@@ -2,7 +2,7 @@
 
 # Square .NET SDK
 
-[![Travis status](https://travis-ci.org/square/square-dotnet-sdk.svg?branch=master)](https://travis-ci.org/square/square-dotnet-sdk)
+[![Travis status](https://travis-ci.com/square/square-dotnet-sdk.svg?branch=master)](https://travis-ci.com/square/square-dotnet-sdk)
 [![NuGet](https://badge.fury.io/nu/Square.svg)](https://badge.fury.io/nu/Square)
 [![Apache-2 license](https://img.shields.io/badge/license-Apache2-brightgreen.svg)](https://www.apache.org/licenses/LICENSE-2.0)
 
