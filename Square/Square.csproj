@@ -14,6 +14,7 @@
     <AssemblyVersion>4.1.0</AssemblyVersion>
     <FileVersion>4.1.0</FileVersion>
     <Description>.NET client library for the Square API</Description>
+    <LangVersion>7.1</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
