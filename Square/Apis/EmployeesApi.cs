@@ -79,7 +79,7 @@ namespace Square.Apis
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string, string>()
             { 
-                { "user-agent", userAgent },
+                { "user-agent","Square-DotNet-SDK/4.1.0"},
                 { "accept", "application/json" },
                 { "Square-Version", "2020-01-22" }
             };
@@ -147,7 +147,7 @@ namespace Square.Apis
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string, string>()
             { 
-                { "user-agent", userAgent },
+                { "user-agent","Square-DotNet-SDK/4.1.0"},
                 { "accept", "application/json" },
                 { "Square-Version", "2020-01-22" }
             };
