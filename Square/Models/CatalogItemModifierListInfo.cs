@@ -70,7 +70,7 @@ namespace Square.Models
         public class Builder
         {
             private string modifierListId;
-            private IList<Models.CatalogModifierOverride> modifierOverrides;
+            private IList<Models.CatalogModifierOverride> modifierOverrides = new List<Models.CatalogModifierOverride>();
             private int? minSelectedModifiers;
             private int? maxSelectedModifiers;
             private bool? enabled;
@@ -119,4 +119,4 @@ namespace Square.Models
             }
         }
     }
-} 
+}

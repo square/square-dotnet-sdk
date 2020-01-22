@@ -4,6 +4,7 @@ using System.Dynamic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Square;
 using Square.Utilities;
@@ -31,7 +32,7 @@ namespace Square.Apis
         /// <param name="limit">Optional parameter: Maximum number of Break Types to return per page. Can range between 1 and 200. The default is the maximum at 200.</param>
         /// <param name="cursor">Optional parameter: Pointer to the next page of Break Type results to fetch.</param>
         /// <return>Returns the Models.ListBreakTypesResponse response from the API call</return>
-        Task<Models.ListBreakTypesResponse> ListBreakTypesAsync(string locationId = null, int? limit = null, string cursor = null);
+        Task<Models.ListBreakTypesResponse> ListBreakTypesAsync(string locationId = null, int? limit = null, string cursor = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Creates a new `BreakType`. 
@@ -65,7 +66,7 @@ namespace Square.Apis
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.CreateBreakTypeResponse response from the API call</return>
-        Task<Models.CreateBreakTypeResponse> CreateBreakTypeAsync(Models.CreateBreakTypeRequest body);
+        Task<Models.CreateBreakTypeResponse> CreateBreakTypeAsync(Models.CreateBreakTypeRequest body, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Deletes an existing `BreakType`. 
@@ -81,7 +82,7 @@ namespace Square.Apis
         /// </summary>
         /// <param name="id">Required parameter: UUID for the `BreakType` being deleted.</param>
         /// <return>Returns the Models.DeleteBreakTypeResponse response from the API call</return>
-        Task<Models.DeleteBreakTypeResponse> DeleteBreakTypeAsync(string id);
+        Task<Models.DeleteBreakTypeResponse> DeleteBreakTypeAsync(string id, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Returns a single `BreakType` specified by id.
@@ -95,7 +96,7 @@ namespace Square.Apis
         /// </summary>
         /// <param name="id">Required parameter: UUID for the `BreakType` being retrieved.</param>
         /// <return>Returns the Models.GetBreakTypeResponse response from the API call</return>
-        Task<Models.GetBreakTypeResponse> GetBreakTypeAsync(string id);
+        Task<Models.GetBreakTypeResponse> GetBreakTypeAsync(string id, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Updates an existing `BreakType`.
@@ -111,7 +112,7 @@ namespace Square.Apis
         /// <param name="id">Required parameter: UUID for the `BreakType` being updated.</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.UpdateBreakTypeResponse response from the API call</return>
-        Task<Models.UpdateBreakTypeResponse> UpdateBreakTypeAsync(string id, Models.UpdateBreakTypeRequest body);
+        Task<Models.UpdateBreakTypeResponse> UpdateBreakTypeAsync(string id, Models.UpdateBreakTypeRequest body, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Returns a paginated list of `EmployeeWage` instances for a business.
@@ -129,7 +130,7 @@ namespace Square.Apis
         /// <param name="limit">Optional parameter: Maximum number of Employee Wages to return per page. Can range between 1 and 200. The default is the maximum at 200.</param>
         /// <param name="cursor">Optional parameter: Pointer to the next page of Employee Wage results to fetch.</param>
         /// <return>Returns the Models.ListEmployeeWagesResponse response from the API call</return>
-        Task<Models.ListEmployeeWagesResponse> ListEmployeeWagesAsync(string employeeId = null, int? limit = null, string cursor = null);
+        Task<Models.ListEmployeeWagesResponse> ListEmployeeWagesAsync(string employeeId = null, int? limit = null, string cursor = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Returns a single `EmployeeWage` specified by id.
@@ -143,7 +144,7 @@ namespace Square.Apis
         /// </summary>
         /// <param name="id">Required parameter: UUID for the `EmployeeWage` being retrieved.</param>
         /// <return>Returns the Models.GetEmployeeWageResponse response from the API call</return>
-        Task<Models.GetEmployeeWageResponse> GetEmployeeWageAsync(string id);
+        Task<Models.GetEmployeeWageResponse> GetEmployeeWageAsync(string id, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Creates a new `Shift`. 
@@ -185,7 +186,7 @@ namespace Square.Apis
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.CreateShiftResponse response from the API call</return>
-        Task<Models.CreateShiftResponse> CreateShiftAsync(Models.CreateShiftRequest body);
+        Task<Models.CreateShiftResponse> CreateShiftAsync(Models.CreateShiftRequest body, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Returns a paginated list of `Shift` records for a business. 
@@ -223,7 +224,7 @@ namespace Square.Apis
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.SearchShiftsResponse response from the API call</return>
-        Task<Models.SearchShiftsResponse> SearchShiftsAsync(Models.SearchShiftsRequest body);
+        Task<Models.SearchShiftsResponse> SearchShiftsAsync(Models.SearchShiftsRequest body, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Deletes a `Shift`.
@@ -237,7 +238,7 @@ namespace Square.Apis
         /// </summary>
         /// <param name="id">Required parameter: UUID for the `Shift` being deleted.</param>
         /// <return>Returns the Models.DeleteShiftResponse response from the API call</return>
-        Task<Models.DeleteShiftResponse> DeleteShiftAsync(string id);
+        Task<Models.DeleteShiftResponse> DeleteShiftAsync(string id, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Returns a single `Shift` specified by id.
@@ -251,7 +252,7 @@ namespace Square.Apis
         /// </summary>
         /// <param name="id">Required parameter: UUID for the `Shift` being retrieved.</param>
         /// <return>Returns the Models.GetShiftResponse response from the API call</return>
-        Task<Models.GetShiftResponse> GetShiftAsync(string id);
+        Task<Models.GetShiftResponse> GetShiftAsync(string id, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Updates an existing `Shift`. 
@@ -275,7 +276,7 @@ namespace Square.Apis
         /// <param name="id">Required parameter: ID of the object being updated.</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.UpdateShiftResponse response from the API call</return>
-        Task<Models.UpdateShiftResponse> UpdateShiftAsync(string id, Models.UpdateShiftRequest body);
+        Task<Models.UpdateShiftResponse> UpdateShiftAsync(string id, Models.UpdateShiftRequest body, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Returns a list of `WorkweekConfig` instances for a business.
@@ -291,7 +292,7 @@ namespace Square.Apis
         /// <param name="limit">Optional parameter: Maximum number of Workweek Configs to return per page.</param>
         /// <param name="cursor">Optional parameter: Pointer to the next page of Workweek Config results to fetch.</param>
         /// <return>Returns the Models.ListWorkweekConfigsResponse response from the API call</return>
-        Task<Models.ListWorkweekConfigsResponse> ListWorkweekConfigsAsync(int? limit = null, string cursor = null);
+        Task<Models.ListWorkweekConfigsResponse> ListWorkweekConfigsAsync(int? limit = null, string cursor = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Updates a `WorkweekConfig`.
@@ -307,7 +308,7 @@ namespace Square.Apis
         /// <param name="id">Required parameter: UUID for the `WorkweekConfig` object being updated.</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.UpdateWorkweekConfigResponse response from the API call</return>
-        Task<Models.UpdateWorkweekConfigResponse> UpdateWorkweekConfigAsync(string id, Models.UpdateWorkweekConfigRequest body);
+        Task<Models.UpdateWorkweekConfigResponse> UpdateWorkweekConfigAsync(string id, Models.UpdateWorkweekConfigRequest body, CancellationToken cancellationToken = default);
 
     }
-} 
+}

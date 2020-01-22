@@ -291,7 +291,7 @@ namespace Square.Models
             private Models.Money tipMoney;
             private Models.Money totalMoney;
             private Models.Money appFeeMoney;
-            private IList<Models.ProcessingFee> processingFee;
+            private IList<Models.ProcessingFee> processingFee = new List<Models.ProcessingFee>();
             private Models.Money refundedMoney;
             private string status;
             private string sourceType;
@@ -301,7 +301,7 @@ namespace Square.Models
             private string referenceId;
             private string customerId;
             private string employeeId;
-            private IList<string> refundIds;
+            private IList<string> refundIds = new List<string>();
             private string buyerEmailAddress;
             private Models.Address billingAddress;
             private Models.Address shippingAddress;
@@ -491,4 +491,4 @@ namespace Square.Models
             }
         }
     }
-} 
+}

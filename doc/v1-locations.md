@@ -38,7 +38,7 @@ RetrieveBusinessAsync()
 ```csharp
 try
 {
-    V1Merchant result = v1LocationsApi.RetrieveBusinessAsync().Result;
+    V1Merchant result = await v1LocationsApi.RetrieveBusinessAsync();
 }
 catch (ApiException e){};
 ```
@@ -69,7 +69,7 @@ ListLocationsAsync()
 ```csharp
 try
 {
-    List<V1Merchant> result = v1LocationsApi.ListLocationsAsync().Result;
+    List<V1Merchant> result = await v1LocationsApi.ListLocationsAsync();
 }
 catch (ApiException e){};
 ```

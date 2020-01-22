@@ -58,9 +58,9 @@ namespace Square.Models
 
         public class Builder
         {
-            private IList<Models.CashDrawerShiftSummary> items;
+            private IList<Models.CashDrawerShiftSummary> items = new List<Models.CashDrawerShiftSummary>();
             private string cursor;
-            private IList<Models.Error> errors;
+            private IList<Models.Error> errors = new List<Models.Error>();
 
             public Builder() { }
             public Builder Items(IList<Models.CashDrawerShiftSummary> value)
@@ -89,4 +89,4 @@ namespace Square.Models
             }
         }
     }
-} 
+}

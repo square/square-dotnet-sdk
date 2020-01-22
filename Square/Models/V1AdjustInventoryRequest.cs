@@ -30,7 +30,7 @@ namespace Square.Models
         public double? QuantityDelta { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for adjustment_type
         /// </summary>
         [JsonProperty("adjustment_type")]
         public string AdjustmentType { get; }
@@ -83,4 +83,4 @@ namespace Square.Models
             }
         }
     }
-} 
+}

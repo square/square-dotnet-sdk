@@ -32,7 +32,7 @@ namespace Square.Models
         public IList<Models.Error> Errors { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for updated_at
         /// </summary>
         [JsonProperty("updated_at")]
         public string UpdatedAt { get; }
@@ -47,7 +47,7 @@ namespace Square.Models
 
         public class Builder
         {
-            private IList<Models.Error> errors;
+            private IList<Models.Error> errors = new List<Models.Error>();
             private string updatedAt;
 
             public Builder() { }
@@ -70,4 +70,4 @@ namespace Square.Models
             }
         }
     }
-} 
+}

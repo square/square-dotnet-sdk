@@ -4,6 +4,7 @@ using System.Dynamic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Square;
 using Square.Utilities;
@@ -51,7 +52,7 @@ namespace Square.Apis
                 string beginTime = null,
                 string endTime = null,
                 string sortOrder = null,
-                string cursor = null);
+                string cursor = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Returns a list of receivables (across all possible sending locations) representing monies credited
@@ -89,7 +90,7 @@ namespace Square.Apis
                 string beginTime = null,
                 string endTime = null,
                 string sortOrder = null,
-                string cursor = null);
+                string cursor = null, CancellationToken cancellationToken = default);
 
     }
-} 
+}

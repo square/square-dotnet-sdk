@@ -58,7 +58,7 @@ namespace Square.Models
         public HttpContext Context { get; internal set; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for type
         /// </summary>
         [JsonProperty("type")]
         public string Type { get; }
@@ -70,25 +70,25 @@ namespace Square.Models
         public string Reason { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for refunded_money
         /// </summary>
         [JsonProperty("refunded_money")]
         public Models.V1Money RefundedMoney { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for refunded_processing_fee_money
         /// </summary>
         [JsonProperty("refunded_processing_fee_money")]
         public Models.V1Money RefundedProcessingFeeMoney { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for refunded_tax_money
         /// </summary>
         [JsonProperty("refunded_tax_money")]
         public Models.V1Money RefundedTaxMoney { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for refunded_additive_tax_money
         /// </summary>
         [JsonProperty("refunded_additive_tax_money")]
         public Models.V1Money RefundedAdditiveTaxMoney { get; }
@@ -100,7 +100,7 @@ namespace Square.Models
         public IList<Models.V1PaymentTax> RefundedAdditiveTax { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for refunded_inclusive_tax_money
         /// </summary>
         [JsonProperty("refunded_inclusive_tax_money")]
         public Models.V1Money RefundedInclusiveTaxMoney { get; }
@@ -112,19 +112,19 @@ namespace Square.Models
         public IList<Models.V1PaymentTax> RefundedInclusiveTax { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for refunded_tip_money
         /// </summary>
         [JsonProperty("refunded_tip_money")]
         public Models.V1Money RefundedTipMoney { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for refunded_discount_money
         /// </summary>
         [JsonProperty("refunded_discount_money")]
         public Models.V1Money RefundedDiscountMoney { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for refunded_surcharge_money
         /// </summary>
         [JsonProperty("refunded_surcharge_money")]
         public Models.V1Money RefundedSurchargeMoney { get; }
@@ -154,7 +154,7 @@ namespace Square.Models
         public string PaymentId { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for merchant_id
         /// </summary>
         [JsonProperty("merchant_id")]
         public string MerchantId { get; }
@@ -197,13 +197,13 @@ namespace Square.Models
             private Models.V1Money refundedProcessingFeeMoney;
             private Models.V1Money refundedTaxMoney;
             private Models.V1Money refundedAdditiveTaxMoney;
-            private IList<Models.V1PaymentTax> refundedAdditiveTax;
+            private IList<Models.V1PaymentTax> refundedAdditiveTax = new List<Models.V1PaymentTax>();
             private Models.V1Money refundedInclusiveTaxMoney;
-            private IList<Models.V1PaymentTax> refundedInclusiveTax;
+            private IList<Models.V1PaymentTax> refundedInclusiveTax = new List<Models.V1PaymentTax>();
             private Models.V1Money refundedTipMoney;
             private Models.V1Money refundedDiscountMoney;
             private Models.V1Money refundedSurchargeMoney;
-            private IList<Models.V1PaymentSurcharge> refundedSurcharges;
+            private IList<Models.V1PaymentSurcharge> refundedSurcharges = new List<Models.V1PaymentSurcharge>();
             private string createdAt;
             private string processedAt;
             private string paymentId;
@@ -342,4 +342,4 @@ namespace Square.Models
             }
         }
     }
-} 
+}

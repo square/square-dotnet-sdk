@@ -50,7 +50,7 @@ string locationId = "location_id4";
 
 try
 {
-    ListAdditionalRecipientReceivableRefundsResponse result = reportingApi.ListAdditionalRecipientReceivableRefundsAsync(locationId, null, null, null, null).Result;
+    ListAdditionalRecipientReceivableRefundsResponse result = await reportingApi.ListAdditionalRecipientReceivableRefundsAsync(locationId, null, null, null, null);
 }
 catch (ApiException e){};
 ```
@@ -92,7 +92,7 @@ string locationId = "location_id4";
 
 try
 {
-    ListAdditionalRecipientReceivablesResponse result = reportingApi.ListAdditionalRecipientReceivablesAsync(locationId, null, null, null, null).Result;
+    ListAdditionalRecipientReceivablesResponse result = await reportingApi.ListAdditionalRecipientReceivablesAsync(locationId, null, null, null, null);
 }
 catch (ApiException e){};
 ```

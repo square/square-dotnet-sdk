@@ -34,7 +34,7 @@ namespace Square.Models
         public IList<Models.Error> Errors { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for limits
         /// </summary>
         [JsonProperty("limits")]
         public Models.CatalogInfoResponseLimits Limits { get; }
@@ -56,7 +56,7 @@ namespace Square.Models
 
         public class Builder
         {
-            private IList<Models.Error> errors;
+            private IList<Models.Error> errors = new List<Models.Error>();
             private Models.CatalogInfoResponseLimits limits;
             private Models.StandardUnitDescriptionGroup standardUnitDescriptionGroup;
 
@@ -87,4 +87,4 @@ namespace Square.Models
             }
         }
     }
-} 
+}

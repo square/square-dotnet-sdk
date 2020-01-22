@@ -40,7 +40,7 @@ namespace Square.Models
         public string Name { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for applied_money
         /// </summary>
         [JsonProperty("applied_money")]
         public Models.V1Money AppliedMoney { get; }
@@ -52,13 +52,13 @@ namespace Square.Models
         public string Rate { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for amount_money
         /// </summary>
         [JsonProperty("amount_money")]
         public Models.V1Money AmountMoney { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for type
         /// </summary>
         [JsonProperty("type")]
         public string Type { get; }
@@ -103,7 +103,7 @@ namespace Square.Models
             private Models.V1Money amountMoney;
             private string type;
             private bool? taxable;
-            private IList<Models.V1PaymentTax> taxes;
+            private IList<Models.V1PaymentTax> taxes = new List<Models.V1PaymentTax>();
             private string surchargeId;
 
             public Builder() { }
@@ -168,4 +168,4 @@ namespace Square.Models
             }
         }
     }
-} 
+}

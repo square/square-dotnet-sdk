@@ -89,7 +89,7 @@ namespace Square.Models
             private string displayName;
             private string description;
             private bool? showColors;
-            private IList<Models.CatalogObject> values;
+            private IList<Models.CatalogObject> values = new List<Models.CatalogObject>();
             private long? itemCount;
 
             public Builder() { }
@@ -140,4 +140,4 @@ namespace Square.Models
             }
         }
     }
-} 
+}

@@ -80,7 +80,7 @@ namespace Square.Models
         public string CurrencyCode { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for type
         /// </summary>
         [JsonProperty("type")]
         public string Type { get; }
@@ -172,4 +172,4 @@ namespace Square.Models
             }
         }
     }
-} 
+}

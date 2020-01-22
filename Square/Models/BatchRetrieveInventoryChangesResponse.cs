@@ -59,8 +59,8 @@ namespace Square.Models
 
         public class Builder
         {
-            private IList<Models.Error> errors;
-            private IList<Models.InventoryChange> changes;
+            private IList<Models.Error> errors = new List<Models.Error>();
+            private IList<Models.InventoryChange> changes = new List<Models.InventoryChange>();
             private string cursor;
 
             public Builder() { }
@@ -90,4 +90,4 @@ namespace Square.Models
             }
         }
     }
-} 
+}

@@ -70,13 +70,13 @@ namespace Square.Models
         public int? Ordinal { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for pricing_type
         /// </summary>
         [JsonProperty("pricing_type")]
         public string PricingType { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for price_money
         /// </summary>
         [JsonProperty("price_money")]
         public Models.V1Money PriceMoney { get; }
@@ -94,7 +94,7 @@ namespace Square.Models
         public bool? TrackInventory { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for inventory_alert_type
         /// </summary>
         [JsonProperty("inventory_alert_type")]
         public string InventoryAlertType { get; }
@@ -240,4 +240,4 @@ namespace Square.Models
             }
         }
     }
-} 
+}

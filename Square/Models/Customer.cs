@@ -184,7 +184,7 @@ namespace Square.Models
             private string id;
             private string createdAt;
             private string updatedAt;
-            private IList<Models.Card> cards;
+            private IList<Models.Card> cards = new List<Models.Card>();
             private string givenName;
             private string familyName;
             private string nickname;
@@ -196,7 +196,7 @@ namespace Square.Models
             private string referenceId;
             private string note;
             private Models.CustomerPreferences preferences;
-            private IList<Models.CustomerGroupInfo> groups;
+            private IList<Models.CustomerGroupInfo> groups = new List<Models.CustomerGroupInfo>();
             private string creationSource;
 
             public Builder(string id,
@@ -331,4 +331,4 @@ namespace Square.Models
             }
         }
     }
-} 
+}

@@ -6,9 +6,9 @@
 
 ### Fields
 
-| Name | Description |
-|  --- | --- |
-| `ALLITEMS` | - |
-| `DISCOUNTSCATEGORY` | - |
-| `REWARDSFINDER` | - |
+| Name |
+|  --- |
+| `ALLITEMS` |
+| `DISCOUNTSCATEGORY` |
+| `REWARDSFINDER` |
 

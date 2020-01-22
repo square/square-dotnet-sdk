@@ -56,7 +56,7 @@ namespace Square.Models
         public string Id { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for type
         /// </summary>
         [JsonProperty("type")]
         public string Type { get; }
@@ -92,7 +92,7 @@ namespace Square.Models
         public string PanSuffix { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for entry_method
         /// </summary>
         [JsonProperty("entry_method")]
         public string EntryMethod { get; }
@@ -104,13 +104,13 @@ namespace Square.Models
         public string PaymentNote { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for total_money
         /// </summary>
         [JsonProperty("total_money")]
         public Models.V1Money TotalMoney { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for tendered_money
         /// </summary>
         [JsonProperty("tendered_money")]
         public Models.V1Money TenderedMoney { get; }
@@ -128,13 +128,13 @@ namespace Square.Models
         public string SettledAt { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for change_back_money
         /// </summary>
         [JsonProperty("change_back_money")]
         public Models.V1Money ChangeBackMoney { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for refunded_money
         /// </summary>
         [JsonProperty("refunded_money")]
         public Models.V1Money RefundedMoney { get; }
@@ -304,4 +304,4 @@ namespace Square.Models
             }
         }
     }
-} 
+}

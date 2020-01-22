@@ -32,19 +32,19 @@ namespace Square.Models
         public string PaymentId { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for type
         /// </summary>
         [JsonProperty("type")]
         public string Type { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for amount_money
         /// </summary>
         [JsonProperty("amount_money")]
         public Models.V1Money AmountMoney { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for fee_money
         /// </summary>
         [JsonProperty("fee_money")]
         public Models.V1Money FeeMoney { get; }
@@ -100,4 +100,4 @@ namespace Square.Models
             }
         }
     }
-} 
+}

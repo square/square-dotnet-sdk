@@ -4,6 +4,7 @@ using System.Dynamic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Square;
 using Square.Utilities;
@@ -39,7 +40,7 @@ namespace Square.Apis
         /// <param name="locationId">Required parameter: The ID of the location to list categories for.</param>
         /// <return>Returns the List<Models.V1Category> response from the API call</return>
         [Obsolete]
-        Task<List<Models.V1Category>> ListCategoriesAsync(string locationId);
+        Task<List<Models.V1Category>> ListCategoriesAsync(string locationId, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Creates an item category.
@@ -67,7 +68,7 @@ namespace Square.Apis
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.V1Category response from the API call</return>
         [Obsolete]
-        Task<Models.V1Category> CreateCategoryAsync(string locationId, Models.V1Category body);
+        Task<Models.V1Category> CreateCategoryAsync(string locationId, Models.V1Category body, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Deletes an existing item category.
@@ -101,7 +102,7 @@ namespace Square.Apis
         /// <param name="categoryId">Required parameter: The ID of the category to delete.</param>
         /// <return>Returns the Models.V1Category response from the API call</return>
         [Obsolete]
-        Task<Models.V1Category> DeleteCategoryAsync(string locationId, string categoryId);
+        Task<Models.V1Category> DeleteCategoryAsync(string locationId, string categoryId, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Modifies the details of an existing item category.
@@ -131,7 +132,7 @@ namespace Square.Apis
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.V1Category response from the API call</return>
         [Obsolete]
-        Task<Models.V1Category> UpdateCategoryAsync(string locationId, string categoryId, Models.V1Category body);
+        Task<Models.V1Category> UpdateCategoryAsync(string locationId, string categoryId, Models.V1Category body, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Lists all the discounts for a given location.
@@ -157,7 +158,7 @@ namespace Square.Apis
         /// <param name="locationId">Required parameter: The ID of the location to list categories for.</param>
         /// <return>Returns the List<Models.V1Discount> response from the API call</return>
         [Obsolete]
-        Task<List<Models.V1Discount>> ListDiscountsAsync(string locationId);
+        Task<List<Models.V1Discount>> ListDiscountsAsync(string locationId, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Creates a discount.
@@ -185,7 +186,7 @@ namespace Square.Apis
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.V1Discount response from the API call</return>
         [Obsolete]
-        Task<Models.V1Discount> CreateDiscountAsync(string locationId, Models.V1Discount body);
+        Task<Models.V1Discount> CreateDiscountAsync(string locationId, Models.V1Discount body, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Deletes an existing discount.
@@ -219,7 +220,7 @@ namespace Square.Apis
         /// <param name="discountId">Required parameter: The ID of the discount to delete.</param>
         /// <return>Returns the Models.V1Discount response from the API call</return>
         [Obsolete]
-        Task<Models.V1Discount> DeleteDiscountAsync(string locationId, string discountId);
+        Task<Models.V1Discount> DeleteDiscountAsync(string locationId, string discountId, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Modifies the details of an existing discount.
@@ -249,7 +250,7 @@ namespace Square.Apis
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.V1Discount response from the API call</return>
         [Obsolete]
-        Task<Models.V1Discount> UpdateDiscountAsync(string locationId, string discountId, Models.V1Discount body);
+        Task<Models.V1Discount> UpdateDiscountAsync(string locationId, string discountId, Models.V1Discount body, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Lists all the fees (taxes) for a given location.
@@ -275,7 +276,7 @@ namespace Square.Apis
         /// <param name="locationId">Required parameter: The ID of the location to list fees for.</param>
         /// <return>Returns the List<Models.V1Fee> response from the API call</return>
         [Obsolete]
-        Task<List<Models.V1Fee>> ListFeesAsync(string locationId);
+        Task<List<Models.V1Fee>> ListFeesAsync(string locationId, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Creates a fee (tax).
@@ -303,7 +304,7 @@ namespace Square.Apis
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.V1Fee response from the API call</return>
         [Obsolete]
-        Task<Models.V1Fee> CreateFeeAsync(string locationId, Models.V1Fee body);
+        Task<Models.V1Fee> CreateFeeAsync(string locationId, Models.V1Fee body, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Deletes an existing fee (tax).
@@ -337,7 +338,7 @@ namespace Square.Apis
         /// <param name="feeId">Required parameter: The ID of the fee to delete.</param>
         /// <return>Returns the Models.V1Fee response from the API call</return>
         [Obsolete]
-        Task<Models.V1Fee> DeleteFeeAsync(string locationId, string feeId);
+        Task<Models.V1Fee> DeleteFeeAsync(string locationId, string feeId, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Modifies the details of an existing fee (tax).
@@ -367,7 +368,7 @@ namespace Square.Apis
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.V1Fee response from the API call</return>
         [Obsolete]
-        Task<Models.V1Fee> UpdateFeeAsync(string locationId, string feeId, Models.V1Fee body);
+        Task<Models.V1Fee> UpdateFeeAsync(string locationId, string feeId, Models.V1Fee body, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Provides inventory information for all inventory-enabled item
@@ -399,7 +400,7 @@ namespace Square.Apis
         /// <param name="batchToken">Optional parameter: A pagination cursor to retrieve the next set of results for your original query to the endpoint.</param>
         /// <return>Returns the List<Models.V1InventoryEntry> response from the API call</return>
         [Obsolete]
-        Task<List<Models.V1InventoryEntry>> ListInventoryAsync(string locationId, int? limit = null, string batchToken = null);
+        Task<List<Models.V1InventoryEntry>> ListInventoryAsync(string locationId, int? limit = null, string batchToken = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Adjusts the current available inventory of an item variation.
@@ -429,7 +430,7 @@ namespace Square.Apis
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.V1InventoryEntry response from the API call</return>
         [Obsolete]
-        Task<Models.V1InventoryEntry> AdjustInventoryAsync(string locationId, string variationId, Models.V1AdjustInventoryRequest body);
+        Task<Models.V1InventoryEntry> AdjustInventoryAsync(string locationId, string variationId, Models.V1AdjustInventoryRequest body, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Provides summary information of all items for a given location.
@@ -457,7 +458,7 @@ namespace Square.Apis
         /// <param name="batchToken">Optional parameter: A pagination cursor to retrieve the next set of results for your original query to the endpoint.</param>
         /// <return>Returns the List<Models.V1Item> response from the API call</return>
         [Obsolete]
-        Task<List<Models.V1Item>> ListItemsAsync(string locationId, string batchToken = null);
+        Task<List<Models.V1Item>> ListItemsAsync(string locationId, string batchToken = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Creates an item and at least one variation for it.
@@ -501,7 +502,7 @@ namespace Square.Apis
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.V1Item response from the API call</return>
         [Obsolete]
-        Task<Models.V1Item> CreateItemAsync(string locationId, Models.V1Item body);
+        Task<Models.V1Item> CreateItemAsync(string locationId, Models.V1Item body, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Deletes an existing item and all item variations associated with it.
@@ -535,7 +536,7 @@ namespace Square.Apis
         /// <param name="itemId">Required parameter: The ID of the item to modify.</param>
         /// <return>Returns the Models.V1Item response from the API call</return>
         [Obsolete]
-        Task<Models.V1Item> DeleteItemAsync(string locationId, string itemId);
+        Task<Models.V1Item> DeleteItemAsync(string locationId, string itemId, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Provides the details for a single item, including associated modifier
@@ -565,7 +566,7 @@ namespace Square.Apis
         /// <param name="itemId">Required parameter: The item's ID.</param>
         /// <return>Returns the Models.V1Item response from the API call</return>
         [Obsolete]
-        Task<Models.V1Item> RetrieveItemAsync(string locationId, string itemId);
+        Task<Models.V1Item> RetrieveItemAsync(string locationId, string itemId, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Modifies the core details of an existing item.
@@ -595,7 +596,7 @@ namespace Square.Apis
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.V1Item response from the API call</return>
         [Obsolete]
-        Task<Models.V1Item> UpdateItemAsync(string locationId, string itemId, Models.V1Item body);
+        Task<Models.V1Item> UpdateItemAsync(string locationId, string itemId, Models.V1Item body, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Removes a fee assocation from an item so the fee is no longer
@@ -627,7 +628,7 @@ namespace Square.Apis
         /// <param name="feeId">Required parameter: The ID of the fee to apply.</param>
         /// <return>Returns the Models.V1Item response from the API call</return>
         [Obsolete]
-        Task<Models.V1Item> RemoveFeeAsync(string locationId, string itemId, string feeId);
+        Task<Models.V1Item> RemoveFeeAsync(string locationId, string itemId, string feeId, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Associates a fee with an item so the fee is automatically applied to
@@ -659,7 +660,7 @@ namespace Square.Apis
         /// <param name="feeId">Required parameter: The ID of the fee to apply.</param>
         /// <return>Returns the Models.V1Item response from the API call</return>
         [Obsolete]
-        Task<Models.V1Item> ApplyFeeAsync(string locationId, string itemId, string feeId);
+        Task<Models.V1Item> ApplyFeeAsync(string locationId, string itemId, string feeId, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Removes a modifier list association from an item so the modifier
@@ -691,7 +692,7 @@ namespace Square.Apis
         /// <param name="itemId">Required parameter: The ID of the item to remove the modifier list from.</param>
         /// <return>Returns the Models.V1Item response from the API call</return>
         [Obsolete]
-        Task<Models.V1Item> RemoveModifierListAsync(string locationId, string modifierListId, string itemId);
+        Task<Models.V1Item> RemoveModifierListAsync(string locationId, string modifierListId, string itemId, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Associates a modifier list with an item so the associated modifier
@@ -723,7 +724,7 @@ namespace Square.Apis
         /// <param name="itemId">Required parameter: The ID of the item to add the modifier list to.</param>
         /// <return>Returns the Models.V1Item response from the API call</return>
         [Obsolete]
-        Task<Models.V1Item> ApplyModifierListAsync(string locationId, string modifierListId, string itemId);
+        Task<Models.V1Item> ApplyModifierListAsync(string locationId, string modifierListId, string itemId, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Creates an item variation for an existing item.
@@ -753,7 +754,7 @@ namespace Square.Apis
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.V1Variation response from the API call</return>
         [Obsolete]
-        Task<Models.V1Variation> CreateVariationAsync(string locationId, string itemId, Models.V1Variation body);
+        Task<Models.V1Variation> CreateVariationAsync(string locationId, string itemId, Models.V1Variation body, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Deletes an existing item variation from an item.
@@ -789,7 +790,7 @@ namespace Square.Apis
         /// <param name="variationId">Required parameter: The ID of the variation to delete.</param>
         /// <return>Returns the Models.V1Variation response from the API call</return>
         [Obsolete]
-        Task<Models.V1Variation> DeleteVariationAsync(string locationId, string itemId, string variationId);
+        Task<Models.V1Variation> DeleteVariationAsync(string locationId, string itemId, string variationId, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Modifies the details of an existing item variation.
@@ -829,7 +830,7 @@ namespace Square.Apis
                 string locationId,
                 string itemId,
                 string variationId,
-                Models.V1Variation body);
+                Models.V1Variation body, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Lists all the modifier lists for a given location.
@@ -855,7 +856,7 @@ namespace Square.Apis
         /// <param name="locationId">Required parameter: The ID of the location to list modifier lists for.</param>
         /// <return>Returns the List<Models.V1ModifierList> response from the API call</return>
         [Obsolete]
-        Task<List<Models.V1ModifierList>> ListModifierListsAsync(string locationId);
+        Task<List<Models.V1ModifierList>> ListModifierListsAsync(string locationId, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Creates an item modifier list and at least 1 modifier option for it.
@@ -883,7 +884,7 @@ namespace Square.Apis
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.V1ModifierList response from the API call</return>
         [Obsolete]
-        Task<Models.V1ModifierList> CreateModifierListAsync(string locationId, Models.V1ModifierList body);
+        Task<Models.V1ModifierList> CreateModifierListAsync(string locationId, Models.V1ModifierList body, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Deletes an existing item modifier list and all modifier options
@@ -919,7 +920,7 @@ namespace Square.Apis
         /// <param name="modifierListId">Required parameter: The ID of the modifier list to delete.</param>
         /// <return>Returns the Models.V1ModifierList response from the API call</return>
         [Obsolete]
-        Task<Models.V1ModifierList> DeleteModifierListAsync(string locationId, string modifierListId);
+        Task<Models.V1ModifierList> DeleteModifierListAsync(string locationId, string modifierListId, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Provides the details for a single modifier list.
@@ -947,7 +948,7 @@ namespace Square.Apis
         /// <param name="modifierListId">Required parameter: The modifier list's ID.</param>
         /// <return>Returns the Models.V1ModifierList response from the API call</return>
         [Obsolete]
-        Task<Models.V1ModifierList> RetrieveModifierListAsync(string locationId, string modifierListId);
+        Task<Models.V1ModifierList> RetrieveModifierListAsync(string locationId, string modifierListId, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Modifies the details of an existing item modifier list.
@@ -977,7 +978,7 @@ namespace Square.Apis
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.V1ModifierList response from the API call</return>
         [Obsolete]
-        Task<Models.V1ModifierList> UpdateModifierListAsync(string locationId, string modifierListId, Models.V1UpdateModifierListRequest body);
+        Task<Models.V1ModifierList> UpdateModifierListAsync(string locationId, string modifierListId, Models.V1UpdateModifierListRequest body, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Creates an item modifier option and adds it to a modifier list.
@@ -1007,7 +1008,7 @@ namespace Square.Apis
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.V1ModifierOption response from the API call</return>
         [Obsolete]
-        Task<Models.V1ModifierOption> CreateModifierOptionAsync(string locationId, string modifierListId, Models.V1ModifierOption body);
+        Task<Models.V1ModifierOption> CreateModifierOptionAsync(string locationId, string modifierListId, Models.V1ModifierOption body, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Deletes an existing item modifier option from a modifier list.
@@ -1043,7 +1044,7 @@ namespace Square.Apis
         /// <param name="modifierOptionId">Required parameter: The ID of the modifier list to edit.</param>
         /// <return>Returns the Models.V1ModifierOption response from the API call</return>
         [Obsolete]
-        Task<Models.V1ModifierOption> DeleteModifierOptionAsync(string locationId, string modifierListId, string modifierOptionId);
+        Task<Models.V1ModifierOption> DeleteModifierOptionAsync(string locationId, string modifierListId, string modifierOptionId, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Modifies the details of an existing item modifier option.
@@ -1083,7 +1084,7 @@ namespace Square.Apis
                 string locationId,
                 string modifierListId,
                 string modifierOptionId,
-                Models.V1ModifierOption body);
+                Models.V1ModifierOption body, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Lists all Favorites pages (in Square Point of Sale) for a given
@@ -1111,7 +1112,7 @@ namespace Square.Apis
         /// <param name="locationId">Required parameter: The ID of the location to list Favorites pages for.</param>
         /// <return>Returns the List<Models.V1Page> response from the API call</return>
         [Obsolete]
-        Task<List<Models.V1Page>> ListPagesAsync(string locationId);
+        Task<List<Models.V1Page>> ListPagesAsync(string locationId, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Creates a Favorites page in Square Point of Sale.
@@ -1139,7 +1140,7 @@ namespace Square.Apis
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.V1Page response from the API call</return>
         [Obsolete]
-        Task<Models.V1Page> CreatePageAsync(string locationId, Models.V1Page body);
+        Task<Models.V1Page> CreatePageAsync(string locationId, Models.V1Page body, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Deletes an existing Favorites page and all of its cells.
@@ -1171,7 +1172,7 @@ namespace Square.Apis
         /// <param name="pageId">Required parameter: The ID of the page to delete.</param>
         /// <return>Returns the Models.V1Page response from the API call</return>
         [Obsolete]
-        Task<Models.V1Page> DeletePageAsync(string locationId, string pageId);
+        Task<Models.V1Page> DeletePageAsync(string locationId, string pageId, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Modifies the details of a Favorites page in Square Point of Sale.
@@ -1201,7 +1202,7 @@ namespace Square.Apis
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.V1Page response from the API call</return>
         [Obsolete]
-        Task<Models.V1Page> UpdatePageAsync(string locationId, string pageId, Models.V1Page body);
+        Task<Models.V1Page> UpdatePageAsync(string locationId, string pageId, Models.V1Page body, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Deletes a cell from a Favorites page in Square Point of Sale.
@@ -1247,7 +1248,7 @@ namespace Square.Apis
                 string locationId,
                 string pageId,
                 string row = null,
-                string column = null);
+                string column = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Modifies a cell of a Favorites page in Square Point of Sale.
@@ -1277,7 +1278,7 @@ namespace Square.Apis
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.V1Page response from the API call</return>
         [Obsolete]
-        Task<Models.V1Page> UpdatePageCellAsync(string locationId, string pageId, Models.V1PageCell body);
+        Task<Models.V1Page> UpdatePageCellAsync(string locationId, string pageId, Models.V1PageCell body, CancellationToken cancellationToken = default);
 
     }
-} 
+}

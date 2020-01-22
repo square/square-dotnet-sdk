@@ -88,7 +88,7 @@ namespace Square.Models
             private string transactionLocationId;
             private Models.Money amountMoney;
             private string createdAt;
-            private IList<Models.AdditionalRecipientReceivableRefund> refunds;
+            private IList<Models.AdditionalRecipientReceivableRefund> refunds = new List<Models.AdditionalRecipientReceivableRefund>();
 
             public Builder(string id,
                 string transactionId,
@@ -147,4 +147,4 @@ namespace Square.Models
             }
         }
     }
-} 
+}

@@ -66,7 +66,7 @@ namespace Square.Models
         public string Id { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for event_type
         /// </summary>
         [JsonProperty("event_type")]
         public string EventType { get; }
@@ -120,49 +120,49 @@ namespace Square.Models
         public string Description { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for starting_cash_money
         /// </summary>
         [JsonProperty("starting_cash_money")]
         public Models.V1Money StartingCashMoney { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for cash_payment_money
         /// </summary>
         [JsonProperty("cash_payment_money")]
         public Models.V1Money CashPaymentMoney { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for cash_refunds_money
         /// </summary>
         [JsonProperty("cash_refunds_money")]
         public Models.V1Money CashRefundsMoney { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for cash_paid_in_money
         /// </summary>
         [JsonProperty("cash_paid_in_money")]
         public Models.V1Money CashPaidInMoney { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for cash_paid_out_money
         /// </summary>
         [JsonProperty("cash_paid_out_money")]
         public Models.V1Money CashPaidOutMoney { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for expected_cash_money
         /// </summary>
         [JsonProperty("expected_cash_money")]
         public Models.V1Money ExpectedCashMoney { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for closed_cash_money
         /// </summary>
         [JsonProperty("closed_cash_money")]
         public Models.V1Money ClosedCashMoney { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for device
         /// </summary>
         [JsonProperty("device")]
         public Models.Device Device { get; }
@@ -205,7 +205,7 @@ namespace Square.Models
             private string openedAt;
             private string endedAt;
             private string closedAt;
-            private IList<string> employeeIds;
+            private IList<string> employeeIds = new List<string>();
             private string openingEmployeeId;
             private string endingEmployeeId;
             private string closingEmployeeId;
@@ -218,7 +218,7 @@ namespace Square.Models
             private Models.V1Money expectedCashMoney;
             private Models.V1Money closedCashMoney;
             private Models.Device device;
-            private IList<Models.V1CashDrawerEvent> events;
+            private IList<Models.V1CashDrawerEvent> events = new List<Models.V1CashDrawerEvent>();
 
             public Builder() { }
             public Builder Id(string value)
@@ -359,4 +359,4 @@ namespace Square.Models
             }
         }
     }
-} 
+}

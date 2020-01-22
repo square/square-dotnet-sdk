@@ -84,7 +84,7 @@ string locationId = "location_id4";
 
 try
 {
-    List<V1Category> result = v1ItemsApi.ListCategoriesAsync(locationId).Result;
+    List<V1Category> result = await v1ItemsApi.ListCategoriesAsync(locationId);
 }
 catch (ApiException e){};
 ```
@@ -125,7 +125,7 @@ var body = new V1Category.Builder()
 
 try
 {
-    V1Category result = v1ItemsApi.CreateCategoryAsync(locationId, body).Result;
+    V1Category result = await v1ItemsApi.CreateCategoryAsync(locationId, body);
 }
 catch (ApiException e){};
 ```
@@ -169,7 +169,7 @@ string categoryId = "category_id8";
 
 try
 {
-    V1Category result = v1ItemsApi.DeleteCategoryAsync(locationId, categoryId).Result;
+    V1Category result = await v1ItemsApi.DeleteCategoryAsync(locationId, categoryId);
 }
 catch (ApiException e){};
 ```
@@ -212,7 +212,7 @@ var body = new V1Category.Builder()
 
 try
 {
-    V1Category result = v1ItemsApi.UpdateCategoryAsync(locationId, categoryId, body).Result;
+    V1Category result = await v1ItemsApi.UpdateCategoryAsync(locationId, categoryId, body);
 }
 catch (ApiException e){};
 ```
@@ -250,7 +250,7 @@ string locationId = "location_id4";
 
 try
 {
-    List<V1Discount> result = v1ItemsApi.ListDiscountsAsync(locationId).Result;
+    List<V1Discount> result = await v1ItemsApi.ListDiscountsAsync(locationId);
 }
 catch (ApiException e){};
 ```
@@ -291,7 +291,7 @@ var body = new V1Discount.Builder()
 
 try
 {
-    V1Discount result = v1ItemsApi.CreateDiscountAsync(locationId, body).Result;
+    V1Discount result = await v1ItemsApi.CreateDiscountAsync(locationId, body);
 }
 catch (ApiException e){};
 ```
@@ -335,7 +335,7 @@ string discountId = "discount_id8";
 
 try
 {
-    V1Discount result = v1ItemsApi.DeleteDiscountAsync(locationId, discountId).Result;
+    V1Discount result = await v1ItemsApi.DeleteDiscountAsync(locationId, discountId);
 }
 catch (ApiException e){};
 ```
@@ -378,7 +378,7 @@ var body = new V1Discount.Builder()
 
 try
 {
-    V1Discount result = v1ItemsApi.UpdateDiscountAsync(locationId, discountId, body).Result;
+    V1Discount result = await v1ItemsApi.UpdateDiscountAsync(locationId, discountId, body);
 }
 catch (ApiException e){};
 ```
@@ -416,7 +416,7 @@ string locationId = "location_id4";
 
 try
 {
-    List<V1Fee> result = v1ItemsApi.ListFeesAsync(locationId).Result;
+    List<V1Fee> result = await v1ItemsApi.ListFeesAsync(locationId);
 }
 catch (ApiException e){};
 ```
@@ -457,7 +457,7 @@ var body = new V1Fee.Builder()
 
 try
 {
-    V1Fee result = v1ItemsApi.CreateFeeAsync(locationId, body).Result;
+    V1Fee result = await v1ItemsApi.CreateFeeAsync(locationId, body);
 }
 catch (ApiException e){};
 ```
@@ -501,7 +501,7 @@ string feeId = "fee_id8";
 
 try
 {
-    V1Fee result = v1ItemsApi.DeleteFeeAsync(locationId, feeId).Result;
+    V1Fee result = await v1ItemsApi.DeleteFeeAsync(locationId, feeId);
 }
 catch (ApiException e){};
 ```
@@ -544,7 +544,7 @@ var body = new V1Fee.Builder()
 
 try
 {
-    V1Fee result = v1ItemsApi.UpdateFeeAsync(locationId, feeId, body).Result;
+    V1Fee result = await v1ItemsApi.UpdateFeeAsync(locationId, feeId, body);
 }
 catch (ApiException e){};
 ```
@@ -585,7 +585,7 @@ string locationId = "location_id4";
 
 try
 {
-    List<V1InventoryEntry> result = v1ItemsApi.ListInventoryAsync(locationId, null, null).Result;
+    List<V1InventoryEntry> result = await v1ItemsApi.ListInventoryAsync(locationId, null, null);
 }
 catch (ApiException e){};
 ```
@@ -628,7 +628,7 @@ var body = new V1AdjustInventoryRequest.Builder()
 
 try
 {
-    V1InventoryEntry result = v1ItemsApi.AdjustInventoryAsync(locationId, variationId, body).Result;
+    V1InventoryEntry result = await v1ItemsApi.AdjustInventoryAsync(locationId, variationId, body);
 }
 catch (ApiException e){};
 ```
@@ -667,7 +667,7 @@ string locationId = "location_id4";
 
 try
 {
-    List<V1Item> result = v1ItemsApi.ListItemsAsync(locationId, null).Result;
+    List<V1Item> result = await v1ItemsApi.ListItemsAsync(locationId, null);
 }
 catch (ApiException e){};
 ```
@@ -720,7 +720,7 @@ var body = new V1Item.Builder()
 
 try
 {
-    V1Item result = v1ItemsApi.CreateItemAsync(locationId, body).Result;
+    V1Item result = await v1ItemsApi.CreateItemAsync(locationId, body);
 }
 catch (ApiException e){};
 ```
@@ -764,7 +764,7 @@ string itemId = "item_id0";
 
 try
 {
-    V1Item result = v1ItemsApi.DeleteItemAsync(locationId, itemId).Result;
+    V1Item result = await v1ItemsApi.DeleteItemAsync(locationId, itemId);
 }
 catch (ApiException e){};
 ```
@@ -805,7 +805,7 @@ string itemId = "item_id0";
 
 try
 {
-    V1Item result = v1ItemsApi.RetrieveItemAsync(locationId, itemId).Result;
+    V1Item result = await v1ItemsApi.RetrieveItemAsync(locationId, itemId);
 }
 catch (ApiException e){};
 ```
@@ -848,7 +848,7 @@ var body = new V1Item.Builder()
 
 try
 {
-    V1Item result = v1ItemsApi.UpdateItemAsync(locationId, itemId, body).Result;
+    V1Item result = await v1ItemsApi.UpdateItemAsync(locationId, itemId, body);
 }
 catch (ApiException e){};
 ```
@@ -891,7 +891,7 @@ string feeId = "fee_id8";
 
 try
 {
-    V1Item result = v1ItemsApi.RemoveFeeAsync(locationId, itemId, feeId).Result;
+    V1Item result = await v1ItemsApi.RemoveFeeAsync(locationId, itemId, feeId);
 }
 catch (ApiException e){};
 ```
@@ -934,7 +934,7 @@ string feeId = "fee_id8";
 
 try
 {
-    V1Item result = v1ItemsApi.ApplyFeeAsync(locationId, itemId, feeId).Result;
+    V1Item result = await v1ItemsApi.ApplyFeeAsync(locationId, itemId, feeId);
 }
 catch (ApiException e){};
 ```
@@ -977,7 +977,7 @@ string itemId = "item_id0";
 
 try
 {
-    V1Item result = v1ItemsApi.RemoveModifierListAsync(locationId, modifierListId, itemId).Result;
+    V1Item result = await v1ItemsApi.RemoveModifierListAsync(locationId, modifierListId, itemId);
 }
 catch (ApiException e){};
 ```
@@ -1020,7 +1020,7 @@ string itemId = "item_id0";
 
 try
 {
-    V1Item result = v1ItemsApi.ApplyModifierListAsync(locationId, modifierListId, itemId).Result;
+    V1Item result = await v1ItemsApi.ApplyModifierListAsync(locationId, modifierListId, itemId);
 }
 catch (ApiException e){};
 ```
@@ -1063,7 +1063,7 @@ var body = new V1Variation.Builder()
 
 try
 {
-    V1Variation result = v1ItemsApi.CreateVariationAsync(locationId, itemId, body).Result;
+    V1Variation result = await v1ItemsApi.CreateVariationAsync(locationId, itemId, body);
 }
 catch (ApiException e){};
 ```
@@ -1109,7 +1109,7 @@ string variationId = "variation_id2";
 
 try
 {
-    V1Variation result = v1ItemsApi.DeleteVariationAsync(locationId, itemId, variationId).Result;
+    V1Variation result = await v1ItemsApi.DeleteVariationAsync(locationId, itemId, variationId);
 }
 catch (ApiException e){};
 ```
@@ -1158,7 +1158,7 @@ var body = new V1Variation.Builder()
 
 try
 {
-    V1Variation result = v1ItemsApi.UpdateVariationAsync(locationId, itemId, variationId, body).Result;
+    V1Variation result = await v1ItemsApi.UpdateVariationAsync(locationId, itemId, variationId, body);
 }
 catch (ApiException e){};
 ```
@@ -1196,7 +1196,7 @@ string locationId = "location_id4";
 
 try
 {
-    List<V1ModifierList> result = v1ItemsApi.ListModifierListsAsync(locationId).Result;
+    List<V1ModifierList> result = await v1ItemsApi.ListModifierListsAsync(locationId);
 }
 catch (ApiException e){};
 ```
@@ -1237,7 +1237,7 @@ var body = new V1ModifierList.Builder()
 
 try
 {
-    V1ModifierList result = v1ItemsApi.CreateModifierListAsync(locationId, body).Result;
+    V1ModifierList result = await v1ItemsApi.CreateModifierListAsync(locationId, body);
 }
 catch (ApiException e){};
 ```
@@ -1282,7 +1282,7 @@ string modifierListId = "modifier_list_id6";
 
 try
 {
-    V1ModifierList result = v1ItemsApi.DeleteModifierListAsync(locationId, modifierListId).Result;
+    V1ModifierList result = await v1ItemsApi.DeleteModifierListAsync(locationId, modifierListId);
 }
 catch (ApiException e){};
 ```
@@ -1322,7 +1322,7 @@ string modifierListId = "modifier_list_id6";
 
 try
 {
-    V1ModifierList result = v1ItemsApi.RetrieveModifierListAsync(locationId, modifierListId).Result;
+    V1ModifierList result = await v1ItemsApi.RetrieveModifierListAsync(locationId, modifierListId);
 }
 catch (ApiException e){};
 ```
@@ -1365,7 +1365,7 @@ var body = new V1UpdateModifierListRequest.Builder()
 
 try
 {
-    V1ModifierList result = v1ItemsApi.UpdateModifierListAsync(locationId, modifierListId, body).Result;
+    V1ModifierList result = await v1ItemsApi.UpdateModifierListAsync(locationId, modifierListId, body);
 }
 catch (ApiException e){};
 ```
@@ -1408,7 +1408,7 @@ var body = new V1ModifierOption.Builder()
 
 try
 {
-    V1ModifierOption result = v1ItemsApi.CreateModifierOptionAsync(locationId, modifierListId, body).Result;
+    V1ModifierOption result = await v1ItemsApi.CreateModifierOptionAsync(locationId, modifierListId, body);
 }
 catch (ApiException e){};
 ```
@@ -1454,7 +1454,7 @@ string modifierOptionId = "modifier_option_id6";
 
 try
 {
-    V1ModifierOption result = v1ItemsApi.DeleteModifierOptionAsync(locationId, modifierListId, modifierOptionId).Result;
+    V1ModifierOption result = await v1ItemsApi.DeleteModifierOptionAsync(locationId, modifierListId, modifierOptionId);
 }
 catch (ApiException e){};
 ```
@@ -1503,7 +1503,7 @@ var body = new V1ModifierOption.Builder()
 
 try
 {
-    V1ModifierOption result = v1ItemsApi.UpdateModifierOptionAsync(locationId, modifierListId, modifierOptionId, body).Result;
+    V1ModifierOption result = await v1ItemsApi.UpdateModifierOptionAsync(locationId, modifierListId, modifierOptionId, body);
 }
 catch (ApiException e){};
 ```
@@ -1542,7 +1542,7 @@ string locationId = "location_id4";
 
 try
 {
-    List<V1Page> result = v1ItemsApi.ListPagesAsync(locationId).Result;
+    List<V1Page> result = await v1ItemsApi.ListPagesAsync(locationId);
 }
 catch (ApiException e){};
 ```
@@ -1583,7 +1583,7 @@ var body = new V1Page.Builder()
 
 try
 {
-    V1Page result = v1ItemsApi.CreatePageAsync(locationId, body).Result;
+    V1Page result = await v1ItemsApi.CreatePageAsync(locationId, body);
 }
 catch (ApiException e){};
 ```
@@ -1626,7 +1626,7 @@ string pageId = "page_id0";
 
 try
 {
-    V1Page result = v1ItemsApi.DeletePageAsync(locationId, pageId).Result;
+    V1Page result = await v1ItemsApi.DeletePageAsync(locationId, pageId);
 }
 catch (ApiException e){};
 ```
@@ -1669,7 +1669,7 @@ var body = new V1Page.Builder()
 
 try
 {
-    V1Page result = v1ItemsApi.UpdatePageAsync(locationId, pageId, body).Result;
+    V1Page result = await v1ItemsApi.UpdatePageAsync(locationId, pageId, body);
 }
 catch (ApiException e){};
 ```
@@ -1719,7 +1719,7 @@ string pageId = "page_id0";
 
 try
 {
-    V1Page result = v1ItemsApi.DeletePageCellAsync(locationId, pageId, null, null).Result;
+    V1Page result = await v1ItemsApi.DeletePageCellAsync(locationId, pageId, null, null);
 }
 catch (ApiException e){};
 ```
@@ -1762,7 +1762,7 @@ var body = new V1PageCell.Builder()
 
 try
 {
-    V1Page result = v1ItemsApi.UpdatePageCellAsync(locationId, pageId, body).Result;
+    V1Page result = await v1ItemsApi.UpdatePageCellAsync(locationId, pageId, body);
 }
 catch (ApiException e){};
 ```

@@ -105,8 +105,8 @@ namespace Square.Models
         public class Builder
         {
             private string name;
-            private IList<string> productIdsAny;
-            private IList<string> productIdsAll;
+            private IList<string> productIdsAny = new List<string>();
+            private IList<string> productIdsAll = new List<string>();
             private long? quantityExact;
             private long? quantityMin;
             private long? quantityMax;
@@ -167,4 +167,4 @@ namespace Square.Models
             }
         }
     }
-} 
+}

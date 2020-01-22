@@ -44,7 +44,7 @@ string adjustmentId = "adjustment_id0";
 
 try
 {
-    RetrieveInventoryAdjustmentResponse result = inventoryApi.RetrieveInventoryAdjustmentAsync(adjustmentId).Result;
+    RetrieveInventoryAdjustmentResponse result = await inventoryApi.RetrieveInventoryAdjustmentAsync(adjustmentId);
 }
 catch (ApiException e){};
 ```
@@ -99,7 +99,7 @@ var body = new BatchChangeInventoryRequest.Builder()
 
 try
 {
-    BatchChangeInventoryResponse result = inventoryApi.BatchChangeInventoryAsync(body).Result;
+    BatchChangeInventoryResponse result = await inventoryApi.BatchChangeInventoryAsync(body);
 }
 catch (ApiException e){};
 ```
@@ -151,7 +151,7 @@ var body = new BatchRetrieveInventoryChangesRequest.Builder()
 
 try
 {
-    BatchRetrieveInventoryChangesResponse result = inventoryApi.BatchRetrieveInventoryChangesAsync(body).Result;
+    BatchRetrieveInventoryChangesResponse result = await inventoryApi.BatchRetrieveInventoryChangesAsync(body);
 }
 catch (ApiException e){};
 ```
@@ -199,7 +199,7 @@ var body = new BatchRetrieveInventoryCountsRequest.Builder()
 
 try
 {
-    BatchRetrieveInventoryCountsResponse result = inventoryApi.BatchRetrieveInventoryCountsAsync(body).Result;
+    BatchRetrieveInventoryCountsResponse result = await inventoryApi.BatchRetrieveInventoryCountsAsync(body);
 }
 catch (ApiException e){};
 ```
@@ -230,7 +230,7 @@ string physicalCountId = "physical_count_id2";
 
 try
 {
-    RetrieveInventoryPhysicalCountResponse result = inventoryApi.RetrieveInventoryPhysicalCountAsync(physicalCountId).Result;
+    RetrieveInventoryPhysicalCountResponse result = await inventoryApi.RetrieveInventoryPhysicalCountAsync(physicalCountId);
 }
 catch (ApiException e){};
 ```
@@ -265,7 +265,7 @@ string catalogObjectId = "catalog_object_id6";
 
 try
 {
-    RetrieveInventoryCountResponse result = inventoryApi.RetrieveInventoryCountAsync(catalogObjectId, null, null).Result;
+    RetrieveInventoryCountResponse result = await inventoryApi.RetrieveInventoryCountAsync(catalogObjectId, null, null);
 }
 catch (ApiException e){};
 ```
@@ -306,7 +306,7 @@ string catalogObjectId = "catalog_object_id6";
 
 try
 {
-    RetrieveInventoryChangesResponse result = inventoryApi.RetrieveInventoryChangesAsync(catalogObjectId, null, null).Result;
+    RetrieveInventoryChangesResponse result = await inventoryApi.RetrieveInventoryChangesAsync(catalogObjectId, null, null);
 }
 catch (ApiException e){};
 ```

@@ -28,7 +28,7 @@ namespace Square.Models
         public string Name { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for selection_type
         /// </summary>
         [JsonProperty("selection_type")]
         public string SelectionType { get; }
@@ -66,4 +66,4 @@ namespace Square.Models
             }
         }
     }
-} 
+}

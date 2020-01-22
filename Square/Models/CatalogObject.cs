@@ -274,10 +274,10 @@ namespace Square.Models
             private string updatedAt;
             private long? version;
             private bool? isDeleted;
-            private IList<Models.CatalogV1Id> catalogV1Ids;
+            private IList<Models.CatalogV1Id> catalogV1Ids = new List<Models.CatalogV1Id>();
             private bool? presentAtAllLocations;
-            private IList<string> presentAtLocationIds;
-            private IList<string> absentAtLocationIds;
+            private IList<string> presentAtLocationIds = new List<string>();
+            private IList<string> absentAtLocationIds = new List<string>();
             private string imageId;
             private Models.CatalogItem itemData;
             private Models.CatalogCategory categoryData;
@@ -473,4 +473,4 @@ namespace Square.Models
             }
         }
     }
-} 
+}

@@ -44,7 +44,7 @@ ListCustomersAsync(string cursor = null, string sortField = null, string sortOrd
 ```csharp
 try
 {
-    ListCustomersResponse result = customersApi.ListCustomersAsync(null, null, null).Result;
+    ListCustomersResponse result = await customersApi.ListCustomersAsync(null, null, null);
 }
 catch (ApiException e){};
 ```
@@ -99,7 +99,7 @@ var body = new CreateCustomerRequest.Builder()
 
 try
 {
-    CreateCustomerResponse result = customersApi.CreateCustomerAsync(body).Result;
+    CreateCustomerResponse result = await customersApi.CreateCustomerAsync(body);
 }
 catch (ApiException e){};
 ```
@@ -157,7 +157,7 @@ var body = new SearchCustomersRequest.Builder()
 
 try
 {
-    SearchCustomersResponse result = customersApi.SearchCustomersAsync(body).Result;
+    SearchCustomersResponse result = await customersApi.SearchCustomersAsync(body);
 }
 catch (ApiException e){};
 ```
@@ -189,7 +189,7 @@ string customerId = "customer_id8";
 
 try
 {
-    DeleteCustomerResponse result = customersApi.DeleteCustomerAsync(customerId).Result;
+    DeleteCustomerResponse result = await customersApi.DeleteCustomerAsync(customerId);
 }
 catch (ApiException e){};
 ```
@@ -219,7 +219,7 @@ string customerId = "customer_id8";
 
 try
 {
-    RetrieveCustomerResponse result = customersApi.RetrieveCustomerAsync(customerId).Result;
+    RetrieveCustomerResponse result = await customersApi.RetrieveCustomerAsync(customerId);
 }
 catch (ApiException e){};
 ```
@@ -262,7 +262,7 @@ var body = new UpdateCustomerRequest.Builder()
 
 try
 {
-    UpdateCustomerResponse result = customersApi.UpdateCustomerAsync(customerId, body).Result;
+    UpdateCustomerResponse result = await customersApi.UpdateCustomerAsync(customerId, body);
 }
 catch (ApiException e){};
 ```
@@ -310,7 +310,7 @@ var body = new CreateCustomerCardRequest.Builder(
 
 try
 {
-    CreateCustomerCardResponse result = customersApi.CreateCustomerCardAsync(customerId, body).Result;
+    CreateCustomerCardResponse result = await customersApi.CreateCustomerCardAsync(customerId, body);
 }
 catch (ApiException e){};
 ```
@@ -342,7 +342,7 @@ string cardId = "card_id4";
 
 try
 {
-    DeleteCustomerCardResponse result = customersApi.DeleteCustomerCardAsync(customerId, cardId).Result;
+    DeleteCustomerCardResponse result = await customersApi.DeleteCustomerCardAsync(customerId, cardId);
 }
 catch (ApiException e){};
 ```

@@ -42,13 +42,13 @@ namespace Square.Models
         public string EmployeeId { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for event_type
         /// </summary>
         [JsonProperty("event_type")]
         public string EventType { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for event_money
         /// </summary>
         [JsonProperty("event_money")]
         public Models.V1Money EventMoney { get; }
@@ -134,4 +134,4 @@ namespace Square.Models
             }
         }
     }
-} 
+}

@@ -37,7 +37,11 @@ namespace Square.Http.Client
                 FileName = string.IsNullOrWhiteSpace(File.FileName) ? "file" : File.FileName,
             };
 
-            if (!Headers.ContainsKey("content-type"))
+            if (!string.IsNullOrEmpty(File.ContentType))
+            {
+                headers.ContentType = new MediaTypeHeaderValue(File.ContentType);
+            }
+            else if (!Headers.ContainsKey("content-type"))
             {
                 headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
             }

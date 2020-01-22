@@ -56,9 +56,9 @@ namespace Square.Models
 
         public class Builder
         {
-            private IList<Models.Shift> shifts;
+            private IList<Models.Shift> shifts = new List<Models.Shift>();
             private string cursor;
-            private IList<Models.Error> errors;
+            private IList<Models.Error> errors = new List<Models.Error>();
 
             public Builder() { }
             public Builder Shifts(IList<Models.Shift> value)
@@ -87,4 +87,4 @@ namespace Square.Models
             }
         }
     }
-} 
+}

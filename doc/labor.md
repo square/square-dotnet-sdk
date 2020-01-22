@@ -50,7 +50,7 @@ ListBreakTypesAsync(string locationId = null, int? limit = null, string cursor =
 ```csharp
 try
 {
-    ListBreakTypesResponse result = laborApi.ListBreakTypesAsync(null, null, null).Result;
+    ListBreakTypesResponse result = await laborApi.ListBreakTypesAsync(null, null, null);
 }
 catch (ApiException e){};
 ```
@@ -102,7 +102,7 @@ var body = new CreateBreakTypeRequest.Builder(
 
 try
 {
-    CreateBreakTypeResponse result = laborApi.CreateBreakTypeAsync(body).Result;
+    CreateBreakTypeResponse result = await laborApi.CreateBreakTypeAsync(body);
 }
 catch (ApiException e){};
 ```
@@ -134,7 +134,7 @@ string id = "id0";
 
 try
 {
-    DeleteBreakTypeResponse result = laborApi.DeleteBreakTypeAsync(id).Result;
+    DeleteBreakTypeResponse result = await laborApi.DeleteBreakTypeAsync(id);
 }
 catch (ApiException e){};
 ```
@@ -164,7 +164,7 @@ string id = "id0";
 
 try
 {
-    GetBreakTypeResponse result = laborApi.GetBreakTypeAsync(id).Result;
+    GetBreakTypeResponse result = await laborApi.GetBreakTypeAsync(id);
 }
 catch (ApiException e){};
 ```
@@ -205,7 +205,7 @@ var body = new UpdateBreakTypeRequest.Builder(
 
 try
 {
-    UpdateBreakTypeResponse result = laborApi.UpdateBreakTypeAsync(id, body).Result;
+    UpdateBreakTypeResponse result = await laborApi.UpdateBreakTypeAsync(id, body);
 }
 catch (ApiException e){};
 ```
@@ -235,7 +235,7 @@ ListEmployeeWagesAsync(string employeeId = null, int? limit = null, string curso
 ```csharp
 try
 {
-    ListEmployeeWagesResponse result = laborApi.ListEmployeeWagesAsync(null, null, null).Result;
+    ListEmployeeWagesResponse result = await laborApi.ListEmployeeWagesAsync(null, null, null);
 }
 catch (ApiException e){};
 ```
@@ -265,7 +265,7 @@ string id = "id0";
 
 try
 {
-    GetEmployeeWageResponse result = laborApi.GetEmployeeWageAsync(id).Result;
+    GetEmployeeWageResponse result = await laborApi.GetEmployeeWageAsync(id);
 }
 catch (ApiException e){};
 ```
@@ -343,7 +343,7 @@ var body = new CreateShiftRequest.Builder(
 
 try
 {
-    CreateShiftResponse result = laborApi.CreateShiftAsync(body).Result;
+    CreateShiftResponse result = await laborApi.CreateShiftAsync(body);
 }
 catch (ApiException e){};
 ```
@@ -404,7 +404,7 @@ var body = new SearchShiftsRequest.Builder()
 
 try
 {
-    SearchShiftsResponse result = laborApi.SearchShiftsAsync(body).Result;
+    SearchShiftsResponse result = await laborApi.SearchShiftsAsync(body);
 }
 catch (ApiException e){};
 ```
@@ -434,7 +434,7 @@ string id = "id0";
 
 try
 {
-    DeleteShiftResponse result = laborApi.DeleteShiftAsync(id).Result;
+    DeleteShiftResponse result = await laborApi.DeleteShiftAsync(id);
 }
 catch (ApiException e){};
 ```
@@ -464,7 +464,7 @@ string id = "id0";
 
 try
 {
-    GetShiftResponse result = laborApi.GetShiftAsync(id).Result;
+    GetShiftResponse result = await laborApi.GetShiftAsync(id);
 }
 catch (ApiException e){};
 ```
@@ -534,7 +534,7 @@ var body = new UpdateShiftRequest.Builder(
 
 try
 {
-    UpdateShiftResponse result = laborApi.UpdateShiftAsync(id, body).Result;
+    UpdateShiftResponse result = await laborApi.UpdateShiftAsync(id, body);
 }
 catch (ApiException e){};
 ```
@@ -563,7 +563,7 @@ ListWorkweekConfigsAsync(int? limit = null, string cursor = null)
 ```csharp
 try
 {
-    ListWorkweekConfigsResponse result = laborApi.ListWorkweekConfigsAsync(null, null).Result;
+    ListWorkweekConfigsResponse result = await laborApi.ListWorkweekConfigsAsync(null, null);
 }
 catch (ApiException e){};
 ```
@@ -602,7 +602,7 @@ var body = new UpdateWorkweekConfigRequest.Builder(
 
 try
 {
-    UpdateWorkweekConfigResponse result = laborApi.UpdateWorkweekConfigAsync(id, body).Result;
+    UpdateWorkweekConfigResponse result = await laborApi.UpdateWorkweekConfigAsync(id, body);
 }
 catch (ApiException e){};
 ```

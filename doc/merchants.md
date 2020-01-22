@@ -43,7 +43,7 @@ ListMerchantsAsync(int? cursor = null)
 ```csharp
 try
 {
-    ListMerchantsResponse result = merchantsApi.ListMerchantsAsync(null).Result;
+    ListMerchantsResponse result = await merchantsApi.ListMerchantsAsync(null);
 }
 catch (ApiException e){};
 ```
@@ -73,7 +73,7 @@ string merchantId = "merchant_id0";
 
 try
 {
-    RetrieveMerchantResponse result = merchantsApi.RetrieveMerchantAsync(merchantId).Result;
+    RetrieveMerchantResponse result = await merchantsApi.RetrieveMerchantAsync(merchantId);
 }
 catch (ApiException e){};
 ```

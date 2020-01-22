@@ -67,7 +67,7 @@ ListEmployeesAsync(
 ```csharp
 try
 {
-    List<V1Employee> result = v1EmployeesApi.ListEmployeesAsync(null, null, null, null, null, null, null, null, null).Result;
+    List<V1Employee> result = await v1EmployeesApi.ListEmployeesAsync(null, null, null, null, null, null, null, null, null);
 }
 catch (ApiException e){};
 ```
@@ -109,7 +109,7 @@ var body = new V1Employee.Builder(
 
 try
 {
-    V1Employee result = v1EmployeesApi.CreateEmployeeAsync(body).Result;
+    V1Employee result = await v1EmployeesApi.CreateEmployeeAsync(body);
 }
 catch (ApiException e){};
 ```
@@ -139,7 +139,7 @@ string employeeId = "employee_id0";
 
 try
 {
-    V1Employee result = v1EmployeesApi.RetrieveEmployeeAsync(employeeId).Result;
+    V1Employee result = await v1EmployeesApi.RetrieveEmployeeAsync(employeeId);
 }
 catch (ApiException e){};
 ```
@@ -174,7 +174,7 @@ var body = new V1Employee.Builder(
 
 try
 {
-    V1Employee result = v1EmployeesApi.UpdateEmployeeAsync(employeeId, body).Result;
+    V1Employee result = await v1EmployeesApi.UpdateEmployeeAsync(employeeId, body);
 }
 catch (ApiException e){};
 ```
@@ -204,7 +204,7 @@ ListEmployeeRolesAsync(string order = null, int? limit = null, string batchToken
 ```csharp
 try
 {
-    List<V1EmployeeRole> result = v1EmployeesApi.ListEmployeeRolesAsync(null, null, null).Result;
+    List<V1EmployeeRole> result = await v1EmployeesApi.ListEmployeeRolesAsync(null, null, null);
 }
 catch (ApiException e){};
 ```
@@ -253,7 +253,7 @@ var body = new V1EmployeeRole.Builder(
 
 try
 {
-    V1EmployeeRole result = v1EmployeesApi.CreateEmployeeRoleAsync(body).Result;
+    V1EmployeeRole result = await v1EmployeesApi.CreateEmployeeRoleAsync(body);
 }
 catch (ApiException e){};
 ```
@@ -283,7 +283,7 @@ string roleId = "role_id6";
 
 try
 {
-    V1EmployeeRole result = v1EmployeesApi.RetrieveEmployeeRoleAsync(roleId).Result;
+    V1EmployeeRole result = await v1EmployeesApi.RetrieveEmployeeRoleAsync(roleId);
 }
 catch (ApiException e){};
 ```
@@ -322,7 +322,7 @@ var body = new V1EmployeeRole.Builder(
 
 try
 {
-    V1EmployeeRole result = v1EmployeesApi.UpdateEmployeeRoleAsync(roleId, body).Result;
+    V1EmployeeRole result = await v1EmployeesApi.UpdateEmployeeRoleAsync(roleId, body);
 }
 catch (ApiException e){};
 ```
@@ -371,7 +371,7 @@ ListTimecardsAsync(
 ```csharp
 try
 {
-    List<V1Timecard> result = v1EmployeesApi.ListTimecardsAsync(null, null, null, null, null, null, null, null, null, null, null).Result;
+    List<V1Timecard> result = await v1EmployeesApi.ListTimecardsAsync(null, null, null, null, null, null, null, null, null, null, null);
 }
 catch (ApiException e){};
 ```
@@ -413,7 +413,7 @@ var body = new V1Timecard.Builder(
 
 try
 {
-    V1Timecard result = v1EmployeesApi.CreateTimecardAsync(body).Result;
+    V1Timecard result = await v1EmployeesApi.CreateTimecardAsync(body);
 }
 catch (ApiException e){};
 ```
@@ -457,7 +457,7 @@ string timecardId = "timecard_id0";
 
 try
 {
-    object result = v1EmployeesApi.DeleteTimecardAsync(timecardId).Result;
+    object result = await v1EmployeesApi.DeleteTimecardAsync(timecardId);
 }
 catch (ApiException e){};
 ```
@@ -492,7 +492,7 @@ string timecardId = "timecard_id0";
 
 try
 {
-    V1Timecard result = v1EmployeesApi.RetrieveTimecardAsync(timecardId).Result;
+    V1Timecard result = await v1EmployeesApi.RetrieveTimecardAsync(timecardId);
 }
 catch (ApiException e){};
 ```
@@ -528,7 +528,7 @@ var body = new V1Timecard.Builder(
 
 try
 {
-    V1Timecard result = v1EmployeesApi.UpdateTimecardAsync(timecardId, body).Result;
+    V1Timecard result = await v1EmployeesApi.UpdateTimecardAsync(timecardId, body);
 }
 catch (ApiException e){};
 ```
@@ -565,7 +565,7 @@ string timecardId = "timecard_id0";
 
 try
 {
-    List<V1TimecardEvent> result = v1EmployeesApi.ListTimecardEventsAsync(timecardId).Result;
+    List<V1TimecardEvent> result = await v1EmployeesApi.ListTimecardEventsAsync(timecardId);
 }
 catch (ApiException e){};
 ```
@@ -602,7 +602,7 @@ string locationId = "location_id4";
 
 try
 {
-    List<V1CashDrawerShift> result = v1EmployeesApi.ListCashDrawerShiftsAsync(locationId, null, null, null).Result;
+    List<V1CashDrawerShift> result = await v1EmployeesApi.ListCashDrawerShiftsAsync(locationId, null, null, null);
 }
 catch (ApiException e){};
 ```
@@ -634,7 +634,7 @@ string shiftId = "shift_id0";
 
 try
 {
-    V1CashDrawerShift result = v1EmployeesApi.RetrieveCashDrawerShiftAsync(locationId, shiftId).Result;
+    V1CashDrawerShift result = await v1EmployeesApi.RetrieveCashDrawerShiftAsync(locationId, shiftId);
 }
 catch (ApiException e){};
 ```

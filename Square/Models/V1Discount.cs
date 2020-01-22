@@ -56,13 +56,13 @@ namespace Square.Models
         public string Rate { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for amount_money
         /// </summary>
         [JsonProperty("amount_money")]
         public Models.V1Money AmountMoney { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for discount_type
         /// </summary>
         [JsonProperty("discount_type")]
         public string DiscountType { get; }
@@ -74,7 +74,7 @@ namespace Square.Models
         public bool? PinRequired { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for color
         /// </summary>
         [JsonProperty("color")]
         public string Color { get; }
@@ -172,4 +172,4 @@ namespace Square.Models
             }
         }
     }
-} 
+}

@@ -68,7 +68,7 @@ namespace Square.Models
             private string id;
             private string name;
             private int? pageIndex;
-            private IList<Models.V1PageCell> cells;
+            private IList<Models.V1PageCell> cells = new List<Models.V1PageCell>();
 
             public Builder() { }
             public Builder Id(string value)
@@ -104,4 +104,4 @@ namespace Square.Models
             }
         }
     }
-} 
+}

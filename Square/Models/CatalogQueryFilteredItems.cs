@@ -38,19 +38,19 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for text_filter
         /// </summary>
         [JsonProperty("text_filter")]
         public string TextFilter { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for search_vendor_code
         /// </summary>
         [JsonProperty("search_vendor_code")]
         public bool? SearchVendorCode { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for category_ids
         /// </summary>
         [JsonProperty("category_ids")]
         public IList<string> CategoryIds { get; }
@@ -62,13 +62,13 @@ namespace Square.Models
         public IList<string> StockLevels { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for enabled_location_ids
         /// </summary>
         [JsonProperty("enabled_location_ids")]
         public IList<string> EnabledLocationIds { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for vendor_ids
         /// </summary>
         [JsonProperty("vendor_ids")]
         public IList<string> VendorIds { get; }
@@ -80,7 +80,7 @@ namespace Square.Models
         public IList<string> ProductTypes { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for custom_attribute_filters
         /// </summary>
         [JsonProperty("custom_attribute_filters")]
         public IList<Models.CatalogQueryFilteredItemsCustomAttributeFilter> CustomAttributeFilters { get; }
@@ -117,13 +117,13 @@ namespace Square.Models
         {
             private string textFilter;
             private bool? searchVendorCode;
-            private IList<string> categoryIds;
-            private IList<string> stockLevels;
-            private IList<string> enabledLocationIds;
-            private IList<string> vendorIds;
-            private IList<string> productTypes;
-            private IList<Models.CatalogQueryFilteredItemsCustomAttributeFilter> customAttributeFilters;
-            private IList<string> doesNotExist;
+            private IList<string> categoryIds = new List<string>();
+            private IList<string> stockLevels = new List<string>();
+            private IList<string> enabledLocationIds = new List<string>();
+            private IList<string> vendorIds = new List<string>();
+            private IList<string> productTypes = new List<string>();
+            private IList<Models.CatalogQueryFilteredItemsCustomAttributeFilter> customAttributeFilters = new List<Models.CatalogQueryFilteredItemsCustomAttributeFilter>();
+            private IList<string> doesNotExist = new List<string>();
             private string sortOrder;
 
             public Builder() { }
@@ -202,4 +202,4 @@ namespace Square.Models
             }
         }
     }
-} 
+}

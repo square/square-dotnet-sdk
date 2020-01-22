@@ -52,7 +52,7 @@ ListPaymentRefundsAsync(
 ```csharp
 try
 {
-    ListPaymentRefundsResponse result = refundsApi.ListPaymentRefundsAsync(null, null, null, null, null, null, null).Result;
+    ListPaymentRefundsResponse result = await refundsApi.ListPaymentRefundsAsync(null, null, null, null, null, null, null);
 }
 catch (ApiException e){};
 ```
@@ -86,13 +86,13 @@ var bodyAmountMoney = new Money.Builder()
     .Build();
 var body = new RefundPaymentRequest.Builder(
         "a7e36d40-d24b-11e8-b568-0800200c9a66",
-        bodyAmountMoney)
-    .PaymentId("UNOE3kv2BZwqHlJ830RCt5YCuaB")
+        bodyAmountMoney,
+        "UNOE3kv2BZwqHlJ830RCt5YCuaB")
     .Build();
 
 try
 {
-    RefundPaymentResponse result = refundsApi.RefundPaymentAsync(body).Result;
+    RefundPaymentResponse result = await refundsApi.RefundPaymentAsync(body);
 }
 catch (ApiException e){};
 ```
@@ -122,7 +122,7 @@ string refundId = "refund_id4";
 
 try
 {
-    GetPaymentRefundResponse result = refundsApi.GetPaymentRefundAsync(refundId).Result;
+    GetPaymentRefundResponse result = await refundsApi.GetPaymentRefundAsync(refundId);
 }
 catch (ApiException e){};
 ```

@@ -36,55 +36,55 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for sorted_attribute_query
         /// </summary>
         [JsonProperty("sorted_attribute_query")]
         public Models.CatalogQuerySortedAttribute SortedAttributeQuery { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for exact_query
         /// </summary>
         [JsonProperty("exact_query")]
         public Models.CatalogQueryExact ExactQuery { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for prefix_query
         /// </summary>
         [JsonProperty("prefix_query")]
         public Models.CatalogQueryPrefix PrefixQuery { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for range_query
         /// </summary>
         [JsonProperty("range_query")]
         public Models.CatalogQueryRange RangeQuery { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for text_query
         /// </summary>
         [JsonProperty("text_query")]
         public Models.CatalogQueryText TextQuery { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for items_for_tax_query
         /// </summary>
         [JsonProperty("items_for_tax_query")]
         public Models.CatalogQueryItemsForTax ItemsForTaxQuery { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for items_for_modifier_list_query
         /// </summary>
         [JsonProperty("items_for_modifier_list_query")]
         public Models.CatalogQueryItemsForModifierList ItemsForModifierListQuery { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for items_for_item_options_query
         /// </summary>
         [JsonProperty("items_for_item_options_query")]
         public Models.CatalogQueryItemsForItemOptions ItemsForItemOptionsQuery { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for item_variations_for_item_option_values_query
         /// </summary>
         [JsonProperty("item_variations_for_item_option_values_query")]
         public Models.CatalogQueryItemVariationsForItemOptionValues ItemVariationsForItemOptionValuesQuery { get; }
@@ -185,4 +185,4 @@ namespace Square.Models
             }
         }
     }
-} 
+}

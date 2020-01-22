@@ -56,9 +56,9 @@ namespace Square.Models
 
         public class Builder
         {
-            private IList<Models.Employee> employees;
+            private IList<Models.Employee> employees = new List<Models.Employee>();
             private string cursor;
-            private IList<Models.Error> errors;
+            private IList<Models.Error> errors = new List<Models.Error>();
 
             public Builder() { }
             public Builder Employees(IList<Models.Employee> value)
@@ -87,4 +87,4 @@ namespace Square.Models
             }
         }
     }
-} 
+}

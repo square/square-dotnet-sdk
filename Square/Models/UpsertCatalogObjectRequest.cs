@@ -35,7 +35,7 @@ namespace Square.Models
         public string IdempotencyKey { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for object
         /// </summary>
         [JsonProperty("object")]
         public Models.CatalogObject MObject { get; }
@@ -77,4 +77,4 @@ namespace Square.Models
             }
         }
     }
-} 
+}

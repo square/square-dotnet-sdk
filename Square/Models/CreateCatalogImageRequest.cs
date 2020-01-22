@@ -40,7 +40,7 @@ namespace Square.Models
         public string ObjectId { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for image
         /// </summary>
         [JsonProperty("image")]
         public Models.CatalogObject Image { get; }
@@ -89,4 +89,4 @@ namespace Square.Models
             }
         }
     }
-} 
+}

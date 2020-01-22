@@ -56,9 +56,9 @@ namespace Square.Models
 
         public class Builder
         {
-            private IList<Models.Error> errors;
-            private IList<Models.CatalogObject> objects;
-            private IList<Models.CatalogObject> relatedObjects;
+            private IList<Models.Error> errors = new List<Models.Error>();
+            private IList<Models.CatalogObject> objects = new List<Models.CatalogObject>();
+            private IList<Models.CatalogObject> relatedObjects = new List<Models.CatalogObject>();
 
             public Builder() { }
             public Builder Errors(IList<Models.Error> value)
@@ -87,4 +87,4 @@ namespace Square.Models
             }
         }
     }
-} 
+}

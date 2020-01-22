@@ -202,7 +202,7 @@ namespace Square.Models
             private Models.Address shippingAddress;
             private string buyerEmailAddress;
             private string orderId;
-            private IList<Models.AdditionalRecipient> additionalRecipients;
+            private IList<Models.AdditionalRecipient> additionalRecipients = new List<Models.AdditionalRecipient>();
             private string verificationToken;
 
             public Builder(string idempotencyKey,
@@ -314,4 +314,4 @@ namespace Square.Models
             }
         }
     }
-} 
+}

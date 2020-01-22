@@ -127,8 +127,8 @@ namespace Square.Models
             private string id;
             private string locationId;
             private string createdAt;
-            private IList<Models.Tender> tenders;
-            private IList<Models.Refund> refunds;
+            private IList<Models.Tender> tenders = new List<Models.Tender>();
+            private IList<Models.Refund> refunds = new List<Models.Refund>();
             private string referenceId;
             private string product;
             private string clientId;
@@ -211,4 +211,4 @@ namespace Square.Models
             }
         }
     }
-} 
+}

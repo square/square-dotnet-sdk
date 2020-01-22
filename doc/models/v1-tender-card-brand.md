@@ -8,15 +8,15 @@ The brand of a credit card.
 
 ### Fields
 
-| Name | Description |
-|  --- | --- |
-| `OTHERBRAND` | - |
-| `VISA` | - |
-| `MASTERCARD` | - |
-| `AMERICANEXPRESS` | - |
-| `DISCOVER` | - |
-| `DISCOVERDINERS` | - |
-| `JCB` | - |
-| `CHINAUNIONPAY` | - |
-| `SQUAREGIFTCARD` | - |
+| Name |
+|  --- |
+| `OTHERBRAND` |
+| `VISA` |
+| `MASTERCARD` |
+| `AMERICANEXPRESS` |
+| `DISCOVER` |
+| `DISCOVERDINERS` |
+| `JCB` |
+| `CHINAUNIONPAY` |
+| `SQUAREGIFTCARD` |
 

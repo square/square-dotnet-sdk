@@ -318,18 +318,18 @@ namespace Square.Models
             private string referenceId;
             private Models.OrderSource source;
             private string customerId;
-            private IList<Models.OrderLineItem> lineItems;
-            private IList<Models.OrderLineItemTax> taxes;
-            private IList<Models.OrderLineItemDiscount> discounts;
-            private IList<Models.OrderServiceCharge> serviceCharges;
-            private IList<Models.OrderFulfillment> fulfillments;
-            private IList<Models.OrderReturn> returns;
+            private IList<Models.OrderLineItem> lineItems = new List<Models.OrderLineItem>();
+            private IList<Models.OrderLineItemTax> taxes = new List<Models.OrderLineItemTax>();
+            private IList<Models.OrderLineItemDiscount> discounts = new List<Models.OrderLineItemDiscount>();
+            private IList<Models.OrderServiceCharge> serviceCharges = new List<Models.OrderServiceCharge>();
+            private IList<Models.OrderFulfillment> fulfillments = new List<Models.OrderFulfillment>();
+            private IList<Models.OrderReturn> returns = new List<Models.OrderReturn>();
             private Models.OrderMoneyAmounts returnAmounts;
             private Models.OrderMoneyAmounts netAmounts;
             private Models.OrderRoundingAdjustment roundingAdjustment;
-            private IList<Models.Tender> tenders;
-            private IList<Models.Refund> refunds;
-            private IDictionary<string, string> metadata;
+            private IList<Models.Tender> tenders = new List<Models.Tender>();
+            private IList<Models.Refund> refunds = new List<Models.Refund>();
+            private IDictionary<string, string> metadata = new Dictionary<string, string>();
             private string createdAt;
             private string updatedAt;
             private string closedAt;
@@ -531,4 +531,4 @@ namespace Square.Models
             }
         }
     }
-} 
+}

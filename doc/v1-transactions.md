@@ -47,7 +47,7 @@ string locationId = "location_id4";
 
 try
 {
-    List<V1BankAccount> result = v1TransactionsApi.ListBankAccountsAsync(locationId).Result;
+    List<V1BankAccount> result = await v1TransactionsApi.ListBankAccountsAsync(locationId);
 }
 catch (ApiException e){};
 ```
@@ -79,7 +79,7 @@ string bankAccountId = "bank_account_id0";
 
 try
 {
-    V1BankAccount result = v1TransactionsApi.RetrieveBankAccountAsync(locationId, bankAccountId).Result;
+    V1BankAccount result = await v1TransactionsApi.RetrieveBankAccountAsync(locationId, bankAccountId);
 }
 catch (ApiException e){};
 ```
@@ -116,7 +116,7 @@ string locationId = "location_id4";
 
 try
 {
-    List<V1Order> result = v1TransactionsApi.ListOrdersAsync(locationId, null, null, null).Result;
+    List<V1Order> result = await v1TransactionsApi.ListOrdersAsync(locationId, null, null, null);
 }
 catch (ApiException e){};
 ```
@@ -148,7 +148,7 @@ string orderId = "order_id6";
 
 try
 {
-    V1Order result = v1TransactionsApi.RetrieveOrderAsync(locationId, orderId).Result;
+    V1Order result = await v1TransactionsApi.RetrieveOrderAsync(locationId, orderId);
 }
 catch (ApiException e){};
 ```
@@ -184,7 +184,7 @@ var body = new V1UpdateOrderRequest.Builder(
 
 try
 {
-    V1Order result = v1TransactionsApi.UpdateOrderAsync(locationId, orderId, body).Result;
+    V1Order result = await v1TransactionsApi.UpdateOrderAsync(locationId, orderId, body);
 }
 catch (ApiException e){};
 ```
@@ -237,7 +237,7 @@ string locationId = "location_id4";
 
 try
 {
-    List<V1Payment> result = v1TransactionsApi.ListPaymentsAsync(locationId, null, null, null, null, null, null).Result;
+    List<V1Payment> result = await v1TransactionsApi.ListPaymentsAsync(locationId, null, null, null, null, null, null);
 }
 catch (ApiException e){};
 ```
@@ -269,7 +269,7 @@ string paymentId = "payment_id0";
 
 try
 {
-    V1Payment result = v1TransactionsApi.RetrievePaymentAsync(locationId, paymentId).Result;
+    V1Payment result = await v1TransactionsApi.RetrievePaymentAsync(locationId, paymentId);
 }
 catch (ApiException e){};
 ```
@@ -310,7 +310,7 @@ string locationId = "location_id4";
 
 try
 {
-    List<V1Refund> result = v1TransactionsApi.ListRefundsAsync(locationId, null, null, null, null, null).Result;
+    List<V1Refund> result = await v1TransactionsApi.ListRefundsAsync(locationId, null, null, null, null, null);
 }
 catch (ApiException e){};
 ```
@@ -357,7 +357,7 @@ var body = new V1CreateRefundRequest.Builder(
 
 try
 {
-    V1Refund result = v1TransactionsApi.CreateRefundAsync(locationId, body).Result;
+    V1Refund result = await v1TransactionsApi.CreateRefundAsync(locationId, body);
 }
 catch (ApiException e){};
 ```
@@ -386,11 +386,11 @@ ListSettlementsAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `locationId` | `string` | Template, Required | The ID of the location to list settlements for. |
-| `order` | [`string`](/doc/models/sort-order.md) | Query, Optional | TThe order in which payments are listed in the response. |
+| `locationId` | `string` | Template, Required | The ID of the location to list settlements for. If you specify me, this endpoint returns settlements aggregated from all of the business's locations. |
+| `order` | [`string`](/doc/models/sort-order.md) | Query, Optional | The order in which settlements are listed in the response. |
 | `beginTime` | `string` | Query, Optional | The beginning of the requested reporting period, in ISO 8601 format. If this value is before January 1, 2013 (2013-01-01T00:00:00Z), this endpoint returns an error. Default value: The current time minus one year. |
 | `endTime` | `string` | Query, Optional | The end of the requested reporting period, in ISO 8601 format. If this value is more than one year greater than begin_time, this endpoint returns an error. Default value: The current time. |
-| `limit` | `int?` | Query, Optional | The maximum number of payments to return in a single response. This value cannot exceed 200. |
+| `limit` | `int?` | Query, Optional | The maximum number of settlements to return in a single response. This value cannot exceed 200. |
 | `status` | [`string`](/doc/models/v1-list-settlements-request-status.md) | Query, Optional | Provide this parameter to retrieve only settlements with a particular status (SENT or FAILED). |
 | `batchToken` | `string` | Query, Optional | A pagination cursor to retrieve the next set of results for your<br>original query to the endpoint. |
 
@@ -405,7 +405,7 @@ string locationId = "location_id4";
 
 try
 {
-    List<V1Settlement> result = v1TransactionsApi.ListSettlementsAsync(locationId, null, null, null, null, null, null).Result;
+    List<V1Settlement> result = await v1TransactionsApi.ListSettlementsAsync(locationId, null, null, null, null, null, null);
 }
 catch (ApiException e){};
 ```
@@ -453,7 +453,7 @@ string settlementId = "settlement_id0";
 
 try
 {
-    V1Settlement result = v1TransactionsApi.RetrieveSettlementAsync(locationId, settlementId).Result;
+    V1Settlement result = await v1TransactionsApi.RetrieveSettlementAsync(locationId, settlementId);
 }
 catch (ApiException e){};
 ```

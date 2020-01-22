@@ -22,13 +22,13 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for custom_attribute_definition_ids
         /// </summary>
         [JsonProperty("custom_attribute_definition_ids")]
         public IList<string> CustomAttributeDefinitionIds { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for has_value
         /// </summary>
         [JsonProperty("has_value")]
         public bool? HasValue { get; }
@@ -43,7 +43,7 @@ namespace Square.Models
 
         public class Builder
         {
-            private IList<string> customAttributeDefinitionIds;
+            private IList<string> customAttributeDefinitionIds = new List<string>();
             private bool? hasValue;
 
             public Builder() { }
@@ -66,4 +66,4 @@ namespace Square.Models
             }
         }
     }
-} 
+}

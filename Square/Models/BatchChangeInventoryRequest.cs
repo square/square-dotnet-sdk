@@ -60,7 +60,7 @@ namespace Square.Models
         public class Builder
         {
             private string idempotencyKey;
-            private IList<Models.InventoryChange> changes;
+            private IList<Models.InventoryChange> changes = new List<Models.InventoryChange>();
             private bool? ignoreUnchangedCounts;
 
             public Builder() { }
@@ -90,4 +90,4 @@ namespace Square.Models
             }
         }
     }
-} 
+}

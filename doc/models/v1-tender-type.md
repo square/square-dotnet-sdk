@@ -6,14 +6,14 @@
 
 ### Fields
 
-| Name | Description |
-|  --- | --- |
-| `CREDITCARD` | - |
-| `CASH` | - |
-| `THIRDPARTYCARD` | - |
-| `NOSALE` | - |
-| `SQUAREWALLET` | - |
-| `SQUAREGIFTCARD` | - |
-| `UNKNOWN` | - |
-| `OTHER` | - |
+| Name |
+|  --- |
+| `CREDITCARD` |
+| `CASH` |
+| `THIRDPARTYCARD` |
+| `NOSALE` |
+| `SQUAREWALLET` |
+| `SQUAREGIFTCARD` |
+| `UNKNOWN` |
+| `OTHER` |
 

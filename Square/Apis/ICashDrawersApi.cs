@@ -4,6 +4,7 @@ using System.Dynamic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Square;
 using Square.Utilities;
@@ -51,7 +52,7 @@ namespace Square.Apis
                 string beginTime = null,
                 string endTime = null,
                 int? limit = null,
-                string cursor = null);
+                string cursor = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Provides the summary details for a single cash drawer shift. See
@@ -69,7 +70,7 @@ namespace Square.Apis
         /// <param name="locationId">Required parameter: The ID of the location to retrieve cash drawer shifts from.</param>
         /// <param name="shiftId">Required parameter: The shift ID.</param>
         /// <return>Returns the Models.RetrieveCashDrawerShiftResponse response from the API call</return>
-        Task<Models.RetrieveCashDrawerShiftResponse> RetrieveCashDrawerShiftAsync(string locationId, string shiftId);
+        Task<Models.RetrieveCashDrawerShiftResponse> RetrieveCashDrawerShiftAsync(string locationId, string shiftId, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Provides a paginated list of events for a single cash drawer shift.
@@ -97,7 +98,7 @@ namespace Square.Apis
                 string locationId,
                 string shiftId,
                 int? limit = null,
-                string cursor = null);
+                string cursor = null, CancellationToken cancellationToken = default);
 
     }
-} 
+}
