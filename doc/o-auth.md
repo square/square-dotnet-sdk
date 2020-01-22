@@ -66,7 +66,7 @@ string authorization = "Authorization8";
 
 try
 {
-    RenewTokenResponse result = oAuthApi.RenewTokenAsync(clientId, body, authorization).Result;
+    RenewTokenResponse result = await oAuthApi.RenewTokenAsync(clientId, body, authorization);
 }
 catch (ApiException e){};
 ```
@@ -118,7 +118,7 @@ string authorization = "Authorization8";
 
 try
 {
-    RevokeTokenResponse result = oAuthApi.RevokeTokenAsync(body, authorization).Result;
+    RevokeTokenResponse result = await oAuthApi.RevokeTokenAsync(body, authorization);
 }
 catch (ApiException e){};
 ```
@@ -159,14 +159,15 @@ ObtainTokenAsync(Models.ObtainTokenRequest body)
 
 ```csharp
 var body = new ObtainTokenRequest.Builder(
-        "client_id8",
-        "client_secret4",
-        "grant_type8")
+        "APPLICATION_ID",
+        "APPLICATION_SECRET",
+        "authorization_code")
+    .Code("CODE_FROM_AUTHORIZE")
     .Build();
 
 try
 {
-    ObtainTokenResponse result = oAuthApi.ObtainTokenAsync(body).Result;
+    ObtainTokenResponse result = await oAuthApi.ObtainTokenAsync(body);
 }
 catch (ApiException e){};
 ```

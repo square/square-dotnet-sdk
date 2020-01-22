@@ -94,7 +94,7 @@ namespace Square.Models
             private string uid;
             private string type;
             private string state;
-            private IDictionary<string, string> metadata;
+            private IDictionary<string, string> metadata = new Dictionary<string, string>();
             private Models.OrderFulfillmentPickupDetails pickupDetails;
             private Models.OrderFulfillmentShipmentDetails shipmentDetails;
 
@@ -146,4 +146,4 @@ namespace Square.Models
             }
         }
     }
-} 
+}

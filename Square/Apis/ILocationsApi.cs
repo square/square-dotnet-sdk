@@ -4,6 +4,7 @@ using System.Dynamic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Square;
 using Square.Utilities;
@@ -31,7 +32,7 @@ namespace Square.Apis
         /// endpoint correspond to that `location_id` parameter.
         /// </summary>
         /// <return>Returns the Models.ListLocationsResponse response from the API call</return>
-        Task<Models.ListLocationsResponse> ListLocationsAsync();
+        Task<Models.ListLocationsResponse> ListLocationsAsync(CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Creates a location.
@@ -47,7 +48,7 @@ namespace Square.Apis
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.CreateLocationResponse response from the API call</return>
-        Task<Models.CreateLocationResponse> CreateLocationAsync(Models.CreateLocationRequest body);
+        Task<Models.CreateLocationResponse> CreateLocationAsync(Models.CreateLocationRequest body, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Retrieves details of a location.
@@ -61,7 +62,7 @@ namespace Square.Apis
         /// </summary>
         /// <param name="locationId">Required parameter: The ID of the location to retrieve.</param>
         /// <return>Returns the Models.RetrieveLocationResponse response from the API call</return>
-        Task<Models.RetrieveLocationResponse> RetrieveLocationAsync(string locationId);
+        Task<Models.RetrieveLocationResponse> RetrieveLocationAsync(string locationId, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Updates a location.
@@ -77,7 +78,7 @@ namespace Square.Apis
         /// <param name="locationId">Required parameter: The ID of the location to update.</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.UpdateLocationResponse response from the API call</return>
-        Task<Models.UpdateLocationResponse> UpdateLocationAsync(string locationId, Models.UpdateLocationRequest body);
+        Task<Models.UpdateLocationResponse> UpdateLocationAsync(string locationId, Models.UpdateLocationRequest body, CancellationToken cancellationToken = default);
 
     }
-} 
+}

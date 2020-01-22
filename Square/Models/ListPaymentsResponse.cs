@@ -58,8 +58,8 @@ namespace Square.Models
 
         public class Builder
         {
-            private IList<Models.Error> errors;
-            private IList<Models.Payment> payments;
+            private IList<Models.Error> errors = new List<Models.Error>();
+            private IList<Models.Payment> payments = new List<Models.Payment>();
             private string cursor;
 
             public Builder() { }
@@ -89,4 +89,4 @@ namespace Square.Models
             }
         }
     }
-} 
+}

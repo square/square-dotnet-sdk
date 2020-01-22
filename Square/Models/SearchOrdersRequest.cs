@@ -80,7 +80,7 @@ namespace Square.Models
 
         public class Builder
         {
-            private IList<string> locationIds;
+            private IList<string> locationIds = new List<string>();
             private string cursor;
             private Models.SearchOrdersQuery query;
             private int? limit;
@@ -127,4 +127,4 @@ namespace Square.Models
             }
         }
     }
-} 
+}

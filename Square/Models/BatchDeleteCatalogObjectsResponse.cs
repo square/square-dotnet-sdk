@@ -56,8 +56,8 @@ namespace Square.Models
 
         public class Builder
         {
-            private IList<Models.Error> errors;
-            private IList<string> deletedObjectIds;
+            private IList<Models.Error> errors = new List<Models.Error>();
+            private IList<string> deletedObjectIds = new List<string>();
             private string deletedAt;
 
             public Builder() { }
@@ -87,4 +87,4 @@ namespace Square.Models
             }
         }
     }
-} 
+}

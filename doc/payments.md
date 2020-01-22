@@ -57,7 +57,7 @@ ListPaymentsAsync(
 ```csharp
 try
 {
-    ListPaymentsResponse result = paymentsApi.ListPaymentsAsync(null, null, null, null, null, null, null, null).Result;
+    ListPaymentsResponse result = await paymentsApi.ListPaymentsAsync(null, null, null, null, null, null, null, null);
 }
 catch (ApiException e){};
 ```
@@ -117,7 +117,7 @@ var body = new CreatePaymentRequest.Builder(
 
 try
 {
-    CreatePaymentResponse result = paymentsApi.CreatePaymentAsync(body).Result;
+    CreatePaymentResponse result = await paymentsApi.CreatePaymentAsync(body);
 }
 catch (ApiException e){};
 ```
@@ -158,7 +158,7 @@ var body = new CancelPaymentByIdempotencyKeyRequest.Builder(
 
 try
 {
-    CancelPaymentByIdempotencyKeyResponse result = paymentsApi.CancelPaymentByIdempotencyKeyAsync(body).Result;
+    CancelPaymentByIdempotencyKeyResponse result = await paymentsApi.CancelPaymentByIdempotencyKeyAsync(body);
 }
 catch (ApiException e){};
 ```
@@ -188,7 +188,7 @@ string paymentId = "payment_id0";
 
 try
 {
-    GetPaymentResponse result = paymentsApi.GetPaymentAsync(paymentId).Result;
+    GetPaymentResponse result = await paymentsApi.GetPaymentAsync(paymentId);
 }
 catch (ApiException e){};
 ```
@@ -220,7 +220,7 @@ string paymentId = "payment_id0";
 
 try
 {
-    CancelPaymentResponse result = paymentsApi.CancelPaymentAsync(paymentId).Result;
+    CancelPaymentResponse result = await paymentsApi.CancelPaymentAsync(paymentId);
 }
 catch (ApiException e){};
 ```
@@ -255,7 +255,7 @@ string paymentId = "payment_id0";
 
 try
 {
-    CompletePaymentResponse result = paymentsApi.CompletePaymentAsync(paymentId).Result;
+    CompletePaymentResponse result = await paymentsApi.CompletePaymentAsync(paymentId);
 }
 catch (ApiException e){};
 ```

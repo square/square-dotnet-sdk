@@ -247,11 +247,11 @@ namespace Square.Models
             private string note;
             private string catalogObjectId;
             private string variationName;
-            private IList<Models.OrderReturnLineItemModifier> returnModifiers;
-            private IList<Models.OrderReturnTax> returnTaxes;
-            private IList<Models.OrderReturnDiscount> returnDiscounts;
-            private IList<Models.OrderLineItemAppliedTax> appliedTaxes;
-            private IList<Models.OrderLineItemAppliedDiscount> appliedDiscounts;
+            private IList<Models.OrderReturnLineItemModifier> returnModifiers = new List<Models.OrderReturnLineItemModifier>();
+            private IList<Models.OrderReturnTax> returnTaxes = new List<Models.OrderReturnTax>();
+            private IList<Models.OrderReturnDiscount> returnDiscounts = new List<Models.OrderReturnDiscount>();
+            private IList<Models.OrderLineItemAppliedTax> appliedTaxes = new List<Models.OrderLineItemAppliedTax>();
+            private IList<Models.OrderLineItemAppliedDiscount> appliedDiscounts = new List<Models.OrderLineItemAppliedDiscount>();
             private Models.Money basePriceMoney;
             private Models.Money variationTotalPriceMoney;
             private Models.Money grossReturnMoney;
@@ -401,4 +401,4 @@ namespace Square.Models
             }
         }
     }
-} 
+}

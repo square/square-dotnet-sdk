@@ -4,6 +4,7 @@ using System.Dynamic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Square;
 using Square.Utilities;
@@ -31,7 +32,7 @@ namespace Square.Apis
         /// <param name="sortField">Optional parameter: Indicates how Customers should be sorted.  Default: `DEFAULT`.</param>
         /// <param name="sortOrder">Optional parameter: Indicates whether Customers should be sorted in ascending (`ASC`) or descending (`DESC`) order.  Default: `ASC`.</param>
         /// <return>Returns the Models.ListCustomersResponse response from the API call</return>
-        Task<Models.ListCustomersResponse> ListCustomersAsync(string cursor = null, string sortField = null, string sortOrder = null);
+        Task<Models.ListCustomersResponse> ListCustomersAsync(string cursor = null, string sortField = null, string sortOrder = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Creates a new customer for a business, which can have associated cards on file.
@@ -59,7 +60,7 @@ namespace Square.Apis
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.CreateCustomerResponse response from the API call</return>
-        Task<Models.CreateCustomerResponse> CreateCustomerAsync(Models.CreateCustomerRequest body);
+        Task<Models.CreateCustomerResponse> CreateCustomerAsync(Models.CreateCustomerRequest body, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Searches the customer profiles associated with a Square account.
@@ -79,7 +80,7 @@ namespace Square.Apis
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.SearchCustomersResponse response from the API call</return>
-        Task<Models.SearchCustomersResponse> SearchCustomersAsync(Models.SearchCustomersRequest body);
+        Task<Models.SearchCustomersResponse> SearchCustomersAsync(Models.SearchCustomersRequest body, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Deletes a customer from a business, along with any linked cards on file. When two profiles
@@ -97,7 +98,7 @@ namespace Square.Apis
         /// </summary>
         /// <param name="customerId">Required parameter: The ID of the customer to delete.</param>
         /// <return>Returns the Models.DeleteCustomerResponse response from the API call</return>
-        Task<Models.DeleteCustomerResponse> DeleteCustomerAsync(string customerId);
+        Task<Models.DeleteCustomerResponse> DeleteCustomerAsync(string customerId, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Returns details for a single customer.
@@ -111,7 +112,7 @@ namespace Square.Apis
         /// </summary>
         /// <param name="customerId">Required parameter: The ID of the customer to retrieve.</param>
         /// <return>Returns the Models.RetrieveCustomerResponse response from the API call</return>
-        Task<Models.RetrieveCustomerResponse> RetrieveCustomerAsync(string customerId);
+        Task<Models.RetrieveCustomerResponse> RetrieveCustomerAsync(string customerId, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Updates the details of an existing customer. When two profiles are merged
@@ -139,7 +140,7 @@ namespace Square.Apis
         /// <param name="customerId">Required parameter: The ID of the customer to update.</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.UpdateCustomerResponse response from the API call</return>
-        Task<Models.UpdateCustomerResponse> UpdateCustomerAsync(string customerId, Models.UpdateCustomerRequest body);
+        Task<Models.UpdateCustomerResponse> UpdateCustomerAsync(string customerId, Models.UpdateCustomerRequest body, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Adds a card on file to an existing customer.
@@ -161,7 +162,7 @@ namespace Square.Apis
         /// <param name="customerId">Required parameter: The Square ID of the customer profile the card is linked to.</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.CreateCustomerCardResponse response from the API call</return>
-        Task<Models.CreateCustomerCardResponse> CreateCustomerCardAsync(string customerId, Models.CreateCustomerCardRequest body);
+        Task<Models.CreateCustomerCardResponse> CreateCustomerCardAsync(string customerId, Models.CreateCustomerCardRequest body, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Removes a card on file from a customer.
@@ -177,7 +178,7 @@ namespace Square.Apis
         /// <param name="customerId">Required parameter: The ID of the customer that the card on file belongs to.</param>
         /// <param name="cardId">Required parameter: The ID of the card on file to delete.</param>
         /// <return>Returns the Models.DeleteCustomerCardResponse response from the API call</return>
-        Task<Models.DeleteCustomerCardResponse> DeleteCustomerCardAsync(string customerId, string cardId);
+        Task<Models.DeleteCustomerCardResponse> DeleteCustomerCardAsync(string customerId, string cardId, CancellationToken cancellationToken = default);
 
     }
-} 
+}

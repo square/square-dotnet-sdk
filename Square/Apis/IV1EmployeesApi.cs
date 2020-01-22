@@ -4,6 +4,7 @@ using System.Dynamic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Square;
 using Square.Utilities;
@@ -61,7 +62,7 @@ namespace Square.Apis
                 string status = null,
                 string externalId = null,
                 int? limit = null,
-                string batchToken = null);
+                string batchToken = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         ///  Use the CreateEmployee endpoint to add an employee to a Square
@@ -91,7 +92,7 @@ namespace Square.Apis
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.V1Employee response from the API call</return>
-        Task<Models.V1Employee> CreateEmployeeAsync(Models.V1Employee body);
+        Task<Models.V1Employee> CreateEmployeeAsync(Models.V1Employee body, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Provides the details for a single employee.
@@ -105,7 +106,7 @@ namespace Square.Apis
         /// </summary>
         /// <param name="employeeId">Required parameter: The employee's ID.</param>
         /// <return>Returns the Models.V1Employee response from the API call</return>
-        Task<Models.V1Employee> RetrieveEmployeeAsync(string employeeId);
+        Task<Models.V1Employee> RetrieveEmployeeAsync(string employeeId, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// UpdateEmployee
@@ -121,7 +122,7 @@ namespace Square.Apis
         /// <param name="employeeId">Required parameter: The ID of the role to modify.</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.V1Employee response from the API call</return>
-        Task<Models.V1Employee> UpdateEmployeeAsync(string employeeId, Models.V1Employee body);
+        Task<Models.V1Employee> UpdateEmployeeAsync(string employeeId, Models.V1Employee body, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Provides summary information for all of a business's employee roles.
@@ -139,7 +140,7 @@ namespace Square.Apis
         /// <param name="limit">Optional parameter: The maximum integer number of employee entities to return in a single response. Default 100, maximum 200.</param>
         /// <param name="batchToken">Optional parameter: A pagination cursor to retrieve the next set of results for your original query to the endpoint.</param>
         /// <return>Returns the List<Models.V1EmployeeRole> response from the API call</return>
-        Task<List<Models.V1EmployeeRole>> ListEmployeeRolesAsync(string order = null, int? limit = null, string batchToken = null);
+        Task<List<Models.V1EmployeeRole>> ListEmployeeRolesAsync(string order = null, int? limit = null, string batchToken = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Creates an employee role you can then assign to employees.
@@ -171,7 +172,7 @@ namespace Square.Apis
         /// </summary>
         /// <param name="body">Required parameter: An EmployeeRole object with a name and permissions, and an optional owner flag.</param>
         /// <return>Returns the Models.V1EmployeeRole response from the API call</return>
-        Task<Models.V1EmployeeRole> CreateEmployeeRoleAsync(Models.V1EmployeeRole body);
+        Task<Models.V1EmployeeRole> CreateEmployeeRoleAsync(Models.V1EmployeeRole body, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Provides the details for a single employee role.
@@ -185,7 +186,7 @@ namespace Square.Apis
         /// </summary>
         /// <param name="roleId">Required parameter: The role's ID.</param>
         /// <return>Returns the Models.V1EmployeeRole response from the API call</return>
-        Task<Models.V1EmployeeRole> RetrieveEmployeeRoleAsync(string roleId);
+        Task<Models.V1EmployeeRole> RetrieveEmployeeRoleAsync(string roleId, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Modifies the details of an employee role.
@@ -201,7 +202,7 @@ namespace Square.Apis
         /// <param name="roleId">Required parameter: The ID of the role to modify.</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.V1EmployeeRole response from the API call</return>
-        Task<Models.V1EmployeeRole> UpdateEmployeeRoleAsync(string roleId, Models.V1EmployeeRole body);
+        Task<Models.V1EmployeeRole> UpdateEmployeeRoleAsync(string roleId, Models.V1EmployeeRole body, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Provides summary information for all of a business's employee timecards.
@@ -257,7 +258,7 @@ namespace Square.Apis
                 string endUpdatedAt = null,
                 bool? deleted = null,
                 int? limit = null,
-                string batchToken = null);
+                string batchToken = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Creates a timecard for an employee and clocks them in with an
@@ -289,7 +290,7 @@ namespace Square.Apis
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.V1Timecard response from the API call</return>
-        Task<Models.V1Timecard> CreateTimecardAsync(Models.V1Timecard body);
+        Task<Models.V1Timecard> CreateTimecardAsync(Models.V1Timecard body, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Deletes a timecard. Timecards can also be deleted through the
@@ -327,7 +328,7 @@ namespace Square.Apis
         /// </summary>
         /// <param name="timecardId">Required parameter: The ID of the timecard to delete.</param>
         /// <return>Returns the object response from the API call</return>
-        Task<object> DeleteTimecardAsync(string timecardId);
+        Task<object> DeleteTimecardAsync(string timecardId, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Provides the details for a single timecard.
@@ -351,7 +352,7 @@ namespace Square.Apis
         /// </summary>
         /// <param name="timecardId">Required parameter: The timecard's ID.</param>
         /// <return>Returns the Models.V1Timecard response from the API call</return>
-        Task<Models.V1Timecard> RetrieveTimecardAsync(string timecardId);
+        Task<Models.V1Timecard> RetrieveTimecardAsync(string timecardId, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Modifies the details of a timecard with an `API_EDIT` event for
@@ -371,7 +372,7 @@ namespace Square.Apis
         /// <param name="timecardId">Required parameter: TThe ID of the timecard to modify.</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request. See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.V1Timecard response from the API call</return>
-        Task<Models.V1Timecard> UpdateTimecardAsync(string timecardId, Models.V1Timecard body);
+        Task<Models.V1Timecard> UpdateTimecardAsync(string timecardId, Models.V1Timecard body, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Provides summary information for all events associated with a
@@ -397,7 +398,7 @@ namespace Square.Apis
         /// </summary>
         /// <param name="timecardId">Required parameter: The ID of the timecard to list events for.</param>
         /// <return>Returns the List<Models.V1TimecardEvent> response from the API call</return>
-        Task<List<Models.V1TimecardEvent>> ListTimecardEventsAsync(string timecardId);
+        Task<List<Models.V1TimecardEvent>> ListTimecardEventsAsync(string timecardId, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Provides the details for all of a location's cash drawer shifts during a date range. The date range you specify cannot exceed 90 days.
@@ -425,7 +426,7 @@ namespace Square.Apis
                 string locationId,
                 string order = null,
                 string beginTime = null,
-                string endTime = null);
+                string endTime = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Provides the details for a single cash drawer shift, including all events that occurred during the shift.
@@ -441,7 +442,7 @@ namespace Square.Apis
         /// <param name="locationId">Required parameter: The ID of the location to list cash drawer shifts for.</param>
         /// <param name="shiftId">Required parameter: The shift's ID.</param>
         /// <return>Returns the Models.V1CashDrawerShift response from the API call</return>
-        Task<Models.V1CashDrawerShift> RetrieveCashDrawerShiftAsync(string locationId, string shiftId);
+        Task<Models.V1CashDrawerShift> RetrieveCashDrawerShiftAsync(string locationId, string shiftId, CancellationToken cancellationToken = default);
 
     }
-} 
+}

@@ -4,6 +4,7 @@ using System.Dynamic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Square;
 using Square.Utilities;
@@ -37,7 +38,7 @@ namespace Square.Apis
         /// </summary>
         /// <return>Returns the Models.V1Merchant response from the API call</return>
         [Obsolete]
-        Task<Models.V1Merchant> RetrieveBusinessAsync();
+        Task<Models.V1Merchant> RetrieveBusinessAsync(CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Provides details for all business locations associated with a Square
@@ -63,7 +64,7 @@ namespace Square.Apis
         /// </summary>
         /// <return>Returns the List<Models.V1Merchant> response from the API call</return>
         [Obsolete]
-        Task<List<Models.V1Merchant>> ListLocationsAsync();
+        Task<List<Models.V1Merchant>> ListLocationsAsync(CancellationToken cancellationToken = default);
 
     }
-} 
+}

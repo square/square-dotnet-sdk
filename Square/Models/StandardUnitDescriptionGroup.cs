@@ -43,7 +43,7 @@ namespace Square.Models
 
         public class Builder
         {
-            private IList<Models.StandardUnitDescription> standardUnitDescriptions;
+            private IList<Models.StandardUnitDescription> standardUnitDescriptions = new List<Models.StandardUnitDescription>();
             private string languageCode;
 
             public Builder() { }
@@ -66,4 +66,4 @@ namespace Square.Models
             }
         }
     }
-} 
+}

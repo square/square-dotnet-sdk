@@ -6,12 +6,12 @@
 
 ### Fields
 
-| Name | Description |
-|  --- | --- |
-| `BUSINESSCHECKING` | - |
-| `CHECKING` | - |
-| `INVESTMENT` | - |
-| `LOAN` | - |
-| `SAVINGS` | - |
-| `OTHER` | - |
+| Name |
+|  --- |
+| `BUSINESSCHECKING` |
+| `CHECKING` |
+| `INVESTMENT` |
+| `LOAN` |
+| `SAVINGS` |
+| `OTHER` |
 

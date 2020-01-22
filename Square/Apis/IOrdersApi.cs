@@ -4,6 +4,7 @@ using System.Dynamic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Square;
 using Square.Utilities;
@@ -41,7 +42,7 @@ namespace Square.Apis
         /// <param name="locationId">Required parameter: The ID of the business location to associate the order with.</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.CreateOrderResponse response from the API call</return>
-        Task<Models.CreateOrderResponse> CreateOrderAsync(string locationId, Models.CreateOrderRequest body);
+        Task<Models.CreateOrderResponse> CreateOrderAsync(string locationId, Models.CreateOrderRequest body, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Retrieves a set of [Order](#type-order)s by their IDs.
@@ -59,7 +60,7 @@ namespace Square.Apis
         /// <param name="locationId">Required parameter: The ID of the orders' associated location.</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.BatchRetrieveOrdersResponse response from the API call</return>
-        Task<Models.BatchRetrieveOrdersResponse> BatchRetrieveOrdersAsync(string locationId, Models.BatchRetrieveOrdersRequest body);
+        Task<Models.BatchRetrieveOrdersResponse> BatchRetrieveOrdersAsync(string locationId, Models.BatchRetrieveOrdersRequest body, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Updates an open [Order](#type-order) by adding, replacing, or deleting
@@ -101,7 +102,7 @@ namespace Square.Apis
         /// <param name="orderId">Required parameter: The ID of the order to update.</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.UpdateOrderResponse response from the API call</return>
-        Task<Models.UpdateOrderResponse> UpdateOrderAsync(string locationId, string orderId, Models.UpdateOrderRequest body);
+        Task<Models.UpdateOrderResponse> UpdateOrderAsync(string locationId, string orderId, Models.UpdateOrderRequest body, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Search all orders for one or more locations. Orders include all sales,
@@ -141,7 +142,7 @@ namespace Square.Apis
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.SearchOrdersResponse response from the API call</return>
-        Task<Models.SearchOrdersResponse> SearchOrdersAsync(Models.SearchOrdersRequest body);
+        Task<Models.SearchOrdersResponse> SearchOrdersAsync(Models.SearchOrdersRequest body, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Pay for an [order](#type-order) using one or more approved [payments](#type-payment),
@@ -179,7 +180,7 @@ namespace Square.Apis
         /// <param name="orderId">Required parameter: The ID of the order being paid.</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.PayOrderResponse response from the API call</return>
-        Task<Models.PayOrderResponse> PayOrderAsync(string orderId, Models.PayOrderRequest body);
+        Task<Models.PayOrderResponse> PayOrderAsync(string orderId, Models.PayOrderRequest body, CancellationToken cancellationToken = default);
 
     }
-} 
+}

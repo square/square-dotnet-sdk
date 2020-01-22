@@ -45,7 +45,7 @@ namespace Square.Models
 
         public class Builder
         {
-            private IList<string> values;
+            private IList<string> values = new List<string>();
             private string rule;
 
             public Builder() { }
@@ -68,4 +68,4 @@ namespace Square.Models
             }
         }
     }
-} 
+}

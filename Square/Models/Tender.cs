@@ -180,7 +180,7 @@ namespace Square.Models
             private string customerId;
             private Models.TenderCardDetails cardDetails;
             private Models.TenderCashDetails cashDetails;
-            private IList<Models.AdditionalRecipient> additionalRecipients;
+            private IList<Models.AdditionalRecipient> additionalRecipients = new List<Models.AdditionalRecipient>();
             private string paymentId;
 
             public Builder(string type)
@@ -290,4 +290,4 @@ namespace Square.Models
             }
         }
     }
-} 
+}

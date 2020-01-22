@@ -36,7 +36,7 @@ namespace Square.Models
 
         public class Builder
         {
-            private IList<string> sourceNames;
+            private IList<string> sourceNames = new List<string>();
 
             public Builder() { }
             public Builder SourceNames(IList<string> value)
@@ -51,4 +51,4 @@ namespace Square.Models
             }
         }
     }
-} 
+}

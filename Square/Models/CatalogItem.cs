@@ -172,12 +172,12 @@ namespace Square.Models
             private bool? availableForPickup;
             private bool? availableElectronically;
             private string categoryId;
-            private IList<string> taxIds;
-            private IList<Models.CatalogItemModifierListInfo> modifierListInfo;
-            private IList<Models.CatalogObject> variations;
+            private IList<string> taxIds = new List<string>();
+            private IList<Models.CatalogItemModifierListInfo> modifierListInfo = new List<Models.CatalogItemModifierListInfo>();
+            private IList<Models.CatalogObject> variations = new List<Models.CatalogObject>();
             private string productType;
             private bool? skipModifierScreen;
-            private IList<Models.CatalogItemOptionForItem> itemOptions;
+            private IList<Models.CatalogItemOptionForItem> itemOptions = new List<Models.CatalogItemOptionForItem>();
 
             public Builder() { }
             public Builder Name(string value)
@@ -283,4 +283,4 @@ namespace Square.Models
             }
         }
     }
-} 
+}

@@ -174,7 +174,7 @@ namespace Square.Models
             private string verificationResults;
             private string statementDescription;
             private Models.DeviceDetails deviceDetails;
-            private IList<Models.Error> errors;
+            private IList<Models.Error> errors = new List<Models.Error>();
 
             public Builder() { }
             public Builder Status(string value)
@@ -280,4 +280,4 @@ namespace Square.Models
             }
         }
     }
-} 
+}

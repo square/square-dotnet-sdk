@@ -74,13 +74,13 @@ namespace Square.Models
         public string Description { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for type
         /// </summary>
         [JsonProperty("type")]
         public string Type { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for color
         /// </summary>
         [JsonProperty("color")]
         public string Color { get; }
@@ -92,7 +92,7 @@ namespace Square.Models
         public string Abbreviation { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for visibility
         /// </summary>
         [JsonProperty("visibility")]
         public string Visibility { get; }
@@ -192,9 +192,9 @@ namespace Square.Models
             private bool? availableOnline;
             private Models.V1ItemImage masterImage;
             private Models.V1Category category;
-            private IList<Models.V1Variation> variations;
-            private IList<Models.V1ModifierList> modifierLists;
-            private IList<Models.V1Fee> fees;
+            private IList<Models.V1Variation> variations = new List<Models.V1Variation>();
+            private IList<Models.V1ModifierList> modifierLists = new List<Models.V1ModifierList>();
+            private IList<Models.V1Fee> fees = new List<Models.V1Fee>();
             private bool? taxable;
             private string categoryId;
             private bool? availableForPickup;
@@ -325,4 +325,4 @@ namespace Square.Models
             }
         }
     }
-} 
+}

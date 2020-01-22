@@ -189,8 +189,8 @@ namespace Square.Models
             private Models.Money totalTaxMoney;
             private string calculationPhase;
             private bool? taxable;
-            private IList<Models.OrderReturnTax> returnTaxes;
-            private IList<Models.OrderLineItemAppliedTax> appliedTaxes;
+            private IList<Models.OrderReturnTax> returnTaxes = new List<Models.OrderReturnTax>();
+            private IList<Models.OrderLineItemAppliedTax> appliedTaxes = new List<Models.OrderLineItemAppliedTax>();
 
             public Builder() { }
             public Builder Uid(string value)
@@ -289,4 +289,4 @@ namespace Square.Models
             }
         }
     }
-} 
+}

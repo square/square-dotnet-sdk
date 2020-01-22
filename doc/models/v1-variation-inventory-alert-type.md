@@ -6,12 +6,12 @@
 
 ### Fields
 
-| Name | Description |
-|  --- | --- |
-| `LOWQUANTITY` | - |
-| `NONE` | - |
-| `INVESTMENT` | - |
-| `LOAN` | - |
-| `SAVINGS` | - |
-| `OTHER` | - |
+| Name |
+|  --- |
+| `LOWQUANTITY` |
+| `NONE` |
+| `INVESTMENT` |
+| `LOAN` |
+| `SAVINGS` |
+| `OTHER` |
 

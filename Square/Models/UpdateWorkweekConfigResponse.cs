@@ -49,7 +49,7 @@ namespace Square.Models
         public class Builder
         {
             private Models.WorkweekConfig workweekConfig;
-            private IList<Models.Error> errors;
+            private IList<Models.Error> errors = new List<Models.Error>();
 
             public Builder() { }
             public Builder WorkweekConfig(Models.WorkweekConfig value)
@@ -71,4 +71,4 @@ namespace Square.Models
             }
         }
     }
-} 
+}

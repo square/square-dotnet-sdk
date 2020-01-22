@@ -20,6 +20,18 @@ namespace Square.Utilities
         public static string DateTimeFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss.FFFFFFFK";
 
         /// <summary>
+        /// Creates a deep clone of an object by serializing it into a json string and then
+        /// deserializing back into an object.
+        /// </summary>
+        /// <typeparam name="T">The type of the obj parameter as well as the return object</typeparam>
+        /// <param name="obj">The object to clone</param>
+        /// <returns></returns>
+        internal static T DeepCloneObject<T>(T obj)
+        {
+            return JsonDeserialize<T>(JsonSerialize(obj));
+        }
+
+        /// <summary>
         /// JSON Serialization of a given object.
         /// </summary>
         /// <param name="obj">The object to serialize into JSON</param>
@@ -30,7 +42,8 @@ namespace Square.Utilities
             if (null == obj)
                 return null;
 
-            var settings = new JsonSerializerSettings() { };
+            var settings = new JsonSerializerSettings();
+
             if (converter == null)
                 settings.Converters.Add(new IsoDateTimeConverter());
             else
@@ -402,7 +415,7 @@ namespace Square.Utilities
                                             converterAttr.ConverterParameters)).Replace("\"", "");
                     }
                 }
-                keys.Add(new KeyValuePair<string, object>(name, (convertedValue) ?? ((DateTime)value).ToString(DateTimeFormat))); 
+                keys.Add(new KeyValuePair<string, object>(name, (convertedValue) ?? ((DateTime)value).ToString(DateTimeFormat)));
             }
             else
             {

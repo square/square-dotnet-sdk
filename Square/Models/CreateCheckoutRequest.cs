@@ -51,7 +51,7 @@ namespace Square.Models
         public string IdempotencyKey { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for order
         /// </summary>
         [JsonProperty("order")]
         public Models.CreateOrderRequest Order { get; }
@@ -147,7 +147,7 @@ namespace Square.Models
             private string prePopulateBuyerEmail;
             private Models.Address prePopulateShippingAddress;
             private string redirectUrl;
-            private IList<Models.ChargeRequestAdditionalRecipient> additionalRecipients;
+            private IList<Models.ChargeRequestAdditionalRecipient> additionalRecipients = new List<Models.ChargeRequestAdditionalRecipient>();
             private string note;
 
             public Builder(string idempotencyKey,
@@ -224,4 +224,4 @@ namespace Square.Models
             }
         }
     }
-} 
+}

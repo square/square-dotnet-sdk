@@ -43,7 +43,7 @@ ListEmployeesAsync(
 ```csharp
 try
 {
-    ListEmployeesResponse result = employeesApi.ListEmployeesAsync(null, null, null, null).Result;
+    ListEmployeesResponse result = await employeesApi.ListEmployeesAsync(null, null, null, null);
 }
 catch (ApiException e){};
 ```
@@ -73,7 +73,7 @@ string id = "id0";
 
 try
 {
-    RetrieveEmployeeResponse result = employeesApi.RetrieveEmployeeAsync(id).Result;
+    RetrieveEmployeeResponse result = await employeesApi.RetrieveEmployeeAsync(id);
 }
 catch (ApiException e){};
 ```

@@ -4,6 +4,7 @@ using System.Dynamic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Square;
 using Square.Utilities;
@@ -55,7 +56,7 @@ namespace Square.Apis
                 string cursor = null,
                 string locationId = null,
                 string status = null,
-                string sourceType = null);
+                string sourceType = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Refunds a payment. You can refund the entire payment amount or a 
@@ -73,7 +74,7 @@ namespace Square.Apis
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.RefundPaymentResponse response from the API call</return>
-        Task<Models.RefundPaymentResponse> RefundPaymentAsync(Models.RefundPaymentRequest body);
+        Task<Models.RefundPaymentResponse> RefundPaymentAsync(Models.RefundPaymentRequest body, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Retrieves a specific `Refund` using the `refund_id`.
@@ -87,7 +88,7 @@ namespace Square.Apis
         /// </summary>
         /// <param name="refundId">Required parameter: Unique ID for the desired `PaymentRefund`.</param>
         /// <return>Returns the Models.GetPaymentRefundResponse response from the API call</return>
-        Task<Models.GetPaymentRefundResponse> GetPaymentRefundAsync(string refundId);
+        Task<Models.GetPaymentRefundResponse> GetPaymentRefundAsync(string refundId, CancellationToken cancellationToken = default);
 
     }
-} 
+}

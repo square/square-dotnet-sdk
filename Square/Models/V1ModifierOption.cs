@@ -48,7 +48,7 @@ namespace Square.Models
         public string Name { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for price_money
         /// </summary>
         [JsonProperty("price_money")]
         public Models.V1Money PriceMoney { get; }
@@ -155,4 +155,4 @@ namespace Square.Models
             }
         }
     }
-} 
+}

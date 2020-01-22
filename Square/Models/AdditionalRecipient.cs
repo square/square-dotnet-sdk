@@ -111,4 +111,4 @@ namespace Square.Models
             }
         }
     }
-} 
+}

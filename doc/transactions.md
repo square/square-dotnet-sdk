@@ -63,7 +63,7 @@ string locationId = "location_id4";
 
 try
 {
-    ListRefundsResponse result = transactionsApi.ListRefundsAsync(locationId, null, null, null, null).Result;
+    ListRefundsResponse result = await transactionsApi.ListRefundsAsync(locationId, null, null, null, null);
 }
 catch (ApiException e){};
 ```
@@ -109,7 +109,7 @@ string locationId = "location_id4";
 
 try
 {
-    ListTransactionsResponse result = transactionsApi.ListTransactionsAsync(locationId, null, null, null, null).Result;
+    ListTransactionsResponse result = await transactionsApi.ListTransactionsAsync(locationId, null, null, null, null);
 }
 catch (ApiException e){};
 ```
@@ -204,7 +204,7 @@ var body = new ChargeRequest.Builder(
 
 try
 {
-    ChargeResponse result = transactionsApi.ChargeAsync(locationId, body).Result;
+    ChargeResponse result = await transactionsApi.ChargeAsync(locationId, body);
 }
 catch (ApiException e){};
 ```
@@ -238,7 +238,7 @@ string transactionId = "transaction_id8";
 
 try
 {
-    RetrieveTransactionResponse result = transactionsApi.RetrieveTransactionAsync(locationId, transactionId).Result;
+    RetrieveTransactionResponse result = await transactionsApi.RetrieveTransactionAsync(locationId, transactionId);
 }
 catch (ApiException e){};
 ```
@@ -274,7 +274,7 @@ string transactionId = "transaction_id8";
 
 try
 {
-    CaptureTransactionResponse result = transactionsApi.CaptureTransactionAsync(locationId, transactionId).Result;
+    CaptureTransactionResponse result = await transactionsApi.CaptureTransactionAsync(locationId, transactionId);
 }
 catch (ApiException e){};
 ```
@@ -327,7 +327,7 @@ var body = new CreateRefundRequest.Builder(
 
 try
 {
-    CreateRefundResponse result = transactionsApi.CreateRefundAsync(locationId, transactionId, body).Result;
+    CreateRefundResponse result = await transactionsApi.CreateRefundAsync(locationId, transactionId, body);
 }
 catch (ApiException e){};
 ```
@@ -363,7 +363,7 @@ string transactionId = "transaction_id8";
 
 try
 {
-    VoidTransactionResponse result = transactionsApi.VoidTransactionAsync(locationId, transactionId).Result;
+    VoidTransactionResponse result = await transactionsApi.VoidTransactionAsync(locationId, transactionId);
 }
 catch (ApiException e){};
 ```

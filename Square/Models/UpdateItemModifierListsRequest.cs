@@ -52,8 +52,8 @@ namespace Square.Models
         public class Builder
         {
             private IList<string> itemIds;
-            private IList<string> modifierListsToEnable;
-            private IList<string> modifierListsToDisable;
+            private IList<string> modifierListsToEnable = new List<string>();
+            private IList<string> modifierListsToDisable = new List<string>();
 
             public Builder(IList<string> itemIds)
             {
@@ -85,4 +85,4 @@ namespace Square.Models
             }
         }
     }
-} 
+}

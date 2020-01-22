@@ -177,7 +177,7 @@ var body = new CreateCheckoutRequest.Builder(
 
 try
 {
-    CreateCheckoutResponse result = checkoutApi.CreateCheckoutAsync(locationId, body).Result;
+    CreateCheckoutResponse result = await checkoutApi.CreateCheckoutAsync(locationId, body);
 }
 catch (ApiException e){};
 ```

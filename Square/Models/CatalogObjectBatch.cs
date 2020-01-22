@@ -34,7 +34,7 @@ namespace Square.Models
 
         public class Builder
         {
-            private IList<Models.CatalogObject> objects;
+            private IList<Models.CatalogObject> objects = new List<Models.CatalogObject>();
 
             public Builder() { }
             public Builder Objects(IList<Models.CatalogObject> value)
@@ -49,4 +49,4 @@ namespace Square.Models
             }
         }
     }
-} 
+}

@@ -4,6 +4,7 @@ using System.Dynamic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Square;
 using Square.Utilities;
@@ -43,7 +44,7 @@ namespace Square.Apis
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.BatchDeleteCatalogObjectsResponse response from the API call</return>
-        Task<Models.BatchDeleteCatalogObjectsResponse> BatchDeleteCatalogObjectsAsync(Models.BatchDeleteCatalogObjectsRequest body);
+        Task<Models.BatchDeleteCatalogObjectsResponse> BatchDeleteCatalogObjectsAsync(Models.BatchDeleteCatalogObjectsRequest body, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Returns a set of objects based on the provided ID.
@@ -67,7 +68,7 @@ namespace Square.Apis
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.BatchRetrieveCatalogObjectsResponse response from the API call</return>
-        Task<Models.BatchRetrieveCatalogObjectsResponse> BatchRetrieveCatalogObjectsAsync(Models.BatchRetrieveCatalogObjectsRequest body);
+        Task<Models.BatchRetrieveCatalogObjectsResponse> BatchRetrieveCatalogObjectsAsync(Models.BatchRetrieveCatalogObjectsRequest body, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Creates or updates up to 10,000 target objects based on the provided
@@ -97,7 +98,7 @@ namespace Square.Apis
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.BatchUpsertCatalogObjectsResponse response from the API call</return>
-        Task<Models.BatchUpsertCatalogObjectsResponse> BatchUpsertCatalogObjectsAsync(Models.BatchUpsertCatalogObjectsRequest body);
+        Task<Models.BatchUpsertCatalogObjectsResponse> BatchUpsertCatalogObjectsAsync(Models.BatchUpsertCatalogObjectsRequest body, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Upload an image file to create a new [CatalogImage](#type-catalogimage) for an existing
@@ -175,7 +176,7 @@ namespace Square.Apis
         /// <param name="request">Optional parameter: Example: </param>
         /// <param name="imageFile">Optional parameter: Example: </param>
         /// <return>Returns the Models.CreateCatalogImageResponse response from the API call</return>
-        Task<Models.CreateCatalogImageResponse> CreateCatalogImageAsync(Models.CreateCatalogImageRequest request = null, FileStreamInfo imageFile = null);
+        Task<Models.CreateCatalogImageResponse> CreateCatalogImageAsync(Models.CreateCatalogImageRequest request = null, FileStreamInfo imageFile = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Returns information about the Square Catalog API, such as batch size
@@ -189,7 +190,7 @@ namespace Square.Apis
         /// limits for `BatchUpsertCatalogObjects`.
         /// </summary>
         /// <return>Returns the Models.CatalogInfoResponse response from the API call</return>
-        Task<Models.CatalogInfoResponse> CatalogInfoAsync();
+        Task<Models.CatalogInfoResponse> CatalogInfoAsync(CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Returns a list of [CatalogObject](#type-catalogobject)s that includes
@@ -219,7 +220,7 @@ namespace Square.Apis
         /// <param name="cursor">Optional parameter: The pagination cursor returned in the previous response. Leave unset for an initial request. See [Pagination](https://developer.squareup.com/docs/basics/api101/pagination) for more information.</param>
         /// <param name="types">Optional parameter: An optional case-insensitive, comma-separated list of object types to retrieve, for example `ITEM,ITEM_VARIATION,CATEGORY,IMAGE`.  The legal values are taken from the CatalogObjectType enum: `ITEM`, `ITEM_VARIATION`, `CATEGORY`, `DISCOUNT`, `TAX`, `MODIFIER`, `MODIFIER_LIST`, or `IMAGE`.</param>
         /// <return>Returns the Models.ListCatalogResponse response from the API call</return>
-        Task<Models.ListCatalogResponse> ListCatalogAsync(string cursor = null, string types = null);
+        Task<Models.ListCatalogResponse> ListCatalogAsync(string cursor = null, string types = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Creates or updates the target [CatalogObject](#type-catalogobject).
@@ -233,7 +234,7 @@ namespace Square.Apis
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.UpsertCatalogObjectResponse response from the API call</return>
-        Task<Models.UpsertCatalogObjectResponse> UpsertCatalogObjectAsync(Models.UpsertCatalogObjectRequest body);
+        Task<Models.UpsertCatalogObjectResponse> UpsertCatalogObjectAsync(Models.UpsertCatalogObjectRequest body, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Deletes a single [CatalogObject](#type-catalogobject) based on the
@@ -257,7 +258,7 @@ namespace Square.Apis
         /// </summary>
         /// <param name="objectId">Required parameter: The ID of the catalog object to be deleted. When an object is deleted, other objects in the graph that depend on that object will be deleted as well (for example, deleting a catalog item will delete its catalog item variations).</param>
         /// <return>Returns the Models.DeleteCatalogObjectResponse response from the API call</return>
-        Task<Models.DeleteCatalogObjectResponse> DeleteCatalogObjectAsync(string objectId);
+        Task<Models.DeleteCatalogObjectResponse> DeleteCatalogObjectAsync(string objectId, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Returns a single [CatalogItem](#type-catalogitem) as a
@@ -285,7 +286,7 @@ namespace Square.Apis
         /// <param name="objectId">Required parameter: The object ID of any type of catalog objects to be retrieved.</param>
         /// <param name="includeRelatedObjects">Optional parameter: If `true`, the response will include additional objects that are related to the requested object, as follows:  If the `object` field of the response contains a CatalogItem, its associated CatalogCategory, CatalogTax objects, CatalogImages and CatalogModifierLists will be returned in the `related_objects` field of the response. If the `object` field of the response contains a CatalogItemVariation, its parent CatalogItem will be returned in the `related_objects` field of the response.  Default value: `false`</param>
         /// <return>Returns the Models.RetrieveCatalogObjectResponse response from the API call</return>
-        Task<Models.RetrieveCatalogObjectResponse> RetrieveCatalogObjectAsync(string objectId, bool? includeRelatedObjects = null);
+        Task<Models.RetrieveCatalogObjectResponse> RetrieveCatalogObjectAsync(string objectId, bool? includeRelatedObjects = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Queries the targeted catalog using a variety of query types:
@@ -325,7 +326,7 @@ namespace Square.Apis
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.SearchCatalogObjectsResponse response from the API call</return>
-        Task<Models.SearchCatalogObjectsResponse> SearchCatalogObjectsAsync(Models.SearchCatalogObjectsRequest body);
+        Task<Models.SearchCatalogObjectsResponse> SearchCatalogObjectsAsync(Models.SearchCatalogObjectsRequest body, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Updates the [CatalogModifierList](#type-catalogmodifierlist) objects
@@ -343,7 +344,7 @@ namespace Square.Apis
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.UpdateItemModifierListsResponse response from the API call</return>
-        Task<Models.UpdateItemModifierListsResponse> UpdateItemModifierListsAsync(Models.UpdateItemModifierListsRequest body);
+        Task<Models.UpdateItemModifierListsResponse> UpdateItemModifierListsAsync(Models.UpdateItemModifierListsRequest body, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Updates the [CatalogTax](#type-catalogtax) objects that apply to the
@@ -361,7 +362,7 @@ namespace Square.Apis
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.UpdateItemTaxesResponse response from the API call</return>
-        Task<Models.UpdateItemTaxesResponse> UpdateItemTaxesAsync(Models.UpdateItemTaxesRequest body);
+        Task<Models.UpdateItemTaxesResponse> UpdateItemTaxesAsync(Models.UpdateItemTaxesRequest body, CancellationToken cancellationToken = default);
 
     }
-} 
+}

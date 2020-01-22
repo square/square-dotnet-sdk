@@ -70,7 +70,7 @@ namespace Square.Models
         public string Email { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for account_type
         /// </summary>
         [JsonProperty("account_type")]
         public string AccountType { get; }
@@ -118,7 +118,7 @@ namespace Square.Models
         public Models.V1PhoneNumber BusinessPhone { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for business_type
         /// </summary>
         [JsonProperty("business_type")]
         public string BusinessType { get; }
@@ -168,7 +168,7 @@ namespace Square.Models
             private string name;
             private string email;
             private string accountType;
-            private IList<string> accountCapabilities;
+            private IList<string> accountCapabilities = new List<string>();
             private string countryCode;
             private string languageCode;
             private string currencyCode;
@@ -291,4 +291,4 @@ namespace Square.Models
             }
         }
     }
-} 
+}

@@ -4,6 +4,7 @@ using System.Dynamic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Square;
 using Square.Utilities;
@@ -29,7 +30,7 @@ namespace Square.Apis
         /// </summary>
         /// <param name="adjustmentId">Required parameter: ID of the [InventoryAdjustment](#type-inventoryadjustment) to retrieve.</param>
         /// <return>Returns the Models.RetrieveInventoryAdjustmentResponse response from the API call</return>
-        Task<Models.RetrieveInventoryAdjustmentResponse> RetrieveInventoryAdjustmentAsync(string adjustmentId);
+        Task<Models.RetrieveInventoryAdjustmentResponse> RetrieveInventoryAdjustmentAsync(string adjustmentId, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Applies adjustments and counts to the provided item quantities.
@@ -49,7 +50,7 @@ namespace Square.Apis
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.BatchChangeInventoryResponse response from the API call</return>
-        Task<Models.BatchChangeInventoryResponse> BatchChangeInventoryAsync(Models.BatchChangeInventoryRequest body);
+        Task<Models.BatchChangeInventoryResponse> BatchChangeInventoryAsync(Models.BatchChangeInventoryRequest body, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Returns historical physical counts and adjustments based on the
@@ -73,7 +74,7 @@ namespace Square.Apis
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.BatchRetrieveInventoryChangesResponse response from the API call</return>
-        Task<Models.BatchRetrieveInventoryChangesResponse> BatchRetrieveInventoryChangesAsync(Models.BatchRetrieveInventoryChangesRequest body);
+        Task<Models.BatchRetrieveInventoryChangesResponse> BatchRetrieveInventoryChangesAsync(Models.BatchRetrieveInventoryChangesRequest body, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Returns current counts for the provided
@@ -103,7 +104,7 @@ namespace Square.Apis
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.BatchRetrieveInventoryCountsResponse response from the API call</return>
-        Task<Models.BatchRetrieveInventoryCountsResponse> BatchRetrieveInventoryCountsAsync(Models.BatchRetrieveInventoryCountsRequest body);
+        Task<Models.BatchRetrieveInventoryCountsResponse> BatchRetrieveInventoryCountsAsync(Models.BatchRetrieveInventoryCountsRequest body, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Returns the [InventoryPhysicalCount](#type-inventoryphysicalcount)
@@ -119,7 +120,7 @@ namespace Square.Apis
         /// </summary>
         /// <param name="physicalCountId">Required parameter: ID of the [InventoryPhysicalCount](#type-inventoryphysicalcount) to retrieve.</param>
         /// <return>Returns the Models.RetrieveInventoryPhysicalCountResponse response from the API call</return>
-        Task<Models.RetrieveInventoryPhysicalCountResponse> RetrieveInventoryPhysicalCountAsync(string physicalCountId);
+        Task<Models.RetrieveInventoryPhysicalCountResponse> RetrieveInventoryPhysicalCountAsync(string physicalCountId, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Retrieves the current calculated stock count for a given
@@ -143,7 +144,7 @@ namespace Square.Apis
         /// <param name="locationIds">Optional parameter: The [Location](#type-location) IDs to look up as a comma-separated list. An empty list queries all locations.</param>
         /// <param name="cursor">Optional parameter: A pagination cursor returned by a previous call to this endpoint. Provide this to retrieve the next set of results for the original query.  See the [Pagination](https://developer.squareup.com/docs/docs/working-with-apis/pagination) guide for more information.</param>
         /// <return>Returns the Models.RetrieveInventoryCountResponse response from the API call</return>
-        Task<Models.RetrieveInventoryCountResponse> RetrieveInventoryCountAsync(string catalogObjectId, string locationIds = null, string cursor = null);
+        Task<Models.RetrieveInventoryCountResponse> RetrieveInventoryCountAsync(string catalogObjectId, string locationIds = null, string cursor = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Returns a set of physical counts and inventory adjustments for the
@@ -175,7 +176,7 @@ namespace Square.Apis
         /// <param name="locationIds">Optional parameter: The [Location](#type-location) IDs to look up as a comma-separated list. An empty list queries all locations.</param>
         /// <param name="cursor">Optional parameter: A pagination cursor returned by a previous call to this endpoint. Provide this to retrieve the next set of results for the original query.  See the [Pagination](https://developer.squareup.com/docs/docs/working-with-apis/pagination) guide for more information.</param>
         /// <return>Returns the Models.RetrieveInventoryChangesResponse response from the API call</return>
-        Task<Models.RetrieveInventoryChangesResponse> RetrieveInventoryChangesAsync(string catalogObjectId, string locationIds = null, string cursor = null);
+        Task<Models.RetrieveInventoryChangesResponse> RetrieveInventoryChangesAsync(string catalogObjectId, string locationIds = null, string cursor = null, CancellationToken cancellationToken = default);
 
     }
-} 
+}

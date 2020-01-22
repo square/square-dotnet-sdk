@@ -121,7 +121,7 @@ namespace Square.Models
             private string name;
             private string type;
             private string percentage;
-            private IDictionary<string, string> metadata;
+            private IDictionary<string, string> metadata = new Dictionary<string, string>();
             private Models.Money appliedMoney;
             private string scope;
 
@@ -187,4 +187,4 @@ namespace Square.Models
             }
         }
     }
-} 
+}

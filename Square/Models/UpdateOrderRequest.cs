@@ -64,7 +64,7 @@ namespace Square.Models
         public class Builder
         {
             private Models.Order order;
-            private IList<string> fieldsToClear;
+            private IList<string> fieldsToClear = new List<string>();
             private string idempotencyKey;
 
             public Builder() { }
@@ -94,4 +94,4 @@ namespace Square.Models
             }
         }
     }
-} 
+}

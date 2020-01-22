@@ -6,13 +6,13 @@
 
 ### Fields
 
-| Name | Description |
-|  --- | --- |
-| `MANUAL` | - |
-| `SCANNED` | - |
-| `SQUARECASH` | - |
-| `SQUAREWALLET` | - |
-| `SWIPED` | - |
-| `WEBFORM` | - |
-| `OTHER` | - |
+| Name |
+|  --- |
+| `MANUAL` |
+| `SCANNED` |
+| `SQUARECASH` |
+| `SQUAREWALLET` |
+| `SWIPED` |
+| `WEBFORM` |
+| `OTHER` |
 

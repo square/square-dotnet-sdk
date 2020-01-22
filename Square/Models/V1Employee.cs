@@ -78,7 +78,7 @@ namespace Square.Models
         public string Email { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for status
         /// </summary>
         [JsonProperty("status")]
         public string Status { get; }
@@ -121,8 +121,8 @@ namespace Square.Models
             private string firstName;
             private string lastName;
             private string id;
-            private IList<string> roleIds;
-            private IList<string> authorizedLocationIds;
+            private IList<string> roleIds = new List<string>();
+            private IList<string> authorizedLocationIds = new List<string>();
             private string email;
             private string status;
             private string externalId;
@@ -210,4 +210,4 @@ namespace Square.Models
             }
         }
     }
-} 
+}

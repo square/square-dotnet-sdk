@@ -4,15 +4,15 @@
   <PropertyGroup>
     <TargetFramework>netstandard1.3</TargetFramework>
     <AssemblyName>Square</AssemblyName>
-    <Version>4.0.0</Version>
-    <authors>Square</authors>
-    <owners>Square</owners>
+    <Version>4.1.0</Version>
+    <Authors>Square Developer Platform</Authors>
+    <Owners>Square Developer Platform</Owners>
     <Product>Square</Product>
     <PackageLicenseUrl>https://github.com/square/square-dotnet-sdk/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/square/square-dotnet-sdk</PackageProjectUrl>
     <Copyright>Copyright ©  2019</Copyright>
-    <AssemblyVersion>4.0.0</AssemblyVersion>
-    <FileVersion>4.0.0</FileVersion>
+    <AssemblyVersion>4.1.0</AssemblyVersion>
+    <FileVersion>4.1.0</FileVersion>
     <Description>.NET client library for the Square API</Description>
   </PropertyGroup>
 
@@ -22,5 +22,4 @@
         <_Parameter1>Square.Tests</_Parameter1>
     </AssemblyAttribute>
   </ItemGroup>
-
 </Project>

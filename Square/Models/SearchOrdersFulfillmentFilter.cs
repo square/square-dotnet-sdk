@@ -49,7 +49,7 @@ namespace Square.Models
         public class Builder
         {
             private IList<string> fulfillmentTypes;
-            private IList<string> fulfillmentStates;
+            private IList<string> fulfillmentStates = new List<string>();
 
             public Builder(IList<string> fulfillmentTypes)
             {
@@ -74,4 +74,4 @@ namespace Square.Models
             }
         }
     }
-} 
+}

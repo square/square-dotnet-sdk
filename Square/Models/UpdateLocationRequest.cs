@@ -20,7 +20,7 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for location
         /// </summary>
         [JsonProperty("location")]
         public Models.Location Location { get; }
@@ -49,4 +49,4 @@ namespace Square.Models
             }
         }
     }
-} 
+}

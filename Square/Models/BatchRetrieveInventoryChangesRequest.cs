@@ -102,10 +102,10 @@ namespace Square.Models
 
         public class Builder
         {
-            private IList<string> catalogObjectIds;
-            private IList<string> locationIds;
-            private IList<string> types;
-            private IList<string> states;
+            private IList<string> catalogObjectIds = new List<string>();
+            private IList<string> locationIds = new List<string>();
+            private IList<string> types = new List<string>();
+            private IList<string> states = new List<string>();
             private string updatedAfter;
             private string updatedBefore;
             private string cursor;
@@ -165,4 +165,4 @@ namespace Square.Models
             }
         }
     }
-} 
+}

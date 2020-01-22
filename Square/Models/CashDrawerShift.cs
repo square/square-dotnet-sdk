@@ -193,7 +193,7 @@ namespace Square.Models
         public Models.Money ClosedCashMoney { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for device
         /// </summary>
         [JsonProperty("device")]
         public Models.CashDrawerDevice Device { get; }
@@ -229,7 +229,7 @@ namespace Square.Models
             private string openedAt;
             private string endedAt;
             private string closedAt;
-            private IList<string> employeeIds;
+            private IList<string> employeeIds = new List<string>();
             private string openingEmployeeId;
             private string endingEmployeeId;
             private string closingEmployeeId;
@@ -375,4 +375,4 @@ namespace Square.Models
             }
         }
     }
-} 
+}

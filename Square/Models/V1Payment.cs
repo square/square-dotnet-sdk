@@ -100,7 +100,7 @@ namespace Square.Models
         public string CreatorId { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for device
         /// </summary>
         [JsonProperty("device")]
         public Models.Device Device { get; }
@@ -122,73 +122,73 @@ namespace Square.Models
         public string ReceiptUrl { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for inclusive_tax_money
         /// </summary>
         [JsonProperty("inclusive_tax_money")]
         public Models.V1Money InclusiveTaxMoney { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for additive_tax_money
         /// </summary>
         [JsonProperty("additive_tax_money")]
         public Models.V1Money AdditiveTaxMoney { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for tax_money
         /// </summary>
         [JsonProperty("tax_money")]
         public Models.V1Money TaxMoney { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for tip_money
         /// </summary>
         [JsonProperty("tip_money")]
         public Models.V1Money TipMoney { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for discount_money
         /// </summary>
         [JsonProperty("discount_money")]
         public Models.V1Money DiscountMoney { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for total_collected_money
         /// </summary>
         [JsonProperty("total_collected_money")]
         public Models.V1Money TotalCollectedMoney { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for processing_fee_money
         /// </summary>
         [JsonProperty("processing_fee_money")]
         public Models.V1Money ProcessingFeeMoney { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for net_total_money
         /// </summary>
         [JsonProperty("net_total_money")]
         public Models.V1Money NetTotalMoney { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for refunded_money
         /// </summary>
         [JsonProperty("refunded_money")]
         public Models.V1Money RefundedMoney { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for swedish_rounding_money
         /// </summary>
         [JsonProperty("swedish_rounding_money")]
         public Models.V1Money SwedishRoundingMoney { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for gross_sales_money
         /// </summary>
         [JsonProperty("gross_sales_money")]
         public Models.V1Money GrossSalesMoney { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for net_sales_money
         /// </summary>
         [JsonProperty("net_sales_money")]
         public Models.V1Money NetSalesMoney { get; }
@@ -224,7 +224,7 @@ namespace Square.Models
         public IList<Models.V1PaymentItemization> Itemizations { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for surcharge_money
         /// </summary>
         [JsonProperty("surcharge_money")]
         public Models.V1Money SurchargeMoney { get; }
@@ -297,13 +297,13 @@ namespace Square.Models
             private Models.V1Money swedishRoundingMoney;
             private Models.V1Money grossSalesMoney;
             private Models.V1Money netSalesMoney;
-            private IList<Models.V1PaymentTax> inclusiveTax;
-            private IList<Models.V1PaymentTax> additiveTax;
-            private IList<Models.V1Tender> tender;
-            private IList<Models.V1Refund> refunds;
-            private IList<Models.V1PaymentItemization> itemizations;
+            private IList<Models.V1PaymentTax> inclusiveTax = new List<Models.V1PaymentTax>();
+            private IList<Models.V1PaymentTax> additiveTax = new List<Models.V1PaymentTax>();
+            private IList<Models.V1Tender> tender = new List<Models.V1Tender>();
+            private IList<Models.V1Refund> refunds = new List<Models.V1Refund>();
+            private IList<Models.V1PaymentItemization> itemizations = new List<Models.V1PaymentItemization>();
             private Models.V1Money surchargeMoney;
-            private IList<Models.V1PaymentSurcharge> surcharges;
+            private IList<Models.V1PaymentSurcharge> surcharges = new List<Models.V1PaymentSurcharge>();
             private bool? isPartial;
 
             public Builder() { }
@@ -501,4 +501,4 @@ namespace Square.Models
             }
         }
     }
-} 
+}

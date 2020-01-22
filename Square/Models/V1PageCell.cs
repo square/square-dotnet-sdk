@@ -48,7 +48,7 @@ namespace Square.Models
         public int? Column { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for object_type
         /// </summary>
         [JsonProperty("object_type")]
         public string ObjectType { get; }
@@ -60,7 +60,7 @@ namespace Square.Models
         public string ObjectId { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for placeholder_type
         /// </summary>
         [JsonProperty("placeholder_type")]
         public string PlaceholderType { get; }
@@ -134,4 +134,4 @@ namespace Square.Models
             }
         }
     }
-} 
+}

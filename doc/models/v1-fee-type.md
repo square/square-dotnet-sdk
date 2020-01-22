@@ -6,14 +6,14 @@
 
 ### Fields
 
-| Name | Description |
-|  --- | --- |
-| `CAGST` | - |
-| `CAHST` | - |
-| `CAPST` | - |
-| `CAQST` | - |
-| `JPCONSUMPTIONTAX` | - |
-| `CAPEIPST` | - |
-| `USSALESTAX` | - |
-| `OTHER` | - |
+| Name |
+|  --- |
+| `CAGST` |
+| `CAHST` |
+| `CAPST` |
+| `CAQST` |
+| `JPCONSUMPTIONTAX` |
+| `CAPEIPST` |
+| `USSALESTAX` |
+| `OTHER` |
 

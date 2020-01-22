@@ -22,7 +22,7 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for action
         /// </summary>
         [JsonProperty("action")]
         public string Action { get; }
@@ -66,4 +66,4 @@ namespace Square.Models
             }
         }
     }
-} 
+}

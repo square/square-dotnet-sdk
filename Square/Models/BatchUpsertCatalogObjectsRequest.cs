@@ -65,7 +65,7 @@ namespace Square.Models
         public class Builder
         {
             private string idempotencyKey;
-            private IList<Models.CatalogObjectBatch> batches;
+            private IList<Models.CatalogObjectBatch> batches = new List<Models.CatalogObjectBatch>();
 
             public Builder(string idempotencyKey)
             {
@@ -90,4 +90,4 @@ namespace Square.Models
             }
         }
     }
-} 
+}

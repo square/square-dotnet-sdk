@@ -76,10 +76,10 @@ namespace Square.Models
 
         public class Builder
         {
-            private IList<Models.Error> errors;
+            private IList<Models.Error> errors = new List<Models.Error>();
             private string cursor;
-            private IList<Models.CatalogObject> objects;
-            private IList<Models.CatalogObject> relatedObjects;
+            private IList<Models.CatalogObject> objects = new List<Models.CatalogObject>();
+            private IList<Models.CatalogObject> relatedObjects = new List<Models.CatalogObject>();
             private string latestTime;
 
             public Builder() { }
@@ -123,4 +123,4 @@ namespace Square.Models
             }
         }
     }
-} 
+}

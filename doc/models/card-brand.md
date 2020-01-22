@@ -8,15 +8,16 @@ Indicates a card's brand, such as `VISA` or `MASTERCARD`.
 
 ### Fields
 
-| Name | Description |
-|  --- | --- |
-| `OTHERBRAND` | - |
-| `VISA` | - |
-| `MASTERCARD` | - |
-| `AMERICANEXPRESS` | - |
-| `DISCOVER` | - |
-| `DISCOVERDINERS` | - |
-| `JCB` | - |
-| `CHINAUNIONPAY` | - |
-| `SQUAREGIFTCARD` | - |
+| Name |
+|  --- |
+| `OTHERBRAND` |
+| `VISA` |
+| `MASTERCARD` |
+| `AMERICANEXPRESS` |
+| `DISCOVER` |
+| `DISCOVERDINERS` |
+| `JCB` |
+| `CHINAUNIONPAY` |
+| `SQUAREGIFTCARD` |
+| `SQUARECAPITALCARD` |
 

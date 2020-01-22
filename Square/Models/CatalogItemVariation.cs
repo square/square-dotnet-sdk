@@ -184,13 +184,13 @@ namespace Square.Models
             private int? ordinal;
             private string pricingType;
             private Models.Money priceMoney;
-            private IList<Models.ItemVariationLocationOverrides> locationOverrides;
+            private IList<Models.ItemVariationLocationOverrides> locationOverrides = new List<Models.ItemVariationLocationOverrides>();
             private bool? trackInventory;
             private string inventoryAlertType;
             private long? inventoryAlertThreshold;
             private string userData;
             private long? serviceDuration;
-            private IList<Models.CatalogItemOptionValueForItemVariation> itemOptionValues;
+            private IList<Models.CatalogItemOptionValueForItemVariation> itemOptionValues = new List<Models.CatalogItemOptionValueForItemVariation>();
             private string measurementUnitId;
 
             public Builder() { }
@@ -304,4 +304,4 @@ namespace Square.Models
             }
         }
     }
-} 
+}

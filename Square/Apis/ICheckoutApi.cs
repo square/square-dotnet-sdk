@@ -4,6 +4,7 @@ using System.Dynamic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Square;
 using Square.Utilities;
@@ -33,7 +34,7 @@ namespace Square.Apis
         /// <param name="locationId">Required parameter: The ID of the business location to associate the checkout with.</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.CreateCheckoutResponse response from the API call</return>
-        Task<Models.CreateCheckoutResponse> CreateCheckoutAsync(string locationId, Models.CreateCheckoutRequest body);
+        Task<Models.CreateCheckoutResponse> CreateCheckoutAsync(string locationId, Models.CreateCheckoutRequest body, CancellationToken cancellationToken = default);
 
     }
-} 
+}

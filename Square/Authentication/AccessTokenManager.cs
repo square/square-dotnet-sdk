@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Square.Http.Request;
 
-namespace Square.Utilities
+namespace Square.Authentication
 {
-     internal class AccessTokenManager: IAuthManager 
+     internal class AccessTokenManager: IAuthManager, IAccessTokenCredentials
      {
         /// Header Param to be used for requests
         public string AccessToken { get; }
@@ -28,5 +29,15 @@ namespace Square.Utilities
             return httpRequest;
         }
 
+        /// <summary>
+        /// Adds authentication to the given HttpRequest
+        /// </summary>
+        /// <param name="httpRequest">Http Request</param>
+        /// <return>Returns the httpRequest after adding authentication</return>
+        public Task<HttpRequest> ApplyAsync(HttpRequest httpRequest)
+        {
+            httpRequest.Headers["Authorization"] = "Bearer " + AccessToken;
+            return Task.FromResult(httpRequest);
+        }
     }
 }

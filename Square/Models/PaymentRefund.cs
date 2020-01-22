@@ -142,7 +142,7 @@ namespace Square.Models
             private string status;
             private string locationId;
             private Models.Money appFeeMoney;
-            private IList<Models.ProcessingFee> processingFee;
+            private IList<Models.ProcessingFee> processingFee = new List<Models.ProcessingFee>();
             private string paymentId;
             private string orderId;
             private string reason;
@@ -237,4 +237,4 @@ namespace Square.Models
             }
         }
     }
-} 
+}

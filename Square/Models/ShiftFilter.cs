@@ -88,8 +88,8 @@ namespace Square.Models
 
         public class Builder
         {
-            private IList<string> locationIds;
-            private IList<string> employeeIds;
+            private IList<string> locationIds = new List<string>();
+            private IList<string> employeeIds = new List<string>();
             private string status;
             private Models.TimeRange start;
             private Models.TimeRange end;
@@ -143,4 +143,4 @@ namespace Square.Models
             }
         }
     }
-} 
+}

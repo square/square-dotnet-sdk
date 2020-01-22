@@ -42,7 +42,7 @@ namespace Square.Models
         public string Name { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for applied_money
         /// </summary>
         [JsonProperty("applied_money")]
         public Models.V1Money AppliedMoney { get; }
@@ -54,7 +54,7 @@ namespace Square.Models
         public string Rate { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for inclusion_type
         /// </summary>
         [JsonProperty("inclusion_type")]
         public string InclusionType { get; }
@@ -79,7 +79,7 @@ namespace Square.Models
 
         public class Builder
         {
-            private IList<Models.Error> errors;
+            private IList<Models.Error> errors = new List<Models.Error>();
             private string name;
             private Models.V1Money appliedMoney;
             private string rate;
@@ -134,4 +134,4 @@ namespace Square.Models
             }
         }
     }
-} 
+}
