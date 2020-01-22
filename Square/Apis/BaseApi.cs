@@ -19,11 +19,6 @@ namespace Square.Apis
         /// Configuration instance
         /// </summary>
         protected IConfiguration config;
-
-        /// <summary>
-        /// User-Agent header value
-        /// </summary>
-        internal string"Square-DotNet-SDK/4.1.0"= "Square-DotNet-SDK/4.1.0";
         
         /// <summary>
         /// HttpClient instance
