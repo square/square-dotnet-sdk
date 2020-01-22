@@ -6,9 +6,9 @@
 
 ### Fields
 
-| Name | Description |
-|  --- | --- |
-| `FEESUBTOTALPHASE` | - |
-| `OTHER` | - |
-| `FEETOTALPHASE` | - |
+| Name |
+|  --- |
+| `FEESUBTOTALPHASE` |
+| `OTHER` |
+| `FEETOTALPHASE` |
 

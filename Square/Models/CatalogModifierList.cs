@@ -57,7 +57,7 @@ namespace Square.Models
         {
             private string name;
             private string selectionType;
-            private IList<Models.CatalogObject> modifiers;
+            private IList<Models.CatalogObject> modifiers = new List<Models.CatalogObject>();
 
             public Builder() { }
             public Builder Name(string value)
@@ -86,4 +86,4 @@ namespace Square.Models
             }
         }
     }
-} 
+}

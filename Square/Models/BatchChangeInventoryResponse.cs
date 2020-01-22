@@ -47,8 +47,8 @@ namespace Square.Models
 
         public class Builder
         {
-            private IList<Models.Error> errors;
-            private IList<Models.InventoryCount> counts;
+            private IList<Models.Error> errors = new List<Models.Error>();
+            private IList<Models.InventoryCount> counts = new List<Models.InventoryCount>();
 
             public Builder() { }
             public Builder Errors(IList<Models.Error> value)
@@ -70,4 +70,4 @@ namespace Square.Models
             }
         }
     }
-} 
+}

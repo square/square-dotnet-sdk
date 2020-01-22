@@ -36,7 +36,7 @@ ListLocationsAsync()
 ```csharp
 try
 {
-    ListLocationsResponse result = locationsApi.ListLocationsAsync().Result;
+    ListLocationsResponse result = await locationsApi.ListLocationsAsync();
 }
 catch (ApiException e){};
 ```
@@ -80,7 +80,7 @@ var body = new CreateLocationRequest.Builder()
 
 try
 {
-    CreateLocationResponse result = locationsApi.CreateLocationAsync(body).Result;
+    CreateLocationResponse result = await locationsApi.CreateLocationAsync(body);
 }
 catch (ApiException e){};
 ```
@@ -110,7 +110,7 @@ string locationId = "location_id4";
 
 try
 {
-    RetrieveLocationResponse result = locationsApi.RetrieveLocationAsync(locationId).Result;
+    RetrieveLocationResponse result = await locationsApi.RetrieveLocationAsync(locationId);
 }
 catch (ApiException e){};
 ```
@@ -170,7 +170,7 @@ var body = new UpdateLocationRequest.Builder()
 
 try
 {
-    UpdateLocationResponse result = locationsApi.UpdateLocationAsync(locationId, body).Result;
+    UpdateLocationResponse result = await locationsApi.UpdateLocationAsync(locationId, body);
 }
 catch (ApiException e){};
 ```

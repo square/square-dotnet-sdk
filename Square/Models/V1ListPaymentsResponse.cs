@@ -20,7 +20,7 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for items
         /// </summary>
         [JsonProperty("items")]
         public IList<Models.V1Payment> Items { get; }
@@ -34,7 +34,7 @@ namespace Square.Models
 
         public class Builder
         {
-            private IList<Models.V1Payment> items;
+            private IList<Models.V1Payment> items = new List<Models.V1Payment>();
 
             public Builder() { }
             public Builder Items(IList<Models.V1Payment> value)
@@ -49,4 +49,4 @@ namespace Square.Models
             }
         }
     }
-} 
+}

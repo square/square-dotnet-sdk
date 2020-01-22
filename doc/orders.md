@@ -53,7 +53,7 @@ var body = new CreateOrderRequest.Builder()
 
 try
 {
-    CreateOrderResponse result = ordersApi.CreateOrderAsync(locationId, body).Result;
+    CreateOrderResponse result = await ordersApi.CreateOrderAsync(locationId, body);
 }
 catch (ApiException e){};
 ```
@@ -92,7 +92,7 @@ var body = new BatchRetrieveOrdersRequest.Builder(
 
 try
 {
-    BatchRetrieveOrdersResponse result = ordersApi.BatchRetrieveOrdersAsync(locationId, body).Result;
+    BatchRetrieveOrdersResponse result = await ordersApi.BatchRetrieveOrdersAsync(locationId, body);
 }
 catch (ApiException e){};
 ```
@@ -143,7 +143,7 @@ var body = new UpdateOrderRequest.Builder()
 
 try
 {
-    UpdateOrderResponse result = ordersApi.UpdateOrderAsync(locationId, orderId, body).Result;
+    UpdateOrderResponse result = await ordersApi.UpdateOrderAsync(locationId, orderId, body);
 }
 catch (ApiException e){};
 ```
@@ -221,7 +221,7 @@ var body = new SearchOrdersRequest.Builder()
 
 try
 {
-    SearchOrdersResponse result = ordersApi.SearchOrdersAsync(body).Result;
+    SearchOrdersResponse result = await ordersApi.SearchOrdersAsync(body);
 }
 catch (ApiException e){};
 ```
@@ -274,7 +274,7 @@ var body = new PayOrderRequest.Builder(
 
 try
 {
-    PayOrderResponse result = ordersApi.PayOrderAsync(orderId, body).Result;
+    PayOrderResponse result = await ordersApi.PayOrderAsync(orderId, body);
 }
 catch (ApiException e){};
 ```

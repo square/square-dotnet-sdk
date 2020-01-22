@@ -62,7 +62,7 @@ var body = new BatchDeleteCatalogObjectsRequest.Builder()
 
 try
 {
-    BatchDeleteCatalogObjectsResponse result = catalogApi.BatchDeleteCatalogObjectsAsync(body).Result;
+    BatchDeleteCatalogObjectsResponse result = await catalogApi.BatchDeleteCatalogObjectsAsync(body);
 }
 catch (ApiException e){};
 ```
@@ -103,7 +103,7 @@ var body = new BatchRetrieveCatalogObjectsRequest.Builder(
 
 try
 {
-    BatchRetrieveCatalogObjectsResponse result = catalogApi.BatchRetrieveCatalogObjectsAsync(body).Result;
+    BatchRetrieveCatalogObjectsResponse result = await catalogApi.BatchRetrieveCatalogObjectsAsync(body);
 }
 catch (ApiException e){};
 ```
@@ -257,7 +257,7 @@ var body = new BatchUpsertCatalogObjectsRequest.Builder(
 
 try
 {
-    BatchUpsertCatalogObjectsResponse result = catalogApi.BatchUpsertCatalogObjectsAsync(body).Result;
+    BatchUpsertCatalogObjectsResponse result = await catalogApi.BatchUpsertCatalogObjectsAsync(body);
 }
 catch (ApiException e){};
 ```
@@ -337,7 +337,7 @@ var request = new CreateCatalogImageRequest.Builder(
 
 try
 {
-    CreateCatalogImageResponse result = catalogApi.CreateCatalogImageAsync(request, null).Result;
+    CreateCatalogImageResponse result = await catalogApi.CreateCatalogImageAsync(request, null);
 }
 catch (ApiException e){};
 ```
@@ -360,7 +360,7 @@ CatalogInfoAsync()
 ```csharp
 try
 {
-    CatalogInfoResponse result = catalogApi.CatalogInfoAsync().Result;
+    CatalogInfoResponse result = await catalogApi.CatalogInfoAsync();
 }
 catch (ApiException e){};
 ```
@@ -397,7 +397,7 @@ ListCatalogAsync(string cursor = null, string types = null)
 ```csharp
 try
 {
-    ListCatalogResponse result = catalogApi.ListCatalogAsync(null, null).Result;
+    ListCatalogResponse result = await catalogApi.ListCatalogAsync(null, null);
 }
 catch (ApiException e){};
 ```
@@ -440,7 +440,7 @@ var body = new UpsertCatalogObjectRequest.Builder(
 
 try
 {
-    UpsertCatalogObjectResponse result = catalogApi.UpsertCatalogObjectAsync(body).Result;
+    UpsertCatalogObjectResponse result = await catalogApi.UpsertCatalogObjectAsync(body);
 }
 catch (ApiException e){};
 ```
@@ -475,7 +475,7 @@ string objectId = "object_id8";
 
 try
 {
-    DeleteCatalogObjectResponse result = catalogApi.DeleteCatalogObjectAsync(objectId).Result;
+    DeleteCatalogObjectResponse result = await catalogApi.DeleteCatalogObjectAsync(objectId);
 }
 catch (ApiException e){};
 ```
@@ -512,7 +512,7 @@ string objectId = "object_id8";
 
 try
 {
-    RetrieveCatalogObjectResponse result = catalogApi.RetrieveCatalogObjectAsync(objectId, null).Result;
+    RetrieveCatalogObjectResponse result = await catalogApi.RetrieveCatalogObjectAsync(objectId, null);
 }
 catch (ApiException e){};
 ```
@@ -568,7 +568,7 @@ var body = new SearchCatalogObjectsRequest.Builder()
 
 try
 {
-    SearchCatalogObjectsResponse result = catalogApi.SearchCatalogObjectsAsync(body).Result;
+    SearchCatalogObjectsResponse result = await catalogApi.SearchCatalogObjectsAsync(body);
 }
 catch (ApiException e){};
 ```
@@ -612,7 +612,7 @@ var body = new UpdateItemModifierListsRequest.Builder(
 
 try
 {
-    UpdateItemModifierListsResponse result = catalogApi.UpdateItemModifierListsAsync(body).Result;
+    UpdateItemModifierListsResponse result = await catalogApi.UpdateItemModifierListsAsync(body);
 }
 catch (ApiException e){};
 ```
@@ -655,7 +655,7 @@ var body = new UpdateItemTaxesRequest.Builder(
 
 try
 {
-    UpdateItemTaxesResponse result = catalogApi.UpdateItemTaxesAsync(body).Result;
+    UpdateItemTaxesResponse result = await catalogApi.UpdateItemTaxesAsync(body);
 }
 catch (ApiException e){};
 ```

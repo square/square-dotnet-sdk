@@ -40,13 +40,13 @@ namespace Square.Models
         public string Id { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for status
         /// </summary>
         [JsonProperty("status")]
         public string Status { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for total_money
         /// </summary>
         [JsonProperty("total_money")]
         public Models.V1Money TotalMoney { get; }
@@ -88,7 +88,7 @@ namespace Square.Models
             private Models.V1Money totalMoney;
             private string initiatedAt;
             private string bankAccountId;
-            private IList<Models.V1SettlementEntry> entries;
+            private IList<Models.V1SettlementEntry> entries = new List<Models.V1SettlementEntry>();
 
             public Builder() { }
             public Builder Id(string value)
@@ -138,4 +138,4 @@ namespace Square.Models
             }
         }
     }
-} 
+}

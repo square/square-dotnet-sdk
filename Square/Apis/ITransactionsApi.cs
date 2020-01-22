@@ -4,6 +4,7 @@ using System.Dynamic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Square;
 using Square.Utilities;
@@ -61,7 +62,7 @@ namespace Square.Apis
                 string beginTime = null,
                 string endTime = null,
                 string sortOrder = null,
-                string cursor = null);
+                string cursor = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Lists transactions for a particular location.
@@ -103,7 +104,7 @@ namespace Square.Apis
                 string beginTime = null,
                 string endTime = null,
                 string sortOrder = null,
-                string cursor = null);
+                string cursor = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Charges a card represented by a card nonce or a customer's card on file.
@@ -151,7 +152,7 @@ namespace Square.Apis
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.ChargeResponse response from the API call</return>
         [Obsolete]
-        Task<Models.ChargeResponse> ChargeAsync(string locationId, Models.ChargeRequest body);
+        Task<Models.ChargeResponse> ChargeAsync(string locationId, Models.ChargeRequest body, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Retrieves details for a single transaction.
@@ -171,7 +172,7 @@ namespace Square.Apis
         /// <param name="transactionId">Required parameter: The ID of the transaction to retrieve.</param>
         /// <return>Returns the Models.RetrieveTransactionResponse response from the API call</return>
         [Obsolete]
-        Task<Models.RetrieveTransactionResponse> RetrieveTransactionAsync(string locationId, string transactionId);
+        Task<Models.RetrieveTransactionResponse> RetrieveTransactionAsync(string locationId, string transactionId, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Captures a transaction that was created with the [Charge](#endpoint-charge)
@@ -195,7 +196,7 @@ namespace Square.Apis
         /// <param name="transactionId">Required parameter: Example: </param>
         /// <return>Returns the Models.CaptureTransactionResponse response from the API call</return>
         [Obsolete]
-        Task<Models.CaptureTransactionResponse> CaptureTransactionAsync(string locationId, string transactionId);
+        Task<Models.CaptureTransactionResponse> CaptureTransactionAsync(string locationId, string transactionId, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Initiates a refund for a previously charged tender.
@@ -229,7 +230,7 @@ namespace Square.Apis
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.CreateRefundResponse response from the API call</return>
         [Obsolete]
-        Task<Models.CreateRefundResponse> CreateRefundAsync(string locationId, string transactionId, Models.CreateRefundRequest body);
+        Task<Models.CreateRefundResponse> CreateRefundAsync(string locationId, string transactionId, Models.CreateRefundRequest body, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Cancels a transaction that was created with the [Charge](#endpoint-charge)
@@ -253,7 +254,7 @@ namespace Square.Apis
         /// <param name="transactionId">Required parameter: Example: </param>
         /// <return>Returns the Models.VoidTransactionResponse response from the API call</return>
         [Obsolete]
-        Task<Models.VoidTransactionResponse> VoidTransactionAsync(string locationId, string transactionId);
+        Task<Models.VoidTransactionResponse> VoidTransactionAsync(string locationId, string transactionId, CancellationToken cancellationToken = default);
 
     }
-} 
+}

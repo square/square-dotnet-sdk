@@ -35,7 +35,7 @@ namespace Square.Models
 
         public class Builder
         {
-            private IList<Models.BusinessHoursPeriod> periods;
+            private IList<Models.BusinessHoursPeriod> periods = new List<Models.BusinessHoursPeriod>();
 
             public Builder() { }
             public Builder Periods(IList<Models.BusinessHoursPeriod> value)
@@ -50,4 +50,4 @@ namespace Square.Models
             }
         }
     }
-} 
+}

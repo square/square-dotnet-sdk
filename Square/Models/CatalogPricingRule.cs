@@ -146,7 +146,7 @@ namespace Square.Models
         public class Builder
         {
             private string name;
-            private IList<string> timePeriodIds;
+            private IList<string> timePeriodIds = new List<string>();
             private string discountId;
             private string matchProductsId;
             private string applyProductsId;
@@ -240,4 +240,4 @@ namespace Square.Models
             }
         }
     }
-} 
+}

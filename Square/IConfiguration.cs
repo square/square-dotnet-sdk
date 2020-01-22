@@ -1,4 +1,5 @@
 using System;
+using System.Net;
 using Square.Models;
 
 namespace Square
@@ -10,7 +11,9 @@ namespace Square
         /// </summary>
         TimeSpan Timeout { get; }
 
-        // OAuth 2.0 Access Token
+        /// <summary>
+        /// OAuth 2.0 Access Token
+        /// </summary>
         string AccessToken { get; }
 
         /// <summary>

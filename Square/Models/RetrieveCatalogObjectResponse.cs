@@ -34,7 +34,7 @@ namespace Square.Models
         public IList<Models.Error> Errors { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for object
         /// </summary>
         [JsonProperty("object")]
         public Models.CatalogObject MObject { get; }
@@ -56,9 +56,9 @@ namespace Square.Models
 
         public class Builder
         {
-            private IList<Models.Error> errors;
+            private IList<Models.Error> errors = new List<Models.Error>();
             private Models.CatalogObject mObject;
-            private IList<Models.CatalogObject> relatedObjects;
+            private IList<Models.CatalogObject> relatedObjects = new List<Models.CatalogObject>();
 
             public Builder() { }
             public Builder Errors(IList<Models.Error> value)
@@ -87,4 +87,4 @@ namespace Square.Models
             }
         }
     }
-} 
+}

@@ -58,7 +58,7 @@ namespace Square.Models
         public double? Quantity { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for itemization_type
         /// </summary>
         [JsonProperty("itemization_type")]
         public string ItemizationType { get; }
@@ -82,31 +82,31 @@ namespace Square.Models
         public string ItemVariationName { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for total_money
         /// </summary>
         [JsonProperty("total_money")]
         public Models.V1Money TotalMoney { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for single_quantity_money
         /// </summary>
         [JsonProperty("single_quantity_money")]
         public Models.V1Money SingleQuantityMoney { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for gross_sales_money
         /// </summary>
         [JsonProperty("gross_sales_money")]
         public Models.V1Money GrossSalesMoney { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for discount_money
         /// </summary>
         [JsonProperty("discount_money")]
         public Models.V1Money DiscountMoney { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for net_sales_money
         /// </summary>
         [JsonProperty("net_sales_money")]
         public Models.V1Money NetSalesMoney { get; }
@@ -162,9 +162,9 @@ namespace Square.Models
             private Models.V1Money grossSalesMoney;
             private Models.V1Money discountMoney;
             private Models.V1Money netSalesMoney;
-            private IList<Models.V1PaymentTax> taxes;
-            private IList<Models.V1PaymentDiscount> discounts;
-            private IList<Models.V1PaymentModifier> modifiers;
+            private IList<Models.V1PaymentTax> taxes = new List<Models.V1PaymentTax>();
+            private IList<Models.V1PaymentDiscount> discounts = new List<Models.V1PaymentDiscount>();
+            private IList<Models.V1PaymentModifier> modifiers = new List<Models.V1PaymentModifier>();
 
             public Builder() { }
             public Builder Name(string value)
@@ -270,4 +270,4 @@ namespace Square.Models
             }
         }
     }
-} 
+}

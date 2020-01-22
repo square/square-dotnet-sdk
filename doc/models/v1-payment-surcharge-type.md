@@ -6,9 +6,9 @@
 
 ### Fields
 
-| Name | Description |
-|  --- | --- |
-| `UNKNOWN` | - |
-| `AUTOGRATUITY` | - |
-| `CUSTOM` | - |
+| Name |
+|  --- |
+| `UNKNOWN` |
+| `AUTOGRATUITY` |
+| `CUSTOM` |
 

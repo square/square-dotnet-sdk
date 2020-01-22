@@ -105,10 +105,10 @@ namespace Square.Models
         {
             private string uid;
             private string sourceOrderId;
-            private IList<Models.OrderReturnLineItem> returnLineItems;
-            private IList<Models.OrderReturnServiceCharge> returnServiceCharges;
-            private IList<Models.OrderReturnTax> returnTaxes;
-            private IList<Models.OrderReturnDiscount> returnDiscounts;
+            private IList<Models.OrderReturnLineItem> returnLineItems = new List<Models.OrderReturnLineItem>();
+            private IList<Models.OrderReturnServiceCharge> returnServiceCharges = new List<Models.OrderReturnServiceCharge>();
+            private IList<Models.OrderReturnTax> returnTaxes = new List<Models.OrderReturnTax>();
+            private IList<Models.OrderReturnDiscount> returnDiscounts = new List<Models.OrderReturnDiscount>();
             private Models.OrderRoundingAdjustment roundingAdjustment;
             private Models.OrderMoneyAmounts returnAmounts;
 
@@ -174,4 +174,4 @@ namespace Square.Models
             }
         }
     }
-} 
+}

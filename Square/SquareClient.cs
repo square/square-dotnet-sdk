@@ -1,17 +1,20 @@
 using System;
 using System.Text;
 using System.Linq;
+using System.Net;
 using System.Collections.Generic;
+using Square.Authentication;
 using Square.Apis;
 using Square.Http.Client;
 using Square.Utilities;
 
 namespace Square
 {
-    public sealed class SquareClient : ISquareClient 
+    public sealed class SquareClient : ISquareClient
     {
-        private readonly IDictionary<string, List<string>> additionalHeaders;
         private readonly IDictionary<string, IAuthManager> authManagers;
+        private readonly IDictionary<string, List<string>> additionalHeaders;
+        private readonly AccessTokenManager accessTokenManager;
         private readonly IHttpClient httpClient;
         private readonly HttpCallBack httpCallBack;
         private readonly Lazy<IMobileAuthorizationApi> mobileAuthorization;
@@ -149,12 +152,12 @@ namespace Square
         /// <summary>
         /// Current version of the SDK
         /// </summary>
-        public string SdkVersion => "4.0.0";
+        public string SdkVersion => "4.1.0";
 
         /// <summary>
         /// Version of Square API supported by this SDK
         /// </summary>
-        public string SquareVersion => "2019-12-17";
+        public string SquareVersion => "2020-01-22";
 
         internal static SquareClient CreateFromEnvironment()
         {
@@ -184,15 +187,18 @@ namespace Square
 
         private SquareClient(TimeSpan timeout, string accessToken, Environment environment,
                 IDictionary<string, IAuthManager> authManagers, IHttpClient httpClient,
-                HttpCallBack httpCallBack, IDictionary<string, List<string>> additionalHeaders)
-        { 
+                HttpCallBack httpCallBack, IDictionary<string, List<string>> additionalHeaders,
+                IHttpClientConfiguration httpClientConfiguration)
+        {
             Timeout = timeout;
             AccessToken = accessToken;
             Environment = environment;
             this.httpCallBack = httpCallBack;
             this.httpClient = httpClient;
             this.authManagers = new Dictionary<string, IAuthManager>(authManagers);
-            this.additionalHeaders = additionalHeaders; 
+            accessTokenManager = new AccessTokenManager(accessToken);
+            this.additionalHeaders = additionalHeaders;                HttpClientConfiguration = httpClientConfiguration;
+
             mobileAuthorization = new Lazy<IMobileAuthorizationApi>(
                 () => new MobileAuthorizationApi(this, this.httpClient, authManagers, this.httpCallBack));
             oAuth = new Lazy<IOAuthApi>(
@@ -239,9 +245,14 @@ namespace Square
             if (!authManagers.ContainsKey("default") ||
                 ((AccessTokenManager)authManagers["default"]).AccessToken != accessToken)
             {
-                authManagers["default"] = new AccessTokenManager(AccessToken);
+                authManagers["default"] = accessTokenManager;
             }
         }
+
+        /// <summary>
+        /// The configuration of the Http Client associated with this SquareClient.
+        /// </summary>
+        public IHttpClientConfiguration HttpClientConfiguration { get; }
 
         /// <summary>
         /// Http client timeout
@@ -285,7 +296,7 @@ namespace Square
             List<KeyValuePair<string, object>> kvpList = new List<KeyValuePair<string, object>>()
             {
             };
-            return kvpList; 
+            return kvpList;
         }
 
         /// <summary>
@@ -300,16 +311,16 @@ namespace Square
             return Url.ToString();
         }
 
-        public Builder ToBuilder() 
+        public Builder ToBuilder()
         {
-            Builder builder = new Builder()
-                .Timeout(Timeout)
-                .AccessToken(AccessToken)
-                .Environment(Environment)
-                .AuthManagers(authManagers)
-                .HttpClient(httpClient)
-                .AdditionalHeaders(additionalHeaders)
-                .HttpCallBack(httpCallBack);
+            Builder builder = new Builder();
+            builder.Timeout(Timeout);
+            builder.AccessToken(AccessToken);
+            builder.Environment(Environment);
+            builder.AdditionalHeaders(additionalHeaders);
+            builder.HttpCallBack(httpCallBack);
+            builder.HttpClient(httpClient);
+            builder.AuthManagers(authManagers);
 
             return builder;
         }
@@ -317,24 +328,14 @@ namespace Square
         public class Builder
         {
             private TimeSpan timeout = TimeSpan.FromSeconds(60);
-            private string accessToken = "TODO: Replace";
+            private string accessToken = String.Empty;
             private Environment environment = Square.Environment.Production;
             private IHttpClient httpClient;
             private IDictionary<string, List<string>> additionalHeaders = new Dictionary<string, List<string>>();
             private IDictionary<string, IAuthManager> authManagers = new Dictionary<string, IAuthManager>();
-            private bool createCustomHttpClient = false;
+            private HttpClientConfiguration httpClientConfig = new HttpClientConfiguration();
             private HttpCallBack httpCallBack;
-
-            // Setter for timeout. Determines whether a new this.httpClient is needed
-            public Builder Timeout(TimeSpan timeout)
-            { 
-                if (this.timeout != timeout && timeout.TotalSeconds > 0)
-                {
-                    this.timeout = timeout;
-                    this.createCustomHttpClient = true;
-                }
-                return this;
-            }
+            private bool createCustomHttpClient = false;
 
             // Setter for AccessToken
             public Builder AccessToken(string accessToken)
@@ -350,9 +351,11 @@ namespace Square
                 return this;
             }
 
-            internal Builder HttpClient(IHttpClient httpClient)
+            // Setter for Timeout
+            public Builder Timeout(TimeSpan timeout)
             {
-                this.httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
+                httpClientConfig.Timeout = timeout.TotalSeconds <= 0 ? TimeSpan.FromSeconds(60) : timeout;
+                this.createCustomHttpClient = true;
                 return this;
             }
 
@@ -391,6 +394,12 @@ namespace Square
                 return this;
             }
 
+            internal Builder HttpClient(IHttpClient httpClient)
+            {
+                this.httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
+                return this;
+            }
+
             internal Builder AuthManagers(IDictionary<string, IAuthManager> authManagers)
             {
                 this.authManagers = authManagers ?? throw new ArgumentNullException(nameof(authManagers));
@@ -407,7 +416,7 @@ namespace Square
             {
                 if (createCustomHttpClient) 
                 {
-                    httpClient = new HttpClientWrapper(timeout);
+                    httpClient = new HttpClientWrapper(httpClientConfig);
                 } 
                 else 
                 {
@@ -415,7 +424,7 @@ namespace Square
                 }
 
                 return new SquareClient(timeout, accessToken, environment, authManagers, httpClient, httpCallBack,
-                        additionalHeaders);
+                        additionalHeaders, httpClientConfig);
             }
         }
 

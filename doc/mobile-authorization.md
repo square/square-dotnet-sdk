@@ -46,7 +46,7 @@ var body = new CreateMobileAuthorizationCodeRequest.Builder()
 
 try
 {
-    CreateMobileAuthorizationCodeResponse result = mobileAuthorizationApi.CreateMobileAuthorizationCodeAsync(body).Result;
+    CreateMobileAuthorizationCodeResponse result = await mobileAuthorizationApi.CreateMobileAuthorizationCodeAsync(body);
 }
 catch (ApiException e){};
 ```

@@ -274,12 +274,12 @@ namespace Square.Models
             private string note;
             private string catalogObjectId;
             private string variationName;
-            private IDictionary<string, string> metadata;
-            private IList<Models.OrderLineItemModifier> modifiers;
-            private IList<Models.OrderLineItemTax> taxes;
-            private IList<Models.OrderLineItemDiscount> discounts;
-            private IList<Models.OrderLineItemAppliedTax> appliedTaxes;
-            private IList<Models.OrderLineItemAppliedDiscount> appliedDiscounts;
+            private IDictionary<string, string> metadata = new Dictionary<string, string>();
+            private IList<Models.OrderLineItemModifier> modifiers = new List<Models.OrderLineItemModifier>();
+            private IList<Models.OrderLineItemTax> taxes = new List<Models.OrderLineItemTax>();
+            private IList<Models.OrderLineItemDiscount> discounts = new List<Models.OrderLineItemDiscount>();
+            private IList<Models.OrderLineItemAppliedTax> appliedTaxes = new List<Models.OrderLineItemAppliedTax>();
+            private IList<Models.OrderLineItemAppliedDiscount> appliedDiscounts = new List<Models.OrderLineItemAppliedDiscount>();
             private Models.Money basePriceMoney;
             private Models.Money variationTotalPriceMoney;
             private Models.Money grossSalesMoney;
@@ -429,4 +429,4 @@ namespace Square.Models
             }
         }
     }
-} 
+}

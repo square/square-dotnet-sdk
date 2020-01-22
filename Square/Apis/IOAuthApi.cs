@@ -4,6 +4,7 @@ using System.Dynamic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Square;
 using Square.Utilities;
@@ -59,7 +60,7 @@ namespace Square.Apis
         /// <param name="authorization">Required parameter: Client APPLICATION_SECRET</param>
         /// <return>Returns the Models.RenewTokenResponse response from the API call</return>
         [Obsolete]
-        Task<Models.RenewTokenResponse> RenewTokenAsync(string clientId, Models.RenewTokenRequest body, string authorization);
+        Task<Models.RenewTokenResponse> RenewTokenAsync(string clientId, Models.RenewTokenRequest body, string authorization, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Revokes an access token generated with the OAuth flow.
@@ -97,7 +98,7 @@ namespace Square.Apis
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <param name="authorization">Required parameter: Client APPLICATION_SECRET</param>
         /// <return>Returns the Models.RevokeTokenResponse response from the API call</return>
-        Task<Models.RevokeTokenResponse> RevokeTokenAsync(Models.RevokeTokenRequest body, string authorization);
+        Task<Models.RevokeTokenResponse> RevokeTokenAsync(Models.RevokeTokenRequest body, string authorization, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Returns an OAuth access token.
@@ -129,7 +130,7 @@ namespace Square.Apis
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.ObtainTokenResponse response from the API call</return>
-        Task<Models.ObtainTokenResponse> ObtainTokenAsync(Models.ObtainTokenRequest body);
+        Task<Models.ObtainTokenResponse> ObtainTokenAsync(Models.ObtainTokenRequest body, CancellationToken cancellationToken = default);
 
     }
-} 
+}

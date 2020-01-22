@@ -16,8 +16,8 @@ namespace Square.Models
     {
         public RefundPaymentRequest(string idempotencyKey,
             Models.Money amountMoney,
+            string paymentId,
             Models.Money appFeeMoney = null,
-            string paymentId = null,
             string reason = null)
         {
             IdempotencyKey = idempotencyKey;
@@ -72,9 +72,9 @@ namespace Square.Models
         public Builder ToBuilder()
         {
             var builder = new Builder(IdempotencyKey,
-                AmountMoney)
+                AmountMoney,
+                PaymentId)
                 .AppFeeMoney(AppFeeMoney)
-                .PaymentId(PaymentId)
                 .Reason(Reason);
             return builder;
         }
@@ -83,15 +83,17 @@ namespace Square.Models
         {
             private string idempotencyKey;
             private Models.Money amountMoney;
-            private Models.Money appFeeMoney;
             private string paymentId;
+            private Models.Money appFeeMoney;
             private string reason;
 
             public Builder(string idempotencyKey,
-                Models.Money amountMoney)
+                Models.Money amountMoney,
+                string paymentId)
             {
                 this.idempotencyKey = idempotencyKey;
                 this.amountMoney = amountMoney;
+                this.paymentId = paymentId;
             }
             public Builder IdempotencyKey(string value)
             {
@@ -105,15 +107,15 @@ namespace Square.Models
                 return this;
             }
 
-            public Builder AppFeeMoney(Models.Money value)
-            {
-                appFeeMoney = value;
-                return this;
-            }
-
             public Builder PaymentId(string value)
             {
                 paymentId = value;
+                return this;
+            }
+
+            public Builder AppFeeMoney(Models.Money value)
+            {
+                appFeeMoney = value;
                 return this;
             }
 
@@ -127,10 +129,10 @@ namespace Square.Models
             {
                 return new RefundPaymentRequest(idempotencyKey,
                     amountMoney,
-                    appFeeMoney,
                     paymentId,
+                    appFeeMoney,
                     reason);
             }
         }
     }
-} 
+}

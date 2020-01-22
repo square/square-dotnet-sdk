@@ -18,7 +18,7 @@ namespace Square
     public static class EnvironmentHelper
     {
         //string values corresponding the enum elements
-        private static List<string> stringValues = new List<string> { "production", "sandbox" };
+        private static readonly List<string> stringValues = new List<string> { "production", "sandbox" };
 
         /// <summary>
         /// Converts an Environment value to a corresponding string value

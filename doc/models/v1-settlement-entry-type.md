@@ -23,7 +23,7 @@
 | `SQUARECAPITALREVERSEDPAYMENT` | Capital merchant cash advance (MCA) assessment refund. These are, generally, proportional to the merchant's refunds but may be issued for other reasons related to the MCA. |
 | `SUBSCRIPTIONFEE` | Fee charged for subscription to a Square product |
 | `SUBSCRIPTIONFEEREFUND` | Refund of a previously charged Square product subscription fee. |
-| `OTHER` | - |
+| `OTHER` |  |
 | `INCENTEDPAYMENT` | A payment in which Square covers part of the funds for a purchase |
 | `RETURNEDACHENTRY` | A settlement failed to be processed and the settlement amount has been returned to the account |
 | `RETURNEDSQUARE275` | Refund for cancelling a Square Plus subscription |

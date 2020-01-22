@@ -21,6 +21,7 @@ namespace Square.Models
             string phoneNumber = null,
             IList<string> locationIds = null,
             string status = null,
+            bool? isOwner = null,
             string createdAt = null,
             string updatedAt = null)
         {
@@ -31,6 +32,7 @@ namespace Square.Models
             PhoneNumber = phoneNumber;
             LocationIds = locationIds;
             Status = status;
+            IsOwner = isOwner;
             CreatedAt = createdAt;
             UpdatedAt = updatedAt;
         }
@@ -78,6 +80,14 @@ namespace Square.Models
         public string Status { get; }
 
         /// <summary>
+        /// Whether this employee is the owner of the merchant. Each merchant
+        /// has one owner employee, and that employee has full authority over
+        /// the account.
+        /// </summary>
+        [JsonProperty("is_owner")]
+        public bool? IsOwner { get; }
+
+        /// <summary>
         /// A read-only timestamp in RFC 3339 format.
         /// </summary>
         [JsonProperty("created_at")]
@@ -99,6 +109,7 @@ namespace Square.Models
                 .PhoneNumber(PhoneNumber)
                 .LocationIds(LocationIds)
                 .Status(Status)
+                .IsOwner(IsOwner)
                 .CreatedAt(CreatedAt)
                 .UpdatedAt(UpdatedAt);
             return builder;
@@ -111,8 +122,9 @@ namespace Square.Models
             private string lastName;
             private string email;
             private string phoneNumber;
-            private IList<string> locationIds;
+            private IList<string> locationIds = new List<string>();
             private string status;
+            private bool? isOwner;
             private string createdAt;
             private string updatedAt;
 
@@ -159,6 +171,12 @@ namespace Square.Models
                 return this;
             }
 
+            public Builder IsOwner(bool? value)
+            {
+                isOwner = value;
+                return this;
+            }
+
             public Builder CreatedAt(string value)
             {
                 createdAt = value;
@@ -180,9 +198,10 @@ namespace Square.Models
                     phoneNumber,
                     locationIds,
                     status,
+                    isOwner,
                     createdAt,
                     updatedAt);
             }
         }
     }
-} 
+}

@@ -60,13 +60,13 @@ namespace Square.Models
         public string Rate { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for calculation_phase
         /// </summary>
         [JsonProperty("calculation_phase")]
         public string CalculationPhase { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for adjustment_type
         /// </summary>
         [JsonProperty("adjustment_type")]
         public string AdjustmentType { get; }
@@ -84,13 +84,13 @@ namespace Square.Models
         public bool? Enabled { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for inclusion_type
         /// </summary>
         [JsonProperty("inclusion_type")]
         public string InclusionType { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for type
         /// </summary>
         [JsonProperty("type")]
         public string Type { get; }
@@ -206,4 +206,4 @@ namespace Square.Models
             }
         }
     }
-} 
+}

@@ -266,7 +266,7 @@ namespace Square.Models
             private string name;
             private Models.Address address;
             private string timezone;
-            private IList<string> capabilities;
+            private IList<string> capabilities = new List<string>();
             private string status;
             private string createdAt;
             private string merchantId;
@@ -469,4 +469,4 @@ namespace Square.Models
             }
         }
     }
-} 
+}

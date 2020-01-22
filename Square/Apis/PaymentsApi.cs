@@ -5,6 +5,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Converters;
 using Square;
@@ -12,6 +13,7 @@ using Square.Utilities;
 using Square.Http.Request;
 using Square.Http.Response;
 using Square.Http.Client;
+using Square.Authentication;
 using Square.Exceptions;
 
 namespace Square.Apis
@@ -71,7 +73,7 @@ namespace Square.Apis
                 string locationId = null,
                 long? total = null,
                 string last4 = null,
-                string cardBrand = null)
+                string cardBrand = null, CancellationToken cancellationToken = default)
         {
             //the base uri for api requests
             string _baseUri = config.GetBaseUri();
@@ -91,17 +93,17 @@ namespace Square.Apis
                 { "total", total },
                 { "last_4", last4 },
                 { "card_brand", cardBrand }
-            },ArrayDeserializationFormat,ParameterSeparator);
+            }, ArrayDeserializationFormat, ParameterSeparator);
 
             //validate and preprocess url
             string _queryUrl = ApiHelper.CleanUrl(_queryBuilder);
 
             //append request with appropriate headers and parameters
-            var _headers = new Dictionary<string,string>()
+            var _headers = new Dictionary<string, string>()
             { 
-                { "user-agent", "Square-DotNet-SDK/4.0.0" },
+                { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2019-12-17" }
+                { "Square-Version", "2020-01-22" }
             };
 
             //prepare the API call request to fetch the response
@@ -111,10 +113,10 @@ namespace Square.Apis
                 HttpCallBack.OnBeforeHttpRequestEventHandler(GetClientInstance(), _request);
             }
 
-            _request = authManagers["default"].Apply(_request);
+            _request = await authManagers["default"].ApplyAsync(_request).ConfigureAwait(false);
 
             //invoke request and get response
-            HttpStringResponse _response = (HttpStringResponse) await GetClientInstance().ExecuteAsStringAsync(_request).ConfigureAwait(false);
+            HttpStringResponse _response = await GetClientInstance().ExecuteAsStringAsync(_request, cancellationToken).ConfigureAwait(false);
             HttpContext _context = new HttpContext(_request, _response);
             if (HttpCallBack != null)
             {
@@ -166,7 +168,7 @@ namespace Square.Apis
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.CreatePaymentResponse response from the API call</return>
-        public async Task<Models.CreatePaymentResponse> CreatePaymentAsync(Models.CreatePaymentRequest body)
+        public async Task<Models.CreatePaymentResponse> CreatePaymentAsync(Models.CreatePaymentRequest body, CancellationToken cancellationToken = default)
         {
             //the base uri for api requests
             string _baseUri = config.GetBaseUri();
@@ -179,12 +181,12 @@ namespace Square.Apis
             string _queryUrl = ApiHelper.CleanUrl(_queryBuilder);
 
             //append request with appropriate headers and parameters
-            var _headers = new Dictionary<string,string>()
+            var _headers = new Dictionary<string, string>()
             { 
-                { "user-agent", "Square-DotNet-SDK/4.0.0" },
+                { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
-                { "Square-Version", "2019-12-17" }
+                { "Square-Version", "2020-01-22" }
             };
 
             //append body params
@@ -197,10 +199,10 @@ namespace Square.Apis
                 HttpCallBack.OnBeforeHttpRequestEventHandler(GetClientInstance(), _request);
             }
 
-            _request = authManagers["default"].Apply(_request);
+            _request = await authManagers["default"].ApplyAsync(_request).ConfigureAwait(false);
 
             //invoke request and get response
-            HttpStringResponse _response = (HttpStringResponse) await GetClientInstance().ExecuteAsStringAsync(_request).ConfigureAwait(false);
+            HttpStringResponse _response = await GetClientInstance().ExecuteAsStringAsync(_request, cancellationToken).ConfigureAwait(false);
             HttpContext _context = new HttpContext(_request, _response);
             if (HttpCallBack != null)
             {
@@ -248,7 +250,7 @@ namespace Square.Apis
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.CancelPaymentByIdempotencyKeyResponse response from the API call</return>
-        public async Task<Models.CancelPaymentByIdempotencyKeyResponse> CancelPaymentByIdempotencyKeyAsync(Models.CancelPaymentByIdempotencyKeyRequest body)
+        public async Task<Models.CancelPaymentByIdempotencyKeyResponse> CancelPaymentByIdempotencyKeyAsync(Models.CancelPaymentByIdempotencyKeyRequest body, CancellationToken cancellationToken = default)
         {
             //the base uri for api requests
             string _baseUri = config.GetBaseUri();
@@ -261,12 +263,12 @@ namespace Square.Apis
             string _queryUrl = ApiHelper.CleanUrl(_queryBuilder);
 
             //append request with appropriate headers and parameters
-            var _headers = new Dictionary<string,string>()
+            var _headers = new Dictionary<string, string>()
             { 
-                { "user-agent", "Square-DotNet-SDK/4.0.0" },
+                { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
-                { "Square-Version", "2019-12-17" }
+                { "Square-Version", "2020-01-22" }
             };
 
             //append body params
@@ -279,10 +281,10 @@ namespace Square.Apis
                 HttpCallBack.OnBeforeHttpRequestEventHandler(GetClientInstance(), _request);
             }
 
-            _request = authManagers["default"].Apply(_request);
+            _request = await authManagers["default"].ApplyAsync(_request).ConfigureAwait(false);
 
             //invoke request and get response
-            HttpStringResponse _response = (HttpStringResponse) await GetClientInstance().ExecuteAsStringAsync(_request).ConfigureAwait(false);
+            HttpStringResponse _response = await GetClientInstance().ExecuteAsStringAsync(_request, cancellationToken).ConfigureAwait(false);
             HttpContext _context = new HttpContext(_request, _response);
             if (HttpCallBack != null)
             {
@@ -314,7 +316,7 @@ namespace Square.Apis
         /// </summary>
         /// <param name="paymentId">Required parameter: Unique ID for the desired `Payment`.</param>
         /// <return>Returns the Models.GetPaymentResponse response from the API call</return>
-        public async Task<Models.GetPaymentResponse> GetPaymentAsync(string paymentId)
+        public async Task<Models.GetPaymentResponse> GetPaymentAsync(string paymentId, CancellationToken cancellationToken = default)
         {
             //the base uri for api requests
             string _baseUri = config.GetBaseUri();
@@ -333,11 +335,11 @@ namespace Square.Apis
             string _queryUrl = ApiHelper.CleanUrl(_queryBuilder);
 
             //append request with appropriate headers and parameters
-            var _headers = new Dictionary<string,string>()
+            var _headers = new Dictionary<string, string>()
             { 
-                { "user-agent", "Square-DotNet-SDK/4.0.0" },
+                { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2019-12-17" }
+                { "Square-Version", "2020-01-22" }
             };
 
             //prepare the API call request to fetch the response
@@ -347,10 +349,10 @@ namespace Square.Apis
                 HttpCallBack.OnBeforeHttpRequestEventHandler(GetClientInstance(), _request);
             }
 
-            _request = authManagers["default"].Apply(_request);
+            _request = await authManagers["default"].ApplyAsync(_request).ConfigureAwait(false);
 
             //invoke request and get response
-            HttpStringResponse _response = (HttpStringResponse) await GetClientInstance().ExecuteAsStringAsync(_request).ConfigureAwait(false);
+            HttpStringResponse _response = await GetClientInstance().ExecuteAsStringAsync(_request, cancellationToken).ConfigureAwait(false);
             HttpContext _context = new HttpContext(_request, _response);
             if (HttpCallBack != null)
             {
@@ -386,7 +388,7 @@ namespace Square.Apis
         /// </summary>
         /// <param name="paymentId">Required parameter: `payment_id` identifying the payment to be canceled.</param>
         /// <return>Returns the Models.CancelPaymentResponse response from the API call</return>
-        public async Task<Models.CancelPaymentResponse> CancelPaymentAsync(string paymentId)
+        public async Task<Models.CancelPaymentResponse> CancelPaymentAsync(string paymentId, CancellationToken cancellationToken = default)
         {
             //the base uri for api requests
             string _baseUri = config.GetBaseUri();
@@ -405,11 +407,11 @@ namespace Square.Apis
             string _queryUrl = ApiHelper.CleanUrl(_queryBuilder);
 
             //append request with appropriate headers and parameters
-            var _headers = new Dictionary<string,string>()
+            var _headers = new Dictionary<string, string>()
             { 
-                { "user-agent", "Square-DotNet-SDK/4.0.0" },
+                { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2019-12-17" }
+                { "Square-Version", "2020-01-22" }
             };
 
             //prepare the API call request to fetch the response
@@ -419,10 +421,10 @@ namespace Square.Apis
                 HttpCallBack.OnBeforeHttpRequestEventHandler(GetClientInstance(), _request);
             }
 
-            _request = authManagers["default"].Apply(_request);
+            _request = await authManagers["default"].ApplyAsync(_request).ConfigureAwait(false);
 
             //invoke request and get response
-            HttpStringResponse _response = (HttpStringResponse) await GetClientInstance().ExecuteAsStringAsync(_request).ConfigureAwait(false);
+            HttpStringResponse _response = await GetClientInstance().ExecuteAsStringAsync(_request, cancellationToken).ConfigureAwait(false);
             HttpContext _context = new HttpContext(_request, _response);
             if (HttpCallBack != null)
             {
@@ -462,7 +464,7 @@ namespace Square.Apis
         /// </summary>
         /// <param name="paymentId">Required parameter: Unique ID identifying the payment to be completed.</param>
         /// <return>Returns the Models.CompletePaymentResponse response from the API call</return>
-        public async Task<Models.CompletePaymentResponse> CompletePaymentAsync(string paymentId)
+        public async Task<Models.CompletePaymentResponse> CompletePaymentAsync(string paymentId, CancellationToken cancellationToken = default)
         {
             //the base uri for api requests
             string _baseUri = config.GetBaseUri();
@@ -481,11 +483,11 @@ namespace Square.Apis
             string _queryUrl = ApiHelper.CleanUrl(_queryBuilder);
 
             //append request with appropriate headers and parameters
-            var _headers = new Dictionary<string,string>()
+            var _headers = new Dictionary<string, string>()
             { 
-                { "user-agent", "Square-DotNet-SDK/4.0.0" },
+                { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2019-12-17" }
+                { "Square-Version", "2020-01-22" }
             };
 
             //prepare the API call request to fetch the response
@@ -495,10 +497,10 @@ namespace Square.Apis
                 HttpCallBack.OnBeforeHttpRequestEventHandler(GetClientInstance(), _request);
             }
 
-            _request = authManagers["default"].Apply(_request);
+            _request = await authManagers["default"].ApplyAsync(_request).ConfigureAwait(false);
 
             //invoke request and get response
-            HttpStringResponse _response = (HttpStringResponse) await GetClientInstance().ExecuteAsStringAsync(_request).ConfigureAwait(false);
+            HttpStringResponse _response = await GetClientInstance().ExecuteAsStringAsync(_request, cancellationToken).ConfigureAwait(false);
             HttpContext _context = new HttpContext(_request, _response);
             if (HttpCallBack != null)
             {
@@ -514,4 +516,4 @@ namespace Square.Apis
         }
 
     }
-} 
+}

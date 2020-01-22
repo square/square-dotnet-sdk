@@ -64,7 +64,7 @@ namespace Square.Models
         public string WeightUnit { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for generic_unit
         /// </summary>
         [JsonProperty("generic_unit")]
         public string GenericUnit { get; }
@@ -168,4 +168,4 @@ namespace Square.Models
             }
         }
     }
-} 
+}

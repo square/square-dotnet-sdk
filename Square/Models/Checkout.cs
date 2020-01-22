@@ -148,7 +148,7 @@ namespace Square.Models
             private string redirectUrl;
             private Models.Order order;
             private string createdAt;
-            private IList<Models.AdditionalRecipient> additionalRecipients;
+            private IList<Models.AdditionalRecipient> additionalRecipients = new List<Models.AdditionalRecipient>();
 
             public Builder() { }
             public Builder Id(string value)
@@ -226,4 +226,4 @@ namespace Square.Models
             }
         }
     }
-} 
+}

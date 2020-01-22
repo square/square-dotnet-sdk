@@ -4,6 +4,7 @@ using System.Dynamic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Square;
 using Square.Utilities;
@@ -39,7 +40,7 @@ namespace Square.Apis
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.RegisterDomainResponse response from the API call</return>
-        Task<Models.RegisterDomainResponse> RegisterDomainAsync(Models.RegisterDomainRequest body);
+        Task<Models.RegisterDomainResponse> RegisterDomainAsync(Models.RegisterDomainRequest body, CancellationToken cancellationToken = default);
 
     }
-} 
+}

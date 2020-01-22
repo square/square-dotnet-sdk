@@ -51,7 +51,7 @@ string locationId = "location_id4";
 
 try
 {
-    ListCashDrawerShiftsResponse result = cashDrawersApi.ListCashDrawerShiftsAsync(locationId, null, null, null, null, null).Result;
+    ListCashDrawerShiftsResponse result = await cashDrawersApi.ListCashDrawerShiftsAsync(locationId, null, null, null, null, null);
 }
 catch (ApiException e){};
 ```
@@ -84,7 +84,7 @@ string shiftId = "shift_id0";
 
 try
 {
-    RetrieveCashDrawerShiftResponse result = cashDrawersApi.RetrieveCashDrawerShiftAsync(locationId, shiftId).Result;
+    RetrieveCashDrawerShiftResponse result = await cashDrawersApi.RetrieveCashDrawerShiftAsync(locationId, shiftId);
 }
 catch (ApiException e){};
 ```
@@ -122,7 +122,7 @@ string shiftId = "shift_id0";
 
 try
 {
-    ListCashDrawerShiftEventsResponse result = cashDrawersApi.ListCashDrawerShiftEventsAsync(locationId, shiftId, null, null).Result;
+    ListCashDrawerShiftEventsResponse result = await cashDrawersApi.ListCashDrawerShiftEventsAsync(locationId, shiftId, null, null);
 }
 catch (ApiException e){};
 ```

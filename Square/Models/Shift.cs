@@ -149,7 +149,7 @@ namespace Square.Models
             private string timezone;
             private string endAt;
             private Models.ShiftWage wage;
-            private IList<Models.Break> breaks;
+            private IList<Models.Break> breaks = new List<Models.Break>();
             private string status;
             private int? version;
             private string createdAt;
@@ -250,4 +250,4 @@ namespace Square.Models
             }
         }
     }
-} 
+}

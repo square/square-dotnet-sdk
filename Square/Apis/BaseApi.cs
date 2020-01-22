@@ -5,6 +5,7 @@ using Square;
 using Square.Utilities;
 using Square.Http.Client;
 using Square.Http.Response;
+using Square.Authentication;
 using Square.Exceptions;
 
 namespace Square.Apis
@@ -19,6 +20,11 @@ namespace Square.Apis
         /// </summary>
         protected IConfiguration config;
 
+        /// <summary>
+        /// User-Agent header value
+        /// </summary>
+        internal string userAgent = "Square-DotNet-SDK/4.1.0";
+        
         /// <summary>
         /// HttpClient instance
         /// </summary>
@@ -85,10 +91,10 @@ namespace Square.Apis
         /// <param name="_context">Context of the request and the recieved response</param>
         protected void ValidateResponse(HttpResponse _response, HttpContext _context)
         {
-            if ((_response.StatusCode < 200) || (_response.StatusCode > 208)) //[200,208] = HTTP OK
+            if ((_response.StatusCode < 200) || (_response.StatusCode > 208)) //[200, 208] = HTTP OK
             {
                 throw new ApiException(@"HTTP Response Not OK", _context);
             }
         }
     }
-} 
+}

@@ -101,9 +101,9 @@ namespace Square.Models
             private Models.Order order;
             private string idempotencyKey;
             private string referenceId;
-            private IList<Models.CreateOrderRequestLineItem> lineItems;
-            private IList<Models.CreateOrderRequestTax> taxes;
-            private IList<Models.CreateOrderRequestDiscount> discounts;
+            private IList<Models.CreateOrderRequestLineItem> lineItems = new List<Models.CreateOrderRequestLineItem>();
+            private IList<Models.CreateOrderRequestTax> taxes = new List<Models.CreateOrderRequestTax>();
+            private IList<Models.CreateOrderRequestDiscount> discounts = new List<Models.CreateOrderRequestDiscount>();
 
             public Builder() { }
             public Builder Order(Models.Order value)
@@ -153,4 +153,4 @@ namespace Square.Models
             }
         }
     }
-} 
+}

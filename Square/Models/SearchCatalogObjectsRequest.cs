@@ -114,7 +114,7 @@ namespace Square.Models
         public class Builder
         {
             private string cursor;
-            private IList<string> objectTypes;
+            private IList<string> objectTypes = new List<string>();
             private bool? includeDeletedObjects;
             private bool? includeRelatedObjects;
             private string beginTime;
@@ -176,4 +176,4 @@ namespace Square.Models
             }
         }
     }
-} 
+}

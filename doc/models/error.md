@@ -22,7 +22,7 @@ See [Handling errors](#handlingerrors) for more information.
 ```json
 {
   "category": "INVALID_REQUEST_ERROR",
-  "code": "VALUE_TOO_LOW",
+  "code": "REFUND_AMOUNT_INVALID",
   "detail": null,
   "field": null
 }

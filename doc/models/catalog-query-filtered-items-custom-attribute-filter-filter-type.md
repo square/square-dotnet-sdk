@@ -6,10 +6,10 @@
 
 ### Fields
 
-| Name | Description |
-|  --- | --- |
-| `CUSTOMATTRIBUTEFILTERTYPEDONOTUSE` | - |
-| `EXACT` | - |
-| `PREFIX` | - |
-| `RANGE` | - |
+| Name |
+|  --- |
+| `CUSTOMATTRIBUTEFILTERTYPEDONOTUSE` |
+| `EXACT` |
+| `PREFIX` |
+| `RANGE` |
 

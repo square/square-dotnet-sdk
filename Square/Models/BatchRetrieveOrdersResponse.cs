@@ -47,8 +47,8 @@ namespace Square.Models
 
         public class Builder
         {
-            private IList<Models.Order> orders;
-            private IList<Models.Error> errors;
+            private IList<Models.Order> orders = new List<Models.Order>();
+            private IList<Models.Error> errors = new List<Models.Error>();
 
             public Builder() { }
             public Builder Orders(IList<Models.Order> value)
@@ -70,4 +70,4 @@ namespace Square.Models
             }
         }
     }
-} 
+}

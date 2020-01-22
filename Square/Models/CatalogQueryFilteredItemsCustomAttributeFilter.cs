@@ -30,37 +30,37 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for filter_type
         /// </summary>
         [JsonProperty("filter_type")]
         public string FilterType { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for custom_attribute_definition_ids
         /// </summary>
         [JsonProperty("custom_attribute_definition_ids")]
         public IList<string> CustomAttributeDefinitionIds { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for custom_attribute_value_exact
         /// </summary>
         [JsonProperty("custom_attribute_value_exact")]
         public string CustomAttributeValueExact { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for custom_attribute_value_prefix
         /// </summary>
         [JsonProperty("custom_attribute_value_prefix")]
         public string CustomAttributeValuePrefix { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for custom_attribute_min_value
         /// </summary>
         [JsonProperty("custom_attribute_min_value")]
         public string CustomAttributeMinValue { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for custom_attribute_max_value
         /// </summary>
         [JsonProperty("custom_attribute_max_value")]
         public string CustomAttributeMaxValue { get; }
@@ -80,7 +80,7 @@ namespace Square.Models
         public class Builder
         {
             private string filterType;
-            private IList<string> customAttributeDefinitionIds;
+            private IList<string> customAttributeDefinitionIds = new List<string>();
             private string customAttributeValueExact;
             private string customAttributeValuePrefix;
             private string customAttributeMinValue;
@@ -134,4 +134,4 @@ namespace Square.Models
             }
         }
     }
-} 
+}

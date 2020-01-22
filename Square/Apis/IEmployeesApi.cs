@@ -4,6 +4,7 @@ using System.Dynamic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Square;
 using Square.Utilities;
@@ -41,7 +42,7 @@ namespace Square.Apis
                 string locationId = null,
                 string status = null,
                 int? limit = null,
-                string cursor = null);
+                string cursor = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// RetrieveEmployee
@@ -55,7 +56,7 @@ namespace Square.Apis
         /// </summary>
         /// <param name="id">Required parameter: UUID for the employee that was requested.</param>
         /// <return>Returns the Models.RetrieveEmployeeResponse response from the API call</return>
-        Task<Models.RetrieveEmployeeResponse> RetrieveEmployeeAsync(string id);
+        Task<Models.RetrieveEmployeeResponse> RetrieveEmployeeAsync(string id, CancellationToken cancellationToken = default);
 
     }
-} 
+}

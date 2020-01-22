@@ -39,7 +39,7 @@ namespace Square.Models
         public int? OrderVersion { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for payment_ids
         /// </summary>
         [JsonProperty("payment_ids")]
         public IList<string> PaymentIds { get; }
@@ -56,7 +56,7 @@ namespace Square.Models
         {
             private string idempotencyKey;
             private int? orderVersion;
-            private IList<string> paymentIds;
+            private IList<string> paymentIds = new List<string>();
 
             public Builder(string idempotencyKey)
             {
@@ -88,4 +88,4 @@ namespace Square.Models
             }
         }
     }
-} 
+}

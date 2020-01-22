@@ -48,13 +48,13 @@ namespace Square.Models
         public string EndTime { get; }
 
         /// <summary>
-        /// The maximum number of payments to return in a single response. This value cannot exceed 200.
+        /// The maximum number of settlements to return in a single response. This value cannot exceed 200.
         /// </summary>
         [JsonProperty("limit")]
         public int? Limit { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for status
         /// </summary>
         [JsonProperty("status")]
         public string Status { get; }
@@ -135,4 +135,4 @@ namespace Square.Models
             }
         }
     }
-} 
+}

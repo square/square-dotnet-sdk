@@ -134,7 +134,7 @@ namespace Square.Models
             private string status;
             private string createdAt;
             private Models.Money processingFeeMoney;
-            private IList<Models.AdditionalRecipient> additionalRecipients;
+            private IList<Models.AdditionalRecipient> additionalRecipients = new List<Models.AdditionalRecipient>();
 
             public Builder(string id,
                 string locationId,
@@ -227,4 +227,4 @@ namespace Square.Models
             }
         }
     }
-} 
+}

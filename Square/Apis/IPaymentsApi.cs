@@ -4,6 +4,7 @@ using System.Dynamic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Square;
 using Square.Utilities;
@@ -59,7 +60,7 @@ namespace Square.Apis
                 string locationId = null,
                 long? total = null,
                 string last4 = null,
-                string cardBrand = null);
+                string cardBrand = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Charges a payment source, for example, a card 
@@ -93,7 +94,7 @@ namespace Square.Apis
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.CreatePaymentResponse response from the API call</return>
-        Task<Models.CreatePaymentResponse> CreatePaymentAsync(Models.CreatePaymentRequest body);
+        Task<Models.CreatePaymentResponse> CreatePaymentAsync(Models.CreatePaymentRequest body, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Cancels (voids) a payment identified by the idempotency key that is specified in the request. 
@@ -123,7 +124,7 @@ namespace Square.Apis
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.CancelPaymentByIdempotencyKeyResponse response from the API call</return>
-        Task<Models.CancelPaymentByIdempotencyKeyResponse> CancelPaymentByIdempotencyKeyAsync(Models.CancelPaymentByIdempotencyKeyRequest body);
+        Task<Models.CancelPaymentByIdempotencyKeyResponse> CancelPaymentByIdempotencyKeyAsync(Models.CancelPaymentByIdempotencyKeyRequest body, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Retrieves details for a specific Payment.
@@ -137,7 +138,7 @@ namespace Square.Apis
         /// </summary>
         /// <param name="paymentId">Required parameter: Unique ID for the desired `Payment`.</param>
         /// <return>Returns the Models.GetPaymentResponse response from the API call</return>
-        Task<Models.GetPaymentResponse> GetPaymentAsync(string paymentId);
+        Task<Models.GetPaymentResponse> GetPaymentAsync(string paymentId, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Cancels (voids) a payment. If you set `autocomplete` to false when creating a payment, 
@@ -155,7 +156,7 @@ namespace Square.Apis
         /// </summary>
         /// <param name="paymentId">Required parameter: `payment_id` identifying the payment to be canceled.</param>
         /// <return>Returns the Models.CancelPaymentResponse response from the API call</return>
-        Task<Models.CancelPaymentResponse> CancelPaymentAsync(string paymentId);
+        Task<Models.CancelPaymentResponse> CancelPaymentAsync(string paymentId, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Completes (captures) a payment.
@@ -177,7 +178,7 @@ namespace Square.Apis
         /// </summary>
         /// <param name="paymentId">Required parameter: Unique ID identifying the payment to be completed.</param>
         /// <return>Returns the Models.CompletePaymentResponse response from the API call</return>
-        Task<Models.CompletePaymentResponse> CompletePaymentAsync(string paymentId);
+        Task<Models.CompletePaymentResponse> CompletePaymentAsync(string paymentId, CancellationToken cancellationToken = default);
 
     }
-} 
+}

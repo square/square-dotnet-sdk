@@ -56,8 +56,8 @@ namespace Square.Models
 
         public class Builder
         {
-            private IList<Models.Error> errors;
-            private IList<Models.Merchant> merchant;
+            private IList<Models.Error> errors = new List<Models.Error>();
+            private IList<Models.Merchant> merchant = new List<Models.Merchant>();
             private int? cursor;
 
             public Builder() { }
@@ -87,4 +87,4 @@ namespace Square.Models
             }
         }
     }
-} 
+}

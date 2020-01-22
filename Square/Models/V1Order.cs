@@ -102,7 +102,7 @@ namespace Square.Models
         public string RecipientPhoneNumber { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for state
         /// </summary>
         [JsonProperty("state")]
         public string State { get; }
@@ -114,31 +114,31 @@ namespace Square.Models
         public Models.Address ShippingAddress { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for subtotal_money
         /// </summary>
         [JsonProperty("subtotal_money")]
         public Models.V1Money SubtotalMoney { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for total_shipping_money
         /// </summary>
         [JsonProperty("total_shipping_money")]
         public Models.V1Money TotalShippingMoney { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for total_tax_money
         /// </summary>
         [JsonProperty("total_tax_money")]
         public Models.V1Money TotalTaxMoney { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for total_price_money
         /// </summary>
         [JsonProperty("total_price_money")]
         public Models.V1Money TotalPriceMoney { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for total_discount_money
         /// </summary>
         [JsonProperty("total_discount_money")]
         public Models.V1Money TotalDiscountMoney { get; }
@@ -270,7 +270,7 @@ namespace Square.Models
 
         public class Builder
         {
-            private IList<Models.Error> errors;
+            private IList<Models.Error> errors = new List<Models.Error>();
             private string id;
             private string buyerEmail;
             private string recipientName;
@@ -291,7 +291,7 @@ namespace Square.Models
             private string refundedNote;
             private string canceledNote;
             private Models.V1Tender tender;
-            private IList<Models.V1OrderHistoryEntry> orderHistory;
+            private IList<Models.V1OrderHistoryEntry> orderHistory = new List<Models.V1OrderHistoryEntry>();
             private string promoCode;
             private string btcReceiveAddress;
             private double? btcPriceSatoshi;
@@ -477,4 +477,4 @@ namespace Square.Models
             }
         }
     }
-} 
+}

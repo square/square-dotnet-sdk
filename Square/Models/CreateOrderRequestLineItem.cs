@@ -122,9 +122,9 @@ namespace Square.Models
             private string variationName;
             private string note;
             private string catalogObjectId;
-            private IList<Models.CreateOrderRequestModifier> modifiers;
-            private IList<Models.CreateOrderRequestTax> taxes;
-            private IList<Models.CreateOrderRequestDiscount> discounts;
+            private IList<Models.CreateOrderRequestModifier> modifiers = new List<Models.CreateOrderRequestModifier>();
+            private IList<Models.CreateOrderRequestTax> taxes = new List<Models.CreateOrderRequestTax>();
+            private IList<Models.CreateOrderRequestDiscount> discounts = new List<Models.CreateOrderRequestDiscount>();
 
             public Builder(string quantity)
             {
@@ -198,4 +198,4 @@ namespace Square.Models
             }
         }
     }
-} 
+}

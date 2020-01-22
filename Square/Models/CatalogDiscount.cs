@@ -77,7 +77,7 @@ namespace Square.Models
         public string LabelColor { get; }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Getter for modify_tax_basis
         /// </summary>
         [JsonProperty("modify_tax_basis")]
         public string ModifyTaxBasis { get; }
@@ -160,4 +160,4 @@ namespace Square.Models
             }
         }
     }
-} 
+}

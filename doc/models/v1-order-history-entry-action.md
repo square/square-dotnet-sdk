@@ -6,13 +6,13 @@
 
 ### Fields
 
-| Name | Description |
-|  --- | --- |
-| `ORDERPLACED` | - |
-| `DECLINED` | - |
-| `PAYMENTRECEIVED` | - |
-| `CANCELED` | - |
-| `COMPLETED` | - |
-| `REFUNDED` | - |
-| `EXPIRED` | - |
+| Name |
+|  --- |
+| `ORDERPLACED` |
+| `DECLINED` |
+| `PAYMENTRECEIVED` |
+| `CANCELED` |
+| `COMPLETED` |
+| `REFUNDED` |
+| `EXPIRED` |
 

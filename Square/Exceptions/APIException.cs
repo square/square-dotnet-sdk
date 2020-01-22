@@ -10,6 +10,9 @@ using Square.Http.Client;
 
 namespace Square.Exceptions
 {
+    /// <summary>
+    /// This is the base class for all exceptions that represent an error response from the server.
+    /// </summary>
     [JsonObject]
     public class ApiException : Exception
     {
@@ -54,13 +57,13 @@ namespace Square.Exceptions
                 string responseBody = reader.ReadToEnd();
                 if (!string.IsNullOrWhiteSpace(responseBody))
                 {
-                    try 
-                    { 
+                    try
+                    {
                         JObject body = JObject.Parse(responseBody);
 
                         if(!this.GetType().Name.Equals("ApiException", StringComparison.OrdinalIgnoreCase))
                         {
-                            JsonConvert.PopulateObject(responseBody, this); 
+                            JsonConvert.PopulateObject(responseBody, this);
                         }
 
                         // Map Square v1 error to v2 errors
@@ -77,7 +80,7 @@ namespace Square.Exceptions
 
                         Errors = new List<Error> { errorBuilder.Build() };
                     }
-                    catch
+                    catch (JsonReaderException)
                     {
                         // Ignore deserialization and IO issues to prevent exception being thrown when this exception
                         // instance is being constructed.

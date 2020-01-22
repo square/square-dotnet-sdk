@@ -6,9 +6,9 @@
 
 ### Fields
 
-| Name | Description |
-|  --- | --- |
-| `NORMAL` | - |
-| `GIFTCARD` | - |
-| `OTHER` | - |
+| Name |
+|  --- |
+| `NORMAL` |
+| `GIFTCARD` |
+| `OTHER` |
 

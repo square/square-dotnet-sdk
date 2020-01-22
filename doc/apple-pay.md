@@ -43,7 +43,7 @@ var body = new RegisterDomainRequest.Builder(
 
 try
 {
-    RegisterDomainResponse result = applePayApi.RegisterDomainAsync(body).Result;
+    RegisterDomainResponse result = await applePayApi.RegisterDomainAsync(body);
 }
 catch (ApiException e){};
 ```
