@@ -26,7 +26,7 @@ dotnet pack Square/Square.csproj -o bin
 if [ "${TRAVIS_PULL_REQUEST_BRANCH}" = "" -a "${TRAVIS_BRANCH}" = "master" ];
 then
   echo -e "\033[1;32mPublishing version ${packageVersion} to Nuget..."
-  dotnet nuget push bin/*.nupkg -k $NUGET_APIKEY -s https://api.nuget.org/v3/index.json
+  dotnet nuget push Square/bin/*.nupkg -k $NUGET_APIKEY -s https://api.nuget.org/v3/index.json
 else
   echo -e "\033[1;32mNot uploading pending changes until it's merged into master."
 fi
