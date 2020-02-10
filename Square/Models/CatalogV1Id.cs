@@ -14,10 +14,10 @@ namespace Square.Models
 {
     public class CatalogV1Id 
     {
-        public CatalogV1Id(string catalogV1Id = null,
+        public CatalogV1Id(string catalogV1IdProp = null,
             string locationId = null)
         {
-            CatalogV1IdProp = catalogV1Id;
+            CatalogV1IdProp = catalogV1IdProp;
             LocationId = locationId;
         }
 
