@@ -45,7 +45,7 @@ namespace Square.Models
         /// same other parameters without worrying about creating duplicates.
         /// We recommend using a random number/string generator native to the language
         /// you are working in to generate strings for your idempotency keys.
-        /// See [Idempotency keys](#idempotencykeys) for more information.
+        /// See the [Idempotency](https://developer.squareup.com/docs/working-with-apis/idempotency) guide for more information.
         /// </summary>
         [JsonProperty("idempotency_key")]
         public string IdempotencyKey { get; }

@@ -41,6 +41,11 @@ namespace Square
         IApplePayApi ApplePayApi { get; }
 
         /// <summary>
+        /// Instance for IBankAccountsApi
+        /// </summary>
+        IBankAccountsApi BankAccountsApi { get; }
+
+        /// <summary>
         /// Instance for ICashDrawersApi
         /// </summary>
         ICashDrawersApi CashDrawersApi { get; }
@@ -54,6 +59,11 @@ namespace Square
         /// Instance for ICustomersApi
         /// </summary>
         ICustomersApi CustomersApi { get; }
+
+        /// <summary>
+        /// Instance for IDisputesApi
+        /// </summary>
+        IDisputesApi DisputesApi { get; }
 
         /// <summary>
         /// Instance for IEmployeesApi

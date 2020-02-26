@@ -14,7 +14,7 @@ namespace Square.Models
 {
     public class CatalogObjectBatch 
     {
-        public CatalogObjectBatch(IList<Models.CatalogObject> objects = null)
+        public CatalogObjectBatch(IList<Models.CatalogObject> objects)
         {
             Objects = objects;
         }
@@ -27,16 +27,18 @@ namespace Square.Models
 
         public Builder ToBuilder()
         {
-            var builder = new Builder()
-                .Objects(Objects);
+            var builder = new Builder(Objects);
             return builder;
         }
 
         public class Builder
         {
-            private IList<Models.CatalogObject> objects = new List<Models.CatalogObject>();
+            private IList<Models.CatalogObject> objects;
 
-            public Builder() { }
+            public Builder(IList<Models.CatalogObject> objects)
+            {
+                this.objects = objects;
+            }
             public Builder Objects(IList<Models.CatalogObject> value)
             {
                 objects = value;

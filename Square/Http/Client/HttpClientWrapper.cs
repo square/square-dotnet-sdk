@@ -249,6 +249,10 @@ namespace Square.Http.Client
                         {
                             requestMessage.Content.Headers.ContentType = new MediaTypeHeaderValue(file.ContentType);
                         }
+                        else if (request.Headers.Any(h => h.Key.Equals("content-type", StringComparison.OrdinalIgnoreCase)))
+                        {
+                            requestMessage.Content.Headers.ContentType = new MediaTypeHeaderValue(request.Headers["content-type"]);
+                        }
                         else
                         {
                             requestMessage.Content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");

@@ -24,7 +24,6 @@ namespace Square.Models
             Models.Money totalTaxMoney = null,
             string calculationPhase = null,
             bool? taxable = null,
-            IList<Models.OrderLineItemTax> taxes = null,
             IList<Models.OrderLineItemAppliedTax> appliedTaxes = null,
             IDictionary<string, string> metadata = null)
         {
@@ -38,7 +37,6 @@ namespace Square.Models
             TotalTaxMoney = totalTaxMoney;
             CalculationPhase = calculationPhase;
             Taxable = taxable;
-            Taxes = taxes;
             AppliedTaxes = appliedTaxes;
             Metadata = metadata;
         }
@@ -130,19 +128,6 @@ namespace Square.Models
         public bool? Taxable { get; }
 
         /// <summary>
-        /// A list of taxes applied to this service charge. On read or retrieve, this list includes
-        /// both item-level taxes and any order-level taxes apportioned to this service charge.
-        /// When creating an Order, set your service charge-level taxes in this list. By default,
-        /// order-level taxes apply to service charges calculated in the `SUBTOTAL_PHASE` if `taxable` is
-        /// set to `true`.
-        /// This field has been deprecated in favour of `applied_taxes`. Usage of both this field and
-        /// `applied_taxes` when creating an order will result in an error. Usage of this field when
-        /// sending requests to the UpdateOrder endpoint will result in an error.
-        /// </summary>
-        [JsonProperty("taxes")]
-        public IList<Models.OrderLineItemTax> Taxes { get; }
-
-        /// <summary>
         /// The list of references to taxes applied to this service charge. Each
         /// `OrderLineItemAppliedTax` has a `tax_uid` that references the `uid` of a top-level
         /// `OrderLineItemTax` that is being applied to this service charge. On reads, the amount applied
@@ -188,7 +173,6 @@ namespace Square.Models
                 .TotalTaxMoney(TotalTaxMoney)
                 .CalculationPhase(CalculationPhase)
                 .Taxable(Taxable)
-                .Taxes(Taxes)
                 .AppliedTaxes(AppliedTaxes)
                 .Metadata(Metadata);
             return builder;
@@ -206,7 +190,6 @@ namespace Square.Models
             private Models.Money totalTaxMoney;
             private string calculationPhase;
             private bool? taxable;
-            private IList<Models.OrderLineItemTax> taxes = new List<Models.OrderLineItemTax>();
             private IList<Models.OrderLineItemAppliedTax> appliedTaxes = new List<Models.OrderLineItemAppliedTax>();
             private IDictionary<string, string> metadata = new Dictionary<string, string>();
 
@@ -271,12 +254,6 @@ namespace Square.Models
                 return this;
             }
 
-            public Builder Taxes(IList<Models.OrderLineItemTax> value)
-            {
-                taxes = value;
-                return this;
-            }
-
             public Builder AppliedTaxes(IList<Models.OrderLineItemAppliedTax> value)
             {
                 appliedTaxes = value;
@@ -301,7 +278,6 @@ namespace Square.Models
                     totalTaxMoney,
                     calculationPhase,
                     taxable,
-                    taxes,
                     appliedTaxes,
                     metadata);
             }

@@ -26,9 +26,15 @@ namespace Square.Apis
 
         /// <summary>
         /// Provides non-confidential details for all of a location's associated bank accounts. This endpoint does not provide full bank account numbers, and there is no way to obtain a full bank account number with the Connect API.
+        /// ---
+        /// - __Deprecation date__: 2020-02-26
+        /// - [__Retirement date__](https://developer.squareup.com/docs/docs/build-basics/api-lifecycle#deprecated): 2021-02-26
+        /// - [Migration guide](https://developer.squareup.com/docs/docs/migrate-from-v1/guides/v1-bankaccounts)
+        /// ---
         /// </summary>
         /// <param name="locationId">Required parameter: The ID of the location to list bank accounts for.</param>
         /// <return>Returns the List<Models.V1BankAccount> response from the API call</return>
+        [Obsolete]
         public List<Models.V1BankAccount> ListBankAccounts(string locationId)
         {
             Task<List<Models.V1BankAccount>> t = ListBankAccountsAsync(locationId);
@@ -38,9 +44,15 @@ namespace Square.Apis
 
         /// <summary>
         /// Provides non-confidential details for all of a location's associated bank accounts. This endpoint does not provide full bank account numbers, and there is no way to obtain a full bank account number with the Connect API.
+        /// ---
+        /// - __Deprecation date__: 2020-02-26
+        /// - [__Retirement date__](https://developer.squareup.com/docs/docs/build-basics/api-lifecycle#deprecated): 2021-02-26
+        /// - [Migration guide](https://developer.squareup.com/docs/docs/migrate-from-v1/guides/v1-bankaccounts)
+        /// ---
         /// </summary>
         /// <param name="locationId">Required parameter: The ID of the location to list bank accounts for.</param>
         /// <return>Returns the List<Models.V1BankAccount> response from the API call</return>
+        [Obsolete]
         public async Task<List<Models.V1BankAccount>> ListBankAccountsAsync(string locationId, CancellationToken cancellationToken = default)
         {
             //the base uri for api requests
@@ -64,7 +76,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-01-22" }
+                { "Square-Version", "2020-02-26" }
             };
 
             //prepare the API call request to fetch the response
@@ -87,15 +99,23 @@ namespace Square.Apis
             //handle errors defined at the API level
             base.ValidateResponse(_response, _context);
 
-            return ApiHelper.JsonDeserialize<List<Models.V1BankAccount>>(_response.Body);
+            var _responseModels = ApiHelper.JsonDeserialize<List<Models.V1BankAccount>>(_response.Body);
+            _responseModels.ForEach(r => r.Context = _context);
+            return _responseModels;
         }
 
         /// <summary>
         /// Provides non-confidential details for a merchant's associated bank account. This endpoint does not provide full bank account numbers, and there is no way to obtain a full bank account number with the Connect API.
+        /// ---
+        /// - __Deprecation date__: 2020-02-26
+        /// - [__Retirement date__](https://developer.squareup.com/docs/docs/build-basics/api-lifecycle#deprecated): 2021-02-26
+        /// - [Migration guide](https://developer.squareup.com/docs/docs/migrate-from-v1/guides/v1-bankaccounts)
+        /// ---
         /// </summary>
         /// <param name="locationId">Required parameter: The ID of the bank account's associated location.</param>
         /// <param name="bankAccountId">Required parameter: The bank account's Square-issued ID. You obtain this value from Settlement objects returned.</param>
         /// <return>Returns the Models.V1BankAccount response from the API call</return>
+        [Obsolete]
         public Models.V1BankAccount RetrieveBankAccount(string locationId, string bankAccountId)
         {
             Task<Models.V1BankAccount> t = RetrieveBankAccountAsync(locationId, bankAccountId);
@@ -105,10 +125,16 @@ namespace Square.Apis
 
         /// <summary>
         /// Provides non-confidential details for a merchant's associated bank account. This endpoint does not provide full bank account numbers, and there is no way to obtain a full bank account number with the Connect API.
+        /// ---
+        /// - __Deprecation date__: 2020-02-26
+        /// - [__Retirement date__](https://developer.squareup.com/docs/docs/build-basics/api-lifecycle#deprecated): 2021-02-26
+        /// - [Migration guide](https://developer.squareup.com/docs/docs/migrate-from-v1/guides/v1-bankaccounts)
+        /// ---
         /// </summary>
         /// <param name="locationId">Required parameter: The ID of the bank account's associated location.</param>
         /// <param name="bankAccountId">Required parameter: The bank account's Square-issued ID. You obtain this value from Settlement objects returned.</param>
         /// <return>Returns the Models.V1BankAccount response from the API call</return>
+        [Obsolete]
         public async Task<Models.V1BankAccount> RetrieveBankAccountAsync(string locationId, string bankAccountId, CancellationToken cancellationToken = default)
         {
             //the base uri for api requests
@@ -133,7 +159,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-01-22" }
+                { "Square-Version", "2020-02-26" }
             };
 
             //prepare the API call request to fetch the response
@@ -223,7 +249,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-01-22" }
+                { "Square-Version", "2020-02-26" }
             };
 
             //prepare the API call request to fetch the response
@@ -246,7 +272,9 @@ namespace Square.Apis
             //handle errors defined at the API level
             base.ValidateResponse(_response, _context);
 
-            return ApiHelper.JsonDeserialize<List<Models.V1Order>>(_response.Body);
+            var _responseModels = ApiHelper.JsonDeserialize<List<Models.V1Order>>(_response.Body);
+            _responseModels.ForEach(r => r.Context = _context);
+            return _responseModels;
         }
 
         /// <summary>
@@ -292,7 +320,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-01-22" }
+                { "Square-Version", "2020-02-26" }
             };
 
             //prepare the API call request to fetch the response
@@ -366,7 +394,7 @@ namespace Square.Apis
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
-                { "Square-Version", "2020-01-22" }
+                { "Square-Version", "2020-02-26" }
             };
 
             //append body params
@@ -492,7 +520,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-01-22" }
+                { "Square-Version", "2020-02-26" }
             };
 
             //prepare the API call request to fetch the response
@@ -515,7 +543,9 @@ namespace Square.Apis
             //handle errors defined at the API level
             base.ValidateResponse(_response, _context);
 
-            return ApiHelper.JsonDeserialize<List<Models.V1Payment>>(_response.Body);
+            var _responseModels = ApiHelper.JsonDeserialize<List<Models.V1Payment>>(_response.Body);
+            _responseModels.ForEach(r => r.Context = _context);
+            return _responseModels;
         }
 
         /// <summary>
@@ -561,7 +591,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-01-22" }
+                { "Square-Version", "2020-02-26" }
             };
 
             //prepare the API call request to fetch the response
@@ -661,7 +691,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-01-22" }
+                { "Square-Version", "2020-02-26" }
             };
 
             //prepare the API call request to fetch the response
@@ -684,7 +714,9 @@ namespace Square.Apis
             //handle errors defined at the API level
             base.ValidateResponse(_response, _context);
 
-            return ApiHelper.JsonDeserialize<List<Models.V1Refund>>(_response.Body);
+            var _responseModels = ApiHelper.JsonDeserialize<List<Models.V1Refund>>(_response.Body);
+            _responseModels.ForEach(r => r.Context = _context);
+            return _responseModels;
         }
 
         /// <summary>
@@ -748,7 +780,7 @@ namespace Square.Apis
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
-                { "Square-Version", "2020-01-22" }
+                { "Square-Version", "2020-02-26" }
             };
 
             //append body params
@@ -864,7 +896,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-01-22" }
+                { "Square-Version", "2020-02-26" }
             };
 
             //prepare the API call request to fetch the response
@@ -887,7 +919,9 @@ namespace Square.Apis
             //handle errors defined at the API level
             base.ValidateResponse(_response, _context);
 
-            return ApiHelper.JsonDeserialize<List<Models.V1Settlement>>(_response.Body);
+            var _responseModels = ApiHelper.JsonDeserialize<List<Models.V1Settlement>>(_response.Body);
+            _responseModels.ForEach(r => r.Context = _context);
+            return _responseModels;
         }
 
         /// <summary>
@@ -959,7 +993,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-01-22" }
+                { "Square-Version", "2020-02-26" }
             };
 
             //prepare the API call request to fetch the response

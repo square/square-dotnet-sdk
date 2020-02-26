@@ -13,6 +13,4 @@ The type of a CatalogItem. Connect V2 only allows the creation of `REGULAR` or `
 | `REGULAR` | An ordinary item. |
 | `GIFTCARD` | A Square gift card. |
 | `APPOINTMENTSSERVICE` | A service that can be booked using the Square Appointments app. |
-| `RETAILITEM` | An item associated with the Retail vertical. |
-| `RESTAURANTITEM` | An item associated with the Restaurants vertical. |
 

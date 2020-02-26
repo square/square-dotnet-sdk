@@ -22,6 +22,8 @@ namespace Square.Models
             string cardholderName = null,
             Models.Address billingAddress = null,
             string fingerprint = null,
+            string cardType = null,
+            string prepaidType = null,
             string bin = null)
         {
             Id = id;
@@ -32,6 +34,8 @@ namespace Square.Models
             CardholderName = cardholderName;
             BillingAddress = billingAddress;
             Fingerprint = fingerprint;
+            CardType = cardType;
+            PrepaidType = prepaidType;
             Bin = bin;
         }
 
@@ -86,6 +90,18 @@ namespace Square.Models
         public string Fingerprint { get; }
 
         /// <summary>
+        /// Indicates a card's type, such as `CREDIT` or `DEBIT`.
+        /// </summary>
+        [JsonProperty("card_type")]
+        public string CardType { get; }
+
+        /// <summary>
+        /// Indicates a card's prepaid type, such as `NOT_PREPAID` or `PREPAID`.
+        /// </summary>
+        [JsonProperty("prepaid_type")]
+        public string PrepaidType { get; }
+
+        /// <summary>
         /// The first six digits of the card number, known as the Bank Identification Number (BIN). Only the Payments API
         /// returns this field.
         /// </summary>
@@ -103,6 +119,8 @@ namespace Square.Models
                 .CardholderName(CardholderName)
                 .BillingAddress(BillingAddress)
                 .Fingerprint(Fingerprint)
+                .CardType(CardType)
+                .PrepaidType(PrepaidType)
                 .Bin(Bin);
             return builder;
         }
@@ -117,6 +135,8 @@ namespace Square.Models
             private string cardholderName;
             private Models.Address billingAddress;
             private string fingerprint;
+            private string cardType;
+            private string prepaidType;
             private string bin;
 
             public Builder() { }
@@ -168,6 +188,18 @@ namespace Square.Models
                 return this;
             }
 
+            public Builder CardType(string value)
+            {
+                cardType = value;
+                return this;
+            }
+
+            public Builder PrepaidType(string value)
+            {
+                prepaidType = value;
+                return this;
+            }
+
             public Builder Bin(string value)
             {
                 bin = value;
@@ -184,6 +216,8 @@ namespace Square.Models
                     cardholderName,
                     billingAddress,
                     fingerprint,
+                    cardType,
+                    prepaidType,
                     bin);
             }
         }

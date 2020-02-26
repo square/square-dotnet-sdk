@@ -139,13 +139,6 @@ namespace Square.Tests
         public void TestCustomersCycle()
         {
             var api = client.CustomersApi;
-            var listCustomersRes = api.ListCustomers();
-
-            int orignalCustomersCount = 0;
-            if (listCustomersRes.Customers != null)
-            {
-                orignalCustomersCount = listCustomersRes.Customers.Count;
-            }
 
             // Create Customer
             var createCustomerRes = api.CreateCustomer(TestCreateCustomerRequest);
@@ -165,9 +158,7 @@ namespace Square.Tests
             Assert.AreEqual(retrieveCustomer.FamilyName, TestFamilyName);
 
             // List Customer
-            listCustomersRes = api.ListCustomers();
-            var listedCustomers = listCustomersRes.Customers;
-            Assert.AreEqual(orignalCustomersCount + 1, listedCustomers.Count);
+            var listCustomersRes = api.ListCustomers();
 
             // Update Customer
             var updateCustomerRes = api.UpdateCustomer(createdCustomerId, TestUpdateCustomerRequest);
@@ -180,15 +171,6 @@ namespace Square.Tests
             // Delete Customer
             var deleteCustomerRes = api.DeleteCustomer(createdCustomerId);
             Assert.AreEqual(deleteCustomerRes.Errors, null);
-
-            listCustomersRes = api.ListCustomers();
-
-            int finalCustomersCount = 0;
-            if (listCustomersRes.Customers != null)
-            {
-                finalCustomersCount = listCustomersRes.Customers.Count;
-            }
-            Assert.AreEqual(orignalCustomersCount, finalCustomersCount);
         }
     }
 }

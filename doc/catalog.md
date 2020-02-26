@@ -245,14 +245,14 @@ var bodyBatches0Objects3 = new CatalogObject.Builder(
     .Build();
 bodyBatches0Objects.Add(bodyBatches0Objects3);
 
-var bodyBatches0 = new CatalogObjectBatch.Builder()
-    .Objects(bodyBatches0Objects)
+var bodyBatches0 = new CatalogObjectBatch.Builder(
+        bodyBatches0Objects)
     .Build();
 bodyBatches.Add(bodyBatches0);
 
 var body = new BatchUpsertCatalogObjectsRequest.Builder(
-        "789ff020-f723-43a9-b4b5-43b5dc1fa3dc")
-    .Batches(bodyBatches)
+        "789ff020-f723-43a9-b4b5-43b5dc1fa3dc",
+        bodyBatches)
     .Build();
 
 try

@@ -15,7 +15,7 @@ namespace Square.Models
     public class BatchUpsertCatalogObjectsRequest 
     {
         public BatchUpsertCatalogObjectsRequest(string idempotencyKey,
-            IList<Models.CatalogObjectBatch> batches = null)
+            IList<Models.CatalogObjectBatch> batches)
         {
             IdempotencyKey = idempotencyKey;
             Batches = batches;
@@ -57,19 +57,21 @@ namespace Square.Models
 
         public Builder ToBuilder()
         {
-            var builder = new Builder(IdempotencyKey)
-                .Batches(Batches);
+            var builder = new Builder(IdempotencyKey,
+                Batches);
             return builder;
         }
 
         public class Builder
         {
             private string idempotencyKey;
-            private IList<Models.CatalogObjectBatch> batches = new List<Models.CatalogObjectBatch>();
+            private IList<Models.CatalogObjectBatch> batches;
 
-            public Builder(string idempotencyKey)
+            public Builder(string idempotencyKey,
+                IList<Models.CatalogObjectBatch> batches)
             {
                 this.idempotencyKey = idempotencyKey;
+                this.batches = batches;
             }
             public Builder IdempotencyKey(string value)
             {

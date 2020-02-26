@@ -18,6 +18,7 @@ the modifier list are allowed.
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `Name` | `string` | Optional | A searchable name for the `CatalogModifierList`. This field has max length of 255 Unicode code points. |
+| `Ordinal` | `int?` | Optional | Determines where this `CatalogModifierList` appears in a list of `CatalogModifierList` values. |
 | `SelectionType` | [`string`](/doc/models/catalog-modifier-list-selection-type.md) | Optional | Indicates whether a CatalogModifierList supports multiple selections. |
 | `Modifiers` | [`IList<Models.CatalogObject>`](/doc/models/catalog-object.md) | Optional | The options included in the `CatalogModifierList`.<br>You must include at least one `CatalogModifier`.<br>Each CatalogObject must have type `MODIFIER` and contain<br>`CatalogModifier` data. |
 

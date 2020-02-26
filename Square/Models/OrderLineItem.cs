@@ -23,8 +23,6 @@ namespace Square.Models
             string variationName = null,
             IDictionary<string, string> metadata = null,
             IList<Models.OrderLineItemModifier> modifiers = null,
-            IList<Models.OrderLineItemTax> taxes = null,
-            IList<Models.OrderLineItemDiscount> discounts = null,
             IList<Models.OrderLineItemAppliedTax> appliedTaxes = null,
             IList<Models.OrderLineItemAppliedDiscount> appliedDiscounts = null,
             Models.Money basePriceMoney = null,
@@ -43,8 +41,6 @@ namespace Square.Models
             VariationName = variationName;
             Metadata = metadata;
             Modifiers = modifiers;
-            Taxes = taxes;
-            Discounts = discounts;
             AppliedTaxes = appliedTaxes;
             AppliedDiscounts = appliedDiscounts;
             BasePriceMoney = basePriceMoney;
@@ -124,28 +120,6 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("modifiers")]
         public IList<Models.OrderLineItemModifier> Modifiers { get; }
-
-        /// <summary>
-        /// A list of taxes applied to this line item. On read or retrieve, this list includes both
-        /// item-level taxes and any order-level taxes apportioned to this item. When creating an Order,
-        /// set your item-level taxes in this list.
-        /// This field has been deprecated in favour of `applied_taxes`. Usage of both this field and
-        /// `applied_taxes` when creating an order will result in an error. Usage of this field when
-        /// sending requests to the UpdateOrder endpoint will result in an error.
-        /// </summary>
-        [JsonProperty("taxes")]
-        public IList<Models.OrderLineItemTax> Taxes { get; }
-
-        /// <summary>
-        /// A list of discounts applied to this line item. On read or retrieve, this list includes
-        /// both item-level discounts and any order-level discounts apportioned to this item. When
-        /// creating an Order, set your item-level discounts in this list.
-        /// This field has been deprecated in favour of `applied_discounts`. Usage of both this field and
-        /// `applied_discounts` when creating an order will result in an error. Usage of this field when
-        /// sending requests to the UpdateOrder endpoint will result in an error.
-        /// </summary>
-        [JsonProperty("discounts")]
-        public IList<Models.OrderLineItemDiscount> Discounts { get; }
 
         /// <summary>
         /// The list of references to taxes applied to this line item. Each
@@ -252,8 +226,6 @@ namespace Square.Models
                 .VariationName(VariationName)
                 .Metadata(Metadata)
                 .Modifiers(Modifiers)
-                .Taxes(Taxes)
-                .Discounts(Discounts)
                 .AppliedTaxes(AppliedTaxes)
                 .AppliedDiscounts(AppliedDiscounts)
                 .BasePriceMoney(BasePriceMoney)
@@ -276,8 +248,6 @@ namespace Square.Models
             private string variationName;
             private IDictionary<string, string> metadata = new Dictionary<string, string>();
             private IList<Models.OrderLineItemModifier> modifiers = new List<Models.OrderLineItemModifier>();
-            private IList<Models.OrderLineItemTax> taxes = new List<Models.OrderLineItemTax>();
-            private IList<Models.OrderLineItemDiscount> discounts = new List<Models.OrderLineItemDiscount>();
             private IList<Models.OrderLineItemAppliedTax> appliedTaxes = new List<Models.OrderLineItemAppliedTax>();
             private IList<Models.OrderLineItemAppliedDiscount> appliedDiscounts = new List<Models.OrderLineItemAppliedDiscount>();
             private Models.Money basePriceMoney;
@@ -345,18 +315,6 @@ namespace Square.Models
                 return this;
             }
 
-            public Builder Taxes(IList<Models.OrderLineItemTax> value)
-            {
-                taxes = value;
-                return this;
-            }
-
-            public Builder Discounts(IList<Models.OrderLineItemDiscount> value)
-            {
-                discounts = value;
-                return this;
-            }
-
             public Builder AppliedTaxes(IList<Models.OrderLineItemAppliedTax> value)
             {
                 appliedTaxes = value;
@@ -416,8 +374,6 @@ namespace Square.Models
                     variationName,
                     metadata,
                     modifiers,
-                    taxes,
-                    discounts,
                     appliedTaxes,
                     appliedDiscounts,
                     basePriceMoney,
