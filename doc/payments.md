@@ -43,7 +43,7 @@ ListPaymentsAsync(
 | `endTime` | `string` | Query, Optional | Timestamp for the end of the requested reporting period, in RFC 3339 format.<br><br>Default: The current time. |
 | `sortOrder` | `string` | Query, Optional | The order in which results are listed.<br>- `ASC` - oldest to newest<br>- `DESC` - newest to oldest (default). |
 | `cursor` | `string` | Query, Optional | A pagination cursor returned by a previous call to this endpoint.<br>Provide this to retrieve the next set of results for the original query.<br><br>See [Pagination](https://developer.squareup.com/docs/basics/api101/pagination) for more information. |
-| `locationId` | `string` | Query, Optional | ID of location associated with payment |
+| `locationId` | `string` | Query, Optional | Limit results to the location supplied. By default, results are returned<br>for all locations associated with the merchant. |
 | `total` | `long?` | Query, Optional | The exact amount in the total_money for a `Payment`. |
 | `last4` | `string` | Query, Optional | The last 4 digits of `Payment` card. |
 | `cardBrand` | `string` | Query, Optional | The brand of `Payment` card. For example, `VISA` |
@@ -124,15 +124,16 @@ catch (ApiException e){};
 
 ## Cancel Payment by Idempotency Key
 
-Cancels (voids) a payment identified by the idempotency key that is specified in the request. 
+Cancels (voids) a payment identified by the idempotency key that is specified in the
+request.
 
-Use this method when status of a CreatePayment request is unknown. 
-For example, after you send a CreatePayment 
-request a network error occurs and you don't get a response. In this case, you can direct 
-Square to cancel the payment using this endpoint. In the request, you provide the same idempotency 
-key that you provided in your CreatePayment request you want  to cancel. After cancelling the 
-payment, you can submit your CreatePayment request again. 
-Note that if no payment with the specified idempotency key is found, no action is taken, the end 
+Use this method when status of a CreatePayment request is unknown. For example, after you send a
+CreatePayment request a network error occurs and you don't get a response. In this case, you can
+direct Square to cancel the payment using this endpoint. In the request, you provide the same
+idempotency key that you provided in your CreatePayment request you want  to cancel. After
+cancelling the payment, you can submit your CreatePayment request again.
+
+Note that if no payment with the specified idempotency key is found, no action is taken, the end
 point returns successfully.
 
 ```csharp

@@ -15,10 +15,14 @@ namespace Square.Models
     public class CatalogModifier 
     {
         public CatalogModifier(string name = null,
-            Models.Money priceMoney = null)
+            Models.Money priceMoney = null,
+            int? ordinal = null,
+            string modifierListId = null)
         {
             Name = name;
             PriceMoney = priceMoney;
+            Ordinal = ordinal;
+            ModifierListId = modifierListId;
         }
 
         /// <summary>
@@ -38,11 +42,25 @@ namespace Square.Models
         [JsonProperty("price_money")]
         public Models.Money PriceMoney { get; }
 
+        /// <summary>
+        /// Determines where this `CatalogModifier` appears in the `CatalogModifierList`.
+        /// </summary>
+        [JsonProperty("ordinal")]
+        public int? Ordinal { get; }
+
+        /// <summary>
+        /// The ID of the `CatalogModifierList` associated with this modifier. Searchable.
+        /// </summary>
+        [JsonProperty("modifier_list_id")]
+        public string ModifierListId { get; }
+
         public Builder ToBuilder()
         {
             var builder = new Builder()
                 .Name(Name)
-                .PriceMoney(PriceMoney);
+                .PriceMoney(PriceMoney)
+                .Ordinal(Ordinal)
+                .ModifierListId(ModifierListId);
             return builder;
         }
 
@@ -50,6 +68,8 @@ namespace Square.Models
         {
             private string name;
             private Models.Money priceMoney;
+            private int? ordinal;
+            private string modifierListId;
 
             public Builder() { }
             public Builder Name(string value)
@@ -64,10 +84,24 @@ namespace Square.Models
                 return this;
             }
 
+            public Builder Ordinal(int? value)
+            {
+                ordinal = value;
+                return this;
+            }
+
+            public Builder ModifierListId(string value)
+            {
+                modifierListId = value;
+                return this;
+            }
+
             public CatalogModifier Build()
             {
                 return new CatalogModifier(name,
-                    priceMoney);
+                    priceMoney,
+                    ordinal,
+                    modifierListId);
             }
         }
     }

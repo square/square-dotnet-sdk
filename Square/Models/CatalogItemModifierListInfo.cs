@@ -52,7 +52,7 @@ namespace Square.Models
         public int? MaxSelectedModifiers { get; }
 
         /// <summary>
-        /// If `true`, enable this `CatalogModifierList`.
+        /// If `true`, enable this `CatalogModifierList`. The default value is `true`.
         /// </summary>
         [JsonProperty("enabled")]
         public bool? Enabled { get; }

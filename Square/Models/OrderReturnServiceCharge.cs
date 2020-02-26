@@ -25,7 +25,6 @@ namespace Square.Models
             Models.Money totalTaxMoney = null,
             string calculationPhase = null,
             bool? taxable = null,
-            IList<Models.OrderReturnTax> returnTaxes = null,
             IList<Models.OrderLineItemAppliedTax> appliedTaxes = null)
         {
             Uid = uid;
@@ -39,7 +38,6 @@ namespace Square.Models
             TotalTaxMoney = totalTaxMoney;
             CalculationPhase = calculationPhase;
             Taxable = taxable;
-            ReturnTaxes = returnTaxes;
             AppliedTaxes = appliedTaxes;
         }
 
@@ -138,16 +136,6 @@ namespace Square.Models
         public bool? Taxable { get; }
 
         /// <summary>
-        /// Taxes applied to the `OrderReturnServiceCharge`. By default, return-level taxes apply to
-        /// `OrderReturnServiceCharge`s calculated in the `SUBTOTAL_PHASE` if `taxable` is set to `true`.  On
-        /// read or retrieve, this list includes both item-level taxes and any return-level taxes
-        /// apportioned to this item.
-        /// This field has been deprecated in favour of `applied_taxes`.
-        /// </summary>
-        [JsonProperty("return_taxes")]
-        public IList<Models.OrderReturnTax> ReturnTaxes { get; }
-
-        /// <summary>
         /// The list of references to `OrderReturnTax` entities applied to the
         /// `OrderReturnServiceCharge`. Each `OrderLineItemAppliedTax` has a `tax_uid`
         /// that references the `uid` of a top-level `OrderReturnTax` that is being
@@ -171,7 +159,6 @@ namespace Square.Models
                 .TotalTaxMoney(TotalTaxMoney)
                 .CalculationPhase(CalculationPhase)
                 .Taxable(Taxable)
-                .ReturnTaxes(ReturnTaxes)
                 .AppliedTaxes(AppliedTaxes);
             return builder;
         }
@@ -189,7 +176,6 @@ namespace Square.Models
             private Models.Money totalTaxMoney;
             private string calculationPhase;
             private bool? taxable;
-            private IList<Models.OrderReturnTax> returnTaxes = new List<Models.OrderReturnTax>();
             private IList<Models.OrderLineItemAppliedTax> appliedTaxes = new List<Models.OrderLineItemAppliedTax>();
 
             public Builder() { }
@@ -259,12 +245,6 @@ namespace Square.Models
                 return this;
             }
 
-            public Builder ReturnTaxes(IList<Models.OrderReturnTax> value)
-            {
-                returnTaxes = value;
-                return this;
-            }
-
             public Builder AppliedTaxes(IList<Models.OrderLineItemAppliedTax> value)
             {
                 appliedTaxes = value;
@@ -284,7 +264,6 @@ namespace Square.Models
                     totalTaxMoney,
                     calculationPhase,
                     taxable,
-                    returnTaxes,
                     appliedTaxes);
             }
         }

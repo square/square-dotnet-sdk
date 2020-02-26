@@ -15,10 +15,12 @@ namespace Square.Models
     public class CatalogModifierList 
     {
         public CatalogModifierList(string name = null,
+            int? ordinal = null,
             string selectionType = null,
             IList<Models.CatalogObject> modifiers = null)
         {
             Name = name;
+            Ordinal = ordinal;
             SelectionType = selectionType;
             Modifiers = modifiers;
         }
@@ -28,6 +30,12 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("name")]
         public string Name { get; }
+
+        /// <summary>
+        /// Determines where this `CatalogModifierList` appears in a list of `CatalogModifierList` values.
+        /// </summary>
+        [JsonProperty("ordinal")]
+        public int? Ordinal { get; }
 
         /// <summary>
         /// Indicates whether a CatalogModifierList supports multiple selections.
@@ -48,6 +56,7 @@ namespace Square.Models
         {
             var builder = new Builder()
                 .Name(Name)
+                .Ordinal(Ordinal)
                 .SelectionType(SelectionType)
                 .Modifiers(Modifiers);
             return builder;
@@ -56,6 +65,7 @@ namespace Square.Models
         public class Builder
         {
             private string name;
+            private int? ordinal;
             private string selectionType;
             private IList<Models.CatalogObject> modifiers = new List<Models.CatalogObject>();
 
@@ -63,6 +73,12 @@ namespace Square.Models
             public Builder Name(string value)
             {
                 name = value;
+                return this;
+            }
+
+            public Builder Ordinal(int? value)
+            {
+                ordinal = value;
                 return this;
             }
 
@@ -81,6 +97,7 @@ namespace Square.Models
             public CatalogModifierList Build()
             {
                 return new CatalogModifierList(name,
+                    ordinal,
                     selectionType,
                     modifiers);
             }

@@ -76,7 +76,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-01-22" }
+                { "Square-Version", "2020-02-26" }
             };
 
             //prepare the API call request to fetch the response
@@ -99,7 +99,9 @@ namespace Square.Apis
             //handle errors defined at the API level
             base.ValidateResponse(_response, _context);
 
-            return ApiHelper.JsonDeserialize<List<Models.V1Category>>(_response.Body);
+            var _responseModels = ApiHelper.JsonDeserialize<List<Models.V1Category>>(_response.Body);
+            _responseModels.ForEach(r => r.Context = _context);
+            return _responseModels;
         }
 
         /// <summary>
@@ -157,7 +159,7 @@ namespace Square.Apis
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
-                { "Square-Version", "2020-01-22" }
+                { "Square-Version", "2020-02-26" }
             };
 
             //append body params
@@ -249,7 +251,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-01-22" }
+                { "Square-Version", "2020-02-26" }
             };
 
             //prepare the API call request to fetch the response
@@ -335,7 +337,7 @@ namespace Square.Apis
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
-                { "Square-Version", "2020-01-22" }
+                { "Square-Version", "2020-02-26" }
             };
 
             //append body params
@@ -418,7 +420,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-01-22" }
+                { "Square-Version", "2020-02-26" }
             };
 
             //prepare the API call request to fetch the response
@@ -441,7 +443,9 @@ namespace Square.Apis
             //handle errors defined at the API level
             base.ValidateResponse(_response, _context);
 
-            return ApiHelper.JsonDeserialize<List<Models.V1Discount>>(_response.Body);
+            var _responseModels = ApiHelper.JsonDeserialize<List<Models.V1Discount>>(_response.Body);
+            _responseModels.ForEach(r => r.Context = _context);
+            return _responseModels;
         }
 
         /// <summary>
@@ -499,7 +503,7 @@ namespace Square.Apis
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
-                { "Square-Version", "2020-01-22" }
+                { "Square-Version", "2020-02-26" }
             };
 
             //append body params
@@ -591,7 +595,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-01-22" }
+                { "Square-Version", "2020-02-26" }
             };
 
             //prepare the API call request to fetch the response
@@ -677,7 +681,7 @@ namespace Square.Apis
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
-                { "Square-Version", "2020-01-22" }
+                { "Square-Version", "2020-02-26" }
             };
 
             //append body params
@@ -760,7 +764,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-01-22" }
+                { "Square-Version", "2020-02-26" }
             };
 
             //prepare the API call request to fetch the response
@@ -783,7 +787,9 @@ namespace Square.Apis
             //handle errors defined at the API level
             base.ValidateResponse(_response, _context);
 
-            return ApiHelper.JsonDeserialize<List<Models.V1Fee>>(_response.Body);
+            var _responseModels = ApiHelper.JsonDeserialize<List<Models.V1Fee>>(_response.Body);
+            _responseModels.ForEach(r => r.Context = _context);
+            return _responseModels;
         }
 
         /// <summary>
@@ -841,7 +847,7 @@ namespace Square.Apis
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
-                { "Square-Version", "2020-01-22" }
+                { "Square-Version", "2020-02-26" }
             };
 
             //append body params
@@ -933,7 +939,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-01-22" }
+                { "Square-Version", "2020-02-26" }
             };
 
             //prepare the API call request to fetch the response
@@ -1019,7 +1025,7 @@ namespace Square.Apis
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
-                { "Square-Version", "2020-01-22" }
+                { "Square-Version", "2020-02-26" }
             };
 
             //append body params
@@ -1115,7 +1121,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-01-22" }
+                { "Square-Version", "2020-02-26" }
             };
 
             //prepare the API call request to fetch the response
@@ -1138,7 +1144,9 @@ namespace Square.Apis
             //handle errors defined at the API level
             base.ValidateResponse(_response, _context);
 
-            return ApiHelper.JsonDeserialize<List<Models.V1InventoryEntry>>(_response.Body);
+            var _responseModels = ApiHelper.JsonDeserialize<List<Models.V1InventoryEntry>>(_response.Body);
+            _responseModels.ForEach(r => r.Context = _context);
+            return _responseModels;
         }
 
         /// <summary>
@@ -1199,7 +1207,7 @@ namespace Square.Apis
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
-                { "Square-Version", "2020-01-22" }
+                { "Square-Version", "2020-02-26" }
             };
 
             //append body params
@@ -1290,7 +1298,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-01-22" }
+                { "Square-Version", "2020-02-26" }
             };
 
             //prepare the API call request to fetch the response
@@ -1313,7 +1321,9 @@ namespace Square.Apis
             //handle errors defined at the API level
             base.ValidateResponse(_response, _context);
 
-            return ApiHelper.JsonDeserialize<List<Models.V1Item>>(_response.Body);
+            var _responseModels = ApiHelper.JsonDeserialize<List<Models.V1Item>>(_response.Body);
+            _responseModels.ForEach(r => r.Context = _context);
+            return _responseModels;
         }
 
         /// <summary>
@@ -1387,7 +1397,7 @@ namespace Square.Apis
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
-                { "Square-Version", "2020-01-22" }
+                { "Square-Version", "2020-02-26" }
             };
 
             //append body params
@@ -1479,7 +1489,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-01-22" }
+                { "Square-Version", "2020-02-26" }
             };
 
             //prepare the API call request to fetch the response
@@ -1564,7 +1574,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-01-22" }
+                { "Square-Version", "2020-02-26" }
             };
 
             //prepare the API call request to fetch the response
@@ -1650,7 +1660,7 @@ namespace Square.Apis
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
-                { "Square-Version", "2020-01-22" }
+                { "Square-Version", "2020-02-26" }
             };
 
             //append body params
@@ -1741,7 +1751,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-01-22" }
+                { "Square-Version", "2020-02-26" }
             };
 
             //prepare the API call request to fetch the response
@@ -1829,7 +1839,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-01-22" }
+                { "Square-Version", "2020-02-26" }
             };
 
             //prepare the API call request to fetch the response
@@ -1917,7 +1927,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-01-22" }
+                { "Square-Version", "2020-02-26" }
             };
 
             //prepare the API call request to fetch the response
@@ -2005,7 +2015,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-01-22" }
+                { "Square-Version", "2020-02-26" }
             };
 
             //prepare the API call request to fetch the response
@@ -2091,7 +2101,7 @@ namespace Square.Apis
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
-                { "Square-Version", "2020-01-22" }
+                { "Square-Version", "2020-02-26" }
             };
 
             //append body params
@@ -2186,7 +2196,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-01-22" }
+                { "Square-Version", "2020-02-26" }
             };
 
             //prepare the API call request to fetch the response
@@ -2283,7 +2293,7 @@ namespace Square.Apis
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
-                { "Square-Version", "2020-01-22" }
+                { "Square-Version", "2020-02-26" }
             };
 
             //append body params
@@ -2366,7 +2376,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-01-22" }
+                { "Square-Version", "2020-02-26" }
             };
 
             //prepare the API call request to fetch the response
@@ -2389,7 +2399,9 @@ namespace Square.Apis
             //handle errors defined at the API level
             base.ValidateResponse(_response, _context);
 
-            return ApiHelper.JsonDeserialize<List<Models.V1ModifierList>>(_response.Body);
+            var _responseModels = ApiHelper.JsonDeserialize<List<Models.V1ModifierList>>(_response.Body);
+            _responseModels.ForEach(r => r.Context = _context);
+            return _responseModels;
         }
 
         /// <summary>
@@ -2447,7 +2459,7 @@ namespace Square.Apis
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
-                { "Square-Version", "2020-01-22" }
+                { "Square-Version", "2020-02-26" }
             };
 
             //append body params
@@ -2541,7 +2553,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-01-22" }
+                { "Square-Version", "2020-02-26" }
             };
 
             //prepare the API call request to fetch the response
@@ -2624,7 +2636,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-01-22" }
+                { "Square-Version", "2020-02-26" }
             };
 
             //prepare the API call request to fetch the response
@@ -2710,7 +2722,7 @@ namespace Square.Apis
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
-                { "Square-Version", "2020-01-22" }
+                { "Square-Version", "2020-02-26" }
             };
 
             //append body params
@@ -2799,7 +2811,7 @@ namespace Square.Apis
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
-                { "Square-Version", "2020-01-22" }
+                { "Square-Version", "2020-02-26" }
             };
 
             //append body params
@@ -2894,7 +2906,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-01-22" }
+                { "Square-Version", "2020-02-26" }
             };
 
             //prepare the API call request to fetch the response
@@ -2991,7 +3003,7 @@ namespace Square.Apis
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
-                { "Square-Version", "2020-01-22" }
+                { "Square-Version", "2020-02-26" }
             };
 
             //append body params
@@ -3076,7 +3088,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-01-22" }
+                { "Square-Version", "2020-02-26" }
             };
 
             //prepare the API call request to fetch the response
@@ -3099,7 +3111,9 @@ namespace Square.Apis
             //handle errors defined at the API level
             base.ValidateResponse(_response, _context);
 
-            return ApiHelper.JsonDeserialize<List<Models.V1Page>>(_response.Body);
+            var _responseModels = ApiHelper.JsonDeserialize<List<Models.V1Page>>(_response.Body);
+            _responseModels.ForEach(r => r.Context = _context);
+            return _responseModels;
         }
 
         /// <summary>
@@ -3157,7 +3171,7 @@ namespace Square.Apis
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
-                { "Square-Version", "2020-01-22" }
+                { "Square-Version", "2020-02-26" }
             };
 
             //append body params
@@ -3247,7 +3261,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-01-22" }
+                { "Square-Version", "2020-02-26" }
             };
 
             //prepare the API call request to fetch the response
@@ -3333,7 +3347,7 @@ namespace Square.Apis
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
-                { "Square-Version", "2020-01-22" }
+                { "Square-Version", "2020-02-26" }
             };
 
             //append body params
@@ -3444,7 +3458,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-01-22" }
+                { "Square-Version", "2020-02-26" }
             };
 
             //prepare the API call request to fetch the response
@@ -3530,7 +3544,7 @@ namespace Square.Apis
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
-                { "Square-Version", "2020-01-22" }
+                { "Square-Version", "2020-02-26" }
             };
 
             //append body params

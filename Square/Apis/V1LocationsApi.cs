@@ -68,7 +68,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-01-22" }
+                { "Square-Version", "2020-02-26" }
             };
 
             //prepare the API call request to fetch the response
@@ -142,7 +142,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-01-22" }
+                { "Square-Version", "2020-02-26" }
             };
 
             //prepare the API call request to fetch the response
@@ -165,7 +165,9 @@ namespace Square.Apis
             //handle errors defined at the API level
             base.ValidateResponse(_response, _context);
 
-            return ApiHelper.JsonDeserialize<List<Models.V1Merchant>>(_response.Body);
+            var _responseModels = ApiHelper.JsonDeserialize<List<Models.V1Merchant>>(_response.Body);
+            _responseModels.ForEach(r => r.Context = _context);
+            return _responseModels;
         }
 
     }

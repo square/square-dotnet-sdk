@@ -18,32 +18,56 @@ namespace Square.Apis
     {
         /// <summary>
         /// Provides non-confidential details for all of a location's associated bank accounts. This endpoint does not provide full bank account numbers, and there is no way to obtain a full bank account number with the Connect API.
+        /// ---
+        /// - __Deprecation date__: 2020-02-26
+        /// - [__Retirement date__](https://developer.squareup.com/docs/docs/build-basics/api-lifecycle#deprecated): 2021-02-26
+        /// - [Migration guide](https://developer.squareup.com/docs/docs/migrate-from-v1/guides/v1-bankaccounts)
+        /// ---
         /// </summary>
         /// <param name="locationId">Required parameter: The ID of the location to list bank accounts for.</param>
         /// <return>Returns the List<Models.V1BankAccount> response from the API call</return>
+        [Obsolete]
         List<Models.V1BankAccount> ListBankAccounts(string locationId);
 
         /// <summary>
         /// Provides non-confidential details for all of a location's associated bank accounts. This endpoint does not provide full bank account numbers, and there is no way to obtain a full bank account number with the Connect API.
+        /// ---
+        /// - __Deprecation date__: 2020-02-26
+        /// - [__Retirement date__](https://developer.squareup.com/docs/docs/build-basics/api-lifecycle#deprecated): 2021-02-26
+        /// - [Migration guide](https://developer.squareup.com/docs/docs/migrate-from-v1/guides/v1-bankaccounts)
+        /// ---
         /// </summary>
         /// <param name="locationId">Required parameter: The ID of the location to list bank accounts for.</param>
         /// <return>Returns the List<Models.V1BankAccount> response from the API call</return>
+        [Obsolete]
         Task<List<Models.V1BankAccount>> ListBankAccountsAsync(string locationId, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Provides non-confidential details for a merchant's associated bank account. This endpoint does not provide full bank account numbers, and there is no way to obtain a full bank account number with the Connect API.
+        /// ---
+        /// - __Deprecation date__: 2020-02-26
+        /// - [__Retirement date__](https://developer.squareup.com/docs/docs/build-basics/api-lifecycle#deprecated): 2021-02-26
+        /// - [Migration guide](https://developer.squareup.com/docs/docs/migrate-from-v1/guides/v1-bankaccounts)
+        /// ---
         /// </summary>
         /// <param name="locationId">Required parameter: The ID of the bank account's associated location.</param>
         /// <param name="bankAccountId">Required parameter: The bank account's Square-issued ID. You obtain this value from Settlement objects returned.</param>
         /// <return>Returns the Models.V1BankAccount response from the API call</return>
+        [Obsolete]
         Models.V1BankAccount RetrieveBankAccount(string locationId, string bankAccountId);
 
         /// <summary>
         /// Provides non-confidential details for a merchant's associated bank account. This endpoint does not provide full bank account numbers, and there is no way to obtain a full bank account number with the Connect API.
+        /// ---
+        /// - __Deprecation date__: 2020-02-26
+        /// - [__Retirement date__](https://developer.squareup.com/docs/docs/build-basics/api-lifecycle#deprecated): 2021-02-26
+        /// - [Migration guide](https://developer.squareup.com/docs/docs/migrate-from-v1/guides/v1-bankaccounts)
+        /// ---
         /// </summary>
         /// <param name="locationId">Required parameter: The ID of the bank account's associated location.</param>
         /// <param name="bankAccountId">Required parameter: The bank account's Square-issued ID. You obtain this value from Settlement objects returned.</param>
         /// <return>Returns the Models.V1BankAccount response from the API call</return>
+        [Obsolete]
         Task<Models.V1BankAccount> RetrieveBankAccountAsync(string locationId, string bankAccountId, CancellationToken cancellationToken = default);
 
         /// <summary>

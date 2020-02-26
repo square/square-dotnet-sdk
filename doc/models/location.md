@@ -26,8 +26,8 @@
 | `BusinessHours` | [`Models.BusinessHours`](/doc/models/business-hours.md) | Optional | Represents the hours of operation for a business location. |
 | `BusinessEmail` | `string` | Optional | The email of the location.<br>This email is visible to the customers of the location.<br>For example, the email appears on customer receipts. |
 | `Description` | `string` | Optional | The description of the location. |
-| `TwitterUsername` | `string` | Optional | The Twitter username of the location without the '&#64;' symbol. |
-| `InstagramUsername` | `string` | Optional | The Instagram username of the location without the '&#64;' symbol. |
+| `TwitterUsername` | `string` | Optional | The Twitter username of the location without the '@' symbol. |
+| `InstagramUsername` | `string` | Optional | The Instagram username of the location without the '@' symbol. |
 | `FacebookUrl` | `string` | Optional | The Facebook profile URL of the location. The URL should begin with 'facebook.com/'. |
 | `Coordinates` | [`Models.Coordinates`](/doc/models/coordinates.md) | Optional | Latitude and longitude coordinates. |
 | `LogoUrl` | `string` | Optional | The URL of the logo image for the location. |

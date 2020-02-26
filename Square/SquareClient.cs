@@ -24,9 +24,11 @@ namespace Square
         private readonly Lazy<IV1TransactionsApi> v1Transactions;
         private readonly Lazy<IV1ItemsApi> v1Items;
         private readonly Lazy<IApplePayApi> applePay;
+        private readonly Lazy<IBankAccountsApi> bankAccounts;
         private readonly Lazy<ICashDrawersApi> cashDrawers;
         private readonly Lazy<ICatalogApi> catalog;
         private readonly Lazy<ICustomersApi> customers;
+        private readonly Lazy<IDisputesApi> disputes;
         private readonly Lazy<IEmployeesApi> employees;
         private readonly Lazy<IInventoryApi> inventory;
         private readonly Lazy<ILaborApi> labor;
@@ -75,6 +77,11 @@ namespace Square
         public IApplePayApi ApplePayApi => applePay.Value;
 
         /// <summary>
+        /// Provides access to BankAccountsApi controller
+        /// </summary>
+        public IBankAccountsApi BankAccountsApi => bankAccounts.Value;
+
+        /// <summary>
         /// Provides access to CashDrawersApi controller
         /// </summary>
         public ICashDrawersApi CashDrawersApi => cashDrawers.Value;
@@ -88,6 +95,11 @@ namespace Square
         /// Provides access to CustomersApi controller
         /// </summary>
         public ICustomersApi CustomersApi => customers.Value;
+
+        /// <summary>
+        /// Provides access to DisputesApi controller
+        /// </summary>
+        public IDisputesApi DisputesApi => disputes.Value;
 
         /// <summary>
         /// Provides access to EmployeesApi controller
@@ -152,12 +164,12 @@ namespace Square
         /// <summary>
         /// Current version of the SDK
         /// </summary>
-        public string SdkVersion => "4.1.0";
+        public string SdkVersion => "5.0.0";
 
         /// <summary>
         /// Version of Square API supported by this SDK
         /// </summary>
-        public string SquareVersion => "2020-01-22";
+        public string SquareVersion => "2020-02-26";
 
         internal static SquareClient CreateFromEnvironment()
         {
@@ -213,12 +225,16 @@ namespace Square
                 () => new V1ItemsApi(this, this.httpClient, authManagers, this.httpCallBack));
             applePay = new Lazy<IApplePayApi>(
                 () => new ApplePayApi(this, this.httpClient, authManagers, this.httpCallBack));
+            bankAccounts = new Lazy<IBankAccountsApi>(
+                () => new BankAccountsApi(this, this.httpClient, authManagers, this.httpCallBack));
             cashDrawers = new Lazy<ICashDrawersApi>(
                 () => new CashDrawersApi(this, this.httpClient, authManagers, this.httpCallBack));
             catalog = new Lazy<ICatalogApi>(
                 () => new CatalogApi(this, this.httpClient, authManagers, this.httpCallBack));
             customers = new Lazy<ICustomersApi>(
                 () => new CustomersApi(this, this.httpClient, authManagers, this.httpCallBack));
+            disputes = new Lazy<IDisputesApi>(
+                () => new DisputesApi(this, this.httpClient, authManagers, this.httpCallBack));
             employees = new Lazy<IEmployeesApi>(
                 () => new EmployeesApi(this, this.httpClient, authManagers, this.httpCallBack));
             inventory = new Lazy<IInventoryApi>(

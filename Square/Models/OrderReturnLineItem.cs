@@ -23,8 +23,6 @@ namespace Square.Models
             string catalogObjectId = null,
             string variationName = null,
             IList<Models.OrderReturnLineItemModifier> returnModifiers = null,
-            IList<Models.OrderReturnTax> returnTaxes = null,
-            IList<Models.OrderReturnDiscount> returnDiscounts = null,
             IList<Models.OrderLineItemAppliedTax> appliedTaxes = null,
             IList<Models.OrderLineItemAppliedDiscount> appliedDiscounts = null,
             Models.Money basePriceMoney = null,
@@ -43,8 +41,6 @@ namespace Square.Models
             CatalogObjectId = catalogObjectId;
             VariationName = variationName;
             ReturnModifiers = returnModifiers;
-            ReturnTaxes = returnTaxes;
-            ReturnDiscounts = returnDiscounts;
             AppliedTaxes = appliedTaxes;
             AppliedDiscounts = appliedDiscounts;
             BasePriceMoney = basePriceMoney;
@@ -112,22 +108,6 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("return_modifiers")]
         public IList<Models.OrderReturnLineItemModifier> ReturnModifiers { get; }
-
-        /// <summary>
-        /// A list of taxes applied to this line item. On read or retrieve, this list includes both
-        /// item-level taxes and any return-level taxes apportioned to this item.
-        /// This field has been deprecated in favour of `applied_taxes`.
-        /// </summary>
-        [JsonProperty("return_taxes")]
-        public IList<Models.OrderReturnTax> ReturnTaxes { get; }
-
-        /// <summary>
-        /// A list of discounts applied to this line item. On read or retrieve, this list includes
-        /// both item-level discounts and any return-level discounts apportioned to this item.
-        /// This field has been deprecated in favour of `applied_discounts`.
-        /// </summary>
-        [JsonProperty("return_discounts")]
-        public IList<Models.OrderReturnDiscount> ReturnDiscounts { get; }
 
         /// <summary>
         /// The list of references to `OrderReturnTax` entities applied to the returned line item. Each
@@ -224,8 +204,6 @@ namespace Square.Models
                 .CatalogObjectId(CatalogObjectId)
                 .VariationName(VariationName)
                 .ReturnModifiers(ReturnModifiers)
-                .ReturnTaxes(ReturnTaxes)
-                .ReturnDiscounts(ReturnDiscounts)
                 .AppliedTaxes(AppliedTaxes)
                 .AppliedDiscounts(AppliedDiscounts)
                 .BasePriceMoney(BasePriceMoney)
@@ -248,8 +226,6 @@ namespace Square.Models
             private string catalogObjectId;
             private string variationName;
             private IList<Models.OrderReturnLineItemModifier> returnModifiers = new List<Models.OrderReturnLineItemModifier>();
-            private IList<Models.OrderReturnTax> returnTaxes = new List<Models.OrderReturnTax>();
-            private IList<Models.OrderReturnDiscount> returnDiscounts = new List<Models.OrderReturnDiscount>();
             private IList<Models.OrderLineItemAppliedTax> appliedTaxes = new List<Models.OrderLineItemAppliedTax>();
             private IList<Models.OrderLineItemAppliedDiscount> appliedDiscounts = new List<Models.OrderLineItemAppliedDiscount>();
             private Models.Money basePriceMoney;
@@ -317,18 +293,6 @@ namespace Square.Models
                 return this;
             }
 
-            public Builder ReturnTaxes(IList<Models.OrderReturnTax> value)
-            {
-                returnTaxes = value;
-                return this;
-            }
-
-            public Builder ReturnDiscounts(IList<Models.OrderReturnDiscount> value)
-            {
-                returnDiscounts = value;
-                return this;
-            }
-
             public Builder AppliedTaxes(IList<Models.OrderLineItemAppliedTax> value)
             {
                 appliedTaxes = value;
@@ -388,8 +352,6 @@ namespace Square.Models
                     catalogObjectId,
                     variationName,
                     returnModifiers,
-                    returnTaxes,
-                    returnDiscounts,
                     appliedTaxes,
                     appliedDiscounts,
                     basePriceMoney,

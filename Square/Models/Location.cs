@@ -187,13 +187,13 @@ namespace Square.Models
         public string Description { get; }
 
         /// <summary>
-        /// The Twitter username of the location without the '&#64;' symbol.
+        /// The Twitter username of the location without the '@' symbol.
         /// </summary>
         [JsonProperty("twitter_username")]
         public string TwitterUsername { get; }
 
         /// <summary>
-        /// The Instagram username of the location without the '&#64;' symbol.
+        /// The Instagram username of the location without the '@' symbol.
         /// </summary>
         [JsonProperty("instagram_username")]
         public string InstagramUsername { get; }

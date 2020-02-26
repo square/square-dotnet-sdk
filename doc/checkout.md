@@ -33,113 +33,92 @@ CreateCheckoutAsync(string locationId, Models.CreateCheckoutRequest body)
 
 ```csharp
 string locationId = "location_id4";
-var bodyOrderLineItems = new List<CreateOrderRequestLineItem>();
+var bodyOrderOrderLineItems = new List<OrderLineItem>();
 
-var bodyOrderLineItems0BasePriceMoney = new Money.Builder()
+var bodyOrderOrderLineItems0AppliedTaxes = new List<OrderLineItemAppliedTax>();
+
+var bodyOrderOrderLineItems0AppliedTaxes0 = new OrderLineItemAppliedTax.Builder(
+        "38ze1696-z1e3-5628-af6d-f1e04d947fg3")
+    .Build();
+bodyOrderOrderLineItems0AppliedTaxes.Add(bodyOrderOrderLineItems0AppliedTaxes0);
+
+var bodyOrderOrderLineItems0AppliedDiscounts = new List<OrderLineItemAppliedDiscount>();
+
+var bodyOrderOrderLineItems0AppliedDiscounts0 = new OrderLineItemAppliedDiscount.Builder(
+        "56ae1696-z1e3-9328-af6d-f1e04d947gd4")
+    .Build();
+bodyOrderOrderLineItems0AppliedDiscounts.Add(bodyOrderOrderLineItems0AppliedDiscounts0);
+
+var bodyOrderOrderLineItems0BasePriceMoney = new Money.Builder()
     .Amount(1500L)
     .Currency("USD")
     .Build();
-var bodyOrderLineItems0Discounts = new List<CreateOrderRequestDiscount>();
-
-var bodyOrderLineItems0Discounts0 = new CreateOrderRequestDiscount.Builder()
-    .Name("7% off previous season item")
-    .Percentage("7")
-    .Build();
-bodyOrderLineItems0Discounts.Add(bodyOrderLineItems0Discounts0);
-
-var bodyOrderLineItems0Discounts1AmountMoney = new Money.Builder()
-    .Amount(300L)
-    .Currency("USD")
-    .Build();
-var bodyOrderLineItems0Discounts1 = new CreateOrderRequestDiscount.Builder()
-    .Name("$3 off Customer Discount")
-    .AmountMoney(bodyOrderLineItems0Discounts1AmountMoney)
-    .Build();
-bodyOrderLineItems0Discounts.Add(bodyOrderLineItems0Discounts1);
-
-var bodyOrderLineItems0 = new CreateOrderRequestLineItem.Builder(
+var bodyOrderOrderLineItems0 = new OrderLineItem.Builder(
         "2")
     .Name("Printed T Shirt")
-    .BasePriceMoney(bodyOrderLineItems0BasePriceMoney)
-    .Discounts(bodyOrderLineItems0Discounts)
+    .AppliedTaxes(bodyOrderOrderLineItems0AppliedTaxes)
+    .AppliedDiscounts(bodyOrderOrderLineItems0AppliedDiscounts)
+    .BasePriceMoney(bodyOrderOrderLineItems0BasePriceMoney)
     .Build();
-bodyOrderLineItems.Add(bodyOrderLineItems0);
+bodyOrderOrderLineItems.Add(bodyOrderOrderLineItems0);
 
-var bodyOrderLineItems1BasePriceMoney = new Money.Builder()
+var bodyOrderOrderLineItems1BasePriceMoney = new Money.Builder()
     .Amount(2500L)
     .Currency("USD")
     .Build();
-var bodyOrderLineItems1 = new CreateOrderRequestLineItem.Builder(
+var bodyOrderOrderLineItems1 = new OrderLineItem.Builder(
         "1")
     .Name("Slim Jeans")
-    .BasePriceMoney(bodyOrderLineItems1BasePriceMoney)
+    .BasePriceMoney(bodyOrderOrderLineItems1BasePriceMoney)
     .Build();
-bodyOrderLineItems.Add(bodyOrderLineItems1);
+bodyOrderOrderLineItems.Add(bodyOrderOrderLineItems1);
 
-var bodyOrderLineItems2BasePriceMoney = new Money.Builder()
+var bodyOrderOrderLineItems2BasePriceMoney = new Money.Builder()
     .Amount(3500L)
     .Currency("USD")
     .Build();
-var bodyOrderLineItems2Taxes = new List<CreateOrderRequestTax>();
-
-var bodyOrderLineItems2Taxes0 = new CreateOrderRequestTax.Builder()
-    .Name("Fair Trade Tax")
-    .Percentage("5")
-    .Build();
-bodyOrderLineItems2Taxes.Add(bodyOrderLineItems2Taxes0);
-
-var bodyOrderLineItems2Discounts = new List<CreateOrderRequestDiscount>();
-
-var bodyOrderLineItems2Discounts0AmountMoney = new Money.Builder()
-    .Amount(1100L)
-    .Currency("USD")
-    .Build();
-var bodyOrderLineItems2Discounts0 = new CreateOrderRequestDiscount.Builder()
-    .Name("$11 off Customer Discount")
-    .AmountMoney(bodyOrderLineItems2Discounts0AmountMoney)
-    .Build();
-bodyOrderLineItems2Discounts.Add(bodyOrderLineItems2Discounts0);
-
-var bodyOrderLineItems2 = new CreateOrderRequestLineItem.Builder(
+var bodyOrderOrderLineItems2 = new OrderLineItem.Builder(
         "3")
     .Name("Woven Sweater")
-    .BasePriceMoney(bodyOrderLineItems2BasePriceMoney)
-    .Taxes(bodyOrderLineItems2Taxes)
-    .Discounts(bodyOrderLineItems2Discounts)
+    .BasePriceMoney(bodyOrderOrderLineItems2BasePriceMoney)
     .Build();
-bodyOrderLineItems.Add(bodyOrderLineItems2);
+bodyOrderOrderLineItems.Add(bodyOrderOrderLineItems2);
 
-var bodyOrderTaxes = new List<CreateOrderRequestTax>();
+var bodyOrderOrderTaxes = new List<OrderLineItemTax>();
 
-var bodyOrderTaxes0 = new CreateOrderRequestTax.Builder()
-    .Name("Sales Tax")
-    .Percentage("8.5")
+var bodyOrderOrderTaxes0 = new OrderLineItemTax.Builder()
+    .Uid("38ze1696-z1e3-5628-af6d-f1e04d947fg3")
+    .Type("INCLUSIVE")
+    .Percentage("7.75")
+    .Scope("LINE_ITEM")
     .Build();
-bodyOrderTaxes.Add(bodyOrderTaxes0);
+bodyOrderOrderTaxes.Add(bodyOrderOrderTaxes0);
 
-var bodyOrderDiscounts = new List<CreateOrderRequestDiscount>();
+var bodyOrderOrderDiscounts = new List<OrderLineItemDiscount>();
 
-var bodyOrderDiscounts0 = new CreateOrderRequestDiscount.Builder()
-    .Name("Father's day 12% OFF")
-    .Percentage("12")
-    .Build();
-bodyOrderDiscounts.Add(bodyOrderDiscounts0);
-
-var bodyOrderDiscounts1AmountMoney = new Money.Builder()
-    .Amount(5500L)
+var bodyOrderOrderDiscounts0AmountMoney = new Money.Builder()
+    .Amount(100L)
     .Currency("USD")
     .Build();
-var bodyOrderDiscounts1 = new CreateOrderRequestDiscount.Builder()
-    .Name("Global Sales $55 OFF")
-    .AmountMoney(bodyOrderDiscounts1AmountMoney)
+var bodyOrderOrderDiscounts0 = new OrderLineItemDiscount.Builder()
+    .Uid("56ae1696-z1e3-9328-af6d-f1e04d947gd4")
+    .Type("FIXED_AMOUNT")
+    .AmountMoney(bodyOrderOrderDiscounts0AmountMoney)
+    .Scope("LINE_ITEM")
     .Build();
-bodyOrderDiscounts.Add(bodyOrderDiscounts1);
+bodyOrderOrderDiscounts.Add(bodyOrderOrderDiscounts0);
 
-var bodyOrder = new CreateOrderRequest.Builder()
+var bodyOrderOrder = new Order.Builder(
+        "location_id")
     .ReferenceId("reference_id")
-    .LineItems(bodyOrderLineItems)
-    .Taxes(bodyOrderTaxes)
-    .Discounts(bodyOrderDiscounts)
+    .CustomerId("customer_id")
+    .LineItems(bodyOrderOrderLineItems)
+    .Taxes(bodyOrderOrderTaxes)
+    .Discounts(bodyOrderOrderDiscounts)
+    .Build();
+var bodyOrder = new CreateOrderRequest.Builder()
+    .Order(bodyOrderOrder)
+    .IdempotencyKey("12ae1696-z1e3-4328-af6d-f1e04d947gd4")
     .Build();
 var bodyPrePopulateShippingAddress = new Address.Builder()
     .AddressLine1("1455 Market St.")

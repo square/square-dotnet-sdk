@@ -206,6 +206,11 @@ namespace Square.Apis
 
         /// <summary>
         /// Provides summary information for all of a business's employee timecards.
+        /// ---
+        /// - __Deprecation date__: 2020-02-26
+        /// - [__Retirement date__](https://developer.squareup.com/docs/docs/build-basics/api-lifecycle#deprecated): 2021-02-26
+        /// - [Migration guide](https://developer.squareup.com/docs/docs/migrate-from-v1/guides/v1-timecards)
+        /// ---
         /// </summary>
         /// <param name="order">Optional parameter: The order in which timecards are listed in the response, based on their created_at field.</param>
         /// <param name="employeeId">Optional parameter: If provided, the endpoint returns only timecards for the employee with the specified ID.</param>
@@ -219,6 +224,7 @@ namespace Square.Apis
         /// <param name="limit">Optional parameter: The maximum integer number of employee entities to return in a single response. Default 100, maximum 200.</param>
         /// <param name="batchToken">Optional parameter: A pagination cursor to retrieve the next set of results for your original query to the endpoint.</param>
         /// <return>Returns the List<Models.V1Timecard> response from the API call</return>
+        [Obsolete]
         List<Models.V1Timecard> ListTimecards(
                 string order = null,
                 string employeeId = null,
@@ -234,6 +240,11 @@ namespace Square.Apis
 
         /// <summary>
         /// Provides summary information for all of a business's employee timecards.
+        /// ---
+        /// - __Deprecation date__: 2020-02-26
+        /// - [__Retirement date__](https://developer.squareup.com/docs/docs/build-basics/api-lifecycle#deprecated): 2021-02-26
+        /// - [Migration guide](https://developer.squareup.com/docs/docs/migrate-from-v1/guides/v1-timecards)
+        /// ---
         /// </summary>
         /// <param name="order">Optional parameter: The order in which timecards are listed in the response, based on their created_at field.</param>
         /// <param name="employeeId">Optional parameter: If provided, the endpoint returns only timecards for the employee with the specified ID.</param>
@@ -247,6 +258,7 @@ namespace Square.Apis
         /// <param name="limit">Optional parameter: The maximum integer number of employee entities to return in a single response. Default 100, maximum 200.</param>
         /// <param name="batchToken">Optional parameter: A pagination cursor to retrieve the next set of results for your original query to the endpoint.</param>
         /// <return>Returns the List<Models.V1Timecard> response from the API call</return>
+        [Obsolete]
         Task<List<Models.V1Timecard>> ListTimecardsAsync(
                 string order = null,
                 string employeeId = null,
@@ -263,7 +275,13 @@ namespace Square.Apis
         /// <summary>
         /// Creates a timecard for an employee and clocks them in with an
         /// `API_CREATE` event and a `clockin_time` set to the current time unless
-        /// the request provides a different value. To import timecards from another
+        /// the request provides a different value.
+        /// ---
+        /// - __Deprecation date__: 2020-02-26
+        /// - [__Retirement date__](https://developer.squareup.com/docs/docs/build-basics/api-lifecycle#deprecated): 2021-02-26
+        /// - [Migration guide](https://developer.squareup.com/docs/docs/migrate-from-v1/guides/v1-timecards)
+        /// ---
+        /// To import timecards from another
         /// system (rather than clocking someone in). Specify the `clockin_time`
         /// and* `clockout_time` in the request.
         /// Timecards correspond to exactly one shift for a given employee, bounded
@@ -274,12 +292,19 @@ namespace Square.Apis
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.V1Timecard response from the API call</return>
+        [Obsolete]
         Models.V1Timecard CreateTimecard(Models.V1Timecard body);
 
         /// <summary>
         /// Creates a timecard for an employee and clocks them in with an
         /// `API_CREATE` event and a `clockin_time` set to the current time unless
-        /// the request provides a different value. To import timecards from another
+        /// the request provides a different value.
+        /// ---
+        /// - __Deprecation date__: 2020-02-26
+        /// - [__Retirement date__](https://developer.squareup.com/docs/docs/build-basics/api-lifecycle#deprecated): 2021-02-26
+        /// - [Migration guide](https://developer.squareup.com/docs/docs/migrate-from-v1/guides/v1-timecards)
+        /// ---
+        /// To import timecards from another
         /// system (rather than clocking someone in). Specify the `clockin_time`
         /// and* `clockout_time` in the request.
         /// Timecards correspond to exactly one shift for a given employee, bounded
@@ -290,6 +315,7 @@ namespace Square.Apis
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.V1Timecard response from the API call</return>
+        [Obsolete]
         Task<Models.V1Timecard> CreateTimecardAsync(Models.V1Timecard body, CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -297,6 +323,11 @@ namespace Square.Apis
         /// Square Dashboard. Deleted timecards are still accessible through
         /// Connect API endpoints, but cannot be modified. The `deleted` field of
         /// the `Timecard` object indicates whether the timecard has been deleted.
+        /// ---
+        /// - __Deprecation date__: 2020-02-26
+        /// - [__Retirement date__](https://developer.squareup.com/docs/docs/build-basics/api-lifecycle#deprecated): 2021-02-26
+        /// - [Migration guide](https://developer.squareup.com/docs/docs/migrate-from-v1/guides/v1-timecards)
+        /// ---
         /// *Note**: By default, deleted timecards appear alongside valid timecards in
         /// results returned by the [ListTimecards](#endpoint-v1employees-listtimecards)
         /// endpoint. To filter deleted timecards, include the `deleted` query
@@ -309,6 +340,7 @@ namespace Square.Apis
         /// </summary>
         /// <param name="timecardId">Required parameter: The ID of the timecard to delete.</param>
         /// <return>Returns the object response from the API call</return>
+        [Obsolete]
         object DeleteTimecard(string timecardId);
 
         /// <summary>
@@ -316,6 +348,11 @@ namespace Square.Apis
         /// Square Dashboard. Deleted timecards are still accessible through
         /// Connect API endpoints, but cannot be modified. The `deleted` field of
         /// the `Timecard` object indicates whether the timecard has been deleted.
+        /// ---
+        /// - __Deprecation date__: 2020-02-26
+        /// - [__Retirement date__](https://developer.squareup.com/docs/docs/build-basics/api-lifecycle#deprecated): 2021-02-26
+        /// - [Migration guide](https://developer.squareup.com/docs/docs/migrate-from-v1/guides/v1-timecards)
+        /// ---
         /// *Note**: By default, deleted timecards appear alongside valid timecards in
         /// results returned by the [ListTimecards](#endpoint-v1employees-listtimecards)
         /// endpoint. To filter deleted timecards, include the `deleted` query
@@ -328,10 +365,16 @@ namespace Square.Apis
         /// </summary>
         /// <param name="timecardId">Required parameter: The ID of the timecard to delete.</param>
         /// <return>Returns the object response from the API call</return>
+        [Obsolete]
         Task<object> DeleteTimecardAsync(string timecardId, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Provides the details for a single timecard.
+        /// ---
+        /// - __Deprecation date__: 2020-02-26
+        /// - [__Retirement date__](https://developer.squareup.com/docs/docs/build-basics/api-lifecycle#deprecated): 2021-02-26
+        /// - [Migration guide](https://developer.squareup.com/docs/docs/migrate-from-v1/guides/v1-timecards)
+        /// ---
         /// <aside>
         /// Only approved accounts can manage their employees with Square.
         /// Unapproved accounts cannot use employee management features with the
@@ -340,10 +383,16 @@ namespace Square.Apis
         /// </summary>
         /// <param name="timecardId">Required parameter: The timecard's ID.</param>
         /// <return>Returns the Models.V1Timecard response from the API call</return>
+        [Obsolete]
         Models.V1Timecard RetrieveTimecard(string timecardId);
 
         /// <summary>
         /// Provides the details for a single timecard.
+        /// ---
+        /// - __Deprecation date__: 2020-02-26
+        /// - [__Retirement date__](https://developer.squareup.com/docs/docs/build-basics/api-lifecycle#deprecated): 2021-02-26
+        /// - [Migration guide](https://developer.squareup.com/docs/docs/migrate-from-v1/guides/v1-timecards)
+        /// ---
         /// <aside>
         /// Only approved accounts can manage their employees with Square.
         /// Unapproved accounts cannot use employee management features with the
@@ -352,31 +401,49 @@ namespace Square.Apis
         /// </summary>
         /// <param name="timecardId">Required parameter: The timecard's ID.</param>
         /// <return>Returns the Models.V1Timecard response from the API call</return>
+        [Obsolete]
         Task<Models.V1Timecard> RetrieveTimecardAsync(string timecardId, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Modifies the details of a timecard with an `API_EDIT` event for
         /// the timecard. Updating an active timecard with a `clockout_time`
         /// clocks the employee out.
+        /// ---
+        /// - __Deprecation date__: 2020-02-26
+        /// - [__Retirement date__](https://developer.squareup.com/docs/docs/build-basics/api-lifecycle#deprecated): 2021-02-26
+        /// - [Migration guide](https://developer.squareup.com/docs/docs/migrate-from-v1/guides/v1-timecards)
+        /// ---
         /// </summary>
         /// <param name="timecardId">Required parameter: TThe ID of the timecard to modify.</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request. See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.V1Timecard response from the API call</return>
+        [Obsolete]
         Models.V1Timecard UpdateTimecard(string timecardId, Models.V1Timecard body);
 
         /// <summary>
         /// Modifies the details of a timecard with an `API_EDIT` event for
         /// the timecard. Updating an active timecard with a `clockout_time`
         /// clocks the employee out.
+        /// ---
+        /// - __Deprecation date__: 2020-02-26
+        /// - [__Retirement date__](https://developer.squareup.com/docs/docs/build-basics/api-lifecycle#deprecated): 2021-02-26
+        /// - [Migration guide](https://developer.squareup.com/docs/docs/migrate-from-v1/guides/v1-timecards)
+        /// ---
         /// </summary>
         /// <param name="timecardId">Required parameter: TThe ID of the timecard to modify.</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request. See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.V1Timecard response from the API call</return>
+        [Obsolete]
         Task<Models.V1Timecard> UpdateTimecardAsync(string timecardId, Models.V1Timecard body, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Provides summary information for all events associated with a
         /// particular timecard.
+        /// ---
+        /// - __Deprecation date__: 2020-02-26
+        /// - [__Retirement date__](https://developer.squareup.com/docs/docs/build-basics/api-lifecycle#deprecated): 2021-02-26
+        /// - [Migration guide](https://developer.squareup.com/docs/docs/migrate-from-v1/guides/v1-timecards)
+        /// ---
         /// <aside>
         /// Only approved accounts can manage their employees with Square.
         /// Unapproved accounts cannot use employee management features with the
@@ -385,11 +452,17 @@ namespace Square.Apis
         /// </summary>
         /// <param name="timecardId">Required parameter: The ID of the timecard to list events for.</param>
         /// <return>Returns the List<Models.V1TimecardEvent> response from the API call</return>
+        [Obsolete]
         List<Models.V1TimecardEvent> ListTimecardEvents(string timecardId);
 
         /// <summary>
         /// Provides summary information for all events associated with a
         /// particular timecard.
+        /// ---
+        /// - __Deprecation date__: 2020-02-26
+        /// - [__Retirement date__](https://developer.squareup.com/docs/docs/build-basics/api-lifecycle#deprecated): 2021-02-26
+        /// - [Migration guide](https://developer.squareup.com/docs/docs/migrate-from-v1/guides/v1-timecards)
+        /// ---
         /// <aside>
         /// Only approved accounts can manage their employees with Square.
         /// Unapproved accounts cannot use employee management features with the
@@ -398,16 +471,23 @@ namespace Square.Apis
         /// </summary>
         /// <param name="timecardId">Required parameter: The ID of the timecard to list events for.</param>
         /// <return>Returns the List<Models.V1TimecardEvent> response from the API call</return>
+        [Obsolete]
         Task<List<Models.V1TimecardEvent>> ListTimecardEventsAsync(string timecardId, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Provides the details for all of a location's cash drawer shifts during a date range. The date range you specify cannot exceed 90 days.
+        /// ---
+        /// - __Deprecation date__: 2020-02-26
+        /// - [__Retirement date__](https://developer.squareup.com/docs/docs/build-basics/api-lifecycle#deprecated): 2021-02-26
+        /// - [Migration guide](https://developer.squareup.com/docs/docs/migrate-from-v1/guides/v1-cashdrawershifts)
+        /// ---
         /// </summary>
         /// <param name="locationId">Required parameter: The ID of the location to list cash drawer shifts for.</param>
         /// <param name="order">Optional parameter: The order in which cash drawer shifts are listed in the response, based on their created_at field. Default value: ASC</param>
         /// <param name="beginTime">Optional parameter: The beginning of the requested reporting period, in ISO 8601 format. Default value: The current time minus 90 days.</param>
         /// <param name="endTime">Optional parameter: The beginning of the requested reporting period, in ISO 8601 format. Default value: The current time.</param>
         /// <return>Returns the List<Models.V1CashDrawerShift> response from the API call</return>
+        [Obsolete]
         List<Models.V1CashDrawerShift> ListCashDrawerShifts(
                 string locationId,
                 string order = null,
@@ -416,12 +496,18 @@ namespace Square.Apis
 
         /// <summary>
         /// Provides the details for all of a location's cash drawer shifts during a date range. The date range you specify cannot exceed 90 days.
+        /// ---
+        /// - __Deprecation date__: 2020-02-26
+        /// - [__Retirement date__](https://developer.squareup.com/docs/docs/build-basics/api-lifecycle#deprecated): 2021-02-26
+        /// - [Migration guide](https://developer.squareup.com/docs/docs/migrate-from-v1/guides/v1-cashdrawershifts)
+        /// ---
         /// </summary>
         /// <param name="locationId">Required parameter: The ID of the location to list cash drawer shifts for.</param>
         /// <param name="order">Optional parameter: The order in which cash drawer shifts are listed in the response, based on their created_at field. Default value: ASC</param>
         /// <param name="beginTime">Optional parameter: The beginning of the requested reporting period, in ISO 8601 format. Default value: The current time minus 90 days.</param>
         /// <param name="endTime">Optional parameter: The beginning of the requested reporting period, in ISO 8601 format. Default value: The current time.</param>
         /// <return>Returns the List<Models.V1CashDrawerShift> response from the API call</return>
+        [Obsolete]
         Task<List<Models.V1CashDrawerShift>> ListCashDrawerShiftsAsync(
                 string locationId,
                 string order = null,
@@ -430,18 +516,30 @@ namespace Square.Apis
 
         /// <summary>
         /// Provides the details for a single cash drawer shift, including all events that occurred during the shift.
+        /// ---
+        /// - __Deprecation date__: 2020-02-26
+        /// - [__Retirement date__](https://developer.squareup.com/docs/docs/build-basics/api-lifecycle#deprecated): 2021-02-26
+        /// - [Migration guide](https://developer.squareup.com/docs/docs/migrate-from-v1/guides/v1-cashdrawershifts)
+        /// ---
         /// </summary>
         /// <param name="locationId">Required parameter: The ID of the location to list cash drawer shifts for.</param>
         /// <param name="shiftId">Required parameter: The shift's ID.</param>
         /// <return>Returns the Models.V1CashDrawerShift response from the API call</return>
+        [Obsolete]
         Models.V1CashDrawerShift RetrieveCashDrawerShift(string locationId, string shiftId);
 
         /// <summary>
         /// Provides the details for a single cash drawer shift, including all events that occurred during the shift.
+        /// ---
+        /// - __Deprecation date__: 2020-02-26
+        /// - [__Retirement date__](https://developer.squareup.com/docs/docs/build-basics/api-lifecycle#deprecated): 2021-02-26
+        /// - [Migration guide](https://developer.squareup.com/docs/docs/migrate-from-v1/guides/v1-cashdrawershifts)
+        /// ---
         /// </summary>
         /// <param name="locationId">Required parameter: The ID of the location to list cash drawer shifts for.</param>
         /// <param name="shiftId">Required parameter: The shift's ID.</param>
         /// <return>Returns the Models.V1CashDrawerShift response from the API call</return>
+        [Obsolete]
         Task<Models.V1CashDrawerShift> RetrieveCashDrawerShiftAsync(string locationId, string shiftId, CancellationToken cancellationToken = default);
 
     }
