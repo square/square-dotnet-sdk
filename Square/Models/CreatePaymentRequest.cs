@@ -19,6 +19,7 @@ namespace Square.Models
             Models.Money amountMoney,
             Models.Money tipMoney = null,
             Models.Money appFeeMoney = null,
+            string delayDuration = null,
             bool? autocomplete = null,
             string orderId = null,
             string customerId = null,
@@ -37,6 +38,7 @@ namespace Square.Models
             AmountMoney = amountMoney;
             TipMoney = tipMoney;
             AppFeeMoney = appFeeMoney;
+            DelayDuration = delayDuration;
             Autocomplete = autocomplete;
             OrderId = orderId;
             CustomerId = customerId;
@@ -99,6 +101,22 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("app_fee_money")]
         public Models.Money AppFeeMoney { get; }
+
+        /// <summary>
+        /// The duration of time after the payment's creation when Square automatically cancels the
+        /// payment. This automatic cancellation applies only to payments that don't reach a terminal state
+        /// (COMPLETED, CANCELED, or FAILED) before the `delay_duration` time period.
+        /// This parameter should be specified as a time duration, in RFC 3339 format, with a minimum value
+        /// of 1 minute.
+        /// Notes:
+        /// This feature is only supported for card payments. This parameter can only be set for a delayed
+        /// capture payment (`autocomplete=false`).
+        /// Default:
+        /// - Card Present payments: "PT36H" (36 hours) from the creation time.
+        /// - Card Not Present payments: "P7D" (7 days) from the creation time.
+        /// </summary>
+        [JsonProperty("delay_duration")]
+        public string DelayDuration { get; }
 
         /// <summary>
         /// If set to `true`, this payment will be completed when possible. If
@@ -206,6 +224,7 @@ namespace Square.Models
                 AmountMoney)
                 .TipMoney(TipMoney)
                 .AppFeeMoney(AppFeeMoney)
+                .DelayDuration(DelayDuration)
                 .Autocomplete(Autocomplete)
                 .OrderId(OrderId)
                 .CustomerId(CustomerId)
@@ -228,6 +247,7 @@ namespace Square.Models
             private Models.Money amountMoney;
             private Models.Money tipMoney;
             private Models.Money appFeeMoney;
+            private string delayDuration;
             private bool? autocomplete;
             private string orderId;
             private string customerId;
@@ -276,6 +296,12 @@ namespace Square.Models
             public Builder AppFeeMoney(Models.Money value)
             {
                 appFeeMoney = value;
+                return this;
+            }
+
+            public Builder DelayDuration(string value)
+            {
+                delayDuration = value;
                 return this;
             }
 
@@ -358,6 +384,7 @@ namespace Square.Models
                     amountMoney,
                     tipMoney,
                     appFeeMoney,
+                    delayDuration,
                     autocomplete,
                     orderId,
                     customerId,

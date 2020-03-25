@@ -14,10 +14,10 @@ namespace Square.Models
 {
     public class CatalogV1Id 
     {
-        public CatalogV1Id(string catalogV1Id = null,
+        public CatalogV1Id(string catalogV1IdProp = null,
             string locationId = null)
         {
-            CatalogV1IdProp = catalogV1Id;
+            CatalogV1IdProp = catalogV1IdProp;
             LocationId = locationId;
         }
 
@@ -43,13 +43,13 @@ namespace Square.Models
 
         public class Builder
         {
-            private string catalogV1Id;
+            private string catalogV1IdProp;
             private string locationId;
 
             public Builder() { }
             public Builder CatalogV1IdProp(string value)
             {
-                catalogV1Id = value;
+                catalogV1IdProp = value;
                 return this;
             }
 
@@ -61,7 +61,7 @@ namespace Square.Models
 
             public CatalogV1Id Build()
             {
-                return new CatalogV1Id(catalogV1Id,
+                return new CatalogV1Id(catalogV1IdProp,
                     locationId);
             }
         }

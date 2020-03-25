@@ -19,6 +19,7 @@ namespace Square.Models
             string updatedAt = null,
             long? version = null,
             bool? isDeleted = null,
+            IDictionary<string, Models.CatalogCustomAttributeValue> customAttributeValues = null,
             IList<Models.CatalogV1Id> catalogV1Ids = null,
             bool? presentAtAllLocations = null,
             IList<string> presentAtLocationIds = null,
@@ -37,13 +38,15 @@ namespace Square.Models
             Models.CatalogImage imageData = null,
             Models.CatalogMeasurementUnit measurementUnitData = null,
             Models.CatalogItemOption itemOptionData = null,
-            Models.CatalogItemOptionValue itemOptionValueData = null)
+            Models.CatalogItemOptionValue itemOptionValueData = null,
+            Models.CatalogCustomAttributeDefinition customAttributeDefinitionData = null)
         {
             Type = type;
             Id = id;
             UpdatedAt = updatedAt;
             Version = version;
             IsDeleted = isDeleted;
+            CustomAttributeValues = customAttributeValues;
             CatalogV1Ids = catalogV1Ids;
             PresentAtAllLocations = presentAtAllLocations;
             PresentAtLocationIds = presentAtLocationIds;
@@ -63,6 +66,7 @@ namespace Square.Models
             MeasurementUnitData = measurementUnitData;
             ItemOptionData = itemOptionData;
             ItemOptionValueData = itemOptionValueData;
+            CustomAttributeDefinitionData = customAttributeDefinitionData;
         }
 
         /// <summary>
@@ -103,6 +107,19 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("is_deleted")]
         public bool? IsDeleted { get; }
+
+        /// <summary>
+        /// Application-defined key/value attributes that are set at a global (location-independent) level.
+        /// Values from the `*_data` fields may not be duplicated. Custom Attribute fields are intended to store additional
+        /// information about a Catalog Object or associations with an entity in another system. Do not use custom attributes
+        /// to store any sensitive information (personally identifiable information, card details, etc.).
+        /// For CustomAttributesDefinitions defined by the app making the request, the map key is the key defined in
+        /// CustomAttributeDefinition (eg. “reference_id”). For CustomAttributesDefinitions by other apps, the map key is
+        /// the key defined in CustomAttributeDefinition prefixed with the application ID and a colon
+        /// (eg. “abcd1234:reference_id”).
+        /// </summary>
+        [JsonProperty("custom_attribute_values")]
+        public IDictionary<string, Models.CatalogCustomAttributeValue> CustomAttributeValues { get; }
 
         /// <summary>
         /// The Connect v1 IDs for this object at each location where it is present, where they
@@ -238,6 +255,16 @@ namespace Square.Models
         [JsonProperty("item_option_value_data")]
         public Models.CatalogItemOptionValue ItemOptionValueData { get; }
 
+        /// <summary>
+        /// Contains information defining a custom attribute. Custom attributes are
+        /// intended to store additional information about a catalog object or to associate a
+        /// catalog object with an entity in another system. Do not use custom attributes
+        /// to store any sensitive information (personally identifiable information, card details, etc.).
+        /// [Read more about custom attributes](https://developer.squareup.com/docs/catalog-api/add-custom-attributes)
+        /// </summary>
+        [JsonProperty("custom_attribute_definition_data")]
+        public Models.CatalogCustomAttributeDefinition CustomAttributeDefinitionData { get; }
+
         public Builder ToBuilder()
         {
             var builder = new Builder(Type,
@@ -245,6 +272,7 @@ namespace Square.Models
                 .UpdatedAt(UpdatedAt)
                 .Version(Version)
                 .IsDeleted(IsDeleted)
+                .CustomAttributeValues(CustomAttributeValues)
                 .CatalogV1Ids(CatalogV1Ids)
                 .PresentAtAllLocations(PresentAtAllLocations)
                 .PresentAtLocationIds(PresentAtLocationIds)
@@ -263,7 +291,8 @@ namespace Square.Models
                 .ImageData(ImageData)
                 .MeasurementUnitData(MeasurementUnitData)
                 .ItemOptionData(ItemOptionData)
-                .ItemOptionValueData(ItemOptionValueData);
+                .ItemOptionValueData(ItemOptionValueData)
+                .CustomAttributeDefinitionData(CustomAttributeDefinitionData);
             return builder;
         }
 
@@ -274,6 +303,7 @@ namespace Square.Models
             private string updatedAt;
             private long? version;
             private bool? isDeleted;
+            private IDictionary<string, Models.CatalogCustomAttributeValue> customAttributeValues = new Dictionary<string, Models.CatalogCustomAttributeValue>();
             private IList<Models.CatalogV1Id> catalogV1Ids = new List<Models.CatalogV1Id>();
             private bool? presentAtAllLocations;
             private IList<string> presentAtLocationIds = new List<string>();
@@ -293,6 +323,7 @@ namespace Square.Models
             private Models.CatalogMeasurementUnit measurementUnitData;
             private Models.CatalogItemOption itemOptionData;
             private Models.CatalogItemOptionValue itemOptionValueData;
+            private Models.CatalogCustomAttributeDefinition customAttributeDefinitionData;
 
             public Builder(string type,
                 string id)
@@ -327,6 +358,12 @@ namespace Square.Models
             public Builder IsDeleted(bool? value)
             {
                 isDeleted = value;
+                return this;
+            }
+
+            public Builder CustomAttributeValues(IDictionary<string, Models.CatalogCustomAttributeValue> value)
+            {
+                customAttributeValues = value;
                 return this;
             }
 
@@ -444,6 +481,12 @@ namespace Square.Models
                 return this;
             }
 
+            public Builder CustomAttributeDefinitionData(Models.CatalogCustomAttributeDefinition value)
+            {
+                customAttributeDefinitionData = value;
+                return this;
+            }
+
             public CatalogObject Build()
             {
                 return new CatalogObject(type,
@@ -451,6 +494,7 @@ namespace Square.Models
                     updatedAt,
                     version,
                     isDeleted,
+                    customAttributeValues,
                     catalogV1Ids,
                     presentAtAllLocations,
                     presentAtLocationIds,
@@ -469,7 +513,8 @@ namespace Square.Models
                     imageData,
                     measurementUnitData,
                     itemOptionData,
-                    itemOptionValueData);
+                    itemOptionValueData,
+                    customAttributeDefinitionData);
             }
         }
     }
