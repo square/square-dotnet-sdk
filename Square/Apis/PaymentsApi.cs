@@ -103,7 +103,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-02-26" }
+                { "Square-Version", "2020-03-25" }
             };
 
             //prepare the API call request to fetch the response
@@ -186,7 +186,7 @@ namespace Square.Apis
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
-                { "Square-Version", "2020-02-26" }
+                { "Square-Version", "2020-03-25" }
             };
 
             //append body params
@@ -268,7 +268,7 @@ namespace Square.Apis
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
-                { "Square-Version", "2020-02-26" }
+                { "Square-Version", "2020-03-25" }
             };
 
             //append body params
@@ -339,7 +339,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-02-26" }
+                { "Square-Version", "2020-03-25" }
             };
 
             //prepare the API call request to fetch the response
@@ -411,7 +411,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-02-26" }
+                { "Square-Version", "2020-03-25" }
             };
 
             //prepare the API call request to fetch the response
@@ -447,10 +447,11 @@ namespace Square.Apis
         /// [Delayed Payments](https://developer.squareup.com/docs/payments-api/take-payments#delayed-payments).
         /// </summary>
         /// <param name="paymentId">Required parameter: Unique ID identifying the payment to be completed.</param>
+        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.CompletePaymentResponse response from the API call</return>
-        public Models.CompletePaymentResponse CompletePayment(string paymentId)
+        public Models.CompletePaymentResponse CompletePayment(string paymentId, object body)
         {
-            Task<Models.CompletePaymentResponse> t = CompletePaymentAsync(paymentId);
+            Task<Models.CompletePaymentResponse> t = CompletePaymentAsync(paymentId, body);
             ApiHelper.RunTaskSynchronously(t);
             return t.Result;
         }
@@ -463,8 +464,9 @@ namespace Square.Apis
         /// [Delayed Payments](https://developer.squareup.com/docs/payments-api/take-payments#delayed-payments).
         /// </summary>
         /// <param name="paymentId">Required parameter: Unique ID identifying the payment to be completed.</param>
+        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.CompletePaymentResponse response from the API call</return>
-        public async Task<Models.CompletePaymentResponse> CompletePaymentAsync(string paymentId, CancellationToken cancellationToken = default)
+        public async Task<Models.CompletePaymentResponse> CompletePaymentAsync(string paymentId, object body, CancellationToken cancellationToken = default)
         {
             //the base uri for api requests
             string _baseUri = config.GetBaseUri();
@@ -487,11 +489,15 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-02-26" }
+                { "content-type", "application/json; charset=utf-8" },
+                { "Square-Version", "2020-03-25" }
             };
 
+            //append body params
+            var _body = ApiHelper.JsonSerialize(body);
+
             //prepare the API call request to fetch the response
-            HttpRequest _request = GetClientInstance().Post(_queryUrl, _headers, null);
+            HttpRequest _request = GetClientInstance().PostBody(_queryUrl, _headers, _body);
             if (HttpCallBack != null)
             {
                 HttpCallBack.OnBeforeHttpRequestEventHandler(GetClientInstance(), _request);

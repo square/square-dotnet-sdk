@@ -164,12 +164,12 @@ namespace Square
         /// <summary>
         /// Current version of the SDK
         /// </summary>
-        public string SdkVersion => "5.0.0";
+        public string SdkVersion => "5.1.0";
 
         /// <summary>
         /// Version of Square API supported by this SDK
         /// </summary>
-        public string SquareVersion => "2020-02-26";
+        public string SquareVersion => "2020-03-25";
 
         internal static SquareClient CreateFromEnvironment()
         {
