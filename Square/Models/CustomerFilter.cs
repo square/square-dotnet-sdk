@@ -16,11 +16,13 @@ namespace Square.Models
     {
         public CustomerFilter(Models.CustomerCreationSourceFilter creationSource = null,
             Models.TimeRange createdAt = null,
-            Models.TimeRange updatedAt = null)
+            Models.TimeRange updatedAt = null,
+            Models.FilterValue groupIds = null)
         {
             CreationSource = creationSource;
             CreatedAt = createdAt;
             UpdatedAt = updatedAt;
+            GroupIds = groupIds;
         }
 
         /// <summary>
@@ -52,12 +54,22 @@ namespace Square.Models
         [JsonProperty("updated_at")]
         public Models.TimeRange UpdatedAt { get; }
 
+        /// <summary>
+        /// A filter to select resources based on an exact field value. For any given
+        /// value, the value can only be in one property. Depending on the field, either
+        /// all properties can be set or only a subset will be available.
+        /// Refer to the documentation of the field.
+        /// </summary>
+        [JsonProperty("group_ids")]
+        public Models.FilterValue GroupIds { get; }
+
         public Builder ToBuilder()
         {
             var builder = new Builder()
                 .CreationSource(CreationSource)
                 .CreatedAt(CreatedAt)
-                .UpdatedAt(UpdatedAt);
+                .UpdatedAt(UpdatedAt)
+                .GroupIds(GroupIds);
             return builder;
         }
 
@@ -66,6 +78,7 @@ namespace Square.Models
             private Models.CustomerCreationSourceFilter creationSource;
             private Models.TimeRange createdAt;
             private Models.TimeRange updatedAt;
+            private Models.FilterValue groupIds;
 
             public Builder() { }
             public Builder CreationSource(Models.CustomerCreationSourceFilter value)
@@ -86,11 +99,18 @@ namespace Square.Models
                 return this;
             }
 
+            public Builder GroupIds(Models.FilterValue value)
+            {
+                groupIds = value;
+                return this;
+            }
+
             public CustomerFilter Build()
             {
                 return new CustomerFilter(creationSource,
                     createdAt,
-                    updatedAt);
+                    updatedAt,
+                    groupIds);
             }
         }
     }

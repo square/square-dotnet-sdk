@@ -28,6 +28,9 @@ namespace Square
         private readonly Lazy<ICashDrawersApi> cashDrawers;
         private readonly Lazy<ICatalogApi> catalog;
         private readonly Lazy<ICustomersApi> customers;
+        private readonly Lazy<ICustomerGroupsApi> customerGroups;
+        private readonly Lazy<ICustomerSegmentsApi> customerSegments;
+        private readonly Lazy<IDevicesApi> devices;
         private readonly Lazy<IDisputesApi> disputes;
         private readonly Lazy<IEmployeesApi> employees;
         private readonly Lazy<IInventoryApi> inventory;
@@ -40,6 +43,7 @@ namespace Square
         private readonly Lazy<IMerchantsApi> merchants;
         private readonly Lazy<IPaymentsApi> payments;
         private readonly Lazy<IRefundsApi> refunds;
+        private readonly Lazy<ITerminalApi> terminal;
 
         /// <summary>
         /// Provides access to MobileAuthorizationApi controller
@@ -95,6 +99,21 @@ namespace Square
         /// Provides access to CustomersApi controller
         /// </summary>
         public ICustomersApi CustomersApi => customers.Value;
+
+        /// <summary>
+        /// Provides access to CustomerGroupsApi controller
+        /// </summary>
+        public ICustomerGroupsApi CustomerGroupsApi => customerGroups.Value;
+
+        /// <summary>
+        /// Provides access to CustomerSegmentsApi controller
+        /// </summary>
+        public ICustomerSegmentsApi CustomerSegmentsApi => customerSegments.Value;
+
+        /// <summary>
+        /// Provides access to DevicesApi controller
+        /// </summary>
+        public IDevicesApi DevicesApi => devices.Value;
 
         /// <summary>
         /// Provides access to DisputesApi controller
@@ -157,6 +176,11 @@ namespace Square
         public IRefundsApi RefundsApi => refunds.Value;
 
         /// <summary>
+        /// Provides access to TerminalApi controller
+        /// </summary>
+        public ITerminalApi TerminalApi => terminal.Value;
+
+        /// <summary>
         /// Provides access to Additional headers
         /// </summary>
         public IDictionary<string, List<string>> AdditionalHeaders => additionalHeaders.ToDictionary(s => s.Key, s => new List<string>(s.Value));
@@ -164,12 +188,12 @@ namespace Square
         /// <summary>
         /// Current version of the SDK
         /// </summary>
-        public string SdkVersion => "5.1.0";
+        public string SdkVersion => "5.2.0";
 
         /// <summary>
         /// Version of Square API supported by this SDK
         /// </summary>
-        public string SquareVersion => "2020-03-25";
+        public string SquareVersion => "2020-04-22";
 
         internal static SquareClient CreateFromEnvironment()
         {
@@ -233,6 +257,12 @@ namespace Square
                 () => new CatalogApi(this, this.httpClient, authManagers, this.httpCallBack));
             customers = new Lazy<ICustomersApi>(
                 () => new CustomersApi(this, this.httpClient, authManagers, this.httpCallBack));
+            customerGroups = new Lazy<ICustomerGroupsApi>(
+                () => new CustomerGroupsApi(this, this.httpClient, authManagers, this.httpCallBack));
+            customerSegments = new Lazy<ICustomerSegmentsApi>(
+                () => new CustomerSegmentsApi(this, this.httpClient, authManagers, this.httpCallBack));
+            devices = new Lazy<IDevicesApi>(
+                () => new DevicesApi(this, this.httpClient, authManagers, this.httpCallBack));
             disputes = new Lazy<IDisputesApi>(
                 () => new DisputesApi(this, this.httpClient, authManagers, this.httpCallBack));
             employees = new Lazy<IEmployeesApi>(
@@ -257,6 +287,8 @@ namespace Square
                 () => new PaymentsApi(this, this.httpClient, authManagers, this.httpCallBack));
             refunds = new Lazy<IRefundsApi>(
                 () => new RefundsApi(this, this.httpClient, authManagers, this.httpCallBack));
+            terminal = new Lazy<ITerminalApi>(
+                () => new TerminalApi(this, this.httpClient, authManagers, this.httpCallBack));
 
             if (!authManagers.ContainsKey("default") ||
                 ((AccessTokenManager)authManagers["default"]).AccessToken != accessToken)

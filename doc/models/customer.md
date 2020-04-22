@@ -11,9 +11,9 @@ cards on file associated with it.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `Id` | `string` |  | A unique, Square-assigned object ID. |
-| `CreatedAt` | `string` |  | The time when the customer profile was created, in RFC 3339 format. |
-| `UpdatedAt` | `string` |  | The time when the customer profile was last updated, in RFC 3339 format. |
+| `Id` | `string` |  | A unique Square-assigned ID for the customer profile. |
+| `CreatedAt` | `string` |  | The timestamp when the customer profile was created, in RFC 3339 format. |
+| `UpdatedAt` | `string` |  | The timestamp when the customer profile was last updated, in RFC 3339 format. |
 | `Cards` | [`IList<Models.Card>`](/doc/models/card.md) | Optional | Payment details of cards stored on file for the customer profile. |
 | `GivenName` | `string` | Optional | The given (i.e., first) name associated with the customer profile. |
 | `FamilyName` | `string` | Optional | The family (i.e., last) name associated with the customer profile. |
@@ -26,8 +26,10 @@ cards on file associated with it.
 | `ReferenceId` | `string` | Optional | An optional, second ID used to associate the customer profile with an<br>entity in another system. |
 | `Note` | `string` | Optional | A custom note associated with the customer profile. |
 | `Preferences` | [`Models.CustomerPreferences`](/doc/models/customer-preferences.md) | Optional | Represents communication preferences for the customer profile. |
-| `Groups` | [`IList<Models.CustomerGroupInfo>`](/doc/models/customer-group-info.md) | Optional | The groups the customer belongs to. |
+| `Groups` | [`IList<Models.CustomerGroupInfo>`](/doc/models/customer-group-info.md) | Optional | The customer groups and segments the customer belongs to. This deprecated field is replaced with dedicated `group_ids` for customer groups and `segment_ids` for customer segments. |
 | `CreationSource` | [`string`](/doc/models/customer-creation-source.md) | Optional | Indicates the method used to create the customer profile. |
+| `GroupIds` | `IList<string>` | Optional | The IDs of customer groups the customer belongs to. |
+| `SegmentIds` | `IList<string>` | Optional | The IDs of segments the customer belongs to. |
 
 ### Example (as JSON)
 
@@ -49,7 +51,9 @@ cards on file associated with it.
   "note": null,
   "preferences": null,
   "groups": null,
-  "creation_source": null
+  "creation_source": null,
+  "group_ids": null,
+  "segment_ids": null
 }
 ```
 

@@ -70,7 +70,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-03-25" }
+                { "Square-Version", "2020-04-22" }
             };
 
             //prepare the API call request to fetch the response
@@ -147,7 +147,7 @@ namespace Square.Apis
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
-                { "Square-Version", "2020-03-25" }
+                { "Square-Version", "2020-04-22" }
             };
 
             //append body params
@@ -219,7 +219,7 @@ namespace Square.Apis
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
-                { "Square-Version", "2020-03-25" }
+                { "Square-Version", "2020-04-22" }
             };
 
             //append body params
@@ -294,7 +294,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-03-25" }
+                { "Square-Version", "2020-04-22" }
             };
 
             //prepare the API call request to fetch the response
@@ -362,7 +362,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-03-25" }
+                { "Square-Version", "2020-04-22" }
             };
 
             //prepare the API call request to fetch the response
@@ -445,7 +445,7 @@ namespace Square.Apis
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
-                { "Square-Version", "2020-03-25" }
+                { "Square-Version", "2020-04-22" }
             };
 
             //append body params
@@ -525,7 +525,7 @@ namespace Square.Apis
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
-                { "Square-Version", "2020-03-25" }
+                { "Square-Version", "2020-04-22" }
             };
 
             //append body params
@@ -599,7 +599,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-03-25" }
+                { "Square-Version", "2020-04-22" }
             };
 
             //prepare the API call request to fetch the response
@@ -623,6 +623,156 @@ namespace Square.Apis
             base.ValidateResponse(_response, _context);
 
             var _responseModel = ApiHelper.JsonDeserialize<Models.DeleteCustomerCardResponse>(_response.Body);
+            _responseModel.Context = _context;
+            return _responseModel;
+        }
+
+        /// <summary>
+        /// Removes a customer membership from a customer group. 
+        /// The customer is identified by the `customer_id` value 
+        /// and the customer group is identified by the `group_id` value.
+        /// </summary>
+        /// <param name="customerId">Required parameter: The ID of the customer to remove from the group.</param>
+        /// <param name="groupId">Required parameter: The ID of the customer group to remove the customer from.</param>
+        /// <return>Returns the Models.RemoveGroupFromCustomerResponse response from the API call</return>
+        public Models.RemoveGroupFromCustomerResponse RemoveGroupFromCustomer(string customerId, string groupId)
+        {
+            Task<Models.RemoveGroupFromCustomerResponse> t = RemoveGroupFromCustomerAsync(customerId, groupId);
+            ApiHelper.RunTaskSynchronously(t);
+            return t.Result;
+        }
+
+        /// <summary>
+        /// Removes a customer membership from a customer group. 
+        /// The customer is identified by the `customer_id` value 
+        /// and the customer group is identified by the `group_id` value.
+        /// </summary>
+        /// <param name="customerId">Required parameter: The ID of the customer to remove from the group.</param>
+        /// <param name="groupId">Required parameter: The ID of the customer group to remove the customer from.</param>
+        /// <return>Returns the Models.RemoveGroupFromCustomerResponse response from the API call</return>
+        public async Task<Models.RemoveGroupFromCustomerResponse> RemoveGroupFromCustomerAsync(string customerId, string groupId, CancellationToken cancellationToken = default)
+        {
+            //the base uri for api requests
+            string _baseUri = config.GetBaseUri();
+
+            //prepare query string for API call
+            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
+            _queryBuilder.Append("/v2/customers/{customer_id}/groups/{group_id}");
+
+            //process optional template parameters
+            ApiHelper.AppendUrlWithTemplateParameters(_queryBuilder, new Dictionary<string, object>()
+            {
+                { "customer_id", customerId },
+                { "group_id", groupId }
+            });
+
+            //validate and preprocess url
+            string _queryUrl = ApiHelper.CleanUrl(_queryBuilder);
+
+            //append request with appropriate headers and parameters
+            var _headers = new Dictionary<string, string>()
+            { 
+                { "user-agent", userAgent },
+                { "accept", "application/json" },
+                { "Square-Version", "2020-04-22" }
+            };
+
+            //prepare the API call request to fetch the response
+            HttpRequest _request = GetClientInstance().Delete(_queryUrl, _headers, null);
+            if (HttpCallBack != null)
+            {
+                HttpCallBack.OnBeforeHttpRequestEventHandler(GetClientInstance(), _request);
+            }
+
+            _request = await authManagers["default"].ApplyAsync(_request).ConfigureAwait(false);
+
+            //invoke request and get response
+            HttpStringResponse _response = await GetClientInstance().ExecuteAsStringAsync(_request, cancellationToken).ConfigureAwait(false);
+            HttpContext _context = new HttpContext(_request, _response);
+            if (HttpCallBack != null)
+            {
+                HttpCallBack.OnAfterHttpResponseEventHandler(GetClientInstance(), _response);
+            }
+
+            //handle errors defined at the API level
+            base.ValidateResponse(_response, _context);
+
+            var _responseModel = ApiHelper.JsonDeserialize<Models.RemoveGroupFromCustomerResponse>(_response.Body);
+            _responseModel.Context = _context;
+            return _responseModel;
+        }
+
+        /// <summary>
+        /// Adds a customer membership to a customer group. 
+        /// The customer is identified by the `customer_id` value 
+        /// and the customer group is identified by the `group_id` value.
+        /// </summary>
+        /// <param name="customerId">Required parameter: The ID of the customer to add to a group.</param>
+        /// <param name="groupId">Required parameter: The ID of the customer group to add the customer to.</param>
+        /// <return>Returns the Models.AddGroupToCustomerResponse response from the API call</return>
+        public Models.AddGroupToCustomerResponse AddGroupToCustomer(string customerId, string groupId)
+        {
+            Task<Models.AddGroupToCustomerResponse> t = AddGroupToCustomerAsync(customerId, groupId);
+            ApiHelper.RunTaskSynchronously(t);
+            return t.Result;
+        }
+
+        /// <summary>
+        /// Adds a customer membership to a customer group. 
+        /// The customer is identified by the `customer_id` value 
+        /// and the customer group is identified by the `group_id` value.
+        /// </summary>
+        /// <param name="customerId">Required parameter: The ID of the customer to add to a group.</param>
+        /// <param name="groupId">Required parameter: The ID of the customer group to add the customer to.</param>
+        /// <return>Returns the Models.AddGroupToCustomerResponse response from the API call</return>
+        public async Task<Models.AddGroupToCustomerResponse> AddGroupToCustomerAsync(string customerId, string groupId, CancellationToken cancellationToken = default)
+        {
+            //the base uri for api requests
+            string _baseUri = config.GetBaseUri();
+
+            //prepare query string for API call
+            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
+            _queryBuilder.Append("/v2/customers/{customer_id}/groups/{group_id}");
+
+            //process optional template parameters
+            ApiHelper.AppendUrlWithTemplateParameters(_queryBuilder, new Dictionary<string, object>()
+            {
+                { "customer_id", customerId },
+                { "group_id", groupId }
+            });
+
+            //validate and preprocess url
+            string _queryUrl = ApiHelper.CleanUrl(_queryBuilder);
+
+            //append request with appropriate headers and parameters
+            var _headers = new Dictionary<string, string>()
+            { 
+                { "user-agent", userAgent },
+                { "accept", "application/json" },
+                { "Square-Version", "2020-04-22" }
+            };
+
+            //prepare the API call request to fetch the response
+            HttpRequest _request = GetClientInstance().Put(_queryUrl, _headers, null);
+            if (HttpCallBack != null)
+            {
+                HttpCallBack.OnBeforeHttpRequestEventHandler(GetClientInstance(), _request);
+            }
+
+            _request = await authManagers["default"].ApplyAsync(_request).ConfigureAwait(false);
+
+            //invoke request and get response
+            HttpStringResponse _response = await GetClientInstance().ExecuteAsStringAsync(_request, cancellationToken).ConfigureAwait(false);
+            HttpContext _context = new HttpContext(_request, _response);
+            if (HttpCallBack != null)
+            {
+                HttpCallBack.OnAfterHttpResponseEventHandler(GetClientInstance(), _response);
+            }
+
+            //handle errors defined at the API level
+            base.ValidateResponse(_response, _context);
+
+            var _responseModel = ApiHelper.JsonDeserialize<Models.AddGroupToCustomerResponse>(_response.Body);
             _responseModel.Context = _context;
             return _responseModel;
         }

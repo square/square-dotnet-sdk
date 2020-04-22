@@ -79,7 +79,7 @@ namespace Square.Apis
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
-                { "Square-Version", "2020-03-25" }
+                { "Square-Version", "2020-04-22" }
             };
 
             //append body params
@@ -155,7 +155,7 @@ namespace Square.Apis
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
-                { "Square-Version", "2020-03-25" }
+                { "Square-Version", "2020-04-22" }
             };
 
             //append body params
@@ -256,7 +256,7 @@ namespace Square.Apis
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
-                { "Square-Version", "2020-03-25" }
+                { "Square-Version", "2020-04-22" }
             };
 
             //append body params
@@ -348,7 +348,7 @@ namespace Square.Apis
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
-                { "Square-Version", "2020-03-25" }
+                { "Square-Version", "2020-04-22" }
             };
 
             //append body params
@@ -444,7 +444,7 @@ namespace Square.Apis
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
-                { "Square-Version", "2020-03-25" }
+                { "Square-Version", "2020-04-22" }
             };
 
             //append body params

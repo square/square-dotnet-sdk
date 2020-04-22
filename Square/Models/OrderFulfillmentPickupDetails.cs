@@ -29,7 +29,9 @@ namespace Square.Models
             string expiredAt = null,
             string pickedUpAt = null,
             string canceledAt = null,
-            string cancelReason = null)
+            string cancelReason = null,
+            bool? isCurbsidePickup = null,
+            Models.OrderFulfillmentPickupDetailsCurbsidePickupDetails curbsidePickupDetails = null)
         {
             Recipient = recipient;
             ExpiresAt = expiresAt;
@@ -47,6 +49,8 @@ namespace Square.Models
             PickedUpAt = pickedUpAt;
             CanceledAt = canceledAt;
             CancelReason = cancelReason;
+            IsCurbsidePickup = isCurbsidePickup;
+            CurbsidePickupDetails = curbsidePickupDetails;
         }
 
         /// <summary>
@@ -168,6 +172,18 @@ namespace Square.Models
         [JsonProperty("cancel_reason")]
         public string CancelReason { get; }
 
+        /// <summary>
+        /// If true, indicates this pickup order is for curbside pickup, not in-store pickup.
+        /// </summary>
+        [JsonProperty("is_curbside_pickup")]
+        public bool? IsCurbsidePickup { get; }
+
+        /// <summary>
+        /// Specific details for curbside pickup.
+        /// </summary>
+        [JsonProperty("curbside_pickup_details")]
+        public Models.OrderFulfillmentPickupDetailsCurbsidePickupDetails CurbsidePickupDetails { get; }
+
         public Builder ToBuilder()
         {
             var builder = new Builder()
@@ -186,7 +202,9 @@ namespace Square.Models
                 .ExpiredAt(ExpiredAt)
                 .PickedUpAt(PickedUpAt)
                 .CanceledAt(CanceledAt)
-                .CancelReason(CancelReason);
+                .CancelReason(CancelReason)
+                .IsCurbsidePickup(IsCurbsidePickup)
+                .CurbsidePickupDetails(CurbsidePickupDetails);
             return builder;
         }
 
@@ -208,6 +226,8 @@ namespace Square.Models
             private string pickedUpAt;
             private string canceledAt;
             private string cancelReason;
+            private bool? isCurbsidePickup;
+            private Models.OrderFulfillmentPickupDetailsCurbsidePickupDetails curbsidePickupDetails;
 
             public Builder() { }
             public Builder Recipient(Models.OrderFulfillmentRecipient value)
@@ -306,6 +326,18 @@ namespace Square.Models
                 return this;
             }
 
+            public Builder IsCurbsidePickup(bool? value)
+            {
+                isCurbsidePickup = value;
+                return this;
+            }
+
+            public Builder CurbsidePickupDetails(Models.OrderFulfillmentPickupDetailsCurbsidePickupDetails value)
+            {
+                curbsidePickupDetails = value;
+                return this;
+            }
+
             public OrderFulfillmentPickupDetails Build()
             {
                 return new OrderFulfillmentPickupDetails(recipient,
@@ -323,7 +355,9 @@ namespace Square.Models
                     expiredAt,
                     pickedUpAt,
                     canceledAt,
-                    cancelReason);
+                    cancelReason,
+                    isCurbsidePickup,
+                    curbsidePickupDetails);
             }
         }
     }

@@ -216,7 +216,7 @@ namespace Square.Models
         public string UpdatedAt { get; }
 
         /// <summary>
-        /// Timestamp for when the order was closed. In RFC 3339 format, e.g., "2016-09-04T23:59:33.123Z".
+        /// Timestamp for when the order reached a terminal [state](#property-state). In RFC 3339 format, e.g., "2016-09-04T23:59:33.123Z".
         /// </summary>
         [JsonProperty("closed_at")]
         public string ClosedAt { get; }

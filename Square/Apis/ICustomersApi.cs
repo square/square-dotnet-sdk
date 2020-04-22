@@ -180,5 +180,45 @@ namespace Square.Apis
         /// <return>Returns the Models.DeleteCustomerCardResponse response from the API call</return>
         Task<Models.DeleteCustomerCardResponse> DeleteCustomerCardAsync(string customerId, string cardId, CancellationToken cancellationToken = default);
 
+        /// <summary>
+        /// Removes a customer membership from a customer group. 
+        /// The customer is identified by the `customer_id` value 
+        /// and the customer group is identified by the `group_id` value.
+        /// </summary>
+        /// <param name="customerId">Required parameter: The ID of the customer to remove from the group.</param>
+        /// <param name="groupId">Required parameter: The ID of the customer group to remove the customer from.</param>
+        /// <return>Returns the Models.RemoveGroupFromCustomerResponse response from the API call</return>
+        Models.RemoveGroupFromCustomerResponse RemoveGroupFromCustomer(string customerId, string groupId);
+
+        /// <summary>
+        /// Removes a customer membership from a customer group. 
+        /// The customer is identified by the `customer_id` value 
+        /// and the customer group is identified by the `group_id` value.
+        /// </summary>
+        /// <param name="customerId">Required parameter: The ID of the customer to remove from the group.</param>
+        /// <param name="groupId">Required parameter: The ID of the customer group to remove the customer from.</param>
+        /// <return>Returns the Models.RemoveGroupFromCustomerResponse response from the API call</return>
+        Task<Models.RemoveGroupFromCustomerResponse> RemoveGroupFromCustomerAsync(string customerId, string groupId, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Adds a customer membership to a customer group. 
+        /// The customer is identified by the `customer_id` value 
+        /// and the customer group is identified by the `group_id` value.
+        /// </summary>
+        /// <param name="customerId">Required parameter: The ID of the customer to add to a group.</param>
+        /// <param name="groupId">Required parameter: The ID of the customer group to add the customer to.</param>
+        /// <return>Returns the Models.AddGroupToCustomerResponse response from the API call</return>
+        Models.AddGroupToCustomerResponse AddGroupToCustomer(string customerId, string groupId);
+
+        /// <summary>
+        /// Adds a customer membership to a customer group. 
+        /// The customer is identified by the `customer_id` value 
+        /// and the customer group is identified by the `group_id` value.
+        /// </summary>
+        /// <param name="customerId">Required parameter: The ID of the customer to add to a group.</param>
+        /// <param name="groupId">Required parameter: The ID of the customer group to add the customer to.</param>
+        /// <return>Returns the Models.AddGroupToCustomerResponse response from the API call</return>
+        Task<Models.AddGroupToCustomerResponse> AddGroupToCustomerAsync(string customerId, string groupId, CancellationToken cancellationToken = default);
+
     }
 }
