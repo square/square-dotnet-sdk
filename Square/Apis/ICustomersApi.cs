@@ -181,7 +181,7 @@ namespace Square.Apis
         Task<Models.DeleteCustomerCardResponse> DeleteCustomerCardAsync(string customerId, string cardId, CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Removes a customer membership from a customer group. 
+        /// Removes a group membership from a customer. 
         /// The customer is identified by the `customer_id` value 
         /// and the customer group is identified by the `group_id` value.
         /// </summary>
@@ -191,7 +191,7 @@ namespace Square.Apis
         Models.RemoveGroupFromCustomerResponse RemoveGroupFromCustomer(string customerId, string groupId);
 
         /// <summary>
-        /// Removes a customer membership from a customer group. 
+        /// Removes a group membership from a customer. 
         /// The customer is identified by the `customer_id` value 
         /// and the customer group is identified by the `group_id` value.
         /// </summary>
@@ -201,7 +201,7 @@ namespace Square.Apis
         Task<Models.RemoveGroupFromCustomerResponse> RemoveGroupFromCustomerAsync(string customerId, string groupId, CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Adds a customer membership to a customer group. 
+        /// Adds a group membership to a customer. 
         /// The customer is identified by the `customer_id` value 
         /// and the customer group is identified by the `group_id` value.
         /// </summary>
@@ -211,7 +211,7 @@ namespace Square.Apis
         Models.AddGroupToCustomerResponse AddGroupToCustomer(string customerId, string groupId);
 
         /// <summary>
-        /// Adds a customer membership to a customer group. 
+        /// Adds a group membership to a customer. 
         /// The customer is identified by the `customer_id` value 
         /// and the customer group is identified by the `group_id` value.
         /// </summary>

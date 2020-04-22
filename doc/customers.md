@@ -140,9 +140,15 @@ var bodyQueryFilterCreatedAt = new TimeRange.Builder()
     .StartAt("2018-01-01T00:00:00-00:00")
     .EndAt("2018-02-01T00:00:00-00:00")
     .Build();
+var bodyQueryFilterGroupIdsAll = new List<string>();
+bodyQueryFilterGroupIdsAll.Add("545AXB44B4XXWMVQ4W8SBT3HHF");
+var bodyQueryFilterGroupIds = new FilterValue.Builder()
+    .All(bodyQueryFilterGroupIdsAll)
+    .Build();
 var bodyQueryFilter = new CustomerFilter.Builder()
     .CreationSource(bodyQueryFilterCreationSource)
     .CreatedAt(bodyQueryFilterCreatedAt)
+    .GroupIds(bodyQueryFilterGroupIds)
     .Build();
 var bodyQuerySort = new CustomerSort.Builder()
     .Field("CREATED_AT")
@@ -351,7 +357,7 @@ catch (ApiException e){};
 
 ## Remove Group From Customer
 
-Removes a customer membership from a customer group. 
+Removes a group membership from a customer. 
 
 The customer is identified by the `customer_id` value 
 and the customer group is identified by the `group_id` value.
@@ -386,7 +392,7 @@ catch (ApiException e){};
 
 ## Add Group to Customer
 
-Adds a customer membership to a customer group. 
+Adds a group membership to a customer. 
 
 The customer is identified by the `customer_id` value 
 and the customer group is identified by the `group_id` value.

@@ -14,11 +14,9 @@ namespace Square.Models
 {
     public class ListCustomerSegmentsRequest 
     {
-        public ListCustomerSegmentsRequest(string cursor = null,
-            long? limit = null)
+        public ListCustomerSegmentsRequest(string cursor = null)
         {
             Cursor = cursor;
-            Limit = limit;
         }
 
         /// <summary>
@@ -29,27 +27,16 @@ namespace Square.Models
         [JsonProperty("cursor")]
         public string Cursor { get; }
 
-        /// <summary>
-        /// Sets the maximum number of results to be returned in a single page.
-        /// Limit values outside the supported range are ignored.
-        /// Minimum value: `1`
-        /// Maximum value: `1,000`
-        /// </summary>
-        [JsonProperty("limit")]
-        public long? Limit { get; }
-
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .Cursor(Cursor)
-                .Limit(Limit);
+                .Cursor(Cursor);
             return builder;
         }
 
         public class Builder
         {
             private string cursor;
-            private long? limit;
 
             public Builder() { }
             public Builder Cursor(string value)
@@ -58,16 +45,9 @@ namespace Square.Models
                 return this;
             }
 
-            public Builder Limit(long? value)
-            {
-                limit = value;
-                return this;
-            }
-
             public ListCustomerSegmentsRequest Build()
             {
-                return new ListCustomerSegmentsRequest(cursor,
-                    limit);
+                return new ListCustomerSegmentsRequest(cursor);
             }
         }
     }

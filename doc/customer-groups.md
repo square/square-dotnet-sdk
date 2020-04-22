@@ -48,7 +48,7 @@ catch (ApiException e){};
 
 Creates a new customer group for a business. 
 
-The request must include at least the `name` value of the group.
+The request must include the `name` value of the group.
 
 ```csharp
 CreateCustomerGroupAsync(Models.CreateCustomerGroupRequest body)
