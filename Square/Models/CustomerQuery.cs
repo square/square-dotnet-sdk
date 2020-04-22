@@ -23,7 +23,7 @@ namespace Square.Models
 
         /// <summary>
         /// Represents a set of `CustomerQuery` filters used to limit the set of
-        /// `Customers` returned by SearchCustomers.
+        /// `Customers` returned by `SearchCustomers`.
         /// </summary>
         [JsonProperty("filter")]
         public Models.CustomerFilter Filter { get; }

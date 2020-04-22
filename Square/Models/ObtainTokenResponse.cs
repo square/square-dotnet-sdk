@@ -87,7 +87,7 @@ namespace Square.Models
         public string IdToken { get; }
 
         /// <summary>
-        /// A refresh token.
+        /// A refresh token. OAuth refresh tokens are 64 bytes long.
         /// For more information, see [OAuth access token management](https://developer.squareup.com/docs/authz/oauth/how-it-works#oauth-access-token-management).
         /// </summary>
         [JsonProperty("refresh_token")]

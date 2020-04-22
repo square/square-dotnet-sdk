@@ -61,6 +61,21 @@ namespace Square
         ICustomersApi CustomersApi { get; }
 
         /// <summary>
+        /// Instance for ICustomerGroupsApi
+        /// </summary>
+        ICustomerGroupsApi CustomerGroupsApi { get; }
+
+        /// <summary>
+        /// Instance for ICustomerSegmentsApi
+        /// </summary>
+        ICustomerSegmentsApi CustomerSegmentsApi { get; }
+
+        /// <summary>
+        /// Instance for IDevicesApi
+        /// </summary>
+        IDevicesApi DevicesApi { get; }
+
+        /// <summary>
         /// Instance for IDisputesApi
         /// </summary>
         IDisputesApi DisputesApi { get; }
@@ -119,6 +134,11 @@ namespace Square
         /// Instance for IRefundsApi
         /// </summary>
         IRefundsApi RefundsApi { get; }
+
+        /// <summary>
+        /// Instance for ITerminalApi
+        /// </summary>
+        ITerminalApi TerminalApi { get; }
 
         /// <summary>
         /// Current version of the SDK

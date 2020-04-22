@@ -22,13 +22,13 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// The ID of the customer group.
+        /// The ID of the Customer Group.
         /// </summary>
         [JsonProperty("id")]
         public string Id { get; }
 
         /// <summary>
-        /// The name of the customer group.
+        /// The name of the Customer Group.
         /// </summary>
         [JsonProperty("name")]
         public string Name { get; }

@@ -30,7 +30,9 @@ namespace Square.Models
             string note = null,
             Models.CustomerPreferences preferences = null,
             IList<Models.CustomerGroupInfo> groups = null,
-            string creationSource = null)
+            string creationSource = null,
+            IList<string> groupIds = null,
+            IList<string> segmentIds = null)
         {
             Id = id;
             CreatedAt = createdAt;
@@ -49,22 +51,24 @@ namespace Square.Models
             Preferences = preferences;
             Groups = groups;
             CreationSource = creationSource;
+            GroupIds = groupIds;
+            SegmentIds = segmentIds;
         }
 
         /// <summary>
-        /// A unique, Square-assigned object ID.
+        /// A unique Square-assigned ID for the customer profile.
         /// </summary>
         [JsonProperty("id")]
         public string Id { get; }
 
         /// <summary>
-        /// The time when the customer profile was created, in RFC 3339 format.
+        /// The timestamp when the customer profile was created, in RFC 3339 format.
         /// </summary>
         [JsonProperty("created_at")]
         public string CreatedAt { get; }
 
         /// <summary>
-        /// The time when the customer profile was last updated, in RFC 3339 format.
+        /// The timestamp when the customer profile was last updated, in RFC 3339 format.
         /// </summary>
         [JsonProperty("updated_at")]
         public string UpdatedAt { get; }
@@ -146,7 +150,7 @@ namespace Square.Models
         public Models.CustomerPreferences Preferences { get; }
 
         /// <summary>
-        /// The groups the customer belongs to.
+        /// The customer groups and segments the customer belongs to. This deprecated field is replaced with dedicated `group_ids` for customer groups and `segment_ids` for customer segments.
         /// </summary>
         [JsonProperty("groups")]
         public IList<Models.CustomerGroupInfo> Groups { get; }
@@ -156,6 +160,18 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("creation_source")]
         public string CreationSource { get; }
+
+        /// <summary>
+        /// The IDs of customer groups the customer belongs to.
+        /// </summary>
+        [JsonProperty("group_ids")]
+        public IList<string> GroupIds { get; }
+
+        /// <summary>
+        /// The IDs of segments the customer belongs to.
+        /// </summary>
+        [JsonProperty("segment_ids")]
+        public IList<string> SegmentIds { get; }
 
         public Builder ToBuilder()
         {
@@ -175,7 +191,9 @@ namespace Square.Models
                 .Note(Note)
                 .Preferences(Preferences)
                 .Groups(Groups)
-                .CreationSource(CreationSource);
+                .CreationSource(CreationSource)
+                .GroupIds(GroupIds)
+                .SegmentIds(SegmentIds);
             return builder;
         }
 
@@ -198,6 +216,8 @@ namespace Square.Models
             private Models.CustomerPreferences preferences;
             private IList<Models.CustomerGroupInfo> groups = new List<Models.CustomerGroupInfo>();
             private string creationSource;
+            private IList<string> groupIds = new List<string>();
+            private IList<string> segmentIds = new List<string>();
 
             public Builder(string id,
                 string createdAt,
@@ -309,6 +329,18 @@ namespace Square.Models
                 return this;
             }
 
+            public Builder GroupIds(IList<string> value)
+            {
+                groupIds = value;
+                return this;
+            }
+
+            public Builder SegmentIds(IList<string> value)
+            {
+                segmentIds = value;
+                return this;
+            }
+
             public Customer Build()
             {
                 return new Customer(id,
@@ -327,7 +359,9 @@ namespace Square.Models
                     note,
                     preferences,
                     groups,
-                    creationSource);
+                    creationSource,
+                    groupIds,
+                    segmentIds);
             }
         }
     }

@@ -39,7 +39,8 @@ namespace Square.Models
             Models.CatalogMeasurementUnit measurementUnitData = null,
             Models.CatalogItemOption itemOptionData = null,
             Models.CatalogItemOptionValue itemOptionValueData = null,
-            Models.CatalogCustomAttributeDefinition customAttributeDefinitionData = null)
+            Models.CatalogCustomAttributeDefinition customAttributeDefinitionData = null,
+            Models.CatalogQuickAmountsSettings quickAmountsSettingsData = null)
         {
             Type = type;
             Id = id;
@@ -67,6 +68,7 @@ namespace Square.Models
             ItemOptionData = itemOptionData;
             ItemOptionValueData = itemOptionValueData;
             CustomAttributeDefinitionData = customAttributeDefinitionData;
+            QuickAmountsSettingsData = quickAmountsSettingsData;
         }
 
         /// <summary>
@@ -110,12 +112,12 @@ namespace Square.Models
 
         /// <summary>
         /// Application-defined key/value attributes that are set at a global (location-independent) level.
-        /// Values from the `*_data` fields may not be duplicated. Custom Attribute fields are intended to store additional
-        /// information about a Catalog Object or associations with an entity in another system. Do not use custom attributes
+        /// Custom Attribute Values are intended to store additional information about a Catalog Object
+        /// or associations with an entity in another system. Do not use custom attributes
         /// to store any sensitive information (personally identifiable information, card details, etc.).
-        /// For CustomAttributesDefinitions defined by the app making the request, the map key is the key defined in
-        /// CustomAttributeDefinition (eg. “reference_id”). For CustomAttributesDefinitions by other apps, the map key is
-        /// the key defined in CustomAttributeDefinition prefixed with the application ID and a colon
+        /// For CustomAttributesDefinitions defined by the app making the request, the map key is the key defined in the
+        /// `CatalogCustomAttributeDefinition` (e.g. “reference_id”). For custom attributes created by other apps, the map key is
+        /// the key defined in `CatalogCustomAttributeDefinition` prefixed with the application ID and a colon
         /// (eg. “abcd1234:reference_id”).
         /// </summary>
         [JsonProperty("custom_attribute_values")]
@@ -265,6 +267,12 @@ namespace Square.Models
         [JsonProperty("custom_attribute_definition_data")]
         public Models.CatalogCustomAttributeDefinition CustomAttributeDefinitionData { get; }
 
+        /// <summary>
+        /// A parent Catalog Object model represents a set of Quick Amounts and the settings control the amounts.
+        /// </summary>
+        [JsonProperty("quick_amounts_settings_data")]
+        public Models.CatalogQuickAmountsSettings QuickAmountsSettingsData { get; }
+
         public Builder ToBuilder()
         {
             var builder = new Builder(Type,
@@ -292,7 +300,8 @@ namespace Square.Models
                 .MeasurementUnitData(MeasurementUnitData)
                 .ItemOptionData(ItemOptionData)
                 .ItemOptionValueData(ItemOptionValueData)
-                .CustomAttributeDefinitionData(CustomAttributeDefinitionData);
+                .CustomAttributeDefinitionData(CustomAttributeDefinitionData)
+                .QuickAmountsSettingsData(QuickAmountsSettingsData);
             return builder;
         }
 
@@ -324,6 +333,7 @@ namespace Square.Models
             private Models.CatalogItemOption itemOptionData;
             private Models.CatalogItemOptionValue itemOptionValueData;
             private Models.CatalogCustomAttributeDefinition customAttributeDefinitionData;
+            private Models.CatalogQuickAmountsSettings quickAmountsSettingsData;
 
             public Builder(string type,
                 string id)
@@ -487,6 +497,12 @@ namespace Square.Models
                 return this;
             }
 
+            public Builder QuickAmountsSettingsData(Models.CatalogQuickAmountsSettings value)
+            {
+                quickAmountsSettingsData = value;
+                return this;
+            }
+
             public CatalogObject Build()
             {
                 return new CatalogObject(type,
@@ -514,7 +530,8 @@ namespace Square.Models
                     measurementUnitData,
                     itemOptionData,
                     itemOptionValueData,
-                    customAttributeDefinitionData);
+                    customAttributeDefinitionData,
+                    quickAmountsSettingsData);
             }
         }
     }

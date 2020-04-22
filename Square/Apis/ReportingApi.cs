@@ -97,7 +97,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-03-25" }
+                { "Square-Version", "2020-04-22" }
             };
 
             //prepare the API call request to fetch the response
@@ -198,7 +198,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-03-25" }
+                { "Square-Version", "2020-04-22" }
             };
 
             //prepare the API call request to fetch the response

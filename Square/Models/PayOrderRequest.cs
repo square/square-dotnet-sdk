@@ -39,7 +39,8 @@ namespace Square.Models
         public int? OrderVersion { get; }
 
         /// <summary>
-        /// Getter for payment_ids
+        /// The IDs of the [payments](#type-payment) to collect.
+        /// The payment total must match the order total.
         /// </summary>
         [JsonProperty("payment_ids")]
         public IList<string> PaymentIds { get; }

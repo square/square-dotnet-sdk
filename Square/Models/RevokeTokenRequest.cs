@@ -16,11 +16,13 @@ namespace Square.Models
     {
         public RevokeTokenRequest(string clientId = null,
             string accessToken = null,
-            string merchantId = null)
+            string merchantId = null,
+            bool? revokeOnlyAccessToken = null)
         {
             ClientId = clientId;
             AccessToken = accessToken;
             MerchantId = merchantId;
+            RevokeOnlyAccessToken = revokeOnlyAccessToken;
         }
 
         /// <summary>
@@ -44,12 +46,21 @@ namespace Square.Models
         [JsonProperty("merchant_id")]
         public string MerchantId { get; }
 
+        /// <summary>
+        /// If `true`, terminate the given single access token, but do not
+        /// terminate the entire authorization.
+        /// Default: `false`
+        /// </summary>
+        [JsonProperty("revoke_only_access_token")]
+        public bool? RevokeOnlyAccessToken { get; }
+
         public Builder ToBuilder()
         {
             var builder = new Builder()
                 .ClientId(ClientId)
                 .AccessToken(AccessToken)
-                .MerchantId(MerchantId);
+                .MerchantId(MerchantId)
+                .RevokeOnlyAccessToken(RevokeOnlyAccessToken);
             return builder;
         }
 
@@ -58,6 +69,7 @@ namespace Square.Models
             private string clientId;
             private string accessToken;
             private string merchantId;
+            private bool? revokeOnlyAccessToken;
 
             public Builder() { }
             public Builder ClientId(string value)
@@ -78,11 +90,18 @@ namespace Square.Models
                 return this;
             }
 
+            public Builder RevokeOnlyAccessToken(bool? value)
+            {
+                revokeOnlyAccessToken = value;
+                return this;
+            }
+
             public RevokeTokenRequest Build()
             {
                 return new RevokeTokenRequest(clientId,
                     accessToken,
-                    merchantId);
+                    merchantId,
+                    revokeOnlyAccessToken);
             }
         }
     }
