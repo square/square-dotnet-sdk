@@ -94,7 +94,7 @@ namespace Square.Apis
 
         /// <summary>
         /// Creates a new customer group for a business. 
-        /// The request must include at least the `name` value of the group.
+        /// The request must include the `name` value of the group.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.CreateCustomerGroupResponse response from the API call</return>
@@ -107,7 +107,7 @@ namespace Square.Apis
 
         /// <summary>
         /// Creates a new customer group for a business. 
-        /// The request must include at least the `name` value of the group.
+        /// The request must include the `name` value of the group.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.CreateCustomerGroupResponse response from the API call</return>

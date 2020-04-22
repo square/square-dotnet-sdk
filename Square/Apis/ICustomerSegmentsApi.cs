@@ -20,17 +20,15 @@ namespace Square.Apis
         /// Retrieves the list of customer segments of a business.
         /// </summary>
         /// <param name="cursor">Optional parameter: A pagination cursor returned by previous calls to __ListCustomerSegments__. Used to retrieve the next set of query results.  See the [Pagination guide](https://developer.squareup.com/docs/docs/working-with-apis/pagination) for more information.</param>
-        /// <param name="limit">Optional parameter: Sets the maximum number of results to be returned in a single page. Limit values outside the supported range are ignored.  Minimum value: `1` Maximum value: `1,000`</param>
         /// <return>Returns the Models.ListCustomerSegmentsResponse response from the API call</return>
-        Models.ListCustomerSegmentsResponse ListCustomerSegments(string cursor = null, long? limit = null);
+        Models.ListCustomerSegmentsResponse ListCustomerSegments(string cursor = null);
 
         /// <summary>
         /// Retrieves the list of customer segments of a business.
         /// </summary>
         /// <param name="cursor">Optional parameter: A pagination cursor returned by previous calls to __ListCustomerSegments__. Used to retrieve the next set of query results.  See the [Pagination guide](https://developer.squareup.com/docs/docs/working-with-apis/pagination) for more information.</param>
-        /// <param name="limit">Optional parameter: Sets the maximum number of results to be returned in a single page. Limit values outside the supported range are ignored.  Minimum value: `1` Maximum value: `1,000`</param>
         /// <return>Returns the Models.ListCustomerSegmentsResponse response from the API call</return>
-        Task<Models.ListCustomerSegmentsResponse> ListCustomerSegmentsAsync(string cursor = null, long? limit = null, CancellationToken cancellationToken = default);
+        Task<Models.ListCustomerSegmentsResponse> ListCustomerSegmentsAsync(string cursor = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Retrieves a specific customer segment as identified by the `segment_id` value.
