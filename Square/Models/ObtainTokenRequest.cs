@@ -20,8 +20,7 @@ namespace Square.Models
             string code = null,
             string redirectUri = null,
             string refreshToken = null,
-            string migrationToken = null,
-            IList<string> scopes = null)
+            string migrationToken = null)
         {
             ClientId = clientId;
             ClientSecret = clientSecret;
@@ -30,7 +29,6 @@ namespace Square.Models
             GrantType = grantType;
             RefreshToken = refreshToken;
             MigrationToken = migrationToken;
-            Scopes = scopes;
         }
 
         /// <summary>
@@ -86,17 +84,6 @@ namespace Square.Models
         [JsonProperty("migration_token")]
         public string MigrationToken { get; }
 
-        /// <summary>
-        /// __OPTIONAL__
-        /// A JSON list of strings that are the permissions the application is requesting.
-        /// For example: "`["MERCHANT_PROFILE_READ","PAYMENTS_READ","BANK_ACCOUNTS_READ"]`"
-        /// The access token returned in the response will be granted the permissions
-        /// that comprise the intersection between the given list of permissions, and those
-        /// that belong to the provided refresh token.
-        /// </summary>
-        [JsonProperty("scopes")]
-        public IList<string> Scopes { get; }
-
         public Builder ToBuilder()
         {
             var builder = new Builder(ClientId,
@@ -105,8 +92,7 @@ namespace Square.Models
                 .Code(Code)
                 .RedirectUri(RedirectUri)
                 .RefreshToken(RefreshToken)
-                .MigrationToken(MigrationToken)
-                .Scopes(Scopes);
+                .MigrationToken(MigrationToken);
             return builder;
         }
 
@@ -119,7 +105,6 @@ namespace Square.Models
             private string redirectUri;
             private string refreshToken;
             private string migrationToken;
-            private IList<string> scopes = new List<string>();
 
             public Builder(string clientId,
                 string clientSecret,
@@ -171,12 +156,6 @@ namespace Square.Models
                 return this;
             }
 
-            public Builder Scopes(IList<string> value)
-            {
-                scopes = value;
-                return this;
-            }
-
             public ObtainTokenRequest Build()
             {
                 return new ObtainTokenRequest(clientId,
@@ -185,8 +164,7 @@ namespace Square.Models
                     code,
                     redirectUri,
                     refreshToken,
-                    migrationToken,
-                    scopes);
+                    migrationToken);
             }
         }
     }
