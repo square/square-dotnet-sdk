@@ -188,7 +188,7 @@ namespace Square
         /// <summary>
         /// Current version of the SDK
         /// </summary>
-        public string SdkVersion => "5.2.1";
+        public string SdkVersion => "5.2.2";
 
         /// <summary>
         /// Version of Square API supported by this SDK
