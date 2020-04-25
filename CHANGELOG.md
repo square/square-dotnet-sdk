@@ -51,8 +51,6 @@
 
 * **OAuth API**
   * [RevokeToken](${SQUARE_TECH_REF}/oauth-api/revoke-token) endpoint. Added a new field called [revoke_only_access_token](${SQUARE_TECH_REF}/oauth-api/revoke-token#request__property-revoke_only_access_token). This field allows a client to revoke an access token but leave the parent authorization active.
-  * [ObtainToken](${SQUARE_TECH_REF}/oauth-api/obtain-token) endpoint. Added a new field called [scopes](${SQUARE_TECH_REF}/oauth-api/obtain-token#request__property-scopes). This field lets a client change the set of permissions for an access token when making a request to refresh the token.
-
 
 * **Catalog API**
   * [CatalogQuickAmountsSettings](${SQUARE_TECH_REF}/objects/CatalogQuickAmountsSettings) type. Added to support predefined custom payment amounts in the Square Register checkout dialog box.
