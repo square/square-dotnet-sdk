@@ -1,19 +1,19 @@
 # Changelog
 
-## Version 5.2.2.20200422 (2020-04-25)
+## Version 5.2.2 (2020-04-25)
 ## Existing API updates
 
 * **OAuth API**
   * [Obtain Token](https://developer.squareup.com/reference/square_2020-04-22/oauth-api/obtain-token) endpoint: Removed the `scopes` property from the request body.
 
-## Version 5.2.1.20200422 (2020-04-22)
+## Version 5.2.1 (2020-04-22)
 ## API releases
 * **Customer Segments API (beta).** `limit` field removed from **ListCustomerSegments** endpoint.
 
 
 **Note:** This release fixes a bug introduced on the [April 22, 2020](changelog/connect-logs/2020-04-22) release of the Square API.
 
-## Version 5.2.0.20200422 (2020-04-22)
+## Version 5.2.0 (2020-04-22)
 ## API releases
 * **Terminal API.** The new Terminal API lets a custom third-party POS app integrate with the Square Terminal to send terminal checkout requests to collect payments.
   * For an overview, see [Overview](/terminal-api/overview).
