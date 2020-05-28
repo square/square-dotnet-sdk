@@ -16,12 +16,13 @@ namespace Square.Models
     {
         public CatalogCustomAttributeDefinition(string type,
             string name,
+            IList<string> allowedObjectTypes,
             string description = null,
             Models.SourceApplication sourceApplication = null,
-            IList<string> allowedObjectTypes = null,
             string sellerVisibility = null,
             string appVisibility = null,
             Models.CatalogCustomAttributeDefinitionStringConfig stringConfig = null,
+            Models.CatalogCustomAttributeDefinitionNumberConfig numberConfig = null,
             Models.CatalogCustomAttributeDefinitionSelectionConfig selectionConfig = null,
             int? customAttributeUsageCount = null,
             string key = null)
@@ -34,6 +35,7 @@ namespace Square.Models
             SellerVisibility = sellerVisibility;
             AppVisibility = appVisibility;
             StringConfig = stringConfig;
+            NumberConfig = numberConfig;
             SelectionConfig = selectionConfig;
             CustomAttributeUsageCount = customAttributeUsageCount;
             Key = key;
@@ -97,6 +99,12 @@ namespace Square.Models
         public Models.CatalogCustomAttributeDefinitionStringConfig StringConfig { get; }
 
         /// <summary>
+        /// Getter for number_config
+        /// </summary>
+        [JsonProperty("number_config")]
+        public Models.CatalogCustomAttributeDefinitionNumberConfig NumberConfig { get; }
+
+        /// <summary>
         /// Configuration associated with `SELECTION`-type custom attribute definitions.
         /// </summary>
         [JsonProperty("selection_config")]
@@ -123,13 +131,14 @@ namespace Square.Models
         public Builder ToBuilder()
         {
             var builder = new Builder(Type,
-                Name)
+                Name,
+                AllowedObjectTypes)
                 .Description(Description)
                 .SourceApplication(SourceApplication)
-                .AllowedObjectTypes(AllowedObjectTypes)
                 .SellerVisibility(SellerVisibility)
                 .AppVisibility(AppVisibility)
                 .StringConfig(StringConfig)
+                .NumberConfig(NumberConfig)
                 .SelectionConfig(SelectionConfig)
                 .CustomAttributeUsageCount(CustomAttributeUsageCount)
                 .Key(Key);
@@ -140,21 +149,24 @@ namespace Square.Models
         {
             private string type;
             private string name;
+            private IList<string> allowedObjectTypes;
             private string description;
             private Models.SourceApplication sourceApplication;
-            private IList<string> allowedObjectTypes = new List<string>();
             private string sellerVisibility;
             private string appVisibility;
             private Models.CatalogCustomAttributeDefinitionStringConfig stringConfig;
+            private Models.CatalogCustomAttributeDefinitionNumberConfig numberConfig;
             private Models.CatalogCustomAttributeDefinitionSelectionConfig selectionConfig;
             private int? customAttributeUsageCount;
             private string key;
 
             public Builder(string type,
-                string name)
+                string name,
+                IList<string> allowedObjectTypes)
             {
                 this.type = type;
                 this.name = name;
+                this.allowedObjectTypes = allowedObjectTypes;
             }
             public Builder Type(string value)
             {
@@ -168,6 +180,12 @@ namespace Square.Models
                 return this;
             }
 
+            public Builder AllowedObjectTypes(IList<string> value)
+            {
+                allowedObjectTypes = value;
+                return this;
+            }
+
             public Builder Description(string value)
             {
                 description = value;
@@ -177,12 +195,6 @@ namespace Square.Models
             public Builder SourceApplication(Models.SourceApplication value)
             {
                 sourceApplication = value;
-                return this;
-            }
-
-            public Builder AllowedObjectTypes(IList<string> value)
-            {
-                allowedObjectTypes = value;
                 return this;
             }
 
@@ -201,6 +213,12 @@ namespace Square.Models
             public Builder StringConfig(Models.CatalogCustomAttributeDefinitionStringConfig value)
             {
                 stringConfig = value;
+                return this;
+            }
+
+            public Builder NumberConfig(Models.CatalogCustomAttributeDefinitionNumberConfig value)
+            {
+                numberConfig = value;
                 return this;
             }
 
@@ -226,12 +244,13 @@ namespace Square.Models
             {
                 return new CatalogCustomAttributeDefinition(type,
                     name,
+                    allowedObjectTypes,
                     description,
                     sourceApplication,
-                    allowedObjectTypes,
                     sellerVisibility,
                     appVisibility,
                     stringConfig,
+                    numberConfig,
                     selectionConfig,
                     customAttributeUsageCount,
                     key);

@@ -29,7 +29,7 @@ namespace Square.Models
         public Models.CustomerFilter Filter { get; }
 
         /// <summary>
-        /// Indicates the field to use for sorting customer profiles.
+        /// Specifies how searched customers profiles are sorted, including the sort key and sort order.
         /// </summary>
         [JsonProperty("sort")]
         public Models.CustomerSort Sort { get; }

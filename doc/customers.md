@@ -23,7 +23,11 @@ ICustomersApi customersApi = client.CustomersApi;
 
 ## List Customers
 
-Lists a business's customers.
+Lists customer profiles associated with a Square account.
+
+Under normal operating conditions, newly created or updated customer profiles become available 
+for the listing operation in well under 30 seconds. Occasionally, propagation of the new or updated 
+profiles can take closer to one minute or longer, espeically during network incidents and outages.
 
 ```csharp
 ListCustomersAsync(string cursor = null, string sortField = null, string sortOrder = null)
@@ -108,10 +112,16 @@ catch (ApiException e){};
 
 ## Search Customers
 
-Searches the customer profiles associated with a Square account.
-Calling SearchCustomers without an explicit query parameter returns all
+Searches the customer profiles associated with a Square account using 
+one or more supported query filters. 
+
+Calling `SearchCustomers` without any explicit query filter returns all
 customer profiles ordered alphabetically based on `given_name` and
 `family_name`.
+
+Under normal operating conditions, newly created or updated customer profiles become available 
+for the search operation in well under 30 seconds. Occasionally, propagation of the new or updated 
+profiles can take closer to one minute or longer, espeically during network incidents and outages.
 
 ```csharp
 SearchCustomersAsync(Models.SearchCustomersRequest body)
@@ -140,6 +150,9 @@ var bodyQueryFilterCreatedAt = new TimeRange.Builder()
     .StartAt("2018-01-01T00:00:00-00:00")
     .EndAt("2018-02-01T00:00:00-00:00")
     .Build();
+var bodyQueryFilterEmailAddress = new CustomerTextFilter.Builder()
+    .Fuzzy("example.com")
+    .Build();
 var bodyQueryFilterGroupIdsAll = new List<string>();
 bodyQueryFilterGroupIdsAll.Add("545AXB44B4XXWMVQ4W8SBT3HHF");
 var bodyQueryFilterGroupIds = new FilterValue.Builder()
@@ -148,6 +161,7 @@ var bodyQueryFilterGroupIds = new FilterValue.Builder()
 var bodyQueryFilter = new CustomerFilter.Builder()
     .CreationSource(bodyQueryFilterCreationSource)
     .CreatedAt(bodyQueryFilterCreatedAt)
+    .EmailAddress(bodyQueryFilterEmailAddress)
     .GroupIds(bodyQueryFilterGroupIds)
     .Build();
 var bodyQuerySort = new CustomerSort.Builder()

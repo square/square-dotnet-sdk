@@ -17,11 +17,17 @@ namespace Square.Models
         public CustomerFilter(Models.CustomerCreationSourceFilter creationSource = null,
             Models.TimeRange createdAt = null,
             Models.TimeRange updatedAt = null,
+            Models.CustomerTextFilter emailAddress = null,
+            Models.CustomerTextFilter phoneNumber = null,
+            Models.CustomerTextFilter referenceId = null,
             Models.FilterValue groupIds = null)
         {
             CreationSource = creationSource;
             CreatedAt = createdAt;
             UpdatedAt = updatedAt;
+            EmailAddress = emailAddress;
+            PhoneNumber = phoneNumber;
+            ReferenceId = referenceId;
             GroupIds = groupIds;
         }
 
@@ -55,6 +61,30 @@ namespace Square.Models
         public Models.TimeRange UpdatedAt { get; }
 
         /// <summary>
+        /// A filter to select customers based on exact or fuzzy matching of
+        /// customer attributes against a specified query. Depending on customer attributes, 
+        /// the filter can be case sensitive. This filter can be either exact or fuzzy. It cannot be both.
+        /// </summary>
+        [JsonProperty("email_address")]
+        public Models.CustomerTextFilter EmailAddress { get; }
+
+        /// <summary>
+        /// A filter to select customers based on exact or fuzzy matching of
+        /// customer attributes against a specified query. Depending on customer attributes, 
+        /// the filter can be case sensitive. This filter can be either exact or fuzzy. It cannot be both.
+        /// </summary>
+        [JsonProperty("phone_number")]
+        public Models.CustomerTextFilter PhoneNumber { get; }
+
+        /// <summary>
+        /// A filter to select customers based on exact or fuzzy matching of
+        /// customer attributes against a specified query. Depending on customer attributes, 
+        /// the filter can be case sensitive. This filter can be either exact or fuzzy. It cannot be both.
+        /// </summary>
+        [JsonProperty("reference_id")]
+        public Models.CustomerTextFilter ReferenceId { get; }
+
+        /// <summary>
         /// A filter to select resources based on an exact field value. For any given
         /// value, the value can only be in one property. Depending on the field, either
         /// all properties can be set or only a subset will be available.
@@ -69,6 +99,9 @@ namespace Square.Models
                 .CreationSource(CreationSource)
                 .CreatedAt(CreatedAt)
                 .UpdatedAt(UpdatedAt)
+                .EmailAddress(EmailAddress)
+                .PhoneNumber(PhoneNumber)
+                .ReferenceId(ReferenceId)
                 .GroupIds(GroupIds);
             return builder;
         }
@@ -78,6 +111,9 @@ namespace Square.Models
             private Models.CustomerCreationSourceFilter creationSource;
             private Models.TimeRange createdAt;
             private Models.TimeRange updatedAt;
+            private Models.CustomerTextFilter emailAddress;
+            private Models.CustomerTextFilter phoneNumber;
+            private Models.CustomerTextFilter referenceId;
             private Models.FilterValue groupIds;
 
             public Builder() { }
@@ -99,6 +135,24 @@ namespace Square.Models
                 return this;
             }
 
+            public Builder EmailAddress(Models.CustomerTextFilter value)
+            {
+                emailAddress = value;
+                return this;
+            }
+
+            public Builder PhoneNumber(Models.CustomerTextFilter value)
+            {
+                phoneNumber = value;
+                return this;
+            }
+
+            public Builder ReferenceId(Models.CustomerTextFilter value)
+            {
+                referenceId = value;
+                return this;
+            }
+
             public Builder GroupIds(Models.FilterValue value)
             {
                 groupIds = value;
@@ -110,6 +164,9 @@ namespace Square.Models
                 return new CustomerFilter(creationSource,
                     createdAt,
                     updatedAt,
+                    emailAddress,
+                    phoneNumber,
+                    referenceId,
                     groupIds);
             }
         }

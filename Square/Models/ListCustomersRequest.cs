@@ -32,7 +32,7 @@ namespace Square.Models
         public string Cursor { get; }
 
         /// <summary>
-        /// Indicates the sort criteria for a list of Customers.
+        /// Specifies customer attributes as the sort key to customer profiles returned from a search.
         /// </summary>
         [JsonProperty("sort_field")]
         public string SortField { get; }

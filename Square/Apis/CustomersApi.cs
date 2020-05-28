@@ -25,7 +25,10 @@ namespace Square.Apis
         { }
 
         /// <summary>
-        /// Lists a business's customers.
+        /// Lists customer profiles associated with a Square account.
+        /// Under normal operating conditions, newly created or updated customer profiles become available 
+        /// for the listing operation in well under 30 seconds. Occasionally, propagation of the new or updated 
+        /// profiles can take closer to one minute or longer, espeically during network incidents and outages.
         /// </summary>
         /// <param name="cursor">Optional parameter: A pagination cursor returned by a previous call to this endpoint. Provide this to retrieve the next set of results for your original query.  See the [Pagination guide](https://developer.squareup.com/docs/working-with-apis/pagination) for more information.</param>
         /// <param name="sortField">Optional parameter: Indicates how Customers should be sorted.  Default: `DEFAULT`.</param>
@@ -39,7 +42,10 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Lists a business's customers.
+        /// Lists customer profiles associated with a Square account.
+        /// Under normal operating conditions, newly created or updated customer profiles become available 
+        /// for the listing operation in well under 30 seconds. Occasionally, propagation of the new or updated 
+        /// profiles can take closer to one minute or longer, espeically during network incidents and outages.
         /// </summary>
         /// <param name="cursor">Optional parameter: A pagination cursor returned by a previous call to this endpoint. Provide this to retrieve the next set of results for your original query.  See the [Pagination guide](https://developer.squareup.com/docs/working-with-apis/pagination) for more information.</param>
         /// <param name="sortField">Optional parameter: Indicates how Customers should be sorted.  Default: `DEFAULT`.</param>
@@ -70,7 +76,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-04-22" }
+                { "Square-Version", "2020-05-28" }
             };
 
             //prepare the API call request to fetch the response
@@ -147,7 +153,7 @@ namespace Square.Apis
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
-                { "Square-Version", "2020-04-22" }
+                { "Square-Version", "2020-05-28" }
             };
 
             //append body params
@@ -179,10 +185,14 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Searches the customer profiles associated with a Square account.
-        /// Calling SearchCustomers without an explicit query parameter returns all
+        /// Searches the customer profiles associated with a Square account using 
+        /// one or more supported query filters. 
+        /// Calling `SearchCustomers` without any explicit query filter returns all
         /// customer profiles ordered alphabetically based on `given_name` and
         /// `family_name`.
+        /// Under normal operating conditions, newly created or updated customer profiles become available 
+        /// for the search operation in well under 30 seconds. Occasionally, propagation of the new or updated 
+        /// profiles can take closer to one minute or longer, espeically during network incidents and outages.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.SearchCustomersResponse response from the API call</return>
@@ -194,10 +204,14 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Searches the customer profiles associated with a Square account.
-        /// Calling SearchCustomers without an explicit query parameter returns all
+        /// Searches the customer profiles associated with a Square account using 
+        /// one or more supported query filters. 
+        /// Calling `SearchCustomers` without any explicit query filter returns all
         /// customer profiles ordered alphabetically based on `given_name` and
         /// `family_name`.
+        /// Under normal operating conditions, newly created or updated customer profiles become available 
+        /// for the search operation in well under 30 seconds. Occasionally, propagation of the new or updated 
+        /// profiles can take closer to one minute or longer, espeically during network incidents and outages.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.SearchCustomersResponse response from the API call</return>
@@ -219,7 +233,7 @@ namespace Square.Apis
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
-                { "Square-Version", "2020-04-22" }
+                { "Square-Version", "2020-05-28" }
             };
 
             //append body params
@@ -294,7 +308,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-04-22" }
+                { "Square-Version", "2020-05-28" }
             };
 
             //prepare the API call request to fetch the response
@@ -362,7 +376,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-04-22" }
+                { "Square-Version", "2020-05-28" }
             };
 
             //prepare the API call request to fetch the response
@@ -445,7 +459,7 @@ namespace Square.Apis
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
-                { "Square-Version", "2020-04-22" }
+                { "Square-Version", "2020-05-28" }
             };
 
             //append body params
@@ -525,7 +539,7 @@ namespace Square.Apis
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
-                { "Square-Version", "2020-04-22" }
+                { "Square-Version", "2020-05-28" }
             };
 
             //append body params
@@ -599,7 +613,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-04-22" }
+                { "Square-Version", "2020-05-28" }
             };
 
             //prepare the API call request to fetch the response
@@ -674,7 +688,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-04-22" }
+                { "Square-Version", "2020-05-28" }
             };
 
             //prepare the API call request to fetch the response
@@ -749,7 +763,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-04-22" }
+                { "Square-Version", "2020-05-28" }
             };
 
             //prepare the API call request to fetch the response

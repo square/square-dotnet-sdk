@@ -62,7 +62,7 @@ string clientId = "client_id8";
 var body = new RenewTokenRequest.Builder()
     .AccessToken("ACCESS_TOKEN")
     .Build();
-string authorization = "Authorization8";
+string authorization = "Client CLIENT_SECRET";
 
 try
 {
@@ -114,7 +114,7 @@ var body = new RevokeTokenRequest.Builder()
     .ClientId("CLIENT_ID")
     .AccessToken("ACCESS_TOKEN")
     .Build();
-string authorization = "Authorization8";
+string authorization = "Client CLIENT_SECRET";
 
 try
 {
