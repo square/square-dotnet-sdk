@@ -40,6 +40,7 @@ namespace Square
         private readonly Lazy<ICheckoutApi> checkout;
         private readonly Lazy<IOrdersApi> orders;
         private readonly Lazy<ITransactionsApi> transactions;
+        private readonly Lazy<ILoyaltyApi> loyalty;
         private readonly Lazy<IMerchantsApi> merchants;
         private readonly Lazy<IPaymentsApi> payments;
         private readonly Lazy<IRefundsApi> refunds;
@@ -161,6 +162,11 @@ namespace Square
         public ITransactionsApi TransactionsApi => transactions.Value;
 
         /// <summary>
+        /// Provides access to LoyaltyApi controller
+        /// </summary>
+        public ILoyaltyApi LoyaltyApi => loyalty.Value;
+
+        /// <summary>
         /// Provides access to MerchantsApi controller
         /// </summary>
         public IMerchantsApi MerchantsApi => merchants.Value;
@@ -188,12 +194,12 @@ namespace Square
         /// <summary>
         /// Current version of the SDK
         /// </summary>
-        public string SdkVersion => "5.2.2";
+        public string SdkVersion => "5.3.0";
 
         /// <summary>
         /// Version of Square API supported by this SDK
         /// </summary>
-        public string SquareVersion => "2020-04-22";
+        public string SquareVersion => "2020-05-28";
 
         internal static SquareClient CreateFromEnvironment()
         {
@@ -281,6 +287,8 @@ namespace Square
                 () => new OrdersApi(this, this.httpClient, authManagers, this.httpCallBack));
             transactions = new Lazy<ITransactionsApi>(
                 () => new TransactionsApi(this, this.httpClient, authManagers, this.httpCallBack));
+            loyalty = new Lazy<ILoyaltyApi>(
+                () => new LoyaltyApi(this, this.httpClient, authManagers, this.httpCallBack));
             merchants = new Lazy<IMerchantsApi>(
                 () => new MerchantsApi(this, this.httpClient, authManagers, this.httpCallBack));
             payments = new Lazy<IPaymentsApi>(

@@ -105,6 +105,20 @@ namespace Square.Apis
         Task<Models.UpdateOrderResponse> UpdateOrderAsync(string locationId, string orderId, Models.UpdateOrderRequest body, CancellationToken cancellationToken = default);
 
         /// <summary>
+        /// Calculates an [Order](#type-order).
+        /// </summary>
+        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
+        /// <return>Returns the Models.CalculateOrderResponse response from the API call</return>
+        Models.CalculateOrderResponse CalculateOrder(Models.CalculateOrderRequest body);
+
+        /// <summary>
+        /// Calculates an [Order](#type-order).
+        /// </summary>
+        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
+        /// <return>Returns the Models.CalculateOrderResponse response from the API call</return>
+        Task<Models.CalculateOrderResponse> CalculateOrderAsync(Models.CalculateOrderRequest body, CancellationToken cancellationToken = default);
+
+        /// <summary>
         /// Search all orders for one or more locations. Orders include all sales,
         /// returns, and exchanges regardless of how or when they entered the Square
         /// Ecosystem (e.g. Point of Sale, Invoices, Connect APIs, etc).

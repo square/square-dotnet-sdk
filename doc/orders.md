@@ -13,6 +13,7 @@ IOrdersApi ordersApi = client.OrdersApi;
 * [Create Order](/doc/orders.md#create-order)
 * [Batch Retrieve Orders](/doc/orders.md#batch-retrieve-orders)
 * [Update Order](/doc/orders.md#update-order)
+* [Calculate Order](/doc/orders.md#calculate-order)
 * [Search Orders](/doc/orders.md#search-orders)
 * [Pay Order](/doc/orders.md#pay-order)
 
@@ -144,6 +145,76 @@ var body = new UpdateOrderRequest.Builder()
 try
 {
     UpdateOrderResponse result = await ordersApi.UpdateOrderAsync(locationId, orderId, body);
+}
+catch (ApiException e){};
+```
+
+## Calculate Order
+
+Calculates an [Order](#type-order).
+
+```csharp
+CalculateOrderAsync(Models.CalculateOrderRequest body)
+```
+
+### Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `body` | [`Models.CalculateOrderRequest`](/doc/models/calculate-order-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+
+### Response Type
+
+[`Task<Models.CalculateOrderResponse>`](/doc/models/calculate-order-response.md)
+
+### Example Usage
+
+```csharp
+var bodyOrderLineItems = new List<OrderLineItem>();
+
+var bodyOrderLineItems0BasePriceMoney = new Money.Builder()
+    .Amount(500L)
+    .Currency("USD")
+    .Build();
+var bodyOrderLineItems0 = new OrderLineItem.Builder(
+        "1")
+    .Name("Item 1")
+    .BasePriceMoney(bodyOrderLineItems0BasePriceMoney)
+    .Build();
+bodyOrderLineItems.Add(bodyOrderLineItems0);
+
+var bodyOrderLineItems1BasePriceMoney = new Money.Builder()
+    .Amount(300L)
+    .Currency("USD")
+    .Build();
+var bodyOrderLineItems1 = new OrderLineItem.Builder(
+        "2")
+    .Name("Item 2")
+    .BasePriceMoney(bodyOrderLineItems1BasePriceMoney)
+    .Build();
+bodyOrderLineItems.Add(bodyOrderLineItems1);
+
+var bodyOrderDiscounts = new List<OrderLineItemDiscount>();
+
+var bodyOrderDiscounts0 = new OrderLineItemDiscount.Builder()
+    .Name("50% Off")
+    .Percentage("50")
+    .Scope("ORDER")
+    .Build();
+bodyOrderDiscounts.Add(bodyOrderDiscounts0);
+
+var bodyOrder = new Order.Builder(
+        "D7AVYMEAPJ3A3")
+    .LineItems(bodyOrderLineItems)
+    .Discounts(bodyOrderDiscounts)
+    .Build();
+var body = new CalculateOrderRequest.Builder(
+        bodyOrder)
+    .Build();
+
+try
+{
+    CalculateOrderResponse result = await ordersApi.CalculateOrderAsync(body);
 }
 catch (ApiException e){};
 ```

@@ -22,7 +22,8 @@ namespace Square.Models
             Models.Money amountMoney = null,
             Models.Money appliedMoney = null,
             IDictionary<string, string> metadata = null,
-            string scope = null)
+            string scope = null,
+            IList<string> rewardIds = null)
         {
             Uid = uid;
             CatalogObjectId = catalogObjectId;
@@ -33,6 +34,7 @@ namespace Square.Models
             AppliedMoney = appliedMoney;
             Metadata = metadata;
             Scope = scope;
+            RewardIds = rewardIds;
         }
 
         /// <summary>
@@ -113,6 +115,16 @@ namespace Square.Models
         [JsonProperty("scope")]
         public string Scope { get; }
 
+        /// <summary>
+        /// The reward identifiers corresponding to this discount. The application and
+        /// specification of discounts that have `reward_ids` are completely controlled by the backing
+        /// criteria corresponding to the reward tiers of the rewards that are added to the order
+        /// through the Loyalty API. To manually unapply discounts that are the result of added rewards,
+        /// the rewards must be removed from the order through the Loyalty API.
+        /// </summary>
+        [JsonProperty("reward_ids")]
+        public IList<string> RewardIds { get; }
+
         public Builder ToBuilder()
         {
             var builder = new Builder()
@@ -124,7 +136,8 @@ namespace Square.Models
                 .AmountMoney(AmountMoney)
                 .AppliedMoney(AppliedMoney)
                 .Metadata(Metadata)
-                .Scope(Scope);
+                .Scope(Scope)
+                .RewardIds(RewardIds);
             return builder;
         }
 
@@ -139,6 +152,7 @@ namespace Square.Models
             private Models.Money appliedMoney;
             private IDictionary<string, string> metadata = new Dictionary<string, string>();
             private string scope;
+            private IList<string> rewardIds = new List<string>();
 
             public Builder() { }
             public Builder Uid(string value)
@@ -195,6 +209,12 @@ namespace Square.Models
                 return this;
             }
 
+            public Builder RewardIds(IList<string> value)
+            {
+                rewardIds = value;
+                return this;
+            }
+
             public OrderLineItemDiscount Build()
             {
                 return new OrderLineItemDiscount(uid,
@@ -205,7 +225,8 @@ namespace Square.Models
                     amountMoney,
                     appliedMoney,
                     metadata,
-                    scope);
+                    scope,
+                    rewardIds);
             }
         }
     }

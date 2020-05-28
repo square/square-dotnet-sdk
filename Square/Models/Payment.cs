@@ -194,8 +194,7 @@ namespace Square.Models
 
         /// <summary>
         /// The source type for this payment
-        /// Current values include:
-        /// `CARD`
+        /// Current values include: `CARD`.
         /// </summary>
         [JsonProperty("source_type")]
         public string SourceType { get; }
@@ -226,7 +225,7 @@ namespace Square.Models
         public string ReferenceId { get; }
 
         /// <summary>
-        /// An optional customer_id to be entered by the developer when creating a payment.
+        /// The [Customer](#type-customer) ID of the customer associated with the payment.
         /// </summary>
         [JsonProperty("customer_id")]
         public string CustomerId { get; }
@@ -270,7 +269,7 @@ namespace Square.Models
         /// <summary>
         /// Additional payment information that gets added on the customer's card statement
         /// as part of the statement description.
-        /// Note that the statement_description_identifier may get truncated on the statement description
+        /// Note that the `statement_description_identifier` may get truncated on the statement description
         /// to fit the required information including the Square identifier (SQ *) and name of the
         /// merchant taking the payment.
         /// </summary>

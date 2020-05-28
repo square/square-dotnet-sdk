@@ -14,7 +14,7 @@ namespace Square.Models
 {
     public class SearchOrdersFulfillmentFilter 
     {
-        public SearchOrdersFulfillmentFilter(IList<string> fulfillmentTypes,
+        public SearchOrdersFulfillmentFilter(IList<string> fulfillmentTypes = null,
             IList<string> fulfillmentStates = null)
         {
             FulfillmentTypes = fulfillmentTypes;
@@ -41,20 +41,18 @@ namespace Square.Models
 
         public Builder ToBuilder()
         {
-            var builder = new Builder(FulfillmentTypes)
+            var builder = new Builder()
+                .FulfillmentTypes(FulfillmentTypes)
                 .FulfillmentStates(FulfillmentStates);
             return builder;
         }
 
         public class Builder
         {
-            private IList<string> fulfillmentTypes;
+            private IList<string> fulfillmentTypes = new List<string>();
             private IList<string> fulfillmentStates = new List<string>();
 
-            public Builder(IList<string> fulfillmentTypes)
-            {
-                this.fulfillmentTypes = fulfillmentTypes;
-            }
+            public Builder() { }
             public Builder FulfillmentTypes(IList<string> value)
             {
                 fulfillmentTypes = value;

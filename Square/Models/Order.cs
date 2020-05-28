@@ -39,7 +39,8 @@ namespace Square.Models
             Models.Money totalMoney = null,
             Models.Money totalTaxMoney = null,
             Models.Money totalDiscountMoney = null,
-            Models.Money totalServiceChargeMoney = null)
+            Models.Money totalServiceChargeMoney = null,
+            IList<Models.OrderReward> rewards = null)
         {
             Id = id;
             LocationId = locationId;
@@ -67,6 +68,7 @@ namespace Square.Models
             TotalTaxMoney = totalTaxMoney;
             TotalDiscountMoney = totalDiscountMoney;
             TotalServiceChargeMoney = totalServiceChargeMoney;
+            Rewards = rewards;
         }
 
         /// <summary>
@@ -280,6 +282,12 @@ namespace Square.Models
         [JsonProperty("total_service_charge_money")]
         public Models.Money TotalServiceChargeMoney { get; }
 
+        /// <summary>
+        /// A set-like list of rewards that have been added to the order.
+        /// </summary>
+        [JsonProperty("rewards")]
+        public IList<Models.OrderReward> Rewards { get; }
+
         public Builder ToBuilder()
         {
             var builder = new Builder(LocationId)
@@ -307,7 +315,8 @@ namespace Square.Models
                 .TotalMoney(TotalMoney)
                 .TotalTaxMoney(TotalTaxMoney)
                 .TotalDiscountMoney(TotalDiscountMoney)
-                .TotalServiceChargeMoney(TotalServiceChargeMoney);
+                .TotalServiceChargeMoney(TotalServiceChargeMoney)
+                .Rewards(Rewards);
             return builder;
         }
 
@@ -339,6 +348,7 @@ namespace Square.Models
             private Models.Money totalTaxMoney;
             private Models.Money totalDiscountMoney;
             private Models.Money totalServiceChargeMoney;
+            private IList<Models.OrderReward> rewards = new List<Models.OrderReward>();
 
             public Builder(string locationId)
             {
@@ -500,6 +510,12 @@ namespace Square.Models
                 return this;
             }
 
+            public Builder Rewards(IList<Models.OrderReward> value)
+            {
+                rewards = value;
+                return this;
+            }
+
             public Order Build()
             {
                 return new Order(locationId,
@@ -527,7 +543,8 @@ namespace Square.Models
                     totalMoney,
                     totalTaxMoney,
                     totalDiscountMoney,
-                    totalServiceChargeMoney);
+                    totalServiceChargeMoney,
+                    rewards);
             }
         }
     }

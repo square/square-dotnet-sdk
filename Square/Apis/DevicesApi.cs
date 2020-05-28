@@ -70,7 +70,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-04-22" }
+                { "Square-Version", "2020-05-28" }
             };
 
             //prepare the API call request to fetch the response
@@ -135,7 +135,7 @@ namespace Square.Apis
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
-                { "Square-Version", "2020-04-22" }
+                { "Square-Version", "2020-05-28" }
             };
 
             //append body params
@@ -206,7 +206,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-04-22" }
+                { "Square-Version", "2020-05-28" }
             };
 
             //prepare the API call request to fetch the response

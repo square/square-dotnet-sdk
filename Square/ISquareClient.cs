@@ -121,6 +121,11 @@ namespace Square
         ITransactionsApi TransactionsApi { get; }
 
         /// <summary>
+        /// Instance for ILoyaltyApi
+        /// </summary>
+        ILoyaltyApi LoyaltyApi { get; }
+
+        /// <summary>
         /// Instance for IMerchantsApi
         /// </summary>
         IMerchantsApi MerchantsApi { get; }

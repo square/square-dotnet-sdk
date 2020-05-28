@@ -14,9 +14,9 @@ namespace Square.Models
 {
     public class Customer 
     {
-        public Customer(string id,
-            string createdAt,
-            string updatedAt,
+        public Customer(string id = null,
+            string createdAt = null,
+            string updatedAt = null,
             IList<Models.Card> cards = null,
             string givenName = null,
             string familyName = null,
@@ -150,7 +150,7 @@ namespace Square.Models
         public Models.CustomerPreferences Preferences { get; }
 
         /// <summary>
-        /// The customer groups and segments the customer belongs to. This deprecated field is replaced with dedicated `group_ids` for customer groups and `segment_ids` for customer segments.
+        /// The customer groups and segments the customer belongs to. This deprecated field has been replaced with  the dedicated `group_ids` for customer groups and the dedicated `segment_ids` field for customer segments. You can retrieve information about a given customer group and segment respectively using the Customer Groups API and Customer Segments API.
         /// </summary>
         [JsonProperty("groups")]
         public IList<Models.CustomerGroupInfo> Groups { get; }
@@ -175,9 +175,10 @@ namespace Square.Models
 
         public Builder ToBuilder()
         {
-            var builder = new Builder(Id,
-                CreatedAt,
-                UpdatedAt)
+            var builder = new Builder()
+                .Id(Id)
+                .CreatedAt(CreatedAt)
+                .UpdatedAt(UpdatedAt)
                 .Cards(Cards)
                 .GivenName(GivenName)
                 .FamilyName(FamilyName)
@@ -219,14 +220,7 @@ namespace Square.Models
             private IList<string> groupIds = new List<string>();
             private IList<string> segmentIds = new List<string>();
 
-            public Builder(string id,
-                string createdAt,
-                string updatedAt)
-            {
-                this.id = id;
-                this.createdAt = createdAt;
-                this.updatedAt = updatedAt;
-            }
+            public Builder() { }
             public Builder Id(string value)
             {
                 id = value;
