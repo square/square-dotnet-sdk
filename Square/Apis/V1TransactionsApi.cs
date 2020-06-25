@@ -26,11 +26,6 @@ namespace Square.Apis
 
         /// <summary>
         /// Provides non-confidential details for all of a location's associated bank accounts. This endpoint does not provide full bank account numbers, and there is no way to obtain a full bank account number with the Connect API.
-        /// ---
-        /// - __Deprecation date__: 2020-02-26
-        /// - [__Retirement date__](https://developer.squareup.com/docs/docs/build-basics/api-lifecycle#deprecated): 2021-02-26
-        /// - [Migration guide](https://developer.squareup.com/docs/docs/migrate-from-v1/guides/v1-bankaccounts)
-        /// ---
         /// </summary>
         /// <param name="locationId">Required parameter: The ID of the location to list bank accounts for.</param>
         /// <return>Returns the List<Models.V1BankAccount> response from the API call</return>
@@ -44,11 +39,6 @@ namespace Square.Apis
 
         /// <summary>
         /// Provides non-confidential details for all of a location's associated bank accounts. This endpoint does not provide full bank account numbers, and there is no way to obtain a full bank account number with the Connect API.
-        /// ---
-        /// - __Deprecation date__: 2020-02-26
-        /// - [__Retirement date__](https://developer.squareup.com/docs/docs/build-basics/api-lifecycle#deprecated): 2021-02-26
-        /// - [Migration guide](https://developer.squareup.com/docs/docs/migrate-from-v1/guides/v1-bankaccounts)
-        /// ---
         /// </summary>
         /// <param name="locationId">Required parameter: The ID of the location to list bank accounts for.</param>
         /// <return>Returns the List<Models.V1BankAccount> response from the API call</return>
@@ -76,7 +66,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-05-28" }
+                { "Square-Version", "2020-06-25" }
             };
 
             //prepare the API call request to fetch the response
@@ -106,11 +96,6 @@ namespace Square.Apis
 
         /// <summary>
         /// Provides non-confidential details for a merchant's associated bank account. This endpoint does not provide full bank account numbers, and there is no way to obtain a full bank account number with the Connect API.
-        /// ---
-        /// - __Deprecation date__: 2020-02-26
-        /// - [__Retirement date__](https://developer.squareup.com/docs/docs/build-basics/api-lifecycle#deprecated): 2021-02-26
-        /// - [Migration guide](https://developer.squareup.com/docs/docs/migrate-from-v1/guides/v1-bankaccounts)
-        /// ---
         /// </summary>
         /// <param name="locationId">Required parameter: The ID of the bank account's associated location.</param>
         /// <param name="bankAccountId">Required parameter: The bank account's Square-issued ID. You obtain this value from Settlement objects returned.</param>
@@ -125,11 +110,6 @@ namespace Square.Apis
 
         /// <summary>
         /// Provides non-confidential details for a merchant's associated bank account. This endpoint does not provide full bank account numbers, and there is no way to obtain a full bank account number with the Connect API.
-        /// ---
-        /// - __Deprecation date__: 2020-02-26
-        /// - [__Retirement date__](https://developer.squareup.com/docs/docs/build-basics/api-lifecycle#deprecated): 2021-02-26
-        /// - [Migration guide](https://developer.squareup.com/docs/docs/migrate-from-v1/guides/v1-bankaccounts)
-        /// ---
         /// </summary>
         /// <param name="locationId">Required parameter: The ID of the bank account's associated location.</param>
         /// <param name="bankAccountId">Required parameter: The bank account's Square-issued ID. You obtain this value from Settlement objects returned.</param>
@@ -159,7 +139,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-05-28" }
+                { "Square-Version", "2020-06-25" }
             };
 
             //prepare the API call request to fetch the response
@@ -249,7 +229,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-05-28" }
+                { "Square-Version", "2020-06-25" }
             };
 
             //prepare the API call request to fetch the response
@@ -320,7 +300,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-05-28" }
+                { "Square-Version", "2020-06-25" }
             };
 
             //prepare the API call request to fetch the response
@@ -394,7 +374,7 @@ namespace Square.Apis
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
-                { "Square-Version", "2020-05-28" }
+                { "Square-Version", "2020-06-25" }
             };
 
             //append body params
@@ -452,7 +432,7 @@ namespace Square.Apis
                 string endTime = null,
                 int? limit = null,
                 string batchToken = null,
-                bool? includePartial = null)
+                bool? includePartial = false)
         {
             Task<List<Models.V1Payment>> t = ListPaymentsAsync(locationId, order, beginTime, endTime, limit, batchToken, includePartial);
             ApiHelper.RunTaskSynchronously(t);
@@ -486,7 +466,7 @@ namespace Square.Apis
                 string endTime = null,
                 int? limit = null,
                 string batchToken = null,
-                bool? includePartial = null, CancellationToken cancellationToken = default)
+                bool? includePartial = false, CancellationToken cancellationToken = default)
         {
             //the base uri for api requests
             string _baseUri = config.GetBaseUri();
@@ -509,7 +489,7 @@ namespace Square.Apis
                 { "end_time", endTime },
                 { "limit", limit },
                 { "batch_token", batchToken },
-                { "include_partial", includePartial }
+                { "include_partial", (null != includePartial) ? includePartial : false }
             }, ArrayDeserializationFormat, ParameterSeparator);
 
             //validate and preprocess url
@@ -520,7 +500,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-05-28" }
+                { "Square-Version", "2020-06-25" }
             };
 
             //prepare the API call request to fetch the response
@@ -591,7 +571,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-05-28" }
+                { "Square-Version", "2020-06-25" }
             };
 
             //prepare the API call request to fetch the response
@@ -691,7 +671,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-05-28" }
+                { "Square-Version", "2020-06-25" }
             };
 
             //prepare the API call request to fetch the response
@@ -780,7 +760,7 @@ namespace Square.Apis
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
-                { "Square-Version", "2020-05-28" }
+                { "Square-Version", "2020-06-25" }
             };
 
             //append body params
@@ -896,7 +876,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-05-28" }
+                { "Square-Version", "2020-06-25" }
             };
 
             //prepare the API call request to fetch the response
@@ -993,7 +973,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-05-28" }
+                { "Square-Version", "2020-06-25" }
             };
 
             //prepare the API call request to fetch the response

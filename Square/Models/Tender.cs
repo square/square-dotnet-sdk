@@ -64,7 +64,7 @@ namespace Square.Models
         public string TransactionId { get; }
 
         /// <summary>
-        /// The time when the tender was created, in RFC 3339 format.
+        /// The timestamp for when the tender was created, in RFC 3339 format.
         /// </summary>
         [JsonProperty("created_at")]
         public string CreatedAt { get; }

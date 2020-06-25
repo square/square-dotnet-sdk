@@ -26,11 +26,6 @@ namespace Square.Apis
 
         /// <summary>
         /// Lists all the item categories for a given location.
-        /// ---
-        /// - __Deprecation date__: 2019-11-20
-        /// - [__Retirement date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#deprecated): 2020-11-18
-        /// - [Migration guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items)
-        /// ---
         /// </summary>
         /// <param name="locationId">Required parameter: The ID of the location to list categories for.</param>
         /// <return>Returns the List<Models.V1Category> response from the API call</return>
@@ -44,11 +39,6 @@ namespace Square.Apis
 
         /// <summary>
         /// Lists all the item categories for a given location.
-        /// ---
-        /// - __Deprecation date__: 2019-11-20
-        /// - [__Retirement date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#deprecated): 2020-11-18
-        /// - [Migration guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items)
-        /// ---
         /// </summary>
         /// <param name="locationId">Required parameter: The ID of the location to list categories for.</param>
         /// <return>Returns the List<Models.V1Category> response from the API call</return>
@@ -76,7 +66,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-05-28" }
+                { "Square-Version", "2020-06-25" }
             };
 
             //prepare the API call request to fetch the response
@@ -106,11 +96,6 @@ namespace Square.Apis
 
         /// <summary>
         /// Creates an item category.
-        /// ---
-        /// - __Deprecation date__: 2019-11-20
-        /// - [__Retirement date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#deprecated): 2020-11-18
-        /// - [Migration guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items)
-        /// ---
         /// </summary>
         /// <param name="locationId">Required parameter: The ID of the location to create an item for.</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
@@ -125,11 +110,6 @@ namespace Square.Apis
 
         /// <summary>
         /// Creates an item category.
-        /// ---
-        /// - __Deprecation date__: 2019-11-20
-        /// - [__Retirement date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#deprecated): 2020-11-18
-        /// - [Migration guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items)
-        /// ---
         /// </summary>
         /// <param name="locationId">Required parameter: The ID of the location to create an item for.</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
@@ -159,7 +139,7 @@ namespace Square.Apis
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
-                { "Square-Version", "2020-05-28" }
+                { "Square-Version", "2020-06-25" }
             };
 
             //append body params
@@ -192,11 +172,6 @@ namespace Square.Apis
 
         /// <summary>
         /// Deletes an existing item category.
-        /// ---
-        /// - __Deprecation date__: 2019-11-20
-        /// - [__Retirement date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#deprecated): 2020-11-18
-        /// - [Migration guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items)
-        /// ---
         /// __DeleteCategory__ returns nothing on success but Connect SDKs
         /// map the empty response to an empty `V1DeleteCategoryRequest` object
         /// as documented below.
@@ -214,11 +189,6 @@ namespace Square.Apis
 
         /// <summary>
         /// Deletes an existing item category.
-        /// ---
-        /// - __Deprecation date__: 2019-11-20
-        /// - [__Retirement date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#deprecated): 2020-11-18
-        /// - [Migration guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items)
-        /// ---
         /// __DeleteCategory__ returns nothing on success but Connect SDKs
         /// map the empty response to an empty `V1DeleteCategoryRequest` object
         /// as documented below.
@@ -251,7 +221,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-05-28" }
+                { "Square-Version", "2020-06-25" }
             };
 
             //prepare the API call request to fetch the response
@@ -281,11 +251,6 @@ namespace Square.Apis
 
         /// <summary>
         /// Modifies the details of an existing item category.
-        /// ---
-        /// - __Deprecation date__: 2019-11-20
-        /// - [__Retirement date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#deprecated): 2020-11-18
-        /// - [Migration guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items)
-        /// ---
         /// </summary>
         /// <param name="locationId">Required parameter: The ID of the category's associated location.</param>
         /// <param name="categoryId">Required parameter: The ID of the category to edit.</param>
@@ -301,11 +266,6 @@ namespace Square.Apis
 
         /// <summary>
         /// Modifies the details of an existing item category.
-        /// ---
-        /// - __Deprecation date__: 2019-11-20
-        /// - [__Retirement date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#deprecated): 2020-11-18
-        /// - [Migration guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items)
-        /// ---
         /// </summary>
         /// <param name="locationId">Required parameter: The ID of the category's associated location.</param>
         /// <param name="categoryId">Required parameter: The ID of the category to edit.</param>
@@ -337,7 +297,7 @@ namespace Square.Apis
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
-                { "Square-Version", "2020-05-28" }
+                { "Square-Version", "2020-06-25" }
             };
 
             //append body params
@@ -370,11 +330,6 @@ namespace Square.Apis
 
         /// <summary>
         /// Lists all the discounts for a given location.
-        /// ---
-        /// - __Deprecation date__: 2019-11-20
-        /// - [__Retirement date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#deprecated): 2020-11-18
-        /// - [Migration guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items)
-        /// ---
         /// </summary>
         /// <param name="locationId">Required parameter: The ID of the location to list categories for.</param>
         /// <return>Returns the List<Models.V1Discount> response from the API call</return>
@@ -388,11 +343,6 @@ namespace Square.Apis
 
         /// <summary>
         /// Lists all the discounts for a given location.
-        /// ---
-        /// - __Deprecation date__: 2019-11-20
-        /// - [__Retirement date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#deprecated): 2020-11-18
-        /// - [Migration guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items)
-        /// ---
         /// </summary>
         /// <param name="locationId">Required parameter: The ID of the location to list categories for.</param>
         /// <return>Returns the List<Models.V1Discount> response from the API call</return>
@@ -420,7 +370,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-05-28" }
+                { "Square-Version", "2020-06-25" }
             };
 
             //prepare the API call request to fetch the response
@@ -450,11 +400,6 @@ namespace Square.Apis
 
         /// <summary>
         /// Creates a discount.
-        /// ---
-        /// - __Deprecation date__: 2019-11-20
-        /// - [__Retirement date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#deprecated): 2020-11-18
-        /// - [Migration guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items)
-        /// ---
         /// </summary>
         /// <param name="locationId">Required parameter: The ID of the location to create an item for.</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
@@ -469,11 +414,6 @@ namespace Square.Apis
 
         /// <summary>
         /// Creates a discount.
-        /// ---
-        /// - __Deprecation date__: 2019-11-20
-        /// - [__Retirement date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#deprecated): 2020-11-18
-        /// - [Migration guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items)
-        /// ---
         /// </summary>
         /// <param name="locationId">Required parameter: The ID of the location to create an item for.</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
@@ -503,7 +443,7 @@ namespace Square.Apis
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
-                { "Square-Version", "2020-05-28" }
+                { "Square-Version", "2020-06-25" }
             };
 
             //append body params
@@ -536,11 +476,6 @@ namespace Square.Apis
 
         /// <summary>
         /// Deletes an existing discount.
-        /// ---
-        /// - __Deprecation date__: 2019-11-20
-        /// - [__Retirement date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#deprecated): 2020-11-18
-        /// - [Migration guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items)
-        /// ---
         /// __DeleteDiscount__ returns nothing on success but Connect SDKs
         /// map the empty response to an empty `V1DeleteDiscountRequest` object
         /// as documented below.
@@ -558,11 +493,6 @@ namespace Square.Apis
 
         /// <summary>
         /// Deletes an existing discount.
-        /// ---
-        /// - __Deprecation date__: 2019-11-20
-        /// - [__Retirement date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#deprecated): 2020-11-18
-        /// - [Migration guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items)
-        /// ---
         /// __DeleteDiscount__ returns nothing on success but Connect SDKs
         /// map the empty response to an empty `V1DeleteDiscountRequest` object
         /// as documented below.
@@ -595,7 +525,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-05-28" }
+                { "Square-Version", "2020-06-25" }
             };
 
             //prepare the API call request to fetch the response
@@ -625,11 +555,6 @@ namespace Square.Apis
 
         /// <summary>
         /// Modifies the details of an existing discount.
-        /// ---
-        /// - __Deprecation date__: 2019-11-20
-        /// - [__Retirement date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#deprecated): 2020-11-18
-        /// - [Migration guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items)
-        /// ---
         /// </summary>
         /// <param name="locationId">Required parameter: The ID of the category's associated location.</param>
         /// <param name="discountId">Required parameter: The ID of the discount to edit.</param>
@@ -645,11 +570,6 @@ namespace Square.Apis
 
         /// <summary>
         /// Modifies the details of an existing discount.
-        /// ---
-        /// - __Deprecation date__: 2019-11-20
-        /// - [__Retirement date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#deprecated): 2020-11-18
-        /// - [Migration guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items)
-        /// ---
         /// </summary>
         /// <param name="locationId">Required parameter: The ID of the category's associated location.</param>
         /// <param name="discountId">Required parameter: The ID of the discount to edit.</param>
@@ -681,7 +601,7 @@ namespace Square.Apis
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
-                { "Square-Version", "2020-05-28" }
+                { "Square-Version", "2020-06-25" }
             };
 
             //append body params
@@ -714,11 +634,6 @@ namespace Square.Apis
 
         /// <summary>
         /// Lists all the fees (taxes) for a given location.
-        /// ---
-        /// - __Deprecation date__: 2019-11-20
-        /// - [__Retirement date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#deprecated): 2020-11-18
-        /// - [Migration guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items)
-        /// ---
         /// </summary>
         /// <param name="locationId">Required parameter: The ID of the location to list fees for.</param>
         /// <return>Returns the List<Models.V1Fee> response from the API call</return>
@@ -732,11 +647,6 @@ namespace Square.Apis
 
         /// <summary>
         /// Lists all the fees (taxes) for a given location.
-        /// ---
-        /// - __Deprecation date__: 2019-11-20
-        /// - [__Retirement date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#deprecated): 2020-11-18
-        /// - [Migration guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items)
-        /// ---
         /// </summary>
         /// <param name="locationId">Required parameter: The ID of the location to list fees for.</param>
         /// <return>Returns the List<Models.V1Fee> response from the API call</return>
@@ -764,7 +674,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-05-28" }
+                { "Square-Version", "2020-06-25" }
             };
 
             //prepare the API call request to fetch the response
@@ -794,11 +704,6 @@ namespace Square.Apis
 
         /// <summary>
         /// Creates a fee (tax).
-        /// ---
-        /// - __Deprecation date__: 2019-11-20
-        /// - [__Retirement date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#deprecated): 2020-11-18
-        /// - [Migration guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items)
-        /// ---
         /// </summary>
         /// <param name="locationId">Required parameter: The ID of the location to create a fee for.</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
@@ -813,11 +718,6 @@ namespace Square.Apis
 
         /// <summary>
         /// Creates a fee (tax).
-        /// ---
-        /// - __Deprecation date__: 2019-11-20
-        /// - [__Retirement date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#deprecated): 2020-11-18
-        /// - [Migration guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items)
-        /// ---
         /// </summary>
         /// <param name="locationId">Required parameter: The ID of the location to create a fee for.</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
@@ -847,7 +747,7 @@ namespace Square.Apis
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
-                { "Square-Version", "2020-05-28" }
+                { "Square-Version", "2020-06-25" }
             };
 
             //append body params
@@ -880,11 +780,6 @@ namespace Square.Apis
 
         /// <summary>
         /// Deletes an existing fee (tax).
-        /// ---
-        /// - __Deprecation date__: 2019-11-20
-        /// - [__Retirement date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#deprecated): 2020-11-18
-        /// - [Migration guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items)
-        /// ---
         /// __DeleteFee__ returns nothing on success but Connect SDKs
         /// map the empty response to an empty `V1DeleteFeeRequest` object
         /// as documented below.
@@ -902,11 +797,6 @@ namespace Square.Apis
 
         /// <summary>
         /// Deletes an existing fee (tax).
-        /// ---
-        /// - __Deprecation date__: 2019-11-20
-        /// - [__Retirement date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#deprecated): 2020-11-18
-        /// - [Migration guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items)
-        /// ---
         /// __DeleteFee__ returns nothing on success but Connect SDKs
         /// map the empty response to an empty `V1DeleteFeeRequest` object
         /// as documented below.
@@ -939,7 +829,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-05-28" }
+                { "Square-Version", "2020-06-25" }
             };
 
             //prepare the API call request to fetch the response
@@ -969,11 +859,6 @@ namespace Square.Apis
 
         /// <summary>
         /// Modifies the details of an existing fee (tax).
-        /// ---
-        /// - __Deprecation date__: 2019-11-20
-        /// - [__Retirement date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#deprecated): 2020-11-18
-        /// - [Migration guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items)
-        /// ---
         /// </summary>
         /// <param name="locationId">Required parameter: The ID of the fee's associated location.</param>
         /// <param name="feeId">Required parameter: The ID of the fee to edit.</param>
@@ -989,11 +874,6 @@ namespace Square.Apis
 
         /// <summary>
         /// Modifies the details of an existing fee (tax).
-        /// ---
-        /// - __Deprecation date__: 2019-11-20
-        /// - [__Retirement date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#deprecated): 2020-11-18
-        /// - [Migration guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items)
-        /// ---
         /// </summary>
         /// <param name="locationId">Required parameter: The ID of the fee's associated location.</param>
         /// <param name="feeId">Required parameter: The ID of the fee to edit.</param>
@@ -1025,7 +905,7 @@ namespace Square.Apis
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
-                { "Square-Version", "2020-05-28" }
+                { "Square-Version", "2020-06-25" }
             };
 
             //append body params
@@ -1059,11 +939,6 @@ namespace Square.Apis
         /// <summary>
         /// Provides inventory information for all inventory-enabled item
         /// variations.
-        /// ---
-        /// - __Deprecation date__: 2019-11-20
-        /// - [__Retirement date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#deprecated): 2020-11-18
-        /// - [Migration guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items)
-        /// ---
         /// </summary>
         /// <param name="locationId">Required parameter: The ID of the item's associated location.</param>
         /// <param name="limit">Optional parameter: The maximum number of inventory entries to return in a single response. This value cannot exceed 1000.</param>
@@ -1080,11 +955,6 @@ namespace Square.Apis
         /// <summary>
         /// Provides inventory information for all inventory-enabled item
         /// variations.
-        /// ---
-        /// - __Deprecation date__: 2019-11-20
-        /// - [__Retirement date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#deprecated): 2020-11-18
-        /// - [Migration guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items)
-        /// ---
         /// </summary>
         /// <param name="locationId">Required parameter: The ID of the item's associated location.</param>
         /// <param name="limit">Optional parameter: The maximum number of inventory entries to return in a single response. This value cannot exceed 1000.</param>
@@ -1121,7 +991,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-05-28" }
+                { "Square-Version", "2020-06-25" }
             };
 
             //prepare the API call request to fetch the response
@@ -1151,11 +1021,6 @@ namespace Square.Apis
 
         /// <summary>
         /// Adjusts the current available inventory of an item variation.
-        /// ---
-        /// - __Deprecation date__: 2019-11-20
-        /// - [__Retirement date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#deprecated): 2020-11-18
-        /// - [Migration guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items)
-        /// ---
         /// </summary>
         /// <param name="locationId">Required parameter: The ID of the item's associated location.</param>
         /// <param name="variationId">Required parameter: The ID of the variation to adjust inventory information for.</param>
@@ -1171,11 +1036,6 @@ namespace Square.Apis
 
         /// <summary>
         /// Adjusts the current available inventory of an item variation.
-        /// ---
-        /// - __Deprecation date__: 2019-11-20
-        /// - [__Retirement date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#deprecated): 2020-11-18
-        /// - [Migration guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items)
-        /// ---
         /// </summary>
         /// <param name="locationId">Required parameter: The ID of the item's associated location.</param>
         /// <param name="variationId">Required parameter: The ID of the variation to adjust inventory information for.</param>
@@ -1207,7 +1067,7 @@ namespace Square.Apis
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
-                { "Square-Version", "2020-05-28" }
+                { "Square-Version", "2020-06-25" }
             };
 
             //append body params
@@ -1240,11 +1100,6 @@ namespace Square.Apis
 
         /// <summary>
         /// Provides summary information of all items for a given location.
-        /// ---
-        /// - __Deprecation date__: 2019-11-20
-        /// - [__Retirement date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#deprecated): 2020-11-18
-        /// - [Migration guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items)
-        /// ---
         /// </summary>
         /// <param name="locationId">Required parameter: The ID of the location to list items for.</param>
         /// <param name="batchToken">Optional parameter: A pagination cursor to retrieve the next set of results for your original query to the endpoint.</param>
@@ -1259,11 +1114,6 @@ namespace Square.Apis
 
         /// <summary>
         /// Provides summary information of all items for a given location.
-        /// ---
-        /// - __Deprecation date__: 2019-11-20
-        /// - [__Retirement date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#deprecated): 2020-11-18
-        /// - [Migration guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items)
-        /// ---
         /// </summary>
         /// <param name="locationId">Required parameter: The ID of the location to list items for.</param>
         /// <param name="batchToken">Optional parameter: A pagination cursor to retrieve the next set of results for your original query to the endpoint.</param>
@@ -1298,7 +1148,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-05-28" }
+                { "Square-Version", "2020-06-25" }
             };
 
             //prepare the API call request to fetch the response
@@ -1328,11 +1178,6 @@ namespace Square.Apis
 
         /// <summary>
         /// Creates an item and at least one variation for it.
-        /// ---
-        /// - __Deprecation date__: 2019-11-20
-        /// - [__Retirement date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#deprecated): 2020-11-18
-        /// - [Migration guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items)
-        /// ---
         /// Item-related entities include fields you can use to associate them with
         /// entities in a non-Square system.
         /// When you create an item-related entity, you can optionally specify `id`.
@@ -1355,11 +1200,6 @@ namespace Square.Apis
 
         /// <summary>
         /// Creates an item and at least one variation for it.
-        /// ---
-        /// - __Deprecation date__: 2019-11-20
-        /// - [__Retirement date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#deprecated): 2020-11-18
-        /// - [Migration guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items)
-        /// ---
         /// Item-related entities include fields you can use to associate them with
         /// entities in a non-Square system.
         /// When you create an item-related entity, you can optionally specify `id`.
@@ -1397,7 +1237,7 @@ namespace Square.Apis
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
-                { "Square-Version", "2020-05-28" }
+                { "Square-Version", "2020-06-25" }
             };
 
             //append body params
@@ -1430,11 +1270,6 @@ namespace Square.Apis
 
         /// <summary>
         /// Deletes an existing item and all item variations associated with it.
-        /// ---
-        /// - __Deprecation date__: 2019-11-20
-        /// - [__Retirement date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#deprecated): 2020-11-18
-        /// - [Migration guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items)
-        /// ---
         /// __DeleteItem__ returns nothing on success but Connect SDKs
         /// map the empty response to an empty `V1DeleteItemRequest` object
         /// as documented below.
@@ -1452,11 +1287,6 @@ namespace Square.Apis
 
         /// <summary>
         /// Deletes an existing item and all item variations associated with it.
-        /// ---
-        /// - __Deprecation date__: 2019-11-20
-        /// - [__Retirement date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#deprecated): 2020-11-18
-        /// - [Migration guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items)
-        /// ---
         /// __DeleteItem__ returns nothing on success but Connect SDKs
         /// map the empty response to an empty `V1DeleteItemRequest` object
         /// as documented below.
@@ -1489,7 +1319,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-05-28" }
+                { "Square-Version", "2020-06-25" }
             };
 
             //prepare the API call request to fetch the response
@@ -1520,11 +1350,6 @@ namespace Square.Apis
         /// <summary>
         /// Provides the details for a single item, including associated modifier
         /// lists and fees.
-        /// ---
-        /// - __Deprecation date__: 2019-11-20
-        /// - [__Retirement date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#deprecated): 2020-11-18
-        /// - [Migration guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items)
-        /// ---
         /// </summary>
         /// <param name="locationId">Required parameter: The ID of the item's associated location.</param>
         /// <param name="itemId">Required parameter: The item's ID.</param>
@@ -1540,11 +1365,6 @@ namespace Square.Apis
         /// <summary>
         /// Provides the details for a single item, including associated modifier
         /// lists and fees.
-        /// ---
-        /// - __Deprecation date__: 2019-11-20
-        /// - [__Retirement date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#deprecated): 2020-11-18
-        /// - [Migration guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items)
-        /// ---
         /// </summary>
         /// <param name="locationId">Required parameter: The ID of the item's associated location.</param>
         /// <param name="itemId">Required parameter: The item's ID.</param>
@@ -1574,7 +1394,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-05-28" }
+                { "Square-Version", "2020-06-25" }
             };
 
             //prepare the API call request to fetch the response
@@ -1604,11 +1424,6 @@ namespace Square.Apis
 
         /// <summary>
         /// Modifies the core details of an existing item.
-        /// ---
-        /// - __Deprecation date__: 2019-11-20
-        /// - [__Retirement date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#deprecated): 2020-11-18
-        /// - [Migration guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items)
-        /// ---
         /// </summary>
         /// <param name="locationId">Required parameter: The ID of the item's associated location.</param>
         /// <param name="itemId">Required parameter: The ID of the item to modify.</param>
@@ -1624,11 +1439,6 @@ namespace Square.Apis
 
         /// <summary>
         /// Modifies the core details of an existing item.
-        /// ---
-        /// - __Deprecation date__: 2019-11-20
-        /// - [__Retirement date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#deprecated): 2020-11-18
-        /// - [Migration guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items)
-        /// ---
         /// </summary>
         /// <param name="locationId">Required parameter: The ID of the item's associated location.</param>
         /// <param name="itemId">Required parameter: The ID of the item to modify.</param>
@@ -1660,7 +1470,7 @@ namespace Square.Apis
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
-                { "Square-Version", "2020-05-28" }
+                { "Square-Version", "2020-06-25" }
             };
 
             //append body params
@@ -1694,11 +1504,6 @@ namespace Square.Apis
         /// <summary>
         /// Removes a fee assocation from an item so the fee is no longer
         /// automatically applied to the item in Square Point of Sale.
-        /// ---
-        /// - __Deprecation date__: 2019-11-20
-        /// - [__Retirement date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#deprecated): 2020-11-18
-        /// - [Migration guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items)
-        /// ---
         /// </summary>
         /// <param name="locationId">Required parameter: The ID of the fee's associated location.</param>
         /// <param name="itemId">Required parameter: The ID of the item to add the fee to.</param>
@@ -1715,11 +1520,6 @@ namespace Square.Apis
         /// <summary>
         /// Removes a fee assocation from an item so the fee is no longer
         /// automatically applied to the item in Square Point of Sale.
-        /// ---
-        /// - __Deprecation date__: 2019-11-20
-        /// - [__Retirement date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#deprecated): 2020-11-18
-        /// - [Migration guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items)
-        /// ---
         /// </summary>
         /// <param name="locationId">Required parameter: The ID of the fee's associated location.</param>
         /// <param name="itemId">Required parameter: The ID of the item to add the fee to.</param>
@@ -1751,7 +1551,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-05-28" }
+                { "Square-Version", "2020-06-25" }
             };
 
             //prepare the API call request to fetch the response
@@ -1782,11 +1582,6 @@ namespace Square.Apis
         /// <summary>
         /// Associates a fee with an item so the fee is automatically applied to
         /// the item in Square Point of Sale.
-        /// ---
-        /// - __Deprecation date__: 2019-11-20
-        /// - [__Retirement date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#deprecated): 2020-11-18
-        /// - [Migration guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items)
-        /// ---
         /// </summary>
         /// <param name="locationId">Required parameter: The ID of the fee's associated location.</param>
         /// <param name="itemId">Required parameter: The ID of the item to add the fee to.</param>
@@ -1803,11 +1598,6 @@ namespace Square.Apis
         /// <summary>
         /// Associates a fee with an item so the fee is automatically applied to
         /// the item in Square Point of Sale.
-        /// ---
-        /// - __Deprecation date__: 2019-11-20
-        /// - [__Retirement date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#deprecated): 2020-11-18
-        /// - [Migration guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items)
-        /// ---
         /// </summary>
         /// <param name="locationId">Required parameter: The ID of the fee's associated location.</param>
         /// <param name="itemId">Required parameter: The ID of the item to add the fee to.</param>
@@ -1839,7 +1629,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-05-28" }
+                { "Square-Version", "2020-06-25" }
             };
 
             //prepare the API call request to fetch the response
@@ -1870,11 +1660,6 @@ namespace Square.Apis
         /// <summary>
         /// Removes a modifier list association from an item so the modifier
         /// options from the list can no longer be applied to the item.
-        /// ---
-        /// - __Deprecation date__: 2019-11-20
-        /// - [__Retirement date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#deprecated): 2020-11-18
-        /// - [Migration guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items)
-        /// ---
         /// </summary>
         /// <param name="locationId">Required parameter: The ID of the item's associated location.</param>
         /// <param name="modifierListId">Required parameter: The ID of the modifier list to remove.</param>
@@ -1891,11 +1676,6 @@ namespace Square.Apis
         /// <summary>
         /// Removes a modifier list association from an item so the modifier
         /// options from the list can no longer be applied to the item.
-        /// ---
-        /// - __Deprecation date__: 2019-11-20
-        /// - [__Retirement date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#deprecated): 2020-11-18
-        /// - [Migration guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items)
-        /// ---
         /// </summary>
         /// <param name="locationId">Required parameter: The ID of the item's associated location.</param>
         /// <param name="modifierListId">Required parameter: The ID of the modifier list to remove.</param>
@@ -1927,7 +1707,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-05-28" }
+                { "Square-Version", "2020-06-25" }
             };
 
             //prepare the API call request to fetch the response
@@ -1958,11 +1738,6 @@ namespace Square.Apis
         /// <summary>
         /// Associates a modifier list with an item so the associated modifier
         /// options can be applied to the item.
-        /// ---
-        /// - __Deprecation date__: 2019-11-20
-        /// - [__Retirement date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#deprecated): 2020-11-18
-        /// - [Migration guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items)
-        /// ---
         /// </summary>
         /// <param name="locationId">Required parameter: The ID of the item's associated location.</param>
         /// <param name="modifierListId">Required parameter: The ID of the modifier list to apply.</param>
@@ -1979,11 +1754,6 @@ namespace Square.Apis
         /// <summary>
         /// Associates a modifier list with an item so the associated modifier
         /// options can be applied to the item.
-        /// ---
-        /// - __Deprecation date__: 2019-11-20
-        /// - [__Retirement date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#deprecated): 2020-11-18
-        /// - [Migration guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items)
-        /// ---
         /// </summary>
         /// <param name="locationId">Required parameter: The ID of the item's associated location.</param>
         /// <param name="modifierListId">Required parameter: The ID of the modifier list to apply.</param>
@@ -2015,7 +1785,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-05-28" }
+                { "Square-Version", "2020-06-25" }
             };
 
             //prepare the API call request to fetch the response
@@ -2045,11 +1815,6 @@ namespace Square.Apis
 
         /// <summary>
         /// Creates an item variation for an existing item.
-        /// ---
-        /// - __Deprecation date__: 2019-11-20
-        /// - [__Retirement date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#deprecated): 2020-11-18
-        /// - [Migration guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items)
-        /// ---
         /// </summary>
         /// <param name="locationId">Required parameter: The ID of the item's associated location.</param>
         /// <param name="itemId">Required parameter: The item's ID.</param>
@@ -2065,11 +1830,6 @@ namespace Square.Apis
 
         /// <summary>
         /// Creates an item variation for an existing item.
-        /// ---
-        /// - __Deprecation date__: 2019-11-20
-        /// - [__Retirement date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#deprecated): 2020-11-18
-        /// - [Migration guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items)
-        /// ---
         /// </summary>
         /// <param name="locationId">Required parameter: The ID of the item's associated location.</param>
         /// <param name="itemId">Required parameter: The item's ID.</param>
@@ -2101,7 +1861,7 @@ namespace Square.Apis
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
-                { "Square-Version", "2020-05-28" }
+                { "Square-Version", "2020-06-25" }
             };
 
             //append body params
@@ -2134,11 +1894,6 @@ namespace Square.Apis
 
         /// <summary>
         /// Deletes an existing item variation from an item.
-        /// ---
-        /// - __Deprecation date__: 2019-11-20
-        /// - [__Retirement date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#deprecated): 2020-11-18
-        /// - [Migration guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items)
-        /// ---
         /// __DeleteVariation__ returns nothing on success but Connect SDKs
         /// map the empty response to an empty `V1DeleteVariationRequest` object
         /// as documented below.
@@ -2157,11 +1912,6 @@ namespace Square.Apis
 
         /// <summary>
         /// Deletes an existing item variation from an item.
-        /// ---
-        /// - __Deprecation date__: 2019-11-20
-        /// - [__Retirement date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#deprecated): 2020-11-18
-        /// - [Migration guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items)
-        /// ---
         /// __DeleteVariation__ returns nothing on success but Connect SDKs
         /// map the empty response to an empty `V1DeleteVariationRequest` object
         /// as documented below.
@@ -2196,7 +1946,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-05-28" }
+                { "Square-Version", "2020-06-25" }
             };
 
             //prepare the API call request to fetch the response
@@ -2226,11 +1976,6 @@ namespace Square.Apis
 
         /// <summary>
         /// Modifies the details of an existing item variation.
-        /// ---
-        /// - __Deprecation date__: 2019-11-20
-        /// - [__Retirement date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#deprecated): 2020-11-18
-        /// - [Migration guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items)
-        /// ---
         /// </summary>
         /// <param name="locationId">Required parameter: The ID of the item's associated location.</param>
         /// <param name="itemId">Required parameter: The ID of the item to modify.</param>
@@ -2251,11 +1996,6 @@ namespace Square.Apis
 
         /// <summary>
         /// Modifies the details of an existing item variation.
-        /// ---
-        /// - __Deprecation date__: 2019-11-20
-        /// - [__Retirement date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#deprecated): 2020-11-18
-        /// - [Migration guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items)
-        /// ---
         /// </summary>
         /// <param name="locationId">Required parameter: The ID of the item's associated location.</param>
         /// <param name="itemId">Required parameter: The ID of the item to modify.</param>
@@ -2293,7 +2033,7 @@ namespace Square.Apis
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
-                { "Square-Version", "2020-05-28" }
+                { "Square-Version", "2020-06-25" }
             };
 
             //append body params
@@ -2326,11 +2066,6 @@ namespace Square.Apis
 
         /// <summary>
         /// Lists all the modifier lists for a given location.
-        /// ---
-        /// - __Deprecation date__: 2019-11-20
-        /// - [__Retirement date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#deprecated): 2020-11-18
-        /// - [Migration guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items)
-        /// ---
         /// </summary>
         /// <param name="locationId">Required parameter: The ID of the location to list modifier lists for.</param>
         /// <return>Returns the List<Models.V1ModifierList> response from the API call</return>
@@ -2344,11 +2079,6 @@ namespace Square.Apis
 
         /// <summary>
         /// Lists all the modifier lists for a given location.
-        /// ---
-        /// - __Deprecation date__: 2019-11-20
-        /// - [__Retirement date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#deprecated): 2020-11-18
-        /// - [Migration guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items)
-        /// ---
         /// </summary>
         /// <param name="locationId">Required parameter: The ID of the location to list modifier lists for.</param>
         /// <return>Returns the List<Models.V1ModifierList> response from the API call</return>
@@ -2376,7 +2106,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-05-28" }
+                { "Square-Version", "2020-06-25" }
             };
 
             //prepare the API call request to fetch the response
@@ -2406,11 +2136,6 @@ namespace Square.Apis
 
         /// <summary>
         /// Creates an item modifier list and at least 1 modifier option for it.
-        /// ---
-        /// - __Deprecation date__: 2019-11-20
-        /// - [__Retirement date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#deprecated): 2020-11-18
-        /// - [Migration guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items)
-        /// ---
         /// </summary>
         /// <param name="locationId">Required parameter: The ID of the location to create a modifier list for.</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
@@ -2425,11 +2150,6 @@ namespace Square.Apis
 
         /// <summary>
         /// Creates an item modifier list and at least 1 modifier option for it.
-        /// ---
-        /// - __Deprecation date__: 2019-11-20
-        /// - [__Retirement date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#deprecated): 2020-11-18
-        /// - [Migration guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items)
-        /// ---
         /// </summary>
         /// <param name="locationId">Required parameter: The ID of the location to create a modifier list for.</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
@@ -2459,7 +2179,7 @@ namespace Square.Apis
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
-                { "Square-Version", "2020-05-28" }
+                { "Square-Version", "2020-06-25" }
             };
 
             //append body params
@@ -2493,11 +2213,6 @@ namespace Square.Apis
         /// <summary>
         /// Deletes an existing item modifier list and all modifier options
         /// associated with it.
-        /// ---
-        /// - __Deprecation date__: 2019-11-20
-        /// - [__Retirement date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#deprecated): 2020-11-18
-        /// - [Migration guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items)
-        /// ---
         /// __DeleteModifierList__ returns nothing on success but Connect SDKs
         /// map the empty response to an empty `V1DeleteModifierListRequest` object
         /// as documented below.
@@ -2516,11 +2231,6 @@ namespace Square.Apis
         /// <summary>
         /// Deletes an existing item modifier list and all modifier options
         /// associated with it.
-        /// ---
-        /// - __Deprecation date__: 2019-11-20
-        /// - [__Retirement date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#deprecated): 2020-11-18
-        /// - [Migration guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items)
-        /// ---
         /// __DeleteModifierList__ returns nothing on success but Connect SDKs
         /// map the empty response to an empty `V1DeleteModifierListRequest` object
         /// as documented below.
@@ -2553,7 +2263,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-05-28" }
+                { "Square-Version", "2020-06-25" }
             };
 
             //prepare the API call request to fetch the response
@@ -2583,11 +2293,6 @@ namespace Square.Apis
 
         /// <summary>
         /// Provides the details for a single modifier list.
-        /// ---
-        /// - __Deprecation date__: 2019-11-20
-        /// - [__Retirement date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#deprecated): 2020-11-18
-        /// - [Migration guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items)
-        /// ---
         /// </summary>
         /// <param name="locationId">Required parameter: The ID of the item's associated location.</param>
         /// <param name="modifierListId">Required parameter: The modifier list's ID.</param>
@@ -2602,11 +2307,6 @@ namespace Square.Apis
 
         /// <summary>
         /// Provides the details for a single modifier list.
-        /// ---
-        /// - __Deprecation date__: 2019-11-20
-        /// - [__Retirement date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#deprecated): 2020-11-18
-        /// - [Migration guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items)
-        /// ---
         /// </summary>
         /// <param name="locationId">Required parameter: The ID of the item's associated location.</param>
         /// <param name="modifierListId">Required parameter: The modifier list's ID.</param>
@@ -2636,7 +2336,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-05-28" }
+                { "Square-Version", "2020-06-25" }
             };
 
             //prepare the API call request to fetch the response
@@ -2666,11 +2366,6 @@ namespace Square.Apis
 
         /// <summary>
         /// Modifies the details of an existing item modifier list.
-        /// ---
-        /// - __Deprecation date__: 2019-11-20
-        /// - [__Retirement date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#deprecated): 2020-11-18
-        /// - [Migration guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items)
-        /// ---
         /// </summary>
         /// <param name="locationId">Required parameter: The ID of the item's associated location.</param>
         /// <param name="modifierListId">Required parameter: The ID of the modifier list to edit.</param>
@@ -2686,11 +2381,6 @@ namespace Square.Apis
 
         /// <summary>
         /// Modifies the details of an existing item modifier list.
-        /// ---
-        /// - __Deprecation date__: 2019-11-20
-        /// - [__Retirement date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#deprecated): 2020-11-18
-        /// - [Migration guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items)
-        /// ---
         /// </summary>
         /// <param name="locationId">Required parameter: The ID of the item's associated location.</param>
         /// <param name="modifierListId">Required parameter: The ID of the modifier list to edit.</param>
@@ -2722,7 +2412,7 @@ namespace Square.Apis
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
-                { "Square-Version", "2020-05-28" }
+                { "Square-Version", "2020-06-25" }
             };
 
             //append body params
@@ -2755,11 +2445,6 @@ namespace Square.Apis
 
         /// <summary>
         /// Creates an item modifier option and adds it to a modifier list.
-        /// ---
-        /// - __Deprecation date__: 2019-11-20
-        /// - [__Retirement date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#deprecated): 2020-11-18
-        /// - [Migration guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items)
-        /// ---
         /// </summary>
         /// <param name="locationId">Required parameter: The ID of the item's associated location.</param>
         /// <param name="modifierListId">Required parameter: The ID of the modifier list to edit.</param>
@@ -2775,11 +2460,6 @@ namespace Square.Apis
 
         /// <summary>
         /// Creates an item modifier option and adds it to a modifier list.
-        /// ---
-        /// - __Deprecation date__: 2019-11-20
-        /// - [__Retirement date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#deprecated): 2020-11-18
-        /// - [Migration guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items)
-        /// ---
         /// </summary>
         /// <param name="locationId">Required parameter: The ID of the item's associated location.</param>
         /// <param name="modifierListId">Required parameter: The ID of the modifier list to edit.</param>
@@ -2811,7 +2491,7 @@ namespace Square.Apis
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
-                { "Square-Version", "2020-05-28" }
+                { "Square-Version", "2020-06-25" }
             };
 
             //append body params
@@ -2844,11 +2524,6 @@ namespace Square.Apis
 
         /// <summary>
         /// Deletes an existing item modifier option from a modifier list.
-        /// ---
-        /// - __Deprecation date__: 2019-11-20
-        /// - [__Retirement date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#deprecated): 2020-11-18
-        /// - [Migration guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items)
-        /// ---
         /// __DeleteModifierOption__ returns nothing on success but Connect
         /// SDKs map the empty response to an empty `V1DeleteModifierOptionRequest`
         /// object.
@@ -2867,11 +2542,6 @@ namespace Square.Apis
 
         /// <summary>
         /// Deletes an existing item modifier option from a modifier list.
-        /// ---
-        /// - __Deprecation date__: 2019-11-20
-        /// - [__Retirement date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#deprecated): 2020-11-18
-        /// - [Migration guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items)
-        /// ---
         /// __DeleteModifierOption__ returns nothing on success but Connect
         /// SDKs map the empty response to an empty `V1DeleteModifierOptionRequest`
         /// object.
@@ -2906,7 +2576,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-05-28" }
+                { "Square-Version", "2020-06-25" }
             };
 
             //prepare the API call request to fetch the response
@@ -2936,11 +2606,6 @@ namespace Square.Apis
 
         /// <summary>
         /// Modifies the details of an existing item modifier option.
-        /// ---
-        /// - __Deprecation date__: 2019-11-20
-        /// - [__Retirement date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#deprecated): 2020-11-18
-        /// - [Migration guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items)
-        /// ---
         /// </summary>
         /// <param name="locationId">Required parameter: The ID of the item's associated location.</param>
         /// <param name="modifierListId">Required parameter: The ID of the modifier list to edit.</param>
@@ -2961,11 +2626,6 @@ namespace Square.Apis
 
         /// <summary>
         /// Modifies the details of an existing item modifier option.
-        /// ---
-        /// - __Deprecation date__: 2019-11-20
-        /// - [__Retirement date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#deprecated): 2020-11-18
-        /// - [Migration guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items)
-        /// ---
         /// </summary>
         /// <param name="locationId">Required parameter: The ID of the item's associated location.</param>
         /// <param name="modifierListId">Required parameter: The ID of the modifier list to edit.</param>
@@ -3003,7 +2663,7 @@ namespace Square.Apis
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
-                { "Square-Version", "2020-05-28" }
+                { "Square-Version", "2020-06-25" }
             };
 
             //append body params
@@ -3037,11 +2697,6 @@ namespace Square.Apis
         /// <summary>
         /// Lists all Favorites pages (in Square Point of Sale) for a given
         /// location.
-        /// ---
-        /// - __Deprecation date__: 2019-11-20
-        /// - [__Retirement date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#deprecated): 2020-11-18
-        /// - [Migration guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items)
-        /// ---
         /// </summary>
         /// <param name="locationId">Required parameter: The ID of the location to list Favorites pages for.</param>
         /// <return>Returns the List<Models.V1Page> response from the API call</return>
@@ -3056,11 +2711,6 @@ namespace Square.Apis
         /// <summary>
         /// Lists all Favorites pages (in Square Point of Sale) for a given
         /// location.
-        /// ---
-        /// - __Deprecation date__: 2019-11-20
-        /// - [__Retirement date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#deprecated): 2020-11-18
-        /// - [Migration guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items)
-        /// ---
         /// </summary>
         /// <param name="locationId">Required parameter: The ID of the location to list Favorites pages for.</param>
         /// <return>Returns the List<Models.V1Page> response from the API call</return>
@@ -3088,7 +2738,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-05-28" }
+                { "Square-Version", "2020-06-25" }
             };
 
             //prepare the API call request to fetch the response
@@ -3118,11 +2768,6 @@ namespace Square.Apis
 
         /// <summary>
         /// Creates a Favorites page in Square Point of Sale.
-        /// ---
-        /// - __Deprecation date__: 2019-11-20
-        /// - [__Retirement date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#deprecated): 2020-11-18
-        /// - [Migration guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items)
-        /// ---
         /// </summary>
         /// <param name="locationId">Required parameter: The ID of the location to create an item for.</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
@@ -3137,11 +2782,6 @@ namespace Square.Apis
 
         /// <summary>
         /// Creates a Favorites page in Square Point of Sale.
-        /// ---
-        /// - __Deprecation date__: 2019-11-20
-        /// - [__Retirement date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#deprecated): 2020-11-18
-        /// - [Migration guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items)
-        /// ---
         /// </summary>
         /// <param name="locationId">Required parameter: The ID of the location to create an item for.</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
@@ -3171,7 +2811,7 @@ namespace Square.Apis
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
-                { "Square-Version", "2020-05-28" }
+                { "Square-Version", "2020-06-25" }
             };
 
             //append body params
@@ -3204,11 +2844,6 @@ namespace Square.Apis
 
         /// <summary>
         /// Deletes an existing Favorites page and all of its cells.
-        /// ---
-        /// - __Deprecation date__: 2019-11-20
-        /// - [__Retirement date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#deprecated): 2020-11-18
-        /// - [Migration guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items)
-        /// ---
         /// __DeletePage__ returns nothing on success but Connect SDKs
         /// map the empty response to an empty `V1DeletePageRequest` object.
         /// </summary>
@@ -3225,11 +2860,6 @@ namespace Square.Apis
 
         /// <summary>
         /// Deletes an existing Favorites page and all of its cells.
-        /// ---
-        /// - __Deprecation date__: 2019-11-20
-        /// - [__Retirement date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#deprecated): 2020-11-18
-        /// - [Migration guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items)
-        /// ---
         /// __DeletePage__ returns nothing on success but Connect SDKs
         /// map the empty response to an empty `V1DeletePageRequest` object.
         /// </summary>
@@ -3261,7 +2891,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-05-28" }
+                { "Square-Version", "2020-06-25" }
             };
 
             //prepare the API call request to fetch the response
@@ -3291,11 +2921,6 @@ namespace Square.Apis
 
         /// <summary>
         /// Modifies the details of a Favorites page in Square Point of Sale.
-        /// ---
-        /// - __Deprecation date__: 2019-11-20
-        /// - [__Retirement date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#deprecated): 2020-11-18
-        /// - [Migration guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items)
-        /// ---
         /// </summary>
         /// <param name="locationId">Required parameter: The ID of the Favorites page's associated location</param>
         /// <param name="pageId">Required parameter: The ID of the page to modify.</param>
@@ -3311,11 +2936,6 @@ namespace Square.Apis
 
         /// <summary>
         /// Modifies the details of a Favorites page in Square Point of Sale.
-        /// ---
-        /// - __Deprecation date__: 2019-11-20
-        /// - [__Retirement date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#deprecated): 2020-11-18
-        /// - [Migration guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items)
-        /// ---
         /// </summary>
         /// <param name="locationId">Required parameter: The ID of the Favorites page's associated location</param>
         /// <param name="pageId">Required parameter: The ID of the page to modify.</param>
@@ -3347,7 +2967,7 @@ namespace Square.Apis
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
-                { "Square-Version", "2020-05-28" }
+                { "Square-Version", "2020-06-25" }
             };
 
             //append body params
@@ -3380,11 +3000,6 @@ namespace Square.Apis
 
         /// <summary>
         /// Deletes a cell from a Favorites page in Square Point of Sale.
-        /// ---
-        /// - __Deprecation date__: 2019-11-20
-        /// - [__Retirement date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#deprecated): 2020-11-18
-        /// - [Migration guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items)
-        /// ---
         /// __DeletePageCell__ returns nothing on success but Connect SDKs
         /// map the empty response to an empty `V1DeletePageCellRequest` object
         /// as documented below.
@@ -3408,11 +3023,6 @@ namespace Square.Apis
 
         /// <summary>
         /// Deletes a cell from a Favorites page in Square Point of Sale.
-        /// ---
-        /// - __Deprecation date__: 2019-11-20
-        /// - [__Retirement date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#deprecated): 2020-11-18
-        /// - [Migration guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items)
-        /// ---
         /// __DeletePageCell__ returns nothing on success but Connect SDKs
         /// map the empty response to an empty `V1DeletePageCellRequest` object
         /// as documented below.
@@ -3458,7 +3068,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-05-28" }
+                { "Square-Version", "2020-06-25" }
             };
 
             //prepare the API call request to fetch the response
@@ -3488,11 +3098,6 @@ namespace Square.Apis
 
         /// <summary>
         /// Modifies a cell of a Favorites page in Square Point of Sale.
-        /// ---
-        /// - __Deprecation date__: 2019-11-20
-        /// - [__Retirement date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#deprecated): 2020-11-18
-        /// - [Migration guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items)
-        /// ---
         /// </summary>
         /// <param name="locationId">Required parameter: The ID of the Favorites page's associated location.</param>
         /// <param name="pageId">Required parameter: The ID of the page the cell belongs to.</param>
@@ -3508,11 +3113,6 @@ namespace Square.Apis
 
         /// <summary>
         /// Modifies a cell of a Favorites page in Square Point of Sale.
-        /// ---
-        /// - __Deprecation date__: 2019-11-20
-        /// - [__Retirement date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#deprecated): 2020-11-18
-        /// - [Migration guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items)
-        /// ---
         /// </summary>
         /// <param name="locationId">Required parameter: The ID of the Favorites page's associated location.</param>
         /// <param name="pageId">Required parameter: The ID of the page the cell belongs to.</param>
@@ -3544,7 +3144,7 @@ namespace Square.Apis
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
-                { "Square-Version", "2020-05-28" }
+                { "Square-Version", "2020-06-25" }
             };
 
             //append body params

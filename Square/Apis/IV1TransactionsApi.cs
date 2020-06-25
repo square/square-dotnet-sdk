@@ -18,11 +18,6 @@ namespace Square.Apis
     {
         /// <summary>
         /// Provides non-confidential details for all of a location's associated bank accounts. This endpoint does not provide full bank account numbers, and there is no way to obtain a full bank account number with the Connect API.
-        /// ---
-        /// - __Deprecation date__: 2020-02-26
-        /// - [__Retirement date__](https://developer.squareup.com/docs/docs/build-basics/api-lifecycle#deprecated): 2021-02-26
-        /// - [Migration guide](https://developer.squareup.com/docs/docs/migrate-from-v1/guides/v1-bankaccounts)
-        /// ---
         /// </summary>
         /// <param name="locationId">Required parameter: The ID of the location to list bank accounts for.</param>
         /// <return>Returns the List<Models.V1BankAccount> response from the API call</return>
@@ -31,11 +26,6 @@ namespace Square.Apis
 
         /// <summary>
         /// Provides non-confidential details for all of a location's associated bank accounts. This endpoint does not provide full bank account numbers, and there is no way to obtain a full bank account number with the Connect API.
-        /// ---
-        /// - __Deprecation date__: 2020-02-26
-        /// - [__Retirement date__](https://developer.squareup.com/docs/docs/build-basics/api-lifecycle#deprecated): 2021-02-26
-        /// - [Migration guide](https://developer.squareup.com/docs/docs/migrate-from-v1/guides/v1-bankaccounts)
-        /// ---
         /// </summary>
         /// <param name="locationId">Required parameter: The ID of the location to list bank accounts for.</param>
         /// <return>Returns the List<Models.V1BankAccount> response from the API call</return>
@@ -44,11 +34,6 @@ namespace Square.Apis
 
         /// <summary>
         /// Provides non-confidential details for a merchant's associated bank account. This endpoint does not provide full bank account numbers, and there is no way to obtain a full bank account number with the Connect API.
-        /// ---
-        /// - __Deprecation date__: 2020-02-26
-        /// - [__Retirement date__](https://developer.squareup.com/docs/docs/build-basics/api-lifecycle#deprecated): 2021-02-26
-        /// - [Migration guide](https://developer.squareup.com/docs/docs/migrate-from-v1/guides/v1-bankaccounts)
-        /// ---
         /// </summary>
         /// <param name="locationId">Required parameter: The ID of the bank account's associated location.</param>
         /// <param name="bankAccountId">Required parameter: The bank account's Square-issued ID. You obtain this value from Settlement objects returned.</param>
@@ -58,11 +43,6 @@ namespace Square.Apis
 
         /// <summary>
         /// Provides non-confidential details for a merchant's associated bank account. This endpoint does not provide full bank account numbers, and there is no way to obtain a full bank account number with the Connect API.
-        /// ---
-        /// - __Deprecation date__: 2020-02-26
-        /// - [__Retirement date__](https://developer.squareup.com/docs/docs/build-basics/api-lifecycle#deprecated): 2021-02-26
-        /// - [Migration guide](https://developer.squareup.com/docs/docs/migrate-from-v1/guides/v1-bankaccounts)
-        /// ---
         /// </summary>
         /// <param name="locationId">Required parameter: The ID of the bank account's associated location.</param>
         /// <param name="bankAccountId">Required parameter: The bank account's Square-issued ID. You obtain this value from Settlement objects returned.</param>
@@ -159,7 +139,7 @@ namespace Square.Apis
                 string endTime = null,
                 int? limit = null,
                 string batchToken = null,
-                bool? includePartial = null);
+                bool? includePartial = false);
 
         /// <summary>
         /// Provides summary information for all payments taken for a given
@@ -188,7 +168,7 @@ namespace Square.Apis
                 string endTime = null,
                 int? limit = null,
                 string batchToken = null,
-                bool? includePartial = null, CancellationToken cancellationToken = default);
+                bool? includePartial = false, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Provides comprehensive information for a single payment.

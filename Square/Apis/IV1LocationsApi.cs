@@ -18,11 +18,6 @@ namespace Square.Apis
     {
         /// <summary>
         /// Get the general information for a business.
-        /// ---
-        /// - __Deprecation date__: 2019-11-20
-        /// - [__Retirement date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#deprecated): 2020-11-18
-        /// - [Migration guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-locations)
-        /// ---
         /// </summary>
         /// <return>Returns the Models.V1Merchant response from the API call</return>
         [Obsolete]
@@ -30,11 +25,6 @@ namespace Square.Apis
 
         /// <summary>
         /// Get the general information for a business.
-        /// ---
-        /// - __Deprecation date__: 2019-11-20
-        /// - [__Retirement date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#deprecated): 2020-11-18
-        /// - [Migration guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-locations)
-        /// ---
         /// </summary>
         /// <return>Returns the Models.V1Merchant response from the API call</return>
         [Obsolete]
@@ -43,11 +33,6 @@ namespace Square.Apis
         /// <summary>
         /// Provides details for all business locations associated with a Square
         /// account, including the Square-assigned object ID for the location.
-        /// ---
-        /// - __Deprecation date__: 2019-11-20
-        /// - [__Retirement date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#deprecated): 2020-11-18
-        /// - [Migration guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-locations)
-        /// ---
         /// </summary>
         /// <return>Returns the List<Models.V1Merchant> response from the API call</return>
         [Obsolete]
@@ -56,11 +41,6 @@ namespace Square.Apis
         /// <summary>
         /// Provides details for all business locations associated with a Square
         /// account, including the Square-assigned object ID for the location.
-        /// ---
-        /// - __Deprecation date__: 2019-11-20
-        /// - [__Retirement date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#deprecated): 2020-11-18
-        /// - [Migration guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-locations)
-        /// ---
         /// </summary>
         /// <return>Returns the List<Models.V1Merchant> response from the API call</return>
         [Obsolete]

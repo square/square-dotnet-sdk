@@ -82,7 +82,7 @@ namespace Square.Models
         public Models.Address BillingAddress { get; }
 
         /// <summary>
-        /// __Not currently set.__ Intended as a Square-assigned identifier, based 
+        /// __Not currently set.__ Intended as a Square-assigned identifier, based
         /// on the card number, to identify the card across multiple locations within a
         /// single application.
         /// </summary>

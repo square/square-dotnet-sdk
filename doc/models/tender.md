@@ -13,7 +13,7 @@ Represents a tender (i.e., a method of payment) used in a Square transaction.
 | `Id` | `string` | Optional | The tender's unique ID. |
 | `LocationId` | `string` | Optional | The ID of the transaction's associated location. |
 | `TransactionId` | `string` | Optional | The ID of the tender's associated transaction. |
-| `CreatedAt` | `string` | Optional | The time when the tender was created, in RFC 3339 format. |
+| `CreatedAt` | `string` | Optional | The timestamp for when the tender was created, in RFC 3339 format. |
 | `Note` | `string` | Optional | An optional note associated with the tender at the time of payment. |
 | `AmountMoney` | [`Models.Money`](/doc/models/money.md) | Optional | Represents an amount of money. `Money` fields can be signed or unsigned.<br>Fields that do not explicitly define whether they are signed or unsigned are<br>considered unsigned and can only hold positive amounts. For signed fields, the<br>sign of the value indicates the purpose of the money transfer. See<br>[Working with Monetary Amounts](https://developer.squareup.com/docs/build-basics/working-with-monetary-amounts)<br>for more information. |
 | `TipMoney` | [`Models.Money`](/doc/models/money.md) | Optional | Represents an amount of money. `Money` fields can be signed or unsigned.<br>Fields that do not explicitly define whether they are signed or unsigned are<br>considered unsigned and can only hold positive amounts. For signed fields, the<br>sign of the value indicates the purpose of the money transfer. See<br>[Working with Monetary Amounts](https://developer.squareup.com/docs/build-basics/working-with-monetary-amounts)<br>for more information. |

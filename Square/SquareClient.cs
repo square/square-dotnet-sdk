@@ -44,6 +44,7 @@ namespace Square
         private readonly Lazy<IMerchantsApi> merchants;
         private readonly Lazy<IPaymentsApi> payments;
         private readonly Lazy<IRefundsApi> refunds;
+        private readonly Lazy<ITeamApi> team;
         private readonly Lazy<ITerminalApi> terminal;
 
         /// <summary>
@@ -182,6 +183,11 @@ namespace Square
         public IRefundsApi RefundsApi => refunds.Value;
 
         /// <summary>
+        /// Provides access to TeamApi controller
+        /// </summary>
+        public ITeamApi TeamApi => team.Value;
+
+        /// <summary>
         /// Provides access to TerminalApi controller
         /// </summary>
         public ITerminalApi TerminalApi => terminal.Value;
@@ -194,12 +200,12 @@ namespace Square
         /// <summary>
         /// Current version of the SDK
         /// </summary>
-        public string SdkVersion => "5.3.0";
+        public string SdkVersion => "6.0.0";
 
         /// <summary>
         /// Version of Square API supported by this SDK
         /// </summary>
-        public string SquareVersion => "2020-05-28";
+        public string SquareVersion => "2020-06-25";
 
         internal static SquareClient CreateFromEnvironment()
         {
@@ -295,6 +301,8 @@ namespace Square
                 () => new PaymentsApi(this, this.httpClient, authManagers, this.httpCallBack));
             refunds = new Lazy<IRefundsApi>(
                 () => new RefundsApi(this, this.httpClient, authManagers, this.httpCallBack));
+            team = new Lazy<ITeamApi>(
+                () => new TeamApi(this, this.httpClient, authManagers, this.httpCallBack));
             terminal = new Lazy<ITerminalApi>(
                 () => new TerminalApi(this, this.httpClient, authManagers, this.httpCallBack));
 

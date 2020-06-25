@@ -166,9 +166,8 @@ namespace Square.Apis
         /// [Delayed Payments](https://developer.squareup.com/docs/payments-api/take-payments#delayed-payments).
         /// </summary>
         /// <param name="paymentId">Required parameter: Unique ID identifying the payment to be completed.</param>
-        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.CompletePaymentResponse response from the API call</return>
-        Models.CompletePaymentResponse CompletePayment(string paymentId, object body);
+        Models.CompletePaymentResponse CompletePayment(string paymentId);
 
         /// <summary>
         /// Completes (captures) a payment.
@@ -178,9 +177,8 @@ namespace Square.Apis
         /// [Delayed Payments](https://developer.squareup.com/docs/payments-api/take-payments#delayed-payments).
         /// </summary>
         /// <param name="paymentId">Required parameter: Unique ID identifying the payment to be completed.</param>
-        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.CompletePaymentResponse response from the API call</return>
-        Task<Models.CompletePaymentResponse> CompletePaymentAsync(string paymentId, object body, CancellationToken cancellationToken = default);
+        Task<Models.CompletePaymentResponse> CompletePaymentAsync(string paymentId, CancellationToken cancellationToken = default);
 
     }
 }
