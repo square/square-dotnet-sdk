@@ -27,6 +27,7 @@ namespace Square.Models
             string verificationResults = null,
             string statementDescription = null,
             Models.DeviceDetails deviceDetails = null,
+            bool? refundRequiresCardPresence = null,
             IList<Models.Error> errors = null)
         {
             Status = status;
@@ -42,6 +43,7 @@ namespace Square.Models
             VerificationResults = verificationResults;
             StatementDescription = statementDescription;
             DeviceDetails = deviceDetails;
+            RefundRequiresCardPresence = refundRequiresCardPresence;
             Errors = errors;
         }
 
@@ -134,6 +136,13 @@ namespace Square.Models
         public Models.DeviceDetails DeviceDetails { get; }
 
         /// <summary>
+        /// Whether or not the card is required to be physically present in order for the payment to
+        /// be refunded.  If true, the card is required to be present.
+        /// </summary>
+        [JsonProperty("refund_requires_card_presence")]
+        public bool? RefundRequiresCardPresence { get; }
+
+        /// <summary>
         /// Information on errors encountered during the request.
         /// </summary>
         [JsonProperty("errors")]
@@ -155,6 +164,7 @@ namespace Square.Models
                 .VerificationResults(VerificationResults)
                 .StatementDescription(StatementDescription)
                 .DeviceDetails(DeviceDetails)
+                .RefundRequiresCardPresence(RefundRequiresCardPresence)
                 .Errors(Errors);
             return builder;
         }
@@ -174,6 +184,7 @@ namespace Square.Models
             private string verificationResults;
             private string statementDescription;
             private Models.DeviceDetails deviceDetails;
+            private bool? refundRequiresCardPresence;
             private IList<Models.Error> errors = new List<Models.Error>();
 
             public Builder() { }
@@ -255,6 +266,12 @@ namespace Square.Models
                 return this;
             }
 
+            public Builder RefundRequiresCardPresence(bool? value)
+            {
+                refundRequiresCardPresence = value;
+                return this;
+            }
+
             public Builder Errors(IList<Models.Error> value)
             {
                 errors = value;
@@ -276,6 +293,7 @@ namespace Square.Models
                     verificationResults,
                     statementDescription,
                     deviceDetails,
+                    refundRequiresCardPresence,
                     errors);
             }
         }

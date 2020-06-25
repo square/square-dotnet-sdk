@@ -72,7 +72,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-05-28" }
+                { "Square-Version", "2020-06-25" }
             };
 
             //prepare the API call request to fetch the response
@@ -140,7 +140,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-05-28" }
+                { "Square-Version", "2020-06-25" }
             };
 
             //prepare the API call request to fetch the response
@@ -220,7 +220,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-05-28" }
+                { "Square-Version", "2020-06-25" }
             };
 
             //prepare the API call request to fetch the response
@@ -288,7 +288,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-05-28" }
+                { "Square-Version", "2020-06-25" }
             };
 
             //prepare the API call request to fetch the response
@@ -365,7 +365,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-05-28" }
+                { "Square-Version", "2020-06-25" }
             };
 
             //prepare the API call request to fetch the response
@@ -442,7 +442,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-05-28" }
+                { "Square-Version", "2020-06-25" }
             };
 
             //prepare the API call request to fetch the response
@@ -473,16 +473,7 @@ namespace Square.Apis
         /// <summary>
         /// Uploads a file to use as evidence in a dispute challenge. The endpoint accepts
         /// HTTP multipart/form-data file uploads in HEIC, HEIF, JPEG, PDF, PNG,
-        /// and TIFF formats. The following is an example of such an HTTP request:
-        /// ```
-        /// curl -X POST \
-        /// -H 'Accept: application/json' \
-        /// -H 'Authorization: Bearer {{ACCESS_TOKEN}}' \
-        /// -H 'Content-Type: multipart/form-data' \
-        /// -F 'evidence=@/path/to/file/filename.tiff' \
-        /// -F 'request={ "idempotency_key":"{{UNIQUE_KEY}}", "evidence_type":"{{EVIDENCE_TYPE}}", "content_type":"image/tiff" }' \
-        /// 'https://connect.squareup.com/v2/disputes/{{DISPUTE_ID}}/evidence_file'
-        /// ```
+        /// and TIFF formats.
         /// For more information, see [Challenge a Dispute](https://developer.squareup.com/docs/docs/disputes-api/process-disputes#challenge-a-dispute).
         /// </summary>
         /// <param name="disputeId">Required parameter: ID of the dispute you want to upload evidence for.</param>
@@ -499,16 +490,7 @@ namespace Square.Apis
         /// <summary>
         /// Uploads a file to use as evidence in a dispute challenge. The endpoint accepts
         /// HTTP multipart/form-data file uploads in HEIC, HEIF, JPEG, PDF, PNG,
-        /// and TIFF formats. The following is an example of such an HTTP request:
-        /// ```
-        /// curl -X POST \
-        /// -H 'Accept: application/json' \
-        /// -H 'Authorization: Bearer {{ACCESS_TOKEN}}' \
-        /// -H 'Content-Type: multipart/form-data' \
-        /// -F 'evidence=@/path/to/file/filename.tiff' \
-        /// -F 'request={ "idempotency_key":"{{UNIQUE_KEY}}", "evidence_type":"{{EVIDENCE_TYPE}}", "content_type":"image/tiff" }' \
-        /// 'https://connect.squareup.com/v2/disputes/{{DISPUTE_ID}}/evidence_file'
-        /// ```
+        /// and TIFF formats.
         /// For more information, see [Challenge a Dispute](https://developer.squareup.com/docs/docs/disputes-api/process-disputes#challenge-a-dispute).
         /// </summary>
         /// <param name="disputeId">Required parameter: ID of the dispute you want to upload evidence for.</param>
@@ -538,7 +520,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-05-28" }
+                { "Square-Version", "2020-06-25" }
             };
 
             var requestHeaders = new Dictionary<string, IReadOnlyCollection<string>>(StringComparer.OrdinalIgnoreCase)
@@ -631,7 +613,7 @@ namespace Square.Apis
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
-                { "Square-Version", "2020-05-28" }
+                { "Square-Version", "2020-06-25" }
             };
 
             //append body params
@@ -716,7 +698,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-05-28" }
+                { "Square-Version", "2020-06-25" }
             };
 
             //prepare the API call request to fetch the response

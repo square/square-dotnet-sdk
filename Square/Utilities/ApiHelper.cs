@@ -43,6 +43,7 @@ namespace Square.Utilities
                 return null;
 
             var settings = new JsonSerializerSettings();
+            settings.NullValueHandling = NullValueHandling.Ignore;
 
             if (converter == null)
                 settings.Converters.Add(new IsoDateTimeConverter());

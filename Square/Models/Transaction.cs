@@ -50,7 +50,7 @@ namespace Square.Models
         public string LocationId { get; }
 
         /// <summary>
-        /// The time when the transaction was created, in RFC 3339 format.
+        /// The timestamp for when the transaction was created, in RFC 3339 format.
         /// </summary>
         [JsonProperty("created_at")]
         public string CreatedAt { get; }

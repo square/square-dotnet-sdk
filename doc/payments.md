@@ -236,7 +236,7 @@ the payment using this endpoint. For more information, see
 [Delayed Payments](https://developer.squareup.com/docs/payments-api/take-payments#delayed-payments).
 
 ```csharp
-CompletePaymentAsync(string paymentId, object body)
+CompletePaymentAsync(string paymentId)
 ```
 
 ### Parameters
@@ -244,7 +244,6 @@ CompletePaymentAsync(string paymentId, object body)
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `paymentId` | `string` | Template, Required | Unique ID identifying the payment to be completed. |
-| `body` | `object` | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ### Response Type
 
@@ -254,11 +253,10 @@ CompletePaymentAsync(string paymentId, object body)
 
 ```csharp
 string paymentId = "payment_id0";
-object body = ApiHelper.JsonDeserialize<Object>("{\"key1\":\"val1\",\"key2\":\"val2\"}");
 
 try
 {
-    CompletePaymentResponse result = await paymentsApi.CompletePaymentAsync(paymentId, body);
+    CompletePaymentResponse result = await paymentsApi.CompletePaymentAsync(paymentId);
 }
 catch (ApiException e){};
 ```

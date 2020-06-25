@@ -62,7 +62,8 @@ namespace Square.Models
         public string Cursor { get; }
 
         /// <summary>
-        /// ID of location associated with payment.
+        /// Limit results to the location supplied. By default, results are returned
+        /// for all locations associated with the merchant.
         /// </summary>
         [JsonProperty("location_id")]
         public string LocationId { get; }

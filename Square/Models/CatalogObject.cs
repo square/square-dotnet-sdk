@@ -111,14 +111,20 @@ namespace Square.Models
         public bool? IsDeleted { get; }
 
         /// <summary>
-        /// Application-defined key/value attributes that are set at a global (location-independent) level.
-        /// Custom Attribute Values are intended to store additional information about a Catalog Object
+        /// A map (key-value pairs) of application-defined custom attribute values. The value of a key-value pair 
+        /// is a [CatalogCustomAttributeValue](#type-CatalogCustomAttributeValue) object. The key is the `key` attribute 
+        /// value defined in the associated [CatalogCustomAttributeDefinition](#type-CatalogCustomAttributeDefinition) 
+        /// object defined by the application making the request. 
+        /// If the `CatalogCustomAttributeDefinition` object is 
+        /// defined by another application, the `CatalogCustomAttributeDefinition`'s key attribute value is prefixed by 
+        /// the defining application ID. For example, if the `CatalogCustomAttributeDefinition` has a `key` attribute of 
+        /// "cocoa_brand" and the defining application ID is "abcd1234", the key in the map is "abcd1234:cocoa_brand" if the
+        /// application making the request is different from the application defining the custom attribute definition. 
+        /// Otherwise, the key used in the map is simply "cocoa-brand".
+        /// Application-defined custom attributes that are set at a global (location-independent) level.
+        /// Custom attribute values are intended to store additional information about a catalog object
         /// or associations with an entity in another system. Do not use custom attributes
         /// to store any sensitive information (personally identifiable information, card details, etc.).
-        /// For CustomAttributesDefinitions defined by the app making the request, the map key is the key defined in the
-        /// `CatalogCustomAttributeDefinition` (e.g. “reference_id”). For custom attributes created by other apps, the map key is
-        /// the key defined in `CatalogCustomAttributeDefinition` prefixed with the application ID and a colon
-        /// (eg. “abcd1234:reference_id”).
         /// </summary>
         [JsonProperty("custom_attribute_values")]
         public IDictionary<string, Models.CatalogCustomAttributeValue> CustomAttributeValues { get; }
@@ -223,7 +229,7 @@ namespace Square.Models
         public Models.CatalogProductSet ProductSetData { get; }
 
         /// <summary>
-        /// Defines how prices are modified or set for items that match the pricing rule
+        /// Defines how discounts are automatically applied to a set of items that match the pricing rule 
         /// during the active time period.
         /// </summary>
         [JsonProperty("pricing_rule_data")]

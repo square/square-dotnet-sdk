@@ -62,7 +62,7 @@ namespace Square.Models
         public string TenderId { get; }
 
         /// <summary>
-        /// The time when the refund was created, in RFC 3339 format.
+        /// The timestamp for when the refund was created, in RFC 3339 format.
         /// </summary>
         [JsonProperty("created_at")]
         public string CreatedAt { get; }

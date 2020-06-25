@@ -20,4 +20,7 @@ Indicates a card's brand, such as `VISA` or `MASTERCARD`.
 | `CHINAUNIONPAY` |
 | `SQUAREGIFTCARD` |
 | `SQUARECAPITALCARD` |
+| `INTERAC` |
+| `EFTPOS` |
+| `FELICA` |
 
