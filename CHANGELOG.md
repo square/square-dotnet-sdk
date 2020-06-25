@@ -1,6 +1,6 @@
 # Change Log
 
-## Version 6.0.0.20200625 (2020-06-25)
+## Version 6.0.0 (2020-06-25)
 
 ## New API release 
 * Team API generally available (GA)
