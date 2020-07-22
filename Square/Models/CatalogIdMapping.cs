@@ -22,7 +22,7 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// The client-supplied, temporary `#`-prefixed ID for a new `CatalogObject`.
+        /// The client-supplied temporary `#`-prefixed ID for a new `CatalogObject`.
         /// </summary>
         [JsonProperty("client_object_id")]
         public string ClientObjectId { get; }

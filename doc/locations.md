@@ -87,7 +87,10 @@ catch (ApiException e){};
 
 ## Retrieve Location
 
-Retrieves details of a location.
+Retrieves details of a location. You can specify "main" 
+as the location ID to retrieve details of the 
+main location. For more information, 
+see [Locations API Overview](https://developer.squareup.com/docs/docs/locations-api).
 
 ```csharp
 RetrieveLocationAsync(string locationId)
@@ -97,7 +100,7 @@ RetrieveLocationAsync(string locationId)
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `locationId` | `string` | Template, Required | The ID of the location to retrieve. |
+| `locationId` | `string` | Template, Required | The ID of the location to retrieve. If you specify the string "main",<br>then the endpoint returns the main location. |
 
 ### Response Type
 

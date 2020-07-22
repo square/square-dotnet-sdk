@@ -30,7 +30,7 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// The tax's name. Searchable. This field has max length of 255 Unicode code points.
+        /// The tax's name. This is a searchable attribute for use in applicable query filters, and its value length is of Unicode code points.
         /// </summary>
         [JsonProperty("name")]
         public string Name { get; }

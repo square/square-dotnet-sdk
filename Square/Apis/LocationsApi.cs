@@ -62,7 +62,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-06-25" }
+                { "Square-Version", config.SquareVersion }
             };
 
             //prepare the API call request to fetch the response
@@ -127,7 +127,7 @@ namespace Square.Apis
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
-                { "Square-Version", "2020-06-25" }
+                { "Square-Version", config.SquareVersion }
             };
 
             //append body params
@@ -159,9 +159,12 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Retrieves details of a location.
+        /// Retrieves details of a location. You can specify "main" 
+        /// as the location ID to retrieve details of the 
+        /// main location. For more information, 
+        /// see [Locations API Overview](https://developer.squareup.com/docs/docs/locations-api).
         /// </summary>
-        /// <param name="locationId">Required parameter: The ID of the location to retrieve.</param>
+        /// <param name="locationId">Required parameter: The ID of the location to retrieve. If you specify the string "main", then the endpoint returns the main location.</param>
         /// <return>Returns the Models.RetrieveLocationResponse response from the API call</return>
         public Models.RetrieveLocationResponse RetrieveLocation(string locationId)
         {
@@ -171,9 +174,12 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Retrieves details of a location.
+        /// Retrieves details of a location. You can specify "main" 
+        /// as the location ID to retrieve details of the 
+        /// main location. For more information, 
+        /// see [Locations API Overview](https://developer.squareup.com/docs/docs/locations-api).
         /// </summary>
-        /// <param name="locationId">Required parameter: The ID of the location to retrieve.</param>
+        /// <param name="locationId">Required parameter: The ID of the location to retrieve. If you specify the string "main", then the endpoint returns the main location.</param>
         /// <return>Returns the Models.RetrieveLocationResponse response from the API call</return>
         public async Task<Models.RetrieveLocationResponse> RetrieveLocationAsync(string locationId, CancellationToken cancellationToken = default)
         {
@@ -198,7 +204,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-06-25" }
+                { "Square-Version", config.SquareVersion }
             };
 
             //prepare the API call request to fetch the response
@@ -269,7 +275,7 @@ namespace Square.Apis
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
-                { "Square-Version", "2020-06-25" }
+                { "Square-Version", config.SquareVersion }
             };
 
             //append body params

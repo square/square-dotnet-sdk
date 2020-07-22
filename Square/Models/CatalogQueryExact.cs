@@ -22,13 +22,14 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// The name of the attribute to be searched.
+        /// The name of the attribute to be searched. Matching of the attribute name is exact.
         /// </summary>
         [JsonProperty("attribute_name")]
         public string AttributeName { get; }
 
         /// <summary>
-        /// The desired value of the search attribute.
+        /// The desired value of the search attribute. Matching of the attribute value is case insensitive and can be partial. 
+        /// For example, if a specified value of "sma", objects with the named attribute value of "Small", "small" are both matched.
         /// </summary>
         [JsonProperty("attribute_value")]
         public string AttributeValue { get; }

@@ -11,7 +11,7 @@ A request to create a new `BreakType`
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `IdempotencyKey` | `string` | Optional | Unique string value to insure idempotency of the operation |
-| `BreakType` | [`Models.BreakType`](/doc/models/break-type.md) |  | A defined break template that sets an expectation for possible `Break` <br>instances on a `Shift`. |
+| `BreakType` | [`Models.BreakType`](/doc/models/break-type.md) |  | A defined break template that sets an expectation for possible `Break`<br>instances on a `Shift`. |
 
 ### Example (as JSON)
 

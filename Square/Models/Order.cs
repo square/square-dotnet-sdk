@@ -40,6 +40,7 @@ namespace Square.Models
             Models.Money totalTaxMoney = null,
             Models.Money totalDiscountMoney = null,
             Models.Money totalServiceChargeMoney = null,
+            Models.OrderPricingOptions pricingOptions = null,
             IList<Models.OrderReward> rewards = null)
         {
             Id = id;
@@ -68,6 +69,7 @@ namespace Square.Models
             TotalTaxMoney = totalTaxMoney;
             TotalDiscountMoney = totalDiscountMoney;
             TotalServiceChargeMoney = totalServiceChargeMoney;
+            PricingOptions = pricingOptions;
             Rewards = rewards;
         }
 
@@ -283,6 +285,14 @@ namespace Square.Models
         public Models.Money TotalServiceChargeMoney { get; }
 
         /// <summary>
+        /// Pricing options for an order. The options affect how the order's price is calculated.
+        /// They can be used, for example, to apply automatic price adjustments that are based on pre-configured
+        /// [pricing rules](https://developer.squareup.com/docs/reference/square/objects/CatalogPricingRule).
+        /// </summary>
+        [JsonProperty("pricing_options")]
+        public Models.OrderPricingOptions PricingOptions { get; }
+
+        /// <summary>
         /// A set-like list of rewards that have been added to the order.
         /// </summary>
         [JsonProperty("rewards")]
@@ -316,6 +326,7 @@ namespace Square.Models
                 .TotalTaxMoney(TotalTaxMoney)
                 .TotalDiscountMoney(TotalDiscountMoney)
                 .TotalServiceChargeMoney(TotalServiceChargeMoney)
+                .PricingOptions(PricingOptions)
                 .Rewards(Rewards);
             return builder;
         }
@@ -348,6 +359,7 @@ namespace Square.Models
             private Models.Money totalTaxMoney;
             private Models.Money totalDiscountMoney;
             private Models.Money totalServiceChargeMoney;
+            private Models.OrderPricingOptions pricingOptions;
             private IList<Models.OrderReward> rewards = new List<Models.OrderReward>();
 
             public Builder(string locationId)
@@ -510,6 +522,12 @@ namespace Square.Models
                 return this;
             }
 
+            public Builder PricingOptions(Models.OrderPricingOptions value)
+            {
+                pricingOptions = value;
+                return this;
+            }
+
             public Builder Rewards(IList<Models.OrderReward> value)
             {
                 rewards = value;
@@ -544,6 +562,7 @@ namespace Square.Models
                     totalTaxMoney,
                     totalDiscountMoney,
                     totalServiceChargeMoney,
+                    pricingOptions,
                     rewards);
             }
         }

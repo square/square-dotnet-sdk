@@ -36,55 +36,55 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// Getter for sorted_attribute_query
+        /// The query expression to specify the key to sort search results.
         /// </summary>
         [JsonProperty("sorted_attribute_query")]
         public Models.CatalogQuerySortedAttribute SortedAttributeQuery { get; }
 
         /// <summary>
-        /// Getter for exact_query
+        /// The query filter to return the serch result by exact match of the specified attribute name and value.
         /// </summary>
         [JsonProperty("exact_query")]
         public Models.CatalogQueryExact ExactQuery { get; }
 
         /// <summary>
-        /// Getter for prefix_query
+        /// The query filter to return the search result whose named attribute values are prefixed by the specified attribute value.
         /// </summary>
         [JsonProperty("prefix_query")]
         public Models.CatalogQueryPrefix PrefixQuery { get; }
 
         /// <summary>
-        /// Getter for range_query
+        /// The query filter to return the search result whose named attribute values fall between the specified range.
         /// </summary>
         [JsonProperty("range_query")]
         public Models.CatalogQueryRange RangeQuery { get; }
 
         /// <summary>
-        /// Getter for text_query
+        /// The query filter to return the search result whose searchable attribute values contain all of the specified keywords or tokens, independent of the token order or case.
         /// </summary>
         [JsonProperty("text_query")]
         public Models.CatalogQueryText TextQuery { get; }
 
         /// <summary>
-        /// Getter for items_for_tax_query
+        /// The query filter to return the items containing the specified tax IDs.
         /// </summary>
         [JsonProperty("items_for_tax_query")]
         public Models.CatalogQueryItemsForTax ItemsForTaxQuery { get; }
 
         /// <summary>
-        /// Getter for items_for_modifier_list_query
+        /// The query filter to return the items containing the specified modifier list IDs.
         /// </summary>
         [JsonProperty("items_for_modifier_list_query")]
         public Models.CatalogQueryItemsForModifierList ItemsForModifierListQuery { get; }
 
         /// <summary>
-        /// Getter for items_for_item_options_query
+        /// The query filter to return the items containing the specified item option IDs.
         /// </summary>
         [JsonProperty("items_for_item_options_query")]
         public Models.CatalogQueryItemsForItemOptions ItemsForItemOptionsQuery { get; }
 
         /// <summary>
-        /// Getter for item_variations_for_item_option_values_query
+        /// The query filter to return the item variations containing the specified item option value IDs.
         /// </summary>
         [JsonProperty("item_variations_for_item_option_values_query")]
         public Models.CatalogQueryItemVariationsForItemOptionValues ItemVariationsForItemOptionValuesQuery { get; }

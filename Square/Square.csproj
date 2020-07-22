@@ -4,13 +4,13 @@
   <PropertyGroup>
     <TargetFramework>netstandard1.3</TargetFramework>
     <AssemblyName>Square</AssemblyName>
-    <Version>6.0.0.0</Version>
+    <Version>6.1.0.0</Version>
     <Authors>Square Developer Platform</Authors>
     <Owners>Square Developer Platform</Owners>
     <Product>Square</Product>
     <Copyright>Copyright ©  2019</Copyright>
-    <AssemblyVersion>6.0.0.0</AssemblyVersion>
-    <FileVersion>6.0.0.0</FileVersion>
+    <AssemblyVersion>6.1.0.0</AssemblyVersion>
+    <FileVersion>6.1.0.0</FileVersion>
     <Description>.NET client library for the Square API</Description>
     <LangVersion>7.3</LangVersion>
   </PropertyGroup>

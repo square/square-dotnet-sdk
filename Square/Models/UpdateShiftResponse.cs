@@ -26,8 +26,8 @@ namespace Square.Models
         public HttpContext Context { get; internal set; }
 
         /// <summary>
-        /// A record of the hourly rate, start, and end times for a single work shift 
-        /// for an employee. May include a record of the start and end times for breaks 
+        /// A record of the hourly rate, start, and end times for a single work shift
+        /// for an employee. May include a record of the start and end times for breaks
         /// taken during the shift.
         /// </summary>
         [JsonProperty("shift")]

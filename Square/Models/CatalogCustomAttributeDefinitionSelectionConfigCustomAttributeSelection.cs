@@ -29,7 +29,6 @@ namespace Square.Models
 
         /// <summary>
         /// Selection name, unique within `allowed_selections`.
-        /// Required. Min length of 1, max length of 255.
         /// </summary>
         [JsonProperty("name")]
         public string Name { get; }

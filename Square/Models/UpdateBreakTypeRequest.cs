@@ -20,7 +20,7 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// A defined break template that sets an expectation for possible `Break` 
+        /// A defined break template that sets an expectation for possible `Break`
         /// instances on a `Shift`.
         /// </summary>
         [JsonProperty("break_type")]

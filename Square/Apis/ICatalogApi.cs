@@ -101,11 +101,11 @@ namespace Square.Apis
         Task<Models.BatchUpsertCatalogObjectsResponse> BatchUpsertCatalogObjectsAsync(Models.BatchUpsertCatalogObjectsRequest body, CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Upload an image file to create a new [CatalogImage](#type-catalogimage) for an existing
-        /// [CatalogObject](#type-catalogobject). Images can be uploaded and linked in this request or created independently
-        /// (without an object assignment) and linked to a [CatalogObject](#type-catalogobject) at a later time.
-        /// CreateCatalogImage accepts HTTP multipart/form-data requests with a JSON part and an image file part in
-        /// JPEG, PJPEG, PNG, or GIF format. The maximum file size is 15MB. 
+        /// Uploads an image file to be represented by an [CatalogImage](#type-catalogimage) object linked to an existing
+        /// [CatalogObject](#type-catalogobject) instance. A call to this endpoint can upload an image, link an image to
+        /// a catalog object, or do both.
+        /// This `CreateCatalogImage` endpoint accepts HTTP multipart/form-data requests with a JSON part and an image file part in
+        /// JPEG, PJPEG, PNG, or GIF format. The maximum file size is 15MB.
         /// Additional information and an example cURL request can be found in the [Create a Catalog Image recipe](https://developer.squareup.com/docs/more-apis/catalog/cookbook/create-catalog-images).
         /// </summary>
         /// <param name="request">Optional parameter: Example: </param>
@@ -114,11 +114,11 @@ namespace Square.Apis
         Models.CreateCatalogImageResponse CreateCatalogImage(Models.CreateCatalogImageRequest request = null, FileStreamInfo imageFile = null);
 
         /// <summary>
-        /// Upload an image file to create a new [CatalogImage](#type-catalogimage) for an existing
-        /// [CatalogObject](#type-catalogobject). Images can be uploaded and linked in this request or created independently
-        /// (without an object assignment) and linked to a [CatalogObject](#type-catalogobject) at a later time.
-        /// CreateCatalogImage accepts HTTP multipart/form-data requests with a JSON part and an image file part in
-        /// JPEG, PJPEG, PNG, or GIF format. The maximum file size is 15MB. 
+        /// Uploads an image file to be represented by an [CatalogImage](#type-catalogimage) object linked to an existing
+        /// [CatalogObject](#type-catalogobject) instance. A call to this endpoint can upload an image, link an image to
+        /// a catalog object, or do both.
+        /// This `CreateCatalogImage` endpoint accepts HTTP multipart/form-data requests with a JSON part and an image file part in
+        /// JPEG, PJPEG, PNG, or GIF format. The maximum file size is 15MB.
         /// Additional information and an example cURL request can be found in the [Create a Catalog Image recipe](https://developer.squareup.com/docs/more-apis/catalog/cookbook/create-catalog-images).
         /// </summary>
         /// <param name="request">Optional parameter: Example: </param>
@@ -127,15 +127,15 @@ namespace Square.Apis
         Task<Models.CreateCatalogImageResponse> CreateCatalogImageAsync(Models.CreateCatalogImageRequest request = null, FileStreamInfo imageFile = null, CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Returns information about the Square Catalog API, such as batch size
-        /// limits for `BatchUpsertCatalogObjects`.
+        /// Retrieves information about the Square Catalog API, such as batch size
+        /// limits that can be used by the `BatchUpsertCatalogObjects` endpoint.
         /// </summary>
         /// <return>Returns the Models.CatalogInfoResponse response from the API call</return>
         Models.CatalogInfoResponse CatalogInfo();
 
         /// <summary>
-        /// Returns information about the Square Catalog API, such as batch size
-        /// limits for `BatchUpsertCatalogObjects`.
+        /// Retrieves information about the Square Catalog API, such as batch size
+        /// limits that can be used by the `BatchUpsertCatalogObjects` endpoint.
         /// </summary>
         /// <return>Returns the Models.CatalogInfoResponse response from the API call</return>
         Task<Models.CatalogInfoResponse> CatalogInfoAsync(CancellationToken cancellationToken = default);
@@ -237,36 +237,60 @@ namespace Square.Apis
         Task<Models.RetrieveCatalogObjectResponse> RetrieveCatalogObjectAsync(string objectId, bool? includeRelatedObjects = false, CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Queries the targeted catalog using a variety of query expressions.
-        /// Supported query expressions are of the following types:
-        /// - [CatalogQuerySortedAttribute](#type-catalogquerysortedattribute),
-        /// - [CatalogQueryExact](#type-catalogqueryexact),
-        /// - [CatalogQueryRange](#type-catalogqueryrange),
-        /// - [CatalogQueryText](#type-catalogquerytext),
-        /// - [CatalogQueryItemsForTax](#type-catalogqueryitemsfortax),
-        /// - [CatalogQueryItemsForModifierList](#type-catalogqueryitemsformodifierlist),
-        /// - [CatalogQueryItemsForItemOptions](#type-catalogqueryitemsforitemoptions), and
-        /// - [CatalogQueryItemVariationsForItemOptionValues](#type-catalogqueryitemvariationsforitemoptionvalues).
+        /// Searches for [CatalogObject](#type-CatalogObject) of any types against supported search attribute values, 
+        /// excluding custom attribute values on items or item variations, against one or more of the specified query expressions, 
+        /// This (`SearchCatalogObjects`) endpoint differs from the [SearchCatalogItems](#endpoint-Catalog-SearchCatalogItems)
+        /// endpoint in the following aspects:
+        /// - `SearchCatalogItems` can only search for items or item variations, whereas `SearchCatalogObjects` can search for any type of catalog objects.
+        /// - `SearchCatalogItems` supports the custom attribute query filters to return items or item variations that contain custom attribute values, where `SearchCatalogObjects` does not.
+        /// - `SearchCatalogItems` does not support the `include_deleted_objects` filter to search for deleted items or item variations, whereas `SearchCatalogObjects` does.
+        /// - The both endpoints have different call conventions, including the query filter formats.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.SearchCatalogObjectsResponse response from the API call</return>
         Models.SearchCatalogObjectsResponse SearchCatalogObjects(Models.SearchCatalogObjectsRequest body);
 
         /// <summary>
-        /// Queries the targeted catalog using a variety of query expressions.
-        /// Supported query expressions are of the following types:
-        /// - [CatalogQuerySortedAttribute](#type-catalogquerysortedattribute),
-        /// - [CatalogQueryExact](#type-catalogqueryexact),
-        /// - [CatalogQueryRange](#type-catalogqueryrange),
-        /// - [CatalogQueryText](#type-catalogquerytext),
-        /// - [CatalogQueryItemsForTax](#type-catalogqueryitemsfortax),
-        /// - [CatalogQueryItemsForModifierList](#type-catalogqueryitemsformodifierlist),
-        /// - [CatalogQueryItemsForItemOptions](#type-catalogqueryitemsforitemoptions), and
-        /// - [CatalogQueryItemVariationsForItemOptionValues](#type-catalogqueryitemvariationsforitemoptionvalues).
+        /// Searches for [CatalogObject](#type-CatalogObject) of any types against supported search attribute values, 
+        /// excluding custom attribute values on items or item variations, against one or more of the specified query expressions, 
+        /// This (`SearchCatalogObjects`) endpoint differs from the [SearchCatalogItems](#endpoint-Catalog-SearchCatalogItems)
+        /// endpoint in the following aspects:
+        /// - `SearchCatalogItems` can only search for items or item variations, whereas `SearchCatalogObjects` can search for any type of catalog objects.
+        /// - `SearchCatalogItems` supports the custom attribute query filters to return items or item variations that contain custom attribute values, where `SearchCatalogObjects` does not.
+        /// - `SearchCatalogItems` does not support the `include_deleted_objects` filter to search for deleted items or item variations, whereas `SearchCatalogObjects` does.
+        /// - The both endpoints have different call conventions, including the query filter formats.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.SearchCatalogObjectsResponse response from the API call</return>
         Task<Models.SearchCatalogObjectsResponse> SearchCatalogObjectsAsync(Models.SearchCatalogObjectsRequest body, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Searches for catalog items or item variations by matching supported search attribute values, including
+        /// custom attribute values, against one or more of the specified query expressions, 
+        /// This (`SearchCatalogItems`) endpoint differs from the [SearchCatalogObjects](#endpoint-Catalog-SearchCatalogObjects)
+        /// endpoint in the following aspects:
+        /// - `SearchCatalogItems` can only search for items or item variations, whereas `SearchCatalogObjects` can search for any type of catalog objects.
+        /// - `SearchCatalogItems` supports the custom attribute query filters to return items or item variations that contain custom attribute values, where `SearchCatalogObjects` does not.
+        /// - `SearchCatalogItems` does not support the `include_deleted_objects` filter to search for deleted items or item variations, whereas `SearchCatalogObjects` does.
+        /// - The both endpoints use different call conventions, including the query filter formats.
+        /// </summary>
+        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
+        /// <return>Returns the Models.SearchCatalogItemsResponse response from the API call</return>
+        Models.SearchCatalogItemsResponse SearchCatalogItems(Models.SearchCatalogItemsRequest body);
+
+        /// <summary>
+        /// Searches for catalog items or item variations by matching supported search attribute values, including
+        /// custom attribute values, against one or more of the specified query expressions, 
+        /// This (`SearchCatalogItems`) endpoint differs from the [SearchCatalogObjects](#endpoint-Catalog-SearchCatalogObjects)
+        /// endpoint in the following aspects:
+        /// - `SearchCatalogItems` can only search for items or item variations, whereas `SearchCatalogObjects` can search for any type of catalog objects.
+        /// - `SearchCatalogItems` supports the custom attribute query filters to return items or item variations that contain custom attribute values, where `SearchCatalogObjects` does not.
+        /// - `SearchCatalogItems` does not support the `include_deleted_objects` filter to search for deleted items or item variations, whereas `SearchCatalogObjects` does.
+        /// - The both endpoints use different call conventions, including the query filter formats.
+        /// </summary>
+        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
+        /// <return>Returns the Models.SearchCatalogItemsResponse response from the API call</return>
+        Task<Models.SearchCatalogItemsResponse> SearchCatalogItemsAsync(Models.SearchCatalogItemsRequest body, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Updates the [CatalogModifierList](#type-catalogmodifierlist) objects

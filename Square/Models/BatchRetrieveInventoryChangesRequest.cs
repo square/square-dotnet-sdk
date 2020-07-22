@@ -33,7 +33,7 @@ namespace Square.Models
 
         /// <summary>
         /// Filters results by `CatalogObject` ID.
-        /// Only applied when set. Default: unset.
+        /// Only applied when set. Max size is 500 IDs. Default: unset.
         /// </summary>
         [JsonProperty("catalog_object_ids")]
         public IList<string> CatalogObjectIds { get; }

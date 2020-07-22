@@ -36,13 +36,13 @@ namespace Square.Models
         public string ItemOptionId { get; }
 
         /// <summary>
-        /// Name of this item option value. Searchable.
+        /// Name of this item option value. This is a searchable attribute for use in applicable query filters.
         /// </summary>
         [JsonProperty("name")]
         public string Name { get; }
 
         /// <summary>
-        /// A human-readable description for the option value.
+        /// A human-readable description for the option value. This is a searchable attribute for use in applicable query filters.
         /// </summary>
         [JsonProperty("description")]
         public string Description { get; }
@@ -64,10 +64,9 @@ namespace Square.Models
 
         /// <summary>
         /// The number of `CatalogItemVariation`s that
-        /// currently make use of this Item Option value. Present only if `retrieve_counts`
-        /// was specified on the request used to retrieve the parent Item Option of this
+        /// currently use this item option value. Present only if `retrieve_counts`
+        /// was specified on the request used to retrieve the parent item option of this
         /// value.
-        /// Maximum: 100 counts.
         /// </summary>
         [JsonProperty("item_variation_count")]
         public long? ItemVariationCount { get; }

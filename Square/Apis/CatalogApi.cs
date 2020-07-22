@@ -75,7 +75,7 @@ namespace Square.Apis
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
-                { "Square-Version", "2020-06-25" }
+                { "Square-Version", config.SquareVersion }
             };
 
             //append body params
@@ -151,7 +151,7 @@ namespace Square.Apis
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
-                { "Square-Version", "2020-06-25" }
+                { "Square-Version", config.SquareVersion }
             };
 
             //append body params
@@ -233,7 +233,7 @@ namespace Square.Apis
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
-                { "Square-Version", "2020-06-25" }
+                { "Square-Version", config.SquareVersion }
             };
 
             //append body params
@@ -265,11 +265,11 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Upload an image file to create a new [CatalogImage](#type-catalogimage) for an existing
-        /// [CatalogObject](#type-catalogobject). Images can be uploaded and linked in this request or created independently
-        /// (without an object assignment) and linked to a [CatalogObject](#type-catalogobject) at a later time.
-        /// CreateCatalogImage accepts HTTP multipart/form-data requests with a JSON part and an image file part in
-        /// JPEG, PJPEG, PNG, or GIF format. The maximum file size is 15MB. 
+        /// Uploads an image file to be represented by an [CatalogImage](#type-catalogimage) object linked to an existing
+        /// [CatalogObject](#type-catalogobject) instance. A call to this endpoint can upload an image, link an image to
+        /// a catalog object, or do both.
+        /// This `CreateCatalogImage` endpoint accepts HTTP multipart/form-data requests with a JSON part and an image file part in
+        /// JPEG, PJPEG, PNG, or GIF format. The maximum file size is 15MB.
         /// Additional information and an example cURL request can be found in the [Create a Catalog Image recipe](https://developer.squareup.com/docs/more-apis/catalog/cookbook/create-catalog-images).
         /// </summary>
         /// <param name="request">Optional parameter: Example: </param>
@@ -283,11 +283,11 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Upload an image file to create a new [CatalogImage](#type-catalogimage) for an existing
-        /// [CatalogObject](#type-catalogobject). Images can be uploaded and linked in this request or created independently
-        /// (without an object assignment) and linked to a [CatalogObject](#type-catalogobject) at a later time.
-        /// CreateCatalogImage accepts HTTP multipart/form-data requests with a JSON part and an image file part in
-        /// JPEG, PJPEG, PNG, or GIF format. The maximum file size is 15MB. 
+        /// Uploads an image file to be represented by an [CatalogImage](#type-catalogimage) object linked to an existing
+        /// [CatalogObject](#type-catalogobject) instance. A call to this endpoint can upload an image, link an image to
+        /// a catalog object, or do both.
+        /// This `CreateCatalogImage` endpoint accepts HTTP multipart/form-data requests with a JSON part and an image file part in
+        /// JPEG, PJPEG, PNG, or GIF format. The maximum file size is 15MB.
         /// Additional information and an example cURL request can be found in the [Create a Catalog Image recipe](https://developer.squareup.com/docs/more-apis/catalog/cookbook/create-catalog-images).
         /// </summary>
         /// <param name="request">Optional parameter: Example: </param>
@@ -310,7 +310,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-06-25" }
+                { "Square-Version", config.SquareVersion }
             };
 
             var requestHeaders = new Dictionary<string, IReadOnlyCollection<string>>(StringComparer.OrdinalIgnoreCase)
@@ -359,8 +359,8 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Returns information about the Square Catalog API, such as batch size
-        /// limits for `BatchUpsertCatalogObjects`.
+        /// Retrieves information about the Square Catalog API, such as batch size
+        /// limits that can be used by the `BatchUpsertCatalogObjects` endpoint.
         /// </summary>
         /// <return>Returns the Models.CatalogInfoResponse response from the API call</return>
         public Models.CatalogInfoResponse CatalogInfo()
@@ -371,8 +371,8 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Returns information about the Square Catalog API, such as batch size
-        /// limits for `BatchUpsertCatalogObjects`.
+        /// Retrieves information about the Square Catalog API, such as batch size
+        /// limits that can be used by the `BatchUpsertCatalogObjects` endpoint.
         /// </summary>
         /// <return>Returns the Models.CatalogInfoResponse response from the API call</return>
         public async Task<Models.CatalogInfoResponse> CatalogInfoAsync(CancellationToken cancellationToken = default)
@@ -392,7 +392,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-06-25" }
+                { "Square-Version", config.SquareVersion }
             };
 
             //prepare the API call request to fetch the response
@@ -477,7 +477,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-06-25" }
+                { "Square-Version", config.SquareVersion }
             };
 
             //prepare the API call request to fetch the response
@@ -540,7 +540,7 @@ namespace Square.Apis
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
-                { "Square-Version", "2020-06-25" }
+                { "Square-Version", config.SquareVersion }
             };
 
             //append body params
@@ -621,7 +621,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-06-25" }
+                { "Square-Version", config.SquareVersion }
             };
 
             //prepare the API call request to fetch the response
@@ -709,7 +709,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-06-25" }
+                { "Square-Version", config.SquareVersion }
             };
 
             //prepare the API call request to fetch the response
@@ -738,16 +738,14 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Queries the targeted catalog using a variety of query expressions.
-        /// Supported query expressions are of the following types:
-        /// - [CatalogQuerySortedAttribute](#type-catalogquerysortedattribute),
-        /// - [CatalogQueryExact](#type-catalogqueryexact),
-        /// - [CatalogQueryRange](#type-catalogqueryrange),
-        /// - [CatalogQueryText](#type-catalogquerytext),
-        /// - [CatalogQueryItemsForTax](#type-catalogqueryitemsfortax),
-        /// - [CatalogQueryItemsForModifierList](#type-catalogqueryitemsformodifierlist),
-        /// - [CatalogQueryItemsForItemOptions](#type-catalogqueryitemsforitemoptions), and
-        /// - [CatalogQueryItemVariationsForItemOptionValues](#type-catalogqueryitemvariationsforitemoptionvalues).
+        /// Searches for [CatalogObject](#type-CatalogObject) of any types against supported search attribute values, 
+        /// excluding custom attribute values on items or item variations, against one or more of the specified query expressions, 
+        /// This (`SearchCatalogObjects`) endpoint differs from the [SearchCatalogItems](#endpoint-Catalog-SearchCatalogItems)
+        /// endpoint in the following aspects:
+        /// - `SearchCatalogItems` can only search for items or item variations, whereas `SearchCatalogObjects` can search for any type of catalog objects.
+        /// - `SearchCatalogItems` supports the custom attribute query filters to return items or item variations that contain custom attribute values, where `SearchCatalogObjects` does not.
+        /// - `SearchCatalogItems` does not support the `include_deleted_objects` filter to search for deleted items or item variations, whereas `SearchCatalogObjects` does.
+        /// - The both endpoints have different call conventions, including the query filter formats.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.SearchCatalogObjectsResponse response from the API call</return>
@@ -759,16 +757,14 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Queries the targeted catalog using a variety of query expressions.
-        /// Supported query expressions are of the following types:
-        /// - [CatalogQuerySortedAttribute](#type-catalogquerysortedattribute),
-        /// - [CatalogQueryExact](#type-catalogqueryexact),
-        /// - [CatalogQueryRange](#type-catalogqueryrange),
-        /// - [CatalogQueryText](#type-catalogquerytext),
-        /// - [CatalogQueryItemsForTax](#type-catalogqueryitemsfortax),
-        /// - [CatalogQueryItemsForModifierList](#type-catalogqueryitemsformodifierlist),
-        /// - [CatalogQueryItemsForItemOptions](#type-catalogqueryitemsforitemoptions), and
-        /// - [CatalogQueryItemVariationsForItemOptionValues](#type-catalogqueryitemvariationsforitemoptionvalues).
+        /// Searches for [CatalogObject](#type-CatalogObject) of any types against supported search attribute values, 
+        /// excluding custom attribute values on items or item variations, against one or more of the specified query expressions, 
+        /// This (`SearchCatalogObjects`) endpoint differs from the [SearchCatalogItems](#endpoint-Catalog-SearchCatalogItems)
+        /// endpoint in the following aspects:
+        /// - `SearchCatalogItems` can only search for items or item variations, whereas `SearchCatalogObjects` can search for any type of catalog objects.
+        /// - `SearchCatalogItems` supports the custom attribute query filters to return items or item variations that contain custom attribute values, where `SearchCatalogObjects` does not.
+        /// - `SearchCatalogItems` does not support the `include_deleted_objects` filter to search for deleted items or item variations, whereas `SearchCatalogObjects` does.
+        /// - The both endpoints have different call conventions, including the query filter formats.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.SearchCatalogObjectsResponse response from the API call</return>
@@ -790,7 +786,7 @@ namespace Square.Apis
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
-                { "Square-Version", "2020-06-25" }
+                { "Square-Version", config.SquareVersion }
             };
 
             //append body params
@@ -817,6 +813,86 @@ namespace Square.Apis
             base.ValidateResponse(_response, _context);
 
             var _responseModel = ApiHelper.JsonDeserialize<Models.SearchCatalogObjectsResponse>(_response.Body);
+            _responseModel.Context = _context;
+            return _responseModel;
+        }
+
+        /// <summary>
+        /// Searches for catalog items or item variations by matching supported search attribute values, including
+        /// custom attribute values, against one or more of the specified query expressions, 
+        /// This (`SearchCatalogItems`) endpoint differs from the [SearchCatalogObjects](#endpoint-Catalog-SearchCatalogObjects)
+        /// endpoint in the following aspects:
+        /// - `SearchCatalogItems` can only search for items or item variations, whereas `SearchCatalogObjects` can search for any type of catalog objects.
+        /// - `SearchCatalogItems` supports the custom attribute query filters to return items or item variations that contain custom attribute values, where `SearchCatalogObjects` does not.
+        /// - `SearchCatalogItems` does not support the `include_deleted_objects` filter to search for deleted items or item variations, whereas `SearchCatalogObjects` does.
+        /// - The both endpoints use different call conventions, including the query filter formats.
+        /// </summary>
+        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
+        /// <return>Returns the Models.SearchCatalogItemsResponse response from the API call</return>
+        public Models.SearchCatalogItemsResponse SearchCatalogItems(Models.SearchCatalogItemsRequest body)
+        {
+            Task<Models.SearchCatalogItemsResponse> t = SearchCatalogItemsAsync(body);
+            ApiHelper.RunTaskSynchronously(t);
+            return t.Result;
+        }
+
+        /// <summary>
+        /// Searches for catalog items or item variations by matching supported search attribute values, including
+        /// custom attribute values, against one or more of the specified query expressions, 
+        /// This (`SearchCatalogItems`) endpoint differs from the [SearchCatalogObjects](#endpoint-Catalog-SearchCatalogObjects)
+        /// endpoint in the following aspects:
+        /// - `SearchCatalogItems` can only search for items or item variations, whereas `SearchCatalogObjects` can search for any type of catalog objects.
+        /// - `SearchCatalogItems` supports the custom attribute query filters to return items or item variations that contain custom attribute values, where `SearchCatalogObjects` does not.
+        /// - `SearchCatalogItems` does not support the `include_deleted_objects` filter to search for deleted items or item variations, whereas `SearchCatalogObjects` does.
+        /// - The both endpoints use different call conventions, including the query filter formats.
+        /// </summary>
+        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
+        /// <return>Returns the Models.SearchCatalogItemsResponse response from the API call</return>
+        public async Task<Models.SearchCatalogItemsResponse> SearchCatalogItemsAsync(Models.SearchCatalogItemsRequest body, CancellationToken cancellationToken = default)
+        {
+            //the base uri for api requests
+            string _baseUri = config.GetBaseUri();
+
+            //prepare query string for API call
+            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
+            _queryBuilder.Append("/v2/catalog/search-catalog-items");
+
+            //validate and preprocess url
+            string _queryUrl = ApiHelper.CleanUrl(_queryBuilder);
+
+            //append request with appropriate headers and parameters
+            var _headers = new Dictionary<string, string>()
+            { 
+                { "user-agent", userAgent },
+                { "accept", "application/json" },
+                { "content-type", "application/json; charset=utf-8" },
+                { "Square-Version", config.SquareVersion }
+            };
+
+            //append body params
+            var _body = ApiHelper.JsonSerialize(body);
+
+            //prepare the API call request to fetch the response
+            HttpRequest _request = GetClientInstance().PostBody(_queryUrl, _headers, _body);
+            if (HttpCallBack != null)
+            {
+                HttpCallBack.OnBeforeHttpRequestEventHandler(GetClientInstance(), _request);
+            }
+
+            _request = await authManagers["default"].ApplyAsync(_request).ConfigureAwait(false);
+
+            //invoke request and get response
+            HttpStringResponse _response = await GetClientInstance().ExecuteAsStringAsync(_request, cancellationToken).ConfigureAwait(false);
+            HttpContext _context = new HttpContext(_request, _response);
+            if (HttpCallBack != null)
+            {
+                HttpCallBack.OnAfterHttpResponseEventHandler(GetClientInstance(), _response);
+            }
+
+            //handle errors defined at the API level
+            base.ValidateResponse(_response, _context);
+
+            var _responseModel = ApiHelper.JsonDeserialize<Models.SearchCatalogItemsResponse>(_response.Body);
             _responseModel.Context = _context;
             return _responseModel;
         }
@@ -860,7 +936,7 @@ namespace Square.Apis
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
-                { "Square-Version", "2020-06-25" }
+                { "Square-Version", config.SquareVersion }
             };
 
             //append body params
@@ -930,7 +1006,7 @@ namespace Square.Apis
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
-                { "Square-Version", "2020-06-25" }
+                { "Square-Version", config.SquareVersion }
             };
 
             //append body params

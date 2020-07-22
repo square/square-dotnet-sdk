@@ -23,7 +23,8 @@ namespace Square.Models
             Models.Money appliedMoney = null,
             IDictionary<string, string> metadata = null,
             string scope = null,
-            IList<string> rewardIds = null)
+            IList<string> rewardIds = null,
+            string pricingRuleId = null)
         {
             Uid = uid;
             CatalogObjectId = catalogObjectId;
@@ -35,6 +36,7 @@ namespace Square.Models
             Metadata = metadata;
             Scope = scope;
             RewardIds = rewardIds;
+            PricingRuleId = pricingRuleId;
         }
 
         /// <summary>
@@ -125,6 +127,14 @@ namespace Square.Models
         [JsonProperty("reward_ids")]
         public IList<string> RewardIds { get; }
 
+        /// <summary>
+        /// The object identifier of a [pricing rule](#type-CatalogPricingRule) to be applied automatically
+        /// to this discount. The specification and application of the discounts, to which a `pricing_rule_id` is
+        /// assigned, are completely controlled by the corresponding pricing rule.
+        /// </summary>
+        [JsonProperty("pricing_rule_id")]
+        public string PricingRuleId { get; }
+
         public Builder ToBuilder()
         {
             var builder = new Builder()
@@ -137,7 +147,8 @@ namespace Square.Models
                 .AppliedMoney(AppliedMoney)
                 .Metadata(Metadata)
                 .Scope(Scope)
-                .RewardIds(RewardIds);
+                .RewardIds(RewardIds)
+                .PricingRuleId(PricingRuleId);
             return builder;
         }
 
@@ -153,6 +164,7 @@ namespace Square.Models
             private IDictionary<string, string> metadata = new Dictionary<string, string>();
             private string scope;
             private IList<string> rewardIds = new List<string>();
+            private string pricingRuleId;
 
             public Builder() { }
             public Builder Uid(string value)
@@ -215,6 +227,12 @@ namespace Square.Models
                 return this;
             }
 
+            public Builder PricingRuleId(string value)
+            {
+                pricingRuleId = value;
+                return this;
+            }
+
             public OrderLineItemDiscount Build()
             {
                 return new OrderLineItemDiscount(uid,
@@ -226,7 +244,8 @@ namespace Square.Models
                     appliedMoney,
                     metadata,
                     scope,
-                    rewardIds);
+                    rewardIds,
+                    pricingRuleId);
             }
         }
     }

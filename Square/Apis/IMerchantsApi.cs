@@ -43,14 +43,14 @@ namespace Square.Apis
         /// <summary>
         /// Retrieve a `Merchant` object for the given `merchant_id`.
         /// </summary>
-        /// <param name="merchantId">Required parameter: The ID of the merchant to retrieve.</param>
+        /// <param name="merchantId">Required parameter: The ID of the merchant to retrieve. If the string "me" is supplied as the ID, then retrieve the merchant that is currently accessible to this call.</param>
         /// <return>Returns the Models.RetrieveMerchantResponse response from the API call</return>
         Models.RetrieveMerchantResponse RetrieveMerchant(string merchantId);
 
         /// <summary>
         /// Retrieve a `Merchant` object for the given `merchant_id`.
         /// </summary>
-        /// <param name="merchantId">Required parameter: The ID of the merchant to retrieve.</param>
+        /// <param name="merchantId">Required parameter: The ID of the merchant to retrieve. If the string "me" is supplied as the ID, then retrieve the merchant that is currently accessible to this call.</param>
         /// <return>Returns the Models.RetrieveMerchantResponse response from the API call</return>
         Task<Models.RetrieveMerchantResponse> RetrieveMerchantAsync(string merchantId, CancellationToken cancellationToken = default);
 

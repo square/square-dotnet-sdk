@@ -48,27 +48,27 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// The ID of the `CatalogItem` associated with this item variation. Searchable.
+        /// The ID of the `CatalogItem` associated with this item variation.
         /// </summary>
         [JsonProperty("item_id")]
         public string ItemId { get; }
 
         /// <summary>
-        /// The item variation's name. Searchable. This field has max length of 255 Unicode code points.
+        /// The item variation's name. This is a searchable attribute for use in applicable query filters, and its value length is of Unicode code points.
         /// </summary>
         [JsonProperty("name")]
         public string Name { get; }
 
         /// <summary>
-        /// The item variation's SKU, if any. Searchable.
+        /// The item variation's SKU, if any. This is a searchable attribute for use in applicable query filters.
         /// </summary>
         [JsonProperty("sku")]
         public string Sku { get; }
 
         /// <summary>
-        /// The item variation's UPC, if any. Searchable in the Connect API.
-        /// This field is only exposed in the Connect API. It is not exposed in Square's Dashboard,
-        /// Square Point of Sale app or Retail Point of Sale app.
+        /// The item variation's UPC, if any. This is a searchable attribute for use in applicable query filters.
+        /// It is only accessible through the Square API, and not exposed in the Square Seller Dashboard,
+        /// Square Point of Sale or Retail Point of Sale apps.
         /// </summary>
         [JsonProperty("upc")]
         public string Upc { get; }
@@ -125,7 +125,7 @@ namespace Square.Models
         public long? InventoryAlertThreshold { get; }
 
         /// <summary>
-        /// Arbitrary user metadata to associate with the item variation. Searchable. This field has max length of 255 Unicode code points.
+        /// Arbitrary user metadata to associate with the item variation. This attribute value length is of Unicode code points.
         /// </summary>
         [JsonProperty("user_data")]
         public string UserData { get; }

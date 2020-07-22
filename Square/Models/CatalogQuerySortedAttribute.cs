@@ -24,7 +24,7 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// The attribute whose value should be used as the sort key.
+        /// The attribute whose value is used as the sort key.
         /// </summary>
         [JsonProperty("attribute_name")]
         public string AttributeName { get; }

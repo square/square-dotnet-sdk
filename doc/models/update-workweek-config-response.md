@@ -12,7 +12,7 @@ the request resulted in errors.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `WorkweekConfig` | [`Models.WorkweekConfig`](/doc/models/workweek-config.md) | Optional | Sets the Day of the week and hour of the day that a business starts a <br>work week. Used for the calculation of overtime pay. |
+| `WorkweekConfig` | [`Models.WorkweekConfig`](/doc/models/workweek-config.md) | Optional | Sets the Day of the week and hour of the day that a business starts a<br>work week. Used for the calculation of overtime pay. |
 | `Errors` | [`IList<Models.Error>`](/doc/models/error.md) | Optional | Any errors that occurred during the request. |
 
 ### Example (as JSON)
