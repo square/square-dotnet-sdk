@@ -164,13 +164,13 @@ namespace Square.Models
         public string ImageId { get; }
 
         /// <summary>
-        /// An item (i.e., product family) in the Catalog object model.
+        /// An [CatalogObject](#type-CatalogObject) instance of the `ITEM` type, also referred to as an item, in the catalog.
         /// </summary>
         [JsonProperty("item_data")]
         public Models.CatalogItem ItemData { get; }
 
         /// <summary>
-        /// A category to which a `CatalogItem` belongs in the `Catalog` object model.
+        /// A category to which a `CatalogItem` instance belongs.
         /// </summary>
         [JsonProperty("category_data")]
         public Models.CatalogCategory CategoryData { get; }
@@ -183,31 +183,29 @@ namespace Square.Models
         public Models.CatalogItemVariation ItemVariationData { get; }
 
         /// <summary>
-        /// A tax in the Catalog object model.
+        /// A tax applicable to an item.
         /// </summary>
         [JsonProperty("tax_data")]
         public Models.CatalogTax TaxData { get; }
 
         /// <summary>
-        /// A discount in the Catalog object model.
+        /// A discount applicable to items.
         /// </summary>
         [JsonProperty("discount_data")]
         public Models.CatalogDiscount DiscountData { get; }
 
         /// <summary>
-        /// A modifier list in the Catalog object model. A `CatalogModifierList`
-        /// contains `CatalogModifier` objects that can be applied to a `CatalogItem` at
-        /// the time of sale.
-        /// For example, a modifier list "Condiments" that would apply to a "Hot Dog"
-        /// `CatalogItem` might contain `CatalogModifier`s "Ketchup", "Mustard", and "Relish".
-        /// The `selection_type` field specifies whether or not multiple selections from
+        /// A list of modifiers applicable to items at the time of sale.
+        /// For example, a "Condiments" modifier list applicable to a "Hot Dog" item
+        /// may contain "Ketchup", "Mustard", and "Relish" modifiers.
+        /// Use the `selection_type` field to specify whether or not multiple selections from
         /// the modifier list are allowed.
         /// </summary>
         [JsonProperty("modifier_list_data")]
         public Models.CatalogModifierList ModifierListData { get; }
 
         /// <summary>
-        /// A modifier in the Catalog object model.
+        /// A modifier applicable to items at the time of sale.
         /// </summary>
         [JsonProperty("modifier_data")]
         public Models.CatalogModifier ModifierData { get; }
@@ -236,7 +234,7 @@ namespace Square.Models
         public Models.CatalogPricingRule PricingRuleData { get; }
 
         /// <summary>
-        /// An image file to use in Square catalogs. Can be associated with catalog
+        /// An image file to use in Square catalogs. It can be associated with catalog
         /// items, item variations, and categories.
         /// </summary>
         [JsonProperty("image_data")]

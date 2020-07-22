@@ -19,7 +19,8 @@ namespace Square.Models
             string businessName = null,
             string languageCode = null,
             string currency = null,
-            string status = null)
+            string status = null,
+            string mainLocationId = null)
         {
             Id = id;
             BusinessName = businessName;
@@ -27,6 +28,7 @@ namespace Square.Models
             LanguageCode = languageCode;
             Currency = currency;
             Status = status;
+            MainLocationId = mainLocationId;
         }
 
         /// <summary>
@@ -67,6 +69,12 @@ namespace Square.Models
         [JsonProperty("status")]
         public string Status { get; }
 
+        /// <summary>
+        /// The ID of the main `Location` for this merchant.
+        /// </summary>
+        [JsonProperty("main_location_id")]
+        public string MainLocationId { get; }
+
         public Builder ToBuilder()
         {
             var builder = new Builder(Country)
@@ -74,7 +82,8 @@ namespace Square.Models
                 .BusinessName(BusinessName)
                 .LanguageCode(LanguageCode)
                 .Currency(Currency)
-                .Status(Status);
+                .Status(Status)
+                .MainLocationId(MainLocationId);
             return builder;
         }
 
@@ -86,6 +95,7 @@ namespace Square.Models
             private string languageCode;
             private string currency;
             private string status;
+            private string mainLocationId;
 
             public Builder(string country)
             {
@@ -127,6 +137,12 @@ namespace Square.Models
                 return this;
             }
 
+            public Builder MainLocationId(string value)
+            {
+                mainLocationId = value;
+                return this;
+            }
+
             public Merchant Build()
             {
                 return new Merchant(country,
@@ -134,7 +150,8 @@ namespace Square.Models
                     businessName,
                     languageCode,
                     currency,
-                    status);
+                    status,
+                    mainLocationId);
             }
         }
     }

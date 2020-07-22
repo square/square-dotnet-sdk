@@ -12,6 +12,11 @@ namespace Square
         TimeSpan Timeout { get; }
 
         /// <summary>
+        /// Square Connect API versions
+        /// </summary>
+        string SquareVersion { get; }
+
+        /// <summary>
         /// OAuth 2.0 Access Token
         /// </summary>
         string AccessToken { get; }

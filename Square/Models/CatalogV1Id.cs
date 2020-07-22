@@ -22,7 +22,7 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// The ID for an object in Connect V1, if different from its Connect V2 ID.
+        /// The ID for an object used in the Square API V1, if the object ID differs from the Square API V2 object ID.
         /// </summary>
         [JsonProperty("catalog_v1_id")]
         public string CatalogV1IdProp { get; }

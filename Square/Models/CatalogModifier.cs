@@ -26,7 +26,7 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// The modifier name. Searchable. This field has max length of 255 Unicode code points.
+        /// The modifier name.  This is a searchable attribute for use in applicable query filters, and its value length is of Unicode code points.
         /// </summary>
         [JsonProperty("name")]
         public string Name { get; }
@@ -49,7 +49,7 @@ namespace Square.Models
         public int? Ordinal { get; }
 
         /// <summary>
-        /// The ID of the `CatalogModifierList` associated with this modifier. Searchable.
+        /// The ID of the `CatalogModifierList` associated with this modifier.
         /// </summary>
         [JsonProperty("modifier_list_id")]
         public string ModifierListId { get; }

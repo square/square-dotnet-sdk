@@ -66,7 +66,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-06-25" }
+                { "Square-Version", config.SquareVersion }
             };
 
             //prepare the API call request to fetch the response
@@ -135,7 +135,7 @@ namespace Square.Apis
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
-                { "Square-Version", "2020-06-25" }
+                { "Square-Version", config.SquareVersion }
             };
 
             //append body params
@@ -211,7 +211,7 @@ namespace Square.Apis
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
-                { "Square-Version", "2020-06-25" }
+                { "Square-Version", config.SquareVersion }
             };
 
             //append body params
@@ -293,7 +293,7 @@ namespace Square.Apis
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
-                { "Square-Version", "2020-06-25" }
+                { "Square-Version", config.SquareVersion }
             };
 
             //append body params
@@ -366,7 +366,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-06-25" }
+                { "Square-Version", config.SquareVersion }
             };
 
             //prepare the API call request to fetch the response
@@ -451,7 +451,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-06-25" }
+                { "Square-Version", config.SquareVersion }
             };
 
             //prepare the API call request to fetch the response
@@ -491,7 +491,7 @@ namespace Square.Apis
         /// </summary>
         /// <param name="catalogObjectId">Required parameter: ID of the [CatalogObject](#type-catalogobject) to retrieve.</param>
         /// <param name="locationIds">Optional parameter: The [Location](#type-location) IDs to look up as a comma-separated list. An empty list queries all locations.</param>
-        /// <param name="cursor">Optional parameter: A pagination cursor returned by a previous call to this endpoint. Provide this to retrieve the next set of results for the original query.  See the [Pagination](https://developer.squareup.com/docs/docs/working-with-apis/pagination) guide for more information.</param>
+        /// <param name="cursor">Optional parameter: A pagination cursor returned by a previous call to this endpoint. Provide this to retrieve the next set of results for the original query.  See the [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination) guide for more information.</param>
         /// <return>Returns the Models.RetrieveInventoryChangesResponse response from the API call</return>
         public Models.RetrieveInventoryChangesResponse RetrieveInventoryChanges(string catalogObjectId, string locationIds = null, string cursor = null)
         {
@@ -512,7 +512,7 @@ namespace Square.Apis
         /// </summary>
         /// <param name="catalogObjectId">Required parameter: ID of the [CatalogObject](#type-catalogobject) to retrieve.</param>
         /// <param name="locationIds">Optional parameter: The [Location](#type-location) IDs to look up as a comma-separated list. An empty list queries all locations.</param>
-        /// <param name="cursor">Optional parameter: A pagination cursor returned by a previous call to this endpoint. Provide this to retrieve the next set of results for the original query.  See the [Pagination](https://developer.squareup.com/docs/docs/working-with-apis/pagination) guide for more information.</param>
+        /// <param name="cursor">Optional parameter: A pagination cursor returned by a previous call to this endpoint. Provide this to retrieve the next set of results for the original query.  See the [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination) guide for more information.</param>
         /// <return>Returns the Models.RetrieveInventoryChangesResponse response from the API call</return>
         public async Task<Models.RetrieveInventoryChangesResponse> RetrieveInventoryChangesAsync(string catalogObjectId, string locationIds = null, string cursor = null, CancellationToken cancellationToken = default)
         {
@@ -544,7 +544,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-06-25" }
+                { "Square-Version", config.SquareVersion }
             };
 
             //prepare the API call request to fetch the response

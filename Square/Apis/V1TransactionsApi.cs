@@ -66,7 +66,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-06-25" }
+                { "Square-Version", config.SquareVersion }
             };
 
             //prepare the API call request to fetch the response
@@ -139,7 +139,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-06-25" }
+                { "Square-Version", config.SquareVersion }
             };
 
             //prepare the API call request to fetch the response
@@ -229,7 +229,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-06-25" }
+                { "Square-Version", config.SquareVersion }
             };
 
             //prepare the API call request to fetch the response
@@ -300,7 +300,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-06-25" }
+                { "Square-Version", config.SquareVersion }
             };
 
             //prepare the API call request to fetch the response
@@ -374,7 +374,7 @@ namespace Square.Apis
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
-                { "Square-Version", "2020-06-25" }
+                { "Square-Version", config.SquareVersion }
             };
 
             //append body params
@@ -500,7 +500,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-06-25" }
+                { "Square-Version", config.SquareVersion }
             };
 
             //prepare the API call request to fetch the response
@@ -571,7 +571,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-06-25" }
+                { "Square-Version", config.SquareVersion }
             };
 
             //prepare the API call request to fetch the response
@@ -671,7 +671,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-06-25" }
+                { "Square-Version", config.SquareVersion }
             };
 
             //prepare the API call request to fetch the response
@@ -760,7 +760,7 @@ namespace Square.Apis
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
-                { "Square-Version", "2020-06-25" }
+                { "Square-Version", config.SquareVersion }
             };
 
             //append body params
@@ -876,7 +876,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-06-25" }
+                { "Square-Version", config.SquareVersion }
             };
 
             //prepare the API call request to fetch the response
@@ -973,7 +973,7 @@ namespace Square.Apis
             { 
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
-                { "Square-Version", "2020-06-25" }
+                { "Square-Version", config.SquareVersion }
             };
 
             //prepare the API call request to fetch the response

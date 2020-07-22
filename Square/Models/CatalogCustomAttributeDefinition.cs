@@ -63,8 +63,7 @@ namespace Square.Models
         public string Description { get; }
 
         /// <summary>
-        /// Provides information about the application used to generate an inventory
-        /// change.
+        /// Provides information about the application used to generate a change.
         /// </summary>
         [JsonProperty("source_application")]
         public Models.SourceApplication SourceApplication { get; }

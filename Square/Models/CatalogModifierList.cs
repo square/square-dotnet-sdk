@@ -26,13 +26,13 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// A searchable name for the `CatalogModifierList`. This field has max length of 255 Unicode code points.
+        /// The name for the `CatalogModifierList` instance. This is a searchable attribute for use in applicable query filters, and its value length is of Unicode code points.
         /// </summary>
         [JsonProperty("name")]
         public string Name { get; }
 
         /// <summary>
-        /// Determines where this `CatalogModifierList` appears in a list of `CatalogModifierList` values.
+        /// Determines where this modifier list appears in a list of `CatalogModifierList` values.
         /// </summary>
         [JsonProperty("ordinal")]
         public int? Ordinal { get; }

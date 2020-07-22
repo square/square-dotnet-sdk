@@ -34,6 +34,7 @@ namespace Square
         private readonly Lazy<IDisputesApi> disputes;
         private readonly Lazy<IEmployeesApi> employees;
         private readonly Lazy<IInventoryApi> inventory;
+        private readonly Lazy<IInvoicesApi> invoices;
         private readonly Lazy<ILaborApi> labor;
         private readonly Lazy<ILocationsApi> locations;
         private readonly Lazy<IReportingApi> reporting;
@@ -133,6 +134,11 @@ namespace Square
         public IInventoryApi InventoryApi => inventory.Value;
 
         /// <summary>
+        /// Provides access to InvoicesApi controller
+        /// </summary>
+        public IInvoicesApi InvoicesApi => invoices.Value;
+
+        /// <summary>
         /// Provides access to LaborApi controller
         /// </summary>
         public ILaborApi LaborApi => labor.Value;
@@ -200,24 +206,25 @@ namespace Square
         /// <summary>
         /// Current version of the SDK
         /// </summary>
-        public string SdkVersion => "6.0.0";
-
-        /// <summary>
-        /// Version of Square API supported by this SDK
-        /// </summary>
-        public string SquareVersion => "2020-06-25";
+        public string SdkVersion => "6.1.0";
 
         internal static SquareClient CreateFromEnvironment()
         {
             var builder = new Builder();
 
             string timeout = System.Environment.GetEnvironmentVariable("SQUARE_TIMEOUT");
+            string squareVersion = System.Environment.GetEnvironmentVariable("SQUARE_SQUARE_VERSION");
             string accessToken = System.Environment.GetEnvironmentVariable("SQUARE_ACCESS_TOKEN");
             string environment = System.Environment.GetEnvironmentVariable("SQUARE_ENVIRONMENT");
 
             if (timeout != null)
             {
                 builder.Timeout(TimeSpan.Parse(timeout));
+            }
+
+            if (squareVersion != null)
+            {
+                builder.SquareVersion(squareVersion);
             }
 
             if (accessToken != null)
@@ -233,12 +240,14 @@ namespace Square
             return builder.Build();
         }
 
-        private SquareClient(TimeSpan timeout, string accessToken, Environment environment,
-                IDictionary<string, IAuthManager> authManagers, IHttpClient httpClient,
-                HttpCallBack httpCallBack, IDictionary<string, List<string>> additionalHeaders,
+        private SquareClient(TimeSpan timeout, string squareVersion, string accessToken,
+                Environment environment, IDictionary<string, IAuthManager> authManagers,
+                IHttpClient httpClient, HttpCallBack httpCallBack,
+                IDictionary<string, List<string>> additionalHeaders,
                 IHttpClientConfiguration httpClientConfiguration)
         {
             Timeout = timeout;
+            SquareVersion = squareVersion;
             AccessToken = accessToken;
             Environment = environment;
             this.httpCallBack = httpCallBack;
@@ -281,6 +290,8 @@ namespace Square
                 () => new EmployeesApi(this, this.httpClient, authManagers, this.httpCallBack));
             inventory = new Lazy<IInventoryApi>(
                 () => new InventoryApi(this, this.httpClient, authManagers, this.httpCallBack));
+            invoices = new Lazy<IInvoicesApi>(
+                () => new InvoicesApi(this, this.httpClient, authManagers, this.httpCallBack));
             labor = new Lazy<ILaborApi>(
                 () => new LaborApi(this, this.httpClient, authManagers, this.httpCallBack));
             locations = new Lazy<ILocationsApi>(
@@ -322,6 +333,11 @@ namespace Square
         /// Http client timeout
         /// </summary>
         public TimeSpan Timeout { get; }
+
+        /// <summary>
+        /// Square Connect API versions
+        /// </summary>
+        public string SquareVersion { get; }
 
         /// <summary>
         /// OAuth 2.0 Access Token
@@ -379,6 +395,7 @@ namespace Square
         {
             Builder builder = new Builder();
             builder.Timeout(Timeout);
+            builder.SquareVersion(SquareVersion);
             builder.AccessToken(AccessToken);
             builder.Environment(Environment);
             builder.AdditionalHeaders(additionalHeaders);
@@ -392,6 +409,7 @@ namespace Square
         public class Builder
         {
             private TimeSpan timeout = TimeSpan.FromSeconds(60);
+            private string squareVersion = "2020-07-22";
             private string accessToken = String.Empty;
             private Environment environment = Square.Environment.Production;
             private IHttpClient httpClient;
@@ -400,6 +418,13 @@ namespace Square
             private HttpClientConfiguration httpClientConfig = new HttpClientConfiguration();
             private HttpCallBack httpCallBack;
             private bool createCustomHttpClient = false;
+
+            // Setter for SquareVersion
+            public Builder SquareVersion(string squareVersion)
+            {
+                this.squareVersion = squareVersion ?? throw new ArgumentNullException(nameof(squareVersion));
+                return this;
+            }
 
             // Setter for AccessToken
             public Builder AccessToken(string accessToken)
@@ -487,7 +512,7 @@ namespace Square
                     httpClient = new HttpClientWrapper();
                 }
 
-                return new SquareClient(timeout, accessToken, environment, authManagers, httpClient, httpCallBack,
+                return new SquareClient(timeout, squareVersion, accessToken, environment, authManagers, httpClient, httpCallBack,
                         additionalHeaders, httpClientConfig);
             }
         }

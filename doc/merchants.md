@@ -60,7 +60,7 @@ RetrieveMerchantAsync(string merchantId)
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `merchantId` | `string` | Template, Required | The ID of the merchant to retrieve. |
+| `merchantId` | `string` | Template, Required | The ID of the merchant to retrieve. If the string "me" is supplied as the ID,<br>then retrieve the merchant that is currently accessible to this call. |
 
 ### Response Type
 

@@ -20,7 +20,7 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// The category name. Searchable. This field has max length of 255 Unicode code points.
+        /// The category name. This is a searchable attribute for use in applicable query filters, and its value length is of Unicode code points.
         /// </summary>
         [JsonProperty("name")]
         public string Name { get; }

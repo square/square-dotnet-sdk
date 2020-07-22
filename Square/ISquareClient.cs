@@ -91,6 +91,11 @@ namespace Square
         IInventoryApi InventoryApi { get; }
 
         /// <summary>
+        /// Instance for IInvoicesApi
+        /// </summary>
+        IInvoicesApi InvoicesApi { get; }
+
+        /// <summary>
         /// Instance for ILaborApi
         /// </summary>
         ILaborApi LaborApi { get; }
@@ -154,10 +159,5 @@ namespace Square
         /// Current version of the SDK
         /// </summary>
         string SdkVersion { get; }
-
-        /// <summary>
-        /// Version of Square API supported by this SDK
-        /// </summary>
-        string SquareVersion { get; }
     }
 }
