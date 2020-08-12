@@ -146,6 +146,11 @@ namespace Square
         IRefundsApi RefundsApi { get; }
 
         /// <summary>
+        /// Instance for ISubscriptionsApi
+        /// </summary>
+        ISubscriptionsApi SubscriptionsApi { get; }
+
+        /// <summary>
         /// Instance for ITeamApi
         /// </summary>
         ITeamApi TeamApi { get; }

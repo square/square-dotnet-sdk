@@ -10,7 +10,7 @@ Indicates a card's type, such as `CREDIT` or `DEBIT`.
 
 | Name |
 |  --- |
-| `UNKNOWNCARDTYPE` |
+| `UNKNOWN_CARD_TYPE` |
 | `CREDIT` |
 | `DEBIT` |
 

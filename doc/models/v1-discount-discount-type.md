@@ -9,6 +9,6 @@
 | Name |
 |  --- |
 | `FIXED` |
-| `VARIABLEPERCENTAGE` |
-| `VARIABLEAMOUNT` |
+| `VARIABLE_PERCENTAGE` |
+| `VARIABLE_AMOUNT` |
 

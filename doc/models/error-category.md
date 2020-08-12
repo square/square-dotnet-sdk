@@ -11,10 +11,10 @@ request to the Connect API.
 
 | Name | Description |
 |  --- | --- |
-| `APIERROR` | An error occurred with the Connect API itself. |
-| `AUTHENTICATIONERROR` | An authentication error occurred. Most commonly, the request had<br>a missing, malformed, or otherwise invalid `Authorization` header. |
-| `INVALIDREQUESTERROR` | The request was invalid. Most commonly, a required parameter was<br>missing, or a provided parameter had an invalid value. |
-| `RATELIMITERROR` | Your application reached the Connect API rate limit. Retry your<br>request after a while. |
-| `PAYMENTMETHODERROR` | An error occurred while processing a payment method. Most commonly,<br>the details of the payment method were invalid (such as a card's CVV<br>or expiration date). |
-| `REFUNDERROR` | An error occurred while attempting to process a refund. |
+| `API_ERROR` | An error occurred with the Connect API itself. |
+| `AUTHENTICATION_ERROR` | An authentication error occurred. Most commonly, the request had<br>a missing, malformed, or otherwise invalid `Authorization` header. |
+| `INVALID_REQUEST_ERROR` | The request was invalid. Most commonly, a required parameter was<br>missing, or a provided parameter had an invalid value. |
+| `RATE_LIMIT_ERROR` | Your application reached the Connect API rate limit. Retry your<br>request after a while. |
+| `PAYMENT_METHOD_ERROR` | An error occurred while processing a payment method. Most commonly,<br>the details of the payment method were invalid (such as a card's CVV<br>or expiration date). |
+| `REFUND_ERROR` | An error occurred while attempting to process a refund. |
 

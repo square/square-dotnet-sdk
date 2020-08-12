@@ -10,6 +10,6 @@ When to calculate the taxes due on a cart.
 
 | Name | Description |
 |  --- | --- |
-| `TAXSUBTOTALPHASE` | The fee is calculated based on the payment's subtotal. |
-| `TAXTOTALPHASE` | The fee is calculated based on the payment's total. |
+| `TAX_SUBTOTAL_PHASE` | The fee is calculated based on the payment's subtotal. |
+| `TAX_TOTAL_PHASE` | The fee is calculated based on the payment's total. |
 

@@ -45,6 +45,7 @@ namespace Square
         private readonly Lazy<IMerchantsApi> merchants;
         private readonly Lazy<IPaymentsApi> payments;
         private readonly Lazy<IRefundsApi> refunds;
+        private readonly Lazy<ISubscriptionsApi> subscriptions;
         private readonly Lazy<ITeamApi> team;
         private readonly Lazy<ITerminalApi> terminal;
 
@@ -189,6 +190,11 @@ namespace Square
         public IRefundsApi RefundsApi => refunds.Value;
 
         /// <summary>
+        /// Provides access to SubscriptionsApi controller
+        /// </summary>
+        public ISubscriptionsApi SubscriptionsApi => subscriptions.Value;
+
+        /// <summary>
         /// Provides access to TeamApi controller
         /// </summary>
         public ITeamApi TeamApi => team.Value;
@@ -206,7 +212,7 @@ namespace Square
         /// <summary>
         /// Current version of the SDK
         /// </summary>
-        public string SdkVersion => "6.1.0";
+        public string SdkVersion => "6.2.0";
 
         internal static SquareClient CreateFromEnvironment()
         {
@@ -312,6 +318,8 @@ namespace Square
                 () => new PaymentsApi(this, this.httpClient, authManagers, this.httpCallBack));
             refunds = new Lazy<IRefundsApi>(
                 () => new RefundsApi(this, this.httpClient, authManagers, this.httpCallBack));
+            subscriptions = new Lazy<ISubscriptionsApi>(
+                () => new SubscriptionsApi(this, this.httpClient, authManagers, this.httpCallBack));
             team = new Lazy<ITeamApi>(
                 () => new TeamApi(this, this.httpClient, authManagers, this.httpCallBack));
             terminal = new Lazy<ITerminalApi>(
@@ -409,7 +417,7 @@ namespace Square
         public class Builder
         {
             private TimeSpan timeout = TimeSpan.FromSeconds(60);
-            private string squareVersion = "2020-07-22";
+            private string squareVersion = "2020-08-12";
             private string accessToken = String.Empty;
             private Environment environment = Square.Environment.Production;
             private IHttpClient httpClient;

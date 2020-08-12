@@ -8,7 +8,7 @@
 
 | Name |
 |  --- |
-| `BUSINESSCHECKING` |
+| `BUSINESS_CHECKING` |
 | `CHECKING` |
 | `INVESTMENT` |
 | `LOAN` |

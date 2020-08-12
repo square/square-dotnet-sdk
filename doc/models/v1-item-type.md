@@ -9,6 +9,6 @@
 | Name |
 |  --- |
 | `NORMAL` |
-| `GIFTCARD` |
+| `GIFT_CARD` |
 | `OTHER` |
 

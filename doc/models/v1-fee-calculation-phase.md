@@ -8,7 +8,7 @@
 
 | Name |
 |  --- |
-| `FEESUBTOTALPHASE` |
+| `FEE_SUBTOTAL_PHASE` |
 | `OTHER` |
-| `FEETOTALPHASE` |
+| `FEE_TOTAL_PHASE` |
 

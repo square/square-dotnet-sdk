@@ -10,10 +10,10 @@ Unit of weight used to measure a quantity.
 
 | Name | Description |
 |  --- | --- |
-| `IMPERIALWEIGHTOUNCE` | The weight is measured in ounces. |
-| `IMPERIALPOUND` | The weight is measured in pounds. |
-| `IMPERIALSTONE` | The weight is measured in stones. |
-| `METRICMILLIGRAM` | The weight is measured in milligrams. |
-| `METRICGRAM` | The weight is measured in grams. |
-| `METRICKILOGRAM` | The weight is measured in kilograms. |
+| `IMPERIAL_WEIGHT_OUNCE` | The weight is measured in ounces. |
+| `IMPERIAL_POUND` | The weight is measured in pounds. |
+| `IMPERIAL_STONE` | The weight is measured in stones. |
+| `METRIC_MILLIGRAM` | The weight is measured in milligrams. |
+| `METRIC_GRAM` | The weight is measured in grams. |
+| `METRIC_KILOGRAM` | The weight is measured in kilograms. |
 

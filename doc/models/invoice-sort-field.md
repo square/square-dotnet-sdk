@@ -10,5 +10,5 @@ Field to use for sorting.
 
 | Name | Description |
 |  --- | --- |
-| `INVOICESORTDATE` | The field works as follows:<br><br>- If the invoice is a draft, it uses the invoice `created_at` date.<br>- If the invoice is scheduled for publication, it uses the `scheduled_at` date.<br>- If the invoice is published, it uses the invoice publication date. |
+| `INVOICE_SORT_DATE` | The field works as follows:<br><br>- If the invoice is a draft, it uses the invoice `created_at` date.<br>- If the invoice is scheduled for publication, it uses the `scheduled_at` date.<br>- If the invoice is published, it uses the invoice publication date. |
 

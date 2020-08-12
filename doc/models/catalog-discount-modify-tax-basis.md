@@ -8,6 +8,6 @@
 
 | Name | Description |
 |  --- | --- |
-| `MODIFYTAXBASIS` | Application of the discount will modify the tax basis. |
-| `DONOTMODIFYTAXBASIS` | Application of the discount will not modify the tax basis. |
+| `MODIFY_TAX_BASIS` | Application of the discount will modify the tax basis. |
+| `DO_NOT_MODIFY_TAX_BASIS` | Application of the discount will not modify the tax basis. |
 

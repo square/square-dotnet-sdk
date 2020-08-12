@@ -13,6 +13,6 @@ Service charges are applied __after__ the indicated phase.
 
 | Name | Description |
 |  --- | --- |
-| `SUBTOTALPHASE` | The service charge will be applied after discounts, but before<br>taxes. |
-| `TOTALPHASE` | The service charge will be applied after all discounts and taxes<br>are applied. |
+| `SUBTOTAL_PHASE` | The service charge will be applied after discounts, but before<br>taxes. |
+| `TOTAL_PHASE` | The service charge will be applied after all discounts and taxes<br>are applied. |
 
