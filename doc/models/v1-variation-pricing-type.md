@@ -8,6 +8,6 @@
 
 | Name |
 |  --- |
-| `FIXEDPRICING` |
-| `VARIABLEPRICING` |
+| `FIXED_PRICING` |
+| `VARIABLE_PRICING` |
 

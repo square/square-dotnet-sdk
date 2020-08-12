@@ -11,7 +11,7 @@ to [ISO 4217](https://wikipedia.org/wiki/ISO_4217).
 
 | Name | Description |
 |  --- | --- |
-| `UNKNOWNCURRENCY` | Unknown currency |
+| `UNKNOWN_CURRENCY` | Unknown currency |
 | `AED` | United Arab Emirates dirham |
 | `AFN` | Afghan afghani |
 | `ALL` | Albanian lek |

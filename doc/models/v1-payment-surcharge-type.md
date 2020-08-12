@@ -9,6 +9,6 @@
 | Name |
 |  --- |
 | `UNKNOWN` |
-| `AUTOGRATUITY` |
+| `AUTO_GRATUITY` |
 | `CUSTOM` |
 

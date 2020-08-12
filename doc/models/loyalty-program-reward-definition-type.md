@@ -10,6 +10,6 @@ The type of discount the reward tier offers.
 
 | Name | Description |
 |  --- | --- |
-| `FIXEDAMOUNT` | The fixed amount discounted. |
-| `FIXEDPERCENTAGE` | The fixed percentage discounted. |
+| `FIXED_AMOUNT` | The fixed amount discounted. |
+| `FIXED_PERCENTAGE` | The fixed percentage discounted. |
 

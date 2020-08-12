@@ -10,9 +10,9 @@
 |  --- |
 | `MANUAL` |
 | `SCANNED` |
-| `SQUARECASH` |
-| `SQUAREWALLET` |
+| `SQUARE_CASH` |
+| `SQUARE_WALLET` |
 | `SWIPED` |
-| `WEBFORM` |
+| `WEB_FORM` |
 | `OTHER` |
 

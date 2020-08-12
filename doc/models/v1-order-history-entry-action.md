@@ -8,9 +8,9 @@
 
 | Name |
 |  --- |
-| `ORDERPLACED` |
+| `ORDER_PLACED` |
 | `DECLINED` |
-| `PAYMENTRECEIVED` |
+| `PAYMENT_RECEIVED` |
 | `CANCELED` |
 | `COMPLETED` |
 | `REFUNDED` |

@@ -10,16 +10,16 @@ Indicates a card's brand, such as `VISA` or `MASTERCARD`.
 
 | Name |
 |  --- |
-| `OTHERBRAND` |
+| `OTHER_BRAND` |
 | `VISA` |
 | `MASTERCARD` |
-| `AMERICANEXPRESS` |
+| `AMERICAN_EXPRESS` |
 | `DISCOVER` |
-| `DISCOVERDINERS` |
+| `DISCOVER_DINERS` |
 | `JCB` |
-| `CHINAUNIONPAY` |
-| `SQUAREGIFTCARD` |
-| `SQUARECAPITALCARD` |
+| `CHINA_UNIONPAY` |
+| `SQUARE_GIFT_CARD` |
+| `SQUARE_CAPITAL_CARD` |
 | `INTERAC` |
 | `EFTPOS` |
 | `FELICA` |

@@ -11,7 +11,7 @@ creating application.
 
 | Name | Description |
 |  --- | --- |
-| `APPVISIBILITYHIDDEN` | Other applications cannot read this custom attribute. |
-| `APPVISIBILITYREADONLY` | Other applications can read this custom attribute definition and<br>values. |
-| `APPVISIBILITYREADWRITEVALUES` | Other applications can read and write custom attribute values on objects.<br>They can read but cannot edit the custom attribute definition. |
+| `APP_VISIBILITY_HIDDEN` | Other applications cannot read this custom attribute. |
+| `APP_VISIBILITY_READ_ONLY` | Other applications can read this custom attribute definition and<br>values. |
+| `APP_VISIBILITY_READ_WRITE_VALUES` | Other applications can read and write custom attribute values on objects.<br>They can read but cannot edit the custom attribute definition. |
 

@@ -11,5 +11,5 @@ Indicates whether Square should alert the merchant when the inventory quantity o
 | Name | Description |
 |  --- | --- |
 | `NONE` | The variation does not display an alert. |
-| `LOWQUANTITY` | The variation generates an alert when its quantity is low. |
+| `LOW_QUANTITY` | The variation generates an alert when its quantity is low. |
 

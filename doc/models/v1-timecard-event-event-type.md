@@ -12,12 +12,12 @@ events created with the Connect API have an event type that begins with
 
 | Name | Description |
 |  --- | --- |
-| `APICREATE` | The timecard was created by a request to the<br>[CreateTimecard](#endpoint-v1employees-createtimecard) endpoint. |
-| `APIEDIT` | The timecard was edited by a request to the<br>[UpdateTimecard](#endpoint-v1employees-updatetimecard) endpoint. |
-| `APIDELETE` | The timecard was deleted by a request to the<br>[DeleteTimecard](#endpoint-v1employees-deletetimecard) endpoint. |
-| `REGISTERCLOCKIN` | The employee clocked in via Square Point of Sale. |
-| `REGISTERCLOCKOUT` | The employee clocked out via Square Point of Sale. |
-| `DASHBOARDSUPERVISORCLOSE` | A supervisor clocked out the employee from the merchant<br>dashboard. |
-| `DASHBOARDEDIT` | A supervisor manually edited the timecard from the merchant<br>dashboard |
-| `DASHBOARDDELETE` | A supervisor deleted the timecard from the merchant dashboard. |
+| `API_CREATE` | The timecard was created by a request to the<br>[CreateTimecard](#endpoint-v1employees-createtimecard) endpoint. |
+| `API_EDIT` | The timecard was edited by a request to the<br>[UpdateTimecard](#endpoint-v1employees-updatetimecard) endpoint. |
+| `API_DELETE` | The timecard was deleted by a request to the<br>[DeleteTimecard](#endpoint-v1employees-deletetimecard) endpoint. |
+| `REGISTER_CLOCKIN` | The employee clocked in via Square Point of Sale. |
+| `REGISTER_CLOCKOUT` | The employee clocked out via Square Point of Sale. |
+| `DASHBOARD_SUPERVISOR_CLOSE` | A supervisor clocked out the employee from the merchant<br>dashboard. |
+| `DASHBOARD_EDIT` | A supervisor manually edited the timecard from the merchant<br>dashboard |
+| `DASHBOARD_DELETE` | A supervisor deleted the timecard from the merchant dashboard. |
 

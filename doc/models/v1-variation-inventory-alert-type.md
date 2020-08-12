@@ -8,7 +8,7 @@
 
 | Name |
 |  --- |
-| `LOWQUANTITY` |
+| `LOW_QUANTITY` |
 | `NONE` |
 | `INVESTMENT` |
 | `LOAN` |

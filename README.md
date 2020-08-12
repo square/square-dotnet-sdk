@@ -50,6 +50,9 @@ dotnet add package Square
 ### Orders
 * [Orders]
 
+### Subscriptions
+* [Subscriptions]
+
 ### Invoices
 * [Invoices]
 
@@ -336,3 +339,4 @@ You can also use the Square API to create applications or services that work wit
 [V1 Items]: doc/v1-items.md
 [Team]: doc/team.md
 [Transactions]: doc/transactions.md
+[Subscriptions]: doc/subscriptions.md

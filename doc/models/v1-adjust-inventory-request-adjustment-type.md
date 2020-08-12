@@ -9,6 +9,6 @@
 | Name |
 |  --- |
 | `SALE` |
-| `RECEIVESTOCK` |
-| `MANUALADJUST` |
+| `RECEIVE_STOCK` |
+| `MANUAL_ADJUST` |
 

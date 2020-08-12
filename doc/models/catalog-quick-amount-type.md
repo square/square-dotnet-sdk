@@ -10,6 +10,6 @@ Determines the type of a specific Quick Amount.
 
 | Name | Description |
 |  --- | --- |
-| `QUICKAMOUNTTYPEMANUAL` | Quick Amount is created manually by the seller. |
-| `QUICKAMOUNTTYPEAUTO` | Quick Amount is generated automatically by machine learning algorithms. |
+| `QUICK_AMOUNT_TYPE_MANUAL` | Quick Amount is created manually by the seller. |
+| `QUICK_AMOUNT_TYPE_AUTO` | Quick Amount is generated automatically by machine learning algorithms. |
 

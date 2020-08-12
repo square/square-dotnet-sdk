@@ -40,7 +40,7 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// The idempotency key for the request.	See the
+        /// The idempotency key for the request. See the
         /// [Idempotency](https://developer.squareup.com/docs/working-with-apis/idempotency) guide for more information.
         /// </summary>
         [JsonProperty("idempotency_key")]

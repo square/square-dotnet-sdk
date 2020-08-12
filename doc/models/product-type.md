@@ -8,5 +8,5 @@
 
 | Name |
 |  --- |
-| `TERMINALAPI` |
+| `TERMINAL_API` |
 

@@ -10,7 +10,7 @@ Indicates a card's prepaid type, such as `NOT_PREPAID` or `PREPAID`.
 
 | Name |
 |  --- |
-| `UNKNOWNPREPAIDTYPE` |
-| `NOTPREPAID` |
+| `UNKNOWN_PREPAID_TYPE` |
+| `NOT_PREPAID` |
 | `PREPAID` |
 

@@ -10,13 +10,13 @@ The brand of a credit card.
 
 | Name |
 |  --- |
-| `OTHERBRAND` |
+| `OTHER_BRAND` |
 | `VISA` |
-| `MASTERCARD` |
-| `AMERICANEXPRESS` |
+| `MASTER_CARD` |
+| `AMERICAN_EXPRESS` |
 | `DISCOVER` |
-| `DISCOVERDINERS` |
+| `DISCOVER_DINERS` |
 | `JCB` |
-| `CHINAUNIONPAY` |
-| `SQUAREGIFTCARD` |
+| `CHINA_UNIONPAY` |
+| `SQUARE_GIFT_CARD` |
 

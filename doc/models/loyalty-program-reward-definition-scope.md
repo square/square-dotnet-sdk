@@ -11,6 +11,6 @@ Indicates the scope of the reward tier.
 | Name | Description |
 |  --- | --- |
 | `ORDER` | The discount applies to the entire order. |
-| `ITEMVARIATION` | The discount applies only to specific item variations. |
+| `ITEM_VARIATION` | The discount applies only to specific item variations. |
 | `CATEGORY` | The discount applies only to items in the given categories. |
 

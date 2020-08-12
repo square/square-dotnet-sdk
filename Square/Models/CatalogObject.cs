@@ -37,6 +37,7 @@ namespace Square.Models
             Models.CatalogPricingRule pricingRuleData = null,
             Models.CatalogImage imageData = null,
             Models.CatalogMeasurementUnit measurementUnitData = null,
+            Models.CatalogSubscriptionPlan subscriptionPlanData = null,
             Models.CatalogItemOption itemOptionData = null,
             Models.CatalogItemOptionValue itemOptionValueData = null,
             Models.CatalogCustomAttributeDefinition customAttributeDefinitionData = null,
@@ -65,6 +66,7 @@ namespace Square.Models
             PricingRuleData = pricingRuleData;
             ImageData = imageData;
             MeasurementUnitData = measurementUnitData;
+            SubscriptionPlanData = subscriptionPlanData;
             ItemOptionData = itemOptionData;
             ItemOptionValueData = itemOptionValueData;
             CustomAttributeDefinitionData = customAttributeDefinitionData;
@@ -248,6 +250,13 @@ namespace Square.Models
         public Models.CatalogMeasurementUnit MeasurementUnitData { get; }
 
         /// <summary>
+        /// Describes a subscription plan. For more information, see
+        /// [Set Up and Manage a Subscription Plan](https://developer.squareup.com/docs/docs/subscriptions-api/setup-plan).
+        /// </summary>
+        [JsonProperty("subscription_plan_data")]
+        public Models.CatalogSubscriptionPlan SubscriptionPlanData { get; }
+
+        /// <summary>
         /// A group of variations for a `CatalogItem`.
         /// </summary>
         [JsonProperty("item_option_data")]
@@ -302,6 +311,7 @@ namespace Square.Models
                 .PricingRuleData(PricingRuleData)
                 .ImageData(ImageData)
                 .MeasurementUnitData(MeasurementUnitData)
+                .SubscriptionPlanData(SubscriptionPlanData)
                 .ItemOptionData(ItemOptionData)
                 .ItemOptionValueData(ItemOptionValueData)
                 .CustomAttributeDefinitionData(CustomAttributeDefinitionData)
@@ -334,6 +344,7 @@ namespace Square.Models
             private Models.CatalogPricingRule pricingRuleData;
             private Models.CatalogImage imageData;
             private Models.CatalogMeasurementUnit measurementUnitData;
+            private Models.CatalogSubscriptionPlan subscriptionPlanData;
             private Models.CatalogItemOption itemOptionData;
             private Models.CatalogItemOptionValue itemOptionValueData;
             private Models.CatalogCustomAttributeDefinition customAttributeDefinitionData;
@@ -483,6 +494,12 @@ namespace Square.Models
                 return this;
             }
 
+            public Builder SubscriptionPlanData(Models.CatalogSubscriptionPlan value)
+            {
+                subscriptionPlanData = value;
+                return this;
+            }
+
             public Builder ItemOptionData(Models.CatalogItemOption value)
             {
                 itemOptionData = value;
@@ -532,6 +549,7 @@ namespace Square.Models
                     pricingRuleData,
                     imageData,
                     measurementUnitData,
+                    subscriptionPlanData,
                     itemOptionData,
                     itemOptionValueData,
                     customAttributeDefinitionData,
