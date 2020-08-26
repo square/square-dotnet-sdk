@@ -17,32 +17,34 @@ namespace Square.Models
         public BatchRetrieveInventoryCountsRequest(IList<string> catalogObjectIds = null,
             IList<string> locationIds = null,
             string updatedAfter = null,
-            string cursor = null)
+            string cursor = null,
+            IList<string> states = null)
         {
             CatalogObjectIds = catalogObjectIds;
             LocationIds = locationIds;
             UpdatedAfter = updatedAfter;
             Cursor = cursor;
+            States = states;
         }
 
         /// <summary>
-        /// Filters results by `CatalogObject` ID.
-        /// Only applied when set. Max size is 1000 IDs. Default: unset.
+        /// The filter to return results by `CatalogObject` ID.
+        /// The filter is applicable only when set.  The default is null.
         /// </summary>
         [JsonProperty("catalog_object_ids")]
         public IList<string> CatalogObjectIds { get; }
 
         /// <summary>
-        /// Filters results by `Location` ID. Only
-        /// applied when set. Default: unset.
+        /// The filter to return results by `Location` ID. 
+        /// This filter is applicable only when set. The default is null.
         /// </summary>
         [JsonProperty("location_ids")]
         public IList<string> LocationIds { get; }
 
         /// <summary>
-        /// Provided as an RFC 3339 timestamp. Returns results whose
-        /// `calculated_at` value is after the given time. Default: UNIX epoch
-        /// (`1970-01-01T00:00:00Z`).
+        /// The filter to return results with their `calculated_at` value 
+        /// after the given time as specified in an RFC 3339 timestamp. 
+        /// The default value is the UNIX epoch of (`1970-01-01T00:00:00Z`).
         /// </summary>
         [JsonProperty("updated_after")]
         public string UpdatedAfter { get; }
@@ -55,13 +57,23 @@ namespace Square.Models
         [JsonProperty("cursor")]
         public string Cursor { get; }
 
+        /// <summary>
+        /// The filter to return results by `InventoryState`. The filter is only applicable when set.
+        /// Ignored are untracked states of `NONE`, `SOLD`, and `UNLINKED_RETURN`.
+        /// The default is null.
+        /// See [InventoryState](#type-inventorystate) for possible values
+        /// </summary>
+        [JsonProperty("states")]
+        public IList<string> States { get; }
+
         public Builder ToBuilder()
         {
             var builder = new Builder()
                 .CatalogObjectIds(CatalogObjectIds)
                 .LocationIds(LocationIds)
                 .UpdatedAfter(UpdatedAfter)
-                .Cursor(Cursor);
+                .Cursor(Cursor)
+                .States(States);
             return builder;
         }
 
@@ -71,6 +83,7 @@ namespace Square.Models
             private IList<string> locationIds = new List<string>();
             private string updatedAfter;
             private string cursor;
+            private IList<string> states = new List<string>();
 
             public Builder() { }
             public Builder CatalogObjectIds(IList<string> value)
@@ -97,12 +110,19 @@ namespace Square.Models
                 return this;
             }
 
+            public Builder States(IList<string> value)
+            {
+                states = value;
+                return this;
+            }
+
             public BatchRetrieveInventoryCountsRequest Build()
             {
                 return new BatchRetrieveInventoryCountsRequest(catalogObjectIds,
                     locationIds,
                     updatedAfter,
-                    cursor);
+                    cursor,
+                    states);
             }
         }
     }

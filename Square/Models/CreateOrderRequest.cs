@@ -15,9 +15,11 @@ namespace Square.Models
     public class CreateOrderRequest 
     {
         public CreateOrderRequest(Models.Order order = null,
+            string locationId = null,
             string idempotencyKey = null)
         {
             Order = order;
+            LocationId = locationId;
             IdempotencyKey = idempotencyKey;
         }
 
@@ -30,6 +32,12 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("order")]
         public Models.Order Order { get; }
+
+        /// <summary>
+        /// The ID of the business location to associate the order with.
+        /// </summary>
+        [JsonProperty("location_id")]
+        public string LocationId { get; }
 
         /// <summary>
         /// A value you specify that uniquely identifies this
@@ -46,6 +54,7 @@ namespace Square.Models
         {
             var builder = new Builder()
                 .Order(Order)
+                .LocationId(LocationId)
                 .IdempotencyKey(IdempotencyKey);
             return builder;
         }
@@ -53,12 +62,19 @@ namespace Square.Models
         public class Builder
         {
             private Models.Order order;
+            private string locationId;
             private string idempotencyKey;
 
             public Builder() { }
             public Builder Order(Models.Order value)
             {
                 order = value;
+                return this;
+            }
+
+            public Builder LocationId(string value)
+            {
+                locationId = value;
                 return this;
             }
 
@@ -71,6 +87,7 @@ namespace Square.Models
             public CreateOrderRequest Build()
             {
                 return new CreateOrderRequest(order,
+                    locationId,
                     idempotencyKey);
             }
         }

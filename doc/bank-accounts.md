@@ -39,9 +39,13 @@ ListBankAccountsAsync(string cursor = null, int? limit = null, string locationId
 ### Example Usage
 
 ```csharp
+string cursor = "cursor6";
+int? limit = 172;
+string locationId = "location_id4";
+
 try
 {
-    ListBankAccountsResponse result = await bankAccountsApi.ListBankAccountsAsync(null, null, null);
+    ListBankAccountsResponse result = await bankAccountsApi.ListBankAccountsAsync(cursor, limit, locationId);
 }
 catch (ApiException e){};
 ```

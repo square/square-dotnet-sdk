@@ -22,14 +22,14 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// A datetime value in RFC-3339 format indicating when the time range
+        /// A datetime value in RFC 3339 format indicating when the time range
         /// starts.
         /// </summary>
         [JsonProperty("start_at")]
         public string StartAt { get; }
 
         /// <summary>
-        /// A datetime value in RFC-3339 format indicating when the time range
+        /// A datetime value in RFC 3339 format indicating when the time range
         /// ends.
         /// </summary>
         [JsonProperty("end_at")]

@@ -34,9 +34,11 @@ ListCustomerSegmentsAsync(string cursor = null)
 ### Example Usage
 
 ```csharp
+string cursor = "cursor6";
+
 try
 {
-    ListCustomerSegmentsResponse result = await customerSegmentsApi.ListCustomerSegmentsAsync(null);
+    ListCustomerSegmentsResponse result = await customerSegmentsApi.ListCustomerSegmentsAsync(cursor);
 }
 catch (ApiException e){};
 ```

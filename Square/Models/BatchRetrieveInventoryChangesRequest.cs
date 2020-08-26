@@ -32,49 +32,48 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// Filters results by `CatalogObject` ID.
-        /// Only applied when set. Max size is 500 IDs. Default: unset.
+        /// The filter to return results by `CatalogObject` ID.
+        /// The filter is only applicable when set. The default value is null.
         /// </summary>
         [JsonProperty("catalog_object_ids")]
         public IList<string> CatalogObjectIds { get; }
 
         /// <summary>
-        /// Filters results by `Location` ID. Only
-        /// applied when set. Default: unset.
+        /// The filter to return results by `Location` ID. 
+        /// The filter is only applicable when set. The default value is null.
         /// </summary>
         [JsonProperty("location_ids")]
         public IList<string> LocationIds { get; }
 
         /// <summary>
-        /// Filters results by `InventoryChangeType`.
-        /// Default: [`PHYSICAL_COUNT`, `ADJUSTMENT`]. `TRANSFER` is not supported as
-        /// a filter.
+        /// The filter to return results by `InventoryChangeType` values other than `TRANSFER`.
+        /// The default value is `[PHYSICAL_COUNT, ADJUSTMENT]`.
         /// See [InventoryChangeType](#type-inventorychangetype) for possible values
         /// </summary>
         [JsonProperty("types")]
         public IList<string> Types { get; }
 
         /// <summary>
-        /// Filters `ADJUSTMENT` query results by
-        /// `InventoryState`. Only applied when set.
-        /// Default: unset.
+        /// The filter to return `ADJUSTMENT` query results by
+        /// `InventoryState`. This filter is only applied when set.
+        /// The default value is null.
         /// See [InventoryState](#type-inventorystate) for possible values
         /// </summary>
         [JsonProperty("states")]
         public IList<string> States { get; }
 
         /// <summary>
-        /// Provided as an RFC 3339 timestamp. Returns results whose
-        /// `created_at` or `calculated_at` value is after the given time.
-        /// Default: UNIX epoch (`1970-01-01T00:00:00Z`).
+        /// The filter to return results with their `calculated_at` value  
+        /// after the given time as specified in an RFC 3339 timestamp. 
+        /// The default value is the UNIX epoch of (`1970-01-01T00:00:00Z`).
         /// </summary>
         [JsonProperty("updated_after")]
         public string UpdatedAfter { get; }
 
         /// <summary>
-        /// Provided as an RFC 3339 timestamp. Returns results whose
-        /// `created_at` or `calculated_at` value is strictly before the given time.
-        /// Default: UNIX epoch (`1970-01-01T00:00:00Z`).
+        /// The filter to return results with their `created_at` or `calculated_at` value  
+        /// strictly before the given time as specified in an RFC 3339 timestamp. 
+        /// The default value is the UNIX epoch of (`1970-01-01T00:00:00Z`).
         /// </summary>
         [JsonProperty("updated_before")]
         public string UpdatedBefore { get; }

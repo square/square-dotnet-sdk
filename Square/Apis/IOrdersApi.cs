@@ -25,10 +25,9 @@ namespace Square.Apis
         /// To learn more about the Orders API, see the
         /// [Orders API Overview](https://developer.squareup.com/docs/orders-api/what-it-does).
         /// </summary>
-        /// <param name="locationId">Required parameter: The ID of the business location to associate the order with.</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.CreateOrderResponse response from the API call</return>
-        Models.CreateOrderResponse CreateOrder(string locationId, Models.CreateOrderRequest body);
+        Models.CreateOrderResponse CreateOrder(Models.CreateOrderRequest body);
 
         /// <summary>
         /// Creates a new [Order](#type-order) which can include information on products for
@@ -39,70 +38,25 @@ namespace Square.Apis
         /// To learn more about the Orders API, see the
         /// [Orders API Overview](https://developer.squareup.com/docs/orders-api/what-it-does).
         /// </summary>
-        /// <param name="locationId">Required parameter: The ID of the business location to associate the order with.</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.CreateOrderResponse response from the API call</return>
-        Task<Models.CreateOrderResponse> CreateOrderAsync(string locationId, Models.CreateOrderRequest body, CancellationToken cancellationToken = default);
+        Task<Models.CreateOrderResponse> CreateOrderAsync(Models.CreateOrderRequest body, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Retrieves a set of [Order](#type-order)s by their IDs.
         /// If a given Order ID does not exist, the ID is ignored instead of generating an error.
         /// </summary>
-        /// <param name="locationId">Required parameter: The ID of the orders' associated location.</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.BatchRetrieveOrdersResponse response from the API call</return>
-        Models.BatchRetrieveOrdersResponse BatchRetrieveOrders(string locationId, Models.BatchRetrieveOrdersRequest body);
+        Models.BatchRetrieveOrdersResponse BatchRetrieveOrders(Models.BatchRetrieveOrdersRequest body);
 
         /// <summary>
         /// Retrieves a set of [Order](#type-order)s by their IDs.
         /// If a given Order ID does not exist, the ID is ignored instead of generating an error.
         /// </summary>
-        /// <param name="locationId">Required parameter: The ID of the orders' associated location.</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.BatchRetrieveOrdersResponse response from the API call</return>
-        Task<Models.BatchRetrieveOrdersResponse> BatchRetrieveOrdersAsync(string locationId, Models.BatchRetrieveOrdersRequest body, CancellationToken cancellationToken = default);
-
-        /// <summary>
-        /// Updates an open [Order](#type-order) by adding, replacing, or deleting
-        /// fields. Orders with a `COMPLETED` or `CANCELED` state cannot be updated.
-        /// An UpdateOrder request requires the following:
-        /// - The `order_id` in the endpoint path, identifying the order to update.
-        /// - The latest `version` of the order to update.
-        /// - The [sparse order](https://developer.squareup.com/docs/orders-api/manage-orders#sparse-order-objects)
-        /// containing only the fields to update and the version the update is
-        /// being applied to.
-        /// - If deleting fields, the [dot notation paths](https://developer.squareup.com/docs/orders-api/manage-orders#on-dot-notation)
-        /// identifying fields to clear.
-        /// To pay for an order, please refer to the [Pay for Orders](https://developer.squareup.com/docs/orders-api/pay-for-orders) guide.
-        /// To learn more about the Orders API, see the
-        /// [Orders API Overview](https://developer.squareup.com/docs/orders-api/what-it-does).
-        /// </summary>
-        /// <param name="locationId">Required parameter: The ID of the order's associated location.</param>
-        /// <param name="orderId">Required parameter: The ID of the order to update.</param>
-        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
-        /// <return>Returns the Models.UpdateOrderResponse response from the API call</return>
-        Models.UpdateOrderResponse UpdateOrder(string locationId, string orderId, Models.UpdateOrderRequest body);
-
-        /// <summary>
-        /// Updates an open [Order](#type-order) by adding, replacing, or deleting
-        /// fields. Orders with a `COMPLETED` or `CANCELED` state cannot be updated.
-        /// An UpdateOrder request requires the following:
-        /// - The `order_id` in the endpoint path, identifying the order to update.
-        /// - The latest `version` of the order to update.
-        /// - The [sparse order](https://developer.squareup.com/docs/orders-api/manage-orders#sparse-order-objects)
-        /// containing only the fields to update and the version the update is
-        /// being applied to.
-        /// - If deleting fields, the [dot notation paths](https://developer.squareup.com/docs/orders-api/manage-orders#on-dot-notation)
-        /// identifying fields to clear.
-        /// To pay for an order, please refer to the [Pay for Orders](https://developer.squareup.com/docs/orders-api/pay-for-orders) guide.
-        /// To learn more about the Orders API, see the
-        /// [Orders API Overview](https://developer.squareup.com/docs/orders-api/what-it-does).
-        /// </summary>
-        /// <param name="locationId">Required parameter: The ID of the order's associated location.</param>
-        /// <param name="orderId">Required parameter: The ID of the order to update.</param>
-        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
-        /// <return>Returns the Models.UpdateOrderResponse response from the API call</return>
-        Task<Models.UpdateOrderResponse> UpdateOrderAsync(string locationId, string orderId, Models.UpdateOrderRequest body, CancellationToken cancellationToken = default);
+        Task<Models.BatchRetrieveOrdersResponse> BatchRetrieveOrdersAsync(Models.BatchRetrieveOrdersRequest body, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Calculates an [Order](#type-order).
@@ -157,6 +111,46 @@ namespace Square.Apis
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.SearchOrdersResponse response from the API call</return>
         Task<Models.SearchOrdersResponse> SearchOrdersAsync(Models.SearchOrdersRequest body, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Updates an open [Order](#type-order) by adding, replacing, or deleting
+        /// fields. Orders with a `COMPLETED` or `CANCELED` state cannot be updated.
+        /// An UpdateOrder request requires the following:
+        /// - The `order_id` in the endpoint path, identifying the order to update.
+        /// - The latest `version` of the order to update.
+        /// - The [sparse order](https://developer.squareup.com/docs/orders-api/manage-orders#sparse-order-objects)
+        /// containing only the fields to update and the version the update is
+        /// being applied to.
+        /// - If deleting fields, the [dot notation paths](https://developer.squareup.com/docs/orders-api/manage-orders#on-dot-notation)
+        /// identifying fields to clear.
+        /// To pay for an order, please refer to the [Pay for Orders](https://developer.squareup.com/docs/orders-api/pay-for-orders) guide.
+        /// To learn more about the Orders API, see the
+        /// [Orders API Overview](https://developer.squareup.com/docs/orders-api/what-it-does).
+        /// </summary>
+        /// <param name="orderId">Required parameter: The ID of the order to update.</param>
+        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
+        /// <return>Returns the Models.UpdateOrderResponse response from the API call</return>
+        Models.UpdateOrderResponse UpdateOrder(string orderId, Models.UpdateOrderRequest body);
+
+        /// <summary>
+        /// Updates an open [Order](#type-order) by adding, replacing, or deleting
+        /// fields. Orders with a `COMPLETED` or `CANCELED` state cannot be updated.
+        /// An UpdateOrder request requires the following:
+        /// - The `order_id` in the endpoint path, identifying the order to update.
+        /// - The latest `version` of the order to update.
+        /// - The [sparse order](https://developer.squareup.com/docs/orders-api/manage-orders#sparse-order-objects)
+        /// containing only the fields to update and the version the update is
+        /// being applied to.
+        /// - If deleting fields, the [dot notation paths](https://developer.squareup.com/docs/orders-api/manage-orders#on-dot-notation)
+        /// identifying fields to clear.
+        /// To pay for an order, please refer to the [Pay for Orders](https://developer.squareup.com/docs/orders-api/pay-for-orders) guide.
+        /// To learn more about the Orders API, see the
+        /// [Orders API Overview](https://developer.squareup.com/docs/orders-api/what-it-does).
+        /// </summary>
+        /// <param name="orderId">Required parameter: The ID of the order to update.</param>
+        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
+        /// <return>Returns the Models.UpdateOrderResponse response from the API call</return>
+        Task<Models.UpdateOrderResponse> UpdateOrderAsync(string orderId, Models.UpdateOrderRequest body, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Pay for an [order](#type-order) using one or more approved [payments](#type-payment),

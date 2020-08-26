@@ -26,6 +26,7 @@ namespace Square.Models
             string customerId = null,
             Models.TenderCardDetails cardDetails = null,
             Models.TenderCashDetails cashDetails = null,
+            Models.TenderBankTransferDetails bankTransferDetails = null,
             IList<Models.AdditionalRecipient> additionalRecipients = null,
             string paymentId = null)
         {
@@ -41,6 +42,7 @@ namespace Square.Models
             Type = type;
             CardDetails = cardDetails;
             CashDetails = cashDetails;
+            BankTransferDetails = bankTransferDetails;
             AdditionalRecipients = additionalRecipients;
             PaymentId = paymentId;
         }
@@ -134,6 +136,13 @@ namespace Square.Models
         public Models.TenderCashDetails CashDetails { get; }
 
         /// <summary>
+        /// Represents the details of a tender with `type` `BANK_TRANSFER`.
+        /// See [PaymentBankTransferDetails](#type-paymentbanktransferdetails) for more exposed details of a bank transfer payment.
+        /// </summary>
+        [JsonProperty("bank_transfer_details")]
+        public Models.TenderBankTransferDetails BankTransferDetails { get; }
+
+        /// <summary>
         /// Additional recipients (other than the merchant) receiving a portion of this tender.
         /// For example, fees assessed on the purchase by a third party integration.
         /// </summary>
@@ -161,6 +170,7 @@ namespace Square.Models
                 .CustomerId(CustomerId)
                 .CardDetails(CardDetails)
                 .CashDetails(CashDetails)
+                .BankTransferDetails(BankTransferDetails)
                 .AdditionalRecipients(AdditionalRecipients)
                 .PaymentId(PaymentId);
             return builder;
@@ -180,6 +190,7 @@ namespace Square.Models
             private string customerId;
             private Models.TenderCardDetails cardDetails;
             private Models.TenderCashDetails cashDetails;
+            private Models.TenderBankTransferDetails bankTransferDetails;
             private IList<Models.AdditionalRecipient> additionalRecipients = new List<Models.AdditionalRecipient>();
             private string paymentId;
 
@@ -259,6 +270,12 @@ namespace Square.Models
                 return this;
             }
 
+            public Builder BankTransferDetails(Models.TenderBankTransferDetails value)
+            {
+                bankTransferDetails = value;
+                return this;
+            }
+
             public Builder AdditionalRecipients(IList<Models.AdditionalRecipient> value)
             {
                 additionalRecipients = value;
@@ -285,6 +302,7 @@ namespace Square.Models
                     customerId,
                     cardDetails,
                     cashDetails,
+                    bankTransferDetails,
                     additionalRecipients,
                     paymentId);
             }

@@ -58,10 +58,14 @@ ListRefundsAsync(
 
 ```csharp
 string locationId = "location_id4";
+string beginTime = "begin_time2";
+string endTime = "end_time2";
+string sortOrder = "DESC";
+string cursor = "cursor6";
 
 try
 {
-    ListRefundsResponse result = await transactionsApi.ListRefundsAsync(locationId, null, null, null, null);
+    ListRefundsResponse result = await transactionsApi.ListRefundsAsync(locationId, beginTime, endTime, sortOrder, cursor);
 }
 catch (ApiException e){};
 ```
@@ -102,10 +106,14 @@ ListTransactionsAsync(
 
 ```csharp
 string locationId = "location_id4";
+string beginTime = "begin_time2";
+string endTime = "end_time2";
+string sortOrder = "DESC";
+string cursor = "cursor6";
 
 try
 {
-    ListTransactionsResponse result = await transactionsApi.ListTransactionsAsync(locationId, null, null, null, null);
+    ListTransactionsResponse result = await transactionsApi.ListTransactionsAsync(locationId, beginTime, endTime, sortOrder, cursor);
 }
 catch (ApiException e){};
 ```
@@ -159,14 +167,19 @@ var bodyAmountMoney = new Money.Builder()
 var bodyBillingAddress = new Address.Builder()
     .AddressLine1("500 Electric Ave")
     .AddressLine2("Suite 600")
+    .AddressLine3("address_line_38")
     .Locality("New York")
+    .Sublocality("sublocality2")
     .AdministrativeDistrictLevel1("NY")
     .PostalCode("10003")
     .Country("US")
     .Build();
 var bodyShippingAddress = new Address.Builder()
     .AddressLine1("123 Main St")
+    .AddressLine2("address_line_24")
+    .AddressLine3("address_line_30")
     .Locality("San Francisco")
+    .Sublocality("sublocality4")
     .AdministrativeDistrictLevel1("CA")
     .PostalCode("94114")
     .Country("US")
@@ -181,6 +194,7 @@ var bodyAdditionalRecipients0 = new AdditionalRecipient.Builder(
         "057P5VYJ4A5X1",
         "Application fees",
         bodyAdditionalRecipients0AmountMoney)
+    .ReceivableId("receivable_id5")
     .Build();
 bodyAdditionalRecipients.Add(bodyAdditionalRecipients0);
 
@@ -188,6 +202,7 @@ var body = new ChargeRequest.Builder(
         "74ae1696-b1e3-4328-af6d-f1e04d947a13",
         bodyAmountMoney)
     .CardNonce("card_nonce_from_square_123")
+    .CustomerCardId("customer_card_id6")
     .DelayCapture(false)
     .ReferenceId("some optional reference id")
     .Note("some optional note")

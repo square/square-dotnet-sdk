@@ -12,40 +12,40 @@ using Square.Utilities;
 
 namespace Square.Models
 {
-    public class MethodErrorCodes 
+    public class TenderBankTransferDetails 
     {
-        public MethodErrorCodes(IList<string> mValue = null)
+        public TenderBankTransferDetails(string status = null)
         {
-            MValue = mValue;
+            Status = status;
         }
 
         /// <summary>
-        /// See [ErrorCode](#type-errorcode) for possible values
+        /// Indicates the bank transfer's current status.
         /// </summary>
-        [JsonProperty("value")]
-        public IList<string> MValue { get; }
+        [JsonProperty("status")]
+        public string Status { get; }
 
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .MValue(MValue);
+                .Status(Status);
             return builder;
         }
 
         public class Builder
         {
-            private IList<string> mValue = new List<string>();
+            private string status;
 
             public Builder() { }
-            public Builder MValue(IList<string> value)
+            public Builder Status(string value)
             {
-                mValue = value;
+                status = value;
                 return this;
             }
 
-            public MethodErrorCodes Build()
+            public TenderBankTransferDetails Build()
             {
-                return new MethodErrorCodes(mValue);
+                return new TenderBankTransferDetails(status);
             }
         }
     }

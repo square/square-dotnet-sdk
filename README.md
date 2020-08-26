@@ -92,7 +92,6 @@ dotnet add package Square
 * [V1 Transactions]
 * [V1 Items]
 * [Transactions]
-* [Reporting]
 
 ## Usage
 
@@ -330,7 +329,6 @@ You can also use the Square API to create applications or services that work wit
 [Invoices]: doc/invoices.md
 [Apple Pay]: doc/apple-pay.md
 [Refunds]: doc/refunds.md
-[Reporting]: doc/reporting.md
 [Mobile Authorization]: doc/mobile-authorization.md
 [O Auth]: doc/o-auth.md
 [V1 Locations]: doc/v1-locations.md

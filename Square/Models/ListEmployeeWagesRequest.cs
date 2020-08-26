@@ -24,8 +24,7 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// Filter wages returned to only those that are associated with the
-        /// specified employee.
+        /// Filter wages returned to only those that are associated with the specified employee.
         /// </summary>
         [JsonProperty("employee_id")]
         public string EmployeeId { get; }

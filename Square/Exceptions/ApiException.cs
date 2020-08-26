@@ -49,6 +49,7 @@ namespace Square.Exceptions
                 || (context.Response.RawBody == null)
                 || (!context.Response.RawBody.CanRead))
                 {
+                    Errors = new List<Error>();
                     return;
                 }
 

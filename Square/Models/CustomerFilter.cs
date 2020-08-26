@@ -42,9 +42,9 @@ namespace Square.Models
 
         /// <summary>
         /// Represents a generic time range. The start and end values are
-        /// represented in RFC-3339 format. Time ranges are customized to be
+        /// represented in RFC 3339 format. Time ranges are customized to be
         /// inclusive or exclusive based on the needs of a particular endpoint.
-        /// Refer to the relevent endpoint-specific documentation to determine
+        /// Refer to the relevant endpoint-specific documentation to determine
         /// how time ranges are handled.
         /// </summary>
         [JsonProperty("created_at")]
@@ -52,9 +52,9 @@ namespace Square.Models
 
         /// <summary>
         /// Represents a generic time range. The start and end values are
-        /// represented in RFC-3339 format. Time ranges are customized to be
+        /// represented in RFC 3339 format. Time ranges are customized to be
         /// inclusive or exclusive based on the needs of a particular endpoint.
-        /// Refer to the relevent endpoint-specific documentation to determine
+        /// Refer to the relevant endpoint-specific documentation to determine
         /// how time ranges are handled.
         /// </summary>
         [JsonProperty("updated_at")]

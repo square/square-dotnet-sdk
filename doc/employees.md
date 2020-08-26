@@ -29,7 +29,7 @@ ListEmployeesAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `locationId` | `string` | Query, Optional | Filter employees returned to only those that are associated with the specified location. |
+| `locationId` | `string` | Query, Optional | - |
 | `status` | [`string`](/doc/models/employee-status.md) | Query, Optional | Specifies the EmployeeStatus to filter the employee by. |
 | `limit` | `int?` | Query, Optional | The number of employees to be returned on each page. |
 | `cursor` | `string` | Query, Optional | The token required to retrieve the specified page of results. |
@@ -41,9 +41,14 @@ ListEmployeesAsync(
 ### Example Usage
 
 ```csharp
+string locationId = "location_id4";
+string status = "ACTIVE";
+int? limit = 172;
+string cursor = "cursor6";
+
 try
 {
-    ListEmployeesResponse result = await employeesApi.ListEmployeesAsync(null, null, null, null);
+    ListEmployeesResponse result = await employeesApi.ListEmployeesAsync(locationId, status, limit, cursor);
 }
 catch (ApiException e){};
 ```

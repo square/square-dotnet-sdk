@@ -65,9 +65,19 @@ ListEmployeesAsync(
 ### Example Usage
 
 ```csharp
+string order = "DESC";
+string beginUpdatedAt = "begin_updated_at6";
+string endUpdatedAt = "end_updated_at4";
+string beginCreatedAt = "begin_created_at6";
+string endCreatedAt = "end_created_at8";
+string status = "ACTIVE";
+string externalId = "external_id6";
+int? limit = 172;
+string batchToken = "batch_token2";
+
 try
 {
-    List<V1Employee> result = await v1EmployeesApi.ListEmployeesAsync(null, null, null, null, null, null, null, null, null);
+    List<V1Employee> result = await v1EmployeesApi.ListEmployeesAsync(order, beginUpdatedAt, endUpdatedAt, beginCreatedAt, endCreatedAt, status, externalId, limit, batchToken);
 }
 catch (ApiException e){};
 ```
@@ -102,9 +112,20 @@ CreateEmployeeAsync(Models.V1Employee body)
 ### Example Usage
 
 ```csharp
+var bodyRoleIds = new List<string>();
+bodyRoleIds.Add("role_ids0");
+bodyRoleIds.Add("role_ids1");
+var bodyAuthorizedLocationIds = new List<string>();
+bodyAuthorizedLocationIds.Add("authorized_location_ids7");
+bodyAuthorizedLocationIds.Add("authorized_location_ids8");
 var body = new V1Employee.Builder(
         "first_name6",
         "last_name4")
+    .Id("id6")
+    .RoleIds(bodyRoleIds)
+    .AuthorizedLocationIds(bodyAuthorizedLocationIds)
+    .Email("email0")
+    .Status("ACTIVE")
     .Build();
 
 try
@@ -167,9 +188,20 @@ UpdateEmployeeAsync(string employeeId, Models.V1Employee body)
 
 ```csharp
 string employeeId = "employee_id0";
+var bodyRoleIds = new List<string>();
+bodyRoleIds.Add("role_ids0");
+bodyRoleIds.Add("role_ids1");
+var bodyAuthorizedLocationIds = new List<string>();
+bodyAuthorizedLocationIds.Add("authorized_location_ids7");
+bodyAuthorizedLocationIds.Add("authorized_location_ids8");
 var body = new V1Employee.Builder(
         "first_name6",
         "last_name4")
+    .Id("id6")
+    .RoleIds(bodyRoleIds)
+    .AuthorizedLocationIds(bodyAuthorizedLocationIds)
+    .Email("email0")
+    .Status("ACTIVE")
     .Build();
 
 try
@@ -202,9 +234,13 @@ ListEmployeeRolesAsync(string order = null, int? limit = null, string batchToken
 ### Example Usage
 
 ```csharp
+string order = "DESC";
+int? limit = 172;
+string batchToken = "batch_token2";
+
 try
 {
-    List<V1EmployeeRole> result = await v1EmployeesApi.ListEmployeeRolesAsync(null, null, null);
+    List<V1EmployeeRole> result = await v1EmployeesApi.ListEmployeeRolesAsync(order, limit, batchToken);
 }
 catch (ApiException e){};
 ```
@@ -249,6 +285,10 @@ bodyPermissions.Add("REGISTER_EDIT_ITEM");
 var body = new V1EmployeeRole.Builder(
         "name6",
         bodyPermissions)
+    .Id("id6")
+    .IsOwner(false)
+    .CreatedAt("created_at4")
+    .UpdatedAt("updated_at8")
     .Build();
 
 try
@@ -318,6 +358,10 @@ bodyPermissions.Add("REGISTER_EDIT_ITEM");
 var body = new V1EmployeeRole.Builder(
         "name6",
         bodyPermissions)
+    .Id("id6")
+    .IsOwner(false)
+    .CreatedAt("created_at4")
+    .UpdatedAt("updated_at8")
     .Build();
 
 try
@@ -369,9 +413,21 @@ ListTimecardsAsync(
 ### Example Usage
 
 ```csharp
+string order = "DESC";
+string employeeId = "employee_id0";
+string beginClockinTime = "begin_clockin_time8";
+string endClockinTime = "end_clockin_time2";
+string beginClockoutTime = "begin_clockout_time0";
+string endClockoutTime = "end_clockout_time2";
+string beginUpdatedAt = "begin_updated_at6";
+string endUpdatedAt = "end_updated_at4";
+bool? deleted = false;
+int? limit = 172;
+string batchToken = "batch_token2";
+
 try
 {
-    List<V1Timecard> result = await v1EmployeesApi.ListTimecardsAsync(null, null, null, null, null, null, null, null, null, null, null);
+    List<V1Timecard> result = await v1EmployeesApi.ListTimecardsAsync(order, employeeId, beginClockinTime, endClockinTime, beginClockoutTime, endClockoutTime, beginUpdatedAt, endUpdatedAt, deleted, limit, batchToken);
 }
 catch (ApiException e){};
 ```
@@ -411,6 +467,11 @@ CreateTimecardAsync(Models.V1Timecard body)
 ```csharp
 var body = new V1Timecard.Builder(
         "employee_id4")
+    .Id("id6")
+    .Deleted(false)
+    .ClockinTime("clockin_time2")
+    .ClockoutTime("clockout_time2")
+    .ClockinLocationId("clockin_location_id4")
     .Build();
 
 try
@@ -527,6 +588,11 @@ UpdateTimecardAsync(string timecardId, Models.V1Timecard body)
 string timecardId = "timecard_id0";
 var body = new V1Timecard.Builder(
         "employee_id4")
+    .Id("id6")
+    .Deleted(false)
+    .ClockinTime("clockin_time2")
+    .ClockoutTime("clockout_time2")
+    .ClockinLocationId("clockin_location_id4")
     .Build();
 
 try
@@ -603,10 +669,13 @@ ListCashDrawerShiftsAsync(
 
 ```csharp
 string locationId = "location_id4";
+string order = "DESC";
+string beginTime = "begin_time2";
+string endTime = "end_time2";
 
 try
 {
-    List<V1CashDrawerShift> result = await v1EmployeesApi.ListCashDrawerShiftsAsync(locationId, null, null, null);
+    List<V1CashDrawerShift> result = await v1EmployeesApi.ListCashDrawerShiftsAsync(locationId, order, beginTime, endTime);
 }
 catch (ApiException e){};
 ```

@@ -113,6 +113,8 @@ RevokeTokenAsync(Models.RevokeTokenRequest body, string authorization)
 var body = new RevokeTokenRequest.Builder()
     .ClientId("CLIENT_ID")
     .AccessToken("ACCESS_TOKEN")
+    .MerchantId("merchant_id6")
+    .RevokeOnlyAccessToken(false)
     .Build();
 string authorization = "Client CLIENT_SECRET";
 
@@ -163,6 +165,9 @@ var body = new ObtainTokenRequest.Builder(
         "APPLICATION_SECRET",
         "authorization_code")
     .Code("CODE_FROM_AUTHORIZE")
+    .RedirectUri("redirect_uri4")
+    .RefreshToken("refresh_token6")
+    .MigrationToken("migration_token4")
     .Build();
 
 try

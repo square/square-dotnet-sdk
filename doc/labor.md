@@ -22,6 +22,8 @@ ILaborApi laborApi = client.LaborApi;
 * [Delete Shift](/doc/labor.md#delete-shift)
 * [Get Shift](/doc/labor.md#get-shift)
 * [Update Shift](/doc/labor.md#update-shift)
+* [List Team Member Wages](/doc/labor.md#list-team-member-wages)
+* [Get Team Member Wage](/doc/labor.md#get-team-member-wage)
 * [List Workweek Configs](/doc/labor.md#list-workweek-configs)
 * [Update Workweek Config](/doc/labor.md#update-workweek-config)
 
@@ -48,18 +50,22 @@ ListBreakTypesAsync(string locationId = null, int? limit = null, string cursor =
 ### Example Usage
 
 ```csharp
+string locationId = "location_id4";
+int? limit = 172;
+string cursor = "cursor6";
+
 try
 {
-    ListBreakTypesResponse result = await laborApi.ListBreakTypesAsync(null, null, null);
+    ListBreakTypesResponse result = await laborApi.ListBreakTypesAsync(locationId, limit, cursor);
 }
 catch (ApiException e){};
 ```
 
 ## Create Break Type
 
-Creates a new `BreakType`. 
+Creates a new `BreakType`.
 
-A `BreakType` is a template for creating `Break` objects. 
+A `BreakType` is a template for creating `Break` objects.
 You must provide the following values in your request to this
 endpoint:
 
@@ -94,6 +100,10 @@ var bodyBreakType = new BreakType.Builder(
         "Lunch Break",
         "PT30M",
         true)
+    .Id("id2")
+    .Version(124)
+    .CreatedAt("created_at0")
+    .UpdatedAt("updated_at8")
     .Build();
 var body = new CreateBreakTypeRequest.Builder(
         bodyBreakType)
@@ -109,7 +119,7 @@ catch (ApiException e){};
 
 ## Delete Break Type
 
-Deletes an existing `BreakType`. 
+Deletes an existing `BreakType`.
 
 A `BreakType` can be deleted even if it is referenced from a `Shift`.
 
@@ -197,7 +207,10 @@ var bodyBreakType = new BreakType.Builder(
         "Lunch",
         "PT50M",
         true)
+    .Id("id2")
     .Version(1)
+    .CreatedAt("created_at0")
+    .UpdatedAt("updated_at8")
     .Build();
 var body = new UpdateBreakTypeRequest.Builder(
         bodyBreakType)
@@ -222,7 +235,7 @@ ListEmployeeWagesAsync(string employeeId = null, int? limit = null, string curso
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `employeeId` | `string` | Query, Optional | Filter wages returned to only those that are associated with the<br>specified employee. |
+| `employeeId` | `string` | Query, Optional | Filter wages returned to only those that are associated with the specified employee. |
 | `limit` | `int?` | Query, Optional | Maximum number of Employee Wages to return per page. Can range between<br>1 and 200. The default is the maximum at 200. |
 | `cursor` | `string` | Query, Optional | Pointer to the next page of Employee Wage results to fetch. |
 
@@ -233,9 +246,13 @@ ListEmployeeWagesAsync(string employeeId = null, int? limit = null, string curso
 ### Example Usage
 
 ```csharp
+string employeeId = "employee_id0";
+int? limit = 172;
+string cursor = "cursor6";
+
 try
 {
-    ListEmployeeWagesResponse result = await laborApi.ListEmployeeWagesAsync(null, null, null);
+    ListEmployeeWagesResponse result = await laborApi.ListEmployeeWagesAsync(employeeId, limit, cursor);
 }
 catch (ApiException e){};
 ```
@@ -272,9 +289,9 @@ catch (ApiException e){};
 
 ## Create Shift
 
-Creates a new `Shift`. 
+Creates a new `Shift`.
 
-A `Shift` represents a complete work day for a single employee. 
+A `Shift` represents a complete work day for a single employee.
 You must provide the following values in your request to this
 endpoint:
 
@@ -283,8 +300,8 @@ endpoint:
 - `start_at`
 
 An attempt to create a new `Shift` can result in a `BAD_REQUEST` error when:
-- The `status` of the new `Shift` is `OPEN` and the employee has another 
-shift with an `OPEN` status. 
+- The `status` of the new `Shift` is `OPEN` and the employee has another
+shift with an `OPEN` status.
 - The `start_at` date is in the future
 - the `start_at` or `end_at` overlaps another shift for the same employee
 - If `Break`s are set in the request, a break `start_at`
@@ -324,17 +341,21 @@ var bodyShiftBreaks0 = new Break.Builder(
         "Tea Break",
         "PT5M",
         true)
+    .Id("id4")
     .EndAt("2019-01-25T06:16:00-05:00")
     .Build();
 bodyShiftBreaks.Add(bodyShiftBreaks0);
 
 var bodyShift = new Shift.Builder(
-        "ormj0jJJZ5OZIzxrZYJI",
         "2019-01-25T03:11:00-05:00")
+    .Id("id8")
+    .EmployeeId("employee_id2")
     .LocationId("PAA1RJZZKXBFG")
+    .Timezone("timezone2")
     .EndAt("2019-01-25T13:11:00-05:00")
     .Wage(bodyShiftWage)
     .Breaks(bodyShiftBreaks)
+    .TeamMemberId("ormj0jJJZ5OZIzxrZYJI")
     .Build();
 var body = new CreateShiftRequest.Builder(
         bodyShift)
@@ -350,7 +371,7 @@ catch (ApiException e){};
 
 ## Search Shifts
 
-Returns a paginated list of `Shift` records for a business. 
+Returns a paginated list of `Shift` records for a business.
 The list to be returned can be filtered by:
 - Location IDs **and**
 - employee IDs **and**
@@ -382,24 +403,51 @@ SearchShiftsAsync(Models.SearchShiftsRequest body)
 ### Example Usage
 
 ```csharp
+var bodyQueryFilterLocationIds = new List<string>();
+bodyQueryFilterLocationIds.Add("location_ids2");
+var bodyQueryFilterTeamMemberIds = new List<string>();
+bodyQueryFilterTeamMemberIds.Add("team_member_ids9");
+bodyQueryFilterTeamMemberIds.Add("team_member_ids0");
+var bodyQueryFilterEmployeeIds = new List<string>();
+bodyQueryFilterEmployeeIds.Add("employee_ids7");
+var bodyQueryFilterStart = new TimeRange.Builder()
+    .StartAt("start_at8")
+    .EndAt("end_at4")
+    .Build();
+var bodyQueryFilterEnd = new TimeRange.Builder()
+    .StartAt("start_at2")
+    .EndAt("end_at0")
+    .Build();
 var bodyQueryFilterWorkdayDateRange = new DateRange.Builder()
-    .StartDate("2019-01-20")
-    .EndDate("2019-02-03")
+    .StartDate("start_date8")
+    .EndDate("end_date4")
     .Build();
 var bodyQueryFilterWorkday = new ShiftWorkday.Builder()
     .DateRange(bodyQueryFilterWorkdayDateRange)
     .MatchShiftsBy("START_AT")
-    .DefaultTimezone("America/Los_Angeles")
+    .DefaultTimezone("default_timezone8")
     .Build();
-var bodyQueryFilter = new ShiftFilter.Builder()
+var bodyQueryFilter = new ShiftFilter.Builder(
+        bodyQueryFilterLocationIds,
+        bodyQueryFilterTeamMemberIds)
+    .EmployeeIds(bodyQueryFilterEmployeeIds)
+    .Status("OPEN")
+    .Start(bodyQueryFilterStart)
+    .End(bodyQueryFilterEnd)
     .Workday(bodyQueryFilterWorkday)
+    .Build();
+var bodyQuerySort = new ShiftSort.Builder()
+    .Field("CREATED_AT")
+    .Order("DESC")
     .Build();
 var bodyQuery = new ShiftQuery.Builder()
     .Filter(bodyQueryFilter)
+    .Sort(bodyQuerySort)
     .Build();
 var body = new SearchShiftsRequest.Builder()
     .Query(bodyQuery)
-    .Limit(100)
+    .Limit(164)
+    .Cursor("cursor0")
     .Build();
 
 try
@@ -471,10 +519,10 @@ catch (ApiException e){};
 
 ## Update Shift
 
-Updates an existing `Shift`. 
+Updates an existing `Shift`.
 
-When adding a `Break` to a `Shift`, any earlier `Breaks` in the `Shift` have 
-the `end_at` property set to a valid RFC-3339 datetime string. 
+When adding a `Break` to a `Shift`, any earlier `Breaks` in the `Shift` have
+the `end_at` property set to a valid RFC-3339 datetime string.
 
 When closing a `Shift`, all `Break` instances in the shift must be complete with `end_at`
 set on each `Break`.
@@ -520,13 +568,16 @@ var bodyShiftBreaks0 = new Break.Builder(
 bodyShiftBreaks.Add(bodyShiftBreaks0);
 
 var bodyShift = new Shift.Builder(
-        "ormj0jJJZ5OZIzxrZYJI",
         "2019-01-25T03:11:00-05:00")
+    .Id("id8")
+    .EmployeeId("employee_id2")
     .LocationId("PAA1RJZZKXBFG")
+    .Timezone("timezone2")
     .EndAt("2019-01-25T13:11:00-05:00")
     .Wage(bodyShiftWage)
     .Breaks(bodyShiftBreaks)
     .Version(1)
+    .TeamMemberId("ormj0jJJZ5OZIzxrZYJI")
     .Build();
 var body = new UpdateShiftRequest.Builder(
         bodyShift)
@@ -535,6 +586,70 @@ var body = new UpdateShiftRequest.Builder(
 try
 {
     UpdateShiftResponse result = await laborApi.UpdateShiftAsync(id, body);
+}
+catch (ApiException e){};
+```
+
+## List Team Member Wages
+
+Returns a paginated list of `TeamMemberWage` instances for a business.
+
+```csharp
+ListTeamMemberWagesAsync(string teamMemberId = null, int? limit = null, string cursor = null)
+```
+
+### Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `teamMemberId` | `string` | Query, Optional | Filter wages returned to only those that are associated with the<br>specified team member. |
+| `limit` | `int?` | Query, Optional | Maximum number of Team Member Wages to return per page. Can range between<br>1 and 200. The default is the maximum at 200. |
+| `cursor` | `string` | Query, Optional | Pointer to the next page of Employee Wage results to fetch. |
+
+### Response Type
+
+[`Task<Models.ListTeamMemberWagesResponse>`](/doc/models/list-team-member-wages-response.md)
+
+### Example Usage
+
+```csharp
+string teamMemberId = "team_member_id0";
+int? limit = 172;
+string cursor = "cursor6";
+
+try
+{
+    ListTeamMemberWagesResponse result = await laborApi.ListTeamMemberWagesAsync(teamMemberId, limit, cursor);
+}
+catch (ApiException e){};
+```
+
+## Get Team Member Wage
+
+Returns a single `TeamMemberWage` specified by id.
+
+```csharp
+GetTeamMemberWageAsync(string id)
+```
+
+### Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `id` | `string` | Template, Required | UUID for the `TeamMemberWage` being retrieved. |
+
+### Response Type
+
+[`Task<Models.GetTeamMemberWageResponse>`](/doc/models/get-team-member-wage-response.md)
+
+### Example Usage
+
+```csharp
+string id = "id0";
+
+try
+{
+    GetTeamMemberWageResponse result = await laborApi.GetTeamMemberWageAsync(id);
 }
 catch (ApiException e){};
 ```
@@ -561,9 +676,12 @@ ListWorkweekConfigsAsync(int? limit = null, string cursor = null)
 ### Example Usage
 
 ```csharp
+int? limit = 172;
+string cursor = "cursor6";
+
 try
 {
-    ListWorkweekConfigsResponse result = await laborApi.ListWorkweekConfigsAsync(null, null);
+    ListWorkweekConfigsResponse result = await laborApi.ListWorkweekConfigsAsync(limit, cursor);
 }
 catch (ApiException e){};
 ```
@@ -594,7 +712,10 @@ string id = "id0";
 var bodyWorkweekConfig = new WorkweekConfig.Builder(
         "MON",
         "10:00")
+    .Id("id4")
     .Version(10)
+    .CreatedAt("created_at2")
+    .UpdatedAt("updated_at0")
     .Build();
 var body = new UpdateWorkweekConfigRequest.Builder(
         bodyWorkweekConfig)

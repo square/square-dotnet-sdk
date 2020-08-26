@@ -39,6 +39,7 @@ namespace Square.Models
             Models.Money totalMoney = null,
             Models.Money totalTaxMoney = null,
             Models.Money totalDiscountMoney = null,
+            Models.Money totalTipMoney = null,
             Models.Money totalServiceChargeMoney = null,
             Models.OrderPricingOptions pricingOptions = null,
             IList<Models.OrderReward> rewards = null)
@@ -68,6 +69,7 @@ namespace Square.Models
             TotalMoney = totalMoney;
             TotalTaxMoney = totalTaxMoney;
             TotalDiscountMoney = totalDiscountMoney;
+            TotalTipMoney = totalTipMoney;
             TotalServiceChargeMoney = totalServiceChargeMoney;
             PricingOptions = pricingOptions;
             Rewards = rewards;
@@ -281,6 +283,17 @@ namespace Square.Models
         /// [Working with Monetary Amounts](https://developer.squareup.com/docs/build-basics/working-with-monetary-amounts)
         /// for more information.
         /// </summary>
+        [JsonProperty("total_tip_money")]
+        public Models.Money TotalTipMoney { get; }
+
+        /// <summary>
+        /// Represents an amount of money. `Money` fields can be signed or unsigned.
+        /// Fields that do not explicitly define whether they are signed or unsigned are
+        /// considered unsigned and can only hold positive amounts. For signed fields, the
+        /// sign of the value indicates the purpose of the money transfer. See
+        /// [Working with Monetary Amounts](https://developer.squareup.com/docs/build-basics/working-with-monetary-amounts)
+        /// for more information.
+        /// </summary>
         [JsonProperty("total_service_charge_money")]
         public Models.Money TotalServiceChargeMoney { get; }
 
@@ -325,6 +338,7 @@ namespace Square.Models
                 .TotalMoney(TotalMoney)
                 .TotalTaxMoney(TotalTaxMoney)
                 .TotalDiscountMoney(TotalDiscountMoney)
+                .TotalTipMoney(TotalTipMoney)
                 .TotalServiceChargeMoney(TotalServiceChargeMoney)
                 .PricingOptions(PricingOptions)
                 .Rewards(Rewards);
@@ -358,6 +372,7 @@ namespace Square.Models
             private Models.Money totalMoney;
             private Models.Money totalTaxMoney;
             private Models.Money totalDiscountMoney;
+            private Models.Money totalTipMoney;
             private Models.Money totalServiceChargeMoney;
             private Models.OrderPricingOptions pricingOptions;
             private IList<Models.OrderReward> rewards = new List<Models.OrderReward>();
@@ -516,6 +531,12 @@ namespace Square.Models
                 return this;
             }
 
+            public Builder TotalTipMoney(Models.Money value)
+            {
+                totalTipMoney = value;
+                return this;
+            }
+
             public Builder TotalServiceChargeMoney(Models.Money value)
             {
                 totalServiceChargeMoney = value;
@@ -561,6 +582,7 @@ namespace Square.Models
                     totalMoney,
                     totalTaxMoney,
                     totalDiscountMoney,
+                    totalTipMoney,
                     totalServiceChargeMoney,
                     pricingOptions,
                     rewards);

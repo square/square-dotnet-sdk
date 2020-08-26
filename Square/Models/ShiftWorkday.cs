@@ -24,7 +24,7 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// A range defined by two dates. Used for filtering a query for Connect v2 
+        /// A range defined by two dates. Used for filtering a query for Connect v2
         /// objects that have date properties.
         /// </summary>
         [JsonProperty("date_range")]

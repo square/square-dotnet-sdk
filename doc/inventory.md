@@ -77,17 +77,35 @@ BatchChangeInventoryAsync(Models.BatchChangeInventoryRequest body)
 var bodyChanges = new List<InventoryChange>();
 
 var bodyChanges0PhysicalCount = new InventoryPhysicalCount.Builder()
+    .Id("id0")
     .ReferenceId("1536bfbf-efed-48bf-b17d-a197141b2a92")
     .CatalogObjectId("W62UWFY35CWMYGVWK6TWJDNI")
+    .CatalogObjectType("catalog_object_type4")
     .State("IN_STOCK")
     .LocationId("C6W5YS5QM06F5")
     .Quantity("53")
     .EmployeeId("LRK57NSQ5X7PUD05")
     .OccurredAt("2016-11-16T22:25:24.878Z")
     .Build();
+var bodyChanges0Adjustment = new InventoryAdjustment.Builder()
+    .Id("id6")
+    .ReferenceId("reference_id4")
+    .FromState("SOLD")
+    .ToState("IN_TRANSIT_TO")
+    .LocationId("location_id0")
+    .Build();
+var bodyChanges0Transfer = new InventoryTransfer.Builder()
+    .Id("id0")
+    .ReferenceId("reference_id8")
+    .State("SOLD")
+    .FromLocationId("from_location_id2")
+    .ToLocationId("to_location_id2")
+    .Build();
 var bodyChanges0 = new InventoryChange.Builder()
     .Type("PHYSICAL_COUNT")
     .PhysicalCount(bodyChanges0PhysicalCount)
+    .Adjustment(bodyChanges0Adjustment)
+    .Transfer(bodyChanges0Transfer)
     .Build();
 bodyChanges.Add(bodyChanges0);
 
@@ -191,10 +209,14 @@ var bodyCatalogObjectIds = new List<string>();
 bodyCatalogObjectIds.Add("W62UWFY35CWMYGVWK6TWJDNI");
 var bodyLocationIds = new List<string>();
 bodyLocationIds.Add("59TNP9SA8VGDA");
+var bodyStates = new List<string>();
+bodyStates.Add("IN_TRANSIT_TO");
 var body = new BatchRetrieveInventoryCountsRequest.Builder()
     .CatalogObjectIds(bodyCatalogObjectIds)
     .LocationIds(bodyLocationIds)
     .UpdatedAfter("2016-11-16T00:00:00.000Z")
+    .Cursor("cursor0")
+    .States(bodyStates)
     .Build();
 
 try
@@ -262,10 +284,12 @@ RetrieveInventoryCountAsync(string catalogObjectId, string locationIds = null, s
 
 ```csharp
 string catalogObjectId = "catalog_object_id6";
+string locationIds = "location_ids0";
+string cursor = "cursor6";
 
 try
 {
-    RetrieveInventoryCountResponse result = await inventoryApi.RetrieveInventoryCountAsync(catalogObjectId, null, null);
+    RetrieveInventoryCountResponse result = await inventoryApi.RetrieveInventoryCountAsync(catalogObjectId, locationIds, cursor);
 }
 catch (ApiException e){};
 ```
@@ -279,8 +303,8 @@ provided [CatalogObject](#type-catalogobject) at the requested
 Results are paginated and sorted in descending order according to their
 `occurred_at` timestamp (newest first).
 
-There are no limits on how far back the caller can page. This endpoint is
-useful when displaying recent changes for a specific item. For more
+There are no limits on how far back the caller can page. This endpoint can be 
+used to display recent changes for a specific item. For more
 sophisticated queries, use a batch endpoint.
 
 ```csharp
@@ -303,10 +327,12 @@ RetrieveInventoryChangesAsync(string catalogObjectId, string locationIds = null,
 
 ```csharp
 string catalogObjectId = "catalog_object_id6";
+string locationIds = "location_ids0";
+string cursor = "cursor6";
 
 try
 {
-    RetrieveInventoryChangesResponse result = await inventoryApi.RetrieveInventoryChangesAsync(catalogObjectId, null, null);
+    RetrieveInventoryChangesResponse result = await inventoryApi.RetrieveInventoryChangesAsync(catalogObjectId, locationIds, cursor);
 }
 catch (ApiException e){};
 ```

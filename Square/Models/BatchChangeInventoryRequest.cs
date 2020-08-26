@@ -36,7 +36,7 @@ namespace Square.Models
         /// <summary>
         /// The set of physical counts and inventory adjustments to be made.
         /// Changes are applied based on the client-supplied timestamp and may be sent
-        /// out of order. Max size is 100 changes.
+        /// out of order.
         /// </summary>
         [JsonProperty("changes")]
         public IList<Models.InventoryChange> Changes { get; }
