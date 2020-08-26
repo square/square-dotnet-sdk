@@ -51,12 +51,19 @@ var bodyLoyaltyAccountMappings = new List<LoyaltyAccountMapping>();
 var bodyLoyaltyAccountMappings0 = new LoyaltyAccountMapping.Builder(
         "PHONE",
         "+14155551234")
+    .Id("id0")
+    .CreatedAt("created_at8")
     .Build();
 bodyLoyaltyAccountMappings.Add(bodyLoyaltyAccountMappings0);
 
 var bodyLoyaltyAccount = new LoyaltyAccount.Builder(
         bodyLoyaltyAccountMappings,
         "d619f755-2d17-41f3-990d-c04ecedd64dd")
+    .Id("id2")
+    .Balance(14)
+    .LifetimePoints(38)
+    .CustomerId("customer_id0")
+    .EnrolledAt("enrolled_at2")
     .Build();
 var body = new CreateLoyaltyAccountRequest.Builder(
         bodyLoyaltyAccount,
@@ -98,6 +105,8 @@ var bodyQueryMappings = new List<LoyaltyAccountMapping>();
 var bodyQueryMappings0 = new LoyaltyAccountMapping.Builder(
         "PHONE",
         "+14155551234")
+    .Id("id4")
+    .CreatedAt("created_at8")
     .Build();
 bodyQueryMappings.Add(bodyQueryMappings0);
 
@@ -107,6 +116,7 @@ var bodyQuery = new SearchLoyaltyAccountsRequestLoyaltyAccountQuery.Builder()
 var body = new SearchLoyaltyAccountsRequest.Builder()
     .Query(bodyQuery)
     .Limit(10)
+    .Cursor("cursor0")
     .Build();
 
 try
@@ -181,6 +191,8 @@ AccumulateLoyaltyPointsAsync(string accountId, Models.AccumulateLoyaltyPointsReq
 ```csharp
 string accountId = "account_id2";
 var bodyAccumulatePoints = new LoyaltyEventAccumulatePoints.Builder()
+    .LoyaltyProgramId("loyalty_program_id8")
+    .Points(90)
     .OrderId("RFZfrdtm3mhO1oGzf5Cx7fEMsmGZY")
     .Build();
 var body = new AccumulateLoyaltyPointsRequest.Builder(
@@ -225,6 +237,8 @@ AdjustLoyaltyPointsAsync(string accountId, Models.AdjustLoyaltyPointsRequest bod
 string accountId = "account_id2";
 var bodyAdjustPoints = new LoyaltyEventAdjustPoints.Builder(
         112)
+    .LoyaltyProgramId("loyalty_program_id4")
+    .Reason("reason0")
     .Build();
 var body = new AdjustLoyaltyPointsRequest.Builder(
         "idempotency_key2",
@@ -266,10 +280,38 @@ SearchLoyaltyEventsAsync(Models.SearchLoyaltyEventsRequest body)
 ### Example Usage
 
 ```csharp
+var bodyQueryFilterLoyaltyAccountFilter = new LoyaltyEventLoyaltyAccountFilter.Builder(
+        "loyalty_account_id6")
+    .Build();
+var bodyQueryFilterTypeFilterTypes = new List<string>();
+bodyQueryFilterTypeFilterTypes.Add("DELETE_REWARD");
+bodyQueryFilterTypeFilterTypes.Add("ADJUST_POINTS");
+bodyQueryFilterTypeFilterTypes.Add("EXPIRE_POINTS");
+var bodyQueryFilterTypeFilter = new LoyaltyEventTypeFilter.Builder(
+        bodyQueryFilterTypeFilterTypes)
+    .Build();
+var bodyQueryFilterDateTimeFilterCreatedAt = new TimeRange.Builder()
+    .StartAt("start_at8")
+    .EndAt("end_at4")
+    .Build();
+var bodyQueryFilterDateTimeFilter = new LoyaltyEventDateTimeFilter.Builder(
+        bodyQueryFilterDateTimeFilterCreatedAt)
+    .Build();
+var bodyQueryFilterLocationFilterLocationIds = new List<string>();
+bodyQueryFilterLocationFilterLocationIds.Add("location_ids2");
+bodyQueryFilterLocationFilterLocationIds.Add("location_ids3");
+bodyQueryFilterLocationFilterLocationIds.Add("location_ids4");
+var bodyQueryFilterLocationFilter = new LoyaltyEventLocationFilter.Builder(
+        bodyQueryFilterLocationFilterLocationIds)
+    .Build();
 var bodyQueryFilterOrderFilter = new LoyaltyEventOrderFilter.Builder(
         "PyATxhYLfsMqpVkcKJITPydgEYfZY")
     .Build();
 var bodyQueryFilter = new LoyaltyEventFilter.Builder()
+    .LoyaltyAccountFilter(bodyQueryFilterLoyaltyAccountFilter)
+    .TypeFilter(bodyQueryFilterTypeFilter)
+    .DateTimeFilter(bodyQueryFilterDateTimeFilter)
+    .LocationFilter(bodyQueryFilterLocationFilter)
     .OrderFilter(bodyQueryFilterOrderFilter)
     .Build();
 var bodyQuery = new LoyaltyEventQuery.Builder()
@@ -278,6 +320,7 @@ var bodyQuery = new LoyaltyEventQuery.Builder()
 var body = new SearchLoyaltyEventsRequest.Builder()
     .Query(bodyQuery)
     .Limit(30)
+    .Cursor("cursor0")
     .Build();
 
 try
@@ -343,8 +386,13 @@ CalculateLoyaltyPointsAsync(string programId, Models.CalculateLoyaltyPointsReque
 
 ```csharp
 string programId = "program_id0";
+var bodyTransactionAmountMoney = new Money.Builder()
+    .Amount(72L)
+    .Currency("UZS")
+    .Build();
 var body = new CalculateLoyaltyPointsRequest.Builder()
     .OrderId("RFZfrdtm3mhO1oGzf5Cx7fEMsmGZY")
+    .TransactionAmountMoney(bodyTransactionAmountMoney)
     .Build();
 
 try
@@ -387,7 +435,11 @@ CreateLoyaltyRewardAsync(Models.CreateLoyaltyRewardRequest body)
 var bodyReward = new LoyaltyReward.Builder(
         "5adcb100-07f1-4ee7-b8c6-6bb9ebc474bd",
         "e1b39225-9da5-43d1-a5db-782cdd8ad94f")
+    .Id("id4")
+    .Status("REDEEMED")
+    .Points(230)
     .OrderId("RFZfrdtm3mhO1oGzf5Cx7fEMsmGZY")
+    .CreatedAt("created_at2")
     .Build();
 var body = new CreateLoyaltyRewardRequest.Builder(
         bodyReward,
@@ -432,10 +484,12 @@ SearchLoyaltyRewardsAsync(Models.SearchLoyaltyRewardsRequest body)
 ```csharp
 var bodyQuery = new SearchLoyaltyRewardsRequestLoyaltyRewardQuery.Builder(
         "5adcb100-07f1-4ee7-b8c6-6bb9ebc474bd")
+    .Status("REDEEMED")
     .Build();
 var body = new SearchLoyaltyRewardsRequest.Builder()
     .Query(bodyQuery)
     .Limit(10)
+    .Cursor("cursor0")
     .Build();
 
 try

@@ -48,9 +48,13 @@ ListCustomersAsync(string cursor = null, string sortField = null, string sortOrd
 ### Example Usage
 
 ```csharp
+string cursor = "cursor6";
+string sortField = "DEFAULT";
+string sortOrder = "DESC";
+
 try
 {
-    ListCustomersResponse result = await customersApi.ListCustomersAsync(null, null, null);
+    ListCustomersResponse result = await customersApi.ListCustomersAsync(cursor, sortField, sortOrder);
 }
 catch (ApiException e){};
 ```
@@ -88,14 +92,19 @@ CreateCustomerAsync(Models.CreateCustomerRequest body)
 var bodyAddress = new Address.Builder()
     .AddressLine1("500 Electric Ave")
     .AddressLine2("Suite 600")
+    .AddressLine3("address_line_38")
     .Locality("New York")
+    .Sublocality("sublocality2")
     .AdministrativeDistrictLevel1("NY")
     .PostalCode("10003")
     .Country("US")
     .Build();
 var body = new CreateCustomerRequest.Builder()
+    .IdempotencyKey("idempotency_key2")
     .GivenName("Amelia")
     .FamilyName("Earhart")
+    .CompanyName("company_name2")
+    .Nickname("nickname2")
     .EmailAddress("Amelia.Earhart@example.com")
     .Address(bodyAddress)
     .PhoneNumber("1-212-555-4240")
@@ -150,18 +159,38 @@ var bodyQueryFilterCreatedAt = new TimeRange.Builder()
     .StartAt("2018-01-01T00:00:00-00:00")
     .EndAt("2018-02-01T00:00:00-00:00")
     .Build();
+var bodyQueryFilterUpdatedAt = new TimeRange.Builder()
+    .StartAt("start_at4")
+    .EndAt("end_at8")
+    .Build();
 var bodyQueryFilterEmailAddress = new CustomerTextFilter.Builder()
+    .Exact("exact0")
     .Fuzzy("example.com")
+    .Build();
+var bodyQueryFilterPhoneNumber = new CustomerTextFilter.Builder()
+    .Exact("exact0")
+    .Fuzzy("fuzzy6")
     .Build();
 var bodyQueryFilterGroupIdsAll = new List<string>();
 bodyQueryFilterGroupIdsAll.Add("545AXB44B4XXWMVQ4W8SBT3HHF");
+var bodyQueryFilterGroupIdsAny = new List<string>();
+bodyQueryFilterGroupIdsAny.Add("any0");
+bodyQueryFilterGroupIdsAny.Add("any1");
+bodyQueryFilterGroupIdsAny.Add("any2");
+var bodyQueryFilterGroupIdsNone = new List<string>();
+bodyQueryFilterGroupIdsNone.Add("none5");
+bodyQueryFilterGroupIdsNone.Add("none6");
 var bodyQueryFilterGroupIds = new FilterValue.Builder()
     .All(bodyQueryFilterGroupIdsAll)
+    .Any(bodyQueryFilterGroupIdsAny)
+    .None(bodyQueryFilterGroupIdsNone)
     .Build();
 var bodyQueryFilter = new CustomerFilter.Builder()
     .CreationSource(bodyQueryFilterCreationSource)
     .CreatedAt(bodyQueryFilterCreatedAt)
+    .UpdatedAt(bodyQueryFilterUpdatedAt)
     .EmailAddress(bodyQueryFilterEmailAddress)
+    .PhoneNumber(bodyQueryFilterPhoneNumber)
     .GroupIds(bodyQueryFilterGroupIds)
     .Build();
 var bodyQuerySort = new CustomerSort.Builder()
@@ -173,6 +202,7 @@ var bodyQuery = new CustomerQuery.Builder()
     .Sort(bodyQuerySort)
     .Build();
 var body = new SearchCustomersRequest.Builder()
+    .Cursor("cursor0")
     .Limit(2L)
     .Query(bodyQuery)
     .Build();
@@ -277,6 +307,10 @@ UpdateCustomerAsync(string customerId, Models.UpdateCustomerRequest body)
 ```csharp
 string customerId = "customer_id8";
 var body = new UpdateCustomerRequest.Builder()
+    .GivenName("given_name8")
+    .FamilyName("family_name0")
+    .CompanyName("company_name2")
+    .Nickname("nickname2")
     .EmailAddress("New.Amelia.Earhart@example.com")
     .PhoneNumber("")
     .Note("updated customer note")
@@ -319,7 +353,9 @@ string customerId = "customer_id8";
 var bodyBillingAddress = new Address.Builder()
     .AddressLine1("500 Electric Ave")
     .AddressLine2("Suite 600")
+    .AddressLine3("address_line_38")
     .Locality("New York")
+    .Sublocality("sublocality2")
     .AdministrativeDistrictLevel1("NY")
     .PostalCode("10003")
     .Country("US")
@@ -328,6 +364,7 @@ var body = new CreateCustomerCardRequest.Builder(
         "YOUR_CARD_NONCE")
     .BillingAddress(bodyBillingAddress)
     .CardholderName("Amelia Earhart")
+    .VerificationToken("verification_token0")
     .Build();
 
 try

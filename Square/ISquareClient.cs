@@ -106,19 +106,9 @@ namespace Square
         ILocationsApi LocationsApi { get; }
 
         /// <summary>
-        /// Instance for IReportingApi
-        /// </summary>
-        IReportingApi ReportingApi { get; }
-
-        /// <summary>
         /// Instance for ICheckoutApi
         /// </summary>
         ICheckoutApi CheckoutApi { get; }
-
-        /// <summary>
-        /// Instance for IOrdersApi
-        /// </summary>
-        IOrdersApi OrdersApi { get; }
 
         /// <summary>
         /// Instance for ITransactionsApi
@@ -134,6 +124,11 @@ namespace Square
         /// Instance for IMerchantsApi
         /// </summary>
         IMerchantsApi MerchantsApi { get; }
+
+        /// <summary>
+        /// Instance for IOrdersApi
+        /// </summary>
+        IOrdersApi OrdersApi { get; }
 
         /// <summary>
         /// Instance for IPaymentsApi

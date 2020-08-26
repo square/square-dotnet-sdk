@@ -44,9 +44,13 @@ ListDisputesAsync(string cursor = null, string states = null, string locationId 
 ### Example Usage
 
 ```csharp
+string cursor = "cursor6";
+string states = "EVIDENCE_REQUIRED";
+string locationId = "location_id4";
+
 try
 {
-    ListDisputesResponse result = await disputesApi.ListDisputesAsync(null, null, null);
+    ListDisputesResponse result = await disputesApi.ListDisputesAsync(cursor, states, locationId);
 }
 catch (ApiException e){};
 ```
@@ -247,10 +251,16 @@ CreateDisputeEvidenceFileAsync(string disputeId, Models.CreateDisputeEvidenceFil
 
 ```csharp
 string disputeId = "dispute_id2";
+var request = new CreateDisputeEvidenceFileRequest.Builder(
+        "idempotency_key2")
+    .EvidenceType("REBUTTAL_EXPLANATION")
+    .ContentType("content_type0")
+    .Build();
+FileStreamInfo imageFile = new FileStreamInfo(new FileStream("dummy_file",FileMode.Open));
 
 try
 {
-    CreateDisputeEvidenceFileResponse result = await disputesApi.CreateDisputeEvidenceFileAsync(disputeId, null, null);
+    CreateDisputeEvidenceFileResponse result = await disputesApi.CreateDisputeEvidenceFileAsync(disputeId, request, imageFile);
 }
 catch (ApiException e){};
 ```

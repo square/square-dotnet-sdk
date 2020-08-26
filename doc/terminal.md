@@ -40,14 +40,24 @@ var bodyCheckoutAmountMoney = new Money.Builder()
     .Amount(2610L)
     .Currency("USD")
     .Build();
+var bodyCheckoutDeviceOptionsTipSettings = new TipSettings.Builder()
+    .AllowTipping(false)
+    .SeparateTipScreen(false)
+    .CustomTipField(false)
+    .Build();
 var bodyCheckoutDeviceOptions = new DeviceCheckoutOptions.Builder(
         "dbb5d83a-7838-11ea-bc55-0242ac130003")
+    .SkipReceiptScreen(false)
+    .TipSettings(bodyCheckoutDeviceOptionsTipSettings)
     .Build();
 var bodyCheckout = new TerminalCheckout.Builder(
         bodyCheckoutAmountMoney,
         bodyCheckoutDeviceOptions)
+    .Id("id8")
     .ReferenceId("id11572")
     .Note("A brief note")
+    .DeadlineDuration("deadline_duration0")
+    .Status("status0")
     .Build();
 var body = new CreateTerminalCheckoutRequest.Builder(
         "28a0c3bc-7839-11ea-bc55-0242ac130003",
@@ -82,14 +92,25 @@ SearchTerminalCheckoutsAsync(Models.SearchTerminalCheckoutsRequest body)
 ### Example Usage
 
 ```csharp
+var bodyQueryFilterCreatedAt = new TimeRange.Builder()
+    .StartAt("start_at2")
+    .EndAt("end_at0")
+    .Build();
 var bodyQueryFilter = new TerminalCheckoutQueryFilter.Builder()
+    .DeviceId("device_id8")
+    .CreatedAt(bodyQueryFilterCreatedAt)
     .Status("COMPLETED")
+    .Build();
+var bodyQuerySort = new TerminalCheckoutQuerySort.Builder()
+    .SortOrder("sort_order8")
     .Build();
 var bodyQuery = new TerminalCheckoutQuery.Builder()
     .Filter(bodyQueryFilter)
+    .Sort(bodyQuerySort)
     .Build();
 var body = new SearchTerminalCheckoutsRequest.Builder()
     .Query(bodyQuery)
+    .Cursor("cursor0")
     .Limit(2)
     .Build();
 

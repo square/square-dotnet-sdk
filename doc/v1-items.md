@@ -105,6 +105,9 @@ CreateCategoryAsync(string locationId, Models.V1Category body)
 ```csharp
 string locationId = "location_id4";
 var body = new V1Category.Builder()
+    .Id("id6")
+    .Name("name6")
+    .V2Id("v2_id6")
     .Build();
 
 try
@@ -177,6 +180,9 @@ UpdateCategoryAsync(string locationId, string categoryId, Models.V1Category body
 string locationId = "location_id4";
 string categoryId = "category_id8";
 var body = new V1Category.Builder()
+    .Id("id6")
+    .Name("name6")
+    .V2Id("v2_id6")
     .Build();
 
 try
@@ -239,7 +245,16 @@ CreateDiscountAsync(string locationId, Models.V1Discount body)
 
 ```csharp
 string locationId = "location_id4";
+var bodyAmountMoney = new V1Money.Builder()
+    .Amount(194)
+    .CurrencyCode("KWD")
+    .Build();
 var body = new V1Discount.Builder()
+    .Id("id6")
+    .Name("name6")
+    .Rate("rate4")
+    .AmountMoney(bodyAmountMoney)
+    .DiscountType("VARIABLE_AMOUNT")
     .Build();
 
 try
@@ -311,7 +326,16 @@ UpdateDiscountAsync(string locationId, string discountId, Models.V1Discount body
 ```csharp
 string locationId = "location_id4";
 string discountId = "discount_id8";
+var bodyAmountMoney = new V1Money.Builder()
+    .Amount(194)
+    .CurrencyCode("KWD")
+    .Build();
 var body = new V1Discount.Builder()
+    .Id("id6")
+    .Name("name6")
+    .Rate("rate4")
+    .AmountMoney(bodyAmountMoney)
+    .DiscountType("VARIABLE_AMOUNT")
     .Build();
 
 try
@@ -375,6 +399,11 @@ CreateFeeAsync(string locationId, Models.V1Fee body)
 ```csharp
 string locationId = "location_id4";
 var body = new V1Fee.Builder()
+    .Id("id6")
+    .Name("name6")
+    .Rate("rate4")
+    .CalculationPhase("FEE_SUBTOTAL_PHASE")
+    .AdjustmentType("TAX")
     .Build();
 
 try
@@ -447,6 +476,11 @@ UpdateFeeAsync(string locationId, string feeId, Models.V1Fee body)
 string locationId = "location_id4";
 string feeId = "fee_id8";
 var body = new V1Fee.Builder()
+    .Id("id6")
+    .Name("name6")
+    .Rate("rate4")
+    .CalculationPhase("FEE_SUBTOTAL_PHASE")
+    .AdjustmentType("TAX")
     .Build();
 
 try
@@ -481,10 +515,12 @@ ListInventoryAsync(string locationId, int? limit = null, string batchToken = nul
 
 ```csharp
 string locationId = "location_id4";
+int? limit = 172;
+string batchToken = "batch_token2";
 
 try
 {
-    List<V1InventoryEntry> result = await v1ItemsApi.ListInventoryAsync(locationId, null, null);
+    List<V1InventoryEntry> result = await v1ItemsApi.ListInventoryAsync(locationId, limit, batchToken);
 }
 catch (ApiException e){};
 ```
@@ -515,6 +551,9 @@ AdjustInventoryAsync(string locationId, string variationId, Models.V1AdjustInven
 string locationId = "location_id4";
 string variationId = "variation_id2";
 var body = new V1AdjustInventoryRequest.Builder()
+    .QuantityDelta(87.82)
+    .AdjustmentType("SALE")
+    .Memo("memo0")
     .Build();
 
 try
@@ -547,10 +586,11 @@ ListItemsAsync(string locationId, string batchToken = null)
 
 ```csharp
 string locationId = "location_id4";
+string batchToken = "batch_token2";
 
 try
 {
-    List<V1Item> result = await v1ItemsApi.ListItemsAsync(locationId, null);
+    List<V1Item> result = await v1ItemsApi.ListItemsAsync(locationId, batchToken);
 }
 catch (ApiException e){};
 ```
@@ -592,6 +632,11 @@ CreateItemAsync(string locationId, Models.V1Item body)
 ```csharp
 string locationId = "location_id4";
 var body = new V1Item.Builder()
+    .Id("id6")
+    .Name("name6")
+    .Description("description4")
+    .Type("GIFT_CARD")
+    .Color("593c00")
     .Build();
 
 try
@@ -697,6 +742,11 @@ UpdateItemAsync(string locationId, string itemId, Models.V1Item body)
 string locationId = "location_id4";
 string itemId = "item_id0";
 var body = new V1Item.Builder()
+    .Id("id6")
+    .Name("name6")
+    .Description("description4")
+    .Type("GIFT_CARD")
+    .Color("593c00")
     .Build();
 
 try
@@ -872,6 +922,11 @@ CreateVariationAsync(string locationId, string itemId, Models.V1Variation body)
 string locationId = "location_id4";
 string itemId = "item_id0";
 var body = new V1Variation.Builder()
+    .Id("id6")
+    .Name("name6")
+    .ItemId("item_id4")
+    .Ordinal(88)
+    .PricingType("FIXED_PRICING")
     .Build();
 
 try
@@ -952,6 +1007,11 @@ string locationId = "location_id4";
 string itemId = "item_id0";
 string variationId = "variation_id2";
 var body = new V1Variation.Builder()
+    .Id("id6")
+    .Name("name6")
+    .ItemId("item_id4")
+    .Ordinal(88)
+    .PricingType("FIXED_PRICING")
     .Build();
 
 try
@@ -1014,7 +1074,40 @@ CreateModifierListAsync(string locationId, Models.V1ModifierList body)
 
 ```csharp
 string locationId = "location_id4";
+var bodyModifierOptions = new List<V1ModifierOption>();
+
+var bodyModifierOptions0PriceMoney = new V1Money.Builder()
+    .Amount(104)
+    .CurrencyCode("UAH")
+    .Build();
+var bodyModifierOptions0 = new V1ModifierOption.Builder()
+    .Id("id0")
+    .Name("name0")
+    .PriceMoney(bodyModifierOptions0PriceMoney)
+    .OnByDefault(false)
+    .Ordinal(178)
+    .Build();
+bodyModifierOptions.Add(bodyModifierOptions0);
+
+var bodyModifierOptions1PriceMoney = new V1Money.Builder()
+    .Amount(103)
+    .CurrencyCode("TZS")
+    .Build();
+var bodyModifierOptions1 = new V1ModifierOption.Builder()
+    .Id("id1")
+    .Name("name1")
+    .PriceMoney(bodyModifierOptions1PriceMoney)
+    .OnByDefault(true)
+    .Ordinal(179)
+    .Build();
+bodyModifierOptions.Add(bodyModifierOptions1);
+
 var body = new V1ModifierList.Builder()
+    .Id("id6")
+    .Name("name6")
+    .SelectionType("SINGLE")
+    .ModifierOptions(bodyModifierOptions)
+    .V2Id("v2_id6")
     .Build();
 
 try
@@ -1120,6 +1213,8 @@ UpdateModifierListAsync(string locationId, string modifierListId, Models.V1Updat
 string locationId = "location_id4";
 string modifierListId = "modifier_list_id6";
 var body = new V1UpdateModifierListRequest.Builder()
+    .Name("name6")
+    .SelectionType("SINGLE")
     .Build();
 
 try
@@ -1154,7 +1249,16 @@ CreateModifierOptionAsync(string locationId, string modifierListId, Models.V1Mod
 ```csharp
 string locationId = "location_id4";
 string modifierListId = "modifier_list_id6";
+var bodyPriceMoney = new V1Money.Builder()
+    .Amount(194)
+    .CurrencyCode("XBA")
+    .Build();
 var body = new V1ModifierOption.Builder()
+    .Id("id6")
+    .Name("name6")
+    .PriceMoney(bodyPriceMoney)
+    .OnByDefault(false)
+    .Ordinal(88)
     .Build();
 
 try
@@ -1234,7 +1338,16 @@ UpdateModifierOptionAsync(
 string locationId = "location_id4";
 string modifierListId = "modifier_list_id6";
 string modifierOptionId = "modifier_option_id6";
+var bodyPriceMoney = new V1Money.Builder()
+    .Amount(194)
+    .CurrencyCode("XBA")
+    .Build();
 var body = new V1ModifierOption.Builder()
+    .Id("id6")
+    .Name("name6")
+    .PriceMoney(bodyPriceMoney)
+    .OnByDefault(false)
+    .Ordinal(88)
     .Build();
 
 try
@@ -1298,7 +1411,22 @@ CreatePageAsync(string locationId, Models.V1Page body)
 
 ```csharp
 string locationId = "location_id4";
+var bodyCells = new List<V1PageCell>();
+
+var bodyCells0 = new V1PageCell.Builder()
+    .PageId("page_id8")
+    .Row(2)
+    .Column(80)
+    .ObjectType("ITEM")
+    .ObjectId("object_id6")
+    .Build();
+bodyCells.Add(bodyCells0);
+
 var body = new V1Page.Builder()
+    .Id("id6")
+    .Name("name6")
+    .PageIndex(224)
+    .Cells(bodyCells)
     .Build();
 
 try
@@ -1369,7 +1497,22 @@ UpdatePageAsync(string locationId, string pageId, Models.V1Page body)
 ```csharp
 string locationId = "location_id4";
 string pageId = "page_id0";
+var bodyCells = new List<V1PageCell>();
+
+var bodyCells0 = new V1PageCell.Builder()
+    .PageId("page_id8")
+    .Row(2)
+    .Column(80)
+    .ObjectType("ITEM")
+    .ObjectId("object_id6")
+    .Build();
+bodyCells.Add(bodyCells0);
+
 var body = new V1Page.Builder()
+    .Id("id6")
+    .Name("name6")
+    .PageIndex(224)
+    .Cells(bodyCells)
     .Build();
 
 try
@@ -1414,10 +1557,12 @@ DeletePageCellAsync(
 ```csharp
 string locationId = "location_id4";
 string pageId = "page_id0";
+string row = "row0";
+string column = "column4";
 
 try
 {
-    V1Page result = await v1ItemsApi.DeletePageCellAsync(locationId, pageId, null, null);
+    V1Page result = await v1ItemsApi.DeletePageCellAsync(locationId, pageId, row, column);
 }
 catch (ApiException e){};
 ```
@@ -1448,6 +1593,11 @@ UpdatePageCellAsync(string locationId, string pageId, Models.V1PageCell body)
 string locationId = "location_id4";
 string pageId = "page_id0";
 var body = new V1PageCell.Builder()
+    .PageId("page_id6")
+    .Row(22)
+    .Column(60)
+    .ObjectType("ITEM")
+    .ObjectId("object_id4")
     .Build();
 
 try

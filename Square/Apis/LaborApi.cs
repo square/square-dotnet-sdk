@@ -99,8 +99,8 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Creates a new `BreakType`. 
-        /// A `BreakType` is a template for creating `Break` objects. 
+        /// Creates a new `BreakType`.
+        /// A `BreakType` is a template for creating `Break` objects.
         /// You must provide the following values in your request to this
         /// endpoint:
         /// - `location_id`
@@ -121,8 +121,8 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Creates a new `BreakType`. 
-        /// A `BreakType` is a template for creating `Break` objects. 
+        /// Creates a new `BreakType`.
+        /// A `BreakType` is a template for creating `Break` objects.
         /// You must provide the following values in your request to this
         /// endpoint:
         /// - `location_id`
@@ -185,7 +185,7 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Deletes an existing `BreakType`. 
+        /// Deletes an existing `BreakType`.
         /// A `BreakType` can be deleted even if it is referenced from a `Shift`.
         /// </summary>
         /// <param name="id">Required parameter: UUID for the `BreakType` being deleted.</param>
@@ -198,7 +198,7 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Deletes an existing `BreakType`. 
+        /// Deletes an existing `BreakType`.
         /// A `BreakType` can be deleted even if it is referenced from a `Shift`.
         /// </summary>
         /// <param name="id">Required parameter: UUID for the `BreakType` being deleted.</param>
@@ -403,6 +403,7 @@ namespace Square.Apis
         /// <param name="limit">Optional parameter: Maximum number of Employee Wages to return per page. Can range between 1 and 200. The default is the maximum at 200.</param>
         /// <param name="cursor">Optional parameter: Pointer to the next page of Employee Wage results to fetch.</param>
         /// <return>Returns the Models.ListEmployeeWagesResponse response from the API call</return>
+        [Obsolete]
         public Models.ListEmployeeWagesResponse ListEmployeeWages(string employeeId = null, int? limit = null, string cursor = null)
         {
             Task<Models.ListEmployeeWagesResponse> t = ListEmployeeWagesAsync(employeeId, limit, cursor);
@@ -417,6 +418,7 @@ namespace Square.Apis
         /// <param name="limit">Optional parameter: Maximum number of Employee Wages to return per page. Can range between 1 and 200. The default is the maximum at 200.</param>
         /// <param name="cursor">Optional parameter: Pointer to the next page of Employee Wage results to fetch.</param>
         /// <return>Returns the Models.ListEmployeeWagesResponse response from the API call</return>
+        [Obsolete]
         public async Task<Models.ListEmployeeWagesResponse> ListEmployeeWagesAsync(string employeeId = null, int? limit = null, string cursor = null, CancellationToken cancellationToken = default)
         {
             //the base uri for api requests
@@ -475,6 +477,7 @@ namespace Square.Apis
         /// </summary>
         /// <param name="id">Required parameter: UUID for the `EmployeeWage` being retrieved.</param>
         /// <return>Returns the Models.GetEmployeeWageResponse response from the API call</return>
+        [Obsolete]
         public Models.GetEmployeeWageResponse GetEmployeeWage(string id)
         {
             Task<Models.GetEmployeeWageResponse> t = GetEmployeeWageAsync(id);
@@ -487,6 +490,7 @@ namespace Square.Apis
         /// </summary>
         /// <param name="id">Required parameter: UUID for the `EmployeeWage` being retrieved.</param>
         /// <return>Returns the Models.GetEmployeeWageResponse response from the API call</return>
+        [Obsolete]
         public async Task<Models.GetEmployeeWageResponse> GetEmployeeWageAsync(string id, CancellationToken cancellationToken = default)
         {
             //the base uri for api requests
@@ -539,16 +543,16 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Creates a new `Shift`. 
-        /// A `Shift` represents a complete work day for a single employee. 
+        /// Creates a new `Shift`.
+        /// A `Shift` represents a complete work day for a single employee.
         /// You must provide the following values in your request to this
         /// endpoint:
         /// - `location_id`
         /// - `employee_id`
         /// - `start_at`
         /// An attempt to create a new `Shift` can result in a `BAD_REQUEST` error when:
-        /// - The `status` of the new `Shift` is `OPEN` and the employee has another 
-        /// shift with an `OPEN` status. 
+        /// - The `status` of the new `Shift` is `OPEN` and the employee has another
+        /// shift with an `OPEN` status.
         /// - The `start_at` date is in the future
         /// - the `start_at` or `end_at` overlaps another shift for the same employee
         /// - If `Break`s are set in the request, a break `start_at`
@@ -565,16 +569,16 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Creates a new `Shift`. 
-        /// A `Shift` represents a complete work day for a single employee. 
+        /// Creates a new `Shift`.
+        /// A `Shift` represents a complete work day for a single employee.
         /// You must provide the following values in your request to this
         /// endpoint:
         /// - `location_id`
         /// - `employee_id`
         /// - `start_at`
         /// An attempt to create a new `Shift` can result in a `BAD_REQUEST` error when:
-        /// - The `status` of the new `Shift` is `OPEN` and the employee has another 
-        /// shift with an `OPEN` status. 
+        /// - The `status` of the new `Shift` is `OPEN` and the employee has another
+        /// shift with an `OPEN` status.
         /// - The `start_at` date is in the future
         /// - the `start_at` or `end_at` overlaps another shift for the same employee
         /// - If `Break`s are set in the request, a break `start_at`
@@ -633,7 +637,7 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Returns a paginated list of `Shift` records for a business. 
+        /// Returns a paginated list of `Shift` records for a business.
         /// The list to be returned can be filtered by:
         /// - Location IDs **and**
         /// - employee IDs **and**
@@ -657,7 +661,7 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Returns a paginated list of `Shift` records for a business. 
+        /// Returns a paginated list of `Shift` records for a business.
         /// The list to be returned can be filtered by:
         /// - Location IDs **and**
         /// - employee IDs **and**
@@ -859,9 +863,9 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Updates an existing `Shift`. 
-        /// When adding a `Break` to a `Shift`, any earlier `Breaks` in the `Shift` have 
-        /// the `end_at` property set to a valid RFC-3339 datetime string. 
+        /// Updates an existing `Shift`.
+        /// When adding a `Break` to a `Shift`, any earlier `Breaks` in the `Shift` have
+        /// the `end_at` property set to a valid RFC-3339 datetime string.
         /// When closing a `Shift`, all `Break` instances in the shift must be complete with `end_at`
         /// set on each `Break`.
         /// </summary>
@@ -876,9 +880,9 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Updates an existing `Shift`. 
-        /// When adding a `Break` to a `Shift`, any earlier `Breaks` in the `Shift` have 
-        /// the `end_at` property set to a valid RFC-3339 datetime string. 
+        /// Updates an existing `Shift`.
+        /// When adding a `Break` to a `Shift`, any earlier `Breaks` in the `Shift` have
+        /// the `end_at` property set to a valid RFC-3339 datetime string.
         /// When closing a `Shift`, all `Break` instances in the shift must be complete with `end_at`
         /// set on each `Break`.
         /// </summary>
@@ -936,6 +940,148 @@ namespace Square.Apis
             base.ValidateResponse(_response, _context);
 
             var _responseModel = ApiHelper.JsonDeserialize<Models.UpdateShiftResponse>(_response.Body);
+            _responseModel.Context = _context;
+            return _responseModel;
+        }
+
+        /// <summary>
+        /// Returns a paginated list of `TeamMemberWage` instances for a business.
+        /// </summary>
+        /// <param name="teamMemberId">Optional parameter: Filter wages returned to only those that are associated with the specified team member.</param>
+        /// <param name="limit">Optional parameter: Maximum number of Team Member Wages to return per page. Can range between 1 and 200. The default is the maximum at 200.</param>
+        /// <param name="cursor">Optional parameter: Pointer to the next page of Employee Wage results to fetch.</param>
+        /// <return>Returns the Models.ListTeamMemberWagesResponse response from the API call</return>
+        public Models.ListTeamMemberWagesResponse ListTeamMemberWages(string teamMemberId = null, int? limit = null, string cursor = null)
+        {
+            Task<Models.ListTeamMemberWagesResponse> t = ListTeamMemberWagesAsync(teamMemberId, limit, cursor);
+            ApiHelper.RunTaskSynchronously(t);
+            return t.Result;
+        }
+
+        /// <summary>
+        /// Returns a paginated list of `TeamMemberWage` instances for a business.
+        /// </summary>
+        /// <param name="teamMemberId">Optional parameter: Filter wages returned to only those that are associated with the specified team member.</param>
+        /// <param name="limit">Optional parameter: Maximum number of Team Member Wages to return per page. Can range between 1 and 200. The default is the maximum at 200.</param>
+        /// <param name="cursor">Optional parameter: Pointer to the next page of Employee Wage results to fetch.</param>
+        /// <return>Returns the Models.ListTeamMemberWagesResponse response from the API call</return>
+        public async Task<Models.ListTeamMemberWagesResponse> ListTeamMemberWagesAsync(string teamMemberId = null, int? limit = null, string cursor = null, CancellationToken cancellationToken = default)
+        {
+            //the base uri for api requests
+            string _baseUri = config.GetBaseUri();
+
+            //prepare query string for API call
+            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
+            _queryBuilder.Append("/v2/labor/team-member-wages");
+
+            //process optional query parameters
+            ApiHelper.AppendUrlWithQueryParameters(_queryBuilder, new Dictionary<string, object>()
+            {
+                { "team_member_id", teamMemberId },
+                { "limit", limit },
+                { "cursor", cursor }
+            }, ArrayDeserializationFormat, ParameterSeparator);
+
+            //validate and preprocess url
+            string _queryUrl = ApiHelper.CleanUrl(_queryBuilder);
+
+            //append request with appropriate headers and parameters
+            var _headers = new Dictionary<string, string>()
+            { 
+                { "user-agent", userAgent },
+                { "accept", "application/json" },
+                { "Square-Version", config.SquareVersion }
+            };
+
+            //prepare the API call request to fetch the response
+            HttpRequest _request = GetClientInstance().Get(_queryUrl,_headers);
+            if (HttpCallBack != null)
+            {
+                HttpCallBack.OnBeforeHttpRequestEventHandler(GetClientInstance(), _request);
+            }
+
+            _request = await authManagers["default"].ApplyAsync(_request).ConfigureAwait(false);
+
+            //invoke request and get response
+            HttpStringResponse _response = await GetClientInstance().ExecuteAsStringAsync(_request, cancellationToken).ConfigureAwait(false);
+            HttpContext _context = new HttpContext(_request, _response);
+            if (HttpCallBack != null)
+            {
+                HttpCallBack.OnAfterHttpResponseEventHandler(GetClientInstance(), _response);
+            }
+
+            //handle errors defined at the API level
+            base.ValidateResponse(_response, _context);
+
+            var _responseModel = ApiHelper.JsonDeserialize<Models.ListTeamMemberWagesResponse>(_response.Body);
+            _responseModel.Context = _context;
+            return _responseModel;
+        }
+
+        /// <summary>
+        /// Returns a single `TeamMemberWage` specified by id.
+        /// </summary>
+        /// <param name="id">Required parameter: UUID for the `TeamMemberWage` being retrieved.</param>
+        /// <return>Returns the Models.GetTeamMemberWageResponse response from the API call</return>
+        public Models.GetTeamMemberWageResponse GetTeamMemberWage(string id)
+        {
+            Task<Models.GetTeamMemberWageResponse> t = GetTeamMemberWageAsync(id);
+            ApiHelper.RunTaskSynchronously(t);
+            return t.Result;
+        }
+
+        /// <summary>
+        /// Returns a single `TeamMemberWage` specified by id.
+        /// </summary>
+        /// <param name="id">Required parameter: UUID for the `TeamMemberWage` being retrieved.</param>
+        /// <return>Returns the Models.GetTeamMemberWageResponse response from the API call</return>
+        public async Task<Models.GetTeamMemberWageResponse> GetTeamMemberWageAsync(string id, CancellationToken cancellationToken = default)
+        {
+            //the base uri for api requests
+            string _baseUri = config.GetBaseUri();
+
+            //prepare query string for API call
+            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
+            _queryBuilder.Append("/v2/labor/team-member-wages/{id}");
+
+            //process optional template parameters
+            ApiHelper.AppendUrlWithTemplateParameters(_queryBuilder, new Dictionary<string, object>()
+            {
+                { "id", id }
+            });
+
+            //validate and preprocess url
+            string _queryUrl = ApiHelper.CleanUrl(_queryBuilder);
+
+            //append request with appropriate headers and parameters
+            var _headers = new Dictionary<string, string>()
+            { 
+                { "user-agent", userAgent },
+                { "accept", "application/json" },
+                { "Square-Version", config.SquareVersion }
+            };
+
+            //prepare the API call request to fetch the response
+            HttpRequest _request = GetClientInstance().Get(_queryUrl,_headers);
+            if (HttpCallBack != null)
+            {
+                HttpCallBack.OnBeforeHttpRequestEventHandler(GetClientInstance(), _request);
+            }
+
+            _request = await authManagers["default"].ApplyAsync(_request).ConfigureAwait(false);
+
+            //invoke request and get response
+            HttpStringResponse _response = await GetClientInstance().ExecuteAsStringAsync(_request, cancellationToken).ConfigureAwait(false);
+            HttpContext _context = new HttpContext(_request, _response);
+            if (HttpCallBack != null)
+            {
+                HttpCallBack.OnAfterHttpResponseEventHandler(GetClientInstance(), _response);
+            }
+
+            //handle errors defined at the API level
+            base.ValidateResponse(_response, _context);
+
+            var _responseModel = ApiHelper.JsonDeserialize<Models.GetTeamMemberWageResponse>(_response.Body);
             _responseModel.Context = _context;
             return _responseModel;
         }

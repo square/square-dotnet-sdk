@@ -65,14 +65,25 @@ CreateLocationAsync(Models.CreateLocationRequest body)
 ```csharp
 var bodyLocationAddress = new Address.Builder()
     .AddressLine1("1234 Peachtree St. NE")
+    .AddressLine2("address_line_26")
+    .AddressLine3("address_line_32")
     .Locality("Atlanta")
+    .Sublocality("sublocality6")
     .AdministrativeDistrictLevel1("GA")
     .PostalCode("30309")
     .Build();
+var bodyLocationCapabilities = new List<string>();
+bodyLocationCapabilities.Add("CREDIT_CARD_PROCESSING");
+bodyLocationCapabilities.Add("CREDIT_CARD_PROCESSING");
+bodyLocationCapabilities.Add("CREDIT_CARD_PROCESSING");
 var bodyLocation = new Location.Builder()
+    .Id("id0")
     .Name("New location name")
     .Address(bodyLocationAddress)
+    .Timezone("timezone0")
+    .Capabilities(bodyLocationCapabilities)
     .Description("My new location.")
+    .FacebookUrl("null")
     .Build();
 var body = new CreateLocationRequest.Builder()
     .Location(bodyLocation)
@@ -143,10 +154,17 @@ UpdateLocationAsync(string locationId, Models.UpdateLocationRequest body)
 string locationId = "location_id4";
 var bodyLocationAddress = new Address.Builder()
     .AddressLine1("1234 Peachtree St. NE")
+    .AddressLine2("address_line_26")
+    .AddressLine3("address_line_32")
     .Locality("Atlanta")
+    .Sublocality("sublocality6")
     .AdministrativeDistrictLevel1("GA")
     .PostalCode("30309")
     .Build();
+var bodyLocationCapabilities = new List<string>();
+bodyLocationCapabilities.Add("CREDIT_CARD_PROCESSING");
+bodyLocationCapabilities.Add("CREDIT_CARD_PROCESSING");
+bodyLocationCapabilities.Add("CREDIT_CARD_PROCESSING");
 var bodyLocationBusinessHoursPeriods = new List<BusinessHoursPeriod>();
 
 var bodyLocationBusinessHoursPeriods0 = new BusinessHoursPeriod.Builder()
@@ -160,12 +178,16 @@ var bodyLocationBusinessHours = new BusinessHours.Builder()
     .Periods(bodyLocationBusinessHoursPeriods)
     .Build();
 var bodyLocation = new Location.Builder()
+    .Id("id0")
     .Name("Updated nickname")
     .Address(bodyLocationAddress)
+    .Timezone("timezone0")
+    .Capabilities(bodyLocationCapabilities)
     .BusinessHours(bodyLocationBusinessHours)
     .Description("Updated description")
     .TwitterUsername("twitter")
     .InstagramUsername("instagram")
+    .FacebookUrl("null")
     .Build();
 var body = new UpdateLocationRequest.Builder()
     .Location(bodyLocation)

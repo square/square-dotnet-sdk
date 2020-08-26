@@ -27,11 +27,12 @@ namespace Square.Apis
         /// <summary>
         /// ListEmployees
         /// </summary>
-        /// <param name="locationId">Optional parameter: Filter employees returned to only those that are associated with the specified location.</param>
+        /// <param name="locationId">Optional parameter: Example: </param>
         /// <param name="status">Optional parameter: Specifies the EmployeeStatus to filter the employee by.</param>
         /// <param name="limit">Optional parameter: The number of employees to be returned on each page.</param>
         /// <param name="cursor">Optional parameter: The token required to retrieve the specified page of results.</param>
         /// <return>Returns the Models.ListEmployeesResponse response from the API call</return>
+        [Obsolete]
         public Models.ListEmployeesResponse ListEmployees(
                 string locationId = null,
                 string status = null,
@@ -46,11 +47,12 @@ namespace Square.Apis
         /// <summary>
         /// ListEmployees
         /// </summary>
-        /// <param name="locationId">Optional parameter: Filter employees returned to only those that are associated with the specified location.</param>
+        /// <param name="locationId">Optional parameter: Example: </param>
         /// <param name="status">Optional parameter: Specifies the EmployeeStatus to filter the employee by.</param>
         /// <param name="limit">Optional parameter: The number of employees to be returned on each page.</param>
         /// <param name="cursor">Optional parameter: The token required to retrieve the specified page of results.</param>
         /// <return>Returns the Models.ListEmployeesResponse response from the API call</return>
+        [Obsolete]
         public async Task<Models.ListEmployeesResponse> ListEmployeesAsync(
                 string locationId = null,
                 string status = null,
@@ -114,6 +116,7 @@ namespace Square.Apis
         /// </summary>
         /// <param name="id">Required parameter: UUID for the employee that was requested.</param>
         /// <return>Returns the Models.RetrieveEmployeeResponse response from the API call</return>
+        [Obsolete]
         public Models.RetrieveEmployeeResponse RetrieveEmployee(string id)
         {
             Task<Models.RetrieveEmployeeResponse> t = RetrieveEmployeeAsync(id);
@@ -126,6 +129,7 @@ namespace Square.Apis
         /// </summary>
         /// <param name="id">Required parameter: UUID for the employee that was requested.</param>
         /// <return>Returns the Models.RetrieveEmployeeResponse response from the API call</return>
+        [Obsolete]
         public async Task<Models.RetrieveEmployeeResponse> RetrieveEmployeeAsync(string id, CancellationToken cancellationToken = default)
         {
             //the base uri for api requests

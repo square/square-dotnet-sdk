@@ -33,12 +33,11 @@ namespace Square.Apis
         /// To learn more about the Orders API, see the
         /// [Orders API Overview](https://developer.squareup.com/docs/orders-api/what-it-does).
         /// </summary>
-        /// <param name="locationId">Required parameter: The ID of the business location to associate the order with.</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.CreateOrderResponse response from the API call</return>
-        public Models.CreateOrderResponse CreateOrder(string locationId, Models.CreateOrderRequest body)
+        public Models.CreateOrderResponse CreateOrder(Models.CreateOrderRequest body)
         {
-            Task<Models.CreateOrderResponse> t = CreateOrderAsync(locationId, body);
+            Task<Models.CreateOrderResponse> t = CreateOrderAsync(body);
             ApiHelper.RunTaskSynchronously(t);
             return t.Result;
         }
@@ -52,23 +51,16 @@ namespace Square.Apis
         /// To learn more about the Orders API, see the
         /// [Orders API Overview](https://developer.squareup.com/docs/orders-api/what-it-does).
         /// </summary>
-        /// <param name="locationId">Required parameter: The ID of the business location to associate the order with.</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.CreateOrderResponse response from the API call</return>
-        public async Task<Models.CreateOrderResponse> CreateOrderAsync(string locationId, Models.CreateOrderRequest body, CancellationToken cancellationToken = default)
+        public async Task<Models.CreateOrderResponse> CreateOrderAsync(Models.CreateOrderRequest body, CancellationToken cancellationToken = default)
         {
             //the base uri for api requests
             string _baseUri = config.GetBaseUri();
 
             //prepare query string for API call
             StringBuilder _queryBuilder = new StringBuilder(_baseUri);
-            _queryBuilder.Append("/v2/locations/{location_id}/orders");
-
-            //process optional template parameters
-            ApiHelper.AppendUrlWithTemplateParameters(_queryBuilder, new Dictionary<string, object>()
-            {
-                { "location_id", locationId }
-            });
+            _queryBuilder.Append("/v2/orders");
 
             //validate and preprocess url
             string _queryUrl = ApiHelper.CleanUrl(_queryBuilder);
@@ -114,12 +106,11 @@ namespace Square.Apis
         /// Retrieves a set of [Order](#type-order)s by their IDs.
         /// If a given Order ID does not exist, the ID is ignored instead of generating an error.
         /// </summary>
-        /// <param name="locationId">Required parameter: The ID of the orders' associated location.</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.BatchRetrieveOrdersResponse response from the API call</return>
-        public Models.BatchRetrieveOrdersResponse BatchRetrieveOrders(string locationId, Models.BatchRetrieveOrdersRequest body)
+        public Models.BatchRetrieveOrdersResponse BatchRetrieveOrders(Models.BatchRetrieveOrdersRequest body)
         {
-            Task<Models.BatchRetrieveOrdersResponse> t = BatchRetrieveOrdersAsync(locationId, body);
+            Task<Models.BatchRetrieveOrdersResponse> t = BatchRetrieveOrdersAsync(body);
             ApiHelper.RunTaskSynchronously(t);
             return t.Result;
         }
@@ -128,23 +119,16 @@ namespace Square.Apis
         /// Retrieves a set of [Order](#type-order)s by their IDs.
         /// If a given Order ID does not exist, the ID is ignored instead of generating an error.
         /// </summary>
-        /// <param name="locationId">Required parameter: The ID of the orders' associated location.</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.BatchRetrieveOrdersResponse response from the API call</return>
-        public async Task<Models.BatchRetrieveOrdersResponse> BatchRetrieveOrdersAsync(string locationId, Models.BatchRetrieveOrdersRequest body, CancellationToken cancellationToken = default)
+        public async Task<Models.BatchRetrieveOrdersResponse> BatchRetrieveOrdersAsync(Models.BatchRetrieveOrdersRequest body, CancellationToken cancellationToken = default)
         {
             //the base uri for api requests
             string _baseUri = config.GetBaseUri();
 
             //prepare query string for API call
             StringBuilder _queryBuilder = new StringBuilder(_baseUri);
-            _queryBuilder.Append("/v2/locations/{location_id}/orders/batch-retrieve");
-
-            //process optional template parameters
-            ApiHelper.AppendUrlWithTemplateParameters(_queryBuilder, new Dictionary<string, object>()
-            {
-                { "location_id", locationId }
-            });
+            _queryBuilder.Append("/v2/orders/batch-retrieve");
 
             //validate and preprocess url
             string _queryUrl = ApiHelper.CleanUrl(_queryBuilder);
@@ -182,107 +166,6 @@ namespace Square.Apis
             base.ValidateResponse(_response, _context);
 
             var _responseModel = ApiHelper.JsonDeserialize<Models.BatchRetrieveOrdersResponse>(_response.Body);
-            _responseModel.Context = _context;
-            return _responseModel;
-        }
-
-        /// <summary>
-        /// Updates an open [Order](#type-order) by adding, replacing, or deleting
-        /// fields. Orders with a `COMPLETED` or `CANCELED` state cannot be updated.
-        /// An UpdateOrder request requires the following:
-        /// - The `order_id` in the endpoint path, identifying the order to update.
-        /// - The latest `version` of the order to update.
-        /// - The [sparse order](https://developer.squareup.com/docs/orders-api/manage-orders#sparse-order-objects)
-        /// containing only the fields to update and the version the update is
-        /// being applied to.
-        /// - If deleting fields, the [dot notation paths](https://developer.squareup.com/docs/orders-api/manage-orders#on-dot-notation)
-        /// identifying fields to clear.
-        /// To pay for an order, please refer to the [Pay for Orders](https://developer.squareup.com/docs/orders-api/pay-for-orders) guide.
-        /// To learn more about the Orders API, see the
-        /// [Orders API Overview](https://developer.squareup.com/docs/orders-api/what-it-does).
-        /// </summary>
-        /// <param name="locationId">Required parameter: The ID of the order's associated location.</param>
-        /// <param name="orderId">Required parameter: The ID of the order to update.</param>
-        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
-        /// <return>Returns the Models.UpdateOrderResponse response from the API call</return>
-        public Models.UpdateOrderResponse UpdateOrder(string locationId, string orderId, Models.UpdateOrderRequest body)
-        {
-            Task<Models.UpdateOrderResponse> t = UpdateOrderAsync(locationId, orderId, body);
-            ApiHelper.RunTaskSynchronously(t);
-            return t.Result;
-        }
-
-        /// <summary>
-        /// Updates an open [Order](#type-order) by adding, replacing, or deleting
-        /// fields. Orders with a `COMPLETED` or `CANCELED` state cannot be updated.
-        /// An UpdateOrder request requires the following:
-        /// - The `order_id` in the endpoint path, identifying the order to update.
-        /// - The latest `version` of the order to update.
-        /// - The [sparse order](https://developer.squareup.com/docs/orders-api/manage-orders#sparse-order-objects)
-        /// containing only the fields to update and the version the update is
-        /// being applied to.
-        /// - If deleting fields, the [dot notation paths](https://developer.squareup.com/docs/orders-api/manage-orders#on-dot-notation)
-        /// identifying fields to clear.
-        /// To pay for an order, please refer to the [Pay for Orders](https://developer.squareup.com/docs/orders-api/pay-for-orders) guide.
-        /// To learn more about the Orders API, see the
-        /// [Orders API Overview](https://developer.squareup.com/docs/orders-api/what-it-does).
-        /// </summary>
-        /// <param name="locationId">Required parameter: The ID of the order's associated location.</param>
-        /// <param name="orderId">Required parameter: The ID of the order to update.</param>
-        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
-        /// <return>Returns the Models.UpdateOrderResponse response from the API call</return>
-        public async Task<Models.UpdateOrderResponse> UpdateOrderAsync(string locationId, string orderId, Models.UpdateOrderRequest body, CancellationToken cancellationToken = default)
-        {
-            //the base uri for api requests
-            string _baseUri = config.GetBaseUri();
-
-            //prepare query string for API call
-            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
-            _queryBuilder.Append("/v2/locations/{location_id}/orders/{order_id}");
-
-            //process optional template parameters
-            ApiHelper.AppendUrlWithTemplateParameters(_queryBuilder, new Dictionary<string, object>()
-            {
-                { "location_id", locationId },
-                { "order_id", orderId }
-            });
-
-            //validate and preprocess url
-            string _queryUrl = ApiHelper.CleanUrl(_queryBuilder);
-
-            //append request with appropriate headers and parameters
-            var _headers = new Dictionary<string, string>()
-            { 
-                { "user-agent", userAgent },
-                { "accept", "application/json" },
-                { "content-type", "application/json; charset=utf-8" },
-                { "Square-Version", config.SquareVersion }
-            };
-
-            //append body params
-            var _body = ApiHelper.JsonSerialize(body);
-
-            //prepare the API call request to fetch the response
-            HttpRequest _request = GetClientInstance().PutBody(_queryUrl, _headers, _body);
-            if (HttpCallBack != null)
-            {
-                HttpCallBack.OnBeforeHttpRequestEventHandler(GetClientInstance(), _request);
-            }
-
-            _request = await authManagers["default"].ApplyAsync(_request).ConfigureAwait(false);
-
-            //invoke request and get response
-            HttpStringResponse _response = await GetClientInstance().ExecuteAsStringAsync(_request, cancellationToken).ConfigureAwait(false);
-            HttpContext _context = new HttpContext(_request, _response);
-            if (HttpCallBack != null)
-            {
-                HttpCallBack.OnAfterHttpResponseEventHandler(GetClientInstance(), _response);
-            }
-
-            //handle errors defined at the API level
-            base.ValidateResponse(_response, _context);
-
-            var _responseModel = ApiHelper.JsonDeserialize<Models.UpdateOrderResponse>(_response.Body);
             _responseModel.Context = _context;
             return _responseModel;
         }
@@ -441,6 +324,104 @@ namespace Square.Apis
             base.ValidateResponse(_response, _context);
 
             var _responseModel = ApiHelper.JsonDeserialize<Models.SearchOrdersResponse>(_response.Body);
+            _responseModel.Context = _context;
+            return _responseModel;
+        }
+
+        /// <summary>
+        /// Updates an open [Order](#type-order) by adding, replacing, or deleting
+        /// fields. Orders with a `COMPLETED` or `CANCELED` state cannot be updated.
+        /// An UpdateOrder request requires the following:
+        /// - The `order_id` in the endpoint path, identifying the order to update.
+        /// - The latest `version` of the order to update.
+        /// - The [sparse order](https://developer.squareup.com/docs/orders-api/manage-orders#sparse-order-objects)
+        /// containing only the fields to update and the version the update is
+        /// being applied to.
+        /// - If deleting fields, the [dot notation paths](https://developer.squareup.com/docs/orders-api/manage-orders#on-dot-notation)
+        /// identifying fields to clear.
+        /// To pay for an order, please refer to the [Pay for Orders](https://developer.squareup.com/docs/orders-api/pay-for-orders) guide.
+        /// To learn more about the Orders API, see the
+        /// [Orders API Overview](https://developer.squareup.com/docs/orders-api/what-it-does).
+        /// </summary>
+        /// <param name="orderId">Required parameter: The ID of the order to update.</param>
+        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
+        /// <return>Returns the Models.UpdateOrderResponse response from the API call</return>
+        public Models.UpdateOrderResponse UpdateOrder(string orderId, Models.UpdateOrderRequest body)
+        {
+            Task<Models.UpdateOrderResponse> t = UpdateOrderAsync(orderId, body);
+            ApiHelper.RunTaskSynchronously(t);
+            return t.Result;
+        }
+
+        /// <summary>
+        /// Updates an open [Order](#type-order) by adding, replacing, or deleting
+        /// fields. Orders with a `COMPLETED` or `CANCELED` state cannot be updated.
+        /// An UpdateOrder request requires the following:
+        /// - The `order_id` in the endpoint path, identifying the order to update.
+        /// - The latest `version` of the order to update.
+        /// - The [sparse order](https://developer.squareup.com/docs/orders-api/manage-orders#sparse-order-objects)
+        /// containing only the fields to update and the version the update is
+        /// being applied to.
+        /// - If deleting fields, the [dot notation paths](https://developer.squareup.com/docs/orders-api/manage-orders#on-dot-notation)
+        /// identifying fields to clear.
+        /// To pay for an order, please refer to the [Pay for Orders](https://developer.squareup.com/docs/orders-api/pay-for-orders) guide.
+        /// To learn more about the Orders API, see the
+        /// [Orders API Overview](https://developer.squareup.com/docs/orders-api/what-it-does).
+        /// </summary>
+        /// <param name="orderId">Required parameter: The ID of the order to update.</param>
+        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
+        /// <return>Returns the Models.UpdateOrderResponse response from the API call</return>
+        public async Task<Models.UpdateOrderResponse> UpdateOrderAsync(string orderId, Models.UpdateOrderRequest body, CancellationToken cancellationToken = default)
+        {
+            //the base uri for api requests
+            string _baseUri = config.GetBaseUri();
+
+            //prepare query string for API call
+            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
+            _queryBuilder.Append("/v2/orders/{order_id}");
+
+            //process optional template parameters
+            ApiHelper.AppendUrlWithTemplateParameters(_queryBuilder, new Dictionary<string, object>()
+            {
+                { "order_id", orderId }
+            });
+
+            //validate and preprocess url
+            string _queryUrl = ApiHelper.CleanUrl(_queryBuilder);
+
+            //append request with appropriate headers and parameters
+            var _headers = new Dictionary<string, string>()
+            { 
+                { "user-agent", userAgent },
+                { "accept", "application/json" },
+                { "content-type", "application/json; charset=utf-8" },
+                { "Square-Version", config.SquareVersion }
+            };
+
+            //append body params
+            var _body = ApiHelper.JsonSerialize(body);
+
+            //prepare the API call request to fetch the response
+            HttpRequest _request = GetClientInstance().PutBody(_queryUrl, _headers, _body);
+            if (HttpCallBack != null)
+            {
+                HttpCallBack.OnBeforeHttpRequestEventHandler(GetClientInstance(), _request);
+            }
+
+            _request = await authManagers["default"].ApplyAsync(_request).ConfigureAwait(false);
+
+            //invoke request and get response
+            HttpStringResponse _response = await GetClientInstance().ExecuteAsStringAsync(_request, cancellationToken).ConfigureAwait(false);
+            HttpContext _context = new HttpContext(_request, _response);
+            if (HttpCallBack != null)
+            {
+                HttpCallBack.OnAfterHttpResponseEventHandler(GetClientInstance(), _response);
+            }
+
+            //handle errors defined at the API level
+            base.ValidateResponse(_response, _context);
+
+            var _responseModel = ApiHelper.JsonDeserialize<Models.UpdateOrderResponse>(_response.Body);
             _responseModel.Context = _context;
             return _responseModel;
         }

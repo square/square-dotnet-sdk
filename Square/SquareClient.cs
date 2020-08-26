@@ -37,12 +37,11 @@ namespace Square
         private readonly Lazy<IInvoicesApi> invoices;
         private readonly Lazy<ILaborApi> labor;
         private readonly Lazy<ILocationsApi> locations;
-        private readonly Lazy<IReportingApi> reporting;
         private readonly Lazy<ICheckoutApi> checkout;
-        private readonly Lazy<IOrdersApi> orders;
         private readonly Lazy<ITransactionsApi> transactions;
         private readonly Lazy<ILoyaltyApi> loyalty;
         private readonly Lazy<IMerchantsApi> merchants;
+        private readonly Lazy<IOrdersApi> orders;
         private readonly Lazy<IPaymentsApi> payments;
         private readonly Lazy<IRefundsApi> refunds;
         private readonly Lazy<ISubscriptionsApi> subscriptions;
@@ -150,19 +149,9 @@ namespace Square
         public ILocationsApi LocationsApi => locations.Value;
 
         /// <summary>
-        /// Provides access to ReportingApi controller
-        /// </summary>
-        public IReportingApi ReportingApi => reporting.Value;
-
-        /// <summary>
         /// Provides access to CheckoutApi controller
         /// </summary>
         public ICheckoutApi CheckoutApi => checkout.Value;
-
-        /// <summary>
-        /// Provides access to OrdersApi controller
-        /// </summary>
-        public IOrdersApi OrdersApi => orders.Value;
 
         /// <summary>
         /// Provides access to TransactionsApi controller
@@ -178,6 +167,11 @@ namespace Square
         /// Provides access to MerchantsApi controller
         /// </summary>
         public IMerchantsApi MerchantsApi => merchants.Value;
+
+        /// <summary>
+        /// Provides access to OrdersApi controller
+        /// </summary>
+        public IOrdersApi OrdersApi => orders.Value;
 
         /// <summary>
         /// Provides access to PaymentsApi controller
@@ -212,7 +206,7 @@ namespace Square
         /// <summary>
         /// Current version of the SDK
         /// </summary>
-        public string SdkVersion => "6.2.0";
+        public string SdkVersion => "6.3.0";
 
         internal static SquareClient CreateFromEnvironment()
         {
@@ -302,18 +296,16 @@ namespace Square
                 () => new LaborApi(this, this.httpClient, authManagers, this.httpCallBack));
             locations = new Lazy<ILocationsApi>(
                 () => new LocationsApi(this, this.httpClient, authManagers, this.httpCallBack));
-            reporting = new Lazy<IReportingApi>(
-                () => new ReportingApi(this, this.httpClient, authManagers, this.httpCallBack));
             checkout = new Lazy<ICheckoutApi>(
                 () => new CheckoutApi(this, this.httpClient, authManagers, this.httpCallBack));
-            orders = new Lazy<IOrdersApi>(
-                () => new OrdersApi(this, this.httpClient, authManagers, this.httpCallBack));
             transactions = new Lazy<ITransactionsApi>(
                 () => new TransactionsApi(this, this.httpClient, authManagers, this.httpCallBack));
             loyalty = new Lazy<ILoyaltyApi>(
                 () => new LoyaltyApi(this, this.httpClient, authManagers, this.httpCallBack));
             merchants = new Lazy<IMerchantsApi>(
                 () => new MerchantsApi(this, this.httpClient, authManagers, this.httpCallBack));
+            orders = new Lazy<IOrdersApi>(
+                () => new OrdersApi(this, this.httpClient, authManagers, this.httpCallBack));
             payments = new Lazy<IPaymentsApi>(
                 () => new PaymentsApi(this, this.httpClient, authManagers, this.httpCallBack));
             refunds = new Lazy<IRefundsApi>(
@@ -417,7 +409,7 @@ namespace Square
         public class Builder
         {
             private TimeSpan timeout = TimeSpan.FromSeconds(60);
-            private string squareVersion = "2020-08-12";
+            private string squareVersion = "2020-08-26";
             private string accessToken = String.Empty;
             private Environment environment = Square.Environment.Production;
             private IHttpClient httpClient;

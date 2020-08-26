@@ -26,7 +26,7 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// Filter employees returned to only those that are associated with the specified location.
+        /// Getter for location_id
         /// </summary>
         [JsonProperty("location_id")]
         public string LocationId { get; }

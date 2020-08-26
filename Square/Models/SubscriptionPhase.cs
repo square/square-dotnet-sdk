@@ -28,7 +28,7 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// The Square-assigned ID of the subscription phase.
+        /// The Square-assigned ID of the subscription phase. This field cannot be changed after a `SubscriptionPhase` is created.
         /// </summary>
         [JsonProperty("uid")]
         public string Uid { get; }
@@ -40,7 +40,7 @@ namespace Square.Models
         public string Cadence { get; }
 
         /// <summary>
-        /// The number of `cadence`s the phase lasts. If not set, the phase never ends. Only the last phase can be indefinite.
+        /// The number of `cadence`s the phase lasts. If not set, the phase never ends. Only the last phase can be indefinite. This field cannot be changed after a `SubscriptionPhase` is created.
         /// </summary>
         [JsonProperty("periods")]
         public int? Periods { get; }
@@ -57,7 +57,7 @@ namespace Square.Models
         public Models.Money RecurringPriceMoney { get; }
 
         /// <summary>
-        /// The position this phase appears in the sequence of phases defined for the plan, indexed from 0.
+        /// The position this phase appears in the sequence of phases defined for the plan, indexed from 0. This field cannot be changed after a `SubscriptionPhase` is created.
         /// </summary>
         [JsonProperty("ordinal")]
         public long? Ordinal { get; }

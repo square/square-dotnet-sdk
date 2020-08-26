@@ -37,9 +37,11 @@ ListCustomerGroupsAsync(string cursor = null)
 ### Example Usage
 
 ```csharp
+string cursor = "cursor6";
+
 try
 {
-    ListCustomerGroupsResponse result = await customerGroupsApi.ListCustomerGroupsAsync(null);
+    ListCustomerGroupsResponse result = await customerGroupsApi.ListCustomerGroupsAsync(cursor);
 }
 catch (ApiException e){};
 ```
@@ -69,9 +71,13 @@ CreateCustomerGroupAsync(Models.CreateCustomerGroupRequest body)
 ```csharp
 var bodyGroup = new CustomerGroup.Builder(
         "Loyal Customers")
+    .Id("id4")
+    .CreatedAt("created_at2")
+    .UpdatedAt("updated_at0")
     .Build();
 var body = new CreateCustomerGroupRequest.Builder(
         bodyGroup)
+    .IdempotencyKey("idempotency_key2")
     .Build();
 
 try
@@ -166,6 +172,9 @@ UpdateCustomerGroupAsync(string groupId, Models.UpdateCustomerGroupRequest body)
 string groupId = "group_id0";
 var bodyGroup = new CustomerGroup.Builder(
         "Loyal Customers")
+    .Id("id4")
+    .CreatedAt("created_at2")
+    .UpdatedAt("updated_at0")
     .Build();
 var body = new UpdateCustomerGroupRequest.Builder(
         bodyGroup)

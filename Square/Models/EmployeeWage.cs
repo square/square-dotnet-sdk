@@ -14,8 +14,8 @@ namespace Square.Models
 {
     public class EmployeeWage 
     {
-        public EmployeeWage(string employeeId,
-            string id = null,
+        public EmployeeWage(string id = null,
+            string employeeId = null,
             string title = null,
             Models.Money hourlyRate = null)
         {
@@ -56,8 +56,9 @@ namespace Square.Models
 
         public Builder ToBuilder()
         {
-            var builder = new Builder(EmployeeId)
+            var builder = new Builder()
                 .Id(Id)
+                .EmployeeId(EmployeeId)
                 .Title(Title)
                 .HourlyRate(HourlyRate);
             return builder;
@@ -65,24 +66,21 @@ namespace Square.Models
 
         public class Builder
         {
-            private string employeeId;
             private string id;
+            private string employeeId;
             private string title;
             private Models.Money hourlyRate;
 
-            public Builder(string employeeId)
-            {
-                this.employeeId = employeeId;
-            }
-            public Builder EmployeeId(string value)
-            {
-                employeeId = value;
-                return this;
-            }
-
+            public Builder() { }
             public Builder Id(string value)
             {
                 id = value;
+                return this;
+            }
+
+            public Builder EmployeeId(string value)
+            {
+                employeeId = value;
                 return this;
             }
 
@@ -100,8 +98,8 @@ namespace Square.Models
 
             public EmployeeWage Build()
             {
-                return new EmployeeWage(employeeId,
-                    id,
+                return new EmployeeWage(id,
+                    employeeId,
                     title,
                     hourlyRate);
             }

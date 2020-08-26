@@ -46,10 +46,12 @@ ListInvoicesAsync(string locationId, string cursor = null, int? limit = null)
 
 ```csharp
 string locationId = "location_id4";
+string cursor = "cursor6";
+int? limit = 172;
 
 try
 {
-    ListInvoicesResponse result = await invoicesApi.ListInvoicesAsync(locationId, null, null);
+    ListInvoicesResponse result = await invoicesApi.ListInvoicesAsync(locationId, cursor, limit);
 }
 catch (ApiException e){};
 ```
@@ -80,29 +82,51 @@ CreateInvoiceAsync(Models.CreateInvoiceRequest body)
 ### Example Usage
 
 ```csharp
+var bodyInvoicePrimaryRecipientAddress = new Address.Builder()
+    .AddressLine1("address_line_10")
+    .AddressLine2("address_line_20")
+    .AddressLine3("address_line_36")
+    .Locality("locality0")
+    .Sublocality("sublocality0")
+    .Build();
 var bodyInvoicePrimaryRecipient = new InvoiceRecipient.Builder()
     .CustomerId("JDKYHBWT1D4F8MFH63DBMEN8Y4")
+    .GivenName("given_name6")
+    .FamilyName("family_name8")
+    .EmailAddress("email_address2")
+    .Address(bodyInvoicePrimaryRecipientAddress)
     .Build();
 var bodyInvoicePaymentRequests = new List<InvoicePaymentRequest>();
 
+var bodyInvoicePaymentRequests0FixedAmountRequestedMoney = new Money.Builder()
+    .Amount(52L)
+    .Currency("USS")
+    .Build();
 var bodyInvoicePaymentRequests0Reminders = new List<InvoicePaymentReminder>();
 
 var bodyInvoicePaymentRequests0Reminders0 = new InvoicePaymentReminder.Builder()
+    .Uid("uid2")
     .RelativeScheduledDays(-1)
     .Message("Your invoice is due tomorrow")
+    .Status("PENDING")
+    .SentAt("sent_at2")
     .Build();
 bodyInvoicePaymentRequests0Reminders.Add(bodyInvoicePaymentRequests0Reminders0);
 
 var bodyInvoicePaymentRequests0 = new InvoicePaymentRequest.Builder()
+    .Uid("uid4")
     .RequestMethod("EMAIL")
     .RequestType("BALANCE")
     .DueDate("2030-01-24")
+    .FixedAmountRequestedMoney(bodyInvoicePaymentRequests0FixedAmountRequestedMoney)
     .TippingEnabled(true)
     .Reminders(bodyInvoicePaymentRequests0Reminders)
     .Build();
 bodyInvoicePaymentRequests.Add(bodyInvoicePaymentRequests0);
 
 var bodyInvoice = new Invoice.Builder()
+    .Id("id0")
+    .Version(38)
     .LocationId("ES0RJRZYEC39A")
     .OrderId("CAISENgvlJ6jLWAzERDzjyHVybY")
     .PrimaryRecipient(bodyInvoicePrimaryRecipient)
@@ -170,6 +194,8 @@ var bodyQuery = new InvoiceQuery.Builder(
     .Build();
 var body = new SearchInvoicesRequest.Builder(
         bodyQuery)
+    .Limit(164)
+    .Cursor("cursor0")
     .Build();
 
 try
@@ -205,10 +231,11 @@ DeleteInvoiceAsync(string invoiceId, int? version = null)
 
 ```csharp
 string invoiceId = "invoice_id0";
+int? version = 172;
 
 try
 {
-    DeleteInvoiceResponse result = await invoicesApi.DeleteInvoiceAsync(invoiceId, null);
+    DeleteInvoiceResponse result = await invoicesApi.DeleteInvoiceAsync(invoiceId, version);
 }
 catch (ApiException e){};
 ```
@@ -270,15 +297,42 @@ UpdateInvoiceAsync(string invoiceId, Models.UpdateInvoiceRequest body)
 
 ```csharp
 string invoiceId = "invoice_id0";
+var bodyInvoicePrimaryRecipientAddress = new Address.Builder()
+    .AddressLine1("address_line_10")
+    .AddressLine2("address_line_20")
+    .AddressLine3("address_line_36")
+    .Locality("locality0")
+    .Sublocality("sublocality0")
+    .Build();
+var bodyInvoicePrimaryRecipient = new InvoiceRecipient.Builder()
+    .CustomerId("customer_id2")
+    .GivenName("given_name6")
+    .FamilyName("family_name8")
+    .EmailAddress("email_address2")
+    .Address(bodyInvoicePrimaryRecipientAddress)
+    .Build();
 var bodyInvoicePaymentRequests = new List<InvoicePaymentRequest>();
 
+var bodyInvoicePaymentRequests0FixedAmountRequestedMoney = new Money.Builder()
+    .Amount(52L)
+    .Currency("USS")
+    .Build();
 var bodyInvoicePaymentRequests0 = new InvoicePaymentRequest.Builder()
     .Uid("2da7964f-f3d2-4f43-81e8-5aa220bf3355")
+    .RequestMethod("EMAIL")
+    .RequestType("DEPOSIT")
+    .DueDate("due_date2")
+    .FixedAmountRequestedMoney(bodyInvoicePaymentRequests0FixedAmountRequestedMoney)
     .TippingEnabled(false)
     .Build();
 bodyInvoicePaymentRequests.Add(bodyInvoicePaymentRequests0);
 
 var bodyInvoice = new Invoice.Builder()
+    .Id("id0")
+    .Version(38)
+    .LocationId("location_id4")
+    .OrderId("order_id6")
+    .PrimaryRecipient(bodyInvoicePrimaryRecipient)
     .PaymentRequests(bodyInvoicePaymentRequests)
     .Build();
 var bodyFieldsToClear = new List<string>();

@@ -24,10 +24,9 @@ Creates a subscription for a customer to a subscription plan.
 If you provide a card on file in the request, Square charges the card for 
 the subscription. Otherwise, Square bills an invoice to the customer's email 
 address. The subscription starts immediately, unless the request includes 
-the optional `start_date`. Each individual subscription is associated with a particular location. 
+the optional `start_date`. Each individual subscription is associated with a particular location.
 
-For more information, 
-see [Subscription API Overview](https://developer.squareup.com/docs/docs/subscriptions-api/overview).
+Subscriptions Guide: [https://developer.squareup.com/docs/subscriptions-api/overview#create-subscriptions](https://developer.squareup.com/docs/subscriptions-api/overview#create-subscriptions)
 
 ```csharp
 CreateSubscriptionAsync(Models.CreateSubscriptionRequest body)
@@ -56,6 +55,7 @@ var body = new CreateSubscriptionRequest.Builder(
         "6JHXF3B2CW3YKHDV4XEM674H",
         "CHFGVKYY8RSV93M5KCYTG4PN0G")
     .StartDate("2020-08-01")
+    .CanceledDate("canceled_date0")
     .TaxPercentage("5")
     .PriceOverrideMoney(bodyPriceOverrideMoney)
     .CardId("ccof:qy5x8hHGYsgLrp4Q4GB")
@@ -88,6 +88,8 @@ customer by subscription creation date.
 For more information, see 
 [Retrieve subscriptions](https://developer.squareup.com/docs/docs/subscriptions-api/overview#retrieve-subscriptions).
 
+Subscriptions Guide: [https://developer.squareup.com/docs/subscriptions-api/overview#retrieve-subscriptions](https://developer.squareup.com/docs/subscriptions-api/overview#retrieve-subscriptions)
+
 ```csharp
 SearchSubscriptionsAsync(Models.SearchSubscriptionsRequest body)
 ```
@@ -117,6 +119,8 @@ var bodyQuery = new SearchSubscriptionsQuery.Builder()
     .Filter(bodyQueryFilter)
     .Build();
 var body = new SearchSubscriptionsRequest.Builder()
+    .Cursor("cursor0")
+    .Limit(164)
     .Query(bodyQuery)
     .Build();
 
@@ -130,6 +134,8 @@ catch (ApiException e){};
 ## Retrieve Subscription
 
 Retrieves a subscription.
+
+Subscriptions Guide: [https://developer.squareup.com/docs/subscriptions-api/overview#retrieve-subscriptions](https://developer.squareup.com/docs/subscriptions-api/overview#retrieve-subscriptions)
 
 ```csharp
 RetrieveSubscriptionAsync(string subscriptionId)
@@ -160,8 +166,9 @@ catch (ApiException e){};
 ## Update Subscription
 
 Updates a subscription. You can set, modify, and clear the 
-`subscription` field values. For more information and examples, see 
-[Update subscriptions](https://developer.squareup.com/docs/docs/subscriptions-api/overview#update-subscriptions).
+`subscription` field values.
+
+Subscriptions Guide: [https://developer.squareup.com/docs/subscriptions-api/overview#update-subscriptions](https://developer.squareup.com/docs/subscriptions-api/overview#update-subscriptions)
 
 ```csharp
 UpdateSubscriptionAsync(string subscriptionId, Models.UpdateSubscriptionRequest body)
@@ -187,6 +194,12 @@ var bodySubscriptionPriceOverrideMoney = new Money.Builder()
     .Currency("USD")
     .Build();
 var bodySubscription = new Subscription.Builder()
+    .Id("id8")
+    .LocationId("location_id2")
+    .PlanId("plan_id0")
+    .CustomerId("customer_id6")
+    .StartDate("start_date2")
+    .TaxPercentage("null")
     .PriceOverrideMoney(bodySubscriptionPriceOverrideMoney)
     .Version(1594155459464L)
     .Build();
@@ -203,11 +216,10 @@ catch (ApiException e){};
 
 ## Cancel Subscription
 
-Cancels a subscription immediately and sets the subscription
-`status` to `CANCELED`. You can also use the `UpdateSubscription`
-endpoint to cancel a subscription at a future date. For more
-information, see
-[CancelSubscriptions](https://developer.squareup.com/docs/docs/subscriptions-api/overview#cancel-subscriptions).
+Sets the `canceled_date` field to the end of the active billing period.
+After this date, the status changes from ACTIVE to CANCELED.
+
+Subscriptions Guide: [https://developer.squareup.com/docs/subscriptions-api/overview#cancel-subscriptions](https://developer.squareup.com/docs/subscriptions-api/overview#cancel-subscriptions)
 
 ```csharp
 CancelSubscriptionAsync(string subscriptionId)
@@ -240,6 +252,8 @@ catch (ApiException e){};
 Lists all events for a specific subscription.
 In the current implementation, only `START_SUBSCRIPTION` and `STOP_SUBSCRIPTION` (when the subscription was canceled) events are returned.
 
+Subscriptions Guide: [https://developer.squareup.com/docs/subscriptions-api/overview#subscription-events](https://developer.squareup.com/docs/subscriptions-api/overview#subscription-events)
+
 ```csharp
 ListSubscriptionEventsAsync(string subscriptionId, string cursor = null, int? limit = null)
 ```
@@ -260,10 +274,12 @@ ListSubscriptionEventsAsync(string subscriptionId, string cursor = null, int? li
 
 ```csharp
 string subscriptionId = "subscription_id0";
+string cursor = "cursor6";
+int? limit = 172;
 
 try
 {
-    ListSubscriptionEventsResponse result = await subscriptionsApi.ListSubscriptionEventsAsync(subscriptionId, null, null);
+    ListSubscriptionEventsResponse result = await subscriptionsApi.ListSubscriptionEventsAsync(subscriptionId, cursor, limit);
 }
 catch (ApiException e){};
 ```

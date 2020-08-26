@@ -28,7 +28,7 @@ namespace Square.Models
         public HttpContext Context { get; internal set; }
 
         /// <summary>
-        /// List of employees returned from the request.
+        /// Getter for employees
         /// </summary>
         [JsonProperty("employees")]
         public IList<Models.Employee> Employees { get; }

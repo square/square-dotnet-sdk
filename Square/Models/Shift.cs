@@ -14,9 +14,9 @@ namespace Square.Models
 {
     public class Shift 
     {
-        public Shift(string employeeId,
-            string startAt,
+        public Shift(string startAt,
             string id = null,
+            string employeeId = null,
             string locationId = null,
             string timezone = null,
             string endAt = null,
@@ -25,7 +25,8 @@ namespace Square.Models
             string status = null,
             int? version = null,
             string createdAt = null,
-            string updatedAt = null)
+            string updatedAt = null,
+            string teamMemberId = null)
         {
             Id = id;
             EmployeeId = employeeId;
@@ -39,6 +40,7 @@ namespace Square.Models
             Version = version;
             CreatedAt = createdAt;
             UpdatedAt = updatedAt;
+            TeamMemberId = teamMemberId;
         }
 
         /// <summary>
@@ -48,7 +50,7 @@ namespace Square.Models
         public string Id { get; }
 
         /// <summary>
-        /// The ID of the employee this shift belongs to.
+        /// The ID of the employee this shift belongs to. DEPRECATED at version 2020-08-26. Use `team_member_id` instead
         /// </summary>
         [JsonProperty("employee_id")]
         public string EmployeeId { get; }
@@ -77,9 +79,7 @@ namespace Square.Models
 
         /// <summary>
         /// RFC 3339; shifted to timezone + offset. Precision up to the minute is
-        /// respected; seconds are truncated. The `end_at` minute is not
-        /// counted when the shift length is calculated. For example, a shift from `00:00`
-        /// to `08:01` is considered an 8 hour shift (midnight to 8am).
+        /// respected; seconds are truncated.
         /// </summary>
         [JsonProperty("end_at")]
         public string EndAt { get; }
@@ -123,11 +123,17 @@ namespace Square.Models
         [JsonProperty("updated_at")]
         public string UpdatedAt { get; }
 
+        /// <summary>
+        /// The ID of the team member this shift belongs to. Replaced `employee_id` at version "2020-08-26"
+        /// </summary>
+        [JsonProperty("team_member_id")]
+        public string TeamMemberId { get; }
+
         public Builder ToBuilder()
         {
-            var builder = new Builder(EmployeeId,
-                StartAt)
+            var builder = new Builder(StartAt)
                 .Id(Id)
+                .EmployeeId(EmployeeId)
                 .LocationId(LocationId)
                 .Timezone(Timezone)
                 .EndAt(EndAt)
@@ -136,15 +142,16 @@ namespace Square.Models
                 .Status(Status)
                 .Version(Version)
                 .CreatedAt(CreatedAt)
-                .UpdatedAt(UpdatedAt);
+                .UpdatedAt(UpdatedAt)
+                .TeamMemberId(TeamMemberId);
             return builder;
         }
 
         public class Builder
         {
-            private string employeeId;
             private string startAt;
             private string id;
+            private string employeeId;
             private string locationId;
             private string timezone;
             private string endAt;
@@ -154,19 +161,12 @@ namespace Square.Models
             private int? version;
             private string createdAt;
             private string updatedAt;
+            private string teamMemberId;
 
-            public Builder(string employeeId,
-                string startAt)
+            public Builder(string startAt)
             {
-                this.employeeId = employeeId;
                 this.startAt = startAt;
             }
-            public Builder EmployeeId(string value)
-            {
-                employeeId = value;
-                return this;
-            }
-
             public Builder StartAt(string value)
             {
                 startAt = value;
@@ -176,6 +176,12 @@ namespace Square.Models
             public Builder Id(string value)
             {
                 id = value;
+                return this;
+            }
+
+            public Builder EmployeeId(string value)
+            {
+                employeeId = value;
                 return this;
             }
 
@@ -233,11 +239,17 @@ namespace Square.Models
                 return this;
             }
 
+            public Builder TeamMemberId(string value)
+            {
+                teamMemberId = value;
+                return this;
+            }
+
             public Shift Build()
             {
-                return new Shift(employeeId,
-                    startAt,
+                return new Shift(startAt,
                     id,
+                    employeeId,
                     locationId,
                     timezone,
                     endAt,
@@ -246,7 +258,8 @@ namespace Square.Models
                     status,
                     version,
                     createdAt,
-                    updatedAt);
+                    updatedAt,
+                    teamMemberId);
             }
         }
     }
