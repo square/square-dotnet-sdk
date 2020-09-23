@@ -15,9 +15,11 @@ namespace Square.Models
     public class DeviceDetails 
     {
         public DeviceDetails(string deviceId = null,
+            string deviceInstallationId = null,
             string deviceName = null)
         {
             DeviceId = deviceId;
+            DeviceInstallationId = deviceInstallationId;
             DeviceName = deviceName;
         }
 
@@ -26,6 +28,12 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("device_id")]
         public string DeviceId { get; }
+
+        /// <summary>
+        /// Square-issued installation ID for the device.
+        /// </summary>
+        [JsonProperty("device_installation_id")]
+        public string DeviceInstallationId { get; }
 
         /// <summary>
         /// The name of the device set by the merchant.
@@ -37,6 +45,7 @@ namespace Square.Models
         {
             var builder = new Builder()
                 .DeviceId(DeviceId)
+                .DeviceInstallationId(DeviceInstallationId)
                 .DeviceName(DeviceName);
             return builder;
         }
@@ -44,12 +53,19 @@ namespace Square.Models
         public class Builder
         {
             private string deviceId;
+            private string deviceInstallationId;
             private string deviceName;
 
             public Builder() { }
             public Builder DeviceId(string value)
             {
                 deviceId = value;
+                return this;
+            }
+
+            public Builder DeviceInstallationId(string value)
+            {
+                deviceInstallationId = value;
                 return this;
             }
 
@@ -62,6 +78,7 @@ namespace Square.Models
             public DeviceDetails Build()
             {
                 return new DeviceDetails(deviceId,
+                    deviceInstallationId,
                     deviceName);
             }
         }

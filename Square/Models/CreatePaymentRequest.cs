@@ -64,6 +64,8 @@ namespace Square.Models
         /// A unique string that identifies this CreatePayment request. Keys can be any valid string
         /// but must be unique for every CreatePayment request.
         /// Max: 45 characters
+        /// Note: The number of allowed characters might be less than the stated maximum, if multi-byte
+        /// characters are used.
         /// See [Idempotency keys](https://developer.squareup.com/docs/basics/api101/idempotency) for more information.
         /// </summary>
         [JsonProperty("idempotency_key")]

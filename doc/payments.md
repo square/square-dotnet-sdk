@@ -32,7 +32,8 @@ ListPaymentsAsync(
     string locationId = null,
     long? total = null,
     string last4 = null,
-    string cardBrand = null)
+    string cardBrand = null,
+    int? limit = null)
 ```
 
 ### Parameters
@@ -43,10 +44,11 @@ ListPaymentsAsync(
 | `endTime` | `string` | Query, Optional | Timestamp for the end of the requested reporting period, in RFC 3339 format.<br><br>Default: The current time. |
 | `sortOrder` | `string` | Query, Optional | The order in which results are listed.<br>- `ASC` - oldest to newest<br>- `DESC` - newest to oldest (default). |
 | `cursor` | `string` | Query, Optional | A pagination cursor returned by a previous call to this endpoint.<br>Provide this to retrieve the next set of results for the original query.<br><br>See [Pagination](https://developer.squareup.com/docs/basics/api101/pagination) for more information. |
-| `locationId` | `string` | Query, Optional | Limit results to the location supplied. By default, results are returned<br>for all locations associated with the merchant. |
+| `locationId` | `string` | Query, Optional | Limit results to the location supplied. By default, results are returned<br>for the default (main) location associated with the merchant. |
 | `total` | `long?` | Query, Optional | The exact amount in the total_money for a `Payment`. |
 | `last4` | `string` | Query, Optional | The last 4 digits of `Payment` card. |
 | `cardBrand` | `string` | Query, Optional | The brand of `Payment` card. For example, `VISA` |
+| `limit` | `int?` | Query, Optional | Maximum number of results to be returned in a single page.<br>It is possible to receive fewer results than the specified limit on a given page.<br><br>If the supplied value is greater than 100, at most 100 results will be returned.<br><br>Default: `100` |
 
 ### Response Type
 
@@ -63,10 +65,11 @@ string locationId = "location_id4";
 long? total = 10L;
 string last4 = "last_42";
 string cardBrand = "card_brand6";
+int? limit = 172;
 
 try
 {
-    ListPaymentsResponse result = await paymentsApi.ListPaymentsAsync(beginTime, endTime, sortOrder, cursor, locationId, total, last4, cardBrand);
+    ListPaymentsResponse result = await paymentsApi.ListPaymentsAsync(beginTime, endTime, sortOrder, cursor, locationId, total, last4, cardBrand, limit);
 }
 catch (ApiException e){};
 ```
@@ -81,11 +84,11 @@ amount to accept for the payment.
 There are several optional parameters that you can include in the request. 
 For example, tip money, whether to autocomplete the payment, or a reference ID
 to correlate this payment with another system. 
-For more information about these 
-payment options, see [Take Payments](https://developer.squareup.com/docs/payments-api/take-payments).
 
 The `PAYMENTS_WRITE_ADDITIONAL_RECIPIENTS` OAuth permission is required
 to enable application fees.
+
+Take Payments: [https://developer.squareup.com/docs/payments-api/take-payments](https://developer.squareup.com/docs/payments-api/take-payments)
 
 ```csharp
 CreatePaymentAsync(Models.CreatePaymentRequest body)
@@ -213,8 +216,9 @@ catch (ApiException e){};
 ## Cancel Payment
 
 Cancels (voids) a payment. If you set `autocomplete` to false when creating a payment, 
-you can cancel the payment using this endpoint. For more information, see 
-[Delayed Payments](https://developer.squareup.com/docs/payments-api/take-payments#delayed-payments).
+you can cancel the payment using this endpoint.
+
+Delayed capture: [https://developer.squareup.com/docs/payments-api/take-payments#delayed-payments](https://developer.squareup.com/docs/payments-api/take-payments#delayed-payments)
 
 ```csharp
 CancelPaymentAsync(string paymentId)
@@ -248,8 +252,9 @@ Completes (captures) a payment.
 
 By default, payments are set to complete immediately after they are created. 
 If you set autocomplete to false when creating a payment, you can complete (capture) 
-the payment using this endpoint. For more information, see
-[Delayed Payments](https://developer.squareup.com/docs/payments-api/take-payments#delayed-payments).
+the payment using this endpoint.
+
+Delayed capture: [https://developer.squareup.com/docs/payments-api/take-payments#delayed-payments](https://developer.squareup.com/docs/payments-api/take-payments#delayed-payments)
 
 ```csharp
 CompletePaymentAsync(string paymentId)

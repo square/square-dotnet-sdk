@@ -23,7 +23,7 @@ namespace Square.Apis
         /// <summary>
         /// User-Agent header value
         /// </summary>
-        internal string userAgent = "Square-DotNet-SDK/6.3.0";
+        internal string userAgent = "Square-DotNet-SDK/6.4.0";
         
         /// <summary>
         /// HttpClient instance

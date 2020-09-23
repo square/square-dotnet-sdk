@@ -175,7 +175,6 @@ namespace Square.Apis
         /// Square debits the disputed amount from the seller’s Square
         /// account. If the Square account balance does not have
         /// sufficient funds, Square debits the associated bank account.
-        /// For an overview of the Disputes API, see [Overview](https://developer.squareup.com/docs/docs/disputes-api/overview).
         /// </summary>
         /// <param name="disputeId">Required parameter: ID of the dispute you want to accept.</param>
         /// <return>Returns the Models.AcceptDisputeResponse response from the API call</return>
@@ -193,7 +192,6 @@ namespace Square.Apis
         /// Square debits the disputed amount from the seller’s Square
         /// account. If the Square account balance does not have
         /// sufficient funds, Square debits the associated bank account.
-        /// For an overview of the Disputes API, see [Overview](https://developer.squareup.com/docs/docs/disputes-api/overview).
         /// </summary>
         /// <param name="disputeId">Required parameter: ID of the dispute you want to accept.</param>
         /// <return>Returns the Models.AcceptDisputeResponse response from the API call</return>
@@ -474,7 +472,6 @@ namespace Square.Apis
         /// Uploads a file to use as evidence in a dispute challenge. The endpoint accepts
         /// HTTP multipart/form-data file uploads in HEIC, HEIF, JPEG, PDF, PNG,
         /// and TIFF formats.
-        /// For more information, see [Challenge a Dispute](https://developer.squareup.com/docs/docs/disputes-api/process-disputes#challenge-a-dispute).
         /// </summary>
         /// <param name="disputeId">Required parameter: ID of the dispute you want to upload evidence for.</param>
         /// <param name="request">Optional parameter: Defines parameters for a CreateDisputeEvidenceFile request.</param>
@@ -491,7 +488,6 @@ namespace Square.Apis
         /// Uploads a file to use as evidence in a dispute challenge. The endpoint accepts
         /// HTTP multipart/form-data file uploads in HEIC, HEIF, JPEG, PDF, PNG,
         /// and TIFF formats.
-        /// For more information, see [Challenge a Dispute](https://developer.squareup.com/docs/docs/disputes-api/process-disputes#challenge-a-dispute).
         /// </summary>
         /// <param name="disputeId">Required parameter: ID of the dispute you want to upload evidence for.</param>
         /// <param name="request">Optional parameter: Defines parameters for a CreateDisputeEvidenceFile request.</param>
@@ -569,8 +565,7 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Uploads text to use as evidence for a dispute challenge. For more information, see
-        /// [Challenge a Dispute](https://developer.squareup.com/docs/docs/disputes-api/process-disputes#challenge-a-dispute).
+        /// Uploads text to use as evidence for a dispute challenge.
         /// </summary>
         /// <param name="disputeId">Required parameter: The ID of the dispute you want to upload evidence for.</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
@@ -583,8 +578,7 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Uploads text to use as evidence for a dispute challenge. For more information, see
-        /// [Challenge a Dispute](https://developer.squareup.com/docs/docs/disputes-api/process-disputes#challenge-a-dispute).
+        /// Uploads text to use as evidence for a dispute challenge.
         /// </summary>
         /// <param name="disputeId">Required parameter: The ID of the dispute you want to upload evidence for.</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
@@ -651,8 +645,7 @@ namespace Square.Apis
         /// [CreateDisputeEvidenceFile](https://developer.squareup.com/docs/reference/square/disputes-api/create-dispute-evidence-file) and
         /// [CreateDisputeEvidenceText](https://developer.squareup.com/docs/reference/square/disputes-api/create-dispute-evidence-text) endpoints,
         /// and evidence automatically provided by Square, when
-        /// available. For more information, see
-        /// [Challenge a Dispute](https://developer.squareup.com/docs/docs/disputes-api/process-disputes#challenge-a-dispute).
+        /// available.
         /// </summary>
         /// <param name="disputeId">Required parameter: The ID of the dispute you want to submit evidence for.</param>
         /// <return>Returns the Models.SubmitEvidenceResponse response from the API call</return>
@@ -670,8 +663,7 @@ namespace Square.Apis
         /// [CreateDisputeEvidenceFile](https://developer.squareup.com/docs/reference/square/disputes-api/create-dispute-evidence-file) and
         /// [CreateDisputeEvidenceText](https://developer.squareup.com/docs/reference/square/disputes-api/create-dispute-evidence-text) endpoints,
         /// and evidence automatically provided by Square, when
-        /// available. For more information, see
-        /// [Challenge a Dispute](https://developer.squareup.com/docs/docs/disputes-api/process-disputes#challenge-a-dispute).
+        /// available.
         /// </summary>
         /// <param name="disputeId">Required parameter: The ID of the dispute you want to submit evidence for.</param>
         /// <return>Returns the Models.SubmitEvidenceResponse response from the API call</return>

@@ -35,6 +35,7 @@ namespace Square.Apis
         /// <param name="locationId">Optional parameter: Limit results to the location supplied. By default, results are returned for all locations associated with the merchant.</param>
         /// <param name="status">Optional parameter: If provided, only refunds with the given status are returned. For a list of refund status values, see [PaymentRefund](#type-paymentrefund).  Default: If omitted refunds are returned regardless of status.</param>
         /// <param name="sourceType">Optional parameter: If provided, only refunds with the given source type are returned. - `CARD` - List refunds only for payments where card was specified as payment source.  Default: If omitted refunds are returned regardless of source type.</param>
+        /// <param name="limit">Optional parameter: Maximum number of results to be returned in a single page. It is possible to receive fewer results than the specified limit on a given page.  If the supplied value is greater than 100, at most 100 results will be returned.  Default: `100`</param>
         /// <return>Returns the Models.ListPaymentRefundsResponse response from the API call</return>
         public Models.ListPaymentRefundsResponse ListPaymentRefunds(
                 string beginTime = null,
@@ -43,9 +44,10 @@ namespace Square.Apis
                 string cursor = null,
                 string locationId = null,
                 string status = null,
-                string sourceType = null)
+                string sourceType = null,
+                int? limit = null)
         {
-            Task<Models.ListPaymentRefundsResponse> t = ListPaymentRefundsAsync(beginTime, endTime, sortOrder, cursor, locationId, status, sourceType);
+            Task<Models.ListPaymentRefundsResponse> t = ListPaymentRefundsAsync(beginTime, endTime, sortOrder, cursor, locationId, status, sourceType, limit);
             ApiHelper.RunTaskSynchronously(t);
             return t.Result;
         }
@@ -61,6 +63,7 @@ namespace Square.Apis
         /// <param name="locationId">Optional parameter: Limit results to the location supplied. By default, results are returned for all locations associated with the merchant.</param>
         /// <param name="status">Optional parameter: If provided, only refunds with the given status are returned. For a list of refund status values, see [PaymentRefund](#type-paymentrefund).  Default: If omitted refunds are returned regardless of status.</param>
         /// <param name="sourceType">Optional parameter: If provided, only refunds with the given source type are returned. - `CARD` - List refunds only for payments where card was specified as payment source.  Default: If omitted refunds are returned regardless of source type.</param>
+        /// <param name="limit">Optional parameter: Maximum number of results to be returned in a single page. It is possible to receive fewer results than the specified limit on a given page.  If the supplied value is greater than 100, at most 100 results will be returned.  Default: `100`</param>
         /// <return>Returns the Models.ListPaymentRefundsResponse response from the API call</return>
         public async Task<Models.ListPaymentRefundsResponse> ListPaymentRefundsAsync(
                 string beginTime = null,
@@ -69,7 +72,8 @@ namespace Square.Apis
                 string cursor = null,
                 string locationId = null,
                 string status = null,
-                string sourceType = null, CancellationToken cancellationToken = default)
+                string sourceType = null,
+                int? limit = null, CancellationToken cancellationToken = default)
         {
             //the base uri for api requests
             string _baseUri = config.GetBaseUri();
@@ -87,7 +91,8 @@ namespace Square.Apis
                 { "cursor", cursor },
                 { "location_id", locationId },
                 { "status", status },
-                { "source_type", sourceType }
+                { "source_type", sourceType },
+                { "limit", limit }
             }, ArrayDeserializationFormat, ParameterSeparator);
 
             //validate and preprocess url
@@ -128,8 +133,7 @@ namespace Square.Apis
 
         /// <summary>
         /// Refunds a payment. You can refund the entire payment amount or a 
-        /// portion of it. For more information, see 
-        /// [Payments and Refunds Overview](https://developer.squareup.com/docs/payments-api/overview).
+        /// portion of it.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.RefundPaymentResponse response from the API call</return>
@@ -142,8 +146,7 @@ namespace Square.Apis
 
         /// <summary>
         /// Refunds a payment. You can refund the entire payment amount or a 
-        /// portion of it. For more information, see 
-        /// [Payments and Refunds Overview](https://developer.squareup.com/docs/payments-api/overview).
+        /// portion of it.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.RefundPaymentResponse response from the API call</return>

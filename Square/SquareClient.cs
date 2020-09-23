@@ -206,7 +206,7 @@ namespace Square
         /// <summary>
         /// Current version of the SDK
         /// </summary>
-        public string SdkVersion => "6.3.0";
+        public string SdkVersion => "6.4.0";
 
         internal static SquareClient CreateFromEnvironment()
         {
@@ -409,7 +409,7 @@ namespace Square
         public class Builder
         {
             private TimeSpan timeout = TimeSpan.FromSeconds(60);
-            private string squareVersion = "2020-08-26";
+            private string squareVersion = "2020-09-23";
             private string accessToken = String.Empty;
             private Environment environment = Square.Environment.Production;
             private IHttpClient httpClient;

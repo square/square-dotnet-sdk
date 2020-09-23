@@ -1,7 +1,7 @@
 language: csharp
-dist: trusty
+dist: xenial
 mono: none
-dotnet: 2.1.502
+dotnet: 3.1.301
 install:
 - wget -nc https://dist.nuget.org/win-x86-commandline/latest/nuget.exe;
 script:

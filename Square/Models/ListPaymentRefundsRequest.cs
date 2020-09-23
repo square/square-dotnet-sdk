@@ -20,7 +20,8 @@ namespace Square.Models
             string cursor = null,
             string locationId = null,
             string status = null,
-            string sourceType = null)
+            string sourceType = null,
+            int? limit = null)
         {
             BeginTime = beginTime;
             EndTime = endTime;
@@ -29,6 +30,7 @@ namespace Square.Models
             LocationId = locationId;
             Status = status;
             SourceType = sourceType;
+            Limit = limit;
         }
 
         /// <summary>
@@ -85,6 +87,15 @@ namespace Square.Models
         [JsonProperty("source_type")]
         public string SourceType { get; }
 
+        /// <summary>
+        /// Maximum number of results to be returned in a single page.
+        /// It is possible to receive fewer results than the specified limit on a given page.
+        /// If the supplied value is greater than 100, at most 100 results will be returned.
+        /// Default: `100`
+        /// </summary>
+        [JsonProperty("limit")]
+        public int? Limit { get; }
+
         public Builder ToBuilder()
         {
             var builder = new Builder()
@@ -94,7 +105,8 @@ namespace Square.Models
                 .Cursor(Cursor)
                 .LocationId(LocationId)
                 .Status(Status)
-                .SourceType(SourceType);
+                .SourceType(SourceType)
+                .Limit(Limit);
             return builder;
         }
 
@@ -107,6 +119,7 @@ namespace Square.Models
             private string locationId;
             private string status;
             private string sourceType;
+            private int? limit;
 
             public Builder() { }
             public Builder BeginTime(string value)
@@ -151,6 +164,12 @@ namespace Square.Models
                 return this;
             }
 
+            public Builder Limit(int? value)
+            {
+                limit = value;
+                return this;
+            }
+
             public ListPaymentRefundsRequest Build()
             {
                 return new ListPaymentRefundsRequest(beginTime,
@@ -159,7 +178,8 @@ namespace Square.Models
                     cursor,
                     locationId,
                     status,
-                    sourceType);
+                    sourceType,
+                    limit);
             }
         }
     }
