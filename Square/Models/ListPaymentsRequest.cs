@@ -21,7 +21,8 @@ namespace Square.Models
             string locationId = null,
             long? total = null,
             string last4 = null,
-            string cardBrand = null)
+            string cardBrand = null,
+            int? limit = null)
         {
             BeginTime = beginTime;
             EndTime = endTime;
@@ -31,6 +32,7 @@ namespace Square.Models
             Total = total;
             Last4 = last4;
             CardBrand = cardBrand;
+            Limit = limit;
         }
 
         /// <summary>
@@ -65,7 +67,7 @@ namespace Square.Models
 
         /// <summary>
         /// Limit results to the location supplied. By default, results are returned
-        /// for all locations associated with the merchant.
+        /// for the default (main) location associated with the merchant.
         /// </summary>
         [JsonProperty("location_id")]
         public string LocationId { get; }
@@ -88,6 +90,15 @@ namespace Square.Models
         [JsonProperty("card_brand")]
         public string CardBrand { get; }
 
+        /// <summary>
+        /// Maximum number of results to be returned in a single page.
+        /// It is possible to receive fewer results than the specified limit on a given page.
+        /// If the supplied value is greater than 100, at most 100 results will be returned.
+        /// Default: `100`
+        /// </summary>
+        [JsonProperty("limit")]
+        public int? Limit { get; }
+
         public Builder ToBuilder()
         {
             var builder = new Builder()
@@ -98,7 +109,8 @@ namespace Square.Models
                 .LocationId(LocationId)
                 .Total(Total)
                 .Last4(Last4)
-                .CardBrand(CardBrand);
+                .CardBrand(CardBrand)
+                .Limit(Limit);
             return builder;
         }
 
@@ -112,6 +124,7 @@ namespace Square.Models
             private long? total;
             private string last4;
             private string cardBrand;
+            private int? limit;
 
             public Builder() { }
             public Builder BeginTime(string value)
@@ -162,6 +175,12 @@ namespace Square.Models
                 return this;
             }
 
+            public Builder Limit(int? value)
+            {
+                limit = value;
+                return this;
+            }
+
             public ListPaymentsRequest Build()
             {
                 return new ListPaymentsRequest(beginTime,
@@ -171,7 +190,8 @@ namespace Square.Models
                     locationId,
                     total,
                     last4,
-                    cardBrand);
+                    cardBrand,
+                    limit);
             }
         }
     }

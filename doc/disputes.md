@@ -25,6 +25,8 @@ IDisputesApi disputesApi = client.DisputesApi;
 Returns a list of disputes associated
 with a particular account.
 
+Access dispute information: [https://developer.squareup.com/docs/disputes-api/process-disputes#access-dispute-information](https://developer.squareup.com/docs/disputes-api/process-disputes#access-dispute-information)
+
 ```csharp
 ListDisputesAsync(string cursor = null, string states = null, string locationId = null)
 ```
@@ -94,7 +96,8 @@ dispute state to ACCEPTED.
 Square debits the disputed amount from the seller’s Square
 account. If the Square account balance does not have
 sufficient funds, Square debits the associated bank account.
-For an overview of the Disputes API, see [Overview](https://developer.squareup.com/docs/docs/disputes-api/overview).
+
+Accept a dispute: [https://developer.squareup.com/docs/disputes-api/process-disputes#accept-a-dispute](https://developer.squareup.com/docs/disputes-api/process-disputes#accept-a-dispute)
 
 ```csharp
 AcceptDisputeAsync(string disputeId)
@@ -229,7 +232,8 @@ catch (ApiException e){};
 Uploads a file to use as evidence in a dispute challenge. The endpoint accepts
 HTTP multipart/form-data file uploads in HEIC, HEIF, JPEG, PDF, PNG,
 and TIFF formats.
-For more information, see [Challenge a Dispute](https://developer.squareup.com/docs/docs/disputes-api/process-disputes#challenge-a-dispute).
+
+Challenge a dispute: [https://developer.squareup.com/docs/disputes-api/process-disputes#challenge-a-dispute](https://developer.squareup.com/docs/disputes-api/process-disputes#challenge-a-dispute)
 
 ```csharp
 CreateDisputeEvidenceFileAsync(string disputeId, Models.CreateDisputeEvidenceFileRequest request = null, FileStreamInfo imageFile = null)
@@ -267,8 +271,9 @@ catch (ApiException e){};
 
 ## Create Dispute Evidence Text
 
-Uploads text to use as evidence for a dispute challenge. For more information, see
-[Challenge a Dispute](https://developer.squareup.com/docs/docs/disputes-api/process-disputes#challenge-a-dispute).
+Uploads text to use as evidence for a dispute challenge.
+
+Challenge a dispute: [https://developer.squareup.com/docs/disputes-api/process-disputes#challenge-a-dispute](https://developer.squareup.com/docs/disputes-api/process-disputes#challenge-a-dispute)
 
 ```csharp
 CreateDisputeEvidenceTextAsync(string disputeId, Models.CreateDisputeEvidenceTextRequest body)
@@ -311,8 +316,9 @@ evidence uploaded using the
 [CreateDisputeEvidenceFile](https://developer.squareup.com/docs/reference/square/disputes-api/create-dispute-evidence-file) and
 [CreateDisputeEvidenceText](https://developer.squareup.com/docs/reference/square/disputes-api/create-dispute-evidence-text) endpoints,
 and evidence automatically provided by Square, when
-available. For more information, see
-[Challenge a Dispute](https://developer.squareup.com/docs/docs/disputes-api/process-disputes#challenge-a-dispute).
+available.
+
+Challenge a dispute: [https://developer.squareup.com/docs/disputes-api/process-disputes#challenge-a-dispute](https://developer.squareup.com/docs/disputes-api/process-disputes#challenge-a-dispute)
 
 ```csharp
 SubmitEvidenceAsync(string disputeId)

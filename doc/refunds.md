@@ -28,7 +28,8 @@ ListPaymentRefundsAsync(
     string cursor = null,
     string locationId = null,
     string status = null,
-    string sourceType = null)
+    string sourceType = null,
+    int? limit = null)
 ```
 
 ### Parameters
@@ -42,6 +43,7 @@ ListPaymentRefundsAsync(
 | `locationId` | `string` | Query, Optional | Limit results to the location supplied. By default, results are returned<br>for all locations associated with the merchant. |
 | `status` | `string` | Query, Optional | If provided, only refunds with the given status are returned.<br>For a list of refund status values, see [PaymentRefund](#type-paymentrefund).<br><br>Default: If omitted refunds are returned regardless of status. |
 | `sourceType` | `string` | Query, Optional | If provided, only refunds with the given source type are returned.<br>- `CARD` - List refunds only for payments where card was specified as payment<br>source.<br><br>Default: If omitted refunds are returned regardless of source type. |
+| `limit` | `int?` | Query, Optional | Maximum number of results to be returned in a single page.<br>It is possible to receive fewer results than the specified limit on a given page.<br><br>If the supplied value is greater than 100, at most 100 results will be returned.<br><br>Default: `100` |
 
 ### Response Type
 
@@ -57,10 +59,11 @@ string cursor = "cursor6";
 string locationId = "location_id4";
 string status = "status8";
 string sourceType = "source_type0";
+int? limit = 172;
 
 try
 {
-    ListPaymentRefundsResponse result = await refundsApi.ListPaymentRefundsAsync(beginTime, endTime, sortOrder, cursor, locationId, status, sourceType);
+    ListPaymentRefundsResponse result = await refundsApi.ListPaymentRefundsAsync(beginTime, endTime, sortOrder, cursor, locationId, status, sourceType, limit);
 }
 catch (ApiException e){};
 ```
@@ -68,8 +71,9 @@ catch (ApiException e){};
 ## Refund Payment
 
 Refunds a payment. You can refund the entire payment amount or a 
-portion of it. For more information, see 
-[Payments and Refunds Overview](https://developer.squareup.com/docs/payments-api/overview).
+portion of it.
+
+Refund a payment: [https://developer.squareup.com/docs/payments-api/refund-payments#refund-a-payment](https://developer.squareup.com/docs/payments-api/refund-payments#refund-a-payment)
 
 ```csharp
 RefundPaymentAsync(Models.RefundPaymentRequest body)
@@ -114,6 +118,8 @@ catch (ApiException e){};
 ## Get Payment Refund
 
 Retrieves a specific `Refund` using the `refund_id`.
+
+Retrieve refund information: [https://developer.squareup.com/docs/payments-api/refund-payments#retrieve-refund-information](https://developer.squareup.com/docs/payments-api/refund-payments#retrieve-refund-information)
 
 ```csharp
 GetPaymentRefundAsync(string refundId)

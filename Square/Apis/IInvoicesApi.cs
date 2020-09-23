@@ -20,7 +20,6 @@ namespace Square.Apis
         /// Returns a list of invoices for a given location. The response 
         /// is paginated. If truncated, the response includes a `cursor` that you    
         /// use in a subsequent request to fetch the next set of invoices.
-        /// For more information about retrieving invoices, see [Retrieve invoices](https://developer.squareup.com/docs/docs/invoices-api/overview#retrieve-invoices).
         /// </summary>
         /// <param name="locationId">Required parameter: The ID of the location for which to list invoices.</param>
         /// <param name="cursor">Optional parameter: A pagination cursor returned by a previous call to this endpoint.  Provide this cursor to retrieve the next set of results for your original query.  For more information, see [Pagination](https://developer.squareup.com/docs/docs/working-with-apis/pagination).</param>
@@ -32,7 +31,6 @@ namespace Square.Apis
         /// Returns a list of invoices for a given location. The response 
         /// is paginated. If truncated, the response includes a `cursor` that you    
         /// use in a subsequent request to fetch the next set of invoices.
-        /// For more information about retrieving invoices, see [Retrieve invoices](https://developer.squareup.com/docs/docs/invoices-api/overview#retrieve-invoices).
         /// </summary>
         /// <param name="locationId">Required parameter: The ID of the location for which to list invoices.</param>
         /// <param name="cursor">Optional parameter: A pagination cursor returned by a previous call to this endpoint.  Provide this cursor to retrieve the next set of results for your original query.  For more information, see [Pagination](https://developer.squareup.com/docs/docs/working-with-apis/pagination).</param>
@@ -44,8 +42,7 @@ namespace Square.Apis
         /// Creates a draft [invoice](#type-invoice) 
         /// for an order created using the Orders API.
         /// A draft invoice remains in your account and no action is taken. 
-        /// You must publish the invoice before Square can process it (send it to the customer's email address or charge the customer’s card on file). 
-        /// For more information, see [Manage Invoices Using the Invoices API](https://developer.squareup.com/docs/docs/invoices-api/overview).
+        /// You must publish the invoice before Square can process it (send it to the customer's email address or charge the customer’s card on file).
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.CreateInvoiceResponse response from the API call</return>
@@ -55,8 +52,7 @@ namespace Square.Apis
         /// Creates a draft [invoice](#type-invoice) 
         /// for an order created using the Orders API.
         /// A draft invoice remains in your account and no action is taken. 
-        /// You must publish the invoice before Square can process it (send it to the customer's email address or charge the customer’s card on file). 
-        /// For more information, see [Manage Invoices Using the Invoices API](https://developer.squareup.com/docs/docs/invoices-api/overview).
+        /// You must publish the invoice before Square can process it (send it to the customer's email address or charge the customer’s card on file).
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.CreateInvoiceResponse response from the API call</return>
@@ -68,8 +64,7 @@ namespace Square.Apis
         /// retrieve invoices. In the current implementation, you can only specify one location and 
         /// optionally one customer.
         /// The response is paginated. If truncated, the response includes a `cursor` 
-        /// that you use in a subsequent request to fetch the next set of invoices. 
-        /// For more information about retrieving invoices, see [Retrieve invoices](https://developer.squareup.com/docs/docs/invoices-api/overview#retrieve-invoices).
+        /// that you use in a subsequent request to fetch the next set of invoices.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.SearchInvoicesResponse response from the API call</return>
@@ -81,8 +76,7 @@ namespace Square.Apis
         /// retrieve invoices. In the current implementation, you can only specify one location and 
         /// optionally one customer.
         /// The response is paginated. If truncated, the response includes a `cursor` 
-        /// that you use in a subsequent request to fetch the next set of invoices. 
-        /// For more information about retrieving invoices, see [Retrieve invoices](https://developer.squareup.com/docs/docs/invoices-api/overview#retrieve-invoices).
+        /// that you use in a subsequent request to fetch the next set of invoices.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.SearchInvoicesResponse response from the API call</return>
@@ -128,8 +122,7 @@ namespace Square.Apis
         /// Updates an invoice by modifying field values, clearing field values, or both 
         /// as specified in the request. 
         /// There are no restrictions to updating an invoice in a draft state. 
-        /// However, there are guidelines for updating a published invoice. 
-        /// For more information, see [Update an invoice](https://developer.squareup.com/docs/docs/invoices-api/overview#update-an-invoice).
+        /// However, there are guidelines for updating a published invoice.
         /// </summary>
         /// <param name="invoiceId">Required parameter: The id of the invoice to update.</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
@@ -140,8 +133,7 @@ namespace Square.Apis
         /// Updates an invoice by modifying field values, clearing field values, or both 
         /// as specified in the request. 
         /// There are no restrictions to updating an invoice in a draft state. 
-        /// However, there are guidelines for updating a published invoice. 
-        /// For more information, see [Update an invoice](https://developer.squareup.com/docs/docs/invoices-api/overview#update-an-invoice).
+        /// However, there are guidelines for updating a published invoice.
         /// </summary>
         /// <param name="invoiceId">Required parameter: The id of the invoice to update.</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
@@ -178,8 +170,6 @@ namespace Square.Apis
         /// based on the invoice configuration. For example, the status changes to `UNPAID` if 
         /// Square emails the invoice or `PARTIALLY_PAID` if Square charge a card on file for a portion of the 
         /// invoice amount).
-        /// For more information, see 
-        /// [Create and publish an invoice](https://developer.squareup.com/docs/docs/invoices-api/overview#create-and-publish-an-invoice).
         /// </summary>
         /// <param name="invoiceId">Required parameter: The id of the invoice to publish.</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
@@ -196,8 +186,6 @@ namespace Square.Apis
         /// based on the invoice configuration. For example, the status changes to `UNPAID` if 
         /// Square emails the invoice or `PARTIALLY_PAID` if Square charge a card on file for a portion of the 
         /// invoice amount).
-        /// For more information, see 
-        /// [Create and publish an invoice](https://developer.squareup.com/docs/docs/invoices-api/overview#create-and-publish-an-invoice).
         /// </summary>
         /// <param name="invoiceId">Required parameter: The id of the invoice to publish.</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>

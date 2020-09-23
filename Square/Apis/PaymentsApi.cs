@@ -32,10 +32,11 @@ namespace Square.Apis
         /// <param name="endTime">Optional parameter: Timestamp for the end of the requested reporting period, in RFC 3339 format.  Default: The current time.</param>
         /// <param name="sortOrder">Optional parameter: The order in which results are listed. - `ASC` - oldest to newest - `DESC` - newest to oldest (default).</param>
         /// <param name="cursor">Optional parameter: A pagination cursor returned by a previous call to this endpoint. Provide this to retrieve the next set of results for the original query.  See [Pagination](https://developer.squareup.com/docs/basics/api101/pagination) for more information.</param>
-        /// <param name="locationId">Optional parameter: Limit results to the location supplied. By default, results are returned for all locations associated with the merchant.</param>
+        /// <param name="locationId">Optional parameter: Limit results to the location supplied. By default, results are returned for the default (main) location associated with the merchant.</param>
         /// <param name="total">Optional parameter: The exact amount in the total_money for a `Payment`.</param>
         /// <param name="last4">Optional parameter: The last 4 digits of `Payment` card.</param>
         /// <param name="cardBrand">Optional parameter: The brand of `Payment` card. For example, `VISA`</param>
+        /// <param name="limit">Optional parameter: Maximum number of results to be returned in a single page. It is possible to receive fewer results than the specified limit on a given page.  If the supplied value is greater than 100, at most 100 results will be returned.  Default: `100`</param>
         /// <return>Returns the Models.ListPaymentsResponse response from the API call</return>
         public Models.ListPaymentsResponse ListPayments(
                 string beginTime = null,
@@ -45,9 +46,10 @@ namespace Square.Apis
                 string locationId = null,
                 long? total = null,
                 string last4 = null,
-                string cardBrand = null)
+                string cardBrand = null,
+                int? limit = null)
         {
-            Task<Models.ListPaymentsResponse> t = ListPaymentsAsync(beginTime, endTime, sortOrder, cursor, locationId, total, last4, cardBrand);
+            Task<Models.ListPaymentsResponse> t = ListPaymentsAsync(beginTime, endTime, sortOrder, cursor, locationId, total, last4, cardBrand, limit);
             ApiHelper.RunTaskSynchronously(t);
             return t.Result;
         }
@@ -60,10 +62,11 @@ namespace Square.Apis
         /// <param name="endTime">Optional parameter: Timestamp for the end of the requested reporting period, in RFC 3339 format.  Default: The current time.</param>
         /// <param name="sortOrder">Optional parameter: The order in which results are listed. - `ASC` - oldest to newest - `DESC` - newest to oldest (default).</param>
         /// <param name="cursor">Optional parameter: A pagination cursor returned by a previous call to this endpoint. Provide this to retrieve the next set of results for the original query.  See [Pagination](https://developer.squareup.com/docs/basics/api101/pagination) for more information.</param>
-        /// <param name="locationId">Optional parameter: Limit results to the location supplied. By default, results are returned for all locations associated with the merchant.</param>
+        /// <param name="locationId">Optional parameter: Limit results to the location supplied. By default, results are returned for the default (main) location associated with the merchant.</param>
         /// <param name="total">Optional parameter: The exact amount in the total_money for a `Payment`.</param>
         /// <param name="last4">Optional parameter: The last 4 digits of `Payment` card.</param>
         /// <param name="cardBrand">Optional parameter: The brand of `Payment` card. For example, `VISA`</param>
+        /// <param name="limit">Optional parameter: Maximum number of results to be returned in a single page. It is possible to receive fewer results than the specified limit on a given page.  If the supplied value is greater than 100, at most 100 results will be returned.  Default: `100`</param>
         /// <return>Returns the Models.ListPaymentsResponse response from the API call</return>
         public async Task<Models.ListPaymentsResponse> ListPaymentsAsync(
                 string beginTime = null,
@@ -73,7 +76,8 @@ namespace Square.Apis
                 string locationId = null,
                 long? total = null,
                 string last4 = null,
-                string cardBrand = null, CancellationToken cancellationToken = default)
+                string cardBrand = null,
+                int? limit = null, CancellationToken cancellationToken = default)
         {
             //the base uri for api requests
             string _baseUri = config.GetBaseUri();
@@ -92,7 +96,8 @@ namespace Square.Apis
                 { "location_id", locationId },
                 { "total", total },
                 { "last_4", last4 },
-                { "card_brand", cardBrand }
+                { "card_brand", cardBrand },
+                { "limit", limit }
             }, ArrayDeserializationFormat, ParameterSeparator);
 
             //validate and preprocess url
@@ -139,8 +144,6 @@ namespace Square.Apis
         /// There are several optional parameters that you can include in the request. 
         /// For example, tip money, whether to autocomplete the payment, or a reference ID
         /// to correlate this payment with another system. 
-        /// For more information about these 
-        /// payment options, see [Take Payments](https://developer.squareup.com/docs/payments-api/take-payments).
         /// The `PAYMENTS_WRITE_ADDITIONAL_RECIPIENTS` OAuth permission is required
         /// to enable application fees.
         /// </summary>
@@ -161,8 +164,6 @@ namespace Square.Apis
         /// There are several optional parameters that you can include in the request. 
         /// For example, tip money, whether to autocomplete the payment, or a reference ID
         /// to correlate this payment with another system. 
-        /// For more information about these 
-        /// payment options, see [Take Payments](https://developer.squareup.com/docs/payments-api/take-payments).
         /// The `PAYMENTS_WRITE_ADDITIONAL_RECIPIENTS` OAuth permission is required
         /// to enable application fees.
         /// </summary>
@@ -369,8 +370,7 @@ namespace Square.Apis
 
         /// <summary>
         /// Cancels (voids) a payment. If you set `autocomplete` to false when creating a payment, 
-        /// you can cancel the payment using this endpoint. For more information, see 
-        /// [Delayed Payments](https://developer.squareup.com/docs/payments-api/take-payments#delayed-payments).
+        /// you can cancel the payment using this endpoint.
         /// </summary>
         /// <param name="paymentId">Required parameter: `payment_id` identifying the payment to be canceled.</param>
         /// <return>Returns the Models.CancelPaymentResponse response from the API call</return>
@@ -383,8 +383,7 @@ namespace Square.Apis
 
         /// <summary>
         /// Cancels (voids) a payment. If you set `autocomplete` to false when creating a payment, 
-        /// you can cancel the payment using this endpoint. For more information, see 
-        /// [Delayed Payments](https://developer.squareup.com/docs/payments-api/take-payments#delayed-payments).
+        /// you can cancel the payment using this endpoint.
         /// </summary>
         /// <param name="paymentId">Required parameter: `payment_id` identifying the payment to be canceled.</param>
         /// <return>Returns the Models.CancelPaymentResponse response from the API call</return>
@@ -443,8 +442,7 @@ namespace Square.Apis
         /// Completes (captures) a payment.
         /// By default, payments are set to complete immediately after they are created. 
         /// If you set autocomplete to false when creating a payment, you can complete (capture) 
-        /// the payment using this endpoint. For more information, see
-        /// [Delayed Payments](https://developer.squareup.com/docs/payments-api/take-payments#delayed-payments).
+        /// the payment using this endpoint.
         /// </summary>
         /// <param name="paymentId">Required parameter: Unique ID identifying the payment to be completed.</param>
         /// <return>Returns the Models.CompletePaymentResponse response from the API call</return>
@@ -459,8 +457,7 @@ namespace Square.Apis
         /// Completes (captures) a payment.
         /// By default, payments are set to complete immediately after they are created. 
         /// If you set autocomplete to false when creating a payment, you can complete (capture) 
-        /// the payment using this endpoint. For more information, see
-        /// [Delayed Payments](https://developer.squareup.com/docs/payments-api/take-payments#delayed-payments).
+        /// the payment using this endpoint.
         /// </summary>
         /// <param name="paymentId">Required parameter: Unique ID identifying the payment to be completed.</param>
         /// <return>Returns the Models.CompletePaymentResponse response from the API call</return>
