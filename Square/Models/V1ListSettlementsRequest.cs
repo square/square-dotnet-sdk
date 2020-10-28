@@ -32,38 +32,38 @@ namespace Square.Models
         /// <summary>
         /// The order (e.g., chronological or alphabetical) in which results from a request are returned.
         /// </summary>
-        [JsonProperty("order")]
+        [JsonProperty("order", NullValueHandling = NullValueHandling.Ignore)]
         public string Order { get; }
 
         /// <summary>
         /// The beginning of the requested reporting period, in ISO 8601 format. If this value is before January 1, 2013 (2013-01-01T00:00:00Z), this endpoint returns an error. Default value: The current time minus one year.
         /// </summary>
-        [JsonProperty("begin_time")]
+        [JsonProperty("begin_time", NullValueHandling = NullValueHandling.Ignore)]
         public string BeginTime { get; }
 
         /// <summary>
         /// The end of the requested reporting period, in ISO 8601 format. If this value is more than one year greater than begin_time, this endpoint returns an error. Default value: The current time.
         /// </summary>
-        [JsonProperty("end_time")]
+        [JsonProperty("end_time", NullValueHandling = NullValueHandling.Ignore)]
         public string EndTime { get; }
 
         /// <summary>
         /// The maximum number of settlements to return in a single response. This value cannot exceed 200.
         /// </summary>
-        [JsonProperty("limit")]
+        [JsonProperty("limit", NullValueHandling = NullValueHandling.Ignore)]
         public int? Limit { get; }
 
         /// <summary>
         /// Getter for status
         /// </summary>
-        [JsonProperty("status")]
+        [JsonProperty("status", NullValueHandling = NullValueHandling.Ignore)]
         public string Status { get; }
 
         /// <summary>
         /// A pagination cursor to retrieve the next set of results for your
         /// original query to the endpoint.
         /// </summary>
-        [JsonProperty("batch_token")]
+        [JsonProperty("batch_token", NullValueHandling = NullValueHandling.Ignore)]
         public string BatchToken { get; }
 
         public Builder ToBuilder()
@@ -87,40 +87,41 @@ namespace Square.Models
             private string status;
             private string batchToken;
 
-            public Builder() { }
-            public Builder Order(string value)
+
+
+            public Builder Order(string order)
             {
-                order = value;
+                this.order = order;
                 return this;
             }
 
-            public Builder BeginTime(string value)
+            public Builder BeginTime(string beginTime)
             {
-                beginTime = value;
+                this.beginTime = beginTime;
                 return this;
             }
 
-            public Builder EndTime(string value)
+            public Builder EndTime(string endTime)
             {
-                endTime = value;
+                this.endTime = endTime;
                 return this;
             }
 
-            public Builder Limit(int? value)
+            public Builder Limit(int? limit)
             {
-                limit = value;
+                this.limit = limit;
                 return this;
             }
 
-            public Builder Status(string value)
+            public Builder Status(string status)
             {
-                status = value;
+                this.status = status;
                 return this;
             }
 
-            public Builder BatchToken(string value)
+            public Builder BatchToken(string batchToken)
             {
-                batchToken = value;
+                this.batchToken = batchToken;
                 return this;
             }
 

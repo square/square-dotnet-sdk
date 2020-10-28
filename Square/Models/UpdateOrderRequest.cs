@@ -30,7 +30,7 @@ namespace Square.Models
         /// All Connect V2 Transactions have all been converted to Orders including all associated
         /// itemization data.
         /// </summary>
-        [JsonProperty("order")]
+        [JsonProperty("order", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Order Order { get; }
 
         /// <summary>
@@ -38,7 +38,7 @@ namespace Square.Models
         /// fields to clear. For example, `line_items[uid].note`
         /// [Read more about Deleting fields](https://developer.squareup.com/docs/orders-api/manage-orders#delete-fields).
         /// </summary>
-        [JsonProperty("fields_to_clear")]
+        [JsonProperty("fields_to_clear", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> FieldsToClear { get; }
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace Square.Models
         /// The latest order version will be returned.
         /// See [Idempotency](https://developer.squareup.com/docs/basics/api101/idempotency) for more information.
         /// </summary>
-        [JsonProperty("idempotency_key")]
+        [JsonProperty("idempotency_key", NullValueHandling = NullValueHandling.Ignore)]
         public string IdempotencyKey { get; }
 
         public Builder ToBuilder()
@@ -64,25 +64,26 @@ namespace Square.Models
         public class Builder
         {
             private Models.Order order;
-            private IList<string> fieldsToClear = new List<string>();
+            private IList<string> fieldsToClear;
             private string idempotencyKey;
 
-            public Builder() { }
-            public Builder Order(Models.Order value)
+
+
+            public Builder Order(Models.Order order)
             {
-                order = value;
+                this.order = order;
                 return this;
             }
 
-            public Builder FieldsToClear(IList<string> value)
+            public Builder FieldsToClear(IList<string> fieldsToClear)
             {
-                fieldsToClear = value;
+                this.fieldsToClear = fieldsToClear;
                 return this;
             }
 
-            public Builder IdempotencyKey(string value)
+            public Builder IdempotencyKey(string idempotencyKey)
             {
-                idempotencyKey = value;
+                this.idempotencyKey = idempotencyKey;
                 return this;
             }
 

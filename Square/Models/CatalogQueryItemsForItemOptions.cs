@@ -24,7 +24,7 @@ namespace Square.Models
         /// `CatalogItem`s. All Items that contain all of the given Item Options (in any order)
         /// will be returned.
         /// </summary>
-        [JsonProperty("item_option_ids")]
+        [JsonProperty("item_option_ids", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> ItemOptionIds { get; }
 
         public Builder ToBuilder()
@@ -36,12 +36,13 @@ namespace Square.Models
 
         public class Builder
         {
-            private IList<string> itemOptionIds = new List<string>();
+            private IList<string> itemOptionIds;
 
-            public Builder() { }
-            public Builder ItemOptionIds(IList<string> value)
+
+
+            public Builder ItemOptionIds(IList<string> itemOptionIds)
             {
-                itemOptionIds = value;
+                this.itemOptionIds = itemOptionIds;
                 return this;
             }
 

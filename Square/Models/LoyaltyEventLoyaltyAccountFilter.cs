@@ -39,9 +39,10 @@ namespace Square.Models
             {
                 this.loyaltyAccountId = loyaltyAccountId;
             }
-            public Builder LoyaltyAccountId(string value)
+
+            public Builder LoyaltyAccountId(string loyaltyAccountId)
             {
-                loyaltyAccountId = value;
+                this.loyaltyAccountId = loyaltyAccountId;
                 return this;
             }
 

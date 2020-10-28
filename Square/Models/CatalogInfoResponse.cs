@@ -28,21 +28,21 @@ namespace Square.Models
         public HttpContext Context { get; internal set; }
 
         /// <summary>
-        /// The set of errors encountered.
+        /// Any errors that occurred during the request.
         /// </summary>
-        [JsonProperty("errors")]
+        [JsonProperty("errors", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.Error> Errors { get; }
 
         /// <summary>
         /// Getter for limits
         /// </summary>
-        [JsonProperty("limits")]
+        [JsonProperty("limits", NullValueHandling = NullValueHandling.Ignore)]
         public Models.CatalogInfoResponseLimits Limits { get; }
 
         /// <summary>
         /// Group of standard measurement units.
         /// </summary>
-        [JsonProperty("standard_unit_description_group")]
+        [JsonProperty("standard_unit_description_group", NullValueHandling = NullValueHandling.Ignore)]
         public Models.StandardUnitDescriptionGroup StandardUnitDescriptionGroup { get; }
 
         public Builder ToBuilder()
@@ -56,26 +56,27 @@ namespace Square.Models
 
         public class Builder
         {
-            private IList<Models.Error> errors = new List<Models.Error>();
+            private IList<Models.Error> errors;
             private Models.CatalogInfoResponseLimits limits;
             private Models.StandardUnitDescriptionGroup standardUnitDescriptionGroup;
 
-            public Builder() { }
-            public Builder Errors(IList<Models.Error> value)
+
+
+            public Builder Errors(IList<Models.Error> errors)
             {
-                errors = value;
+                this.errors = errors;
                 return this;
             }
 
-            public Builder Limits(Models.CatalogInfoResponseLimits value)
+            public Builder Limits(Models.CatalogInfoResponseLimits limits)
             {
-                limits = value;
+                this.limits = limits;
                 return this;
             }
 
-            public Builder StandardUnitDescriptionGroup(Models.StandardUnitDescriptionGroup value)
+            public Builder StandardUnitDescriptionGroup(Models.StandardUnitDescriptionGroup standardUnitDescriptionGroup)
             {
-                standardUnitDescriptionGroup = value;
+                this.standardUnitDescriptionGroup = standardUnitDescriptionGroup;
                 return this;
             }
 

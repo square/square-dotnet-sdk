@@ -38,7 +38,7 @@ namespace Square.Models
         /// <summary>
         /// The Square-assigned ID of the loyalty account.
         /// </summary>
-        [JsonProperty("id")]
+        [JsonProperty("id", NullValueHandling = NullValueHandling.Ignore)]
         public string Id { get; }
 
         /// <summary>
@@ -56,39 +56,40 @@ namespace Square.Models
         public string ProgramId { get; }
 
         /// <summary>
-        /// The available point balance in the loyalty account.
+        /// The available point balance in the loyalty account.  
+        /// Your application should be able to handle loyalty accounts that have a negative point balance (`balance` is less than 0). This might occur if a seller makes a manual adjustment or as a result of a refund or exchange.
         /// </summary>
-        [JsonProperty("balance")]
+        [JsonProperty("balance", NullValueHandling = NullValueHandling.Ignore)]
         public int? Balance { get; }
 
         /// <summary>
         /// The total points accrued during the lifetime of the account.
         /// </summary>
-        [JsonProperty("lifetime_points")]
+        [JsonProperty("lifetime_points", NullValueHandling = NullValueHandling.Ignore)]
         public int? LifetimePoints { get; }
 
         /// <summary>
         /// The Square-assigned ID of the [customer](#type-Customer) that is associated with the account.
         /// </summary>
-        [JsonProperty("customer_id")]
+        [JsonProperty("customer_id", NullValueHandling = NullValueHandling.Ignore)]
         public string CustomerId { get; }
 
         /// <summary>
         /// The timestamp when enrollment occurred, in RFC 3339 format.
         /// </summary>
-        [JsonProperty("enrolled_at")]
+        [JsonProperty("enrolled_at", NullValueHandling = NullValueHandling.Ignore)]
         public string EnrolledAt { get; }
 
         /// <summary>
         /// The timestamp when the loyalty account was created, in RFC 3339 format.
         /// </summary>
-        [JsonProperty("created_at")]
+        [JsonProperty("created_at", NullValueHandling = NullValueHandling.Ignore)]
         public string CreatedAt { get; }
 
         /// <summary>
         /// The timestamp when the loyalty account was last updated, in RFC 3339 format.
         /// </summary>
-        [JsonProperty("updated_at")]
+        [JsonProperty("updated_at", NullValueHandling = NullValueHandling.Ignore)]
         public string UpdatedAt { get; }
 
         public Builder ToBuilder()
@@ -123,57 +124,58 @@ namespace Square.Models
                 this.mappings = mappings;
                 this.programId = programId;
             }
-            public Builder Mappings(IList<Models.LoyaltyAccountMapping> value)
+
+            public Builder Mappings(IList<Models.LoyaltyAccountMapping> mappings)
             {
-                mappings = value;
+                this.mappings = mappings;
                 return this;
             }
 
-            public Builder ProgramId(string value)
+            public Builder ProgramId(string programId)
             {
-                programId = value;
+                this.programId = programId;
                 return this;
             }
 
-            public Builder Id(string value)
+            public Builder Id(string id)
             {
-                id = value;
+                this.id = id;
                 return this;
             }
 
-            public Builder Balance(int? value)
+            public Builder Balance(int? balance)
             {
-                balance = value;
+                this.balance = balance;
                 return this;
             }
 
-            public Builder LifetimePoints(int? value)
+            public Builder LifetimePoints(int? lifetimePoints)
             {
-                lifetimePoints = value;
+                this.lifetimePoints = lifetimePoints;
                 return this;
             }
 
-            public Builder CustomerId(string value)
+            public Builder CustomerId(string customerId)
             {
-                customerId = value;
+                this.customerId = customerId;
                 return this;
             }
 
-            public Builder EnrolledAt(string value)
+            public Builder EnrolledAt(string enrolledAt)
             {
-                enrolledAt = value;
+                this.enrolledAt = enrolledAt;
                 return this;
             }
 
-            public Builder CreatedAt(string value)
+            public Builder CreatedAt(string createdAt)
             {
-                createdAt = value;
+                this.createdAt = createdAt;
                 return this;
             }
 
-            public Builder UpdatedAt(string value)
+            public Builder UpdatedAt(string updatedAt)
             {
-                updatedAt = value;
+                this.updatedAt = updatedAt;
                 return this;
             }
 

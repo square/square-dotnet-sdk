@@ -1,20 +1,21 @@
-## Business Hours Period
+
+# Business Hours Period
 
 Represents a period of time during which a business location is open.
 
-### Structure
+## Structure
 
 `BusinessHoursPeriod`
 
-### Fields
+## Fields
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `DayOfWeek` | [`string`](/doc/models/day-of-week.md) | Optional | Indicates the specific day  of the week. |
-| `StartLocalTime` | `string` | Optional | The start time of a business hours period, specified in local time using partial-time<br>RFC3339 format. |
-| `EndLocalTime` | `string` | Optional | The end time of a business hours period, specified in local time using partial-time<br>RFC3339 format. |
+| `StartLocalTime` | `string` | Optional | The start time of a business hours period, specified in local time using partial-time<br>RFC 3339 format. |
+| `EndLocalTime` | `string` | Optional | The end time of a business hours period, specified in local time using partial-time<br>RFC 3339 format. |
 
-### Example (as JSON)
+## Example (as JSON)
 
 ```json
 {

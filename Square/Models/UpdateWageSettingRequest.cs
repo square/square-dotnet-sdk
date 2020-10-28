@@ -39,9 +39,10 @@ namespace Square.Models
             {
                 this.wageSetting = wageSetting;
             }
-            public Builder WageSetting(Models.WageSetting value)
+
+            public Builder WageSetting(Models.WageSetting wageSetting)
             {
-                wageSetting = value;
+                this.wageSetting = wageSetting;
                 return this;
             }
 

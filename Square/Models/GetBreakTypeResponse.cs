@@ -29,13 +29,13 @@ namespace Square.Models
         /// A defined break template that sets an expectation for possible `Break`
         /// instances on a `Shift`.
         /// </summary>
-        [JsonProperty("break_type")]
+        [JsonProperty("break_type", NullValueHandling = NullValueHandling.Ignore)]
         public Models.BreakType BreakType { get; }
 
         /// <summary>
         /// Any errors that occurred during the request.
         /// </summary>
-        [JsonProperty("errors")]
+        [JsonProperty("errors", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.Error> Errors { get; }
 
         public Builder ToBuilder()
@@ -49,18 +49,19 @@ namespace Square.Models
         public class Builder
         {
             private Models.BreakType breakType;
-            private IList<Models.Error> errors = new List<Models.Error>();
+            private IList<Models.Error> errors;
 
-            public Builder() { }
-            public Builder BreakType(Models.BreakType value)
+
+
+            public Builder BreakType(Models.BreakType breakType)
             {
-                breakType = value;
+                this.breakType = breakType;
                 return this;
             }
 
-            public Builder Errors(IList<Models.Error> value)
+            public Builder Errors(IList<Models.Error> errors)
             {
-                errors = value;
+                this.errors = errors;
                 return this;
             }
 

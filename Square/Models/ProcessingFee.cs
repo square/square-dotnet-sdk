@@ -26,13 +26,13 @@ namespace Square.Models
         /// <summary>
         /// Timestamp of when the fee takes effect, in RFC 3339 format.
         /// </summary>
-        [JsonProperty("effective_at")]
+        [JsonProperty("effective_at", NullValueHandling = NullValueHandling.Ignore)]
         public string EffectiveAt { get; }
 
         /// <summary>
         /// The type of fee assessed or adjusted. Can be one of: `INITIAL`, `ADJUSTMENT`.
         /// </summary>
-        [JsonProperty("type")]
+        [JsonProperty("type", NullValueHandling = NullValueHandling.Ignore)]
         public string Type { get; }
 
         /// <summary>
@@ -43,7 +43,7 @@ namespace Square.Models
         /// [Working with Monetary Amounts](https://developer.squareup.com/docs/build-basics/working-with-monetary-amounts)
         /// for more information.
         /// </summary>
-        [JsonProperty("amount_money")]
+        [JsonProperty("amount_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Money AmountMoney { get; }
 
         public Builder ToBuilder()
@@ -61,22 +61,23 @@ namespace Square.Models
             private string type;
             private Models.Money amountMoney;
 
-            public Builder() { }
-            public Builder EffectiveAt(string value)
+
+
+            public Builder EffectiveAt(string effectiveAt)
             {
-                effectiveAt = value;
+                this.effectiveAt = effectiveAt;
                 return this;
             }
 
-            public Builder Type(string value)
+            public Builder Type(string type)
             {
-                type = value;
+                this.type = type;
                 return this;
             }
 
-            public Builder AmountMoney(Models.Money value)
+            public Builder AmountMoney(Models.Money amountMoney)
             {
-                amountMoney = value;
+                this.amountMoney = amountMoney;
                 return this;
             }
 

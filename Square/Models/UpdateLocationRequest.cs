@@ -22,7 +22,7 @@ namespace Square.Models
         /// <summary>
         /// Getter for location
         /// </summary>
-        [JsonProperty("location")]
+        [JsonProperty("location", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Location Location { get; }
 
         public Builder ToBuilder()
@@ -36,10 +36,11 @@ namespace Square.Models
         {
             private Models.Location location;
 
-            public Builder() { }
-            public Builder Location(Models.Location value)
+
+
+            public Builder Location(Models.Location location)
             {
-                location = value;
+                this.location = location;
                 return this;
             }
 

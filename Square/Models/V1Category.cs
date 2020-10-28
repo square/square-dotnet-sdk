@@ -30,19 +30,19 @@ namespace Square.Models
         /// <summary>
         /// The category's unique ID.
         /// </summary>
-        [JsonProperty("id")]
+        [JsonProperty("id", NullValueHandling = NullValueHandling.Ignore)]
         public string Id { get; }
 
         /// <summary>
         /// The category's name.
         /// </summary>
-        [JsonProperty("name")]
+        [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
         public string Name { get; }
 
         /// <summary>
         /// The ID of the CatalogObject in the Connect v2 API. Objects that are shared across multiple locations share the same v2 ID.
         /// </summary>
-        [JsonProperty("v2_id")]
+        [JsonProperty("v2_id", NullValueHandling = NullValueHandling.Ignore)]
         public string V2Id { get; }
 
         public Builder ToBuilder()
@@ -60,22 +60,23 @@ namespace Square.Models
             private string name;
             private string v2Id;
 
-            public Builder() { }
-            public Builder Id(string value)
+
+
+            public Builder Id(string id)
             {
-                id = value;
+                this.id = id;
                 return this;
             }
 
-            public Builder Name(string value)
+            public Builder Name(string name)
             {
-                name = value;
+                this.name = name;
                 return this;
             }
 
-            public Builder V2Id(string value)
+            public Builder V2Id(string v2Id)
             {
-                v2Id = value;
+                this.v2Id = v2Id;
                 return this;
             }
 

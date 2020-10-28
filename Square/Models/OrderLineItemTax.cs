@@ -36,25 +36,25 @@ namespace Square.Models
         /// <summary>
         /// Unique ID that identifies the tax only within this order.
         /// </summary>
-        [JsonProperty("uid")]
+        [JsonProperty("uid", NullValueHandling = NullValueHandling.Ignore)]
         public string Uid { get; }
 
         /// <summary>
         /// The catalog object id referencing [CatalogTax](#type-catalogtax).
         /// </summary>
-        [JsonProperty("catalog_object_id")]
+        [JsonProperty("catalog_object_id", NullValueHandling = NullValueHandling.Ignore)]
         public string CatalogObjectId { get; }
 
         /// <summary>
         /// The tax's name.
         /// </summary>
-        [JsonProperty("name")]
+        [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
         public string Name { get; }
 
         /// <summary>
         /// Indicates how the tax is applied to the associated line item or order.
         /// </summary>
-        [JsonProperty("type")]
+        [JsonProperty("type", NullValueHandling = NullValueHandling.Ignore)]
         public string Type { get; }
 
         /// <summary>
@@ -62,7 +62,7 @@ namespace Square.Models
         /// number. For example, a value of `"7.25"` corresponds to a percentage of
         /// 7.25%.
         /// </summary>
-        [JsonProperty("percentage")]
+        [JsonProperty("percentage", NullValueHandling = NullValueHandling.Ignore)]
         public string Percentage { get; }
 
         /// <summary>
@@ -80,7 +80,7 @@ namespace Square.Models
         /// application.
         /// See [Metadata](https://developer.squareup.com/docs/build-basics/metadata) for more information.
         /// </summary>
-        [JsonProperty("metadata")]
+        [JsonProperty("metadata", NullValueHandling = NullValueHandling.Ignore)]
         public IDictionary<string, string> Metadata { get; }
 
         /// <summary>
@@ -91,13 +91,13 @@ namespace Square.Models
         /// [Working with Monetary Amounts](https://developer.squareup.com/docs/build-basics/working-with-monetary-amounts)
         /// for more information.
         /// </summary>
-        [JsonProperty("applied_money")]
+        [JsonProperty("applied_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Money AppliedMoney { get; }
 
         /// <summary>
         /// Indicates whether this is a line item or order level tax.
         /// </summary>
-        [JsonProperty("scope")]
+        [JsonProperty("scope", NullValueHandling = NullValueHandling.Ignore)]
         public string Scope { get; }
 
         public Builder ToBuilder()
@@ -121,56 +121,57 @@ namespace Square.Models
             private string name;
             private string type;
             private string percentage;
-            private IDictionary<string, string> metadata = new Dictionary<string, string>();
+            private IDictionary<string, string> metadata;
             private Models.Money appliedMoney;
             private string scope;
 
-            public Builder() { }
-            public Builder Uid(string value)
+
+
+            public Builder Uid(string uid)
             {
-                uid = value;
+                this.uid = uid;
                 return this;
             }
 
-            public Builder CatalogObjectId(string value)
+            public Builder CatalogObjectId(string catalogObjectId)
             {
-                catalogObjectId = value;
+                this.catalogObjectId = catalogObjectId;
                 return this;
             }
 
-            public Builder Name(string value)
+            public Builder Name(string name)
             {
-                name = value;
+                this.name = name;
                 return this;
             }
 
-            public Builder Type(string value)
+            public Builder Type(string type)
             {
-                type = value;
+                this.type = type;
                 return this;
             }
 
-            public Builder Percentage(string value)
+            public Builder Percentage(string percentage)
             {
-                percentage = value;
+                this.percentage = percentage;
                 return this;
             }
 
-            public Builder Metadata(IDictionary<string, string> value)
+            public Builder Metadata(IDictionary<string, string> metadata)
             {
-                metadata = value;
+                this.metadata = metadata;
                 return this;
             }
 
-            public Builder AppliedMoney(Models.Money value)
+            public Builder AppliedMoney(Models.Money appliedMoney)
             {
-                appliedMoney = value;
+                this.appliedMoney = appliedMoney;
                 return this;
             }
 
-            public Builder Scope(string value)
+            public Builder Scope(string scope)
             {
-                scope = value;
+                this.scope = scope;
                 return this;
             }
 

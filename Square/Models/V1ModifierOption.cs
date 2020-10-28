@@ -38,43 +38,43 @@ namespace Square.Models
         /// <summary>
         /// The modifier option's unique ID.
         /// </summary>
-        [JsonProperty("id")]
+        [JsonProperty("id", NullValueHandling = NullValueHandling.Ignore)]
         public string Id { get; }
 
         /// <summary>
         /// The modifier option's name.
         /// </summary>
-        [JsonProperty("name")]
+        [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
         public string Name { get; }
 
         /// <summary>
         /// Getter for price_money
         /// </summary>
-        [JsonProperty("price_money")]
+        [JsonProperty("price_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1Money PriceMoney { get; }
 
         /// <summary>
         /// If true, the modifier option is the default option in a modifier list for which selection_type is SINGLE.
         /// </summary>
-        [JsonProperty("on_by_default")]
+        [JsonProperty("on_by_default", NullValueHandling = NullValueHandling.Ignore)]
         public bool? OnByDefault { get; }
 
         /// <summary>
         /// Indicates the modifier option's list position when displayed in Square Point of Sale and the merchant dashboard. If more than one modifier option in the same modifier list has the same ordinal value, those options are displayed in alphabetical order.
         /// </summary>
-        [JsonProperty("ordinal")]
+        [JsonProperty("ordinal", NullValueHandling = NullValueHandling.Ignore)]
         public int? Ordinal { get; }
 
         /// <summary>
         /// The ID of the modifier list the option belongs to.
         /// </summary>
-        [JsonProperty("modifier_list_id")]
+        [JsonProperty("modifier_list_id", NullValueHandling = NullValueHandling.Ignore)]
         public string ModifierListId { get; }
 
         /// <summary>
         /// The ID of the CatalogObject in the Connect v2 API. Objects that are shared across multiple locations share the same v2 ID.
         /// </summary>
-        [JsonProperty("v2_id")]
+        [JsonProperty("v2_id", NullValueHandling = NullValueHandling.Ignore)]
         public string V2Id { get; }
 
         public Builder ToBuilder()
@@ -100,46 +100,47 @@ namespace Square.Models
             private string modifierListId;
             private string v2Id;
 
-            public Builder() { }
-            public Builder Id(string value)
+
+
+            public Builder Id(string id)
             {
-                id = value;
+                this.id = id;
                 return this;
             }
 
-            public Builder Name(string value)
+            public Builder Name(string name)
             {
-                name = value;
+                this.name = name;
                 return this;
             }
 
-            public Builder PriceMoney(Models.V1Money value)
+            public Builder PriceMoney(Models.V1Money priceMoney)
             {
-                priceMoney = value;
+                this.priceMoney = priceMoney;
                 return this;
             }
 
-            public Builder OnByDefault(bool? value)
+            public Builder OnByDefault(bool? onByDefault)
             {
-                onByDefault = value;
+                this.onByDefault = onByDefault;
                 return this;
             }
 
-            public Builder Ordinal(int? value)
+            public Builder Ordinal(int? ordinal)
             {
-                ordinal = value;
+                this.ordinal = ordinal;
                 return this;
             }
 
-            public Builder ModifierListId(string value)
+            public Builder ModifierListId(string modifierListId)
             {
-                modifierListId = value;
+                this.modifierListId = modifierListId;
                 return this;
             }
 
-            public Builder V2Id(string value)
+            public Builder V2Id(string v2Id)
             {
-                v2Id = value;
+                this.v2Id = v2Id;
                 return this;
             }
 

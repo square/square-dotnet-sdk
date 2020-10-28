@@ -30,31 +30,31 @@ namespace Square.Models
         /// <summary>
         /// Filter events by loyalty account.
         /// </summary>
-        [JsonProperty("loyalty_account_filter")]
+        [JsonProperty("loyalty_account_filter", NullValueHandling = NullValueHandling.Ignore)]
         public Models.LoyaltyEventLoyaltyAccountFilter LoyaltyAccountFilter { get; }
 
         /// <summary>
         /// Filter events by event type.
         /// </summary>
-        [JsonProperty("type_filter")]
+        [JsonProperty("type_filter", NullValueHandling = NullValueHandling.Ignore)]
         public Models.LoyaltyEventTypeFilter TypeFilter { get; }
 
         /// <summary>
         /// Filter events by date time range.
         /// </summary>
-        [JsonProperty("date_time_filter")]
+        [JsonProperty("date_time_filter", NullValueHandling = NullValueHandling.Ignore)]
         public Models.LoyaltyEventDateTimeFilter DateTimeFilter { get; }
 
         /// <summary>
         /// Filter events by location.
         /// </summary>
-        [JsonProperty("location_filter")]
+        [JsonProperty("location_filter", NullValueHandling = NullValueHandling.Ignore)]
         public Models.LoyaltyEventLocationFilter LocationFilter { get; }
 
         /// <summary>
         /// Filter events by the order associated with the event.
         /// </summary>
-        [JsonProperty("order_filter")]
+        [JsonProperty("order_filter", NullValueHandling = NullValueHandling.Ignore)]
         public Models.LoyaltyEventOrderFilter OrderFilter { get; }
 
         public Builder ToBuilder()
@@ -76,34 +76,35 @@ namespace Square.Models
             private Models.LoyaltyEventLocationFilter locationFilter;
             private Models.LoyaltyEventOrderFilter orderFilter;
 
-            public Builder() { }
-            public Builder LoyaltyAccountFilter(Models.LoyaltyEventLoyaltyAccountFilter value)
+
+
+            public Builder LoyaltyAccountFilter(Models.LoyaltyEventLoyaltyAccountFilter loyaltyAccountFilter)
             {
-                loyaltyAccountFilter = value;
+                this.loyaltyAccountFilter = loyaltyAccountFilter;
                 return this;
             }
 
-            public Builder TypeFilter(Models.LoyaltyEventTypeFilter value)
+            public Builder TypeFilter(Models.LoyaltyEventTypeFilter typeFilter)
             {
-                typeFilter = value;
+                this.typeFilter = typeFilter;
                 return this;
             }
 
-            public Builder DateTimeFilter(Models.LoyaltyEventDateTimeFilter value)
+            public Builder DateTimeFilter(Models.LoyaltyEventDateTimeFilter dateTimeFilter)
             {
-                dateTimeFilter = value;
+                this.dateTimeFilter = dateTimeFilter;
                 return this;
             }
 
-            public Builder LocationFilter(Models.LoyaltyEventLocationFilter value)
+            public Builder LocationFilter(Models.LoyaltyEventLocationFilter locationFilter)
             {
-                locationFilter = value;
+                this.locationFilter = locationFilter;
                 return this;
             }
 
-            public Builder OrderFilter(Models.LoyaltyEventOrderFilter value)
+            public Builder OrderFilter(Models.LoyaltyEventOrderFilter orderFilter)
             {
-                orderFilter = value;
+                this.orderFilter = orderFilter;
                 return this;
             }
 

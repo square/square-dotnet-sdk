@@ -22,7 +22,7 @@ namespace Square.Models
         /// <summary>
         /// The unique id of the item option, used to form the dimensions of the item option matrix in a specified order.
         /// </summary>
-        [JsonProperty("item_option_id")]
+        [JsonProperty("item_option_id", NullValueHandling = NullValueHandling.Ignore)]
         public string ItemOptionId { get; }
 
         public Builder ToBuilder()
@@ -36,10 +36,11 @@ namespace Square.Models
         {
             private string itemOptionId;
 
-            public Builder() { }
-            public Builder ItemOptionId(string value)
+
+
+            public Builder ItemOptionId(string itemOptionId)
             {
-                itemOptionId = value;
+                this.itemOptionId = itemOptionId;
                 return this;
             }
 

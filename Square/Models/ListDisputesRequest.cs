@@ -28,7 +28,7 @@ namespace Square.Models
         /// Provide this to retrieve the next set of results for the original query.
         /// For more information, see [Paginating](https://developer.squareup.com/docs/basics/api101/pagination).
         /// </summary>
-        [JsonProperty("cursor")]
+        [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
         public string Cursor { get; }
 
         /// <summary>
@@ -38,7 +38,7 @@ namespace Square.Models
         /// `INQUIRY_CLOSED`, `WON`, or `LOST`).
         /// See [DisputeState](#type-disputestate) for possible values
         /// </summary>
-        [JsonProperty("states")]
+        [JsonProperty("states", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> States { get; }
 
         /// <summary>
@@ -48,7 +48,7 @@ namespace Square.Models
         /// (dispute status is not `INQUIRY_CLOSED`, `WON`, or 
         /// `LOST`) associated with all locations.
         /// </summary>
-        [JsonProperty("location_id")]
+        [JsonProperty("location_id", NullValueHandling = NullValueHandling.Ignore)]
         public string LocationId { get; }
 
         public Builder ToBuilder()
@@ -63,25 +63,26 @@ namespace Square.Models
         public class Builder
         {
             private string cursor;
-            private IList<string> states = new List<string>();
+            private IList<string> states;
             private string locationId;
 
-            public Builder() { }
-            public Builder Cursor(string value)
+
+
+            public Builder Cursor(string cursor)
             {
-                cursor = value;
+                this.cursor = cursor;
                 return this;
             }
 
-            public Builder States(IList<string> value)
+            public Builder States(IList<string> states)
             {
-                states = value;
+                this.states = states;
                 return this;
             }
 
-            public Builder LocationId(string value)
+            public Builder LocationId(string locationId)
             {
-                locationId = value;
+                this.locationId = locationId;
                 return this;
             }
 

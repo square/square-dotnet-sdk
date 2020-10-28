@@ -32,25 +32,25 @@ namespace Square.Models
         /// <summary>
         /// The page's unique identifier.
         /// </summary>
-        [JsonProperty("id")]
+        [JsonProperty("id", NullValueHandling = NullValueHandling.Ignore)]
         public string Id { get; }
 
         /// <summary>
         /// The page's name, if any.
         /// </summary>
-        [JsonProperty("name")]
+        [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
         public string Name { get; }
 
         /// <summary>
         /// The page's position in the merchant's list of pages. Always an integer between 0 and 6, inclusive.
         /// </summary>
-        [JsonProperty("page_index")]
+        [JsonProperty("page_index", NullValueHandling = NullValueHandling.Ignore)]
         public int? PageIndex { get; }
 
         /// <summary>
         /// The cells included on the page.
         /// </summary>
-        [JsonProperty("cells")]
+        [JsonProperty("cells", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.V1PageCell> Cells { get; }
 
         public Builder ToBuilder()
@@ -68,30 +68,31 @@ namespace Square.Models
             private string id;
             private string name;
             private int? pageIndex;
-            private IList<Models.V1PageCell> cells = new List<Models.V1PageCell>();
+            private IList<Models.V1PageCell> cells;
 
-            public Builder() { }
-            public Builder Id(string value)
+
+
+            public Builder Id(string id)
             {
-                id = value;
+                this.id = id;
                 return this;
             }
 
-            public Builder Name(string value)
+            public Builder Name(string name)
             {
-                name = value;
+                this.name = name;
                 return this;
             }
 
-            public Builder PageIndex(int? value)
+            public Builder PageIndex(int? pageIndex)
             {
-                pageIndex = value;
+                this.pageIndex = pageIndex;
                 return this;
             }
 
-            public Builder Cells(IList<Models.V1PageCell> value)
+            public Builder Cells(IList<Models.V1PageCell> cells)
             {
-                cells = value;
+                this.cells = cells;
                 return this;
             }
 

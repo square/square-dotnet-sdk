@@ -26,7 +26,7 @@ namespace Square.Models
         /// or inches. Exactly one of the following fields are required: `custom_unit`,
         /// `area_unit`, `length_unit`, `volume_unit`, and `weight_unit`.
         /// </summary>
-        [JsonProperty("measurement_unit")]
+        [JsonProperty("measurement_unit", NullValueHandling = NullValueHandling.Ignore)]
         public Models.MeasurementUnit MeasurementUnit { get; }
 
         /// <summary>
@@ -38,7 +38,7 @@ namespace Square.Models
         /// - if the precision is 2, the quantity can be 0.01, 0.12, etc.
         /// Default: 3
         /// </summary>
-        [JsonProperty("precision")]
+        [JsonProperty("precision", NullValueHandling = NullValueHandling.Ignore)]
         public int? Precision { get; }
 
         public Builder ToBuilder()
@@ -54,16 +54,17 @@ namespace Square.Models
             private Models.MeasurementUnit measurementUnit;
             private int? precision;
 
-            public Builder() { }
-            public Builder MeasurementUnit(Models.MeasurementUnit value)
+
+
+            public Builder MeasurementUnit(Models.MeasurementUnit measurementUnit)
             {
-                measurementUnit = value;
+                this.measurementUnit = measurementUnit;
                 return this;
             }
 
-            public Builder Precision(int? value)
+            public Builder Precision(int? precision)
             {
-                precision = value;
+                this.precision = precision;
                 return this;
             }
 

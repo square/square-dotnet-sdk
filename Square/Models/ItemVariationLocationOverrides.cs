@@ -32,7 +32,7 @@ namespace Square.Models
         /// <summary>
         /// The ID of the `Location`.
         /// </summary>
-        [JsonProperty("location_id")]
+        [JsonProperty("location_id", NullValueHandling = NullValueHandling.Ignore)]
         public string LocationId { get; }
 
         /// <summary>
@@ -43,25 +43,25 @@ namespace Square.Models
         /// [Working with Monetary Amounts](https://developer.squareup.com/docs/build-basics/working-with-monetary-amounts)
         /// for more information.
         /// </summary>
-        [JsonProperty("price_money")]
+        [JsonProperty("price_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Money PriceMoney { get; }
 
         /// <summary>
         /// Indicates whether the price of a CatalogItemVariation should be entered manually at the time of sale.
         /// </summary>
-        [JsonProperty("pricing_type")]
+        [JsonProperty("pricing_type", NullValueHandling = NullValueHandling.Ignore)]
         public string PricingType { get; }
 
         /// <summary>
         /// If `true`, inventory tracking is active for the `CatalogItemVariation` at this `Location`.
         /// </summary>
-        [JsonProperty("track_inventory")]
+        [JsonProperty("track_inventory", NullValueHandling = NullValueHandling.Ignore)]
         public bool? TrackInventory { get; }
 
         /// <summary>
         /// Indicates whether Square should alert the merchant when the inventory quantity of a CatalogItemVariation is low.
         /// </summary>
-        [JsonProperty("inventory_alert_type")]
+        [JsonProperty("inventory_alert_type", NullValueHandling = NullValueHandling.Ignore)]
         public string InventoryAlertType { get; }
 
         /// <summary>
@@ -69,7 +69,7 @@ namespace Square.Models
         /// is `LOW_QUANTITY`, the variation displays an alert in the merchant dashboard.
         /// This value is always an integer.
         /// </summary>
-        [JsonProperty("inventory_alert_threshold")]
+        [JsonProperty("inventory_alert_threshold", NullValueHandling = NullValueHandling.Ignore)]
         public long? InventoryAlertThreshold { get; }
 
         public Builder ToBuilder()
@@ -93,40 +93,41 @@ namespace Square.Models
             private string inventoryAlertType;
             private long? inventoryAlertThreshold;
 
-            public Builder() { }
-            public Builder LocationId(string value)
+
+
+            public Builder LocationId(string locationId)
             {
-                locationId = value;
+                this.locationId = locationId;
                 return this;
             }
 
-            public Builder PriceMoney(Models.Money value)
+            public Builder PriceMoney(Models.Money priceMoney)
             {
-                priceMoney = value;
+                this.priceMoney = priceMoney;
                 return this;
             }
 
-            public Builder PricingType(string value)
+            public Builder PricingType(string pricingType)
             {
-                pricingType = value;
+                this.pricingType = pricingType;
                 return this;
             }
 
-            public Builder TrackInventory(bool? value)
+            public Builder TrackInventory(bool? trackInventory)
             {
-                trackInventory = value;
+                this.trackInventory = trackInventory;
                 return this;
             }
 
-            public Builder InventoryAlertType(string value)
+            public Builder InventoryAlertType(string inventoryAlertType)
             {
-                inventoryAlertType = value;
+                this.inventoryAlertType = inventoryAlertType;
                 return this;
             }
 
-            public Builder InventoryAlertThreshold(long? value)
+            public Builder InventoryAlertThreshold(long? inventoryAlertThreshold)
             {
-                inventoryAlertThreshold = value;
+                this.inventoryAlertThreshold = inventoryAlertThreshold;
                 return this;
             }
 

@@ -22,7 +22,7 @@ namespace Square.Models
         /// <summary>
         /// V1Fee
         /// </summary>
-        [JsonProperty("body")]
+        [JsonProperty("body", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1Fee Body { get; }
 
         public Builder ToBuilder()
@@ -36,10 +36,11 @@ namespace Square.Models
         {
             private Models.V1Fee body;
 
-            public Builder() { }
-            public Builder Body(Models.V1Fee value)
+
+
+            public Builder Body(Models.V1Fee body)
             {
-                body = value;
+                this.body = body;
                 return this;
             }
 

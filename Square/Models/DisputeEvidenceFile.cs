@@ -24,13 +24,13 @@ namespace Square.Models
         /// <summary>
         /// The file name including the file extension. For example: "receipt.tiff".
         /// </summary>
-        [JsonProperty("filename")]
+        [JsonProperty("filename", NullValueHandling = NullValueHandling.Ignore)]
         public string Filename { get; }
 
         /// <summary>
         /// Dispute evidence files must one of application/pdf, image/heic, image/heif, image/jpeg, image/png, image/tiff formats.
         /// </summary>
-        [JsonProperty("filetype")]
+        [JsonProperty("filetype", NullValueHandling = NullValueHandling.Ignore)]
         public string Filetype { get; }
 
         public Builder ToBuilder()
@@ -46,16 +46,17 @@ namespace Square.Models
             private string filename;
             private string filetype;
 
-            public Builder() { }
-            public Builder Filename(string value)
+
+
+            public Builder Filename(string filename)
             {
-                filename = value;
+                this.filename = filename;
                 return this;
             }
 
-            public Builder Filetype(string value)
+            public Builder Filetype(string filetype)
             {
-                filetype = value;
+                this.filetype = filetype;
                 return this;
             }
 

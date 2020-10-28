@@ -22,7 +22,7 @@ namespace Square.Models
         /// <summary>
         /// Getter for order_fulfillment_updated
         /// </summary>
-        [JsonProperty("order_fulfillment_updated")]
+        [JsonProperty("order_fulfillment_updated", NullValueHandling = NullValueHandling.Ignore)]
         public Models.OrderFulfillmentUpdated OrderFulfillmentUpdated { get; }
 
         public Builder ToBuilder()
@@ -36,10 +36,11 @@ namespace Square.Models
         {
             private Models.OrderFulfillmentUpdated orderFulfillmentUpdated;
 
-            public Builder() { }
-            public Builder OrderFulfillmentUpdated(Models.OrderFulfillmentUpdated value)
+
+
+            public Builder OrderFulfillmentUpdated(Models.OrderFulfillmentUpdated orderFulfillmentUpdated)
             {
-                orderFulfillmentUpdated = value;
+                this.orderFulfillmentUpdated = orderFulfillmentUpdated;
                 return this;
             }
 

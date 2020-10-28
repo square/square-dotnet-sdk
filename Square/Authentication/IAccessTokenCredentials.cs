@@ -5,10 +5,13 @@ namespace Square.Authentication
     public interface IAccessTokenCredentials
     {
         /// <summary>
-        /// This returns the access token currently stored
+        /// Getter for accessToken
         /// </summary>
-        /// <param></param>
-        /// <return> Returns AccessToken </return>
         string AccessToken { get; }
+
+        /// <summary>
+        ///  Returns true if credentials matched.
+        /// </summary>
+        bool Equals(string accessToken);
     }
 }

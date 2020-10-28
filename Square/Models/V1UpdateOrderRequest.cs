@@ -36,25 +36,25 @@ namespace Square.Models
         /// <summary>
         /// The tracking number of the shipment associated with the order. Only valid if action is COMPLETE.
         /// </summary>
-        [JsonProperty("shipped_tracking_number")]
+        [JsonProperty("shipped_tracking_number", NullValueHandling = NullValueHandling.Ignore)]
         public string ShippedTrackingNumber { get; }
 
         /// <summary>
         /// A merchant-specified note about the completion of the order. Only valid if action is COMPLETE.
         /// </summary>
-        [JsonProperty("completed_note")]
+        [JsonProperty("completed_note", NullValueHandling = NullValueHandling.Ignore)]
         public string CompletedNote { get; }
 
         /// <summary>
         /// A merchant-specified note about the refunding of the order. Only valid if action is REFUND.
         /// </summary>
-        [JsonProperty("refunded_note")]
+        [JsonProperty("refunded_note", NullValueHandling = NullValueHandling.Ignore)]
         public string RefundedNote { get; }
 
         /// <summary>
         /// A merchant-specified note about the canceling of the order. Only valid if action is CANCEL.
         /// </summary>
-        [JsonProperty("canceled_note")]
+        [JsonProperty("canceled_note", NullValueHandling = NullValueHandling.Ignore)]
         public string CanceledNote { get; }
 
         public Builder ToBuilder()
@@ -79,33 +79,34 @@ namespace Square.Models
             {
                 this.action = action;
             }
-            public Builder Action(string value)
+
+            public Builder Action(string action)
             {
-                action = value;
+                this.action = action;
                 return this;
             }
 
-            public Builder ShippedTrackingNumber(string value)
+            public Builder ShippedTrackingNumber(string shippedTrackingNumber)
             {
-                shippedTrackingNumber = value;
+                this.shippedTrackingNumber = shippedTrackingNumber;
                 return this;
             }
 
-            public Builder CompletedNote(string value)
+            public Builder CompletedNote(string completedNote)
             {
-                completedNote = value;
+                this.completedNote = completedNote;
                 return this;
             }
 
-            public Builder RefundedNote(string value)
+            public Builder RefundedNote(string refundedNote)
             {
-                refundedNote = value;
+                this.refundedNote = refundedNote;
                 return this;
             }
 
-            public Builder CanceledNote(string value)
+            public Builder CanceledNote(string canceledNote)
             {
-                canceledNote = value;
+                this.canceledNote = canceledNote;
                 return this;
             }
 

@@ -14,11 +14,10 @@ using Square.Http.Request;
 using Square.Http.Response;
 using Square.Http.Client;
 using Square.Authentication;
-using Square.Exceptions;
 
 namespace Square.Apis
 {
-    internal class MobileAuthorizationApi: BaseApi, IMobileAuthorizationApi
+    internal class MobileAuthorizationApi : BaseApi, IMobileAuthorizationApi
     {
         internal MobileAuthorizationApi(IConfiguration config, IHttpClient httpClient, IDictionary<string, IAuthManager> authManagers, HttpCallBack httpCallBack = null) :
             base(config, httpClient, authManagers, httpCallBack)
@@ -64,12 +63,9 @@ namespace Square.Apis
             StringBuilder _queryBuilder = new StringBuilder(_baseUri);
             _queryBuilder.Append("/mobile/authorization-code");
 
-            //validate and preprocess url
-            string _queryUrl = ApiHelper.CleanUrl(_queryBuilder);
-
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string, string>()
-            { 
+            {
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
@@ -80,13 +76,13 @@ namespace Square.Apis
             var _body = ApiHelper.JsonSerialize(body);
 
             //prepare the API call request to fetch the response
-            HttpRequest _request = GetClientInstance().PostBody(_queryUrl, _headers, _body);
+            HttpRequest _request = GetClientInstance().PostBody(_queryBuilder.ToString(), _headers, _body);
             if (HttpCallBack != null)
             {
                 HttpCallBack.OnBeforeHttpRequestEventHandler(GetClientInstance(), _request);
             }
 
-            _request = await authManagers["default"].ApplyAsync(_request).ConfigureAwait(false);
+            _request = await authManagers["global"].ApplyAsync(_request).ConfigureAwait(false);
 
             //invoke request and get response
             HttpStringResponse _response = await GetClientInstance().ExecuteAsStringAsync(_request, cancellationToken).ConfigureAwait(false);

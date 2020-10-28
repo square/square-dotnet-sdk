@@ -62,115 +62,115 @@ namespace Square.Models
         /// <summary>
         /// The shift's unique ID.
         /// </summary>
-        [JsonProperty("id")]
+        [JsonProperty("id", NullValueHandling = NullValueHandling.Ignore)]
         public string Id { get; }
 
         /// <summary>
         /// Getter for event_type
         /// </summary>
-        [JsonProperty("event_type")]
+        [JsonProperty("event_type", NullValueHandling = NullValueHandling.Ignore)]
         public string EventType { get; }
 
         /// <summary>
         /// The time when the shift began, in ISO 8601 format.
         /// </summary>
-        [JsonProperty("opened_at")]
+        [JsonProperty("opened_at", NullValueHandling = NullValueHandling.Ignore)]
         public string OpenedAt { get; }
 
         /// <summary>
         /// The time when the shift ended, in ISO 8601 format.
         /// </summary>
-        [JsonProperty("ended_at")]
+        [JsonProperty("ended_at", NullValueHandling = NullValueHandling.Ignore)]
         public string EndedAt { get; }
 
         /// <summary>
         /// The time when the shift was closed, in ISO 8601 format.
         /// </summary>
-        [JsonProperty("closed_at")]
+        [JsonProperty("closed_at", NullValueHandling = NullValueHandling.Ignore)]
         public string ClosedAt { get; }
 
         /// <summary>
         /// The IDs of all employees that were logged into Square Register at some point during the cash drawer shift.
         /// </summary>
-        [JsonProperty("employee_ids")]
+        [JsonProperty("employee_ids", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> EmployeeIds { get; }
 
         /// <summary>
         /// The ID of the employee that started the cash drawer shift.
         /// </summary>
-        [JsonProperty("opening_employee_id")]
+        [JsonProperty("opening_employee_id", NullValueHandling = NullValueHandling.Ignore)]
         public string OpeningEmployeeId { get; }
 
         /// <summary>
         /// The ID of the employee that ended the cash drawer shift.
         /// </summary>
-        [JsonProperty("ending_employee_id")]
+        [JsonProperty("ending_employee_id", NullValueHandling = NullValueHandling.Ignore)]
         public string EndingEmployeeId { get; }
 
         /// <summary>
         /// The ID of the employee that closed the cash drawer shift by auditing the cash drawer's contents.
         /// </summary>
-        [JsonProperty("closing_employee_id")]
+        [JsonProperty("closing_employee_id", NullValueHandling = NullValueHandling.Ignore)]
         public string ClosingEmployeeId { get; }
 
         /// <summary>
         /// A description of the cash drawer shift.
         /// </summary>
-        [JsonProperty("description")]
+        [JsonProperty("description", NullValueHandling = NullValueHandling.Ignore)]
         public string Description { get; }
 
         /// <summary>
         /// Getter for starting_cash_money
         /// </summary>
-        [JsonProperty("starting_cash_money")]
+        [JsonProperty("starting_cash_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1Money StartingCashMoney { get; }
 
         /// <summary>
         /// Getter for cash_payment_money
         /// </summary>
-        [JsonProperty("cash_payment_money")]
+        [JsonProperty("cash_payment_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1Money CashPaymentMoney { get; }
 
         /// <summary>
         /// Getter for cash_refunds_money
         /// </summary>
-        [JsonProperty("cash_refunds_money")]
+        [JsonProperty("cash_refunds_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1Money CashRefundsMoney { get; }
 
         /// <summary>
         /// Getter for cash_paid_in_money
         /// </summary>
-        [JsonProperty("cash_paid_in_money")]
+        [JsonProperty("cash_paid_in_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1Money CashPaidInMoney { get; }
 
         /// <summary>
         /// Getter for cash_paid_out_money
         /// </summary>
-        [JsonProperty("cash_paid_out_money")]
+        [JsonProperty("cash_paid_out_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1Money CashPaidOutMoney { get; }
 
         /// <summary>
         /// Getter for expected_cash_money
         /// </summary>
-        [JsonProperty("expected_cash_money")]
+        [JsonProperty("expected_cash_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1Money ExpectedCashMoney { get; }
 
         /// <summary>
         /// Getter for closed_cash_money
         /// </summary>
-        [JsonProperty("closed_cash_money")]
+        [JsonProperty("closed_cash_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1Money ClosedCashMoney { get; }
 
         /// <summary>
         /// Getter for device
         /// </summary>
-        [JsonProperty("device")]
+        [JsonProperty("device", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Device Device { get; }
 
         /// <summary>
         /// All of the events (payments, refunds, and so on) that involved the cash drawer during the shift.
         /// </summary>
-        [JsonProperty("events")]
+        [JsonProperty("events", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.V1CashDrawerEvent> Events { get; }
 
         public Builder ToBuilder()
@@ -205,7 +205,7 @@ namespace Square.Models
             private string openedAt;
             private string endedAt;
             private string closedAt;
-            private IList<string> employeeIds = new List<string>();
+            private IList<string> employeeIds;
             private string openingEmployeeId;
             private string endingEmployeeId;
             private string closingEmployeeId;
@@ -218,120 +218,121 @@ namespace Square.Models
             private Models.V1Money expectedCashMoney;
             private Models.V1Money closedCashMoney;
             private Models.Device device;
-            private IList<Models.V1CashDrawerEvent> events = new List<Models.V1CashDrawerEvent>();
+            private IList<Models.V1CashDrawerEvent> events;
 
-            public Builder() { }
-            public Builder Id(string value)
+
+
+            public Builder Id(string id)
             {
-                id = value;
+                this.id = id;
                 return this;
             }
 
-            public Builder EventType(string value)
+            public Builder EventType(string eventType)
             {
-                eventType = value;
+                this.eventType = eventType;
                 return this;
             }
 
-            public Builder OpenedAt(string value)
+            public Builder OpenedAt(string openedAt)
             {
-                openedAt = value;
+                this.openedAt = openedAt;
                 return this;
             }
 
-            public Builder EndedAt(string value)
+            public Builder EndedAt(string endedAt)
             {
-                endedAt = value;
+                this.endedAt = endedAt;
                 return this;
             }
 
-            public Builder ClosedAt(string value)
+            public Builder ClosedAt(string closedAt)
             {
-                closedAt = value;
+                this.closedAt = closedAt;
                 return this;
             }
 
-            public Builder EmployeeIds(IList<string> value)
+            public Builder EmployeeIds(IList<string> employeeIds)
             {
-                employeeIds = value;
+                this.employeeIds = employeeIds;
                 return this;
             }
 
-            public Builder OpeningEmployeeId(string value)
+            public Builder OpeningEmployeeId(string openingEmployeeId)
             {
-                openingEmployeeId = value;
+                this.openingEmployeeId = openingEmployeeId;
                 return this;
             }
 
-            public Builder EndingEmployeeId(string value)
+            public Builder EndingEmployeeId(string endingEmployeeId)
             {
-                endingEmployeeId = value;
+                this.endingEmployeeId = endingEmployeeId;
                 return this;
             }
 
-            public Builder ClosingEmployeeId(string value)
+            public Builder ClosingEmployeeId(string closingEmployeeId)
             {
-                closingEmployeeId = value;
+                this.closingEmployeeId = closingEmployeeId;
                 return this;
             }
 
-            public Builder Description(string value)
+            public Builder Description(string description)
             {
-                description = value;
+                this.description = description;
                 return this;
             }
 
-            public Builder StartingCashMoney(Models.V1Money value)
+            public Builder StartingCashMoney(Models.V1Money startingCashMoney)
             {
-                startingCashMoney = value;
+                this.startingCashMoney = startingCashMoney;
                 return this;
             }
 
-            public Builder CashPaymentMoney(Models.V1Money value)
+            public Builder CashPaymentMoney(Models.V1Money cashPaymentMoney)
             {
-                cashPaymentMoney = value;
+                this.cashPaymentMoney = cashPaymentMoney;
                 return this;
             }
 
-            public Builder CashRefundsMoney(Models.V1Money value)
+            public Builder CashRefundsMoney(Models.V1Money cashRefundsMoney)
             {
-                cashRefundsMoney = value;
+                this.cashRefundsMoney = cashRefundsMoney;
                 return this;
             }
 
-            public Builder CashPaidInMoney(Models.V1Money value)
+            public Builder CashPaidInMoney(Models.V1Money cashPaidInMoney)
             {
-                cashPaidInMoney = value;
+                this.cashPaidInMoney = cashPaidInMoney;
                 return this;
             }
 
-            public Builder CashPaidOutMoney(Models.V1Money value)
+            public Builder CashPaidOutMoney(Models.V1Money cashPaidOutMoney)
             {
-                cashPaidOutMoney = value;
+                this.cashPaidOutMoney = cashPaidOutMoney;
                 return this;
             }
 
-            public Builder ExpectedCashMoney(Models.V1Money value)
+            public Builder ExpectedCashMoney(Models.V1Money expectedCashMoney)
             {
-                expectedCashMoney = value;
+                this.expectedCashMoney = expectedCashMoney;
                 return this;
             }
 
-            public Builder ClosedCashMoney(Models.V1Money value)
+            public Builder ClosedCashMoney(Models.V1Money closedCashMoney)
             {
-                closedCashMoney = value;
+                this.closedCashMoney = closedCashMoney;
                 return this;
             }
 
-            public Builder Device(Models.Device value)
+            public Builder Device(Models.Device device)
             {
-                device = value;
+                this.device = device;
                 return this;
             }
 
-            public Builder Events(IList<Models.V1CashDrawerEvent> value)
+            public Builder Events(IList<Models.V1CashDrawerEvent> events)
             {
-                events = value;
+                this.events = events;
                 return this;
             }
 

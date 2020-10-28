@@ -26,7 +26,7 @@ namespace Square.Models
         /// Specify this field if your application uses the Orders API to process orders.
         /// Otherwise, specify the `transaction_amount`.
         /// </summary>
-        [JsonProperty("order_id")]
+        [JsonProperty("order_id", NullValueHandling = NullValueHandling.Ignore)]
         public string OrderId { get; }
 
         /// <summary>
@@ -37,7 +37,7 @@ namespace Square.Models
         /// [Working with Monetary Amounts](https://developer.squareup.com/docs/build-basics/working-with-monetary-amounts)
         /// for more information.
         /// </summary>
-        [JsonProperty("transaction_amount_money")]
+        [JsonProperty("transaction_amount_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Money TransactionAmountMoney { get; }
 
         public Builder ToBuilder()
@@ -53,16 +53,17 @@ namespace Square.Models
             private string orderId;
             private Models.Money transactionAmountMoney;
 
-            public Builder() { }
-            public Builder OrderId(string value)
+
+
+            public Builder OrderId(string orderId)
             {
-                orderId = value;
+                this.orderId = orderId;
                 return this;
             }
 
-            public Builder TransactionAmountMoney(Models.Money value)
+            public Builder TransactionAmountMoney(Models.Money transactionAmountMoney)
             {
-                transactionAmountMoney = value;
+                this.transactionAmountMoney = transactionAmountMoney;
                 return this;
             }
 

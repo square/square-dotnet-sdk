@@ -35,7 +35,7 @@ namespace Square.Models
         /// [Working with Monetary Amounts](https://developer.squareup.com/docs/build-basics/working-with-monetary-amounts)
         /// for more information.
         /// </summary>
-        [JsonProperty("total_money")]
+        [JsonProperty("total_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Money TotalMoney { get; }
 
         /// <summary>
@@ -46,7 +46,7 @@ namespace Square.Models
         /// [Working with Monetary Amounts](https://developer.squareup.com/docs/build-basics/working-with-monetary-amounts)
         /// for more information.
         /// </summary>
-        [JsonProperty("tax_money")]
+        [JsonProperty("tax_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Money TaxMoney { get; }
 
         /// <summary>
@@ -57,7 +57,7 @@ namespace Square.Models
         /// [Working with Monetary Amounts](https://developer.squareup.com/docs/build-basics/working-with-monetary-amounts)
         /// for more information.
         /// </summary>
-        [JsonProperty("discount_money")]
+        [JsonProperty("discount_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Money DiscountMoney { get; }
 
         /// <summary>
@@ -68,7 +68,7 @@ namespace Square.Models
         /// [Working with Monetary Amounts](https://developer.squareup.com/docs/build-basics/working-with-monetary-amounts)
         /// for more information.
         /// </summary>
-        [JsonProperty("tip_money")]
+        [JsonProperty("tip_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Money TipMoney { get; }
 
         /// <summary>
@@ -79,7 +79,7 @@ namespace Square.Models
         /// [Working with Monetary Amounts](https://developer.squareup.com/docs/build-basics/working-with-monetary-amounts)
         /// for more information.
         /// </summary>
-        [JsonProperty("service_charge_money")]
+        [JsonProperty("service_charge_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Money ServiceChargeMoney { get; }
 
         public Builder ToBuilder()
@@ -101,34 +101,35 @@ namespace Square.Models
             private Models.Money tipMoney;
             private Models.Money serviceChargeMoney;
 
-            public Builder() { }
-            public Builder TotalMoney(Models.Money value)
+
+
+            public Builder TotalMoney(Models.Money totalMoney)
             {
-                totalMoney = value;
+                this.totalMoney = totalMoney;
                 return this;
             }
 
-            public Builder TaxMoney(Models.Money value)
+            public Builder TaxMoney(Models.Money taxMoney)
             {
-                taxMoney = value;
+                this.taxMoney = taxMoney;
                 return this;
             }
 
-            public Builder DiscountMoney(Models.Money value)
+            public Builder DiscountMoney(Models.Money discountMoney)
             {
-                discountMoney = value;
+                this.discountMoney = discountMoney;
                 return this;
             }
 
-            public Builder TipMoney(Models.Money value)
+            public Builder TipMoney(Models.Money tipMoney)
             {
-                tipMoney = value;
+                this.tipMoney = tipMoney;
                 return this;
             }
 
-            public Builder ServiceChargeMoney(Models.Money value)
+            public Builder ServiceChargeMoney(Models.Money serviceChargeMoney)
             {
-                serviceChargeMoney = value;
+                this.serviceChargeMoney = serviceChargeMoney;
                 return this;
             }
 

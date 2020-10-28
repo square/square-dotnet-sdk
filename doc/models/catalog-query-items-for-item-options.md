@@ -1,18 +1,19 @@
-## Catalog Query Items for Item Options
+
+# Catalog Query Items for Item Options
 
 The query filter to return the items containing the specified item option IDs.
 
-### Structure
+## Structure
 
 `CatalogQueryItemsForItemOptions`
 
-### Fields
+## Fields
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `ItemOptionIds` | `IList<string>` | Optional | A set of `CatalogItemOption` IDs to be used to find associated<br>`CatalogItem`s. All Items that contain all of the given Item Options (in any order)<br>will be returned. |
 
-### Example (as JSON)
+## Example (as JSON)
 
 ```json
 {

@@ -37,7 +37,7 @@ namespace Square.Models
         /// or excluded from, the result if they match at least one of the filter
         /// criteria.
         /// </summary>
-        [JsonProperty("creation_source")]
+        [JsonProperty("creation_source", NullValueHandling = NullValueHandling.Ignore)]
         public Models.CustomerCreationSourceFilter CreationSource { get; }
 
         /// <summary>
@@ -47,7 +47,7 @@ namespace Square.Models
         /// Refer to the relevant endpoint-specific documentation to determine
         /// how time ranges are handled.
         /// </summary>
-        [JsonProperty("created_at")]
+        [JsonProperty("created_at", NullValueHandling = NullValueHandling.Ignore)]
         public Models.TimeRange CreatedAt { get; }
 
         /// <summary>
@@ -57,7 +57,7 @@ namespace Square.Models
         /// Refer to the relevant endpoint-specific documentation to determine
         /// how time ranges are handled.
         /// </summary>
-        [JsonProperty("updated_at")]
+        [JsonProperty("updated_at", NullValueHandling = NullValueHandling.Ignore)]
         public Models.TimeRange UpdatedAt { get; }
 
         /// <summary>
@@ -65,7 +65,7 @@ namespace Square.Models
         /// customer attributes against a specified query. Depending on customer attributes, 
         /// the filter can be case sensitive. This filter can be either exact or fuzzy. It cannot be both.
         /// </summary>
-        [JsonProperty("email_address")]
+        [JsonProperty("email_address", NullValueHandling = NullValueHandling.Ignore)]
         public Models.CustomerTextFilter EmailAddress { get; }
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace Square.Models
         /// customer attributes against a specified query. Depending on customer attributes, 
         /// the filter can be case sensitive. This filter can be either exact or fuzzy. It cannot be both.
         /// </summary>
-        [JsonProperty("phone_number")]
+        [JsonProperty("phone_number", NullValueHandling = NullValueHandling.Ignore)]
         public Models.CustomerTextFilter PhoneNumber { get; }
 
         /// <summary>
@@ -81,7 +81,7 @@ namespace Square.Models
         /// customer attributes against a specified query. Depending on customer attributes, 
         /// the filter can be case sensitive. This filter can be either exact or fuzzy. It cannot be both.
         /// </summary>
-        [JsonProperty("reference_id")]
+        [JsonProperty("reference_id", NullValueHandling = NullValueHandling.Ignore)]
         public Models.CustomerTextFilter ReferenceId { get; }
 
         /// <summary>
@@ -90,7 +90,7 @@ namespace Square.Models
         /// all properties can be set or only a subset will be available.
         /// Refer to the documentation of the field.
         /// </summary>
-        [JsonProperty("group_ids")]
+        [JsonProperty("group_ids", NullValueHandling = NullValueHandling.Ignore)]
         public Models.FilterValue GroupIds { get; }
 
         public Builder ToBuilder()
@@ -116,46 +116,47 @@ namespace Square.Models
             private Models.CustomerTextFilter referenceId;
             private Models.FilterValue groupIds;
 
-            public Builder() { }
-            public Builder CreationSource(Models.CustomerCreationSourceFilter value)
+
+
+            public Builder CreationSource(Models.CustomerCreationSourceFilter creationSource)
             {
-                creationSource = value;
+                this.creationSource = creationSource;
                 return this;
             }
 
-            public Builder CreatedAt(Models.TimeRange value)
+            public Builder CreatedAt(Models.TimeRange createdAt)
             {
-                createdAt = value;
+                this.createdAt = createdAt;
                 return this;
             }
 
-            public Builder UpdatedAt(Models.TimeRange value)
+            public Builder UpdatedAt(Models.TimeRange updatedAt)
             {
-                updatedAt = value;
+                this.updatedAt = updatedAt;
                 return this;
             }
 
-            public Builder EmailAddress(Models.CustomerTextFilter value)
+            public Builder EmailAddress(Models.CustomerTextFilter emailAddress)
             {
-                emailAddress = value;
+                this.emailAddress = emailAddress;
                 return this;
             }
 
-            public Builder PhoneNumber(Models.CustomerTextFilter value)
+            public Builder PhoneNumber(Models.CustomerTextFilter phoneNumber)
             {
-                phoneNumber = value;
+                this.phoneNumber = phoneNumber;
                 return this;
             }
 
-            public Builder ReferenceId(Models.CustomerTextFilter value)
+            public Builder ReferenceId(Models.CustomerTextFilter referenceId)
             {
-                referenceId = value;
+                this.referenceId = referenceId;
                 return this;
             }
 
-            public Builder GroupIds(Models.FilterValue value)
+            public Builder GroupIds(Models.FilterValue groupIds)
             {
-                groupIds = value;
+                this.groupIds = groupIds;
                 return this;
             }
 

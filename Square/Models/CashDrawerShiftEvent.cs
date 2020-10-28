@@ -32,13 +32,13 @@ namespace Square.Models
         /// <summary>
         /// The unique ID of the event.
         /// </summary>
-        [JsonProperty("id")]
+        [JsonProperty("id", NullValueHandling = NullValueHandling.Ignore)]
         public string Id { get; }
 
         /// <summary>
         /// The ID of the employee that created the event.
         /// </summary>
-        [JsonProperty("employee_id")]
+        [JsonProperty("employee_id", NullValueHandling = NullValueHandling.Ignore)]
         public string EmployeeId { get; }
 
         /// <summary>
@@ -46,7 +46,7 @@ namespace Square.Models
         /// Each event type represents an employee action on the actual cash drawer
         /// represented by a CashDrawerShift.
         /// </summary>
-        [JsonProperty("event_type")]
+        [JsonProperty("event_type", NullValueHandling = NullValueHandling.Ignore)]
         public string EventType { get; }
 
         /// <summary>
@@ -57,20 +57,20 @@ namespace Square.Models
         /// [Working with Monetary Amounts](https://developer.squareup.com/docs/build-basics/working-with-monetary-amounts)
         /// for more information.
         /// </summary>
-        [JsonProperty("event_money")]
+        [JsonProperty("event_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Money EventMoney { get; }
 
         /// <summary>
         /// The event time in ISO 8601 format.
         /// </summary>
-        [JsonProperty("created_at")]
+        [JsonProperty("created_at", NullValueHandling = NullValueHandling.Ignore)]
         public string CreatedAt { get; }
 
         /// <summary>
         /// An optional description of the event, entered by the employee that
         /// created the event.
         /// </summary>
-        [JsonProperty("description")]
+        [JsonProperty("description", NullValueHandling = NullValueHandling.Ignore)]
         public string Description { get; }
 
         public Builder ToBuilder()
@@ -94,40 +94,41 @@ namespace Square.Models
             private string createdAt;
             private string description;
 
-            public Builder() { }
-            public Builder Id(string value)
+
+
+            public Builder Id(string id)
             {
-                id = value;
+                this.id = id;
                 return this;
             }
 
-            public Builder EmployeeId(string value)
+            public Builder EmployeeId(string employeeId)
             {
-                employeeId = value;
+                this.employeeId = employeeId;
                 return this;
             }
 
-            public Builder EventType(string value)
+            public Builder EventType(string eventType)
             {
-                eventType = value;
+                this.eventType = eventType;
                 return this;
             }
 
-            public Builder EventMoney(Models.Money value)
+            public Builder EventMoney(Models.Money eventMoney)
             {
-                eventMoney = value;
+                this.eventMoney = eventMoney;
                 return this;
             }
 
-            public Builder CreatedAt(string value)
+            public Builder CreatedAt(string createdAt)
             {
-                createdAt = value;
+                this.createdAt = createdAt;
                 return this;
             }
 
-            public Builder Description(string value)
+            public Builder Description(string description)
             {
-                description = value;
+                this.description = description;
                 return this;
             }
 

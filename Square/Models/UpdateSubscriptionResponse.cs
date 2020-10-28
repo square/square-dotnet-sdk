@@ -28,7 +28,7 @@ namespace Square.Models
         /// <summary>
         /// Information about errors encountered during the request.
         /// </summary>
-        [JsonProperty("errors")]
+        [JsonProperty("errors", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.Error> Errors { get; }
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace Square.Models
         /// For an overview of the `Subscription` type, see 
         /// [Subscription object](https://developer.squareup.com/docs/docs/subscriptions-api/overview#subscription-object-overview).
         /// </summary>
-        [JsonProperty("subscription")]
+        [JsonProperty("subscription", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Subscription Subscription { get; }
 
         public Builder ToBuilder()
@@ -49,19 +49,20 @@ namespace Square.Models
 
         public class Builder
         {
-            private IList<Models.Error> errors = new List<Models.Error>();
+            private IList<Models.Error> errors;
             private Models.Subscription subscription;
 
-            public Builder() { }
-            public Builder Errors(IList<Models.Error> value)
+
+
+            public Builder Errors(IList<Models.Error> errors)
             {
-                errors = value;
+                this.errors = errors;
                 return this;
             }
 
-            public Builder Subscription(Models.Subscription value)
+            public Builder Subscription(Models.Subscription subscription)
             {
-                subscription = value;
+                this.subscription = subscription;
                 return this;
             }
 

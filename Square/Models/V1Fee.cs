@@ -44,61 +44,61 @@ namespace Square.Models
         /// <summary>
         /// The fee's unique ID.
         /// </summary>
-        [JsonProperty("id")]
+        [JsonProperty("id", NullValueHandling = NullValueHandling.Ignore)]
         public string Id { get; }
 
         /// <summary>
         /// The fee's name.
         /// </summary>
-        [JsonProperty("name")]
+        [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
         public string Name { get; }
 
         /// <summary>
         /// The rate of the fee, as a string representation of a decimal number. A value of 0.07 corresponds to a rate of 7%.
         /// </summary>
-        [JsonProperty("rate")]
+        [JsonProperty("rate", NullValueHandling = NullValueHandling.Ignore)]
         public string Rate { get; }
 
         /// <summary>
         /// Getter for calculation_phase
         /// </summary>
-        [JsonProperty("calculation_phase")]
+        [JsonProperty("calculation_phase", NullValueHandling = NullValueHandling.Ignore)]
         public string CalculationPhase { get; }
 
         /// <summary>
         /// Getter for adjustment_type
         /// </summary>
-        [JsonProperty("adjustment_type")]
+        [JsonProperty("adjustment_type", NullValueHandling = NullValueHandling.Ignore)]
         public string AdjustmentType { get; }
 
         /// <summary>
         /// If true, the fee applies to custom amounts entered into Square Point of Sale that are not associated with a particular item.
         /// </summary>
-        [JsonProperty("applies_to_custom_amounts")]
+        [JsonProperty("applies_to_custom_amounts", NullValueHandling = NullValueHandling.Ignore)]
         public bool? AppliesToCustomAmounts { get; }
 
         /// <summary>
         /// If true, the fee is applied to all appropriate items. If false, the fee is not applied at all.
         /// </summary>
-        [JsonProperty("enabled")]
+        [JsonProperty("enabled", NullValueHandling = NullValueHandling.Ignore)]
         public bool? Enabled { get; }
 
         /// <summary>
         /// Getter for inclusion_type
         /// </summary>
-        [JsonProperty("inclusion_type")]
+        [JsonProperty("inclusion_type", NullValueHandling = NullValueHandling.Ignore)]
         public string InclusionType { get; }
 
         /// <summary>
         /// Getter for type
         /// </summary>
-        [JsonProperty("type")]
+        [JsonProperty("type", NullValueHandling = NullValueHandling.Ignore)]
         public string Type { get; }
 
         /// <summary>
         /// The ID of the CatalogObject in the Connect v2 API. Objects that are shared across multiple locations share the same v2 ID.
         /// </summary>
-        [JsonProperty("v2_id")]
+        [JsonProperty("v2_id", NullValueHandling = NullValueHandling.Ignore)]
         public string V2Id { get; }
 
         public Builder ToBuilder()
@@ -130,64 +130,65 @@ namespace Square.Models
             private string type;
             private string v2Id;
 
-            public Builder() { }
-            public Builder Id(string value)
+
+
+            public Builder Id(string id)
             {
-                id = value;
+                this.id = id;
                 return this;
             }
 
-            public Builder Name(string value)
+            public Builder Name(string name)
             {
-                name = value;
+                this.name = name;
                 return this;
             }
 
-            public Builder Rate(string value)
+            public Builder Rate(string rate)
             {
-                rate = value;
+                this.rate = rate;
                 return this;
             }
 
-            public Builder CalculationPhase(string value)
+            public Builder CalculationPhase(string calculationPhase)
             {
-                calculationPhase = value;
+                this.calculationPhase = calculationPhase;
                 return this;
             }
 
-            public Builder AdjustmentType(string value)
+            public Builder AdjustmentType(string adjustmentType)
             {
-                adjustmentType = value;
+                this.adjustmentType = adjustmentType;
                 return this;
             }
 
-            public Builder AppliesToCustomAmounts(bool? value)
+            public Builder AppliesToCustomAmounts(bool? appliesToCustomAmounts)
             {
-                appliesToCustomAmounts = value;
+                this.appliesToCustomAmounts = appliesToCustomAmounts;
                 return this;
             }
 
-            public Builder Enabled(bool? value)
+            public Builder Enabled(bool? enabled)
             {
-                enabled = value;
+                this.enabled = enabled;
                 return this;
             }
 
-            public Builder InclusionType(string value)
+            public Builder InclusionType(string inclusionType)
             {
-                inclusionType = value;
+                this.inclusionType = inclusionType;
                 return this;
             }
 
-            public Builder Type(string value)
+            public Builder Type(string type)
             {
-                type = value;
+                this.type = type;
                 return this;
             }
 
-            public Builder V2Id(string value)
+            public Builder V2Id(string v2Id)
             {
-                v2Id = value;
+                this.v2Id = v2Id;
                 return this;
             }
 

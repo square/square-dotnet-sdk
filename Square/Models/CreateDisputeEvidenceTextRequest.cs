@@ -33,7 +33,7 @@ namespace Square.Models
         /// <summary>
         /// Type of the dispute evidence.
         /// </summary>
-        [JsonProperty("evidence_type")]
+        [JsonProperty("evidence_type", NullValueHandling = NullValueHandling.Ignore)]
         public string EvidenceType { get; }
 
         /// <summary>
@@ -62,21 +62,22 @@ namespace Square.Models
                 this.idempotencyKey = idempotencyKey;
                 this.evidenceText = evidenceText;
             }
-            public Builder IdempotencyKey(string value)
+
+            public Builder IdempotencyKey(string idempotencyKey)
             {
-                idempotencyKey = value;
+                this.idempotencyKey = idempotencyKey;
                 return this;
             }
 
-            public Builder EvidenceText(string value)
+            public Builder EvidenceText(string evidenceText)
             {
-                evidenceText = value;
+                this.evidenceText = evidenceText;
                 return this;
             }
 
-            public Builder EvidenceType(string value)
+            public Builder EvidenceType(string evidenceType)
             {
-                evidenceType = value;
+                this.evidenceType = evidenceType;
                 return this;
             }
 

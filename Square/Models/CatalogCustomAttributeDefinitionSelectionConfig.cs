@@ -27,14 +27,14 @@ namespace Square.Models
         /// affect existing custom attribute values on objects. Clients need to
         /// handle custom attributes with more selected values than allowed by this limit.
         /// </summary>
-        [JsonProperty("max_allowed_selections")]
+        [JsonProperty("max_allowed_selections", NullValueHandling = NullValueHandling.Ignore)]
         public int? MaxAllowedSelections { get; }
 
         /// <summary>
         /// The set of valid `CatalogCustomAttributeSelections`. Up to a maximum of 100
         /// selections can be defined. Can be modified.
         /// </summary>
-        [JsonProperty("allowed_selections")]
+        [JsonProperty("allowed_selections", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.CatalogCustomAttributeDefinitionSelectionConfigCustomAttributeSelection> AllowedSelections { get; }
 
         public Builder ToBuilder()
@@ -48,18 +48,19 @@ namespace Square.Models
         public class Builder
         {
             private int? maxAllowedSelections;
-            private IList<Models.CatalogCustomAttributeDefinitionSelectionConfigCustomAttributeSelection> allowedSelections = new List<Models.CatalogCustomAttributeDefinitionSelectionConfigCustomAttributeSelection>();
+            private IList<Models.CatalogCustomAttributeDefinitionSelectionConfigCustomAttributeSelection> allowedSelections;
 
-            public Builder() { }
-            public Builder MaxAllowedSelections(int? value)
+
+
+            public Builder MaxAllowedSelections(int? maxAllowedSelections)
             {
-                maxAllowedSelections = value;
+                this.maxAllowedSelections = maxAllowedSelections;
                 return this;
             }
 
-            public Builder AllowedSelections(IList<Models.CatalogCustomAttributeDefinitionSelectionConfigCustomAttributeSelection> value)
+            public Builder AllowedSelections(IList<Models.CatalogCustomAttributeDefinitionSelectionConfigCustomAttributeSelection> allowedSelections)
             {
-                allowedSelections = value;
+                this.allowedSelections = allowedSelections;
                 return this;
             }
 

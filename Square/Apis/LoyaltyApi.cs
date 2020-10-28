@@ -14,19 +14,17 @@ using Square.Http.Request;
 using Square.Http.Response;
 using Square.Http.Client;
 using Square.Authentication;
-using Square.Exceptions;
 
 namespace Square.Apis
 {
-    internal class LoyaltyApi: BaseApi, ILoyaltyApi
+    internal class LoyaltyApi : BaseApi, ILoyaltyApi
     {
         internal LoyaltyApi(IConfiguration config, IHttpClient httpClient, IDictionary<string, IAuthManager> authManagers, HttpCallBack httpCallBack = null) :
             base(config, httpClient, authManagers, httpCallBack)
         { }
 
         /// <summary>
-        /// Creates a loyalty account. For more information, see 
-        /// [Create a loyalty account](https://developer.squareup.com/docs/docs/loyalty-api/overview/#loyalty-overview-create-account).
+        /// Creates a loyalty account.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.CreateLoyaltyAccountResponse response from the API call</return>
@@ -38,8 +36,7 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Creates a loyalty account. For more information, see 
-        /// [Create a loyalty account](https://developer.squareup.com/docs/docs/loyalty-api/overview/#loyalty-overview-create-account).
+        /// Creates a loyalty account.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.CreateLoyaltyAccountResponse response from the API call</return>
@@ -52,12 +49,9 @@ namespace Square.Apis
             StringBuilder _queryBuilder = new StringBuilder(_baseUri);
             _queryBuilder.Append("/v2/loyalty/accounts");
 
-            //validate and preprocess url
-            string _queryUrl = ApiHelper.CleanUrl(_queryBuilder);
-
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string, string>()
-            { 
+            {
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
@@ -68,13 +62,13 @@ namespace Square.Apis
             var _body = ApiHelper.JsonSerialize(body);
 
             //prepare the API call request to fetch the response
-            HttpRequest _request = GetClientInstance().PostBody(_queryUrl, _headers, _body);
+            HttpRequest _request = GetClientInstance().PostBody(_queryBuilder.ToString(), _headers, _body);
             if (HttpCallBack != null)
             {
                 HttpCallBack.OnBeforeHttpRequestEventHandler(GetClientInstance(), _request);
             }
 
-            _request = await authManagers["default"].ApplyAsync(_request).ConfigureAwait(false);
+            _request = await authManagers["global"].ApplyAsync(_request).ConfigureAwait(false);
 
             //invoke request and get response
             HttpStringResponse _response = await GetClientInstance().ExecuteAsStringAsync(_request, cancellationToken).ConfigureAwait(false);
@@ -93,9 +87,9 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Searches for loyalty accounts. 
-        /// In the current implementation, you can search for a loyalty account using the phone number associated with the account. 
-        /// If no phone number is provided, all loyalty accounts are returned.
+        /// Searches for loyalty accounts in a loyalty program.  
+        /// You can search for a loyalty account using the phone number or customer ID associated with the account. To return all loyalty accounts, specify an empty `query` object or omit it entirely.  
+        /// Search results are sorted by `created_at` in ascending order.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.SearchLoyaltyAccountsResponse response from the API call</return>
@@ -107,9 +101,9 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Searches for loyalty accounts. 
-        /// In the current implementation, you can search for a loyalty account using the phone number associated with the account. 
-        /// If no phone number is provided, all loyalty accounts are returned.
+        /// Searches for loyalty accounts in a loyalty program.  
+        /// You can search for a loyalty account using the phone number or customer ID associated with the account. To return all loyalty accounts, specify an empty `query` object or omit it entirely.  
+        /// Search results are sorted by `created_at` in ascending order.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.SearchLoyaltyAccountsResponse response from the API call</return>
@@ -122,12 +116,9 @@ namespace Square.Apis
             StringBuilder _queryBuilder = new StringBuilder(_baseUri);
             _queryBuilder.Append("/v2/loyalty/accounts/search");
 
-            //validate and preprocess url
-            string _queryUrl = ApiHelper.CleanUrl(_queryBuilder);
-
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string, string>()
-            { 
+            {
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
@@ -138,13 +129,13 @@ namespace Square.Apis
             var _body = ApiHelper.JsonSerialize(body);
 
             //prepare the API call request to fetch the response
-            HttpRequest _request = GetClientInstance().PostBody(_queryUrl, _headers, _body);
+            HttpRequest _request = GetClientInstance().PostBody(_queryBuilder.ToString(), _headers, _body);
             if (HttpCallBack != null)
             {
                 HttpCallBack.OnBeforeHttpRequestEventHandler(GetClientInstance(), _request);
             }
 
-            _request = await authManagers["default"].ApplyAsync(_request).ConfigureAwait(false);
+            _request = await authManagers["global"].ApplyAsync(_request).ConfigureAwait(false);
 
             //invoke request and get response
             HttpStringResponse _response = await GetClientInstance().ExecuteAsStringAsync(_request, cancellationToken).ConfigureAwait(false);
@@ -194,25 +185,22 @@ namespace Square.Apis
                 { "account_id", accountId }
             });
 
-            //validate and preprocess url
-            string _queryUrl = ApiHelper.CleanUrl(_queryBuilder);
-
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string, string>()
-            { 
+            {
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "Square-Version", config.SquareVersion }
             };
 
             //prepare the API call request to fetch the response
-            HttpRequest _request = GetClientInstance().Get(_queryUrl,_headers);
+            HttpRequest _request = GetClientInstance().Get(_queryBuilder.ToString(), _headers);
             if (HttpCallBack != null)
             {
                 HttpCallBack.OnBeforeHttpRequestEventHandler(GetClientInstance(), _request);
             }
 
-            _request = await authManagers["default"].ApplyAsync(_request).ConfigureAwait(false);
+            _request = await authManagers["global"].ApplyAsync(_request).ConfigureAwait(false);
 
             //invoke request and get response
             HttpStringResponse _response = await GetClientInstance().ExecuteAsStringAsync(_request, cancellationToken).ConfigureAwait(false);
@@ -237,10 +225,9 @@ namespace Square.Apis
         /// - If you are not using the Orders API to manage orders, 
         /// you first perform a client-side computation to compute the points.  
         /// For spend-based and visit-based programs, you can call 
-        /// `CalculateLoyaltyPoints` to compute the points. For more information, 
+        /// [CalculateLoyaltyPoints](#endpoint-Loyalty-CalculateLoyaltyPoints) to compute the points. For more information, 
         /// see [Loyalty Program Overview](https://developer.squareup.com/docs/docs/loyalty/overview). 
-        /// You then provide the points in a request to this endpoint. 
-        /// For more information, see [Accumulate points](https://developer.squareup.com/docs/docs/loyalty-api/overview/#accumulate-points).
+        /// You then provide the points in a request to this endpoint.
         /// </summary>
         /// <param name="accountId">Required parameter: The [loyalty account](#type-LoyaltyAccount) ID to which to add the points.</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
@@ -259,10 +246,9 @@ namespace Square.Apis
         /// - If you are not using the Orders API to manage orders, 
         /// you first perform a client-side computation to compute the points.  
         /// For spend-based and visit-based programs, you can call 
-        /// `CalculateLoyaltyPoints` to compute the points. For more information, 
+        /// [CalculateLoyaltyPoints](#endpoint-Loyalty-CalculateLoyaltyPoints) to compute the points. For more information, 
         /// see [Loyalty Program Overview](https://developer.squareup.com/docs/docs/loyalty/overview). 
-        /// You then provide the points in a request to this endpoint. 
-        /// For more information, see [Accumulate points](https://developer.squareup.com/docs/docs/loyalty-api/overview/#accumulate-points).
+        /// You then provide the points in a request to this endpoint.
         /// </summary>
         /// <param name="accountId">Required parameter: The [loyalty account](#type-LoyaltyAccount) ID to which to add the points.</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
@@ -282,12 +268,9 @@ namespace Square.Apis
                 { "account_id", accountId }
             });
 
-            //validate and preprocess url
-            string _queryUrl = ApiHelper.CleanUrl(_queryBuilder);
-
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string, string>()
-            { 
+            {
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
@@ -298,13 +281,13 @@ namespace Square.Apis
             var _body = ApiHelper.JsonSerialize(body);
 
             //prepare the API call request to fetch the response
-            HttpRequest _request = GetClientInstance().PostBody(_queryUrl, _headers, _body);
+            HttpRequest _request = GetClientInstance().PostBody(_queryBuilder.ToString(), _headers, _body);
             if (HttpCallBack != null)
             {
                 HttpCallBack.OnBeforeHttpRequestEventHandler(GetClientInstance(), _request);
             }
 
-            _request = await authManagers["default"].ApplyAsync(_request).ConfigureAwait(false);
+            _request = await authManagers["global"].ApplyAsync(_request).ConfigureAwait(false);
 
             //invoke request and get response
             HttpStringResponse _response = await GetClientInstance().ExecuteAsStringAsync(_request, cancellationToken).ConfigureAwait(false);
@@ -325,7 +308,7 @@ namespace Square.Apis
         /// <summary>
         /// Adds points to or subtracts points from a buyer's account. 
         /// Use this endpoint only when you need to manually adjust points. Otherwise, in your application flow, you call 
-        /// [AccumulateLoyaltyPoints](https://developer.squareup.com/docs/reference/square/loyalty-api/accumulate-loyalty-points) 
+        /// [AccumulateLoyaltyPoints](#endpoint-Loyalty-AccumulateLoyaltyPoints) 
         /// to add points when a buyer pays for the purchase.
         /// </summary>
         /// <param name="accountId">Required parameter: The ID of the [loyalty account](#type-LoyaltyAccount) in which to adjust the points.</param>
@@ -341,7 +324,7 @@ namespace Square.Apis
         /// <summary>
         /// Adds points to or subtracts points from a buyer's account. 
         /// Use this endpoint only when you need to manually adjust points. Otherwise, in your application flow, you call 
-        /// [AccumulateLoyaltyPoints](https://developer.squareup.com/docs/reference/square/loyalty-api/accumulate-loyalty-points) 
+        /// [AccumulateLoyaltyPoints](#endpoint-Loyalty-AccumulateLoyaltyPoints) 
         /// to add points when a buyer pays for the purchase.
         /// </summary>
         /// <param name="accountId">Required parameter: The ID of the [loyalty account](#type-LoyaltyAccount) in which to adjust the points.</param>
@@ -362,12 +345,9 @@ namespace Square.Apis
                 { "account_id", accountId }
             });
 
-            //validate and preprocess url
-            string _queryUrl = ApiHelper.CleanUrl(_queryBuilder);
-
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string, string>()
-            { 
+            {
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
@@ -378,13 +358,13 @@ namespace Square.Apis
             var _body = ApiHelper.JsonSerialize(body);
 
             //prepare the API call request to fetch the response
-            HttpRequest _request = GetClientInstance().PostBody(_queryUrl, _headers, _body);
+            HttpRequest _request = GetClientInstance().PostBody(_queryBuilder.ToString(), _headers, _body);
             if (HttpCallBack != null)
             {
                 HttpCallBack.OnBeforeHttpRequestEventHandler(GetClientInstance(), _request);
             }
 
-            _request = await authManagers["default"].ApplyAsync(_request).ConfigureAwait(false);
+            _request = await authManagers["global"].ApplyAsync(_request).ConfigureAwait(false);
 
             //invoke request and get response
             HttpStringResponse _response = await GetClientInstance().ExecuteAsStringAsync(_request, cancellationToken).ConfigureAwait(false);
@@ -407,9 +387,7 @@ namespace Square.Apis
         /// A Square loyalty program maintains a ledger of events that occur during the lifetime of a 
         /// buyer's loyalty account. Each change in the point balance 
         /// (for example, points earned, points redeemed, and points expired) is 
-        /// recorded in the ledger. Using this endpoint, you can search the ledger for events. 
-        /// For more information, see 
-        /// [Loyalty events](https://developer.squareup.com/docs/docs/loyalty-api/overview/#loyalty-events).
+        /// recorded in the ledger. Using this endpoint, you can search the ledger for events.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.SearchLoyaltyEventsResponse response from the API call</return>
@@ -425,9 +403,7 @@ namespace Square.Apis
         /// A Square loyalty program maintains a ledger of events that occur during the lifetime of a 
         /// buyer's loyalty account. Each change in the point balance 
         /// (for example, points earned, points redeemed, and points expired) is 
-        /// recorded in the ledger. Using this endpoint, you can search the ledger for events. 
-        /// For more information, see 
-        /// [Loyalty events](https://developer.squareup.com/docs/docs/loyalty-api/overview/#loyalty-events).
+        /// recorded in the ledger. Using this endpoint, you can search the ledger for events.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.SearchLoyaltyEventsResponse response from the API call</return>
@@ -440,12 +416,9 @@ namespace Square.Apis
             StringBuilder _queryBuilder = new StringBuilder(_baseUri);
             _queryBuilder.Append("/v2/loyalty/events/search");
 
-            //validate and preprocess url
-            string _queryUrl = ApiHelper.CleanUrl(_queryBuilder);
-
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string, string>()
-            { 
+            {
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
@@ -456,13 +429,13 @@ namespace Square.Apis
             var _body = ApiHelper.JsonSerialize(body);
 
             //prepare the API call request to fetch the response
-            HttpRequest _request = GetClientInstance().PostBody(_queryUrl, _headers, _body);
+            HttpRequest _request = GetClientInstance().PostBody(_queryBuilder.ToString(), _headers, _body);
             if (HttpCallBack != null)
             {
                 HttpCallBack.OnBeforeHttpRequestEventHandler(GetClientInstance(), _request);
             }
 
-            _request = await authManagers["default"].ApplyAsync(_request).ConfigureAwait(false);
+            _request = await authManagers["global"].ApplyAsync(_request).ConfigureAwait(false);
 
             //invoke request and get response
             HttpStringResponse _response = await GetClientInstance().ExecuteAsStringAsync(_request, cancellationToken).ConfigureAwait(false);
@@ -482,9 +455,7 @@ namespace Square.Apis
 
         /// <summary>
         /// Returns a list of loyalty programs in the seller's account.
-        /// Currently, a seller can only have one loyalty program. For more information, see 
-        /// [Loyalty Overview](https://developer.squareup.com/docs/docs/loyalty/overview).
-        /// .
+        /// Currently, a seller can only have one loyalty program.
         /// </summary>
         /// <return>Returns the Models.ListLoyaltyProgramsResponse response from the API call</return>
         public Models.ListLoyaltyProgramsResponse ListLoyaltyPrograms()
@@ -496,9 +467,7 @@ namespace Square.Apis
 
         /// <summary>
         /// Returns a list of loyalty programs in the seller's account.
-        /// Currently, a seller can only have one loyalty program. For more information, see 
-        /// [Loyalty Overview](https://developer.squareup.com/docs/docs/loyalty/overview).
-        /// .
+        /// Currently, a seller can only have one loyalty program.
         /// </summary>
         /// <return>Returns the Models.ListLoyaltyProgramsResponse response from the API call</return>
         public async Task<Models.ListLoyaltyProgramsResponse> ListLoyaltyProgramsAsync(CancellationToken cancellationToken = default)
@@ -510,25 +479,22 @@ namespace Square.Apis
             StringBuilder _queryBuilder = new StringBuilder(_baseUri);
             _queryBuilder.Append("/v2/loyalty/programs");
 
-            //validate and preprocess url
-            string _queryUrl = ApiHelper.CleanUrl(_queryBuilder);
-
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string, string>()
-            { 
+            {
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "Square-Version", config.SquareVersion }
             };
 
             //prepare the API call request to fetch the response
-            HttpRequest _request = GetClientInstance().Get(_queryUrl,_headers);
+            HttpRequest _request = GetClientInstance().Get(_queryBuilder.ToString(), _headers);
             if (HttpCallBack != null)
             {
                 HttpCallBack.OnBeforeHttpRequestEventHandler(GetClientInstance(), _request);
             }
 
-            _request = await authManagers["default"].ApplyAsync(_request).ConfigureAwait(false);
+            _request = await authManagers["global"].ApplyAsync(_request).ConfigureAwait(false);
 
             //invoke request and get response
             HttpStringResponse _response = await GetClientInstance().ExecuteAsStringAsync(_request, cancellationToken).ConfigureAwait(false);
@@ -592,12 +558,9 @@ namespace Square.Apis
                 { "program_id", programId }
             });
 
-            //validate and preprocess url
-            string _queryUrl = ApiHelper.CleanUrl(_queryBuilder);
-
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string, string>()
-            { 
+            {
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
@@ -608,13 +571,13 @@ namespace Square.Apis
             var _body = ApiHelper.JsonSerialize(body);
 
             //prepare the API call request to fetch the response
-            HttpRequest _request = GetClientInstance().PostBody(_queryUrl, _headers, _body);
+            HttpRequest _request = GetClientInstance().PostBody(_queryBuilder.ToString(), _headers, _body);
             if (HttpCallBack != null)
             {
                 HttpCallBack.OnBeforeHttpRequestEventHandler(GetClientInstance(), _request);
             }
 
-            _request = await authManagers["default"].ApplyAsync(_request).ConfigureAwait(false);
+            _request = await authManagers["global"].ApplyAsync(_request).ConfigureAwait(false);
 
             //invoke request and get response
             HttpStringResponse _response = await GetClientInstance().ExecuteAsStringAsync(_request, cancellationToken).ConfigureAwait(false);
@@ -638,9 +601,7 @@ namespace Square.Apis
         /// to lock for this reward. 
         /// - If the request includes `order_id`, it adds the reward and related discount to the order. 
         /// After a reward is created, the points are locked and 
-        /// not available for the buyer to redeem another reward. 
-        /// For more information, see 
-        /// [Loyalty rewards](https://developer.squareup.com/docs/docs/loyalty-api/overview/#loyalty-overview-loyalty-rewards).
+        /// not available for the buyer to redeem another reward.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.CreateLoyaltyRewardResponse response from the API call</return>
@@ -657,9 +618,7 @@ namespace Square.Apis
         /// to lock for this reward. 
         /// - If the request includes `order_id`, it adds the reward and related discount to the order. 
         /// After a reward is created, the points are locked and 
-        /// not available for the buyer to redeem another reward. 
-        /// For more information, see 
-        /// [Loyalty rewards](https://developer.squareup.com/docs/docs/loyalty-api/overview/#loyalty-overview-loyalty-rewards).
+        /// not available for the buyer to redeem another reward.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.CreateLoyaltyRewardResponse response from the API call</return>
@@ -672,12 +631,9 @@ namespace Square.Apis
             StringBuilder _queryBuilder = new StringBuilder(_baseUri);
             _queryBuilder.Append("/v2/loyalty/rewards");
 
-            //validate and preprocess url
-            string _queryUrl = ApiHelper.CleanUrl(_queryBuilder);
-
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string, string>()
-            { 
+            {
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
@@ -688,13 +644,13 @@ namespace Square.Apis
             var _body = ApiHelper.JsonSerialize(body);
 
             //prepare the API call request to fetch the response
-            HttpRequest _request = GetClientInstance().PostBody(_queryUrl, _headers, _body);
+            HttpRequest _request = GetClientInstance().PostBody(_queryBuilder.ToString(), _headers, _body);
             if (HttpCallBack != null)
             {
                 HttpCallBack.OnBeforeHttpRequestEventHandler(GetClientInstance(), _request);
             }
 
-            _request = await authManagers["default"].ApplyAsync(_request).ConfigureAwait(false);
+            _request = await authManagers["global"].ApplyAsync(_request).ConfigureAwait(false);
 
             //invoke request and get response
             HttpStringResponse _response = await GetClientInstance().ExecuteAsStringAsync(_request, cancellationToken).ConfigureAwait(false);
@@ -716,9 +672,7 @@ namespace Square.Apis
         /// Searches for loyalty rewards in a loyalty account. 
         /// In the current implementation, the endpoint supports search by the reward `status`.
         /// If you know a reward ID, use the 
-        /// [RetrieveLoyaltyReward](https://developer.squareup.com/docs/reference/square/loyalty-api/retrieve-loyalty-reward) endpoint.
-        /// For more information about loyalty rewards, see 
-        /// [Loyalty Rewards](https://developer.squareup.com/docs/docs/loyalty-api/overview/#loyalty-rewards).
+        /// [RetrieveLoyaltyReward](#endpoint-Loyalty-RetrieveLoyaltyReward) endpoint.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.SearchLoyaltyRewardsResponse response from the API call</return>
@@ -733,9 +687,7 @@ namespace Square.Apis
         /// Searches for loyalty rewards in a loyalty account. 
         /// In the current implementation, the endpoint supports search by the reward `status`.
         /// If you know a reward ID, use the 
-        /// [RetrieveLoyaltyReward](https://developer.squareup.com/docs/reference/square/loyalty-api/retrieve-loyalty-reward) endpoint.
-        /// For more information about loyalty rewards, see 
-        /// [Loyalty Rewards](https://developer.squareup.com/docs/docs/loyalty-api/overview/#loyalty-rewards).
+        /// [RetrieveLoyaltyReward](#endpoint-Loyalty-RetrieveLoyaltyReward) endpoint.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.SearchLoyaltyRewardsResponse response from the API call</return>
@@ -748,12 +700,9 @@ namespace Square.Apis
             StringBuilder _queryBuilder = new StringBuilder(_baseUri);
             _queryBuilder.Append("/v2/loyalty/rewards/search");
 
-            //validate and preprocess url
-            string _queryUrl = ApiHelper.CleanUrl(_queryBuilder);
-
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string, string>()
-            { 
+            {
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
@@ -764,13 +713,13 @@ namespace Square.Apis
             var _body = ApiHelper.JsonSerialize(body);
 
             //prepare the API call request to fetch the response
-            HttpRequest _request = GetClientInstance().PostBody(_queryUrl, _headers, _body);
+            HttpRequest _request = GetClientInstance().PostBody(_queryBuilder.ToString(), _headers, _body);
             if (HttpCallBack != null)
             {
                 HttpCallBack.OnBeforeHttpRequestEventHandler(GetClientInstance(), _request);
             }
 
-            _request = await authManagers["default"].ApplyAsync(_request).ConfigureAwait(false);
+            _request = await authManagers["global"].ApplyAsync(_request).ConfigureAwait(false);
 
             //invoke request and get response
             HttpStringResponse _response = await GetClientInstance().ExecuteAsStringAsync(_request, cancellationToken).ConfigureAwait(false);
@@ -792,12 +741,10 @@ namespace Square.Apis
         /// Deletes a loyalty reward by doing the following:
         /// - Returns the loyalty points back to the loyalty account.
         /// - If an order ID was specified when the reward was created 
-        /// (see [CreateLoyaltyReward](https://developer.squareup.com/docs/reference/square/loyalty-api/create-loyalty-reward)), 
+        /// (see [CreateLoyaltyReward](#endpoint-Loyalty-CreateLoyaltyReward)), 
         /// it updates the order by removing the reward and related 
         /// discounts.
-        /// You cannot delete a reward that has reached the terminal state (REDEEMED). 
-        /// For more information, see 
-        /// [Loyalty rewards](https://developer.squareup.com/docs/docs/loyalty-api/overview/#loyalty-overview-loyalty-rewards).
+        /// You cannot delete a reward that has reached the terminal state (REDEEMED).
         /// </summary>
         /// <param name="rewardId">Required parameter: The ID of the [loyalty reward](#type-LoyaltyReward) to delete.</param>
         /// <return>Returns the Models.DeleteLoyaltyRewardResponse response from the API call</return>
@@ -812,12 +759,10 @@ namespace Square.Apis
         /// Deletes a loyalty reward by doing the following:
         /// - Returns the loyalty points back to the loyalty account.
         /// - If an order ID was specified when the reward was created 
-        /// (see [CreateLoyaltyReward](https://developer.squareup.com/docs/reference/square/loyalty-api/create-loyalty-reward)), 
+        /// (see [CreateLoyaltyReward](#endpoint-Loyalty-CreateLoyaltyReward)), 
         /// it updates the order by removing the reward and related 
         /// discounts.
-        /// You cannot delete a reward that has reached the terminal state (REDEEMED). 
-        /// For more information, see 
-        /// [Loyalty rewards](https://developer.squareup.com/docs/docs/loyalty-api/overview/#loyalty-overview-loyalty-rewards).
+        /// You cannot delete a reward that has reached the terminal state (REDEEMED).
         /// </summary>
         /// <param name="rewardId">Required parameter: The ID of the [loyalty reward](#type-LoyaltyReward) to delete.</param>
         /// <return>Returns the Models.DeleteLoyaltyRewardResponse response from the API call</return>
@@ -836,25 +781,22 @@ namespace Square.Apis
                 { "reward_id", rewardId }
             });
 
-            //validate and preprocess url
-            string _queryUrl = ApiHelper.CleanUrl(_queryBuilder);
-
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string, string>()
-            { 
+            {
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "Square-Version", config.SquareVersion }
             };
 
             //prepare the API call request to fetch the response
-            HttpRequest _request = GetClientInstance().Delete(_queryUrl, _headers, null);
+            HttpRequest _request = GetClientInstance().Delete(_queryBuilder.ToString(), _headers, null);
             if (HttpCallBack != null)
             {
                 HttpCallBack.OnBeforeHttpRequestEventHandler(GetClientInstance(), _request);
             }
 
-            _request = await authManagers["default"].ApplyAsync(_request).ConfigureAwait(false);
+            _request = await authManagers["global"].ApplyAsync(_request).ConfigureAwait(false);
 
             //invoke request and get response
             HttpStringResponse _response = await GetClientInstance().ExecuteAsStringAsync(_request, cancellationToken).ConfigureAwait(false);
@@ -904,25 +846,22 @@ namespace Square.Apis
                 { "reward_id", rewardId }
             });
 
-            //validate and preprocess url
-            string _queryUrl = ApiHelper.CleanUrl(_queryBuilder);
-
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string, string>()
-            { 
+            {
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "Square-Version", config.SquareVersion }
             };
 
             //prepare the API call request to fetch the response
-            HttpRequest _request = GetClientInstance().Get(_queryUrl,_headers);
+            HttpRequest _request = GetClientInstance().Get(_queryBuilder.ToString(), _headers);
             if (HttpCallBack != null)
             {
                 HttpCallBack.OnBeforeHttpRequestEventHandler(GetClientInstance(), _request);
             }
 
-            _request = await authManagers["default"].ApplyAsync(_request).ConfigureAwait(false);
+            _request = await authManagers["global"].ApplyAsync(_request).ConfigureAwait(false);
 
             //invoke request and get response
             HttpStringResponse _response = await GetClientInstance().ExecuteAsStringAsync(_request, cancellationToken).ConfigureAwait(false);
@@ -942,15 +881,13 @@ namespace Square.Apis
 
         /// <summary>
         /// Redeems a loyalty reward.
-        /// The endpoint sets the reward to the terminal state (`REDEEMED`). 
+        /// The endpoint sets the reward to the `REDEEMED` terminal state. 
         /// If you are using your own order processing system (not using the 
         /// Orders API), you call this endpoint after the buyer paid for the 
         /// purchase.
         /// After the reward reaches the terminal state, it cannot be deleted. 
         /// In other words, points used for the reward cannot be returned 
         /// to the account.
-        /// For more information, see 
-        /// [Loyalty rewards](https://developer.squareup.com/docs/docs/loyalty-api/overview/#loyalty-overview-loyalty-rewards).
         /// </summary>
         /// <param name="rewardId">Required parameter: The ID of the [loyalty reward](#type-LoyaltyReward) to redeem.</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
@@ -964,15 +901,13 @@ namespace Square.Apis
 
         /// <summary>
         /// Redeems a loyalty reward.
-        /// The endpoint sets the reward to the terminal state (`REDEEMED`). 
+        /// The endpoint sets the reward to the `REDEEMED` terminal state. 
         /// If you are using your own order processing system (not using the 
         /// Orders API), you call this endpoint after the buyer paid for the 
         /// purchase.
         /// After the reward reaches the terminal state, it cannot be deleted. 
         /// In other words, points used for the reward cannot be returned 
         /// to the account.
-        /// For more information, see 
-        /// [Loyalty rewards](https://developer.squareup.com/docs/docs/loyalty-api/overview/#loyalty-overview-loyalty-rewards).
         /// </summary>
         /// <param name="rewardId">Required parameter: The ID of the [loyalty reward](#type-LoyaltyReward) to redeem.</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
@@ -992,12 +927,9 @@ namespace Square.Apis
                 { "reward_id", rewardId }
             });
 
-            //validate and preprocess url
-            string _queryUrl = ApiHelper.CleanUrl(_queryBuilder);
-
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string, string>()
-            { 
+            {
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
@@ -1008,13 +940,13 @@ namespace Square.Apis
             var _body = ApiHelper.JsonSerialize(body);
 
             //prepare the API call request to fetch the response
-            HttpRequest _request = GetClientInstance().PostBody(_queryUrl, _headers, _body);
+            HttpRequest _request = GetClientInstance().PostBody(_queryBuilder.ToString(), _headers, _body);
             if (HttpCallBack != null)
             {
                 HttpCallBack.OnBeforeHttpRequestEventHandler(GetClientInstance(), _request);
             }
 
-            _request = await authManagers["default"].ApplyAsync(_request).ConfigureAwait(false);
+            _request = await authManagers["global"].ApplyAsync(_request).ConfigureAwait(false);
 
             //invoke request and get response
             HttpStringResponse _response = await GetClientInstance().ExecuteAsStringAsync(_request, cancellationToken).ConfigureAwait(false);

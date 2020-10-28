@@ -40,49 +40,49 @@ namespace Square.Models
         /// <summary>
         /// The discount's unique ID.
         /// </summary>
-        [JsonProperty("id")]
+        [JsonProperty("id", NullValueHandling = NullValueHandling.Ignore)]
         public string Id { get; }
 
         /// <summary>
         /// The discount's name.
         /// </summary>
-        [JsonProperty("name")]
+        [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
         public string Name { get; }
 
         /// <summary>
         /// The rate of the discount, as a string representation of a decimal number. A value of 0.07 corresponds to a rate of 7%. This rate is 0 if discount_type is VARIABLE_PERCENTAGE.
         /// </summary>
-        [JsonProperty("rate")]
+        [JsonProperty("rate", NullValueHandling = NullValueHandling.Ignore)]
         public string Rate { get; }
 
         /// <summary>
         /// Getter for amount_money
         /// </summary>
-        [JsonProperty("amount_money")]
+        [JsonProperty("amount_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1Money AmountMoney { get; }
 
         /// <summary>
         /// Getter for discount_type
         /// </summary>
-        [JsonProperty("discount_type")]
+        [JsonProperty("discount_type", NullValueHandling = NullValueHandling.Ignore)]
         public string DiscountType { get; }
 
         /// <summary>
         /// Indicates whether a mobile staff member needs to enter their PIN to apply the discount to a payment.
         /// </summary>
-        [JsonProperty("pin_required")]
+        [JsonProperty("pin_required", NullValueHandling = NullValueHandling.Ignore)]
         public bool? PinRequired { get; }
 
         /// <summary>
         /// Getter for color
         /// </summary>
-        [JsonProperty("color")]
+        [JsonProperty("color", NullValueHandling = NullValueHandling.Ignore)]
         public string Color { get; }
 
         /// <summary>
         /// The ID of the CatalogObject in the Connect v2 API. Objects that are shared across multiple locations share the same v2 ID.
         /// </summary>
-        [JsonProperty("v2_id")]
+        [JsonProperty("v2_id", NullValueHandling = NullValueHandling.Ignore)]
         public string V2Id { get; }
 
         public Builder ToBuilder()
@@ -110,52 +110,53 @@ namespace Square.Models
             private string color;
             private string v2Id;
 
-            public Builder() { }
-            public Builder Id(string value)
+
+
+            public Builder Id(string id)
             {
-                id = value;
+                this.id = id;
                 return this;
             }
 
-            public Builder Name(string value)
+            public Builder Name(string name)
             {
-                name = value;
+                this.name = name;
                 return this;
             }
 
-            public Builder Rate(string value)
+            public Builder Rate(string rate)
             {
-                rate = value;
+                this.rate = rate;
                 return this;
             }
 
-            public Builder AmountMoney(Models.V1Money value)
+            public Builder AmountMoney(Models.V1Money amountMoney)
             {
-                amountMoney = value;
+                this.amountMoney = amountMoney;
                 return this;
             }
 
-            public Builder DiscountType(string value)
+            public Builder DiscountType(string discountType)
             {
-                discountType = value;
+                this.discountType = discountType;
                 return this;
             }
 
-            public Builder PinRequired(bool? value)
+            public Builder PinRequired(bool? pinRequired)
             {
-                pinRequired = value;
+                this.pinRequired = pinRequired;
                 return this;
             }
 
-            public Builder Color(string value)
+            public Builder Color(string color)
             {
-                color = value;
+                this.color = color;
                 return this;
             }
 
-            public Builder V2Id(string value)
+            public Builder V2Id(string v2Id)
             {
-                v2Id = value;
+                this.v2Id = v2Id;
                 return this;
             }
 

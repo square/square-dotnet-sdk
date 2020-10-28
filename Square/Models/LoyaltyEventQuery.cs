@@ -23,7 +23,7 @@ namespace Square.Models
         /// The filtering criteria. If the request specifies multiple filters, 
         /// the endpoint uses a logical AND to evaluate them.
         /// </summary>
-        [JsonProperty("filter")]
+        [JsonProperty("filter", NullValueHandling = NullValueHandling.Ignore)]
         public Models.LoyaltyEventFilter Filter { get; }
 
         public Builder ToBuilder()
@@ -37,10 +37,11 @@ namespace Square.Models
         {
             private Models.LoyaltyEventFilter filter;
 
-            public Builder() { }
-            public Builder Filter(Models.LoyaltyEventFilter value)
+
+
+            public Builder Filter(Models.LoyaltyEventFilter filter)
             {
-                filter = value;
+                this.filter = filter;
                 return this;
             }
 

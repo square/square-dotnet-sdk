@@ -1,12 +1,13 @@
-## Order Fulfillment Shipment Details
+
+# Order Fulfillment Shipment Details
 
 Contains details necessary to fulfill a shipment order.
 
-### Structure
+## Structure
 
 `OrderFulfillmentShipmentDetails`
 
-### Fields
+## Fields
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
@@ -26,7 +27,7 @@ Contains details necessary to fulfill a shipment order.
 | `FailedAt` | `string` | Optional | The [timestamp](#workingwithdates) indicating when the shipment<br>failed to be completed. Must be in RFC 3339 timestamp format, e.g.,<br>"2016-09-04T23:59:33.123Z". |
 | `FailureReason` | `string` | Optional | A description of why the shipment failed to be completed. |
 
-### Example (as JSON)
+## Example (as JSON)
 
 ```json
 {

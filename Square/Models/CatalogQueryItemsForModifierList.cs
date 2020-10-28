@@ -39,9 +39,10 @@ namespace Square.Models
             {
                 this.modifierListIds = modifierListIds;
             }
-            public Builder ModifierListIds(IList<string> value)
+
+            public Builder ModifierListIds(IList<string> modifierListIds)
             {
-                modifierListIds = value;
+                this.modifierListIds = modifierListIds;
                 return this;
             }
 

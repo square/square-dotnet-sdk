@@ -38,7 +38,8 @@ namespace Square.Models
             Models.Coordinates coordinates = null,
             string logoUrl = null,
             string posBackgroundUrl = null,
-            string mcc = null)
+            string mcc = null,
+            string fullFormatLogoUrl = null)
         {
             Id = id;
             Name = name;
@@ -65,32 +66,33 @@ namespace Square.Models
             LogoUrl = logoUrl;
             PosBackgroundUrl = posBackgroundUrl;
             Mcc = mcc;
+            FullFormatLogoUrl = fullFormatLogoUrl;
         }
 
         /// <summary>
         /// The Square-issued ID of the location.
         /// </summary>
-        [JsonProperty("id")]
+        [JsonProperty("id", NullValueHandling = NullValueHandling.Ignore)]
         public string Id { get; }
 
         /// <summary>
         /// The name of the location.
         /// This information appears in the dashboard as the nickname.
         /// </summary>
-        [JsonProperty("name")]
+        [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
         public string Name { get; }
 
         /// <summary>
         /// Represents a physical address.
         /// </summary>
-        [JsonProperty("address")]
+        [JsonProperty("address", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Address Address { get; }
 
         /// <summary>
         /// The [IANA Timezone](https://www.iana.org/time-zones) identifier for
         /// the timezone of the location.
         /// </summary>
-        [JsonProperty("timezone")]
+        [JsonProperty("timezone", NullValueHandling = NullValueHandling.Ignore)]
         public string Timezone { get; }
 
         /// <summary>
@@ -98,52 +100,52 @@ namespace Square.Models
         /// See [LocationCapability](#type-locationcapability) for possible values.
         /// See [LocationCapability](#type-locationcapability) for possible values
         /// </summary>
-        [JsonProperty("capabilities")]
+        [JsonProperty("capabilities", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> Capabilities { get; }
 
         /// <summary>
         /// The status of the location, whether a location is active or inactive.
         /// </summary>
-        [JsonProperty("status")]
+        [JsonProperty("status", NullValueHandling = NullValueHandling.Ignore)]
         public string Status { get; }
 
         /// <summary>
         /// The time when the location was created, in RFC 3339 format.
         /// </summary>
-        [JsonProperty("created_at")]
+        [JsonProperty("created_at", NullValueHandling = NullValueHandling.Ignore)]
         public string CreatedAt { get; }
 
         /// <summary>
         /// The ID of the merchant that owns the location.
         /// </summary>
-        [JsonProperty("merchant_id")]
+        [JsonProperty("merchant_id", NullValueHandling = NullValueHandling.Ignore)]
         public string MerchantId { get; }
 
         /// <summary>
         /// Indicates the country associated with another entity, such as a business.
         /// Values are in [ISO 3166-1-alpha-2 format](http://www.iso.org/iso/home/standards/country_codes.htm).
         /// </summary>
-        [JsonProperty("country")]
+        [JsonProperty("country", NullValueHandling = NullValueHandling.Ignore)]
         public string Country { get; }
 
         /// <summary>
         /// The language associated with the location, in
         /// [BCP 47 format](https://tools.ietf.org/html/bcp47#appendix-A).
         /// </summary>
-        [JsonProperty("language_code")]
+        [JsonProperty("language_code", NullValueHandling = NullValueHandling.Ignore)]
         public string LanguageCode { get; }
 
         /// <summary>
         /// Indicates the associated currency for an amount of money. Values correspond
         /// to [ISO 4217](https://wikipedia.org/wiki/ISO_4217).
         /// </summary>
-        [JsonProperty("currency")]
+        [JsonProperty("currency", NullValueHandling = NullValueHandling.Ignore)]
         public string Currency { get; }
 
         /// <summary>
         /// The phone number of the location in human readable format.
         /// </summary>
-        [JsonProperty("phone_number")]
+        [JsonProperty("phone_number", NullValueHandling = NullValueHandling.Ignore)]
         public string PhoneNumber { get; }
 
         /// <summary>
@@ -151,25 +153,25 @@ namespace Square.Models
         /// This is the name visible to the customers of the location.
         /// For example, this name appears on customer receipts.
         /// </summary>
-        [JsonProperty("business_name")]
+        [JsonProperty("business_name", NullValueHandling = NullValueHandling.Ignore)]
         public string BusinessName { get; }
 
         /// <summary>
         /// A location's physical or mobile type.
         /// </summary>
-        [JsonProperty("type")]
+        [JsonProperty("type", NullValueHandling = NullValueHandling.Ignore)]
         public string Type { get; }
 
         /// <summary>
         /// The website URL of the location.
         /// </summary>
-        [JsonProperty("website_url")]
+        [JsonProperty("website_url", NullValueHandling = NullValueHandling.Ignore)]
         public string WebsiteUrl { get; }
 
         /// <summary>
         /// Represents the hours of operation for a business location.
         /// </summary>
-        [JsonProperty("business_hours")]
+        [JsonProperty("business_hours", NullValueHandling = NullValueHandling.Ignore)]
         public Models.BusinessHours BusinessHours { get; }
 
         /// <summary>
@@ -177,57 +179,69 @@ namespace Square.Models
         /// This email is visible to the customers of the location.
         /// For example, the email appears on customer receipts.
         /// </summary>
-        [JsonProperty("business_email")]
+        [JsonProperty("business_email", NullValueHandling = NullValueHandling.Ignore)]
         public string BusinessEmail { get; }
 
         /// <summary>
         /// The description of the location.
         /// </summary>
-        [JsonProperty("description")]
+        [JsonProperty("description", NullValueHandling = NullValueHandling.Ignore)]
         public string Description { get; }
 
         /// <summary>
         /// The Twitter username of the location without the '@' symbol.
         /// </summary>
-        [JsonProperty("twitter_username")]
+        [JsonProperty("twitter_username", NullValueHandling = NullValueHandling.Ignore)]
         public string TwitterUsername { get; }
 
         /// <summary>
         /// The Instagram username of the location without the '@' symbol.
         /// </summary>
-        [JsonProperty("instagram_username")]
+        [JsonProperty("instagram_username", NullValueHandling = NullValueHandling.Ignore)]
         public string InstagramUsername { get; }
 
         /// <summary>
         /// The Facebook profile URL of the location. The URL should begin with 'facebook.com/'.
         /// </summary>
-        [JsonProperty("facebook_url")]
+        [JsonProperty("facebook_url", NullValueHandling = NullValueHandling.Ignore)]
         public string FacebookUrl { get; }
 
         /// <summary>
         /// Latitude and longitude coordinates.
         /// </summary>
-        [JsonProperty("coordinates")]
+        [JsonProperty("coordinates", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Coordinates Coordinates { get; }
 
         /// <summary>
-        /// The URL of the logo image for the location.
+        /// The URL of the logo image for the location. The Seller must choose this logo in the Seller
+        /// dashboard (Receipts section) for the logo to appear on transactions (such as receipts, invoices)
+        /// that Square generates on behalf of the Seller. This image should have an aspect ratio
+        /// close to 1:1 and is recommended to be at least 200x200 pixels.
         /// </summary>
-        [JsonProperty("logo_url")]
+        [JsonProperty("logo_url", NullValueHandling = NullValueHandling.Ignore)]
         public string LogoUrl { get; }
 
         /// <summary>
         /// The URL of the Point of Sale background image for the location.
         /// </summary>
-        [JsonProperty("pos_background_url")]
+        [JsonProperty("pos_background_url", NullValueHandling = NullValueHandling.Ignore)]
         public string PosBackgroundUrl { get; }
 
         /// <summary>
         /// The merchant category code (MCC) of the location, as standardized by ISO 18245.
         /// The MCC describes the kind of goods or services sold at the location.
         /// </summary>
-        [JsonProperty("mcc")]
+        [JsonProperty("mcc", NullValueHandling = NullValueHandling.Ignore)]
         public string Mcc { get; }
+
+        /// <summary>
+        /// The URL of a full-format logo image for the location. The Seller must choose this logo in the
+        /// Seller dashboard (Receipts section) for the logo to appear on transactions (such as receipts, invoices)
+        /// that Square generates on behalf of the Seller. This image can have an aspect ratio of 2:1 or greater
+        /// and is recommended to be at least 1280x648 pixels.
+        /// </summary>
+        [JsonProperty("full_format_logo_url", NullValueHandling = NullValueHandling.Ignore)]
+        public string FullFormatLogoUrl { get; }
 
         public Builder ToBuilder()
         {
@@ -256,7 +270,8 @@ namespace Square.Models
                 .Coordinates(Coordinates)
                 .LogoUrl(LogoUrl)
                 .PosBackgroundUrl(PosBackgroundUrl)
-                .Mcc(Mcc);
+                .Mcc(Mcc)
+                .FullFormatLogoUrl(FullFormatLogoUrl);
             return builder;
         }
 
@@ -266,7 +281,7 @@ namespace Square.Models
             private string name;
             private Models.Address address;
             private string timezone;
-            private IList<string> capabilities = new List<string>();
+            private IList<string> capabilities;
             private string status;
             private string createdAt;
             private string merchantId;
@@ -287,155 +302,163 @@ namespace Square.Models
             private string logoUrl;
             private string posBackgroundUrl;
             private string mcc;
+            private string fullFormatLogoUrl;
 
-            public Builder() { }
-            public Builder Id(string value)
+
+
+            public Builder Id(string id)
             {
-                id = value;
+                this.id = id;
                 return this;
             }
 
-            public Builder Name(string value)
+            public Builder Name(string name)
             {
-                name = value;
+                this.name = name;
                 return this;
             }
 
-            public Builder Address(Models.Address value)
+            public Builder Address(Models.Address address)
             {
-                address = value;
+                this.address = address;
                 return this;
             }
 
-            public Builder Timezone(string value)
+            public Builder Timezone(string timezone)
             {
-                timezone = value;
+                this.timezone = timezone;
                 return this;
             }
 
-            public Builder Capabilities(IList<string> value)
+            public Builder Capabilities(IList<string> capabilities)
             {
-                capabilities = value;
+                this.capabilities = capabilities;
                 return this;
             }
 
-            public Builder Status(string value)
+            public Builder Status(string status)
             {
-                status = value;
+                this.status = status;
                 return this;
             }
 
-            public Builder CreatedAt(string value)
+            public Builder CreatedAt(string createdAt)
             {
-                createdAt = value;
+                this.createdAt = createdAt;
                 return this;
             }
 
-            public Builder MerchantId(string value)
+            public Builder MerchantId(string merchantId)
             {
-                merchantId = value;
+                this.merchantId = merchantId;
                 return this;
             }
 
-            public Builder Country(string value)
+            public Builder Country(string country)
             {
-                country = value;
+                this.country = country;
                 return this;
             }
 
-            public Builder LanguageCode(string value)
+            public Builder LanguageCode(string languageCode)
             {
-                languageCode = value;
+                this.languageCode = languageCode;
                 return this;
             }
 
-            public Builder Currency(string value)
+            public Builder Currency(string currency)
             {
-                currency = value;
+                this.currency = currency;
                 return this;
             }
 
-            public Builder PhoneNumber(string value)
+            public Builder PhoneNumber(string phoneNumber)
             {
-                phoneNumber = value;
+                this.phoneNumber = phoneNumber;
                 return this;
             }
 
-            public Builder BusinessName(string value)
+            public Builder BusinessName(string businessName)
             {
-                businessName = value;
+                this.businessName = businessName;
                 return this;
             }
 
-            public Builder Type(string value)
+            public Builder Type(string type)
             {
-                type = value;
+                this.type = type;
                 return this;
             }
 
-            public Builder WebsiteUrl(string value)
+            public Builder WebsiteUrl(string websiteUrl)
             {
-                websiteUrl = value;
+                this.websiteUrl = websiteUrl;
                 return this;
             }
 
-            public Builder BusinessHours(Models.BusinessHours value)
+            public Builder BusinessHours(Models.BusinessHours businessHours)
             {
-                businessHours = value;
+                this.businessHours = businessHours;
                 return this;
             }
 
-            public Builder BusinessEmail(string value)
+            public Builder BusinessEmail(string businessEmail)
             {
-                businessEmail = value;
+                this.businessEmail = businessEmail;
                 return this;
             }
 
-            public Builder Description(string value)
+            public Builder Description(string description)
             {
-                description = value;
+                this.description = description;
                 return this;
             }
 
-            public Builder TwitterUsername(string value)
+            public Builder TwitterUsername(string twitterUsername)
             {
-                twitterUsername = value;
+                this.twitterUsername = twitterUsername;
                 return this;
             }
 
-            public Builder InstagramUsername(string value)
+            public Builder InstagramUsername(string instagramUsername)
             {
-                instagramUsername = value;
+                this.instagramUsername = instagramUsername;
                 return this;
             }
 
-            public Builder FacebookUrl(string value)
+            public Builder FacebookUrl(string facebookUrl)
             {
-                facebookUrl = value;
+                this.facebookUrl = facebookUrl;
                 return this;
             }
 
-            public Builder Coordinates(Models.Coordinates value)
+            public Builder Coordinates(Models.Coordinates coordinates)
             {
-                coordinates = value;
+                this.coordinates = coordinates;
                 return this;
             }
 
-            public Builder LogoUrl(string value)
+            public Builder LogoUrl(string logoUrl)
             {
-                logoUrl = value;
+                this.logoUrl = logoUrl;
                 return this;
             }
 
-            public Builder PosBackgroundUrl(string value)
+            public Builder PosBackgroundUrl(string posBackgroundUrl)
             {
-                posBackgroundUrl = value;
+                this.posBackgroundUrl = posBackgroundUrl;
                 return this;
             }
 
-            public Builder Mcc(string value)
+            public Builder Mcc(string mcc)
             {
-                mcc = value;
+                this.mcc = mcc;
+                return this;
+            }
+
+            public Builder FullFormatLogoUrl(string fullFormatLogoUrl)
+            {
+                this.fullFormatLogoUrl = fullFormatLogoUrl;
                 return this;
             }
 
@@ -465,7 +488,8 @@ namespace Square.Models
                     coordinates,
                     logoUrl,
                     posBackgroundUrl,
-                    mcc);
+                    mcc,
+                    fullFormatLogoUrl);
             }
         }
     }

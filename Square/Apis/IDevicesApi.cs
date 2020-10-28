@@ -22,8 +22,13 @@ namespace Square.Apis
         /// <param name="cursor">Optional parameter: A pagination cursor returned by a previous call to this endpoint. Provide this to retrieve the next set of results for your original query.  See [Paginating results](#paginatingresults) for more information.</param>
         /// <param name="locationId">Optional parameter: If specified, only returns DeviceCodes of the specified location. Returns DeviceCodes of all locations if empty.</param>
         /// <param name="productType">Optional parameter: If specified, only returns DeviceCodes targeting the specified product type. Returns DeviceCodes of all product types if empty.</param>
+        /// <param name="status">Optional parameter: If specified, returns DeviceCodes with the specified statuses. Returns DeviceCodes of status `PAIRED` and `UNPAIRED` if empty.</param>
         /// <return>Returns the Models.ListDeviceCodesResponse response from the API call</return>
-        Models.ListDeviceCodesResponse ListDeviceCodes(string cursor = null, string locationId = null, string productType = null);
+        Models.ListDeviceCodesResponse ListDeviceCodes(
+                string cursor = null,
+                string locationId = null,
+                string productType = null,
+                string status = null);
 
         /// <summary>
         /// Lists all DeviceCodes associated with the merchant.
@@ -31,8 +36,13 @@ namespace Square.Apis
         /// <param name="cursor">Optional parameter: A pagination cursor returned by a previous call to this endpoint. Provide this to retrieve the next set of results for your original query.  See [Paginating results](#paginatingresults) for more information.</param>
         /// <param name="locationId">Optional parameter: If specified, only returns DeviceCodes of the specified location. Returns DeviceCodes of all locations if empty.</param>
         /// <param name="productType">Optional parameter: If specified, only returns DeviceCodes targeting the specified product type. Returns DeviceCodes of all product types if empty.</param>
+        /// <param name="status">Optional parameter: If specified, returns DeviceCodes with the specified statuses. Returns DeviceCodes of status `PAIRED` and `UNPAIRED` if empty.</param>
         /// <return>Returns the Models.ListDeviceCodesResponse response from the API call</return>
-        Task<Models.ListDeviceCodesResponse> ListDeviceCodesAsync(string cursor = null, string locationId = null, string productType = null, CancellationToken cancellationToken = default);
+        Task<Models.ListDeviceCodesResponse> ListDeviceCodesAsync(
+                string cursor = null,
+                string locationId = null,
+                string productType = null,
+                string status = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Creates a DeviceCode that can be used to login to a Square Terminal device to enter the connected

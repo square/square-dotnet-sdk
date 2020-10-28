@@ -52,15 +52,16 @@ namespace Square.Models
                 this.idempotencyKey = idempotencyKey;
                 this.adjustPoints = adjustPoints;
             }
-            public Builder IdempotencyKey(string value)
+
+            public Builder IdempotencyKey(string idempotencyKey)
             {
-                idempotencyKey = value;
+                this.idempotencyKey = idempotencyKey;
                 return this;
             }
 
-            public Builder AdjustPoints(Models.LoyaltyEventAdjustPoints value)
+            public Builder AdjustPoints(Models.LoyaltyEventAdjustPoints adjustPoints)
             {
-                adjustPoints = value;
+                this.adjustPoints = adjustPoints;
                 return this;
             }
 

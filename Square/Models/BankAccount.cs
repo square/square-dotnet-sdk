@@ -101,27 +101,27 @@ namespace Square.Models
         /// Secondary identifier for the bank. For more information, see 
         /// [Bank Accounts API](https://developer.squareup.com/docs/docs/bank-accounts-api).
         /// </summary>
-        [JsonProperty("secondary_bank_identification_number")]
+        [JsonProperty("secondary_bank_identification_number", NullValueHandling = NullValueHandling.Ignore)]
         public string SecondaryBankIdentificationNumber { get; }
 
         /// <summary>
         /// Reference identifier that will be displayed to UK bank account owners
         /// when collecting direct debit authorization. Only required for UK bank accounts.
         /// </summary>
-        [JsonProperty("debit_mandate_reference_id")]
+        [JsonProperty("debit_mandate_reference_id", NullValueHandling = NullValueHandling.Ignore)]
         public string DebitMandateReferenceId { get; }
 
         /// <summary>
         /// Client-provided identifier for linking the banking account to an entity
         /// in a third-party system (for example, a bank account number or a user identifier).
         /// </summary>
-        [JsonProperty("reference_id")]
+        [JsonProperty("reference_id", NullValueHandling = NullValueHandling.Ignore)]
         public string ReferenceId { get; }
 
         /// <summary>
         /// The location to which the bank account belongs.
         /// </summary>
-        [JsonProperty("location_id")]
+        [JsonProperty("location_id", NullValueHandling = NullValueHandling.Ignore)]
         public string LocationId { get; }
 
         /// <summary>
@@ -148,20 +148,20 @@ namespace Square.Models
         /// account information. The account fingerprint can be used to compare account
         /// entries and determine if the they represent the same real-world bank account.
         /// </summary>
-        [JsonProperty("fingerprint")]
+        [JsonProperty("fingerprint", NullValueHandling = NullValueHandling.Ignore)]
         public string Fingerprint { get; }
 
         /// <summary>
         /// The current version of the `BankAccount`.
         /// </summary>
-        [JsonProperty("version")]
+        [JsonProperty("version", NullValueHandling = NullValueHandling.Ignore)]
         public int? Version { get; }
 
         /// <summary>
         /// Read only. Name of actual financial institution. 
         /// For example "Bank of America".
         /// </summary>
-        [JsonProperty("bank_name")]
+        [JsonProperty("bank_name", NullValueHandling = NullValueHandling.Ignore)]
         public string BankName { get; }
 
         public Builder ToBuilder()
@@ -228,105 +228,106 @@ namespace Square.Models
                 this.creditable = creditable;
                 this.debitable = debitable;
             }
-            public Builder Id(string value)
+
+            public Builder Id(string id)
             {
-                id = value;
+                this.id = id;
                 return this;
             }
 
-            public Builder AccountNumberSuffix(string value)
+            public Builder AccountNumberSuffix(string accountNumberSuffix)
             {
-                accountNumberSuffix = value;
+                this.accountNumberSuffix = accountNumberSuffix;
                 return this;
             }
 
-            public Builder Country(string value)
+            public Builder Country(string country)
             {
-                country = value;
+                this.country = country;
                 return this;
             }
 
-            public Builder Currency(string value)
+            public Builder Currency(string currency)
             {
-                currency = value;
+                this.currency = currency;
                 return this;
             }
 
-            public Builder AccountType(string value)
+            public Builder AccountType(string accountType)
             {
-                accountType = value;
+                this.accountType = accountType;
                 return this;
             }
 
-            public Builder HolderName(string value)
+            public Builder HolderName(string holderName)
             {
-                holderName = value;
+                this.holderName = holderName;
                 return this;
             }
 
-            public Builder PrimaryBankIdentificationNumber(string value)
+            public Builder PrimaryBankIdentificationNumber(string primaryBankIdentificationNumber)
             {
-                primaryBankIdentificationNumber = value;
+                this.primaryBankIdentificationNumber = primaryBankIdentificationNumber;
                 return this;
             }
 
-            public Builder Status(string value)
+            public Builder Status(string status)
             {
-                status = value;
+                this.status = status;
                 return this;
             }
 
-            public Builder Creditable(bool value)
+            public Builder Creditable(bool creditable)
             {
-                creditable = value;
+                this.creditable = creditable;
                 return this;
             }
 
-            public Builder Debitable(bool value)
+            public Builder Debitable(bool debitable)
             {
-                debitable = value;
+                this.debitable = debitable;
                 return this;
             }
 
-            public Builder SecondaryBankIdentificationNumber(string value)
+            public Builder SecondaryBankIdentificationNumber(string secondaryBankIdentificationNumber)
             {
-                secondaryBankIdentificationNumber = value;
+                this.secondaryBankIdentificationNumber = secondaryBankIdentificationNumber;
                 return this;
             }
 
-            public Builder DebitMandateReferenceId(string value)
+            public Builder DebitMandateReferenceId(string debitMandateReferenceId)
             {
-                debitMandateReferenceId = value;
+                this.debitMandateReferenceId = debitMandateReferenceId;
                 return this;
             }
 
-            public Builder ReferenceId(string value)
+            public Builder ReferenceId(string referenceId)
             {
-                referenceId = value;
+                this.referenceId = referenceId;
                 return this;
             }
 
-            public Builder LocationId(string value)
+            public Builder LocationId(string locationId)
             {
-                locationId = value;
+                this.locationId = locationId;
                 return this;
             }
 
-            public Builder Fingerprint(string value)
+            public Builder Fingerprint(string fingerprint)
             {
-                fingerprint = value;
+                this.fingerprint = fingerprint;
                 return this;
             }
 
-            public Builder Version(int? value)
+            public Builder Version(int? version)
             {
-                version = value;
+                this.version = version;
                 return this;
             }
 
-            public Builder BankName(string value)
+            public Builder BankName(string bankName)
             {
-                bankName = value;
+                this.bankName = bankName;
                 return this;
             }
 

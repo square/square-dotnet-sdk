@@ -30,13 +30,13 @@ namespace Square.Models
         /// <summary>
         /// Any errors that occurred during the request.
         /// </summary>
-        [JsonProperty("errors")]
+        [JsonProperty("errors", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.Error> Errors { get; }
 
         /// <summary>
         /// The loyalty events that satisfy the search criteria.
         /// </summary>
-        [JsonProperty("events")]
+        [JsonProperty("events", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.LoyaltyEvent> Events { get; }
 
         /// <summary>
@@ -45,7 +45,7 @@ namespace Square.Models
         /// For more information, 
         /// see [Pagination](https://developer.squareup.com/docs/docs/basics/api101/pagination).
         /// </summary>
-        [JsonProperty("cursor")]
+        [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
         public string Cursor { get; }
 
         public Builder ToBuilder()
@@ -59,26 +59,27 @@ namespace Square.Models
 
         public class Builder
         {
-            private IList<Models.Error> errors = new List<Models.Error>();
-            private IList<Models.LoyaltyEvent> events = new List<Models.LoyaltyEvent>();
+            private IList<Models.Error> errors;
+            private IList<Models.LoyaltyEvent> events;
             private string cursor;
 
-            public Builder() { }
-            public Builder Errors(IList<Models.Error> value)
+
+
+            public Builder Errors(IList<Models.Error> errors)
             {
-                errors = value;
+                this.errors = errors;
                 return this;
             }
 
-            public Builder Events(IList<Models.LoyaltyEvent> value)
+            public Builder Events(IList<Models.LoyaltyEvent> events)
             {
-                events = value;
+                this.events = events;
                 return this;
             }
 
-            public Builder Cursor(string value)
+            public Builder Cursor(string cursor)
             {
-                cursor = value;
+                this.cursor = cursor;
                 return this;
             }
 

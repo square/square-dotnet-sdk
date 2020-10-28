@@ -52,13 +52,13 @@ namespace Square.Models
         /// - `REJECTED` - the refund was rejected
         /// - `FAILED` - an error occurred
         /// </summary>
-        [JsonProperty("status")]
+        [JsonProperty("status", NullValueHandling = NullValueHandling.Ignore)]
         public string Status { get; }
 
         /// <summary>
         /// Location ID associated with the payment this refund is attached to.
         /// </summary>
-        [JsonProperty("location_id")]
+        [JsonProperty("location_id", NullValueHandling = NullValueHandling.Ignore)]
         public string LocationId { get; }
 
         /// <summary>
@@ -80,43 +80,43 @@ namespace Square.Models
         /// [Working with Monetary Amounts](https://developer.squareup.com/docs/build-basics/working-with-monetary-amounts)
         /// for more information.
         /// </summary>
-        [JsonProperty("app_fee_money")]
+        [JsonProperty("app_fee_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Money AppFeeMoney { get; }
 
         /// <summary>
         /// Processing fees and fee adjustments assessed by Square on this refund.
         /// </summary>
-        [JsonProperty("processing_fee")]
+        [JsonProperty("processing_fee", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.ProcessingFee> ProcessingFee { get; }
 
         /// <summary>
         /// The ID of the payment assocated with this refund.
         /// </summary>
-        [JsonProperty("payment_id")]
+        [JsonProperty("payment_id", NullValueHandling = NullValueHandling.Ignore)]
         public string PaymentId { get; }
 
         /// <summary>
         /// The ID of the order associated with the refund.
         /// </summary>
-        [JsonProperty("order_id")]
+        [JsonProperty("order_id", NullValueHandling = NullValueHandling.Ignore)]
         public string OrderId { get; }
 
         /// <summary>
         /// The reason for the refund.
         /// </summary>
-        [JsonProperty("reason")]
+        [JsonProperty("reason", NullValueHandling = NullValueHandling.Ignore)]
         public string Reason { get; }
 
         /// <summary>
         /// Timestamp of when the refund was created, in RFC 3339 format.
         /// </summary>
-        [JsonProperty("created_at")]
+        [JsonProperty("created_at", NullValueHandling = NullValueHandling.Ignore)]
         public string CreatedAt { get; }
 
         /// <summary>
         /// Timestamp of when the refund was last updated, in RFC 3339 format.
         /// </summary>
-        [JsonProperty("updated_at")]
+        [JsonProperty("updated_at", NullValueHandling = NullValueHandling.Ignore)]
         public string UpdatedAt { get; }
 
         public Builder ToBuilder()
@@ -142,7 +142,7 @@ namespace Square.Models
             private string status;
             private string locationId;
             private Models.Money appFeeMoney;
-            private IList<Models.ProcessingFee> processingFee = new List<Models.ProcessingFee>();
+            private IList<Models.ProcessingFee> processingFee;
             private string paymentId;
             private string orderId;
             private string reason;
@@ -155,69 +155,70 @@ namespace Square.Models
                 this.id = id;
                 this.amountMoney = amountMoney;
             }
-            public Builder Id(string value)
+
+            public Builder Id(string id)
             {
-                id = value;
+                this.id = id;
                 return this;
             }
 
-            public Builder AmountMoney(Models.Money value)
+            public Builder AmountMoney(Models.Money amountMoney)
             {
-                amountMoney = value;
+                this.amountMoney = amountMoney;
                 return this;
             }
 
-            public Builder Status(string value)
+            public Builder Status(string status)
             {
-                status = value;
+                this.status = status;
                 return this;
             }
 
-            public Builder LocationId(string value)
+            public Builder LocationId(string locationId)
             {
-                locationId = value;
+                this.locationId = locationId;
                 return this;
             }
 
-            public Builder AppFeeMoney(Models.Money value)
+            public Builder AppFeeMoney(Models.Money appFeeMoney)
             {
-                appFeeMoney = value;
+                this.appFeeMoney = appFeeMoney;
                 return this;
             }
 
-            public Builder ProcessingFee(IList<Models.ProcessingFee> value)
+            public Builder ProcessingFee(IList<Models.ProcessingFee> processingFee)
             {
-                processingFee = value;
+                this.processingFee = processingFee;
                 return this;
             }
 
-            public Builder PaymentId(string value)
+            public Builder PaymentId(string paymentId)
             {
-                paymentId = value;
+                this.paymentId = paymentId;
                 return this;
             }
 
-            public Builder OrderId(string value)
+            public Builder OrderId(string orderId)
             {
-                orderId = value;
+                this.orderId = orderId;
                 return this;
             }
 
-            public Builder Reason(string value)
+            public Builder Reason(string reason)
             {
-                reason = value;
+                this.reason = reason;
                 return this;
             }
 
-            public Builder CreatedAt(string value)
+            public Builder CreatedAt(string createdAt)
             {
-                createdAt = value;
+                this.createdAt = createdAt;
                 return this;
             }
 
-            public Builder UpdatedAt(string value)
+            public Builder UpdatedAt(string updatedAt)
             {
-                updatedAt = value;
+                this.updatedAt = updatedAt;
                 return this;
             }
 

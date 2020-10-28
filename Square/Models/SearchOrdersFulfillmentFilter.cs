@@ -27,7 +27,7 @@ namespace Square.Models
         /// listed in this field.
         /// See [OrderFulfillmentType](#type-orderfulfillmenttype) for possible values
         /// </summary>
-        [JsonProperty("fulfillment_types")]
+        [JsonProperty("fulfillment_types", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> FulfillmentTypes { get; }
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace Square.Models
         /// fulfillment states listed in this field.
         /// See [OrderFulfillmentState](#type-orderfulfillmentstate) for possible values
         /// </summary>
-        [JsonProperty("fulfillment_states")]
+        [JsonProperty("fulfillment_states", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> FulfillmentStates { get; }
 
         public Builder ToBuilder()
@@ -49,19 +49,20 @@ namespace Square.Models
 
         public class Builder
         {
-            private IList<string> fulfillmentTypes = new List<string>();
-            private IList<string> fulfillmentStates = new List<string>();
+            private IList<string> fulfillmentTypes;
+            private IList<string> fulfillmentStates;
 
-            public Builder() { }
-            public Builder FulfillmentTypes(IList<string> value)
+
+
+            public Builder FulfillmentTypes(IList<string> fulfillmentTypes)
             {
-                fulfillmentTypes = value;
+                this.fulfillmentTypes = fulfillmentTypes;
                 return this;
             }
 
-            public Builder FulfillmentStates(IList<string> value)
+            public Builder FulfillmentStates(IList<string> fulfillmentStates)
             {
-                fulfillmentStates = value;
+                this.fulfillmentStates = fulfillmentStates;
                 return this;
             }
 

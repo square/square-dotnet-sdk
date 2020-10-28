@@ -1,7 +1,7 @@
 using System;
 using System.Net;
 using Square.Models;
-
+using Square.Authentication;
 namespace Square
 {
     public interface IConfiguration
@@ -17,14 +17,14 @@ namespace Square
         string SquareVersion { get; }
 
         /// <summary>
-        /// OAuth 2.0 Access Token
-        /// </summary>
-        string AccessToken { get; }
-
-        /// <summary>
         /// Current API environment
         /// </summary>
         Environment Environment { get; }
+
+        /// <summary>
+        /// OAuth 2.0 Access Token
+        /// </summary>
+        string AccessToken { get; }
 
         /// <summary>
         /// Gets the URL for a particular alias in the current environment and appends it with template parameters

@@ -32,7 +32,7 @@ namespace Square.Models
         /// <summary>
         /// UUID for this object
         /// </summary>
-        [JsonProperty("id")]
+        [JsonProperty("id", NullValueHandling = NullValueHandling.Ignore)]
         public string Id { get; }
 
         /// <summary>
@@ -55,19 +55,19 @@ namespace Square.Models
         /// Square executes a blind write; potentially overwriting data from another
         /// write.
         /// </summary>
-        [JsonProperty("version")]
+        [JsonProperty("version", NullValueHandling = NullValueHandling.Ignore)]
         public int? Version { get; }
 
         /// <summary>
         /// A read-only timestamp in RFC 3339 format; presented in UTC
         /// </summary>
-        [JsonProperty("created_at")]
+        [JsonProperty("created_at", NullValueHandling = NullValueHandling.Ignore)]
         public string CreatedAt { get; }
 
         /// <summary>
         /// A read-only timestamp in RFC 3339 format; presented in UTC
         /// </summary>
-        [JsonProperty("updated_at")]
+        [JsonProperty("updated_at", NullValueHandling = NullValueHandling.Ignore)]
         public string UpdatedAt { get; }
 
         public Builder ToBuilder()
@@ -96,39 +96,40 @@ namespace Square.Models
                 this.startOfWeek = startOfWeek;
                 this.startOfDayLocalTime = startOfDayLocalTime;
             }
-            public Builder StartOfWeek(string value)
+
+            public Builder StartOfWeek(string startOfWeek)
             {
-                startOfWeek = value;
+                this.startOfWeek = startOfWeek;
                 return this;
             }
 
-            public Builder StartOfDayLocalTime(string value)
+            public Builder StartOfDayLocalTime(string startOfDayLocalTime)
             {
-                startOfDayLocalTime = value;
+                this.startOfDayLocalTime = startOfDayLocalTime;
                 return this;
             }
 
-            public Builder Id(string value)
+            public Builder Id(string id)
             {
-                id = value;
+                this.id = id;
                 return this;
             }
 
-            public Builder Version(int? value)
+            public Builder Version(int? version)
             {
-                version = value;
+                this.version = version;
                 return this;
             }
 
-            public Builder CreatedAt(string value)
+            public Builder CreatedAt(string createdAt)
             {
-                createdAt = value;
+                this.createdAt = createdAt;
                 return this;
             }
 
-            public Builder UpdatedAt(string value)
+            public Builder UpdatedAt(string updatedAt)
             {
-                updatedAt = value;
+                this.updatedAt = updatedAt;
                 return this;
             }
 

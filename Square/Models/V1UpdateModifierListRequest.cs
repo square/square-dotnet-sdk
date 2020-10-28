@@ -24,13 +24,13 @@ namespace Square.Models
         /// <summary>
         /// The modifier list's name.
         /// </summary>
-        [JsonProperty("name")]
+        [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
         public string Name { get; }
 
         /// <summary>
         /// Getter for selection_type
         /// </summary>
-        [JsonProperty("selection_type")]
+        [JsonProperty("selection_type", NullValueHandling = NullValueHandling.Ignore)]
         public string SelectionType { get; }
 
         public Builder ToBuilder()
@@ -46,16 +46,17 @@ namespace Square.Models
             private string name;
             private string selectionType;
 
-            public Builder() { }
-            public Builder Name(string value)
+
+
+            public Builder Name(string name)
             {
-                name = value;
+                this.name = name;
                 return this;
             }
 
-            public Builder SelectionType(string value)
+            public Builder SelectionType(string selectionType)
             {
-                selectionType = value;
+                this.selectionType = selectionType;
                 return this;
             }
 

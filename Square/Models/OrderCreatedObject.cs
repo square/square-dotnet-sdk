@@ -22,7 +22,7 @@ namespace Square.Models
         /// <summary>
         /// Getter for order_created
         /// </summary>
-        [JsonProperty("order_created")]
+        [JsonProperty("order_created", NullValueHandling = NullValueHandling.Ignore)]
         public Models.OrderCreated OrderCreated { get; }
 
         public Builder ToBuilder()
@@ -36,10 +36,11 @@ namespace Square.Models
         {
             private Models.OrderCreated orderCreated;
 
-            public Builder() { }
-            public Builder OrderCreated(Models.OrderCreated value)
+
+
+            public Builder OrderCreated(Models.OrderCreated orderCreated)
             {
-                orderCreated = value;
+                this.orderCreated = orderCreated;
                 return this;
             }
 

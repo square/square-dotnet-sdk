@@ -27,13 +27,13 @@ namespace Square.Models
         /// A range defined by two dates. Used for filtering a query for Connect v2
         /// objects that have date properties.
         /// </summary>
-        [JsonProperty("date_range")]
+        [JsonProperty("date_range", NullValueHandling = NullValueHandling.Ignore)]
         public Models.DateRange DateRange { get; }
 
         /// <summary>
         /// Defines the logic used to apply a workday filter.
         /// </summary>
-        [JsonProperty("match_shifts_by")]
+        [JsonProperty("match_shifts_by", NullValueHandling = NullValueHandling.Ignore)]
         public string MatchShiftsBy { get; }
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace Square.Models
         /// must be provided as a fallback. Format: the IANA timezone database
         /// identifier for the relevant timezone.
         /// </summary>
-        [JsonProperty("default_timezone")]
+        [JsonProperty("default_timezone", NullValueHandling = NullValueHandling.Ignore)]
         public string DefaultTimezone { get; }
 
         public Builder ToBuilder()
@@ -60,22 +60,23 @@ namespace Square.Models
             private string matchShiftsBy;
             private string defaultTimezone;
 
-            public Builder() { }
-            public Builder DateRange(Models.DateRange value)
+
+
+            public Builder DateRange(Models.DateRange dateRange)
             {
-                dateRange = value;
+                this.dateRange = dateRange;
                 return this;
             }
 
-            public Builder MatchShiftsBy(string value)
+            public Builder MatchShiftsBy(string matchShiftsBy)
             {
-                matchShiftsBy = value;
+                this.matchShiftsBy = matchShiftsBy;
                 return this;
             }
 
-            public Builder DefaultTimezone(string value)
+            public Builder DefaultTimezone(string defaultTimezone)
             {
-                defaultTimezone = value;
+                this.defaultTimezone = defaultTimezone;
                 return this;
             }
 

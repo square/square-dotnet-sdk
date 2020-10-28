@@ -36,25 +36,25 @@ namespace Square.Models
         /// <summary>
         /// A set of `CatalogModifierOverride` objects that override whether a given `CatalogModifier` is enabled by default.
         /// </summary>
-        [JsonProperty("modifier_overrides")]
+        [JsonProperty("modifier_overrides", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.CatalogModifierOverride> ModifierOverrides { get; }
 
         /// <summary>
         /// If 0 or larger, the smallest number of `CatalogModifier`s that must be selected from this `CatalogModifierList`.
         /// </summary>
-        [JsonProperty("min_selected_modifiers")]
+        [JsonProperty("min_selected_modifiers", NullValueHandling = NullValueHandling.Ignore)]
         public int? MinSelectedModifiers { get; }
 
         /// <summary>
         /// If 0 or larger, the largest number of `CatalogModifier`s that can be selected from this `CatalogModifierList`.
         /// </summary>
-        [JsonProperty("max_selected_modifiers")]
+        [JsonProperty("max_selected_modifiers", NullValueHandling = NullValueHandling.Ignore)]
         public int? MaxSelectedModifiers { get; }
 
         /// <summary>
         /// If `true`, enable this `CatalogModifierList`. The default value is `true`.
         /// </summary>
-        [JsonProperty("enabled")]
+        [JsonProperty("enabled", NullValueHandling = NullValueHandling.Ignore)]
         public bool? Enabled { get; }
 
         public Builder ToBuilder()
@@ -70,7 +70,7 @@ namespace Square.Models
         public class Builder
         {
             private string modifierListId;
-            private IList<Models.CatalogModifierOverride> modifierOverrides = new List<Models.CatalogModifierOverride>();
+            private IList<Models.CatalogModifierOverride> modifierOverrides;
             private int? minSelectedModifiers;
             private int? maxSelectedModifiers;
             private bool? enabled;
@@ -79,33 +79,34 @@ namespace Square.Models
             {
                 this.modifierListId = modifierListId;
             }
-            public Builder ModifierListId(string value)
+
+            public Builder ModifierListId(string modifierListId)
             {
-                modifierListId = value;
+                this.modifierListId = modifierListId;
                 return this;
             }
 
-            public Builder ModifierOverrides(IList<Models.CatalogModifierOverride> value)
+            public Builder ModifierOverrides(IList<Models.CatalogModifierOverride> modifierOverrides)
             {
-                modifierOverrides = value;
+                this.modifierOverrides = modifierOverrides;
                 return this;
             }
 
-            public Builder MinSelectedModifiers(int? value)
+            public Builder MinSelectedModifiers(int? minSelectedModifiers)
             {
-                minSelectedModifiers = value;
+                this.minSelectedModifiers = minSelectedModifiers;
                 return this;
             }
 
-            public Builder MaxSelectedModifiers(int? value)
+            public Builder MaxSelectedModifiers(int? maxSelectedModifiers)
             {
-                maxSelectedModifiers = value;
+                this.maxSelectedModifiers = maxSelectedModifiers;
                 return this;
             }
 
-            public Builder Enabled(bool? value)
+            public Builder Enabled(bool? enabled)
             {
-                enabled = value;
+                this.enabled = enabled;
                 return this;
             }
 

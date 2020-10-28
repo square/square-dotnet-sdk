@@ -1,19 +1,20 @@
-## Loyalty Event Other
+
+# Loyalty Event Other
 
 Provides metadata when the event `type` is `OTHER`.
 
-### Structure
+## Structure
 
 `LoyaltyEventOther`
 
-### Fields
+## Fields
 
 | Name | Type | Description |
 |  --- | --- | --- |
 | `LoyaltyProgramId` | `string` | The Square-assigned ID of the [loyalty program](#type-LoyaltyProgram). |
 | `Points` | `int` | The number of points added or removed. |
 
-### Example (as JSON)
+## Example (as JSON)
 
 ```json
 {

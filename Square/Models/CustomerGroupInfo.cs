@@ -51,15 +51,16 @@ namespace Square.Models
                 this.id = id;
                 this.name = name;
             }
-            public Builder Id(string value)
+
+            public Builder Id(string id)
             {
-                id = value;
+                this.id = id;
                 return this;
             }
 
-            public Builder Name(string value)
+            public Builder Name(string name)
             {
-                name = value;
+                this.name = name;
                 return this;
             }
 

@@ -36,26 +36,26 @@ namespace Square.Models
         /// <summary>
         /// Unique ID that identifies the return only within this order.
         /// </summary>
-        [JsonProperty("uid")]
+        [JsonProperty("uid", NullValueHandling = NullValueHandling.Ignore)]
         public string Uid { get; }
 
         /// <summary>
         /// Order which contains the original sale of these returned line items. This will be unset
         /// for unlinked returns.
         /// </summary>
-        [JsonProperty("source_order_id")]
+        [JsonProperty("source_order_id", NullValueHandling = NullValueHandling.Ignore)]
         public string SourceOrderId { get; }
 
         /// <summary>
         /// Collection of line items which are being returned.
         /// </summary>
-        [JsonProperty("return_line_items")]
+        [JsonProperty("return_line_items", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.OrderReturnLineItem> ReturnLineItems { get; }
 
         /// <summary>
         /// Collection of service charges which are being returned.
         /// </summary>
-        [JsonProperty("return_service_charges")]
+        [JsonProperty("return_service_charges", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.OrderReturnServiceCharge> ReturnServiceCharges { get; }
 
         /// <summary>
@@ -63,7 +63,7 @@ namespace Square.Models
         /// applied tax amount to be returned. The taxes must reference a top-level tax ID from the source
         /// order.
         /// </summary>
-        [JsonProperty("return_taxes")]
+        [JsonProperty("return_taxes", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.OrderReturnTax> ReturnTaxes { get; }
 
         /// <summary>
@@ -71,20 +71,20 @@ namespace Square.Models
         /// applied discount amount to be returned. The discounts must reference a top-level discount ID
         /// from the source order.
         /// </summary>
-        [JsonProperty("return_discounts")]
+        [JsonProperty("return_discounts", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.OrderReturnDiscount> ReturnDiscounts { get; }
 
         /// <summary>
         /// A rounding adjustment of the money being returned. Commonly used to apply Cash Rounding
         /// when the minimum unit of account is smaller than the lowest physical denomination of currency.
         /// </summary>
-        [JsonProperty("rounding_adjustment")]
+        [JsonProperty("rounding_adjustment", NullValueHandling = NullValueHandling.Ignore)]
         public Models.OrderRoundingAdjustment RoundingAdjustment { get; }
 
         /// <summary>
         /// A collection of various money amounts.
         /// </summary>
-        [JsonProperty("return_amounts")]
+        [JsonProperty("return_amounts", NullValueHandling = NullValueHandling.Ignore)]
         public Models.OrderMoneyAmounts ReturnAmounts { get; }
 
         public Builder ToBuilder()
@@ -105,59 +105,60 @@ namespace Square.Models
         {
             private string uid;
             private string sourceOrderId;
-            private IList<Models.OrderReturnLineItem> returnLineItems = new List<Models.OrderReturnLineItem>();
-            private IList<Models.OrderReturnServiceCharge> returnServiceCharges = new List<Models.OrderReturnServiceCharge>();
-            private IList<Models.OrderReturnTax> returnTaxes = new List<Models.OrderReturnTax>();
-            private IList<Models.OrderReturnDiscount> returnDiscounts = new List<Models.OrderReturnDiscount>();
+            private IList<Models.OrderReturnLineItem> returnLineItems;
+            private IList<Models.OrderReturnServiceCharge> returnServiceCharges;
+            private IList<Models.OrderReturnTax> returnTaxes;
+            private IList<Models.OrderReturnDiscount> returnDiscounts;
             private Models.OrderRoundingAdjustment roundingAdjustment;
             private Models.OrderMoneyAmounts returnAmounts;
 
-            public Builder() { }
-            public Builder Uid(string value)
+
+
+            public Builder Uid(string uid)
             {
-                uid = value;
+                this.uid = uid;
                 return this;
             }
 
-            public Builder SourceOrderId(string value)
+            public Builder SourceOrderId(string sourceOrderId)
             {
-                sourceOrderId = value;
+                this.sourceOrderId = sourceOrderId;
                 return this;
             }
 
-            public Builder ReturnLineItems(IList<Models.OrderReturnLineItem> value)
+            public Builder ReturnLineItems(IList<Models.OrderReturnLineItem> returnLineItems)
             {
-                returnLineItems = value;
+                this.returnLineItems = returnLineItems;
                 return this;
             }
 
-            public Builder ReturnServiceCharges(IList<Models.OrderReturnServiceCharge> value)
+            public Builder ReturnServiceCharges(IList<Models.OrderReturnServiceCharge> returnServiceCharges)
             {
-                returnServiceCharges = value;
+                this.returnServiceCharges = returnServiceCharges;
                 return this;
             }
 
-            public Builder ReturnTaxes(IList<Models.OrderReturnTax> value)
+            public Builder ReturnTaxes(IList<Models.OrderReturnTax> returnTaxes)
             {
-                returnTaxes = value;
+                this.returnTaxes = returnTaxes;
                 return this;
             }
 
-            public Builder ReturnDiscounts(IList<Models.OrderReturnDiscount> value)
+            public Builder ReturnDiscounts(IList<Models.OrderReturnDiscount> returnDiscounts)
             {
-                returnDiscounts = value;
+                this.returnDiscounts = returnDiscounts;
                 return this;
             }
 
-            public Builder RoundingAdjustment(Models.OrderRoundingAdjustment value)
+            public Builder RoundingAdjustment(Models.OrderRoundingAdjustment roundingAdjustment)
             {
-                roundingAdjustment = value;
+                this.roundingAdjustment = roundingAdjustment;
                 return this;
             }
 
-            public Builder ReturnAmounts(Models.OrderMoneyAmounts value)
+            public Builder ReturnAmounts(Models.OrderMoneyAmounts returnAmounts)
             {
-                returnAmounts = value;
+                this.returnAmounts = returnAmounts;
                 return this;
             }
 

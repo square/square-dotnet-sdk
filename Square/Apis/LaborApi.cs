@@ -14,11 +14,10 @@ using Square.Http.Request;
 using Square.Http.Response;
 using Square.Http.Client;
 using Square.Authentication;
-using Square.Exceptions;
 
 namespace Square.Apis
 {
-    internal class LaborApi: BaseApi, ILaborApi
+    internal class LaborApi : BaseApi, ILaborApi
     {
         internal LaborApi(IConfiguration config, IHttpClient httpClient, IDictionary<string, IAuthManager> authManagers, HttpCallBack httpCallBack = null) :
             base(config, httpClient, authManagers, httpCallBack)
@@ -54,33 +53,30 @@ namespace Square.Apis
             StringBuilder _queryBuilder = new StringBuilder(_baseUri);
             _queryBuilder.Append("/v2/labor/break-types");
 
-            //process optional query parameters
-            ApiHelper.AppendUrlWithQueryParameters(_queryBuilder, new Dictionary<string, object>()
+            //prepare specfied query parameters
+            var _queryParameters = new Dictionary<string, object>()
             {
                 { "location_id", locationId },
                 { "limit", limit },
                 { "cursor", cursor }
-            }, ArrayDeserializationFormat, ParameterSeparator);
-
-            //validate and preprocess url
-            string _queryUrl = ApiHelper.CleanUrl(_queryBuilder);
+            };
 
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string, string>()
-            { 
+            {
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "Square-Version", config.SquareVersion }
             };
 
             //prepare the API call request to fetch the response
-            HttpRequest _request = GetClientInstance().Get(_queryUrl,_headers);
+            HttpRequest _request = GetClientInstance().Get(_queryBuilder.ToString(), _headers, queryParameters: _queryParameters);
             if (HttpCallBack != null)
             {
                 HttpCallBack.OnBeforeHttpRequestEventHandler(GetClientInstance(), _request);
             }
 
-            _request = await authManagers["default"].ApplyAsync(_request).ConfigureAwait(false);
+            _request = await authManagers["global"].ApplyAsync(_request).ConfigureAwait(false);
 
             //invoke request and get response
             HttpStringResponse _response = await GetClientInstance().ExecuteAsStringAsync(_request, cancellationToken).ConfigureAwait(false);
@@ -144,12 +140,9 @@ namespace Square.Apis
             StringBuilder _queryBuilder = new StringBuilder(_baseUri);
             _queryBuilder.Append("/v2/labor/break-types");
 
-            //validate and preprocess url
-            string _queryUrl = ApiHelper.CleanUrl(_queryBuilder);
-
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string, string>()
-            { 
+            {
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
@@ -160,13 +153,13 @@ namespace Square.Apis
             var _body = ApiHelper.JsonSerialize(body);
 
             //prepare the API call request to fetch the response
-            HttpRequest _request = GetClientInstance().PostBody(_queryUrl, _headers, _body);
+            HttpRequest _request = GetClientInstance().PostBody(_queryBuilder.ToString(), _headers, _body);
             if (HttpCallBack != null)
             {
                 HttpCallBack.OnBeforeHttpRequestEventHandler(GetClientInstance(), _request);
             }
 
-            _request = await authManagers["default"].ApplyAsync(_request).ConfigureAwait(false);
+            _request = await authManagers["global"].ApplyAsync(_request).ConfigureAwait(false);
 
             //invoke request and get response
             HttpStringResponse _response = await GetClientInstance().ExecuteAsStringAsync(_request, cancellationToken).ConfigureAwait(false);
@@ -218,25 +211,22 @@ namespace Square.Apis
                 { "id", id }
             });
 
-            //validate and preprocess url
-            string _queryUrl = ApiHelper.CleanUrl(_queryBuilder);
-
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string, string>()
-            { 
+            {
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "Square-Version", config.SquareVersion }
             };
 
             //prepare the API call request to fetch the response
-            HttpRequest _request = GetClientInstance().Delete(_queryUrl, _headers, null);
+            HttpRequest _request = GetClientInstance().Delete(_queryBuilder.ToString(), _headers, null);
             if (HttpCallBack != null)
             {
                 HttpCallBack.OnBeforeHttpRequestEventHandler(GetClientInstance(), _request);
             }
 
-            _request = await authManagers["default"].ApplyAsync(_request).ConfigureAwait(false);
+            _request = await authManagers["global"].ApplyAsync(_request).ConfigureAwait(false);
 
             //invoke request and get response
             HttpStringResponse _response = await GetClientInstance().ExecuteAsStringAsync(_request, cancellationToken).ConfigureAwait(false);
@@ -286,25 +276,22 @@ namespace Square.Apis
                 { "id", id }
             });
 
-            //validate and preprocess url
-            string _queryUrl = ApiHelper.CleanUrl(_queryBuilder);
-
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string, string>()
-            { 
+            {
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "Square-Version", config.SquareVersion }
             };
 
             //prepare the API call request to fetch the response
-            HttpRequest _request = GetClientInstance().Get(_queryUrl,_headers);
+            HttpRequest _request = GetClientInstance().Get(_queryBuilder.ToString(), _headers);
             if (HttpCallBack != null)
             {
                 HttpCallBack.OnBeforeHttpRequestEventHandler(GetClientInstance(), _request);
             }
 
-            _request = await authManagers["default"].ApplyAsync(_request).ConfigureAwait(false);
+            _request = await authManagers["global"].ApplyAsync(_request).ConfigureAwait(false);
 
             //invoke request and get response
             HttpStringResponse _response = await GetClientInstance().ExecuteAsStringAsync(_request, cancellationToken).ConfigureAwait(false);
@@ -356,12 +343,9 @@ namespace Square.Apis
                 { "id", id }
             });
 
-            //validate and preprocess url
-            string _queryUrl = ApiHelper.CleanUrl(_queryBuilder);
-
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string, string>()
-            { 
+            {
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
@@ -372,13 +356,13 @@ namespace Square.Apis
             var _body = ApiHelper.JsonSerialize(body);
 
             //prepare the API call request to fetch the response
-            HttpRequest _request = GetClientInstance().PutBody(_queryUrl, _headers, _body);
+            HttpRequest _request = GetClientInstance().PutBody(_queryBuilder.ToString(), _headers, _body);
             if (HttpCallBack != null)
             {
                 HttpCallBack.OnBeforeHttpRequestEventHandler(GetClientInstance(), _request);
             }
 
-            _request = await authManagers["default"].ApplyAsync(_request).ConfigureAwait(false);
+            _request = await authManagers["global"].ApplyAsync(_request).ConfigureAwait(false);
 
             //invoke request and get response
             HttpStringResponse _response = await GetClientInstance().ExecuteAsStringAsync(_request, cancellationToken).ConfigureAwait(false);
@@ -428,33 +412,30 @@ namespace Square.Apis
             StringBuilder _queryBuilder = new StringBuilder(_baseUri);
             _queryBuilder.Append("/v2/labor/employee-wages");
 
-            //process optional query parameters
-            ApiHelper.AppendUrlWithQueryParameters(_queryBuilder, new Dictionary<string, object>()
+            //prepare specfied query parameters
+            var _queryParameters = new Dictionary<string, object>()
             {
                 { "employee_id", employeeId },
                 { "limit", limit },
                 { "cursor", cursor }
-            }, ArrayDeserializationFormat, ParameterSeparator);
-
-            //validate and preprocess url
-            string _queryUrl = ApiHelper.CleanUrl(_queryBuilder);
+            };
 
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string, string>()
-            { 
+            {
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "Square-Version", config.SquareVersion }
             };
 
             //prepare the API call request to fetch the response
-            HttpRequest _request = GetClientInstance().Get(_queryUrl,_headers);
+            HttpRequest _request = GetClientInstance().Get(_queryBuilder.ToString(), _headers, queryParameters: _queryParameters);
             if (HttpCallBack != null)
             {
                 HttpCallBack.OnBeforeHttpRequestEventHandler(GetClientInstance(), _request);
             }
 
-            _request = await authManagers["default"].ApplyAsync(_request).ConfigureAwait(false);
+            _request = await authManagers["global"].ApplyAsync(_request).ConfigureAwait(false);
 
             //invoke request and get response
             HttpStringResponse _response = await GetClientInstance().ExecuteAsStringAsync(_request, cancellationToken).ConfigureAwait(false);
@@ -506,25 +487,22 @@ namespace Square.Apis
                 { "id", id }
             });
 
-            //validate and preprocess url
-            string _queryUrl = ApiHelper.CleanUrl(_queryBuilder);
-
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string, string>()
-            { 
+            {
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "Square-Version", config.SquareVersion }
             };
 
             //prepare the API call request to fetch the response
-            HttpRequest _request = GetClientInstance().Get(_queryUrl,_headers);
+            HttpRequest _request = GetClientInstance().Get(_queryBuilder.ToString(), _headers);
             if (HttpCallBack != null)
             {
                 HttpCallBack.OnBeforeHttpRequestEventHandler(GetClientInstance(), _request);
             }
 
-            _request = await authManagers["default"].ApplyAsync(_request).ConfigureAwait(false);
+            _request = await authManagers["global"].ApplyAsync(_request).ConfigureAwait(false);
 
             //invoke request and get response
             HttpStringResponse _response = await GetClientInstance().ExecuteAsStringAsync(_request, cancellationToken).ConfigureAwait(false);
@@ -596,12 +574,9 @@ namespace Square.Apis
             StringBuilder _queryBuilder = new StringBuilder(_baseUri);
             _queryBuilder.Append("/v2/labor/shifts");
 
-            //validate and preprocess url
-            string _queryUrl = ApiHelper.CleanUrl(_queryBuilder);
-
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string, string>()
-            { 
+            {
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
@@ -612,13 +587,13 @@ namespace Square.Apis
             var _body = ApiHelper.JsonSerialize(body);
 
             //prepare the API call request to fetch the response
-            HttpRequest _request = GetClientInstance().PostBody(_queryUrl, _headers, _body);
+            HttpRequest _request = GetClientInstance().PostBody(_queryBuilder.ToString(), _headers, _body);
             if (HttpCallBack != null)
             {
                 HttpCallBack.OnBeforeHttpRequestEventHandler(GetClientInstance(), _request);
             }
 
-            _request = await authManagers["default"].ApplyAsync(_request).ConfigureAwait(false);
+            _request = await authManagers["global"].ApplyAsync(_request).ConfigureAwait(false);
 
             //invoke request and get response
             HttpStringResponse _response = await GetClientInstance().ExecuteAsStringAsync(_request, cancellationToken).ConfigureAwait(false);
@@ -686,12 +661,9 @@ namespace Square.Apis
             StringBuilder _queryBuilder = new StringBuilder(_baseUri);
             _queryBuilder.Append("/v2/labor/shifts/search");
 
-            //validate and preprocess url
-            string _queryUrl = ApiHelper.CleanUrl(_queryBuilder);
-
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string, string>()
-            { 
+            {
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
@@ -702,13 +674,13 @@ namespace Square.Apis
             var _body = ApiHelper.JsonSerialize(body);
 
             //prepare the API call request to fetch the response
-            HttpRequest _request = GetClientInstance().PostBody(_queryUrl, _headers, _body);
+            HttpRequest _request = GetClientInstance().PostBody(_queryBuilder.ToString(), _headers, _body);
             if (HttpCallBack != null)
             {
                 HttpCallBack.OnBeforeHttpRequestEventHandler(GetClientInstance(), _request);
             }
 
-            _request = await authManagers["default"].ApplyAsync(_request).ConfigureAwait(false);
+            _request = await authManagers["global"].ApplyAsync(_request).ConfigureAwait(false);
 
             //invoke request and get response
             HttpStringResponse _response = await GetClientInstance().ExecuteAsStringAsync(_request, cancellationToken).ConfigureAwait(false);
@@ -758,25 +730,22 @@ namespace Square.Apis
                 { "id", id }
             });
 
-            //validate and preprocess url
-            string _queryUrl = ApiHelper.CleanUrl(_queryBuilder);
-
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string, string>()
-            { 
+            {
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "Square-Version", config.SquareVersion }
             };
 
             //prepare the API call request to fetch the response
-            HttpRequest _request = GetClientInstance().Delete(_queryUrl, _headers, null);
+            HttpRequest _request = GetClientInstance().Delete(_queryBuilder.ToString(), _headers, null);
             if (HttpCallBack != null)
             {
                 HttpCallBack.OnBeforeHttpRequestEventHandler(GetClientInstance(), _request);
             }
 
-            _request = await authManagers["default"].ApplyAsync(_request).ConfigureAwait(false);
+            _request = await authManagers["global"].ApplyAsync(_request).ConfigureAwait(false);
 
             //invoke request and get response
             HttpStringResponse _response = await GetClientInstance().ExecuteAsStringAsync(_request, cancellationToken).ConfigureAwait(false);
@@ -826,25 +795,22 @@ namespace Square.Apis
                 { "id", id }
             });
 
-            //validate and preprocess url
-            string _queryUrl = ApiHelper.CleanUrl(_queryBuilder);
-
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string, string>()
-            { 
+            {
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "Square-Version", config.SquareVersion }
             };
 
             //prepare the API call request to fetch the response
-            HttpRequest _request = GetClientInstance().Get(_queryUrl,_headers);
+            HttpRequest _request = GetClientInstance().Get(_queryBuilder.ToString(), _headers);
             if (HttpCallBack != null)
             {
                 HttpCallBack.OnBeforeHttpRequestEventHandler(GetClientInstance(), _request);
             }
 
-            _request = await authManagers["default"].ApplyAsync(_request).ConfigureAwait(false);
+            _request = await authManagers["global"].ApplyAsync(_request).ConfigureAwait(false);
 
             //invoke request and get response
             HttpStringResponse _response = await GetClientInstance().ExecuteAsStringAsync(_request, cancellationToken).ConfigureAwait(false);
@@ -904,12 +870,9 @@ namespace Square.Apis
                 { "id", id }
             });
 
-            //validate and preprocess url
-            string _queryUrl = ApiHelper.CleanUrl(_queryBuilder);
-
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string, string>()
-            { 
+            {
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
@@ -920,13 +883,13 @@ namespace Square.Apis
             var _body = ApiHelper.JsonSerialize(body);
 
             //prepare the API call request to fetch the response
-            HttpRequest _request = GetClientInstance().PutBody(_queryUrl, _headers, _body);
+            HttpRequest _request = GetClientInstance().PutBody(_queryBuilder.ToString(), _headers, _body);
             if (HttpCallBack != null)
             {
                 HttpCallBack.OnBeforeHttpRequestEventHandler(GetClientInstance(), _request);
             }
 
-            _request = await authManagers["default"].ApplyAsync(_request).ConfigureAwait(false);
+            _request = await authManagers["global"].ApplyAsync(_request).ConfigureAwait(false);
 
             //invoke request and get response
             HttpStringResponse _response = await GetClientInstance().ExecuteAsStringAsync(_request, cancellationToken).ConfigureAwait(false);
@@ -974,33 +937,30 @@ namespace Square.Apis
             StringBuilder _queryBuilder = new StringBuilder(_baseUri);
             _queryBuilder.Append("/v2/labor/team-member-wages");
 
-            //process optional query parameters
-            ApiHelper.AppendUrlWithQueryParameters(_queryBuilder, new Dictionary<string, object>()
+            //prepare specfied query parameters
+            var _queryParameters = new Dictionary<string, object>()
             {
                 { "team_member_id", teamMemberId },
                 { "limit", limit },
                 { "cursor", cursor }
-            }, ArrayDeserializationFormat, ParameterSeparator);
-
-            //validate and preprocess url
-            string _queryUrl = ApiHelper.CleanUrl(_queryBuilder);
+            };
 
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string, string>()
-            { 
+            {
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "Square-Version", config.SquareVersion }
             };
 
             //prepare the API call request to fetch the response
-            HttpRequest _request = GetClientInstance().Get(_queryUrl,_headers);
+            HttpRequest _request = GetClientInstance().Get(_queryBuilder.ToString(), _headers, queryParameters: _queryParameters);
             if (HttpCallBack != null)
             {
                 HttpCallBack.OnBeforeHttpRequestEventHandler(GetClientInstance(), _request);
             }
 
-            _request = await authManagers["default"].ApplyAsync(_request).ConfigureAwait(false);
+            _request = await authManagers["global"].ApplyAsync(_request).ConfigureAwait(false);
 
             //invoke request and get response
             HttpStringResponse _response = await GetClientInstance().ExecuteAsStringAsync(_request, cancellationToken).ConfigureAwait(false);
@@ -1050,25 +1010,22 @@ namespace Square.Apis
                 { "id", id }
             });
 
-            //validate and preprocess url
-            string _queryUrl = ApiHelper.CleanUrl(_queryBuilder);
-
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string, string>()
-            { 
+            {
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "Square-Version", config.SquareVersion }
             };
 
             //prepare the API call request to fetch the response
-            HttpRequest _request = GetClientInstance().Get(_queryUrl,_headers);
+            HttpRequest _request = GetClientInstance().Get(_queryBuilder.ToString(), _headers);
             if (HttpCallBack != null)
             {
                 HttpCallBack.OnBeforeHttpRequestEventHandler(GetClientInstance(), _request);
             }
 
-            _request = await authManagers["default"].ApplyAsync(_request).ConfigureAwait(false);
+            _request = await authManagers["global"].ApplyAsync(_request).ConfigureAwait(false);
 
             //invoke request and get response
             HttpStringResponse _response = await GetClientInstance().ExecuteAsStringAsync(_request, cancellationToken).ConfigureAwait(false);
@@ -1114,32 +1071,29 @@ namespace Square.Apis
             StringBuilder _queryBuilder = new StringBuilder(_baseUri);
             _queryBuilder.Append("/v2/labor/workweek-configs");
 
-            //process optional query parameters
-            ApiHelper.AppendUrlWithQueryParameters(_queryBuilder, new Dictionary<string, object>()
+            //prepare specfied query parameters
+            var _queryParameters = new Dictionary<string, object>()
             {
                 { "limit", limit },
                 { "cursor", cursor }
-            }, ArrayDeserializationFormat, ParameterSeparator);
-
-            //validate and preprocess url
-            string _queryUrl = ApiHelper.CleanUrl(_queryBuilder);
+            };
 
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string, string>()
-            { 
+            {
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "Square-Version", config.SquareVersion }
             };
 
             //prepare the API call request to fetch the response
-            HttpRequest _request = GetClientInstance().Get(_queryUrl,_headers);
+            HttpRequest _request = GetClientInstance().Get(_queryBuilder.ToString(), _headers, queryParameters: _queryParameters);
             if (HttpCallBack != null)
             {
                 HttpCallBack.OnBeforeHttpRequestEventHandler(GetClientInstance(), _request);
             }
 
-            _request = await authManagers["default"].ApplyAsync(_request).ConfigureAwait(false);
+            _request = await authManagers["global"].ApplyAsync(_request).ConfigureAwait(false);
 
             //invoke request and get response
             HttpStringResponse _response = await GetClientInstance().ExecuteAsStringAsync(_request, cancellationToken).ConfigureAwait(false);
@@ -1191,12 +1145,9 @@ namespace Square.Apis
                 { "id", id }
             });
 
-            //validate and preprocess url
-            string _queryUrl = ApiHelper.CleanUrl(_queryBuilder);
-
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string, string>()
-            { 
+            {
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
@@ -1207,13 +1158,13 @@ namespace Square.Apis
             var _body = ApiHelper.JsonSerialize(body);
 
             //prepare the API call request to fetch the response
-            HttpRequest _request = GetClientInstance().PutBody(_queryUrl, _headers, _body);
+            HttpRequest _request = GetClientInstance().PutBody(_queryBuilder.ToString(), _headers, _body);
             if (HttpCallBack != null)
             {
                 HttpCallBack.OnBeforeHttpRequestEventHandler(GetClientInstance(), _request);
             }
 
-            _request = await authManagers["default"].ApplyAsync(_request).ConfigureAwait(false);
+            _request = await authManagers["global"].ApplyAsync(_request).ConfigureAwait(false);
 
             //invoke request and get response
             HttpStringResponse _response = await GetClientInstance().ExecuteAsStringAsync(_request, cancellationToken).ConfigureAwait(false);

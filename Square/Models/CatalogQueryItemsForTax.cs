@@ -39,9 +39,10 @@ namespace Square.Models
             {
                 this.taxIds = taxIds;
             }
-            public Builder TaxIds(IList<string> value)
+
+            public Builder TaxIds(IList<string> taxIds)
             {
-                taxIds = value;
+                this.taxIds = taxIds;
                 return this;
             }
 

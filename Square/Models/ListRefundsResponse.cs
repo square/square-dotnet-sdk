@@ -30,13 +30,13 @@ namespace Square.Models
         /// <summary>
         /// Any errors that occurred during the request.
         /// </summary>
-        [JsonProperty("errors")]
+        [JsonProperty("errors", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.Error> Errors { get; }
 
         /// <summary>
         /// An array of refunds that match your query.
         /// </summary>
-        [JsonProperty("refunds")]
+        [JsonProperty("refunds", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.Refund> Refunds { get; }
 
         /// <summary>
@@ -45,7 +45,7 @@ namespace Square.Models
         /// request to this endpoint.
         /// See [Paginating results](#paginatingresults) for more information.
         /// </summary>
-        [JsonProperty("cursor")]
+        [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
         public string Cursor { get; }
 
         public Builder ToBuilder()
@@ -59,26 +59,27 @@ namespace Square.Models
 
         public class Builder
         {
-            private IList<Models.Error> errors = new List<Models.Error>();
-            private IList<Models.Refund> refunds = new List<Models.Refund>();
+            private IList<Models.Error> errors;
+            private IList<Models.Refund> refunds;
             private string cursor;
 
-            public Builder() { }
-            public Builder Errors(IList<Models.Error> value)
+
+
+            public Builder Errors(IList<Models.Error> errors)
             {
-                errors = value;
+                this.errors = errors;
                 return this;
             }
 
-            public Builder Refunds(IList<Models.Refund> value)
+            public Builder Refunds(IList<Models.Refund> refunds)
             {
-                refunds = value;
+                this.refunds = refunds;
                 return this;
             }
 
-            public Builder Cursor(string value)
+            public Builder Cursor(string cursor)
             {
-                cursor = value;
+                this.cursor = cursor;
                 return this;
             }
 

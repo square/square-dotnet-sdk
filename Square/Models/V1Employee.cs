@@ -44,7 +44,7 @@ namespace Square.Models
         /// <summary>
         /// The employee's unique ID.
         /// </summary>
-        [JsonProperty("id")]
+        [JsonProperty("id", NullValueHandling = NullValueHandling.Ignore)]
         public string Id { get; }
 
         /// <summary>
@@ -62,43 +62,43 @@ namespace Square.Models
         /// <summary>
         /// The ids of the employee's associated roles. Currently, you can specify only one or zero roles per employee.
         /// </summary>
-        [JsonProperty("role_ids")]
+        [JsonProperty("role_ids", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> RoleIds { get; }
 
         /// <summary>
         /// The IDs of the locations the employee is allowed to clock in at.
         /// </summary>
-        [JsonProperty("authorized_location_ids")]
+        [JsonProperty("authorized_location_ids", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> AuthorizedLocationIds { get; }
 
         /// <summary>
         /// The employee's email address.
         /// </summary>
-        [JsonProperty("email")]
+        [JsonProperty("email", NullValueHandling = NullValueHandling.Ignore)]
         public string Email { get; }
 
         /// <summary>
         /// Getter for status
         /// </summary>
-        [JsonProperty("status")]
+        [JsonProperty("status", NullValueHandling = NullValueHandling.Ignore)]
         public string Status { get; }
 
         /// <summary>
         /// An ID the merchant can set to associate the employee with an entity in another system.
         /// </summary>
-        [JsonProperty("external_id")]
+        [JsonProperty("external_id", NullValueHandling = NullValueHandling.Ignore)]
         public string ExternalId { get; }
 
         /// <summary>
         /// The time when the employee entity was created, in ISO 8601 format.
         /// </summary>
-        [JsonProperty("created_at")]
+        [JsonProperty("created_at", NullValueHandling = NullValueHandling.Ignore)]
         public string CreatedAt { get; }
 
         /// <summary>
         /// The time when the employee entity was most recently updated, in ISO 8601 format.
         /// </summary>
-        [JsonProperty("updated_at")]
+        [JsonProperty("updated_at", NullValueHandling = NullValueHandling.Ignore)]
         public string UpdatedAt { get; }
 
         public Builder ToBuilder()
@@ -121,8 +121,8 @@ namespace Square.Models
             private string firstName;
             private string lastName;
             private string id;
-            private IList<string> roleIds = new List<string>();
-            private IList<string> authorizedLocationIds = new List<string>();
+            private IList<string> roleIds;
+            private IList<string> authorizedLocationIds;
             private string email;
             private string status;
             private string externalId;
@@ -135,63 +135,64 @@ namespace Square.Models
                 this.firstName = firstName;
                 this.lastName = lastName;
             }
-            public Builder FirstName(string value)
+
+            public Builder FirstName(string firstName)
             {
-                firstName = value;
+                this.firstName = firstName;
                 return this;
             }
 
-            public Builder LastName(string value)
+            public Builder LastName(string lastName)
             {
-                lastName = value;
+                this.lastName = lastName;
                 return this;
             }
 
-            public Builder Id(string value)
+            public Builder Id(string id)
             {
-                id = value;
+                this.id = id;
                 return this;
             }
 
-            public Builder RoleIds(IList<string> value)
+            public Builder RoleIds(IList<string> roleIds)
             {
-                roleIds = value;
+                this.roleIds = roleIds;
                 return this;
             }
 
-            public Builder AuthorizedLocationIds(IList<string> value)
+            public Builder AuthorizedLocationIds(IList<string> authorizedLocationIds)
             {
-                authorizedLocationIds = value;
+                this.authorizedLocationIds = authorizedLocationIds;
                 return this;
             }
 
-            public Builder Email(string value)
+            public Builder Email(string email)
             {
-                email = value;
+                this.email = email;
                 return this;
             }
 
-            public Builder Status(string value)
+            public Builder Status(string status)
             {
-                status = value;
+                this.status = status;
                 return this;
             }
 
-            public Builder ExternalId(string value)
+            public Builder ExternalId(string externalId)
             {
-                externalId = value;
+                this.externalId = externalId;
                 return this;
             }
 
-            public Builder CreatedAt(string value)
+            public Builder CreatedAt(string createdAt)
             {
-                createdAt = value;
+                this.createdAt = createdAt;
                 return this;
             }
 
-            public Builder UpdatedAt(string value)
+            public Builder UpdatedAt(string updatedAt)
             {
-                updatedAt = value;
+                this.updatedAt = updatedAt;
                 return this;
             }
 

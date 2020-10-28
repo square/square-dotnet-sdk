@@ -26,13 +26,13 @@ namespace Square.Models
         /// <summary>
         /// Unique ID that identifies the rounding adjustment only within this order.
         /// </summary>
-        [JsonProperty("uid")]
+        [JsonProperty("uid", NullValueHandling = NullValueHandling.Ignore)]
         public string Uid { get; }
 
         /// <summary>
         /// The name of the rounding adjustment from the original sale Order.
         /// </summary>
-        [JsonProperty("name")]
+        [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
         public string Name { get; }
 
         /// <summary>
@@ -43,7 +43,7 @@ namespace Square.Models
         /// [Working with Monetary Amounts](https://developer.squareup.com/docs/build-basics/working-with-monetary-amounts)
         /// for more information.
         /// </summary>
-        [JsonProperty("amount_money")]
+        [JsonProperty("amount_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Money AmountMoney { get; }
 
         public Builder ToBuilder()
@@ -61,22 +61,23 @@ namespace Square.Models
             private string name;
             private Models.Money amountMoney;
 
-            public Builder() { }
-            public Builder Uid(string value)
+
+
+            public Builder Uid(string uid)
             {
-                uid = value;
+                this.uid = uid;
                 return this;
             }
 
-            public Builder Name(string value)
+            public Builder Name(string name)
             {
-                name = value;
+                this.name = name;
                 return this;
             }
 
-            public Builder AmountMoney(Models.Money value)
+            public Builder AmountMoney(Models.Money amountMoney)
             {
-                amountMoney = value;
+                this.amountMoney = amountMoney;
                 return this;
             }
 

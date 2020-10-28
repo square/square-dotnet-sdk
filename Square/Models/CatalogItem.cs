@@ -48,50 +48,50 @@ namespace Square.Models
         /// <summary>
         /// The item's name. This is a searchable attribute for use in applicable query filters, its value must not be empty, and the length is of Unicode code points.
         /// </summary>
-        [JsonProperty("name")]
+        [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
         public string Name { get; }
 
         /// <summary>
         /// The item's description. This is a searchable attribute for use in applicable query filters, and its value length is of Unicode code points.
         /// </summary>
-        [JsonProperty("description")]
+        [JsonProperty("description", NullValueHandling = NullValueHandling.Ignore)]
         public string Description { get; }
 
         /// <summary>
         /// The text of the item's display label in the Square Point of Sale app. Only up to the first five characters of the string are used.
         /// This attribute is searchable, and its value length is of Unicode code points.
         /// </summary>
-        [JsonProperty("abbreviation")]
+        [JsonProperty("abbreviation", NullValueHandling = NullValueHandling.Ignore)]
         public string Abbreviation { get; }
 
         /// <summary>
         /// The color of the item's display label in the Square Point of Sale app. This must be a valid hex color code.
         /// </summary>
-        [JsonProperty("label_color")]
+        [JsonProperty("label_color", NullValueHandling = NullValueHandling.Ignore)]
         public string LabelColor { get; }
 
         /// <summary>
         /// If `true`, the item can be added to shipping orders from the merchant's online store.
         /// </summary>
-        [JsonProperty("available_online")]
+        [JsonProperty("available_online", NullValueHandling = NullValueHandling.Ignore)]
         public bool? AvailableOnline { get; }
 
         /// <summary>
         /// If `true`, the item can be added to pickup orders from the merchant's online store.
         /// </summary>
-        [JsonProperty("available_for_pickup")]
+        [JsonProperty("available_for_pickup", NullValueHandling = NullValueHandling.Ignore)]
         public bool? AvailableForPickup { get; }
 
         /// <summary>
         /// If `true`, the item can be added to electronically fulfilled orders from the merchant's online store.
         /// </summary>
-        [JsonProperty("available_electronically")]
+        [JsonProperty("available_electronically", NullValueHandling = NullValueHandling.Ignore)]
         public bool? AvailableElectronically { get; }
 
         /// <summary>
         /// The ID of the item's category, if any.
         /// </summary>
-        [JsonProperty("category_id")]
+        [JsonProperty("category_id", NullValueHandling = NullValueHandling.Ignore)]
         public string CategoryId { get; }
 
         /// <summary>
@@ -99,7 +99,7 @@ namespace Square.Models
         /// this item. When updating an item, any taxes listed here will be added to the item.
         /// Taxes may also be added to or deleted from an item using `UpdateItemTaxes`.
         /// </summary>
-        [JsonProperty("tax_ids")]
+        [JsonProperty("tax_ids", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> TaxIds { get; }
 
         /// <summary>
@@ -108,19 +108,19 @@ namespace Square.Models
         /// and max limits that are specific to this item. Modifier lists
         /// may also be added to or deleted from an item using `UpdateItemModifierLists`.
         /// </summary>
-        [JsonProperty("modifier_list_info")]
+        [JsonProperty("modifier_list_info", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.CatalogItemModifierListInfo> ModifierListInfo { get; }
 
         /// <summary>
         /// A list of CatalogObjects containing the `CatalogItemVariation`s for this item.
         /// </summary>
-        [JsonProperty("variations")]
+        [JsonProperty("variations", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.CatalogObject> Variations { get; }
 
         /// <summary>
         /// The type of a CatalogItem. Connect V2 only allows the creation of `REGULAR` or `APPOINTMENTS_SERVICE` items.
         /// </summary>
-        [JsonProperty("product_type")]
+        [JsonProperty("product_type", NullValueHandling = NullValueHandling.Ignore)]
         public string ProductType { get; }
 
         /// <summary>
@@ -131,7 +131,7 @@ namespace Square.Models
         /// modifiers, and merchants can edit modifiers by drilling down onto the item's details.
         /// Third-party clients are encouraged to implement similar behaviors.
         /// </summary>
-        [JsonProperty("skip_modifier_screen")]
+        [JsonProperty("skip_modifier_screen", NullValueHandling = NullValueHandling.Ignore)]
         public bool? SkipModifierScreen { get; }
 
         /// <summary>
@@ -139,7 +139,7 @@ namespace Square.Models
         /// variations in a specified order.
         /// Maximum: 6 item options.
         /// </summary>
-        [JsonProperty("item_options")]
+        [JsonProperty("item_options", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.CatalogItemOptionForItem> ItemOptions { get; }
 
         public Builder ToBuilder()
@@ -172,95 +172,96 @@ namespace Square.Models
             private bool? availableForPickup;
             private bool? availableElectronically;
             private string categoryId;
-            private IList<string> taxIds = new List<string>();
-            private IList<Models.CatalogItemModifierListInfo> modifierListInfo = new List<Models.CatalogItemModifierListInfo>();
-            private IList<Models.CatalogObject> variations = new List<Models.CatalogObject>();
+            private IList<string> taxIds;
+            private IList<Models.CatalogItemModifierListInfo> modifierListInfo;
+            private IList<Models.CatalogObject> variations;
             private string productType;
             private bool? skipModifierScreen;
-            private IList<Models.CatalogItemOptionForItem> itemOptions = new List<Models.CatalogItemOptionForItem>();
+            private IList<Models.CatalogItemOptionForItem> itemOptions;
 
-            public Builder() { }
-            public Builder Name(string value)
+
+
+            public Builder Name(string name)
             {
-                name = value;
+                this.name = name;
                 return this;
             }
 
-            public Builder Description(string value)
+            public Builder Description(string description)
             {
-                description = value;
+                this.description = description;
                 return this;
             }
 
-            public Builder Abbreviation(string value)
+            public Builder Abbreviation(string abbreviation)
             {
-                abbreviation = value;
+                this.abbreviation = abbreviation;
                 return this;
             }
 
-            public Builder LabelColor(string value)
+            public Builder LabelColor(string labelColor)
             {
-                labelColor = value;
+                this.labelColor = labelColor;
                 return this;
             }
 
-            public Builder AvailableOnline(bool? value)
+            public Builder AvailableOnline(bool? availableOnline)
             {
-                availableOnline = value;
+                this.availableOnline = availableOnline;
                 return this;
             }
 
-            public Builder AvailableForPickup(bool? value)
+            public Builder AvailableForPickup(bool? availableForPickup)
             {
-                availableForPickup = value;
+                this.availableForPickup = availableForPickup;
                 return this;
             }
 
-            public Builder AvailableElectronically(bool? value)
+            public Builder AvailableElectronically(bool? availableElectronically)
             {
-                availableElectronically = value;
+                this.availableElectronically = availableElectronically;
                 return this;
             }
 
-            public Builder CategoryId(string value)
+            public Builder CategoryId(string categoryId)
             {
-                categoryId = value;
+                this.categoryId = categoryId;
                 return this;
             }
 
-            public Builder TaxIds(IList<string> value)
+            public Builder TaxIds(IList<string> taxIds)
             {
-                taxIds = value;
+                this.taxIds = taxIds;
                 return this;
             }
 
-            public Builder ModifierListInfo(IList<Models.CatalogItemModifierListInfo> value)
+            public Builder ModifierListInfo(IList<Models.CatalogItemModifierListInfo> modifierListInfo)
             {
-                modifierListInfo = value;
+                this.modifierListInfo = modifierListInfo;
                 return this;
             }
 
-            public Builder Variations(IList<Models.CatalogObject> value)
+            public Builder Variations(IList<Models.CatalogObject> variations)
             {
-                variations = value;
+                this.variations = variations;
                 return this;
             }
 
-            public Builder ProductType(string value)
+            public Builder ProductType(string productType)
             {
-                productType = value;
+                this.productType = productType;
                 return this;
             }
 
-            public Builder SkipModifierScreen(bool? value)
+            public Builder SkipModifierScreen(bool? skipModifierScreen)
             {
-                skipModifierScreen = value;
+                this.skipModifierScreen = skipModifierScreen;
                 return this;
             }
 
-            public Builder ItemOptions(IList<Models.CatalogItemOptionForItem> value)
+            public Builder ItemOptions(IList<Models.CatalogItemOptionForItem> itemOptions)
             {
-                itemOptions = value;
+                this.itemOptions = itemOptions;
                 return this;
             }
 

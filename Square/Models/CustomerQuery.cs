@@ -25,13 +25,13 @@ namespace Square.Models
         /// Represents a set of `CustomerQuery` filters used to limit the set of
         /// `Customers` returned by `SearchCustomers`.
         /// </summary>
-        [JsonProperty("filter")]
+        [JsonProperty("filter", NullValueHandling = NullValueHandling.Ignore)]
         public Models.CustomerFilter Filter { get; }
 
         /// <summary>
         /// Specifies how searched customers profiles are sorted, including the sort key and sort order.
         /// </summary>
-        [JsonProperty("sort")]
+        [JsonProperty("sort", NullValueHandling = NullValueHandling.Ignore)]
         public Models.CustomerSort Sort { get; }
 
         public Builder ToBuilder()
@@ -47,16 +47,17 @@ namespace Square.Models
             private Models.CustomerFilter filter;
             private Models.CustomerSort sort;
 
-            public Builder() { }
-            public Builder Filter(Models.CustomerFilter value)
+
+
+            public Builder Filter(Models.CustomerFilter filter)
             {
-                filter = value;
+                this.filter = filter;
                 return this;
             }
 
-            public Builder Sort(Models.CustomerSort value)
+            public Builder Sort(Models.CustomerSort sort)
             {
-                sort = value;
+                this.sort = sort;
                 return this;
             }
 

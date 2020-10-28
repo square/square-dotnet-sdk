@@ -22,7 +22,7 @@ namespace Square.Models
         /// <summary>
         /// A record representing an individual team member for a business.
         /// </summary>
-        [JsonProperty("team_member")]
+        [JsonProperty("team_member", NullValueHandling = NullValueHandling.Ignore)]
         public Models.TeamMember TeamMember { get; }
 
         public Builder ToBuilder()
@@ -36,10 +36,11 @@ namespace Square.Models
         {
             private Models.TeamMember teamMember;
 
-            public Builder() { }
-            public Builder TeamMember(Models.TeamMember value)
+
+
+            public Builder TeamMember(Models.TeamMember teamMember)
             {
-                teamMember = value;
+                this.teamMember = teamMember;
                 return this;
             }
 

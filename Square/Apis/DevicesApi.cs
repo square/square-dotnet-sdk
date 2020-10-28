@@ -14,11 +14,10 @@ using Square.Http.Request;
 using Square.Http.Response;
 using Square.Http.Client;
 using Square.Authentication;
-using Square.Exceptions;
 
 namespace Square.Apis
 {
-    internal class DevicesApi: BaseApi, IDevicesApi
+    internal class DevicesApi : BaseApi, IDevicesApi
     {
         internal DevicesApi(IConfiguration config, IHttpClient httpClient, IDictionary<string, IAuthManager> authManagers, HttpCallBack httpCallBack = null) :
             base(config, httpClient, authManagers, httpCallBack)
@@ -30,10 +29,15 @@ namespace Square.Apis
         /// <param name="cursor">Optional parameter: A pagination cursor returned by a previous call to this endpoint. Provide this to retrieve the next set of results for your original query.  See [Paginating results](#paginatingresults) for more information.</param>
         /// <param name="locationId">Optional parameter: If specified, only returns DeviceCodes of the specified location. Returns DeviceCodes of all locations if empty.</param>
         /// <param name="productType">Optional parameter: If specified, only returns DeviceCodes targeting the specified product type. Returns DeviceCodes of all product types if empty.</param>
+        /// <param name="status">Optional parameter: If specified, returns DeviceCodes with the specified statuses. Returns DeviceCodes of status `PAIRED` and `UNPAIRED` if empty.</param>
         /// <return>Returns the Models.ListDeviceCodesResponse response from the API call</return>
-        public Models.ListDeviceCodesResponse ListDeviceCodes(string cursor = null, string locationId = null, string productType = null)
+        public Models.ListDeviceCodesResponse ListDeviceCodes(
+                string cursor = null,
+                string locationId = null,
+                string productType = null,
+                string status = null)
         {
-            Task<Models.ListDeviceCodesResponse> t = ListDeviceCodesAsync(cursor, locationId, productType);
+            Task<Models.ListDeviceCodesResponse> t = ListDeviceCodesAsync(cursor, locationId, productType, status);
             ApiHelper.RunTaskSynchronously(t);
             return t.Result;
         }
@@ -44,8 +48,13 @@ namespace Square.Apis
         /// <param name="cursor">Optional parameter: A pagination cursor returned by a previous call to this endpoint. Provide this to retrieve the next set of results for your original query.  See [Paginating results](#paginatingresults) for more information.</param>
         /// <param name="locationId">Optional parameter: If specified, only returns DeviceCodes of the specified location. Returns DeviceCodes of all locations if empty.</param>
         /// <param name="productType">Optional parameter: If specified, only returns DeviceCodes targeting the specified product type. Returns DeviceCodes of all product types if empty.</param>
+        /// <param name="status">Optional parameter: If specified, returns DeviceCodes with the specified statuses. Returns DeviceCodes of status `PAIRED` and `UNPAIRED` if empty.</param>
         /// <return>Returns the Models.ListDeviceCodesResponse response from the API call</return>
-        public async Task<Models.ListDeviceCodesResponse> ListDeviceCodesAsync(string cursor = null, string locationId = null, string productType = null, CancellationToken cancellationToken = default)
+        public async Task<Models.ListDeviceCodesResponse> ListDeviceCodesAsync(
+                string cursor = null,
+                string locationId = null,
+                string productType = null,
+                string status = null, CancellationToken cancellationToken = default)
         {
             //the base uri for api requests
             string _baseUri = config.GetBaseUri();
@@ -54,33 +63,31 @@ namespace Square.Apis
             StringBuilder _queryBuilder = new StringBuilder(_baseUri);
             _queryBuilder.Append("/v2/devices/codes");
 
-            //process optional query parameters
-            ApiHelper.AppendUrlWithQueryParameters(_queryBuilder, new Dictionary<string, object>()
+            //prepare specfied query parameters
+            var _queryParameters = new Dictionary<string, object>()
             {
                 { "cursor", cursor },
                 { "location_id", locationId },
-                { "product_type", productType }
-            }, ArrayDeserializationFormat, ParameterSeparator);
-
-            //validate and preprocess url
-            string _queryUrl = ApiHelper.CleanUrl(_queryBuilder);
+                { "product_type", productType },
+                { "status", status }
+            };
 
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string, string>()
-            { 
+            {
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "Square-Version", config.SquareVersion }
             };
 
             //prepare the API call request to fetch the response
-            HttpRequest _request = GetClientInstance().Get(_queryUrl,_headers);
+            HttpRequest _request = GetClientInstance().Get(_queryBuilder.ToString(), _headers, queryParameters: _queryParameters);
             if (HttpCallBack != null)
             {
                 HttpCallBack.OnBeforeHttpRequestEventHandler(GetClientInstance(), _request);
             }
 
-            _request = await authManagers["default"].ApplyAsync(_request).ConfigureAwait(false);
+            _request = await authManagers["global"].ApplyAsync(_request).ConfigureAwait(false);
 
             //invoke request and get response
             HttpStringResponse _response = await GetClientInstance().ExecuteAsStringAsync(_request, cancellationToken).ConfigureAwait(false);
@@ -126,12 +133,9 @@ namespace Square.Apis
             StringBuilder _queryBuilder = new StringBuilder(_baseUri);
             _queryBuilder.Append("/v2/devices/codes");
 
-            //validate and preprocess url
-            string _queryUrl = ApiHelper.CleanUrl(_queryBuilder);
-
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string, string>()
-            { 
+            {
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
@@ -142,13 +146,13 @@ namespace Square.Apis
             var _body = ApiHelper.JsonSerialize(body);
 
             //prepare the API call request to fetch the response
-            HttpRequest _request = GetClientInstance().PostBody(_queryUrl, _headers, _body);
+            HttpRequest _request = GetClientInstance().PostBody(_queryBuilder.ToString(), _headers, _body);
             if (HttpCallBack != null)
             {
                 HttpCallBack.OnBeforeHttpRequestEventHandler(GetClientInstance(), _request);
             }
 
-            _request = await authManagers["default"].ApplyAsync(_request).ConfigureAwait(false);
+            _request = await authManagers["global"].ApplyAsync(_request).ConfigureAwait(false);
 
             //invoke request and get response
             HttpStringResponse _response = await GetClientInstance().ExecuteAsStringAsync(_request, cancellationToken).ConfigureAwait(false);
@@ -198,25 +202,22 @@ namespace Square.Apis
                 { "id", id }
             });
 
-            //validate and preprocess url
-            string _queryUrl = ApiHelper.CleanUrl(_queryBuilder);
-
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string, string>()
-            { 
+            {
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "Square-Version", config.SquareVersion }
             };
 
             //prepare the API call request to fetch the response
-            HttpRequest _request = GetClientInstance().Get(_queryUrl,_headers);
+            HttpRequest _request = GetClientInstance().Get(_queryBuilder.ToString(), _headers);
             if (HttpCallBack != null)
             {
                 HttpCallBack.OnBeforeHttpRequestEventHandler(GetClientInstance(), _request);
             }
 
-            _request = await authManagers["default"].ApplyAsync(_request).ConfigureAwait(false);
+            _request = await authManagers["global"].ApplyAsync(_request).ConfigureAwait(false);
 
             //invoke request and get response
             HttpStringResponse _response = await GetClientInstance().ExecuteAsStringAsync(_request, cancellationToken).ConfigureAwait(false);

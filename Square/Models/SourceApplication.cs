@@ -26,21 +26,21 @@ namespace Square.Models
         /// <summary>
         /// Indicates the Square product used to generate an inventory change.
         /// </summary>
-        [JsonProperty("product")]
+        [JsonProperty("product", NullValueHandling = NullValueHandling.Ignore)]
         public string Product { get; }
 
         /// <summary>
         /// Read-only Square ID assigned to the application. Only used for
         /// [Product](#type-product) type `EXTERNAL_API`.
         /// </summary>
-        [JsonProperty("application_id")]
+        [JsonProperty("application_id", NullValueHandling = NullValueHandling.Ignore)]
         public string ApplicationId { get; }
 
         /// <summary>
         /// Read-only display name assigned to the application
         /// (e.g. `"Custom Application"`, `"Square POS 4.74 for Android"`).
         /// </summary>
-        [JsonProperty("name")]
+        [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
         public string Name { get; }
 
         public Builder ToBuilder()
@@ -58,22 +58,23 @@ namespace Square.Models
             private string applicationId;
             private string name;
 
-            public Builder() { }
-            public Builder Product(string value)
+
+
+            public Builder Product(string product)
             {
-                product = value;
+                this.product = product;
                 return this;
             }
 
-            public Builder ApplicationId(string value)
+            public Builder ApplicationId(string applicationId)
             {
-                applicationId = value;
+                this.applicationId = applicationId;
                 return this;
             }
 
-            public Builder Name(string value)
+            public Builder Name(string name)
             {
-                name = value;
+                this.name = name;
                 return this;
             }
 

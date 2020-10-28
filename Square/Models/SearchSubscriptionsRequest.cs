@@ -28,7 +28,7 @@ namespace Square.Models
         /// Provide this to retrieve the next set of results for the original query.
         /// For more information, see [Pagination](https://developer.squareup.com/docs/docs/working-with-apis/pagination).
         /// </summary>
-        [JsonProperty("cursor")]
+        [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
         public string Cursor { get; }
 
         /// <summary>
@@ -36,13 +36,13 @@ namespace Square.Models
         /// in the response. 
         /// Default: `200`
         /// </summary>
-        [JsonProperty("limit")]
+        [JsonProperty("limit", NullValueHandling = NullValueHandling.Ignore)]
         public int? Limit { get; }
 
         /// <summary>
         /// Represents a query (including filtering criteria) used to search for subscriptions.
         /// </summary>
-        [JsonProperty("query")]
+        [JsonProperty("query", NullValueHandling = NullValueHandling.Ignore)]
         public Models.SearchSubscriptionsQuery Query { get; }
 
         public Builder ToBuilder()
@@ -60,22 +60,23 @@ namespace Square.Models
             private int? limit;
             private Models.SearchSubscriptionsQuery query;
 
-            public Builder() { }
-            public Builder Cursor(string value)
+
+
+            public Builder Cursor(string cursor)
             {
-                cursor = value;
+                this.cursor = cursor;
                 return this;
             }
 
-            public Builder Limit(int? value)
+            public Builder Limit(int? limit)
             {
-                limit = value;
+                this.limit = limit;
                 return this;
             }
 
-            public Builder Query(Models.SearchSubscriptionsQuery value)
+            public Builder Query(Models.SearchSubscriptionsQuery query)
             {
-                query = value;
+                this.query = query;
                 return this;
             }
 

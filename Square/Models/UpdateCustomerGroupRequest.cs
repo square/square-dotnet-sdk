@@ -41,9 +41,10 @@ namespace Square.Models
             {
                 this.mGroup = mGroup;
             }
-            public Builder MGroup(Models.CustomerGroup value)
+
+            public Builder MGroup(Models.CustomerGroup mGroup)
             {
-                mGroup = value;
+                this.mGroup = mGroup;
                 return this;
             }
 

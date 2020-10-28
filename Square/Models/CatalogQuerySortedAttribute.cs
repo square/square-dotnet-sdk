@@ -34,13 +34,13 @@ namespace Square.Models
         /// objects with this value or greater, while descending sorts will return only objects with this value
         /// or less. If unset, start at the beginning (for ascending sorts) or end (for descending sorts).
         /// </summary>
-        [JsonProperty("initial_attribute_value")]
+        [JsonProperty("initial_attribute_value", NullValueHandling = NullValueHandling.Ignore)]
         public string InitialAttributeValue { get; }
 
         /// <summary>
         /// The order (e.g., chronological or alphabetical) in which results from a request are returned.
         /// </summary>
-        [JsonProperty("sort_order")]
+        [JsonProperty("sort_order", NullValueHandling = NullValueHandling.Ignore)]
         public string SortOrder { get; }
 
         public Builder ToBuilder()
@@ -61,21 +61,22 @@ namespace Square.Models
             {
                 this.attributeName = attributeName;
             }
-            public Builder AttributeName(string value)
+
+            public Builder AttributeName(string attributeName)
             {
-                attributeName = value;
+                this.attributeName = attributeName;
                 return this;
             }
 
-            public Builder InitialAttributeValue(string value)
+            public Builder InitialAttributeValue(string initialAttributeValue)
             {
-                initialAttributeValue = value;
+                this.initialAttributeValue = initialAttributeValue;
                 return this;
             }
 
-            public Builder SortOrder(string value)
+            public Builder SortOrder(string sortOrder)
             {
-                sortOrder = value;
+                this.sortOrder = sortOrder;
                 return this;
             }
 

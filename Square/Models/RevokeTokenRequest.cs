@@ -29,21 +29,21 @@ namespace Square.Models
         /// The Square issued ID for your application, available from the
         /// [application dashboard](https://connect.squareup.com/apps).
         /// </summary>
-        [JsonProperty("client_id")]
+        [JsonProperty("client_id", NullValueHandling = NullValueHandling.Ignore)]
         public string ClientId { get; }
 
         /// <summary>
         /// The access token of the merchant whose token you want to revoke.
         /// Do not provide a value for merchant_id if you provide this parameter.
         /// </summary>
-        [JsonProperty("access_token")]
+        [JsonProperty("access_token", NullValueHandling = NullValueHandling.Ignore)]
         public string AccessToken { get; }
 
         /// <summary>
         /// The ID of the merchant whose token you want to revoke.
         /// Do not provide a value for access_token if you provide this parameter.
         /// </summary>
-        [JsonProperty("merchant_id")]
+        [JsonProperty("merchant_id", NullValueHandling = NullValueHandling.Ignore)]
         public string MerchantId { get; }
 
         /// <summary>
@@ -51,7 +51,7 @@ namespace Square.Models
         /// terminate the entire authorization.
         /// Default: `false`
         /// </summary>
-        [JsonProperty("revoke_only_access_token")]
+        [JsonProperty("revoke_only_access_token", NullValueHandling = NullValueHandling.Ignore)]
         public bool? RevokeOnlyAccessToken { get; }
 
         public Builder ToBuilder()
@@ -71,28 +71,29 @@ namespace Square.Models
             private string merchantId;
             private bool? revokeOnlyAccessToken;
 
-            public Builder() { }
-            public Builder ClientId(string value)
+
+
+            public Builder ClientId(string clientId)
             {
-                clientId = value;
+                this.clientId = clientId;
                 return this;
             }
 
-            public Builder AccessToken(string value)
+            public Builder AccessToken(string accessToken)
             {
-                accessToken = value;
+                this.accessToken = accessToken;
                 return this;
             }
 
-            public Builder MerchantId(string value)
+            public Builder MerchantId(string merchantId)
             {
-                merchantId = value;
+                this.merchantId = merchantId;
                 return this;
             }
 
-            public Builder RevokeOnlyAccessToken(bool? value)
+            public Builder RevokeOnlyAccessToken(bool? revokeOnlyAccessToken)
             {
-                revokeOnlyAccessToken = value;
+                this.revokeOnlyAccessToken = revokeOnlyAccessToken;
                 return this;
             }
 

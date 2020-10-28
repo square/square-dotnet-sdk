@@ -38,7 +38,7 @@ namespace Square.Models
         /// redemptions, that is, no `reward`s are created. Therefore, the reward `id`s are
         /// random strings used only to reference the reward tier.
         /// </summary>
-        [JsonProperty("proposed_rewards")]
+        [JsonProperty("proposed_rewards", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.OrderReward> ProposedRewards { get; }
 
         public Builder ToBuilder()
@@ -51,21 +51,22 @@ namespace Square.Models
         public class Builder
         {
             private Models.Order order;
-            private IList<Models.OrderReward> proposedRewards = new List<Models.OrderReward>();
+            private IList<Models.OrderReward> proposedRewards;
 
             public Builder(Models.Order order)
             {
                 this.order = order;
             }
-            public Builder Order(Models.Order value)
+
+            public Builder Order(Models.Order order)
             {
-                order = value;
+                this.order = order;
                 return this;
             }
 
-            public Builder ProposedRewards(IList<Models.OrderReward> value)
+            public Builder ProposedRewards(IList<Models.OrderReward> proposedRewards)
             {
-                proposedRewards = value;
+                this.proposedRewards = proposedRewards;
                 return this;
             }
 

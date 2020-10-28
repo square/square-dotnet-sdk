@@ -24,13 +24,13 @@ namespace Square.Models
         /// <summary>
         /// List of standard (non-custom) measurement units in this description group.
         /// </summary>
-        [JsonProperty("standard_unit_descriptions")]
+        [JsonProperty("standard_unit_descriptions", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.StandardUnitDescription> StandardUnitDescriptions { get; }
 
         /// <summary>
         /// IETF language tag.
         /// </summary>
-        [JsonProperty("language_code")]
+        [JsonProperty("language_code", NullValueHandling = NullValueHandling.Ignore)]
         public string LanguageCode { get; }
 
         public Builder ToBuilder()
@@ -43,19 +43,20 @@ namespace Square.Models
 
         public class Builder
         {
-            private IList<Models.StandardUnitDescription> standardUnitDescriptions = new List<Models.StandardUnitDescription>();
+            private IList<Models.StandardUnitDescription> standardUnitDescriptions;
             private string languageCode;
 
-            public Builder() { }
-            public Builder StandardUnitDescriptions(IList<Models.StandardUnitDescription> value)
+
+
+            public Builder StandardUnitDescriptions(IList<Models.StandardUnitDescription> standardUnitDescriptions)
             {
-                standardUnitDescriptions = value;
+                this.standardUnitDescriptions = standardUnitDescriptions;
                 return this;
             }
 
-            public Builder LanguageCode(string value)
+            public Builder LanguageCode(string languageCode)
             {
-                languageCode = value;
+                this.languageCode = languageCode;
                 return this;
             }
 

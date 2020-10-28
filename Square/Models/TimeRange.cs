@@ -25,14 +25,14 @@ namespace Square.Models
         /// A datetime value in RFC 3339 format indicating when the time range
         /// starts.
         /// </summary>
-        [JsonProperty("start_at")]
+        [JsonProperty("start_at", NullValueHandling = NullValueHandling.Ignore)]
         public string StartAt { get; }
 
         /// <summary>
         /// A datetime value in RFC 3339 format indicating when the time range
         /// ends.
         /// </summary>
-        [JsonProperty("end_at")]
+        [JsonProperty("end_at", NullValueHandling = NullValueHandling.Ignore)]
         public string EndAt { get; }
 
         public Builder ToBuilder()
@@ -48,16 +48,17 @@ namespace Square.Models
             private string startAt;
             private string endAt;
 
-            public Builder() { }
-            public Builder StartAt(string value)
+
+
+            public Builder StartAt(string startAt)
             {
-                startAt = value;
+                this.startAt = startAt;
                 return this;
             }
 
-            public Builder EndAt(string value)
+            public Builder EndAt(string endAt)
             {
-                endAt = value;
+                this.endAt = endAt;
                 return this;
             }
 

@@ -26,15 +26,15 @@ namespace Square.Models
         public HttpContext Context { get; internal set; }
 
         /// <summary>
-        /// Information on errors encountered during the request
+        /// Information about errors encountered during the request.
         /// </summary>
-        [JsonProperty("errors")]
+        [JsonProperty("errors", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.Error> Errors { get; }
 
         /// <summary>
         /// Represents a payment processed by the Square API.
         /// </summary>
-        [JsonProperty("payment")]
+        [JsonProperty("payment", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Payment Payment { get; }
 
         public Builder ToBuilder()
@@ -47,19 +47,20 @@ namespace Square.Models
 
         public class Builder
         {
-            private IList<Models.Error> errors = new List<Models.Error>();
+            private IList<Models.Error> errors;
             private Models.Payment payment;
 
-            public Builder() { }
-            public Builder Errors(IList<Models.Error> value)
+
+
+            public Builder Errors(IList<Models.Error> errors)
             {
-                errors = value;
+                this.errors = errors;
                 return this;
             }
 
-            public Builder Payment(Models.Payment value)
+            public Builder Payment(Models.Payment payment)
             {
-                payment = value;
+                this.payment = payment;
                 return this;
             }
 

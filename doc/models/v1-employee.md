@@ -1,12 +1,13 @@
-## V1 Employee
+
+# V1 Employee
 
 Represents one of a business's employees.
 
-### Structure
+## Structure
 
 `V1Employee`
 
-### Fields
+## Fields
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
@@ -21,7 +22,7 @@ Represents one of a business's employees.
 | `CreatedAt` | `string` | Optional | The time when the employee entity was created, in ISO 8601 format. |
 | `UpdatedAt` | `string` | Optional | The time when the employee entity was most recently updated, in ISO 8601 format. |
 
-### Example (as JSON)
+## Example (as JSON)
 
 ```json
 {

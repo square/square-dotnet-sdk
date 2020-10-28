@@ -28,13 +28,13 @@ namespace Square.Models
         /// <summary>
         /// A record representing an individual team member for a business.
         /// </summary>
-        [JsonProperty("team_member")]
+        [JsonProperty("team_member", NullValueHandling = NullValueHandling.Ignore)]
         public Models.TeamMember TeamMember { get; }
 
         /// <summary>
         /// The errors that occurred during the request.
         /// </summary>
-        [JsonProperty("errors")]
+        [JsonProperty("errors", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.Error> Errors { get; }
 
         public Builder ToBuilder()
@@ -48,18 +48,19 @@ namespace Square.Models
         public class Builder
         {
             private Models.TeamMember teamMember;
-            private IList<Models.Error> errors = new List<Models.Error>();
+            private IList<Models.Error> errors;
 
-            public Builder() { }
-            public Builder TeamMember(Models.TeamMember value)
+
+
+            public Builder TeamMember(Models.TeamMember teamMember)
             {
-                teamMember = value;
+                this.teamMember = teamMember;
                 return this;
             }
 
-            public Builder Errors(IList<Models.Error> value)
+            public Builder Errors(IList<Models.Error> errors)
             {
-                errors = value;
+                this.errors = errors;
                 return this;
             }
 

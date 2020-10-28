@@ -26,7 +26,7 @@ namespace Square.Models
         /// duplicated within a seller's catalog. May not be modified after the
         /// definition has been created.
         /// </summary>
-        [JsonProperty("enforce_uniqueness")]
+        [JsonProperty("enforce_uniqueness", NullValueHandling = NullValueHandling.Ignore)]
         public bool? EnforceUniqueness { get; }
 
         public Builder ToBuilder()
@@ -40,10 +40,11 @@ namespace Square.Models
         {
             private bool? enforceUniqueness;
 
-            public Builder() { }
-            public Builder EnforceUniqueness(bool? value)
+
+
+            public Builder EnforceUniqueness(bool? enforceUniqueness)
             {
-                enforceUniqueness = value;
+                this.enforceUniqueness = enforceUniqueness;
                 return this;
             }
 

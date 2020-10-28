@@ -39,9 +39,10 @@ namespace Square.Models
             {
                 this.objects = objects;
             }
-            public Builder Objects(IList<Models.CatalogObject> value)
+
+            public Builder Objects(IList<Models.CatalogObject> objects)
             {
-                objects = value;
+                this.objects = objects;
                 return this;
             }
 

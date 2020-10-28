@@ -28,14 +28,14 @@ namespace Square.Models
         /// <summary>
         /// Any errors that occurred during the request.
         /// </summary>
-        [JsonProperty("errors")]
+        [JsonProperty("errors", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.Error> Errors { get; }
 
         /// <summary>
         /// Provides information about a loyalty event. 
         /// For more information, see [Loyalty events](https://developer.squareup.com/docs/docs/loyalty-api/overview/#loyalty-events).
         /// </summary>
-        [JsonProperty("event")]
+        [JsonProperty("event", NullValueHandling = NullValueHandling.Ignore)]
         public Models.LoyaltyEvent MEvent { get; }
 
         public Builder ToBuilder()
@@ -48,19 +48,20 @@ namespace Square.Models
 
         public class Builder
         {
-            private IList<Models.Error> errors = new List<Models.Error>();
+            private IList<Models.Error> errors;
             private Models.LoyaltyEvent mEvent;
 
-            public Builder() { }
-            public Builder Errors(IList<Models.Error> value)
+
+
+            public Builder Errors(IList<Models.Error> errors)
             {
-                errors = value;
+                this.errors = errors;
                 return this;
             }
 
-            public Builder MEvent(Models.LoyaltyEvent value)
+            public Builder MEvent(Models.LoyaltyEvent mEvent)
             {
-                mEvent = value;
+                this.mEvent = mEvent;
                 return this;
             }
 

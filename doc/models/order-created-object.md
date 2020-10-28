@@ -1,16 +1,17 @@
-## Order Created Object
 
-### Structure
+# Order Created Object
+
+## Structure
 
 `OrderCreatedObject`
 
-### Fields
+## Fields
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `OrderCreated` | [`Models.OrderCreated`](/doc/models/order-created.md) | Optional | - |
 
-### Example (as JSON)
+## Example (as JSON)
 
 ```json
 {

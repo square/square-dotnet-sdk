@@ -54,95 +54,95 @@ namespace Square.Models
         /// provide less specific details like city, state/province, or country (these
         /// details are provided in other fields).
         /// </summary>
-        [JsonProperty("address_line_1")]
+        [JsonProperty("address_line_1", NullValueHandling = NullValueHandling.Ignore)]
         public string AddressLine1 { get; }
 
         /// <summary>
         /// The second line of the address, if any.
         /// </summary>
-        [JsonProperty("address_line_2")]
+        [JsonProperty("address_line_2", NullValueHandling = NullValueHandling.Ignore)]
         public string AddressLine2 { get; }
 
         /// <summary>
         /// The third line of the address, if any.
         /// </summary>
-        [JsonProperty("address_line_3")]
+        [JsonProperty("address_line_3", NullValueHandling = NullValueHandling.Ignore)]
         public string AddressLine3 { get; }
 
         /// <summary>
         /// The city or town of the address.
         /// </summary>
-        [JsonProperty("locality")]
+        [JsonProperty("locality", NullValueHandling = NullValueHandling.Ignore)]
         public string Locality { get; }
 
         /// <summary>
         /// A civil region within the address's `locality`, if any.
         /// </summary>
-        [JsonProperty("sublocality")]
+        [JsonProperty("sublocality", NullValueHandling = NullValueHandling.Ignore)]
         public string Sublocality { get; }
 
         /// <summary>
         /// A civil region within the address's `sublocality`, if any.
         /// </summary>
-        [JsonProperty("sublocality_2")]
+        [JsonProperty("sublocality_2", NullValueHandling = NullValueHandling.Ignore)]
         public string Sublocality2 { get; }
 
         /// <summary>
         /// A civil region within the address's `sublocality_2`, if any.
         /// </summary>
-        [JsonProperty("sublocality_3")]
+        [JsonProperty("sublocality_3", NullValueHandling = NullValueHandling.Ignore)]
         public string Sublocality3 { get; }
 
         /// <summary>
         /// A civil entity within the address's country. In the US, this
         /// is the state.
         /// </summary>
-        [JsonProperty("administrative_district_level_1")]
+        [JsonProperty("administrative_district_level_1", NullValueHandling = NullValueHandling.Ignore)]
         public string AdministrativeDistrictLevel1 { get; }
 
         /// <summary>
         /// A civil entity within the address's `administrative_district_level_1`.
         /// In the US, this is the county.
         /// </summary>
-        [JsonProperty("administrative_district_level_2")]
+        [JsonProperty("administrative_district_level_2", NullValueHandling = NullValueHandling.Ignore)]
         public string AdministrativeDistrictLevel2 { get; }
 
         /// <summary>
         /// A civil entity within the address's `administrative_district_level_2`,
         /// if any.
         /// </summary>
-        [JsonProperty("administrative_district_level_3")]
+        [JsonProperty("administrative_district_level_3", NullValueHandling = NullValueHandling.Ignore)]
         public string AdministrativeDistrictLevel3 { get; }
 
         /// <summary>
         /// The address's postal code.
         /// </summary>
-        [JsonProperty("postal_code")]
+        [JsonProperty("postal_code", NullValueHandling = NullValueHandling.Ignore)]
         public string PostalCode { get; }
 
         /// <summary>
         /// Indicates the country associated with another entity, such as a business.
         /// Values are in [ISO 3166-1-alpha-2 format](http://www.iso.org/iso/home/standards/country_codes.htm).
         /// </summary>
-        [JsonProperty("country")]
+        [JsonProperty("country", NullValueHandling = NullValueHandling.Ignore)]
         public string Country { get; }
 
         /// <summary>
         /// Optional first name when it's representing recipient.
         /// </summary>
-        [JsonProperty("first_name")]
+        [JsonProperty("first_name", NullValueHandling = NullValueHandling.Ignore)]
         public string FirstName { get; }
 
         /// <summary>
         /// Optional last name when it's representing recipient.
         /// </summary>
-        [JsonProperty("last_name")]
+        [JsonProperty("last_name", NullValueHandling = NullValueHandling.Ignore)]
         public string LastName { get; }
 
         /// <summary>
         /// Optional organization name when it's representing recipient.
         /// </summary>
-        [JsonProperty("organization")]
+        [JsonProperty("organization", NullValueHandling = NullValueHandling.Ignore)]
         public string Organization { get; }
 
         public Builder ToBuilder()
@@ -184,94 +184,95 @@ namespace Square.Models
             private string lastName;
             private string organization;
 
-            public Builder() { }
-            public Builder AddressLine1(string value)
+
+
+            public Builder AddressLine1(string addressLine1)
             {
-                addressLine1 = value;
+                this.addressLine1 = addressLine1;
                 return this;
             }
 
-            public Builder AddressLine2(string value)
+            public Builder AddressLine2(string addressLine2)
             {
-                addressLine2 = value;
+                this.addressLine2 = addressLine2;
                 return this;
             }
 
-            public Builder AddressLine3(string value)
+            public Builder AddressLine3(string addressLine3)
             {
-                addressLine3 = value;
+                this.addressLine3 = addressLine3;
                 return this;
             }
 
-            public Builder Locality(string value)
+            public Builder Locality(string locality)
             {
-                locality = value;
+                this.locality = locality;
                 return this;
             }
 
-            public Builder Sublocality(string value)
+            public Builder Sublocality(string sublocality)
             {
-                sublocality = value;
+                this.sublocality = sublocality;
                 return this;
             }
 
-            public Builder Sublocality2(string value)
+            public Builder Sublocality2(string sublocality2)
             {
-                sublocality2 = value;
+                this.sublocality2 = sublocality2;
                 return this;
             }
 
-            public Builder Sublocality3(string value)
+            public Builder Sublocality3(string sublocality3)
             {
-                sublocality3 = value;
+                this.sublocality3 = sublocality3;
                 return this;
             }
 
-            public Builder AdministrativeDistrictLevel1(string value)
+            public Builder AdministrativeDistrictLevel1(string administrativeDistrictLevel1)
             {
-                administrativeDistrictLevel1 = value;
+                this.administrativeDistrictLevel1 = administrativeDistrictLevel1;
                 return this;
             }
 
-            public Builder AdministrativeDistrictLevel2(string value)
+            public Builder AdministrativeDistrictLevel2(string administrativeDistrictLevel2)
             {
-                administrativeDistrictLevel2 = value;
+                this.administrativeDistrictLevel2 = administrativeDistrictLevel2;
                 return this;
             }
 
-            public Builder AdministrativeDistrictLevel3(string value)
+            public Builder AdministrativeDistrictLevel3(string administrativeDistrictLevel3)
             {
-                administrativeDistrictLevel3 = value;
+                this.administrativeDistrictLevel3 = administrativeDistrictLevel3;
                 return this;
             }
 
-            public Builder PostalCode(string value)
+            public Builder PostalCode(string postalCode)
             {
-                postalCode = value;
+                this.postalCode = postalCode;
                 return this;
             }
 
-            public Builder Country(string value)
+            public Builder Country(string country)
             {
-                country = value;
+                this.country = country;
                 return this;
             }
 
-            public Builder FirstName(string value)
+            public Builder FirstName(string firstName)
             {
-                firstName = value;
+                this.firstName = firstName;
                 return this;
             }
 
-            public Builder LastName(string value)
+            public Builder LastName(string lastName)
             {
-                lastName = value;
+                this.lastName = lastName;
                 return this;
             }
 
-            public Builder Organization(string value)
+            public Builder Organization(string organization)
             {
-                organization = value;
+                this.organization = organization;
                 return this;
             }
 

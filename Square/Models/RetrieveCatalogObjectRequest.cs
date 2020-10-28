@@ -22,16 +22,14 @@ namespace Square.Models
         /// <summary>
         /// If `true`, the response will include additional objects that are related to the
         /// requested object, as follows:
-        /// If the `object` field of the response contains a CatalogItem,
-        /// its associated CatalogCategory, CatalogTax objects,
-        /// CatalogImages and CatalogModifierLists
-        /// will be returned in the `related_objects` field of the response. If the `object`
-        /// field of the response contains a CatalogItemVariation,
-        /// its parent CatalogItem will be returned in the `related_objects` field of
-        /// the response.
+        /// If the `object` field of the response contains a `CatalogItem`, its associated
+        /// `CatalogCategory`, `CatalogTax`, `CatalogImage` and `CatalogModifierList` objects will
+        /// be returned in the `related_objects` field of the response. If the `object` field of
+        /// the response contains a `CatalogItemVariation`, its parent `CatalogItem` will be returned
+        /// in the `related_objects` field of the response.
         /// Default value: `false`
         /// </summary>
-        [JsonProperty("include_related_objects")]
+        [JsonProperty("include_related_objects", NullValueHandling = NullValueHandling.Ignore)]
         public bool? IncludeRelatedObjects { get; }
 
         public Builder ToBuilder()
@@ -45,10 +43,11 @@ namespace Square.Models
         {
             private bool? includeRelatedObjects;
 
-            public Builder() { }
-            public Builder IncludeRelatedObjects(bool? value)
+
+
+            public Builder IncludeRelatedObjects(bool? includeRelatedObjects)
             {
-                includeRelatedObjects = value;
+                this.includeRelatedObjects = includeRelatedObjects;
                 return this;
             }
 

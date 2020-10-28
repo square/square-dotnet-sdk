@@ -40,43 +40,43 @@ namespace Square.Models
         /// <summary>
         /// UUID for this object.
         /// </summary>
-        [JsonProperty("id")]
+        [JsonProperty("id", NullValueHandling = NullValueHandling.Ignore)]
         public string Id { get; }
 
         /// <summary>
         /// The employee's first name.
         /// </summary>
-        [JsonProperty("first_name")]
+        [JsonProperty("first_name", NullValueHandling = NullValueHandling.Ignore)]
         public string FirstName { get; }
 
         /// <summary>
         /// The employee's last name.
         /// </summary>
-        [JsonProperty("last_name")]
+        [JsonProperty("last_name", NullValueHandling = NullValueHandling.Ignore)]
         public string LastName { get; }
 
         /// <summary>
         /// The employee's email address
         /// </summary>
-        [JsonProperty("email")]
+        [JsonProperty("email", NullValueHandling = NullValueHandling.Ignore)]
         public string Email { get; }
 
         /// <summary>
         /// The employee's phone number in E.164 format, i.e. "+12125554250"
         /// </summary>
-        [JsonProperty("phone_number")]
+        [JsonProperty("phone_number", NullValueHandling = NullValueHandling.Ignore)]
         public string PhoneNumber { get; }
 
         /// <summary>
         /// A list of location IDs where this employee has access to.
         /// </summary>
-        [JsonProperty("location_ids")]
+        [JsonProperty("location_ids", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> LocationIds { get; }
 
         /// <summary>
         /// The status of the Employee being retrieved.
         /// </summary>
-        [JsonProperty("status")]
+        [JsonProperty("status", NullValueHandling = NullValueHandling.Ignore)]
         public string Status { get; }
 
         /// <summary>
@@ -84,19 +84,19 @@ namespace Square.Models
         /// has one owner employee, and that employee has full authority over
         /// the account.
         /// </summary>
-        [JsonProperty("is_owner")]
+        [JsonProperty("is_owner", NullValueHandling = NullValueHandling.Ignore)]
         public bool? IsOwner { get; }
 
         /// <summary>
         /// A read-only timestamp in RFC 3339 format.
         /// </summary>
-        [JsonProperty("created_at")]
+        [JsonProperty("created_at", NullValueHandling = NullValueHandling.Ignore)]
         public string CreatedAt { get; }
 
         /// <summary>
         /// A read-only timestamp in RFC 3339 format.
         /// </summary>
-        [JsonProperty("updated_at")]
+        [JsonProperty("updated_at", NullValueHandling = NullValueHandling.Ignore)]
         public string UpdatedAt { get; }
 
         public Builder ToBuilder()
@@ -122,70 +122,71 @@ namespace Square.Models
             private string lastName;
             private string email;
             private string phoneNumber;
-            private IList<string> locationIds = new List<string>();
+            private IList<string> locationIds;
             private string status;
             private bool? isOwner;
             private string createdAt;
             private string updatedAt;
 
-            public Builder() { }
-            public Builder Id(string value)
+
+
+            public Builder Id(string id)
             {
-                id = value;
+                this.id = id;
                 return this;
             }
 
-            public Builder FirstName(string value)
+            public Builder FirstName(string firstName)
             {
-                firstName = value;
+                this.firstName = firstName;
                 return this;
             }
 
-            public Builder LastName(string value)
+            public Builder LastName(string lastName)
             {
-                lastName = value;
+                this.lastName = lastName;
                 return this;
             }
 
-            public Builder Email(string value)
+            public Builder Email(string email)
             {
-                email = value;
+                this.email = email;
                 return this;
             }
 
-            public Builder PhoneNumber(string value)
+            public Builder PhoneNumber(string phoneNumber)
             {
-                phoneNumber = value;
+                this.phoneNumber = phoneNumber;
                 return this;
             }
 
-            public Builder LocationIds(IList<string> value)
+            public Builder LocationIds(IList<string> locationIds)
             {
-                locationIds = value;
+                this.locationIds = locationIds;
                 return this;
             }
 
-            public Builder Status(string value)
+            public Builder Status(string status)
             {
-                status = value;
+                this.status = status;
                 return this;
             }
 
-            public Builder IsOwner(bool? value)
+            public Builder IsOwner(bool? isOwner)
             {
-                isOwner = value;
+                this.isOwner = isOwner;
                 return this;
             }
 
-            public Builder CreatedAt(string value)
+            public Builder CreatedAt(string createdAt)
             {
-                createdAt = value;
+                this.createdAt = createdAt;
                 return this;
             }
 
-            public Builder UpdatedAt(string value)
+            public Builder UpdatedAt(string updatedAt)
             {
-                updatedAt = value;
+                this.updatedAt = updatedAt;
                 return this;
             }
 

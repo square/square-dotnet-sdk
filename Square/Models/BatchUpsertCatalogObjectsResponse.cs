@@ -30,27 +30,27 @@ namespace Square.Models
         public HttpContext Context { get; internal set; }
 
         /// <summary>
-        /// Information on any errors that encountered.
+        /// Any errors that occurred during the request.
         /// </summary>
-        [JsonProperty("errors")]
+        [JsonProperty("errors", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.Error> Errors { get; }
 
         /// <summary>
         /// The created successfully created CatalogObjects.
         /// </summary>
-        [JsonProperty("objects")]
+        [JsonProperty("objects", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.CatalogObject> Objects { get; }
 
         /// <summary>
         /// The database [timestamp](https://developer.squareup.com/docs/build-basics/working-with-dates) of this update in RFC 3339 format, e.g., "2016-09-04T23:59:33.123Z".
         /// </summary>
-        [JsonProperty("updated_at")]
+        [JsonProperty("updated_at", NullValueHandling = NullValueHandling.Ignore)]
         public string UpdatedAt { get; }
 
         /// <summary>
         /// The mapping between client and server IDs for this upsert.
         /// </summary>
-        [JsonProperty("id_mappings")]
+        [JsonProperty("id_mappings", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.CatalogIdMapping> IdMappings { get; }
 
         public Builder ToBuilder()
@@ -65,33 +65,34 @@ namespace Square.Models
 
         public class Builder
         {
-            private IList<Models.Error> errors = new List<Models.Error>();
-            private IList<Models.CatalogObject> objects = new List<Models.CatalogObject>();
+            private IList<Models.Error> errors;
+            private IList<Models.CatalogObject> objects;
             private string updatedAt;
-            private IList<Models.CatalogIdMapping> idMappings = new List<Models.CatalogIdMapping>();
+            private IList<Models.CatalogIdMapping> idMappings;
 
-            public Builder() { }
-            public Builder Errors(IList<Models.Error> value)
+
+
+            public Builder Errors(IList<Models.Error> errors)
             {
-                errors = value;
+                this.errors = errors;
                 return this;
             }
 
-            public Builder Objects(IList<Models.CatalogObject> value)
+            public Builder Objects(IList<Models.CatalogObject> objects)
             {
-                objects = value;
+                this.objects = objects;
                 return this;
             }
 
-            public Builder UpdatedAt(string value)
+            public Builder UpdatedAt(string updatedAt)
             {
-                updatedAt = value;
+                this.updatedAt = updatedAt;
                 return this;
             }
 
-            public Builder IdMappings(IList<Models.CatalogIdMapping> value)
+            public Builder IdMappings(IList<Models.CatalogIdMapping> idMappings)
             {
-                idMappings = value;
+                this.idMappings = idMappings;
                 return this;
             }
 

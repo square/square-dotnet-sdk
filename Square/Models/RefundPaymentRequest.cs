@@ -54,7 +54,7 @@ namespace Square.Models
         /// [Working with Monetary Amounts](https://developer.squareup.com/docs/build-basics/working-with-monetary-amounts)
         /// for more information.
         /// </summary>
-        [JsonProperty("app_fee_money")]
+        [JsonProperty("app_fee_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Money AppFeeMoney { get; }
 
         /// <summary>
@@ -66,7 +66,7 @@ namespace Square.Models
         /// <summary>
         /// A description of the reason for the refund.
         /// </summary>
-        [JsonProperty("reason")]
+        [JsonProperty("reason", NullValueHandling = NullValueHandling.Ignore)]
         public string Reason { get; }
 
         public Builder ToBuilder()
@@ -95,33 +95,34 @@ namespace Square.Models
                 this.amountMoney = amountMoney;
                 this.paymentId = paymentId;
             }
-            public Builder IdempotencyKey(string value)
+
+            public Builder IdempotencyKey(string idempotencyKey)
             {
-                idempotencyKey = value;
+                this.idempotencyKey = idempotencyKey;
                 return this;
             }
 
-            public Builder AmountMoney(Models.Money value)
+            public Builder AmountMoney(Models.Money amountMoney)
             {
-                amountMoney = value;
+                this.amountMoney = amountMoney;
                 return this;
             }
 
-            public Builder PaymentId(string value)
+            public Builder PaymentId(string paymentId)
             {
-                paymentId = value;
+                this.paymentId = paymentId;
                 return this;
             }
 
-            public Builder AppFeeMoney(Models.Money value)
+            public Builder AppFeeMoney(Models.Money appFeeMoney)
             {
-                appFeeMoney = value;
+                this.appFeeMoney = appFeeMoney;
                 return this;
             }
 
-            public Builder Reason(string value)
+            public Builder Reason(string reason)
             {
-                reason = value;
+                this.reason = reason;
                 return this;
             }
 

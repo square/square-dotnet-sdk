@@ -26,7 +26,7 @@ namespace Square.Models
         /// <summary>
         /// The id of the Order
         /// </summary>
-        [JsonProperty("order_id")]
+        [JsonProperty("order_id", NullValueHandling = NullValueHandling.Ignore)]
         public string OrderId { get; }
 
         /// <summary>
@@ -35,13 +35,13 @@ namespace Square.Models
         /// thus cannot be updated.
         /// [Read more about working with versions](https://developer.squareup.com/docs/orders-api/manage-orders#update-orders).
         /// </summary>
-        [JsonProperty("version")]
+        [JsonProperty("version", NullValueHandling = NullValueHandling.Ignore)]
         public int? Version { get; }
 
         /// <summary>
         /// The location id the Order belongs to.
         /// </summary>
-        [JsonProperty("location_id")]
+        [JsonProperty("location_id", NullValueHandling = NullValueHandling.Ignore)]
         public string LocationId { get; }
 
         public Builder ToBuilder()
@@ -59,22 +59,23 @@ namespace Square.Models
             private int? version;
             private string locationId;
 
-            public Builder() { }
-            public Builder OrderId(string value)
+
+
+            public Builder OrderId(string orderId)
             {
-                orderId = value;
+                this.orderId = orderId;
                 return this;
             }
 
-            public Builder Version(int? value)
+            public Builder Version(int? version)
             {
-                version = value;
+                this.version = version;
                 return this;
             }
 
-            public Builder LocationId(string value)
+            public Builder LocationId(string locationId)
             {
-                locationId = value;
+                this.locationId = locationId;
                 return this;
             }
 

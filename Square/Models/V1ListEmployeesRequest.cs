@@ -38,56 +38,56 @@ namespace Square.Models
         /// <summary>
         /// The order (e.g., chronological or alphabetical) in which results from a request are returned.
         /// </summary>
-        [JsonProperty("order")]
+        [JsonProperty("order", NullValueHandling = NullValueHandling.Ignore)]
         public string Order { get; }
 
         /// <summary>
         /// If filtering results by their updated_at field, the beginning of the requested reporting period, in ISO 8601 format
         /// </summary>
-        [JsonProperty("begin_updated_at")]
+        [JsonProperty("begin_updated_at", NullValueHandling = NullValueHandling.Ignore)]
         public string BeginUpdatedAt { get; }
 
         /// <summary>
         /// If filtering results by there updated_at field, the end of the requested reporting period, in ISO 8601 format.
         /// </summary>
-        [JsonProperty("end_updated_at")]
+        [JsonProperty("end_updated_at", NullValueHandling = NullValueHandling.Ignore)]
         public string EndUpdatedAt { get; }
 
         /// <summary>
         /// If filtering results by their created_at field, the beginning of the requested reporting period, in ISO 8601 format.
         /// </summary>
-        [JsonProperty("begin_created_at")]
+        [JsonProperty("begin_created_at", NullValueHandling = NullValueHandling.Ignore)]
         public string BeginCreatedAt { get; }
 
         /// <summary>
         /// If filtering results by their created_at field, the end of the requested reporting period, in ISO 8601 format.
         /// </summary>
-        [JsonProperty("end_created_at")]
+        [JsonProperty("end_created_at", NullValueHandling = NullValueHandling.Ignore)]
         public string EndCreatedAt { get; }
 
         /// <summary>
         /// Getter for status
         /// </summary>
-        [JsonProperty("status")]
+        [JsonProperty("status", NullValueHandling = NullValueHandling.Ignore)]
         public string Status { get; }
 
         /// <summary>
         /// If provided, the endpoint returns only employee entities with the specified external_id.
         /// </summary>
-        [JsonProperty("external_id")]
+        [JsonProperty("external_id", NullValueHandling = NullValueHandling.Ignore)]
         public string ExternalId { get; }
 
         /// <summary>
         /// The maximum integer number of employee entities to return in a single response. Default 100, maximum 200.
         /// </summary>
-        [JsonProperty("limit")]
+        [JsonProperty("limit", NullValueHandling = NullValueHandling.Ignore)]
         public int? Limit { get; }
 
         /// <summary>
         /// A pagination cursor to retrieve the next set of results for your
         /// original query to the endpoint.
         /// </summary>
-        [JsonProperty("batch_token")]
+        [JsonProperty("batch_token", NullValueHandling = NullValueHandling.Ignore)]
         public string BatchToken { get; }
 
         public Builder ToBuilder()
@@ -117,58 +117,59 @@ namespace Square.Models
             private int? limit;
             private string batchToken;
 
-            public Builder() { }
-            public Builder Order(string value)
+
+
+            public Builder Order(string order)
             {
-                order = value;
+                this.order = order;
                 return this;
             }
 
-            public Builder BeginUpdatedAt(string value)
+            public Builder BeginUpdatedAt(string beginUpdatedAt)
             {
-                beginUpdatedAt = value;
+                this.beginUpdatedAt = beginUpdatedAt;
                 return this;
             }
 
-            public Builder EndUpdatedAt(string value)
+            public Builder EndUpdatedAt(string endUpdatedAt)
             {
-                endUpdatedAt = value;
+                this.endUpdatedAt = endUpdatedAt;
                 return this;
             }
 
-            public Builder BeginCreatedAt(string value)
+            public Builder BeginCreatedAt(string beginCreatedAt)
             {
-                beginCreatedAt = value;
+                this.beginCreatedAt = beginCreatedAt;
                 return this;
             }
 
-            public Builder EndCreatedAt(string value)
+            public Builder EndCreatedAt(string endCreatedAt)
             {
-                endCreatedAt = value;
+                this.endCreatedAt = endCreatedAt;
                 return this;
             }
 
-            public Builder Status(string value)
+            public Builder Status(string status)
             {
-                status = value;
+                this.status = status;
                 return this;
             }
 
-            public Builder ExternalId(string value)
+            public Builder ExternalId(string externalId)
             {
-                externalId = value;
+                this.externalId = externalId;
                 return this;
             }
 
-            public Builder Limit(int? value)
+            public Builder Limit(int? limit)
             {
-                limit = value;
+                this.limit = limit;
                 return this;
             }
 
-            public Builder BatchToken(string value)
+            public Builder BatchToken(string batchToken)
             {
-                batchToken = value;
+                this.batchToken = batchToken;
                 return this;
             }
 

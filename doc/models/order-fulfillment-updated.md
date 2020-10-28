@@ -1,10 +1,11 @@
-## Order Fulfillment Updated
 
-### Structure
+# Order Fulfillment Updated
+
+## Structure
 
 `OrderFulfillmentUpdated`
 
-### Fields
+## Fields
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
@@ -16,7 +17,7 @@
 | `UpdatedAt` | `string` | Optional | Timestamp for when the order was last updated in RFC 3339 format. |
 | `FulfillmentUpdate` | [`IList<Models.OrderFulfillmentUpdatedUpdate>`](/doc/models/order-fulfillment-updated-update.md) | Optional | The fulfillments that were updated with this version change. |
 
-### Example (as JSON)
+## Example (as JSON)
 
 ```json
 {

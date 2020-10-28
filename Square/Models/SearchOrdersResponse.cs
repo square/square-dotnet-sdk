@@ -33,7 +33,7 @@ namespace Square.Models
         /// List of [OrderEntries](#type-orderentry) that fit the query
         /// conditions. Populated only if `return_entries` was set to `true` in the request.
         /// </summary>
-        [JsonProperty("order_entries")]
+        [JsonProperty("order_entries", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.OrderEntry> OrderEntries { get; }
 
         /// <summary>
@@ -41,7 +41,7 @@ namespace Square.Models
         /// [Order](#type-order) objects that match query conditions. Populated only if
         /// `return_entries` in the request is set to `false`.
         /// </summary>
-        [JsonProperty("orders")]
+        [JsonProperty("orders", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.Order> Orders { get; }
 
         /// <summary>
@@ -49,13 +49,13 @@ namespace Square.Models
         /// this is the final response.
         /// See [Pagination](https://developer.squareup.com/docs/basics/api101/pagination) for more information.
         /// </summary>
-        [JsonProperty("cursor")]
+        [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
         public string Cursor { get; }
 
         /// <summary>
         /// [Errors](#type-error) encountered during the search.
         /// </summary>
-        [JsonProperty("errors")]
+        [JsonProperty("errors", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.Error> Errors { get; }
 
         public Builder ToBuilder()
@@ -70,33 +70,34 @@ namespace Square.Models
 
         public class Builder
         {
-            private IList<Models.OrderEntry> orderEntries = new List<Models.OrderEntry>();
-            private IList<Models.Order> orders = new List<Models.Order>();
+            private IList<Models.OrderEntry> orderEntries;
+            private IList<Models.Order> orders;
             private string cursor;
-            private IList<Models.Error> errors = new List<Models.Error>();
+            private IList<Models.Error> errors;
 
-            public Builder() { }
-            public Builder OrderEntries(IList<Models.OrderEntry> value)
+
+
+            public Builder OrderEntries(IList<Models.OrderEntry> orderEntries)
             {
-                orderEntries = value;
+                this.orderEntries = orderEntries;
                 return this;
             }
 
-            public Builder Orders(IList<Models.Order> value)
+            public Builder Orders(IList<Models.Order> orders)
             {
-                orders = value;
+                this.orders = orders;
                 return this;
             }
 
-            public Builder Cursor(string value)
+            public Builder Cursor(string cursor)
             {
-                cursor = value;
+                this.cursor = cursor;
                 return this;
             }
 
-            public Builder Errors(IList<Models.Error> value)
+            public Builder Errors(IList<Models.Error> errors)
             {
-                errors = value;
+                this.errors = errors;
                 return this;
             }
 

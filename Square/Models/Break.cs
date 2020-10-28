@@ -34,7 +34,7 @@ namespace Square.Models
         /// <summary>
         /// UUID for this object
         /// </summary>
-        [JsonProperty("id")]
+        [JsonProperty("id", NullValueHandling = NullValueHandling.Ignore)]
         public string Id { get; }
 
         /// <summary>
@@ -48,7 +48,7 @@ namespace Square.Models
         /// RFC 3339; follows same timezone info as `Shift`. Precision up to
         /// the minute is respected; seconds are truncated.
         /// </summary>
-        [JsonProperty("end_at")]
+        [JsonProperty("end_at", NullValueHandling = NullValueHandling.Ignore)]
         public string EndAt { get; }
 
         /// <summary>
@@ -111,45 +111,46 @@ namespace Square.Models
                 this.expectedDuration = expectedDuration;
                 this.isPaid = isPaid;
             }
-            public Builder StartAt(string value)
+
+            public Builder StartAt(string startAt)
             {
-                startAt = value;
+                this.startAt = startAt;
                 return this;
             }
 
-            public Builder BreakTypeId(string value)
+            public Builder BreakTypeId(string breakTypeId)
             {
-                breakTypeId = value;
+                this.breakTypeId = breakTypeId;
                 return this;
             }
 
-            public Builder Name(string value)
+            public Builder Name(string name)
             {
-                name = value;
+                this.name = name;
                 return this;
             }
 
-            public Builder ExpectedDuration(string value)
+            public Builder ExpectedDuration(string expectedDuration)
             {
-                expectedDuration = value;
+                this.expectedDuration = expectedDuration;
                 return this;
             }
 
-            public Builder IsPaid(bool value)
+            public Builder IsPaid(bool isPaid)
             {
-                isPaid = value;
+                this.isPaid = isPaid;
                 return this;
             }
 
-            public Builder Id(string value)
+            public Builder Id(string id)
             {
-                id = value;
+                this.id = id;
                 return this;
             }
 
-            public Builder EndAt(string value)
+            public Builder EndAt(string endAt)
             {
-                endAt = value;
+                this.endAt = endAt;
                 return this;
             }
 

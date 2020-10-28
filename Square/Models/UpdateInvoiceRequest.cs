@@ -36,14 +36,14 @@ namespace Square.Models
         /// treats each request as independent.
         /// For more information, see [Idempotency](https://developer.squareup.com/docs/docs/working-with-apis/idempotency).
         /// </summary>
-        [JsonProperty("idempotency_key")]
+        [JsonProperty("idempotency_key", NullValueHandling = NullValueHandling.Ignore)]
         public string IdempotencyKey { get; }
 
         /// <summary>
         /// List of fields to clear.
         /// For examples, see [Update an invoice](https://developer.squareup.com/docs/docs/invoices-api/overview#update-an-invoice).
         /// </summary>
-        [JsonProperty("fields_to_clear")]
+        [JsonProperty("fields_to_clear", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> FieldsToClear { get; }
 
         public Builder ToBuilder()
@@ -58,27 +58,28 @@ namespace Square.Models
         {
             private Models.Invoice invoice;
             private string idempotencyKey;
-            private IList<string> fieldsToClear = new List<string>();
+            private IList<string> fieldsToClear;
 
             public Builder(Models.Invoice invoice)
             {
                 this.invoice = invoice;
             }
-            public Builder Invoice(Models.Invoice value)
+
+            public Builder Invoice(Models.Invoice invoice)
             {
-                invoice = value;
+                this.invoice = invoice;
                 return this;
             }
 
-            public Builder IdempotencyKey(string value)
+            public Builder IdempotencyKey(string idempotencyKey)
             {
-                idempotencyKey = value;
+                this.idempotencyKey = idempotencyKey;
                 return this;
             }
 
-            public Builder FieldsToClear(IList<string> value)
+            public Builder FieldsToClear(IList<string> fieldsToClear)
             {
-                fieldsToClear = value;
+                this.fieldsToClear = fieldsToClear;
                 return this;
             }
 

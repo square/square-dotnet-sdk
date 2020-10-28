@@ -35,14 +35,14 @@ namespace Square.Models
         /// <summary>
         /// The version of the order being paid. If not supplied, the latest version will be paid.
         /// </summary>
-        [JsonProperty("order_version")]
+        [JsonProperty("order_version", NullValueHandling = NullValueHandling.Ignore)]
         public int? OrderVersion { get; }
 
         /// <summary>
         /// The IDs of the [payments](#type-payment) to collect.
         /// The payment total must match the order total.
         /// </summary>
-        [JsonProperty("payment_ids")]
+        [JsonProperty("payment_ids", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> PaymentIds { get; }
 
         public Builder ToBuilder()
@@ -57,27 +57,28 @@ namespace Square.Models
         {
             private string idempotencyKey;
             private int? orderVersion;
-            private IList<string> paymentIds = new List<string>();
+            private IList<string> paymentIds;
 
             public Builder(string idempotencyKey)
             {
                 this.idempotencyKey = idempotencyKey;
             }
-            public Builder IdempotencyKey(string value)
+
+            public Builder IdempotencyKey(string idempotencyKey)
             {
-                idempotencyKey = value;
+                this.idempotencyKey = idempotencyKey;
                 return this;
             }
 
-            public Builder OrderVersion(int? value)
+            public Builder OrderVersion(int? orderVersion)
             {
-                orderVersion = value;
+                this.orderVersion = orderVersion;
                 return this;
             }
 
-            public Builder PaymentIds(IList<string> value)
+            public Builder PaymentIds(IList<string> paymentIds)
             {
-                paymentIds = value;
+                this.paymentIds = paymentIds;
                 return this;
             }
 

@@ -1,16 +1,17 @@
-## V1 List Discounts Response
 
-### Structure
+# V1 List Discounts Response
+
+## Structure
 
 `V1ListDiscountsResponse`
 
-### Fields
+## Fields
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `Items` | [`IList<Models.V1Discount>`](/doc/models/v1-discount.md) | Optional | - |
 
-### Example (as JSON)
+## Example (as JSON)
 
 ```json
 {

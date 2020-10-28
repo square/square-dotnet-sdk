@@ -28,7 +28,7 @@ namespace Square.Models
         /// <summary>
         /// Any errors that occurred during the request.
         /// </summary>
-        [JsonProperty("errors")]
+        [JsonProperty("errors", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.Error> Errors { get; }
 
         /// <summary>
@@ -38,7 +38,7 @@ namespace Square.Models
         /// All Connect V2 Transactions have all been converted to Orders including all associated
         /// itemization data.
         /// </summary>
-        [JsonProperty("order")]
+        [JsonProperty("order", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Order Order { get; }
 
         public Builder ToBuilder()
@@ -51,19 +51,20 @@ namespace Square.Models
 
         public class Builder
         {
-            private IList<Models.Error> errors = new List<Models.Error>();
+            private IList<Models.Error> errors;
             private Models.Order order;
 
-            public Builder() { }
-            public Builder Errors(IList<Models.Error> value)
+
+
+            public Builder Errors(IList<Models.Error> errors)
             {
-                errors = value;
+                this.errors = errors;
                 return this;
             }
 
-            public Builder Order(Models.Order value)
+            public Builder Order(Models.Order order)
             {
-                order = value;
+                this.order = order;
                 return this;
             }
 

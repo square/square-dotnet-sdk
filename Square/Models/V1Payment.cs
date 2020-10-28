@@ -78,37 +78,37 @@ namespace Square.Models
         /// <summary>
         /// The payment's unique identifier.
         /// </summary>
-        [JsonProperty("id")]
+        [JsonProperty("id", NullValueHandling = NullValueHandling.Ignore)]
         public string Id { get; }
 
         /// <summary>
         /// The unique identifier of the merchant that took the payment.
         /// </summary>
-        [JsonProperty("merchant_id")]
+        [JsonProperty("merchant_id", NullValueHandling = NullValueHandling.Ignore)]
         public string MerchantId { get; }
 
         /// <summary>
         /// The time when the payment was created, in ISO 8601 format. Reflects the time of the first payment if the object represents an incomplete partial payment, and the time of the last or complete payment otherwise.
         /// </summary>
-        [JsonProperty("created_at")]
+        [JsonProperty("created_at", NullValueHandling = NullValueHandling.Ignore)]
         public string CreatedAt { get; }
 
         /// <summary>
         /// The unique identifier of the Square account that took the payment.
         /// </summary>
-        [JsonProperty("creator_id")]
+        [JsonProperty("creator_id", NullValueHandling = NullValueHandling.Ignore)]
         public string CreatorId { get; }
 
         /// <summary>
         /// Getter for device
         /// </summary>
-        [JsonProperty("device")]
+        [JsonProperty("device", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Device Device { get; }
 
         /// <summary>
         /// The URL of the payment's detail page in the merchant dashboard. The merchant must be signed in to the merchant dashboard to view this page.
         /// </summary>
-        [JsonProperty("payment_url")]
+        [JsonProperty("payment_url", NullValueHandling = NullValueHandling.Ignore)]
         public string PaymentUrl { get; }
 
         /// <summary>
@@ -118,121 +118,121 @@ namespace Square.Models
         /// receipt_url field you can use to get the other receipts associated with
         /// a split tender payment.
         /// </summary>
-        [JsonProperty("receipt_url")]
+        [JsonProperty("receipt_url", NullValueHandling = NullValueHandling.Ignore)]
         public string ReceiptUrl { get; }
 
         /// <summary>
         /// Getter for inclusive_tax_money
         /// </summary>
-        [JsonProperty("inclusive_tax_money")]
+        [JsonProperty("inclusive_tax_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1Money InclusiveTaxMoney { get; }
 
         /// <summary>
         /// Getter for additive_tax_money
         /// </summary>
-        [JsonProperty("additive_tax_money")]
+        [JsonProperty("additive_tax_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1Money AdditiveTaxMoney { get; }
 
         /// <summary>
         /// Getter for tax_money
         /// </summary>
-        [JsonProperty("tax_money")]
+        [JsonProperty("tax_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1Money TaxMoney { get; }
 
         /// <summary>
         /// Getter for tip_money
         /// </summary>
-        [JsonProperty("tip_money")]
+        [JsonProperty("tip_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1Money TipMoney { get; }
 
         /// <summary>
         /// Getter for discount_money
         /// </summary>
-        [JsonProperty("discount_money")]
+        [JsonProperty("discount_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1Money DiscountMoney { get; }
 
         /// <summary>
         /// Getter for total_collected_money
         /// </summary>
-        [JsonProperty("total_collected_money")]
+        [JsonProperty("total_collected_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1Money TotalCollectedMoney { get; }
 
         /// <summary>
         /// Getter for processing_fee_money
         /// </summary>
-        [JsonProperty("processing_fee_money")]
+        [JsonProperty("processing_fee_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1Money ProcessingFeeMoney { get; }
 
         /// <summary>
         /// Getter for net_total_money
         /// </summary>
-        [JsonProperty("net_total_money")]
+        [JsonProperty("net_total_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1Money NetTotalMoney { get; }
 
         /// <summary>
         /// Getter for refunded_money
         /// </summary>
-        [JsonProperty("refunded_money")]
+        [JsonProperty("refunded_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1Money RefundedMoney { get; }
 
         /// <summary>
         /// Getter for swedish_rounding_money
         /// </summary>
-        [JsonProperty("swedish_rounding_money")]
+        [JsonProperty("swedish_rounding_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1Money SwedishRoundingMoney { get; }
 
         /// <summary>
         /// Getter for gross_sales_money
         /// </summary>
-        [JsonProperty("gross_sales_money")]
+        [JsonProperty("gross_sales_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1Money GrossSalesMoney { get; }
 
         /// <summary>
         /// Getter for net_sales_money
         /// </summary>
-        [JsonProperty("net_sales_money")]
+        [JsonProperty("net_sales_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1Money NetSalesMoney { get; }
 
         /// <summary>
         /// All of the inclusive taxes associated with the payment.
         /// </summary>
-        [JsonProperty("inclusive_tax")]
+        [JsonProperty("inclusive_tax", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.V1PaymentTax> InclusiveTax { get; }
 
         /// <summary>
         /// All of the additive taxes associated with the payment.
         /// </summary>
-        [JsonProperty("additive_tax")]
+        [JsonProperty("additive_tax", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.V1PaymentTax> AdditiveTax { get; }
 
         /// <summary>
         /// All of the tenders associated with the payment.
         /// </summary>
-        [JsonProperty("tender")]
+        [JsonProperty("tender", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.V1Tender> Tender { get; }
 
         /// <summary>
         /// All of the refunds applied to the payment. Note that the value of all refunds on a payment can exceed the value of all tenders if a merchant chooses to refund money to a tender after previously accepting returned goods as part of an exchange.
         /// </summary>
-        [JsonProperty("refunds")]
+        [JsonProperty("refunds", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.V1Refund> Refunds { get; }
 
         /// <summary>
         /// The items purchased in the payment.
         /// </summary>
-        [JsonProperty("itemizations")]
+        [JsonProperty("itemizations", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.V1PaymentItemization> Itemizations { get; }
 
         /// <summary>
         /// Getter for surcharge_money
         /// </summary>
-        [JsonProperty("surcharge_money")]
+        [JsonProperty("surcharge_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1Money SurchargeMoney { get; }
 
         /// <summary>
         /// A list of all surcharges associated with the payment.
         /// </summary>
-        [JsonProperty("surcharges")]
+        [JsonProperty("surcharges", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.V1PaymentSurcharge> Surcharges { get; }
 
         /// <summary>
@@ -240,7 +240,7 @@ namespace Square.Models
         /// If true, this payment will have the tenders collected so far, but the
         /// itemizations will be empty until the payment is completed.
         /// </summary>
-        [JsonProperty("is_partial")]
+        [JsonProperty("is_partial", NullValueHandling = NullValueHandling.Ignore)]
         public bool? IsPartial { get; }
 
         public Builder ToBuilder()
@@ -297,175 +297,176 @@ namespace Square.Models
             private Models.V1Money swedishRoundingMoney;
             private Models.V1Money grossSalesMoney;
             private Models.V1Money netSalesMoney;
-            private IList<Models.V1PaymentTax> inclusiveTax = new List<Models.V1PaymentTax>();
-            private IList<Models.V1PaymentTax> additiveTax = new List<Models.V1PaymentTax>();
-            private IList<Models.V1Tender> tender = new List<Models.V1Tender>();
-            private IList<Models.V1Refund> refunds = new List<Models.V1Refund>();
-            private IList<Models.V1PaymentItemization> itemizations = new List<Models.V1PaymentItemization>();
+            private IList<Models.V1PaymentTax> inclusiveTax;
+            private IList<Models.V1PaymentTax> additiveTax;
+            private IList<Models.V1Tender> tender;
+            private IList<Models.V1Refund> refunds;
+            private IList<Models.V1PaymentItemization> itemizations;
             private Models.V1Money surchargeMoney;
-            private IList<Models.V1PaymentSurcharge> surcharges = new List<Models.V1PaymentSurcharge>();
+            private IList<Models.V1PaymentSurcharge> surcharges;
             private bool? isPartial;
 
-            public Builder() { }
-            public Builder Id(string value)
+
+
+            public Builder Id(string id)
             {
-                id = value;
+                this.id = id;
                 return this;
             }
 
-            public Builder MerchantId(string value)
+            public Builder MerchantId(string merchantId)
             {
-                merchantId = value;
+                this.merchantId = merchantId;
                 return this;
             }
 
-            public Builder CreatedAt(string value)
+            public Builder CreatedAt(string createdAt)
             {
-                createdAt = value;
+                this.createdAt = createdAt;
                 return this;
             }
 
-            public Builder CreatorId(string value)
+            public Builder CreatorId(string creatorId)
             {
-                creatorId = value;
+                this.creatorId = creatorId;
                 return this;
             }
 
-            public Builder Device(Models.Device value)
+            public Builder Device(Models.Device device)
             {
-                device = value;
+                this.device = device;
                 return this;
             }
 
-            public Builder PaymentUrl(string value)
+            public Builder PaymentUrl(string paymentUrl)
             {
-                paymentUrl = value;
+                this.paymentUrl = paymentUrl;
                 return this;
             }
 
-            public Builder ReceiptUrl(string value)
+            public Builder ReceiptUrl(string receiptUrl)
             {
-                receiptUrl = value;
+                this.receiptUrl = receiptUrl;
                 return this;
             }
 
-            public Builder InclusiveTaxMoney(Models.V1Money value)
+            public Builder InclusiveTaxMoney(Models.V1Money inclusiveTaxMoney)
             {
-                inclusiveTaxMoney = value;
+                this.inclusiveTaxMoney = inclusiveTaxMoney;
                 return this;
             }
 
-            public Builder AdditiveTaxMoney(Models.V1Money value)
+            public Builder AdditiveTaxMoney(Models.V1Money additiveTaxMoney)
             {
-                additiveTaxMoney = value;
+                this.additiveTaxMoney = additiveTaxMoney;
                 return this;
             }
 
-            public Builder TaxMoney(Models.V1Money value)
+            public Builder TaxMoney(Models.V1Money taxMoney)
             {
-                taxMoney = value;
+                this.taxMoney = taxMoney;
                 return this;
             }
 
-            public Builder TipMoney(Models.V1Money value)
+            public Builder TipMoney(Models.V1Money tipMoney)
             {
-                tipMoney = value;
+                this.tipMoney = tipMoney;
                 return this;
             }
 
-            public Builder DiscountMoney(Models.V1Money value)
+            public Builder DiscountMoney(Models.V1Money discountMoney)
             {
-                discountMoney = value;
+                this.discountMoney = discountMoney;
                 return this;
             }
 
-            public Builder TotalCollectedMoney(Models.V1Money value)
+            public Builder TotalCollectedMoney(Models.V1Money totalCollectedMoney)
             {
-                totalCollectedMoney = value;
+                this.totalCollectedMoney = totalCollectedMoney;
                 return this;
             }
 
-            public Builder ProcessingFeeMoney(Models.V1Money value)
+            public Builder ProcessingFeeMoney(Models.V1Money processingFeeMoney)
             {
-                processingFeeMoney = value;
+                this.processingFeeMoney = processingFeeMoney;
                 return this;
             }
 
-            public Builder NetTotalMoney(Models.V1Money value)
+            public Builder NetTotalMoney(Models.V1Money netTotalMoney)
             {
-                netTotalMoney = value;
+                this.netTotalMoney = netTotalMoney;
                 return this;
             }
 
-            public Builder RefundedMoney(Models.V1Money value)
+            public Builder RefundedMoney(Models.V1Money refundedMoney)
             {
-                refundedMoney = value;
+                this.refundedMoney = refundedMoney;
                 return this;
             }
 
-            public Builder SwedishRoundingMoney(Models.V1Money value)
+            public Builder SwedishRoundingMoney(Models.V1Money swedishRoundingMoney)
             {
-                swedishRoundingMoney = value;
+                this.swedishRoundingMoney = swedishRoundingMoney;
                 return this;
             }
 
-            public Builder GrossSalesMoney(Models.V1Money value)
+            public Builder GrossSalesMoney(Models.V1Money grossSalesMoney)
             {
-                grossSalesMoney = value;
+                this.grossSalesMoney = grossSalesMoney;
                 return this;
             }
 
-            public Builder NetSalesMoney(Models.V1Money value)
+            public Builder NetSalesMoney(Models.V1Money netSalesMoney)
             {
-                netSalesMoney = value;
+                this.netSalesMoney = netSalesMoney;
                 return this;
             }
 
-            public Builder InclusiveTax(IList<Models.V1PaymentTax> value)
+            public Builder InclusiveTax(IList<Models.V1PaymentTax> inclusiveTax)
             {
-                inclusiveTax = value;
+                this.inclusiveTax = inclusiveTax;
                 return this;
             }
 
-            public Builder AdditiveTax(IList<Models.V1PaymentTax> value)
+            public Builder AdditiveTax(IList<Models.V1PaymentTax> additiveTax)
             {
-                additiveTax = value;
+                this.additiveTax = additiveTax;
                 return this;
             }
 
-            public Builder Tender(IList<Models.V1Tender> value)
+            public Builder Tender(IList<Models.V1Tender> tender)
             {
-                tender = value;
+                this.tender = tender;
                 return this;
             }
 
-            public Builder Refunds(IList<Models.V1Refund> value)
+            public Builder Refunds(IList<Models.V1Refund> refunds)
             {
-                refunds = value;
+                this.refunds = refunds;
                 return this;
             }
 
-            public Builder Itemizations(IList<Models.V1PaymentItemization> value)
+            public Builder Itemizations(IList<Models.V1PaymentItemization> itemizations)
             {
-                itemizations = value;
+                this.itemizations = itemizations;
                 return this;
             }
 
-            public Builder SurchargeMoney(Models.V1Money value)
+            public Builder SurchargeMoney(Models.V1Money surchargeMoney)
             {
-                surchargeMoney = value;
+                this.surchargeMoney = surchargeMoney;
                 return this;
             }
 
-            public Builder Surcharges(IList<Models.V1PaymentSurcharge> value)
+            public Builder Surcharges(IList<Models.V1PaymentSurcharge> surcharges)
             {
-                surcharges = value;
+                this.surcharges = surcharges;
                 return this;
             }
 
-            public Builder IsPartial(bool? value)
+            public Builder IsPartial(bool? isPartial)
             {
-                isPartial = value;
+                this.isPartial = isPartial;
                 return this;
             }
 

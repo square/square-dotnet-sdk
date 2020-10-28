@@ -32,13 +32,13 @@ namespace Square.Models
         /// <summary>
         /// The IDs of the CatalogModifierList objects to enable for the CatalogItem.
         /// </summary>
-        [JsonProperty("modifier_lists_to_enable")]
+        [JsonProperty("modifier_lists_to_enable", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> ModifierListsToEnable { get; }
 
         /// <summary>
         /// The IDs of the CatalogModifierList objects to disable for the CatalogItem.
         /// </summary>
-        [JsonProperty("modifier_lists_to_disable")]
+        [JsonProperty("modifier_lists_to_disable", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> ModifierListsToDisable { get; }
 
         public Builder ToBuilder()
@@ -52,28 +52,29 @@ namespace Square.Models
         public class Builder
         {
             private IList<string> itemIds;
-            private IList<string> modifierListsToEnable = new List<string>();
-            private IList<string> modifierListsToDisable = new List<string>();
+            private IList<string> modifierListsToEnable;
+            private IList<string> modifierListsToDisable;
 
             public Builder(IList<string> itemIds)
             {
                 this.itemIds = itemIds;
             }
-            public Builder ItemIds(IList<string> value)
+
+            public Builder ItemIds(IList<string> itemIds)
             {
-                itemIds = value;
+                this.itemIds = itemIds;
                 return this;
             }
 
-            public Builder ModifierListsToEnable(IList<string> value)
+            public Builder ModifierListsToEnable(IList<string> modifierListsToEnable)
             {
-                modifierListsToEnable = value;
+                this.modifierListsToEnable = modifierListsToEnable;
                 return this;
             }
 
-            public Builder ModifierListsToDisable(IList<string> value)
+            public Builder ModifierListsToDisable(IList<string> modifierListsToDisable)
             {
-                modifierListsToDisable = value;
+                this.modifierListsToDisable = modifierListsToDisable;
                 return this;
             }
 

@@ -40,9 +40,10 @@ namespace Square.Models
             {
                 this.states = states;
             }
-            public Builder States(IList<string> value)
+
+            public Builder States(IList<string> states)
             {
-                states = value;
+                this.states = states;
                 return this;
             }
 

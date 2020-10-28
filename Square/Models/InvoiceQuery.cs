@@ -30,7 +30,7 @@ namespace Square.Models
         /// <summary>
         /// Identifies the  sort field and sort order.
         /// </summary>
-        [JsonProperty("sort")]
+        [JsonProperty("sort", NullValueHandling = NullValueHandling.Ignore)]
         public Models.InvoiceSort Sort { get; }
 
         public Builder ToBuilder()
@@ -49,15 +49,16 @@ namespace Square.Models
             {
                 this.filter = filter;
             }
-            public Builder Filter(Models.InvoiceFilter value)
+
+            public Builder Filter(Models.InvoiceFilter filter)
             {
-                filter = value;
+                this.filter = filter;
                 return this;
             }
 
-            public Builder Sort(Models.InvoiceSort value)
+            public Builder Sort(Models.InvoiceSort sort)
             {
-                sort = value;
+                this.sort = sort;
                 return this;
             }
 

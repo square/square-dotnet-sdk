@@ -24,7 +24,7 @@ namespace Square.Models
         /// <summary>
         /// Unique ID set by Square.
         /// </summary>
-        [JsonProperty("uid")]
+        [JsonProperty("uid", NullValueHandling = NullValueHandling.Ignore)]
         public string Uid { get; }
 
         /// <summary>
@@ -49,15 +49,16 @@ namespace Square.Models
             {
                 this.name = name;
             }
-            public Builder Name(string value)
+
+            public Builder Name(string name)
             {
-                name = value;
+                this.name = name;
                 return this;
             }
 
-            public Builder Uid(string value)
+            public Builder Uid(string uid)
             {
-                uid = value;
+                this.uid = uid;
                 return this;
             }
 

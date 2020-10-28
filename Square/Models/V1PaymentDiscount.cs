@@ -26,19 +26,19 @@ namespace Square.Models
         /// <summary>
         /// The discount's name.
         /// </summary>
-        [JsonProperty("name")]
+        [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
         public string Name { get; }
 
         /// <summary>
         /// Getter for applied_money
         /// </summary>
-        [JsonProperty("applied_money")]
+        [JsonProperty("applied_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1Money AppliedMoney { get; }
 
         /// <summary>
         /// The ID of the applied discount, if available. Discounts applied in older versions of Square Register might not have an ID.
         /// </summary>
-        [JsonProperty("discount_id")]
+        [JsonProperty("discount_id", NullValueHandling = NullValueHandling.Ignore)]
         public string DiscountId { get; }
 
         public Builder ToBuilder()
@@ -56,22 +56,23 @@ namespace Square.Models
             private Models.V1Money appliedMoney;
             private string discountId;
 
-            public Builder() { }
-            public Builder Name(string value)
+
+
+            public Builder Name(string name)
             {
-                name = value;
+                this.name = name;
                 return this;
             }
 
-            public Builder AppliedMoney(Models.V1Money value)
+            public Builder AppliedMoney(Models.V1Money appliedMoney)
             {
-                appliedMoney = value;
+                this.appliedMoney = appliedMoney;
                 return this;
             }
 
-            public Builder DiscountId(string value)
+            public Builder DiscountId(string discountId)
             {
-                discountId = value;
+                this.discountId = discountId;
                 return this;
             }
 

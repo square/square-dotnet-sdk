@@ -26,13 +26,13 @@ namespace Square.Models
         /// <summary>
         /// The set of search requirements.
         /// </summary>
-        [JsonProperty("query")]
+        [JsonProperty("query", NullValueHandling = NullValueHandling.Ignore)]
         public Models.SearchLoyaltyRewardsRequestLoyaltyRewardQuery Query { get; }
 
         /// <summary>
         /// The maximum number of results to return in the response.
         /// </summary>
-        [JsonProperty("limit")]
+        [JsonProperty("limit", NullValueHandling = NullValueHandling.Ignore)]
         public int? Limit { get; }
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace Square.Models
         /// For more information, 
         /// see [Pagination](https://developer.squareup.com/docs/docs/basics/api101/pagination).
         /// </summary>
-        [JsonProperty("cursor")]
+        [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
         public string Cursor { get; }
 
         public Builder ToBuilder()
@@ -60,22 +60,23 @@ namespace Square.Models
             private int? limit;
             private string cursor;
 
-            public Builder() { }
-            public Builder Query(Models.SearchLoyaltyRewardsRequestLoyaltyRewardQuery value)
+
+
+            public Builder Query(Models.SearchLoyaltyRewardsRequestLoyaltyRewardQuery query)
             {
-                query = value;
+                this.query = query;
                 return this;
             }
 
-            public Builder Limit(int? value)
+            public Builder Limit(int? limit)
             {
-                limit = value;
+                this.limit = limit;
                 return this;
             }
 
-            public Builder Cursor(string value)
+            public Builder Cursor(string cursor)
             {
-                cursor = value;
+                this.cursor = cursor;
                 return this;
             }
 

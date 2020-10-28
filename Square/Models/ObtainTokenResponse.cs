@@ -43,32 +43,32 @@ namespace Square.Models
         /// endpoints. See the [Build with OAuth](https://developer.squareup.com/docs/authz/oauth/build-with-the-api) guide
         /// for more information.
         /// </summary>
-        [JsonProperty("access_token")]
+        [JsonProperty("access_token", NullValueHandling = NullValueHandling.Ignore)]
         public string AccessToken { get; }
 
         /// <summary>
         /// This value is always _bearer_.
         /// </summary>
-        [JsonProperty("token_type")]
+        [JsonProperty("token_type", NullValueHandling = NullValueHandling.Ignore)]
         public string TokenType { get; }
 
         /// <summary>
         /// The date when access_token expires, in [ISO 8601](http://www.iso.org/iso/home/standards/iso8601.htm) format.
         /// </summary>
-        [JsonProperty("expires_at")]
+        [JsonProperty("expires_at", NullValueHandling = NullValueHandling.Ignore)]
         public string ExpiresAt { get; }
 
         /// <summary>
         /// The ID of the authorizing merchant's business.
         /// </summary>
-        [JsonProperty("merchant_id")]
+        [JsonProperty("merchant_id", NullValueHandling = NullValueHandling.Ignore)]
         public string MerchantId { get; }
 
         /// <summary>
         /// __LEGACY FIELD__. The ID of a subscription plan the merchant signed up
         /// for. Only present if the merchant signed up for a subscription during authorization.
         /// </summary>
-        [JsonProperty("subscription_id")]
+        [JsonProperty("subscription_id", NullValueHandling = NullValueHandling.Ignore)]
         public string SubscriptionId { get; }
 
         /// <summary>
@@ -76,21 +76,21 @@ namespace Square.Models
         /// up for. Only present if the merchant signed up for a subscription during
         /// authorization.
         /// </summary>
-        [JsonProperty("plan_id")]
+        [JsonProperty("plan_id", NullValueHandling = NullValueHandling.Ignore)]
         public string PlanId { get; }
 
         /// <summary>
         /// Then OpenID token belonging to this this person. Only present if the
         /// OPENID scope is included in the authorize request.
         /// </summary>
-        [JsonProperty("id_token")]
+        [JsonProperty("id_token", NullValueHandling = NullValueHandling.Ignore)]
         public string IdToken { get; }
 
         /// <summary>
         /// A refresh token. OAuth refresh tokens are 64 bytes long.
         /// For more information, see [OAuth access token management](https://developer.squareup.com/docs/authz/oauth/how-it-works#oauth-access-token-management).
         /// </summary>
-        [JsonProperty("refresh_token")]
+        [JsonProperty("refresh_token", NullValueHandling = NullValueHandling.Ignore)]
         public string RefreshToken { get; }
 
         public Builder ToBuilder()
@@ -118,52 +118,53 @@ namespace Square.Models
             private string idToken;
             private string refreshToken;
 
-            public Builder() { }
-            public Builder AccessToken(string value)
+
+
+            public Builder AccessToken(string accessToken)
             {
-                accessToken = value;
+                this.accessToken = accessToken;
                 return this;
             }
 
-            public Builder TokenType(string value)
+            public Builder TokenType(string tokenType)
             {
-                tokenType = value;
+                this.tokenType = tokenType;
                 return this;
             }
 
-            public Builder ExpiresAt(string value)
+            public Builder ExpiresAt(string expiresAt)
             {
-                expiresAt = value;
+                this.expiresAt = expiresAt;
                 return this;
             }
 
-            public Builder MerchantId(string value)
+            public Builder MerchantId(string merchantId)
             {
-                merchantId = value;
+                this.merchantId = merchantId;
                 return this;
             }
 
-            public Builder SubscriptionId(string value)
+            public Builder SubscriptionId(string subscriptionId)
             {
-                subscriptionId = value;
+                this.subscriptionId = subscriptionId;
                 return this;
             }
 
-            public Builder PlanId(string value)
+            public Builder PlanId(string planId)
             {
-                planId = value;
+                this.planId = planId;
                 return this;
             }
 
-            public Builder IdToken(string value)
+            public Builder IdToken(string idToken)
             {
-                idToken = value;
+                this.idToken = idToken;
                 return this;
             }
 
-            public Builder RefreshToken(string value)
+            public Builder RefreshToken(string refreshToken)
             {
-                refreshToken = value;
+                this.refreshToken = refreshToken;
                 return this;
             }
 

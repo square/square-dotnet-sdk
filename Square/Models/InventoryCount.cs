@@ -33,7 +33,7 @@ namespace Square.Models
         /// The Square generated ID of the
         /// `CatalogObject` being tracked.
         /// </summary>
-        [JsonProperty("catalog_object_id")]
+        [JsonProperty("catalog_object_id", NullValueHandling = NullValueHandling.Ignore)]
         public string CatalogObjectId { get; }
 
         /// <summary>
@@ -41,27 +41,27 @@ namespace Square.Models
         /// `CatalogObject` being tracked. Tracking is only
         /// supported for the `ITEM_VARIATION` type.
         /// </summary>
-        [JsonProperty("catalog_object_type")]
+        [JsonProperty("catalog_object_type", NullValueHandling = NullValueHandling.Ignore)]
         public string CatalogObjectType { get; }
 
         /// <summary>
         /// Indicates the state of a tracked item quantity in the lifecycle of goods.
         /// </summary>
-        [JsonProperty("state")]
+        [JsonProperty("state", NullValueHandling = NullValueHandling.Ignore)]
         public string State { get; }
 
         /// <summary>
         /// The Square ID of the [Location](#type-location) where the related
         /// quantity of items are being tracked.
         /// </summary>
-        [JsonProperty("location_id")]
+        [JsonProperty("location_id", NullValueHandling = NullValueHandling.Ignore)]
         public string LocationId { get; }
 
         /// <summary>
         /// The number of items affected by the estimated count as a decimal string.
         /// Can support up to 5 digits after the decimal point.
         /// </summary>
-        [JsonProperty("quantity")]
+        [JsonProperty("quantity", NullValueHandling = NullValueHandling.Ignore)]
         public string Quantity { get; }
 
         /// <summary>
@@ -69,7 +69,7 @@ namespace Square.Models
         /// received the most recent physical count or adjustment that had an affect
         /// on the estimated count.
         /// </summary>
-        [JsonProperty("calculated_at")]
+        [JsonProperty("calculated_at", NullValueHandling = NullValueHandling.Ignore)]
         public string CalculatedAt { get; }
 
         public Builder ToBuilder()
@@ -93,40 +93,41 @@ namespace Square.Models
             private string quantity;
             private string calculatedAt;
 
-            public Builder() { }
-            public Builder CatalogObjectId(string value)
+
+
+            public Builder CatalogObjectId(string catalogObjectId)
             {
-                catalogObjectId = value;
+                this.catalogObjectId = catalogObjectId;
                 return this;
             }
 
-            public Builder CatalogObjectType(string value)
+            public Builder CatalogObjectType(string catalogObjectType)
             {
-                catalogObjectType = value;
+                this.catalogObjectType = catalogObjectType;
                 return this;
             }
 
-            public Builder State(string value)
+            public Builder State(string state)
             {
-                state = value;
+                this.state = state;
                 return this;
             }
 
-            public Builder LocationId(string value)
+            public Builder LocationId(string locationId)
             {
-                locationId = value;
+                this.locationId = locationId;
                 return this;
             }
 
-            public Builder Quantity(string value)
+            public Builder Quantity(string quantity)
             {
-                quantity = value;
+                this.quantity = quantity;
                 return this;
             }
 
-            public Builder CalculatedAt(string value)
+            public Builder CalculatedAt(string calculatedAt)
             {
-                calculatedAt = value;
+                this.calculatedAt = calculatedAt;
                 return this;
             }
 

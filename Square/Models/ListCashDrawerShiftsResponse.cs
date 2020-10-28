@@ -31,20 +31,20 @@ namespace Square.Models
         /// A collection of CashDrawerShiftSummary objects for shifts that match
         /// the query.
         /// </summary>
-        [JsonProperty("items")]
+        [JsonProperty("items", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.CashDrawerShiftSummary> Items { get; }
 
         /// <summary>
         /// Opaque cursor for fetching the next page of results. Cursor is not
         /// present in the last page of results.
         /// </summary>
-        [JsonProperty("cursor")]
+        [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
         public string Cursor { get; }
 
         /// <summary>
         /// Any errors that occurred during the request.
         /// </summary>
-        [JsonProperty("errors")]
+        [JsonProperty("errors", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.Error> Errors { get; }
 
         public Builder ToBuilder()
@@ -58,26 +58,27 @@ namespace Square.Models
 
         public class Builder
         {
-            private IList<Models.CashDrawerShiftSummary> items = new List<Models.CashDrawerShiftSummary>();
+            private IList<Models.CashDrawerShiftSummary> items;
             private string cursor;
-            private IList<Models.Error> errors = new List<Models.Error>();
+            private IList<Models.Error> errors;
 
-            public Builder() { }
-            public Builder Items(IList<Models.CashDrawerShiftSummary> value)
+
+
+            public Builder Items(IList<Models.CashDrawerShiftSummary> items)
             {
-                items = value;
+                this.items = items;
                 return this;
             }
 
-            public Builder Cursor(string value)
+            public Builder Cursor(string cursor)
             {
-                cursor = value;
+                this.cursor = cursor;
                 return this;
             }
 
-            public Builder Errors(IList<Models.Error> value)
+            public Builder Errors(IList<Models.Error> errors)
             {
-                errors = value;
+                this.errors = errors;
                 return this;
             }
 

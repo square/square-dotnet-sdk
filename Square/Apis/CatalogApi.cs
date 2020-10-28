@@ -14,11 +14,10 @@ using Square.Http.Request;
 using Square.Http.Response;
 using Square.Http.Client;
 using Square.Authentication;
-using Square.Exceptions;
 
 namespace Square.Apis
 {
-    internal class CatalogApi: BaseApi, ICatalogApi
+    internal class CatalogApi : BaseApi, ICatalogApi
     {
         internal CatalogApi(IConfiguration config, IHttpClient httpClient, IDictionary<string, IAuthManager> authManagers, HttpCallBack httpCallBack = null) :
             base(config, httpClient, authManagers, httpCallBack)
@@ -66,12 +65,9 @@ namespace Square.Apis
             StringBuilder _queryBuilder = new StringBuilder(_baseUri);
             _queryBuilder.Append("/v2/catalog/batch-delete");
 
-            //validate and preprocess url
-            string _queryUrl = ApiHelper.CleanUrl(_queryBuilder);
-
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string, string>()
-            { 
+            {
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
@@ -82,13 +78,13 @@ namespace Square.Apis
             var _body = ApiHelper.JsonSerialize(body);
 
             //prepare the API call request to fetch the response
-            HttpRequest _request = GetClientInstance().PostBody(_queryUrl, _headers, _body);
+            HttpRequest _request = GetClientInstance().PostBody(_queryBuilder.ToString(), _headers, _body);
             if (HttpCallBack != null)
             {
                 HttpCallBack.OnBeforeHttpRequestEventHandler(GetClientInstance(), _request);
             }
 
-            _request = await authManagers["default"].ApplyAsync(_request).ConfigureAwait(false);
+            _request = await authManagers["global"].ApplyAsync(_request).ConfigureAwait(false);
 
             //invoke request and get response
             HttpStringResponse _response = await GetClientInstance().ExecuteAsStringAsync(_request, cancellationToken).ConfigureAwait(false);
@@ -142,12 +138,9 @@ namespace Square.Apis
             StringBuilder _queryBuilder = new StringBuilder(_baseUri);
             _queryBuilder.Append("/v2/catalog/batch-retrieve");
 
-            //validate and preprocess url
-            string _queryUrl = ApiHelper.CleanUrl(_queryBuilder);
-
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string, string>()
-            { 
+            {
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
@@ -158,13 +151,13 @@ namespace Square.Apis
             var _body = ApiHelper.JsonSerialize(body);
 
             //prepare the API call request to fetch the response
-            HttpRequest _request = GetClientInstance().PostBody(_queryUrl, _headers, _body);
+            HttpRequest _request = GetClientInstance().PostBody(_queryBuilder.ToString(), _headers, _body);
             if (HttpCallBack != null)
             {
                 HttpCallBack.OnBeforeHttpRequestEventHandler(GetClientInstance(), _request);
             }
 
-            _request = await authManagers["default"].ApplyAsync(_request).ConfigureAwait(false);
+            _request = await authManagers["global"].ApplyAsync(_request).ConfigureAwait(false);
 
             //invoke request and get response
             HttpStringResponse _response = await GetClientInstance().ExecuteAsStringAsync(_request, cancellationToken).ConfigureAwait(false);
@@ -224,12 +217,9 @@ namespace Square.Apis
             StringBuilder _queryBuilder = new StringBuilder(_baseUri);
             _queryBuilder.Append("/v2/catalog/batch-upsert");
 
-            //validate and preprocess url
-            string _queryUrl = ApiHelper.CleanUrl(_queryBuilder);
-
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string, string>()
-            { 
+            {
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
@@ -240,13 +230,13 @@ namespace Square.Apis
             var _body = ApiHelper.JsonSerialize(body);
 
             //prepare the API call request to fetch the response
-            HttpRequest _request = GetClientInstance().PostBody(_queryUrl, _headers, _body);
+            HttpRequest _request = GetClientInstance().PostBody(_queryBuilder.ToString(), _headers, _body);
             if (HttpCallBack != null)
             {
                 HttpCallBack.OnBeforeHttpRequestEventHandler(GetClientInstance(), _request);
             }
 
-            _request = await authManagers["default"].ApplyAsync(_request).ConfigureAwait(false);
+            _request = await authManagers["global"].ApplyAsync(_request).ConfigureAwait(false);
 
             //invoke request and get response
             HttpStringResponse _response = await GetClientInstance().ExecuteAsStringAsync(_request, cancellationToken).ConfigureAwait(false);
@@ -265,12 +255,11 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Uploads an image file to be represented by an [CatalogImage](#type-catalogimage) object linked to an existing
+        /// Uploads an image file to be represented by a [CatalogImage](#type-catalogimage) object linked to an existing
         /// [CatalogObject](#type-catalogobject) instance. A call to this endpoint can upload an image, link an image to
         /// a catalog object, or do both.
         /// This `CreateCatalogImage` endpoint accepts HTTP multipart/form-data requests with a JSON part and an image file part in
         /// JPEG, PJPEG, PNG, or GIF format. The maximum file size is 15MB.
-        /// Additional information and an example cURL request can be found in the [Create a Catalog Image recipe](https://developer.squareup.com/docs/more-apis/catalog/cookbook/create-catalog-images).
         /// </summary>
         /// <param name="request">Optional parameter: Example: </param>
         /// <param name="imageFile">Optional parameter: Example: </param>
@@ -283,12 +272,11 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Uploads an image file to be represented by an [CatalogImage](#type-catalogimage) object linked to an existing
+        /// Uploads an image file to be represented by a [CatalogImage](#type-catalogimage) object linked to an existing
         /// [CatalogObject](#type-catalogobject) instance. A call to this endpoint can upload an image, link an image to
         /// a catalog object, or do both.
         /// This `CreateCatalogImage` endpoint accepts HTTP multipart/form-data requests with a JSON part and an image file part in
         /// JPEG, PJPEG, PNG, or GIF format. The maximum file size is 15MB.
-        /// Additional information and an example cURL request can be found in the [Create a Catalog Image recipe](https://developer.squareup.com/docs/more-apis/catalog/cookbook/create-catalog-images).
         /// </summary>
         /// <param name="request">Optional parameter: Example: </param>
         /// <param name="imageFile">Optional parameter: Example: </param>
@@ -302,12 +290,9 @@ namespace Square.Apis
             StringBuilder _queryBuilder = new StringBuilder(_baseUri);
             _queryBuilder.Append("/v2/catalog/images");
 
-            //validate and preprocess url
-            string _queryUrl = ApiHelper.CleanUrl(_queryBuilder);
-
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string, string>()
-            { 
+            {
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "Square-Version", config.SquareVersion }
@@ -334,13 +319,13 @@ namespace Square.Apis
             _fields = _fields.Where(kvp => kvp.Value != null).ToList();
 
             //prepare the API call request to fetch the response
-            HttpRequest _request = GetClientInstance().Post(_queryUrl, _headers, _fields);
+            HttpRequest _request = GetClientInstance().Post(_queryBuilder.ToString(), _headers, _fields);
             if (HttpCallBack != null)
             {
                 HttpCallBack.OnBeforeHttpRequestEventHandler(GetClientInstance(), _request);
             }
 
-            _request = await authManagers["default"].ApplyAsync(_request).ConfigureAwait(false);
+            _request = await authManagers["global"].ApplyAsync(_request).ConfigureAwait(false);
 
             //invoke request and get response
             HttpStringResponse _response = await GetClientInstance().ExecuteAsStringAsync(_request, cancellationToken).ConfigureAwait(false);
@@ -384,25 +369,22 @@ namespace Square.Apis
             StringBuilder _queryBuilder = new StringBuilder(_baseUri);
             _queryBuilder.Append("/v2/catalog/info");
 
-            //validate and preprocess url
-            string _queryUrl = ApiHelper.CleanUrl(_queryBuilder);
-
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string, string>()
-            { 
+            {
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "Square-Version", config.SquareVersion }
             };
 
             //prepare the API call request to fetch the response
-            HttpRequest _request = GetClientInstance().Get(_queryUrl,_headers);
+            HttpRequest _request = GetClientInstance().Get(_queryBuilder.ToString(), _headers);
             if (HttpCallBack != null)
             {
                 HttpCallBack.OnBeforeHttpRequestEventHandler(GetClientInstance(), _request);
             }
 
-            _request = await authManagers["default"].ApplyAsync(_request).ConfigureAwait(false);
+            _request = await authManagers["global"].ApplyAsync(_request).ConfigureAwait(false);
 
             //invoke request and get response
             HttpStringResponse _response = await GetClientInstance().ExecuteAsStringAsync(_request, cancellationToken).ConfigureAwait(false);
@@ -462,32 +444,29 @@ namespace Square.Apis
             StringBuilder _queryBuilder = new StringBuilder(_baseUri);
             _queryBuilder.Append("/v2/catalog/list");
 
-            //process optional query parameters
-            ApiHelper.AppendUrlWithQueryParameters(_queryBuilder, new Dictionary<string, object>()
+            //prepare specfied query parameters
+            var _queryParameters = new Dictionary<string, object>()
             {
                 { "cursor", cursor },
                 { "types", types }
-            }, ArrayDeserializationFormat, ParameterSeparator);
-
-            //validate and preprocess url
-            string _queryUrl = ApiHelper.CleanUrl(_queryBuilder);
+            };
 
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string, string>()
-            { 
+            {
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "Square-Version", config.SquareVersion }
             };
 
             //prepare the API call request to fetch the response
-            HttpRequest _request = GetClientInstance().Get(_queryUrl,_headers);
+            HttpRequest _request = GetClientInstance().Get(_queryBuilder.ToString(), _headers, queryParameters: _queryParameters);
             if (HttpCallBack != null)
             {
                 HttpCallBack.OnBeforeHttpRequestEventHandler(GetClientInstance(), _request);
             }
 
-            _request = await authManagers["default"].ApplyAsync(_request).ConfigureAwait(false);
+            _request = await authManagers["global"].ApplyAsync(_request).ConfigureAwait(false);
 
             //invoke request and get response
             HttpStringResponse _response = await GetClientInstance().ExecuteAsStringAsync(_request, cancellationToken).ConfigureAwait(false);
@@ -531,12 +510,9 @@ namespace Square.Apis
             StringBuilder _queryBuilder = new StringBuilder(_baseUri);
             _queryBuilder.Append("/v2/catalog/object");
 
-            //validate and preprocess url
-            string _queryUrl = ApiHelper.CleanUrl(_queryBuilder);
-
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string, string>()
-            { 
+            {
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
@@ -547,13 +523,13 @@ namespace Square.Apis
             var _body = ApiHelper.JsonSerialize(body);
 
             //prepare the API call request to fetch the response
-            HttpRequest _request = GetClientInstance().PostBody(_queryUrl, _headers, _body);
+            HttpRequest _request = GetClientInstance().PostBody(_queryBuilder.ToString(), _headers, _body);
             if (HttpCallBack != null)
             {
                 HttpCallBack.OnBeforeHttpRequestEventHandler(GetClientInstance(), _request);
             }
 
-            _request = await authManagers["default"].ApplyAsync(_request).ConfigureAwait(false);
+            _request = await authManagers["global"].ApplyAsync(_request).ConfigureAwait(false);
 
             //invoke request and get response
             HttpStringResponse _response = await GetClientInstance().ExecuteAsStringAsync(_request, cancellationToken).ConfigureAwait(false);
@@ -613,25 +589,22 @@ namespace Square.Apis
                 { "object_id", objectId }
             });
 
-            //validate and preprocess url
-            string _queryUrl = ApiHelper.CleanUrl(_queryBuilder);
-
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string, string>()
-            { 
+            {
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "Square-Version", config.SquareVersion }
             };
 
             //prepare the API call request to fetch the response
-            HttpRequest _request = GetClientInstance().Delete(_queryUrl, _headers, null);
+            HttpRequest _request = GetClientInstance().Delete(_queryBuilder.ToString(), _headers, null);
             if (HttpCallBack != null)
             {
                 HttpCallBack.OnBeforeHttpRequestEventHandler(GetClientInstance(), _request);
             }
 
-            _request = await authManagers["default"].ApplyAsync(_request).ConfigureAwait(false);
+            _request = await authManagers["global"].ApplyAsync(_request).ConfigureAwait(false);
 
             //invoke request and get response
             HttpStringResponse _response = await GetClientInstance().ExecuteAsStringAsync(_request, cancellationToken).ConfigureAwait(false);
@@ -659,7 +632,7 @@ namespace Square.Apis
         /// any [CatalogTax](#type-catalogtax) objects that apply to it.
         /// </summary>
         /// <param name="objectId">Required parameter: The object ID of any type of catalog objects to be retrieved.</param>
-        /// <param name="includeRelatedObjects">Optional parameter: If `true`, the response will include additional objects that are related to the requested object, as follows:  If the `object` field of the response contains a CatalogItem, its associated CatalogCategory, CatalogTax objects, CatalogImages and CatalogModifierLists will be returned in the `related_objects` field of the response. If the `object` field of the response contains a CatalogItemVariation, its parent CatalogItem will be returned in the `related_objects` field of the response.  Default value: `false`</param>
+        /// <param name="includeRelatedObjects">Optional parameter: If `true`, the response will include additional objects that are related to the requested object, as follows:  If the `object` field of the response contains a `CatalogItem`, its associated `CatalogCategory`, `CatalogTax`, `CatalogImage` and `CatalogModifierList` objects will be returned in the `related_objects` field of the response. If the `object` field of the response contains a `CatalogItemVariation`, its parent `CatalogItem` will be returned in the `related_objects` field of the response.  Default value: `false`</param>
         /// <return>Returns the Models.RetrieveCatalogObjectResponse response from the API call</return>
         public Models.RetrieveCatalogObjectResponse RetrieveCatalogObject(string objectId, bool? includeRelatedObjects = false)
         {
@@ -678,7 +651,7 @@ namespace Square.Apis
         /// any [CatalogTax](#type-catalogtax) objects that apply to it.
         /// </summary>
         /// <param name="objectId">Required parameter: The object ID of any type of catalog objects to be retrieved.</param>
-        /// <param name="includeRelatedObjects">Optional parameter: If `true`, the response will include additional objects that are related to the requested object, as follows:  If the `object` field of the response contains a CatalogItem, its associated CatalogCategory, CatalogTax objects, CatalogImages and CatalogModifierLists will be returned in the `related_objects` field of the response. If the `object` field of the response contains a CatalogItemVariation, its parent CatalogItem will be returned in the `related_objects` field of the response.  Default value: `false`</param>
+        /// <param name="includeRelatedObjects">Optional parameter: If `true`, the response will include additional objects that are related to the requested object, as follows:  If the `object` field of the response contains a `CatalogItem`, its associated `CatalogCategory`, `CatalogTax`, `CatalogImage` and `CatalogModifierList` objects will be returned in the `related_objects` field of the response. If the `object` field of the response contains a `CatalogItemVariation`, its parent `CatalogItem` will be returned in the `related_objects` field of the response.  Default value: `false`</param>
         /// <return>Returns the Models.RetrieveCatalogObjectResponse response from the API call</return>
         public async Task<Models.RetrieveCatalogObjectResponse> RetrieveCatalogObjectAsync(string objectId, bool? includeRelatedObjects = false, CancellationToken cancellationToken = default)
         {
@@ -695,31 +668,28 @@ namespace Square.Apis
                 { "object_id", objectId }
             });
 
-            //process optional query parameters
-            ApiHelper.AppendUrlWithQueryParameters(_queryBuilder, new Dictionary<string, object>()
+            //prepare specfied query parameters
+            var _queryParameters = new Dictionary<string, object>()
             {
                 { "include_related_objects", (null != includeRelatedObjects) ? includeRelatedObjects : false }
-            }, ArrayDeserializationFormat, ParameterSeparator);
-
-            //validate and preprocess url
-            string _queryUrl = ApiHelper.CleanUrl(_queryBuilder);
+            };
 
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string, string>()
-            { 
+            {
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "Square-Version", config.SquareVersion }
             };
 
             //prepare the API call request to fetch the response
-            HttpRequest _request = GetClientInstance().Get(_queryUrl,_headers);
+            HttpRequest _request = GetClientInstance().Get(_queryBuilder.ToString(), _headers, queryParameters: _queryParameters);
             if (HttpCallBack != null)
             {
                 HttpCallBack.OnBeforeHttpRequestEventHandler(GetClientInstance(), _request);
             }
 
-            _request = await authManagers["default"].ApplyAsync(_request).ConfigureAwait(false);
+            _request = await authManagers["global"].ApplyAsync(_request).ConfigureAwait(false);
 
             //invoke request and get response
             HttpStringResponse _response = await GetClientInstance().ExecuteAsStringAsync(_request, cancellationToken).ConfigureAwait(false);
@@ -738,8 +708,8 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Searches for [CatalogObject](#type-CatalogObject) of any types against supported search attribute values, 
-        /// excluding custom attribute values on items or item variations, against one or more of the specified query expressions, 
+        /// Searches for [CatalogObject](#type-CatalogObject) of any types against supported search attribute values,
+        /// excluding custom attribute values on items or item variations, against one or more of the specified query expressions,
         /// This (`SearchCatalogObjects`) endpoint differs from the [SearchCatalogItems](#endpoint-Catalog-SearchCatalogItems)
         /// endpoint in the following aspects:
         /// - `SearchCatalogItems` can only search for items or item variations, whereas `SearchCatalogObjects` can search for any type of catalog objects.
@@ -757,8 +727,8 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Searches for [CatalogObject](#type-CatalogObject) of any types against supported search attribute values, 
-        /// excluding custom attribute values on items or item variations, against one or more of the specified query expressions, 
+        /// Searches for [CatalogObject](#type-CatalogObject) of any types against supported search attribute values,
+        /// excluding custom attribute values on items or item variations, against one or more of the specified query expressions,
         /// This (`SearchCatalogObjects`) endpoint differs from the [SearchCatalogItems](#endpoint-Catalog-SearchCatalogItems)
         /// endpoint in the following aspects:
         /// - `SearchCatalogItems` can only search for items or item variations, whereas `SearchCatalogObjects` can search for any type of catalog objects.
@@ -777,12 +747,9 @@ namespace Square.Apis
             StringBuilder _queryBuilder = new StringBuilder(_baseUri);
             _queryBuilder.Append("/v2/catalog/search");
 
-            //validate and preprocess url
-            string _queryUrl = ApiHelper.CleanUrl(_queryBuilder);
-
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string, string>()
-            { 
+            {
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
@@ -793,13 +760,13 @@ namespace Square.Apis
             var _body = ApiHelper.JsonSerialize(body);
 
             //prepare the API call request to fetch the response
-            HttpRequest _request = GetClientInstance().PostBody(_queryUrl, _headers, _body);
+            HttpRequest _request = GetClientInstance().PostBody(_queryBuilder.ToString(), _headers, _body);
             if (HttpCallBack != null)
             {
                 HttpCallBack.OnBeforeHttpRequestEventHandler(GetClientInstance(), _request);
             }
 
-            _request = await authManagers["default"].ApplyAsync(_request).ConfigureAwait(false);
+            _request = await authManagers["global"].ApplyAsync(_request).ConfigureAwait(false);
 
             //invoke request and get response
             HttpStringResponse _response = await GetClientInstance().ExecuteAsStringAsync(_request, cancellationToken).ConfigureAwait(false);
@@ -819,7 +786,7 @@ namespace Square.Apis
 
         /// <summary>
         /// Searches for catalog items or item variations by matching supported search attribute values, including
-        /// custom attribute values, against one or more of the specified query expressions, 
+        /// custom attribute values, against one or more of the specified query expressions,
         /// This (`SearchCatalogItems`) endpoint differs from the [SearchCatalogObjects](#endpoint-Catalog-SearchCatalogObjects)
         /// endpoint in the following aspects:
         /// - `SearchCatalogItems` can only search for items or item variations, whereas `SearchCatalogObjects` can search for any type of catalog objects.
@@ -838,7 +805,7 @@ namespace Square.Apis
 
         /// <summary>
         /// Searches for catalog items or item variations by matching supported search attribute values, including
-        /// custom attribute values, against one or more of the specified query expressions, 
+        /// custom attribute values, against one or more of the specified query expressions,
         /// This (`SearchCatalogItems`) endpoint differs from the [SearchCatalogObjects](#endpoint-Catalog-SearchCatalogObjects)
         /// endpoint in the following aspects:
         /// - `SearchCatalogItems` can only search for items or item variations, whereas `SearchCatalogObjects` can search for any type of catalog objects.
@@ -857,12 +824,9 @@ namespace Square.Apis
             StringBuilder _queryBuilder = new StringBuilder(_baseUri);
             _queryBuilder.Append("/v2/catalog/search-catalog-items");
 
-            //validate and preprocess url
-            string _queryUrl = ApiHelper.CleanUrl(_queryBuilder);
-
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string, string>()
-            { 
+            {
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
@@ -873,13 +837,13 @@ namespace Square.Apis
             var _body = ApiHelper.JsonSerialize(body);
 
             //prepare the API call request to fetch the response
-            HttpRequest _request = GetClientInstance().PostBody(_queryUrl, _headers, _body);
+            HttpRequest _request = GetClientInstance().PostBody(_queryBuilder.ToString(), _headers, _body);
             if (HttpCallBack != null)
             {
                 HttpCallBack.OnBeforeHttpRequestEventHandler(GetClientInstance(), _request);
             }
 
-            _request = await authManagers["default"].ApplyAsync(_request).ConfigureAwait(false);
+            _request = await authManagers["global"].ApplyAsync(_request).ConfigureAwait(false);
 
             //invoke request and get response
             HttpStringResponse _response = await GetClientInstance().ExecuteAsStringAsync(_request, cancellationToken).ConfigureAwait(false);
@@ -927,12 +891,9 @@ namespace Square.Apis
             StringBuilder _queryBuilder = new StringBuilder(_baseUri);
             _queryBuilder.Append("/v2/catalog/update-item-modifier-lists");
 
-            //validate and preprocess url
-            string _queryUrl = ApiHelper.CleanUrl(_queryBuilder);
-
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string, string>()
-            { 
+            {
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
@@ -943,13 +904,13 @@ namespace Square.Apis
             var _body = ApiHelper.JsonSerialize(body);
 
             //prepare the API call request to fetch the response
-            HttpRequest _request = GetClientInstance().PostBody(_queryUrl, _headers, _body);
+            HttpRequest _request = GetClientInstance().PostBody(_queryBuilder.ToString(), _headers, _body);
             if (HttpCallBack != null)
             {
                 HttpCallBack.OnBeforeHttpRequestEventHandler(GetClientInstance(), _request);
             }
 
-            _request = await authManagers["default"].ApplyAsync(_request).ConfigureAwait(false);
+            _request = await authManagers["global"].ApplyAsync(_request).ConfigureAwait(false);
 
             //invoke request and get response
             HttpStringResponse _response = await GetClientInstance().ExecuteAsStringAsync(_request, cancellationToken).ConfigureAwait(false);
@@ -997,12 +958,9 @@ namespace Square.Apis
             StringBuilder _queryBuilder = new StringBuilder(_baseUri);
             _queryBuilder.Append("/v2/catalog/update-item-taxes");
 
-            //validate and preprocess url
-            string _queryUrl = ApiHelper.CleanUrl(_queryBuilder);
-
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string, string>()
-            { 
+            {
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
@@ -1013,13 +971,13 @@ namespace Square.Apis
             var _body = ApiHelper.JsonSerialize(body);
 
             //prepare the API call request to fetch the response
-            HttpRequest _request = GetClientInstance().PostBody(_queryUrl, _headers, _body);
+            HttpRequest _request = GetClientInstance().PostBody(_queryBuilder.ToString(), _headers, _body);
             if (HttpCallBack != null)
             {
                 HttpCallBack.OnBeforeHttpRequestEventHandler(GetClientInstance(), _request);
             }
 
-            _request = await authManagers["default"].ApplyAsync(_request).ConfigureAwait(false);
+            _request = await authManagers["global"].ApplyAsync(_request).ConfigureAwait(false);
 
             //invoke request and get response
             HttpStringResponse _response = await GetClientInstance().ExecuteAsStringAsync(_request, cancellationToken).ConfigureAwait(false);

@@ -34,7 +34,7 @@ namespace Square.Models
         /// <summary>
         /// The event's unique ID.
         /// </summary>
-        [JsonProperty("id")]
+        [JsonProperty("id", NullValueHandling = NullValueHandling.Ignore)]
         public string Id { get; }
 
         /// <summary>
@@ -42,25 +42,25 @@ namespace Square.Models
         /// events created with the Connect API have an event type that begins with
         /// `API`.
         /// </summary>
-        [JsonProperty("event_type")]
+        [JsonProperty("event_type", NullValueHandling = NullValueHandling.Ignore)]
         public string EventType { get; }
 
         /// <summary>
         /// The time the employee clocked in, in ISO 8601 format.
         /// </summary>
-        [JsonProperty("clockin_time")]
+        [JsonProperty("clockin_time", NullValueHandling = NullValueHandling.Ignore)]
         public string ClockinTime { get; }
 
         /// <summary>
         /// The time the employee clocked out, in ISO 8601 format.
         /// </summary>
-        [JsonProperty("clockout_time")]
+        [JsonProperty("clockout_time", NullValueHandling = NullValueHandling.Ignore)]
         public string ClockoutTime { get; }
 
         /// <summary>
         /// The time when the event was created, in ISO 8601 format.
         /// </summary>
-        [JsonProperty("created_at")]
+        [JsonProperty("created_at", NullValueHandling = NullValueHandling.Ignore)]
         public string CreatedAt { get; }
 
         public Builder ToBuilder()
@@ -82,34 +82,35 @@ namespace Square.Models
             private string clockoutTime;
             private string createdAt;
 
-            public Builder() { }
-            public Builder Id(string value)
+
+
+            public Builder Id(string id)
             {
-                id = value;
+                this.id = id;
                 return this;
             }
 
-            public Builder EventType(string value)
+            public Builder EventType(string eventType)
             {
-                eventType = value;
+                this.eventType = eventType;
                 return this;
             }
 
-            public Builder ClockinTime(string value)
+            public Builder ClockinTime(string clockinTime)
             {
-                clockinTime = value;
+                this.clockinTime = clockinTime;
                 return this;
             }
 
-            public Builder ClockoutTime(string value)
+            public Builder ClockoutTime(string clockoutTime)
             {
-                clockoutTime = value;
+                this.clockoutTime = clockoutTime;
                 return this;
             }
 
-            public Builder CreatedAt(string value)
+            public Builder CreatedAt(string createdAt)
             {
-                createdAt = value;
+                this.createdAt = createdAt;
                 return this;
             }
 

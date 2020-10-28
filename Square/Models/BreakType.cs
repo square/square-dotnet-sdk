@@ -36,7 +36,7 @@ namespace Square.Models
         /// <summary>
         /// UUID for this object.
         /// </summary>
-        [JsonProperty("id")]
+        [JsonProperty("id", NullValueHandling = NullValueHandling.Ignore)]
         public string Id { get; }
 
         /// <summary>
@@ -72,19 +72,19 @@ namespace Square.Models
         /// provided, Square's servers execute a "blind" write; potentially
         /// overwriting another writer's data.
         /// </summary>
-        [JsonProperty("version")]
+        [JsonProperty("version", NullValueHandling = NullValueHandling.Ignore)]
         public int? Version { get; }
 
         /// <summary>
         /// A read-only timestamp in RFC 3339 format.
         /// </summary>
-        [JsonProperty("created_at")]
+        [JsonProperty("created_at", NullValueHandling = NullValueHandling.Ignore)]
         public string CreatedAt { get; }
 
         /// <summary>
         /// A read-only timestamp in RFC 3339 format.
         /// </summary>
-        [JsonProperty("updated_at")]
+        [JsonProperty("updated_at", NullValueHandling = NullValueHandling.Ignore)]
         public string UpdatedAt { get; }
 
         public Builder ToBuilder()
@@ -121,51 +121,52 @@ namespace Square.Models
                 this.expectedDuration = expectedDuration;
                 this.isPaid = isPaid;
             }
-            public Builder LocationId(string value)
+
+            public Builder LocationId(string locationId)
             {
-                locationId = value;
+                this.locationId = locationId;
                 return this;
             }
 
-            public Builder BreakName(string value)
+            public Builder BreakName(string breakName)
             {
-                breakName = value;
+                this.breakName = breakName;
                 return this;
             }
 
-            public Builder ExpectedDuration(string value)
+            public Builder ExpectedDuration(string expectedDuration)
             {
-                expectedDuration = value;
+                this.expectedDuration = expectedDuration;
                 return this;
             }
 
-            public Builder IsPaid(bool value)
+            public Builder IsPaid(bool isPaid)
             {
-                isPaid = value;
+                this.isPaid = isPaid;
                 return this;
             }
 
-            public Builder Id(string value)
+            public Builder Id(string id)
             {
-                id = value;
+                this.id = id;
                 return this;
             }
 
-            public Builder Version(int? value)
+            public Builder Version(int? version)
             {
-                version = value;
+                this.version = version;
                 return this;
             }
 
-            public Builder CreatedAt(string value)
+            public Builder CreatedAt(string createdAt)
             {
-                createdAt = value;
+                this.createdAt = createdAt;
                 return this;
             }
 
-            public Builder UpdatedAt(string value)
+            public Builder UpdatedAt(string updatedAt)
             {
-                updatedAt = value;
+                this.updatedAt = updatedAt;
                 return this;
             }
 

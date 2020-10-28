@@ -1,14 +1,15 @@
-## Catalog Custom Attribute Value
+
+# Catalog Custom Attribute Value
 
 An instance of a custom attribute. Custom attributes can be defined and
 added to `ITEM` and `ITEM_VARIATION` type catalog objects.
 [Read more about custom attributes](https://developer.squareup.com/docs/catalog-api/add-custom-attributes).
 
-### Structure
+## Structure
 
 `CatalogCustomAttributeValue`
 
-### Fields
+## Fields
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
@@ -21,7 +22,7 @@ added to `ITEM` and `ITEM_VARIATION` type catalog objects.
 | `SelectionUidValues` | `IList<string>` | Optional | One or more choices from `allowed_selections`. Populated if `type` = `SELECTION`. |
 | `Key` | `string` | Optional | __Read-only.__ A copy of key from the associated `CatalogCustomAttributeDefinition`. |
 
-### Example (as JSON)
+## Example (as JSON)
 
 ```json
 {

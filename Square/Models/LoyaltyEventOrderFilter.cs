@@ -39,9 +39,10 @@ namespace Square.Models
             {
                 this.orderId = orderId;
             }
-            public Builder OrderId(string value)
+
+            public Builder OrderId(string orderId)
             {
-                orderId = value;
+                this.orderId = orderId;
                 return this;
             }
 

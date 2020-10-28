@@ -76,27 +76,28 @@ namespace Square.Models
                 this.effectiveDate = effectiveDate;
                 this.planId = planId;
             }
-            public Builder Id(string value)
+
+            public Builder Id(string id)
             {
-                id = value;
+                this.id = id;
                 return this;
             }
 
-            public Builder SubscriptionEventType(string value)
+            public Builder SubscriptionEventType(string subscriptionEventType)
             {
-                subscriptionEventType = value;
+                this.subscriptionEventType = subscriptionEventType;
                 return this;
             }
 
-            public Builder EffectiveDate(string value)
+            public Builder EffectiveDate(string effectiveDate)
             {
-                effectiveDate = value;
+                this.effectiveDate = effectiveDate;
                 return this;
             }
 
-            public Builder PlanId(string value)
+            public Builder PlanId(string planId)
             {
-                planId = value;
+                this.planId = planId;
                 return this;
             }
 

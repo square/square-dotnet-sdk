@@ -30,19 +30,19 @@ namespace Square.Models
         /// <summary>
         /// Getter for employees
         /// </summary>
-        [JsonProperty("employees")]
+        [JsonProperty("employees", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.Employee> Employees { get; }
 
         /// <summary>
         /// The token to be used to retrieve the next page of results.
         /// </summary>
-        [JsonProperty("cursor")]
+        [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
         public string Cursor { get; }
 
         /// <summary>
         /// Any errors that occurred during the request.
         /// </summary>
-        [JsonProperty("errors")]
+        [JsonProperty("errors", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.Error> Errors { get; }
 
         public Builder ToBuilder()
@@ -56,26 +56,27 @@ namespace Square.Models
 
         public class Builder
         {
-            private IList<Models.Employee> employees = new List<Models.Employee>();
+            private IList<Models.Employee> employees;
             private string cursor;
-            private IList<Models.Error> errors = new List<Models.Error>();
+            private IList<Models.Error> errors;
 
-            public Builder() { }
-            public Builder Employees(IList<Models.Employee> value)
+
+
+            public Builder Employees(IList<Models.Employee> employees)
             {
-                employees = value;
+                this.employees = employees;
                 return this;
             }
 
-            public Builder Cursor(string value)
+            public Builder Cursor(string cursor)
             {
-                cursor = value;
+                this.cursor = cursor;
                 return this;
             }
 
-            public Builder Errors(IList<Models.Error> value)
+            public Builder Errors(IList<Models.Error> errors)
             {
-                errors = value;
+                this.errors = errors;
                 return this;
             }
 

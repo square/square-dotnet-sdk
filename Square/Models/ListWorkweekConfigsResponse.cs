@@ -30,20 +30,20 @@ namespace Square.Models
         /// <summary>
         /// A page of Employee Wage results.
         /// </summary>
-        [JsonProperty("workweek_configs")]
+        [JsonProperty("workweek_configs", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.WorkweekConfig> WorkweekConfigs { get; }
 
         /// <summary>
         /// Value supplied in the subsequent request to fetch the next page of
         /// Employee Wage results.
         /// </summary>
-        [JsonProperty("cursor")]
+        [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
         public string Cursor { get; }
 
         /// <summary>
         /// Any errors that occurred during the request.
         /// </summary>
-        [JsonProperty("errors")]
+        [JsonProperty("errors", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.Error> Errors { get; }
 
         public Builder ToBuilder()
@@ -57,26 +57,27 @@ namespace Square.Models
 
         public class Builder
         {
-            private IList<Models.WorkweekConfig> workweekConfigs = new List<Models.WorkweekConfig>();
+            private IList<Models.WorkweekConfig> workweekConfigs;
             private string cursor;
-            private IList<Models.Error> errors = new List<Models.Error>();
+            private IList<Models.Error> errors;
 
-            public Builder() { }
-            public Builder WorkweekConfigs(IList<Models.WorkweekConfig> value)
+
+
+            public Builder WorkweekConfigs(IList<Models.WorkweekConfig> workweekConfigs)
             {
-                workweekConfigs = value;
+                this.workweekConfigs = workweekConfigs;
                 return this;
             }
 
-            public Builder Cursor(string value)
+            public Builder Cursor(string cursor)
             {
-                cursor = value;
+                this.cursor = cursor;
                 return this;
             }
 
-            public Builder Errors(IList<Models.Error> value)
+            public Builder Errors(IList<Models.Error> errors)
             {
-                errors = value;
+                this.errors = errors;
                 return this;
             }
 

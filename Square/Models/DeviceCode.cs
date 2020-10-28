@@ -42,25 +42,25 @@ namespace Square.Models
         /// <summary>
         /// The unique id for this device code.
         /// </summary>
-        [JsonProperty("id")]
+        [JsonProperty("id", NullValueHandling = NullValueHandling.Ignore)]
         public string Id { get; }
 
         /// <summary>
         /// An optional user-defined name for the device code.
         /// </summary>
-        [JsonProperty("name")]
+        [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
         public string Name { get; }
 
         /// <summary>
         /// The unique code that can be used to login.
         /// </summary>
-        [JsonProperty("code")]
+        [JsonProperty("code", NullValueHandling = NullValueHandling.Ignore)]
         public string Code { get; }
 
         /// <summary>
         /// The unique id of the device that used this code. Populated when the device is paired up.
         /// </summary>
-        [JsonProperty("device_id")]
+        [JsonProperty("device_id", NullValueHandling = NullValueHandling.Ignore)]
         public string DeviceId { get; }
 
         /// <summary>
@@ -72,37 +72,37 @@ namespace Square.Models
         /// <summary>
         /// The location assigned to this code.
         /// </summary>
-        [JsonProperty("location_id")]
+        [JsonProperty("location_id", NullValueHandling = NullValueHandling.Ignore)]
         public string LocationId { get; }
 
         /// <summary>
         /// DeviceCode.Status enum.
         /// </summary>
-        [JsonProperty("status")]
+        [JsonProperty("status", NullValueHandling = NullValueHandling.Ignore)]
         public string Status { get; }
 
         /// <summary>
         /// When this DeviceCode will expire and no longer login. Timestamp in RFC 3339 format.
         /// </summary>
-        [JsonProperty("pair_by")]
+        [JsonProperty("pair_by", NullValueHandling = NullValueHandling.Ignore)]
         public string PairBy { get; }
 
         /// <summary>
         /// When this DeviceCode was created. Timestamp in RFC 3339 format.
         /// </summary>
-        [JsonProperty("created_at")]
+        [JsonProperty("created_at", NullValueHandling = NullValueHandling.Ignore)]
         public string CreatedAt { get; }
 
         /// <summary>
         /// When this DeviceCode's status was last changed. Timestamp in RFC 3339 format.
         /// </summary>
-        [JsonProperty("status_changed_at")]
+        [JsonProperty("status_changed_at", NullValueHandling = NullValueHandling.Ignore)]
         public string StatusChangedAt { get; }
 
         /// <summary>
         /// When this DeviceCode was paired. Timestamp in RFC 3339 format.
         /// </summary>
-        [JsonProperty("paired_at")]
+        [JsonProperty("paired_at", NullValueHandling = NullValueHandling.Ignore)]
         public string PairedAt { get; }
 
         public Builder ToBuilder()
@@ -139,69 +139,70 @@ namespace Square.Models
             {
                 this.productType = productType;
             }
-            public Builder ProductType(string value)
+
+            public Builder ProductType(string productType)
             {
-                productType = value;
+                this.productType = productType;
                 return this;
             }
 
-            public Builder Id(string value)
+            public Builder Id(string id)
             {
-                id = value;
+                this.id = id;
                 return this;
             }
 
-            public Builder Name(string value)
+            public Builder Name(string name)
             {
-                name = value;
+                this.name = name;
                 return this;
             }
 
-            public Builder Code(string value)
+            public Builder Code(string code)
             {
-                code = value;
+                this.code = code;
                 return this;
             }
 
-            public Builder DeviceId(string value)
+            public Builder DeviceId(string deviceId)
             {
-                deviceId = value;
+                this.deviceId = deviceId;
                 return this;
             }
 
-            public Builder LocationId(string value)
+            public Builder LocationId(string locationId)
             {
-                locationId = value;
+                this.locationId = locationId;
                 return this;
             }
 
-            public Builder Status(string value)
+            public Builder Status(string status)
             {
-                status = value;
+                this.status = status;
                 return this;
             }
 
-            public Builder PairBy(string value)
+            public Builder PairBy(string pairBy)
             {
-                pairBy = value;
+                this.pairBy = pairBy;
                 return this;
             }
 
-            public Builder CreatedAt(string value)
+            public Builder CreatedAt(string createdAt)
             {
-                createdAt = value;
+                this.createdAt = createdAt;
                 return this;
             }
 
-            public Builder StatusChangedAt(string value)
+            public Builder StatusChangedAt(string statusChangedAt)
             {
-                statusChangedAt = value;
+                this.statusChangedAt = statusChangedAt;
                 return this;
             }
 
-            public Builder PairedAt(string value)
+            public Builder PairedAt(string pairedAt)
             {
-                pairedAt = value;
+                this.pairedAt = pairedAt;
                 return this;
             }
 

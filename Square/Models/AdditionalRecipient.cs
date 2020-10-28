@@ -51,7 +51,7 @@ namespace Square.Models
         /// <summary>
         /// The unique ID for this [AdditionalRecipientReceivable](#type-additionalrecipientreceivable), assigned by the server.
         /// </summary>
-        [JsonProperty("receivable_id")]
+        [JsonProperty("receivable_id", NullValueHandling = NullValueHandling.Ignore)]
         public string ReceivableId { get; }
 
         public Builder ToBuilder()
@@ -78,27 +78,28 @@ namespace Square.Models
                 this.description = description;
                 this.amountMoney = amountMoney;
             }
-            public Builder LocationId(string value)
+
+            public Builder LocationId(string locationId)
             {
-                locationId = value;
+                this.locationId = locationId;
                 return this;
             }
 
-            public Builder Description(string value)
+            public Builder Description(string description)
             {
-                description = value;
+                this.description = description;
                 return this;
             }
 
-            public Builder AmountMoney(Models.Money value)
+            public Builder AmountMoney(Models.Money amountMoney)
             {
-                amountMoney = value;
+                this.amountMoney = amountMoney;
                 return this;
             }
 
-            public Builder ReceivableId(string value)
+            public Builder ReceivableId(string receivableId)
             {
-                receivableId = value;
+                this.receivableId = receivableId;
                 return this;
             }
 

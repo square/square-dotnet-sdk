@@ -39,9 +39,10 @@ namespace Square.Models
             {
                 this.locationId = locationId;
             }
-            public Builder LocationId(string value)
+
+            public Builder LocationId(string locationId)
             {
-                locationId = value;
+                this.locationId = locationId;
                 return this;
             }
 

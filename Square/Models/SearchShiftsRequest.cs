@@ -26,19 +26,19 @@ namespace Square.Models
         /// <summary>
         /// The parameters of a `Shift` search query. Includes filter and sort options.
         /// </summary>
-        [JsonProperty("query")]
+        [JsonProperty("query", NullValueHandling = NullValueHandling.Ignore)]
         public Models.ShiftQuery Query { get; }
 
         /// <summary>
         /// number of resources in a page (200 by default).
         /// </summary>
-        [JsonProperty("limit")]
+        [JsonProperty("limit", NullValueHandling = NullValueHandling.Ignore)]
         public int? Limit { get; }
 
         /// <summary>
         /// opaque cursor for fetching the next page.
         /// </summary>
-        [JsonProperty("cursor")]
+        [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
         public string Cursor { get; }
 
         public Builder ToBuilder()
@@ -56,22 +56,23 @@ namespace Square.Models
             private int? limit;
             private string cursor;
 
-            public Builder() { }
-            public Builder Query(Models.ShiftQuery value)
+
+
+            public Builder Query(Models.ShiftQuery query)
             {
-                query = value;
+                this.query = query;
                 return this;
             }
 
-            public Builder Limit(int? value)
+            public Builder Limit(int? limit)
             {
-                limit = value;
+                this.limit = limit;
                 return this;
             }
 
-            public Builder Cursor(string value)
+            public Builder Cursor(string cursor)
             {
-                cursor = value;
+                this.cursor = cursor;
                 return this;
             }
 

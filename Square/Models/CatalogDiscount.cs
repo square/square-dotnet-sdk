@@ -34,13 +34,13 @@ namespace Square.Models
         /// <summary>
         /// The discount name. This is a searchable attribute for use in applicable query filters, and its value length is of Unicode code points.
         /// </summary>
-        [JsonProperty("name")]
+        [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
         public string Name { get; }
 
         /// <summary>
         /// How to apply a CatalogDiscount to a CatalogItem.
         /// </summary>
-        [JsonProperty("discount_type")]
+        [JsonProperty("discount_type", NullValueHandling = NullValueHandling.Ignore)]
         public string DiscountType { get; }
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace Square.Models
         /// is `VARIABLE_PERCENTAGE`.
         /// Do not use this field for amount-based or variable discounts.
         /// </summary>
-        [JsonProperty("percentage")]
+        [JsonProperty("percentage", NullValueHandling = NullValueHandling.Ignore)]
         public string Percentage { get; }
 
         /// <summary>
@@ -60,26 +60,26 @@ namespace Square.Models
         /// [Working with Monetary Amounts](https://developer.squareup.com/docs/build-basics/working-with-monetary-amounts)
         /// for more information.
         /// </summary>
-        [JsonProperty("amount_money")]
+        [JsonProperty("amount_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Money AmountMoney { get; }
 
         /// <summary>
         /// Indicates whether a mobile staff member needs to enter their PIN to apply the
         /// discount to a payment in the Square Point of Sale app.
         /// </summary>
-        [JsonProperty("pin_required")]
+        [JsonProperty("pin_required", NullValueHandling = NullValueHandling.Ignore)]
         public bool? PinRequired { get; }
 
         /// <summary>
         /// The color of the discount display label in the Square Point of Sale app. This must be a valid hex color code.
         /// </summary>
-        [JsonProperty("label_color")]
+        [JsonProperty("label_color", NullValueHandling = NullValueHandling.Ignore)]
         public string LabelColor { get; }
 
         /// <summary>
         /// Getter for modify_tax_basis
         /// </summary>
-        [JsonProperty("modify_tax_basis")]
+        [JsonProperty("modify_tax_basis", NullValueHandling = NullValueHandling.Ignore)]
         public string ModifyTaxBasis { get; }
 
         public Builder ToBuilder()
@@ -105,46 +105,47 @@ namespace Square.Models
             private string labelColor;
             private string modifyTaxBasis;
 
-            public Builder() { }
-            public Builder Name(string value)
+
+
+            public Builder Name(string name)
             {
-                name = value;
+                this.name = name;
                 return this;
             }
 
-            public Builder DiscountType(string value)
+            public Builder DiscountType(string discountType)
             {
-                discountType = value;
+                this.discountType = discountType;
                 return this;
             }
 
-            public Builder Percentage(string value)
+            public Builder Percentage(string percentage)
             {
-                percentage = value;
+                this.percentage = percentage;
                 return this;
             }
 
-            public Builder AmountMoney(Models.Money value)
+            public Builder AmountMoney(Models.Money amountMoney)
             {
-                amountMoney = value;
+                this.amountMoney = amountMoney;
                 return this;
             }
 
-            public Builder PinRequired(bool? value)
+            public Builder PinRequired(bool? pinRequired)
             {
-                pinRequired = value;
+                this.pinRequired = pinRequired;
                 return this;
             }
 
-            public Builder LabelColor(string value)
+            public Builder LabelColor(string labelColor)
             {
-                labelColor = value;
+                this.labelColor = labelColor;
                 return this;
             }
 
-            public Builder ModifyTaxBasis(string value)
+            public Builder ModifyTaxBasis(string modifyTaxBasis)
             {
-                modifyTaxBasis = value;
+                this.modifyTaxBasis = modifyTaxBasis;
                 return this;
             }
 

@@ -39,9 +39,10 @@ namespace Square.Models
             {
                 this.teamMembers = teamMembers;
             }
-            public Builder TeamMembers(IDictionary<string, Models.CreateTeamMemberRequest> value)
+
+            public Builder TeamMembers(IDictionary<string, Models.CreateTeamMemberRequest> teamMembers)
             {
-                teamMembers = value;
+                this.teamMembers = teamMembers;
                 return this;
             }
 

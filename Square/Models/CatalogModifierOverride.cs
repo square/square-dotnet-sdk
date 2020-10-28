@@ -30,7 +30,7 @@ namespace Square.Models
         /// <summary>
         /// If `true`, this `CatalogModifier` should be selected by default for this `CatalogItem`.
         /// </summary>
-        [JsonProperty("on_by_default")]
+        [JsonProperty("on_by_default", NullValueHandling = NullValueHandling.Ignore)]
         public bool? OnByDefault { get; }
 
         public Builder ToBuilder()
@@ -49,15 +49,16 @@ namespace Square.Models
             {
                 this.modifierId = modifierId;
             }
-            public Builder ModifierId(string value)
+
+            public Builder ModifierId(string modifierId)
             {
-                modifierId = value;
+                this.modifierId = modifierId;
                 return this;
             }
 
-            public Builder OnByDefault(bool? value)
+            public Builder OnByDefault(bool? onByDefault)
             {
-                onByDefault = value;
+                this.onByDefault = onByDefault;
                 return this;
             }
 

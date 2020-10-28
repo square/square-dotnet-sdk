@@ -20,9 +20,10 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// The option to determine whether or not pricing rule-based discounts are automatically applied to an order.
+        /// The option to determine whether or not pricing rule-based
+        /// discounts are automatically applied to an order.
         /// </summary>
-        [JsonProperty("auto_apply_discounts")]
+        [JsonProperty("auto_apply_discounts", NullValueHandling = NullValueHandling.Ignore)]
         public bool? AutoApplyDiscounts { get; }
 
         public Builder ToBuilder()
@@ -36,10 +37,11 @@ namespace Square.Models
         {
             private bool? autoApplyDiscounts;
 
-            public Builder() { }
-            public Builder AutoApplyDiscounts(bool? value)
+
+
+            public Builder AutoApplyDiscounts(bool? autoApplyDiscounts)
             {
-                autoApplyDiscounts = value;
+                this.autoApplyDiscounts = autoApplyDiscounts;
                 return this;
             }
 

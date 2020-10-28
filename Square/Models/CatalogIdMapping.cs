@@ -24,13 +24,13 @@ namespace Square.Models
         /// <summary>
         /// The client-supplied temporary `#`-prefixed ID for a new `CatalogObject`.
         /// </summary>
-        [JsonProperty("client_object_id")]
+        [JsonProperty("client_object_id", NullValueHandling = NullValueHandling.Ignore)]
         public string ClientObjectId { get; }
 
         /// <summary>
         /// The permanent ID for the CatalogObject created by the server.
         /// </summary>
-        [JsonProperty("object_id")]
+        [JsonProperty("object_id", NullValueHandling = NullValueHandling.Ignore)]
         public string ObjectId { get; }
 
         public Builder ToBuilder()
@@ -46,16 +46,17 @@ namespace Square.Models
             private string clientObjectId;
             private string objectId;
 
-            public Builder() { }
-            public Builder ClientObjectId(string value)
+
+
+            public Builder ClientObjectId(string clientObjectId)
             {
-                clientObjectId = value;
+                this.clientObjectId = clientObjectId;
                 return this;
             }
 
-            public Builder ObjectId(string value)
+            public Builder ObjectId(string objectId)
             {
-                objectId = value;
+                this.objectId = objectId;
                 return this;
             }
 

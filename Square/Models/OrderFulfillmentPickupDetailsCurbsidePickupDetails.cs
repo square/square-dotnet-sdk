@@ -24,14 +24,14 @@ namespace Square.Models
         /// <summary>
         /// Specific details for curbside pickup, such as parking number, vehicle model, etc.
         /// </summary>
-        [JsonProperty("curbside_details")]
+        [JsonProperty("curbside_details", NullValueHandling = NullValueHandling.Ignore)]
         public string CurbsideDetails { get; }
 
         /// <summary>
         /// The [timestamp](#workingwithdates) in RFC 3339 timestamp format, e.g., "2016-09-04T23:59:33.123Z",
         /// indicating when the buyer arrived and is waiting for pickup.
         /// </summary>
-        [JsonProperty("buyer_arrived_at")]
+        [JsonProperty("buyer_arrived_at", NullValueHandling = NullValueHandling.Ignore)]
         public string BuyerArrivedAt { get; }
 
         public Builder ToBuilder()
@@ -47,16 +47,17 @@ namespace Square.Models
             private string curbsideDetails;
             private string buyerArrivedAt;
 
-            public Builder() { }
-            public Builder CurbsideDetails(string value)
+
+
+            public Builder CurbsideDetails(string curbsideDetails)
             {
-                curbsideDetails = value;
+                this.curbsideDetails = curbsideDetails;
                 return this;
             }
 
-            public Builder BuyerArrivedAt(string value)
+            public Builder BuyerArrivedAt(string buyerArrivedAt)
             {
-                buyerArrivedAt = value;
+                this.buyerArrivedAt = buyerArrivedAt;
                 return this;
             }
 

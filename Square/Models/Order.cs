@@ -78,7 +78,7 @@ namespace Square.Models
         /// <summary>
         /// The order's unique ID.
         /// </summary>
-        [JsonProperty("id")]
+        [JsonProperty("id", NullValueHandling = NullValueHandling.Ignore)]
         public string Id { get; }
 
         /// <summary>
@@ -91,25 +91,25 @@ namespace Square.Models
         /// A client specified identifier to associate an entity in another system
         /// with this order.
         /// </summary>
-        [JsonProperty("reference_id")]
+        [JsonProperty("reference_id", NullValueHandling = NullValueHandling.Ignore)]
         public string ReferenceId { get; }
 
         /// <summary>
         /// Represents the origination details of an order.
         /// </summary>
-        [JsonProperty("source")]
+        [JsonProperty("source", NullValueHandling = NullValueHandling.Ignore)]
         public Models.OrderSource Source { get; }
 
         /// <summary>
         /// The [Customer](#type-customer) ID of the customer associated with the order.
         /// </summary>
-        [JsonProperty("customer_id")]
+        [JsonProperty("customer_id", NullValueHandling = NullValueHandling.Ignore)]
         public string CustomerId { get; }
 
         /// <summary>
         /// The line items included in the order.
         /// </summary>
-        [JsonProperty("line_items")]
+        [JsonProperty("line_items", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.OrderLineItem> LineItems { get; }
 
         /// <summary>
@@ -122,7 +122,7 @@ namespace Square.Models
         /// `line_items.taxes` field will result in an error. Please use `line_items.applied_taxes`
         /// instead.
         /// </summary>
-        [JsonProperty("taxes")]
+        [JsonProperty("taxes", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.OrderLineItemTax> Taxes { get; }
 
         /// <summary>
@@ -135,13 +135,13 @@ namespace Square.Models
         /// `line_items.discounts` field will result in an error. Please use `line_items.applied_discounts`
         /// instead.
         /// </summary>
-        [JsonProperty("discounts")]
+        [JsonProperty("discounts", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.OrderLineItemDiscount> Discounts { get; }
 
         /// <summary>
         /// A list of service charges applied to the order.
         /// </summary>
-        [JsonProperty("service_charges")]
+        [JsonProperty("service_charges", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.OrderServiceCharge> ServiceCharges { get; }
 
         /// <summary>
@@ -149,7 +149,7 @@ namespace Square.Models
         /// Orders can only be created with at most one fulfillment. However, orders returned
         /// by the API may contain multiple fulfillments.
         /// </summary>
-        [JsonProperty("fulfillments")]
+        [JsonProperty("fulfillments", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.OrderFulfillment> Fulfillments { get; }
 
         /// <summary>
@@ -157,38 +157,38 @@ namespace Square.Models
         /// Itemized Return or Exchange.  There will be exactly one `Return` object per sale Order being
         /// referenced.
         /// </summary>
-        [JsonProperty("returns")]
+        [JsonProperty("returns", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.OrderReturn> Returns { get; }
 
         /// <summary>
         /// A collection of various money amounts.
         /// </summary>
-        [JsonProperty("return_amounts")]
+        [JsonProperty("return_amounts", NullValueHandling = NullValueHandling.Ignore)]
         public Models.OrderMoneyAmounts ReturnAmounts { get; }
 
         /// <summary>
         /// A collection of various money amounts.
         /// </summary>
-        [JsonProperty("net_amounts")]
+        [JsonProperty("net_amounts", NullValueHandling = NullValueHandling.Ignore)]
         public Models.OrderMoneyAmounts NetAmounts { get; }
 
         /// <summary>
         /// A rounding adjustment of the money being returned. Commonly used to apply Cash Rounding
         /// when the minimum unit of account is smaller than the lowest physical denomination of currency.
         /// </summary>
-        [JsonProperty("rounding_adjustment")]
+        [JsonProperty("rounding_adjustment", NullValueHandling = NullValueHandling.Ignore)]
         public Models.OrderRoundingAdjustment RoundingAdjustment { get; }
 
         /// <summary>
         /// The Tenders which were used to pay for the Order.
         /// </summary>
-        [JsonProperty("tenders")]
+        [JsonProperty("tenders", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.Tender> Tenders { get; }
 
         /// <summary>
         /// The Refunds that are part of this Order.
         /// </summary>
-        [JsonProperty("refunds")]
+        [JsonProperty("refunds", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.Refund> Refunds { get; }
 
         /// <summary>
@@ -206,31 +206,31 @@ namespace Square.Models
         /// application.
         /// See [Metadata](https://developer.squareup.com/docs/build-basics/metadata) for more information.
         /// </summary>
-        [JsonProperty("metadata")]
+        [JsonProperty("metadata", NullValueHandling = NullValueHandling.Ignore)]
         public IDictionary<string, string> Metadata { get; }
 
         /// <summary>
         /// Timestamp for when the order was created. In RFC 3339 format, e.g., "2016-09-04T23:59:33.123Z".
         /// </summary>
-        [JsonProperty("created_at")]
+        [JsonProperty("created_at", NullValueHandling = NullValueHandling.Ignore)]
         public string CreatedAt { get; }
 
         /// <summary>
         /// Timestamp for when the order was last updated. In RFC 3339 format, e.g., "2016-09-04T23:59:33.123Z".
         /// </summary>
-        [JsonProperty("updated_at")]
+        [JsonProperty("updated_at", NullValueHandling = NullValueHandling.Ignore)]
         public string UpdatedAt { get; }
 
         /// <summary>
         /// Timestamp for when the order reached a terminal [state](#property-state). In RFC 3339 format, e.g., "2016-09-04T23:59:33.123Z".
         /// </summary>
-        [JsonProperty("closed_at")]
+        [JsonProperty("closed_at", NullValueHandling = NullValueHandling.Ignore)]
         public string ClosedAt { get; }
 
         /// <summary>
         /// The state of the order.
         /// </summary>
-        [JsonProperty("state")]
+        [JsonProperty("state", NullValueHandling = NullValueHandling.Ignore)]
         public string State { get; }
 
         /// <summary>
@@ -239,7 +239,7 @@ namespace Square.Models
         /// thus cannot be updated.
         /// [Read more about working with versions](https://developer.squareup.com/docs/orders-api/manage-orders#update-orders).
         /// </summary>
-        [JsonProperty("version")]
+        [JsonProperty("version", NullValueHandling = NullValueHandling.Ignore)]
         public int? Version { get; }
 
         /// <summary>
@@ -250,7 +250,7 @@ namespace Square.Models
         /// [Working with Monetary Amounts](https://developer.squareup.com/docs/build-basics/working-with-monetary-amounts)
         /// for more information.
         /// </summary>
-        [JsonProperty("total_money")]
+        [JsonProperty("total_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Money TotalMoney { get; }
 
         /// <summary>
@@ -261,7 +261,7 @@ namespace Square.Models
         /// [Working with Monetary Amounts](https://developer.squareup.com/docs/build-basics/working-with-monetary-amounts)
         /// for more information.
         /// </summary>
-        [JsonProperty("total_tax_money")]
+        [JsonProperty("total_tax_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Money TotalTaxMoney { get; }
 
         /// <summary>
@@ -272,7 +272,7 @@ namespace Square.Models
         /// [Working with Monetary Amounts](https://developer.squareup.com/docs/build-basics/working-with-monetary-amounts)
         /// for more information.
         /// </summary>
-        [JsonProperty("total_discount_money")]
+        [JsonProperty("total_discount_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Money TotalDiscountMoney { get; }
 
         /// <summary>
@@ -283,7 +283,7 @@ namespace Square.Models
         /// [Working with Monetary Amounts](https://developer.squareup.com/docs/build-basics/working-with-monetary-amounts)
         /// for more information.
         /// </summary>
-        [JsonProperty("total_tip_money")]
+        [JsonProperty("total_tip_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Money TotalTipMoney { get; }
 
         /// <summary>
@@ -294,7 +294,7 @@ namespace Square.Models
         /// [Working with Monetary Amounts](https://developer.squareup.com/docs/build-basics/working-with-monetary-amounts)
         /// for more information.
         /// </summary>
-        [JsonProperty("total_service_charge_money")]
+        [JsonProperty("total_service_charge_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Money TotalServiceChargeMoney { get; }
 
         /// <summary>
@@ -302,13 +302,13 @@ namespace Square.Models
         /// They can be used, for example, to apply automatic price adjustments that are based on pre-configured
         /// [pricing rules](https://developer.squareup.com/docs/reference/square/objects/CatalogPricingRule).
         /// </summary>
-        [JsonProperty("pricing_options")]
+        [JsonProperty("pricing_options", NullValueHandling = NullValueHandling.Ignore)]
         public Models.OrderPricingOptions PricingOptions { get; }
 
         /// <summary>
         /// A set-like list of rewards that have been added to the order.
         /// </summary>
-        [JsonProperty("rewards")]
+        [JsonProperty("rewards", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.OrderReward> Rewards { get; }
 
         public Builder ToBuilder()
@@ -352,18 +352,18 @@ namespace Square.Models
             private string referenceId;
             private Models.OrderSource source;
             private string customerId;
-            private IList<Models.OrderLineItem> lineItems = new List<Models.OrderLineItem>();
-            private IList<Models.OrderLineItemTax> taxes = new List<Models.OrderLineItemTax>();
-            private IList<Models.OrderLineItemDiscount> discounts = new List<Models.OrderLineItemDiscount>();
-            private IList<Models.OrderServiceCharge> serviceCharges = new List<Models.OrderServiceCharge>();
-            private IList<Models.OrderFulfillment> fulfillments = new List<Models.OrderFulfillment>();
-            private IList<Models.OrderReturn> returns = new List<Models.OrderReturn>();
+            private IList<Models.OrderLineItem> lineItems;
+            private IList<Models.OrderLineItemTax> taxes;
+            private IList<Models.OrderLineItemDiscount> discounts;
+            private IList<Models.OrderServiceCharge> serviceCharges;
+            private IList<Models.OrderFulfillment> fulfillments;
+            private IList<Models.OrderReturn> returns;
             private Models.OrderMoneyAmounts returnAmounts;
             private Models.OrderMoneyAmounts netAmounts;
             private Models.OrderRoundingAdjustment roundingAdjustment;
-            private IList<Models.Tender> tenders = new List<Models.Tender>();
-            private IList<Models.Refund> refunds = new List<Models.Refund>();
-            private IDictionary<string, string> metadata = new Dictionary<string, string>();
+            private IList<Models.Tender> tenders;
+            private IList<Models.Refund> refunds;
+            private IDictionary<string, string> metadata;
             private string createdAt;
             private string updatedAt;
             private string closedAt;
@@ -375,183 +375,184 @@ namespace Square.Models
             private Models.Money totalTipMoney;
             private Models.Money totalServiceChargeMoney;
             private Models.OrderPricingOptions pricingOptions;
-            private IList<Models.OrderReward> rewards = new List<Models.OrderReward>();
+            private IList<Models.OrderReward> rewards;
 
             public Builder(string locationId)
             {
                 this.locationId = locationId;
             }
-            public Builder LocationId(string value)
+
+            public Builder LocationId(string locationId)
             {
-                locationId = value;
+                this.locationId = locationId;
                 return this;
             }
 
-            public Builder Id(string value)
+            public Builder Id(string id)
             {
-                id = value;
+                this.id = id;
                 return this;
             }
 
-            public Builder ReferenceId(string value)
+            public Builder ReferenceId(string referenceId)
             {
-                referenceId = value;
+                this.referenceId = referenceId;
                 return this;
             }
 
-            public Builder Source(Models.OrderSource value)
+            public Builder Source(Models.OrderSource source)
             {
-                source = value;
+                this.source = source;
                 return this;
             }
 
-            public Builder CustomerId(string value)
+            public Builder CustomerId(string customerId)
             {
-                customerId = value;
+                this.customerId = customerId;
                 return this;
             }
 
-            public Builder LineItems(IList<Models.OrderLineItem> value)
+            public Builder LineItems(IList<Models.OrderLineItem> lineItems)
             {
-                lineItems = value;
+                this.lineItems = lineItems;
                 return this;
             }
 
-            public Builder Taxes(IList<Models.OrderLineItemTax> value)
+            public Builder Taxes(IList<Models.OrderLineItemTax> taxes)
             {
-                taxes = value;
+                this.taxes = taxes;
                 return this;
             }
 
-            public Builder Discounts(IList<Models.OrderLineItemDiscount> value)
+            public Builder Discounts(IList<Models.OrderLineItemDiscount> discounts)
             {
-                discounts = value;
+                this.discounts = discounts;
                 return this;
             }
 
-            public Builder ServiceCharges(IList<Models.OrderServiceCharge> value)
+            public Builder ServiceCharges(IList<Models.OrderServiceCharge> serviceCharges)
             {
-                serviceCharges = value;
+                this.serviceCharges = serviceCharges;
                 return this;
             }
 
-            public Builder Fulfillments(IList<Models.OrderFulfillment> value)
+            public Builder Fulfillments(IList<Models.OrderFulfillment> fulfillments)
             {
-                fulfillments = value;
+                this.fulfillments = fulfillments;
                 return this;
             }
 
-            public Builder Returns(IList<Models.OrderReturn> value)
+            public Builder Returns(IList<Models.OrderReturn> returns)
             {
-                returns = value;
+                this.returns = returns;
                 return this;
             }
 
-            public Builder ReturnAmounts(Models.OrderMoneyAmounts value)
+            public Builder ReturnAmounts(Models.OrderMoneyAmounts returnAmounts)
             {
-                returnAmounts = value;
+                this.returnAmounts = returnAmounts;
                 return this;
             }
 
-            public Builder NetAmounts(Models.OrderMoneyAmounts value)
+            public Builder NetAmounts(Models.OrderMoneyAmounts netAmounts)
             {
-                netAmounts = value;
+                this.netAmounts = netAmounts;
                 return this;
             }
 
-            public Builder RoundingAdjustment(Models.OrderRoundingAdjustment value)
+            public Builder RoundingAdjustment(Models.OrderRoundingAdjustment roundingAdjustment)
             {
-                roundingAdjustment = value;
+                this.roundingAdjustment = roundingAdjustment;
                 return this;
             }
 
-            public Builder Tenders(IList<Models.Tender> value)
+            public Builder Tenders(IList<Models.Tender> tenders)
             {
-                tenders = value;
+                this.tenders = tenders;
                 return this;
             }
 
-            public Builder Refunds(IList<Models.Refund> value)
+            public Builder Refunds(IList<Models.Refund> refunds)
             {
-                refunds = value;
+                this.refunds = refunds;
                 return this;
             }
 
-            public Builder Metadata(IDictionary<string, string> value)
+            public Builder Metadata(IDictionary<string, string> metadata)
             {
-                metadata = value;
+                this.metadata = metadata;
                 return this;
             }
 
-            public Builder CreatedAt(string value)
+            public Builder CreatedAt(string createdAt)
             {
-                createdAt = value;
+                this.createdAt = createdAt;
                 return this;
             }
 
-            public Builder UpdatedAt(string value)
+            public Builder UpdatedAt(string updatedAt)
             {
-                updatedAt = value;
+                this.updatedAt = updatedAt;
                 return this;
             }
 
-            public Builder ClosedAt(string value)
+            public Builder ClosedAt(string closedAt)
             {
-                closedAt = value;
+                this.closedAt = closedAt;
                 return this;
             }
 
-            public Builder State(string value)
+            public Builder State(string state)
             {
-                state = value;
+                this.state = state;
                 return this;
             }
 
-            public Builder Version(int? value)
+            public Builder Version(int? version)
             {
-                version = value;
+                this.version = version;
                 return this;
             }
 
-            public Builder TotalMoney(Models.Money value)
+            public Builder TotalMoney(Models.Money totalMoney)
             {
-                totalMoney = value;
+                this.totalMoney = totalMoney;
                 return this;
             }
 
-            public Builder TotalTaxMoney(Models.Money value)
+            public Builder TotalTaxMoney(Models.Money totalTaxMoney)
             {
-                totalTaxMoney = value;
+                this.totalTaxMoney = totalTaxMoney;
                 return this;
             }
 
-            public Builder TotalDiscountMoney(Models.Money value)
+            public Builder TotalDiscountMoney(Models.Money totalDiscountMoney)
             {
-                totalDiscountMoney = value;
+                this.totalDiscountMoney = totalDiscountMoney;
                 return this;
             }
 
-            public Builder TotalTipMoney(Models.Money value)
+            public Builder TotalTipMoney(Models.Money totalTipMoney)
             {
-                totalTipMoney = value;
+                this.totalTipMoney = totalTipMoney;
                 return this;
             }
 
-            public Builder TotalServiceChargeMoney(Models.Money value)
+            public Builder TotalServiceChargeMoney(Models.Money totalServiceChargeMoney)
             {
-                totalServiceChargeMoney = value;
+                this.totalServiceChargeMoney = totalServiceChargeMoney;
                 return this;
             }
 
-            public Builder PricingOptions(Models.OrderPricingOptions value)
+            public Builder PricingOptions(Models.OrderPricingOptions pricingOptions)
             {
-                pricingOptions = value;
+                this.pricingOptions = pricingOptions;
                 return this;
             }
 
-            public Builder Rewards(IList<Models.OrderReward> value)
+            public Builder Rewards(IList<Models.OrderReward> rewards)
             {
-                rewards = value;
+                this.rewards = rewards;
                 return this;
             }
 

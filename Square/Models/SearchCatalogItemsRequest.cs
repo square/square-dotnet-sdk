@@ -40,51 +40,50 @@ namespace Square.Models
         /// the `name`, `description`, or `abbreviation` attribute value of an item, or in
         /// the `name`, `sku`, or `upc` attribute value of an item variation.
         /// </summary>
-        [JsonProperty("text_filter")]
+        [JsonProperty("text_filter", NullValueHandling = NullValueHandling.Ignore)]
         public string TextFilter { get; }
 
         /// <summary>
         /// The category id query expression to return items containing the specified category IDs.
         /// </summary>
-        [JsonProperty("category_ids")]
+        [JsonProperty("category_ids", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> CategoryIds { get; }
 
         /// <summary>
         /// The stock-level query expression to return item variations with the specified stock levels.
         /// See [SearchCatalogItemsRequestStockLevel](#type-searchcatalogitemsrequeststocklevel) for possible values
         /// </summary>
-        [JsonProperty("stock_levels")]
+        [JsonProperty("stock_levels", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> StockLevels { get; }
 
         /// <summary>
         /// The enabled-location query expression to return items and item variations having specified enabled locations.
         /// </summary>
-        [JsonProperty("enabled_location_ids")]
+        [JsonProperty("enabled_location_ids", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> EnabledLocationIds { get; }
 
         /// <summary>
         /// The pagination token, returned in the previous response, used to fetch the next batch of pending results.
         /// </summary>
-        [JsonProperty("cursor")]
+        [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
         public string Cursor { get; }
 
         /// <summary>
         /// The maximum number of results to return per page. The default value is 100.
         /// </summary>
-        [JsonProperty("limit")]
+        [JsonProperty("limit", NullValueHandling = NullValueHandling.Ignore)]
         public int? Limit { get; }
 
         /// <summary>
         /// The order (e.g., chronological or alphabetical) in which results from a request are returned.
         /// </summary>
-        [JsonProperty("sort_order")]
+        [JsonProperty("sort_order", NullValueHandling = NullValueHandling.Ignore)]
         public string SortOrder { get; }
 
         /// <summary>
         /// The product types query expression to return items or item variations having the specified product types.
-        /// See [CatalogItemProductType](#type-catalogitemproducttype) for possible values
         /// </summary>
-        [JsonProperty("product_types")]
+        [JsonProperty("product_types", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> ProductTypes { get; }
 
         /// <summary>
@@ -92,7 +91,7 @@ namespace Square.Models
         /// custom attribute expressions. A maximum number of 10 custom attribute expressions are supported in
         /// a single call to the [SearchCatalogItems](#endpoint-Catalog-SearchCatalogItems) endpoint.
         /// </summary>
-        [JsonProperty("custom_attribute_filters")]
+        [JsonProperty("custom_attribute_filters", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.CustomAttributeFilter> CustomAttributeFilters { get; }
 
         public Builder ToBuilder()
@@ -113,67 +112,68 @@ namespace Square.Models
         public class Builder
         {
             private string textFilter;
-            private IList<string> categoryIds = new List<string>();
-            private IList<string> stockLevels = new List<string>();
-            private IList<string> enabledLocationIds = new List<string>();
+            private IList<string> categoryIds;
+            private IList<string> stockLevels;
+            private IList<string> enabledLocationIds;
             private string cursor;
             private int? limit;
             private string sortOrder;
-            private IList<string> productTypes = new List<string>();
-            private IList<Models.CustomAttributeFilter> customAttributeFilters = new List<Models.CustomAttributeFilter>();
+            private IList<string> productTypes;
+            private IList<Models.CustomAttributeFilter> customAttributeFilters;
 
-            public Builder() { }
-            public Builder TextFilter(string value)
+
+
+            public Builder TextFilter(string textFilter)
             {
-                textFilter = value;
+                this.textFilter = textFilter;
                 return this;
             }
 
-            public Builder CategoryIds(IList<string> value)
+            public Builder CategoryIds(IList<string> categoryIds)
             {
-                categoryIds = value;
+                this.categoryIds = categoryIds;
                 return this;
             }
 
-            public Builder StockLevels(IList<string> value)
+            public Builder StockLevels(IList<string> stockLevels)
             {
-                stockLevels = value;
+                this.stockLevels = stockLevels;
                 return this;
             }
 
-            public Builder EnabledLocationIds(IList<string> value)
+            public Builder EnabledLocationIds(IList<string> enabledLocationIds)
             {
-                enabledLocationIds = value;
+                this.enabledLocationIds = enabledLocationIds;
                 return this;
             }
 
-            public Builder Cursor(string value)
+            public Builder Cursor(string cursor)
             {
-                cursor = value;
+                this.cursor = cursor;
                 return this;
             }
 
-            public Builder Limit(int? value)
+            public Builder Limit(int? limit)
             {
-                limit = value;
+                this.limit = limit;
                 return this;
             }
 
-            public Builder SortOrder(string value)
+            public Builder SortOrder(string sortOrder)
             {
-                sortOrder = value;
+                this.sortOrder = sortOrder;
                 return this;
             }
 
-            public Builder ProductTypes(IList<string> value)
+            public Builder ProductTypes(IList<string> productTypes)
             {
-                productTypes = value;
+                this.productTypes = productTypes;
                 return this;
             }
 
-            public Builder CustomAttributeFilters(IList<Models.CustomAttributeFilter> value)
+            public Builder CustomAttributeFilters(IList<Models.CustomAttributeFilter> customAttributeFilters)
             {
-                customAttributeFilters = value;
+                this.customAttributeFilters = customAttributeFilters;
                 return this;
             }
 

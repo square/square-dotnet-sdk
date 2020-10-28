@@ -26,7 +26,7 @@ namespace Square.Models
         /// <summary>
         /// Unique ID that identifies the applied discount only within this order.
         /// </summary>
-        [JsonProperty("uid")]
+        [JsonProperty("uid", NullValueHandling = NullValueHandling.Ignore)]
         public string Uid { get; }
 
         /// <summary>
@@ -46,7 +46,7 @@ namespace Square.Models
         /// [Working with Monetary Amounts](https://developer.squareup.com/docs/build-basics/working-with-monetary-amounts)
         /// for more information.
         /// </summary>
-        [JsonProperty("applied_money")]
+        [JsonProperty("applied_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Money AppliedMoney { get; }
 
         public Builder ToBuilder()
@@ -67,21 +67,22 @@ namespace Square.Models
             {
                 this.discountUid = discountUid;
             }
-            public Builder DiscountUid(string value)
+
+            public Builder DiscountUid(string discountUid)
             {
-                discountUid = value;
+                this.discountUid = discountUid;
                 return this;
             }
 
-            public Builder Uid(string value)
+            public Builder Uid(string uid)
             {
-                uid = value;
+                this.uid = uid;
                 return this;
             }
 
-            public Builder AppliedMoney(Models.Money value)
+            public Builder AppliedMoney(Models.Money appliedMoney)
             {
-                appliedMoney = value;
+                this.appliedMoney = appliedMoney;
                 return this;
             }
 

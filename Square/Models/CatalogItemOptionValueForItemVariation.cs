@@ -24,13 +24,13 @@ namespace Square.Models
         /// <summary>
         /// The unique id of an item option.
         /// </summary>
-        [JsonProperty("item_option_id")]
+        [JsonProperty("item_option_id", NullValueHandling = NullValueHandling.Ignore)]
         public string ItemOptionId { get; }
 
         /// <summary>
         /// The unique id of the selected value for the item option.
         /// </summary>
-        [JsonProperty("item_option_value_id")]
+        [JsonProperty("item_option_value_id", NullValueHandling = NullValueHandling.Ignore)]
         public string ItemOptionValueId { get; }
 
         public Builder ToBuilder()
@@ -46,16 +46,17 @@ namespace Square.Models
             private string itemOptionId;
             private string itemOptionValueId;
 
-            public Builder() { }
-            public Builder ItemOptionId(string value)
+
+
+            public Builder ItemOptionId(string itemOptionId)
             {
-                itemOptionId = value;
+                this.itemOptionId = itemOptionId;
                 return this;
             }
 
-            public Builder ItemOptionValueId(string value)
+            public Builder ItemOptionValueId(string itemOptionValueId)
             {
-                itemOptionValueId = value;
+                this.itemOptionValueId = itemOptionValueId;
                 return this;
             }
 

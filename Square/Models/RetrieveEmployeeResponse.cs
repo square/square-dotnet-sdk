@@ -28,13 +28,13 @@ namespace Square.Models
         /// <summary>
         /// An employee object that is used by the external API.
         /// </summary>
-        [JsonProperty("employee")]
+        [JsonProperty("employee", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Employee Employee { get; }
 
         /// <summary>
         /// Any errors that occurred during the request.
         /// </summary>
-        [JsonProperty("errors")]
+        [JsonProperty("errors", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.Error> Errors { get; }
 
         public Builder ToBuilder()
@@ -48,18 +48,19 @@ namespace Square.Models
         public class Builder
         {
             private Models.Employee employee;
-            private IList<Models.Error> errors = new List<Models.Error>();
+            private IList<Models.Error> errors;
 
-            public Builder() { }
-            public Builder Employee(Models.Employee value)
+
+
+            public Builder Employee(Models.Employee employee)
             {
-                employee = value;
+                this.employee = employee;
                 return this;
             }
 
-            public Builder Errors(IList<Models.Error> value)
+            public Builder Errors(IList<Models.Error> errors)
             {
-                errors = value;
+                this.errors = errors;
                 return this;
             }
 

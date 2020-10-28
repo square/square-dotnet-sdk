@@ -36,50 +36,50 @@ namespace Square.Models
         /// <summary>
         /// The name of the custom attribute.
         /// </summary>
-        [JsonProperty("name")]
+        [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
         public string Name { get; }
 
         /// <summary>
         /// The string value of the custom attribute.  Populated if `type` = `STRING`.
         /// </summary>
-        [JsonProperty("string_value")]
+        [JsonProperty("string_value", NullValueHandling = NullValueHandling.Ignore)]
         public string StringValue { get; }
 
         /// <summary>
         /// __Read-only.__ The id of the [CatalogCustomAttributeDefinition](#type-CatalogCustomAttributeDefinition) this value belongs to.
         /// </summary>
-        [JsonProperty("custom_attribute_definition_id")]
+        [JsonProperty("custom_attribute_definition_id", NullValueHandling = NullValueHandling.Ignore)]
         public string CustomAttributeDefinitionId { get; }
 
         /// <summary>
         /// Defines the possible types for a custom attribute.
         /// </summary>
-        [JsonProperty("type")]
+        [JsonProperty("type", NullValueHandling = NullValueHandling.Ignore)]
         public string Type { get; }
 
         /// <summary>
         /// Populated if `type` = `NUMBER`. Contains a string
         /// representation of a decimal number, using a `.` as the decimal separator.
         /// </summary>
-        [JsonProperty("number_value")]
+        [JsonProperty("number_value", NullValueHandling = NullValueHandling.Ignore)]
         public string NumberValue { get; }
 
         /// <summary>
         /// A `true` or `false` value. Populated if `type` = `BOOLEAN`.
         /// </summary>
-        [JsonProperty("boolean_value")]
+        [JsonProperty("boolean_value", NullValueHandling = NullValueHandling.Ignore)]
         public bool? BooleanValue { get; }
 
         /// <summary>
         /// One or more choices from `allowed_selections`. Populated if `type` = `SELECTION`.
         /// </summary>
-        [JsonProperty("selection_uid_values")]
+        [JsonProperty("selection_uid_values", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> SelectionUidValues { get; }
 
         /// <summary>
         /// __Read-only.__ A copy of key from the associated `CatalogCustomAttributeDefinition`.
         /// </summary>
-        [JsonProperty("key")]
+        [JsonProperty("key", NullValueHandling = NullValueHandling.Ignore)]
         public string Key { get; }
 
         public Builder ToBuilder()
@@ -104,55 +104,56 @@ namespace Square.Models
             private string type;
             private string numberValue;
             private bool? booleanValue;
-            private IList<string> selectionUidValues = new List<string>();
+            private IList<string> selectionUidValues;
             private string key;
 
-            public Builder() { }
-            public Builder Name(string value)
+
+
+            public Builder Name(string name)
             {
-                name = value;
+                this.name = name;
                 return this;
             }
 
-            public Builder StringValue(string value)
+            public Builder StringValue(string stringValue)
             {
-                stringValue = value;
+                this.stringValue = stringValue;
                 return this;
             }
 
-            public Builder CustomAttributeDefinitionId(string value)
+            public Builder CustomAttributeDefinitionId(string customAttributeDefinitionId)
             {
-                customAttributeDefinitionId = value;
+                this.customAttributeDefinitionId = customAttributeDefinitionId;
                 return this;
             }
 
-            public Builder Type(string value)
+            public Builder Type(string type)
             {
-                type = value;
+                this.type = type;
                 return this;
             }
 
-            public Builder NumberValue(string value)
+            public Builder NumberValue(string numberValue)
             {
-                numberValue = value;
+                this.numberValue = numberValue;
                 return this;
             }
 
-            public Builder BooleanValue(bool? value)
+            public Builder BooleanValue(bool? booleanValue)
             {
-                booleanValue = value;
+                this.booleanValue = booleanValue;
                 return this;
             }
 
-            public Builder SelectionUidValues(IList<string> value)
+            public Builder SelectionUidValues(IList<string> selectionUidValues)
             {
-                selectionUidValues = value;
+                this.selectionUidValues = selectionUidValues;
                 return this;
             }
 
-            public Builder Key(string value)
+            public Builder Key(string key)
             {
-                key = value;
+                this.key = key;
                 return this;
             }
 

@@ -22,8 +22,8 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// A unique string that identifies this CreateCheckout request. Keys can be any valid string but
-        /// must be unique for every CreateCheckout request.
+        /// A unique string that identifies this `CreateCheckout` request. Keys can be any valid string but
+        /// must be unique for every `CreateCheckout` request.
         /// See [Idempotency keys](https://developer.squareup.com/docs/basics/api101/idempotency) for more information.
         /// </summary>
         [JsonProperty("idempotency_key")]
@@ -53,15 +53,16 @@ namespace Square.Models
                 this.idempotencyKey = idempotencyKey;
                 this.checkout = checkout;
             }
-            public Builder IdempotencyKey(string value)
+
+            public Builder IdempotencyKey(string idempotencyKey)
             {
-                idempotencyKey = value;
+                this.idempotencyKey = idempotencyKey;
                 return this;
             }
 
-            public Builder Checkout(Models.TerminalCheckout value)
+            public Builder Checkout(Models.TerminalCheckout checkout)
             {
-                checkout = value;
+                this.checkout = checkout;
                 return this;
             }
 

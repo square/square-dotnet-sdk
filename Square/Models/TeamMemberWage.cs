@@ -28,19 +28,19 @@ namespace Square.Models
         /// <summary>
         /// UUID for this object.
         /// </summary>
-        [JsonProperty("id")]
+        [JsonProperty("id", NullValueHandling = NullValueHandling.Ignore)]
         public string Id { get; }
 
         /// <summary>
         /// The `Team Member` that this wage is assigned to.
         /// </summary>
-        [JsonProperty("team_member_id")]
+        [JsonProperty("team_member_id", NullValueHandling = NullValueHandling.Ignore)]
         public string TeamMemberId { get; }
 
         /// <summary>
         /// The job title that this wage relates to.
         /// </summary>
-        [JsonProperty("title")]
+        [JsonProperty("title", NullValueHandling = NullValueHandling.Ignore)]
         public string Title { get; }
 
         /// <summary>
@@ -51,7 +51,7 @@ namespace Square.Models
         /// [Working with Monetary Amounts](https://developer.squareup.com/docs/build-basics/working-with-monetary-amounts)
         /// for more information.
         /// </summary>
-        [JsonProperty("hourly_rate")]
+        [JsonProperty("hourly_rate", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Money HourlyRate { get; }
 
         public Builder ToBuilder()
@@ -71,28 +71,29 @@ namespace Square.Models
             private string title;
             private Models.Money hourlyRate;
 
-            public Builder() { }
-            public Builder Id(string value)
+
+
+            public Builder Id(string id)
             {
-                id = value;
+                this.id = id;
                 return this;
             }
 
-            public Builder TeamMemberId(string value)
+            public Builder TeamMemberId(string teamMemberId)
             {
-                teamMemberId = value;
+                this.teamMemberId = teamMemberId;
                 return this;
             }
 
-            public Builder Title(string value)
+            public Builder Title(string title)
             {
-                title = value;
+                this.title = title;
                 return this;
             }
 
-            public Builder HourlyRate(Models.Money value)
+            public Builder HourlyRate(Models.Money hourlyRate)
             {
-                hourlyRate = value;
+                this.hourlyRate = hourlyRate;
                 return this;
             }
 

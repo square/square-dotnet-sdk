@@ -30,20 +30,20 @@ namespace Square.Models
         /// <summary>
         /// The filtered list of `TeamMember` objects.
         /// </summary>
-        [JsonProperty("team_members")]
+        [JsonProperty("team_members", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.TeamMember> TeamMembers { get; }
 
         /// <summary>
         /// The opaque cursor for fetching the next page. Read about
         /// [pagination](https://developer.squareup.com/docs/docs/working-with-apis/pagination) with Square APIs for more information.
         /// </summary>
-        [JsonProperty("cursor")]
+        [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
         public string Cursor { get; }
 
         /// <summary>
         /// The errors that occurred during the request.
         /// </summary>
-        [JsonProperty("errors")]
+        [JsonProperty("errors", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.Error> Errors { get; }
 
         public Builder ToBuilder()
@@ -57,26 +57,27 @@ namespace Square.Models
 
         public class Builder
         {
-            private IList<Models.TeamMember> teamMembers = new List<Models.TeamMember>();
+            private IList<Models.TeamMember> teamMembers;
             private string cursor;
-            private IList<Models.Error> errors = new List<Models.Error>();
+            private IList<Models.Error> errors;
 
-            public Builder() { }
-            public Builder TeamMembers(IList<Models.TeamMember> value)
+
+
+            public Builder TeamMembers(IList<Models.TeamMember> teamMembers)
             {
-                teamMembers = value;
+                this.teamMembers = teamMembers;
                 return this;
             }
 
-            public Builder Cursor(string value)
+            public Builder Cursor(string cursor)
             {
-                cursor = value;
+                this.cursor = cursor;
                 return this;
             }
 
-            public Builder Errors(IList<Models.Error> value)
+            public Builder Errors(IList<Models.Error> errors)
             {
-                errors = value;
+                this.errors = errors;
                 return this;
             }
 

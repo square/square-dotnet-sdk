@@ -40,9 +40,10 @@ namespace Square.Models
             {
                 this.workweekConfig = workweekConfig;
             }
-            public Builder WorkweekConfig(Models.WorkweekConfig value)
+
+            public Builder WorkweekConfig(Models.WorkweekConfig workweekConfig)
             {
-                workweekConfig = value;
+                this.workweekConfig = workweekConfig;
                 return this;
             }
 

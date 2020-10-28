@@ -43,9 +43,10 @@ namespace Square.Models
             {
                 this.createdAt = createdAt;
             }
-            public Builder CreatedAt(Models.TimeRange value)
+
+            public Builder CreatedAt(Models.TimeRange createdAt)
             {
-                createdAt = value;
+                this.createdAt = createdAt;
                 return this;
             }
 

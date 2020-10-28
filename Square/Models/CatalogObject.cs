@@ -95,40 +95,40 @@ namespace Square.Models
         /// Last modification [timestamp](https://developer.squareup.com/docs/build-basics/working-with-dates) in RFC 3339 format, e.g., `"2016-08-15T23:59:33.123Z"`
         /// would indicate the UTC time (denoted by `Z`) of August 15, 2016 at 23:59:33 and 123 milliseconds.
         /// </summary>
-        [JsonProperty("updated_at")]
+        [JsonProperty("updated_at", NullValueHandling = NullValueHandling.Ignore)]
         public string UpdatedAt { get; }
 
         /// <summary>
         /// The version of the object. When updating an object, the version supplied
         /// must match the version in the database, otherwise the write will be rejected as conflicting.
         /// </summary>
-        [JsonProperty("version")]
+        [JsonProperty("version", NullValueHandling = NullValueHandling.Ignore)]
         public long? Version { get; }
 
         /// <summary>
         /// If `true`, the object has been deleted from the database. Must be `false` for new objects
         /// being inserted. When deleted, the `updated_at` field will equal the deletion time.
         /// </summary>
-        [JsonProperty("is_deleted")]
+        [JsonProperty("is_deleted", NullValueHandling = NullValueHandling.Ignore)]
         public bool? IsDeleted { get; }
 
         /// <summary>
-        /// A map (key-value pairs) of application-defined custom attribute values. The value of a key-value pair 
-        /// is a [CatalogCustomAttributeValue](#type-CatalogCustomAttributeValue) object. The key is the `key` attribute 
-        /// value defined in the associated [CatalogCustomAttributeDefinition](#type-CatalogCustomAttributeDefinition) 
-        /// object defined by the application making the request. 
-        /// If the `CatalogCustomAttributeDefinition` object is 
-        /// defined by another application, the `CatalogCustomAttributeDefinition`'s key attribute value is prefixed by 
-        /// the defining application ID. For example, if the `CatalogCustomAttributeDefinition` has a `key` attribute of 
-        /// "cocoa_brand" and the defining application ID is "abcd1234", the key in the map is "abcd1234:cocoa_brand" if the
-        /// application making the request is different from the application defining the custom attribute definition. 
-        /// Otherwise, the key used in the map is simply "cocoa-brand".
+        /// A map (key-value pairs) of application-defined custom attribute values. The value of a key-value pair
+        /// is a [CatalogCustomAttributeValue](#type-CatalogCustomAttributeValue) object. The key is the `key` attribute
+        /// value defined in the associated [CatalogCustomAttributeDefinition](#type-CatalogCustomAttributeDefinition)
+        /// object defined by the application making the request.
+        /// If the `CatalogCustomAttributeDefinition` object is
+        /// defined by another application, the `CatalogCustomAttributeDefinition`'s key attribute value is prefixed by
+        /// the defining application ID. For example, if the `CatalogCustomAttributeDefinition` has a `key` attribute of
+        /// `"cocoa_brand"` and the defining application ID is `"abcd1234"`, the key in the map is `"abcd1234:cocoa_brand"`
+        /// if the application making the request is different from the application defining the custom attribute definition.
+        /// Otherwise, the key used in the map is simply `"cocoa_brand"`.
         /// Application-defined custom attributes that are set at a global (location-independent) level.
         /// Custom attribute values are intended to store additional information about a catalog object
         /// or associations with an entity in another system. Do not use custom attributes
         /// to store any sensitive information (personally identifiable information, card details, etc.).
         /// </summary>
-        [JsonProperty("custom_attribute_values")]
+        [JsonProperty("custom_attribute_values", NullValueHandling = NullValueHandling.Ignore)]
         public IDictionary<string, Models.CatalogCustomAttributeValue> CustomAttributeValues { get; }
 
         /// <summary>
@@ -136,7 +136,7 @@ namespace Square.Models
         /// differ from the object's Connect V2 ID. The field will only be present for objects that
         /// have been created or modified by legacy APIs.
         /// </summary>
-        [JsonProperty("catalog_v1_ids")]
+        [JsonProperty("catalog_v1_ids", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.CatalogV1Id> CatalogV1Ids { get; }
 
         /// <summary>
@@ -144,56 +144,56 @@ namespace Square.Models
         /// the `absent_at_location_ids` field. If `false`, this object is not present at any locations (including future locations),
         /// except where specified in the `present_at_location_ids` field. If not specified, defaults to `true`.
         /// </summary>
-        [JsonProperty("present_at_all_locations")]
+        [JsonProperty("present_at_all_locations", NullValueHandling = NullValueHandling.Ignore)]
         public bool? PresentAtAllLocations { get; }
 
         /// <summary>
         /// A list of locations where the object is present, even if `present_at_all_locations` is `false`.
         /// </summary>
-        [JsonProperty("present_at_location_ids")]
+        [JsonProperty("present_at_location_ids", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> PresentAtLocationIds { get; }
 
         /// <summary>
         /// A list of locations where the object is not present, even if `present_at_all_locations` is `true`.
         /// </summary>
-        [JsonProperty("absent_at_location_ids")]
+        [JsonProperty("absent_at_location_ids", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> AbsentAtLocationIds { get; }
 
         /// <summary>
         /// Identifies the `CatalogImage` attached to this `CatalogObject`.
         /// </summary>
-        [JsonProperty("image_id")]
+        [JsonProperty("image_id", NullValueHandling = NullValueHandling.Ignore)]
         public string ImageId { get; }
 
         /// <summary>
         /// An [CatalogObject](#type-CatalogObject) instance of the `ITEM` type, also referred to as an item, in the catalog.
         /// </summary>
-        [JsonProperty("item_data")]
+        [JsonProperty("item_data", NullValueHandling = NullValueHandling.Ignore)]
         public Models.CatalogItem ItemData { get; }
 
         /// <summary>
         /// A category to which a `CatalogItem` instance belongs.
         /// </summary>
-        [JsonProperty("category_data")]
+        [JsonProperty("category_data", NullValueHandling = NullValueHandling.Ignore)]
         public Models.CatalogCategory CategoryData { get; }
 
         /// <summary>
         /// An item variation (i.e., product) in the Catalog object model. Each item
         /// may have a maximum of 250 item variations.
         /// </summary>
-        [JsonProperty("item_variation_data")]
+        [JsonProperty("item_variation_data", NullValueHandling = NullValueHandling.Ignore)]
         public Models.CatalogItemVariation ItemVariationData { get; }
 
         /// <summary>
         /// A tax applicable to an item.
         /// </summary>
-        [JsonProperty("tax_data")]
+        [JsonProperty("tax_data", NullValueHandling = NullValueHandling.Ignore)]
         public Models.CatalogTax TaxData { get; }
 
         /// <summary>
         /// A discount applicable to items.
         /// </summary>
-        [JsonProperty("discount_data")]
+        [JsonProperty("discount_data", NullValueHandling = NullValueHandling.Ignore)]
         public Models.CatalogDiscount DiscountData { get; }
 
         /// <summary>
@@ -203,19 +203,19 @@ namespace Square.Models
         /// Use the `selection_type` field to specify whether or not multiple selections from
         /// the modifier list are allowed.
         /// </summary>
-        [JsonProperty("modifier_list_data")]
+        [JsonProperty("modifier_list_data", NullValueHandling = NullValueHandling.Ignore)]
         public Models.CatalogModifierList ModifierListData { get; }
 
         /// <summary>
         /// A modifier applicable to items at the time of sale.
         /// </summary>
-        [JsonProperty("modifier_data")]
+        [JsonProperty("modifier_data", NullValueHandling = NullValueHandling.Ignore)]
         public Models.CatalogModifier ModifierData { get; }
 
         /// <summary>
         /// Represents a time period - either a single period or a repeating period.
         /// </summary>
-        [JsonProperty("time_period_data")]
+        [JsonProperty("time_period_data", NullValueHandling = NullValueHandling.Ignore)]
         public Models.CatalogTimePeriod TimePeriodData { get; }
 
         /// <summary>
@@ -225,41 +225,41 @@ namespace Square.Models
         /// items and associated item variations in the product set. Including an item in
         /// a product set will also include its item variations.
         /// </summary>
-        [JsonProperty("product_set_data")]
+        [JsonProperty("product_set_data", NullValueHandling = NullValueHandling.Ignore)]
         public Models.CatalogProductSet ProductSetData { get; }
 
         /// <summary>
-        /// Defines how discounts are automatically applied to a set of items that match the pricing rule 
+        /// Defines how discounts are automatically applied to a set of items that match the pricing rule
         /// during the active time period.
         /// </summary>
-        [JsonProperty("pricing_rule_data")]
+        [JsonProperty("pricing_rule_data", NullValueHandling = NullValueHandling.Ignore)]
         public Models.CatalogPricingRule PricingRuleData { get; }
 
         /// <summary>
         /// An image file to use in Square catalogs. It can be associated with catalog
         /// items, item variations, and categories.
         /// </summary>
-        [JsonProperty("image_data")]
+        [JsonProperty("image_data", NullValueHandling = NullValueHandling.Ignore)]
         public Models.CatalogImage ImageData { get; }
 
         /// <summary>
         /// Represents the unit used to measure a `CatalogItemVariation` and
         /// specifies the precision for decimal quantities.
         /// </summary>
-        [JsonProperty("measurement_unit_data")]
+        [JsonProperty("measurement_unit_data", NullValueHandling = NullValueHandling.Ignore)]
         public Models.CatalogMeasurementUnit MeasurementUnitData { get; }
 
         /// <summary>
         /// Describes a subscription plan. For more information, see
         /// [Set Up and Manage a Subscription Plan](https://developer.squareup.com/docs/docs/subscriptions-api/setup-plan).
         /// </summary>
-        [JsonProperty("subscription_plan_data")]
+        [JsonProperty("subscription_plan_data", NullValueHandling = NullValueHandling.Ignore)]
         public Models.CatalogSubscriptionPlan SubscriptionPlanData { get; }
 
         /// <summary>
         /// A group of variations for a `CatalogItem`.
         /// </summary>
-        [JsonProperty("item_option_data")]
+        [JsonProperty("item_option_data", NullValueHandling = NullValueHandling.Ignore)]
         public Models.CatalogItemOption ItemOptionData { get; }
 
         /// <summary>
@@ -267,7 +267,7 @@ namespace Square.Models
         /// `CatalogItemVariation` to an item option as one of
         /// its item option values.
         /// </summary>
-        [JsonProperty("item_option_value_data")]
+        [JsonProperty("item_option_value_data", NullValueHandling = NullValueHandling.Ignore)]
         public Models.CatalogItemOptionValue ItemOptionValueData { get; }
 
         /// <summary>
@@ -277,13 +277,13 @@ namespace Square.Models
         /// to store any sensitive information (personally identifiable information, card details, etc.).
         /// [Read more about custom attributes](https://developer.squareup.com/docs/catalog-api/add-custom-attributes)
         /// </summary>
-        [JsonProperty("custom_attribute_definition_data")]
+        [JsonProperty("custom_attribute_definition_data", NullValueHandling = NullValueHandling.Ignore)]
         public Models.CatalogCustomAttributeDefinition CustomAttributeDefinitionData { get; }
 
         /// <summary>
         /// A parent Catalog Object model represents a set of Quick Amounts and the settings control the amounts.
         /// </summary>
-        [JsonProperty("quick_amounts_settings_data")]
+        [JsonProperty("quick_amounts_settings_data", NullValueHandling = NullValueHandling.Ignore)]
         public Models.CatalogQuickAmountsSettings QuickAmountsSettingsData { get; }
 
         public Builder ToBuilder()
@@ -326,11 +326,11 @@ namespace Square.Models
             private string updatedAt;
             private long? version;
             private bool? isDeleted;
-            private IDictionary<string, Models.CatalogCustomAttributeValue> customAttributeValues = new Dictionary<string, Models.CatalogCustomAttributeValue>();
-            private IList<Models.CatalogV1Id> catalogV1Ids = new List<Models.CatalogV1Id>();
+            private IDictionary<string, Models.CatalogCustomAttributeValue> customAttributeValues;
+            private IList<Models.CatalogV1Id> catalogV1Ids;
             private bool? presentAtAllLocations;
-            private IList<string> presentAtLocationIds = new List<string>();
-            private IList<string> absentAtLocationIds = new List<string>();
+            private IList<string> presentAtLocationIds;
+            private IList<string> absentAtLocationIds;
             private string imageId;
             private Models.CatalogItem itemData;
             private Models.CatalogCategory categoryData;
@@ -356,171 +356,172 @@ namespace Square.Models
                 this.type = type;
                 this.id = id;
             }
-            public Builder Type(string value)
+
+            public Builder Type(string type)
             {
-                type = value;
+                this.type = type;
                 return this;
             }
 
-            public Builder Id(string value)
+            public Builder Id(string id)
             {
-                id = value;
+                this.id = id;
                 return this;
             }
 
-            public Builder UpdatedAt(string value)
+            public Builder UpdatedAt(string updatedAt)
             {
-                updatedAt = value;
+                this.updatedAt = updatedAt;
                 return this;
             }
 
-            public Builder Version(long? value)
+            public Builder Version(long? version)
             {
-                version = value;
+                this.version = version;
                 return this;
             }
 
-            public Builder IsDeleted(bool? value)
+            public Builder IsDeleted(bool? isDeleted)
             {
-                isDeleted = value;
+                this.isDeleted = isDeleted;
                 return this;
             }
 
-            public Builder CustomAttributeValues(IDictionary<string, Models.CatalogCustomAttributeValue> value)
+            public Builder CustomAttributeValues(IDictionary<string, Models.CatalogCustomAttributeValue> customAttributeValues)
             {
-                customAttributeValues = value;
+                this.customAttributeValues = customAttributeValues;
                 return this;
             }
 
-            public Builder CatalogV1Ids(IList<Models.CatalogV1Id> value)
+            public Builder CatalogV1Ids(IList<Models.CatalogV1Id> catalogV1Ids)
             {
-                catalogV1Ids = value;
+                this.catalogV1Ids = catalogV1Ids;
                 return this;
             }
 
-            public Builder PresentAtAllLocations(bool? value)
+            public Builder PresentAtAllLocations(bool? presentAtAllLocations)
             {
-                presentAtAllLocations = value;
+                this.presentAtAllLocations = presentAtAllLocations;
                 return this;
             }
 
-            public Builder PresentAtLocationIds(IList<string> value)
+            public Builder PresentAtLocationIds(IList<string> presentAtLocationIds)
             {
-                presentAtLocationIds = value;
+                this.presentAtLocationIds = presentAtLocationIds;
                 return this;
             }
 
-            public Builder AbsentAtLocationIds(IList<string> value)
+            public Builder AbsentAtLocationIds(IList<string> absentAtLocationIds)
             {
-                absentAtLocationIds = value;
+                this.absentAtLocationIds = absentAtLocationIds;
                 return this;
             }
 
-            public Builder ImageId(string value)
+            public Builder ImageId(string imageId)
             {
-                imageId = value;
+                this.imageId = imageId;
                 return this;
             }
 
-            public Builder ItemData(Models.CatalogItem value)
+            public Builder ItemData(Models.CatalogItem itemData)
             {
-                itemData = value;
+                this.itemData = itemData;
                 return this;
             }
 
-            public Builder CategoryData(Models.CatalogCategory value)
+            public Builder CategoryData(Models.CatalogCategory categoryData)
             {
-                categoryData = value;
+                this.categoryData = categoryData;
                 return this;
             }
 
-            public Builder ItemVariationData(Models.CatalogItemVariation value)
+            public Builder ItemVariationData(Models.CatalogItemVariation itemVariationData)
             {
-                itemVariationData = value;
+                this.itemVariationData = itemVariationData;
                 return this;
             }
 
-            public Builder TaxData(Models.CatalogTax value)
+            public Builder TaxData(Models.CatalogTax taxData)
             {
-                taxData = value;
+                this.taxData = taxData;
                 return this;
             }
 
-            public Builder DiscountData(Models.CatalogDiscount value)
+            public Builder DiscountData(Models.CatalogDiscount discountData)
             {
-                discountData = value;
+                this.discountData = discountData;
                 return this;
             }
 
-            public Builder ModifierListData(Models.CatalogModifierList value)
+            public Builder ModifierListData(Models.CatalogModifierList modifierListData)
             {
-                modifierListData = value;
+                this.modifierListData = modifierListData;
                 return this;
             }
 
-            public Builder ModifierData(Models.CatalogModifier value)
+            public Builder ModifierData(Models.CatalogModifier modifierData)
             {
-                modifierData = value;
+                this.modifierData = modifierData;
                 return this;
             }
 
-            public Builder TimePeriodData(Models.CatalogTimePeriod value)
+            public Builder TimePeriodData(Models.CatalogTimePeriod timePeriodData)
             {
-                timePeriodData = value;
+                this.timePeriodData = timePeriodData;
                 return this;
             }
 
-            public Builder ProductSetData(Models.CatalogProductSet value)
+            public Builder ProductSetData(Models.CatalogProductSet productSetData)
             {
-                productSetData = value;
+                this.productSetData = productSetData;
                 return this;
             }
 
-            public Builder PricingRuleData(Models.CatalogPricingRule value)
+            public Builder PricingRuleData(Models.CatalogPricingRule pricingRuleData)
             {
-                pricingRuleData = value;
+                this.pricingRuleData = pricingRuleData;
                 return this;
             }
 
-            public Builder ImageData(Models.CatalogImage value)
+            public Builder ImageData(Models.CatalogImage imageData)
             {
-                imageData = value;
+                this.imageData = imageData;
                 return this;
             }
 
-            public Builder MeasurementUnitData(Models.CatalogMeasurementUnit value)
+            public Builder MeasurementUnitData(Models.CatalogMeasurementUnit measurementUnitData)
             {
-                measurementUnitData = value;
+                this.measurementUnitData = measurementUnitData;
                 return this;
             }
 
-            public Builder SubscriptionPlanData(Models.CatalogSubscriptionPlan value)
+            public Builder SubscriptionPlanData(Models.CatalogSubscriptionPlan subscriptionPlanData)
             {
-                subscriptionPlanData = value;
+                this.subscriptionPlanData = subscriptionPlanData;
                 return this;
             }
 
-            public Builder ItemOptionData(Models.CatalogItemOption value)
+            public Builder ItemOptionData(Models.CatalogItemOption itemOptionData)
             {
-                itemOptionData = value;
+                this.itemOptionData = itemOptionData;
                 return this;
             }
 
-            public Builder ItemOptionValueData(Models.CatalogItemOptionValue value)
+            public Builder ItemOptionValueData(Models.CatalogItemOptionValue itemOptionValueData)
             {
-                itemOptionValueData = value;
+                this.itemOptionValueData = itemOptionValueData;
                 return this;
             }
 
-            public Builder CustomAttributeDefinitionData(Models.CatalogCustomAttributeDefinition value)
+            public Builder CustomAttributeDefinitionData(Models.CatalogCustomAttributeDefinition customAttributeDefinitionData)
             {
-                customAttributeDefinitionData = value;
+                this.customAttributeDefinitionData = customAttributeDefinitionData;
                 return this;
             }
 
-            public Builder QuickAmountsSettingsData(Models.CatalogQuickAmountsSettings value)
+            public Builder QuickAmountsSettingsData(Models.CatalogQuickAmountsSettings quickAmountsSettingsData)
             {
-                quickAmountsSettingsData = value;
+                this.quickAmountsSettingsData = quickAmountsSettingsData;
                 return this;
             }
 

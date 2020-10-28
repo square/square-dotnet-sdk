@@ -36,67 +36,68 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// Timestamp for the beginning of the reporting period, in RFC 3339 format.
+        /// The timestamp for the beginning of the reporting period, in RFC 3339 format.
         /// Inclusive. Default: The current time minus one year.
         /// </summary>
-        [JsonProperty("begin_time")]
+        [JsonProperty("begin_time", NullValueHandling = NullValueHandling.Ignore)]
         public string BeginTime { get; }
 
         /// <summary>
-        /// Timestamp for the end of the requested reporting period, in RFC 3339 format.
+        /// The timestamp for the end of the reporting period, in RFC 3339 format.
         /// Default: The current time.
         /// </summary>
-        [JsonProperty("end_time")]
+        [JsonProperty("end_time", NullValueHandling = NullValueHandling.Ignore)]
         public string EndTime { get; }
 
         /// <summary>
-        /// The order in which results are listed.
-        /// - `ASC` - oldest to newest
-        /// - `DESC` - newest to oldest (default).
+        /// The order in which results are listed:
+        /// - `ASC` - Oldest to newest.
+        /// - `DESC` - Newest to oldest (default).
         /// </summary>
-        [JsonProperty("sort_order")]
+        [JsonProperty("sort_order", NullValueHandling = NullValueHandling.Ignore)]
         public string SortOrder { get; }
 
         /// <summary>
         /// A pagination cursor returned by a previous call to this endpoint.
-        /// Provide this to retrieve the next set of results for the original query.
-        /// See [Pagination](https://developer.squareup.com/docs/basics/api101/pagination) for more information.
+        /// Provide this cursor to retrieve the next set of results for the original query.
+        /// For more information, see [Pagination](https://developer.squareup.com/docs/basics/api101/pagination).
         /// </summary>
-        [JsonProperty("cursor")]
+        [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
         public string Cursor { get; }
 
         /// <summary>
         /// Limit results to the location supplied. By default, results are returned
-        /// for the default (main) location associated with the merchant.
+        /// for the default (main) location associated with the seller.
         /// </summary>
-        [JsonProperty("location_id")]
+        [JsonProperty("location_id", NullValueHandling = NullValueHandling.Ignore)]
         public string LocationId { get; }
 
         /// <summary>
-        /// The exact amount in the total_money for a `Payment`.
+        /// The exact amount in the `total_money` for a payment.
         /// </summary>
-        [JsonProperty("total")]
+        [JsonProperty("total", NullValueHandling = NullValueHandling.Ignore)]
         public long? Total { get; }
 
         /// <summary>
-        /// The last 4 digits of `Payment` card.
+        /// The last four digits of a payment card.
         /// </summary>
-        [JsonProperty("last_4")]
+        [JsonProperty("last_4", NullValueHandling = NullValueHandling.Ignore)]
         public string Last4 { get; }
 
         /// <summary>
-        /// The brand of `Payment` card. For example, `VISA`
+        /// The brand of the payment card (for example, VISA).
         /// </summary>
-        [JsonProperty("card_brand")]
+        [JsonProperty("card_brand", NullValueHandling = NullValueHandling.Ignore)]
         public string CardBrand { get; }
 
         /// <summary>
-        /// Maximum number of results to be returned in a single page.
+        /// The maximum number of results to be returned in a single page.
         /// It is possible to receive fewer results than the specified limit on a given page.
-        /// If the supplied value is greater than 100, at most 100 results will be returned.
+        /// The default value of 100 is also the maximum allowed value. If the provided value is 
+        /// greater than 100, it is ignored and the default value is used instead.
         /// Default: `100`
         /// </summary>
-        [JsonProperty("limit")]
+        [JsonProperty("limit", NullValueHandling = NullValueHandling.Ignore)]
         public int? Limit { get; }
 
         public Builder ToBuilder()
@@ -126,58 +127,59 @@ namespace Square.Models
             private string cardBrand;
             private int? limit;
 
-            public Builder() { }
-            public Builder BeginTime(string value)
+
+
+            public Builder BeginTime(string beginTime)
             {
-                beginTime = value;
+                this.beginTime = beginTime;
                 return this;
             }
 
-            public Builder EndTime(string value)
+            public Builder EndTime(string endTime)
             {
-                endTime = value;
+                this.endTime = endTime;
                 return this;
             }
 
-            public Builder SortOrder(string value)
+            public Builder SortOrder(string sortOrder)
             {
-                sortOrder = value;
+                this.sortOrder = sortOrder;
                 return this;
             }
 
-            public Builder Cursor(string value)
+            public Builder Cursor(string cursor)
             {
-                cursor = value;
+                this.cursor = cursor;
                 return this;
             }
 
-            public Builder LocationId(string value)
+            public Builder LocationId(string locationId)
             {
-                locationId = value;
+                this.locationId = locationId;
                 return this;
             }
 
-            public Builder Total(long? value)
+            public Builder Total(long? total)
             {
-                total = value;
+                this.total = total;
                 return this;
             }
 
-            public Builder Last4(string value)
+            public Builder Last4(string last4)
             {
-                last4 = value;
+                this.last4 = last4;
                 return this;
             }
 
-            public Builder CardBrand(string value)
+            public Builder CardBrand(string cardBrand)
             {
-                cardBrand = value;
+                this.cardBrand = cardBrand;
                 return this;
             }
 
-            public Builder Limit(int? value)
+            public Builder Limit(int? limit)
             {
-                limit = value;
+                this.limit = limit;
                 return this;
             }
 

@@ -46,13 +46,13 @@ namespace Square.Models
         /// Describes the ranking of the Quick Amount provided by machine learning model, in the range [0, 100].
         /// MANUAL type amount will always have score = 100.
         /// </summary>
-        [JsonProperty("score")]
+        [JsonProperty("score", NullValueHandling = NullValueHandling.Ignore)]
         public long? Score { get; }
 
         /// <summary>
         /// The order in which this Quick Amount should be displayed.
         /// </summary>
-        [JsonProperty("ordinal")]
+        [JsonProperty("ordinal", NullValueHandling = NullValueHandling.Ignore)]
         public long? Ordinal { get; }
 
         public Builder ToBuilder()
@@ -77,27 +77,28 @@ namespace Square.Models
                 this.type = type;
                 this.amount = amount;
             }
-            public Builder Type(string value)
+
+            public Builder Type(string type)
             {
-                type = value;
+                this.type = type;
                 return this;
             }
 
-            public Builder Amount(Models.Money value)
+            public Builder Amount(Models.Money amount)
             {
-                amount = value;
+                this.amount = amount;
                 return this;
             }
 
-            public Builder Score(long? value)
+            public Builder Score(long? score)
             {
-                score = value;
+                this.score = score;
                 return this;
             }
 
-            public Builder Ordinal(long? value)
+            public Builder Ordinal(long? ordinal)
             {
-                ordinal = value;
+                this.ordinal = ordinal;
                 return this;
             }
 

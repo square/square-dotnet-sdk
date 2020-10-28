@@ -24,13 +24,13 @@ namespace Square.Models
         /// <summary>
         /// Maximum number of Workweek Configs to return per page.
         /// </summary>
-        [JsonProperty("limit")]
+        [JsonProperty("limit", NullValueHandling = NullValueHandling.Ignore)]
         public int? Limit { get; }
 
         /// <summary>
         /// Pointer to the next page of Workweek Config results to fetch.
         /// </summary>
-        [JsonProperty("cursor")]
+        [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
         public string Cursor { get; }
 
         public Builder ToBuilder()
@@ -46,16 +46,17 @@ namespace Square.Models
             private int? limit;
             private string cursor;
 
-            public Builder() { }
-            public Builder Limit(int? value)
+
+
+            public Builder Limit(int? limit)
             {
-                limit = value;
+                this.limit = limit;
                 return this;
             }
 
-            public Builder Cursor(string value)
+            public Builder Cursor(string cursor)
             {
-                cursor = value;
+                this.cursor = cursor;
                 return this;
             }
 

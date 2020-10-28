@@ -26,7 +26,7 @@ namespace Square.Models
         /// extended format for calendar dates.
         /// The beginning of a date range (inclusive)
         /// </summary>
-        [JsonProperty("start_date")]
+        [JsonProperty("start_date", NullValueHandling = NullValueHandling.Ignore)]
         public string StartDate { get; }
 
         /// <summary>
@@ -34,7 +34,7 @@ namespace Square.Models
         /// extended format for calendar dates.
         /// The end of a date range (inclusive)
         /// </summary>
-        [JsonProperty("end_date")]
+        [JsonProperty("end_date", NullValueHandling = NullValueHandling.Ignore)]
         public string EndDate { get; }
 
         public Builder ToBuilder()
@@ -50,16 +50,17 @@ namespace Square.Models
             private string startDate;
             private string endDate;
 
-            public Builder() { }
-            public Builder StartDate(string value)
+
+
+            public Builder StartDate(string startDate)
             {
-                startDate = value;
+                this.startDate = startDate;
                 return this;
             }
 
-            public Builder EndDate(string value)
+            public Builder EndDate(string endDate)
             {
-                endDate = value;
+                this.endDate = endDate;
                 return this;
             }
 

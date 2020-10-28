@@ -40,13 +40,13 @@ namespace Square.Models
         /// <summary>
         /// Represents a physical address.
         /// </summary>
-        [JsonProperty("billing_address")]
+        [JsonProperty("billing_address", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Address BillingAddress { get; }
 
         /// <summary>
         /// The full name printed on the credit card.
         /// </summary>
-        [JsonProperty("cardholder_name")]
+        [JsonProperty("cardholder_name", NullValueHandling = NullValueHandling.Ignore)]
         public string CardholderName { get; }
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace Square.Models
         /// Verification tokens encapsulate customer device information and 3-D Secure
         /// challenge results to indicate that Square has verified the buyer identity.
         /// </summary>
-        [JsonProperty("verification_token")]
+        [JsonProperty("verification_token", NullValueHandling = NullValueHandling.Ignore)]
         public string VerificationToken { get; }
 
         public Builder ToBuilder()
@@ -77,27 +77,28 @@ namespace Square.Models
             {
                 this.cardNonce = cardNonce;
             }
-            public Builder CardNonce(string value)
+
+            public Builder CardNonce(string cardNonce)
             {
-                cardNonce = value;
+                this.cardNonce = cardNonce;
                 return this;
             }
 
-            public Builder BillingAddress(Models.Address value)
+            public Builder BillingAddress(Models.Address billingAddress)
             {
-                billingAddress = value;
+                this.billingAddress = billingAddress;
                 return this;
             }
 
-            public Builder CardholderName(string value)
+            public Builder CardholderName(string cardholderName)
             {
-                cardholderName = value;
+                this.cardholderName = cardholderName;
                 return this;
             }
 
-            public Builder VerificationToken(string value)
+            public Builder VerificationToken(string verificationToken)
             {
-                verificationToken = value;
+                this.verificationToken = verificationToken;
                 return this;
             }
 

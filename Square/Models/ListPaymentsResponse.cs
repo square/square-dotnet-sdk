@@ -28,23 +28,23 @@ namespace Square.Models
         public HttpContext Context { get; internal set; }
 
         /// <summary>
-        /// Information on errors encountered during the request.
+        /// Information about errors encountered during the request.
         /// </summary>
-        [JsonProperty("errors")]
+        [JsonProperty("errors", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.Error> Errors { get; }
 
         /// <summary>
-        /// The requested list of `Payment`s.
+        /// The requested list of payments.
         /// </summary>
-        [JsonProperty("payments")]
+        [JsonProperty("payments", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.Payment> Payments { get; }
 
         /// <summary>
         /// The pagination cursor to be used in a subsequent request. If empty,
         /// this is the final response.
-        /// See [Pagination](https://developer.squareup.com/docs/basics/api101/pagination) for more information.
+        /// For more information, see [Pagination](https://developer.squareup.com/docs/basics/api101/pagination).
         /// </summary>
-        [JsonProperty("cursor")]
+        [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
         public string Cursor { get; }
 
         public Builder ToBuilder()
@@ -58,26 +58,27 @@ namespace Square.Models
 
         public class Builder
         {
-            private IList<Models.Error> errors = new List<Models.Error>();
-            private IList<Models.Payment> payments = new List<Models.Payment>();
+            private IList<Models.Error> errors;
+            private IList<Models.Payment> payments;
             private string cursor;
 
-            public Builder() { }
-            public Builder Errors(IList<Models.Error> value)
+
+
+            public Builder Errors(IList<Models.Error> errors)
             {
-                errors = value;
+                this.errors = errors;
                 return this;
             }
 
-            public Builder Payments(IList<Models.Payment> value)
+            public Builder Payments(IList<Models.Payment> payments)
             {
-                payments = value;
+                this.payments = payments;
                 return this;
             }
 
-            public Builder Cursor(string value)
+            public Builder Cursor(string cursor)
             {
-                cursor = value;
+                this.cursor = cursor;
                 return this;
             }
 

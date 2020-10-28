@@ -35,7 +35,7 @@ namespace Square.Models
         /// User-defined name for the product set. For example, "Clearance Items"
         /// or "Winter Sale Items".
         /// </summary>
-        [JsonProperty("name")]
+        [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
         public string Name { get; }
 
         /// <summary>
@@ -47,7 +47,7 @@ namespace Square.Models
         /// Only one of `product_ids_all`, `product_ids_any`, or `all_products` can be set.
         /// Max: 500 catalog object IDs.
         /// </summary>
-        [JsonProperty("product_ids_any")]
+        [JsonProperty("product_ids_any", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> ProductIdsAny { get; }
 
         /// <summary>
@@ -56,7 +56,7 @@ namespace Square.Models
         /// Only one of `product_ids_all`, `product_ids_any`, or `all_products` can be set.
         /// Max: 500 catalog object IDs.
         /// </summary>
-        [JsonProperty("product_ids_all")]
+        [JsonProperty("product_ids_all", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> ProductIdsAll { get; }
 
         /// <summary>
@@ -64,7 +64,7 @@ namespace Square.Models
         /// in the cart for the discount to apply.
         /// Cannot be combined with either `quantity_min` or `quantity_max`.
         /// </summary>
-        [JsonProperty("quantity_exact")]
+        [JsonProperty("quantity_exact", NullValueHandling = NullValueHandling.Ignore)]
         public long? QuantityExact { get; }
 
         /// <summary>
@@ -72,21 +72,21 @@ namespace Square.Models
         /// in a cart for the discount to apply. See `quantity_exact`. Defaults to 0 if
         /// `quantity_exact`, `quantity_min` and `quantity_max` are all unspecified.
         /// </summary>
-        [JsonProperty("quantity_min")]
+        [JsonProperty("quantity_min", NullValueHandling = NullValueHandling.Ignore)]
         public long? QuantityMin { get; }
 
         /// <summary>
         /// If set, the pricing rule will apply to a maximum of this many items from
         /// `products_any` or `products_all`.
         /// </summary>
-        [JsonProperty("quantity_max")]
+        [JsonProperty("quantity_max", NullValueHandling = NullValueHandling.Ignore)]
         public long? QuantityMax { get; }
 
         /// <summary>
         /// If set to `true`, the product set will include every item in the catalog.
         /// Only one of `product_ids_all`, `product_ids_any`, or `all_products` can be set.
         /// </summary>
-        [JsonProperty("all_products")]
+        [JsonProperty("all_products", NullValueHandling = NullValueHandling.Ignore)]
         public bool? AllProducts { get; }
 
         public Builder ToBuilder()
@@ -105,53 +105,54 @@ namespace Square.Models
         public class Builder
         {
             private string name;
-            private IList<string> productIdsAny = new List<string>();
-            private IList<string> productIdsAll = new List<string>();
+            private IList<string> productIdsAny;
+            private IList<string> productIdsAll;
             private long? quantityExact;
             private long? quantityMin;
             private long? quantityMax;
             private bool? allProducts;
 
-            public Builder() { }
-            public Builder Name(string value)
+
+
+            public Builder Name(string name)
             {
-                name = value;
+                this.name = name;
                 return this;
             }
 
-            public Builder ProductIdsAny(IList<string> value)
+            public Builder ProductIdsAny(IList<string> productIdsAny)
             {
-                productIdsAny = value;
+                this.productIdsAny = productIdsAny;
                 return this;
             }
 
-            public Builder ProductIdsAll(IList<string> value)
+            public Builder ProductIdsAll(IList<string> productIdsAll)
             {
-                productIdsAll = value;
+                this.productIdsAll = productIdsAll;
                 return this;
             }
 
-            public Builder QuantityExact(long? value)
+            public Builder QuantityExact(long? quantityExact)
             {
-                quantityExact = value;
+                this.quantityExact = quantityExact;
                 return this;
             }
 
-            public Builder QuantityMin(long? value)
+            public Builder QuantityMin(long? quantityMin)
             {
-                quantityMin = value;
+                this.quantityMin = quantityMin;
                 return this;
             }
 
-            public Builder QuantityMax(long? value)
+            public Builder QuantityMax(long? quantityMax)
             {
-                quantityMax = value;
+                this.quantityMax = quantityMax;
                 return this;
             }
 
-            public Builder AllProducts(bool? value)
+            public Builder AllProducts(bool? allProducts)
             {
-                allProducts = value;
+                this.allProducts = allProducts;
                 return this;
             }
 

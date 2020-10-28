@@ -51,15 +51,16 @@ namespace Square.Models
                 this.loyaltyProgramId = loyaltyProgramId;
                 this.points = points;
             }
-            public Builder LoyaltyProgramId(string value)
+
+            public Builder LoyaltyProgramId(string loyaltyProgramId)
             {
-                loyaltyProgramId = value;
+                this.loyaltyProgramId = loyaltyProgramId;
                 return this;
             }
 
-            public Builder Points(int value)
+            public Builder Points(int points)
             {
-                points = value;
+                this.points = points;
                 return this;
             }
 

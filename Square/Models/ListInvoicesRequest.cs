@@ -34,7 +34,7 @@ namespace Square.Models
         /// Provide this cursor to retrieve the next set of results for your original query.
         /// For more information, see [Pagination](https://developer.squareup.com/docs/docs/working-with-apis/pagination).
         /// </summary>
-        [JsonProperty("cursor")]
+        [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
         public string Cursor { get; }
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace Square.Models
         /// If not provided, the server 
         /// uses a default limit of 100 invoices.
         /// </summary>
-        [JsonProperty("limit")]
+        [JsonProperty("limit", NullValueHandling = NullValueHandling.Ignore)]
         public int? Limit { get; }
 
         public Builder ToBuilder()
@@ -63,21 +63,22 @@ namespace Square.Models
             {
                 this.locationId = locationId;
             }
-            public Builder LocationId(string value)
+
+            public Builder LocationId(string locationId)
             {
-                locationId = value;
+                this.locationId = locationId;
                 return this;
             }
 
-            public Builder Cursor(string value)
+            public Builder Cursor(string cursor)
             {
-                cursor = value;
+                this.cursor = cursor;
                 return this;
             }
 
-            public Builder Limit(int? value)
+            public Builder Limit(int? limit)
             {
-                limit = value;
+                this.limit = limit;
                 return this;
             }
 

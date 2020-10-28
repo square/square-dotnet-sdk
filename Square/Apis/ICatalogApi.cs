@@ -101,12 +101,11 @@ namespace Square.Apis
         Task<Models.BatchUpsertCatalogObjectsResponse> BatchUpsertCatalogObjectsAsync(Models.BatchUpsertCatalogObjectsRequest body, CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Uploads an image file to be represented by an [CatalogImage](#type-catalogimage) object linked to an existing
+        /// Uploads an image file to be represented by a [CatalogImage](#type-catalogimage) object linked to an existing
         /// [CatalogObject](#type-catalogobject) instance. A call to this endpoint can upload an image, link an image to
         /// a catalog object, or do both.
         /// This `CreateCatalogImage` endpoint accepts HTTP multipart/form-data requests with a JSON part and an image file part in
         /// JPEG, PJPEG, PNG, or GIF format. The maximum file size is 15MB.
-        /// Additional information and an example cURL request can be found in the [Create a Catalog Image recipe](https://developer.squareup.com/docs/more-apis/catalog/cookbook/create-catalog-images).
         /// </summary>
         /// <param name="request">Optional parameter: Example: </param>
         /// <param name="imageFile">Optional parameter: Example: </param>
@@ -114,12 +113,11 @@ namespace Square.Apis
         Models.CreateCatalogImageResponse CreateCatalogImage(Models.CreateCatalogImageRequest request = null, FileStreamInfo imageFile = null);
 
         /// <summary>
-        /// Uploads an image file to be represented by an [CatalogImage](#type-catalogimage) object linked to an existing
+        /// Uploads an image file to be represented by a [CatalogImage](#type-catalogimage) object linked to an existing
         /// [CatalogObject](#type-catalogobject) instance. A call to this endpoint can upload an image, link an image to
         /// a catalog object, or do both.
         /// This `CreateCatalogImage` endpoint accepts HTTP multipart/form-data requests with a JSON part and an image file part in
         /// JPEG, PJPEG, PNG, or GIF format. The maximum file size is 15MB.
-        /// Additional information and an example cURL request can be found in the [Create a Catalog Image recipe](https://developer.squareup.com/docs/more-apis/catalog/cookbook/create-catalog-images).
         /// </summary>
         /// <param name="request">Optional parameter: Example: </param>
         /// <param name="imageFile">Optional parameter: Example: </param>
@@ -218,7 +216,7 @@ namespace Square.Apis
         /// any [CatalogTax](#type-catalogtax) objects that apply to it.
         /// </summary>
         /// <param name="objectId">Required parameter: The object ID of any type of catalog objects to be retrieved.</param>
-        /// <param name="includeRelatedObjects">Optional parameter: If `true`, the response will include additional objects that are related to the requested object, as follows:  If the `object` field of the response contains a CatalogItem, its associated CatalogCategory, CatalogTax objects, CatalogImages and CatalogModifierLists will be returned in the `related_objects` field of the response. If the `object` field of the response contains a CatalogItemVariation, its parent CatalogItem will be returned in the `related_objects` field of the response.  Default value: `false`</param>
+        /// <param name="includeRelatedObjects">Optional parameter: If `true`, the response will include additional objects that are related to the requested object, as follows:  If the `object` field of the response contains a `CatalogItem`, its associated `CatalogCategory`, `CatalogTax`, `CatalogImage` and `CatalogModifierList` objects will be returned in the `related_objects` field of the response. If the `object` field of the response contains a `CatalogItemVariation`, its parent `CatalogItem` will be returned in the `related_objects` field of the response.  Default value: `false`</param>
         /// <return>Returns the Models.RetrieveCatalogObjectResponse response from the API call</return>
         Models.RetrieveCatalogObjectResponse RetrieveCatalogObject(string objectId, bool? includeRelatedObjects = false);
 
@@ -232,13 +230,13 @@ namespace Square.Apis
         /// any [CatalogTax](#type-catalogtax) objects that apply to it.
         /// </summary>
         /// <param name="objectId">Required parameter: The object ID of any type of catalog objects to be retrieved.</param>
-        /// <param name="includeRelatedObjects">Optional parameter: If `true`, the response will include additional objects that are related to the requested object, as follows:  If the `object` field of the response contains a CatalogItem, its associated CatalogCategory, CatalogTax objects, CatalogImages and CatalogModifierLists will be returned in the `related_objects` field of the response. If the `object` field of the response contains a CatalogItemVariation, its parent CatalogItem will be returned in the `related_objects` field of the response.  Default value: `false`</param>
+        /// <param name="includeRelatedObjects">Optional parameter: If `true`, the response will include additional objects that are related to the requested object, as follows:  If the `object` field of the response contains a `CatalogItem`, its associated `CatalogCategory`, `CatalogTax`, `CatalogImage` and `CatalogModifierList` objects will be returned in the `related_objects` field of the response. If the `object` field of the response contains a `CatalogItemVariation`, its parent `CatalogItem` will be returned in the `related_objects` field of the response.  Default value: `false`</param>
         /// <return>Returns the Models.RetrieveCatalogObjectResponse response from the API call</return>
         Task<Models.RetrieveCatalogObjectResponse> RetrieveCatalogObjectAsync(string objectId, bool? includeRelatedObjects = false, CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Searches for [CatalogObject](#type-CatalogObject) of any types against supported search attribute values, 
-        /// excluding custom attribute values on items or item variations, against one or more of the specified query expressions, 
+        /// Searches for [CatalogObject](#type-CatalogObject) of any types against supported search attribute values,
+        /// excluding custom attribute values on items or item variations, against one or more of the specified query expressions,
         /// This (`SearchCatalogObjects`) endpoint differs from the [SearchCatalogItems](#endpoint-Catalog-SearchCatalogItems)
         /// endpoint in the following aspects:
         /// - `SearchCatalogItems` can only search for items or item variations, whereas `SearchCatalogObjects` can search for any type of catalog objects.
@@ -251,8 +249,8 @@ namespace Square.Apis
         Models.SearchCatalogObjectsResponse SearchCatalogObjects(Models.SearchCatalogObjectsRequest body);
 
         /// <summary>
-        /// Searches for [CatalogObject](#type-CatalogObject) of any types against supported search attribute values, 
-        /// excluding custom attribute values on items or item variations, against one or more of the specified query expressions, 
+        /// Searches for [CatalogObject](#type-CatalogObject) of any types against supported search attribute values,
+        /// excluding custom attribute values on items or item variations, against one or more of the specified query expressions,
         /// This (`SearchCatalogObjects`) endpoint differs from the [SearchCatalogItems](#endpoint-Catalog-SearchCatalogItems)
         /// endpoint in the following aspects:
         /// - `SearchCatalogItems` can only search for items or item variations, whereas `SearchCatalogObjects` can search for any type of catalog objects.
@@ -266,7 +264,7 @@ namespace Square.Apis
 
         /// <summary>
         /// Searches for catalog items or item variations by matching supported search attribute values, including
-        /// custom attribute values, against one or more of the specified query expressions, 
+        /// custom attribute values, against one or more of the specified query expressions,
         /// This (`SearchCatalogItems`) endpoint differs from the [SearchCatalogObjects](#endpoint-Catalog-SearchCatalogObjects)
         /// endpoint in the following aspects:
         /// - `SearchCatalogItems` can only search for items or item variations, whereas `SearchCatalogObjects` can search for any type of catalog objects.
@@ -280,7 +278,7 @@ namespace Square.Apis
 
         /// <summary>
         /// Searches for catalog items or item variations by matching supported search attribute values, including
-        /// custom attribute values, against one or more of the specified query expressions, 
+        /// custom attribute values, against one or more of the specified query expressions,
         /// This (`SearchCatalogItems`) endpoint differs from the [SearchCatalogObjects](#endpoint-Catalog-SearchCatalogObjects)
         /// endpoint in the following aspects:
         /// - `SearchCatalogItems` can only search for items or item variations, whereas `SearchCatalogObjects` can search for any type of catalog objects.

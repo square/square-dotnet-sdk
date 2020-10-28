@@ -50,13 +50,13 @@ namespace Square.Models
         /// This is required if `grant_type` is set to `authorization_code`, to indicate that
         /// the application wants to exchange an authorization code for an OAuth access token.
         /// </summary>
-        [JsonProperty("code")]
+        [JsonProperty("code", NullValueHandling = NullValueHandling.Ignore)]
         public string Code { get; }
 
         /// <summary>
         /// The redirect URL assigned in the [application dashboard](https://connect.squareup.com/apps).
         /// </summary>
-        [JsonProperty("redirect_uri")]
+        [JsonProperty("redirect_uri", NullValueHandling = NullValueHandling.Ignore)]
         public string RedirectUri { get; }
 
         /// <summary>
@@ -71,7 +71,7 @@ namespace Square.Models
         /// A valid refresh token is required if `grant_type` is set to `refresh_token` ,
         /// to indicate the application wants a replacement for an expired OAuth access token.
         /// </summary>
-        [JsonProperty("refresh_token")]
+        [JsonProperty("refresh_token", NullValueHandling = NullValueHandling.Ignore)]
         public string RefreshToken { get; }
 
         /// <summary>
@@ -81,7 +81,7 @@ namespace Square.Models
         /// OAuth access token. The response also returns a refresh token.
         /// For more information, see [Migrate to Using Refresh Tokens](https://developer.squareup.com/docs/authz/oauth/migration).
         /// </summary>
-        [JsonProperty("migration_token")]
+        [JsonProperty("migration_token", NullValueHandling = NullValueHandling.Ignore)]
         public string MigrationToken { get; }
 
         public Builder ToBuilder()
@@ -114,45 +114,46 @@ namespace Square.Models
                 this.clientSecret = clientSecret;
                 this.grantType = grantType;
             }
-            public Builder ClientId(string value)
+
+            public Builder ClientId(string clientId)
             {
-                clientId = value;
+                this.clientId = clientId;
                 return this;
             }
 
-            public Builder ClientSecret(string value)
+            public Builder ClientSecret(string clientSecret)
             {
-                clientSecret = value;
+                this.clientSecret = clientSecret;
                 return this;
             }
 
-            public Builder GrantType(string value)
+            public Builder GrantType(string grantType)
             {
-                grantType = value;
+                this.grantType = grantType;
                 return this;
             }
 
-            public Builder Code(string value)
+            public Builder Code(string code)
             {
-                code = value;
+                this.code = code;
                 return this;
             }
 
-            public Builder RedirectUri(string value)
+            public Builder RedirectUri(string redirectUri)
             {
-                redirectUri = value;
+                this.redirectUri = redirectUri;
                 return this;
             }
 
-            public Builder RefreshToken(string value)
+            public Builder RefreshToken(string refreshToken)
             {
-                refreshToken = value;
+                this.refreshToken = refreshToken;
                 return this;
             }
 
-            public Builder MigrationToken(string value)
+            public Builder MigrationToken(string migrationToken)
             {
-                migrationToken = value;
+                this.migrationToken = migrationToken;
                 return this;
             }
 

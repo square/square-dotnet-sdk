@@ -30,13 +30,13 @@ namespace Square.Models
         /// All Connect V2 Transactions have all been converted to Orders including all associated
         /// itemization data.
         /// </summary>
-        [JsonProperty("order")]
+        [JsonProperty("order", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Order Order { get; }
 
         /// <summary>
         /// The ID of the business location to associate the order with.
         /// </summary>
-        [JsonProperty("location_id")]
+        [JsonProperty("location_id", NullValueHandling = NullValueHandling.Ignore)]
         public string LocationId { get; }
 
         /// <summary>
@@ -47,7 +47,7 @@ namespace Square.Models
         /// worrying about creating duplicate orders.
         /// See [Idempotency](https://developer.squareup.com/docs/basics/api101/idempotency) for more information.
         /// </summary>
-        [JsonProperty("idempotency_key")]
+        [JsonProperty("idempotency_key", NullValueHandling = NullValueHandling.Ignore)]
         public string IdempotencyKey { get; }
 
         public Builder ToBuilder()
@@ -65,22 +65,23 @@ namespace Square.Models
             private string locationId;
             private string idempotencyKey;
 
-            public Builder() { }
-            public Builder Order(Models.Order value)
+
+
+            public Builder Order(Models.Order order)
             {
-                order = value;
+                this.order = order;
                 return this;
             }
 
-            public Builder LocationId(string value)
+            public Builder LocationId(string locationId)
             {
-                locationId = value;
+                this.locationId = locationId;
                 return this;
             }
 
-            public Builder IdempotencyKey(string value)
+            public Builder IdempotencyKey(string idempotencyKey)
             {
-                idempotencyKey = value;
+                this.idempotencyKey = idempotencyKey;
                 return this;
             }
 

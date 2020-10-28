@@ -28,7 +28,7 @@ namespace Square.Models
         /// <summary>
         /// Any errors that occurred during the request.
         /// </summary>
-        [JsonProperty("errors")]
+        [JsonProperty("errors", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.Error> Errors { get; }
 
         /// <summary>
@@ -37,7 +37,7 @@ namespace Square.Models
         /// a physical count might come from an employee counting the item variations on
         /// hand or from syncing with an external system.
         /// </summary>
-        [JsonProperty("count")]
+        [JsonProperty("count", NullValueHandling = NullValueHandling.Ignore)]
         public Models.InventoryPhysicalCount Count { get; }
 
         public Builder ToBuilder()
@@ -50,19 +50,20 @@ namespace Square.Models
 
         public class Builder
         {
-            private IList<Models.Error> errors = new List<Models.Error>();
+            private IList<Models.Error> errors;
             private Models.InventoryPhysicalCount count;
 
-            public Builder() { }
-            public Builder Errors(IList<Models.Error> value)
+
+
+            public Builder Errors(IList<Models.Error> errors)
             {
-                errors = value;
+                this.errors = errors;
                 return this;
             }
 
-            public Builder Count(Models.InventoryPhysicalCount value)
+            public Builder Count(Models.InventoryPhysicalCount count)
             {
-                count = value;
+                this.count = count;
                 return this;
             }
 

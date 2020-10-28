@@ -14,11 +14,10 @@ using Square.Http.Request;
 using Square.Http.Response;
 using Square.Http.Client;
 using Square.Authentication;
-using Square.Exceptions;
 
 namespace Square.Apis
 {
-    internal class TerminalApi: BaseApi, ITerminalApi
+    internal class TerminalApi : BaseApi, ITerminalApi
     {
         internal TerminalApi(IConfiguration config, IHttpClient httpClient, IDictionary<string, IAuthManager> authManagers, HttpCallBack httpCallBack = null) :
             base(config, httpClient, authManagers, httpCallBack)
@@ -50,12 +49,9 @@ namespace Square.Apis
             StringBuilder _queryBuilder = new StringBuilder(_baseUri);
             _queryBuilder.Append("/v2/terminals/checkouts");
 
-            //validate and preprocess url
-            string _queryUrl = ApiHelper.CleanUrl(_queryBuilder);
-
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string, string>()
-            { 
+            {
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
@@ -66,13 +62,13 @@ namespace Square.Apis
             var _body = ApiHelper.JsonSerialize(body);
 
             //prepare the API call request to fetch the response
-            HttpRequest _request = GetClientInstance().PostBody(_queryUrl, _headers, _body);
+            HttpRequest _request = GetClientInstance().PostBody(_queryBuilder.ToString(), _headers, _body);
             if (HttpCallBack != null)
             {
                 HttpCallBack.OnBeforeHttpRequestEventHandler(GetClientInstance(), _request);
             }
 
-            _request = await authManagers["default"].ApplyAsync(_request).ConfigureAwait(false);
+            _request = await authManagers["global"].ApplyAsync(_request).ConfigureAwait(false);
 
             //invoke request and get response
             HttpStringResponse _response = await GetClientInstance().ExecuteAsStringAsync(_request, cancellationToken).ConfigureAwait(false);
@@ -116,12 +112,9 @@ namespace Square.Apis
             StringBuilder _queryBuilder = new StringBuilder(_baseUri);
             _queryBuilder.Append("/v2/terminals/checkouts/search");
 
-            //validate and preprocess url
-            string _queryUrl = ApiHelper.CleanUrl(_queryBuilder);
-
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string, string>()
-            { 
+            {
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
@@ -132,13 +125,13 @@ namespace Square.Apis
             var _body = ApiHelper.JsonSerialize(body);
 
             //prepare the API call request to fetch the response
-            HttpRequest _request = GetClientInstance().PostBody(_queryUrl, _headers, _body);
+            HttpRequest _request = GetClientInstance().PostBody(_queryBuilder.ToString(), _headers, _body);
             if (HttpCallBack != null)
             {
                 HttpCallBack.OnBeforeHttpRequestEventHandler(GetClientInstance(), _request);
             }
 
-            _request = await authManagers["default"].ApplyAsync(_request).ConfigureAwait(false);
+            _request = await authManagers["global"].ApplyAsync(_request).ConfigureAwait(false);
 
             //invoke request and get response
             HttpStringResponse _response = await GetClientInstance().ExecuteAsStringAsync(_request, cancellationToken).ConfigureAwait(false);
@@ -188,25 +181,22 @@ namespace Square.Apis
                 { "checkout_id", checkoutId }
             });
 
-            //validate and preprocess url
-            string _queryUrl = ApiHelper.CleanUrl(_queryBuilder);
-
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string, string>()
-            { 
+            {
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "Square-Version", config.SquareVersion }
             };
 
             //prepare the API call request to fetch the response
-            HttpRequest _request = GetClientInstance().Get(_queryUrl,_headers);
+            HttpRequest _request = GetClientInstance().Get(_queryBuilder.ToString(), _headers);
             if (HttpCallBack != null)
             {
                 HttpCallBack.OnBeforeHttpRequestEventHandler(GetClientInstance(), _request);
             }
 
-            _request = await authManagers["default"].ApplyAsync(_request).ConfigureAwait(false);
+            _request = await authManagers["global"].ApplyAsync(_request).ConfigureAwait(false);
 
             //invoke request and get response
             HttpStringResponse _response = await GetClientInstance().ExecuteAsStringAsync(_request, cancellationToken).ConfigureAwait(false);
@@ -225,7 +215,7 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Cancels a Terminal checkout request, if the status of the request permits it.
+        /// Cancels a Terminal checkout request if the status of the request permits it.
         /// </summary>
         /// <param name="checkoutId">Required parameter: Unique ID for the desired `TerminalCheckout`</param>
         /// <return>Returns the Models.CancelTerminalCheckoutResponse response from the API call</return>
@@ -237,7 +227,7 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Cancels a Terminal checkout request, if the status of the request permits it.
+        /// Cancels a Terminal checkout request if the status of the request permits it.
         /// </summary>
         /// <param name="checkoutId">Required parameter: Unique ID for the desired `TerminalCheckout`</param>
         /// <return>Returns the Models.CancelTerminalCheckoutResponse response from the API call</return>
@@ -256,25 +246,22 @@ namespace Square.Apis
                 { "checkout_id", checkoutId }
             });
 
-            //validate and preprocess url
-            string _queryUrl = ApiHelper.CleanUrl(_queryBuilder);
-
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string, string>()
-            { 
+            {
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "Square-Version", config.SquareVersion }
             };
 
             //prepare the API call request to fetch the response
-            HttpRequest _request = GetClientInstance().Post(_queryUrl, _headers, null);
+            HttpRequest _request = GetClientInstance().Post(_queryBuilder.ToString(), _headers, null);
             if (HttpCallBack != null)
             {
                 HttpCallBack.OnBeforeHttpRequestEventHandler(GetClientInstance(), _request);
             }
 
-            _request = await authManagers["default"].ApplyAsync(_request).ConfigureAwait(false);
+            _request = await authManagers["global"].ApplyAsync(_request).ConfigureAwait(false);
 
             //invoke request and get response
             HttpStringResponse _response = await GetClientInstance().ExecuteAsStringAsync(_request, cancellationToken).ConfigureAwait(false);
@@ -288,6 +275,262 @@ namespace Square.Apis
             base.ValidateResponse(_response, _context);
 
             var _responseModel = ApiHelper.JsonDeserialize<Models.CancelTerminalCheckoutResponse>(_response.Body);
+            _responseModel.Context = _context;
+            return _responseModel;
+        }
+
+        /// <summary>
+        /// Creates a request to refund an Interac payment completed on a Square Terminal.
+        /// </summary>
+        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
+        /// <return>Returns the Models.CreateTerminalRefundResponse response from the API call</return>
+        public Models.CreateTerminalRefundResponse CreateTerminalRefund(Models.CreateTerminalRefundRequest body)
+        {
+            Task<Models.CreateTerminalRefundResponse> t = CreateTerminalRefundAsync(body);
+            ApiHelper.RunTaskSynchronously(t);
+            return t.Result;
+        }
+
+        /// <summary>
+        /// Creates a request to refund an Interac payment completed on a Square Terminal.
+        /// </summary>
+        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
+        /// <return>Returns the Models.CreateTerminalRefundResponse response from the API call</return>
+        public async Task<Models.CreateTerminalRefundResponse> CreateTerminalRefundAsync(Models.CreateTerminalRefundRequest body, CancellationToken cancellationToken = default)
+        {
+            //the base uri for api requests
+            string _baseUri = config.GetBaseUri();
+
+            //prepare query string for API call
+            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
+            _queryBuilder.Append("/v2/terminals/refunds");
+
+            //append request with appropriate headers and parameters
+            var _headers = new Dictionary<string, string>()
+            {
+                { "user-agent", userAgent },
+                { "accept", "application/json" },
+                { "content-type", "application/json; charset=utf-8" },
+                { "Square-Version", config.SquareVersion }
+            };
+
+            //append body params
+            var _body = ApiHelper.JsonSerialize(body);
+
+            //prepare the API call request to fetch the response
+            HttpRequest _request = GetClientInstance().PostBody(_queryBuilder.ToString(), _headers, _body);
+            if (HttpCallBack != null)
+            {
+                HttpCallBack.OnBeforeHttpRequestEventHandler(GetClientInstance(), _request);
+            }
+
+            _request = await authManagers["global"].ApplyAsync(_request).ConfigureAwait(false);
+
+            //invoke request and get response
+            HttpStringResponse _response = await GetClientInstance().ExecuteAsStringAsync(_request, cancellationToken).ConfigureAwait(false);
+            HttpContext _context = new HttpContext(_request, _response);
+            if (HttpCallBack != null)
+            {
+                HttpCallBack.OnAfterHttpResponseEventHandler(GetClientInstance(), _response);
+            }
+
+            //handle errors defined at the API level
+            base.ValidateResponse(_response, _context);
+
+            var _responseModel = ApiHelper.JsonDeserialize<Models.CreateTerminalRefundResponse>(_response.Body);
+            _responseModel.Context = _context;
+            return _responseModel;
+        }
+
+        /// <summary>
+        /// Retrieves a filtered list of Terminal Interac refund requests created by the seller making the request.
+        /// </summary>
+        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
+        /// <return>Returns the Models.SearchTerminalRefundsResponse response from the API call</return>
+        public Models.SearchTerminalRefundsResponse SearchTerminalRefunds(Models.SearchTerminalRefundsRequest body)
+        {
+            Task<Models.SearchTerminalRefundsResponse> t = SearchTerminalRefundsAsync(body);
+            ApiHelper.RunTaskSynchronously(t);
+            return t.Result;
+        }
+
+        /// <summary>
+        /// Retrieves a filtered list of Terminal Interac refund requests created by the seller making the request.
+        /// </summary>
+        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
+        /// <return>Returns the Models.SearchTerminalRefundsResponse response from the API call</return>
+        public async Task<Models.SearchTerminalRefundsResponse> SearchTerminalRefundsAsync(Models.SearchTerminalRefundsRequest body, CancellationToken cancellationToken = default)
+        {
+            //the base uri for api requests
+            string _baseUri = config.GetBaseUri();
+
+            //prepare query string for API call
+            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
+            _queryBuilder.Append("/v2/terminals/refunds/search");
+
+            //append request with appropriate headers and parameters
+            var _headers = new Dictionary<string, string>()
+            {
+                { "user-agent", userAgent },
+                { "accept", "application/json" },
+                { "content-type", "application/json; charset=utf-8" },
+                { "Square-Version", config.SquareVersion }
+            };
+
+            //append body params
+            var _body = ApiHelper.JsonSerialize(body);
+
+            //prepare the API call request to fetch the response
+            HttpRequest _request = GetClientInstance().PostBody(_queryBuilder.ToString(), _headers, _body);
+            if (HttpCallBack != null)
+            {
+                HttpCallBack.OnBeforeHttpRequestEventHandler(GetClientInstance(), _request);
+            }
+
+            _request = await authManagers["global"].ApplyAsync(_request).ConfigureAwait(false);
+
+            //invoke request and get response
+            HttpStringResponse _response = await GetClientInstance().ExecuteAsStringAsync(_request, cancellationToken).ConfigureAwait(false);
+            HttpContext _context = new HttpContext(_request, _response);
+            if (HttpCallBack != null)
+            {
+                HttpCallBack.OnAfterHttpResponseEventHandler(GetClientInstance(), _response);
+            }
+
+            //handle errors defined at the API level
+            base.ValidateResponse(_response, _context);
+
+            var _responseModel = ApiHelper.JsonDeserialize<Models.SearchTerminalRefundsResponse>(_response.Body);
+            _responseModel.Context = _context;
+            return _responseModel;
+        }
+
+        /// <summary>
+        /// Retrieves an Interac terminal refund object by ID.
+        /// </summary>
+        /// <param name="terminalRefundId">Required parameter: Unique ID for the desired `TerminalRefund`</param>
+        /// <return>Returns the Models.GetTerminalRefundResponse response from the API call</return>
+        public Models.GetTerminalRefundResponse GetTerminalRefund(string terminalRefundId)
+        {
+            Task<Models.GetTerminalRefundResponse> t = GetTerminalRefundAsync(terminalRefundId);
+            ApiHelper.RunTaskSynchronously(t);
+            return t.Result;
+        }
+
+        /// <summary>
+        /// Retrieves an Interac terminal refund object by ID.
+        /// </summary>
+        /// <param name="terminalRefundId">Required parameter: Unique ID for the desired `TerminalRefund`</param>
+        /// <return>Returns the Models.GetTerminalRefundResponse response from the API call</return>
+        public async Task<Models.GetTerminalRefundResponse> GetTerminalRefundAsync(string terminalRefundId, CancellationToken cancellationToken = default)
+        {
+            //the base uri for api requests
+            string _baseUri = config.GetBaseUri();
+
+            //prepare query string for API call
+            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
+            _queryBuilder.Append("/v2/terminals/refunds/{terminal_refund_id}");
+
+            //process optional template parameters
+            ApiHelper.AppendUrlWithTemplateParameters(_queryBuilder, new Dictionary<string, object>()
+            {
+                { "terminal_refund_id", terminalRefundId }
+            });
+
+            //append request with appropriate headers and parameters
+            var _headers = new Dictionary<string, string>()
+            {
+                { "user-agent", userAgent },
+                { "accept", "application/json" },
+                { "Square-Version", config.SquareVersion }
+            };
+
+            //prepare the API call request to fetch the response
+            HttpRequest _request = GetClientInstance().Get(_queryBuilder.ToString(), _headers);
+            if (HttpCallBack != null)
+            {
+                HttpCallBack.OnBeforeHttpRequestEventHandler(GetClientInstance(), _request);
+            }
+
+            _request = await authManagers["global"].ApplyAsync(_request).ConfigureAwait(false);
+
+            //invoke request and get response
+            HttpStringResponse _response = await GetClientInstance().ExecuteAsStringAsync(_request, cancellationToken).ConfigureAwait(false);
+            HttpContext _context = new HttpContext(_request, _response);
+            if (HttpCallBack != null)
+            {
+                HttpCallBack.OnAfterHttpResponseEventHandler(GetClientInstance(), _response);
+            }
+
+            //handle errors defined at the API level
+            base.ValidateResponse(_response, _context);
+
+            var _responseModel = ApiHelper.JsonDeserialize<Models.GetTerminalRefundResponse>(_response.Body);
+            _responseModel.Context = _context;
+            return _responseModel;
+        }
+
+        /// <summary>
+        /// Cancels an Interac terminal refund request by refund request ID if the status of the request permits it.
+        /// </summary>
+        /// <param name="terminalRefundId">Required parameter: Unique ID for the desired `TerminalRefund`</param>
+        /// <return>Returns the Models.CancelTerminalRefundResponse response from the API call</return>
+        public Models.CancelTerminalRefundResponse CancelTerminalRefund(string terminalRefundId)
+        {
+            Task<Models.CancelTerminalRefundResponse> t = CancelTerminalRefundAsync(terminalRefundId);
+            ApiHelper.RunTaskSynchronously(t);
+            return t.Result;
+        }
+
+        /// <summary>
+        /// Cancels an Interac terminal refund request by refund request ID if the status of the request permits it.
+        /// </summary>
+        /// <param name="terminalRefundId">Required parameter: Unique ID for the desired `TerminalRefund`</param>
+        /// <return>Returns the Models.CancelTerminalRefundResponse response from the API call</return>
+        public async Task<Models.CancelTerminalRefundResponse> CancelTerminalRefundAsync(string terminalRefundId, CancellationToken cancellationToken = default)
+        {
+            //the base uri for api requests
+            string _baseUri = config.GetBaseUri();
+
+            //prepare query string for API call
+            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
+            _queryBuilder.Append("/v2/terminals/refunds/{terminal_refund_id}/cancel");
+
+            //process optional template parameters
+            ApiHelper.AppendUrlWithTemplateParameters(_queryBuilder, new Dictionary<string, object>()
+            {
+                { "terminal_refund_id", terminalRefundId }
+            });
+
+            //append request with appropriate headers and parameters
+            var _headers = new Dictionary<string, string>()
+            {
+                { "user-agent", userAgent },
+                { "accept", "application/json" },
+                { "Square-Version", config.SquareVersion }
+            };
+
+            //prepare the API call request to fetch the response
+            HttpRequest _request = GetClientInstance().Post(_queryBuilder.ToString(), _headers, null);
+            if (HttpCallBack != null)
+            {
+                HttpCallBack.OnBeforeHttpRequestEventHandler(GetClientInstance(), _request);
+            }
+
+            _request = await authManagers["global"].ApplyAsync(_request).ConfigureAwait(false);
+
+            //invoke request and get response
+            HttpStringResponse _response = await GetClientInstance().ExecuteAsStringAsync(_request, cancellationToken).ConfigureAwait(false);
+            HttpContext _context = new HttpContext(_request, _response);
+            if (HttpCallBack != null)
+            {
+                HttpCallBack.OnAfterHttpResponseEventHandler(GetClientInstance(), _response);
+            }
+
+            //handle errors defined at the API level
+            base.ValidateResponse(_response, _context);
+
+            var _responseModel = ApiHelper.JsonDeserialize<Models.CancelTerminalRefundResponse>(_response.Body);
             _responseModel.Context = _context;
             return _responseModel;
         }

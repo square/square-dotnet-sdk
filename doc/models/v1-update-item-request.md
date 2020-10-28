@@ -1,16 +1,17 @@
-## V1 Update Item Request
 
-### Structure
+# V1 Update Item Request
+
+## Structure
 
 `V1UpdateItemRequest`
 
-### Fields
+## Fields
 
 | Name | Type | Description |
 |  --- | --- | --- |
 | `Body` | [`Models.V1Item`](/doc/models/v1-item.md) | V1Item |
 
-### Example (as JSON)
+## Example (as JSON)
 
 ```json
 {

@@ -31,7 +31,7 @@ namespace Square.Models
         /// A Square-assigned ID that uniquely identifies the reminder within the
         /// `InvoicePaymentRequest`.
         /// </summary>
-        [JsonProperty("uid")]
+        [JsonProperty("uid", NullValueHandling = NullValueHandling.Ignore)]
         public string Uid { get; }
 
         /// <summary>
@@ -39,25 +39,25 @@ namespace Square.Models
         /// the payment request `due_date` when the reminder is sent. For example, -3 indicates that
         /// the reminder should be sent 3 days before the payment request `due_date`.
         /// </summary>
-        [JsonProperty("relative_scheduled_days")]
+        [JsonProperty("relative_scheduled_days", NullValueHandling = NullValueHandling.Ignore)]
         public int? RelativeScheduledDays { get; }
 
         /// <summary>
         /// The reminder message.
         /// </summary>
-        [JsonProperty("message")]
+        [JsonProperty("message", NullValueHandling = NullValueHandling.Ignore)]
         public string Message { get; }
 
         /// <summary>
         /// The status of a payment request reminder.
         /// </summary>
-        [JsonProperty("status")]
+        [JsonProperty("status", NullValueHandling = NullValueHandling.Ignore)]
         public string Status { get; }
 
         /// <summary>
         /// If sent, the timestamp when the reminder was sent, in RFC 3339 format.
         /// </summary>
-        [JsonProperty("sent_at")]
+        [JsonProperty("sent_at", NullValueHandling = NullValueHandling.Ignore)]
         public string SentAt { get; }
 
         public Builder ToBuilder()
@@ -79,34 +79,35 @@ namespace Square.Models
             private string status;
             private string sentAt;
 
-            public Builder() { }
-            public Builder Uid(string value)
+
+
+            public Builder Uid(string uid)
             {
-                uid = value;
+                this.uid = uid;
                 return this;
             }
 
-            public Builder RelativeScheduledDays(int? value)
+            public Builder RelativeScheduledDays(int? relativeScheduledDays)
             {
-                relativeScheduledDays = value;
+                this.relativeScheduledDays = relativeScheduledDays;
                 return this;
             }
 
-            public Builder Message(string value)
+            public Builder Message(string message)
             {
-                message = value;
+                this.message = message;
                 return this;
             }
 
-            public Builder Status(string value)
+            public Builder Status(string status)
             {
-                status = value;
+                this.status = status;
                 return this;
             }
 
-            public Builder SentAt(string value)
+            public Builder SentAt(string sentAt)
             {
-                sentAt = value;
+                this.sentAt = sentAt;
                 return this;
             }
 

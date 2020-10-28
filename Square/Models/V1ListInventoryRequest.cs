@@ -24,14 +24,14 @@ namespace Square.Models
         /// <summary>
         /// The maximum number of inventory entries to return in a single response. This value cannot exceed 1000.
         /// </summary>
-        [JsonProperty("limit")]
+        [JsonProperty("limit", NullValueHandling = NullValueHandling.Ignore)]
         public int? Limit { get; }
 
         /// <summary>
         /// A pagination cursor to retrieve the next set of results for your
         /// original query to the endpoint.
         /// </summary>
-        [JsonProperty("batch_token")]
+        [JsonProperty("batch_token", NullValueHandling = NullValueHandling.Ignore)]
         public string BatchToken { get; }
 
         public Builder ToBuilder()
@@ -47,16 +47,17 @@ namespace Square.Models
             private int? limit;
             private string batchToken;
 
-            public Builder() { }
-            public Builder Limit(int? value)
+
+
+            public Builder Limit(int? limit)
             {
-                limit = value;
+                this.limit = limit;
                 return this;
             }
 
-            public Builder BatchToken(string value)
+            public Builder BatchToken(string batchToken)
             {
-                batchToken = value;
+                this.batchToken = batchToken;
                 return this;
             }
 

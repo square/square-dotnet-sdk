@@ -29,7 +29,7 @@ namespace Square.Models
         /// of results.
         /// See the [Pagination](https://developer.squareup.com/docs/docs/working-with-apis/pagination) guide for more information.
         /// </summary>
-        [JsonProperty("cursor")]
+        [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
         public string Cursor { get; }
 
         /// <summary>
@@ -37,14 +37,14 @@ namespace Square.Models
         /// Currently, 1000 is the largest supported limit. You can specify a limit 
         /// of up to 1000 bank accounts. This is also the default limit.
         /// </summary>
-        [JsonProperty("limit")]
+        [JsonProperty("limit", NullValueHandling = NullValueHandling.Ignore)]
         public int? Limit { get; }
 
         /// <summary>
         /// Location ID. You can specify this optional filter 
         /// to retrieve only the linked bank accounts belonging to a specific location.
         /// </summary>
-        [JsonProperty("location_id")]
+        [JsonProperty("location_id", NullValueHandling = NullValueHandling.Ignore)]
         public string LocationId { get; }
 
         public Builder ToBuilder()
@@ -62,22 +62,23 @@ namespace Square.Models
             private int? limit;
             private string locationId;
 
-            public Builder() { }
-            public Builder Cursor(string value)
+
+
+            public Builder Cursor(string cursor)
             {
-                cursor = value;
+                this.cursor = cursor;
                 return this;
             }
 
-            public Builder Limit(int? value)
+            public Builder Limit(int? limit)
             {
-                limit = value;
+                this.limit = limit;
                 return this;
             }
 
-            public Builder LocationId(string value)
+            public Builder LocationId(string locationId)
             {
-                locationId = value;
+                this.locationId = locationId;
                 return this;
             }
 

@@ -1,18 +1,19 @@
-## Cancel Payment by Idempotency Key Request
 
-Specifies idempotency key of a payment to cancel.
+# Cancel Payment by Idempotency Key Request
 
-### Structure
+Specifies the idempotency key of a payment to cancel.
+
+## Structure
 
 `CancelPaymentByIdempotencyKeyRequest`
 
-### Fields
+## Fields
 
 | Name | Type | Description |
 |  --- | --- | --- |
-| `IdempotencyKey` | `string` | `idempotency_key` identifying the payment to be canceled. |
+| `IdempotencyKey` | `string` | The `idempotency_key` identifying the payment to be canceled. |
 
-### Example (as JSON)
+## Example (as JSON)
 
 ```json
 {

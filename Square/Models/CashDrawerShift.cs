@@ -56,63 +56,63 @@ namespace Square.Models
         /// <summary>
         /// The shift unique ID.
         /// </summary>
-        [JsonProperty("id")]
+        [JsonProperty("id", NullValueHandling = NullValueHandling.Ignore)]
         public string Id { get; }
 
         /// <summary>
         /// The current state of a cash drawer shift.
         /// </summary>
-        [JsonProperty("state")]
+        [JsonProperty("state", NullValueHandling = NullValueHandling.Ignore)]
         public string State { get; }
 
         /// <summary>
         /// The time when the shift began, in ISO 8601 format.
         /// </summary>
-        [JsonProperty("opened_at")]
+        [JsonProperty("opened_at", NullValueHandling = NullValueHandling.Ignore)]
         public string OpenedAt { get; }
 
         /// <summary>
         /// The time when the shift ended, in ISO 8601 format.
         /// </summary>
-        [JsonProperty("ended_at")]
+        [JsonProperty("ended_at", NullValueHandling = NullValueHandling.Ignore)]
         public string EndedAt { get; }
 
         /// <summary>
         /// The time when the shift was closed, in ISO 8601 format.
         /// </summary>
-        [JsonProperty("closed_at")]
+        [JsonProperty("closed_at", NullValueHandling = NullValueHandling.Ignore)]
         public string ClosedAt { get; }
 
         /// <summary>
         /// The IDs of all employees that were logged into Square Point of Sale at any
         /// point while the cash drawer shift was open.
         /// </summary>
-        [JsonProperty("employee_ids")]
+        [JsonProperty("employee_ids", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> EmployeeIds { get; }
 
         /// <summary>
         /// The ID of the employee that started the cash drawer shift.
         /// </summary>
-        [JsonProperty("opening_employee_id")]
+        [JsonProperty("opening_employee_id", NullValueHandling = NullValueHandling.Ignore)]
         public string OpeningEmployeeId { get; }
 
         /// <summary>
         /// The ID of the employee that ended the cash drawer shift.
         /// </summary>
-        [JsonProperty("ending_employee_id")]
+        [JsonProperty("ending_employee_id", NullValueHandling = NullValueHandling.Ignore)]
         public string EndingEmployeeId { get; }
 
         /// <summary>
         /// The ID of the employee that closed the cash drawer shift by auditing
         /// the cash drawer contents.
         /// </summary>
-        [JsonProperty("closing_employee_id")]
+        [JsonProperty("closing_employee_id", NullValueHandling = NullValueHandling.Ignore)]
         public string ClosingEmployeeId { get; }
 
         /// <summary>
         /// The free-form text description of a cash drawer by an employee.
         /// </summary>
-        [JsonProperty("description")]
+        [JsonProperty("description", NullValueHandling = NullValueHandling.Ignore)]
         public string Description { get; }
 
         /// <summary>
@@ -123,7 +123,7 @@ namespace Square.Models
         /// [Working with Monetary Amounts](https://developer.squareup.com/docs/build-basics/working-with-monetary-amounts)
         /// for more information.
         /// </summary>
-        [JsonProperty("opened_cash_money")]
+        [JsonProperty("opened_cash_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Money OpenedCashMoney { get; }
 
         /// <summary>
@@ -134,7 +134,7 @@ namespace Square.Models
         /// [Working with Monetary Amounts](https://developer.squareup.com/docs/build-basics/working-with-monetary-amounts)
         /// for more information.
         /// </summary>
-        [JsonProperty("cash_payment_money")]
+        [JsonProperty("cash_payment_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Money CashPaymentMoney { get; }
 
         /// <summary>
@@ -145,7 +145,7 @@ namespace Square.Models
         /// [Working with Monetary Amounts](https://developer.squareup.com/docs/build-basics/working-with-monetary-amounts)
         /// for more information.
         /// </summary>
-        [JsonProperty("cash_refunds_money")]
+        [JsonProperty("cash_refunds_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Money CashRefundsMoney { get; }
 
         /// <summary>
@@ -156,7 +156,7 @@ namespace Square.Models
         /// [Working with Monetary Amounts](https://developer.squareup.com/docs/build-basics/working-with-monetary-amounts)
         /// for more information.
         /// </summary>
-        [JsonProperty("cash_paid_in_money")]
+        [JsonProperty("cash_paid_in_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Money CashPaidInMoney { get; }
 
         /// <summary>
@@ -167,7 +167,7 @@ namespace Square.Models
         /// [Working with Monetary Amounts](https://developer.squareup.com/docs/build-basics/working-with-monetary-amounts)
         /// for more information.
         /// </summary>
-        [JsonProperty("cash_paid_out_money")]
+        [JsonProperty("cash_paid_out_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Money CashPaidOutMoney { get; }
 
         /// <summary>
@@ -178,7 +178,7 @@ namespace Square.Models
         /// [Working with Monetary Amounts](https://developer.squareup.com/docs/build-basics/working-with-monetary-amounts)
         /// for more information.
         /// </summary>
-        [JsonProperty("expected_cash_money")]
+        [JsonProperty("expected_cash_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Money ExpectedCashMoney { get; }
 
         /// <summary>
@@ -189,13 +189,13 @@ namespace Square.Models
         /// [Working with Monetary Amounts](https://developer.squareup.com/docs/build-basics/working-with-monetary-amounts)
         /// for more information.
         /// </summary>
-        [JsonProperty("closed_cash_money")]
+        [JsonProperty("closed_cash_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Money ClosedCashMoney { get; }
 
         /// <summary>
         /// Getter for device
         /// </summary>
-        [JsonProperty("device")]
+        [JsonProperty("device", NullValueHandling = NullValueHandling.Ignore)]
         public Models.CashDrawerDevice Device { get; }
 
         public Builder ToBuilder()
@@ -229,7 +229,7 @@ namespace Square.Models
             private string openedAt;
             private string endedAt;
             private string closedAt;
-            private IList<string> employeeIds = new List<string>();
+            private IList<string> employeeIds;
             private string openingEmployeeId;
             private string endingEmployeeId;
             private string closingEmployeeId;
@@ -243,112 +243,113 @@ namespace Square.Models
             private Models.Money closedCashMoney;
             private Models.CashDrawerDevice device;
 
-            public Builder() { }
-            public Builder Id(string value)
+
+
+            public Builder Id(string id)
             {
-                id = value;
+                this.id = id;
                 return this;
             }
 
-            public Builder State(string value)
+            public Builder State(string state)
             {
-                state = value;
+                this.state = state;
                 return this;
             }
 
-            public Builder OpenedAt(string value)
+            public Builder OpenedAt(string openedAt)
             {
-                openedAt = value;
+                this.openedAt = openedAt;
                 return this;
             }
 
-            public Builder EndedAt(string value)
+            public Builder EndedAt(string endedAt)
             {
-                endedAt = value;
+                this.endedAt = endedAt;
                 return this;
             }
 
-            public Builder ClosedAt(string value)
+            public Builder ClosedAt(string closedAt)
             {
-                closedAt = value;
+                this.closedAt = closedAt;
                 return this;
             }
 
-            public Builder EmployeeIds(IList<string> value)
+            public Builder EmployeeIds(IList<string> employeeIds)
             {
-                employeeIds = value;
+                this.employeeIds = employeeIds;
                 return this;
             }
 
-            public Builder OpeningEmployeeId(string value)
+            public Builder OpeningEmployeeId(string openingEmployeeId)
             {
-                openingEmployeeId = value;
+                this.openingEmployeeId = openingEmployeeId;
                 return this;
             }
 
-            public Builder EndingEmployeeId(string value)
+            public Builder EndingEmployeeId(string endingEmployeeId)
             {
-                endingEmployeeId = value;
+                this.endingEmployeeId = endingEmployeeId;
                 return this;
             }
 
-            public Builder ClosingEmployeeId(string value)
+            public Builder ClosingEmployeeId(string closingEmployeeId)
             {
-                closingEmployeeId = value;
+                this.closingEmployeeId = closingEmployeeId;
                 return this;
             }
 
-            public Builder Description(string value)
+            public Builder Description(string description)
             {
-                description = value;
+                this.description = description;
                 return this;
             }
 
-            public Builder OpenedCashMoney(Models.Money value)
+            public Builder OpenedCashMoney(Models.Money openedCashMoney)
             {
-                openedCashMoney = value;
+                this.openedCashMoney = openedCashMoney;
                 return this;
             }
 
-            public Builder CashPaymentMoney(Models.Money value)
+            public Builder CashPaymentMoney(Models.Money cashPaymentMoney)
             {
-                cashPaymentMoney = value;
+                this.cashPaymentMoney = cashPaymentMoney;
                 return this;
             }
 
-            public Builder CashRefundsMoney(Models.Money value)
+            public Builder CashRefundsMoney(Models.Money cashRefundsMoney)
             {
-                cashRefundsMoney = value;
+                this.cashRefundsMoney = cashRefundsMoney;
                 return this;
             }
 
-            public Builder CashPaidInMoney(Models.Money value)
+            public Builder CashPaidInMoney(Models.Money cashPaidInMoney)
             {
-                cashPaidInMoney = value;
+                this.cashPaidInMoney = cashPaidInMoney;
                 return this;
             }
 
-            public Builder CashPaidOutMoney(Models.Money value)
+            public Builder CashPaidOutMoney(Models.Money cashPaidOutMoney)
             {
-                cashPaidOutMoney = value;
+                this.cashPaidOutMoney = cashPaidOutMoney;
                 return this;
             }
 
-            public Builder ExpectedCashMoney(Models.Money value)
+            public Builder ExpectedCashMoney(Models.Money expectedCashMoney)
             {
-                expectedCashMoney = value;
+                this.expectedCashMoney = expectedCashMoney;
                 return this;
             }
 
-            public Builder ClosedCashMoney(Models.Money value)
+            public Builder ClosedCashMoney(Models.Money closedCashMoney)
             {
-                closedCashMoney = value;
+                this.closedCashMoney = closedCashMoney;
                 return this;
             }
 
-            public Builder Device(Models.CashDrawerDevice value)
+            public Builder Device(Models.CashDrawerDevice device)
             {
-                device = value;
+                this.device = device;
                 return this;
             }
 

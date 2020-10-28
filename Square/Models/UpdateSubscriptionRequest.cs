@@ -24,7 +24,7 @@ namespace Square.Models
         /// For an overview of the `Subscription` type, see 
         /// [Subscription object](https://developer.squareup.com/docs/docs/subscriptions-api/overview#subscription-object-overview).
         /// </summary>
-        [JsonProperty("subscription")]
+        [JsonProperty("subscription", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Subscription Subscription { get; }
 
         public Builder ToBuilder()
@@ -38,10 +38,11 @@ namespace Square.Models
         {
             private Models.Subscription subscription;
 
-            public Builder() { }
-            public Builder Subscription(Models.Subscription value)
+
+
+            public Builder Subscription(Models.Subscription subscription)
             {
-                subscription = value;
+                this.subscription = subscription;
                 return this;
             }
 

@@ -24,13 +24,13 @@ namespace Square.Models
         /// <summary>
         /// Enumerates the possible assignment types the team member can have
         /// </summary>
-        [JsonProperty("assignment_type")]
+        [JsonProperty("assignment_type", NullValueHandling = NullValueHandling.Ignore)]
         public string AssignmentType { get; }
 
         /// <summary>
         /// The locations that the team member is assigned to.
         /// </summary>
-        [JsonProperty("location_ids")]
+        [JsonProperty("location_ids", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> LocationIds { get; }
 
         public Builder ToBuilder()
@@ -44,18 +44,19 @@ namespace Square.Models
         public class Builder
         {
             private string assignmentType;
-            private IList<string> locationIds = new List<string>();
+            private IList<string> locationIds;
 
-            public Builder() { }
-            public Builder AssignmentType(string value)
+
+
+            public Builder AssignmentType(string assignmentType)
             {
-                assignmentType = value;
+                this.assignmentType = assignmentType;
                 return this;
             }
 
-            public Builder LocationIds(IList<string> value)
+            public Builder LocationIds(IList<string> locationIds)
             {
-                locationIds = value;
+                this.locationIds = locationIds;
                 return this;
             }
 

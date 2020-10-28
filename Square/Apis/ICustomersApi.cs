@@ -18,9 +18,9 @@ namespace Square.Apis
     {
         /// <summary>
         /// Lists customer profiles associated with a Square account.
-        /// Under normal operating conditions, newly created or updated customer profiles become available 
-        /// for the listing operation in well under 30 seconds. Occasionally, propagation of the new or updated 
-        /// profiles can take closer to one minute or longer, espeically during network incidents and outages.
+        /// Under normal operating conditions, newly created or updated customer profiles become available
+        /// for the listing operation in well under 30 seconds. Occasionally, propagation of the new or updated
+        /// profiles can take closer to one minute or longer, especially during network incidents and outages.
         /// </summary>
         /// <param name="cursor">Optional parameter: A pagination cursor returned by a previous call to this endpoint. Provide this to retrieve the next set of results for your original query.  See the [Pagination guide](https://developer.squareup.com/docs/working-with-apis/pagination) for more information.</param>
         /// <param name="sortField">Optional parameter: Indicates how Customers should be sorted.  Default: `DEFAULT`.</param>
@@ -30,9 +30,9 @@ namespace Square.Apis
 
         /// <summary>
         /// Lists customer profiles associated with a Square account.
-        /// Under normal operating conditions, newly created or updated customer profiles become available 
-        /// for the listing operation in well under 30 seconds. Occasionally, propagation of the new or updated 
-        /// profiles can take closer to one minute or longer, espeically during network incidents and outages.
+        /// Under normal operating conditions, newly created or updated customer profiles become available
+        /// for the listing operation in well under 30 seconds. Occasionally, propagation of the new or updated
+        /// profiles can take closer to one minute or longer, especially during network incidents and outages.
         /// </summary>
         /// <param name="cursor">Optional parameter: A pagination cursor returned by a previous call to this endpoint. Provide this to retrieve the next set of results for your original query.  See the [Pagination guide](https://developer.squareup.com/docs/working-with-apis/pagination) for more information.</param>
         /// <param name="sortField">Optional parameter: Indicates how Customers should be sorted.  Default: `DEFAULT`.</param>
@@ -69,28 +69,26 @@ namespace Square.Apis
         Task<Models.CreateCustomerResponse> CreateCustomerAsync(Models.CreateCustomerRequest body, CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Searches the customer profiles associated with a Square account using 
-        /// one or more supported query filters. 
+        /// Searches the customer profiles associated with a Square account using a supported query filter.
         /// Calling `SearchCustomers` without any explicit query filter returns all
         /// customer profiles ordered alphabetically based on `given_name` and
         /// `family_name`.
-        /// Under normal operating conditions, newly created or updated customer profiles become available 
-        /// for the search operation in well under 30 seconds. Occasionally, propagation of the new or updated 
-        /// profiles can take closer to one minute or longer, espeically during network incidents and outages.
+        /// Under normal operating conditions, newly created or updated customer profiles become available
+        /// for the search operation in well under 30 seconds. Occasionally, propagation of the new or updated
+        /// profiles can take closer to one minute or longer, especially during network incidents and outages.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.SearchCustomersResponse response from the API call</return>
         Models.SearchCustomersResponse SearchCustomers(Models.SearchCustomersRequest body);
 
         /// <summary>
-        /// Searches the customer profiles associated with a Square account using 
-        /// one or more supported query filters. 
+        /// Searches the customer profiles associated with a Square account using a supported query filter.
         /// Calling `SearchCustomers` without any explicit query filter returns all
         /// customer profiles ordered alphabetically based on `given_name` and
         /// `family_name`.
-        /// Under normal operating conditions, newly created or updated customer profiles become available 
-        /// for the search operation in well under 30 seconds. Occasionally, propagation of the new or updated 
-        /// profiles can take closer to one minute or longer, espeically during network incidents and outages.
+        /// Under normal operating conditions, newly created or updated customer profiles become available
+        /// for the search operation in well under 30 seconds. Occasionally, propagation of the new or updated
+        /// profiles can take closer to one minute or longer, especially during network incidents and outages.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.SearchCustomersResponse response from the API call</return>
@@ -134,8 +132,8 @@ namespace Square.Apis
         /// the new `customer_id` to update merged profiles.
         /// You cannot edit a customer's cards on file with this endpoint. To make changes
         /// to a card on file, you must delete the existing card on file with the
-        /// [DeleteCustomerCard](#endpoint-deletecustomercard) endpoint, then create a new one with the
-        /// [CreateCustomerCard](#endpoint-createcustomercard) endpoint.
+        /// [DeleteCustomerCard](#endpoint-Customers-deletecustomercard) endpoint, then create a new one with the
+        /// [CreateCustomerCard](#endpoint-Customers-createcustomercard) endpoint.
         /// </summary>
         /// <param name="customerId">Required parameter: The ID of the customer to update.</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
@@ -148,8 +146,8 @@ namespace Square.Apis
         /// the new `customer_id` to update merged profiles.
         /// You cannot edit a customer's cards on file with this endpoint. To make changes
         /// to a card on file, you must delete the existing card on file with the
-        /// [DeleteCustomerCard](#endpoint-deletecustomercard) endpoint, then create a new one with the
-        /// [CreateCustomerCard](#endpoint-createcustomercard) endpoint.
+        /// [DeleteCustomerCard](#endpoint-Customers-deletecustomercard) endpoint, then create a new one with the
+        /// [CreateCustomerCard](#endpoint-Customers-createcustomercard) endpoint.
         /// </summary>
         /// <param name="customerId">Required parameter: The ID of the customer to update.</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>

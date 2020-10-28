@@ -52,97 +52,97 @@ namespace Square.Models
         /// <summary>
         /// The tender's unique ID.
         /// </summary>
-        [JsonProperty("id")]
+        [JsonProperty("id", NullValueHandling = NullValueHandling.Ignore)]
         public string Id { get; }
 
         /// <summary>
         /// Getter for type
         /// </summary>
-        [JsonProperty("type")]
+        [JsonProperty("type", NullValueHandling = NullValueHandling.Ignore)]
         public string Type { get; }
 
         /// <summary>
         /// A human-readable description of the tender.
         /// </summary>
-        [JsonProperty("name")]
+        [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
         public string Name { get; }
 
         /// <summary>
         /// The ID of the employee that processed the tender.
         /// </summary>
-        [JsonProperty("employee_id")]
+        [JsonProperty("employee_id", NullValueHandling = NullValueHandling.Ignore)]
         public string EmployeeId { get; }
 
         /// <summary>
         /// The URL of the receipt for the tender.
         /// </summary>
-        [JsonProperty("receipt_url")]
+        [JsonProperty("receipt_url", NullValueHandling = NullValueHandling.Ignore)]
         public string ReceiptUrl { get; }
 
         /// <summary>
         /// The brand of a credit card.
         /// </summary>
-        [JsonProperty("card_brand")]
+        [JsonProperty("card_brand", NullValueHandling = NullValueHandling.Ignore)]
         public string CardBrand { get; }
 
         /// <summary>
         /// The last four digits of the provided credit card's account number.
         /// </summary>
-        [JsonProperty("pan_suffix")]
+        [JsonProperty("pan_suffix", NullValueHandling = NullValueHandling.Ignore)]
         public string PanSuffix { get; }
 
         /// <summary>
         /// Getter for entry_method
         /// </summary>
-        [JsonProperty("entry_method")]
+        [JsonProperty("entry_method", NullValueHandling = NullValueHandling.Ignore)]
         public string EntryMethod { get; }
 
         /// <summary>
         /// Notes entered by the merchant about the tender at the time of payment, if any. Typically only present for tender with the type: OTHER.
         /// </summary>
-        [JsonProperty("payment_note")]
+        [JsonProperty("payment_note", NullValueHandling = NullValueHandling.Ignore)]
         public string PaymentNote { get; }
 
         /// <summary>
         /// Getter for total_money
         /// </summary>
-        [JsonProperty("total_money")]
+        [JsonProperty("total_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1Money TotalMoney { get; }
 
         /// <summary>
         /// Getter for tendered_money
         /// </summary>
-        [JsonProperty("tendered_money")]
+        [JsonProperty("tendered_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1Money TenderedMoney { get; }
 
         /// <summary>
         /// The time when the tender was created, in ISO 8601 format.
         /// </summary>
-        [JsonProperty("tendered_at")]
+        [JsonProperty("tendered_at", NullValueHandling = NullValueHandling.Ignore)]
         public string TenderedAt { get; }
 
         /// <summary>
         /// The time when the tender was settled, in ISO 8601 format.
         /// </summary>
-        [JsonProperty("settled_at")]
+        [JsonProperty("settled_at", NullValueHandling = NullValueHandling.Ignore)]
         public string SettledAt { get; }
 
         /// <summary>
         /// Getter for change_back_money
         /// </summary>
-        [JsonProperty("change_back_money")]
+        [JsonProperty("change_back_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1Money ChangeBackMoney { get; }
 
         /// <summary>
         /// Getter for refunded_money
         /// </summary>
-        [JsonProperty("refunded_money")]
+        [JsonProperty("refunded_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1Money RefundedMoney { get; }
 
         /// <summary>
         /// Indicates whether or not the tender is associated with an exchange. If is_exchange is true, the tender represents the value of goods returned in an exchange not the actual money paid. The exchange value reduces the tender amounts needed to pay for items purchased in the exchange.
         /// </summary>
-        [JsonProperty("is_exchange")]
+        [JsonProperty("is_exchange", NullValueHandling = NullValueHandling.Ignore)]
         public bool? IsExchange { get; }
 
         public Builder ToBuilder()
@@ -186,100 +186,101 @@ namespace Square.Models
             private Models.V1Money refundedMoney;
             private bool? isExchange;
 
-            public Builder() { }
-            public Builder Id(string value)
+
+
+            public Builder Id(string id)
             {
-                id = value;
+                this.id = id;
                 return this;
             }
 
-            public Builder Type(string value)
+            public Builder Type(string type)
             {
-                type = value;
+                this.type = type;
                 return this;
             }
 
-            public Builder Name(string value)
+            public Builder Name(string name)
             {
-                name = value;
+                this.name = name;
                 return this;
             }
 
-            public Builder EmployeeId(string value)
+            public Builder EmployeeId(string employeeId)
             {
-                employeeId = value;
+                this.employeeId = employeeId;
                 return this;
             }
 
-            public Builder ReceiptUrl(string value)
+            public Builder ReceiptUrl(string receiptUrl)
             {
-                receiptUrl = value;
+                this.receiptUrl = receiptUrl;
                 return this;
             }
 
-            public Builder CardBrand(string value)
+            public Builder CardBrand(string cardBrand)
             {
-                cardBrand = value;
+                this.cardBrand = cardBrand;
                 return this;
             }
 
-            public Builder PanSuffix(string value)
+            public Builder PanSuffix(string panSuffix)
             {
-                panSuffix = value;
+                this.panSuffix = panSuffix;
                 return this;
             }
 
-            public Builder EntryMethod(string value)
+            public Builder EntryMethod(string entryMethod)
             {
-                entryMethod = value;
+                this.entryMethod = entryMethod;
                 return this;
             }
 
-            public Builder PaymentNote(string value)
+            public Builder PaymentNote(string paymentNote)
             {
-                paymentNote = value;
+                this.paymentNote = paymentNote;
                 return this;
             }
 
-            public Builder TotalMoney(Models.V1Money value)
+            public Builder TotalMoney(Models.V1Money totalMoney)
             {
-                totalMoney = value;
+                this.totalMoney = totalMoney;
                 return this;
             }
 
-            public Builder TenderedMoney(Models.V1Money value)
+            public Builder TenderedMoney(Models.V1Money tenderedMoney)
             {
-                tenderedMoney = value;
+                this.tenderedMoney = tenderedMoney;
                 return this;
             }
 
-            public Builder TenderedAt(string value)
+            public Builder TenderedAt(string tenderedAt)
             {
-                tenderedAt = value;
+                this.tenderedAt = tenderedAt;
                 return this;
             }
 
-            public Builder SettledAt(string value)
+            public Builder SettledAt(string settledAt)
             {
-                settledAt = value;
+                this.settledAt = settledAt;
                 return this;
             }
 
-            public Builder ChangeBackMoney(Models.V1Money value)
+            public Builder ChangeBackMoney(Models.V1Money changeBackMoney)
             {
-                changeBackMoney = value;
+                this.changeBackMoney = changeBackMoney;
                 return this;
             }
 
-            public Builder RefundedMoney(Models.V1Money value)
+            public Builder RefundedMoney(Models.V1Money refundedMoney)
             {
-                refundedMoney = value;
+                this.refundedMoney = refundedMoney;
                 return this;
             }
 
-            public Builder IsExchange(bool? value)
+            public Builder IsExchange(bool? isExchange)
             {
-                isExchange = value;
+                this.isExchange = isExchange;
                 return this;
             }
 

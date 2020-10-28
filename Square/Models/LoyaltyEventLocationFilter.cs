@@ -41,9 +41,10 @@ namespace Square.Models
             {
                 this.locationIds = locationIds;
             }
-            public Builder LocationIds(IList<string> value)
+
+            public Builder LocationIds(IList<string> locationIds)
             {
-                locationIds = value;
+                this.locationIds = locationIds;
                 return this;
             }
 

@@ -30,27 +30,27 @@ namespace Square.Models
         public HttpContext Context { get; internal set; }
 
         /// <summary>
-        /// Errors detected when the call to [SearchCatalogItems](#endpoint-Catalog-SearchCatalogItems) endpoint fails.
+        /// Any errors that occurred during the request.
         /// </summary>
-        [JsonProperty("errors")]
+        [JsonProperty("errors", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.Error> Errors { get; }
 
         /// <summary>
         /// Returned items matching the specified query expressions.
         /// </summary>
-        [JsonProperty("items")]
+        [JsonProperty("items", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.CatalogObject> Items { get; }
 
         /// <summary>
         /// Pagination token used in the next request to return more of the search result.
         /// </summary>
-        [JsonProperty("cursor")]
+        [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
         public string Cursor { get; }
 
         /// <summary>
         /// Ids of returned item variations matching the specified query expression.
         /// </summary>
-        [JsonProperty("matched_variation_ids")]
+        [JsonProperty("matched_variation_ids", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> MatchedVariationIds { get; }
 
         public Builder ToBuilder()
@@ -65,33 +65,34 @@ namespace Square.Models
 
         public class Builder
         {
-            private IList<Models.Error> errors = new List<Models.Error>();
-            private IList<Models.CatalogObject> items = new List<Models.CatalogObject>();
+            private IList<Models.Error> errors;
+            private IList<Models.CatalogObject> items;
             private string cursor;
-            private IList<string> matchedVariationIds = new List<string>();
+            private IList<string> matchedVariationIds;
 
-            public Builder() { }
-            public Builder Errors(IList<Models.Error> value)
+
+
+            public Builder Errors(IList<Models.Error> errors)
             {
-                errors = value;
+                this.errors = errors;
                 return this;
             }
 
-            public Builder Items(IList<Models.CatalogObject> value)
+            public Builder Items(IList<Models.CatalogObject> items)
             {
-                items = value;
+                this.items = items;
                 return this;
             }
 
-            public Builder Cursor(string value)
+            public Builder Cursor(string cursor)
             {
-                cursor = value;
+                this.cursor = cursor;
                 return this;
             }
 
-            public Builder MatchedVariationIds(IList<string> value)
+            public Builder MatchedVariationIds(IList<string> matchedVariationIds)
             {
-                matchedVariationIds = value;
+                this.matchedVariationIds = matchedVariationIds;
                 return this;
             }
 

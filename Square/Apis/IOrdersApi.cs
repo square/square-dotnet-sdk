@@ -109,6 +109,20 @@ namespace Square.Apis
         Task<Models.SearchOrdersResponse> SearchOrdersAsync(Models.SearchOrdersRequest body, CancellationToken cancellationToken = default);
 
         /// <summary>
+        /// Retrieves an [Order](#type-order) by ID.
+        /// </summary>
+        /// <param name="orderId">Required parameter: The ID of the order to retrieve.</param>
+        /// <return>Returns the Models.RetrieveOrderResponse response from the API call</return>
+        Models.RetrieveOrderResponse RetrieveOrder(string orderId);
+
+        /// <summary>
+        /// Retrieves an [Order](#type-order) by ID.
+        /// </summary>
+        /// <param name="orderId">Required parameter: The ID of the order to retrieve.</param>
+        /// <return>Returns the Models.RetrieveOrderResponse response from the API call</return>
+        Task<Models.RetrieveOrderResponse> RetrieveOrderAsync(string orderId, CancellationToken cancellationToken = default);
+
+        /// <summary>
         /// Updates an open [Order](#type-order) by adding, replacing, or deleting
         /// fields. Orders with a `COMPLETED` or `CANCELED` state cannot be updated.
         /// An UpdateOrder request requires the following:

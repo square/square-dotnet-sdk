@@ -49,7 +49,7 @@ namespace Square.Models
 
         /// <summary>
         /// The name of this definition for API and seller-facing UI purposes.
-        /// The name must be unique within the (merchant, application_id) pair. Required.
+        /// The name must be unique within the (merchant, application) pair. Required.
         /// May not be empty and may not exceed 255 characters. Can be modified after creation.
         /// </summary>
         [JsonProperty("name")]
@@ -59,13 +59,13 @@ namespace Square.Models
         /// Seller-oriented description of the meaning of this Custom Attribute,
         /// any constraints that the seller should observe, etc. May be displayed as a tooltip in Square UIs.
         /// </summary>
-        [JsonProperty("description")]
+        [JsonProperty("description", NullValueHandling = NullValueHandling.Ignore)]
         public string Description { get; }
 
         /// <summary>
         /// Provides information about the application used to generate a change.
         /// </summary>
-        [JsonProperty("source_application")]
+        [JsonProperty("source_application", NullValueHandling = NullValueHandling.Ignore)]
         public Models.SourceApplication SourceApplication { get; }
 
         /// <summary>
@@ -81,32 +81,32 @@ namespace Square.Models
         /// client applications, Square APIs or in Square UIs (including Square Point
         /// of Sale applications and Square Dashboard).
         /// </summary>
-        [JsonProperty("seller_visibility")]
+        [JsonProperty("seller_visibility", NullValueHandling = NullValueHandling.Ignore)]
         public string SellerVisibility { get; }
 
         /// <summary>
         /// Defines the visibility of a custom attribute to applications other than their
         /// creating application.
         /// </summary>
-        [JsonProperty("app_visibility")]
+        [JsonProperty("app_visibility", NullValueHandling = NullValueHandling.Ignore)]
         public string AppVisibility { get; }
 
         /// <summary>
         /// Configuration associated with Custom Attribute Definitions of type `STRING`.
         /// </summary>
-        [JsonProperty("string_config")]
+        [JsonProperty("string_config", NullValueHandling = NullValueHandling.Ignore)]
         public Models.CatalogCustomAttributeDefinitionStringConfig StringConfig { get; }
 
         /// <summary>
         /// Getter for number_config
         /// </summary>
-        [JsonProperty("number_config")]
+        [JsonProperty("number_config", NullValueHandling = NullValueHandling.Ignore)]
         public Models.CatalogCustomAttributeDefinitionNumberConfig NumberConfig { get; }
 
         /// <summary>
         /// Configuration associated with `SELECTION`-type custom attribute definitions.
         /// </summary>
-        [JsonProperty("selection_config")]
+        [JsonProperty("selection_config", NullValueHandling = NullValueHandling.Ignore)]
         public Models.CatalogCustomAttributeDefinitionSelectionConfig SelectionConfig { get; }
 
         /// <summary>
@@ -115,16 +115,16 @@ namespace Square.Models
         /// request with `include_counts` set to `true`.  If the actual count is greater
         /// than 100, `custom_attribute_usage_count` will be set to `100`.
         /// </summary>
-        [JsonProperty("custom_attribute_usage_count")]
+        [JsonProperty("custom_attribute_usage_count", NullValueHandling = NullValueHandling.Ignore)]
         public int? CustomAttributeUsageCount { get; }
 
         /// <summary>
         /// The name of the desired custom attribute key that can be used to access
         /// the custom attribute value on catalog objects. Cannot be modified after the
         /// custom attribute definition has been created.
-        /// Must be between 1 and 60 characters, and may only contain the characters [a-zA-Z0-9_-].
+        /// Must be between 1 and 60 characters, and may only contain the characters `[a-zA-Z0-9_-]`.
         /// </summary>
-        [JsonProperty("key")]
+        [JsonProperty("key", NullValueHandling = NullValueHandling.Ignore)]
         public string Key { get; }
 
         public Builder ToBuilder()
@@ -167,75 +167,76 @@ namespace Square.Models
                 this.name = name;
                 this.allowedObjectTypes = allowedObjectTypes;
             }
-            public Builder Type(string value)
+
+            public Builder Type(string type)
             {
-                type = value;
+                this.type = type;
                 return this;
             }
 
-            public Builder Name(string value)
+            public Builder Name(string name)
             {
-                name = value;
+                this.name = name;
                 return this;
             }
 
-            public Builder AllowedObjectTypes(IList<string> value)
+            public Builder AllowedObjectTypes(IList<string> allowedObjectTypes)
             {
-                allowedObjectTypes = value;
+                this.allowedObjectTypes = allowedObjectTypes;
                 return this;
             }
 
-            public Builder Description(string value)
+            public Builder Description(string description)
             {
-                description = value;
+                this.description = description;
                 return this;
             }
 
-            public Builder SourceApplication(Models.SourceApplication value)
+            public Builder SourceApplication(Models.SourceApplication sourceApplication)
             {
-                sourceApplication = value;
+                this.sourceApplication = sourceApplication;
                 return this;
             }
 
-            public Builder SellerVisibility(string value)
+            public Builder SellerVisibility(string sellerVisibility)
             {
-                sellerVisibility = value;
+                this.sellerVisibility = sellerVisibility;
                 return this;
             }
 
-            public Builder AppVisibility(string value)
+            public Builder AppVisibility(string appVisibility)
             {
-                appVisibility = value;
+                this.appVisibility = appVisibility;
                 return this;
             }
 
-            public Builder StringConfig(Models.CatalogCustomAttributeDefinitionStringConfig value)
+            public Builder StringConfig(Models.CatalogCustomAttributeDefinitionStringConfig stringConfig)
             {
-                stringConfig = value;
+                this.stringConfig = stringConfig;
                 return this;
             }
 
-            public Builder NumberConfig(Models.CatalogCustomAttributeDefinitionNumberConfig value)
+            public Builder NumberConfig(Models.CatalogCustomAttributeDefinitionNumberConfig numberConfig)
             {
-                numberConfig = value;
+                this.numberConfig = numberConfig;
                 return this;
             }
 
-            public Builder SelectionConfig(Models.CatalogCustomAttributeDefinitionSelectionConfig value)
+            public Builder SelectionConfig(Models.CatalogCustomAttributeDefinitionSelectionConfig selectionConfig)
             {
-                selectionConfig = value;
+                this.selectionConfig = selectionConfig;
                 return this;
             }
 
-            public Builder CustomAttributeUsageCount(int? value)
+            public Builder CustomAttributeUsageCount(int? customAttributeUsageCount)
             {
-                customAttributeUsageCount = value;
+                this.customAttributeUsageCount = customAttributeUsageCount;
                 return this;
             }
 
-            public Builder Key(string value)
+            public Builder Key(string key)
             {
-                key = value;
+                this.key = key;
                 return this;
             }
 

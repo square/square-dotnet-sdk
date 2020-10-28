@@ -40,49 +40,49 @@ namespace Square.Models
         /// <summary>
         /// The bank account's Square-issued ID.
         /// </summary>
-        [JsonProperty("id")]
+        [JsonProperty("id", NullValueHandling = NullValueHandling.Ignore)]
         public string Id { get; }
 
         /// <summary>
         /// The Square-issued ID of the merchant associated with the bank account.
         /// </summary>
-        [JsonProperty("merchant_id")]
+        [JsonProperty("merchant_id", NullValueHandling = NullValueHandling.Ignore)]
         public string MerchantId { get; }
 
         /// <summary>
         /// The name of the bank that manages the account.
         /// </summary>
-        [JsonProperty("bank_name")]
+        [JsonProperty("bank_name", NullValueHandling = NullValueHandling.Ignore)]
         public string BankName { get; }
 
         /// <summary>
         /// The name associated with the bank account.
         /// </summary>
-        [JsonProperty("name")]
+        [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
         public string Name { get; }
 
         /// <summary>
         /// The bank account's routing number.
         /// </summary>
-        [JsonProperty("routing_number")]
+        [JsonProperty("routing_number", NullValueHandling = NullValueHandling.Ignore)]
         public string RoutingNumber { get; }
 
         /// <summary>
         /// The last few digits of the bank account number.
         /// </summary>
-        [JsonProperty("account_number_suffix")]
+        [JsonProperty("account_number_suffix", NullValueHandling = NullValueHandling.Ignore)]
         public string AccountNumberSuffix { get; }
 
         /// <summary>
         /// The currency code of the currency associated with the bank account, in ISO 4217 format. For example, the currency code for US dollars is USD.
         /// </summary>
-        [JsonProperty("currency_code")]
+        [JsonProperty("currency_code", NullValueHandling = NullValueHandling.Ignore)]
         public string CurrencyCode { get; }
 
         /// <summary>
         /// Getter for type
         /// </summary>
-        [JsonProperty("type")]
+        [JsonProperty("type", NullValueHandling = NullValueHandling.Ignore)]
         public string Type { get; }
 
         public Builder ToBuilder()
@@ -110,52 +110,53 @@ namespace Square.Models
             private string currencyCode;
             private string type;
 
-            public Builder() { }
-            public Builder Id(string value)
+
+
+            public Builder Id(string id)
             {
-                id = value;
+                this.id = id;
                 return this;
             }
 
-            public Builder MerchantId(string value)
+            public Builder MerchantId(string merchantId)
             {
-                merchantId = value;
+                this.merchantId = merchantId;
                 return this;
             }
 
-            public Builder BankName(string value)
+            public Builder BankName(string bankName)
             {
-                bankName = value;
+                this.bankName = bankName;
                 return this;
             }
 
-            public Builder Name(string value)
+            public Builder Name(string name)
             {
-                name = value;
+                this.name = name;
                 return this;
             }
 
-            public Builder RoutingNumber(string value)
+            public Builder RoutingNumber(string routingNumber)
             {
-                routingNumber = value;
+                this.routingNumber = routingNumber;
                 return this;
             }
 
-            public Builder AccountNumberSuffix(string value)
+            public Builder AccountNumberSuffix(string accountNumberSuffix)
             {
-                accountNumberSuffix = value;
+                this.accountNumberSuffix = accountNumberSuffix;
                 return this;
             }
 
-            public Builder CurrencyCode(string value)
+            public Builder CurrencyCode(string currencyCode)
             {
-                currencyCode = value;
+                this.currencyCode = currencyCode;
                 return this;
             }
 
-            public Builder Type(string value)
+            public Builder Type(string type)
             {
-                type = value;
+                this.type = type;
                 return this;
             }
 

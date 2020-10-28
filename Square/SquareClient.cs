@@ -10,13 +10,17 @@ using Square.Utilities;
 
 namespace Square
 {
+    /// <summary>
+    /// Gateway for the SDK. This class acts as a factory for Api and also holds 
+    /// the configuration of the SDK.
+    /// </summary>
     public sealed class SquareClient : ISquareClient
     {
-        private readonly IDictionary<string, IAuthManager> authManagers;
+        internal readonly IDictionary<string, IAuthManager> authManagers;
         private readonly IDictionary<string, List<string>> additionalHeaders;
+        internal readonly IHttpClient httpClient;
+        internal readonly HttpCallBack httpCallBack;
         private readonly AccessTokenManager accessTokenManager;
-        private readonly IHttpClient httpClient;
-        private readonly HttpCallBack httpCallBack;
         private readonly Lazy<IMobileAuthorizationApi> mobileAuthorization;
         private readonly Lazy<IOAuthApi> oAuth;
         private readonly Lazy<IV1LocationsApi> v1Locations;
@@ -49,164 +53,164 @@ namespace Square
         private readonly Lazy<ITerminalApi> terminal;
 
         /// <summary>
-        /// Provides access to MobileAuthorizationApi controller
+        /// Provides access to MobileAuthorizationApi.
         /// </summary>
         public IMobileAuthorizationApi MobileAuthorizationApi => mobileAuthorization.Value;
 
         /// <summary>
-        /// Provides access to OAuthApi controller
+        /// Provides access to OAuthApi.
         /// </summary>
         public IOAuthApi OAuthApi => oAuth.Value;
 
         /// <summary>
-        /// Provides access to V1LocationsApi controller
+        /// Provides access to V1LocationsApi.
         /// </summary>
         public IV1LocationsApi V1LocationsApi => v1Locations.Value;
 
         /// <summary>
-        /// Provides access to V1EmployeesApi controller
+        /// Provides access to V1EmployeesApi.
         /// </summary>
         public IV1EmployeesApi V1EmployeesApi => v1Employees.Value;
 
         /// <summary>
-        /// Provides access to V1TransactionsApi controller
+        /// Provides access to V1TransactionsApi.
         /// </summary>
         public IV1TransactionsApi V1TransactionsApi => v1Transactions.Value;
 
         /// <summary>
-        /// Provides access to V1ItemsApi controller
+        /// Provides access to V1ItemsApi.
         /// </summary>
         public IV1ItemsApi V1ItemsApi => v1Items.Value;
 
         /// <summary>
-        /// Provides access to ApplePayApi controller
+        /// Provides access to ApplePayApi.
         /// </summary>
         public IApplePayApi ApplePayApi => applePay.Value;
 
         /// <summary>
-        /// Provides access to BankAccountsApi controller
+        /// Provides access to BankAccountsApi.
         /// </summary>
         public IBankAccountsApi BankAccountsApi => bankAccounts.Value;
 
         /// <summary>
-        /// Provides access to CashDrawersApi controller
+        /// Provides access to CashDrawersApi.
         /// </summary>
         public ICashDrawersApi CashDrawersApi => cashDrawers.Value;
 
         /// <summary>
-        /// Provides access to CatalogApi controller
+        /// Provides access to CatalogApi.
         /// </summary>
         public ICatalogApi CatalogApi => catalog.Value;
 
         /// <summary>
-        /// Provides access to CustomersApi controller
+        /// Provides access to CustomersApi.
         /// </summary>
         public ICustomersApi CustomersApi => customers.Value;
 
         /// <summary>
-        /// Provides access to CustomerGroupsApi controller
+        /// Provides access to CustomerGroupsApi.
         /// </summary>
         public ICustomerGroupsApi CustomerGroupsApi => customerGroups.Value;
 
         /// <summary>
-        /// Provides access to CustomerSegmentsApi controller
+        /// Provides access to CustomerSegmentsApi.
         /// </summary>
         public ICustomerSegmentsApi CustomerSegmentsApi => customerSegments.Value;
 
         /// <summary>
-        /// Provides access to DevicesApi controller
+        /// Provides access to DevicesApi.
         /// </summary>
         public IDevicesApi DevicesApi => devices.Value;
 
         /// <summary>
-        /// Provides access to DisputesApi controller
+        /// Provides access to DisputesApi.
         /// </summary>
         public IDisputesApi DisputesApi => disputes.Value;
 
         /// <summary>
-        /// Provides access to EmployeesApi controller
+        /// Provides access to EmployeesApi.
         /// </summary>
         public IEmployeesApi EmployeesApi => employees.Value;
 
         /// <summary>
-        /// Provides access to InventoryApi controller
+        /// Provides access to InventoryApi.
         /// </summary>
         public IInventoryApi InventoryApi => inventory.Value;
 
         /// <summary>
-        /// Provides access to InvoicesApi controller
+        /// Provides access to InvoicesApi.
         /// </summary>
         public IInvoicesApi InvoicesApi => invoices.Value;
 
         /// <summary>
-        /// Provides access to LaborApi controller
+        /// Provides access to LaborApi.
         /// </summary>
         public ILaborApi LaborApi => labor.Value;
 
         /// <summary>
-        /// Provides access to LocationsApi controller
+        /// Provides access to LocationsApi.
         /// </summary>
         public ILocationsApi LocationsApi => locations.Value;
 
         /// <summary>
-        /// Provides access to CheckoutApi controller
+        /// Provides access to CheckoutApi.
         /// </summary>
         public ICheckoutApi CheckoutApi => checkout.Value;
 
         /// <summary>
-        /// Provides access to TransactionsApi controller
+        /// Provides access to TransactionsApi.
         /// </summary>
         public ITransactionsApi TransactionsApi => transactions.Value;
 
         /// <summary>
-        /// Provides access to LoyaltyApi controller
+        /// Provides access to LoyaltyApi.
         /// </summary>
         public ILoyaltyApi LoyaltyApi => loyalty.Value;
 
         /// <summary>
-        /// Provides access to MerchantsApi controller
+        /// Provides access to MerchantsApi.
         /// </summary>
         public IMerchantsApi MerchantsApi => merchants.Value;
 
         /// <summary>
-        /// Provides access to OrdersApi controller
+        /// Provides access to OrdersApi.
         /// </summary>
         public IOrdersApi OrdersApi => orders.Value;
 
         /// <summary>
-        /// Provides access to PaymentsApi controller
+        /// Provides access to PaymentsApi.
         /// </summary>
         public IPaymentsApi PaymentsApi => payments.Value;
 
         /// <summary>
-        /// Provides access to RefundsApi controller
+        /// Provides access to RefundsApi.
         /// </summary>
         public IRefundsApi RefundsApi => refunds.Value;
 
         /// <summary>
-        /// Provides access to SubscriptionsApi controller
+        /// Provides access to SubscriptionsApi.
         /// </summary>
         public ISubscriptionsApi SubscriptionsApi => subscriptions.Value;
 
         /// <summary>
-        /// Provides access to TeamApi controller
+        /// Provides access to TeamApi.
         /// </summary>
         public ITeamApi TeamApi => team.Value;
 
         /// <summary>
-        /// Provides access to TerminalApi controller
+        /// Provides access to TerminalApi.
         /// </summary>
         public ITerminalApi TerminalApi => terminal.Value;
 
         /// <summary>
-        /// Provides access to Additional headers
+        /// Provides access to Additional headers.
         /// </summary>
         public IDictionary<string, List<string>> AdditionalHeaders => additionalHeaders.ToDictionary(s => s.Key, s => new List<string>(s.Value));
 
         /// <summary>
-        /// Current version of the SDK
+        /// Current version of the SDK.
         /// </summary>
-        public string SdkVersion => "6.4.0";
+        public string SdkVersion => "6.5.0";
 
         internal static SquareClient CreateFromEnvironment()
         {
@@ -214,8 +218,8 @@ namespace Square
 
             string timeout = System.Environment.GetEnvironmentVariable("SQUARE_TIMEOUT");
             string squareVersion = System.Environment.GetEnvironmentVariable("SQUARE_SQUARE_VERSION");
-            string accessToken = System.Environment.GetEnvironmentVariable("SQUARE_ACCESS_TOKEN");
             string environment = System.Environment.GetEnvironmentVariable("SQUARE_ENVIRONMENT");
+            string accessToken = System.Environment.GetEnvironmentVariable("SQUARE_ACCESS_TOKEN");
 
             if (timeout != null)
             {
@@ -227,107 +231,122 @@ namespace Square
                 builder.SquareVersion(squareVersion);
             }
 
-            if (accessToken != null)
-            {
-                builder.AccessToken(accessToken);
-            }
-
             if (environment != null)
             {
                 builder.Environment(EnvironmentHelper.ParseString(environment));
             }
 
+            if (accessToken != null)
+            {
+                builder.AccessToken(accessToken);
+            }
+
             return builder.Build();
         }
 
-        private SquareClient(TimeSpan timeout, string squareVersion, string accessToken,
-                Environment environment, IDictionary<string, IAuthManager> authManagers,
+        private SquareClient(TimeSpan timeout, string squareVersion, Environment environment,
+                string accessToken, IDictionary<string, IAuthManager> authManagers,
                 IHttpClient httpClient, HttpCallBack httpCallBack,
                 IDictionary<string, List<string>> additionalHeaders,
                 IHttpClientConfiguration httpClientConfiguration)
         {
             Timeout = timeout;
             SquareVersion = squareVersion;
-            AccessToken = accessToken;
             Environment = environment;
             this.httpCallBack = httpCallBack;
             this.httpClient = httpClient;
-            this.authManagers = new Dictionary<string, IAuthManager>(authManagers);
-            accessTokenManager = new AccessTokenManager(accessToken);
-            this.additionalHeaders = additionalHeaders;                HttpClientConfiguration = httpClientConfiguration;
+            this.authManagers = (authManagers == null) ? new Dictionary<string, IAuthManager>() : new Dictionary<string, IAuthManager>(authManagers);
+            this.additionalHeaders = additionalHeaders;
+            HttpClientConfiguration = httpClientConfiguration;
 
             mobileAuthorization = new Lazy<IMobileAuthorizationApi>(
-                () => new MobileAuthorizationApi(this, this.httpClient, authManagers, this.httpCallBack));
+                () => new MobileAuthorizationApi(this, this.httpClient, this.authManagers, this.httpCallBack));
             oAuth = new Lazy<IOAuthApi>(
-                () => new OAuthApi(this, this.httpClient, authManagers, this.httpCallBack));
+                () => new OAuthApi(this, this.httpClient, this.authManagers, this.httpCallBack));
             v1Locations = new Lazy<IV1LocationsApi>(
-                () => new V1LocationsApi(this, this.httpClient, authManagers, this.httpCallBack));
+                () => new V1LocationsApi(this, this.httpClient, this.authManagers, this.httpCallBack));
             v1Employees = new Lazy<IV1EmployeesApi>(
-                () => new V1EmployeesApi(this, this.httpClient, authManagers, this.httpCallBack));
+                () => new V1EmployeesApi(this, this.httpClient, this.authManagers, this.httpCallBack));
             v1Transactions = new Lazy<IV1TransactionsApi>(
-                () => new V1TransactionsApi(this, this.httpClient, authManagers, this.httpCallBack));
+                () => new V1TransactionsApi(this, this.httpClient, this.authManagers, this.httpCallBack));
             v1Items = new Lazy<IV1ItemsApi>(
-                () => new V1ItemsApi(this, this.httpClient, authManagers, this.httpCallBack));
+                () => new V1ItemsApi(this, this.httpClient, this.authManagers, this.httpCallBack));
             applePay = new Lazy<IApplePayApi>(
-                () => new ApplePayApi(this, this.httpClient, authManagers, this.httpCallBack));
+                () => new ApplePayApi(this, this.httpClient, this.authManagers, this.httpCallBack));
             bankAccounts = new Lazy<IBankAccountsApi>(
-                () => new BankAccountsApi(this, this.httpClient, authManagers, this.httpCallBack));
+                () => new BankAccountsApi(this, this.httpClient, this.authManagers, this.httpCallBack));
             cashDrawers = new Lazy<ICashDrawersApi>(
-                () => new CashDrawersApi(this, this.httpClient, authManagers, this.httpCallBack));
+                () => new CashDrawersApi(this, this.httpClient, this.authManagers, this.httpCallBack));
             catalog = new Lazy<ICatalogApi>(
-                () => new CatalogApi(this, this.httpClient, authManagers, this.httpCallBack));
+                () => new CatalogApi(this, this.httpClient, this.authManagers, this.httpCallBack));
             customers = new Lazy<ICustomersApi>(
-                () => new CustomersApi(this, this.httpClient, authManagers, this.httpCallBack));
+                () => new CustomersApi(this, this.httpClient, this.authManagers, this.httpCallBack));
             customerGroups = new Lazy<ICustomerGroupsApi>(
-                () => new CustomerGroupsApi(this, this.httpClient, authManagers, this.httpCallBack));
+                () => new CustomerGroupsApi(this, this.httpClient, this.authManagers, this.httpCallBack));
             customerSegments = new Lazy<ICustomerSegmentsApi>(
-                () => new CustomerSegmentsApi(this, this.httpClient, authManagers, this.httpCallBack));
+                () => new CustomerSegmentsApi(this, this.httpClient, this.authManagers, this.httpCallBack));
             devices = new Lazy<IDevicesApi>(
-                () => new DevicesApi(this, this.httpClient, authManagers, this.httpCallBack));
+                () => new DevicesApi(this, this.httpClient, this.authManagers, this.httpCallBack));
             disputes = new Lazy<IDisputesApi>(
-                () => new DisputesApi(this, this.httpClient, authManagers, this.httpCallBack));
+                () => new DisputesApi(this, this.httpClient, this.authManagers, this.httpCallBack));
             employees = new Lazy<IEmployeesApi>(
-                () => new EmployeesApi(this, this.httpClient, authManagers, this.httpCallBack));
+                () => new EmployeesApi(this, this.httpClient, this.authManagers, this.httpCallBack));
             inventory = new Lazy<IInventoryApi>(
-                () => new InventoryApi(this, this.httpClient, authManagers, this.httpCallBack));
+                () => new InventoryApi(this, this.httpClient, this.authManagers, this.httpCallBack));
             invoices = new Lazy<IInvoicesApi>(
-                () => new InvoicesApi(this, this.httpClient, authManagers, this.httpCallBack));
+                () => new InvoicesApi(this, this.httpClient, this.authManagers, this.httpCallBack));
             labor = new Lazy<ILaborApi>(
-                () => new LaborApi(this, this.httpClient, authManagers, this.httpCallBack));
+                () => new LaborApi(this, this.httpClient, this.authManagers, this.httpCallBack));
             locations = new Lazy<ILocationsApi>(
-                () => new LocationsApi(this, this.httpClient, authManagers, this.httpCallBack));
+                () => new LocationsApi(this, this.httpClient, this.authManagers, this.httpCallBack));
             checkout = new Lazy<ICheckoutApi>(
-                () => new CheckoutApi(this, this.httpClient, authManagers, this.httpCallBack));
+                () => new CheckoutApi(this, this.httpClient, this.authManagers, this.httpCallBack));
             transactions = new Lazy<ITransactionsApi>(
-                () => new TransactionsApi(this, this.httpClient, authManagers, this.httpCallBack));
+                () => new TransactionsApi(this, this.httpClient, this.authManagers, this.httpCallBack));
             loyalty = new Lazy<ILoyaltyApi>(
-                () => new LoyaltyApi(this, this.httpClient, authManagers, this.httpCallBack));
+                () => new LoyaltyApi(this, this.httpClient, this.authManagers, this.httpCallBack));
             merchants = new Lazy<IMerchantsApi>(
-                () => new MerchantsApi(this, this.httpClient, authManagers, this.httpCallBack));
+                () => new MerchantsApi(this, this.httpClient, this.authManagers, this.httpCallBack));
             orders = new Lazy<IOrdersApi>(
-                () => new OrdersApi(this, this.httpClient, authManagers, this.httpCallBack));
+                () => new OrdersApi(this, this.httpClient, this.authManagers, this.httpCallBack));
             payments = new Lazy<IPaymentsApi>(
-                () => new PaymentsApi(this, this.httpClient, authManagers, this.httpCallBack));
+                () => new PaymentsApi(this, this.httpClient, this.authManagers, this.httpCallBack));
             refunds = new Lazy<IRefundsApi>(
-                () => new RefundsApi(this, this.httpClient, authManagers, this.httpCallBack));
+                () => new RefundsApi(this, this.httpClient, this.authManagers, this.httpCallBack));
             subscriptions = new Lazy<ISubscriptionsApi>(
-                () => new SubscriptionsApi(this, this.httpClient, authManagers, this.httpCallBack));
+                () => new SubscriptionsApi(this, this.httpClient, this.authManagers, this.httpCallBack));
             team = new Lazy<ITeamApi>(
-                () => new TeamApi(this, this.httpClient, authManagers, this.httpCallBack));
+                () => new TeamApi(this, this.httpClient, this.authManagers, this.httpCallBack));
             terminal = new Lazy<ITerminalApi>(
-                () => new TerminalApi(this, this.httpClient, authManagers, this.httpCallBack));
+                () => new TerminalApi(this, this.httpClient, this.authManagers, this.httpCallBack));
 
-            if (!authManagers.ContainsKey("default") ||
-                ((AccessTokenManager)authManagers["default"]).AccessToken != accessToken)
+            if (this.authManagers.ContainsKey("global"))
             {
-                authManagers["default"] = accessTokenManager;
+                accessTokenManager = (AccessTokenManager) this.authManagers["global"];
+            }
+
+            if (!this.authManagers.ContainsKey("global")
+                || !AccessTokenCredentials.Equals(accessToken))
+            {
+                accessTokenManager = new AccessTokenManager(accessToken);
+                this.authManagers["global"] = accessTokenManager;
             }
         }
 
         /// <summary>
-        /// The configuration of the Http Client associated with this SquareClient.
+        /// The configuration of the Http Client associated with this client.
         /// </summary>
         public IHttpClientConfiguration HttpClientConfiguration { get; }
+
+        /// <summary>
+        /// The credentials to use with AccessToken
+        /// </summary>
+        private IAccessTokenCredentials AccessTokenCredentials { get => accessTokenManager; }
+
+        /// <summary>
+        /// Access token to use with OAuth 2 authentication.
+        /// </summary>
+        public string AccessToken { get => AccessTokenCredentials.AccessToken; }
 
         /// <summary>
         /// Http client timeout
@@ -338,11 +357,6 @@ namespace Square
         /// Square Connect API versions
         /// </summary>
         public string SquareVersion { get; }
-
-        /// <summary>
-        /// OAuth 2.0 Access Token
-        /// </summary>
-        public string AccessToken { get; }
 
         /// <summary>
         /// Current API environment
@@ -380,7 +394,8 @@ namespace Square
         }
 
         /// <summary>
-        /// Gets the URL for a particular alias in the current environment and appends it with template parameters
+        /// Gets the URL for a particular alias in the current environment and appends 
+        /// it with template parameters.
         /// </summary>
         /// <param name="alias">Default value:DEFAULT</param>
         /// <return>Returns the baseurl</return>
@@ -391,17 +406,20 @@ namespace Square
             return Url.ToString();
         }
 
+        /// <summary>
+        /// Creates an object of the SquareClient using the values provided for the builder.
+        /// </summary>
         public Builder ToBuilder()
         {
-            Builder builder = new Builder();
-            builder.Timeout(Timeout);
-            builder.SquareVersion(SquareVersion);
-            builder.AccessToken(AccessToken);
-            builder.Environment(Environment);
-            builder.AdditionalHeaders(additionalHeaders);
-            builder.HttpCallBack(httpCallBack);
-            builder.HttpClient(httpClient);
-            builder.AuthManagers(authManagers);
+            Builder builder = new Builder()
+                .Timeout(Timeout)
+                .SquareVersion(SquareVersion)
+                .Environment(Environment)
+                .AccessToken(AccessTokenCredentials.AccessToken)
+                .AdditionalHeaders(additionalHeaders)
+                .HttpCallBack(httpCallBack)
+                .HttpClient(httpClient)
+                .AuthManagers(authManagers);
 
             return builder;
         }
@@ -409,38 +427,46 @@ namespace Square
         public class Builder
         {
             private TimeSpan timeout = TimeSpan.FromSeconds(60);
-            private string squareVersion = "2020-09-23";
-            private string accessToken = String.Empty;
+            private string squareVersion = "2020-10-28";
             private Environment environment = Square.Environment.Production;
-            private IHttpClient httpClient;
-            private IDictionary<string, List<string>> additionalHeaders = new Dictionary<string, List<string>>();
+            private string accessToken = "TODO: Replace";
             private IDictionary<string, IAuthManager> authManagers = new Dictionary<string, IAuthManager>();
-            private HttpClientConfiguration httpClientConfig = new HttpClientConfiguration();
-            private HttpCallBack httpCallBack;
             private bool createCustomHttpClient = false;
+            private HttpClientConfiguration httpClientConfig = new HttpClientConfiguration();
+            private IHttpClient httpClient;
+            private HttpCallBack httpCallBack;
+            private IDictionary<string, List<string>> additionalHeaders = new Dictionary<string, List<string>>();
 
-            // Setter for SquareVersion
-            public Builder SquareVersion(string squareVersion)
-            {
-                this.squareVersion = squareVersion ?? throw new ArgumentNullException(nameof(squareVersion));
-                return this;
-            }
-
-            // Setter for AccessToken
+            /// <summary>
+            /// Credentials setter for AccessToken
+            /// </summary>
             public Builder AccessToken(string accessToken)
             {
                 this.accessToken = accessToken ?? throw new ArgumentNullException(nameof(accessToken));
                 return this;
             }
 
-            // Setter for Environment
+            /// <summary>
+            /// Setter for SquareVersion.
+            /// </summary>
+            public Builder SquareVersion(string squareVersion)
+            {
+                this.squareVersion = squareVersion ?? throw new ArgumentNullException(nameof(squareVersion));
+                return this;
+            }
+
+            /// <summary>
+            /// Setter for Environment.
+            /// </summary>
             public Builder Environment(Environment environment)
             {
                 this.environment = environment;
                 return this;
             }
 
-            // Setter for Timeout
+            /// <summary>
+            /// Setter for Timeout.
+            /// </summary>
             public Builder Timeout(TimeSpan timeout)
             {
                 httpClientConfig.Timeout = timeout.TotalSeconds <= 0 ? TimeSpan.FromSeconds(60) : timeout;
@@ -448,6 +474,9 @@ namespace Square
                 return this;
             }
 
+            /// <summary>
+            /// Sets the AdditionalHeaders for the Builder.
+            /// </summary>
             public Builder AdditionalHeaders(IDictionary<string, List<string>> additionalHeaders)
             {
                 if (additionalHeaders is null)
@@ -459,6 +488,9 @@ namespace Square
                 return this;
             }
 
+            /// <summary>
+            /// Adds AdditionalHeader.
+            /// </summary>
             public Builder AddAdditionalHeader(string headerName, string headerValue)
             {
                 if (string.IsNullOrWhiteSpace(headerName))
@@ -483,24 +515,36 @@ namespace Square
                 return this;
             }
 
+            /// <summary>
+            /// Sets the IHttpClient for the Builder.
+            /// </summary>
             internal Builder HttpClient(IHttpClient httpClient)
             {
                 this.httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
                 return this;
             }
 
+            /// <summary>
+            /// Sets the authentication managers for the Builder.
+            /// </summary>
             internal Builder AuthManagers(IDictionary<string, IAuthManager> authManagers)
             {
                 this.authManagers = authManagers ?? throw new ArgumentNullException(nameof(authManagers));
                 return this;
             }
 
+            /// <summary>
+            /// Sets the HttpCallBack for the Builder.
+            /// </summary>
             internal Builder HttpCallBack(HttpCallBack httpCallBack)
             {
                 this.httpCallBack = httpCallBack;
                 return this;
             }
 
+            /// <summary>
+            /// Creates an object of the SquareClient using the values provided for the builder.
+            /// </summary>
             public SquareClient Build()
             {
                 if (createCustomHttpClient) 
@@ -512,7 +556,7 @@ namespace Square
                     httpClient = new HttpClientWrapper();
                 }
 
-                return new SquareClient(timeout, squareVersion, accessToken, environment, authManagers, httpClient, httpCallBack,
+                return new SquareClient(timeout, squareVersion, environment, accessToken, authManagers, httpClient, httpCallBack,
                         additionalHeaders, httpClientConfig);
             }
         }

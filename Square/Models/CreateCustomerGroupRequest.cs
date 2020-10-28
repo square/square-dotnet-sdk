@@ -25,7 +25,7 @@ namespace Square.Models
         /// The idempotency key for the request. See the [Idempotency](https://developer.squareup.com/docs/basics/api101/idempotency)
         /// guide for more information.
         /// </summary>
-        [JsonProperty("idempotency_key")]
+        [JsonProperty("idempotency_key", NullValueHandling = NullValueHandling.Ignore)]
         public string IdempotencyKey { get; }
 
         /// <summary>
@@ -52,15 +52,16 @@ namespace Square.Models
             {
                 this.mGroup = mGroup;
             }
-            public Builder MGroup(Models.CustomerGroup value)
+
+            public Builder MGroup(Models.CustomerGroup mGroup)
             {
-                mGroup = value;
+                this.mGroup = mGroup;
                 return this;
             }
 
-            public Builder IdempotencyKey(string value)
+            public Builder IdempotencyKey(string idempotencyKey)
             {
-                idempotencyKey = value;
+                this.idempotencyKey = idempotencyKey;
                 return this;
             }
 

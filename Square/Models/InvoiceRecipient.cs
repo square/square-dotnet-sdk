@@ -35,43 +35,43 @@ namespace Square.Models
         /// The ID of the customer. This is the customer profile ID that 
         /// you provide when creating a draft invoice.
         /// </summary>
-        [JsonProperty("customer_id")]
+        [JsonProperty("customer_id", NullValueHandling = NullValueHandling.Ignore)]
         public string CustomerId { get; }
 
         /// <summary>
         /// The recipient's given (that is, first) name.
         /// </summary>
-        [JsonProperty("given_name")]
+        [JsonProperty("given_name", NullValueHandling = NullValueHandling.Ignore)]
         public string GivenName { get; }
 
         /// <summary>
         /// The recipient's family (that is, last) name.
         /// </summary>
-        [JsonProperty("family_name")]
+        [JsonProperty("family_name", NullValueHandling = NullValueHandling.Ignore)]
         public string FamilyName { get; }
 
         /// <summary>
         /// The recipient's email address.
         /// </summary>
-        [JsonProperty("email_address")]
+        [JsonProperty("email_address", NullValueHandling = NullValueHandling.Ignore)]
         public string EmailAddress { get; }
 
         /// <summary>
         /// Represents a physical address.
         /// </summary>
-        [JsonProperty("address")]
+        [JsonProperty("address", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Address Address { get; }
 
         /// <summary>
         /// The recipient's phone number.
         /// </summary>
-        [JsonProperty("phone_number")]
+        [JsonProperty("phone_number", NullValueHandling = NullValueHandling.Ignore)]
         public string PhoneNumber { get; }
 
         /// <summary>
         /// The name of the recipient's company.
         /// </summary>
-        [JsonProperty("company_name")]
+        [JsonProperty("company_name", NullValueHandling = NullValueHandling.Ignore)]
         public string CompanyName { get; }
 
         public Builder ToBuilder()
@@ -97,46 +97,47 @@ namespace Square.Models
             private string phoneNumber;
             private string companyName;
 
-            public Builder() { }
-            public Builder CustomerId(string value)
+
+
+            public Builder CustomerId(string customerId)
             {
-                customerId = value;
+                this.customerId = customerId;
                 return this;
             }
 
-            public Builder GivenName(string value)
+            public Builder GivenName(string givenName)
             {
-                givenName = value;
+                this.givenName = givenName;
                 return this;
             }
 
-            public Builder FamilyName(string value)
+            public Builder FamilyName(string familyName)
             {
-                familyName = value;
+                this.familyName = familyName;
                 return this;
             }
 
-            public Builder EmailAddress(string value)
+            public Builder EmailAddress(string emailAddress)
             {
-                emailAddress = value;
+                this.emailAddress = emailAddress;
                 return this;
             }
 
-            public Builder Address(Models.Address value)
+            public Builder Address(Models.Address address)
             {
-                address = value;
+                this.address = address;
                 return this;
             }
 
-            public Builder PhoneNumber(string value)
+            public Builder PhoneNumber(string phoneNumber)
             {
-                phoneNumber = value;
+                this.phoneNumber = phoneNumber;
                 return this;
             }
 
-            public Builder CompanyName(string value)
+            public Builder CompanyName(string companyName)
             {
-                companyName = value;
+                this.companyName = companyName;
                 return this;
             }
 

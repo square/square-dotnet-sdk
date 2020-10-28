@@ -57,7 +57,7 @@ namespace Square.Models
         /// <summary>
         /// Describes when the loyalty program expires.
         /// </summary>
-        [JsonProperty("expiration_policy")]
+        [JsonProperty("expiration_policy", NullValueHandling = NullValueHandling.Ignore)]
         public Models.LoyaltyProgramExpirationPolicy ExpirationPolicy { get; }
 
         /// <summary>
@@ -134,57 +134,58 @@ namespace Square.Models
                 this.updatedAt = updatedAt;
                 this.accrualRules = accrualRules;
             }
-            public Builder Id(string value)
+
+            public Builder Id(string id)
             {
-                id = value;
+                this.id = id;
                 return this;
             }
 
-            public Builder Status(string value)
+            public Builder Status(string status)
             {
-                status = value;
+                this.status = status;
                 return this;
             }
 
-            public Builder RewardTiers(IList<Models.LoyaltyProgramRewardTier> value)
+            public Builder RewardTiers(IList<Models.LoyaltyProgramRewardTier> rewardTiers)
             {
-                rewardTiers = value;
+                this.rewardTiers = rewardTiers;
                 return this;
             }
 
-            public Builder Terminology(Models.LoyaltyProgramTerminology value)
+            public Builder Terminology(Models.LoyaltyProgramTerminology terminology)
             {
-                terminology = value;
+                this.terminology = terminology;
                 return this;
             }
 
-            public Builder LocationIds(IList<string> value)
+            public Builder LocationIds(IList<string> locationIds)
             {
-                locationIds = value;
+                this.locationIds = locationIds;
                 return this;
             }
 
-            public Builder CreatedAt(string value)
+            public Builder CreatedAt(string createdAt)
             {
-                createdAt = value;
+                this.createdAt = createdAt;
                 return this;
             }
 
-            public Builder UpdatedAt(string value)
+            public Builder UpdatedAt(string updatedAt)
             {
-                updatedAt = value;
+                this.updatedAt = updatedAt;
                 return this;
             }
 
-            public Builder AccrualRules(IList<Models.LoyaltyProgramAccrualRule> value)
+            public Builder AccrualRules(IList<Models.LoyaltyProgramAccrualRule> accrualRules)
             {
-                accrualRules = value;
+                this.accrualRules = accrualRules;
                 return this;
             }
 
-            public Builder ExpirationPolicy(Models.LoyaltyProgramExpirationPolicy value)
+            public Builder ExpirationPolicy(Models.LoyaltyProgramExpirationPolicy expirationPolicy)
             {
-                expirationPolicy = value;
+                this.expirationPolicy = expirationPolicy;
                 return this;
             }
 

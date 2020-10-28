@@ -50,19 +50,19 @@ namespace Square.Models
         /// <summary>
         /// The ID of the `CatalogItem` associated with this item variation.
         /// </summary>
-        [JsonProperty("item_id")]
+        [JsonProperty("item_id", NullValueHandling = NullValueHandling.Ignore)]
         public string ItemId { get; }
 
         /// <summary>
         /// The item variation's name. This is a searchable attribute for use in applicable query filters, and its value length is of Unicode code points.
         /// </summary>
-        [JsonProperty("name")]
+        [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
         public string Name { get; }
 
         /// <summary>
         /// The item variation's SKU, if any. This is a searchable attribute for use in applicable query filters.
         /// </summary>
-        [JsonProperty("sku")]
+        [JsonProperty("sku", NullValueHandling = NullValueHandling.Ignore)]
         public string Sku { get; }
 
         /// <summary>
@@ -70,7 +70,7 @@ namespace Square.Models
         /// It is only accessible through the Square API, and not exposed in the Square Seller Dashboard,
         /// Square Point of Sale or Retail Point of Sale apps.
         /// </summary>
-        [JsonProperty("upc")]
+        [JsonProperty("upc", NullValueHandling = NullValueHandling.Ignore)]
         public string Upc { get; }
 
         /// <summary>
@@ -78,13 +78,13 @@ namespace Square.Models
         /// for each item variation within a parent `CatalogItem` is set according to the item variations's
         /// position. On reads, the value is not guaranteed to be sequential or unique.
         /// </summary>
-        [JsonProperty("ordinal")]
+        [JsonProperty("ordinal", NullValueHandling = NullValueHandling.Ignore)]
         public int? Ordinal { get; }
 
         /// <summary>
         /// Indicates whether the price of a CatalogItemVariation should be entered manually at the time of sale.
         /// </summary>
-        [JsonProperty("pricing_type")]
+        [JsonProperty("pricing_type", NullValueHandling = NullValueHandling.Ignore)]
         public string PricingType { get; }
 
         /// <summary>
@@ -95,25 +95,25 @@ namespace Square.Models
         /// [Working with Monetary Amounts](https://developer.squareup.com/docs/build-basics/working-with-monetary-amounts)
         /// for more information.
         /// </summary>
-        [JsonProperty("price_money")]
+        [JsonProperty("price_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Money PriceMoney { get; }
 
         /// <summary>
         /// Per-location price and inventory overrides.
         /// </summary>
-        [JsonProperty("location_overrides")]
+        [JsonProperty("location_overrides", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.ItemVariationLocationOverrides> LocationOverrides { get; }
 
         /// <summary>
         /// If `true`, inventory tracking is active for the variation.
         /// </summary>
-        [JsonProperty("track_inventory")]
+        [JsonProperty("track_inventory", NullValueHandling = NullValueHandling.Ignore)]
         public bool? TrackInventory { get; }
 
         /// <summary>
         /// Indicates whether Square should alert the merchant when the inventory quantity of a CatalogItemVariation is low.
         /// </summary>
-        [JsonProperty("inventory_alert_type")]
+        [JsonProperty("inventory_alert_type", NullValueHandling = NullValueHandling.Ignore)]
         public string InventoryAlertType { get; }
 
         /// <summary>
@@ -121,13 +121,13 @@ namespace Square.Models
         /// is `LOW_QUANTITY`, the variation displays an alert in the merchant dashboard.
         /// This value is always an integer.
         /// </summary>
-        [JsonProperty("inventory_alert_threshold")]
+        [JsonProperty("inventory_alert_threshold", NullValueHandling = NullValueHandling.Ignore)]
         public long? InventoryAlertThreshold { get; }
 
         /// <summary>
         /// Arbitrary user metadata to associate with the item variation. This attribute value length is of Unicode code points.
         /// </summary>
-        [JsonProperty("user_data")]
+        [JsonProperty("user_data", NullValueHandling = NullValueHandling.Ignore)]
         public string UserData { get; }
 
         /// <summary>
@@ -136,14 +136,14 @@ namespace Square.Models
         /// example, a 30 minute appointment would have the value `1800000`, which is equal to
         /// 30 (minutes) * 60 (seconds per minute) * 1000 (milliseconds per second).
         /// </summary>
-        [JsonProperty("service_duration")]
+        [JsonProperty("service_duration", NullValueHandling = NullValueHandling.Ignore)]
         public long? ServiceDuration { get; }
 
         /// <summary>
         /// List of item option values associated with this item variation. Listed
         /// in the same order as the item options of the parent item.
         /// </summary>
-        [JsonProperty("item_option_values")]
+        [JsonProperty("item_option_values", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.CatalogItemOptionValueForItemVariation> ItemOptionValues { get; }
 
         /// <summary>
@@ -151,7 +151,7 @@ namespace Square.Models
         /// sold of this item variation. If left unset, the item will be sold in
         /// whole quantities.
         /// </summary>
-        [JsonProperty("measurement_unit_id")]
+        [JsonProperty("measurement_unit_id", NullValueHandling = NullValueHandling.Ignore)]
         public string MeasurementUnitId { get; }
 
         public Builder ToBuilder()
@@ -184,103 +184,104 @@ namespace Square.Models
             private int? ordinal;
             private string pricingType;
             private Models.Money priceMoney;
-            private IList<Models.ItemVariationLocationOverrides> locationOverrides = new List<Models.ItemVariationLocationOverrides>();
+            private IList<Models.ItemVariationLocationOverrides> locationOverrides;
             private bool? trackInventory;
             private string inventoryAlertType;
             private long? inventoryAlertThreshold;
             private string userData;
             private long? serviceDuration;
-            private IList<Models.CatalogItemOptionValueForItemVariation> itemOptionValues = new List<Models.CatalogItemOptionValueForItemVariation>();
+            private IList<Models.CatalogItemOptionValueForItemVariation> itemOptionValues;
             private string measurementUnitId;
 
-            public Builder() { }
-            public Builder ItemId(string value)
+
+
+            public Builder ItemId(string itemId)
             {
-                itemId = value;
+                this.itemId = itemId;
                 return this;
             }
 
-            public Builder Name(string value)
+            public Builder Name(string name)
             {
-                name = value;
+                this.name = name;
                 return this;
             }
 
-            public Builder Sku(string value)
+            public Builder Sku(string sku)
             {
-                sku = value;
+                this.sku = sku;
                 return this;
             }
 
-            public Builder Upc(string value)
+            public Builder Upc(string upc)
             {
-                upc = value;
+                this.upc = upc;
                 return this;
             }
 
-            public Builder Ordinal(int? value)
+            public Builder Ordinal(int? ordinal)
             {
-                ordinal = value;
+                this.ordinal = ordinal;
                 return this;
             }
 
-            public Builder PricingType(string value)
+            public Builder PricingType(string pricingType)
             {
-                pricingType = value;
+                this.pricingType = pricingType;
                 return this;
             }
 
-            public Builder PriceMoney(Models.Money value)
+            public Builder PriceMoney(Models.Money priceMoney)
             {
-                priceMoney = value;
+                this.priceMoney = priceMoney;
                 return this;
             }
 
-            public Builder LocationOverrides(IList<Models.ItemVariationLocationOverrides> value)
+            public Builder LocationOverrides(IList<Models.ItemVariationLocationOverrides> locationOverrides)
             {
-                locationOverrides = value;
+                this.locationOverrides = locationOverrides;
                 return this;
             }
 
-            public Builder TrackInventory(bool? value)
+            public Builder TrackInventory(bool? trackInventory)
             {
-                trackInventory = value;
+                this.trackInventory = trackInventory;
                 return this;
             }
 
-            public Builder InventoryAlertType(string value)
+            public Builder InventoryAlertType(string inventoryAlertType)
             {
-                inventoryAlertType = value;
+                this.inventoryAlertType = inventoryAlertType;
                 return this;
             }
 
-            public Builder InventoryAlertThreshold(long? value)
+            public Builder InventoryAlertThreshold(long? inventoryAlertThreshold)
             {
-                inventoryAlertThreshold = value;
+                this.inventoryAlertThreshold = inventoryAlertThreshold;
                 return this;
             }
 
-            public Builder UserData(string value)
+            public Builder UserData(string userData)
             {
-                userData = value;
+                this.userData = userData;
                 return this;
             }
 
-            public Builder ServiceDuration(long? value)
+            public Builder ServiceDuration(long? serviceDuration)
             {
-                serviceDuration = value;
+                this.serviceDuration = serviceDuration;
                 return this;
             }
 
-            public Builder ItemOptionValues(IList<Models.CatalogItemOptionValueForItemVariation> value)
+            public Builder ItemOptionValues(IList<Models.CatalogItemOptionValueForItemVariation> itemOptionValues)
             {
-                itemOptionValues = value;
+                this.itemOptionValues = itemOptionValues;
                 return this;
             }
 
-            public Builder MeasurementUnitId(string value)
+            public Builder MeasurementUnitId(string measurementUnitId)
             {
-                measurementUnitId = value;
+                this.measurementUnitId = measurementUnitId;
                 return this;
             }
 

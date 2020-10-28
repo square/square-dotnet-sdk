@@ -50,46 +50,46 @@ namespace Square.Models
         /// <summary>
         /// Contains information on the recipient of a fulfillment.
         /// </summary>
-        [JsonProperty("recipient")]
+        [JsonProperty("recipient", NullValueHandling = NullValueHandling.Ignore)]
         public Models.OrderFulfillmentRecipient Recipient { get; }
 
         /// <summary>
         /// The shipping carrier being used to ship this fulfillment
         /// e.g. UPS, FedEx, USPS, etc.
         /// </summary>
-        [JsonProperty("carrier")]
+        [JsonProperty("carrier", NullValueHandling = NullValueHandling.Ignore)]
         public string Carrier { get; }
 
         /// <summary>
         /// A note with additional information for the shipping carrier.
         /// </summary>
-        [JsonProperty("shipping_note")]
+        [JsonProperty("shipping_note", NullValueHandling = NullValueHandling.Ignore)]
         public string ShippingNote { get; }
 
         /// <summary>
         /// A description of the type of shipping product purchased from the carrier.
         /// e.g. First Class, Priority, Express
         /// </summary>
-        [JsonProperty("shipping_type")]
+        [JsonProperty("shipping_type", NullValueHandling = NullValueHandling.Ignore)]
         public string ShippingType { get; }
 
         /// <summary>
         /// The reference number provided by the carrier to track the shipment's progress.
         /// </summary>
-        [JsonProperty("tracking_number")]
+        [JsonProperty("tracking_number", NullValueHandling = NullValueHandling.Ignore)]
         public string TrackingNumber { get; }
 
         /// <summary>
         /// A link to the tracking webpage on the carrier's website.
         /// </summary>
-        [JsonProperty("tracking_url")]
+        [JsonProperty("tracking_url", NullValueHandling = NullValueHandling.Ignore)]
         public string TrackingUrl { get; }
 
         /// <summary>
         /// The [timestamp](#workingwithdates) indicating when the shipment was
         /// requested. Must be in RFC 3339 timestamp format, e.g., "2016-09-04T23:59:33.123Z".
         /// </summary>
-        [JsonProperty("placed_at")]
+        [JsonProperty("placed_at", NullValueHandling = NullValueHandling.Ignore)]
         public string PlacedAt { get; }
 
         /// <summary>
@@ -97,7 +97,7 @@ namespace Square.Models
         /// moved to the `RESERVED` state. Indicates that preparation of this shipment has begun.
         /// Must be in RFC 3339 timestamp format, e.g., "2016-09-04T23:59:33.123Z".
         /// </summary>
-        [JsonProperty("in_progress_at")]
+        [JsonProperty("in_progress_at", NullValueHandling = NullValueHandling.Ignore)]
         public string InProgressAt { get; }
 
         /// <summary>
@@ -105,7 +105,7 @@ namespace Square.Models
         /// was moved to the `PREPARED` state. Indicates that the fulfillment is packaged.
         /// Must be in RFC 3339 timestamp format, e.g., "2016-09-04T23:59:33.123Z".
         /// </summary>
-        [JsonProperty("packaged_at")]
+        [JsonProperty("packaged_at", NullValueHandling = NullValueHandling.Ignore)]
         public string PackagedAt { get; }
 
         /// <summary>
@@ -113,7 +113,7 @@ namespace Square.Models
         /// expected to be delivered to the shipping carrier. Must be in RFC 3339 timestamp
         /// format, e.g., "2016-09-04T23:59:33.123Z".
         /// </summary>
-        [JsonProperty("expected_shipped_at")]
+        [JsonProperty("expected_shipped_at", NullValueHandling = NullValueHandling.Ignore)]
         public string ExpectedShippedAt { get; }
 
         /// <summary>
@@ -121,20 +121,20 @@ namespace Square.Models
         /// was moved to the `COMPLETED`state. Indicates that the fulfillment has been given
         /// to the shipping carrier. Must be in RFC 3339 timestamp format, e.g., "2016-09-04T23:59:33.123Z".
         /// </summary>
-        [JsonProperty("shipped_at")]
+        [JsonProperty("shipped_at", NullValueHandling = NullValueHandling.Ignore)]
         public string ShippedAt { get; }
 
         /// <summary>
         /// The [timestamp](#workingwithdates) indicating the shipment was canceled.
         /// Must be in RFC 3339 timestamp format, e.g., "2016-09-04T23:59:33.123Z".
         /// </summary>
-        [JsonProperty("canceled_at")]
+        [JsonProperty("canceled_at", NullValueHandling = NullValueHandling.Ignore)]
         public string CanceledAt { get; }
 
         /// <summary>
         /// A description of why the shipment was canceled.
         /// </summary>
-        [JsonProperty("cancel_reason")]
+        [JsonProperty("cancel_reason", NullValueHandling = NullValueHandling.Ignore)]
         public string CancelReason { get; }
 
         /// <summary>
@@ -142,13 +142,13 @@ namespace Square.Models
         /// failed to be completed. Must be in RFC 3339 timestamp format, e.g.,
         /// "2016-09-04T23:59:33.123Z".
         /// </summary>
-        [JsonProperty("failed_at")]
+        [JsonProperty("failed_at", NullValueHandling = NullValueHandling.Ignore)]
         public string FailedAt { get; }
 
         /// <summary>
         /// A description of why the shipment failed to be completed.
         /// </summary>
-        [JsonProperty("failure_reason")]
+        [JsonProperty("failure_reason", NullValueHandling = NullValueHandling.Ignore)]
         public string FailureReason { get; }
 
         public Builder ToBuilder()
@@ -190,94 +190,95 @@ namespace Square.Models
             private string failedAt;
             private string failureReason;
 
-            public Builder() { }
-            public Builder Recipient(Models.OrderFulfillmentRecipient value)
+
+
+            public Builder Recipient(Models.OrderFulfillmentRecipient recipient)
             {
-                recipient = value;
+                this.recipient = recipient;
                 return this;
             }
 
-            public Builder Carrier(string value)
+            public Builder Carrier(string carrier)
             {
-                carrier = value;
+                this.carrier = carrier;
                 return this;
             }
 
-            public Builder ShippingNote(string value)
+            public Builder ShippingNote(string shippingNote)
             {
-                shippingNote = value;
+                this.shippingNote = shippingNote;
                 return this;
             }
 
-            public Builder ShippingType(string value)
+            public Builder ShippingType(string shippingType)
             {
-                shippingType = value;
+                this.shippingType = shippingType;
                 return this;
             }
 
-            public Builder TrackingNumber(string value)
+            public Builder TrackingNumber(string trackingNumber)
             {
-                trackingNumber = value;
+                this.trackingNumber = trackingNumber;
                 return this;
             }
 
-            public Builder TrackingUrl(string value)
+            public Builder TrackingUrl(string trackingUrl)
             {
-                trackingUrl = value;
+                this.trackingUrl = trackingUrl;
                 return this;
             }
 
-            public Builder PlacedAt(string value)
+            public Builder PlacedAt(string placedAt)
             {
-                placedAt = value;
+                this.placedAt = placedAt;
                 return this;
             }
 
-            public Builder InProgressAt(string value)
+            public Builder InProgressAt(string inProgressAt)
             {
-                inProgressAt = value;
+                this.inProgressAt = inProgressAt;
                 return this;
             }
 
-            public Builder PackagedAt(string value)
+            public Builder PackagedAt(string packagedAt)
             {
-                packagedAt = value;
+                this.packagedAt = packagedAt;
                 return this;
             }
 
-            public Builder ExpectedShippedAt(string value)
+            public Builder ExpectedShippedAt(string expectedShippedAt)
             {
-                expectedShippedAt = value;
+                this.expectedShippedAt = expectedShippedAt;
                 return this;
             }
 
-            public Builder ShippedAt(string value)
+            public Builder ShippedAt(string shippedAt)
             {
-                shippedAt = value;
+                this.shippedAt = shippedAt;
                 return this;
             }
 
-            public Builder CanceledAt(string value)
+            public Builder CanceledAt(string canceledAt)
             {
-                canceledAt = value;
+                this.canceledAt = canceledAt;
                 return this;
             }
 
-            public Builder CancelReason(string value)
+            public Builder CancelReason(string cancelReason)
             {
-                cancelReason = value;
+                this.cancelReason = cancelReason;
                 return this;
             }
 
-            public Builder FailedAt(string value)
+            public Builder FailedAt(string failedAt)
             {
-                failedAt = value;
+                this.failedAt = failedAt;
                 return this;
             }
 
-            public Builder FailureReason(string value)
+            public Builder FailureReason(string failureReason)
             {
-                failureReason = value;
+                this.failureReason = failureReason;
                 return this;
             }
 

@@ -23,7 +23,7 @@ namespace Square.Models
         /// A pagination cursor to retrieve the next set of results for your
         /// original query to the endpoint.
         /// </summary>
-        [JsonProperty("batch_token")]
+        [JsonProperty("batch_token", NullValueHandling = NullValueHandling.Ignore)]
         public string BatchToken { get; }
 
         public Builder ToBuilder()
@@ -37,10 +37,11 @@ namespace Square.Models
         {
             private string batchToken;
 
-            public Builder() { }
-            public Builder BatchToken(string value)
+
+
+            public Builder BatchToken(string batchToken)
             {
-                batchToken = value;
+                this.batchToken = batchToken;
                 return this;
             }
 

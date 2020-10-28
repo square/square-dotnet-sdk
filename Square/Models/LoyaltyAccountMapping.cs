@@ -28,7 +28,7 @@ namespace Square.Models
         /// <summary>
         /// The Square-assigned ID of the mapping.
         /// </summary>
-        [JsonProperty("id")]
+        [JsonProperty("id", NullValueHandling = NullValueHandling.Ignore)]
         public string Id { get; }
 
         /// <summary>
@@ -46,7 +46,7 @@ namespace Square.Models
         /// <summary>
         /// The timestamp when the mapping was created, in RFC 3339 format.
         /// </summary>
-        [JsonProperty("created_at")]
+        [JsonProperty("created_at", NullValueHandling = NullValueHandling.Ignore)]
         public string CreatedAt { get; }
 
         public Builder ToBuilder()
@@ -71,27 +71,28 @@ namespace Square.Models
                 this.type = type;
                 this.mValue = mValue;
             }
-            public Builder Type(string value)
+
+            public Builder Type(string type)
             {
-                type = value;
+                this.type = type;
                 return this;
             }
 
-            public Builder MValue(string value)
+            public Builder MValue(string mValue)
             {
-                mValue = value;
+                this.mValue = mValue;
                 return this;
             }
 
-            public Builder Id(string value)
+            public Builder Id(string id)
             {
-                id = value;
+                this.id = id;
                 return this;
             }
 
-            public Builder CreatedAt(string value)
+            public Builder CreatedAt(string createdAt)
             {
-                createdAt = value;
+                this.createdAt = createdAt;
                 return this;
             }
 

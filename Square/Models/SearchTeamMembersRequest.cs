@@ -26,20 +26,20 @@ namespace Square.Models
         /// <summary>
         /// Represents the parameters in a search for `TeamMember` objects.
         /// </summary>
-        [JsonProperty("query")]
+        [JsonProperty("query", NullValueHandling = NullValueHandling.Ignore)]
         public Models.SearchTeamMembersQuery Query { get; }
 
         /// <summary>
         /// The maximum number of `TeamMember` objects in a page (25 by default).
         /// </summary>
-        [JsonProperty("limit")]
+        [JsonProperty("limit", NullValueHandling = NullValueHandling.Ignore)]
         public int? Limit { get; }
 
         /// <summary>
         /// The opaque cursor for fetching the next page. Read about
         /// [pagination](https://developer.squareup.com/docs/docs/working-with-apis/pagination) with Square APIs for more information.
         /// </summary>
-        [JsonProperty("cursor")]
+        [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
         public string Cursor { get; }
 
         public Builder ToBuilder()
@@ -57,22 +57,23 @@ namespace Square.Models
             private int? limit;
             private string cursor;
 
-            public Builder() { }
-            public Builder Query(Models.SearchTeamMembersQuery value)
+
+
+            public Builder Query(Models.SearchTeamMembersQuery query)
             {
-                query = value;
+                this.query = query;
                 return this;
             }
 
-            public Builder Limit(int? value)
+            public Builder Limit(int? limit)
             {
-                limit = value;
+                this.limit = limit;
                 return this;
             }
 
-            public Builder Cursor(string value)
+            public Builder Cursor(string cursor)
             {
-                cursor = value;
+                this.cursor = cursor;
                 return this;
             }
 

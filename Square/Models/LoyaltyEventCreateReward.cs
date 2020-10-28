@@ -33,7 +33,7 @@ namespace Square.Models
         /// The Square-assigned ID of the created [loyalty reward](#type-LoyaltyReward).
         /// This field is returned only if the event source is `LOYALTY_API`.
         /// </summary>
-        [JsonProperty("reward_id")]
+        [JsonProperty("reward_id", NullValueHandling = NullValueHandling.Ignore)]
         public string RewardId { get; }
 
         /// <summary>
@@ -62,21 +62,22 @@ namespace Square.Models
                 this.loyaltyProgramId = loyaltyProgramId;
                 this.points = points;
             }
-            public Builder LoyaltyProgramId(string value)
+
+            public Builder LoyaltyProgramId(string loyaltyProgramId)
             {
-                loyaltyProgramId = value;
+                this.loyaltyProgramId = loyaltyProgramId;
                 return this;
             }
 
-            public Builder Points(int value)
+            public Builder Points(int points)
             {
-                points = value;
+                this.points = points;
                 return this;
             }
 
-            public Builder RewardId(string value)
+            public Builder RewardId(string rewardId)
             {
-                rewardId = value;
+                this.rewardId = rewardId;
                 return this;
             }
 

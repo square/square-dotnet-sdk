@@ -26,20 +26,20 @@ namespace Square.Models
         /// <summary>
         /// The ID of the [loyalty program](#type-LoyaltyProgram).
         /// </summary>
-        [JsonProperty("loyalty_program_id")]
+        [JsonProperty("loyalty_program_id", NullValueHandling = NullValueHandling.Ignore)]
         public string LoyaltyProgramId { get; }
 
         /// <summary>
         /// The number of points accumulated by the event.
         /// </summary>
-        [JsonProperty("points")]
+        [JsonProperty("points", NullValueHandling = NullValueHandling.Ignore)]
         public int? Points { get; }
 
         /// <summary>
         /// The ID of the [order](#type-Order) for which the buyer accumulated the points.
         /// This field is returned only if the Orders API is used to process orders.
         /// </summary>
-        [JsonProperty("order_id")]
+        [JsonProperty("order_id", NullValueHandling = NullValueHandling.Ignore)]
         public string OrderId { get; }
 
         public Builder ToBuilder()
@@ -57,22 +57,23 @@ namespace Square.Models
             private int? points;
             private string orderId;
 
-            public Builder() { }
-            public Builder LoyaltyProgramId(string value)
+
+
+            public Builder LoyaltyProgramId(string loyaltyProgramId)
             {
-                loyaltyProgramId = value;
+                this.loyaltyProgramId = loyaltyProgramId;
                 return this;
             }
 
-            public Builder Points(int? value)
+            public Builder Points(int? points)
             {
-                points = value;
+                this.points = points;
                 return this;
             }
 
-            public Builder OrderId(string value)
+            public Builder OrderId(string orderId)
             {
-                orderId = value;
+                this.orderId = orderId;
                 return this;
             }
 

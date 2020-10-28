@@ -36,49 +36,49 @@ namespace Square.Models
         /// <summary>
         /// The name of the surcharge.
         /// </summary>
-        [JsonProperty("name")]
+        [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
         public string Name { get; }
 
         /// <summary>
         /// Getter for applied_money
         /// </summary>
-        [JsonProperty("applied_money")]
+        [JsonProperty("applied_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1Money AppliedMoney { get; }
 
         /// <summary>
         /// The amount of the surcharge as a percentage. The percentage is provided as a string representing the decimal equivalent of the percentage. For example, "0.7" corresponds to a 7% surcharge. Exactly one of rate or amount_money should be set.
         /// </summary>
-        [JsonProperty("rate")]
+        [JsonProperty("rate", NullValueHandling = NullValueHandling.Ignore)]
         public string Rate { get; }
 
         /// <summary>
         /// Getter for amount_money
         /// </summary>
-        [JsonProperty("amount_money")]
+        [JsonProperty("amount_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1Money AmountMoney { get; }
 
         /// <summary>
         /// Getter for type
         /// </summary>
-        [JsonProperty("type")]
+        [JsonProperty("type", NullValueHandling = NullValueHandling.Ignore)]
         public string Type { get; }
 
         /// <summary>
         /// Indicates whether the surcharge is taxable.
         /// </summary>
-        [JsonProperty("taxable")]
+        [JsonProperty("taxable", NullValueHandling = NullValueHandling.Ignore)]
         public bool? Taxable { get; }
 
         /// <summary>
         /// The list of taxes that should be applied to the surcharge.
         /// </summary>
-        [JsonProperty("taxes")]
+        [JsonProperty("taxes", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.V1PaymentTax> Taxes { get; }
 
         /// <summary>
         /// A Square-issued unique identifier associated with the surcharge.
         /// </summary>
-        [JsonProperty("surcharge_id")]
+        [JsonProperty("surcharge_id", NullValueHandling = NullValueHandling.Ignore)]
         public string SurchargeId { get; }
 
         public Builder ToBuilder()
@@ -103,55 +103,56 @@ namespace Square.Models
             private Models.V1Money amountMoney;
             private string type;
             private bool? taxable;
-            private IList<Models.V1PaymentTax> taxes = new List<Models.V1PaymentTax>();
+            private IList<Models.V1PaymentTax> taxes;
             private string surchargeId;
 
-            public Builder() { }
-            public Builder Name(string value)
+
+
+            public Builder Name(string name)
             {
-                name = value;
+                this.name = name;
                 return this;
             }
 
-            public Builder AppliedMoney(Models.V1Money value)
+            public Builder AppliedMoney(Models.V1Money appliedMoney)
             {
-                appliedMoney = value;
+                this.appliedMoney = appliedMoney;
                 return this;
             }
 
-            public Builder Rate(string value)
+            public Builder Rate(string rate)
             {
-                rate = value;
+                this.rate = rate;
                 return this;
             }
 
-            public Builder AmountMoney(Models.V1Money value)
+            public Builder AmountMoney(Models.V1Money amountMoney)
             {
-                amountMoney = value;
+                this.amountMoney = amountMoney;
                 return this;
             }
 
-            public Builder Type(string value)
+            public Builder Type(string type)
             {
-                type = value;
+                this.type = type;
                 return this;
             }
 
-            public Builder Taxable(bool? value)
+            public Builder Taxable(bool? taxable)
             {
-                taxable = value;
+                this.taxable = taxable;
                 return this;
             }
 
-            public Builder Taxes(IList<Models.V1PaymentTax> value)
+            public Builder Taxes(IList<Models.V1PaymentTax> taxes)
             {
-                taxes = value;
+                this.taxes = taxes;
                 return this;
             }
 
-            public Builder SurchargeId(string value)
+            public Builder SurchargeId(string surchargeId)
             {
-                surchargeId = value;
+                this.surchargeId = surchargeId;
                 return this;
             }
 

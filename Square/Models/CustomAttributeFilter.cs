@@ -30,49 +30,49 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// A query expression to filter items or item variations by matching their custom attributes' 
-        /// `custom_attribute_definition_id`  
+        /// A query expression to filter items or item variations by matching their custom attributes'
+        /// `custom_attribute_definition_id`
         /// property value against the the specified id.
         /// </summary>
-        [JsonProperty("custom_attribute_definition_id")]
+        [JsonProperty("custom_attribute_definition_id", NullValueHandling = NullValueHandling.Ignore)]
         public string CustomAttributeDefinitionId { get; }
 
         /// <summary>
         /// A query expression to filter items or item variations by matching their custom attributes'
-        /// `key` property value against 
+        /// `key` property value against
         /// the specified key.
         /// </summary>
-        [JsonProperty("key")]
+        [JsonProperty("key", NullValueHandling = NullValueHandling.Ignore)]
         public string Key { get; }
 
         /// <summary>
-        /// A query expression to filter items or item variations by matching their custom attributes' 
-        /// `string_value`  property value 
+        /// A query expression to filter items or item variations by matching their custom attributes'
+        /// `string_value`  property value
         /// against the specified text.
         /// </summary>
-        [JsonProperty("string_filter")]
+        [JsonProperty("string_filter", NullValueHandling = NullValueHandling.Ignore)]
         public string StringFilter { get; }
 
         /// <summary>
         /// The range of a number value between the specified lower and upper bounds.
         /// </summary>
-        [JsonProperty("number_filter")]
+        [JsonProperty("number_filter", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Range NumberFilter { get; }
 
         /// <summary>
-        /// A query expression to filter items or item variations by matching  their custom attributes' 
-        /// `selection_uid_values` 
+        /// A query expression to filter items or item variations by matching  their custom attributes'
+        /// `selection_uid_values`
         /// values against the specified selection uids.
         /// </summary>
-        [JsonProperty("selection_uids_filter")]
+        [JsonProperty("selection_uids_filter", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> SelectionUidsFilter { get; }
 
         /// <summary>
         /// A query expression to filter items or item variations by matching their custom attributes'
-        /// `boolean_value` property values 
+        /// `boolean_value` property values
         /// against the specified Boolean expression.
         /// </summary>
-        [JsonProperty("bool_filter")]
+        [JsonProperty("bool_filter", NullValueHandling = NullValueHandling.Ignore)]
         public bool? BoolFilter { get; }
 
         public Builder ToBuilder()
@@ -93,43 +93,44 @@ namespace Square.Models
             private string key;
             private string stringFilter;
             private Models.Range numberFilter;
-            private IList<string> selectionUidsFilter = new List<string>();
+            private IList<string> selectionUidsFilter;
             private bool? boolFilter;
 
-            public Builder() { }
-            public Builder CustomAttributeDefinitionId(string value)
+
+
+            public Builder CustomAttributeDefinitionId(string customAttributeDefinitionId)
             {
-                customAttributeDefinitionId = value;
+                this.customAttributeDefinitionId = customAttributeDefinitionId;
                 return this;
             }
 
-            public Builder Key(string value)
+            public Builder Key(string key)
             {
-                key = value;
+                this.key = key;
                 return this;
             }
 
-            public Builder StringFilter(string value)
+            public Builder StringFilter(string stringFilter)
             {
-                stringFilter = value;
+                this.stringFilter = stringFilter;
                 return this;
             }
 
-            public Builder NumberFilter(Models.Range value)
+            public Builder NumberFilter(Models.Range numberFilter)
             {
-                numberFilter = value;
+                this.numberFilter = numberFilter;
                 return this;
             }
 
-            public Builder SelectionUidsFilter(IList<string> value)
+            public Builder SelectionUidsFilter(IList<string> selectionUidsFilter)
             {
-                selectionUidsFilter = value;
+                this.selectionUidsFilter = selectionUidsFilter;
                 return this;
             }
 
-            public Builder BoolFilter(bool? value)
+            public Builder BoolFilter(bool? boolFilter)
             {
-                boolFilter = value;
+                this.boolFilter = boolFilter;
                 return this;
             }
 

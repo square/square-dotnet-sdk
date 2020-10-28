@@ -35,7 +35,7 @@ namespace Square.Models
         /// treats each request as independent.
         /// For more information, see [Idempotency](https://developer.squareup.com/docs/docs/working-with-apis/idempotency).
         /// </summary>
-        [JsonProperty("idempotency_key")]
+        [JsonProperty("idempotency_key", NullValueHandling = NullValueHandling.Ignore)]
         public string IdempotencyKey { get; }
 
         public Builder ToBuilder()
@@ -54,15 +54,16 @@ namespace Square.Models
             {
                 this.version = version;
             }
-            public Builder Version(int value)
+
+            public Builder Version(int version)
             {
-                version = value;
+                this.version = version;
                 return this;
             }
 
-            public Builder IdempotencyKey(string value)
+            public Builder IdempotencyKey(string idempotencyKey)
             {
-                idempotencyKey = value;
+                this.idempotencyKey = idempotencyKey;
                 return this;
             }
 

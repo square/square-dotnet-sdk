@@ -1,12 +1,13 @@
-## Standard Unit Description
+
+# Standard Unit Description
 
 Contains the name and abbreviation for standard measurement unit.
 
-### Structure
+## Structure
 
 `StandardUnitDescription`
 
-### Fields
+## Fields
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
@@ -14,7 +15,7 @@ Contains the name and abbreviation for standard measurement unit.
 | `Name` | `string` | Optional | UI display name of the measurement unit. For example, 'Pound'. |
 | `Abbreviation` | `string` | Optional | UI display abbreviation for the measurement unit. For example, 'lb'. |
 
-### Example (as JSON)
+## Example (as JSON)
 
 ```json
 {

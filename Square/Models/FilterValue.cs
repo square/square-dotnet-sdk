@@ -26,20 +26,20 @@ namespace Square.Models
         /// <summary>
         /// A list of terms that must be present on the field of the resource.
         /// </summary>
-        [JsonProperty("all")]
+        [JsonProperty("all", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> All { get; }
 
         /// <summary>
         /// A list of terms where at least one of them must be present on the
         /// field of the resource.
         /// </summary>
-        [JsonProperty("any")]
+        [JsonProperty("any", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> Any { get; }
 
         /// <summary>
         /// A list of terms that must not be present on the field the resource
         /// </summary>
-        [JsonProperty("none")]
+        [JsonProperty("none", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> None { get; }
 
         public Builder ToBuilder()
@@ -53,26 +53,27 @@ namespace Square.Models
 
         public class Builder
         {
-            private IList<string> all = new List<string>();
-            private IList<string> any = new List<string>();
-            private IList<string> none = new List<string>();
+            private IList<string> all;
+            private IList<string> any;
+            private IList<string> none;
 
-            public Builder() { }
-            public Builder All(IList<string> value)
+
+
+            public Builder All(IList<string> all)
             {
-                all = value;
+                this.all = all;
                 return this;
             }
 
-            public Builder Any(IList<string> value)
+            public Builder Any(IList<string> any)
             {
-                any = value;
+                this.any = any;
                 return this;
             }
 
-            public Builder None(IList<string> value)
+            public Builder None(IList<string> none)
             {
-                none = value;
+                this.none = none;
                 return this;
             }
 

@@ -25,13 +25,13 @@ namespace Square.Models
         /// Defines a filter used in a search for `Shift` records. `AND` logic is
         /// used by Square's servers to apply each filter property specified.
         /// </summary>
-        [JsonProperty("filter")]
+        [JsonProperty("filter", NullValueHandling = NullValueHandling.Ignore)]
         public Models.ShiftFilter Filter { get; }
 
         /// <summary>
         /// Sets the sort order of search results.
         /// </summary>
-        [JsonProperty("sort")]
+        [JsonProperty("sort", NullValueHandling = NullValueHandling.Ignore)]
         public Models.ShiftSort Sort { get; }
 
         public Builder ToBuilder()
@@ -47,16 +47,17 @@ namespace Square.Models
             private Models.ShiftFilter filter;
             private Models.ShiftSort sort;
 
-            public Builder() { }
-            public Builder Filter(Models.ShiftFilter value)
+
+
+            public Builder Filter(Models.ShiftFilter filter)
             {
-                filter = value;
+                this.filter = filter;
                 return this;
             }
 
-            public Builder Sort(Models.ShiftSort value)
+            public Builder Sort(Models.ShiftSort sort)
             {
-                sort = value;
+                this.sort = sort;
                 return this;
             }
 

@@ -24,13 +24,13 @@ namespace Square.Models
         /// <summary>
         /// Getter for action
         /// </summary>
-        [JsonProperty("action")]
+        [JsonProperty("action", NullValueHandling = NullValueHandling.Ignore)]
         public string Action { get; }
 
         /// <summary>
         /// The time when the action was performed, in ISO 8601 format.
         /// </summary>
-        [JsonProperty("created_at")]
+        [JsonProperty("created_at", NullValueHandling = NullValueHandling.Ignore)]
         public string CreatedAt { get; }
 
         public Builder ToBuilder()
@@ -46,16 +46,17 @@ namespace Square.Models
             private string action;
             private string createdAt;
 
-            public Builder() { }
-            public Builder Action(string value)
+
+
+            public Builder Action(string action)
             {
-                action = value;
+                this.action = action;
                 return this;
             }
 
-            public Builder CreatedAt(string value)
+            public Builder CreatedAt(string createdAt)
             {
-                createdAt = value;
+                this.createdAt = createdAt;
                 return this;
             }
 

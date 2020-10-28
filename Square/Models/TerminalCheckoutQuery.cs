@@ -24,13 +24,13 @@ namespace Square.Models
         /// <summary>
         /// Getter for filter
         /// </summary>
-        [JsonProperty("filter")]
+        [JsonProperty("filter", NullValueHandling = NullValueHandling.Ignore)]
         public Models.TerminalCheckoutQueryFilter Filter { get; }
 
         /// <summary>
         /// Getter for sort
         /// </summary>
-        [JsonProperty("sort")]
+        [JsonProperty("sort", NullValueHandling = NullValueHandling.Ignore)]
         public Models.TerminalCheckoutQuerySort Sort { get; }
 
         public Builder ToBuilder()
@@ -46,16 +46,17 @@ namespace Square.Models
             private Models.TerminalCheckoutQueryFilter filter;
             private Models.TerminalCheckoutQuerySort sort;
 
-            public Builder() { }
-            public Builder Filter(Models.TerminalCheckoutQueryFilter value)
+
+
+            public Builder Filter(Models.TerminalCheckoutQueryFilter filter)
             {
-                filter = value;
+                this.filter = filter;
                 return this;
             }
 
-            public Builder Sort(Models.TerminalCheckoutQuerySort value)
+            public Builder Sort(Models.TerminalCheckoutQuerySort sort)
             {
-                sort = value;
+                this.sort = sort;
                 return this;
             }
 

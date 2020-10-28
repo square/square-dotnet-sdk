@@ -1,10 +1,11 @@
-## Obtain Token Response
 
-### Structure
+# Obtain Token Response
+
+## Structure
 
 `ObtainTokenResponse`
 
-### Fields
+## Fields
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
@@ -17,15 +18,15 @@
 | `IdToken` | `string` | Optional | Then OpenID token belonging to this this person. Only present if the<br>OPENID scope is included in the authorize request. |
 | `RefreshToken` | `string` | Optional | A refresh token. OAuth refresh tokens are 64 bytes long.<br>For more information, see [OAuth access token management](https://developer.squareup.com/docs/authz/oauth/how-it-works#oauth-access-token-management). |
 
-### Example (as JSON)
+## Example (as JSON)
 
 ```json
 {
   "access_token": "ACCESS_TOKEN",
-  "token_type": "bearer",
   "expires_at": "2006-01-02T15:04:05Z",
   "merchant_id": "MERCHANT_ID",
-  "refresh_token": "REFRESH_TOKEN"
+  "refresh_token": "REFRESH_TOKEN",
+  "token_type": "bearer"
 }
 ```
 

@@ -1,16 +1,17 @@
-## V1 Update Variation Request
 
-### Structure
+# V1 Update Variation Request
+
+## Structure
 
 `V1UpdateVariationRequest`
 
-### Fields
+## Fields
 
 | Name | Type | Description |
 |  --- | --- | --- |
 | `Body` | [`Models.V1Variation`](/doc/models/v1-variation.md) | V1Variation |
 
-### Example (as JSON)
+## Example (as JSON)
 
 ```json
 {

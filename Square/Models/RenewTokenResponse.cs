@@ -39,25 +39,25 @@ namespace Square.Models
         /// You provide this token in a header with every request to Connect API endpoints.
         /// See [Request and response headers](https://developer.squareup.com/docs/api/connect/v2/#requestandresponseheaders) for the format of this header.
         /// </summary>
-        [JsonProperty("access_token")]
+        [JsonProperty("access_token", NullValueHandling = NullValueHandling.Ignore)]
         public string AccessToken { get; }
 
         /// <summary>
         /// This value is always _bearer_.
         /// </summary>
-        [JsonProperty("token_type")]
+        [JsonProperty("token_type", NullValueHandling = NullValueHandling.Ignore)]
         public string TokenType { get; }
 
         /// <summary>
         /// The date when access_token expires, in [ISO 8601](http://www.iso.org/iso/home/standards/iso8601.htm) format.
         /// </summary>
-        [JsonProperty("expires_at")]
+        [JsonProperty("expires_at", NullValueHandling = NullValueHandling.Ignore)]
         public string ExpiresAt { get; }
 
         /// <summary>
         /// The ID of the authorizing merchant's business.
         /// </summary>
-        [JsonProperty("merchant_id")]
+        [JsonProperty("merchant_id", NullValueHandling = NullValueHandling.Ignore)]
         public string MerchantId { get; }
 
         /// <summary>
@@ -65,7 +65,7 @@ namespace Square.Models
         /// the authorization. Only present if the merchant signed up for a subscription
         /// during authorization..
         /// </summary>
-        [JsonProperty("subscription_id")]
+        [JsonProperty("subscription_id", NullValueHandling = NullValueHandling.Ignore)]
         public string SubscriptionId { get; }
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace Square.Models
         /// up for. Only present if the merchant signed up for a subscription during
         /// authorization.
         /// </summary>
-        [JsonProperty("plan_id")]
+        [JsonProperty("plan_id", NullValueHandling = NullValueHandling.Ignore)]
         public string PlanId { get; }
 
         public Builder ToBuilder()
@@ -97,40 +97,41 @@ namespace Square.Models
             private string subscriptionId;
             private string planId;
 
-            public Builder() { }
-            public Builder AccessToken(string value)
+
+
+            public Builder AccessToken(string accessToken)
             {
-                accessToken = value;
+                this.accessToken = accessToken;
                 return this;
             }
 
-            public Builder TokenType(string value)
+            public Builder TokenType(string tokenType)
             {
-                tokenType = value;
+                this.tokenType = tokenType;
                 return this;
             }
 
-            public Builder ExpiresAt(string value)
+            public Builder ExpiresAt(string expiresAt)
             {
-                expiresAt = value;
+                this.expiresAt = expiresAt;
                 return this;
             }
 
-            public Builder MerchantId(string value)
+            public Builder MerchantId(string merchantId)
             {
-                merchantId = value;
+                this.merchantId = merchantId;
                 return this;
             }
 
-            public Builder SubscriptionId(string value)
+            public Builder SubscriptionId(string subscriptionId)
             {
-                subscriptionId = value;
+                this.subscriptionId = subscriptionId;
                 return this;
             }
 
-            public Builder PlanId(string value)
+            public Builder PlanId(string planId)
             {
-                planId = value;
+                this.planId = planId;
                 return this;
             }
 

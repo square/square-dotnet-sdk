@@ -59,18 +59,74 @@ namespace Square.Apis
         Task<Models.GetTerminalCheckoutResponse> GetTerminalCheckoutAsync(string checkoutId, CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Cancels a Terminal checkout request, if the status of the request permits it.
+        /// Cancels a Terminal checkout request if the status of the request permits it.
         /// </summary>
         /// <param name="checkoutId">Required parameter: Unique ID for the desired `TerminalCheckout`</param>
         /// <return>Returns the Models.CancelTerminalCheckoutResponse response from the API call</return>
         Models.CancelTerminalCheckoutResponse CancelTerminalCheckout(string checkoutId);
 
         /// <summary>
-        /// Cancels a Terminal checkout request, if the status of the request permits it.
+        /// Cancels a Terminal checkout request if the status of the request permits it.
         /// </summary>
         /// <param name="checkoutId">Required parameter: Unique ID for the desired `TerminalCheckout`</param>
         /// <return>Returns the Models.CancelTerminalCheckoutResponse response from the API call</return>
         Task<Models.CancelTerminalCheckoutResponse> CancelTerminalCheckoutAsync(string checkoutId, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Creates a request to refund an Interac payment completed on a Square Terminal.
+        /// </summary>
+        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
+        /// <return>Returns the Models.CreateTerminalRefundResponse response from the API call</return>
+        Models.CreateTerminalRefundResponse CreateTerminalRefund(Models.CreateTerminalRefundRequest body);
+
+        /// <summary>
+        /// Creates a request to refund an Interac payment completed on a Square Terminal.
+        /// </summary>
+        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
+        /// <return>Returns the Models.CreateTerminalRefundResponse response from the API call</return>
+        Task<Models.CreateTerminalRefundResponse> CreateTerminalRefundAsync(Models.CreateTerminalRefundRequest body, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Retrieves a filtered list of Terminal Interac refund requests created by the seller making the request.
+        /// </summary>
+        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
+        /// <return>Returns the Models.SearchTerminalRefundsResponse response from the API call</return>
+        Models.SearchTerminalRefundsResponse SearchTerminalRefunds(Models.SearchTerminalRefundsRequest body);
+
+        /// <summary>
+        /// Retrieves a filtered list of Terminal Interac refund requests created by the seller making the request.
+        /// </summary>
+        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
+        /// <return>Returns the Models.SearchTerminalRefundsResponse response from the API call</return>
+        Task<Models.SearchTerminalRefundsResponse> SearchTerminalRefundsAsync(Models.SearchTerminalRefundsRequest body, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Retrieves an Interac terminal refund object by ID.
+        /// </summary>
+        /// <param name="terminalRefundId">Required parameter: Unique ID for the desired `TerminalRefund`</param>
+        /// <return>Returns the Models.GetTerminalRefundResponse response from the API call</return>
+        Models.GetTerminalRefundResponse GetTerminalRefund(string terminalRefundId);
+
+        /// <summary>
+        /// Retrieves an Interac terminal refund object by ID.
+        /// </summary>
+        /// <param name="terminalRefundId">Required parameter: Unique ID for the desired `TerminalRefund`</param>
+        /// <return>Returns the Models.GetTerminalRefundResponse response from the API call</return>
+        Task<Models.GetTerminalRefundResponse> GetTerminalRefundAsync(string terminalRefundId, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Cancels an Interac terminal refund request by refund request ID if the status of the request permits it.
+        /// </summary>
+        /// <param name="terminalRefundId">Required parameter: Unique ID for the desired `TerminalRefund`</param>
+        /// <return>Returns the Models.CancelTerminalRefundResponse response from the API call</return>
+        Models.CancelTerminalRefundResponse CancelTerminalRefund(string terminalRefundId);
+
+        /// <summary>
+        /// Cancels an Interac terminal refund request by refund request ID if the status of the request permits it.
+        /// </summary>
+        /// <param name="terminalRefundId">Required parameter: Unique ID for the desired `TerminalRefund`</param>
+        /// <return>Returns the Models.CancelTerminalRefundResponse response from the API call</return>
+        Task<Models.CancelTerminalRefundResponse> CancelTerminalRefundAsync(string terminalRefundId, CancellationToken cancellationToken = default);
 
     }
 }

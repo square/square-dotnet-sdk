@@ -26,19 +26,19 @@ namespace Square.Models
         /// <summary>
         /// Unique ID that identifies the fulfillment only within this order.
         /// </summary>
-        [JsonProperty("fulfillment_uid")]
+        [JsonProperty("fulfillment_uid", NullValueHandling = NullValueHandling.Ignore)]
         public string FulfillmentUid { get; }
 
         /// <summary>
         /// The current state of this fulfillment.
         /// </summary>
-        [JsonProperty("old_state")]
+        [JsonProperty("old_state", NullValueHandling = NullValueHandling.Ignore)]
         public string OldState { get; }
 
         /// <summary>
         /// The current state of this fulfillment.
         /// </summary>
-        [JsonProperty("new_state")]
+        [JsonProperty("new_state", NullValueHandling = NullValueHandling.Ignore)]
         public string NewState { get; }
 
         public Builder ToBuilder()
@@ -56,22 +56,23 @@ namespace Square.Models
             private string oldState;
             private string newState;
 
-            public Builder() { }
-            public Builder FulfillmentUid(string value)
+
+
+            public Builder FulfillmentUid(string fulfillmentUid)
             {
-                fulfillmentUid = value;
+                this.fulfillmentUid = fulfillmentUid;
                 return this;
             }
 
-            public Builder OldState(string value)
+            public Builder OldState(string oldState)
             {
-                oldState = value;
+                this.oldState = oldState;
                 return this;
             }
 
-            public Builder NewState(string value)
+            public Builder NewState(string newState)
             {
-                newState = value;
+                this.newState = newState;
                 return this;
             }
 

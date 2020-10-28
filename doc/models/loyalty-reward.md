@@ -1,10 +1,11 @@
-## Loyalty Reward
 
-### Structure
+# Loyalty Reward
+
+## Structure
 
 `LoyaltyReward`
 
-### Fields
+## Fields
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
@@ -18,7 +19,7 @@
 | `UpdatedAt` | `string` | Optional | The timestamp when the reward was last updated, in RFC 3339 format. |
 | `RedeemedAt` | `string` | Optional | The timestamp when the reward was redeemed, in RFC 3339 format. |
 
-### Example (as JSON)
+## Example (as JSON)
 
 ```json
 {

@@ -24,13 +24,13 @@ namespace Square.Models
         /// <summary>
         /// ID for the account used to fund the payment.
         /// </summary>
-        [JsonProperty("account_id")]
+        [JsonProperty("account_id", NullValueHandling = NullValueHandling.Ignore)]
         public string AccountId { get; }
 
         /// <summary>
         /// The balance payment’s current state. Can be `COMPLETED` or `FAILED`.
         /// </summary>
-        [JsonProperty("status")]
+        [JsonProperty("status", NullValueHandling = NullValueHandling.Ignore)]
         public string Status { get; }
 
         public Builder ToBuilder()
@@ -46,16 +46,17 @@ namespace Square.Models
             private string accountId;
             private string status;
 
-            public Builder() { }
-            public Builder AccountId(string value)
+
+
+            public Builder AccountId(string accountId)
             {
-                accountId = value;
+                this.accountId = accountId;
                 return this;
             }
 
-            public Builder Status(string value)
+            public Builder Status(string status)
             {
-                status = value;
+                this.status = status;
                 return this;
             }
 

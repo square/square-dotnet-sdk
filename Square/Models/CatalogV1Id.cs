@@ -24,13 +24,13 @@ namespace Square.Models
         /// <summary>
         /// The ID for an object used in the Square API V1, if the object ID differs from the Square API V2 object ID.
         /// </summary>
-        [JsonProperty("catalog_v1_id")]
+        [JsonProperty("catalog_v1_id", NullValueHandling = NullValueHandling.Ignore)]
         public string CatalogV1IdProp { get; }
 
         /// <summary>
         /// The ID of the `Location` this Connect V1 ID is associated with.
         /// </summary>
-        [JsonProperty("location_id")]
+        [JsonProperty("location_id", NullValueHandling = NullValueHandling.Ignore)]
         public string LocationId { get; }
 
         public Builder ToBuilder()
@@ -46,16 +46,17 @@ namespace Square.Models
             private string catalogV1IdProp;
             private string locationId;
 
-            public Builder() { }
-            public Builder CatalogV1IdProp(string value)
+
+
+            public Builder CatalogV1IdProp(string catalogV1IdProp)
             {
-                catalogV1IdProp = value;
+                this.catalogV1IdProp = catalogV1IdProp;
                 return this;
             }
 
-            public Builder LocationId(string value)
+            public Builder LocationId(string locationId)
             {
-                locationId = value;
+                this.locationId = locationId;
                 return this;
             }
 

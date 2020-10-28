@@ -30,7 +30,7 @@ namespace Square.Models
         /// <summary>
         /// The order (e.g., chronological or alphabetical) in which results from a request are returned.
         /// </summary>
-        [JsonProperty("sort_order")]
+        [JsonProperty("sort_order", NullValueHandling = NullValueHandling.Ignore)]
         public string SortOrder { get; }
 
         public Builder ToBuilder()
@@ -49,15 +49,16 @@ namespace Square.Models
             {
                 this.sortField = sortField;
             }
-            public Builder SortField(string value)
+
+            public Builder SortField(string sortField)
             {
-                sortField = value;
+                this.sortField = sortField;
                 return this;
             }
 
-            public Builder SortOrder(string value)
+            public Builder SortOrder(string sortOrder)
             {
-                sortOrder = value;
+                this.sortOrder = sortOrder;
                 return this;
             }
 

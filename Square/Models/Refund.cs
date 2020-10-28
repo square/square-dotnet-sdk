@@ -64,7 +64,7 @@ namespace Square.Models
         /// <summary>
         /// The timestamp for when the refund was created, in RFC 3339 format.
         /// </summary>
-        [JsonProperty("created_at")]
+        [JsonProperty("created_at", NullValueHandling = NullValueHandling.Ignore)]
         public string CreatedAt { get; }
 
         /// <summary>
@@ -98,14 +98,14 @@ namespace Square.Models
         /// [Working with Monetary Amounts](https://developer.squareup.com/docs/build-basics/working-with-monetary-amounts)
         /// for more information.
         /// </summary>
-        [JsonProperty("processing_fee_money")]
+        [JsonProperty("processing_fee_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Money ProcessingFeeMoney { get; }
 
         /// <summary>
         /// Additional recipients (other than the merchant) receiving a portion of this refund.
         /// For example, fees assessed on a refund of a purchase by a third party integration.
         /// </summary>
-        [JsonProperty("additional_recipients")]
+        [JsonProperty("additional_recipients", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.AdditionalRecipient> AdditionalRecipients { get; }
 
         public Builder ToBuilder()
@@ -134,7 +134,7 @@ namespace Square.Models
             private string status;
             private string createdAt;
             private Models.Money processingFeeMoney;
-            private IList<Models.AdditionalRecipient> additionalRecipients = new List<Models.AdditionalRecipient>();
+            private IList<Models.AdditionalRecipient> additionalRecipients;
 
             public Builder(string id,
                 string locationId,
@@ -152,63 +152,64 @@ namespace Square.Models
                 this.amountMoney = amountMoney;
                 this.status = status;
             }
-            public Builder Id(string value)
+
+            public Builder Id(string id)
             {
-                id = value;
+                this.id = id;
                 return this;
             }
 
-            public Builder LocationId(string value)
+            public Builder LocationId(string locationId)
             {
-                locationId = value;
+                this.locationId = locationId;
                 return this;
             }
 
-            public Builder TransactionId(string value)
+            public Builder TransactionId(string transactionId)
             {
-                transactionId = value;
+                this.transactionId = transactionId;
                 return this;
             }
 
-            public Builder TenderId(string value)
+            public Builder TenderId(string tenderId)
             {
-                tenderId = value;
+                this.tenderId = tenderId;
                 return this;
             }
 
-            public Builder Reason(string value)
+            public Builder Reason(string reason)
             {
-                reason = value;
+                this.reason = reason;
                 return this;
             }
 
-            public Builder AmountMoney(Models.Money value)
+            public Builder AmountMoney(Models.Money amountMoney)
             {
-                amountMoney = value;
+                this.amountMoney = amountMoney;
                 return this;
             }
 
-            public Builder Status(string value)
+            public Builder Status(string status)
             {
-                status = value;
+                this.status = status;
                 return this;
             }
 
-            public Builder CreatedAt(string value)
+            public Builder CreatedAt(string createdAt)
             {
-                createdAt = value;
+                this.createdAt = createdAt;
                 return this;
             }
 
-            public Builder ProcessingFeeMoney(Models.Money value)
+            public Builder ProcessingFeeMoney(Models.Money processingFeeMoney)
             {
-                processingFeeMoney = value;
+                this.processingFeeMoney = processingFeeMoney;
                 return this;
             }
 
-            public Builder AdditionalRecipients(IList<Models.AdditionalRecipient> value)
+            public Builder AdditionalRecipients(IList<Models.AdditionalRecipient> additionalRecipients)
             {
-                additionalRecipients = value;
+                this.additionalRecipients = additionalRecipients;
                 return this;
             }
 

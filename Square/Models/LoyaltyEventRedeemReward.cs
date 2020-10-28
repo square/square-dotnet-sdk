@@ -33,14 +33,14 @@ namespace Square.Models
         /// The ID of the redeemed [loyalty reward](#type-LoyaltyReward).
         /// This field is returned only if the event source is `LOYALTY_API`.
         /// </summary>
-        [JsonProperty("reward_id")]
+        [JsonProperty("reward_id", NullValueHandling = NullValueHandling.Ignore)]
         public string RewardId { get; }
 
         /// <summary>
         /// The ID of the [order](#type-Order) that redeemed the reward.
         /// This field is returned only if the Orders API is used to process orders.
         /// </summary>
-        [JsonProperty("order_id")]
+        [JsonProperty("order_id", NullValueHandling = NullValueHandling.Ignore)]
         public string OrderId { get; }
 
         public Builder ToBuilder()
@@ -61,21 +61,22 @@ namespace Square.Models
             {
                 this.loyaltyProgramId = loyaltyProgramId;
             }
-            public Builder LoyaltyProgramId(string value)
+
+            public Builder LoyaltyProgramId(string loyaltyProgramId)
             {
-                loyaltyProgramId = value;
+                this.loyaltyProgramId = loyaltyProgramId;
                 return this;
             }
 
-            public Builder RewardId(string value)
+            public Builder RewardId(string rewardId)
             {
-                rewardId = value;
+                this.rewardId = rewardId;
                 return this;
             }
 
-            public Builder OrderId(string value)
+            public Builder OrderId(string orderId)
             {
-                orderId = value;
+                this.orderId = orderId;
                 return this;
             }
 

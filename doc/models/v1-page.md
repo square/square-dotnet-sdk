@@ -1,12 +1,13 @@
-## V1 Page
+
+# V1 Page
 
 V1Page
 
-### Structure
+## Structure
 
 `V1Page`
 
-### Fields
+## Fields
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
@@ -15,7 +16,7 @@ V1Page
 | `PageIndex` | `int?` | Optional | The page's position in the merchant's list of pages. Always an integer between 0 and 6, inclusive. |
 | `Cells` | [`IList<Models.V1PageCell>`](/doc/models/v1-page-cell.md) | Optional | The cells included on the page. |
 
-### Example (as JSON)
+## Example (as JSON)
 
 ```json
 {

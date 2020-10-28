@@ -28,25 +28,25 @@ namespace Square.Models
         /// <summary>
         /// The name of the item's merchant-defined category, if any.
         /// </summary>
-        [JsonProperty("category_name")]
+        [JsonProperty("category_name", NullValueHandling = NullValueHandling.Ignore)]
         public string CategoryName { get; }
 
         /// <summary>
         /// The item's merchant-defined SKU, if any.
         /// </summary>
-        [JsonProperty("sku")]
+        [JsonProperty("sku", NullValueHandling = NullValueHandling.Ignore)]
         public string Sku { get; }
 
         /// <summary>
         /// The unique ID of the item purchased, if any.
         /// </summary>
-        [JsonProperty("item_id")]
+        [JsonProperty("item_id", NullValueHandling = NullValueHandling.Ignore)]
         public string ItemId { get; }
 
         /// <summary>
         /// The unique ID of the item variation purchased, if any.
         /// </summary>
-        [JsonProperty("item_variation_id")]
+        [JsonProperty("item_variation_id", NullValueHandling = NullValueHandling.Ignore)]
         public string ItemVariationId { get; }
 
         public Builder ToBuilder()
@@ -66,28 +66,29 @@ namespace Square.Models
             private string itemId;
             private string itemVariationId;
 
-            public Builder() { }
-            public Builder CategoryName(string value)
+
+
+            public Builder CategoryName(string categoryName)
             {
-                categoryName = value;
+                this.categoryName = categoryName;
                 return this;
             }
 
-            public Builder Sku(string value)
+            public Builder Sku(string sku)
             {
-                sku = value;
+                this.sku = sku;
                 return this;
             }
 
-            public Builder ItemId(string value)
+            public Builder ItemId(string itemId)
             {
-                itemId = value;
+                this.itemId = itemId;
                 return this;
             }
 
-            public Builder ItemVariationId(string value)
+            public Builder ItemVariationId(string itemVariationId)
             {
-                itemVariationId = value;
+                this.itemVariationId = itemVariationId;
                 return this;
             }
 

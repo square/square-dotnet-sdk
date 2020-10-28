@@ -28,19 +28,19 @@ namespace Square.Models
         /// or inches. Exactly one of the following fields are required: `custom_unit`,
         /// `area_unit`, `length_unit`, `volume_unit`, and `weight_unit`.
         /// </summary>
-        [JsonProperty("unit")]
+        [JsonProperty("unit", NullValueHandling = NullValueHandling.Ignore)]
         public Models.MeasurementUnit Unit { get; }
 
         /// <summary>
         /// UI display name of the measurement unit. For example, 'Pound'.
         /// </summary>
-        [JsonProperty("name")]
+        [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
         public string Name { get; }
 
         /// <summary>
         /// UI display abbreviation for the measurement unit. For example, 'lb'.
         /// </summary>
-        [JsonProperty("abbreviation")]
+        [JsonProperty("abbreviation", NullValueHandling = NullValueHandling.Ignore)]
         public string Abbreviation { get; }
 
         public Builder ToBuilder()
@@ -58,22 +58,23 @@ namespace Square.Models
             private string name;
             private string abbreviation;
 
-            public Builder() { }
-            public Builder Unit(Models.MeasurementUnit value)
+
+
+            public Builder Unit(Models.MeasurementUnit unit)
             {
-                unit = value;
+                this.unit = unit;
                 return this;
             }
 
-            public Builder Name(string value)
+            public Builder Name(string name)
             {
-                name = value;
+                this.name = name;
                 return this;
             }
 
-            public Builder Abbreviation(string value)
+            public Builder Abbreviation(string abbreviation)
             {
-                abbreviation = value;
+                this.abbreviation = abbreviation;
                 return this;
             }
 

@@ -27,14 +27,14 @@ namespace Square.Models
         /// in cents. Monetary amounts can be positive or negative. See the specific
         /// field description to determine the meaning of the sign in a particular case.
         /// </summary>
-        [JsonProperty("amount")]
+        [JsonProperty("amount", NullValueHandling = NullValueHandling.Ignore)]
         public long? Amount { get; }
 
         /// <summary>
         /// Indicates the associated currency for an amount of money. Values correspond
         /// to [ISO 4217](https://wikipedia.org/wiki/ISO_4217).
         /// </summary>
-        [JsonProperty("currency")]
+        [JsonProperty("currency", NullValueHandling = NullValueHandling.Ignore)]
         public string Currency { get; }
 
         public Builder ToBuilder()
@@ -50,16 +50,17 @@ namespace Square.Models
             private long? amount;
             private string currency;
 
-            public Builder() { }
-            public Builder Amount(long? value)
+
+
+            public Builder Amount(long? amount)
             {
-                amount = value;
+                this.amount = amount;
                 return this;
             }
 
-            public Builder Currency(string value)
+            public Builder Currency(string currency)
             {
-                currency = value;
+                this.currency = currency;
                 return this;
             }
 

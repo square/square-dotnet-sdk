@@ -30,7 +30,7 @@ namespace Square.Models
         /// See [Date ranges](#dateranges) for details on date inclusivity/exclusivity.
         /// Default value: The current time minus one year.
         /// </summary>
-        [JsonProperty("begin_time")]
+        [JsonProperty("begin_time", NullValueHandling = NullValueHandling.Ignore)]
         public string BeginTime { get; }
 
         /// <summary>
@@ -38,13 +38,13 @@ namespace Square.Models
         /// See [Date ranges](#dateranges) for details on date inclusivity/exclusivity.
         /// Default value: The current time.
         /// </summary>
-        [JsonProperty("end_time")]
+        [JsonProperty("end_time", NullValueHandling = NullValueHandling.Ignore)]
         public string EndTime { get; }
 
         /// <summary>
         /// The order (e.g., chronological or alphabetical) in which results from a request are returned.
         /// </summary>
-        [JsonProperty("sort_order")]
+        [JsonProperty("sort_order", NullValueHandling = NullValueHandling.Ignore)]
         public string SortOrder { get; }
 
         /// <summary>
@@ -52,7 +52,7 @@ namespace Square.Models
         /// Provide this to retrieve the next set of results for your original query.
         /// See [Paginating results](#paginatingresults) for more information.
         /// </summary>
-        [JsonProperty("cursor")]
+        [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
         public string Cursor { get; }
 
         public Builder ToBuilder()
@@ -72,28 +72,29 @@ namespace Square.Models
             private string sortOrder;
             private string cursor;
 
-            public Builder() { }
-            public Builder BeginTime(string value)
+
+
+            public Builder BeginTime(string beginTime)
             {
-                beginTime = value;
+                this.beginTime = beginTime;
                 return this;
             }
 
-            public Builder EndTime(string value)
+            public Builder EndTime(string endTime)
             {
-                endTime = value;
+                this.endTime = endTime;
                 return this;
             }
 
-            public Builder SortOrder(string value)
+            public Builder SortOrder(string sortOrder)
             {
-                sortOrder = value;
+                this.sortOrder = sortOrder;
                 return this;
             }
 
-            public Builder Cursor(string value)
+            public Builder Cursor(string cursor)
             {
-                cursor = value;
+                this.cursor = cursor;
                 return this;
             }
 

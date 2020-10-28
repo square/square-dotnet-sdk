@@ -24,13 +24,13 @@ namespace Square.Models
         /// <summary>
         /// The row of the cell to clear. Always an integer between 0 and 4, inclusive. Row 0 is the top row.
         /// </summary>
-        [JsonProperty("row")]
+        [JsonProperty("row", NullValueHandling = NullValueHandling.Ignore)]
         public string Row { get; }
 
         /// <summary>
         /// The column of the cell to clear. Always an integer between 0 and 4, inclusive. Column 0 is the leftmost column.
         /// </summary>
-        [JsonProperty("column")]
+        [JsonProperty("column", NullValueHandling = NullValueHandling.Ignore)]
         public string Column { get; }
 
         public Builder ToBuilder()
@@ -46,16 +46,17 @@ namespace Square.Models
             private string row;
             private string column;
 
-            public Builder() { }
-            public Builder Row(string value)
+
+
+            public Builder Row(string row)
             {
-                row = value;
+                this.row = row;
                 return this;
             }
 
-            public Builder Column(string value)
+            public Builder Column(string column)
             {
-                column = value;
+                this.column = column;
                 return this;
             }
 

@@ -24,13 +24,13 @@ namespace Square.Models
         /// <summary>
         /// The latitude of the coordinate expressed in degrees.
         /// </summary>
-        [JsonProperty("latitude")]
+        [JsonProperty("latitude", NullValueHandling = NullValueHandling.Ignore)]
         public double? Latitude { get; }
 
         /// <summary>
         /// The longitude of the coordinate expressed in degrees.
         /// </summary>
-        [JsonProperty("longitude")]
+        [JsonProperty("longitude", NullValueHandling = NullValueHandling.Ignore)]
         public double? Longitude { get; }
 
         public Builder ToBuilder()
@@ -46,16 +46,17 @@ namespace Square.Models
             private double? latitude;
             private double? longitude;
 
-            public Builder() { }
-            public Builder Latitude(double? value)
+
+
+            public Builder Latitude(double? latitude)
             {
-                latitude = value;
+                this.latitude = latitude;
                 return this;
             }
 
-            public Builder Longitude(double? value)
+            public Builder Longitude(double? longitude)
             {
-                longitude = value;
+                this.longitude = longitude;
                 return this;
             }
 

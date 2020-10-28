@@ -50,13 +50,13 @@ namespace Square.Models
         /// <summary>
         /// Getter for refunded_money
         /// </summary>
-        [JsonProperty("refunded_money")]
+        [JsonProperty("refunded_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1Money RefundedMoney { get; }
 
         /// <summary>
         /// An optional key to ensure idempotence if you issue the same PARTIAL refund request more than once.
         /// </summary>
-        [JsonProperty("request_idempotence_key")]
+        [JsonProperty("request_idempotence_key", NullValueHandling = NullValueHandling.Ignore)]
         public string RequestIdempotenceKey { get; }
 
         public Builder ToBuilder()
@@ -85,33 +85,34 @@ namespace Square.Models
                 this.type = type;
                 this.reason = reason;
             }
-            public Builder PaymentId(string value)
+
+            public Builder PaymentId(string paymentId)
             {
-                paymentId = value;
+                this.paymentId = paymentId;
                 return this;
             }
 
-            public Builder Type(string value)
+            public Builder Type(string type)
             {
-                type = value;
+                this.type = type;
                 return this;
             }
 
-            public Builder Reason(string value)
+            public Builder Reason(string reason)
             {
-                reason = value;
+                this.reason = reason;
                 return this;
             }
 
-            public Builder RefundedMoney(Models.V1Money value)
+            public Builder RefundedMoney(Models.V1Money refundedMoney)
             {
-                refundedMoney = value;
+                this.refundedMoney = refundedMoney;
                 return this;
             }
 
-            public Builder RequestIdempotenceKey(string value)
+            public Builder RequestIdempotenceKey(string requestIdempotenceKey)
             {
-                requestIdempotenceKey = value;
+                this.requestIdempotenceKey = requestIdempotenceKey;
                 return this;
             }
 

@@ -52,15 +52,16 @@ namespace Square.Models
                 this.name = name;
                 this.abbreviation = abbreviation;
             }
-            public Builder Name(string value)
+
+            public Builder Name(string name)
             {
-                name = value;
+                this.name = name;
                 return this;
             }
 
-            public Builder Abbreviation(string value)
+            public Builder Abbreviation(string abbreviation)
             {
-                abbreviation = value;
+                this.abbreviation = abbreviation;
                 return this;
             }
 

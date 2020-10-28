@@ -45,13 +45,13 @@ namespace Square.Models
         /// Present if `discount_type` is `FIXED_PERCENTAGE`.
         /// For example, a 7.25% off discount will be represented as "7.25".
         /// </summary>
-        [JsonProperty("percentage_discount")]
+        [JsonProperty("percentage_discount", NullValueHandling = NullValueHandling.Ignore)]
         public string PercentageDiscount { get; }
 
         /// <summary>
         /// A list of [catalog object](#type-CatalogObject) ids to which this reward can be applied. They are either all item-variation ids or category ids, depending on the `type` field.
         /// </summary>
-        [JsonProperty("catalog_object_ids")]
+        [JsonProperty("catalog_object_ids", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> CatalogObjectIds { get; }
 
         /// <summary>
@@ -62,7 +62,7 @@ namespace Square.Models
         /// [Working with Monetary Amounts](https://developer.squareup.com/docs/build-basics/working-with-monetary-amounts)
         /// for more information.
         /// </summary>
-        [JsonProperty("fixed_discount_money")]
+        [JsonProperty("fixed_discount_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Money FixedDiscountMoney { get; }
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace Square.Models
         /// [Working with Monetary Amounts](https://developer.squareup.com/docs/build-basics/working-with-monetary-amounts)
         /// for more information.
         /// </summary>
-        [JsonProperty("max_discount_money")]
+        [JsonProperty("max_discount_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Money MaxDiscountMoney { get; }
 
         public Builder ToBuilder()
@@ -92,7 +92,7 @@ namespace Square.Models
             private string scope;
             private string discountType;
             private string percentageDiscount;
-            private IList<string> catalogObjectIds = new List<string>();
+            private IList<string> catalogObjectIds;
             private Models.Money fixedDiscountMoney;
             private Models.Money maxDiscountMoney;
 
@@ -102,39 +102,40 @@ namespace Square.Models
                 this.scope = scope;
                 this.discountType = discountType;
             }
-            public Builder Scope(string value)
+
+            public Builder Scope(string scope)
             {
-                scope = value;
+                this.scope = scope;
                 return this;
             }
 
-            public Builder DiscountType(string value)
+            public Builder DiscountType(string discountType)
             {
-                discountType = value;
+                this.discountType = discountType;
                 return this;
             }
 
-            public Builder PercentageDiscount(string value)
+            public Builder PercentageDiscount(string percentageDiscount)
             {
-                percentageDiscount = value;
+                this.percentageDiscount = percentageDiscount;
                 return this;
             }
 
-            public Builder CatalogObjectIds(IList<string> value)
+            public Builder CatalogObjectIds(IList<string> catalogObjectIds)
             {
-                catalogObjectIds = value;
+                this.catalogObjectIds = catalogObjectIds;
                 return this;
             }
 
-            public Builder FixedDiscountMoney(Models.Money value)
+            public Builder FixedDiscountMoney(Models.Money fixedDiscountMoney)
             {
-                fixedDiscountMoney = value;
+                this.fixedDiscountMoney = fixedDiscountMoney;
                 return this;
             }
 
-            public Builder MaxDiscountMoney(Models.Money value)
+            public Builder MaxDiscountMoney(Models.Money maxDiscountMoney)
             {
-                maxDiscountMoney = value;
+                this.maxDiscountMoney = maxDiscountMoney;
                 return this;
             }
 
