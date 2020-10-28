@@ -28,7 +28,7 @@ namespace Square.Models
         /// - if the precision is 2, the quantity can be 0.01, 0.12, etc.
         /// Default: 5
         /// </summary>
-        [JsonProperty("precision")]
+        [JsonProperty("precision", NullValueHandling = NullValueHandling.Ignore)]
         public int? Precision { get; }
 
         public Builder ToBuilder()
@@ -42,10 +42,11 @@ namespace Square.Models
         {
             private int? precision;
 
-            public Builder() { }
-            public Builder Precision(int? value)
+
+
+            public Builder Precision(int? precision)
             {
-                precision = value;
+                this.precision = precision;
                 return this;
             }
 

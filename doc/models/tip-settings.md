@@ -1,10 +1,11 @@
-## Tip Settings
 
-### Structure
+# Tip Settings
+
+## Structure
 
 `TipSettings`
 
-### Fields
+## Fields
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
@@ -12,7 +13,7 @@
 | `SeparateTipScreen` | `bool?` | Optional | Indicates whether tip options should be presented on their own screen before presenting<br>the signature screen during card payment. Defaults to false. |
 | `CustomTipField` | `bool?` | Optional | Indicates whether custom tip amounts are allowed during the checkout flow. Defaults to false. |
 
-### Example (as JSON)
+## Example (as JSON)
 
 ```json
 {

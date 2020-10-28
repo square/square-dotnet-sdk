@@ -37,7 +37,7 @@ namespace Square.Models
         /// its parent CatalogItem will be returned in the `related_objects` field of
         /// the response.
         /// </summary>
-        [JsonProperty("include_related_objects")]
+        [JsonProperty("include_related_objects", NullValueHandling = NullValueHandling.Ignore)]
         public bool? IncludeRelatedObjects { get; }
 
         public Builder ToBuilder()
@@ -56,15 +56,16 @@ namespace Square.Models
             {
                 this.objectIds = objectIds;
             }
-            public Builder ObjectIds(IList<string> value)
+
+            public Builder ObjectIds(IList<string> objectIds)
             {
-                objectIds = value;
+                this.objectIds = objectIds;
                 return this;
             }
 
-            public Builder IncludeRelatedObjects(bool? value)
+            public Builder IncludeRelatedObjects(bool? includeRelatedObjects)
             {
-                includeRelatedObjects = value;
+                this.includeRelatedObjects = includeRelatedObjects;
                 return this;
             }
 

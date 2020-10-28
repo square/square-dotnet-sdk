@@ -24,13 +24,13 @@ namespace Square.Models
         /// <summary>
         /// The lower bound of the number range.
         /// </summary>
-        [JsonProperty("min")]
+        [JsonProperty("min", NullValueHandling = NullValueHandling.Ignore)]
         public string Min { get; }
 
         /// <summary>
         /// The upper bound of the number range.
         /// </summary>
-        [JsonProperty("max")]
+        [JsonProperty("max", NullValueHandling = NullValueHandling.Ignore)]
         public string Max { get; }
 
         public Builder ToBuilder()
@@ -46,16 +46,17 @@ namespace Square.Models
             private string min;
             private string max;
 
-            public Builder() { }
-            public Builder Min(string value)
+
+
+            public Builder Min(string min)
             {
-                min = value;
+                this.min = min;
                 return this;
             }
 
-            public Builder Max(string value)
+            public Builder Max(string max)
             {
-                max = value;
+                this.max = max;
                 return this;
             }
 

@@ -33,7 +33,7 @@ namespace Square.Models
         /// Specifying a customer is optional. In the current implementation, 
         /// a maximum of one customer can be specified.
         /// </summary>
-        [JsonProperty("customer_ids")]
+        [JsonProperty("customer_ids", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> CustomerIds { get; }
 
         public Builder ToBuilder()
@@ -46,21 +46,22 @@ namespace Square.Models
         public class Builder
         {
             private IList<string> locationIds;
-            private IList<string> customerIds = new List<string>();
+            private IList<string> customerIds;
 
             public Builder(IList<string> locationIds)
             {
                 this.locationIds = locationIds;
             }
-            public Builder LocationIds(IList<string> value)
+
+            public Builder LocationIds(IList<string> locationIds)
             {
-                locationIds = value;
+                this.locationIds = locationIds;
                 return this;
             }
 
-            public Builder CustomerIds(IList<string> value)
+            public Builder CustomerIds(IList<string> customerIds)
             {
-                customerIds = value;
+                this.customerIds = customerIds;
                 return this;
             }
 

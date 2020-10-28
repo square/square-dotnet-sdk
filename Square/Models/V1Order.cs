@@ -74,121 +74,121 @@ namespace Square.Models
         /// <summary>
         /// Any errors that occurred during the request.
         /// </summary>
-        [JsonProperty("errors")]
+        [JsonProperty("errors", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.Error> Errors { get; }
 
         /// <summary>
         /// The order's unique identifier.
         /// </summary>
-        [JsonProperty("id")]
+        [JsonProperty("id", NullValueHandling = NullValueHandling.Ignore)]
         public string Id { get; }
 
         /// <summary>
         /// The email address of the order's buyer.
         /// </summary>
-        [JsonProperty("buyer_email")]
+        [JsonProperty("buyer_email", NullValueHandling = NullValueHandling.Ignore)]
         public string BuyerEmail { get; }
 
         /// <summary>
         /// The name of the order's buyer.
         /// </summary>
-        [JsonProperty("recipient_name")]
+        [JsonProperty("recipient_name", NullValueHandling = NullValueHandling.Ignore)]
         public string RecipientName { get; }
 
         /// <summary>
         /// The phone number to use for the order's delivery.
         /// </summary>
-        [JsonProperty("recipient_phone_number")]
+        [JsonProperty("recipient_phone_number", NullValueHandling = NullValueHandling.Ignore)]
         public string RecipientPhoneNumber { get; }
 
         /// <summary>
         /// Getter for state
         /// </summary>
-        [JsonProperty("state")]
+        [JsonProperty("state", NullValueHandling = NullValueHandling.Ignore)]
         public string State { get; }
 
         /// <summary>
         /// Represents a physical address.
         /// </summary>
-        [JsonProperty("shipping_address")]
+        [JsonProperty("shipping_address", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Address ShippingAddress { get; }
 
         /// <summary>
         /// Getter for subtotal_money
         /// </summary>
-        [JsonProperty("subtotal_money")]
+        [JsonProperty("subtotal_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1Money SubtotalMoney { get; }
 
         /// <summary>
         /// Getter for total_shipping_money
         /// </summary>
-        [JsonProperty("total_shipping_money")]
+        [JsonProperty("total_shipping_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1Money TotalShippingMoney { get; }
 
         /// <summary>
         /// Getter for total_tax_money
         /// </summary>
-        [JsonProperty("total_tax_money")]
+        [JsonProperty("total_tax_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1Money TotalTaxMoney { get; }
 
         /// <summary>
         /// Getter for total_price_money
         /// </summary>
-        [JsonProperty("total_price_money")]
+        [JsonProperty("total_price_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1Money TotalPriceMoney { get; }
 
         /// <summary>
         /// Getter for total_discount_money
         /// </summary>
-        [JsonProperty("total_discount_money")]
+        [JsonProperty("total_discount_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1Money TotalDiscountMoney { get; }
 
         /// <summary>
         /// The time when the order was created, in ISO 8601 format.
         /// </summary>
-        [JsonProperty("created_at")]
+        [JsonProperty("created_at", NullValueHandling = NullValueHandling.Ignore)]
         public string CreatedAt { get; }
 
         /// <summary>
         /// The time when the order was last modified, in ISO 8601 format.
         /// </summary>
-        [JsonProperty("updated_at")]
+        [JsonProperty("updated_at", NullValueHandling = NullValueHandling.Ignore)]
         public string UpdatedAt { get; }
 
         /// <summary>
         /// The time when the order expires if no action is taken, in ISO 8601 format.
         /// </summary>
-        [JsonProperty("expires_at")]
+        [JsonProperty("expires_at", NullValueHandling = NullValueHandling.Ignore)]
         public string ExpiresAt { get; }
 
         /// <summary>
         /// The unique identifier of the payment associated with the order.
         /// </summary>
-        [JsonProperty("payment_id")]
+        [JsonProperty("payment_id", NullValueHandling = NullValueHandling.Ignore)]
         public string PaymentId { get; }
 
         /// <summary>
         /// A note provided by the buyer when the order was created, if any.
         /// </summary>
-        [JsonProperty("buyer_note")]
+        [JsonProperty("buyer_note", NullValueHandling = NullValueHandling.Ignore)]
         public string BuyerNote { get; }
 
         /// <summary>
         /// A note provided by the merchant when the order's state was set to COMPLETED, if any
         /// </summary>
-        [JsonProperty("completed_note")]
+        [JsonProperty("completed_note", NullValueHandling = NullValueHandling.Ignore)]
         public string CompletedNote { get; }
 
         /// <summary>
         /// A note provided by the merchant when the order's state was set to REFUNDED, if any.
         /// </summary>
-        [JsonProperty("refunded_note")]
+        [JsonProperty("refunded_note", NullValueHandling = NullValueHandling.Ignore)]
         public string RefundedNote { get; }
 
         /// <summary>
         /// A note provided by the merchant when the order's state was set to CANCELED, if any.
         /// </summary>
-        [JsonProperty("canceled_note")]
+        [JsonProperty("canceled_note", NullValueHandling = NullValueHandling.Ignore)]
         public string CanceledNote { get; }
 
         /// <summary>
@@ -210,31 +210,31 @@ namespace Square.Models
         /// `SQUARE_GIFT_CARD` indicates a gift card was used for some or all of the
         /// associated payment.
         /// </summary>
-        [JsonProperty("tender")]
+        [JsonProperty("tender", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1Tender Tender { get; }
 
         /// <summary>
         /// The history of actions associated with the order.
         /// </summary>
-        [JsonProperty("order_history")]
+        [JsonProperty("order_history", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.V1OrderHistoryEntry> OrderHistory { get; }
 
         /// <summary>
         /// The promo code provided by the buyer, if any.
         /// </summary>
-        [JsonProperty("promo_code")]
+        [JsonProperty("promo_code", NullValueHandling = NullValueHandling.Ignore)]
         public string PromoCode { get; }
 
         /// <summary>
         /// For Bitcoin transactions, the address that the buyer sent Bitcoin to.
         /// </summary>
-        [JsonProperty("btc_receive_address")]
+        [JsonProperty("btc_receive_address", NullValueHandling = NullValueHandling.Ignore)]
         public string BtcReceiveAddress { get; }
 
         /// <summary>
         /// For Bitcoin transactions, the price of the buyer's order in satoshi (100 million satoshi equals 1 BTC).
         /// </summary>
-        [JsonProperty("btc_price_satoshi")]
+        [JsonProperty("btc_price_satoshi", NullValueHandling = NullValueHandling.Ignore)]
         public double? BtcPriceSatoshi { get; }
 
         public Builder ToBuilder()
@@ -270,7 +270,7 @@ namespace Square.Models
 
         public class Builder
         {
-            private IList<Models.Error> errors = new List<Models.Error>();
+            private IList<Models.Error> errors;
             private string id;
             private string buyerEmail;
             private string recipientName;
@@ -291,159 +291,160 @@ namespace Square.Models
             private string refundedNote;
             private string canceledNote;
             private Models.V1Tender tender;
-            private IList<Models.V1OrderHistoryEntry> orderHistory = new List<Models.V1OrderHistoryEntry>();
+            private IList<Models.V1OrderHistoryEntry> orderHistory;
             private string promoCode;
             private string btcReceiveAddress;
             private double? btcPriceSatoshi;
 
-            public Builder() { }
-            public Builder Errors(IList<Models.Error> value)
+
+
+            public Builder Errors(IList<Models.Error> errors)
             {
-                errors = value;
+                this.errors = errors;
                 return this;
             }
 
-            public Builder Id(string value)
+            public Builder Id(string id)
             {
-                id = value;
+                this.id = id;
                 return this;
             }
 
-            public Builder BuyerEmail(string value)
+            public Builder BuyerEmail(string buyerEmail)
             {
-                buyerEmail = value;
+                this.buyerEmail = buyerEmail;
                 return this;
             }
 
-            public Builder RecipientName(string value)
+            public Builder RecipientName(string recipientName)
             {
-                recipientName = value;
+                this.recipientName = recipientName;
                 return this;
             }
 
-            public Builder RecipientPhoneNumber(string value)
+            public Builder RecipientPhoneNumber(string recipientPhoneNumber)
             {
-                recipientPhoneNumber = value;
+                this.recipientPhoneNumber = recipientPhoneNumber;
                 return this;
             }
 
-            public Builder State(string value)
+            public Builder State(string state)
             {
-                state = value;
+                this.state = state;
                 return this;
             }
 
-            public Builder ShippingAddress(Models.Address value)
+            public Builder ShippingAddress(Models.Address shippingAddress)
             {
-                shippingAddress = value;
+                this.shippingAddress = shippingAddress;
                 return this;
             }
 
-            public Builder SubtotalMoney(Models.V1Money value)
+            public Builder SubtotalMoney(Models.V1Money subtotalMoney)
             {
-                subtotalMoney = value;
+                this.subtotalMoney = subtotalMoney;
                 return this;
             }
 
-            public Builder TotalShippingMoney(Models.V1Money value)
+            public Builder TotalShippingMoney(Models.V1Money totalShippingMoney)
             {
-                totalShippingMoney = value;
+                this.totalShippingMoney = totalShippingMoney;
                 return this;
             }
 
-            public Builder TotalTaxMoney(Models.V1Money value)
+            public Builder TotalTaxMoney(Models.V1Money totalTaxMoney)
             {
-                totalTaxMoney = value;
+                this.totalTaxMoney = totalTaxMoney;
                 return this;
             }
 
-            public Builder TotalPriceMoney(Models.V1Money value)
+            public Builder TotalPriceMoney(Models.V1Money totalPriceMoney)
             {
-                totalPriceMoney = value;
+                this.totalPriceMoney = totalPriceMoney;
                 return this;
             }
 
-            public Builder TotalDiscountMoney(Models.V1Money value)
+            public Builder TotalDiscountMoney(Models.V1Money totalDiscountMoney)
             {
-                totalDiscountMoney = value;
+                this.totalDiscountMoney = totalDiscountMoney;
                 return this;
             }
 
-            public Builder CreatedAt(string value)
+            public Builder CreatedAt(string createdAt)
             {
-                createdAt = value;
+                this.createdAt = createdAt;
                 return this;
             }
 
-            public Builder UpdatedAt(string value)
+            public Builder UpdatedAt(string updatedAt)
             {
-                updatedAt = value;
+                this.updatedAt = updatedAt;
                 return this;
             }
 
-            public Builder ExpiresAt(string value)
+            public Builder ExpiresAt(string expiresAt)
             {
-                expiresAt = value;
+                this.expiresAt = expiresAt;
                 return this;
             }
 
-            public Builder PaymentId(string value)
+            public Builder PaymentId(string paymentId)
             {
-                paymentId = value;
+                this.paymentId = paymentId;
                 return this;
             }
 
-            public Builder BuyerNote(string value)
+            public Builder BuyerNote(string buyerNote)
             {
-                buyerNote = value;
+                this.buyerNote = buyerNote;
                 return this;
             }
 
-            public Builder CompletedNote(string value)
+            public Builder CompletedNote(string completedNote)
             {
-                completedNote = value;
+                this.completedNote = completedNote;
                 return this;
             }
 
-            public Builder RefundedNote(string value)
+            public Builder RefundedNote(string refundedNote)
             {
-                refundedNote = value;
+                this.refundedNote = refundedNote;
                 return this;
             }
 
-            public Builder CanceledNote(string value)
+            public Builder CanceledNote(string canceledNote)
             {
-                canceledNote = value;
+                this.canceledNote = canceledNote;
                 return this;
             }
 
-            public Builder Tender(Models.V1Tender value)
+            public Builder Tender(Models.V1Tender tender)
             {
-                tender = value;
+                this.tender = tender;
                 return this;
             }
 
-            public Builder OrderHistory(IList<Models.V1OrderHistoryEntry> value)
+            public Builder OrderHistory(IList<Models.V1OrderHistoryEntry> orderHistory)
             {
-                orderHistory = value;
+                this.orderHistory = orderHistory;
                 return this;
             }
 
-            public Builder PromoCode(string value)
+            public Builder PromoCode(string promoCode)
             {
-                promoCode = value;
+                this.promoCode = promoCode;
                 return this;
             }
 
-            public Builder BtcReceiveAddress(string value)
+            public Builder BtcReceiveAddress(string btcReceiveAddress)
             {
-                btcReceiveAddress = value;
+                this.btcReceiveAddress = btcReceiveAddress;
                 return this;
             }
 
-            public Builder BtcPriceSatoshi(double? value)
+            public Builder BtcPriceSatoshi(double? btcPriceSatoshi)
             {
-                btcPriceSatoshi = value;
+                this.btcPriceSatoshi = btcPriceSatoshi;
                 return this;
             }
 

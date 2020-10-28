@@ -22,7 +22,7 @@ namespace Square.Models
         /// <summary>
         /// V1Category
         /// </summary>
-        [JsonProperty("body")]
+        [JsonProperty("body", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1Category Body { get; }
 
         public Builder ToBuilder()
@@ -36,10 +36,11 @@ namespace Square.Models
         {
             private Models.V1Category body;
 
-            public Builder() { }
-            public Builder Body(Models.V1Category value)
+
+
+            public Builder Body(Models.V1Category body)
             {
-                body = value;
+                this.body = body;
                 return this;
             }
 

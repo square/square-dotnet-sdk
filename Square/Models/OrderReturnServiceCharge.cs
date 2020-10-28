@@ -44,7 +44,7 @@ namespace Square.Models
         /// <summary>
         /// Unique ID that identifies the return service charge only within this order.
         /// </summary>
-        [JsonProperty("uid")]
+        [JsonProperty("uid", NullValueHandling = NullValueHandling.Ignore)]
         public string Uid { get; }
 
         /// <summary>
@@ -52,19 +52,19 @@ namespace Square.Models
         /// charge of the service charge. `source_service_charge_uid` is `null` for
         /// unlinked returns.
         /// </summary>
-        [JsonProperty("source_service_charge_uid")]
+        [JsonProperty("source_service_charge_uid", NullValueHandling = NullValueHandling.Ignore)]
         public string SourceServiceChargeUid { get; }
 
         /// <summary>
         /// The name of the service charge.
         /// </summary>
-        [JsonProperty("name")]
+        [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
         public string Name { get; }
 
         /// <summary>
         /// The catalog object ID of the associated [CatalogServiceCharge](#type-catalogservicecharge).
         /// </summary>
-        [JsonProperty("catalog_object_id")]
+        [JsonProperty("catalog_object_id", NullValueHandling = NullValueHandling.Ignore)]
         public string CatalogObjectId { get; }
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace Square.Models
         /// percentage of 7.25%.
         /// Exactly one of `percentage` or `amount_money` should be set.
         /// </summary>
-        [JsonProperty("percentage")]
+        [JsonProperty("percentage", NullValueHandling = NullValueHandling.Ignore)]
         public string Percentage { get; }
 
         /// <summary>
@@ -84,7 +84,7 @@ namespace Square.Models
         /// [Working with Monetary Amounts](https://developer.squareup.com/docs/build-basics/working-with-monetary-amounts)
         /// for more information.
         /// </summary>
-        [JsonProperty("amount_money")]
+        [JsonProperty("amount_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Money AmountMoney { get; }
 
         /// <summary>
@@ -95,7 +95,7 @@ namespace Square.Models
         /// [Working with Monetary Amounts](https://developer.squareup.com/docs/build-basics/working-with-monetary-amounts)
         /// for more information.
         /// </summary>
-        [JsonProperty("applied_money")]
+        [JsonProperty("applied_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Money AppliedMoney { get; }
 
         /// <summary>
@@ -106,7 +106,7 @@ namespace Square.Models
         /// [Working with Monetary Amounts](https://developer.squareup.com/docs/build-basics/working-with-monetary-amounts)
         /// for more information.
         /// </summary>
-        [JsonProperty("total_money")]
+        [JsonProperty("total_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Money TotalMoney { get; }
 
         /// <summary>
@@ -117,7 +117,7 @@ namespace Square.Models
         /// [Working with Monetary Amounts](https://developer.squareup.com/docs/build-basics/working-with-monetary-amounts)
         /// for more information.
         /// </summary>
-        [JsonProperty("total_tax_money")]
+        [JsonProperty("total_tax_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Money TotalTaxMoney { get; }
 
         /// <summary>
@@ -125,14 +125,14 @@ namespace Square.Models
         /// Service charges are applied __after__ the indicated phase.
         /// [Read more about how order totals are calculated.](https://developer.squareup.com/docs/docs/orders-api/how-it-works#how-totals-are-calculated)
         /// </summary>
-        [JsonProperty("calculation_phase")]
+        [JsonProperty("calculation_phase", NullValueHandling = NullValueHandling.Ignore)]
         public string CalculationPhase { get; }
 
         /// <summary>
         /// Indicates whether the surcharge can be taxed. Service charges
         /// calculated in the `TOTAL_PHASE` cannot be marked as taxable.
         /// </summary>
-        [JsonProperty("taxable")]
+        [JsonProperty("taxable", NullValueHandling = NullValueHandling.Ignore)]
         public bool? Taxable { get; }
 
         /// <summary>
@@ -142,7 +142,7 @@ namespace Square.Models
         /// applied to the `OrderReturnServiceCharge`. On reads, the amount applied is
         /// populated.
         /// </summary>
-        [JsonProperty("applied_taxes")]
+        [JsonProperty("applied_taxes", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.OrderLineItemAppliedTax> AppliedTaxes { get; }
 
         public Builder ToBuilder()
@@ -176,78 +176,79 @@ namespace Square.Models
             private Models.Money totalTaxMoney;
             private string calculationPhase;
             private bool? taxable;
-            private IList<Models.OrderLineItemAppliedTax> appliedTaxes = new List<Models.OrderLineItemAppliedTax>();
+            private IList<Models.OrderLineItemAppliedTax> appliedTaxes;
 
-            public Builder() { }
-            public Builder Uid(string value)
+
+
+            public Builder Uid(string uid)
             {
-                uid = value;
+                this.uid = uid;
                 return this;
             }
 
-            public Builder SourceServiceChargeUid(string value)
+            public Builder SourceServiceChargeUid(string sourceServiceChargeUid)
             {
-                sourceServiceChargeUid = value;
+                this.sourceServiceChargeUid = sourceServiceChargeUid;
                 return this;
             }
 
-            public Builder Name(string value)
+            public Builder Name(string name)
             {
-                name = value;
+                this.name = name;
                 return this;
             }
 
-            public Builder CatalogObjectId(string value)
+            public Builder CatalogObjectId(string catalogObjectId)
             {
-                catalogObjectId = value;
+                this.catalogObjectId = catalogObjectId;
                 return this;
             }
 
-            public Builder Percentage(string value)
+            public Builder Percentage(string percentage)
             {
-                percentage = value;
+                this.percentage = percentage;
                 return this;
             }
 
-            public Builder AmountMoney(Models.Money value)
+            public Builder AmountMoney(Models.Money amountMoney)
             {
-                amountMoney = value;
+                this.amountMoney = amountMoney;
                 return this;
             }
 
-            public Builder AppliedMoney(Models.Money value)
+            public Builder AppliedMoney(Models.Money appliedMoney)
             {
-                appliedMoney = value;
+                this.appliedMoney = appliedMoney;
                 return this;
             }
 
-            public Builder TotalMoney(Models.Money value)
+            public Builder TotalMoney(Models.Money totalMoney)
             {
-                totalMoney = value;
+                this.totalMoney = totalMoney;
                 return this;
             }
 
-            public Builder TotalTaxMoney(Models.Money value)
+            public Builder TotalTaxMoney(Models.Money totalTaxMoney)
             {
-                totalTaxMoney = value;
+                this.totalTaxMoney = totalTaxMoney;
                 return this;
             }
 
-            public Builder CalculationPhase(string value)
+            public Builder CalculationPhase(string calculationPhase)
             {
-                calculationPhase = value;
+                this.calculationPhase = calculationPhase;
                 return this;
             }
 
-            public Builder Taxable(bool? value)
+            public Builder Taxable(bool? taxable)
             {
-                taxable = value;
+                this.taxable = taxable;
                 return this;
             }
 
-            public Builder AppliedTaxes(IList<Models.OrderLineItemAppliedTax> value)
+            public Builder AppliedTaxes(IList<Models.OrderLineItemAppliedTax> appliedTaxes)
             {
-                appliedTaxes = value;
+                this.appliedTaxes = appliedTaxes;
                 return this;
             }
 

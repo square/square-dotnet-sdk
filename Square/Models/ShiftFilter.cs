@@ -40,13 +40,13 @@ namespace Square.Models
         /// <summary>
         /// Fetch shifts for the specified employees. DEPRECATED at version 2020-08-26. Use `team_member_ids` instead
         /// </summary>
-        [JsonProperty("employee_ids")]
+        [JsonProperty("employee_ids", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> EmployeeIds { get; }
 
         /// <summary>
         /// Specifies the `status` of `Shift` records to be returned.
         /// </summary>
-        [JsonProperty("status")]
+        [JsonProperty("status", NullValueHandling = NullValueHandling.Ignore)]
         public string Status { get; }
 
         /// <summary>
@@ -56,7 +56,7 @@ namespace Square.Models
         /// Refer to the relevant endpoint-specific documentation to determine
         /// how time ranges are handled.
         /// </summary>
-        [JsonProperty("start")]
+        [JsonProperty("start", NullValueHandling = NullValueHandling.Ignore)]
         public Models.TimeRange Start { get; }
 
         /// <summary>
@@ -66,14 +66,14 @@ namespace Square.Models
         /// Refer to the relevant endpoint-specific documentation to determine
         /// how time ranges are handled.
         /// </summary>
-        [JsonProperty("end")]
+        [JsonProperty("end", NullValueHandling = NullValueHandling.Ignore)]
         public Models.TimeRange End { get; }
 
         /// <summary>
         /// A `Shift` search query filter parameter that sets a range of days that
         /// a `Shift` must start or end in before passing the filter condition.
         /// </summary>
-        [JsonProperty("workday")]
+        [JsonProperty("workday", NullValueHandling = NullValueHandling.Ignore)]
         public Models.ShiftWorkday Workday { get; }
 
         /// <summary>
@@ -98,7 +98,7 @@ namespace Square.Models
         {
             private IList<string> locationIds;
             private IList<string> teamMemberIds;
-            private IList<string> employeeIds = new List<string>();
+            private IList<string> employeeIds;
             private string status;
             private Models.TimeRange start;
             private Models.TimeRange end;
@@ -110,45 +110,46 @@ namespace Square.Models
                 this.locationIds = locationIds;
                 this.teamMemberIds = teamMemberIds;
             }
-            public Builder LocationIds(IList<string> value)
+
+            public Builder LocationIds(IList<string> locationIds)
             {
-                locationIds = value;
+                this.locationIds = locationIds;
                 return this;
             }
 
-            public Builder TeamMemberIds(IList<string> value)
+            public Builder TeamMemberIds(IList<string> teamMemberIds)
             {
-                teamMemberIds = value;
+                this.teamMemberIds = teamMemberIds;
                 return this;
             }
 
-            public Builder EmployeeIds(IList<string> value)
+            public Builder EmployeeIds(IList<string> employeeIds)
             {
-                employeeIds = value;
+                this.employeeIds = employeeIds;
                 return this;
             }
 
-            public Builder Status(string value)
+            public Builder Status(string status)
             {
-                status = value;
+                this.status = status;
                 return this;
             }
 
-            public Builder Start(Models.TimeRange value)
+            public Builder Start(Models.TimeRange start)
             {
-                start = value;
+                this.start = start;
                 return this;
             }
 
-            public Builder End(Models.TimeRange value)
+            public Builder End(Models.TimeRange end)
             {
-                end = value;
+                this.end = end;
                 return this;
             }
 
-            public Builder Workday(Models.ShiftWorkday value)
+            public Builder Workday(Models.ShiftWorkday workday)
             {
-                workday = value;
+                this.workday = workday;
                 return this;
             }
 

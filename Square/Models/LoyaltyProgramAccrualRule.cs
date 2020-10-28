@@ -37,7 +37,7 @@ namespace Square.Models
         /// The number of points that 
         /// buyers earn based on the `accrual_type`.
         /// </summary>
-        [JsonProperty("points")]
+        [JsonProperty("points", NullValueHandling = NullValueHandling.Ignore)]
         public int? Points { get; }
 
         /// <summary>
@@ -48,7 +48,7 @@ namespace Square.Models
         /// [Working with Monetary Amounts](https://developer.squareup.com/docs/build-basics/working-with-monetary-amounts)
         /// for more information.
         /// </summary>
-        [JsonProperty("visit_minimum_amount_money")]
+        [JsonProperty("visit_minimum_amount_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Money VisitMinimumAmountMoney { get; }
 
         /// <summary>
@@ -59,7 +59,7 @@ namespace Square.Models
         /// [Working with Monetary Amounts](https://developer.squareup.com/docs/build-basics/working-with-monetary-amounts)
         /// for more information.
         /// </summary>
-        [JsonProperty("spend_amount_money")]
+        [JsonProperty("spend_amount_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Money SpendAmountMoney { get; }
 
         /// <summary>
@@ -67,7 +67,7 @@ namespace Square.Models
         /// rule. This is either an item variation or a category, depending on the type. This is defined on
         /// `ITEM_VARIATION` rules and `CATEGORY` rules.
         /// </summary>
-        [JsonProperty("catalog_object_id")]
+        [JsonProperty("catalog_object_id", NullValueHandling = NullValueHandling.Ignore)]
         public string CatalogObjectId { get; }
 
         public Builder ToBuilder()
@@ -92,33 +92,34 @@ namespace Square.Models
             {
                 this.accrualType = accrualType;
             }
-            public Builder AccrualType(string value)
+
+            public Builder AccrualType(string accrualType)
             {
-                accrualType = value;
+                this.accrualType = accrualType;
                 return this;
             }
 
-            public Builder Points(int? value)
+            public Builder Points(int? points)
             {
-                points = value;
+                this.points = points;
                 return this;
             }
 
-            public Builder VisitMinimumAmountMoney(Models.Money value)
+            public Builder VisitMinimumAmountMoney(Models.Money visitMinimumAmountMoney)
             {
-                visitMinimumAmountMoney = value;
+                this.visitMinimumAmountMoney = visitMinimumAmountMoney;
                 return this;
             }
 
-            public Builder SpendAmountMoney(Models.Money value)
+            public Builder SpendAmountMoney(Models.Money spendAmountMoney)
             {
-                spendAmountMoney = value;
+                this.spendAmountMoney = spendAmountMoney;
                 return this;
             }
 
-            public Builder CatalogObjectId(string value)
+            public Builder CatalogObjectId(string catalogObjectId)
             {
-                catalogObjectId = value;
+                this.catalogObjectId = catalogObjectId;
                 return this;
             }
 

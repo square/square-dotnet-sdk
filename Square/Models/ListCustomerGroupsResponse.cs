@@ -30,13 +30,13 @@ namespace Square.Models
         /// <summary>
         /// Any errors that occurred during the request.
         /// </summary>
-        [JsonProperty("errors")]
+        [JsonProperty("errors", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.Error> Errors { get; }
 
         /// <summary>
         /// A list of customer groups belonging to the current merchant.
         /// </summary>
-        [JsonProperty("groups")]
+        [JsonProperty("groups", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.CustomerGroup> Groups { get; }
 
         /// <summary>
@@ -45,7 +45,7 @@ namespace Square.Models
         /// succeeded and additional results are available.
         /// See the [Pagination guide](https://developer.squareup.com/docs/working-with-apis/pagination) for more information.
         /// </summary>
-        [JsonProperty("cursor")]
+        [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
         public string Cursor { get; }
 
         public Builder ToBuilder()
@@ -59,26 +59,27 @@ namespace Square.Models
 
         public class Builder
         {
-            private IList<Models.Error> errors = new List<Models.Error>();
-            private IList<Models.CustomerGroup> groups = new List<Models.CustomerGroup>();
+            private IList<Models.Error> errors;
+            private IList<Models.CustomerGroup> groups;
             private string cursor;
 
-            public Builder() { }
-            public Builder Errors(IList<Models.Error> value)
+
+
+            public Builder Errors(IList<Models.Error> errors)
             {
-                errors = value;
+                this.errors = errors;
                 return this;
             }
 
-            public Builder Groups(IList<Models.CustomerGroup> value)
+            public Builder Groups(IList<Models.CustomerGroup> groups)
             {
-                groups = value;
+                this.groups = groups;
                 return this;
             }
 
-            public Builder Cursor(string value)
+            public Builder Cursor(string cursor)
             {
-                cursor = value;
+                this.cursor = cursor;
                 return this;
             }
 

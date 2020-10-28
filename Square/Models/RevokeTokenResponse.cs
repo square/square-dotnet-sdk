@@ -26,7 +26,7 @@ namespace Square.Models
         /// <summary>
         /// If the request is successful, this is true.
         /// </summary>
-        [JsonProperty("success")]
+        [JsonProperty("success", NullValueHandling = NullValueHandling.Ignore)]
         public bool? Success { get; }
 
         public Builder ToBuilder()
@@ -40,10 +40,11 @@ namespace Square.Models
         {
             private bool? success;
 
-            public Builder() { }
-            public Builder Success(bool? value)
+
+
+            public Builder Success(bool? success)
             {
-                success = value;
+                this.success = success;
                 return this;
             }
 

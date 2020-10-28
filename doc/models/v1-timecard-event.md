@@ -1,12 +1,13 @@
-## V1 Timecard Event
+
+# V1 Timecard Event
 
 V1TimecardEvent
 
-### Structure
+## Structure
 
 `V1TimecardEvent`
 
-### Fields
+## Fields
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
@@ -16,7 +17,7 @@ V1TimecardEvent
 | `ClockoutTime` | `string` | Optional | The time the employee clocked out, in ISO 8601 format. |
 | `CreatedAt` | `string` | Optional | The time when the event was created, in ISO 8601 format. |
 
-### Example (as JSON)
+## Example (as JSON)
 
 ```json
 {

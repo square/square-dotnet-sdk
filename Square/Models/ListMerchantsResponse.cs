@@ -30,19 +30,19 @@ namespace Square.Models
         /// <summary>
         /// Information on errors encountered during the request.
         /// </summary>
-        [JsonProperty("errors")]
+        [JsonProperty("errors", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.Error> Errors { get; }
 
         /// <summary>
         /// The requested `Merchant` entities.
         /// </summary>
-        [JsonProperty("merchant")]
+        [JsonProperty("merchant", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.Merchant> Merchant { get; }
 
         /// <summary>
         /// If the  response is truncated, the cursor to use in next  request to fetch next set of objects.
         /// </summary>
-        [JsonProperty("cursor")]
+        [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
         public int? Cursor { get; }
 
         public Builder ToBuilder()
@@ -56,26 +56,27 @@ namespace Square.Models
 
         public class Builder
         {
-            private IList<Models.Error> errors = new List<Models.Error>();
-            private IList<Models.Merchant> merchant = new List<Models.Merchant>();
+            private IList<Models.Error> errors;
+            private IList<Models.Merchant> merchant;
             private int? cursor;
 
-            public Builder() { }
-            public Builder Errors(IList<Models.Error> value)
+
+
+            public Builder Errors(IList<Models.Error> errors)
             {
-                errors = value;
+                this.errors = errors;
                 return this;
             }
 
-            public Builder Merchant(IList<Models.Merchant> value)
+            public Builder Merchant(IList<Models.Merchant> merchant)
             {
-                merchant = value;
+                this.merchant = merchant;
                 return this;
             }
 
-            public Builder Cursor(int? value)
+            public Builder Cursor(int? cursor)
             {
-                cursor = value;
+                this.cursor = cursor;
                 return this;
             }
 

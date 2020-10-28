@@ -28,22 +28,22 @@ namespace Square.Models
         public HttpContext Context { get; internal set; }
 
         /// <summary>
-        /// Information on any errors encountered.
+        /// Any errors that occurred during the request.
         /// </summary>
-        [JsonProperty("errors")]
+        [JsonProperty("errors", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.Error> Errors { get; }
 
         /// <summary>
         /// The pagination cursor to be used in a subsequent request. If unset, this is the final response.
         /// See [Pagination](https://developer.squareup.com/docs/basics/api101/pagination) for more information.
         /// </summary>
-        [JsonProperty("cursor")]
+        [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
         public string Cursor { get; }
 
         /// <summary>
         /// The CatalogObjects returned.
         /// </summary>
-        [JsonProperty("objects")]
+        [JsonProperty("objects", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.CatalogObject> Objects { get; }
 
         public Builder ToBuilder()
@@ -57,26 +57,27 @@ namespace Square.Models
 
         public class Builder
         {
-            private IList<Models.Error> errors = new List<Models.Error>();
+            private IList<Models.Error> errors;
             private string cursor;
-            private IList<Models.CatalogObject> objects = new List<Models.CatalogObject>();
+            private IList<Models.CatalogObject> objects;
 
-            public Builder() { }
-            public Builder Errors(IList<Models.Error> value)
+
+
+            public Builder Errors(IList<Models.Error> errors)
             {
-                errors = value;
+                this.errors = errors;
                 return this;
             }
 
-            public Builder Cursor(string value)
+            public Builder Cursor(string cursor)
             {
-                cursor = value;
+                this.cursor = cursor;
                 return this;
             }
 
-            public Builder Objects(IList<Models.CatalogObject> value)
+            public Builder Objects(IList<Models.CatalogObject> objects)
             {
-                objects = value;
+                this.objects = objects;
                 return this;
             }
 

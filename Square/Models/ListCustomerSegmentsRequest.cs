@@ -24,7 +24,7 @@ namespace Square.Models
         /// Used to retrieve the next set of query results.
         /// See the [Pagination guide](https://developer.squareup.com/docs/docs/working-with-apis/pagination) for more information.
         /// </summary>
-        [JsonProperty("cursor")]
+        [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
         public string Cursor { get; }
 
         public Builder ToBuilder()
@@ -38,10 +38,11 @@ namespace Square.Models
         {
             private string cursor;
 
-            public Builder() { }
-            public Builder Cursor(string value)
+
+
+            public Builder Cursor(string cursor)
             {
-                cursor = value;
+                this.cursor = cursor;
                 return this;
             }
 

@@ -30,19 +30,19 @@ namespace Square.Models
         /// <summary>
         /// Unique ID that identifies the modifier only within this order.
         /// </summary>
-        [JsonProperty("uid")]
+        [JsonProperty("uid", NullValueHandling = NullValueHandling.Ignore)]
         public string Uid { get; }
 
         /// <summary>
         /// The catalog object id referencing [CatalogModifier](#type-catalogmodifier).
         /// </summary>
-        [JsonProperty("catalog_object_id")]
+        [JsonProperty("catalog_object_id", NullValueHandling = NullValueHandling.Ignore)]
         public string CatalogObjectId { get; }
 
         /// <summary>
         /// The name of the item modifier.
         /// </summary>
-        [JsonProperty("name")]
+        [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
         public string Name { get; }
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace Square.Models
         /// [Working with Monetary Amounts](https://developer.squareup.com/docs/build-basics/working-with-monetary-amounts)
         /// for more information.
         /// </summary>
-        [JsonProperty("base_price_money")]
+        [JsonProperty("base_price_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Money BasePriceMoney { get; }
 
         /// <summary>
@@ -64,7 +64,7 @@ namespace Square.Models
         /// [Working with Monetary Amounts](https://developer.squareup.com/docs/build-basics/working-with-monetary-amounts)
         /// for more information.
         /// </summary>
-        [JsonProperty("total_price_money")]
+        [JsonProperty("total_price_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Money TotalPriceMoney { get; }
 
         public Builder ToBuilder()
@@ -86,34 +86,35 @@ namespace Square.Models
             private Models.Money basePriceMoney;
             private Models.Money totalPriceMoney;
 
-            public Builder() { }
-            public Builder Uid(string value)
+
+
+            public Builder Uid(string uid)
             {
-                uid = value;
+                this.uid = uid;
                 return this;
             }
 
-            public Builder CatalogObjectId(string value)
+            public Builder CatalogObjectId(string catalogObjectId)
             {
-                catalogObjectId = value;
+                this.catalogObjectId = catalogObjectId;
                 return this;
             }
 
-            public Builder Name(string value)
+            public Builder Name(string name)
             {
-                name = value;
+                this.name = name;
                 return this;
             }
 
-            public Builder BasePriceMoney(Models.Money value)
+            public Builder BasePriceMoney(Models.Money basePriceMoney)
             {
-                basePriceMoney = value;
+                this.basePriceMoney = basePriceMoney;
                 return this;
             }
 
-            public Builder TotalPriceMoney(Models.Money value)
+            public Builder TotalPriceMoney(Models.Money totalPriceMoney)
             {
-                totalPriceMoney = value;
+                this.totalPriceMoney = totalPriceMoney;
                 return this;
             }
 

@@ -28,13 +28,13 @@ namespace Square.Models
         /// <summary>
         /// Any errors that occurred during the request.
         /// </summary>
-        [JsonProperty("errors")]
+        [JsonProperty("errors", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.Error> Errors { get; }
 
         /// <summary>
         /// Getter for evidence
         /// </summary>
-        [JsonProperty("evidence")]
+        [JsonProperty("evidence", NullValueHandling = NullValueHandling.Ignore)]
         public Models.DisputeEvidence Evidence { get; }
 
         public Builder ToBuilder()
@@ -47,19 +47,20 @@ namespace Square.Models
 
         public class Builder
         {
-            private IList<Models.Error> errors = new List<Models.Error>();
+            private IList<Models.Error> errors;
             private Models.DisputeEvidence evidence;
 
-            public Builder() { }
-            public Builder Errors(IList<Models.Error> value)
+
+
+            public Builder Errors(IList<Models.Error> errors)
             {
-                errors = value;
+                this.errors = errors;
                 return this;
             }
 
-            public Builder Evidence(Models.DisputeEvidence value)
+            public Builder Evidence(Models.DisputeEvidence evidence)
             {
-                evidence = value;
+                this.evidence = evidence;
                 return this;
             }
 

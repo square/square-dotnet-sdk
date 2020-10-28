@@ -28,21 +28,21 @@ namespace Square.Models
         public HttpContext Context { get; internal set; }
 
         /// <summary>
-        /// The set of [Error](#type-error)s encountered.
+        /// Any errors that occurred during the request.
         /// </summary>
-        [JsonProperty("errors")]
+        [JsonProperty("errors", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.Error> Errors { get; }
 
         /// <summary>
         /// A list of [CatalogObject](#type-catalogobject)s returned.
         /// </summary>
-        [JsonProperty("objects")]
+        [JsonProperty("objects", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.CatalogObject> Objects { get; }
 
         /// <summary>
         /// A list of [CatalogObject](#type-catalogobject)s referenced by the object in the `objects` field.
         /// </summary>
-        [JsonProperty("related_objects")]
+        [JsonProperty("related_objects", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.CatalogObject> RelatedObjects { get; }
 
         public Builder ToBuilder()
@@ -56,26 +56,27 @@ namespace Square.Models
 
         public class Builder
         {
-            private IList<Models.Error> errors = new List<Models.Error>();
-            private IList<Models.CatalogObject> objects = new List<Models.CatalogObject>();
-            private IList<Models.CatalogObject> relatedObjects = new List<Models.CatalogObject>();
+            private IList<Models.Error> errors;
+            private IList<Models.CatalogObject> objects;
+            private IList<Models.CatalogObject> relatedObjects;
 
-            public Builder() { }
-            public Builder Errors(IList<Models.Error> value)
+
+
+            public Builder Errors(IList<Models.Error> errors)
             {
-                errors = value;
+                this.errors = errors;
                 return this;
             }
 
-            public Builder Objects(IList<Models.CatalogObject> value)
+            public Builder Objects(IList<Models.CatalogObject> objects)
             {
-                objects = value;
+                this.objects = objects;
                 return this;
             }
 
-            public Builder RelatedObjects(IList<Models.CatalogObject> value)
+            public Builder RelatedObjects(IList<Models.CatalogObject> relatedObjects)
             {
-                relatedObjects = value;
+                this.relatedObjects = relatedObjects;
                 return this;
             }
 

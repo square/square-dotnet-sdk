@@ -1,18 +1,19 @@
-## Loyalty Event Loyalty Account Filter
+
+# Loyalty Event Loyalty Account Filter
 
 Filter events by loyalty account.
 
-### Structure
+## Structure
 
 `LoyaltyEventLoyaltyAccountFilter`
 
-### Fields
+## Fields
 
 | Name | Type | Description |
 |  --- | --- | --- |
 | `LoyaltyAccountId` | `string` | The ID of the [loyalty account](#type-LoyaltyAccount) associated with loyalty events. |
 
-### Example (as JSON)
+## Example (as JSON)
 
 ```json
 {

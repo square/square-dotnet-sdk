@@ -33,14 +33,14 @@ namespace Square.Models
         /// <summary>
         /// Type of the dispute evidence.
         /// </summary>
-        [JsonProperty("evidence_type")]
+        [JsonProperty("evidence_type", NullValueHandling = NullValueHandling.Ignore)]
         public string EvidenceType { get; }
 
         /// <summary>
         /// The MIME type of the uploaded file.
         /// One of image/heic, image/heif, image/jpeg, application/pdf,  image/png, image/tiff.
         /// </summary>
-        [JsonProperty("content_type")]
+        [JsonProperty("content_type", NullValueHandling = NullValueHandling.Ignore)]
         public string ContentType { get; }
 
         public Builder ToBuilder()
@@ -61,21 +61,22 @@ namespace Square.Models
             {
                 this.idempotencyKey = idempotencyKey;
             }
-            public Builder IdempotencyKey(string value)
+
+            public Builder IdempotencyKey(string idempotencyKey)
             {
-                idempotencyKey = value;
+                this.idempotencyKey = idempotencyKey;
                 return this;
             }
 
-            public Builder EvidenceType(string value)
+            public Builder EvidenceType(string evidenceType)
             {
-                evidenceType = value;
+                this.evidenceType = evidenceType;
                 return this;
             }
 
-            public Builder ContentType(string value)
+            public Builder ContentType(string contentType)
             {
-                contentType = value;
+                this.contentType = contentType;
                 return this;
             }
 

@@ -46,20 +46,20 @@ namespace Square.Models
         /// <summary>
         /// UUID for this object
         /// </summary>
-        [JsonProperty("id")]
+        [JsonProperty("id", NullValueHandling = NullValueHandling.Ignore)]
         public string Id { get; }
 
         /// <summary>
         /// The ID of the employee this shift belongs to. DEPRECATED at version 2020-08-26. Use `team_member_id` instead
         /// </summary>
-        [JsonProperty("employee_id")]
+        [JsonProperty("employee_id", NullValueHandling = NullValueHandling.Ignore)]
         public string EmployeeId { get; }
 
         /// <summary>
         /// The ID of the location this shift occurred at. Should be based on
         /// where the employee clocked in.
         /// </summary>
-        [JsonProperty("location_id")]
+        [JsonProperty("location_id", NullValueHandling = NullValueHandling.Ignore)]
         public string LocationId { get; }
 
         /// <summary>
@@ -67,7 +67,7 @@ namespace Square.Models
         /// on `location_id`. Format: the IANA Timezone Database identifier for the
         /// location timezone.
         /// </summary>
-        [JsonProperty("timezone")]
+        [JsonProperty("timezone", NullValueHandling = NullValueHandling.Ignore)]
         public string Timezone { get; }
 
         /// <summary>
@@ -81,25 +81,25 @@ namespace Square.Models
         /// RFC 3339; shifted to timezone + offset. Precision up to the minute is
         /// respected; seconds are truncated.
         /// </summary>
-        [JsonProperty("end_at")]
+        [JsonProperty("end_at", NullValueHandling = NullValueHandling.Ignore)]
         public string EndAt { get; }
 
         /// <summary>
         /// The hourly wage rate used to compensate an employee for this shift.
         /// </summary>
-        [JsonProperty("wage")]
+        [JsonProperty("wage", NullValueHandling = NullValueHandling.Ignore)]
         public Models.ShiftWage Wage { get; }
 
         /// <summary>
         /// A list of any paid or unpaid breaks that were taken during this shift.
         /// </summary>
-        [JsonProperty("breaks")]
+        [JsonProperty("breaks", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.Break> Breaks { get; }
 
         /// <summary>
         /// Enumerates the possible status of a `Shift`
         /// </summary>
-        [JsonProperty("status")]
+        [JsonProperty("status", NullValueHandling = NullValueHandling.Ignore)]
         public string Status { get; }
 
         /// <summary>
@@ -108,25 +108,25 @@ namespace Square.Models
         /// Square executes a blind write; potentially overwriting data from another
         /// write.
         /// </summary>
-        [JsonProperty("version")]
+        [JsonProperty("version", NullValueHandling = NullValueHandling.Ignore)]
         public int? Version { get; }
 
         /// <summary>
         /// A read-only timestamp in RFC 3339 format; presented in UTC.
         /// </summary>
-        [JsonProperty("created_at")]
+        [JsonProperty("created_at", NullValueHandling = NullValueHandling.Ignore)]
         public string CreatedAt { get; }
 
         /// <summary>
         /// A read-only timestamp in RFC 3339 format; presented in UTC.
         /// </summary>
-        [JsonProperty("updated_at")]
+        [JsonProperty("updated_at", NullValueHandling = NullValueHandling.Ignore)]
         public string UpdatedAt { get; }
 
         /// <summary>
         /// The ID of the team member this shift belongs to. Replaced `employee_id` at version "2020-08-26"
         /// </summary>
-        [JsonProperty("team_member_id")]
+        [JsonProperty("team_member_id", NullValueHandling = NullValueHandling.Ignore)]
         public string TeamMemberId { get; }
 
         public Builder ToBuilder()
@@ -156,7 +156,7 @@ namespace Square.Models
             private string timezone;
             private string endAt;
             private Models.ShiftWage wage;
-            private IList<Models.Break> breaks = new List<Models.Break>();
+            private IList<Models.Break> breaks;
             private string status;
             private int? version;
             private string createdAt;
@@ -167,81 +167,82 @@ namespace Square.Models
             {
                 this.startAt = startAt;
             }
-            public Builder StartAt(string value)
+
+            public Builder StartAt(string startAt)
             {
-                startAt = value;
+                this.startAt = startAt;
                 return this;
             }
 
-            public Builder Id(string value)
+            public Builder Id(string id)
             {
-                id = value;
+                this.id = id;
                 return this;
             }
 
-            public Builder EmployeeId(string value)
+            public Builder EmployeeId(string employeeId)
             {
-                employeeId = value;
+                this.employeeId = employeeId;
                 return this;
             }
 
-            public Builder LocationId(string value)
+            public Builder LocationId(string locationId)
             {
-                locationId = value;
+                this.locationId = locationId;
                 return this;
             }
 
-            public Builder Timezone(string value)
+            public Builder Timezone(string timezone)
             {
-                timezone = value;
+                this.timezone = timezone;
                 return this;
             }
 
-            public Builder EndAt(string value)
+            public Builder EndAt(string endAt)
             {
-                endAt = value;
+                this.endAt = endAt;
                 return this;
             }
 
-            public Builder Wage(Models.ShiftWage value)
+            public Builder Wage(Models.ShiftWage wage)
             {
-                wage = value;
+                this.wage = wage;
                 return this;
             }
 
-            public Builder Breaks(IList<Models.Break> value)
+            public Builder Breaks(IList<Models.Break> breaks)
             {
-                breaks = value;
+                this.breaks = breaks;
                 return this;
             }
 
-            public Builder Status(string value)
+            public Builder Status(string status)
             {
-                status = value;
+                this.status = status;
                 return this;
             }
 
-            public Builder Version(int? value)
+            public Builder Version(int? version)
             {
-                version = value;
+                this.version = version;
                 return this;
             }
 
-            public Builder CreatedAt(string value)
+            public Builder CreatedAt(string createdAt)
             {
-                createdAt = value;
+                this.createdAt = createdAt;
                 return this;
             }
 
-            public Builder UpdatedAt(string value)
+            public Builder UpdatedAt(string updatedAt)
             {
-                updatedAt = value;
+                this.updatedAt = updatedAt;
                 return this;
             }
 
-            public Builder TeamMemberId(string value)
+            public Builder TeamMemberId(string teamMemberId)
             {
-                teamMemberId = value;
+                this.teamMemberId = teamMemberId;
                 return this;
             }
 

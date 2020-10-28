@@ -28,25 +28,25 @@ namespace Square.Models
         /// <summary>
         /// The settlement's unique identifier.
         /// </summary>
-        [JsonProperty("payment_id")]
+        [JsonProperty("payment_id", NullValueHandling = NullValueHandling.Ignore)]
         public string PaymentId { get; }
 
         /// <summary>
         /// Getter for type
         /// </summary>
-        [JsonProperty("type")]
+        [JsonProperty("type", NullValueHandling = NullValueHandling.Ignore)]
         public string Type { get; }
 
         /// <summary>
         /// Getter for amount_money
         /// </summary>
-        [JsonProperty("amount_money")]
+        [JsonProperty("amount_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1Money AmountMoney { get; }
 
         /// <summary>
         /// Getter for fee_money
         /// </summary>
-        [JsonProperty("fee_money")]
+        [JsonProperty("fee_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1Money FeeMoney { get; }
 
         public Builder ToBuilder()
@@ -66,28 +66,29 @@ namespace Square.Models
             private Models.V1Money amountMoney;
             private Models.V1Money feeMoney;
 
-            public Builder() { }
-            public Builder PaymentId(string value)
+
+
+            public Builder PaymentId(string paymentId)
             {
-                paymentId = value;
+                this.paymentId = paymentId;
                 return this;
             }
 
-            public Builder Type(string value)
+            public Builder Type(string type)
             {
-                type = value;
+                this.type = type;
                 return this;
             }
 
-            public Builder AmountMoney(Models.V1Money value)
+            public Builder AmountMoney(Models.V1Money amountMoney)
             {
-                amountMoney = value;
+                this.amountMoney = amountMoney;
                 return this;
             }
 
-            public Builder FeeMoney(Models.V1Money value)
+            public Builder FeeMoney(Models.V1Money feeMoney)
             {
-                feeMoney = value;
+                this.feeMoney = feeMoney;
                 return this;
             }
 

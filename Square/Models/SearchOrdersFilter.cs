@@ -30,7 +30,7 @@ namespace Square.Models
         /// <summary>
         /// Filter by current Order `state`.
         /// </summary>
-        [JsonProperty("state_filter")]
+        [JsonProperty("state_filter", NullValueHandling = NullValueHandling.Ignore)]
         public Models.SearchOrdersStateFilter StateFilter { get; }
 
         /// <summary>
@@ -47,19 +47,19 @@ namespace Square.Models
         /// `CLOSED_AT`. Otherwise, SearchOrders will throw an error.
         /// [Learn more about filtering orders by time range](https://developer.squareup.com/docs/orders-api/manage-orders#important-note-on-filtering-orders-by-time-range).
         /// </summary>
-        [JsonProperty("date_time_filter")]
+        [JsonProperty("date_time_filter", NullValueHandling = NullValueHandling.Ignore)]
         public Models.SearchOrdersDateTimeFilter DateTimeFilter { get; }
 
         /// <summary>
         /// Filter based on [Order Fulfillment](#type-orderfulfillment) information.
         /// </summary>
-        [JsonProperty("fulfillment_filter")]
+        [JsonProperty("fulfillment_filter", NullValueHandling = NullValueHandling.Ignore)]
         public Models.SearchOrdersFulfillmentFilter FulfillmentFilter { get; }
 
         /// <summary>
         /// Filter based on order `source` information.
         /// </summary>
-        [JsonProperty("source_filter")]
+        [JsonProperty("source_filter", NullValueHandling = NullValueHandling.Ignore)]
         public Models.SearchOrdersSourceFilter SourceFilter { get; }
 
         /// <summary>
@@ -67,7 +67,7 @@ namespace Square.Models
         /// associated with the Order. Does not filter based on the
         /// [FulfillmentRecipient](#type-orderfulfillmentrecipient) `customer_id`.
         /// </summary>
-        [JsonProperty("customer_filter")]
+        [JsonProperty("customer_filter", NullValueHandling = NullValueHandling.Ignore)]
         public Models.SearchOrdersCustomerFilter CustomerFilter { get; }
 
         public Builder ToBuilder()
@@ -89,34 +89,35 @@ namespace Square.Models
             private Models.SearchOrdersSourceFilter sourceFilter;
             private Models.SearchOrdersCustomerFilter customerFilter;
 
-            public Builder() { }
-            public Builder StateFilter(Models.SearchOrdersStateFilter value)
+
+
+            public Builder StateFilter(Models.SearchOrdersStateFilter stateFilter)
             {
-                stateFilter = value;
+                this.stateFilter = stateFilter;
                 return this;
             }
 
-            public Builder DateTimeFilter(Models.SearchOrdersDateTimeFilter value)
+            public Builder DateTimeFilter(Models.SearchOrdersDateTimeFilter dateTimeFilter)
             {
-                dateTimeFilter = value;
+                this.dateTimeFilter = dateTimeFilter;
                 return this;
             }
 
-            public Builder FulfillmentFilter(Models.SearchOrdersFulfillmentFilter value)
+            public Builder FulfillmentFilter(Models.SearchOrdersFulfillmentFilter fulfillmentFilter)
             {
-                fulfillmentFilter = value;
+                this.fulfillmentFilter = fulfillmentFilter;
                 return this;
             }
 
-            public Builder SourceFilter(Models.SearchOrdersSourceFilter value)
+            public Builder SourceFilter(Models.SearchOrdersSourceFilter sourceFilter)
             {
-                sourceFilter = value;
+                this.sourceFilter = sourceFilter;
                 return this;
             }
 
-            public Builder CustomerFilter(Models.SearchOrdersCustomerFilter value)
+            public Builder CustomerFilter(Models.SearchOrdersCustomerFilter customerFilter)
             {
-                customerFilter = value;
+                this.customerFilter = customerFilter;
                 return this;
             }
 

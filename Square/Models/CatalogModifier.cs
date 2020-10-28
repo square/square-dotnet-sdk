@@ -28,7 +28,7 @@ namespace Square.Models
         /// <summary>
         /// The modifier name.  This is a searchable attribute for use in applicable query filters, and its value length is of Unicode code points.
         /// </summary>
-        [JsonProperty("name")]
+        [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
         public string Name { get; }
 
         /// <summary>
@@ -39,19 +39,19 @@ namespace Square.Models
         /// [Working with Monetary Amounts](https://developer.squareup.com/docs/build-basics/working-with-monetary-amounts)
         /// for more information.
         /// </summary>
-        [JsonProperty("price_money")]
+        [JsonProperty("price_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Money PriceMoney { get; }
 
         /// <summary>
         /// Determines where this `CatalogModifier` appears in the `CatalogModifierList`.
         /// </summary>
-        [JsonProperty("ordinal")]
+        [JsonProperty("ordinal", NullValueHandling = NullValueHandling.Ignore)]
         public int? Ordinal { get; }
 
         /// <summary>
         /// The ID of the `CatalogModifierList` associated with this modifier.
         /// </summary>
-        [JsonProperty("modifier_list_id")]
+        [JsonProperty("modifier_list_id", NullValueHandling = NullValueHandling.Ignore)]
         public string ModifierListId { get; }
 
         public Builder ToBuilder()
@@ -71,28 +71,29 @@ namespace Square.Models
             private int? ordinal;
             private string modifierListId;
 
-            public Builder() { }
-            public Builder Name(string value)
+
+
+            public Builder Name(string name)
             {
-                name = value;
+                this.name = name;
                 return this;
             }
 
-            public Builder PriceMoney(Models.Money value)
+            public Builder PriceMoney(Models.Money priceMoney)
             {
-                priceMoney = value;
+                this.priceMoney = priceMoney;
                 return this;
             }
 
-            public Builder Ordinal(int? value)
+            public Builder Ordinal(int? ordinal)
             {
-                ordinal = value;
+                this.ordinal = ordinal;
                 return this;
             }
 
-            public Builder ModifierListId(string value)
+            public Builder ModifierListId(string modifierListId)
             {
-                modifierListId = value;
+                this.modifierListId = modifierListId;
                 return this;
             }
 

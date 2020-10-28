@@ -23,7 +23,7 @@ namespace Square.Models
         /// The name used to identify the place (physical or digital) that an order originates.
         /// If unset, the name defaults to the name of the application that created the order.
         /// </summary>
-        [JsonProperty("name")]
+        [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
         public string Name { get; }
 
         public Builder ToBuilder()
@@ -37,10 +37,11 @@ namespace Square.Models
         {
             private string name;
 
-            public Builder() { }
-            public Builder Name(string value)
+
+
+            public Builder Name(string name)
             {
-                name = value;
+                this.name = name;
                 return this;
             }
 

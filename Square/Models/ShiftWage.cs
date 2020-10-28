@@ -25,7 +25,7 @@ namespace Square.Models
         /// The name of the job performed during this shift. Square
         /// labor-reporting UIs may group shifts together by title.
         /// </summary>
-        [JsonProperty("title")]
+        [JsonProperty("title", NullValueHandling = NullValueHandling.Ignore)]
         public string Title { get; }
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace Square.Models
         /// [Working with Monetary Amounts](https://developer.squareup.com/docs/build-basics/working-with-monetary-amounts)
         /// for more information.
         /// </summary>
-        [JsonProperty("hourly_rate")]
+        [JsonProperty("hourly_rate", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Money HourlyRate { get; }
 
         public Builder ToBuilder()
@@ -52,16 +52,17 @@ namespace Square.Models
             private string title;
             private Models.Money hourlyRate;
 
-            public Builder() { }
-            public Builder Title(string value)
+
+
+            public Builder Title(string title)
             {
-                title = value;
+                this.title = title;
                 return this;
             }
 
-            public Builder HourlyRate(Models.Money value)
+            public Builder HourlyRate(Models.Money hourlyRate)
             {
-                hourlyRate = value;
+                this.hourlyRate = hourlyRate;
                 return this;
             }
 

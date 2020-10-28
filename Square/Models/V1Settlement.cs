@@ -36,37 +36,37 @@ namespace Square.Models
         /// <summary>
         /// The settlement's unique identifier.
         /// </summary>
-        [JsonProperty("id")]
+        [JsonProperty("id", NullValueHandling = NullValueHandling.Ignore)]
         public string Id { get; }
 
         /// <summary>
         /// Getter for status
         /// </summary>
-        [JsonProperty("status")]
+        [JsonProperty("status", NullValueHandling = NullValueHandling.Ignore)]
         public string Status { get; }
 
         /// <summary>
         /// Getter for total_money
         /// </summary>
-        [JsonProperty("total_money")]
+        [JsonProperty("total_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1Money TotalMoney { get; }
 
         /// <summary>
         /// The time when the settlement was submitted for deposit or withdrawal, in ISO 8601 format.
         /// </summary>
-        [JsonProperty("initiated_at")]
+        [JsonProperty("initiated_at", NullValueHandling = NullValueHandling.Ignore)]
         public string InitiatedAt { get; }
 
         /// <summary>
         /// The Square-issued unique identifier for the bank account associated with the settlement.
         /// </summary>
-        [JsonProperty("bank_account_id")]
+        [JsonProperty("bank_account_id", NullValueHandling = NullValueHandling.Ignore)]
         public string BankAccountId { get; }
 
         /// <summary>
         /// The entries included in this settlement.
         /// </summary>
-        [JsonProperty("entries")]
+        [JsonProperty("entries", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.V1SettlementEntry> Entries { get; }
 
         public Builder ToBuilder()
@@ -88,42 +88,43 @@ namespace Square.Models
             private Models.V1Money totalMoney;
             private string initiatedAt;
             private string bankAccountId;
-            private IList<Models.V1SettlementEntry> entries = new List<Models.V1SettlementEntry>();
+            private IList<Models.V1SettlementEntry> entries;
 
-            public Builder() { }
-            public Builder Id(string value)
+
+
+            public Builder Id(string id)
             {
-                id = value;
+                this.id = id;
                 return this;
             }
 
-            public Builder Status(string value)
+            public Builder Status(string status)
             {
-                status = value;
+                this.status = status;
                 return this;
             }
 
-            public Builder TotalMoney(Models.V1Money value)
+            public Builder TotalMoney(Models.V1Money totalMoney)
             {
-                totalMoney = value;
+                this.totalMoney = totalMoney;
                 return this;
             }
 
-            public Builder InitiatedAt(string value)
+            public Builder InitiatedAt(string initiatedAt)
             {
-                initiatedAt = value;
+                this.initiatedAt = initiatedAt;
                 return this;
             }
 
-            public Builder BankAccountId(string value)
+            public Builder BankAccountId(string bankAccountId)
             {
-                bankAccountId = value;
+                this.bankAccountId = bankAccountId;
                 return this;
             }
 
-            public Builder Entries(IList<Models.V1SettlementEntry> value)
+            public Builder Entries(IList<Models.V1SettlementEntry> entries)
             {
-                entries = value;
+                this.entries = entries;
                 return this;
             }
 

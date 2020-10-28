@@ -48,7 +48,7 @@ namespace Square.Models
         /// <summary>
         /// The timecard's unique ID.
         /// </summary>
-        [JsonProperty("id")]
+        [JsonProperty("id", NullValueHandling = NullValueHandling.Ignore)]
         public string Id { get; }
 
         /// <summary>
@@ -60,61 +60,61 @@ namespace Square.Models
         /// <summary>
         /// If true, the timecard was deleted by the merchant, and it is no longer valid.
         /// </summary>
-        [JsonProperty("deleted")]
+        [JsonProperty("deleted", NullValueHandling = NullValueHandling.Ignore)]
         public bool? Deleted { get; }
 
         /// <summary>
         /// The clock-in time for the timecard, in ISO 8601 format.
         /// </summary>
-        [JsonProperty("clockin_time")]
+        [JsonProperty("clockin_time", NullValueHandling = NullValueHandling.Ignore)]
         public string ClockinTime { get; }
 
         /// <summary>
         /// The clock-out time for the timecard, in ISO 8601 format. Provide this value only if importing timecard information from another system.
         /// </summary>
-        [JsonProperty("clockout_time")]
+        [JsonProperty("clockout_time", NullValueHandling = NullValueHandling.Ignore)]
         public string ClockoutTime { get; }
 
         /// <summary>
         /// The ID of the location the employee clocked in from. We strongly reccomend providing a clockin_location_id. Square uses the clockin_location_id to determine a timecard’s timezone and overtime rules.
         /// </summary>
-        [JsonProperty("clockin_location_id")]
+        [JsonProperty("clockin_location_id", NullValueHandling = NullValueHandling.Ignore)]
         public string ClockinLocationId { get; }
 
         /// <summary>
         /// The ID of the location the employee clocked out from. Provide this value only if importing timecard information from another system.
         /// </summary>
-        [JsonProperty("clockout_location_id")]
+        [JsonProperty("clockout_location_id", NullValueHandling = NullValueHandling.Ignore)]
         public string ClockoutLocationId { get; }
 
         /// <summary>
         /// The time when the timecard was created, in ISO 8601 format.
         /// </summary>
-        [JsonProperty("created_at")]
+        [JsonProperty("created_at", NullValueHandling = NullValueHandling.Ignore)]
         public string CreatedAt { get; }
 
         /// <summary>
         /// The time when the timecard was most recently updated, in ISO 8601 format.
         /// </summary>
-        [JsonProperty("updated_at")]
+        [JsonProperty("updated_at", NullValueHandling = NullValueHandling.Ignore)]
         public string UpdatedAt { get; }
 
         /// <summary>
         /// The total number of regular (non-overtime) seconds worked in the timecard.
         /// </summary>
-        [JsonProperty("regular_seconds_worked")]
+        [JsonProperty("regular_seconds_worked", NullValueHandling = NullValueHandling.Ignore)]
         public double? RegularSecondsWorked { get; }
 
         /// <summary>
         /// The total number of overtime seconds worked in the timecard.
         /// </summary>
-        [JsonProperty("overtime_seconds_worked")]
+        [JsonProperty("overtime_seconds_worked", NullValueHandling = NullValueHandling.Ignore)]
         public double? OvertimeSecondsWorked { get; }
 
         /// <summary>
         /// The total number of doubletime seconds worked in the timecard.
         /// </summary>
-        [JsonProperty("doubletime_seconds_worked")]
+        [JsonProperty("doubletime_seconds_worked", NullValueHandling = NullValueHandling.Ignore)]
         public double? DoubletimeSecondsWorked { get; }
 
         public Builder ToBuilder()
@@ -153,75 +153,76 @@ namespace Square.Models
             {
                 this.employeeId = employeeId;
             }
-            public Builder EmployeeId(string value)
+
+            public Builder EmployeeId(string employeeId)
             {
-                employeeId = value;
+                this.employeeId = employeeId;
                 return this;
             }
 
-            public Builder Id(string value)
+            public Builder Id(string id)
             {
-                id = value;
+                this.id = id;
                 return this;
             }
 
-            public Builder Deleted(bool? value)
+            public Builder Deleted(bool? deleted)
             {
-                deleted = value;
+                this.deleted = deleted;
                 return this;
             }
 
-            public Builder ClockinTime(string value)
+            public Builder ClockinTime(string clockinTime)
             {
-                clockinTime = value;
+                this.clockinTime = clockinTime;
                 return this;
             }
 
-            public Builder ClockoutTime(string value)
+            public Builder ClockoutTime(string clockoutTime)
             {
-                clockoutTime = value;
+                this.clockoutTime = clockoutTime;
                 return this;
             }
 
-            public Builder ClockinLocationId(string value)
+            public Builder ClockinLocationId(string clockinLocationId)
             {
-                clockinLocationId = value;
+                this.clockinLocationId = clockinLocationId;
                 return this;
             }
 
-            public Builder ClockoutLocationId(string value)
+            public Builder ClockoutLocationId(string clockoutLocationId)
             {
-                clockoutLocationId = value;
+                this.clockoutLocationId = clockoutLocationId;
                 return this;
             }
 
-            public Builder CreatedAt(string value)
+            public Builder CreatedAt(string createdAt)
             {
-                createdAt = value;
+                this.createdAt = createdAt;
                 return this;
             }
 
-            public Builder UpdatedAt(string value)
+            public Builder UpdatedAt(string updatedAt)
             {
-                updatedAt = value;
+                this.updatedAt = updatedAt;
                 return this;
             }
 
-            public Builder RegularSecondsWorked(double? value)
+            public Builder RegularSecondsWorked(double? regularSecondsWorked)
             {
-                regularSecondsWorked = value;
+                this.regularSecondsWorked = regularSecondsWorked;
                 return this;
             }
 
-            public Builder OvertimeSecondsWorked(double? value)
+            public Builder OvertimeSecondsWorked(double? overtimeSecondsWorked)
             {
-                overtimeSecondsWorked = value;
+                this.overtimeSecondsWorked = overtimeSecondsWorked;
                 return this;
             }
 
-            public Builder DoubletimeSecondsWorked(double? value)
+            public Builder DoubletimeSecondsWorked(double? doubletimeSecondsWorked)
             {
-                doubletimeSecondsWorked = value;
+                this.doubletimeSecondsWorked = doubletimeSecondsWorked;
                 return this;
             }
 

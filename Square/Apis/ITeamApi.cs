@@ -19,8 +19,8 @@ namespace Square.Apis
         /// <summary>
         /// Creates a single `TeamMember` object. The `TeamMember` will be returned on successful creates.
         /// You must provide the following values in your request to this endpoint:
-        /// - `first_name`
-        /// - `last_name`
+        /// - `given_name`
+        /// - `family_name`
         /// Learn about [Troubleshooting the Teams API](https://developer.squareup.com/docs/docs/team/troubleshooting#createteammember).
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
@@ -30,8 +30,8 @@ namespace Square.Apis
         /// <summary>
         /// Creates a single `TeamMember` object. The `TeamMember` will be returned on successful creates.
         /// You must provide the following values in your request to this endpoint:
-        /// - `first_name`
-        /// - `last_name`
+        /// - `given_name`
+        /// - `family_name`
         /// Learn about [Troubleshooting the Teams API](https://developer.squareup.com/docs/docs/team/troubleshooting#createteammember).
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
@@ -86,7 +86,7 @@ namespace Square.Apis
         /// Returns a paginated list of `TeamMember` objects for a business.
         /// The list to be returned can be filtered by:
         /// - location IDs **and**
-        /// - `is_active`
+        /// - `status`
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.SearchTeamMembersResponse response from the API call</return>
@@ -96,14 +96,14 @@ namespace Square.Apis
         /// Returns a paginated list of `TeamMember` objects for a business.
         /// The list to be returned can be filtered by:
         /// - location IDs **and**
-        /// - `is_active`
+        /// - `status`
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.SearchTeamMembersResponse response from the API call</return>
         Task<Models.SearchTeamMembersResponse> SearchTeamMembersAsync(Models.SearchTeamMembersRequest body, CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Retrieve a `TeamMember` object for the given `TeamMember.id`
+        /// Retrieve a `TeamMember` object for the given `TeamMember.id`.
         /// Learn about [Troubleshooting the Teams API](https://developer.squareup.com/docs/docs/team/troubleshooting#retrieveteammember).
         /// </summary>
         /// <param name="teamMemberId">Required parameter: The ID of the team member to retrieve.</param>
@@ -111,7 +111,7 @@ namespace Square.Apis
         Models.RetrieveTeamMemberResponse RetrieveTeamMember(string teamMemberId);
 
         /// <summary>
-        /// Retrieve a `TeamMember` object for the given `TeamMember.id`
+        /// Retrieve a `TeamMember` object for the given `TeamMember.id`.
         /// Learn about [Troubleshooting the Teams API](https://developer.squareup.com/docs/docs/team/troubleshooting#retrieveteammember).
         /// </summary>
         /// <param name="teamMemberId">Required parameter: The ID of the team member to retrieve.</param>

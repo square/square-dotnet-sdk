@@ -22,7 +22,7 @@ namespace Square.Models
         /// <summary>
         /// Represents a set of SearchSubscriptionsQuery filters used to limit the set of Subscriptions returned by SearchSubscriptions.
         /// </summary>
-        [JsonProperty("filter")]
+        [JsonProperty("filter", NullValueHandling = NullValueHandling.Ignore)]
         public Models.SearchSubscriptionsFilter Filter { get; }
 
         public Builder ToBuilder()
@@ -36,10 +36,11 @@ namespace Square.Models
         {
             private Models.SearchSubscriptionsFilter filter;
 
-            public Builder() { }
-            public Builder Filter(Models.SearchSubscriptionsFilter value)
+
+
+            public Builder Filter(Models.SearchSubscriptionsFilter filter)
             {
-                filter = value;
+                this.filter = filter;
                 return this;
             }
 

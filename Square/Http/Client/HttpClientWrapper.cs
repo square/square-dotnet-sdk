@@ -15,6 +15,8 @@ namespace Square.Http.Client
 {
     internal sealed class HttpClientWrapper : IHttpClient
     {
+        private ArrayDeserialization ArrayDeserializationFormat = ArrayDeserialization.Indexed;
+        private static char ParameterSeparator = '&';
         private readonly static object syncObject = new Object();
         private static HttpClient defaultHttpClient;
         private HttpClient client;
@@ -35,7 +37,7 @@ namespace Square.Http.Client
         {
             if (defaultHttpClient == null)
             {
-                lock(syncObject)
+                lock (syncObject)
                 {
                     if (defaultHttpClient == null)
                     {
@@ -108,7 +110,6 @@ namespace Square.Http.Client
 
         #endregion
 
-
         #region Http request and response events
 
         public event OnBeforeHttpRequestEventHandler OnBeforeHttpRequestEvent;
@@ -132,12 +133,12 @@ namespace Square.Http.Client
 
         #endregion
 
-
         #region Http methods
 
-        public HttpRequest Get(string queryUrl, Dictionary<string, string> headers, string username = null, string password = null)
+        public HttpRequest Get(string queryUrl, Dictionary<string, string> headers, Dictionary<string, object> queryParameters = null,
+                string username = null, string password = null)
         {
-            return new HttpRequest(HttpMethod.Get, queryUrl, headers, username, password);
+            return new HttpRequest(HttpMethod.Get, queryUrl, headers, username, password, queryParameters: queryParameters);
         }
 
         public HttpRequest Get(string queryUrl)
@@ -165,48 +166,52 @@ namespace Square.Http.Client
             return new HttpRequest(new HttpMethod("PATCH"), queryUrl);
         }
 
-        public HttpRequest Post(string queryUrl, Dictionary<string, string> headers, List<KeyValuePair<string, object>> formParameters, string username = null,
-            string password = null)
+        public HttpRequest Post(string queryUrl, Dictionary<string, string> headers, List<KeyValuePair<string, object>> formParameters,
+                Dictionary<string, object> queryParameters = null, string username = null, string password = null)
         {
-            return new HttpRequest(HttpMethod.Post, queryUrl, headers, formParameters, username, password);
+            return new HttpRequest(HttpMethod.Post, queryUrl, headers, formParameters, username, password, queryParameters: queryParameters);
         }
 
-        public HttpRequest PostBody(string queryUrl, Dictionary<string, string> headers, object body, string username = null, string password = null)
+        public HttpRequest PostBody(string queryUrl, Dictionary<string, string> headers, object body,
+                Dictionary<string, object> queryParameters = null, string username = null, string password = null)
         {
-            return new HttpRequest(HttpMethod.Post, queryUrl, headers, body, username, password);
+            return new HttpRequest(HttpMethod.Post, queryUrl, headers, body, username, password, queryParameters: queryParameters);
         }
 
-        public HttpRequest Put(string queryUrl, Dictionary<string, string> headers, List<KeyValuePair<string, object>> formParameters, string username = null,
-            string password = null)
+        public HttpRequest Put(string queryUrl, Dictionary<string, string> headers, List<KeyValuePair<string, object>> formParameters,
+                Dictionary<string, object> queryParameters = null, string username = null, string password = null)
         {
-            return new HttpRequest(HttpMethod.Put, queryUrl, headers, formParameters, username, password);
+            return new HttpRequest(HttpMethod.Put, queryUrl, headers, formParameters, username, password, queryParameters: queryParameters);
         }
 
-        public HttpRequest PutBody(string queryUrl, Dictionary<string, string> headers, object body, string username = null, string password = null)
+        public HttpRequest PutBody(string queryUrl, Dictionary<string, string> headers, object body, Dictionary<string, object> queryParameters = null,
+                string username = null, string password = null)
         {
-            return new HttpRequest(HttpMethod.Put, queryUrl, headers, body, username, password);
+            return new HttpRequest(HttpMethod.Put, queryUrl, headers, body, username, password, queryParameters: queryParameters);
         }
 
-        public HttpRequest Patch(string queryUrl, Dictionary<string, string> headers, List<KeyValuePair<string, object>> formParameters, string username = null,
-            string password = null)
+        public HttpRequest Patch(string queryUrl, Dictionary<string, string> headers, List<KeyValuePair<string, object>> formParameters,
+                Dictionary<string, object> queryParameters = null, string username = null, string password = null)
         {
-            return new HttpRequest(new HttpMethod("PATCH"), queryUrl, headers, formParameters, username, password);
+            return new HttpRequest(new HttpMethod("PATCH"), queryUrl, headers, formParameters, username, password, queryParameters: queryParameters);
         }
 
-        public HttpRequest PatchBody(string queryUrl, Dictionary<string, string> headers, object body, string username = null, string password = null)
+        public HttpRequest PatchBody(string queryUrl, Dictionary<string, string> headers, object body, Dictionary<string, object> queryParameters = null,
+                string username = null, string password = null)
         {
-            return new HttpRequest(new HttpMethod("PATCH"), queryUrl, headers, body, username, password);
+            return new HttpRequest(new HttpMethod("PATCH"), queryUrl, headers, body, username, password, queryParameters: queryParameters);
         }
 
-        public HttpRequest Delete(string queryUrl, Dictionary<string, string> headers, List<KeyValuePair<string, object>> formParameters, string username = null,
-            string password = null)
+        public HttpRequest Delete(string queryUrl, Dictionary<string, string> headers, List<KeyValuePair<string, object>> formParameters,
+                Dictionary<string, object> queryParameters = null, string username = null, string password = null)
         {
-            return new HttpRequest(HttpMethod.Delete, queryUrl, headers, formParameters, username, password);
+            return new HttpRequest(HttpMethod.Delete, queryUrl, headers, formParameters, username, password, queryParameters: queryParameters);
         }
 
-        public HttpRequest DeleteBody(string queryUrl, Dictionary<string, string> headers, object body, string username = null, string password = null)
+        public HttpRequest DeleteBody(string queryUrl, Dictionary<string, string> headers, object body, Dictionary<string, object> queryParameters = null,
+                string username = null, string password = null)
         {
-            return new HttpRequest(HttpMethod.Delete, queryUrl, headers, body, username, password);
+            return new HttpRequest(HttpMethod.Delete, queryUrl, headers, body, username, password, queryParameters: queryParameters);
         }
 
         #endregion
@@ -215,13 +220,24 @@ namespace Square.Http.Client
 
         private async Task<HttpResponseMessage> HttpResponseMessage(HttpRequest request, CancellationToken cancellationToken)
         {
+            var queryBuilder = new StringBuilder(request.QueryUrl);
+
+            if (request.QueryParameters != null)
+            {
+                ApiHelper.AppendUrlWithQueryParameters(queryBuilder, request.QueryParameters, ArrayDeserializationFormat, ParameterSeparator);
+            }
+
+            //validate and preprocess url
+            string queryUrl = ApiHelper.CleanUrl(queryBuilder);
+
             HttpRequestMessage requestMessage = new HttpRequestMessage
             {
-                RequestUri = new Uri(request.QueryUrl),
+                RequestUri = new Uri(queryUrl),
                 Method = request.HttpMethod,
             };
 
-            if (request.Headers != null) {
+            if (request.Headers != null)
+            {
                 foreach (var headers in request.Headers)
                 {
                     requestMessage.Headers.TryAddWithoutValidation(headers.Key, headers.Value);
@@ -237,7 +253,7 @@ namespace Square.Http.Client
 
             if (request.HttpMethod.Equals(HttpMethod.Delete) || request.HttpMethod.Equals(HttpMethod.Post) || request.HttpMethod.Equals(HttpMethod.Put) || request.HttpMethod.Equals(new HttpMethod("PATCH")))
             {
-            bool multipartRequest = request.FormParameters != null &&
+                bool multipartRequest = request.FormParameters != null &&
                     (request.FormParameters.Any(f => f.Value is MultipartContent) || request.FormParameters.Any(f => f.Value is FileStreamInfo));
 
                 if (request.Body != null)
@@ -251,7 +267,9 @@ namespace Square.Http.Client
                         }
                         else if (request.Headers.Any(h => h.Key.Equals("content-type", StringComparison.OrdinalIgnoreCase)))
                         {
-                            requestMessage.Content.Headers.ContentType = new MediaTypeHeaderValue(request.Headers["content-type"]);
+                            requestMessage.Content.Headers.ContentType = new MediaTypeHeaderValue(
+                                request.Headers.First(h =>
+                                    h.Key.Equals("content-type", StringComparison.OrdinalIgnoreCase)).Value);
                         }
                         else
                         {
@@ -290,7 +308,8 @@ namespace Square.Http.Client
                         try
                         {
                             requestMessage.Content.Headers.ContentType = MediaTypeHeaderValue.Parse(request.Headers["content-type"]);
-                        } catch(Exception)
+                        }
+                        catch(Exception)
                         {
                             requestMessage.Content.Headers.TryAddWithoutValidation("content-type", request.Headers["content-type"]);
                         }

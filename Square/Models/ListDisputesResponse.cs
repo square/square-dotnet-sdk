@@ -30,13 +30,13 @@ namespace Square.Models
         /// <summary>
         /// Information on errors encountered during the request.
         /// </summary>
-        [JsonProperty("errors")]
+        [JsonProperty("errors", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.Error> Errors { get; }
 
         /// <summary>
         /// The list of Disputes.
         /// </summary>
-        [JsonProperty("disputes")]
+        [JsonProperty("disputes", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.Dispute> Disputes { get; }
 
         /// <summary>
@@ -44,7 +44,7 @@ namespace Square.Models
         /// If unset, this is the final response.
         /// For more information, see [Paginating](https://developer.squareup.com/docs/basics/api101/pagination).
         /// </summary>
-        [JsonProperty("cursor")]
+        [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
         public string Cursor { get; }
 
         public Builder ToBuilder()
@@ -58,26 +58,27 @@ namespace Square.Models
 
         public class Builder
         {
-            private IList<Models.Error> errors = new List<Models.Error>();
-            private IList<Models.Dispute> disputes = new List<Models.Dispute>();
+            private IList<Models.Error> errors;
+            private IList<Models.Dispute> disputes;
             private string cursor;
 
-            public Builder() { }
-            public Builder Errors(IList<Models.Error> value)
+
+
+            public Builder Errors(IList<Models.Error> errors)
             {
-                errors = value;
+                this.errors = errors;
                 return this;
             }
 
-            public Builder Disputes(IList<Models.Dispute> value)
+            public Builder Disputes(IList<Models.Dispute> disputes)
             {
-                disputes = value;
+                this.disputes = disputes;
                 return this;
             }
 
-            public Builder Cursor(string value)
+            public Builder Cursor(string cursor)
             {
-                cursor = value;
+                this.cursor = cursor;
                 return this;
             }
 

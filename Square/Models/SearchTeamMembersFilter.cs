@@ -25,13 +25,13 @@ namespace Square.Models
         /// When present, filter by team members assigned to the specified locations.
         /// When empty, include team members assigned to any location.
         /// </summary>
-        [JsonProperty("location_ids")]
+        [JsonProperty("location_ids", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> LocationIds { get; }
 
         /// <summary>
         /// Enumerates the possible statuses the team member can have within a business.
         /// </summary>
-        [JsonProperty("status")]
+        [JsonProperty("status", NullValueHandling = NullValueHandling.Ignore)]
         public string Status { get; }
 
         public Builder ToBuilder()
@@ -44,19 +44,20 @@ namespace Square.Models
 
         public class Builder
         {
-            private IList<string> locationIds = new List<string>();
+            private IList<string> locationIds;
             private string status;
 
-            public Builder() { }
-            public Builder LocationIds(IList<string> value)
+
+
+            public Builder LocationIds(IList<string> locationIds)
             {
-                locationIds = value;
+                this.locationIds = locationIds;
                 return this;
             }
 
-            public Builder Status(string value)
+            public Builder Status(string status)
             {
-                status = value;
+                this.status = status;
                 return this;
             }
 

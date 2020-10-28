@@ -22,7 +22,7 @@ namespace Square.Models
         /// <summary>
         /// Square-generated unique ID of the payment being disputed.
         /// </summary>
-        [JsonProperty("payment_id")]
+        [JsonProperty("payment_id", NullValueHandling = NullValueHandling.Ignore)]
         public string PaymentId { get; }
 
         public Builder ToBuilder()
@@ -36,10 +36,11 @@ namespace Square.Models
         {
             private string paymentId;
 
-            public Builder() { }
-            public Builder PaymentId(string value)
+
+
+            public Builder PaymentId(string paymentId)
             {
-                paymentId = value;
+                this.paymentId = paymentId;
                 return this;
             }
 

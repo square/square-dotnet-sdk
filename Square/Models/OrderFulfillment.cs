@@ -32,19 +32,19 @@ namespace Square.Models
         /// <summary>
         /// Unique ID that identifies the fulfillment only within this order.
         /// </summary>
-        [JsonProperty("uid")]
+        [JsonProperty("uid", NullValueHandling = NullValueHandling.Ignore)]
         public string Uid { get; }
 
         /// <summary>
         /// The type of fulfillment.
         /// </summary>
-        [JsonProperty("type")]
+        [JsonProperty("type", NullValueHandling = NullValueHandling.Ignore)]
         public string Type { get; }
 
         /// <summary>
         /// The current state of this fulfillment.
         /// </summary>
-        [JsonProperty("state")]
+        [JsonProperty("state", NullValueHandling = NullValueHandling.Ignore)]
         public string State { get; }
 
         /// <summary>
@@ -62,19 +62,19 @@ namespace Square.Models
         /// application.
         /// See [Metadata](https://developer.squareup.com/docs/build-basics/metadata) for more information.
         /// </summary>
-        [JsonProperty("metadata")]
+        [JsonProperty("metadata", NullValueHandling = NullValueHandling.Ignore)]
         public IDictionary<string, string> Metadata { get; }
 
         /// <summary>
         /// Contains details necessary to fulfill a pickup order.
         /// </summary>
-        [JsonProperty("pickup_details")]
+        [JsonProperty("pickup_details", NullValueHandling = NullValueHandling.Ignore)]
         public Models.OrderFulfillmentPickupDetails PickupDetails { get; }
 
         /// <summary>
         /// Contains details necessary to fulfill a shipment order.
         /// </summary>
-        [JsonProperty("shipment_details")]
+        [JsonProperty("shipment_details", NullValueHandling = NullValueHandling.Ignore)]
         public Models.OrderFulfillmentShipmentDetails ShipmentDetails { get; }
 
         public Builder ToBuilder()
@@ -94,44 +94,45 @@ namespace Square.Models
             private string uid;
             private string type;
             private string state;
-            private IDictionary<string, string> metadata = new Dictionary<string, string>();
+            private IDictionary<string, string> metadata;
             private Models.OrderFulfillmentPickupDetails pickupDetails;
             private Models.OrderFulfillmentShipmentDetails shipmentDetails;
 
-            public Builder() { }
-            public Builder Uid(string value)
+
+
+            public Builder Uid(string uid)
             {
-                uid = value;
+                this.uid = uid;
                 return this;
             }
 
-            public Builder Type(string value)
+            public Builder Type(string type)
             {
-                type = value;
+                this.type = type;
                 return this;
             }
 
-            public Builder State(string value)
+            public Builder State(string state)
             {
-                state = value;
+                this.state = state;
                 return this;
             }
 
-            public Builder Metadata(IDictionary<string, string> value)
+            public Builder Metadata(IDictionary<string, string> metadata)
             {
-                metadata = value;
+                this.metadata = metadata;
                 return this;
             }
 
-            public Builder PickupDetails(Models.OrderFulfillmentPickupDetails value)
+            public Builder PickupDetails(Models.OrderFulfillmentPickupDetails pickupDetails)
             {
-                pickupDetails = value;
+                this.pickupDetails = pickupDetails;
                 return this;
             }
 
-            public Builder ShipmentDetails(Models.OrderFulfillmentShipmentDetails value)
+            public Builder ShipmentDetails(Models.OrderFulfillmentShipmentDetails shipmentDetails)
             {
-                shipmentDetails = value;
+                this.shipmentDetails = shipmentDetails;
                 return this;
             }
 

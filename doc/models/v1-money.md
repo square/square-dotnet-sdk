@@ -1,17 +1,18 @@
-## V1 Money
 
-### Structure
+# V1 Money
+
+## Structure
 
 `V1Money`
 
-### Fields
+## Fields
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `Amount` | `int?` | Optional | Amount in the lowest denominated value of this Currency. E.g. in USD<br>these are cents, in JPY they are Yen (which do not have a 'cent' concept). |
 | `CurrencyCode` | [`string`](/doc/models/currency.md) | Optional | Indicates the associated currency for an amount of money. Values correspond<br>to [ISO 4217](https://wikipedia.org/wiki/ISO_4217). |
 
-### Example (as JSON)
+## Example (as JSON)
 
 ```json
 {

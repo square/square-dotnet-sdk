@@ -28,13 +28,13 @@ namespace Square.Models
         /// <summary>
         /// The successfully updated `TeamMember` objects. Each key is the `team_member_id` that maps to the `UpdateTeamMemberRequest`.
         /// </summary>
-        [JsonProperty("team_members")]
+        [JsonProperty("team_members", NullValueHandling = NullValueHandling.Ignore)]
         public IDictionary<string, Models.UpdateTeamMemberResponse> TeamMembers { get; }
 
         /// <summary>
         /// The errors that occurred during the request.
         /// </summary>
-        [JsonProperty("errors")]
+        [JsonProperty("errors", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.Error> Errors { get; }
 
         public Builder ToBuilder()
@@ -47,19 +47,20 @@ namespace Square.Models
 
         public class Builder
         {
-            private IDictionary<string, Models.UpdateTeamMemberResponse> teamMembers = new Dictionary<string, Models.UpdateTeamMemberResponse>();
-            private IList<Models.Error> errors = new List<Models.Error>();
+            private IDictionary<string, Models.UpdateTeamMemberResponse> teamMembers;
+            private IList<Models.Error> errors;
 
-            public Builder() { }
-            public Builder TeamMembers(IDictionary<string, Models.UpdateTeamMemberResponse> value)
+
+
+            public Builder TeamMembers(IDictionary<string, Models.UpdateTeamMemberResponse> teamMembers)
             {
-                teamMembers = value;
+                this.teamMembers = teamMembers;
                 return this;
             }
 
-            public Builder Errors(IList<Models.Error> value)
+            public Builder Errors(IList<Models.Error> errors)
             {
-                errors = value;
+                this.errors = errors;
                 return this;
             }
 

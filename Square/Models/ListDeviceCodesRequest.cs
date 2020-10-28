@@ -16,11 +16,13 @@ namespace Square.Models
     {
         public ListDeviceCodesRequest(string cursor = null,
             string locationId = null,
-            string productType = null)
+            string productType = null,
+            IList<string> status = null)
         {
             Cursor = cursor;
             LocationId = locationId;
             ProductType = productType;
+            Status = status;
         }
 
         /// <summary>
@@ -28,28 +30,37 @@ namespace Square.Models
         /// Provide this to retrieve the next set of results for your original query.
         /// See [Paginating results](#paginatingresults) for more information.
         /// </summary>
-        [JsonProperty("cursor")]
+        [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
         public string Cursor { get; }
 
         /// <summary>
         /// If specified, only returns DeviceCodes of the specified location.
         /// Returns DeviceCodes of all locations if empty.
         /// </summary>
-        [JsonProperty("location_id")]
+        [JsonProperty("location_id", NullValueHandling = NullValueHandling.Ignore)]
         public string LocationId { get; }
 
         /// <summary>
         /// Getter for product_type
         /// </summary>
-        [JsonProperty("product_type")]
+        [JsonProperty("product_type", NullValueHandling = NullValueHandling.Ignore)]
         public string ProductType { get; }
+
+        /// <summary>
+        /// If specified, returns DeviceCodes with the specified statuses.
+        /// Returns DeviceCodes of status `PAIRED` and `UNPAIRED` if empty.
+        /// See [DeviceCodeStatus](#type-devicecodestatus) for possible values
+        /// </summary>
+        [JsonProperty("status", NullValueHandling = NullValueHandling.Ignore)]
+        public IList<string> Status { get; }
 
         public Builder ToBuilder()
         {
             var builder = new Builder()
                 .Cursor(Cursor)
                 .LocationId(LocationId)
-                .ProductType(ProductType);
+                .ProductType(ProductType)
+                .Status(Status);
             return builder;
         }
 
@@ -58,23 +69,31 @@ namespace Square.Models
             private string cursor;
             private string locationId;
             private string productType;
+            private IList<string> status;
 
-            public Builder() { }
-            public Builder Cursor(string value)
+
+
+            public Builder Cursor(string cursor)
             {
-                cursor = value;
+                this.cursor = cursor;
                 return this;
             }
 
-            public Builder LocationId(string value)
+            public Builder LocationId(string locationId)
             {
-                locationId = value;
+                this.locationId = locationId;
                 return this;
             }
 
-            public Builder ProductType(string value)
+            public Builder ProductType(string productType)
             {
-                productType = value;
+                this.productType = productType;
+                return this;
+            }
+
+            public Builder Status(IList<string> status)
+            {
+                this.status = status;
                 return this;
             }
 
@@ -82,7 +101,8 @@ namespace Square.Models
             {
                 return new ListDeviceCodesRequest(cursor,
                     locationId,
-                    productType);
+                    productType,
+                    status);
             }
         }
     }

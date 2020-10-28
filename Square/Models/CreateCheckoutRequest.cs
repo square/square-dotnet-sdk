@@ -62,7 +62,7 @@ namespace Square.Models
         /// Square Dashboard.
         /// Default: `false`.
         /// </summary>
-        [JsonProperty("ask_for_shipping_address")]
+        [JsonProperty("ask_for_shipping_address", NullValueHandling = NullValueHandling.Ignore)]
         public bool? AskForShippingAddress { get; }
 
         /// <summary>
@@ -72,7 +72,7 @@ namespace Square.Models
         /// primary email address associated with the merchant's Square account.
         /// Default: none; only exists if explicitly set.
         /// </summary>
-        [JsonProperty("merchant_support_email")]
+        [JsonProperty("merchant_support_email", NullValueHandling = NullValueHandling.Ignore)]
         public string MerchantSupportEmail { get; }
 
         /// <summary>
@@ -80,13 +80,13 @@ namespace Square.Models
         /// as an editable text field.
         /// Default: none; only exists if explicitly set.
         /// </summary>
-        [JsonProperty("pre_populate_buyer_email")]
+        [JsonProperty("pre_populate_buyer_email", NullValueHandling = NullValueHandling.Ignore)]
         public string PrePopulateBuyerEmail { get; }
 
         /// <summary>
         /// Represents a physical address.
         /// </summary>
-        [JsonProperty("pre_populate_shipping_address")]
+        [JsonProperty("pre_populate_shipping_address", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Address PrePopulateShippingAddress { get; }
 
         /// <summary>
@@ -102,7 +102,7 @@ namespace Square.Models
         /// finalize the order through your existing/normal confirmation workflow.
         /// Default: none; only exists if explicitly set.
         /// </summary>
-        [JsonProperty("redirect_url")]
+        [JsonProperty("redirect_url", NullValueHandling = NullValueHandling.Ignore)]
         public string RedirectUrl { get; }
 
         /// <summary>
@@ -114,14 +114,14 @@ namespace Square.Models
         /// This field requires `PAYMENTS_WRITE_ADDITIONAL_RECIPIENTS` OAuth permission.
         /// This field is currently not supported in sandbox.
         /// </summary>
-        [JsonProperty("additional_recipients")]
+        [JsonProperty("additional_recipients", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.ChargeRequestAdditionalRecipient> AdditionalRecipients { get; }
 
         /// <summary>
         /// An optional note to associate with the checkout object.
         /// This value cannot exceed 60 characters.
         /// </summary>
-        [JsonProperty("note")]
+        [JsonProperty("note", NullValueHandling = NullValueHandling.Ignore)]
         public string Note { get; }
 
         public Builder ToBuilder()
@@ -147,7 +147,7 @@ namespace Square.Models
             private string prePopulateBuyerEmail;
             private Models.Address prePopulateShippingAddress;
             private string redirectUrl;
-            private IList<Models.ChargeRequestAdditionalRecipient> additionalRecipients = new List<Models.ChargeRequestAdditionalRecipient>();
+            private IList<Models.ChargeRequestAdditionalRecipient> additionalRecipients;
             private string note;
 
             public Builder(string idempotencyKey,
@@ -156,57 +156,58 @@ namespace Square.Models
                 this.idempotencyKey = idempotencyKey;
                 this.order = order;
             }
-            public Builder IdempotencyKey(string value)
+
+            public Builder IdempotencyKey(string idempotencyKey)
             {
-                idempotencyKey = value;
+                this.idempotencyKey = idempotencyKey;
                 return this;
             }
 
-            public Builder Order(Models.CreateOrderRequest value)
+            public Builder Order(Models.CreateOrderRequest order)
             {
-                order = value;
+                this.order = order;
                 return this;
             }
 
-            public Builder AskForShippingAddress(bool? value)
+            public Builder AskForShippingAddress(bool? askForShippingAddress)
             {
-                askForShippingAddress = value;
+                this.askForShippingAddress = askForShippingAddress;
                 return this;
             }
 
-            public Builder MerchantSupportEmail(string value)
+            public Builder MerchantSupportEmail(string merchantSupportEmail)
             {
-                merchantSupportEmail = value;
+                this.merchantSupportEmail = merchantSupportEmail;
                 return this;
             }
 
-            public Builder PrePopulateBuyerEmail(string value)
+            public Builder PrePopulateBuyerEmail(string prePopulateBuyerEmail)
             {
-                prePopulateBuyerEmail = value;
+                this.prePopulateBuyerEmail = prePopulateBuyerEmail;
                 return this;
             }
 
-            public Builder PrePopulateShippingAddress(Models.Address value)
+            public Builder PrePopulateShippingAddress(Models.Address prePopulateShippingAddress)
             {
-                prePopulateShippingAddress = value;
+                this.prePopulateShippingAddress = prePopulateShippingAddress;
                 return this;
             }
 
-            public Builder RedirectUrl(string value)
+            public Builder RedirectUrl(string redirectUrl)
             {
-                redirectUrl = value;
+                this.redirectUrl = redirectUrl;
                 return this;
             }
 
-            public Builder AdditionalRecipients(IList<Models.ChargeRequestAdditionalRecipient> value)
+            public Builder AdditionalRecipients(IList<Models.ChargeRequestAdditionalRecipient> additionalRecipients)
             {
-                additionalRecipients = value;
+                this.additionalRecipients = additionalRecipients;
                 return this;
             }
 
-            public Builder Note(string value)
+            public Builder Note(string note)
             {
-                note = value;
+                this.note = note;
                 return this;
             }
 

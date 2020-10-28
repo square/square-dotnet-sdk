@@ -28,7 +28,7 @@ namespace Square.Models
         public string AttributeName { get; }
 
         /// <summary>
-        /// The desired value of the search attribute. Matching of the attribute value is case insensitive and can be partial. 
+        /// The desired value of the search attribute. Matching of the attribute value is case insensitive and can be partial.
         /// For example, if a specified value of "sma", objects with the named attribute value of "Small", "small" are both matched.
         /// </summary>
         [JsonProperty("attribute_value")]
@@ -52,15 +52,16 @@ namespace Square.Models
                 this.attributeName = attributeName;
                 this.attributeValue = attributeValue;
             }
-            public Builder AttributeName(string value)
+
+            public Builder AttributeName(string attributeName)
             {
-                attributeName = value;
+                this.attributeName = attributeName;
                 return this;
             }
 
-            public Builder AttributeValue(string value)
+            public Builder AttributeValue(string attributeValue)
             {
-                attributeValue = value;
+                this.attributeValue = attributeValue;
                 return this;
             }
 

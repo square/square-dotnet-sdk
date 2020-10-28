@@ -73,15 +73,16 @@ namespace Square.Models
                 this.idempotencyKey = idempotencyKey;
                 this.batches = batches;
             }
-            public Builder IdempotencyKey(string value)
+
+            public Builder IdempotencyKey(string idempotencyKey)
             {
-                idempotencyKey = value;
+                this.idempotencyKey = idempotencyKey;
                 return this;
             }
 
-            public Builder Batches(IList<Models.CatalogObjectBatch> value)
+            public Builder Batches(IList<Models.CatalogObjectBatch> batches)
             {
-                batches = value;
+                this.batches = batches;
                 return this;
             }
 

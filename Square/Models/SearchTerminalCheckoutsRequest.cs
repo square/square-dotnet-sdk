@@ -26,20 +26,21 @@ namespace Square.Models
         /// <summary>
         /// Getter for query
         /// </summary>
-        [JsonProperty("query")]
+        [JsonProperty("query", NullValueHandling = NullValueHandling.Ignore)]
         public Models.TerminalCheckoutQuery Query { get; }
 
         /// <summary>
         /// A pagination cursor returned by a previous call to this endpoint.
         /// Provide this to retrieve the next set of results for the original query.
+        /// See [Pagination](https://developer.squareup.com/docs/basics/api101/pagination) for more information.
         /// </summary>
-        [JsonProperty("cursor")]
+        [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
         public string Cursor { get; }
 
         /// <summary>
         /// Limit the number of results returned for a single request.
         /// </summary>
-        [JsonProperty("limit")]
+        [JsonProperty("limit", NullValueHandling = NullValueHandling.Ignore)]
         public int? Limit { get; }
 
         public Builder ToBuilder()
@@ -57,22 +58,23 @@ namespace Square.Models
             private string cursor;
             private int? limit;
 
-            public Builder() { }
-            public Builder Query(Models.TerminalCheckoutQuery value)
+
+
+            public Builder Query(Models.TerminalCheckoutQuery query)
             {
-                query = value;
+                this.query = query;
                 return this;
             }
 
-            public Builder Cursor(string value)
+            public Builder Cursor(string cursor)
             {
-                cursor = value;
+                this.cursor = cursor;
                 return this;
             }
 
-            public Builder Limit(int? value)
+            public Builder Limit(int? limit)
             {
-                limit = value;
+                this.limit = limit;
                 return this;
             }
 

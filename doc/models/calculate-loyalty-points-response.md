@@ -1,20 +1,21 @@
-## Calculate Loyalty Points Response
 
-A response that includes the points that the buyer can earn from 
+# Calculate Loyalty Points Response
+
+A response that includes the points that the buyer can earn from
 a specified purchase.
 
-### Structure
+## Structure
 
 `CalculateLoyaltyPointsResponse`
 
-### Fields
+## Fields
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `Errors` | [`IList<Models.Error>`](/doc/models/error.md) | Optional | Any errors that occurred during the request. |
 | `Points` | `int?` | Optional | The points that the buyer can earn from a specified purchase. |
 
-### Example (as JSON)
+## Example (as JSON)
 
 ```json
 {

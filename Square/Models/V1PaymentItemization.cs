@@ -48,85 +48,85 @@ namespace Square.Models
         /// <summary>
         /// The item's name.
         /// </summary>
-        [JsonProperty("name")]
+        [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
         public string Name { get; }
 
         /// <summary>
         /// The quantity of the item purchased. This can be a decimal value.
         /// </summary>
-        [JsonProperty("quantity")]
+        [JsonProperty("quantity", NullValueHandling = NullValueHandling.Ignore)]
         public double? Quantity { get; }
 
         /// <summary>
         /// Getter for itemization_type
         /// </summary>
-        [JsonProperty("itemization_type")]
+        [JsonProperty("itemization_type", NullValueHandling = NullValueHandling.Ignore)]
         public string ItemizationType { get; }
 
         /// <summary>
         /// V1PaymentItemDetail
         /// </summary>
-        [JsonProperty("item_detail")]
+        [JsonProperty("item_detail", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1PaymentItemDetail ItemDetail { get; }
 
         /// <summary>
         /// Notes entered by the merchant about the item at the time of payment, if any.
         /// </summary>
-        [JsonProperty("notes")]
+        [JsonProperty("notes", NullValueHandling = NullValueHandling.Ignore)]
         public string Notes { get; }
 
         /// <summary>
         /// The name of the item variation purchased, if any.
         /// </summary>
-        [JsonProperty("item_variation_name")]
+        [JsonProperty("item_variation_name", NullValueHandling = NullValueHandling.Ignore)]
         public string ItemVariationName { get; }
 
         /// <summary>
         /// Getter for total_money
         /// </summary>
-        [JsonProperty("total_money")]
+        [JsonProperty("total_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1Money TotalMoney { get; }
 
         /// <summary>
         /// Getter for single_quantity_money
         /// </summary>
-        [JsonProperty("single_quantity_money")]
+        [JsonProperty("single_quantity_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1Money SingleQuantityMoney { get; }
 
         /// <summary>
         /// Getter for gross_sales_money
         /// </summary>
-        [JsonProperty("gross_sales_money")]
+        [JsonProperty("gross_sales_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1Money GrossSalesMoney { get; }
 
         /// <summary>
         /// Getter for discount_money
         /// </summary>
-        [JsonProperty("discount_money")]
+        [JsonProperty("discount_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1Money DiscountMoney { get; }
 
         /// <summary>
         /// Getter for net_sales_money
         /// </summary>
-        [JsonProperty("net_sales_money")]
+        [JsonProperty("net_sales_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1Money NetSalesMoney { get; }
 
         /// <summary>
         /// All taxes applied to this itemization.
         /// </summary>
-        [JsonProperty("taxes")]
+        [JsonProperty("taxes", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.V1PaymentTax> Taxes { get; }
 
         /// <summary>
         /// All discounts applied to this itemization.
         /// </summary>
-        [JsonProperty("discounts")]
+        [JsonProperty("discounts", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.V1PaymentDiscount> Discounts { get; }
 
         /// <summary>
         /// All modifier options applied to this itemization.
         /// </summary>
-        [JsonProperty("modifiers")]
+        [JsonProperty("modifiers", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.V1PaymentModifier> Modifiers { get; }
 
         public Builder ToBuilder()
@@ -162,92 +162,93 @@ namespace Square.Models
             private Models.V1Money grossSalesMoney;
             private Models.V1Money discountMoney;
             private Models.V1Money netSalesMoney;
-            private IList<Models.V1PaymentTax> taxes = new List<Models.V1PaymentTax>();
-            private IList<Models.V1PaymentDiscount> discounts = new List<Models.V1PaymentDiscount>();
-            private IList<Models.V1PaymentModifier> modifiers = new List<Models.V1PaymentModifier>();
+            private IList<Models.V1PaymentTax> taxes;
+            private IList<Models.V1PaymentDiscount> discounts;
+            private IList<Models.V1PaymentModifier> modifiers;
 
-            public Builder() { }
-            public Builder Name(string value)
+
+
+            public Builder Name(string name)
             {
-                name = value;
+                this.name = name;
                 return this;
             }
 
-            public Builder Quantity(double? value)
+            public Builder Quantity(double? quantity)
             {
-                quantity = value;
+                this.quantity = quantity;
                 return this;
             }
 
-            public Builder ItemizationType(string value)
+            public Builder ItemizationType(string itemizationType)
             {
-                itemizationType = value;
+                this.itemizationType = itemizationType;
                 return this;
             }
 
-            public Builder ItemDetail(Models.V1PaymentItemDetail value)
+            public Builder ItemDetail(Models.V1PaymentItemDetail itemDetail)
             {
-                itemDetail = value;
+                this.itemDetail = itemDetail;
                 return this;
             }
 
-            public Builder Notes(string value)
+            public Builder Notes(string notes)
             {
-                notes = value;
+                this.notes = notes;
                 return this;
             }
 
-            public Builder ItemVariationName(string value)
+            public Builder ItemVariationName(string itemVariationName)
             {
-                itemVariationName = value;
+                this.itemVariationName = itemVariationName;
                 return this;
             }
 
-            public Builder TotalMoney(Models.V1Money value)
+            public Builder TotalMoney(Models.V1Money totalMoney)
             {
-                totalMoney = value;
+                this.totalMoney = totalMoney;
                 return this;
             }
 
-            public Builder SingleQuantityMoney(Models.V1Money value)
+            public Builder SingleQuantityMoney(Models.V1Money singleQuantityMoney)
             {
-                singleQuantityMoney = value;
+                this.singleQuantityMoney = singleQuantityMoney;
                 return this;
             }
 
-            public Builder GrossSalesMoney(Models.V1Money value)
+            public Builder GrossSalesMoney(Models.V1Money grossSalesMoney)
             {
-                grossSalesMoney = value;
+                this.grossSalesMoney = grossSalesMoney;
                 return this;
             }
 
-            public Builder DiscountMoney(Models.V1Money value)
+            public Builder DiscountMoney(Models.V1Money discountMoney)
             {
-                discountMoney = value;
+                this.discountMoney = discountMoney;
                 return this;
             }
 
-            public Builder NetSalesMoney(Models.V1Money value)
+            public Builder NetSalesMoney(Models.V1Money netSalesMoney)
             {
-                netSalesMoney = value;
+                this.netSalesMoney = netSalesMoney;
                 return this;
             }
 
-            public Builder Taxes(IList<Models.V1PaymentTax> value)
+            public Builder Taxes(IList<Models.V1PaymentTax> taxes)
             {
-                taxes = value;
+                this.taxes = taxes;
                 return this;
             }
 
-            public Builder Discounts(IList<Models.V1PaymentDiscount> value)
+            public Builder Discounts(IList<Models.V1PaymentDiscount> discounts)
             {
-                discounts = value;
+                this.discounts = discounts;
                 return this;
             }
 
-            public Builder Modifiers(IList<Models.V1PaymentModifier> value)
+            public Builder Modifiers(IList<Models.V1PaymentModifier> modifiers)
             {
-                modifiers = value;
+                this.modifiers = modifiers;
                 return this;
             }
 

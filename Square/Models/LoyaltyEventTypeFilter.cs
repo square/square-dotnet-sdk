@@ -42,9 +42,10 @@ namespace Square.Models
             {
                 this.types = types;
             }
-            public Builder Types(IList<string> value)
+
+            public Builder Types(IList<string> types)
             {
-                types = value;
+                this.types = types;
                 return this;
             }
 

@@ -22,7 +22,7 @@ namespace Square.Models
         /// <summary>
         /// V1ModifierOption
         /// </summary>
-        [JsonProperty("body")]
+        [JsonProperty("body", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1ModifierOption Body { get; }
 
         public Builder ToBuilder()
@@ -36,10 +36,11 @@ namespace Square.Models
         {
             private Models.V1ModifierOption body;
 
-            public Builder() { }
-            public Builder Body(Models.V1ModifierOption value)
+
+
+            public Builder Body(Models.V1ModifierOption body)
             {
-                body = value;
+                this.body = body;
                 return this;
             }
 

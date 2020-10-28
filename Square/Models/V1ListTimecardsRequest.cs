@@ -42,68 +42,68 @@ namespace Square.Models
         /// <summary>
         /// The order (e.g., chronological or alphabetical) in which results from a request are returned.
         /// </summary>
-        [JsonProperty("order")]
+        [JsonProperty("order", NullValueHandling = NullValueHandling.Ignore)]
         public string Order { get; }
 
         /// <summary>
         /// If provided, the endpoint returns only timecards for the employee with the specified ID.
         /// </summary>
-        [JsonProperty("employee_id")]
+        [JsonProperty("employee_id", NullValueHandling = NullValueHandling.Ignore)]
         public string EmployeeId { get; }
 
         /// <summary>
         /// If filtering results by their clockin_time field, the beginning of the requested reporting period, in ISO 8601 format.
         /// </summary>
-        [JsonProperty("begin_clockin_time")]
+        [JsonProperty("begin_clockin_time", NullValueHandling = NullValueHandling.Ignore)]
         public string BeginClockinTime { get; }
 
         /// <summary>
         /// If filtering results by their clockin_time field, the end of the requested reporting period, in ISO 8601 format.
         /// </summary>
-        [JsonProperty("end_clockin_time")]
+        [JsonProperty("end_clockin_time", NullValueHandling = NullValueHandling.Ignore)]
         public string EndClockinTime { get; }
 
         /// <summary>
         /// If filtering results by their clockout_time field, the beginning of the requested reporting period, in ISO 8601 format.
         /// </summary>
-        [JsonProperty("begin_clockout_time")]
+        [JsonProperty("begin_clockout_time", NullValueHandling = NullValueHandling.Ignore)]
         public string BeginClockoutTime { get; }
 
         /// <summary>
         /// If filtering results by their clockout_time field, the end of the requested reporting period, in ISO 8601 format.
         /// </summary>
-        [JsonProperty("end_clockout_time")]
+        [JsonProperty("end_clockout_time", NullValueHandling = NullValueHandling.Ignore)]
         public string EndClockoutTime { get; }
 
         /// <summary>
         /// If filtering results by their updated_at field, the beginning of the requested reporting period, in ISO 8601 format.
         /// </summary>
-        [JsonProperty("begin_updated_at")]
+        [JsonProperty("begin_updated_at", NullValueHandling = NullValueHandling.Ignore)]
         public string BeginUpdatedAt { get; }
 
         /// <summary>
         /// If filtering results by their updated_at field, the end of the requested reporting period, in ISO 8601 format.
         /// </summary>
-        [JsonProperty("end_updated_at")]
+        [JsonProperty("end_updated_at", NullValueHandling = NullValueHandling.Ignore)]
         public string EndUpdatedAt { get; }
 
         /// <summary>
         /// If true, only deleted timecards are returned. If false, only valid timecards are returned.If you don't provide this parameter, both valid and deleted timecards are returned.
         /// </summary>
-        [JsonProperty("deleted")]
+        [JsonProperty("deleted", NullValueHandling = NullValueHandling.Ignore)]
         public bool? Deleted { get; }
 
         /// <summary>
         /// The maximum integer number of employee entities to return in a single response. Default 100, maximum 200.
         /// </summary>
-        [JsonProperty("limit")]
+        [JsonProperty("limit", NullValueHandling = NullValueHandling.Ignore)]
         public int? Limit { get; }
 
         /// <summary>
         /// A pagination cursor to retrieve the next set of results for your
         /// original query to the endpoint.
         /// </summary>
-        [JsonProperty("batch_token")]
+        [JsonProperty("batch_token", NullValueHandling = NullValueHandling.Ignore)]
         public string BatchToken { get; }
 
         public Builder ToBuilder()
@@ -137,70 +137,71 @@ namespace Square.Models
             private int? limit;
             private string batchToken;
 
-            public Builder() { }
-            public Builder Order(string value)
+
+
+            public Builder Order(string order)
             {
-                order = value;
+                this.order = order;
                 return this;
             }
 
-            public Builder EmployeeId(string value)
+            public Builder EmployeeId(string employeeId)
             {
-                employeeId = value;
+                this.employeeId = employeeId;
                 return this;
             }
 
-            public Builder BeginClockinTime(string value)
+            public Builder BeginClockinTime(string beginClockinTime)
             {
-                beginClockinTime = value;
+                this.beginClockinTime = beginClockinTime;
                 return this;
             }
 
-            public Builder EndClockinTime(string value)
+            public Builder EndClockinTime(string endClockinTime)
             {
-                endClockinTime = value;
+                this.endClockinTime = endClockinTime;
                 return this;
             }
 
-            public Builder BeginClockoutTime(string value)
+            public Builder BeginClockoutTime(string beginClockoutTime)
             {
-                beginClockoutTime = value;
+                this.beginClockoutTime = beginClockoutTime;
                 return this;
             }
 
-            public Builder EndClockoutTime(string value)
+            public Builder EndClockoutTime(string endClockoutTime)
             {
-                endClockoutTime = value;
+                this.endClockoutTime = endClockoutTime;
                 return this;
             }
 
-            public Builder BeginUpdatedAt(string value)
+            public Builder BeginUpdatedAt(string beginUpdatedAt)
             {
-                beginUpdatedAt = value;
+                this.beginUpdatedAt = beginUpdatedAt;
                 return this;
             }
 
-            public Builder EndUpdatedAt(string value)
+            public Builder EndUpdatedAt(string endUpdatedAt)
             {
-                endUpdatedAt = value;
+                this.endUpdatedAt = endUpdatedAt;
                 return this;
             }
 
-            public Builder Deleted(bool? value)
+            public Builder Deleted(bool? deleted)
             {
-                deleted = value;
+                this.deleted = deleted;
                 return this;
             }
 
-            public Builder Limit(int? value)
+            public Builder Limit(int? limit)
             {
-                limit = value;
+                this.limit = limit;
                 return this;
             }
 
-            public Builder BatchToken(string value)
+            public Builder BatchToken(string batchToken)
             {
-                batchToken = value;
+                this.batchToken = batchToken;
                 return this;
             }
 

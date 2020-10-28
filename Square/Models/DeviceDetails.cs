@@ -26,19 +26,19 @@ namespace Square.Models
         /// <summary>
         /// Square-issued ID of the device.
         /// </summary>
-        [JsonProperty("device_id")]
+        [JsonProperty("device_id", NullValueHandling = NullValueHandling.Ignore)]
         public string DeviceId { get; }
 
         /// <summary>
         /// Square-issued installation ID for the device.
         /// </summary>
-        [JsonProperty("device_installation_id")]
+        [JsonProperty("device_installation_id", NullValueHandling = NullValueHandling.Ignore)]
         public string DeviceInstallationId { get; }
 
         /// <summary>
         /// The name of the device set by the merchant.
         /// </summary>
-        [JsonProperty("device_name")]
+        [JsonProperty("device_name", NullValueHandling = NullValueHandling.Ignore)]
         public string DeviceName { get; }
 
         public Builder ToBuilder()
@@ -56,22 +56,23 @@ namespace Square.Models
             private string deviceInstallationId;
             private string deviceName;
 
-            public Builder() { }
-            public Builder DeviceId(string value)
+
+
+            public Builder DeviceId(string deviceId)
             {
-                deviceId = value;
+                this.deviceId = deviceId;
                 return this;
             }
 
-            public Builder DeviceInstallationId(string value)
+            public Builder DeviceInstallationId(string deviceInstallationId)
             {
-                deviceInstallationId = value;
+                this.deviceInstallationId = deviceInstallationId;
                 return this;
             }
 
-            public Builder DeviceName(string value)
+            public Builder DeviceName(string deviceName)
             {
-                deviceName = value;
+                this.deviceName = deviceName;
                 return this;
             }
 

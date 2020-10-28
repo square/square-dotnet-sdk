@@ -35,31 +35,29 @@ namespace Square.Models
         /// The filter to return results by `CatalogObject` ID.
         /// The filter is only applicable when set. The default value is null.
         /// </summary>
-        [JsonProperty("catalog_object_ids")]
+        [JsonProperty("catalog_object_ids", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> CatalogObjectIds { get; }
 
         /// <summary>
         /// The filter to return results by `Location` ID. 
         /// The filter is only applicable when set. The default value is null.
         /// </summary>
-        [JsonProperty("location_ids")]
+        [JsonProperty("location_ids", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> LocationIds { get; }
 
         /// <summary>
         /// The filter to return results by `InventoryChangeType` values other than `TRANSFER`.
         /// The default value is `[PHYSICAL_COUNT, ADJUSTMENT]`.
-        /// See [InventoryChangeType](#type-inventorychangetype) for possible values
         /// </summary>
-        [JsonProperty("types")]
+        [JsonProperty("types", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> Types { get; }
 
         /// <summary>
         /// The filter to return `ADJUSTMENT` query results by
         /// `InventoryState`. This filter is only applied when set.
         /// The default value is null.
-        /// See [InventoryState](#type-inventorystate) for possible values
         /// </summary>
-        [JsonProperty("states")]
+        [JsonProperty("states", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> States { get; }
 
         /// <summary>
@@ -67,7 +65,7 @@ namespace Square.Models
         /// after the given time as specified in an RFC 3339 timestamp. 
         /// The default value is the UNIX epoch of (`1970-01-01T00:00:00Z`).
         /// </summary>
-        [JsonProperty("updated_after")]
+        [JsonProperty("updated_after", NullValueHandling = NullValueHandling.Ignore)]
         public string UpdatedAfter { get; }
 
         /// <summary>
@@ -75,7 +73,7 @@ namespace Square.Models
         /// strictly before the given time as specified in an RFC 3339 timestamp. 
         /// The default value is the UNIX epoch of (`1970-01-01T00:00:00Z`).
         /// </summary>
-        [JsonProperty("updated_before")]
+        [JsonProperty("updated_before", NullValueHandling = NullValueHandling.Ignore)]
         public string UpdatedBefore { get; }
 
         /// <summary>
@@ -83,7 +81,7 @@ namespace Square.Models
         /// Provide this to retrieve the next set of results for the original query.
         /// See the [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination) guide for more information.
         /// </summary>
-        [JsonProperty("cursor")]
+        [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
         public string Cursor { get; }
 
         public Builder ToBuilder()
@@ -101,54 +99,55 @@ namespace Square.Models
 
         public class Builder
         {
-            private IList<string> catalogObjectIds = new List<string>();
-            private IList<string> locationIds = new List<string>();
-            private IList<string> types = new List<string>();
-            private IList<string> states = new List<string>();
+            private IList<string> catalogObjectIds;
+            private IList<string> locationIds;
+            private IList<string> types;
+            private IList<string> states;
             private string updatedAfter;
             private string updatedBefore;
             private string cursor;
 
-            public Builder() { }
-            public Builder CatalogObjectIds(IList<string> value)
+
+
+            public Builder CatalogObjectIds(IList<string> catalogObjectIds)
             {
-                catalogObjectIds = value;
+                this.catalogObjectIds = catalogObjectIds;
                 return this;
             }
 
-            public Builder LocationIds(IList<string> value)
+            public Builder LocationIds(IList<string> locationIds)
             {
-                locationIds = value;
+                this.locationIds = locationIds;
                 return this;
             }
 
-            public Builder Types(IList<string> value)
+            public Builder Types(IList<string> types)
             {
-                types = value;
+                this.types = types;
                 return this;
             }
 
-            public Builder States(IList<string> value)
+            public Builder States(IList<string> states)
             {
-                states = value;
+                this.states = states;
                 return this;
             }
 
-            public Builder UpdatedAfter(string value)
+            public Builder UpdatedAfter(string updatedAfter)
             {
-                updatedAfter = value;
+                this.updatedAfter = updatedAfter;
                 return this;
             }
 
-            public Builder UpdatedBefore(string value)
+            public Builder UpdatedBefore(string updatedBefore)
             {
-                updatedBefore = value;
+                this.updatedBefore = updatedBefore;
                 return this;
             }
 
-            public Builder Cursor(string value)
+            public Builder Cursor(string cursor)
             {
-                cursor = value;
+                this.cursor = cursor;
                 return this;
             }
 

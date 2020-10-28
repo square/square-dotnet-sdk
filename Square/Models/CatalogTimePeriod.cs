@@ -20,7 +20,7 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// An iCalendar (RFC5545) [event](https://tools.ietf.org/html/rfc5545#section-3.6.1), which
+        /// An iCalendar (RFC 5545) [event](https://tools.ietf.org/html/rfc5545#section-3.6.1), which
         /// specifies the name, timing, duration and recurrence of this time period.
         /// Example:
         /// ```
@@ -33,7 +33,7 @@ namespace Square.Models
         /// and `END:VEVENT` is not required in the request. The response will always
         /// include them.
         /// </summary>
-        [JsonProperty("event")]
+        [JsonProperty("event", NullValueHandling = NullValueHandling.Ignore)]
         public string MEvent { get; }
 
         public Builder ToBuilder()
@@ -47,10 +47,11 @@ namespace Square.Models
         {
             private string mEvent;
 
-            public Builder() { }
-            public Builder MEvent(string value)
+
+
+            public Builder MEvent(string mEvent)
             {
-                mEvent = value;
+                this.mEvent = mEvent;
                 return this;
             }
 

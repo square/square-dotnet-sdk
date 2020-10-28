@@ -18,7 +18,7 @@ namespace Square.Apis
     {
         /// <summary>
         /// Retrieves a list of refunds for the account making the request.
-        /// Max results per page: 100
+        /// The maximum results per page is 100.
         /// </summary>
         /// <param name="beginTime">Optional parameter: Timestamp for the beginning of the requested reporting period, in RFC 3339 format.  Default: The current time minus one year.</param>
         /// <param name="endTime">Optional parameter: Timestamp for the end of the requested reporting period, in RFC 3339 format.  Default: The current time.</param>
@@ -41,7 +41,7 @@ namespace Square.Apis
 
         /// <summary>
         /// Retrieves a list of refunds for the account making the request.
-        /// Max results per page: 100
+        /// The maximum results per page is 100.
         /// </summary>
         /// <param name="beginTime">Optional parameter: Timestamp for the beginning of the requested reporting period, in RFC 3339 format.  Default: The current time minus one year.</param>
         /// <param name="endTime">Optional parameter: Timestamp for the end of the requested reporting period, in RFC 3339 format.  Default: The current time.</param>
@@ -79,14 +79,14 @@ namespace Square.Apis
         Task<Models.RefundPaymentResponse> RefundPaymentAsync(Models.RefundPaymentRequest body, CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Retrieves a specific `Refund` using the `refund_id`.
+        /// Retrieves a specific refund using the `refund_id`.
         /// </summary>
         /// <param name="refundId">Required parameter: Unique ID for the desired `PaymentRefund`.</param>
         /// <return>Returns the Models.GetPaymentRefundResponse response from the API call</return>
         Models.GetPaymentRefundResponse GetPaymentRefund(string refundId);
 
         /// <summary>
-        /// Retrieves a specific `Refund` using the `refund_id`.
+        /// Retrieves a specific refund using the `refund_id`.
         /// </summary>
         /// <param name="refundId">Required parameter: Unique ID for the desired `PaymentRefund`.</param>
         /// <return>Returns the Models.GetPaymentRefundResponse response from the API call</return>

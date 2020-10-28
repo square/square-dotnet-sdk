@@ -20,7 +20,7 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// `idempotency_key` identifying the payment to be canceled.
+        /// The `idempotency_key` identifying the payment to be canceled.
         /// </summary>
         [JsonProperty("idempotency_key")]
         public string IdempotencyKey { get; }
@@ -39,9 +39,10 @@ namespace Square.Models
             {
                 this.idempotencyKey = idempotencyKey;
             }
-            public Builder IdempotencyKey(string value)
+
+            public Builder IdempotencyKey(string idempotencyKey)
             {
-                idempotencyKey = value;
+                this.idempotencyKey = idempotencyKey;
                 return this;
             }
 

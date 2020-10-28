@@ -44,28 +44,33 @@ namespace Square.Models
         /// <summary>
         /// The Square-generated ID of the payment request in an [invoice](#type-invoice).
         /// </summary>
-        [JsonProperty("uid")]
+        [JsonProperty("uid", NullValueHandling = NullValueHandling.Ignore)]
         public string Uid { get; }
 
         /// <summary>
         /// Specifies the action for Square to take for processing the invoice. For example, 
         /// email the invoice, charge a customer's card on file, or do nothing.
         /// </summary>
-        [JsonProperty("request_method")]
+        [JsonProperty("request_method", NullValueHandling = NullValueHandling.Ignore)]
         public string RequestMethod { get; }
 
         /// <summary>
-        /// Identifies the type of the payment request. For more information, 
-        /// see [Payment request](TBD).
+        /// Indicates the type of the payment request. An invoice supports the following payment request combinations:
+        /// - 1 balance
+        /// - 1 deposit with 1 balance
+        /// - 2 - 12 installments
+        /// - 1 deposit with 2 - 12 installments
+        /// For more information, 
+        /// see [Payment requests](https://developer.squareup.com/docs/docs/invoices-api/overview#payment-requests).
         /// </summary>
-        [JsonProperty("request_type")]
+        [JsonProperty("request_type", NullValueHandling = NullValueHandling.Ignore)]
         public string RequestType { get; }
 
         /// <summary>
         /// The due date (in the invoice location's time zone) for the payment request. 
         /// After this date, the invoice becomes overdue.
         /// </summary>
-        [JsonProperty("due_date")]
+        [JsonProperty("due_date", NullValueHandling = NullValueHandling.Ignore)]
         public string DueDate { get; }
 
         /// <summary>
@@ -76,7 +81,7 @@ namespace Square.Models
         /// [Working with Monetary Amounts](https://developer.squareup.com/docs/build-basics/working-with-monetary-amounts)
         /// for more information.
         /// </summary>
-        [JsonProperty("fixed_amount_requested_money")]
+        [JsonProperty("fixed_amount_requested_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Money FixedAmountRequestedMoney { get; }
 
         /// <summary>
@@ -88,7 +93,7 @@ namespace Square.Models
         /// You cannot specify this when the payment `request_type` is `BALANCE` or when the 
         /// payment request specifies the `fixed_amount_requested_money` field.
         /// </summary>
-        [JsonProperty("percentage_requested")]
+        [JsonProperty("percentage_requested", NullValueHandling = NullValueHandling.Ignore)]
         public string PercentageRequested { get; }
 
         /// <summary>
@@ -97,20 +102,20 @@ namespace Square.Models
         /// This field is allowed only on the final payment request  
         /// and the payment `request_type` must be `BALANCE` or `INSTALLMENT`.
         /// </summary>
-        [JsonProperty("tipping_enabled")]
+        [JsonProperty("tipping_enabled", NullValueHandling = NullValueHandling.Ignore)]
         public bool? TippingEnabled { get; }
 
         /// <summary>
         /// If the request method is `CHARGE_CARD_ON_FILE`, this field provides the 
         /// card to charge.
         /// </summary>
-        [JsonProperty("card_id")]
+        [JsonProperty("card_id", NullValueHandling = NullValueHandling.Ignore)]
         public string CardId { get; }
 
         /// <summary>
         /// A list of one or more reminders to send for the payment request.
         /// </summary>
-        [JsonProperty("reminders")]
+        [JsonProperty("reminders", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.InvoicePaymentReminder> Reminders { get; }
 
         /// <summary>
@@ -121,7 +126,7 @@ namespace Square.Models
         /// [Working with Monetary Amounts](https://developer.squareup.com/docs/build-basics/working-with-monetary-amounts)
         /// for more information.
         /// </summary>
-        [JsonProperty("computed_amount_money")]
+        [JsonProperty("computed_amount_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Money ComputedAmountMoney { get; }
 
         /// <summary>
@@ -132,7 +137,7 @@ namespace Square.Models
         /// [Working with Monetary Amounts](https://developer.squareup.com/docs/build-basics/working-with-monetary-amounts)
         /// for more information.
         /// </summary>
-        [JsonProperty("total_completed_amount_money")]
+        [JsonProperty("total_completed_amount_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Money TotalCompletedAmountMoney { get; }
 
         /// <summary>
@@ -143,7 +148,7 @@ namespace Square.Models
         /// [Working with Monetary Amounts](https://developer.squareup.com/docs/build-basics/working-with-monetary-amounts)
         /// for more information.
         /// </summary>
-        [JsonProperty("rounding_adjustment_included_money")]
+        [JsonProperty("rounding_adjustment_included_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Money RoundingAdjustmentIncludedMoney { get; }
 
         public Builder ToBuilder()
@@ -174,81 +179,82 @@ namespace Square.Models
             private string percentageRequested;
             private bool? tippingEnabled;
             private string cardId;
-            private IList<Models.InvoicePaymentReminder> reminders = new List<Models.InvoicePaymentReminder>();
+            private IList<Models.InvoicePaymentReminder> reminders;
             private Models.Money computedAmountMoney;
             private Models.Money totalCompletedAmountMoney;
             private Models.Money roundingAdjustmentIncludedMoney;
 
-            public Builder() { }
-            public Builder Uid(string value)
+
+
+            public Builder Uid(string uid)
             {
-                uid = value;
+                this.uid = uid;
                 return this;
             }
 
-            public Builder RequestMethod(string value)
+            public Builder RequestMethod(string requestMethod)
             {
-                requestMethod = value;
+                this.requestMethod = requestMethod;
                 return this;
             }
 
-            public Builder RequestType(string value)
+            public Builder RequestType(string requestType)
             {
-                requestType = value;
+                this.requestType = requestType;
                 return this;
             }
 
-            public Builder DueDate(string value)
+            public Builder DueDate(string dueDate)
             {
-                dueDate = value;
+                this.dueDate = dueDate;
                 return this;
             }
 
-            public Builder FixedAmountRequestedMoney(Models.Money value)
+            public Builder FixedAmountRequestedMoney(Models.Money fixedAmountRequestedMoney)
             {
-                fixedAmountRequestedMoney = value;
+                this.fixedAmountRequestedMoney = fixedAmountRequestedMoney;
                 return this;
             }
 
-            public Builder PercentageRequested(string value)
+            public Builder PercentageRequested(string percentageRequested)
             {
-                percentageRequested = value;
+                this.percentageRequested = percentageRequested;
                 return this;
             }
 
-            public Builder TippingEnabled(bool? value)
+            public Builder TippingEnabled(bool? tippingEnabled)
             {
-                tippingEnabled = value;
+                this.tippingEnabled = tippingEnabled;
                 return this;
             }
 
-            public Builder CardId(string value)
+            public Builder CardId(string cardId)
             {
-                cardId = value;
+                this.cardId = cardId;
                 return this;
             }
 
-            public Builder Reminders(IList<Models.InvoicePaymentReminder> value)
+            public Builder Reminders(IList<Models.InvoicePaymentReminder> reminders)
             {
-                reminders = value;
+                this.reminders = reminders;
                 return this;
             }
 
-            public Builder ComputedAmountMoney(Models.Money value)
+            public Builder ComputedAmountMoney(Models.Money computedAmountMoney)
             {
-                computedAmountMoney = value;
+                this.computedAmountMoney = computedAmountMoney;
                 return this;
             }
 
-            public Builder TotalCompletedAmountMoney(Models.Money value)
+            public Builder TotalCompletedAmountMoney(Models.Money totalCompletedAmountMoney)
             {
-                totalCompletedAmountMoney = value;
+                this.totalCompletedAmountMoney = totalCompletedAmountMoney;
                 return this;
             }
 
-            public Builder RoundingAdjustmentIncludedMoney(Models.Money value)
+            public Builder RoundingAdjustmentIncludedMoney(Models.Money roundingAdjustmentIncludedMoney)
             {
-                roundingAdjustmentIncludedMoney = value;
+                this.roundingAdjustmentIncludedMoney = roundingAdjustmentIncludedMoney;
                 return this;
             }
 

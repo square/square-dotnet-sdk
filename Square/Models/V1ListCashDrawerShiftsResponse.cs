@@ -22,7 +22,7 @@ namespace Square.Models
         /// <summary>
         /// Getter for items
         /// </summary>
-        [JsonProperty("items")]
+        [JsonProperty("items", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.V1CashDrawerShift> Items { get; }
 
         public Builder ToBuilder()
@@ -34,12 +34,13 @@ namespace Square.Models
 
         public class Builder
         {
-            private IList<Models.V1CashDrawerShift> items = new List<Models.V1CashDrawerShift>();
+            private IList<Models.V1CashDrawerShift> items;
 
-            public Builder() { }
-            public Builder Items(IList<Models.V1CashDrawerShift> value)
+
+
+            public Builder Items(IList<Models.V1CashDrawerShift> items)
             {
-                items = value;
+                this.items = items;
                 return this;
             }
 

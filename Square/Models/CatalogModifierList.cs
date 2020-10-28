@@ -28,19 +28,19 @@ namespace Square.Models
         /// <summary>
         /// The name for the `CatalogModifierList` instance. This is a searchable attribute for use in applicable query filters, and its value length is of Unicode code points.
         /// </summary>
-        [JsonProperty("name")]
+        [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
         public string Name { get; }
 
         /// <summary>
         /// Determines where this modifier list appears in a list of `CatalogModifierList` values.
         /// </summary>
-        [JsonProperty("ordinal")]
+        [JsonProperty("ordinal", NullValueHandling = NullValueHandling.Ignore)]
         public int? Ordinal { get; }
 
         /// <summary>
         /// Indicates whether a CatalogModifierList supports multiple selections.
         /// </summary>
-        [JsonProperty("selection_type")]
+        [JsonProperty("selection_type", NullValueHandling = NullValueHandling.Ignore)]
         public string SelectionType { get; }
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace Square.Models
         /// Each CatalogObject must have type `MODIFIER` and contain
         /// `CatalogModifier` data.
         /// </summary>
-        [JsonProperty("modifiers")]
+        [JsonProperty("modifiers", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.CatalogObject> Modifiers { get; }
 
         public Builder ToBuilder()
@@ -67,30 +67,31 @@ namespace Square.Models
             private string name;
             private int? ordinal;
             private string selectionType;
-            private IList<Models.CatalogObject> modifiers = new List<Models.CatalogObject>();
+            private IList<Models.CatalogObject> modifiers;
 
-            public Builder() { }
-            public Builder Name(string value)
+
+
+            public Builder Name(string name)
             {
-                name = value;
+                this.name = name;
                 return this;
             }
 
-            public Builder Ordinal(int? value)
+            public Builder Ordinal(int? ordinal)
             {
-                ordinal = value;
+                this.ordinal = ordinal;
                 return this;
             }
 
-            public Builder SelectionType(string value)
+            public Builder SelectionType(string selectionType)
             {
-                selectionType = value;
+                this.selectionType = selectionType;
                 return this;
             }
 
-            public Builder Modifiers(IList<Models.CatalogObject> value)
+            public Builder Modifiers(IList<Models.CatalogObject> modifiers)
             {
-                modifiers = value;
+                this.modifiers = modifiers;
                 return this;
             }
 

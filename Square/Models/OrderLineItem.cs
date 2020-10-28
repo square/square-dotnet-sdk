@@ -54,13 +54,13 @@ namespace Square.Models
         /// <summary>
         /// Unique ID that identifies the line item only within this order.
         /// </summary>
-        [JsonProperty("uid")]
+        [JsonProperty("uid", NullValueHandling = NullValueHandling.Ignore)]
         public string Uid { get; }
 
         /// <summary>
         /// The name of the line item.
         /// </summary>
-        [JsonProperty("name")]
+        [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
         public string Name { get; }
 
         /// <summary>
@@ -78,25 +78,25 @@ namespace Square.Models
         /// Contains the measurement unit for a quantity and a precision which
         /// specifies the number of digits after the decimal point for decimal quantities.
         /// </summary>
-        [JsonProperty("quantity_unit")]
+        [JsonProperty("quantity_unit", NullValueHandling = NullValueHandling.Ignore)]
         public Models.OrderQuantityUnit QuantityUnit { get; }
 
         /// <summary>
         /// The note of the line item.
         /// </summary>
-        [JsonProperty("note")]
+        [JsonProperty("note", NullValueHandling = NullValueHandling.Ignore)]
         public string Note { get; }
 
         /// <summary>
         /// The [CatalogItemVariation](#type-catalogitemvariation) id applied to this line item.
         /// </summary>
-        [JsonProperty("catalog_object_id")]
+        [JsonProperty("catalog_object_id", NullValueHandling = NullValueHandling.Ignore)]
         public string CatalogObjectId { get; }
 
         /// <summary>
         /// The name of the variation applied to this line item.
         /// </summary>
-        [JsonProperty("variation_name")]
+        [JsonProperty("variation_name", NullValueHandling = NullValueHandling.Ignore)]
         public string VariationName { get; }
 
         /// <summary>
@@ -114,13 +114,13 @@ namespace Square.Models
         /// application.
         /// See [Metadata](https://developer.squareup.com/docs/build-basics/metadata) for more information.
         /// </summary>
-        [JsonProperty("metadata")]
+        [JsonProperty("metadata", NullValueHandling = NullValueHandling.Ignore)]
         public IDictionary<string, string> Metadata { get; }
 
         /// <summary>
         /// The [CatalogModifier](#type-catalogmodifier)s applied to this line item.
         /// </summary>
-        [JsonProperty("modifiers")]
+        [JsonProperty("modifiers", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.OrderLineItemModifier> Modifiers { get; }
 
         /// <summary>
@@ -134,7 +134,7 @@ namespace Square.Models
         /// to apply to any line items.
         /// To change the amount of a tax, modify the referenced top-level tax.
         /// </summary>
-        [JsonProperty("applied_taxes")]
+        [JsonProperty("applied_taxes", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.OrderLineItemAppliedTax> AppliedTaxes { get; }
 
         /// <summary>
@@ -148,7 +148,7 @@ namespace Square.Models
         /// line items.
         /// To change the amount of a discount, modify the referenced top-level discount.
         /// </summary>
-        [JsonProperty("applied_discounts")]
+        [JsonProperty("applied_discounts", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.OrderLineItemAppliedDiscount> AppliedDiscounts { get; }
 
         /// <summary>
@@ -159,7 +159,7 @@ namespace Square.Models
         /// [Working with Monetary Amounts](https://developer.squareup.com/docs/build-basics/working-with-monetary-amounts)
         /// for more information.
         /// </summary>
-        [JsonProperty("base_price_money")]
+        [JsonProperty("base_price_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Money BasePriceMoney { get; }
 
         /// <summary>
@@ -170,7 +170,7 @@ namespace Square.Models
         /// [Working with Monetary Amounts](https://developer.squareup.com/docs/build-basics/working-with-monetary-amounts)
         /// for more information.
         /// </summary>
-        [JsonProperty("variation_total_price_money")]
+        [JsonProperty("variation_total_price_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Money VariationTotalPriceMoney { get; }
 
         /// <summary>
@@ -181,7 +181,7 @@ namespace Square.Models
         /// [Working with Monetary Amounts](https://developer.squareup.com/docs/build-basics/working-with-monetary-amounts)
         /// for more information.
         /// </summary>
-        [JsonProperty("gross_sales_money")]
+        [JsonProperty("gross_sales_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Money GrossSalesMoney { get; }
 
         /// <summary>
@@ -192,7 +192,7 @@ namespace Square.Models
         /// [Working with Monetary Amounts](https://developer.squareup.com/docs/build-basics/working-with-monetary-amounts)
         /// for more information.
         /// </summary>
-        [JsonProperty("total_tax_money")]
+        [JsonProperty("total_tax_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Money TotalTaxMoney { get; }
 
         /// <summary>
@@ -203,7 +203,7 @@ namespace Square.Models
         /// [Working with Monetary Amounts](https://developer.squareup.com/docs/build-basics/working-with-monetary-amounts)
         /// for more information.
         /// </summary>
-        [JsonProperty("total_discount_money")]
+        [JsonProperty("total_discount_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Money TotalDiscountMoney { get; }
 
         /// <summary>
@@ -214,7 +214,7 @@ namespace Square.Models
         /// [Working with Monetary Amounts](https://developer.squareup.com/docs/build-basics/working-with-monetary-amounts)
         /// for more information.
         /// </summary>
-        [JsonProperty("total_money")]
+        [JsonProperty("total_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Money TotalMoney { get; }
 
         public Builder ToBuilder()
@@ -248,10 +248,10 @@ namespace Square.Models
             private string note;
             private string catalogObjectId;
             private string variationName;
-            private IDictionary<string, string> metadata = new Dictionary<string, string>();
-            private IList<Models.OrderLineItemModifier> modifiers = new List<Models.OrderLineItemModifier>();
-            private IList<Models.OrderLineItemAppliedTax> appliedTaxes = new List<Models.OrderLineItemAppliedTax>();
-            private IList<Models.OrderLineItemAppliedDiscount> appliedDiscounts = new List<Models.OrderLineItemAppliedDiscount>();
+            private IDictionary<string, string> metadata;
+            private IList<Models.OrderLineItemModifier> modifiers;
+            private IList<Models.OrderLineItemAppliedTax> appliedTaxes;
+            private IList<Models.OrderLineItemAppliedDiscount> appliedDiscounts;
             private Models.Money basePriceMoney;
             private Models.Money variationTotalPriceMoney;
             private Models.Money grossSalesMoney;
@@ -263,105 +263,106 @@ namespace Square.Models
             {
                 this.quantity = quantity;
             }
-            public Builder Quantity(string value)
+
+            public Builder Quantity(string quantity)
             {
-                quantity = value;
+                this.quantity = quantity;
                 return this;
             }
 
-            public Builder Uid(string value)
+            public Builder Uid(string uid)
             {
-                uid = value;
+                this.uid = uid;
                 return this;
             }
 
-            public Builder Name(string value)
+            public Builder Name(string name)
             {
-                name = value;
+                this.name = name;
                 return this;
             }
 
-            public Builder QuantityUnit(Models.OrderQuantityUnit value)
+            public Builder QuantityUnit(Models.OrderQuantityUnit quantityUnit)
             {
-                quantityUnit = value;
+                this.quantityUnit = quantityUnit;
                 return this;
             }
 
-            public Builder Note(string value)
+            public Builder Note(string note)
             {
-                note = value;
+                this.note = note;
                 return this;
             }
 
-            public Builder CatalogObjectId(string value)
+            public Builder CatalogObjectId(string catalogObjectId)
             {
-                catalogObjectId = value;
+                this.catalogObjectId = catalogObjectId;
                 return this;
             }
 
-            public Builder VariationName(string value)
+            public Builder VariationName(string variationName)
             {
-                variationName = value;
+                this.variationName = variationName;
                 return this;
             }
 
-            public Builder Metadata(IDictionary<string, string> value)
+            public Builder Metadata(IDictionary<string, string> metadata)
             {
-                metadata = value;
+                this.metadata = metadata;
                 return this;
             }
 
-            public Builder Modifiers(IList<Models.OrderLineItemModifier> value)
+            public Builder Modifiers(IList<Models.OrderLineItemModifier> modifiers)
             {
-                modifiers = value;
+                this.modifiers = modifiers;
                 return this;
             }
 
-            public Builder AppliedTaxes(IList<Models.OrderLineItemAppliedTax> value)
+            public Builder AppliedTaxes(IList<Models.OrderLineItemAppliedTax> appliedTaxes)
             {
-                appliedTaxes = value;
+                this.appliedTaxes = appliedTaxes;
                 return this;
             }
 
-            public Builder AppliedDiscounts(IList<Models.OrderLineItemAppliedDiscount> value)
+            public Builder AppliedDiscounts(IList<Models.OrderLineItemAppliedDiscount> appliedDiscounts)
             {
-                appliedDiscounts = value;
+                this.appliedDiscounts = appliedDiscounts;
                 return this;
             }
 
-            public Builder BasePriceMoney(Models.Money value)
+            public Builder BasePriceMoney(Models.Money basePriceMoney)
             {
-                basePriceMoney = value;
+                this.basePriceMoney = basePriceMoney;
                 return this;
             }
 
-            public Builder VariationTotalPriceMoney(Models.Money value)
+            public Builder VariationTotalPriceMoney(Models.Money variationTotalPriceMoney)
             {
-                variationTotalPriceMoney = value;
+                this.variationTotalPriceMoney = variationTotalPriceMoney;
                 return this;
             }
 
-            public Builder GrossSalesMoney(Models.Money value)
+            public Builder GrossSalesMoney(Models.Money grossSalesMoney)
             {
-                grossSalesMoney = value;
+                this.grossSalesMoney = grossSalesMoney;
                 return this;
             }
 
-            public Builder TotalTaxMoney(Models.Money value)
+            public Builder TotalTaxMoney(Models.Money totalTaxMoney)
             {
-                totalTaxMoney = value;
+                this.totalTaxMoney = totalTaxMoney;
                 return this;
             }
 
-            public Builder TotalDiscountMoney(Models.Money value)
+            public Builder TotalDiscountMoney(Models.Money totalDiscountMoney)
             {
-                totalDiscountMoney = value;
+                this.totalDiscountMoney = totalDiscountMoney;
                 return this;
             }
 
-            public Builder TotalMoney(Models.Money value)
+            public Builder TotalMoney(Models.Money totalMoney)
             {
-                totalMoney = value;
+                this.totalMoney = totalMoney;
                 return this;
             }
 

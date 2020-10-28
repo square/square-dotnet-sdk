@@ -58,119 +58,119 @@ namespace Square.Models
         /// <summary>
         /// A unique Square-assigned ID for the customer profile.
         /// </summary>
-        [JsonProperty("id")]
+        [JsonProperty("id", NullValueHandling = NullValueHandling.Ignore)]
         public string Id { get; }
 
         /// <summary>
         /// The timestamp when the customer profile was created, in RFC 3339 format.
         /// </summary>
-        [JsonProperty("created_at")]
+        [JsonProperty("created_at", NullValueHandling = NullValueHandling.Ignore)]
         public string CreatedAt { get; }
 
         /// <summary>
         /// The timestamp when the customer profile was last updated, in RFC 3339 format.
         /// </summary>
-        [JsonProperty("updated_at")]
+        [JsonProperty("updated_at", NullValueHandling = NullValueHandling.Ignore)]
         public string UpdatedAt { get; }
 
         /// <summary>
         /// Payment details of cards stored on file for the customer profile.
         /// </summary>
-        [JsonProperty("cards")]
+        [JsonProperty("cards", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.Card> Cards { get; }
 
         /// <summary>
         /// The given (i.e., first) name associated with the customer profile.
         /// </summary>
-        [JsonProperty("given_name")]
+        [JsonProperty("given_name", NullValueHandling = NullValueHandling.Ignore)]
         public string GivenName { get; }
 
         /// <summary>
         /// The family (i.e., last) name associated with the customer profile.
         /// </summary>
-        [JsonProperty("family_name")]
+        [JsonProperty("family_name", NullValueHandling = NullValueHandling.Ignore)]
         public string FamilyName { get; }
 
         /// <summary>
         /// A nickname for the customer profile.
         /// </summary>
-        [JsonProperty("nickname")]
+        [JsonProperty("nickname", NullValueHandling = NullValueHandling.Ignore)]
         public string Nickname { get; }
 
         /// <summary>
         /// A business name associated with the customer profile.
         /// </summary>
-        [JsonProperty("company_name")]
+        [JsonProperty("company_name", NullValueHandling = NullValueHandling.Ignore)]
         public string CompanyName { get; }
 
         /// <summary>
         /// The email address associated with the customer profile.
         /// </summary>
-        [JsonProperty("email_address")]
+        [JsonProperty("email_address", NullValueHandling = NullValueHandling.Ignore)]
         public string EmailAddress { get; }
 
         /// <summary>
         /// Represents a physical address.
         /// </summary>
-        [JsonProperty("address")]
+        [JsonProperty("address", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Address Address { get; }
 
         /// <summary>
         /// The 11-digit phone number associated with the customer profile.
         /// </summary>
-        [JsonProperty("phone_number")]
+        [JsonProperty("phone_number", NullValueHandling = NullValueHandling.Ignore)]
         public string PhoneNumber { get; }
 
         /// <summary>
-        /// The birthday associated with the customer profile, in RFC-3339 format.
+        /// The birthday associated with the customer profile, in RFC 3339 format.
         /// Year is optional, timezone and times are not allowed.
         /// For example: `0000-09-01T00:00:00-00:00` indicates a birthday on September 1st.
         /// `1998-09-01T00:00:00-00:00` indications a birthday on September 1st __1998__.
         /// </summary>
-        [JsonProperty("birthday")]
+        [JsonProperty("birthday", NullValueHandling = NullValueHandling.Ignore)]
         public string Birthday { get; }
 
         /// <summary>
         /// An optional, second ID used to associate the customer profile with an
         /// entity in another system.
         /// </summary>
-        [JsonProperty("reference_id")]
+        [JsonProperty("reference_id", NullValueHandling = NullValueHandling.Ignore)]
         public string ReferenceId { get; }
 
         /// <summary>
         /// A custom note associated with the customer profile.
         /// </summary>
-        [JsonProperty("note")]
+        [JsonProperty("note", NullValueHandling = NullValueHandling.Ignore)]
         public string Note { get; }
 
         /// <summary>
         /// Represents communication preferences for the customer profile.
         /// </summary>
-        [JsonProperty("preferences")]
+        [JsonProperty("preferences", NullValueHandling = NullValueHandling.Ignore)]
         public Models.CustomerPreferences Preferences { get; }
 
         /// <summary>
         /// The customer groups and segments the customer belongs to. This deprecated field has been replaced with  the dedicated `group_ids` for customer groups and the dedicated `segment_ids` field for customer segments. You can retrieve information about a given customer group and segment respectively using the Customer Groups API and Customer Segments API.
         /// </summary>
-        [JsonProperty("groups")]
+        [JsonProperty("groups", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.CustomerGroupInfo> Groups { get; }
 
         /// <summary>
         /// Indicates the method used to create the customer profile.
         /// </summary>
-        [JsonProperty("creation_source")]
+        [JsonProperty("creation_source", NullValueHandling = NullValueHandling.Ignore)]
         public string CreationSource { get; }
 
         /// <summary>
         /// The IDs of customer groups the customer belongs to.
         /// </summary>
-        [JsonProperty("group_ids")]
+        [JsonProperty("group_ids", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> GroupIds { get; }
 
         /// <summary>
         /// The IDs of segments the customer belongs to.
         /// </summary>
-        [JsonProperty("segment_ids")]
+        [JsonProperty("segment_ids", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> SegmentIds { get; }
 
         public Builder ToBuilder()
@@ -203,7 +203,7 @@ namespace Square.Models
             private string id;
             private string createdAt;
             private string updatedAt;
-            private IList<Models.Card> cards = new List<Models.Card>();
+            private IList<Models.Card> cards;
             private string givenName;
             private string familyName;
             private string nickname;
@@ -215,123 +215,124 @@ namespace Square.Models
             private string referenceId;
             private string note;
             private Models.CustomerPreferences preferences;
-            private IList<Models.CustomerGroupInfo> groups = new List<Models.CustomerGroupInfo>();
+            private IList<Models.CustomerGroupInfo> groups;
             private string creationSource;
-            private IList<string> groupIds = new List<string>();
-            private IList<string> segmentIds = new List<string>();
+            private IList<string> groupIds;
+            private IList<string> segmentIds;
 
-            public Builder() { }
-            public Builder Id(string value)
+
+
+            public Builder Id(string id)
             {
-                id = value;
+                this.id = id;
                 return this;
             }
 
-            public Builder CreatedAt(string value)
+            public Builder CreatedAt(string createdAt)
             {
-                createdAt = value;
+                this.createdAt = createdAt;
                 return this;
             }
 
-            public Builder UpdatedAt(string value)
+            public Builder UpdatedAt(string updatedAt)
             {
-                updatedAt = value;
+                this.updatedAt = updatedAt;
                 return this;
             }
 
-            public Builder Cards(IList<Models.Card> value)
+            public Builder Cards(IList<Models.Card> cards)
             {
-                cards = value;
+                this.cards = cards;
                 return this;
             }
 
-            public Builder GivenName(string value)
+            public Builder GivenName(string givenName)
             {
-                givenName = value;
+                this.givenName = givenName;
                 return this;
             }
 
-            public Builder FamilyName(string value)
+            public Builder FamilyName(string familyName)
             {
-                familyName = value;
+                this.familyName = familyName;
                 return this;
             }
 
-            public Builder Nickname(string value)
+            public Builder Nickname(string nickname)
             {
-                nickname = value;
+                this.nickname = nickname;
                 return this;
             }
 
-            public Builder CompanyName(string value)
+            public Builder CompanyName(string companyName)
             {
-                companyName = value;
+                this.companyName = companyName;
                 return this;
             }
 
-            public Builder EmailAddress(string value)
+            public Builder EmailAddress(string emailAddress)
             {
-                emailAddress = value;
+                this.emailAddress = emailAddress;
                 return this;
             }
 
-            public Builder Address(Models.Address value)
+            public Builder Address(Models.Address address)
             {
-                address = value;
+                this.address = address;
                 return this;
             }
 
-            public Builder PhoneNumber(string value)
+            public Builder PhoneNumber(string phoneNumber)
             {
-                phoneNumber = value;
+                this.phoneNumber = phoneNumber;
                 return this;
             }
 
-            public Builder Birthday(string value)
+            public Builder Birthday(string birthday)
             {
-                birthday = value;
+                this.birthday = birthday;
                 return this;
             }
 
-            public Builder ReferenceId(string value)
+            public Builder ReferenceId(string referenceId)
             {
-                referenceId = value;
+                this.referenceId = referenceId;
                 return this;
             }
 
-            public Builder Note(string value)
+            public Builder Note(string note)
             {
-                note = value;
+                this.note = note;
                 return this;
             }
 
-            public Builder Preferences(Models.CustomerPreferences value)
+            public Builder Preferences(Models.CustomerPreferences preferences)
             {
-                preferences = value;
+                this.preferences = preferences;
                 return this;
             }
 
-            public Builder Groups(IList<Models.CustomerGroupInfo> value)
+            public Builder Groups(IList<Models.CustomerGroupInfo> groups)
             {
-                groups = value;
+                this.groups = groups;
                 return this;
             }
 
-            public Builder CreationSource(string value)
+            public Builder CreationSource(string creationSource)
             {
-                creationSource = value;
+                this.creationSource = creationSource;
                 return this;
             }
 
-            public Builder GroupIds(IList<string> value)
+            public Builder GroupIds(IList<string> groupIds)
             {
-                groupIds = value;
+                this.groupIds = groupIds;
                 return this;
             }
 
-            public Builder SegmentIds(IList<string> value)
+            public Builder SegmentIds(IList<string> segmentIds)
             {
-                segmentIds = value;
+                this.segmentIds = segmentIds;
                 return this;
             }
 

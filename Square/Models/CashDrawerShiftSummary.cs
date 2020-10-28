@@ -38,37 +38,37 @@ namespace Square.Models
         /// <summary>
         /// The shift unique ID.
         /// </summary>
-        [JsonProperty("id")]
+        [JsonProperty("id", NullValueHandling = NullValueHandling.Ignore)]
         public string Id { get; }
 
         /// <summary>
         /// The current state of a cash drawer shift.
         /// </summary>
-        [JsonProperty("state")]
+        [JsonProperty("state", NullValueHandling = NullValueHandling.Ignore)]
         public string State { get; }
 
         /// <summary>
         /// The shift start time in ISO 8601 format.
         /// </summary>
-        [JsonProperty("opened_at")]
+        [JsonProperty("opened_at", NullValueHandling = NullValueHandling.Ignore)]
         public string OpenedAt { get; }
 
         /// <summary>
         /// The shift end time in ISO 8601 format.
         /// </summary>
-        [JsonProperty("ended_at")]
+        [JsonProperty("ended_at", NullValueHandling = NullValueHandling.Ignore)]
         public string EndedAt { get; }
 
         /// <summary>
         /// The shift close time in ISO 8601 format.
         /// </summary>
-        [JsonProperty("closed_at")]
+        [JsonProperty("closed_at", NullValueHandling = NullValueHandling.Ignore)]
         public string ClosedAt { get; }
 
         /// <summary>
         /// An employee free-text description of a cash drawer shift.
         /// </summary>
-        [JsonProperty("description")]
+        [JsonProperty("description", NullValueHandling = NullValueHandling.Ignore)]
         public string Description { get; }
 
         /// <summary>
@@ -79,7 +79,7 @@ namespace Square.Models
         /// [Working with Monetary Amounts](https://developer.squareup.com/docs/build-basics/working-with-monetary-amounts)
         /// for more information.
         /// </summary>
-        [JsonProperty("opened_cash_money")]
+        [JsonProperty("opened_cash_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Money OpenedCashMoney { get; }
 
         /// <summary>
@@ -90,7 +90,7 @@ namespace Square.Models
         /// [Working with Monetary Amounts](https://developer.squareup.com/docs/build-basics/working-with-monetary-amounts)
         /// for more information.
         /// </summary>
-        [JsonProperty("expected_cash_money")]
+        [JsonProperty("expected_cash_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Money ExpectedCashMoney { get; }
 
         /// <summary>
@@ -101,7 +101,7 @@ namespace Square.Models
         /// [Working with Monetary Amounts](https://developer.squareup.com/docs/build-basics/working-with-monetary-amounts)
         /// for more information.
         /// </summary>
-        [JsonProperty("closed_cash_money")]
+        [JsonProperty("closed_cash_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Money ClosedCashMoney { get; }
 
         public Builder ToBuilder()
@@ -131,58 +131,59 @@ namespace Square.Models
             private Models.Money expectedCashMoney;
             private Models.Money closedCashMoney;
 
-            public Builder() { }
-            public Builder Id(string value)
+
+
+            public Builder Id(string id)
             {
-                id = value;
+                this.id = id;
                 return this;
             }
 
-            public Builder State(string value)
+            public Builder State(string state)
             {
-                state = value;
+                this.state = state;
                 return this;
             }
 
-            public Builder OpenedAt(string value)
+            public Builder OpenedAt(string openedAt)
             {
-                openedAt = value;
+                this.openedAt = openedAt;
                 return this;
             }
 
-            public Builder EndedAt(string value)
+            public Builder EndedAt(string endedAt)
             {
-                endedAt = value;
+                this.endedAt = endedAt;
                 return this;
             }
 
-            public Builder ClosedAt(string value)
+            public Builder ClosedAt(string closedAt)
             {
-                closedAt = value;
+                this.closedAt = closedAt;
                 return this;
             }
 
-            public Builder Description(string value)
+            public Builder Description(string description)
             {
-                description = value;
+                this.description = description;
                 return this;
             }
 
-            public Builder OpenedCashMoney(Models.Money value)
+            public Builder OpenedCashMoney(Models.Money openedCashMoney)
             {
-                openedCashMoney = value;
+                this.openedCashMoney = openedCashMoney;
                 return this;
             }
 
-            public Builder ExpectedCashMoney(Models.Money value)
+            public Builder ExpectedCashMoney(Models.Money expectedCashMoney)
             {
-                expectedCashMoney = value;
+                this.expectedCashMoney = expectedCashMoney;
                 return this;
             }
 
-            public Builder ClosedCashMoney(Models.Money value)
+            public Builder ClosedCashMoney(Models.Money closedCashMoney)
             {
-                closedCashMoney = value;
+                this.closedCashMoney = closedCashMoney;
                 return this;
             }
 

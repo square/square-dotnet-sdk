@@ -41,9 +41,10 @@ namespace Square.Models
             {
                 this.shift = shift;
             }
-            public Builder Shift(Models.Shift value)
+
+            public Builder Shift(Models.Shift shift)
             {
-                shift = value;
+                this.shift = shift;
                 return this;
             }
 

@@ -28,7 +28,7 @@ namespace Square.Models
         /// <summary>
         /// Indicates how the inventory change was applied to a tracked quantity of items.
         /// </summary>
-        [JsonProperty("type")]
+        [JsonProperty("type", NullValueHandling = NullValueHandling.Ignore)]
         public string Type { get; }
 
         /// <summary>
@@ -37,21 +37,21 @@ namespace Square.Models
         /// a physical count might come from an employee counting the item variations on
         /// hand or from syncing with an external system.
         /// </summary>
-        [JsonProperty("physical_count")]
+        [JsonProperty("physical_count", NullValueHandling = NullValueHandling.Ignore)]
         public Models.InventoryPhysicalCount PhysicalCount { get; }
 
         /// <summary>
         /// Represents a change in state or quantity of product inventory at a
         /// particular time and location.
         /// </summary>
-        [JsonProperty("adjustment")]
+        [JsonProperty("adjustment", NullValueHandling = NullValueHandling.Ignore)]
         public Models.InventoryAdjustment Adjustment { get; }
 
         /// <summary>
         /// Represents the transfer of a quantity of product inventory at a
         /// particular time from one location to another.
         /// </summary>
-        [JsonProperty("transfer")]
+        [JsonProperty("transfer", NullValueHandling = NullValueHandling.Ignore)]
         public Models.InventoryTransfer Transfer { get; }
 
         public Builder ToBuilder()
@@ -71,28 +71,29 @@ namespace Square.Models
             private Models.InventoryAdjustment adjustment;
             private Models.InventoryTransfer transfer;
 
-            public Builder() { }
-            public Builder Type(string value)
+
+
+            public Builder Type(string type)
             {
-                type = value;
+                this.type = type;
                 return this;
             }
 
-            public Builder PhysicalCount(Models.InventoryPhysicalCount value)
+            public Builder PhysicalCount(Models.InventoryPhysicalCount physicalCount)
             {
-                physicalCount = value;
+                this.physicalCount = physicalCount;
                 return this;
             }
 
-            public Builder Adjustment(Models.InventoryAdjustment value)
+            public Builder Adjustment(Models.InventoryAdjustment adjustment)
             {
-                adjustment = value;
+                this.adjustment = adjustment;
                 return this;
             }
 
-            public Builder Transfer(Models.InventoryTransfer value)
+            public Builder Transfer(Models.InventoryTransfer transfer)
             {
-                transfer = value;
+                this.transfer = transfer;
                 return this;
             }
 

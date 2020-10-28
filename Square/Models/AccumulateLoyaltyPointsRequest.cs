@@ -64,21 +64,22 @@ namespace Square.Models
                 this.idempotencyKey = idempotencyKey;
                 this.locationId = locationId;
             }
-            public Builder AccumulatePoints(Models.LoyaltyEventAccumulatePoints value)
+
+            public Builder AccumulatePoints(Models.LoyaltyEventAccumulatePoints accumulatePoints)
             {
-                accumulatePoints = value;
+                this.accumulatePoints = accumulatePoints;
                 return this;
             }
 
-            public Builder IdempotencyKey(string value)
+            public Builder IdempotencyKey(string idempotencyKey)
             {
-                idempotencyKey = value;
+                this.idempotencyKey = idempotencyKey;
                 return this;
             }
 
-            public Builder LocationId(string value)
+            public Builder LocationId(string locationId)
             {
-                locationId = value;
+                this.locationId = locationId;
                 return this;
             }
 

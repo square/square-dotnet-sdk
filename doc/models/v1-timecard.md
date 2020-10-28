@@ -1,12 +1,13 @@
-## V1 Timecard
+
+# V1 Timecard
 
 Represents a timecard for an employee.
 
-### Structure
+## Structure
 
 `V1Timecard`
 
-### Fields
+## Fields
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
@@ -23,7 +24,7 @@ Represents a timecard for an employee.
 | `OvertimeSecondsWorked` | `double?` | Optional | The total number of overtime seconds worked in the timecard. |
 | `DoubletimeSecondsWorked` | `double?` | Optional | The total number of doubletime seconds worked in the timecard. |
 
-### Example (as JSON)
+## Example (as JSON)
 
 ```json
 {

@@ -53,15 +53,16 @@ namespace Square.Models
                 this.idempotencyKey = idempotencyKey;
                 this.deviceCode = deviceCode;
             }
-            public Builder IdempotencyKey(string value)
+
+            public Builder IdempotencyKey(string idempotencyKey)
             {
-                idempotencyKey = value;
+                this.idempotencyKey = idempotencyKey;
                 return this;
             }
 
-            public Builder DeviceCode(Models.DeviceCode value)
+            public Builder DeviceCode(Models.DeviceCode deviceCode)
             {
-                deviceCode = value;
+                this.deviceCode = deviceCode;
                 return this;
             }
 

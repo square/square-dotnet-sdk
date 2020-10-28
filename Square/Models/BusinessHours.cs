@@ -23,7 +23,7 @@ namespace Square.Models
         /// The list of time periods during which the business is open. There may be at most 10
         /// periods per day.
         /// </summary>
-        [JsonProperty("periods")]
+        [JsonProperty("periods", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.BusinessHoursPeriod> Periods { get; }
 
         public Builder ToBuilder()
@@ -35,12 +35,13 @@ namespace Square.Models
 
         public class Builder
         {
-            private IList<Models.BusinessHoursPeriod> periods = new List<Models.BusinessHoursPeriod>();
+            private IList<Models.BusinessHoursPeriod> periods;
 
-            public Builder() { }
-            public Builder Periods(IList<Models.BusinessHoursPeriod> value)
+
+
+            public Builder Periods(IList<Models.BusinessHoursPeriod> periods)
             {
-                periods = value;
+                this.periods = periods;
                 return this;
             }
 

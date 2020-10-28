@@ -1,16 +1,17 @@
-## V1 Update Modifier Option Request
 
-### Structure
+# V1 Update Modifier Option Request
+
+## Structure
 
 `V1UpdateModifierOptionRequest`
 
-### Fields
+## Fields
 
 | Name | Type | Description |
 |  --- | --- | --- |
 | `Body` | [`Models.V1ModifierOption`](/doc/models/v1-modifier-option.md) | V1ModifierOption |
 
-### Example (as JSON)
+## Example (as JSON)
 
 ```json
 {

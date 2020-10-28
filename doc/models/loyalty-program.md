@@ -1,14 +1,15 @@
-## Loyalty Program
 
-### Structure
+# Loyalty Program
+
+## Structure
 
 `LoyaltyProgram`
 
-### Fields
+## Fields
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `Id` | `string` |  | The Square-assigned ID of the loyalty program. Updates to <br>the loyalty program do not modify the identifier. |
+| `Id` | `string` |  | The Square-assigned ID of the loyalty program. Updates to<br>the loyalty program do not modify the identifier. |
 | `Status` | [`string`](/doc/models/loyalty-program-status.md) |  | Whether the program is currently active. |
 | `RewardTiers` | [`IList<Models.LoyaltyProgramRewardTier>`](/doc/models/loyalty-program-reward-tier.md) |  | The list of rewards for buyers, sorted by ascending points. |
 | `ExpirationPolicy` | [`Models.LoyaltyProgramExpirationPolicy`](/doc/models/loyalty-program-expiration-policy.md) | Optional | Describes when the loyalty program expires. |
@@ -18,7 +19,7 @@
 | `UpdatedAt` | `string` |  | The timestamp when the reward was last updated, in RFC 3339 format. |
 | `AccrualRules` | [`IList<Models.LoyaltyProgramAccrualRule>`](/doc/models/loyalty-program-accrual-rule.md) |  | Defines how buyers can earn loyalty points. |
 
-### Example (as JSON)
+## Example (as JSON)
 
 ```json
 {

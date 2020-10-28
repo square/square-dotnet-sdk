@@ -24,7 +24,7 @@ namespace Square.Models
         /// <summary>
         /// Unique string value to insure idempotency of the operation
         /// </summary>
-        [JsonProperty("idempotency_key")]
+        [JsonProperty("idempotency_key", NullValueHandling = NullValueHandling.Ignore)]
         public string IdempotencyKey { get; }
 
         /// <summary>
@@ -50,15 +50,16 @@ namespace Square.Models
             {
                 this.breakType = breakType;
             }
-            public Builder BreakType(Models.BreakType value)
+
+            public Builder BreakType(Models.BreakType breakType)
             {
-                breakType = value;
+                this.breakType = breakType;
                 return this;
             }
 
-            public Builder IdempotencyKey(string value)
+            public Builder IdempotencyKey(string idempotencyKey)
             {
-                idempotencyKey = value;
+                this.idempotencyKey = idempotencyKey;
                 return this;
             }
 

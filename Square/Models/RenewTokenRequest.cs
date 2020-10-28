@@ -22,7 +22,7 @@ namespace Square.Models
         /// <summary>
         /// The token you want to renew.
         /// </summary>
-        [JsonProperty("access_token")]
+        [JsonProperty("access_token", NullValueHandling = NullValueHandling.Ignore)]
         public string AccessToken { get; }
 
         public Builder ToBuilder()
@@ -36,10 +36,11 @@ namespace Square.Models
         {
             private string accessToken;
 
-            public Builder() { }
-            public Builder AccessToken(string value)
+
+
+            public Builder AccessToken(string accessToken)
             {
-                accessToken = value;
+                this.accessToken = accessToken;
                 return this;
             }
 

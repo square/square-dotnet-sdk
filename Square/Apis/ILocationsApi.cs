@@ -18,7 +18,7 @@ namespace Square.Apis
     {
         /// <summary>
         /// Provides information of all locations of a business.
-        /// Most other Connect API endpoints have a required `location_id` path parameter.
+        /// Many Square API endpoints require a `location_id` parameter.
         /// The `id` field of the [`Location`](#type-location) objects returned by this
         /// endpoint correspond to that `location_id` parameter.
         /// </summary>
@@ -27,7 +27,7 @@ namespace Square.Apis
 
         /// <summary>
         /// Provides information of all locations of a business.
-        /// Most other Connect API endpoints have a required `location_id` path parameter.
+        /// Many Square API endpoints require a `location_id` parameter.
         /// The `id` field of the [`Location`](#type-location) objects returned by this
         /// endpoint correspond to that `location_id` parameter.
         /// </summary>
@@ -36,7 +36,6 @@ namespace Square.Apis
 
         /// <summary>
         /// Creates a location.
-        /// For more information about locations, see [Locations API Overview](https://developer.squareup.com/docs/locations-api).
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.CreateLocationResponse response from the API call</return>
@@ -44,7 +43,6 @@ namespace Square.Apis
 
         /// <summary>
         /// Creates a location.
-        /// For more information about locations, see [Locations API Overview](https://developer.squareup.com/docs/locations-api).
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.CreateLocationResponse response from the API call</return>
@@ -53,8 +51,7 @@ namespace Square.Apis
         /// <summary>
         /// Retrieves details of a location. You can specify "main" 
         /// as the location ID to retrieve details of the 
-        /// main location. For more information, 
-        /// see [Locations API Overview](https://developer.squareup.com/docs/docs/locations-api).
+        /// main location.
         /// </summary>
         /// <param name="locationId">Required parameter: The ID of the location to retrieve. If you specify the string "main", then the endpoint returns the main location.</param>
         /// <return>Returns the Models.RetrieveLocationResponse response from the API call</return>
@@ -63,8 +60,7 @@ namespace Square.Apis
         /// <summary>
         /// Retrieves details of a location. You can specify "main" 
         /// as the location ID to retrieve details of the 
-        /// main location. For more information, 
-        /// see [Locations API Overview](https://developer.squareup.com/docs/docs/locations-api).
+        /// main location.
         /// </summary>
         /// <param name="locationId">Required parameter: The ID of the location to retrieve. If you specify the string "main", then the endpoint returns the main location.</param>
         /// <return>Returns the Models.RetrieveLocationResponse response from the API call</return>

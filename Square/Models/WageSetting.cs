@@ -32,7 +32,7 @@ namespace Square.Models
         /// <summary>
         /// The unique ID of the `TeamMember` whom this wage setting describes.
         /// </summary>
-        [JsonProperty("team_member_id")]
+        [JsonProperty("team_member_id", NullValueHandling = NullValueHandling.Ignore)]
         public string TeamMemberId { get; }
 
         /// <summary>
@@ -41,13 +41,13 @@ namespace Square.Models
         /// <br>
         /// <b>Min Length 1    Max Length 12</b>
         /// </summary>
-        [JsonProperty("job_assignments")]
+        [JsonProperty("job_assignments", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.JobAssignment> JobAssignments { get; }
 
         /// <summary>
         /// Whether the team member is exempt from the overtime rules of the seller country.
         /// </summary>
-        [JsonProperty("is_overtime_exempt")]
+        [JsonProperty("is_overtime_exempt", NullValueHandling = NullValueHandling.Ignore)]
         public bool? IsOvertimeExempt { get; }
 
         /// <summary>
@@ -57,21 +57,21 @@ namespace Square.Models
         /// about [optimistic concurrency](https://developer.squareup.com/docs/docs/working-with-apis/optimistic-concurrency)
         /// in Square APIs for more information.
         /// </summary>
-        [JsonProperty("version")]
+        [JsonProperty("version", NullValueHandling = NullValueHandling.Ignore)]
         public int? Version { get; }
 
         /// <summary>
         /// The timestamp in RFC 3339 format describing when the wage setting object was created.
         /// Ex: "2018-10-04T04:00:00-07:00" or "2019-02-05T12:00:00Z"
         /// </summary>
-        [JsonProperty("created_at")]
+        [JsonProperty("created_at", NullValueHandling = NullValueHandling.Ignore)]
         public string CreatedAt { get; }
 
         /// <summary>
         /// The timestamp in RFC 3339 format describing when the wage setting object was last updated.
         /// Ex: "2018-10-04T04:00:00-07:00" or "2019-02-05T12:00:00Z"
         /// </summary>
-        [JsonProperty("updated_at")]
+        [JsonProperty("updated_at", NullValueHandling = NullValueHandling.Ignore)]
         public string UpdatedAt { get; }
 
         public Builder ToBuilder()
@@ -89,46 +89,47 @@ namespace Square.Models
         public class Builder
         {
             private string teamMemberId;
-            private IList<Models.JobAssignment> jobAssignments = new List<Models.JobAssignment>();
+            private IList<Models.JobAssignment> jobAssignments;
             private bool? isOvertimeExempt;
             private int? version;
             private string createdAt;
             private string updatedAt;
 
-            public Builder() { }
-            public Builder TeamMemberId(string value)
+
+
+            public Builder TeamMemberId(string teamMemberId)
             {
-                teamMemberId = value;
+                this.teamMemberId = teamMemberId;
                 return this;
             }
 
-            public Builder JobAssignments(IList<Models.JobAssignment> value)
+            public Builder JobAssignments(IList<Models.JobAssignment> jobAssignments)
             {
-                jobAssignments = value;
+                this.jobAssignments = jobAssignments;
                 return this;
             }
 
-            public Builder IsOvertimeExempt(bool? value)
+            public Builder IsOvertimeExempt(bool? isOvertimeExempt)
             {
-                isOvertimeExempt = value;
+                this.isOvertimeExempt = isOvertimeExempt;
                 return this;
             }
 
-            public Builder Version(int? value)
+            public Builder Version(int? version)
             {
-                version = value;
+                this.version = version;
                 return this;
             }
 
-            public Builder CreatedAt(string value)
+            public Builder CreatedAt(string createdAt)
             {
-                createdAt = value;
+                this.createdAt = createdAt;
                 return this;
             }
 
-            public Builder UpdatedAt(string value)
+            public Builder UpdatedAt(string updatedAt)
             {
-                updatedAt = value;
+                this.updatedAt = updatedAt;
                 return this;
             }
 

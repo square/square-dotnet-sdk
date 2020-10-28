@@ -30,7 +30,7 @@ namespace Square.Models
         /// <summary>
         /// The list of invoices returned by the search.
         /// </summary>
-        [JsonProperty("invoices")]
+        [JsonProperty("invoices", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.Invoice> Invoices { get; }
 
         /// <summary>
@@ -39,13 +39,13 @@ namespace Square.Models
         /// response. 
         /// For more information, see [Pagination](https://developer.squareup.com/docs/docs/working-with-apis/pagination).
         /// </summary>
-        [JsonProperty("cursor")]
+        [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
         public string Cursor { get; }
 
         /// <summary>
         /// Information about errors encountered during the request.
         /// </summary>
-        [JsonProperty("errors")]
+        [JsonProperty("errors", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.Error> Errors { get; }
 
         public Builder ToBuilder()
@@ -59,26 +59,27 @@ namespace Square.Models
 
         public class Builder
         {
-            private IList<Models.Invoice> invoices = new List<Models.Invoice>();
+            private IList<Models.Invoice> invoices;
             private string cursor;
-            private IList<Models.Error> errors = new List<Models.Error>();
+            private IList<Models.Error> errors;
 
-            public Builder() { }
-            public Builder Invoices(IList<Models.Invoice> value)
+
+
+            public Builder Invoices(IList<Models.Invoice> invoices)
             {
-                invoices = value;
+                this.invoices = invoices;
                 return this;
             }
 
-            public Builder Cursor(string value)
+            public Builder Cursor(string cursor)
             {
-                cursor = value;
+                this.cursor = cursor;
                 return this;
             }
 
-            public Builder Errors(IList<Models.Error> value)
+            public Builder Errors(IList<Models.Error> errors)
             {
-                errors = value;
+                this.errors = errors;
                 return this;
             }
 

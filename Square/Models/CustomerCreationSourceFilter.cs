@@ -25,14 +25,14 @@ namespace Square.Models
         /// The list of creation sources used as filtering criteria.
         /// See [CustomerCreationSource](#type-customercreationsource) for possible values
         /// </summary>
-        [JsonProperty("values")]
+        [JsonProperty("values", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> Values { get; }
 
         /// <summary>
         /// Indicates whether customers should be included in, or excluded from,
         /// the result set when they match the filtering criteria.
         /// </summary>
-        [JsonProperty("rule")]
+        [JsonProperty("rule", NullValueHandling = NullValueHandling.Ignore)]
         public string Rule { get; }
 
         public Builder ToBuilder()
@@ -45,19 +45,20 @@ namespace Square.Models
 
         public class Builder
         {
-            private IList<string> values = new List<string>();
+            private IList<string> values;
             private string rule;
 
-            public Builder() { }
-            public Builder Values(IList<string> value)
+
+
+            public Builder Values(IList<string> values)
             {
-                values = value;
+                this.values = values;
                 return this;
             }
 
-            public Builder Rule(string value)
+            public Builder Rule(string rule)
             {
-                rule = value;
+                this.rule = rule;
                 return this;
             }
 

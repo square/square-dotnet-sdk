@@ -29,13 +29,13 @@ namespace Square.Models
         /// Sets the Day of the week and hour of the day that a business starts a
         /// work week. Used for the calculation of overtime pay.
         /// </summary>
-        [JsonProperty("workweek_config")]
+        [JsonProperty("workweek_config", NullValueHandling = NullValueHandling.Ignore)]
         public Models.WorkweekConfig WorkweekConfig { get; }
 
         /// <summary>
         /// Any errors that occurred during the request.
         /// </summary>
-        [JsonProperty("errors")]
+        [JsonProperty("errors", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.Error> Errors { get; }
 
         public Builder ToBuilder()
@@ -49,18 +49,19 @@ namespace Square.Models
         public class Builder
         {
             private Models.WorkweekConfig workweekConfig;
-            private IList<Models.Error> errors = new List<Models.Error>();
+            private IList<Models.Error> errors;
 
-            public Builder() { }
-            public Builder WorkweekConfig(Models.WorkweekConfig value)
+
+
+            public Builder WorkweekConfig(Models.WorkweekConfig workweekConfig)
             {
-                workweekConfig = value;
+                this.workweekConfig = workweekConfig;
                 return this;
             }
 
-            public Builder Errors(IList<Models.Error> value)
+            public Builder Errors(IList<Models.Error> errors)
             {
-                errors = value;
+                this.errors = errors;
                 return this;
             }
 

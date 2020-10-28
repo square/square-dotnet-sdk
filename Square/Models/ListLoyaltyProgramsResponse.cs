@@ -28,13 +28,13 @@ namespace Square.Models
         /// <summary>
         /// Any errors that occurred during the request.
         /// </summary>
-        [JsonProperty("errors")]
+        [JsonProperty("errors", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.Error> Errors { get; }
 
         /// <summary>
         /// A list of `LoyaltyProgram` for the merchant.
         /// </summary>
-        [JsonProperty("programs")]
+        [JsonProperty("programs", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.LoyaltyProgram> Programs { get; }
 
         public Builder ToBuilder()
@@ -47,19 +47,20 @@ namespace Square.Models
 
         public class Builder
         {
-            private IList<Models.Error> errors = new List<Models.Error>();
-            private IList<Models.LoyaltyProgram> programs = new List<Models.LoyaltyProgram>();
+            private IList<Models.Error> errors;
+            private IList<Models.LoyaltyProgram> programs;
 
-            public Builder() { }
-            public Builder Errors(IList<Models.Error> value)
+
+
+            public Builder Errors(IList<Models.Error> errors)
             {
-                errors = value;
+                this.errors = errors;
                 return this;
             }
 
-            public Builder Programs(IList<Models.LoyaltyProgram> value)
+            public Builder Programs(IList<Models.LoyaltyProgram> programs)
             {
-                programs = value;
+                this.programs = programs;
                 return this;
             }
 

@@ -28,9 +28,9 @@ namespace Square.Models
         public HttpContext Context { get; internal set; }
 
         /// <summary>
-        /// Information on any errors encountered.
+        /// Any errors that occurred during the request.
         /// </summary>
-        [JsonProperty("errors")]
+        [JsonProperty("errors", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.Error> Errors { get; }
 
         /// <summary>
@@ -39,14 +39,14 @@ namespace Square.Models
         /// a catalog item variation will be deleted (and its ID included in this field)
         /// when its parent catalog item is deleted.
         /// </summary>
-        [JsonProperty("deleted_object_ids")]
+        [JsonProperty("deleted_object_ids", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> DeletedObjectIds { get; }
 
         /// <summary>
         /// The database [timestamp](https://developer.squareup.com/docs/build-basics/working-with-dates)
         /// of this deletion in RFC 3339 format, e.g., `2016-09-04T23:59:33.123Z`.
         /// </summary>
-        [JsonProperty("deleted_at")]
+        [JsonProperty("deleted_at", NullValueHandling = NullValueHandling.Ignore)]
         public string DeletedAt { get; }
 
         public Builder ToBuilder()
@@ -60,26 +60,27 @@ namespace Square.Models
 
         public class Builder
         {
-            private IList<Models.Error> errors = new List<Models.Error>();
-            private IList<string> deletedObjectIds = new List<string>();
+            private IList<Models.Error> errors;
+            private IList<string> deletedObjectIds;
             private string deletedAt;
 
-            public Builder() { }
-            public Builder Errors(IList<Models.Error> value)
+
+
+            public Builder Errors(IList<Models.Error> errors)
             {
-                errors = value;
+                this.errors = errors;
                 return this;
             }
 
-            public Builder DeletedObjectIds(IList<string> value)
+            public Builder DeletedObjectIds(IList<string> deletedObjectIds)
             {
-                deletedObjectIds = value;
+                this.deletedObjectIds = deletedObjectIds;
                 return this;
             }
 
-            public Builder DeletedAt(string value)
+            public Builder DeletedAt(string deletedAt)
             {
-                deletedAt = value;
+                this.deletedAt = deletedAt;
                 return this;
             }
 

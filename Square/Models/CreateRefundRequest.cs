@@ -49,7 +49,7 @@ namespace Square.Models
         /// A description of the reason for the refund.
         /// Default value: `Refund via API`
         /// </summary>
-        [JsonProperty("reason")]
+        [JsonProperty("reason", NullValueHandling = NullValueHandling.Ignore)]
         public string Reason { get; }
 
         /// <summary>
@@ -87,27 +87,28 @@ namespace Square.Models
                 this.tenderId = tenderId;
                 this.amountMoney = amountMoney;
             }
-            public Builder IdempotencyKey(string value)
+
+            public Builder IdempotencyKey(string idempotencyKey)
             {
-                idempotencyKey = value;
+                this.idempotencyKey = idempotencyKey;
                 return this;
             }
 
-            public Builder TenderId(string value)
+            public Builder TenderId(string tenderId)
             {
-                tenderId = value;
+                this.tenderId = tenderId;
                 return this;
             }
 
-            public Builder AmountMoney(Models.Money value)
+            public Builder AmountMoney(Models.Money amountMoney)
             {
-                amountMoney = value;
+                this.amountMoney = amountMoney;
                 return this;
             }
 
-            public Builder Reason(string value)
+            public Builder Reason(string reason)
             {
-                reason = value;
+                this.reason = reason;
                 return this;
             }
 

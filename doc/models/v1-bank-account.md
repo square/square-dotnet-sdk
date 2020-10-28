@@ -1,12 +1,13 @@
-## V1 Bank Account
+
+# V1 Bank Account
 
 V1BankAccount
 
-### Structure
+## Structure
 
 `V1BankAccount`
 
-### Fields
+## Fields
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
@@ -19,7 +20,7 @@ V1BankAccount
 | `CurrencyCode` | `string` | Optional | The currency code of the currency associated with the bank account, in ISO 4217 format. For example, the currency code for US dollars is USD. |
 | `Type` | [`string`](/doc/models/v1-bank-account-type.md) | Optional | - |
 
-### Example (as JSON)
+## Example (as JSON)
 
 ```json
 {

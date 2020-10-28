@@ -24,7 +24,7 @@ namespace Square.Models
         /// - `ASC` - oldest to newest
         /// - `DESC` - newest to oldest (default).
         /// </summary>
-        [JsonProperty("sort_order")]
+        [JsonProperty("sort_order", NullValueHandling = NullValueHandling.Ignore)]
         public string SortOrder { get; }
 
         public Builder ToBuilder()
@@ -38,10 +38,11 @@ namespace Square.Models
         {
             private string sortOrder;
 
-            public Builder() { }
-            public Builder SortOrder(string value)
+
+
+            public Builder SortOrder(string sortOrder)
             {
-                sortOrder = value;
+                this.sortOrder = sortOrder;
                 return this;
             }
 

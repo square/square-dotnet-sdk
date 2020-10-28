@@ -30,7 +30,7 @@ namespace Square.Models
         /// Refer to the relevant endpoint-specific documentation to determine
         /// how time ranges are handled.
         /// </summary>
-        [JsonProperty("created_at")]
+        [JsonProperty("created_at", NullValueHandling = NullValueHandling.Ignore)]
         public Models.TimeRange CreatedAt { get; }
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace Square.Models
         /// Refer to the relevant endpoint-specific documentation to determine
         /// how time ranges are handled.
         /// </summary>
-        [JsonProperty("updated_at")]
+        [JsonProperty("updated_at", NullValueHandling = NullValueHandling.Ignore)]
         public Models.TimeRange UpdatedAt { get; }
 
         /// <summary>
@@ -50,7 +50,7 @@ namespace Square.Models
         /// Refer to the relevant endpoint-specific documentation to determine
         /// how time ranges are handled.
         /// </summary>
-        [JsonProperty("closed_at")]
+        [JsonProperty("closed_at", NullValueHandling = NullValueHandling.Ignore)]
         public Models.TimeRange ClosedAt { get; }
 
         public Builder ToBuilder()
@@ -68,22 +68,23 @@ namespace Square.Models
             private Models.TimeRange updatedAt;
             private Models.TimeRange closedAt;
 
-            public Builder() { }
-            public Builder CreatedAt(Models.TimeRange value)
+
+
+            public Builder CreatedAt(Models.TimeRange createdAt)
             {
-                createdAt = value;
+                this.createdAt = createdAt;
                 return this;
             }
 
-            public Builder UpdatedAt(Models.TimeRange value)
+            public Builder UpdatedAt(Models.TimeRange updatedAt)
             {
-                updatedAt = value;
+                this.updatedAt = updatedAt;
                 return this;
             }
 
-            public Builder ClosedAt(Models.TimeRange value)
+            public Builder ClosedAt(Models.TimeRange closedAt)
             {
-                closedAt = value;
+                this.closedAt = closedAt;
                 return this;
             }
 

@@ -26,19 +26,19 @@ namespace Square.Models
         /// <summary>
         /// The number to adjust the variation's quantity by.
         /// </summary>
-        [JsonProperty("quantity_delta")]
+        [JsonProperty("quantity_delta", NullValueHandling = NullValueHandling.Ignore)]
         public double? QuantityDelta { get; }
 
         /// <summary>
         /// Getter for adjustment_type
         /// </summary>
-        [JsonProperty("adjustment_type")]
+        [JsonProperty("adjustment_type", NullValueHandling = NullValueHandling.Ignore)]
         public string AdjustmentType { get; }
 
         /// <summary>
         /// A note about the inventory adjustment.
         /// </summary>
-        [JsonProperty("memo")]
+        [JsonProperty("memo", NullValueHandling = NullValueHandling.Ignore)]
         public string Memo { get; }
 
         public Builder ToBuilder()
@@ -56,22 +56,23 @@ namespace Square.Models
             private string adjustmentType;
             private string memo;
 
-            public Builder() { }
-            public Builder QuantityDelta(double? value)
+
+
+            public Builder QuantityDelta(double? quantityDelta)
             {
-                quantityDelta = value;
+                this.quantityDelta = quantityDelta;
                 return this;
             }
 
-            public Builder AdjustmentType(string value)
+            public Builder AdjustmentType(string adjustmentType)
             {
-                adjustmentType = value;
+                this.adjustmentType = adjustmentType;
                 return this;
             }
 
-            public Builder Memo(string value)
+            public Builder Memo(string memo)
             {
-                memo = value;
+                this.memo = memo;
                 return this;
             }
 

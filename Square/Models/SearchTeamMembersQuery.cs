@@ -28,7 +28,7 @@ namespace Square.Models
         /// ```
         /// returns only active team members assigned to either location "A" or "B".
         /// </summary>
-        [JsonProperty("filter")]
+        [JsonProperty("filter", NullValueHandling = NullValueHandling.Ignore)]
         public Models.SearchTeamMembersFilter Filter { get; }
 
         public Builder ToBuilder()
@@ -42,10 +42,11 @@ namespace Square.Models
         {
             private Models.SearchTeamMembersFilter filter;
 
-            public Builder() { }
-            public Builder Filter(Models.SearchTeamMembersFilter value)
+
+
+            public Builder Filter(Models.SearchTeamMembersFilter filter)
             {
-                filter = value;
+                this.filter = filter;
                 return this;
             }
 

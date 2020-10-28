@@ -24,13 +24,13 @@ namespace Square.Models
         /// <summary>
         /// A filter to select subscriptions based on the customer.
         /// </summary>
-        [JsonProperty("customer_ids")]
+        [JsonProperty("customer_ids", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> CustomerIds { get; }
 
         /// <summary>
         /// A filter to select subscriptions based the location.
         /// </summary>
-        [JsonProperty("location_ids")]
+        [JsonProperty("location_ids", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> LocationIds { get; }
 
         public Builder ToBuilder()
@@ -43,19 +43,20 @@ namespace Square.Models
 
         public class Builder
         {
-            private IList<string> customerIds = new List<string>();
-            private IList<string> locationIds = new List<string>();
+            private IList<string> customerIds;
+            private IList<string> locationIds;
 
-            public Builder() { }
-            public Builder CustomerIds(IList<string> value)
+
+
+            public Builder CustomerIds(IList<string> customerIds)
             {
-                customerIds = value;
+                this.customerIds = customerIds;
                 return this;
             }
 
-            public Builder LocationIds(IList<string> value)
+            public Builder LocationIds(IList<string> locationIds)
             {
-                locationIds = value;
+                this.locationIds = locationIds;
                 return this;
             }
 

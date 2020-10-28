@@ -34,31 +34,31 @@ namespace Square.Models
         /// <summary>
         /// The modifier list's unique ID.
         /// </summary>
-        [JsonProperty("id")]
+        [JsonProperty("id", NullValueHandling = NullValueHandling.Ignore)]
         public string Id { get; }
 
         /// <summary>
         /// The modifier list's name.
         /// </summary>
-        [JsonProperty("name")]
+        [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
         public string Name { get; }
 
         /// <summary>
         /// Getter for selection_type
         /// </summary>
-        [JsonProperty("selection_type")]
+        [JsonProperty("selection_type", NullValueHandling = NullValueHandling.Ignore)]
         public string SelectionType { get; }
 
         /// <summary>
         /// The options included in the modifier list.
         /// </summary>
-        [JsonProperty("modifier_options")]
+        [JsonProperty("modifier_options", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.V1ModifierOption> ModifierOptions { get; }
 
         /// <summary>
         /// The ID of the CatalogObject in the Connect v2 API. Objects that are shared across multiple locations share the same v2 ID.
         /// </summary>
-        [JsonProperty("v2_id")]
+        [JsonProperty("v2_id", NullValueHandling = NullValueHandling.Ignore)]
         public string V2Id { get; }
 
         public Builder ToBuilder()
@@ -77,37 +77,38 @@ namespace Square.Models
             private string id;
             private string name;
             private string selectionType;
-            private IList<Models.V1ModifierOption> modifierOptions = new List<Models.V1ModifierOption>();
+            private IList<Models.V1ModifierOption> modifierOptions;
             private string v2Id;
 
-            public Builder() { }
-            public Builder Id(string value)
+
+
+            public Builder Id(string id)
             {
-                id = value;
+                this.id = id;
                 return this;
             }
 
-            public Builder Name(string value)
+            public Builder Name(string name)
             {
-                name = value;
+                this.name = name;
                 return this;
             }
 
-            public Builder SelectionType(string value)
+            public Builder SelectionType(string selectionType)
             {
-                selectionType = value;
+                this.selectionType = selectionType;
                 return this;
             }
 
-            public Builder ModifierOptions(IList<Models.V1ModifierOption> value)
+            public Builder ModifierOptions(IList<Models.V1ModifierOption> modifierOptions)
             {
-                modifierOptions = value;
+                this.modifierOptions = modifierOptions;
                 return this;
             }
 
-            public Builder V2Id(string value)
+            public Builder V2Id(string v2Id)
             {
-                v2Id = value;
+                this.v2Id = v2Id;
                 return this;
             }
 

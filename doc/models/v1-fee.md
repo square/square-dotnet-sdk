@@ -1,12 +1,13 @@
-## V1 Fee
+
+# V1 Fee
 
 V1Fee
 
-### Structure
+## Structure
 
 `V1Fee`
 
-### Fields
+## Fields
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
@@ -21,7 +22,7 @@ V1Fee
 | `Type` | [`string`](/doc/models/v1-fee-type.md) | Optional | - |
 | `V2Id` | `string` | Optional | The ID of the CatalogObject in the Connect v2 API. Objects that are shared across multiple locations share the same v2 ID. |
 
-### Example (as JSON)
+## Example (as JSON)
 
 ```json
 {

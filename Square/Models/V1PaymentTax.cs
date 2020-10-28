@@ -32,37 +32,37 @@ namespace Square.Models
         /// <summary>
         /// Any errors that occurred during the request.
         /// </summary>
-        [JsonProperty("errors")]
+        [JsonProperty("errors", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.Error> Errors { get; }
 
         /// <summary>
         /// The merchant-defined name of the tax.
         /// </summary>
-        [JsonProperty("name")]
+        [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
         public string Name { get; }
 
         /// <summary>
         /// Getter for applied_money
         /// </summary>
-        [JsonProperty("applied_money")]
+        [JsonProperty("applied_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1Money AppliedMoney { get; }
 
         /// <summary>
         /// The rate of the tax, as a string representation of a decimal number. A value of 0.07 corresponds to a rate of 7%.
         /// </summary>
-        [JsonProperty("rate")]
+        [JsonProperty("rate", NullValueHandling = NullValueHandling.Ignore)]
         public string Rate { get; }
 
         /// <summary>
         /// Getter for inclusion_type
         /// </summary>
-        [JsonProperty("inclusion_type")]
+        [JsonProperty("inclusion_type", NullValueHandling = NullValueHandling.Ignore)]
         public string InclusionType { get; }
 
         /// <summary>
         /// The ID of the tax, if available. Taxes applied in older versions of Square Register might not have an ID.
         /// </summary>
-        [JsonProperty("fee_id")]
+        [JsonProperty("fee_id", NullValueHandling = NullValueHandling.Ignore)]
         public string FeeId { get; }
 
         public Builder ToBuilder()
@@ -79,47 +79,48 @@ namespace Square.Models
 
         public class Builder
         {
-            private IList<Models.Error> errors = new List<Models.Error>();
+            private IList<Models.Error> errors;
             private string name;
             private Models.V1Money appliedMoney;
             private string rate;
             private string inclusionType;
             private string feeId;
 
-            public Builder() { }
-            public Builder Errors(IList<Models.Error> value)
+
+
+            public Builder Errors(IList<Models.Error> errors)
             {
-                errors = value;
+                this.errors = errors;
                 return this;
             }
 
-            public Builder Name(string value)
+            public Builder Name(string name)
             {
-                name = value;
+                this.name = name;
                 return this;
             }
 
-            public Builder AppliedMoney(Models.V1Money value)
+            public Builder AppliedMoney(Models.V1Money appliedMoney)
             {
-                appliedMoney = value;
+                this.appliedMoney = appliedMoney;
                 return this;
             }
 
-            public Builder Rate(string value)
+            public Builder Rate(string rate)
             {
-                rate = value;
+                this.rate = rate;
                 return this;
             }
 
-            public Builder InclusionType(string value)
+            public Builder InclusionType(string inclusionType)
             {
-                inclusionType = value;
+                this.inclusionType = inclusionType;
                 return this;
             }
 
-            public Builder FeeId(string value)
+            public Builder FeeId(string feeId)
             {
-                feeId = value;
+                this.feeId = feeId;
                 return this;
             }
 

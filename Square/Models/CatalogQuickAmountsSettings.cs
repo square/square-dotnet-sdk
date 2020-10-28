@@ -33,13 +33,13 @@ namespace Square.Models
         /// Represents location's eligibility for auto amounts
         /// The boolean should be consistent with whether there are AUTO amounts in the `amounts`.
         /// </summary>
-        [JsonProperty("eligible_for_auto_amounts")]
+        [JsonProperty("eligible_for_auto_amounts", NullValueHandling = NullValueHandling.Ignore)]
         public bool? EligibleForAutoAmounts { get; }
 
         /// <summary>
         /// Represents a set of Quick Amounts at this location.
         /// </summary>
-        [JsonProperty("amounts")]
+        [JsonProperty("amounts", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.CatalogQuickAmount> Amounts { get; }
 
         public Builder ToBuilder()
@@ -54,27 +54,28 @@ namespace Square.Models
         {
             private string option;
             private bool? eligibleForAutoAmounts;
-            private IList<Models.CatalogQuickAmount> amounts = new List<Models.CatalogQuickAmount>();
+            private IList<Models.CatalogQuickAmount> amounts;
 
             public Builder(string option)
             {
                 this.option = option;
             }
-            public Builder Option(string value)
+
+            public Builder Option(string option)
             {
-                option = value;
+                this.option = option;
                 return this;
             }
 
-            public Builder EligibleForAutoAmounts(bool? value)
+            public Builder EligibleForAutoAmounts(bool? eligibleForAutoAmounts)
             {
-                eligibleForAutoAmounts = value;
+                this.eligibleForAutoAmounts = eligibleForAutoAmounts;
                 return this;
             }
 
-            public Builder Amounts(IList<Models.CatalogQuickAmount> value)
+            public Builder Amounts(IList<Models.CatalogQuickAmount> amounts)
             {
-                amounts = value;
+                this.amounts = amounts;
                 return this;
             }
 

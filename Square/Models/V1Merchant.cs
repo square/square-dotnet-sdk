@@ -54,91 +54,91 @@ namespace Square.Models
         /// <summary>
         /// The merchant account's unique identifier.
         /// </summary>
-        [JsonProperty("id")]
+        [JsonProperty("id", NullValueHandling = NullValueHandling.Ignore)]
         public string Id { get; }
 
         /// <summary>
         /// The name associated with the merchant account.
         /// </summary>
-        [JsonProperty("name")]
+        [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
         public string Name { get; }
 
         /// <summary>
         /// The email address associated with the merchant account.
         /// </summary>
-        [JsonProperty("email")]
+        [JsonProperty("email", NullValueHandling = NullValueHandling.Ignore)]
         public string Email { get; }
 
         /// <summary>
         /// Getter for account_type
         /// </summary>
-        [JsonProperty("account_type")]
+        [JsonProperty("account_type", NullValueHandling = NullValueHandling.Ignore)]
         public string AccountType { get; }
 
         /// <summary>
         /// Capabilities that are enabled for the merchant's Square account. Capabilities that are not listed in this array are not enabled for the account.
         /// </summary>
-        [JsonProperty("account_capabilities")]
+        [JsonProperty("account_capabilities", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> AccountCapabilities { get; }
 
         /// <summary>
         /// The country associated with the merchant account, in ISO 3166-1-alpha-2 format.
         /// </summary>
-        [JsonProperty("country_code")]
+        [JsonProperty("country_code", NullValueHandling = NullValueHandling.Ignore)]
         public string CountryCode { get; }
 
         /// <summary>
         /// The language associated with the merchant account, in BCP 47 format.
         /// </summary>
-        [JsonProperty("language_code")]
+        [JsonProperty("language_code", NullValueHandling = NullValueHandling.Ignore)]
         public string LanguageCode { get; }
 
         /// <summary>
         /// The currency associated with the merchant account, in ISO 4217 format. For example, the currency code for US dollars is USD.
         /// </summary>
-        [JsonProperty("currency_code")]
+        [JsonProperty("currency_code", NullValueHandling = NullValueHandling.Ignore)]
         public string CurrencyCode { get; }
 
         /// <summary>
         /// The name of the merchant's business.
         /// </summary>
-        [JsonProperty("business_name")]
+        [JsonProperty("business_name", NullValueHandling = NullValueHandling.Ignore)]
         public string BusinessName { get; }
 
         /// <summary>
         /// Represents a physical address.
         /// </summary>
-        [JsonProperty("business_address")]
+        [JsonProperty("business_address", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Address BusinessAddress { get; }
 
         /// <summary>
         /// Represents a phone number.
         /// </summary>
-        [JsonProperty("business_phone")]
+        [JsonProperty("business_phone", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1PhoneNumber BusinessPhone { get; }
 
         /// <summary>
         /// Getter for business_type
         /// </summary>
-        [JsonProperty("business_type")]
+        [JsonProperty("business_type", NullValueHandling = NullValueHandling.Ignore)]
         public string BusinessType { get; }
 
         /// <summary>
         /// Represents a physical address.
         /// </summary>
-        [JsonProperty("shipping_address")]
+        [JsonProperty("shipping_address", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Address ShippingAddress { get; }
 
         /// <summary>
         /// Additional information for a single-location account specified by its associated business account, if it has one.
         /// </summary>
-        [JsonProperty("location_details")]
+        [JsonProperty("location_details", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1MerchantLocationDetails LocationDetails { get; }
 
         /// <summary>
         /// The URL of the merchant's online store.
         /// </summary>
-        [JsonProperty("market_url")]
+        [JsonProperty("market_url", NullValueHandling = NullValueHandling.Ignore)]
         public string MarketUrl { get; }
 
         public Builder ToBuilder()
@@ -168,7 +168,7 @@ namespace Square.Models
             private string name;
             private string email;
             private string accountType;
-            private IList<string> accountCapabilities = new List<string>();
+            private IList<string> accountCapabilities;
             private string countryCode;
             private string languageCode;
             private string currencyCode;
@@ -180,94 +180,95 @@ namespace Square.Models
             private Models.V1MerchantLocationDetails locationDetails;
             private string marketUrl;
 
-            public Builder() { }
-            public Builder Id(string value)
+
+
+            public Builder Id(string id)
             {
-                id = value;
+                this.id = id;
                 return this;
             }
 
-            public Builder Name(string value)
+            public Builder Name(string name)
             {
-                name = value;
+                this.name = name;
                 return this;
             }
 
-            public Builder Email(string value)
+            public Builder Email(string email)
             {
-                email = value;
+                this.email = email;
                 return this;
             }
 
-            public Builder AccountType(string value)
+            public Builder AccountType(string accountType)
             {
-                accountType = value;
+                this.accountType = accountType;
                 return this;
             }
 
-            public Builder AccountCapabilities(IList<string> value)
+            public Builder AccountCapabilities(IList<string> accountCapabilities)
             {
-                accountCapabilities = value;
+                this.accountCapabilities = accountCapabilities;
                 return this;
             }
 
-            public Builder CountryCode(string value)
+            public Builder CountryCode(string countryCode)
             {
-                countryCode = value;
+                this.countryCode = countryCode;
                 return this;
             }
 
-            public Builder LanguageCode(string value)
+            public Builder LanguageCode(string languageCode)
             {
-                languageCode = value;
+                this.languageCode = languageCode;
                 return this;
             }
 
-            public Builder CurrencyCode(string value)
+            public Builder CurrencyCode(string currencyCode)
             {
-                currencyCode = value;
+                this.currencyCode = currencyCode;
                 return this;
             }
 
-            public Builder BusinessName(string value)
+            public Builder BusinessName(string businessName)
             {
-                businessName = value;
+                this.businessName = businessName;
                 return this;
             }
 
-            public Builder BusinessAddress(Models.Address value)
+            public Builder BusinessAddress(Models.Address businessAddress)
             {
-                businessAddress = value;
+                this.businessAddress = businessAddress;
                 return this;
             }
 
-            public Builder BusinessPhone(Models.V1PhoneNumber value)
+            public Builder BusinessPhone(Models.V1PhoneNumber businessPhone)
             {
-                businessPhone = value;
+                this.businessPhone = businessPhone;
                 return this;
             }
 
-            public Builder BusinessType(string value)
+            public Builder BusinessType(string businessType)
             {
-                businessType = value;
+                this.businessType = businessType;
                 return this;
             }
 
-            public Builder ShippingAddress(Models.Address value)
+            public Builder ShippingAddress(Models.Address shippingAddress)
             {
-                shippingAddress = value;
+                this.shippingAddress = shippingAddress;
                 return this;
             }
 
-            public Builder LocationDetails(Models.V1MerchantLocationDetails value)
+            public Builder LocationDetails(Models.V1MerchantLocationDetails locationDetails)
             {
-                locationDetails = value;
+                this.locationDetails = locationDetails;
                 return this;
             }
 
-            public Builder MarketUrl(string value)
+            public Builder MarketUrl(string marketUrl)
             {
-                marketUrl = value;
+                this.marketUrl = marketUrl;
                 return this;
             }
 

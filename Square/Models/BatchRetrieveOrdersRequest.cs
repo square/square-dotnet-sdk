@@ -25,7 +25,7 @@ namespace Square.Models
         /// The ID of the location for these orders. This field is optional: omit it to retrieve
         /// orders within the scope of the current authorization's merchant ID.
         /// </summary>
-        [JsonProperty("location_id")]
+        [JsonProperty("location_id", NullValueHandling = NullValueHandling.Ignore)]
         public string LocationId { get; }
 
         /// <summary>
@@ -50,15 +50,16 @@ namespace Square.Models
             {
                 this.orderIds = orderIds;
             }
-            public Builder OrderIds(IList<string> value)
+
+            public Builder OrderIds(IList<string> orderIds)
             {
-                orderIds = value;
+                this.orderIds = orderIds;
                 return this;
             }
 
-            public Builder LocationId(string value)
+            public Builder LocationId(string locationId)
             {
-                locationId = value;
+                this.locationId = locationId;
                 return this;
             }
 

@@ -18,33 +18,31 @@ namespace Square.Models
             string name = null,
             string description = null,
             string color = null,
-            int? ordinal = null,
-            long? itemVariationCount = null)
+            int? ordinal = null)
         {
             ItemOptionId = itemOptionId;
             Name = name;
             Description = description;
             Color = color;
             Ordinal = ordinal;
-            ItemVariationCount = itemVariationCount;
         }
 
         /// <summary>
         /// Unique ID of the associated item option.
         /// </summary>
-        [JsonProperty("item_option_id")]
+        [JsonProperty("item_option_id", NullValueHandling = NullValueHandling.Ignore)]
         public string ItemOptionId { get; }
 
         /// <summary>
         /// Name of this item option value. This is a searchable attribute for use in applicable query filters.
         /// </summary>
-        [JsonProperty("name")]
+        [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
         public string Name { get; }
 
         /// <summary>
         /// A human-readable description for the option value. This is a searchable attribute for use in applicable query filters.
         /// </summary>
-        [JsonProperty("description")]
+        [JsonProperty("description", NullValueHandling = NullValueHandling.Ignore)]
         public string Description { get; }
 
         /// <summary>
@@ -53,23 +51,14 @@ namespace Square.Models
         /// left unset, `color` defaults to white ("#ffffff") when `show_colors` is
         /// enabled on the parent `ItemOption`.
         /// </summary>
-        [JsonProperty("color")]
+        [JsonProperty("color", NullValueHandling = NullValueHandling.Ignore)]
         public string Color { get; }
 
         /// <summary>
         /// Determines where this option value appears in a list of option values.
         /// </summary>
-        [JsonProperty("ordinal")]
+        [JsonProperty("ordinal", NullValueHandling = NullValueHandling.Ignore)]
         public int? Ordinal { get; }
-
-        /// <summary>
-        /// The number of `CatalogItemVariation`s that
-        /// currently use this item option value. Present only if `retrieve_counts`
-        /// was specified on the request used to retrieve the parent item option of this
-        /// value.
-        /// </summary>
-        [JsonProperty("item_variation_count")]
-        public long? ItemVariationCount { get; }
 
         public Builder ToBuilder()
         {
@@ -78,8 +67,7 @@ namespace Square.Models
                 .Name(Name)
                 .Description(Description)
                 .Color(Color)
-                .Ordinal(Ordinal)
-                .ItemVariationCount(ItemVariationCount);
+                .Ordinal(Ordinal);
             return builder;
         }
 
@@ -90,42 +78,36 @@ namespace Square.Models
             private string description;
             private string color;
             private int? ordinal;
-            private long? itemVariationCount;
 
-            public Builder() { }
-            public Builder ItemOptionId(string value)
+
+
+            public Builder ItemOptionId(string itemOptionId)
             {
-                itemOptionId = value;
+                this.itemOptionId = itemOptionId;
                 return this;
             }
 
-            public Builder Name(string value)
+            public Builder Name(string name)
             {
-                name = value;
+                this.name = name;
                 return this;
             }
 
-            public Builder Description(string value)
+            public Builder Description(string description)
             {
-                description = value;
+                this.description = description;
                 return this;
             }
 
-            public Builder Color(string value)
+            public Builder Color(string color)
             {
-                color = value;
+                this.color = color;
                 return this;
             }
 
-            public Builder Ordinal(int? value)
+            public Builder Ordinal(int? ordinal)
             {
-                ordinal = value;
-                return this;
-            }
-
-            public Builder ItemVariationCount(long? value)
-            {
-                itemVariationCount = value;
+                this.ordinal = ordinal;
                 return this;
             }
 
@@ -135,8 +117,7 @@ namespace Square.Models
                     name,
                     description,
                     color,
-                    ordinal,
-                    itemVariationCount);
+                    ordinal);
             }
         }
     }

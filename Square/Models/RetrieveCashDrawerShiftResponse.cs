@@ -31,13 +31,13 @@ namespace Square.Models
         /// and cash_paid_out_money fields are all computed by summing their respective
         /// event types.
         /// </summary>
-        [JsonProperty("cash_drawer_shift")]
+        [JsonProperty("cash_drawer_shift", NullValueHandling = NullValueHandling.Ignore)]
         public Models.CashDrawerShift CashDrawerShift { get; }
 
         /// <summary>
         /// Any errors that occurred during the request.
         /// </summary>
-        [JsonProperty("errors")]
+        [JsonProperty("errors", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.Error> Errors { get; }
 
         public Builder ToBuilder()
@@ -51,18 +51,19 @@ namespace Square.Models
         public class Builder
         {
             private Models.CashDrawerShift cashDrawerShift;
-            private IList<Models.Error> errors = new List<Models.Error>();
+            private IList<Models.Error> errors;
 
-            public Builder() { }
-            public Builder CashDrawerShift(Models.CashDrawerShift value)
+
+
+            public Builder CashDrawerShift(Models.CashDrawerShift cashDrawerShift)
             {
-                cashDrawerShift = value;
+                this.cashDrawerShift = cashDrawerShift;
                 return this;
             }
 
-            public Builder Errors(IList<Models.Error> value)
+            public Builder Errors(IList<Models.Error> errors)
             {
-                errors = value;
+                this.errors = errors;
                 return this;
             }
 

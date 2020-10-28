@@ -25,7 +25,7 @@ namespace Square.Models
         /// The pagination cursor returned in the previous response. Leave unset for an initial request.
         /// See [Pagination](https://developer.squareup.com/docs/basics/api101/pagination) for more information.
         /// </summary>
-        [JsonProperty("cursor")]
+        [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
         public string Cursor { get; }
 
         /// <summary>
@@ -35,7 +35,7 @@ namespace Square.Models
         /// `ITEM`, `ITEM_VARIATION`, `CATEGORY`, `DISCOUNT`, `TAX`,
         /// `MODIFIER`, `MODIFIER_LIST`, or `IMAGE`.
         /// </summary>
-        [JsonProperty("types")]
+        [JsonProperty("types", NullValueHandling = NullValueHandling.Ignore)]
         public string Types { get; }
 
         public Builder ToBuilder()
@@ -51,16 +51,17 @@ namespace Square.Models
             private string cursor;
             private string types;
 
-            public Builder() { }
-            public Builder Cursor(string value)
+
+
+            public Builder Cursor(string cursor)
             {
-                cursor = value;
+                this.cursor = cursor;
                 return this;
             }
 
-            public Builder Types(string value)
+            public Builder Types(string types)
             {
-                types = value;
+                this.types = types;
                 return this;
             }
 

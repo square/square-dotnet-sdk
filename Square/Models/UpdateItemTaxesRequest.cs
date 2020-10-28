@@ -32,13 +32,13 @@ namespace Square.Models
         /// <summary>
         /// IDs of the CatalogTax objects to enable.
         /// </summary>
-        [JsonProperty("taxes_to_enable")]
+        [JsonProperty("taxes_to_enable", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> TaxesToEnable { get; }
 
         /// <summary>
         /// IDs of the CatalogTax objects to disable.
         /// </summary>
-        [JsonProperty("taxes_to_disable")]
+        [JsonProperty("taxes_to_disable", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> TaxesToDisable { get; }
 
         public Builder ToBuilder()
@@ -52,28 +52,29 @@ namespace Square.Models
         public class Builder
         {
             private IList<string> itemIds;
-            private IList<string> taxesToEnable = new List<string>();
-            private IList<string> taxesToDisable = new List<string>();
+            private IList<string> taxesToEnable;
+            private IList<string> taxesToDisable;
 
             public Builder(IList<string> itemIds)
             {
                 this.itemIds = itemIds;
             }
-            public Builder ItemIds(IList<string> value)
+
+            public Builder ItemIds(IList<string> itemIds)
             {
-                itemIds = value;
+                this.itemIds = itemIds;
                 return this;
             }
 
-            public Builder TaxesToEnable(IList<string> value)
+            public Builder TaxesToEnable(IList<string> taxesToEnable)
             {
-                taxesToEnable = value;
+                this.taxesToEnable = taxesToEnable;
                 return this;
             }
 
-            public Builder TaxesToDisable(IList<string> value)
+            public Builder TaxesToDisable(IList<string> taxesToDisable)
             {
-                taxesToDisable = value;
+                this.taxesToDisable = taxesToDisable;
                 return this;
             }
 

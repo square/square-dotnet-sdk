@@ -42,43 +42,43 @@ namespace Square.Models
         /// <summary>
         /// The unique ID for the team member.
         /// </summary>
-        [JsonProperty("id")]
+        [JsonProperty("id", NullValueHandling = NullValueHandling.Ignore)]
         public string Id { get; }
 
         /// <summary>
         /// A second ID used to associate the team member with an entity in another system.
         /// </summary>
-        [JsonProperty("reference_id")]
+        [JsonProperty("reference_id", NullValueHandling = NullValueHandling.Ignore)]
         public string ReferenceId { get; }
 
         /// <summary>
         /// Whether the team member is the owner of the Square account.
         /// </summary>
-        [JsonProperty("is_owner")]
+        [JsonProperty("is_owner", NullValueHandling = NullValueHandling.Ignore)]
         public bool? IsOwner { get; }
 
         /// <summary>
         /// Enumerates the possible statuses the team member can have within a business.
         /// </summary>
-        [JsonProperty("status")]
+        [JsonProperty("status", NullValueHandling = NullValueHandling.Ignore)]
         public string Status { get; }
 
         /// <summary>
         /// The given (i.e., first) name associated with the team member.
         /// </summary>
-        [JsonProperty("given_name")]
+        [JsonProperty("given_name", NullValueHandling = NullValueHandling.Ignore)]
         public string GivenName { get; }
 
         /// <summary>
         /// The family (i.e., last) name associated with the team member.
         /// </summary>
-        [JsonProperty("family_name")]
+        [JsonProperty("family_name", NullValueHandling = NullValueHandling.Ignore)]
         public string FamilyName { get; }
 
         /// <summary>
         /// The email address associated with the team member.
         /// </summary>
-        [JsonProperty("email_address")]
+        [JsonProperty("email_address", NullValueHandling = NullValueHandling.Ignore)]
         public string EmailAddress { get; }
 
         /// <summary>
@@ -86,27 +86,27 @@ namespace Square.Models
         /// +14155552671 - the country code is 1 for US
         /// +551155256325 - the country code is 55 for BR
         /// </summary>
-        [JsonProperty("phone_number")]
+        [JsonProperty("phone_number", NullValueHandling = NullValueHandling.Ignore)]
         public string PhoneNumber { get; }
 
         /// <summary>
         /// The timestamp in RFC 3339 format describing when the team member was created.
         /// Ex: "2018-10-04T04:00:00-07:00" or "2019-02-05T12:00:00Z"
         /// </summary>
-        [JsonProperty("created_at")]
+        [JsonProperty("created_at", NullValueHandling = NullValueHandling.Ignore)]
         public string CreatedAt { get; }
 
         /// <summary>
         /// The timestamp in RFC 3339 format describing when the team member was last updated.
         /// Ex: "2018-10-04T04:00:00-07:00" or "2019-02-05T12:00:00Z"
         /// </summary>
-        [JsonProperty("updated_at")]
+        [JsonProperty("updated_at", NullValueHandling = NullValueHandling.Ignore)]
         public string UpdatedAt { get; }
 
         /// <summary>
         /// An object that represents a team member's assignment to locations.
         /// </summary>
-        [JsonProperty("assigned_locations")]
+        [JsonProperty("assigned_locations", NullValueHandling = NullValueHandling.Ignore)]
         public Models.TeamMemberAssignedLocations AssignedLocations { get; }
 
         public Builder ToBuilder()
@@ -140,70 +140,71 @@ namespace Square.Models
             private string updatedAt;
             private Models.TeamMemberAssignedLocations assignedLocations;
 
-            public Builder() { }
-            public Builder Id(string value)
+
+
+            public Builder Id(string id)
             {
-                id = value;
+                this.id = id;
                 return this;
             }
 
-            public Builder ReferenceId(string value)
+            public Builder ReferenceId(string referenceId)
             {
-                referenceId = value;
+                this.referenceId = referenceId;
                 return this;
             }
 
-            public Builder IsOwner(bool? value)
+            public Builder IsOwner(bool? isOwner)
             {
-                isOwner = value;
+                this.isOwner = isOwner;
                 return this;
             }
 
-            public Builder Status(string value)
+            public Builder Status(string status)
             {
-                status = value;
+                this.status = status;
                 return this;
             }
 
-            public Builder GivenName(string value)
+            public Builder GivenName(string givenName)
             {
-                givenName = value;
+                this.givenName = givenName;
                 return this;
             }
 
-            public Builder FamilyName(string value)
+            public Builder FamilyName(string familyName)
             {
-                familyName = value;
+                this.familyName = familyName;
                 return this;
             }
 
-            public Builder EmailAddress(string value)
+            public Builder EmailAddress(string emailAddress)
             {
-                emailAddress = value;
+                this.emailAddress = emailAddress;
                 return this;
             }
 
-            public Builder PhoneNumber(string value)
+            public Builder PhoneNumber(string phoneNumber)
             {
-                phoneNumber = value;
+                this.phoneNumber = phoneNumber;
                 return this;
             }
 
-            public Builder CreatedAt(string value)
+            public Builder CreatedAt(string createdAt)
             {
-                createdAt = value;
+                this.createdAt = createdAt;
                 return this;
             }
 
-            public Builder UpdatedAt(string value)
+            public Builder UpdatedAt(string updatedAt)
             {
-                updatedAt = value;
+                this.updatedAt = updatedAt;
                 return this;
             }
 
-            public Builder AssignedLocations(Models.TeamMemberAssignedLocations value)
+            public Builder AssignedLocations(Models.TeamMemberAssignedLocations assignedLocations)
             {
-                assignedLocations = value;
+                this.assignedLocations = assignedLocations;
                 return this;
             }
 

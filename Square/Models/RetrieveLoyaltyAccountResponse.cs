@@ -28,14 +28,14 @@ namespace Square.Models
         /// <summary>
         /// Any errors that occurred during the request.
         /// </summary>
-        [JsonProperty("errors")]
+        [JsonProperty("errors", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.Error> Errors { get; }
 
         /// <summary>
         /// Describes a loyalty account. For more information, see 
         /// [Loyalty Overview](https://developer.squareup.com/docs/docs/loyalty/overview).
         /// </summary>
-        [JsonProperty("loyalty_account")]
+        [JsonProperty("loyalty_account", NullValueHandling = NullValueHandling.Ignore)]
         public Models.LoyaltyAccount LoyaltyAccount { get; }
 
         public Builder ToBuilder()
@@ -48,19 +48,20 @@ namespace Square.Models
 
         public class Builder
         {
-            private IList<Models.Error> errors = new List<Models.Error>();
+            private IList<Models.Error> errors;
             private Models.LoyaltyAccount loyaltyAccount;
 
-            public Builder() { }
-            public Builder Errors(IList<Models.Error> value)
+
+
+            public Builder Errors(IList<Models.Error> errors)
             {
-                errors = value;
+                this.errors = errors;
                 return this;
             }
 
-            public Builder LoyaltyAccount(Models.LoyaltyAccount value)
+            public Builder LoyaltyAccount(Models.LoyaltyAccount loyaltyAccount)
             {
-                loyaltyAccount = value;
+                this.loyaltyAccount = loyaltyAccount;
                 return this;
             }
 

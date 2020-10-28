@@ -23,7 +23,7 @@ namespace Square.Models
         /// List of customer IDs to filter by.
         /// Max: 10 customer IDs.
         /// </summary>
-        [JsonProperty("customer_ids")]
+        [JsonProperty("customer_ids", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> CustomerIds { get; }
 
         public Builder ToBuilder()
@@ -35,12 +35,13 @@ namespace Square.Models
 
         public class Builder
         {
-            private IList<string> customerIds = new List<string>();
+            private IList<string> customerIds;
 
-            public Builder() { }
-            public Builder CustomerIds(IList<string> value)
+
+
+            public Builder CustomerIds(IList<string> customerIds)
             {
-                customerIds = value;
+                this.customerIds = customerIds;
                 return this;
             }
 

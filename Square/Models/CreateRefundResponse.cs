@@ -28,13 +28,13 @@ namespace Square.Models
         /// <summary>
         /// Any errors that occurred during the request.
         /// </summary>
-        [JsonProperty("errors")]
+        [JsonProperty("errors", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.Error> Errors { get; }
 
         /// <summary>
         /// Represents a refund processed for a Square transaction.
         /// </summary>
-        [JsonProperty("refund")]
+        [JsonProperty("refund", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Refund Refund { get; }
 
         public Builder ToBuilder()
@@ -47,19 +47,20 @@ namespace Square.Models
 
         public class Builder
         {
-            private IList<Models.Error> errors = new List<Models.Error>();
+            private IList<Models.Error> errors;
             private Models.Refund refund;
 
-            public Builder() { }
-            public Builder Errors(IList<Models.Error> value)
+
+
+            public Builder Errors(IList<Models.Error> errors)
             {
-                errors = value;
+                this.errors = errors;
                 return this;
             }
 
-            public Builder Refund(Models.Refund value)
+            public Builder Refund(Models.Refund refund)
             {
-                refund = value;
+                this.refund = refund;
                 return this;
             }
 

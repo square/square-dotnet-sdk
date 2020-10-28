@@ -51,15 +51,16 @@ namespace Square.Models
                 this.one = one;
                 this.other = other;
             }
-            public Builder One(string value)
+
+            public Builder One(string one)
             {
-                one = value;
+                this.one = one;
                 return this;
             }
 
-            public Builder Other(string value)
+            public Builder Other(string other)
             {
-                other = value;
+                this.other = other;
                 return this;
             }
 

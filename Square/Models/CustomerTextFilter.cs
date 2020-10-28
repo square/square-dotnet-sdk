@@ -24,7 +24,7 @@ namespace Square.Models
         /// <summary>
         /// Use the exact filter to select customers whose attributes match exactly the specified query.
         /// </summary>
-        [JsonProperty("exact")]
+        [JsonProperty("exact", NullValueHandling = NullValueHandling.Ignore)]
         public string Exact { get; }
 
         /// <summary>
@@ -33,7 +33,7 @@ namespace Square.Models
         /// each query token must be matched somewhere in the searched attribute. For single token queries, 
         /// this is effectively the same behavior as a partial match operation.
         /// </summary>
-        [JsonProperty("fuzzy")]
+        [JsonProperty("fuzzy", NullValueHandling = NullValueHandling.Ignore)]
         public string Fuzzy { get; }
 
         public Builder ToBuilder()
@@ -49,16 +49,17 @@ namespace Square.Models
             private string exact;
             private string fuzzy;
 
-            public Builder() { }
-            public Builder Exact(string value)
+
+
+            public Builder Exact(string exact)
             {
-                exact = value;
+                this.exact = exact;
                 return this;
             }
 
-            public Builder Fuzzy(string value)
+            public Builder Fuzzy(string fuzzy)
             {
-                fuzzy = value;
+                this.fuzzy = fuzzy;
                 return this;
             }
 

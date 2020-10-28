@@ -48,73 +48,73 @@ namespace Square.Models
         /// <summary>
         /// The item variation's unique ID.
         /// </summary>
-        [JsonProperty("id")]
+        [JsonProperty("id", NullValueHandling = NullValueHandling.Ignore)]
         public string Id { get; }
 
         /// <summary>
         /// The item variation's name.
         /// </summary>
-        [JsonProperty("name")]
+        [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
         public string Name { get; }
 
         /// <summary>
         /// The ID of the variation's associated item.
         /// </summary>
-        [JsonProperty("item_id")]
+        [JsonProperty("item_id", NullValueHandling = NullValueHandling.Ignore)]
         public string ItemId { get; }
 
         /// <summary>
         /// Indicates the variation's list position when displayed in Square Point of Sale and the merchant dashboard. If more than one variation for the same item has the same ordinal value, those variations are displayed in alphabetical order
         /// </summary>
-        [JsonProperty("ordinal")]
+        [JsonProperty("ordinal", NullValueHandling = NullValueHandling.Ignore)]
         public int? Ordinal { get; }
 
         /// <summary>
         /// Getter for pricing_type
         /// </summary>
-        [JsonProperty("pricing_type")]
+        [JsonProperty("pricing_type", NullValueHandling = NullValueHandling.Ignore)]
         public string PricingType { get; }
 
         /// <summary>
         /// Getter for price_money
         /// </summary>
-        [JsonProperty("price_money")]
+        [JsonProperty("price_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1Money PriceMoney { get; }
 
         /// <summary>
         /// The item variation's SKU, if any.
         /// </summary>
-        [JsonProperty("sku")]
+        [JsonProperty("sku", NullValueHandling = NullValueHandling.Ignore)]
         public string Sku { get; }
 
         /// <summary>
         /// If true, inventory tracking is active for the variation.
         /// </summary>
-        [JsonProperty("track_inventory")]
+        [JsonProperty("track_inventory", NullValueHandling = NullValueHandling.Ignore)]
         public bool? TrackInventory { get; }
 
         /// <summary>
         /// Getter for inventory_alert_type
         /// </summary>
-        [JsonProperty("inventory_alert_type")]
+        [JsonProperty("inventory_alert_type", NullValueHandling = NullValueHandling.Ignore)]
         public string InventoryAlertType { get; }
 
         /// <summary>
         /// If the inventory quantity for the variation is less than or equal to this value and inventory_alert_type is LOW_QUANTITY, the variation displays an alert in the merchant dashboard.
         /// </summary>
-        [JsonProperty("inventory_alert_threshold")]
+        [JsonProperty("inventory_alert_threshold", NullValueHandling = NullValueHandling.Ignore)]
         public int? InventoryAlertThreshold { get; }
 
         /// <summary>
         /// Arbitrary metadata associated with the variation. Cannot exceed 255 characters.
         /// </summary>
-        [JsonProperty("user_data")]
+        [JsonProperty("user_data", NullValueHandling = NullValueHandling.Ignore)]
         public string UserData { get; }
 
         /// <summary>
         /// The ID of the CatalogObject in the Connect v2 API. Objects that are shared across multiple locations share the same v2 ID.
         /// </summary>
-        [JsonProperty("v2_id")]
+        [JsonProperty("v2_id", NullValueHandling = NullValueHandling.Ignore)]
         public string V2Id { get; }
 
         public Builder ToBuilder()
@@ -150,76 +150,77 @@ namespace Square.Models
             private string userData;
             private string v2Id;
 
-            public Builder() { }
-            public Builder Id(string value)
+
+
+            public Builder Id(string id)
             {
-                id = value;
+                this.id = id;
                 return this;
             }
 
-            public Builder Name(string value)
+            public Builder Name(string name)
             {
-                name = value;
+                this.name = name;
                 return this;
             }
 
-            public Builder ItemId(string value)
+            public Builder ItemId(string itemId)
             {
-                itemId = value;
+                this.itemId = itemId;
                 return this;
             }
 
-            public Builder Ordinal(int? value)
+            public Builder Ordinal(int? ordinal)
             {
-                ordinal = value;
+                this.ordinal = ordinal;
                 return this;
             }
 
-            public Builder PricingType(string value)
+            public Builder PricingType(string pricingType)
             {
-                pricingType = value;
+                this.pricingType = pricingType;
                 return this;
             }
 
-            public Builder PriceMoney(Models.V1Money value)
+            public Builder PriceMoney(Models.V1Money priceMoney)
             {
-                priceMoney = value;
+                this.priceMoney = priceMoney;
                 return this;
             }
 
-            public Builder Sku(string value)
+            public Builder Sku(string sku)
             {
-                sku = value;
+                this.sku = sku;
                 return this;
             }
 
-            public Builder TrackInventory(bool? value)
+            public Builder TrackInventory(bool? trackInventory)
             {
-                trackInventory = value;
+                this.trackInventory = trackInventory;
                 return this;
             }
 
-            public Builder InventoryAlertType(string value)
+            public Builder InventoryAlertType(string inventoryAlertType)
             {
-                inventoryAlertType = value;
+                this.inventoryAlertType = inventoryAlertType;
                 return this;
             }
 
-            public Builder InventoryAlertThreshold(int? value)
+            public Builder InventoryAlertThreshold(int? inventoryAlertThreshold)
             {
-                inventoryAlertThreshold = value;
+                this.inventoryAlertThreshold = inventoryAlertThreshold;
                 return this;
             }
 
-            public Builder UserData(string value)
+            public Builder UserData(string userData)
             {
-                userData = value;
+                this.userData = userData;
                 return this;
             }
 
-            public Builder V2Id(string value)
+            public Builder V2Id(string v2Id)
             {
-                v2Id = value;
+                this.v2Id = v2Id;
                 return this;
             }
 

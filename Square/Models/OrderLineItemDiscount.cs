@@ -42,25 +42,25 @@ namespace Square.Models
         /// <summary>
         /// Unique ID that identifies the discount only within this order.
         /// </summary>
-        [JsonProperty("uid")]
+        [JsonProperty("uid", NullValueHandling = NullValueHandling.Ignore)]
         public string Uid { get; }
 
         /// <summary>
         /// The catalog object id referencing [CatalogDiscount](#type-catalogdiscount).
         /// </summary>
-        [JsonProperty("catalog_object_id")]
+        [JsonProperty("catalog_object_id", NullValueHandling = NullValueHandling.Ignore)]
         public string CatalogObjectId { get; }
 
         /// <summary>
         /// The discount's name.
         /// </summary>
-        [JsonProperty("name")]
+        [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
         public string Name { get; }
 
         /// <summary>
         /// Indicates how the discount is applied to the associated line item or order.
         /// </summary>
-        [JsonProperty("type")]
+        [JsonProperty("type", NullValueHandling = NullValueHandling.Ignore)]
         public string Type { get; }
 
         /// <summary>
@@ -68,7 +68,7 @@ namespace Square.Models
         /// A value of `7.25` corresponds to a percentage of 7.25%.
         /// `percentage` is not set for amount-based discounts.
         /// </summary>
-        [JsonProperty("percentage")]
+        [JsonProperty("percentage", NullValueHandling = NullValueHandling.Ignore)]
         public string Percentage { get; }
 
         /// <summary>
@@ -79,7 +79,7 @@ namespace Square.Models
         /// [Working with Monetary Amounts](https://developer.squareup.com/docs/build-basics/working-with-monetary-amounts)
         /// for more information.
         /// </summary>
-        [JsonProperty("amount_money")]
+        [JsonProperty("amount_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Money AmountMoney { get; }
 
         /// <summary>
@@ -90,7 +90,7 @@ namespace Square.Models
         /// [Working with Monetary Amounts](https://developer.squareup.com/docs/build-basics/working-with-monetary-amounts)
         /// for more information.
         /// </summary>
-        [JsonProperty("applied_money")]
+        [JsonProperty("applied_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Money AppliedMoney { get; }
 
         /// <summary>
@@ -108,13 +108,13 @@ namespace Square.Models
         /// application.
         /// See [Metadata](https://developer.squareup.com/docs/build-basics/metadata) for more information.
         /// </summary>
-        [JsonProperty("metadata")]
+        [JsonProperty("metadata", NullValueHandling = NullValueHandling.Ignore)]
         public IDictionary<string, string> Metadata { get; }
 
         /// <summary>
         /// Indicates whether this is a line item or order level discount.
         /// </summary>
-        [JsonProperty("scope")]
+        [JsonProperty("scope", NullValueHandling = NullValueHandling.Ignore)]
         public string Scope { get; }
 
         /// <summary>
@@ -124,7 +124,7 @@ namespace Square.Models
         /// through the Loyalty API. To manually unapply discounts that are the result of added rewards,
         /// the rewards must be removed from the order through the Loyalty API.
         /// </summary>
-        [JsonProperty("reward_ids")]
+        [JsonProperty("reward_ids", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> RewardIds { get; }
 
         /// <summary>
@@ -132,7 +132,7 @@ namespace Square.Models
         /// to this discount. The specification and application of the discounts, to which a `pricing_rule_id` is
         /// assigned, are completely controlled by the corresponding pricing rule.
         /// </summary>
-        [JsonProperty("pricing_rule_id")]
+        [JsonProperty("pricing_rule_id", NullValueHandling = NullValueHandling.Ignore)]
         public string PricingRuleId { get; }
 
         public Builder ToBuilder()
@@ -161,75 +161,76 @@ namespace Square.Models
             private string percentage;
             private Models.Money amountMoney;
             private Models.Money appliedMoney;
-            private IDictionary<string, string> metadata = new Dictionary<string, string>();
+            private IDictionary<string, string> metadata;
             private string scope;
-            private IList<string> rewardIds = new List<string>();
+            private IList<string> rewardIds;
             private string pricingRuleId;
 
-            public Builder() { }
-            public Builder Uid(string value)
+
+
+            public Builder Uid(string uid)
             {
-                uid = value;
+                this.uid = uid;
                 return this;
             }
 
-            public Builder CatalogObjectId(string value)
+            public Builder CatalogObjectId(string catalogObjectId)
             {
-                catalogObjectId = value;
+                this.catalogObjectId = catalogObjectId;
                 return this;
             }
 
-            public Builder Name(string value)
+            public Builder Name(string name)
             {
-                name = value;
+                this.name = name;
                 return this;
             }
 
-            public Builder Type(string value)
+            public Builder Type(string type)
             {
-                type = value;
+                this.type = type;
                 return this;
             }
 
-            public Builder Percentage(string value)
+            public Builder Percentage(string percentage)
             {
-                percentage = value;
+                this.percentage = percentage;
                 return this;
             }
 
-            public Builder AmountMoney(Models.Money value)
+            public Builder AmountMoney(Models.Money amountMoney)
             {
-                amountMoney = value;
+                this.amountMoney = amountMoney;
                 return this;
             }
 
-            public Builder AppliedMoney(Models.Money value)
+            public Builder AppliedMoney(Models.Money appliedMoney)
             {
-                appliedMoney = value;
+                this.appliedMoney = appliedMoney;
                 return this;
             }
 
-            public Builder Metadata(IDictionary<string, string> value)
+            public Builder Metadata(IDictionary<string, string> metadata)
             {
-                metadata = value;
+                this.metadata = metadata;
                 return this;
             }
 
-            public Builder Scope(string value)
+            public Builder Scope(string scope)
             {
-                scope = value;
+                this.scope = scope;
                 return this;
             }
 
-            public Builder RewardIds(IList<string> value)
+            public Builder RewardIds(IList<string> rewardIds)
             {
-                rewardIds = value;
+                this.rewardIds = rewardIds;
                 return this;
             }
 
-            public Builder PricingRuleId(string value)
+            public Builder PricingRuleId(string pricingRuleId)
             {
-                pricingRuleId = value;
+                this.pricingRuleId = pricingRuleId;
                 return this;
             }
 

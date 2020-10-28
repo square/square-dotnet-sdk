@@ -24,7 +24,7 @@ namespace Square.Models
         /// with with a `source.name` that matches any of the listed source names.
         /// Max: 10 source names.
         /// </summary>
-        [JsonProperty("source_names")]
+        [JsonProperty("source_names", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> SourceNames { get; }
 
         public Builder ToBuilder()
@@ -36,12 +36,13 @@ namespace Square.Models
 
         public class Builder
         {
-            private IList<string> sourceNames = new List<string>();
+            private IList<string> sourceNames;
 
-            public Builder() { }
-            public Builder SourceNames(IList<string> value)
+
+
+            public Builder SourceNames(IList<string> sourceNames)
             {
-                sourceNames = value;
+                this.sourceNames = sourceNames;
                 return this;
             }
 

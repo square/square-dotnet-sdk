@@ -30,13 +30,13 @@ namespace Square.Models
         /// for an employee. May include a record of the start and end times for breaks
         /// taken during the shift.
         /// </summary>
-        [JsonProperty("shift")]
+        [JsonProperty("shift", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Shift Shift { get; }
 
         /// <summary>
         /// Any errors that occurred during the request.
         /// </summary>
-        [JsonProperty("errors")]
+        [JsonProperty("errors", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.Error> Errors { get; }
 
         public Builder ToBuilder()
@@ -50,18 +50,19 @@ namespace Square.Models
         public class Builder
         {
             private Models.Shift shift;
-            private IList<Models.Error> errors = new List<Models.Error>();
+            private IList<Models.Error> errors;
 
-            public Builder() { }
-            public Builder Shift(Models.Shift value)
+
+
+            public Builder Shift(Models.Shift shift)
             {
-                shift = value;
+                this.shift = shift;
                 return this;
             }
 
-            public Builder Errors(IList<Models.Error> value)
+            public Builder Errors(IList<Models.Error> errors)
             {
-                errors = value;
+                this.errors = errors;
                 return this;
             }
 

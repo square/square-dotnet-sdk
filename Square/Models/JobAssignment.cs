@@ -47,7 +47,7 @@ namespace Square.Models
         /// [Working with Monetary Amounts](https://developer.squareup.com/docs/build-basics/working-with-monetary-amounts)
         /// for more information.
         /// </summary>
-        [JsonProperty("hourly_rate")]
+        [JsonProperty("hourly_rate", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Money HourlyRate { get; }
 
         /// <summary>
@@ -58,13 +58,13 @@ namespace Square.Models
         /// [Working with Monetary Amounts](https://developer.squareup.com/docs/build-basics/working-with-monetary-amounts)
         /// for more information.
         /// </summary>
-        [JsonProperty("annual_rate")]
+        [JsonProperty("annual_rate", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Money AnnualRate { get; }
 
         /// <summary>
         /// The planned hours per week for the job. Set if the job `PayType` is `SALARY`.
         /// </summary>
-        [JsonProperty("weekly_hours")]
+        [JsonProperty("weekly_hours", NullValueHandling = NullValueHandling.Ignore)]
         public int? WeeklyHours { get; }
 
         public Builder ToBuilder()
@@ -91,33 +91,34 @@ namespace Square.Models
                 this.jobTitle = jobTitle;
                 this.payType = payType;
             }
-            public Builder JobTitle(string value)
+
+            public Builder JobTitle(string jobTitle)
             {
-                jobTitle = value;
+                this.jobTitle = jobTitle;
                 return this;
             }
 
-            public Builder PayType(string value)
+            public Builder PayType(string payType)
             {
-                payType = value;
+                this.payType = payType;
                 return this;
             }
 
-            public Builder HourlyRate(Models.Money value)
+            public Builder HourlyRate(Models.Money hourlyRate)
             {
-                hourlyRate = value;
+                this.hourlyRate = hourlyRate;
                 return this;
             }
 
-            public Builder AnnualRate(Models.Money value)
+            public Builder AnnualRate(Models.Money annualRate)
             {
-                annualRate = value;
+                this.annualRate = annualRate;
                 return this;
             }
 
-            public Builder WeeklyHours(int? value)
+            public Builder WeeklyHours(int? weeklyHours)
             {
-                weeklyHours = value;
+                this.weeklyHours = weeklyHours;
                 return this;
             }
 

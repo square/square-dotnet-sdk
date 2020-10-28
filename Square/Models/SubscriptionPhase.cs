@@ -30,7 +30,7 @@ namespace Square.Models
         /// <summary>
         /// The Square-assigned ID of the subscription phase. This field cannot be changed after a `SubscriptionPhase` is created.
         /// </summary>
-        [JsonProperty("uid")]
+        [JsonProperty("uid", NullValueHandling = NullValueHandling.Ignore)]
         public string Uid { get; }
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace Square.Models
         /// <summary>
         /// The number of `cadence`s the phase lasts. If not set, the phase never ends. Only the last phase can be indefinite. This field cannot be changed after a `SubscriptionPhase` is created.
         /// </summary>
-        [JsonProperty("periods")]
+        [JsonProperty("periods", NullValueHandling = NullValueHandling.Ignore)]
         public int? Periods { get; }
 
         /// <summary>
@@ -59,7 +59,7 @@ namespace Square.Models
         /// <summary>
         /// The position this phase appears in the sequence of phases defined for the plan, indexed from 0. This field cannot be changed after a `SubscriptionPhase` is created.
         /// </summary>
-        [JsonProperty("ordinal")]
+        [JsonProperty("ordinal", NullValueHandling = NullValueHandling.Ignore)]
         public long? Ordinal { get; }
 
         public Builder ToBuilder()
@@ -86,33 +86,34 @@ namespace Square.Models
                 this.cadence = cadence;
                 this.recurringPriceMoney = recurringPriceMoney;
             }
-            public Builder Cadence(string value)
+
+            public Builder Cadence(string cadence)
             {
-                cadence = value;
+                this.cadence = cadence;
                 return this;
             }
 
-            public Builder RecurringPriceMoney(Models.Money value)
+            public Builder RecurringPriceMoney(Models.Money recurringPriceMoney)
             {
-                recurringPriceMoney = value;
+                this.recurringPriceMoney = recurringPriceMoney;
                 return this;
             }
 
-            public Builder Uid(string value)
+            public Builder Uid(string uid)
             {
-                uid = value;
+                this.uid = uid;
                 return this;
             }
 
-            public Builder Periods(int? value)
+            public Builder Periods(int? periods)
             {
-                periods = value;
+                this.periods = periods;
                 return this;
             }
 
-            public Builder Ordinal(long? value)
+            public Builder Ordinal(long? ordinal)
             {
-                ordinal = value;
+                this.ordinal = ordinal;
                 return this;
             }
 

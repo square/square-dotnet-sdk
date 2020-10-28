@@ -22,7 +22,7 @@ namespace Square.Models
         /// <summary>
         /// V1EmployeeRole
         /// </summary>
-        [JsonProperty("employee_role")]
+        [JsonProperty("employee_role", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1EmployeeRole EmployeeRole { get; }
 
         public Builder ToBuilder()
@@ -36,10 +36,11 @@ namespace Square.Models
         {
             private Models.V1EmployeeRole employeeRole;
 
-            public Builder() { }
-            public Builder EmployeeRole(Models.V1EmployeeRole value)
+
+
+            public Builder EmployeeRole(Models.V1EmployeeRole employeeRole)
             {
-                employeeRole = value;
+                this.employeeRole = employeeRole;
                 return this;
             }
 

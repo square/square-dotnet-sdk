@@ -26,19 +26,19 @@ namespace Square.Models
         /// <summary>
         /// The modifier option's name.
         /// </summary>
-        [JsonProperty("name")]
+        [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
         public string Name { get; }
 
         /// <summary>
         /// Getter for applied_money
         /// </summary>
-        [JsonProperty("applied_money")]
+        [JsonProperty("applied_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1Money AppliedMoney { get; }
 
         /// <summary>
         /// TThe ID of the applied modifier option, if available. Modifier options applied in older versions of Square Register might not have an ID.
         /// </summary>
-        [JsonProperty("modifier_option_id")]
+        [JsonProperty("modifier_option_id", NullValueHandling = NullValueHandling.Ignore)]
         public string ModifierOptionId { get; }
 
         public Builder ToBuilder()
@@ -56,22 +56,23 @@ namespace Square.Models
             private Models.V1Money appliedMoney;
             private string modifierOptionId;
 
-            public Builder() { }
-            public Builder Name(string value)
+
+
+            public Builder Name(string name)
             {
-                name = value;
+                this.name = name;
                 return this;
             }
 
-            public Builder AppliedMoney(Models.V1Money value)
+            public Builder AppliedMoney(Models.V1Money appliedMoney)
             {
-                appliedMoney = value;
+                this.appliedMoney = appliedMoney;
                 return this;
             }
 
-            public Builder ModifierOptionId(string value)
+            public Builder ModifierOptionId(string modifierOptionId)
             {
-                modifierOptionId = value;
+                this.modifierOptionId = modifierOptionId;
                 return this;
             }
 

@@ -18,28 +18,26 @@ namespace Square.Models
             string displayName = null,
             string description = null,
             bool? showColors = null,
-            IList<Models.CatalogObject> values = null,
-            long? itemCount = null)
+            IList<Models.CatalogObject> values = null)
         {
             Name = name;
             DisplayName = displayName;
             Description = description;
             ShowColors = showColors;
             Values = values;
-            ItemCount = itemCount;
         }
 
         /// <summary>
         /// The item option's display name for the seller. Must be unique across
         /// all item options. This is a searchable attribute for use in applicable query filters.
         /// </summary>
-        [JsonProperty("name")]
+        [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
         public string Name { get; }
 
         /// <summary>
         /// The item option's display name for the customer. This is a searchable attribute for use in applicable query filters.
         /// </summary>
-        [JsonProperty("display_name")]
+        [JsonProperty("display_name", NullValueHandling = NullValueHandling.Ignore)]
         public string DisplayName { get; }
 
         /// <summary>
@@ -47,29 +45,21 @@ namespace Square.Models
         /// Point of Sale app for the seller and in the Online Store or on receipts for
         /// the buyer. This is a searchable attribute for use in applicable query filters.
         /// </summary>
-        [JsonProperty("description")]
+        [JsonProperty("description", NullValueHandling = NullValueHandling.Ignore)]
         public string Description { get; }
 
         /// <summary>
         /// If true, display colors for entries in `values` when present.
         /// </summary>
-        [JsonProperty("show_colors")]
+        [JsonProperty("show_colors", NullValueHandling = NullValueHandling.Ignore)]
         public bool? ShowColors { get; }
 
         /// <summary>
         /// A list of CatalogObjects containing the
         /// `CatalogItemOptionValue`s for this item.
         /// </summary>
-        [JsonProperty("values")]
+        [JsonProperty("values", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.CatalogObject> Values { get; }
-
-        /// <summary>
-        /// The number of `CatalogItem`s currently associated
-        /// with this item option. Present only if the `include_counts` was specified
-        /// in the request. Any count over 100 will be returned as `100`.
-        /// </summary>
-        [JsonProperty("item_count")]
-        public long? ItemCount { get; }
 
         public Builder ToBuilder()
         {
@@ -78,8 +68,7 @@ namespace Square.Models
                 .DisplayName(DisplayName)
                 .Description(Description)
                 .ShowColors(ShowColors)
-                .Values(Values)
-                .ItemCount(ItemCount);
+                .Values(Values);
             return builder;
         }
 
@@ -89,43 +78,37 @@ namespace Square.Models
             private string displayName;
             private string description;
             private bool? showColors;
-            private IList<Models.CatalogObject> values = new List<Models.CatalogObject>();
-            private long? itemCount;
+            private IList<Models.CatalogObject> values;
 
-            public Builder() { }
-            public Builder Name(string value)
+
+
+            public Builder Name(string name)
             {
-                name = value;
+                this.name = name;
                 return this;
             }
 
-            public Builder DisplayName(string value)
+            public Builder DisplayName(string displayName)
             {
-                displayName = value;
+                this.displayName = displayName;
                 return this;
             }
 
-            public Builder Description(string value)
+            public Builder Description(string description)
             {
-                description = value;
+                this.description = description;
                 return this;
             }
 
-            public Builder ShowColors(bool? value)
+            public Builder ShowColors(bool? showColors)
             {
-                showColors = value;
+                this.showColors = showColors;
                 return this;
             }
 
-            public Builder Values(IList<Models.CatalogObject> value)
+            public Builder Values(IList<Models.CatalogObject> values)
             {
-                values = value;
-                return this;
-            }
-
-            public Builder ItemCount(long? value)
-            {
-                itemCount = value;
+                this.values = values;
                 return this;
             }
 
@@ -135,8 +118,7 @@ namespace Square.Models
                     displayName,
                     description,
                     showColors,
-                    values,
-                    itemCount);
+                    values);
             }
         }
     }

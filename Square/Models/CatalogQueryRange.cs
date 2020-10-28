@@ -32,13 +32,13 @@ namespace Square.Models
         /// <summary>
         /// The desired minimum value for the search attribute (inclusive).
         /// </summary>
-        [JsonProperty("attribute_min_value")]
+        [JsonProperty("attribute_min_value", NullValueHandling = NullValueHandling.Ignore)]
         public long? AttributeMinValue { get; }
 
         /// <summary>
         /// The desired maximum value for the search attribute (inclusive).
         /// </summary>
-        [JsonProperty("attribute_max_value")]
+        [JsonProperty("attribute_max_value", NullValueHandling = NullValueHandling.Ignore)]
         public long? AttributeMaxValue { get; }
 
         public Builder ToBuilder()
@@ -59,21 +59,22 @@ namespace Square.Models
             {
                 this.attributeName = attributeName;
             }
-            public Builder AttributeName(string value)
+
+            public Builder AttributeName(string attributeName)
             {
-                attributeName = value;
+                this.attributeName = attributeName;
                 return this;
             }
 
-            public Builder AttributeMinValue(long? value)
+            public Builder AttributeMinValue(long? attributeMinValue)
             {
-                attributeMinValue = value;
+                this.attributeMinValue = attributeMinValue;
                 return this;
             }
 
-            public Builder AttributeMaxValue(long? value)
+            public Builder AttributeMaxValue(long? attributeMaxValue)
             {
-                attributeMaxValue = value;
+                this.attributeMaxValue = attributeMaxValue;
                 return this;
             }
 

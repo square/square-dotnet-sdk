@@ -28,13 +28,13 @@ namespace Square.Models
         /// <summary>
         /// The variation that the entry corresponds to.
         /// </summary>
-        [JsonProperty("variation_id")]
+        [JsonProperty("variation_id", NullValueHandling = NullValueHandling.Ignore)]
         public string VariationId { get; }
 
         /// <summary>
         /// The current available quantity of the item variation.
         /// </summary>
-        [JsonProperty("quantity_on_hand")]
+        [JsonProperty("quantity_on_hand", NullValueHandling = NullValueHandling.Ignore)]
         public double? QuantityOnHand { get; }
 
         public Builder ToBuilder()
@@ -50,16 +50,17 @@ namespace Square.Models
             private string variationId;
             private double? quantityOnHand;
 
-            public Builder() { }
-            public Builder VariationId(string value)
+
+
+            public Builder VariationId(string variationId)
             {
-                variationId = value;
+                this.variationId = variationId;
                 return this;
             }
 
-            public Builder QuantityOnHand(double? value)
+            public Builder QuantityOnHand(double? quantityOnHand)
             {
-                quantityOnHand = value;
+                this.quantityOnHand = quantityOnHand;
                 return this;
             }
 

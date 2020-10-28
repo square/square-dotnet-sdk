@@ -38,13 +38,13 @@ namespace Square.Models
         /// <summary>
         /// The Square-assigned ID of the loyalty reward.
         /// </summary>
-        [JsonProperty("id")]
+        [JsonProperty("id", NullValueHandling = NullValueHandling.Ignore)]
         public string Id { get; }
 
         /// <summary>
         /// The status of the loyalty reward.
         /// </summary>
-        [JsonProperty("status")]
+        [JsonProperty("status", NullValueHandling = NullValueHandling.Ignore)]
         public string Status { get; }
 
         /// <summary>
@@ -62,31 +62,31 @@ namespace Square.Models
         /// <summary>
         /// The number of loyalty points used for the reward.
         /// </summary>
-        [JsonProperty("points")]
+        [JsonProperty("points", NullValueHandling = NullValueHandling.Ignore)]
         public int? Points { get; }
 
         /// <summary>
         /// The Square-assigned ID of the [order](#type-Order) to which the reward is attached.
         /// </summary>
-        [JsonProperty("order_id")]
+        [JsonProperty("order_id", NullValueHandling = NullValueHandling.Ignore)]
         public string OrderId { get; }
 
         /// <summary>
         /// The timestamp when the reward was created, in RFC 3339 format.
         /// </summary>
-        [JsonProperty("created_at")]
+        [JsonProperty("created_at", NullValueHandling = NullValueHandling.Ignore)]
         public string CreatedAt { get; }
 
         /// <summary>
         /// The timestamp when the reward was last updated, in RFC 3339 format.
         /// </summary>
-        [JsonProperty("updated_at")]
+        [JsonProperty("updated_at", NullValueHandling = NullValueHandling.Ignore)]
         public string UpdatedAt { get; }
 
         /// <summary>
         /// The timestamp when the reward was redeemed, in RFC 3339 format.
         /// </summary>
-        [JsonProperty("redeemed_at")]
+        [JsonProperty("redeemed_at", NullValueHandling = NullValueHandling.Ignore)]
         public string RedeemedAt { get; }
 
         public Builder ToBuilder()
@@ -121,57 +121,58 @@ namespace Square.Models
                 this.loyaltyAccountId = loyaltyAccountId;
                 this.rewardTierId = rewardTierId;
             }
-            public Builder LoyaltyAccountId(string value)
+
+            public Builder LoyaltyAccountId(string loyaltyAccountId)
             {
-                loyaltyAccountId = value;
+                this.loyaltyAccountId = loyaltyAccountId;
                 return this;
             }
 
-            public Builder RewardTierId(string value)
+            public Builder RewardTierId(string rewardTierId)
             {
-                rewardTierId = value;
+                this.rewardTierId = rewardTierId;
                 return this;
             }
 
-            public Builder Id(string value)
+            public Builder Id(string id)
             {
-                id = value;
+                this.id = id;
                 return this;
             }
 
-            public Builder Status(string value)
+            public Builder Status(string status)
             {
-                status = value;
+                this.status = status;
                 return this;
             }
 
-            public Builder Points(int? value)
+            public Builder Points(int? points)
             {
-                points = value;
+                this.points = points;
                 return this;
             }
 
-            public Builder OrderId(string value)
+            public Builder OrderId(string orderId)
             {
-                orderId = value;
+                this.orderId = orderId;
                 return this;
             }
 
-            public Builder CreatedAt(string value)
+            public Builder CreatedAt(string createdAt)
             {
-                createdAt = value;
+                this.createdAt = createdAt;
                 return this;
             }
 
-            public Builder UpdatedAt(string value)
+            public Builder UpdatedAt(string updatedAt)
             {
-                updatedAt = value;
+                this.updatedAt = updatedAt;
                 return this;
             }
 
-            public Builder RedeemedAt(string value)
+            public Builder RedeemedAt(string redeemedAt)
             {
-                redeemedAt = value;
+                this.redeemedAt = redeemedAt;
                 return this;
             }
 

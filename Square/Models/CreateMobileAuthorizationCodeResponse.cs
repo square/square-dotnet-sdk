@@ -31,21 +31,21 @@ namespace Square.Models
         /// Generated authorization code that connects a mobile application instance
         /// to a Square account.
         /// </summary>
-        [JsonProperty("authorization_code")]
+        [JsonProperty("authorization_code", NullValueHandling = NullValueHandling.Ignore)]
         public string AuthorizationCode { get; }
 
         /// <summary>
         /// The timestamp when `authorization_code` expires in
         /// [RFC 3339](https://tools.ietf.org/html/rfc3339) format, e.g., "2016-09-04T23:59:33.123Z".
         /// </summary>
-        [JsonProperty("expires_at")]
+        [JsonProperty("expires_at", NullValueHandling = NullValueHandling.Ignore)]
         public string ExpiresAt { get; }
 
         /// <summary>
         /// Represents an error encountered during a request to the Connect API.
         /// See [Handling errors](#handlingerrors) for more information.
         /// </summary>
-        [JsonProperty("error")]
+        [JsonProperty("error", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Error Error { get; }
 
         public Builder ToBuilder()
@@ -63,22 +63,23 @@ namespace Square.Models
             private string expiresAt;
             private Models.Error error;
 
-            public Builder() { }
-            public Builder AuthorizationCode(string value)
+
+
+            public Builder AuthorizationCode(string authorizationCode)
             {
-                authorizationCode = value;
+                this.authorizationCode = authorizationCode;
                 return this;
             }
 
-            public Builder ExpiresAt(string value)
+            public Builder ExpiresAt(string expiresAt)
             {
-                expiresAt = value;
+                this.expiresAt = expiresAt;
                 return this;
             }
 
-            public Builder Error(Models.Error value)
+            public Builder Error(Models.Error error)
             {
-                error = value;
+                this.error = error;
                 return this;
             }
 

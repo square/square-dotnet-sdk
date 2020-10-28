@@ -56,7 +56,7 @@ namespace Square.Models
         /// <summary>
         /// Contains information on the recipient of a fulfillment.
         /// </summary>
-        [JsonProperty("recipient")]
+        [JsonProperty("recipient", NullValueHandling = NullValueHandling.Ignore)]
         public Models.OrderFulfillmentRecipient Recipient { get; }
 
         /// <summary>
@@ -66,7 +66,7 @@ namespace Square.Models
         /// days in the future. If `expires_at` is not set, this pickup fulfillment
         /// will be automatically accepted when placed.
         /// </summary>
-        [JsonProperty("expires_at")]
+        [JsonProperty("expires_at", NullValueHandling = NullValueHandling.Ignore)]
         public string ExpiresAt { get; }
 
         /// <summary>
@@ -75,13 +75,13 @@ namespace Square.Models
         /// duration format e.g., "P1W3D".
         /// If not set, this pickup fulfillment will remain accepted until it is canceled or completed.
         /// </summary>
-        [JsonProperty("auto_complete_duration")]
+        [JsonProperty("auto_complete_duration", NullValueHandling = NullValueHandling.Ignore)]
         public string AutoCompleteDuration { get; }
 
         /// <summary>
         /// The schedule type of the pickup fulfillment.
         /// </summary>
-        [JsonProperty("schedule_type")]
+        [JsonProperty("schedule_type", NullValueHandling = NullValueHandling.Ignore)]
         public string ScheduleType { get; }
 
         /// <summary>
@@ -90,7 +90,7 @@ namespace Square.Models
         /// For fulfillments with the schedule type `ASAP`, this is automatically set
         /// to the current time plus the expected duration to prepare the fulfillment.
         /// </summary>
-        [JsonProperty("pickup_at")]
+        [JsonProperty("pickup_at", NullValueHandling = NullValueHandling.Ignore)]
         public string PickupAt { get; }
 
         /// <summary>
@@ -98,28 +98,28 @@ namespace Square.Models
         /// Must be in RFC3339 duration format, e.g., "P1W3D". Can be used as an
         /// informational guideline for merchants.
         /// </summary>
-        [JsonProperty("pickup_window_duration")]
+        [JsonProperty("pickup_window_duration", NullValueHandling = NullValueHandling.Ignore)]
         public string PickupWindowDuration { get; }
 
         /// <summary>
         /// The duration of time it takes to prepare this fulfillment.
         /// Must be in RFC3339 duration format, e.g., "P1W3D".
         /// </summary>
-        [JsonProperty("prep_time_duration")]
+        [JsonProperty("prep_time_duration", NullValueHandling = NullValueHandling.Ignore)]
         public string PrepTimeDuration { get; }
 
         /// <summary>
         /// A note meant to provide additional instructions about the pickup
         /// fulfillment displayed in the Square Point of Sale and set by the API.
         /// </summary>
-        [JsonProperty("note")]
+        [JsonProperty("note", NullValueHandling = NullValueHandling.Ignore)]
         public string Note { get; }
 
         /// <summary>
         /// The [timestamp](#workingwithdates) indicating when the fulfillment
         /// was placed. Must be in RFC3339 timestamp format, e.g., "2016-09-04T23:59:33.123Z".
         /// </summary>
-        [JsonProperty("placed_at")]
+        [JsonProperty("placed_at", NullValueHandling = NullValueHandling.Ignore)]
         public string PlacedAt { get; }
 
         /// <summary>
@@ -127,28 +127,28 @@ namespace Square.Models
         /// was accepted. In RFC3339 timestamp format,
         /// e.g., "2016-09-04T23:59:33.123Z".
         /// </summary>
-        [JsonProperty("accepted_at")]
+        [JsonProperty("accepted_at", NullValueHandling = NullValueHandling.Ignore)]
         public string AcceptedAt { get; }
 
         /// <summary>
         /// The [timestamp](#workingwithdates) indicating when the fulfillment
         /// was rejected. In RFC3339 timestamp format, e.g., "2016-09-04T23:59:33.123Z".
         /// </summary>
-        [JsonProperty("rejected_at")]
+        [JsonProperty("rejected_at", NullValueHandling = NullValueHandling.Ignore)]
         public string RejectedAt { get; }
 
         /// <summary>
         /// The [timestamp](#workingwithdates) indicating when the fulfillment is
         /// marked as ready for pickup. In RFC3339 timestamp format, e.g., "2016-09-04T23:59:33.123Z".
         /// </summary>
-        [JsonProperty("ready_at")]
+        [JsonProperty("ready_at", NullValueHandling = NullValueHandling.Ignore)]
         public string ReadyAt { get; }
 
         /// <summary>
         /// The [timestamp](#workingwithdates) indicating when the fulfillment expired.
         /// In RFC3339 timestamp format, e.g., "2016-09-04T23:59:33.123Z".
         /// </summary>
-        [JsonProperty("expired_at")]
+        [JsonProperty("expired_at", NullValueHandling = NullValueHandling.Ignore)]
         public string ExpiredAt { get; }
 
         /// <summary>
@@ -156,32 +156,32 @@ namespace Square.Models
         /// was picked up by the recipient. In RFC3339 timestamp format,
         /// e.g., "2016-09-04T23:59:33.123Z".
         /// </summary>
-        [JsonProperty("picked_up_at")]
+        [JsonProperty("picked_up_at", NullValueHandling = NullValueHandling.Ignore)]
         public string PickedUpAt { get; }
 
         /// <summary>
         /// The [timestamp](#workingwithdates) in RFC3339 timestamp format, e.g., "2016-09-04T23:59:33.123Z",
         /// indicating when the fulfillment was canceled.
         /// </summary>
-        [JsonProperty("canceled_at")]
+        [JsonProperty("canceled_at", NullValueHandling = NullValueHandling.Ignore)]
         public string CanceledAt { get; }
 
         /// <summary>
         /// A description of why the pickup was canceled. Max length: 100 characters.
         /// </summary>
-        [JsonProperty("cancel_reason")]
+        [JsonProperty("cancel_reason", NullValueHandling = NullValueHandling.Ignore)]
         public string CancelReason { get; }
 
         /// <summary>
         /// If true, indicates this pickup order is for curbside pickup, not in-store pickup.
         /// </summary>
-        [JsonProperty("is_curbside_pickup")]
+        [JsonProperty("is_curbside_pickup", NullValueHandling = NullValueHandling.Ignore)]
         public bool? IsCurbsidePickup { get; }
 
         /// <summary>
         /// Specific details for curbside pickup.
         /// </summary>
-        [JsonProperty("curbside_pickup_details")]
+        [JsonProperty("curbside_pickup_details", NullValueHandling = NullValueHandling.Ignore)]
         public Models.OrderFulfillmentPickupDetailsCurbsidePickupDetails CurbsidePickupDetails { get; }
 
         public Builder ToBuilder()
@@ -229,112 +229,113 @@ namespace Square.Models
             private bool? isCurbsidePickup;
             private Models.OrderFulfillmentPickupDetailsCurbsidePickupDetails curbsidePickupDetails;
 
-            public Builder() { }
-            public Builder Recipient(Models.OrderFulfillmentRecipient value)
+
+
+            public Builder Recipient(Models.OrderFulfillmentRecipient recipient)
             {
-                recipient = value;
+                this.recipient = recipient;
                 return this;
             }
 
-            public Builder ExpiresAt(string value)
+            public Builder ExpiresAt(string expiresAt)
             {
-                expiresAt = value;
+                this.expiresAt = expiresAt;
                 return this;
             }
 
-            public Builder AutoCompleteDuration(string value)
+            public Builder AutoCompleteDuration(string autoCompleteDuration)
             {
-                autoCompleteDuration = value;
+                this.autoCompleteDuration = autoCompleteDuration;
                 return this;
             }
 
-            public Builder ScheduleType(string value)
+            public Builder ScheduleType(string scheduleType)
             {
-                scheduleType = value;
+                this.scheduleType = scheduleType;
                 return this;
             }
 
-            public Builder PickupAt(string value)
+            public Builder PickupAt(string pickupAt)
             {
-                pickupAt = value;
+                this.pickupAt = pickupAt;
                 return this;
             }
 
-            public Builder PickupWindowDuration(string value)
+            public Builder PickupWindowDuration(string pickupWindowDuration)
             {
-                pickupWindowDuration = value;
+                this.pickupWindowDuration = pickupWindowDuration;
                 return this;
             }
 
-            public Builder PrepTimeDuration(string value)
+            public Builder PrepTimeDuration(string prepTimeDuration)
             {
-                prepTimeDuration = value;
+                this.prepTimeDuration = prepTimeDuration;
                 return this;
             }
 
-            public Builder Note(string value)
+            public Builder Note(string note)
             {
-                note = value;
+                this.note = note;
                 return this;
             }
 
-            public Builder PlacedAt(string value)
+            public Builder PlacedAt(string placedAt)
             {
-                placedAt = value;
+                this.placedAt = placedAt;
                 return this;
             }
 
-            public Builder AcceptedAt(string value)
+            public Builder AcceptedAt(string acceptedAt)
             {
-                acceptedAt = value;
+                this.acceptedAt = acceptedAt;
                 return this;
             }
 
-            public Builder RejectedAt(string value)
+            public Builder RejectedAt(string rejectedAt)
             {
-                rejectedAt = value;
+                this.rejectedAt = rejectedAt;
                 return this;
             }
 
-            public Builder ReadyAt(string value)
+            public Builder ReadyAt(string readyAt)
             {
-                readyAt = value;
+                this.readyAt = readyAt;
                 return this;
             }
 
-            public Builder ExpiredAt(string value)
+            public Builder ExpiredAt(string expiredAt)
             {
-                expiredAt = value;
+                this.expiredAt = expiredAt;
                 return this;
             }
 
-            public Builder PickedUpAt(string value)
+            public Builder PickedUpAt(string pickedUpAt)
             {
-                pickedUpAt = value;
+                this.pickedUpAt = pickedUpAt;
                 return this;
             }
 
-            public Builder CanceledAt(string value)
+            public Builder CanceledAt(string canceledAt)
             {
-                canceledAt = value;
+                this.canceledAt = canceledAt;
                 return this;
             }
 
-            public Builder CancelReason(string value)
+            public Builder CancelReason(string cancelReason)
             {
-                cancelReason = value;
+                this.cancelReason = cancelReason;
                 return this;
             }
 
-            public Builder IsCurbsidePickup(bool? value)
+            public Builder IsCurbsidePickup(bool? isCurbsidePickup)
             {
-                isCurbsidePickup = value;
+                this.isCurbsidePickup = isCurbsidePickup;
                 return this;
             }
 
-            public Builder CurbsidePickupDetails(Models.OrderFulfillmentPickupDetailsCurbsidePickupDetails value)
+            public Builder CurbsidePickupDetails(Models.OrderFulfillmentPickupDetailsCurbsidePickupDetails curbsidePickupDetails)
             {
-                curbsidePickupDetails = value;
+                this.curbsidePickupDetails = curbsidePickupDetails;
                 return this;
             }
 

@@ -27,20 +27,20 @@ namespace Square.Models
         /// Filter wages returned to only those that are associated with the
         /// specified team member.
         /// </summary>
-        [JsonProperty("team_member_id")]
+        [JsonProperty("team_member_id", NullValueHandling = NullValueHandling.Ignore)]
         public string TeamMemberId { get; }
 
         /// <summary>
         /// Maximum number of Team Member Wages to return per page. Can range between
         /// 1 and 200. The default is the maximum at 200.
         /// </summary>
-        [JsonProperty("limit")]
+        [JsonProperty("limit", NullValueHandling = NullValueHandling.Ignore)]
         public int? Limit { get; }
 
         /// <summary>
         /// Pointer to the next page of Employee Wage results to fetch.
         /// </summary>
-        [JsonProperty("cursor")]
+        [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
         public string Cursor { get; }
 
         public Builder ToBuilder()
@@ -58,22 +58,23 @@ namespace Square.Models
             private int? limit;
             private string cursor;
 
-            public Builder() { }
-            public Builder TeamMemberId(string value)
+
+
+            public Builder TeamMemberId(string teamMemberId)
             {
-                teamMemberId = value;
+                this.teamMemberId = teamMemberId;
                 return this;
             }
 
-            public Builder Limit(int? value)
+            public Builder Limit(int? limit)
             {
-                limit = value;
+                this.limit = limit;
                 return this;
             }
 
-            public Builder Cursor(string value)
+            public Builder Cursor(string cursor)
             {
-                cursor = value;
+                this.cursor = cursor;
                 return this;
             }
 

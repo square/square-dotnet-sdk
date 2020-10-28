@@ -41,9 +41,10 @@ namespace Square.Models
             {
                 this.version = version;
             }
-            public Builder Version(int value)
+
+            public Builder Version(int version)
             {
-                version = value;
+                this.version = version;
                 return this;
             }
 

@@ -1,12 +1,13 @@
-## Catalog Item Modifier List Info
+
+# Catalog Item Modifier List Info
 
 Options to control the properties of a `CatalogModifierList` applied to a `CatalogItem` instance.
 
-### Structure
+## Structure
 
 `CatalogItemModifierListInfo`
 
-### Fields
+## Fields
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
@@ -16,7 +17,7 @@ Options to control the properties of a `CatalogModifierList` applied to a `Catal
 | `MaxSelectedModifiers` | `int?` | Optional | If 0 or larger, the largest number of `CatalogModifier`s that can be selected from this `CatalogModifierList`. |
 | `Enabled` | `bool?` | Optional | If `true`, enable this `CatalogModifierList`. The default value is `true`. |
 
-### Example (as JSON)
+## Example (as JSON)
 
 ```json
 {

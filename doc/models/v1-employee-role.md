@@ -1,12 +1,13 @@
-## V1 Employee Role
+
+# V1 Employee Role
 
 V1EmployeeRole
 
-### Structure
+## Structure
 
 `V1EmployeeRole`
 
-### Fields
+## Fields
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
@@ -17,7 +18,7 @@ V1EmployeeRole
 | `CreatedAt` | `string` | Optional | The time when the employee entity was created, in ISO 8601 format. Is set by Square when the Role is created. |
 | `UpdatedAt` | `string` | Optional | The time when the employee entity was most recently updated, in ISO 8601 format. Is set by Square when the Role updated. |
 
-### Example (as JSON)
+## Example (as JSON)
 
 ```json
 {

@@ -1,10 +1,11 @@
-## Update Item Taxes Request
 
-### Structure
+# Update Item Taxes Request
+
+## Structure
 
 `UpdateItemTaxesRequest`
 
-### Fields
+## Fields
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
@@ -12,7 +13,7 @@
 | `TaxesToEnable` | `IList<string>` | Optional | IDs of the CatalogTax objects to enable. |
 | `TaxesToDisable` | `IList<string>` | Optional | IDs of the CatalogTax objects to disable. |
 
-### Example (as JSON)
+## Example (as JSON)
 
 ```json
 {
@@ -20,11 +21,11 @@
     "H42BRLUJ5KTZTTMPVSLFAACQ",
     "2JXOBJIHCWBQ4NZ3RIXQGJA6"
   ],
-  "taxes_to_enable": [
-    "4WRCNHCJZDVLSNDQ35PP6YAD"
-  ],
   "taxes_to_disable": [
     "AQCEGCEBBQONINDOHRGZISEX"
+  ],
+  "taxes_to_enable": [
+    "4WRCNHCJZDVLSNDQ35PP6YAD"
   ]
 }
 ```

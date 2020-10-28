@@ -28,25 +28,25 @@ namespace Square.Models
         /// <summary>
         /// The Square-generated ID of the evidence.
         /// </summary>
-        [JsonProperty("evidence_id")]
+        [JsonProperty("evidence_id", NullValueHandling = NullValueHandling.Ignore)]
         public string EvidenceId { get; }
 
         /// <summary>
         /// The ID of the dispute the evidence is associated with.
         /// </summary>
-        [JsonProperty("dispute_id")]
+        [JsonProperty("dispute_id", NullValueHandling = NullValueHandling.Ignore)]
         public string DisputeId { get; }
 
         /// <summary>
         /// The time when the next action is due, in RFC 3339 format.
         /// </summary>
-        [JsonProperty("uploaded_at")]
+        [JsonProperty("uploaded_at", NullValueHandling = NullValueHandling.Ignore)]
         public string UploadedAt { get; }
 
         /// <summary>
         /// Type of the dispute evidence.
         /// </summary>
-        [JsonProperty("evidence_type")]
+        [JsonProperty("evidence_type", NullValueHandling = NullValueHandling.Ignore)]
         public string EvidenceType { get; }
 
         public Builder ToBuilder()
@@ -66,28 +66,29 @@ namespace Square.Models
             private string uploadedAt;
             private string evidenceType;
 
-            public Builder() { }
-            public Builder EvidenceId(string value)
+
+
+            public Builder EvidenceId(string evidenceId)
             {
-                evidenceId = value;
+                this.evidenceId = evidenceId;
                 return this;
             }
 
-            public Builder DisputeId(string value)
+            public Builder DisputeId(string disputeId)
             {
-                disputeId = value;
+                this.disputeId = disputeId;
                 return this;
             }
 
-            public Builder UploadedAt(string value)
+            public Builder UploadedAt(string uploadedAt)
             {
-                uploadedAt = value;
+                this.uploadedAt = uploadedAt;
                 return this;
             }
 
-            public Builder EvidenceType(string value)
+            public Builder EvidenceType(string evidenceType)
             {
-                evidenceType = value;
+                this.evidenceType = evidenceType;
                 return this;
             }
 

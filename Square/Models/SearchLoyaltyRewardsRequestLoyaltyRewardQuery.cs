@@ -30,7 +30,7 @@ namespace Square.Models
         /// <summary>
         /// The status of the loyalty reward.
         /// </summary>
-        [JsonProperty("status")]
+        [JsonProperty("status", NullValueHandling = NullValueHandling.Ignore)]
         public string Status { get; }
 
         public Builder ToBuilder()
@@ -49,15 +49,16 @@ namespace Square.Models
             {
                 this.loyaltyAccountId = loyaltyAccountId;
             }
-            public Builder LoyaltyAccountId(string value)
+
+            public Builder LoyaltyAccountId(string loyaltyAccountId)
             {
-                loyaltyAccountId = value;
+                this.loyaltyAccountId = loyaltyAccountId;
                 return this;
             }
 
-            public Builder Status(string value)
+            public Builder Status(string status)
             {
-                status = value;
+                this.status = status;
                 return this;
             }
 

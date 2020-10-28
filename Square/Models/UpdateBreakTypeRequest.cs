@@ -40,9 +40,10 @@ namespace Square.Models
             {
                 this.breakType = breakType;
             }
-            public Builder BreakType(Models.BreakType value)
+
+            public Builder BreakType(Models.BreakType breakType)
             {
-                breakType = value;
+                this.breakType = breakType;
                 return this;
             }
 

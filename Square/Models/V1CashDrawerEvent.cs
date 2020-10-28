@@ -32,37 +32,37 @@ namespace Square.Models
         /// <summary>
         /// The event's unique ID.
         /// </summary>
-        [JsonProperty("id")]
+        [JsonProperty("id", NullValueHandling = NullValueHandling.Ignore)]
         public string Id { get; }
 
         /// <summary>
         /// The ID of the employee that created the event.
         /// </summary>
-        [JsonProperty("employee_id")]
+        [JsonProperty("employee_id", NullValueHandling = NullValueHandling.Ignore)]
         public string EmployeeId { get; }
 
         /// <summary>
         /// Getter for event_type
         /// </summary>
-        [JsonProperty("event_type")]
+        [JsonProperty("event_type", NullValueHandling = NullValueHandling.Ignore)]
         public string EventType { get; }
 
         /// <summary>
         /// Getter for event_money
         /// </summary>
-        [JsonProperty("event_money")]
+        [JsonProperty("event_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1Money EventMoney { get; }
 
         /// <summary>
         /// The time when the event occurred, in ISO 8601 format.
         /// </summary>
-        [JsonProperty("created_at")]
+        [JsonProperty("created_at", NullValueHandling = NullValueHandling.Ignore)]
         public string CreatedAt { get; }
 
         /// <summary>
         /// An optional description of the event, entered by the employee that created it.
         /// </summary>
-        [JsonProperty("description")]
+        [JsonProperty("description", NullValueHandling = NullValueHandling.Ignore)]
         public string Description { get; }
 
         public Builder ToBuilder()
@@ -86,40 +86,41 @@ namespace Square.Models
             private string createdAt;
             private string description;
 
-            public Builder() { }
-            public Builder Id(string value)
+
+
+            public Builder Id(string id)
             {
-                id = value;
+                this.id = id;
                 return this;
             }
 
-            public Builder EmployeeId(string value)
+            public Builder EmployeeId(string employeeId)
             {
-                employeeId = value;
+                this.employeeId = employeeId;
                 return this;
             }
 
-            public Builder EventType(string value)
+            public Builder EventType(string eventType)
             {
-                eventType = value;
+                this.eventType = eventType;
                 return this;
             }
 
-            public Builder EventMoney(Models.V1Money value)
+            public Builder EventMoney(Models.V1Money eventMoney)
             {
-                eventMoney = value;
+                this.eventMoney = eventMoney;
                 return this;
             }
 
-            public Builder CreatedAt(string value)
+            public Builder CreatedAt(string createdAt)
             {
-                createdAt = value;
+                this.createdAt = createdAt;
                 return this;
             }
 
-            public Builder Description(string value)
+            public Builder Description(string description)
             {
-                description = value;
+                this.description = description;
                 return this;
             }
 

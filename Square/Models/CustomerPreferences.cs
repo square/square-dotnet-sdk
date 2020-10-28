@@ -22,7 +22,7 @@ namespace Square.Models
         /// <summary>
         /// The customer has unsubscribed from receiving marketing campaign emails.
         /// </summary>
-        [JsonProperty("email_unsubscribed")]
+        [JsonProperty("email_unsubscribed", NullValueHandling = NullValueHandling.Ignore)]
         public bool? EmailUnsubscribed { get; }
 
         public Builder ToBuilder()
@@ -36,10 +36,11 @@ namespace Square.Models
         {
             private bool? emailUnsubscribed;
 
-            public Builder() { }
-            public Builder EmailUnsubscribed(bool? value)
+
+
+            public Builder EmailUnsubscribed(bool? emailUnsubscribed)
             {
-                emailUnsubscribed = value;
+                this.emailUnsubscribed = emailUnsubscribed;
                 return this;
             }
 

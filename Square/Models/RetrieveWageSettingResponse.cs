@@ -28,13 +28,13 @@ namespace Square.Models
         /// <summary>
         /// An object representing a team member's wage information.
         /// </summary>
-        [JsonProperty("wage_setting")]
+        [JsonProperty("wage_setting", NullValueHandling = NullValueHandling.Ignore)]
         public Models.WageSetting WageSetting { get; }
 
         /// <summary>
         /// The errors that occurred during the request.
         /// </summary>
-        [JsonProperty("errors")]
+        [JsonProperty("errors", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.Error> Errors { get; }
 
         public Builder ToBuilder()
@@ -48,18 +48,19 @@ namespace Square.Models
         public class Builder
         {
             private Models.WageSetting wageSetting;
-            private IList<Models.Error> errors = new List<Models.Error>();
+            private IList<Models.Error> errors;
 
-            public Builder() { }
-            public Builder WageSetting(Models.WageSetting value)
+
+
+            public Builder WageSetting(Models.WageSetting wageSetting)
             {
-                wageSetting = value;
+                this.wageSetting = wageSetting;
                 return this;
             }
 
-            public Builder Errors(IList<Models.Error> value)
+            public Builder Errors(IList<Models.Error> errors)
             {
-                errors = value;
+                this.errors = errors;
                 return this;
             }
 

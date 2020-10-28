@@ -25,7 +25,7 @@ namespace Square.Models
         /// The [Location](#type-location) IDs to look up as a comma-separated
         /// list. An empty list queries all locations.
         /// </summary>
-        [JsonProperty("location_ids")]
+        [JsonProperty("location_ids", NullValueHandling = NullValueHandling.Ignore)]
         public string LocationIds { get; }
 
         /// <summary>
@@ -33,7 +33,7 @@ namespace Square.Models
         /// Provide this to retrieve the next set of results for the original query.
         /// See the [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination) guide for more information.
         /// </summary>
-        [JsonProperty("cursor")]
+        [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
         public string Cursor { get; }
 
         public Builder ToBuilder()
@@ -49,16 +49,17 @@ namespace Square.Models
             private string locationIds;
             private string cursor;
 
-            public Builder() { }
-            public Builder LocationIds(string value)
+
+
+            public Builder LocationIds(string locationIds)
             {
-                locationIds = value;
+                this.locationIds = locationIds;
                 return this;
             }
 
-            public Builder Cursor(string value)
+            public Builder Cursor(string cursor)
             {
-                cursor = value;
+                this.cursor = cursor;
                 return this;
             }
 

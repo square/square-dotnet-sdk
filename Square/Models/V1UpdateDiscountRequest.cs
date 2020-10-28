@@ -39,9 +39,10 @@ namespace Square.Models
             {
                 this.body = body;
             }
-            public Builder Body(Models.V1Discount value)
+
+            public Builder Body(Models.V1Discount body)
             {
-                body = value;
+                this.body = body;
                 return this;
             }
 

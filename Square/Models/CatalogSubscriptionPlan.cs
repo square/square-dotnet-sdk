@@ -24,13 +24,13 @@ namespace Square.Models
         /// <summary>
         /// The name of the plan.
         /// </summary>
-        [JsonProperty("name")]
+        [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
         public string Name { get; }
 
         /// <summary>
         /// A list of SubscriptionPhase containing the [SubscriptionPhase](#type-SubscriptionPhase) for this plan.
         /// </summary>
-        [JsonProperty("phases")]
+        [JsonProperty("phases", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.SubscriptionPhase> Phases { get; }
 
         public Builder ToBuilder()
@@ -44,18 +44,19 @@ namespace Square.Models
         public class Builder
         {
             private string name;
-            private IList<Models.SubscriptionPhase> phases = new List<Models.SubscriptionPhase>();
+            private IList<Models.SubscriptionPhase> phases;
 
-            public Builder() { }
-            public Builder Name(string value)
+
+
+            public Builder Name(string name)
             {
-                name = value;
+                this.name = name;
                 return this;
             }
 
-            public Builder Phases(IList<Models.SubscriptionPhase> value)
+            public Builder Phases(IList<Models.SubscriptionPhase> phases)
             {
-                phases = value;
+                this.phases = phases;
                 return this;
             }
 

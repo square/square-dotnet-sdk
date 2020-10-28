@@ -50,32 +50,32 @@ namespace Square.Models
         /// <summary>
         /// The Square-assigned ID of the subscription.
         /// </summary>
-        [JsonProperty("id")]
+        [JsonProperty("id", NullValueHandling = NullValueHandling.Ignore)]
         public string Id { get; }
 
         /// <summary>
         /// The ID of the location associated with the subscription.
         /// </summary>
-        [JsonProperty("location_id")]
+        [JsonProperty("location_id", NullValueHandling = NullValueHandling.Ignore)]
         public string LocationId { get; }
 
         /// <summary>
         /// The ID of the associated [subscription plan](#type-catalogsubscriptionplan).
         /// </summary>
-        [JsonProperty("plan_id")]
+        [JsonProperty("plan_id", NullValueHandling = NullValueHandling.Ignore)]
         public string PlanId { get; }
 
         /// <summary>
         /// The ID of the associated [customer](#type-customer) profile.
         /// </summary>
-        [JsonProperty("customer_id")]
+        [JsonProperty("customer_id", NullValueHandling = NullValueHandling.Ignore)]
         public string CustomerId { get; }
 
         /// <summary>
         /// The start date of the subscription, in YYYY-MM-DD format (for example,
         /// 2013-01-15).
         /// </summary>
-        [JsonProperty("start_date")]
+        [JsonProperty("start_date", NullValueHandling = NullValueHandling.Ignore)]
         public string StartDate { get; }
 
         /// <summary>
@@ -86,13 +86,13 @@ namespace Square.Models
         /// when subscription ends. 
         /// You cannot update this field, you can only clear it.
         /// </summary>
-        [JsonProperty("canceled_date")]
+        [JsonProperty("canceled_date", NullValueHandling = NullValueHandling.Ignore)]
         public string CanceledDate { get; }
 
         /// <summary>
         /// Possible subscription status values.
         /// </summary>
-        [JsonProperty("status")]
+        [JsonProperty("status", NullValueHandling = NullValueHandling.Ignore)]
         public string Status { get; }
 
         /// <summary>
@@ -101,7 +101,7 @@ namespace Square.Models
         /// separator and without a `'%'` sign. For example, a value of `7.5`
         /// corresponds to 7.5%.
         /// </summary>
-        [JsonProperty("tax_percentage")]
+        [JsonProperty("tax_percentage", NullValueHandling = NullValueHandling.Ignore)]
         public string TaxPercentage { get; }
 
         /// <summary>
@@ -109,7 +109,7 @@ namespace Square.Models
         /// subscription, listed in order when the invoices were created 
         /// (oldest invoices appear first).
         /// </summary>
-        [JsonProperty("invoice_ids")]
+        [JsonProperty("invoice_ids", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> InvoiceIds { get; }
 
         /// <summary>
@@ -120,7 +120,7 @@ namespace Square.Models
         /// [Working with Monetary Amounts](https://developer.squareup.com/docs/build-basics/working-with-monetary-amounts)
         /// for more information.
         /// </summary>
-        [JsonProperty("price_override_money")]
+        [JsonProperty("price_override_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Money PriceOverrideMoney { get; }
 
         /// <summary>
@@ -128,20 +128,20 @@ namespace Square.Models
         /// supplied must match the version in the database, otherwise the write will
         /// be rejected as conflicting.
         /// </summary>
-        [JsonProperty("version")]
+        [JsonProperty("version", NullValueHandling = NullValueHandling.Ignore)]
         public long? Version { get; }
 
         /// <summary>
         /// The timestamp when the subscription was created, in RFC 3339 format.
         /// </summary>
-        [JsonProperty("created_at")]
+        [JsonProperty("created_at", NullValueHandling = NullValueHandling.Ignore)]
         public string CreatedAt { get; }
 
         /// <summary>
         /// The ID of the [customer](#type-customer) [card](#type-card)
         /// that is charged for the subscription.
         /// </summary>
-        [JsonProperty("card_id")]
+        [JsonProperty("card_id", NullValueHandling = NullValueHandling.Ignore)]
         public string CardId { get; }
 
         /// <summary>
@@ -154,7 +154,7 @@ namespace Square.Models
         /// (or charged the card) on May 1. For the monthly billing scenario,
         /// this date is then set to May 31.
         /// </summary>
-        [JsonProperty("paid_until_date")]
+        [JsonProperty("paid_until_date", NullValueHandling = NullValueHandling.Ignore)]
         public string PaidUntilDate { get; }
 
         /// <summary>
@@ -162,7 +162,7 @@ namespace Square.Models
         /// Defaults to the timezone of the location based on `location_id`.
         /// Format: the IANA Timezone Database identifier for the location timezone (for example, `America/Los_Angeles`).
         /// </summary>
-        [JsonProperty("timezone")]
+        [JsonProperty("timezone", NullValueHandling = NullValueHandling.Ignore)]
         public string Timezone { get; }
 
         public Builder ToBuilder()
@@ -196,7 +196,7 @@ namespace Square.Models
             private string canceledDate;
             private string status;
             private string taxPercentage;
-            private IList<string> invoiceIds = new List<string>();
+            private IList<string> invoiceIds;
             private Models.Money priceOverrideMoney;
             private long? version;
             private string createdAt;
@@ -204,94 +204,95 @@ namespace Square.Models
             private string paidUntilDate;
             private string timezone;
 
-            public Builder() { }
-            public Builder Id(string value)
+
+
+            public Builder Id(string id)
             {
-                id = value;
+                this.id = id;
                 return this;
             }
 
-            public Builder LocationId(string value)
+            public Builder LocationId(string locationId)
             {
-                locationId = value;
+                this.locationId = locationId;
                 return this;
             }
 
-            public Builder PlanId(string value)
+            public Builder PlanId(string planId)
             {
-                planId = value;
+                this.planId = planId;
                 return this;
             }
 
-            public Builder CustomerId(string value)
+            public Builder CustomerId(string customerId)
             {
-                customerId = value;
+                this.customerId = customerId;
                 return this;
             }
 
-            public Builder StartDate(string value)
+            public Builder StartDate(string startDate)
             {
-                startDate = value;
+                this.startDate = startDate;
                 return this;
             }
 
-            public Builder CanceledDate(string value)
+            public Builder CanceledDate(string canceledDate)
             {
-                canceledDate = value;
+                this.canceledDate = canceledDate;
                 return this;
             }
 
-            public Builder Status(string value)
+            public Builder Status(string status)
             {
-                status = value;
+                this.status = status;
                 return this;
             }
 
-            public Builder TaxPercentage(string value)
+            public Builder TaxPercentage(string taxPercentage)
             {
-                taxPercentage = value;
+                this.taxPercentage = taxPercentage;
                 return this;
             }
 
-            public Builder InvoiceIds(IList<string> value)
+            public Builder InvoiceIds(IList<string> invoiceIds)
             {
-                invoiceIds = value;
+                this.invoiceIds = invoiceIds;
                 return this;
             }
 
-            public Builder PriceOverrideMoney(Models.Money value)
+            public Builder PriceOverrideMoney(Models.Money priceOverrideMoney)
             {
-                priceOverrideMoney = value;
+                this.priceOverrideMoney = priceOverrideMoney;
                 return this;
             }
 
-            public Builder Version(long? value)
+            public Builder Version(long? version)
             {
-                version = value;
+                this.version = version;
                 return this;
             }
 
-            public Builder CreatedAt(string value)
+            public Builder CreatedAt(string createdAt)
             {
-                createdAt = value;
+                this.createdAt = createdAt;
                 return this;
             }
 
-            public Builder CardId(string value)
+            public Builder CardId(string cardId)
             {
-                cardId = value;
+                this.cardId = cardId;
                 return this;
             }
 
-            public Builder PaidUntilDate(string value)
+            public Builder PaidUntilDate(string paidUntilDate)
             {
-                paidUntilDate = value;
+                this.paidUntilDate = paidUntilDate;
                 return this;
             }
 
-            public Builder Timezone(string value)
+            public Builder Timezone(string timezone)
             {
-                timezone = value;
+                this.timezone = timezone;
                 return this;
             }
 

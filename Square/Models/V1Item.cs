@@ -58,103 +58,103 @@ namespace Square.Models
         /// <summary>
         /// The item's ID. Must be unique among all entity IDs ever provided on behalf of the merchant. You can never reuse an ID. This value can include alphanumeric characters, dashes (-), and underscores (_).
         /// </summary>
-        [JsonProperty("id")]
+        [JsonProperty("id", NullValueHandling = NullValueHandling.Ignore)]
         public string Id { get; }
 
         /// <summary>
         /// The item's name.
         /// </summary>
-        [JsonProperty("name")]
+        [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
         public string Name { get; }
 
         /// <summary>
         /// The item's description.
         /// </summary>
-        [JsonProperty("description")]
+        [JsonProperty("description", NullValueHandling = NullValueHandling.Ignore)]
         public string Description { get; }
 
         /// <summary>
         /// Getter for type
         /// </summary>
-        [JsonProperty("type")]
+        [JsonProperty("type", NullValueHandling = NullValueHandling.Ignore)]
         public string Type { get; }
 
         /// <summary>
         /// Getter for color
         /// </summary>
-        [JsonProperty("color")]
+        [JsonProperty("color", NullValueHandling = NullValueHandling.Ignore)]
         public string Color { get; }
 
         /// <summary>
         /// The text of the item's display label in Square Point of Sale. Only up to the first five characters of the string are used.
         /// </summary>
-        [JsonProperty("abbreviation")]
+        [JsonProperty("abbreviation", NullValueHandling = NullValueHandling.Ignore)]
         public string Abbreviation { get; }
 
         /// <summary>
         /// Getter for visibility
         /// </summary>
-        [JsonProperty("visibility")]
+        [JsonProperty("visibility", NullValueHandling = NullValueHandling.Ignore)]
         public string Visibility { get; }
 
         /// <summary>
         /// If true, the item can be added to shipping orders from the merchant's online store.
         /// </summary>
-        [JsonProperty("available_online")]
+        [JsonProperty("available_online", NullValueHandling = NullValueHandling.Ignore)]
         public bool? AvailableOnline { get; }
 
         /// <summary>
         /// V1ItemImage
         /// </summary>
-        [JsonProperty("master_image")]
+        [JsonProperty("master_image", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1ItemImage MasterImage { get; }
 
         /// <summary>
         /// V1Category
         /// </summary>
-        [JsonProperty("category")]
+        [JsonProperty("category", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1Category Category { get; }
 
         /// <summary>
         /// The item's variations. You must specify at least one variation.
         /// </summary>
-        [JsonProperty("variations")]
+        [JsonProperty("variations", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.V1Variation> Variations { get; }
 
         /// <summary>
         /// The modifier lists that apply to the item, if any.
         /// </summary>
-        [JsonProperty("modifier_lists")]
+        [JsonProperty("modifier_lists", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.V1ModifierList> ModifierLists { get; }
 
         /// <summary>
         /// The fees that apply to the item, if any.
         /// </summary>
-        [JsonProperty("fees")]
+        [JsonProperty("fees", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.V1Fee> Fees { get; }
 
         /// <summary>
         /// Deprecated. This field is not used.
         /// </summary>
-        [JsonProperty("taxable")]
+        [JsonProperty("taxable", NullValueHandling = NullValueHandling.Ignore)]
         public bool? Taxable { get; }
 
         /// <summary>
         /// The ID of the item's category, if any.
         /// </summary>
-        [JsonProperty("category_id")]
+        [JsonProperty("category_id", NullValueHandling = NullValueHandling.Ignore)]
         public string CategoryId { get; }
 
         /// <summary>
         /// If true, the item can be added to pickup orders from the merchant's online store. Default value: false
         /// </summary>
-        [JsonProperty("available_for_pickup")]
+        [JsonProperty("available_for_pickup", NullValueHandling = NullValueHandling.Ignore)]
         public bool? AvailableForPickup { get; }
 
         /// <summary>
         /// The ID of the CatalogObject in the Connect v2 API. Objects that are shared across multiple locations share the same v2 ID.
         /// </summary>
-        [JsonProperty("v2_id")]
+        [JsonProperty("v2_id", NullValueHandling = NullValueHandling.Ignore)]
         public string V2Id { get; }
 
         public Builder ToBuilder()
@@ -192,114 +192,115 @@ namespace Square.Models
             private bool? availableOnline;
             private Models.V1ItemImage masterImage;
             private Models.V1Category category;
-            private IList<Models.V1Variation> variations = new List<Models.V1Variation>();
-            private IList<Models.V1ModifierList> modifierLists = new List<Models.V1ModifierList>();
-            private IList<Models.V1Fee> fees = new List<Models.V1Fee>();
+            private IList<Models.V1Variation> variations;
+            private IList<Models.V1ModifierList> modifierLists;
+            private IList<Models.V1Fee> fees;
             private bool? taxable;
             private string categoryId;
             private bool? availableForPickup;
             private string v2Id;
 
-            public Builder() { }
-            public Builder Id(string value)
+
+
+            public Builder Id(string id)
             {
-                id = value;
+                this.id = id;
                 return this;
             }
 
-            public Builder Name(string value)
+            public Builder Name(string name)
             {
-                name = value;
+                this.name = name;
                 return this;
             }
 
-            public Builder Description(string value)
+            public Builder Description(string description)
             {
-                description = value;
+                this.description = description;
                 return this;
             }
 
-            public Builder Type(string value)
+            public Builder Type(string type)
             {
-                type = value;
+                this.type = type;
                 return this;
             }
 
-            public Builder Color(string value)
+            public Builder Color(string color)
             {
-                color = value;
+                this.color = color;
                 return this;
             }
 
-            public Builder Abbreviation(string value)
+            public Builder Abbreviation(string abbreviation)
             {
-                abbreviation = value;
+                this.abbreviation = abbreviation;
                 return this;
             }
 
-            public Builder Visibility(string value)
+            public Builder Visibility(string visibility)
             {
-                visibility = value;
+                this.visibility = visibility;
                 return this;
             }
 
-            public Builder AvailableOnline(bool? value)
+            public Builder AvailableOnline(bool? availableOnline)
             {
-                availableOnline = value;
+                this.availableOnline = availableOnline;
                 return this;
             }
 
-            public Builder MasterImage(Models.V1ItemImage value)
+            public Builder MasterImage(Models.V1ItemImage masterImage)
             {
-                masterImage = value;
+                this.masterImage = masterImage;
                 return this;
             }
 
-            public Builder Category(Models.V1Category value)
+            public Builder Category(Models.V1Category category)
             {
-                category = value;
+                this.category = category;
                 return this;
             }
 
-            public Builder Variations(IList<Models.V1Variation> value)
+            public Builder Variations(IList<Models.V1Variation> variations)
             {
-                variations = value;
+                this.variations = variations;
                 return this;
             }
 
-            public Builder ModifierLists(IList<Models.V1ModifierList> value)
+            public Builder ModifierLists(IList<Models.V1ModifierList> modifierLists)
             {
-                modifierLists = value;
+                this.modifierLists = modifierLists;
                 return this;
             }
 
-            public Builder Fees(IList<Models.V1Fee> value)
+            public Builder Fees(IList<Models.V1Fee> fees)
             {
-                fees = value;
+                this.fees = fees;
                 return this;
             }
 
-            public Builder Taxable(bool? value)
+            public Builder Taxable(bool? taxable)
             {
-                taxable = value;
+                this.taxable = taxable;
                 return this;
             }
 
-            public Builder CategoryId(string value)
+            public Builder CategoryId(string categoryId)
             {
-                categoryId = value;
+                this.categoryId = categoryId;
                 return this;
             }
 
-            public Builder AvailableForPickup(bool? value)
+            public Builder AvailableForPickup(bool? availableForPickup)
             {
-                availableForPickup = value;
+                this.availableForPickup = availableForPickup;
                 return this;
             }
 
-            public Builder V2Id(string value)
+            public Builder V2Id(string v2Id)
             {
-                v2Id = value;
+                this.v2Id = v2Id;
                 return this;
             }
 

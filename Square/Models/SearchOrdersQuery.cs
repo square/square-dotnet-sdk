@@ -25,14 +25,14 @@ namespace Square.Models
         /// Filtering criteria to use for a SearchOrders request. Multiple filters
         /// will be ANDed together.
         /// </summary>
-        [JsonProperty("filter")]
+        [JsonProperty("filter", NullValueHandling = NullValueHandling.Ignore)]
         public Models.SearchOrdersFilter Filter { get; }
 
         /// <summary>
         /// Sorting criteria for a SearchOrders request. Results can only be sorted
         /// by a timestamp field.
         /// </summary>
-        [JsonProperty("sort")]
+        [JsonProperty("sort", NullValueHandling = NullValueHandling.Ignore)]
         public Models.SearchOrdersSort Sort { get; }
 
         public Builder ToBuilder()
@@ -48,16 +48,17 @@ namespace Square.Models
             private Models.SearchOrdersFilter filter;
             private Models.SearchOrdersSort sort;
 
-            public Builder() { }
-            public Builder Filter(Models.SearchOrdersFilter value)
+
+
+            public Builder Filter(Models.SearchOrdersFilter filter)
             {
-                filter = value;
+                this.filter = filter;
                 return this;
             }
 
-            public Builder Sort(Models.SearchOrdersSort value)
+            public Builder Sort(Models.SearchOrdersSort sort)
             {
-                sort = value;
+                this.sort = sort;
                 return this;
             }
 

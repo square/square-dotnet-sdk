@@ -1,16 +1,17 @@
-## V1 List Cash Drawer Shifts Response
 
-### Structure
+# V1 List Cash Drawer Shifts Response
+
+## Structure
 
 `V1ListCashDrawerShiftsResponse`
 
-### Fields
+## Fields
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `Items` | [`IList<Models.V1CashDrawerShift>`](/doc/models/v1-cash-drawer-shift.md) | Optional | - |
 
-### Example (as JSON)
+## Example (as JSON)
 
 ```json
 {

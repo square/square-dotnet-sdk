@@ -22,7 +22,7 @@ namespace Square.Models
         /// <summary>
         /// The Square location ID the authorization code should be tied to.
         /// </summary>
-        [JsonProperty("location_id")]
+        [JsonProperty("location_id", NullValueHandling = NullValueHandling.Ignore)]
         public string LocationId { get; }
 
         public Builder ToBuilder()
@@ -36,10 +36,11 @@ namespace Square.Models
         {
             private string locationId;
 
-            public Builder() { }
-            public Builder LocationId(string value)
+
+
+            public Builder LocationId(string locationId)
             {
-                locationId = value;
+                this.locationId = locationId;
                 return this;
             }
 

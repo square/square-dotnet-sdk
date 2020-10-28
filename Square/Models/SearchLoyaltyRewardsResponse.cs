@@ -30,21 +30,21 @@ namespace Square.Models
         /// <summary>
         /// Any errors that occurred during the request.
         /// </summary>
-        [JsonProperty("errors")]
+        [JsonProperty("errors", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.Error> Errors { get; }
 
         /// <summary>
         /// The loyalty rewards that satisfy the search criteria.
         /// These are returned in descending order by `updated_at`.
         /// </summary>
-        [JsonProperty("rewards")]
+        [JsonProperty("rewards", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.LoyaltyReward> Rewards { get; }
 
         /// <summary>
         /// The pagination cursor to be used in a subsequent 
         /// request. If empty, this is the final response.
         /// </summary>
-        [JsonProperty("cursor")]
+        [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
         public string Cursor { get; }
 
         public Builder ToBuilder()
@@ -58,26 +58,27 @@ namespace Square.Models
 
         public class Builder
         {
-            private IList<Models.Error> errors = new List<Models.Error>();
-            private IList<Models.LoyaltyReward> rewards = new List<Models.LoyaltyReward>();
+            private IList<Models.Error> errors;
+            private IList<Models.LoyaltyReward> rewards;
             private string cursor;
 
-            public Builder() { }
-            public Builder Errors(IList<Models.Error> value)
+
+
+            public Builder Errors(IList<Models.Error> errors)
             {
-                errors = value;
+                this.errors = errors;
                 return this;
             }
 
-            public Builder Rewards(IList<Models.LoyaltyReward> value)
+            public Builder Rewards(IList<Models.LoyaltyReward> rewards)
             {
-                rewards = value;
+                this.rewards = rewards;
                 return this;
             }
 
-            public Builder Cursor(string value)
+            public Builder Cursor(string cursor)
             {
-                cursor = value;
+                this.cursor = cursor;
                 return this;
             }
 

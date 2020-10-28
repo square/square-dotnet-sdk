@@ -28,14 +28,14 @@ namespace Square.Models
         /// <summary>
         /// Any errors that occurred during the request.
         /// </summary>
-        [JsonProperty("errors")]
+        [JsonProperty("errors", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.Error> Errors { get; }
 
         /// <summary>
         /// Represents a group of customer profiles that match one or more predefined filter criteria. 
         /// Segments (also known as Smart Groups) are defined and created within Customer Directory in the Square Dashboard or Point of Sale.
         /// </summary>
-        [JsonProperty("segment")]
+        [JsonProperty("segment", NullValueHandling = NullValueHandling.Ignore)]
         public Models.CustomerSegment Segment { get; }
 
         public Builder ToBuilder()
@@ -48,19 +48,20 @@ namespace Square.Models
 
         public class Builder
         {
-            private IList<Models.Error> errors = new List<Models.Error>();
+            private IList<Models.Error> errors;
             private Models.CustomerSegment segment;
 
-            public Builder() { }
-            public Builder Errors(IList<Models.Error> value)
+
+
+            public Builder Errors(IList<Models.Error> errors)
             {
-                errors = value;
+                this.errors = errors;
                 return this;
             }
 
-            public Builder Segment(Models.CustomerSegment value)
+            public Builder Segment(Models.CustomerSegment segment)
             {
-                segment = value;
+                this.segment = segment;
                 return this;
             }
 

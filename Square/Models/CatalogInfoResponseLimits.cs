@@ -43,77 +43,77 @@ namespace Square.Models
         /// The maximum number of objects that may appear within a single batch in a
         /// `/v2/catalog/batch-upsert` request.
         /// </summary>
-        [JsonProperty("batch_upsert_max_objects_per_batch")]
+        [JsonProperty("batch_upsert_max_objects_per_batch", NullValueHandling = NullValueHandling.Ignore)]
         public int? BatchUpsertMaxObjectsPerBatch { get; }
 
         /// <summary>
         /// The maximum number of objects that may appear across all batches in a
         /// `/v2/catalog/batch-upsert` request.
         /// </summary>
-        [JsonProperty("batch_upsert_max_total_objects")]
+        [JsonProperty("batch_upsert_max_total_objects", NullValueHandling = NullValueHandling.Ignore)]
         public int? BatchUpsertMaxTotalObjects { get; }
 
         /// <summary>
         /// The maximum number of object IDs that may appear in a `/v2/catalog/batch-retrieve`
         /// request.
         /// </summary>
-        [JsonProperty("batch_retrieve_max_object_ids")]
+        [JsonProperty("batch_retrieve_max_object_ids", NullValueHandling = NullValueHandling.Ignore)]
         public int? BatchRetrieveMaxObjectIds { get; }
 
         /// <summary>
         /// The maximum number of results that may be returned in a page of a
         /// `/v2/catalog/search` response.
         /// </summary>
-        [JsonProperty("search_max_page_limit")]
+        [JsonProperty("search_max_page_limit", NullValueHandling = NullValueHandling.Ignore)]
         public int? SearchMaxPageLimit { get; }
 
         /// <summary>
         /// The maximum number of object IDs that may be included in a single
         /// `/v2/catalog/batch-delete` request.
         /// </summary>
-        [JsonProperty("batch_delete_max_object_ids")]
+        [JsonProperty("batch_delete_max_object_ids", NullValueHandling = NullValueHandling.Ignore)]
         public int? BatchDeleteMaxObjectIds { get; }
 
         /// <summary>
         /// The maximum number of item IDs that may be included in a single
         /// `/v2/catalog/update-item-taxes` request.
         /// </summary>
-        [JsonProperty("update_item_taxes_max_item_ids")]
+        [JsonProperty("update_item_taxes_max_item_ids", NullValueHandling = NullValueHandling.Ignore)]
         public int? UpdateItemTaxesMaxItemIds { get; }
 
         /// <summary>
         /// The maximum number of tax IDs to be enabled that may be included in a single
         /// `/v2/catalog/update-item-taxes` request.
         /// </summary>
-        [JsonProperty("update_item_taxes_max_taxes_to_enable")]
+        [JsonProperty("update_item_taxes_max_taxes_to_enable", NullValueHandling = NullValueHandling.Ignore)]
         public int? UpdateItemTaxesMaxTaxesToEnable { get; }
 
         /// <summary>
         /// The maximum number of tax IDs to be disabled that may be included in a single
         /// `/v2/catalog/update-item-taxes` request.
         /// </summary>
-        [JsonProperty("update_item_taxes_max_taxes_to_disable")]
+        [JsonProperty("update_item_taxes_max_taxes_to_disable", NullValueHandling = NullValueHandling.Ignore)]
         public int? UpdateItemTaxesMaxTaxesToDisable { get; }
 
         /// <summary>
         /// The maximum number of item IDs that may be included in a single
         /// `/v2/catalog/update-item-modifier-lists` request.
         /// </summary>
-        [JsonProperty("update_item_modifier_lists_max_item_ids")]
+        [JsonProperty("update_item_modifier_lists_max_item_ids", NullValueHandling = NullValueHandling.Ignore)]
         public int? UpdateItemModifierListsMaxItemIds { get; }
 
         /// <summary>
         /// The maximum number of modifier list IDs to be enabled that may be included in
         /// a single `/v2/catalog/update-item-modifier-lists` request.
         /// </summary>
-        [JsonProperty("update_item_modifier_lists_max_modifier_lists_to_enable")]
+        [JsonProperty("update_item_modifier_lists_max_modifier_lists_to_enable", NullValueHandling = NullValueHandling.Ignore)]
         public int? UpdateItemModifierListsMaxModifierListsToEnable { get; }
 
         /// <summary>
         /// The maximum number of modifier list IDs to be disabled that may be included in
         /// a single `/v2/catalog/update-item-modifier-lists` request.
         /// </summary>
-        [JsonProperty("update_item_modifier_lists_max_modifier_lists_to_disable")]
+        [JsonProperty("update_item_modifier_lists_max_modifier_lists_to_disable", NullValueHandling = NullValueHandling.Ignore)]
         public int? UpdateItemModifierListsMaxModifierListsToDisable { get; }
 
         public Builder ToBuilder()
@@ -147,70 +147,71 @@ namespace Square.Models
             private int? updateItemModifierListsMaxModifierListsToEnable;
             private int? updateItemModifierListsMaxModifierListsToDisable;
 
-            public Builder() { }
-            public Builder BatchUpsertMaxObjectsPerBatch(int? value)
+
+
+            public Builder BatchUpsertMaxObjectsPerBatch(int? batchUpsertMaxObjectsPerBatch)
             {
-                batchUpsertMaxObjectsPerBatch = value;
+                this.batchUpsertMaxObjectsPerBatch = batchUpsertMaxObjectsPerBatch;
                 return this;
             }
 
-            public Builder BatchUpsertMaxTotalObjects(int? value)
+            public Builder BatchUpsertMaxTotalObjects(int? batchUpsertMaxTotalObjects)
             {
-                batchUpsertMaxTotalObjects = value;
+                this.batchUpsertMaxTotalObjects = batchUpsertMaxTotalObjects;
                 return this;
             }
 
-            public Builder BatchRetrieveMaxObjectIds(int? value)
+            public Builder BatchRetrieveMaxObjectIds(int? batchRetrieveMaxObjectIds)
             {
-                batchRetrieveMaxObjectIds = value;
+                this.batchRetrieveMaxObjectIds = batchRetrieveMaxObjectIds;
                 return this;
             }
 
-            public Builder SearchMaxPageLimit(int? value)
+            public Builder SearchMaxPageLimit(int? searchMaxPageLimit)
             {
-                searchMaxPageLimit = value;
+                this.searchMaxPageLimit = searchMaxPageLimit;
                 return this;
             }
 
-            public Builder BatchDeleteMaxObjectIds(int? value)
+            public Builder BatchDeleteMaxObjectIds(int? batchDeleteMaxObjectIds)
             {
-                batchDeleteMaxObjectIds = value;
+                this.batchDeleteMaxObjectIds = batchDeleteMaxObjectIds;
                 return this;
             }
 
-            public Builder UpdateItemTaxesMaxItemIds(int? value)
+            public Builder UpdateItemTaxesMaxItemIds(int? updateItemTaxesMaxItemIds)
             {
-                updateItemTaxesMaxItemIds = value;
+                this.updateItemTaxesMaxItemIds = updateItemTaxesMaxItemIds;
                 return this;
             }
 
-            public Builder UpdateItemTaxesMaxTaxesToEnable(int? value)
+            public Builder UpdateItemTaxesMaxTaxesToEnable(int? updateItemTaxesMaxTaxesToEnable)
             {
-                updateItemTaxesMaxTaxesToEnable = value;
+                this.updateItemTaxesMaxTaxesToEnable = updateItemTaxesMaxTaxesToEnable;
                 return this;
             }
 
-            public Builder UpdateItemTaxesMaxTaxesToDisable(int? value)
+            public Builder UpdateItemTaxesMaxTaxesToDisable(int? updateItemTaxesMaxTaxesToDisable)
             {
-                updateItemTaxesMaxTaxesToDisable = value;
+                this.updateItemTaxesMaxTaxesToDisable = updateItemTaxesMaxTaxesToDisable;
                 return this;
             }
 
-            public Builder UpdateItemModifierListsMaxItemIds(int? value)
+            public Builder UpdateItemModifierListsMaxItemIds(int? updateItemModifierListsMaxItemIds)
             {
-                updateItemModifierListsMaxItemIds = value;
+                this.updateItemModifierListsMaxItemIds = updateItemModifierListsMaxItemIds;
                 return this;
             }
 
-            public Builder UpdateItemModifierListsMaxModifierListsToEnable(int? value)
+            public Builder UpdateItemModifierListsMaxModifierListsToEnable(int? updateItemModifierListsMaxModifierListsToEnable)
             {
-                updateItemModifierListsMaxModifierListsToEnable = value;
+                this.updateItemModifierListsMaxModifierListsToEnable = updateItemModifierListsMaxModifierListsToEnable;
                 return this;
             }
 
-            public Builder UpdateItemModifierListsMaxModifierListsToDisable(int? value)
+            public Builder UpdateItemModifierListsMaxModifierListsToDisable(int? updateItemModifierListsMaxModifierListsToDisable)
             {
-                updateItemModifierListsMaxModifierListsToDisable = value;
+                this.updateItemModifierListsMaxModifierListsToDisable = updateItemModifierListsMaxModifierListsToDisable;
                 return this;
             }
 

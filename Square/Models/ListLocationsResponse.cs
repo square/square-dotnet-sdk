@@ -28,13 +28,13 @@ namespace Square.Models
         /// <summary>
         /// Any errors that occurred during the request.
         /// </summary>
-        [JsonProperty("errors")]
+        [JsonProperty("errors", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.Error> Errors { get; }
 
         /// <summary>
         /// The business locations.
         /// </summary>
-        [JsonProperty("locations")]
+        [JsonProperty("locations", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.Location> Locations { get; }
 
         public Builder ToBuilder()
@@ -47,19 +47,20 @@ namespace Square.Models
 
         public class Builder
         {
-            private IList<Models.Error> errors = new List<Models.Error>();
-            private IList<Models.Location> locations = new List<Models.Location>();
+            private IList<Models.Error> errors;
+            private IList<Models.Location> locations;
 
-            public Builder() { }
-            public Builder Errors(IList<Models.Error> value)
+
+
+            public Builder Errors(IList<Models.Error> errors)
             {
-                errors = value;
+                this.errors = errors;
                 return this;
             }
 
-            public Builder Locations(IList<Models.Location> value)
+            public Builder Locations(IList<Models.Location> locations)
             {
-                locations = value;
+                this.locations = locations;
                 return this;
             }
 

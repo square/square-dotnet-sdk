@@ -14,20 +14,17 @@ using Square.Http.Request;
 using Square.Http.Response;
 using Square.Http.Client;
 using Square.Authentication;
-using Square.Exceptions;
 
 namespace Square.Apis
 {
-    internal class BankAccountsApi: BaseApi, IBankAccountsApi
+    internal class BankAccountsApi : BaseApi, IBankAccountsApi
     {
         internal BankAccountsApi(IConfiguration config, IHttpClient httpClient, IDictionary<string, IAuthManager> authManagers, HttpCallBack httpCallBack = null) :
             base(config, httpClient, authManagers, httpCallBack)
         { }
 
         /// <summary>
-        /// Returns a list of [BankAccount](#type-bankaccount) objects linked to a Square account. 
-        /// For more information, see 
-        /// [Bank Accounts API](https://developer.squareup.com/docs/docs/bank-accounts-api).
+        /// Returns a list of [BankAccount](#type-bankaccount) objects linked to a Square account.
         /// </summary>
         /// <param name="cursor">Optional parameter: The pagination cursor returned by a previous call to this endpoint. Use it in the next `ListBankAccounts` request to retrieve the next set  of results.  See the [Pagination](https://developer.squareup.com/docs/docs/working-with-apis/pagination) guide for more information.</param>
         /// <param name="limit">Optional parameter: Upper limit on the number of bank accounts to return in the response.  Currently, 1000 is the largest supported limit. You can specify a limit  of up to 1000 bank accounts. This is also the default limit.</param>
@@ -41,9 +38,7 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Returns a list of [BankAccount](#type-bankaccount) objects linked to a Square account. 
-        /// For more information, see 
-        /// [Bank Accounts API](https://developer.squareup.com/docs/docs/bank-accounts-api).
+        /// Returns a list of [BankAccount](#type-bankaccount) objects linked to a Square account.
         /// </summary>
         /// <param name="cursor">Optional parameter: The pagination cursor returned by a previous call to this endpoint. Use it in the next `ListBankAccounts` request to retrieve the next set  of results.  See the [Pagination](https://developer.squareup.com/docs/docs/working-with-apis/pagination) guide for more information.</param>
         /// <param name="limit">Optional parameter: Upper limit on the number of bank accounts to return in the response.  Currently, 1000 is the largest supported limit. You can specify a limit  of up to 1000 bank accounts. This is also the default limit.</param>
@@ -58,33 +53,30 @@ namespace Square.Apis
             StringBuilder _queryBuilder = new StringBuilder(_baseUri);
             _queryBuilder.Append("/v2/bank-accounts");
 
-            //process optional query parameters
-            ApiHelper.AppendUrlWithQueryParameters(_queryBuilder, new Dictionary<string, object>()
+            //prepare specfied query parameters
+            var _queryParameters = new Dictionary<string, object>()
             {
                 { "cursor", cursor },
                 { "limit", limit },
                 { "location_id", locationId }
-            }, ArrayDeserializationFormat, ParameterSeparator);
-
-            //validate and preprocess url
-            string _queryUrl = ApiHelper.CleanUrl(_queryBuilder);
+            };
 
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string, string>()
-            { 
+            {
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "Square-Version", config.SquareVersion }
             };
 
             //prepare the API call request to fetch the response
-            HttpRequest _request = GetClientInstance().Get(_queryUrl,_headers);
+            HttpRequest _request = GetClientInstance().Get(_queryBuilder.ToString(), _headers, queryParameters: _queryParameters);
             if (HttpCallBack != null)
             {
                 HttpCallBack.OnBeforeHttpRequestEventHandler(GetClientInstance(), _request);
             }
 
-            _request = await authManagers["default"].ApplyAsync(_request).ConfigureAwait(false);
+            _request = await authManagers["global"].ApplyAsync(_request).ConfigureAwait(false);
 
             //invoke request and get response
             HttpStringResponse _response = await GetClientInstance().ExecuteAsStringAsync(_request, cancellationToken).ConfigureAwait(false);
@@ -103,9 +95,7 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Returns details of a [BankAccount](#type-bankaccount) identified by V1 bank account ID. 
-        /// For more information, see 
-        /// [Retrieve a bank account by using an ID issued by V1 Bank Accounts API](https://developer.squareup.com/docs/docs/bank-accounts-api#retrieve-a-bank-account-by-using-an-id-issued-by-the-v1-bank-accounts-api).
+        /// Returns details of a [BankAccount](#type-bankaccount) identified by V1 bank account ID.
         /// </summary>
         /// <param name="v1BankAccountId">Required parameter: Connect V1 ID of the desired `BankAccount`. For more information, see  [Retrieve a bank account by using an ID issued by V1 Bank Accounts API](https://developer.squareup.com/docs/docs/bank-accounts-api#retrieve-a-bank-account-by-using-an-id-issued-by-v1-bank-accounts-api).</param>
         /// <return>Returns the Models.GetBankAccountByV1IdResponse response from the API call</return>
@@ -117,9 +107,7 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Returns details of a [BankAccount](#type-bankaccount) identified by V1 bank account ID. 
-        /// For more information, see 
-        /// [Retrieve a bank account by using an ID issued by V1 Bank Accounts API](https://developer.squareup.com/docs/docs/bank-accounts-api#retrieve-a-bank-account-by-using-an-id-issued-by-the-v1-bank-accounts-api).
+        /// Returns details of a [BankAccount](#type-bankaccount) identified by V1 bank account ID.
         /// </summary>
         /// <param name="v1BankAccountId">Required parameter: Connect V1 ID of the desired `BankAccount`. For more information, see  [Retrieve a bank account by using an ID issued by V1 Bank Accounts API](https://developer.squareup.com/docs/docs/bank-accounts-api#retrieve-a-bank-account-by-using-an-id-issued-by-v1-bank-accounts-api).</param>
         /// <return>Returns the Models.GetBankAccountByV1IdResponse response from the API call</return>
@@ -138,25 +126,22 @@ namespace Square.Apis
                 { "v1_bank_account_id", v1BankAccountId }
             });
 
-            //validate and preprocess url
-            string _queryUrl = ApiHelper.CleanUrl(_queryBuilder);
-
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string, string>()
-            { 
+            {
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "Square-Version", config.SquareVersion }
             };
 
             //prepare the API call request to fetch the response
-            HttpRequest _request = GetClientInstance().Get(_queryUrl,_headers);
+            HttpRequest _request = GetClientInstance().Get(_queryBuilder.ToString(), _headers);
             if (HttpCallBack != null)
             {
                 HttpCallBack.OnBeforeHttpRequestEventHandler(GetClientInstance(), _request);
             }
 
-            _request = await authManagers["default"].ApplyAsync(_request).ConfigureAwait(false);
+            _request = await authManagers["global"].ApplyAsync(_request).ConfigureAwait(false);
 
             //invoke request and get response
             HttpStringResponse _response = await GetClientInstance().ExecuteAsStringAsync(_request, cancellationToken).ConfigureAwait(false);
@@ -176,8 +161,7 @@ namespace Square.Apis
 
         /// <summary>
         /// Returns details of a [BankAccount](#type-bankaccount) 
-        /// linked to a Square account. For more information, see 
-        /// [Bank Accounts API](https://developer.squareup.com/docs/docs/bank-accounts-api).
+        /// linked to a Square account.
         /// </summary>
         /// <param name="bankAccountId">Required parameter: Square-issued ID of the desired `BankAccount`.</param>
         /// <return>Returns the Models.GetBankAccountResponse response from the API call</return>
@@ -190,8 +174,7 @@ namespace Square.Apis
 
         /// <summary>
         /// Returns details of a [BankAccount](#type-bankaccount) 
-        /// linked to a Square account. For more information, see 
-        /// [Bank Accounts API](https://developer.squareup.com/docs/docs/bank-accounts-api).
+        /// linked to a Square account.
         /// </summary>
         /// <param name="bankAccountId">Required parameter: Square-issued ID of the desired `BankAccount`.</param>
         /// <return>Returns the Models.GetBankAccountResponse response from the API call</return>
@@ -210,25 +193,22 @@ namespace Square.Apis
                 { "bank_account_id", bankAccountId }
             });
 
-            //validate and preprocess url
-            string _queryUrl = ApiHelper.CleanUrl(_queryBuilder);
-
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string, string>()
-            { 
+            {
                 { "user-agent", userAgent },
                 { "accept", "application/json" },
                 { "Square-Version", config.SquareVersion }
             };
 
             //prepare the API call request to fetch the response
-            HttpRequest _request = GetClientInstance().Get(_queryUrl,_headers);
+            HttpRequest _request = GetClientInstance().Get(_queryBuilder.ToString(), _headers);
             if (HttpCallBack != null)
             {
                 HttpCallBack.OnBeforeHttpRequestEventHandler(GetClientInstance(), _request);
             }
 
-            _request = await authManagers["default"].ApplyAsync(_request).ConfigureAwait(false);
+            _request = await authManagers["global"].ApplyAsync(_request).ConfigureAwait(false);
 
             //invoke request and get response
             HttpStringResponse _response = await GetClientInstance().ExecuteAsStringAsync(_request, cancellationToken).ConfigureAwait(false);

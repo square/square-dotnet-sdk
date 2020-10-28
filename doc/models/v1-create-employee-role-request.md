@@ -1,16 +1,17 @@
-## V1 Create Employee Role Request
 
-### Structure
+# V1 Create Employee Role Request
+
+## Structure
 
 `V1CreateEmployeeRoleRequest`
 
-### Fields
+## Fields
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `EmployeeRole` | [`Models.V1EmployeeRole`](/doc/models/v1-employee-role.md) | Optional | V1EmployeeRole |
 
-### Example (as JSON)
+## Example (as JSON)
 
 ```json
 {

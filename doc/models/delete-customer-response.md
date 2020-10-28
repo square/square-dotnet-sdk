@@ -1,19 +1,20 @@
-## Delete Customer Response
+
+# Delete Customer Response
 
 Defines the fields that are included in the response body of
 a request to the DeleteCustomer endpoint.
 
-### Structure
+## Structure
 
 `DeleteCustomerResponse`
 
-### Fields
+## Fields
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `Errors` | [`IList<Models.Error>`](/doc/models/error.md) | Optional | Any errors that occurred during the request. |
 
-### Example (as JSON)
+## Example (as JSON)
 
 ```json
 {}

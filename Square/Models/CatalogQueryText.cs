@@ -39,9 +39,10 @@ namespace Square.Models
             {
                 this.keywords = keywords;
             }
-            public Builder Keywords(IList<string> value)
+
+            public Builder Keywords(IList<string> keywords)
             {
-                keywords = value;
+                this.keywords = keywords;
                 return this;
             }
 

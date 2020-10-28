@@ -30,7 +30,7 @@ namespace Square.Models
         /// [API Development 101](https://developer.squareup.com/docs/basics/api101/overview) section for more
         /// information.
         /// </summary>
-        [JsonProperty("idempotency_key")]
+        [JsonProperty("idempotency_key", NullValueHandling = NullValueHandling.Ignore)]
         public string IdempotencyKey { get; }
 
         /// <summary>
@@ -38,14 +38,14 @@ namespace Square.Models
         /// Changes are applied based on the client-supplied timestamp and may be sent
         /// out of order.
         /// </summary>
-        [JsonProperty("changes")]
+        [JsonProperty("changes", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.InventoryChange> Changes { get; }
 
         /// <summary>
         /// Indicates whether the current physical count should be ignored if
         /// the quantity is unchanged since the last physical count. Default: `true`.
         /// </summary>
-        [JsonProperty("ignore_unchanged_counts")]
+        [JsonProperty("ignore_unchanged_counts", NullValueHandling = NullValueHandling.Ignore)]
         public bool? IgnoreUnchangedCounts { get; }
 
         public Builder ToBuilder()
@@ -60,25 +60,26 @@ namespace Square.Models
         public class Builder
         {
             private string idempotencyKey;
-            private IList<Models.InventoryChange> changes = new List<Models.InventoryChange>();
+            private IList<Models.InventoryChange> changes;
             private bool? ignoreUnchangedCounts;
 
-            public Builder() { }
-            public Builder IdempotencyKey(string value)
+
+
+            public Builder IdempotencyKey(string idempotencyKey)
             {
-                idempotencyKey = value;
+                this.idempotencyKey = idempotencyKey;
                 return this;
             }
 
-            public Builder Changes(IList<Models.InventoryChange> value)
+            public Builder Changes(IList<Models.InventoryChange> changes)
             {
-                changes = value;
+                this.changes = changes;
                 return this;
             }
 
-            public Builder IgnoreUnchangedCounts(bool? value)
+            public Builder IgnoreUnchangedCounts(bool? ignoreUnchangedCounts)
             {
-                ignoreUnchangedCounts = value;
+                this.ignoreUnchangedCounts = ignoreUnchangedCounts;
                 return this;
             }
 

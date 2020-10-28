@@ -39,9 +39,10 @@ namespace Square.Models
             {
                 this.domainName = domainName;
             }
-            public Builder DomainName(string value)
+
+            public Builder DomainName(string domainName)
             {
-                domainName = value;
+                this.domainName = domainName;
                 return this;
             }
 

@@ -1,10 +1,11 @@
-## Order Updated
 
-### Structure
+# Order Updated
+
+## Structure
 
 `OrderUpdated`
 
-### Fields
+## Fields
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
@@ -15,7 +16,7 @@
 | `CreatedAt` | `string` | Optional | Timestamp for when the order was created in RFC 3339 format. |
 | `UpdatedAt` | `string` | Optional | Timestamp for when the order was last updated in RFC 3339 format. |
 
-### Example (as JSON)
+## Example (as JSON)
 
 ```json
 {

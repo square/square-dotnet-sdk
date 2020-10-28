@@ -24,7 +24,7 @@ namespace Square.Models
         /// <summary>
         /// Unique string value to insure the idempotency of the operation.
         /// </summary>
-        [JsonProperty("idempotency_key")]
+        [JsonProperty("idempotency_key", NullValueHandling = NullValueHandling.Ignore)]
         public string IdempotencyKey { get; }
 
         /// <summary>
@@ -51,15 +51,16 @@ namespace Square.Models
             {
                 this.shift = shift;
             }
-            public Builder Shift(Models.Shift value)
+
+            public Builder Shift(Models.Shift shift)
             {
-                shift = value;
+                this.shift = shift;
                 return this;
             }
 
-            public Builder IdempotencyKey(string value)
+            public Builder IdempotencyKey(string idempotencyKey)
             {
-                idempotencyKey = value;
+                this.idempotencyKey = idempotencyKey;
                 return this;
             }
 

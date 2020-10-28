@@ -27,7 +27,7 @@ namespace Square.Models
         /// `TerminalCheckout`s associated with a specific device. If no device is specified then all
         /// `TerminalCheckout`s for the merchant will be displayed.
         /// </summary>
-        [JsonProperty("device_id")]
+        [JsonProperty("device_id", NullValueHandling = NullValueHandling.Ignore)]
         public string DeviceId { get; }
 
         /// <summary>
@@ -37,14 +37,14 @@ namespace Square.Models
         /// Refer to the relevant endpoint-specific documentation to determine
         /// how time ranges are handled.
         /// </summary>
-        [JsonProperty("created_at")]
+        [JsonProperty("created_at", NullValueHandling = NullValueHandling.Ignore)]
         public Models.TimeRange CreatedAt { get; }
 
         /// <summary>
         /// Filtered results with the desired status of the `TerminalCheckout`
         /// Options: PENDING, IN\_PROGRESS, CANCELED, COMPLETED
         /// </summary>
-        [JsonProperty("status")]
+        [JsonProperty("status", NullValueHandling = NullValueHandling.Ignore)]
         public string Status { get; }
 
         public Builder ToBuilder()
@@ -62,22 +62,23 @@ namespace Square.Models
             private Models.TimeRange createdAt;
             private string status;
 
-            public Builder() { }
-            public Builder DeviceId(string value)
+
+
+            public Builder DeviceId(string deviceId)
             {
-                deviceId = value;
+                this.deviceId = deviceId;
                 return this;
             }
 
-            public Builder CreatedAt(Models.TimeRange value)
+            public Builder CreatedAt(Models.TimeRange createdAt)
             {
-                createdAt = value;
+                this.createdAt = createdAt;
                 return this;
             }
 
-            public Builder Status(string value)
+            public Builder Status(string status)
             {
-                status = value;
+                this.status = status;
                 return this;
             }
 

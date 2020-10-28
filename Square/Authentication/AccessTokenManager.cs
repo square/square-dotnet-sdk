@@ -5,17 +5,26 @@ using Square.Http.Request;
 
 namespace Square.Authentication
 {
-     internal class AccessTokenManager: IAuthManager, IAccessTokenCredentials
+     internal class AccessTokenManager : IAccessTokenCredentials, IAuthManager
      {
-        /// Header Param to be used for requests
-        public string AccessToken { get; }
-
         /// <summary>
         /// Constructor
         /// </summary>
         public AccessTokenManager(string accessToken)
         {
             AccessToken = accessToken;
+        }
+
+        /// <summary>
+        /// Getter for accessToken
+        /// </summary>
+        public string AccessToken { get; }
+
+        /// <summary>
+        /// Check if credentials match.
+        /// </summary>
+        public bool Equals(string accessToken) {
+            return accessToken.Equals(AccessToken);
         }
 
         /// <summary>

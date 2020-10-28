@@ -22,7 +22,7 @@ namespace Square.Models
         /// <summary>
         /// The nickname assigned to the single-location account by the parent business. This value appears in the parent business's multi-location dashboard.
         /// </summary>
-        [JsonProperty("nickname")]
+        [JsonProperty("nickname", NullValueHandling = NullValueHandling.Ignore)]
         public string Nickname { get; }
 
         public Builder ToBuilder()
@@ -36,10 +36,11 @@ namespace Square.Models
         {
             private string nickname;
 
-            public Builder() { }
-            public Builder Nickname(string value)
+
+
+            public Builder Nickname(string nickname)
             {
-                nickname = value;
+                this.nickname = nickname;
                 return this;
             }
 

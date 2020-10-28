@@ -26,21 +26,21 @@ namespace Square.Models
         /// <summary>
         /// Indicates the specific day  of the week.
         /// </summary>
-        [JsonProperty("day_of_week")]
+        [JsonProperty("day_of_week", NullValueHandling = NullValueHandling.Ignore)]
         public string DayOfWeek { get; }
 
         /// <summary>
         /// The start time of a business hours period, specified in local time using partial-time
-        /// RFC3339 format.
+        /// RFC 3339 format.
         /// </summary>
-        [JsonProperty("start_local_time")]
+        [JsonProperty("start_local_time", NullValueHandling = NullValueHandling.Ignore)]
         public string StartLocalTime { get; }
 
         /// <summary>
         /// The end time of a business hours period, specified in local time using partial-time
-        /// RFC3339 format.
+        /// RFC 3339 format.
         /// </summary>
-        [JsonProperty("end_local_time")]
+        [JsonProperty("end_local_time", NullValueHandling = NullValueHandling.Ignore)]
         public string EndLocalTime { get; }
 
         public Builder ToBuilder()
@@ -58,22 +58,23 @@ namespace Square.Models
             private string startLocalTime;
             private string endLocalTime;
 
-            public Builder() { }
-            public Builder DayOfWeek(string value)
+
+
+            public Builder DayOfWeek(string dayOfWeek)
             {
-                dayOfWeek = value;
+                this.dayOfWeek = dayOfWeek;
                 return this;
             }
 
-            public Builder StartLocalTime(string value)
+            public Builder StartLocalTime(string startLocalTime)
             {
-                startLocalTime = value;
+                this.startLocalTime = startLocalTime;
                 return this;
             }
 
-            public Builder EndLocalTime(string value)
+            public Builder EndLocalTime(string endLocalTime)
             {
-                endLocalTime = value;
+                this.endLocalTime = endLocalTime;
                 return this;
             }
 

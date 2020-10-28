@@ -26,7 +26,7 @@ namespace Square.Models
         /// <summary>
         /// The Square-assigned ID of the [loyalty program](#type-LoyaltyProgram).
         /// </summary>
-        [JsonProperty("loyalty_program_id")]
+        [JsonProperty("loyalty_program_id", NullValueHandling = NullValueHandling.Ignore)]
         public string LoyaltyProgramId { get; }
 
         /// <summary>
@@ -38,7 +38,7 @@ namespace Square.Models
         /// <summary>
         /// The reason for the adjustment of points.
         /// </summary>
-        [JsonProperty("reason")]
+        [JsonProperty("reason", NullValueHandling = NullValueHandling.Ignore)]
         public string Reason { get; }
 
         public Builder ToBuilder()
@@ -59,21 +59,22 @@ namespace Square.Models
             {
                 this.points = points;
             }
-            public Builder Points(int value)
+
+            public Builder Points(int points)
             {
-                points = value;
+                this.points = points;
                 return this;
             }
 
-            public Builder LoyaltyProgramId(string value)
+            public Builder LoyaltyProgramId(string loyaltyProgramId)
             {
-                loyaltyProgramId = value;
+                this.loyaltyProgramId = loyaltyProgramId;
                 return this;
             }
 
-            public Builder Reason(string value)
+            public Builder Reason(string reason)
             {
-                reason = value;
+                this.reason = reason;
                 return this;
             }
 

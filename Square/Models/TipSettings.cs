@@ -26,20 +26,20 @@ namespace Square.Models
         /// <summary>
         /// Indicates whether tipping is enabled for this checkout. Defaults to false.
         /// </summary>
-        [JsonProperty("allow_tipping")]
+        [JsonProperty("allow_tipping", NullValueHandling = NullValueHandling.Ignore)]
         public bool? AllowTipping { get; }
 
         /// <summary>
         /// Indicates whether tip options should be presented on their own screen before presenting
         /// the signature screen during card payment. Defaults to false.
         /// </summary>
-        [JsonProperty("separate_tip_screen")]
+        [JsonProperty("separate_tip_screen", NullValueHandling = NullValueHandling.Ignore)]
         public bool? SeparateTipScreen { get; }
 
         /// <summary>
         /// Indicates whether custom tip amounts are allowed during the checkout flow. Defaults to false.
         /// </summary>
-        [JsonProperty("custom_tip_field")]
+        [JsonProperty("custom_tip_field", NullValueHandling = NullValueHandling.Ignore)]
         public bool? CustomTipField { get; }
 
         public Builder ToBuilder()
@@ -57,22 +57,23 @@ namespace Square.Models
             private bool? separateTipScreen;
             private bool? customTipField;
 
-            public Builder() { }
-            public Builder AllowTipping(bool? value)
+
+
+            public Builder AllowTipping(bool? allowTipping)
             {
-                allowTipping = value;
+                this.allowTipping = allowTipping;
                 return this;
             }
 
-            public Builder SeparateTipScreen(bool? value)
+            public Builder SeparateTipScreen(bool? separateTipScreen)
             {
-                separateTipScreen = value;
+                this.separateTipScreen = separateTipScreen;
                 return this;
             }
 
-            public Builder CustomTipField(bool? value)
+            public Builder CustomTipField(bool? customTipField)
             {
-                customTipField = value;
+                this.customTipField = customTipField;
                 return this;
             }
 

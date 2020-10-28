@@ -39,9 +39,10 @@ namespace Square.Models
             {
                 this.expirationDuration = expirationDuration;
             }
-            public Builder ExpirationDuration(string value)
+
+            public Builder ExpirationDuration(string expirationDuration)
             {
-                expirationDuration = value;
+                this.expirationDuration = expirationDuration;
                 return this;
             }
 

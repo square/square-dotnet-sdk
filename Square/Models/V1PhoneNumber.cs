@@ -51,15 +51,16 @@ namespace Square.Models
                 this.callingCode = callingCode;
                 this.number = number;
             }
-            public Builder CallingCode(string value)
+
+            public Builder CallingCode(string callingCode)
             {
-                callingCode = value;
+                this.callingCode = callingCode;
                 return this;
             }
 
-            public Builder Number(string value)
+            public Builder Number(string number)
             {
-                number = value;
+                this.number = number;
                 return this;
             }
 

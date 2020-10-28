@@ -28,13 +28,13 @@ namespace Square.Models
         /// <br>
         /// <b>Min Length 1    Max Length 45</b>
         /// </summary>
-        [JsonProperty("idempotency_key")]
+        [JsonProperty("idempotency_key", NullValueHandling = NullValueHandling.Ignore)]
         public string IdempotencyKey { get; }
 
         /// <summary>
         /// A record representing an individual team member for a business.
         /// </summary>
-        [JsonProperty("team_member")]
+        [JsonProperty("team_member", NullValueHandling = NullValueHandling.Ignore)]
         public Models.TeamMember TeamMember { get; }
 
         public Builder ToBuilder()
@@ -50,16 +50,17 @@ namespace Square.Models
             private string idempotencyKey;
             private Models.TeamMember teamMember;
 
-            public Builder() { }
-            public Builder IdempotencyKey(string value)
+
+
+            public Builder IdempotencyKey(string idempotencyKey)
             {
-                idempotencyKey = value;
+                this.idempotencyKey = idempotencyKey;
                 return this;
             }
 
-            public Builder TeamMember(Models.TeamMember value)
+            public Builder TeamMember(Models.TeamMember teamMember)
             {
-                teamMember = value;
+                this.teamMember = teamMember;
                 return this;
             }
 

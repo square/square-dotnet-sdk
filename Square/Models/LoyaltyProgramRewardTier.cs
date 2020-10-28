@@ -87,33 +87,34 @@ namespace Square.Models
                 this.definition = definition;
                 this.createdAt = createdAt;
             }
-            public Builder Id(string value)
+
+            public Builder Id(string id)
             {
-                id = value;
+                this.id = id;
                 return this;
             }
 
-            public Builder Points(int value)
+            public Builder Points(int points)
             {
-                points = value;
+                this.points = points;
                 return this;
             }
 
-            public Builder Name(string value)
+            public Builder Name(string name)
             {
-                name = value;
+                this.name = name;
                 return this;
             }
 
-            public Builder Definition(Models.LoyaltyProgramRewardDefinition value)
+            public Builder Definition(Models.LoyaltyProgramRewardDefinition definition)
             {
-                definition = value;
+                this.definition = definition;
                 return this;
             }
 
-            public Builder CreatedAt(string value)
+            public Builder CreatedAt(string createdAt)
             {
-                createdAt = value;
+                this.createdAt = createdAt;
                 return this;
             }
 

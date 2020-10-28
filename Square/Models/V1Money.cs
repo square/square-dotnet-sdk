@@ -25,14 +25,14 @@ namespace Square.Models
         /// Amount in the lowest denominated value of this Currency. E.g. in USD
         /// these are cents, in JPY they are Yen (which do not have a 'cent' concept).
         /// </summary>
-        [JsonProperty("amount")]
+        [JsonProperty("amount", NullValueHandling = NullValueHandling.Ignore)]
         public int? Amount { get; }
 
         /// <summary>
         /// Indicates the associated currency for an amount of money. Values correspond
         /// to [ISO 4217](https://wikipedia.org/wiki/ISO_4217).
         /// </summary>
-        [JsonProperty("currency_code")]
+        [JsonProperty("currency_code", NullValueHandling = NullValueHandling.Ignore)]
         public string CurrencyCode { get; }
 
         public Builder ToBuilder()
@@ -48,16 +48,17 @@ namespace Square.Models
             private int? amount;
             private string currencyCode;
 
-            public Builder() { }
-            public Builder Amount(int? value)
+
+
+            public Builder Amount(int? amount)
             {
-                amount = value;
+                this.amount = amount;
                 return this;
             }
 
-            public Builder CurrencyCode(string value)
+            public Builder CurrencyCode(string currencyCode)
             {
-                currencyCode = value;
+                this.currencyCode = currencyCode;
                 return this;
             }
 

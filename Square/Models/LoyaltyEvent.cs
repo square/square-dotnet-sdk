@@ -64,31 +64,31 @@ namespace Square.Models
         /// <summary>
         /// Provides metadata when the event `type` is `ACCUMULATE_POINTS`.
         /// </summary>
-        [JsonProperty("accumulate_points")]
+        [JsonProperty("accumulate_points", NullValueHandling = NullValueHandling.Ignore)]
         public Models.LoyaltyEventAccumulatePoints AccumulatePoints { get; }
 
         /// <summary>
         /// Provides metadata when the event `type` is `CREATE_REWARD`.
         /// </summary>
-        [JsonProperty("create_reward")]
+        [JsonProperty("create_reward", NullValueHandling = NullValueHandling.Ignore)]
         public Models.LoyaltyEventCreateReward CreateReward { get; }
 
         /// <summary>
         /// Provides metadata when the event `type` is `REDEEM_REWARD`.
         /// </summary>
-        [JsonProperty("redeem_reward")]
+        [JsonProperty("redeem_reward", NullValueHandling = NullValueHandling.Ignore)]
         public Models.LoyaltyEventRedeemReward RedeemReward { get; }
 
         /// <summary>
         /// Provides metadata when the event `type` is `DELETE_REWARD`.
         /// </summary>
-        [JsonProperty("delete_reward")]
+        [JsonProperty("delete_reward", NullValueHandling = NullValueHandling.Ignore)]
         public Models.LoyaltyEventDeleteReward DeleteReward { get; }
 
         /// <summary>
         /// Provides metadata when the event `type` is `ADJUST_POINTS`.
         /// </summary>
-        [JsonProperty("adjust_points")]
+        [JsonProperty("adjust_points", NullValueHandling = NullValueHandling.Ignore)]
         public Models.LoyaltyEventAdjustPoints AdjustPoints { get; }
 
         /// <summary>
@@ -100,7 +100,7 @@ namespace Square.Models
         /// <summary>
         /// The ID of the [location](#type-Location) where the event occurred.
         /// </summary>
-        [JsonProperty("location_id")]
+        [JsonProperty("location_id", NullValueHandling = NullValueHandling.Ignore)]
         public string LocationId { get; }
 
         /// <summary>
@@ -112,13 +112,13 @@ namespace Square.Models
         /// <summary>
         /// Provides metadata when the event `type` is `EXPIRE_POINTS`.
         /// </summary>
-        [JsonProperty("expire_points")]
+        [JsonProperty("expire_points", NullValueHandling = NullValueHandling.Ignore)]
         public Models.LoyaltyEventExpirePoints ExpirePoints { get; }
 
         /// <summary>
         /// Provides metadata when the event `type` is `OTHER`.
         /// </summary>
-        [JsonProperty("other_event")]
+        [JsonProperty("other_event", NullValueHandling = NullValueHandling.Ignore)]
         public Models.LoyaltyEventOther OtherEvent { get; }
 
         public Builder ToBuilder()
@@ -167,81 +167,82 @@ namespace Square.Models
                 this.loyaltyAccountId = loyaltyAccountId;
                 this.source = source;
             }
-            public Builder Id(string value)
+
+            public Builder Id(string id)
             {
-                id = value;
+                this.id = id;
                 return this;
             }
 
-            public Builder Type(string value)
+            public Builder Type(string type)
             {
-                type = value;
+                this.type = type;
                 return this;
             }
 
-            public Builder CreatedAt(string value)
+            public Builder CreatedAt(string createdAt)
             {
-                createdAt = value;
+                this.createdAt = createdAt;
                 return this;
             }
 
-            public Builder LoyaltyAccountId(string value)
+            public Builder LoyaltyAccountId(string loyaltyAccountId)
             {
-                loyaltyAccountId = value;
+                this.loyaltyAccountId = loyaltyAccountId;
                 return this;
             }
 
-            public Builder Source(string value)
+            public Builder Source(string source)
             {
-                source = value;
+                this.source = source;
                 return this;
             }
 
-            public Builder AccumulatePoints(Models.LoyaltyEventAccumulatePoints value)
+            public Builder AccumulatePoints(Models.LoyaltyEventAccumulatePoints accumulatePoints)
             {
-                accumulatePoints = value;
+                this.accumulatePoints = accumulatePoints;
                 return this;
             }
 
-            public Builder CreateReward(Models.LoyaltyEventCreateReward value)
+            public Builder CreateReward(Models.LoyaltyEventCreateReward createReward)
             {
-                createReward = value;
+                this.createReward = createReward;
                 return this;
             }
 
-            public Builder RedeemReward(Models.LoyaltyEventRedeemReward value)
+            public Builder RedeemReward(Models.LoyaltyEventRedeemReward redeemReward)
             {
-                redeemReward = value;
+                this.redeemReward = redeemReward;
                 return this;
             }
 
-            public Builder DeleteReward(Models.LoyaltyEventDeleteReward value)
+            public Builder DeleteReward(Models.LoyaltyEventDeleteReward deleteReward)
             {
-                deleteReward = value;
+                this.deleteReward = deleteReward;
                 return this;
             }
 
-            public Builder AdjustPoints(Models.LoyaltyEventAdjustPoints value)
+            public Builder AdjustPoints(Models.LoyaltyEventAdjustPoints adjustPoints)
             {
-                adjustPoints = value;
+                this.adjustPoints = adjustPoints;
                 return this;
             }
 
-            public Builder LocationId(string value)
+            public Builder LocationId(string locationId)
             {
-                locationId = value;
+                this.locationId = locationId;
                 return this;
             }
 
-            public Builder ExpirePoints(Models.LoyaltyEventExpirePoints value)
+            public Builder ExpirePoints(Models.LoyaltyEventExpirePoints expirePoints)
             {
-                expirePoints = value;
+                this.expirePoints = expirePoints;
                 return this;
             }
 
-            public Builder OtherEvent(Models.LoyaltyEventOther value)
+            public Builder OtherEvent(Models.LoyaltyEventOther otherEvent)
             {
-                otherEvent = value;
+                this.otherEvent = otherEvent;
                 return this;
             }
 

@@ -26,19 +26,19 @@ namespace Square.Models
         /// <summary>
         /// The order (e.g., chronological or alphabetical) in which results from a request are returned.
         /// </summary>
-        [JsonProperty("order")]
+        [JsonProperty("order", NullValueHandling = NullValueHandling.Ignore)]
         public string Order { get; }
 
         /// <summary>
         /// The beginning of the requested reporting period, in ISO 8601 format. Default value: The current time minus 90 days.
         /// </summary>
-        [JsonProperty("begin_time")]
+        [JsonProperty("begin_time", NullValueHandling = NullValueHandling.Ignore)]
         public string BeginTime { get; }
 
         /// <summary>
         /// The beginning of the requested reporting period, in ISO 8601 format. Default value: The current time.
         /// </summary>
-        [JsonProperty("end_time")]
+        [JsonProperty("end_time", NullValueHandling = NullValueHandling.Ignore)]
         public string EndTime { get; }
 
         public Builder ToBuilder()
@@ -56,22 +56,23 @@ namespace Square.Models
             private string beginTime;
             private string endTime;
 
-            public Builder() { }
-            public Builder Order(string value)
+
+
+            public Builder Order(string order)
             {
-                order = value;
+                this.order = order;
                 return this;
             }
 
-            public Builder BeginTime(string value)
+            public Builder BeginTime(string beginTime)
             {
-                beginTime = value;
+                this.beginTime = beginTime;
                 return this;
             }
 
-            public Builder EndTime(string value)
+            public Builder EndTime(string endTime)
             {
-                endTime = value;
+                this.endTime = endTime;
                 return this;
             }
 

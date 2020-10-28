@@ -37,14 +37,14 @@ namespace Square.Models
         /// Timestamp for the beginning of the requested reporting period, in RFC 3339 format.
         /// Default: The current time minus one year.
         /// </summary>
-        [JsonProperty("begin_time")]
+        [JsonProperty("begin_time", NullValueHandling = NullValueHandling.Ignore)]
         public string BeginTime { get; }
 
         /// <summary>
         /// Timestamp for the end of the requested reporting period, in RFC 3339 format.
         /// Default: The current time.
         /// </summary>
-        [JsonProperty("end_time")]
+        [JsonProperty("end_time", NullValueHandling = NullValueHandling.Ignore)]
         public string EndTime { get; }
 
         /// <summary>
@@ -52,7 +52,7 @@ namespace Square.Models
         /// - `ASC` - oldest to newest
         /// - `DESC` - newest to oldest (default).
         /// </summary>
-        [JsonProperty("sort_order")]
+        [JsonProperty("sort_order", NullValueHandling = NullValueHandling.Ignore)]
         public string SortOrder { get; }
 
         /// <summary>
@@ -60,14 +60,14 @@ namespace Square.Models
         /// Provide this to retrieve the next set of results for the original query.
         /// See [Pagination](https://developer.squareup.com/docs/basics/api101/pagination) for more information.
         /// </summary>
-        [JsonProperty("cursor")]
+        [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
         public string Cursor { get; }
 
         /// <summary>
         /// Limit results to the location supplied. By default, results are returned
         /// for all locations associated with the merchant.
         /// </summary>
-        [JsonProperty("location_id")]
+        [JsonProperty("location_id", NullValueHandling = NullValueHandling.Ignore)]
         public string LocationId { get; }
 
         /// <summary>
@@ -75,7 +75,7 @@ namespace Square.Models
         /// For a list of refund status values, see [PaymentRefund](#type-paymentrefund).
         /// Default: If omitted refunds are returned regardless of status.
         /// </summary>
-        [JsonProperty("status")]
+        [JsonProperty("status", NullValueHandling = NullValueHandling.Ignore)]
         public string Status { get; }
 
         /// <summary>
@@ -84,7 +84,7 @@ namespace Square.Models
         /// source.
         /// Default: If omitted refunds are returned regardless of source type.
         /// </summary>
-        [JsonProperty("source_type")]
+        [JsonProperty("source_type", NullValueHandling = NullValueHandling.Ignore)]
         public string SourceType { get; }
 
         /// <summary>
@@ -93,7 +93,7 @@ namespace Square.Models
         /// If the supplied value is greater than 100, at most 100 results will be returned.
         /// Default: `100`
         /// </summary>
-        [JsonProperty("limit")]
+        [JsonProperty("limit", NullValueHandling = NullValueHandling.Ignore)]
         public int? Limit { get; }
 
         public Builder ToBuilder()
@@ -121,52 +121,53 @@ namespace Square.Models
             private string sourceType;
             private int? limit;
 
-            public Builder() { }
-            public Builder BeginTime(string value)
+
+
+            public Builder BeginTime(string beginTime)
             {
-                beginTime = value;
+                this.beginTime = beginTime;
                 return this;
             }
 
-            public Builder EndTime(string value)
+            public Builder EndTime(string endTime)
             {
-                endTime = value;
+                this.endTime = endTime;
                 return this;
             }
 
-            public Builder SortOrder(string value)
+            public Builder SortOrder(string sortOrder)
             {
-                sortOrder = value;
+                this.sortOrder = sortOrder;
                 return this;
             }
 
-            public Builder Cursor(string value)
+            public Builder Cursor(string cursor)
             {
-                cursor = value;
+                this.cursor = cursor;
                 return this;
             }
 
-            public Builder LocationId(string value)
+            public Builder LocationId(string locationId)
             {
-                locationId = value;
+                this.locationId = locationId;
                 return this;
             }
 
-            public Builder Status(string value)
+            public Builder Status(string status)
             {
-                status = value;
+                this.status = status;
                 return this;
             }
 
-            public Builder SourceType(string value)
+            public Builder SourceType(string sourceType)
             {
-                sourceType = value;
+                this.sourceType = sourceType;
                 return this;
             }
 
-            public Builder Limit(int? value)
+            public Builder Limit(int? limit)
             {
-                limit = value;
+                this.limit = limit;
                 return this;
             }
 

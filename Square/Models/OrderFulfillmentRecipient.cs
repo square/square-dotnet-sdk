@@ -36,34 +36,34 @@ namespace Square.Models
         /// targeted customer profile does not contain the necessary information and
         /// these fields are left unset, the request will result in an error.
         /// </summary>
-        [JsonProperty("customer_id")]
+        [JsonProperty("customer_id", NullValueHandling = NullValueHandling.Ignore)]
         public string CustomerId { get; }
 
         /// <summary>
         /// The display name of the fulfillment recipient.
         /// If provided, overrides the value pulled from the customer profile indicated by `customer_id`.
         /// </summary>
-        [JsonProperty("display_name")]
+        [JsonProperty("display_name", NullValueHandling = NullValueHandling.Ignore)]
         public string DisplayName { get; }
 
         /// <summary>
         /// The email address of the fulfillment recipient.
         /// If provided, overrides the value pulled from the customer profile indicated by `customer_id`.
         /// </summary>
-        [JsonProperty("email_address")]
+        [JsonProperty("email_address", NullValueHandling = NullValueHandling.Ignore)]
         public string EmailAddress { get; }
 
         /// <summary>
         /// The phone number of the fulfillment recipient.
         /// If provided, overrides the value pulled from the customer profile indicated by `customer_id`.
         /// </summary>
-        [JsonProperty("phone_number")]
+        [JsonProperty("phone_number", NullValueHandling = NullValueHandling.Ignore)]
         public string PhoneNumber { get; }
 
         /// <summary>
         /// Represents a physical address.
         /// </summary>
-        [JsonProperty("address")]
+        [JsonProperty("address", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Address Address { get; }
 
         public Builder ToBuilder()
@@ -85,34 +85,35 @@ namespace Square.Models
             private string phoneNumber;
             private Models.Address address;
 
-            public Builder() { }
-            public Builder CustomerId(string value)
+
+
+            public Builder CustomerId(string customerId)
             {
-                customerId = value;
+                this.customerId = customerId;
                 return this;
             }
 
-            public Builder DisplayName(string value)
+            public Builder DisplayName(string displayName)
             {
-                displayName = value;
+                this.displayName = displayName;
                 return this;
             }
 
-            public Builder EmailAddress(string value)
+            public Builder EmailAddress(string emailAddress)
             {
-                emailAddress = value;
+                this.emailAddress = emailAddress;
                 return this;
             }
 
-            public Builder PhoneNumber(string value)
+            public Builder PhoneNumber(string phoneNumber)
             {
-                phoneNumber = value;
+                this.phoneNumber = phoneNumber;
                 return this;
             }
 
-            public Builder Address(Models.Address value)
+            public Builder Address(Models.Address address)
             {
-                address = value;
+                this.address = address;
                 return this;
             }
 

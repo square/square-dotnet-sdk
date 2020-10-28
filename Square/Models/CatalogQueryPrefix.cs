@@ -51,15 +51,16 @@ namespace Square.Models
                 this.attributeName = attributeName;
                 this.attributePrefix = attributePrefix;
             }
-            public Builder AttributeName(string value)
+
+            public Builder AttributeName(string attributeName)
             {
-                attributeName = value;
+                this.attributeName = attributeName;
                 return this;
             }
 
-            public Builder AttributePrefix(string value)
+            public Builder AttributePrefix(string attributePrefix)
             {
-                attributePrefix = value;
+                this.attributePrefix = attributePrefix;
                 return this;
             }
 

@@ -1,18 +1,19 @@
-## Catalog Query Items for Tax
+
+# Catalog Query Items for Tax
 
 The query filter to return the items containing the specified tax IDs.
 
-### Structure
+## Structure
 
 `CatalogQueryItemsForTax`
 
-### Fields
+## Fields
 
 | Name | Type | Description |
 |  --- | --- | --- |
 | `TaxIds` | `IList<string>` | A set of `CatalogTax` IDs to be used to find associated `CatalogItem`s. |
 
-### Example (as JSON)
+## Example (as JSON)
 
 ```json
 {

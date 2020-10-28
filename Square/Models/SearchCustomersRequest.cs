@@ -28,7 +28,7 @@ namespace Square.Models
         /// the next set of results associated with the original query.
         /// See the [Pagination guide](https://developer.squareup.com/docs/working-with-apis/pagination) for more information.
         /// </summary>
-        [JsonProperty("cursor")]
+        [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
         public string Cursor { get; }
 
         /// <summary>
@@ -37,14 +37,14 @@ namespace Square.Models
         /// If the supplied limit is negative, zero, or is higher than the maximum limit
         /// of 100, it will be ignored.
         /// </summary>
-        [JsonProperty("limit")]
+        [JsonProperty("limit", NullValueHandling = NullValueHandling.Ignore)]
         public long? Limit { get; }
 
         /// <summary>
         /// Represents a query (including filtering criteria, sorting criteria, or both) used to search
         /// for customer profiles.
         /// </summary>
-        [JsonProperty("query")]
+        [JsonProperty("query", NullValueHandling = NullValueHandling.Ignore)]
         public Models.CustomerQuery Query { get; }
 
         public Builder ToBuilder()
@@ -62,22 +62,23 @@ namespace Square.Models
             private long? limit;
             private Models.CustomerQuery query;
 
-            public Builder() { }
-            public Builder Cursor(string value)
+
+
+            public Builder Cursor(string cursor)
             {
-                cursor = value;
+                this.cursor = cursor;
                 return this;
             }
 
-            public Builder Limit(long? value)
+            public Builder Limit(long? limit)
             {
-                limit = value;
+                this.limit = limit;
                 return this;
             }
 
-            public Builder Query(Models.CustomerQuery value)
+            public Builder Query(Models.CustomerQuery query)
             {
-                query = value;
+                this.query = query;
                 return this;
             }
 

@@ -28,19 +28,19 @@ namespace Square.Models
         /// Provide this to retrieve the next set of results for your original query.
         /// See the [Pagination guide](https://developer.squareup.com/docs/working-with-apis/pagination) for more information.
         /// </summary>
-        [JsonProperty("cursor")]
+        [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
         public string Cursor { get; }
 
         /// <summary>
         /// Specifies customer attributes as the sort key to customer profiles returned from a search.
         /// </summary>
-        [JsonProperty("sort_field")]
+        [JsonProperty("sort_field", NullValueHandling = NullValueHandling.Ignore)]
         public string SortField { get; }
 
         /// <summary>
         /// The order (e.g., chronological or alphabetical) in which results from a request are returned.
         /// </summary>
-        [JsonProperty("sort_order")]
+        [JsonProperty("sort_order", NullValueHandling = NullValueHandling.Ignore)]
         public string SortOrder { get; }
 
         public Builder ToBuilder()
@@ -58,22 +58,23 @@ namespace Square.Models
             private string sortField;
             private string sortOrder;
 
-            public Builder() { }
-            public Builder Cursor(string value)
+
+
+            public Builder Cursor(string cursor)
             {
-                cursor = value;
+                this.cursor = cursor;
                 return this;
             }
 
-            public Builder SortField(string value)
+            public Builder SortField(string sortField)
             {
-                sortField = value;
+                this.sortField = sortField;
                 return this;
             }
 
-            public Builder SortOrder(string value)
+            public Builder SortOrder(string sortOrder)
             {
-                sortOrder = value;
+                this.sortOrder = sortOrder;
                 return this;
             }
 

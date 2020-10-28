@@ -24,7 +24,7 @@ namespace Square.Models
         /// If you do not know the version, you can call [GetInvoice](#endpoint-Invoices-GetInvoice) or 
         /// [ListInvoices](#endpoint-Invoices-ListInvoices).
         /// </summary>
-        [JsonProperty("version")]
+        [JsonProperty("version", NullValueHandling = NullValueHandling.Ignore)]
         public int? Version { get; }
 
         public Builder ToBuilder()
@@ -38,10 +38,11 @@ namespace Square.Models
         {
             private int? version;
 
-            public Builder() { }
-            public Builder Version(int? value)
+
+
+            public Builder Version(int? version)
             {
-                version = value;
+                this.version = version;
                 return this;
             }
 

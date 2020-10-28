@@ -30,13 +30,13 @@ namespace Square.Models
         /// <summary>
         /// Any errors that occurred during the request.
         /// </summary>
-        [JsonProperty("errors")]
+        [JsonProperty("errors", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.Error> Errors { get; }
 
         /// <summary>
         /// The queried DeviceCode.
         /// </summary>
-        [JsonProperty("device_codes")]
+        [JsonProperty("device_codes", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.DeviceCode> DeviceCodes { get; }
 
         /// <summary>
@@ -45,7 +45,7 @@ namespace Square.Models
         /// succeeded and additional results are available.
         /// See [Paginating results](#paginatingresults) for more information.
         /// </summary>
-        [JsonProperty("cursor")]
+        [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
         public string Cursor { get; }
 
         public Builder ToBuilder()
@@ -59,26 +59,27 @@ namespace Square.Models
 
         public class Builder
         {
-            private IList<Models.Error> errors = new List<Models.Error>();
-            private IList<Models.DeviceCode> deviceCodes = new List<Models.DeviceCode>();
+            private IList<Models.Error> errors;
+            private IList<Models.DeviceCode> deviceCodes;
             private string cursor;
 
-            public Builder() { }
-            public Builder Errors(IList<Models.Error> value)
+
+
+            public Builder Errors(IList<Models.Error> errors)
             {
-                errors = value;
+                this.errors = errors;
                 return this;
             }
 
-            public Builder DeviceCodes(IList<Models.DeviceCode> value)
+            public Builder DeviceCodes(IList<Models.DeviceCode> deviceCodes)
             {
-                deviceCodes = value;
+                this.deviceCodes = deviceCodes;
                 return this;
             }
 
-            public Builder Cursor(string value)
+            public Builder Cursor(string cursor)
             {
-                cursor = value;
+                this.cursor = cursor;
                 return this;
             }
 

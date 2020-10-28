@@ -16,6 +16,7 @@ namespace Square.Models
     {
         public CatalogQuery(Models.CatalogQuerySortedAttribute sortedAttributeQuery = null,
             Models.CatalogQueryExact exactQuery = null,
+            Models.CatalogQuerySet setQuery = null,
             Models.CatalogQueryPrefix prefixQuery = null,
             Models.CatalogQueryRange rangeQuery = null,
             Models.CatalogQueryText textQuery = null,
@@ -26,6 +27,7 @@ namespace Square.Models
         {
             SortedAttributeQuery = sortedAttributeQuery;
             ExactQuery = exactQuery;
+            SetQuery = setQuery;
             PrefixQuery = prefixQuery;
             RangeQuery = rangeQuery;
             TextQuery = textQuery;
@@ -38,55 +40,62 @@ namespace Square.Models
         /// <summary>
         /// The query expression to specify the key to sort search results.
         /// </summary>
-        [JsonProperty("sorted_attribute_query")]
+        [JsonProperty("sorted_attribute_query", NullValueHandling = NullValueHandling.Ignore)]
         public Models.CatalogQuerySortedAttribute SortedAttributeQuery { get; }
 
         /// <summary>
-        /// The query filter to return the serch result by exact match of the specified attribute name and value.
+        /// The query filter to return the search result by exact match of the specified attribute name and value.
         /// </summary>
-        [JsonProperty("exact_query")]
+        [JsonProperty("exact_query", NullValueHandling = NullValueHandling.Ignore)]
         public Models.CatalogQueryExact ExactQuery { get; }
+
+        /// <summary>
+        /// The query filter to return the search result(s) by exact match of the specified `attribute_name` and any of
+        /// the `attribute_values`.
+        /// </summary>
+        [JsonProperty("set_query", NullValueHandling = NullValueHandling.Ignore)]
+        public Models.CatalogQuerySet SetQuery { get; }
 
         /// <summary>
         /// The query filter to return the search result whose named attribute values are prefixed by the specified attribute value.
         /// </summary>
-        [JsonProperty("prefix_query")]
+        [JsonProperty("prefix_query", NullValueHandling = NullValueHandling.Ignore)]
         public Models.CatalogQueryPrefix PrefixQuery { get; }
 
         /// <summary>
         /// The query filter to return the search result whose named attribute values fall between the specified range.
         /// </summary>
-        [JsonProperty("range_query")]
+        [JsonProperty("range_query", NullValueHandling = NullValueHandling.Ignore)]
         public Models.CatalogQueryRange RangeQuery { get; }
 
         /// <summary>
         /// The query filter to return the search result whose searchable attribute values contain all of the specified keywords or tokens, independent of the token order or case.
         /// </summary>
-        [JsonProperty("text_query")]
+        [JsonProperty("text_query", NullValueHandling = NullValueHandling.Ignore)]
         public Models.CatalogQueryText TextQuery { get; }
 
         /// <summary>
         /// The query filter to return the items containing the specified tax IDs.
         /// </summary>
-        [JsonProperty("items_for_tax_query")]
+        [JsonProperty("items_for_tax_query", NullValueHandling = NullValueHandling.Ignore)]
         public Models.CatalogQueryItemsForTax ItemsForTaxQuery { get; }
 
         /// <summary>
         /// The query filter to return the items containing the specified modifier list IDs.
         /// </summary>
-        [JsonProperty("items_for_modifier_list_query")]
+        [JsonProperty("items_for_modifier_list_query", NullValueHandling = NullValueHandling.Ignore)]
         public Models.CatalogQueryItemsForModifierList ItemsForModifierListQuery { get; }
 
         /// <summary>
         /// The query filter to return the items containing the specified item option IDs.
         /// </summary>
-        [JsonProperty("items_for_item_options_query")]
+        [JsonProperty("items_for_item_options_query", NullValueHandling = NullValueHandling.Ignore)]
         public Models.CatalogQueryItemsForItemOptions ItemsForItemOptionsQuery { get; }
 
         /// <summary>
         /// The query filter to return the item variations containing the specified item option value IDs.
         /// </summary>
-        [JsonProperty("item_variations_for_item_option_values_query")]
+        [JsonProperty("item_variations_for_item_option_values_query", NullValueHandling = NullValueHandling.Ignore)]
         public Models.CatalogQueryItemVariationsForItemOptionValues ItemVariationsForItemOptionValuesQuery { get; }
 
         public Builder ToBuilder()
@@ -94,6 +103,7 @@ namespace Square.Models
             var builder = new Builder()
                 .SortedAttributeQuery(SortedAttributeQuery)
                 .ExactQuery(ExactQuery)
+                .SetQuery(SetQuery)
                 .PrefixQuery(PrefixQuery)
                 .RangeQuery(RangeQuery)
                 .TextQuery(TextQuery)
@@ -108,6 +118,7 @@ namespace Square.Models
         {
             private Models.CatalogQuerySortedAttribute sortedAttributeQuery;
             private Models.CatalogQueryExact exactQuery;
+            private Models.CatalogQuerySet setQuery;
             private Models.CatalogQueryPrefix prefixQuery;
             private Models.CatalogQueryRange rangeQuery;
             private Models.CatalogQueryText textQuery;
@@ -116,58 +127,65 @@ namespace Square.Models
             private Models.CatalogQueryItemsForItemOptions itemsForItemOptionsQuery;
             private Models.CatalogQueryItemVariationsForItemOptionValues itemVariationsForItemOptionValuesQuery;
 
-            public Builder() { }
-            public Builder SortedAttributeQuery(Models.CatalogQuerySortedAttribute value)
+
+
+            public Builder SortedAttributeQuery(Models.CatalogQuerySortedAttribute sortedAttributeQuery)
             {
-                sortedAttributeQuery = value;
+                this.sortedAttributeQuery = sortedAttributeQuery;
                 return this;
             }
 
-            public Builder ExactQuery(Models.CatalogQueryExact value)
+            public Builder ExactQuery(Models.CatalogQueryExact exactQuery)
             {
-                exactQuery = value;
+                this.exactQuery = exactQuery;
                 return this;
             }
 
-            public Builder PrefixQuery(Models.CatalogQueryPrefix value)
+            public Builder SetQuery(Models.CatalogQuerySet setQuery)
             {
-                prefixQuery = value;
+                this.setQuery = setQuery;
                 return this;
             }
 
-            public Builder RangeQuery(Models.CatalogQueryRange value)
+            public Builder PrefixQuery(Models.CatalogQueryPrefix prefixQuery)
             {
-                rangeQuery = value;
+                this.prefixQuery = prefixQuery;
                 return this;
             }
 
-            public Builder TextQuery(Models.CatalogQueryText value)
+            public Builder RangeQuery(Models.CatalogQueryRange rangeQuery)
             {
-                textQuery = value;
+                this.rangeQuery = rangeQuery;
                 return this;
             }
 
-            public Builder ItemsForTaxQuery(Models.CatalogQueryItemsForTax value)
+            public Builder TextQuery(Models.CatalogQueryText textQuery)
             {
-                itemsForTaxQuery = value;
+                this.textQuery = textQuery;
                 return this;
             }
 
-            public Builder ItemsForModifierListQuery(Models.CatalogQueryItemsForModifierList value)
+            public Builder ItemsForTaxQuery(Models.CatalogQueryItemsForTax itemsForTaxQuery)
             {
-                itemsForModifierListQuery = value;
+                this.itemsForTaxQuery = itemsForTaxQuery;
                 return this;
             }
 
-            public Builder ItemsForItemOptionsQuery(Models.CatalogQueryItemsForItemOptions value)
+            public Builder ItemsForModifierListQuery(Models.CatalogQueryItemsForModifierList itemsForModifierListQuery)
             {
-                itemsForItemOptionsQuery = value;
+                this.itemsForModifierListQuery = itemsForModifierListQuery;
                 return this;
             }
 
-            public Builder ItemVariationsForItemOptionValuesQuery(Models.CatalogQueryItemVariationsForItemOptionValues value)
+            public Builder ItemsForItemOptionsQuery(Models.CatalogQueryItemsForItemOptions itemsForItemOptionsQuery)
             {
-                itemVariationsForItemOptionValuesQuery = value;
+                this.itemsForItemOptionsQuery = itemsForItemOptionsQuery;
+                return this;
+            }
+
+            public Builder ItemVariationsForItemOptionValuesQuery(Models.CatalogQueryItemVariationsForItemOptionValues itemVariationsForItemOptionValuesQuery)
+            {
+                this.itemVariationsForItemOptionValuesQuery = itemVariationsForItemOptionValuesQuery;
                 return this;
             }
 
@@ -175,6 +193,7 @@ namespace Square.Models
             {
                 return new CatalogQuery(sortedAttributeQuery,
                     exactQuery,
+                    setQuery,
                     prefixQuery,
                     rangeQuery,
                     textQuery,

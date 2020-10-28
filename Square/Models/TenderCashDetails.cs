@@ -29,7 +29,7 @@ namespace Square.Models
         /// [Working with Monetary Amounts](https://developer.squareup.com/docs/build-basics/working-with-monetary-amounts)
         /// for more information.
         /// </summary>
-        [JsonProperty("buyer_tendered_money")]
+        [JsonProperty("buyer_tendered_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Money BuyerTenderedMoney { get; }
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace Square.Models
         /// [Working with Monetary Amounts](https://developer.squareup.com/docs/build-basics/working-with-monetary-amounts)
         /// for more information.
         /// </summary>
-        [JsonProperty("change_back_money")]
+        [JsonProperty("change_back_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Money ChangeBackMoney { get; }
 
         public Builder ToBuilder()
@@ -56,16 +56,17 @@ namespace Square.Models
             private Models.Money buyerTenderedMoney;
             private Models.Money changeBackMoney;
 
-            public Builder() { }
-            public Builder BuyerTenderedMoney(Models.Money value)
+
+
+            public Builder BuyerTenderedMoney(Models.Money buyerTenderedMoney)
             {
-                buyerTenderedMoney = value;
+                this.buyerTenderedMoney = buyerTenderedMoney;
                 return this;
             }
 
-            public Builder ChangeBackMoney(Models.Money value)
+            public Builder ChangeBackMoney(Models.Money changeBackMoney)
             {
-                changeBackMoney = value;
+                this.changeBackMoney = changeBackMoney;
                 return this;
             }
 

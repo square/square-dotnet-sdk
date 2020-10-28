@@ -28,13 +28,13 @@ namespace Square.Models
         /// <summary>
         /// Any errors that occurred during the request.
         /// </summary>
-        [JsonProperty("errors")]
+        [JsonProperty("errors", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.Error> Errors { get; }
 
         /// <summary>
         /// The current counts for all objects referenced in the request.
         /// </summary>
-        [JsonProperty("counts")]
+        [JsonProperty("counts", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.InventoryCount> Counts { get; }
 
         public Builder ToBuilder()
@@ -47,19 +47,20 @@ namespace Square.Models
 
         public class Builder
         {
-            private IList<Models.Error> errors = new List<Models.Error>();
-            private IList<Models.InventoryCount> counts = new List<Models.InventoryCount>();
+            private IList<Models.Error> errors;
+            private IList<Models.InventoryCount> counts;
 
-            public Builder() { }
-            public Builder Errors(IList<Models.Error> value)
+
+
+            public Builder Errors(IList<Models.Error> errors)
             {
-                errors = value;
+                this.errors = errors;
                 return this;
             }
 
-            public Builder Counts(IList<Models.InventoryCount> value)
+            public Builder Counts(IList<Models.InventoryCount> counts)
             {
-                counts = value;
+                this.counts = counts;
                 return this;
             }
 

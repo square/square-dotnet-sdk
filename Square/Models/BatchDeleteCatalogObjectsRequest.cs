@@ -24,7 +24,7 @@ namespace Square.Models
         /// in the graph that depend on that object will be deleted as well (for example, deleting a
         /// CatalogItem will delete its CatalogItemVariation.
         /// </summary>
-        [JsonProperty("object_ids")]
+        [JsonProperty("object_ids", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> ObjectIds { get; }
 
         public Builder ToBuilder()
@@ -36,12 +36,13 @@ namespace Square.Models
 
         public class Builder
         {
-            private IList<string> objectIds = new List<string>();
+            private IList<string> objectIds;
 
-            public Builder() { }
-            public Builder ObjectIds(IList<string> value)
+
+
+            public Builder ObjectIds(IList<string> objectIds)
             {
-                objectIds = value;
+                this.objectIds = objectIds;
                 return this;
             }
 

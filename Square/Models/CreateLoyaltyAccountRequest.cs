@@ -53,15 +53,16 @@ namespace Square.Models
                 this.loyaltyAccount = loyaltyAccount;
                 this.idempotencyKey = idempotencyKey;
             }
-            public Builder LoyaltyAccount(Models.LoyaltyAccount value)
+
+            public Builder LoyaltyAccount(Models.LoyaltyAccount loyaltyAccount)
             {
-                loyaltyAccount = value;
+                this.loyaltyAccount = loyaltyAccount;
                 return this;
             }
 
-            public Builder IdempotencyKey(string value)
+            public Builder IdempotencyKey(string idempotencyKey)
             {
-                idempotencyKey = value;
+                this.idempotencyKey = idempotencyKey;
                 return this;
             }
 

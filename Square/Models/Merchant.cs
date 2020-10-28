@@ -34,13 +34,13 @@ namespace Square.Models
         /// <summary>
         /// The Square-issued ID of the merchant.
         /// </summary>
-        [JsonProperty("id")]
+        [JsonProperty("id", NullValueHandling = NullValueHandling.Ignore)]
         public string Id { get; }
 
         /// <summary>
         /// The business name of the merchant.
         /// </summary>
-        [JsonProperty("business_name")]
+        [JsonProperty("business_name", NullValueHandling = NullValueHandling.Ignore)]
         public string BusinessName { get; }
 
         /// <summary>
@@ -53,26 +53,26 @@ namespace Square.Models
         /// <summary>
         /// The language code associated with the merchant account, in BCP 47 format.
         /// </summary>
-        [JsonProperty("language_code")]
+        [JsonProperty("language_code", NullValueHandling = NullValueHandling.Ignore)]
         public string LanguageCode { get; }
 
         /// <summary>
         /// Indicates the associated currency for an amount of money. Values correspond
         /// to [ISO 4217](https://wikipedia.org/wiki/ISO_4217).
         /// </summary>
-        [JsonProperty("currency")]
+        [JsonProperty("currency", NullValueHandling = NullValueHandling.Ignore)]
         public string Currency { get; }
 
         /// <summary>
         /// Getter for status
         /// </summary>
-        [JsonProperty("status")]
+        [JsonProperty("status", NullValueHandling = NullValueHandling.Ignore)]
         public string Status { get; }
 
         /// <summary>
         /// The ID of the main `Location` for this merchant.
         /// </summary>
-        [JsonProperty("main_location_id")]
+        [JsonProperty("main_location_id", NullValueHandling = NullValueHandling.Ignore)]
         public string MainLocationId { get; }
 
         public Builder ToBuilder()
@@ -101,45 +101,46 @@ namespace Square.Models
             {
                 this.country = country;
             }
-            public Builder Country(string value)
+
+            public Builder Country(string country)
             {
-                country = value;
+                this.country = country;
                 return this;
             }
 
-            public Builder Id(string value)
+            public Builder Id(string id)
             {
-                id = value;
+                this.id = id;
                 return this;
             }
 
-            public Builder BusinessName(string value)
+            public Builder BusinessName(string businessName)
             {
-                businessName = value;
+                this.businessName = businessName;
                 return this;
             }
 
-            public Builder LanguageCode(string value)
+            public Builder LanguageCode(string languageCode)
             {
-                languageCode = value;
+                this.languageCode = languageCode;
                 return this;
             }
 
-            public Builder Currency(string value)
+            public Builder Currency(string currency)
             {
-                currency = value;
+                this.currency = currency;
                 return this;
             }
 
-            public Builder Status(string value)
+            public Builder Status(string status)
             {
-                status = value;
+                this.status = status;
                 return this;
             }
 
-            public Builder MainLocationId(string value)
+            public Builder MainLocationId(string mainLocationId)
             {
-                mainLocationId = value;
+                this.mainLocationId = mainLocationId;
                 return this;
             }
 

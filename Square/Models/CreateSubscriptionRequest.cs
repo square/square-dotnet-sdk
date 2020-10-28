@@ -70,7 +70,7 @@ namespace Square.Models
         /// 2013-01-15. If the start date is left empty, the subscription begins 
         /// immediately.
         /// </summary>
-        [JsonProperty("start_date")]
+        [JsonProperty("start_date", NullValueHandling = NullValueHandling.Ignore)]
         public string StartDate { get; }
 
         /// <summary>
@@ -78,7 +78,7 @@ namespace Square.Models
         /// YYYY-MM-DD format (for example, 2025-02-29). This overrides the plan configuration 
         /// if it comes before the date the subscription would otherwise end.
         /// </summary>
-        [JsonProperty("canceled_date")]
+        [JsonProperty("canceled_date", NullValueHandling = NullValueHandling.Ignore)]
         public string CanceledDate { get; }
 
         /// <summary>
@@ -87,7 +87,7 @@ namespace Square.Models
         /// separator and without a `'%'` sign. For example, a value of 7.5
         /// corresponds to 7.5%.
         /// </summary>
-        [JsonProperty("tax_percentage")]
+        [JsonProperty("tax_percentage", NullValueHandling = NullValueHandling.Ignore)]
         public string TaxPercentage { get; }
 
         /// <summary>
@@ -98,7 +98,7 @@ namespace Square.Models
         /// [Working with Monetary Amounts](https://developer.squareup.com/docs/build-basics/working-with-monetary-amounts)
         /// for more information.
         /// </summary>
-        [JsonProperty("price_override_money")]
+        [JsonProperty("price_override_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Money PriceOverrideMoney { get; }
 
         /// <summary>
@@ -106,7 +106,7 @@ namespace Square.Models
         /// If not specified, Square sends an invoice via email. For an example to
         /// create a customer and add a card on file, see [Subscriptions Walkthrough](https://developer.squareup.com/docs/docs/subscriptions-api/walkthrough).
         /// </summary>
-        [JsonProperty("card_id")]
+        [JsonProperty("card_id", NullValueHandling = NullValueHandling.Ignore)]
         public string CardId { get; }
 
         /// <summary>
@@ -115,7 +115,7 @@ namespace Square.Models
         /// Format: the IANA Timezone Database identifier for the location timezone. For
         /// a list of time zones, see [List of tz database time zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).
         /// </summary>
-        [JsonProperty("timezone")]
+        [JsonProperty("timezone", NullValueHandling = NullValueHandling.Ignore)]
         public string Timezone { get; }
 
         public Builder ToBuilder()
@@ -156,63 +156,64 @@ namespace Square.Models
                 this.planId = planId;
                 this.customerId = customerId;
             }
-            public Builder IdempotencyKey(string value)
+
+            public Builder IdempotencyKey(string idempotencyKey)
             {
-                idempotencyKey = value;
+                this.idempotencyKey = idempotencyKey;
                 return this;
             }
 
-            public Builder LocationId(string value)
+            public Builder LocationId(string locationId)
             {
-                locationId = value;
+                this.locationId = locationId;
                 return this;
             }
 
-            public Builder PlanId(string value)
+            public Builder PlanId(string planId)
             {
-                planId = value;
+                this.planId = planId;
                 return this;
             }
 
-            public Builder CustomerId(string value)
+            public Builder CustomerId(string customerId)
             {
-                customerId = value;
+                this.customerId = customerId;
                 return this;
             }
 
-            public Builder StartDate(string value)
+            public Builder StartDate(string startDate)
             {
-                startDate = value;
+                this.startDate = startDate;
                 return this;
             }
 
-            public Builder CanceledDate(string value)
+            public Builder CanceledDate(string canceledDate)
             {
-                canceledDate = value;
+                this.canceledDate = canceledDate;
                 return this;
             }
 
-            public Builder TaxPercentage(string value)
+            public Builder TaxPercentage(string taxPercentage)
             {
-                taxPercentage = value;
+                this.taxPercentage = taxPercentage;
                 return this;
             }
 
-            public Builder PriceOverrideMoney(Models.Money value)
+            public Builder PriceOverrideMoney(Models.Money priceOverrideMoney)
             {
-                priceOverrideMoney = value;
+                this.priceOverrideMoney = priceOverrideMoney;
                 return this;
             }
 
-            public Builder CardId(string value)
+            public Builder CardId(string cardId)
             {
-                cardId = value;
+                this.cardId = cardId;
                 return this;
             }
 
-            public Builder Timezone(string value)
+            public Builder Timezone(string timezone)
             {
-                timezone = value;
+                this.timezone = timezone;
                 return this;
             }
 

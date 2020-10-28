@@ -1,13 +1,14 @@
-## Break Type
+
+# Break Type
 
 A defined break template that sets an expectation for possible `Break`
 instances on a `Shift`.
 
-### Structure
+## Structure
 
 `BreakType`
 
-### Fields
+## Fields
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
@@ -20,7 +21,7 @@ instances on a `Shift`.
 | `CreatedAt` | `string` | Optional | A read-only timestamp in RFC 3339 format. |
 | `UpdatedAt` | `string` | Optional | A read-only timestamp in RFC 3339 format. |
 
-### Example (as JSON)
+## Example (as JSON)
 
 ```json
 {

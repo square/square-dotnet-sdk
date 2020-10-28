@@ -35,23 +35,22 @@ namespace Square.Models
         /// The pagination cursor returned in the previous response. Leave unset for an initial request.
         /// See [Pagination](https://developer.squareup.com/docs/basics/api101/pagination) for more information.
         /// </summary>
-        [JsonProperty("cursor")]
+        [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
         public string Cursor { get; }
 
         /// <summary>
         /// The desired set of object types to appear in the search results.
         /// The legal values are taken from the CatalogObjectType enum: `"ITEM"`, `"ITEM_VARIATION"`, `"CATEGORY"`,
         /// `"DISCOUNT"`, `"TAX"`, `"MODIFIER"`, or `"MODIFIER_LIST"`.
-        /// See [CatalogObjectType](#type-catalogobjecttype) for possible values
         /// </summary>
-        [JsonProperty("object_types")]
+        [JsonProperty("object_types", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> ObjectTypes { get; }
 
         /// <summary>
         /// If `true`, deleted objects will be included in the results. Deleted objects will have their
         /// `is_deleted` field set to `true`.
         /// </summary>
-        [JsonProperty("include_deleted_objects")]
+        [JsonProperty("include_deleted_objects", NullValueHandling = NullValueHandling.Ignore)]
         public bool? IncludeDeletedObjects { get; }
 
         /// <summary>
@@ -65,7 +64,7 @@ namespace Square.Models
         /// response, its parent CatalogItem will be included in the `related_objects` field of
         /// the response.
         /// </summary>
-        [JsonProperty("include_related_objects")]
+        [JsonProperty("include_related_objects", NullValueHandling = NullValueHandling.Ignore)]
         public bool? IncludeRelatedObjects { get; }
 
         /// <summary>
@@ -73,26 +72,26 @@ namespace Square.Models
         /// format, e.g., `2016-09-04T23:59:33.123Z`. The timestamp is exclusive - objects with a
         /// timestamp equal to `begin_time` will not be included in the response.
         /// </summary>
-        [JsonProperty("begin_time")]
+        [JsonProperty("begin_time", NullValueHandling = NullValueHandling.Ignore)]
         public string BeginTime { get; }
 
         /// <summary>
         /// A query composed of one or more different types of filters to narrow the scope of targeted objects when calling the `SearchCatalogObjects` endpoint.
         /// Although a query can have multiple filters, only one query is allowed per call to [SearchCatalogObjects](#endpoint-Catalog-SearchCatalogObjects).
-        /// When a query filter is based on an attribute, the attribute must be searchable. 
-        /// Searchable attributes are listed as follows, along their parent types that can be searched for with applicable query filters. 
-        /// Searchable attribute and objects queryable by searchable attributes ** 
-        /// - `name`:  `CatalogItem`, `CatalogItemVariation`, `CatelogCatogry`, `CatalogTax`, `CatalogDiscount`, `CatalogModifier`, 'CatalogModifierList`, `CatalogItemOption`, `CatalogItemOptionValue` 
-        /// - `description`: `CatalogItem`, `CatalogItemOptionValue` 
-        /// - `abbreviation`: `CatalogItem` 
-        /// - `upc`: `CatalogItemVariation` 
-        /// - `sku`: `CatalogItemVariation` 
-        /// - `caption`: `CatalogImage` 
-        /// - `display_name`: `CatalogItemOption` 
-        /// For example, to search for [CatalogItem](#type-CatalogItem) objects by searchable attributes, you can use 
+        /// When a query filter is based on an attribute, the attribute must be searchable.
+        /// Searchable attributes are listed as follows, along their parent types that can be searched for with applicable query filters.
+        /// * Searchable attribute and objects queryable by searchable attributes **
+        /// - `name`:  `CatalogItem`, `CatalogItemVariation`, `CatelogCatogry`, `CatalogTax`, `CatalogDiscount`, `CatalogModifier`, 'CatalogModifierList`, `CatalogItemOption`, `CatalogItemOptionValue`
+        /// - `description`: `CatalogItem`, `CatalogItemOptionValue`
+        /// - `abbreviation`: `CatalogItem`
+        /// - `upc`: `CatalogItemVariation`
+        /// - `sku`: `CatalogItemVariation`
+        /// - `caption`: `CatalogImage`
+        /// - `display_name`: `CatalogItemOption`
+        /// For example, to search for [CatalogItem](#type-CatalogItem) objects by searchable attributes, you can use
         /// the `"name"`, `"description"`, or `"abbreviation"` attribute in an applicable query filter.
         /// </summary>
-        [JsonProperty("query")]
+        [JsonProperty("query", NullValueHandling = NullValueHandling.Ignore)]
         public Models.CatalogQuery Query { get; }
 
         /// <summary>
@@ -100,7 +99,7 @@ namespace Square.Models
         /// the implementation may return more or fewer results. If the supplied limit is negative, zero, or
         /// is higher than the maximum limit of 1,000, it will be ignored.
         /// </summary>
-        [JsonProperty("limit")]
+        [JsonProperty("limit", NullValueHandling = NullValueHandling.Ignore)]
         public int? Limit { get; }
 
         public Builder ToBuilder()
@@ -119,53 +118,54 @@ namespace Square.Models
         public class Builder
         {
             private string cursor;
-            private IList<string> objectTypes = new List<string>();
+            private IList<string> objectTypes;
             private bool? includeDeletedObjects;
             private bool? includeRelatedObjects;
             private string beginTime;
             private Models.CatalogQuery query;
             private int? limit;
 
-            public Builder() { }
-            public Builder Cursor(string value)
+
+
+            public Builder Cursor(string cursor)
             {
-                cursor = value;
+                this.cursor = cursor;
                 return this;
             }
 
-            public Builder ObjectTypes(IList<string> value)
+            public Builder ObjectTypes(IList<string> objectTypes)
             {
-                objectTypes = value;
+                this.objectTypes = objectTypes;
                 return this;
             }
 
-            public Builder IncludeDeletedObjects(bool? value)
+            public Builder IncludeDeletedObjects(bool? includeDeletedObjects)
             {
-                includeDeletedObjects = value;
+                this.includeDeletedObjects = includeDeletedObjects;
                 return this;
             }
 
-            public Builder IncludeRelatedObjects(bool? value)
+            public Builder IncludeRelatedObjects(bool? includeRelatedObjects)
             {
-                includeRelatedObjects = value;
+                this.includeRelatedObjects = includeRelatedObjects;
                 return this;
             }
 
-            public Builder BeginTime(string value)
+            public Builder BeginTime(string beginTime)
             {
-                beginTime = value;
+                this.beginTime = beginTime;
                 return this;
             }
 
-            public Builder Query(Models.CatalogQuery value)
+            public Builder Query(Models.CatalogQuery query)
             {
-                query = value;
+                this.query = query;
                 return this;
             }
 
-            public Builder Limit(int? value)
+            public Builder Limit(int? limit)
             {
-                limit = value;
+                this.limit = limit;
                 return this;
             }
 

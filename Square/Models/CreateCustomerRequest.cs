@@ -40,74 +40,74 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// The idempotency key for the request. See the
+        /// The idempotency key for the request.	See the
         /// [Idempotency](https://developer.squareup.com/docs/working-with-apis/idempotency) guide for more information.
         /// </summary>
-        [JsonProperty("idempotency_key")]
+        [JsonProperty("idempotency_key", NullValueHandling = NullValueHandling.Ignore)]
         public string IdempotencyKey { get; }
 
         /// <summary>
         /// The given (i.e., first) name associated with the customer profile.
         /// </summary>
-        [JsonProperty("given_name")]
+        [JsonProperty("given_name", NullValueHandling = NullValueHandling.Ignore)]
         public string GivenName { get; }
 
         /// <summary>
         /// The family (i.e., last) name associated with the customer profile.
         /// </summary>
-        [JsonProperty("family_name")]
+        [JsonProperty("family_name", NullValueHandling = NullValueHandling.Ignore)]
         public string FamilyName { get; }
 
         /// <summary>
         /// A business name associated with the customer profile.
         /// </summary>
-        [JsonProperty("company_name")]
+        [JsonProperty("company_name", NullValueHandling = NullValueHandling.Ignore)]
         public string CompanyName { get; }
 
         /// <summary>
         /// A nickname for the customer profile.
         /// </summary>
-        [JsonProperty("nickname")]
+        [JsonProperty("nickname", NullValueHandling = NullValueHandling.Ignore)]
         public string Nickname { get; }
 
         /// <summary>
         /// The email address associated with the customer profile.
         /// </summary>
-        [JsonProperty("email_address")]
+        [JsonProperty("email_address", NullValueHandling = NullValueHandling.Ignore)]
         public string EmailAddress { get; }
 
         /// <summary>
         /// Represents a physical address.
         /// </summary>
-        [JsonProperty("address")]
+        [JsonProperty("address", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Address Address { get; }
 
         /// <summary>
         /// The 11-digit phone number associated with the customer profile.
         /// </summary>
-        [JsonProperty("phone_number")]
+        [JsonProperty("phone_number", NullValueHandling = NullValueHandling.Ignore)]
         public string PhoneNumber { get; }
 
         /// <summary>
         /// An optional, second ID used to associate the customer profile with an
         /// entity in another system.
         /// </summary>
-        [JsonProperty("reference_id")]
+        [JsonProperty("reference_id", NullValueHandling = NullValueHandling.Ignore)]
         public string ReferenceId { get; }
 
         /// <summary>
         /// A custom note associated with the customer profile.
         /// </summary>
-        [JsonProperty("note")]
+        [JsonProperty("note", NullValueHandling = NullValueHandling.Ignore)]
         public string Note { get; }
 
         /// <summary>
-        /// The birthday associated with the customer profile, in RFC-3339 format.
+        /// The birthday associated with the customer profile, in RFC 3339 format.
         /// Year is optional, timezone and times are not allowed.
         /// For example: `0000-09-01T00:00:00-00:00` indicates a birthday on September 1st.
         /// `1998-09-01T00:00:00-00:00` indications a birthday on September 1st __1998__.
         /// </summary>
-        [JsonProperty("birthday")]
+        [JsonProperty("birthday", NullValueHandling = NullValueHandling.Ignore)]
         public string Birthday { get; }
 
         public Builder ToBuilder()
@@ -141,70 +141,71 @@ namespace Square.Models
             private string note;
             private string birthday;
 
-            public Builder() { }
-            public Builder IdempotencyKey(string value)
+
+
+            public Builder IdempotencyKey(string idempotencyKey)
             {
-                idempotencyKey = value;
+                this.idempotencyKey = idempotencyKey;
                 return this;
             }
 
-            public Builder GivenName(string value)
+            public Builder GivenName(string givenName)
             {
-                givenName = value;
+                this.givenName = givenName;
                 return this;
             }
 
-            public Builder FamilyName(string value)
+            public Builder FamilyName(string familyName)
             {
-                familyName = value;
+                this.familyName = familyName;
                 return this;
             }
 
-            public Builder CompanyName(string value)
+            public Builder CompanyName(string companyName)
             {
-                companyName = value;
+                this.companyName = companyName;
                 return this;
             }
 
-            public Builder Nickname(string value)
+            public Builder Nickname(string nickname)
             {
-                nickname = value;
+                this.nickname = nickname;
                 return this;
             }
 
-            public Builder EmailAddress(string value)
+            public Builder EmailAddress(string emailAddress)
             {
-                emailAddress = value;
+                this.emailAddress = emailAddress;
                 return this;
             }
 
-            public Builder Address(Models.Address value)
+            public Builder Address(Models.Address address)
             {
-                address = value;
+                this.address = address;
                 return this;
             }
 
-            public Builder PhoneNumber(string value)
+            public Builder PhoneNumber(string phoneNumber)
             {
-                phoneNumber = value;
+                this.phoneNumber = phoneNumber;
                 return this;
             }
 
-            public Builder ReferenceId(string value)
+            public Builder ReferenceId(string referenceId)
             {
-                referenceId = value;
+                this.referenceId = referenceId;
                 return this;
             }
 
-            public Builder Note(string value)
+            public Builder Note(string note)
             {
-                note = value;
+                this.note = note;
                 return this;
             }
 
-            public Builder Birthday(string value)
+            public Builder Birthday(string birthday)
             {
-                birthday = value;
+                this.birthday = birthday;
                 return this;
             }
 

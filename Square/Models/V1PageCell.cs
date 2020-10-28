@@ -32,37 +32,37 @@ namespace Square.Models
         /// <summary>
         /// The unique identifier of the page the cell is included on.
         /// </summary>
-        [JsonProperty("page_id")]
+        [JsonProperty("page_id", NullValueHandling = NullValueHandling.Ignore)]
         public string PageId { get; }
 
         /// <summary>
         /// The row of the cell. Always an integer between 0 and 4, inclusive.
         /// </summary>
-        [JsonProperty("row")]
+        [JsonProperty("row", NullValueHandling = NullValueHandling.Ignore)]
         public int? Row { get; }
 
         /// <summary>
         /// The column of the cell. Always an integer between 0 and 4, inclusive.
         /// </summary>
-        [JsonProperty("column")]
+        [JsonProperty("column", NullValueHandling = NullValueHandling.Ignore)]
         public int? Column { get; }
 
         /// <summary>
         /// Getter for object_type
         /// </summary>
-        [JsonProperty("object_type")]
+        [JsonProperty("object_type", NullValueHandling = NullValueHandling.Ignore)]
         public string ObjectType { get; }
 
         /// <summary>
         /// The unique identifier of the entity represented in the cell. Not present for cells with an object_type of PLACEHOLDER.
         /// </summary>
-        [JsonProperty("object_id")]
+        [JsonProperty("object_id", NullValueHandling = NullValueHandling.Ignore)]
         public string ObjectId { get; }
 
         /// <summary>
         /// Getter for placeholder_type
         /// </summary>
-        [JsonProperty("placeholder_type")]
+        [JsonProperty("placeholder_type", NullValueHandling = NullValueHandling.Ignore)]
         public string PlaceholderType { get; }
 
         public Builder ToBuilder()
@@ -86,40 +86,41 @@ namespace Square.Models
             private string objectId;
             private string placeholderType;
 
-            public Builder() { }
-            public Builder PageId(string value)
+
+
+            public Builder PageId(string pageId)
             {
-                pageId = value;
+                this.pageId = pageId;
                 return this;
             }
 
-            public Builder Row(int? value)
+            public Builder Row(int? row)
             {
-                row = value;
+                this.row = row;
                 return this;
             }
 
-            public Builder Column(int? value)
+            public Builder Column(int? column)
             {
-                column = value;
+                this.column = column;
                 return this;
             }
 
-            public Builder ObjectType(string value)
+            public Builder ObjectType(string objectType)
             {
-                objectType = value;
+                this.objectType = objectType;
                 return this;
             }
 
-            public Builder ObjectId(string value)
+            public Builder ObjectId(string objectId)
             {
-                objectId = value;
+                this.objectId = objectId;
                 return this;
             }
 
-            public Builder PlaceholderType(string value)
+            public Builder PlaceholderType(string placeholderType)
             {
-                placeholderType = value;
+                this.placeholderType = placeholderType;
                 return this;
             }
 

@@ -40,31 +40,31 @@ namespace Square.Models
         /// <summary>
         /// The transaction's unique ID, issued by Square payments servers.
         /// </summary>
-        [JsonProperty("id")]
+        [JsonProperty("id", NullValueHandling = NullValueHandling.Ignore)]
         public string Id { get; }
 
         /// <summary>
         /// The ID of the transaction's associated location.
         /// </summary>
-        [JsonProperty("location_id")]
+        [JsonProperty("location_id", NullValueHandling = NullValueHandling.Ignore)]
         public string LocationId { get; }
 
         /// <summary>
         /// The timestamp for when the transaction was created, in RFC 3339 format.
         /// </summary>
-        [JsonProperty("created_at")]
+        [JsonProperty("created_at", NullValueHandling = NullValueHandling.Ignore)]
         public string CreatedAt { get; }
 
         /// <summary>
         /// The tenders used to pay in the transaction.
         /// </summary>
-        [JsonProperty("tenders")]
+        [JsonProperty("tenders", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.Tender> Tenders { get; }
 
         /// <summary>
         /// Refunds that have been applied to any tender in the transaction.
         /// </summary>
-        [JsonProperty("refunds")]
+        [JsonProperty("refunds", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.Refund> Refunds { get; }
 
         /// <summary>
@@ -72,13 +72,13 @@ namespace Square.Models
         /// endpoint, this value is the same as the value provided for the `reference_id`
         /// parameter in the request to that endpoint. Otherwise, it is not set.
         /// </summary>
-        [JsonProperty("reference_id")]
+        [JsonProperty("reference_id", NullValueHandling = NullValueHandling.Ignore)]
         public string ReferenceId { get; }
 
         /// <summary>
         /// Indicates the Square product used to process a transaction.
         /// </summary>
-        [JsonProperty("product")]
+        [JsonProperty("product", NullValueHandling = NullValueHandling.Ignore)]
         public string Product { get; }
 
         /// <summary>
@@ -91,19 +91,19 @@ namespace Square.Models
         /// It is not currently possible with the Connect API to perform a transaction
         /// lookup by this value.
         /// </summary>
-        [JsonProperty("client_id")]
+        [JsonProperty("client_id", NullValueHandling = NullValueHandling.Ignore)]
         public string ClientId { get; }
 
         /// <summary>
         /// Represents a physical address.
         /// </summary>
-        [JsonProperty("shipping_address")]
+        [JsonProperty("shipping_address", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Address ShippingAddress { get; }
 
         /// <summary>
         /// The order_id is an identifier for the order associated with this transaction, if any.
         /// </summary>
-        [JsonProperty("order_id")]
+        [JsonProperty("order_id", NullValueHandling = NullValueHandling.Ignore)]
         public string OrderId { get; }
 
         public Builder ToBuilder()
@@ -127,72 +127,73 @@ namespace Square.Models
             private string id;
             private string locationId;
             private string createdAt;
-            private IList<Models.Tender> tenders = new List<Models.Tender>();
-            private IList<Models.Refund> refunds = new List<Models.Refund>();
+            private IList<Models.Tender> tenders;
+            private IList<Models.Refund> refunds;
             private string referenceId;
             private string product;
             private string clientId;
             private Models.Address shippingAddress;
             private string orderId;
 
-            public Builder() { }
-            public Builder Id(string value)
+
+
+            public Builder Id(string id)
             {
-                id = value;
+                this.id = id;
                 return this;
             }
 
-            public Builder LocationId(string value)
+            public Builder LocationId(string locationId)
             {
-                locationId = value;
+                this.locationId = locationId;
                 return this;
             }
 
-            public Builder CreatedAt(string value)
+            public Builder CreatedAt(string createdAt)
             {
-                createdAt = value;
+                this.createdAt = createdAt;
                 return this;
             }
 
-            public Builder Tenders(IList<Models.Tender> value)
+            public Builder Tenders(IList<Models.Tender> tenders)
             {
-                tenders = value;
+                this.tenders = tenders;
                 return this;
             }
 
-            public Builder Refunds(IList<Models.Refund> value)
+            public Builder Refunds(IList<Models.Refund> refunds)
             {
-                refunds = value;
+                this.refunds = refunds;
                 return this;
             }
 
-            public Builder ReferenceId(string value)
+            public Builder ReferenceId(string referenceId)
             {
-                referenceId = value;
+                this.referenceId = referenceId;
                 return this;
             }
 
-            public Builder Product(string value)
+            public Builder Product(string product)
             {
-                product = value;
+                this.product = product;
                 return this;
             }
 
-            public Builder ClientId(string value)
+            public Builder ClientId(string clientId)
             {
-                clientId = value;
+                this.clientId = clientId;
                 return this;
             }
 
-            public Builder ShippingAddress(Models.Address value)
+            public Builder ShippingAddress(Models.Address shippingAddress)
             {
-                shippingAddress = value;
+                this.shippingAddress = shippingAddress;
                 return this;
             }
 
-            public Builder OrderId(string value)
+            public Builder OrderId(string orderId)
             {
-                orderId = value;
+                this.orderId = orderId;
                 return this;
             }
 

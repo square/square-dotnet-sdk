@@ -42,14 +42,14 @@ namespace Square.Models
         /// <summary>
         /// A human-readable description of the error for debugging purposes.
         /// </summary>
-        [JsonProperty("detail")]
+        [JsonProperty("detail", NullValueHandling = NullValueHandling.Ignore)]
         public string Detail { get; }
 
         /// <summary>
         /// The name of the field provided in the original request (if any) that
         /// the error pertains to.
         /// </summary>
-        [JsonProperty("field")]
+        [JsonProperty("field", NullValueHandling = NullValueHandling.Ignore)]
         public string Field { get; }
 
         public Builder ToBuilder()
@@ -74,27 +74,28 @@ namespace Square.Models
                 this.category = category;
                 this.code = code;
             }
-            public Builder Category(string value)
+
+            public Builder Category(string category)
             {
-                category = value;
+                this.category = category;
                 return this;
             }
 
-            public Builder Code(string value)
+            public Builder Code(string code)
             {
-                code = value;
+                this.code = code;
                 return this;
             }
 
-            public Builder Detail(string value)
+            public Builder Detail(string detail)
             {
-                detail = value;
+                this.detail = detail;
                 return this;
             }
 
-            public Builder Field(string value)
+            public Builder Field(string field)
             {
-                field = value;
+                this.field = field;
                 return this;
             }
 

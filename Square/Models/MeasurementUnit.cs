@@ -36,49 +36,49 @@ namespace Square.Models
         /// <summary>
         /// The information needed to define a custom unit, provided by the seller.
         /// </summary>
-        [JsonProperty("custom_unit")]
+        [JsonProperty("custom_unit", NullValueHandling = NullValueHandling.Ignore)]
         public Models.MeasurementUnitCustom CustomUnit { get; }
 
         /// <summary>
         /// Unit of area used to measure a quantity.
         /// </summary>
-        [JsonProperty("area_unit")]
+        [JsonProperty("area_unit", NullValueHandling = NullValueHandling.Ignore)]
         public string AreaUnit { get; }
 
         /// <summary>
         /// The unit of length used to measure a quantity.
         /// </summary>
-        [JsonProperty("length_unit")]
+        [JsonProperty("length_unit", NullValueHandling = NullValueHandling.Ignore)]
         public string LengthUnit { get; }
 
         /// <summary>
         /// The unit of volume used to measure a quantity.
         /// </summary>
-        [JsonProperty("volume_unit")]
+        [JsonProperty("volume_unit", NullValueHandling = NullValueHandling.Ignore)]
         public string VolumeUnit { get; }
 
         /// <summary>
         /// Unit of weight used to measure a quantity.
         /// </summary>
-        [JsonProperty("weight_unit")]
+        [JsonProperty("weight_unit", NullValueHandling = NullValueHandling.Ignore)]
         public string WeightUnit { get; }
 
         /// <summary>
         /// Getter for generic_unit
         /// </summary>
-        [JsonProperty("generic_unit")]
+        [JsonProperty("generic_unit", NullValueHandling = NullValueHandling.Ignore)]
         public string GenericUnit { get; }
 
         /// <summary>
         /// Unit of time used to measure a quantity (a duration).
         /// </summary>
-        [JsonProperty("time_unit")]
+        [JsonProperty("time_unit", NullValueHandling = NullValueHandling.Ignore)]
         public string TimeUnit { get; }
 
         /// <summary>
         /// Describes the type of this unit and indicates which field contains the unit information. This is an ‘open’ enum.
         /// </summary>
-        [JsonProperty("type")]
+        [JsonProperty("type", NullValueHandling = NullValueHandling.Ignore)]
         public string Type { get; }
 
         public Builder ToBuilder()
@@ -106,52 +106,53 @@ namespace Square.Models
             private string timeUnit;
             private string type;
 
-            public Builder() { }
-            public Builder CustomUnit(Models.MeasurementUnitCustom value)
+
+
+            public Builder CustomUnit(Models.MeasurementUnitCustom customUnit)
             {
-                customUnit = value;
+                this.customUnit = customUnit;
                 return this;
             }
 
-            public Builder AreaUnit(string value)
+            public Builder AreaUnit(string areaUnit)
             {
-                areaUnit = value;
+                this.areaUnit = areaUnit;
                 return this;
             }
 
-            public Builder LengthUnit(string value)
+            public Builder LengthUnit(string lengthUnit)
             {
-                lengthUnit = value;
+                this.lengthUnit = lengthUnit;
                 return this;
             }
 
-            public Builder VolumeUnit(string value)
+            public Builder VolumeUnit(string volumeUnit)
             {
-                volumeUnit = value;
+                this.volumeUnit = volumeUnit;
                 return this;
             }
 
-            public Builder WeightUnit(string value)
+            public Builder WeightUnit(string weightUnit)
             {
-                weightUnit = value;
+                this.weightUnit = weightUnit;
                 return this;
             }
 
-            public Builder GenericUnit(string value)
+            public Builder GenericUnit(string genericUnit)
             {
-                genericUnit = value;
+                this.genericUnit = genericUnit;
                 return this;
             }
 
-            public Builder TimeUnit(string value)
+            public Builder TimeUnit(string timeUnit)
             {
-                timeUnit = value;
+                this.timeUnit = timeUnit;
                 return this;
             }
 
-            public Builder Type(string value)
+            public Builder Type(string type)
             {
-                type = value;
+                this.type = type;
                 return this;
             }
 

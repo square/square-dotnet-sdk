@@ -29,13 +29,13 @@ namespace Square.Models
         /// Stores information about an invoice. You use the Invoices API to create and process
         /// invoices. For more information, see [Manage Invoices Using the Invoices API](https://developer.squareup.com/docs/docs/invoices-api/overview).
         /// </summary>
-        [JsonProperty("invoice")]
+        [JsonProperty("invoice", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Invoice Invoice { get; }
 
         /// <summary>
         /// Information about errors encountered during the request.
         /// </summary>
-        [JsonProperty("errors")]
+        [JsonProperty("errors", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.Error> Errors { get; }
 
         public Builder ToBuilder()
@@ -49,18 +49,19 @@ namespace Square.Models
         public class Builder
         {
             private Models.Invoice invoice;
-            private IList<Models.Error> errors = new List<Models.Error>();
+            private IList<Models.Error> errors;
 
-            public Builder() { }
-            public Builder Invoice(Models.Invoice value)
+
+
+            public Builder Invoice(Models.Invoice invoice)
             {
-                invoice = value;
+                this.invoice = invoice;
                 return this;
             }
 
-            public Builder Errors(IList<Models.Error> value)
+            public Builder Errors(IList<Models.Error> errors)
             {
-                errors = value;
+                this.errors = errors;
                 return this;
             }
 
