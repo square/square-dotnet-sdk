@@ -28,9 +28,9 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// A unique string that identifies this RefundPayment request. Key can be any valid string
-        /// but must be unique for every RefundPayment request.
-        /// For more information, see [Idempotency keys](https://developer.squareup.com/docs/working-with-apis/idempotency).
+        /// A unique string that identifies this `RefundPayment` request. The key can be any valid string
+        /// but must be unique for every `RefundPayment` request.
+        /// For more information, see [Idempotency](https://developer.squareup.com/docs/working-with-apis/idempotency).
         /// </summary>
         [JsonProperty("idempotency_key")]
         public string IdempotencyKey { get; }
@@ -58,7 +58,7 @@ namespace Square.Models
         public Models.Money AppFeeMoney { get; }
 
         /// <summary>
-        /// Unique ID of the payment being refunded.
+        /// The unique ID of the payment being refunded.
         /// </summary>
         [JsonProperty("payment_id")]
         public string PaymentId { get; }

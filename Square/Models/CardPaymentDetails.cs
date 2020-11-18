@@ -48,8 +48,8 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// The card payment's current state. It can be one of: `AUTHORIZED`, `CAPTURED`, `VOIDED`,
-        /// `FAILED`.
+        /// The card payment's current state. The state can be AUTHORIZED, CAPTURED, VOIDED, or
+        /// FAILED.
         /// </summary>
         [JsonProperty("status", NullValueHandling = NullValueHandling.Ignore)]
         public string Status { get; }
@@ -62,35 +62,35 @@ namespace Square.Models
         public Models.Card Card { get; }
 
         /// <summary>
-        /// The method used to enter the card's details for the payment.  Can be
+        /// The method used to enter the card's details for the payment. The method can be
         /// `KEYED`, `SWIPED`, `EMV`, `ON_FILE`, or `CONTACTLESS`.
         /// </summary>
         [JsonProperty("entry_method", NullValueHandling = NullValueHandling.Ignore)]
         public string EntryMethod { get; }
 
         /// <summary>
-        /// Status code returned from the Card Verification Value (CVV) check. Can be
-        /// `CVV_ACCEPTED`, `CVV_REJECTED`, `CVV_NOT_CHECKED`.
+        /// The status code returned from the Card Verification Value (CVV) check. The code can be
+        /// `CVV_ACCEPTED`, `CVV_REJECTED`, or `CVV_NOT_CHECKED`.
         /// </summary>
         [JsonProperty("cvv_status", NullValueHandling = NullValueHandling.Ignore)]
         public string CvvStatus { get; }
 
         /// <summary>
-        /// Status code returned from the Address Verification System (AVS) check. Can be
-        /// `AVS_ACCEPTED`, `AVS_REJECTED`, `AVS_NOT_CHECKED`.
+        /// The status code returned from the Address Verification System (AVS) check. The code can be
+        /// `AVS_ACCEPTED`, `AVS_REJECTED`, or `AVS_NOT_CHECKED`.
         /// </summary>
         [JsonProperty("avs_status", NullValueHandling = NullValueHandling.Ignore)]
         public string AvsStatus { get; }
 
         /// <summary>
-        /// Status code returned by the card issuer that describes the payment's
+        /// The status code returned by the card issuer that describes the payment's
         /// authorization status.
         /// </summary>
         [JsonProperty("auth_result_code", NullValueHandling = NullValueHandling.Ignore)]
         public string AuthResultCode { get; }
 
         /// <summary>
-        /// For EMV payments, identifies the EMV application used for the payment.
+        /// For EMV payments, the application ID identifies the EMV application used for the payment.
         /// </summary>
         [JsonProperty("application_identifier", NullValueHandling = NullValueHandling.Ignore)]
         public string ApplicationIdentifier { get; }
@@ -108,14 +108,14 @@ namespace Square.Models
         public string ApplicationCryptogram { get; }
 
         /// <summary>
-        /// For EMV payments, method used to verify the cardholder's identity.  Can be one of
+        /// For EMV payments, the method used to verify the cardholder's identity. The method can be
         /// `PIN`, `SIGNATURE`, `PIN_AND_SIGNATURE`, `ON_DEVICE`, or `NONE`.
         /// </summary>
         [JsonProperty("verification_method", NullValueHandling = NullValueHandling.Ignore)]
         public string VerificationMethod { get; }
 
         /// <summary>
-        /// For EMV payments, the results of the cardholder verification.  Can be one of
+        /// For EMV payments, the results of the cardholder verification. The result can be
         /// `SUCCESS`, `FAILURE`, or `UNKNOWN`.
         /// </summary>
         [JsonProperty("verification_results", NullValueHandling = NullValueHandling.Ignore)]
@@ -123,7 +123,7 @@ namespace Square.Models
 
         /// <summary>
         /// The statement description sent to the card networks.
-        /// Note: The actual statement description will vary and is likely to be truncated and appended with
+        /// Note: The actual statement description varies and is likely to be truncated and appended with
         /// additional information on a per issuer basis.
         /// </summary>
         [JsonProperty("statement_description", NullValueHandling = NullValueHandling.Ignore)]
@@ -136,14 +136,14 @@ namespace Square.Models
         public Models.DeviceDetails DeviceDetails { get; }
 
         /// <summary>
-        /// Whether or not the card is required to be physically present in order for the payment to
-        /// be refunded.  If true, the card is required to be present.
+        /// Whether the card must be physically present for the payment to
+        /// be refunded.  If set to `true`, the card must be present.
         /// </summary>
         [JsonProperty("refund_requires_card_presence", NullValueHandling = NullValueHandling.Ignore)]
         public bool? RefundRequiresCardPresence { get; }
 
         /// <summary>
-        /// Information on errors encountered during the request.
+        /// Information about errors encountered during the request.
         /// </summary>
         [JsonProperty("errors", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.Error> Errors { get; }

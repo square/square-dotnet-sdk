@@ -1,20 +1,19 @@
 
 # Client Class Documentation
 
-The following parameters are configurable for the API Client.
+The following parameters are configurable for the API Client:
 
 | Parameter | Type | Description |
 |  --- | --- | --- |
-| `SquareVersion` | `string` | Square Connect API versions<br>*Default*: `"2020-10-28"` |
+| `SquareVersion` | `string` | Square Connect API versions<br>*Default*: `"2020-11-18"` |
 | `Environment` | `string` | The API environment. <br> **Default: `production`** |
-| `AccessToken` | `string` | OAuth 2.0 Access Token |
 
-The API client can be initialized as following.
+The API client can be initialized as follows:
 
 ```csharp
 Square.SquareClient client = new Square.SquareClient.Builder()
     .AccessToken("AccessToken")
-    .SquareVersion(GetEnvironmentVariable("2020-10-28"))
+    .SquareVersion(GetEnvironmentVariable("2020-11-18"))
     .Environment(Environment.Production)
     .Build();
 ```
@@ -41,7 +40,7 @@ namespace Testing
         {
             SquareClient client = new SquareClient.Builder()
                 .AccessToken("AccessToken")
-                .SquareVersion(GetEnvironmentVariable("2020-10-28"))
+                .SquareVersion(GetEnvironmentVariable("2020-11-18"))
                 .Build();
             ILocationsApi locationsApi = client.LocationsApi;
             
@@ -57,7 +56,7 @@ namespace Testing
 
 ## SquareClient Class
 
-Gateway for the SDK. This class acts as a factory for Api and also holds the configuration of the SDK.
+The gateway for the SDK. This class acts as a factory for the Apis and also holds the configuration of the SDK.
 
 ### Controllers
 
@@ -71,6 +70,7 @@ Gateway for the SDK. This class acts as a factory for Api and also holds the con
 | V1ItemsApi | Provides access to V1ItemsApi. |
 | ApplePayApi | Provides access to ApplePayApi. |
 | BankAccountsApi | Provides access to BankAccountsApi. |
+| BookingsApi | Provides access to BookingsApi. |
 | CashDrawersApi | Provides access to CashDrawersApi. |
 | CatalogApi | Provides access to CatalogApi. |
 | CustomersApi | Provides access to CustomersApi. |

@@ -23,7 +23,7 @@ namespace Square.Apis
         /// This endpoint provides an easy way for platform developers to bulk activate
         /// Web Apple Pay with Square for merchants using their platform.
         /// To learn more about Apple Pay on Web see the Apple Pay section in the
-        /// [Square Payment Form Walkthrough](https://developer.squareup.com/docs/docs/payment-form/payment-form-walkthrough).
+        /// [Square Payment Form Walkthrough](https://developer.squareup.com/docs/payment-form/payment-form-walkthrough).
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.RegisterDomainResponse response from the API call</return>
@@ -36,7 +36,7 @@ namespace Square.Apis
         /// This endpoint provides an easy way for platform developers to bulk activate
         /// Web Apple Pay with Square for merchants using their platform.
         /// To learn more about Apple Pay on Web see the Apple Pay section in the
-        /// [Square Payment Form Walkthrough](https://developer.squareup.com/docs/docs/payment-form/payment-form-walkthrough).
+        /// [Square Payment Form Walkthrough](https://developer.squareup.com/docs/payment-form/payment-form-walkthrough).
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.RegisterDomainResponse response from the API call</return>

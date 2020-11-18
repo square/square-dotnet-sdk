@@ -24,7 +24,7 @@ namespace Square.Apis
         /// Authorization: Bearer ACCESS_TOKEN
         /// ```
         /// Replace `ACCESS_TOKEN` with a
-        /// [valid production authorization credential](https://developer.squareup.com/docs/docs/build-basics/access-tokens).
+        /// [valid production authorization credential](https://developer.squareup.com/docs/build-basics/access-tokens).
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.CreateMobileAuthorizationCodeResponse response from the API call</return>
@@ -38,7 +38,7 @@ namespace Square.Apis
         /// Authorization: Bearer ACCESS_TOKEN
         /// ```
         /// Replace `ACCESS_TOKEN` with a
-        /// [valid production authorization credential](https://developer.squareup.com/docs/docs/build-basics/access-tokens).
+        /// [valid production authorization credential](https://developer.squareup.com/docs/build-basics/access-tokens).
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.CreateMobileAuthorizationCodeResponse response from the API call</return>

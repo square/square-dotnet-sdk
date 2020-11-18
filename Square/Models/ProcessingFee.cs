@@ -24,13 +24,13 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// Timestamp of when the fee takes effect, in RFC 3339 format.
+        /// The timestamp of when the fee takes effect, in RFC 3339 format.
         /// </summary>
         [JsonProperty("effective_at", NullValueHandling = NullValueHandling.Ignore)]
         public string EffectiveAt { get; }
 
         /// <summary>
-        /// The type of fee assessed or adjusted. Can be one of: `INITIAL`, `ADJUSTMENT`.
+        /// The type of fee assessed or adjusted. The fee type can be `INITIAL` or `ADJUSTMENT`.
         /// </summary>
         [JsonProperty("type", NullValueHandling = NullValueHandling.Ignore)]
         public string Type { get; }

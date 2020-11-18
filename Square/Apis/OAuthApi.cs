@@ -135,7 +135,7 @@ namespace Square.Apis
         /// Authorization: Client APPLICATION_SECRET
         /// ```
         /// Replace `APPLICATION_SECRET` with the application secret on the Credentials
-        /// page in the [application dashboard](https://connect.squareup.com/apps).
+        /// page in the [Developer Dashboard](https://developer.squareup.com/apps).
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <param name="authorization">Required parameter: Client APPLICATION_SECRET</param>
@@ -159,7 +159,7 @@ namespace Square.Apis
         /// Authorization: Client APPLICATION_SECRET
         /// ```
         /// Replace `APPLICATION_SECRET` with the application secret on the Credentials
-        /// page in the [application dashboard](https://connect.squareup.com/apps).
+        /// page in the [Developer Dashboard](https://developer.squareup.com/apps).
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <param name="authorization">Required parameter: Client APPLICATION_SECRET</param>
@@ -214,7 +214,6 @@ namespace Square.Apis
         /// The endpoint supports distinct methods of obtaining OAuth access tokens.
         /// Applications specify a method by adding the `grant_type` parameter
         /// in the request and also provide relevant information.
-        /// For more information, see [OAuth access token management](https://developer.squareup.com/docs/authz/oauth/how-it-works#oauth-access-token-management).
         /// __Note:__ Regardless of the method application specified,
         /// the endpoint always returns two items; an OAuth access token and
         /// a refresh token in the response.
@@ -235,7 +234,6 @@ namespace Square.Apis
         /// The endpoint supports distinct methods of obtaining OAuth access tokens.
         /// Applications specify a method by adding the `grant_type` parameter
         /// in the request and also provide relevant information.
-        /// For more information, see [OAuth access token management](https://developer.squareup.com/docs/authz/oauth/how-it-works#oauth-access-token-management).
         /// __Note:__ Regardless of the method application specified,
         /// the endpoint always returns two items; an OAuth access token and
         /// a refresh token in the response.

@@ -22,7 +22,8 @@ namespace Square.Models
             string subscriptionId = null,
             string planId = null,
             string idToken = null,
-            string refreshToken = null)
+            string refreshToken = null,
+            bool? shortLived = null)
         {
             AccessToken = accessToken;
             TokenType = tokenType;
@@ -32,6 +33,7 @@ namespace Square.Models
             PlanId = planId;
             IdToken = idToken;
             RefreshToken = refreshToken;
+            ShortLived = shortLived;
         }
 
         [JsonIgnore]
@@ -40,7 +42,7 @@ namespace Square.Models
         /// <summary>
         /// A valid OAuth access token. OAuth access tokens are 64 bytes long.
         /// Provide the access token in a header with every request to Connect API
-        /// endpoints. See the [Build with OAuth](https://developer.squareup.com/docs/authz/oauth/build-with-the-api) guide
+        /// endpoints. See [OAuth API: Walkthrough](https://developer.squareup.com/docs/oauth-api/walkthrough)
         /// for more information.
         /// </summary>
         [JsonProperty("access_token", NullValueHandling = NullValueHandling.Ignore)]
@@ -72,7 +74,7 @@ namespace Square.Models
         public string SubscriptionId { get; }
 
         /// <summary>
-        /// T__LEGACY FIELD__. The ID of the subscription plan the merchant signed
+        /// __LEGACY FIELD__. The ID of the subscription plan the merchant signed
         /// up for. Only present if the merchant signed up for a subscription during
         /// authorization.
         /// </summary>
@@ -93,6 +95,13 @@ namespace Square.Models
         [JsonProperty("refresh_token", NullValueHandling = NullValueHandling.Ignore)]
         public string RefreshToken { get; }
 
+        /// <summary>
+        /// A boolean indicating the access token is a short-lived access token.
+        /// The short-lived access token returned in the response will expire in 24 hours.
+        /// </summary>
+        [JsonProperty("short_lived", NullValueHandling = NullValueHandling.Ignore)]
+        public bool? ShortLived { get; }
+
         public Builder ToBuilder()
         {
             var builder = new Builder()
@@ -103,7 +112,8 @@ namespace Square.Models
                 .SubscriptionId(SubscriptionId)
                 .PlanId(PlanId)
                 .IdToken(IdToken)
-                .RefreshToken(RefreshToken);
+                .RefreshToken(RefreshToken)
+                .ShortLived(ShortLived);
             return builder;
         }
 
@@ -117,6 +127,7 @@ namespace Square.Models
             private string planId;
             private string idToken;
             private string refreshToken;
+            private bool? shortLived;
 
 
 
@@ -168,6 +179,12 @@ namespace Square.Models
                 return this;
             }
 
+            public Builder ShortLived(bool? shortLived)
+            {
+                this.shortLived = shortLived;
+                return this;
+            }
+
             public ObtainTokenResponse Build()
             {
                 return new ObtainTokenResponse(accessToken,
@@ -177,7 +194,8 @@ namespace Square.Models
                     subscriptionId,
                     planId,
                     idToken,
-                    refreshToken);
+                    refreshToken,
+                    shortLived);
             }
         }
     }

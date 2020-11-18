@@ -17,7 +17,7 @@
 | `Reason` | `string` | Optional | A description of the reason for the refund.<br>Note: maximum 192 characters |
 | `DeviceId` | `string` | Optional | The unique Id of the device intended for this `TerminalRefund`.<br>The Id can be retrieved from /v2/devices api. |
 | `DeadlineDuration` | `string` | Optional | The duration as an RFC 3339 duration, after which the refund will be automatically canceled.<br>TerminalRefunds that are `PENDING` will be automatically `CANCELED` and have a cancellation reason<br>of `TIMED_OUT`<br><br>Default: 5 minutes from creation<br><br>Maximum: 5 minutes |
-| `Status` | `string` | Optional | The status of the `TerminalRefund`.<br>Options: `PENDING`, `IN\_PROGRESS`, `CANCELED`, `COMPLETED` |
+| `Status` | `string` | Optional | The status of the `TerminalRefund`.<br>Options: `PENDING`, `IN_PROGRESS`, `CANCELED`, `COMPLETED` |
 | `CancelReason` | [`string`](/doc/models/action-cancel-reason.md) | Optional | - |
 | `CreatedAt` | `string` | Optional | The time when the `TerminalRefund` was created as an RFC 3339 timestamp. |
 | `UpdatedAt` | `string` | Optional | The time when the `TerminalRefund` was last updated as an RFC 3339 timestamp. |

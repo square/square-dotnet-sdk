@@ -38,8 +38,9 @@ namespace Square.Exceptions
         public List<Models.Error> Errors { get; internal set; }
 
         /// <summary>
-        /// Returns data about the steps that completed successfully before an error was raised.
-        /// This field is currently only populated for the PaymentsApi.CreatePayment endpoint.
+        /// Returns data about the steps that completed successfully before an error 
+        /// was raised. This field is currently only populated for the PaymentsApi.CreatePayment 
+        /// endpoint.
         /// </summary>
         [JsonProperty("data")]
         public new object Data { get; internal set; }

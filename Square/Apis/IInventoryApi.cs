@@ -130,7 +130,7 @@ namespace Square.Apis
         /// </summary>
         /// <param name="catalogObjectId">Required parameter: ID of the [CatalogObject](#type-catalogobject) to retrieve.</param>
         /// <param name="locationIds">Optional parameter: The [Location](#type-location) IDs to look up as a comma-separated list. An empty list queries all locations.</param>
-        /// <param name="cursor">Optional parameter: A pagination cursor returned by a previous call to this endpoint. Provide this to retrieve the next set of results for the original query.  See the [Pagination](https://developer.squareup.com/docs/docs/working-with-apis/pagination) guide for more information.</param>
+        /// <param name="cursor">Optional parameter: A pagination cursor returned by a previous call to this endpoint. Provide this to retrieve the next set of results for the original query.  See the [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination) guide for more information.</param>
         /// <return>Returns the Models.RetrieveInventoryCountResponse response from the API call</return>
         Models.RetrieveInventoryCountResponse RetrieveInventoryCount(string catalogObjectId, string locationIds = null, string cursor = null);
 
@@ -142,7 +142,7 @@ namespace Square.Apis
         /// </summary>
         /// <param name="catalogObjectId">Required parameter: ID of the [CatalogObject](#type-catalogobject) to retrieve.</param>
         /// <param name="locationIds">Optional parameter: The [Location](#type-location) IDs to look up as a comma-separated list. An empty list queries all locations.</param>
-        /// <param name="cursor">Optional parameter: A pagination cursor returned by a previous call to this endpoint. Provide this to retrieve the next set of results for the original query.  See the [Pagination](https://developer.squareup.com/docs/docs/working-with-apis/pagination) guide for more information.</param>
+        /// <param name="cursor">Optional parameter: A pagination cursor returned by a previous call to this endpoint. Provide this to retrieve the next set of results for the original query.  See the [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination) guide for more information.</param>
         /// <return>Returns the Models.RetrieveInventoryCountResponse response from the API call</return>
         Task<Models.RetrieveInventoryCountResponse> RetrieveInventoryCountAsync(string catalogObjectId, string locationIds = null, string cursor = null, CancellationToken cancellationToken = default);
 

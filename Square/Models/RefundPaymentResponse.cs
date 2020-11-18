@@ -26,13 +26,13 @@ namespace Square.Models
         public HttpContext Context { get; internal set; }
 
         /// <summary>
-        /// Information on errors encountered during the request.
+        /// Information about errors encountered during the request.
         /// </summary>
         [JsonProperty("errors", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.Error> Errors { get; }
 
         /// <summary>
-        /// Represents a refund of a payment made using Square. Contains information on
+        /// Represents a refund of a payment made using Square. Contains information about
         /// the original payment and the amount of money refunded.
         /// </summary>
         [JsonProperty("refund", NullValueHandling = NullValueHandling.Ignore)]

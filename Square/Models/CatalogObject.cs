@@ -166,7 +166,7 @@ namespace Square.Models
         public string ImageId { get; }
 
         /// <summary>
-        /// An [CatalogObject](#type-CatalogObject) instance of the `ITEM` type, also referred to as an item, in the catalog.
+        /// A [CatalogObject](#type-CatalogObject) instance of the `ITEM` type, also referred to as an item, in the catalog.
         /// </summary>
         [JsonProperty("item_data", NullValueHandling = NullValueHandling.Ignore)]
         public Models.CatalogItem ItemData { get; }
@@ -251,7 +251,7 @@ namespace Square.Models
 
         /// <summary>
         /// Describes a subscription plan. For more information, see
-        /// [Set Up and Manage a Subscription Plan](https://developer.squareup.com/docs/docs/subscriptions-api/setup-plan).
+        /// [Set Up and Manage a Subscription Plan](https://developer.squareup.com/docs/subscriptions-api/setup-plan).
         /// </summary>
         [JsonProperty("subscription_plan_data", NullValueHandling = NullValueHandling.Ignore)]
         public Models.CatalogSubscriptionPlan SubscriptionPlanData { get; }

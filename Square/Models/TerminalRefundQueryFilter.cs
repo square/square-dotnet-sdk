@@ -42,7 +42,7 @@ namespace Square.Models
 
         /// <summary>
         /// Filtered results with the desired status of the `TerminalRefund`
-        /// Options: `PENDING`, `IN\_PROGRESS`, `CANCEL\_REQUESTED`, `CANCELED`, `COMPLETED`
+        /// Options: `PENDING`, `IN_PROGRESS`, `CANCEL_REQUESTED`, `CANCELED`, `COMPLETED`
         /// </summary>
         [JsonProperty("status", NullValueHandling = NullValueHandling.Ignore)]
         public string Status { get; }

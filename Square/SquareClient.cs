@@ -11,8 +11,8 @@ using Square.Utilities;
 namespace Square
 {
     /// <summary>
-    /// Gateway for the SDK. This class acts as a factory for Api and also holds 
-    /// the configuration of the SDK.
+    /// The gateway for the SDK. This class acts as a factory for Api and holds the 
+    /// configuration of the SDK.
     /// </summary>
     public sealed class SquareClient : ISquareClient
     {
@@ -29,6 +29,7 @@ namespace Square
         private readonly Lazy<IV1ItemsApi> v1Items;
         private readonly Lazy<IApplePayApi> applePay;
         private readonly Lazy<IBankAccountsApi> bankAccounts;
+        private readonly Lazy<IBookingsApi> bookings;
         private readonly Lazy<ICashDrawersApi> cashDrawers;
         private readonly Lazy<ICatalogApi> catalog;
         private readonly Lazy<ICustomersApi> customers;
@@ -91,6 +92,11 @@ namespace Square
         /// Provides access to BankAccountsApi.
         /// </summary>
         public IBankAccountsApi BankAccountsApi => bankAccounts.Value;
+
+        /// <summary>
+        /// Provides access to BookingsApi.
+        /// </summary>
+        public IBookingsApi BookingsApi => bookings.Value;
 
         /// <summary>
         /// Provides access to CashDrawersApi.
@@ -210,7 +216,7 @@ namespace Square
         /// <summary>
         /// Current version of the SDK.
         /// </summary>
-        public string SdkVersion => "6.5.0";
+        public string SdkVersion => "7.0.0";
 
         internal static SquareClient CreateFromEnvironment()
         {
@@ -275,6 +281,8 @@ namespace Square
                 () => new ApplePayApi(this, this.httpClient, this.authManagers, this.httpCallBack));
             bankAccounts = new Lazy<IBankAccountsApi>(
                 () => new BankAccountsApi(this, this.httpClient, this.authManagers, this.httpCallBack));
+            bookings = new Lazy<IBookingsApi>(
+                () => new BookingsApi(this, this.httpClient, this.authManagers, this.httpCallBack));
             cashDrawers = new Lazy<ICashDrawersApi>(
                 () => new CashDrawersApi(this, this.httpClient, this.authManagers, this.httpCallBack));
             catalog = new Lazy<ICatalogApi>(
@@ -427,7 +435,7 @@ namespace Square
         public class Builder
         {
             private TimeSpan timeout = TimeSpan.FromSeconds(60);
-            private string squareVersion = "2020-10-28";
+            private string squareVersion = "2020-11-18";
             private Environment environment = Square.Environment.Production;
             private string accessToken = "TODO: Replace";
             private IDictionary<string, IAuthManager> authManagers = new Dictionary<string, IAuthManager>();

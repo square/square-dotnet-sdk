@@ -20,7 +20,9 @@ namespace Square.Models
             string code = null,
             string redirectUri = null,
             string refreshToken = null,
-            string migrationToken = null)
+            string migrationToken = null,
+            IList<string> scopes = null,
+            bool? shortLived = null)
         {
             ClientId = clientId;
             ClientSecret = clientSecret;
@@ -29,6 +31,8 @@ namespace Square.Models
             GrantType = grantType;
             RefreshToken = refreshToken;
             MigrationToken = migrationToken;
+            Scopes = scopes;
+            ShortLived = shortLived;
         }
 
         /// <summary>
@@ -84,6 +88,25 @@ namespace Square.Models
         [JsonProperty("migration_token", NullValueHandling = NullValueHandling.Ignore)]
         public string MigrationToken { get; }
 
+        /// <summary>
+        /// __OPTIONAL__
+        /// A JSON list of strings representing the permissions the application is requesting.
+        /// For example: "`["MERCHANT_PROFILE_READ","PAYMENTS_READ","BANK_ACCOUNTS_READ"]`"
+        /// The access token returned in the response is granted the permissions
+        /// that comprise the intersection between the requested list of permissions, and those
+        /// that belong to the provided refresh token.
+        /// </summary>
+        [JsonProperty("scopes", NullValueHandling = NullValueHandling.Ignore)]
+        public IList<string> Scopes { get; }
+
+        /// <summary>
+        /// __OPTIONAL__
+        /// A boolean indicating a request for a short-lived access token.
+        /// The short-lived access token returned in the response will expire in 24 hours.
+        /// </summary>
+        [JsonProperty("short_lived", NullValueHandling = NullValueHandling.Ignore)]
+        public bool? ShortLived { get; }
+
         public Builder ToBuilder()
         {
             var builder = new Builder(ClientId,
@@ -92,7 +115,9 @@ namespace Square.Models
                 .Code(Code)
                 .RedirectUri(RedirectUri)
                 .RefreshToken(RefreshToken)
-                .MigrationToken(MigrationToken);
+                .MigrationToken(MigrationToken)
+                .Scopes(Scopes)
+                .ShortLived(ShortLived);
             return builder;
         }
 
@@ -105,6 +130,8 @@ namespace Square.Models
             private string redirectUri;
             private string refreshToken;
             private string migrationToken;
+            private IList<string> scopes;
+            private bool? shortLived;
 
             public Builder(string clientId,
                 string clientSecret,
@@ -157,6 +184,18 @@ namespace Square.Models
                 return this;
             }
 
+            public Builder Scopes(IList<string> scopes)
+            {
+                this.scopes = scopes;
+                return this;
+            }
+
+            public Builder ShortLived(bool? shortLived)
+            {
+                this.shortLived = shortLived;
+                return this;
+            }
+
             public ObtainTokenRequest Build()
             {
                 return new ObtainTokenRequest(clientId,
@@ -165,7 +204,9 @@ namespace Square.Models
                     code,
                     redirectUri,
                     refreshToken,
-                    migrationToken);
+                    migrationToken,
+                    scopes,
+                    shortLived);
             }
         }
     }

@@ -92,14 +92,14 @@ namespace Square.Models
 
         /// <summary>
         /// Primary identifier for the bank. For more information, see 
-        /// [Bank Accounts API](https://developer.squareup.com/docs/docs/bank-accounts-api).
+        /// [Bank Accounts API](https://developer.squareup.com/docs/bank-accounts-api).
         /// </summary>
         [JsonProperty("primary_bank_identification_number")]
         public string PrimaryBankIdentificationNumber { get; }
 
         /// <summary>
         /// Secondary identifier for the bank. For more information, see 
-        /// [Bank Accounts API](https://developer.squareup.com/docs/docs/bank-accounts-api).
+        /// [Bank Accounts API](https://developer.squareup.com/docs/bank-accounts-api).
         /// </summary>
         [JsonProperty("secondary_bank_identification_number", NullValueHandling = NullValueHandling.Ignore)]
         public string SecondaryBankIdentificationNumber { get; }

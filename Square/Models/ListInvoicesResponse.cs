@@ -37,7 +37,7 @@ namespace Square.Models
         /// When a response is truncated, it includes a cursor that you can use in a 
         /// subsequent request to fetch the next set of invoices. If empty, this is the final 
         /// response. 
-        /// For more information, see [Pagination](https://developer.squareup.com/docs/docs/working-with-apis/pagination).
+        /// For more information, see [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination).
         /// </summary>
         [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
         public string Cursor { get; }

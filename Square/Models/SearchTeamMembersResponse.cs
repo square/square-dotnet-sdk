@@ -35,7 +35,7 @@ namespace Square.Models
 
         /// <summary>
         /// The opaque cursor for fetching the next page. Read about
-        /// [pagination](https://developer.squareup.com/docs/docs/working-with-apis/pagination) with Square APIs for more information.
+        /// [pagination](https://developer.squareup.com/docs/working-with-apis/pagination) with Square APIs for more information.
         /// </summary>
         [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
         public string Cursor { get; }

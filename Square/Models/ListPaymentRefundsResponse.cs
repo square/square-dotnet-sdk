@@ -28,7 +28,7 @@ namespace Square.Models
         public HttpContext Context { get; internal set; }
 
         /// <summary>
-        /// Information on errors encountered during the request.
+        /// Information about errors encountered during the request.
         /// </summary>
         [JsonProperty("errors", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.Error> Errors { get; }
@@ -42,7 +42,7 @@ namespace Square.Models
         /// <summary>
         /// The pagination cursor to be used in a subsequent request. If empty,
         /// this is the final response.
-        /// See [Pagination](https://developer.squareup.com/docs/basics/api101/pagination) for more information.
+        /// For more information, see [Pagination](https://developer.squareup.com/docs/basics/api101/pagination).
         /// </summary>
         [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
         public string Cursor { get; }

@@ -23,7 +23,7 @@ namespace Square.Models
 
         /// <summary>
         /// Describes a loyalty account. For more information, see 
-        /// [Loyalty Overview](https://developer.squareup.com/docs/docs/loyalty/overview).
+        /// [Loyalty Overview](https://developer.squareup.com/docs/loyalty/overview).
         /// </summary>
         [JsonProperty("loyalty_account")]
         public Models.LoyaltyAccount LoyaltyAccount { get; }

@@ -80,7 +80,7 @@ namespace Square.Models
         /// <summary>
         /// The duration as an RFC 3339 duration, after which the checkout will be automatically canceled.
         /// TerminalCheckouts that are `PENDING` will be automatically `CANCELED` and have a cancellation reason
-        /// of `TIMED\_OUT`.
+        /// of `TIMED_OUT`.
         /// Default: 5 minutes from creation
         /// Maximum: 5 minutes
         /// </summary>
@@ -89,7 +89,7 @@ namespace Square.Models
 
         /// <summary>
         /// The status of the `TerminalCheckout`.
-        /// Options: `PENDING`, `IN\_PROGRESS`, `CANCEL\_REQUESTED`, `CANCELED`, `COMPLETED`
+        /// Options: `PENDING`, `IN_PROGRESS`, `CANCEL_REQUESTED`, `CANCELED`, `COMPLETED`
         /// </summary>
         [JsonProperty("status", NullValueHandling = NullValueHandling.Ignore)]
         public string Status { get; }

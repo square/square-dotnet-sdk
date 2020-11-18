@@ -70,7 +70,7 @@ namespace Square.Apis
         /// you first perform a client-side computation to compute the points.  
         /// For spend-based and visit-based programs, you can call 
         /// [CalculateLoyaltyPoints](#endpoint-Loyalty-CalculateLoyaltyPoints) to compute the points. For more information, 
-        /// see [Loyalty Program Overview](https://developer.squareup.com/docs/docs/loyalty/overview). 
+        /// see [Loyalty Program Overview](https://developer.squareup.com/docs/loyalty/overview). 
         /// You then provide the points in a request to this endpoint.
         /// </summary>
         /// <param name="accountId">Required parameter: The [loyalty account](#type-LoyaltyAccount) ID to which to add the points.</param>
@@ -86,7 +86,7 @@ namespace Square.Apis
         /// you first perform a client-side computation to compute the points.  
         /// For spend-based and visit-based programs, you can call 
         /// [CalculateLoyaltyPoints](#endpoint-Loyalty-CalculateLoyaltyPoints) to compute the points. For more information, 
-        /// see [Loyalty Program Overview](https://developer.squareup.com/docs/docs/loyalty/overview). 
+        /// see [Loyalty Program Overview](https://developer.squareup.com/docs/loyalty/overview). 
         /// You then provide the points in a request to this endpoint.
         /// </summary>
         /// <param name="accountId">Required parameter: The [loyalty account](#type-LoyaltyAccount) ID to which to add the points.</param>

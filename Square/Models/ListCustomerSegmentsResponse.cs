@@ -43,7 +43,7 @@ namespace Square.Models
         /// A pagination cursor to be used in subsequent calls to __ListCustomerSegments__
         /// to retrieve the next set of query results. Only present only if the request succeeded and
         /// additional results are available.
-        /// See the [Pagination guide](https://developer.squareup.com/docs/docs/working-with-apis/pagination) for more information.
+        /// See the [Pagination guide](https://developer.squareup.com/docs/working-with-apis/pagination) for more information.
         /// </summary>
         [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
         public string Cursor { get; }

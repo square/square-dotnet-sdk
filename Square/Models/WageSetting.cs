@@ -54,7 +54,7 @@ namespace Square.Models
         /// Used for resolving concurrency issues; request will fail if version
         /// provided does not match server version at time of request. If not provided,
         /// Square executes a blind write, potentially overwriting data from another write. Read
-        /// about [optimistic concurrency](https://developer.squareup.com/docs/docs/working-with-apis/optimistic-concurrency)
+        /// about [optimistic concurrency](https://developer.squareup.com/docs/working-with-apis/optimistic-concurrency)
         /// in Square APIs for more information.
         /// </summary>
         [JsonProperty("version", NullValueHandling = NullValueHandling.Ignore)]

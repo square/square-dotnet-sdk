@@ -42,7 +42,7 @@ namespace Square.Models
 
         /// <summary>
         /// Filtered results with the desired status of the `TerminalCheckout`
-        /// Options: PENDING, IN\_PROGRESS, CANCELED, COMPLETED
+        /// Options: PENDING, IN_PROGRESS, CANCELED, COMPLETED
         /// </summary>
         [JsonProperty("status", NullValueHandling = NullValueHandling.Ignore)]
         public string Status { get; }

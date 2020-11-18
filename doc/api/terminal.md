@@ -45,10 +45,16 @@ var bodyCheckoutAmountMoney = new Money.Builder()
     .Amount(2610L)
     .Currency("USD")
     .Build();
+var bodyCheckoutDeviceOptionsTipSettingsTipPercentages = new List<int?>();
+bodyCheckoutDeviceOptionsTipSettingsTipPercentages.Add(148);
+bodyCheckoutDeviceOptionsTipSettingsTipPercentages.Add(149);
+bodyCheckoutDeviceOptionsTipSettingsTipPercentages.Add(150);
 var bodyCheckoutDeviceOptionsTipSettings = new TipSettings.Builder()
     .AllowTipping(false)
     .SeparateTipScreen(false)
     .CustomTipField(false)
+    .TipPercentages(bodyCheckoutDeviceOptionsTipSettingsTipPercentages)
+    .SmartTipping(false)
     .Build();
 var bodyCheckoutDeviceOptions = new DeviceCheckoutOptions.Builder(
         "dbb5d83a-7838-11ea-bc55-0242ac130003")
@@ -212,20 +218,20 @@ CreateTerminalRefundAsync(Models.CreateTerminalRefundRequest body)
 
 ```csharp
 var bodyRefundAmountMoney = new Money.Builder()
-    .Amount(128L)
-    .Currency("AWG")
+    .Amount(111L)
+    .Currency("CAD")
     .Build();
 var bodyRefund = new TerminalRefund.Builder(
-        "payment_id4",
+        "5O5OvgkcNUhl7JBuINflcjKqUzXZY",
         bodyRefundAmountMoney)
     .Id("id4")
     .RefundId("refund_id8")
     .OrderId("order_id8")
-    .Reason("reason0")
-    .DeviceId("device_id0")
+    .Reason("Returning items")
+    .DeviceId("f72dfb8e-4d65-4e56-aade-ec3fb8d33291")
     .Build();
 var body = new CreateTerminalRefundRequest.Builder(
-        "idempotency_key2")
+        "402a640b-b26f-401f-b406-46f839590c04")
     .Refund(bodyRefund)
     .Build();
 
@@ -265,7 +271,7 @@ var bodyQueryFilterCreatedAt = new TimeRange.Builder()
 var bodyQueryFilter = new TerminalRefundQueryFilter.Builder()
     .DeviceId("device_id8")
     .CreatedAt(bodyQueryFilterCreatedAt)
-    .Status("status6")
+    .Status("COMPLETED")
     .Build();
 var bodyQuerySort = new TerminalRefundQuerySort.Builder()
     .SortOrder("sort_order8")
@@ -277,7 +283,7 @@ var bodyQuery = new TerminalRefundQuery.Builder()
 var body = new SearchTerminalRefundsRequest.Builder()
     .Query(bodyQuery)
     .Cursor("cursor0")
-    .Limit(164)
+    .Limit(1)
     .Build();
 
 try

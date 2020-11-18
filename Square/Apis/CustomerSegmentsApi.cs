@@ -26,7 +26,7 @@ namespace Square.Apis
         /// <summary>
         /// Retrieves the list of customer segments of a business.
         /// </summary>
-        /// <param name="cursor">Optional parameter: A pagination cursor returned by previous calls to __ListCustomerSegments__. Used to retrieve the next set of query results.  See the [Pagination guide](https://developer.squareup.com/docs/docs/working-with-apis/pagination) for more information.</param>
+        /// <param name="cursor">Optional parameter: A pagination cursor returned by previous calls to __ListCustomerSegments__. Used to retrieve the next set of query results.  See the [Pagination guide](https://developer.squareup.com/docs/working-with-apis/pagination) for more information.</param>
         /// <return>Returns the Models.ListCustomerSegmentsResponse response from the API call</return>
         public Models.ListCustomerSegmentsResponse ListCustomerSegments(string cursor = null)
         {
@@ -38,7 +38,7 @@ namespace Square.Apis
         /// <summary>
         /// Retrieves the list of customer segments of a business.
         /// </summary>
-        /// <param name="cursor">Optional parameter: A pagination cursor returned by previous calls to __ListCustomerSegments__. Used to retrieve the next set of query results.  See the [Pagination guide](https://developer.squareup.com/docs/docs/working-with-apis/pagination) for more information.</param>
+        /// <param name="cursor">Optional parameter: A pagination cursor returned by previous calls to __ListCustomerSegments__. Used to retrieve the next set of query results.  See the [Pagination guide](https://developer.squareup.com/docs/working-with-apis/pagination) for more information.</param>
         /// <return>Returns the Models.ListCustomerSegmentsResponse response from the API call</return>
         public async Task<Models.ListCustomerSegmentsResponse> ListCustomerSegmentsAsync(string cursor = null, CancellationToken cancellationToken = default)
         {

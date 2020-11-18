@@ -22,13 +22,13 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// ID for the account used to fund the payment.
+        /// The ID of the account used to fund the payment.
         /// </summary>
         [JsonProperty("account_id", NullValueHandling = NullValueHandling.Ignore)]
         public string AccountId { get; }
 
         /// <summary>
-        /// The balance payment’s current state. Can be `COMPLETED` or `FAILED`.
+        /// The balance payment’s current state. The state can be COMPLETED or FAILED.
         /// </summary>
         [JsonProperty("status", NullValueHandling = NullValueHandling.Ignore)]
         public string Status { get; }
