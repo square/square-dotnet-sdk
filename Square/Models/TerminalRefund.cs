@@ -102,7 +102,7 @@ namespace Square.Models
 
         /// <summary>
         /// The status of the `TerminalRefund`.
-        /// Options: `PENDING`, `IN\_PROGRESS`, `CANCELED`, `COMPLETED`
+        /// Options: `PENDING`, `IN_PROGRESS`, `CANCELED`, `COMPLETED`
         /// </summary>
         [JsonProperty("status", NullValueHandling = NullValueHandling.Ignore)]
         public string Status { get; }

@@ -21,7 +21,7 @@ namespace Square.Apis
         /// You must provide the following values in your request to this endpoint:
         /// - `given_name`
         /// - `family_name`
-        /// Learn about [Troubleshooting the Teams API](https://developer.squareup.com/docs/docs/team/troubleshooting#createteammember).
+        /// Learn about [Troubleshooting the Teams API](https://developer.squareup.com/docs/team/troubleshooting#createteammember).
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.CreateTeamMemberResponse response from the API call</return>
@@ -32,7 +32,7 @@ namespace Square.Apis
         /// You must provide the following values in your request to this endpoint:
         /// - `given_name`
         /// - `family_name`
-        /// Learn about [Troubleshooting the Teams API](https://developer.squareup.com/docs/docs/team/troubleshooting#createteammember).
+        /// Learn about [Troubleshooting the Teams API](https://developer.squareup.com/docs/team/troubleshooting#createteammember).
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.CreateTeamMemberResponse response from the API call</return>
@@ -43,7 +43,7 @@ namespace Square.Apis
         /// This process is non-transactional and will process as much of the request as is possible. If one of the creates in
         /// the request cannot be successfully processed, the request will NOT be marked as failed, but the body of the response
         /// will contain explicit error information for this particular create.
-        /// Learn about [Troubleshooting the Teams API](https://developer.squareup.com/docs/docs/team/troubleshooting#bulkcreateteammembers).
+        /// Learn about [Troubleshooting the Teams API](https://developer.squareup.com/docs/team/troubleshooting#bulkcreateteammembers).
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.BulkCreateTeamMembersResponse response from the API call</return>
@@ -54,7 +54,7 @@ namespace Square.Apis
         /// This process is non-transactional and will process as much of the request as is possible. If one of the creates in
         /// the request cannot be successfully processed, the request will NOT be marked as failed, but the body of the response
         /// will contain explicit error information for this particular create.
-        /// Learn about [Troubleshooting the Teams API](https://developer.squareup.com/docs/docs/team/troubleshooting#bulkcreateteammembers).
+        /// Learn about [Troubleshooting the Teams API](https://developer.squareup.com/docs/team/troubleshooting#bulkcreateteammembers).
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.BulkCreateTeamMembersResponse response from the API call</return>
@@ -65,7 +65,7 @@ namespace Square.Apis
         /// This process is non-transactional and will process as much of the request as is possible. If one of the updates in
         /// the request cannot be successfully processed, the request will NOT be marked as failed, but the body of the response
         /// will contain explicit error information for this particular update.
-        /// Learn about [Troubleshooting the Teams API](https://developer.squareup.com/docs/docs/team/troubleshooting#bulkupdateteammembers).
+        /// Learn about [Troubleshooting the Teams API](https://developer.squareup.com/docs/team/troubleshooting#bulkupdateteammembers).
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.BulkUpdateTeamMembersResponse response from the API call</return>
@@ -76,7 +76,7 @@ namespace Square.Apis
         /// This process is non-transactional and will process as much of the request as is possible. If one of the updates in
         /// the request cannot be successfully processed, the request will NOT be marked as failed, but the body of the response
         /// will contain explicit error information for this particular update.
-        /// Learn about [Troubleshooting the Teams API](https://developer.squareup.com/docs/docs/team/troubleshooting#bulkupdateteammembers).
+        /// Learn about [Troubleshooting the Teams API](https://developer.squareup.com/docs/team/troubleshooting#bulkupdateteammembers).
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.BulkUpdateTeamMembersResponse response from the API call</return>
@@ -104,7 +104,7 @@ namespace Square.Apis
 
         /// <summary>
         /// Retrieve a `TeamMember` object for the given `TeamMember.id`.
-        /// Learn about [Troubleshooting the Teams API](https://developer.squareup.com/docs/docs/team/troubleshooting#retrieveteammember).
+        /// Learn about [Troubleshooting the Teams API](https://developer.squareup.com/docs/team/troubleshooting#retrieveteammember).
         /// </summary>
         /// <param name="teamMemberId">Required parameter: The ID of the team member to retrieve.</param>
         /// <return>Returns the Models.RetrieveTeamMemberResponse response from the API call</return>
@@ -112,7 +112,7 @@ namespace Square.Apis
 
         /// <summary>
         /// Retrieve a `TeamMember` object for the given `TeamMember.id`.
-        /// Learn about [Troubleshooting the Teams API](https://developer.squareup.com/docs/docs/team/troubleshooting#retrieveteammember).
+        /// Learn about [Troubleshooting the Teams API](https://developer.squareup.com/docs/team/troubleshooting#retrieveteammember).
         /// </summary>
         /// <param name="teamMemberId">Required parameter: The ID of the team member to retrieve.</param>
         /// <return>Returns the Models.RetrieveTeamMemberResponse response from the API call</return>
@@ -120,7 +120,7 @@ namespace Square.Apis
 
         /// <summary>
         /// Updates a single `TeamMember` object. The `TeamMember` will be returned on successful updates.
-        /// Learn about [Troubleshooting the Teams API](https://developer.squareup.com/docs/docs/team/troubleshooting#updateteammember).
+        /// Learn about [Troubleshooting the Teams API](https://developer.squareup.com/docs/team/troubleshooting#updateteammember).
         /// </summary>
         /// <param name="teamMemberId">Required parameter: The ID of the team member to update.</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
@@ -129,7 +129,7 @@ namespace Square.Apis
 
         /// <summary>
         /// Updates a single `TeamMember` object. The `TeamMember` will be returned on successful updates.
-        /// Learn about [Troubleshooting the Teams API](https://developer.squareup.com/docs/docs/team/troubleshooting#updateteammember).
+        /// Learn about [Troubleshooting the Teams API](https://developer.squareup.com/docs/team/troubleshooting#updateteammember).
         /// </summary>
         /// <param name="teamMemberId">Required parameter: The ID of the team member to update.</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
@@ -139,7 +139,7 @@ namespace Square.Apis
         /// <summary>
         /// Retrieve a `WageSetting` object for a team member specified
         /// by `TeamMember.id`.
-        /// Learn about [Troubleshooting the Teams API](https://developer.squareup.com/docs/docs/team/troubleshooting#retrievewagesetting).
+        /// Learn about [Troubleshooting the Teams API](https://developer.squareup.com/docs/team/troubleshooting#retrievewagesetting).
         /// </summary>
         /// <param name="teamMemberId">Required parameter: The ID of the team member to retrieve wage setting for</param>
         /// <return>Returns the Models.RetrieveWageSettingResponse response from the API call</return>
@@ -148,7 +148,7 @@ namespace Square.Apis
         /// <summary>
         /// Retrieve a `WageSetting` object for a team member specified
         /// by `TeamMember.id`.
-        /// Learn about [Troubleshooting the Teams API](https://developer.squareup.com/docs/docs/team/troubleshooting#retrievewagesetting).
+        /// Learn about [Troubleshooting the Teams API](https://developer.squareup.com/docs/team/troubleshooting#retrievewagesetting).
         /// </summary>
         /// <param name="teamMemberId">Required parameter: The ID of the team member to retrieve wage setting for</param>
         /// <return>Returns the Models.RetrieveWageSettingResponse response from the API call</return>
@@ -159,7 +159,7 @@ namespace Square.Apis
         /// `WageSetting` with the specified `team_member_id` does not exist. Otherwise,
         /// it fully replaces the `WageSetting` object for the team member.
         /// The `WageSetting` will be returned upon successful update.
-        /// Learn about [Troubleshooting the Teams API](https://developer.squareup.com/docs/docs/team/troubleshooting#updatewagesetting).
+        /// Learn about [Troubleshooting the Teams API](https://developer.squareup.com/docs/team/troubleshooting#updatewagesetting).
         /// </summary>
         /// <param name="teamMemberId">Required parameter: The ID of the team member to update the `WageSetting` object for.</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
@@ -171,7 +171,7 @@ namespace Square.Apis
         /// `WageSetting` with the specified `team_member_id` does not exist. Otherwise,
         /// it fully replaces the `WageSetting` object for the team member.
         /// The `WageSetting` will be returned upon successful update.
-        /// Learn about [Troubleshooting the Teams API](https://developer.squareup.com/docs/docs/team/troubleshooting#updatewagesetting).
+        /// Learn about [Troubleshooting the Teams API](https://developer.squareup.com/docs/team/troubleshooting#updatewagesetting).
         /// </summary>
         /// <param name="teamMemberId">Required parameter: The ID of the team member to update the `WageSetting` object for.</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>

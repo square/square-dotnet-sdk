@@ -16,11 +16,15 @@ namespace Square.Models
     {
         public TipSettings(bool? allowTipping = null,
             bool? separateTipScreen = null,
-            bool? customTipField = null)
+            bool? customTipField = null,
+            IList<int> tipPercentages = null,
+            bool? smartTipping = null)
         {
             AllowTipping = allowTipping;
             SeparateTipScreen = separateTipScreen;
             CustomTipField = customTipField;
+            TipPercentages = tipPercentages;
+            SmartTipping = smartTipping;
         }
 
         /// <summary>
@@ -42,12 +46,32 @@ namespace Square.Models
         [JsonProperty("custom_tip_field", NullValueHandling = NullValueHandling.Ignore)]
         public bool? CustomTipField { get; }
 
+        /// <summary>
+        /// A list of tip percentages that should be presented during the checkout flow. Specified as
+        /// up to 3 non-negative integers from 0 to 100 (inclusive). Defaults to [15, 20, 25]
+        /// </summary>
+        [JsonProperty("tip_percentages", NullValueHandling = NullValueHandling.Ignore)]
+        public IList<int> TipPercentages { get; }
+
+        /// <summary>
+        /// Enables the "Smart Tip Amounts" behavior described in https://squareup.com/help/us/en/article/5069-accept-tips-with-the-square-app.
+        /// Exact tipping options depend on the region the Square seller is active in.
+        /// In the United States and Canada, tipping options will be presented in whole dollar amounts for
+        /// payments under 10 USD/CAD respectively.
+        /// If set to true, the tip_percentages settings is ignored.
+        /// Defaults to false.
+        /// </summary>
+        [JsonProperty("smart_tipping", NullValueHandling = NullValueHandling.Ignore)]
+        public bool? SmartTipping { get; }
+
         public Builder ToBuilder()
         {
             var builder = new Builder()
                 .AllowTipping(AllowTipping)
                 .SeparateTipScreen(SeparateTipScreen)
-                .CustomTipField(CustomTipField);
+                .CustomTipField(CustomTipField)
+                .TipPercentages(TipPercentages)
+                .SmartTipping(SmartTipping);
             return builder;
         }
 
@@ -56,6 +80,8 @@ namespace Square.Models
             private bool? allowTipping;
             private bool? separateTipScreen;
             private bool? customTipField;
+            private IList<int> tipPercentages;
+            private bool? smartTipping;
 
 
 
@@ -77,11 +103,25 @@ namespace Square.Models
                 return this;
             }
 
+            public Builder TipPercentages(IList<int> tipPercentages)
+            {
+                this.tipPercentages = tipPercentages;
+                return this;
+            }
+
+            public Builder SmartTipping(bool? smartTipping)
+            {
+                this.smartTipping = smartTipping;
+                return this;
+            }
+
             public TipSettings Build()
             {
                 return new TipSettings(allowTipping,
                     separateTipScreen,
-                    customTipField);
+                    customTipField,
+                    tipPercentages,
+                    smartTipping);
             }
         }
     }

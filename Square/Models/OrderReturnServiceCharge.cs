@@ -123,7 +123,7 @@ namespace Square.Models
         /// <summary>
         /// Represents a phase in the process of calculating order totals.
         /// Service charges are applied __after__ the indicated phase.
-        /// [Read more about how order totals are calculated.](https://developer.squareup.com/docs/docs/orders-api/how-it-works#how-totals-are-calculated)
+        /// [Read more about how order totals are calculated.](https://developer.squareup.com/docs/orders-api/how-it-works#how-totals-are-calculated)
         /// </summary>
         [JsonProperty("calculation_phase", NullValueHandling = NullValueHandling.Ignore)]
         public string CalculationPhase { get; }

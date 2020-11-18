@@ -41,7 +41,7 @@ namespace Square.Models
         /// A unique string that identifies this `CreateSubscription` request.
         /// If you do not provide a unique string (or provide an empty string as the value),
         /// the endpoint treats each request as independent.
-        /// For more information, see [Idempotency keys](https://developer.squareup.com/docs/docs/working-with-apis/idempotency).
+        /// For more information, see [Idempotency keys](https://developer.squareup.com/docs/working-with-apis/idempotency).
         /// </summary>
         [JsonProperty("idempotency_key")]
         public string IdempotencyKey { get; }
@@ -54,7 +54,7 @@ namespace Square.Models
 
         /// <summary>
         /// The ID of the subscription plan. For more information, see 
-        /// [Subscription Plan Overview](https://developer.squareup.com/docs/docs/subscriptions/overview).
+        /// [Subscription Plan Overview](https://developer.squareup.com/docs/subscriptions/overview).
         /// </summary>
         [JsonProperty("plan_id")]
         public string PlanId { get; }
@@ -104,7 +104,7 @@ namespace Square.Models
         /// <summary>
         /// The ID of the [customer](#type-customer) [card](#type-card) to charge.
         /// If not specified, Square sends an invoice via email. For an example to
-        /// create a customer and add a card on file, see [Subscriptions Walkthrough](https://developer.squareup.com/docs/docs/subscriptions-api/walkthrough).
+        /// create a customer and add a card on file, see [Subscriptions Walkthrough](https://developer.squareup.com/docs/subscriptions-api/walkthrough).
         /// </summary>
         [JsonProperty("card_id", NullValueHandling = NullValueHandling.Ignore)]
         public string CardId { get; }

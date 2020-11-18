@@ -34,38 +34,38 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// Timestamp for the beginning of the requested reporting period, in RFC 3339 format.
+        /// The timestamp for the beginning of the requested reporting period, in RFC 3339 format.
         /// Default: The current time minus one year.
         /// </summary>
         [JsonProperty("begin_time", NullValueHandling = NullValueHandling.Ignore)]
         public string BeginTime { get; }
 
         /// <summary>
-        /// Timestamp for the end of the requested reporting period, in RFC 3339 format.
+        /// The timestamp for the end of the requested reporting period, in RFC 3339 format.
         /// Default: The current time.
         /// </summary>
         [JsonProperty("end_time", NullValueHandling = NullValueHandling.Ignore)]
         public string EndTime { get; }
 
         /// <summary>
-        /// The order in which results are listed.
-        /// - `ASC` - oldest to newest
-        /// - `DESC` - newest to oldest (default).
+        /// The order in which results are listed:
+        /// - `ASC` - Oldest to newest.
+        /// - `DESC` - Newest to oldest (default).
         /// </summary>
         [JsonProperty("sort_order", NullValueHandling = NullValueHandling.Ignore)]
         public string SortOrder { get; }
 
         /// <summary>
         /// A pagination cursor returned by a previous call to this endpoint.
-        /// Provide this to retrieve the next set of results for the original query.
-        /// See [Pagination](https://developer.squareup.com/docs/basics/api101/pagination) for more information.
+        /// Provide this cursor to retrieve the next set of results for the original query.
+        /// For more information, see [Pagination](https://developer.squareup.com/docs/basics/api101/pagination).
         /// </summary>
         [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
         public string Cursor { get; }
 
         /// <summary>
         /// Limit results to the location supplied. By default, results are returned
-        /// for all locations associated with the merchant.
+        /// for all locations associated with the seller.
         /// </summary>
         [JsonProperty("location_id", NullValueHandling = NullValueHandling.Ignore)]
         public string LocationId { get; }
@@ -73,25 +73,25 @@ namespace Square.Models
         /// <summary>
         /// If provided, only refunds with the given status are returned.
         /// For a list of refund status values, see [PaymentRefund](#type-paymentrefund).
-        /// Default: If omitted refunds are returned regardless of status.
+        /// Default: If omitted, refunds are returned regardless of their status.
         /// </summary>
         [JsonProperty("status", NullValueHandling = NullValueHandling.Ignore)]
         public string Status { get; }
 
         /// <summary>
         /// If provided, only refunds with the given source type are returned.
-        /// - `CARD` - List refunds only for payments where card was specified as payment
+        /// - `CARD` - List refunds only for payments where `CARD` was specified as the payment
         /// source.
-        /// Default: If omitted refunds are returned regardless of source type.
+        /// Default: If omitted, refunds are returned regardless of the source type.
         /// </summary>
         [JsonProperty("source_type", NullValueHandling = NullValueHandling.Ignore)]
         public string SourceType { get; }
 
         /// <summary>
-        /// Maximum number of results to be returned in a single page.
+        /// The maximum number of results to be returned in a single page.
         /// It is possible to receive fewer results than the specified limit on a given page.
-        /// If the supplied value is greater than 100, at most 100 results will be returned.
-        /// Default: `100`
+        /// If the supplied value is greater than 100, no more than 100 results are returned.
+        /// Default: 100
         /// </summary>
         [JsonProperty("limit", NullValueHandling = NullValueHandling.Ignore)]
         public int? Limit { get; }

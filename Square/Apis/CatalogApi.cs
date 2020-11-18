@@ -409,8 +409,8 @@ namespace Square.Apis
         /// is specified as a comma-separated list of valid [CatalogObject](#type-catalogobject) types:
         /// `ITEM`, `ITEM_VARIATION`, `MODIFIER`, `MODIFIER_LIST`, `CATEGORY`, `DISCOUNT`, `TAX`, `IMAGE`.
         /// __Important:__ ListCatalog does not return deleted catalog items. To retrieve
-        /// deleted catalog items, use SearchCatalogObjects and set `include_deleted_objects`
-        /// to `true`.
+        /// deleted catalog items, use [SearchCatalogObjects](#endpoint-Catalog-SearchCatalogObjects) 
+        /// and set the `include_deleted_objects` attribute value to `true`.
         /// </summary>
         /// <param name="cursor">Optional parameter: The pagination cursor returned in the previous response. Leave unset for an initial request. See [Pagination](https://developer.squareup.com/docs/basics/api101/pagination) for more information.</param>
         /// <param name="types">Optional parameter: An optional case-insensitive, comma-separated list of object types to retrieve, for example `ITEM,ITEM_VARIATION,CATEGORY,IMAGE`.  The legal values are taken from the CatalogObjectType enum: `ITEM`, `ITEM_VARIATION`, `CATEGORY`, `DISCOUNT`, `TAX`, `MODIFIER`, `MODIFIER_LIST`, or `IMAGE`.</param>
@@ -429,8 +429,8 @@ namespace Square.Apis
         /// is specified as a comma-separated list of valid [CatalogObject](#type-catalogobject) types:
         /// `ITEM`, `ITEM_VARIATION`, `MODIFIER`, `MODIFIER_LIST`, `CATEGORY`, `DISCOUNT`, `TAX`, `IMAGE`.
         /// __Important:__ ListCatalog does not return deleted catalog items. To retrieve
-        /// deleted catalog items, use SearchCatalogObjects and set `include_deleted_objects`
-        /// to `true`.
+        /// deleted catalog items, use [SearchCatalogObjects](#endpoint-Catalog-SearchCatalogObjects) 
+        /// and set the `include_deleted_objects` attribute value to `true`.
         /// </summary>
         /// <param name="cursor">Optional parameter: The pagination cursor returned in the previous response. Leave unset for an initial request. See [Pagination](https://developer.squareup.com/docs/basics/api101/pagination) for more information.</param>
         /// <param name="types">Optional parameter: An optional case-insensitive, comma-separated list of object types to retrieve, for example `ITEM,ITEM_VARIATION,CATEGORY,IMAGE`.  The legal values are taken from the CatalogObjectType enum: `ITEM`, `ITEM_VARIATION`, `CATEGORY`, `DISCOUNT`, `TAX`, `MODIFIER`, `MODIFIER_LIST`, or `IMAGE`.</param>

@@ -66,7 +66,7 @@ catch (ApiException e){};
 # Retrieve Cash Drawer Shift
 
 Provides the summary details for a single cash drawer shift. See
-RetrieveCashDrawerShiftEvents for a list of cash drawer shift events.
+[ListCashDrawerShiftEvents](#endpoint-CashDrawers-ListCashDrawerShiftEvents) for a list of cash drawer shift events.
 
 ```csharp
 RetrieveCashDrawerShiftAsync(string locationId, string shiftId)

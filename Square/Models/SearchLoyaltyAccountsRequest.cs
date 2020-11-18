@@ -40,7 +40,7 @@ namespace Square.Models
         /// this endpoint. Provide this to retrieve the next set of 
         /// results for the original query.
         /// For more information, 
-        /// see [Pagination](https://developer.squareup.com/docs/docs/basics/api101/pagination).
+        /// see [Pagination](https://developer.squareup.com/docs/basics/api101/pagination).
         /// </summary>
         [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
         public string Cursor { get; }

@@ -108,7 +108,7 @@ namespace Square.Apis
         /// first by location, within location by customer ID, and within 
         /// customer by subscription creation date.
         /// For more information, see 
-        /// [Retrieve subscriptions](https://developer.squareup.com/docs/docs/subscriptions-api/overview#retrieve-subscriptions).
+        /// [Retrieve subscriptions](https://developer.squareup.com/docs/subscriptions-api/overview#retrieve-subscriptions).
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.SearchSubscriptionsResponse response from the API call</return>
@@ -133,7 +133,7 @@ namespace Square.Apis
         /// first by location, within location by customer ID, and within 
         /// customer by subscription creation date.
         /// For more information, see 
-        /// [Retrieve subscriptions](https://developer.squareup.com/docs/docs/subscriptions-api/overview#retrieve-subscriptions).
+        /// [Retrieve subscriptions](https://developer.squareup.com/docs/subscriptions-api/overview#retrieve-subscriptions).
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.SearchSubscriptionsResponse response from the API call</return>
@@ -393,7 +393,7 @@ namespace Square.Apis
         /// In the current implementation, only `START_SUBSCRIPTION` and `STOP_SUBSCRIPTION` (when the subscription was canceled) events are returned.
         /// </summary>
         /// <param name="subscriptionId">Required parameter: The ID of the subscription to retrieve the events for.</param>
-        /// <param name="cursor">Optional parameter: A pagination cursor returned by a previous call to this endpoint. Provide this to retrieve the next set of results for the original query.  For more information, see [Pagination](https://developer.squareup.com/docs/docs/working-with-apis/pagination).</param>
+        /// <param name="cursor">Optional parameter: A pagination cursor returned by a previous call to this endpoint. Provide this to retrieve the next set of results for the original query.  For more information, see [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination).</param>
         /// <param name="limit">Optional parameter: The upper limit on the number of subscription events to return  in the response.   Default: `200`</param>
         /// <return>Returns the Models.ListSubscriptionEventsResponse response from the API call</return>
         public Models.ListSubscriptionEventsResponse ListSubscriptionEvents(string subscriptionId, string cursor = null, int? limit = null)
@@ -408,7 +408,7 @@ namespace Square.Apis
         /// In the current implementation, only `START_SUBSCRIPTION` and `STOP_SUBSCRIPTION` (when the subscription was canceled) events are returned.
         /// </summary>
         /// <param name="subscriptionId">Required parameter: The ID of the subscription to retrieve the events for.</param>
-        /// <param name="cursor">Optional parameter: A pagination cursor returned by a previous call to this endpoint. Provide this to retrieve the next set of results for the original query.  For more information, see [Pagination](https://developer.squareup.com/docs/docs/working-with-apis/pagination).</param>
+        /// <param name="cursor">Optional parameter: A pagination cursor returned by a previous call to this endpoint. Provide this to retrieve the next set of results for the original query.  For more information, see [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination).</param>
         /// <param name="limit">Optional parameter: The upper limit on the number of subscription events to return  in the response.   Default: `200`</param>
         /// <return>Returns the Models.ListSubscriptionEventsResponse response from the API call</return>
         public async Task<Models.ListSubscriptionEventsResponse> ListSubscriptionEventsAsync(string subscriptionId, string cursor = null, int? limit = null, CancellationToken cancellationToken = default)

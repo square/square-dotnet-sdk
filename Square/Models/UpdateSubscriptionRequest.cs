@@ -22,7 +22,7 @@ namespace Square.Models
         /// <summary>
         /// Represents a customer subscription to a subscription plan.
         /// For an overview of the `Subscription` type, see 
-        /// [Subscription object](https://developer.squareup.com/docs/docs/subscriptions-api/overview#subscription-object-overview).
+        /// [Subscription object](https://developer.squareup.com/docs/subscriptions-api/overview#subscription-object-overview).
         /// </summary>
         [JsonProperty("subscription", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Subscription Subscription { get; }

@@ -33,7 +33,7 @@ namespace Square.Models
         /// A unique string that identifies the `PublishInvoice` request. If you do not 
         /// provide `idempotency_key` (or provide an empty string as the value), the endpoint 
         /// treats each request as independent.
-        /// For more information, see [Idempotency](https://developer.squareup.com/docs/docs/working-with-apis/idempotency).
+        /// For more information, see [Idempotency](https://developer.squareup.com/docs/working-with-apis/idempotency).
         /// </summary>
         [JsonProperty("idempotency_key", NullValueHandling = NullValueHandling.Ignore)]
         public string IdempotencyKey { get; }

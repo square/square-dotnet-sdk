@@ -46,6 +46,11 @@ namespace Square
         IBankAccountsApi BankAccountsApi { get; }
 
         /// <summary>
+        /// Instance for IBookingsApi
+        /// </summary>
+        IBookingsApi BookingsApi { get; }
+
+        /// <summary>
         /// Instance for ICashDrawersApi
         /// </summary>
         ICashDrawersApi CashDrawersApi { get; }

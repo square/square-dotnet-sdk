@@ -27,7 +27,7 @@ namespace Square.Models
         /// The pagination cursor returned by a previous call to this endpoint.
         /// Use it in the next `ListBankAccounts` request to retrieve the next set 
         /// of results.
-        /// See the [Pagination](https://developer.squareup.com/docs/docs/working-with-apis/pagination) guide for more information.
+        /// See the [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination) guide for more information.
         /// </summary>
         [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
         public string Cursor { get; }

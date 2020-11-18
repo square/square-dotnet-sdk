@@ -24,19 +24,19 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// Square-issued ID of the device.
+        /// The Square-issued ID of the device.
         /// </summary>
         [JsonProperty("device_id", NullValueHandling = NullValueHandling.Ignore)]
         public string DeviceId { get; }
 
         /// <summary>
-        /// Square-issued installation ID for the device.
+        /// The Square-issued installation ID for the device.
         /// </summary>
         [JsonProperty("device_installation_id", NullValueHandling = NullValueHandling.Ignore)]
         public string DeviceInstallationId { get; }
 
         /// <summary>
-        /// The name of the device set by the merchant.
+        /// The name of the device set by the seller.
         /// </summary>
         [JsonProperty("device_name", NullValueHandling = NullValueHandling.Ignore)]
         public string DeviceName { get; }

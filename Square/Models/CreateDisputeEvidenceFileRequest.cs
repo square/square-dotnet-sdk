@@ -25,7 +25,7 @@ namespace Square.Models
 
         /// <summary>
         /// Unique ID. For more information,
-        /// see [Idempotency](https://developer.squareup.com/docs/docs/working-with-apis/idempotency).
+        /// see [Idempotency](https://developer.squareup.com/docs/working-with-apis/idempotency).
         /// </summary>
         [JsonProperty("idempotency_key")]
         public string IdempotencyKey { get; }

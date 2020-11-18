@@ -27,8 +27,10 @@ namespace Square.Models
             long? inventoryAlertThreshold = null,
             string userData = null,
             long? serviceDuration = null,
+            bool? availableForBooking = null,
             IList<Models.CatalogItemOptionValueForItemVariation> itemOptionValues = null,
-            string measurementUnitId = null)
+            string measurementUnitId = null,
+            IList<string> teamMemberIds = null)
         {
             ItemId = itemId;
             Name = name;
@@ -43,8 +45,10 @@ namespace Square.Models
             InventoryAlertThreshold = inventoryAlertThreshold;
             UserData = userData;
             ServiceDuration = serviceDuration;
+            AvailableForBooking = availableForBooking;
             ItemOptionValues = itemOptionValues;
             MeasurementUnitId = measurementUnitId;
+            TeamMemberIds = teamMemberIds;
         }
 
         /// <summary>
@@ -66,9 +70,11 @@ namespace Square.Models
         public string Sku { get; }
 
         /// <summary>
-        /// The item variation's UPC, if any. This is a searchable attribute for use in applicable query filters.
-        /// It is only accessible through the Square API, and not exposed in the Square Seller Dashboard,
-        /// Square Point of Sale or Retail Point of Sale apps.
+        /// The universal product code (UPC) of the item variation, if any. This is a searchable attribute for use in applicable query filters.
+        /// The value of this attribute should be a number of 12-14 digits long.  This restriction is enforced on the Square Seller Dashboard, 
+        /// Square Point of Sale or Retail Point of Sale apps, where this attribute shows in the GTIN field. If a non-compliant UPC value is assigned 
+        /// to this attribute using the API, the value is not editable on the Seller Dashboard, Square Point of Sale or Retail Point of Sale apps 
+        /// unless it is updated to fit the expected format.
         /// </summary>
         [JsonProperty("upc", NullValueHandling = NullValueHandling.Ignore)]
         public string Upc { get; }
@@ -140,6 +146,13 @@ namespace Square.Models
         public long? ServiceDuration { get; }
 
         /// <summary>
+        /// If the `CatalogItem` that owns this item variation is of type
+        /// `APPOINTMENTS_SERVICE`, a bool representing whether this service is available for booking.
+        /// </summary>
+        [JsonProperty("available_for_booking", NullValueHandling = NullValueHandling.Ignore)]
+        public bool? AvailableForBooking { get; }
+
+        /// <summary>
         /// List of item option values associated with this item variation. Listed
         /// in the same order as the item options of the parent item.
         /// </summary>
@@ -153,6 +166,13 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("measurement_unit_id", NullValueHandling = NullValueHandling.Ignore)]
         public string MeasurementUnitId { get; }
+
+        /// <summary>
+        /// Tokens of employees that can perform the service represented by this variation. Only valid for
+        /// variations of type `APPOINTMENTS_SERVICE`.
+        /// </summary>
+        [JsonProperty("team_member_ids", NullValueHandling = NullValueHandling.Ignore)]
+        public IList<string> TeamMemberIds { get; }
 
         public Builder ToBuilder()
         {
@@ -170,8 +190,10 @@ namespace Square.Models
                 .InventoryAlertThreshold(InventoryAlertThreshold)
                 .UserData(UserData)
                 .ServiceDuration(ServiceDuration)
+                .AvailableForBooking(AvailableForBooking)
                 .ItemOptionValues(ItemOptionValues)
-                .MeasurementUnitId(MeasurementUnitId);
+                .MeasurementUnitId(MeasurementUnitId)
+                .TeamMemberIds(TeamMemberIds);
             return builder;
         }
 
@@ -190,8 +212,10 @@ namespace Square.Models
             private long? inventoryAlertThreshold;
             private string userData;
             private long? serviceDuration;
+            private bool? availableForBooking;
             private IList<Models.CatalogItemOptionValueForItemVariation> itemOptionValues;
             private string measurementUnitId;
+            private IList<string> teamMemberIds;
 
 
 
@@ -273,6 +297,12 @@ namespace Square.Models
                 return this;
             }
 
+            public Builder AvailableForBooking(bool? availableForBooking)
+            {
+                this.availableForBooking = availableForBooking;
+                return this;
+            }
+
             public Builder ItemOptionValues(IList<Models.CatalogItemOptionValueForItemVariation> itemOptionValues)
             {
                 this.itemOptionValues = itemOptionValues;
@@ -282,6 +312,12 @@ namespace Square.Models
             public Builder MeasurementUnitId(string measurementUnitId)
             {
                 this.measurementUnitId = measurementUnitId;
+                return this;
+            }
+
+            public Builder TeamMemberIds(IList<string> teamMemberIds)
+            {
+                this.teamMemberIds = teamMemberIds;
                 return this;
             }
 
@@ -300,8 +336,10 @@ namespace Square.Models
                     inventoryAlertThreshold,
                     userData,
                     serviceDuration,
+                    availableForBooking,
                     itemOptionValues,
-                    measurementUnitId);
+                    measurementUnitId,
+                    teamMemberIds);
             }
         }
     }

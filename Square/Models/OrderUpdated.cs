@@ -39,7 +39,7 @@ namespace Square.Models
         /// Version number which is incremented each time an update is committed to the order.
         /// Orders that were not created through the API will not include a version and
         /// thus cannot be updated.
-        /// [Read more about working with versions](https://developer.squareup.com/docs/docs/orders-api/manage-orders#update-orders)
+        /// [Read more about working with versions](https://developer.squareup.com/docs/orders-api/manage-orders#update-orders)
         /// </summary>
         [JsonProperty("version", NullValueHandling = NullValueHandling.Ignore)]
         public int? Version { get; }

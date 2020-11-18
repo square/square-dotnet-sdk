@@ -23,7 +23,7 @@ namespace Square.Models
 
         /// <summary>
         /// Stores information about an invoice. You use the Invoices API to create and process
-        /// invoices. For more information, see [Manage Invoices Using the Invoices API](https://developer.squareup.com/docs/docs/invoices-api/overview).
+        /// invoices. For more information, see [Manage Invoices Using the Invoices API](https://developer.squareup.com/docs/invoices-api/overview).
         /// </summary>
         [JsonProperty("invoice")]
         public Models.Invoice Invoice { get; }
@@ -32,7 +32,7 @@ namespace Square.Models
         /// A unique string that identifies the `CreateInvoice` request. If you do not 
         /// provide `idempotency_key` (or provide an empty string as the value), the endpoint 
         /// treats each request as independent.
-        /// For more information, see [Idempotency](https://developer.squareup.com/docs/docs/working-with-apis/idempotency).
+        /// For more information, see [Idempotency](https://developer.squareup.com/docs/working-with-apis/idempotency).
         /// </summary>
         [JsonProperty("idempotency_key", NullValueHandling = NullValueHandling.Ignore)]
         public string IdempotencyKey { get; }
