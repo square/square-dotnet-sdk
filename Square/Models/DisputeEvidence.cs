@@ -44,7 +44,7 @@ namespace Square.Models
         public string UploadedAt { get; }
 
         /// <summary>
-        /// Type of the dispute evidence.
+        /// The type of the dispute evidence.
         /// </summary>
         [JsonProperty("evidence_type", NullValueHandling = NullValueHandling.Ignore)]
         public string EvidenceType { get; }

@@ -30,7 +30,8 @@ namespace Square.Models
             Models.Money grossSalesMoney = null,
             Models.Money totalTaxMoney = null,
             Models.Money totalDiscountMoney = null,
-            Models.Money totalMoney = null)
+            Models.Money totalMoney = null,
+            Models.OrderLineItemPricingBlocklists pricingBlocklists = null)
         {
             Uid = uid;
             Name = name;
@@ -49,6 +50,7 @@ namespace Square.Models
             TotalTaxMoney = totalTaxMoney;
             TotalDiscountMoney = totalDiscountMoney;
             TotalMoney = totalMoney;
+            PricingBlocklists = pricingBlocklists;
         }
 
         /// <summary>
@@ -217,6 +219,14 @@ namespace Square.Models
         [JsonProperty("total_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Money TotalMoney { get; }
 
+        /// <summary>
+        /// Describes pricing adjustments that are blocked from manual and 
+        /// automatic application to a line item. For more information, see 
+        /// [Apply Taxes and Discounts](https://developer.squareup.com/docs/orders-api/apply-taxes-and-discounts).
+        /// </summary>
+        [JsonProperty("pricing_blocklists", NullValueHandling = NullValueHandling.Ignore)]
+        public Models.OrderLineItemPricingBlocklists PricingBlocklists { get; }
+
         public Builder ToBuilder()
         {
             var builder = new Builder(Quantity)
@@ -235,7 +245,8 @@ namespace Square.Models
                 .GrossSalesMoney(GrossSalesMoney)
                 .TotalTaxMoney(TotalTaxMoney)
                 .TotalDiscountMoney(TotalDiscountMoney)
-                .TotalMoney(TotalMoney);
+                .TotalMoney(TotalMoney)
+                .PricingBlocklists(PricingBlocklists);
             return builder;
         }
 
@@ -258,6 +269,7 @@ namespace Square.Models
             private Models.Money totalTaxMoney;
             private Models.Money totalDiscountMoney;
             private Models.Money totalMoney;
+            private Models.OrderLineItemPricingBlocklists pricingBlocklists;
 
             public Builder(string quantity)
             {
@@ -366,6 +378,12 @@ namespace Square.Models
                 return this;
             }
 
+            public Builder PricingBlocklists(Models.OrderLineItemPricingBlocklists pricingBlocklists)
+            {
+                this.pricingBlocklists = pricingBlocklists;
+                return this;
+            }
+
             public OrderLineItem Build()
             {
                 return new OrderLineItem(quantity,
@@ -384,7 +402,8 @@ namespace Square.Models
                     grossSalesMoney,
                     totalTaxMoney,
                     totalDiscountMoney,
-                    totalMoney);
+                    totalMoney,
+                    pricingBlocklists);
             }
         }
     }

@@ -54,7 +54,6 @@ namespace Square.Tests
         public void TestReturnApiType()
         {
             Assert.IsInstanceOf<LocationsApi>(client.LocationsApi);
-            Assert.IsInstanceOf<V1LocationsApi>(client.V1LocationsApi);
         }
 
         [Test]
@@ -112,26 +111,6 @@ namespace Square.Tests
 
             Assert.AreEqual(errors[0].Category, "AUTHENTICATION_ERROR");
             Assert.AreEqual(errors[0].Code, "UNAUTHORIZED");
-        }
-
-        [Test]
-        public void TestV1APIException()
-        {
-            SquareClient badClient = new SquareClient.Builder()
-            .Environment(Environment.Production)
-            .AccessToken("BAD_TOKEN")
-            .Build();
-
-            var api = badClient.V1LocationsApi;
-
-            var ex = Assert.Throws<ApiException>(() => api.ListLocations());
-            Assert.AreEqual(ex.ResponseCode, 401);
-
-            var errors = ex.Errors;
-
-            Assert.AreEqual(errors[0].Category, "V1_ERROR");
-            Assert.AreEqual(errors[0].Code, "service.not_authorized");
-            Assert.AreEqual(errors[0].Detail, "Not Authorized");
         }
 
         [Test]

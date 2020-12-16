@@ -23,7 +23,6 @@ namespace Square
         private readonly AccessTokenManager accessTokenManager;
         private readonly Lazy<IMobileAuthorizationApi> mobileAuthorization;
         private readonly Lazy<IOAuthApi> oAuth;
-        private readonly Lazy<IV1LocationsApi> v1Locations;
         private readonly Lazy<IV1EmployeesApi> v1Employees;
         private readonly Lazy<IV1TransactionsApi> v1Transactions;
         private readonly Lazy<IV1ItemsApi> v1Items;
@@ -62,11 +61,6 @@ namespace Square
         /// Provides access to OAuthApi.
         /// </summary>
         public IOAuthApi OAuthApi => oAuth.Value;
-
-        /// <summary>
-        /// Provides access to V1LocationsApi.
-        /// </summary>
-        public IV1LocationsApi V1LocationsApi => v1Locations.Value;
 
         /// <summary>
         /// Provides access to V1EmployeesApi.
@@ -216,7 +210,7 @@ namespace Square
         /// <summary>
         /// Current version of the SDK.
         /// </summary>
-        public string SdkVersion => "7.0.0";
+        public string SdkVersion => "8.0.0";
 
         internal static SquareClient CreateFromEnvironment()
         {
@@ -269,8 +263,6 @@ namespace Square
                 () => new MobileAuthorizationApi(this, this.httpClient, this.authManagers, this.httpCallBack));
             oAuth = new Lazy<IOAuthApi>(
                 () => new OAuthApi(this, this.httpClient, this.authManagers, this.httpCallBack));
-            v1Locations = new Lazy<IV1LocationsApi>(
-                () => new V1LocationsApi(this, this.httpClient, this.authManagers, this.httpCallBack));
             v1Employees = new Lazy<IV1EmployeesApi>(
                 () => new V1EmployeesApi(this, this.httpClient, this.authManagers, this.httpCallBack));
             v1Transactions = new Lazy<IV1TransactionsApi>(
@@ -435,7 +427,7 @@ namespace Square
         public class Builder
         {
             private TimeSpan timeout = TimeSpan.FromSeconds(60);
-            private string squareVersion = "2020-11-18";
+            private string squareVersion = "2020-12-16";
             private Environment environment = Square.Environment.Production;
             private string accessToken = "TODO: Replace";
             private IDictionary<string, IAuthManager> authManagers = new Dictionary<string, IAuthManager>();

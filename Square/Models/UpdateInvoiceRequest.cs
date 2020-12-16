@@ -40,7 +40,7 @@ namespace Square.Models
         public string IdempotencyKey { get; }
 
         /// <summary>
-        /// List of fields to clear.
+        /// The list of fields to clear.
         /// For examples, see [Update an invoice](https://developer.squareup.com/docs/invoices-api/overview#update-an-invoice).
         /// </summary>
         [JsonProperty("fields_to_clear", NullValueHandling = NullValueHandling.Ignore)]

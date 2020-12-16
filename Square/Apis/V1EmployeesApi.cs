@@ -136,10 +136,8 @@ namespace Square.Apis
         /// of `INACTIVE`. Inactive employees cannot sign in to Square Point of Sale
         /// until they are activated from the Square Dashboard. Employee status
         /// cannot be changed with the Connect API.
-        /// <aside class="important">
         /// Employee entities cannot be deleted. To disable employee profiles,
         /// set the employee's status to <code>INACTIVE</code>
-        /// </aside>
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.V1Employee response from the API call</return>
@@ -156,10 +154,8 @@ namespace Square.Apis
         /// of `INACTIVE`. Inactive employees cannot sign in to Square Point of Sale
         /// until they are activated from the Square Dashboard. Employee status
         /// cannot be changed with the Connect API.
-        /// <aside class="important">
         /// Employee entities cannot be deleted. To disable employee profiles,
         /// set the employee's status to <code>INACTIVE</code>
-        /// </aside>
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.V1Employee response from the API call</return>
@@ -1078,11 +1074,9 @@ namespace Square.Apis
         /// <summary>
         /// Provides summary information for all events associated with a
         /// particular timecard.
-        /// <aside>
         /// Only approved accounts can manage their employees with Square.
         /// Unapproved accounts cannot use employee management features with the
         /// API.
-        /// </aside>
         /// </summary>
         /// <param name="timecardId">Required parameter: The ID of the timecard to list events for.</param>
         /// <return>Returns the List<Models.V1TimecardEvent> response from the API call</return>
@@ -1097,11 +1091,9 @@ namespace Square.Apis
         /// <summary>
         /// Provides summary information for all events associated with a
         /// particular timecard.
-        /// <aside>
         /// Only approved accounts can manage their employees with Square.
         /// Unapproved accounts cannot use employee management features with the
         /// API.
-        /// </aside>
         /// </summary>
         /// <param name="timecardId">Required parameter: The ID of the timecard to list events for.</param>
         /// <return>Returns the List<Models.V1TimecardEvent> response from the API call</return>

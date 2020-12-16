@@ -210,8 +210,7 @@ catch (ApiException e){};
 
 Deletes the specified invoice. When an invoice is deleted, the
 associated Order status changes to CANCELED. You can only delete a draft
-invoice (you cannot delete an invoice scheduled for publication, or a
-published invoice).
+invoice (you cannot delete a published invoice, including one that is scheduled for processing).
 
 ```csharp
 DeleteInvoiceAsync(string invoiceId, int? version = null)
@@ -275,10 +274,10 @@ catch (ApiException e){};
 
 # Update Invoice
 
-Updates an invoice by modifying field values, clearing field values, or both
-as specified in the request.
-There are no restrictions to updating an invoice in a draft state.
-However, there are guidelines for updating a published invoice.
+Updates an invoice by modifying fields, clearing fields, or both. For most updates, you can use a sparse
+`Invoice` object to add fields or change values, and use the `fields_to_clear` field to specify fields to clear.
+However, some restrictions apply. For example, you cannot change the `order_id` or `location_id` field, and you
+must provide the complete `custom_fields` list to update a custom field. Published invoices have additional restrictions.
 
 ```csharp
 UpdateInvoiceAsync(string invoiceId, Models.UpdateInvoiceRequest body)
@@ -288,7 +287,7 @@ UpdateInvoiceAsync(string invoiceId, Models.UpdateInvoiceRequest body)
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `invoiceId` | `string` | Template, Required | The id of the invoice to update. |
+| `invoiceId` | `string` | Template, Required | The ID of the invoice to update. |
 | `body` | [`Models.UpdateInvoiceRequest`](/doc/models/update-invoice-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
@@ -321,7 +320,7 @@ var bodyInvoicePaymentRequests0FixedAmountRequestedMoney = new Money.Builder()
     .Build();
 var bodyInvoicePaymentRequests0 = new InvoicePaymentRequest.Builder()
     .Uid("2da7964f-f3d2-4f43-81e8-5aa220bf3355")
-    .RequestMethod("EMAIL")
+    .RequestMethod("SHARE_MANUALLY")
     .RequestType("DEPOSIT")
     .DueDate("due_date2")
     .FixedAmountRequestedMoney(bodyInvoicePaymentRequests0FixedAmountRequestedMoney)

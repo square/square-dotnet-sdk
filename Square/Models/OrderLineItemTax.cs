@@ -21,7 +21,8 @@ namespace Square.Models
             string percentage = null,
             IDictionary<string, string> metadata = null,
             Models.Money appliedMoney = null,
-            string scope = null)
+            string scope = null,
+            bool? autoApplied = null)
         {
             Uid = uid;
             CatalogObjectId = catalogObjectId;
@@ -31,6 +32,7 @@ namespace Square.Models
             Metadata = metadata;
             AppliedMoney = appliedMoney;
             Scope = scope;
+            AutoApplied = autoApplied;
         }
 
         /// <summary>
@@ -100,6 +102,14 @@ namespace Square.Models
         [JsonProperty("scope", NullValueHandling = NullValueHandling.Ignore)]
         public string Scope { get; }
 
+        /// <summary>
+        /// Determines whether the tax was automatically applied to the order based on
+        /// the catalog configuration. For an example, see 
+        /// [Automatically Apply Taxes to an Order](https://developer.squareup.com/docs/orders-api/apply-taxes-and-discounts/auto-apply-taxes).
+        /// </summary>
+        [JsonProperty("auto_applied", NullValueHandling = NullValueHandling.Ignore)]
+        public bool? AutoApplied { get; }
+
         public Builder ToBuilder()
         {
             var builder = new Builder()
@@ -110,7 +120,8 @@ namespace Square.Models
                 .Percentage(Percentage)
                 .Metadata(Metadata)
                 .AppliedMoney(AppliedMoney)
-                .Scope(Scope);
+                .Scope(Scope)
+                .AutoApplied(AutoApplied);
             return builder;
         }
 
@@ -124,6 +135,7 @@ namespace Square.Models
             private IDictionary<string, string> metadata;
             private Models.Money appliedMoney;
             private string scope;
+            private bool? autoApplied;
 
 
 
@@ -175,6 +187,12 @@ namespace Square.Models
                 return this;
             }
 
+            public Builder AutoApplied(bool? autoApplied)
+            {
+                this.autoApplied = autoApplied;
+                return this;
+            }
+
             public OrderLineItemTax Build()
             {
                 return new OrderLineItemTax(uid,
@@ -184,7 +202,8 @@ namespace Square.Models
                     percentage,
                     metadata,
                     appliedMoney,
-                    scope);
+                    scope,
+                    autoApplied);
             }
         }
     }

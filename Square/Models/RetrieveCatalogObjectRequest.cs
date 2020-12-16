@@ -14,9 +14,11 @@ namespace Square.Models
 {
     public class RetrieveCatalogObjectRequest 
     {
-        public RetrieveCatalogObjectRequest(bool? includeRelatedObjects = null)
+        public RetrieveCatalogObjectRequest(bool? includeRelatedObjects = null,
+            long? catalogVersion = null)
         {
             IncludeRelatedObjects = includeRelatedObjects;
+            CatalogVersion = catalogVersion;
         }
 
         /// <summary>
@@ -32,16 +34,26 @@ namespace Square.Models
         [JsonProperty("include_related_objects", NullValueHandling = NullValueHandling.Ignore)]
         public bool? IncludeRelatedObjects { get; }
 
+        /// <summary>
+        /// Requests objects as of a specific version of the catalog. This allows you to retrieve historical
+        /// versions of objects. The value to retrieve a specific version of an object can be found
+        /// in the version field of [CatalogObject](#type-catalogobject)s.
+        /// </summary>
+        [JsonProperty("catalog_version", NullValueHandling = NullValueHandling.Ignore)]
+        public long? CatalogVersion { get; }
+
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .IncludeRelatedObjects(IncludeRelatedObjects);
+                .IncludeRelatedObjects(IncludeRelatedObjects)
+                .CatalogVersion(CatalogVersion);
             return builder;
         }
 
         public class Builder
         {
             private bool? includeRelatedObjects;
+            private long? catalogVersion;
 
 
 
@@ -51,9 +63,16 @@ namespace Square.Models
                 return this;
             }
 
+            public Builder CatalogVersion(long? catalogVersion)
+            {
+                this.catalogVersion = catalogVersion;
+                return this;
+            }
+
             public RetrieveCatalogObjectRequest Build()
             {
-                return new RetrieveCatalogObjectRequest(includeRelatedObjects);
+                return new RetrieveCatalogObjectRequest(includeRelatedObjects,
+                    catalogVersion);
             }
         }
     }

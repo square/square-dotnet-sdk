@@ -29,7 +29,8 @@ namespace Square.Models
             string status = null,
             string timezone = null,
             string createdAt = null,
-            string updatedAt = null)
+            string updatedAt = null,
+            IList<Models.InvoiceCustomField> customFields = null)
         {
             Id = id;
             Version = version;
@@ -47,6 +48,7 @@ namespace Square.Models
             Timezone = timezone;
             CreatedAt = createdAt;
             UpdatedAt = updatedAt;
+            CustomFields = customFields;
         }
 
         /// <summary>
@@ -83,12 +85,11 @@ namespace Square.Models
         public Models.InvoiceRecipient PrimaryRecipient { get; }
 
         /// <summary>
-        /// An array of `InvoicePaymentRequest` objects. Each object defines
-        /// a payment request in an invoice payment schedule. It provides information
-        /// such as when and how Square processes payments. You must specify at least one payment request. For invoices 
-        /// with multiple payment requests, you can specify a maximum of 12 `INSTALLMENT` request types. All of the payment requests must specify the
-        /// same `request_method`.
-        /// This field is required when creating an invoice.
+        /// The payment schedule for the invoice, represented by one or more payment requests that
+        /// define payment settings, such as amount due and due date. You can specify a maximum of 13
+        /// payment requests, with up to 12 `INSTALLMENT` request types. For more information, see
+        /// [Payment requests](https://developer.squareup.com/docs/invoices-api/overview#payment-requests).
+        /// This field is required when creating an invoice. It must contain at least one payment request.
         /// </summary>
         [JsonProperty("payment_requests", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.InvoicePaymentRequest> PaymentRequests { get; }
@@ -109,16 +110,16 @@ namespace Square.Models
         public string Title { get; }
 
         /// <summary>
-        /// The description of the invoice. This is visible the customer receiving the invoice.
+        /// The description of the invoice. This is visible to the customer receiving the invoice.
         /// </summary>
         [JsonProperty("description", NullValueHandling = NullValueHandling.Ignore)]
         public string Description { get; }
 
         /// <summary>
         /// The timestamp when the invoice is scheduled for processing, in RFC 3339 format.
-        /// At the specified time, depending on the `request_method`, Square sends the
-        /// invoice to the customer's email address or charge the customer's card on file.
-        /// If the field is not set, Square processes the invoice immediately after publication.
+        /// After the invoice is published, Square processes the invoice on the specified date,
+        /// based on the settings for the invoice payment requests.
+        /// If the field is not set, Square processes the invoice immediately after it is published.
         /// </summary>
         [JsonProperty("scheduled_at", NullValueHandling = NullValueHandling.Ignore)]
         public string ScheduledAt { get; }
@@ -166,6 +167,15 @@ namespace Square.Models
         [JsonProperty("updated_at", NullValueHandling = NullValueHandling.Ignore)]
         public string UpdatedAt { get; }
 
+        /// <summary>
+        /// Additional seller-defined fields to render on the invoice. These fields are visible to sellers and buyers
+        /// on the Square-hosted invoice page and in emailed or PDF copies of invoices. For more information, see
+        /// [Custom fields](https://developer.squareup.com/docs/invoices-api/overview#custom-fields).
+        /// Max: 2 custom fields
+        /// </summary>
+        [JsonProperty("custom_fields", NullValueHandling = NullValueHandling.Ignore)]
+        public IList<Models.InvoiceCustomField> CustomFields { get; }
+
         public Builder ToBuilder()
         {
             var builder = new Builder()
@@ -184,7 +194,8 @@ namespace Square.Models
                 .Status(Status)
                 .Timezone(Timezone)
                 .CreatedAt(CreatedAt)
-                .UpdatedAt(UpdatedAt);
+                .UpdatedAt(UpdatedAt)
+                .CustomFields(CustomFields);
             return builder;
         }
 
@@ -206,6 +217,7 @@ namespace Square.Models
             private string timezone;
             private string createdAt;
             private string updatedAt;
+            private IList<Models.InvoiceCustomField> customFields;
 
 
 
@@ -305,6 +317,12 @@ namespace Square.Models
                 return this;
             }
 
+            public Builder CustomFields(IList<Models.InvoiceCustomField> customFields)
+            {
+                this.customFields = customFields;
+                return this;
+            }
+
             public Invoice Build()
             {
                 return new Invoice(id,
@@ -322,7 +340,8 @@ namespace Square.Models
                     status,
                     timezone,
                     createdAt,
-                    updatedAt);
+                    updatedAt,
+                    customFields);
             }
         }
     }

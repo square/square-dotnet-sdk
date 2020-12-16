@@ -5,7 +5,7 @@ The following parameters are configurable for the API Client:
 
 | Parameter | Type | Description |
 |  --- | --- | --- |
-| `SquareVersion` | `string` | Square Connect API versions<br>*Default*: `"2020-11-18"` |
+| `SquareVersion` | `string` | Square Connect API versions<br>*Default*: `"2020-12-16"` |
 | `Environment` | `string` | The API environment. <br> **Default: `production`** |
 
 The API client can be initialized as follows:
@@ -13,7 +13,7 @@ The API client can be initialized as follows:
 ```csharp
 Square.SquareClient client = new Square.SquareClient.Builder()
     .AccessToken("AccessToken")
-    .SquareVersion(GetEnvironmentVariable("2020-11-18"))
+    .SquareVersion(GetEnvironmentVariable("2020-12-16"))
     .Environment(Environment.Production)
     .Build();
 ```
@@ -40,7 +40,7 @@ namespace Testing
         {
             SquareClient client = new SquareClient.Builder()
                 .AccessToken("AccessToken")
-                .SquareVersion(GetEnvironmentVariable("2020-11-18"))
+                .SquareVersion(GetEnvironmentVariable("2020-12-16"))
                 .Build();
             ILocationsApi locationsApi = client.LocationsApi;
             
@@ -64,7 +64,6 @@ The gateway for the SDK. This class acts as a factory for the Apis and also hold
 |  --- | --- |
 | MobileAuthorizationApi | Provides access to MobileAuthorizationApi. |
 | OAuthApi | Provides access to OAuthApi. |
-| V1LocationsApi | Provides access to V1LocationsApi. |
 | V1EmployeesApi | Provides access to V1EmployeesApi. |
 | V1TransactionsApi | Provides access to V1TransactionsApi. |
 | V1ItemsApi | Provides access to V1ItemsApi. |

@@ -25,28 +25,24 @@ namespace Square.Models
 
         /// <summary>
         /// A pagination cursor returned by a previous call to this endpoint.
-        /// Provide this to retrieve the next set of results for the original query.
-        /// For more information, see [Paginating](https://developer.squareup.com/docs/basics/api101/pagination).
+        /// Provide this cursor to retrieve the next set of results for the original query.
+        /// For more information, see [Pagination](https://developer.squareup.com/docs/basics/api101/pagination).
         /// </summary>
         [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
         public string Cursor { get; }
 
         /// <summary>
         /// The dispute states to filter the result.
-        /// If not specified, the endpoint
-        /// returns all open disputes (dispute status is not
-        /// `INQUIRY_CLOSED`, `WON`, or `LOST`).
+        /// If not specified, the endpoint returns all open disputes (the dispute status is not `INQUIRY_CLOSED`, `WON`,
+        /// or `LOST`).
         /// See [DisputeState](#type-disputestate) for possible values
         /// </summary>
         [JsonProperty("states", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> States { get; }
 
         /// <summary>
-        /// The ID of the location for which to return 
-        /// a list of disputes. If not specified,
-        /// the endpoint returns all open disputes
-        /// (dispute status is not `INQUIRY_CLOSED`, `WON`, or 
-        /// `LOST`) associated with all locations.
+        /// The ID of the location for which to return a list of disputes. If not specified, the endpoint returns
+        /// all open disputes (the dispute status is not `INQUIRY_CLOSED`, `WON`, or `LOST`) associated with all locations.
         /// </summary>
         [JsonProperty("location_id", NullValueHandling = NullValueHandling.Ignore)]
         public string LocationId { get; }

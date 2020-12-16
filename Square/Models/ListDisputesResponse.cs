@@ -28,21 +28,20 @@ namespace Square.Models
         public HttpContext Context { get; internal set; }
 
         /// <summary>
-        /// Information on errors encountered during the request.
+        /// Information about errors encountered during the request.
         /// </summary>
         [JsonProperty("errors", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.Error> Errors { get; }
 
         /// <summary>
-        /// The list of Disputes.
+        /// The list of disputes.
         /// </summary>
         [JsonProperty("disputes", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.Dispute> Disputes { get; }
 
         /// <summary>
         /// The pagination cursor to be used in a subsequent request.
-        /// If unset, this is the final response.
-        /// For more information, see [Paginating](https://developer.squareup.com/docs/basics/api101/pagination).
+        /// If unset, this is the final response. For more information, see [Pagination](https://developer.squareup.com/docs/basics/api101/pagination).
         /// </summary>
         [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
         public string Cursor { get; }
