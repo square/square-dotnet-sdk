@@ -15,10 +15,12 @@ namespace Square.Models
     public class ListCatalogRequest 
     {
         public ListCatalogRequest(string cursor = null,
-            string types = null)
+            string types = null,
+            long? catalogVersion = null)
         {
             Cursor = cursor;
             Types = types;
+            CatalogVersion = catalogVersion;
         }
 
         /// <summary>
@@ -38,11 +40,21 @@ namespace Square.Models
         [JsonProperty("types", NullValueHandling = NullValueHandling.Ignore)]
         public string Types { get; }
 
+        /// <summary>
+        /// The specific version of the catalog objects to be included in the response. 
+        /// This allows you to retrieve historical
+        /// versions of objects. The specified version value is matched against
+        /// the [CatalogObject](#type-catalogobject)s' `version` attribute.
+        /// </summary>
+        [JsonProperty("catalog_version", NullValueHandling = NullValueHandling.Ignore)]
+        public long? CatalogVersion { get; }
+
         public Builder ToBuilder()
         {
             var builder = new Builder()
                 .Cursor(Cursor)
-                .Types(Types);
+                .Types(Types)
+                .CatalogVersion(CatalogVersion);
             return builder;
         }
 
@@ -50,6 +62,7 @@ namespace Square.Models
         {
             private string cursor;
             private string types;
+            private long? catalogVersion;
 
 
 
@@ -65,10 +78,17 @@ namespace Square.Models
                 return this;
             }
 
+            public Builder CatalogVersion(long? catalogVersion)
+            {
+                this.catalogVersion = catalogVersion;
+                return this;
+            }
+
             public ListCatalogRequest Build()
             {
                 return new ListCatalogRequest(cursor,
-                    types);
+                    types,
+                    catalogVersion);
             }
         }
     }

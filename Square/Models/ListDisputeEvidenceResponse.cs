@@ -32,7 +32,7 @@ namespace Square.Models
         public IList<Models.DisputeEvidence> Evidence { get; }
 
         /// <summary>
-        /// Information on errors encountered during the request.
+        /// Information about errors encountered during the request.
         /// </summary>
         [JsonProperty("errors", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.Error> Errors { get; }

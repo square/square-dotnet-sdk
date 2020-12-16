@@ -85,8 +85,7 @@ namespace Square.Apis
         /// <summary>
         /// Deletes the specified invoice. When an invoice is deleted, the 
         /// associated Order status changes to CANCELED. You can only delete a draft 
-        /// invoice (you cannot delete an invoice scheduled for publication, or a 
-        /// published invoice).
+        /// invoice (you cannot delete a published invoice, including one that is scheduled for processing).
         /// </summary>
         /// <param name="invoiceId">Required parameter: The ID of the invoice to delete.</param>
         /// <param name="version">Optional parameter: The version of the [invoice](#type-invoice) to delete. If you do not know the version, you can call [GetInvoice](#endpoint-Invoices-GetInvoice) or  [ListInvoices](#endpoint-Invoices-ListInvoices).</param>
@@ -96,8 +95,7 @@ namespace Square.Apis
         /// <summary>
         /// Deletes the specified invoice. When an invoice is deleted, the 
         /// associated Order status changes to CANCELED. You can only delete a draft 
-        /// invoice (you cannot delete an invoice scheduled for publication, or a 
-        /// published invoice).
+        /// invoice (you cannot delete a published invoice, including one that is scheduled for processing).
         /// </summary>
         /// <param name="invoiceId">Required parameter: The ID of the invoice to delete.</param>
         /// <param name="version">Optional parameter: The version of the [invoice](#type-invoice) to delete. If you do not know the version, you can call [GetInvoice](#endpoint-Invoices-GetInvoice) or  [ListInvoices](#endpoint-Invoices-ListInvoices).</param>
@@ -119,23 +117,23 @@ namespace Square.Apis
         Task<Models.GetInvoiceResponse> GetInvoiceAsync(string invoiceId, CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Updates an invoice by modifying field values, clearing field values, or both 
-        /// as specified in the request. 
-        /// There are no restrictions to updating an invoice in a draft state. 
-        /// However, there are guidelines for updating a published invoice.
+        /// Updates an invoice by modifying fields, clearing fields, or both. For most updates, you can use a sparse 
+        /// `Invoice` object to add fields or change values, and use the `fields_to_clear` field to specify fields to clear. 
+        /// However, some restrictions apply. For example, you cannot change the `order_id` or `location_id` field, and you 
+        /// must provide the complete `custom_fields` list to update a custom field. Published invoices have additional restrictions.
         /// </summary>
-        /// <param name="invoiceId">Required parameter: The id of the invoice to update.</param>
+        /// <param name="invoiceId">Required parameter: The ID of the invoice to update.</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.UpdateInvoiceResponse response from the API call</return>
         Models.UpdateInvoiceResponse UpdateInvoice(string invoiceId, Models.UpdateInvoiceRequest body);
 
         /// <summary>
-        /// Updates an invoice by modifying field values, clearing field values, or both 
-        /// as specified in the request. 
-        /// There are no restrictions to updating an invoice in a draft state. 
-        /// However, there are guidelines for updating a published invoice.
+        /// Updates an invoice by modifying fields, clearing fields, or both. For most updates, you can use a sparse 
+        /// `Invoice` object to add fields or change values, and use the `fields_to_clear` field to specify fields to clear. 
+        /// However, some restrictions apply. For example, you cannot change the `order_id` or `location_id` field, and you 
+        /// must provide the complete `custom_fields` list to update a custom field. Published invoices have additional restrictions.
         /// </summary>
-        /// <param name="invoiceId">Required parameter: The id of the invoice to update.</param>
+        /// <param name="invoiceId">Required parameter: The ID of the invoice to update.</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.UpdateInvoiceResponse response from the API call</return>
         Task<Models.UpdateInvoiceResponse> UpdateInvoiceAsync(string invoiceId, Models.UpdateInvoiceRequest body, CancellationToken cancellationToken = default);

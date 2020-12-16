@@ -43,7 +43,7 @@ namespace Square.Models
         public string Id { get; }
 
         /// <summary>
-        /// Whether the program is currently active.
+        /// Indicates whether the program is currently active.
         /// </summary>
         [JsonProperty("status")]
         public string Status { get; }

@@ -12,9 +12,9 @@ using Square.Utilities;
 
 namespace Square.Models
 {
-    public class VersionedCatalogObject 
+    public class CatalogObjectReference 
     {
-        public VersionedCatalogObject(string objectId = null,
+        public CatalogObjectReference(string objectId = null,
             long? catalogVersion = null)
         {
             ObjectId = objectId;
@@ -60,9 +60,9 @@ namespace Square.Models
                 return this;
             }
 
-            public VersionedCatalogObject Build()
+            public CatalogObjectReference Build()
             {
-                return new VersionedCatalogObject(objectId,
+                return new CatalogObjectReference(objectId,
                     catalogVersion);
             }
         }

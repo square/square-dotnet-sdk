@@ -489,5 +489,76 @@ namespace Square.Apis
             return _responseModel;
         }
 
+        /// <summary>
+        /// Cancels an existing booking.
+        /// </summary>
+        /// <param name="bookingId">Required parameter: The ID of the [Booking](#type-booking) object representing the to-be-cancelled booking.</param>
+        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
+        /// <return>Returns the Models.CancelBookingResponse response from the API call</return>
+        public Models.CancelBookingResponse CancelBooking(string bookingId, Models.CancelBookingRequest body)
+        {
+            Task<Models.CancelBookingResponse> t = CancelBookingAsync(bookingId, body);
+            ApiHelper.RunTaskSynchronously(t);
+            return t.Result;
+        }
+
+        /// <summary>
+        /// Cancels an existing booking.
+        /// </summary>
+        /// <param name="bookingId">Required parameter: The ID of the [Booking](#type-booking) object representing the to-be-cancelled booking.</param>
+        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
+        /// <return>Returns the Models.CancelBookingResponse response from the API call</return>
+        public async Task<Models.CancelBookingResponse> CancelBookingAsync(string bookingId, Models.CancelBookingRequest body, CancellationToken cancellationToken = default)
+        {
+            //the base uri for api requests
+            string _baseUri = config.GetBaseUri();
+
+            //prepare query string for API call
+            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
+            _queryBuilder.Append("/v2/bookings/{booking_id}/cancel");
+
+            //process optional template parameters
+            ApiHelper.AppendUrlWithTemplateParameters(_queryBuilder, new Dictionary<string, object>()
+            {
+                { "booking_id", bookingId }
+            });
+
+            //append request with appropriate headers and parameters
+            var _headers = new Dictionary<string, string>()
+            {
+                { "user-agent", userAgent },
+                { "accept", "application/json" },
+                { "content-type", "application/json; charset=utf-8" },
+                { "Square-Version", config.SquareVersion }
+            };
+
+            //append body params
+            var _body = ApiHelper.JsonSerialize(body);
+
+            //prepare the API call request to fetch the response
+            HttpRequest _request = GetClientInstance().PostBody(_queryBuilder.ToString(), _headers, _body);
+            if (HttpCallBack != null)
+            {
+                HttpCallBack.OnBeforeHttpRequestEventHandler(GetClientInstance(), _request);
+            }
+
+            _request = await authManagers["global"].ApplyAsync(_request).ConfigureAwait(false);
+
+            //invoke request and get response
+            HttpStringResponse _response = await GetClientInstance().ExecuteAsStringAsync(_request, cancellationToken).ConfigureAwait(false);
+            HttpContext _context = new HttpContext(_request, _response);
+            if (HttpCallBack != null)
+            {
+                HttpCallBack.OnAfterHttpResponseEventHandler(GetClientInstance(), _response);
+            }
+
+            //handle errors defined at the API level
+            base.ValidateResponse(_response, _context);
+
+            var _responseModel = ApiHelper.JsonDeserialize<Models.CancelBookingResponse>(_response.Body);
+            _responseModel.Context = _context;
+            return _responseModel;
+        }
+
     }
 }

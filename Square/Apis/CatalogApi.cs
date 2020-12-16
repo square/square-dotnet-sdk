@@ -414,10 +414,11 @@ namespace Square.Apis
         /// </summary>
         /// <param name="cursor">Optional parameter: The pagination cursor returned in the previous response. Leave unset for an initial request. See [Pagination](https://developer.squareup.com/docs/basics/api101/pagination) for more information.</param>
         /// <param name="types">Optional parameter: An optional case-insensitive, comma-separated list of object types to retrieve, for example `ITEM,ITEM_VARIATION,CATEGORY,IMAGE`.  The legal values are taken from the CatalogObjectType enum: `ITEM`, `ITEM_VARIATION`, `CATEGORY`, `DISCOUNT`, `TAX`, `MODIFIER`, `MODIFIER_LIST`, or `IMAGE`.</param>
+        /// <param name="catalogVersion">Optional parameter: The specific version of the catalog objects to be included in the response.  This allows you to retrieve historical versions of objects. The specified version value is matched against the [CatalogObject](#type-catalogobject)s' `version` attribute.</param>
         /// <return>Returns the Models.ListCatalogResponse response from the API call</return>
-        public Models.ListCatalogResponse ListCatalog(string cursor = null, string types = null)
+        public Models.ListCatalogResponse ListCatalog(string cursor = null, string types = null, long? catalogVersion = null)
         {
-            Task<Models.ListCatalogResponse> t = ListCatalogAsync(cursor, types);
+            Task<Models.ListCatalogResponse> t = ListCatalogAsync(cursor, types, catalogVersion);
             ApiHelper.RunTaskSynchronously(t);
             return t.Result;
         }
@@ -434,8 +435,9 @@ namespace Square.Apis
         /// </summary>
         /// <param name="cursor">Optional parameter: The pagination cursor returned in the previous response. Leave unset for an initial request. See [Pagination](https://developer.squareup.com/docs/basics/api101/pagination) for more information.</param>
         /// <param name="types">Optional parameter: An optional case-insensitive, comma-separated list of object types to retrieve, for example `ITEM,ITEM_VARIATION,CATEGORY,IMAGE`.  The legal values are taken from the CatalogObjectType enum: `ITEM`, `ITEM_VARIATION`, `CATEGORY`, `DISCOUNT`, `TAX`, `MODIFIER`, `MODIFIER_LIST`, or `IMAGE`.</param>
+        /// <param name="catalogVersion">Optional parameter: The specific version of the catalog objects to be included in the response.  This allows you to retrieve historical versions of objects. The specified version value is matched against the [CatalogObject](#type-catalogobject)s' `version` attribute.</param>
         /// <return>Returns the Models.ListCatalogResponse response from the API call</return>
-        public async Task<Models.ListCatalogResponse> ListCatalogAsync(string cursor = null, string types = null, CancellationToken cancellationToken = default)
+        public async Task<Models.ListCatalogResponse> ListCatalogAsync(string cursor = null, string types = null, long? catalogVersion = null, CancellationToken cancellationToken = default)
         {
             //the base uri for api requests
             string _baseUri = config.GetBaseUri();
@@ -448,7 +450,8 @@ namespace Square.Apis
             var _queryParameters = new Dictionary<string, object>()
             {
                 { "cursor", cursor },
-                { "types", types }
+                { "types", types },
+                { "catalog_version", catalogVersion }
             };
 
             //append request with appropriate headers and parameters
@@ -633,10 +636,11 @@ namespace Square.Apis
         /// </summary>
         /// <param name="objectId">Required parameter: The object ID of any type of catalog objects to be retrieved.</param>
         /// <param name="includeRelatedObjects">Optional parameter: If `true`, the response will include additional objects that are related to the requested object, as follows:  If the `object` field of the response contains a `CatalogItem`, its associated `CatalogCategory`, `CatalogTax`, `CatalogImage` and `CatalogModifierList` objects will be returned in the `related_objects` field of the response. If the `object` field of the response contains a `CatalogItemVariation`, its parent `CatalogItem` will be returned in the `related_objects` field of the response.  Default value: `false`</param>
+        /// <param name="catalogVersion">Optional parameter: Requests objects as of a specific version of the catalog. This allows you to retrieve historical versions of objects. The value to retrieve a specific version of an object can be found in the version field of [CatalogObject](#type-catalogobject)s.</param>
         /// <return>Returns the Models.RetrieveCatalogObjectResponse response from the API call</return>
-        public Models.RetrieveCatalogObjectResponse RetrieveCatalogObject(string objectId, bool? includeRelatedObjects = false)
+        public Models.RetrieveCatalogObjectResponse RetrieveCatalogObject(string objectId, bool? includeRelatedObjects = false, long? catalogVersion = null)
         {
-            Task<Models.RetrieveCatalogObjectResponse> t = RetrieveCatalogObjectAsync(objectId, includeRelatedObjects);
+            Task<Models.RetrieveCatalogObjectResponse> t = RetrieveCatalogObjectAsync(objectId, includeRelatedObjects, catalogVersion);
             ApiHelper.RunTaskSynchronously(t);
             return t.Result;
         }
@@ -652,8 +656,9 @@ namespace Square.Apis
         /// </summary>
         /// <param name="objectId">Required parameter: The object ID of any type of catalog objects to be retrieved.</param>
         /// <param name="includeRelatedObjects">Optional parameter: If `true`, the response will include additional objects that are related to the requested object, as follows:  If the `object` field of the response contains a `CatalogItem`, its associated `CatalogCategory`, `CatalogTax`, `CatalogImage` and `CatalogModifierList` objects will be returned in the `related_objects` field of the response. If the `object` field of the response contains a `CatalogItemVariation`, its parent `CatalogItem` will be returned in the `related_objects` field of the response.  Default value: `false`</param>
+        /// <param name="catalogVersion">Optional parameter: Requests objects as of a specific version of the catalog. This allows you to retrieve historical versions of objects. The value to retrieve a specific version of an object can be found in the version field of [CatalogObject](#type-catalogobject)s.</param>
         /// <return>Returns the Models.RetrieveCatalogObjectResponse response from the API call</return>
-        public async Task<Models.RetrieveCatalogObjectResponse> RetrieveCatalogObjectAsync(string objectId, bool? includeRelatedObjects = false, CancellationToken cancellationToken = default)
+        public async Task<Models.RetrieveCatalogObjectResponse> RetrieveCatalogObjectAsync(string objectId, bool? includeRelatedObjects = false, long? catalogVersion = null, CancellationToken cancellationToken = default)
         {
             //the base uri for api requests
             string _baseUri = config.GetBaseUri();
@@ -671,7 +676,8 @@ namespace Square.Apis
             //prepare specfied query parameters
             var _queryParameters = new Dictionary<string, object>()
             {
-                { "include_related_objects", (null != includeRelatedObjects) ? includeRelatedObjects : false }
+                { "include_related_objects", (null != includeRelatedObjects) ? includeRelatedObjects : false },
+                { "catalog_version", catalogVersion }
             };
 
             //append request with appropriate headers and parameters

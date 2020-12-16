@@ -102,6 +102,7 @@ bodyObjectIds.Add("AA27W3M2GGTF3H6AVPNB77CK");
 var body = new BatchRetrieveCatalogObjectsRequest.Builder(
         bodyObjectIds)
     .IncludeRelatedObjects(true)
+    .CatalogVersion(118L)
     .Build();
 
 try
@@ -527,7 +528,7 @@ deleted catalog items, use [SearchCatalogObjects](#endpoint-Catalog-SearchCatalo
 and set the `include_deleted_objects` attribute value to `true`.
 
 ```csharp
-ListCatalogAsync(string cursor = null, string types = null)
+ListCatalogAsync(string cursor = null, string types = null, long? catalogVersion = null)
 ```
 
 ## Parameters
@@ -536,6 +537,7 @@ ListCatalogAsync(string cursor = null, string types = null)
 |  --- | --- | --- | --- |
 | `cursor` | `string` | Query, Optional | The pagination cursor returned in the previous response. Leave unset for an initial request.<br>See [Pagination](https://developer.squareup.com/docs/basics/api101/pagination) for more information. |
 | `types` | `string` | Query, Optional | An optional case-insensitive, comma-separated list of object types to retrieve, for example<br>`ITEM,ITEM_VARIATION,CATEGORY,IMAGE`.<br><br>The legal values are taken from the CatalogObjectType enum:<br>`ITEM`, `ITEM_VARIATION`, `CATEGORY`, `DISCOUNT`, `TAX`,<br>`MODIFIER`, `MODIFIER_LIST`, or `IMAGE`. |
+| `catalogVersion` | `long?` | Query, Optional | The specific version of the catalog objects to be included in the response.<br>This allows you to retrieve historical<br>versions of objects. The specified version value is matched against<br>the [CatalogObject](#type-catalogobject)s' `version` attribute. |
 
 ## Response Type
 
@@ -546,10 +548,11 @@ ListCatalogAsync(string cursor = null, string types = null)
 ```csharp
 string cursor = "cursor6";
 string types = "types6";
+long? catalogVersion = 126L;
 
 try
 {
-    ListCatalogResponse result = await catalogApi.ListCatalogAsync(cursor, types);
+    ListCatalogResponse result = await catalogApi.ListCatalogAsync(cursor, types, catalogVersion);
 }
 catch (ApiException e){};
 ```
@@ -675,7 +678,7 @@ children, references to its
 any [CatalogTax](#type-catalogtax) objects that apply to it.
 
 ```csharp
-RetrieveCatalogObjectAsync(string objectId, bool? includeRelatedObjects = false)
+RetrieveCatalogObjectAsync(string objectId, bool? includeRelatedObjects = false, long? catalogVersion = null)
 ```
 
 ## Parameters
@@ -684,6 +687,7 @@ RetrieveCatalogObjectAsync(string objectId, bool? includeRelatedObjects = false)
 |  --- | --- | --- | --- |
 | `objectId` | `string` | Template, Required | The object ID of any type of catalog objects to be retrieved. |
 | `includeRelatedObjects` | `bool?` | Query, Optional | If `true`, the response will include additional objects that are related to the<br>requested object, as follows:<br><br>If the `object` field of the response contains a `CatalogItem`, its associated<br>`CatalogCategory`, `CatalogTax`, `CatalogImage` and `CatalogModifierList` objects will<br>be returned in the `related_objects` field of the response. If the `object` field of<br>the response contains a `CatalogItemVariation`, its parent `CatalogItem` will be returned<br>in the `related_objects` field of the response.<br><br>Default value: `false` |
+| `catalogVersion` | `long?` | Query, Optional | Requests objects as of a specific version of the catalog. This allows you to retrieve historical<br>versions of objects. The value to retrieve a specific version of an object can be found<br>in the version field of [CatalogObject](#type-catalogobject)s. |
 
 ## Response Type
 
@@ -694,10 +698,11 @@ RetrieveCatalogObjectAsync(string objectId, bool? includeRelatedObjects = false)
 ```csharp
 string objectId = "object_id8";
 bool? includeRelatedObjects = false;
+long? catalogVersion = 126L;
 
 try
 {
-    RetrieveCatalogObjectResponse result = await catalogApi.RetrieveCatalogObjectAsync(objectId, includeRelatedObjects);
+    RetrieveCatalogObjectResponse result = await catalogApi.RetrieveCatalogObjectAsync(objectId, includeRelatedObjects, catalogVersion);
 }
 catch (ApiException e){};
 ```

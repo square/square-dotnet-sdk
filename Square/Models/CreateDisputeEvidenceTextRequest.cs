@@ -24,14 +24,13 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// Unique ID. For more information,
-        /// see [Idempotency](https://developer.squareup.com/docs/working-with-apis/idempotency).
+        /// The Unique ID. For more information, see [Idempotency](https://developer.squareup.com/docs/working-with-apis/idempotency).
         /// </summary>
         [JsonProperty("idempotency_key")]
         public string IdempotencyKey { get; }
 
         /// <summary>
-        /// Type of the dispute evidence.
+        /// The type of the dispute evidence.
         /// </summary>
         [JsonProperty("evidence_type", NullValueHandling = NullValueHandling.Ignore)]
         public string EvidenceType { get; }

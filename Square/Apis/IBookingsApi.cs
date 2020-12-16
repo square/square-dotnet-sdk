@@ -128,5 +128,21 @@ namespace Square.Apis
         /// <return>Returns the Models.UpdateBookingResponse response from the API call</return>
         Task<Models.UpdateBookingResponse> UpdateBookingAsync(string bookingId, Models.UpdateBookingRequest body, CancellationToken cancellationToken = default);
 
+        /// <summary>
+        /// Cancels an existing booking.
+        /// </summary>
+        /// <param name="bookingId">Required parameter: The ID of the [Booking](#type-booking) object representing the to-be-cancelled booking.</param>
+        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
+        /// <return>Returns the Models.CancelBookingResponse response from the API call</return>
+        Models.CancelBookingResponse CancelBooking(string bookingId, Models.CancelBookingRequest body);
+
+        /// <summary>
+        /// Cancels an existing booking.
+        /// </summary>
+        /// <param name="bookingId">Required parameter: The ID of the [Booking](#type-booking) object representing the to-be-cancelled booking.</param>
+        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
+        /// <return>Returns the Models.CancelBookingResponse response from the API call</return>
+        Task<Models.CancelBookingResponse> CancelBookingAsync(string bookingId, Models.CancelBookingRequest body, CancellationToken cancellationToken = default);
+
     }
 }

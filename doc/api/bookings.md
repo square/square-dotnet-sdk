@@ -17,6 +17,7 @@ IBookingsApi bookingsApi = client.BookingsApi;
 * [Retrieve Team Member Booking Profile](/doc/api/bookings.md#retrieve-team-member-booking-profile)
 * [Retrieve Booking](/doc/api/bookings.md#retrieve-booking)
 * [Update Booking](/doc/api/bookings.md#update-booking)
+* [Cancel Booking](/doc/api/bookings.md#cancel-booking)
 
 
 # Create Booking
@@ -312,6 +313,42 @@ var body = new UpdateBookingRequest.Builder(
 try
 {
     UpdateBookingResponse result = await bookingsApi.UpdateBookingAsync(bookingId, body);
+}
+catch (ApiException e){};
+```
+
+
+# Cancel Booking
+
+Cancels an existing booking.
+
+```csharp
+CancelBookingAsync(string bookingId, Models.CancelBookingRequest body)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `bookingId` | `string` | Template, Required | The ID of the [Booking](#type-booking) object representing the to-be-cancelled booking. |
+| `body` | [`Models.CancelBookingRequest`](/doc/models/cancel-booking-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+
+## Response Type
+
+[`Task<Models.CancelBookingResponse>`](/doc/models/cancel-booking-response.md)
+
+## Example Usage
+
+```csharp
+string bookingId = "booking_id4";
+var body = new CancelBookingRequest.Builder()
+    .IdempotencyKey("idempotency_key2")
+    .BookingVersion(8)
+    .Build();
+
+try
+{
+    CancelBookingResponse result = await bookingsApi.CancelBookingAsync(bookingId, body);
 }
 catch (ApiException e){};
 ```

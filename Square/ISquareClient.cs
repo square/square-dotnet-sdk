@@ -16,11 +16,6 @@ namespace Square
         IOAuthApi OAuthApi { get; }
 
         /// <summary>
-        /// Instance for IV1LocationsApi
-        /// </summary>
-        IV1LocationsApi V1LocationsApi { get; }
-
-        /// <summary>
         /// Instance for IV1EmployeesApi
         /// </summary>
         IV1EmployeesApi V1EmployeesApi { get; }
