@@ -919,11 +919,9 @@ namespace Square.Apis
 
         /// <summary>
         /// Provides the details for a single timecard.
-        /// <aside>
         /// Only approved accounts can manage their employees with Square.
         /// Unapproved accounts cannot use employee management features with the
         /// API.
-        /// </aside>
         /// </summary>
         /// <param name="timecardId">Required parameter: The timecard's ID.</param>
         /// <return>Returns the Models.V1Timecard response from the API call</return>
@@ -937,11 +935,9 @@ namespace Square.Apis
 
         /// <summary>
         /// Provides the details for a single timecard.
-        /// <aside>
         /// Only approved accounts can manage their employees with Square.
         /// Unapproved accounts cannot use employee management features with the
         /// API.
-        /// </aside>
         /// </summary>
         /// <param name="timecardId">Required parameter: The timecard's ID.</param>
         /// <return>Returns the Models.V1Timecard response from the API call</return>

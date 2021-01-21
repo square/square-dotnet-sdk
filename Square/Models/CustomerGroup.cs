@@ -44,7 +44,7 @@ namespace Square.Models
         public string CreatedAt { get; }
 
         /// <summary>
-        /// The timesamp when the customer group was last updated, in RFC 3339 format.
+        /// The timestamp when the customer group was last updated, in RFC 3339 format.
         /// </summary>
         [JsonProperty("updated_at", NullValueHandling = NullValueHandling.Ignore)]
         public string UpdatedAt { get; }

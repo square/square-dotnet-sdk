@@ -231,6 +231,8 @@ catch (ApiException e){};
 
 # List Employee Wages
 
+**This endpoint is deprecated. **
+
 Returns a paginated list of `EmployeeWage` instances for a business.
 
 ```csharp
@@ -265,6 +267,8 @@ catch (ApiException e){};
 
 
 # Get Employee Wage
+
+**This endpoint is deprecated. **
 
 Returns a single `EmployeeWage` specified by id.
 

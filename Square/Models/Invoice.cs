@@ -20,6 +20,7 @@ namespace Square.Models
             string orderId = null,
             Models.InvoiceRecipient primaryRecipient = null,
             IList<Models.InvoicePaymentRequest> paymentRequests = null,
+            string deliveryMethod = null,
             string invoiceNumber = null,
             string title = null,
             string description = null,
@@ -38,6 +39,7 @@ namespace Square.Models
             OrderId = orderId;
             PrimaryRecipient = primaryRecipient;
             PaymentRequests = paymentRequests;
+            DeliveryMethod = deliveryMethod;
             InvoiceNumber = invoiceNumber;
             Title = title;
             Description = description;
@@ -95,6 +97,12 @@ namespace Square.Models
         public IList<Models.InvoicePaymentRequest> PaymentRequests { get; }
 
         /// <summary>
+        /// Indicates how Square delivers the [invoice](#type-Invoice) to the customer.
+        /// </summary>
+        [JsonProperty("delivery_method", NullValueHandling = NullValueHandling.Ignore)]
+        public string DeliveryMethod { get; }
+
+        /// <summary>
         /// A user-friendly invoice number. The value is unique within a location.
         /// If not provided when creating an invoice, Square assigns a value.
         /// It increments from 1 and padded with zeros making it 7 characters long
@@ -117,8 +125,7 @@ namespace Square.Models
 
         /// <summary>
         /// The timestamp when the invoice is scheduled for processing, in RFC 3339 format.
-        /// After the invoice is published, Square processes the invoice on the specified date,
-        /// based on the settings for the invoice payment requests.
+        /// After the invoice is published, Square processes the invoice on the specified date, according to the delivery method and payment request settings.
         /// If the field is not set, Square processes the invoice immediately after it is published.
         /// </summary>
         [JsonProperty("scheduled_at", NullValueHandling = NullValueHandling.Ignore)]
@@ -185,6 +192,7 @@ namespace Square.Models
                 .OrderId(OrderId)
                 .PrimaryRecipient(PrimaryRecipient)
                 .PaymentRequests(PaymentRequests)
+                .DeliveryMethod(DeliveryMethod)
                 .InvoiceNumber(InvoiceNumber)
                 .Title(Title)
                 .Description(Description)
@@ -207,6 +215,7 @@ namespace Square.Models
             private string orderId;
             private Models.InvoiceRecipient primaryRecipient;
             private IList<Models.InvoicePaymentRequest> paymentRequests;
+            private string deliveryMethod;
             private string invoiceNumber;
             private string title;
             private string description;
@@ -254,6 +263,12 @@ namespace Square.Models
             public Builder PaymentRequests(IList<Models.InvoicePaymentRequest> paymentRequests)
             {
                 this.paymentRequests = paymentRequests;
+                return this;
+            }
+
+            public Builder DeliveryMethod(string deliveryMethod)
+            {
+                this.deliveryMethod = deliveryMethod;
                 return this;
             }
 
@@ -331,6 +346,7 @@ namespace Square.Models
                     orderId,
                     primaryRecipient,
                     paymentRequests,
+                    deliveryMethod,
                     invoiceNumber,
                     title,
                     description,

@@ -14,10 +14,10 @@ the Customers API or within Customer Directory in the Square Dashboard or Point 
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `Id` | `string` | Optional | Unique Square-generated ID for the customer group. |
+| `Id` | `string` | Optional | Unique Square-generated ID for the customer group.<br>**Constraints**: *Maximum Length*: `255` |
 | `Name` | `string` |  | Name of the customer group. |
 | `CreatedAt` | `string` | Optional | The timestamp when the customer group was created, in RFC 3339 format. |
-| `UpdatedAt` | `string` | Optional | The timesamp when the customer group was last updated, in RFC 3339 format. |
+| `UpdatedAt` | `string` | Optional | The timestamp when the customer group was last updated, in RFC 3339 format. |
 
 ## Example (as JSON)
 

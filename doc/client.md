@@ -5,15 +5,17 @@ The following parameters are configurable for the API Client:
 
 | Parameter | Type | Description |
 |  --- | --- | --- |
-| `SquareVersion` | `string` | Square Connect API versions<br>*Default*: `"2020-12-16"` |
+| `SquareVersion` | `string` | Square Connect API versions<br>*Default*: `"2021-01-21"` |
 | `Environment` | `string` | The API environment. <br> **Default: `production`** |
+| `Timeout` | `TimeSpan` | Http client timeout<br>*Default*: `TimeSpan.FromSeconds(60)` |
+| `AccessToken` | `string` | The OAuth 2.0 Access Token to use for API requests. |
 
 The API client can be initialized as follows:
 
 ```csharp
 Square.SquareClient client = new Square.SquareClient.Builder()
     .AccessToken("AccessToken")
-    .SquareVersion(GetEnvironmentVariable("2020-12-16"))
+    .SquareVersion(GetEnvironmentVariable("2021-01-21"))
     .Environment(Environment.Production)
     .Build();
 ```
@@ -40,7 +42,7 @@ namespace Testing
         {
             SquareClient client = new SquareClient.Builder()
                 .AccessToken("AccessToken")
-                .SquareVersion(GetEnvironmentVariable("2020-12-16"))
+                .SquareVersion(GetEnvironmentVariable("2021-01-21"))
                 .Build();
             ILocationsApi locationsApi = client.LocationsApi;
             

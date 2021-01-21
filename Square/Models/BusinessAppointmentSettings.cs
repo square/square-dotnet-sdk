@@ -45,7 +45,7 @@ namespace Square.Models
 
         /// <summary>
         /// Types of the location allowed for bookings.
-        /// See [BookingLocationType](#type-bookinglocationtype) for possible values
+        /// See [BusinessAppointmentSettingsBookingLocationType](#type-businessappointmentsettingsbookinglocationtype) for possible values
         /// </summary>
         [JsonProperty("location_types", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> LocationTypes { get; }

@@ -90,7 +90,7 @@ namespace Square.Models
         public IList<Models.ProcessingFee> ProcessingFee { get; }
 
         /// <summary>
-        /// The ID of the payment assocated with this refund.
+        /// The ID of the payment associated with this refund.
         /// </summary>
         [JsonProperty("payment_id", NullValueHandling = NullValueHandling.Ignore)]
         public string PaymentId { get; }

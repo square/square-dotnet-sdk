@@ -22,7 +22,7 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// The timestamp when payment risk was evaluated, in RFC3339 format.
+        /// The timestamp when payment risk was evaluated, in RFC 3339 format.
         /// </summary>
         [JsonProperty("created_at", NullValueHandling = NullValueHandling.Ignore)]
         public string CreatedAt { get; }

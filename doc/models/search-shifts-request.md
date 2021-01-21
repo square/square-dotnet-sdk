@@ -12,7 +12,7 @@ A request for a filtered and sorted set of `Shift` objects.
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `Query` | [`Models.ShiftQuery`](/doc/models/shift-query.md) | Optional | The parameters of a `Shift` search query. Includes filter and sort options. |
-| `Limit` | `int?` | Optional | number of resources in a page (200 by default). |
+| `Limit` | `int?` | Optional | number of resources in a page (200 by default).<br>**Constraints**: `>= 1`, `<= 200` |
 | `Cursor` | `string` | Optional | opaque cursor for fetching the next page. |
 
 ## Example (as JSON)

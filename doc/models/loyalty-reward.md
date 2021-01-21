@@ -9,11 +9,11 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `Id` | `string` | Optional | The Square-assigned ID of the loyalty reward. |
+| `Id` | `string` | Optional | The Square-assigned ID of the loyalty reward.<br>**Constraints**: *Maximum Length*: `36` |
 | `Status` | [`string`](/doc/models/loyalty-reward-status.md) | Optional | The status of the loyalty reward. |
-| `LoyaltyAccountId` | `string` |  | The Square-assigned ID of the [loyalty account](#type-LoyaltyAccount) to which the reward belongs. |
-| `RewardTierId` | `string` |  | The Square-assigned ID of the [reward tier](#type-LoyaltyProgramRewardTier) used to create the reward. |
-| `Points` | `int?` | Optional | The number of loyalty points used for the reward. |
+| `LoyaltyAccountId` | `string` |  | The Square-assigned ID of the [loyalty account](#type-LoyaltyAccount) to which the reward belongs.<br>**Constraints**: *Minimum Length*: `1`, *Maximum Length*: `36` |
+| `RewardTierId` | `string` |  | The Square-assigned ID of the [reward tier](#type-LoyaltyProgramRewardTier) used to create the reward.<br>**Constraints**: *Minimum Length*: `1`, *Maximum Length*: `36` |
+| `Points` | `int?` | Optional | The number of loyalty points used for the reward.<br>**Constraints**: `>= 1` |
 | `OrderId` | `string` | Optional | The Square-assigned ID of the [order](#type-Order) to which the reward is attached. |
 | `CreatedAt` | `string` | Optional | The timestamp when the reward was created, in RFC 3339 format. |
 | `UpdatedAt` | `string` | Optional | The timestamp when the reward was last updated, in RFC 3339 format. |

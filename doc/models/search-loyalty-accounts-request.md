@@ -12,7 +12,7 @@ A request to search for loyalty accounts.
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `Query` | [`Models.SearchLoyaltyAccountsRequestLoyaltyAccountQuery`](/doc/models/search-loyalty-accounts-request-loyalty-account-query.md) | Optional | The search criteria for the loyalty accounts. |
-| `Limit` | `int?` | Optional | The maximum number of results to include in the response. |
+| `Limit` | `int?` | Optional | The maximum number of results to include in the response.<br>**Constraints**: `>= 1`, `<= 30` |
 | `Cursor` | `string` | Optional | A pagination cursor returned by a previous call to<br>this endpoint. Provide this to retrieve the next set of<br>results for the original query.<br><br>For more information,<br>see [Pagination](https://developer.squareup.com/docs/basics/api101/pagination). |
 
 ## Example (as JSON)

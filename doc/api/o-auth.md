@@ -17,6 +17,8 @@ IOAuthApi oAuthApi = client.OAuthApi;
 
 # Renew Token
 
+**This endpoint is deprecated. **
+
 `RenewToken` is deprecated. For information about refreshing OAuth access tokens, see
 [Renew OAuth Token](https://developer.squareup.com/docs/oauth-api/cookbook/renew-oauth-tokens).
 

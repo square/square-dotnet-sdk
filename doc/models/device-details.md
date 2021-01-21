@@ -11,9 +11,9 @@ Details about the device that took the payment.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `DeviceId` | `string` | Optional | The Square-issued ID of the device. |
-| `DeviceInstallationId` | `string` | Optional | The Square-issued installation ID for the device. |
-| `DeviceName` | `string` | Optional | The name of the device set by the seller. |
+| `DeviceId` | `string` | Optional | The Square-issued ID of the device.<br>**Constraints**: *Maximum Length*: `255` |
+| `DeviceInstallationId` | `string` | Optional | The Square-issued installation ID for the device.<br>**Constraints**: *Maximum Length*: `255` |
+| `DeviceName` | `string` | Optional | The name of the device set by the seller.<br>**Constraints**: *Maximum Length*: `255` |
 
 ## Example (as JSON)
 

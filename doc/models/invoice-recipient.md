@@ -11,7 +11,7 @@ Provides customer data that Square uses to deliver an invoice.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `CustomerId` | `string` | Optional | The ID of the customer. This is the customer profile ID that<br>you provide when creating a draft invoice. |
+| `CustomerId` | `string` | Optional | The ID of the customer. This is the customer profile ID that<br>you provide when creating a draft invoice.<br>**Constraints**: *Minimum Length*: `1`, *Maximum Length*: `255` |
 | `GivenName` | `string` | Optional | The recipient's given (that is, first) name. |
 | `FamilyName` | `string` | Optional | The recipient's family (that is, last) name. |
 | `EmailAddress` | `string` | Optional | The recipient's email address. |

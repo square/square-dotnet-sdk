@@ -9,7 +9,7 @@
 
 | Name | Type | Description |
 |  --- | --- | --- |
-| `IdempotencyKey` | `string` | A unique string that identifies this `CreateCheckout` request. Keys can be any valid string but<br>must be unique for every `CreateCheckout` request.<br><br>See [Idempotency keys](https://developer.squareup.com/docs/basics/api101/idempotency) for more information. |
+| `IdempotencyKey` | `string` | A unique string that identifies this `CreateCheckout` request. Keys can be any valid string but<br>must be unique for every `CreateCheckout` request.<br><br>See [Idempotency keys](https://developer.squareup.com/docs/basics/api101/idempotency) for more information.<br>**Constraints**: *Minimum Length*: `1`, *Maximum Length*: `64` |
 | `Checkout` | [`Models.TerminalCheckout`](/doc/models/terminal-checkout.md) | - |
 
 ## Example (as JSON)
