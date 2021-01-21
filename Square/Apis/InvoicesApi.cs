@@ -462,7 +462,7 @@ namespace Square.Apis
         /// <summary>
         /// Cancels an invoice. The seller cannot collect payments for 
         /// the canceled invoice.
-        /// You cannot cancel an invoice in a terminal state: `PAID`, `REFUNDED`, `CANCELED`, or `FAILED`.
+        /// You cannot cancel an invoice in the `DRAFT` state or in a terminal state: `PAID`, `REFUNDED`, `CANCELED`, or `FAILED`.
         /// </summary>
         /// <param name="invoiceId">Required parameter: The ID of the [invoice](#type-invoice) to cancel.</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
@@ -477,7 +477,7 @@ namespace Square.Apis
         /// <summary>
         /// Cancels an invoice. The seller cannot collect payments for 
         /// the canceled invoice.
-        /// You cannot cancel an invoice in a terminal state: `PAID`, `REFUNDED`, `CANCELED`, or `FAILED`.
+        /// You cannot cancel an invoice in the `DRAFT` state or in a terminal state: `PAID`, `REFUNDED`, `CANCELED`, or `FAILED`.
         /// </summary>
         /// <param name="invoiceId">Required parameter: The ID of the [invoice](#type-invoice) to cancel.</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>

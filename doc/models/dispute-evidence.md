@@ -9,9 +9,9 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `EvidenceId` | `string` | Optional | The Square-generated ID of the evidence. |
-| `DisputeId` | `string` | Optional | The ID of the dispute the evidence is associated with. |
-| `UploadedAt` | `string` | Optional | The time when the next action is due, in RFC 3339 format. |
+| `EvidenceId` | `string` | Optional | The Square-generated ID of the evidence.<br>**Constraints**: *Minimum Length*: `1`, *Maximum Length*: `40` |
+| `DisputeId` | `string` | Optional | The ID of the dispute the evidence is associated with.<br>**Constraints**: *Minimum Length*: `1`, *Maximum Length*: `40` |
+| `UploadedAt` | `string` | Optional | The time when the next action is due, in RFC 3339 format.<br>**Constraints**: *Minimum Length*: `1`, *Maximum Length*: `40` |
 | `EvidenceType` | [`string`](/doc/models/dispute-evidence-type.md) | Optional | The type of the dispute evidence. |
 
 ## Example (as JSON)

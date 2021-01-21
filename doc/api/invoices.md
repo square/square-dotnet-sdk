@@ -115,11 +115,12 @@ bodyInvoicePaymentRequests0Reminders.Add(bodyInvoicePaymentRequests0Reminders0);
 
 var bodyInvoicePaymentRequests0 = new InvoicePaymentRequest.Builder()
     .Uid("uid4")
-    .RequestMethod("EMAIL")
+    .RequestMethod("SHARE_MANUALLY")
     .RequestType("BALANCE")
     .DueDate("2030-01-24")
     .FixedAmountRequestedMoney(bodyInvoicePaymentRequests0FixedAmountRequestedMoney)
     .TippingEnabled(true)
+    .AutomaticPaymentSource("NONE")
     .Reminders(bodyInvoicePaymentRequests0Reminders)
     .Build();
 bodyInvoicePaymentRequests.Add(bodyInvoicePaymentRequests0);
@@ -131,6 +132,7 @@ var bodyInvoice = new Invoice.Builder()
     .OrderId("CAISENgvlJ6jLWAzERDzjyHVybY")
     .PrimaryRecipient(bodyInvoicePrimaryRecipient)
     .PaymentRequests(bodyInvoicePaymentRequests)
+    .DeliveryMethod("EMAIL")
     .InvoiceNumber("inv-100")
     .Title("Event Planning Services")
     .Description("We appreciate your business!")
@@ -357,7 +359,7 @@ catch (ApiException e){};
 Cancels an invoice. The seller cannot collect payments for
 the canceled invoice.
 
-You cannot cancel an invoice in a terminal state: `PAID`, `REFUNDED`, `CANCELED`, or `FAILED`.
+You cannot cancel an invoice in the `DRAFT` state or in a terminal state: `PAID`, `REFUNDED`, `CANCELED`, or `FAILED`.
 
 ```csharp
 CancelInvoiceAsync(string invoiceId, Models.CancelInvoiceRequest body)

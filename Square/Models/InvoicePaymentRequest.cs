@@ -21,6 +21,7 @@ namespace Square.Models
             Models.Money fixedAmountRequestedMoney = null,
             string percentageRequested = null,
             bool? tippingEnabled = null,
+            string automaticPaymentSource = null,
             string cardId = null,
             IList<Models.InvoicePaymentReminder> reminders = null,
             Models.Money computedAmountMoney = null,
@@ -34,6 +35,7 @@ namespace Square.Models
             FixedAmountRequestedMoney = fixedAmountRequestedMoney;
             PercentageRequested = percentageRequested;
             TippingEnabled = tippingEnabled;
+            AutomaticPaymentSource = automaticPaymentSource;
             CardId = cardId;
             Reminders = reminders;
             ComputedAmountMoney = computedAmountMoney;
@@ -49,7 +51,7 @@ namespace Square.Models
 
         /// <summary>
         /// Specifies the action for Square to take for processing the invoice. For example, 
-        /// email the invoice, charge a customer's card on file, or do nothing.
+        /// email the invoice, charge a customer's card on file, or do nothing. DEPRECATED at version 2021-01-21. The corresponding `request_method` field is replaced by the `Invoice.delivery_method` and `InvoicePaymentRequest.automatic_payment_source` fields.
         /// </summary>
         [JsonProperty("request_method", NullValueHandling = NullValueHandling.Ignore)]
         public string RequestMethod { get; }
@@ -67,8 +69,8 @@ namespace Square.Models
         public string RequestType { get; }
 
         /// <summary>
-        /// The due date (in the invoice location's time zone) for the payment request. 
-        /// After this date, the invoice becomes overdue.
+        /// The due date (in the invoice location's time zone) for the payment request, in `YYYY-MM-DD` format. 
+        /// After this date, the invoice becomes overdue. This field is required to create a payment request.
         /// </summary>
         [JsonProperty("due_date", NullValueHandling = NullValueHandling.Ignore)]
         public string DueDate { get; }
@@ -104,6 +106,12 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("tipping_enabled", NullValueHandling = NullValueHandling.Ignore)]
         public bool? TippingEnabled { get; }
+
+        /// <summary>
+        /// Indicates the automatic payment method for an [invoice payment request](#type-InvoicePaymentRequest).
+        /// </summary>
+        [JsonProperty("automatic_payment_source", NullValueHandling = NullValueHandling.Ignore)]
+        public string AutomaticPaymentSource { get; }
 
         /// <summary>
         /// The ID of the card on file to charge for the payment request. To get the customer’s card on file,
@@ -162,6 +170,7 @@ namespace Square.Models
                 .FixedAmountRequestedMoney(FixedAmountRequestedMoney)
                 .PercentageRequested(PercentageRequested)
                 .TippingEnabled(TippingEnabled)
+                .AutomaticPaymentSource(AutomaticPaymentSource)
                 .CardId(CardId)
                 .Reminders(Reminders)
                 .ComputedAmountMoney(ComputedAmountMoney)
@@ -179,6 +188,7 @@ namespace Square.Models
             private Models.Money fixedAmountRequestedMoney;
             private string percentageRequested;
             private bool? tippingEnabled;
+            private string automaticPaymentSource;
             private string cardId;
             private IList<Models.InvoicePaymentReminder> reminders;
             private Models.Money computedAmountMoney;
@@ -229,6 +239,12 @@ namespace Square.Models
                 return this;
             }
 
+            public Builder AutomaticPaymentSource(string automaticPaymentSource)
+            {
+                this.automaticPaymentSource = automaticPaymentSource;
+                return this;
+            }
+
             public Builder CardId(string cardId)
             {
                 this.cardId = cardId;
@@ -268,6 +284,7 @@ namespace Square.Models
                     fixedAmountRequestedMoney,
                     percentageRequested,
                     tippingEnabled,
+                    automaticPaymentSource,
                     cardId,
                     reminders,
                     computedAmountMoney,

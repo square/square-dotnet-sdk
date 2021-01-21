@@ -9,7 +9,7 @@
 
 | Name | Type | Description |
 |  --- | --- | --- |
-| `LocationId` | `string` | The ID of the location to retrieve cash drawer shifts from. |
+| `LocationId` | `string` | The ID of the location to retrieve cash drawer shifts from.<br>**Constraints**: *Minimum Length*: `1` |
 
 ## Example (as JSON)
 

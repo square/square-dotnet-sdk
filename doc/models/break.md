@@ -12,11 +12,11 @@ A record of an employee's break during a shift.
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `Id` | `string` | Optional | UUID for this object |
-| `StartAt` | `string` |  | RFC 3339; follows same timezone info as `Shift`. Precision up to<br>the minute is respected; seconds are truncated. |
+| `StartAt` | `string` |  | RFC 3339; follows same timezone info as `Shift`. Precision up to<br>the minute is respected; seconds are truncated.<br>**Constraints**: *Minimum Length*: `1` |
 | `EndAt` | `string` | Optional | RFC 3339; follows same timezone info as `Shift`. Precision up to<br>the minute is respected; seconds are truncated. |
-| `BreakTypeId` | `string` |  | The `BreakType` this `Break` was templated on. |
-| `Name` | `string` |  | A human-readable name. |
-| `ExpectedDuration` | `string` |  | Format: RFC-3339 P[n]Y[n]M[n]DT[n]H[n]M[n]S. The expected length of<br>the break. |
+| `BreakTypeId` | `string` |  | The `BreakType` this `Break` was templated on.<br>**Constraints**: *Minimum Length*: `1` |
+| `Name` | `string` |  | A human-readable name.<br>**Constraints**: *Minimum Length*: `1` |
+| `ExpectedDuration` | `string` |  | Format: RFC-3339 P[n]Y[n]M[n]DT[n]H[n]M[n]S. The expected length of<br>the break.<br>**Constraints**: *Minimum Length*: `1` |
 | `IsPaid` | `bool` |  | Whether this break counts towards time worked for compensation<br>purposes. |
 
 ## Example (as JSON)

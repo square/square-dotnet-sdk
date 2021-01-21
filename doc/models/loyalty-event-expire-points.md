@@ -11,7 +11,7 @@ Provides metadata when the event `type` is `EXPIRE_POINTS`.
 
 | Name | Type | Description |
 |  --- | --- | --- |
-| `LoyaltyProgramId` | `string` | The Square-assigned ID of the [loyalty program](#type-LoyaltyProgram). |
+| `LoyaltyProgramId` | `string` | The Square-assigned ID of the [loyalty program](#type-LoyaltyProgram).<br>**Constraints**: *Minimum Length*: `1`, *Maximum Length*: `36` |
 | `Points` | `int` | The number of points expired. |
 
 ## Example (as JSON)

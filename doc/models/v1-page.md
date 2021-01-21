@@ -13,7 +13,7 @@ V1Page
 |  --- | --- | --- | --- |
 | `Id` | `string` | Optional | The page's unique identifier. |
 | `Name` | `string` | Optional | The page's name, if any. |
-| `PageIndex` | `int?` | Optional | The page's position in the merchant's list of pages. Always an integer between 0 and 6, inclusive. |
+| `PageIndex` | `int?` | Optional | The page's position in the merchant's list of pages. Always an integer between 0 and 6, inclusive.<br>**Constraints**: `<= 6` |
 | `Cells` | [`IList<Models.V1PageCell>`](/doc/models/v1-page-cell.md) | Optional | The cells included on the page. |
 
 ## Example (as JSON)
