@@ -29,5 +29,11 @@ namespace Square.Http.Client
             Request = request;
             Response = response;
         }
+
+        public override string ToString()
+        {
+            return $" Request = {Request}, " +
+                $" Response = {Response}";
+        }
     }
 }

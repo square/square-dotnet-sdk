@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -82,6 +83,83 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("max_discount_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Money MaxDiscountMoney { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"LoyaltyProgramRewardDefinition : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"Scope = {(Scope == null ? "null" : Scope.ToString())}");
+            toStringOutput.Add($"DiscountType = {(DiscountType == null ? "null" : DiscountType.ToString())}");
+            toStringOutput.Add($"PercentageDiscount = {(PercentageDiscount == null ? "null" : PercentageDiscount == string.Empty ? "" : PercentageDiscount)}");
+            toStringOutput.Add($"CatalogObjectIds = {(CatalogObjectIds == null ? "null" : $"[{ string.Join(", ", CatalogObjectIds)} ]")}");
+            toStringOutput.Add($"FixedDiscountMoney = {(FixedDiscountMoney == null ? "null" : FixedDiscountMoney.ToString())}");
+            toStringOutput.Add($"MaxDiscountMoney = {(MaxDiscountMoney == null ? "null" : MaxDiscountMoney.ToString())}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is LoyaltyProgramRewardDefinition other &&
+                ((Scope == null && other.Scope == null) || (Scope?.Equals(other.Scope) == true)) &&
+                ((DiscountType == null && other.DiscountType == null) || (DiscountType?.Equals(other.DiscountType) == true)) &&
+                ((PercentageDiscount == null && other.PercentageDiscount == null) || (PercentageDiscount?.Equals(other.PercentageDiscount) == true)) &&
+                ((CatalogObjectIds == null && other.CatalogObjectIds == null) || (CatalogObjectIds?.Equals(other.CatalogObjectIds) == true)) &&
+                ((FixedDiscountMoney == null && other.FixedDiscountMoney == null) || (FixedDiscountMoney?.Equals(other.FixedDiscountMoney) == true)) &&
+                ((MaxDiscountMoney == null && other.MaxDiscountMoney == null) || (MaxDiscountMoney?.Equals(other.MaxDiscountMoney) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 1536175793;
+
+            if (Scope != null)
+            {
+               hashCode += Scope.GetHashCode();
+            }
+
+            if (DiscountType != null)
+            {
+               hashCode += DiscountType.GetHashCode();
+            }
+
+            if (PercentageDiscount != null)
+            {
+               hashCode += PercentageDiscount.GetHashCode();
+            }
+
+            if (CatalogObjectIds != null)
+            {
+               hashCode += CatalogObjectIds.GetHashCode();
+            }
+
+            if (FixedDiscountMoney != null)
+            {
+               hashCode += FixedDiscountMoney.GetHashCode();
+            }
+
+            if (MaxDiscountMoney != null)
+            {
+               hashCode += MaxDiscountMoney.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

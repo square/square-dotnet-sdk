@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -117,6 +118,111 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("timezone", NullValueHandling = NullValueHandling.Ignore)]
         public string Timezone { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"CreateSubscriptionRequest : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"IdempotencyKey = {(IdempotencyKey == null ? "null" : IdempotencyKey == string.Empty ? "" : IdempotencyKey)}");
+            toStringOutput.Add($"LocationId = {(LocationId == null ? "null" : LocationId == string.Empty ? "" : LocationId)}");
+            toStringOutput.Add($"PlanId = {(PlanId == null ? "null" : PlanId == string.Empty ? "" : PlanId)}");
+            toStringOutput.Add($"CustomerId = {(CustomerId == null ? "null" : CustomerId == string.Empty ? "" : CustomerId)}");
+            toStringOutput.Add($"StartDate = {(StartDate == null ? "null" : StartDate == string.Empty ? "" : StartDate)}");
+            toStringOutput.Add($"CanceledDate = {(CanceledDate == null ? "null" : CanceledDate == string.Empty ? "" : CanceledDate)}");
+            toStringOutput.Add($"TaxPercentage = {(TaxPercentage == null ? "null" : TaxPercentage == string.Empty ? "" : TaxPercentage)}");
+            toStringOutput.Add($"PriceOverrideMoney = {(PriceOverrideMoney == null ? "null" : PriceOverrideMoney.ToString())}");
+            toStringOutput.Add($"CardId = {(CardId == null ? "null" : CardId == string.Empty ? "" : CardId)}");
+            toStringOutput.Add($"Timezone = {(Timezone == null ? "null" : Timezone == string.Empty ? "" : Timezone)}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is CreateSubscriptionRequest other &&
+                ((IdempotencyKey == null && other.IdempotencyKey == null) || (IdempotencyKey?.Equals(other.IdempotencyKey) == true)) &&
+                ((LocationId == null && other.LocationId == null) || (LocationId?.Equals(other.LocationId) == true)) &&
+                ((PlanId == null && other.PlanId == null) || (PlanId?.Equals(other.PlanId) == true)) &&
+                ((CustomerId == null && other.CustomerId == null) || (CustomerId?.Equals(other.CustomerId) == true)) &&
+                ((StartDate == null && other.StartDate == null) || (StartDate?.Equals(other.StartDate) == true)) &&
+                ((CanceledDate == null && other.CanceledDate == null) || (CanceledDate?.Equals(other.CanceledDate) == true)) &&
+                ((TaxPercentage == null && other.TaxPercentage == null) || (TaxPercentage?.Equals(other.TaxPercentage) == true)) &&
+                ((PriceOverrideMoney == null && other.PriceOverrideMoney == null) || (PriceOverrideMoney?.Equals(other.PriceOverrideMoney) == true)) &&
+                ((CardId == null && other.CardId == null) || (CardId?.Equals(other.CardId) == true)) &&
+                ((Timezone == null && other.Timezone == null) || (Timezone?.Equals(other.Timezone) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 801909259;
+
+            if (IdempotencyKey != null)
+            {
+               hashCode += IdempotencyKey.GetHashCode();
+            }
+
+            if (LocationId != null)
+            {
+               hashCode += LocationId.GetHashCode();
+            }
+
+            if (PlanId != null)
+            {
+               hashCode += PlanId.GetHashCode();
+            }
+
+            if (CustomerId != null)
+            {
+               hashCode += CustomerId.GetHashCode();
+            }
+
+            if (StartDate != null)
+            {
+               hashCode += StartDate.GetHashCode();
+            }
+
+            if (CanceledDate != null)
+            {
+               hashCode += CanceledDate.GetHashCode();
+            }
+
+            if (TaxPercentage != null)
+            {
+               hashCode += TaxPercentage.GetHashCode();
+            }
+
+            if (PriceOverrideMoney != null)
+            {
+               hashCode += PriceOverrideMoney.GetHashCode();
+            }
+
+            if (CardId != null)
+            {
+               hashCode += CardId.GetHashCode();
+            }
+
+            if (Timezone != null)
+            {
+               hashCode += Timezone.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

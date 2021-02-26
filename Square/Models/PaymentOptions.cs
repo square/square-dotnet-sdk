@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -25,6 +26,48 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("autocomplete", NullValueHandling = NullValueHandling.Ignore)]
         public bool? Autocomplete { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"PaymentOptions : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"Autocomplete = {(Autocomplete == null ? "null" : Autocomplete.ToString())}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is PaymentOptions other &&
+                ((Autocomplete == null && other.Autocomplete == null) || (Autocomplete?.Equals(other.Autocomplete) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 449968409;
+
+            if (Autocomplete != null)
+            {
+               hashCode += Autocomplete.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

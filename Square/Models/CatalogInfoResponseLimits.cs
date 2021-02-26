@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -115,6 +116,118 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("update_item_modifier_lists_max_modifier_lists_to_disable", NullValueHandling = NullValueHandling.Ignore)]
         public int? UpdateItemModifierListsMaxModifierListsToDisable { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"CatalogInfoResponseLimits : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"BatchUpsertMaxObjectsPerBatch = {(BatchUpsertMaxObjectsPerBatch == null ? "null" : BatchUpsertMaxObjectsPerBatch.ToString())}");
+            toStringOutput.Add($"BatchUpsertMaxTotalObjects = {(BatchUpsertMaxTotalObjects == null ? "null" : BatchUpsertMaxTotalObjects.ToString())}");
+            toStringOutput.Add($"BatchRetrieveMaxObjectIds = {(BatchRetrieveMaxObjectIds == null ? "null" : BatchRetrieveMaxObjectIds.ToString())}");
+            toStringOutput.Add($"SearchMaxPageLimit = {(SearchMaxPageLimit == null ? "null" : SearchMaxPageLimit.ToString())}");
+            toStringOutput.Add($"BatchDeleteMaxObjectIds = {(BatchDeleteMaxObjectIds == null ? "null" : BatchDeleteMaxObjectIds.ToString())}");
+            toStringOutput.Add($"UpdateItemTaxesMaxItemIds = {(UpdateItemTaxesMaxItemIds == null ? "null" : UpdateItemTaxesMaxItemIds.ToString())}");
+            toStringOutput.Add($"UpdateItemTaxesMaxTaxesToEnable = {(UpdateItemTaxesMaxTaxesToEnable == null ? "null" : UpdateItemTaxesMaxTaxesToEnable.ToString())}");
+            toStringOutput.Add($"UpdateItemTaxesMaxTaxesToDisable = {(UpdateItemTaxesMaxTaxesToDisable == null ? "null" : UpdateItemTaxesMaxTaxesToDisable.ToString())}");
+            toStringOutput.Add($"UpdateItemModifierListsMaxItemIds = {(UpdateItemModifierListsMaxItemIds == null ? "null" : UpdateItemModifierListsMaxItemIds.ToString())}");
+            toStringOutput.Add($"UpdateItemModifierListsMaxModifierListsToEnable = {(UpdateItemModifierListsMaxModifierListsToEnable == null ? "null" : UpdateItemModifierListsMaxModifierListsToEnable.ToString())}");
+            toStringOutput.Add($"UpdateItemModifierListsMaxModifierListsToDisable = {(UpdateItemModifierListsMaxModifierListsToDisable == null ? "null" : UpdateItemModifierListsMaxModifierListsToDisable.ToString())}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is CatalogInfoResponseLimits other &&
+                ((BatchUpsertMaxObjectsPerBatch == null && other.BatchUpsertMaxObjectsPerBatch == null) || (BatchUpsertMaxObjectsPerBatch?.Equals(other.BatchUpsertMaxObjectsPerBatch) == true)) &&
+                ((BatchUpsertMaxTotalObjects == null && other.BatchUpsertMaxTotalObjects == null) || (BatchUpsertMaxTotalObjects?.Equals(other.BatchUpsertMaxTotalObjects) == true)) &&
+                ((BatchRetrieveMaxObjectIds == null && other.BatchRetrieveMaxObjectIds == null) || (BatchRetrieveMaxObjectIds?.Equals(other.BatchRetrieveMaxObjectIds) == true)) &&
+                ((SearchMaxPageLimit == null && other.SearchMaxPageLimit == null) || (SearchMaxPageLimit?.Equals(other.SearchMaxPageLimit) == true)) &&
+                ((BatchDeleteMaxObjectIds == null && other.BatchDeleteMaxObjectIds == null) || (BatchDeleteMaxObjectIds?.Equals(other.BatchDeleteMaxObjectIds) == true)) &&
+                ((UpdateItemTaxesMaxItemIds == null && other.UpdateItemTaxesMaxItemIds == null) || (UpdateItemTaxesMaxItemIds?.Equals(other.UpdateItemTaxesMaxItemIds) == true)) &&
+                ((UpdateItemTaxesMaxTaxesToEnable == null && other.UpdateItemTaxesMaxTaxesToEnable == null) || (UpdateItemTaxesMaxTaxesToEnable?.Equals(other.UpdateItemTaxesMaxTaxesToEnable) == true)) &&
+                ((UpdateItemTaxesMaxTaxesToDisable == null && other.UpdateItemTaxesMaxTaxesToDisable == null) || (UpdateItemTaxesMaxTaxesToDisable?.Equals(other.UpdateItemTaxesMaxTaxesToDisable) == true)) &&
+                ((UpdateItemModifierListsMaxItemIds == null && other.UpdateItemModifierListsMaxItemIds == null) || (UpdateItemModifierListsMaxItemIds?.Equals(other.UpdateItemModifierListsMaxItemIds) == true)) &&
+                ((UpdateItemModifierListsMaxModifierListsToEnable == null && other.UpdateItemModifierListsMaxModifierListsToEnable == null) || (UpdateItemModifierListsMaxModifierListsToEnable?.Equals(other.UpdateItemModifierListsMaxModifierListsToEnable) == true)) &&
+                ((UpdateItemModifierListsMaxModifierListsToDisable == null && other.UpdateItemModifierListsMaxModifierListsToDisable == null) || (UpdateItemModifierListsMaxModifierListsToDisable?.Equals(other.UpdateItemModifierListsMaxModifierListsToDisable) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 163529302;
+
+            if (BatchUpsertMaxObjectsPerBatch != null)
+            {
+               hashCode += BatchUpsertMaxObjectsPerBatch.GetHashCode();
+            }
+
+            if (BatchUpsertMaxTotalObjects != null)
+            {
+               hashCode += BatchUpsertMaxTotalObjects.GetHashCode();
+            }
+
+            if (BatchRetrieveMaxObjectIds != null)
+            {
+               hashCode += BatchRetrieveMaxObjectIds.GetHashCode();
+            }
+
+            if (SearchMaxPageLimit != null)
+            {
+               hashCode += SearchMaxPageLimit.GetHashCode();
+            }
+
+            if (BatchDeleteMaxObjectIds != null)
+            {
+               hashCode += BatchDeleteMaxObjectIds.GetHashCode();
+            }
+
+            if (UpdateItemTaxesMaxItemIds != null)
+            {
+               hashCode += UpdateItemTaxesMaxItemIds.GetHashCode();
+            }
+
+            if (UpdateItemTaxesMaxTaxesToEnable != null)
+            {
+               hashCode += UpdateItemTaxesMaxTaxesToEnable.GetHashCode();
+            }
+
+            if (UpdateItemTaxesMaxTaxesToDisable != null)
+            {
+               hashCode += UpdateItemTaxesMaxTaxesToDisable.GetHashCode();
+            }
+
+            if (UpdateItemModifierListsMaxItemIds != null)
+            {
+               hashCode += UpdateItemModifierListsMaxItemIds.GetHashCode();
+            }
+
+            if (UpdateItemModifierListsMaxModifierListsToEnable != null)
+            {
+               hashCode += UpdateItemModifierListsMaxModifierListsToEnable.GetHashCode();
+            }
+
+            if (UpdateItemModifierListsMaxModifierListsToDisable != null)
+            {
+               hashCode += UpdateItemModifierListsMaxModifierListsToDisable.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

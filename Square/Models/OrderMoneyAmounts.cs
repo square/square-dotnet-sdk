@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -81,6 +82,76 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("service_charge_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Money ServiceChargeMoney { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"OrderMoneyAmounts : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"TotalMoney = {(TotalMoney == null ? "null" : TotalMoney.ToString())}");
+            toStringOutput.Add($"TaxMoney = {(TaxMoney == null ? "null" : TaxMoney.ToString())}");
+            toStringOutput.Add($"DiscountMoney = {(DiscountMoney == null ? "null" : DiscountMoney.ToString())}");
+            toStringOutput.Add($"TipMoney = {(TipMoney == null ? "null" : TipMoney.ToString())}");
+            toStringOutput.Add($"ServiceChargeMoney = {(ServiceChargeMoney == null ? "null" : ServiceChargeMoney.ToString())}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is OrderMoneyAmounts other &&
+                ((TotalMoney == null && other.TotalMoney == null) || (TotalMoney?.Equals(other.TotalMoney) == true)) &&
+                ((TaxMoney == null && other.TaxMoney == null) || (TaxMoney?.Equals(other.TaxMoney) == true)) &&
+                ((DiscountMoney == null && other.DiscountMoney == null) || (DiscountMoney?.Equals(other.DiscountMoney) == true)) &&
+                ((TipMoney == null && other.TipMoney == null) || (TipMoney?.Equals(other.TipMoney) == true)) &&
+                ((ServiceChargeMoney == null && other.ServiceChargeMoney == null) || (ServiceChargeMoney?.Equals(other.ServiceChargeMoney) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -685311361;
+
+            if (TotalMoney != null)
+            {
+               hashCode += TotalMoney.GetHashCode();
+            }
+
+            if (TaxMoney != null)
+            {
+               hashCode += TaxMoney.GetHashCode();
+            }
+
+            if (DiscountMoney != null)
+            {
+               hashCode += DiscountMoney.GetHashCode();
+            }
+
+            if (TipMoney != null)
+            {
+               hashCode += TipMoney.GetHashCode();
+            }
+
+            if (ServiceChargeMoney != null)
+            {
+               hashCode += ServiceChargeMoney.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

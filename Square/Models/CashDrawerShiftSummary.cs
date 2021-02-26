@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -103,6 +104,104 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("closed_cash_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Money ClosedCashMoney { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"CashDrawerShiftSummary : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"Id = {(Id == null ? "null" : Id == string.Empty ? "" : Id)}");
+            toStringOutput.Add($"State = {(State == null ? "null" : State.ToString())}");
+            toStringOutput.Add($"OpenedAt = {(OpenedAt == null ? "null" : OpenedAt == string.Empty ? "" : OpenedAt)}");
+            toStringOutput.Add($"EndedAt = {(EndedAt == null ? "null" : EndedAt == string.Empty ? "" : EndedAt)}");
+            toStringOutput.Add($"ClosedAt = {(ClosedAt == null ? "null" : ClosedAt == string.Empty ? "" : ClosedAt)}");
+            toStringOutput.Add($"Description = {(Description == null ? "null" : Description == string.Empty ? "" : Description)}");
+            toStringOutput.Add($"OpenedCashMoney = {(OpenedCashMoney == null ? "null" : OpenedCashMoney.ToString())}");
+            toStringOutput.Add($"ExpectedCashMoney = {(ExpectedCashMoney == null ? "null" : ExpectedCashMoney.ToString())}");
+            toStringOutput.Add($"ClosedCashMoney = {(ClosedCashMoney == null ? "null" : ClosedCashMoney.ToString())}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is CashDrawerShiftSummary other &&
+                ((Id == null && other.Id == null) || (Id?.Equals(other.Id) == true)) &&
+                ((State == null && other.State == null) || (State?.Equals(other.State) == true)) &&
+                ((OpenedAt == null && other.OpenedAt == null) || (OpenedAt?.Equals(other.OpenedAt) == true)) &&
+                ((EndedAt == null && other.EndedAt == null) || (EndedAt?.Equals(other.EndedAt) == true)) &&
+                ((ClosedAt == null && other.ClosedAt == null) || (ClosedAt?.Equals(other.ClosedAt) == true)) &&
+                ((Description == null && other.Description == null) || (Description?.Equals(other.Description) == true)) &&
+                ((OpenedCashMoney == null && other.OpenedCashMoney == null) || (OpenedCashMoney?.Equals(other.OpenedCashMoney) == true)) &&
+                ((ExpectedCashMoney == null && other.ExpectedCashMoney == null) || (ExpectedCashMoney?.Equals(other.ExpectedCashMoney) == true)) &&
+                ((ClosedCashMoney == null && other.ClosedCashMoney == null) || (ClosedCashMoney?.Equals(other.ClosedCashMoney) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -323366853;
+
+            if (Id != null)
+            {
+               hashCode += Id.GetHashCode();
+            }
+
+            if (State != null)
+            {
+               hashCode += State.GetHashCode();
+            }
+
+            if (OpenedAt != null)
+            {
+               hashCode += OpenedAt.GetHashCode();
+            }
+
+            if (EndedAt != null)
+            {
+               hashCode += EndedAt.GetHashCode();
+            }
+
+            if (ClosedAt != null)
+            {
+               hashCode += ClosedAt.GetHashCode();
+            }
+
+            if (Description != null)
+            {
+               hashCode += Description.GetHashCode();
+            }
+
+            if (OpenedCashMoney != null)
+            {
+               hashCode += OpenedCashMoney.GetHashCode();
+            }
+
+            if (ExpectedCashMoney != null)
+            {
+               hashCode += ExpectedCashMoney.GetHashCode();
+            }
+
+            if (ClosedCashMoney != null)
+            {
+               hashCode += ClosedCashMoney.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

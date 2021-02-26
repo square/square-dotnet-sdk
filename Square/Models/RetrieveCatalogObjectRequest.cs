@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -41,6 +42,55 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("catalog_version", NullValueHandling = NullValueHandling.Ignore)]
         public long? CatalogVersion { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"RetrieveCatalogObjectRequest : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"IncludeRelatedObjects = {(IncludeRelatedObjects == null ? "null" : IncludeRelatedObjects.ToString())}");
+            toStringOutput.Add($"CatalogVersion = {(CatalogVersion == null ? "null" : CatalogVersion.ToString())}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is RetrieveCatalogObjectRequest other &&
+                ((IncludeRelatedObjects == null && other.IncludeRelatedObjects == null) || (IncludeRelatedObjects?.Equals(other.IncludeRelatedObjects) == true)) &&
+                ((CatalogVersion == null && other.CatalogVersion == null) || (CatalogVersion?.Equals(other.CatalogVersion) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -126608082;
+
+            if (IncludeRelatedObjects != null)
+            {
+               hashCode += IncludeRelatedObjects.GetHashCode();
+            }
+
+            if (CatalogVersion != null)
+            {
+               hashCode += CatalogVersion.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

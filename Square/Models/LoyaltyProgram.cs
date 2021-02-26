@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -89,6 +90,104 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("accrual_rules")]
         public IList<Models.LoyaltyProgramAccrualRule> AccrualRules { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"LoyaltyProgram : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"Id = {(Id == null ? "null" : Id == string.Empty ? "" : Id)}");
+            toStringOutput.Add($"Status = {(Status == null ? "null" : Status.ToString())}");
+            toStringOutput.Add($"RewardTiers = {(RewardTiers == null ? "null" : $"[{ string.Join(", ", RewardTiers)} ]")}");
+            toStringOutput.Add($"ExpirationPolicy = {(ExpirationPolicy == null ? "null" : ExpirationPolicy.ToString())}");
+            toStringOutput.Add($"Terminology = {(Terminology == null ? "null" : Terminology.ToString())}");
+            toStringOutput.Add($"LocationIds = {(LocationIds == null ? "null" : $"[{ string.Join(", ", LocationIds)} ]")}");
+            toStringOutput.Add($"CreatedAt = {(CreatedAt == null ? "null" : CreatedAt == string.Empty ? "" : CreatedAt)}");
+            toStringOutput.Add($"UpdatedAt = {(UpdatedAt == null ? "null" : UpdatedAt == string.Empty ? "" : UpdatedAt)}");
+            toStringOutput.Add($"AccrualRules = {(AccrualRules == null ? "null" : $"[{ string.Join(", ", AccrualRules)} ]")}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is LoyaltyProgram other &&
+                ((Id == null && other.Id == null) || (Id?.Equals(other.Id) == true)) &&
+                ((Status == null && other.Status == null) || (Status?.Equals(other.Status) == true)) &&
+                ((RewardTiers == null && other.RewardTiers == null) || (RewardTiers?.Equals(other.RewardTiers) == true)) &&
+                ((ExpirationPolicy == null && other.ExpirationPolicy == null) || (ExpirationPolicy?.Equals(other.ExpirationPolicy) == true)) &&
+                ((Terminology == null && other.Terminology == null) || (Terminology?.Equals(other.Terminology) == true)) &&
+                ((LocationIds == null && other.LocationIds == null) || (LocationIds?.Equals(other.LocationIds) == true)) &&
+                ((CreatedAt == null && other.CreatedAt == null) || (CreatedAt?.Equals(other.CreatedAt) == true)) &&
+                ((UpdatedAt == null && other.UpdatedAt == null) || (UpdatedAt?.Equals(other.UpdatedAt) == true)) &&
+                ((AccrualRules == null && other.AccrualRules == null) || (AccrualRules?.Equals(other.AccrualRules) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 2031047851;
+
+            if (Id != null)
+            {
+               hashCode += Id.GetHashCode();
+            }
+
+            if (Status != null)
+            {
+               hashCode += Status.GetHashCode();
+            }
+
+            if (RewardTiers != null)
+            {
+               hashCode += RewardTiers.GetHashCode();
+            }
+
+            if (ExpirationPolicy != null)
+            {
+               hashCode += ExpirationPolicy.GetHashCode();
+            }
+
+            if (Terminology != null)
+            {
+               hashCode += Terminology.GetHashCode();
+            }
+
+            if (LocationIds != null)
+            {
+               hashCode += LocationIds.GetHashCode();
+            }
+
+            if (CreatedAt != null)
+            {
+               hashCode += CreatedAt.GetHashCode();
+            }
+
+            if (UpdatedAt != null)
+            {
+               hashCode += UpdatedAt.GetHashCode();
+            }
+
+            if (AccrualRules != null)
+            {
+               hashCode += AccrualRules.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

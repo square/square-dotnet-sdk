@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -172,6 +173,174 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("segment_ids", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> SegmentIds { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"Customer : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"Id = {(Id == null ? "null" : Id == string.Empty ? "" : Id)}");
+            toStringOutput.Add($"CreatedAt = {(CreatedAt == null ? "null" : CreatedAt == string.Empty ? "" : CreatedAt)}");
+            toStringOutput.Add($"UpdatedAt = {(UpdatedAt == null ? "null" : UpdatedAt == string.Empty ? "" : UpdatedAt)}");
+            toStringOutput.Add($"Cards = {(Cards == null ? "null" : $"[{ string.Join(", ", Cards)} ]")}");
+            toStringOutput.Add($"GivenName = {(GivenName == null ? "null" : GivenName == string.Empty ? "" : GivenName)}");
+            toStringOutput.Add($"FamilyName = {(FamilyName == null ? "null" : FamilyName == string.Empty ? "" : FamilyName)}");
+            toStringOutput.Add($"Nickname = {(Nickname == null ? "null" : Nickname == string.Empty ? "" : Nickname)}");
+            toStringOutput.Add($"CompanyName = {(CompanyName == null ? "null" : CompanyName == string.Empty ? "" : CompanyName)}");
+            toStringOutput.Add($"EmailAddress = {(EmailAddress == null ? "null" : EmailAddress == string.Empty ? "" : EmailAddress)}");
+            toStringOutput.Add($"Address = {(Address == null ? "null" : Address.ToString())}");
+            toStringOutput.Add($"PhoneNumber = {(PhoneNumber == null ? "null" : PhoneNumber == string.Empty ? "" : PhoneNumber)}");
+            toStringOutput.Add($"Birthday = {(Birthday == null ? "null" : Birthday == string.Empty ? "" : Birthday)}");
+            toStringOutput.Add($"ReferenceId = {(ReferenceId == null ? "null" : ReferenceId == string.Empty ? "" : ReferenceId)}");
+            toStringOutput.Add($"Note = {(Note == null ? "null" : Note == string.Empty ? "" : Note)}");
+            toStringOutput.Add($"Preferences = {(Preferences == null ? "null" : Preferences.ToString())}");
+            toStringOutput.Add($"Groups = {(Groups == null ? "null" : $"[{ string.Join(", ", Groups)} ]")}");
+            toStringOutput.Add($"CreationSource = {(CreationSource == null ? "null" : CreationSource.ToString())}");
+            toStringOutput.Add($"GroupIds = {(GroupIds == null ? "null" : $"[{ string.Join(", ", GroupIds)} ]")}");
+            toStringOutput.Add($"SegmentIds = {(SegmentIds == null ? "null" : $"[{ string.Join(", ", SegmentIds)} ]")}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is Customer other &&
+                ((Id == null && other.Id == null) || (Id?.Equals(other.Id) == true)) &&
+                ((CreatedAt == null && other.CreatedAt == null) || (CreatedAt?.Equals(other.CreatedAt) == true)) &&
+                ((UpdatedAt == null && other.UpdatedAt == null) || (UpdatedAt?.Equals(other.UpdatedAt) == true)) &&
+                ((Cards == null && other.Cards == null) || (Cards?.Equals(other.Cards) == true)) &&
+                ((GivenName == null && other.GivenName == null) || (GivenName?.Equals(other.GivenName) == true)) &&
+                ((FamilyName == null && other.FamilyName == null) || (FamilyName?.Equals(other.FamilyName) == true)) &&
+                ((Nickname == null && other.Nickname == null) || (Nickname?.Equals(other.Nickname) == true)) &&
+                ((CompanyName == null && other.CompanyName == null) || (CompanyName?.Equals(other.CompanyName) == true)) &&
+                ((EmailAddress == null && other.EmailAddress == null) || (EmailAddress?.Equals(other.EmailAddress) == true)) &&
+                ((Address == null && other.Address == null) || (Address?.Equals(other.Address) == true)) &&
+                ((PhoneNumber == null && other.PhoneNumber == null) || (PhoneNumber?.Equals(other.PhoneNumber) == true)) &&
+                ((Birthday == null && other.Birthday == null) || (Birthday?.Equals(other.Birthday) == true)) &&
+                ((ReferenceId == null && other.ReferenceId == null) || (ReferenceId?.Equals(other.ReferenceId) == true)) &&
+                ((Note == null && other.Note == null) || (Note?.Equals(other.Note) == true)) &&
+                ((Preferences == null && other.Preferences == null) || (Preferences?.Equals(other.Preferences) == true)) &&
+                ((Groups == null && other.Groups == null) || (Groups?.Equals(other.Groups) == true)) &&
+                ((CreationSource == null && other.CreationSource == null) || (CreationSource?.Equals(other.CreationSource) == true)) &&
+                ((GroupIds == null && other.GroupIds == null) || (GroupIds?.Equals(other.GroupIds) == true)) &&
+                ((SegmentIds == null && other.SegmentIds == null) || (SegmentIds?.Equals(other.SegmentIds) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 749289117;
+
+            if (Id != null)
+            {
+               hashCode += Id.GetHashCode();
+            }
+
+            if (CreatedAt != null)
+            {
+               hashCode += CreatedAt.GetHashCode();
+            }
+
+            if (UpdatedAt != null)
+            {
+               hashCode += UpdatedAt.GetHashCode();
+            }
+
+            if (Cards != null)
+            {
+               hashCode += Cards.GetHashCode();
+            }
+
+            if (GivenName != null)
+            {
+               hashCode += GivenName.GetHashCode();
+            }
+
+            if (FamilyName != null)
+            {
+               hashCode += FamilyName.GetHashCode();
+            }
+
+            if (Nickname != null)
+            {
+               hashCode += Nickname.GetHashCode();
+            }
+
+            if (CompanyName != null)
+            {
+               hashCode += CompanyName.GetHashCode();
+            }
+
+            if (EmailAddress != null)
+            {
+               hashCode += EmailAddress.GetHashCode();
+            }
+
+            if (Address != null)
+            {
+               hashCode += Address.GetHashCode();
+            }
+
+            if (PhoneNumber != null)
+            {
+               hashCode += PhoneNumber.GetHashCode();
+            }
+
+            if (Birthday != null)
+            {
+               hashCode += Birthday.GetHashCode();
+            }
+
+            if (ReferenceId != null)
+            {
+               hashCode += ReferenceId.GetHashCode();
+            }
+
+            if (Note != null)
+            {
+               hashCode += Note.GetHashCode();
+            }
+
+            if (Preferences != null)
+            {
+               hashCode += Preferences.GetHashCode();
+            }
+
+            if (Groups != null)
+            {
+               hashCode += Groups.GetHashCode();
+            }
+
+            if (CreationSource != null)
+            {
+               hashCode += CreationSource.GetHashCode();
+            }
+
+            if (GroupIds != null)
+            {
+               hashCode += GroupIds.GetHashCode();
+            }
+
+            if (SegmentIds != null)
+            {
+               hashCode += SegmentIds.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

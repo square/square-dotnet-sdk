@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -56,6 +57,76 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("profile_image_url", NullValueHandling = NullValueHandling.Ignore)]
         public string ProfileImageUrl { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"TeamMemberBookingProfile : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"TeamMemberId = {(TeamMemberId == null ? "null" : TeamMemberId == string.Empty ? "" : TeamMemberId)}");
+            toStringOutput.Add($"Description = {(Description == null ? "null" : Description == string.Empty ? "" : Description)}");
+            toStringOutput.Add($"DisplayName = {(DisplayName == null ? "null" : DisplayName == string.Empty ? "" : DisplayName)}");
+            toStringOutput.Add($"IsBookable = {(IsBookable == null ? "null" : IsBookable.ToString())}");
+            toStringOutput.Add($"ProfileImageUrl = {(ProfileImageUrl == null ? "null" : ProfileImageUrl == string.Empty ? "" : ProfileImageUrl)}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is TeamMemberBookingProfile other &&
+                ((TeamMemberId == null && other.TeamMemberId == null) || (TeamMemberId?.Equals(other.TeamMemberId) == true)) &&
+                ((Description == null && other.Description == null) || (Description?.Equals(other.Description) == true)) &&
+                ((DisplayName == null && other.DisplayName == null) || (DisplayName?.Equals(other.DisplayName) == true)) &&
+                ((IsBookable == null && other.IsBookable == null) || (IsBookable?.Equals(other.IsBookable) == true)) &&
+                ((ProfileImageUrl == null && other.ProfileImageUrl == null) || (ProfileImageUrl?.Equals(other.ProfileImageUrl) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -1821243729;
+
+            if (TeamMemberId != null)
+            {
+               hashCode += TeamMemberId.GetHashCode();
+            }
+
+            if (Description != null)
+            {
+               hashCode += Description.GetHashCode();
+            }
+
+            if (DisplayName != null)
+            {
+               hashCode += DisplayName.GetHashCode();
+            }
+
+            if (IsBookable != null)
+            {
+               hashCode += IsBookable.GetHashCode();
+            }
+
+            if (ProfileImageUrl != null)
+            {
+               hashCode += ProfileImageUrl.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

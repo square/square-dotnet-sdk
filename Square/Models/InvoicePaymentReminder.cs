@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -59,6 +60,76 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("sent_at", NullValueHandling = NullValueHandling.Ignore)]
         public string SentAt { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"InvoicePaymentReminder : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"Uid = {(Uid == null ? "null" : Uid == string.Empty ? "" : Uid)}");
+            toStringOutput.Add($"RelativeScheduledDays = {(RelativeScheduledDays == null ? "null" : RelativeScheduledDays.ToString())}");
+            toStringOutput.Add($"Message = {(Message == null ? "null" : Message == string.Empty ? "" : Message)}");
+            toStringOutput.Add($"Status = {(Status == null ? "null" : Status.ToString())}");
+            toStringOutput.Add($"SentAt = {(SentAt == null ? "null" : SentAt == string.Empty ? "" : SentAt)}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is InvoicePaymentReminder other &&
+                ((Uid == null && other.Uid == null) || (Uid?.Equals(other.Uid) == true)) &&
+                ((RelativeScheduledDays == null && other.RelativeScheduledDays == null) || (RelativeScheduledDays?.Equals(other.RelativeScheduledDays) == true)) &&
+                ((Message == null && other.Message == null) || (Message?.Equals(other.Message) == true)) &&
+                ((Status == null && other.Status == null) || (Status?.Equals(other.Status) == true)) &&
+                ((SentAt == null && other.SentAt == null) || (SentAt?.Equals(other.SentAt) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -1406942862;
+
+            if (Uid != null)
+            {
+               hashCode += Uid.GetHashCode();
+            }
+
+            if (RelativeScheduledDays != null)
+            {
+               hashCode += RelativeScheduledDays.GetHashCode();
+            }
+
+            if (Message != null)
+            {
+               hashCode += Message.GetHashCode();
+            }
+
+            if (Status != null)
+            {
+               hashCode += Status.GetHashCode();
+            }
+
+            if (SentAt != null)
+            {
+               hashCode += SentAt.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

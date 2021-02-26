@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -42,6 +43,62 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("caption", NullValueHandling = NullValueHandling.Ignore)]
         public string Caption { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"CatalogImage : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"Name = {(Name == null ? "null" : Name == string.Empty ? "" : Name)}");
+            toStringOutput.Add($"Url = {(Url == null ? "null" : Url == string.Empty ? "" : Url)}");
+            toStringOutput.Add($"Caption = {(Caption == null ? "null" : Caption == string.Empty ? "" : Caption)}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is CatalogImage other &&
+                ((Name == null && other.Name == null) || (Name?.Equals(other.Name) == true)) &&
+                ((Url == null && other.Url == null) || (Url?.Equals(other.Url) == true)) &&
+                ((Caption == null && other.Caption == null) || (Caption?.Equals(other.Caption) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -261675541;
+
+            if (Name != null)
+            {
+               hashCode += Name.GetHashCode();
+            }
+
+            if (Url != null)
+            {
+               hashCode += Url.GetHashCode();
+            }
+
+            if (Caption != null)
+            {
+               hashCode += Caption.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

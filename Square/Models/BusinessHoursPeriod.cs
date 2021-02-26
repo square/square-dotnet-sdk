@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -42,6 +43,62 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("end_local_time", NullValueHandling = NullValueHandling.Ignore)]
         public string EndLocalTime { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"BusinessHoursPeriod : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"DayOfWeek = {(DayOfWeek == null ? "null" : DayOfWeek.ToString())}");
+            toStringOutput.Add($"StartLocalTime = {(StartLocalTime == null ? "null" : StartLocalTime == string.Empty ? "" : StartLocalTime)}");
+            toStringOutput.Add($"EndLocalTime = {(EndLocalTime == null ? "null" : EndLocalTime == string.Empty ? "" : EndLocalTime)}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is BusinessHoursPeriod other &&
+                ((DayOfWeek == null && other.DayOfWeek == null) || (DayOfWeek?.Equals(other.DayOfWeek) == true)) &&
+                ((StartLocalTime == null && other.StartLocalTime == null) || (StartLocalTime?.Equals(other.StartLocalTime) == true)) &&
+                ((EndLocalTime == null && other.EndLocalTime == null) || (EndLocalTime?.Equals(other.EndLocalTime) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 870467587;
+
+            if (DayOfWeek != null)
+            {
+               hashCode += DayOfWeek.GetHashCode();
+            }
+
+            if (StartLocalTime != null)
+            {
+               hashCode += StartLocalTime.GetHashCode();
+            }
+
+            if (EndLocalTime != null)
+            {
+               hashCode += EndLocalTime.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

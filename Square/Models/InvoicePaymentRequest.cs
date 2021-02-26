@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -159,6 +160,132 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("rounding_adjustment_included_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Money RoundingAdjustmentIncludedMoney { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"InvoicePaymentRequest : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"Uid = {(Uid == null ? "null" : Uid == string.Empty ? "" : Uid)}");
+            toStringOutput.Add($"RequestMethod = {(RequestMethod == null ? "null" : RequestMethod.ToString())}");
+            toStringOutput.Add($"RequestType = {(RequestType == null ? "null" : RequestType.ToString())}");
+            toStringOutput.Add($"DueDate = {(DueDate == null ? "null" : DueDate == string.Empty ? "" : DueDate)}");
+            toStringOutput.Add($"FixedAmountRequestedMoney = {(FixedAmountRequestedMoney == null ? "null" : FixedAmountRequestedMoney.ToString())}");
+            toStringOutput.Add($"PercentageRequested = {(PercentageRequested == null ? "null" : PercentageRequested == string.Empty ? "" : PercentageRequested)}");
+            toStringOutput.Add($"TippingEnabled = {(TippingEnabled == null ? "null" : TippingEnabled.ToString())}");
+            toStringOutput.Add($"AutomaticPaymentSource = {(AutomaticPaymentSource == null ? "null" : AutomaticPaymentSource.ToString())}");
+            toStringOutput.Add($"CardId = {(CardId == null ? "null" : CardId == string.Empty ? "" : CardId)}");
+            toStringOutput.Add($"Reminders = {(Reminders == null ? "null" : $"[{ string.Join(", ", Reminders)} ]")}");
+            toStringOutput.Add($"ComputedAmountMoney = {(ComputedAmountMoney == null ? "null" : ComputedAmountMoney.ToString())}");
+            toStringOutput.Add($"TotalCompletedAmountMoney = {(TotalCompletedAmountMoney == null ? "null" : TotalCompletedAmountMoney.ToString())}");
+            toStringOutput.Add($"RoundingAdjustmentIncludedMoney = {(RoundingAdjustmentIncludedMoney == null ? "null" : RoundingAdjustmentIncludedMoney.ToString())}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is InvoicePaymentRequest other &&
+                ((Uid == null && other.Uid == null) || (Uid?.Equals(other.Uid) == true)) &&
+                ((RequestMethod == null && other.RequestMethod == null) || (RequestMethod?.Equals(other.RequestMethod) == true)) &&
+                ((RequestType == null && other.RequestType == null) || (RequestType?.Equals(other.RequestType) == true)) &&
+                ((DueDate == null && other.DueDate == null) || (DueDate?.Equals(other.DueDate) == true)) &&
+                ((FixedAmountRequestedMoney == null && other.FixedAmountRequestedMoney == null) || (FixedAmountRequestedMoney?.Equals(other.FixedAmountRequestedMoney) == true)) &&
+                ((PercentageRequested == null && other.PercentageRequested == null) || (PercentageRequested?.Equals(other.PercentageRequested) == true)) &&
+                ((TippingEnabled == null && other.TippingEnabled == null) || (TippingEnabled?.Equals(other.TippingEnabled) == true)) &&
+                ((AutomaticPaymentSource == null && other.AutomaticPaymentSource == null) || (AutomaticPaymentSource?.Equals(other.AutomaticPaymentSource) == true)) &&
+                ((CardId == null && other.CardId == null) || (CardId?.Equals(other.CardId) == true)) &&
+                ((Reminders == null && other.Reminders == null) || (Reminders?.Equals(other.Reminders) == true)) &&
+                ((ComputedAmountMoney == null && other.ComputedAmountMoney == null) || (ComputedAmountMoney?.Equals(other.ComputedAmountMoney) == true)) &&
+                ((TotalCompletedAmountMoney == null && other.TotalCompletedAmountMoney == null) || (TotalCompletedAmountMoney?.Equals(other.TotalCompletedAmountMoney) == true)) &&
+                ((RoundingAdjustmentIncludedMoney == null && other.RoundingAdjustmentIncludedMoney == null) || (RoundingAdjustmentIncludedMoney?.Equals(other.RoundingAdjustmentIncludedMoney) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 772730141;
+
+            if (Uid != null)
+            {
+               hashCode += Uid.GetHashCode();
+            }
+
+            if (RequestMethod != null)
+            {
+               hashCode += RequestMethod.GetHashCode();
+            }
+
+            if (RequestType != null)
+            {
+               hashCode += RequestType.GetHashCode();
+            }
+
+            if (DueDate != null)
+            {
+               hashCode += DueDate.GetHashCode();
+            }
+
+            if (FixedAmountRequestedMoney != null)
+            {
+               hashCode += FixedAmountRequestedMoney.GetHashCode();
+            }
+
+            if (PercentageRequested != null)
+            {
+               hashCode += PercentageRequested.GetHashCode();
+            }
+
+            if (TippingEnabled != null)
+            {
+               hashCode += TippingEnabled.GetHashCode();
+            }
+
+            if (AutomaticPaymentSource != null)
+            {
+               hashCode += AutomaticPaymentSource.GetHashCode();
+            }
+
+            if (CardId != null)
+            {
+               hashCode += CardId.GetHashCode();
+            }
+
+            if (Reminders != null)
+            {
+               hashCode += Reminders.GetHashCode();
+            }
+
+            if (ComputedAmountMoney != null)
+            {
+               hashCode += ComputedAmountMoney.GetHashCode();
+            }
+
+            if (TotalCompletedAmountMoney != null)
+            {
+               hashCode += TotalCompletedAmountMoney.GetHashCode();
+            }
+
+            if (RoundingAdjustmentIncludedMoney != null)
+            {
+               hashCode += RoundingAdjustmentIncludedMoney.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

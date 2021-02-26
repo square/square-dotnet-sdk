@@ -10,7 +10,7 @@
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `Id` | `string` | Optional | The Square-issued ID of the location. |
-| `Name` | `string` | Optional | The name of the location.<br>This information appears in the dashboard as the nickname. |
+| `Name` | `string` | Optional | The name of the location.<br>This information appears in the dashboard as the nickname.<br>A location name must be unique within a seller account. |
 | `Address` | [`Models.Address`](/doc/models/address.md) | Optional | Represents a physical address. |
 | `Timezone` | `string` | Optional | The [IANA Timezone](https://www.iana.org/time-zones) identifier for<br>the timezone of the location. |
 | `Capabilities` | [`IList<string>`](/doc/models/location-capability.md) | Optional | The Square features that are enabled for the location.<br>See [LocationCapability](#type-locationcapability) for possible values.<br>See [LocationCapability](#type-locationcapability) for possible values |

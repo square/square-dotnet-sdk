@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -97,6 +98,111 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("item_variations_for_item_option_values_query", NullValueHandling = NullValueHandling.Ignore)]
         public Models.CatalogQueryItemVariationsForItemOptionValues ItemVariationsForItemOptionValuesQuery { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"CatalogQuery : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"SortedAttributeQuery = {(SortedAttributeQuery == null ? "null" : SortedAttributeQuery.ToString())}");
+            toStringOutput.Add($"ExactQuery = {(ExactQuery == null ? "null" : ExactQuery.ToString())}");
+            toStringOutput.Add($"SetQuery = {(SetQuery == null ? "null" : SetQuery.ToString())}");
+            toStringOutput.Add($"PrefixQuery = {(PrefixQuery == null ? "null" : PrefixQuery.ToString())}");
+            toStringOutput.Add($"RangeQuery = {(RangeQuery == null ? "null" : RangeQuery.ToString())}");
+            toStringOutput.Add($"TextQuery = {(TextQuery == null ? "null" : TextQuery.ToString())}");
+            toStringOutput.Add($"ItemsForTaxQuery = {(ItemsForTaxQuery == null ? "null" : ItemsForTaxQuery.ToString())}");
+            toStringOutput.Add($"ItemsForModifierListQuery = {(ItemsForModifierListQuery == null ? "null" : ItemsForModifierListQuery.ToString())}");
+            toStringOutput.Add($"ItemsForItemOptionsQuery = {(ItemsForItemOptionsQuery == null ? "null" : ItemsForItemOptionsQuery.ToString())}");
+            toStringOutput.Add($"ItemVariationsForItemOptionValuesQuery = {(ItemVariationsForItemOptionValuesQuery == null ? "null" : ItemVariationsForItemOptionValuesQuery.ToString())}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is CatalogQuery other &&
+                ((SortedAttributeQuery == null && other.SortedAttributeQuery == null) || (SortedAttributeQuery?.Equals(other.SortedAttributeQuery) == true)) &&
+                ((ExactQuery == null && other.ExactQuery == null) || (ExactQuery?.Equals(other.ExactQuery) == true)) &&
+                ((SetQuery == null && other.SetQuery == null) || (SetQuery?.Equals(other.SetQuery) == true)) &&
+                ((PrefixQuery == null && other.PrefixQuery == null) || (PrefixQuery?.Equals(other.PrefixQuery) == true)) &&
+                ((RangeQuery == null && other.RangeQuery == null) || (RangeQuery?.Equals(other.RangeQuery) == true)) &&
+                ((TextQuery == null && other.TextQuery == null) || (TextQuery?.Equals(other.TextQuery) == true)) &&
+                ((ItemsForTaxQuery == null && other.ItemsForTaxQuery == null) || (ItemsForTaxQuery?.Equals(other.ItemsForTaxQuery) == true)) &&
+                ((ItemsForModifierListQuery == null && other.ItemsForModifierListQuery == null) || (ItemsForModifierListQuery?.Equals(other.ItemsForModifierListQuery) == true)) &&
+                ((ItemsForItemOptionsQuery == null && other.ItemsForItemOptionsQuery == null) || (ItemsForItemOptionsQuery?.Equals(other.ItemsForItemOptionsQuery) == true)) &&
+                ((ItemVariationsForItemOptionValuesQuery == null && other.ItemVariationsForItemOptionValuesQuery == null) || (ItemVariationsForItemOptionValuesQuery?.Equals(other.ItemVariationsForItemOptionValuesQuery) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 1871698487;
+
+            if (SortedAttributeQuery != null)
+            {
+               hashCode += SortedAttributeQuery.GetHashCode();
+            }
+
+            if (ExactQuery != null)
+            {
+               hashCode += ExactQuery.GetHashCode();
+            }
+
+            if (SetQuery != null)
+            {
+               hashCode += SetQuery.GetHashCode();
+            }
+
+            if (PrefixQuery != null)
+            {
+               hashCode += PrefixQuery.GetHashCode();
+            }
+
+            if (RangeQuery != null)
+            {
+               hashCode += RangeQuery.GetHashCode();
+            }
+
+            if (TextQuery != null)
+            {
+               hashCode += TextQuery.GetHashCode();
+            }
+
+            if (ItemsForTaxQuery != null)
+            {
+               hashCode += ItemsForTaxQuery.GetHashCode();
+            }
+
+            if (ItemsForModifierListQuery != null)
+            {
+               hashCode += ItemsForModifierListQuery.GetHashCode();
+            }
+
+            if (ItemsForItemOptionsQuery != null)
+            {
+               hashCode += ItemsForItemOptionsQuery.GetHashCode();
+            }
+
+            if (ItemVariationsForItemOptionValuesQuery != null)
+            {
+               hashCode += ItemVariationsForItemOptionValuesQuery.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

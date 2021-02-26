@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -24,6 +25,48 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("keywords")]
         public IList<string> Keywords { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"CatalogQueryText : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"Keywords = {(Keywords == null ? "null" : $"[{ string.Join(", ", Keywords)} ]")}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is CatalogQueryText other &&
+                ((Keywords == null && other.Keywords == null) || (Keywords?.Equals(other.Keywords) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -192618322;
+
+            if (Keywords != null)
+            {
+               hashCode += Keywords.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

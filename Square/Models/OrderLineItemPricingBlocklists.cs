@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -36,6 +37,55 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("blocked_taxes", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.OrderLineItemPricingBlocklistsBlockedTax> BlockedTaxes { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"OrderLineItemPricingBlocklists : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"BlockedDiscounts = {(BlockedDiscounts == null ? "null" : $"[{ string.Join(", ", BlockedDiscounts)} ]")}");
+            toStringOutput.Add($"BlockedTaxes = {(BlockedTaxes == null ? "null" : $"[{ string.Join(", ", BlockedTaxes)} ]")}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is OrderLineItemPricingBlocklists other &&
+                ((BlockedDiscounts == null && other.BlockedDiscounts == null) || (BlockedDiscounts?.Equals(other.BlockedDiscounts) == true)) &&
+                ((BlockedTaxes == null && other.BlockedTaxes == null) || (BlockedTaxes?.Equals(other.BlockedTaxes) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 497511120;
+
+            if (BlockedDiscounts != null)
+            {
+               hashCode += BlockedDiscounts.GetHashCode();
+            }
+
+            if (BlockedTaxes != null)
+            {
+               hashCode += BlockedTaxes.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

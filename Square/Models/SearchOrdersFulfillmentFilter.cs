@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -38,6 +39,55 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("fulfillment_states", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> FulfillmentStates { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"SearchOrdersFulfillmentFilter : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"FulfillmentTypes = {(FulfillmentTypes == null ? "null" : $"[{ string.Join(", ", FulfillmentTypes)} ]")}");
+            toStringOutput.Add($"FulfillmentStates = {(FulfillmentStates == null ? "null" : $"[{ string.Join(", ", FulfillmentStates)} ]")}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is SearchOrdersFulfillmentFilter other &&
+                ((FulfillmentTypes == null && other.FulfillmentTypes == null) || (FulfillmentTypes?.Equals(other.FulfillmentTypes) == true)) &&
+                ((FulfillmentStates == null && other.FulfillmentStates == null) || (FulfillmentStates?.Equals(other.FulfillmentStates) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -747213754;
+
+            if (FulfillmentTypes != null)
+            {
+               hashCode += FulfillmentTypes.GetHashCode();
+            }
+
+            if (FulfillmentStates != null)
+            {
+               hashCode += FulfillmentStates.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

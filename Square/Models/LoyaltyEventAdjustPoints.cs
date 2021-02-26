@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -40,6 +41,58 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("reason", NullValueHandling = NullValueHandling.Ignore)]
         public string Reason { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"LoyaltyEventAdjustPoints : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"LoyaltyProgramId = {(LoyaltyProgramId == null ? "null" : LoyaltyProgramId == string.Empty ? "" : LoyaltyProgramId)}");
+            toStringOutput.Add($"Points = {Points}");
+            toStringOutput.Add($"Reason = {(Reason == null ? "null" : Reason == string.Empty ? "" : Reason)}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is LoyaltyEventAdjustPoints other &&
+                ((LoyaltyProgramId == null && other.LoyaltyProgramId == null) || (LoyaltyProgramId?.Equals(other.LoyaltyProgramId) == true)) &&
+                Points.Equals(other.Points) &&
+                ((Reason == null && other.Reason == null) || (Reason?.Equals(other.Reason) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 318164469;
+
+            if (LoyaltyProgramId != null)
+            {
+               hashCode += LoyaltyProgramId.GetHashCode();
+            }
+            hashCode += Points.GetHashCode();
+
+            if (Reason != null)
+            {
+               hashCode += Reason.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

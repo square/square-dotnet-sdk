@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -32,6 +33,55 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("number")]
         public string Number { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"V1PhoneNumber : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"CallingCode = {(CallingCode == null ? "null" : CallingCode == string.Empty ? "" : CallingCode)}");
+            toStringOutput.Add($"Number = {(Number == null ? "null" : Number == string.Empty ? "" : Number)}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is V1PhoneNumber other &&
+                ((CallingCode == null && other.CallingCode == null) || (CallingCode?.Equals(other.CallingCode) == true)) &&
+                ((Number == null && other.Number == null) || (Number?.Equals(other.Number) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 343986405;
+
+            if (CallingCode != null)
+            {
+               hashCode += CallingCode.GetHashCode();
+            }
+
+            if (Number != null)
+            {
+               hashCode += Number.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

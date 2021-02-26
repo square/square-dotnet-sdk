@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -41,6 +42,62 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("placement", NullValueHandling = NullValueHandling.Ignore)]
         public string Placement { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"InvoiceCustomField : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"Label = {(Label == null ? "null" : Label == string.Empty ? "" : Label)}");
+            toStringOutput.Add($"MValue = {(MValue == null ? "null" : MValue == string.Empty ? "" : MValue)}");
+            toStringOutput.Add($"Placement = {(Placement == null ? "null" : Placement.ToString())}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is InvoiceCustomField other &&
+                ((Label == null && other.Label == null) || (Label?.Equals(other.Label) == true)) &&
+                ((MValue == null && other.MValue == null) || (MValue?.Equals(other.MValue) == true)) &&
+                ((Placement == null && other.Placement == null) || (Placement?.Equals(other.Placement) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -295655815;
+
+            if (Label != null)
+            {
+               hashCode += Label.GetHashCode();
+            }
+
+            if (MValue != null)
+            {
+               hashCode += MValue.GetHashCode();
+            }
+
+            if (Placement != null)
+            {
+               hashCode += Placement.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

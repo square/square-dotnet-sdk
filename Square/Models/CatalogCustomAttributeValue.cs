@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -81,6 +82,97 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("key", NullValueHandling = NullValueHandling.Ignore)]
         public string Key { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"CatalogCustomAttributeValue : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"Name = {(Name == null ? "null" : Name == string.Empty ? "" : Name)}");
+            toStringOutput.Add($"StringValue = {(StringValue == null ? "null" : StringValue == string.Empty ? "" : StringValue)}");
+            toStringOutput.Add($"CustomAttributeDefinitionId = {(CustomAttributeDefinitionId == null ? "null" : CustomAttributeDefinitionId == string.Empty ? "" : CustomAttributeDefinitionId)}");
+            toStringOutput.Add($"Type = {(Type == null ? "null" : Type.ToString())}");
+            toStringOutput.Add($"NumberValue = {(NumberValue == null ? "null" : NumberValue == string.Empty ? "" : NumberValue)}");
+            toStringOutput.Add($"BooleanValue = {(BooleanValue == null ? "null" : BooleanValue.ToString())}");
+            toStringOutput.Add($"SelectionUidValues = {(SelectionUidValues == null ? "null" : $"[{ string.Join(", ", SelectionUidValues)} ]")}");
+            toStringOutput.Add($"Key = {(Key == null ? "null" : Key == string.Empty ? "" : Key)}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is CatalogCustomAttributeValue other &&
+                ((Name == null && other.Name == null) || (Name?.Equals(other.Name) == true)) &&
+                ((StringValue == null && other.StringValue == null) || (StringValue?.Equals(other.StringValue) == true)) &&
+                ((CustomAttributeDefinitionId == null && other.CustomAttributeDefinitionId == null) || (CustomAttributeDefinitionId?.Equals(other.CustomAttributeDefinitionId) == true)) &&
+                ((Type == null && other.Type == null) || (Type?.Equals(other.Type) == true)) &&
+                ((NumberValue == null && other.NumberValue == null) || (NumberValue?.Equals(other.NumberValue) == true)) &&
+                ((BooleanValue == null && other.BooleanValue == null) || (BooleanValue?.Equals(other.BooleanValue) == true)) &&
+                ((SelectionUidValues == null && other.SelectionUidValues == null) || (SelectionUidValues?.Equals(other.SelectionUidValues) == true)) &&
+                ((Key == null && other.Key == null) || (Key?.Equals(other.Key) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 1910658984;
+
+            if (Name != null)
+            {
+               hashCode += Name.GetHashCode();
+            }
+
+            if (StringValue != null)
+            {
+               hashCode += StringValue.GetHashCode();
+            }
+
+            if (CustomAttributeDefinitionId != null)
+            {
+               hashCode += CustomAttributeDefinitionId.GetHashCode();
+            }
+
+            if (Type != null)
+            {
+               hashCode += Type.GetHashCode();
+            }
+
+            if (NumberValue != null)
+            {
+               hashCode += NumberValue.GetHashCode();
+            }
+
+            if (BooleanValue != null)
+            {
+               hashCode += BooleanValue.GetHashCode();
+            }
+
+            if (SelectionUidValues != null)
+            {
+               hashCode += SelectionUidValues.GetHashCode();
+            }
+
+            if (Key != null)
+            {
+               hashCode += Key.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

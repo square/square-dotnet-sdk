@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -242,6 +243,236 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("is_partial", NullValueHandling = NullValueHandling.Ignore)]
         public bool? IsPartial { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"V1Payment : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"Id = {(Id == null ? "null" : Id == string.Empty ? "" : Id)}");
+            toStringOutput.Add($"MerchantId = {(MerchantId == null ? "null" : MerchantId == string.Empty ? "" : MerchantId)}");
+            toStringOutput.Add($"CreatedAt = {(CreatedAt == null ? "null" : CreatedAt == string.Empty ? "" : CreatedAt)}");
+            toStringOutput.Add($"CreatorId = {(CreatorId == null ? "null" : CreatorId == string.Empty ? "" : CreatorId)}");
+            toStringOutput.Add($"Device = {(Device == null ? "null" : Device.ToString())}");
+            toStringOutput.Add($"PaymentUrl = {(PaymentUrl == null ? "null" : PaymentUrl == string.Empty ? "" : PaymentUrl)}");
+            toStringOutput.Add($"ReceiptUrl = {(ReceiptUrl == null ? "null" : ReceiptUrl == string.Empty ? "" : ReceiptUrl)}");
+            toStringOutput.Add($"InclusiveTaxMoney = {(InclusiveTaxMoney == null ? "null" : InclusiveTaxMoney.ToString())}");
+            toStringOutput.Add($"AdditiveTaxMoney = {(AdditiveTaxMoney == null ? "null" : AdditiveTaxMoney.ToString())}");
+            toStringOutput.Add($"TaxMoney = {(TaxMoney == null ? "null" : TaxMoney.ToString())}");
+            toStringOutput.Add($"TipMoney = {(TipMoney == null ? "null" : TipMoney.ToString())}");
+            toStringOutput.Add($"DiscountMoney = {(DiscountMoney == null ? "null" : DiscountMoney.ToString())}");
+            toStringOutput.Add($"TotalCollectedMoney = {(TotalCollectedMoney == null ? "null" : TotalCollectedMoney.ToString())}");
+            toStringOutput.Add($"ProcessingFeeMoney = {(ProcessingFeeMoney == null ? "null" : ProcessingFeeMoney.ToString())}");
+            toStringOutput.Add($"NetTotalMoney = {(NetTotalMoney == null ? "null" : NetTotalMoney.ToString())}");
+            toStringOutput.Add($"RefundedMoney = {(RefundedMoney == null ? "null" : RefundedMoney.ToString())}");
+            toStringOutput.Add($"SwedishRoundingMoney = {(SwedishRoundingMoney == null ? "null" : SwedishRoundingMoney.ToString())}");
+            toStringOutput.Add($"GrossSalesMoney = {(GrossSalesMoney == null ? "null" : GrossSalesMoney.ToString())}");
+            toStringOutput.Add($"NetSalesMoney = {(NetSalesMoney == null ? "null" : NetSalesMoney.ToString())}");
+            toStringOutput.Add($"InclusiveTax = {(InclusiveTax == null ? "null" : $"[{ string.Join(", ", InclusiveTax)} ]")}");
+            toStringOutput.Add($"AdditiveTax = {(AdditiveTax == null ? "null" : $"[{ string.Join(", ", AdditiveTax)} ]")}");
+            toStringOutput.Add($"Tender = {(Tender == null ? "null" : $"[{ string.Join(", ", Tender)} ]")}");
+            toStringOutput.Add($"Refunds = {(Refunds == null ? "null" : $"[{ string.Join(", ", Refunds)} ]")}");
+            toStringOutput.Add($"Itemizations = {(Itemizations == null ? "null" : $"[{ string.Join(", ", Itemizations)} ]")}");
+            toStringOutput.Add($"SurchargeMoney = {(SurchargeMoney == null ? "null" : SurchargeMoney.ToString())}");
+            toStringOutput.Add($"Surcharges = {(Surcharges == null ? "null" : $"[{ string.Join(", ", Surcharges)} ]")}");
+            toStringOutput.Add($"IsPartial = {(IsPartial == null ? "null" : IsPartial.ToString())}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is V1Payment other &&
+                ((Context == null && other.Context == null) || (Context?.Equals(other.Context) == true)) &&
+                ((Id == null && other.Id == null) || (Id?.Equals(other.Id) == true)) &&
+                ((MerchantId == null && other.MerchantId == null) || (MerchantId?.Equals(other.MerchantId) == true)) &&
+                ((CreatedAt == null && other.CreatedAt == null) || (CreatedAt?.Equals(other.CreatedAt) == true)) &&
+                ((CreatorId == null && other.CreatorId == null) || (CreatorId?.Equals(other.CreatorId) == true)) &&
+                ((Device == null && other.Device == null) || (Device?.Equals(other.Device) == true)) &&
+                ((PaymentUrl == null && other.PaymentUrl == null) || (PaymentUrl?.Equals(other.PaymentUrl) == true)) &&
+                ((ReceiptUrl == null && other.ReceiptUrl == null) || (ReceiptUrl?.Equals(other.ReceiptUrl) == true)) &&
+                ((InclusiveTaxMoney == null && other.InclusiveTaxMoney == null) || (InclusiveTaxMoney?.Equals(other.InclusiveTaxMoney) == true)) &&
+                ((AdditiveTaxMoney == null && other.AdditiveTaxMoney == null) || (AdditiveTaxMoney?.Equals(other.AdditiveTaxMoney) == true)) &&
+                ((TaxMoney == null && other.TaxMoney == null) || (TaxMoney?.Equals(other.TaxMoney) == true)) &&
+                ((TipMoney == null && other.TipMoney == null) || (TipMoney?.Equals(other.TipMoney) == true)) &&
+                ((DiscountMoney == null && other.DiscountMoney == null) || (DiscountMoney?.Equals(other.DiscountMoney) == true)) &&
+                ((TotalCollectedMoney == null && other.TotalCollectedMoney == null) || (TotalCollectedMoney?.Equals(other.TotalCollectedMoney) == true)) &&
+                ((ProcessingFeeMoney == null && other.ProcessingFeeMoney == null) || (ProcessingFeeMoney?.Equals(other.ProcessingFeeMoney) == true)) &&
+                ((NetTotalMoney == null && other.NetTotalMoney == null) || (NetTotalMoney?.Equals(other.NetTotalMoney) == true)) &&
+                ((RefundedMoney == null && other.RefundedMoney == null) || (RefundedMoney?.Equals(other.RefundedMoney) == true)) &&
+                ((SwedishRoundingMoney == null && other.SwedishRoundingMoney == null) || (SwedishRoundingMoney?.Equals(other.SwedishRoundingMoney) == true)) &&
+                ((GrossSalesMoney == null && other.GrossSalesMoney == null) || (GrossSalesMoney?.Equals(other.GrossSalesMoney) == true)) &&
+                ((NetSalesMoney == null && other.NetSalesMoney == null) || (NetSalesMoney?.Equals(other.NetSalesMoney) == true)) &&
+                ((InclusiveTax == null && other.InclusiveTax == null) || (InclusiveTax?.Equals(other.InclusiveTax) == true)) &&
+                ((AdditiveTax == null && other.AdditiveTax == null) || (AdditiveTax?.Equals(other.AdditiveTax) == true)) &&
+                ((Tender == null && other.Tender == null) || (Tender?.Equals(other.Tender) == true)) &&
+                ((Refunds == null && other.Refunds == null) || (Refunds?.Equals(other.Refunds) == true)) &&
+                ((Itemizations == null && other.Itemizations == null) || (Itemizations?.Equals(other.Itemizations) == true)) &&
+                ((SurchargeMoney == null && other.SurchargeMoney == null) || (SurchargeMoney?.Equals(other.SurchargeMoney) == true)) &&
+                ((Surcharges == null && other.Surcharges == null) || (Surcharges?.Equals(other.Surcharges) == true)) &&
+                ((IsPartial == null && other.IsPartial == null) || (IsPartial?.Equals(other.IsPartial) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -215174345;
+
+            if (Context != null)
+            {
+                hashCode += Context.GetHashCode();
+            }
+
+            if (Id != null)
+            {
+               hashCode += Id.GetHashCode();
+            }
+
+            if (MerchantId != null)
+            {
+               hashCode += MerchantId.GetHashCode();
+            }
+
+            if (CreatedAt != null)
+            {
+               hashCode += CreatedAt.GetHashCode();
+            }
+
+            if (CreatorId != null)
+            {
+               hashCode += CreatorId.GetHashCode();
+            }
+
+            if (Device != null)
+            {
+               hashCode += Device.GetHashCode();
+            }
+
+            if (PaymentUrl != null)
+            {
+               hashCode += PaymentUrl.GetHashCode();
+            }
+
+            if (ReceiptUrl != null)
+            {
+               hashCode += ReceiptUrl.GetHashCode();
+            }
+
+            if (InclusiveTaxMoney != null)
+            {
+               hashCode += InclusiveTaxMoney.GetHashCode();
+            }
+
+            if (AdditiveTaxMoney != null)
+            {
+               hashCode += AdditiveTaxMoney.GetHashCode();
+            }
+
+            if (TaxMoney != null)
+            {
+               hashCode += TaxMoney.GetHashCode();
+            }
+
+            if (TipMoney != null)
+            {
+               hashCode += TipMoney.GetHashCode();
+            }
+
+            if (DiscountMoney != null)
+            {
+               hashCode += DiscountMoney.GetHashCode();
+            }
+
+            if (TotalCollectedMoney != null)
+            {
+               hashCode += TotalCollectedMoney.GetHashCode();
+            }
+
+            if (ProcessingFeeMoney != null)
+            {
+               hashCode += ProcessingFeeMoney.GetHashCode();
+            }
+
+            if (NetTotalMoney != null)
+            {
+               hashCode += NetTotalMoney.GetHashCode();
+            }
+
+            if (RefundedMoney != null)
+            {
+               hashCode += RefundedMoney.GetHashCode();
+            }
+
+            if (SwedishRoundingMoney != null)
+            {
+               hashCode += SwedishRoundingMoney.GetHashCode();
+            }
+
+            if (GrossSalesMoney != null)
+            {
+               hashCode += GrossSalesMoney.GetHashCode();
+            }
+
+            if (NetSalesMoney != null)
+            {
+               hashCode += NetSalesMoney.GetHashCode();
+            }
+
+            if (InclusiveTax != null)
+            {
+               hashCode += InclusiveTax.GetHashCode();
+            }
+
+            if (AdditiveTax != null)
+            {
+               hashCode += AdditiveTax.GetHashCode();
+            }
+
+            if (Tender != null)
+            {
+               hashCode += Tender.GetHashCode();
+            }
+
+            if (Refunds != null)
+            {
+               hashCode += Refunds.GetHashCode();
+            }
+
+            if (Itemizations != null)
+            {
+               hashCode += Itemizations.GetHashCode();
+            }
+
+            if (SurchargeMoney != null)
+            {
+               hashCode += SurchargeMoney.GetHashCode();
+            }
+
+            if (Surcharges != null)
+            {
+               hashCode += Surcharges.GetHashCode();
+            }
+
+            if (IsPartial != null)
+            {
+               hashCode += IsPartial.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

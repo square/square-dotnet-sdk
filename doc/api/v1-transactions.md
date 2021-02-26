@@ -10,8 +10,6 @@ IV1TransactionsApi v1TransactionsApi = client.V1TransactionsApi;
 
 ## Methods
 
-* [List Bank Accounts](/doc/api/v1-transactions.md#list-bank-accounts)
-* [Retrieve Bank Account](/doc/api/v1-transactions.md#retrieve-bank-account)
 * [List Orders](/doc/api/v1-transactions.md#list-orders)
 * [Retrieve Order](/doc/api/v1-transactions.md#retrieve-order)
 * [Update Order](/doc/api/v1-transactions.md#update-order)
@@ -21,74 +19,6 @@ IV1TransactionsApi v1TransactionsApi = client.V1TransactionsApi;
 * [Create Refund](/doc/api/v1-transactions.md#create-refund)
 * [List Settlements](/doc/api/v1-transactions.md#list-settlements)
 * [Retrieve Settlement](/doc/api/v1-transactions.md#retrieve-settlement)
-
-
-# List Bank Accounts
-
-**This endpoint is deprecated. **
-
-Provides non-confidential details for all of a location's associated bank accounts. This endpoint does not provide full bank account numbers, and there is no way to obtain a full bank account number with the Connect API.
-
-```csharp
-ListBankAccountsAsync(string locationId)
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `locationId` | `string` | Template, Required | The ID of the location to list bank accounts for. |
-
-## Response Type
-
-[`Task<List<Models.V1BankAccount>>`](/doc/models/v1-bank-account.md)
-
-## Example Usage
-
-```csharp
-string locationId = "location_id4";
-
-try
-{
-    List<V1BankAccount> result = await v1TransactionsApi.ListBankAccountsAsync(locationId);
-}
-catch (ApiException e){};
-```
-
-
-# Retrieve Bank Account
-
-**This endpoint is deprecated. **
-
-Provides non-confidential details for a merchant's associated bank account. This endpoint does not provide full bank account numbers, and there is no way to obtain a full bank account number with the Connect API.
-
-```csharp
-RetrieveBankAccountAsync(string locationId, string bankAccountId)
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `locationId` | `string` | Template, Required | The ID of the bank account's associated location. |
-| `bankAccountId` | `string` | Template, Required | The bank account's Square-issued ID. You obtain this value from Settlement objects returned. |
-
-## Response Type
-
-[`Task<Models.V1BankAccount>`](/doc/models/v1-bank-account.md)
-
-## Example Usage
-
-```csharp
-string locationId = "location_id4";
-string bankAccountId = "bank_account_id0";
-
-try
-{
-    V1BankAccount result = await v1TransactionsApi.RetrieveBankAccountAsync(locationId, bankAccountId);
-}
-catch (ApiException e){};
-```
 
 
 # List Orders
@@ -108,7 +38,7 @@ ListOrdersAsync(
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `locationId` | `string` | Template, Required | The ID of the location to list online store orders for. |
-| `order` | [`string`](/doc/models/sort-order.md) | Query, Optional | TThe order in which payments are listed in the response. |
+| `order` | [`string`](/doc/models/sort-order.md) | Query, Optional | The order in which payments are listed in the response. |
 | `limit` | `int?` | Query, Optional | The maximum number of payments to return in a single response. This value cannot exceed 200. |
 | `batchToken` | `string` | Query, Optional | A pagination cursor to retrieve the next set of results for your<br>original query to the endpoint. |
 
@@ -318,7 +248,7 @@ ListRefundsAsync(
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `locationId` | `string` | Template, Required | The ID of the location to list refunds for. |
-| `order` | [`string`](/doc/models/sort-order.md) | Query, Optional | TThe order in which payments are listed in the response. |
+| `order` | [`string`](/doc/models/sort-order.md) | Query, Optional | The order in which payments are listed in the response. |
 | `beginTime` | `string` | Query, Optional | The beginning of the requested reporting period, in ISO 8601 format. If this value is before January 1, 2013 (2013-01-01T00:00:00Z), this endpoint returns an error. Default value: The current time minus one year. |
 | `endTime` | `string` | Query, Optional | The end of the requested reporting period, in ISO 8601 format. If this value is more than one year greater than begin_time, this endpoint returns an error. Default value: The current time. |
 | `limit` | `int?` | Query, Optional | The approximate number of refunds to return in a single response. Default: 100. Max: 200. Response may contain more results than the prescribed limit when refunds are made simultaneously to multiple tenders in a payment or when refunds are generated in an exchange to account for the value of returned goods. |

@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -78,6 +79,7 @@ namespace Square.Models
         /// <summary>
         /// The name of the location.
         /// This information appears in the dashboard as the nickname.
+        /// A location name must be unique within a seller account.
         /// </summary>
         [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
         public string Name { get; }
@@ -242,6 +244,223 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("full_format_logo_url", NullValueHandling = NullValueHandling.Ignore)]
         public string FullFormatLogoUrl { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"Location : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"Id = {(Id == null ? "null" : Id == string.Empty ? "" : Id)}");
+            toStringOutput.Add($"Name = {(Name == null ? "null" : Name == string.Empty ? "" : Name)}");
+            toStringOutput.Add($"Address = {(Address == null ? "null" : Address.ToString())}");
+            toStringOutput.Add($"Timezone = {(Timezone == null ? "null" : Timezone == string.Empty ? "" : Timezone)}");
+            toStringOutput.Add($"Capabilities = {(Capabilities == null ? "null" : $"[{ string.Join(", ", Capabilities)} ]")}");
+            toStringOutput.Add($"Status = {(Status == null ? "null" : Status.ToString())}");
+            toStringOutput.Add($"CreatedAt = {(CreatedAt == null ? "null" : CreatedAt == string.Empty ? "" : CreatedAt)}");
+            toStringOutput.Add($"MerchantId = {(MerchantId == null ? "null" : MerchantId == string.Empty ? "" : MerchantId)}");
+            toStringOutput.Add($"Country = {(Country == null ? "null" : Country.ToString())}");
+            toStringOutput.Add($"LanguageCode = {(LanguageCode == null ? "null" : LanguageCode == string.Empty ? "" : LanguageCode)}");
+            toStringOutput.Add($"Currency = {(Currency == null ? "null" : Currency.ToString())}");
+            toStringOutput.Add($"PhoneNumber = {(PhoneNumber == null ? "null" : PhoneNumber == string.Empty ? "" : PhoneNumber)}");
+            toStringOutput.Add($"BusinessName = {(BusinessName == null ? "null" : BusinessName == string.Empty ? "" : BusinessName)}");
+            toStringOutput.Add($"Type = {(Type == null ? "null" : Type.ToString())}");
+            toStringOutput.Add($"WebsiteUrl = {(WebsiteUrl == null ? "null" : WebsiteUrl == string.Empty ? "" : WebsiteUrl)}");
+            toStringOutput.Add($"BusinessHours = {(BusinessHours == null ? "null" : BusinessHours.ToString())}");
+            toStringOutput.Add($"BusinessEmail = {(BusinessEmail == null ? "null" : BusinessEmail == string.Empty ? "" : BusinessEmail)}");
+            toStringOutput.Add($"Description = {(Description == null ? "null" : Description == string.Empty ? "" : Description)}");
+            toStringOutput.Add($"TwitterUsername = {(TwitterUsername == null ? "null" : TwitterUsername == string.Empty ? "" : TwitterUsername)}");
+            toStringOutput.Add($"InstagramUsername = {(InstagramUsername == null ? "null" : InstagramUsername == string.Empty ? "" : InstagramUsername)}");
+            toStringOutput.Add($"FacebookUrl = {(FacebookUrl == null ? "null" : FacebookUrl == string.Empty ? "" : FacebookUrl)}");
+            toStringOutput.Add($"Coordinates = {(Coordinates == null ? "null" : Coordinates.ToString())}");
+            toStringOutput.Add($"LogoUrl = {(LogoUrl == null ? "null" : LogoUrl == string.Empty ? "" : LogoUrl)}");
+            toStringOutput.Add($"PosBackgroundUrl = {(PosBackgroundUrl == null ? "null" : PosBackgroundUrl == string.Empty ? "" : PosBackgroundUrl)}");
+            toStringOutput.Add($"Mcc = {(Mcc == null ? "null" : Mcc == string.Empty ? "" : Mcc)}");
+            toStringOutput.Add($"FullFormatLogoUrl = {(FullFormatLogoUrl == null ? "null" : FullFormatLogoUrl == string.Empty ? "" : FullFormatLogoUrl)}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is Location other &&
+                ((Id == null && other.Id == null) || (Id?.Equals(other.Id) == true)) &&
+                ((Name == null && other.Name == null) || (Name?.Equals(other.Name) == true)) &&
+                ((Address == null && other.Address == null) || (Address?.Equals(other.Address) == true)) &&
+                ((Timezone == null && other.Timezone == null) || (Timezone?.Equals(other.Timezone) == true)) &&
+                ((Capabilities == null && other.Capabilities == null) || (Capabilities?.Equals(other.Capabilities) == true)) &&
+                ((Status == null && other.Status == null) || (Status?.Equals(other.Status) == true)) &&
+                ((CreatedAt == null && other.CreatedAt == null) || (CreatedAt?.Equals(other.CreatedAt) == true)) &&
+                ((MerchantId == null && other.MerchantId == null) || (MerchantId?.Equals(other.MerchantId) == true)) &&
+                ((Country == null && other.Country == null) || (Country?.Equals(other.Country) == true)) &&
+                ((LanguageCode == null && other.LanguageCode == null) || (LanguageCode?.Equals(other.LanguageCode) == true)) &&
+                ((Currency == null && other.Currency == null) || (Currency?.Equals(other.Currency) == true)) &&
+                ((PhoneNumber == null && other.PhoneNumber == null) || (PhoneNumber?.Equals(other.PhoneNumber) == true)) &&
+                ((BusinessName == null && other.BusinessName == null) || (BusinessName?.Equals(other.BusinessName) == true)) &&
+                ((Type == null && other.Type == null) || (Type?.Equals(other.Type) == true)) &&
+                ((WebsiteUrl == null && other.WebsiteUrl == null) || (WebsiteUrl?.Equals(other.WebsiteUrl) == true)) &&
+                ((BusinessHours == null && other.BusinessHours == null) || (BusinessHours?.Equals(other.BusinessHours) == true)) &&
+                ((BusinessEmail == null && other.BusinessEmail == null) || (BusinessEmail?.Equals(other.BusinessEmail) == true)) &&
+                ((Description == null && other.Description == null) || (Description?.Equals(other.Description) == true)) &&
+                ((TwitterUsername == null && other.TwitterUsername == null) || (TwitterUsername?.Equals(other.TwitterUsername) == true)) &&
+                ((InstagramUsername == null && other.InstagramUsername == null) || (InstagramUsername?.Equals(other.InstagramUsername) == true)) &&
+                ((FacebookUrl == null && other.FacebookUrl == null) || (FacebookUrl?.Equals(other.FacebookUrl) == true)) &&
+                ((Coordinates == null && other.Coordinates == null) || (Coordinates?.Equals(other.Coordinates) == true)) &&
+                ((LogoUrl == null && other.LogoUrl == null) || (LogoUrl?.Equals(other.LogoUrl) == true)) &&
+                ((PosBackgroundUrl == null && other.PosBackgroundUrl == null) || (PosBackgroundUrl?.Equals(other.PosBackgroundUrl) == true)) &&
+                ((Mcc == null && other.Mcc == null) || (Mcc?.Equals(other.Mcc) == true)) &&
+                ((FullFormatLogoUrl == null && other.FullFormatLogoUrl == null) || (FullFormatLogoUrl?.Equals(other.FullFormatLogoUrl) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -255518735;
+
+            if (Id != null)
+            {
+               hashCode += Id.GetHashCode();
+            }
+
+            if (Name != null)
+            {
+               hashCode += Name.GetHashCode();
+            }
+
+            if (Address != null)
+            {
+               hashCode += Address.GetHashCode();
+            }
+
+            if (Timezone != null)
+            {
+               hashCode += Timezone.GetHashCode();
+            }
+
+            if (Capabilities != null)
+            {
+               hashCode += Capabilities.GetHashCode();
+            }
+
+            if (Status != null)
+            {
+               hashCode += Status.GetHashCode();
+            }
+
+            if (CreatedAt != null)
+            {
+               hashCode += CreatedAt.GetHashCode();
+            }
+
+            if (MerchantId != null)
+            {
+               hashCode += MerchantId.GetHashCode();
+            }
+
+            if (Country != null)
+            {
+               hashCode += Country.GetHashCode();
+            }
+
+            if (LanguageCode != null)
+            {
+               hashCode += LanguageCode.GetHashCode();
+            }
+
+            if (Currency != null)
+            {
+               hashCode += Currency.GetHashCode();
+            }
+
+            if (PhoneNumber != null)
+            {
+               hashCode += PhoneNumber.GetHashCode();
+            }
+
+            if (BusinessName != null)
+            {
+               hashCode += BusinessName.GetHashCode();
+            }
+
+            if (Type != null)
+            {
+               hashCode += Type.GetHashCode();
+            }
+
+            if (WebsiteUrl != null)
+            {
+               hashCode += WebsiteUrl.GetHashCode();
+            }
+
+            if (BusinessHours != null)
+            {
+               hashCode += BusinessHours.GetHashCode();
+            }
+
+            if (BusinessEmail != null)
+            {
+               hashCode += BusinessEmail.GetHashCode();
+            }
+
+            if (Description != null)
+            {
+               hashCode += Description.GetHashCode();
+            }
+
+            if (TwitterUsername != null)
+            {
+               hashCode += TwitterUsername.GetHashCode();
+            }
+
+            if (InstagramUsername != null)
+            {
+               hashCode += InstagramUsername.GetHashCode();
+            }
+
+            if (FacebookUrl != null)
+            {
+               hashCode += FacebookUrl.GetHashCode();
+            }
+
+            if (Coordinates != null)
+            {
+               hashCode += Coordinates.GetHashCode();
+            }
+
+            if (LogoUrl != null)
+            {
+               hashCode += LogoUrl.GetHashCode();
+            }
+
+            if (PosBackgroundUrl != null)
+            {
+               hashCode += PosBackgroundUrl.GetHashCode();
+            }
+
+            if (Mcc != null)
+            {
+               hashCode += Mcc.GetHashCode();
+            }
+
+            if (FullFormatLogoUrl != null)
+            {
+               hashCode += FullFormatLogoUrl.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

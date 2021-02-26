@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -35,6 +36,48 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("event", NullValueHandling = NullValueHandling.Ignore)]
         public string MEvent { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"CatalogTimePeriod : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"MEvent = {(MEvent == null ? "null" : MEvent == string.Empty ? "" : MEvent)}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is CatalogTimePeriod other &&
+                ((MEvent == null && other.MEvent == null) || (MEvent?.Equals(other.MEvent) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 1787594864;
+
+            if (MEvent != null)
+            {
+               hashCode += MEvent.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

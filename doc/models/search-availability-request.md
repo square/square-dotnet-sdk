@@ -7,9 +7,9 @@
 
 ## Fields
 
-| Name | Type | Description |
-|  --- | --- | --- |
-| `Query` | [`Models.SearchAvailabilityQuery`](/doc/models/search-availability-query.md) | Query conditions to search for availabilities of bookings. |
+| Name | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `Query` | [`Models.SearchAvailabilityQuery`](/doc/models/search-availability-query.md) | Required | Query conditions to search for availabilities of bookings. |
 
 ## Example (as JSON)
 

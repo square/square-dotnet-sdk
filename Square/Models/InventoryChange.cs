@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -53,6 +54,69 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("transfer", NullValueHandling = NullValueHandling.Ignore)]
         public Models.InventoryTransfer Transfer { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"InventoryChange : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"Type = {(Type == null ? "null" : Type.ToString())}");
+            toStringOutput.Add($"PhysicalCount = {(PhysicalCount == null ? "null" : PhysicalCount.ToString())}");
+            toStringOutput.Add($"Adjustment = {(Adjustment == null ? "null" : Adjustment.ToString())}");
+            toStringOutput.Add($"Transfer = {(Transfer == null ? "null" : Transfer.ToString())}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is InventoryChange other &&
+                ((Type == null && other.Type == null) || (Type?.Equals(other.Type) == true)) &&
+                ((PhysicalCount == null && other.PhysicalCount == null) || (PhysicalCount?.Equals(other.PhysicalCount) == true)) &&
+                ((Adjustment == null && other.Adjustment == null) || (Adjustment?.Equals(other.Adjustment) == true)) &&
+                ((Transfer == null && other.Transfer == null) || (Transfer?.Equals(other.Transfer) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -1849913550;
+
+            if (Type != null)
+            {
+               hashCode += Type.GetHashCode();
+            }
+
+            if (PhysicalCount != null)
+            {
+               hashCode += PhysicalCount.GetHashCode();
+            }
+
+            if (Adjustment != null)
+            {
+               hashCode += Adjustment.GetHashCode();
+            }
+
+            if (Transfer != null)
+            {
+               hashCode += Transfer.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

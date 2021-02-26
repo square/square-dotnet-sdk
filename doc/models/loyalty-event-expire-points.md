@@ -9,10 +9,10 @@ Provides metadata when the event `type` is `EXPIRE_POINTS`.
 
 ## Fields
 
-| Name | Type | Description |
-|  --- | --- | --- |
-| `LoyaltyProgramId` | `string` | The Square-assigned ID of the [loyalty program](#type-LoyaltyProgram).<br>**Constraints**: *Minimum Length*: `1`, *Maximum Length*: `36` |
-| `Points` | `int` | The number of points expired. |
+| Name | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `LoyaltyProgramId` | `string` | Required | The Square-assigned ID of the [loyalty program](#type-LoyaltyProgram).<br>**Constraints**: *Minimum Length*: `1`, *Maximum Length*: `36` |
+| `Points` | `int` | Required | The number of points expired. |
 
 ## Example (as JSON)
 

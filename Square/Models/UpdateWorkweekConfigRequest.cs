@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -25,6 +26,48 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("workweek_config")]
         public Models.WorkweekConfig WorkweekConfig { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"UpdateWorkweekConfigRequest : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"WorkweekConfig = {(WorkweekConfig == null ? "null" : WorkweekConfig.ToString())}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is UpdateWorkweekConfigRequest other &&
+                ((WorkweekConfig == null && other.WorkweekConfig == null) || (WorkweekConfig?.Equals(other.WorkweekConfig) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -161126356;
+
+            if (WorkweekConfig != null)
+            {
+               hashCode += WorkweekConfig.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

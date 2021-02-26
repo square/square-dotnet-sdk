@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -24,6 +25,48 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("email_unsubscribed", NullValueHandling = NullValueHandling.Ignore)]
         public bool? EmailUnsubscribed { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"CustomerPreferences : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"EmailUnsubscribed = {(EmailUnsubscribed == null ? "null" : EmailUnsubscribed.ToString())}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is CustomerPreferences other &&
+                ((EmailUnsubscribed == null && other.EmailUnsubscribed == null) || (EmailUnsubscribed?.Equals(other.EmailUnsubscribed) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -1448015667;
+
+            if (EmailUnsubscribed != null)
+            {
+               hashCode += EmailUnsubscribed.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

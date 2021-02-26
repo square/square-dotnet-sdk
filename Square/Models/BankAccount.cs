@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -163,6 +164,152 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("bank_name", NullValueHandling = NullValueHandling.Ignore)]
         public string BankName { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"BankAccount : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"Id = {(Id == null ? "null" : Id == string.Empty ? "" : Id)}");
+            toStringOutput.Add($"AccountNumberSuffix = {(AccountNumberSuffix == null ? "null" : AccountNumberSuffix == string.Empty ? "" : AccountNumberSuffix)}");
+            toStringOutput.Add($"Country = {(Country == null ? "null" : Country.ToString())}");
+            toStringOutput.Add($"Currency = {(Currency == null ? "null" : Currency.ToString())}");
+            toStringOutput.Add($"AccountType = {(AccountType == null ? "null" : AccountType.ToString())}");
+            toStringOutput.Add($"HolderName = {(HolderName == null ? "null" : HolderName == string.Empty ? "" : HolderName)}");
+            toStringOutput.Add($"PrimaryBankIdentificationNumber = {(PrimaryBankIdentificationNumber == null ? "null" : PrimaryBankIdentificationNumber == string.Empty ? "" : PrimaryBankIdentificationNumber)}");
+            toStringOutput.Add($"SecondaryBankIdentificationNumber = {(SecondaryBankIdentificationNumber == null ? "null" : SecondaryBankIdentificationNumber == string.Empty ? "" : SecondaryBankIdentificationNumber)}");
+            toStringOutput.Add($"DebitMandateReferenceId = {(DebitMandateReferenceId == null ? "null" : DebitMandateReferenceId == string.Empty ? "" : DebitMandateReferenceId)}");
+            toStringOutput.Add($"ReferenceId = {(ReferenceId == null ? "null" : ReferenceId == string.Empty ? "" : ReferenceId)}");
+            toStringOutput.Add($"LocationId = {(LocationId == null ? "null" : LocationId == string.Empty ? "" : LocationId)}");
+            toStringOutput.Add($"Status = {(Status == null ? "null" : Status.ToString())}");
+            toStringOutput.Add($"Creditable = {Creditable}");
+            toStringOutput.Add($"Debitable = {Debitable}");
+            toStringOutput.Add($"Fingerprint = {(Fingerprint == null ? "null" : Fingerprint == string.Empty ? "" : Fingerprint)}");
+            toStringOutput.Add($"Version = {(Version == null ? "null" : Version.ToString())}");
+            toStringOutput.Add($"BankName = {(BankName == null ? "null" : BankName == string.Empty ? "" : BankName)}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is BankAccount other &&
+                ((Id == null && other.Id == null) || (Id?.Equals(other.Id) == true)) &&
+                ((AccountNumberSuffix == null && other.AccountNumberSuffix == null) || (AccountNumberSuffix?.Equals(other.AccountNumberSuffix) == true)) &&
+                ((Country == null && other.Country == null) || (Country?.Equals(other.Country) == true)) &&
+                ((Currency == null && other.Currency == null) || (Currency?.Equals(other.Currency) == true)) &&
+                ((AccountType == null && other.AccountType == null) || (AccountType?.Equals(other.AccountType) == true)) &&
+                ((HolderName == null && other.HolderName == null) || (HolderName?.Equals(other.HolderName) == true)) &&
+                ((PrimaryBankIdentificationNumber == null && other.PrimaryBankIdentificationNumber == null) || (PrimaryBankIdentificationNumber?.Equals(other.PrimaryBankIdentificationNumber) == true)) &&
+                ((SecondaryBankIdentificationNumber == null && other.SecondaryBankIdentificationNumber == null) || (SecondaryBankIdentificationNumber?.Equals(other.SecondaryBankIdentificationNumber) == true)) &&
+                ((DebitMandateReferenceId == null && other.DebitMandateReferenceId == null) || (DebitMandateReferenceId?.Equals(other.DebitMandateReferenceId) == true)) &&
+                ((ReferenceId == null && other.ReferenceId == null) || (ReferenceId?.Equals(other.ReferenceId) == true)) &&
+                ((LocationId == null && other.LocationId == null) || (LocationId?.Equals(other.LocationId) == true)) &&
+                ((Status == null && other.Status == null) || (Status?.Equals(other.Status) == true)) &&
+                Creditable.Equals(other.Creditable) &&
+                Debitable.Equals(other.Debitable) &&
+                ((Fingerprint == null && other.Fingerprint == null) || (Fingerprint?.Equals(other.Fingerprint) == true)) &&
+                ((Version == null && other.Version == null) || (Version?.Equals(other.Version) == true)) &&
+                ((BankName == null && other.BankName == null) || (BankName?.Equals(other.BankName) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 424336074;
+
+            if (Id != null)
+            {
+               hashCode += Id.GetHashCode();
+            }
+
+            if (AccountNumberSuffix != null)
+            {
+               hashCode += AccountNumberSuffix.GetHashCode();
+            }
+
+            if (Country != null)
+            {
+               hashCode += Country.GetHashCode();
+            }
+
+            if (Currency != null)
+            {
+               hashCode += Currency.GetHashCode();
+            }
+
+            if (AccountType != null)
+            {
+               hashCode += AccountType.GetHashCode();
+            }
+
+            if (HolderName != null)
+            {
+               hashCode += HolderName.GetHashCode();
+            }
+
+            if (PrimaryBankIdentificationNumber != null)
+            {
+               hashCode += PrimaryBankIdentificationNumber.GetHashCode();
+            }
+
+            if (SecondaryBankIdentificationNumber != null)
+            {
+               hashCode += SecondaryBankIdentificationNumber.GetHashCode();
+            }
+
+            if (DebitMandateReferenceId != null)
+            {
+               hashCode += DebitMandateReferenceId.GetHashCode();
+            }
+
+            if (ReferenceId != null)
+            {
+               hashCode += ReferenceId.GetHashCode();
+            }
+
+            if (LocationId != null)
+            {
+               hashCode += LocationId.GetHashCode();
+            }
+
+            if (Status != null)
+            {
+               hashCode += Status.GetHashCode();
+            }
+            hashCode += Creditable.GetHashCode();
+            hashCode += Debitable.GetHashCode();
+
+            if (Fingerprint != null)
+            {
+               hashCode += Fingerprint.GetHashCode();
+            }
+
+            if (Version != null)
+            {
+               hashCode += Version.GetHashCode();
+            }
+
+            if (BankName != null)
+            {
+               hashCode += BankName.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -164,6 +165,173 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("is_exchange", NullValueHandling = NullValueHandling.Ignore)]
         public bool? IsExchange { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"V1Refund : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"Type = {(Type == null ? "null" : Type.ToString())}");
+            toStringOutput.Add($"Reason = {(Reason == null ? "null" : Reason == string.Empty ? "" : Reason)}");
+            toStringOutput.Add($"RefundedMoney = {(RefundedMoney == null ? "null" : RefundedMoney.ToString())}");
+            toStringOutput.Add($"RefundedProcessingFeeMoney = {(RefundedProcessingFeeMoney == null ? "null" : RefundedProcessingFeeMoney.ToString())}");
+            toStringOutput.Add($"RefundedTaxMoney = {(RefundedTaxMoney == null ? "null" : RefundedTaxMoney.ToString())}");
+            toStringOutput.Add($"RefundedAdditiveTaxMoney = {(RefundedAdditiveTaxMoney == null ? "null" : RefundedAdditiveTaxMoney.ToString())}");
+            toStringOutput.Add($"RefundedAdditiveTax = {(RefundedAdditiveTax == null ? "null" : $"[{ string.Join(", ", RefundedAdditiveTax)} ]")}");
+            toStringOutput.Add($"RefundedInclusiveTaxMoney = {(RefundedInclusiveTaxMoney == null ? "null" : RefundedInclusiveTaxMoney.ToString())}");
+            toStringOutput.Add($"RefundedInclusiveTax = {(RefundedInclusiveTax == null ? "null" : $"[{ string.Join(", ", RefundedInclusiveTax)} ]")}");
+            toStringOutput.Add($"RefundedTipMoney = {(RefundedTipMoney == null ? "null" : RefundedTipMoney.ToString())}");
+            toStringOutput.Add($"RefundedDiscountMoney = {(RefundedDiscountMoney == null ? "null" : RefundedDiscountMoney.ToString())}");
+            toStringOutput.Add($"RefundedSurchargeMoney = {(RefundedSurchargeMoney == null ? "null" : RefundedSurchargeMoney.ToString())}");
+            toStringOutput.Add($"RefundedSurcharges = {(RefundedSurcharges == null ? "null" : $"[{ string.Join(", ", RefundedSurcharges)} ]")}");
+            toStringOutput.Add($"CreatedAt = {(CreatedAt == null ? "null" : CreatedAt == string.Empty ? "" : CreatedAt)}");
+            toStringOutput.Add($"ProcessedAt = {(ProcessedAt == null ? "null" : ProcessedAt == string.Empty ? "" : ProcessedAt)}");
+            toStringOutput.Add($"PaymentId = {(PaymentId == null ? "null" : PaymentId == string.Empty ? "" : PaymentId)}");
+            toStringOutput.Add($"MerchantId = {(MerchantId == null ? "null" : MerchantId == string.Empty ? "" : MerchantId)}");
+            toStringOutput.Add($"IsExchange = {(IsExchange == null ? "null" : IsExchange.ToString())}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is V1Refund other &&
+                ((Context == null && other.Context == null) || (Context?.Equals(other.Context) == true)) &&
+                ((Type == null && other.Type == null) || (Type?.Equals(other.Type) == true)) &&
+                ((Reason == null && other.Reason == null) || (Reason?.Equals(other.Reason) == true)) &&
+                ((RefundedMoney == null && other.RefundedMoney == null) || (RefundedMoney?.Equals(other.RefundedMoney) == true)) &&
+                ((RefundedProcessingFeeMoney == null && other.RefundedProcessingFeeMoney == null) || (RefundedProcessingFeeMoney?.Equals(other.RefundedProcessingFeeMoney) == true)) &&
+                ((RefundedTaxMoney == null && other.RefundedTaxMoney == null) || (RefundedTaxMoney?.Equals(other.RefundedTaxMoney) == true)) &&
+                ((RefundedAdditiveTaxMoney == null && other.RefundedAdditiveTaxMoney == null) || (RefundedAdditiveTaxMoney?.Equals(other.RefundedAdditiveTaxMoney) == true)) &&
+                ((RefundedAdditiveTax == null && other.RefundedAdditiveTax == null) || (RefundedAdditiveTax?.Equals(other.RefundedAdditiveTax) == true)) &&
+                ((RefundedInclusiveTaxMoney == null && other.RefundedInclusiveTaxMoney == null) || (RefundedInclusiveTaxMoney?.Equals(other.RefundedInclusiveTaxMoney) == true)) &&
+                ((RefundedInclusiveTax == null && other.RefundedInclusiveTax == null) || (RefundedInclusiveTax?.Equals(other.RefundedInclusiveTax) == true)) &&
+                ((RefundedTipMoney == null && other.RefundedTipMoney == null) || (RefundedTipMoney?.Equals(other.RefundedTipMoney) == true)) &&
+                ((RefundedDiscountMoney == null && other.RefundedDiscountMoney == null) || (RefundedDiscountMoney?.Equals(other.RefundedDiscountMoney) == true)) &&
+                ((RefundedSurchargeMoney == null && other.RefundedSurchargeMoney == null) || (RefundedSurchargeMoney?.Equals(other.RefundedSurchargeMoney) == true)) &&
+                ((RefundedSurcharges == null && other.RefundedSurcharges == null) || (RefundedSurcharges?.Equals(other.RefundedSurcharges) == true)) &&
+                ((CreatedAt == null && other.CreatedAt == null) || (CreatedAt?.Equals(other.CreatedAt) == true)) &&
+                ((ProcessedAt == null && other.ProcessedAt == null) || (ProcessedAt?.Equals(other.ProcessedAt) == true)) &&
+                ((PaymentId == null && other.PaymentId == null) || (PaymentId?.Equals(other.PaymentId) == true)) &&
+                ((MerchantId == null && other.MerchantId == null) || (MerchantId?.Equals(other.MerchantId) == true)) &&
+                ((IsExchange == null && other.IsExchange == null) || (IsExchange?.Equals(other.IsExchange) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 699909783;
+
+            if (Context != null)
+            {
+                hashCode += Context.GetHashCode();
+            }
+
+            if (Type != null)
+            {
+               hashCode += Type.GetHashCode();
+            }
+
+            if (Reason != null)
+            {
+               hashCode += Reason.GetHashCode();
+            }
+
+            if (RefundedMoney != null)
+            {
+               hashCode += RefundedMoney.GetHashCode();
+            }
+
+            if (RefundedProcessingFeeMoney != null)
+            {
+               hashCode += RefundedProcessingFeeMoney.GetHashCode();
+            }
+
+            if (RefundedTaxMoney != null)
+            {
+               hashCode += RefundedTaxMoney.GetHashCode();
+            }
+
+            if (RefundedAdditiveTaxMoney != null)
+            {
+               hashCode += RefundedAdditiveTaxMoney.GetHashCode();
+            }
+
+            if (RefundedAdditiveTax != null)
+            {
+               hashCode += RefundedAdditiveTax.GetHashCode();
+            }
+
+            if (RefundedInclusiveTaxMoney != null)
+            {
+               hashCode += RefundedInclusiveTaxMoney.GetHashCode();
+            }
+
+            if (RefundedInclusiveTax != null)
+            {
+               hashCode += RefundedInclusiveTax.GetHashCode();
+            }
+
+            if (RefundedTipMoney != null)
+            {
+               hashCode += RefundedTipMoney.GetHashCode();
+            }
+
+            if (RefundedDiscountMoney != null)
+            {
+               hashCode += RefundedDiscountMoney.GetHashCode();
+            }
+
+            if (RefundedSurchargeMoney != null)
+            {
+               hashCode += RefundedSurchargeMoney.GetHashCode();
+            }
+
+            if (RefundedSurcharges != null)
+            {
+               hashCode += RefundedSurcharges.GetHashCode();
+            }
+
+            if (CreatedAt != null)
+            {
+               hashCode += CreatedAt.GetHashCode();
+            }
+
+            if (ProcessedAt != null)
+            {
+               hashCode += ProcessedAt.GetHashCode();
+            }
+
+            if (PaymentId != null)
+            {
+               hashCode += PaymentId.GetHashCode();
+            }
+
+            if (MerchantId != null)
+            {
+               hashCode += MerchantId.GetHashCode();
+            }
+
+            if (IsExchange != null)
+            {
+               hashCode += IsExchange.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

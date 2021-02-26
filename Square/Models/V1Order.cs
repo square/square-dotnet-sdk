@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -236,6 +237,222 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("btc_price_satoshi", NullValueHandling = NullValueHandling.Ignore)]
         public double? BtcPriceSatoshi { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"V1Order : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"Errors = {(Errors == null ? "null" : $"[{ string.Join(", ", Errors)} ]")}");
+            toStringOutput.Add($"Id = {(Id == null ? "null" : Id == string.Empty ? "" : Id)}");
+            toStringOutput.Add($"BuyerEmail = {(BuyerEmail == null ? "null" : BuyerEmail == string.Empty ? "" : BuyerEmail)}");
+            toStringOutput.Add($"RecipientName = {(RecipientName == null ? "null" : RecipientName == string.Empty ? "" : RecipientName)}");
+            toStringOutput.Add($"RecipientPhoneNumber = {(RecipientPhoneNumber == null ? "null" : RecipientPhoneNumber == string.Empty ? "" : RecipientPhoneNumber)}");
+            toStringOutput.Add($"State = {(State == null ? "null" : State.ToString())}");
+            toStringOutput.Add($"ShippingAddress = {(ShippingAddress == null ? "null" : ShippingAddress.ToString())}");
+            toStringOutput.Add($"SubtotalMoney = {(SubtotalMoney == null ? "null" : SubtotalMoney.ToString())}");
+            toStringOutput.Add($"TotalShippingMoney = {(TotalShippingMoney == null ? "null" : TotalShippingMoney.ToString())}");
+            toStringOutput.Add($"TotalTaxMoney = {(TotalTaxMoney == null ? "null" : TotalTaxMoney.ToString())}");
+            toStringOutput.Add($"TotalPriceMoney = {(TotalPriceMoney == null ? "null" : TotalPriceMoney.ToString())}");
+            toStringOutput.Add($"TotalDiscountMoney = {(TotalDiscountMoney == null ? "null" : TotalDiscountMoney.ToString())}");
+            toStringOutput.Add($"CreatedAt = {(CreatedAt == null ? "null" : CreatedAt == string.Empty ? "" : CreatedAt)}");
+            toStringOutput.Add($"UpdatedAt = {(UpdatedAt == null ? "null" : UpdatedAt == string.Empty ? "" : UpdatedAt)}");
+            toStringOutput.Add($"ExpiresAt = {(ExpiresAt == null ? "null" : ExpiresAt == string.Empty ? "" : ExpiresAt)}");
+            toStringOutput.Add($"PaymentId = {(PaymentId == null ? "null" : PaymentId == string.Empty ? "" : PaymentId)}");
+            toStringOutput.Add($"BuyerNote = {(BuyerNote == null ? "null" : BuyerNote == string.Empty ? "" : BuyerNote)}");
+            toStringOutput.Add($"CompletedNote = {(CompletedNote == null ? "null" : CompletedNote == string.Empty ? "" : CompletedNote)}");
+            toStringOutput.Add($"RefundedNote = {(RefundedNote == null ? "null" : RefundedNote == string.Empty ? "" : RefundedNote)}");
+            toStringOutput.Add($"CanceledNote = {(CanceledNote == null ? "null" : CanceledNote == string.Empty ? "" : CanceledNote)}");
+            toStringOutput.Add($"Tender = {(Tender == null ? "null" : Tender.ToString())}");
+            toStringOutput.Add($"OrderHistory = {(OrderHistory == null ? "null" : $"[{ string.Join(", ", OrderHistory)} ]")}");
+            toStringOutput.Add($"PromoCode = {(PromoCode == null ? "null" : PromoCode == string.Empty ? "" : PromoCode)}");
+            toStringOutput.Add($"BtcReceiveAddress = {(BtcReceiveAddress == null ? "null" : BtcReceiveAddress == string.Empty ? "" : BtcReceiveAddress)}");
+            toStringOutput.Add($"BtcPriceSatoshi = {(BtcPriceSatoshi == null ? "null" : BtcPriceSatoshi.ToString())}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is V1Order other &&
+                ((Context == null && other.Context == null) || (Context?.Equals(other.Context) == true)) &&
+                ((Errors == null && other.Errors == null) || (Errors?.Equals(other.Errors) == true)) &&
+                ((Id == null && other.Id == null) || (Id?.Equals(other.Id) == true)) &&
+                ((BuyerEmail == null && other.BuyerEmail == null) || (BuyerEmail?.Equals(other.BuyerEmail) == true)) &&
+                ((RecipientName == null && other.RecipientName == null) || (RecipientName?.Equals(other.RecipientName) == true)) &&
+                ((RecipientPhoneNumber == null && other.RecipientPhoneNumber == null) || (RecipientPhoneNumber?.Equals(other.RecipientPhoneNumber) == true)) &&
+                ((State == null && other.State == null) || (State?.Equals(other.State) == true)) &&
+                ((ShippingAddress == null && other.ShippingAddress == null) || (ShippingAddress?.Equals(other.ShippingAddress) == true)) &&
+                ((SubtotalMoney == null && other.SubtotalMoney == null) || (SubtotalMoney?.Equals(other.SubtotalMoney) == true)) &&
+                ((TotalShippingMoney == null && other.TotalShippingMoney == null) || (TotalShippingMoney?.Equals(other.TotalShippingMoney) == true)) &&
+                ((TotalTaxMoney == null && other.TotalTaxMoney == null) || (TotalTaxMoney?.Equals(other.TotalTaxMoney) == true)) &&
+                ((TotalPriceMoney == null && other.TotalPriceMoney == null) || (TotalPriceMoney?.Equals(other.TotalPriceMoney) == true)) &&
+                ((TotalDiscountMoney == null && other.TotalDiscountMoney == null) || (TotalDiscountMoney?.Equals(other.TotalDiscountMoney) == true)) &&
+                ((CreatedAt == null && other.CreatedAt == null) || (CreatedAt?.Equals(other.CreatedAt) == true)) &&
+                ((UpdatedAt == null && other.UpdatedAt == null) || (UpdatedAt?.Equals(other.UpdatedAt) == true)) &&
+                ((ExpiresAt == null && other.ExpiresAt == null) || (ExpiresAt?.Equals(other.ExpiresAt) == true)) &&
+                ((PaymentId == null && other.PaymentId == null) || (PaymentId?.Equals(other.PaymentId) == true)) &&
+                ((BuyerNote == null && other.BuyerNote == null) || (BuyerNote?.Equals(other.BuyerNote) == true)) &&
+                ((CompletedNote == null && other.CompletedNote == null) || (CompletedNote?.Equals(other.CompletedNote) == true)) &&
+                ((RefundedNote == null && other.RefundedNote == null) || (RefundedNote?.Equals(other.RefundedNote) == true)) &&
+                ((CanceledNote == null && other.CanceledNote == null) || (CanceledNote?.Equals(other.CanceledNote) == true)) &&
+                ((Tender == null && other.Tender == null) || (Tender?.Equals(other.Tender) == true)) &&
+                ((OrderHistory == null && other.OrderHistory == null) || (OrderHistory?.Equals(other.OrderHistory) == true)) &&
+                ((PromoCode == null && other.PromoCode == null) || (PromoCode?.Equals(other.PromoCode) == true)) &&
+                ((BtcReceiveAddress == null && other.BtcReceiveAddress == null) || (BtcReceiveAddress?.Equals(other.BtcReceiveAddress) == true)) &&
+                ((BtcPriceSatoshi == null && other.BtcPriceSatoshi == null) || (BtcPriceSatoshi?.Equals(other.BtcPriceSatoshi) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 820864276;
+
+            if (Context != null)
+            {
+                hashCode += Context.GetHashCode();
+            }
+
+            if (Errors != null)
+            {
+               hashCode += Errors.GetHashCode();
+            }
+
+            if (Id != null)
+            {
+               hashCode += Id.GetHashCode();
+            }
+
+            if (BuyerEmail != null)
+            {
+               hashCode += BuyerEmail.GetHashCode();
+            }
+
+            if (RecipientName != null)
+            {
+               hashCode += RecipientName.GetHashCode();
+            }
+
+            if (RecipientPhoneNumber != null)
+            {
+               hashCode += RecipientPhoneNumber.GetHashCode();
+            }
+
+            if (State != null)
+            {
+               hashCode += State.GetHashCode();
+            }
+
+            if (ShippingAddress != null)
+            {
+               hashCode += ShippingAddress.GetHashCode();
+            }
+
+            if (SubtotalMoney != null)
+            {
+               hashCode += SubtotalMoney.GetHashCode();
+            }
+
+            if (TotalShippingMoney != null)
+            {
+               hashCode += TotalShippingMoney.GetHashCode();
+            }
+
+            if (TotalTaxMoney != null)
+            {
+               hashCode += TotalTaxMoney.GetHashCode();
+            }
+
+            if (TotalPriceMoney != null)
+            {
+               hashCode += TotalPriceMoney.GetHashCode();
+            }
+
+            if (TotalDiscountMoney != null)
+            {
+               hashCode += TotalDiscountMoney.GetHashCode();
+            }
+
+            if (CreatedAt != null)
+            {
+               hashCode += CreatedAt.GetHashCode();
+            }
+
+            if (UpdatedAt != null)
+            {
+               hashCode += UpdatedAt.GetHashCode();
+            }
+
+            if (ExpiresAt != null)
+            {
+               hashCode += ExpiresAt.GetHashCode();
+            }
+
+            if (PaymentId != null)
+            {
+               hashCode += PaymentId.GetHashCode();
+            }
+
+            if (BuyerNote != null)
+            {
+               hashCode += BuyerNote.GetHashCode();
+            }
+
+            if (CompletedNote != null)
+            {
+               hashCode += CompletedNote.GetHashCode();
+            }
+
+            if (RefundedNote != null)
+            {
+               hashCode += RefundedNote.GetHashCode();
+            }
+
+            if (CanceledNote != null)
+            {
+               hashCode += CanceledNote.GetHashCode();
+            }
+
+            if (Tender != null)
+            {
+               hashCode += Tender.GetHashCode();
+            }
+
+            if (OrderHistory != null)
+            {
+               hashCode += OrderHistory.GetHashCode();
+            }
+
+            if (PromoCode != null)
+            {
+               hashCode += PromoCode.GetHashCode();
+            }
+
+            if (BtcReceiveAddress != null)
+            {
+               hashCode += BtcReceiveAddress.GetHashCode();
+            }
+
+            if (BtcPriceSatoshi != null)
+            {
+               hashCode += BtcPriceSatoshi.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

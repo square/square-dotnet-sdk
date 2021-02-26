@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -44,6 +45,68 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("standard_unit_description_group", NullValueHandling = NullValueHandling.Ignore)]
         public Models.StandardUnitDescriptionGroup StandardUnitDescriptionGroup { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"CatalogInfoResponse : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"Errors = {(Errors == null ? "null" : $"[{ string.Join(", ", Errors)} ]")}");
+            toStringOutput.Add($"Limits = {(Limits == null ? "null" : Limits.ToString())}");
+            toStringOutput.Add($"StandardUnitDescriptionGroup = {(StandardUnitDescriptionGroup == null ? "null" : StandardUnitDescriptionGroup.ToString())}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is CatalogInfoResponse other &&
+                ((Context == null && other.Context == null) || (Context?.Equals(other.Context) == true)) &&
+                ((Errors == null && other.Errors == null) || (Errors?.Equals(other.Errors) == true)) &&
+                ((Limits == null && other.Limits == null) || (Limits?.Equals(other.Limits) == true)) &&
+                ((StandardUnitDescriptionGroup == null && other.StandardUnitDescriptionGroup == null) || (StandardUnitDescriptionGroup?.Equals(other.StandardUnitDescriptionGroup) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -614027011;
+
+            if (Context != null)
+            {
+                hashCode += Context.GetHashCode();
+            }
+
+            if (Errors != null)
+            {
+               hashCode += Errors.GetHashCode();
+            }
+
+            if (Limits != null)
+            {
+               hashCode += Limits.GetHashCode();
+            }
+
+            if (StandardUnitDescriptionGroup != null)
+            {
+               hashCode += StandardUnitDescriptionGroup.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

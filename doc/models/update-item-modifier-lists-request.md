@@ -9,7 +9,7 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `ItemIds` | `IList<string>` |  | The IDs of the catalog items associated with the CatalogModifierList objects being updated. |
+| `ItemIds` | `IList<string>` | Required | The IDs of the catalog items associated with the CatalogModifierList objects being updated. |
 | `ModifierListsToEnable` | `IList<string>` | Optional | The IDs of the CatalogModifierList objects to enable for the CatalogItem. |
 | `ModifierListsToDisable` | `IList<string>` | Optional | The IDs of the CatalogModifierList objects to disable for the CatalogItem. |
 

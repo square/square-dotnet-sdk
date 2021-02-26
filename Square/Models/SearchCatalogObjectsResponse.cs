@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -62,6 +63,82 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("latest_time", NullValueHandling = NullValueHandling.Ignore)]
         public string LatestTime { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"SearchCatalogObjectsResponse : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"Errors = {(Errors == null ? "null" : $"[{ string.Join(", ", Errors)} ]")}");
+            toStringOutput.Add($"Cursor = {(Cursor == null ? "null" : Cursor == string.Empty ? "" : Cursor)}");
+            toStringOutput.Add($"Objects = {(Objects == null ? "null" : $"[{ string.Join(", ", Objects)} ]")}");
+            toStringOutput.Add($"RelatedObjects = {(RelatedObjects == null ? "null" : $"[{ string.Join(", ", RelatedObjects)} ]")}");
+            toStringOutput.Add($"LatestTime = {(LatestTime == null ? "null" : LatestTime == string.Empty ? "" : LatestTime)}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is SearchCatalogObjectsResponse other &&
+                ((Context == null && other.Context == null) || (Context?.Equals(other.Context) == true)) &&
+                ((Errors == null && other.Errors == null) || (Errors?.Equals(other.Errors) == true)) &&
+                ((Cursor == null && other.Cursor == null) || (Cursor?.Equals(other.Cursor) == true)) &&
+                ((Objects == null && other.Objects == null) || (Objects?.Equals(other.Objects) == true)) &&
+                ((RelatedObjects == null && other.RelatedObjects == null) || (RelatedObjects?.Equals(other.RelatedObjects) == true)) &&
+                ((LatestTime == null && other.LatestTime == null) || (LatestTime?.Equals(other.LatestTime) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -544883463;
+
+            if (Context != null)
+            {
+                hashCode += Context.GetHashCode();
+            }
+
+            if (Errors != null)
+            {
+               hashCode += Errors.GetHashCode();
+            }
+
+            if (Cursor != null)
+            {
+               hashCode += Cursor.GetHashCode();
+            }
+
+            if (Objects != null)
+            {
+               hashCode += Objects.GetHashCode();
+            }
+
+            if (RelatedObjects != null)
+            {
+               hashCode += RelatedObjects.GetHashCode();
+            }
+
+            if (LatestTime != null)
+            {
+               hashCode += LatestTime.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -150,6 +151,146 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("failure_reason", NullValueHandling = NullValueHandling.Ignore)]
         public string FailureReason { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"OrderFulfillmentShipmentDetails : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"Recipient = {(Recipient == null ? "null" : Recipient.ToString())}");
+            toStringOutput.Add($"Carrier = {(Carrier == null ? "null" : Carrier == string.Empty ? "" : Carrier)}");
+            toStringOutput.Add($"ShippingNote = {(ShippingNote == null ? "null" : ShippingNote == string.Empty ? "" : ShippingNote)}");
+            toStringOutput.Add($"ShippingType = {(ShippingType == null ? "null" : ShippingType == string.Empty ? "" : ShippingType)}");
+            toStringOutput.Add($"TrackingNumber = {(TrackingNumber == null ? "null" : TrackingNumber == string.Empty ? "" : TrackingNumber)}");
+            toStringOutput.Add($"TrackingUrl = {(TrackingUrl == null ? "null" : TrackingUrl == string.Empty ? "" : TrackingUrl)}");
+            toStringOutput.Add($"PlacedAt = {(PlacedAt == null ? "null" : PlacedAt == string.Empty ? "" : PlacedAt)}");
+            toStringOutput.Add($"InProgressAt = {(InProgressAt == null ? "null" : InProgressAt == string.Empty ? "" : InProgressAt)}");
+            toStringOutput.Add($"PackagedAt = {(PackagedAt == null ? "null" : PackagedAt == string.Empty ? "" : PackagedAt)}");
+            toStringOutput.Add($"ExpectedShippedAt = {(ExpectedShippedAt == null ? "null" : ExpectedShippedAt == string.Empty ? "" : ExpectedShippedAt)}");
+            toStringOutput.Add($"ShippedAt = {(ShippedAt == null ? "null" : ShippedAt == string.Empty ? "" : ShippedAt)}");
+            toStringOutput.Add($"CanceledAt = {(CanceledAt == null ? "null" : CanceledAt == string.Empty ? "" : CanceledAt)}");
+            toStringOutput.Add($"CancelReason = {(CancelReason == null ? "null" : CancelReason == string.Empty ? "" : CancelReason)}");
+            toStringOutput.Add($"FailedAt = {(FailedAt == null ? "null" : FailedAt == string.Empty ? "" : FailedAt)}");
+            toStringOutput.Add($"FailureReason = {(FailureReason == null ? "null" : FailureReason == string.Empty ? "" : FailureReason)}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is OrderFulfillmentShipmentDetails other &&
+                ((Recipient == null && other.Recipient == null) || (Recipient?.Equals(other.Recipient) == true)) &&
+                ((Carrier == null && other.Carrier == null) || (Carrier?.Equals(other.Carrier) == true)) &&
+                ((ShippingNote == null && other.ShippingNote == null) || (ShippingNote?.Equals(other.ShippingNote) == true)) &&
+                ((ShippingType == null && other.ShippingType == null) || (ShippingType?.Equals(other.ShippingType) == true)) &&
+                ((TrackingNumber == null && other.TrackingNumber == null) || (TrackingNumber?.Equals(other.TrackingNumber) == true)) &&
+                ((TrackingUrl == null && other.TrackingUrl == null) || (TrackingUrl?.Equals(other.TrackingUrl) == true)) &&
+                ((PlacedAt == null && other.PlacedAt == null) || (PlacedAt?.Equals(other.PlacedAt) == true)) &&
+                ((InProgressAt == null && other.InProgressAt == null) || (InProgressAt?.Equals(other.InProgressAt) == true)) &&
+                ((PackagedAt == null && other.PackagedAt == null) || (PackagedAt?.Equals(other.PackagedAt) == true)) &&
+                ((ExpectedShippedAt == null && other.ExpectedShippedAt == null) || (ExpectedShippedAt?.Equals(other.ExpectedShippedAt) == true)) &&
+                ((ShippedAt == null && other.ShippedAt == null) || (ShippedAt?.Equals(other.ShippedAt) == true)) &&
+                ((CanceledAt == null && other.CanceledAt == null) || (CanceledAt?.Equals(other.CanceledAt) == true)) &&
+                ((CancelReason == null && other.CancelReason == null) || (CancelReason?.Equals(other.CancelReason) == true)) &&
+                ((FailedAt == null && other.FailedAt == null) || (FailedAt?.Equals(other.FailedAt) == true)) &&
+                ((FailureReason == null && other.FailureReason == null) || (FailureReason?.Equals(other.FailureReason) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 1108362053;
+
+            if (Recipient != null)
+            {
+               hashCode += Recipient.GetHashCode();
+            }
+
+            if (Carrier != null)
+            {
+               hashCode += Carrier.GetHashCode();
+            }
+
+            if (ShippingNote != null)
+            {
+               hashCode += ShippingNote.GetHashCode();
+            }
+
+            if (ShippingType != null)
+            {
+               hashCode += ShippingType.GetHashCode();
+            }
+
+            if (TrackingNumber != null)
+            {
+               hashCode += TrackingNumber.GetHashCode();
+            }
+
+            if (TrackingUrl != null)
+            {
+               hashCode += TrackingUrl.GetHashCode();
+            }
+
+            if (PlacedAt != null)
+            {
+               hashCode += PlacedAt.GetHashCode();
+            }
+
+            if (InProgressAt != null)
+            {
+               hashCode += InProgressAt.GetHashCode();
+            }
+
+            if (PackagedAt != null)
+            {
+               hashCode += PackagedAt.GetHashCode();
+            }
+
+            if (ExpectedShippedAt != null)
+            {
+               hashCode += ExpectedShippedAt.GetHashCode();
+            }
+
+            if (ShippedAt != null)
+            {
+               hashCode += ShippedAt.GetHashCode();
+            }
+
+            if (CanceledAt != null)
+            {
+               hashCode += CanceledAt.GetHashCode();
+            }
+
+            if (CancelReason != null)
+            {
+               hashCode += CancelReason.GetHashCode();
+            }
+
+            if (FailedAt != null)
+            {
+               hashCode += FailedAt.GetHashCode();
+            }
+
+            if (FailureReason != null)
+            {
+               hashCode += FailureReason.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

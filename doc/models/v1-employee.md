@@ -12,8 +12,8 @@ Represents one of a business's employees.
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `Id` | `string` | Optional | The employee's unique ID. |
-| `FirstName` | `string` |  | The employee's first name. |
-| `LastName` | `string` |  | The employee's last name. |
+| `FirstName` | `string` | Required | The employee's first name. |
+| `LastName` | `string` | Required | The employee's last name. |
 | `RoleIds` | `IList<string>` | Optional | The ids of the employee's associated roles. Currently, you can specify only one or zero roles per employee. |
 | `AuthorizedLocationIds` | `IList<string>` | Optional | The IDs of the locations the employee is allowed to clock in at. |
 | `Email` | `string` | Optional | The employee's email address. |

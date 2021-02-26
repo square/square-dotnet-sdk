@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -32,6 +33,55 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("language_code", NullValueHandling = NullValueHandling.Ignore)]
         public string LanguageCode { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"StandardUnitDescriptionGroup : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"StandardUnitDescriptions = {(StandardUnitDescriptions == null ? "null" : $"[{ string.Join(", ", StandardUnitDescriptions)} ]")}");
+            toStringOutput.Add($"LanguageCode = {(LanguageCode == null ? "null" : LanguageCode == string.Empty ? "" : LanguageCode)}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is StandardUnitDescriptionGroup other &&
+                ((StandardUnitDescriptions == null && other.StandardUnitDescriptions == null) || (StandardUnitDescriptions?.Equals(other.StandardUnitDescriptions) == true)) &&
+                ((LanguageCode == null && other.LanguageCode == null) || (LanguageCode?.Equals(other.LanguageCode) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -1512557629;
+
+            if (StandardUnitDescriptions != null)
+            {
+               hashCode += StandardUnitDescriptions.GetHashCode();
+            }
+
+            if (LanguageCode != null)
+            {
+               hashCode += LanguageCode.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

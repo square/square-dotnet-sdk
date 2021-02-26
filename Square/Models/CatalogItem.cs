@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -141,6 +142,139 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("item_options", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.CatalogItemOptionForItem> ItemOptions { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"CatalogItem : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"Name = {(Name == null ? "null" : Name == string.Empty ? "" : Name)}");
+            toStringOutput.Add($"Description = {(Description == null ? "null" : Description == string.Empty ? "" : Description)}");
+            toStringOutput.Add($"Abbreviation = {(Abbreviation == null ? "null" : Abbreviation == string.Empty ? "" : Abbreviation)}");
+            toStringOutput.Add($"LabelColor = {(LabelColor == null ? "null" : LabelColor == string.Empty ? "" : LabelColor)}");
+            toStringOutput.Add($"AvailableOnline = {(AvailableOnline == null ? "null" : AvailableOnline.ToString())}");
+            toStringOutput.Add($"AvailableForPickup = {(AvailableForPickup == null ? "null" : AvailableForPickup.ToString())}");
+            toStringOutput.Add($"AvailableElectronically = {(AvailableElectronically == null ? "null" : AvailableElectronically.ToString())}");
+            toStringOutput.Add($"CategoryId = {(CategoryId == null ? "null" : CategoryId == string.Empty ? "" : CategoryId)}");
+            toStringOutput.Add($"TaxIds = {(TaxIds == null ? "null" : $"[{ string.Join(", ", TaxIds)} ]")}");
+            toStringOutput.Add($"ModifierListInfo = {(ModifierListInfo == null ? "null" : $"[{ string.Join(", ", ModifierListInfo)} ]")}");
+            toStringOutput.Add($"Variations = {(Variations == null ? "null" : $"[{ string.Join(", ", Variations)} ]")}");
+            toStringOutput.Add($"ProductType = {(ProductType == null ? "null" : ProductType.ToString())}");
+            toStringOutput.Add($"SkipModifierScreen = {(SkipModifierScreen == null ? "null" : SkipModifierScreen.ToString())}");
+            toStringOutput.Add($"ItemOptions = {(ItemOptions == null ? "null" : $"[{ string.Join(", ", ItemOptions)} ]")}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is CatalogItem other &&
+                ((Name == null && other.Name == null) || (Name?.Equals(other.Name) == true)) &&
+                ((Description == null && other.Description == null) || (Description?.Equals(other.Description) == true)) &&
+                ((Abbreviation == null && other.Abbreviation == null) || (Abbreviation?.Equals(other.Abbreviation) == true)) &&
+                ((LabelColor == null && other.LabelColor == null) || (LabelColor?.Equals(other.LabelColor) == true)) &&
+                ((AvailableOnline == null && other.AvailableOnline == null) || (AvailableOnline?.Equals(other.AvailableOnline) == true)) &&
+                ((AvailableForPickup == null && other.AvailableForPickup == null) || (AvailableForPickup?.Equals(other.AvailableForPickup) == true)) &&
+                ((AvailableElectronically == null && other.AvailableElectronically == null) || (AvailableElectronically?.Equals(other.AvailableElectronically) == true)) &&
+                ((CategoryId == null && other.CategoryId == null) || (CategoryId?.Equals(other.CategoryId) == true)) &&
+                ((TaxIds == null && other.TaxIds == null) || (TaxIds?.Equals(other.TaxIds) == true)) &&
+                ((ModifierListInfo == null && other.ModifierListInfo == null) || (ModifierListInfo?.Equals(other.ModifierListInfo) == true)) &&
+                ((Variations == null && other.Variations == null) || (Variations?.Equals(other.Variations) == true)) &&
+                ((ProductType == null && other.ProductType == null) || (ProductType?.Equals(other.ProductType) == true)) &&
+                ((SkipModifierScreen == null && other.SkipModifierScreen == null) || (SkipModifierScreen?.Equals(other.SkipModifierScreen) == true)) &&
+                ((ItemOptions == null && other.ItemOptions == null) || (ItemOptions?.Equals(other.ItemOptions) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -268666674;
+
+            if (Name != null)
+            {
+               hashCode += Name.GetHashCode();
+            }
+
+            if (Description != null)
+            {
+               hashCode += Description.GetHashCode();
+            }
+
+            if (Abbreviation != null)
+            {
+               hashCode += Abbreviation.GetHashCode();
+            }
+
+            if (LabelColor != null)
+            {
+               hashCode += LabelColor.GetHashCode();
+            }
+
+            if (AvailableOnline != null)
+            {
+               hashCode += AvailableOnline.GetHashCode();
+            }
+
+            if (AvailableForPickup != null)
+            {
+               hashCode += AvailableForPickup.GetHashCode();
+            }
+
+            if (AvailableElectronically != null)
+            {
+               hashCode += AvailableElectronically.GetHashCode();
+            }
+
+            if (CategoryId != null)
+            {
+               hashCode += CategoryId.GetHashCode();
+            }
+
+            if (TaxIds != null)
+            {
+               hashCode += TaxIds.GetHashCode();
+            }
+
+            if (ModifierListInfo != null)
+            {
+               hashCode += ModifierListInfo.GetHashCode();
+            }
+
+            if (Variations != null)
+            {
+               hashCode += Variations.GetHashCode();
+            }
+
+            if (ProductType != null)
+            {
+               hashCode += ProductType.GetHashCode();
+            }
+
+            if (SkipModifierScreen != null)
+            {
+               hashCode += SkipModifierScreen.GetHashCode();
+            }
+
+            if (ItemOptions != null)
+            {
+               hashCode += ItemOptions.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

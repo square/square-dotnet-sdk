@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -42,6 +43,55 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("change_back_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Money ChangeBackMoney { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"TenderCashDetails : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"BuyerTenderedMoney = {(BuyerTenderedMoney == null ? "null" : BuyerTenderedMoney.ToString())}");
+            toStringOutput.Add($"ChangeBackMoney = {(ChangeBackMoney == null ? "null" : ChangeBackMoney.ToString())}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is TenderCashDetails other &&
+                ((BuyerTenderedMoney == null && other.BuyerTenderedMoney == null) || (BuyerTenderedMoney?.Equals(other.BuyerTenderedMoney) == true)) &&
+                ((ChangeBackMoney == null && other.ChangeBackMoney == null) || (ChangeBackMoney?.Equals(other.ChangeBackMoney) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -1409552788;
+
+            if (BuyerTenderedMoney != null)
+            {
+               hashCode += BuyerTenderedMoney.GetHashCode();
+            }
+
+            if (ChangeBackMoney != null)
+            {
+               hashCode += ChangeBackMoney.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

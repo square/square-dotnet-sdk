@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -54,6 +55,69 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("ordinal", NullValueHandling = NullValueHandling.Ignore)]
         public long? Ordinal { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"CatalogQuickAmount : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"Type = {(Type == null ? "null" : Type.ToString())}");
+            toStringOutput.Add($"Amount = {(Amount == null ? "null" : Amount.ToString())}");
+            toStringOutput.Add($"Score = {(Score == null ? "null" : Score.ToString())}");
+            toStringOutput.Add($"Ordinal = {(Ordinal == null ? "null" : Ordinal.ToString())}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is CatalogQuickAmount other &&
+                ((Type == null && other.Type == null) || (Type?.Equals(other.Type) == true)) &&
+                ((Amount == null && other.Amount == null) || (Amount?.Equals(other.Amount) == true)) &&
+                ((Score == null && other.Score == null) || (Score?.Equals(other.Score) == true)) &&
+                ((Ordinal == null && other.Ordinal == null) || (Ordinal?.Equals(other.Ordinal) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -1903352296;
+
+            if (Type != null)
+            {
+               hashCode += Type.GetHashCode();
+            }
+
+            if (Amount != null)
+            {
+               hashCode += Amount.GetHashCode();
+            }
+
+            if (Score != null)
+            {
+               hashCode += Score.GetHashCode();
+            }
+
+            if (Ordinal != null)
+            {
+               hashCode += Ordinal.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

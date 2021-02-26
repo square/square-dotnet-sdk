@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -197,6 +198,167 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("device", NullValueHandling = NullValueHandling.Ignore)]
         public Models.CashDrawerDevice Device { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"CashDrawerShift : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"Id = {(Id == null ? "null" : Id == string.Empty ? "" : Id)}");
+            toStringOutput.Add($"State = {(State == null ? "null" : State.ToString())}");
+            toStringOutput.Add($"OpenedAt = {(OpenedAt == null ? "null" : OpenedAt == string.Empty ? "" : OpenedAt)}");
+            toStringOutput.Add($"EndedAt = {(EndedAt == null ? "null" : EndedAt == string.Empty ? "" : EndedAt)}");
+            toStringOutput.Add($"ClosedAt = {(ClosedAt == null ? "null" : ClosedAt == string.Empty ? "" : ClosedAt)}");
+            toStringOutput.Add($"EmployeeIds = {(EmployeeIds == null ? "null" : $"[{ string.Join(", ", EmployeeIds)} ]")}");
+            toStringOutput.Add($"OpeningEmployeeId = {(OpeningEmployeeId == null ? "null" : OpeningEmployeeId == string.Empty ? "" : OpeningEmployeeId)}");
+            toStringOutput.Add($"EndingEmployeeId = {(EndingEmployeeId == null ? "null" : EndingEmployeeId == string.Empty ? "" : EndingEmployeeId)}");
+            toStringOutput.Add($"ClosingEmployeeId = {(ClosingEmployeeId == null ? "null" : ClosingEmployeeId == string.Empty ? "" : ClosingEmployeeId)}");
+            toStringOutput.Add($"Description = {(Description == null ? "null" : Description == string.Empty ? "" : Description)}");
+            toStringOutput.Add($"OpenedCashMoney = {(OpenedCashMoney == null ? "null" : OpenedCashMoney.ToString())}");
+            toStringOutput.Add($"CashPaymentMoney = {(CashPaymentMoney == null ? "null" : CashPaymentMoney.ToString())}");
+            toStringOutput.Add($"CashRefundsMoney = {(CashRefundsMoney == null ? "null" : CashRefundsMoney.ToString())}");
+            toStringOutput.Add($"CashPaidInMoney = {(CashPaidInMoney == null ? "null" : CashPaidInMoney.ToString())}");
+            toStringOutput.Add($"CashPaidOutMoney = {(CashPaidOutMoney == null ? "null" : CashPaidOutMoney.ToString())}");
+            toStringOutput.Add($"ExpectedCashMoney = {(ExpectedCashMoney == null ? "null" : ExpectedCashMoney.ToString())}");
+            toStringOutput.Add($"ClosedCashMoney = {(ClosedCashMoney == null ? "null" : ClosedCashMoney.ToString())}");
+            toStringOutput.Add($"Device = {(Device == null ? "null" : Device.ToString())}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is CashDrawerShift other &&
+                ((Id == null && other.Id == null) || (Id?.Equals(other.Id) == true)) &&
+                ((State == null && other.State == null) || (State?.Equals(other.State) == true)) &&
+                ((OpenedAt == null && other.OpenedAt == null) || (OpenedAt?.Equals(other.OpenedAt) == true)) &&
+                ((EndedAt == null && other.EndedAt == null) || (EndedAt?.Equals(other.EndedAt) == true)) &&
+                ((ClosedAt == null && other.ClosedAt == null) || (ClosedAt?.Equals(other.ClosedAt) == true)) &&
+                ((EmployeeIds == null && other.EmployeeIds == null) || (EmployeeIds?.Equals(other.EmployeeIds) == true)) &&
+                ((OpeningEmployeeId == null && other.OpeningEmployeeId == null) || (OpeningEmployeeId?.Equals(other.OpeningEmployeeId) == true)) &&
+                ((EndingEmployeeId == null && other.EndingEmployeeId == null) || (EndingEmployeeId?.Equals(other.EndingEmployeeId) == true)) &&
+                ((ClosingEmployeeId == null && other.ClosingEmployeeId == null) || (ClosingEmployeeId?.Equals(other.ClosingEmployeeId) == true)) &&
+                ((Description == null && other.Description == null) || (Description?.Equals(other.Description) == true)) &&
+                ((OpenedCashMoney == null && other.OpenedCashMoney == null) || (OpenedCashMoney?.Equals(other.OpenedCashMoney) == true)) &&
+                ((CashPaymentMoney == null && other.CashPaymentMoney == null) || (CashPaymentMoney?.Equals(other.CashPaymentMoney) == true)) &&
+                ((CashRefundsMoney == null && other.CashRefundsMoney == null) || (CashRefundsMoney?.Equals(other.CashRefundsMoney) == true)) &&
+                ((CashPaidInMoney == null && other.CashPaidInMoney == null) || (CashPaidInMoney?.Equals(other.CashPaidInMoney) == true)) &&
+                ((CashPaidOutMoney == null && other.CashPaidOutMoney == null) || (CashPaidOutMoney?.Equals(other.CashPaidOutMoney) == true)) &&
+                ((ExpectedCashMoney == null && other.ExpectedCashMoney == null) || (ExpectedCashMoney?.Equals(other.ExpectedCashMoney) == true)) &&
+                ((ClosedCashMoney == null && other.ClosedCashMoney == null) || (ClosedCashMoney?.Equals(other.ClosedCashMoney) == true)) &&
+                ((Device == null && other.Device == null) || (Device?.Equals(other.Device) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -498109440;
+
+            if (Id != null)
+            {
+               hashCode += Id.GetHashCode();
+            }
+
+            if (State != null)
+            {
+               hashCode += State.GetHashCode();
+            }
+
+            if (OpenedAt != null)
+            {
+               hashCode += OpenedAt.GetHashCode();
+            }
+
+            if (EndedAt != null)
+            {
+               hashCode += EndedAt.GetHashCode();
+            }
+
+            if (ClosedAt != null)
+            {
+               hashCode += ClosedAt.GetHashCode();
+            }
+
+            if (EmployeeIds != null)
+            {
+               hashCode += EmployeeIds.GetHashCode();
+            }
+
+            if (OpeningEmployeeId != null)
+            {
+               hashCode += OpeningEmployeeId.GetHashCode();
+            }
+
+            if (EndingEmployeeId != null)
+            {
+               hashCode += EndingEmployeeId.GetHashCode();
+            }
+
+            if (ClosingEmployeeId != null)
+            {
+               hashCode += ClosingEmployeeId.GetHashCode();
+            }
+
+            if (Description != null)
+            {
+               hashCode += Description.GetHashCode();
+            }
+
+            if (OpenedCashMoney != null)
+            {
+               hashCode += OpenedCashMoney.GetHashCode();
+            }
+
+            if (CashPaymentMoney != null)
+            {
+               hashCode += CashPaymentMoney.GetHashCode();
+            }
+
+            if (CashRefundsMoney != null)
+            {
+               hashCode += CashRefundsMoney.GetHashCode();
+            }
+
+            if (CashPaidInMoney != null)
+            {
+               hashCode += CashPaidInMoney.GetHashCode();
+            }
+
+            if (CashPaidOutMoney != null)
+            {
+               hashCode += CashPaidOutMoney.GetHashCode();
+            }
+
+            if (ExpectedCashMoney != null)
+            {
+               hashCode += ExpectedCashMoney.GetHashCode();
+            }
+
+            if (ClosedCashMoney != null)
+            {
+               hashCode += ClosedCashMoney.GetHashCode();
+            }
+
+            if (Device != null)
+            {
+               hashCode += Device.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

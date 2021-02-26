@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -106,6 +107,90 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("limit", NullValueHandling = NullValueHandling.Ignore)]
         public int? Limit { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"SearchCatalogObjectsRequest : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"Cursor = {(Cursor == null ? "null" : Cursor == string.Empty ? "" : Cursor)}");
+            toStringOutput.Add($"ObjectTypes = {(ObjectTypes == null ? "null" : $"[{ string.Join(", ", ObjectTypes)} ]")}");
+            toStringOutput.Add($"IncludeDeletedObjects = {(IncludeDeletedObjects == null ? "null" : IncludeDeletedObjects.ToString())}");
+            toStringOutput.Add($"IncludeRelatedObjects = {(IncludeRelatedObjects == null ? "null" : IncludeRelatedObjects.ToString())}");
+            toStringOutput.Add($"BeginTime = {(BeginTime == null ? "null" : BeginTime == string.Empty ? "" : BeginTime)}");
+            toStringOutput.Add($"Query = {(Query == null ? "null" : Query.ToString())}");
+            toStringOutput.Add($"Limit = {(Limit == null ? "null" : Limit.ToString())}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is SearchCatalogObjectsRequest other &&
+                ((Cursor == null && other.Cursor == null) || (Cursor?.Equals(other.Cursor) == true)) &&
+                ((ObjectTypes == null && other.ObjectTypes == null) || (ObjectTypes?.Equals(other.ObjectTypes) == true)) &&
+                ((IncludeDeletedObjects == null && other.IncludeDeletedObjects == null) || (IncludeDeletedObjects?.Equals(other.IncludeDeletedObjects) == true)) &&
+                ((IncludeRelatedObjects == null && other.IncludeRelatedObjects == null) || (IncludeRelatedObjects?.Equals(other.IncludeRelatedObjects) == true)) &&
+                ((BeginTime == null && other.BeginTime == null) || (BeginTime?.Equals(other.BeginTime) == true)) &&
+                ((Query == null && other.Query == null) || (Query?.Equals(other.Query) == true)) &&
+                ((Limit == null && other.Limit == null) || (Limit?.Equals(other.Limit) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 405501134;
+
+            if (Cursor != null)
+            {
+               hashCode += Cursor.GetHashCode();
+            }
+
+            if (ObjectTypes != null)
+            {
+               hashCode += ObjectTypes.GetHashCode();
+            }
+
+            if (IncludeDeletedObjects != null)
+            {
+               hashCode += IncludeDeletedObjects.GetHashCode();
+            }
+
+            if (IncludeRelatedObjects != null)
+            {
+               hashCode += IncludeRelatedObjects.GetHashCode();
+            }
+
+            if (BeginTime != null)
+            {
+               hashCode += BeginTime.GetHashCode();
+            }
+
+            if (Query != null)
+            {
+               hashCode += Query.GetHashCode();
+            }
+
+            if (Limit != null)
+            {
+               hashCode += Limit.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

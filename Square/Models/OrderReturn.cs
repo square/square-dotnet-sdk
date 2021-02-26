@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -86,6 +87,97 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("return_amounts", NullValueHandling = NullValueHandling.Ignore)]
         public Models.OrderMoneyAmounts ReturnAmounts { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"OrderReturn : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"Uid = {(Uid == null ? "null" : Uid == string.Empty ? "" : Uid)}");
+            toStringOutput.Add($"SourceOrderId = {(SourceOrderId == null ? "null" : SourceOrderId == string.Empty ? "" : SourceOrderId)}");
+            toStringOutput.Add($"ReturnLineItems = {(ReturnLineItems == null ? "null" : $"[{ string.Join(", ", ReturnLineItems)} ]")}");
+            toStringOutput.Add($"ReturnServiceCharges = {(ReturnServiceCharges == null ? "null" : $"[{ string.Join(", ", ReturnServiceCharges)} ]")}");
+            toStringOutput.Add($"ReturnTaxes = {(ReturnTaxes == null ? "null" : $"[{ string.Join(", ", ReturnTaxes)} ]")}");
+            toStringOutput.Add($"ReturnDiscounts = {(ReturnDiscounts == null ? "null" : $"[{ string.Join(", ", ReturnDiscounts)} ]")}");
+            toStringOutput.Add($"RoundingAdjustment = {(RoundingAdjustment == null ? "null" : RoundingAdjustment.ToString())}");
+            toStringOutput.Add($"ReturnAmounts = {(ReturnAmounts == null ? "null" : ReturnAmounts.ToString())}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is OrderReturn other &&
+                ((Uid == null && other.Uid == null) || (Uid?.Equals(other.Uid) == true)) &&
+                ((SourceOrderId == null && other.SourceOrderId == null) || (SourceOrderId?.Equals(other.SourceOrderId) == true)) &&
+                ((ReturnLineItems == null && other.ReturnLineItems == null) || (ReturnLineItems?.Equals(other.ReturnLineItems) == true)) &&
+                ((ReturnServiceCharges == null && other.ReturnServiceCharges == null) || (ReturnServiceCharges?.Equals(other.ReturnServiceCharges) == true)) &&
+                ((ReturnTaxes == null && other.ReturnTaxes == null) || (ReturnTaxes?.Equals(other.ReturnTaxes) == true)) &&
+                ((ReturnDiscounts == null && other.ReturnDiscounts == null) || (ReturnDiscounts?.Equals(other.ReturnDiscounts) == true)) &&
+                ((RoundingAdjustment == null && other.RoundingAdjustment == null) || (RoundingAdjustment?.Equals(other.RoundingAdjustment) == true)) &&
+                ((ReturnAmounts == null && other.ReturnAmounts == null) || (ReturnAmounts?.Equals(other.ReturnAmounts) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 2075174143;
+
+            if (Uid != null)
+            {
+               hashCode += Uid.GetHashCode();
+            }
+
+            if (SourceOrderId != null)
+            {
+               hashCode += SourceOrderId.GetHashCode();
+            }
+
+            if (ReturnLineItems != null)
+            {
+               hashCode += ReturnLineItems.GetHashCode();
+            }
+
+            if (ReturnServiceCharges != null)
+            {
+               hashCode += ReturnServiceCharges.GetHashCode();
+            }
+
+            if (ReturnTaxes != null)
+            {
+               hashCode += ReturnTaxes.GetHashCode();
+            }
+
+            if (ReturnDiscounts != null)
+            {
+               hashCode += ReturnDiscounts.GetHashCode();
+            }
+
+            if (RoundingAdjustment != null)
+            {
+               hashCode += RoundingAdjustment.GetHashCode();
+            }
+
+            if (ReturnAmounts != null)
+            {
+               hashCode += ReturnAmounts.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

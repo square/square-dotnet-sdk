@@ -9,10 +9,10 @@ Contains some brief information about a Customer Group with its identifier inclu
 
 ## Fields
 
-| Name | Type | Description |
-|  --- | --- | --- |
-| `Id` | `string` | The ID of the Customer Group. |
-| `Name` | `string` | The name of the Customer Group. |
+| Name | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `Id` | `string` | Required | The ID of the Customer Group. |
+| `Name` | `string` | Required | The name of the Customer Group. |
 
 ## Example (as JSON)
 

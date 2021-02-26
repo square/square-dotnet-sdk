@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -69,6 +70,76 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("catalog_object_id", NullValueHandling = NullValueHandling.Ignore)]
         public string CatalogObjectId { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"LoyaltyProgramAccrualRule : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"AccrualType = {(AccrualType == null ? "null" : AccrualType.ToString())}");
+            toStringOutput.Add($"Points = {(Points == null ? "null" : Points.ToString())}");
+            toStringOutput.Add($"VisitMinimumAmountMoney = {(VisitMinimumAmountMoney == null ? "null" : VisitMinimumAmountMoney.ToString())}");
+            toStringOutput.Add($"SpendAmountMoney = {(SpendAmountMoney == null ? "null" : SpendAmountMoney.ToString())}");
+            toStringOutput.Add($"CatalogObjectId = {(CatalogObjectId == null ? "null" : CatalogObjectId == string.Empty ? "" : CatalogObjectId)}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is LoyaltyProgramAccrualRule other &&
+                ((AccrualType == null && other.AccrualType == null) || (AccrualType?.Equals(other.AccrualType) == true)) &&
+                ((Points == null && other.Points == null) || (Points?.Equals(other.Points) == true)) &&
+                ((VisitMinimumAmountMoney == null && other.VisitMinimumAmountMoney == null) || (VisitMinimumAmountMoney?.Equals(other.VisitMinimumAmountMoney) == true)) &&
+                ((SpendAmountMoney == null && other.SpendAmountMoney == null) || (SpendAmountMoney?.Equals(other.SpendAmountMoney) == true)) &&
+                ((CatalogObjectId == null && other.CatalogObjectId == null) || (CatalogObjectId?.Equals(other.CatalogObjectId) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -765894953;
+
+            if (AccrualType != null)
+            {
+               hashCode += AccrualType.GetHashCode();
+            }
+
+            if (Points != null)
+            {
+               hashCode += Points.GetHashCode();
+            }
+
+            if (VisitMinimumAmountMoney != null)
+            {
+               hashCode += VisitMinimumAmountMoney.GetHashCode();
+            }
+
+            if (SpendAmountMoney != null)
+            {
+               hashCode += SpendAmountMoney.GetHashCode();
+            }
+
+            if (CatalogObjectId != null)
+            {
+               hashCode += CatalogObjectId.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

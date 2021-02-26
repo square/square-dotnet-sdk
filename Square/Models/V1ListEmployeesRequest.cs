@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -89,6 +90,104 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("batch_token", NullValueHandling = NullValueHandling.Ignore)]
         public string BatchToken { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"V1ListEmployeesRequest : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"Order = {(Order == null ? "null" : Order.ToString())}");
+            toStringOutput.Add($"BeginUpdatedAt = {(BeginUpdatedAt == null ? "null" : BeginUpdatedAt == string.Empty ? "" : BeginUpdatedAt)}");
+            toStringOutput.Add($"EndUpdatedAt = {(EndUpdatedAt == null ? "null" : EndUpdatedAt == string.Empty ? "" : EndUpdatedAt)}");
+            toStringOutput.Add($"BeginCreatedAt = {(BeginCreatedAt == null ? "null" : BeginCreatedAt == string.Empty ? "" : BeginCreatedAt)}");
+            toStringOutput.Add($"EndCreatedAt = {(EndCreatedAt == null ? "null" : EndCreatedAt == string.Empty ? "" : EndCreatedAt)}");
+            toStringOutput.Add($"Status = {(Status == null ? "null" : Status.ToString())}");
+            toStringOutput.Add($"ExternalId = {(ExternalId == null ? "null" : ExternalId == string.Empty ? "" : ExternalId)}");
+            toStringOutput.Add($"Limit = {(Limit == null ? "null" : Limit.ToString())}");
+            toStringOutput.Add($"BatchToken = {(BatchToken == null ? "null" : BatchToken == string.Empty ? "" : BatchToken)}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is V1ListEmployeesRequest other &&
+                ((Order == null && other.Order == null) || (Order?.Equals(other.Order) == true)) &&
+                ((BeginUpdatedAt == null && other.BeginUpdatedAt == null) || (BeginUpdatedAt?.Equals(other.BeginUpdatedAt) == true)) &&
+                ((EndUpdatedAt == null && other.EndUpdatedAt == null) || (EndUpdatedAt?.Equals(other.EndUpdatedAt) == true)) &&
+                ((BeginCreatedAt == null && other.BeginCreatedAt == null) || (BeginCreatedAt?.Equals(other.BeginCreatedAt) == true)) &&
+                ((EndCreatedAt == null && other.EndCreatedAt == null) || (EndCreatedAt?.Equals(other.EndCreatedAt) == true)) &&
+                ((Status == null && other.Status == null) || (Status?.Equals(other.Status) == true)) &&
+                ((ExternalId == null && other.ExternalId == null) || (ExternalId?.Equals(other.ExternalId) == true)) &&
+                ((Limit == null && other.Limit == null) || (Limit?.Equals(other.Limit) == true)) &&
+                ((BatchToken == null && other.BatchToken == null) || (BatchToken?.Equals(other.BatchToken) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -1221038871;
+
+            if (Order != null)
+            {
+               hashCode += Order.GetHashCode();
+            }
+
+            if (BeginUpdatedAt != null)
+            {
+               hashCode += BeginUpdatedAt.GetHashCode();
+            }
+
+            if (EndUpdatedAt != null)
+            {
+               hashCode += EndUpdatedAt.GetHashCode();
+            }
+
+            if (BeginCreatedAt != null)
+            {
+               hashCode += BeginCreatedAt.GetHashCode();
+            }
+
+            if (EndCreatedAt != null)
+            {
+               hashCode += EndCreatedAt.GetHashCode();
+            }
+
+            if (Status != null)
+            {
+               hashCode += Status.GetHashCode();
+            }
+
+            if (ExternalId != null)
+            {
+               hashCode += ExternalId.GetHashCode();
+            }
+
+            if (Limit != null)
+            {
+               hashCode += Limit.GetHashCode();
+            }
+
+            if (BatchToken != null)
+            {
+               hashCode += BatchToken.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

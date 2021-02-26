@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -68,6 +69,89 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("entries", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.V1SettlementEntry> Entries { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"V1Settlement : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"Id = {(Id == null ? "null" : Id == string.Empty ? "" : Id)}");
+            toStringOutput.Add($"Status = {(Status == null ? "null" : Status.ToString())}");
+            toStringOutput.Add($"TotalMoney = {(TotalMoney == null ? "null" : TotalMoney.ToString())}");
+            toStringOutput.Add($"InitiatedAt = {(InitiatedAt == null ? "null" : InitiatedAt == string.Empty ? "" : InitiatedAt)}");
+            toStringOutput.Add($"BankAccountId = {(BankAccountId == null ? "null" : BankAccountId == string.Empty ? "" : BankAccountId)}");
+            toStringOutput.Add($"Entries = {(Entries == null ? "null" : $"[{ string.Join(", ", Entries)} ]")}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is V1Settlement other &&
+                ((Context == null && other.Context == null) || (Context?.Equals(other.Context) == true)) &&
+                ((Id == null && other.Id == null) || (Id?.Equals(other.Id) == true)) &&
+                ((Status == null && other.Status == null) || (Status?.Equals(other.Status) == true)) &&
+                ((TotalMoney == null && other.TotalMoney == null) || (TotalMoney?.Equals(other.TotalMoney) == true)) &&
+                ((InitiatedAt == null && other.InitiatedAt == null) || (InitiatedAt?.Equals(other.InitiatedAt) == true)) &&
+                ((BankAccountId == null && other.BankAccountId == null) || (BankAccountId?.Equals(other.BankAccountId) == true)) &&
+                ((Entries == null && other.Entries == null) || (Entries?.Equals(other.Entries) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 388412647;
+
+            if (Context != null)
+            {
+                hashCode += Context.GetHashCode();
+            }
+
+            if (Id != null)
+            {
+               hashCode += Id.GetHashCode();
+            }
+
+            if (Status != null)
+            {
+               hashCode += Status.GetHashCode();
+            }
+
+            if (TotalMoney != null)
+            {
+               hashCode += TotalMoney.GetHashCode();
+            }
+
+            if (InitiatedAt != null)
+            {
+               hashCode += InitiatedAt.GetHashCode();
+            }
+
+            if (BankAccountId != null)
+            {
+               hashCode += BankAccountId.GetHashCode();
+            }
+
+            if (Entries != null)
+            {
+               hashCode += Entries.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

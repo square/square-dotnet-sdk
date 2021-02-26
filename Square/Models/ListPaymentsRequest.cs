@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -99,6 +100,104 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("limit", NullValueHandling = NullValueHandling.Ignore)]
         public int? Limit { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"ListPaymentsRequest : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"BeginTime = {(BeginTime == null ? "null" : BeginTime == string.Empty ? "" : BeginTime)}");
+            toStringOutput.Add($"EndTime = {(EndTime == null ? "null" : EndTime == string.Empty ? "" : EndTime)}");
+            toStringOutput.Add($"SortOrder = {(SortOrder == null ? "null" : SortOrder == string.Empty ? "" : SortOrder)}");
+            toStringOutput.Add($"Cursor = {(Cursor == null ? "null" : Cursor == string.Empty ? "" : Cursor)}");
+            toStringOutput.Add($"LocationId = {(LocationId == null ? "null" : LocationId == string.Empty ? "" : LocationId)}");
+            toStringOutput.Add($"Total = {(Total == null ? "null" : Total.ToString())}");
+            toStringOutput.Add($"Last4 = {(Last4 == null ? "null" : Last4 == string.Empty ? "" : Last4)}");
+            toStringOutput.Add($"CardBrand = {(CardBrand == null ? "null" : CardBrand == string.Empty ? "" : CardBrand)}");
+            toStringOutput.Add($"Limit = {(Limit == null ? "null" : Limit.ToString())}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is ListPaymentsRequest other &&
+                ((BeginTime == null && other.BeginTime == null) || (BeginTime?.Equals(other.BeginTime) == true)) &&
+                ((EndTime == null && other.EndTime == null) || (EndTime?.Equals(other.EndTime) == true)) &&
+                ((SortOrder == null && other.SortOrder == null) || (SortOrder?.Equals(other.SortOrder) == true)) &&
+                ((Cursor == null && other.Cursor == null) || (Cursor?.Equals(other.Cursor) == true)) &&
+                ((LocationId == null && other.LocationId == null) || (LocationId?.Equals(other.LocationId) == true)) &&
+                ((Total == null && other.Total == null) || (Total?.Equals(other.Total) == true)) &&
+                ((Last4 == null && other.Last4 == null) || (Last4?.Equals(other.Last4) == true)) &&
+                ((CardBrand == null && other.CardBrand == null) || (CardBrand?.Equals(other.CardBrand) == true)) &&
+                ((Limit == null && other.Limit == null) || (Limit?.Equals(other.Limit) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 805936600;
+
+            if (BeginTime != null)
+            {
+               hashCode += BeginTime.GetHashCode();
+            }
+
+            if (EndTime != null)
+            {
+               hashCode += EndTime.GetHashCode();
+            }
+
+            if (SortOrder != null)
+            {
+               hashCode += SortOrder.GetHashCode();
+            }
+
+            if (Cursor != null)
+            {
+               hashCode += Cursor.GetHashCode();
+            }
+
+            if (LocationId != null)
+            {
+               hashCode += LocationId.GetHashCode();
+            }
+
+            if (Total != null)
+            {
+               hashCode += Total.GetHashCode();
+            }
+
+            if (Last4 != null)
+            {
+               hashCode += Last4.GetHashCode();
+            }
+
+            if (CardBrand != null)
+            {
+               hashCode += CardBrand.GetHashCode();
+            }
+
+            if (Limit != null)
+            {
+               hashCode += Limit.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

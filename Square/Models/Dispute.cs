@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -134,6 +135,139 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("location_id", NullValueHandling = NullValueHandling.Ignore)]
         public string LocationId { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"Dispute : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"DisputeId = {(DisputeId == null ? "null" : DisputeId == string.Empty ? "" : DisputeId)}");
+            toStringOutput.Add($"AmountMoney = {(AmountMoney == null ? "null" : AmountMoney.ToString())}");
+            toStringOutput.Add($"Reason = {(Reason == null ? "null" : Reason.ToString())}");
+            toStringOutput.Add($"State = {(State == null ? "null" : State.ToString())}");
+            toStringOutput.Add($"DueAt = {(DueAt == null ? "null" : DueAt == string.Empty ? "" : DueAt)}");
+            toStringOutput.Add($"DisputedPayment = {(DisputedPayment == null ? "null" : DisputedPayment.ToString())}");
+            toStringOutput.Add($"EvidenceIds = {(EvidenceIds == null ? "null" : $"[{ string.Join(", ", EvidenceIds)} ]")}");
+            toStringOutput.Add($"CardBrand = {(CardBrand == null ? "null" : CardBrand.ToString())}");
+            toStringOutput.Add($"CreatedAt = {(CreatedAt == null ? "null" : CreatedAt == string.Empty ? "" : CreatedAt)}");
+            toStringOutput.Add($"UpdatedAt = {(UpdatedAt == null ? "null" : UpdatedAt == string.Empty ? "" : UpdatedAt)}");
+            toStringOutput.Add($"BrandDisputeId = {(BrandDisputeId == null ? "null" : BrandDisputeId == string.Empty ? "" : BrandDisputeId)}");
+            toStringOutput.Add($"ReportedDate = {(ReportedDate == null ? "null" : ReportedDate == string.Empty ? "" : ReportedDate)}");
+            toStringOutput.Add($"Version = {(Version == null ? "null" : Version.ToString())}");
+            toStringOutput.Add($"LocationId = {(LocationId == null ? "null" : LocationId == string.Empty ? "" : LocationId)}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is Dispute other &&
+                ((DisputeId == null && other.DisputeId == null) || (DisputeId?.Equals(other.DisputeId) == true)) &&
+                ((AmountMoney == null && other.AmountMoney == null) || (AmountMoney?.Equals(other.AmountMoney) == true)) &&
+                ((Reason == null && other.Reason == null) || (Reason?.Equals(other.Reason) == true)) &&
+                ((State == null && other.State == null) || (State?.Equals(other.State) == true)) &&
+                ((DueAt == null && other.DueAt == null) || (DueAt?.Equals(other.DueAt) == true)) &&
+                ((DisputedPayment == null && other.DisputedPayment == null) || (DisputedPayment?.Equals(other.DisputedPayment) == true)) &&
+                ((EvidenceIds == null && other.EvidenceIds == null) || (EvidenceIds?.Equals(other.EvidenceIds) == true)) &&
+                ((CardBrand == null && other.CardBrand == null) || (CardBrand?.Equals(other.CardBrand) == true)) &&
+                ((CreatedAt == null && other.CreatedAt == null) || (CreatedAt?.Equals(other.CreatedAt) == true)) &&
+                ((UpdatedAt == null && other.UpdatedAt == null) || (UpdatedAt?.Equals(other.UpdatedAt) == true)) &&
+                ((BrandDisputeId == null && other.BrandDisputeId == null) || (BrandDisputeId?.Equals(other.BrandDisputeId) == true)) &&
+                ((ReportedDate == null && other.ReportedDate == null) || (ReportedDate?.Equals(other.ReportedDate) == true)) &&
+                ((Version == null && other.Version == null) || (Version?.Equals(other.Version) == true)) &&
+                ((LocationId == null && other.LocationId == null) || (LocationId?.Equals(other.LocationId) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 1993475725;
+
+            if (DisputeId != null)
+            {
+               hashCode += DisputeId.GetHashCode();
+            }
+
+            if (AmountMoney != null)
+            {
+               hashCode += AmountMoney.GetHashCode();
+            }
+
+            if (Reason != null)
+            {
+               hashCode += Reason.GetHashCode();
+            }
+
+            if (State != null)
+            {
+               hashCode += State.GetHashCode();
+            }
+
+            if (DueAt != null)
+            {
+               hashCode += DueAt.GetHashCode();
+            }
+
+            if (DisputedPayment != null)
+            {
+               hashCode += DisputedPayment.GetHashCode();
+            }
+
+            if (EvidenceIds != null)
+            {
+               hashCode += EvidenceIds.GetHashCode();
+            }
+
+            if (CardBrand != null)
+            {
+               hashCode += CardBrand.GetHashCode();
+            }
+
+            if (CreatedAt != null)
+            {
+               hashCode += CreatedAt.GetHashCode();
+            }
+
+            if (UpdatedAt != null)
+            {
+               hashCode += UpdatedAt.GetHashCode();
+            }
+
+            if (BrandDisputeId != null)
+            {
+               hashCode += BrandDisputeId.GetHashCode();
+            }
+
+            if (ReportedDate != null)
+            {
+               hashCode += ReportedDate.GetHashCode();
+            }
+
+            if (Version != null)
+            {
+               hashCode += Version.GetHashCode();
+            }
+
+            if (LocationId != null)
+            {
+               hashCode += LocationId.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

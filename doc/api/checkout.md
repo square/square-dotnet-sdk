@@ -183,7 +183,6 @@ var bodyOrderOrder = new Order.Builder(
     .Build();
 var bodyOrder = new CreateOrderRequest.Builder()
     .Order(bodyOrderOrder)
-    .LocationId("location_id4")
     .IdempotencyKey("12ae1696-z1e3-4328-af6d-f1e04d947gd4")
     .Build();
 var bodyPrePopulateShippingAddress = new Address.Builder()

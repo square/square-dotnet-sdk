@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -75,6 +76,89 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("plan_id", NullValueHandling = NullValueHandling.Ignore)]
         public string PlanId { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"RenewTokenResponse : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"AccessToken = {(AccessToken == null ? "null" : AccessToken == string.Empty ? "" : AccessToken)}");
+            toStringOutput.Add($"TokenType = {(TokenType == null ? "null" : TokenType == string.Empty ? "" : TokenType)}");
+            toStringOutput.Add($"ExpiresAt = {(ExpiresAt == null ? "null" : ExpiresAt == string.Empty ? "" : ExpiresAt)}");
+            toStringOutput.Add($"MerchantId = {(MerchantId == null ? "null" : MerchantId == string.Empty ? "" : MerchantId)}");
+            toStringOutput.Add($"SubscriptionId = {(SubscriptionId == null ? "null" : SubscriptionId == string.Empty ? "" : SubscriptionId)}");
+            toStringOutput.Add($"PlanId = {(PlanId == null ? "null" : PlanId == string.Empty ? "" : PlanId)}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is RenewTokenResponse other &&
+                ((Context == null && other.Context == null) || (Context?.Equals(other.Context) == true)) &&
+                ((AccessToken == null && other.AccessToken == null) || (AccessToken?.Equals(other.AccessToken) == true)) &&
+                ((TokenType == null && other.TokenType == null) || (TokenType?.Equals(other.TokenType) == true)) &&
+                ((ExpiresAt == null && other.ExpiresAt == null) || (ExpiresAt?.Equals(other.ExpiresAt) == true)) &&
+                ((MerchantId == null && other.MerchantId == null) || (MerchantId?.Equals(other.MerchantId) == true)) &&
+                ((SubscriptionId == null && other.SubscriptionId == null) || (SubscriptionId?.Equals(other.SubscriptionId) == true)) &&
+                ((PlanId == null && other.PlanId == null) || (PlanId?.Equals(other.PlanId) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 1777017961;
+
+            if (Context != null)
+            {
+                hashCode += Context.GetHashCode();
+            }
+
+            if (AccessToken != null)
+            {
+               hashCode += AccessToken.GetHashCode();
+            }
+
+            if (TokenType != null)
+            {
+               hashCode += TokenType.GetHashCode();
+            }
+
+            if (ExpiresAt != null)
+            {
+               hashCode += ExpiresAt.GetHashCode();
+            }
+
+            if (MerchantId != null)
+            {
+               hashCode += MerchantId.GetHashCode();
+            }
+
+            if (SubscriptionId != null)
+            {
+               hashCode += SubscriptionId.GetHashCode();
+            }
+
+            if (PlanId != null)
+            {
+               hashCode += PlanId.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

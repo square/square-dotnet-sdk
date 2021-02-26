@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -106,6 +107,104 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("short_lived", NullValueHandling = NullValueHandling.Ignore)]
         public bool? ShortLived { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"ObtainTokenRequest : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"ClientId = {(ClientId == null ? "null" : ClientId == string.Empty ? "" : ClientId)}");
+            toStringOutput.Add($"ClientSecret = {(ClientSecret == null ? "null" : ClientSecret == string.Empty ? "" : ClientSecret)}");
+            toStringOutput.Add($"Code = {(Code == null ? "null" : Code == string.Empty ? "" : Code)}");
+            toStringOutput.Add($"RedirectUri = {(RedirectUri == null ? "null" : RedirectUri == string.Empty ? "" : RedirectUri)}");
+            toStringOutput.Add($"GrantType = {(GrantType == null ? "null" : GrantType == string.Empty ? "" : GrantType)}");
+            toStringOutput.Add($"RefreshToken = {(RefreshToken == null ? "null" : RefreshToken == string.Empty ? "" : RefreshToken)}");
+            toStringOutput.Add($"MigrationToken = {(MigrationToken == null ? "null" : MigrationToken == string.Empty ? "" : MigrationToken)}");
+            toStringOutput.Add($"Scopes = {(Scopes == null ? "null" : $"[{ string.Join(", ", Scopes)} ]")}");
+            toStringOutput.Add($"ShortLived = {(ShortLived == null ? "null" : ShortLived.ToString())}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is ObtainTokenRequest other &&
+                ((ClientId == null && other.ClientId == null) || (ClientId?.Equals(other.ClientId) == true)) &&
+                ((ClientSecret == null && other.ClientSecret == null) || (ClientSecret?.Equals(other.ClientSecret) == true)) &&
+                ((Code == null && other.Code == null) || (Code?.Equals(other.Code) == true)) &&
+                ((RedirectUri == null && other.RedirectUri == null) || (RedirectUri?.Equals(other.RedirectUri) == true)) &&
+                ((GrantType == null && other.GrantType == null) || (GrantType?.Equals(other.GrantType) == true)) &&
+                ((RefreshToken == null && other.RefreshToken == null) || (RefreshToken?.Equals(other.RefreshToken) == true)) &&
+                ((MigrationToken == null && other.MigrationToken == null) || (MigrationToken?.Equals(other.MigrationToken) == true)) &&
+                ((Scopes == null && other.Scopes == null) || (Scopes?.Equals(other.Scopes) == true)) &&
+                ((ShortLived == null && other.ShortLived == null) || (ShortLived?.Equals(other.ShortLived) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -994318680;
+
+            if (ClientId != null)
+            {
+               hashCode += ClientId.GetHashCode();
+            }
+
+            if (ClientSecret != null)
+            {
+               hashCode += ClientSecret.GetHashCode();
+            }
+
+            if (Code != null)
+            {
+               hashCode += Code.GetHashCode();
+            }
+
+            if (RedirectUri != null)
+            {
+               hashCode += RedirectUri.GetHashCode();
+            }
+
+            if (GrantType != null)
+            {
+               hashCode += GrantType.GetHashCode();
+            }
+
+            if (RefreshToken != null)
+            {
+               hashCode += RefreshToken.GetHashCode();
+            }
+
+            if (MigrationToken != null)
+            {
+               hashCode += MigrationToken.GetHashCode();
+            }
+
+            if (Scopes != null)
+            {
+               hashCode += Scopes.GetHashCode();
+            }
+
+            if (ShortLived != null)
+            {
+               hashCode += ShortLived.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

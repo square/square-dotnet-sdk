@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -107,6 +108,118 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("bin", NullValueHandling = NullValueHandling.Ignore)]
         public string Bin { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"Card : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"Id = {(Id == null ? "null" : Id == string.Empty ? "" : Id)}");
+            toStringOutput.Add($"CardBrand = {(CardBrand == null ? "null" : CardBrand.ToString())}");
+            toStringOutput.Add($"Last4 = {(Last4 == null ? "null" : Last4 == string.Empty ? "" : Last4)}");
+            toStringOutput.Add($"ExpMonth = {(ExpMonth == null ? "null" : ExpMonth.ToString())}");
+            toStringOutput.Add($"ExpYear = {(ExpYear == null ? "null" : ExpYear.ToString())}");
+            toStringOutput.Add($"CardholderName = {(CardholderName == null ? "null" : CardholderName == string.Empty ? "" : CardholderName)}");
+            toStringOutput.Add($"BillingAddress = {(BillingAddress == null ? "null" : BillingAddress.ToString())}");
+            toStringOutput.Add($"Fingerprint = {(Fingerprint == null ? "null" : Fingerprint == string.Empty ? "" : Fingerprint)}");
+            toStringOutput.Add($"CardType = {(CardType == null ? "null" : CardType.ToString())}");
+            toStringOutput.Add($"PrepaidType = {(PrepaidType == null ? "null" : PrepaidType.ToString())}");
+            toStringOutput.Add($"Bin = {(Bin == null ? "null" : Bin == string.Empty ? "" : Bin)}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is Card other &&
+                ((Id == null && other.Id == null) || (Id?.Equals(other.Id) == true)) &&
+                ((CardBrand == null && other.CardBrand == null) || (CardBrand?.Equals(other.CardBrand) == true)) &&
+                ((Last4 == null && other.Last4 == null) || (Last4?.Equals(other.Last4) == true)) &&
+                ((ExpMonth == null && other.ExpMonth == null) || (ExpMonth?.Equals(other.ExpMonth) == true)) &&
+                ((ExpYear == null && other.ExpYear == null) || (ExpYear?.Equals(other.ExpYear) == true)) &&
+                ((CardholderName == null && other.CardholderName == null) || (CardholderName?.Equals(other.CardholderName) == true)) &&
+                ((BillingAddress == null && other.BillingAddress == null) || (BillingAddress?.Equals(other.BillingAddress) == true)) &&
+                ((Fingerprint == null && other.Fingerprint == null) || (Fingerprint?.Equals(other.Fingerprint) == true)) &&
+                ((CardType == null && other.CardType == null) || (CardType?.Equals(other.CardType) == true)) &&
+                ((PrepaidType == null && other.PrepaidType == null) || (PrepaidType?.Equals(other.PrepaidType) == true)) &&
+                ((Bin == null && other.Bin == null) || (Bin?.Equals(other.Bin) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 1370361237;
+
+            if (Id != null)
+            {
+               hashCode += Id.GetHashCode();
+            }
+
+            if (CardBrand != null)
+            {
+               hashCode += CardBrand.GetHashCode();
+            }
+
+            if (Last4 != null)
+            {
+               hashCode += Last4.GetHashCode();
+            }
+
+            if (ExpMonth != null)
+            {
+               hashCode += ExpMonth.GetHashCode();
+            }
+
+            if (ExpYear != null)
+            {
+               hashCode += ExpYear.GetHashCode();
+            }
+
+            if (CardholderName != null)
+            {
+               hashCode += CardholderName.GetHashCode();
+            }
+
+            if (BillingAddress != null)
+            {
+               hashCode += BillingAddress.GetHashCode();
+            }
+
+            if (Fingerprint != null)
+            {
+               hashCode += Fingerprint.GetHashCode();
+            }
+
+            if (CardType != null)
+            {
+               hashCode += CardType.GetHashCode();
+            }
+
+            if (PrepaidType != null)
+            {
+               hashCode += PrepaidType.GetHashCode();
+            }
+
+            if (Bin != null)
+            {
+               hashCode += Bin.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

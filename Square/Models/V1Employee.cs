@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -100,6 +101,117 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("updated_at", NullValueHandling = NullValueHandling.Ignore)]
         public string UpdatedAt { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"V1Employee : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"Id = {(Id == null ? "null" : Id == string.Empty ? "" : Id)}");
+            toStringOutput.Add($"FirstName = {(FirstName == null ? "null" : FirstName == string.Empty ? "" : FirstName)}");
+            toStringOutput.Add($"LastName = {(LastName == null ? "null" : LastName == string.Empty ? "" : LastName)}");
+            toStringOutput.Add($"RoleIds = {(RoleIds == null ? "null" : $"[{ string.Join(", ", RoleIds)} ]")}");
+            toStringOutput.Add($"AuthorizedLocationIds = {(AuthorizedLocationIds == null ? "null" : $"[{ string.Join(", ", AuthorizedLocationIds)} ]")}");
+            toStringOutput.Add($"Email = {(Email == null ? "null" : Email == string.Empty ? "" : Email)}");
+            toStringOutput.Add($"Status = {(Status == null ? "null" : Status.ToString())}");
+            toStringOutput.Add($"ExternalId = {(ExternalId == null ? "null" : ExternalId == string.Empty ? "" : ExternalId)}");
+            toStringOutput.Add($"CreatedAt = {(CreatedAt == null ? "null" : CreatedAt == string.Empty ? "" : CreatedAt)}");
+            toStringOutput.Add($"UpdatedAt = {(UpdatedAt == null ? "null" : UpdatedAt == string.Empty ? "" : UpdatedAt)}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is V1Employee other &&
+                ((Context == null && other.Context == null) || (Context?.Equals(other.Context) == true)) &&
+                ((Id == null && other.Id == null) || (Id?.Equals(other.Id) == true)) &&
+                ((FirstName == null && other.FirstName == null) || (FirstName?.Equals(other.FirstName) == true)) &&
+                ((LastName == null && other.LastName == null) || (LastName?.Equals(other.LastName) == true)) &&
+                ((RoleIds == null && other.RoleIds == null) || (RoleIds?.Equals(other.RoleIds) == true)) &&
+                ((AuthorizedLocationIds == null && other.AuthorizedLocationIds == null) || (AuthorizedLocationIds?.Equals(other.AuthorizedLocationIds) == true)) &&
+                ((Email == null && other.Email == null) || (Email?.Equals(other.Email) == true)) &&
+                ((Status == null && other.Status == null) || (Status?.Equals(other.Status) == true)) &&
+                ((ExternalId == null && other.ExternalId == null) || (ExternalId?.Equals(other.ExternalId) == true)) &&
+                ((CreatedAt == null && other.CreatedAt == null) || (CreatedAt?.Equals(other.CreatedAt) == true)) &&
+                ((UpdatedAt == null && other.UpdatedAt == null) || (UpdatedAt?.Equals(other.UpdatedAt) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -1815713267;
+
+            if (Context != null)
+            {
+                hashCode += Context.GetHashCode();
+            }
+
+            if (Id != null)
+            {
+               hashCode += Id.GetHashCode();
+            }
+
+            if (FirstName != null)
+            {
+               hashCode += FirstName.GetHashCode();
+            }
+
+            if (LastName != null)
+            {
+               hashCode += LastName.GetHashCode();
+            }
+
+            if (RoleIds != null)
+            {
+               hashCode += RoleIds.GetHashCode();
+            }
+
+            if (AuthorizedLocationIds != null)
+            {
+               hashCode += AuthorizedLocationIds.GetHashCode();
+            }
+
+            if (Email != null)
+            {
+               hashCode += Email.GetHashCode();
+            }
+
+            if (Status != null)
+            {
+               hashCode += Status.GetHashCode();
+            }
+
+            if (ExternalId != null)
+            {
+               hashCode += ExternalId.GetHashCode();
+            }
+
+            if (CreatedAt != null)
+            {
+               hashCode += CreatedAt.GetHashCode();
+            }
+
+            if (UpdatedAt != null)
+            {
+               hashCode += UpdatedAt.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

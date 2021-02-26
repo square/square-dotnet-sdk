@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -48,6 +49,61 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("service_variation_version")]
         public long ServiceVariationVersion { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"AppointmentSegment : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"DurationMinutes = {DurationMinutes}");
+            toStringOutput.Add($"ServiceVariationId = {(ServiceVariationId == null ? "null" : ServiceVariationId == string.Empty ? "" : ServiceVariationId)}");
+            toStringOutput.Add($"TeamMemberId = {(TeamMemberId == null ? "null" : TeamMemberId == string.Empty ? "" : TeamMemberId)}");
+            toStringOutput.Add($"ServiceVariationVersion = {ServiceVariationVersion}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is AppointmentSegment other &&
+                DurationMinutes.Equals(other.DurationMinutes) &&
+                ((ServiceVariationId == null && other.ServiceVariationId == null) || (ServiceVariationId?.Equals(other.ServiceVariationId) == true)) &&
+                ((TeamMemberId == null && other.TeamMemberId == null) || (TeamMemberId?.Equals(other.TeamMemberId) == true)) &&
+                ServiceVariationVersion.Equals(other.ServiceVariationVersion);
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -1009100920;
+            hashCode += DurationMinutes.GetHashCode();
+
+            if (ServiceVariationId != null)
+            {
+               hashCode += ServiceVariationId.GetHashCode();
+            }
+
+            if (TeamMemberId != null)
+            {
+               hashCode += TeamMemberId.GetHashCode();
+            }
+            hashCode += ServiceVariationVersion.GetHashCode();
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

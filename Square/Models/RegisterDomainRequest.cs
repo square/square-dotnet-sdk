@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -24,6 +25,48 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("domain_name")]
         public string DomainName { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"RegisterDomainRequest : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"DomainName = {(DomainName == null ? "null" : DomainName == string.Empty ? "" : DomainName)}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is RegisterDomainRequest other &&
+                ((DomainName == null && other.DomainName == null) || (DomainName?.Equals(other.DomainName) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 1345788057;
+
+            if (DomainName != null)
+            {
+               hashCode += DomainName.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

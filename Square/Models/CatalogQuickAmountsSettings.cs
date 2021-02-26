@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -41,6 +42,62 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("amounts", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.CatalogQuickAmount> Amounts { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"CatalogQuickAmountsSettings : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"Option = {(Option == null ? "null" : Option.ToString())}");
+            toStringOutput.Add($"EligibleForAutoAmounts = {(EligibleForAutoAmounts == null ? "null" : EligibleForAutoAmounts.ToString())}");
+            toStringOutput.Add($"Amounts = {(Amounts == null ? "null" : $"[{ string.Join(", ", Amounts)} ]")}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is CatalogQuickAmountsSettings other &&
+                ((Option == null && other.Option == null) || (Option?.Equals(other.Option) == true)) &&
+                ((EligibleForAutoAmounts == null && other.EligibleForAutoAmounts == null) || (EligibleForAutoAmounts?.Equals(other.EligibleForAutoAmounts) == true)) &&
+                ((Amounts == null && other.Amounts == null) || (Amounts?.Equals(other.Amounts) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -1326255280;
+
+            if (Option != null)
+            {
+               hashCode += Option.GetHashCode();
+            }
+
+            if (EligibleForAutoAmounts != null)
+            {
+               hashCode += EligibleForAutoAmounts.GetHashCode();
+            }
+
+            if (Amounts != null)
+            {
+               hashCode += Amounts.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

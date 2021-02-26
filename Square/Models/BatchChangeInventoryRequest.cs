@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -47,6 +48,62 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("ignore_unchanged_counts", NullValueHandling = NullValueHandling.Ignore)]
         public bool? IgnoreUnchangedCounts { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"BatchChangeInventoryRequest : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"IdempotencyKey = {(IdempotencyKey == null ? "null" : IdempotencyKey == string.Empty ? "" : IdempotencyKey)}");
+            toStringOutput.Add($"Changes = {(Changes == null ? "null" : $"[{ string.Join(", ", Changes)} ]")}");
+            toStringOutput.Add($"IgnoreUnchangedCounts = {(IgnoreUnchangedCounts == null ? "null" : IgnoreUnchangedCounts.ToString())}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is BatchChangeInventoryRequest other &&
+                ((IdempotencyKey == null && other.IdempotencyKey == null) || (IdempotencyKey?.Equals(other.IdempotencyKey) == true)) &&
+                ((Changes == null && other.Changes == null) || (Changes?.Equals(other.Changes) == true)) &&
+                ((IgnoreUnchangedCounts == null && other.IgnoreUnchangedCounts == null) || (IgnoreUnchangedCounts?.Equals(other.IgnoreUnchangedCounts) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 1934758425;
+
+            if (IdempotencyKey != null)
+            {
+               hashCode += IdempotencyKey.GetHashCode();
+            }
+
+            if (Changes != null)
+            {
+               hashCode += Changes.GetHashCode();
+            }
+
+            if (IgnoreUnchangedCounts != null)
+            {
+               hashCode += IgnoreUnchangedCounts.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

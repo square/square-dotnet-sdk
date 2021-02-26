@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -35,6 +36,55 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("team_member_id_filter", NullValueHandling = NullValueHandling.Ignore)]
         public Models.FilterValue TeamMemberIdFilter { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"SegmentFilter : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"ServiceVariationId = {(ServiceVariationId == null ? "null" : ServiceVariationId == string.Empty ? "" : ServiceVariationId)}");
+            toStringOutput.Add($"TeamMemberIdFilter = {(TeamMemberIdFilter == null ? "null" : TeamMemberIdFilter.ToString())}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is SegmentFilter other &&
+                ((ServiceVariationId == null && other.ServiceVariationId == null) || (ServiceVariationId?.Equals(other.ServiceVariationId) == true)) &&
+                ((TeamMemberIdFilter == null && other.TeamMemberIdFilter == null) || (TeamMemberIdFilter?.Equals(other.TeamMemberIdFilter) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -2080323319;
+
+            if (ServiceVariationId != null)
+            {
+               hashCode += ServiceVariationId.GetHashCode();
+            }
+
+            if (TeamMemberIdFilter != null)
+            {
+               hashCode += TeamMemberIdFilter.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

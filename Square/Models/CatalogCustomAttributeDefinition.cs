@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -126,6 +127,125 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("key", NullValueHandling = NullValueHandling.Ignore)]
         public string Key { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"CatalogCustomAttributeDefinition : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"Type = {(Type == null ? "null" : Type.ToString())}");
+            toStringOutput.Add($"Name = {(Name == null ? "null" : Name == string.Empty ? "" : Name)}");
+            toStringOutput.Add($"Description = {(Description == null ? "null" : Description == string.Empty ? "" : Description)}");
+            toStringOutput.Add($"SourceApplication = {(SourceApplication == null ? "null" : SourceApplication.ToString())}");
+            toStringOutput.Add($"AllowedObjectTypes = {(AllowedObjectTypes == null ? "null" : $"[{ string.Join(", ", AllowedObjectTypes)} ]")}");
+            toStringOutput.Add($"SellerVisibility = {(SellerVisibility == null ? "null" : SellerVisibility.ToString())}");
+            toStringOutput.Add($"AppVisibility = {(AppVisibility == null ? "null" : AppVisibility.ToString())}");
+            toStringOutput.Add($"StringConfig = {(StringConfig == null ? "null" : StringConfig.ToString())}");
+            toStringOutput.Add($"NumberConfig = {(NumberConfig == null ? "null" : NumberConfig.ToString())}");
+            toStringOutput.Add($"SelectionConfig = {(SelectionConfig == null ? "null" : SelectionConfig.ToString())}");
+            toStringOutput.Add($"CustomAttributeUsageCount = {(CustomAttributeUsageCount == null ? "null" : CustomAttributeUsageCount.ToString())}");
+            toStringOutput.Add($"Key = {(Key == null ? "null" : Key == string.Empty ? "" : Key)}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is CatalogCustomAttributeDefinition other &&
+                ((Type == null && other.Type == null) || (Type?.Equals(other.Type) == true)) &&
+                ((Name == null && other.Name == null) || (Name?.Equals(other.Name) == true)) &&
+                ((Description == null && other.Description == null) || (Description?.Equals(other.Description) == true)) &&
+                ((SourceApplication == null && other.SourceApplication == null) || (SourceApplication?.Equals(other.SourceApplication) == true)) &&
+                ((AllowedObjectTypes == null && other.AllowedObjectTypes == null) || (AllowedObjectTypes?.Equals(other.AllowedObjectTypes) == true)) &&
+                ((SellerVisibility == null && other.SellerVisibility == null) || (SellerVisibility?.Equals(other.SellerVisibility) == true)) &&
+                ((AppVisibility == null && other.AppVisibility == null) || (AppVisibility?.Equals(other.AppVisibility) == true)) &&
+                ((StringConfig == null && other.StringConfig == null) || (StringConfig?.Equals(other.StringConfig) == true)) &&
+                ((NumberConfig == null && other.NumberConfig == null) || (NumberConfig?.Equals(other.NumberConfig) == true)) &&
+                ((SelectionConfig == null && other.SelectionConfig == null) || (SelectionConfig?.Equals(other.SelectionConfig) == true)) &&
+                ((CustomAttributeUsageCount == null && other.CustomAttributeUsageCount == null) || (CustomAttributeUsageCount?.Equals(other.CustomAttributeUsageCount) == true)) &&
+                ((Key == null && other.Key == null) || (Key?.Equals(other.Key) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 1892852076;
+
+            if (Type != null)
+            {
+               hashCode += Type.GetHashCode();
+            }
+
+            if (Name != null)
+            {
+               hashCode += Name.GetHashCode();
+            }
+
+            if (Description != null)
+            {
+               hashCode += Description.GetHashCode();
+            }
+
+            if (SourceApplication != null)
+            {
+               hashCode += SourceApplication.GetHashCode();
+            }
+
+            if (AllowedObjectTypes != null)
+            {
+               hashCode += AllowedObjectTypes.GetHashCode();
+            }
+
+            if (SellerVisibility != null)
+            {
+               hashCode += SellerVisibility.GetHashCode();
+            }
+
+            if (AppVisibility != null)
+            {
+               hashCode += AppVisibility.GetHashCode();
+            }
+
+            if (StringConfig != null)
+            {
+               hashCode += StringConfig.GetHashCode();
+            }
+
+            if (NumberConfig != null)
+            {
+               hashCode += NumberConfig.GetHashCode();
+            }
+
+            if (SelectionConfig != null)
+            {
+               hashCode += SelectionConfig.GetHashCode();
+            }
+
+            if (CustomAttributeUsageCount != null)
+            {
+               hashCode += CustomAttributeUsageCount.GetHashCode();
+            }
+
+            if (Key != null)
+            {
+               hashCode += Key.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

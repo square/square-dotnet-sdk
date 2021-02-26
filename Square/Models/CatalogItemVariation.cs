@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -173,6 +174,160 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("team_member_ids", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> TeamMemberIds { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"CatalogItemVariation : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"ItemId = {(ItemId == null ? "null" : ItemId == string.Empty ? "" : ItemId)}");
+            toStringOutput.Add($"Name = {(Name == null ? "null" : Name == string.Empty ? "" : Name)}");
+            toStringOutput.Add($"Sku = {(Sku == null ? "null" : Sku == string.Empty ? "" : Sku)}");
+            toStringOutput.Add($"Upc = {(Upc == null ? "null" : Upc == string.Empty ? "" : Upc)}");
+            toStringOutput.Add($"Ordinal = {(Ordinal == null ? "null" : Ordinal.ToString())}");
+            toStringOutput.Add($"PricingType = {(PricingType == null ? "null" : PricingType.ToString())}");
+            toStringOutput.Add($"PriceMoney = {(PriceMoney == null ? "null" : PriceMoney.ToString())}");
+            toStringOutput.Add($"LocationOverrides = {(LocationOverrides == null ? "null" : $"[{ string.Join(", ", LocationOverrides)} ]")}");
+            toStringOutput.Add($"TrackInventory = {(TrackInventory == null ? "null" : TrackInventory.ToString())}");
+            toStringOutput.Add($"InventoryAlertType = {(InventoryAlertType == null ? "null" : InventoryAlertType.ToString())}");
+            toStringOutput.Add($"InventoryAlertThreshold = {(InventoryAlertThreshold == null ? "null" : InventoryAlertThreshold.ToString())}");
+            toStringOutput.Add($"UserData = {(UserData == null ? "null" : UserData == string.Empty ? "" : UserData)}");
+            toStringOutput.Add($"ServiceDuration = {(ServiceDuration == null ? "null" : ServiceDuration.ToString())}");
+            toStringOutput.Add($"AvailableForBooking = {(AvailableForBooking == null ? "null" : AvailableForBooking.ToString())}");
+            toStringOutput.Add($"ItemOptionValues = {(ItemOptionValues == null ? "null" : $"[{ string.Join(", ", ItemOptionValues)} ]")}");
+            toStringOutput.Add($"MeasurementUnitId = {(MeasurementUnitId == null ? "null" : MeasurementUnitId == string.Empty ? "" : MeasurementUnitId)}");
+            toStringOutput.Add($"TeamMemberIds = {(TeamMemberIds == null ? "null" : $"[{ string.Join(", ", TeamMemberIds)} ]")}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is CatalogItemVariation other &&
+                ((ItemId == null && other.ItemId == null) || (ItemId?.Equals(other.ItemId) == true)) &&
+                ((Name == null && other.Name == null) || (Name?.Equals(other.Name) == true)) &&
+                ((Sku == null && other.Sku == null) || (Sku?.Equals(other.Sku) == true)) &&
+                ((Upc == null && other.Upc == null) || (Upc?.Equals(other.Upc) == true)) &&
+                ((Ordinal == null && other.Ordinal == null) || (Ordinal?.Equals(other.Ordinal) == true)) &&
+                ((PricingType == null && other.PricingType == null) || (PricingType?.Equals(other.PricingType) == true)) &&
+                ((PriceMoney == null && other.PriceMoney == null) || (PriceMoney?.Equals(other.PriceMoney) == true)) &&
+                ((LocationOverrides == null && other.LocationOverrides == null) || (LocationOverrides?.Equals(other.LocationOverrides) == true)) &&
+                ((TrackInventory == null && other.TrackInventory == null) || (TrackInventory?.Equals(other.TrackInventory) == true)) &&
+                ((InventoryAlertType == null && other.InventoryAlertType == null) || (InventoryAlertType?.Equals(other.InventoryAlertType) == true)) &&
+                ((InventoryAlertThreshold == null && other.InventoryAlertThreshold == null) || (InventoryAlertThreshold?.Equals(other.InventoryAlertThreshold) == true)) &&
+                ((UserData == null && other.UserData == null) || (UserData?.Equals(other.UserData) == true)) &&
+                ((ServiceDuration == null && other.ServiceDuration == null) || (ServiceDuration?.Equals(other.ServiceDuration) == true)) &&
+                ((AvailableForBooking == null && other.AvailableForBooking == null) || (AvailableForBooking?.Equals(other.AvailableForBooking) == true)) &&
+                ((ItemOptionValues == null && other.ItemOptionValues == null) || (ItemOptionValues?.Equals(other.ItemOptionValues) == true)) &&
+                ((MeasurementUnitId == null && other.MeasurementUnitId == null) || (MeasurementUnitId?.Equals(other.MeasurementUnitId) == true)) &&
+                ((TeamMemberIds == null && other.TeamMemberIds == null) || (TeamMemberIds?.Equals(other.TeamMemberIds) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -1155387790;
+
+            if (ItemId != null)
+            {
+               hashCode += ItemId.GetHashCode();
+            }
+
+            if (Name != null)
+            {
+               hashCode += Name.GetHashCode();
+            }
+
+            if (Sku != null)
+            {
+               hashCode += Sku.GetHashCode();
+            }
+
+            if (Upc != null)
+            {
+               hashCode += Upc.GetHashCode();
+            }
+
+            if (Ordinal != null)
+            {
+               hashCode += Ordinal.GetHashCode();
+            }
+
+            if (PricingType != null)
+            {
+               hashCode += PricingType.GetHashCode();
+            }
+
+            if (PriceMoney != null)
+            {
+               hashCode += PriceMoney.GetHashCode();
+            }
+
+            if (LocationOverrides != null)
+            {
+               hashCode += LocationOverrides.GetHashCode();
+            }
+
+            if (TrackInventory != null)
+            {
+               hashCode += TrackInventory.GetHashCode();
+            }
+
+            if (InventoryAlertType != null)
+            {
+               hashCode += InventoryAlertType.GetHashCode();
+            }
+
+            if (InventoryAlertThreshold != null)
+            {
+               hashCode += InventoryAlertThreshold.GetHashCode();
+            }
+
+            if (UserData != null)
+            {
+               hashCode += UserData.GetHashCode();
+            }
+
+            if (ServiceDuration != null)
+            {
+               hashCode += ServiceDuration.GetHashCode();
+            }
+
+            if (AvailableForBooking != null)
+            {
+               hashCode += AvailableForBooking.GetHashCode();
+            }
+
+            if (ItemOptionValues != null)
+            {
+               hashCode += ItemOptionValues.GetHashCode();
+            }
+
+            if (MeasurementUnitId != null)
+            {
+               hashCode += MeasurementUnitId.GetHashCode();
+            }
+
+            if (TeamMemberIds != null)
+            {
+               hashCode += TeamMemberIds.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

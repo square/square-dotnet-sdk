@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -76,6 +77,86 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("is_paid")]
         public bool IsPaid { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"Break : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"Id = {(Id == null ? "null" : Id == string.Empty ? "" : Id)}");
+            toStringOutput.Add($"StartAt = {(StartAt == null ? "null" : StartAt == string.Empty ? "" : StartAt)}");
+            toStringOutput.Add($"EndAt = {(EndAt == null ? "null" : EndAt == string.Empty ? "" : EndAt)}");
+            toStringOutput.Add($"BreakTypeId = {(BreakTypeId == null ? "null" : BreakTypeId == string.Empty ? "" : BreakTypeId)}");
+            toStringOutput.Add($"Name = {(Name == null ? "null" : Name == string.Empty ? "" : Name)}");
+            toStringOutput.Add($"ExpectedDuration = {(ExpectedDuration == null ? "null" : ExpectedDuration == string.Empty ? "" : ExpectedDuration)}");
+            toStringOutput.Add($"IsPaid = {IsPaid}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is Break other &&
+                ((Id == null && other.Id == null) || (Id?.Equals(other.Id) == true)) &&
+                ((StartAt == null && other.StartAt == null) || (StartAt?.Equals(other.StartAt) == true)) &&
+                ((EndAt == null && other.EndAt == null) || (EndAt?.Equals(other.EndAt) == true)) &&
+                ((BreakTypeId == null && other.BreakTypeId == null) || (BreakTypeId?.Equals(other.BreakTypeId) == true)) &&
+                ((Name == null && other.Name == null) || (Name?.Equals(other.Name) == true)) &&
+                ((ExpectedDuration == null && other.ExpectedDuration == null) || (ExpectedDuration?.Equals(other.ExpectedDuration) == true)) &&
+                IsPaid.Equals(other.IsPaid);
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 168552180;
+
+            if (Id != null)
+            {
+               hashCode += Id.GetHashCode();
+            }
+
+            if (StartAt != null)
+            {
+               hashCode += StartAt.GetHashCode();
+            }
+
+            if (EndAt != null)
+            {
+               hashCode += EndAt.GetHashCode();
+            }
+
+            if (BreakTypeId != null)
+            {
+               hashCode += BreakTypeId.GetHashCode();
+            }
+
+            if (Name != null)
+            {
+               hashCode += Name.GetHashCode();
+            }
+
+            if (ExpectedDuration != null)
+            {
+               hashCode += ExpectedDuration.GetHashCode();
+            }
+            hashCode += IsPaid.GetHashCode();
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

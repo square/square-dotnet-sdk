@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -43,6 +44,62 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("tax_catalog_object_id", NullValueHandling = NullValueHandling.Ignore)]
         public string TaxCatalogObjectId { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"OrderLineItemPricingBlocklistsBlockedTax : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"Uid = {(Uid == null ? "null" : Uid == string.Empty ? "" : Uid)}");
+            toStringOutput.Add($"TaxUid = {(TaxUid == null ? "null" : TaxUid == string.Empty ? "" : TaxUid)}");
+            toStringOutput.Add($"TaxCatalogObjectId = {(TaxCatalogObjectId == null ? "null" : TaxCatalogObjectId == string.Empty ? "" : TaxCatalogObjectId)}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is OrderLineItemPricingBlocklistsBlockedTax other &&
+                ((Uid == null && other.Uid == null) || (Uid?.Equals(other.Uid) == true)) &&
+                ((TaxUid == null && other.TaxUid == null) || (TaxUid?.Equals(other.TaxUid) == true)) &&
+                ((TaxCatalogObjectId == null && other.TaxCatalogObjectId == null) || (TaxCatalogObjectId?.Equals(other.TaxCatalogObjectId) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 91458610;
+
+            if (Uid != null)
+            {
+               hashCode += Uid.GetHashCode();
+            }
+
+            if (TaxUid != null)
+            {
+               hashCode += TaxUid.GetHashCode();
+            }
+
+            if (TaxCatalogObjectId != null)
+            {
+               hashCode += TaxCatalogObjectId.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

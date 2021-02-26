@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -36,6 +37,55 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("allowed_selections", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.CatalogCustomAttributeDefinitionSelectionConfigCustomAttributeSelection> AllowedSelections { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"CatalogCustomAttributeDefinitionSelectionConfig : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"MaxAllowedSelections = {(MaxAllowedSelections == null ? "null" : MaxAllowedSelections.ToString())}");
+            toStringOutput.Add($"AllowedSelections = {(AllowedSelections == null ? "null" : $"[{ string.Join(", ", AllowedSelections)} ]")}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is CatalogCustomAttributeDefinitionSelectionConfig other &&
+                ((MaxAllowedSelections == null && other.MaxAllowedSelections == null) || (MaxAllowedSelections?.Equals(other.MaxAllowedSelections) == true)) &&
+                ((AllowedSelections == null && other.AllowedSelections == null) || (AllowedSelections?.Equals(other.AllowedSelections) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 960165059;
+
+            if (MaxAllowedSelections != null)
+            {
+               hashCode += MaxAllowedSelections.GetHashCode();
+            }
+
+            if (AllowedSelections != null)
+            {
+               hashCode += AllowedSelections.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

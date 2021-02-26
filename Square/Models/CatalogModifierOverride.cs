@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -32,6 +33,55 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("on_by_default", NullValueHandling = NullValueHandling.Ignore)]
         public bool? OnByDefault { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"CatalogModifierOverride : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"ModifierId = {(ModifierId == null ? "null" : ModifierId == string.Empty ? "" : ModifierId)}");
+            toStringOutput.Add($"OnByDefault = {(OnByDefault == null ? "null" : OnByDefault.ToString())}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is CatalogModifierOverride other &&
+                ((ModifierId == null && other.ModifierId == null) || (ModifierId?.Equals(other.ModifierId) == true)) &&
+                ((OnByDefault == null && other.OnByDefault == null) || (OnByDefault?.Equals(other.OnByDefault) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -1142174100;
+
+            if (ModifierId != null)
+            {
+               hashCode += ModifierId.GetHashCode();
+            }
+
+            if (OnByDefault != null)
+            {
+               hashCode += OnByDefault.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

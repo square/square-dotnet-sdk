@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -44,6 +45,62 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("payment_ids", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> PaymentIds { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"PayOrderRequest : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"IdempotencyKey = {(IdempotencyKey == null ? "null" : IdempotencyKey == string.Empty ? "" : IdempotencyKey)}");
+            toStringOutput.Add($"OrderVersion = {(OrderVersion == null ? "null" : OrderVersion.ToString())}");
+            toStringOutput.Add($"PaymentIds = {(PaymentIds == null ? "null" : $"[{ string.Join(", ", PaymentIds)} ]")}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is PayOrderRequest other &&
+                ((IdempotencyKey == null && other.IdempotencyKey == null) || (IdempotencyKey?.Equals(other.IdempotencyKey) == true)) &&
+                ((OrderVersion == null && other.OrderVersion == null) || (OrderVersion?.Equals(other.OrderVersion) == true)) &&
+                ((PaymentIds == null && other.PaymentIds == null) || (PaymentIds?.Equals(other.PaymentIds) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -320446863;
+
+            if (IdempotencyKey != null)
+            {
+               hashCode += IdempotencyKey.GetHashCode();
+            }
+
+            if (OrderVersion != null)
+            {
+               hashCode += OrderVersion.GetHashCode();
+            }
+
+            if (PaymentIds != null)
+            {
+               hashCode += PaymentIds.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

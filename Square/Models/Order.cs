@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -310,6 +311,244 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("rewards", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.OrderReward> Rewards { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"Order : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"Id = {(Id == null ? "null" : Id == string.Empty ? "" : Id)}");
+            toStringOutput.Add($"LocationId = {(LocationId == null ? "null" : LocationId == string.Empty ? "" : LocationId)}");
+            toStringOutput.Add($"ReferenceId = {(ReferenceId == null ? "null" : ReferenceId == string.Empty ? "" : ReferenceId)}");
+            toStringOutput.Add($"Source = {(Source == null ? "null" : Source.ToString())}");
+            toStringOutput.Add($"CustomerId = {(CustomerId == null ? "null" : CustomerId == string.Empty ? "" : CustomerId)}");
+            toStringOutput.Add($"LineItems = {(LineItems == null ? "null" : $"[{ string.Join(", ", LineItems)} ]")}");
+            toStringOutput.Add($"Taxes = {(Taxes == null ? "null" : $"[{ string.Join(", ", Taxes)} ]")}");
+            toStringOutput.Add($"Discounts = {(Discounts == null ? "null" : $"[{ string.Join(", ", Discounts)} ]")}");
+            toStringOutput.Add($"ServiceCharges = {(ServiceCharges == null ? "null" : $"[{ string.Join(", ", ServiceCharges)} ]")}");
+            toStringOutput.Add($"Fulfillments = {(Fulfillments == null ? "null" : $"[{ string.Join(", ", Fulfillments)} ]")}");
+            toStringOutput.Add($"Returns = {(Returns == null ? "null" : $"[{ string.Join(", ", Returns)} ]")}");
+            toStringOutput.Add($"ReturnAmounts = {(ReturnAmounts == null ? "null" : ReturnAmounts.ToString())}");
+            toStringOutput.Add($"NetAmounts = {(NetAmounts == null ? "null" : NetAmounts.ToString())}");
+            toStringOutput.Add($"RoundingAdjustment = {(RoundingAdjustment == null ? "null" : RoundingAdjustment.ToString())}");
+            toStringOutput.Add($"Tenders = {(Tenders == null ? "null" : $"[{ string.Join(", ", Tenders)} ]")}");
+            toStringOutput.Add($"Refunds = {(Refunds == null ? "null" : $"[{ string.Join(", ", Refunds)} ]")}");
+            toStringOutput.Add($"Metadata = {(Metadata == null ? "null" : Metadata.ToString())}");
+            toStringOutput.Add($"CreatedAt = {(CreatedAt == null ? "null" : CreatedAt == string.Empty ? "" : CreatedAt)}");
+            toStringOutput.Add($"UpdatedAt = {(UpdatedAt == null ? "null" : UpdatedAt == string.Empty ? "" : UpdatedAt)}");
+            toStringOutput.Add($"ClosedAt = {(ClosedAt == null ? "null" : ClosedAt == string.Empty ? "" : ClosedAt)}");
+            toStringOutput.Add($"State = {(State == null ? "null" : State.ToString())}");
+            toStringOutput.Add($"Version = {(Version == null ? "null" : Version.ToString())}");
+            toStringOutput.Add($"TotalMoney = {(TotalMoney == null ? "null" : TotalMoney.ToString())}");
+            toStringOutput.Add($"TotalTaxMoney = {(TotalTaxMoney == null ? "null" : TotalTaxMoney.ToString())}");
+            toStringOutput.Add($"TotalDiscountMoney = {(TotalDiscountMoney == null ? "null" : TotalDiscountMoney.ToString())}");
+            toStringOutput.Add($"TotalTipMoney = {(TotalTipMoney == null ? "null" : TotalTipMoney.ToString())}");
+            toStringOutput.Add($"TotalServiceChargeMoney = {(TotalServiceChargeMoney == null ? "null" : TotalServiceChargeMoney.ToString())}");
+            toStringOutput.Add($"PricingOptions = {(PricingOptions == null ? "null" : PricingOptions.ToString())}");
+            toStringOutput.Add($"Rewards = {(Rewards == null ? "null" : $"[{ string.Join(", ", Rewards)} ]")}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is Order other &&
+                ((Id == null && other.Id == null) || (Id?.Equals(other.Id) == true)) &&
+                ((LocationId == null && other.LocationId == null) || (LocationId?.Equals(other.LocationId) == true)) &&
+                ((ReferenceId == null && other.ReferenceId == null) || (ReferenceId?.Equals(other.ReferenceId) == true)) &&
+                ((Source == null && other.Source == null) || (Source?.Equals(other.Source) == true)) &&
+                ((CustomerId == null && other.CustomerId == null) || (CustomerId?.Equals(other.CustomerId) == true)) &&
+                ((LineItems == null && other.LineItems == null) || (LineItems?.Equals(other.LineItems) == true)) &&
+                ((Taxes == null && other.Taxes == null) || (Taxes?.Equals(other.Taxes) == true)) &&
+                ((Discounts == null && other.Discounts == null) || (Discounts?.Equals(other.Discounts) == true)) &&
+                ((ServiceCharges == null && other.ServiceCharges == null) || (ServiceCharges?.Equals(other.ServiceCharges) == true)) &&
+                ((Fulfillments == null && other.Fulfillments == null) || (Fulfillments?.Equals(other.Fulfillments) == true)) &&
+                ((Returns == null && other.Returns == null) || (Returns?.Equals(other.Returns) == true)) &&
+                ((ReturnAmounts == null && other.ReturnAmounts == null) || (ReturnAmounts?.Equals(other.ReturnAmounts) == true)) &&
+                ((NetAmounts == null && other.NetAmounts == null) || (NetAmounts?.Equals(other.NetAmounts) == true)) &&
+                ((RoundingAdjustment == null && other.RoundingAdjustment == null) || (RoundingAdjustment?.Equals(other.RoundingAdjustment) == true)) &&
+                ((Tenders == null && other.Tenders == null) || (Tenders?.Equals(other.Tenders) == true)) &&
+                ((Refunds == null && other.Refunds == null) || (Refunds?.Equals(other.Refunds) == true)) &&
+                ((Metadata == null && other.Metadata == null) || (Metadata?.Equals(other.Metadata) == true)) &&
+                ((CreatedAt == null && other.CreatedAt == null) || (CreatedAt?.Equals(other.CreatedAt) == true)) &&
+                ((UpdatedAt == null && other.UpdatedAt == null) || (UpdatedAt?.Equals(other.UpdatedAt) == true)) &&
+                ((ClosedAt == null && other.ClosedAt == null) || (ClosedAt?.Equals(other.ClosedAt) == true)) &&
+                ((State == null && other.State == null) || (State?.Equals(other.State) == true)) &&
+                ((Version == null && other.Version == null) || (Version?.Equals(other.Version) == true)) &&
+                ((TotalMoney == null && other.TotalMoney == null) || (TotalMoney?.Equals(other.TotalMoney) == true)) &&
+                ((TotalTaxMoney == null && other.TotalTaxMoney == null) || (TotalTaxMoney?.Equals(other.TotalTaxMoney) == true)) &&
+                ((TotalDiscountMoney == null && other.TotalDiscountMoney == null) || (TotalDiscountMoney?.Equals(other.TotalDiscountMoney) == true)) &&
+                ((TotalTipMoney == null && other.TotalTipMoney == null) || (TotalTipMoney?.Equals(other.TotalTipMoney) == true)) &&
+                ((TotalServiceChargeMoney == null && other.TotalServiceChargeMoney == null) || (TotalServiceChargeMoney?.Equals(other.TotalServiceChargeMoney) == true)) &&
+                ((PricingOptions == null && other.PricingOptions == null) || (PricingOptions?.Equals(other.PricingOptions) == true)) &&
+                ((Rewards == null && other.Rewards == null) || (Rewards?.Equals(other.Rewards) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 401631729;
+
+            if (Id != null)
+            {
+               hashCode += Id.GetHashCode();
+            }
+
+            if (LocationId != null)
+            {
+               hashCode += LocationId.GetHashCode();
+            }
+
+            if (ReferenceId != null)
+            {
+               hashCode += ReferenceId.GetHashCode();
+            }
+
+            if (Source != null)
+            {
+               hashCode += Source.GetHashCode();
+            }
+
+            if (CustomerId != null)
+            {
+               hashCode += CustomerId.GetHashCode();
+            }
+
+            if (LineItems != null)
+            {
+               hashCode += LineItems.GetHashCode();
+            }
+
+            if (Taxes != null)
+            {
+               hashCode += Taxes.GetHashCode();
+            }
+
+            if (Discounts != null)
+            {
+               hashCode += Discounts.GetHashCode();
+            }
+
+            if (ServiceCharges != null)
+            {
+               hashCode += ServiceCharges.GetHashCode();
+            }
+
+            if (Fulfillments != null)
+            {
+               hashCode += Fulfillments.GetHashCode();
+            }
+
+            if (Returns != null)
+            {
+               hashCode += Returns.GetHashCode();
+            }
+
+            if (ReturnAmounts != null)
+            {
+               hashCode += ReturnAmounts.GetHashCode();
+            }
+
+            if (NetAmounts != null)
+            {
+               hashCode += NetAmounts.GetHashCode();
+            }
+
+            if (RoundingAdjustment != null)
+            {
+               hashCode += RoundingAdjustment.GetHashCode();
+            }
+
+            if (Tenders != null)
+            {
+               hashCode += Tenders.GetHashCode();
+            }
+
+            if (Refunds != null)
+            {
+               hashCode += Refunds.GetHashCode();
+            }
+
+            if (Metadata != null)
+            {
+               hashCode += Metadata.GetHashCode();
+            }
+
+            if (CreatedAt != null)
+            {
+               hashCode += CreatedAt.GetHashCode();
+            }
+
+            if (UpdatedAt != null)
+            {
+               hashCode += UpdatedAt.GetHashCode();
+            }
+
+            if (ClosedAt != null)
+            {
+               hashCode += ClosedAt.GetHashCode();
+            }
+
+            if (State != null)
+            {
+               hashCode += State.GetHashCode();
+            }
+
+            if (Version != null)
+            {
+               hashCode += Version.GetHashCode();
+            }
+
+            if (TotalMoney != null)
+            {
+               hashCode += TotalMoney.GetHashCode();
+            }
+
+            if (TotalTaxMoney != null)
+            {
+               hashCode += TotalTaxMoney.GetHashCode();
+            }
+
+            if (TotalDiscountMoney != null)
+            {
+               hashCode += TotalDiscountMoney.GetHashCode();
+            }
+
+            if (TotalTipMoney != null)
+            {
+               hashCode += TotalTipMoney.GetHashCode();
+            }
+
+            if (TotalServiceChargeMoney != null)
+            {
+               hashCode += TotalServiceChargeMoney.GetHashCode();
+            }
+
+            if (PricingOptions != null)
+            {
+               hashCode += PricingOptions.GetHashCode();
+            }
+
+            if (Rewards != null)
+            {
+               hashCode += Rewards.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

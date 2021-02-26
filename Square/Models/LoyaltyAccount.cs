@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -91,6 +92,104 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("updated_at", NullValueHandling = NullValueHandling.Ignore)]
         public string UpdatedAt { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"LoyaltyAccount : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"Id = {(Id == null ? "null" : Id == string.Empty ? "" : Id)}");
+            toStringOutput.Add($"Mappings = {(Mappings == null ? "null" : $"[{ string.Join(", ", Mappings)} ]")}");
+            toStringOutput.Add($"ProgramId = {(ProgramId == null ? "null" : ProgramId == string.Empty ? "" : ProgramId)}");
+            toStringOutput.Add($"Balance = {(Balance == null ? "null" : Balance.ToString())}");
+            toStringOutput.Add($"LifetimePoints = {(LifetimePoints == null ? "null" : LifetimePoints.ToString())}");
+            toStringOutput.Add($"CustomerId = {(CustomerId == null ? "null" : CustomerId == string.Empty ? "" : CustomerId)}");
+            toStringOutput.Add($"EnrolledAt = {(EnrolledAt == null ? "null" : EnrolledAt == string.Empty ? "" : EnrolledAt)}");
+            toStringOutput.Add($"CreatedAt = {(CreatedAt == null ? "null" : CreatedAt == string.Empty ? "" : CreatedAt)}");
+            toStringOutput.Add($"UpdatedAt = {(UpdatedAt == null ? "null" : UpdatedAt == string.Empty ? "" : UpdatedAt)}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is LoyaltyAccount other &&
+                ((Id == null && other.Id == null) || (Id?.Equals(other.Id) == true)) &&
+                ((Mappings == null && other.Mappings == null) || (Mappings?.Equals(other.Mappings) == true)) &&
+                ((ProgramId == null && other.ProgramId == null) || (ProgramId?.Equals(other.ProgramId) == true)) &&
+                ((Balance == null && other.Balance == null) || (Balance?.Equals(other.Balance) == true)) &&
+                ((LifetimePoints == null && other.LifetimePoints == null) || (LifetimePoints?.Equals(other.LifetimePoints) == true)) &&
+                ((CustomerId == null && other.CustomerId == null) || (CustomerId?.Equals(other.CustomerId) == true)) &&
+                ((EnrolledAt == null && other.EnrolledAt == null) || (EnrolledAt?.Equals(other.EnrolledAt) == true)) &&
+                ((CreatedAt == null && other.CreatedAt == null) || (CreatedAt?.Equals(other.CreatedAt) == true)) &&
+                ((UpdatedAt == null && other.UpdatedAt == null) || (UpdatedAt?.Equals(other.UpdatedAt) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -823121408;
+
+            if (Id != null)
+            {
+               hashCode += Id.GetHashCode();
+            }
+
+            if (Mappings != null)
+            {
+               hashCode += Mappings.GetHashCode();
+            }
+
+            if (ProgramId != null)
+            {
+               hashCode += ProgramId.GetHashCode();
+            }
+
+            if (Balance != null)
+            {
+               hashCode += Balance.GetHashCode();
+            }
+
+            if (LifetimePoints != null)
+            {
+               hashCode += LifetimePoints.GetHashCode();
+            }
+
+            if (CustomerId != null)
+            {
+               hashCode += CustomerId.GetHashCode();
+            }
+
+            if (EnrolledAt != null)
+            {
+               hashCode += EnrolledAt.GetHashCode();
+            }
+
+            if (CreatedAt != null)
+            {
+               hashCode += CreatedAt.GetHashCode();
+            }
+
+            if (UpdatedAt != null)
+            {
+               hashCode += UpdatedAt.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

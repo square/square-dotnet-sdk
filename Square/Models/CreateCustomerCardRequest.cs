@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -56,6 +57,69 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("verification_token", NullValueHandling = NullValueHandling.Ignore)]
         public string VerificationToken { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"CreateCustomerCardRequest : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"CardNonce = {(CardNonce == null ? "null" : CardNonce == string.Empty ? "" : CardNonce)}");
+            toStringOutput.Add($"BillingAddress = {(BillingAddress == null ? "null" : BillingAddress.ToString())}");
+            toStringOutput.Add($"CardholderName = {(CardholderName == null ? "null" : CardholderName == string.Empty ? "" : CardholderName)}");
+            toStringOutput.Add($"VerificationToken = {(VerificationToken == null ? "null" : VerificationToken == string.Empty ? "" : VerificationToken)}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is CreateCustomerCardRequest other &&
+                ((CardNonce == null && other.CardNonce == null) || (CardNonce?.Equals(other.CardNonce) == true)) &&
+                ((BillingAddress == null && other.BillingAddress == null) || (BillingAddress?.Equals(other.BillingAddress) == true)) &&
+                ((CardholderName == null && other.CardholderName == null) || (CardholderName?.Equals(other.CardholderName) == true)) &&
+                ((VerificationToken == null && other.VerificationToken == null) || (VerificationToken?.Equals(other.VerificationToken) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 1509386817;
+
+            if (CardNonce != null)
+            {
+               hashCode += CardNonce.GetHashCode();
+            }
+
+            if (BillingAddress != null)
+            {
+               hashCode += BillingAddress.GetHashCode();
+            }
+
+            if (CardholderName != null)
+            {
+               hashCode += CardholderName.GetHashCode();
+            }
+
+            if (VerificationToken != null)
+            {
+               hashCode += VerificationToken.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

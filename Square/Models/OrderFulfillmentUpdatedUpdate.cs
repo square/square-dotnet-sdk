@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -40,6 +41,62 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("new_state", NullValueHandling = NullValueHandling.Ignore)]
         public string NewState { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"OrderFulfillmentUpdatedUpdate : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"FulfillmentUid = {(FulfillmentUid == null ? "null" : FulfillmentUid == string.Empty ? "" : FulfillmentUid)}");
+            toStringOutput.Add($"OldState = {(OldState == null ? "null" : OldState.ToString())}");
+            toStringOutput.Add($"NewState = {(NewState == null ? "null" : NewState.ToString())}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is OrderFulfillmentUpdatedUpdate other &&
+                ((FulfillmentUid == null && other.FulfillmentUid == null) || (FulfillmentUid?.Equals(other.FulfillmentUid) == true)) &&
+                ((OldState == null && other.OldState == null) || (OldState?.Equals(other.OldState) == true)) &&
+                ((NewState == null && other.NewState == null) || (NewState?.Equals(other.NewState) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 1020384167;
+
+            if (FulfillmentUid != null)
+            {
+               hashCode += FulfillmentUid.GetHashCode();
+            }
+
+            if (OldState != null)
+            {
+               hashCode += OldState.GetHashCode();
+            }
+
+            if (NewState != null)
+            {
+               hashCode += NewState.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

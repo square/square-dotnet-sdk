@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -61,6 +62,76 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("ordinal", NullValueHandling = NullValueHandling.Ignore)]
         public long? Ordinal { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"SubscriptionPhase : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"Uid = {(Uid == null ? "null" : Uid == string.Empty ? "" : Uid)}");
+            toStringOutput.Add($"Cadence = {(Cadence == null ? "null" : Cadence.ToString())}");
+            toStringOutput.Add($"Periods = {(Periods == null ? "null" : Periods.ToString())}");
+            toStringOutput.Add($"RecurringPriceMoney = {(RecurringPriceMoney == null ? "null" : RecurringPriceMoney.ToString())}");
+            toStringOutput.Add($"Ordinal = {(Ordinal == null ? "null" : Ordinal.ToString())}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is SubscriptionPhase other &&
+                ((Uid == null && other.Uid == null) || (Uid?.Equals(other.Uid) == true)) &&
+                ((Cadence == null && other.Cadence == null) || (Cadence?.Equals(other.Cadence) == true)) &&
+                ((Periods == null && other.Periods == null) || (Periods?.Equals(other.Periods) == true)) &&
+                ((RecurringPriceMoney == null && other.RecurringPriceMoney == null) || (RecurringPriceMoney?.Equals(other.RecurringPriceMoney) == true)) &&
+                ((Ordinal == null && other.Ordinal == null) || (Ordinal?.Equals(other.Ordinal) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 718353637;
+
+            if (Uid != null)
+            {
+               hashCode += Uid.GetHashCode();
+            }
+
+            if (Cadence != null)
+            {
+               hashCode += Cadence.GetHashCode();
+            }
+
+            if (Periods != null)
+            {
+               hashCode += Periods.GetHashCode();
+            }
+
+            if (RecurringPriceMoney != null)
+            {
+               hashCode += RecurringPriceMoney.GetHashCode();
+            }
+
+            if (Ordinal != null)
+            {
+               hashCode += Ordinal.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -69,6 +70,76 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("customer_filter", NullValueHandling = NullValueHandling.Ignore)]
         public Models.SearchOrdersCustomerFilter CustomerFilter { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"SearchOrdersFilter : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"StateFilter = {(StateFilter == null ? "null" : StateFilter.ToString())}");
+            toStringOutput.Add($"DateTimeFilter = {(DateTimeFilter == null ? "null" : DateTimeFilter.ToString())}");
+            toStringOutput.Add($"FulfillmentFilter = {(FulfillmentFilter == null ? "null" : FulfillmentFilter.ToString())}");
+            toStringOutput.Add($"SourceFilter = {(SourceFilter == null ? "null" : SourceFilter.ToString())}");
+            toStringOutput.Add($"CustomerFilter = {(CustomerFilter == null ? "null" : CustomerFilter.ToString())}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is SearchOrdersFilter other &&
+                ((StateFilter == null && other.StateFilter == null) || (StateFilter?.Equals(other.StateFilter) == true)) &&
+                ((DateTimeFilter == null && other.DateTimeFilter == null) || (DateTimeFilter?.Equals(other.DateTimeFilter) == true)) &&
+                ((FulfillmentFilter == null && other.FulfillmentFilter == null) || (FulfillmentFilter?.Equals(other.FulfillmentFilter) == true)) &&
+                ((SourceFilter == null && other.SourceFilter == null) || (SourceFilter?.Equals(other.SourceFilter) == true)) &&
+                ((CustomerFilter == null && other.CustomerFilter == null) || (CustomerFilter?.Equals(other.CustomerFilter) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -566134060;
+
+            if (StateFilter != null)
+            {
+               hashCode += StateFilter.GetHashCode();
+            }
+
+            if (DateTimeFilter != null)
+            {
+               hashCode += DateTimeFilter.GetHashCode();
+            }
+
+            if (FulfillmentFilter != null)
+            {
+               hashCode += FulfillmentFilter.GetHashCode();
+            }
+
+            if (SourceFilter != null)
+            {
+               hashCode += SourceFilter.GetHashCode();
+            }
+
+            if (CustomerFilter != null)
+            {
+               hashCode += CustomerFilter.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

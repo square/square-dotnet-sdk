@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -56,6 +57,69 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("booking_id", NullValueHandling = NullValueHandling.Ignore)]
         public string BookingId { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"SearchAvailabilityFilter : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"StartAtRange = {(StartAtRange == null ? "null" : StartAtRange.ToString())}");
+            toStringOutput.Add($"LocationId = {(LocationId == null ? "null" : LocationId == string.Empty ? "" : LocationId)}");
+            toStringOutput.Add($"SegmentFilters = {(SegmentFilters == null ? "null" : $"[{ string.Join(", ", SegmentFilters)} ]")}");
+            toStringOutput.Add($"BookingId = {(BookingId == null ? "null" : BookingId == string.Empty ? "" : BookingId)}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is SearchAvailabilityFilter other &&
+                ((StartAtRange == null && other.StartAtRange == null) || (StartAtRange?.Equals(other.StartAtRange) == true)) &&
+                ((LocationId == null && other.LocationId == null) || (LocationId?.Equals(other.LocationId) == true)) &&
+                ((SegmentFilters == null && other.SegmentFilters == null) || (SegmentFilters?.Equals(other.SegmentFilters) == true)) &&
+                ((BookingId == null && other.BookingId == null) || (BookingId?.Equals(other.BookingId) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -735515174;
+
+            if (StartAtRange != null)
+            {
+               hashCode += StartAtRange.GetHashCode();
+            }
+
+            if (LocationId != null)
+            {
+               hashCode += LocationId.GetHashCode();
+            }
+
+            if (SegmentFilters != null)
+            {
+               hashCode += SegmentFilters.GetHashCode();
+            }
+
+            if (BookingId != null)
+            {
+               hashCode += BookingId.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

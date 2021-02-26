@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -40,6 +41,62 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("appointment_segments", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.AppointmentSegment> AppointmentSegments { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"Availability : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"StartAt = {(StartAt == null ? "null" : StartAt == string.Empty ? "" : StartAt)}");
+            toStringOutput.Add($"LocationId = {(LocationId == null ? "null" : LocationId == string.Empty ? "" : LocationId)}");
+            toStringOutput.Add($"AppointmentSegments = {(AppointmentSegments == null ? "null" : $"[{ string.Join(", ", AppointmentSegments)} ]")}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is Availability other &&
+                ((StartAt == null && other.StartAt == null) || (StartAt?.Equals(other.StartAt) == true)) &&
+                ((LocationId == null && other.LocationId == null) || (LocationId?.Equals(other.LocationId) == true)) &&
+                ((AppointmentSegments == null && other.AppointmentSegments == null) || (AppointmentSegments?.Equals(other.AppointmentSegments) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 133095493;
+
+            if (StartAt != null)
+            {
+               hashCode += StartAt.GetHashCode();
+            }
+
+            if (LocationId != null)
+            {
+               hashCode += LocationId.GetHashCode();
+            }
+
+            if (AppointmentSegments != null)
+            {
+               hashCode += AppointmentSegments.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

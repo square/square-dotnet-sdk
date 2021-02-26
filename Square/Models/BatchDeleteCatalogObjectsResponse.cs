@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -44,6 +45,68 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("deleted_at", NullValueHandling = NullValueHandling.Ignore)]
         public string DeletedAt { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"BatchDeleteCatalogObjectsResponse : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"Errors = {(Errors == null ? "null" : $"[{ string.Join(", ", Errors)} ]")}");
+            toStringOutput.Add($"DeletedObjectIds = {(DeletedObjectIds == null ? "null" : $"[{ string.Join(", ", DeletedObjectIds)} ]")}");
+            toStringOutput.Add($"DeletedAt = {(DeletedAt == null ? "null" : DeletedAt == string.Empty ? "" : DeletedAt)}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is BatchDeleteCatalogObjectsResponse other &&
+                ((Context == null && other.Context == null) || (Context?.Equals(other.Context) == true)) &&
+                ((Errors == null && other.Errors == null) || (Errors?.Equals(other.Errors) == true)) &&
+                ((DeletedObjectIds == null && other.DeletedObjectIds == null) || (DeletedObjectIds?.Equals(other.DeletedObjectIds) == true)) &&
+                ((DeletedAt == null && other.DeletedAt == null) || (DeletedAt?.Equals(other.DeletedAt) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 1786767467;
+
+            if (Context != null)
+            {
+                hashCode += Context.GetHashCode();
+            }
+
+            if (Errors != null)
+            {
+               hashCode += Errors.GetHashCode();
+            }
+
+            if (DeletedObjectIds != null)
+            {
+               hashCode += DeletedObjectIds.GetHashCode();
+            }
+
+            if (DeletedAt != null)
+            {
+               hashCode += DeletedAt.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {
