@@ -11,7 +11,7 @@ The query filter to return the search result whose named attribute values fall b
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `AttributeName` | `string` |  | The name of the attribute to be searched.<br>**Constraints**: *Minimum Length*: `1` |
+| `AttributeName` | `string` | Required | The name of the attribute to be searched.<br>**Constraints**: *Minimum Length*: `1` |
 | `AttributeMinValue` | `long?` | Optional | The desired minimum value for the search attribute (inclusive). |
 | `AttributeMaxValue` | `long?` | Optional | The desired maximum value for the search attribute (inclusive). |
 

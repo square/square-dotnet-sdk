@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -40,6 +41,62 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("device_name", NullValueHandling = NullValueHandling.Ignore)]
         public string DeviceName { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"DeviceDetails : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"DeviceId = {(DeviceId == null ? "null" : DeviceId == string.Empty ? "" : DeviceId)}");
+            toStringOutput.Add($"DeviceInstallationId = {(DeviceInstallationId == null ? "null" : DeviceInstallationId == string.Empty ? "" : DeviceInstallationId)}");
+            toStringOutput.Add($"DeviceName = {(DeviceName == null ? "null" : DeviceName == string.Empty ? "" : DeviceName)}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is DeviceDetails other &&
+                ((DeviceId == null && other.DeviceId == null) || (DeviceId?.Equals(other.DeviceId) == true)) &&
+                ((DeviceInstallationId == null && other.DeviceInstallationId == null) || (DeviceInstallationId?.Equals(other.DeviceInstallationId) == true)) &&
+                ((DeviceName == null && other.DeviceName == null) || (DeviceName?.Equals(other.DeviceName) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -363727408;
+
+            if (DeviceId != null)
+            {
+               hashCode += DeviceId.GetHashCode();
+            }
+
+            if (DeviceInstallationId != null)
+            {
+               hashCode += DeviceInstallationId.GetHashCode();
+            }
+
+            if (DeviceName != null)
+            {
+               hashCode += DeviceName.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -24,6 +25,48 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("order_updated", NullValueHandling = NullValueHandling.Ignore)]
         public Models.OrderUpdated OrderUpdated { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"OrderUpdatedObject : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"OrderUpdated = {(OrderUpdated == null ? "null" : OrderUpdated.ToString())}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is OrderUpdatedObject other &&
+                ((OrderUpdated == null && other.OrderUpdated == null) || (OrderUpdated?.Equals(other.OrderUpdated) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -155189447;
+
+            if (OrderUpdated != null)
+            {
+               hashCode += OrderUpdated.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

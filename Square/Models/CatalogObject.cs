@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -285,6 +286,237 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("quick_amounts_settings_data", NullValueHandling = NullValueHandling.Ignore)]
         public Models.CatalogQuickAmountsSettings QuickAmountsSettingsData { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"CatalogObject : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"Type = {(Type == null ? "null" : Type.ToString())}");
+            toStringOutput.Add($"Id = {(Id == null ? "null" : Id == string.Empty ? "" : Id)}");
+            toStringOutput.Add($"UpdatedAt = {(UpdatedAt == null ? "null" : UpdatedAt == string.Empty ? "" : UpdatedAt)}");
+            toStringOutput.Add($"Version = {(Version == null ? "null" : Version.ToString())}");
+            toStringOutput.Add($"IsDeleted = {(IsDeleted == null ? "null" : IsDeleted.ToString())}");
+            toStringOutput.Add($"CustomAttributeValues = {(CustomAttributeValues == null ? "null" : CustomAttributeValues.ToString())}");
+            toStringOutput.Add($"CatalogV1Ids = {(CatalogV1Ids == null ? "null" : $"[{ string.Join(", ", CatalogV1Ids)} ]")}");
+            toStringOutput.Add($"PresentAtAllLocations = {(PresentAtAllLocations == null ? "null" : PresentAtAllLocations.ToString())}");
+            toStringOutput.Add($"PresentAtLocationIds = {(PresentAtLocationIds == null ? "null" : $"[{ string.Join(", ", PresentAtLocationIds)} ]")}");
+            toStringOutput.Add($"AbsentAtLocationIds = {(AbsentAtLocationIds == null ? "null" : $"[{ string.Join(", ", AbsentAtLocationIds)} ]")}");
+            toStringOutput.Add($"ImageId = {(ImageId == null ? "null" : ImageId == string.Empty ? "" : ImageId)}");
+            toStringOutput.Add($"ItemData = {(ItemData == null ? "null" : ItemData.ToString())}");
+            toStringOutput.Add($"CategoryData = {(CategoryData == null ? "null" : CategoryData.ToString())}");
+            toStringOutput.Add($"ItemVariationData = {(ItemVariationData == null ? "null" : ItemVariationData.ToString())}");
+            toStringOutput.Add($"TaxData = {(TaxData == null ? "null" : TaxData.ToString())}");
+            toStringOutput.Add($"DiscountData = {(DiscountData == null ? "null" : DiscountData.ToString())}");
+            toStringOutput.Add($"ModifierListData = {(ModifierListData == null ? "null" : ModifierListData.ToString())}");
+            toStringOutput.Add($"ModifierData = {(ModifierData == null ? "null" : ModifierData.ToString())}");
+            toStringOutput.Add($"TimePeriodData = {(TimePeriodData == null ? "null" : TimePeriodData.ToString())}");
+            toStringOutput.Add($"ProductSetData = {(ProductSetData == null ? "null" : ProductSetData.ToString())}");
+            toStringOutput.Add($"PricingRuleData = {(PricingRuleData == null ? "null" : PricingRuleData.ToString())}");
+            toStringOutput.Add($"ImageData = {(ImageData == null ? "null" : ImageData.ToString())}");
+            toStringOutput.Add($"MeasurementUnitData = {(MeasurementUnitData == null ? "null" : MeasurementUnitData.ToString())}");
+            toStringOutput.Add($"SubscriptionPlanData = {(SubscriptionPlanData == null ? "null" : SubscriptionPlanData.ToString())}");
+            toStringOutput.Add($"ItemOptionData = {(ItemOptionData == null ? "null" : ItemOptionData.ToString())}");
+            toStringOutput.Add($"ItemOptionValueData = {(ItemOptionValueData == null ? "null" : ItemOptionValueData.ToString())}");
+            toStringOutput.Add($"CustomAttributeDefinitionData = {(CustomAttributeDefinitionData == null ? "null" : CustomAttributeDefinitionData.ToString())}");
+            toStringOutput.Add($"QuickAmountsSettingsData = {(QuickAmountsSettingsData == null ? "null" : QuickAmountsSettingsData.ToString())}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is CatalogObject other &&
+                ((Type == null && other.Type == null) || (Type?.Equals(other.Type) == true)) &&
+                ((Id == null && other.Id == null) || (Id?.Equals(other.Id) == true)) &&
+                ((UpdatedAt == null && other.UpdatedAt == null) || (UpdatedAt?.Equals(other.UpdatedAt) == true)) &&
+                ((Version == null && other.Version == null) || (Version?.Equals(other.Version) == true)) &&
+                ((IsDeleted == null && other.IsDeleted == null) || (IsDeleted?.Equals(other.IsDeleted) == true)) &&
+                ((CustomAttributeValues == null && other.CustomAttributeValues == null) || (CustomAttributeValues?.Equals(other.CustomAttributeValues) == true)) &&
+                ((CatalogV1Ids == null && other.CatalogV1Ids == null) || (CatalogV1Ids?.Equals(other.CatalogV1Ids) == true)) &&
+                ((PresentAtAllLocations == null && other.PresentAtAllLocations == null) || (PresentAtAllLocations?.Equals(other.PresentAtAllLocations) == true)) &&
+                ((PresentAtLocationIds == null && other.PresentAtLocationIds == null) || (PresentAtLocationIds?.Equals(other.PresentAtLocationIds) == true)) &&
+                ((AbsentAtLocationIds == null && other.AbsentAtLocationIds == null) || (AbsentAtLocationIds?.Equals(other.AbsentAtLocationIds) == true)) &&
+                ((ImageId == null && other.ImageId == null) || (ImageId?.Equals(other.ImageId) == true)) &&
+                ((ItemData == null && other.ItemData == null) || (ItemData?.Equals(other.ItemData) == true)) &&
+                ((CategoryData == null && other.CategoryData == null) || (CategoryData?.Equals(other.CategoryData) == true)) &&
+                ((ItemVariationData == null && other.ItemVariationData == null) || (ItemVariationData?.Equals(other.ItemVariationData) == true)) &&
+                ((TaxData == null && other.TaxData == null) || (TaxData?.Equals(other.TaxData) == true)) &&
+                ((DiscountData == null && other.DiscountData == null) || (DiscountData?.Equals(other.DiscountData) == true)) &&
+                ((ModifierListData == null && other.ModifierListData == null) || (ModifierListData?.Equals(other.ModifierListData) == true)) &&
+                ((ModifierData == null && other.ModifierData == null) || (ModifierData?.Equals(other.ModifierData) == true)) &&
+                ((TimePeriodData == null && other.TimePeriodData == null) || (TimePeriodData?.Equals(other.TimePeriodData) == true)) &&
+                ((ProductSetData == null && other.ProductSetData == null) || (ProductSetData?.Equals(other.ProductSetData) == true)) &&
+                ((PricingRuleData == null && other.PricingRuleData == null) || (PricingRuleData?.Equals(other.PricingRuleData) == true)) &&
+                ((ImageData == null && other.ImageData == null) || (ImageData?.Equals(other.ImageData) == true)) &&
+                ((MeasurementUnitData == null && other.MeasurementUnitData == null) || (MeasurementUnitData?.Equals(other.MeasurementUnitData) == true)) &&
+                ((SubscriptionPlanData == null && other.SubscriptionPlanData == null) || (SubscriptionPlanData?.Equals(other.SubscriptionPlanData) == true)) &&
+                ((ItemOptionData == null && other.ItemOptionData == null) || (ItemOptionData?.Equals(other.ItemOptionData) == true)) &&
+                ((ItemOptionValueData == null && other.ItemOptionValueData == null) || (ItemOptionValueData?.Equals(other.ItemOptionValueData) == true)) &&
+                ((CustomAttributeDefinitionData == null && other.CustomAttributeDefinitionData == null) || (CustomAttributeDefinitionData?.Equals(other.CustomAttributeDefinitionData) == true)) &&
+                ((QuickAmountsSettingsData == null && other.QuickAmountsSettingsData == null) || (QuickAmountsSettingsData?.Equals(other.QuickAmountsSettingsData) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -1814270990;
+
+            if (Type != null)
+            {
+               hashCode += Type.GetHashCode();
+            }
+
+            if (Id != null)
+            {
+               hashCode += Id.GetHashCode();
+            }
+
+            if (UpdatedAt != null)
+            {
+               hashCode += UpdatedAt.GetHashCode();
+            }
+
+            if (Version != null)
+            {
+               hashCode += Version.GetHashCode();
+            }
+
+            if (IsDeleted != null)
+            {
+               hashCode += IsDeleted.GetHashCode();
+            }
+
+            if (CustomAttributeValues != null)
+            {
+               hashCode += CustomAttributeValues.GetHashCode();
+            }
+
+            if (CatalogV1Ids != null)
+            {
+               hashCode += CatalogV1Ids.GetHashCode();
+            }
+
+            if (PresentAtAllLocations != null)
+            {
+               hashCode += PresentAtAllLocations.GetHashCode();
+            }
+
+            if (PresentAtLocationIds != null)
+            {
+               hashCode += PresentAtLocationIds.GetHashCode();
+            }
+
+            if (AbsentAtLocationIds != null)
+            {
+               hashCode += AbsentAtLocationIds.GetHashCode();
+            }
+
+            if (ImageId != null)
+            {
+               hashCode += ImageId.GetHashCode();
+            }
+
+            if (ItemData != null)
+            {
+               hashCode += ItemData.GetHashCode();
+            }
+
+            if (CategoryData != null)
+            {
+               hashCode += CategoryData.GetHashCode();
+            }
+
+            if (ItemVariationData != null)
+            {
+               hashCode += ItemVariationData.GetHashCode();
+            }
+
+            if (TaxData != null)
+            {
+               hashCode += TaxData.GetHashCode();
+            }
+
+            if (DiscountData != null)
+            {
+               hashCode += DiscountData.GetHashCode();
+            }
+
+            if (ModifierListData != null)
+            {
+               hashCode += ModifierListData.GetHashCode();
+            }
+
+            if (ModifierData != null)
+            {
+               hashCode += ModifierData.GetHashCode();
+            }
+
+            if (TimePeriodData != null)
+            {
+               hashCode += TimePeriodData.GetHashCode();
+            }
+
+            if (ProductSetData != null)
+            {
+               hashCode += ProductSetData.GetHashCode();
+            }
+
+            if (PricingRuleData != null)
+            {
+               hashCode += PricingRuleData.GetHashCode();
+            }
+
+            if (ImageData != null)
+            {
+               hashCode += ImageData.GetHashCode();
+            }
+
+            if (MeasurementUnitData != null)
+            {
+               hashCode += MeasurementUnitData.GetHashCode();
+            }
+
+            if (SubscriptionPlanData != null)
+            {
+               hashCode += SubscriptionPlanData.GetHashCode();
+            }
+
+            if (ItemOptionData != null)
+            {
+               hashCode += ItemOptionData.GetHashCode();
+            }
+
+            if (ItemOptionValueData != null)
+            {
+               hashCode += ItemOptionValueData.GetHashCode();
+            }
+
+            if (CustomAttributeDefinitionData != null)
+            {
+               hashCode += CustomAttributeDefinitionData.GetHashCode();
+            }
+
+            if (QuickAmountsSettingsData != null)
+            {
+               hashCode += QuickAmountsSettingsData.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

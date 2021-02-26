@@ -9,9 +9,9 @@ Filter events by the order associated with the event.
 
 ## Fields
 
-| Name | Type | Description |
-|  --- | --- | --- |
-| `OrderId` | `string` | The ID of the [order](#type-Order) associated with the event.<br>**Constraints**: *Minimum Length*: `1` |
+| Name | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `OrderId` | `string` | Required | The ID of the [order](#type-Order) associated with the event.<br>**Constraints**: *Minimum Length*: `1` |
 
 ## Example (as JSON)
 

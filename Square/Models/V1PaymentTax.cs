@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -64,6 +65,83 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("fee_id", NullValueHandling = NullValueHandling.Ignore)]
         public string FeeId { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"V1PaymentTax : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"Errors = {(Errors == null ? "null" : $"[{ string.Join(", ", Errors)} ]")}");
+            toStringOutput.Add($"Name = {(Name == null ? "null" : Name == string.Empty ? "" : Name)}");
+            toStringOutput.Add($"AppliedMoney = {(AppliedMoney == null ? "null" : AppliedMoney.ToString())}");
+            toStringOutput.Add($"Rate = {(Rate == null ? "null" : Rate == string.Empty ? "" : Rate)}");
+            toStringOutput.Add($"InclusionType = {(InclusionType == null ? "null" : InclusionType.ToString())}");
+            toStringOutput.Add($"FeeId = {(FeeId == null ? "null" : FeeId == string.Empty ? "" : FeeId)}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is V1PaymentTax other &&
+                ((Errors == null && other.Errors == null) || (Errors?.Equals(other.Errors) == true)) &&
+                ((Name == null && other.Name == null) || (Name?.Equals(other.Name) == true)) &&
+                ((AppliedMoney == null && other.AppliedMoney == null) || (AppliedMoney?.Equals(other.AppliedMoney) == true)) &&
+                ((Rate == null && other.Rate == null) || (Rate?.Equals(other.Rate) == true)) &&
+                ((InclusionType == null && other.InclusionType == null) || (InclusionType?.Equals(other.InclusionType) == true)) &&
+                ((FeeId == null && other.FeeId == null) || (FeeId?.Equals(other.FeeId) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 2123751229;
+
+            if (Errors != null)
+            {
+               hashCode += Errors.GetHashCode();
+            }
+
+            if (Name != null)
+            {
+               hashCode += Name.GetHashCode();
+            }
+
+            if (AppliedMoney != null)
+            {
+               hashCode += AppliedMoney.GetHashCode();
+            }
+
+            if (Rate != null)
+            {
+               hashCode += Rate.GetHashCode();
+            }
+
+            if (InclusionType != null)
+            {
+               hashCode += InclusionType.GetHashCode();
+            }
+
+            if (FeeId != null)
+            {
+               hashCode += FeeId.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

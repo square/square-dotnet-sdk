@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -35,6 +36,55 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("fuzzy", NullValueHandling = NullValueHandling.Ignore)]
         public string Fuzzy { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"CustomerTextFilter : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"Exact = {(Exact == null ? "null" : Exact == string.Empty ? "" : Exact)}");
+            toStringOutput.Add($"Fuzzy = {(Fuzzy == null ? "null" : Fuzzy == string.Empty ? "" : Fuzzy)}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is CustomerTextFilter other &&
+                ((Exact == null && other.Exact == null) || (Exact?.Equals(other.Exact) == true)) &&
+                ((Fuzzy == null && other.Fuzzy == null) || (Fuzzy?.Equals(other.Fuzzy) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -1444472756;
+
+            if (Exact != null)
+            {
+               hashCode += Exact.GetHashCode();
+            }
+
+            if (Fuzzy != null)
+            {
+               hashCode += Fuzzy.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

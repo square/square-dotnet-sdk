@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -48,6 +49,69 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("evidence_type", NullValueHandling = NullValueHandling.Ignore)]
         public string EvidenceType { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"DisputeEvidence : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"EvidenceId = {(EvidenceId == null ? "null" : EvidenceId == string.Empty ? "" : EvidenceId)}");
+            toStringOutput.Add($"DisputeId = {(DisputeId == null ? "null" : DisputeId == string.Empty ? "" : DisputeId)}");
+            toStringOutput.Add($"UploadedAt = {(UploadedAt == null ? "null" : UploadedAt == string.Empty ? "" : UploadedAt)}");
+            toStringOutput.Add($"EvidenceType = {(EvidenceType == null ? "null" : EvidenceType.ToString())}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is DisputeEvidence other &&
+                ((EvidenceId == null && other.EvidenceId == null) || (EvidenceId?.Equals(other.EvidenceId) == true)) &&
+                ((DisputeId == null && other.DisputeId == null) || (DisputeId?.Equals(other.DisputeId) == true)) &&
+                ((UploadedAt == null && other.UploadedAt == null) || (UploadedAt?.Equals(other.UploadedAt) == true)) &&
+                ((EvidenceType == null && other.EvidenceType == null) || (EvidenceType?.Equals(other.EvidenceType) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -1509606900;
+
+            if (EvidenceId != null)
+            {
+               hashCode += EvidenceId.GetHashCode();
+            }
+
+            if (DisputeId != null)
+            {
+               hashCode += DisputeId.GetHashCode();
+            }
+
+            if (UploadedAt != null)
+            {
+               hashCode += UploadedAt.GetHashCode();
+            }
+
+            if (EvidenceType != null)
+            {
+               hashCode += EvidenceType.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

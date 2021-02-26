@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -32,6 +33,55 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("risk_level", NullValueHandling = NullValueHandling.Ignore)]
         public string RiskLevel { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"RiskEvaluation : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"CreatedAt = {(CreatedAt == null ? "null" : CreatedAt == string.Empty ? "" : CreatedAt)}");
+            toStringOutput.Add($"RiskLevel = {(RiskLevel == null ? "null" : RiskLevel.ToString())}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is RiskEvaluation other &&
+                ((CreatedAt == null && other.CreatedAt == null) || (CreatedAt?.Equals(other.CreatedAt) == true)) &&
+                ((RiskLevel == null && other.RiskLevel == null) || (RiskLevel?.Equals(other.RiskLevel) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 692810603;
+
+            if (CreatedAt != null)
+            {
+               hashCode += CreatedAt.GetHashCode();
+            }
+
+            if (RiskLevel != null)
+            {
+               hashCode += RiskLevel.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -144,6 +145,153 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("is_exchange", NullValueHandling = NullValueHandling.Ignore)]
         public bool? IsExchange { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"V1Tender : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"Id = {(Id == null ? "null" : Id == string.Empty ? "" : Id)}");
+            toStringOutput.Add($"Type = {(Type == null ? "null" : Type.ToString())}");
+            toStringOutput.Add($"Name = {(Name == null ? "null" : Name == string.Empty ? "" : Name)}");
+            toStringOutput.Add($"EmployeeId = {(EmployeeId == null ? "null" : EmployeeId == string.Empty ? "" : EmployeeId)}");
+            toStringOutput.Add($"ReceiptUrl = {(ReceiptUrl == null ? "null" : ReceiptUrl == string.Empty ? "" : ReceiptUrl)}");
+            toStringOutput.Add($"CardBrand = {(CardBrand == null ? "null" : CardBrand.ToString())}");
+            toStringOutput.Add($"PanSuffix = {(PanSuffix == null ? "null" : PanSuffix == string.Empty ? "" : PanSuffix)}");
+            toStringOutput.Add($"EntryMethod = {(EntryMethod == null ? "null" : EntryMethod.ToString())}");
+            toStringOutput.Add($"PaymentNote = {(PaymentNote == null ? "null" : PaymentNote == string.Empty ? "" : PaymentNote)}");
+            toStringOutput.Add($"TotalMoney = {(TotalMoney == null ? "null" : TotalMoney.ToString())}");
+            toStringOutput.Add($"TenderedMoney = {(TenderedMoney == null ? "null" : TenderedMoney.ToString())}");
+            toStringOutput.Add($"TenderedAt = {(TenderedAt == null ? "null" : TenderedAt == string.Empty ? "" : TenderedAt)}");
+            toStringOutput.Add($"SettledAt = {(SettledAt == null ? "null" : SettledAt == string.Empty ? "" : SettledAt)}");
+            toStringOutput.Add($"ChangeBackMoney = {(ChangeBackMoney == null ? "null" : ChangeBackMoney.ToString())}");
+            toStringOutput.Add($"RefundedMoney = {(RefundedMoney == null ? "null" : RefundedMoney.ToString())}");
+            toStringOutput.Add($"IsExchange = {(IsExchange == null ? "null" : IsExchange.ToString())}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is V1Tender other &&
+                ((Id == null && other.Id == null) || (Id?.Equals(other.Id) == true)) &&
+                ((Type == null && other.Type == null) || (Type?.Equals(other.Type) == true)) &&
+                ((Name == null && other.Name == null) || (Name?.Equals(other.Name) == true)) &&
+                ((EmployeeId == null && other.EmployeeId == null) || (EmployeeId?.Equals(other.EmployeeId) == true)) &&
+                ((ReceiptUrl == null && other.ReceiptUrl == null) || (ReceiptUrl?.Equals(other.ReceiptUrl) == true)) &&
+                ((CardBrand == null && other.CardBrand == null) || (CardBrand?.Equals(other.CardBrand) == true)) &&
+                ((PanSuffix == null && other.PanSuffix == null) || (PanSuffix?.Equals(other.PanSuffix) == true)) &&
+                ((EntryMethod == null && other.EntryMethod == null) || (EntryMethod?.Equals(other.EntryMethod) == true)) &&
+                ((PaymentNote == null && other.PaymentNote == null) || (PaymentNote?.Equals(other.PaymentNote) == true)) &&
+                ((TotalMoney == null && other.TotalMoney == null) || (TotalMoney?.Equals(other.TotalMoney) == true)) &&
+                ((TenderedMoney == null && other.TenderedMoney == null) || (TenderedMoney?.Equals(other.TenderedMoney) == true)) &&
+                ((TenderedAt == null && other.TenderedAt == null) || (TenderedAt?.Equals(other.TenderedAt) == true)) &&
+                ((SettledAt == null && other.SettledAt == null) || (SettledAt?.Equals(other.SettledAt) == true)) &&
+                ((ChangeBackMoney == null && other.ChangeBackMoney == null) || (ChangeBackMoney?.Equals(other.ChangeBackMoney) == true)) &&
+                ((RefundedMoney == null && other.RefundedMoney == null) || (RefundedMoney?.Equals(other.RefundedMoney) == true)) &&
+                ((IsExchange == null && other.IsExchange == null) || (IsExchange?.Equals(other.IsExchange) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 1002014939;
+
+            if (Id != null)
+            {
+               hashCode += Id.GetHashCode();
+            }
+
+            if (Type != null)
+            {
+               hashCode += Type.GetHashCode();
+            }
+
+            if (Name != null)
+            {
+               hashCode += Name.GetHashCode();
+            }
+
+            if (EmployeeId != null)
+            {
+               hashCode += EmployeeId.GetHashCode();
+            }
+
+            if (ReceiptUrl != null)
+            {
+               hashCode += ReceiptUrl.GetHashCode();
+            }
+
+            if (CardBrand != null)
+            {
+               hashCode += CardBrand.GetHashCode();
+            }
+
+            if (PanSuffix != null)
+            {
+               hashCode += PanSuffix.GetHashCode();
+            }
+
+            if (EntryMethod != null)
+            {
+               hashCode += EntryMethod.GetHashCode();
+            }
+
+            if (PaymentNote != null)
+            {
+               hashCode += PaymentNote.GetHashCode();
+            }
+
+            if (TotalMoney != null)
+            {
+               hashCode += TotalMoney.GetHashCode();
+            }
+
+            if (TenderedMoney != null)
+            {
+               hashCode += TenderedMoney.GetHashCode();
+            }
+
+            if (TenderedAt != null)
+            {
+               hashCode += TenderedAt.GetHashCode();
+            }
+
+            if (SettledAt != null)
+            {
+               hashCode += SettledAt.GetHashCode();
+            }
+
+            if (ChangeBackMoney != null)
+            {
+               hashCode += ChangeBackMoney.GetHashCode();
+            }
+
+            if (RefundedMoney != null)
+            {
+               hashCode += RefundedMoney.GetHashCode();
+            }
+
+            if (IsExchange != null)
+            {
+               hashCode += IsExchange.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

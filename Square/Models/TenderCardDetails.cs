@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -41,6 +42,62 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("entry_method", NullValueHandling = NullValueHandling.Ignore)]
         public string EntryMethod { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"TenderCardDetails : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"Status = {(Status == null ? "null" : Status.ToString())}");
+            toStringOutput.Add($"Card = {(Card == null ? "null" : Card.ToString())}");
+            toStringOutput.Add($"EntryMethod = {(EntryMethod == null ? "null" : EntryMethod.ToString())}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is TenderCardDetails other &&
+                ((Status == null && other.Status == null) || (Status?.Equals(other.Status) == true)) &&
+                ((Card == null && other.Card == null) || (Card?.Equals(other.Card) == true)) &&
+                ((EntryMethod == null && other.EntryMethod == null) || (EntryMethod?.Equals(other.EntryMethod) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -1919501986;
+
+            if (Status != null)
+            {
+               hashCode += Status.GetHashCode();
+            }
+
+            if (Card != null)
+            {
+               hashCode += Card.GetHashCode();
+            }
+
+            if (EntryMethod != null)
+            {
+               hashCode += EntryMethod.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

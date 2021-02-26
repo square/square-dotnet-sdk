@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -36,6 +37,61 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("merchant", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Merchant Merchant { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"RetrieveMerchantResponse : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"Errors = {(Errors == null ? "null" : $"[{ string.Join(", ", Errors)} ]")}");
+            toStringOutput.Add($"Merchant = {(Merchant == null ? "null" : Merchant.ToString())}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is RetrieveMerchantResponse other &&
+                ((Context == null && other.Context == null) || (Context?.Equals(other.Context) == true)) &&
+                ((Errors == null && other.Errors == null) || (Errors?.Equals(other.Errors) == true)) &&
+                ((Merchant == null && other.Merchant == null) || (Merchant?.Equals(other.Merchant) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 1177191163;
+
+            if (Context != null)
+            {
+                hashCode += Context.GetHashCode();
+            }
+
+            if (Errors != null)
+            {
+               hashCode += Errors.GetHashCode();
+            }
+
+            if (Merchant != null)
+            {
+               hashCode += Merchant.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

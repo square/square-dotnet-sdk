@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -42,6 +43,62 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("sort_order", NullValueHandling = NullValueHandling.Ignore)]
         public string SortOrder { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"CatalogQuerySortedAttribute : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"AttributeName = {(AttributeName == null ? "null" : AttributeName == string.Empty ? "" : AttributeName)}");
+            toStringOutput.Add($"InitialAttributeValue = {(InitialAttributeValue == null ? "null" : InitialAttributeValue == string.Empty ? "" : InitialAttributeValue)}");
+            toStringOutput.Add($"SortOrder = {(SortOrder == null ? "null" : SortOrder.ToString())}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is CatalogQuerySortedAttribute other &&
+                ((AttributeName == null && other.AttributeName == null) || (AttributeName?.Equals(other.AttributeName) == true)) &&
+                ((InitialAttributeValue == null && other.InitialAttributeValue == null) || (InitialAttributeValue?.Equals(other.InitialAttributeValue) == true)) &&
+                ((SortOrder == null && other.SortOrder == null) || (SortOrder?.Equals(other.SortOrder) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -406098695;
+
+            if (AttributeName != null)
+            {
+               hashCode += AttributeName.GetHashCode();
+            }
+
+            if (InitialAttributeValue != null)
+            {
+               hashCode += InitialAttributeValue.GetHashCode();
+            }
+
+            if (SortOrder != null)
+            {
+               hashCode += SortOrder.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

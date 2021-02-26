@@ -9,7 +9,7 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `ItemIds` | `IList<string>` |  | IDs for the CatalogItems associated with the CatalogTax objects being updated. |
+| `ItemIds` | `IList<string>` | Required | IDs for the CatalogItems associated with the CatalogTax objects being updated. |
 | `TaxesToEnable` | `IList<string>` | Optional | IDs of the CatalogTax objects to enable. |
 | `TaxesToDisable` | `IList<string>` | Optional | IDs of the CatalogTax objects to disable. |
 

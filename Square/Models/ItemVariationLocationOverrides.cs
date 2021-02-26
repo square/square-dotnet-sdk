@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -71,6 +72,83 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("inventory_alert_threshold", NullValueHandling = NullValueHandling.Ignore)]
         public long? InventoryAlertThreshold { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"ItemVariationLocationOverrides : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"LocationId = {(LocationId == null ? "null" : LocationId == string.Empty ? "" : LocationId)}");
+            toStringOutput.Add($"PriceMoney = {(PriceMoney == null ? "null" : PriceMoney.ToString())}");
+            toStringOutput.Add($"PricingType = {(PricingType == null ? "null" : PricingType.ToString())}");
+            toStringOutput.Add($"TrackInventory = {(TrackInventory == null ? "null" : TrackInventory.ToString())}");
+            toStringOutput.Add($"InventoryAlertType = {(InventoryAlertType == null ? "null" : InventoryAlertType.ToString())}");
+            toStringOutput.Add($"InventoryAlertThreshold = {(InventoryAlertThreshold == null ? "null" : InventoryAlertThreshold.ToString())}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is ItemVariationLocationOverrides other &&
+                ((LocationId == null && other.LocationId == null) || (LocationId?.Equals(other.LocationId) == true)) &&
+                ((PriceMoney == null && other.PriceMoney == null) || (PriceMoney?.Equals(other.PriceMoney) == true)) &&
+                ((PricingType == null && other.PricingType == null) || (PricingType?.Equals(other.PricingType) == true)) &&
+                ((TrackInventory == null && other.TrackInventory == null) || (TrackInventory?.Equals(other.TrackInventory) == true)) &&
+                ((InventoryAlertType == null && other.InventoryAlertType == null) || (InventoryAlertType?.Equals(other.InventoryAlertType) == true)) &&
+                ((InventoryAlertThreshold == null && other.InventoryAlertThreshold == null) || (InventoryAlertThreshold?.Equals(other.InventoryAlertThreshold) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -598612092;
+
+            if (LocationId != null)
+            {
+               hashCode += LocationId.GetHashCode();
+            }
+
+            if (PriceMoney != null)
+            {
+               hashCode += PriceMoney.GetHashCode();
+            }
+
+            if (PricingType != null)
+            {
+               hashCode += PricingType.GetHashCode();
+            }
+
+            if (TrackInventory != null)
+            {
+               hashCode += TrackInventory.GetHashCode();
+            }
+
+            if (InventoryAlertType != null)
+            {
+               hashCode += InventoryAlertType.GetHashCode();
+            }
+
+            if (InventoryAlertThreshold != null)
+            {
+               hashCode += InventoryAlertThreshold.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

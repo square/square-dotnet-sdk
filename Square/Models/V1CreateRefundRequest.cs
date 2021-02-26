@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -58,6 +59,76 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("request_idempotence_key", NullValueHandling = NullValueHandling.Ignore)]
         public string RequestIdempotenceKey { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"V1CreateRefundRequest : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"PaymentId = {(PaymentId == null ? "null" : PaymentId == string.Empty ? "" : PaymentId)}");
+            toStringOutput.Add($"Type = {(Type == null ? "null" : Type.ToString())}");
+            toStringOutput.Add($"Reason = {(Reason == null ? "null" : Reason == string.Empty ? "" : Reason)}");
+            toStringOutput.Add($"RefundedMoney = {(RefundedMoney == null ? "null" : RefundedMoney.ToString())}");
+            toStringOutput.Add($"RequestIdempotenceKey = {(RequestIdempotenceKey == null ? "null" : RequestIdempotenceKey == string.Empty ? "" : RequestIdempotenceKey)}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is V1CreateRefundRequest other &&
+                ((PaymentId == null && other.PaymentId == null) || (PaymentId?.Equals(other.PaymentId) == true)) &&
+                ((Type == null && other.Type == null) || (Type?.Equals(other.Type) == true)) &&
+                ((Reason == null && other.Reason == null) || (Reason?.Equals(other.Reason) == true)) &&
+                ((RefundedMoney == null && other.RefundedMoney == null) || (RefundedMoney?.Equals(other.RefundedMoney) == true)) &&
+                ((RequestIdempotenceKey == null && other.RequestIdempotenceKey == null) || (RequestIdempotenceKey?.Equals(other.RequestIdempotenceKey) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 1278947048;
+
+            if (PaymentId != null)
+            {
+               hashCode += PaymentId.GetHashCode();
+            }
+
+            if (Type != null)
+            {
+               hashCode += Type.GetHashCode();
+            }
+
+            if (Reason != null)
+            {
+               hashCode += Reason.GetHashCode();
+            }
+
+            if (RefundedMoney != null)
+            {
+               hashCode += RefundedMoney.GetHashCode();
+            }
+
+            if (RequestIdempotenceKey != null)
+            {
+               hashCode += RequestIdempotenceKey.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -92,6 +93,90 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("group_ids", NullValueHandling = NullValueHandling.Ignore)]
         public Models.FilterValue GroupIds { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"CustomerFilter : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"CreationSource = {(CreationSource == null ? "null" : CreationSource.ToString())}");
+            toStringOutput.Add($"CreatedAt = {(CreatedAt == null ? "null" : CreatedAt.ToString())}");
+            toStringOutput.Add($"UpdatedAt = {(UpdatedAt == null ? "null" : UpdatedAt.ToString())}");
+            toStringOutput.Add($"EmailAddress = {(EmailAddress == null ? "null" : EmailAddress.ToString())}");
+            toStringOutput.Add($"PhoneNumber = {(PhoneNumber == null ? "null" : PhoneNumber.ToString())}");
+            toStringOutput.Add($"ReferenceId = {(ReferenceId == null ? "null" : ReferenceId.ToString())}");
+            toStringOutput.Add($"GroupIds = {(GroupIds == null ? "null" : GroupIds.ToString())}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is CustomerFilter other &&
+                ((CreationSource == null && other.CreationSource == null) || (CreationSource?.Equals(other.CreationSource) == true)) &&
+                ((CreatedAt == null && other.CreatedAt == null) || (CreatedAt?.Equals(other.CreatedAt) == true)) &&
+                ((UpdatedAt == null && other.UpdatedAt == null) || (UpdatedAt?.Equals(other.UpdatedAt) == true)) &&
+                ((EmailAddress == null && other.EmailAddress == null) || (EmailAddress?.Equals(other.EmailAddress) == true)) &&
+                ((PhoneNumber == null && other.PhoneNumber == null) || (PhoneNumber?.Equals(other.PhoneNumber) == true)) &&
+                ((ReferenceId == null && other.ReferenceId == null) || (ReferenceId?.Equals(other.ReferenceId) == true)) &&
+                ((GroupIds == null && other.GroupIds == null) || (GroupIds?.Equals(other.GroupIds) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 1632151242;
+
+            if (CreationSource != null)
+            {
+               hashCode += CreationSource.GetHashCode();
+            }
+
+            if (CreatedAt != null)
+            {
+               hashCode += CreatedAt.GetHashCode();
+            }
+
+            if (UpdatedAt != null)
+            {
+               hashCode += UpdatedAt.GetHashCode();
+            }
+
+            if (EmailAddress != null)
+            {
+               hashCode += EmailAddress.GetHashCode();
+            }
+
+            if (PhoneNumber != null)
+            {
+               hashCode += PhoneNumber.GetHashCode();
+            }
+
+            if (ReferenceId != null)
+            {
+               hashCode += ReferenceId.GetHashCode();
+            }
+
+            if (GroupIds != null)
+            {
+               hashCode += GroupIds.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

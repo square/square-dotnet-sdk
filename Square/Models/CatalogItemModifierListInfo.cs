@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -56,6 +57,76 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("enabled", NullValueHandling = NullValueHandling.Ignore)]
         public bool? Enabled { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"CatalogItemModifierListInfo : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"ModifierListId = {(ModifierListId == null ? "null" : ModifierListId == string.Empty ? "" : ModifierListId)}");
+            toStringOutput.Add($"ModifierOverrides = {(ModifierOverrides == null ? "null" : $"[{ string.Join(", ", ModifierOverrides)} ]")}");
+            toStringOutput.Add($"MinSelectedModifiers = {(MinSelectedModifiers == null ? "null" : MinSelectedModifiers.ToString())}");
+            toStringOutput.Add($"MaxSelectedModifiers = {(MaxSelectedModifiers == null ? "null" : MaxSelectedModifiers.ToString())}");
+            toStringOutput.Add($"Enabled = {(Enabled == null ? "null" : Enabled.ToString())}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is CatalogItemModifierListInfo other &&
+                ((ModifierListId == null && other.ModifierListId == null) || (ModifierListId?.Equals(other.ModifierListId) == true)) &&
+                ((ModifierOverrides == null && other.ModifierOverrides == null) || (ModifierOverrides?.Equals(other.ModifierOverrides) == true)) &&
+                ((MinSelectedModifiers == null && other.MinSelectedModifiers == null) || (MinSelectedModifiers?.Equals(other.MinSelectedModifiers) == true)) &&
+                ((MaxSelectedModifiers == null && other.MaxSelectedModifiers == null) || (MaxSelectedModifiers?.Equals(other.MaxSelectedModifiers) == true)) &&
+                ((Enabled == null && other.Enabled == null) || (Enabled?.Equals(other.Enabled) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 1904387422;
+
+            if (ModifierListId != null)
+            {
+               hashCode += ModifierListId.GetHashCode();
+            }
+
+            if (ModifierOverrides != null)
+            {
+               hashCode += ModifierOverrides.GetHashCode();
+            }
+
+            if (MinSelectedModifiers != null)
+            {
+               hashCode += MinSelectedModifiers.GetHashCode();
+            }
+
+            if (MaxSelectedModifiers != null)
+            {
+               hashCode += MaxSelectedModifiers.GetHashCode();
+            }
+
+            if (Enabled != null)
+            {
+               hashCode += Enabled.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

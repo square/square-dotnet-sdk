@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -66,6 +67,83 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("enabled", NullValueHandling = NullValueHandling.Ignore)]
         public bool? Enabled { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"CatalogTax : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"Name = {(Name == null ? "null" : Name == string.Empty ? "" : Name)}");
+            toStringOutput.Add($"CalculationPhase = {(CalculationPhase == null ? "null" : CalculationPhase.ToString())}");
+            toStringOutput.Add($"InclusionType = {(InclusionType == null ? "null" : InclusionType.ToString())}");
+            toStringOutput.Add($"Percentage = {(Percentage == null ? "null" : Percentage == string.Empty ? "" : Percentage)}");
+            toStringOutput.Add($"AppliesToCustomAmounts = {(AppliesToCustomAmounts == null ? "null" : AppliesToCustomAmounts.ToString())}");
+            toStringOutput.Add($"Enabled = {(Enabled == null ? "null" : Enabled.ToString())}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is CatalogTax other &&
+                ((Name == null && other.Name == null) || (Name?.Equals(other.Name) == true)) &&
+                ((CalculationPhase == null && other.CalculationPhase == null) || (CalculationPhase?.Equals(other.CalculationPhase) == true)) &&
+                ((InclusionType == null && other.InclusionType == null) || (InclusionType?.Equals(other.InclusionType) == true)) &&
+                ((Percentage == null && other.Percentage == null) || (Percentage?.Equals(other.Percentage) == true)) &&
+                ((AppliesToCustomAmounts == null && other.AppliesToCustomAmounts == null) || (AppliesToCustomAmounts?.Equals(other.AppliesToCustomAmounts) == true)) &&
+                ((Enabled == null && other.Enabled == null) || (Enabled?.Equals(other.Enabled) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 29476180;
+
+            if (Name != null)
+            {
+               hashCode += Name.GetHashCode();
+            }
+
+            if (CalculationPhase != null)
+            {
+               hashCode += CalculationPhase.GetHashCode();
+            }
+
+            if (InclusionType != null)
+            {
+               hashCode += InclusionType.GetHashCode();
+            }
+
+            if (Percentage != null)
+            {
+               hashCode += Percentage.GetHashCode();
+            }
+
+            if (AppliesToCustomAmounts != null)
+            {
+               hashCode += AppliesToCustomAmounts.GetHashCode();
+            }
+
+            if (Enabled != null)
+            {
+               hashCode += Enabled.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

@@ -25,7 +25,6 @@ namespace Square
         private readonly Lazy<IOAuthApi> oAuth;
         private readonly Lazy<IV1EmployeesApi> v1Employees;
         private readonly Lazy<IV1TransactionsApi> v1Transactions;
-        private readonly Lazy<IV1ItemsApi> v1Items;
         private readonly Lazy<IApplePayApi> applePay;
         private readonly Lazy<IBankAccountsApi> bankAccounts;
         private readonly Lazy<IBookingsApi> bookings;
@@ -71,11 +70,6 @@ namespace Square
         /// Provides access to V1TransactionsApi.
         /// </summary>
         public IV1TransactionsApi V1TransactionsApi => v1Transactions.Value;
-
-        /// <summary>
-        /// Provides access to V1ItemsApi.
-        /// </summary>
-        public IV1ItemsApi V1ItemsApi => v1Items.Value;
 
         /// <summary>
         /// Provides access to ApplePayApi.
@@ -210,7 +204,7 @@ namespace Square
         /// <summary>
         /// Current version of the SDK.
         /// </summary>
-        public string SdkVersion => "8.1.0";
+        public string SdkVersion => "9.0.0";
 
         internal static SquareClient CreateFromEnvironment()
         {
@@ -219,6 +213,7 @@ namespace Square
             string timeout = System.Environment.GetEnvironmentVariable("SQUARE_TIMEOUT");
             string squareVersion = System.Environment.GetEnvironmentVariable("SQUARE_SQUARE_VERSION");
             string environment = System.Environment.GetEnvironmentVariable("SQUARE_ENVIRONMENT");
+            string customUrl = System.Environment.GetEnvironmentVariable("SQUARE_CUSTOM_URL");
             string accessToken = System.Environment.GetEnvironmentVariable("SQUARE_ACCESS_TOKEN");
 
             if (timeout != null)
@@ -236,6 +231,11 @@ namespace Square
                 builder.Environment(EnvironmentHelper.ParseString(environment));
             }
 
+            if (customUrl != null)
+            {
+                builder.CustomUrl(customUrl);
+            }
+
             if (accessToken != null)
             {
                 builder.AccessToken(accessToken);
@@ -245,7 +245,7 @@ namespace Square
         }
 
         private SquareClient(TimeSpan timeout, string squareVersion, Environment environment,
-                string accessToken, IDictionary<string, IAuthManager> authManagers,
+                string customUrl, string accessToken, IDictionary<string, IAuthManager> authManagers,
                 IHttpClient httpClient, HttpCallBack httpCallBack,
                 IDictionary<string, List<string>> additionalHeaders,
                 IHttpClientConfiguration httpClientConfiguration)
@@ -253,6 +253,7 @@ namespace Square
             Timeout = timeout;
             SquareVersion = squareVersion;
             Environment = environment;
+            CustomUrl = customUrl;
             this.httpCallBack = httpCallBack;
             this.httpClient = httpClient;
             this.authManagers = (authManagers == null) ? new Dictionary<string, IAuthManager>() : new Dictionary<string, IAuthManager>(authManagers);
@@ -267,8 +268,6 @@ namespace Square
                 () => new V1EmployeesApi(this, this.httpClient, this.authManagers, this.httpCallBack));
             v1Transactions = new Lazy<IV1TransactionsApi>(
                 () => new V1TransactionsApi(this, this.httpClient, this.authManagers, this.httpCallBack));
-            v1Items = new Lazy<IV1ItemsApi>(
-                () => new V1ItemsApi(this, this.httpClient, this.authManagers, this.httpCallBack));
             applePay = new Lazy<IApplePayApi>(
                 () => new ApplePayApi(this, this.httpClient, this.authManagers, this.httpCallBack));
             bankAccounts = new Lazy<IBankAccountsApi>(
@@ -363,6 +362,11 @@ namespace Square
         /// </summary>
         public Environment Environment { get; }
 
+        /// <summary>
+        /// Sets the base URL requests are made to. Defaults to `https://connect.squareup.com`
+        /// </summary>
+        public string CustomUrl { get; }
+
         //A map of environments and their corresponding servers/baseurls
         private static readonly Dictionary<Environment, Dictionary<Server, string>> EnvironmentsMap =
             new Dictionary<Environment, Dictionary<Server, string>>
@@ -379,6 +383,12 @@ namespace Square
                     { Server.Default, "https://connect.squareupsandbox.com" },
                 }
             },
+            {
+                Environment.Custom, new Dictionary<Server, string>
+                {
+                    { Server.Default, "{custom_url}" },
+                }
+            },
         };
 
         /// <summary>
@@ -389,6 +399,7 @@ namespace Square
         {
             List<KeyValuePair<string, object>> kvpList = new List<KeyValuePair<string, object>>()
             {
+                new KeyValuePair<string, object>("custom_url", CustomUrl),
             };
             return kvpList;
         }
@@ -415,6 +426,7 @@ namespace Square
                 .Timeout(Timeout)
                 .SquareVersion(SquareVersion)
                 .Environment(Environment)
+                .CustomUrl(CustomUrl)
                 .AccessToken(AccessTokenCredentials.AccessToken)
                 .AdditionalHeaders(additionalHeaders)
                 .HttpCallBack(httpCallBack)
@@ -424,11 +436,22 @@ namespace Square
             return builder;
         }
 
+        public override string ToString()
+        {
+            return
+                $"SquareVersion = {SquareVersion}, " +
+                $"Environment = {Environment}, " +
+                $"CustomUrl = {CustomUrl}, " +
+                $"additionalHeaders = {ApiHelper.JsonSerialize(additionalHeaders)}, " +
+                $"HttpClientConfiguration = {HttpClientConfiguration}, ";
+        }
+
         public class Builder
         {
             private TimeSpan timeout = TimeSpan.FromSeconds(60);
-            private string squareVersion = "2021-01-21";
+            private string squareVersion = "2021-02-26";
             private Environment environment = Square.Environment.Production;
+            private string customUrl = "https://connect.squareup.com";
             private string accessToken = "TODO: Replace";
             private IDictionary<string, IAuthManager> authManagers = new Dictionary<string, IAuthManager>();
             private bool createCustomHttpClient = false;
@@ -461,6 +484,15 @@ namespace Square
             public Builder Environment(Environment environment)
             {
                 this.environment = environment;
+                return this;
+            }
+
+            /// <summary>
+            /// Setter for CustomUrl.
+            /// </summary>
+            public Builder CustomUrl(string customUrl)
+            {
+                this.customUrl = customUrl ?? throw new ArgumentNullException(nameof(customUrl));
                 return this;
             }
 
@@ -556,8 +588,8 @@ namespace Square
                     httpClient = new HttpClientWrapper();
                 }
 
-                return new SquareClient(timeout, squareVersion, environment, accessToken, authManagers, httpClient, httpCallBack,
-                        additionalHeaders, httpClientConfig);
+                return new SquareClient(timeout, squareVersion, environment, customUrl, accessToken, authManagers, httpClient,
+                        httpCallBack, additionalHeaders, httpClientConfig);
             }
         }
 

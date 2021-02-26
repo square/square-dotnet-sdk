@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -128,6 +129,132 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("team_member_id", NullValueHandling = NullValueHandling.Ignore)]
         public string TeamMemberId { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"Shift : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"Id = {(Id == null ? "null" : Id == string.Empty ? "" : Id)}");
+            toStringOutput.Add($"EmployeeId = {(EmployeeId == null ? "null" : EmployeeId == string.Empty ? "" : EmployeeId)}");
+            toStringOutput.Add($"LocationId = {(LocationId == null ? "null" : LocationId == string.Empty ? "" : LocationId)}");
+            toStringOutput.Add($"Timezone = {(Timezone == null ? "null" : Timezone == string.Empty ? "" : Timezone)}");
+            toStringOutput.Add($"StartAt = {(StartAt == null ? "null" : StartAt == string.Empty ? "" : StartAt)}");
+            toStringOutput.Add($"EndAt = {(EndAt == null ? "null" : EndAt == string.Empty ? "" : EndAt)}");
+            toStringOutput.Add($"Wage = {(Wage == null ? "null" : Wage.ToString())}");
+            toStringOutput.Add($"Breaks = {(Breaks == null ? "null" : $"[{ string.Join(", ", Breaks)} ]")}");
+            toStringOutput.Add($"Status = {(Status == null ? "null" : Status.ToString())}");
+            toStringOutput.Add($"Version = {(Version == null ? "null" : Version.ToString())}");
+            toStringOutput.Add($"CreatedAt = {(CreatedAt == null ? "null" : CreatedAt == string.Empty ? "" : CreatedAt)}");
+            toStringOutput.Add($"UpdatedAt = {(UpdatedAt == null ? "null" : UpdatedAt == string.Empty ? "" : UpdatedAt)}");
+            toStringOutput.Add($"TeamMemberId = {(TeamMemberId == null ? "null" : TeamMemberId == string.Empty ? "" : TeamMemberId)}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is Shift other &&
+                ((Id == null && other.Id == null) || (Id?.Equals(other.Id) == true)) &&
+                ((EmployeeId == null && other.EmployeeId == null) || (EmployeeId?.Equals(other.EmployeeId) == true)) &&
+                ((LocationId == null && other.LocationId == null) || (LocationId?.Equals(other.LocationId) == true)) &&
+                ((Timezone == null && other.Timezone == null) || (Timezone?.Equals(other.Timezone) == true)) &&
+                ((StartAt == null && other.StartAt == null) || (StartAt?.Equals(other.StartAt) == true)) &&
+                ((EndAt == null && other.EndAt == null) || (EndAt?.Equals(other.EndAt) == true)) &&
+                ((Wage == null && other.Wage == null) || (Wage?.Equals(other.Wage) == true)) &&
+                ((Breaks == null && other.Breaks == null) || (Breaks?.Equals(other.Breaks) == true)) &&
+                ((Status == null && other.Status == null) || (Status?.Equals(other.Status) == true)) &&
+                ((Version == null && other.Version == null) || (Version?.Equals(other.Version) == true)) &&
+                ((CreatedAt == null && other.CreatedAt == null) || (CreatedAt?.Equals(other.CreatedAt) == true)) &&
+                ((UpdatedAt == null && other.UpdatedAt == null) || (UpdatedAt?.Equals(other.UpdatedAt) == true)) &&
+                ((TeamMemberId == null && other.TeamMemberId == null) || (TeamMemberId?.Equals(other.TeamMemberId) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -1338935965;
+
+            if (Id != null)
+            {
+               hashCode += Id.GetHashCode();
+            }
+
+            if (EmployeeId != null)
+            {
+               hashCode += EmployeeId.GetHashCode();
+            }
+
+            if (LocationId != null)
+            {
+               hashCode += LocationId.GetHashCode();
+            }
+
+            if (Timezone != null)
+            {
+               hashCode += Timezone.GetHashCode();
+            }
+
+            if (StartAt != null)
+            {
+               hashCode += StartAt.GetHashCode();
+            }
+
+            if (EndAt != null)
+            {
+               hashCode += EndAt.GetHashCode();
+            }
+
+            if (Wage != null)
+            {
+               hashCode += Wage.GetHashCode();
+            }
+
+            if (Breaks != null)
+            {
+               hashCode += Breaks.GetHashCode();
+            }
+
+            if (Status != null)
+            {
+               hashCode += Status.GetHashCode();
+            }
+
+            if (Version != null)
+            {
+               hashCode += Version.GetHashCode();
+            }
+
+            if (CreatedAt != null)
+            {
+               hashCode += CreatedAt.GetHashCode();
+            }
+
+            if (UpdatedAt != null)
+            {
+               hashCode += UpdatedAt.GetHashCode();
+            }
+
+            if (TeamMemberId != null)
+            {
+               hashCode += TeamMemberId.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

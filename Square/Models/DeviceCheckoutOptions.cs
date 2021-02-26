@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -42,6 +43,62 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("tip_settings", NullValueHandling = NullValueHandling.Ignore)]
         public Models.TipSettings TipSettings { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"DeviceCheckoutOptions : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"DeviceId = {(DeviceId == null ? "null" : DeviceId == string.Empty ? "" : DeviceId)}");
+            toStringOutput.Add($"SkipReceiptScreen = {(SkipReceiptScreen == null ? "null" : SkipReceiptScreen.ToString())}");
+            toStringOutput.Add($"TipSettings = {(TipSettings == null ? "null" : TipSettings.ToString())}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is DeviceCheckoutOptions other &&
+                ((DeviceId == null && other.DeviceId == null) || (DeviceId?.Equals(other.DeviceId) == true)) &&
+                ((SkipReceiptScreen == null && other.SkipReceiptScreen == null) || (SkipReceiptScreen?.Equals(other.SkipReceiptScreen) == true)) &&
+                ((TipSettings == null && other.TipSettings == null) || (TipSettings?.Equals(other.TipSettings) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -1796237610;
+
+            if (DeviceId != null)
+            {
+               hashCode += DeviceId.GetHashCode();
+            }
+
+            if (SkipReceiptScreen != null)
+            {
+               hashCode += SkipReceiptScreen.GetHashCode();
+            }
+
+            if (TipSettings != null)
+            {
+               hashCode += TipSettings.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -75,6 +76,90 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("fulfillment_update", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.OrderFulfillmentUpdatedUpdate> FulfillmentUpdate { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"OrderFulfillmentUpdated : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"OrderId = {(OrderId == null ? "null" : OrderId == string.Empty ? "" : OrderId)}");
+            toStringOutput.Add($"Version = {(Version == null ? "null" : Version.ToString())}");
+            toStringOutput.Add($"LocationId = {(LocationId == null ? "null" : LocationId == string.Empty ? "" : LocationId)}");
+            toStringOutput.Add($"State = {(State == null ? "null" : State.ToString())}");
+            toStringOutput.Add($"CreatedAt = {(CreatedAt == null ? "null" : CreatedAt == string.Empty ? "" : CreatedAt)}");
+            toStringOutput.Add($"UpdatedAt = {(UpdatedAt == null ? "null" : UpdatedAt == string.Empty ? "" : UpdatedAt)}");
+            toStringOutput.Add($"FulfillmentUpdate = {(FulfillmentUpdate == null ? "null" : $"[{ string.Join(", ", FulfillmentUpdate)} ]")}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is OrderFulfillmentUpdated other &&
+                ((OrderId == null && other.OrderId == null) || (OrderId?.Equals(other.OrderId) == true)) &&
+                ((Version == null && other.Version == null) || (Version?.Equals(other.Version) == true)) &&
+                ((LocationId == null && other.LocationId == null) || (LocationId?.Equals(other.LocationId) == true)) &&
+                ((State == null && other.State == null) || (State?.Equals(other.State) == true)) &&
+                ((CreatedAt == null && other.CreatedAt == null) || (CreatedAt?.Equals(other.CreatedAt) == true)) &&
+                ((UpdatedAt == null && other.UpdatedAt == null) || (UpdatedAt?.Equals(other.UpdatedAt) == true)) &&
+                ((FulfillmentUpdate == null && other.FulfillmentUpdate == null) || (FulfillmentUpdate?.Equals(other.FulfillmentUpdate) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -660264854;
+
+            if (OrderId != null)
+            {
+               hashCode += OrderId.GetHashCode();
+            }
+
+            if (Version != null)
+            {
+               hashCode += Version.GetHashCode();
+            }
+
+            if (LocationId != null)
+            {
+               hashCode += LocationId.GetHashCode();
+            }
+
+            if (State != null)
+            {
+               hashCode += State.GetHashCode();
+            }
+
+            if (CreatedAt != null)
+            {
+               hashCode += CreatedAt.GetHashCode();
+            }
+
+            if (UpdatedAt != null)
+            {
+               hashCode += UpdatedAt.GetHashCode();
+            }
+
+            if (FulfillmentUpdate != null)
+            {
+               hashCode += FulfillmentUpdate.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

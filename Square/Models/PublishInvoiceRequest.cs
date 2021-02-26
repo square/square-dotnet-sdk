@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -37,6 +38,51 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("idempotency_key", NullValueHandling = NullValueHandling.Ignore)]
         public string IdempotencyKey { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"PublishInvoiceRequest : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"Version = {Version}");
+            toStringOutput.Add($"IdempotencyKey = {(IdempotencyKey == null ? "null" : IdempotencyKey == string.Empty ? "" : IdempotencyKey)}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is PublishInvoiceRequest other &&
+                Version.Equals(other.Version) &&
+                ((IdempotencyKey == null && other.IdempotencyKey == null) || (IdempotencyKey?.Equals(other.IdempotencyKey) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -1055593006;
+            hashCode += Version.GetHashCode();
+
+            if (IdempotencyKey != null)
+            {
+               hashCode += IdempotencyKey.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

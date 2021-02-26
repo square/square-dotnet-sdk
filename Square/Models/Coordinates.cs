@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -32,6 +33,55 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("longitude", NullValueHandling = NullValueHandling.Ignore)]
         public double? Longitude { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"Coordinates : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"Latitude = {(Latitude == null ? "null" : Latitude.ToString())}");
+            toStringOutput.Add($"Longitude = {(Longitude == null ? "null" : Longitude.ToString())}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is Coordinates other &&
+                ((Latitude == null && other.Latitude == null) || (Latitude?.Equals(other.Latitude) == true)) &&
+                ((Longitude == null && other.Longitude == null) || (Longitude?.Equals(other.Longitude) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -1577606388;
+
+            if (Latitude != null)
+            {
+               hashCode += Latitude.GetHashCode();
+            }
+
+            if (Longitude != null)
+            {
+               hashCode += Longitude.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

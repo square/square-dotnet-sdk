@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -40,6 +41,62 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("discount_id", NullValueHandling = NullValueHandling.Ignore)]
         public string DiscountId { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"V1PaymentDiscount : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"Name = {(Name == null ? "null" : Name == string.Empty ? "" : Name)}");
+            toStringOutput.Add($"AppliedMoney = {(AppliedMoney == null ? "null" : AppliedMoney.ToString())}");
+            toStringOutput.Add($"DiscountId = {(DiscountId == null ? "null" : DiscountId == string.Empty ? "" : DiscountId)}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is V1PaymentDiscount other &&
+                ((Name == null && other.Name == null) || (Name?.Equals(other.Name) == true)) &&
+                ((AppliedMoney == null && other.AppliedMoney == null) || (AppliedMoney?.Equals(other.AppliedMoney) == true)) &&
+                ((DiscountId == null && other.DiscountId == null) || (DiscountId?.Equals(other.DiscountId) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 1602240589;
+
+            if (Name != null)
+            {
+               hashCode += Name.GetHashCode();
+            }
+
+            if (AppliedMoney != null)
+            {
+               hashCode += AppliedMoney.GetHashCode();
+            }
+
+            if (DiscountId != null)
+            {
+               hashCode += DiscountId.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

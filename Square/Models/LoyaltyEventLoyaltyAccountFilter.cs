@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -24,6 +25,48 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("loyalty_account_id")]
         public string LoyaltyAccountId { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"LoyaltyEventLoyaltyAccountFilter : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"LoyaltyAccountId = {(LoyaltyAccountId == null ? "null" : LoyaltyAccountId == string.Empty ? "" : LoyaltyAccountId)}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is LoyaltyEventLoyaltyAccountFilter other &&
+                ((LoyaltyAccountId == null && other.LoyaltyAccountId == null) || (LoyaltyAccountId?.Equals(other.LoyaltyAccountId) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 1399145156;
+
+            if (LoyaltyAccountId != null)
+            {
+               hashCode += LoyaltyAccountId.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

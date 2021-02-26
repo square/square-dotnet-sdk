@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -86,6 +87,97 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("scope", NullValueHandling = NullValueHandling.Ignore)]
         public string Scope { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"OrderReturnTax : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"Uid = {(Uid == null ? "null" : Uid == string.Empty ? "" : Uid)}");
+            toStringOutput.Add($"SourceTaxUid = {(SourceTaxUid == null ? "null" : SourceTaxUid == string.Empty ? "" : SourceTaxUid)}");
+            toStringOutput.Add($"CatalogObjectId = {(CatalogObjectId == null ? "null" : CatalogObjectId == string.Empty ? "" : CatalogObjectId)}");
+            toStringOutput.Add($"Name = {(Name == null ? "null" : Name == string.Empty ? "" : Name)}");
+            toStringOutput.Add($"Type = {(Type == null ? "null" : Type.ToString())}");
+            toStringOutput.Add($"Percentage = {(Percentage == null ? "null" : Percentage == string.Empty ? "" : Percentage)}");
+            toStringOutput.Add($"AppliedMoney = {(AppliedMoney == null ? "null" : AppliedMoney.ToString())}");
+            toStringOutput.Add($"Scope = {(Scope == null ? "null" : Scope.ToString())}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is OrderReturnTax other &&
+                ((Uid == null && other.Uid == null) || (Uid?.Equals(other.Uid) == true)) &&
+                ((SourceTaxUid == null && other.SourceTaxUid == null) || (SourceTaxUid?.Equals(other.SourceTaxUid) == true)) &&
+                ((CatalogObjectId == null && other.CatalogObjectId == null) || (CatalogObjectId?.Equals(other.CatalogObjectId) == true)) &&
+                ((Name == null && other.Name == null) || (Name?.Equals(other.Name) == true)) &&
+                ((Type == null && other.Type == null) || (Type?.Equals(other.Type) == true)) &&
+                ((Percentage == null && other.Percentage == null) || (Percentage?.Equals(other.Percentage) == true)) &&
+                ((AppliedMoney == null && other.AppliedMoney == null) || (AppliedMoney?.Equals(other.AppliedMoney) == true)) &&
+                ((Scope == null && other.Scope == null) || (Scope?.Equals(other.Scope) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -778295832;
+
+            if (Uid != null)
+            {
+               hashCode += Uid.GetHashCode();
+            }
+
+            if (SourceTaxUid != null)
+            {
+               hashCode += SourceTaxUid.GetHashCode();
+            }
+
+            if (CatalogObjectId != null)
+            {
+               hashCode += CatalogObjectId.GetHashCode();
+            }
+
+            if (Name != null)
+            {
+               hashCode += Name.GetHashCode();
+            }
+
+            if (Type != null)
+            {
+               hashCode += Type.GetHashCode();
+            }
+
+            if (Percentage != null)
+            {
+               hashCode += Percentage.GetHashCode();
+            }
+
+            if (AppliedMoney != null)
+            {
+               hashCode += AppliedMoney.GetHashCode();
+            }
+
+            if (Scope != null)
+            {
+               hashCode += Scope.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

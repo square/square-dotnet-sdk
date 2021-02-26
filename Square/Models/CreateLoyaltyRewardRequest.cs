@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -33,6 +34,55 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("idempotency_key")]
         public string IdempotencyKey { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"CreateLoyaltyRewardRequest : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"Reward = {(Reward == null ? "null" : Reward.ToString())}");
+            toStringOutput.Add($"IdempotencyKey = {(IdempotencyKey == null ? "null" : IdempotencyKey == string.Empty ? "" : IdempotencyKey)}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is CreateLoyaltyRewardRequest other &&
+                ((Reward == null && other.Reward == null) || (Reward?.Equals(other.Reward) == true)) &&
+                ((IdempotencyKey == null && other.IdempotencyKey == null) || (IdempotencyKey?.Equals(other.IdempotencyKey) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -767337134;
+
+            if (Reward != null)
+            {
+               hashCode += Reward.GetHashCode();
+            }
+
+            if (IdempotencyKey != null)
+            {
+               hashCode += IdempotencyKey.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

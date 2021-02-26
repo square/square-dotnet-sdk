@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -36,6 +37,61 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("reward", NullValueHandling = NullValueHandling.Ignore)]
         public Models.LoyaltyReward Reward { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"RetrieveLoyaltyRewardResponse : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"Errors = {(Errors == null ? "null" : $"[{ string.Join(", ", Errors)} ]")}");
+            toStringOutput.Add($"Reward = {(Reward == null ? "null" : Reward.ToString())}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is RetrieveLoyaltyRewardResponse other &&
+                ((Context == null && other.Context == null) || (Context?.Equals(other.Context) == true)) &&
+                ((Errors == null && other.Errors == null) || (Errors?.Equals(other.Errors) == true)) &&
+                ((Reward == null && other.Reward == null) || (Reward?.Equals(other.Reward) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -1832831396;
+
+            if (Context != null)
+            {
+                hashCode += Context.GetHashCode();
+            }
+
+            if (Errors != null)
+            {
+               hashCode += Errors.GetHashCode();
+            }
+
+            if (Reward != null)
+            {
+               hashCode += Reward.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

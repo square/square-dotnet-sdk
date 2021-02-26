@@ -5,7 +5,8 @@ The following parameters are configurable for the API Client:
 
 | Parameter | Type | Description |
 |  --- | --- | --- |
-| `SquareVersion` | `string` | Square Connect API versions<br>*Default*: `"2021-01-21"` |
+| `SquareVersion` | `string` | Square Connect API versions<br>*Default*: `"2021-02-26"` |
+| `CustomUrl` | `string` | Sets the base URL requests are made to. Defaults to `https://connect.squareup.com`<br>*Default*: `"https://connect.squareup.com"` |
 | `Environment` | `string` | The API environment. <br> **Default: `production`** |
 | `Timeout` | `TimeSpan` | Http client timeout<br>*Default*: `TimeSpan.FromSeconds(60)` |
 | `AccessToken` | `string` | The OAuth 2.0 Access Token to use for API requests. |
@@ -15,8 +16,9 @@ The API client can be initialized as follows:
 ```csharp
 Square.SquareClient client = new Square.SquareClient.Builder()
     .AccessToken("AccessToken")
-    .SquareVersion(GetEnvironmentVariable("2021-01-21"))
+    .SquareVersion(GetEnvironmentVariable("2021-02-26"))
     .Environment(Environment.Production)
+    .CustomUrl("https://connect.squareup.com")
     .Build();
 ```
 
@@ -42,7 +44,7 @@ namespace Testing
         {
             SquareClient client = new SquareClient.Builder()
                 .AccessToken("AccessToken")
-                .SquareVersion(GetEnvironmentVariable("2021-01-21"))
+                .SquareVersion(GetEnvironmentVariable("2021-02-26"))
                 .Build();
             ILocationsApi locationsApi = client.LocationsApi;
             
@@ -68,7 +70,6 @@ The gateway for the SDK. This class acts as a factory for the Apis and also hold
 | OAuthApi | Provides access to OAuthApi. |
 | V1EmployeesApi | Provides access to V1EmployeesApi. |
 | V1TransactionsApi | Provides access to V1TransactionsApi. |
-| V1ItemsApi | Provides access to V1ItemsApi. |
 | ApplePayApi | Provides access to ApplePayApi. |
 | BankAccountsApi | Provides access to BankAccountsApi. |
 | BookingsApi | Provides access to BookingsApi. |
@@ -105,6 +106,7 @@ The gateway for the SDK. This class acts as a factory for the Apis and also hold
 | Timeout | Http client timeout | `TimeSpan` |
 | SquareVersion | Square Connect API versions | `string` |
 | Environment | Current API environment | `Environment` |
+| CustomUrl | Sets the base URL requests are made to. Defaults to `https://connect.squareup.com` | `string` |
 
 ### Methods
 

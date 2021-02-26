@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -128,6 +129,139 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("modifiers", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.V1PaymentModifier> Modifiers { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"V1PaymentItemization : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"Name = {(Name == null ? "null" : Name == string.Empty ? "" : Name)}");
+            toStringOutput.Add($"Quantity = {(Quantity == null ? "null" : Quantity.ToString())}");
+            toStringOutput.Add($"ItemizationType = {(ItemizationType == null ? "null" : ItemizationType.ToString())}");
+            toStringOutput.Add($"ItemDetail = {(ItemDetail == null ? "null" : ItemDetail.ToString())}");
+            toStringOutput.Add($"Notes = {(Notes == null ? "null" : Notes == string.Empty ? "" : Notes)}");
+            toStringOutput.Add($"ItemVariationName = {(ItemVariationName == null ? "null" : ItemVariationName == string.Empty ? "" : ItemVariationName)}");
+            toStringOutput.Add($"TotalMoney = {(TotalMoney == null ? "null" : TotalMoney.ToString())}");
+            toStringOutput.Add($"SingleQuantityMoney = {(SingleQuantityMoney == null ? "null" : SingleQuantityMoney.ToString())}");
+            toStringOutput.Add($"GrossSalesMoney = {(GrossSalesMoney == null ? "null" : GrossSalesMoney.ToString())}");
+            toStringOutput.Add($"DiscountMoney = {(DiscountMoney == null ? "null" : DiscountMoney.ToString())}");
+            toStringOutput.Add($"NetSalesMoney = {(NetSalesMoney == null ? "null" : NetSalesMoney.ToString())}");
+            toStringOutput.Add($"Taxes = {(Taxes == null ? "null" : $"[{ string.Join(", ", Taxes)} ]")}");
+            toStringOutput.Add($"Discounts = {(Discounts == null ? "null" : $"[{ string.Join(", ", Discounts)} ]")}");
+            toStringOutput.Add($"Modifiers = {(Modifiers == null ? "null" : $"[{ string.Join(", ", Modifiers)} ]")}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is V1PaymentItemization other &&
+                ((Name == null && other.Name == null) || (Name?.Equals(other.Name) == true)) &&
+                ((Quantity == null && other.Quantity == null) || (Quantity?.Equals(other.Quantity) == true)) &&
+                ((ItemizationType == null && other.ItemizationType == null) || (ItemizationType?.Equals(other.ItemizationType) == true)) &&
+                ((ItemDetail == null && other.ItemDetail == null) || (ItemDetail?.Equals(other.ItemDetail) == true)) &&
+                ((Notes == null && other.Notes == null) || (Notes?.Equals(other.Notes) == true)) &&
+                ((ItemVariationName == null && other.ItemVariationName == null) || (ItemVariationName?.Equals(other.ItemVariationName) == true)) &&
+                ((TotalMoney == null && other.TotalMoney == null) || (TotalMoney?.Equals(other.TotalMoney) == true)) &&
+                ((SingleQuantityMoney == null && other.SingleQuantityMoney == null) || (SingleQuantityMoney?.Equals(other.SingleQuantityMoney) == true)) &&
+                ((GrossSalesMoney == null && other.GrossSalesMoney == null) || (GrossSalesMoney?.Equals(other.GrossSalesMoney) == true)) &&
+                ((DiscountMoney == null && other.DiscountMoney == null) || (DiscountMoney?.Equals(other.DiscountMoney) == true)) &&
+                ((NetSalesMoney == null && other.NetSalesMoney == null) || (NetSalesMoney?.Equals(other.NetSalesMoney) == true)) &&
+                ((Taxes == null && other.Taxes == null) || (Taxes?.Equals(other.Taxes) == true)) &&
+                ((Discounts == null && other.Discounts == null) || (Discounts?.Equals(other.Discounts) == true)) &&
+                ((Modifiers == null && other.Modifiers == null) || (Modifiers?.Equals(other.Modifiers) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 1047875174;
+
+            if (Name != null)
+            {
+               hashCode += Name.GetHashCode();
+            }
+
+            if (Quantity != null)
+            {
+               hashCode += Quantity.GetHashCode();
+            }
+
+            if (ItemizationType != null)
+            {
+               hashCode += ItemizationType.GetHashCode();
+            }
+
+            if (ItemDetail != null)
+            {
+               hashCode += ItemDetail.GetHashCode();
+            }
+
+            if (Notes != null)
+            {
+               hashCode += Notes.GetHashCode();
+            }
+
+            if (ItemVariationName != null)
+            {
+               hashCode += ItemVariationName.GetHashCode();
+            }
+
+            if (TotalMoney != null)
+            {
+               hashCode += TotalMoney.GetHashCode();
+            }
+
+            if (SingleQuantityMoney != null)
+            {
+               hashCode += SingleQuantityMoney.GetHashCode();
+            }
+
+            if (GrossSalesMoney != null)
+            {
+               hashCode += GrossSalesMoney.GetHashCode();
+            }
+
+            if (DiscountMoney != null)
+            {
+               hashCode += DiscountMoney.GetHashCode();
+            }
+
+            if (NetSalesMoney != null)
+            {
+               hashCode += NetSalesMoney.GetHashCode();
+            }
+
+            if (Taxes != null)
+            {
+               hashCode += Taxes.GetHashCode();
+            }
+
+            if (Discounts != null)
+            {
+               hashCode += Discounts.GetHashCode();
+            }
+
+            if (Modifiers != null)
+            {
+               hashCode += Modifiers.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

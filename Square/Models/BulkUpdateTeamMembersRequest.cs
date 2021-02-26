@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -24,6 +25,48 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("team_members")]
         public IDictionary<string, Models.UpdateTeamMemberRequest> TeamMembers { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"BulkUpdateTeamMembersRequest : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"TeamMembers = {(TeamMembers == null ? "null" : TeamMembers.ToString())}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is BulkUpdateTeamMembersRequest other &&
+                ((TeamMembers == null && other.TeamMembers == null) || (TeamMembers?.Equals(other.TeamMembers) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 676588886;
+
+            if (TeamMembers != null)
+            {
+               hashCode += TeamMembers.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

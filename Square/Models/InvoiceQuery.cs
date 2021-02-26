@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -32,6 +33,55 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("sort", NullValueHandling = NullValueHandling.Ignore)]
         public Models.InvoiceSort Sort { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"InvoiceQuery : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"Filter = {(Filter == null ? "null" : Filter.ToString())}");
+            toStringOutput.Add($"Sort = {(Sort == null ? "null" : Sort.ToString())}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is InvoiceQuery other &&
+                ((Filter == null && other.Filter == null) || (Filter?.Equals(other.Filter) == true)) &&
+                ((Sort == null && other.Sort == null) || (Sort?.Equals(other.Sort) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -1092655669;
+
+            if (Filter != null)
+            {
+               hashCode += Filter.GetHashCode();
+            }
+
+            if (Sort != null)
+            {
+               hashCode += Sort.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

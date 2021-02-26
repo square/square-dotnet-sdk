@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -53,6 +54,69 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("receivable_id", NullValueHandling = NullValueHandling.Ignore)]
         public string ReceivableId { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"AdditionalRecipient : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"LocationId = {(LocationId == null ? "null" : LocationId == string.Empty ? "" : LocationId)}");
+            toStringOutput.Add($"Description = {(Description == null ? "null" : Description == string.Empty ? "" : Description)}");
+            toStringOutput.Add($"AmountMoney = {(AmountMoney == null ? "null" : AmountMoney.ToString())}");
+            toStringOutput.Add($"ReceivableId = {(ReceivableId == null ? "null" : ReceivableId == string.Empty ? "" : ReceivableId)}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is AdditionalRecipient other &&
+                ((LocationId == null && other.LocationId == null) || (LocationId?.Equals(other.LocationId) == true)) &&
+                ((Description == null && other.Description == null) || (Description?.Equals(other.Description) == true)) &&
+                ((AmountMoney == null && other.AmountMoney == null) || (AmountMoney?.Equals(other.AmountMoney) == true)) &&
+                ((ReceivableId == null && other.ReceivableId == null) || (ReceivableId?.Equals(other.ReceivableId) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -1717136415;
+
+            if (LocationId != null)
+            {
+               hashCode += LocationId.GetHashCode();
+            }
+
+            if (Description != null)
+            {
+               hashCode += Description.GetHashCode();
+            }
+
+            if (AmountMoney != null)
+            {
+               hashCode += AmountMoney.GetHashCode();
+            }
+
+            if (ReceivableId != null)
+            {
+               hashCode += ReceivableId.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

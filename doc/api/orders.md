@@ -201,7 +201,6 @@ var bodyOrder = new Order.Builder(
     .Build();
 var body = new CreateOrderRequest.Builder()
     .Order(bodyOrder)
-    .LocationId("location_id0")
     .IdempotencyKey("8193148c-9586-11e6-99f9-28cfe92138cf")
     .Build();
 

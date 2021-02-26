@@ -11,6 +11,7 @@ namespace Square
     {
         Production,
         Sandbox,
+        Custom,
     }
     /// <summary>
     /// Helper for the enum type Environment
@@ -18,7 +19,7 @@ namespace Square
     public static class EnvironmentHelper
     {
         //string values corresponding the enum elements
-        private static readonly List<string> stringValues = new List<string> { "production", "sandbox" };
+        private static readonly List<string> stringValues = new List<string> { "production", "sandbox", "custom" };
 
         /// <summary>
         /// Converts an Environment value to a corresponding string value
@@ -33,6 +34,7 @@ namespace Square
                 //this is necessary to avoid errors
                 case Environment.Production:
                 case Environment.Sandbox:
+                case Environment.Custom:
                     return stringValues[(int)enumValue];
 
                 //an invalid enum value was requested

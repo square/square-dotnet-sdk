@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -63,6 +64,62 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("image", NullValueHandling = NullValueHandling.Ignore)]
         public Models.CatalogObject Image { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"CreateCatalogImageRequest : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"IdempotencyKey = {(IdempotencyKey == null ? "null" : IdempotencyKey == string.Empty ? "" : IdempotencyKey)}");
+            toStringOutput.Add($"ObjectId = {(ObjectId == null ? "null" : ObjectId == string.Empty ? "" : ObjectId)}");
+            toStringOutput.Add($"Image = {(Image == null ? "null" : Image.ToString())}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is CreateCatalogImageRequest other &&
+                ((IdempotencyKey == null && other.IdempotencyKey == null) || (IdempotencyKey?.Equals(other.IdempotencyKey) == true)) &&
+                ((ObjectId == null && other.ObjectId == null) || (ObjectId?.Equals(other.ObjectId) == true)) &&
+                ((Image == null && other.Image == null) || (Image?.Equals(other.Image) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 1867152760;
+
+            if (IdempotencyKey != null)
+            {
+               hashCode += IdempotencyKey.GetHashCode();
+            }
+
+            if (ObjectId != null)
+            {
+               hashCode += ObjectId.GetHashCode();
+            }
+
+            if (Image != null)
+            {
+               hashCode += Image.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

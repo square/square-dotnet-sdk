@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -192,6 +193,160 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("total_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Money TotalMoney { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"OrderReturnLineItem : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"Uid = {(Uid == null ? "null" : Uid == string.Empty ? "" : Uid)}");
+            toStringOutput.Add($"SourceLineItemUid = {(SourceLineItemUid == null ? "null" : SourceLineItemUid == string.Empty ? "" : SourceLineItemUid)}");
+            toStringOutput.Add($"Name = {(Name == null ? "null" : Name == string.Empty ? "" : Name)}");
+            toStringOutput.Add($"Quantity = {(Quantity == null ? "null" : Quantity == string.Empty ? "" : Quantity)}");
+            toStringOutput.Add($"QuantityUnit = {(QuantityUnit == null ? "null" : QuantityUnit.ToString())}");
+            toStringOutput.Add($"Note = {(Note == null ? "null" : Note == string.Empty ? "" : Note)}");
+            toStringOutput.Add($"CatalogObjectId = {(CatalogObjectId == null ? "null" : CatalogObjectId == string.Empty ? "" : CatalogObjectId)}");
+            toStringOutput.Add($"VariationName = {(VariationName == null ? "null" : VariationName == string.Empty ? "" : VariationName)}");
+            toStringOutput.Add($"ReturnModifiers = {(ReturnModifiers == null ? "null" : $"[{ string.Join(", ", ReturnModifiers)} ]")}");
+            toStringOutput.Add($"AppliedTaxes = {(AppliedTaxes == null ? "null" : $"[{ string.Join(", ", AppliedTaxes)} ]")}");
+            toStringOutput.Add($"AppliedDiscounts = {(AppliedDiscounts == null ? "null" : $"[{ string.Join(", ", AppliedDiscounts)} ]")}");
+            toStringOutput.Add($"BasePriceMoney = {(BasePriceMoney == null ? "null" : BasePriceMoney.ToString())}");
+            toStringOutput.Add($"VariationTotalPriceMoney = {(VariationTotalPriceMoney == null ? "null" : VariationTotalPriceMoney.ToString())}");
+            toStringOutput.Add($"GrossReturnMoney = {(GrossReturnMoney == null ? "null" : GrossReturnMoney.ToString())}");
+            toStringOutput.Add($"TotalTaxMoney = {(TotalTaxMoney == null ? "null" : TotalTaxMoney.ToString())}");
+            toStringOutput.Add($"TotalDiscountMoney = {(TotalDiscountMoney == null ? "null" : TotalDiscountMoney.ToString())}");
+            toStringOutput.Add($"TotalMoney = {(TotalMoney == null ? "null" : TotalMoney.ToString())}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is OrderReturnLineItem other &&
+                ((Uid == null && other.Uid == null) || (Uid?.Equals(other.Uid) == true)) &&
+                ((SourceLineItemUid == null && other.SourceLineItemUid == null) || (SourceLineItemUid?.Equals(other.SourceLineItemUid) == true)) &&
+                ((Name == null && other.Name == null) || (Name?.Equals(other.Name) == true)) &&
+                ((Quantity == null && other.Quantity == null) || (Quantity?.Equals(other.Quantity) == true)) &&
+                ((QuantityUnit == null && other.QuantityUnit == null) || (QuantityUnit?.Equals(other.QuantityUnit) == true)) &&
+                ((Note == null && other.Note == null) || (Note?.Equals(other.Note) == true)) &&
+                ((CatalogObjectId == null && other.CatalogObjectId == null) || (CatalogObjectId?.Equals(other.CatalogObjectId) == true)) &&
+                ((VariationName == null && other.VariationName == null) || (VariationName?.Equals(other.VariationName) == true)) &&
+                ((ReturnModifiers == null && other.ReturnModifiers == null) || (ReturnModifiers?.Equals(other.ReturnModifiers) == true)) &&
+                ((AppliedTaxes == null && other.AppliedTaxes == null) || (AppliedTaxes?.Equals(other.AppliedTaxes) == true)) &&
+                ((AppliedDiscounts == null && other.AppliedDiscounts == null) || (AppliedDiscounts?.Equals(other.AppliedDiscounts) == true)) &&
+                ((BasePriceMoney == null && other.BasePriceMoney == null) || (BasePriceMoney?.Equals(other.BasePriceMoney) == true)) &&
+                ((VariationTotalPriceMoney == null && other.VariationTotalPriceMoney == null) || (VariationTotalPriceMoney?.Equals(other.VariationTotalPriceMoney) == true)) &&
+                ((GrossReturnMoney == null && other.GrossReturnMoney == null) || (GrossReturnMoney?.Equals(other.GrossReturnMoney) == true)) &&
+                ((TotalTaxMoney == null && other.TotalTaxMoney == null) || (TotalTaxMoney?.Equals(other.TotalTaxMoney) == true)) &&
+                ((TotalDiscountMoney == null && other.TotalDiscountMoney == null) || (TotalDiscountMoney?.Equals(other.TotalDiscountMoney) == true)) &&
+                ((TotalMoney == null && other.TotalMoney == null) || (TotalMoney?.Equals(other.TotalMoney) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 1299728447;
+
+            if (Uid != null)
+            {
+               hashCode += Uid.GetHashCode();
+            }
+
+            if (SourceLineItemUid != null)
+            {
+               hashCode += SourceLineItemUid.GetHashCode();
+            }
+
+            if (Name != null)
+            {
+               hashCode += Name.GetHashCode();
+            }
+
+            if (Quantity != null)
+            {
+               hashCode += Quantity.GetHashCode();
+            }
+
+            if (QuantityUnit != null)
+            {
+               hashCode += QuantityUnit.GetHashCode();
+            }
+
+            if (Note != null)
+            {
+               hashCode += Note.GetHashCode();
+            }
+
+            if (CatalogObjectId != null)
+            {
+               hashCode += CatalogObjectId.GetHashCode();
+            }
+
+            if (VariationName != null)
+            {
+               hashCode += VariationName.GetHashCode();
+            }
+
+            if (ReturnModifiers != null)
+            {
+               hashCode += ReturnModifiers.GetHashCode();
+            }
+
+            if (AppliedTaxes != null)
+            {
+               hashCode += AppliedTaxes.GetHashCode();
+            }
+
+            if (AppliedDiscounts != null)
+            {
+               hashCode += AppliedDiscounts.GetHashCode();
+            }
+
+            if (BasePriceMoney != null)
+            {
+               hashCode += BasePriceMoney.GetHashCode();
+            }
+
+            if (VariationTotalPriceMoney != null)
+            {
+               hashCode += VariationTotalPriceMoney.GetHashCode();
+            }
+
+            if (GrossReturnMoney != null)
+            {
+               hashCode += GrossReturnMoney.GetHashCode();
+            }
+
+            if (TotalTaxMoney != null)
+            {
+               hashCode += TotalTaxMoney.GetHashCode();
+            }
+
+            if (TotalDiscountMoney != null)
+            {
+               hashCode += TotalDiscountMoney.GetHashCode();
+            }
+
+            if (TotalMoney != null)
+            {
+               hashCode += TotalMoney.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

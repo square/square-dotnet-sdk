@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -32,6 +33,55 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("item_option_value_id", NullValueHandling = NullValueHandling.Ignore)]
         public string ItemOptionValueId { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"CatalogItemOptionValueForItemVariation : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"ItemOptionId = {(ItemOptionId == null ? "null" : ItemOptionId == string.Empty ? "" : ItemOptionId)}");
+            toStringOutput.Add($"ItemOptionValueId = {(ItemOptionValueId == null ? "null" : ItemOptionValueId == string.Empty ? "" : ItemOptionValueId)}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is CatalogItemOptionValueForItemVariation other &&
+                ((ItemOptionId == null && other.ItemOptionId == null) || (ItemOptionId?.Equals(other.ItemOptionId) == true)) &&
+                ((ItemOptionValueId == null && other.ItemOptionValueId == null) || (ItemOptionValueId?.Equals(other.ItemOptionValueId) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -727857243;
+
+            if (ItemOptionId != null)
+            {
+               hashCode += ItemOptionId.GetHashCode();
+            }
+
+            if (ItemOptionValueId != null)
+            {
+               hashCode += ItemOptionValueId.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -72,6 +73,90 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("business_appointment_settings", NullValueHandling = NullValueHandling.Ignore)]
         public Models.BusinessAppointmentSettings BusinessAppointmentSettings { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"BusinessBookingProfile : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"SellerId = {(SellerId == null ? "null" : SellerId == string.Empty ? "" : SellerId)}");
+            toStringOutput.Add($"CreatedAt = {(CreatedAt == null ? "null" : CreatedAt == string.Empty ? "" : CreatedAt)}");
+            toStringOutput.Add($"BookingEnabled = {(BookingEnabled == null ? "null" : BookingEnabled.ToString())}");
+            toStringOutput.Add($"CustomerTimezoneChoice = {(CustomerTimezoneChoice == null ? "null" : CustomerTimezoneChoice.ToString())}");
+            toStringOutput.Add($"BookingPolicy = {(BookingPolicy == null ? "null" : BookingPolicy.ToString())}");
+            toStringOutput.Add($"AllowUserCancel = {(AllowUserCancel == null ? "null" : AllowUserCancel.ToString())}");
+            toStringOutput.Add($"BusinessAppointmentSettings = {(BusinessAppointmentSettings == null ? "null" : BusinessAppointmentSettings.ToString())}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is BusinessBookingProfile other &&
+                ((SellerId == null && other.SellerId == null) || (SellerId?.Equals(other.SellerId) == true)) &&
+                ((CreatedAt == null && other.CreatedAt == null) || (CreatedAt?.Equals(other.CreatedAt) == true)) &&
+                ((BookingEnabled == null && other.BookingEnabled == null) || (BookingEnabled?.Equals(other.BookingEnabled) == true)) &&
+                ((CustomerTimezoneChoice == null && other.CustomerTimezoneChoice == null) || (CustomerTimezoneChoice?.Equals(other.CustomerTimezoneChoice) == true)) &&
+                ((BookingPolicy == null && other.BookingPolicy == null) || (BookingPolicy?.Equals(other.BookingPolicy) == true)) &&
+                ((AllowUserCancel == null && other.AllowUserCancel == null) || (AllowUserCancel?.Equals(other.AllowUserCancel) == true)) &&
+                ((BusinessAppointmentSettings == null && other.BusinessAppointmentSettings == null) || (BusinessAppointmentSettings?.Equals(other.BusinessAppointmentSettings) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 604613904;
+
+            if (SellerId != null)
+            {
+               hashCode += SellerId.GetHashCode();
+            }
+
+            if (CreatedAt != null)
+            {
+               hashCode += CreatedAt.GetHashCode();
+            }
+
+            if (BookingEnabled != null)
+            {
+               hashCode += BookingEnabled.GetHashCode();
+            }
+
+            if (CustomerTimezoneChoice != null)
+            {
+               hashCode += CustomerTimezoneChoice.GetHashCode();
+            }
+
+            if (BookingPolicy != null)
+            {
+               hashCode += BookingPolicy.GetHashCode();
+            }
+
+            if (AllowUserCancel != null)
+            {
+               hashCode += AllowUserCancel.GetHashCode();
+            }
+
+            if (BusinessAppointmentSettings != null)
+            {
+               hashCode += BusinessAppointmentSettings.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

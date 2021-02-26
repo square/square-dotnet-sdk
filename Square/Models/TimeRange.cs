@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -34,6 +35,55 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("end_at", NullValueHandling = NullValueHandling.Ignore)]
         public string EndAt { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"TimeRange : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"StartAt = {(StartAt == null ? "null" : StartAt == string.Empty ? "" : StartAt)}");
+            toStringOutput.Add($"EndAt = {(EndAt == null ? "null" : EndAt == string.Empty ? "" : EndAt)}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is TimeRange other &&
+                ((StartAt == null && other.StartAt == null) || (StartAt?.Equals(other.StartAt) == true)) &&
+                ((EndAt == null && other.EndAt == null) || (EndAt?.Equals(other.EndAt) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 1397829395;
+
+            if (StartAt != null)
+            {
+               hashCode += StartAt.GetHashCode();
+            }
+
+            if (EndAt != null)
+            {
+               hashCode += EndAt.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

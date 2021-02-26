@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -88,6 +89,104 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("redeemed_at", NullValueHandling = NullValueHandling.Ignore)]
         public string RedeemedAt { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"LoyaltyReward : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"Id = {(Id == null ? "null" : Id == string.Empty ? "" : Id)}");
+            toStringOutput.Add($"Status = {(Status == null ? "null" : Status.ToString())}");
+            toStringOutput.Add($"LoyaltyAccountId = {(LoyaltyAccountId == null ? "null" : LoyaltyAccountId == string.Empty ? "" : LoyaltyAccountId)}");
+            toStringOutput.Add($"RewardTierId = {(RewardTierId == null ? "null" : RewardTierId == string.Empty ? "" : RewardTierId)}");
+            toStringOutput.Add($"Points = {(Points == null ? "null" : Points.ToString())}");
+            toStringOutput.Add($"OrderId = {(OrderId == null ? "null" : OrderId == string.Empty ? "" : OrderId)}");
+            toStringOutput.Add($"CreatedAt = {(CreatedAt == null ? "null" : CreatedAt == string.Empty ? "" : CreatedAt)}");
+            toStringOutput.Add($"UpdatedAt = {(UpdatedAt == null ? "null" : UpdatedAt == string.Empty ? "" : UpdatedAt)}");
+            toStringOutput.Add($"RedeemedAt = {(RedeemedAt == null ? "null" : RedeemedAt == string.Empty ? "" : RedeemedAt)}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is LoyaltyReward other &&
+                ((Id == null && other.Id == null) || (Id?.Equals(other.Id) == true)) &&
+                ((Status == null && other.Status == null) || (Status?.Equals(other.Status) == true)) &&
+                ((LoyaltyAccountId == null && other.LoyaltyAccountId == null) || (LoyaltyAccountId?.Equals(other.LoyaltyAccountId) == true)) &&
+                ((RewardTierId == null && other.RewardTierId == null) || (RewardTierId?.Equals(other.RewardTierId) == true)) &&
+                ((Points == null && other.Points == null) || (Points?.Equals(other.Points) == true)) &&
+                ((OrderId == null && other.OrderId == null) || (OrderId?.Equals(other.OrderId) == true)) &&
+                ((CreatedAt == null && other.CreatedAt == null) || (CreatedAt?.Equals(other.CreatedAt) == true)) &&
+                ((UpdatedAt == null && other.UpdatedAt == null) || (UpdatedAt?.Equals(other.UpdatedAt) == true)) &&
+                ((RedeemedAt == null && other.RedeemedAt == null) || (RedeemedAt?.Equals(other.RedeemedAt) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -1604808841;
+
+            if (Id != null)
+            {
+               hashCode += Id.GetHashCode();
+            }
+
+            if (Status != null)
+            {
+               hashCode += Status.GetHashCode();
+            }
+
+            if (LoyaltyAccountId != null)
+            {
+               hashCode += LoyaltyAccountId.GetHashCode();
+            }
+
+            if (RewardTierId != null)
+            {
+               hashCode += RewardTierId.GetHashCode();
+            }
+
+            if (Points != null)
+            {
+               hashCode += Points.GetHashCode();
+            }
+
+            if (OrderId != null)
+            {
+               hashCode += OrderId.GetHashCode();
+            }
+
+            if (CreatedAt != null)
+            {
+               hashCode += CreatedAt.GetHashCode();
+            }
+
+            if (UpdatedAt != null)
+            {
+               hashCode += UpdatedAt.GetHashCode();
+            }
+
+            if (RedeemedAt != null)
+            {
+               hashCode += RedeemedAt.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

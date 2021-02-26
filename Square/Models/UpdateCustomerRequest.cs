@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -100,6 +101,111 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("birthday", NullValueHandling = NullValueHandling.Ignore)]
         public string Birthday { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"UpdateCustomerRequest : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"GivenName = {(GivenName == null ? "null" : GivenName == string.Empty ? "" : GivenName)}");
+            toStringOutput.Add($"FamilyName = {(FamilyName == null ? "null" : FamilyName == string.Empty ? "" : FamilyName)}");
+            toStringOutput.Add($"CompanyName = {(CompanyName == null ? "null" : CompanyName == string.Empty ? "" : CompanyName)}");
+            toStringOutput.Add($"Nickname = {(Nickname == null ? "null" : Nickname == string.Empty ? "" : Nickname)}");
+            toStringOutput.Add($"EmailAddress = {(EmailAddress == null ? "null" : EmailAddress == string.Empty ? "" : EmailAddress)}");
+            toStringOutput.Add($"Address = {(Address == null ? "null" : Address.ToString())}");
+            toStringOutput.Add($"PhoneNumber = {(PhoneNumber == null ? "null" : PhoneNumber == string.Empty ? "" : PhoneNumber)}");
+            toStringOutput.Add($"ReferenceId = {(ReferenceId == null ? "null" : ReferenceId == string.Empty ? "" : ReferenceId)}");
+            toStringOutput.Add($"Note = {(Note == null ? "null" : Note == string.Empty ? "" : Note)}");
+            toStringOutput.Add($"Birthday = {(Birthday == null ? "null" : Birthday == string.Empty ? "" : Birthday)}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is UpdateCustomerRequest other &&
+                ((GivenName == null && other.GivenName == null) || (GivenName?.Equals(other.GivenName) == true)) &&
+                ((FamilyName == null && other.FamilyName == null) || (FamilyName?.Equals(other.FamilyName) == true)) &&
+                ((CompanyName == null && other.CompanyName == null) || (CompanyName?.Equals(other.CompanyName) == true)) &&
+                ((Nickname == null && other.Nickname == null) || (Nickname?.Equals(other.Nickname) == true)) &&
+                ((EmailAddress == null && other.EmailAddress == null) || (EmailAddress?.Equals(other.EmailAddress) == true)) &&
+                ((Address == null && other.Address == null) || (Address?.Equals(other.Address) == true)) &&
+                ((PhoneNumber == null && other.PhoneNumber == null) || (PhoneNumber?.Equals(other.PhoneNumber) == true)) &&
+                ((ReferenceId == null && other.ReferenceId == null) || (ReferenceId?.Equals(other.ReferenceId) == true)) &&
+                ((Note == null && other.Note == null) || (Note?.Equals(other.Note) == true)) &&
+                ((Birthday == null && other.Birthday == null) || (Birthday?.Equals(other.Birthday) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -738294962;
+
+            if (GivenName != null)
+            {
+               hashCode += GivenName.GetHashCode();
+            }
+
+            if (FamilyName != null)
+            {
+               hashCode += FamilyName.GetHashCode();
+            }
+
+            if (CompanyName != null)
+            {
+               hashCode += CompanyName.GetHashCode();
+            }
+
+            if (Nickname != null)
+            {
+               hashCode += Nickname.GetHashCode();
+            }
+
+            if (EmailAddress != null)
+            {
+               hashCode += EmailAddress.GetHashCode();
+            }
+
+            if (Address != null)
+            {
+               hashCode += Address.GetHashCode();
+            }
+
+            if (PhoneNumber != null)
+            {
+               hashCode += PhoneNumber.GetHashCode();
+            }
+
+            if (ReferenceId != null)
+            {
+               hashCode += ReferenceId.GetHashCode();
+            }
+
+            if (Note != null)
+            {
+               hashCode += Note.GetHashCode();
+            }
+
+            if (Birthday != null)
+            {
+               hashCode += Birthday.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -15,11 +16,9 @@ namespace Square.Models
     public class CreateOrderRequest 
     {
         public CreateOrderRequest(Models.Order order = null,
-            string locationId = null,
             string idempotencyKey = null)
         {
             Order = order;
-            LocationId = locationId;
             IdempotencyKey = idempotencyKey;
         }
 
@@ -34,12 +33,6 @@ namespace Square.Models
         public Models.Order Order { get; }
 
         /// <summary>
-        /// The ID of the business location to associate the order with.
-        /// </summary>
-        [JsonProperty("location_id", NullValueHandling = NullValueHandling.Ignore)]
-        public string LocationId { get; }
-
-        /// <summary>
         /// A value you specify that uniquely identifies this
         /// order among orders you've created.
         /// If you're unsure whether a particular order was created successfully,
@@ -50,11 +43,59 @@ namespace Square.Models
         [JsonProperty("idempotency_key", NullValueHandling = NullValueHandling.Ignore)]
         public string IdempotencyKey { get; }
 
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"CreateOrderRequest : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"Order = {(Order == null ? "null" : Order.ToString())}");
+            toStringOutput.Add($"IdempotencyKey = {(IdempotencyKey == null ? "null" : IdempotencyKey == string.Empty ? "" : IdempotencyKey)}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is CreateOrderRequest other &&
+                ((Order == null && other.Order == null) || (Order?.Equals(other.Order) == true)) &&
+                ((IdempotencyKey == null && other.IdempotencyKey == null) || (IdempotencyKey?.Equals(other.IdempotencyKey) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -934891871;
+
+            if (Order != null)
+            {
+               hashCode += Order.GetHashCode();
+            }
+
+            if (IdempotencyKey != null)
+            {
+               hashCode += IdempotencyKey.GetHashCode();
+            }
+
+            return hashCode;
+        }
+
         public Builder ToBuilder()
         {
             var builder = new Builder()
                 .Order(Order)
-                .LocationId(LocationId)
                 .IdempotencyKey(IdempotencyKey);
             return builder;
         }
@@ -62,7 +103,6 @@ namespace Square.Models
         public class Builder
         {
             private Models.Order order;
-            private string locationId;
             private string idempotencyKey;
 
 
@@ -70,12 +110,6 @@ namespace Square.Models
             public Builder Order(Models.Order order)
             {
                 this.order = order;
-                return this;
-            }
-
-            public Builder LocationId(string locationId)
-            {
-                this.locationId = locationId;
                 return this;
             }
 
@@ -88,7 +122,6 @@ namespace Square.Models
             public CreateOrderRequest Build()
             {
                 return new CreateOrderRequest(order,
-                    locationId,
                     idempotencyKey);
             }
         }

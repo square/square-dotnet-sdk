@@ -26,11 +26,6 @@ namespace Square
         IV1TransactionsApi V1TransactionsApi { get; }
 
         /// <summary>
-        /// Instance for IV1ItemsApi
-        /// </summary>
-        IV1ItemsApi V1ItemsApi { get; }
-
-        /// <summary>
         /// Instance for IApplePayApi
         /// </summary>
         IApplePayApi ApplePayApi { get; }

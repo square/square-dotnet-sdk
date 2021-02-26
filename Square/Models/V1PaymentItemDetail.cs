@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -48,6 +49,69 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("item_variation_id", NullValueHandling = NullValueHandling.Ignore)]
         public string ItemVariationId { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"V1PaymentItemDetail : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"CategoryName = {(CategoryName == null ? "null" : CategoryName == string.Empty ? "" : CategoryName)}");
+            toStringOutput.Add($"Sku = {(Sku == null ? "null" : Sku == string.Empty ? "" : Sku)}");
+            toStringOutput.Add($"ItemId = {(ItemId == null ? "null" : ItemId == string.Empty ? "" : ItemId)}");
+            toStringOutput.Add($"ItemVariationId = {(ItemVariationId == null ? "null" : ItemVariationId == string.Empty ? "" : ItemVariationId)}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is V1PaymentItemDetail other &&
+                ((CategoryName == null && other.CategoryName == null) || (CategoryName?.Equals(other.CategoryName) == true)) &&
+                ((Sku == null && other.Sku == null) || (Sku?.Equals(other.Sku) == true)) &&
+                ((ItemId == null && other.ItemId == null) || (ItemId?.Equals(other.ItemId) == true)) &&
+                ((ItemVariationId == null && other.ItemVariationId == null) || (ItemVariationId?.Equals(other.ItemVariationId) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 1460876522;
+
+            if (CategoryName != null)
+            {
+               hashCode += CategoryName.GetHashCode();
+            }
+
+            if (Sku != null)
+            {
+               hashCode += Sku.GetHashCode();
+            }
+
+            if (ItemId != null)
+            {
+               hashCode += ItemId.GetHashCode();
+            }
+
+            if (ItemVariationId != null)
+            {
+               hashCode += ItemVariationId.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

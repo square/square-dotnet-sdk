@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -168,6 +169,139 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("verification_token", NullValueHandling = NullValueHandling.Ignore)]
         public string VerificationToken { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"ChargeRequest : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"IdempotencyKey = {(IdempotencyKey == null ? "null" : IdempotencyKey == string.Empty ? "" : IdempotencyKey)}");
+            toStringOutput.Add($"AmountMoney = {(AmountMoney == null ? "null" : AmountMoney.ToString())}");
+            toStringOutput.Add($"CardNonce = {(CardNonce == null ? "null" : CardNonce == string.Empty ? "" : CardNonce)}");
+            toStringOutput.Add($"CustomerCardId = {(CustomerCardId == null ? "null" : CustomerCardId == string.Empty ? "" : CustomerCardId)}");
+            toStringOutput.Add($"DelayCapture = {(DelayCapture == null ? "null" : DelayCapture.ToString())}");
+            toStringOutput.Add($"ReferenceId = {(ReferenceId == null ? "null" : ReferenceId == string.Empty ? "" : ReferenceId)}");
+            toStringOutput.Add($"Note = {(Note == null ? "null" : Note == string.Empty ? "" : Note)}");
+            toStringOutput.Add($"CustomerId = {(CustomerId == null ? "null" : CustomerId == string.Empty ? "" : CustomerId)}");
+            toStringOutput.Add($"BillingAddress = {(BillingAddress == null ? "null" : BillingAddress.ToString())}");
+            toStringOutput.Add($"ShippingAddress = {(ShippingAddress == null ? "null" : ShippingAddress.ToString())}");
+            toStringOutput.Add($"BuyerEmailAddress = {(BuyerEmailAddress == null ? "null" : BuyerEmailAddress == string.Empty ? "" : BuyerEmailAddress)}");
+            toStringOutput.Add($"OrderId = {(OrderId == null ? "null" : OrderId == string.Empty ? "" : OrderId)}");
+            toStringOutput.Add($"AdditionalRecipients = {(AdditionalRecipients == null ? "null" : $"[{ string.Join(", ", AdditionalRecipients)} ]")}");
+            toStringOutput.Add($"VerificationToken = {(VerificationToken == null ? "null" : VerificationToken == string.Empty ? "" : VerificationToken)}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is ChargeRequest other &&
+                ((IdempotencyKey == null && other.IdempotencyKey == null) || (IdempotencyKey?.Equals(other.IdempotencyKey) == true)) &&
+                ((AmountMoney == null && other.AmountMoney == null) || (AmountMoney?.Equals(other.AmountMoney) == true)) &&
+                ((CardNonce == null && other.CardNonce == null) || (CardNonce?.Equals(other.CardNonce) == true)) &&
+                ((CustomerCardId == null && other.CustomerCardId == null) || (CustomerCardId?.Equals(other.CustomerCardId) == true)) &&
+                ((DelayCapture == null && other.DelayCapture == null) || (DelayCapture?.Equals(other.DelayCapture) == true)) &&
+                ((ReferenceId == null && other.ReferenceId == null) || (ReferenceId?.Equals(other.ReferenceId) == true)) &&
+                ((Note == null && other.Note == null) || (Note?.Equals(other.Note) == true)) &&
+                ((CustomerId == null && other.CustomerId == null) || (CustomerId?.Equals(other.CustomerId) == true)) &&
+                ((BillingAddress == null && other.BillingAddress == null) || (BillingAddress?.Equals(other.BillingAddress) == true)) &&
+                ((ShippingAddress == null && other.ShippingAddress == null) || (ShippingAddress?.Equals(other.ShippingAddress) == true)) &&
+                ((BuyerEmailAddress == null && other.BuyerEmailAddress == null) || (BuyerEmailAddress?.Equals(other.BuyerEmailAddress) == true)) &&
+                ((OrderId == null && other.OrderId == null) || (OrderId?.Equals(other.OrderId) == true)) &&
+                ((AdditionalRecipients == null && other.AdditionalRecipients == null) || (AdditionalRecipients?.Equals(other.AdditionalRecipients) == true)) &&
+                ((VerificationToken == null && other.VerificationToken == null) || (VerificationToken?.Equals(other.VerificationToken) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 851688088;
+
+            if (IdempotencyKey != null)
+            {
+               hashCode += IdempotencyKey.GetHashCode();
+            }
+
+            if (AmountMoney != null)
+            {
+               hashCode += AmountMoney.GetHashCode();
+            }
+
+            if (CardNonce != null)
+            {
+               hashCode += CardNonce.GetHashCode();
+            }
+
+            if (CustomerCardId != null)
+            {
+               hashCode += CustomerCardId.GetHashCode();
+            }
+
+            if (DelayCapture != null)
+            {
+               hashCode += DelayCapture.GetHashCode();
+            }
+
+            if (ReferenceId != null)
+            {
+               hashCode += ReferenceId.GetHashCode();
+            }
+
+            if (Note != null)
+            {
+               hashCode += Note.GetHashCode();
+            }
+
+            if (CustomerId != null)
+            {
+               hashCode += CustomerId.GetHashCode();
+            }
+
+            if (BillingAddress != null)
+            {
+               hashCode += BillingAddress.GetHashCode();
+            }
+
+            if (ShippingAddress != null)
+            {
+               hashCode += ShippingAddress.GetHashCode();
+            }
+
+            if (BuyerEmailAddress != null)
+            {
+               hashCode += BuyerEmailAddress.GetHashCode();
+            }
+
+            if (OrderId != null)
+            {
+               hashCode += OrderId.GetHashCode();
+            }
+
+            if (AdditionalRecipients != null)
+            {
+               hashCode += AdditionalRecipients.GetHashCode();
+            }
+
+            if (VerificationToken != null)
+            {
+               hashCode += VerificationToken.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

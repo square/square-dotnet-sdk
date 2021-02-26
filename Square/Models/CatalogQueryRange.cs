@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -40,6 +41,62 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("attribute_max_value", NullValueHandling = NullValueHandling.Ignore)]
         public long? AttributeMaxValue { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"CatalogQueryRange : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"AttributeName = {(AttributeName == null ? "null" : AttributeName == string.Empty ? "" : AttributeName)}");
+            toStringOutput.Add($"AttributeMinValue = {(AttributeMinValue == null ? "null" : AttributeMinValue.ToString())}");
+            toStringOutput.Add($"AttributeMaxValue = {(AttributeMaxValue == null ? "null" : AttributeMaxValue.ToString())}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is CatalogQueryRange other &&
+                ((AttributeName == null && other.AttributeName == null) || (AttributeName?.Equals(other.AttributeName) == true)) &&
+                ((AttributeMinValue == null && other.AttributeMinValue == null) || (AttributeMinValue?.Equals(other.AttributeMinValue) == true)) &&
+                ((AttributeMaxValue == null && other.AttributeMaxValue == null) || (AttributeMaxValue?.Equals(other.AttributeMaxValue) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 946255455;
+
+            if (AttributeName != null)
+            {
+               hashCode += AttributeName.GetHashCode();
+            }
+
+            if (AttributeMinValue != null)
+            {
+               hashCode += AttributeMinValue.GetHashCode();
+            }
+
+            if (AttributeMaxValue != null)
+            {
+               hashCode += AttributeMaxValue.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

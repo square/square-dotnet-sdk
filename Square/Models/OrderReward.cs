@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -32,6 +33,55 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("reward_tier_id")]
         public string RewardTierId { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"OrderReward : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"Id = {(Id == null ? "null" : Id == string.Empty ? "" : Id)}");
+            toStringOutput.Add($"RewardTierId = {(RewardTierId == null ? "null" : RewardTierId == string.Empty ? "" : RewardTierId)}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is OrderReward other &&
+                ((Id == null && other.Id == null) || (Id?.Equals(other.Id) == true)) &&
+                ((RewardTierId == null && other.RewardTierId == null) || (RewardTierId?.Equals(other.RewardTierId) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 2052630566;
+
+            if (Id != null)
+            {
+               hashCode += Id.GetHashCode();
+            }
+
+            if (RewardTierId != null)
+            {
+               hashCode += RewardTierId.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

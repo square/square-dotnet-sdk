@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -34,6 +35,55 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("rule", NullValueHandling = NullValueHandling.Ignore)]
         public string Rule { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"CustomerCreationSourceFilter : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"Values = {(Values == null ? "null" : $"[{ string.Join(", ", Values)} ]")}");
+            toStringOutput.Add($"Rule = {(Rule == null ? "null" : Rule.ToString())}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is CustomerCreationSourceFilter other &&
+                ((Values == null && other.Values == null) || (Values?.Equals(other.Values) == true)) &&
+                ((Rule == null && other.Rule == null) || (Rule?.Equals(other.Rule) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 2051047657;
+
+            if (Values != null)
+            {
+               hashCode += Values.GetHashCode();
+            }
+
+            if (Rule != null)
+            {
+               hashCode += Rule.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -66,6 +67,76 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("return_entries", NullValueHandling = NullValueHandling.Ignore)]
         public bool? ReturnEntries { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"SearchOrdersRequest : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"LocationIds = {(LocationIds == null ? "null" : $"[{ string.Join(", ", LocationIds)} ]")}");
+            toStringOutput.Add($"Cursor = {(Cursor == null ? "null" : Cursor == string.Empty ? "" : Cursor)}");
+            toStringOutput.Add($"Query = {(Query == null ? "null" : Query.ToString())}");
+            toStringOutput.Add($"Limit = {(Limit == null ? "null" : Limit.ToString())}");
+            toStringOutput.Add($"ReturnEntries = {(ReturnEntries == null ? "null" : ReturnEntries.ToString())}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is SearchOrdersRequest other &&
+                ((LocationIds == null && other.LocationIds == null) || (LocationIds?.Equals(other.LocationIds) == true)) &&
+                ((Cursor == null && other.Cursor == null) || (Cursor?.Equals(other.Cursor) == true)) &&
+                ((Query == null && other.Query == null) || (Query?.Equals(other.Query) == true)) &&
+                ((Limit == null && other.Limit == null) || (Limit?.Equals(other.Limit) == true)) &&
+                ((ReturnEntries == null && other.ReturnEntries == null) || (ReturnEntries?.Equals(other.ReturnEntries) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 455417059;
+
+            if (LocationIds != null)
+            {
+               hashCode += LocationIds.GetHashCode();
+            }
+
+            if (Cursor != null)
+            {
+               hashCode += Cursor.GetHashCode();
+            }
+
+            if (Query != null)
+            {
+               hashCode += Query.GetHashCode();
+            }
+
+            if (Limit != null)
+            {
+               hashCode += Limit.GetHashCode();
+            }
+
+            if (ReturnEntries != null)
+            {
+               hashCode += ReturnEntries.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

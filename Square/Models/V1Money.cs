@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -34,6 +35,55 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("currency_code", NullValueHandling = NullValueHandling.Ignore)]
         public string CurrencyCode { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"V1Money : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"Amount = {(Amount == null ? "null" : Amount.ToString())}");
+            toStringOutput.Add($"CurrencyCode = {(CurrencyCode == null ? "null" : CurrencyCode.ToString())}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is V1Money other &&
+                ((Amount == null && other.Amount == null) || (Amount?.Equals(other.Amount) == true)) &&
+                ((CurrencyCode == null && other.CurrencyCode == null) || (CurrencyCode?.Equals(other.CurrencyCode) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -1421052291;
+
+            if (Amount != null)
+            {
+               hashCode += Amount.GetHashCode();
+            }
+
+            if (CurrencyCode != null)
+            {
+               hashCode += CurrencyCode.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -51,6 +52,62 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("idempotency_key", NullValueHandling = NullValueHandling.Ignore)]
         public string IdempotencyKey { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"UpdateOrderRequest : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"Order = {(Order == null ? "null" : Order.ToString())}");
+            toStringOutput.Add($"FieldsToClear = {(FieldsToClear == null ? "null" : $"[{ string.Join(", ", FieldsToClear)} ]")}");
+            toStringOutput.Add($"IdempotencyKey = {(IdempotencyKey == null ? "null" : IdempotencyKey == string.Empty ? "" : IdempotencyKey)}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is UpdateOrderRequest other &&
+                ((Order == null && other.Order == null) || (Order?.Equals(other.Order) == true)) &&
+                ((FieldsToClear == null && other.FieldsToClear == null) || (FieldsToClear?.Equals(other.FieldsToClear) == true)) &&
+                ((IdempotencyKey == null && other.IdempotencyKey == null) || (IdempotencyKey?.Equals(other.IdempotencyKey) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -1953116001;
+
+            if (Order != null)
+            {
+               hashCode += Order.GetHashCode();
+            }
+
+            if (FieldsToClear != null)
+            {
+               hashCode += FieldsToClear.GetHashCode();
+            }
+
+            if (IdempotencyKey != null)
+            {
+               hashCode += IdempotencyKey.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

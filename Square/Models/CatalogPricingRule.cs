@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -123,6 +124,118 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("exclude_strategy", NullValueHandling = NullValueHandling.Ignore)]
         public string ExcludeStrategy { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"CatalogPricingRule : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"Name = {(Name == null ? "null" : Name == string.Empty ? "" : Name)}");
+            toStringOutput.Add($"TimePeriodIds = {(TimePeriodIds == null ? "null" : $"[{ string.Join(", ", TimePeriodIds)} ]")}");
+            toStringOutput.Add($"DiscountId = {(DiscountId == null ? "null" : DiscountId == string.Empty ? "" : DiscountId)}");
+            toStringOutput.Add($"MatchProductsId = {(MatchProductsId == null ? "null" : MatchProductsId == string.Empty ? "" : MatchProductsId)}");
+            toStringOutput.Add($"ApplyProductsId = {(ApplyProductsId == null ? "null" : ApplyProductsId == string.Empty ? "" : ApplyProductsId)}");
+            toStringOutput.Add($"ExcludeProductsId = {(ExcludeProductsId == null ? "null" : ExcludeProductsId == string.Empty ? "" : ExcludeProductsId)}");
+            toStringOutput.Add($"ValidFromDate = {(ValidFromDate == null ? "null" : ValidFromDate == string.Empty ? "" : ValidFromDate)}");
+            toStringOutput.Add($"ValidFromLocalTime = {(ValidFromLocalTime == null ? "null" : ValidFromLocalTime == string.Empty ? "" : ValidFromLocalTime)}");
+            toStringOutput.Add($"ValidUntilDate = {(ValidUntilDate == null ? "null" : ValidUntilDate == string.Empty ? "" : ValidUntilDate)}");
+            toStringOutput.Add($"ValidUntilLocalTime = {(ValidUntilLocalTime == null ? "null" : ValidUntilLocalTime == string.Empty ? "" : ValidUntilLocalTime)}");
+            toStringOutput.Add($"ExcludeStrategy = {(ExcludeStrategy == null ? "null" : ExcludeStrategy.ToString())}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is CatalogPricingRule other &&
+                ((Name == null && other.Name == null) || (Name?.Equals(other.Name) == true)) &&
+                ((TimePeriodIds == null && other.TimePeriodIds == null) || (TimePeriodIds?.Equals(other.TimePeriodIds) == true)) &&
+                ((DiscountId == null && other.DiscountId == null) || (DiscountId?.Equals(other.DiscountId) == true)) &&
+                ((MatchProductsId == null && other.MatchProductsId == null) || (MatchProductsId?.Equals(other.MatchProductsId) == true)) &&
+                ((ApplyProductsId == null && other.ApplyProductsId == null) || (ApplyProductsId?.Equals(other.ApplyProductsId) == true)) &&
+                ((ExcludeProductsId == null && other.ExcludeProductsId == null) || (ExcludeProductsId?.Equals(other.ExcludeProductsId) == true)) &&
+                ((ValidFromDate == null && other.ValidFromDate == null) || (ValidFromDate?.Equals(other.ValidFromDate) == true)) &&
+                ((ValidFromLocalTime == null && other.ValidFromLocalTime == null) || (ValidFromLocalTime?.Equals(other.ValidFromLocalTime) == true)) &&
+                ((ValidUntilDate == null && other.ValidUntilDate == null) || (ValidUntilDate?.Equals(other.ValidUntilDate) == true)) &&
+                ((ValidUntilLocalTime == null && other.ValidUntilLocalTime == null) || (ValidUntilLocalTime?.Equals(other.ValidUntilLocalTime) == true)) &&
+                ((ExcludeStrategy == null && other.ExcludeStrategy == null) || (ExcludeStrategy?.Equals(other.ExcludeStrategy) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -988778351;
+
+            if (Name != null)
+            {
+               hashCode += Name.GetHashCode();
+            }
+
+            if (TimePeriodIds != null)
+            {
+               hashCode += TimePeriodIds.GetHashCode();
+            }
+
+            if (DiscountId != null)
+            {
+               hashCode += DiscountId.GetHashCode();
+            }
+
+            if (MatchProductsId != null)
+            {
+               hashCode += MatchProductsId.GetHashCode();
+            }
+
+            if (ApplyProductsId != null)
+            {
+               hashCode += ApplyProductsId.GetHashCode();
+            }
+
+            if (ExcludeProductsId != null)
+            {
+               hashCode += ExcludeProductsId.GetHashCode();
+            }
+
+            if (ValidFromDate != null)
+            {
+               hashCode += ValidFromDate.GetHashCode();
+            }
+
+            if (ValidFromLocalTime != null)
+            {
+               hashCode += ValidFromLocalTime.GetHashCode();
+            }
+
+            if (ValidUntilDate != null)
+            {
+               hashCode += ValidUntilDate.GetHashCode();
+            }
+
+            if (ValidUntilLocalTime != null)
+            {
+               hashCode += ValidUntilLocalTime.GetHashCode();
+            }
+
+            if (ExcludeStrategy != null)
+            {
+               hashCode += ExcludeStrategy.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

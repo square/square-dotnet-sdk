@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -81,6 +82,90 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("team_member_ids")]
         public IList<string> TeamMemberIds { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"ShiftFilter : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"LocationIds = {(LocationIds == null ? "null" : $"[{ string.Join(", ", LocationIds)} ]")}");
+            toStringOutput.Add($"EmployeeIds = {(EmployeeIds == null ? "null" : $"[{ string.Join(", ", EmployeeIds)} ]")}");
+            toStringOutput.Add($"Status = {(Status == null ? "null" : Status.ToString())}");
+            toStringOutput.Add($"Start = {(Start == null ? "null" : Start.ToString())}");
+            toStringOutput.Add($"End = {(End == null ? "null" : End.ToString())}");
+            toStringOutput.Add($"Workday = {(Workday == null ? "null" : Workday.ToString())}");
+            toStringOutput.Add($"TeamMemberIds = {(TeamMemberIds == null ? "null" : $"[{ string.Join(", ", TeamMemberIds)} ]")}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is ShiftFilter other &&
+                ((LocationIds == null && other.LocationIds == null) || (LocationIds?.Equals(other.LocationIds) == true)) &&
+                ((EmployeeIds == null && other.EmployeeIds == null) || (EmployeeIds?.Equals(other.EmployeeIds) == true)) &&
+                ((Status == null && other.Status == null) || (Status?.Equals(other.Status) == true)) &&
+                ((Start == null && other.Start == null) || (Start?.Equals(other.Start) == true)) &&
+                ((End == null && other.End == null) || (End?.Equals(other.End) == true)) &&
+                ((Workday == null && other.Workday == null) || (Workday?.Equals(other.Workday) == true)) &&
+                ((TeamMemberIds == null && other.TeamMemberIds == null) || (TeamMemberIds?.Equals(other.TeamMemberIds) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 432854802;
+
+            if (LocationIds != null)
+            {
+               hashCode += LocationIds.GetHashCode();
+            }
+
+            if (EmployeeIds != null)
+            {
+               hashCode += EmployeeIds.GetHashCode();
+            }
+
+            if (Status != null)
+            {
+               hashCode += Status.GetHashCode();
+            }
+
+            if (Start != null)
+            {
+               hashCode += Start.GetHashCode();
+            }
+
+            if (End != null)
+            {
+               hashCode += End.GetHashCode();
+            }
+
+            if (Workday != null)
+            {
+               hashCode += Workday.GetHashCode();
+            }
+
+            if (TeamMemberIds != null)
+            {
+               hashCode += TeamMemberIds.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

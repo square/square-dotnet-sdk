@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -33,6 +34,55 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("break_type")]
         public Models.BreakType BreakType { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"CreateBreakTypeRequest : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"IdempotencyKey = {(IdempotencyKey == null ? "null" : IdempotencyKey == string.Empty ? "" : IdempotencyKey)}");
+            toStringOutput.Add($"BreakType = {(BreakType == null ? "null" : BreakType.ToString())}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is CreateBreakTypeRequest other &&
+                ((IdempotencyKey == null && other.IdempotencyKey == null) || (IdempotencyKey?.Equals(other.IdempotencyKey) == true)) &&
+                ((BreakType == null && other.BreakType == null) || (BreakType?.Equals(other.BreakType) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 441165331;
+
+            if (IdempotencyKey != null)
+            {
+               hashCode += IdempotencyKey.GetHashCode();
+            }
+
+            if (BreakType != null)
+            {
+               hashCode += BreakType.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

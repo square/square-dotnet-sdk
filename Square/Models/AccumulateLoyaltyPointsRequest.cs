@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -41,6 +42,62 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("location_id")]
         public string LocationId { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"AccumulateLoyaltyPointsRequest : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"AccumulatePoints = {(AccumulatePoints == null ? "null" : AccumulatePoints.ToString())}");
+            toStringOutput.Add($"IdempotencyKey = {(IdempotencyKey == null ? "null" : IdempotencyKey == string.Empty ? "" : IdempotencyKey)}");
+            toStringOutput.Add($"LocationId = {(LocationId == null ? "null" : LocationId == string.Empty ? "" : LocationId)}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is AccumulateLoyaltyPointsRequest other &&
+                ((AccumulatePoints == null && other.AccumulatePoints == null) || (AccumulatePoints?.Equals(other.AccumulatePoints) == true)) &&
+                ((IdempotencyKey == null && other.IdempotencyKey == null) || (IdempotencyKey?.Equals(other.IdempotencyKey) == true)) &&
+                ((LocationId == null && other.LocationId == null) || (LocationId?.Equals(other.LocationId) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -1421565193;
+
+            if (AccumulatePoints != null)
+            {
+               hashCode += AccumulatePoints.GetHashCode();
+            }
+
+            if (IdempotencyKey != null)
+            {
+               hashCode += IdempotencyKey.GetHashCode();
+            }
+
+            if (LocationId != null)
+            {
+               hashCode += LocationId.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

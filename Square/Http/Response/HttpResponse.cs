@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using Square.Utilities;
 
 namespace Square.Http.Response
 {
@@ -32,6 +33,13 @@ namespace Square.Http.Response
             this.StatusCode = statusCode;
             this.Headers = headers;
             this.RawBody = rawBody;
+        }
+
+        public override string ToString()
+        {
+            return $" StatusCode = {StatusCode}, " +
+                $" Headers = {ApiHelper.JsonSerialize(Headers)}, " +
+                $" RawBody = {RawBody}";
         }
     }
 }

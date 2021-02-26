@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -80,6 +81,97 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("type", NullValueHandling = NullValueHandling.Ignore)]
         public string Type { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"MeasurementUnit : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"CustomUnit = {(CustomUnit == null ? "null" : CustomUnit.ToString())}");
+            toStringOutput.Add($"AreaUnit = {(AreaUnit == null ? "null" : AreaUnit.ToString())}");
+            toStringOutput.Add($"LengthUnit = {(LengthUnit == null ? "null" : LengthUnit.ToString())}");
+            toStringOutput.Add($"VolumeUnit = {(VolumeUnit == null ? "null" : VolumeUnit.ToString())}");
+            toStringOutput.Add($"WeightUnit = {(WeightUnit == null ? "null" : WeightUnit.ToString())}");
+            toStringOutput.Add($"GenericUnit = {(GenericUnit == null ? "null" : GenericUnit.ToString())}");
+            toStringOutput.Add($"TimeUnit = {(TimeUnit == null ? "null" : TimeUnit.ToString())}");
+            toStringOutput.Add($"Type = {(Type == null ? "null" : Type.ToString())}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is MeasurementUnit other &&
+                ((CustomUnit == null && other.CustomUnit == null) || (CustomUnit?.Equals(other.CustomUnit) == true)) &&
+                ((AreaUnit == null && other.AreaUnit == null) || (AreaUnit?.Equals(other.AreaUnit) == true)) &&
+                ((LengthUnit == null && other.LengthUnit == null) || (LengthUnit?.Equals(other.LengthUnit) == true)) &&
+                ((VolumeUnit == null && other.VolumeUnit == null) || (VolumeUnit?.Equals(other.VolumeUnit) == true)) &&
+                ((WeightUnit == null && other.WeightUnit == null) || (WeightUnit?.Equals(other.WeightUnit) == true)) &&
+                ((GenericUnit == null && other.GenericUnit == null) || (GenericUnit?.Equals(other.GenericUnit) == true)) &&
+                ((TimeUnit == null && other.TimeUnit == null) || (TimeUnit?.Equals(other.TimeUnit) == true)) &&
+                ((Type == null && other.Type == null) || (Type?.Equals(other.Type) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -1167462471;
+
+            if (CustomUnit != null)
+            {
+               hashCode += CustomUnit.GetHashCode();
+            }
+
+            if (AreaUnit != null)
+            {
+               hashCode += AreaUnit.GetHashCode();
+            }
+
+            if (LengthUnit != null)
+            {
+               hashCode += LengthUnit.GetHashCode();
+            }
+
+            if (VolumeUnit != null)
+            {
+               hashCode += VolumeUnit.GetHashCode();
+            }
+
+            if (WeightUnit != null)
+            {
+               hashCode += WeightUnit.GetHashCode();
+            }
+
+            if (GenericUnit != null)
+            {
+               hashCode += GenericUnit.GetHashCode();
+            }
+
+            if (TimeUnit != null)
+            {
+               hashCode += TimeUnit.GetHashCode();
+            }
+
+            if (Type != null)
+            {
+               hashCode += Type.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

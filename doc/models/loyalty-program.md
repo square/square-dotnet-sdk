@@ -9,15 +9,15 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `Id` | `string` |  | The Square-assigned ID of the loyalty program. Updates to<br>the loyalty program do not modify the identifier.<br>**Constraints**: *Minimum Length*: `1`, *Maximum Length*: `36` |
-| `Status` | [`string`](/doc/models/loyalty-program-status.md) |  | Indicates whether the program is currently active. |
-| `RewardTiers` | [`IList<Models.LoyaltyProgramRewardTier>`](/doc/models/loyalty-program-reward-tier.md) |  | The list of rewards for buyers, sorted by ascending points. |
+| `Id` | `string` | Required | The Square-assigned ID of the loyalty program. Updates to<br>the loyalty program do not modify the identifier.<br>**Constraints**: *Minimum Length*: `1`, *Maximum Length*: `36` |
+| `Status` | [`string`](/doc/models/loyalty-program-status.md) | Required | Indicates whether the program is currently active. |
+| `RewardTiers` | [`IList<Models.LoyaltyProgramRewardTier>`](/doc/models/loyalty-program-reward-tier.md) | Required | The list of rewards for buyers, sorted by ascending points. |
 | `ExpirationPolicy` | [`Models.LoyaltyProgramExpirationPolicy`](/doc/models/loyalty-program-expiration-policy.md) | Optional | Describes when the loyalty program expires. |
-| `Terminology` | [`Models.LoyaltyProgramTerminology`](/doc/models/loyalty-program-terminology.md) |  | - |
-| `LocationIds` | `IList<string>` |  | The [locations](#type-Location) at which the program is active. |
-| `CreatedAt` | `string` |  | The timestamp when the program was created, in RFC 3339 format.<br>**Constraints**: *Minimum Length*: `1` |
-| `UpdatedAt` | `string` |  | The timestamp when the reward was last updated, in RFC 3339 format.<br>**Constraints**: *Minimum Length*: `1` |
-| `AccrualRules` | [`IList<Models.LoyaltyProgramAccrualRule>`](/doc/models/loyalty-program-accrual-rule.md) |  | Defines how buyers can earn loyalty points. |
+| `Terminology` | [`Models.LoyaltyProgramTerminology`](/doc/models/loyalty-program-terminology.md) | Required | - |
+| `LocationIds` | `IList<string>` | Required | The [locations](#type-Location) at which the program is active. |
+| `CreatedAt` | `string` | Required | The timestamp when the program was created, in RFC 3339 format.<br>**Constraints**: *Minimum Length*: `1` |
+| `UpdatedAt` | `string` | Required | The timestamp when the reward was last updated, in RFC 3339 format.<br>**Constraints**: *Minimum Length*: `1` |
+| `AccrualRules` | [`IList<Models.LoyaltyProgramAccrualRule>`](/doc/models/loyalty-program-accrual-rule.md) | Required | Defines how buyers can earn loyalty points. |
 
 ## Example (as JSON)
 

@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -35,6 +36,55 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
         public string Cursor { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"RetrieveInventoryChangesRequest : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"LocationIds = {(LocationIds == null ? "null" : LocationIds == string.Empty ? "" : LocationIds)}");
+            toStringOutput.Add($"Cursor = {(Cursor == null ? "null" : Cursor == string.Empty ? "" : Cursor)}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is RetrieveInventoryChangesRequest other &&
+                ((LocationIds == null && other.LocationIds == null) || (LocationIds?.Equals(other.LocationIds) == true)) &&
+                ((Cursor == null && other.Cursor == null) || (Cursor?.Equals(other.Cursor) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -624939636;
+
+            if (LocationIds != null)
+            {
+               hashCode += LocationIds.GetHashCode();
+            }
+
+            if (Cursor != null)
+            {
+               hashCode += Cursor.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -33,6 +34,55 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("attribute_values")]
         public IList<string> AttributeValues { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"CatalogQuerySet : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"AttributeName = {(AttributeName == null ? "null" : AttributeName == string.Empty ? "" : AttributeName)}");
+            toStringOutput.Add($"AttributeValues = {(AttributeValues == null ? "null" : $"[{ string.Join(", ", AttributeValues)} ]")}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is CatalogQuerySet other &&
+                ((AttributeName == null && other.AttributeName == null) || (AttributeName?.Equals(other.AttributeName) == true)) &&
+                ((AttributeValues == null && other.AttributeValues == null) || (AttributeValues?.Equals(other.AttributeValues) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 478444029;
+
+            if (AttributeName != null)
+            {
+               hashCode += AttributeName.GetHashCode();
+            }
+
+            if (AttributeValues != null)
+            {
+               hashCode += AttributeValues.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

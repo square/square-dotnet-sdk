@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -80,6 +81,97 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("surcharge_id", NullValueHandling = NullValueHandling.Ignore)]
         public string SurchargeId { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"V1PaymentSurcharge : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"Name = {(Name == null ? "null" : Name == string.Empty ? "" : Name)}");
+            toStringOutput.Add($"AppliedMoney = {(AppliedMoney == null ? "null" : AppliedMoney.ToString())}");
+            toStringOutput.Add($"Rate = {(Rate == null ? "null" : Rate == string.Empty ? "" : Rate)}");
+            toStringOutput.Add($"AmountMoney = {(AmountMoney == null ? "null" : AmountMoney.ToString())}");
+            toStringOutput.Add($"Type = {(Type == null ? "null" : Type.ToString())}");
+            toStringOutput.Add($"Taxable = {(Taxable == null ? "null" : Taxable.ToString())}");
+            toStringOutput.Add($"Taxes = {(Taxes == null ? "null" : $"[{ string.Join(", ", Taxes)} ]")}");
+            toStringOutput.Add($"SurchargeId = {(SurchargeId == null ? "null" : SurchargeId == string.Empty ? "" : SurchargeId)}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is V1PaymentSurcharge other &&
+                ((Name == null && other.Name == null) || (Name?.Equals(other.Name) == true)) &&
+                ((AppliedMoney == null && other.AppliedMoney == null) || (AppliedMoney?.Equals(other.AppliedMoney) == true)) &&
+                ((Rate == null && other.Rate == null) || (Rate?.Equals(other.Rate) == true)) &&
+                ((AmountMoney == null && other.AmountMoney == null) || (AmountMoney?.Equals(other.AmountMoney) == true)) &&
+                ((Type == null && other.Type == null) || (Type?.Equals(other.Type) == true)) &&
+                ((Taxable == null && other.Taxable == null) || (Taxable?.Equals(other.Taxable) == true)) &&
+                ((Taxes == null && other.Taxes == null) || (Taxes?.Equals(other.Taxes) == true)) &&
+                ((SurchargeId == null && other.SurchargeId == null) || (SurchargeId?.Equals(other.SurchargeId) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -446593569;
+
+            if (Name != null)
+            {
+               hashCode += Name.GetHashCode();
+            }
+
+            if (AppliedMoney != null)
+            {
+               hashCode += AppliedMoney.GetHashCode();
+            }
+
+            if (Rate != null)
+            {
+               hashCode += Rate.GetHashCode();
+            }
+
+            if (AmountMoney != null)
+            {
+               hashCode += AmountMoney.GetHashCode();
+            }
+
+            if (Type != null)
+            {
+               hashCode += Type.GetHashCode();
+            }
+
+            if (Taxable != null)
+            {
+               hashCode += Taxable.GetHashCode();
+            }
+
+            if (Taxes != null)
+            {
+               hashCode += Taxes.GetHashCode();
+            }
+
+            if (SurchargeId != null)
+            {
+               hashCode += SurchargeId.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

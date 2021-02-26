@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -66,6 +67,76 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("total_price_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Money TotalPriceMoney { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"OrderLineItemModifier : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"Uid = {(Uid == null ? "null" : Uid == string.Empty ? "" : Uid)}");
+            toStringOutput.Add($"CatalogObjectId = {(CatalogObjectId == null ? "null" : CatalogObjectId == string.Empty ? "" : CatalogObjectId)}");
+            toStringOutput.Add($"Name = {(Name == null ? "null" : Name == string.Empty ? "" : Name)}");
+            toStringOutput.Add($"BasePriceMoney = {(BasePriceMoney == null ? "null" : BasePriceMoney.ToString())}");
+            toStringOutput.Add($"TotalPriceMoney = {(TotalPriceMoney == null ? "null" : TotalPriceMoney.ToString())}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is OrderLineItemModifier other &&
+                ((Uid == null && other.Uid == null) || (Uid?.Equals(other.Uid) == true)) &&
+                ((CatalogObjectId == null && other.CatalogObjectId == null) || (CatalogObjectId?.Equals(other.CatalogObjectId) == true)) &&
+                ((Name == null && other.Name == null) || (Name?.Equals(other.Name) == true)) &&
+                ((BasePriceMoney == null && other.BasePriceMoney == null) || (BasePriceMoney?.Equals(other.BasePriceMoney) == true)) &&
+                ((TotalPriceMoney == null && other.TotalPriceMoney == null) || (TotalPriceMoney?.Equals(other.TotalPriceMoney) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 141089450;
+
+            if (Uid != null)
+            {
+               hashCode += Uid.GetHashCode();
+            }
+
+            if (CatalogObjectId != null)
+            {
+               hashCode += CatalogObjectId.GetHashCode();
+            }
+
+            if (Name != null)
+            {
+               hashCode += Name.GetHashCode();
+            }
+
+            if (BasePriceMoney != null)
+            {
+               hashCode += BasePriceMoney.GetHashCode();
+            }
+
+            if (TotalPriceMoney != null)
+            {
+               hashCode += TotalPriceMoney.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

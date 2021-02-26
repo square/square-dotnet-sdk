@@ -9,10 +9,10 @@ Represents a phone number.
 
 ## Fields
 
-| Name | Type | Description |
-|  --- | --- | --- |
-| `CallingCode` | `string` | The phone number's international calling code. For US phone numbers, this value is +1. |
-| `Number` | `string` | The phone number. |
+| Name | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `CallingCode` | `string` | Required | The phone number's international calling code. For US phone numbers, this value is +1. |
+| `Number` | `string` | Required | The phone number. |
 
 ## Example (as JSON)
 

@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -53,6 +54,69 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("hourly_rate", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Money HourlyRate { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"TeamMemberWage : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"Id = {(Id == null ? "null" : Id == string.Empty ? "" : Id)}");
+            toStringOutput.Add($"TeamMemberId = {(TeamMemberId == null ? "null" : TeamMemberId == string.Empty ? "" : TeamMemberId)}");
+            toStringOutput.Add($"Title = {(Title == null ? "null" : Title == string.Empty ? "" : Title)}");
+            toStringOutput.Add($"HourlyRate = {(HourlyRate == null ? "null" : HourlyRate.ToString())}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is TeamMemberWage other &&
+                ((Id == null && other.Id == null) || (Id?.Equals(other.Id) == true)) &&
+                ((TeamMemberId == null && other.TeamMemberId == null) || (TeamMemberId?.Equals(other.TeamMemberId) == true)) &&
+                ((Title == null && other.Title == null) || (Title?.Equals(other.Title) == true)) &&
+                ((HourlyRate == null && other.HourlyRate == null) || (HourlyRate?.Equals(other.HourlyRate) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 2085057343;
+
+            if (Id != null)
+            {
+               hashCode += Id.GetHashCode();
+            }
+
+            if (TeamMemberId != null)
+            {
+               hashCode += TeamMemberId.GetHashCode();
+            }
+
+            if (Title != null)
+            {
+               hashCode += Title.GetHashCode();
+            }
+
+            if (HourlyRate != null)
+            {
+               hashCode += HourlyRate.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

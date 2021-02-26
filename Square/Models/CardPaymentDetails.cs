@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -27,6 +28,7 @@ namespace Square.Models
             string verificationResults = null,
             string statementDescription = null,
             Models.DeviceDetails deviceDetails = null,
+            Models.CardPaymentTimeline cardPaymentTimeline = null,
             bool? refundRequiresCardPresence = null,
             IList<Models.Error> errors = null)
         {
@@ -43,6 +45,7 @@ namespace Square.Models
             VerificationResults = verificationResults;
             StatementDescription = statementDescription;
             DeviceDetails = deviceDetails;
+            CardPaymentTimeline = cardPaymentTimeline;
             RefundRequiresCardPresence = refundRequiresCardPresence;
             Errors = errors;
         }
@@ -136,6 +139,12 @@ namespace Square.Models
         public Models.DeviceDetails DeviceDetails { get; }
 
         /// <summary>
+        /// The timeline for card payments.
+        /// </summary>
+        [JsonProperty("card_payment_timeline", NullValueHandling = NullValueHandling.Ignore)]
+        public Models.CardPaymentTimeline CardPaymentTimeline { get; }
+
+        /// <summary>
         /// Whether the card must be physically present for the payment to
         /// be refunded.  If set to `true`, the card must be present.
         /// </summary>
@@ -147,6 +156,153 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("errors", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.Error> Errors { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"CardPaymentDetails : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"Status = {(Status == null ? "null" : Status == string.Empty ? "" : Status)}");
+            toStringOutput.Add($"Card = {(Card == null ? "null" : Card.ToString())}");
+            toStringOutput.Add($"EntryMethod = {(EntryMethod == null ? "null" : EntryMethod == string.Empty ? "" : EntryMethod)}");
+            toStringOutput.Add($"CvvStatus = {(CvvStatus == null ? "null" : CvvStatus == string.Empty ? "" : CvvStatus)}");
+            toStringOutput.Add($"AvsStatus = {(AvsStatus == null ? "null" : AvsStatus == string.Empty ? "" : AvsStatus)}");
+            toStringOutput.Add($"AuthResultCode = {(AuthResultCode == null ? "null" : AuthResultCode == string.Empty ? "" : AuthResultCode)}");
+            toStringOutput.Add($"ApplicationIdentifier = {(ApplicationIdentifier == null ? "null" : ApplicationIdentifier == string.Empty ? "" : ApplicationIdentifier)}");
+            toStringOutput.Add($"ApplicationName = {(ApplicationName == null ? "null" : ApplicationName == string.Empty ? "" : ApplicationName)}");
+            toStringOutput.Add($"ApplicationCryptogram = {(ApplicationCryptogram == null ? "null" : ApplicationCryptogram == string.Empty ? "" : ApplicationCryptogram)}");
+            toStringOutput.Add($"VerificationMethod = {(VerificationMethod == null ? "null" : VerificationMethod == string.Empty ? "" : VerificationMethod)}");
+            toStringOutput.Add($"VerificationResults = {(VerificationResults == null ? "null" : VerificationResults == string.Empty ? "" : VerificationResults)}");
+            toStringOutput.Add($"StatementDescription = {(StatementDescription == null ? "null" : StatementDescription == string.Empty ? "" : StatementDescription)}");
+            toStringOutput.Add($"DeviceDetails = {(DeviceDetails == null ? "null" : DeviceDetails.ToString())}");
+            toStringOutput.Add($"CardPaymentTimeline = {(CardPaymentTimeline == null ? "null" : CardPaymentTimeline.ToString())}");
+            toStringOutput.Add($"RefundRequiresCardPresence = {(RefundRequiresCardPresence == null ? "null" : RefundRequiresCardPresence.ToString())}");
+            toStringOutput.Add($"Errors = {(Errors == null ? "null" : $"[{ string.Join(", ", Errors)} ]")}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is CardPaymentDetails other &&
+                ((Status == null && other.Status == null) || (Status?.Equals(other.Status) == true)) &&
+                ((Card == null && other.Card == null) || (Card?.Equals(other.Card) == true)) &&
+                ((EntryMethod == null && other.EntryMethod == null) || (EntryMethod?.Equals(other.EntryMethod) == true)) &&
+                ((CvvStatus == null && other.CvvStatus == null) || (CvvStatus?.Equals(other.CvvStatus) == true)) &&
+                ((AvsStatus == null && other.AvsStatus == null) || (AvsStatus?.Equals(other.AvsStatus) == true)) &&
+                ((AuthResultCode == null && other.AuthResultCode == null) || (AuthResultCode?.Equals(other.AuthResultCode) == true)) &&
+                ((ApplicationIdentifier == null && other.ApplicationIdentifier == null) || (ApplicationIdentifier?.Equals(other.ApplicationIdentifier) == true)) &&
+                ((ApplicationName == null && other.ApplicationName == null) || (ApplicationName?.Equals(other.ApplicationName) == true)) &&
+                ((ApplicationCryptogram == null && other.ApplicationCryptogram == null) || (ApplicationCryptogram?.Equals(other.ApplicationCryptogram) == true)) &&
+                ((VerificationMethod == null && other.VerificationMethod == null) || (VerificationMethod?.Equals(other.VerificationMethod) == true)) &&
+                ((VerificationResults == null && other.VerificationResults == null) || (VerificationResults?.Equals(other.VerificationResults) == true)) &&
+                ((StatementDescription == null && other.StatementDescription == null) || (StatementDescription?.Equals(other.StatementDescription) == true)) &&
+                ((DeviceDetails == null && other.DeviceDetails == null) || (DeviceDetails?.Equals(other.DeviceDetails) == true)) &&
+                ((CardPaymentTimeline == null && other.CardPaymentTimeline == null) || (CardPaymentTimeline?.Equals(other.CardPaymentTimeline) == true)) &&
+                ((RefundRequiresCardPresence == null && other.RefundRequiresCardPresence == null) || (RefundRequiresCardPresence?.Equals(other.RefundRequiresCardPresence) == true)) &&
+                ((Errors == null && other.Errors == null) || (Errors?.Equals(other.Errors) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 1465447186;
+
+            if (Status != null)
+            {
+               hashCode += Status.GetHashCode();
+            }
+
+            if (Card != null)
+            {
+               hashCode += Card.GetHashCode();
+            }
+
+            if (EntryMethod != null)
+            {
+               hashCode += EntryMethod.GetHashCode();
+            }
+
+            if (CvvStatus != null)
+            {
+               hashCode += CvvStatus.GetHashCode();
+            }
+
+            if (AvsStatus != null)
+            {
+               hashCode += AvsStatus.GetHashCode();
+            }
+
+            if (AuthResultCode != null)
+            {
+               hashCode += AuthResultCode.GetHashCode();
+            }
+
+            if (ApplicationIdentifier != null)
+            {
+               hashCode += ApplicationIdentifier.GetHashCode();
+            }
+
+            if (ApplicationName != null)
+            {
+               hashCode += ApplicationName.GetHashCode();
+            }
+
+            if (ApplicationCryptogram != null)
+            {
+               hashCode += ApplicationCryptogram.GetHashCode();
+            }
+
+            if (VerificationMethod != null)
+            {
+               hashCode += VerificationMethod.GetHashCode();
+            }
+
+            if (VerificationResults != null)
+            {
+               hashCode += VerificationResults.GetHashCode();
+            }
+
+            if (StatementDescription != null)
+            {
+               hashCode += StatementDescription.GetHashCode();
+            }
+
+            if (DeviceDetails != null)
+            {
+               hashCode += DeviceDetails.GetHashCode();
+            }
+
+            if (CardPaymentTimeline != null)
+            {
+               hashCode += CardPaymentTimeline.GetHashCode();
+            }
+
+            if (RefundRequiresCardPresence != null)
+            {
+               hashCode += RefundRequiresCardPresence.GetHashCode();
+            }
+
+            if (Errors != null)
+            {
+               hashCode += Errors.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {
@@ -164,6 +320,7 @@ namespace Square.Models
                 .VerificationResults(VerificationResults)
                 .StatementDescription(StatementDescription)
                 .DeviceDetails(DeviceDetails)
+                .CardPaymentTimeline(CardPaymentTimeline)
                 .RefundRequiresCardPresence(RefundRequiresCardPresence)
                 .Errors(Errors);
             return builder;
@@ -184,6 +341,7 @@ namespace Square.Models
             private string verificationResults;
             private string statementDescription;
             private Models.DeviceDetails deviceDetails;
+            private Models.CardPaymentTimeline cardPaymentTimeline;
             private bool? refundRequiresCardPresence;
             private IList<Models.Error> errors;
 
@@ -267,6 +425,12 @@ namespace Square.Models
                 return this;
             }
 
+            public Builder CardPaymentTimeline(Models.CardPaymentTimeline cardPaymentTimeline)
+            {
+                this.cardPaymentTimeline = cardPaymentTimeline;
+                return this;
+            }
+
             public Builder RefundRequiresCardPresence(bool? refundRequiresCardPresence)
             {
                 this.refundRequiresCardPresence = refundRequiresCardPresence;
@@ -294,6 +458,7 @@ namespace Square.Models
                     verificationResults,
                     statementDescription,
                     deviceDetails,
+                    cardPaymentTimeline,
                     refundRequiresCardPresence,
                     errors);
             }

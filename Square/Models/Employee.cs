@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -98,6 +99,111 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("updated_at", NullValueHandling = NullValueHandling.Ignore)]
         public string UpdatedAt { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"Employee : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"Id = {(Id == null ? "null" : Id == string.Empty ? "" : Id)}");
+            toStringOutput.Add($"FirstName = {(FirstName == null ? "null" : FirstName == string.Empty ? "" : FirstName)}");
+            toStringOutput.Add($"LastName = {(LastName == null ? "null" : LastName == string.Empty ? "" : LastName)}");
+            toStringOutput.Add($"Email = {(Email == null ? "null" : Email == string.Empty ? "" : Email)}");
+            toStringOutput.Add($"PhoneNumber = {(PhoneNumber == null ? "null" : PhoneNumber == string.Empty ? "" : PhoneNumber)}");
+            toStringOutput.Add($"LocationIds = {(LocationIds == null ? "null" : $"[{ string.Join(", ", LocationIds)} ]")}");
+            toStringOutput.Add($"Status = {(Status == null ? "null" : Status.ToString())}");
+            toStringOutput.Add($"IsOwner = {(IsOwner == null ? "null" : IsOwner.ToString())}");
+            toStringOutput.Add($"CreatedAt = {(CreatedAt == null ? "null" : CreatedAt == string.Empty ? "" : CreatedAt)}");
+            toStringOutput.Add($"UpdatedAt = {(UpdatedAt == null ? "null" : UpdatedAt == string.Empty ? "" : UpdatedAt)}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is Employee other &&
+                ((Id == null && other.Id == null) || (Id?.Equals(other.Id) == true)) &&
+                ((FirstName == null && other.FirstName == null) || (FirstName?.Equals(other.FirstName) == true)) &&
+                ((LastName == null && other.LastName == null) || (LastName?.Equals(other.LastName) == true)) &&
+                ((Email == null && other.Email == null) || (Email?.Equals(other.Email) == true)) &&
+                ((PhoneNumber == null && other.PhoneNumber == null) || (PhoneNumber?.Equals(other.PhoneNumber) == true)) &&
+                ((LocationIds == null && other.LocationIds == null) || (LocationIds?.Equals(other.LocationIds) == true)) &&
+                ((Status == null && other.Status == null) || (Status?.Equals(other.Status) == true)) &&
+                ((IsOwner == null && other.IsOwner == null) || (IsOwner?.Equals(other.IsOwner) == true)) &&
+                ((CreatedAt == null && other.CreatedAt == null) || (CreatedAt?.Equals(other.CreatedAt) == true)) &&
+                ((UpdatedAt == null && other.UpdatedAt == null) || (UpdatedAt?.Equals(other.UpdatedAt) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -1607883077;
+
+            if (Id != null)
+            {
+               hashCode += Id.GetHashCode();
+            }
+
+            if (FirstName != null)
+            {
+               hashCode += FirstName.GetHashCode();
+            }
+
+            if (LastName != null)
+            {
+               hashCode += LastName.GetHashCode();
+            }
+
+            if (Email != null)
+            {
+               hashCode += Email.GetHashCode();
+            }
+
+            if (PhoneNumber != null)
+            {
+               hashCode += PhoneNumber.GetHashCode();
+            }
+
+            if (LocationIds != null)
+            {
+               hashCode += LocationIds.GetHashCode();
+            }
+
+            if (Status != null)
+            {
+               hashCode += Status.GetHashCode();
+            }
+
+            if (IsOwner != null)
+            {
+               hashCode += IsOwner.GetHashCode();
+            }
+
+            if (CreatedAt != null)
+            {
+               hashCode += CreatedAt.GetHashCode();
+            }
+
+            if (UpdatedAt != null)
+            {
+               hashCode += UpdatedAt.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

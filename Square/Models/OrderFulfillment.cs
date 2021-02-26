@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -76,6 +77,83 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("shipment_details", NullValueHandling = NullValueHandling.Ignore)]
         public Models.OrderFulfillmentShipmentDetails ShipmentDetails { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"OrderFulfillment : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"Uid = {(Uid == null ? "null" : Uid == string.Empty ? "" : Uid)}");
+            toStringOutput.Add($"Type = {(Type == null ? "null" : Type.ToString())}");
+            toStringOutput.Add($"State = {(State == null ? "null" : State.ToString())}");
+            toStringOutput.Add($"Metadata = {(Metadata == null ? "null" : Metadata.ToString())}");
+            toStringOutput.Add($"PickupDetails = {(PickupDetails == null ? "null" : PickupDetails.ToString())}");
+            toStringOutput.Add($"ShipmentDetails = {(ShipmentDetails == null ? "null" : ShipmentDetails.ToString())}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is OrderFulfillment other &&
+                ((Uid == null && other.Uid == null) || (Uid?.Equals(other.Uid) == true)) &&
+                ((Type == null && other.Type == null) || (Type?.Equals(other.Type) == true)) &&
+                ((State == null && other.State == null) || (State?.Equals(other.State) == true)) &&
+                ((Metadata == null && other.Metadata == null) || (Metadata?.Equals(other.Metadata) == true)) &&
+                ((PickupDetails == null && other.PickupDetails == null) || (PickupDetails?.Equals(other.PickupDetails) == true)) &&
+                ((ShipmentDetails == null && other.ShipmentDetails == null) || (ShipmentDetails?.Equals(other.ShipmentDetails) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -1081474364;
+
+            if (Uid != null)
+            {
+               hashCode += Uid.GetHashCode();
+            }
+
+            if (Type != null)
+            {
+               hashCode += Type.GetHashCode();
+            }
+
+            if (State != null)
+            {
+               hashCode += State.GetHashCode();
+            }
+
+            if (Metadata != null)
+            {
+               hashCode += Metadata.GetHashCode();
+            }
+
+            if (PickupDetails != null)
+            {
+               hashCode += PickupDetails.GetHashCode();
+            }
+
+            if (ShipmentDetails != null)
+            {
+               hashCode += ShipmentDetails.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

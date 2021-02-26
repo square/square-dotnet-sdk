@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -26,6 +27,44 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("version")]
         public int Version { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"CancelInvoiceRequest : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"Version = {Version}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is CancelInvoiceRequest other &&
+                Version.Equals(other.Version);
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 1350501489;
+            hashCode += Version.GetHashCode();
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

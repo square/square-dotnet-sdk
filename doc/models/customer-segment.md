@@ -14,7 +14,7 @@ Segments (also known as Smart Groups) are defined and created within Customer Di
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `Id` | `string` | Optional | Unique Square-generated ID for the segment.<br>**Constraints**: *Maximum Length*: `255` |
-| `Name` | `string` |  | Name of the segment. |
+| `Name` | `string` | Required | Name of the segment. |
 | `CreatedAt` | `string` | Optional | The timestamp when the segment was created, in RFC 3339 format. |
 | `UpdatedAt` | `string` | Optional | The timestamp when the segment was last updated, in RFC 3339 format. |
 

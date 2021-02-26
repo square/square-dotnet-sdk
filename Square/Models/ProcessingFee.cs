@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -45,6 +46,62 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("amount_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Money AmountMoney { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"ProcessingFee : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"EffectiveAt = {(EffectiveAt == null ? "null" : EffectiveAt == string.Empty ? "" : EffectiveAt)}");
+            toStringOutput.Add($"Type = {(Type == null ? "null" : Type == string.Empty ? "" : Type)}");
+            toStringOutput.Add($"AmountMoney = {(AmountMoney == null ? "null" : AmountMoney.ToString())}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is ProcessingFee other &&
+                ((EffectiveAt == null && other.EffectiveAt == null) || (EffectiveAt?.Equals(other.EffectiveAt) == true)) &&
+                ((Type == null && other.Type == null) || (Type?.Equals(other.Type) == true)) &&
+                ((AmountMoney == null && other.AmountMoney == null) || (AmountMoney?.Equals(other.AmountMoney) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 1083651961;
+
+            if (EffectiveAt != null)
+            {
+               hashCode += EffectiveAt.GetHashCode();
+            }
+
+            if (Type != null)
+            {
+               hashCode += Type.GetHashCode();
+            }
+
+            if (AmountMoney != null)
+            {
+               hashCode += AmountMoney.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

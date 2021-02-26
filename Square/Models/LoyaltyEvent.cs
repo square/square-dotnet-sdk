@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -120,6 +121,132 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("other_event", NullValueHandling = NullValueHandling.Ignore)]
         public Models.LoyaltyEventOther OtherEvent { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"LoyaltyEvent : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"Id = {(Id == null ? "null" : Id == string.Empty ? "" : Id)}");
+            toStringOutput.Add($"Type = {(Type == null ? "null" : Type.ToString())}");
+            toStringOutput.Add($"CreatedAt = {(CreatedAt == null ? "null" : CreatedAt == string.Empty ? "" : CreatedAt)}");
+            toStringOutput.Add($"AccumulatePoints = {(AccumulatePoints == null ? "null" : AccumulatePoints.ToString())}");
+            toStringOutput.Add($"CreateReward = {(CreateReward == null ? "null" : CreateReward.ToString())}");
+            toStringOutput.Add($"RedeemReward = {(RedeemReward == null ? "null" : RedeemReward.ToString())}");
+            toStringOutput.Add($"DeleteReward = {(DeleteReward == null ? "null" : DeleteReward.ToString())}");
+            toStringOutput.Add($"AdjustPoints = {(AdjustPoints == null ? "null" : AdjustPoints.ToString())}");
+            toStringOutput.Add($"LoyaltyAccountId = {(LoyaltyAccountId == null ? "null" : LoyaltyAccountId == string.Empty ? "" : LoyaltyAccountId)}");
+            toStringOutput.Add($"LocationId = {(LocationId == null ? "null" : LocationId == string.Empty ? "" : LocationId)}");
+            toStringOutput.Add($"Source = {(Source == null ? "null" : Source.ToString())}");
+            toStringOutput.Add($"ExpirePoints = {(ExpirePoints == null ? "null" : ExpirePoints.ToString())}");
+            toStringOutput.Add($"OtherEvent = {(OtherEvent == null ? "null" : OtherEvent.ToString())}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is LoyaltyEvent other &&
+                ((Id == null && other.Id == null) || (Id?.Equals(other.Id) == true)) &&
+                ((Type == null && other.Type == null) || (Type?.Equals(other.Type) == true)) &&
+                ((CreatedAt == null && other.CreatedAt == null) || (CreatedAt?.Equals(other.CreatedAt) == true)) &&
+                ((AccumulatePoints == null && other.AccumulatePoints == null) || (AccumulatePoints?.Equals(other.AccumulatePoints) == true)) &&
+                ((CreateReward == null && other.CreateReward == null) || (CreateReward?.Equals(other.CreateReward) == true)) &&
+                ((RedeemReward == null && other.RedeemReward == null) || (RedeemReward?.Equals(other.RedeemReward) == true)) &&
+                ((DeleteReward == null && other.DeleteReward == null) || (DeleteReward?.Equals(other.DeleteReward) == true)) &&
+                ((AdjustPoints == null && other.AdjustPoints == null) || (AdjustPoints?.Equals(other.AdjustPoints) == true)) &&
+                ((LoyaltyAccountId == null && other.LoyaltyAccountId == null) || (LoyaltyAccountId?.Equals(other.LoyaltyAccountId) == true)) &&
+                ((LocationId == null && other.LocationId == null) || (LocationId?.Equals(other.LocationId) == true)) &&
+                ((Source == null && other.Source == null) || (Source?.Equals(other.Source) == true)) &&
+                ((ExpirePoints == null && other.ExpirePoints == null) || (ExpirePoints?.Equals(other.ExpirePoints) == true)) &&
+                ((OtherEvent == null && other.OtherEvent == null) || (OtherEvent?.Equals(other.OtherEvent) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 1490090338;
+
+            if (Id != null)
+            {
+               hashCode += Id.GetHashCode();
+            }
+
+            if (Type != null)
+            {
+               hashCode += Type.GetHashCode();
+            }
+
+            if (CreatedAt != null)
+            {
+               hashCode += CreatedAt.GetHashCode();
+            }
+
+            if (AccumulatePoints != null)
+            {
+               hashCode += AccumulatePoints.GetHashCode();
+            }
+
+            if (CreateReward != null)
+            {
+               hashCode += CreateReward.GetHashCode();
+            }
+
+            if (RedeemReward != null)
+            {
+               hashCode += RedeemReward.GetHashCode();
+            }
+
+            if (DeleteReward != null)
+            {
+               hashCode += DeleteReward.GetHashCode();
+            }
+
+            if (AdjustPoints != null)
+            {
+               hashCode += AdjustPoints.GetHashCode();
+            }
+
+            if (LoyaltyAccountId != null)
+            {
+               hashCode += LoyaltyAccountId.GetHashCode();
+            }
+
+            if (LocationId != null)
+            {
+               hashCode += LocationId.GetHashCode();
+            }
+
+            if (Source != null)
+            {
+               hashCode += Source.GetHashCode();
+            }
+
+            if (ExpirePoints != null)
+            {
+               hashCode += ExpirePoints.GetHashCode();
+            }
+
+            if (OtherEvent != null)
+            {
+               hashCode += OtherEvent.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

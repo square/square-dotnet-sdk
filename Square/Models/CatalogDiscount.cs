@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -81,6 +82,90 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("modify_tax_basis", NullValueHandling = NullValueHandling.Ignore)]
         public string ModifyTaxBasis { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"CatalogDiscount : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"Name = {(Name == null ? "null" : Name == string.Empty ? "" : Name)}");
+            toStringOutput.Add($"DiscountType = {(DiscountType == null ? "null" : DiscountType.ToString())}");
+            toStringOutput.Add($"Percentage = {(Percentage == null ? "null" : Percentage == string.Empty ? "" : Percentage)}");
+            toStringOutput.Add($"AmountMoney = {(AmountMoney == null ? "null" : AmountMoney.ToString())}");
+            toStringOutput.Add($"PinRequired = {(PinRequired == null ? "null" : PinRequired.ToString())}");
+            toStringOutput.Add($"LabelColor = {(LabelColor == null ? "null" : LabelColor == string.Empty ? "" : LabelColor)}");
+            toStringOutput.Add($"ModifyTaxBasis = {(ModifyTaxBasis == null ? "null" : ModifyTaxBasis.ToString())}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is CatalogDiscount other &&
+                ((Name == null && other.Name == null) || (Name?.Equals(other.Name) == true)) &&
+                ((DiscountType == null && other.DiscountType == null) || (DiscountType?.Equals(other.DiscountType) == true)) &&
+                ((Percentage == null && other.Percentage == null) || (Percentage?.Equals(other.Percentage) == true)) &&
+                ((AmountMoney == null && other.AmountMoney == null) || (AmountMoney?.Equals(other.AmountMoney) == true)) &&
+                ((PinRequired == null && other.PinRequired == null) || (PinRequired?.Equals(other.PinRequired) == true)) &&
+                ((LabelColor == null && other.LabelColor == null) || (LabelColor?.Equals(other.LabelColor) == true)) &&
+                ((ModifyTaxBasis == null && other.ModifyTaxBasis == null) || (ModifyTaxBasis?.Equals(other.ModifyTaxBasis) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -419430818;
+
+            if (Name != null)
+            {
+               hashCode += Name.GetHashCode();
+            }
+
+            if (DiscountType != null)
+            {
+               hashCode += DiscountType.GetHashCode();
+            }
+
+            if (Percentage != null)
+            {
+               hashCode += Percentage.GetHashCode();
+            }
+
+            if (AmountMoney != null)
+            {
+               hashCode += AmountMoney.GetHashCode();
+            }
+
+            if (PinRequired != null)
+            {
+               hashCode += PinRequired.GetHashCode();
+            }
+
+            if (LabelColor != null)
+            {
+               hashCode += LabelColor.GetHashCode();
+            }
+
+            if (ModifyTaxBasis != null)
+            {
+               hashCode += ModifyTaxBasis.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

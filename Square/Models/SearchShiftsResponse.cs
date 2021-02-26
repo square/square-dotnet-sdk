@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -44,6 +45,68 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("errors", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.Error> Errors { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"SearchShiftsResponse : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"Shifts = {(Shifts == null ? "null" : $"[{ string.Join(", ", Shifts)} ]")}");
+            toStringOutput.Add($"Cursor = {(Cursor == null ? "null" : Cursor == string.Empty ? "" : Cursor)}");
+            toStringOutput.Add($"Errors = {(Errors == null ? "null" : $"[{ string.Join(", ", Errors)} ]")}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is SearchShiftsResponse other &&
+                ((Context == null && other.Context == null) || (Context?.Equals(other.Context) == true)) &&
+                ((Shifts == null && other.Shifts == null) || (Shifts?.Equals(other.Shifts) == true)) &&
+                ((Cursor == null && other.Cursor == null) || (Cursor?.Equals(other.Cursor) == true)) &&
+                ((Errors == null && other.Errors == null) || (Errors?.Equals(other.Errors) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -614202023;
+
+            if (Context != null)
+            {
+                hashCode += Context.GetHashCode();
+            }
+
+            if (Shifts != null)
+            {
+               hashCode += Shifts.GetHashCode();
+            }
+
+            if (Cursor != null)
+            {
+               hashCode += Cursor.GetHashCode();
+            }
+
+            if (Errors != null)
+            {
+               hashCode += Errors.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

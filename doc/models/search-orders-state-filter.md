@@ -9,9 +9,9 @@ Filter by current Order `state`.
 
 ## Fields
 
-| Name | Type | Description |
-|  --- | --- | --- |
-| `States` | [`IList<string>`](/doc/models/order-state.md) | States to filter for.<br>See [OrderState](#type-orderstate) for possible values |
+| Name | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `States` | [`IList<string>`](/doc/models/order-state.md) | Required | States to filter for.<br>See [OrderState](#type-orderstate) for possible values |
 
 ## Example (as JSON)
 

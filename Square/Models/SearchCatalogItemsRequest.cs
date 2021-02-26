@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -93,6 +94,104 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("custom_attribute_filters", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.CustomAttributeFilter> CustomAttributeFilters { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"SearchCatalogItemsRequest : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"TextFilter = {(TextFilter == null ? "null" : TextFilter == string.Empty ? "" : TextFilter)}");
+            toStringOutput.Add($"CategoryIds = {(CategoryIds == null ? "null" : $"[{ string.Join(", ", CategoryIds)} ]")}");
+            toStringOutput.Add($"StockLevels = {(StockLevels == null ? "null" : $"[{ string.Join(", ", StockLevels)} ]")}");
+            toStringOutput.Add($"EnabledLocationIds = {(EnabledLocationIds == null ? "null" : $"[{ string.Join(", ", EnabledLocationIds)} ]")}");
+            toStringOutput.Add($"Cursor = {(Cursor == null ? "null" : Cursor == string.Empty ? "" : Cursor)}");
+            toStringOutput.Add($"Limit = {(Limit == null ? "null" : Limit.ToString())}");
+            toStringOutput.Add($"SortOrder = {(SortOrder == null ? "null" : SortOrder.ToString())}");
+            toStringOutput.Add($"ProductTypes = {(ProductTypes == null ? "null" : $"[{ string.Join(", ", ProductTypes)} ]")}");
+            toStringOutput.Add($"CustomAttributeFilters = {(CustomAttributeFilters == null ? "null" : $"[{ string.Join(", ", CustomAttributeFilters)} ]")}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is SearchCatalogItemsRequest other &&
+                ((TextFilter == null && other.TextFilter == null) || (TextFilter?.Equals(other.TextFilter) == true)) &&
+                ((CategoryIds == null && other.CategoryIds == null) || (CategoryIds?.Equals(other.CategoryIds) == true)) &&
+                ((StockLevels == null && other.StockLevels == null) || (StockLevels?.Equals(other.StockLevels) == true)) &&
+                ((EnabledLocationIds == null && other.EnabledLocationIds == null) || (EnabledLocationIds?.Equals(other.EnabledLocationIds) == true)) &&
+                ((Cursor == null && other.Cursor == null) || (Cursor?.Equals(other.Cursor) == true)) &&
+                ((Limit == null && other.Limit == null) || (Limit?.Equals(other.Limit) == true)) &&
+                ((SortOrder == null && other.SortOrder == null) || (SortOrder?.Equals(other.SortOrder) == true)) &&
+                ((ProductTypes == null && other.ProductTypes == null) || (ProductTypes?.Equals(other.ProductTypes) == true)) &&
+                ((CustomAttributeFilters == null && other.CustomAttributeFilters == null) || (CustomAttributeFilters?.Equals(other.CustomAttributeFilters) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 737510073;
+
+            if (TextFilter != null)
+            {
+               hashCode += TextFilter.GetHashCode();
+            }
+
+            if (CategoryIds != null)
+            {
+               hashCode += CategoryIds.GetHashCode();
+            }
+
+            if (StockLevels != null)
+            {
+               hashCode += StockLevels.GetHashCode();
+            }
+
+            if (EnabledLocationIds != null)
+            {
+               hashCode += EnabledLocationIds.GetHashCode();
+            }
+
+            if (Cursor != null)
+            {
+               hashCode += Cursor.GetHashCode();
+            }
+
+            if (Limit != null)
+            {
+               hashCode += Limit.GetHashCode();
+            }
+
+            if (SortOrder != null)
+            {
+               hashCode += SortOrder.GetHashCode();
+            }
+
+            if (ProductTypes != null)
+            {
+               hashCode += ProductTypes.GetHashCode();
+            }
+
+            if (CustomAttributeFilters != null)
+            {
+               hashCode += CustomAttributeFilters.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

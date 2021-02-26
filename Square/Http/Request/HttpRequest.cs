@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using Square.Utilities;
 
 namespace Square.Http.Request
 {
@@ -137,6 +138,18 @@ namespace Square.Http.Request
             {
                 QueryParameters = QueryParameters.Concat(queryParamaters).ToDictionary(x => x.Key, x => x.Value);
             }
+        }
+
+        public override string ToString()
+        {
+            return $" HttpMethod = {HttpMethod}, " +
+                $" QueryUrl = {QueryUrl}, " +
+                $" QueryParameters = {ApiHelper.JsonSerialize(QueryParameters)}, " +
+                $" Headers = {ApiHelper.JsonSerialize(Headers)}, " +
+                $" FormParameters = {ApiHelper.JsonSerialize(FormParameters)}, " +
+                $" Body = {Body}, " +
+                $" Username = {Username}, " +
+                $" Password = {Password}";
         }
     }
 }

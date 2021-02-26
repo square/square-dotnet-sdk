@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -300,6 +301,244 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("receipt_url", NullValueHandling = NullValueHandling.Ignore)]
         public string ReceiptUrl { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"Payment : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"Id = {(Id == null ? "null" : Id == string.Empty ? "" : Id)}");
+            toStringOutput.Add($"CreatedAt = {(CreatedAt == null ? "null" : CreatedAt == string.Empty ? "" : CreatedAt)}");
+            toStringOutput.Add($"UpdatedAt = {(UpdatedAt == null ? "null" : UpdatedAt == string.Empty ? "" : UpdatedAt)}");
+            toStringOutput.Add($"AmountMoney = {(AmountMoney == null ? "null" : AmountMoney.ToString())}");
+            toStringOutput.Add($"TipMoney = {(TipMoney == null ? "null" : TipMoney.ToString())}");
+            toStringOutput.Add($"TotalMoney = {(TotalMoney == null ? "null" : TotalMoney.ToString())}");
+            toStringOutput.Add($"AppFeeMoney = {(AppFeeMoney == null ? "null" : AppFeeMoney.ToString())}");
+            toStringOutput.Add($"ProcessingFee = {(ProcessingFee == null ? "null" : $"[{ string.Join(", ", ProcessingFee)} ]")}");
+            toStringOutput.Add($"RefundedMoney = {(RefundedMoney == null ? "null" : RefundedMoney.ToString())}");
+            toStringOutput.Add($"Status = {(Status == null ? "null" : Status == string.Empty ? "" : Status)}");
+            toStringOutput.Add($"DelayDuration = {(DelayDuration == null ? "null" : DelayDuration == string.Empty ? "" : DelayDuration)}");
+            toStringOutput.Add($"DelayAction = {(DelayAction == null ? "null" : DelayAction == string.Empty ? "" : DelayAction)}");
+            toStringOutput.Add($"DelayedUntil = {(DelayedUntil == null ? "null" : DelayedUntil == string.Empty ? "" : DelayedUntil)}");
+            toStringOutput.Add($"SourceType = {(SourceType == null ? "null" : SourceType == string.Empty ? "" : SourceType)}");
+            toStringOutput.Add($"CardDetails = {(CardDetails == null ? "null" : CardDetails.ToString())}");
+            toStringOutput.Add($"LocationId = {(LocationId == null ? "null" : LocationId == string.Empty ? "" : LocationId)}");
+            toStringOutput.Add($"OrderId = {(OrderId == null ? "null" : OrderId == string.Empty ? "" : OrderId)}");
+            toStringOutput.Add($"ReferenceId = {(ReferenceId == null ? "null" : ReferenceId == string.Empty ? "" : ReferenceId)}");
+            toStringOutput.Add($"CustomerId = {(CustomerId == null ? "null" : CustomerId == string.Empty ? "" : CustomerId)}");
+            toStringOutput.Add($"EmployeeId = {(EmployeeId == null ? "null" : EmployeeId == string.Empty ? "" : EmployeeId)}");
+            toStringOutput.Add($"RefundIds = {(RefundIds == null ? "null" : $"[{ string.Join(", ", RefundIds)} ]")}");
+            toStringOutput.Add($"RiskEvaluation = {(RiskEvaluation == null ? "null" : RiskEvaluation.ToString())}");
+            toStringOutput.Add($"BuyerEmailAddress = {(BuyerEmailAddress == null ? "null" : BuyerEmailAddress == string.Empty ? "" : BuyerEmailAddress)}");
+            toStringOutput.Add($"BillingAddress = {(BillingAddress == null ? "null" : BillingAddress.ToString())}");
+            toStringOutput.Add($"ShippingAddress = {(ShippingAddress == null ? "null" : ShippingAddress.ToString())}");
+            toStringOutput.Add($"Note = {(Note == null ? "null" : Note == string.Empty ? "" : Note)}");
+            toStringOutput.Add($"StatementDescriptionIdentifier = {(StatementDescriptionIdentifier == null ? "null" : StatementDescriptionIdentifier == string.Empty ? "" : StatementDescriptionIdentifier)}");
+            toStringOutput.Add($"ReceiptNumber = {(ReceiptNumber == null ? "null" : ReceiptNumber == string.Empty ? "" : ReceiptNumber)}");
+            toStringOutput.Add($"ReceiptUrl = {(ReceiptUrl == null ? "null" : ReceiptUrl == string.Empty ? "" : ReceiptUrl)}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is Payment other &&
+                ((Id == null && other.Id == null) || (Id?.Equals(other.Id) == true)) &&
+                ((CreatedAt == null && other.CreatedAt == null) || (CreatedAt?.Equals(other.CreatedAt) == true)) &&
+                ((UpdatedAt == null && other.UpdatedAt == null) || (UpdatedAt?.Equals(other.UpdatedAt) == true)) &&
+                ((AmountMoney == null && other.AmountMoney == null) || (AmountMoney?.Equals(other.AmountMoney) == true)) &&
+                ((TipMoney == null && other.TipMoney == null) || (TipMoney?.Equals(other.TipMoney) == true)) &&
+                ((TotalMoney == null && other.TotalMoney == null) || (TotalMoney?.Equals(other.TotalMoney) == true)) &&
+                ((AppFeeMoney == null && other.AppFeeMoney == null) || (AppFeeMoney?.Equals(other.AppFeeMoney) == true)) &&
+                ((ProcessingFee == null && other.ProcessingFee == null) || (ProcessingFee?.Equals(other.ProcessingFee) == true)) &&
+                ((RefundedMoney == null && other.RefundedMoney == null) || (RefundedMoney?.Equals(other.RefundedMoney) == true)) &&
+                ((Status == null && other.Status == null) || (Status?.Equals(other.Status) == true)) &&
+                ((DelayDuration == null && other.DelayDuration == null) || (DelayDuration?.Equals(other.DelayDuration) == true)) &&
+                ((DelayAction == null && other.DelayAction == null) || (DelayAction?.Equals(other.DelayAction) == true)) &&
+                ((DelayedUntil == null && other.DelayedUntil == null) || (DelayedUntil?.Equals(other.DelayedUntil) == true)) &&
+                ((SourceType == null && other.SourceType == null) || (SourceType?.Equals(other.SourceType) == true)) &&
+                ((CardDetails == null && other.CardDetails == null) || (CardDetails?.Equals(other.CardDetails) == true)) &&
+                ((LocationId == null && other.LocationId == null) || (LocationId?.Equals(other.LocationId) == true)) &&
+                ((OrderId == null && other.OrderId == null) || (OrderId?.Equals(other.OrderId) == true)) &&
+                ((ReferenceId == null && other.ReferenceId == null) || (ReferenceId?.Equals(other.ReferenceId) == true)) &&
+                ((CustomerId == null && other.CustomerId == null) || (CustomerId?.Equals(other.CustomerId) == true)) &&
+                ((EmployeeId == null && other.EmployeeId == null) || (EmployeeId?.Equals(other.EmployeeId) == true)) &&
+                ((RefundIds == null && other.RefundIds == null) || (RefundIds?.Equals(other.RefundIds) == true)) &&
+                ((RiskEvaluation == null && other.RiskEvaluation == null) || (RiskEvaluation?.Equals(other.RiskEvaluation) == true)) &&
+                ((BuyerEmailAddress == null && other.BuyerEmailAddress == null) || (BuyerEmailAddress?.Equals(other.BuyerEmailAddress) == true)) &&
+                ((BillingAddress == null && other.BillingAddress == null) || (BillingAddress?.Equals(other.BillingAddress) == true)) &&
+                ((ShippingAddress == null && other.ShippingAddress == null) || (ShippingAddress?.Equals(other.ShippingAddress) == true)) &&
+                ((Note == null && other.Note == null) || (Note?.Equals(other.Note) == true)) &&
+                ((StatementDescriptionIdentifier == null && other.StatementDescriptionIdentifier == null) || (StatementDescriptionIdentifier?.Equals(other.StatementDescriptionIdentifier) == true)) &&
+                ((ReceiptNumber == null && other.ReceiptNumber == null) || (ReceiptNumber?.Equals(other.ReceiptNumber) == true)) &&
+                ((ReceiptUrl == null && other.ReceiptUrl == null) || (ReceiptUrl?.Equals(other.ReceiptUrl) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 1131972147;
+
+            if (Id != null)
+            {
+               hashCode += Id.GetHashCode();
+            }
+
+            if (CreatedAt != null)
+            {
+               hashCode += CreatedAt.GetHashCode();
+            }
+
+            if (UpdatedAt != null)
+            {
+               hashCode += UpdatedAt.GetHashCode();
+            }
+
+            if (AmountMoney != null)
+            {
+               hashCode += AmountMoney.GetHashCode();
+            }
+
+            if (TipMoney != null)
+            {
+               hashCode += TipMoney.GetHashCode();
+            }
+
+            if (TotalMoney != null)
+            {
+               hashCode += TotalMoney.GetHashCode();
+            }
+
+            if (AppFeeMoney != null)
+            {
+               hashCode += AppFeeMoney.GetHashCode();
+            }
+
+            if (ProcessingFee != null)
+            {
+               hashCode += ProcessingFee.GetHashCode();
+            }
+
+            if (RefundedMoney != null)
+            {
+               hashCode += RefundedMoney.GetHashCode();
+            }
+
+            if (Status != null)
+            {
+               hashCode += Status.GetHashCode();
+            }
+
+            if (DelayDuration != null)
+            {
+               hashCode += DelayDuration.GetHashCode();
+            }
+
+            if (DelayAction != null)
+            {
+               hashCode += DelayAction.GetHashCode();
+            }
+
+            if (DelayedUntil != null)
+            {
+               hashCode += DelayedUntil.GetHashCode();
+            }
+
+            if (SourceType != null)
+            {
+               hashCode += SourceType.GetHashCode();
+            }
+
+            if (CardDetails != null)
+            {
+               hashCode += CardDetails.GetHashCode();
+            }
+
+            if (LocationId != null)
+            {
+               hashCode += LocationId.GetHashCode();
+            }
+
+            if (OrderId != null)
+            {
+               hashCode += OrderId.GetHashCode();
+            }
+
+            if (ReferenceId != null)
+            {
+               hashCode += ReferenceId.GetHashCode();
+            }
+
+            if (CustomerId != null)
+            {
+               hashCode += CustomerId.GetHashCode();
+            }
+
+            if (EmployeeId != null)
+            {
+               hashCode += EmployeeId.GetHashCode();
+            }
+
+            if (RefundIds != null)
+            {
+               hashCode += RefundIds.GetHashCode();
+            }
+
+            if (RiskEvaluation != null)
+            {
+               hashCode += RiskEvaluation.GetHashCode();
+            }
+
+            if (BuyerEmailAddress != null)
+            {
+               hashCode += BuyerEmailAddress.GetHashCode();
+            }
+
+            if (BillingAddress != null)
+            {
+               hashCode += BillingAddress.GetHashCode();
+            }
+
+            if (ShippingAddress != null)
+            {
+               hashCode += ShippingAddress.GetHashCode();
+            }
+
+            if (Note != null)
+            {
+               hashCode += Note.GetHashCode();
+            }
+
+            if (StatementDescriptionIdentifier != null)
+            {
+               hashCode += StatementDescriptionIdentifier.GetHashCode();
+            }
+
+            if (ReceiptNumber != null)
+            {
+               hashCode += ReceiptNumber.GetHashCode();
+            }
+
+            if (ReceiptUrl != null)
+            {
+               hashCode += ReceiptUrl.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

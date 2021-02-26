@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -47,6 +48,68 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("error", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Error Error { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"CreateMobileAuthorizationCodeResponse : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"AuthorizationCode = {(AuthorizationCode == null ? "null" : AuthorizationCode == string.Empty ? "" : AuthorizationCode)}");
+            toStringOutput.Add($"ExpiresAt = {(ExpiresAt == null ? "null" : ExpiresAt == string.Empty ? "" : ExpiresAt)}");
+            toStringOutput.Add($"Error = {(Error == null ? "null" : Error.ToString())}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is CreateMobileAuthorizationCodeResponse other &&
+                ((Context == null && other.Context == null) || (Context?.Equals(other.Context) == true)) &&
+                ((AuthorizationCode == null && other.AuthorizationCode == null) || (AuthorizationCode?.Equals(other.AuthorizationCode) == true)) &&
+                ((ExpiresAt == null && other.ExpiresAt == null) || (ExpiresAt?.Equals(other.ExpiresAt) == true)) &&
+                ((Error == null && other.Error == null) || (Error?.Equals(other.Error) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -942988970;
+
+            if (Context != null)
+            {
+                hashCode += Context.GetHashCode();
+            }
+
+            if (AuthorizationCode != null)
+            {
+               hashCode += AuthorizationCode.GetHashCode();
+            }
+
+            if (ExpiresAt != null)
+            {
+               hashCode += ExpiresAt.GetHashCode();
+            }
+
+            if (Error != null)
+            {
+               hashCode += Error.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -105,6 +106,118 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("appointment_segments", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.AppointmentSegment> AppointmentSegments { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"Booking : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"Id = {(Id == null ? "null" : Id == string.Empty ? "" : Id)}");
+            toStringOutput.Add($"Version = {(Version == null ? "null" : Version.ToString())}");
+            toStringOutput.Add($"Status = {(Status == null ? "null" : Status.ToString())}");
+            toStringOutput.Add($"CreatedAt = {(CreatedAt == null ? "null" : CreatedAt == string.Empty ? "" : CreatedAt)}");
+            toStringOutput.Add($"UpdatedAt = {(UpdatedAt == null ? "null" : UpdatedAt == string.Empty ? "" : UpdatedAt)}");
+            toStringOutput.Add($"StartAt = {(StartAt == null ? "null" : StartAt == string.Empty ? "" : StartAt)}");
+            toStringOutput.Add($"LocationId = {(LocationId == null ? "null" : LocationId == string.Empty ? "" : LocationId)}");
+            toStringOutput.Add($"CustomerId = {(CustomerId == null ? "null" : CustomerId == string.Empty ? "" : CustomerId)}");
+            toStringOutput.Add($"CustomerNote = {(CustomerNote == null ? "null" : CustomerNote == string.Empty ? "" : CustomerNote)}");
+            toStringOutput.Add($"SellerNote = {(SellerNote == null ? "null" : SellerNote == string.Empty ? "" : SellerNote)}");
+            toStringOutput.Add($"AppointmentSegments = {(AppointmentSegments == null ? "null" : $"[{ string.Join(", ", AppointmentSegments)} ]")}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is Booking other &&
+                ((Id == null && other.Id == null) || (Id?.Equals(other.Id) == true)) &&
+                ((Version == null && other.Version == null) || (Version?.Equals(other.Version) == true)) &&
+                ((Status == null && other.Status == null) || (Status?.Equals(other.Status) == true)) &&
+                ((CreatedAt == null && other.CreatedAt == null) || (CreatedAt?.Equals(other.CreatedAt) == true)) &&
+                ((UpdatedAt == null && other.UpdatedAt == null) || (UpdatedAt?.Equals(other.UpdatedAt) == true)) &&
+                ((StartAt == null && other.StartAt == null) || (StartAt?.Equals(other.StartAt) == true)) &&
+                ((LocationId == null && other.LocationId == null) || (LocationId?.Equals(other.LocationId) == true)) &&
+                ((CustomerId == null && other.CustomerId == null) || (CustomerId?.Equals(other.CustomerId) == true)) &&
+                ((CustomerNote == null && other.CustomerNote == null) || (CustomerNote?.Equals(other.CustomerNote) == true)) &&
+                ((SellerNote == null && other.SellerNote == null) || (SellerNote?.Equals(other.SellerNote) == true)) &&
+                ((AppointmentSegments == null && other.AppointmentSegments == null) || (AppointmentSegments?.Equals(other.AppointmentSegments) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 219005029;
+
+            if (Id != null)
+            {
+               hashCode += Id.GetHashCode();
+            }
+
+            if (Version != null)
+            {
+               hashCode += Version.GetHashCode();
+            }
+
+            if (Status != null)
+            {
+               hashCode += Status.GetHashCode();
+            }
+
+            if (CreatedAt != null)
+            {
+               hashCode += CreatedAt.GetHashCode();
+            }
+
+            if (UpdatedAt != null)
+            {
+               hashCode += UpdatedAt.GetHashCode();
+            }
+
+            if (StartAt != null)
+            {
+               hashCode += StartAt.GetHashCode();
+            }
+
+            if (LocationId != null)
+            {
+               hashCode += LocationId.GetHashCode();
+            }
+
+            if (CustomerId != null)
+            {
+               hashCode += CustomerId.GetHashCode();
+            }
+
+            if (CustomerNote != null)
+            {
+               hashCode += CustomerNote.GetHashCode();
+            }
+
+            if (SellerNote != null)
+            {
+               hashCode += SellerNote.GetHashCode();
+            }
+
+            if (AppointmentSegments != null)
+            {
+               hashCode += AppointmentSegments.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

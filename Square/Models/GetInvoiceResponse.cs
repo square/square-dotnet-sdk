@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -37,6 +38,61 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("errors", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.Error> Errors { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"GetInvoiceResponse : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"Invoice = {(Invoice == null ? "null" : Invoice.ToString())}");
+            toStringOutput.Add($"Errors = {(Errors == null ? "null" : $"[{ string.Join(", ", Errors)} ]")}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is GetInvoiceResponse other &&
+                ((Context == null && other.Context == null) || (Context?.Equals(other.Context) == true)) &&
+                ((Invoice == null && other.Invoice == null) || (Invoice?.Equals(other.Invoice) == true)) &&
+                ((Errors == null && other.Errors == null) || (Errors?.Equals(other.Errors) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -1352095872;
+
+            if (Context != null)
+            {
+                hashCode += Context.GetHashCode();
+            }
+
+            if (Invoice != null)
+            {
+               hashCode += Invoice.GetHashCode();
+            }
+
+            if (Errors != null)
+            {
+               hashCode += Errors.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

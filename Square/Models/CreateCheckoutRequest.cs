@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -123,6 +124,104 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("note", NullValueHandling = NullValueHandling.Ignore)]
         public string Note { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"CreateCheckoutRequest : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"IdempotencyKey = {(IdempotencyKey == null ? "null" : IdempotencyKey == string.Empty ? "" : IdempotencyKey)}");
+            toStringOutput.Add($"Order = {(Order == null ? "null" : Order.ToString())}");
+            toStringOutput.Add($"AskForShippingAddress = {(AskForShippingAddress == null ? "null" : AskForShippingAddress.ToString())}");
+            toStringOutput.Add($"MerchantSupportEmail = {(MerchantSupportEmail == null ? "null" : MerchantSupportEmail == string.Empty ? "" : MerchantSupportEmail)}");
+            toStringOutput.Add($"PrePopulateBuyerEmail = {(PrePopulateBuyerEmail == null ? "null" : PrePopulateBuyerEmail == string.Empty ? "" : PrePopulateBuyerEmail)}");
+            toStringOutput.Add($"PrePopulateShippingAddress = {(PrePopulateShippingAddress == null ? "null" : PrePopulateShippingAddress.ToString())}");
+            toStringOutput.Add($"RedirectUrl = {(RedirectUrl == null ? "null" : RedirectUrl == string.Empty ? "" : RedirectUrl)}");
+            toStringOutput.Add($"AdditionalRecipients = {(AdditionalRecipients == null ? "null" : $"[{ string.Join(", ", AdditionalRecipients)} ]")}");
+            toStringOutput.Add($"Note = {(Note == null ? "null" : Note == string.Empty ? "" : Note)}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is CreateCheckoutRequest other &&
+                ((IdempotencyKey == null && other.IdempotencyKey == null) || (IdempotencyKey?.Equals(other.IdempotencyKey) == true)) &&
+                ((Order == null && other.Order == null) || (Order?.Equals(other.Order) == true)) &&
+                ((AskForShippingAddress == null && other.AskForShippingAddress == null) || (AskForShippingAddress?.Equals(other.AskForShippingAddress) == true)) &&
+                ((MerchantSupportEmail == null && other.MerchantSupportEmail == null) || (MerchantSupportEmail?.Equals(other.MerchantSupportEmail) == true)) &&
+                ((PrePopulateBuyerEmail == null && other.PrePopulateBuyerEmail == null) || (PrePopulateBuyerEmail?.Equals(other.PrePopulateBuyerEmail) == true)) &&
+                ((PrePopulateShippingAddress == null && other.PrePopulateShippingAddress == null) || (PrePopulateShippingAddress?.Equals(other.PrePopulateShippingAddress) == true)) &&
+                ((RedirectUrl == null && other.RedirectUrl == null) || (RedirectUrl?.Equals(other.RedirectUrl) == true)) &&
+                ((AdditionalRecipients == null && other.AdditionalRecipients == null) || (AdditionalRecipients?.Equals(other.AdditionalRecipients) == true)) &&
+                ((Note == null && other.Note == null) || (Note?.Equals(other.Note) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 1270416416;
+
+            if (IdempotencyKey != null)
+            {
+               hashCode += IdempotencyKey.GetHashCode();
+            }
+
+            if (Order != null)
+            {
+               hashCode += Order.GetHashCode();
+            }
+
+            if (AskForShippingAddress != null)
+            {
+               hashCode += AskForShippingAddress.GetHashCode();
+            }
+
+            if (MerchantSupportEmail != null)
+            {
+               hashCode += MerchantSupportEmail.GetHashCode();
+            }
+
+            if (PrePopulateBuyerEmail != null)
+            {
+               hashCode += PrePopulateBuyerEmail.GetHashCode();
+            }
+
+            if (PrePopulateShippingAddress != null)
+            {
+               hashCode += PrePopulateShippingAddress.GetHashCode();
+            }
+
+            if (RedirectUrl != null)
+            {
+               hashCode += RedirectUrl.GetHashCode();
+            }
+
+            if (AdditionalRecipients != null)
+            {
+               hashCode += AdditionalRecipients.GetHashCode();
+            }
+
+            if (Note != null)
+            {
+               hashCode += Note.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -43,6 +44,62 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("discount_catalog_object_id", NullValueHandling = NullValueHandling.Ignore)]
         public string DiscountCatalogObjectId { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"OrderLineItemPricingBlocklistsBlockedDiscount : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"Uid = {(Uid == null ? "null" : Uid == string.Empty ? "" : Uid)}");
+            toStringOutput.Add($"DiscountUid = {(DiscountUid == null ? "null" : DiscountUid == string.Empty ? "" : DiscountUid)}");
+            toStringOutput.Add($"DiscountCatalogObjectId = {(DiscountCatalogObjectId == null ? "null" : DiscountCatalogObjectId == string.Empty ? "" : DiscountCatalogObjectId)}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is OrderLineItemPricingBlocklistsBlockedDiscount other &&
+                ((Uid == null && other.Uid == null) || (Uid?.Equals(other.Uid) == true)) &&
+                ((DiscountUid == null && other.DiscountUid == null) || (DiscountUid?.Equals(other.DiscountUid) == true)) &&
+                ((DiscountCatalogObjectId == null && other.DiscountCatalogObjectId == null) || (DiscountCatalogObjectId?.Equals(other.DiscountCatalogObjectId) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 532800568;
+
+            if (Uid != null)
+            {
+               hashCode += Uid.GetHashCode();
+            }
+
+            if (DiscountUid != null)
+            {
+               hashCode += DiscountUid.GetHashCode();
+            }
+
+            if (DiscountCatalogObjectId != null)
+            {
+               hashCode += DiscountCatalogObjectId.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

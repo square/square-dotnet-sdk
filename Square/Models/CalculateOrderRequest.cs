@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -40,6 +41,55 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("proposed_rewards", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.OrderReward> ProposedRewards { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"CalculateOrderRequest : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"Order = {(Order == null ? "null" : Order.ToString())}");
+            toStringOutput.Add($"ProposedRewards = {(ProposedRewards == null ? "null" : $"[{ string.Join(", ", ProposedRewards)} ]")}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is CalculateOrderRequest other &&
+                ((Order == null && other.Order == null) || (Order?.Equals(other.Order) == true)) &&
+                ((ProposedRewards == null && other.ProposedRewards == null) || (ProposedRewards?.Equals(other.ProposedRewards) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 653159834;
+
+            if (Order != null)
+            {
+               hashCode += Order.GetHashCode();
+            }
+
+            if (ProposedRewards != null)
+            {
+               hashCode += ProposedRewards.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

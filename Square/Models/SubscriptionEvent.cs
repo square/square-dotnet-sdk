@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -49,6 +50,69 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("plan_id")]
         public string PlanId { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"SubscriptionEvent : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"Id = {(Id == null ? "null" : Id == string.Empty ? "" : Id)}");
+            toStringOutput.Add($"SubscriptionEventType = {(SubscriptionEventType == null ? "null" : SubscriptionEventType.ToString())}");
+            toStringOutput.Add($"EffectiveDate = {(EffectiveDate == null ? "null" : EffectiveDate == string.Empty ? "" : EffectiveDate)}");
+            toStringOutput.Add($"PlanId = {(PlanId == null ? "null" : PlanId == string.Empty ? "" : PlanId)}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is SubscriptionEvent other &&
+                ((Id == null && other.Id == null) || (Id?.Equals(other.Id) == true)) &&
+                ((SubscriptionEventType == null && other.SubscriptionEventType == null) || (SubscriptionEventType?.Equals(other.SubscriptionEventType) == true)) &&
+                ((EffectiveDate == null && other.EffectiveDate == null) || (EffectiveDate?.Equals(other.EffectiveDate) == true)) &&
+                ((PlanId == null && other.PlanId == null) || (PlanId?.Equals(other.PlanId) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -298722928;
+
+            if (Id != null)
+            {
+               hashCode += Id.GetHashCode();
+            }
+
+            if (SubscriptionEventType != null)
+            {
+               hashCode += SubscriptionEventType.GetHashCode();
+            }
+
+            if (EffectiveDate != null)
+            {
+               hashCode += EffectiveDate.GetHashCode();
+            }
+
+            if (PlanId != null)
+            {
+               hashCode += PlanId.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

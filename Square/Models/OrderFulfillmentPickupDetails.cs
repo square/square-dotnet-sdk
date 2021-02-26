@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -183,6 +184,167 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("curbside_pickup_details", NullValueHandling = NullValueHandling.Ignore)]
         public Models.OrderFulfillmentPickupDetailsCurbsidePickupDetails CurbsidePickupDetails { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"OrderFulfillmentPickupDetails : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"Recipient = {(Recipient == null ? "null" : Recipient.ToString())}");
+            toStringOutput.Add($"ExpiresAt = {(ExpiresAt == null ? "null" : ExpiresAt == string.Empty ? "" : ExpiresAt)}");
+            toStringOutput.Add($"AutoCompleteDuration = {(AutoCompleteDuration == null ? "null" : AutoCompleteDuration == string.Empty ? "" : AutoCompleteDuration)}");
+            toStringOutput.Add($"ScheduleType = {(ScheduleType == null ? "null" : ScheduleType.ToString())}");
+            toStringOutput.Add($"PickupAt = {(PickupAt == null ? "null" : PickupAt == string.Empty ? "" : PickupAt)}");
+            toStringOutput.Add($"PickupWindowDuration = {(PickupWindowDuration == null ? "null" : PickupWindowDuration == string.Empty ? "" : PickupWindowDuration)}");
+            toStringOutput.Add($"PrepTimeDuration = {(PrepTimeDuration == null ? "null" : PrepTimeDuration == string.Empty ? "" : PrepTimeDuration)}");
+            toStringOutput.Add($"Note = {(Note == null ? "null" : Note == string.Empty ? "" : Note)}");
+            toStringOutput.Add($"PlacedAt = {(PlacedAt == null ? "null" : PlacedAt == string.Empty ? "" : PlacedAt)}");
+            toStringOutput.Add($"AcceptedAt = {(AcceptedAt == null ? "null" : AcceptedAt == string.Empty ? "" : AcceptedAt)}");
+            toStringOutput.Add($"RejectedAt = {(RejectedAt == null ? "null" : RejectedAt == string.Empty ? "" : RejectedAt)}");
+            toStringOutput.Add($"ReadyAt = {(ReadyAt == null ? "null" : ReadyAt == string.Empty ? "" : ReadyAt)}");
+            toStringOutput.Add($"ExpiredAt = {(ExpiredAt == null ? "null" : ExpiredAt == string.Empty ? "" : ExpiredAt)}");
+            toStringOutput.Add($"PickedUpAt = {(PickedUpAt == null ? "null" : PickedUpAt == string.Empty ? "" : PickedUpAt)}");
+            toStringOutput.Add($"CanceledAt = {(CanceledAt == null ? "null" : CanceledAt == string.Empty ? "" : CanceledAt)}");
+            toStringOutput.Add($"CancelReason = {(CancelReason == null ? "null" : CancelReason == string.Empty ? "" : CancelReason)}");
+            toStringOutput.Add($"IsCurbsidePickup = {(IsCurbsidePickup == null ? "null" : IsCurbsidePickup.ToString())}");
+            toStringOutput.Add($"CurbsidePickupDetails = {(CurbsidePickupDetails == null ? "null" : CurbsidePickupDetails.ToString())}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is OrderFulfillmentPickupDetails other &&
+                ((Recipient == null && other.Recipient == null) || (Recipient?.Equals(other.Recipient) == true)) &&
+                ((ExpiresAt == null && other.ExpiresAt == null) || (ExpiresAt?.Equals(other.ExpiresAt) == true)) &&
+                ((AutoCompleteDuration == null && other.AutoCompleteDuration == null) || (AutoCompleteDuration?.Equals(other.AutoCompleteDuration) == true)) &&
+                ((ScheduleType == null && other.ScheduleType == null) || (ScheduleType?.Equals(other.ScheduleType) == true)) &&
+                ((PickupAt == null && other.PickupAt == null) || (PickupAt?.Equals(other.PickupAt) == true)) &&
+                ((PickupWindowDuration == null && other.PickupWindowDuration == null) || (PickupWindowDuration?.Equals(other.PickupWindowDuration) == true)) &&
+                ((PrepTimeDuration == null && other.PrepTimeDuration == null) || (PrepTimeDuration?.Equals(other.PrepTimeDuration) == true)) &&
+                ((Note == null && other.Note == null) || (Note?.Equals(other.Note) == true)) &&
+                ((PlacedAt == null && other.PlacedAt == null) || (PlacedAt?.Equals(other.PlacedAt) == true)) &&
+                ((AcceptedAt == null && other.AcceptedAt == null) || (AcceptedAt?.Equals(other.AcceptedAt) == true)) &&
+                ((RejectedAt == null && other.RejectedAt == null) || (RejectedAt?.Equals(other.RejectedAt) == true)) &&
+                ((ReadyAt == null && other.ReadyAt == null) || (ReadyAt?.Equals(other.ReadyAt) == true)) &&
+                ((ExpiredAt == null && other.ExpiredAt == null) || (ExpiredAt?.Equals(other.ExpiredAt) == true)) &&
+                ((PickedUpAt == null && other.PickedUpAt == null) || (PickedUpAt?.Equals(other.PickedUpAt) == true)) &&
+                ((CanceledAt == null && other.CanceledAt == null) || (CanceledAt?.Equals(other.CanceledAt) == true)) &&
+                ((CancelReason == null && other.CancelReason == null) || (CancelReason?.Equals(other.CancelReason) == true)) &&
+                ((IsCurbsidePickup == null && other.IsCurbsidePickup == null) || (IsCurbsidePickup?.Equals(other.IsCurbsidePickup) == true)) &&
+                ((CurbsidePickupDetails == null && other.CurbsidePickupDetails == null) || (CurbsidePickupDetails?.Equals(other.CurbsidePickupDetails) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -657729285;
+
+            if (Recipient != null)
+            {
+               hashCode += Recipient.GetHashCode();
+            }
+
+            if (ExpiresAt != null)
+            {
+               hashCode += ExpiresAt.GetHashCode();
+            }
+
+            if (AutoCompleteDuration != null)
+            {
+               hashCode += AutoCompleteDuration.GetHashCode();
+            }
+
+            if (ScheduleType != null)
+            {
+               hashCode += ScheduleType.GetHashCode();
+            }
+
+            if (PickupAt != null)
+            {
+               hashCode += PickupAt.GetHashCode();
+            }
+
+            if (PickupWindowDuration != null)
+            {
+               hashCode += PickupWindowDuration.GetHashCode();
+            }
+
+            if (PrepTimeDuration != null)
+            {
+               hashCode += PrepTimeDuration.GetHashCode();
+            }
+
+            if (Note != null)
+            {
+               hashCode += Note.GetHashCode();
+            }
+
+            if (PlacedAt != null)
+            {
+               hashCode += PlacedAt.GetHashCode();
+            }
+
+            if (AcceptedAt != null)
+            {
+               hashCode += AcceptedAt.GetHashCode();
+            }
+
+            if (RejectedAt != null)
+            {
+               hashCode += RejectedAt.GetHashCode();
+            }
+
+            if (ReadyAt != null)
+            {
+               hashCode += ReadyAt.GetHashCode();
+            }
+
+            if (ExpiredAt != null)
+            {
+               hashCode += ExpiredAt.GetHashCode();
+            }
+
+            if (PickedUpAt != null)
+            {
+               hashCode += PickedUpAt.GetHashCode();
+            }
+
+            if (CanceledAt != null)
+            {
+               hashCode += CanceledAt.GetHashCode();
+            }
+
+            if (CancelReason != null)
+            {
+               hashCode += CancelReason.GetHashCode();
+            }
+
+            if (IsCurbsidePickup != null)
+            {
+               hashCode += IsCurbsidePickup.GetHashCode();
+            }
+
+            if (CurbsidePickupDetails != null)
+            {
+               hashCode += CurbsidePickupDetails.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

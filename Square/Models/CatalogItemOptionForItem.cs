@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -24,6 +25,48 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("item_option_id", NullValueHandling = NullValueHandling.Ignore)]
         public string ItemOptionId { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"CatalogItemOptionForItem : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"ItemOptionId = {(ItemOptionId == null ? "null" : ItemOptionId == string.Empty ? "" : ItemOptionId)}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is CatalogItemOptionForItem other &&
+                ((ItemOptionId == null && other.ItemOptionId == null) || (ItemOptionId?.Equals(other.ItemOptionId) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 1801897765;
+
+            if (ItemOptionId != null)
+            {
+               hashCode += ItemOptionId.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

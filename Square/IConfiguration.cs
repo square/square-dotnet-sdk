@@ -22,6 +22,11 @@ namespace Square
         Environment Environment { get; }
 
         /// <summary>
+        /// Sets the base URL requests are made to. Defaults to `https://connect.squareup.com`
+        /// </summary>
+        string CustomUrl { get; }
+
+        /// <summary>
         /// OAuth 2.0 Access Token
         /// </summary>
         string AccessToken { get; }

@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -63,6 +64,68 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("id_mappings", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.CatalogIdMapping> IdMappings { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"UpsertCatalogObjectResponse : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"Errors = {(Errors == null ? "null" : $"[{ string.Join(", ", Errors)} ]")}");
+            toStringOutput.Add($"CatalogObject = {(CatalogObject == null ? "null" : CatalogObject.ToString())}");
+            toStringOutput.Add($"IdMappings = {(IdMappings == null ? "null" : $"[{ string.Join(", ", IdMappings)} ]")}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is UpsertCatalogObjectResponse other &&
+                ((Context == null && other.Context == null) || (Context?.Equals(other.Context) == true)) &&
+                ((Errors == null && other.Errors == null) || (Errors?.Equals(other.Errors) == true)) &&
+                ((CatalogObject == null && other.CatalogObject == null) || (CatalogObject?.Equals(other.CatalogObject) == true)) &&
+                ((IdMappings == null && other.IdMappings == null) || (IdMappings?.Equals(other.IdMappings) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -133578961;
+
+            if (Context != null)
+            {
+                hashCode += Context.GetHashCode();
+            }
+
+            if (Errors != null)
+            {
+               hashCode += Errors.GetHashCode();
+            }
+
+            if (CatalogObject != null)
+            {
+               hashCode += CatalogObject.GetHashCode();
+            }
+
+            if (IdMappings != null)
+            {
+               hashCode += IdMappings.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

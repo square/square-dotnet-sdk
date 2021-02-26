@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -28,6 +29,48 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("enforce_uniqueness", NullValueHandling = NullValueHandling.Ignore)]
         public bool? EnforceUniqueness { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"CatalogCustomAttributeDefinitionStringConfig : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"EnforceUniqueness = {(EnforceUniqueness == null ? "null" : EnforceUniqueness.ToString())}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is CatalogCustomAttributeDefinitionStringConfig other &&
+                ((EnforceUniqueness == null && other.EnforceUniqueness == null) || (EnforceUniqueness?.Equals(other.EnforceUniqueness) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 209404828;
+
+            if (EnforceUniqueness != null)
+            {
+               hashCode += EnforceUniqueness.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -56,6 +57,76 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("order_filter", NullValueHandling = NullValueHandling.Ignore)]
         public Models.LoyaltyEventOrderFilter OrderFilter { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"LoyaltyEventFilter : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"LoyaltyAccountFilter = {(LoyaltyAccountFilter == null ? "null" : LoyaltyAccountFilter.ToString())}");
+            toStringOutput.Add($"TypeFilter = {(TypeFilter == null ? "null" : TypeFilter.ToString())}");
+            toStringOutput.Add($"DateTimeFilter = {(DateTimeFilter == null ? "null" : DateTimeFilter.ToString())}");
+            toStringOutput.Add($"LocationFilter = {(LocationFilter == null ? "null" : LocationFilter.ToString())}");
+            toStringOutput.Add($"OrderFilter = {(OrderFilter == null ? "null" : OrderFilter.ToString())}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is LoyaltyEventFilter other &&
+                ((LoyaltyAccountFilter == null && other.LoyaltyAccountFilter == null) || (LoyaltyAccountFilter?.Equals(other.LoyaltyAccountFilter) == true)) &&
+                ((TypeFilter == null && other.TypeFilter == null) || (TypeFilter?.Equals(other.TypeFilter) == true)) &&
+                ((DateTimeFilter == null && other.DateTimeFilter == null) || (DateTimeFilter?.Equals(other.DateTimeFilter) == true)) &&
+                ((LocationFilter == null && other.LocationFilter == null) || (LocationFilter?.Equals(other.LocationFilter) == true)) &&
+                ((OrderFilter == null && other.OrderFilter == null) || (OrderFilter?.Equals(other.OrderFilter) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 1266972041;
+
+            if (LoyaltyAccountFilter != null)
+            {
+               hashCode += LoyaltyAccountFilter.GetHashCode();
+            }
+
+            if (TypeFilter != null)
+            {
+               hashCode += TypeFilter.GetHashCode();
+            }
+
+            if (DateTimeFilter != null)
+            {
+               hashCode += DateTimeFilter.GetHashCode();
+            }
+
+            if (LocationFilter != null)
+            {
+               hashCode += LocationFilter.GetHashCode();
+            }
+
+            if (OrderFilter != null)
+            {
+               hashCode += OrderFilter.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -182,6 +183,167 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("custom_fields", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.InvoiceCustomField> CustomFields { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"Invoice : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"Id = {(Id == null ? "null" : Id == string.Empty ? "" : Id)}");
+            toStringOutput.Add($"Version = {(Version == null ? "null" : Version.ToString())}");
+            toStringOutput.Add($"LocationId = {(LocationId == null ? "null" : LocationId == string.Empty ? "" : LocationId)}");
+            toStringOutput.Add($"OrderId = {(OrderId == null ? "null" : OrderId == string.Empty ? "" : OrderId)}");
+            toStringOutput.Add($"PrimaryRecipient = {(PrimaryRecipient == null ? "null" : PrimaryRecipient.ToString())}");
+            toStringOutput.Add($"PaymentRequests = {(PaymentRequests == null ? "null" : $"[{ string.Join(", ", PaymentRequests)} ]")}");
+            toStringOutput.Add($"DeliveryMethod = {(DeliveryMethod == null ? "null" : DeliveryMethod.ToString())}");
+            toStringOutput.Add($"InvoiceNumber = {(InvoiceNumber == null ? "null" : InvoiceNumber == string.Empty ? "" : InvoiceNumber)}");
+            toStringOutput.Add($"Title = {(Title == null ? "null" : Title == string.Empty ? "" : Title)}");
+            toStringOutput.Add($"Description = {(Description == null ? "null" : Description == string.Empty ? "" : Description)}");
+            toStringOutput.Add($"ScheduledAt = {(ScheduledAt == null ? "null" : ScheduledAt == string.Empty ? "" : ScheduledAt)}");
+            toStringOutput.Add($"PublicUrl = {(PublicUrl == null ? "null" : PublicUrl == string.Empty ? "" : PublicUrl)}");
+            toStringOutput.Add($"NextPaymentAmountMoney = {(NextPaymentAmountMoney == null ? "null" : NextPaymentAmountMoney.ToString())}");
+            toStringOutput.Add($"Status = {(Status == null ? "null" : Status.ToString())}");
+            toStringOutput.Add($"Timezone = {(Timezone == null ? "null" : Timezone == string.Empty ? "" : Timezone)}");
+            toStringOutput.Add($"CreatedAt = {(CreatedAt == null ? "null" : CreatedAt == string.Empty ? "" : CreatedAt)}");
+            toStringOutput.Add($"UpdatedAt = {(UpdatedAt == null ? "null" : UpdatedAt == string.Empty ? "" : UpdatedAt)}");
+            toStringOutput.Add($"CustomFields = {(CustomFields == null ? "null" : $"[{ string.Join(", ", CustomFields)} ]")}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is Invoice other &&
+                ((Id == null && other.Id == null) || (Id?.Equals(other.Id) == true)) &&
+                ((Version == null && other.Version == null) || (Version?.Equals(other.Version) == true)) &&
+                ((LocationId == null && other.LocationId == null) || (LocationId?.Equals(other.LocationId) == true)) &&
+                ((OrderId == null && other.OrderId == null) || (OrderId?.Equals(other.OrderId) == true)) &&
+                ((PrimaryRecipient == null && other.PrimaryRecipient == null) || (PrimaryRecipient?.Equals(other.PrimaryRecipient) == true)) &&
+                ((PaymentRequests == null && other.PaymentRequests == null) || (PaymentRequests?.Equals(other.PaymentRequests) == true)) &&
+                ((DeliveryMethod == null && other.DeliveryMethod == null) || (DeliveryMethod?.Equals(other.DeliveryMethod) == true)) &&
+                ((InvoiceNumber == null && other.InvoiceNumber == null) || (InvoiceNumber?.Equals(other.InvoiceNumber) == true)) &&
+                ((Title == null && other.Title == null) || (Title?.Equals(other.Title) == true)) &&
+                ((Description == null && other.Description == null) || (Description?.Equals(other.Description) == true)) &&
+                ((ScheduledAt == null && other.ScheduledAt == null) || (ScheduledAt?.Equals(other.ScheduledAt) == true)) &&
+                ((PublicUrl == null && other.PublicUrl == null) || (PublicUrl?.Equals(other.PublicUrl) == true)) &&
+                ((NextPaymentAmountMoney == null && other.NextPaymentAmountMoney == null) || (NextPaymentAmountMoney?.Equals(other.NextPaymentAmountMoney) == true)) &&
+                ((Status == null && other.Status == null) || (Status?.Equals(other.Status) == true)) &&
+                ((Timezone == null && other.Timezone == null) || (Timezone?.Equals(other.Timezone) == true)) &&
+                ((CreatedAt == null && other.CreatedAt == null) || (CreatedAt?.Equals(other.CreatedAt) == true)) &&
+                ((UpdatedAt == null && other.UpdatedAt == null) || (UpdatedAt?.Equals(other.UpdatedAt) == true)) &&
+                ((CustomFields == null && other.CustomFields == null) || (CustomFields?.Equals(other.CustomFields) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 1321207967;
+
+            if (Id != null)
+            {
+               hashCode += Id.GetHashCode();
+            }
+
+            if (Version != null)
+            {
+               hashCode += Version.GetHashCode();
+            }
+
+            if (LocationId != null)
+            {
+               hashCode += LocationId.GetHashCode();
+            }
+
+            if (OrderId != null)
+            {
+               hashCode += OrderId.GetHashCode();
+            }
+
+            if (PrimaryRecipient != null)
+            {
+               hashCode += PrimaryRecipient.GetHashCode();
+            }
+
+            if (PaymentRequests != null)
+            {
+               hashCode += PaymentRequests.GetHashCode();
+            }
+
+            if (DeliveryMethod != null)
+            {
+               hashCode += DeliveryMethod.GetHashCode();
+            }
+
+            if (InvoiceNumber != null)
+            {
+               hashCode += InvoiceNumber.GetHashCode();
+            }
+
+            if (Title != null)
+            {
+               hashCode += Title.GetHashCode();
+            }
+
+            if (Description != null)
+            {
+               hashCode += Description.GetHashCode();
+            }
+
+            if (ScheduledAt != null)
+            {
+               hashCode += ScheduledAt.GetHashCode();
+            }
+
+            if (PublicUrl != null)
+            {
+               hashCode += PublicUrl.GetHashCode();
+            }
+
+            if (NextPaymentAmountMoney != null)
+            {
+               hashCode += NextPaymentAmountMoney.GetHashCode();
+            }
+
+            if (Status != null)
+            {
+               hashCode += Status.GetHashCode();
+            }
+
+            if (Timezone != null)
+            {
+               hashCode += Timezone.GetHashCode();
+            }
+
+            if (CreatedAt != null)
+            {
+               hashCode += CreatedAt.GetHashCode();
+            }
+
+            if (UpdatedAt != null)
+            {
+               hashCode += UpdatedAt.GetHashCode();
+            }
+
+            if (CustomFields != null)
+            {
+               hashCode += CustomFields.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

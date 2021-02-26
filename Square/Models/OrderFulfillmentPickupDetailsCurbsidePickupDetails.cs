@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -33,6 +34,55 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("buyer_arrived_at", NullValueHandling = NullValueHandling.Ignore)]
         public string BuyerArrivedAt { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"OrderFulfillmentPickupDetailsCurbsidePickupDetails : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"CurbsideDetails = {(CurbsideDetails == null ? "null" : CurbsideDetails == string.Empty ? "" : CurbsideDetails)}");
+            toStringOutput.Add($"BuyerArrivedAt = {(BuyerArrivedAt == null ? "null" : BuyerArrivedAt == string.Empty ? "" : BuyerArrivedAt)}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is OrderFulfillmentPickupDetailsCurbsidePickupDetails other &&
+                ((CurbsideDetails == null && other.CurbsideDetails == null) || (CurbsideDetails?.Equals(other.CurbsideDetails) == true)) &&
+                ((BuyerArrivedAt == null && other.BuyerArrivedAt == null) || (BuyerArrivedAt?.Equals(other.BuyerArrivedAt) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -126196706;
+
+            if (CurbsideDetails != null)
+            {
+               hashCode += CurbsideDetails.GetHashCode();
+            }
+
+            if (BuyerArrivedAt != null)
+            {
+               hashCode += BuyerArrivedAt.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

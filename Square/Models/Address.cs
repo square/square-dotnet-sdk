@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -144,6 +145,146 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("organization", NullValueHandling = NullValueHandling.Ignore)]
         public string Organization { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"Address : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"AddressLine1 = {(AddressLine1 == null ? "null" : AddressLine1 == string.Empty ? "" : AddressLine1)}");
+            toStringOutput.Add($"AddressLine2 = {(AddressLine2 == null ? "null" : AddressLine2 == string.Empty ? "" : AddressLine2)}");
+            toStringOutput.Add($"AddressLine3 = {(AddressLine3 == null ? "null" : AddressLine3 == string.Empty ? "" : AddressLine3)}");
+            toStringOutput.Add($"Locality = {(Locality == null ? "null" : Locality == string.Empty ? "" : Locality)}");
+            toStringOutput.Add($"Sublocality = {(Sublocality == null ? "null" : Sublocality == string.Empty ? "" : Sublocality)}");
+            toStringOutput.Add($"Sublocality2 = {(Sublocality2 == null ? "null" : Sublocality2 == string.Empty ? "" : Sublocality2)}");
+            toStringOutput.Add($"Sublocality3 = {(Sublocality3 == null ? "null" : Sublocality3 == string.Empty ? "" : Sublocality3)}");
+            toStringOutput.Add($"AdministrativeDistrictLevel1 = {(AdministrativeDistrictLevel1 == null ? "null" : AdministrativeDistrictLevel1 == string.Empty ? "" : AdministrativeDistrictLevel1)}");
+            toStringOutput.Add($"AdministrativeDistrictLevel2 = {(AdministrativeDistrictLevel2 == null ? "null" : AdministrativeDistrictLevel2 == string.Empty ? "" : AdministrativeDistrictLevel2)}");
+            toStringOutput.Add($"AdministrativeDistrictLevel3 = {(AdministrativeDistrictLevel3 == null ? "null" : AdministrativeDistrictLevel3 == string.Empty ? "" : AdministrativeDistrictLevel3)}");
+            toStringOutput.Add($"PostalCode = {(PostalCode == null ? "null" : PostalCode == string.Empty ? "" : PostalCode)}");
+            toStringOutput.Add($"Country = {(Country == null ? "null" : Country.ToString())}");
+            toStringOutput.Add($"FirstName = {(FirstName == null ? "null" : FirstName == string.Empty ? "" : FirstName)}");
+            toStringOutput.Add($"LastName = {(LastName == null ? "null" : LastName == string.Empty ? "" : LastName)}");
+            toStringOutput.Add($"Organization = {(Organization == null ? "null" : Organization == string.Empty ? "" : Organization)}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is Address other &&
+                ((AddressLine1 == null && other.AddressLine1 == null) || (AddressLine1?.Equals(other.AddressLine1) == true)) &&
+                ((AddressLine2 == null && other.AddressLine2 == null) || (AddressLine2?.Equals(other.AddressLine2) == true)) &&
+                ((AddressLine3 == null && other.AddressLine3 == null) || (AddressLine3?.Equals(other.AddressLine3) == true)) &&
+                ((Locality == null && other.Locality == null) || (Locality?.Equals(other.Locality) == true)) &&
+                ((Sublocality == null && other.Sublocality == null) || (Sublocality?.Equals(other.Sublocality) == true)) &&
+                ((Sublocality2 == null && other.Sublocality2 == null) || (Sublocality2?.Equals(other.Sublocality2) == true)) &&
+                ((Sublocality3 == null && other.Sublocality3 == null) || (Sublocality3?.Equals(other.Sublocality3) == true)) &&
+                ((AdministrativeDistrictLevel1 == null && other.AdministrativeDistrictLevel1 == null) || (AdministrativeDistrictLevel1?.Equals(other.AdministrativeDistrictLevel1) == true)) &&
+                ((AdministrativeDistrictLevel2 == null && other.AdministrativeDistrictLevel2 == null) || (AdministrativeDistrictLevel2?.Equals(other.AdministrativeDistrictLevel2) == true)) &&
+                ((AdministrativeDistrictLevel3 == null && other.AdministrativeDistrictLevel3 == null) || (AdministrativeDistrictLevel3?.Equals(other.AdministrativeDistrictLevel3) == true)) &&
+                ((PostalCode == null && other.PostalCode == null) || (PostalCode?.Equals(other.PostalCode) == true)) &&
+                ((Country == null && other.Country == null) || (Country?.Equals(other.Country) == true)) &&
+                ((FirstName == null && other.FirstName == null) || (FirstName?.Equals(other.FirstName) == true)) &&
+                ((LastName == null && other.LastName == null) || (LastName?.Equals(other.LastName) == true)) &&
+                ((Organization == null && other.Organization == null) || (Organization?.Equals(other.Organization) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -1623438759;
+
+            if (AddressLine1 != null)
+            {
+               hashCode += AddressLine1.GetHashCode();
+            }
+
+            if (AddressLine2 != null)
+            {
+               hashCode += AddressLine2.GetHashCode();
+            }
+
+            if (AddressLine3 != null)
+            {
+               hashCode += AddressLine3.GetHashCode();
+            }
+
+            if (Locality != null)
+            {
+               hashCode += Locality.GetHashCode();
+            }
+
+            if (Sublocality != null)
+            {
+               hashCode += Sublocality.GetHashCode();
+            }
+
+            if (Sublocality2 != null)
+            {
+               hashCode += Sublocality2.GetHashCode();
+            }
+
+            if (Sublocality3 != null)
+            {
+               hashCode += Sublocality3.GetHashCode();
+            }
+
+            if (AdministrativeDistrictLevel1 != null)
+            {
+               hashCode += AdministrativeDistrictLevel1.GetHashCode();
+            }
+
+            if (AdministrativeDistrictLevel2 != null)
+            {
+               hashCode += AdministrativeDistrictLevel2.GetHashCode();
+            }
+
+            if (AdministrativeDistrictLevel3 != null)
+            {
+               hashCode += AdministrativeDistrictLevel3.GetHashCode();
+            }
+
+            if (PostalCode != null)
+            {
+               hashCode += PostalCode.GetHashCode();
+            }
+
+            if (Country != null)
+            {
+               hashCode += Country.GetHashCode();
+            }
+
+            if (FirstName != null)
+            {
+               hashCode += FirstName.GetHashCode();
+            }
+
+            if (LastName != null)
+            {
+               hashCode += LastName.GetHashCode();
+            }
+
+            if (Organization != null)
+            {
+               hashCode += Organization.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

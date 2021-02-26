@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -71,6 +72,83 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("calculated_at", NullValueHandling = NullValueHandling.Ignore)]
         public string CalculatedAt { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"InventoryCount : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"CatalogObjectId = {(CatalogObjectId == null ? "null" : CatalogObjectId == string.Empty ? "" : CatalogObjectId)}");
+            toStringOutput.Add($"CatalogObjectType = {(CatalogObjectType == null ? "null" : CatalogObjectType == string.Empty ? "" : CatalogObjectType)}");
+            toStringOutput.Add($"State = {(State == null ? "null" : State.ToString())}");
+            toStringOutput.Add($"LocationId = {(LocationId == null ? "null" : LocationId == string.Empty ? "" : LocationId)}");
+            toStringOutput.Add($"Quantity = {(Quantity == null ? "null" : Quantity == string.Empty ? "" : Quantity)}");
+            toStringOutput.Add($"CalculatedAt = {(CalculatedAt == null ? "null" : CalculatedAt == string.Empty ? "" : CalculatedAt)}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is InventoryCount other &&
+                ((CatalogObjectId == null && other.CatalogObjectId == null) || (CatalogObjectId?.Equals(other.CatalogObjectId) == true)) &&
+                ((CatalogObjectType == null && other.CatalogObjectType == null) || (CatalogObjectType?.Equals(other.CatalogObjectType) == true)) &&
+                ((State == null && other.State == null) || (State?.Equals(other.State) == true)) &&
+                ((LocationId == null && other.LocationId == null) || (LocationId?.Equals(other.LocationId) == true)) &&
+                ((Quantity == null && other.Quantity == null) || (Quantity?.Equals(other.Quantity) == true)) &&
+                ((CalculatedAt == null && other.CalculatedAt == null) || (CalculatedAt?.Equals(other.CalculatedAt) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 151741649;
+
+            if (CatalogObjectId != null)
+            {
+               hashCode += CatalogObjectId.GetHashCode();
+            }
+
+            if (CatalogObjectType != null)
+            {
+               hashCode += CatalogObjectType.GetHashCode();
+            }
+
+            if (State != null)
+            {
+               hashCode += State.GetHashCode();
+            }
+
+            if (LocationId != null)
+            {
+               hashCode += LocationId.GetHashCode();
+            }
+
+            if (Quantity != null)
+            {
+               hashCode += Quantity.GetHashCode();
+            }
+
+            if (CalculatedAt != null)
+            {
+               hashCode += CalculatedAt.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

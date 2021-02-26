@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -30,6 +31,48 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("precision", NullValueHandling = NullValueHandling.Ignore)]
         public int? Precision { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"CatalogCustomAttributeDefinitionNumberConfig : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"Precision = {(Precision == null ? "null" : Precision.ToString())}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is CatalogCustomAttributeDefinitionNumberConfig other &&
+                ((Precision == null && other.Precision == null) || (Precision?.Equals(other.Precision) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 196624818;
+
+            if (Precision != null)
+            {
+               hashCode += Precision.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

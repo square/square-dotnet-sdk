@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -44,6 +45,62 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("default_timezone", NullValueHandling = NullValueHandling.Ignore)]
         public string DefaultTimezone { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"ShiftWorkday : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"DateRange = {(DateRange == null ? "null" : DateRange.ToString())}");
+            toStringOutput.Add($"MatchShiftsBy = {(MatchShiftsBy == null ? "null" : MatchShiftsBy.ToString())}");
+            toStringOutput.Add($"DefaultTimezone = {(DefaultTimezone == null ? "null" : DefaultTimezone == string.Empty ? "" : DefaultTimezone)}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is ShiftWorkday other &&
+                ((DateRange == null && other.DateRange == null) || (DateRange?.Equals(other.DateRange) == true)) &&
+                ((MatchShiftsBy == null && other.MatchShiftsBy == null) || (MatchShiftsBy?.Equals(other.MatchShiftsBy) == true)) &&
+                ((DefaultTimezone == null && other.DefaultTimezone == null) || (DefaultTimezone?.Equals(other.DefaultTimezone) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -1536716736;
+
+            if (DateRange != null)
+            {
+               hashCode += DateRange.GetHashCode();
+            }
+
+            if (MatchShiftsBy != null)
+            {
+               hashCode += MatchShiftsBy.GetHashCode();
+            }
+
+            if (DefaultTimezone != null)
+            {
+               hashCode += DefaultTimezone.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

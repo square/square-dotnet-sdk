@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -178,6 +179,160 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("goods_receipt_id", NullValueHandling = NullValueHandling.Ignore)]
         public string GoodsReceiptId { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"InventoryAdjustment : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"Id = {(Id == null ? "null" : Id == string.Empty ? "" : Id)}");
+            toStringOutput.Add($"ReferenceId = {(ReferenceId == null ? "null" : ReferenceId == string.Empty ? "" : ReferenceId)}");
+            toStringOutput.Add($"FromState = {(FromState == null ? "null" : FromState.ToString())}");
+            toStringOutput.Add($"ToState = {(ToState == null ? "null" : ToState.ToString())}");
+            toStringOutput.Add($"LocationId = {(LocationId == null ? "null" : LocationId == string.Empty ? "" : LocationId)}");
+            toStringOutput.Add($"CatalogObjectId = {(CatalogObjectId == null ? "null" : CatalogObjectId == string.Empty ? "" : CatalogObjectId)}");
+            toStringOutput.Add($"CatalogObjectType = {(CatalogObjectType == null ? "null" : CatalogObjectType == string.Empty ? "" : CatalogObjectType)}");
+            toStringOutput.Add($"Quantity = {(Quantity == null ? "null" : Quantity == string.Empty ? "" : Quantity)}");
+            toStringOutput.Add($"TotalPriceMoney = {(TotalPriceMoney == null ? "null" : TotalPriceMoney.ToString())}");
+            toStringOutput.Add($"OccurredAt = {(OccurredAt == null ? "null" : OccurredAt == string.Empty ? "" : OccurredAt)}");
+            toStringOutput.Add($"CreatedAt = {(CreatedAt == null ? "null" : CreatedAt == string.Empty ? "" : CreatedAt)}");
+            toStringOutput.Add($"Source = {(Source == null ? "null" : Source.ToString())}");
+            toStringOutput.Add($"EmployeeId = {(EmployeeId == null ? "null" : EmployeeId == string.Empty ? "" : EmployeeId)}");
+            toStringOutput.Add($"TransactionId = {(TransactionId == null ? "null" : TransactionId == string.Empty ? "" : TransactionId)}");
+            toStringOutput.Add($"RefundId = {(RefundId == null ? "null" : RefundId == string.Empty ? "" : RefundId)}");
+            toStringOutput.Add($"PurchaseOrderId = {(PurchaseOrderId == null ? "null" : PurchaseOrderId == string.Empty ? "" : PurchaseOrderId)}");
+            toStringOutput.Add($"GoodsReceiptId = {(GoodsReceiptId == null ? "null" : GoodsReceiptId == string.Empty ? "" : GoodsReceiptId)}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is InventoryAdjustment other &&
+                ((Id == null && other.Id == null) || (Id?.Equals(other.Id) == true)) &&
+                ((ReferenceId == null && other.ReferenceId == null) || (ReferenceId?.Equals(other.ReferenceId) == true)) &&
+                ((FromState == null && other.FromState == null) || (FromState?.Equals(other.FromState) == true)) &&
+                ((ToState == null && other.ToState == null) || (ToState?.Equals(other.ToState) == true)) &&
+                ((LocationId == null && other.LocationId == null) || (LocationId?.Equals(other.LocationId) == true)) &&
+                ((CatalogObjectId == null && other.CatalogObjectId == null) || (CatalogObjectId?.Equals(other.CatalogObjectId) == true)) &&
+                ((CatalogObjectType == null && other.CatalogObjectType == null) || (CatalogObjectType?.Equals(other.CatalogObjectType) == true)) &&
+                ((Quantity == null && other.Quantity == null) || (Quantity?.Equals(other.Quantity) == true)) &&
+                ((TotalPriceMoney == null && other.TotalPriceMoney == null) || (TotalPriceMoney?.Equals(other.TotalPriceMoney) == true)) &&
+                ((OccurredAt == null && other.OccurredAt == null) || (OccurredAt?.Equals(other.OccurredAt) == true)) &&
+                ((CreatedAt == null && other.CreatedAt == null) || (CreatedAt?.Equals(other.CreatedAt) == true)) &&
+                ((Source == null && other.Source == null) || (Source?.Equals(other.Source) == true)) &&
+                ((EmployeeId == null && other.EmployeeId == null) || (EmployeeId?.Equals(other.EmployeeId) == true)) &&
+                ((TransactionId == null && other.TransactionId == null) || (TransactionId?.Equals(other.TransactionId) == true)) &&
+                ((RefundId == null && other.RefundId == null) || (RefundId?.Equals(other.RefundId) == true)) &&
+                ((PurchaseOrderId == null && other.PurchaseOrderId == null) || (PurchaseOrderId?.Equals(other.PurchaseOrderId) == true)) &&
+                ((GoodsReceiptId == null && other.GoodsReceiptId == null) || (GoodsReceiptId?.Equals(other.GoodsReceiptId) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -855846569;
+
+            if (Id != null)
+            {
+               hashCode += Id.GetHashCode();
+            }
+
+            if (ReferenceId != null)
+            {
+               hashCode += ReferenceId.GetHashCode();
+            }
+
+            if (FromState != null)
+            {
+               hashCode += FromState.GetHashCode();
+            }
+
+            if (ToState != null)
+            {
+               hashCode += ToState.GetHashCode();
+            }
+
+            if (LocationId != null)
+            {
+               hashCode += LocationId.GetHashCode();
+            }
+
+            if (CatalogObjectId != null)
+            {
+               hashCode += CatalogObjectId.GetHashCode();
+            }
+
+            if (CatalogObjectType != null)
+            {
+               hashCode += CatalogObjectType.GetHashCode();
+            }
+
+            if (Quantity != null)
+            {
+               hashCode += Quantity.GetHashCode();
+            }
+
+            if (TotalPriceMoney != null)
+            {
+               hashCode += TotalPriceMoney.GetHashCode();
+            }
+
+            if (OccurredAt != null)
+            {
+               hashCode += OccurredAt.GetHashCode();
+            }
+
+            if (CreatedAt != null)
+            {
+               hashCode += CreatedAt.GetHashCode();
+            }
+
+            if (Source != null)
+            {
+               hashCode += Source.GetHashCode();
+            }
+
+            if (EmployeeId != null)
+            {
+               hashCode += EmployeeId.GetHashCode();
+            }
+
+            if (TransactionId != null)
+            {
+               hashCode += TransactionId.GetHashCode();
+            }
+
+            if (RefundId != null)
+            {
+               hashCode += RefundId.GetHashCode();
+            }
+
+            if (PurchaseOrderId != null)
+            {
+               hashCode += PurchaseOrderId.GetHashCode();
+            }
+
+            if (GoodsReceiptId != null)
+            {
+               hashCode += GoodsReceiptId.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -144,6 +145,125 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("applied_taxes", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.OrderLineItemAppliedTax> AppliedTaxes { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"OrderReturnServiceCharge : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"Uid = {(Uid == null ? "null" : Uid == string.Empty ? "" : Uid)}");
+            toStringOutput.Add($"SourceServiceChargeUid = {(SourceServiceChargeUid == null ? "null" : SourceServiceChargeUid == string.Empty ? "" : SourceServiceChargeUid)}");
+            toStringOutput.Add($"Name = {(Name == null ? "null" : Name == string.Empty ? "" : Name)}");
+            toStringOutput.Add($"CatalogObjectId = {(CatalogObjectId == null ? "null" : CatalogObjectId == string.Empty ? "" : CatalogObjectId)}");
+            toStringOutput.Add($"Percentage = {(Percentage == null ? "null" : Percentage == string.Empty ? "" : Percentage)}");
+            toStringOutput.Add($"AmountMoney = {(AmountMoney == null ? "null" : AmountMoney.ToString())}");
+            toStringOutput.Add($"AppliedMoney = {(AppliedMoney == null ? "null" : AppliedMoney.ToString())}");
+            toStringOutput.Add($"TotalMoney = {(TotalMoney == null ? "null" : TotalMoney.ToString())}");
+            toStringOutput.Add($"TotalTaxMoney = {(TotalTaxMoney == null ? "null" : TotalTaxMoney.ToString())}");
+            toStringOutput.Add($"CalculationPhase = {(CalculationPhase == null ? "null" : CalculationPhase.ToString())}");
+            toStringOutput.Add($"Taxable = {(Taxable == null ? "null" : Taxable.ToString())}");
+            toStringOutput.Add($"AppliedTaxes = {(AppliedTaxes == null ? "null" : $"[{ string.Join(", ", AppliedTaxes)} ]")}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is OrderReturnServiceCharge other &&
+                ((Uid == null && other.Uid == null) || (Uid?.Equals(other.Uid) == true)) &&
+                ((SourceServiceChargeUid == null && other.SourceServiceChargeUid == null) || (SourceServiceChargeUid?.Equals(other.SourceServiceChargeUid) == true)) &&
+                ((Name == null && other.Name == null) || (Name?.Equals(other.Name) == true)) &&
+                ((CatalogObjectId == null && other.CatalogObjectId == null) || (CatalogObjectId?.Equals(other.CatalogObjectId) == true)) &&
+                ((Percentage == null && other.Percentage == null) || (Percentage?.Equals(other.Percentage) == true)) &&
+                ((AmountMoney == null && other.AmountMoney == null) || (AmountMoney?.Equals(other.AmountMoney) == true)) &&
+                ((AppliedMoney == null && other.AppliedMoney == null) || (AppliedMoney?.Equals(other.AppliedMoney) == true)) &&
+                ((TotalMoney == null && other.TotalMoney == null) || (TotalMoney?.Equals(other.TotalMoney) == true)) &&
+                ((TotalTaxMoney == null && other.TotalTaxMoney == null) || (TotalTaxMoney?.Equals(other.TotalTaxMoney) == true)) &&
+                ((CalculationPhase == null && other.CalculationPhase == null) || (CalculationPhase?.Equals(other.CalculationPhase) == true)) &&
+                ((Taxable == null && other.Taxable == null) || (Taxable?.Equals(other.Taxable) == true)) &&
+                ((AppliedTaxes == null && other.AppliedTaxes == null) || (AppliedTaxes?.Equals(other.AppliedTaxes) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -2013241171;
+
+            if (Uid != null)
+            {
+               hashCode += Uid.GetHashCode();
+            }
+
+            if (SourceServiceChargeUid != null)
+            {
+               hashCode += SourceServiceChargeUid.GetHashCode();
+            }
+
+            if (Name != null)
+            {
+               hashCode += Name.GetHashCode();
+            }
+
+            if (CatalogObjectId != null)
+            {
+               hashCode += CatalogObjectId.GetHashCode();
+            }
+
+            if (Percentage != null)
+            {
+               hashCode += Percentage.GetHashCode();
+            }
+
+            if (AmountMoney != null)
+            {
+               hashCode += AmountMoney.GetHashCode();
+            }
+
+            if (AppliedMoney != null)
+            {
+               hashCode += AppliedMoney.GetHashCode();
+            }
+
+            if (TotalMoney != null)
+            {
+               hashCode += TotalMoney.GetHashCode();
+            }
+
+            if (TotalTaxMoney != null)
+            {
+               hashCode += TotalTaxMoney.GetHashCode();
+            }
+
+            if (CalculationPhase != null)
+            {
+               hashCode += CalculationPhase.GetHashCode();
+            }
+
+            if (Taxable != null)
+            {
+               hashCode += Taxable.GetHashCode();
+            }
+
+            if (AppliedTaxes != null)
+            {
+               hashCode += AppliedTaxes.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

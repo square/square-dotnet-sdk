@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -88,6 +89,90 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("all_products", NullValueHandling = NullValueHandling.Ignore)]
         public bool? AllProducts { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"CatalogProductSet : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"Name = {(Name == null ? "null" : Name == string.Empty ? "" : Name)}");
+            toStringOutput.Add($"ProductIdsAny = {(ProductIdsAny == null ? "null" : $"[{ string.Join(", ", ProductIdsAny)} ]")}");
+            toStringOutput.Add($"ProductIdsAll = {(ProductIdsAll == null ? "null" : $"[{ string.Join(", ", ProductIdsAll)} ]")}");
+            toStringOutput.Add($"QuantityExact = {(QuantityExact == null ? "null" : QuantityExact.ToString())}");
+            toStringOutput.Add($"QuantityMin = {(QuantityMin == null ? "null" : QuantityMin.ToString())}");
+            toStringOutput.Add($"QuantityMax = {(QuantityMax == null ? "null" : QuantityMax.ToString())}");
+            toStringOutput.Add($"AllProducts = {(AllProducts == null ? "null" : AllProducts.ToString())}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is CatalogProductSet other &&
+                ((Name == null && other.Name == null) || (Name?.Equals(other.Name) == true)) &&
+                ((ProductIdsAny == null && other.ProductIdsAny == null) || (ProductIdsAny?.Equals(other.ProductIdsAny) == true)) &&
+                ((ProductIdsAll == null && other.ProductIdsAll == null) || (ProductIdsAll?.Equals(other.ProductIdsAll) == true)) &&
+                ((QuantityExact == null && other.QuantityExact == null) || (QuantityExact?.Equals(other.QuantityExact) == true)) &&
+                ((QuantityMin == null && other.QuantityMin == null) || (QuantityMin?.Equals(other.QuantityMin) == true)) &&
+                ((QuantityMax == null && other.QuantityMax == null) || (QuantityMax?.Equals(other.QuantityMax) == true)) &&
+                ((AllProducts == null && other.AllProducts == null) || (AllProducts?.Equals(other.AllProducts) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -600323794;
+
+            if (Name != null)
+            {
+               hashCode += Name.GetHashCode();
+            }
+
+            if (ProductIdsAny != null)
+            {
+               hashCode += ProductIdsAny.GetHashCode();
+            }
+
+            if (ProductIdsAll != null)
+            {
+               hashCode += ProductIdsAll.GetHashCode();
+            }
+
+            if (QuantityExact != null)
+            {
+               hashCode += QuantityExact.GetHashCode();
+            }
+
+            if (QuantityMin != null)
+            {
+               hashCode += QuantityMin.GetHashCode();
+            }
+
+            if (QuantityMax != null)
+            {
+               hashCode += QuantityMax.GetHashCode();
+            }
+
+            if (AllProducts != null)
+            {
+               hashCode += AllProducts.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

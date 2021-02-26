@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -25,6 +26,48 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("periods", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.BusinessHoursPeriod> Periods { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"BusinessHours : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"Periods = {(Periods == null ? "null" : $"[{ string.Join(", ", Periods)} ]")}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is BusinessHours other &&
+                ((Periods == null && other.Periods == null) || (Periods?.Equals(other.Periods) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -1271827402;
+
+            if (Periods != null)
+            {
+               hashCode += Periods.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

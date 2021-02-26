@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -215,6 +216,167 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("statement_description_identifier", NullValueHandling = NullValueHandling.Ignore)]
         public string StatementDescriptionIdentifier { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"CreatePaymentRequest : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"SourceId = {(SourceId == null ? "null" : SourceId == string.Empty ? "" : SourceId)}");
+            toStringOutput.Add($"IdempotencyKey = {(IdempotencyKey == null ? "null" : IdempotencyKey == string.Empty ? "" : IdempotencyKey)}");
+            toStringOutput.Add($"AmountMoney = {(AmountMoney == null ? "null" : AmountMoney.ToString())}");
+            toStringOutput.Add($"TipMoney = {(TipMoney == null ? "null" : TipMoney.ToString())}");
+            toStringOutput.Add($"AppFeeMoney = {(AppFeeMoney == null ? "null" : AppFeeMoney.ToString())}");
+            toStringOutput.Add($"DelayDuration = {(DelayDuration == null ? "null" : DelayDuration == string.Empty ? "" : DelayDuration)}");
+            toStringOutput.Add($"Autocomplete = {(Autocomplete == null ? "null" : Autocomplete.ToString())}");
+            toStringOutput.Add($"OrderId = {(OrderId == null ? "null" : OrderId == string.Empty ? "" : OrderId)}");
+            toStringOutput.Add($"CustomerId = {(CustomerId == null ? "null" : CustomerId == string.Empty ? "" : CustomerId)}");
+            toStringOutput.Add($"LocationId = {(LocationId == null ? "null" : LocationId == string.Empty ? "" : LocationId)}");
+            toStringOutput.Add($"ReferenceId = {(ReferenceId == null ? "null" : ReferenceId == string.Empty ? "" : ReferenceId)}");
+            toStringOutput.Add($"VerificationToken = {(VerificationToken == null ? "null" : VerificationToken == string.Empty ? "" : VerificationToken)}");
+            toStringOutput.Add($"AcceptPartialAuthorization = {(AcceptPartialAuthorization == null ? "null" : AcceptPartialAuthorization.ToString())}");
+            toStringOutput.Add($"BuyerEmailAddress = {(BuyerEmailAddress == null ? "null" : BuyerEmailAddress == string.Empty ? "" : BuyerEmailAddress)}");
+            toStringOutput.Add($"BillingAddress = {(BillingAddress == null ? "null" : BillingAddress.ToString())}");
+            toStringOutput.Add($"ShippingAddress = {(ShippingAddress == null ? "null" : ShippingAddress.ToString())}");
+            toStringOutput.Add($"Note = {(Note == null ? "null" : Note == string.Empty ? "" : Note)}");
+            toStringOutput.Add($"StatementDescriptionIdentifier = {(StatementDescriptionIdentifier == null ? "null" : StatementDescriptionIdentifier == string.Empty ? "" : StatementDescriptionIdentifier)}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is CreatePaymentRequest other &&
+                ((SourceId == null && other.SourceId == null) || (SourceId?.Equals(other.SourceId) == true)) &&
+                ((IdempotencyKey == null && other.IdempotencyKey == null) || (IdempotencyKey?.Equals(other.IdempotencyKey) == true)) &&
+                ((AmountMoney == null && other.AmountMoney == null) || (AmountMoney?.Equals(other.AmountMoney) == true)) &&
+                ((TipMoney == null && other.TipMoney == null) || (TipMoney?.Equals(other.TipMoney) == true)) &&
+                ((AppFeeMoney == null && other.AppFeeMoney == null) || (AppFeeMoney?.Equals(other.AppFeeMoney) == true)) &&
+                ((DelayDuration == null && other.DelayDuration == null) || (DelayDuration?.Equals(other.DelayDuration) == true)) &&
+                ((Autocomplete == null && other.Autocomplete == null) || (Autocomplete?.Equals(other.Autocomplete) == true)) &&
+                ((OrderId == null && other.OrderId == null) || (OrderId?.Equals(other.OrderId) == true)) &&
+                ((CustomerId == null && other.CustomerId == null) || (CustomerId?.Equals(other.CustomerId) == true)) &&
+                ((LocationId == null && other.LocationId == null) || (LocationId?.Equals(other.LocationId) == true)) &&
+                ((ReferenceId == null && other.ReferenceId == null) || (ReferenceId?.Equals(other.ReferenceId) == true)) &&
+                ((VerificationToken == null && other.VerificationToken == null) || (VerificationToken?.Equals(other.VerificationToken) == true)) &&
+                ((AcceptPartialAuthorization == null && other.AcceptPartialAuthorization == null) || (AcceptPartialAuthorization?.Equals(other.AcceptPartialAuthorization) == true)) &&
+                ((BuyerEmailAddress == null && other.BuyerEmailAddress == null) || (BuyerEmailAddress?.Equals(other.BuyerEmailAddress) == true)) &&
+                ((BillingAddress == null && other.BillingAddress == null) || (BillingAddress?.Equals(other.BillingAddress) == true)) &&
+                ((ShippingAddress == null && other.ShippingAddress == null) || (ShippingAddress?.Equals(other.ShippingAddress) == true)) &&
+                ((Note == null && other.Note == null) || (Note?.Equals(other.Note) == true)) &&
+                ((StatementDescriptionIdentifier == null && other.StatementDescriptionIdentifier == null) || (StatementDescriptionIdentifier?.Equals(other.StatementDescriptionIdentifier) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -519761043;
+
+            if (SourceId != null)
+            {
+               hashCode += SourceId.GetHashCode();
+            }
+
+            if (IdempotencyKey != null)
+            {
+               hashCode += IdempotencyKey.GetHashCode();
+            }
+
+            if (AmountMoney != null)
+            {
+               hashCode += AmountMoney.GetHashCode();
+            }
+
+            if (TipMoney != null)
+            {
+               hashCode += TipMoney.GetHashCode();
+            }
+
+            if (AppFeeMoney != null)
+            {
+               hashCode += AppFeeMoney.GetHashCode();
+            }
+
+            if (DelayDuration != null)
+            {
+               hashCode += DelayDuration.GetHashCode();
+            }
+
+            if (Autocomplete != null)
+            {
+               hashCode += Autocomplete.GetHashCode();
+            }
+
+            if (OrderId != null)
+            {
+               hashCode += OrderId.GetHashCode();
+            }
+
+            if (CustomerId != null)
+            {
+               hashCode += CustomerId.GetHashCode();
+            }
+
+            if (LocationId != null)
+            {
+               hashCode += LocationId.GetHashCode();
+            }
+
+            if (ReferenceId != null)
+            {
+               hashCode += ReferenceId.GetHashCode();
+            }
+
+            if (VerificationToken != null)
+            {
+               hashCode += VerificationToken.GetHashCode();
+            }
+
+            if (AcceptPartialAuthorization != null)
+            {
+               hashCode += AcceptPartialAuthorization.GetHashCode();
+            }
+
+            if (BuyerEmailAddress != null)
+            {
+               hashCode += BuyerEmailAddress.GetHashCode();
+            }
+
+            if (BillingAddress != null)
+            {
+               hashCode += BillingAddress.GetHashCode();
+            }
+
+            if (ShippingAddress != null)
+            {
+               hashCode += ShippingAddress.GetHashCode();
+            }
+
+            if (Note != null)
+            {
+               hashCode += Note.GetHashCode();
+            }
+
+            if (StatementDescriptionIdentifier != null)
+            {
+               hashCode += StatementDescriptionIdentifier.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

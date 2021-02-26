@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -68,6 +69,79 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("pricing_rule_reference", NullValueHandling = NullValueHandling.Ignore)]
         public Models.CatalogObjectReference PricingRuleReference { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"LoyaltyProgramRewardTier : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"Id = {(Id == null ? "null" : Id == string.Empty ? "" : Id)}");
+            toStringOutput.Add($"Points = {Points}");
+            toStringOutput.Add($"Name = {(Name == null ? "null" : Name == string.Empty ? "" : Name)}");
+            toStringOutput.Add($"Definition = {(Definition == null ? "null" : Definition.ToString())}");
+            toStringOutput.Add($"CreatedAt = {(CreatedAt == null ? "null" : CreatedAt == string.Empty ? "" : CreatedAt)}");
+            toStringOutput.Add($"PricingRuleReference = {(PricingRuleReference == null ? "null" : PricingRuleReference.ToString())}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is LoyaltyProgramRewardTier other &&
+                ((Id == null && other.Id == null) || (Id?.Equals(other.Id) == true)) &&
+                Points.Equals(other.Points) &&
+                ((Name == null && other.Name == null) || (Name?.Equals(other.Name) == true)) &&
+                ((Definition == null && other.Definition == null) || (Definition?.Equals(other.Definition) == true)) &&
+                ((CreatedAt == null && other.CreatedAt == null) || (CreatedAt?.Equals(other.CreatedAt) == true)) &&
+                ((PricingRuleReference == null && other.PricingRuleReference == null) || (PricingRuleReference?.Equals(other.PricingRuleReference) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 1770802231;
+
+            if (Id != null)
+            {
+               hashCode += Id.GetHashCode();
+            }
+            hashCode += Points.GetHashCode();
+
+            if (Name != null)
+            {
+               hashCode += Name.GetHashCode();
+            }
+
+            if (Definition != null)
+            {
+               hashCode += Definition.GetHashCode();
+            }
+
+            if (CreatedAt != null)
+            {
+               hashCode += CreatedAt.GetHashCode();
+            }
+
+            if (PricingRuleReference != null)
+            {
+               hashCode += PricingRuleReference.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {

@@ -14,7 +14,7 @@ product to purchase, with its own quantity and price details.
 |  --- | --- | --- | --- |
 | `Uid` | `string` | Optional | Unique ID that identifies the line item only within this order.<br>**Constraints**: *Maximum Length*: `60` |
 | `Name` | `string` | Optional | The name of the line item.<br>**Constraints**: *Maximum Length*: `512` |
-| `Quantity` | `string` |  | The quantity purchased, formatted as a decimal number.<br>For example: `"3"`.<br><br>Line items with a quantity of `"0"` will be automatically removed<br>upon paying for or otherwise completing the order.<br><br>Line items with a `quantity_unit` can have non-integer quantities.<br>For example: `"1.70000"`.<br>**Constraints**: *Minimum Length*: `1`, *Maximum Length*: `12` |
+| `Quantity` | `string` | Required | The quantity purchased, formatted as a decimal number.<br>For example: `"3"`.<br><br>Line items with a quantity of `"0"` will be automatically removed<br>upon paying for or otherwise completing the order.<br><br>Line items with a `quantity_unit` can have non-integer quantities.<br>For example: `"1.70000"`.<br>**Constraints**: *Minimum Length*: `1`, *Maximum Length*: `12` |
 | `QuantityUnit` | [`Models.OrderQuantityUnit`](/doc/models/order-quantity-unit.md) | Optional | Contains the measurement unit for a quantity and a precision which<br>specifies the number of digits after the decimal point for decimal quantities. |
 | `Note` | `string` | Optional | The note of the line item.<br>**Constraints**: *Maximum Length*: `2000` |
 | `CatalogObjectId` | `string` | Optional | The [CatalogItemVariation](#type-catalogitemvariation) id applied to this line item.<br>**Constraints**: *Maximum Length*: `192` |

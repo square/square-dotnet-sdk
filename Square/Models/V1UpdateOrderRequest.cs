@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -56,6 +57,76 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("canceled_note", NullValueHandling = NullValueHandling.Ignore)]
         public string CanceledNote { get; }
+
+        public override string ToString()
+        {
+            var toStringOutput = new List<string>();
+
+            this.ToString(toStringOutput);
+
+            return $"V1UpdateOrderRequest : ({string.Join(", ", toStringOutput)})";
+        }
+
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"Action = {(Action == null ? "null" : Action.ToString())}");
+            toStringOutput.Add($"ShippedTrackingNumber = {(ShippedTrackingNumber == null ? "null" : ShippedTrackingNumber == string.Empty ? "" : ShippedTrackingNumber)}");
+            toStringOutput.Add($"CompletedNote = {(CompletedNote == null ? "null" : CompletedNote == string.Empty ? "" : CompletedNote)}");
+            toStringOutput.Add($"RefundedNote = {(RefundedNote == null ? "null" : RefundedNote == string.Empty ? "" : RefundedNote)}");
+            toStringOutput.Add($"CanceledNote = {(CanceledNote == null ? "null" : CanceledNote == string.Empty ? "" : CanceledNote)}");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj == this)
+            {
+                return true;
+            }
+
+            return obj is V1UpdateOrderRequest other &&
+                ((Action == null && other.Action == null) || (Action?.Equals(other.Action) == true)) &&
+                ((ShippedTrackingNumber == null && other.ShippedTrackingNumber == null) || (ShippedTrackingNumber?.Equals(other.ShippedTrackingNumber) == true)) &&
+                ((CompletedNote == null && other.CompletedNote == null) || (CompletedNote?.Equals(other.CompletedNote) == true)) &&
+                ((RefundedNote == null && other.RefundedNote == null) || (RefundedNote?.Equals(other.RefundedNote) == true)) &&
+                ((CanceledNote == null && other.CanceledNote == null) || (CanceledNote?.Equals(other.CanceledNote) == true));
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -553282521;
+
+            if (Action != null)
+            {
+               hashCode += Action.GetHashCode();
+            }
+
+            if (ShippedTrackingNumber != null)
+            {
+               hashCode += ShippedTrackingNumber.GetHashCode();
+            }
+
+            if (CompletedNote != null)
+            {
+               hashCode += CompletedNote.GetHashCode();
+            }
+
+            if (RefundedNote != null)
+            {
+               hashCode += RefundedNote.GetHashCode();
+            }
+
+            if (CanceledNote != null)
+            {
+               hashCode += CanceledNote.GetHashCode();
+            }
+
+            return hashCode;
+        }
 
         public Builder ToBuilder()
         {
