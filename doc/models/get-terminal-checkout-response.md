@@ -9,7 +9,7 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `Errors` | [`IList<Models.Error>`](/doc/models/error.md) | Optional | Information on errors encountered during the request. |
+| `Errors` | [`IList<Models.Error>`](/doc/models/error.md) | Optional | Information about errors encountered during the request. |
 | `Checkout` | [`Models.TerminalCheckout`](/doc/models/terminal-checkout.md) | Optional | - |
 
 ## Example (as JSON)

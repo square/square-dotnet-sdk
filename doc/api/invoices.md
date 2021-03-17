@@ -115,7 +115,7 @@ bodyInvoicePaymentRequests0Reminders.Add(bodyInvoicePaymentRequests0Reminders0);
 
 var bodyInvoicePaymentRequests0 = new InvoicePaymentRequest.Builder()
     .Uid("uid4")
-    .RequestMethod("SHARE_MANUALLY")
+    .RequestMethod("SMS_CHARGE_CARD_ON_FILE")
     .RequestType("BALANCE")
     .DueDate("2030-01-24")
     .FixedAmountRequestedMoney(bodyInvoicePaymentRequests0FixedAmountRequestedMoney)
@@ -124,6 +124,22 @@ var bodyInvoicePaymentRequests0 = new InvoicePaymentRequest.Builder()
     .Reminders(bodyInvoicePaymentRequests0Reminders)
     .Build();
 bodyInvoicePaymentRequests.Add(bodyInvoicePaymentRequests0);
+
+var bodyInvoiceCustomFields = new List<InvoiceCustomField>();
+
+var bodyInvoiceCustomFields0 = new InvoiceCustomField.Builder()
+    .Label("Event Reference Number")
+    .MValue("Ref. #1234")
+    .Placement("ABOVE_LINE_ITEMS")
+    .Build();
+bodyInvoiceCustomFields.Add(bodyInvoiceCustomFields0);
+
+var bodyInvoiceCustomFields1 = new InvoiceCustomField.Builder()
+    .Label("Terms of Service")
+    .MValue("The terms of service are...")
+    .Placement("BELOW_LINE_ITEMS")
+    .Build();
+bodyInvoiceCustomFields.Add(bodyInvoiceCustomFields1);
 
 var bodyInvoice = new Invoice.Builder()
     .Id("id0")
@@ -137,6 +153,7 @@ var bodyInvoice = new Invoice.Builder()
     .Title("Event Planning Services")
     .Description("We appreciate your business!")
     .ScheduledAt("2030-01-13T10:00:00Z")
+    .CustomFields(bodyInvoiceCustomFields)
     .Build();
 var body = new CreateInvoiceRequest.Builder(
         bodyInvoice)
@@ -322,7 +339,7 @@ var bodyInvoicePaymentRequests0FixedAmountRequestedMoney = new Money.Builder()
     .Build();
 var bodyInvoicePaymentRequests0 = new InvoicePaymentRequest.Builder()
     .Uid("2da7964f-f3d2-4f43-81e8-5aa220bf3355")
-    .RequestMethod("SHARE_MANUALLY")
+    .RequestMethod("SMS_CHARGE_CARD_ON_FILE")
     .RequestType("DEPOSIT")
     .DueDate("due_date2")
     .FixedAmountRequestedMoney(bodyInvoicePaymentRequests0FixedAmountRequestedMoney)

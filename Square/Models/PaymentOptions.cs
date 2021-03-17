@@ -21,7 +21,7 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// Indicates whether the Payment objects created from this `TerminalCheckout` will automatically be
+        /// Indicates whether the `Payment` objects created from this `TerminalCheckout` are automatically
         /// `COMPLETED` or left in an `APPROVED` state for later modification.
         /// </summary>
         [JsonProperty("autocomplete", NullValueHandling = NullValueHandling.Ignore)]

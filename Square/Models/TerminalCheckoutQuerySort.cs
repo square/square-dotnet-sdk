@@ -22,8 +22,8 @@ namespace Square.Models
 
         /// <summary>
         /// The order in which results are listed.
-        /// - `ASC` - oldest to newest
-        /// - `DESC` - newest to oldest (default).
+        /// - `ASC` - Oldest to newest.
+        /// - `DESC` - Newest to oldest (default).
         /// </summary>
         [JsonProperty("sort_order", NullValueHandling = NullValueHandling.Ignore)]
         public string SortOrder { get; }

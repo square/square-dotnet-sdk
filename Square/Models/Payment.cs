@@ -22,6 +22,7 @@ namespace Square.Models
             Models.Money tipMoney = null,
             Models.Money totalMoney = null,
             Models.Money appFeeMoney = null,
+            Models.Money approvedMoney = null,
             IList<Models.ProcessingFee> processingFee = null,
             Models.Money refundedMoney = null,
             string status = null,
@@ -30,6 +31,8 @@ namespace Square.Models
             string delayedUntil = null,
             string sourceType = null,
             Models.CardPaymentDetails cardDetails = null,
+            Models.CashPaymentDetails cashDetails = null,
+            Models.ExternalPaymentDetails externalDetails = null,
             string locationId = null,
             string orderId = null,
             string referenceId = null,
@@ -42,8 +45,10 @@ namespace Square.Models
             Models.Address shippingAddress = null,
             string note = null,
             string statementDescriptionIdentifier = null,
+            IList<string> capabilities = null,
             string receiptNumber = null,
-            string receiptUrl = null)
+            string receiptUrl = null,
+            string versionToken = null)
         {
             Id = id;
             CreatedAt = createdAt;
@@ -52,6 +57,7 @@ namespace Square.Models
             TipMoney = tipMoney;
             TotalMoney = totalMoney;
             AppFeeMoney = appFeeMoney;
+            ApprovedMoney = approvedMoney;
             ProcessingFee = processingFee;
             RefundedMoney = refundedMoney;
             Status = status;
@@ -60,6 +66,8 @@ namespace Square.Models
             DelayedUntil = delayedUntil;
             SourceType = sourceType;
             CardDetails = cardDetails;
+            CashDetails = cashDetails;
+            ExternalDetails = externalDetails;
             LocationId = locationId;
             OrderId = orderId;
             ReferenceId = referenceId;
@@ -72,8 +80,10 @@ namespace Square.Models
             ShippingAddress = shippingAddress;
             Note = note;
             StatementDescriptionIdentifier = statementDescriptionIdentifier;
+            Capabilities = capabilities;
             ReceiptNumber = receiptNumber;
             ReceiptUrl = receiptUrl;
+            VersionToken = versionToken;
         }
 
         /// <summary>
@@ -139,6 +149,17 @@ namespace Square.Models
         public Models.Money AppFeeMoney { get; }
 
         /// <summary>
+        /// Represents an amount of money. `Money` fields can be signed or unsigned.
+        /// Fields that do not explicitly define whether they are signed or unsigned are
+        /// considered unsigned and can only hold positive amounts. For signed fields, the
+        /// sign of the value indicates the purpose of the money transfer. See
+        /// [Working with Monetary Amounts](https://developer.squareup.com/docs/build-basics/working-with-monetary-amounts)
+        /// for more information.
+        /// </summary>
+        [JsonProperty("approved_money", NullValueHandling = NullValueHandling.Ignore)]
+        public Models.Money ApprovedMoney { get; }
+
+        /// <summary>
         /// The processing fees and fee adjustments assessed by Square for this payment.
         /// </summary>
         [JsonProperty("processing_fee", NullValueHandling = NullValueHandling.Ignore)]
@@ -196,16 +217,31 @@ namespace Square.Models
 
         /// <summary>
         /// The source type for this payment.
-        /// Current values include `CARD`.
+        /// Current values include `CARD`, `CASH`, or `EXTERNAL`.
         /// </summary>
         [JsonProperty("source_type", NullValueHandling = NullValueHandling.Ignore)]
         public string SourceType { get; }
 
         /// <summary>
-        /// Reflects the current status of a card payment.
+        /// Reflects the current status of a card payment. Contains only non-confidential information.
         /// </summary>
         [JsonProperty("card_details", NullValueHandling = NullValueHandling.Ignore)]
         public Models.CardPaymentDetails CardDetails { get; }
+
+        /// <summary>
+        /// Stores details about a cash payment. Contains only non-confidential information. For more information, see 
+        /// [Take Cash Payments](https://developer.squareup.com/docs/payments-api/take-payments/cash-payments).
+        /// </summary>
+        [JsonProperty("cash_details", NullValueHandling = NullValueHandling.Ignore)]
+        public Models.CashPaymentDetails CashDetails { get; }
+
+        /// <summary>
+        /// Stores details about an external payment. Contains only non-confidential information.
+        /// For more information, see 
+        /// [Take External Payments](https://developer.squareup.com/docs/payments-api/take-payments/external-payments).
+        /// </summary>
+        [JsonProperty("external_details", NullValueHandling = NullValueHandling.Ignore)]
+        public Models.ExternalPaymentDetails ExternalDetails { get; }
 
         /// <summary>
         /// The ID of the location associated with the payment.
@@ -289,6 +325,16 @@ namespace Square.Models
         public string StatementDescriptionIdentifier { get; }
 
         /// <summary>
+        /// Actions that can be performed on this payment:
+        /// - `EDIT_AMOUNT_UP` - The payment amount can be edited up.
+        /// - `EDIT_AMOUNT_DOWN` - The payment amount can be edited down.
+        /// - `EDIT_TIP_AMOUNT_UP` - The tip amount can be edited up.
+        /// - `EDIT_TIP_AMOUNT_DOWN` - The tip amount can be edited down.
+        /// </summary>
+        [JsonProperty("capabilities", NullValueHandling = NullValueHandling.Ignore)]
+        public IList<string> Capabilities { get; }
+
+        /// <summary>
         /// The payment's receipt number.
         /// The field is missing if a payment is canceled.
         /// </summary>
@@ -301,6 +347,13 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("receipt_url", NullValueHandling = NullValueHandling.Ignore)]
         public string ReceiptUrl { get; }
+
+        /// <summary>
+        /// Used for optimistic concurrency. This opaque token identifies a specific version of the
+        /// `Payment` object.
+        /// </summary>
+        [JsonProperty("version_token", NullValueHandling = NullValueHandling.Ignore)]
+        public string VersionToken { get; }
 
         public override string ToString()
         {
@@ -320,6 +373,7 @@ namespace Square.Models
             toStringOutput.Add($"TipMoney = {(TipMoney == null ? "null" : TipMoney.ToString())}");
             toStringOutput.Add($"TotalMoney = {(TotalMoney == null ? "null" : TotalMoney.ToString())}");
             toStringOutput.Add($"AppFeeMoney = {(AppFeeMoney == null ? "null" : AppFeeMoney.ToString())}");
+            toStringOutput.Add($"ApprovedMoney = {(ApprovedMoney == null ? "null" : ApprovedMoney.ToString())}");
             toStringOutput.Add($"ProcessingFee = {(ProcessingFee == null ? "null" : $"[{ string.Join(", ", ProcessingFee)} ]")}");
             toStringOutput.Add($"RefundedMoney = {(RefundedMoney == null ? "null" : RefundedMoney.ToString())}");
             toStringOutput.Add($"Status = {(Status == null ? "null" : Status == string.Empty ? "" : Status)}");
@@ -328,6 +382,8 @@ namespace Square.Models
             toStringOutput.Add($"DelayedUntil = {(DelayedUntil == null ? "null" : DelayedUntil == string.Empty ? "" : DelayedUntil)}");
             toStringOutput.Add($"SourceType = {(SourceType == null ? "null" : SourceType == string.Empty ? "" : SourceType)}");
             toStringOutput.Add($"CardDetails = {(CardDetails == null ? "null" : CardDetails.ToString())}");
+            toStringOutput.Add($"CashDetails = {(CashDetails == null ? "null" : CashDetails.ToString())}");
+            toStringOutput.Add($"ExternalDetails = {(ExternalDetails == null ? "null" : ExternalDetails.ToString())}");
             toStringOutput.Add($"LocationId = {(LocationId == null ? "null" : LocationId == string.Empty ? "" : LocationId)}");
             toStringOutput.Add($"OrderId = {(OrderId == null ? "null" : OrderId == string.Empty ? "" : OrderId)}");
             toStringOutput.Add($"ReferenceId = {(ReferenceId == null ? "null" : ReferenceId == string.Empty ? "" : ReferenceId)}");
@@ -340,8 +396,10 @@ namespace Square.Models
             toStringOutput.Add($"ShippingAddress = {(ShippingAddress == null ? "null" : ShippingAddress.ToString())}");
             toStringOutput.Add($"Note = {(Note == null ? "null" : Note == string.Empty ? "" : Note)}");
             toStringOutput.Add($"StatementDescriptionIdentifier = {(StatementDescriptionIdentifier == null ? "null" : StatementDescriptionIdentifier == string.Empty ? "" : StatementDescriptionIdentifier)}");
+            toStringOutput.Add($"Capabilities = {(Capabilities == null ? "null" : $"[{ string.Join(", ", Capabilities)} ]")}");
             toStringOutput.Add($"ReceiptNumber = {(ReceiptNumber == null ? "null" : ReceiptNumber == string.Empty ? "" : ReceiptNumber)}");
             toStringOutput.Add($"ReceiptUrl = {(ReceiptUrl == null ? "null" : ReceiptUrl == string.Empty ? "" : ReceiptUrl)}");
+            toStringOutput.Add($"VersionToken = {(VersionToken == null ? "null" : VersionToken == string.Empty ? "" : VersionToken)}");
         }
 
         public override bool Equals(object obj)
@@ -364,6 +422,7 @@ namespace Square.Models
                 ((TipMoney == null && other.TipMoney == null) || (TipMoney?.Equals(other.TipMoney) == true)) &&
                 ((TotalMoney == null && other.TotalMoney == null) || (TotalMoney?.Equals(other.TotalMoney) == true)) &&
                 ((AppFeeMoney == null && other.AppFeeMoney == null) || (AppFeeMoney?.Equals(other.AppFeeMoney) == true)) &&
+                ((ApprovedMoney == null && other.ApprovedMoney == null) || (ApprovedMoney?.Equals(other.ApprovedMoney) == true)) &&
                 ((ProcessingFee == null && other.ProcessingFee == null) || (ProcessingFee?.Equals(other.ProcessingFee) == true)) &&
                 ((RefundedMoney == null && other.RefundedMoney == null) || (RefundedMoney?.Equals(other.RefundedMoney) == true)) &&
                 ((Status == null && other.Status == null) || (Status?.Equals(other.Status) == true)) &&
@@ -372,6 +431,8 @@ namespace Square.Models
                 ((DelayedUntil == null && other.DelayedUntil == null) || (DelayedUntil?.Equals(other.DelayedUntil) == true)) &&
                 ((SourceType == null && other.SourceType == null) || (SourceType?.Equals(other.SourceType) == true)) &&
                 ((CardDetails == null && other.CardDetails == null) || (CardDetails?.Equals(other.CardDetails) == true)) &&
+                ((CashDetails == null && other.CashDetails == null) || (CashDetails?.Equals(other.CashDetails) == true)) &&
+                ((ExternalDetails == null && other.ExternalDetails == null) || (ExternalDetails?.Equals(other.ExternalDetails) == true)) &&
                 ((LocationId == null && other.LocationId == null) || (LocationId?.Equals(other.LocationId) == true)) &&
                 ((OrderId == null && other.OrderId == null) || (OrderId?.Equals(other.OrderId) == true)) &&
                 ((ReferenceId == null && other.ReferenceId == null) || (ReferenceId?.Equals(other.ReferenceId) == true)) &&
@@ -384,13 +445,15 @@ namespace Square.Models
                 ((ShippingAddress == null && other.ShippingAddress == null) || (ShippingAddress?.Equals(other.ShippingAddress) == true)) &&
                 ((Note == null && other.Note == null) || (Note?.Equals(other.Note) == true)) &&
                 ((StatementDescriptionIdentifier == null && other.StatementDescriptionIdentifier == null) || (StatementDescriptionIdentifier?.Equals(other.StatementDescriptionIdentifier) == true)) &&
+                ((Capabilities == null && other.Capabilities == null) || (Capabilities?.Equals(other.Capabilities) == true)) &&
                 ((ReceiptNumber == null && other.ReceiptNumber == null) || (ReceiptNumber?.Equals(other.ReceiptNumber) == true)) &&
-                ((ReceiptUrl == null && other.ReceiptUrl == null) || (ReceiptUrl?.Equals(other.ReceiptUrl) == true));
+                ((ReceiptUrl == null && other.ReceiptUrl == null) || (ReceiptUrl?.Equals(other.ReceiptUrl) == true)) &&
+                ((VersionToken == null && other.VersionToken == null) || (VersionToken?.Equals(other.VersionToken) == true));
         }
 
         public override int GetHashCode()
         {
-            int hashCode = 1131972147;
+            int hashCode = 761606250;
 
             if (Id != null)
             {
@@ -425,6 +488,11 @@ namespace Square.Models
             if (AppFeeMoney != null)
             {
                hashCode += AppFeeMoney.GetHashCode();
+            }
+
+            if (ApprovedMoney != null)
+            {
+               hashCode += ApprovedMoney.GetHashCode();
             }
 
             if (ProcessingFee != null)
@@ -465,6 +533,16 @@ namespace Square.Models
             if (CardDetails != null)
             {
                hashCode += CardDetails.GetHashCode();
+            }
+
+            if (CashDetails != null)
+            {
+               hashCode += CashDetails.GetHashCode();
+            }
+
+            if (ExternalDetails != null)
+            {
+               hashCode += ExternalDetails.GetHashCode();
             }
 
             if (LocationId != null)
@@ -527,6 +605,11 @@ namespace Square.Models
                hashCode += StatementDescriptionIdentifier.GetHashCode();
             }
 
+            if (Capabilities != null)
+            {
+               hashCode += Capabilities.GetHashCode();
+            }
+
             if (ReceiptNumber != null)
             {
                hashCode += ReceiptNumber.GetHashCode();
@@ -535,6 +618,11 @@ namespace Square.Models
             if (ReceiptUrl != null)
             {
                hashCode += ReceiptUrl.GetHashCode();
+            }
+
+            if (VersionToken != null)
+            {
+               hashCode += VersionToken.GetHashCode();
             }
 
             return hashCode;
@@ -550,6 +638,7 @@ namespace Square.Models
                 .TipMoney(TipMoney)
                 .TotalMoney(TotalMoney)
                 .AppFeeMoney(AppFeeMoney)
+                .ApprovedMoney(ApprovedMoney)
                 .ProcessingFee(ProcessingFee)
                 .RefundedMoney(RefundedMoney)
                 .Status(Status)
@@ -558,6 +647,8 @@ namespace Square.Models
                 .DelayedUntil(DelayedUntil)
                 .SourceType(SourceType)
                 .CardDetails(CardDetails)
+                .CashDetails(CashDetails)
+                .ExternalDetails(ExternalDetails)
                 .LocationId(LocationId)
                 .OrderId(OrderId)
                 .ReferenceId(ReferenceId)
@@ -570,8 +661,10 @@ namespace Square.Models
                 .ShippingAddress(ShippingAddress)
                 .Note(Note)
                 .StatementDescriptionIdentifier(StatementDescriptionIdentifier)
+                .Capabilities(Capabilities)
                 .ReceiptNumber(ReceiptNumber)
-                .ReceiptUrl(ReceiptUrl);
+                .ReceiptUrl(ReceiptUrl)
+                .VersionToken(VersionToken);
             return builder;
         }
 
@@ -584,6 +677,7 @@ namespace Square.Models
             private Models.Money tipMoney;
             private Models.Money totalMoney;
             private Models.Money appFeeMoney;
+            private Models.Money approvedMoney;
             private IList<Models.ProcessingFee> processingFee;
             private Models.Money refundedMoney;
             private string status;
@@ -592,6 +686,8 @@ namespace Square.Models
             private string delayedUntil;
             private string sourceType;
             private Models.CardPaymentDetails cardDetails;
+            private Models.CashPaymentDetails cashDetails;
+            private Models.ExternalPaymentDetails externalDetails;
             private string locationId;
             private string orderId;
             private string referenceId;
@@ -604,8 +700,10 @@ namespace Square.Models
             private Models.Address shippingAddress;
             private string note;
             private string statementDescriptionIdentifier;
+            private IList<string> capabilities;
             private string receiptNumber;
             private string receiptUrl;
+            private string versionToken;
 
 
 
@@ -648,6 +746,12 @@ namespace Square.Models
             public Builder AppFeeMoney(Models.Money appFeeMoney)
             {
                 this.appFeeMoney = appFeeMoney;
+                return this;
+            }
+
+            public Builder ApprovedMoney(Models.Money approvedMoney)
+            {
+                this.approvedMoney = approvedMoney;
                 return this;
             }
 
@@ -696,6 +800,18 @@ namespace Square.Models
             public Builder CardDetails(Models.CardPaymentDetails cardDetails)
             {
                 this.cardDetails = cardDetails;
+                return this;
+            }
+
+            public Builder CashDetails(Models.CashPaymentDetails cashDetails)
+            {
+                this.cashDetails = cashDetails;
+                return this;
+            }
+
+            public Builder ExternalDetails(Models.ExternalPaymentDetails externalDetails)
+            {
+                this.externalDetails = externalDetails;
                 return this;
             }
 
@@ -771,6 +887,12 @@ namespace Square.Models
                 return this;
             }
 
+            public Builder Capabilities(IList<string> capabilities)
+            {
+                this.capabilities = capabilities;
+                return this;
+            }
+
             public Builder ReceiptNumber(string receiptNumber)
             {
                 this.receiptNumber = receiptNumber;
@@ -783,6 +905,12 @@ namespace Square.Models
                 return this;
             }
 
+            public Builder VersionToken(string versionToken)
+            {
+                this.versionToken = versionToken;
+                return this;
+            }
+
             public Payment Build()
             {
                 return new Payment(id,
@@ -792,6 +920,7 @@ namespace Square.Models
                     tipMoney,
                     totalMoney,
                     appFeeMoney,
+                    approvedMoney,
                     processingFee,
                     refundedMoney,
                     status,
@@ -800,6 +929,8 @@ namespace Square.Models
                     delayedUntil,
                     sourceType,
                     cardDetails,
+                    cashDetails,
+                    externalDetails,
                     locationId,
                     orderId,
                     referenceId,
@@ -812,8 +943,10 @@ namespace Square.Models
                     shippingAddress,
                     note,
                     statementDescriptionIdentifier,
+                    capabilities,
                     receiptNumber,
-                    receiptUrl);
+                    receiptUrl,
+                    versionToken);
             }
         }
     }

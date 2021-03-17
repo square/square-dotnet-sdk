@@ -26,7 +26,9 @@ namespace Square.Models
             string status = null,
             string cancelReason = null,
             string createdAt = null,
-            string updatedAt = null)
+            string updatedAt = null,
+            string appId = null,
+            string locationId = null)
         {
             Id = id;
             RefundId = refundId;
@@ -40,10 +42,12 @@ namespace Square.Models
             CancelReason = cancelReason;
             CreatedAt = createdAt;
             UpdatedAt = updatedAt;
+            AppId = appId;
+            LocationId = locationId;
         }
 
         /// <summary>
-        /// A unique ID for this `TerminalRefund`
+        /// A unique ID for this `TerminalRefund`.
         /// </summary>
         [JsonProperty("id", NullValueHandling = NullValueHandling.Ignore)]
         public string Id { get; }
@@ -55,13 +59,13 @@ namespace Square.Models
         public string RefundId { get; }
 
         /// <summary>
-        /// Unique ID of the payment being refunded.
+        /// The unique ID of the payment being refunded.
         /// </summary>
         [JsonProperty("payment_id")]
         public string PaymentId { get; }
 
         /// <summary>
-        /// The reference to the Square order id for the payment identified by the `payment_id`.
+        /// The reference to the Square order ID for the payment identified by the `payment_id`.
         /// </summary>
         [JsonProperty("order_id", NullValueHandling = NullValueHandling.Ignore)]
         public string OrderId { get; }
@@ -85,17 +89,17 @@ namespace Square.Models
         public string Reason { get; }
 
         /// <summary>
-        /// The unique Id of the device intended for this `TerminalRefund`.
+        /// The unique ID of the device intended for this `TerminalRefund`.
         /// The Id can be retrieved from /v2/devices api.
         /// </summary>
         [JsonProperty("device_id", NullValueHandling = NullValueHandling.Ignore)]
         public string DeviceId { get; }
 
         /// <summary>
-        /// The duration as an RFC 3339 duration, after which the refund will be automatically canceled.
-        /// TerminalRefunds that are `PENDING` will be automatically `CANCELED` and have a cancellation reason
-        /// of `TIMED_OUT`
-        /// Default: 5 minutes from creation
+        /// The RFC 3339 duration, after which the refund is automatically canceled.
+        /// A `TerminalRefund` that is `PENDING` is automatically `CANCELED` and has a cancellation reason
+        /// of `TIMED_OUT`.
+        /// Default: 5 minutes from creation.
         /// Maximum: 5 minutes
         /// </summary>
         [JsonProperty("deadline_duration", NullValueHandling = NullValueHandling.Ignore)]
@@ -103,7 +107,7 @@ namespace Square.Models
 
         /// <summary>
         /// The status of the `TerminalRefund`.
-        /// Options: `PENDING`, `IN_PROGRESS`, `CANCELED`, `COMPLETED`
+        /// Options: `PENDING`, `IN_PROGRESS`, `CANCELED`, or `COMPLETED`.
         /// </summary>
         [JsonProperty("status", NullValueHandling = NullValueHandling.Ignore)]
         public string Status { get; }
@@ -115,16 +119,28 @@ namespace Square.Models
         public string CancelReason { get; }
 
         /// <summary>
-        /// The time when the `TerminalRefund` was created as an RFC 3339 timestamp.
+        /// The time when the `TerminalRefund` was created, as an RFC 3339 timestamp.
         /// </summary>
         [JsonProperty("created_at", NullValueHandling = NullValueHandling.Ignore)]
         public string CreatedAt { get; }
 
         /// <summary>
-        /// The time when the `TerminalRefund` was last updated as an RFC 3339 timestamp.
+        /// The time when the `TerminalRefund` was last updated, as an RFC 3339 timestamp.
         /// </summary>
         [JsonProperty("updated_at", NullValueHandling = NullValueHandling.Ignore)]
         public string UpdatedAt { get; }
+
+        /// <summary>
+        /// The ID of the application that created the refund.
+        /// </summary>
+        [JsonProperty("app_id", NullValueHandling = NullValueHandling.Ignore)]
+        public string AppId { get; }
+
+        /// <summary>
+        /// The location of the device where the `TerminalRefund` was directed.
+        /// </summary>
+        [JsonProperty("location_id", NullValueHandling = NullValueHandling.Ignore)]
+        public string LocationId { get; }
 
         public override string ToString()
         {
@@ -149,6 +165,8 @@ namespace Square.Models
             toStringOutput.Add($"CancelReason = {(CancelReason == null ? "null" : CancelReason.ToString())}");
             toStringOutput.Add($"CreatedAt = {(CreatedAt == null ? "null" : CreatedAt == string.Empty ? "" : CreatedAt)}");
             toStringOutput.Add($"UpdatedAt = {(UpdatedAt == null ? "null" : UpdatedAt == string.Empty ? "" : UpdatedAt)}");
+            toStringOutput.Add($"AppId = {(AppId == null ? "null" : AppId == string.Empty ? "" : AppId)}");
+            toStringOutput.Add($"LocationId = {(LocationId == null ? "null" : LocationId == string.Empty ? "" : LocationId)}");
         }
 
         public override bool Equals(object obj)
@@ -175,12 +193,14 @@ namespace Square.Models
                 ((Status == null && other.Status == null) || (Status?.Equals(other.Status) == true)) &&
                 ((CancelReason == null && other.CancelReason == null) || (CancelReason?.Equals(other.CancelReason) == true)) &&
                 ((CreatedAt == null && other.CreatedAt == null) || (CreatedAt?.Equals(other.CreatedAt) == true)) &&
-                ((UpdatedAt == null && other.UpdatedAt == null) || (UpdatedAt?.Equals(other.UpdatedAt) == true));
+                ((UpdatedAt == null && other.UpdatedAt == null) || (UpdatedAt?.Equals(other.UpdatedAt) == true)) &&
+                ((AppId == null && other.AppId == null) || (AppId?.Equals(other.AppId) == true)) &&
+                ((LocationId == null && other.LocationId == null) || (LocationId?.Equals(other.LocationId) == true));
         }
 
         public override int GetHashCode()
         {
-            int hashCode = 1855433710;
+            int hashCode = 973053086;
 
             if (Id != null)
             {
@@ -242,6 +262,16 @@ namespace Square.Models
                hashCode += UpdatedAt.GetHashCode();
             }
 
+            if (AppId != null)
+            {
+               hashCode += AppId.GetHashCode();
+            }
+
+            if (LocationId != null)
+            {
+               hashCode += LocationId.GetHashCode();
+            }
+
             return hashCode;
         }
 
@@ -258,7 +288,9 @@ namespace Square.Models
                 .Status(Status)
                 .CancelReason(CancelReason)
                 .CreatedAt(CreatedAt)
-                .UpdatedAt(UpdatedAt);
+                .UpdatedAt(UpdatedAt)
+                .AppId(AppId)
+                .LocationId(LocationId);
             return builder;
         }
 
@@ -276,6 +308,8 @@ namespace Square.Models
             private string cancelReason;
             private string createdAt;
             private string updatedAt;
+            private string appId;
+            private string locationId;
 
             public Builder(string paymentId,
                 Models.Money amountMoney)
@@ -356,6 +390,18 @@ namespace Square.Models
                 return this;
             }
 
+            public Builder AppId(string appId)
+            {
+                this.appId = appId;
+                return this;
+            }
+
+            public Builder LocationId(string locationId)
+            {
+                this.locationId = locationId;
+                return this;
+            }
+
             public TerminalRefund Build()
             {
                 return new TerminalRefund(paymentId,
@@ -369,7 +415,9 @@ namespace Square.Models
                     status,
                     cancelReason,
                     createdAt,
-                    updatedAt);
+                    updatedAt,
+                    appId,
+                    locationId);
             }
         }
     }

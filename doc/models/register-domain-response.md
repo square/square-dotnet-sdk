@@ -4,7 +4,7 @@
 Defines the fields that are included in the response body of
 a request to the [RegisterDomain](#endpoint-registerdomain) endpoint.
 
-Either `errors` or `status` will be present in a given response (never both).
+Either `errors` or `status` are present in a given response (never both).
 
 ## Structure
 
@@ -15,7 +15,7 @@ Either `errors` or `status` will be present in a given response (never both).
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `Errors` | [`IList<Models.Error>`](/doc/models/error.md) | Optional | Any errors that occurred during the request. |
-| `Status` | [`string`](/doc/models/register-domain-response-status.md) | Optional | The status of domain registration. |
+| `Status` | [`string`](/doc/models/register-domain-response-status.md) | Optional | The status of the domain registration. |
 
 ## Example (as JSON)
 

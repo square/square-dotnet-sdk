@@ -25,8 +25,8 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// `TerminalRefund`s associated with a specific device. If no device is specified then all
-        /// `TerminalRefund`s for the signed in account will be displayed.
+        /// `TerminalRefund` objects associated with a specific device. If no device is specified, then all
+        /// `TerminalRefund` objects for the signed-in account are displayed.
         /// </summary>
         [JsonProperty("device_id", NullValueHandling = NullValueHandling.Ignore)]
         public string DeviceId { get; }
@@ -42,8 +42,8 @@ namespace Square.Models
         public Models.TimeRange CreatedAt { get; }
 
         /// <summary>
-        /// Filtered results with the desired status of the `TerminalRefund`
-        /// Options: `PENDING`, `IN_PROGRESS`, `CANCEL_REQUESTED`, `CANCELED`, `COMPLETED`
+        /// Filtered results with the desired status of the `TerminalRefund`.
+        /// Options: `PENDING`, `IN_PROGRESS`, `CANCEL_REQUESTED`, `CANCELED`, or `COMPLETED`.
         /// </summary>
         [JsonProperty("status", NullValueHandling = NullValueHandling.Ignore)]
         public string Status { get; }

@@ -33,7 +33,7 @@ namespace Square.Models
         public string DeviceId { get; }
 
         /// <summary>
-        /// Instruct the device to skip the receipt screen. Defaults to false.
+        /// Instructs the device to skip the receipt screen. Defaults to false.
         /// </summary>
         [JsonProperty("skip_receipt_screen", NullValueHandling = NullValueHandling.Ignore)]
         public bool? SkipReceiptScreen { get; }

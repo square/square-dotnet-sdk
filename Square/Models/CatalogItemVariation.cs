@@ -72,9 +72,9 @@ namespace Square.Models
 
         /// <summary>
         /// The universal product code (UPC) of the item variation, if any. This is a searchable attribute for use in applicable query filters.
-        /// The value of this attribute should be a number of 12-14 digits long.  This restriction is enforced on the Square Seller Dashboard, 
-        /// Square Point of Sale or Retail Point of Sale apps, where this attribute shows in the GTIN field. If a non-compliant UPC value is assigned 
-        /// to this attribute using the API, the value is not editable on the Seller Dashboard, Square Point of Sale or Retail Point of Sale apps 
+        /// The value of this attribute should be a number of 12-14 digits long.  This restriction is enforced on the Square Seller Dashboard,
+        /// Square Point of Sale or Retail Point of Sale apps, where this attribute shows in the GTIN field. If a non-compliant UPC value is assigned
+        /// to this attribute using the API, the value is not editable on the Seller Dashboard, Square Point of Sale or Retail Point of Sale apps
         /// unless it is updated to fit the expected format.
         /// </summary>
         [JsonProperty("upc", NullValueHandling = NullValueHandling.Ignore)]
