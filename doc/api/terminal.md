@@ -22,7 +22,8 @@ ITerminalApi terminalApi = client.TerminalApi;
 
 # Create Terminal Checkout
 
-Creates a new Terminal checkout request and sends it to the specified device to take a payment for the requested amount.
+Creates a Terminal checkout request and sends it to the specified device to take a payment
+for the requested amount.
 
 ```csharp
 CreateTerminalCheckoutAsync(Models.CreateTerminalCheckoutRequest body)
@@ -136,7 +137,7 @@ catch (ApiException e){};
 
 # Get Terminal Checkout
 
-Retrieves a Terminal checkout request by checkout_id.
+Retrieves a Terminal checkout request by `checkout_id`.
 
 ```csharp
 GetTerminalCheckoutAsync(string checkoutId)
@@ -146,7 +147,7 @@ GetTerminalCheckoutAsync(string checkoutId)
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `checkoutId` | `string` | Template, Required | Unique ID for the desired `TerminalCheckout` |
+| `checkoutId` | `string` | Template, Required | The unique ID for the desired `TerminalCheckout`. |
 
 ## Response Type
 
@@ -177,7 +178,7 @@ CancelTerminalCheckoutAsync(string checkoutId)
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `checkoutId` | `string` | Template, Required | Unique ID for the desired `TerminalCheckout` |
+| `checkoutId` | `string` | Template, Required | The unique ID for the desired `TerminalCheckout`. |
 
 ## Response Type
 
@@ -245,7 +246,7 @@ catch (ApiException e){};
 
 # Search Terminal Refunds
 
-Retrieves a filtered list of Terminal Interac refund requests created by the seller making the request.
+Retrieves a filtered list of Interac Terminal refund requests created by the seller making the request.
 
 ```csharp
 SearchTerminalRefundsAsync(Models.SearchTerminalRefundsRequest body)
@@ -296,7 +297,7 @@ catch (ApiException e){};
 
 # Get Terminal Refund
 
-Retrieves an Interac terminal refund object by ID.
+Retrieves an Interac Terminal refund object by ID.
 
 ```csharp
 GetTerminalRefundAsync(string terminalRefundId)
@@ -306,7 +307,7 @@ GetTerminalRefundAsync(string terminalRefundId)
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `terminalRefundId` | `string` | Template, Required | Unique ID for the desired `TerminalRefund` |
+| `terminalRefundId` | `string` | Template, Required | The unique ID for the desired `TerminalRefund`. |
 
 ## Response Type
 
@@ -327,7 +328,7 @@ catch (ApiException e){};
 
 # Cancel Terminal Refund
 
-Cancels an Interac terminal refund request by refund request ID if the status of the request permits it.
+Cancels an Interac Terminal refund request by refund request ID if the status of the request permits it.
 
 ```csharp
 CancelTerminalRefundAsync(string terminalRefundId)
@@ -337,7 +338,7 @@ CancelTerminalRefundAsync(string terminalRefundId)
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `terminalRefundId` | `string` | Template, Required | Unique ID for the desired `TerminalRefund` |
+| `terminalRefundId` | `string` | Template, Required | The unique ID for the desired `TerminalRefund`. |
 
 ## Response Type
 

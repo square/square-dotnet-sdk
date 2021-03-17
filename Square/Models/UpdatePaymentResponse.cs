@@ -14,29 +14,29 @@ using Square.Utilities;
 
 namespace Square.Models
 {
-    public class CreateTerminalRefundResponse 
+    public class UpdatePaymentResponse 
     {
-        public CreateTerminalRefundResponse(IList<Models.Error> errors = null,
-            Models.TerminalRefund refund = null)
+        public UpdatePaymentResponse(IList<Models.Error> errors = null,
+            Models.Payment payment = null)
         {
             Errors = errors;
-            Refund = refund;
+            Payment = payment;
         }
 
         [JsonIgnore]
         public HttpContext Context { get; internal set; }
 
         /// <summary>
-        /// Information about errors encountered during the request.
+        /// Any errors that occurred during the request.
         /// </summary>
         [JsonProperty("errors", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.Error> Errors { get; }
 
         /// <summary>
-        /// Getter for refund
+        /// Represents a payment processed by the Square API.
         /// </summary>
-        [JsonProperty("refund", NullValueHandling = NullValueHandling.Ignore)]
-        public Models.TerminalRefund Refund { get; }
+        [JsonProperty("payment", NullValueHandling = NullValueHandling.Ignore)]
+        public Models.Payment Payment { get; }
 
         public override string ToString()
         {
@@ -44,13 +44,13 @@ namespace Square.Models
 
             this.ToString(toStringOutput);
 
-            return $"CreateTerminalRefundResponse : ({string.Join(", ", toStringOutput)})";
+            return $"UpdatePaymentResponse : ({string.Join(", ", toStringOutput)})";
         }
 
         protected void ToString(List<string> toStringOutput)
         {
             toStringOutput.Add($"Errors = {(Errors == null ? "null" : $"[{ string.Join(", ", Errors)} ]")}");
-            toStringOutput.Add($"Refund = {(Refund == null ? "null" : Refund.ToString())}");
+            toStringOutput.Add($"Payment = {(Payment == null ? "null" : Payment.ToString())}");
         }
 
         public override bool Equals(object obj)
@@ -65,15 +65,15 @@ namespace Square.Models
                 return true;
             }
 
-            return obj is CreateTerminalRefundResponse other &&
+            return obj is UpdatePaymentResponse other &&
                 ((Context == null && other.Context == null) || (Context?.Equals(other.Context) == true)) &&
                 ((Errors == null && other.Errors == null) || (Errors?.Equals(other.Errors) == true)) &&
-                ((Refund == null && other.Refund == null) || (Refund?.Equals(other.Refund) == true));
+                ((Payment == null && other.Payment == null) || (Payment?.Equals(other.Payment) == true));
         }
 
         public override int GetHashCode()
         {
-            int hashCode = -1398423475;
+            int hashCode = -2086612380;
 
             if (Context != null)
             {
@@ -85,9 +85,9 @@ namespace Square.Models
                hashCode += Errors.GetHashCode();
             }
 
-            if (Refund != null)
+            if (Payment != null)
             {
-               hashCode += Refund.GetHashCode();
+               hashCode += Payment.GetHashCode();
             }
 
             return hashCode;
@@ -97,14 +97,14 @@ namespace Square.Models
         {
             var builder = new Builder()
                 .Errors(Errors)
-                .Refund(Refund);
+                .Payment(Payment);
             return builder;
         }
 
         public class Builder
         {
             private IList<Models.Error> errors;
-            private Models.TerminalRefund refund;
+            private Models.Payment payment;
 
 
 
@@ -114,16 +114,16 @@ namespace Square.Models
                 return this;
             }
 
-            public Builder Refund(Models.TerminalRefund refund)
+            public Builder Payment(Models.Payment payment)
             {
-                this.refund = refund;
+                this.payment = payment;
                 return this;
             }
 
-            public CreateTerminalRefundResponse Build()
+            public UpdatePaymentResponse Build()
             {
-                return new CreateTerminalRefundResponse(errors,
-                    refund);
+                return new UpdatePaymentResponse(errors,
+                    payment);
             }
         }
     }

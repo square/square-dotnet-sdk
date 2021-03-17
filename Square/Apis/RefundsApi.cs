@@ -128,8 +128,10 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Refunds a payment. You can refund the entire payment amount or a 
-        /// portion of it.
+        /// Refunds a payment. You can refund the entire payment amount or a
+        /// portion of it. You can use this endpoint to refund a card payment or record a 
+        /// refund of a cash or external payment. For more information, see
+        /// [Refund Payment](https://developer.squareup.com/docs/payments-api/refund-payments).
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.RefundPaymentResponse response from the API call</return>
@@ -141,8 +143,10 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Refunds a payment. You can refund the entire payment amount or a 
-        /// portion of it.
+        /// Refunds a payment. You can refund the entire payment amount or a
+        /// portion of it. You can use this endpoint to refund a card payment or record a 
+        /// refund of a cash or external payment. For more information, see
+        /// [Refund Payment](https://developer.squareup.com/docs/payments-api/refund-payments).
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.RefundPaymentResponse response from the API call</return>

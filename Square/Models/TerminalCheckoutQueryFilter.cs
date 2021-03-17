@@ -25,8 +25,8 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// `TerminalCheckout`s associated with a specific device. If no device is specified then all
-        /// `TerminalCheckout`s for the merchant will be displayed.
+        /// The `TerminalCheckout` objects associated with a specific device. If no device is specified, then all
+        /// `TerminalCheckout` objects for the merchant are displayed.
         /// </summary>
         [JsonProperty("device_id", NullValueHandling = NullValueHandling.Ignore)]
         public string DeviceId { get; }
@@ -42,7 +42,7 @@ namespace Square.Models
         public Models.TimeRange CreatedAt { get; }
 
         /// <summary>
-        /// Filtered results with the desired status of the `TerminalCheckout`
+        /// Filtered results with the desired status of the `TerminalCheckout`.
         /// Options: PENDING, IN_PROGRESS, CANCELED, COMPLETED
         /// </summary>
         [JsonProperty("status", NullValueHandling = NullValueHandling.Ignore)]

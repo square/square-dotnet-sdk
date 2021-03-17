@@ -32,14 +32,14 @@ namespace Square.Models
 
         /// <summary>
         /// A pagination cursor returned by a previous call to this endpoint.
-        /// Provide this to retrieve the next set of results for the original query.
+        /// Provide this cursor to retrieve the next set of results for the original query.
         /// See [Pagination](https://developer.squareup.com/docs/basics/api101/pagination) for more information.
         /// </summary>
         [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
         public string Cursor { get; }
 
         /// <summary>
-        /// Limit the number of results returned for a single request.
+        /// Limits the number of results returned for a single request.
         /// </summary>
         [JsonProperty("limit", NullValueHandling = NullValueHandling.Ignore)]
         public int? Limit { get; }

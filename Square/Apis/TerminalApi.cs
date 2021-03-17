@@ -24,7 +24,8 @@ namespace Square.Apis
         { }
 
         /// <summary>
-        /// Creates a new Terminal checkout request and sends it to the specified device to take a payment for the requested amount.
+        /// Creates a Terminal checkout request and sends it to the specified device to take a payment
+        /// for the requested amount.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.CreateTerminalCheckoutResponse response from the API call</return>
@@ -36,7 +37,8 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Creates a new Terminal checkout request and sends it to the specified device to take a payment for the requested amount.
+        /// Creates a Terminal checkout request and sends it to the specified device to take a payment
+        /// for the requested amount.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.CreateTerminalCheckoutResponse response from the API call</return>
@@ -150,9 +152,9 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Retrieves a Terminal checkout request by checkout_id.
+        /// Retrieves a Terminal checkout request by `checkout_id`.
         /// </summary>
-        /// <param name="checkoutId">Required parameter: Unique ID for the desired `TerminalCheckout`</param>
+        /// <param name="checkoutId">Required parameter: The unique ID for the desired `TerminalCheckout`.</param>
         /// <return>Returns the Models.GetTerminalCheckoutResponse response from the API call</return>
         public Models.GetTerminalCheckoutResponse GetTerminalCheckout(string checkoutId)
         {
@@ -162,9 +164,9 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Retrieves a Terminal checkout request by checkout_id.
+        /// Retrieves a Terminal checkout request by `checkout_id`.
         /// </summary>
-        /// <param name="checkoutId">Required parameter: Unique ID for the desired `TerminalCheckout`</param>
+        /// <param name="checkoutId">Required parameter: The unique ID for the desired `TerminalCheckout`.</param>
         /// <return>Returns the Models.GetTerminalCheckoutResponse response from the API call</return>
         public async Task<Models.GetTerminalCheckoutResponse> GetTerminalCheckoutAsync(string checkoutId, CancellationToken cancellationToken = default)
         {
@@ -217,7 +219,7 @@ namespace Square.Apis
         /// <summary>
         /// Cancels a Terminal checkout request if the status of the request permits it.
         /// </summary>
-        /// <param name="checkoutId">Required parameter: Unique ID for the desired `TerminalCheckout`</param>
+        /// <param name="checkoutId">Required parameter: The unique ID for the desired `TerminalCheckout`.</param>
         /// <return>Returns the Models.CancelTerminalCheckoutResponse response from the API call</return>
         public Models.CancelTerminalCheckoutResponse CancelTerminalCheckout(string checkoutId)
         {
@@ -229,7 +231,7 @@ namespace Square.Apis
         /// <summary>
         /// Cancels a Terminal checkout request if the status of the request permits it.
         /// </summary>
-        /// <param name="checkoutId">Required parameter: Unique ID for the desired `TerminalCheckout`</param>
+        /// <param name="checkoutId">Required parameter: The unique ID for the desired `TerminalCheckout`.</param>
         /// <return>Returns the Models.CancelTerminalCheckoutResponse response from the API call</return>
         public async Task<Models.CancelTerminalCheckoutResponse> CancelTerminalCheckoutAsync(string checkoutId, CancellationToken cancellationToken = default)
         {
@@ -343,7 +345,7 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Retrieves a filtered list of Terminal Interac refund requests created by the seller making the request.
+        /// Retrieves a filtered list of Interac Terminal refund requests created by the seller making the request.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.SearchTerminalRefundsResponse response from the API call</return>
@@ -355,7 +357,7 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Retrieves a filtered list of Terminal Interac refund requests created by the seller making the request.
+        /// Retrieves a filtered list of Interac Terminal refund requests created by the seller making the request.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
         /// <return>Returns the Models.SearchTerminalRefundsResponse response from the API call</return>
@@ -406,9 +408,9 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Retrieves an Interac terminal refund object by ID.
+        /// Retrieves an Interac Terminal refund object by ID.
         /// </summary>
-        /// <param name="terminalRefundId">Required parameter: Unique ID for the desired `TerminalRefund`</param>
+        /// <param name="terminalRefundId">Required parameter: The unique ID for the desired `TerminalRefund`.</param>
         /// <return>Returns the Models.GetTerminalRefundResponse response from the API call</return>
         public Models.GetTerminalRefundResponse GetTerminalRefund(string terminalRefundId)
         {
@@ -418,9 +420,9 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Retrieves an Interac terminal refund object by ID.
+        /// Retrieves an Interac Terminal refund object by ID.
         /// </summary>
-        /// <param name="terminalRefundId">Required parameter: Unique ID for the desired `TerminalRefund`</param>
+        /// <param name="terminalRefundId">Required parameter: The unique ID for the desired `TerminalRefund`.</param>
         /// <return>Returns the Models.GetTerminalRefundResponse response from the API call</return>
         public async Task<Models.GetTerminalRefundResponse> GetTerminalRefundAsync(string terminalRefundId, CancellationToken cancellationToken = default)
         {
@@ -471,9 +473,9 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Cancels an Interac terminal refund request by refund request ID if the status of the request permits it.
+        /// Cancels an Interac Terminal refund request by refund request ID if the status of the request permits it.
         /// </summary>
-        /// <param name="terminalRefundId">Required parameter: Unique ID for the desired `TerminalRefund`</param>
+        /// <param name="terminalRefundId">Required parameter: The unique ID for the desired `TerminalRefund`.</param>
         /// <return>Returns the Models.CancelTerminalRefundResponse response from the API call</return>
         public Models.CancelTerminalRefundResponse CancelTerminalRefund(string terminalRefundId)
         {
@@ -483,9 +485,9 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Cancels an Interac terminal refund request by refund request ID if the status of the request permits it.
+        /// Cancels an Interac Terminal refund request by refund request ID if the status of the request permits it.
         /// </summary>
-        /// <param name="terminalRefundId">Required parameter: Unique ID for the desired `TerminalRefund`</param>
+        /// <param name="terminalRefundId">Required parameter: The unique ID for the desired `TerminalRefund`.</param>
         /// <return>Returns the Models.CancelTerminalRefundResponse response from the API call</return>
         public async Task<Models.CancelTerminalRefundResponse> CancelTerminalRefundAsync(string terminalRefundId, CancellationToken cancellationToken = default)
         {
