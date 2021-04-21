@@ -1,29 +1,45 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class InventoryChange 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// InventoryChange.
+    /// </summary>
+    public class InventoryChange
     {
-        public InventoryChange(string type = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="InventoryChange"/> class.
+        /// </summary>
+        /// <param name="type">type.</param>
+        /// <param name="physicalCount">physical_count.</param>
+        /// <param name="adjustment">adjustment.</param>
+        /// <param name="transfer">transfer.</param>
+        /// <param name="measurementUnit">measurement_unit.</param>
+        /// <param name="measurementUnitId">measurement_unit_id.</param>
+        public InventoryChange(
+            string type = null,
             Models.InventoryPhysicalCount physicalCount = null,
             Models.InventoryAdjustment adjustment = null,
-            Models.InventoryTransfer transfer = null)
+            Models.InventoryTransfer transfer = null,
+            Models.CatalogMeasurementUnit measurementUnit = null,
+            string measurementUnitId = null)
         {
-            Type = type;
-            PhysicalCount = physicalCount;
-            Adjustment = adjustment;
-            Transfer = transfer;
+            this.Type = type;
+            this.PhysicalCount = physicalCount;
+            this.Adjustment = adjustment;
+            this.Transfer = transfer;
+            this.MeasurementUnit = measurementUnit;
+            this.MeasurementUnitId = measurementUnitId;
         }
 
         /// <summary>
@@ -55,6 +71,20 @@ namespace Square.Models
         [JsonProperty("transfer", NullValueHandling = NullValueHandling.Ignore)]
         public Models.InventoryTransfer Transfer { get; }
 
+        /// <summary>
+        /// Represents the unit used to measure a `CatalogItemVariation` and
+        /// specifies the precision for decimal quantities.
+        /// </summary>
+        [JsonProperty("measurement_unit", NullValueHandling = NullValueHandling.Ignore)]
+        public Models.CatalogMeasurementUnit MeasurementUnit { get; }
+
+        /// <summary>
+        /// The ID of the [CatalogMeasurementUnit]($m/CatalogMeasurementUnit) object representing the catalog measurement unit associated with the inventory change.
+        /// </summary>
+        [JsonProperty("measurement_unit_id", NullValueHandling = NullValueHandling.Ignore)]
+        public string MeasurementUnitId { get; }
+
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -64,14 +94,7 @@ namespace Square.Models
             return $"InventoryChange : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Type = {(Type == null ? "null" : Type.ToString())}");
-            toStringOutput.Add($"PhysicalCount = {(PhysicalCount == null ? "null" : PhysicalCount.ToString())}");
-            toStringOutput.Add($"Adjustment = {(Adjustment == null ? "null" : Adjustment.ToString())}");
-            toStringOutput.Add($"Transfer = {(Transfer == null ? "null" : Transfer.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -85,88 +108,173 @@ namespace Square.Models
             }
 
             return obj is InventoryChange other &&
-                ((Type == null && other.Type == null) || (Type?.Equals(other.Type) == true)) &&
-                ((PhysicalCount == null && other.PhysicalCount == null) || (PhysicalCount?.Equals(other.PhysicalCount) == true)) &&
-                ((Adjustment == null && other.Adjustment == null) || (Adjustment?.Equals(other.Adjustment) == true)) &&
-                ((Transfer == null && other.Transfer == null) || (Transfer?.Equals(other.Transfer) == true));
+                ((this.Type == null && other.Type == null) || (this.Type?.Equals(other.Type) == true)) &&
+                ((this.PhysicalCount == null && other.PhysicalCount == null) || (this.PhysicalCount?.Equals(other.PhysicalCount) == true)) &&
+                ((this.Adjustment == null && other.Adjustment == null) || (this.Adjustment?.Equals(other.Adjustment) == true)) &&
+                ((this.Transfer == null && other.Transfer == null) || (this.Transfer?.Equals(other.Transfer) == true)) &&
+                ((this.MeasurementUnit == null && other.MeasurementUnit == null) || (this.MeasurementUnit?.Equals(other.MeasurementUnit) == true)) &&
+                ((this.MeasurementUnitId == null && other.MeasurementUnitId == null) || (this.MeasurementUnitId?.Equals(other.MeasurementUnitId) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1849913550;
+            int hashCode = -1147135160;
 
-            if (Type != null)
+            if (this.Type != null)
             {
-               hashCode += Type.GetHashCode();
+               hashCode += this.Type.GetHashCode();
             }
 
-            if (PhysicalCount != null)
+            if (this.PhysicalCount != null)
             {
-               hashCode += PhysicalCount.GetHashCode();
+               hashCode += this.PhysicalCount.GetHashCode();
             }
 
-            if (Adjustment != null)
+            if (this.Adjustment != null)
             {
-               hashCode += Adjustment.GetHashCode();
+               hashCode += this.Adjustment.GetHashCode();
             }
 
-            if (Transfer != null)
+            if (this.Transfer != null)
             {
-               hashCode += Transfer.GetHashCode();
+               hashCode += this.Transfer.GetHashCode();
+            }
+
+            if (this.MeasurementUnit != null)
+            {
+               hashCode += this.MeasurementUnit.GetHashCode();
+            }
+
+            if (this.MeasurementUnitId != null)
+            {
+               hashCode += this.MeasurementUnitId.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Type = {(this.Type == null ? "null" : this.Type.ToString())}");
+            toStringOutput.Add($"this.PhysicalCount = {(this.PhysicalCount == null ? "null" : this.PhysicalCount.ToString())}");
+            toStringOutput.Add($"this.Adjustment = {(this.Adjustment == null ? "null" : this.Adjustment.ToString())}");
+            toStringOutput.Add($"this.Transfer = {(this.Transfer == null ? "null" : this.Transfer.ToString())}");
+            toStringOutput.Add($"this.MeasurementUnit = {(this.MeasurementUnit == null ? "null" : this.MeasurementUnit.ToString())}");
+            toStringOutput.Add($"this.MeasurementUnitId = {(this.MeasurementUnitId == null ? "null" : this.MeasurementUnitId == string.Empty ? "" : this.MeasurementUnitId)}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .Type(Type)
-                .PhysicalCount(PhysicalCount)
-                .Adjustment(Adjustment)
-                .Transfer(Transfer);
+                .Type(this.Type)
+                .PhysicalCount(this.PhysicalCount)
+                .Adjustment(this.Adjustment)
+                .Transfer(this.Transfer)
+                .MeasurementUnit(this.MeasurementUnit)
+                .MeasurementUnitId(this.MeasurementUnitId);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string type;
             private Models.InventoryPhysicalCount physicalCount;
             private Models.InventoryAdjustment adjustment;
             private Models.InventoryTransfer transfer;
+            private Models.CatalogMeasurementUnit measurementUnit;
+            private string measurementUnitId;
 
-
-
+             /// <summary>
+             /// Type.
+             /// </summary>
+             /// <param name="type"> type. </param>
+             /// <returns> Builder. </returns>
             public Builder Type(string type)
             {
                 this.type = type;
                 return this;
             }
 
+             /// <summary>
+             /// PhysicalCount.
+             /// </summary>
+             /// <param name="physicalCount"> physicalCount. </param>
+             /// <returns> Builder. </returns>
             public Builder PhysicalCount(Models.InventoryPhysicalCount physicalCount)
             {
                 this.physicalCount = physicalCount;
                 return this;
             }
 
+             /// <summary>
+             /// Adjustment.
+             /// </summary>
+             /// <param name="adjustment"> adjustment. </param>
+             /// <returns> Builder. </returns>
             public Builder Adjustment(Models.InventoryAdjustment adjustment)
             {
                 this.adjustment = adjustment;
                 return this;
             }
 
+             /// <summary>
+             /// Transfer.
+             /// </summary>
+             /// <param name="transfer"> transfer. </param>
+             /// <returns> Builder. </returns>
             public Builder Transfer(Models.InventoryTransfer transfer)
             {
                 this.transfer = transfer;
                 return this;
             }
 
+             /// <summary>
+             /// MeasurementUnit.
+             /// </summary>
+             /// <param name="measurementUnit"> measurementUnit. </param>
+             /// <returns> Builder. </returns>
+            public Builder MeasurementUnit(Models.CatalogMeasurementUnit measurementUnit)
+            {
+                this.measurementUnit = measurementUnit;
+                return this;
+            }
+
+             /// <summary>
+             /// MeasurementUnitId.
+             /// </summary>
+             /// <param name="measurementUnitId"> measurementUnitId. </param>
+             /// <returns> Builder. </returns>
+            public Builder MeasurementUnitId(string measurementUnitId)
+            {
+                this.measurementUnitId = measurementUnitId;
+                return this;
+            }
+
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> InventoryChange. </returns>
             public InventoryChange Build()
             {
-                return new InventoryChange(type,
-                    physicalCount,
-                    adjustment,
-                    transfer);
+                return new InventoryChange(
+                    this.type,
+                    this.physicalCount,
+                    this.adjustment,
+                    this.transfer,
+                    this.measurementUnit,
+                    this.measurementUnitId);
             }
         }
     }

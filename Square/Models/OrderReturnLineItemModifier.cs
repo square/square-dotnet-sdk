@@ -1,33 +1,45 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class OrderReturnLineItemModifier 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// OrderReturnLineItemModifier.
+    /// </summary>
+    public class OrderReturnLineItemModifier
     {
-        public OrderReturnLineItemModifier(string uid = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="OrderReturnLineItemModifier"/> class.
+        /// </summary>
+        /// <param name="uid">uid.</param>
+        /// <param name="sourceModifierUid">source_modifier_uid.</param>
+        /// <param name="catalogObjectId">catalog_object_id.</param>
+        /// <param name="name">name.</param>
+        /// <param name="basePriceMoney">base_price_money.</param>
+        /// <param name="totalPriceMoney">total_price_money.</param>
+        public OrderReturnLineItemModifier(
+            string uid = null,
             string sourceModifierUid = null,
             string catalogObjectId = null,
             string name = null,
             Models.Money basePriceMoney = null,
             Models.Money totalPriceMoney = null)
         {
-            Uid = uid;
-            SourceModifierUid = sourceModifierUid;
-            CatalogObjectId = catalogObjectId;
-            Name = name;
-            BasePriceMoney = basePriceMoney;
-            TotalPriceMoney = totalPriceMoney;
+            this.Uid = uid;
+            this.SourceModifierUid = sourceModifierUid;
+            this.CatalogObjectId = catalogObjectId;
+            this.Name = name;
+            this.BasePriceMoney = basePriceMoney;
+            this.TotalPriceMoney = totalPriceMoney;
         }
 
         /// <summary>
@@ -44,7 +56,7 @@ namespace Square.Models
         public string SourceModifierUid { get; }
 
         /// <summary>
-        /// The catalog object id referencing [CatalogModifier](#type-catalogmodifier).
+        /// The catalog object id referencing [CatalogModifier]($m/CatalogModifier).
         /// </summary>
         [JsonProperty("catalog_object_id", NullValueHandling = NullValueHandling.Ignore)]
         public string CatalogObjectId { get; }
@@ -77,6 +89,7 @@ namespace Square.Models
         [JsonProperty("total_price_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Money TotalPriceMoney { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -86,16 +99,7 @@ namespace Square.Models
             return $"OrderReturnLineItemModifier : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Uid = {(Uid == null ? "null" : Uid == string.Empty ? "" : Uid)}");
-            toStringOutput.Add($"SourceModifierUid = {(SourceModifierUid == null ? "null" : SourceModifierUid == string.Empty ? "" : SourceModifierUid)}");
-            toStringOutput.Add($"CatalogObjectId = {(CatalogObjectId == null ? "null" : CatalogObjectId == string.Empty ? "" : CatalogObjectId)}");
-            toStringOutput.Add($"Name = {(Name == null ? "null" : Name == string.Empty ? "" : Name)}");
-            toStringOutput.Add($"BasePriceMoney = {(BasePriceMoney == null ? "null" : BasePriceMoney.ToString())}");
-            toStringOutput.Add($"TotalPriceMoney = {(TotalPriceMoney == null ? "null" : TotalPriceMoney.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -109,63 +113,85 @@ namespace Square.Models
             }
 
             return obj is OrderReturnLineItemModifier other &&
-                ((Uid == null && other.Uid == null) || (Uid?.Equals(other.Uid) == true)) &&
-                ((SourceModifierUid == null && other.SourceModifierUid == null) || (SourceModifierUid?.Equals(other.SourceModifierUid) == true)) &&
-                ((CatalogObjectId == null && other.CatalogObjectId == null) || (CatalogObjectId?.Equals(other.CatalogObjectId) == true)) &&
-                ((Name == null && other.Name == null) || (Name?.Equals(other.Name) == true)) &&
-                ((BasePriceMoney == null && other.BasePriceMoney == null) || (BasePriceMoney?.Equals(other.BasePriceMoney) == true)) &&
-                ((TotalPriceMoney == null && other.TotalPriceMoney == null) || (TotalPriceMoney?.Equals(other.TotalPriceMoney) == true));
+                ((this.Uid == null && other.Uid == null) || (this.Uid?.Equals(other.Uid) == true)) &&
+                ((this.SourceModifierUid == null && other.SourceModifierUid == null) || (this.SourceModifierUid?.Equals(other.SourceModifierUid) == true)) &&
+                ((this.CatalogObjectId == null && other.CatalogObjectId == null) || (this.CatalogObjectId?.Equals(other.CatalogObjectId) == true)) &&
+                ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
+                ((this.BasePriceMoney == null && other.BasePriceMoney == null) || (this.BasePriceMoney?.Equals(other.BasePriceMoney) == true)) &&
+                ((this.TotalPriceMoney == null && other.TotalPriceMoney == null) || (this.TotalPriceMoney?.Equals(other.TotalPriceMoney) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 909107113;
 
-            if (Uid != null)
+            if (this.Uid != null)
             {
-               hashCode += Uid.GetHashCode();
+               hashCode += this.Uid.GetHashCode();
             }
 
-            if (SourceModifierUid != null)
+            if (this.SourceModifierUid != null)
             {
-               hashCode += SourceModifierUid.GetHashCode();
+               hashCode += this.SourceModifierUid.GetHashCode();
             }
 
-            if (CatalogObjectId != null)
+            if (this.CatalogObjectId != null)
             {
-               hashCode += CatalogObjectId.GetHashCode();
+               hashCode += this.CatalogObjectId.GetHashCode();
             }
 
-            if (Name != null)
+            if (this.Name != null)
             {
-               hashCode += Name.GetHashCode();
+               hashCode += this.Name.GetHashCode();
             }
 
-            if (BasePriceMoney != null)
+            if (this.BasePriceMoney != null)
             {
-               hashCode += BasePriceMoney.GetHashCode();
+               hashCode += this.BasePriceMoney.GetHashCode();
             }
 
-            if (TotalPriceMoney != null)
+            if (this.TotalPriceMoney != null)
             {
-               hashCode += TotalPriceMoney.GetHashCode();
+               hashCode += this.TotalPriceMoney.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Uid = {(this.Uid == null ? "null" : this.Uid == string.Empty ? "" : this.Uid)}");
+            toStringOutput.Add($"this.SourceModifierUid = {(this.SourceModifierUid == null ? "null" : this.SourceModifierUid == string.Empty ? "" : this.SourceModifierUid)}");
+            toStringOutput.Add($"this.CatalogObjectId = {(this.CatalogObjectId == null ? "null" : this.CatalogObjectId == string.Empty ? "" : this.CatalogObjectId)}");
+            toStringOutput.Add($"this.Name = {(this.Name == null ? "null" : this.Name == string.Empty ? "" : this.Name)}");
+            toStringOutput.Add($"this.BasePriceMoney = {(this.BasePriceMoney == null ? "null" : this.BasePriceMoney.ToString())}");
+            toStringOutput.Add($"this.TotalPriceMoney = {(this.TotalPriceMoney == null ? "null" : this.TotalPriceMoney.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .Uid(Uid)
-                .SourceModifierUid(SourceModifierUid)
-                .CatalogObjectId(CatalogObjectId)
-                .Name(Name)
-                .BasePriceMoney(BasePriceMoney)
-                .TotalPriceMoney(TotalPriceMoney);
+                .Uid(this.Uid)
+                .SourceModifierUid(this.SourceModifierUid)
+                .CatalogObjectId(this.CatalogObjectId)
+                .Name(this.Name)
+                .BasePriceMoney(this.BasePriceMoney)
+                .TotalPriceMoney(this.TotalPriceMoney);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string uid;
@@ -175,52 +201,85 @@ namespace Square.Models
             private Models.Money basePriceMoney;
             private Models.Money totalPriceMoney;
 
-
-
+             /// <summary>
+             /// Uid.
+             /// </summary>
+             /// <param name="uid"> uid. </param>
+             /// <returns> Builder. </returns>
             public Builder Uid(string uid)
             {
                 this.uid = uid;
                 return this;
             }
 
+             /// <summary>
+             /// SourceModifierUid.
+             /// </summary>
+             /// <param name="sourceModifierUid"> sourceModifierUid. </param>
+             /// <returns> Builder. </returns>
             public Builder SourceModifierUid(string sourceModifierUid)
             {
                 this.sourceModifierUid = sourceModifierUid;
                 return this;
             }
 
+             /// <summary>
+             /// CatalogObjectId.
+             /// </summary>
+             /// <param name="catalogObjectId"> catalogObjectId. </param>
+             /// <returns> Builder. </returns>
             public Builder CatalogObjectId(string catalogObjectId)
             {
                 this.catalogObjectId = catalogObjectId;
                 return this;
             }
 
+             /// <summary>
+             /// Name.
+             /// </summary>
+             /// <param name="name"> name. </param>
+             /// <returns> Builder. </returns>
             public Builder Name(string name)
             {
                 this.name = name;
                 return this;
             }
 
+             /// <summary>
+             /// BasePriceMoney.
+             /// </summary>
+             /// <param name="basePriceMoney"> basePriceMoney. </param>
+             /// <returns> Builder. </returns>
             public Builder BasePriceMoney(Models.Money basePriceMoney)
             {
                 this.basePriceMoney = basePriceMoney;
                 return this;
             }
 
+             /// <summary>
+             /// TotalPriceMoney.
+             /// </summary>
+             /// <param name="totalPriceMoney"> totalPriceMoney. </param>
+             /// <returns> Builder. </returns>
             public Builder TotalPriceMoney(Models.Money totalPriceMoney)
             {
                 this.totalPriceMoney = totalPriceMoney;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> OrderReturnLineItemModifier. </returns>
             public OrderReturnLineItemModifier Build()
             {
-                return new OrderReturnLineItemModifier(uid,
-                    sourceModifierUid,
-                    catalogObjectId,
-                    name,
-                    basePriceMoney,
-                    totalPriceMoney);
+                return new OrderReturnLineItemModifier(
+                    this.uid,
+                    this.sourceModifierUid,
+                    this.catalogObjectId,
+                    this.name,
+                    this.basePriceMoney,
+                    this.totalPriceMoney);
             }
         }
     }

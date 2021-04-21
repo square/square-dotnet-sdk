@@ -1,28 +1,39 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square.Http.Client;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class GetBreakTypeResponse 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Http.Client;
+    using Square.Utilities;
+
+    /// <summary>
+    /// GetBreakTypeResponse.
+    /// </summary>
+    public class GetBreakTypeResponse
     {
-        public GetBreakTypeResponse(Models.BreakType breakType = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GetBreakTypeResponse"/> class.
+        /// </summary>
+        /// <param name="breakType">break_type.</param>
+        /// <param name="errors">errors.</param>
+        public GetBreakTypeResponse(
+            Models.BreakType breakType = null,
             IList<Models.Error> errors = null)
         {
-            BreakType = breakType;
-            Errors = errors;
+            this.BreakType = breakType;
+            this.Errors = errors;
         }
 
+        /// <summary>
+        /// Gets http context.
+        /// </summary>
         [JsonIgnore]
         public HttpContext Context { get; internal set; }
 
@@ -39,6 +50,7 @@ namespace Square.Models
         [JsonProperty("errors", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.Error> Errors { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -48,12 +60,7 @@ namespace Square.Models
             return $"GetBreakTypeResponse : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"BreakType = {(BreakType == null ? "null" : BreakType.ToString())}");
-            toStringOutput.Add($"Errors = {(Errors == null ? "null" : $"[{ string.Join(", ", Errors)} ]")}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -67,64 +74,95 @@ namespace Square.Models
             }
 
             return obj is GetBreakTypeResponse other &&
-                ((Context == null && other.Context == null) || (Context?.Equals(other.Context) == true)) &&
-                ((BreakType == null && other.BreakType == null) || (BreakType?.Equals(other.BreakType) == true)) &&
-                ((Errors == null && other.Errors == null) || (Errors?.Equals(other.Errors) == true));
+                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
+                ((this.BreakType == null && other.BreakType == null) || (this.BreakType?.Equals(other.BreakType) == true)) &&
+                ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 448496585;
 
-            if (Context != null)
+            if (this.Context != null)
             {
-                hashCode += Context.GetHashCode();
+                hashCode += this.Context.GetHashCode();
             }
 
-            if (BreakType != null)
+            if (this.BreakType != null)
             {
-               hashCode += BreakType.GetHashCode();
+               hashCode += this.BreakType.GetHashCode();
             }
 
-            if (Errors != null)
+            if (this.Errors != null)
             {
-               hashCode += Errors.GetHashCode();
+               hashCode += this.Errors.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.BreakType = {(this.BreakType == null ? "null" : this.BreakType.ToString())}");
+            toStringOutput.Add($"this.Errors = {(this.Errors == null ? "null" : $"[{string.Join(", ", this.Errors)} ]")}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .BreakType(BreakType)
-                .Errors(Errors);
+                .BreakType(this.BreakType)
+                .Errors(this.Errors);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private Models.BreakType breakType;
             private IList<Models.Error> errors;
 
-
-
+             /// <summary>
+             /// BreakType.
+             /// </summary>
+             /// <param name="breakType"> breakType. </param>
+             /// <returns> Builder. </returns>
             public Builder BreakType(Models.BreakType breakType)
             {
                 this.breakType = breakType;
                 return this;
             }
 
+             /// <summary>
+             /// Errors.
+             /// </summary>
+             /// <param name="errors"> errors. </param>
+             /// <returns> Builder. </returns>
             public Builder Errors(IList<Models.Error> errors)
             {
                 this.errors = errors;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> GetBreakTypeResponse. </returns>
             public GetBreakTypeResponse Build()
             {
-                return new GetBreakTypeResponse(breakType,
-                    errors);
+                return new GetBreakTypeResponse(
+                    this.breakType,
+                    this.errors);
             }
         }
     }

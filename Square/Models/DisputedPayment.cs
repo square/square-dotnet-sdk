@@ -1,23 +1,30 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class DisputedPayment 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// DisputedPayment.
+    /// </summary>
+    public class DisputedPayment
     {
-        public DisputedPayment(string paymentId = null)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DisputedPayment"/> class.
+        /// </summary>
+        /// <param name="paymentId">payment_id.</param>
+        public DisputedPayment(
+            string paymentId = null)
         {
-            PaymentId = paymentId;
+            this.PaymentId = paymentId;
         }
 
         /// <summary>
@@ -26,6 +33,7 @@ namespace Square.Models
         [JsonProperty("payment_id", NullValueHandling = NullValueHandling.Ignore)]
         public string PaymentId { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -35,11 +43,7 @@ namespace Square.Models
             return $"DisputedPayment : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"PaymentId = {(PaymentId == null ? "null" : PaymentId == string.Empty ? "" : PaymentId)}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -53,43 +57,68 @@ namespace Square.Models
             }
 
             return obj is DisputedPayment other &&
-                ((PaymentId == null && other.PaymentId == null) || (PaymentId?.Equals(other.PaymentId) == true));
+                ((this.PaymentId == null && other.PaymentId == null) || (this.PaymentId?.Equals(other.PaymentId) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 1880326021;
 
-            if (PaymentId != null)
+            if (this.PaymentId != null)
             {
-               hashCode += PaymentId.GetHashCode();
+               hashCode += this.PaymentId.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.PaymentId = {(this.PaymentId == null ? "null" : this.PaymentId == string.Empty ? "" : this.PaymentId)}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .PaymentId(PaymentId);
+                .PaymentId(this.PaymentId);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string paymentId;
 
-
-
+             /// <summary>
+             /// PaymentId.
+             /// </summary>
+             /// <param name="paymentId"> paymentId. </param>
+             /// <returns> Builder. </returns>
             public Builder PaymentId(string paymentId)
             {
                 this.paymentId = paymentId;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> DisputedPayment. </returns>
             public DisputedPayment Build()
             {
-                return new DisputedPayment(paymentId);
+                return new DisputedPayment(
+                    this.paymentId);
             }
         }
     }

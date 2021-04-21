@@ -1,23 +1,30 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class SearchAvailabilityQuery 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// SearchAvailabilityQuery.
+    /// </summary>
+    public class SearchAvailabilityQuery
     {
-        public SearchAvailabilityQuery(Models.SearchAvailabilityFilter filter)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SearchAvailabilityQuery"/> class.
+        /// </summary>
+        /// <param name="filter">filter.</param>
+        public SearchAvailabilityQuery(
+            Models.SearchAvailabilityFilter filter)
         {
-            Filter = filter;
+            this.Filter = filter;
         }
 
         /// <summary>
@@ -26,6 +33,7 @@ namespace Square.Models
         [JsonProperty("filter")]
         public Models.SearchAvailabilityFilter Filter { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -35,11 +43,7 @@ namespace Square.Models
             return $"SearchAvailabilityQuery : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Filter = {(Filter == null ? "null" : Filter.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -53,45 +57,74 @@ namespace Square.Models
             }
 
             return obj is SearchAvailabilityQuery other &&
-                ((Filter == null && other.Filter == null) || (Filter?.Equals(other.Filter) == true));
+                ((this.Filter == null && other.Filter == null) || (this.Filter?.Equals(other.Filter) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 2004874460;
 
-            if (Filter != null)
+            if (this.Filter != null)
             {
-               hashCode += Filter.GetHashCode();
+               hashCode += this.Filter.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Filter = {(this.Filter == null ? "null" : this.Filter.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
-            var builder = new Builder(Filter);
+            var builder = new Builder(
+                this.Filter);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private Models.SearchAvailabilityFilter filter;
 
-            public Builder(Models.SearchAvailabilityFilter filter)
+            public Builder(
+                Models.SearchAvailabilityFilter filter)
             {
                 this.filter = filter;
             }
 
+             /// <summary>
+             /// Filter.
+             /// </summary>
+             /// <param name="filter"> filter. </param>
+             /// <returns> Builder. </returns>
             public Builder Filter(Models.SearchAvailabilityFilter filter)
             {
                 this.filter = filter;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> SearchAvailabilityQuery. </returns>
             public SearchAvailabilityQuery Build()
             {
-                return new SearchAvailabilityQuery(filter);
+                return new SearchAvailabilityQuery(
+                    this.filter);
             }
         }
     }

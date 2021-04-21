@@ -1,22 +1,46 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square.Http.Client;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class V1Refund 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Http.Client;
+    using Square.Utilities;
+
+    /// <summary>
+    /// V1Refund.
+    /// </summary>
+    public class V1Refund
     {
-        public V1Refund(string type = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="V1Refund"/> class.
+        /// </summary>
+        /// <param name="type">type.</param>
+        /// <param name="reason">reason.</param>
+        /// <param name="refundedMoney">refunded_money.</param>
+        /// <param name="refundedProcessingFeeMoney">refunded_processing_fee_money.</param>
+        /// <param name="refundedTaxMoney">refunded_tax_money.</param>
+        /// <param name="refundedAdditiveTaxMoney">refunded_additive_tax_money.</param>
+        /// <param name="refundedAdditiveTax">refunded_additive_tax.</param>
+        /// <param name="refundedInclusiveTaxMoney">refunded_inclusive_tax_money.</param>
+        /// <param name="refundedInclusiveTax">refunded_inclusive_tax.</param>
+        /// <param name="refundedTipMoney">refunded_tip_money.</param>
+        /// <param name="refundedDiscountMoney">refunded_discount_money.</param>
+        /// <param name="refundedSurchargeMoney">refunded_surcharge_money.</param>
+        /// <param name="refundedSurcharges">refunded_surcharges.</param>
+        /// <param name="createdAt">created_at.</param>
+        /// <param name="processedAt">processed_at.</param>
+        /// <param name="paymentId">payment_id.</param>
+        /// <param name="merchantId">merchant_id.</param>
+        /// <param name="isExchange">is_exchange.</param>
+        public V1Refund(
+            string type = null,
             string reason = null,
             Models.V1Money refundedMoney = null,
             Models.V1Money refundedProcessingFeeMoney = null,
@@ -35,31 +59,34 @@ namespace Square.Models
             string merchantId = null,
             bool? isExchange = null)
         {
-            Type = type;
-            Reason = reason;
-            RefundedMoney = refundedMoney;
-            RefundedProcessingFeeMoney = refundedProcessingFeeMoney;
-            RefundedTaxMoney = refundedTaxMoney;
-            RefundedAdditiveTaxMoney = refundedAdditiveTaxMoney;
-            RefundedAdditiveTax = refundedAdditiveTax;
-            RefundedInclusiveTaxMoney = refundedInclusiveTaxMoney;
-            RefundedInclusiveTax = refundedInclusiveTax;
-            RefundedTipMoney = refundedTipMoney;
-            RefundedDiscountMoney = refundedDiscountMoney;
-            RefundedSurchargeMoney = refundedSurchargeMoney;
-            RefundedSurcharges = refundedSurcharges;
-            CreatedAt = createdAt;
-            ProcessedAt = processedAt;
-            PaymentId = paymentId;
-            MerchantId = merchantId;
-            IsExchange = isExchange;
+            this.Type = type;
+            this.Reason = reason;
+            this.RefundedMoney = refundedMoney;
+            this.RefundedProcessingFeeMoney = refundedProcessingFeeMoney;
+            this.RefundedTaxMoney = refundedTaxMoney;
+            this.RefundedAdditiveTaxMoney = refundedAdditiveTaxMoney;
+            this.RefundedAdditiveTax = refundedAdditiveTax;
+            this.RefundedInclusiveTaxMoney = refundedInclusiveTaxMoney;
+            this.RefundedInclusiveTax = refundedInclusiveTax;
+            this.RefundedTipMoney = refundedTipMoney;
+            this.RefundedDiscountMoney = refundedDiscountMoney;
+            this.RefundedSurchargeMoney = refundedSurchargeMoney;
+            this.RefundedSurcharges = refundedSurcharges;
+            this.CreatedAt = createdAt;
+            this.ProcessedAt = processedAt;
+            this.PaymentId = paymentId;
+            this.MerchantId = merchantId;
+            this.IsExchange = isExchange;
         }
 
+        /// <summary>
+        /// Gets http context.
+        /// </summary>
         [JsonIgnore]
         public HttpContext Context { get; internal set; }
 
         /// <summary>
-        /// Getter for type
+        /// Gets or sets Type.
         /// </summary>
         [JsonProperty("type", NullValueHandling = NullValueHandling.Ignore)]
         public string Type { get; }
@@ -71,25 +98,25 @@ namespace Square.Models
         public string Reason { get; }
 
         /// <summary>
-        /// Getter for refunded_money
+        /// Gets or sets RefundedMoney.
         /// </summary>
         [JsonProperty("refunded_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1Money RefundedMoney { get; }
 
         /// <summary>
-        /// Getter for refunded_processing_fee_money
+        /// Gets or sets RefundedProcessingFeeMoney.
         /// </summary>
         [JsonProperty("refunded_processing_fee_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1Money RefundedProcessingFeeMoney { get; }
 
         /// <summary>
-        /// Getter for refunded_tax_money
+        /// Gets or sets RefundedTaxMoney.
         /// </summary>
         [JsonProperty("refunded_tax_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1Money RefundedTaxMoney { get; }
 
         /// <summary>
-        /// Getter for refunded_additive_tax_money
+        /// Gets or sets RefundedAdditiveTaxMoney.
         /// </summary>
         [JsonProperty("refunded_additive_tax_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1Money RefundedAdditiveTaxMoney { get; }
@@ -101,7 +128,7 @@ namespace Square.Models
         public IList<Models.V1PaymentTax> RefundedAdditiveTax { get; }
 
         /// <summary>
-        /// Getter for refunded_inclusive_tax_money
+        /// Gets or sets RefundedInclusiveTaxMoney.
         /// </summary>
         [JsonProperty("refunded_inclusive_tax_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1Money RefundedInclusiveTaxMoney { get; }
@@ -113,19 +140,19 @@ namespace Square.Models
         public IList<Models.V1PaymentTax> RefundedInclusiveTax { get; }
 
         /// <summary>
-        /// Getter for refunded_tip_money
+        /// Gets or sets RefundedTipMoney.
         /// </summary>
         [JsonProperty("refunded_tip_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1Money RefundedTipMoney { get; }
 
         /// <summary>
-        /// Getter for refunded_discount_money
+        /// Gets or sets RefundedDiscountMoney.
         /// </summary>
         [JsonProperty("refunded_discount_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1Money RefundedDiscountMoney { get; }
 
         /// <summary>
-        /// Getter for refunded_surcharge_money
+        /// Gets or sets RefundedSurchargeMoney.
         /// </summary>
         [JsonProperty("refunded_surcharge_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1Money RefundedSurchargeMoney { get; }
@@ -155,7 +182,7 @@ namespace Square.Models
         public string PaymentId { get; }
 
         /// <summary>
-        /// Getter for merchant_id
+        /// Gets or sets MerchantId.
         /// </summary>
         [JsonProperty("merchant_id", NullValueHandling = NullValueHandling.Ignore)]
         public string MerchantId { get; }
@@ -166,6 +193,7 @@ namespace Square.Models
         [JsonProperty("is_exchange", NullValueHandling = NullValueHandling.Ignore)]
         public bool? IsExchange { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -175,28 +203,7 @@ namespace Square.Models
             return $"V1Refund : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Type = {(Type == null ? "null" : Type.ToString())}");
-            toStringOutput.Add($"Reason = {(Reason == null ? "null" : Reason == string.Empty ? "" : Reason)}");
-            toStringOutput.Add($"RefundedMoney = {(RefundedMoney == null ? "null" : RefundedMoney.ToString())}");
-            toStringOutput.Add($"RefundedProcessingFeeMoney = {(RefundedProcessingFeeMoney == null ? "null" : RefundedProcessingFeeMoney.ToString())}");
-            toStringOutput.Add($"RefundedTaxMoney = {(RefundedTaxMoney == null ? "null" : RefundedTaxMoney.ToString())}");
-            toStringOutput.Add($"RefundedAdditiveTaxMoney = {(RefundedAdditiveTaxMoney == null ? "null" : RefundedAdditiveTaxMoney.ToString())}");
-            toStringOutput.Add($"RefundedAdditiveTax = {(RefundedAdditiveTax == null ? "null" : $"[{ string.Join(", ", RefundedAdditiveTax)} ]")}");
-            toStringOutput.Add($"RefundedInclusiveTaxMoney = {(RefundedInclusiveTaxMoney == null ? "null" : RefundedInclusiveTaxMoney.ToString())}");
-            toStringOutput.Add($"RefundedInclusiveTax = {(RefundedInclusiveTax == null ? "null" : $"[{ string.Join(", ", RefundedInclusiveTax)} ]")}");
-            toStringOutput.Add($"RefundedTipMoney = {(RefundedTipMoney == null ? "null" : RefundedTipMoney.ToString())}");
-            toStringOutput.Add($"RefundedDiscountMoney = {(RefundedDiscountMoney == null ? "null" : RefundedDiscountMoney.ToString())}");
-            toStringOutput.Add($"RefundedSurchargeMoney = {(RefundedSurchargeMoney == null ? "null" : RefundedSurchargeMoney.ToString())}");
-            toStringOutput.Add($"RefundedSurcharges = {(RefundedSurcharges == null ? "null" : $"[{ string.Join(", ", RefundedSurcharges)} ]")}");
-            toStringOutput.Add($"CreatedAt = {(CreatedAt == null ? "null" : CreatedAt == string.Empty ? "" : CreatedAt)}");
-            toStringOutput.Add($"ProcessedAt = {(ProcessedAt == null ? "null" : ProcessedAt == string.Empty ? "" : ProcessedAt)}");
-            toStringOutput.Add($"PaymentId = {(PaymentId == null ? "null" : PaymentId == string.Empty ? "" : PaymentId)}");
-            toStringOutput.Add($"MerchantId = {(MerchantId == null ? "null" : MerchantId == string.Empty ? "" : MerchantId)}");
-            toStringOutput.Add($"IsExchange = {(IsExchange == null ? "null" : IsExchange.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -210,153 +217,187 @@ namespace Square.Models
             }
 
             return obj is V1Refund other &&
-                ((Context == null && other.Context == null) || (Context?.Equals(other.Context) == true)) &&
-                ((Type == null && other.Type == null) || (Type?.Equals(other.Type) == true)) &&
-                ((Reason == null && other.Reason == null) || (Reason?.Equals(other.Reason) == true)) &&
-                ((RefundedMoney == null && other.RefundedMoney == null) || (RefundedMoney?.Equals(other.RefundedMoney) == true)) &&
-                ((RefundedProcessingFeeMoney == null && other.RefundedProcessingFeeMoney == null) || (RefundedProcessingFeeMoney?.Equals(other.RefundedProcessingFeeMoney) == true)) &&
-                ((RefundedTaxMoney == null && other.RefundedTaxMoney == null) || (RefundedTaxMoney?.Equals(other.RefundedTaxMoney) == true)) &&
-                ((RefundedAdditiveTaxMoney == null && other.RefundedAdditiveTaxMoney == null) || (RefundedAdditiveTaxMoney?.Equals(other.RefundedAdditiveTaxMoney) == true)) &&
-                ((RefundedAdditiveTax == null && other.RefundedAdditiveTax == null) || (RefundedAdditiveTax?.Equals(other.RefundedAdditiveTax) == true)) &&
-                ((RefundedInclusiveTaxMoney == null && other.RefundedInclusiveTaxMoney == null) || (RefundedInclusiveTaxMoney?.Equals(other.RefundedInclusiveTaxMoney) == true)) &&
-                ((RefundedInclusiveTax == null && other.RefundedInclusiveTax == null) || (RefundedInclusiveTax?.Equals(other.RefundedInclusiveTax) == true)) &&
-                ((RefundedTipMoney == null && other.RefundedTipMoney == null) || (RefundedTipMoney?.Equals(other.RefundedTipMoney) == true)) &&
-                ((RefundedDiscountMoney == null && other.RefundedDiscountMoney == null) || (RefundedDiscountMoney?.Equals(other.RefundedDiscountMoney) == true)) &&
-                ((RefundedSurchargeMoney == null && other.RefundedSurchargeMoney == null) || (RefundedSurchargeMoney?.Equals(other.RefundedSurchargeMoney) == true)) &&
-                ((RefundedSurcharges == null && other.RefundedSurcharges == null) || (RefundedSurcharges?.Equals(other.RefundedSurcharges) == true)) &&
-                ((CreatedAt == null && other.CreatedAt == null) || (CreatedAt?.Equals(other.CreatedAt) == true)) &&
-                ((ProcessedAt == null && other.ProcessedAt == null) || (ProcessedAt?.Equals(other.ProcessedAt) == true)) &&
-                ((PaymentId == null && other.PaymentId == null) || (PaymentId?.Equals(other.PaymentId) == true)) &&
-                ((MerchantId == null && other.MerchantId == null) || (MerchantId?.Equals(other.MerchantId) == true)) &&
-                ((IsExchange == null && other.IsExchange == null) || (IsExchange?.Equals(other.IsExchange) == true));
+                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
+                ((this.Type == null && other.Type == null) || (this.Type?.Equals(other.Type) == true)) &&
+                ((this.Reason == null && other.Reason == null) || (this.Reason?.Equals(other.Reason) == true)) &&
+                ((this.RefundedMoney == null && other.RefundedMoney == null) || (this.RefundedMoney?.Equals(other.RefundedMoney) == true)) &&
+                ((this.RefundedProcessingFeeMoney == null && other.RefundedProcessingFeeMoney == null) || (this.RefundedProcessingFeeMoney?.Equals(other.RefundedProcessingFeeMoney) == true)) &&
+                ((this.RefundedTaxMoney == null && other.RefundedTaxMoney == null) || (this.RefundedTaxMoney?.Equals(other.RefundedTaxMoney) == true)) &&
+                ((this.RefundedAdditiveTaxMoney == null && other.RefundedAdditiveTaxMoney == null) || (this.RefundedAdditiveTaxMoney?.Equals(other.RefundedAdditiveTaxMoney) == true)) &&
+                ((this.RefundedAdditiveTax == null && other.RefundedAdditiveTax == null) || (this.RefundedAdditiveTax?.Equals(other.RefundedAdditiveTax) == true)) &&
+                ((this.RefundedInclusiveTaxMoney == null && other.RefundedInclusiveTaxMoney == null) || (this.RefundedInclusiveTaxMoney?.Equals(other.RefundedInclusiveTaxMoney) == true)) &&
+                ((this.RefundedInclusiveTax == null && other.RefundedInclusiveTax == null) || (this.RefundedInclusiveTax?.Equals(other.RefundedInclusiveTax) == true)) &&
+                ((this.RefundedTipMoney == null && other.RefundedTipMoney == null) || (this.RefundedTipMoney?.Equals(other.RefundedTipMoney) == true)) &&
+                ((this.RefundedDiscountMoney == null && other.RefundedDiscountMoney == null) || (this.RefundedDiscountMoney?.Equals(other.RefundedDiscountMoney) == true)) &&
+                ((this.RefundedSurchargeMoney == null && other.RefundedSurchargeMoney == null) || (this.RefundedSurchargeMoney?.Equals(other.RefundedSurchargeMoney) == true)) &&
+                ((this.RefundedSurcharges == null && other.RefundedSurcharges == null) || (this.RefundedSurcharges?.Equals(other.RefundedSurcharges) == true)) &&
+                ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true)) &&
+                ((this.ProcessedAt == null && other.ProcessedAt == null) || (this.ProcessedAt?.Equals(other.ProcessedAt) == true)) &&
+                ((this.PaymentId == null && other.PaymentId == null) || (this.PaymentId?.Equals(other.PaymentId) == true)) &&
+                ((this.MerchantId == null && other.MerchantId == null) || (this.MerchantId?.Equals(other.MerchantId) == true)) &&
+                ((this.IsExchange == null && other.IsExchange == null) || (this.IsExchange?.Equals(other.IsExchange) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 699909783;
 
-            if (Context != null)
+            if (this.Context != null)
             {
-                hashCode += Context.GetHashCode();
+                hashCode += this.Context.GetHashCode();
             }
 
-            if (Type != null)
+            if (this.Type != null)
             {
-               hashCode += Type.GetHashCode();
+               hashCode += this.Type.GetHashCode();
             }
 
-            if (Reason != null)
+            if (this.Reason != null)
             {
-               hashCode += Reason.GetHashCode();
+               hashCode += this.Reason.GetHashCode();
             }
 
-            if (RefundedMoney != null)
+            if (this.RefundedMoney != null)
             {
-               hashCode += RefundedMoney.GetHashCode();
+               hashCode += this.RefundedMoney.GetHashCode();
             }
 
-            if (RefundedProcessingFeeMoney != null)
+            if (this.RefundedProcessingFeeMoney != null)
             {
-               hashCode += RefundedProcessingFeeMoney.GetHashCode();
+               hashCode += this.RefundedProcessingFeeMoney.GetHashCode();
             }
 
-            if (RefundedTaxMoney != null)
+            if (this.RefundedTaxMoney != null)
             {
-               hashCode += RefundedTaxMoney.GetHashCode();
+               hashCode += this.RefundedTaxMoney.GetHashCode();
             }
 
-            if (RefundedAdditiveTaxMoney != null)
+            if (this.RefundedAdditiveTaxMoney != null)
             {
-               hashCode += RefundedAdditiveTaxMoney.GetHashCode();
+               hashCode += this.RefundedAdditiveTaxMoney.GetHashCode();
             }
 
-            if (RefundedAdditiveTax != null)
+            if (this.RefundedAdditiveTax != null)
             {
-               hashCode += RefundedAdditiveTax.GetHashCode();
+               hashCode += this.RefundedAdditiveTax.GetHashCode();
             }
 
-            if (RefundedInclusiveTaxMoney != null)
+            if (this.RefundedInclusiveTaxMoney != null)
             {
-               hashCode += RefundedInclusiveTaxMoney.GetHashCode();
+               hashCode += this.RefundedInclusiveTaxMoney.GetHashCode();
             }
 
-            if (RefundedInclusiveTax != null)
+            if (this.RefundedInclusiveTax != null)
             {
-               hashCode += RefundedInclusiveTax.GetHashCode();
+               hashCode += this.RefundedInclusiveTax.GetHashCode();
             }
 
-            if (RefundedTipMoney != null)
+            if (this.RefundedTipMoney != null)
             {
-               hashCode += RefundedTipMoney.GetHashCode();
+               hashCode += this.RefundedTipMoney.GetHashCode();
             }
 
-            if (RefundedDiscountMoney != null)
+            if (this.RefundedDiscountMoney != null)
             {
-               hashCode += RefundedDiscountMoney.GetHashCode();
+               hashCode += this.RefundedDiscountMoney.GetHashCode();
             }
 
-            if (RefundedSurchargeMoney != null)
+            if (this.RefundedSurchargeMoney != null)
             {
-               hashCode += RefundedSurchargeMoney.GetHashCode();
+               hashCode += this.RefundedSurchargeMoney.GetHashCode();
             }
 
-            if (RefundedSurcharges != null)
+            if (this.RefundedSurcharges != null)
             {
-               hashCode += RefundedSurcharges.GetHashCode();
+               hashCode += this.RefundedSurcharges.GetHashCode();
             }
 
-            if (CreatedAt != null)
+            if (this.CreatedAt != null)
             {
-               hashCode += CreatedAt.GetHashCode();
+               hashCode += this.CreatedAt.GetHashCode();
             }
 
-            if (ProcessedAt != null)
+            if (this.ProcessedAt != null)
             {
-               hashCode += ProcessedAt.GetHashCode();
+               hashCode += this.ProcessedAt.GetHashCode();
             }
 
-            if (PaymentId != null)
+            if (this.PaymentId != null)
             {
-               hashCode += PaymentId.GetHashCode();
+               hashCode += this.PaymentId.GetHashCode();
             }
 
-            if (MerchantId != null)
+            if (this.MerchantId != null)
             {
-               hashCode += MerchantId.GetHashCode();
+               hashCode += this.MerchantId.GetHashCode();
             }
 
-            if (IsExchange != null)
+            if (this.IsExchange != null)
             {
-               hashCode += IsExchange.GetHashCode();
+               hashCode += this.IsExchange.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Type = {(this.Type == null ? "null" : this.Type.ToString())}");
+            toStringOutput.Add($"this.Reason = {(this.Reason == null ? "null" : this.Reason == string.Empty ? "" : this.Reason)}");
+            toStringOutput.Add($"this.RefundedMoney = {(this.RefundedMoney == null ? "null" : this.RefundedMoney.ToString())}");
+            toStringOutput.Add($"this.RefundedProcessingFeeMoney = {(this.RefundedProcessingFeeMoney == null ? "null" : this.RefundedProcessingFeeMoney.ToString())}");
+            toStringOutput.Add($"this.RefundedTaxMoney = {(this.RefundedTaxMoney == null ? "null" : this.RefundedTaxMoney.ToString())}");
+            toStringOutput.Add($"this.RefundedAdditiveTaxMoney = {(this.RefundedAdditiveTaxMoney == null ? "null" : this.RefundedAdditiveTaxMoney.ToString())}");
+            toStringOutput.Add($"this.RefundedAdditiveTax = {(this.RefundedAdditiveTax == null ? "null" : $"[{string.Join(", ", this.RefundedAdditiveTax)} ]")}");
+            toStringOutput.Add($"this.RefundedInclusiveTaxMoney = {(this.RefundedInclusiveTaxMoney == null ? "null" : this.RefundedInclusiveTaxMoney.ToString())}");
+            toStringOutput.Add($"this.RefundedInclusiveTax = {(this.RefundedInclusiveTax == null ? "null" : $"[{string.Join(", ", this.RefundedInclusiveTax)} ]")}");
+            toStringOutput.Add($"this.RefundedTipMoney = {(this.RefundedTipMoney == null ? "null" : this.RefundedTipMoney.ToString())}");
+            toStringOutput.Add($"this.RefundedDiscountMoney = {(this.RefundedDiscountMoney == null ? "null" : this.RefundedDiscountMoney.ToString())}");
+            toStringOutput.Add($"this.RefundedSurchargeMoney = {(this.RefundedSurchargeMoney == null ? "null" : this.RefundedSurchargeMoney.ToString())}");
+            toStringOutput.Add($"this.RefundedSurcharges = {(this.RefundedSurcharges == null ? "null" : $"[{string.Join(", ", this.RefundedSurcharges)} ]")}");
+            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt == string.Empty ? "" : this.CreatedAt)}");
+            toStringOutput.Add($"this.ProcessedAt = {(this.ProcessedAt == null ? "null" : this.ProcessedAt == string.Empty ? "" : this.ProcessedAt)}");
+            toStringOutput.Add($"this.PaymentId = {(this.PaymentId == null ? "null" : this.PaymentId == string.Empty ? "" : this.PaymentId)}");
+            toStringOutput.Add($"this.MerchantId = {(this.MerchantId == null ? "null" : this.MerchantId == string.Empty ? "" : this.MerchantId)}");
+            toStringOutput.Add($"this.IsExchange = {(this.IsExchange == null ? "null" : this.IsExchange.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .Type(Type)
-                .Reason(Reason)
-                .RefundedMoney(RefundedMoney)
-                .RefundedProcessingFeeMoney(RefundedProcessingFeeMoney)
-                .RefundedTaxMoney(RefundedTaxMoney)
-                .RefundedAdditiveTaxMoney(RefundedAdditiveTaxMoney)
-                .RefundedAdditiveTax(RefundedAdditiveTax)
-                .RefundedInclusiveTaxMoney(RefundedInclusiveTaxMoney)
-                .RefundedInclusiveTax(RefundedInclusiveTax)
-                .RefundedTipMoney(RefundedTipMoney)
-                .RefundedDiscountMoney(RefundedDiscountMoney)
-                .RefundedSurchargeMoney(RefundedSurchargeMoney)
-                .RefundedSurcharges(RefundedSurcharges)
-                .CreatedAt(CreatedAt)
-                .ProcessedAt(ProcessedAt)
-                .PaymentId(PaymentId)
-                .MerchantId(MerchantId)
-                .IsExchange(IsExchange);
+                .Type(this.Type)
+                .Reason(this.Reason)
+                .RefundedMoney(this.RefundedMoney)
+                .RefundedProcessingFeeMoney(this.RefundedProcessingFeeMoney)
+                .RefundedTaxMoney(this.RefundedTaxMoney)
+                .RefundedAdditiveTaxMoney(this.RefundedAdditiveTaxMoney)
+                .RefundedAdditiveTax(this.RefundedAdditiveTax)
+                .RefundedInclusiveTaxMoney(this.RefundedInclusiveTaxMoney)
+                .RefundedInclusiveTax(this.RefundedInclusiveTax)
+                .RefundedTipMoney(this.RefundedTipMoney)
+                .RefundedDiscountMoney(this.RefundedDiscountMoney)
+                .RefundedSurchargeMoney(this.RefundedSurchargeMoney)
+                .RefundedSurcharges(this.RefundedSurcharges)
+                .CreatedAt(this.CreatedAt)
+                .ProcessedAt(this.ProcessedAt)
+                .PaymentId(this.PaymentId)
+                .MerchantId(this.MerchantId)
+                .IsExchange(this.IsExchange);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string type;
@@ -378,136 +419,229 @@ namespace Square.Models
             private string merchantId;
             private bool? isExchange;
 
-
-
+             /// <summary>
+             /// Type.
+             /// </summary>
+             /// <param name="type"> type. </param>
+             /// <returns> Builder. </returns>
             public Builder Type(string type)
             {
                 this.type = type;
                 return this;
             }
 
+             /// <summary>
+             /// Reason.
+             /// </summary>
+             /// <param name="reason"> reason. </param>
+             /// <returns> Builder. </returns>
             public Builder Reason(string reason)
             {
                 this.reason = reason;
                 return this;
             }
 
+             /// <summary>
+             /// RefundedMoney.
+             /// </summary>
+             /// <param name="refundedMoney"> refundedMoney. </param>
+             /// <returns> Builder. </returns>
             public Builder RefundedMoney(Models.V1Money refundedMoney)
             {
                 this.refundedMoney = refundedMoney;
                 return this;
             }
 
+             /// <summary>
+             /// RefundedProcessingFeeMoney.
+             /// </summary>
+             /// <param name="refundedProcessingFeeMoney"> refundedProcessingFeeMoney. </param>
+             /// <returns> Builder. </returns>
             public Builder RefundedProcessingFeeMoney(Models.V1Money refundedProcessingFeeMoney)
             {
                 this.refundedProcessingFeeMoney = refundedProcessingFeeMoney;
                 return this;
             }
 
+             /// <summary>
+             /// RefundedTaxMoney.
+             /// </summary>
+             /// <param name="refundedTaxMoney"> refundedTaxMoney. </param>
+             /// <returns> Builder. </returns>
             public Builder RefundedTaxMoney(Models.V1Money refundedTaxMoney)
             {
                 this.refundedTaxMoney = refundedTaxMoney;
                 return this;
             }
 
+             /// <summary>
+             /// RefundedAdditiveTaxMoney.
+             /// </summary>
+             /// <param name="refundedAdditiveTaxMoney"> refundedAdditiveTaxMoney. </param>
+             /// <returns> Builder. </returns>
             public Builder RefundedAdditiveTaxMoney(Models.V1Money refundedAdditiveTaxMoney)
             {
                 this.refundedAdditiveTaxMoney = refundedAdditiveTaxMoney;
                 return this;
             }
 
+             /// <summary>
+             /// RefundedAdditiveTax.
+             /// </summary>
+             /// <param name="refundedAdditiveTax"> refundedAdditiveTax. </param>
+             /// <returns> Builder. </returns>
             public Builder RefundedAdditiveTax(IList<Models.V1PaymentTax> refundedAdditiveTax)
             {
                 this.refundedAdditiveTax = refundedAdditiveTax;
                 return this;
             }
 
+             /// <summary>
+             /// RefundedInclusiveTaxMoney.
+             /// </summary>
+             /// <param name="refundedInclusiveTaxMoney"> refundedInclusiveTaxMoney. </param>
+             /// <returns> Builder. </returns>
             public Builder RefundedInclusiveTaxMoney(Models.V1Money refundedInclusiveTaxMoney)
             {
                 this.refundedInclusiveTaxMoney = refundedInclusiveTaxMoney;
                 return this;
             }
 
+             /// <summary>
+             /// RefundedInclusiveTax.
+             /// </summary>
+             /// <param name="refundedInclusiveTax"> refundedInclusiveTax. </param>
+             /// <returns> Builder. </returns>
             public Builder RefundedInclusiveTax(IList<Models.V1PaymentTax> refundedInclusiveTax)
             {
                 this.refundedInclusiveTax = refundedInclusiveTax;
                 return this;
             }
 
+             /// <summary>
+             /// RefundedTipMoney.
+             /// </summary>
+             /// <param name="refundedTipMoney"> refundedTipMoney. </param>
+             /// <returns> Builder. </returns>
             public Builder RefundedTipMoney(Models.V1Money refundedTipMoney)
             {
                 this.refundedTipMoney = refundedTipMoney;
                 return this;
             }
 
+             /// <summary>
+             /// RefundedDiscountMoney.
+             /// </summary>
+             /// <param name="refundedDiscountMoney"> refundedDiscountMoney. </param>
+             /// <returns> Builder. </returns>
             public Builder RefundedDiscountMoney(Models.V1Money refundedDiscountMoney)
             {
                 this.refundedDiscountMoney = refundedDiscountMoney;
                 return this;
             }
 
+             /// <summary>
+             /// RefundedSurchargeMoney.
+             /// </summary>
+             /// <param name="refundedSurchargeMoney"> refundedSurchargeMoney. </param>
+             /// <returns> Builder. </returns>
             public Builder RefundedSurchargeMoney(Models.V1Money refundedSurchargeMoney)
             {
                 this.refundedSurchargeMoney = refundedSurchargeMoney;
                 return this;
             }
 
+             /// <summary>
+             /// RefundedSurcharges.
+             /// </summary>
+             /// <param name="refundedSurcharges"> refundedSurcharges. </param>
+             /// <returns> Builder. </returns>
             public Builder RefundedSurcharges(IList<Models.V1PaymentSurcharge> refundedSurcharges)
             {
                 this.refundedSurcharges = refundedSurcharges;
                 return this;
             }
 
+             /// <summary>
+             /// CreatedAt.
+             /// </summary>
+             /// <param name="createdAt"> createdAt. </param>
+             /// <returns> Builder. </returns>
             public Builder CreatedAt(string createdAt)
             {
                 this.createdAt = createdAt;
                 return this;
             }
 
+             /// <summary>
+             /// ProcessedAt.
+             /// </summary>
+             /// <param name="processedAt"> processedAt. </param>
+             /// <returns> Builder. </returns>
             public Builder ProcessedAt(string processedAt)
             {
                 this.processedAt = processedAt;
                 return this;
             }
 
+             /// <summary>
+             /// PaymentId.
+             /// </summary>
+             /// <param name="paymentId"> paymentId. </param>
+             /// <returns> Builder. </returns>
             public Builder PaymentId(string paymentId)
             {
                 this.paymentId = paymentId;
                 return this;
             }
 
+             /// <summary>
+             /// MerchantId.
+             /// </summary>
+             /// <param name="merchantId"> merchantId. </param>
+             /// <returns> Builder. </returns>
             public Builder MerchantId(string merchantId)
             {
                 this.merchantId = merchantId;
                 return this;
             }
 
+             /// <summary>
+             /// IsExchange.
+             /// </summary>
+             /// <param name="isExchange"> isExchange. </param>
+             /// <returns> Builder. </returns>
             public Builder IsExchange(bool? isExchange)
             {
                 this.isExchange = isExchange;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> V1Refund. </returns>
             public V1Refund Build()
             {
-                return new V1Refund(type,
-                    reason,
-                    refundedMoney,
-                    refundedProcessingFeeMoney,
-                    refundedTaxMoney,
-                    refundedAdditiveTaxMoney,
-                    refundedAdditiveTax,
-                    refundedInclusiveTaxMoney,
-                    refundedInclusiveTax,
-                    refundedTipMoney,
-                    refundedDiscountMoney,
-                    refundedSurchargeMoney,
-                    refundedSurcharges,
-                    createdAt,
-                    processedAt,
-                    paymentId,
-                    merchantId,
-                    isExchange);
+                return new V1Refund(
+                    this.type,
+                    this.reason,
+                    this.refundedMoney,
+                    this.refundedProcessingFeeMoney,
+                    this.refundedTaxMoney,
+                    this.refundedAdditiveTaxMoney,
+                    this.refundedAdditiveTax,
+                    this.refundedInclusiveTaxMoney,
+                    this.refundedInclusiveTax,
+                    this.refundedTipMoney,
+                    this.refundedDiscountMoney,
+                    this.refundedSurchargeMoney,
+                    this.refundedSurcharges,
+                    this.createdAt,
+                    this.processedAt,
+                    this.paymentId,
+                    this.merchantId,
+                    this.isExchange);
             }
         }
     }

@@ -1,33 +1,41 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class DeleteInvoiceRequest 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// DeleteInvoiceRequest.
+    /// </summary>
+    public class DeleteInvoiceRequest
     {
-        public DeleteInvoiceRequest(int? version = null)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DeleteInvoiceRequest"/> class.
+        /// </summary>
+        /// <param name="version">version.</param>
+        public DeleteInvoiceRequest(
+            int? version = null)
         {
-            Version = version;
+            this.Version = version;
         }
 
         /// <summary>
-        /// The version of the [invoice](#type-invoice) to delete.
-        /// If you do not know the version, you can call [GetInvoice](#endpoint-Invoices-GetInvoice) or 
-        /// [ListInvoices](#endpoint-Invoices-ListInvoices).
+        /// The version of the [invoice]($m/Invoice) to delete.
+        /// If you do not know the version, you can call [GetInvoice]($e/Invoices/GetInvoice) or
+        /// [ListInvoices]($e/Invoices/ListInvoices).
         /// </summary>
         [JsonProperty("version", NullValueHandling = NullValueHandling.Ignore)]
         public int? Version { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -37,11 +45,7 @@ namespace Square.Models
             return $"DeleteInvoiceRequest : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Version = {(Version == null ? "null" : Version.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -55,43 +59,68 @@ namespace Square.Models
             }
 
             return obj is DeleteInvoiceRequest other &&
-                ((Version == null && other.Version == null) || (Version?.Equals(other.Version) == true));
+                ((this.Version == null && other.Version == null) || (this.Version?.Equals(other.Version) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -231963317;
 
-            if (Version != null)
+            if (this.Version != null)
             {
-               hashCode += Version.GetHashCode();
+               hashCode += this.Version.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Version = {(this.Version == null ? "null" : this.Version.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .Version(Version);
+                .Version(this.Version);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private int? version;
 
-
-
+             /// <summary>
+             /// Version.
+             /// </summary>
+             /// <param name="version"> version. </param>
+             /// <returns> Builder. </returns>
             public Builder Version(int? version)
             {
                 this.version = version;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> DeleteInvoiceRequest. </returns>
             public DeleteInvoiceRequest Build()
             {
-                return new DeleteInvoiceRequest(version);
+                return new DeleteInvoiceRequest(
+                    this.version);
             }
         }
     }

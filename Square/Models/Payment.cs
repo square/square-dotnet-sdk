@@ -1,21 +1,61 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class Payment 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// Payment.
+    /// </summary>
+    public class Payment
     {
-        public Payment(string id = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Payment"/> class.
+        /// </summary>
+        /// <param name="id">id.</param>
+        /// <param name="createdAt">created_at.</param>
+        /// <param name="updatedAt">updated_at.</param>
+        /// <param name="amountMoney">amount_money.</param>
+        /// <param name="tipMoney">tip_money.</param>
+        /// <param name="totalMoney">total_money.</param>
+        /// <param name="appFeeMoney">app_fee_money.</param>
+        /// <param name="approvedMoney">approved_money.</param>
+        /// <param name="processingFee">processing_fee.</param>
+        /// <param name="refundedMoney">refunded_money.</param>
+        /// <param name="status">status.</param>
+        /// <param name="delayDuration">delay_duration.</param>
+        /// <param name="delayAction">delay_action.</param>
+        /// <param name="delayedUntil">delayed_until.</param>
+        /// <param name="sourceType">source_type.</param>
+        /// <param name="cardDetails">card_details.</param>
+        /// <param name="cashDetails">cash_details.</param>
+        /// <param name="externalDetails">external_details.</param>
+        /// <param name="locationId">location_id.</param>
+        /// <param name="orderId">order_id.</param>
+        /// <param name="referenceId">reference_id.</param>
+        /// <param name="customerId">customer_id.</param>
+        /// <param name="employeeId">employee_id.</param>
+        /// <param name="refundIds">refund_ids.</param>
+        /// <param name="riskEvaluation">risk_evaluation.</param>
+        /// <param name="buyerEmailAddress">buyer_email_address.</param>
+        /// <param name="billingAddress">billing_address.</param>
+        /// <param name="shippingAddress">shipping_address.</param>
+        /// <param name="note">note.</param>
+        /// <param name="statementDescriptionIdentifier">statement_description_identifier.</param>
+        /// <param name="capabilities">capabilities.</param>
+        /// <param name="receiptNumber">receipt_number.</param>
+        /// <param name="receiptUrl">receipt_url.</param>
+        /// <param name="versionToken">version_token.</param>
+        public Payment(
+            string id = null,
             string createdAt = null,
             string updatedAt = null,
             Models.Money amountMoney = null,
@@ -50,40 +90,40 @@ namespace Square.Models
             string receiptUrl = null,
             string versionToken = null)
         {
-            Id = id;
-            CreatedAt = createdAt;
-            UpdatedAt = updatedAt;
-            AmountMoney = amountMoney;
-            TipMoney = tipMoney;
-            TotalMoney = totalMoney;
-            AppFeeMoney = appFeeMoney;
-            ApprovedMoney = approvedMoney;
-            ProcessingFee = processingFee;
-            RefundedMoney = refundedMoney;
-            Status = status;
-            DelayDuration = delayDuration;
-            DelayAction = delayAction;
-            DelayedUntil = delayedUntil;
-            SourceType = sourceType;
-            CardDetails = cardDetails;
-            CashDetails = cashDetails;
-            ExternalDetails = externalDetails;
-            LocationId = locationId;
-            OrderId = orderId;
-            ReferenceId = referenceId;
-            CustomerId = customerId;
-            EmployeeId = employeeId;
-            RefundIds = refundIds;
-            RiskEvaluation = riskEvaluation;
-            BuyerEmailAddress = buyerEmailAddress;
-            BillingAddress = billingAddress;
-            ShippingAddress = shippingAddress;
-            Note = note;
-            StatementDescriptionIdentifier = statementDescriptionIdentifier;
-            Capabilities = capabilities;
-            ReceiptNumber = receiptNumber;
-            ReceiptUrl = receiptUrl;
-            VersionToken = versionToken;
+            this.Id = id;
+            this.CreatedAt = createdAt;
+            this.UpdatedAt = updatedAt;
+            this.AmountMoney = amountMoney;
+            this.TipMoney = tipMoney;
+            this.TotalMoney = totalMoney;
+            this.AppFeeMoney = appFeeMoney;
+            this.ApprovedMoney = approvedMoney;
+            this.ProcessingFee = processingFee;
+            this.RefundedMoney = refundedMoney;
+            this.Status = status;
+            this.DelayDuration = delayDuration;
+            this.DelayAction = delayAction;
+            this.DelayedUntil = delayedUntil;
+            this.SourceType = sourceType;
+            this.CardDetails = cardDetails;
+            this.CashDetails = cashDetails;
+            this.ExternalDetails = externalDetails;
+            this.LocationId = locationId;
+            this.OrderId = orderId;
+            this.ReferenceId = referenceId;
+            this.CustomerId = customerId;
+            this.EmployeeId = employeeId;
+            this.RefundIds = refundIds;
+            this.RiskEvaluation = riskEvaluation;
+            this.BuyerEmailAddress = buyerEmailAddress;
+            this.BillingAddress = billingAddress;
+            this.ShippingAddress = shippingAddress;
+            this.Note = note;
+            this.StatementDescriptionIdentifier = statementDescriptionIdentifier;
+            this.Capabilities = capabilities;
+            this.ReceiptNumber = receiptNumber;
+            this.ReceiptUrl = receiptUrl;
+            this.VersionToken = versionToken;
         }
 
         /// <summary>
@@ -229,7 +269,7 @@ namespace Square.Models
         public Models.CardPaymentDetails CardDetails { get; }
 
         /// <summary>
-        /// Stores details about a cash payment. Contains only non-confidential information. For more information, see 
+        /// Stores details about a cash payment. Contains only non-confidential information. For more information, see
         /// [Take Cash Payments](https://developer.squareup.com/docs/payments-api/take-payments/cash-payments).
         /// </summary>
         [JsonProperty("cash_details", NullValueHandling = NullValueHandling.Ignore)]
@@ -237,7 +277,7 @@ namespace Square.Models
 
         /// <summary>
         /// Stores details about an external payment. Contains only non-confidential information.
-        /// For more information, see 
+        /// For more information, see
         /// [Take External Payments](https://developer.squareup.com/docs/payments-api/take-payments/external-payments).
         /// </summary>
         [JsonProperty("external_details", NullValueHandling = NullValueHandling.Ignore)]
@@ -263,7 +303,7 @@ namespace Square.Models
         public string ReferenceId { get; }
 
         /// <summary>
-        /// The [Customer](#type-customer) ID of the customer associated with the payment.
+        /// The [Customer]($m/Customer) ID of the customer associated with the payment.
         /// </summary>
         [JsonProperty("customer_id", NullValueHandling = NullValueHandling.Ignore)]
         public string CustomerId { get; }
@@ -355,6 +395,7 @@ namespace Square.Models
         [JsonProperty("version_token", NullValueHandling = NullValueHandling.Ignore)]
         public string VersionToken { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -364,44 +405,7 @@ namespace Square.Models
             return $"Payment : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Id = {(Id == null ? "null" : Id == string.Empty ? "" : Id)}");
-            toStringOutput.Add($"CreatedAt = {(CreatedAt == null ? "null" : CreatedAt == string.Empty ? "" : CreatedAt)}");
-            toStringOutput.Add($"UpdatedAt = {(UpdatedAt == null ? "null" : UpdatedAt == string.Empty ? "" : UpdatedAt)}");
-            toStringOutput.Add($"AmountMoney = {(AmountMoney == null ? "null" : AmountMoney.ToString())}");
-            toStringOutput.Add($"TipMoney = {(TipMoney == null ? "null" : TipMoney.ToString())}");
-            toStringOutput.Add($"TotalMoney = {(TotalMoney == null ? "null" : TotalMoney.ToString())}");
-            toStringOutput.Add($"AppFeeMoney = {(AppFeeMoney == null ? "null" : AppFeeMoney.ToString())}");
-            toStringOutput.Add($"ApprovedMoney = {(ApprovedMoney == null ? "null" : ApprovedMoney.ToString())}");
-            toStringOutput.Add($"ProcessingFee = {(ProcessingFee == null ? "null" : $"[{ string.Join(", ", ProcessingFee)} ]")}");
-            toStringOutput.Add($"RefundedMoney = {(RefundedMoney == null ? "null" : RefundedMoney.ToString())}");
-            toStringOutput.Add($"Status = {(Status == null ? "null" : Status == string.Empty ? "" : Status)}");
-            toStringOutput.Add($"DelayDuration = {(DelayDuration == null ? "null" : DelayDuration == string.Empty ? "" : DelayDuration)}");
-            toStringOutput.Add($"DelayAction = {(DelayAction == null ? "null" : DelayAction == string.Empty ? "" : DelayAction)}");
-            toStringOutput.Add($"DelayedUntil = {(DelayedUntil == null ? "null" : DelayedUntil == string.Empty ? "" : DelayedUntil)}");
-            toStringOutput.Add($"SourceType = {(SourceType == null ? "null" : SourceType == string.Empty ? "" : SourceType)}");
-            toStringOutput.Add($"CardDetails = {(CardDetails == null ? "null" : CardDetails.ToString())}");
-            toStringOutput.Add($"CashDetails = {(CashDetails == null ? "null" : CashDetails.ToString())}");
-            toStringOutput.Add($"ExternalDetails = {(ExternalDetails == null ? "null" : ExternalDetails.ToString())}");
-            toStringOutput.Add($"LocationId = {(LocationId == null ? "null" : LocationId == string.Empty ? "" : LocationId)}");
-            toStringOutput.Add($"OrderId = {(OrderId == null ? "null" : OrderId == string.Empty ? "" : OrderId)}");
-            toStringOutput.Add($"ReferenceId = {(ReferenceId == null ? "null" : ReferenceId == string.Empty ? "" : ReferenceId)}");
-            toStringOutput.Add($"CustomerId = {(CustomerId == null ? "null" : CustomerId == string.Empty ? "" : CustomerId)}");
-            toStringOutput.Add($"EmployeeId = {(EmployeeId == null ? "null" : EmployeeId == string.Empty ? "" : EmployeeId)}");
-            toStringOutput.Add($"RefundIds = {(RefundIds == null ? "null" : $"[{ string.Join(", ", RefundIds)} ]")}");
-            toStringOutput.Add($"RiskEvaluation = {(RiskEvaluation == null ? "null" : RiskEvaluation.ToString())}");
-            toStringOutput.Add($"BuyerEmailAddress = {(BuyerEmailAddress == null ? "null" : BuyerEmailAddress == string.Empty ? "" : BuyerEmailAddress)}");
-            toStringOutput.Add($"BillingAddress = {(BillingAddress == null ? "null" : BillingAddress.ToString())}");
-            toStringOutput.Add($"ShippingAddress = {(ShippingAddress == null ? "null" : ShippingAddress.ToString())}");
-            toStringOutput.Add($"Note = {(Note == null ? "null" : Note == string.Empty ? "" : Note)}");
-            toStringOutput.Add($"StatementDescriptionIdentifier = {(StatementDescriptionIdentifier == null ? "null" : StatementDescriptionIdentifier == string.Empty ? "" : StatementDescriptionIdentifier)}");
-            toStringOutput.Add($"Capabilities = {(Capabilities == null ? "null" : $"[{ string.Join(", ", Capabilities)} ]")}");
-            toStringOutput.Add($"ReceiptNumber = {(ReceiptNumber == null ? "null" : ReceiptNumber == string.Empty ? "" : ReceiptNumber)}");
-            toStringOutput.Add($"ReceiptUrl = {(ReceiptUrl == null ? "null" : ReceiptUrl == string.Empty ? "" : ReceiptUrl)}");
-            toStringOutput.Add($"VersionToken = {(VersionToken == null ? "null" : VersionToken == string.Empty ? "" : VersionToken)}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -415,259 +419,309 @@ namespace Square.Models
             }
 
             return obj is Payment other &&
-                ((Id == null && other.Id == null) || (Id?.Equals(other.Id) == true)) &&
-                ((CreatedAt == null && other.CreatedAt == null) || (CreatedAt?.Equals(other.CreatedAt) == true)) &&
-                ((UpdatedAt == null && other.UpdatedAt == null) || (UpdatedAt?.Equals(other.UpdatedAt) == true)) &&
-                ((AmountMoney == null && other.AmountMoney == null) || (AmountMoney?.Equals(other.AmountMoney) == true)) &&
-                ((TipMoney == null && other.TipMoney == null) || (TipMoney?.Equals(other.TipMoney) == true)) &&
-                ((TotalMoney == null && other.TotalMoney == null) || (TotalMoney?.Equals(other.TotalMoney) == true)) &&
-                ((AppFeeMoney == null && other.AppFeeMoney == null) || (AppFeeMoney?.Equals(other.AppFeeMoney) == true)) &&
-                ((ApprovedMoney == null && other.ApprovedMoney == null) || (ApprovedMoney?.Equals(other.ApprovedMoney) == true)) &&
-                ((ProcessingFee == null && other.ProcessingFee == null) || (ProcessingFee?.Equals(other.ProcessingFee) == true)) &&
-                ((RefundedMoney == null && other.RefundedMoney == null) || (RefundedMoney?.Equals(other.RefundedMoney) == true)) &&
-                ((Status == null && other.Status == null) || (Status?.Equals(other.Status) == true)) &&
-                ((DelayDuration == null && other.DelayDuration == null) || (DelayDuration?.Equals(other.DelayDuration) == true)) &&
-                ((DelayAction == null && other.DelayAction == null) || (DelayAction?.Equals(other.DelayAction) == true)) &&
-                ((DelayedUntil == null && other.DelayedUntil == null) || (DelayedUntil?.Equals(other.DelayedUntil) == true)) &&
-                ((SourceType == null && other.SourceType == null) || (SourceType?.Equals(other.SourceType) == true)) &&
-                ((CardDetails == null && other.CardDetails == null) || (CardDetails?.Equals(other.CardDetails) == true)) &&
-                ((CashDetails == null && other.CashDetails == null) || (CashDetails?.Equals(other.CashDetails) == true)) &&
-                ((ExternalDetails == null && other.ExternalDetails == null) || (ExternalDetails?.Equals(other.ExternalDetails) == true)) &&
-                ((LocationId == null && other.LocationId == null) || (LocationId?.Equals(other.LocationId) == true)) &&
-                ((OrderId == null && other.OrderId == null) || (OrderId?.Equals(other.OrderId) == true)) &&
-                ((ReferenceId == null && other.ReferenceId == null) || (ReferenceId?.Equals(other.ReferenceId) == true)) &&
-                ((CustomerId == null && other.CustomerId == null) || (CustomerId?.Equals(other.CustomerId) == true)) &&
-                ((EmployeeId == null && other.EmployeeId == null) || (EmployeeId?.Equals(other.EmployeeId) == true)) &&
-                ((RefundIds == null && other.RefundIds == null) || (RefundIds?.Equals(other.RefundIds) == true)) &&
-                ((RiskEvaluation == null && other.RiskEvaluation == null) || (RiskEvaluation?.Equals(other.RiskEvaluation) == true)) &&
-                ((BuyerEmailAddress == null && other.BuyerEmailAddress == null) || (BuyerEmailAddress?.Equals(other.BuyerEmailAddress) == true)) &&
-                ((BillingAddress == null && other.BillingAddress == null) || (BillingAddress?.Equals(other.BillingAddress) == true)) &&
-                ((ShippingAddress == null && other.ShippingAddress == null) || (ShippingAddress?.Equals(other.ShippingAddress) == true)) &&
-                ((Note == null && other.Note == null) || (Note?.Equals(other.Note) == true)) &&
-                ((StatementDescriptionIdentifier == null && other.StatementDescriptionIdentifier == null) || (StatementDescriptionIdentifier?.Equals(other.StatementDescriptionIdentifier) == true)) &&
-                ((Capabilities == null && other.Capabilities == null) || (Capabilities?.Equals(other.Capabilities) == true)) &&
-                ((ReceiptNumber == null && other.ReceiptNumber == null) || (ReceiptNumber?.Equals(other.ReceiptNumber) == true)) &&
-                ((ReceiptUrl == null && other.ReceiptUrl == null) || (ReceiptUrl?.Equals(other.ReceiptUrl) == true)) &&
-                ((VersionToken == null && other.VersionToken == null) || (VersionToken?.Equals(other.VersionToken) == true));
+                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
+                ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true)) &&
+                ((this.UpdatedAt == null && other.UpdatedAt == null) || (this.UpdatedAt?.Equals(other.UpdatedAt) == true)) &&
+                ((this.AmountMoney == null && other.AmountMoney == null) || (this.AmountMoney?.Equals(other.AmountMoney) == true)) &&
+                ((this.TipMoney == null && other.TipMoney == null) || (this.TipMoney?.Equals(other.TipMoney) == true)) &&
+                ((this.TotalMoney == null && other.TotalMoney == null) || (this.TotalMoney?.Equals(other.TotalMoney) == true)) &&
+                ((this.AppFeeMoney == null && other.AppFeeMoney == null) || (this.AppFeeMoney?.Equals(other.AppFeeMoney) == true)) &&
+                ((this.ApprovedMoney == null && other.ApprovedMoney == null) || (this.ApprovedMoney?.Equals(other.ApprovedMoney) == true)) &&
+                ((this.ProcessingFee == null && other.ProcessingFee == null) || (this.ProcessingFee?.Equals(other.ProcessingFee) == true)) &&
+                ((this.RefundedMoney == null && other.RefundedMoney == null) || (this.RefundedMoney?.Equals(other.RefundedMoney) == true)) &&
+                ((this.Status == null && other.Status == null) || (this.Status?.Equals(other.Status) == true)) &&
+                ((this.DelayDuration == null && other.DelayDuration == null) || (this.DelayDuration?.Equals(other.DelayDuration) == true)) &&
+                ((this.DelayAction == null && other.DelayAction == null) || (this.DelayAction?.Equals(other.DelayAction) == true)) &&
+                ((this.DelayedUntil == null && other.DelayedUntil == null) || (this.DelayedUntil?.Equals(other.DelayedUntil) == true)) &&
+                ((this.SourceType == null && other.SourceType == null) || (this.SourceType?.Equals(other.SourceType) == true)) &&
+                ((this.CardDetails == null && other.CardDetails == null) || (this.CardDetails?.Equals(other.CardDetails) == true)) &&
+                ((this.CashDetails == null && other.CashDetails == null) || (this.CashDetails?.Equals(other.CashDetails) == true)) &&
+                ((this.ExternalDetails == null && other.ExternalDetails == null) || (this.ExternalDetails?.Equals(other.ExternalDetails) == true)) &&
+                ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true)) &&
+                ((this.OrderId == null && other.OrderId == null) || (this.OrderId?.Equals(other.OrderId) == true)) &&
+                ((this.ReferenceId == null && other.ReferenceId == null) || (this.ReferenceId?.Equals(other.ReferenceId) == true)) &&
+                ((this.CustomerId == null && other.CustomerId == null) || (this.CustomerId?.Equals(other.CustomerId) == true)) &&
+                ((this.EmployeeId == null && other.EmployeeId == null) || (this.EmployeeId?.Equals(other.EmployeeId) == true)) &&
+                ((this.RefundIds == null && other.RefundIds == null) || (this.RefundIds?.Equals(other.RefundIds) == true)) &&
+                ((this.RiskEvaluation == null && other.RiskEvaluation == null) || (this.RiskEvaluation?.Equals(other.RiskEvaluation) == true)) &&
+                ((this.BuyerEmailAddress == null && other.BuyerEmailAddress == null) || (this.BuyerEmailAddress?.Equals(other.BuyerEmailAddress) == true)) &&
+                ((this.BillingAddress == null && other.BillingAddress == null) || (this.BillingAddress?.Equals(other.BillingAddress) == true)) &&
+                ((this.ShippingAddress == null && other.ShippingAddress == null) || (this.ShippingAddress?.Equals(other.ShippingAddress) == true)) &&
+                ((this.Note == null && other.Note == null) || (this.Note?.Equals(other.Note) == true)) &&
+                ((this.StatementDescriptionIdentifier == null && other.StatementDescriptionIdentifier == null) || (this.StatementDescriptionIdentifier?.Equals(other.StatementDescriptionIdentifier) == true)) &&
+                ((this.Capabilities == null && other.Capabilities == null) || (this.Capabilities?.Equals(other.Capabilities) == true)) &&
+                ((this.ReceiptNumber == null && other.ReceiptNumber == null) || (this.ReceiptNumber?.Equals(other.ReceiptNumber) == true)) &&
+                ((this.ReceiptUrl == null && other.ReceiptUrl == null) || (this.ReceiptUrl?.Equals(other.ReceiptUrl) == true)) &&
+                ((this.VersionToken == null && other.VersionToken == null) || (this.VersionToken?.Equals(other.VersionToken) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 761606250;
 
-            if (Id != null)
+            if (this.Id != null)
             {
-               hashCode += Id.GetHashCode();
+               hashCode += this.Id.GetHashCode();
             }
 
-            if (CreatedAt != null)
+            if (this.CreatedAt != null)
             {
-               hashCode += CreatedAt.GetHashCode();
+               hashCode += this.CreatedAt.GetHashCode();
             }
 
-            if (UpdatedAt != null)
+            if (this.UpdatedAt != null)
             {
-               hashCode += UpdatedAt.GetHashCode();
+               hashCode += this.UpdatedAt.GetHashCode();
             }
 
-            if (AmountMoney != null)
+            if (this.AmountMoney != null)
             {
-               hashCode += AmountMoney.GetHashCode();
+               hashCode += this.AmountMoney.GetHashCode();
             }
 
-            if (TipMoney != null)
+            if (this.TipMoney != null)
             {
-               hashCode += TipMoney.GetHashCode();
+               hashCode += this.TipMoney.GetHashCode();
             }
 
-            if (TotalMoney != null)
+            if (this.TotalMoney != null)
             {
-               hashCode += TotalMoney.GetHashCode();
+               hashCode += this.TotalMoney.GetHashCode();
             }
 
-            if (AppFeeMoney != null)
+            if (this.AppFeeMoney != null)
             {
-               hashCode += AppFeeMoney.GetHashCode();
+               hashCode += this.AppFeeMoney.GetHashCode();
             }
 
-            if (ApprovedMoney != null)
+            if (this.ApprovedMoney != null)
             {
-               hashCode += ApprovedMoney.GetHashCode();
+               hashCode += this.ApprovedMoney.GetHashCode();
             }
 
-            if (ProcessingFee != null)
+            if (this.ProcessingFee != null)
             {
-               hashCode += ProcessingFee.GetHashCode();
+               hashCode += this.ProcessingFee.GetHashCode();
             }
 
-            if (RefundedMoney != null)
+            if (this.RefundedMoney != null)
             {
-               hashCode += RefundedMoney.GetHashCode();
+               hashCode += this.RefundedMoney.GetHashCode();
             }
 
-            if (Status != null)
+            if (this.Status != null)
             {
-               hashCode += Status.GetHashCode();
+               hashCode += this.Status.GetHashCode();
             }
 
-            if (DelayDuration != null)
+            if (this.DelayDuration != null)
             {
-               hashCode += DelayDuration.GetHashCode();
+               hashCode += this.DelayDuration.GetHashCode();
             }
 
-            if (DelayAction != null)
+            if (this.DelayAction != null)
             {
-               hashCode += DelayAction.GetHashCode();
+               hashCode += this.DelayAction.GetHashCode();
             }
 
-            if (DelayedUntil != null)
+            if (this.DelayedUntil != null)
             {
-               hashCode += DelayedUntil.GetHashCode();
+               hashCode += this.DelayedUntil.GetHashCode();
             }
 
-            if (SourceType != null)
+            if (this.SourceType != null)
             {
-               hashCode += SourceType.GetHashCode();
+               hashCode += this.SourceType.GetHashCode();
             }
 
-            if (CardDetails != null)
+            if (this.CardDetails != null)
             {
-               hashCode += CardDetails.GetHashCode();
+               hashCode += this.CardDetails.GetHashCode();
             }
 
-            if (CashDetails != null)
+            if (this.CashDetails != null)
             {
-               hashCode += CashDetails.GetHashCode();
+               hashCode += this.CashDetails.GetHashCode();
             }
 
-            if (ExternalDetails != null)
+            if (this.ExternalDetails != null)
             {
-               hashCode += ExternalDetails.GetHashCode();
+               hashCode += this.ExternalDetails.GetHashCode();
             }
 
-            if (LocationId != null)
+            if (this.LocationId != null)
             {
-               hashCode += LocationId.GetHashCode();
+               hashCode += this.LocationId.GetHashCode();
             }
 
-            if (OrderId != null)
+            if (this.OrderId != null)
             {
-               hashCode += OrderId.GetHashCode();
+               hashCode += this.OrderId.GetHashCode();
             }
 
-            if (ReferenceId != null)
+            if (this.ReferenceId != null)
             {
-               hashCode += ReferenceId.GetHashCode();
+               hashCode += this.ReferenceId.GetHashCode();
             }
 
-            if (CustomerId != null)
+            if (this.CustomerId != null)
             {
-               hashCode += CustomerId.GetHashCode();
+               hashCode += this.CustomerId.GetHashCode();
             }
 
-            if (EmployeeId != null)
+            if (this.EmployeeId != null)
             {
-               hashCode += EmployeeId.GetHashCode();
+               hashCode += this.EmployeeId.GetHashCode();
             }
 
-            if (RefundIds != null)
+            if (this.RefundIds != null)
             {
-               hashCode += RefundIds.GetHashCode();
+               hashCode += this.RefundIds.GetHashCode();
             }
 
-            if (RiskEvaluation != null)
+            if (this.RiskEvaluation != null)
             {
-               hashCode += RiskEvaluation.GetHashCode();
+               hashCode += this.RiskEvaluation.GetHashCode();
             }
 
-            if (BuyerEmailAddress != null)
+            if (this.BuyerEmailAddress != null)
             {
-               hashCode += BuyerEmailAddress.GetHashCode();
+               hashCode += this.BuyerEmailAddress.GetHashCode();
             }
 
-            if (BillingAddress != null)
+            if (this.BillingAddress != null)
             {
-               hashCode += BillingAddress.GetHashCode();
+               hashCode += this.BillingAddress.GetHashCode();
             }
 
-            if (ShippingAddress != null)
+            if (this.ShippingAddress != null)
             {
-               hashCode += ShippingAddress.GetHashCode();
+               hashCode += this.ShippingAddress.GetHashCode();
             }
 
-            if (Note != null)
+            if (this.Note != null)
             {
-               hashCode += Note.GetHashCode();
+               hashCode += this.Note.GetHashCode();
             }
 
-            if (StatementDescriptionIdentifier != null)
+            if (this.StatementDescriptionIdentifier != null)
             {
-               hashCode += StatementDescriptionIdentifier.GetHashCode();
+               hashCode += this.StatementDescriptionIdentifier.GetHashCode();
             }
 
-            if (Capabilities != null)
+            if (this.Capabilities != null)
             {
-               hashCode += Capabilities.GetHashCode();
+               hashCode += this.Capabilities.GetHashCode();
             }
 
-            if (ReceiptNumber != null)
+            if (this.ReceiptNumber != null)
             {
-               hashCode += ReceiptNumber.GetHashCode();
+               hashCode += this.ReceiptNumber.GetHashCode();
             }
 
-            if (ReceiptUrl != null)
+            if (this.ReceiptUrl != null)
             {
-               hashCode += ReceiptUrl.GetHashCode();
+               hashCode += this.ReceiptUrl.GetHashCode();
             }
 
-            if (VersionToken != null)
+            if (this.VersionToken != null)
             {
-               hashCode += VersionToken.GetHashCode();
+               hashCode += this.VersionToken.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id == string.Empty ? "" : this.Id)}");
+            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt == string.Empty ? "" : this.CreatedAt)}");
+            toStringOutput.Add($"this.UpdatedAt = {(this.UpdatedAt == null ? "null" : this.UpdatedAt == string.Empty ? "" : this.UpdatedAt)}");
+            toStringOutput.Add($"this.AmountMoney = {(this.AmountMoney == null ? "null" : this.AmountMoney.ToString())}");
+            toStringOutput.Add($"this.TipMoney = {(this.TipMoney == null ? "null" : this.TipMoney.ToString())}");
+            toStringOutput.Add($"this.TotalMoney = {(this.TotalMoney == null ? "null" : this.TotalMoney.ToString())}");
+            toStringOutput.Add($"this.AppFeeMoney = {(this.AppFeeMoney == null ? "null" : this.AppFeeMoney.ToString())}");
+            toStringOutput.Add($"this.ApprovedMoney = {(this.ApprovedMoney == null ? "null" : this.ApprovedMoney.ToString())}");
+            toStringOutput.Add($"this.ProcessingFee = {(this.ProcessingFee == null ? "null" : $"[{string.Join(", ", this.ProcessingFee)} ]")}");
+            toStringOutput.Add($"this.RefundedMoney = {(this.RefundedMoney == null ? "null" : this.RefundedMoney.ToString())}");
+            toStringOutput.Add($"this.Status = {(this.Status == null ? "null" : this.Status == string.Empty ? "" : this.Status)}");
+            toStringOutput.Add($"this.DelayDuration = {(this.DelayDuration == null ? "null" : this.DelayDuration == string.Empty ? "" : this.DelayDuration)}");
+            toStringOutput.Add($"this.DelayAction = {(this.DelayAction == null ? "null" : this.DelayAction == string.Empty ? "" : this.DelayAction)}");
+            toStringOutput.Add($"this.DelayedUntil = {(this.DelayedUntil == null ? "null" : this.DelayedUntil == string.Empty ? "" : this.DelayedUntil)}");
+            toStringOutput.Add($"this.SourceType = {(this.SourceType == null ? "null" : this.SourceType == string.Empty ? "" : this.SourceType)}");
+            toStringOutput.Add($"this.CardDetails = {(this.CardDetails == null ? "null" : this.CardDetails.ToString())}");
+            toStringOutput.Add($"this.CashDetails = {(this.CashDetails == null ? "null" : this.CashDetails.ToString())}");
+            toStringOutput.Add($"this.ExternalDetails = {(this.ExternalDetails == null ? "null" : this.ExternalDetails.ToString())}");
+            toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId == string.Empty ? "" : this.LocationId)}");
+            toStringOutput.Add($"this.OrderId = {(this.OrderId == null ? "null" : this.OrderId == string.Empty ? "" : this.OrderId)}");
+            toStringOutput.Add($"this.ReferenceId = {(this.ReferenceId == null ? "null" : this.ReferenceId == string.Empty ? "" : this.ReferenceId)}");
+            toStringOutput.Add($"this.CustomerId = {(this.CustomerId == null ? "null" : this.CustomerId == string.Empty ? "" : this.CustomerId)}");
+            toStringOutput.Add($"this.EmployeeId = {(this.EmployeeId == null ? "null" : this.EmployeeId == string.Empty ? "" : this.EmployeeId)}");
+            toStringOutput.Add($"this.RefundIds = {(this.RefundIds == null ? "null" : $"[{string.Join(", ", this.RefundIds)} ]")}");
+            toStringOutput.Add($"this.RiskEvaluation = {(this.RiskEvaluation == null ? "null" : this.RiskEvaluation.ToString())}");
+            toStringOutput.Add($"this.BuyerEmailAddress = {(this.BuyerEmailAddress == null ? "null" : this.BuyerEmailAddress == string.Empty ? "" : this.BuyerEmailAddress)}");
+            toStringOutput.Add($"this.BillingAddress = {(this.BillingAddress == null ? "null" : this.BillingAddress.ToString())}");
+            toStringOutput.Add($"this.ShippingAddress = {(this.ShippingAddress == null ? "null" : this.ShippingAddress.ToString())}");
+            toStringOutput.Add($"this.Note = {(this.Note == null ? "null" : this.Note == string.Empty ? "" : this.Note)}");
+            toStringOutput.Add($"this.StatementDescriptionIdentifier = {(this.StatementDescriptionIdentifier == null ? "null" : this.StatementDescriptionIdentifier == string.Empty ? "" : this.StatementDescriptionIdentifier)}");
+            toStringOutput.Add($"this.Capabilities = {(this.Capabilities == null ? "null" : $"[{string.Join(", ", this.Capabilities)} ]")}");
+            toStringOutput.Add($"this.ReceiptNumber = {(this.ReceiptNumber == null ? "null" : this.ReceiptNumber == string.Empty ? "" : this.ReceiptNumber)}");
+            toStringOutput.Add($"this.ReceiptUrl = {(this.ReceiptUrl == null ? "null" : this.ReceiptUrl == string.Empty ? "" : this.ReceiptUrl)}");
+            toStringOutput.Add($"this.VersionToken = {(this.VersionToken == null ? "null" : this.VersionToken == string.Empty ? "" : this.VersionToken)}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .Id(Id)
-                .CreatedAt(CreatedAt)
-                .UpdatedAt(UpdatedAt)
-                .AmountMoney(AmountMoney)
-                .TipMoney(TipMoney)
-                .TotalMoney(TotalMoney)
-                .AppFeeMoney(AppFeeMoney)
-                .ApprovedMoney(ApprovedMoney)
-                .ProcessingFee(ProcessingFee)
-                .RefundedMoney(RefundedMoney)
-                .Status(Status)
-                .DelayDuration(DelayDuration)
-                .DelayAction(DelayAction)
-                .DelayedUntil(DelayedUntil)
-                .SourceType(SourceType)
-                .CardDetails(CardDetails)
-                .CashDetails(CashDetails)
-                .ExternalDetails(ExternalDetails)
-                .LocationId(LocationId)
-                .OrderId(OrderId)
-                .ReferenceId(ReferenceId)
-                .CustomerId(CustomerId)
-                .EmployeeId(EmployeeId)
-                .RefundIds(RefundIds)
-                .RiskEvaluation(RiskEvaluation)
-                .BuyerEmailAddress(BuyerEmailAddress)
-                .BillingAddress(BillingAddress)
-                .ShippingAddress(ShippingAddress)
-                .Note(Note)
-                .StatementDescriptionIdentifier(StatementDescriptionIdentifier)
-                .Capabilities(Capabilities)
-                .ReceiptNumber(ReceiptNumber)
-                .ReceiptUrl(ReceiptUrl)
-                .VersionToken(VersionToken);
+                .Id(this.Id)
+                .CreatedAt(this.CreatedAt)
+                .UpdatedAt(this.UpdatedAt)
+                .AmountMoney(this.AmountMoney)
+                .TipMoney(this.TipMoney)
+                .TotalMoney(this.TotalMoney)
+                .AppFeeMoney(this.AppFeeMoney)
+                .ApprovedMoney(this.ApprovedMoney)
+                .ProcessingFee(this.ProcessingFee)
+                .RefundedMoney(this.RefundedMoney)
+                .Status(this.Status)
+                .DelayDuration(this.DelayDuration)
+                .DelayAction(this.DelayAction)
+                .DelayedUntil(this.DelayedUntil)
+                .SourceType(this.SourceType)
+                .CardDetails(this.CardDetails)
+                .CashDetails(this.CashDetails)
+                .ExternalDetails(this.ExternalDetails)
+                .LocationId(this.LocationId)
+                .OrderId(this.OrderId)
+                .ReferenceId(this.ReferenceId)
+                .CustomerId(this.CustomerId)
+                .EmployeeId(this.EmployeeId)
+                .RefundIds(this.RefundIds)
+                .RiskEvaluation(this.RiskEvaluation)
+                .BuyerEmailAddress(this.BuyerEmailAddress)
+                .BillingAddress(this.BillingAddress)
+                .ShippingAddress(this.ShippingAddress)
+                .Note(this.Note)
+                .StatementDescriptionIdentifier(this.StatementDescriptionIdentifier)
+                .Capabilities(this.Capabilities)
+                .ReceiptNumber(this.ReceiptNumber)
+                .ReceiptUrl(this.ReceiptUrl)
+                .VersionToken(this.VersionToken);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string id;
@@ -705,248 +759,421 @@ namespace Square.Models
             private string receiptUrl;
             private string versionToken;
 
-
-
+             /// <summary>
+             /// Id.
+             /// </summary>
+             /// <param name="id"> id. </param>
+             /// <returns> Builder. </returns>
             public Builder Id(string id)
             {
                 this.id = id;
                 return this;
             }
 
+             /// <summary>
+             /// CreatedAt.
+             /// </summary>
+             /// <param name="createdAt"> createdAt. </param>
+             /// <returns> Builder. </returns>
             public Builder CreatedAt(string createdAt)
             {
                 this.createdAt = createdAt;
                 return this;
             }
 
+             /// <summary>
+             /// UpdatedAt.
+             /// </summary>
+             /// <param name="updatedAt"> updatedAt. </param>
+             /// <returns> Builder. </returns>
             public Builder UpdatedAt(string updatedAt)
             {
                 this.updatedAt = updatedAt;
                 return this;
             }
 
+             /// <summary>
+             /// AmountMoney.
+             /// </summary>
+             /// <param name="amountMoney"> amountMoney. </param>
+             /// <returns> Builder. </returns>
             public Builder AmountMoney(Models.Money amountMoney)
             {
                 this.amountMoney = amountMoney;
                 return this;
             }
 
+             /// <summary>
+             /// TipMoney.
+             /// </summary>
+             /// <param name="tipMoney"> tipMoney. </param>
+             /// <returns> Builder. </returns>
             public Builder TipMoney(Models.Money tipMoney)
             {
                 this.tipMoney = tipMoney;
                 return this;
             }
 
+             /// <summary>
+             /// TotalMoney.
+             /// </summary>
+             /// <param name="totalMoney"> totalMoney. </param>
+             /// <returns> Builder. </returns>
             public Builder TotalMoney(Models.Money totalMoney)
             {
                 this.totalMoney = totalMoney;
                 return this;
             }
 
+             /// <summary>
+             /// AppFeeMoney.
+             /// </summary>
+             /// <param name="appFeeMoney"> appFeeMoney. </param>
+             /// <returns> Builder. </returns>
             public Builder AppFeeMoney(Models.Money appFeeMoney)
             {
                 this.appFeeMoney = appFeeMoney;
                 return this;
             }
 
+             /// <summary>
+             /// ApprovedMoney.
+             /// </summary>
+             /// <param name="approvedMoney"> approvedMoney. </param>
+             /// <returns> Builder. </returns>
             public Builder ApprovedMoney(Models.Money approvedMoney)
             {
                 this.approvedMoney = approvedMoney;
                 return this;
             }
 
+             /// <summary>
+             /// ProcessingFee.
+             /// </summary>
+             /// <param name="processingFee"> processingFee. </param>
+             /// <returns> Builder. </returns>
             public Builder ProcessingFee(IList<Models.ProcessingFee> processingFee)
             {
                 this.processingFee = processingFee;
                 return this;
             }
 
+             /// <summary>
+             /// RefundedMoney.
+             /// </summary>
+             /// <param name="refundedMoney"> refundedMoney. </param>
+             /// <returns> Builder. </returns>
             public Builder RefundedMoney(Models.Money refundedMoney)
             {
                 this.refundedMoney = refundedMoney;
                 return this;
             }
 
+             /// <summary>
+             /// Status.
+             /// </summary>
+             /// <param name="status"> status. </param>
+             /// <returns> Builder. </returns>
             public Builder Status(string status)
             {
                 this.status = status;
                 return this;
             }
 
+             /// <summary>
+             /// DelayDuration.
+             /// </summary>
+             /// <param name="delayDuration"> delayDuration. </param>
+             /// <returns> Builder. </returns>
             public Builder DelayDuration(string delayDuration)
             {
                 this.delayDuration = delayDuration;
                 return this;
             }
 
+             /// <summary>
+             /// DelayAction.
+             /// </summary>
+             /// <param name="delayAction"> delayAction. </param>
+             /// <returns> Builder. </returns>
             public Builder DelayAction(string delayAction)
             {
                 this.delayAction = delayAction;
                 return this;
             }
 
+             /// <summary>
+             /// DelayedUntil.
+             /// </summary>
+             /// <param name="delayedUntil"> delayedUntil. </param>
+             /// <returns> Builder. </returns>
             public Builder DelayedUntil(string delayedUntil)
             {
                 this.delayedUntil = delayedUntil;
                 return this;
             }
 
+             /// <summary>
+             /// SourceType.
+             /// </summary>
+             /// <param name="sourceType"> sourceType. </param>
+             /// <returns> Builder. </returns>
             public Builder SourceType(string sourceType)
             {
                 this.sourceType = sourceType;
                 return this;
             }
 
+             /// <summary>
+             /// CardDetails.
+             /// </summary>
+             /// <param name="cardDetails"> cardDetails. </param>
+             /// <returns> Builder. </returns>
             public Builder CardDetails(Models.CardPaymentDetails cardDetails)
             {
                 this.cardDetails = cardDetails;
                 return this;
             }
 
+             /// <summary>
+             /// CashDetails.
+             /// </summary>
+             /// <param name="cashDetails"> cashDetails. </param>
+             /// <returns> Builder. </returns>
             public Builder CashDetails(Models.CashPaymentDetails cashDetails)
             {
                 this.cashDetails = cashDetails;
                 return this;
             }
 
+             /// <summary>
+             /// ExternalDetails.
+             /// </summary>
+             /// <param name="externalDetails"> externalDetails. </param>
+             /// <returns> Builder. </returns>
             public Builder ExternalDetails(Models.ExternalPaymentDetails externalDetails)
             {
                 this.externalDetails = externalDetails;
                 return this;
             }
 
+             /// <summary>
+             /// LocationId.
+             /// </summary>
+             /// <param name="locationId"> locationId. </param>
+             /// <returns> Builder. </returns>
             public Builder LocationId(string locationId)
             {
                 this.locationId = locationId;
                 return this;
             }
 
+             /// <summary>
+             /// OrderId.
+             /// </summary>
+             /// <param name="orderId"> orderId. </param>
+             /// <returns> Builder. </returns>
             public Builder OrderId(string orderId)
             {
                 this.orderId = orderId;
                 return this;
             }
 
+             /// <summary>
+             /// ReferenceId.
+             /// </summary>
+             /// <param name="referenceId"> referenceId. </param>
+             /// <returns> Builder. </returns>
             public Builder ReferenceId(string referenceId)
             {
                 this.referenceId = referenceId;
                 return this;
             }
 
+             /// <summary>
+             /// CustomerId.
+             /// </summary>
+             /// <param name="customerId"> customerId. </param>
+             /// <returns> Builder. </returns>
             public Builder CustomerId(string customerId)
             {
                 this.customerId = customerId;
                 return this;
             }
 
+             /// <summary>
+             /// EmployeeId.
+             /// </summary>
+             /// <param name="employeeId"> employeeId. </param>
+             /// <returns> Builder. </returns>
             public Builder EmployeeId(string employeeId)
             {
                 this.employeeId = employeeId;
                 return this;
             }
 
+             /// <summary>
+             /// RefundIds.
+             /// </summary>
+             /// <param name="refundIds"> refundIds. </param>
+             /// <returns> Builder. </returns>
             public Builder RefundIds(IList<string> refundIds)
             {
                 this.refundIds = refundIds;
                 return this;
             }
 
+             /// <summary>
+             /// RiskEvaluation.
+             /// </summary>
+             /// <param name="riskEvaluation"> riskEvaluation. </param>
+             /// <returns> Builder. </returns>
             public Builder RiskEvaluation(Models.RiskEvaluation riskEvaluation)
             {
                 this.riskEvaluation = riskEvaluation;
                 return this;
             }
 
+             /// <summary>
+             /// BuyerEmailAddress.
+             /// </summary>
+             /// <param name="buyerEmailAddress"> buyerEmailAddress. </param>
+             /// <returns> Builder. </returns>
             public Builder BuyerEmailAddress(string buyerEmailAddress)
             {
                 this.buyerEmailAddress = buyerEmailAddress;
                 return this;
             }
 
+             /// <summary>
+             /// BillingAddress.
+             /// </summary>
+             /// <param name="billingAddress"> billingAddress. </param>
+             /// <returns> Builder. </returns>
             public Builder BillingAddress(Models.Address billingAddress)
             {
                 this.billingAddress = billingAddress;
                 return this;
             }
 
+             /// <summary>
+             /// ShippingAddress.
+             /// </summary>
+             /// <param name="shippingAddress"> shippingAddress. </param>
+             /// <returns> Builder. </returns>
             public Builder ShippingAddress(Models.Address shippingAddress)
             {
                 this.shippingAddress = shippingAddress;
                 return this;
             }
 
+             /// <summary>
+             /// Note.
+             /// </summary>
+             /// <param name="note"> note. </param>
+             /// <returns> Builder. </returns>
             public Builder Note(string note)
             {
                 this.note = note;
                 return this;
             }
 
+             /// <summary>
+             /// StatementDescriptionIdentifier.
+             /// </summary>
+             /// <param name="statementDescriptionIdentifier"> statementDescriptionIdentifier. </param>
+             /// <returns> Builder. </returns>
             public Builder StatementDescriptionIdentifier(string statementDescriptionIdentifier)
             {
                 this.statementDescriptionIdentifier = statementDescriptionIdentifier;
                 return this;
             }
 
+             /// <summary>
+             /// Capabilities.
+             /// </summary>
+             /// <param name="capabilities"> capabilities. </param>
+             /// <returns> Builder. </returns>
             public Builder Capabilities(IList<string> capabilities)
             {
                 this.capabilities = capabilities;
                 return this;
             }
 
+             /// <summary>
+             /// ReceiptNumber.
+             /// </summary>
+             /// <param name="receiptNumber"> receiptNumber. </param>
+             /// <returns> Builder. </returns>
             public Builder ReceiptNumber(string receiptNumber)
             {
                 this.receiptNumber = receiptNumber;
                 return this;
             }
 
+             /// <summary>
+             /// ReceiptUrl.
+             /// </summary>
+             /// <param name="receiptUrl"> receiptUrl. </param>
+             /// <returns> Builder. </returns>
             public Builder ReceiptUrl(string receiptUrl)
             {
                 this.receiptUrl = receiptUrl;
                 return this;
             }
 
+             /// <summary>
+             /// VersionToken.
+             /// </summary>
+             /// <param name="versionToken"> versionToken. </param>
+             /// <returns> Builder. </returns>
             public Builder VersionToken(string versionToken)
             {
                 this.versionToken = versionToken;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> Payment. </returns>
             public Payment Build()
             {
-                return new Payment(id,
-                    createdAt,
-                    updatedAt,
-                    amountMoney,
-                    tipMoney,
-                    totalMoney,
-                    appFeeMoney,
-                    approvedMoney,
-                    processingFee,
-                    refundedMoney,
-                    status,
-                    delayDuration,
-                    delayAction,
-                    delayedUntil,
-                    sourceType,
-                    cardDetails,
-                    cashDetails,
-                    externalDetails,
-                    locationId,
-                    orderId,
-                    referenceId,
-                    customerId,
-                    employeeId,
-                    refundIds,
-                    riskEvaluation,
-                    buyerEmailAddress,
-                    billingAddress,
-                    shippingAddress,
-                    note,
-                    statementDescriptionIdentifier,
-                    capabilities,
-                    receiptNumber,
-                    receiptUrl,
-                    versionToken);
+                return new Payment(
+                    this.id,
+                    this.createdAt,
+                    this.updatedAt,
+                    this.amountMoney,
+                    this.tipMoney,
+                    this.totalMoney,
+                    this.appFeeMoney,
+                    this.approvedMoney,
+                    this.processingFee,
+                    this.refundedMoney,
+                    this.status,
+                    this.delayDuration,
+                    this.delayAction,
+                    this.delayedUntil,
+                    this.sourceType,
+                    this.cardDetails,
+                    this.cashDetails,
+                    this.externalDetails,
+                    this.locationId,
+                    this.orderId,
+                    this.referenceId,
+                    this.customerId,
+                    this.employeeId,
+                    this.refundIds,
+                    this.riskEvaluation,
+                    this.buyerEmailAddress,
+                    this.billingAddress,
+                    this.shippingAddress,
+                    this.note,
+                    this.statementDescriptionIdentifier,
+                    this.capabilities,
+                    this.receiptNumber,
+                    this.receiptUrl,
+                    this.versionToken);
             }
         }
     }

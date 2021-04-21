@@ -1,21 +1,34 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class ShiftFilter 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// ShiftFilter.
+    /// </summary>
+    public class ShiftFilter
     {
-        public ShiftFilter(IList<string> locationIds,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ShiftFilter"/> class.
+        /// </summary>
+        /// <param name="locationIds">location_ids.</param>
+        /// <param name="teamMemberIds">team_member_ids.</param>
+        /// <param name="employeeIds">employee_ids.</param>
+        /// <param name="status">status.</param>
+        /// <param name="start">start.</param>
+        /// <param name="end">end.</param>
+        /// <param name="workday">workday.</param>
+        public ShiftFilter(
+            IList<string> locationIds,
             IList<string> teamMemberIds,
             IList<string> employeeIds = null,
             string status = null,
@@ -23,13 +36,13 @@ namespace Square.Models
             Models.TimeRange end = null,
             Models.ShiftWorkday workday = null)
         {
-            LocationIds = locationIds;
-            EmployeeIds = employeeIds;
-            Status = status;
-            Start = start;
-            End = end;
-            Workday = workday;
-            TeamMemberIds = teamMemberIds;
+            this.LocationIds = locationIds;
+            this.EmployeeIds = employeeIds;
+            this.Status = status;
+            this.Start = start;
+            this.End = end;
+            this.Workday = workday;
+            this.TeamMemberIds = teamMemberIds;
         }
 
         /// <summary>
@@ -83,6 +96,7 @@ namespace Square.Models
         [JsonProperty("team_member_ids")]
         public IList<string> TeamMemberIds { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -92,17 +106,7 @@ namespace Square.Models
             return $"ShiftFilter : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"LocationIds = {(LocationIds == null ? "null" : $"[{ string.Join(", ", LocationIds)} ]")}");
-            toStringOutput.Add($"EmployeeIds = {(EmployeeIds == null ? "null" : $"[{ string.Join(", ", EmployeeIds)} ]")}");
-            toStringOutput.Add($"Status = {(Status == null ? "null" : Status.ToString())}");
-            toStringOutput.Add($"Start = {(Start == null ? "null" : Start.ToString())}");
-            toStringOutput.Add($"End = {(End == null ? "null" : End.ToString())}");
-            toStringOutput.Add($"Workday = {(Workday == null ? "null" : Workday.ToString())}");
-            toStringOutput.Add($"TeamMemberIds = {(TeamMemberIds == null ? "null" : $"[{ string.Join(", ", TeamMemberIds)} ]")}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -116,69 +120,93 @@ namespace Square.Models
             }
 
             return obj is ShiftFilter other &&
-                ((LocationIds == null && other.LocationIds == null) || (LocationIds?.Equals(other.LocationIds) == true)) &&
-                ((EmployeeIds == null && other.EmployeeIds == null) || (EmployeeIds?.Equals(other.EmployeeIds) == true)) &&
-                ((Status == null && other.Status == null) || (Status?.Equals(other.Status) == true)) &&
-                ((Start == null && other.Start == null) || (Start?.Equals(other.Start) == true)) &&
-                ((End == null && other.End == null) || (End?.Equals(other.End) == true)) &&
-                ((Workday == null && other.Workday == null) || (Workday?.Equals(other.Workday) == true)) &&
-                ((TeamMemberIds == null && other.TeamMemberIds == null) || (TeamMemberIds?.Equals(other.TeamMemberIds) == true));
+                ((this.LocationIds == null && other.LocationIds == null) || (this.LocationIds?.Equals(other.LocationIds) == true)) &&
+                ((this.EmployeeIds == null && other.EmployeeIds == null) || (this.EmployeeIds?.Equals(other.EmployeeIds) == true)) &&
+                ((this.Status == null && other.Status == null) || (this.Status?.Equals(other.Status) == true)) &&
+                ((this.Start == null && other.Start == null) || (this.Start?.Equals(other.Start) == true)) &&
+                ((this.End == null && other.End == null) || (this.End?.Equals(other.End) == true)) &&
+                ((this.Workday == null && other.Workday == null) || (this.Workday?.Equals(other.Workday) == true)) &&
+                ((this.TeamMemberIds == null && other.TeamMemberIds == null) || (this.TeamMemberIds?.Equals(other.TeamMemberIds) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 432854802;
 
-            if (LocationIds != null)
+            if (this.LocationIds != null)
             {
-               hashCode += LocationIds.GetHashCode();
+               hashCode += this.LocationIds.GetHashCode();
             }
 
-            if (EmployeeIds != null)
+            if (this.EmployeeIds != null)
             {
-               hashCode += EmployeeIds.GetHashCode();
+               hashCode += this.EmployeeIds.GetHashCode();
             }
 
-            if (Status != null)
+            if (this.Status != null)
             {
-               hashCode += Status.GetHashCode();
+               hashCode += this.Status.GetHashCode();
             }
 
-            if (Start != null)
+            if (this.Start != null)
             {
-               hashCode += Start.GetHashCode();
+               hashCode += this.Start.GetHashCode();
             }
 
-            if (End != null)
+            if (this.End != null)
             {
-               hashCode += End.GetHashCode();
+               hashCode += this.End.GetHashCode();
             }
 
-            if (Workday != null)
+            if (this.Workday != null)
             {
-               hashCode += Workday.GetHashCode();
+               hashCode += this.Workday.GetHashCode();
             }
 
-            if (TeamMemberIds != null)
+            if (this.TeamMemberIds != null)
             {
-               hashCode += TeamMemberIds.GetHashCode();
+               hashCode += this.TeamMemberIds.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.LocationIds = {(this.LocationIds == null ? "null" : $"[{string.Join(", ", this.LocationIds)} ]")}");
+            toStringOutput.Add($"this.EmployeeIds = {(this.EmployeeIds == null ? "null" : $"[{string.Join(", ", this.EmployeeIds)} ]")}");
+            toStringOutput.Add($"this.Status = {(this.Status == null ? "null" : this.Status.ToString())}");
+            toStringOutput.Add($"this.Start = {(this.Start == null ? "null" : this.Start.ToString())}");
+            toStringOutput.Add($"this.End = {(this.End == null ? "null" : this.End.ToString())}");
+            toStringOutput.Add($"this.Workday = {(this.Workday == null ? "null" : this.Workday.ToString())}");
+            toStringOutput.Add($"this.TeamMemberIds = {(this.TeamMemberIds == null ? "null" : $"[{string.Join(", ", this.TeamMemberIds)} ]")}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
-            var builder = new Builder(LocationIds,
-                TeamMemberIds)
-                .EmployeeIds(EmployeeIds)
-                .Status(Status)
-                .Start(Start)
-                .End(End)
-                .Workday(Workday);
+            var builder = new Builder(
+                this.LocationIds,
+                this.TeamMemberIds)
+                .EmployeeIds(this.EmployeeIds)
+                .Status(this.Status)
+                .Start(this.Start)
+                .End(this.End)
+                .Workday(this.Workday);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private IList<string> locationIds;
@@ -189,64 +217,105 @@ namespace Square.Models
             private Models.TimeRange end;
             private Models.ShiftWorkday workday;
 
-            public Builder(IList<string> locationIds,
+            public Builder(
+                IList<string> locationIds,
                 IList<string> teamMemberIds)
             {
                 this.locationIds = locationIds;
                 this.teamMemberIds = teamMemberIds;
             }
 
+             /// <summary>
+             /// LocationIds.
+             /// </summary>
+             /// <param name="locationIds"> locationIds. </param>
+             /// <returns> Builder. </returns>
             public Builder LocationIds(IList<string> locationIds)
             {
                 this.locationIds = locationIds;
                 return this;
             }
 
+             /// <summary>
+             /// TeamMemberIds.
+             /// </summary>
+             /// <param name="teamMemberIds"> teamMemberIds. </param>
+             /// <returns> Builder. </returns>
             public Builder TeamMemberIds(IList<string> teamMemberIds)
             {
                 this.teamMemberIds = teamMemberIds;
                 return this;
             }
 
+             /// <summary>
+             /// EmployeeIds.
+             /// </summary>
+             /// <param name="employeeIds"> employeeIds. </param>
+             /// <returns> Builder. </returns>
             public Builder EmployeeIds(IList<string> employeeIds)
             {
                 this.employeeIds = employeeIds;
                 return this;
             }
 
+             /// <summary>
+             /// Status.
+             /// </summary>
+             /// <param name="status"> status. </param>
+             /// <returns> Builder. </returns>
             public Builder Status(string status)
             {
                 this.status = status;
                 return this;
             }
 
+             /// <summary>
+             /// Start.
+             /// </summary>
+             /// <param name="start"> start. </param>
+             /// <returns> Builder. </returns>
             public Builder Start(Models.TimeRange start)
             {
                 this.start = start;
                 return this;
             }
 
+             /// <summary>
+             /// End.
+             /// </summary>
+             /// <param name="end"> end. </param>
+             /// <returns> Builder. </returns>
             public Builder End(Models.TimeRange end)
             {
                 this.end = end;
                 return this;
             }
 
+             /// <summary>
+             /// Workday.
+             /// </summary>
+             /// <param name="workday"> workday. </param>
+             /// <returns> Builder. </returns>
             public Builder Workday(Models.ShiftWorkday workday)
             {
                 this.workday = workday;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> ShiftFilter. </returns>
             public ShiftFilter Build()
             {
-                return new ShiftFilter(locationIds,
-                    teamMemberIds,
-                    employeeIds,
-                    status,
-                    start,
-                    end,
-                    workday);
+                return new ShiftFilter(
+                    this.locationIds,
+                    this.teamMemberIds,
+                    this.employeeIds,
+                    this.status,
+                    this.start,
+                    this.end,
+                    this.workday);
             }
         }
     }

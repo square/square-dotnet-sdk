@@ -1,21 +1,36 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class ObtainTokenRequest 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// ObtainTokenRequest.
+    /// </summary>
+    public class ObtainTokenRequest
     {
-        public ObtainTokenRequest(string clientId,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ObtainTokenRequest"/> class.
+        /// </summary>
+        /// <param name="clientId">client_id.</param>
+        /// <param name="clientSecret">client_secret.</param>
+        /// <param name="grantType">grant_type.</param>
+        /// <param name="code">code.</param>
+        /// <param name="redirectUri">redirect_uri.</param>
+        /// <param name="refreshToken">refresh_token.</param>
+        /// <param name="migrationToken">migration_token.</param>
+        /// <param name="scopes">scopes.</param>
+        /// <param name="shortLived">short_lived.</param>
+        public ObtainTokenRequest(
+            string clientId,
             string clientSecret,
             string grantType,
             string code = null,
@@ -25,15 +40,15 @@ namespace Square.Models
             IList<string> scopes = null,
             bool? shortLived = null)
         {
-            ClientId = clientId;
-            ClientSecret = clientSecret;
-            Code = code;
-            RedirectUri = redirectUri;
-            GrantType = grantType;
-            RefreshToken = refreshToken;
-            MigrationToken = migrationToken;
-            Scopes = scopes;
-            ShortLived = shortLived;
+            this.ClientId = clientId;
+            this.ClientSecret = clientSecret;
+            this.Code = code;
+            this.RedirectUri = redirectUri;
+            this.GrantType = grantType;
+            this.RefreshToken = refreshToken;
+            this.MigrationToken = migrationToken;
+            this.Scopes = scopes;
+            this.ShortLived = shortLived;
         }
 
         /// <summary>
@@ -84,7 +99,7 @@ namespace Square.Models
         /// to 2019-03-13. This parameter is required if `grant_type` is set to
         /// `migration_token` to indicate that the application wants to get a replacement
         /// OAuth access token. The response also returns a refresh token.
-        /// For more information, see [Migrate to Using Refresh Tokens](https://developer.squareup.com/docs/authz/oauth/migration).
+        /// For more information, see [Migrate to Using Refresh Tokens](https://developer.squareup.com/docs/oauth-api/migrate-to-refresh-tokens).
         /// </summary>
         [JsonProperty("migration_token", NullValueHandling = NullValueHandling.Ignore)]
         public string MigrationToken { get; }
@@ -108,6 +123,7 @@ namespace Square.Models
         [JsonProperty("short_lived", NullValueHandling = NullValueHandling.Ignore)]
         public bool? ShortLived { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -117,19 +133,7 @@ namespace Square.Models
             return $"ObtainTokenRequest : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"ClientId = {(ClientId == null ? "null" : ClientId == string.Empty ? "" : ClientId)}");
-            toStringOutput.Add($"ClientSecret = {(ClientSecret == null ? "null" : ClientSecret == string.Empty ? "" : ClientSecret)}");
-            toStringOutput.Add($"Code = {(Code == null ? "null" : Code == string.Empty ? "" : Code)}");
-            toStringOutput.Add($"RedirectUri = {(RedirectUri == null ? "null" : RedirectUri == string.Empty ? "" : RedirectUri)}");
-            toStringOutput.Add($"GrantType = {(GrantType == null ? "null" : GrantType == string.Empty ? "" : GrantType)}");
-            toStringOutput.Add($"RefreshToken = {(RefreshToken == null ? "null" : RefreshToken == string.Empty ? "" : RefreshToken)}");
-            toStringOutput.Add($"MigrationToken = {(MigrationToken == null ? "null" : MigrationToken == string.Empty ? "" : MigrationToken)}");
-            toStringOutput.Add($"Scopes = {(Scopes == null ? "null" : $"[{ string.Join(", ", Scopes)} ]")}");
-            toStringOutput.Add($"ShortLived = {(ShortLived == null ? "null" : ShortLived.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -143,83 +147,109 @@ namespace Square.Models
             }
 
             return obj is ObtainTokenRequest other &&
-                ((ClientId == null && other.ClientId == null) || (ClientId?.Equals(other.ClientId) == true)) &&
-                ((ClientSecret == null && other.ClientSecret == null) || (ClientSecret?.Equals(other.ClientSecret) == true)) &&
-                ((Code == null && other.Code == null) || (Code?.Equals(other.Code) == true)) &&
-                ((RedirectUri == null && other.RedirectUri == null) || (RedirectUri?.Equals(other.RedirectUri) == true)) &&
-                ((GrantType == null && other.GrantType == null) || (GrantType?.Equals(other.GrantType) == true)) &&
-                ((RefreshToken == null && other.RefreshToken == null) || (RefreshToken?.Equals(other.RefreshToken) == true)) &&
-                ((MigrationToken == null && other.MigrationToken == null) || (MigrationToken?.Equals(other.MigrationToken) == true)) &&
-                ((Scopes == null && other.Scopes == null) || (Scopes?.Equals(other.Scopes) == true)) &&
-                ((ShortLived == null && other.ShortLived == null) || (ShortLived?.Equals(other.ShortLived) == true));
+                ((this.ClientId == null && other.ClientId == null) || (this.ClientId?.Equals(other.ClientId) == true)) &&
+                ((this.ClientSecret == null && other.ClientSecret == null) || (this.ClientSecret?.Equals(other.ClientSecret) == true)) &&
+                ((this.Code == null && other.Code == null) || (this.Code?.Equals(other.Code) == true)) &&
+                ((this.RedirectUri == null && other.RedirectUri == null) || (this.RedirectUri?.Equals(other.RedirectUri) == true)) &&
+                ((this.GrantType == null && other.GrantType == null) || (this.GrantType?.Equals(other.GrantType) == true)) &&
+                ((this.RefreshToken == null && other.RefreshToken == null) || (this.RefreshToken?.Equals(other.RefreshToken) == true)) &&
+                ((this.MigrationToken == null && other.MigrationToken == null) || (this.MigrationToken?.Equals(other.MigrationToken) == true)) &&
+                ((this.Scopes == null && other.Scopes == null) || (this.Scopes?.Equals(other.Scopes) == true)) &&
+                ((this.ShortLived == null && other.ShortLived == null) || (this.ShortLived?.Equals(other.ShortLived) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -994318680;
 
-            if (ClientId != null)
+            if (this.ClientId != null)
             {
-               hashCode += ClientId.GetHashCode();
+               hashCode += this.ClientId.GetHashCode();
             }
 
-            if (ClientSecret != null)
+            if (this.ClientSecret != null)
             {
-               hashCode += ClientSecret.GetHashCode();
+               hashCode += this.ClientSecret.GetHashCode();
             }
 
-            if (Code != null)
+            if (this.Code != null)
             {
-               hashCode += Code.GetHashCode();
+               hashCode += this.Code.GetHashCode();
             }
 
-            if (RedirectUri != null)
+            if (this.RedirectUri != null)
             {
-               hashCode += RedirectUri.GetHashCode();
+               hashCode += this.RedirectUri.GetHashCode();
             }
 
-            if (GrantType != null)
+            if (this.GrantType != null)
             {
-               hashCode += GrantType.GetHashCode();
+               hashCode += this.GrantType.GetHashCode();
             }
 
-            if (RefreshToken != null)
+            if (this.RefreshToken != null)
             {
-               hashCode += RefreshToken.GetHashCode();
+               hashCode += this.RefreshToken.GetHashCode();
             }
 
-            if (MigrationToken != null)
+            if (this.MigrationToken != null)
             {
-               hashCode += MigrationToken.GetHashCode();
+               hashCode += this.MigrationToken.GetHashCode();
             }
 
-            if (Scopes != null)
+            if (this.Scopes != null)
             {
-               hashCode += Scopes.GetHashCode();
+               hashCode += this.Scopes.GetHashCode();
             }
 
-            if (ShortLived != null)
+            if (this.ShortLived != null)
             {
-               hashCode += ShortLived.GetHashCode();
+               hashCode += this.ShortLived.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.ClientId = {(this.ClientId == null ? "null" : this.ClientId == string.Empty ? "" : this.ClientId)}");
+            toStringOutput.Add($"this.ClientSecret = {(this.ClientSecret == null ? "null" : this.ClientSecret == string.Empty ? "" : this.ClientSecret)}");
+            toStringOutput.Add($"this.Code = {(this.Code == null ? "null" : this.Code == string.Empty ? "" : this.Code)}");
+            toStringOutput.Add($"this.RedirectUri = {(this.RedirectUri == null ? "null" : this.RedirectUri == string.Empty ? "" : this.RedirectUri)}");
+            toStringOutput.Add($"this.GrantType = {(this.GrantType == null ? "null" : this.GrantType == string.Empty ? "" : this.GrantType)}");
+            toStringOutput.Add($"this.RefreshToken = {(this.RefreshToken == null ? "null" : this.RefreshToken == string.Empty ? "" : this.RefreshToken)}");
+            toStringOutput.Add($"this.MigrationToken = {(this.MigrationToken == null ? "null" : this.MigrationToken == string.Empty ? "" : this.MigrationToken)}");
+            toStringOutput.Add($"this.Scopes = {(this.Scopes == null ? "null" : $"[{string.Join(", ", this.Scopes)} ]")}");
+            toStringOutput.Add($"this.ShortLived = {(this.ShortLived == null ? "null" : this.ShortLived.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
-            var builder = new Builder(ClientId,
-                ClientSecret,
-                GrantType)
-                .Code(Code)
-                .RedirectUri(RedirectUri)
-                .RefreshToken(RefreshToken)
-                .MigrationToken(MigrationToken)
-                .Scopes(Scopes)
-                .ShortLived(ShortLived);
+            var builder = new Builder(
+                this.ClientId,
+                this.ClientSecret,
+                this.GrantType)
+                .Code(this.Code)
+                .RedirectUri(this.RedirectUri)
+                .RefreshToken(this.RefreshToken)
+                .MigrationToken(this.MigrationToken)
+                .Scopes(this.Scopes)
+                .ShortLived(this.ShortLived);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string clientId;
@@ -232,7 +262,8 @@ namespace Square.Models
             private IList<string> scopes;
             private bool? shortLived;
 
-            public Builder(string clientId,
+            public Builder(
+                string clientId,
                 string clientSecret,
                 string grantType)
             {
@@ -241,71 +272,121 @@ namespace Square.Models
                 this.grantType = grantType;
             }
 
+             /// <summary>
+             /// ClientId.
+             /// </summary>
+             /// <param name="clientId"> clientId. </param>
+             /// <returns> Builder. </returns>
             public Builder ClientId(string clientId)
             {
                 this.clientId = clientId;
                 return this;
             }
 
+             /// <summary>
+             /// ClientSecret.
+             /// </summary>
+             /// <param name="clientSecret"> clientSecret. </param>
+             /// <returns> Builder. </returns>
             public Builder ClientSecret(string clientSecret)
             {
                 this.clientSecret = clientSecret;
                 return this;
             }
 
+             /// <summary>
+             /// GrantType.
+             /// </summary>
+             /// <param name="grantType"> grantType. </param>
+             /// <returns> Builder. </returns>
             public Builder GrantType(string grantType)
             {
                 this.grantType = grantType;
                 return this;
             }
 
+             /// <summary>
+             /// Code.
+             /// </summary>
+             /// <param name="code"> code. </param>
+             /// <returns> Builder. </returns>
             public Builder Code(string code)
             {
                 this.code = code;
                 return this;
             }
 
+             /// <summary>
+             /// RedirectUri.
+             /// </summary>
+             /// <param name="redirectUri"> redirectUri. </param>
+             /// <returns> Builder. </returns>
             public Builder RedirectUri(string redirectUri)
             {
                 this.redirectUri = redirectUri;
                 return this;
             }
 
+             /// <summary>
+             /// RefreshToken.
+             /// </summary>
+             /// <param name="refreshToken"> refreshToken. </param>
+             /// <returns> Builder. </returns>
             public Builder RefreshToken(string refreshToken)
             {
                 this.refreshToken = refreshToken;
                 return this;
             }
 
+             /// <summary>
+             /// MigrationToken.
+             /// </summary>
+             /// <param name="migrationToken"> migrationToken. </param>
+             /// <returns> Builder. </returns>
             public Builder MigrationToken(string migrationToken)
             {
                 this.migrationToken = migrationToken;
                 return this;
             }
 
+             /// <summary>
+             /// Scopes.
+             /// </summary>
+             /// <param name="scopes"> scopes. </param>
+             /// <returns> Builder. </returns>
             public Builder Scopes(IList<string> scopes)
             {
                 this.scopes = scopes;
                 return this;
             }
 
+             /// <summary>
+             /// ShortLived.
+             /// </summary>
+             /// <param name="shortLived"> shortLived. </param>
+             /// <returns> Builder. </returns>
             public Builder ShortLived(bool? shortLived)
             {
                 this.shortLived = shortLived;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> ObtainTokenRequest. </returns>
             public ObtainTokenRequest Build()
             {
-                return new ObtainTokenRequest(clientId,
-                    clientSecret,
-                    grantType,
-                    code,
-                    redirectUri,
-                    refreshToken,
-                    migrationToken,
-                    scopes,
-                    shortLived);
+                return new ObtainTokenRequest(
+                    this.clientId,
+                    this.clientSecret,
+                    this.grantType,
+                    this.code,
+                    this.redirectUri,
+                    this.refreshToken,
+                    this.migrationToken,
+                    this.scopes,
+                    this.shortLived);
             }
         }
     }

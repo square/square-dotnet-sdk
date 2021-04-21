@@ -42,7 +42,10 @@ page in the [application dashboard](https://connect.squareup.com/apps).
 :information_source: **Note** This endpoint does not require authentication.
 
 ```csharp
-RenewTokenAsync(string clientId, Models.RenewTokenRequest body, string authorization)
+RenewTokenAsync(
+    string clientId,
+    Models.RenewTokenRequest body,
+    string authorization)
 ```
 
 ## Parameters
@@ -96,7 +99,9 @@ page in the [Developer Dashboard](https://developer.squareup.com/apps).
 :information_source: **Note** This endpoint does not require authentication.
 
 ```csharp
-RevokeTokenAsync(Models.RevokeTokenRequest body, string authorization)
+RevokeTokenAsync(
+    Models.RevokeTokenRequest body,
+    string authorization)
 ```
 
 ## Parameters
@@ -147,7 +152,8 @@ should never interact directly with OAuth tokens__.
 :information_source: **Note** This endpoint does not require authentication.
 
 ```csharp
-ObtainTokenAsync(Models.ObtainTokenRequest body)
+ObtainTokenAsync(
+    Models.ObtainTokenRequest body)
 ```
 
 ## Parameters

@@ -22,14 +22,15 @@ ICustomerGroupsApi customerGroupsApi = client.CustomerGroupsApi;
 Retrieves the list of customer groups of a business.
 
 ```csharp
-ListCustomerGroupsAsync(string cursor = null)
+ListCustomerGroupsAsync(
+    string cursor = null)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `cursor` | `string` | Query, Optional | A pagination cursor returned by a previous call to this endpoint.<br>Provide this to retrieve the next set of results for your original query.<br><br>See the [Pagination guide](https://developer.squareup.com/docs/working-with-apis/pagination) for more information. |
+| `cursor` | `string` | Query, Optional | A pagination cursor returned by a previous call to this endpoint.<br>Provide this cursor to retrieve the next set of results for your original query.<br><br>For more information, see [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination). |
 
 ## Response Type
 
@@ -55,7 +56,8 @@ Creates a new customer group for a business.
 The request must include the `name` value of the group.
 
 ```csharp
-CreateCustomerGroupAsync(Models.CreateCustomerGroupRequest body)
+CreateCustomerGroupAsync(
+    Models.CreateCustomerGroupRequest body)
 ```
 
 ## Parameters
@@ -95,7 +97,8 @@ catch (ApiException e){};
 Deletes a customer group as identified by the `group_id` value.
 
 ```csharp
-DeleteCustomerGroupAsync(string groupId)
+DeleteCustomerGroupAsync(
+    string groupId)
 ```
 
 ## Parameters
@@ -126,7 +129,8 @@ catch (ApiException e){};
 Retrieves a specific customer group as identified by the `group_id` value.
 
 ```csharp
-RetrieveCustomerGroupAsync(string groupId)
+RetrieveCustomerGroupAsync(
+    string groupId)
 ```
 
 ## Parameters
@@ -157,7 +161,9 @@ catch (ApiException e){};
 Updates a customer group as identified by the `group_id` value.
 
 ```csharp
-UpdateCustomerGroupAsync(string groupId, Models.UpdateCustomerGroupRequest body)
+UpdateCustomerGroupAsync(
+    string groupId,
+    Models.UpdateCustomerGroupRequest body)
 ```
 
 ## Parameters

@@ -1,29 +1,39 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class EmployeeWage 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// EmployeeWage.
+    /// </summary>
+    public class EmployeeWage
     {
-        public EmployeeWage(string id = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="EmployeeWage"/> class.
+        /// </summary>
+        /// <param name="id">id.</param>
+        /// <param name="employeeId">employee_id.</param>
+        /// <param name="title">title.</param>
+        /// <param name="hourlyRate">hourly_rate.</param>
+        public EmployeeWage(
+            string id = null,
             string employeeId = null,
             string title = null,
             Models.Money hourlyRate = null)
         {
-            Id = id;
-            EmployeeId = employeeId;
-            Title = title;
-            HourlyRate = hourlyRate;
+            this.Id = id;
+            this.EmployeeId = employeeId;
+            this.Title = title;
+            this.HourlyRate = hourlyRate;
         }
 
         /// <summary>
@@ -55,6 +65,7 @@ namespace Square.Models
         [JsonProperty("hourly_rate", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Money HourlyRate { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -64,14 +75,7 @@ namespace Square.Models
             return $"EmployeeWage : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Id = {(Id == null ? "null" : Id == string.Empty ? "" : Id)}");
-            toStringOutput.Add($"EmployeeId = {(EmployeeId == null ? "null" : EmployeeId == string.Empty ? "" : EmployeeId)}");
-            toStringOutput.Add($"Title = {(Title == null ? "null" : Title == string.Empty ? "" : Title)}");
-            toStringOutput.Add($"HourlyRate = {(HourlyRate == null ? "null" : HourlyRate.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -85,49 +89,69 @@ namespace Square.Models
             }
 
             return obj is EmployeeWage other &&
-                ((Id == null && other.Id == null) || (Id?.Equals(other.Id) == true)) &&
-                ((EmployeeId == null && other.EmployeeId == null) || (EmployeeId?.Equals(other.EmployeeId) == true)) &&
-                ((Title == null && other.Title == null) || (Title?.Equals(other.Title) == true)) &&
-                ((HourlyRate == null && other.HourlyRate == null) || (HourlyRate?.Equals(other.HourlyRate) == true));
+                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
+                ((this.EmployeeId == null && other.EmployeeId == null) || (this.EmployeeId?.Equals(other.EmployeeId) == true)) &&
+                ((this.Title == null && other.Title == null) || (this.Title?.Equals(other.Title) == true)) &&
+                ((this.HourlyRate == null && other.HourlyRate == null) || (this.HourlyRate?.Equals(other.HourlyRate) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -159635792;
 
-            if (Id != null)
+            if (this.Id != null)
             {
-               hashCode += Id.GetHashCode();
+               hashCode += this.Id.GetHashCode();
             }
 
-            if (EmployeeId != null)
+            if (this.EmployeeId != null)
             {
-               hashCode += EmployeeId.GetHashCode();
+               hashCode += this.EmployeeId.GetHashCode();
             }
 
-            if (Title != null)
+            if (this.Title != null)
             {
-               hashCode += Title.GetHashCode();
+               hashCode += this.Title.GetHashCode();
             }
 
-            if (HourlyRate != null)
+            if (this.HourlyRate != null)
             {
-               hashCode += HourlyRate.GetHashCode();
+               hashCode += this.HourlyRate.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id == string.Empty ? "" : this.Id)}");
+            toStringOutput.Add($"this.EmployeeId = {(this.EmployeeId == null ? "null" : this.EmployeeId == string.Empty ? "" : this.EmployeeId)}");
+            toStringOutput.Add($"this.Title = {(this.Title == null ? "null" : this.Title == string.Empty ? "" : this.Title)}");
+            toStringOutput.Add($"this.HourlyRate = {(this.HourlyRate == null ? "null" : this.HourlyRate.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .Id(Id)
-                .EmployeeId(EmployeeId)
-                .Title(Title)
-                .HourlyRate(HourlyRate);
+                .Id(this.Id)
+                .EmployeeId(this.EmployeeId)
+                .Title(this.Title)
+                .HourlyRate(this.HourlyRate);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string id;
@@ -135,38 +159,61 @@ namespace Square.Models
             private string title;
             private Models.Money hourlyRate;
 
-
-
+             /// <summary>
+             /// Id.
+             /// </summary>
+             /// <param name="id"> id. </param>
+             /// <returns> Builder. </returns>
             public Builder Id(string id)
             {
                 this.id = id;
                 return this;
             }
 
+             /// <summary>
+             /// EmployeeId.
+             /// </summary>
+             /// <param name="employeeId"> employeeId. </param>
+             /// <returns> Builder. </returns>
             public Builder EmployeeId(string employeeId)
             {
                 this.employeeId = employeeId;
                 return this;
             }
 
+             /// <summary>
+             /// Title.
+             /// </summary>
+             /// <param name="title"> title. </param>
+             /// <returns> Builder. </returns>
             public Builder Title(string title)
             {
                 this.title = title;
                 return this;
             }
 
+             /// <summary>
+             /// HourlyRate.
+             /// </summary>
+             /// <param name="hourlyRate"> hourlyRate. </param>
+             /// <returns> Builder. </returns>
             public Builder HourlyRate(Models.Money hourlyRate)
             {
                 this.hourlyRate = hourlyRate;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> EmployeeWage. </returns>
             public EmployeeWage Build()
             {
-                return new EmployeeWage(id,
-                    employeeId,
-                    title,
-                    hourlyRate);
+                return new EmployeeWage(
+                    this.id,
+                    this.employeeId,
+                    this.title,
+                    this.hourlyRate);
             }
         }
     }

@@ -1,25 +1,33 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class BatchUpsertCatalogObjectsRequest 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// BatchUpsertCatalogObjectsRequest.
+    /// </summary>
+    public class BatchUpsertCatalogObjectsRequest
     {
-        public BatchUpsertCatalogObjectsRequest(string idempotencyKey,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BatchUpsertCatalogObjectsRequest"/> class.
+        /// </summary>
+        /// <param name="idempotencyKey">idempotency_key.</param>
+        /// <param name="batches">batches.</param>
+        public BatchUpsertCatalogObjectsRequest(
+            string idempotencyKey,
             IList<Models.CatalogObjectBatch> batches)
         {
-            IdempotencyKey = idempotencyKey;
-            Batches = batches;
+            this.IdempotencyKey = idempotencyKey;
+            this.Batches = batches;
         }
 
         /// <summary>
@@ -56,6 +64,7 @@ namespace Square.Models
         [JsonProperty("batches")]
         public IList<Models.CatalogObjectBatch> Batches { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -65,12 +74,7 @@ namespace Square.Models
             return $"BatchUpsertCatalogObjectsRequest : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"IdempotencyKey = {(IdempotencyKey == null ? "null" : IdempotencyKey == string.Empty ? "" : IdempotencyKey)}");
-            toStringOutput.Add($"Batches = {(Batches == null ? "null" : $"[{ string.Join(", ", Batches)} ]")}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -84,62 +88,97 @@ namespace Square.Models
             }
 
             return obj is BatchUpsertCatalogObjectsRequest other &&
-                ((IdempotencyKey == null && other.IdempotencyKey == null) || (IdempotencyKey?.Equals(other.IdempotencyKey) == true)) &&
-                ((Batches == null && other.Batches == null) || (Batches?.Equals(other.Batches) == true));
+                ((this.IdempotencyKey == null && other.IdempotencyKey == null) || (this.IdempotencyKey?.Equals(other.IdempotencyKey) == true)) &&
+                ((this.Batches == null && other.Batches == null) || (this.Batches?.Equals(other.Batches) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -376663980;
 
-            if (IdempotencyKey != null)
+            if (this.IdempotencyKey != null)
             {
-               hashCode += IdempotencyKey.GetHashCode();
+               hashCode += this.IdempotencyKey.GetHashCode();
             }
 
-            if (Batches != null)
+            if (this.Batches != null)
             {
-               hashCode += Batches.GetHashCode();
+               hashCode += this.Batches.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.IdempotencyKey = {(this.IdempotencyKey == null ? "null" : this.IdempotencyKey == string.Empty ? "" : this.IdempotencyKey)}");
+            toStringOutput.Add($"this.Batches = {(this.Batches == null ? "null" : $"[{string.Join(", ", this.Batches)} ]")}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
-            var builder = new Builder(IdempotencyKey,
-                Batches);
+            var builder = new Builder(
+                this.IdempotencyKey,
+                this.Batches);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string idempotencyKey;
             private IList<Models.CatalogObjectBatch> batches;
 
-            public Builder(string idempotencyKey,
+            public Builder(
+                string idempotencyKey,
                 IList<Models.CatalogObjectBatch> batches)
             {
                 this.idempotencyKey = idempotencyKey;
                 this.batches = batches;
             }
 
+             /// <summary>
+             /// IdempotencyKey.
+             /// </summary>
+             /// <param name="idempotencyKey"> idempotencyKey. </param>
+             /// <returns> Builder. </returns>
             public Builder IdempotencyKey(string idempotencyKey)
             {
                 this.idempotencyKey = idempotencyKey;
                 return this;
             }
 
+             /// <summary>
+             /// Batches.
+             /// </summary>
+             /// <param name="batches"> batches. </param>
+             /// <returns> Builder. </returns>
             public Builder Batches(IList<Models.CatalogObjectBatch> batches)
             {
                 this.batches = batches;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> BatchUpsertCatalogObjectsRequest. </returns>
             public BatchUpsertCatalogObjectsRequest Build()
             {
-                return new BatchUpsertCatalogObjectsRequest(idempotencyKey,
-                    batches);
+                return new BatchUpsertCatalogObjectsRequest(
+                    this.idempotencyKey,
+                    this.batches);
             }
         }
     }

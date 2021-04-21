@@ -1,21 +1,38 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class TeamMember 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// TeamMember.
+    /// </summary>
+    public class TeamMember
     {
-        public TeamMember(string id = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TeamMember"/> class.
+        /// </summary>
+        /// <param name="id">id.</param>
+        /// <param name="referenceId">reference_id.</param>
+        /// <param name="isOwner">is_owner.</param>
+        /// <param name="status">status.</param>
+        /// <param name="givenName">given_name.</param>
+        /// <param name="familyName">family_name.</param>
+        /// <param name="emailAddress">email_address.</param>
+        /// <param name="phoneNumber">phone_number.</param>
+        /// <param name="createdAt">created_at.</param>
+        /// <param name="updatedAt">updated_at.</param>
+        /// <param name="assignedLocations">assigned_locations.</param>
+        public TeamMember(
+            string id = null,
             string referenceId = null,
             bool? isOwner = null,
             string status = null,
@@ -27,17 +44,17 @@ namespace Square.Models
             string updatedAt = null,
             Models.TeamMemberAssignedLocations assignedLocations = null)
         {
-            Id = id;
-            ReferenceId = referenceId;
-            IsOwner = isOwner;
-            Status = status;
-            GivenName = givenName;
-            FamilyName = familyName;
-            EmailAddress = emailAddress;
-            PhoneNumber = phoneNumber;
-            CreatedAt = createdAt;
-            UpdatedAt = updatedAt;
-            AssignedLocations = assignedLocations;
+            this.Id = id;
+            this.ReferenceId = referenceId;
+            this.IsOwner = isOwner;
+            this.Status = status;
+            this.GivenName = givenName;
+            this.FamilyName = familyName;
+            this.EmailAddress = emailAddress;
+            this.PhoneNumber = phoneNumber;
+            this.CreatedAt = createdAt;
+            this.UpdatedAt = updatedAt;
+            this.AssignedLocations = assignedLocations;
         }
 
         /// <summary>
@@ -110,6 +127,7 @@ namespace Square.Models
         [JsonProperty("assigned_locations", NullValueHandling = NullValueHandling.Ignore)]
         public Models.TeamMemberAssignedLocations AssignedLocations { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -119,21 +137,7 @@ namespace Square.Models
             return $"TeamMember : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Id = {(Id == null ? "null" : Id == string.Empty ? "" : Id)}");
-            toStringOutput.Add($"ReferenceId = {(ReferenceId == null ? "null" : ReferenceId == string.Empty ? "" : ReferenceId)}");
-            toStringOutput.Add($"IsOwner = {(IsOwner == null ? "null" : IsOwner.ToString())}");
-            toStringOutput.Add($"Status = {(Status == null ? "null" : Status.ToString())}");
-            toStringOutput.Add($"GivenName = {(GivenName == null ? "null" : GivenName == string.Empty ? "" : GivenName)}");
-            toStringOutput.Add($"FamilyName = {(FamilyName == null ? "null" : FamilyName == string.Empty ? "" : FamilyName)}");
-            toStringOutput.Add($"EmailAddress = {(EmailAddress == null ? "null" : EmailAddress == string.Empty ? "" : EmailAddress)}");
-            toStringOutput.Add($"PhoneNumber = {(PhoneNumber == null ? "null" : PhoneNumber == string.Empty ? "" : PhoneNumber)}");
-            toStringOutput.Add($"CreatedAt = {(CreatedAt == null ? "null" : CreatedAt == string.Empty ? "" : CreatedAt)}");
-            toStringOutput.Add($"UpdatedAt = {(UpdatedAt == null ? "null" : UpdatedAt == string.Empty ? "" : UpdatedAt)}");
-            toStringOutput.Add($"AssignedLocations = {(AssignedLocations == null ? "null" : AssignedLocations.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -147,98 +151,125 @@ namespace Square.Models
             }
 
             return obj is TeamMember other &&
-                ((Id == null && other.Id == null) || (Id?.Equals(other.Id) == true)) &&
-                ((ReferenceId == null && other.ReferenceId == null) || (ReferenceId?.Equals(other.ReferenceId) == true)) &&
-                ((IsOwner == null && other.IsOwner == null) || (IsOwner?.Equals(other.IsOwner) == true)) &&
-                ((Status == null && other.Status == null) || (Status?.Equals(other.Status) == true)) &&
-                ((GivenName == null && other.GivenName == null) || (GivenName?.Equals(other.GivenName) == true)) &&
-                ((FamilyName == null && other.FamilyName == null) || (FamilyName?.Equals(other.FamilyName) == true)) &&
-                ((EmailAddress == null && other.EmailAddress == null) || (EmailAddress?.Equals(other.EmailAddress) == true)) &&
-                ((PhoneNumber == null && other.PhoneNumber == null) || (PhoneNumber?.Equals(other.PhoneNumber) == true)) &&
-                ((CreatedAt == null && other.CreatedAt == null) || (CreatedAt?.Equals(other.CreatedAt) == true)) &&
-                ((UpdatedAt == null && other.UpdatedAt == null) || (UpdatedAt?.Equals(other.UpdatedAt) == true)) &&
-                ((AssignedLocations == null && other.AssignedLocations == null) || (AssignedLocations?.Equals(other.AssignedLocations) == true));
+                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
+                ((this.ReferenceId == null && other.ReferenceId == null) || (this.ReferenceId?.Equals(other.ReferenceId) == true)) &&
+                ((this.IsOwner == null && other.IsOwner == null) || (this.IsOwner?.Equals(other.IsOwner) == true)) &&
+                ((this.Status == null && other.Status == null) || (this.Status?.Equals(other.Status) == true)) &&
+                ((this.GivenName == null && other.GivenName == null) || (this.GivenName?.Equals(other.GivenName) == true)) &&
+                ((this.FamilyName == null && other.FamilyName == null) || (this.FamilyName?.Equals(other.FamilyName) == true)) &&
+                ((this.EmailAddress == null && other.EmailAddress == null) || (this.EmailAddress?.Equals(other.EmailAddress) == true)) &&
+                ((this.PhoneNumber == null && other.PhoneNumber == null) || (this.PhoneNumber?.Equals(other.PhoneNumber) == true)) &&
+                ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true)) &&
+                ((this.UpdatedAt == null && other.UpdatedAt == null) || (this.UpdatedAt?.Equals(other.UpdatedAt) == true)) &&
+                ((this.AssignedLocations == null && other.AssignedLocations == null) || (this.AssignedLocations?.Equals(other.AssignedLocations) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1084182002;
 
-            if (Id != null)
+            if (this.Id != null)
             {
-               hashCode += Id.GetHashCode();
+               hashCode += this.Id.GetHashCode();
             }
 
-            if (ReferenceId != null)
+            if (this.ReferenceId != null)
             {
-               hashCode += ReferenceId.GetHashCode();
+               hashCode += this.ReferenceId.GetHashCode();
             }
 
-            if (IsOwner != null)
+            if (this.IsOwner != null)
             {
-               hashCode += IsOwner.GetHashCode();
+               hashCode += this.IsOwner.GetHashCode();
             }
 
-            if (Status != null)
+            if (this.Status != null)
             {
-               hashCode += Status.GetHashCode();
+               hashCode += this.Status.GetHashCode();
             }
 
-            if (GivenName != null)
+            if (this.GivenName != null)
             {
-               hashCode += GivenName.GetHashCode();
+               hashCode += this.GivenName.GetHashCode();
             }
 
-            if (FamilyName != null)
+            if (this.FamilyName != null)
             {
-               hashCode += FamilyName.GetHashCode();
+               hashCode += this.FamilyName.GetHashCode();
             }
 
-            if (EmailAddress != null)
+            if (this.EmailAddress != null)
             {
-               hashCode += EmailAddress.GetHashCode();
+               hashCode += this.EmailAddress.GetHashCode();
             }
 
-            if (PhoneNumber != null)
+            if (this.PhoneNumber != null)
             {
-               hashCode += PhoneNumber.GetHashCode();
+               hashCode += this.PhoneNumber.GetHashCode();
             }
 
-            if (CreatedAt != null)
+            if (this.CreatedAt != null)
             {
-               hashCode += CreatedAt.GetHashCode();
+               hashCode += this.CreatedAt.GetHashCode();
             }
 
-            if (UpdatedAt != null)
+            if (this.UpdatedAt != null)
             {
-               hashCode += UpdatedAt.GetHashCode();
+               hashCode += this.UpdatedAt.GetHashCode();
             }
 
-            if (AssignedLocations != null)
+            if (this.AssignedLocations != null)
             {
-               hashCode += AssignedLocations.GetHashCode();
+               hashCode += this.AssignedLocations.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id == string.Empty ? "" : this.Id)}");
+            toStringOutput.Add($"this.ReferenceId = {(this.ReferenceId == null ? "null" : this.ReferenceId == string.Empty ? "" : this.ReferenceId)}");
+            toStringOutput.Add($"this.IsOwner = {(this.IsOwner == null ? "null" : this.IsOwner.ToString())}");
+            toStringOutput.Add($"this.Status = {(this.Status == null ? "null" : this.Status.ToString())}");
+            toStringOutput.Add($"this.GivenName = {(this.GivenName == null ? "null" : this.GivenName == string.Empty ? "" : this.GivenName)}");
+            toStringOutput.Add($"this.FamilyName = {(this.FamilyName == null ? "null" : this.FamilyName == string.Empty ? "" : this.FamilyName)}");
+            toStringOutput.Add($"this.EmailAddress = {(this.EmailAddress == null ? "null" : this.EmailAddress == string.Empty ? "" : this.EmailAddress)}");
+            toStringOutput.Add($"this.PhoneNumber = {(this.PhoneNumber == null ? "null" : this.PhoneNumber == string.Empty ? "" : this.PhoneNumber)}");
+            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt == string.Empty ? "" : this.CreatedAt)}");
+            toStringOutput.Add($"this.UpdatedAt = {(this.UpdatedAt == null ? "null" : this.UpdatedAt == string.Empty ? "" : this.UpdatedAt)}");
+            toStringOutput.Add($"this.AssignedLocations = {(this.AssignedLocations == null ? "null" : this.AssignedLocations.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .Id(Id)
-                .ReferenceId(ReferenceId)
-                .IsOwner(IsOwner)
-                .Status(Status)
-                .GivenName(GivenName)
-                .FamilyName(FamilyName)
-                .EmailAddress(EmailAddress)
-                .PhoneNumber(PhoneNumber)
-                .CreatedAt(CreatedAt)
-                .UpdatedAt(UpdatedAt)
-                .AssignedLocations(AssignedLocations);
+                .Id(this.Id)
+                .ReferenceId(this.ReferenceId)
+                .IsOwner(this.IsOwner)
+                .Status(this.Status)
+                .GivenName(this.GivenName)
+                .FamilyName(this.FamilyName)
+                .EmailAddress(this.EmailAddress)
+                .PhoneNumber(this.PhoneNumber)
+                .CreatedAt(this.CreatedAt)
+                .UpdatedAt(this.UpdatedAt)
+                .AssignedLocations(this.AssignedLocations);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string id;
@@ -253,87 +284,145 @@ namespace Square.Models
             private string updatedAt;
             private Models.TeamMemberAssignedLocations assignedLocations;
 
-
-
+             /// <summary>
+             /// Id.
+             /// </summary>
+             /// <param name="id"> id. </param>
+             /// <returns> Builder. </returns>
             public Builder Id(string id)
             {
                 this.id = id;
                 return this;
             }
 
+             /// <summary>
+             /// ReferenceId.
+             /// </summary>
+             /// <param name="referenceId"> referenceId. </param>
+             /// <returns> Builder. </returns>
             public Builder ReferenceId(string referenceId)
             {
                 this.referenceId = referenceId;
                 return this;
             }
 
+             /// <summary>
+             /// IsOwner.
+             /// </summary>
+             /// <param name="isOwner"> isOwner. </param>
+             /// <returns> Builder. </returns>
             public Builder IsOwner(bool? isOwner)
             {
                 this.isOwner = isOwner;
                 return this;
             }
 
+             /// <summary>
+             /// Status.
+             /// </summary>
+             /// <param name="status"> status. </param>
+             /// <returns> Builder. </returns>
             public Builder Status(string status)
             {
                 this.status = status;
                 return this;
             }
 
+             /// <summary>
+             /// GivenName.
+             /// </summary>
+             /// <param name="givenName"> givenName. </param>
+             /// <returns> Builder. </returns>
             public Builder GivenName(string givenName)
             {
                 this.givenName = givenName;
                 return this;
             }
 
+             /// <summary>
+             /// FamilyName.
+             /// </summary>
+             /// <param name="familyName"> familyName. </param>
+             /// <returns> Builder. </returns>
             public Builder FamilyName(string familyName)
             {
                 this.familyName = familyName;
                 return this;
             }
 
+             /// <summary>
+             /// EmailAddress.
+             /// </summary>
+             /// <param name="emailAddress"> emailAddress. </param>
+             /// <returns> Builder. </returns>
             public Builder EmailAddress(string emailAddress)
             {
                 this.emailAddress = emailAddress;
                 return this;
             }
 
+             /// <summary>
+             /// PhoneNumber.
+             /// </summary>
+             /// <param name="phoneNumber"> phoneNumber. </param>
+             /// <returns> Builder. </returns>
             public Builder PhoneNumber(string phoneNumber)
             {
                 this.phoneNumber = phoneNumber;
                 return this;
             }
 
+             /// <summary>
+             /// CreatedAt.
+             /// </summary>
+             /// <param name="createdAt"> createdAt. </param>
+             /// <returns> Builder. </returns>
             public Builder CreatedAt(string createdAt)
             {
                 this.createdAt = createdAt;
                 return this;
             }
 
+             /// <summary>
+             /// UpdatedAt.
+             /// </summary>
+             /// <param name="updatedAt"> updatedAt. </param>
+             /// <returns> Builder. </returns>
             public Builder UpdatedAt(string updatedAt)
             {
                 this.updatedAt = updatedAt;
                 return this;
             }
 
+             /// <summary>
+             /// AssignedLocations.
+             /// </summary>
+             /// <param name="assignedLocations"> assignedLocations. </param>
+             /// <returns> Builder. </returns>
             public Builder AssignedLocations(Models.TeamMemberAssignedLocations assignedLocations)
             {
                 this.assignedLocations = assignedLocations;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> TeamMember. </returns>
             public TeamMember Build()
             {
-                return new TeamMember(id,
-                    referenceId,
-                    isOwner,
-                    status,
-                    givenName,
-                    familyName,
-                    emailAddress,
-                    phoneNumber,
-                    createdAt,
-                    updatedAt,
-                    assignedLocations);
+                return new TeamMember(
+                    this.id,
+                    this.referenceId,
+                    this.isOwner,
+                    this.status,
+                    this.givenName,
+                    this.familyName,
+                    this.emailAddress,
+                    this.phoneNumber,
+                    this.createdAt,
+                    this.updatedAt,
+                    this.assignedLocations);
             }
         }
     }

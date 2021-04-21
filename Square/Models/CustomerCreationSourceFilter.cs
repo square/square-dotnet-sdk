@@ -1,25 +1,33 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class CustomerCreationSourceFilter 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// CustomerCreationSourceFilter.
+    /// </summary>
+    public class CustomerCreationSourceFilter
     {
-        public CustomerCreationSourceFilter(IList<string> values = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CustomerCreationSourceFilter"/> class.
+        /// </summary>
+        /// <param name="values">values.</param>
+        /// <param name="rule">rule.</param>
+        public CustomerCreationSourceFilter(
+            IList<string> values = null,
             string rule = null)
         {
-            Values = values;
-            Rule = rule;
+            this.Values = values;
+            this.Rule = rule;
         }
 
         /// <summary>
@@ -36,6 +44,7 @@ namespace Square.Models
         [JsonProperty("rule", NullValueHandling = NullValueHandling.Ignore)]
         public string Rule { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -45,12 +54,7 @@ namespace Square.Models
             return $"CustomerCreationSourceFilter : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Values = {(Values == null ? "null" : $"[{ string.Join(", ", Values)} ]")}");
-            toStringOutput.Add($"Rule = {(Rule == null ? "null" : Rule.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -64,58 +68,89 @@ namespace Square.Models
             }
 
             return obj is CustomerCreationSourceFilter other &&
-                ((Values == null && other.Values == null) || (Values?.Equals(other.Values) == true)) &&
-                ((Rule == null && other.Rule == null) || (Rule?.Equals(other.Rule) == true));
+                ((this.Values == null && other.Values == null) || (this.Values?.Equals(other.Values) == true)) &&
+                ((this.Rule == null && other.Rule == null) || (this.Rule?.Equals(other.Rule) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 2051047657;
 
-            if (Values != null)
+            if (this.Values != null)
             {
-               hashCode += Values.GetHashCode();
+               hashCode += this.Values.GetHashCode();
             }
 
-            if (Rule != null)
+            if (this.Rule != null)
             {
-               hashCode += Rule.GetHashCode();
+               hashCode += this.Rule.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Values = {(this.Values == null ? "null" : $"[{string.Join(", ", this.Values)} ]")}");
+            toStringOutput.Add($"this.Rule = {(this.Rule == null ? "null" : this.Rule.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .Values(Values)
-                .Rule(Rule);
+                .Values(this.Values)
+                .Rule(this.Rule);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private IList<string> values;
             private string rule;
 
-
-
+             /// <summary>
+             /// Values.
+             /// </summary>
+             /// <param name="values"> values. </param>
+             /// <returns> Builder. </returns>
             public Builder Values(IList<string> values)
             {
                 this.values = values;
                 return this;
             }
 
+             /// <summary>
+             /// Rule.
+             /// </summary>
+             /// <param name="rule"> rule. </param>
+             /// <returns> Builder. </returns>
             public Builder Rule(string rule)
             {
                 this.rule = rule;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> CustomerCreationSourceFilter. </returns>
             public CustomerCreationSourceFilter Build()
             {
-                return new CustomerCreationSourceFilter(values,
-                    rule);
+                return new CustomerCreationSourceFilter(
+                    this.values,
+                    this.rule);
             }
         }
     }

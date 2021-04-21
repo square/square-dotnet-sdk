@@ -1,29 +1,37 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class SearchLoyaltyRewardsRequestLoyaltyRewardQuery 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// SearchLoyaltyRewardsRequestLoyaltyRewardQuery.
+    /// </summary>
+    public class SearchLoyaltyRewardsRequestLoyaltyRewardQuery
     {
-        public SearchLoyaltyRewardsRequestLoyaltyRewardQuery(string loyaltyAccountId,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SearchLoyaltyRewardsRequestLoyaltyRewardQuery"/> class.
+        /// </summary>
+        /// <param name="loyaltyAccountId">loyalty_account_id.</param>
+        /// <param name="status">status.</param>
+        public SearchLoyaltyRewardsRequestLoyaltyRewardQuery(
+            string loyaltyAccountId,
             string status = null)
         {
-            LoyaltyAccountId = loyaltyAccountId;
-            Status = status;
+            this.LoyaltyAccountId = loyaltyAccountId;
+            this.Status = status;
         }
 
         /// <summary>
-        /// The ID of the [loyalty account](#type-LoyaltyAccount) to which the loyalty reward belongs.
+        /// The ID of the [loyalty account]($m/LoyaltyAccount) to which the loyalty reward belongs.
         /// </summary>
         [JsonProperty("loyalty_account_id")]
         public string LoyaltyAccountId { get; }
@@ -34,6 +42,7 @@ namespace Square.Models
         [JsonProperty("status", NullValueHandling = NullValueHandling.Ignore)]
         public string Status { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -43,12 +52,7 @@ namespace Square.Models
             return $"SearchLoyaltyRewardsRequestLoyaltyRewardQuery : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"LoyaltyAccountId = {(LoyaltyAccountId == null ? "null" : LoyaltyAccountId == string.Empty ? "" : LoyaltyAccountId)}");
-            toStringOutput.Add($"Status = {(Status == null ? "null" : Status.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -62,60 +66,95 @@ namespace Square.Models
             }
 
             return obj is SearchLoyaltyRewardsRequestLoyaltyRewardQuery other &&
-                ((LoyaltyAccountId == null && other.LoyaltyAccountId == null) || (LoyaltyAccountId?.Equals(other.LoyaltyAccountId) == true)) &&
-                ((Status == null && other.Status == null) || (Status?.Equals(other.Status) == true));
+                ((this.LoyaltyAccountId == null && other.LoyaltyAccountId == null) || (this.LoyaltyAccountId?.Equals(other.LoyaltyAccountId) == true)) &&
+                ((this.Status == null && other.Status == null) || (this.Status?.Equals(other.Status) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -265874214;
 
-            if (LoyaltyAccountId != null)
+            if (this.LoyaltyAccountId != null)
             {
-               hashCode += LoyaltyAccountId.GetHashCode();
+               hashCode += this.LoyaltyAccountId.GetHashCode();
             }
 
-            if (Status != null)
+            if (this.Status != null)
             {
-               hashCode += Status.GetHashCode();
+               hashCode += this.Status.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.LoyaltyAccountId = {(this.LoyaltyAccountId == null ? "null" : this.LoyaltyAccountId == string.Empty ? "" : this.LoyaltyAccountId)}");
+            toStringOutput.Add($"this.Status = {(this.Status == null ? "null" : this.Status.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
-            var builder = new Builder(LoyaltyAccountId)
-                .Status(Status);
+            var builder = new Builder(
+                this.LoyaltyAccountId)
+                .Status(this.Status);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string loyaltyAccountId;
             private string status;
 
-            public Builder(string loyaltyAccountId)
+            public Builder(
+                string loyaltyAccountId)
             {
                 this.loyaltyAccountId = loyaltyAccountId;
             }
 
+             /// <summary>
+             /// LoyaltyAccountId.
+             /// </summary>
+             /// <param name="loyaltyAccountId"> loyaltyAccountId. </param>
+             /// <returns> Builder. </returns>
             public Builder LoyaltyAccountId(string loyaltyAccountId)
             {
                 this.loyaltyAccountId = loyaltyAccountId;
                 return this;
             }
 
+             /// <summary>
+             /// Status.
+             /// </summary>
+             /// <param name="status"> status. </param>
+             /// <returns> Builder. </returns>
             public Builder Status(string status)
             {
                 this.status = status;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> SearchLoyaltyRewardsRequestLoyaltyRewardQuery. </returns>
             public SearchLoyaltyRewardsRequestLoyaltyRewardQuery Build()
             {
-                return new SearchLoyaltyRewardsRequestLoyaltyRewardQuery(loyaltyAccountId,
-                    status);
+                return new SearchLoyaltyRewardsRequestLoyaltyRewardQuery(
+                    this.loyaltyAccountId,
+                    this.status);
             }
         }
     }

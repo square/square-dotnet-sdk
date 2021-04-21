@@ -1,25 +1,33 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class CreateShiftRequest 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// CreateShiftRequest.
+    /// </summary>
+    public class CreateShiftRequest
     {
-        public CreateShiftRequest(Models.Shift shift,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CreateShiftRequest"/> class.
+        /// </summary>
+        /// <param name="shift">shift.</param>
+        /// <param name="idempotencyKey">idempotency_key.</param>
+        public CreateShiftRequest(
+            Models.Shift shift,
             string idempotencyKey = null)
         {
-            IdempotencyKey = idempotencyKey;
-            Shift = shift;
+            this.IdempotencyKey = idempotencyKey;
+            this.Shift = shift;
         }
 
         /// <summary>
@@ -36,6 +44,7 @@ namespace Square.Models
         [JsonProperty("shift")]
         public Models.Shift Shift { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -45,12 +54,7 @@ namespace Square.Models
             return $"CreateShiftRequest : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"IdempotencyKey = {(IdempotencyKey == null ? "null" : IdempotencyKey == string.Empty ? "" : IdempotencyKey)}");
-            toStringOutput.Add($"Shift = {(Shift == null ? "null" : Shift.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -64,60 +68,95 @@ namespace Square.Models
             }
 
             return obj is CreateShiftRequest other &&
-                ((IdempotencyKey == null && other.IdempotencyKey == null) || (IdempotencyKey?.Equals(other.IdempotencyKey) == true)) &&
-                ((Shift == null && other.Shift == null) || (Shift?.Equals(other.Shift) == true));
+                ((this.IdempotencyKey == null && other.IdempotencyKey == null) || (this.IdempotencyKey?.Equals(other.IdempotencyKey) == true)) &&
+                ((this.Shift == null && other.Shift == null) || (this.Shift?.Equals(other.Shift) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1561193749;
 
-            if (IdempotencyKey != null)
+            if (this.IdempotencyKey != null)
             {
-               hashCode += IdempotencyKey.GetHashCode();
+               hashCode += this.IdempotencyKey.GetHashCode();
             }
 
-            if (Shift != null)
+            if (this.Shift != null)
             {
-               hashCode += Shift.GetHashCode();
+               hashCode += this.Shift.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.IdempotencyKey = {(this.IdempotencyKey == null ? "null" : this.IdempotencyKey == string.Empty ? "" : this.IdempotencyKey)}");
+            toStringOutput.Add($"this.Shift = {(this.Shift == null ? "null" : this.Shift.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
-            var builder = new Builder(Shift)
-                .IdempotencyKey(IdempotencyKey);
+            var builder = new Builder(
+                this.Shift)
+                .IdempotencyKey(this.IdempotencyKey);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private Models.Shift shift;
             private string idempotencyKey;
 
-            public Builder(Models.Shift shift)
+            public Builder(
+                Models.Shift shift)
             {
                 this.shift = shift;
             }
 
+             /// <summary>
+             /// Shift.
+             /// </summary>
+             /// <param name="shift"> shift. </param>
+             /// <returns> Builder. </returns>
             public Builder Shift(Models.Shift shift)
             {
                 this.shift = shift;
                 return this;
             }
 
+             /// <summary>
+             /// IdempotencyKey.
+             /// </summary>
+             /// <param name="idempotencyKey"> idempotencyKey. </param>
+             /// <returns> Builder. </returns>
             public Builder IdempotencyKey(string idempotencyKey)
             {
                 this.idempotencyKey = idempotencyKey;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> CreateShiftRequest. </returns>
             public CreateShiftRequest Build()
             {
-                return new CreateShiftRequest(shift,
-                    idempotencyKey);
+                return new CreateShiftRequest(
+                    this.shift,
+                    this.idempotencyKey);
             }
         }
     }

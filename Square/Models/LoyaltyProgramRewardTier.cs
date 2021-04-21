@@ -1,33 +1,45 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class LoyaltyProgramRewardTier 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// LoyaltyProgramRewardTier.
+    /// </summary>
+    public class LoyaltyProgramRewardTier
     {
-        public LoyaltyProgramRewardTier(string id,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LoyaltyProgramRewardTier"/> class.
+        /// </summary>
+        /// <param name="id">id.</param>
+        /// <param name="points">points.</param>
+        /// <param name="name">name.</param>
+        /// <param name="definition">definition.</param>
+        /// <param name="createdAt">created_at.</param>
+        /// <param name="pricingRuleReference">pricing_rule_reference.</param>
+        public LoyaltyProgramRewardTier(
+            string id,
             int points,
             string name,
             Models.LoyaltyProgramRewardDefinition definition,
             string createdAt,
             Models.CatalogObjectReference pricingRuleReference = null)
         {
-            Id = id;
-            Points = points;
-            Name = name;
-            Definition = definition;
-            CreatedAt = createdAt;
-            PricingRuleReference = pricingRuleReference;
+            this.Id = id;
+            this.Points = points;
+            this.Name = name;
+            this.Definition = definition;
+            this.CreatedAt = createdAt;
+            this.PricingRuleReference = pricingRuleReference;
         }
 
         /// <summary>
@@ -70,6 +82,7 @@ namespace Square.Models
         [JsonProperty("pricing_rule_reference", NullValueHandling = NullValueHandling.Ignore)]
         public Models.CatalogObjectReference PricingRuleReference { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -79,16 +92,7 @@ namespace Square.Models
             return $"LoyaltyProgramRewardTier : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Id = {(Id == null ? "null" : Id == string.Empty ? "" : Id)}");
-            toStringOutput.Add($"Points = {Points}");
-            toStringOutput.Add($"Name = {(Name == null ? "null" : Name == string.Empty ? "" : Name)}");
-            toStringOutput.Add($"Definition = {(Definition == null ? "null" : Definition.ToString())}");
-            toStringOutput.Add($"CreatedAt = {(CreatedAt == null ? "null" : CreatedAt == string.Empty ? "" : CreatedAt)}");
-            toStringOutput.Add($"PricingRuleReference = {(PricingRuleReference == null ? "null" : PricingRuleReference.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -102,58 +106,82 @@ namespace Square.Models
             }
 
             return obj is LoyaltyProgramRewardTier other &&
-                ((Id == null && other.Id == null) || (Id?.Equals(other.Id) == true)) &&
-                Points.Equals(other.Points) &&
-                ((Name == null && other.Name == null) || (Name?.Equals(other.Name) == true)) &&
-                ((Definition == null && other.Definition == null) || (Definition?.Equals(other.Definition) == true)) &&
-                ((CreatedAt == null && other.CreatedAt == null) || (CreatedAt?.Equals(other.CreatedAt) == true)) &&
-                ((PricingRuleReference == null && other.PricingRuleReference == null) || (PricingRuleReference?.Equals(other.PricingRuleReference) == true));
+                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
+                this.Points.Equals(other.Points) &&
+                ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
+                ((this.Definition == null && other.Definition == null) || (this.Definition?.Equals(other.Definition) == true)) &&
+                ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true)) &&
+                ((this.PricingRuleReference == null && other.PricingRuleReference == null) || (this.PricingRuleReference?.Equals(other.PricingRuleReference) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 1770802231;
 
-            if (Id != null)
+            if (this.Id != null)
             {
-               hashCode += Id.GetHashCode();
-            }
-            hashCode += Points.GetHashCode();
-
-            if (Name != null)
-            {
-               hashCode += Name.GetHashCode();
+               hashCode += this.Id.GetHashCode();
             }
 
-            if (Definition != null)
+            hashCode += this.Points.GetHashCode();
+
+            if (this.Name != null)
             {
-               hashCode += Definition.GetHashCode();
+               hashCode += this.Name.GetHashCode();
             }
 
-            if (CreatedAt != null)
+            if (this.Definition != null)
             {
-               hashCode += CreatedAt.GetHashCode();
+               hashCode += this.Definition.GetHashCode();
             }
 
-            if (PricingRuleReference != null)
+            if (this.CreatedAt != null)
             {
-               hashCode += PricingRuleReference.GetHashCode();
+               hashCode += this.CreatedAt.GetHashCode();
+            }
+
+            if (this.PricingRuleReference != null)
+            {
+               hashCode += this.PricingRuleReference.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id == string.Empty ? "" : this.Id)}");
+            toStringOutput.Add($"this.Points = {this.Points}");
+            toStringOutput.Add($"this.Name = {(this.Name == null ? "null" : this.Name == string.Empty ? "" : this.Name)}");
+            toStringOutput.Add($"this.Definition = {(this.Definition == null ? "null" : this.Definition.ToString())}");
+            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt == string.Empty ? "" : this.CreatedAt)}");
+            toStringOutput.Add($"this.PricingRuleReference = {(this.PricingRuleReference == null ? "null" : this.PricingRuleReference.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
-            var builder = new Builder(Id,
-                Points,
-                Name,
-                Definition,
-                CreatedAt)
-                .PricingRuleReference(PricingRuleReference);
+            var builder = new Builder(
+                this.Id,
+                this.Points,
+                this.Name,
+                this.Definition,
+                this.CreatedAt)
+                .PricingRuleReference(this.PricingRuleReference);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string id;
@@ -163,7 +191,8 @@ namespace Square.Models
             private string createdAt;
             private Models.CatalogObjectReference pricingRuleReference;
 
-            public Builder(string id,
+            public Builder(
+                string id,
                 int points,
                 string name,
                 Models.LoyaltyProgramRewardDefinition definition,
@@ -176,50 +205,85 @@ namespace Square.Models
                 this.createdAt = createdAt;
             }
 
+             /// <summary>
+             /// Id.
+             /// </summary>
+             /// <param name="id"> id. </param>
+             /// <returns> Builder. </returns>
             public Builder Id(string id)
             {
                 this.id = id;
                 return this;
             }
 
+             /// <summary>
+             /// Points.
+             /// </summary>
+             /// <param name="points"> points. </param>
+             /// <returns> Builder. </returns>
             public Builder Points(int points)
             {
                 this.points = points;
                 return this;
             }
 
+             /// <summary>
+             /// Name.
+             /// </summary>
+             /// <param name="name"> name. </param>
+             /// <returns> Builder. </returns>
             public Builder Name(string name)
             {
                 this.name = name;
                 return this;
             }
 
+             /// <summary>
+             /// Definition.
+             /// </summary>
+             /// <param name="definition"> definition. </param>
+             /// <returns> Builder. </returns>
             public Builder Definition(Models.LoyaltyProgramRewardDefinition definition)
             {
                 this.definition = definition;
                 return this;
             }
 
+             /// <summary>
+             /// CreatedAt.
+             /// </summary>
+             /// <param name="createdAt"> createdAt. </param>
+             /// <returns> Builder. </returns>
             public Builder CreatedAt(string createdAt)
             {
                 this.createdAt = createdAt;
                 return this;
             }
 
+             /// <summary>
+             /// PricingRuleReference.
+             /// </summary>
+             /// <param name="pricingRuleReference"> pricingRuleReference. </param>
+             /// <returns> Builder. </returns>
             public Builder PricingRuleReference(Models.CatalogObjectReference pricingRuleReference)
             {
                 this.pricingRuleReference = pricingRuleReference;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> LoyaltyProgramRewardTier. </returns>
             public LoyaltyProgramRewardTier Build()
             {
-                return new LoyaltyProgramRewardTier(id,
-                    points,
-                    name,
-                    definition,
-                    createdAt,
-                    pricingRuleReference);
+                return new LoyaltyProgramRewardTier(
+                    this.id,
+                    this.points,
+                    this.name,
+                    this.definition,
+                    this.createdAt,
+                    this.pricingRuleReference);
             }
         }
     }

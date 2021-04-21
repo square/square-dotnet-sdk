@@ -1,27 +1,36 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class TenderCardDetails 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// TenderCardDetails.
+    /// </summary>
+    public class TenderCardDetails
     {
-        public TenderCardDetails(string status = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TenderCardDetails"/> class.
+        /// </summary>
+        /// <param name="status">status.</param>
+        /// <param name="card">card.</param>
+        /// <param name="entryMethod">entry_method.</param>
+        public TenderCardDetails(
+            string status = null,
             Models.Card card = null,
             string entryMethod = null)
         {
-            Status = status;
-            Card = card;
-            EntryMethod = entryMethod;
+            this.Status = status;
+            this.Card = card;
+            this.EntryMethod = entryMethod;
         }
 
         /// <summary>
@@ -43,6 +52,7 @@ namespace Square.Models
         [JsonProperty("entry_method", NullValueHandling = NullValueHandling.Ignore)]
         public string EntryMethod { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -52,13 +62,7 @@ namespace Square.Models
             return $"TenderCardDetails : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Status = {(Status == null ? "null" : Status.ToString())}");
-            toStringOutput.Add($"Card = {(Card == null ? "null" : Card.ToString())}");
-            toStringOutput.Add($"EntryMethod = {(EntryMethod == null ? "null" : EntryMethod.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -72,73 +76,110 @@ namespace Square.Models
             }
 
             return obj is TenderCardDetails other &&
-                ((Status == null && other.Status == null) || (Status?.Equals(other.Status) == true)) &&
-                ((Card == null && other.Card == null) || (Card?.Equals(other.Card) == true)) &&
-                ((EntryMethod == null && other.EntryMethod == null) || (EntryMethod?.Equals(other.EntryMethod) == true));
+                ((this.Status == null && other.Status == null) || (this.Status?.Equals(other.Status) == true)) &&
+                ((this.Card == null && other.Card == null) || (this.Card?.Equals(other.Card) == true)) &&
+                ((this.EntryMethod == null && other.EntryMethod == null) || (this.EntryMethod?.Equals(other.EntryMethod) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1919501986;
 
-            if (Status != null)
+            if (this.Status != null)
             {
-               hashCode += Status.GetHashCode();
+               hashCode += this.Status.GetHashCode();
             }
 
-            if (Card != null)
+            if (this.Card != null)
             {
-               hashCode += Card.GetHashCode();
+               hashCode += this.Card.GetHashCode();
             }
 
-            if (EntryMethod != null)
+            if (this.EntryMethod != null)
             {
-               hashCode += EntryMethod.GetHashCode();
+               hashCode += this.EntryMethod.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Status = {(this.Status == null ? "null" : this.Status.ToString())}");
+            toStringOutput.Add($"this.Card = {(this.Card == null ? "null" : this.Card.ToString())}");
+            toStringOutput.Add($"this.EntryMethod = {(this.EntryMethod == null ? "null" : this.EntryMethod.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .Status(Status)
-                .Card(Card)
-                .EntryMethod(EntryMethod);
+                .Status(this.Status)
+                .Card(this.Card)
+                .EntryMethod(this.EntryMethod);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string status;
             private Models.Card card;
             private string entryMethod;
 
-
-
+             /// <summary>
+             /// Status.
+             /// </summary>
+             /// <param name="status"> status. </param>
+             /// <returns> Builder. </returns>
             public Builder Status(string status)
             {
                 this.status = status;
                 return this;
             }
 
+             /// <summary>
+             /// Card.
+             /// </summary>
+             /// <param name="card"> card. </param>
+             /// <returns> Builder. </returns>
             public Builder Card(Models.Card card)
             {
                 this.card = card;
                 return this;
             }
 
+             /// <summary>
+             /// EntryMethod.
+             /// </summary>
+             /// <param name="entryMethod"> entryMethod. </param>
+             /// <returns> Builder. </returns>
             public Builder EntryMethod(string entryMethod)
             {
                 this.entryMethod = entryMethod;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> TenderCardDetails. </returns>
             public TenderCardDetails Build()
             {
-                return new TenderCardDetails(status,
-                    card,
-                    entryMethod);
+                return new TenderCardDetails(
+                    this.status,
+                    this.card,
+                    this.entryMethod);
             }
         }
     }

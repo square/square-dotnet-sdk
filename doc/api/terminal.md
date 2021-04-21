@@ -26,7 +26,8 @@ Creates a Terminal checkout request and sends it to the specified device to take
 for the requested amount.
 
 ```csharp
-CreateTerminalCheckoutAsync(Models.CreateTerminalCheckoutRequest body)
+CreateTerminalCheckoutAsync(
+    Models.CreateTerminalCheckoutRequest body)
 ```
 
 ## Parameters
@@ -89,7 +90,8 @@ catch (ApiException e){};
 Retrieves a filtered list of Terminal checkout requests created by the account making the request.
 
 ```csharp
-SearchTerminalCheckoutsAsync(Models.SearchTerminalCheckoutsRequest body)
+SearchTerminalCheckoutsAsync(
+    Models.SearchTerminalCheckoutsRequest body)
 ```
 
 ## Parameters
@@ -140,7 +142,8 @@ catch (ApiException e){};
 Retrieves a Terminal checkout request by `checkout_id`.
 
 ```csharp
-GetTerminalCheckoutAsync(string checkoutId)
+GetTerminalCheckoutAsync(
+    string checkoutId)
 ```
 
 ## Parameters
@@ -171,7 +174,8 @@ catch (ApiException e){};
 Cancels a Terminal checkout request if the status of the request permits it.
 
 ```csharp
-CancelTerminalCheckoutAsync(string checkoutId)
+CancelTerminalCheckoutAsync(
+    string checkoutId)
 ```
 
 ## Parameters
@@ -202,7 +206,8 @@ catch (ApiException e){};
 Creates a request to refund an Interac payment completed on a Square Terminal.
 
 ```csharp
-CreateTerminalRefundAsync(Models.CreateTerminalRefundRequest body)
+CreateTerminalRefundAsync(
+    Models.CreateTerminalRefundRequest body)
 ```
 
 ## Parameters
@@ -249,7 +254,8 @@ catch (ApiException e){};
 Retrieves a filtered list of Interac Terminal refund requests created by the seller making the request.
 
 ```csharp
-SearchTerminalRefundsAsync(Models.SearchTerminalRefundsRequest body)
+SearchTerminalRefundsAsync(
+    Models.SearchTerminalRefundsRequest body)
 ```
 
 ## Parameters
@@ -300,7 +306,8 @@ catch (ApiException e){};
 Retrieves an Interac Terminal refund object by ID.
 
 ```csharp
-GetTerminalRefundAsync(string terminalRefundId)
+GetTerminalRefundAsync(
+    string terminalRefundId)
 ```
 
 ## Parameters
@@ -331,7 +338,8 @@ catch (ApiException e){};
 Cancels an Interac Terminal refund request by refund request ID if the status of the request permits it.
 
 ```csharp
-CancelTerminalRefundAsync(string terminalRefundId)
+CancelTerminalRefundAsync(
+    string terminalRefundId)
 ```
 
 ## Parameters

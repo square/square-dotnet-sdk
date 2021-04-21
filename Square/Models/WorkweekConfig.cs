@@ -1,33 +1,45 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class WorkweekConfig 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// WorkweekConfig.
+    /// </summary>
+    public class WorkweekConfig
     {
-        public WorkweekConfig(string startOfWeek,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="WorkweekConfig"/> class.
+        /// </summary>
+        /// <param name="startOfWeek">start_of_week.</param>
+        /// <param name="startOfDayLocalTime">start_of_day_local_time.</param>
+        /// <param name="id">id.</param>
+        /// <param name="version">version.</param>
+        /// <param name="createdAt">created_at.</param>
+        /// <param name="updatedAt">updated_at.</param>
+        public WorkweekConfig(
+            string startOfWeek,
             string startOfDayLocalTime,
             string id = null,
             int? version = null,
             string createdAt = null,
             string updatedAt = null)
         {
-            Id = id;
-            StartOfWeek = startOfWeek;
-            StartOfDayLocalTime = startOfDayLocalTime;
-            Version = version;
-            CreatedAt = createdAt;
-            UpdatedAt = updatedAt;
+            this.Id = id;
+            this.StartOfWeek = startOfWeek;
+            this.StartOfDayLocalTime = startOfDayLocalTime;
+            this.Version = version;
+            this.CreatedAt = createdAt;
+            this.UpdatedAt = updatedAt;
         }
 
         /// <summary>
@@ -71,6 +83,7 @@ namespace Square.Models
         [JsonProperty("updated_at", NullValueHandling = NullValueHandling.Ignore)]
         public string UpdatedAt { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -80,16 +93,7 @@ namespace Square.Models
             return $"WorkweekConfig : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Id = {(Id == null ? "null" : Id == string.Empty ? "" : Id)}");
-            toStringOutput.Add($"StartOfWeek = {(StartOfWeek == null ? "null" : StartOfWeek.ToString())}");
-            toStringOutput.Add($"StartOfDayLocalTime = {(StartOfDayLocalTime == null ? "null" : StartOfDayLocalTime == string.Empty ? "" : StartOfDayLocalTime)}");
-            toStringOutput.Add($"Version = {(Version == null ? "null" : Version.ToString())}");
-            toStringOutput.Add($"CreatedAt = {(CreatedAt == null ? "null" : CreatedAt == string.Empty ? "" : CreatedAt)}");
-            toStringOutput.Add($"UpdatedAt = {(UpdatedAt == null ? "null" : UpdatedAt == string.Empty ? "" : UpdatedAt)}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -103,62 +107,85 @@ namespace Square.Models
             }
 
             return obj is WorkweekConfig other &&
-                ((Id == null && other.Id == null) || (Id?.Equals(other.Id) == true)) &&
-                ((StartOfWeek == null && other.StartOfWeek == null) || (StartOfWeek?.Equals(other.StartOfWeek) == true)) &&
-                ((StartOfDayLocalTime == null && other.StartOfDayLocalTime == null) || (StartOfDayLocalTime?.Equals(other.StartOfDayLocalTime) == true)) &&
-                ((Version == null && other.Version == null) || (Version?.Equals(other.Version) == true)) &&
-                ((CreatedAt == null && other.CreatedAt == null) || (CreatedAt?.Equals(other.CreatedAt) == true)) &&
-                ((UpdatedAt == null && other.UpdatedAt == null) || (UpdatedAt?.Equals(other.UpdatedAt) == true));
+                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
+                ((this.StartOfWeek == null && other.StartOfWeek == null) || (this.StartOfWeek?.Equals(other.StartOfWeek) == true)) &&
+                ((this.StartOfDayLocalTime == null && other.StartOfDayLocalTime == null) || (this.StartOfDayLocalTime?.Equals(other.StartOfDayLocalTime) == true)) &&
+                ((this.Version == null && other.Version == null) || (this.Version?.Equals(other.Version) == true)) &&
+                ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true)) &&
+                ((this.UpdatedAt == null && other.UpdatedAt == null) || (this.UpdatedAt?.Equals(other.UpdatedAt) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 1176790268;
 
-            if (Id != null)
+            if (this.Id != null)
             {
-               hashCode += Id.GetHashCode();
+               hashCode += this.Id.GetHashCode();
             }
 
-            if (StartOfWeek != null)
+            if (this.StartOfWeek != null)
             {
-               hashCode += StartOfWeek.GetHashCode();
+               hashCode += this.StartOfWeek.GetHashCode();
             }
 
-            if (StartOfDayLocalTime != null)
+            if (this.StartOfDayLocalTime != null)
             {
-               hashCode += StartOfDayLocalTime.GetHashCode();
+               hashCode += this.StartOfDayLocalTime.GetHashCode();
             }
 
-            if (Version != null)
+            if (this.Version != null)
             {
-               hashCode += Version.GetHashCode();
+               hashCode += this.Version.GetHashCode();
             }
 
-            if (CreatedAt != null)
+            if (this.CreatedAt != null)
             {
-               hashCode += CreatedAt.GetHashCode();
+               hashCode += this.CreatedAt.GetHashCode();
             }
 
-            if (UpdatedAt != null)
+            if (this.UpdatedAt != null)
             {
-               hashCode += UpdatedAt.GetHashCode();
+               hashCode += this.UpdatedAt.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id == string.Empty ? "" : this.Id)}");
+            toStringOutput.Add($"this.StartOfWeek = {(this.StartOfWeek == null ? "null" : this.StartOfWeek.ToString())}");
+            toStringOutput.Add($"this.StartOfDayLocalTime = {(this.StartOfDayLocalTime == null ? "null" : this.StartOfDayLocalTime == string.Empty ? "" : this.StartOfDayLocalTime)}");
+            toStringOutput.Add($"this.Version = {(this.Version == null ? "null" : this.Version.ToString())}");
+            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt == string.Empty ? "" : this.CreatedAt)}");
+            toStringOutput.Add($"this.UpdatedAt = {(this.UpdatedAt == null ? "null" : this.UpdatedAt == string.Empty ? "" : this.UpdatedAt)}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
-            var builder = new Builder(StartOfWeek,
-                StartOfDayLocalTime)
-                .Id(Id)
-                .Version(Version)
-                .CreatedAt(CreatedAt)
-                .UpdatedAt(UpdatedAt);
+            var builder = new Builder(
+                this.StartOfWeek,
+                this.StartOfDayLocalTime)
+                .Id(this.Id)
+                .Version(this.Version)
+                .CreatedAt(this.CreatedAt)
+                .UpdatedAt(this.UpdatedAt);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string startOfWeek;
@@ -168,57 +195,93 @@ namespace Square.Models
             private string createdAt;
             private string updatedAt;
 
-            public Builder(string startOfWeek,
+            public Builder(
+                string startOfWeek,
                 string startOfDayLocalTime)
             {
                 this.startOfWeek = startOfWeek;
                 this.startOfDayLocalTime = startOfDayLocalTime;
             }
 
+             /// <summary>
+             /// StartOfWeek.
+             /// </summary>
+             /// <param name="startOfWeek"> startOfWeek. </param>
+             /// <returns> Builder. </returns>
             public Builder StartOfWeek(string startOfWeek)
             {
                 this.startOfWeek = startOfWeek;
                 return this;
             }
 
+             /// <summary>
+             /// StartOfDayLocalTime.
+             /// </summary>
+             /// <param name="startOfDayLocalTime"> startOfDayLocalTime. </param>
+             /// <returns> Builder. </returns>
             public Builder StartOfDayLocalTime(string startOfDayLocalTime)
             {
                 this.startOfDayLocalTime = startOfDayLocalTime;
                 return this;
             }
 
+             /// <summary>
+             /// Id.
+             /// </summary>
+             /// <param name="id"> id. </param>
+             /// <returns> Builder. </returns>
             public Builder Id(string id)
             {
                 this.id = id;
                 return this;
             }
 
+             /// <summary>
+             /// Version.
+             /// </summary>
+             /// <param name="version"> version. </param>
+             /// <returns> Builder. </returns>
             public Builder Version(int? version)
             {
                 this.version = version;
                 return this;
             }
 
+             /// <summary>
+             /// CreatedAt.
+             /// </summary>
+             /// <param name="createdAt"> createdAt. </param>
+             /// <returns> Builder. </returns>
             public Builder CreatedAt(string createdAt)
             {
                 this.createdAt = createdAt;
                 return this;
             }
 
+             /// <summary>
+             /// UpdatedAt.
+             /// </summary>
+             /// <param name="updatedAt"> updatedAt. </param>
+             /// <returns> Builder. </returns>
             public Builder UpdatedAt(string updatedAt)
             {
                 this.updatedAt = updatedAt;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> WorkweekConfig. </returns>
             public WorkweekConfig Build()
             {
-                return new WorkweekConfig(startOfWeek,
-                    startOfDayLocalTime,
-                    id,
-                    version,
-                    createdAt,
-                    updatedAt);
+                return new WorkweekConfig(
+                    this.startOfWeek,
+                    this.startOfDayLocalTime,
+                    this.id,
+                    this.version,
+                    this.createdAt,
+                    this.updatedAt);
             }
         }
     }

@@ -1,31 +1,40 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class LoyaltyEventAdjustPoints 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// LoyaltyEventAdjustPoints.
+    /// </summary>
+    public class LoyaltyEventAdjustPoints
     {
-        public LoyaltyEventAdjustPoints(int points,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LoyaltyEventAdjustPoints"/> class.
+        /// </summary>
+        /// <param name="points">points.</param>
+        /// <param name="loyaltyProgramId">loyalty_program_id.</param>
+        /// <param name="reason">reason.</param>
+        public LoyaltyEventAdjustPoints(
+            int points,
             string loyaltyProgramId = null,
             string reason = null)
         {
-            LoyaltyProgramId = loyaltyProgramId;
-            Points = points;
-            Reason = reason;
+            this.LoyaltyProgramId = loyaltyProgramId;
+            this.Points = points;
+            this.Reason = reason;
         }
 
         /// <summary>
-        /// The Square-assigned ID of the [loyalty program](#type-LoyaltyProgram).
+        /// The Square-assigned ID of the [loyalty program]($m/LoyaltyProgram).
         /// </summary>
         [JsonProperty("loyalty_program_id", NullValueHandling = NullValueHandling.Ignore)]
         public string LoyaltyProgramId { get; }
@@ -42,6 +51,7 @@ namespace Square.Models
         [JsonProperty("reason", NullValueHandling = NullValueHandling.Ignore)]
         public string Reason { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -51,13 +61,7 @@ namespace Square.Models
             return $"LoyaltyEventAdjustPoints : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"LoyaltyProgramId = {(LoyaltyProgramId == null ? "null" : LoyaltyProgramId == string.Empty ? "" : LoyaltyProgramId)}");
-            toStringOutput.Add($"Points = {Points}");
-            toStringOutput.Add($"Reason = {(Reason == null ? "null" : Reason == string.Empty ? "" : Reason)}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -71,71 +75,113 @@ namespace Square.Models
             }
 
             return obj is LoyaltyEventAdjustPoints other &&
-                ((LoyaltyProgramId == null && other.LoyaltyProgramId == null) || (LoyaltyProgramId?.Equals(other.LoyaltyProgramId) == true)) &&
-                Points.Equals(other.Points) &&
-                ((Reason == null && other.Reason == null) || (Reason?.Equals(other.Reason) == true));
+                ((this.LoyaltyProgramId == null && other.LoyaltyProgramId == null) || (this.LoyaltyProgramId?.Equals(other.LoyaltyProgramId) == true)) &&
+                this.Points.Equals(other.Points) &&
+                ((this.Reason == null && other.Reason == null) || (this.Reason?.Equals(other.Reason) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 318164469;
 
-            if (LoyaltyProgramId != null)
+            if (this.LoyaltyProgramId != null)
             {
-               hashCode += LoyaltyProgramId.GetHashCode();
+               hashCode += this.LoyaltyProgramId.GetHashCode();
             }
-            hashCode += Points.GetHashCode();
 
-            if (Reason != null)
+            hashCode += this.Points.GetHashCode();
+
+            if (this.Reason != null)
             {
-               hashCode += Reason.GetHashCode();
+               hashCode += this.Reason.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.LoyaltyProgramId = {(this.LoyaltyProgramId == null ? "null" : this.LoyaltyProgramId == string.Empty ? "" : this.LoyaltyProgramId)}");
+            toStringOutput.Add($"this.Points = {this.Points}");
+            toStringOutput.Add($"this.Reason = {(this.Reason == null ? "null" : this.Reason == string.Empty ? "" : this.Reason)}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
-            var builder = new Builder(Points)
-                .LoyaltyProgramId(LoyaltyProgramId)
-                .Reason(Reason);
+            var builder = new Builder(
+                this.Points)
+                .LoyaltyProgramId(this.LoyaltyProgramId)
+                .Reason(this.Reason);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private int points;
             private string loyaltyProgramId;
             private string reason;
 
-            public Builder(int points)
+            public Builder(
+                int points)
             {
                 this.points = points;
             }
 
+             /// <summary>
+             /// Points.
+             /// </summary>
+             /// <param name="points"> points. </param>
+             /// <returns> Builder. </returns>
             public Builder Points(int points)
             {
                 this.points = points;
                 return this;
             }
 
+             /// <summary>
+             /// LoyaltyProgramId.
+             /// </summary>
+             /// <param name="loyaltyProgramId"> loyaltyProgramId. </param>
+             /// <returns> Builder. </returns>
             public Builder LoyaltyProgramId(string loyaltyProgramId)
             {
                 this.loyaltyProgramId = loyaltyProgramId;
                 return this;
             }
 
+             /// <summary>
+             /// Reason.
+             /// </summary>
+             /// <param name="reason"> reason. </param>
+             /// <returns> Builder. </returns>
             public Builder Reason(string reason)
             {
                 this.reason = reason;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> LoyaltyEventAdjustPoints. </returns>
             public LoyaltyEventAdjustPoints Build()
             {
-                return new LoyaltyEventAdjustPoints(points,
-                    loyaltyProgramId,
-                    reason);
+                return new LoyaltyEventAdjustPoints(
+                    this.points,
+                    this.loyaltyProgramId,
+                    this.reason);
             }
         }
     }

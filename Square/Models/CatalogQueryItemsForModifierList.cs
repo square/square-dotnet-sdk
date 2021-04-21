@@ -1,23 +1,30 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class CatalogQueryItemsForModifierList 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// CatalogQueryItemsForModifierList.
+    /// </summary>
+    public class CatalogQueryItemsForModifierList
     {
-        public CatalogQueryItemsForModifierList(IList<string> modifierListIds)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CatalogQueryItemsForModifierList"/> class.
+        /// </summary>
+        /// <param name="modifierListIds">modifier_list_ids.</param>
+        public CatalogQueryItemsForModifierList(
+            IList<string> modifierListIds)
         {
-            ModifierListIds = modifierListIds;
+            this.ModifierListIds = modifierListIds;
         }
 
         /// <summary>
@@ -26,6 +33,7 @@ namespace Square.Models
         [JsonProperty("modifier_list_ids")]
         public IList<string> ModifierListIds { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -35,11 +43,7 @@ namespace Square.Models
             return $"CatalogQueryItemsForModifierList : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"ModifierListIds = {(ModifierListIds == null ? "null" : $"[{ string.Join(", ", ModifierListIds)} ]")}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -53,45 +57,74 @@ namespace Square.Models
             }
 
             return obj is CatalogQueryItemsForModifierList other &&
-                ((ModifierListIds == null && other.ModifierListIds == null) || (ModifierListIds?.Equals(other.ModifierListIds) == true));
+                ((this.ModifierListIds == null && other.ModifierListIds == null) || (this.ModifierListIds?.Equals(other.ModifierListIds) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 969503410;
 
-            if (ModifierListIds != null)
+            if (this.ModifierListIds != null)
             {
-               hashCode += ModifierListIds.GetHashCode();
+               hashCode += this.ModifierListIds.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.ModifierListIds = {(this.ModifierListIds == null ? "null" : $"[{string.Join(", ", this.ModifierListIds)} ]")}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
-            var builder = new Builder(ModifierListIds);
+            var builder = new Builder(
+                this.ModifierListIds);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private IList<string> modifierListIds;
 
-            public Builder(IList<string> modifierListIds)
+            public Builder(
+                IList<string> modifierListIds)
             {
                 this.modifierListIds = modifierListIds;
             }
 
+             /// <summary>
+             /// ModifierListIds.
+             /// </summary>
+             /// <param name="modifierListIds"> modifierListIds. </param>
+             /// <returns> Builder. </returns>
             public Builder ModifierListIds(IList<string> modifierListIds)
             {
                 this.modifierListIds = modifierListIds;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> CatalogQueryItemsForModifierList. </returns>
             public CatalogQueryItemsForModifierList Build()
             {
-                return new CatalogQueryItemsForModifierList(modifierListIds);
+                return new CatalogQueryItemsForModifierList(
+                    this.modifierListIds);
             }
         }
     }

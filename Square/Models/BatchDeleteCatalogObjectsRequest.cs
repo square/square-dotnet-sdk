@@ -1,23 +1,30 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class BatchDeleteCatalogObjectsRequest 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// BatchDeleteCatalogObjectsRequest.
+    /// </summary>
+    public class BatchDeleteCatalogObjectsRequest
     {
-        public BatchDeleteCatalogObjectsRequest(IList<string> objectIds = null)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BatchDeleteCatalogObjectsRequest"/> class.
+        /// </summary>
+        /// <param name="objectIds">object_ids.</param>
+        public BatchDeleteCatalogObjectsRequest(
+            IList<string> objectIds = null)
         {
-            ObjectIds = objectIds;
+            this.ObjectIds = objectIds;
         }
 
         /// <summary>
@@ -28,6 +35,7 @@ namespace Square.Models
         [JsonProperty("object_ids", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> ObjectIds { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -37,11 +45,7 @@ namespace Square.Models
             return $"BatchDeleteCatalogObjectsRequest : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"ObjectIds = {(ObjectIds == null ? "null" : $"[{ string.Join(", ", ObjectIds)} ]")}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -55,43 +59,68 @@ namespace Square.Models
             }
 
             return obj is BatchDeleteCatalogObjectsRequest other &&
-                ((ObjectIds == null && other.ObjectIds == null) || (ObjectIds?.Equals(other.ObjectIds) == true));
+                ((this.ObjectIds == null && other.ObjectIds == null) || (this.ObjectIds?.Equals(other.ObjectIds) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1606600759;
 
-            if (ObjectIds != null)
+            if (this.ObjectIds != null)
             {
-               hashCode += ObjectIds.GetHashCode();
+               hashCode += this.ObjectIds.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.ObjectIds = {(this.ObjectIds == null ? "null" : $"[{string.Join(", ", this.ObjectIds)} ]")}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .ObjectIds(ObjectIds);
+                .ObjectIds(this.ObjectIds);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private IList<string> objectIds;
 
-
-
+             /// <summary>
+             /// ObjectIds.
+             /// </summary>
+             /// <param name="objectIds"> objectIds. </param>
+             /// <returns> Builder. </returns>
             public Builder ObjectIds(IList<string> objectIds)
             {
                 this.objectIds = objectIds;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> BatchDeleteCatalogObjectsRequest. </returns>
             public BatchDeleteCatalogObjectsRequest Build()
             {
-                return new BatchDeleteCatalogObjectsRequest(objectIds);
+                return new BatchDeleteCatalogObjectsRequest(
+                    this.objectIds);
             }
         }
     }

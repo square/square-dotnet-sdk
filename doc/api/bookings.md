@@ -25,7 +25,8 @@ IBookingsApi bookingsApi = client.BookingsApi;
 Creates a booking.
 
 ```csharp
-CreateBookingAsync(Models.CreateBookingRequest body)
+CreateBookingAsync(
+    Models.CreateBookingRequest body)
 ```
 
 ## Parameters
@@ -66,7 +67,8 @@ catch (ApiException e){};
 Searches for availabilities for booking.
 
 ```csharp
-SearchAvailabilityAsync(Models.SearchAvailabilityRequest body)
+SearchAvailabilityAsync(
+    Models.SearchAvailabilityRequest body)
 ```
 
 ## Parameters
@@ -218,7 +220,8 @@ catch (ApiException e){};
 Retrieves a team member's booking profile.
 
 ```csharp
-RetrieveTeamMemberBookingProfileAsync(string teamMemberId)
+RetrieveTeamMemberBookingProfileAsync(
+    string teamMemberId)
 ```
 
 ## Parameters
@@ -249,14 +252,15 @@ catch (ApiException e){};
 Retrieves a booking.
 
 ```csharp
-RetrieveBookingAsync(string bookingId)
+RetrieveBookingAsync(
+    string bookingId)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `bookingId` | `string` | Template, Required | The ID of the [Booking](#type-booking) object representing the to-be-retrieved booking. |
+| `bookingId` | `string` | Template, Required | The ID of the [Booking](/doc/models/booking.md) object representing the to-be-retrieved booking. |
 
 ## Response Type
 
@@ -280,14 +284,16 @@ catch (ApiException e){};
 Updates a booking.
 
 ```csharp
-UpdateBookingAsync(string bookingId, Models.UpdateBookingRequest body)
+UpdateBookingAsync(
+    string bookingId,
+    Models.UpdateBookingRequest body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `bookingId` | `string` | Template, Required | The ID of the [Booking](#type-booking) object representing the to-be-updated booking. |
+| `bookingId` | `string` | Template, Required | The ID of the [Booking](/doc/models/booking.md) object representing the to-be-updated booking. |
 | `body` | [`Models.UpdateBookingRequest`](/doc/models/update-booking-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
@@ -323,14 +329,16 @@ catch (ApiException e){};
 Cancels an existing booking.
 
 ```csharp
-CancelBookingAsync(string bookingId, Models.CancelBookingRequest body)
+CancelBookingAsync(
+    string bookingId,
+    Models.CancelBookingRequest body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `bookingId` | `string` | Template, Required | The ID of the [Booking](#type-booking) object representing the to-be-cancelled booking. |
+| `bookingId` | `string` | Template, Required | The ID of the [Booking](/doc/models/booking.md) object representing the to-be-cancelled booking. |
 | `body` | [`Models.CancelBookingRequest`](/doc/models/cancel-booking-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type

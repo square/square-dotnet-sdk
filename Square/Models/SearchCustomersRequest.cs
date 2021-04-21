@@ -1,42 +1,51 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class SearchCustomersRequest 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// SearchCustomersRequest.
+    /// </summary>
+    public class SearchCustomersRequest
     {
-        public SearchCustomersRequest(string cursor = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SearchCustomersRequest"/> class.
+        /// </summary>
+        /// <param name="cursor">cursor.</param>
+        /// <param name="limit">limit.</param>
+        /// <param name="query">query.</param>
+        public SearchCustomersRequest(
+            string cursor = null,
             long? limit = null,
             Models.CustomerQuery query = null)
         {
-            Cursor = cursor;
-            Limit = limit;
-            Query = query;
+            this.Cursor = cursor;
+            this.Limit = limit;
+            this.Query = query;
         }
 
         /// <summary>
         /// Include the pagination cursor in subsequent calls to this endpoint to retrieve
         /// the next set of results associated with the original query.
-        /// See the [Pagination guide](https://developer.squareup.com/docs/working-with-apis/pagination) for more information.
+        /// For more information, see [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination).
         /// </summary>
         [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
         public string Cursor { get; }
 
         /// <summary>
         /// A limit on the number of results to be returned in a single page.
-        /// The limit is advisory - the implementation may return more or fewer results.
-        /// If the supplied limit is negative, zero, or is higher than the maximum limit
-        /// of 100, it will be ignored.
+        /// The limit is advisory. The implementation might return more or fewer results.
+        /// If the supplied limit is negative, zero, or higher than the maximum limit
+        /// of 100, it is ignored.
         /// </summary>
         [JsonProperty("limit", NullValueHandling = NullValueHandling.Ignore)]
         public long? Limit { get; }
@@ -48,6 +57,7 @@ namespace Square.Models
         [JsonProperty("query", NullValueHandling = NullValueHandling.Ignore)]
         public Models.CustomerQuery Query { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -57,13 +67,7 @@ namespace Square.Models
             return $"SearchCustomersRequest : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Cursor = {(Cursor == null ? "null" : Cursor == string.Empty ? "" : Cursor)}");
-            toStringOutput.Add($"Limit = {(Limit == null ? "null" : Limit.ToString())}");
-            toStringOutput.Add($"Query = {(Query == null ? "null" : Query.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -77,73 +81,110 @@ namespace Square.Models
             }
 
             return obj is SearchCustomersRequest other &&
-                ((Cursor == null && other.Cursor == null) || (Cursor?.Equals(other.Cursor) == true)) &&
-                ((Limit == null && other.Limit == null) || (Limit?.Equals(other.Limit) == true)) &&
-                ((Query == null && other.Query == null) || (Query?.Equals(other.Query) == true));
+                ((this.Cursor == null && other.Cursor == null) || (this.Cursor?.Equals(other.Cursor) == true)) &&
+                ((this.Limit == null && other.Limit == null) || (this.Limit?.Equals(other.Limit) == true)) &&
+                ((this.Query == null && other.Query == null) || (this.Query?.Equals(other.Query) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 236271593;
 
-            if (Cursor != null)
+            if (this.Cursor != null)
             {
-               hashCode += Cursor.GetHashCode();
+               hashCode += this.Cursor.GetHashCode();
             }
 
-            if (Limit != null)
+            if (this.Limit != null)
             {
-               hashCode += Limit.GetHashCode();
+               hashCode += this.Limit.GetHashCode();
             }
 
-            if (Query != null)
+            if (this.Query != null)
             {
-               hashCode += Query.GetHashCode();
+               hashCode += this.Query.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Cursor = {(this.Cursor == null ? "null" : this.Cursor == string.Empty ? "" : this.Cursor)}");
+            toStringOutput.Add($"this.Limit = {(this.Limit == null ? "null" : this.Limit.ToString())}");
+            toStringOutput.Add($"this.Query = {(this.Query == null ? "null" : this.Query.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .Cursor(Cursor)
-                .Limit(Limit)
-                .Query(Query);
+                .Cursor(this.Cursor)
+                .Limit(this.Limit)
+                .Query(this.Query);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string cursor;
             private long? limit;
             private Models.CustomerQuery query;
 
-
-
+             /// <summary>
+             /// Cursor.
+             /// </summary>
+             /// <param name="cursor"> cursor. </param>
+             /// <returns> Builder. </returns>
             public Builder Cursor(string cursor)
             {
                 this.cursor = cursor;
                 return this;
             }
 
+             /// <summary>
+             /// Limit.
+             /// </summary>
+             /// <param name="limit"> limit. </param>
+             /// <returns> Builder. </returns>
             public Builder Limit(long? limit)
             {
                 this.limit = limit;
                 return this;
             }
 
+             /// <summary>
+             /// Query.
+             /// </summary>
+             /// <param name="query"> query. </param>
+             /// <returns> Builder. </returns>
             public Builder Query(Models.CustomerQuery query)
             {
                 this.query = query;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> SearchCustomersRequest. </returns>
             public SearchCustomersRequest Build()
             {
-                return new SearchCustomersRequest(cursor,
-                    limit,
-                    query);
+                return new SearchCustomersRequest(
+                    this.cursor,
+                    this.limit,
+                    this.query);
             }
         }
     }

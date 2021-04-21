@@ -1,23 +1,30 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class CatalogObjectBatch 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// CatalogObjectBatch.
+    /// </summary>
+    public class CatalogObjectBatch
     {
-        public CatalogObjectBatch(IList<Models.CatalogObject> objects)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CatalogObjectBatch"/> class.
+        /// </summary>
+        /// <param name="objects">objects.</param>
+        public CatalogObjectBatch(
+            IList<Models.CatalogObject> objects)
         {
-            Objects = objects;
+            this.Objects = objects;
         }
 
         /// <summary>
@@ -26,6 +33,7 @@ namespace Square.Models
         [JsonProperty("objects")]
         public IList<Models.CatalogObject> Objects { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -35,11 +43,7 @@ namespace Square.Models
             return $"CatalogObjectBatch : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Objects = {(Objects == null ? "null" : $"[{ string.Join(", ", Objects)} ]")}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -53,45 +57,74 @@ namespace Square.Models
             }
 
             return obj is CatalogObjectBatch other &&
-                ((Objects == null && other.Objects == null) || (Objects?.Equals(other.Objects) == true));
+                ((this.Objects == null && other.Objects == null) || (this.Objects?.Equals(other.Objects) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -481009855;
 
-            if (Objects != null)
+            if (this.Objects != null)
             {
-               hashCode += Objects.GetHashCode();
+               hashCode += this.Objects.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Objects = {(this.Objects == null ? "null" : $"[{string.Join(", ", this.Objects)} ]")}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
-            var builder = new Builder(Objects);
+            var builder = new Builder(
+                this.Objects);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private IList<Models.CatalogObject> objects;
 
-            public Builder(IList<Models.CatalogObject> objects)
+            public Builder(
+                IList<Models.CatalogObject> objects)
             {
                 this.objects = objects;
             }
 
+             /// <summary>
+             /// Objects.
+             /// </summary>
+             /// <param name="objects"> objects. </param>
+             /// <returns> Builder. </returns>
             public Builder Objects(IList<Models.CatalogObject> objects)
             {
                 this.objects = objects;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> CatalogObjectBatch. </returns>
             public CatalogObjectBatch Build()
             {
-                return new CatalogObjectBatch(objects);
+                return new CatalogObjectBatch(
+                    this.objects);
             }
         }
     }

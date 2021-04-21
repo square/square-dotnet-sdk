@@ -1,25 +1,33 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class CancelBookingRequest 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// CancelBookingRequest.
+    /// </summary>
+    public class CancelBookingRequest
     {
-        public CancelBookingRequest(string idempotencyKey = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CancelBookingRequest"/> class.
+        /// </summary>
+        /// <param name="idempotencyKey">idempotency_key.</param>
+        /// <param name="bookingVersion">booking_version.</param>
+        public CancelBookingRequest(
+            string idempotencyKey = null,
             int? bookingVersion = null)
         {
-            IdempotencyKey = idempotencyKey;
-            BookingVersion = bookingVersion;
+            this.IdempotencyKey = idempotencyKey;
+            this.BookingVersion = bookingVersion;
         }
 
         /// <summary>
@@ -34,6 +42,7 @@ namespace Square.Models
         [JsonProperty("booking_version", NullValueHandling = NullValueHandling.Ignore)]
         public int? BookingVersion { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -43,12 +52,7 @@ namespace Square.Models
             return $"CancelBookingRequest : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"IdempotencyKey = {(IdempotencyKey == null ? "null" : IdempotencyKey == string.Empty ? "" : IdempotencyKey)}");
-            toStringOutput.Add($"BookingVersion = {(BookingVersion == null ? "null" : BookingVersion.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -62,58 +66,89 @@ namespace Square.Models
             }
 
             return obj is CancelBookingRequest other &&
-                ((IdempotencyKey == null && other.IdempotencyKey == null) || (IdempotencyKey?.Equals(other.IdempotencyKey) == true)) &&
-                ((BookingVersion == null && other.BookingVersion == null) || (BookingVersion?.Equals(other.BookingVersion) == true));
+                ((this.IdempotencyKey == null && other.IdempotencyKey == null) || (this.IdempotencyKey?.Equals(other.IdempotencyKey) == true)) &&
+                ((this.BookingVersion == null && other.BookingVersion == null) || (this.BookingVersion?.Equals(other.BookingVersion) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 1446943632;
 
-            if (IdempotencyKey != null)
+            if (this.IdempotencyKey != null)
             {
-               hashCode += IdempotencyKey.GetHashCode();
+               hashCode += this.IdempotencyKey.GetHashCode();
             }
 
-            if (BookingVersion != null)
+            if (this.BookingVersion != null)
             {
-               hashCode += BookingVersion.GetHashCode();
+               hashCode += this.BookingVersion.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.IdempotencyKey = {(this.IdempotencyKey == null ? "null" : this.IdempotencyKey == string.Empty ? "" : this.IdempotencyKey)}");
+            toStringOutput.Add($"this.BookingVersion = {(this.BookingVersion == null ? "null" : this.BookingVersion.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .IdempotencyKey(IdempotencyKey)
-                .BookingVersion(BookingVersion);
+                .IdempotencyKey(this.IdempotencyKey)
+                .BookingVersion(this.BookingVersion);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string idempotencyKey;
             private int? bookingVersion;
 
-
-
+             /// <summary>
+             /// IdempotencyKey.
+             /// </summary>
+             /// <param name="idempotencyKey"> idempotencyKey. </param>
+             /// <returns> Builder. </returns>
             public Builder IdempotencyKey(string idempotencyKey)
             {
                 this.idempotencyKey = idempotencyKey;
                 return this;
             }
 
+             /// <summary>
+             /// BookingVersion.
+             /// </summary>
+             /// <param name="bookingVersion"> bookingVersion. </param>
+             /// <returns> Builder. </returns>
             public Builder BookingVersion(int? bookingVersion)
             {
                 this.bookingVersion = bookingVersion;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> CancelBookingRequest. </returns>
             public CancelBookingRequest Build()
             {
-                return new CancelBookingRequest(idempotencyKey,
-                    bookingVersion);
+                return new CancelBookingRequest(
+                    this.idempotencyKey,
+                    this.bookingVersion);
             }
         }
     }

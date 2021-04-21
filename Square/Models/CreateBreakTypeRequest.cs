@@ -1,25 +1,33 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class CreateBreakTypeRequest 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// CreateBreakTypeRequest.
+    /// </summary>
+    public class CreateBreakTypeRequest
     {
-        public CreateBreakTypeRequest(Models.BreakType breakType,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CreateBreakTypeRequest"/> class.
+        /// </summary>
+        /// <param name="breakType">break_type.</param>
+        /// <param name="idempotencyKey">idempotency_key.</param>
+        public CreateBreakTypeRequest(
+            Models.BreakType breakType,
             string idempotencyKey = null)
         {
-            IdempotencyKey = idempotencyKey;
-            BreakType = breakType;
+            this.IdempotencyKey = idempotencyKey;
+            this.BreakType = breakType;
         }
 
         /// <summary>
@@ -35,6 +43,7 @@ namespace Square.Models
         [JsonProperty("break_type")]
         public Models.BreakType BreakType { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -44,12 +53,7 @@ namespace Square.Models
             return $"CreateBreakTypeRequest : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"IdempotencyKey = {(IdempotencyKey == null ? "null" : IdempotencyKey == string.Empty ? "" : IdempotencyKey)}");
-            toStringOutput.Add($"BreakType = {(BreakType == null ? "null" : BreakType.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -63,60 +67,95 @@ namespace Square.Models
             }
 
             return obj is CreateBreakTypeRequest other &&
-                ((IdempotencyKey == null && other.IdempotencyKey == null) || (IdempotencyKey?.Equals(other.IdempotencyKey) == true)) &&
-                ((BreakType == null && other.BreakType == null) || (BreakType?.Equals(other.BreakType) == true));
+                ((this.IdempotencyKey == null && other.IdempotencyKey == null) || (this.IdempotencyKey?.Equals(other.IdempotencyKey) == true)) &&
+                ((this.BreakType == null && other.BreakType == null) || (this.BreakType?.Equals(other.BreakType) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 441165331;
 
-            if (IdempotencyKey != null)
+            if (this.IdempotencyKey != null)
             {
-               hashCode += IdempotencyKey.GetHashCode();
+               hashCode += this.IdempotencyKey.GetHashCode();
             }
 
-            if (BreakType != null)
+            if (this.BreakType != null)
             {
-               hashCode += BreakType.GetHashCode();
+               hashCode += this.BreakType.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.IdempotencyKey = {(this.IdempotencyKey == null ? "null" : this.IdempotencyKey == string.Empty ? "" : this.IdempotencyKey)}");
+            toStringOutput.Add($"this.BreakType = {(this.BreakType == null ? "null" : this.BreakType.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
-            var builder = new Builder(BreakType)
-                .IdempotencyKey(IdempotencyKey);
+            var builder = new Builder(
+                this.BreakType)
+                .IdempotencyKey(this.IdempotencyKey);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private Models.BreakType breakType;
             private string idempotencyKey;
 
-            public Builder(Models.BreakType breakType)
+            public Builder(
+                Models.BreakType breakType)
             {
                 this.breakType = breakType;
             }
 
+             /// <summary>
+             /// BreakType.
+             /// </summary>
+             /// <param name="breakType"> breakType. </param>
+             /// <returns> Builder. </returns>
             public Builder BreakType(Models.BreakType breakType)
             {
                 this.breakType = breakType;
                 return this;
             }
 
+             /// <summary>
+             /// IdempotencyKey.
+             /// </summary>
+             /// <param name="idempotencyKey"> idempotencyKey. </param>
+             /// <returns> Builder. </returns>
             public Builder IdempotencyKey(string idempotencyKey)
             {
                 this.idempotencyKey = idempotencyKey;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> CreateBreakTypeRequest. </returns>
             public CreateBreakTypeRequest Build()
             {
-                return new CreateBreakTypeRequest(breakType,
-                    idempotencyKey);
+                return new CreateBreakTypeRequest(
+                    this.breakType,
+                    this.idempotencyKey);
             }
         }
     }

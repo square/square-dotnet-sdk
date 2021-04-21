@@ -1,37 +1,49 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class ItemVariationLocationOverrides 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// ItemVariationLocationOverrides.
+    /// </summary>
+    public class ItemVariationLocationOverrides
     {
-        public ItemVariationLocationOverrides(string locationId = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ItemVariationLocationOverrides"/> class.
+        /// </summary>
+        /// <param name="locationId">location_id.</param>
+        /// <param name="priceMoney">price_money.</param>
+        /// <param name="pricingType">pricing_type.</param>
+        /// <param name="trackInventory">track_inventory.</param>
+        /// <param name="inventoryAlertType">inventory_alert_type.</param>
+        /// <param name="inventoryAlertThreshold">inventory_alert_threshold.</param>
+        public ItemVariationLocationOverrides(
+            string locationId = null,
             Models.Money priceMoney = null,
             string pricingType = null,
             bool? trackInventory = null,
             string inventoryAlertType = null,
             long? inventoryAlertThreshold = null)
         {
-            LocationId = locationId;
-            PriceMoney = priceMoney;
-            PricingType = pricingType;
-            TrackInventory = trackInventory;
-            InventoryAlertType = inventoryAlertType;
-            InventoryAlertThreshold = inventoryAlertThreshold;
+            this.LocationId = locationId;
+            this.PriceMoney = priceMoney;
+            this.PricingType = pricingType;
+            this.TrackInventory = trackInventory;
+            this.InventoryAlertType = inventoryAlertType;
+            this.InventoryAlertThreshold = inventoryAlertThreshold;
         }
 
         /// <summary>
-        /// The ID of the `Location`.
+        /// The ID of the `Location`. This can include locations that are deactivated.
         /// </summary>
         [JsonProperty("location_id", NullValueHandling = NullValueHandling.Ignore)]
         public string LocationId { get; }
@@ -73,6 +85,7 @@ namespace Square.Models
         [JsonProperty("inventory_alert_threshold", NullValueHandling = NullValueHandling.Ignore)]
         public long? InventoryAlertThreshold { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -82,16 +95,7 @@ namespace Square.Models
             return $"ItemVariationLocationOverrides : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"LocationId = {(LocationId == null ? "null" : LocationId == string.Empty ? "" : LocationId)}");
-            toStringOutput.Add($"PriceMoney = {(PriceMoney == null ? "null" : PriceMoney.ToString())}");
-            toStringOutput.Add($"PricingType = {(PricingType == null ? "null" : PricingType.ToString())}");
-            toStringOutput.Add($"TrackInventory = {(TrackInventory == null ? "null" : TrackInventory.ToString())}");
-            toStringOutput.Add($"InventoryAlertType = {(InventoryAlertType == null ? "null" : InventoryAlertType.ToString())}");
-            toStringOutput.Add($"InventoryAlertThreshold = {(InventoryAlertThreshold == null ? "null" : InventoryAlertThreshold.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -105,63 +109,85 @@ namespace Square.Models
             }
 
             return obj is ItemVariationLocationOverrides other &&
-                ((LocationId == null && other.LocationId == null) || (LocationId?.Equals(other.LocationId) == true)) &&
-                ((PriceMoney == null && other.PriceMoney == null) || (PriceMoney?.Equals(other.PriceMoney) == true)) &&
-                ((PricingType == null && other.PricingType == null) || (PricingType?.Equals(other.PricingType) == true)) &&
-                ((TrackInventory == null && other.TrackInventory == null) || (TrackInventory?.Equals(other.TrackInventory) == true)) &&
-                ((InventoryAlertType == null && other.InventoryAlertType == null) || (InventoryAlertType?.Equals(other.InventoryAlertType) == true)) &&
-                ((InventoryAlertThreshold == null && other.InventoryAlertThreshold == null) || (InventoryAlertThreshold?.Equals(other.InventoryAlertThreshold) == true));
+                ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true)) &&
+                ((this.PriceMoney == null && other.PriceMoney == null) || (this.PriceMoney?.Equals(other.PriceMoney) == true)) &&
+                ((this.PricingType == null && other.PricingType == null) || (this.PricingType?.Equals(other.PricingType) == true)) &&
+                ((this.TrackInventory == null && other.TrackInventory == null) || (this.TrackInventory?.Equals(other.TrackInventory) == true)) &&
+                ((this.InventoryAlertType == null && other.InventoryAlertType == null) || (this.InventoryAlertType?.Equals(other.InventoryAlertType) == true)) &&
+                ((this.InventoryAlertThreshold == null && other.InventoryAlertThreshold == null) || (this.InventoryAlertThreshold?.Equals(other.InventoryAlertThreshold) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -598612092;
 
-            if (LocationId != null)
+            if (this.LocationId != null)
             {
-               hashCode += LocationId.GetHashCode();
+               hashCode += this.LocationId.GetHashCode();
             }
 
-            if (PriceMoney != null)
+            if (this.PriceMoney != null)
             {
-               hashCode += PriceMoney.GetHashCode();
+               hashCode += this.PriceMoney.GetHashCode();
             }
 
-            if (PricingType != null)
+            if (this.PricingType != null)
             {
-               hashCode += PricingType.GetHashCode();
+               hashCode += this.PricingType.GetHashCode();
             }
 
-            if (TrackInventory != null)
+            if (this.TrackInventory != null)
             {
-               hashCode += TrackInventory.GetHashCode();
+               hashCode += this.TrackInventory.GetHashCode();
             }
 
-            if (InventoryAlertType != null)
+            if (this.InventoryAlertType != null)
             {
-               hashCode += InventoryAlertType.GetHashCode();
+               hashCode += this.InventoryAlertType.GetHashCode();
             }
 
-            if (InventoryAlertThreshold != null)
+            if (this.InventoryAlertThreshold != null)
             {
-               hashCode += InventoryAlertThreshold.GetHashCode();
+               hashCode += this.InventoryAlertThreshold.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId == string.Empty ? "" : this.LocationId)}");
+            toStringOutput.Add($"this.PriceMoney = {(this.PriceMoney == null ? "null" : this.PriceMoney.ToString())}");
+            toStringOutput.Add($"this.PricingType = {(this.PricingType == null ? "null" : this.PricingType.ToString())}");
+            toStringOutput.Add($"this.TrackInventory = {(this.TrackInventory == null ? "null" : this.TrackInventory.ToString())}");
+            toStringOutput.Add($"this.InventoryAlertType = {(this.InventoryAlertType == null ? "null" : this.InventoryAlertType.ToString())}");
+            toStringOutput.Add($"this.InventoryAlertThreshold = {(this.InventoryAlertThreshold == null ? "null" : this.InventoryAlertThreshold.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .LocationId(LocationId)
-                .PriceMoney(PriceMoney)
-                .PricingType(PricingType)
-                .TrackInventory(TrackInventory)
-                .InventoryAlertType(InventoryAlertType)
-                .InventoryAlertThreshold(InventoryAlertThreshold);
+                .LocationId(this.LocationId)
+                .PriceMoney(this.PriceMoney)
+                .PricingType(this.PricingType)
+                .TrackInventory(this.TrackInventory)
+                .InventoryAlertType(this.InventoryAlertType)
+                .InventoryAlertThreshold(this.InventoryAlertThreshold);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string locationId;
@@ -171,52 +197,85 @@ namespace Square.Models
             private string inventoryAlertType;
             private long? inventoryAlertThreshold;
 
-
-
+             /// <summary>
+             /// LocationId.
+             /// </summary>
+             /// <param name="locationId"> locationId. </param>
+             /// <returns> Builder. </returns>
             public Builder LocationId(string locationId)
             {
                 this.locationId = locationId;
                 return this;
             }
 
+             /// <summary>
+             /// PriceMoney.
+             /// </summary>
+             /// <param name="priceMoney"> priceMoney. </param>
+             /// <returns> Builder. </returns>
             public Builder PriceMoney(Models.Money priceMoney)
             {
                 this.priceMoney = priceMoney;
                 return this;
             }
 
+             /// <summary>
+             /// PricingType.
+             /// </summary>
+             /// <param name="pricingType"> pricingType. </param>
+             /// <returns> Builder. </returns>
             public Builder PricingType(string pricingType)
             {
                 this.pricingType = pricingType;
                 return this;
             }
 
+             /// <summary>
+             /// TrackInventory.
+             /// </summary>
+             /// <param name="trackInventory"> trackInventory. </param>
+             /// <returns> Builder. </returns>
             public Builder TrackInventory(bool? trackInventory)
             {
                 this.trackInventory = trackInventory;
                 return this;
             }
 
+             /// <summary>
+             /// InventoryAlertType.
+             /// </summary>
+             /// <param name="inventoryAlertType"> inventoryAlertType. </param>
+             /// <returns> Builder. </returns>
             public Builder InventoryAlertType(string inventoryAlertType)
             {
                 this.inventoryAlertType = inventoryAlertType;
                 return this;
             }
 
+             /// <summary>
+             /// InventoryAlertThreshold.
+             /// </summary>
+             /// <param name="inventoryAlertThreshold"> inventoryAlertThreshold. </param>
+             /// <returns> Builder. </returns>
             public Builder InventoryAlertThreshold(long? inventoryAlertThreshold)
             {
                 this.inventoryAlertThreshold = inventoryAlertThreshold;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> ItemVariationLocationOverrides. </returns>
             public ItemVariationLocationOverrides Build()
             {
-                return new ItemVariationLocationOverrides(locationId,
-                    priceMoney,
-                    pricingType,
-                    trackInventory,
-                    inventoryAlertType,
-                    inventoryAlertThreshold);
+                return new ItemVariationLocationOverrides(
+                    this.locationId,
+                    this.priceMoney,
+                    this.pricingType,
+                    this.trackInventory,
+                    this.inventoryAlertType,
+                    this.inventoryAlertThreshold);
             }
         }
     }

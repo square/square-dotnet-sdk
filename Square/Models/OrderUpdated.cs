@@ -1,33 +1,45 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class OrderUpdated 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// OrderUpdated.
+    /// </summary>
+    public class OrderUpdated
     {
-        public OrderUpdated(string orderId = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="OrderUpdated"/> class.
+        /// </summary>
+        /// <param name="orderId">order_id.</param>
+        /// <param name="version">version.</param>
+        /// <param name="locationId">location_id.</param>
+        /// <param name="state">state.</param>
+        /// <param name="createdAt">created_at.</param>
+        /// <param name="updatedAt">updated_at.</param>
+        public OrderUpdated(
+            string orderId = null,
             int? version = null,
             string locationId = null,
             string state = null,
             string createdAt = null,
             string updatedAt = null)
         {
-            OrderId = orderId;
-            Version = version;
-            LocationId = locationId;
-            State = state;
-            CreatedAt = createdAt;
-            UpdatedAt = updatedAt;
+            this.OrderId = orderId;
+            this.Version = version;
+            this.LocationId = locationId;
+            this.State = state;
+            this.CreatedAt = createdAt;
+            this.UpdatedAt = updatedAt;
         }
 
         /// <summary>
@@ -69,6 +81,7 @@ namespace Square.Models
         [JsonProperty("updated_at", NullValueHandling = NullValueHandling.Ignore)]
         public string UpdatedAt { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -78,16 +91,7 @@ namespace Square.Models
             return $"OrderUpdated : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"OrderId = {(OrderId == null ? "null" : OrderId == string.Empty ? "" : OrderId)}");
-            toStringOutput.Add($"Version = {(Version == null ? "null" : Version.ToString())}");
-            toStringOutput.Add($"LocationId = {(LocationId == null ? "null" : LocationId == string.Empty ? "" : LocationId)}");
-            toStringOutput.Add($"State = {(State == null ? "null" : State.ToString())}");
-            toStringOutput.Add($"CreatedAt = {(CreatedAt == null ? "null" : CreatedAt == string.Empty ? "" : CreatedAt)}");
-            toStringOutput.Add($"UpdatedAt = {(UpdatedAt == null ? "null" : UpdatedAt == string.Empty ? "" : UpdatedAt)}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -101,63 +105,85 @@ namespace Square.Models
             }
 
             return obj is OrderUpdated other &&
-                ((OrderId == null && other.OrderId == null) || (OrderId?.Equals(other.OrderId) == true)) &&
-                ((Version == null && other.Version == null) || (Version?.Equals(other.Version) == true)) &&
-                ((LocationId == null && other.LocationId == null) || (LocationId?.Equals(other.LocationId) == true)) &&
-                ((State == null && other.State == null) || (State?.Equals(other.State) == true)) &&
-                ((CreatedAt == null && other.CreatedAt == null) || (CreatedAt?.Equals(other.CreatedAt) == true)) &&
-                ((UpdatedAt == null && other.UpdatedAt == null) || (UpdatedAt?.Equals(other.UpdatedAt) == true));
+                ((this.OrderId == null && other.OrderId == null) || (this.OrderId?.Equals(other.OrderId) == true)) &&
+                ((this.Version == null && other.Version == null) || (this.Version?.Equals(other.Version) == true)) &&
+                ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true)) &&
+                ((this.State == null && other.State == null) || (this.State?.Equals(other.State) == true)) &&
+                ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true)) &&
+                ((this.UpdatedAt == null && other.UpdatedAt == null) || (this.UpdatedAt?.Equals(other.UpdatedAt) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 1988209099;
 
-            if (OrderId != null)
+            if (this.OrderId != null)
             {
-               hashCode += OrderId.GetHashCode();
+               hashCode += this.OrderId.GetHashCode();
             }
 
-            if (Version != null)
+            if (this.Version != null)
             {
-               hashCode += Version.GetHashCode();
+               hashCode += this.Version.GetHashCode();
             }
 
-            if (LocationId != null)
+            if (this.LocationId != null)
             {
-               hashCode += LocationId.GetHashCode();
+               hashCode += this.LocationId.GetHashCode();
             }
 
-            if (State != null)
+            if (this.State != null)
             {
-               hashCode += State.GetHashCode();
+               hashCode += this.State.GetHashCode();
             }
 
-            if (CreatedAt != null)
+            if (this.CreatedAt != null)
             {
-               hashCode += CreatedAt.GetHashCode();
+               hashCode += this.CreatedAt.GetHashCode();
             }
 
-            if (UpdatedAt != null)
+            if (this.UpdatedAt != null)
             {
-               hashCode += UpdatedAt.GetHashCode();
+               hashCode += this.UpdatedAt.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.OrderId = {(this.OrderId == null ? "null" : this.OrderId == string.Empty ? "" : this.OrderId)}");
+            toStringOutput.Add($"this.Version = {(this.Version == null ? "null" : this.Version.ToString())}");
+            toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId == string.Empty ? "" : this.LocationId)}");
+            toStringOutput.Add($"this.State = {(this.State == null ? "null" : this.State.ToString())}");
+            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt == string.Empty ? "" : this.CreatedAt)}");
+            toStringOutput.Add($"this.UpdatedAt = {(this.UpdatedAt == null ? "null" : this.UpdatedAt == string.Empty ? "" : this.UpdatedAt)}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .OrderId(OrderId)
-                .Version(Version)
-                .LocationId(LocationId)
-                .State(State)
-                .CreatedAt(CreatedAt)
-                .UpdatedAt(UpdatedAt);
+                .OrderId(this.OrderId)
+                .Version(this.Version)
+                .LocationId(this.LocationId)
+                .State(this.State)
+                .CreatedAt(this.CreatedAt)
+                .UpdatedAt(this.UpdatedAt);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string orderId;
@@ -167,52 +193,85 @@ namespace Square.Models
             private string createdAt;
             private string updatedAt;
 
-
-
+             /// <summary>
+             /// OrderId.
+             /// </summary>
+             /// <param name="orderId"> orderId. </param>
+             /// <returns> Builder. </returns>
             public Builder OrderId(string orderId)
             {
                 this.orderId = orderId;
                 return this;
             }
 
+             /// <summary>
+             /// Version.
+             /// </summary>
+             /// <param name="version"> version. </param>
+             /// <returns> Builder. </returns>
             public Builder Version(int? version)
             {
                 this.version = version;
                 return this;
             }
 
+             /// <summary>
+             /// LocationId.
+             /// </summary>
+             /// <param name="locationId"> locationId. </param>
+             /// <returns> Builder. </returns>
             public Builder LocationId(string locationId)
             {
                 this.locationId = locationId;
                 return this;
             }
 
+             /// <summary>
+             /// State.
+             /// </summary>
+             /// <param name="state"> state. </param>
+             /// <returns> Builder. </returns>
             public Builder State(string state)
             {
                 this.state = state;
                 return this;
             }
 
+             /// <summary>
+             /// CreatedAt.
+             /// </summary>
+             /// <param name="createdAt"> createdAt. </param>
+             /// <returns> Builder. </returns>
             public Builder CreatedAt(string createdAt)
             {
                 this.createdAt = createdAt;
                 return this;
             }
 
+             /// <summary>
+             /// UpdatedAt.
+             /// </summary>
+             /// <param name="updatedAt"> updatedAt. </param>
+             /// <returns> Builder. </returns>
             public Builder UpdatedAt(string updatedAt)
             {
                 this.updatedAt = updatedAt;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> OrderUpdated. </returns>
             public OrderUpdated Build()
             {
-                return new OrderUpdated(orderId,
-                    version,
-                    locationId,
-                    state,
-                    createdAt,
-                    updatedAt);
+                return new OrderUpdated(
+                    this.orderId,
+                    this.version,
+                    this.locationId,
+                    this.state,
+                    this.createdAt,
+                    this.updatedAt);
             }
         }
     }

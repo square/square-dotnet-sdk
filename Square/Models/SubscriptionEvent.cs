@@ -1,29 +1,42 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class SubscriptionEvent 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// SubscriptionEvent.
+    /// </summary>
+    public class SubscriptionEvent
     {
-        public SubscriptionEvent(string id,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SubscriptionEvent"/> class.
+        /// </summary>
+        /// <param name="id">id.</param>
+        /// <param name="subscriptionEventType">subscription_event_type.</param>
+        /// <param name="effectiveDate">effective_date.</param>
+        /// <param name="planId">plan_id.</param>
+        /// <param name="info">info.</param>
+        public SubscriptionEvent(
+            string id,
             string subscriptionEventType,
             string effectiveDate,
-            string planId)
+            string planId,
+            Models.SubscriptionEventInfo info = null)
         {
-            Id = id;
-            SubscriptionEventType = subscriptionEventType;
-            EffectiveDate = effectiveDate;
-            PlanId = planId;
+            this.Id = id;
+            this.SubscriptionEventType = subscriptionEventType;
+            this.EffectiveDate = effectiveDate;
+            this.PlanId = planId;
+            this.Info = info;
         }
 
         /// <summary>
@@ -51,6 +64,13 @@ namespace Square.Models
         [JsonProperty("plan_id")]
         public string PlanId { get; }
 
+        /// <summary>
+        /// Provides information about the subscription event.
+        /// </summary>
+        [JsonProperty("info", NullValueHandling = NullValueHandling.Ignore)]
+        public Models.SubscriptionEventInfo Info { get; }
+
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -60,14 +80,7 @@ namespace Square.Models
             return $"SubscriptionEvent : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Id = {(Id == null ? "null" : Id == string.Empty ? "" : Id)}");
-            toStringOutput.Add($"SubscriptionEventType = {(SubscriptionEventType == null ? "null" : SubscriptionEventType.ToString())}");
-            toStringOutput.Add($"EffectiveDate = {(EffectiveDate == null ? "null" : EffectiveDate == string.Empty ? "" : EffectiveDate)}");
-            toStringOutput.Add($"PlanId = {(PlanId == null ? "null" : PlanId == string.Empty ? "" : PlanId)}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -81,56 +94,87 @@ namespace Square.Models
             }
 
             return obj is SubscriptionEvent other &&
-                ((Id == null && other.Id == null) || (Id?.Equals(other.Id) == true)) &&
-                ((SubscriptionEventType == null && other.SubscriptionEventType == null) || (SubscriptionEventType?.Equals(other.SubscriptionEventType) == true)) &&
-                ((EffectiveDate == null && other.EffectiveDate == null) || (EffectiveDate?.Equals(other.EffectiveDate) == true)) &&
-                ((PlanId == null && other.PlanId == null) || (PlanId?.Equals(other.PlanId) == true));
+                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
+                ((this.SubscriptionEventType == null && other.SubscriptionEventType == null) || (this.SubscriptionEventType?.Equals(other.SubscriptionEventType) == true)) &&
+                ((this.EffectiveDate == null && other.EffectiveDate == null) || (this.EffectiveDate?.Equals(other.EffectiveDate) == true)) &&
+                ((this.PlanId == null && other.PlanId == null) || (this.PlanId?.Equals(other.PlanId) == true)) &&
+                ((this.Info == null && other.Info == null) || (this.Info?.Equals(other.Info) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -298722928;
+            int hashCode = 1280044689;
 
-            if (Id != null)
+            if (this.Id != null)
             {
-               hashCode += Id.GetHashCode();
+               hashCode += this.Id.GetHashCode();
             }
 
-            if (SubscriptionEventType != null)
+            if (this.SubscriptionEventType != null)
             {
-               hashCode += SubscriptionEventType.GetHashCode();
+               hashCode += this.SubscriptionEventType.GetHashCode();
             }
 
-            if (EffectiveDate != null)
+            if (this.EffectiveDate != null)
             {
-               hashCode += EffectiveDate.GetHashCode();
+               hashCode += this.EffectiveDate.GetHashCode();
             }
 
-            if (PlanId != null)
+            if (this.PlanId != null)
             {
-               hashCode += PlanId.GetHashCode();
+               hashCode += this.PlanId.GetHashCode();
+            }
+
+            if (this.Info != null)
+            {
+               hashCode += this.Info.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id == string.Empty ? "" : this.Id)}");
+            toStringOutput.Add($"this.SubscriptionEventType = {(this.SubscriptionEventType == null ? "null" : this.SubscriptionEventType.ToString())}");
+            toStringOutput.Add($"this.EffectiveDate = {(this.EffectiveDate == null ? "null" : this.EffectiveDate == string.Empty ? "" : this.EffectiveDate)}");
+            toStringOutput.Add($"this.PlanId = {(this.PlanId == null ? "null" : this.PlanId == string.Empty ? "" : this.PlanId)}");
+            toStringOutput.Add($"this.Info = {(this.Info == null ? "null" : this.Info.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
-            var builder = new Builder(Id,
-                SubscriptionEventType,
-                EffectiveDate,
-                PlanId);
+            var builder = new Builder(
+                this.Id,
+                this.SubscriptionEventType,
+                this.EffectiveDate,
+                this.PlanId)
+                .Info(this.Info);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string id;
             private string subscriptionEventType;
             private string effectiveDate;
             private string planId;
+            private Models.SubscriptionEventInfo info;
 
-            public Builder(string id,
+            public Builder(
+                string id,
                 string subscriptionEventType,
                 string effectiveDate,
                 string planId)
@@ -141,36 +185,73 @@ namespace Square.Models
                 this.planId = planId;
             }
 
+             /// <summary>
+             /// Id.
+             /// </summary>
+             /// <param name="id"> id. </param>
+             /// <returns> Builder. </returns>
             public Builder Id(string id)
             {
                 this.id = id;
                 return this;
             }
 
+             /// <summary>
+             /// SubscriptionEventType.
+             /// </summary>
+             /// <param name="subscriptionEventType"> subscriptionEventType. </param>
+             /// <returns> Builder. </returns>
             public Builder SubscriptionEventType(string subscriptionEventType)
             {
                 this.subscriptionEventType = subscriptionEventType;
                 return this;
             }
 
+             /// <summary>
+             /// EffectiveDate.
+             /// </summary>
+             /// <param name="effectiveDate"> effectiveDate. </param>
+             /// <returns> Builder. </returns>
             public Builder EffectiveDate(string effectiveDate)
             {
                 this.effectiveDate = effectiveDate;
                 return this;
             }
 
+             /// <summary>
+             /// PlanId.
+             /// </summary>
+             /// <param name="planId"> planId. </param>
+             /// <returns> Builder. </returns>
             public Builder PlanId(string planId)
             {
                 this.planId = planId;
                 return this;
             }
 
+             /// <summary>
+             /// Info.
+             /// </summary>
+             /// <param name="info"> info. </param>
+             /// <returns> Builder. </returns>
+            public Builder Info(Models.SubscriptionEventInfo info)
+            {
+                this.info = info;
+                return this;
+            }
+
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> SubscriptionEvent. </returns>
             public SubscriptionEvent Build()
             {
-                return new SubscriptionEvent(id,
-                    subscriptionEventType,
-                    effectiveDate,
-                    planId);
+                return new SubscriptionEvent(
+                    this.id,
+                    this.subscriptionEventType,
+                    this.effectiveDate,
+                    this.planId,
+                    this.info);
             }
         }
     }

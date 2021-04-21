@@ -1,21 +1,36 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class OrderLineItemTax 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// OrderLineItemTax.
+    /// </summary>
+    public class OrderLineItemTax
     {
-        public OrderLineItemTax(string uid = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="OrderLineItemTax"/> class.
+        /// </summary>
+        /// <param name="uid">uid.</param>
+        /// <param name="catalogObjectId">catalog_object_id.</param>
+        /// <param name="name">name.</param>
+        /// <param name="type">type.</param>
+        /// <param name="percentage">percentage.</param>
+        /// <param name="metadata">metadata.</param>
+        /// <param name="appliedMoney">applied_money.</param>
+        /// <param name="scope">scope.</param>
+        /// <param name="autoApplied">auto_applied.</param>
+        public OrderLineItemTax(
+            string uid = null,
             string catalogObjectId = null,
             string name = null,
             string type = null,
@@ -25,15 +40,15 @@ namespace Square.Models
             string scope = null,
             bool? autoApplied = null)
         {
-            Uid = uid;
-            CatalogObjectId = catalogObjectId;
-            Name = name;
-            Type = type;
-            Percentage = percentage;
-            Metadata = metadata;
-            AppliedMoney = appliedMoney;
-            Scope = scope;
-            AutoApplied = autoApplied;
+            this.Uid = uid;
+            this.CatalogObjectId = catalogObjectId;
+            this.Name = name;
+            this.Type = type;
+            this.Percentage = percentage;
+            this.Metadata = metadata;
+            this.AppliedMoney = appliedMoney;
+            this.Scope = scope;
+            this.AutoApplied = autoApplied;
         }
 
         /// <summary>
@@ -43,7 +58,7 @@ namespace Square.Models
         public string Uid { get; }
 
         /// <summary>
-        /// The catalog object id referencing [CatalogTax](#type-catalogtax).
+        /// The catalog object id referencing [CatalogTax]($m/CatalogTax).
         /// </summary>
         [JsonProperty("catalog_object_id", NullValueHandling = NullValueHandling.Ignore)]
         public string CatalogObjectId { get; }
@@ -81,7 +96,8 @@ namespace Square.Models
         /// An application may have up to 10 entries per metadata field.
         /// Entries written by applications are private and can only be read or modified by the same
         /// application.
-        /// See [Metadata](https://developer.squareup.com/docs/build-basics/metadata) for more information.
+        /// See [Metadata](https://developer.squareup.com/docs/build-basics/metadata) for more
+        /// information.
         /// </summary>
         [JsonProperty("metadata", NullValueHandling = NullValueHandling.Ignore)]
         public IDictionary<string, string> Metadata { get; }
@@ -105,12 +121,13 @@ namespace Square.Models
 
         /// <summary>
         /// Determines whether the tax was automatically applied to the order based on
-        /// the catalog configuration. For an example, see 
+        /// the catalog configuration. For an example, see
         /// [Automatically Apply Taxes to an Order](https://developer.squareup.com/docs/orders-api/apply-taxes-and-discounts/auto-apply-taxes).
         /// </summary>
         [JsonProperty("auto_applied", NullValueHandling = NullValueHandling.Ignore)]
         public bool? AutoApplied { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -120,19 +137,7 @@ namespace Square.Models
             return $"OrderLineItemTax : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Uid = {(Uid == null ? "null" : Uid == string.Empty ? "" : Uid)}");
-            toStringOutput.Add($"CatalogObjectId = {(CatalogObjectId == null ? "null" : CatalogObjectId == string.Empty ? "" : CatalogObjectId)}");
-            toStringOutput.Add($"Name = {(Name == null ? "null" : Name == string.Empty ? "" : Name)}");
-            toStringOutput.Add($"Type = {(Type == null ? "null" : Type.ToString())}");
-            toStringOutput.Add($"Percentage = {(Percentage == null ? "null" : Percentage == string.Empty ? "" : Percentage)}");
-            toStringOutput.Add($"Metadata = {(Metadata == null ? "null" : Metadata.ToString())}");
-            toStringOutput.Add($"AppliedMoney = {(AppliedMoney == null ? "null" : AppliedMoney.ToString())}");
-            toStringOutput.Add($"Scope = {(Scope == null ? "null" : Scope.ToString())}");
-            toStringOutput.Add($"AutoApplied = {(AutoApplied == null ? "null" : AutoApplied.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -146,84 +151,109 @@ namespace Square.Models
             }
 
             return obj is OrderLineItemTax other &&
-                ((Uid == null && other.Uid == null) || (Uid?.Equals(other.Uid) == true)) &&
-                ((CatalogObjectId == null && other.CatalogObjectId == null) || (CatalogObjectId?.Equals(other.CatalogObjectId) == true)) &&
-                ((Name == null && other.Name == null) || (Name?.Equals(other.Name) == true)) &&
-                ((Type == null && other.Type == null) || (Type?.Equals(other.Type) == true)) &&
-                ((Percentage == null && other.Percentage == null) || (Percentage?.Equals(other.Percentage) == true)) &&
-                ((Metadata == null && other.Metadata == null) || (Metadata?.Equals(other.Metadata) == true)) &&
-                ((AppliedMoney == null && other.AppliedMoney == null) || (AppliedMoney?.Equals(other.AppliedMoney) == true)) &&
-                ((Scope == null && other.Scope == null) || (Scope?.Equals(other.Scope) == true)) &&
-                ((AutoApplied == null && other.AutoApplied == null) || (AutoApplied?.Equals(other.AutoApplied) == true));
+                ((this.Uid == null && other.Uid == null) || (this.Uid?.Equals(other.Uid) == true)) &&
+                ((this.CatalogObjectId == null && other.CatalogObjectId == null) || (this.CatalogObjectId?.Equals(other.CatalogObjectId) == true)) &&
+                ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
+                ((this.Type == null && other.Type == null) || (this.Type?.Equals(other.Type) == true)) &&
+                ((this.Percentage == null && other.Percentage == null) || (this.Percentage?.Equals(other.Percentage) == true)) &&
+                ((this.Metadata == null && other.Metadata == null) || (this.Metadata?.Equals(other.Metadata) == true)) &&
+                ((this.AppliedMoney == null && other.AppliedMoney == null) || (this.AppliedMoney?.Equals(other.AppliedMoney) == true)) &&
+                ((this.Scope == null && other.Scope == null) || (this.Scope?.Equals(other.Scope) == true)) &&
+                ((this.AutoApplied == null && other.AutoApplied == null) || (this.AutoApplied?.Equals(other.AutoApplied) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -687616842;
 
-            if (Uid != null)
+            if (this.Uid != null)
             {
-               hashCode += Uid.GetHashCode();
+               hashCode += this.Uid.GetHashCode();
             }
 
-            if (CatalogObjectId != null)
+            if (this.CatalogObjectId != null)
             {
-               hashCode += CatalogObjectId.GetHashCode();
+               hashCode += this.CatalogObjectId.GetHashCode();
             }
 
-            if (Name != null)
+            if (this.Name != null)
             {
-               hashCode += Name.GetHashCode();
+               hashCode += this.Name.GetHashCode();
             }
 
-            if (Type != null)
+            if (this.Type != null)
             {
-               hashCode += Type.GetHashCode();
+               hashCode += this.Type.GetHashCode();
             }
 
-            if (Percentage != null)
+            if (this.Percentage != null)
             {
-               hashCode += Percentage.GetHashCode();
+               hashCode += this.Percentage.GetHashCode();
             }
 
-            if (Metadata != null)
+            if (this.Metadata != null)
             {
-               hashCode += Metadata.GetHashCode();
+               hashCode += this.Metadata.GetHashCode();
             }
 
-            if (AppliedMoney != null)
+            if (this.AppliedMoney != null)
             {
-               hashCode += AppliedMoney.GetHashCode();
+               hashCode += this.AppliedMoney.GetHashCode();
             }
 
-            if (Scope != null)
+            if (this.Scope != null)
             {
-               hashCode += Scope.GetHashCode();
+               hashCode += this.Scope.GetHashCode();
             }
 
-            if (AutoApplied != null)
+            if (this.AutoApplied != null)
             {
-               hashCode += AutoApplied.GetHashCode();
+               hashCode += this.AutoApplied.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Uid = {(this.Uid == null ? "null" : this.Uid == string.Empty ? "" : this.Uid)}");
+            toStringOutput.Add($"this.CatalogObjectId = {(this.CatalogObjectId == null ? "null" : this.CatalogObjectId == string.Empty ? "" : this.CatalogObjectId)}");
+            toStringOutput.Add($"this.Name = {(this.Name == null ? "null" : this.Name == string.Empty ? "" : this.Name)}");
+            toStringOutput.Add($"this.Type = {(this.Type == null ? "null" : this.Type.ToString())}");
+            toStringOutput.Add($"this.Percentage = {(this.Percentage == null ? "null" : this.Percentage == string.Empty ? "" : this.Percentage)}");
+            toStringOutput.Add($"Metadata = {(this.Metadata == null ? "null" : this.Metadata.ToString())}");
+            toStringOutput.Add($"this.AppliedMoney = {(this.AppliedMoney == null ? "null" : this.AppliedMoney.ToString())}");
+            toStringOutput.Add($"this.Scope = {(this.Scope == null ? "null" : this.Scope.ToString())}");
+            toStringOutput.Add($"this.AutoApplied = {(this.AutoApplied == null ? "null" : this.AutoApplied.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .Uid(Uid)
-                .CatalogObjectId(CatalogObjectId)
-                .Name(Name)
-                .Type(Type)
-                .Percentage(Percentage)
-                .Metadata(Metadata)
-                .AppliedMoney(AppliedMoney)
-                .Scope(Scope)
-                .AutoApplied(AutoApplied);
+                .Uid(this.Uid)
+                .CatalogObjectId(this.CatalogObjectId)
+                .Name(this.Name)
+                .Type(this.Type)
+                .Percentage(this.Percentage)
+                .Metadata(this.Metadata)
+                .AppliedMoney(this.AppliedMoney)
+                .Scope(this.Scope)
+                .AutoApplied(this.AutoApplied);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string uid;
@@ -236,73 +266,121 @@ namespace Square.Models
             private string scope;
             private bool? autoApplied;
 
-
-
+             /// <summary>
+             /// Uid.
+             /// </summary>
+             /// <param name="uid"> uid. </param>
+             /// <returns> Builder. </returns>
             public Builder Uid(string uid)
             {
                 this.uid = uid;
                 return this;
             }
 
+             /// <summary>
+             /// CatalogObjectId.
+             /// </summary>
+             /// <param name="catalogObjectId"> catalogObjectId. </param>
+             /// <returns> Builder. </returns>
             public Builder CatalogObjectId(string catalogObjectId)
             {
                 this.catalogObjectId = catalogObjectId;
                 return this;
             }
 
+             /// <summary>
+             /// Name.
+             /// </summary>
+             /// <param name="name"> name. </param>
+             /// <returns> Builder. </returns>
             public Builder Name(string name)
             {
                 this.name = name;
                 return this;
             }
 
+             /// <summary>
+             /// Type.
+             /// </summary>
+             /// <param name="type"> type. </param>
+             /// <returns> Builder. </returns>
             public Builder Type(string type)
             {
                 this.type = type;
                 return this;
             }
 
+             /// <summary>
+             /// Percentage.
+             /// </summary>
+             /// <param name="percentage"> percentage. </param>
+             /// <returns> Builder. </returns>
             public Builder Percentage(string percentage)
             {
                 this.percentage = percentage;
                 return this;
             }
 
+             /// <summary>
+             /// Metadata.
+             /// </summary>
+             /// <param name="metadata"> metadata. </param>
+             /// <returns> Builder. </returns>
             public Builder Metadata(IDictionary<string, string> metadata)
             {
                 this.metadata = metadata;
                 return this;
             }
 
+             /// <summary>
+             /// AppliedMoney.
+             /// </summary>
+             /// <param name="appliedMoney"> appliedMoney. </param>
+             /// <returns> Builder. </returns>
             public Builder AppliedMoney(Models.Money appliedMoney)
             {
                 this.appliedMoney = appliedMoney;
                 return this;
             }
 
+             /// <summary>
+             /// Scope.
+             /// </summary>
+             /// <param name="scope"> scope. </param>
+             /// <returns> Builder. </returns>
             public Builder Scope(string scope)
             {
                 this.scope = scope;
                 return this;
             }
 
+             /// <summary>
+             /// AutoApplied.
+             /// </summary>
+             /// <param name="autoApplied"> autoApplied. </param>
+             /// <returns> Builder. </returns>
             public Builder AutoApplied(bool? autoApplied)
             {
                 this.autoApplied = autoApplied;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> OrderLineItemTax. </returns>
             public OrderLineItemTax Build()
             {
-                return new OrderLineItemTax(uid,
-                    catalogObjectId,
-                    name,
-                    type,
-                    percentage,
-                    metadata,
-                    appliedMoney,
-                    scope,
-                    autoApplied);
+                return new OrderLineItemTax(
+                    this.uid,
+                    this.catalogObjectId,
+                    this.name,
+                    this.type,
+                    this.percentage,
+                    this.metadata,
+                    this.appliedMoney,
+                    this.scope,
+                    this.autoApplied);
             }
         }
     }

@@ -1,30 +1,42 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square.Http.Client;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class ListCustomerGroupsResponse 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Http.Client;
+    using Square.Utilities;
+
+    /// <summary>
+    /// ListCustomerGroupsResponse.
+    /// </summary>
+    public class ListCustomerGroupsResponse
     {
-        public ListCustomerGroupsResponse(IList<Models.Error> errors = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ListCustomerGroupsResponse"/> class.
+        /// </summary>
+        /// <param name="errors">errors.</param>
+        /// <param name="groups">groups.</param>
+        /// <param name="cursor">cursor.</param>
+        public ListCustomerGroupsResponse(
+            IList<Models.Error> errors = null,
             IList<Models.CustomerGroup> groups = null,
             string cursor = null)
         {
-            Errors = errors;
-            Groups = groups;
-            Cursor = cursor;
+            this.Errors = errors;
+            this.Groups = groups;
+            this.Cursor = cursor;
         }
 
+        /// <summary>
+        /// Gets http context.
+        /// </summary>
         [JsonIgnore]
         public HttpContext Context { get; internal set; }
 
@@ -35,7 +47,7 @@ namespace Square.Models
         public IList<Models.Error> Errors { get; }
 
         /// <summary>
-        /// A list of customer groups belonging to the current merchant.
+        /// A list of customer groups belonging to the current seller.
         /// </summary>
         [JsonProperty("groups", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.CustomerGroup> Groups { get; }
@@ -44,11 +56,12 @@ namespace Square.Models
         /// A pagination cursor to retrieve the next set of results for your
         /// original query to the endpoint. This value is present only if the request
         /// succeeded and additional results are available.
-        /// See the [Pagination guide](https://developer.squareup.com/docs/working-with-apis/pagination) for more information.
+        /// For more information, see [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination).
         /// </summary>
         [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
         public string Cursor { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -58,13 +71,7 @@ namespace Square.Models
             return $"ListCustomerGroupsResponse : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Errors = {(Errors == null ? "null" : $"[{ string.Join(", ", Errors)} ]")}");
-            toStringOutput.Add($"Groups = {(Groups == null ? "null" : $"[{ string.Join(", ", Groups)} ]")}");
-            toStringOutput.Add($"Cursor = {(Cursor == null ? "null" : Cursor == string.Empty ? "" : Cursor)}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -78,79 +85,116 @@ namespace Square.Models
             }
 
             return obj is ListCustomerGroupsResponse other &&
-                ((Context == null && other.Context == null) || (Context?.Equals(other.Context) == true)) &&
-                ((Errors == null && other.Errors == null) || (Errors?.Equals(other.Errors) == true)) &&
-                ((Groups == null && other.Groups == null) || (Groups?.Equals(other.Groups) == true)) &&
-                ((Cursor == null && other.Cursor == null) || (Cursor?.Equals(other.Cursor) == true));
+                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
+                ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true)) &&
+                ((this.Groups == null && other.Groups == null) || (this.Groups?.Equals(other.Groups) == true)) &&
+                ((this.Cursor == null && other.Cursor == null) || (this.Cursor?.Equals(other.Cursor) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1420709444;
 
-            if (Context != null)
+            if (this.Context != null)
             {
-                hashCode += Context.GetHashCode();
+                hashCode += this.Context.GetHashCode();
             }
 
-            if (Errors != null)
+            if (this.Errors != null)
             {
-               hashCode += Errors.GetHashCode();
+               hashCode += this.Errors.GetHashCode();
             }
 
-            if (Groups != null)
+            if (this.Groups != null)
             {
-               hashCode += Groups.GetHashCode();
+               hashCode += this.Groups.GetHashCode();
             }
 
-            if (Cursor != null)
+            if (this.Cursor != null)
             {
-               hashCode += Cursor.GetHashCode();
+               hashCode += this.Cursor.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Errors = {(this.Errors == null ? "null" : $"[{string.Join(", ", this.Errors)} ]")}");
+            toStringOutput.Add($"this.Groups = {(this.Groups == null ? "null" : $"[{string.Join(", ", this.Groups)} ]")}");
+            toStringOutput.Add($"this.Cursor = {(this.Cursor == null ? "null" : this.Cursor == string.Empty ? "" : this.Cursor)}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .Errors(Errors)
-                .Groups(Groups)
-                .Cursor(Cursor);
+                .Errors(this.Errors)
+                .Groups(this.Groups)
+                .Cursor(this.Cursor);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private IList<Models.Error> errors;
             private IList<Models.CustomerGroup> groups;
             private string cursor;
 
-
-
+             /// <summary>
+             /// Errors.
+             /// </summary>
+             /// <param name="errors"> errors. </param>
+             /// <returns> Builder. </returns>
             public Builder Errors(IList<Models.Error> errors)
             {
                 this.errors = errors;
                 return this;
             }
 
+             /// <summary>
+             /// Groups.
+             /// </summary>
+             /// <param name="groups"> groups. </param>
+             /// <returns> Builder. </returns>
             public Builder Groups(IList<Models.CustomerGroup> groups)
             {
                 this.groups = groups;
                 return this;
             }
 
+             /// <summary>
+             /// Cursor.
+             /// </summary>
+             /// <param name="cursor"> cursor. </param>
+             /// <returns> Builder. </returns>
             public Builder Cursor(string cursor)
             {
                 this.cursor = cursor;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> ListCustomerGroupsResponse. </returns>
             public ListCustomerGroupsResponse Build()
             {
-                return new ListCustomerGroupsResponse(errors,
-                    groups,
-                    cursor);
+                return new ListCustomerGroupsResponse(
+                    this.errors,
+                    this.groups,
+                    this.cursor);
             }
         }
     }

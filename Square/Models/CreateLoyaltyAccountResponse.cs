@@ -1,28 +1,39 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square.Http.Client;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class CreateLoyaltyAccountResponse 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Http.Client;
+    using Square.Utilities;
+
+    /// <summary>
+    /// CreateLoyaltyAccountResponse.
+    /// </summary>
+    public class CreateLoyaltyAccountResponse
     {
-        public CreateLoyaltyAccountResponse(IList<Models.Error> errors = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CreateLoyaltyAccountResponse"/> class.
+        /// </summary>
+        /// <param name="errors">errors.</param>
+        /// <param name="loyaltyAccount">loyalty_account.</param>
+        public CreateLoyaltyAccountResponse(
+            IList<Models.Error> errors = null,
             Models.LoyaltyAccount loyaltyAccount = null)
         {
-            Errors = errors;
-            LoyaltyAccount = loyaltyAccount;
+            this.Errors = errors;
+            this.LoyaltyAccount = loyaltyAccount;
         }
 
+        /// <summary>
+        /// Gets http context.
+        /// </summary>
         [JsonIgnore]
         public HttpContext Context { get; internal set; }
 
@@ -33,12 +44,13 @@ namespace Square.Models
         public IList<Models.Error> Errors { get; }
 
         /// <summary>
-        /// Describes a loyalty account. For more information, see 
+        /// Describes a loyalty account. For more information, see
         /// [Loyalty Overview](https://developer.squareup.com/docs/loyalty/overview).
         /// </summary>
         [JsonProperty("loyalty_account", NullValueHandling = NullValueHandling.Ignore)]
         public Models.LoyaltyAccount LoyaltyAccount { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -48,12 +60,7 @@ namespace Square.Models
             return $"CreateLoyaltyAccountResponse : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Errors = {(Errors == null ? "null" : $"[{ string.Join(", ", Errors)} ]")}");
-            toStringOutput.Add($"LoyaltyAccount = {(LoyaltyAccount == null ? "null" : LoyaltyAccount.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -67,64 +74,95 @@ namespace Square.Models
             }
 
             return obj is CreateLoyaltyAccountResponse other &&
-                ((Context == null && other.Context == null) || (Context?.Equals(other.Context) == true)) &&
-                ((Errors == null && other.Errors == null) || (Errors?.Equals(other.Errors) == true)) &&
-                ((LoyaltyAccount == null && other.LoyaltyAccount == null) || (LoyaltyAccount?.Equals(other.LoyaltyAccount) == true));
+                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
+                ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true)) &&
+                ((this.LoyaltyAccount == null && other.LoyaltyAccount == null) || (this.LoyaltyAccount?.Equals(other.LoyaltyAccount) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -963021991;
 
-            if (Context != null)
+            if (this.Context != null)
             {
-                hashCode += Context.GetHashCode();
+                hashCode += this.Context.GetHashCode();
             }
 
-            if (Errors != null)
+            if (this.Errors != null)
             {
-               hashCode += Errors.GetHashCode();
+               hashCode += this.Errors.GetHashCode();
             }
 
-            if (LoyaltyAccount != null)
+            if (this.LoyaltyAccount != null)
             {
-               hashCode += LoyaltyAccount.GetHashCode();
+               hashCode += this.LoyaltyAccount.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Errors = {(this.Errors == null ? "null" : $"[{string.Join(", ", this.Errors)} ]")}");
+            toStringOutput.Add($"this.LoyaltyAccount = {(this.LoyaltyAccount == null ? "null" : this.LoyaltyAccount.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .Errors(Errors)
-                .LoyaltyAccount(LoyaltyAccount);
+                .Errors(this.Errors)
+                .LoyaltyAccount(this.LoyaltyAccount);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private IList<Models.Error> errors;
             private Models.LoyaltyAccount loyaltyAccount;
 
-
-
+             /// <summary>
+             /// Errors.
+             /// </summary>
+             /// <param name="errors"> errors. </param>
+             /// <returns> Builder. </returns>
             public Builder Errors(IList<Models.Error> errors)
             {
                 this.errors = errors;
                 return this;
             }
 
+             /// <summary>
+             /// LoyaltyAccount.
+             /// </summary>
+             /// <param name="loyaltyAccount"> loyaltyAccount. </param>
+             /// <returns> Builder. </returns>
             public Builder LoyaltyAccount(Models.LoyaltyAccount loyaltyAccount)
             {
                 this.loyaltyAccount = loyaltyAccount;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> CreateLoyaltyAccountResponse. </returns>
             public CreateLoyaltyAccountResponse Build()
             {
-                return new CreateLoyaltyAccountResponse(errors,
-                    loyaltyAccount);
+                return new CreateLoyaltyAccountResponse(
+                    this.errors,
+                    this.loyaltyAccount);
             }
         }
     }

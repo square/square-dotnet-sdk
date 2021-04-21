@@ -1,31 +1,42 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class SearchOrdersFilter 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// SearchOrdersFilter.
+    /// </summary>
+    public class SearchOrdersFilter
     {
-        public SearchOrdersFilter(Models.SearchOrdersStateFilter stateFilter = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SearchOrdersFilter"/> class.
+        /// </summary>
+        /// <param name="stateFilter">state_filter.</param>
+        /// <param name="dateTimeFilter">date_time_filter.</param>
+        /// <param name="fulfillmentFilter">fulfillment_filter.</param>
+        /// <param name="sourceFilter">source_filter.</param>
+        /// <param name="customerFilter">customer_filter.</param>
+        public SearchOrdersFilter(
+            Models.SearchOrdersStateFilter stateFilter = null,
             Models.SearchOrdersDateTimeFilter dateTimeFilter = null,
             Models.SearchOrdersFulfillmentFilter fulfillmentFilter = null,
             Models.SearchOrdersSourceFilter sourceFilter = null,
             Models.SearchOrdersCustomerFilter customerFilter = null)
         {
-            StateFilter = stateFilter;
-            DateTimeFilter = dateTimeFilter;
-            FulfillmentFilter = fulfillmentFilter;
-            SourceFilter = sourceFilter;
-            CustomerFilter = customerFilter;
+            this.StateFilter = stateFilter;
+            this.DateTimeFilter = dateTimeFilter;
+            this.FulfillmentFilter = fulfillmentFilter;
+            this.SourceFilter = sourceFilter;
+            this.CustomerFilter = customerFilter;
         }
 
         /// <summary>
@@ -42,7 +53,7 @@ namespace Square.Models
         /// For each time range, the start time and end time are inclusive. If the end time
         /// is absent, it defaults to the time of the first request for the cursor.
         /// __Important:__ If you use the DateTimeFilter in a SearchOrders query,
-        /// you must also set the `sort_field` in [OrdersSort](#type-searchorderordersort)
+        /// you must also set the `sort_field` in [OrdersSort]($m/SearchOrdersSort)
         /// to the same field you filter for. For example, if you set the `CLOSED_AT` field
         /// in DateTimeFilter, you must also set the `sort_field` in SearchOrdersSort to
         /// `CLOSED_AT`. Otherwise, SearchOrders will throw an error.
@@ -52,7 +63,7 @@ namespace Square.Models
         public Models.SearchOrdersDateTimeFilter DateTimeFilter { get; }
 
         /// <summary>
-        /// Filter based on [Order Fulfillment](#type-orderfulfillment) information.
+        /// Filter based on [Order Fulfillment]($m/OrderFulfillment) information.
         /// </summary>
         [JsonProperty("fulfillment_filter", NullValueHandling = NullValueHandling.Ignore)]
         public Models.SearchOrdersFulfillmentFilter FulfillmentFilter { get; }
@@ -66,11 +77,12 @@ namespace Square.Models
         /// <summary>
         /// Filter based on Order `customer_id` and any Tender `customer_id`
         /// associated with the Order. Does not filter based on the
-        /// [FulfillmentRecipient](#type-orderfulfillmentrecipient) `customer_id`.
+        /// [FulfillmentRecipient]($m/OrderFulfillmentRecipient) `customer_id`.
         /// </summary>
         [JsonProperty("customer_filter", NullValueHandling = NullValueHandling.Ignore)]
         public Models.SearchOrdersCustomerFilter CustomerFilter { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -80,15 +92,7 @@ namespace Square.Models
             return $"SearchOrdersFilter : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"StateFilter = {(StateFilter == null ? "null" : StateFilter.ToString())}");
-            toStringOutput.Add($"DateTimeFilter = {(DateTimeFilter == null ? "null" : DateTimeFilter.ToString())}");
-            toStringOutput.Add($"FulfillmentFilter = {(FulfillmentFilter == null ? "null" : FulfillmentFilter.ToString())}");
-            toStringOutput.Add($"SourceFilter = {(SourceFilter == null ? "null" : SourceFilter.ToString())}");
-            toStringOutput.Add($"CustomerFilter = {(CustomerFilter == null ? "null" : CustomerFilter.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -102,56 +106,77 @@ namespace Square.Models
             }
 
             return obj is SearchOrdersFilter other &&
-                ((StateFilter == null && other.StateFilter == null) || (StateFilter?.Equals(other.StateFilter) == true)) &&
-                ((DateTimeFilter == null && other.DateTimeFilter == null) || (DateTimeFilter?.Equals(other.DateTimeFilter) == true)) &&
-                ((FulfillmentFilter == null && other.FulfillmentFilter == null) || (FulfillmentFilter?.Equals(other.FulfillmentFilter) == true)) &&
-                ((SourceFilter == null && other.SourceFilter == null) || (SourceFilter?.Equals(other.SourceFilter) == true)) &&
-                ((CustomerFilter == null && other.CustomerFilter == null) || (CustomerFilter?.Equals(other.CustomerFilter) == true));
+                ((this.StateFilter == null && other.StateFilter == null) || (this.StateFilter?.Equals(other.StateFilter) == true)) &&
+                ((this.DateTimeFilter == null && other.DateTimeFilter == null) || (this.DateTimeFilter?.Equals(other.DateTimeFilter) == true)) &&
+                ((this.FulfillmentFilter == null && other.FulfillmentFilter == null) || (this.FulfillmentFilter?.Equals(other.FulfillmentFilter) == true)) &&
+                ((this.SourceFilter == null && other.SourceFilter == null) || (this.SourceFilter?.Equals(other.SourceFilter) == true)) &&
+                ((this.CustomerFilter == null && other.CustomerFilter == null) || (this.CustomerFilter?.Equals(other.CustomerFilter) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -566134060;
 
-            if (StateFilter != null)
+            if (this.StateFilter != null)
             {
-               hashCode += StateFilter.GetHashCode();
+               hashCode += this.StateFilter.GetHashCode();
             }
 
-            if (DateTimeFilter != null)
+            if (this.DateTimeFilter != null)
             {
-               hashCode += DateTimeFilter.GetHashCode();
+               hashCode += this.DateTimeFilter.GetHashCode();
             }
 
-            if (FulfillmentFilter != null)
+            if (this.FulfillmentFilter != null)
             {
-               hashCode += FulfillmentFilter.GetHashCode();
+               hashCode += this.FulfillmentFilter.GetHashCode();
             }
 
-            if (SourceFilter != null)
+            if (this.SourceFilter != null)
             {
-               hashCode += SourceFilter.GetHashCode();
+               hashCode += this.SourceFilter.GetHashCode();
             }
 
-            if (CustomerFilter != null)
+            if (this.CustomerFilter != null)
             {
-               hashCode += CustomerFilter.GetHashCode();
+               hashCode += this.CustomerFilter.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.StateFilter = {(this.StateFilter == null ? "null" : this.StateFilter.ToString())}");
+            toStringOutput.Add($"this.DateTimeFilter = {(this.DateTimeFilter == null ? "null" : this.DateTimeFilter.ToString())}");
+            toStringOutput.Add($"this.FulfillmentFilter = {(this.FulfillmentFilter == null ? "null" : this.FulfillmentFilter.ToString())}");
+            toStringOutput.Add($"this.SourceFilter = {(this.SourceFilter == null ? "null" : this.SourceFilter.ToString())}");
+            toStringOutput.Add($"this.CustomerFilter = {(this.CustomerFilter == null ? "null" : this.CustomerFilter.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .StateFilter(StateFilter)
-                .DateTimeFilter(DateTimeFilter)
-                .FulfillmentFilter(FulfillmentFilter)
-                .SourceFilter(SourceFilter)
-                .CustomerFilter(CustomerFilter);
+                .StateFilter(this.StateFilter)
+                .DateTimeFilter(this.DateTimeFilter)
+                .FulfillmentFilter(this.FulfillmentFilter)
+                .SourceFilter(this.SourceFilter)
+                .CustomerFilter(this.CustomerFilter);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private Models.SearchOrdersStateFilter stateFilter;
@@ -160,45 +185,73 @@ namespace Square.Models
             private Models.SearchOrdersSourceFilter sourceFilter;
             private Models.SearchOrdersCustomerFilter customerFilter;
 
-
-
+             /// <summary>
+             /// StateFilter.
+             /// </summary>
+             /// <param name="stateFilter"> stateFilter. </param>
+             /// <returns> Builder. </returns>
             public Builder StateFilter(Models.SearchOrdersStateFilter stateFilter)
             {
                 this.stateFilter = stateFilter;
                 return this;
             }
 
+             /// <summary>
+             /// DateTimeFilter.
+             /// </summary>
+             /// <param name="dateTimeFilter"> dateTimeFilter. </param>
+             /// <returns> Builder. </returns>
             public Builder DateTimeFilter(Models.SearchOrdersDateTimeFilter dateTimeFilter)
             {
                 this.dateTimeFilter = dateTimeFilter;
                 return this;
             }
 
+             /// <summary>
+             /// FulfillmentFilter.
+             /// </summary>
+             /// <param name="fulfillmentFilter"> fulfillmentFilter. </param>
+             /// <returns> Builder. </returns>
             public Builder FulfillmentFilter(Models.SearchOrdersFulfillmentFilter fulfillmentFilter)
             {
                 this.fulfillmentFilter = fulfillmentFilter;
                 return this;
             }
 
+             /// <summary>
+             /// SourceFilter.
+             /// </summary>
+             /// <param name="sourceFilter"> sourceFilter. </param>
+             /// <returns> Builder. </returns>
             public Builder SourceFilter(Models.SearchOrdersSourceFilter sourceFilter)
             {
                 this.sourceFilter = sourceFilter;
                 return this;
             }
 
+             /// <summary>
+             /// CustomerFilter.
+             /// </summary>
+             /// <param name="customerFilter"> customerFilter. </param>
+             /// <returns> Builder. </returns>
             public Builder CustomerFilter(Models.SearchOrdersCustomerFilter customerFilter)
             {
                 this.customerFilter = customerFilter;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> SearchOrdersFilter. </returns>
             public SearchOrdersFilter Build()
             {
-                return new SearchOrdersFilter(stateFilter,
-                    dateTimeFilter,
-                    fulfillmentFilter,
-                    sourceFilter,
-                    customerFilter);
+                return new SearchOrdersFilter(
+                    this.stateFilter,
+                    this.dateTimeFilter,
+                    this.fulfillmentFilter,
+                    this.sourceFilter,
+                    this.customerFilter);
             }
         }
     }

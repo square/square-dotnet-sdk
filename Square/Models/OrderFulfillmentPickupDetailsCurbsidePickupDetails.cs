@@ -1,25 +1,33 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class OrderFulfillmentPickupDetailsCurbsidePickupDetails 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// OrderFulfillmentPickupDetailsCurbsidePickupDetails.
+    /// </summary>
+    public class OrderFulfillmentPickupDetailsCurbsidePickupDetails
     {
-        public OrderFulfillmentPickupDetailsCurbsidePickupDetails(string curbsideDetails = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="OrderFulfillmentPickupDetailsCurbsidePickupDetails"/> class.
+        /// </summary>
+        /// <param name="curbsideDetails">curbside_details.</param>
+        /// <param name="buyerArrivedAt">buyer_arrived_at.</param>
+        public OrderFulfillmentPickupDetailsCurbsidePickupDetails(
+            string curbsideDetails = null,
             string buyerArrivedAt = null)
         {
-            CurbsideDetails = curbsideDetails;
-            BuyerArrivedAt = buyerArrivedAt;
+            this.CurbsideDetails = curbsideDetails;
+            this.BuyerArrivedAt = buyerArrivedAt;
         }
 
         /// <summary>
@@ -29,12 +37,14 @@ namespace Square.Models
         public string CurbsideDetails { get; }
 
         /// <summary>
-        /// The [timestamp](#workingwithdates) in RFC 3339 timestamp format, e.g., "2016-09-04T23:59:33.123Z",
-        /// indicating when the buyer arrived and is waiting for pickup.
+        /// The [timestamp](https://developer.squareup.com/docs/build-basics/working-with-dates)
+        /// in RFC 3339 timestamp format, e.g., "2016-09-04T23:59:33.123Z", indicating when the buyer
+        /// arrived and is waiting for pickup.
         /// </summary>
         [JsonProperty("buyer_arrived_at", NullValueHandling = NullValueHandling.Ignore)]
         public string BuyerArrivedAt { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -44,12 +54,7 @@ namespace Square.Models
             return $"OrderFulfillmentPickupDetailsCurbsidePickupDetails : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"CurbsideDetails = {(CurbsideDetails == null ? "null" : CurbsideDetails == string.Empty ? "" : CurbsideDetails)}");
-            toStringOutput.Add($"BuyerArrivedAt = {(BuyerArrivedAt == null ? "null" : BuyerArrivedAt == string.Empty ? "" : BuyerArrivedAt)}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -63,58 +68,89 @@ namespace Square.Models
             }
 
             return obj is OrderFulfillmentPickupDetailsCurbsidePickupDetails other &&
-                ((CurbsideDetails == null && other.CurbsideDetails == null) || (CurbsideDetails?.Equals(other.CurbsideDetails) == true)) &&
-                ((BuyerArrivedAt == null && other.BuyerArrivedAt == null) || (BuyerArrivedAt?.Equals(other.BuyerArrivedAt) == true));
+                ((this.CurbsideDetails == null && other.CurbsideDetails == null) || (this.CurbsideDetails?.Equals(other.CurbsideDetails) == true)) &&
+                ((this.BuyerArrivedAt == null && other.BuyerArrivedAt == null) || (this.BuyerArrivedAt?.Equals(other.BuyerArrivedAt) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -126196706;
 
-            if (CurbsideDetails != null)
+            if (this.CurbsideDetails != null)
             {
-               hashCode += CurbsideDetails.GetHashCode();
+               hashCode += this.CurbsideDetails.GetHashCode();
             }
 
-            if (BuyerArrivedAt != null)
+            if (this.BuyerArrivedAt != null)
             {
-               hashCode += BuyerArrivedAt.GetHashCode();
+               hashCode += this.BuyerArrivedAt.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.CurbsideDetails = {(this.CurbsideDetails == null ? "null" : this.CurbsideDetails == string.Empty ? "" : this.CurbsideDetails)}");
+            toStringOutput.Add($"this.BuyerArrivedAt = {(this.BuyerArrivedAt == null ? "null" : this.BuyerArrivedAt == string.Empty ? "" : this.BuyerArrivedAt)}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .CurbsideDetails(CurbsideDetails)
-                .BuyerArrivedAt(BuyerArrivedAt);
+                .CurbsideDetails(this.CurbsideDetails)
+                .BuyerArrivedAt(this.BuyerArrivedAt);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string curbsideDetails;
             private string buyerArrivedAt;
 
-
-
+             /// <summary>
+             /// CurbsideDetails.
+             /// </summary>
+             /// <param name="curbsideDetails"> curbsideDetails. </param>
+             /// <returns> Builder. </returns>
             public Builder CurbsideDetails(string curbsideDetails)
             {
                 this.curbsideDetails = curbsideDetails;
                 return this;
             }
 
+             /// <summary>
+             /// BuyerArrivedAt.
+             /// </summary>
+             /// <param name="buyerArrivedAt"> buyerArrivedAt. </param>
+             /// <returns> Builder. </returns>
             public Builder BuyerArrivedAt(string buyerArrivedAt)
             {
                 this.buyerArrivedAt = buyerArrivedAt;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> OrderFulfillmentPickupDetailsCurbsidePickupDetails. </returns>
             public OrderFulfillmentPickupDetailsCurbsidePickupDetails Build()
             {
-                return new OrderFulfillmentPickupDetailsCurbsidePickupDetails(curbsideDetails,
-                    buyerArrivedAt);
+                return new OrderFulfillmentPickupDetailsCurbsidePickupDetails(
+                    this.curbsideDetails,
+                    this.buyerArrivedAt);
             }
         }
     }

@@ -1,33 +1,45 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class V1ListPaymentsRequest 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// V1ListPaymentsRequest.
+    /// </summary>
+    public class V1ListPaymentsRequest
     {
-        public V1ListPaymentsRequest(string order = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="V1ListPaymentsRequest"/> class.
+        /// </summary>
+        /// <param name="order">order.</param>
+        /// <param name="beginTime">begin_time.</param>
+        /// <param name="endTime">end_time.</param>
+        /// <param name="limit">limit.</param>
+        /// <param name="batchToken">batch_token.</param>
+        /// <param name="includePartial">include_partial.</param>
+        public V1ListPaymentsRequest(
+            string order = null,
             string beginTime = null,
             string endTime = null,
             int? limit = null,
             string batchToken = null,
             bool? includePartial = null)
         {
-            Order = order;
-            BeginTime = beginTime;
-            EndTime = endTime;
-            Limit = limit;
-            BatchToken = batchToken;
-            IncludePartial = includePartial;
+            this.Order = order;
+            this.BeginTime = beginTime;
+            this.EndTime = endTime;
+            this.Limit = limit;
+            this.BatchToken = batchToken;
+            this.IncludePartial = includePartial;
         }
 
         /// <summary>
@@ -67,6 +79,7 @@ namespace Square.Models
         [JsonProperty("include_partial", NullValueHandling = NullValueHandling.Ignore)]
         public bool? IncludePartial { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -76,16 +89,7 @@ namespace Square.Models
             return $"V1ListPaymentsRequest : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Order = {(Order == null ? "null" : Order.ToString())}");
-            toStringOutput.Add($"BeginTime = {(BeginTime == null ? "null" : BeginTime == string.Empty ? "" : BeginTime)}");
-            toStringOutput.Add($"EndTime = {(EndTime == null ? "null" : EndTime == string.Empty ? "" : EndTime)}");
-            toStringOutput.Add($"Limit = {(Limit == null ? "null" : Limit.ToString())}");
-            toStringOutput.Add($"BatchToken = {(BatchToken == null ? "null" : BatchToken == string.Empty ? "" : BatchToken)}");
-            toStringOutput.Add($"IncludePartial = {(IncludePartial == null ? "null" : IncludePartial.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -99,63 +103,85 @@ namespace Square.Models
             }
 
             return obj is V1ListPaymentsRequest other &&
-                ((Order == null && other.Order == null) || (Order?.Equals(other.Order) == true)) &&
-                ((BeginTime == null && other.BeginTime == null) || (BeginTime?.Equals(other.BeginTime) == true)) &&
-                ((EndTime == null && other.EndTime == null) || (EndTime?.Equals(other.EndTime) == true)) &&
-                ((Limit == null && other.Limit == null) || (Limit?.Equals(other.Limit) == true)) &&
-                ((BatchToken == null && other.BatchToken == null) || (BatchToken?.Equals(other.BatchToken) == true)) &&
-                ((IncludePartial == null && other.IncludePartial == null) || (IncludePartial?.Equals(other.IncludePartial) == true));
+                ((this.Order == null && other.Order == null) || (this.Order?.Equals(other.Order) == true)) &&
+                ((this.BeginTime == null && other.BeginTime == null) || (this.BeginTime?.Equals(other.BeginTime) == true)) &&
+                ((this.EndTime == null && other.EndTime == null) || (this.EndTime?.Equals(other.EndTime) == true)) &&
+                ((this.Limit == null && other.Limit == null) || (this.Limit?.Equals(other.Limit) == true)) &&
+                ((this.BatchToken == null && other.BatchToken == null) || (this.BatchToken?.Equals(other.BatchToken) == true)) &&
+                ((this.IncludePartial == null && other.IncludePartial == null) || (this.IncludePartial?.Equals(other.IncludePartial) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 358877715;
 
-            if (Order != null)
+            if (this.Order != null)
             {
-               hashCode += Order.GetHashCode();
+               hashCode += this.Order.GetHashCode();
             }
 
-            if (BeginTime != null)
+            if (this.BeginTime != null)
             {
-               hashCode += BeginTime.GetHashCode();
+               hashCode += this.BeginTime.GetHashCode();
             }
 
-            if (EndTime != null)
+            if (this.EndTime != null)
             {
-               hashCode += EndTime.GetHashCode();
+               hashCode += this.EndTime.GetHashCode();
             }
 
-            if (Limit != null)
+            if (this.Limit != null)
             {
-               hashCode += Limit.GetHashCode();
+               hashCode += this.Limit.GetHashCode();
             }
 
-            if (BatchToken != null)
+            if (this.BatchToken != null)
             {
-               hashCode += BatchToken.GetHashCode();
+               hashCode += this.BatchToken.GetHashCode();
             }
 
-            if (IncludePartial != null)
+            if (this.IncludePartial != null)
             {
-               hashCode += IncludePartial.GetHashCode();
+               hashCode += this.IncludePartial.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Order = {(this.Order == null ? "null" : this.Order.ToString())}");
+            toStringOutput.Add($"this.BeginTime = {(this.BeginTime == null ? "null" : this.BeginTime == string.Empty ? "" : this.BeginTime)}");
+            toStringOutput.Add($"this.EndTime = {(this.EndTime == null ? "null" : this.EndTime == string.Empty ? "" : this.EndTime)}");
+            toStringOutput.Add($"this.Limit = {(this.Limit == null ? "null" : this.Limit.ToString())}");
+            toStringOutput.Add($"this.BatchToken = {(this.BatchToken == null ? "null" : this.BatchToken == string.Empty ? "" : this.BatchToken)}");
+            toStringOutput.Add($"this.IncludePartial = {(this.IncludePartial == null ? "null" : this.IncludePartial.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .Order(Order)
-                .BeginTime(BeginTime)
-                .EndTime(EndTime)
-                .Limit(Limit)
-                .BatchToken(BatchToken)
-                .IncludePartial(IncludePartial);
+                .Order(this.Order)
+                .BeginTime(this.BeginTime)
+                .EndTime(this.EndTime)
+                .Limit(this.Limit)
+                .BatchToken(this.BatchToken)
+                .IncludePartial(this.IncludePartial);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string order;
@@ -165,52 +191,85 @@ namespace Square.Models
             private string batchToken;
             private bool? includePartial;
 
-
-
+             /// <summary>
+             /// Order.
+             /// </summary>
+             /// <param name="order"> order. </param>
+             /// <returns> Builder. </returns>
             public Builder Order(string order)
             {
                 this.order = order;
                 return this;
             }
 
+             /// <summary>
+             /// BeginTime.
+             /// </summary>
+             /// <param name="beginTime"> beginTime. </param>
+             /// <returns> Builder. </returns>
             public Builder BeginTime(string beginTime)
             {
                 this.beginTime = beginTime;
                 return this;
             }
 
+             /// <summary>
+             /// EndTime.
+             /// </summary>
+             /// <param name="endTime"> endTime. </param>
+             /// <returns> Builder. </returns>
             public Builder EndTime(string endTime)
             {
                 this.endTime = endTime;
                 return this;
             }
 
+             /// <summary>
+             /// Limit.
+             /// </summary>
+             /// <param name="limit"> limit. </param>
+             /// <returns> Builder. </returns>
             public Builder Limit(int? limit)
             {
                 this.limit = limit;
                 return this;
             }
 
+             /// <summary>
+             /// BatchToken.
+             /// </summary>
+             /// <param name="batchToken"> batchToken. </param>
+             /// <returns> Builder. </returns>
             public Builder BatchToken(string batchToken)
             {
                 this.batchToken = batchToken;
                 return this;
             }
 
+             /// <summary>
+             /// IncludePartial.
+             /// </summary>
+             /// <param name="includePartial"> includePartial. </param>
+             /// <returns> Builder. </returns>
             public Builder IncludePartial(bool? includePartial)
             {
                 this.includePartial = includePartial;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> V1ListPaymentsRequest. </returns>
             public V1ListPaymentsRequest Build()
             {
-                return new V1ListPaymentsRequest(order,
-                    beginTime,
-                    endTime,
-                    limit,
-                    batchToken,
-                    includePartial);
+                return new V1ListPaymentsRequest(
+                    this.order,
+                    this.beginTime,
+                    this.endTime,
+                    this.limit,
+                    this.batchToken,
+                    this.includePartial);
             }
         }
     }

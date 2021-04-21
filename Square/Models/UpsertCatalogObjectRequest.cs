@@ -1,25 +1,33 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class UpsertCatalogObjectRequest 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// UpsertCatalogObjectRequest.
+    /// </summary>
+    public class UpsertCatalogObjectRequest
     {
-        public UpsertCatalogObjectRequest(string idempotencyKey,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UpsertCatalogObjectRequest"/> class.
+        /// </summary>
+        /// <param name="idempotencyKey">idempotency_key.</param>
+        /// <param name="mObject">object.</param>
+        public UpsertCatalogObjectRequest(
+            string idempotencyKey,
             Models.CatalogObject mObject)
         {
-            IdempotencyKey = idempotencyKey;
-            MObject = mObject;
+            this.IdempotencyKey = idempotencyKey;
+            this.MObject = mObject;
         }
 
         /// <summary>
@@ -60,6 +68,7 @@ namespace Square.Models
         [JsonProperty("object")]
         public Models.CatalogObject MObject { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -69,12 +78,7 @@ namespace Square.Models
             return $"UpsertCatalogObjectRequest : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"IdempotencyKey = {(IdempotencyKey == null ? "null" : IdempotencyKey == string.Empty ? "" : IdempotencyKey)}");
-            toStringOutput.Add($"MObject = {(MObject == null ? "null" : MObject.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -88,62 +92,97 @@ namespace Square.Models
             }
 
             return obj is UpsertCatalogObjectRequest other &&
-                ((IdempotencyKey == null && other.IdempotencyKey == null) || (IdempotencyKey?.Equals(other.IdempotencyKey) == true)) &&
-                ((MObject == null && other.MObject == null) || (MObject?.Equals(other.MObject) == true));
+                ((this.IdempotencyKey == null && other.IdempotencyKey == null) || (this.IdempotencyKey?.Equals(other.IdempotencyKey) == true)) &&
+                ((this.MObject == null && other.MObject == null) || (this.MObject?.Equals(other.MObject) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -153717407;
 
-            if (IdempotencyKey != null)
+            if (this.IdempotencyKey != null)
             {
-               hashCode += IdempotencyKey.GetHashCode();
+               hashCode += this.IdempotencyKey.GetHashCode();
             }
 
-            if (MObject != null)
+            if (this.MObject != null)
             {
-               hashCode += MObject.GetHashCode();
+               hashCode += this.MObject.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.IdempotencyKey = {(this.IdempotencyKey == null ? "null" : this.IdempotencyKey == string.Empty ? "" : this.IdempotencyKey)}");
+            toStringOutput.Add($"this.MObject = {(this.MObject == null ? "null" : this.MObject.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
-            var builder = new Builder(IdempotencyKey,
-                MObject);
+            var builder = new Builder(
+                this.IdempotencyKey,
+                this.MObject);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string idempotencyKey;
             private Models.CatalogObject mObject;
 
-            public Builder(string idempotencyKey,
+            public Builder(
+                string idempotencyKey,
                 Models.CatalogObject mObject)
             {
                 this.idempotencyKey = idempotencyKey;
                 this.mObject = mObject;
             }
 
+             /// <summary>
+             /// IdempotencyKey.
+             /// </summary>
+             /// <param name="idempotencyKey"> idempotencyKey. </param>
+             /// <returns> Builder. </returns>
             public Builder IdempotencyKey(string idempotencyKey)
             {
                 this.idempotencyKey = idempotencyKey;
                 return this;
             }
 
+             /// <summary>
+             /// MObject.
+             /// </summary>
+             /// <param name="mObject"> mObject. </param>
+             /// <returns> Builder. </returns>
             public Builder MObject(Models.CatalogObject mObject)
             {
                 this.mObject = mObject;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> UpsertCatalogObjectRequest. </returns>
             public UpsertCatalogObjectRequest Build()
             {
-                return new UpsertCatalogObjectRequest(idempotencyKey,
-                    mObject);
+                return new UpsertCatalogObjectRequest(
+                    this.idempotencyKey,
+                    this.mObject);
             }
         }
     }

@@ -1,21 +1,37 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class Transaction 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// Transaction.
+    /// </summary>
+    public class Transaction
     {
-        public Transaction(string id = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Transaction"/> class.
+        /// </summary>
+        /// <param name="id">id.</param>
+        /// <param name="locationId">location_id.</param>
+        /// <param name="createdAt">created_at.</param>
+        /// <param name="tenders">tenders.</param>
+        /// <param name="refunds">refunds.</param>
+        /// <param name="referenceId">reference_id.</param>
+        /// <param name="product">product.</param>
+        /// <param name="clientId">client_id.</param>
+        /// <param name="shippingAddress">shipping_address.</param>
+        /// <param name="orderId">order_id.</param>
+        public Transaction(
+            string id = null,
             string locationId = null,
             string createdAt = null,
             IList<Models.Tender> tenders = null,
@@ -26,16 +42,16 @@ namespace Square.Models
             Models.Address shippingAddress = null,
             string orderId = null)
         {
-            Id = id;
-            LocationId = locationId;
-            CreatedAt = createdAt;
-            Tenders = tenders;
-            Refunds = refunds;
-            ReferenceId = referenceId;
-            Product = product;
-            ClientId = clientId;
-            ShippingAddress = shippingAddress;
-            OrderId = orderId;
+            this.Id = id;
+            this.LocationId = locationId;
+            this.CreatedAt = createdAt;
+            this.Tenders = tenders;
+            this.Refunds = refunds;
+            this.ReferenceId = referenceId;
+            this.Product = product;
+            this.ClientId = clientId;
+            this.ShippingAddress = shippingAddress;
+            this.OrderId = orderId;
         }
 
         /// <summary>
@@ -69,7 +85,7 @@ namespace Square.Models
         public IList<Models.Refund> Refunds { get; }
 
         /// <summary>
-        /// If the transaction was created with the [Charge](#endpoint-charge)
+        /// If the transaction was created with the [Charge]($e/Transactions/Charge)
         /// endpoint, this value is the same as the value provided for the `reference_id`
         /// parameter in the request to that endpoint. Otherwise, it is not set.
         /// </summary>
@@ -107,6 +123,7 @@ namespace Square.Models
         [JsonProperty("order_id", NullValueHandling = NullValueHandling.Ignore)]
         public string OrderId { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -116,20 +133,7 @@ namespace Square.Models
             return $"Transaction : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Id = {(Id == null ? "null" : Id == string.Empty ? "" : Id)}");
-            toStringOutput.Add($"LocationId = {(LocationId == null ? "null" : LocationId == string.Empty ? "" : LocationId)}");
-            toStringOutput.Add($"CreatedAt = {(CreatedAt == null ? "null" : CreatedAt == string.Empty ? "" : CreatedAt)}");
-            toStringOutput.Add($"Tenders = {(Tenders == null ? "null" : $"[{ string.Join(", ", Tenders)} ]")}");
-            toStringOutput.Add($"Refunds = {(Refunds == null ? "null" : $"[{ string.Join(", ", Refunds)} ]")}");
-            toStringOutput.Add($"ReferenceId = {(ReferenceId == null ? "null" : ReferenceId == string.Empty ? "" : ReferenceId)}");
-            toStringOutput.Add($"Product = {(Product == null ? "null" : Product.ToString())}");
-            toStringOutput.Add($"ClientId = {(ClientId == null ? "null" : ClientId == string.Empty ? "" : ClientId)}");
-            toStringOutput.Add($"ShippingAddress = {(ShippingAddress == null ? "null" : ShippingAddress.ToString())}");
-            toStringOutput.Add($"OrderId = {(OrderId == null ? "null" : OrderId == string.Empty ? "" : OrderId)}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -143,91 +147,117 @@ namespace Square.Models
             }
 
             return obj is Transaction other &&
-                ((Id == null && other.Id == null) || (Id?.Equals(other.Id) == true)) &&
-                ((LocationId == null && other.LocationId == null) || (LocationId?.Equals(other.LocationId) == true)) &&
-                ((CreatedAt == null && other.CreatedAt == null) || (CreatedAt?.Equals(other.CreatedAt) == true)) &&
-                ((Tenders == null && other.Tenders == null) || (Tenders?.Equals(other.Tenders) == true)) &&
-                ((Refunds == null && other.Refunds == null) || (Refunds?.Equals(other.Refunds) == true)) &&
-                ((ReferenceId == null && other.ReferenceId == null) || (ReferenceId?.Equals(other.ReferenceId) == true)) &&
-                ((Product == null && other.Product == null) || (Product?.Equals(other.Product) == true)) &&
-                ((ClientId == null && other.ClientId == null) || (ClientId?.Equals(other.ClientId) == true)) &&
-                ((ShippingAddress == null && other.ShippingAddress == null) || (ShippingAddress?.Equals(other.ShippingAddress) == true)) &&
-                ((OrderId == null && other.OrderId == null) || (OrderId?.Equals(other.OrderId) == true));
+                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
+                ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true)) &&
+                ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true)) &&
+                ((this.Tenders == null && other.Tenders == null) || (this.Tenders?.Equals(other.Tenders) == true)) &&
+                ((this.Refunds == null && other.Refunds == null) || (this.Refunds?.Equals(other.Refunds) == true)) &&
+                ((this.ReferenceId == null && other.ReferenceId == null) || (this.ReferenceId?.Equals(other.ReferenceId) == true)) &&
+                ((this.Product == null && other.Product == null) || (this.Product?.Equals(other.Product) == true)) &&
+                ((this.ClientId == null && other.ClientId == null) || (this.ClientId?.Equals(other.ClientId) == true)) &&
+                ((this.ShippingAddress == null && other.ShippingAddress == null) || (this.ShippingAddress?.Equals(other.ShippingAddress) == true)) &&
+                ((this.OrderId == null && other.OrderId == null) || (this.OrderId?.Equals(other.OrderId) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 226628405;
 
-            if (Id != null)
+            if (this.Id != null)
             {
-               hashCode += Id.GetHashCode();
+               hashCode += this.Id.GetHashCode();
             }
 
-            if (LocationId != null)
+            if (this.LocationId != null)
             {
-               hashCode += LocationId.GetHashCode();
+               hashCode += this.LocationId.GetHashCode();
             }
 
-            if (CreatedAt != null)
+            if (this.CreatedAt != null)
             {
-               hashCode += CreatedAt.GetHashCode();
+               hashCode += this.CreatedAt.GetHashCode();
             }
 
-            if (Tenders != null)
+            if (this.Tenders != null)
             {
-               hashCode += Tenders.GetHashCode();
+               hashCode += this.Tenders.GetHashCode();
             }
 
-            if (Refunds != null)
+            if (this.Refunds != null)
             {
-               hashCode += Refunds.GetHashCode();
+               hashCode += this.Refunds.GetHashCode();
             }
 
-            if (ReferenceId != null)
+            if (this.ReferenceId != null)
             {
-               hashCode += ReferenceId.GetHashCode();
+               hashCode += this.ReferenceId.GetHashCode();
             }
 
-            if (Product != null)
+            if (this.Product != null)
             {
-               hashCode += Product.GetHashCode();
+               hashCode += this.Product.GetHashCode();
             }
 
-            if (ClientId != null)
+            if (this.ClientId != null)
             {
-               hashCode += ClientId.GetHashCode();
+               hashCode += this.ClientId.GetHashCode();
             }
 
-            if (ShippingAddress != null)
+            if (this.ShippingAddress != null)
             {
-               hashCode += ShippingAddress.GetHashCode();
+               hashCode += this.ShippingAddress.GetHashCode();
             }
 
-            if (OrderId != null)
+            if (this.OrderId != null)
             {
-               hashCode += OrderId.GetHashCode();
+               hashCode += this.OrderId.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id == string.Empty ? "" : this.Id)}");
+            toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId == string.Empty ? "" : this.LocationId)}");
+            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt == string.Empty ? "" : this.CreatedAt)}");
+            toStringOutput.Add($"this.Tenders = {(this.Tenders == null ? "null" : $"[{string.Join(", ", this.Tenders)} ]")}");
+            toStringOutput.Add($"this.Refunds = {(this.Refunds == null ? "null" : $"[{string.Join(", ", this.Refunds)} ]")}");
+            toStringOutput.Add($"this.ReferenceId = {(this.ReferenceId == null ? "null" : this.ReferenceId == string.Empty ? "" : this.ReferenceId)}");
+            toStringOutput.Add($"this.Product = {(this.Product == null ? "null" : this.Product.ToString())}");
+            toStringOutput.Add($"this.ClientId = {(this.ClientId == null ? "null" : this.ClientId == string.Empty ? "" : this.ClientId)}");
+            toStringOutput.Add($"this.ShippingAddress = {(this.ShippingAddress == null ? "null" : this.ShippingAddress.ToString())}");
+            toStringOutput.Add($"this.OrderId = {(this.OrderId == null ? "null" : this.OrderId == string.Empty ? "" : this.OrderId)}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .Id(Id)
-                .LocationId(LocationId)
-                .CreatedAt(CreatedAt)
-                .Tenders(Tenders)
-                .Refunds(Refunds)
-                .ReferenceId(ReferenceId)
-                .Product(Product)
-                .ClientId(ClientId)
-                .ShippingAddress(ShippingAddress)
-                .OrderId(OrderId);
+                .Id(this.Id)
+                .LocationId(this.LocationId)
+                .CreatedAt(this.CreatedAt)
+                .Tenders(this.Tenders)
+                .Refunds(this.Refunds)
+                .ReferenceId(this.ReferenceId)
+                .Product(this.Product)
+                .ClientId(this.ClientId)
+                .ShippingAddress(this.ShippingAddress)
+                .OrderId(this.OrderId);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string id;
@@ -241,80 +271,133 @@ namespace Square.Models
             private Models.Address shippingAddress;
             private string orderId;
 
-
-
+             /// <summary>
+             /// Id.
+             /// </summary>
+             /// <param name="id"> id. </param>
+             /// <returns> Builder. </returns>
             public Builder Id(string id)
             {
                 this.id = id;
                 return this;
             }
 
+             /// <summary>
+             /// LocationId.
+             /// </summary>
+             /// <param name="locationId"> locationId. </param>
+             /// <returns> Builder. </returns>
             public Builder LocationId(string locationId)
             {
                 this.locationId = locationId;
                 return this;
             }
 
+             /// <summary>
+             /// CreatedAt.
+             /// </summary>
+             /// <param name="createdAt"> createdAt. </param>
+             /// <returns> Builder. </returns>
             public Builder CreatedAt(string createdAt)
             {
                 this.createdAt = createdAt;
                 return this;
             }
 
+             /// <summary>
+             /// Tenders.
+             /// </summary>
+             /// <param name="tenders"> tenders. </param>
+             /// <returns> Builder. </returns>
             public Builder Tenders(IList<Models.Tender> tenders)
             {
                 this.tenders = tenders;
                 return this;
             }
 
+             /// <summary>
+             /// Refunds.
+             /// </summary>
+             /// <param name="refunds"> refunds. </param>
+             /// <returns> Builder. </returns>
             public Builder Refunds(IList<Models.Refund> refunds)
             {
                 this.refunds = refunds;
                 return this;
             }
 
+             /// <summary>
+             /// ReferenceId.
+             /// </summary>
+             /// <param name="referenceId"> referenceId. </param>
+             /// <returns> Builder. </returns>
             public Builder ReferenceId(string referenceId)
             {
                 this.referenceId = referenceId;
                 return this;
             }
 
+             /// <summary>
+             /// Product.
+             /// </summary>
+             /// <param name="product"> product. </param>
+             /// <returns> Builder. </returns>
             public Builder Product(string product)
             {
                 this.product = product;
                 return this;
             }
 
+             /// <summary>
+             /// ClientId.
+             /// </summary>
+             /// <param name="clientId"> clientId. </param>
+             /// <returns> Builder. </returns>
             public Builder ClientId(string clientId)
             {
                 this.clientId = clientId;
                 return this;
             }
 
+             /// <summary>
+             /// ShippingAddress.
+             /// </summary>
+             /// <param name="shippingAddress"> shippingAddress. </param>
+             /// <returns> Builder. </returns>
             public Builder ShippingAddress(Models.Address shippingAddress)
             {
                 this.shippingAddress = shippingAddress;
                 return this;
             }
 
+             /// <summary>
+             /// OrderId.
+             /// </summary>
+             /// <param name="orderId"> orderId. </param>
+             /// <returns> Builder. </returns>
             public Builder OrderId(string orderId)
             {
                 this.orderId = orderId;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> Transaction. </returns>
             public Transaction Build()
             {
-                return new Transaction(id,
-                    locationId,
-                    createdAt,
-                    tenders,
-                    refunds,
-                    referenceId,
-                    product,
-                    clientId,
-                    shippingAddress,
-                    orderId);
+                return new Transaction(
+                    this.id,
+                    this.locationId,
+                    this.createdAt,
+                    this.tenders,
+                    this.refunds,
+                    this.referenceId,
+                    this.product,
+                    this.clientId,
+                    this.shippingAddress,
+                    this.orderId);
             }
         }
     }

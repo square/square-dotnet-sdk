@@ -1,23 +1,30 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class PaymentOptions 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// PaymentOptions.
+    /// </summary>
+    public class PaymentOptions
     {
-        public PaymentOptions(bool? autocomplete = null)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PaymentOptions"/> class.
+        /// </summary>
+        /// <param name="autocomplete">autocomplete.</param>
+        public PaymentOptions(
+            bool? autocomplete = null)
         {
-            Autocomplete = autocomplete;
+            this.Autocomplete = autocomplete;
         }
 
         /// <summary>
@@ -27,6 +34,7 @@ namespace Square.Models
         [JsonProperty("autocomplete", NullValueHandling = NullValueHandling.Ignore)]
         public bool? Autocomplete { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -36,11 +44,7 @@ namespace Square.Models
             return $"PaymentOptions : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Autocomplete = {(Autocomplete == null ? "null" : Autocomplete.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -54,43 +58,68 @@ namespace Square.Models
             }
 
             return obj is PaymentOptions other &&
-                ((Autocomplete == null && other.Autocomplete == null) || (Autocomplete?.Equals(other.Autocomplete) == true));
+                ((this.Autocomplete == null && other.Autocomplete == null) || (this.Autocomplete?.Equals(other.Autocomplete) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 449968409;
 
-            if (Autocomplete != null)
+            if (this.Autocomplete != null)
             {
-               hashCode += Autocomplete.GetHashCode();
+               hashCode += this.Autocomplete.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Autocomplete = {(this.Autocomplete == null ? "null" : this.Autocomplete.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .Autocomplete(Autocomplete);
+                .Autocomplete(this.Autocomplete);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private bool? autocomplete;
 
-
-
+             /// <summary>
+             /// Autocomplete.
+             /// </summary>
+             /// <param name="autocomplete"> autocomplete. </param>
+             /// <returns> Builder. </returns>
             public Builder Autocomplete(bool? autocomplete)
             {
                 this.autocomplete = autocomplete;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> PaymentOptions. </returns>
             public PaymentOptions Build()
             {
-                return new PaymentOptions(autocomplete);
+                return new PaymentOptions(
+                    this.autocomplete);
             }
         }
     }

@@ -1,29 +1,39 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class CreateRefundRequest 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// CreateRefundRequest.
+    /// </summary>
+    public class CreateRefundRequest
     {
-        public CreateRefundRequest(string idempotencyKey,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CreateRefundRequest"/> class.
+        /// </summary>
+        /// <param name="idempotencyKey">idempotency_key.</param>
+        /// <param name="tenderId">tender_id.</param>
+        /// <param name="amountMoney">amount_money.</param>
+        /// <param name="reason">reason.</param>
+        public CreateRefundRequest(
+            string idempotencyKey,
             string tenderId,
             Models.Money amountMoney,
             string reason = null)
         {
-            IdempotencyKey = idempotencyKey;
-            TenderId = tenderId;
-            Reason = reason;
-            AmountMoney = amountMoney;
+            this.IdempotencyKey = idempotencyKey;
+            this.TenderId = tenderId;
+            this.Reason = reason;
+            this.AmountMoney = amountMoney;
         }
 
         /// <summary>
@@ -32,14 +42,14 @@ namespace Square.Models
         /// If you're unsure whether a particular refund succeeded,
         /// you can reattempt it with the same idempotency key without
         /// worrying about duplicating the refund.
-        /// See [Idempotency keys](#idempotencykeys) for more information.
+        /// See [Idempotency keys](https://developer.squareup.com/docs/working-with-apis/idempotency) for more information.
         /// </summary>
         [JsonProperty("idempotency_key")]
         public string IdempotencyKey { get; }
 
         /// <summary>
         /// The ID of the tender to refund.
-        /// A [`Transaction`](#type-transaction) has one or more `tenders` (i.e., methods
+        /// A [`Transaction`]($m/Transaction) has one or more `tenders` (i.e., methods
         /// of payment) associated with it, and you refund each tender separately with
         /// the Connect API.
         /// </summary>
@@ -64,6 +74,7 @@ namespace Square.Models
         [JsonProperty("amount_money")]
         public Models.Money AmountMoney { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -73,14 +84,7 @@ namespace Square.Models
             return $"CreateRefundRequest : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"IdempotencyKey = {(IdempotencyKey == null ? "null" : IdempotencyKey == string.Empty ? "" : IdempotencyKey)}");
-            toStringOutput.Add($"TenderId = {(TenderId == null ? "null" : TenderId == string.Empty ? "" : TenderId)}");
-            toStringOutput.Add($"Reason = {(Reason == null ? "null" : Reason == string.Empty ? "" : Reason)}");
-            toStringOutput.Add($"AmountMoney = {(AmountMoney == null ? "null" : AmountMoney.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -94,48 +98,69 @@ namespace Square.Models
             }
 
             return obj is CreateRefundRequest other &&
-                ((IdempotencyKey == null && other.IdempotencyKey == null) || (IdempotencyKey?.Equals(other.IdempotencyKey) == true)) &&
-                ((TenderId == null && other.TenderId == null) || (TenderId?.Equals(other.TenderId) == true)) &&
-                ((Reason == null && other.Reason == null) || (Reason?.Equals(other.Reason) == true)) &&
-                ((AmountMoney == null && other.AmountMoney == null) || (AmountMoney?.Equals(other.AmountMoney) == true));
+                ((this.IdempotencyKey == null && other.IdempotencyKey == null) || (this.IdempotencyKey?.Equals(other.IdempotencyKey) == true)) &&
+                ((this.TenderId == null && other.TenderId == null) || (this.TenderId?.Equals(other.TenderId) == true)) &&
+                ((this.Reason == null && other.Reason == null) || (this.Reason?.Equals(other.Reason) == true)) &&
+                ((this.AmountMoney == null && other.AmountMoney == null) || (this.AmountMoney?.Equals(other.AmountMoney) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 50633946;
 
-            if (IdempotencyKey != null)
+            if (this.IdempotencyKey != null)
             {
-               hashCode += IdempotencyKey.GetHashCode();
+               hashCode += this.IdempotencyKey.GetHashCode();
             }
 
-            if (TenderId != null)
+            if (this.TenderId != null)
             {
-               hashCode += TenderId.GetHashCode();
+               hashCode += this.TenderId.GetHashCode();
             }
 
-            if (Reason != null)
+            if (this.Reason != null)
             {
-               hashCode += Reason.GetHashCode();
+               hashCode += this.Reason.GetHashCode();
             }
 
-            if (AmountMoney != null)
+            if (this.AmountMoney != null)
             {
-               hashCode += AmountMoney.GetHashCode();
+               hashCode += this.AmountMoney.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.IdempotencyKey = {(this.IdempotencyKey == null ? "null" : this.IdempotencyKey == string.Empty ? "" : this.IdempotencyKey)}");
+            toStringOutput.Add($"this.TenderId = {(this.TenderId == null ? "null" : this.TenderId == string.Empty ? "" : this.TenderId)}");
+            toStringOutput.Add($"this.Reason = {(this.Reason == null ? "null" : this.Reason == string.Empty ? "" : this.Reason)}");
+            toStringOutput.Add($"this.AmountMoney = {(this.AmountMoney == null ? "null" : this.AmountMoney.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
-            var builder = new Builder(IdempotencyKey,
-                TenderId,
-                AmountMoney)
-                .Reason(Reason);
+            var builder = new Builder(
+                this.IdempotencyKey,
+                this.TenderId,
+                this.AmountMoney)
+                .Reason(this.Reason);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string idempotencyKey;
@@ -143,7 +168,8 @@ namespace Square.Models
             private Models.Money amountMoney;
             private string reason;
 
-            public Builder(string idempotencyKey,
+            public Builder(
+                string idempotencyKey,
                 string tenderId,
                 Models.Money amountMoney)
             {
@@ -152,36 +178,61 @@ namespace Square.Models
                 this.amountMoney = amountMoney;
             }
 
+             /// <summary>
+             /// IdempotencyKey.
+             /// </summary>
+             /// <param name="idempotencyKey"> idempotencyKey. </param>
+             /// <returns> Builder. </returns>
             public Builder IdempotencyKey(string idempotencyKey)
             {
                 this.idempotencyKey = idempotencyKey;
                 return this;
             }
 
+             /// <summary>
+             /// TenderId.
+             /// </summary>
+             /// <param name="tenderId"> tenderId. </param>
+             /// <returns> Builder. </returns>
             public Builder TenderId(string tenderId)
             {
                 this.tenderId = tenderId;
                 return this;
             }
 
+             /// <summary>
+             /// AmountMoney.
+             /// </summary>
+             /// <param name="amountMoney"> amountMoney. </param>
+             /// <returns> Builder. </returns>
             public Builder AmountMoney(Models.Money amountMoney)
             {
                 this.amountMoney = amountMoney;
                 return this;
             }
 
+             /// <summary>
+             /// Reason.
+             /// </summary>
+             /// <param name="reason"> reason. </param>
+             /// <returns> Builder. </returns>
             public Builder Reason(string reason)
             {
                 this.reason = reason;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> CreateRefundRequest. </returns>
             public CreateRefundRequest Build()
             {
-                return new CreateRefundRequest(idempotencyKey,
-                    tenderId,
-                    amountMoney,
-                    reason);
+                return new CreateRefundRequest(
+                    this.idempotencyKey,
+                    this.tenderId,
+                    this.amountMoney,
+                    this.reason);
             }
         }
     }

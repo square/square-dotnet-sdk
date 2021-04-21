@@ -1,21 +1,40 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class LoyaltyEvent 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// LoyaltyEvent.
+    /// </summary>
+    public class LoyaltyEvent
     {
-        public LoyaltyEvent(string id,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LoyaltyEvent"/> class.
+        /// </summary>
+        /// <param name="id">id.</param>
+        /// <param name="type">type.</param>
+        /// <param name="createdAt">created_at.</param>
+        /// <param name="loyaltyAccountId">loyalty_account_id.</param>
+        /// <param name="source">source.</param>
+        /// <param name="accumulatePoints">accumulate_points.</param>
+        /// <param name="createReward">create_reward.</param>
+        /// <param name="redeemReward">redeem_reward.</param>
+        /// <param name="deleteReward">delete_reward.</param>
+        /// <param name="adjustPoints">adjust_points.</param>
+        /// <param name="locationId">location_id.</param>
+        /// <param name="expirePoints">expire_points.</param>
+        /// <param name="otherEvent">other_event.</param>
+        public LoyaltyEvent(
+            string id,
             string type,
             string createdAt,
             string loyaltyAccountId,
@@ -29,19 +48,19 @@ namespace Square.Models
             Models.LoyaltyEventExpirePoints expirePoints = null,
             Models.LoyaltyEventOther otherEvent = null)
         {
-            Id = id;
-            Type = type;
-            CreatedAt = createdAt;
-            AccumulatePoints = accumulatePoints;
-            CreateReward = createReward;
-            RedeemReward = redeemReward;
-            DeleteReward = deleteReward;
-            AdjustPoints = adjustPoints;
-            LoyaltyAccountId = loyaltyAccountId;
-            LocationId = locationId;
-            Source = source;
-            ExpirePoints = expirePoints;
-            OtherEvent = otherEvent;
+            this.Id = id;
+            this.Type = type;
+            this.CreatedAt = createdAt;
+            this.AccumulatePoints = accumulatePoints;
+            this.CreateReward = createReward;
+            this.RedeemReward = redeemReward;
+            this.DeleteReward = deleteReward;
+            this.AdjustPoints = adjustPoints;
+            this.LoyaltyAccountId = loyaltyAccountId;
+            this.LocationId = locationId;
+            this.Source = source;
+            this.ExpirePoints = expirePoints;
+            this.OtherEvent = otherEvent;
         }
 
         /// <summary>
@@ -93,13 +112,13 @@ namespace Square.Models
         public Models.LoyaltyEventAdjustPoints AdjustPoints { get; }
 
         /// <summary>
-        /// The ID of the [loyalty account](#type-LoyaltyAccount) in which the event occurred.
+        /// The ID of the [loyalty account]($m/LoyaltyAccount) in which the event occurred.
         /// </summary>
         [JsonProperty("loyalty_account_id")]
         public string LoyaltyAccountId { get; }
 
         /// <summary>
-        /// The ID of the [location](#type-Location) where the event occurred.
+        /// The ID of the [location]($m/Location) where the event occurred.
         /// </summary>
         [JsonProperty("location_id", NullValueHandling = NullValueHandling.Ignore)]
         public string LocationId { get; }
@@ -122,6 +141,7 @@ namespace Square.Models
         [JsonProperty("other_event", NullValueHandling = NullValueHandling.Ignore)]
         public Models.LoyaltyEventOther OtherEvent { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -131,23 +151,7 @@ namespace Square.Models
             return $"LoyaltyEvent : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Id = {(Id == null ? "null" : Id == string.Empty ? "" : Id)}");
-            toStringOutput.Add($"Type = {(Type == null ? "null" : Type.ToString())}");
-            toStringOutput.Add($"CreatedAt = {(CreatedAt == null ? "null" : CreatedAt == string.Empty ? "" : CreatedAt)}");
-            toStringOutput.Add($"AccumulatePoints = {(AccumulatePoints == null ? "null" : AccumulatePoints.ToString())}");
-            toStringOutput.Add($"CreateReward = {(CreateReward == null ? "null" : CreateReward.ToString())}");
-            toStringOutput.Add($"RedeemReward = {(RedeemReward == null ? "null" : RedeemReward.ToString())}");
-            toStringOutput.Add($"DeleteReward = {(DeleteReward == null ? "null" : DeleteReward.ToString())}");
-            toStringOutput.Add($"AdjustPoints = {(AdjustPoints == null ? "null" : AdjustPoints.ToString())}");
-            toStringOutput.Add($"LoyaltyAccountId = {(LoyaltyAccountId == null ? "null" : LoyaltyAccountId == string.Empty ? "" : LoyaltyAccountId)}");
-            toStringOutput.Add($"LocationId = {(LocationId == null ? "null" : LocationId == string.Empty ? "" : LocationId)}");
-            toStringOutput.Add($"Source = {(Source == null ? "null" : Source.ToString())}");
-            toStringOutput.Add($"ExpirePoints = {(ExpirePoints == null ? "null" : ExpirePoints.ToString())}");
-            toStringOutput.Add($"OtherEvent = {(OtherEvent == null ? "null" : OtherEvent.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -161,111 +165,141 @@ namespace Square.Models
             }
 
             return obj is LoyaltyEvent other &&
-                ((Id == null && other.Id == null) || (Id?.Equals(other.Id) == true)) &&
-                ((Type == null && other.Type == null) || (Type?.Equals(other.Type) == true)) &&
-                ((CreatedAt == null && other.CreatedAt == null) || (CreatedAt?.Equals(other.CreatedAt) == true)) &&
-                ((AccumulatePoints == null && other.AccumulatePoints == null) || (AccumulatePoints?.Equals(other.AccumulatePoints) == true)) &&
-                ((CreateReward == null && other.CreateReward == null) || (CreateReward?.Equals(other.CreateReward) == true)) &&
-                ((RedeemReward == null && other.RedeemReward == null) || (RedeemReward?.Equals(other.RedeemReward) == true)) &&
-                ((DeleteReward == null && other.DeleteReward == null) || (DeleteReward?.Equals(other.DeleteReward) == true)) &&
-                ((AdjustPoints == null && other.AdjustPoints == null) || (AdjustPoints?.Equals(other.AdjustPoints) == true)) &&
-                ((LoyaltyAccountId == null && other.LoyaltyAccountId == null) || (LoyaltyAccountId?.Equals(other.LoyaltyAccountId) == true)) &&
-                ((LocationId == null && other.LocationId == null) || (LocationId?.Equals(other.LocationId) == true)) &&
-                ((Source == null && other.Source == null) || (Source?.Equals(other.Source) == true)) &&
-                ((ExpirePoints == null && other.ExpirePoints == null) || (ExpirePoints?.Equals(other.ExpirePoints) == true)) &&
-                ((OtherEvent == null && other.OtherEvent == null) || (OtherEvent?.Equals(other.OtherEvent) == true));
+                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
+                ((this.Type == null && other.Type == null) || (this.Type?.Equals(other.Type) == true)) &&
+                ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true)) &&
+                ((this.AccumulatePoints == null && other.AccumulatePoints == null) || (this.AccumulatePoints?.Equals(other.AccumulatePoints) == true)) &&
+                ((this.CreateReward == null && other.CreateReward == null) || (this.CreateReward?.Equals(other.CreateReward) == true)) &&
+                ((this.RedeemReward == null && other.RedeemReward == null) || (this.RedeemReward?.Equals(other.RedeemReward) == true)) &&
+                ((this.DeleteReward == null && other.DeleteReward == null) || (this.DeleteReward?.Equals(other.DeleteReward) == true)) &&
+                ((this.AdjustPoints == null && other.AdjustPoints == null) || (this.AdjustPoints?.Equals(other.AdjustPoints) == true)) &&
+                ((this.LoyaltyAccountId == null && other.LoyaltyAccountId == null) || (this.LoyaltyAccountId?.Equals(other.LoyaltyAccountId) == true)) &&
+                ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true)) &&
+                ((this.Source == null && other.Source == null) || (this.Source?.Equals(other.Source) == true)) &&
+                ((this.ExpirePoints == null && other.ExpirePoints == null) || (this.ExpirePoints?.Equals(other.ExpirePoints) == true)) &&
+                ((this.OtherEvent == null && other.OtherEvent == null) || (this.OtherEvent?.Equals(other.OtherEvent) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 1490090338;
 
-            if (Id != null)
+            if (this.Id != null)
             {
-               hashCode += Id.GetHashCode();
+               hashCode += this.Id.GetHashCode();
             }
 
-            if (Type != null)
+            if (this.Type != null)
             {
-               hashCode += Type.GetHashCode();
+               hashCode += this.Type.GetHashCode();
             }
 
-            if (CreatedAt != null)
+            if (this.CreatedAt != null)
             {
-               hashCode += CreatedAt.GetHashCode();
+               hashCode += this.CreatedAt.GetHashCode();
             }
 
-            if (AccumulatePoints != null)
+            if (this.AccumulatePoints != null)
             {
-               hashCode += AccumulatePoints.GetHashCode();
+               hashCode += this.AccumulatePoints.GetHashCode();
             }
 
-            if (CreateReward != null)
+            if (this.CreateReward != null)
             {
-               hashCode += CreateReward.GetHashCode();
+               hashCode += this.CreateReward.GetHashCode();
             }
 
-            if (RedeemReward != null)
+            if (this.RedeemReward != null)
             {
-               hashCode += RedeemReward.GetHashCode();
+               hashCode += this.RedeemReward.GetHashCode();
             }
 
-            if (DeleteReward != null)
+            if (this.DeleteReward != null)
             {
-               hashCode += DeleteReward.GetHashCode();
+               hashCode += this.DeleteReward.GetHashCode();
             }
 
-            if (AdjustPoints != null)
+            if (this.AdjustPoints != null)
             {
-               hashCode += AdjustPoints.GetHashCode();
+               hashCode += this.AdjustPoints.GetHashCode();
             }
 
-            if (LoyaltyAccountId != null)
+            if (this.LoyaltyAccountId != null)
             {
-               hashCode += LoyaltyAccountId.GetHashCode();
+               hashCode += this.LoyaltyAccountId.GetHashCode();
             }
 
-            if (LocationId != null)
+            if (this.LocationId != null)
             {
-               hashCode += LocationId.GetHashCode();
+               hashCode += this.LocationId.GetHashCode();
             }
 
-            if (Source != null)
+            if (this.Source != null)
             {
-               hashCode += Source.GetHashCode();
+               hashCode += this.Source.GetHashCode();
             }
 
-            if (ExpirePoints != null)
+            if (this.ExpirePoints != null)
             {
-               hashCode += ExpirePoints.GetHashCode();
+               hashCode += this.ExpirePoints.GetHashCode();
             }
 
-            if (OtherEvent != null)
+            if (this.OtherEvent != null)
             {
-               hashCode += OtherEvent.GetHashCode();
+               hashCode += this.OtherEvent.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id == string.Empty ? "" : this.Id)}");
+            toStringOutput.Add($"this.Type = {(this.Type == null ? "null" : this.Type.ToString())}");
+            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt == string.Empty ? "" : this.CreatedAt)}");
+            toStringOutput.Add($"this.AccumulatePoints = {(this.AccumulatePoints == null ? "null" : this.AccumulatePoints.ToString())}");
+            toStringOutput.Add($"this.CreateReward = {(this.CreateReward == null ? "null" : this.CreateReward.ToString())}");
+            toStringOutput.Add($"this.RedeemReward = {(this.RedeemReward == null ? "null" : this.RedeemReward.ToString())}");
+            toStringOutput.Add($"this.DeleteReward = {(this.DeleteReward == null ? "null" : this.DeleteReward.ToString())}");
+            toStringOutput.Add($"this.AdjustPoints = {(this.AdjustPoints == null ? "null" : this.AdjustPoints.ToString())}");
+            toStringOutput.Add($"this.LoyaltyAccountId = {(this.LoyaltyAccountId == null ? "null" : this.LoyaltyAccountId == string.Empty ? "" : this.LoyaltyAccountId)}");
+            toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId == string.Empty ? "" : this.LocationId)}");
+            toStringOutput.Add($"this.Source = {(this.Source == null ? "null" : this.Source.ToString())}");
+            toStringOutput.Add($"this.ExpirePoints = {(this.ExpirePoints == null ? "null" : this.ExpirePoints.ToString())}");
+            toStringOutput.Add($"this.OtherEvent = {(this.OtherEvent == null ? "null" : this.OtherEvent.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
-            var builder = new Builder(Id,
-                Type,
-                CreatedAt,
-                LoyaltyAccountId,
-                Source)
-                .AccumulatePoints(AccumulatePoints)
-                .CreateReward(CreateReward)
-                .RedeemReward(RedeemReward)
-                .DeleteReward(DeleteReward)
-                .AdjustPoints(AdjustPoints)
-                .LocationId(LocationId)
-                .ExpirePoints(ExpirePoints)
-                .OtherEvent(OtherEvent);
+            var builder = new Builder(
+                this.Id,
+                this.Type,
+                this.CreatedAt,
+                this.LoyaltyAccountId,
+                this.Source)
+                .AccumulatePoints(this.AccumulatePoints)
+                .CreateReward(this.CreateReward)
+                .RedeemReward(this.RedeemReward)
+                .DeleteReward(this.DeleteReward)
+                .AdjustPoints(this.AdjustPoints)
+                .LocationId(this.LocationId)
+                .ExpirePoints(this.ExpirePoints)
+                .OtherEvent(this.OtherEvent);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string id;
@@ -282,7 +316,8 @@ namespace Square.Models
             private Models.LoyaltyEventExpirePoints expirePoints;
             private Models.LoyaltyEventOther otherEvent;
 
-            public Builder(string id,
+            public Builder(
+                string id,
                 string type,
                 string createdAt,
                 string loyaltyAccountId,
@@ -295,99 +330,169 @@ namespace Square.Models
                 this.source = source;
             }
 
+             /// <summary>
+             /// Id.
+             /// </summary>
+             /// <param name="id"> id. </param>
+             /// <returns> Builder. </returns>
             public Builder Id(string id)
             {
                 this.id = id;
                 return this;
             }
 
+             /// <summary>
+             /// Type.
+             /// </summary>
+             /// <param name="type"> type. </param>
+             /// <returns> Builder. </returns>
             public Builder Type(string type)
             {
                 this.type = type;
                 return this;
             }
 
+             /// <summary>
+             /// CreatedAt.
+             /// </summary>
+             /// <param name="createdAt"> createdAt. </param>
+             /// <returns> Builder. </returns>
             public Builder CreatedAt(string createdAt)
             {
                 this.createdAt = createdAt;
                 return this;
             }
 
+             /// <summary>
+             /// LoyaltyAccountId.
+             /// </summary>
+             /// <param name="loyaltyAccountId"> loyaltyAccountId. </param>
+             /// <returns> Builder. </returns>
             public Builder LoyaltyAccountId(string loyaltyAccountId)
             {
                 this.loyaltyAccountId = loyaltyAccountId;
                 return this;
             }
 
+             /// <summary>
+             /// Source.
+             /// </summary>
+             /// <param name="source"> source. </param>
+             /// <returns> Builder. </returns>
             public Builder Source(string source)
             {
                 this.source = source;
                 return this;
             }
 
+             /// <summary>
+             /// AccumulatePoints.
+             /// </summary>
+             /// <param name="accumulatePoints"> accumulatePoints. </param>
+             /// <returns> Builder. </returns>
             public Builder AccumulatePoints(Models.LoyaltyEventAccumulatePoints accumulatePoints)
             {
                 this.accumulatePoints = accumulatePoints;
                 return this;
             }
 
+             /// <summary>
+             /// CreateReward.
+             /// </summary>
+             /// <param name="createReward"> createReward. </param>
+             /// <returns> Builder. </returns>
             public Builder CreateReward(Models.LoyaltyEventCreateReward createReward)
             {
                 this.createReward = createReward;
                 return this;
             }
 
+             /// <summary>
+             /// RedeemReward.
+             /// </summary>
+             /// <param name="redeemReward"> redeemReward. </param>
+             /// <returns> Builder. </returns>
             public Builder RedeemReward(Models.LoyaltyEventRedeemReward redeemReward)
             {
                 this.redeemReward = redeemReward;
                 return this;
             }
 
+             /// <summary>
+             /// DeleteReward.
+             /// </summary>
+             /// <param name="deleteReward"> deleteReward. </param>
+             /// <returns> Builder. </returns>
             public Builder DeleteReward(Models.LoyaltyEventDeleteReward deleteReward)
             {
                 this.deleteReward = deleteReward;
                 return this;
             }
 
+             /// <summary>
+             /// AdjustPoints.
+             /// </summary>
+             /// <param name="adjustPoints"> adjustPoints. </param>
+             /// <returns> Builder. </returns>
             public Builder AdjustPoints(Models.LoyaltyEventAdjustPoints adjustPoints)
             {
                 this.adjustPoints = adjustPoints;
                 return this;
             }
 
+             /// <summary>
+             /// LocationId.
+             /// </summary>
+             /// <param name="locationId"> locationId. </param>
+             /// <returns> Builder. </returns>
             public Builder LocationId(string locationId)
             {
                 this.locationId = locationId;
                 return this;
             }
 
+             /// <summary>
+             /// ExpirePoints.
+             /// </summary>
+             /// <param name="expirePoints"> expirePoints. </param>
+             /// <returns> Builder. </returns>
             public Builder ExpirePoints(Models.LoyaltyEventExpirePoints expirePoints)
             {
                 this.expirePoints = expirePoints;
                 return this;
             }
 
+             /// <summary>
+             /// OtherEvent.
+             /// </summary>
+             /// <param name="otherEvent"> otherEvent. </param>
+             /// <returns> Builder. </returns>
             public Builder OtherEvent(Models.LoyaltyEventOther otherEvent)
             {
                 this.otherEvent = otherEvent;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> LoyaltyEvent. </returns>
             public LoyaltyEvent Build()
             {
-                return new LoyaltyEvent(id,
-                    type,
-                    createdAt,
-                    loyaltyAccountId,
-                    source,
-                    accumulatePoints,
-                    createReward,
-                    redeemReward,
-                    deleteReward,
-                    adjustPoints,
-                    locationId,
-                    expirePoints,
-                    otherEvent);
+                return new LoyaltyEvent(
+                    this.id,
+                    this.type,
+                    this.createdAt,
+                    this.loyaltyAccountId,
+                    this.source,
+                    this.accumulatePoints,
+                    this.createReward,
+                    this.redeemReward,
+                    this.deleteReward,
+                    this.adjustPoints,
+                    this.locationId,
+                    this.expirePoints,
+                    this.otherEvent);
             }
         }
     }

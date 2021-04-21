@@ -1,27 +1,36 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class OrderEntry 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// OrderEntry.
+    /// </summary>
+    public class OrderEntry
     {
-        public OrderEntry(string orderId = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="OrderEntry"/> class.
+        /// </summary>
+        /// <param name="orderId">order_id.</param>
+        /// <param name="version">version.</param>
+        /// <param name="locationId">location_id.</param>
+        public OrderEntry(
+            string orderId = null,
             int? version = null,
             string locationId = null)
         {
-            OrderId = orderId;
-            Version = version;
-            LocationId = locationId;
+            this.OrderId = orderId;
+            this.Version = version;
+            this.LocationId = locationId;
         }
 
         /// <summary>
@@ -45,6 +54,7 @@ namespace Square.Models
         [JsonProperty("location_id", NullValueHandling = NullValueHandling.Ignore)]
         public string LocationId { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -54,13 +64,7 @@ namespace Square.Models
             return $"OrderEntry : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"OrderId = {(OrderId == null ? "null" : OrderId == string.Empty ? "" : OrderId)}");
-            toStringOutput.Add($"Version = {(Version == null ? "null" : Version.ToString())}");
-            toStringOutput.Add($"LocationId = {(LocationId == null ? "null" : LocationId == string.Empty ? "" : LocationId)}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -74,73 +78,110 @@ namespace Square.Models
             }
 
             return obj is OrderEntry other &&
-                ((OrderId == null && other.OrderId == null) || (OrderId?.Equals(other.OrderId) == true)) &&
-                ((Version == null && other.Version == null) || (Version?.Equals(other.Version) == true)) &&
-                ((LocationId == null && other.LocationId == null) || (LocationId?.Equals(other.LocationId) == true));
+                ((this.OrderId == null && other.OrderId == null) || (this.OrderId?.Equals(other.OrderId) == true)) &&
+                ((this.Version == null && other.Version == null) || (this.Version?.Equals(other.Version) == true)) &&
+                ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1818630263;
 
-            if (OrderId != null)
+            if (this.OrderId != null)
             {
-               hashCode += OrderId.GetHashCode();
+               hashCode += this.OrderId.GetHashCode();
             }
 
-            if (Version != null)
+            if (this.Version != null)
             {
-               hashCode += Version.GetHashCode();
+               hashCode += this.Version.GetHashCode();
             }
 
-            if (LocationId != null)
+            if (this.LocationId != null)
             {
-               hashCode += LocationId.GetHashCode();
+               hashCode += this.LocationId.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.OrderId = {(this.OrderId == null ? "null" : this.OrderId == string.Empty ? "" : this.OrderId)}");
+            toStringOutput.Add($"this.Version = {(this.Version == null ? "null" : this.Version.ToString())}");
+            toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId == string.Empty ? "" : this.LocationId)}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .OrderId(OrderId)
-                .Version(Version)
-                .LocationId(LocationId);
+                .OrderId(this.OrderId)
+                .Version(this.Version)
+                .LocationId(this.LocationId);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string orderId;
             private int? version;
             private string locationId;
 
-
-
+             /// <summary>
+             /// OrderId.
+             /// </summary>
+             /// <param name="orderId"> orderId. </param>
+             /// <returns> Builder. </returns>
             public Builder OrderId(string orderId)
             {
                 this.orderId = orderId;
                 return this;
             }
 
+             /// <summary>
+             /// Version.
+             /// </summary>
+             /// <param name="version"> version. </param>
+             /// <returns> Builder. </returns>
             public Builder Version(int? version)
             {
                 this.version = version;
                 return this;
             }
 
+             /// <summary>
+             /// LocationId.
+             /// </summary>
+             /// <param name="locationId"> locationId. </param>
+             /// <returns> Builder. </returns>
             public Builder LocationId(string locationId)
             {
                 this.locationId = locationId;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> OrderEntry. </returns>
             public OrderEntry Build()
             {
-                return new OrderEntry(orderId,
-                    version,
-                    locationId);
+                return new OrderEntry(
+                    this.orderId,
+                    this.version,
+                    this.locationId);
             }
         }
     }

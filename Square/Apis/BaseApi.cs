@@ -1,60 +1,75 @@
-using System;
-using System.Text;
-using System.Collections.Generic;
-using Square;
-using Square.Utilities;
-using Square.Http.Client;
-using Square.Http.Response;
-using Square.Authentication;
-using Square.Exceptions;
-
 namespace Square.Apis
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
+    using Square;
+    using Square.Authentication;
+    using Square.Exceptions;
+    using Square.Http.Client;
+    using Square.Http.Response;
+    using Square.Utilities;
+
+    /// <summary>
+    /// The base class for all controller classes.
+    /// </summary>
     internal class BaseApi
     {
-        protected ArrayDeserialization ArrayDeserializationFormat = ArrayDeserialization.Indexed;
+        /// <summary>
+        /// HttpClient instance.
+        /// </summary>
+        private readonly IHttpClient httpClient;
 
         /// <summary>
-        /// Configuration instance
+        /// Initializes a new instance of the <see cref="BaseApi"/> class.
         /// </summary>
-        protected IConfiguration config;
-
-        /// <summary>
-        /// User-Agent header value
-        /// </summary>
-        internal string userAgent = "Square-DotNet-SDK/9.1.0";
-        
-        /// <summary>
-        /// HttpClient instance
-        /// </summary>
-        internal IHttpClient httpClient;
-
-        /// <summary>
-        /// AuthManager instance
-        /// </summary>
-        internal IDictionary<string, IAuthManager> authManagers;
-        /// <summary>
-        /// HttpCallBack instance
-        /// </summary>
-        internal HttpCallBack HttpCallBack { get; }
-        /// <summary>
-        /// Contructor to initialize the controller with the specified configuration and HTTP callback
-        /// </summary>
-        /// <param name="config">Configuration for the API</param>
-        /// <param name="httpCallBack">HTTP callback to catch before/after HTTP request/response events</param>
-
-        internal BaseApi(IConfiguration config, IHttpClient httpClient,
-            IDictionary<string, IAuthManager> authManagers, HttpCallBack httpCallBack = null)
+        /// <param name="config">Configuration for the API.</param>
+        /// <param name="httpCallBack">HTTP callback to catch before/after HTTP request/response events.</param>
+        /// <param name="httpClient">HttpClient for the API.</param>
+        /// <param name="authManagers">AuthManagers for the API.</param>
+        internal BaseApi(
+            IConfiguration config,
+            IHttpClient httpClient,
+            IDictionary<string, IAuthManager> authManagers,
+            HttpCallBack httpCallBack = null)
         {
-            this.config = config;
+            this.Config = config;
             this.httpClient = httpClient;
-            this.authManagers = authManagers;
+            this.AuthManagers = authManagers;
             this.HttpCallBack = httpCallBack;
         }
 
         /// <summary>
+        /// Gets AuthManager instance.
+        /// </summary>
+        internal IDictionary<string, IAuthManager> AuthManagers { get; }
+
+        /// <summary>
+        /// Gets HttpCallBack instance.
+        /// </summary>
+        internal HttpCallBack HttpCallBack { get; }
+
+        /// <summary>
+        /// Gets array deserialization format.
+        /// </summary>
+        protected ArrayDeserialization ArrayDeserializationFormat => ArrayDeserialization.Indexed;
+
+        /// <summary>
+        /// Gets configuration instance.
+        /// </summary>
+        protected IConfiguration Config { get; }
+
+        /// <summary>
+        ///  Gets User-Agent header value.
+        /// </summary>
+        protected string UserAgent => "Square-DotNet-SDK/10.0.0";
+
+        /// <summary>
         /// Create JSON-encoded multipart content from input.
         /// </summary>
+        /// <param name="input"> input object. </param>
+        /// <param name="headers"> Headers dictionary. </param>
+        /// <returns> MultipartContent. </returns>
         internal static MultipartContent CreateJsonEncodedMultipartContent(object input, Dictionary<string, IReadOnlyCollection<string>> headers)
         {
             return new MultipartByteArrayContent(Encoding.ASCII.GetBytes(ApiHelper.JsonSerialize(input)), headers);
@@ -63,6 +78,9 @@ namespace Square.Apis
         /// <summary>
         /// Create binary multipart content from file.
         /// </summary>
+        /// <param name="input"> FileStreamInfo object. </param>
+        /// <param name="headers"> Headers dictionary. </param>
+        /// <returns> MultipartContent. </returns>
         internal static MultipartContent CreateFileMultipartContent(FileStreamInfo input, Dictionary<string, IReadOnlyCollection<string>> headers = null)
         {
             if (headers == null)
@@ -76,23 +94,25 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Get default HTTP client instance
+        /// Get default HTTP client instance.
         /// </summary>
+        /// <returns> IHttpClient. </returns>
         internal IHttpClient GetClientInstance()
         {
-            return httpClient;
+            return this.httpClient;
         }
 
         /// <summary>
-        /// Validates the response against HTTP errors defined at the API level
+        /// Validates the response against HTTP errors defined at the API level.
         /// </summary>
-        /// <param name="_response">The response recieved</param>
-        /// <param name="_context">Context of the request and the recieved response</param>
-        protected void ValidateResponse(HttpResponse _response, HttpContext _context)
+        /// <param name="response">The response recieved.</param>
+        /// <param name="context">Context of the request and the recieved response.</param>
+        protected void ValidateResponse(HttpResponse response, HttpContext context)
         {
-            if ((_response.StatusCode < 200) || (_response.StatusCode > 208)) //[200, 208] = HTTP OK
+            // [200, 208] = HTTP OK
+            if ((response.StatusCode < 200) || (response.StatusCode > 208))
             {
-                throw new ApiException(@"HTTP Response Not OK", _context);
+                throw new ApiException(@"HTTP Response Not OK", context);
             }
         }
     }

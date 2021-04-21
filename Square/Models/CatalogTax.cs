@@ -1,33 +1,45 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class CatalogTax 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// CatalogTax.
+    /// </summary>
+    public class CatalogTax
     {
-        public CatalogTax(string name = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CatalogTax"/> class.
+        /// </summary>
+        /// <param name="name">name.</param>
+        /// <param name="calculationPhase">calculation_phase.</param>
+        /// <param name="inclusionType">inclusion_type.</param>
+        /// <param name="percentage">percentage.</param>
+        /// <param name="appliesToCustomAmounts">applies_to_custom_amounts.</param>
+        /// <param name="enabled">enabled.</param>
+        public CatalogTax(
+            string name = null,
             string calculationPhase = null,
             string inclusionType = null,
             string percentage = null,
             bool? appliesToCustomAmounts = null,
             bool? enabled = null)
         {
-            Name = name;
-            CalculationPhase = calculationPhase;
-            InclusionType = inclusionType;
-            Percentage = percentage;
-            AppliesToCustomAmounts = appliesToCustomAmounts;
-            Enabled = enabled;
+            this.Name = name;
+            this.CalculationPhase = calculationPhase;
+            this.InclusionType = inclusionType;
+            this.Percentage = percentage;
+            this.AppliesToCustomAmounts = appliesToCustomAmounts;
+            this.Enabled = enabled;
         }
 
         /// <summary>
@@ -68,6 +80,7 @@ namespace Square.Models
         [JsonProperty("enabled", NullValueHandling = NullValueHandling.Ignore)]
         public bool? Enabled { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -77,16 +90,7 @@ namespace Square.Models
             return $"CatalogTax : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Name = {(Name == null ? "null" : Name == string.Empty ? "" : Name)}");
-            toStringOutput.Add($"CalculationPhase = {(CalculationPhase == null ? "null" : CalculationPhase.ToString())}");
-            toStringOutput.Add($"InclusionType = {(InclusionType == null ? "null" : InclusionType.ToString())}");
-            toStringOutput.Add($"Percentage = {(Percentage == null ? "null" : Percentage == string.Empty ? "" : Percentage)}");
-            toStringOutput.Add($"AppliesToCustomAmounts = {(AppliesToCustomAmounts == null ? "null" : AppliesToCustomAmounts.ToString())}");
-            toStringOutput.Add($"Enabled = {(Enabled == null ? "null" : Enabled.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -100,63 +104,85 @@ namespace Square.Models
             }
 
             return obj is CatalogTax other &&
-                ((Name == null && other.Name == null) || (Name?.Equals(other.Name) == true)) &&
-                ((CalculationPhase == null && other.CalculationPhase == null) || (CalculationPhase?.Equals(other.CalculationPhase) == true)) &&
-                ((InclusionType == null && other.InclusionType == null) || (InclusionType?.Equals(other.InclusionType) == true)) &&
-                ((Percentage == null && other.Percentage == null) || (Percentage?.Equals(other.Percentage) == true)) &&
-                ((AppliesToCustomAmounts == null && other.AppliesToCustomAmounts == null) || (AppliesToCustomAmounts?.Equals(other.AppliesToCustomAmounts) == true)) &&
-                ((Enabled == null && other.Enabled == null) || (Enabled?.Equals(other.Enabled) == true));
+                ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
+                ((this.CalculationPhase == null && other.CalculationPhase == null) || (this.CalculationPhase?.Equals(other.CalculationPhase) == true)) &&
+                ((this.InclusionType == null && other.InclusionType == null) || (this.InclusionType?.Equals(other.InclusionType) == true)) &&
+                ((this.Percentage == null && other.Percentage == null) || (this.Percentage?.Equals(other.Percentage) == true)) &&
+                ((this.AppliesToCustomAmounts == null && other.AppliesToCustomAmounts == null) || (this.AppliesToCustomAmounts?.Equals(other.AppliesToCustomAmounts) == true)) &&
+                ((this.Enabled == null && other.Enabled == null) || (this.Enabled?.Equals(other.Enabled) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 29476180;
 
-            if (Name != null)
+            if (this.Name != null)
             {
-               hashCode += Name.GetHashCode();
+               hashCode += this.Name.GetHashCode();
             }
 
-            if (CalculationPhase != null)
+            if (this.CalculationPhase != null)
             {
-               hashCode += CalculationPhase.GetHashCode();
+               hashCode += this.CalculationPhase.GetHashCode();
             }
 
-            if (InclusionType != null)
+            if (this.InclusionType != null)
             {
-               hashCode += InclusionType.GetHashCode();
+               hashCode += this.InclusionType.GetHashCode();
             }
 
-            if (Percentage != null)
+            if (this.Percentage != null)
             {
-               hashCode += Percentage.GetHashCode();
+               hashCode += this.Percentage.GetHashCode();
             }
 
-            if (AppliesToCustomAmounts != null)
+            if (this.AppliesToCustomAmounts != null)
             {
-               hashCode += AppliesToCustomAmounts.GetHashCode();
+               hashCode += this.AppliesToCustomAmounts.GetHashCode();
             }
 
-            if (Enabled != null)
+            if (this.Enabled != null)
             {
-               hashCode += Enabled.GetHashCode();
+               hashCode += this.Enabled.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Name = {(this.Name == null ? "null" : this.Name == string.Empty ? "" : this.Name)}");
+            toStringOutput.Add($"this.CalculationPhase = {(this.CalculationPhase == null ? "null" : this.CalculationPhase.ToString())}");
+            toStringOutput.Add($"this.InclusionType = {(this.InclusionType == null ? "null" : this.InclusionType.ToString())}");
+            toStringOutput.Add($"this.Percentage = {(this.Percentage == null ? "null" : this.Percentage == string.Empty ? "" : this.Percentage)}");
+            toStringOutput.Add($"this.AppliesToCustomAmounts = {(this.AppliesToCustomAmounts == null ? "null" : this.AppliesToCustomAmounts.ToString())}");
+            toStringOutput.Add($"this.Enabled = {(this.Enabled == null ? "null" : this.Enabled.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .Name(Name)
-                .CalculationPhase(CalculationPhase)
-                .InclusionType(InclusionType)
-                .Percentage(Percentage)
-                .AppliesToCustomAmounts(AppliesToCustomAmounts)
-                .Enabled(Enabled);
+                .Name(this.Name)
+                .CalculationPhase(this.CalculationPhase)
+                .InclusionType(this.InclusionType)
+                .Percentage(this.Percentage)
+                .AppliesToCustomAmounts(this.AppliesToCustomAmounts)
+                .Enabled(this.Enabled);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string name;
@@ -166,52 +192,85 @@ namespace Square.Models
             private bool? appliesToCustomAmounts;
             private bool? enabled;
 
-
-
+             /// <summary>
+             /// Name.
+             /// </summary>
+             /// <param name="name"> name. </param>
+             /// <returns> Builder. </returns>
             public Builder Name(string name)
             {
                 this.name = name;
                 return this;
             }
 
+             /// <summary>
+             /// CalculationPhase.
+             /// </summary>
+             /// <param name="calculationPhase"> calculationPhase. </param>
+             /// <returns> Builder. </returns>
             public Builder CalculationPhase(string calculationPhase)
             {
                 this.calculationPhase = calculationPhase;
                 return this;
             }
 
+             /// <summary>
+             /// InclusionType.
+             /// </summary>
+             /// <param name="inclusionType"> inclusionType. </param>
+             /// <returns> Builder. </returns>
             public Builder InclusionType(string inclusionType)
             {
                 this.inclusionType = inclusionType;
                 return this;
             }
 
+             /// <summary>
+             /// Percentage.
+             /// </summary>
+             /// <param name="percentage"> percentage. </param>
+             /// <returns> Builder. </returns>
             public Builder Percentage(string percentage)
             {
                 this.percentage = percentage;
                 return this;
             }
 
+             /// <summary>
+             /// AppliesToCustomAmounts.
+             /// </summary>
+             /// <param name="appliesToCustomAmounts"> appliesToCustomAmounts. </param>
+             /// <returns> Builder. </returns>
             public Builder AppliesToCustomAmounts(bool? appliesToCustomAmounts)
             {
                 this.appliesToCustomAmounts = appliesToCustomAmounts;
                 return this;
             }
 
+             /// <summary>
+             /// Enabled.
+             /// </summary>
+             /// <param name="enabled"> enabled. </param>
+             /// <returns> Builder. </returns>
             public Builder Enabled(bool? enabled)
             {
                 this.enabled = enabled;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> CatalogTax. </returns>
             public CatalogTax Build()
             {
-                return new CatalogTax(name,
-                    calculationPhase,
-                    inclusionType,
-                    percentage,
-                    appliesToCustomAmounts,
-                    enabled);
+                return new CatalogTax(
+                    this.name,
+                    this.calculationPhase,
+                    this.inclusionType,
+                    this.percentage,
+                    this.appliesToCustomAmounts,
+                    this.enabled);
             }
         }
     }

@@ -1,30 +1,42 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square.Http.Client;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class ListCatalogResponse 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Http.Client;
+    using Square.Utilities;
+
+    /// <summary>
+    /// ListCatalogResponse.
+    /// </summary>
+    public class ListCatalogResponse
     {
-        public ListCatalogResponse(IList<Models.Error> errors = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ListCatalogResponse"/> class.
+        /// </summary>
+        /// <param name="errors">errors.</param>
+        /// <param name="cursor">cursor.</param>
+        /// <param name="objects">objects.</param>
+        public ListCatalogResponse(
+            IList<Models.Error> errors = null,
             string cursor = null,
             IList<Models.CatalogObject> objects = null)
         {
-            Errors = errors;
-            Cursor = cursor;
-            Objects = objects;
+            this.Errors = errors;
+            this.Cursor = cursor;
+            this.Objects = objects;
         }
 
+        /// <summary>
+        /// Gets http context.
+        /// </summary>
         [JsonIgnore]
         public HttpContext Context { get; internal set; }
 
@@ -47,6 +59,7 @@ namespace Square.Models
         [JsonProperty("objects", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.CatalogObject> Objects { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -56,13 +69,7 @@ namespace Square.Models
             return $"ListCatalogResponse : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Errors = {(Errors == null ? "null" : $"[{ string.Join(", ", Errors)} ]")}");
-            toStringOutput.Add($"Cursor = {(Cursor == null ? "null" : Cursor == string.Empty ? "" : Cursor)}");
-            toStringOutput.Add($"Objects = {(Objects == null ? "null" : $"[{ string.Join(", ", Objects)} ]")}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -76,79 +83,116 @@ namespace Square.Models
             }
 
             return obj is ListCatalogResponse other &&
-                ((Context == null && other.Context == null) || (Context?.Equals(other.Context) == true)) &&
-                ((Errors == null && other.Errors == null) || (Errors?.Equals(other.Errors) == true)) &&
-                ((Cursor == null && other.Cursor == null) || (Cursor?.Equals(other.Cursor) == true)) &&
-                ((Objects == null && other.Objects == null) || (Objects?.Equals(other.Objects) == true));
+                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
+                ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true)) &&
+                ((this.Cursor == null && other.Cursor == null) || (this.Cursor?.Equals(other.Cursor) == true)) &&
+                ((this.Objects == null && other.Objects == null) || (this.Objects?.Equals(other.Objects) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 210832588;
 
-            if (Context != null)
+            if (this.Context != null)
             {
-                hashCode += Context.GetHashCode();
+                hashCode += this.Context.GetHashCode();
             }
 
-            if (Errors != null)
+            if (this.Errors != null)
             {
-               hashCode += Errors.GetHashCode();
+               hashCode += this.Errors.GetHashCode();
             }
 
-            if (Cursor != null)
+            if (this.Cursor != null)
             {
-               hashCode += Cursor.GetHashCode();
+               hashCode += this.Cursor.GetHashCode();
             }
 
-            if (Objects != null)
+            if (this.Objects != null)
             {
-               hashCode += Objects.GetHashCode();
+               hashCode += this.Objects.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Errors = {(this.Errors == null ? "null" : $"[{string.Join(", ", this.Errors)} ]")}");
+            toStringOutput.Add($"this.Cursor = {(this.Cursor == null ? "null" : this.Cursor == string.Empty ? "" : this.Cursor)}");
+            toStringOutput.Add($"this.Objects = {(this.Objects == null ? "null" : $"[{string.Join(", ", this.Objects)} ]")}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .Errors(Errors)
-                .Cursor(Cursor)
-                .Objects(Objects);
+                .Errors(this.Errors)
+                .Cursor(this.Cursor)
+                .Objects(this.Objects);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private IList<Models.Error> errors;
             private string cursor;
             private IList<Models.CatalogObject> objects;
 
-
-
+             /// <summary>
+             /// Errors.
+             /// </summary>
+             /// <param name="errors"> errors. </param>
+             /// <returns> Builder. </returns>
             public Builder Errors(IList<Models.Error> errors)
             {
                 this.errors = errors;
                 return this;
             }
 
+             /// <summary>
+             /// Cursor.
+             /// </summary>
+             /// <param name="cursor"> cursor. </param>
+             /// <returns> Builder. </returns>
             public Builder Cursor(string cursor)
             {
                 this.cursor = cursor;
                 return this;
             }
 
+             /// <summary>
+             /// Objects.
+             /// </summary>
+             /// <param name="objects"> objects. </param>
+             /// <returns> Builder. </returns>
             public Builder Objects(IList<Models.CatalogObject> objects)
             {
                 this.objects = objects;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> ListCatalogResponse. </returns>
             public ListCatalogResponse Build()
             {
-                return new ListCatalogResponse(errors,
-                    cursor,
-                    objects);
+                return new ListCatalogResponse(
+                    this.errors,
+                    this.cursor,
+                    this.objects);
             }
         }
     }

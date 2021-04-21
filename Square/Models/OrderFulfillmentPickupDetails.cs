@@ -1,21 +1,45 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class OrderFulfillmentPickupDetails 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// OrderFulfillmentPickupDetails.
+    /// </summary>
+    public class OrderFulfillmentPickupDetails
     {
-        public OrderFulfillmentPickupDetails(Models.OrderFulfillmentRecipient recipient = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="OrderFulfillmentPickupDetails"/> class.
+        /// </summary>
+        /// <param name="recipient">recipient.</param>
+        /// <param name="expiresAt">expires_at.</param>
+        /// <param name="autoCompleteDuration">auto_complete_duration.</param>
+        /// <param name="scheduleType">schedule_type.</param>
+        /// <param name="pickupAt">pickup_at.</param>
+        /// <param name="pickupWindowDuration">pickup_window_duration.</param>
+        /// <param name="prepTimeDuration">prep_time_duration.</param>
+        /// <param name="note">note.</param>
+        /// <param name="placedAt">placed_at.</param>
+        /// <param name="acceptedAt">accepted_at.</param>
+        /// <param name="rejectedAt">rejected_at.</param>
+        /// <param name="readyAt">ready_at.</param>
+        /// <param name="expiredAt">expired_at.</param>
+        /// <param name="pickedUpAt">picked_up_at.</param>
+        /// <param name="canceledAt">canceled_at.</param>
+        /// <param name="cancelReason">cancel_reason.</param>
+        /// <param name="isCurbsidePickup">is_curbside_pickup.</param>
+        /// <param name="curbsidePickupDetails">curbside_pickup_details.</param>
+        public OrderFulfillmentPickupDetails(
+            Models.OrderFulfillmentRecipient recipient = null,
             string expiresAt = null,
             string autoCompleteDuration = null,
             string scheduleType = null,
@@ -34,24 +58,24 @@ namespace Square.Models
             bool? isCurbsidePickup = null,
             Models.OrderFulfillmentPickupDetailsCurbsidePickupDetails curbsidePickupDetails = null)
         {
-            Recipient = recipient;
-            ExpiresAt = expiresAt;
-            AutoCompleteDuration = autoCompleteDuration;
-            ScheduleType = scheduleType;
-            PickupAt = pickupAt;
-            PickupWindowDuration = pickupWindowDuration;
-            PrepTimeDuration = prepTimeDuration;
-            Note = note;
-            PlacedAt = placedAt;
-            AcceptedAt = acceptedAt;
-            RejectedAt = rejectedAt;
-            ReadyAt = readyAt;
-            ExpiredAt = expiredAt;
-            PickedUpAt = pickedUpAt;
-            CanceledAt = canceledAt;
-            CancelReason = cancelReason;
-            IsCurbsidePickup = isCurbsidePickup;
-            CurbsidePickupDetails = curbsidePickupDetails;
+            this.Recipient = recipient;
+            this.ExpiresAt = expiresAt;
+            this.AutoCompleteDuration = autoCompleteDuration;
+            this.ScheduleType = scheduleType;
+            this.PickupAt = pickupAt;
+            this.PickupWindowDuration = pickupWindowDuration;
+            this.PrepTimeDuration = prepTimeDuration;
+            this.Note = note;
+            this.PlacedAt = placedAt;
+            this.AcceptedAt = acceptedAt;
+            this.RejectedAt = rejectedAt;
+            this.ReadyAt = readyAt;
+            this.ExpiredAt = expiredAt;
+            this.PickedUpAt = pickedUpAt;
+            this.CanceledAt = canceledAt;
+            this.CancelReason = cancelReason;
+            this.IsCurbsidePickup = isCurbsidePickup;
+            this.CurbsidePickupDetails = curbsidePickupDetails;
         }
 
         /// <summary>
@@ -61,11 +85,11 @@ namespace Square.Models
         public Models.OrderFulfillmentRecipient Recipient { get; }
 
         /// <summary>
-        /// The [timestamp](#workingwithdates) indicating when this fulfillment
-        /// will expire if it is not accepted. Must be in RFC 3339 format
-        /// e.g., "2016-09-04T23:59:33.123Z". Expiration time can only be set up to 7
-        /// days in the future. If `expires_at` is not set, this pickup fulfillment
-        /// will be automatically accepted when placed.
+        /// The [timestamp](https://developer.squareup.com/docs/build-basics/working-with-dates)
+        /// indicating when this fulfillment will expire if it is not accepted. Must be in RFC 3339 format
+        /// e.g., "2016-09-04T23:59:33.123Z". Expiration time can only be set up to 7 days in the future.
+        /// If `expires_at` is not set, this pickup fulfillment will be automatically accepted when
+        /// placed.
         /// </summary>
         [JsonProperty("expires_at", NullValueHandling = NullValueHandling.Ignore)]
         public string ExpiresAt { get; }
@@ -86,8 +110,9 @@ namespace Square.Models
         public string ScheduleType { get; }
 
         /// <summary>
-        /// The [timestamp](#workingwithdates) that represents the start of the pickup window.
-        /// Must be in RFC3339 timestamp format, e.g., "2016-09-04T23:59:33.123Z".
+        /// The [timestamp](https://developer.squareup.com/docs/build-basics/working-with-dates)
+        /// that represents the start of the pickup window. Must be in RFC3339 timestamp format, e.g.,
+        /// "2016-09-04T23:59:33.123Z".
         /// For fulfillments with the schedule type `ASAP`, this is automatically set
         /// to the current time plus the expected duration to prepare the fulfillment.
         /// </summary>
@@ -117,52 +142,56 @@ namespace Square.Models
         public string Note { get; }
 
         /// <summary>
-        /// The [timestamp](#workingwithdates) indicating when the fulfillment
-        /// was placed. Must be in RFC3339 timestamp format, e.g., "2016-09-04T23:59:33.123Z".
+        /// The [timestamp](https://developer.squareup.com/docs/build-basics/working-with-dates)
+        /// indicating when the fulfillment was placed. Must be in RFC3339 timestamp format, e.g.,
+        /// "2016-09-04T23:59:33.123Z".
         /// </summary>
         [JsonProperty("placed_at", NullValueHandling = NullValueHandling.Ignore)]
         public string PlacedAt { get; }
 
         /// <summary>
-        /// The [timestamp](#workingwithdates) indicating when the fulfillment
-        /// was accepted. In RFC3339 timestamp format,
+        /// The [timestamp](https://developer.squareup.com/docs/build-basics/working-with-dates)
+        /// indicating when the fulfillment was accepted. In RFC3339 timestamp format,
         /// e.g., "2016-09-04T23:59:33.123Z".
         /// </summary>
         [JsonProperty("accepted_at", NullValueHandling = NullValueHandling.Ignore)]
         public string AcceptedAt { get; }
 
         /// <summary>
-        /// The [timestamp](#workingwithdates) indicating when the fulfillment
-        /// was rejected. In RFC3339 timestamp format, e.g., "2016-09-04T23:59:33.123Z".
+        /// The [timestamp](https://developer.squareup.com/docs/build-basics/working-with-dates)
+        /// indicating when the fulfillment was rejected. In RFC3339 timestamp format, e.g.,
+        /// "2016-09-04T23:59:33.123Z".
         /// </summary>
         [JsonProperty("rejected_at", NullValueHandling = NullValueHandling.Ignore)]
         public string RejectedAt { get; }
 
         /// <summary>
-        /// The [timestamp](#workingwithdates) indicating when the fulfillment is
-        /// marked as ready for pickup. In RFC3339 timestamp format, e.g., "2016-09-04T23:59:33.123Z".
+        /// The [timestamp](https://developer.squareup.com/docs/build-basics/working-with-dates)
+        /// indicating when the fulfillment is marked as ready for pickup. In RFC3339 timestamp format,
+        /// e.g., "2016-09-04T23:59:33.123Z".
         /// </summary>
         [JsonProperty("ready_at", NullValueHandling = NullValueHandling.Ignore)]
         public string ReadyAt { get; }
 
         /// <summary>
-        /// The [timestamp](#workingwithdates) indicating when the fulfillment expired.
+        /// The [timestamp](https://developer.squareup.com/docs/build-basics/working-with-dates) indicating when the fulfillment expired.
         /// In RFC3339 timestamp format, e.g., "2016-09-04T23:59:33.123Z".
         /// </summary>
         [JsonProperty("expired_at", NullValueHandling = NullValueHandling.Ignore)]
         public string ExpiredAt { get; }
 
         /// <summary>
-        /// The [timestamp](#workingwithdates) indicating when the fulfillment
-        /// was picked up by the recipient. In RFC3339 timestamp format,
+        /// The [timestamp](https://developer.squareup.com/docs/build-basics/working-with-dates)
+        /// indicating when the fulfillment was picked up by the recipient. In RFC3339 timestamp format,
         /// e.g., "2016-09-04T23:59:33.123Z".
         /// </summary>
         [JsonProperty("picked_up_at", NullValueHandling = NullValueHandling.Ignore)]
         public string PickedUpAt { get; }
 
         /// <summary>
-        /// The [timestamp](#workingwithdates) in RFC3339 timestamp format, e.g., "2016-09-04T23:59:33.123Z",
-        /// indicating when the fulfillment was canceled.
+        /// The [timestamp](https://developer.squareup.com/docs/build-basics/working-with-dates)
+        /// in RFC3339 timestamp format, e.g., "2016-09-04T23:59:33.123Z", indicating when the
+        /// fulfillment was canceled.
         /// </summary>
         [JsonProperty("canceled_at", NullValueHandling = NullValueHandling.Ignore)]
         public string CanceledAt { get; }
@@ -185,6 +214,7 @@ namespace Square.Models
         [JsonProperty("curbside_pickup_details", NullValueHandling = NullValueHandling.Ignore)]
         public Models.OrderFulfillmentPickupDetailsCurbsidePickupDetails CurbsidePickupDetails { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -194,28 +224,7 @@ namespace Square.Models
             return $"OrderFulfillmentPickupDetails : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Recipient = {(Recipient == null ? "null" : Recipient.ToString())}");
-            toStringOutput.Add($"ExpiresAt = {(ExpiresAt == null ? "null" : ExpiresAt == string.Empty ? "" : ExpiresAt)}");
-            toStringOutput.Add($"AutoCompleteDuration = {(AutoCompleteDuration == null ? "null" : AutoCompleteDuration == string.Empty ? "" : AutoCompleteDuration)}");
-            toStringOutput.Add($"ScheduleType = {(ScheduleType == null ? "null" : ScheduleType.ToString())}");
-            toStringOutput.Add($"PickupAt = {(PickupAt == null ? "null" : PickupAt == string.Empty ? "" : PickupAt)}");
-            toStringOutput.Add($"PickupWindowDuration = {(PickupWindowDuration == null ? "null" : PickupWindowDuration == string.Empty ? "" : PickupWindowDuration)}");
-            toStringOutput.Add($"PrepTimeDuration = {(PrepTimeDuration == null ? "null" : PrepTimeDuration == string.Empty ? "" : PrepTimeDuration)}");
-            toStringOutput.Add($"Note = {(Note == null ? "null" : Note == string.Empty ? "" : Note)}");
-            toStringOutput.Add($"PlacedAt = {(PlacedAt == null ? "null" : PlacedAt == string.Empty ? "" : PlacedAt)}");
-            toStringOutput.Add($"AcceptedAt = {(AcceptedAt == null ? "null" : AcceptedAt == string.Empty ? "" : AcceptedAt)}");
-            toStringOutput.Add($"RejectedAt = {(RejectedAt == null ? "null" : RejectedAt == string.Empty ? "" : RejectedAt)}");
-            toStringOutput.Add($"ReadyAt = {(ReadyAt == null ? "null" : ReadyAt == string.Empty ? "" : ReadyAt)}");
-            toStringOutput.Add($"ExpiredAt = {(ExpiredAt == null ? "null" : ExpiredAt == string.Empty ? "" : ExpiredAt)}");
-            toStringOutput.Add($"PickedUpAt = {(PickedUpAt == null ? "null" : PickedUpAt == string.Empty ? "" : PickedUpAt)}");
-            toStringOutput.Add($"CanceledAt = {(CanceledAt == null ? "null" : CanceledAt == string.Empty ? "" : CanceledAt)}");
-            toStringOutput.Add($"CancelReason = {(CancelReason == null ? "null" : CancelReason == string.Empty ? "" : CancelReason)}");
-            toStringOutput.Add($"IsCurbsidePickup = {(IsCurbsidePickup == null ? "null" : IsCurbsidePickup.ToString())}");
-            toStringOutput.Add($"CurbsidePickupDetails = {(CurbsidePickupDetails == null ? "null" : CurbsidePickupDetails.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -229,147 +238,181 @@ namespace Square.Models
             }
 
             return obj is OrderFulfillmentPickupDetails other &&
-                ((Recipient == null && other.Recipient == null) || (Recipient?.Equals(other.Recipient) == true)) &&
-                ((ExpiresAt == null && other.ExpiresAt == null) || (ExpiresAt?.Equals(other.ExpiresAt) == true)) &&
-                ((AutoCompleteDuration == null && other.AutoCompleteDuration == null) || (AutoCompleteDuration?.Equals(other.AutoCompleteDuration) == true)) &&
-                ((ScheduleType == null && other.ScheduleType == null) || (ScheduleType?.Equals(other.ScheduleType) == true)) &&
-                ((PickupAt == null && other.PickupAt == null) || (PickupAt?.Equals(other.PickupAt) == true)) &&
-                ((PickupWindowDuration == null && other.PickupWindowDuration == null) || (PickupWindowDuration?.Equals(other.PickupWindowDuration) == true)) &&
-                ((PrepTimeDuration == null && other.PrepTimeDuration == null) || (PrepTimeDuration?.Equals(other.PrepTimeDuration) == true)) &&
-                ((Note == null && other.Note == null) || (Note?.Equals(other.Note) == true)) &&
-                ((PlacedAt == null && other.PlacedAt == null) || (PlacedAt?.Equals(other.PlacedAt) == true)) &&
-                ((AcceptedAt == null && other.AcceptedAt == null) || (AcceptedAt?.Equals(other.AcceptedAt) == true)) &&
-                ((RejectedAt == null && other.RejectedAt == null) || (RejectedAt?.Equals(other.RejectedAt) == true)) &&
-                ((ReadyAt == null && other.ReadyAt == null) || (ReadyAt?.Equals(other.ReadyAt) == true)) &&
-                ((ExpiredAt == null && other.ExpiredAt == null) || (ExpiredAt?.Equals(other.ExpiredAt) == true)) &&
-                ((PickedUpAt == null && other.PickedUpAt == null) || (PickedUpAt?.Equals(other.PickedUpAt) == true)) &&
-                ((CanceledAt == null && other.CanceledAt == null) || (CanceledAt?.Equals(other.CanceledAt) == true)) &&
-                ((CancelReason == null && other.CancelReason == null) || (CancelReason?.Equals(other.CancelReason) == true)) &&
-                ((IsCurbsidePickup == null && other.IsCurbsidePickup == null) || (IsCurbsidePickup?.Equals(other.IsCurbsidePickup) == true)) &&
-                ((CurbsidePickupDetails == null && other.CurbsidePickupDetails == null) || (CurbsidePickupDetails?.Equals(other.CurbsidePickupDetails) == true));
+                ((this.Recipient == null && other.Recipient == null) || (this.Recipient?.Equals(other.Recipient) == true)) &&
+                ((this.ExpiresAt == null && other.ExpiresAt == null) || (this.ExpiresAt?.Equals(other.ExpiresAt) == true)) &&
+                ((this.AutoCompleteDuration == null && other.AutoCompleteDuration == null) || (this.AutoCompleteDuration?.Equals(other.AutoCompleteDuration) == true)) &&
+                ((this.ScheduleType == null && other.ScheduleType == null) || (this.ScheduleType?.Equals(other.ScheduleType) == true)) &&
+                ((this.PickupAt == null && other.PickupAt == null) || (this.PickupAt?.Equals(other.PickupAt) == true)) &&
+                ((this.PickupWindowDuration == null && other.PickupWindowDuration == null) || (this.PickupWindowDuration?.Equals(other.PickupWindowDuration) == true)) &&
+                ((this.PrepTimeDuration == null && other.PrepTimeDuration == null) || (this.PrepTimeDuration?.Equals(other.PrepTimeDuration) == true)) &&
+                ((this.Note == null && other.Note == null) || (this.Note?.Equals(other.Note) == true)) &&
+                ((this.PlacedAt == null && other.PlacedAt == null) || (this.PlacedAt?.Equals(other.PlacedAt) == true)) &&
+                ((this.AcceptedAt == null && other.AcceptedAt == null) || (this.AcceptedAt?.Equals(other.AcceptedAt) == true)) &&
+                ((this.RejectedAt == null && other.RejectedAt == null) || (this.RejectedAt?.Equals(other.RejectedAt) == true)) &&
+                ((this.ReadyAt == null && other.ReadyAt == null) || (this.ReadyAt?.Equals(other.ReadyAt) == true)) &&
+                ((this.ExpiredAt == null && other.ExpiredAt == null) || (this.ExpiredAt?.Equals(other.ExpiredAt) == true)) &&
+                ((this.PickedUpAt == null && other.PickedUpAt == null) || (this.PickedUpAt?.Equals(other.PickedUpAt) == true)) &&
+                ((this.CanceledAt == null && other.CanceledAt == null) || (this.CanceledAt?.Equals(other.CanceledAt) == true)) &&
+                ((this.CancelReason == null && other.CancelReason == null) || (this.CancelReason?.Equals(other.CancelReason) == true)) &&
+                ((this.IsCurbsidePickup == null && other.IsCurbsidePickup == null) || (this.IsCurbsidePickup?.Equals(other.IsCurbsidePickup) == true)) &&
+                ((this.CurbsidePickupDetails == null && other.CurbsidePickupDetails == null) || (this.CurbsidePickupDetails?.Equals(other.CurbsidePickupDetails) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -657729285;
 
-            if (Recipient != null)
+            if (this.Recipient != null)
             {
-               hashCode += Recipient.GetHashCode();
+               hashCode += this.Recipient.GetHashCode();
             }
 
-            if (ExpiresAt != null)
+            if (this.ExpiresAt != null)
             {
-               hashCode += ExpiresAt.GetHashCode();
+               hashCode += this.ExpiresAt.GetHashCode();
             }
 
-            if (AutoCompleteDuration != null)
+            if (this.AutoCompleteDuration != null)
             {
-               hashCode += AutoCompleteDuration.GetHashCode();
+               hashCode += this.AutoCompleteDuration.GetHashCode();
             }
 
-            if (ScheduleType != null)
+            if (this.ScheduleType != null)
             {
-               hashCode += ScheduleType.GetHashCode();
+               hashCode += this.ScheduleType.GetHashCode();
             }
 
-            if (PickupAt != null)
+            if (this.PickupAt != null)
             {
-               hashCode += PickupAt.GetHashCode();
+               hashCode += this.PickupAt.GetHashCode();
             }
 
-            if (PickupWindowDuration != null)
+            if (this.PickupWindowDuration != null)
             {
-               hashCode += PickupWindowDuration.GetHashCode();
+               hashCode += this.PickupWindowDuration.GetHashCode();
             }
 
-            if (PrepTimeDuration != null)
+            if (this.PrepTimeDuration != null)
             {
-               hashCode += PrepTimeDuration.GetHashCode();
+               hashCode += this.PrepTimeDuration.GetHashCode();
             }
 
-            if (Note != null)
+            if (this.Note != null)
             {
-               hashCode += Note.GetHashCode();
+               hashCode += this.Note.GetHashCode();
             }
 
-            if (PlacedAt != null)
+            if (this.PlacedAt != null)
             {
-               hashCode += PlacedAt.GetHashCode();
+               hashCode += this.PlacedAt.GetHashCode();
             }
 
-            if (AcceptedAt != null)
+            if (this.AcceptedAt != null)
             {
-               hashCode += AcceptedAt.GetHashCode();
+               hashCode += this.AcceptedAt.GetHashCode();
             }
 
-            if (RejectedAt != null)
+            if (this.RejectedAt != null)
             {
-               hashCode += RejectedAt.GetHashCode();
+               hashCode += this.RejectedAt.GetHashCode();
             }
 
-            if (ReadyAt != null)
+            if (this.ReadyAt != null)
             {
-               hashCode += ReadyAt.GetHashCode();
+               hashCode += this.ReadyAt.GetHashCode();
             }
 
-            if (ExpiredAt != null)
+            if (this.ExpiredAt != null)
             {
-               hashCode += ExpiredAt.GetHashCode();
+               hashCode += this.ExpiredAt.GetHashCode();
             }
 
-            if (PickedUpAt != null)
+            if (this.PickedUpAt != null)
             {
-               hashCode += PickedUpAt.GetHashCode();
+               hashCode += this.PickedUpAt.GetHashCode();
             }
 
-            if (CanceledAt != null)
+            if (this.CanceledAt != null)
             {
-               hashCode += CanceledAt.GetHashCode();
+               hashCode += this.CanceledAt.GetHashCode();
             }
 
-            if (CancelReason != null)
+            if (this.CancelReason != null)
             {
-               hashCode += CancelReason.GetHashCode();
+               hashCode += this.CancelReason.GetHashCode();
             }
 
-            if (IsCurbsidePickup != null)
+            if (this.IsCurbsidePickup != null)
             {
-               hashCode += IsCurbsidePickup.GetHashCode();
+               hashCode += this.IsCurbsidePickup.GetHashCode();
             }
 
-            if (CurbsidePickupDetails != null)
+            if (this.CurbsidePickupDetails != null)
             {
-               hashCode += CurbsidePickupDetails.GetHashCode();
+               hashCode += this.CurbsidePickupDetails.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Recipient = {(this.Recipient == null ? "null" : this.Recipient.ToString())}");
+            toStringOutput.Add($"this.ExpiresAt = {(this.ExpiresAt == null ? "null" : this.ExpiresAt == string.Empty ? "" : this.ExpiresAt)}");
+            toStringOutput.Add($"this.AutoCompleteDuration = {(this.AutoCompleteDuration == null ? "null" : this.AutoCompleteDuration == string.Empty ? "" : this.AutoCompleteDuration)}");
+            toStringOutput.Add($"this.ScheduleType = {(this.ScheduleType == null ? "null" : this.ScheduleType.ToString())}");
+            toStringOutput.Add($"this.PickupAt = {(this.PickupAt == null ? "null" : this.PickupAt == string.Empty ? "" : this.PickupAt)}");
+            toStringOutput.Add($"this.PickupWindowDuration = {(this.PickupWindowDuration == null ? "null" : this.PickupWindowDuration == string.Empty ? "" : this.PickupWindowDuration)}");
+            toStringOutput.Add($"this.PrepTimeDuration = {(this.PrepTimeDuration == null ? "null" : this.PrepTimeDuration == string.Empty ? "" : this.PrepTimeDuration)}");
+            toStringOutput.Add($"this.Note = {(this.Note == null ? "null" : this.Note == string.Empty ? "" : this.Note)}");
+            toStringOutput.Add($"this.PlacedAt = {(this.PlacedAt == null ? "null" : this.PlacedAt == string.Empty ? "" : this.PlacedAt)}");
+            toStringOutput.Add($"this.AcceptedAt = {(this.AcceptedAt == null ? "null" : this.AcceptedAt == string.Empty ? "" : this.AcceptedAt)}");
+            toStringOutput.Add($"this.RejectedAt = {(this.RejectedAt == null ? "null" : this.RejectedAt == string.Empty ? "" : this.RejectedAt)}");
+            toStringOutput.Add($"this.ReadyAt = {(this.ReadyAt == null ? "null" : this.ReadyAt == string.Empty ? "" : this.ReadyAt)}");
+            toStringOutput.Add($"this.ExpiredAt = {(this.ExpiredAt == null ? "null" : this.ExpiredAt == string.Empty ? "" : this.ExpiredAt)}");
+            toStringOutput.Add($"this.PickedUpAt = {(this.PickedUpAt == null ? "null" : this.PickedUpAt == string.Empty ? "" : this.PickedUpAt)}");
+            toStringOutput.Add($"this.CanceledAt = {(this.CanceledAt == null ? "null" : this.CanceledAt == string.Empty ? "" : this.CanceledAt)}");
+            toStringOutput.Add($"this.CancelReason = {(this.CancelReason == null ? "null" : this.CancelReason == string.Empty ? "" : this.CancelReason)}");
+            toStringOutput.Add($"this.IsCurbsidePickup = {(this.IsCurbsidePickup == null ? "null" : this.IsCurbsidePickup.ToString())}");
+            toStringOutput.Add($"this.CurbsidePickupDetails = {(this.CurbsidePickupDetails == null ? "null" : this.CurbsidePickupDetails.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .Recipient(Recipient)
-                .ExpiresAt(ExpiresAt)
-                .AutoCompleteDuration(AutoCompleteDuration)
-                .ScheduleType(ScheduleType)
-                .PickupAt(PickupAt)
-                .PickupWindowDuration(PickupWindowDuration)
-                .PrepTimeDuration(PrepTimeDuration)
-                .Note(Note)
-                .PlacedAt(PlacedAt)
-                .AcceptedAt(AcceptedAt)
-                .RejectedAt(RejectedAt)
-                .ReadyAt(ReadyAt)
-                .ExpiredAt(ExpiredAt)
-                .PickedUpAt(PickedUpAt)
-                .CanceledAt(CanceledAt)
-                .CancelReason(CancelReason)
-                .IsCurbsidePickup(IsCurbsidePickup)
-                .CurbsidePickupDetails(CurbsidePickupDetails);
+                .Recipient(this.Recipient)
+                .ExpiresAt(this.ExpiresAt)
+                .AutoCompleteDuration(this.AutoCompleteDuration)
+                .ScheduleType(this.ScheduleType)
+                .PickupAt(this.PickupAt)
+                .PickupWindowDuration(this.PickupWindowDuration)
+                .PrepTimeDuration(this.PrepTimeDuration)
+                .Note(this.Note)
+                .PlacedAt(this.PlacedAt)
+                .AcceptedAt(this.AcceptedAt)
+                .RejectedAt(this.RejectedAt)
+                .ReadyAt(this.ReadyAt)
+                .ExpiredAt(this.ExpiredAt)
+                .PickedUpAt(this.PickedUpAt)
+                .CanceledAt(this.CanceledAt)
+                .CancelReason(this.CancelReason)
+                .IsCurbsidePickup(this.IsCurbsidePickup)
+                .CurbsidePickupDetails(this.CurbsidePickupDetails);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private Models.OrderFulfillmentRecipient recipient;
@@ -391,136 +434,229 @@ namespace Square.Models
             private bool? isCurbsidePickup;
             private Models.OrderFulfillmentPickupDetailsCurbsidePickupDetails curbsidePickupDetails;
 
-
-
+             /// <summary>
+             /// Recipient.
+             /// </summary>
+             /// <param name="recipient"> recipient. </param>
+             /// <returns> Builder. </returns>
             public Builder Recipient(Models.OrderFulfillmentRecipient recipient)
             {
                 this.recipient = recipient;
                 return this;
             }
 
+             /// <summary>
+             /// ExpiresAt.
+             /// </summary>
+             /// <param name="expiresAt"> expiresAt. </param>
+             /// <returns> Builder. </returns>
             public Builder ExpiresAt(string expiresAt)
             {
                 this.expiresAt = expiresAt;
                 return this;
             }
 
+             /// <summary>
+             /// AutoCompleteDuration.
+             /// </summary>
+             /// <param name="autoCompleteDuration"> autoCompleteDuration. </param>
+             /// <returns> Builder. </returns>
             public Builder AutoCompleteDuration(string autoCompleteDuration)
             {
                 this.autoCompleteDuration = autoCompleteDuration;
                 return this;
             }
 
+             /// <summary>
+             /// ScheduleType.
+             /// </summary>
+             /// <param name="scheduleType"> scheduleType. </param>
+             /// <returns> Builder. </returns>
             public Builder ScheduleType(string scheduleType)
             {
                 this.scheduleType = scheduleType;
                 return this;
             }
 
+             /// <summary>
+             /// PickupAt.
+             /// </summary>
+             /// <param name="pickupAt"> pickupAt. </param>
+             /// <returns> Builder. </returns>
             public Builder PickupAt(string pickupAt)
             {
                 this.pickupAt = pickupAt;
                 return this;
             }
 
+             /// <summary>
+             /// PickupWindowDuration.
+             /// </summary>
+             /// <param name="pickupWindowDuration"> pickupWindowDuration. </param>
+             /// <returns> Builder. </returns>
             public Builder PickupWindowDuration(string pickupWindowDuration)
             {
                 this.pickupWindowDuration = pickupWindowDuration;
                 return this;
             }
 
+             /// <summary>
+             /// PrepTimeDuration.
+             /// </summary>
+             /// <param name="prepTimeDuration"> prepTimeDuration. </param>
+             /// <returns> Builder. </returns>
             public Builder PrepTimeDuration(string prepTimeDuration)
             {
                 this.prepTimeDuration = prepTimeDuration;
                 return this;
             }
 
+             /// <summary>
+             /// Note.
+             /// </summary>
+             /// <param name="note"> note. </param>
+             /// <returns> Builder. </returns>
             public Builder Note(string note)
             {
                 this.note = note;
                 return this;
             }
 
+             /// <summary>
+             /// PlacedAt.
+             /// </summary>
+             /// <param name="placedAt"> placedAt. </param>
+             /// <returns> Builder. </returns>
             public Builder PlacedAt(string placedAt)
             {
                 this.placedAt = placedAt;
                 return this;
             }
 
+             /// <summary>
+             /// AcceptedAt.
+             /// </summary>
+             /// <param name="acceptedAt"> acceptedAt. </param>
+             /// <returns> Builder. </returns>
             public Builder AcceptedAt(string acceptedAt)
             {
                 this.acceptedAt = acceptedAt;
                 return this;
             }
 
+             /// <summary>
+             /// RejectedAt.
+             /// </summary>
+             /// <param name="rejectedAt"> rejectedAt. </param>
+             /// <returns> Builder. </returns>
             public Builder RejectedAt(string rejectedAt)
             {
                 this.rejectedAt = rejectedAt;
                 return this;
             }
 
+             /// <summary>
+             /// ReadyAt.
+             /// </summary>
+             /// <param name="readyAt"> readyAt. </param>
+             /// <returns> Builder. </returns>
             public Builder ReadyAt(string readyAt)
             {
                 this.readyAt = readyAt;
                 return this;
             }
 
+             /// <summary>
+             /// ExpiredAt.
+             /// </summary>
+             /// <param name="expiredAt"> expiredAt. </param>
+             /// <returns> Builder. </returns>
             public Builder ExpiredAt(string expiredAt)
             {
                 this.expiredAt = expiredAt;
                 return this;
             }
 
+             /// <summary>
+             /// PickedUpAt.
+             /// </summary>
+             /// <param name="pickedUpAt"> pickedUpAt. </param>
+             /// <returns> Builder. </returns>
             public Builder PickedUpAt(string pickedUpAt)
             {
                 this.pickedUpAt = pickedUpAt;
                 return this;
             }
 
+             /// <summary>
+             /// CanceledAt.
+             /// </summary>
+             /// <param name="canceledAt"> canceledAt. </param>
+             /// <returns> Builder. </returns>
             public Builder CanceledAt(string canceledAt)
             {
                 this.canceledAt = canceledAt;
                 return this;
             }
 
+             /// <summary>
+             /// CancelReason.
+             /// </summary>
+             /// <param name="cancelReason"> cancelReason. </param>
+             /// <returns> Builder. </returns>
             public Builder CancelReason(string cancelReason)
             {
                 this.cancelReason = cancelReason;
                 return this;
             }
 
+             /// <summary>
+             /// IsCurbsidePickup.
+             /// </summary>
+             /// <param name="isCurbsidePickup"> isCurbsidePickup. </param>
+             /// <returns> Builder. </returns>
             public Builder IsCurbsidePickup(bool? isCurbsidePickup)
             {
                 this.isCurbsidePickup = isCurbsidePickup;
                 return this;
             }
 
+             /// <summary>
+             /// CurbsidePickupDetails.
+             /// </summary>
+             /// <param name="curbsidePickupDetails"> curbsidePickupDetails. </param>
+             /// <returns> Builder. </returns>
             public Builder CurbsidePickupDetails(Models.OrderFulfillmentPickupDetailsCurbsidePickupDetails curbsidePickupDetails)
             {
                 this.curbsidePickupDetails = curbsidePickupDetails;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> OrderFulfillmentPickupDetails. </returns>
             public OrderFulfillmentPickupDetails Build()
             {
-                return new OrderFulfillmentPickupDetails(recipient,
-                    expiresAt,
-                    autoCompleteDuration,
-                    scheduleType,
-                    pickupAt,
-                    pickupWindowDuration,
-                    prepTimeDuration,
-                    note,
-                    placedAt,
-                    acceptedAt,
-                    rejectedAt,
-                    readyAt,
-                    expiredAt,
-                    pickedUpAt,
-                    canceledAt,
-                    cancelReason,
-                    isCurbsidePickup,
-                    curbsidePickupDetails);
+                return new OrderFulfillmentPickupDetails(
+                    this.recipient,
+                    this.expiresAt,
+                    this.autoCompleteDuration,
+                    this.scheduleType,
+                    this.pickupAt,
+                    this.pickupWindowDuration,
+                    this.prepTimeDuration,
+                    this.note,
+                    this.placedAt,
+                    this.acceptedAt,
+                    this.rejectedAt,
+                    this.readyAt,
+                    this.expiredAt,
+                    this.pickedUpAt,
+                    this.canceledAt,
+                    this.cancelReason,
+                    this.isCurbsidePickup,
+                    this.curbsidePickupDetails);
             }
         }
     }

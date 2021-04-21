@@ -1,25 +1,33 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class CreateInvoiceRequest 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// CreateInvoiceRequest.
+    /// </summary>
+    public class CreateInvoiceRequest
     {
-        public CreateInvoiceRequest(Models.Invoice invoice,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CreateInvoiceRequest"/> class.
+        /// </summary>
+        /// <param name="invoice">invoice.</param>
+        /// <param name="idempotencyKey">idempotency_key.</param>
+        public CreateInvoiceRequest(
+            Models.Invoice invoice,
             string idempotencyKey = null)
         {
-            Invoice = invoice;
-            IdempotencyKey = idempotencyKey;
+            this.Invoice = invoice;
+            this.IdempotencyKey = idempotencyKey;
         }
 
         /// <summary>
@@ -30,14 +38,15 @@ namespace Square.Models
         public Models.Invoice Invoice { get; }
 
         /// <summary>
-        /// A unique string that identifies the `CreateInvoice` request. If you do not 
-        /// provide `idempotency_key` (or provide an empty string as the value), the endpoint 
+        /// A unique string that identifies the `CreateInvoice` request. If you do not
+        /// provide `idempotency_key` (or provide an empty string as the value), the endpoint
         /// treats each request as independent.
         /// For more information, see [Idempotency](https://developer.squareup.com/docs/working-with-apis/idempotency).
         /// </summary>
         [JsonProperty("idempotency_key", NullValueHandling = NullValueHandling.Ignore)]
         public string IdempotencyKey { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -47,12 +56,7 @@ namespace Square.Models
             return $"CreateInvoiceRequest : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Invoice = {(Invoice == null ? "null" : Invoice.ToString())}");
-            toStringOutput.Add($"IdempotencyKey = {(IdempotencyKey == null ? "null" : IdempotencyKey == string.Empty ? "" : IdempotencyKey)}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -66,60 +70,95 @@ namespace Square.Models
             }
 
             return obj is CreateInvoiceRequest other &&
-                ((Invoice == null && other.Invoice == null) || (Invoice?.Equals(other.Invoice) == true)) &&
-                ((IdempotencyKey == null && other.IdempotencyKey == null) || (IdempotencyKey?.Equals(other.IdempotencyKey) == true));
+                ((this.Invoice == null && other.Invoice == null) || (this.Invoice?.Equals(other.Invoice) == true)) &&
+                ((this.IdempotencyKey == null && other.IdempotencyKey == null) || (this.IdempotencyKey?.Equals(other.IdempotencyKey) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 503774574;
 
-            if (Invoice != null)
+            if (this.Invoice != null)
             {
-               hashCode += Invoice.GetHashCode();
+               hashCode += this.Invoice.GetHashCode();
             }
 
-            if (IdempotencyKey != null)
+            if (this.IdempotencyKey != null)
             {
-               hashCode += IdempotencyKey.GetHashCode();
+               hashCode += this.IdempotencyKey.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Invoice = {(this.Invoice == null ? "null" : this.Invoice.ToString())}");
+            toStringOutput.Add($"this.IdempotencyKey = {(this.IdempotencyKey == null ? "null" : this.IdempotencyKey == string.Empty ? "" : this.IdempotencyKey)}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
-            var builder = new Builder(Invoice)
-                .IdempotencyKey(IdempotencyKey);
+            var builder = new Builder(
+                this.Invoice)
+                .IdempotencyKey(this.IdempotencyKey);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private Models.Invoice invoice;
             private string idempotencyKey;
 
-            public Builder(Models.Invoice invoice)
+            public Builder(
+                Models.Invoice invoice)
             {
                 this.invoice = invoice;
             }
 
+             /// <summary>
+             /// Invoice.
+             /// </summary>
+             /// <param name="invoice"> invoice. </param>
+             /// <returns> Builder. </returns>
             public Builder Invoice(Models.Invoice invoice)
             {
                 this.invoice = invoice;
                 return this;
             }
 
+             /// <summary>
+             /// IdempotencyKey.
+             /// </summary>
+             /// <param name="idempotencyKey"> idempotencyKey. </param>
+             /// <returns> Builder. </returns>
             public Builder IdempotencyKey(string idempotencyKey)
             {
                 this.idempotencyKey = idempotencyKey;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> CreateInvoiceRequest. </returns>
             public CreateInvoiceRequest Build()
             {
-                return new CreateInvoiceRequest(invoice,
-                    idempotencyKey);
+                return new CreateInvoiceRequest(
+                    this.invoice,
+                    this.idempotencyKey);
             }
         }
     }

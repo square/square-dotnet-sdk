@@ -1,40 +1,49 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class RedeemLoyaltyRewardRequest 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// RedeemLoyaltyRewardRequest.
+    /// </summary>
+    public class RedeemLoyaltyRewardRequest
     {
-        public RedeemLoyaltyRewardRequest(string idempotencyKey,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RedeemLoyaltyRewardRequest"/> class.
+        /// </summary>
+        /// <param name="idempotencyKey">idempotency_key.</param>
+        /// <param name="locationId">location_id.</param>
+        public RedeemLoyaltyRewardRequest(
+            string idempotencyKey,
             string locationId)
         {
-            IdempotencyKey = idempotencyKey;
-            LocationId = locationId;
+            this.IdempotencyKey = idempotencyKey;
+            this.LocationId = locationId;
         }
 
         /// <summary>
-        /// A unique string that identifies this `RedeemLoyaltyReward` request. 
+        /// A unique string that identifies this `RedeemLoyaltyReward` request.
         /// Keys can be any valid string, but must be unique for every request.
         /// </summary>
         [JsonProperty("idempotency_key")]
         public string IdempotencyKey { get; }
 
         /// <summary>
-        /// The ID of the [location](#type-Location) where the reward is redeemed.
+        /// The ID of the [location]($m/Location) where the reward is redeemed.
         /// </summary>
         [JsonProperty("location_id")]
         public string LocationId { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -44,12 +53,7 @@ namespace Square.Models
             return $"RedeemLoyaltyRewardRequest : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"IdempotencyKey = {(IdempotencyKey == null ? "null" : IdempotencyKey == string.Empty ? "" : IdempotencyKey)}");
-            toStringOutput.Add($"LocationId = {(LocationId == null ? "null" : LocationId == string.Empty ? "" : LocationId)}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -63,62 +67,97 @@ namespace Square.Models
             }
 
             return obj is RedeemLoyaltyRewardRequest other &&
-                ((IdempotencyKey == null && other.IdempotencyKey == null) || (IdempotencyKey?.Equals(other.IdempotencyKey) == true)) &&
-                ((LocationId == null && other.LocationId == null) || (LocationId?.Equals(other.LocationId) == true));
+                ((this.IdempotencyKey == null && other.IdempotencyKey == null) || (this.IdempotencyKey?.Equals(other.IdempotencyKey) == true)) &&
+                ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 2001188104;
 
-            if (IdempotencyKey != null)
+            if (this.IdempotencyKey != null)
             {
-               hashCode += IdempotencyKey.GetHashCode();
+               hashCode += this.IdempotencyKey.GetHashCode();
             }
 
-            if (LocationId != null)
+            if (this.LocationId != null)
             {
-               hashCode += LocationId.GetHashCode();
+               hashCode += this.LocationId.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.IdempotencyKey = {(this.IdempotencyKey == null ? "null" : this.IdempotencyKey == string.Empty ? "" : this.IdempotencyKey)}");
+            toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId == string.Empty ? "" : this.LocationId)}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
-            var builder = new Builder(IdempotencyKey,
-                LocationId);
+            var builder = new Builder(
+                this.IdempotencyKey,
+                this.LocationId);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string idempotencyKey;
             private string locationId;
 
-            public Builder(string idempotencyKey,
+            public Builder(
+                string idempotencyKey,
                 string locationId)
             {
                 this.idempotencyKey = idempotencyKey;
                 this.locationId = locationId;
             }
 
+             /// <summary>
+             /// IdempotencyKey.
+             /// </summary>
+             /// <param name="idempotencyKey"> idempotencyKey. </param>
+             /// <returns> Builder. </returns>
             public Builder IdempotencyKey(string idempotencyKey)
             {
                 this.idempotencyKey = idempotencyKey;
                 return this;
             }
 
+             /// <summary>
+             /// LocationId.
+             /// </summary>
+             /// <param name="locationId"> locationId. </param>
+             /// <returns> Builder. </returns>
             public Builder LocationId(string locationId)
             {
                 this.locationId = locationId;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> RedeemLoyaltyRewardRequest. </returns>
             public RedeemLoyaltyRewardRequest Build()
             {
-                return new RedeemLoyaltyRewardRequest(idempotencyKey,
-                    locationId);
+                return new RedeemLoyaltyRewardRequest(
+                    this.idempotencyKey,
+                    this.locationId);
             }
         }
     }

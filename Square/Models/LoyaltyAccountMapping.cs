@@ -1,29 +1,42 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class LoyaltyAccountMapping 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// LoyaltyAccountMapping.
+    /// </summary>
+    public class LoyaltyAccountMapping
     {
-        public LoyaltyAccountMapping(string type,
-            string mValue,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LoyaltyAccountMapping"/> class.
+        /// </summary>
+        /// <param name="id">id.</param>
+        /// <param name="type">type.</param>
+        /// <param name="mValue">value.</param>
+        /// <param name="createdAt">created_at.</param>
+        /// <param name="phoneNumber">phone_number.</param>
+        public LoyaltyAccountMapping(
             string id = null,
-            string createdAt = null)
+            string type = null,
+            string mValue = null,
+            string createdAt = null,
+            string phoneNumber = null)
         {
-            Id = id;
-            Type = type;
-            MValue = mValue;
-            CreatedAt = createdAt;
+            this.Id = id;
+            this.Type = type;
+            this.MValue = mValue;
+            this.CreatedAt = createdAt;
+            this.PhoneNumber = phoneNumber;
         }
 
         /// <summary>
@@ -35,13 +48,14 @@ namespace Square.Models
         /// <summary>
         /// The type of mapping.
         /// </summary>
-        [JsonProperty("type")]
+        [JsonProperty("type", NullValueHandling = NullValueHandling.Ignore)]
         public string Type { get; }
 
         /// <summary>
-        /// The phone number, in E.164 format. For example, "+14155551111".
+        /// The mapping value, which is used with `type` to represent a phone number mapping. The value can be a phone number in E.164 format. For example, "+14155551111".
+        /// When specifying a mapping, the `phone_number` field is preferred to using `type` and `value`.
         /// </summary>
-        [JsonProperty("value")]
+        [JsonProperty("value", NullValueHandling = NullValueHandling.Ignore)]
         public string MValue { get; }
 
         /// <summary>
@@ -50,6 +64,14 @@ namespace Square.Models
         [JsonProperty("created_at", NullValueHandling = NullValueHandling.Ignore)]
         public string CreatedAt { get; }
 
+        /// <summary>
+        /// The phone number of the buyer, in E.164 format. For example, "+14155551111".
+        /// When specifying a mapping, this `phone_number` field is preferred to using `type` and `value`.
+        /// </summary>
+        [JsonProperty("phone_number", NullValueHandling = NullValueHandling.Ignore)]
+        public string PhoneNumber { get; }
+
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -59,14 +81,7 @@ namespace Square.Models
             return $"LoyaltyAccountMapping : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Id = {(Id == null ? "null" : Id == string.Empty ? "" : Id)}");
-            toStringOutput.Add($"Type = {(Type == null ? "null" : Type == string.Empty ? "" : Type)}");
-            toStringOutput.Add($"MValue = {(MValue == null ? "null" : MValue == string.Empty ? "" : MValue)}");
-            toStringOutput.Add($"CreatedAt = {(CreatedAt == null ? "null" : CreatedAt == string.Empty ? "" : CreatedAt)}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -80,92 +95,152 @@ namespace Square.Models
             }
 
             return obj is LoyaltyAccountMapping other &&
-                ((Id == null && other.Id == null) || (Id?.Equals(other.Id) == true)) &&
-                ((Type == null && other.Type == null) || (Type?.Equals(other.Type) == true)) &&
-                ((MValue == null && other.MValue == null) || (MValue?.Equals(other.MValue) == true)) &&
-                ((CreatedAt == null && other.CreatedAt == null) || (CreatedAt?.Equals(other.CreatedAt) == true));
+                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
+                ((this.Type == null && other.Type == null) || (this.Type?.Equals(other.Type) == true)) &&
+                ((this.MValue == null && other.MValue == null) || (this.MValue?.Equals(other.MValue) == true)) &&
+                ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true)) &&
+                ((this.PhoneNumber == null && other.PhoneNumber == null) || (this.PhoneNumber?.Equals(other.PhoneNumber) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1007052003;
+            int hashCode = -1236695962;
 
-            if (Id != null)
+            if (this.Id != null)
             {
-               hashCode += Id.GetHashCode();
+               hashCode += this.Id.GetHashCode();
             }
 
-            if (Type != null)
+            if (this.Type != null)
             {
-               hashCode += Type.GetHashCode();
+               hashCode += this.Type.GetHashCode();
             }
 
-            if (MValue != null)
+            if (this.MValue != null)
             {
-               hashCode += MValue.GetHashCode();
+               hashCode += this.MValue.GetHashCode();
             }
 
-            if (CreatedAt != null)
+            if (this.CreatedAt != null)
             {
-               hashCode += CreatedAt.GetHashCode();
+               hashCode += this.CreatedAt.GetHashCode();
+            }
+
+            if (this.PhoneNumber != null)
+            {
+               hashCode += this.PhoneNumber.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id == string.Empty ? "" : this.Id)}");
+            toStringOutput.Add($"this.Type = {(this.Type == null ? "null" : this.Type.ToString())}");
+            toStringOutput.Add($"this.MValue = {(this.MValue == null ? "null" : this.MValue == string.Empty ? "" : this.MValue)}");
+            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt == string.Empty ? "" : this.CreatedAt)}");
+            toStringOutput.Add($"this.PhoneNumber = {(this.PhoneNumber == null ? "null" : this.PhoneNumber == string.Empty ? "" : this.PhoneNumber)}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
-            var builder = new Builder(Type,
-                MValue)
-                .Id(Id)
-                .CreatedAt(CreatedAt);
+            var builder = new Builder()
+                .Id(this.Id)
+                .Type(this.Type)
+                .MValue(this.MValue)
+                .CreatedAt(this.CreatedAt)
+                .PhoneNumber(this.PhoneNumber);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
+            private string id;
             private string type;
             private string mValue;
-            private string id;
             private string createdAt;
+            private string phoneNumber;
 
-            public Builder(string type,
-                string mValue)
-            {
-                this.type = type;
-                this.mValue = mValue;
-            }
-
-            public Builder Type(string type)
-            {
-                this.type = type;
-                return this;
-            }
-
-            public Builder MValue(string mValue)
-            {
-                this.mValue = mValue;
-                return this;
-            }
-
+             /// <summary>
+             /// Id.
+             /// </summary>
+             /// <param name="id"> id. </param>
+             /// <returns> Builder. </returns>
             public Builder Id(string id)
             {
                 this.id = id;
                 return this;
             }
 
+             /// <summary>
+             /// Type.
+             /// </summary>
+             /// <param name="type"> type. </param>
+             /// <returns> Builder. </returns>
+            public Builder Type(string type)
+            {
+                this.type = type;
+                return this;
+            }
+
+             /// <summary>
+             /// MValue.
+             /// </summary>
+             /// <param name="mValue"> mValue. </param>
+             /// <returns> Builder. </returns>
+            public Builder MValue(string mValue)
+            {
+                this.mValue = mValue;
+                return this;
+            }
+
+             /// <summary>
+             /// CreatedAt.
+             /// </summary>
+             /// <param name="createdAt"> createdAt. </param>
+             /// <returns> Builder. </returns>
             public Builder CreatedAt(string createdAt)
             {
                 this.createdAt = createdAt;
                 return this;
             }
 
+             /// <summary>
+             /// PhoneNumber.
+             /// </summary>
+             /// <param name="phoneNumber"> phoneNumber. </param>
+             /// <returns> Builder. </returns>
+            public Builder PhoneNumber(string phoneNumber)
+            {
+                this.phoneNumber = phoneNumber;
+                return this;
+            }
+
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> LoyaltyAccountMapping. </returns>
             public LoyaltyAccountMapping Build()
             {
-                return new LoyaltyAccountMapping(type,
-                    mValue,
-                    id,
-                    createdAt);
+                return new LoyaltyAccountMapping(
+                    this.id,
+                    this.type,
+                    this.mValue,
+                    this.createdAt,
+                    this.phoneNumber);
             }
         }
     }

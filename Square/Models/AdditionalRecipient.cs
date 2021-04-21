@@ -1,29 +1,39 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class AdditionalRecipient 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// AdditionalRecipient.
+    /// </summary>
+    public class AdditionalRecipient
     {
-        public AdditionalRecipient(string locationId,
-            string description,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AdditionalRecipient"/> class.
+        /// </summary>
+        /// <param name="locationId">location_id.</param>
+        /// <param name="amountMoney">amount_money.</param>
+        /// <param name="description">description.</param>
+        /// <param name="receivableId">receivable_id.</param>
+        public AdditionalRecipient(
+            string locationId,
             Models.Money amountMoney,
+            string description = null,
             string receivableId = null)
         {
-            LocationId = locationId;
-            Description = description;
-            AmountMoney = amountMoney;
-            ReceivableId = receivableId;
+            this.LocationId = locationId;
+            this.Description = description;
+            this.AmountMoney = amountMoney;
+            this.ReceivableId = receivableId;
         }
 
         /// <summary>
@@ -35,7 +45,7 @@ namespace Square.Models
         /// <summary>
         /// The description of the additional recipient.
         /// </summary>
-        [JsonProperty("description")]
+        [JsonProperty("description", NullValueHandling = NullValueHandling.Ignore)]
         public string Description { get; }
 
         /// <summary>
@@ -50,11 +60,12 @@ namespace Square.Models
         public Models.Money AmountMoney { get; }
 
         /// <summary>
-        /// The unique ID for this [AdditionalRecipientReceivable](#type-additionalrecipientreceivable), assigned by the server.
+        /// The unique ID for this [AdditionalRecipientReceivable]($m/AdditionalRecipientReceivable), assigned by the server.
         /// </summary>
         [JsonProperty("receivable_id", NullValueHandling = NullValueHandling.Ignore)]
         public string ReceivableId { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -64,14 +75,7 @@ namespace Square.Models
             return $"AdditionalRecipient : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"LocationId = {(LocationId == null ? "null" : LocationId == string.Empty ? "" : LocationId)}");
-            toStringOutput.Add($"Description = {(Description == null ? "null" : Description == string.Empty ? "" : Description)}");
-            toStringOutput.Add($"AmountMoney = {(AmountMoney == null ? "null" : AmountMoney.ToString())}");
-            toStringOutput.Add($"ReceivableId = {(ReceivableId == null ? "null" : ReceivableId == string.Empty ? "" : ReceivableId)}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -85,94 +89,139 @@ namespace Square.Models
             }
 
             return obj is AdditionalRecipient other &&
-                ((LocationId == null && other.LocationId == null) || (LocationId?.Equals(other.LocationId) == true)) &&
-                ((Description == null && other.Description == null) || (Description?.Equals(other.Description) == true)) &&
-                ((AmountMoney == null && other.AmountMoney == null) || (AmountMoney?.Equals(other.AmountMoney) == true)) &&
-                ((ReceivableId == null && other.ReceivableId == null) || (ReceivableId?.Equals(other.ReceivableId) == true));
+                ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true)) &&
+                ((this.Description == null && other.Description == null) || (this.Description?.Equals(other.Description) == true)) &&
+                ((this.AmountMoney == null && other.AmountMoney == null) || (this.AmountMoney?.Equals(other.AmountMoney) == true)) &&
+                ((this.ReceivableId == null && other.ReceivableId == null) || (this.ReceivableId?.Equals(other.ReceivableId) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1717136415;
 
-            if (LocationId != null)
+            if (this.LocationId != null)
             {
-               hashCode += LocationId.GetHashCode();
+               hashCode += this.LocationId.GetHashCode();
             }
 
-            if (Description != null)
+            if (this.Description != null)
             {
-               hashCode += Description.GetHashCode();
+               hashCode += this.Description.GetHashCode();
             }
 
-            if (AmountMoney != null)
+            if (this.AmountMoney != null)
             {
-               hashCode += AmountMoney.GetHashCode();
+               hashCode += this.AmountMoney.GetHashCode();
             }
 
-            if (ReceivableId != null)
+            if (this.ReceivableId != null)
             {
-               hashCode += ReceivableId.GetHashCode();
+               hashCode += this.ReceivableId.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId == string.Empty ? "" : this.LocationId)}");
+            toStringOutput.Add($"this.Description = {(this.Description == null ? "null" : this.Description == string.Empty ? "" : this.Description)}");
+            toStringOutput.Add($"this.AmountMoney = {(this.AmountMoney == null ? "null" : this.AmountMoney.ToString())}");
+            toStringOutput.Add($"this.ReceivableId = {(this.ReceivableId == null ? "null" : this.ReceivableId == string.Empty ? "" : this.ReceivableId)}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
-            var builder = new Builder(LocationId,
-                Description,
-                AmountMoney)
-                .ReceivableId(ReceivableId);
+            var builder = new Builder(
+                this.LocationId,
+                this.AmountMoney)
+                .Description(this.Description)
+                .ReceivableId(this.ReceivableId);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string locationId;
-            private string description;
             private Models.Money amountMoney;
+            private string description;
             private string receivableId;
 
-            public Builder(string locationId,
-                string description,
+            public Builder(
+                string locationId,
                 Models.Money amountMoney)
             {
                 this.locationId = locationId;
-                this.description = description;
                 this.amountMoney = amountMoney;
             }
 
+             /// <summary>
+             /// LocationId.
+             /// </summary>
+             /// <param name="locationId"> locationId. </param>
+             /// <returns> Builder. </returns>
             public Builder LocationId(string locationId)
             {
                 this.locationId = locationId;
                 return this;
             }
 
-            public Builder Description(string description)
-            {
-                this.description = description;
-                return this;
-            }
-
+             /// <summary>
+             /// AmountMoney.
+             /// </summary>
+             /// <param name="amountMoney"> amountMoney. </param>
+             /// <returns> Builder. </returns>
             public Builder AmountMoney(Models.Money amountMoney)
             {
                 this.amountMoney = amountMoney;
                 return this;
             }
 
+             /// <summary>
+             /// Description.
+             /// </summary>
+             /// <param name="description"> description. </param>
+             /// <returns> Builder. </returns>
+            public Builder Description(string description)
+            {
+                this.description = description;
+                return this;
+            }
+
+             /// <summary>
+             /// ReceivableId.
+             /// </summary>
+             /// <param name="receivableId"> receivableId. </param>
+             /// <returns> Builder. </returns>
             public Builder ReceivableId(string receivableId)
             {
                 this.receivableId = receivableId;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> AdditionalRecipient. </returns>
             public AdditionalRecipient Build()
             {
-                return new AdditionalRecipient(locationId,
-                    description,
-                    amountMoney,
-                    receivableId);
+                return new AdditionalRecipient(
+                    this.locationId,
+                    this.amountMoney,
+                    this.description,
+                    this.receivableId);
             }
         }
     }

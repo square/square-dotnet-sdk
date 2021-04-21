@@ -1,33 +1,45 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class OrderFulfillment 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// OrderFulfillment.
+    /// </summary>
+    public class OrderFulfillment
     {
-        public OrderFulfillment(string uid = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="OrderFulfillment"/> class.
+        /// </summary>
+        /// <param name="uid">uid.</param>
+        /// <param name="type">type.</param>
+        /// <param name="state">state.</param>
+        /// <param name="metadata">metadata.</param>
+        /// <param name="pickupDetails">pickup_details.</param>
+        /// <param name="shipmentDetails">shipment_details.</param>
+        public OrderFulfillment(
+            string uid = null,
             string type = null,
             string state = null,
             IDictionary<string, string> metadata = null,
             Models.OrderFulfillmentPickupDetails pickupDetails = null,
             Models.OrderFulfillmentShipmentDetails shipmentDetails = null)
         {
-            Uid = uid;
-            Type = type;
-            State = state;
-            Metadata = metadata;
-            PickupDetails = pickupDetails;
-            ShipmentDetails = shipmentDetails;
+            this.Uid = uid;
+            this.Type = type;
+            this.State = state;
+            this.Metadata = metadata;
+            this.PickupDetails = pickupDetails;
+            this.ShipmentDetails = shipmentDetails;
         }
 
         /// <summary>
@@ -78,6 +90,7 @@ namespace Square.Models
         [JsonProperty("shipment_details", NullValueHandling = NullValueHandling.Ignore)]
         public Models.OrderFulfillmentShipmentDetails ShipmentDetails { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -87,16 +100,7 @@ namespace Square.Models
             return $"OrderFulfillment : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Uid = {(Uid == null ? "null" : Uid == string.Empty ? "" : Uid)}");
-            toStringOutput.Add($"Type = {(Type == null ? "null" : Type.ToString())}");
-            toStringOutput.Add($"State = {(State == null ? "null" : State.ToString())}");
-            toStringOutput.Add($"Metadata = {(Metadata == null ? "null" : Metadata.ToString())}");
-            toStringOutput.Add($"PickupDetails = {(PickupDetails == null ? "null" : PickupDetails.ToString())}");
-            toStringOutput.Add($"ShipmentDetails = {(ShipmentDetails == null ? "null" : ShipmentDetails.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -110,63 +114,85 @@ namespace Square.Models
             }
 
             return obj is OrderFulfillment other &&
-                ((Uid == null && other.Uid == null) || (Uid?.Equals(other.Uid) == true)) &&
-                ((Type == null && other.Type == null) || (Type?.Equals(other.Type) == true)) &&
-                ((State == null && other.State == null) || (State?.Equals(other.State) == true)) &&
-                ((Metadata == null && other.Metadata == null) || (Metadata?.Equals(other.Metadata) == true)) &&
-                ((PickupDetails == null && other.PickupDetails == null) || (PickupDetails?.Equals(other.PickupDetails) == true)) &&
-                ((ShipmentDetails == null && other.ShipmentDetails == null) || (ShipmentDetails?.Equals(other.ShipmentDetails) == true));
+                ((this.Uid == null && other.Uid == null) || (this.Uid?.Equals(other.Uid) == true)) &&
+                ((this.Type == null && other.Type == null) || (this.Type?.Equals(other.Type) == true)) &&
+                ((this.State == null && other.State == null) || (this.State?.Equals(other.State) == true)) &&
+                ((this.Metadata == null && other.Metadata == null) || (this.Metadata?.Equals(other.Metadata) == true)) &&
+                ((this.PickupDetails == null && other.PickupDetails == null) || (this.PickupDetails?.Equals(other.PickupDetails) == true)) &&
+                ((this.ShipmentDetails == null && other.ShipmentDetails == null) || (this.ShipmentDetails?.Equals(other.ShipmentDetails) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1081474364;
 
-            if (Uid != null)
+            if (this.Uid != null)
             {
-               hashCode += Uid.GetHashCode();
+               hashCode += this.Uid.GetHashCode();
             }
 
-            if (Type != null)
+            if (this.Type != null)
             {
-               hashCode += Type.GetHashCode();
+               hashCode += this.Type.GetHashCode();
             }
 
-            if (State != null)
+            if (this.State != null)
             {
-               hashCode += State.GetHashCode();
+               hashCode += this.State.GetHashCode();
             }
 
-            if (Metadata != null)
+            if (this.Metadata != null)
             {
-               hashCode += Metadata.GetHashCode();
+               hashCode += this.Metadata.GetHashCode();
             }
 
-            if (PickupDetails != null)
+            if (this.PickupDetails != null)
             {
-               hashCode += PickupDetails.GetHashCode();
+               hashCode += this.PickupDetails.GetHashCode();
             }
 
-            if (ShipmentDetails != null)
+            if (this.ShipmentDetails != null)
             {
-               hashCode += ShipmentDetails.GetHashCode();
+               hashCode += this.ShipmentDetails.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Uid = {(this.Uid == null ? "null" : this.Uid == string.Empty ? "" : this.Uid)}");
+            toStringOutput.Add($"this.Type = {(this.Type == null ? "null" : this.Type.ToString())}");
+            toStringOutput.Add($"this.State = {(this.State == null ? "null" : this.State.ToString())}");
+            toStringOutput.Add($"Metadata = {(this.Metadata == null ? "null" : this.Metadata.ToString())}");
+            toStringOutput.Add($"this.PickupDetails = {(this.PickupDetails == null ? "null" : this.PickupDetails.ToString())}");
+            toStringOutput.Add($"this.ShipmentDetails = {(this.ShipmentDetails == null ? "null" : this.ShipmentDetails.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .Uid(Uid)
-                .Type(Type)
-                .State(State)
-                .Metadata(Metadata)
-                .PickupDetails(PickupDetails)
-                .ShipmentDetails(ShipmentDetails);
+                .Uid(this.Uid)
+                .Type(this.Type)
+                .State(this.State)
+                .Metadata(this.Metadata)
+                .PickupDetails(this.PickupDetails)
+                .ShipmentDetails(this.ShipmentDetails);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string uid;
@@ -176,52 +202,85 @@ namespace Square.Models
             private Models.OrderFulfillmentPickupDetails pickupDetails;
             private Models.OrderFulfillmentShipmentDetails shipmentDetails;
 
-
-
+             /// <summary>
+             /// Uid.
+             /// </summary>
+             /// <param name="uid"> uid. </param>
+             /// <returns> Builder. </returns>
             public Builder Uid(string uid)
             {
                 this.uid = uid;
                 return this;
             }
 
+             /// <summary>
+             /// Type.
+             /// </summary>
+             /// <param name="type"> type. </param>
+             /// <returns> Builder. </returns>
             public Builder Type(string type)
             {
                 this.type = type;
                 return this;
             }
 
+             /// <summary>
+             /// State.
+             /// </summary>
+             /// <param name="state"> state. </param>
+             /// <returns> Builder. </returns>
             public Builder State(string state)
             {
                 this.state = state;
                 return this;
             }
 
+             /// <summary>
+             /// Metadata.
+             /// </summary>
+             /// <param name="metadata"> metadata. </param>
+             /// <returns> Builder. </returns>
             public Builder Metadata(IDictionary<string, string> metadata)
             {
                 this.metadata = metadata;
                 return this;
             }
 
+             /// <summary>
+             /// PickupDetails.
+             /// </summary>
+             /// <param name="pickupDetails"> pickupDetails. </param>
+             /// <returns> Builder. </returns>
             public Builder PickupDetails(Models.OrderFulfillmentPickupDetails pickupDetails)
             {
                 this.pickupDetails = pickupDetails;
                 return this;
             }
 
+             /// <summary>
+             /// ShipmentDetails.
+             /// </summary>
+             /// <param name="shipmentDetails"> shipmentDetails. </param>
+             /// <returns> Builder. </returns>
             public Builder ShipmentDetails(Models.OrderFulfillmentShipmentDetails shipmentDetails)
             {
                 this.shipmentDetails = shipmentDetails;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> OrderFulfillment. </returns>
             public OrderFulfillment Build()
             {
-                return new OrderFulfillment(uid,
-                    type,
-                    state,
-                    metadata,
-                    pickupDetails,
-                    shipmentDetails);
+                return new OrderFulfillment(
+                    this.uid,
+                    this.type,
+                    this.state,
+                    this.metadata,
+                    this.pickupDetails,
+                    this.shipmentDetails);
             }
         }
     }

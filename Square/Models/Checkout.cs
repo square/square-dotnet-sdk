@@ -1,21 +1,37 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class Checkout 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// Checkout.
+    /// </summary>
+    public class Checkout
     {
-        public Checkout(string id = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Checkout"/> class.
+        /// </summary>
+        /// <param name="id">id.</param>
+        /// <param name="checkoutPageUrl">checkout_page_url.</param>
+        /// <param name="askForShippingAddress">ask_for_shipping_address.</param>
+        /// <param name="merchantSupportEmail">merchant_support_email.</param>
+        /// <param name="prePopulateBuyerEmail">pre_populate_buyer_email.</param>
+        /// <param name="prePopulateShippingAddress">pre_populate_shipping_address.</param>
+        /// <param name="redirectUrl">redirect_url.</param>
+        /// <param name="order">order.</param>
+        /// <param name="createdAt">created_at.</param>
+        /// <param name="additionalRecipients">additional_recipients.</param>
+        public Checkout(
+            string id = null,
             string checkoutPageUrl = null,
             bool? askForShippingAddress = null,
             string merchantSupportEmail = null,
@@ -26,16 +42,16 @@ namespace Square.Models
             string createdAt = null,
             IList<Models.AdditionalRecipient> additionalRecipients = null)
         {
-            Id = id;
-            CheckoutPageUrl = checkoutPageUrl;
-            AskForShippingAddress = askForShippingAddress;
-            MerchantSupportEmail = merchantSupportEmail;
-            PrePopulateBuyerEmail = prePopulateBuyerEmail;
-            PrePopulateShippingAddress = prePopulateShippingAddress;
-            RedirectUrl = redirectUrl;
-            Order = order;
-            CreatedAt = createdAt;
-            AdditionalRecipients = additionalRecipients;
+            this.Id = id;
+            this.CheckoutPageUrl = checkoutPageUrl;
+            this.AskForShippingAddress = askForShippingAddress;
+            this.MerchantSupportEmail = merchantSupportEmail;
+            this.PrePopulateBuyerEmail = prePopulateBuyerEmail;
+            this.PrePopulateShippingAddress = prePopulateShippingAddress;
+            this.RedirectUrl = redirectUrl;
+            this.Order = order;
+            this.CreatedAt = createdAt;
+            this.AdditionalRecipients = additionalRecipients;
         }
 
         /// <summary>
@@ -122,6 +138,7 @@ namespace Square.Models
         [JsonProperty("additional_recipients", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.AdditionalRecipient> AdditionalRecipients { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -131,20 +148,7 @@ namespace Square.Models
             return $"Checkout : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Id = {(Id == null ? "null" : Id == string.Empty ? "" : Id)}");
-            toStringOutput.Add($"CheckoutPageUrl = {(CheckoutPageUrl == null ? "null" : CheckoutPageUrl == string.Empty ? "" : CheckoutPageUrl)}");
-            toStringOutput.Add($"AskForShippingAddress = {(AskForShippingAddress == null ? "null" : AskForShippingAddress.ToString())}");
-            toStringOutput.Add($"MerchantSupportEmail = {(MerchantSupportEmail == null ? "null" : MerchantSupportEmail == string.Empty ? "" : MerchantSupportEmail)}");
-            toStringOutput.Add($"PrePopulateBuyerEmail = {(PrePopulateBuyerEmail == null ? "null" : PrePopulateBuyerEmail == string.Empty ? "" : PrePopulateBuyerEmail)}");
-            toStringOutput.Add($"PrePopulateShippingAddress = {(PrePopulateShippingAddress == null ? "null" : PrePopulateShippingAddress.ToString())}");
-            toStringOutput.Add($"RedirectUrl = {(RedirectUrl == null ? "null" : RedirectUrl == string.Empty ? "" : RedirectUrl)}");
-            toStringOutput.Add($"Order = {(Order == null ? "null" : Order.ToString())}");
-            toStringOutput.Add($"CreatedAt = {(CreatedAt == null ? "null" : CreatedAt == string.Empty ? "" : CreatedAt)}");
-            toStringOutput.Add($"AdditionalRecipients = {(AdditionalRecipients == null ? "null" : $"[{ string.Join(", ", AdditionalRecipients)} ]")}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -158,91 +162,117 @@ namespace Square.Models
             }
 
             return obj is Checkout other &&
-                ((Id == null && other.Id == null) || (Id?.Equals(other.Id) == true)) &&
-                ((CheckoutPageUrl == null && other.CheckoutPageUrl == null) || (CheckoutPageUrl?.Equals(other.CheckoutPageUrl) == true)) &&
-                ((AskForShippingAddress == null && other.AskForShippingAddress == null) || (AskForShippingAddress?.Equals(other.AskForShippingAddress) == true)) &&
-                ((MerchantSupportEmail == null && other.MerchantSupportEmail == null) || (MerchantSupportEmail?.Equals(other.MerchantSupportEmail) == true)) &&
-                ((PrePopulateBuyerEmail == null && other.PrePopulateBuyerEmail == null) || (PrePopulateBuyerEmail?.Equals(other.PrePopulateBuyerEmail) == true)) &&
-                ((PrePopulateShippingAddress == null && other.PrePopulateShippingAddress == null) || (PrePopulateShippingAddress?.Equals(other.PrePopulateShippingAddress) == true)) &&
-                ((RedirectUrl == null && other.RedirectUrl == null) || (RedirectUrl?.Equals(other.RedirectUrl) == true)) &&
-                ((Order == null && other.Order == null) || (Order?.Equals(other.Order) == true)) &&
-                ((CreatedAt == null && other.CreatedAt == null) || (CreatedAt?.Equals(other.CreatedAt) == true)) &&
-                ((AdditionalRecipients == null && other.AdditionalRecipients == null) || (AdditionalRecipients?.Equals(other.AdditionalRecipients) == true));
+                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
+                ((this.CheckoutPageUrl == null && other.CheckoutPageUrl == null) || (this.CheckoutPageUrl?.Equals(other.CheckoutPageUrl) == true)) &&
+                ((this.AskForShippingAddress == null && other.AskForShippingAddress == null) || (this.AskForShippingAddress?.Equals(other.AskForShippingAddress) == true)) &&
+                ((this.MerchantSupportEmail == null && other.MerchantSupportEmail == null) || (this.MerchantSupportEmail?.Equals(other.MerchantSupportEmail) == true)) &&
+                ((this.PrePopulateBuyerEmail == null && other.PrePopulateBuyerEmail == null) || (this.PrePopulateBuyerEmail?.Equals(other.PrePopulateBuyerEmail) == true)) &&
+                ((this.PrePopulateShippingAddress == null && other.PrePopulateShippingAddress == null) || (this.PrePopulateShippingAddress?.Equals(other.PrePopulateShippingAddress) == true)) &&
+                ((this.RedirectUrl == null && other.RedirectUrl == null) || (this.RedirectUrl?.Equals(other.RedirectUrl) == true)) &&
+                ((this.Order == null && other.Order == null) || (this.Order?.Equals(other.Order) == true)) &&
+                ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true)) &&
+                ((this.AdditionalRecipients == null && other.AdditionalRecipients == null) || (this.AdditionalRecipients?.Equals(other.AdditionalRecipients) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 1629433824;
 
-            if (Id != null)
+            if (this.Id != null)
             {
-               hashCode += Id.GetHashCode();
+               hashCode += this.Id.GetHashCode();
             }
 
-            if (CheckoutPageUrl != null)
+            if (this.CheckoutPageUrl != null)
             {
-               hashCode += CheckoutPageUrl.GetHashCode();
+               hashCode += this.CheckoutPageUrl.GetHashCode();
             }
 
-            if (AskForShippingAddress != null)
+            if (this.AskForShippingAddress != null)
             {
-               hashCode += AskForShippingAddress.GetHashCode();
+               hashCode += this.AskForShippingAddress.GetHashCode();
             }
 
-            if (MerchantSupportEmail != null)
+            if (this.MerchantSupportEmail != null)
             {
-               hashCode += MerchantSupportEmail.GetHashCode();
+               hashCode += this.MerchantSupportEmail.GetHashCode();
             }
 
-            if (PrePopulateBuyerEmail != null)
+            if (this.PrePopulateBuyerEmail != null)
             {
-               hashCode += PrePopulateBuyerEmail.GetHashCode();
+               hashCode += this.PrePopulateBuyerEmail.GetHashCode();
             }
 
-            if (PrePopulateShippingAddress != null)
+            if (this.PrePopulateShippingAddress != null)
             {
-               hashCode += PrePopulateShippingAddress.GetHashCode();
+               hashCode += this.PrePopulateShippingAddress.GetHashCode();
             }
 
-            if (RedirectUrl != null)
+            if (this.RedirectUrl != null)
             {
-               hashCode += RedirectUrl.GetHashCode();
+               hashCode += this.RedirectUrl.GetHashCode();
             }
 
-            if (Order != null)
+            if (this.Order != null)
             {
-               hashCode += Order.GetHashCode();
+               hashCode += this.Order.GetHashCode();
             }
 
-            if (CreatedAt != null)
+            if (this.CreatedAt != null)
             {
-               hashCode += CreatedAt.GetHashCode();
+               hashCode += this.CreatedAt.GetHashCode();
             }
 
-            if (AdditionalRecipients != null)
+            if (this.AdditionalRecipients != null)
             {
-               hashCode += AdditionalRecipients.GetHashCode();
+               hashCode += this.AdditionalRecipients.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id == string.Empty ? "" : this.Id)}");
+            toStringOutput.Add($"this.CheckoutPageUrl = {(this.CheckoutPageUrl == null ? "null" : this.CheckoutPageUrl == string.Empty ? "" : this.CheckoutPageUrl)}");
+            toStringOutput.Add($"this.AskForShippingAddress = {(this.AskForShippingAddress == null ? "null" : this.AskForShippingAddress.ToString())}");
+            toStringOutput.Add($"this.MerchantSupportEmail = {(this.MerchantSupportEmail == null ? "null" : this.MerchantSupportEmail == string.Empty ? "" : this.MerchantSupportEmail)}");
+            toStringOutput.Add($"this.PrePopulateBuyerEmail = {(this.PrePopulateBuyerEmail == null ? "null" : this.PrePopulateBuyerEmail == string.Empty ? "" : this.PrePopulateBuyerEmail)}");
+            toStringOutput.Add($"this.PrePopulateShippingAddress = {(this.PrePopulateShippingAddress == null ? "null" : this.PrePopulateShippingAddress.ToString())}");
+            toStringOutput.Add($"this.RedirectUrl = {(this.RedirectUrl == null ? "null" : this.RedirectUrl == string.Empty ? "" : this.RedirectUrl)}");
+            toStringOutput.Add($"this.Order = {(this.Order == null ? "null" : this.Order.ToString())}");
+            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt == string.Empty ? "" : this.CreatedAt)}");
+            toStringOutput.Add($"this.AdditionalRecipients = {(this.AdditionalRecipients == null ? "null" : $"[{string.Join(", ", this.AdditionalRecipients)} ]")}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .Id(Id)
-                .CheckoutPageUrl(CheckoutPageUrl)
-                .AskForShippingAddress(AskForShippingAddress)
-                .MerchantSupportEmail(MerchantSupportEmail)
-                .PrePopulateBuyerEmail(PrePopulateBuyerEmail)
-                .PrePopulateShippingAddress(PrePopulateShippingAddress)
-                .RedirectUrl(RedirectUrl)
-                .Order(Order)
-                .CreatedAt(CreatedAt)
-                .AdditionalRecipients(AdditionalRecipients);
+                .Id(this.Id)
+                .CheckoutPageUrl(this.CheckoutPageUrl)
+                .AskForShippingAddress(this.AskForShippingAddress)
+                .MerchantSupportEmail(this.MerchantSupportEmail)
+                .PrePopulateBuyerEmail(this.PrePopulateBuyerEmail)
+                .PrePopulateShippingAddress(this.PrePopulateShippingAddress)
+                .RedirectUrl(this.RedirectUrl)
+                .Order(this.Order)
+                .CreatedAt(this.CreatedAt)
+                .AdditionalRecipients(this.AdditionalRecipients);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string id;
@@ -256,80 +286,133 @@ namespace Square.Models
             private string createdAt;
             private IList<Models.AdditionalRecipient> additionalRecipients;
 
-
-
+             /// <summary>
+             /// Id.
+             /// </summary>
+             /// <param name="id"> id. </param>
+             /// <returns> Builder. </returns>
             public Builder Id(string id)
             {
                 this.id = id;
                 return this;
             }
 
+             /// <summary>
+             /// CheckoutPageUrl.
+             /// </summary>
+             /// <param name="checkoutPageUrl"> checkoutPageUrl. </param>
+             /// <returns> Builder. </returns>
             public Builder CheckoutPageUrl(string checkoutPageUrl)
             {
                 this.checkoutPageUrl = checkoutPageUrl;
                 return this;
             }
 
+             /// <summary>
+             /// AskForShippingAddress.
+             /// </summary>
+             /// <param name="askForShippingAddress"> askForShippingAddress. </param>
+             /// <returns> Builder. </returns>
             public Builder AskForShippingAddress(bool? askForShippingAddress)
             {
                 this.askForShippingAddress = askForShippingAddress;
                 return this;
             }
 
+             /// <summary>
+             /// MerchantSupportEmail.
+             /// </summary>
+             /// <param name="merchantSupportEmail"> merchantSupportEmail. </param>
+             /// <returns> Builder. </returns>
             public Builder MerchantSupportEmail(string merchantSupportEmail)
             {
                 this.merchantSupportEmail = merchantSupportEmail;
                 return this;
             }
 
+             /// <summary>
+             /// PrePopulateBuyerEmail.
+             /// </summary>
+             /// <param name="prePopulateBuyerEmail"> prePopulateBuyerEmail. </param>
+             /// <returns> Builder. </returns>
             public Builder PrePopulateBuyerEmail(string prePopulateBuyerEmail)
             {
                 this.prePopulateBuyerEmail = prePopulateBuyerEmail;
                 return this;
             }
 
+             /// <summary>
+             /// PrePopulateShippingAddress.
+             /// </summary>
+             /// <param name="prePopulateShippingAddress"> prePopulateShippingAddress. </param>
+             /// <returns> Builder. </returns>
             public Builder PrePopulateShippingAddress(Models.Address prePopulateShippingAddress)
             {
                 this.prePopulateShippingAddress = prePopulateShippingAddress;
                 return this;
             }
 
+             /// <summary>
+             /// RedirectUrl.
+             /// </summary>
+             /// <param name="redirectUrl"> redirectUrl. </param>
+             /// <returns> Builder. </returns>
             public Builder RedirectUrl(string redirectUrl)
             {
                 this.redirectUrl = redirectUrl;
                 return this;
             }
 
+             /// <summary>
+             /// Order.
+             /// </summary>
+             /// <param name="order"> order. </param>
+             /// <returns> Builder. </returns>
             public Builder Order(Models.Order order)
             {
                 this.order = order;
                 return this;
             }
 
+             /// <summary>
+             /// CreatedAt.
+             /// </summary>
+             /// <param name="createdAt"> createdAt. </param>
+             /// <returns> Builder. </returns>
             public Builder CreatedAt(string createdAt)
             {
                 this.createdAt = createdAt;
                 return this;
             }
 
+             /// <summary>
+             /// AdditionalRecipients.
+             /// </summary>
+             /// <param name="additionalRecipients"> additionalRecipients. </param>
+             /// <returns> Builder. </returns>
             public Builder AdditionalRecipients(IList<Models.AdditionalRecipient> additionalRecipients)
             {
                 this.additionalRecipients = additionalRecipients;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> Checkout. </returns>
             public Checkout Build()
             {
-                return new Checkout(id,
-                    checkoutPageUrl,
-                    askForShippingAddress,
-                    merchantSupportEmail,
-                    prePopulateBuyerEmail,
-                    prePopulateShippingAddress,
-                    redirectUrl,
-                    order,
-                    createdAt,
-                    additionalRecipients);
+                return new Checkout(
+                    this.id,
+                    this.checkoutPageUrl,
+                    this.askForShippingAddress,
+                    this.merchantSupportEmail,
+                    this.prePopulateBuyerEmail,
+                    this.prePopulateShippingAddress,
+                    this.redirectUrl,
+                    this.order,
+                    this.createdAt,
+                    this.additionalRecipients);
             }
         }
     }

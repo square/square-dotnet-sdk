@@ -1,27 +1,36 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class OrderLineItemPricingBlocklistsBlockedDiscount 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// OrderLineItemPricingBlocklistsBlockedDiscount.
+    /// </summary>
+    public class OrderLineItemPricingBlocklistsBlockedDiscount
     {
-        public OrderLineItemPricingBlocklistsBlockedDiscount(string uid = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="OrderLineItemPricingBlocklistsBlockedDiscount"/> class.
+        /// </summary>
+        /// <param name="uid">uid.</param>
+        /// <param name="discountUid">discount_uid.</param>
+        /// <param name="discountCatalogObjectId">discount_catalog_object_id.</param>
+        public OrderLineItemPricingBlocklistsBlockedDiscount(
+            string uid = null,
             string discountUid = null,
             string discountCatalogObjectId = null)
         {
-            Uid = uid;
-            DiscountUid = discountUid;
-            DiscountCatalogObjectId = discountCatalogObjectId;
+            this.Uid = uid;
+            this.DiscountUid = discountUid;
+            this.DiscountCatalogObjectId = discountCatalogObjectId;
         }
 
         /// <summary>
@@ -31,20 +40,21 @@ namespace Square.Models
         public string Uid { get; }
 
         /// <summary>
-        /// The `uid` of the discount that should be blocked. Use this field to block 
+        /// The `uid` of the discount that should be blocked. Use this field to block
         /// ad-hoc discounts. For catalog discounts use the `discount_catalog_object_id` field.
         /// </summary>
         [JsonProperty("discount_uid", NullValueHandling = NullValueHandling.Ignore)]
         public string DiscountUid { get; }
 
         /// <summary>
-        /// The `catalog_object_id` of the discount that should be blocked. 
-        /// Use this field to block catalog discounts. For ad-hoc discounts use the 
+        /// The `catalog_object_id` of the discount that should be blocked.
+        /// Use this field to block catalog discounts. For ad-hoc discounts use the
         /// `discount_uid` field.
         /// </summary>
         [JsonProperty("discount_catalog_object_id", NullValueHandling = NullValueHandling.Ignore)]
         public string DiscountCatalogObjectId { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -54,13 +64,7 @@ namespace Square.Models
             return $"OrderLineItemPricingBlocklistsBlockedDiscount : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Uid = {(Uid == null ? "null" : Uid == string.Empty ? "" : Uid)}");
-            toStringOutput.Add($"DiscountUid = {(DiscountUid == null ? "null" : DiscountUid == string.Empty ? "" : DiscountUid)}");
-            toStringOutput.Add($"DiscountCatalogObjectId = {(DiscountCatalogObjectId == null ? "null" : DiscountCatalogObjectId == string.Empty ? "" : DiscountCatalogObjectId)}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -74,73 +78,110 @@ namespace Square.Models
             }
 
             return obj is OrderLineItemPricingBlocklistsBlockedDiscount other &&
-                ((Uid == null && other.Uid == null) || (Uid?.Equals(other.Uid) == true)) &&
-                ((DiscountUid == null && other.DiscountUid == null) || (DiscountUid?.Equals(other.DiscountUid) == true)) &&
-                ((DiscountCatalogObjectId == null && other.DiscountCatalogObjectId == null) || (DiscountCatalogObjectId?.Equals(other.DiscountCatalogObjectId) == true));
+                ((this.Uid == null && other.Uid == null) || (this.Uid?.Equals(other.Uid) == true)) &&
+                ((this.DiscountUid == null && other.DiscountUid == null) || (this.DiscountUid?.Equals(other.DiscountUid) == true)) &&
+                ((this.DiscountCatalogObjectId == null && other.DiscountCatalogObjectId == null) || (this.DiscountCatalogObjectId?.Equals(other.DiscountCatalogObjectId) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 532800568;
 
-            if (Uid != null)
+            if (this.Uid != null)
             {
-               hashCode += Uid.GetHashCode();
+               hashCode += this.Uid.GetHashCode();
             }
 
-            if (DiscountUid != null)
+            if (this.DiscountUid != null)
             {
-               hashCode += DiscountUid.GetHashCode();
+               hashCode += this.DiscountUid.GetHashCode();
             }
 
-            if (DiscountCatalogObjectId != null)
+            if (this.DiscountCatalogObjectId != null)
             {
-               hashCode += DiscountCatalogObjectId.GetHashCode();
+               hashCode += this.DiscountCatalogObjectId.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Uid = {(this.Uid == null ? "null" : this.Uid == string.Empty ? "" : this.Uid)}");
+            toStringOutput.Add($"this.DiscountUid = {(this.DiscountUid == null ? "null" : this.DiscountUid == string.Empty ? "" : this.DiscountUid)}");
+            toStringOutput.Add($"this.DiscountCatalogObjectId = {(this.DiscountCatalogObjectId == null ? "null" : this.DiscountCatalogObjectId == string.Empty ? "" : this.DiscountCatalogObjectId)}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .Uid(Uid)
-                .DiscountUid(DiscountUid)
-                .DiscountCatalogObjectId(DiscountCatalogObjectId);
+                .Uid(this.Uid)
+                .DiscountUid(this.DiscountUid)
+                .DiscountCatalogObjectId(this.DiscountCatalogObjectId);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string uid;
             private string discountUid;
             private string discountCatalogObjectId;
 
-
-
+             /// <summary>
+             /// Uid.
+             /// </summary>
+             /// <param name="uid"> uid. </param>
+             /// <returns> Builder. </returns>
             public Builder Uid(string uid)
             {
                 this.uid = uid;
                 return this;
             }
 
+             /// <summary>
+             /// DiscountUid.
+             /// </summary>
+             /// <param name="discountUid"> discountUid. </param>
+             /// <returns> Builder. </returns>
             public Builder DiscountUid(string discountUid)
             {
                 this.discountUid = discountUid;
                 return this;
             }
 
+             /// <summary>
+             /// DiscountCatalogObjectId.
+             /// </summary>
+             /// <param name="discountCatalogObjectId"> discountCatalogObjectId. </param>
+             /// <returns> Builder. </returns>
             public Builder DiscountCatalogObjectId(string discountCatalogObjectId)
             {
                 this.discountCatalogObjectId = discountCatalogObjectId;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> OrderLineItemPricingBlocklistsBlockedDiscount. </returns>
             public OrderLineItemPricingBlocklistsBlockedDiscount Build()
             {
-                return new OrderLineItemPricingBlocklistsBlockedDiscount(uid,
-                    discountUid,
-                    discountCatalogObjectId);
+                return new OrderLineItemPricingBlocklistsBlockedDiscount(
+                    this.uid,
+                    this.discountUid,
+                    this.discountCatalogObjectId);
             }
         }
     }

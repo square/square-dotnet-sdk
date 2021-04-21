@@ -1,21 +1,35 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class MeasurementUnit 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// MeasurementUnit.
+    /// </summary>
+    public class MeasurementUnit
     {
-        public MeasurementUnit(Models.MeasurementUnitCustom customUnit = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MeasurementUnit"/> class.
+        /// </summary>
+        /// <param name="customUnit">custom_unit.</param>
+        /// <param name="areaUnit">area_unit.</param>
+        /// <param name="lengthUnit">length_unit.</param>
+        /// <param name="volumeUnit">volume_unit.</param>
+        /// <param name="weightUnit">weight_unit.</param>
+        /// <param name="genericUnit">generic_unit.</param>
+        /// <param name="timeUnit">time_unit.</param>
+        /// <param name="type">type.</param>
+        public MeasurementUnit(
+            Models.MeasurementUnitCustom customUnit = null,
             string areaUnit = null,
             string lengthUnit = null,
             string volumeUnit = null,
@@ -24,14 +38,14 @@ namespace Square.Models
             string timeUnit = null,
             string type = null)
         {
-            CustomUnit = customUnit;
-            AreaUnit = areaUnit;
-            LengthUnit = lengthUnit;
-            VolumeUnit = volumeUnit;
-            WeightUnit = weightUnit;
-            GenericUnit = genericUnit;
-            TimeUnit = timeUnit;
-            Type = type;
+            this.CustomUnit = customUnit;
+            this.AreaUnit = areaUnit;
+            this.LengthUnit = lengthUnit;
+            this.VolumeUnit = volumeUnit;
+            this.WeightUnit = weightUnit;
+            this.GenericUnit = genericUnit;
+            this.TimeUnit = timeUnit;
+            this.Type = type;
         }
 
         /// <summary>
@@ -65,7 +79,7 @@ namespace Square.Models
         public string WeightUnit { get; }
 
         /// <summary>
-        /// Getter for generic_unit
+        /// Gets or sets GenericUnit.
         /// </summary>
         [JsonProperty("generic_unit", NullValueHandling = NullValueHandling.Ignore)]
         public string GenericUnit { get; }
@@ -82,6 +96,7 @@ namespace Square.Models
         [JsonProperty("type", NullValueHandling = NullValueHandling.Ignore)]
         public string Type { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -91,18 +106,7 @@ namespace Square.Models
             return $"MeasurementUnit : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"CustomUnit = {(CustomUnit == null ? "null" : CustomUnit.ToString())}");
-            toStringOutput.Add($"AreaUnit = {(AreaUnit == null ? "null" : AreaUnit.ToString())}");
-            toStringOutput.Add($"LengthUnit = {(LengthUnit == null ? "null" : LengthUnit.ToString())}");
-            toStringOutput.Add($"VolumeUnit = {(VolumeUnit == null ? "null" : VolumeUnit.ToString())}");
-            toStringOutput.Add($"WeightUnit = {(WeightUnit == null ? "null" : WeightUnit.ToString())}");
-            toStringOutput.Add($"GenericUnit = {(GenericUnit == null ? "null" : GenericUnit.ToString())}");
-            toStringOutput.Add($"TimeUnit = {(TimeUnit == null ? "null" : TimeUnit.ToString())}");
-            toStringOutput.Add($"Type = {(Type == null ? "null" : Type.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -116,77 +120,101 @@ namespace Square.Models
             }
 
             return obj is MeasurementUnit other &&
-                ((CustomUnit == null && other.CustomUnit == null) || (CustomUnit?.Equals(other.CustomUnit) == true)) &&
-                ((AreaUnit == null && other.AreaUnit == null) || (AreaUnit?.Equals(other.AreaUnit) == true)) &&
-                ((LengthUnit == null && other.LengthUnit == null) || (LengthUnit?.Equals(other.LengthUnit) == true)) &&
-                ((VolumeUnit == null && other.VolumeUnit == null) || (VolumeUnit?.Equals(other.VolumeUnit) == true)) &&
-                ((WeightUnit == null && other.WeightUnit == null) || (WeightUnit?.Equals(other.WeightUnit) == true)) &&
-                ((GenericUnit == null && other.GenericUnit == null) || (GenericUnit?.Equals(other.GenericUnit) == true)) &&
-                ((TimeUnit == null && other.TimeUnit == null) || (TimeUnit?.Equals(other.TimeUnit) == true)) &&
-                ((Type == null && other.Type == null) || (Type?.Equals(other.Type) == true));
+                ((this.CustomUnit == null && other.CustomUnit == null) || (this.CustomUnit?.Equals(other.CustomUnit) == true)) &&
+                ((this.AreaUnit == null && other.AreaUnit == null) || (this.AreaUnit?.Equals(other.AreaUnit) == true)) &&
+                ((this.LengthUnit == null && other.LengthUnit == null) || (this.LengthUnit?.Equals(other.LengthUnit) == true)) &&
+                ((this.VolumeUnit == null && other.VolumeUnit == null) || (this.VolumeUnit?.Equals(other.VolumeUnit) == true)) &&
+                ((this.WeightUnit == null && other.WeightUnit == null) || (this.WeightUnit?.Equals(other.WeightUnit) == true)) &&
+                ((this.GenericUnit == null && other.GenericUnit == null) || (this.GenericUnit?.Equals(other.GenericUnit) == true)) &&
+                ((this.TimeUnit == null && other.TimeUnit == null) || (this.TimeUnit?.Equals(other.TimeUnit) == true)) &&
+                ((this.Type == null && other.Type == null) || (this.Type?.Equals(other.Type) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1167462471;
 
-            if (CustomUnit != null)
+            if (this.CustomUnit != null)
             {
-               hashCode += CustomUnit.GetHashCode();
+               hashCode += this.CustomUnit.GetHashCode();
             }
 
-            if (AreaUnit != null)
+            if (this.AreaUnit != null)
             {
-               hashCode += AreaUnit.GetHashCode();
+               hashCode += this.AreaUnit.GetHashCode();
             }
 
-            if (LengthUnit != null)
+            if (this.LengthUnit != null)
             {
-               hashCode += LengthUnit.GetHashCode();
+               hashCode += this.LengthUnit.GetHashCode();
             }
 
-            if (VolumeUnit != null)
+            if (this.VolumeUnit != null)
             {
-               hashCode += VolumeUnit.GetHashCode();
+               hashCode += this.VolumeUnit.GetHashCode();
             }
 
-            if (WeightUnit != null)
+            if (this.WeightUnit != null)
             {
-               hashCode += WeightUnit.GetHashCode();
+               hashCode += this.WeightUnit.GetHashCode();
             }
 
-            if (GenericUnit != null)
+            if (this.GenericUnit != null)
             {
-               hashCode += GenericUnit.GetHashCode();
+               hashCode += this.GenericUnit.GetHashCode();
             }
 
-            if (TimeUnit != null)
+            if (this.TimeUnit != null)
             {
-               hashCode += TimeUnit.GetHashCode();
+               hashCode += this.TimeUnit.GetHashCode();
             }
 
-            if (Type != null)
+            if (this.Type != null)
             {
-               hashCode += Type.GetHashCode();
+               hashCode += this.Type.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.CustomUnit = {(this.CustomUnit == null ? "null" : this.CustomUnit.ToString())}");
+            toStringOutput.Add($"this.AreaUnit = {(this.AreaUnit == null ? "null" : this.AreaUnit.ToString())}");
+            toStringOutput.Add($"this.LengthUnit = {(this.LengthUnit == null ? "null" : this.LengthUnit.ToString())}");
+            toStringOutput.Add($"this.VolumeUnit = {(this.VolumeUnit == null ? "null" : this.VolumeUnit.ToString())}");
+            toStringOutput.Add($"this.WeightUnit = {(this.WeightUnit == null ? "null" : this.WeightUnit.ToString())}");
+            toStringOutput.Add($"this.GenericUnit = {(this.GenericUnit == null ? "null" : this.GenericUnit.ToString())}");
+            toStringOutput.Add($"this.TimeUnit = {(this.TimeUnit == null ? "null" : this.TimeUnit.ToString())}");
+            toStringOutput.Add($"this.Type = {(this.Type == null ? "null" : this.Type.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .CustomUnit(CustomUnit)
-                .AreaUnit(AreaUnit)
-                .LengthUnit(LengthUnit)
-                .VolumeUnit(VolumeUnit)
-                .WeightUnit(WeightUnit)
-                .GenericUnit(GenericUnit)
-                .TimeUnit(TimeUnit)
-                .Type(Type);
+                .CustomUnit(this.CustomUnit)
+                .AreaUnit(this.AreaUnit)
+                .LengthUnit(this.LengthUnit)
+                .VolumeUnit(this.VolumeUnit)
+                .WeightUnit(this.WeightUnit)
+                .GenericUnit(this.GenericUnit)
+                .TimeUnit(this.TimeUnit)
+                .Type(this.Type);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private Models.MeasurementUnitCustom customUnit;
@@ -198,66 +226,109 @@ namespace Square.Models
             private string timeUnit;
             private string type;
 
-
-
+             /// <summary>
+             /// CustomUnit.
+             /// </summary>
+             /// <param name="customUnit"> customUnit. </param>
+             /// <returns> Builder. </returns>
             public Builder CustomUnit(Models.MeasurementUnitCustom customUnit)
             {
                 this.customUnit = customUnit;
                 return this;
             }
 
+             /// <summary>
+             /// AreaUnit.
+             /// </summary>
+             /// <param name="areaUnit"> areaUnit. </param>
+             /// <returns> Builder. </returns>
             public Builder AreaUnit(string areaUnit)
             {
                 this.areaUnit = areaUnit;
                 return this;
             }
 
+             /// <summary>
+             /// LengthUnit.
+             /// </summary>
+             /// <param name="lengthUnit"> lengthUnit. </param>
+             /// <returns> Builder. </returns>
             public Builder LengthUnit(string lengthUnit)
             {
                 this.lengthUnit = lengthUnit;
                 return this;
             }
 
+             /// <summary>
+             /// VolumeUnit.
+             /// </summary>
+             /// <param name="volumeUnit"> volumeUnit. </param>
+             /// <returns> Builder. </returns>
             public Builder VolumeUnit(string volumeUnit)
             {
                 this.volumeUnit = volumeUnit;
                 return this;
             }
 
+             /// <summary>
+             /// WeightUnit.
+             /// </summary>
+             /// <param name="weightUnit"> weightUnit. </param>
+             /// <returns> Builder. </returns>
             public Builder WeightUnit(string weightUnit)
             {
                 this.weightUnit = weightUnit;
                 return this;
             }
 
+             /// <summary>
+             /// GenericUnit.
+             /// </summary>
+             /// <param name="genericUnit"> genericUnit. </param>
+             /// <returns> Builder. </returns>
             public Builder GenericUnit(string genericUnit)
             {
                 this.genericUnit = genericUnit;
                 return this;
             }
 
+             /// <summary>
+             /// TimeUnit.
+             /// </summary>
+             /// <param name="timeUnit"> timeUnit. </param>
+             /// <returns> Builder. </returns>
             public Builder TimeUnit(string timeUnit)
             {
                 this.timeUnit = timeUnit;
                 return this;
             }
 
+             /// <summary>
+             /// Type.
+             /// </summary>
+             /// <param name="type"> type. </param>
+             /// <returns> Builder. </returns>
             public Builder Type(string type)
             {
                 this.type = type;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> MeasurementUnit. </returns>
             public MeasurementUnit Build()
             {
-                return new MeasurementUnit(customUnit,
-                    areaUnit,
-                    lengthUnit,
-                    volumeUnit,
-                    weightUnit,
-                    genericUnit,
-                    timeUnit,
-                    type);
+                return new MeasurementUnit(
+                    this.customUnit,
+                    this.areaUnit,
+                    this.lengthUnit,
+                    this.volumeUnit,
+                    this.weightUnit,
+                    this.genericUnit,
+                    this.timeUnit,
+                    this.type);
             }
         }
     }

@@ -1,30 +1,42 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square.Http.Client;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class RetrieveCatalogObjectResponse 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Http.Client;
+    using Square.Utilities;
+
+    /// <summary>
+    /// RetrieveCatalogObjectResponse.
+    /// </summary>
+    public class RetrieveCatalogObjectResponse
     {
-        public RetrieveCatalogObjectResponse(IList<Models.Error> errors = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RetrieveCatalogObjectResponse"/> class.
+        /// </summary>
+        /// <param name="errors">errors.</param>
+        /// <param name="mObject">object.</param>
+        /// <param name="relatedObjects">related_objects.</param>
+        public RetrieveCatalogObjectResponse(
+            IList<Models.Error> errors = null,
             Models.CatalogObject mObject = null,
             IList<Models.CatalogObject> relatedObjects = null)
         {
-            Errors = errors;
-            MObject = mObject;
-            RelatedObjects = relatedObjects;
+            this.Errors = errors;
+            this.MObject = mObject;
+            this.RelatedObjects = relatedObjects;
         }
 
+        /// <summary>
+        /// Gets http context.
+        /// </summary>
         [JsonIgnore]
         public HttpContext Context { get; internal set; }
 
@@ -65,6 +77,7 @@ namespace Square.Models
         [JsonProperty("related_objects", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.CatalogObject> RelatedObjects { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -74,13 +87,7 @@ namespace Square.Models
             return $"RetrieveCatalogObjectResponse : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Errors = {(Errors == null ? "null" : $"[{ string.Join(", ", Errors)} ]")}");
-            toStringOutput.Add($"MObject = {(MObject == null ? "null" : MObject.ToString())}");
-            toStringOutput.Add($"RelatedObjects = {(RelatedObjects == null ? "null" : $"[{ string.Join(", ", RelatedObjects)} ]")}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -94,79 +101,116 @@ namespace Square.Models
             }
 
             return obj is RetrieveCatalogObjectResponse other &&
-                ((Context == null && other.Context == null) || (Context?.Equals(other.Context) == true)) &&
-                ((Errors == null && other.Errors == null) || (Errors?.Equals(other.Errors) == true)) &&
-                ((MObject == null && other.MObject == null) || (MObject?.Equals(other.MObject) == true)) &&
-                ((RelatedObjects == null && other.RelatedObjects == null) || (RelatedObjects?.Equals(other.RelatedObjects) == true));
+                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
+                ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true)) &&
+                ((this.MObject == null && other.MObject == null) || (this.MObject?.Equals(other.MObject) == true)) &&
+                ((this.RelatedObjects == null && other.RelatedObjects == null) || (this.RelatedObjects?.Equals(other.RelatedObjects) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1437875617;
 
-            if (Context != null)
+            if (this.Context != null)
             {
-                hashCode += Context.GetHashCode();
+                hashCode += this.Context.GetHashCode();
             }
 
-            if (Errors != null)
+            if (this.Errors != null)
             {
-               hashCode += Errors.GetHashCode();
+               hashCode += this.Errors.GetHashCode();
             }
 
-            if (MObject != null)
+            if (this.MObject != null)
             {
-               hashCode += MObject.GetHashCode();
+               hashCode += this.MObject.GetHashCode();
             }
 
-            if (RelatedObjects != null)
+            if (this.RelatedObjects != null)
             {
-               hashCode += RelatedObjects.GetHashCode();
+               hashCode += this.RelatedObjects.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Errors = {(this.Errors == null ? "null" : $"[{string.Join(", ", this.Errors)} ]")}");
+            toStringOutput.Add($"this.MObject = {(this.MObject == null ? "null" : this.MObject.ToString())}");
+            toStringOutput.Add($"this.RelatedObjects = {(this.RelatedObjects == null ? "null" : $"[{string.Join(", ", this.RelatedObjects)} ]")}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .Errors(Errors)
-                .MObject(MObject)
-                .RelatedObjects(RelatedObjects);
+                .Errors(this.Errors)
+                .MObject(this.MObject)
+                .RelatedObjects(this.RelatedObjects);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private IList<Models.Error> errors;
             private Models.CatalogObject mObject;
             private IList<Models.CatalogObject> relatedObjects;
 
-
-
+             /// <summary>
+             /// Errors.
+             /// </summary>
+             /// <param name="errors"> errors. </param>
+             /// <returns> Builder. </returns>
             public Builder Errors(IList<Models.Error> errors)
             {
                 this.errors = errors;
                 return this;
             }
 
+             /// <summary>
+             /// MObject.
+             /// </summary>
+             /// <param name="mObject"> mObject. </param>
+             /// <returns> Builder. </returns>
             public Builder MObject(Models.CatalogObject mObject)
             {
                 this.mObject = mObject;
                 return this;
             }
 
+             /// <summary>
+             /// RelatedObjects.
+             /// </summary>
+             /// <param name="relatedObjects"> relatedObjects. </param>
+             /// <returns> Builder. </returns>
             public Builder RelatedObjects(IList<Models.CatalogObject> relatedObjects)
             {
                 this.relatedObjects = relatedObjects;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> RetrieveCatalogObjectResponse. </returns>
             public RetrieveCatalogObjectResponse Build()
             {
-                return new RetrieveCatalogObjectResponse(errors,
-                    mObject,
-                    relatedObjects);
+                return new RetrieveCatalogObjectResponse(
+                    this.errors,
+                    this.mObject,
+                    this.relatedObjects);
             }
         }
     }

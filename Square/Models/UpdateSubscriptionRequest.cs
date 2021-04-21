@@ -1,33 +1,41 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class UpdateSubscriptionRequest 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// UpdateSubscriptionRequest.
+    /// </summary>
+    public class UpdateSubscriptionRequest
     {
-        public UpdateSubscriptionRequest(Models.Subscription subscription = null)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UpdateSubscriptionRequest"/> class.
+        /// </summary>
+        /// <param name="subscription">subscription.</param>
+        public UpdateSubscriptionRequest(
+            Models.Subscription subscription = null)
         {
-            Subscription = subscription;
+            this.Subscription = subscription;
         }
 
         /// <summary>
         /// Represents a customer subscription to a subscription plan.
-        /// For an overview of the `Subscription` type, see 
+        /// For an overview of the `Subscription` type, see
         /// [Subscription object](https://developer.squareup.com/docs/subscriptions-api/overview#subscription-object-overview).
         /// </summary>
         [JsonProperty("subscription", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Subscription Subscription { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -37,11 +45,7 @@ namespace Square.Models
             return $"UpdateSubscriptionRequest : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Subscription = {(Subscription == null ? "null" : Subscription.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -55,43 +59,68 @@ namespace Square.Models
             }
 
             return obj is UpdateSubscriptionRequest other &&
-                ((Subscription == null && other.Subscription == null) || (Subscription?.Equals(other.Subscription) == true));
+                ((this.Subscription == null && other.Subscription == null) || (this.Subscription?.Equals(other.Subscription) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -881287883;
 
-            if (Subscription != null)
+            if (this.Subscription != null)
             {
-               hashCode += Subscription.GetHashCode();
+               hashCode += this.Subscription.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Subscription = {(this.Subscription == null ? "null" : this.Subscription.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .Subscription(Subscription);
+                .Subscription(this.Subscription);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private Models.Subscription subscription;
 
-
-
+             /// <summary>
+             /// Subscription.
+             /// </summary>
+             /// <param name="subscription"> subscription. </param>
+             /// <returns> Builder. </returns>
             public Builder Subscription(Models.Subscription subscription)
             {
                 this.subscription = subscription;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> UpdateSubscriptionRequest. </returns>
             public UpdateSubscriptionRequest Build()
             {
-                return new UpdateSubscriptionRequest(subscription);
+                return new UpdateSubscriptionRequest(
+                    this.subscription);
             }
         }
     }

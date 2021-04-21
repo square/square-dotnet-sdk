@@ -1,25 +1,33 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class CreateOrderRequest 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// CreateOrderRequest.
+    /// </summary>
+    public class CreateOrderRequest
     {
-        public CreateOrderRequest(Models.Order order = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CreateOrderRequest"/> class.
+        /// </summary>
+        /// <param name="order">order.</param>
+        /// <param name="idempotencyKey">idempotency_key.</param>
+        public CreateOrderRequest(
+            Models.Order order = null,
             string idempotencyKey = null)
         {
-            Order = order;
-            IdempotencyKey = idempotencyKey;
+            this.Order = order;
+            this.IdempotencyKey = idempotencyKey;
         }
 
         /// <summary>
@@ -43,6 +51,7 @@ namespace Square.Models
         [JsonProperty("idempotency_key", NullValueHandling = NullValueHandling.Ignore)]
         public string IdempotencyKey { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -52,12 +61,7 @@ namespace Square.Models
             return $"CreateOrderRequest : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Order = {(Order == null ? "null" : Order.ToString())}");
-            toStringOutput.Add($"IdempotencyKey = {(IdempotencyKey == null ? "null" : IdempotencyKey == string.Empty ? "" : IdempotencyKey)}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -71,58 +75,89 @@ namespace Square.Models
             }
 
             return obj is CreateOrderRequest other &&
-                ((Order == null && other.Order == null) || (Order?.Equals(other.Order) == true)) &&
-                ((IdempotencyKey == null && other.IdempotencyKey == null) || (IdempotencyKey?.Equals(other.IdempotencyKey) == true));
+                ((this.Order == null && other.Order == null) || (this.Order?.Equals(other.Order) == true)) &&
+                ((this.IdempotencyKey == null && other.IdempotencyKey == null) || (this.IdempotencyKey?.Equals(other.IdempotencyKey) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -934891871;
 
-            if (Order != null)
+            if (this.Order != null)
             {
-               hashCode += Order.GetHashCode();
+               hashCode += this.Order.GetHashCode();
             }
 
-            if (IdempotencyKey != null)
+            if (this.IdempotencyKey != null)
             {
-               hashCode += IdempotencyKey.GetHashCode();
+               hashCode += this.IdempotencyKey.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Order = {(this.Order == null ? "null" : this.Order.ToString())}");
+            toStringOutput.Add($"this.IdempotencyKey = {(this.IdempotencyKey == null ? "null" : this.IdempotencyKey == string.Empty ? "" : this.IdempotencyKey)}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .Order(Order)
-                .IdempotencyKey(IdempotencyKey);
+                .Order(this.Order)
+                .IdempotencyKey(this.IdempotencyKey);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private Models.Order order;
             private string idempotencyKey;
 
-
-
+             /// <summary>
+             /// Order.
+             /// </summary>
+             /// <param name="order"> order. </param>
+             /// <returns> Builder. </returns>
             public Builder Order(Models.Order order)
             {
                 this.order = order;
                 return this;
             }
 
+             /// <summary>
+             /// IdempotencyKey.
+             /// </summary>
+             /// <param name="idempotencyKey"> idempotencyKey. </param>
+             /// <returns> Builder. </returns>
             public Builder IdempotencyKey(string idempotencyKey)
             {
                 this.idempotencyKey = idempotencyKey;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> CreateOrderRequest. </returns>
             public CreateOrderRequest Build()
             {
-                return new CreateOrderRequest(order,
-                    idempotencyKey);
+                return new CreateOrderRequest(
+                    this.order,
+                    this.idempotencyKey);
             }
         }
     }

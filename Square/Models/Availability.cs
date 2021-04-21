@@ -1,31 +1,40 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class Availability 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// Availability.
+    /// </summary>
+    public class Availability
     {
-        public Availability(string startAt = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Availability"/> class.
+        /// </summary>
+        /// <param name="startAt">start_at.</param>
+        /// <param name="locationId">location_id.</param>
+        /// <param name="appointmentSegments">appointment_segments.</param>
+        public Availability(
+            string startAt = null,
             string locationId = null,
             IList<Models.AppointmentSegment> appointmentSegments = null)
         {
-            StartAt = startAt;
-            LocationId = locationId;
-            AppointmentSegments = appointmentSegments;
+            this.StartAt = startAt;
+            this.LocationId = locationId;
+            this.AppointmentSegments = appointmentSegments;
         }
 
         /// <summary>
-        /// The RFC-3339 timestamp specifying the beginning time of the slot available for booking.
+        /// The RFC 3339 timestamp specifying the beginning time of the slot available for booking.
         /// </summary>
         [JsonProperty("start_at", NullValueHandling = NullValueHandling.Ignore)]
         public string StartAt { get; }
@@ -42,6 +51,7 @@ namespace Square.Models
         [JsonProperty("appointment_segments", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.AppointmentSegment> AppointmentSegments { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -51,13 +61,7 @@ namespace Square.Models
             return $"Availability : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"StartAt = {(StartAt == null ? "null" : StartAt == string.Empty ? "" : StartAt)}");
-            toStringOutput.Add($"LocationId = {(LocationId == null ? "null" : LocationId == string.Empty ? "" : LocationId)}");
-            toStringOutput.Add($"AppointmentSegments = {(AppointmentSegments == null ? "null" : $"[{ string.Join(", ", AppointmentSegments)} ]")}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -71,73 +75,110 @@ namespace Square.Models
             }
 
             return obj is Availability other &&
-                ((StartAt == null && other.StartAt == null) || (StartAt?.Equals(other.StartAt) == true)) &&
-                ((LocationId == null && other.LocationId == null) || (LocationId?.Equals(other.LocationId) == true)) &&
-                ((AppointmentSegments == null && other.AppointmentSegments == null) || (AppointmentSegments?.Equals(other.AppointmentSegments) == true));
+                ((this.StartAt == null && other.StartAt == null) || (this.StartAt?.Equals(other.StartAt) == true)) &&
+                ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true)) &&
+                ((this.AppointmentSegments == null && other.AppointmentSegments == null) || (this.AppointmentSegments?.Equals(other.AppointmentSegments) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 133095493;
 
-            if (StartAt != null)
+            if (this.StartAt != null)
             {
-               hashCode += StartAt.GetHashCode();
+               hashCode += this.StartAt.GetHashCode();
             }
 
-            if (LocationId != null)
+            if (this.LocationId != null)
             {
-               hashCode += LocationId.GetHashCode();
+               hashCode += this.LocationId.GetHashCode();
             }
 
-            if (AppointmentSegments != null)
+            if (this.AppointmentSegments != null)
             {
-               hashCode += AppointmentSegments.GetHashCode();
+               hashCode += this.AppointmentSegments.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.StartAt = {(this.StartAt == null ? "null" : this.StartAt == string.Empty ? "" : this.StartAt)}");
+            toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId == string.Empty ? "" : this.LocationId)}");
+            toStringOutput.Add($"this.AppointmentSegments = {(this.AppointmentSegments == null ? "null" : $"[{string.Join(", ", this.AppointmentSegments)} ]")}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .StartAt(StartAt)
-                .LocationId(LocationId)
-                .AppointmentSegments(AppointmentSegments);
+                .StartAt(this.StartAt)
+                .LocationId(this.LocationId)
+                .AppointmentSegments(this.AppointmentSegments);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string startAt;
             private string locationId;
             private IList<Models.AppointmentSegment> appointmentSegments;
 
-
-
+             /// <summary>
+             /// StartAt.
+             /// </summary>
+             /// <param name="startAt"> startAt. </param>
+             /// <returns> Builder. </returns>
             public Builder StartAt(string startAt)
             {
                 this.startAt = startAt;
                 return this;
             }
 
+             /// <summary>
+             /// LocationId.
+             /// </summary>
+             /// <param name="locationId"> locationId. </param>
+             /// <returns> Builder. </returns>
             public Builder LocationId(string locationId)
             {
                 this.locationId = locationId;
                 return this;
             }
 
+             /// <summary>
+             /// AppointmentSegments.
+             /// </summary>
+             /// <param name="appointmentSegments"> appointmentSegments. </param>
+             /// <returns> Builder. </returns>
             public Builder AppointmentSegments(IList<Models.AppointmentSegment> appointmentSegments)
             {
                 this.appointmentSegments = appointmentSegments;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> Availability. </returns>
             public Availability Build()
             {
-                return new Availability(startAt,
-                    locationId,
-                    appointmentSegments);
+                return new Availability(
+                    this.startAt,
+                    this.locationId,
+                    this.appointmentSegments);
             }
         }
     }

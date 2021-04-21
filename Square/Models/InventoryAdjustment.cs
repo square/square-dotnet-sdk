@@ -1,21 +1,44 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class InventoryAdjustment 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// InventoryAdjustment.
+    /// </summary>
+    public class InventoryAdjustment
     {
-        public InventoryAdjustment(string id = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="InventoryAdjustment"/> class.
+        /// </summary>
+        /// <param name="id">id.</param>
+        /// <param name="referenceId">reference_id.</param>
+        /// <param name="fromState">from_state.</param>
+        /// <param name="toState">to_state.</param>
+        /// <param name="locationId">location_id.</param>
+        /// <param name="catalogObjectId">catalog_object_id.</param>
+        /// <param name="catalogObjectType">catalog_object_type.</param>
+        /// <param name="quantity">quantity.</param>
+        /// <param name="totalPriceMoney">total_price_money.</param>
+        /// <param name="occurredAt">occurred_at.</param>
+        /// <param name="createdAt">created_at.</param>
+        /// <param name="source">source.</param>
+        /// <param name="employeeId">employee_id.</param>
+        /// <param name="transactionId">transaction_id.</param>
+        /// <param name="refundId">refund_id.</param>
+        /// <param name="purchaseOrderId">purchase_order_id.</param>
+        /// <param name="goodsReceiptId">goods_receipt_id.</param>
+        public InventoryAdjustment(
+            string id = null,
             string referenceId = null,
             string fromState = null,
             string toState = null,
@@ -33,23 +56,23 @@ namespace Square.Models
             string purchaseOrderId = null,
             string goodsReceiptId = null)
         {
-            Id = id;
-            ReferenceId = referenceId;
-            FromState = fromState;
-            ToState = toState;
-            LocationId = locationId;
-            CatalogObjectId = catalogObjectId;
-            CatalogObjectType = catalogObjectType;
-            Quantity = quantity;
-            TotalPriceMoney = totalPriceMoney;
-            OccurredAt = occurredAt;
-            CreatedAt = createdAt;
-            Source = source;
-            EmployeeId = employeeId;
-            TransactionId = transactionId;
-            RefundId = refundId;
-            PurchaseOrderId = purchaseOrderId;
-            GoodsReceiptId = goodsReceiptId;
+            this.Id = id;
+            this.ReferenceId = referenceId;
+            this.FromState = fromState;
+            this.ToState = toState;
+            this.LocationId = locationId;
+            this.CatalogObjectId = catalogObjectId;
+            this.CatalogObjectType = catalogObjectType;
+            this.Quantity = quantity;
+            this.TotalPriceMoney = totalPriceMoney;
+            this.OccurredAt = occurredAt;
+            this.CreatedAt = createdAt;
+            this.Source = source;
+            this.EmployeeId = employeeId;
+            this.TransactionId = transactionId;
+            this.RefundId = refundId;
+            this.PurchaseOrderId = purchaseOrderId;
+            this.GoodsReceiptId = goodsReceiptId;
         }
 
         /// <summary>
@@ -80,7 +103,7 @@ namespace Square.Models
         public string ToState { get; }
 
         /// <summary>
-        /// The Square ID of the [Location](#type-location) where the related
+        /// The Square ID of the [Location]($m/Location) where the related
         /// quantity of items are being tracked.
         /// </summary>
         [JsonProperty("location_id", NullValueHandling = NullValueHandling.Ignore)]
@@ -142,7 +165,7 @@ namespace Square.Models
         public Models.SourceApplication Source { get; }
 
         /// <summary>
-        /// The Square ID of the [Employee](#type-employee) responsible for the
+        /// The Square ID of the [Employee]($m/Employee) responsible for the
         /// inventory adjustment.
         /// </summary>
         [JsonProperty("employee_id", NullValueHandling = NullValueHandling.Ignore)]
@@ -180,6 +203,7 @@ namespace Square.Models
         [JsonProperty("goods_receipt_id", NullValueHandling = NullValueHandling.Ignore)]
         public string GoodsReceiptId { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -189,27 +213,7 @@ namespace Square.Models
             return $"InventoryAdjustment : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Id = {(Id == null ? "null" : Id == string.Empty ? "" : Id)}");
-            toStringOutput.Add($"ReferenceId = {(ReferenceId == null ? "null" : ReferenceId == string.Empty ? "" : ReferenceId)}");
-            toStringOutput.Add($"FromState = {(FromState == null ? "null" : FromState.ToString())}");
-            toStringOutput.Add($"ToState = {(ToState == null ? "null" : ToState.ToString())}");
-            toStringOutput.Add($"LocationId = {(LocationId == null ? "null" : LocationId == string.Empty ? "" : LocationId)}");
-            toStringOutput.Add($"CatalogObjectId = {(CatalogObjectId == null ? "null" : CatalogObjectId == string.Empty ? "" : CatalogObjectId)}");
-            toStringOutput.Add($"CatalogObjectType = {(CatalogObjectType == null ? "null" : CatalogObjectType == string.Empty ? "" : CatalogObjectType)}");
-            toStringOutput.Add($"Quantity = {(Quantity == null ? "null" : Quantity == string.Empty ? "" : Quantity)}");
-            toStringOutput.Add($"TotalPriceMoney = {(TotalPriceMoney == null ? "null" : TotalPriceMoney.ToString())}");
-            toStringOutput.Add($"OccurredAt = {(OccurredAt == null ? "null" : OccurredAt == string.Empty ? "" : OccurredAt)}");
-            toStringOutput.Add($"CreatedAt = {(CreatedAt == null ? "null" : CreatedAt == string.Empty ? "" : CreatedAt)}");
-            toStringOutput.Add($"Source = {(Source == null ? "null" : Source.ToString())}");
-            toStringOutput.Add($"EmployeeId = {(EmployeeId == null ? "null" : EmployeeId == string.Empty ? "" : EmployeeId)}");
-            toStringOutput.Add($"TransactionId = {(TransactionId == null ? "null" : TransactionId == string.Empty ? "" : TransactionId)}");
-            toStringOutput.Add($"RefundId = {(RefundId == null ? "null" : RefundId == string.Empty ? "" : RefundId)}");
-            toStringOutput.Add($"PurchaseOrderId = {(PurchaseOrderId == null ? "null" : PurchaseOrderId == string.Empty ? "" : PurchaseOrderId)}");
-            toStringOutput.Add($"GoodsReceiptId = {(GoodsReceiptId == null ? "null" : GoodsReceiptId == string.Empty ? "" : GoodsReceiptId)}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -223,140 +227,173 @@ namespace Square.Models
             }
 
             return obj is InventoryAdjustment other &&
-                ((Id == null && other.Id == null) || (Id?.Equals(other.Id) == true)) &&
-                ((ReferenceId == null && other.ReferenceId == null) || (ReferenceId?.Equals(other.ReferenceId) == true)) &&
-                ((FromState == null && other.FromState == null) || (FromState?.Equals(other.FromState) == true)) &&
-                ((ToState == null && other.ToState == null) || (ToState?.Equals(other.ToState) == true)) &&
-                ((LocationId == null && other.LocationId == null) || (LocationId?.Equals(other.LocationId) == true)) &&
-                ((CatalogObjectId == null && other.CatalogObjectId == null) || (CatalogObjectId?.Equals(other.CatalogObjectId) == true)) &&
-                ((CatalogObjectType == null && other.CatalogObjectType == null) || (CatalogObjectType?.Equals(other.CatalogObjectType) == true)) &&
-                ((Quantity == null && other.Quantity == null) || (Quantity?.Equals(other.Quantity) == true)) &&
-                ((TotalPriceMoney == null && other.TotalPriceMoney == null) || (TotalPriceMoney?.Equals(other.TotalPriceMoney) == true)) &&
-                ((OccurredAt == null && other.OccurredAt == null) || (OccurredAt?.Equals(other.OccurredAt) == true)) &&
-                ((CreatedAt == null && other.CreatedAt == null) || (CreatedAt?.Equals(other.CreatedAt) == true)) &&
-                ((Source == null && other.Source == null) || (Source?.Equals(other.Source) == true)) &&
-                ((EmployeeId == null && other.EmployeeId == null) || (EmployeeId?.Equals(other.EmployeeId) == true)) &&
-                ((TransactionId == null && other.TransactionId == null) || (TransactionId?.Equals(other.TransactionId) == true)) &&
-                ((RefundId == null && other.RefundId == null) || (RefundId?.Equals(other.RefundId) == true)) &&
-                ((PurchaseOrderId == null && other.PurchaseOrderId == null) || (PurchaseOrderId?.Equals(other.PurchaseOrderId) == true)) &&
-                ((GoodsReceiptId == null && other.GoodsReceiptId == null) || (GoodsReceiptId?.Equals(other.GoodsReceiptId) == true));
+                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
+                ((this.ReferenceId == null && other.ReferenceId == null) || (this.ReferenceId?.Equals(other.ReferenceId) == true)) &&
+                ((this.FromState == null && other.FromState == null) || (this.FromState?.Equals(other.FromState) == true)) &&
+                ((this.ToState == null && other.ToState == null) || (this.ToState?.Equals(other.ToState) == true)) &&
+                ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true)) &&
+                ((this.CatalogObjectId == null && other.CatalogObjectId == null) || (this.CatalogObjectId?.Equals(other.CatalogObjectId) == true)) &&
+                ((this.CatalogObjectType == null && other.CatalogObjectType == null) || (this.CatalogObjectType?.Equals(other.CatalogObjectType) == true)) &&
+                ((this.Quantity == null && other.Quantity == null) || (this.Quantity?.Equals(other.Quantity) == true)) &&
+                ((this.TotalPriceMoney == null && other.TotalPriceMoney == null) || (this.TotalPriceMoney?.Equals(other.TotalPriceMoney) == true)) &&
+                ((this.OccurredAt == null && other.OccurredAt == null) || (this.OccurredAt?.Equals(other.OccurredAt) == true)) &&
+                ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true)) &&
+                ((this.Source == null && other.Source == null) || (this.Source?.Equals(other.Source) == true)) &&
+                ((this.EmployeeId == null && other.EmployeeId == null) || (this.EmployeeId?.Equals(other.EmployeeId) == true)) &&
+                ((this.TransactionId == null && other.TransactionId == null) || (this.TransactionId?.Equals(other.TransactionId) == true)) &&
+                ((this.RefundId == null && other.RefundId == null) || (this.RefundId?.Equals(other.RefundId) == true)) &&
+                ((this.PurchaseOrderId == null && other.PurchaseOrderId == null) || (this.PurchaseOrderId?.Equals(other.PurchaseOrderId) == true)) &&
+                ((this.GoodsReceiptId == null && other.GoodsReceiptId == null) || (this.GoodsReceiptId?.Equals(other.GoodsReceiptId) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -855846569;
 
-            if (Id != null)
+            if (this.Id != null)
             {
-               hashCode += Id.GetHashCode();
+               hashCode += this.Id.GetHashCode();
             }
 
-            if (ReferenceId != null)
+            if (this.ReferenceId != null)
             {
-               hashCode += ReferenceId.GetHashCode();
+               hashCode += this.ReferenceId.GetHashCode();
             }
 
-            if (FromState != null)
+            if (this.FromState != null)
             {
-               hashCode += FromState.GetHashCode();
+               hashCode += this.FromState.GetHashCode();
             }
 
-            if (ToState != null)
+            if (this.ToState != null)
             {
-               hashCode += ToState.GetHashCode();
+               hashCode += this.ToState.GetHashCode();
             }
 
-            if (LocationId != null)
+            if (this.LocationId != null)
             {
-               hashCode += LocationId.GetHashCode();
+               hashCode += this.LocationId.GetHashCode();
             }
 
-            if (CatalogObjectId != null)
+            if (this.CatalogObjectId != null)
             {
-               hashCode += CatalogObjectId.GetHashCode();
+               hashCode += this.CatalogObjectId.GetHashCode();
             }
 
-            if (CatalogObjectType != null)
+            if (this.CatalogObjectType != null)
             {
-               hashCode += CatalogObjectType.GetHashCode();
+               hashCode += this.CatalogObjectType.GetHashCode();
             }
 
-            if (Quantity != null)
+            if (this.Quantity != null)
             {
-               hashCode += Quantity.GetHashCode();
+               hashCode += this.Quantity.GetHashCode();
             }
 
-            if (TotalPriceMoney != null)
+            if (this.TotalPriceMoney != null)
             {
-               hashCode += TotalPriceMoney.GetHashCode();
+               hashCode += this.TotalPriceMoney.GetHashCode();
             }
 
-            if (OccurredAt != null)
+            if (this.OccurredAt != null)
             {
-               hashCode += OccurredAt.GetHashCode();
+               hashCode += this.OccurredAt.GetHashCode();
             }
 
-            if (CreatedAt != null)
+            if (this.CreatedAt != null)
             {
-               hashCode += CreatedAt.GetHashCode();
+               hashCode += this.CreatedAt.GetHashCode();
             }
 
-            if (Source != null)
+            if (this.Source != null)
             {
-               hashCode += Source.GetHashCode();
+               hashCode += this.Source.GetHashCode();
             }
 
-            if (EmployeeId != null)
+            if (this.EmployeeId != null)
             {
-               hashCode += EmployeeId.GetHashCode();
+               hashCode += this.EmployeeId.GetHashCode();
             }
 
-            if (TransactionId != null)
+            if (this.TransactionId != null)
             {
-               hashCode += TransactionId.GetHashCode();
+               hashCode += this.TransactionId.GetHashCode();
             }
 
-            if (RefundId != null)
+            if (this.RefundId != null)
             {
-               hashCode += RefundId.GetHashCode();
+               hashCode += this.RefundId.GetHashCode();
             }
 
-            if (PurchaseOrderId != null)
+            if (this.PurchaseOrderId != null)
             {
-               hashCode += PurchaseOrderId.GetHashCode();
+               hashCode += this.PurchaseOrderId.GetHashCode();
             }
 
-            if (GoodsReceiptId != null)
+            if (this.GoodsReceiptId != null)
             {
-               hashCode += GoodsReceiptId.GetHashCode();
+               hashCode += this.GoodsReceiptId.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id == string.Empty ? "" : this.Id)}");
+            toStringOutput.Add($"this.ReferenceId = {(this.ReferenceId == null ? "null" : this.ReferenceId == string.Empty ? "" : this.ReferenceId)}");
+            toStringOutput.Add($"this.FromState = {(this.FromState == null ? "null" : this.FromState.ToString())}");
+            toStringOutput.Add($"this.ToState = {(this.ToState == null ? "null" : this.ToState.ToString())}");
+            toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId == string.Empty ? "" : this.LocationId)}");
+            toStringOutput.Add($"this.CatalogObjectId = {(this.CatalogObjectId == null ? "null" : this.CatalogObjectId == string.Empty ? "" : this.CatalogObjectId)}");
+            toStringOutput.Add($"this.CatalogObjectType = {(this.CatalogObjectType == null ? "null" : this.CatalogObjectType == string.Empty ? "" : this.CatalogObjectType)}");
+            toStringOutput.Add($"this.Quantity = {(this.Quantity == null ? "null" : this.Quantity == string.Empty ? "" : this.Quantity)}");
+            toStringOutput.Add($"this.TotalPriceMoney = {(this.TotalPriceMoney == null ? "null" : this.TotalPriceMoney.ToString())}");
+            toStringOutput.Add($"this.OccurredAt = {(this.OccurredAt == null ? "null" : this.OccurredAt == string.Empty ? "" : this.OccurredAt)}");
+            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt == string.Empty ? "" : this.CreatedAt)}");
+            toStringOutput.Add($"this.Source = {(this.Source == null ? "null" : this.Source.ToString())}");
+            toStringOutput.Add($"this.EmployeeId = {(this.EmployeeId == null ? "null" : this.EmployeeId == string.Empty ? "" : this.EmployeeId)}");
+            toStringOutput.Add($"this.TransactionId = {(this.TransactionId == null ? "null" : this.TransactionId == string.Empty ? "" : this.TransactionId)}");
+            toStringOutput.Add($"this.RefundId = {(this.RefundId == null ? "null" : this.RefundId == string.Empty ? "" : this.RefundId)}");
+            toStringOutput.Add($"this.PurchaseOrderId = {(this.PurchaseOrderId == null ? "null" : this.PurchaseOrderId == string.Empty ? "" : this.PurchaseOrderId)}");
+            toStringOutput.Add($"this.GoodsReceiptId = {(this.GoodsReceiptId == null ? "null" : this.GoodsReceiptId == string.Empty ? "" : this.GoodsReceiptId)}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .Id(Id)
-                .ReferenceId(ReferenceId)
-                .FromState(FromState)
-                .ToState(ToState)
-                .LocationId(LocationId)
-                .CatalogObjectId(CatalogObjectId)
-                .CatalogObjectType(CatalogObjectType)
-                .Quantity(Quantity)
-                .TotalPriceMoney(TotalPriceMoney)
-                .OccurredAt(OccurredAt)
-                .CreatedAt(CreatedAt)
-                .Source(Source)
-                .EmployeeId(EmployeeId)
-                .TransactionId(TransactionId)
-                .RefundId(RefundId)
-                .PurchaseOrderId(PurchaseOrderId)
-                .GoodsReceiptId(GoodsReceiptId);
+                .Id(this.Id)
+                .ReferenceId(this.ReferenceId)
+                .FromState(this.FromState)
+                .ToState(this.ToState)
+                .LocationId(this.LocationId)
+                .CatalogObjectId(this.CatalogObjectId)
+                .CatalogObjectType(this.CatalogObjectType)
+                .Quantity(this.Quantity)
+                .TotalPriceMoney(this.TotalPriceMoney)
+                .OccurredAt(this.OccurredAt)
+                .CreatedAt(this.CreatedAt)
+                .Source(this.Source)
+                .EmployeeId(this.EmployeeId)
+                .TransactionId(this.TransactionId)
+                .RefundId(this.RefundId)
+                .PurchaseOrderId(this.PurchaseOrderId)
+                .GoodsReceiptId(this.GoodsReceiptId);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string id;
@@ -377,129 +414,217 @@ namespace Square.Models
             private string purchaseOrderId;
             private string goodsReceiptId;
 
-
-
+             /// <summary>
+             /// Id.
+             /// </summary>
+             /// <param name="id"> id. </param>
+             /// <returns> Builder. </returns>
             public Builder Id(string id)
             {
                 this.id = id;
                 return this;
             }
 
+             /// <summary>
+             /// ReferenceId.
+             /// </summary>
+             /// <param name="referenceId"> referenceId. </param>
+             /// <returns> Builder. </returns>
             public Builder ReferenceId(string referenceId)
             {
                 this.referenceId = referenceId;
                 return this;
             }
 
+             /// <summary>
+             /// FromState.
+             /// </summary>
+             /// <param name="fromState"> fromState. </param>
+             /// <returns> Builder. </returns>
             public Builder FromState(string fromState)
             {
                 this.fromState = fromState;
                 return this;
             }
 
+             /// <summary>
+             /// ToState.
+             /// </summary>
+             /// <param name="toState"> toState. </param>
+             /// <returns> Builder. </returns>
             public Builder ToState(string toState)
             {
                 this.toState = toState;
                 return this;
             }
 
+             /// <summary>
+             /// LocationId.
+             /// </summary>
+             /// <param name="locationId"> locationId. </param>
+             /// <returns> Builder. </returns>
             public Builder LocationId(string locationId)
             {
                 this.locationId = locationId;
                 return this;
             }
 
+             /// <summary>
+             /// CatalogObjectId.
+             /// </summary>
+             /// <param name="catalogObjectId"> catalogObjectId. </param>
+             /// <returns> Builder. </returns>
             public Builder CatalogObjectId(string catalogObjectId)
             {
                 this.catalogObjectId = catalogObjectId;
                 return this;
             }
 
+             /// <summary>
+             /// CatalogObjectType.
+             /// </summary>
+             /// <param name="catalogObjectType"> catalogObjectType. </param>
+             /// <returns> Builder. </returns>
             public Builder CatalogObjectType(string catalogObjectType)
             {
                 this.catalogObjectType = catalogObjectType;
                 return this;
             }
 
+             /// <summary>
+             /// Quantity.
+             /// </summary>
+             /// <param name="quantity"> quantity. </param>
+             /// <returns> Builder. </returns>
             public Builder Quantity(string quantity)
             {
                 this.quantity = quantity;
                 return this;
             }
 
+             /// <summary>
+             /// TotalPriceMoney.
+             /// </summary>
+             /// <param name="totalPriceMoney"> totalPriceMoney. </param>
+             /// <returns> Builder. </returns>
             public Builder TotalPriceMoney(Models.Money totalPriceMoney)
             {
                 this.totalPriceMoney = totalPriceMoney;
                 return this;
             }
 
+             /// <summary>
+             /// OccurredAt.
+             /// </summary>
+             /// <param name="occurredAt"> occurredAt. </param>
+             /// <returns> Builder. </returns>
             public Builder OccurredAt(string occurredAt)
             {
                 this.occurredAt = occurredAt;
                 return this;
             }
 
+             /// <summary>
+             /// CreatedAt.
+             /// </summary>
+             /// <param name="createdAt"> createdAt. </param>
+             /// <returns> Builder. </returns>
             public Builder CreatedAt(string createdAt)
             {
                 this.createdAt = createdAt;
                 return this;
             }
 
+             /// <summary>
+             /// Source.
+             /// </summary>
+             /// <param name="source"> source. </param>
+             /// <returns> Builder. </returns>
             public Builder Source(Models.SourceApplication source)
             {
                 this.source = source;
                 return this;
             }
 
+             /// <summary>
+             /// EmployeeId.
+             /// </summary>
+             /// <param name="employeeId"> employeeId. </param>
+             /// <returns> Builder. </returns>
             public Builder EmployeeId(string employeeId)
             {
                 this.employeeId = employeeId;
                 return this;
             }
 
+             /// <summary>
+             /// TransactionId.
+             /// </summary>
+             /// <param name="transactionId"> transactionId. </param>
+             /// <returns> Builder. </returns>
             public Builder TransactionId(string transactionId)
             {
                 this.transactionId = transactionId;
                 return this;
             }
 
+             /// <summary>
+             /// RefundId.
+             /// </summary>
+             /// <param name="refundId"> refundId. </param>
+             /// <returns> Builder. </returns>
             public Builder RefundId(string refundId)
             {
                 this.refundId = refundId;
                 return this;
             }
 
+             /// <summary>
+             /// PurchaseOrderId.
+             /// </summary>
+             /// <param name="purchaseOrderId"> purchaseOrderId. </param>
+             /// <returns> Builder. </returns>
             public Builder PurchaseOrderId(string purchaseOrderId)
             {
                 this.purchaseOrderId = purchaseOrderId;
                 return this;
             }
 
+             /// <summary>
+             /// GoodsReceiptId.
+             /// </summary>
+             /// <param name="goodsReceiptId"> goodsReceiptId. </param>
+             /// <returns> Builder. </returns>
             public Builder GoodsReceiptId(string goodsReceiptId)
             {
                 this.goodsReceiptId = goodsReceiptId;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> InventoryAdjustment. </returns>
             public InventoryAdjustment Build()
             {
-                return new InventoryAdjustment(id,
-                    referenceId,
-                    fromState,
-                    toState,
-                    locationId,
-                    catalogObjectId,
-                    catalogObjectType,
-                    quantity,
-                    totalPriceMoney,
-                    occurredAt,
-                    createdAt,
-                    source,
-                    employeeId,
-                    transactionId,
-                    refundId,
-                    purchaseOrderId,
-                    goodsReceiptId);
+                return new InventoryAdjustment(
+                    this.id,
+                    this.referenceId,
+                    this.fromState,
+                    this.toState,
+                    this.locationId,
+                    this.catalogObjectId,
+                    this.catalogObjectType,
+                    this.quantity,
+                    this.totalPriceMoney,
+                    this.occurredAt,
+                    this.createdAt,
+                    this.source,
+                    this.employeeId,
+                    this.transactionId,
+                    this.refundId,
+                    this.purchaseOrderId,
+                    this.goodsReceiptId);
             }
         }
     }

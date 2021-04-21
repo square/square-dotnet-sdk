@@ -1,23 +1,30 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class UpdateWorkweekConfigRequest 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// UpdateWorkweekConfigRequest.
+    /// </summary>
+    public class UpdateWorkweekConfigRequest
     {
-        public UpdateWorkweekConfigRequest(Models.WorkweekConfig workweekConfig)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UpdateWorkweekConfigRequest"/> class.
+        /// </summary>
+        /// <param name="workweekConfig">workweek_config.</param>
+        public UpdateWorkweekConfigRequest(
+            Models.WorkweekConfig workweekConfig)
         {
-            WorkweekConfig = workweekConfig;
+            this.WorkweekConfig = workweekConfig;
         }
 
         /// <summary>
@@ -27,6 +34,7 @@ namespace Square.Models
         [JsonProperty("workweek_config")]
         public Models.WorkweekConfig WorkweekConfig { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -36,11 +44,7 @@ namespace Square.Models
             return $"UpdateWorkweekConfigRequest : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"WorkweekConfig = {(WorkweekConfig == null ? "null" : WorkweekConfig.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -54,45 +58,74 @@ namespace Square.Models
             }
 
             return obj is UpdateWorkweekConfigRequest other &&
-                ((WorkweekConfig == null && other.WorkweekConfig == null) || (WorkweekConfig?.Equals(other.WorkweekConfig) == true));
+                ((this.WorkweekConfig == null && other.WorkweekConfig == null) || (this.WorkweekConfig?.Equals(other.WorkweekConfig) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -161126356;
 
-            if (WorkweekConfig != null)
+            if (this.WorkweekConfig != null)
             {
-               hashCode += WorkweekConfig.GetHashCode();
+               hashCode += this.WorkweekConfig.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.WorkweekConfig = {(this.WorkweekConfig == null ? "null" : this.WorkweekConfig.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
-            var builder = new Builder(WorkweekConfig);
+            var builder = new Builder(
+                this.WorkweekConfig);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private Models.WorkweekConfig workweekConfig;
 
-            public Builder(Models.WorkweekConfig workweekConfig)
+            public Builder(
+                Models.WorkweekConfig workweekConfig)
             {
                 this.workweekConfig = workweekConfig;
             }
 
+             /// <summary>
+             /// WorkweekConfig.
+             /// </summary>
+             /// <param name="workweekConfig"> workweekConfig. </param>
+             /// <returns> Builder. </returns>
             public Builder WorkweekConfig(Models.WorkweekConfig workweekConfig)
             {
                 this.workweekConfig = workweekConfig;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> UpdateWorkweekConfigRequest. </returns>
             public UpdateWorkweekConfigRequest Build()
             {
-                return new UpdateWorkweekConfigRequest(workweekConfig);
+                return new UpdateWorkweekConfigRequest(
+                    this.workweekConfig);
             }
         }
     }

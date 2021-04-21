@@ -9,7 +9,7 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `AccessToken` | `string` | Optional | The token you want to renew. |
+| `AccessToken` | `string` | Optional | The token you want to renew.<br>**Constraints**: *Minimum Length*: `2`, *Maximum Length*: `1024` |
 
 ## Example (as JSON)
 

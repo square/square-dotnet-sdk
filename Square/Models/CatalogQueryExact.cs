@@ -1,25 +1,33 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class CatalogQueryExact 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// CatalogQueryExact.
+    /// </summary>
+    public class CatalogQueryExact
     {
-        public CatalogQueryExact(string attributeName,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CatalogQueryExact"/> class.
+        /// </summary>
+        /// <param name="attributeName">attribute_name.</param>
+        /// <param name="attributeValue">attribute_value.</param>
+        public CatalogQueryExact(
+            string attributeName,
             string attributeValue)
         {
-            AttributeName = attributeName;
-            AttributeValue = attributeValue;
+            this.AttributeName = attributeName;
+            this.AttributeValue = attributeValue;
         }
 
         /// <summary>
@@ -35,6 +43,7 @@ namespace Square.Models
         [JsonProperty("attribute_value")]
         public string AttributeValue { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -44,12 +53,7 @@ namespace Square.Models
             return $"CatalogQueryExact : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"AttributeName = {(AttributeName == null ? "null" : AttributeName == string.Empty ? "" : AttributeName)}");
-            toStringOutput.Add($"AttributeValue = {(AttributeValue == null ? "null" : AttributeValue == string.Empty ? "" : AttributeValue)}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -63,62 +67,97 @@ namespace Square.Models
             }
 
             return obj is CatalogQueryExact other &&
-                ((AttributeName == null && other.AttributeName == null) || (AttributeName?.Equals(other.AttributeName) == true)) &&
-                ((AttributeValue == null && other.AttributeValue == null) || (AttributeValue?.Equals(other.AttributeValue) == true));
+                ((this.AttributeName == null && other.AttributeName == null) || (this.AttributeName?.Equals(other.AttributeName) == true)) &&
+                ((this.AttributeValue == null && other.AttributeValue == null) || (this.AttributeValue?.Equals(other.AttributeValue) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -743751554;
 
-            if (AttributeName != null)
+            if (this.AttributeName != null)
             {
-               hashCode += AttributeName.GetHashCode();
+               hashCode += this.AttributeName.GetHashCode();
             }
 
-            if (AttributeValue != null)
+            if (this.AttributeValue != null)
             {
-               hashCode += AttributeValue.GetHashCode();
+               hashCode += this.AttributeValue.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.AttributeName = {(this.AttributeName == null ? "null" : this.AttributeName == string.Empty ? "" : this.AttributeName)}");
+            toStringOutput.Add($"this.AttributeValue = {(this.AttributeValue == null ? "null" : this.AttributeValue == string.Empty ? "" : this.AttributeValue)}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
-            var builder = new Builder(AttributeName,
-                AttributeValue);
+            var builder = new Builder(
+                this.AttributeName,
+                this.AttributeValue);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string attributeName;
             private string attributeValue;
 
-            public Builder(string attributeName,
+            public Builder(
+                string attributeName,
                 string attributeValue)
             {
                 this.attributeName = attributeName;
                 this.attributeValue = attributeValue;
             }
 
+             /// <summary>
+             /// AttributeName.
+             /// </summary>
+             /// <param name="attributeName"> attributeName. </param>
+             /// <returns> Builder. </returns>
             public Builder AttributeName(string attributeName)
             {
                 this.attributeName = attributeName;
                 return this;
             }
 
+             /// <summary>
+             /// AttributeValue.
+             /// </summary>
+             /// <param name="attributeValue"> attributeValue. </param>
+             /// <returns> Builder. </returns>
             public Builder AttributeValue(string attributeValue)
             {
                 this.attributeValue = attributeValue;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> CatalogQueryExact. </returns>
             public CatalogQueryExact Build()
             {
-                return new CatalogQueryExact(attributeName,
-                    attributeValue);
+                return new CatalogQueryExact(
+                    this.attributeName,
+                    this.attributeValue);
             }
         }
     }

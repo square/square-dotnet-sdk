@@ -67,7 +67,9 @@ catch (ApiException e){};
 Provides comprehensive information for a single online store order, including the order's history.
 
 ```csharp
-RetrieveOrderAsync(string locationId, string orderId)
+RetrieveOrderAsync(
+    string locationId,
+    string orderId)
 ```
 
 ## Parameters
@@ -100,7 +102,10 @@ catch (ApiException e){};
 Updates the details of an online store order. Every update you perform on an order corresponds to one of three actions:
 
 ```csharp
-UpdateOrderAsync(string locationId, string orderId, Models.V1UpdateOrderRequest body)
+UpdateOrderAsync(
+    string locationId,
+    string orderId,
+    Models.V1UpdateOrderRequest body)
 ```
 
 ## Parameters
@@ -201,7 +206,9 @@ catch (ApiException e){};
 Provides comprehensive information for a single payment.
 
 ```csharp
-RetrievePaymentAsync(string locationId, string paymentId)
+RetrievePaymentAsync(
+    string locationId,
+    string paymentId)
 ```
 
 ## Parameters
@@ -292,7 +299,9 @@ purposes, you can create fake cash payments in Square Point of Sale and
 refund them.
 
 ```csharp
-CreateRefundAsync(string locationId, Models.V1CreateRefundRequest body)
+CreateRefundAsync(
+    string locationId,
+    Models.V1CreateRefundRequest body)
 ```
 
 ## Parameters
@@ -406,7 +415,9 @@ a bank account within 3 business days, but in exceptional cases it may
 take longer.
 
 ```csharp
-RetrieveSettlementAsync(string locationId, string settlementId)
+RetrieveSettlementAsync(
+    string locationId,
+    string settlementId)
 ```
 
 ## Parameters

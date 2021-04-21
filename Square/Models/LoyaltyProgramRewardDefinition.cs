@@ -1,33 +1,45 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class LoyaltyProgramRewardDefinition 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// LoyaltyProgramRewardDefinition.
+    /// </summary>
+    public class LoyaltyProgramRewardDefinition
     {
-        public LoyaltyProgramRewardDefinition(string scope,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LoyaltyProgramRewardDefinition"/> class.
+        /// </summary>
+        /// <param name="scope">scope.</param>
+        /// <param name="discountType">discount_type.</param>
+        /// <param name="percentageDiscount">percentage_discount.</param>
+        /// <param name="catalogObjectIds">catalog_object_ids.</param>
+        /// <param name="fixedDiscountMoney">fixed_discount_money.</param>
+        /// <param name="maxDiscountMoney">max_discount_money.</param>
+        public LoyaltyProgramRewardDefinition(
+            string scope,
             string discountType,
             string percentageDiscount = null,
             IList<string> catalogObjectIds = null,
             Models.Money fixedDiscountMoney = null,
             Models.Money maxDiscountMoney = null)
         {
-            Scope = scope;
-            DiscountType = discountType;
-            PercentageDiscount = percentageDiscount;
-            CatalogObjectIds = catalogObjectIds;
-            FixedDiscountMoney = fixedDiscountMoney;
-            MaxDiscountMoney = maxDiscountMoney;
+            this.Scope = scope;
+            this.DiscountType = discountType;
+            this.PercentageDiscount = percentageDiscount;
+            this.CatalogObjectIds = catalogObjectIds;
+            this.FixedDiscountMoney = fixedDiscountMoney;
+            this.MaxDiscountMoney = maxDiscountMoney;
         }
 
         /// <summary>
@@ -84,6 +96,7 @@ namespace Square.Models
         [JsonProperty("max_discount_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Money MaxDiscountMoney { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -93,16 +106,7 @@ namespace Square.Models
             return $"LoyaltyProgramRewardDefinition : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Scope = {(Scope == null ? "null" : Scope.ToString())}");
-            toStringOutput.Add($"DiscountType = {(DiscountType == null ? "null" : DiscountType.ToString())}");
-            toStringOutput.Add($"PercentageDiscount = {(PercentageDiscount == null ? "null" : PercentageDiscount == string.Empty ? "" : PercentageDiscount)}");
-            toStringOutput.Add($"CatalogObjectIds = {(CatalogObjectIds == null ? "null" : $"[{ string.Join(", ", CatalogObjectIds)} ]")}");
-            toStringOutput.Add($"FixedDiscountMoney = {(FixedDiscountMoney == null ? "null" : FixedDiscountMoney.ToString())}");
-            toStringOutput.Add($"MaxDiscountMoney = {(MaxDiscountMoney == null ? "null" : MaxDiscountMoney.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -116,62 +120,85 @@ namespace Square.Models
             }
 
             return obj is LoyaltyProgramRewardDefinition other &&
-                ((Scope == null && other.Scope == null) || (Scope?.Equals(other.Scope) == true)) &&
-                ((DiscountType == null && other.DiscountType == null) || (DiscountType?.Equals(other.DiscountType) == true)) &&
-                ((PercentageDiscount == null && other.PercentageDiscount == null) || (PercentageDiscount?.Equals(other.PercentageDiscount) == true)) &&
-                ((CatalogObjectIds == null && other.CatalogObjectIds == null) || (CatalogObjectIds?.Equals(other.CatalogObjectIds) == true)) &&
-                ((FixedDiscountMoney == null && other.FixedDiscountMoney == null) || (FixedDiscountMoney?.Equals(other.FixedDiscountMoney) == true)) &&
-                ((MaxDiscountMoney == null && other.MaxDiscountMoney == null) || (MaxDiscountMoney?.Equals(other.MaxDiscountMoney) == true));
+                ((this.Scope == null && other.Scope == null) || (this.Scope?.Equals(other.Scope) == true)) &&
+                ((this.DiscountType == null && other.DiscountType == null) || (this.DiscountType?.Equals(other.DiscountType) == true)) &&
+                ((this.PercentageDiscount == null && other.PercentageDiscount == null) || (this.PercentageDiscount?.Equals(other.PercentageDiscount) == true)) &&
+                ((this.CatalogObjectIds == null && other.CatalogObjectIds == null) || (this.CatalogObjectIds?.Equals(other.CatalogObjectIds) == true)) &&
+                ((this.FixedDiscountMoney == null && other.FixedDiscountMoney == null) || (this.FixedDiscountMoney?.Equals(other.FixedDiscountMoney) == true)) &&
+                ((this.MaxDiscountMoney == null && other.MaxDiscountMoney == null) || (this.MaxDiscountMoney?.Equals(other.MaxDiscountMoney) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 1536175793;
 
-            if (Scope != null)
+            if (this.Scope != null)
             {
-               hashCode += Scope.GetHashCode();
+               hashCode += this.Scope.GetHashCode();
             }
 
-            if (DiscountType != null)
+            if (this.DiscountType != null)
             {
-               hashCode += DiscountType.GetHashCode();
+               hashCode += this.DiscountType.GetHashCode();
             }
 
-            if (PercentageDiscount != null)
+            if (this.PercentageDiscount != null)
             {
-               hashCode += PercentageDiscount.GetHashCode();
+               hashCode += this.PercentageDiscount.GetHashCode();
             }
 
-            if (CatalogObjectIds != null)
+            if (this.CatalogObjectIds != null)
             {
-               hashCode += CatalogObjectIds.GetHashCode();
+               hashCode += this.CatalogObjectIds.GetHashCode();
             }
 
-            if (FixedDiscountMoney != null)
+            if (this.FixedDiscountMoney != null)
             {
-               hashCode += FixedDiscountMoney.GetHashCode();
+               hashCode += this.FixedDiscountMoney.GetHashCode();
             }
 
-            if (MaxDiscountMoney != null)
+            if (this.MaxDiscountMoney != null)
             {
-               hashCode += MaxDiscountMoney.GetHashCode();
+               hashCode += this.MaxDiscountMoney.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Scope = {(this.Scope == null ? "null" : this.Scope.ToString())}");
+            toStringOutput.Add($"this.DiscountType = {(this.DiscountType == null ? "null" : this.DiscountType.ToString())}");
+            toStringOutput.Add($"this.PercentageDiscount = {(this.PercentageDiscount == null ? "null" : this.PercentageDiscount == string.Empty ? "" : this.PercentageDiscount)}");
+            toStringOutput.Add($"this.CatalogObjectIds = {(this.CatalogObjectIds == null ? "null" : $"[{string.Join(", ", this.CatalogObjectIds)} ]")}");
+            toStringOutput.Add($"this.FixedDiscountMoney = {(this.FixedDiscountMoney == null ? "null" : this.FixedDiscountMoney.ToString())}");
+            toStringOutput.Add($"this.MaxDiscountMoney = {(this.MaxDiscountMoney == null ? "null" : this.MaxDiscountMoney.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
-            var builder = new Builder(Scope,
-                DiscountType)
-                .PercentageDiscount(PercentageDiscount)
-                .CatalogObjectIds(CatalogObjectIds)
-                .FixedDiscountMoney(FixedDiscountMoney)
-                .MaxDiscountMoney(MaxDiscountMoney);
+            var builder = new Builder(
+                this.Scope,
+                this.DiscountType)
+                .PercentageDiscount(this.PercentageDiscount)
+                .CatalogObjectIds(this.CatalogObjectIds)
+                .FixedDiscountMoney(this.FixedDiscountMoney)
+                .MaxDiscountMoney(this.MaxDiscountMoney);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string scope;
@@ -181,57 +208,93 @@ namespace Square.Models
             private Models.Money fixedDiscountMoney;
             private Models.Money maxDiscountMoney;
 
-            public Builder(string scope,
+            public Builder(
+                string scope,
                 string discountType)
             {
                 this.scope = scope;
                 this.discountType = discountType;
             }
 
+             /// <summary>
+             /// Scope.
+             /// </summary>
+             /// <param name="scope"> scope. </param>
+             /// <returns> Builder. </returns>
             public Builder Scope(string scope)
             {
                 this.scope = scope;
                 return this;
             }
 
+             /// <summary>
+             /// DiscountType.
+             /// </summary>
+             /// <param name="discountType"> discountType. </param>
+             /// <returns> Builder. </returns>
             public Builder DiscountType(string discountType)
             {
                 this.discountType = discountType;
                 return this;
             }
 
+             /// <summary>
+             /// PercentageDiscount.
+             /// </summary>
+             /// <param name="percentageDiscount"> percentageDiscount. </param>
+             /// <returns> Builder. </returns>
             public Builder PercentageDiscount(string percentageDiscount)
             {
                 this.percentageDiscount = percentageDiscount;
                 return this;
             }
 
+             /// <summary>
+             /// CatalogObjectIds.
+             /// </summary>
+             /// <param name="catalogObjectIds"> catalogObjectIds. </param>
+             /// <returns> Builder. </returns>
             public Builder CatalogObjectIds(IList<string> catalogObjectIds)
             {
                 this.catalogObjectIds = catalogObjectIds;
                 return this;
             }
 
+             /// <summary>
+             /// FixedDiscountMoney.
+             /// </summary>
+             /// <param name="fixedDiscountMoney"> fixedDiscountMoney. </param>
+             /// <returns> Builder. </returns>
             public Builder FixedDiscountMoney(Models.Money fixedDiscountMoney)
             {
                 this.fixedDiscountMoney = fixedDiscountMoney;
                 return this;
             }
 
+             /// <summary>
+             /// MaxDiscountMoney.
+             /// </summary>
+             /// <param name="maxDiscountMoney"> maxDiscountMoney. </param>
+             /// <returns> Builder. </returns>
             public Builder MaxDiscountMoney(Models.Money maxDiscountMoney)
             {
                 this.maxDiscountMoney = maxDiscountMoney;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> LoyaltyProgramRewardDefinition. </returns>
             public LoyaltyProgramRewardDefinition Build()
             {
-                return new LoyaltyProgramRewardDefinition(scope,
-                    discountType,
-                    percentageDiscount,
-                    catalogObjectIds,
-                    fixedDiscountMoney,
-                    maxDiscountMoney);
+                return new LoyaltyProgramRewardDefinition(
+                    this.scope,
+                    this.discountType,
+                    this.percentageDiscount,
+                    this.catalogObjectIds,
+                    this.fixedDiscountMoney,
+                    this.maxDiscountMoney);
             }
         }
     }

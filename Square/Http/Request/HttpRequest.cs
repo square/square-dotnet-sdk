@@ -1,61 +1,21 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using Square.Utilities;
-
 namespace Square.Http.Request
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Net.Http;
+    using Square.Utilities;
+
     /// <summary>
     /// HttpRequest stores necessary information about the http request.
     /// </summary>
     public sealed class HttpRequest
     {
         /// <summary>
-        /// The HTTP verb to use for this request.
+        /// Initializes a new instance of the <see cref="HttpRequest"/> class.
         /// </summary>
-        public HttpMethod HttpMethod { get; }
-
-        /// <summary>
-        /// The query url for the http request.
-        /// </summary>
-        public string QueryUrl { get; }
-
-        /// <summary>
-        /// Query parameters collection for the current http request.
-        /// </summary>
-        public Dictionary<string, object> QueryParameters { get; private set; }
-
-        /// <summary>
-        /// Headers collection for the current http request.
-        /// </summary>
-        public Dictionary<string, string> Headers { get; private set; }
-
-        /// <summary>
-        /// Form parameters for the current http request.
-        /// </summary>
-        public List<KeyValuePair<string, object>> FormParameters { get; }
-
-        /// <summary>
-        /// Optional raw string to send as request body.
-        /// </summary>
-        public object Body { get; }
-
-        /// <summary>
-        /// Optional username for Basic Auth.
-        /// </summary>
-        public string Username { get; }
-
-        /// <summary>
-        /// Optional password for Basic Auth.
-        /// </summary>
-        public string Password { get; }
-
-        /// <summary>
-        /// Constructor to initialize the http request object.
-        /// </summary>
-        /// <param name="method">Http verb to use for the http request</param>
-        /// <param name="queryUrl">The query url for the http request</param>
+        /// <param name="method">Http verb to use for the http request.</param>
+        /// <param name="queryUrl">The query url for the http request.</param>
         public HttpRequest(HttpMethod method, string queryUrl)
         {
             this.HttpMethod = method;
@@ -63,14 +23,21 @@ namespace Square.Http.Request
         }
 
         /// <summary>
-        /// Constructor to initialize the http request with headers and optional Basic auth params.
+        /// Initializes a new instance of the <see cref="HttpRequest"/> class.
         /// </summary>
-        /// <param name="method">Http verb to use for the http request</param>
-        /// <param name="queryUrl">The query url for the http request</param>
-        /// <param name="headers">Headers to send with the request</param>
-        /// <param name="username">Basic auth username</param>
-        /// <param name="password">Basic auth password</param>
-        public HttpRequest(HttpMethod method, string queryUrl, Dictionary<string, string> headers, string username, string password, Dictionary<string, object> queryParameters = null)
+        /// <param name="method">Http verb to use for the http request.</param>
+        /// <param name="queryUrl">The query url for the http request.</param>
+        /// <param name="headers">Headers to send with the request.</param>
+        /// <param name="username">Basic auth username.</param>
+        /// <param name="password">Basic auth password.</param>
+        /// <param name="queryParameters">QueryParameters.</param>
+        public HttpRequest(
+            HttpMethod method,
+            string queryUrl,
+            Dictionary<string, string> headers,
+            string username,
+            string password,
+            Dictionary<string, object> queryParameters = null)
             : this(method, queryUrl)
         {
             this.QueryParameters = queryParameters;
@@ -80,76 +47,138 @@ namespace Square.Http.Request
         }
 
         /// <summary>
-        /// Constructor to initialize the http request with headers, body and optional Basic auth params.
+        /// Initializes a new instance of the <see cref="HttpRequest"/> class.
         /// </summary>
-        /// <param name="method">Http verb to use for the http request</param>
-        /// <param name="queryUrl">The query url for the http request</param>
-        /// <param name="headers">Headers to send with the request</param>
-        /// <param name="body">The string to use as raw body of the http request</param>
-        /// <param name="username">Basic auth username</param>
-        /// <param name="password">Basic auth password</param>
-        public HttpRequest(HttpMethod method, string queryUrl, Dictionary<string, string> headers, object body, string username, string password, Dictionary<string, object> queryParameters = null)
+        /// <param name="method">Http verb to use for the http request.</param>
+        /// <param name="queryUrl">The query url for the http request.</param>
+        /// <param name="headers">Headers to send with the request.</param>
+        /// <param name="body">The string to use as raw body of the http request.</param>
+        /// <param name="username">Basic auth username.</param>
+        /// <param name="password">Basic auth password.</param>
+        /// <param name="queryParameters">QueryParameters.</param>
+        public HttpRequest(
+            HttpMethod method,
+            string queryUrl,
+            Dictionary<string, string> headers,
+            object body,
+            string username,
+            string password,
+            Dictionary<string, object> queryParameters = null)
             : this(method, queryUrl, headers, username, password, queryParameters: queryParameters)
         {
             this.Body = body;
         }
 
         /// <summary>
-        /// Constructor to initialize the http request with headers, form parameters and optional Basic auth params.
+        /// Initializes a new instance of the <see cref="HttpRequest"/> class.
         /// </summary>
-        /// <param name="method">Http verb to use for the http request</param>
-        /// <param name="queryUrl">The query url for the http request</param>
-        /// <param name="headers">Headers to send with the request</param>
-        /// <param name="formParameters">Form parameters collection for the request</param>
-        /// <param name="username">Basic auth username</param>
-        /// <param name="password">Basic auth password</param>
-        public HttpRequest(HttpMethod method, string queryUrl, Dictionary<string, string> headers, List<KeyValuePair<string, Object>> formParameters, string username, string password, Dictionary<string, object> queryParameters = null)
+        /// <param name="method">Http verb to use for the http request.</param>
+        /// <param name="queryUrl">The query url for the http request.</param>
+        /// <param name="headers">Headers to send with the request.</param>
+        /// <param name="formParameters">Form parameters collection for the request.</param>
+        /// <param name="username">Basic auth username.</param>
+        /// <param name="password">Basic auth password.</param>
+        /// <param name="queryParameters">QueryParameters.</param>
+        public HttpRequest(
+            HttpMethod method,
+            string queryUrl,
+            Dictionary<string, string> headers,
+            List<KeyValuePair<string, object>> formParameters,
+            string username,
+            string password,
+            Dictionary<string,
+            object> queryParameters = null)
             : this(method, queryUrl, headers, username, password, queryParameters: queryParameters)
         {
             this.FormParameters = formParameters;
         }
 
         /// <summary>
+        /// Gets the HTTP verb to use for this request.
+        /// </summary>
+        public HttpMethod HttpMethod { get; }
+
+        /// <summary>
+        /// Gets the query url for the http request.
+        /// </summary>
+        public string QueryUrl { get; }
+
+        /// <summary>
+        /// Gets the query parameters collection for the current http request.
+        /// </summary>
+        public Dictionary<string, object> QueryParameters { get; private set; }
+
+        /// <summary>
+        /// Gets the headers collection for the current http request.
+        /// </summary>
+        public Dictionary<string, string> Headers { get; private set; }
+
+        /// <summary>
+        /// Gets the form parameters for the current http request.
+        /// </summary>
+        public List<KeyValuePair<string, object>> FormParameters { get; }
+
+        /// <summary>
+        /// Gets the optional raw string to send as request body.
+        /// </summary>
+        public object Body { get; }
+
+        /// <summary>
+        /// Gets the optional username for Basic Auth.
+        /// </summary>
+        public string Username { get; }
+
+        /// <summary>
+        /// Gets the optional password for Basic Auth.
+        /// </summary>
+        public string Password { get; }
+
+        /// <summary>
         /// Concatenate values from a Dictionary to this object.
         /// </summary>
-        public Dictionary<string, string> AddHeaders(Dictionary<string, string> HeadersToAdd)
+        /// <param name="headersToAdd"> headersToAdd. </param>
+        /// <returns>Dictionary.</returns>
+        public Dictionary<string, string> AddHeaders(Dictionary<string, string> headersToAdd)
         {
-            if (Headers == null)
+            if (this.Headers == null)
             {
-                Headers = new Dictionary<string, string>(HeadersToAdd);
+                this.Headers = new Dictionary<string, string>(headersToAdd);
             }
             else
             {
-                Headers = Headers.Concat(HeadersToAdd).ToDictionary(x => x.Key, x => x.Value);
+                this.Headers = this.Headers.Concat(headersToAdd).ToDictionary(x => x.Key, x => x.Value);
             }
-            return Headers;
+
+            return this.Headers;
         }
 
         /// <summary>
         /// Concatenate values from a Dictionary to query parameters dictionary.
         /// </summary>
+        /// <param name="queryParamaters"> queryParamaters. </param>
         public void AddQueryParameters(Dictionary<string, object> queryParamaters)
         {
-            if (QueryParameters == null)
+            if (this.QueryParameters == null)
             {
-                QueryParameters = new Dictionary<string, object>(queryParamaters);
+                this.QueryParameters = new Dictionary<string, object>(queryParamaters);
             }
             else
             {
-                QueryParameters = QueryParameters.Concat(queryParamaters).ToDictionary(x => x.Key, x => x.Value);
+                this.QueryParameters = this.QueryParameters.Concat(queryParamaters).ToDictionary(x => x.Key, x => x.Value);
             }
         }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
-            return $" HttpMethod = {HttpMethod}, " +
-                $" QueryUrl = {QueryUrl}, " +
-                $" QueryParameters = {ApiHelper.JsonSerialize(QueryParameters)}, " +
-                $" Headers = {ApiHelper.JsonSerialize(Headers)}, " +
-                $" FormParameters = {ApiHelper.JsonSerialize(FormParameters)}, " +
-                $" Body = {Body}, " +
-                $" Username = {Username}, " +
-                $" Password = {Password}";
+            return $" HttpMethod = {this.HttpMethod}, " +
+                $" QueryUrl = {this.QueryUrl}, " +
+                $" QueryParameters = {ApiHelper.JsonSerialize(this.QueryParameters)}, " +
+                $" Headers = {ApiHelper.JsonSerialize(this.Headers)}, " +
+                $" FormParameters = {ApiHelper.JsonSerialize(this.FormParameters)}, " +
+                $" Body = {this.Body}, " +
+                $" Username = {this.Username}, " +
+                $" Password = {this.Password}";
         }
     }
 }

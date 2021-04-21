@@ -1,28 +1,39 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square.Http.Client;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class CreateTeamMemberResponse 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Http.Client;
+    using Square.Utilities;
+
+    /// <summary>
+    /// CreateTeamMemberResponse.
+    /// </summary>
+    public class CreateTeamMemberResponse
     {
-        public CreateTeamMemberResponse(Models.TeamMember teamMember = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CreateTeamMemberResponse"/> class.
+        /// </summary>
+        /// <param name="teamMember">team_member.</param>
+        /// <param name="errors">errors.</param>
+        public CreateTeamMemberResponse(
+            Models.TeamMember teamMember = null,
             IList<Models.Error> errors = null)
         {
-            TeamMember = teamMember;
-            Errors = errors;
+            this.TeamMember = teamMember;
+            this.Errors = errors;
         }
 
+        /// <summary>
+        /// Gets http context.
+        /// </summary>
         [JsonIgnore]
         public HttpContext Context { get; internal set; }
 
@@ -38,6 +49,7 @@ namespace Square.Models
         [JsonProperty("errors", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.Error> Errors { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -47,12 +59,7 @@ namespace Square.Models
             return $"CreateTeamMemberResponse : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"TeamMember = {(TeamMember == null ? "null" : TeamMember.ToString())}");
-            toStringOutput.Add($"Errors = {(Errors == null ? "null" : $"[{ string.Join(", ", Errors)} ]")}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -66,64 +73,95 @@ namespace Square.Models
             }
 
             return obj is CreateTeamMemberResponse other &&
-                ((Context == null && other.Context == null) || (Context?.Equals(other.Context) == true)) &&
-                ((TeamMember == null && other.TeamMember == null) || (TeamMember?.Equals(other.TeamMember) == true)) &&
-                ((Errors == null && other.Errors == null) || (Errors?.Equals(other.Errors) == true));
+                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
+                ((this.TeamMember == null && other.TeamMember == null) || (this.TeamMember?.Equals(other.TeamMember) == true)) &&
+                ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 1401221559;
 
-            if (Context != null)
+            if (this.Context != null)
             {
-                hashCode += Context.GetHashCode();
+                hashCode += this.Context.GetHashCode();
             }
 
-            if (TeamMember != null)
+            if (this.TeamMember != null)
             {
-               hashCode += TeamMember.GetHashCode();
+               hashCode += this.TeamMember.GetHashCode();
             }
 
-            if (Errors != null)
+            if (this.Errors != null)
             {
-               hashCode += Errors.GetHashCode();
+               hashCode += this.Errors.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.TeamMember = {(this.TeamMember == null ? "null" : this.TeamMember.ToString())}");
+            toStringOutput.Add($"this.Errors = {(this.Errors == null ? "null" : $"[{string.Join(", ", this.Errors)} ]")}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .TeamMember(TeamMember)
-                .Errors(Errors);
+                .TeamMember(this.TeamMember)
+                .Errors(this.Errors);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private Models.TeamMember teamMember;
             private IList<Models.Error> errors;
 
-
-
+             /// <summary>
+             /// TeamMember.
+             /// </summary>
+             /// <param name="teamMember"> teamMember. </param>
+             /// <returns> Builder. </returns>
             public Builder TeamMember(Models.TeamMember teamMember)
             {
                 this.teamMember = teamMember;
                 return this;
             }
 
+             /// <summary>
+             /// Errors.
+             /// </summary>
+             /// <param name="errors"> errors. </param>
+             /// <returns> Builder. </returns>
             public Builder Errors(IList<Models.Error> errors)
             {
                 this.errors = errors;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> CreateTeamMemberResponse. </returns>
             public CreateTeamMemberResponse Build()
             {
-                return new CreateTeamMemberResponse(teamMember,
-                    errors);
+                return new CreateTeamMemberResponse(
+                    this.teamMember,
+                    this.errors);
             }
         }
     }

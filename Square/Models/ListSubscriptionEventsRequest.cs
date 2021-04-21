@@ -1,25 +1,33 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class ListSubscriptionEventsRequest 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// ListSubscriptionEventsRequest.
+    /// </summary>
+    public class ListSubscriptionEventsRequest
     {
-        public ListSubscriptionEventsRequest(string cursor = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ListSubscriptionEventsRequest"/> class.
+        /// </summary>
+        /// <param name="cursor">cursor.</param>
+        /// <param name="limit">limit.</param>
+        public ListSubscriptionEventsRequest(
+            string cursor = null,
             int? limit = null)
         {
-            Cursor = cursor;
-            Limit = limit;
+            this.Cursor = cursor;
+            this.Limit = limit;
         }
 
         /// <summary>
@@ -31,13 +39,14 @@ namespace Square.Models
         public string Cursor { get; }
 
         /// <summary>
-        /// The upper limit on the number of subscription events to return 
-        /// in the response. 
+        /// The upper limit on the number of subscription events to return
+        /// in the response.
         /// Default: `200`
         /// </summary>
         [JsonProperty("limit", NullValueHandling = NullValueHandling.Ignore)]
         public int? Limit { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -47,12 +56,7 @@ namespace Square.Models
             return $"ListSubscriptionEventsRequest : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Cursor = {(Cursor == null ? "null" : Cursor == string.Empty ? "" : Cursor)}");
-            toStringOutput.Add($"Limit = {(Limit == null ? "null" : Limit.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -66,58 +70,89 @@ namespace Square.Models
             }
 
             return obj is ListSubscriptionEventsRequest other &&
-                ((Cursor == null && other.Cursor == null) || (Cursor?.Equals(other.Cursor) == true)) &&
-                ((Limit == null && other.Limit == null) || (Limit?.Equals(other.Limit) == true));
+                ((this.Cursor == null && other.Cursor == null) || (this.Cursor?.Equals(other.Cursor) == true)) &&
+                ((this.Limit == null && other.Limit == null) || (this.Limit?.Equals(other.Limit) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1791054325;
 
-            if (Cursor != null)
+            if (this.Cursor != null)
             {
-               hashCode += Cursor.GetHashCode();
+               hashCode += this.Cursor.GetHashCode();
             }
 
-            if (Limit != null)
+            if (this.Limit != null)
             {
-               hashCode += Limit.GetHashCode();
+               hashCode += this.Limit.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Cursor = {(this.Cursor == null ? "null" : this.Cursor == string.Empty ? "" : this.Cursor)}");
+            toStringOutput.Add($"this.Limit = {(this.Limit == null ? "null" : this.Limit.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .Cursor(Cursor)
-                .Limit(Limit);
+                .Cursor(this.Cursor)
+                .Limit(this.Limit);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string cursor;
             private int? limit;
 
-
-
+             /// <summary>
+             /// Cursor.
+             /// </summary>
+             /// <param name="cursor"> cursor. </param>
+             /// <returns> Builder. </returns>
             public Builder Cursor(string cursor)
             {
                 this.cursor = cursor;
                 return this;
             }
 
+             /// <summary>
+             /// Limit.
+             /// </summary>
+             /// <param name="limit"> limit. </param>
+             /// <returns> Builder. </returns>
             public Builder Limit(int? limit)
             {
                 this.limit = limit;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> ListSubscriptionEventsRequest. </returns>
             public ListSubscriptionEventsRequest Build()
             {
-                return new ListSubscriptionEventsRequest(cursor,
-                    limit);
+                return new ListSubscriptionEventsRequest(
+                    this.cursor,
+                    this.limit);
             }
         }
     }

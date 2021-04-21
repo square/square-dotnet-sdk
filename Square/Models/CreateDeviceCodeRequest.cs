@@ -1,25 +1,33 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class CreateDeviceCodeRequest 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// CreateDeviceCodeRequest.
+    /// </summary>
+    public class CreateDeviceCodeRequest
     {
-        public CreateDeviceCodeRequest(string idempotencyKey,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CreateDeviceCodeRequest"/> class.
+        /// </summary>
+        /// <param name="idempotencyKey">idempotency_key.</param>
+        /// <param name="deviceCode">device_code.</param>
+        public CreateDeviceCodeRequest(
+            string idempotencyKey,
             Models.DeviceCode deviceCode)
         {
-            IdempotencyKey = idempotencyKey;
-            DeviceCode = deviceCode;
+            this.IdempotencyKey = idempotencyKey;
+            this.DeviceCode = deviceCode;
         }
 
         /// <summary>
@@ -31,11 +39,12 @@ namespace Square.Models
         public string IdempotencyKey { get; }
 
         /// <summary>
-        /// Getter for device_code
+        /// Gets or sets DeviceCode.
         /// </summary>
         [JsonProperty("device_code")]
         public Models.DeviceCode DeviceCode { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -45,12 +54,7 @@ namespace Square.Models
             return $"CreateDeviceCodeRequest : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"IdempotencyKey = {(IdempotencyKey == null ? "null" : IdempotencyKey == string.Empty ? "" : IdempotencyKey)}");
-            toStringOutput.Add($"DeviceCode = {(DeviceCode == null ? "null" : DeviceCode.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -64,62 +68,97 @@ namespace Square.Models
             }
 
             return obj is CreateDeviceCodeRequest other &&
-                ((IdempotencyKey == null && other.IdempotencyKey == null) || (IdempotencyKey?.Equals(other.IdempotencyKey) == true)) &&
-                ((DeviceCode == null && other.DeviceCode == null) || (DeviceCode?.Equals(other.DeviceCode) == true));
+                ((this.IdempotencyKey == null && other.IdempotencyKey == null) || (this.IdempotencyKey?.Equals(other.IdempotencyKey) == true)) &&
+                ((this.DeviceCode == null && other.DeviceCode == null) || (this.DeviceCode?.Equals(other.DeviceCode) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 1794633711;
 
-            if (IdempotencyKey != null)
+            if (this.IdempotencyKey != null)
             {
-               hashCode += IdempotencyKey.GetHashCode();
+               hashCode += this.IdempotencyKey.GetHashCode();
             }
 
-            if (DeviceCode != null)
+            if (this.DeviceCode != null)
             {
-               hashCode += DeviceCode.GetHashCode();
+               hashCode += this.DeviceCode.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.IdempotencyKey = {(this.IdempotencyKey == null ? "null" : this.IdempotencyKey == string.Empty ? "" : this.IdempotencyKey)}");
+            toStringOutput.Add($"this.DeviceCode = {(this.DeviceCode == null ? "null" : this.DeviceCode.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
-            var builder = new Builder(IdempotencyKey,
-                DeviceCode);
+            var builder = new Builder(
+                this.IdempotencyKey,
+                this.DeviceCode);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string idempotencyKey;
             private Models.DeviceCode deviceCode;
 
-            public Builder(string idempotencyKey,
+            public Builder(
+                string idempotencyKey,
                 Models.DeviceCode deviceCode)
             {
                 this.idempotencyKey = idempotencyKey;
                 this.deviceCode = deviceCode;
             }
 
+             /// <summary>
+             /// IdempotencyKey.
+             /// </summary>
+             /// <param name="idempotencyKey"> idempotencyKey. </param>
+             /// <returns> Builder. </returns>
             public Builder IdempotencyKey(string idempotencyKey)
             {
                 this.idempotencyKey = idempotencyKey;
                 return this;
             }
 
+             /// <summary>
+             /// DeviceCode.
+             /// </summary>
+             /// <param name="deviceCode"> deviceCode. </param>
+             /// <returns> Builder. </returns>
             public Builder DeviceCode(Models.DeviceCode deviceCode)
             {
                 this.deviceCode = deviceCode;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> CreateDeviceCodeRequest. </returns>
             public CreateDeviceCodeRequest Build()
             {
-                return new CreateDeviceCodeRequest(idempotencyKey,
-                    deviceCode);
+                return new CreateDeviceCodeRequest(
+                    this.idempotencyKey,
+                    this.deviceCode);
             }
         }
     }

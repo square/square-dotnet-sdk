@@ -7,12 +7,12 @@ Represents the contextual information of HTTP request and response.
 
 | Name | Description | Type |
 |  --- | --- | --- |
-| Request | The http request in the current context. | `HttpRequest` |
-| Response | The http response in the current context. | `HttpResponse` |
+| Request | Gets the http request in the current context. | `HttpRequest` |
+| Response | Gets the http response in the current context. | `HttpResponse` |
 
 ## Constructors
 
 | Name | Description |
 |  --- | --- |
-| `HttpContext(HttpRequest request, HttpResponse response)` | Constructor to initialize the context with http request and response information. |
+| `HttpContext(HttpRequest request, HttpResponse response)` | Initializes a new instance of the <see cref="HttpContext"/> class. |
 

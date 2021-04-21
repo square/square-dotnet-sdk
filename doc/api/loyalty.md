@@ -17,6 +17,7 @@ ILoyaltyApi loyaltyApi = client.LoyaltyApi;
 * [Adjust Loyalty Points](/doc/api/loyalty.md#adjust-loyalty-points)
 * [Search Loyalty Events](/doc/api/loyalty.md#search-loyalty-events)
 * [List Loyalty Programs](/doc/api/loyalty.md#list-loyalty-programs)
+* [Retrieve Loyalty Program](/doc/api/loyalty.md#retrieve-loyalty-program)
 * [Calculate Loyalty Points](/doc/api/loyalty.md#calculate-loyalty-points)
 * [Create Loyalty Reward](/doc/api/loyalty.md#create-loyalty-reward)
 * [Search Loyalty Rewards](/doc/api/loyalty.md#search-loyalty-rewards)
@@ -27,10 +28,11 @@ ILoyaltyApi loyaltyApi = client.LoyaltyApi;
 
 # Create Loyalty Account
 
-Creates a loyalty account.
+Creates a loyalty account. To create a loyalty account, you must provide the `program_id` and either the `mapping` field (preferred) or the `mappings` field.
 
 ```csharp
-CreateLoyaltyAccountAsync(Models.CreateLoyaltyAccountRequest body)
+CreateLoyaltyAccountAsync(
+    Models.CreateLoyaltyAccountRequest body)
 ```
 
 ## Parameters
@@ -48,22 +50,30 @@ CreateLoyaltyAccountAsync(Models.CreateLoyaltyAccountRequest body)
 ```csharp
 var bodyLoyaltyAccountMappings = new List<LoyaltyAccountMapping>();
 
-var bodyLoyaltyAccountMappings0 = new LoyaltyAccountMapping.Builder(
-        "PHONE",
-        "+14155551234")
+var bodyLoyaltyAccountMappings0 = new LoyaltyAccountMapping.Builder()
     .Id("id0")
+    .Type("PHONE")
+    .MValue("value2")
     .CreatedAt("created_at8")
+    .PhoneNumber("phone_number8")
     .Build();
 bodyLoyaltyAccountMappings.Add(bodyLoyaltyAccountMappings0);
 
+var bodyLoyaltyAccountMapping = new LoyaltyAccountMapping.Builder()
+    .Id("id6")
+    .Type("PHONE")
+    .MValue("value8")
+    .CreatedAt("created_at4")
+    .PhoneNumber("+14155551234")
+    .Build();
 var bodyLoyaltyAccount = new LoyaltyAccount.Builder(
-        bodyLoyaltyAccountMappings,
         "d619f755-2d17-41f3-990d-c04ecedd64dd")
     .Id("id2")
+    .Mappings(bodyLoyaltyAccountMappings)
     .Balance(14)
     .LifetimePoints(38)
     .CustomerId("customer_id0")
-    .EnrolledAt("enrolled_at2")
+    .Mapping(bodyLoyaltyAccountMapping)
     .Build();
 var body = new CreateLoyaltyAccountRequest.Builder(
         bodyLoyaltyAccount,
@@ -87,7 +97,8 @@ You can search for a loyalty account using the phone number or customer ID assoc
 Search results are sorted by `created_at` in ascending order.
 
 ```csharp
-SearchLoyaltyAccountsAsync(Models.SearchLoyaltyAccountsRequest body)
+SearchLoyaltyAccountsAsync(
+    Models.SearchLoyaltyAccountsRequest body)
 ```
 
 ## Parameters
@@ -105,11 +116,12 @@ SearchLoyaltyAccountsAsync(Models.SearchLoyaltyAccountsRequest body)
 ```csharp
 var bodyQueryMappings = new List<LoyaltyAccountMapping>();
 
-var bodyQueryMappings0 = new LoyaltyAccountMapping.Builder(
-        "PHONE",
-        "+14155551234")
+var bodyQueryMappings0 = new LoyaltyAccountMapping.Builder()
     .Id("id4")
+    .Type("PHONE")
+    .MValue("value6")
     .CreatedAt("created_at8")
+    .PhoneNumber("+14155551234")
     .Build();
 bodyQueryMappings.Add(bodyQueryMappings0);
 
@@ -139,14 +151,15 @@ catch (ApiException e){};
 Retrieves a loyalty account.
 
 ```csharp
-RetrieveLoyaltyAccountAsync(string accountId)
+RetrieveLoyaltyAccountAsync(
+    string accountId)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `accountId` | `string` | Template, Required | The ID of the [loyalty account](#type-LoyaltyAccount) to retrieve. |
+| `accountId` | `string` | Template, Required | The ID of the [loyalty account](/doc/models/loyalty-account.md) to retrieve. |
 
 ## Response Type
 
@@ -174,19 +187,21 @@ Adds points to a loyalty account.
 - If you are not using the Orders API to manage orders,
   you first perform a client-side computation to compute the points.  
   For spend-based and visit-based programs, you can call
-  [CalculateLoyaltyPoints](#endpoint-Loyalty-CalculateLoyaltyPoints) to compute the points. For more information,
+  [CalculateLoyaltyPoints](/doc/api/loyalty.md#calculate-loyalty-points) to compute the points. For more information,
   see [Loyalty Program Overview](https://developer.squareup.com/docs/loyalty/overview).
   You then provide the points in a request to this endpoint.
 
 ```csharp
-AccumulateLoyaltyPointsAsync(string accountId, Models.AccumulateLoyaltyPointsRequest body)
+AccumulateLoyaltyPointsAsync(
+    string accountId,
+    Models.AccumulateLoyaltyPointsRequest body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `accountId` | `string` | Template, Required | The [loyalty account](#type-LoyaltyAccount) ID to which to add the points. |
+| `accountId` | `string` | Template, Required | The [loyalty account](/doc/models/loyalty-account.md) ID to which to add the points. |
 | `body` | [`Models.AccumulateLoyaltyPointsRequest`](/doc/models/accumulate-loyalty-points-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
@@ -221,18 +236,20 @@ catch (ApiException e){};
 Adds points to or subtracts points from a buyer's account.
 
 Use this endpoint only when you need to manually adjust points. Otherwise, in your application flow, you call
-[AccumulateLoyaltyPoints](#endpoint-Loyalty-AccumulateLoyaltyPoints)
+[AccumulateLoyaltyPoints](/doc/api/loyalty.md#accumulate-loyalty-points)
 to add points when a buyer pays for the purchase.
 
 ```csharp
-AdjustLoyaltyPointsAsync(string accountId, Models.AdjustLoyaltyPointsRequest body)
+AdjustLoyaltyPointsAsync(
+    string accountId,
+    Models.AdjustLoyaltyPointsRequest body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `accountId` | `string` | Template, Required | The ID of the [loyalty account](#type-LoyaltyAccount) in which to adjust the points. |
+| `accountId` | `string` | Template, Required | The ID of the [loyalty account](/doc/models/loyalty-account.md) in which to adjust the points. |
 | `body` | [`Models.AdjustLoyaltyPointsRequest`](/doc/models/adjust-loyalty-points-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
@@ -244,12 +261,12 @@ AdjustLoyaltyPointsAsync(string accountId, Models.AdjustLoyaltyPointsRequest bod
 ```csharp
 string accountId = "account_id2";
 var bodyAdjustPoints = new LoyaltyEventAdjustPoints.Builder(
-        112)
+        10)
     .LoyaltyProgramId("loyalty_program_id4")
-    .Reason("reason0")
+    .Reason("Complimentary points")
     .Build();
 var body = new AdjustLoyaltyPointsRequest.Builder(
-        "idempotency_key2",
+        "bc29a517-3dc9-450e-aa76-fae39ee849d1",
         bodyAdjustPoints)
     .Build();
 
@@ -270,8 +287,11 @@ buyer's loyalty account. Each change in the point balance
 (for example, points earned, points redeemed, and points expired) is
 recorded in the ledger. Using this endpoint, you can search the ledger for events.
 
+Search results are sorted by `created_at` in descending order.
+
 ```csharp
-SearchLoyaltyEventsAsync(Models.SearchLoyaltyEventsRequest body)
+SearchLoyaltyEventsAsync(
+    Models.SearchLoyaltyEventsRequest body)
 ```
 
 ## Parameters
@@ -362,6 +382,40 @@ catch (ApiException e){};
 ```
 
 
+# Retrieve Loyalty Program
+
+Retrieves the loyalty program in a seller's account, specified by the program ID or the keyword `main`.
+
+Loyalty programs define how buyers can earn points and redeem points for rewards. Square sellers can have only one loyalty program, which is created and managed from the Seller Dashboard. For more information, see [Loyalty Program Overview](https://developer.squareup.com/docs/loyalty/overview).
+
+```csharp
+RetrieveLoyaltyProgramAsync(
+    string programId)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `programId` | `string` | Template, Required | The ID of the loyalty program or the keyword `main`. Either value can be used to retrieve the single loyalty program that belongs to the seller. |
+
+## Response Type
+
+[`Task<Models.RetrieveLoyaltyProgramResponse>`](/doc/models/retrieve-loyalty-program-response.md)
+
+## Example Usage
+
+```csharp
+string programId = "program_id0";
+
+try
+{
+    RetrieveLoyaltyProgramResponse result = await loyaltyApi.RetrieveLoyaltyProgramAsync(programId);
+}
+catch (ApiException e){};
+```
+
+
 # Calculate Loyalty Points
 
 Calculates the points a purchase earns.
@@ -375,14 +429,16 @@ An application might call this endpoint to show the points that a buyer can earn
 specific purchase.
 
 ```csharp
-CalculateLoyaltyPointsAsync(string programId, Models.CalculateLoyaltyPointsRequest body)
+CalculateLoyaltyPointsAsync(
+    string programId,
+    Models.CalculateLoyaltyPointsRequest body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `programId` | `string` | Template, Required | The [loyalty program](#type-LoyaltyProgram) ID, which defines the rules for accruing points. |
+| `programId` | `string` | Template, Required | The [loyalty program](/doc/models/loyalty-program.md) ID, which defines the rules for accruing points. |
 | `body` | [`Models.CalculateLoyaltyPointsRequest`](/doc/models/calculate-loyalty-points-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
@@ -422,7 +478,8 @@ After a reward is created, the points are locked and
 not available for the buyer to redeem another reward.
 
 ```csharp
-CreateLoyaltyRewardAsync(Models.CreateLoyaltyRewardRequest body)
+CreateLoyaltyRewardAsync(
+    Models.CreateLoyaltyRewardRequest body)
 ```
 
 ## Parameters
@@ -467,10 +524,13 @@ Searches for loyalty rewards in a loyalty account.
 In the current implementation, the endpoint supports search by the reward `status`.
 
 If you know a reward ID, use the
-[RetrieveLoyaltyReward](#endpoint-Loyalty-RetrieveLoyaltyReward) endpoint.
+[RetrieveLoyaltyReward](/doc/api/loyalty.md#retrieve-loyalty-reward) endpoint.
+
+Search results are sorted by `updated_at` in descending order.
 
 ```csharp
-SearchLoyaltyRewardsAsync(Models.SearchLoyaltyRewardsRequest body)
+SearchLoyaltyRewardsAsync(
+    Models.SearchLoyaltyRewardsRequest body)
 ```
 
 ## Parameters
@@ -510,21 +570,22 @@ Deletes a loyalty reward by doing the following:
 
 - Returns the loyalty points back to the loyalty account.
 - If an order ID was specified when the reward was created
-  (see [CreateLoyaltyReward](#endpoint-Loyalty-CreateLoyaltyReward)),
+  (see [CreateLoyaltyReward](/doc/api/loyalty.md#create-loyalty-reward)),
   it updates the order by removing the reward and related
   discounts.
 
 You cannot delete a reward that has reached the terminal state (REDEEMED).
 
 ```csharp
-DeleteLoyaltyRewardAsync(string rewardId)
+DeleteLoyaltyRewardAsync(
+    string rewardId)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `rewardId` | `string` | Template, Required | The ID of the [loyalty reward](#type-LoyaltyReward) to delete. |
+| `rewardId` | `string` | Template, Required | The ID of the [loyalty reward](/doc/models/loyalty-reward.md) to delete. |
 
 ## Response Type
 
@@ -548,14 +609,15 @@ catch (ApiException e){};
 Retrieves a loyalty reward.
 
 ```csharp
-RetrieveLoyaltyRewardAsync(string rewardId)
+RetrieveLoyaltyRewardAsync(
+    string rewardId)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `rewardId` | `string` | Template, Required | The ID of the [loyalty reward](#type-LoyaltyReward) to retrieve. |
+| `rewardId` | `string` | Template, Required | The ID of the [loyalty reward](/doc/models/loyalty-reward.md) to retrieve. |
 
 ## Response Type
 
@@ -589,14 +651,16 @@ In other words, points used for the reward cannot be returned
 to the account.
 
 ```csharp
-RedeemLoyaltyRewardAsync(string rewardId, Models.RedeemLoyaltyRewardRequest body)
+RedeemLoyaltyRewardAsync(
+    string rewardId,
+    Models.RedeemLoyaltyRewardRequest body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `rewardId` | `string` | Template, Required | The ID of the [loyalty reward](#type-LoyaltyReward) to redeem. |
+| `rewardId` | `string` | Template, Required | The ID of the [loyalty reward](/doc/models/loyalty-reward.md) to redeem. |
 | `body` | [`Models.RedeemLoyaltyRewardRequest`](/doc/models/redeem-loyalty-reward-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type

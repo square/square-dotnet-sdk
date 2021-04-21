@@ -16,7 +16,7 @@ particular time and location.
 | `ReferenceId` | `string` | Optional | An optional ID provided by the application to tie the<br>`InventoryAdjustment` to an external<br>system.<br>**Constraints**: *Maximum Length*: `255` |
 | `FromState` | [`string`](/doc/models/inventory-state.md) | Optional | Indicates the state of a tracked item quantity in the lifecycle of goods. |
 | `ToState` | [`string`](/doc/models/inventory-state.md) | Optional | Indicates the state of a tracked item quantity in the lifecycle of goods. |
-| `LocationId` | `string` | Optional | The Square ID of the [Location](#type-location) where the related<br>quantity of items are being tracked.<br>**Constraints**: *Maximum Length*: `100` |
+| `LocationId` | `string` | Optional | The Square ID of the [Location](/doc/models/location.md) where the related<br>quantity of items are being tracked.<br>**Constraints**: *Maximum Length*: `100` |
 | `CatalogObjectId` | `string` | Optional | The Square generated ID of the<br>`CatalogObject` being tracked.<br>**Constraints**: *Maximum Length*: `100` |
 | `CatalogObjectType` | `string` | Optional | The `CatalogObjectType` of the<br>`CatalogObject` being tracked. Tracking is only<br>supported for the `ITEM_VARIATION` type.<br>**Constraints**: *Maximum Length*: `14` |
 | `Quantity` | `string` | Optional | The number of items affected by the adjustment as a decimal string.<br>Can support up to 5 digits after the decimal point.<br>**Constraints**: *Maximum Length*: `26` |
@@ -24,7 +24,7 @@ particular time and location.
 | `OccurredAt` | `string` | Optional | A client-generated timestamp in RFC 3339 format that indicates when<br>the adjustment took place. For write actions, the `occurred_at`<br>timestamp cannot be older than 24 hours or in the future relative to the<br>time of the request.<br>**Constraints**: *Maximum Length*: `34` |
 | `CreatedAt` | `string` | Optional | A read-only timestamp in RFC 3339 format that indicates when Square<br>received the adjustment.<br>**Constraints**: *Maximum Length*: `34` |
 | `Source` | [`Models.SourceApplication`](/doc/models/source-application.md) | Optional | Provides information about the application used to generate a change. |
-| `EmployeeId` | `string` | Optional | The Square ID of the [Employee](#type-employee) responsible for the<br>inventory adjustment.<br>**Constraints**: *Maximum Length*: `100` |
+| `EmployeeId` | `string` | Optional | The Square ID of the [Employee](/doc/models/employee.md) responsible for the<br>inventory adjustment.<br>**Constraints**: *Maximum Length*: `100` |
 | `TransactionId` | `string` | Optional | The read-only Square ID of the [Transaction][#type-transaction] that<br>caused the adjustment. Only relevant for payment-related state<br>transitions.<br>**Constraints**: *Maximum Length*: `255` |
 | `RefundId` | `string` | Optional | The read-only Square ID of the [Refund][#type-refund] that<br>caused the adjustment. Only relevant for refund-related state<br>transitions.<br>**Constraints**: *Maximum Length*: `255` |
 | `PurchaseOrderId` | `string` | Optional | The read-only Square ID of the purchase order that caused the<br>adjustment. Only relevant for state transitions from the Square for Retail<br>app.<br>**Constraints**: *Maximum Length*: `100` |

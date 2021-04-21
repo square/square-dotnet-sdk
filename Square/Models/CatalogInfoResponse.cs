@@ -1,30 +1,42 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square.Http.Client;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class CatalogInfoResponse 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Http.Client;
+    using Square.Utilities;
+
+    /// <summary>
+    /// CatalogInfoResponse.
+    /// </summary>
+    public class CatalogInfoResponse
     {
-        public CatalogInfoResponse(IList<Models.Error> errors = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CatalogInfoResponse"/> class.
+        /// </summary>
+        /// <param name="errors">errors.</param>
+        /// <param name="limits">limits.</param>
+        /// <param name="standardUnitDescriptionGroup">standard_unit_description_group.</param>
+        public CatalogInfoResponse(
+            IList<Models.Error> errors = null,
             Models.CatalogInfoResponseLimits limits = null,
             Models.StandardUnitDescriptionGroup standardUnitDescriptionGroup = null)
         {
-            Errors = errors;
-            Limits = limits;
-            StandardUnitDescriptionGroup = standardUnitDescriptionGroup;
+            this.Errors = errors;
+            this.Limits = limits;
+            this.StandardUnitDescriptionGroup = standardUnitDescriptionGroup;
         }
 
+        /// <summary>
+        /// Gets http context.
+        /// </summary>
         [JsonIgnore]
         public HttpContext Context { get; internal set; }
 
@@ -35,7 +47,7 @@ namespace Square.Models
         public IList<Models.Error> Errors { get; }
 
         /// <summary>
-        /// Getter for limits
+        /// Gets or sets Limits.
         /// </summary>
         [JsonProperty("limits", NullValueHandling = NullValueHandling.Ignore)]
         public Models.CatalogInfoResponseLimits Limits { get; }
@@ -46,6 +58,7 @@ namespace Square.Models
         [JsonProperty("standard_unit_description_group", NullValueHandling = NullValueHandling.Ignore)]
         public Models.StandardUnitDescriptionGroup StandardUnitDescriptionGroup { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -55,13 +68,7 @@ namespace Square.Models
             return $"CatalogInfoResponse : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Errors = {(Errors == null ? "null" : $"[{ string.Join(", ", Errors)} ]")}");
-            toStringOutput.Add($"Limits = {(Limits == null ? "null" : Limits.ToString())}");
-            toStringOutput.Add($"StandardUnitDescriptionGroup = {(StandardUnitDescriptionGroup == null ? "null" : StandardUnitDescriptionGroup.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -75,79 +82,116 @@ namespace Square.Models
             }
 
             return obj is CatalogInfoResponse other &&
-                ((Context == null && other.Context == null) || (Context?.Equals(other.Context) == true)) &&
-                ((Errors == null && other.Errors == null) || (Errors?.Equals(other.Errors) == true)) &&
-                ((Limits == null && other.Limits == null) || (Limits?.Equals(other.Limits) == true)) &&
-                ((StandardUnitDescriptionGroup == null && other.StandardUnitDescriptionGroup == null) || (StandardUnitDescriptionGroup?.Equals(other.StandardUnitDescriptionGroup) == true));
+                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
+                ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true)) &&
+                ((this.Limits == null && other.Limits == null) || (this.Limits?.Equals(other.Limits) == true)) &&
+                ((this.StandardUnitDescriptionGroup == null && other.StandardUnitDescriptionGroup == null) || (this.StandardUnitDescriptionGroup?.Equals(other.StandardUnitDescriptionGroup) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -614027011;
 
-            if (Context != null)
+            if (this.Context != null)
             {
-                hashCode += Context.GetHashCode();
+                hashCode += this.Context.GetHashCode();
             }
 
-            if (Errors != null)
+            if (this.Errors != null)
             {
-               hashCode += Errors.GetHashCode();
+               hashCode += this.Errors.GetHashCode();
             }
 
-            if (Limits != null)
+            if (this.Limits != null)
             {
-               hashCode += Limits.GetHashCode();
+               hashCode += this.Limits.GetHashCode();
             }
 
-            if (StandardUnitDescriptionGroup != null)
+            if (this.StandardUnitDescriptionGroup != null)
             {
-               hashCode += StandardUnitDescriptionGroup.GetHashCode();
+               hashCode += this.StandardUnitDescriptionGroup.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Errors = {(this.Errors == null ? "null" : $"[{string.Join(", ", this.Errors)} ]")}");
+            toStringOutput.Add($"this.Limits = {(this.Limits == null ? "null" : this.Limits.ToString())}");
+            toStringOutput.Add($"this.StandardUnitDescriptionGroup = {(this.StandardUnitDescriptionGroup == null ? "null" : this.StandardUnitDescriptionGroup.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .Errors(Errors)
-                .Limits(Limits)
-                .StandardUnitDescriptionGroup(StandardUnitDescriptionGroup);
+                .Errors(this.Errors)
+                .Limits(this.Limits)
+                .StandardUnitDescriptionGroup(this.StandardUnitDescriptionGroup);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private IList<Models.Error> errors;
             private Models.CatalogInfoResponseLimits limits;
             private Models.StandardUnitDescriptionGroup standardUnitDescriptionGroup;
 
-
-
+             /// <summary>
+             /// Errors.
+             /// </summary>
+             /// <param name="errors"> errors. </param>
+             /// <returns> Builder. </returns>
             public Builder Errors(IList<Models.Error> errors)
             {
                 this.errors = errors;
                 return this;
             }
 
+             /// <summary>
+             /// Limits.
+             /// </summary>
+             /// <param name="limits"> limits. </param>
+             /// <returns> Builder. </returns>
             public Builder Limits(Models.CatalogInfoResponseLimits limits)
             {
                 this.limits = limits;
                 return this;
             }
 
+             /// <summary>
+             /// StandardUnitDescriptionGroup.
+             /// </summary>
+             /// <param name="standardUnitDescriptionGroup"> standardUnitDescriptionGroup. </param>
+             /// <returns> Builder. </returns>
             public Builder StandardUnitDescriptionGroup(Models.StandardUnitDescriptionGroup standardUnitDescriptionGroup)
             {
                 this.standardUnitDescriptionGroup = standardUnitDescriptionGroup;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> CatalogInfoResponse. </returns>
             public CatalogInfoResponse Build()
             {
-                return new CatalogInfoResponse(errors,
-                    limits,
-                    standardUnitDescriptionGroup);
+                return new CatalogInfoResponse(
+                    this.errors,
+                    this.limits,
+                    this.standardUnitDescriptionGroup);
             }
         }
     }

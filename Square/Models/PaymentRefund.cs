@@ -1,21 +1,38 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class PaymentRefund 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// PaymentRefund.
+    /// </summary>
+    public class PaymentRefund
     {
-        public PaymentRefund(string id,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PaymentRefund"/> class.
+        /// </summary>
+        /// <param name="id">id.</param>
+        /// <param name="amountMoney">amount_money.</param>
+        /// <param name="status">status.</param>
+        /// <param name="locationId">location_id.</param>
+        /// <param name="appFeeMoney">app_fee_money.</param>
+        /// <param name="processingFee">processing_fee.</param>
+        /// <param name="paymentId">payment_id.</param>
+        /// <param name="orderId">order_id.</param>
+        /// <param name="reason">reason.</param>
+        /// <param name="createdAt">created_at.</param>
+        /// <param name="updatedAt">updated_at.</param>
+        public PaymentRefund(
+            string id,
             Models.Money amountMoney,
             string status = null,
             string locationId = null,
@@ -27,17 +44,17 @@ namespace Square.Models
             string createdAt = null,
             string updatedAt = null)
         {
-            Id = id;
-            Status = status;
-            LocationId = locationId;
-            AmountMoney = amountMoney;
-            AppFeeMoney = appFeeMoney;
-            ProcessingFee = processingFee;
-            PaymentId = paymentId;
-            OrderId = orderId;
-            Reason = reason;
-            CreatedAt = createdAt;
-            UpdatedAt = updatedAt;
+            this.Id = id;
+            this.Status = status;
+            this.LocationId = locationId;
+            this.AmountMoney = amountMoney;
+            this.AppFeeMoney = appFeeMoney;
+            this.ProcessingFee = processingFee;
+            this.PaymentId = paymentId;
+            this.OrderId = orderId;
+            this.Reason = reason;
+            this.CreatedAt = createdAt;
+            this.UpdatedAt = updatedAt;
         }
 
         /// <summary>
@@ -120,6 +137,7 @@ namespace Square.Models
         [JsonProperty("updated_at", NullValueHandling = NullValueHandling.Ignore)]
         public string UpdatedAt { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -129,21 +147,7 @@ namespace Square.Models
             return $"PaymentRefund : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Id = {(Id == null ? "null" : Id == string.Empty ? "" : Id)}");
-            toStringOutput.Add($"Status = {(Status == null ? "null" : Status == string.Empty ? "" : Status)}");
-            toStringOutput.Add($"LocationId = {(LocationId == null ? "null" : LocationId == string.Empty ? "" : LocationId)}");
-            toStringOutput.Add($"AmountMoney = {(AmountMoney == null ? "null" : AmountMoney.ToString())}");
-            toStringOutput.Add($"AppFeeMoney = {(AppFeeMoney == null ? "null" : AppFeeMoney.ToString())}");
-            toStringOutput.Add($"ProcessingFee = {(ProcessingFee == null ? "null" : $"[{ string.Join(", ", ProcessingFee)} ]")}");
-            toStringOutput.Add($"PaymentId = {(PaymentId == null ? "null" : PaymentId == string.Empty ? "" : PaymentId)}");
-            toStringOutput.Add($"OrderId = {(OrderId == null ? "null" : OrderId == string.Empty ? "" : OrderId)}");
-            toStringOutput.Add($"Reason = {(Reason == null ? "null" : Reason == string.Empty ? "" : Reason)}");
-            toStringOutput.Add($"CreatedAt = {(CreatedAt == null ? "null" : CreatedAt == string.Empty ? "" : CreatedAt)}");
-            toStringOutput.Add($"UpdatedAt = {(UpdatedAt == null ? "null" : UpdatedAt == string.Empty ? "" : UpdatedAt)}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -157,97 +161,125 @@ namespace Square.Models
             }
 
             return obj is PaymentRefund other &&
-                ((Id == null && other.Id == null) || (Id?.Equals(other.Id) == true)) &&
-                ((Status == null && other.Status == null) || (Status?.Equals(other.Status) == true)) &&
-                ((LocationId == null && other.LocationId == null) || (LocationId?.Equals(other.LocationId) == true)) &&
-                ((AmountMoney == null && other.AmountMoney == null) || (AmountMoney?.Equals(other.AmountMoney) == true)) &&
-                ((AppFeeMoney == null && other.AppFeeMoney == null) || (AppFeeMoney?.Equals(other.AppFeeMoney) == true)) &&
-                ((ProcessingFee == null && other.ProcessingFee == null) || (ProcessingFee?.Equals(other.ProcessingFee) == true)) &&
-                ((PaymentId == null && other.PaymentId == null) || (PaymentId?.Equals(other.PaymentId) == true)) &&
-                ((OrderId == null && other.OrderId == null) || (OrderId?.Equals(other.OrderId) == true)) &&
-                ((Reason == null && other.Reason == null) || (Reason?.Equals(other.Reason) == true)) &&
-                ((CreatedAt == null && other.CreatedAt == null) || (CreatedAt?.Equals(other.CreatedAt) == true)) &&
-                ((UpdatedAt == null && other.UpdatedAt == null) || (UpdatedAt?.Equals(other.UpdatedAt) == true));
+                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
+                ((this.Status == null && other.Status == null) || (this.Status?.Equals(other.Status) == true)) &&
+                ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true)) &&
+                ((this.AmountMoney == null && other.AmountMoney == null) || (this.AmountMoney?.Equals(other.AmountMoney) == true)) &&
+                ((this.AppFeeMoney == null && other.AppFeeMoney == null) || (this.AppFeeMoney?.Equals(other.AppFeeMoney) == true)) &&
+                ((this.ProcessingFee == null && other.ProcessingFee == null) || (this.ProcessingFee?.Equals(other.ProcessingFee) == true)) &&
+                ((this.PaymentId == null && other.PaymentId == null) || (this.PaymentId?.Equals(other.PaymentId) == true)) &&
+                ((this.OrderId == null && other.OrderId == null) || (this.OrderId?.Equals(other.OrderId) == true)) &&
+                ((this.Reason == null && other.Reason == null) || (this.Reason?.Equals(other.Reason) == true)) &&
+                ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true)) &&
+                ((this.UpdatedAt == null && other.UpdatedAt == null) || (this.UpdatedAt?.Equals(other.UpdatedAt) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1029518993;
 
-            if (Id != null)
+            if (this.Id != null)
             {
-               hashCode += Id.GetHashCode();
+               hashCode += this.Id.GetHashCode();
             }
 
-            if (Status != null)
+            if (this.Status != null)
             {
-               hashCode += Status.GetHashCode();
+               hashCode += this.Status.GetHashCode();
             }
 
-            if (LocationId != null)
+            if (this.LocationId != null)
             {
-               hashCode += LocationId.GetHashCode();
+               hashCode += this.LocationId.GetHashCode();
             }
 
-            if (AmountMoney != null)
+            if (this.AmountMoney != null)
             {
-               hashCode += AmountMoney.GetHashCode();
+               hashCode += this.AmountMoney.GetHashCode();
             }
 
-            if (AppFeeMoney != null)
+            if (this.AppFeeMoney != null)
             {
-               hashCode += AppFeeMoney.GetHashCode();
+               hashCode += this.AppFeeMoney.GetHashCode();
             }
 
-            if (ProcessingFee != null)
+            if (this.ProcessingFee != null)
             {
-               hashCode += ProcessingFee.GetHashCode();
+               hashCode += this.ProcessingFee.GetHashCode();
             }
 
-            if (PaymentId != null)
+            if (this.PaymentId != null)
             {
-               hashCode += PaymentId.GetHashCode();
+               hashCode += this.PaymentId.GetHashCode();
             }
 
-            if (OrderId != null)
+            if (this.OrderId != null)
             {
-               hashCode += OrderId.GetHashCode();
+               hashCode += this.OrderId.GetHashCode();
             }
 
-            if (Reason != null)
+            if (this.Reason != null)
             {
-               hashCode += Reason.GetHashCode();
+               hashCode += this.Reason.GetHashCode();
             }
 
-            if (CreatedAt != null)
+            if (this.CreatedAt != null)
             {
-               hashCode += CreatedAt.GetHashCode();
+               hashCode += this.CreatedAt.GetHashCode();
             }
 
-            if (UpdatedAt != null)
+            if (this.UpdatedAt != null)
             {
-               hashCode += UpdatedAt.GetHashCode();
+               hashCode += this.UpdatedAt.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id == string.Empty ? "" : this.Id)}");
+            toStringOutput.Add($"this.Status = {(this.Status == null ? "null" : this.Status == string.Empty ? "" : this.Status)}");
+            toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId == string.Empty ? "" : this.LocationId)}");
+            toStringOutput.Add($"this.AmountMoney = {(this.AmountMoney == null ? "null" : this.AmountMoney.ToString())}");
+            toStringOutput.Add($"this.AppFeeMoney = {(this.AppFeeMoney == null ? "null" : this.AppFeeMoney.ToString())}");
+            toStringOutput.Add($"this.ProcessingFee = {(this.ProcessingFee == null ? "null" : $"[{string.Join(", ", this.ProcessingFee)} ]")}");
+            toStringOutput.Add($"this.PaymentId = {(this.PaymentId == null ? "null" : this.PaymentId == string.Empty ? "" : this.PaymentId)}");
+            toStringOutput.Add($"this.OrderId = {(this.OrderId == null ? "null" : this.OrderId == string.Empty ? "" : this.OrderId)}");
+            toStringOutput.Add($"this.Reason = {(this.Reason == null ? "null" : this.Reason == string.Empty ? "" : this.Reason)}");
+            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt == string.Empty ? "" : this.CreatedAt)}");
+            toStringOutput.Add($"this.UpdatedAt = {(this.UpdatedAt == null ? "null" : this.UpdatedAt == string.Empty ? "" : this.UpdatedAt)}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
-            var builder = new Builder(Id,
-                AmountMoney)
-                .Status(Status)
-                .LocationId(LocationId)
-                .AppFeeMoney(AppFeeMoney)
-                .ProcessingFee(ProcessingFee)
-                .PaymentId(PaymentId)
-                .OrderId(OrderId)
-                .Reason(Reason)
-                .CreatedAt(CreatedAt)
-                .UpdatedAt(UpdatedAt);
+            var builder = new Builder(
+                this.Id,
+                this.AmountMoney)
+                .Status(this.Status)
+                .LocationId(this.LocationId)
+                .AppFeeMoney(this.AppFeeMoney)
+                .ProcessingFee(this.ProcessingFee)
+                .PaymentId(this.PaymentId)
+                .OrderId(this.OrderId)
+                .Reason(this.Reason)
+                .CreatedAt(this.CreatedAt)
+                .UpdatedAt(this.UpdatedAt);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string id;
@@ -262,92 +294,153 @@ namespace Square.Models
             private string createdAt;
             private string updatedAt;
 
-            public Builder(string id,
+            public Builder(
+                string id,
                 Models.Money amountMoney)
             {
                 this.id = id;
                 this.amountMoney = amountMoney;
             }
 
+             /// <summary>
+             /// Id.
+             /// </summary>
+             /// <param name="id"> id. </param>
+             /// <returns> Builder. </returns>
             public Builder Id(string id)
             {
                 this.id = id;
                 return this;
             }
 
+             /// <summary>
+             /// AmountMoney.
+             /// </summary>
+             /// <param name="amountMoney"> amountMoney. </param>
+             /// <returns> Builder. </returns>
             public Builder AmountMoney(Models.Money amountMoney)
             {
                 this.amountMoney = amountMoney;
                 return this;
             }
 
+             /// <summary>
+             /// Status.
+             /// </summary>
+             /// <param name="status"> status. </param>
+             /// <returns> Builder. </returns>
             public Builder Status(string status)
             {
                 this.status = status;
                 return this;
             }
 
+             /// <summary>
+             /// LocationId.
+             /// </summary>
+             /// <param name="locationId"> locationId. </param>
+             /// <returns> Builder. </returns>
             public Builder LocationId(string locationId)
             {
                 this.locationId = locationId;
                 return this;
             }
 
+             /// <summary>
+             /// AppFeeMoney.
+             /// </summary>
+             /// <param name="appFeeMoney"> appFeeMoney. </param>
+             /// <returns> Builder. </returns>
             public Builder AppFeeMoney(Models.Money appFeeMoney)
             {
                 this.appFeeMoney = appFeeMoney;
                 return this;
             }
 
+             /// <summary>
+             /// ProcessingFee.
+             /// </summary>
+             /// <param name="processingFee"> processingFee. </param>
+             /// <returns> Builder. </returns>
             public Builder ProcessingFee(IList<Models.ProcessingFee> processingFee)
             {
                 this.processingFee = processingFee;
                 return this;
             }
 
+             /// <summary>
+             /// PaymentId.
+             /// </summary>
+             /// <param name="paymentId"> paymentId. </param>
+             /// <returns> Builder. </returns>
             public Builder PaymentId(string paymentId)
             {
                 this.paymentId = paymentId;
                 return this;
             }
 
+             /// <summary>
+             /// OrderId.
+             /// </summary>
+             /// <param name="orderId"> orderId. </param>
+             /// <returns> Builder. </returns>
             public Builder OrderId(string orderId)
             {
                 this.orderId = orderId;
                 return this;
             }
 
+             /// <summary>
+             /// Reason.
+             /// </summary>
+             /// <param name="reason"> reason. </param>
+             /// <returns> Builder. </returns>
             public Builder Reason(string reason)
             {
                 this.reason = reason;
                 return this;
             }
 
+             /// <summary>
+             /// CreatedAt.
+             /// </summary>
+             /// <param name="createdAt"> createdAt. </param>
+             /// <returns> Builder. </returns>
             public Builder CreatedAt(string createdAt)
             {
                 this.createdAt = createdAt;
                 return this;
             }
 
+             /// <summary>
+             /// UpdatedAt.
+             /// </summary>
+             /// <param name="updatedAt"> updatedAt. </param>
+             /// <returns> Builder. </returns>
             public Builder UpdatedAt(string updatedAt)
             {
                 this.updatedAt = updatedAt;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> PaymentRefund. </returns>
             public PaymentRefund Build()
             {
-                return new PaymentRefund(id,
-                    amountMoney,
-                    status,
-                    locationId,
-                    appFeeMoney,
-                    processingFee,
-                    paymentId,
-                    orderId,
-                    reason,
-                    createdAt,
-                    updatedAt);
+                return new PaymentRefund(
+                    this.id,
+                    this.amountMoney,
+                    this.status,
+                    this.locationId,
+                    this.appFeeMoney,
+                    this.processingFee,
+                    this.paymentId,
+                    this.orderId,
+                    this.reason,
+                    this.createdAt,
+                    this.updatedAt);
             }
         }
     }

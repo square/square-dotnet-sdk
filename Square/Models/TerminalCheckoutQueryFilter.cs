@@ -1,27 +1,36 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class TerminalCheckoutQueryFilter 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// TerminalCheckoutQueryFilter.
+    /// </summary>
+    public class TerminalCheckoutQueryFilter
     {
-        public TerminalCheckoutQueryFilter(string deviceId = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TerminalCheckoutQueryFilter"/> class.
+        /// </summary>
+        /// <param name="deviceId">device_id.</param>
+        /// <param name="createdAt">created_at.</param>
+        /// <param name="status">status.</param>
+        public TerminalCheckoutQueryFilter(
+            string deviceId = null,
             Models.TimeRange createdAt = null,
             string status = null)
         {
-            DeviceId = deviceId;
-            CreatedAt = createdAt;
-            Status = status;
+            this.DeviceId = deviceId;
+            this.CreatedAt = createdAt;
+            this.Status = status;
         }
 
         /// <summary>
@@ -48,6 +57,7 @@ namespace Square.Models
         [JsonProperty("status", NullValueHandling = NullValueHandling.Ignore)]
         public string Status { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -57,13 +67,7 @@ namespace Square.Models
             return $"TerminalCheckoutQueryFilter : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"DeviceId = {(DeviceId == null ? "null" : DeviceId == string.Empty ? "" : DeviceId)}");
-            toStringOutput.Add($"CreatedAt = {(CreatedAt == null ? "null" : CreatedAt.ToString())}");
-            toStringOutput.Add($"Status = {(Status == null ? "null" : Status == string.Empty ? "" : Status)}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -77,73 +81,110 @@ namespace Square.Models
             }
 
             return obj is TerminalCheckoutQueryFilter other &&
-                ((DeviceId == null && other.DeviceId == null) || (DeviceId?.Equals(other.DeviceId) == true)) &&
-                ((CreatedAt == null && other.CreatedAt == null) || (CreatedAt?.Equals(other.CreatedAt) == true)) &&
-                ((Status == null && other.Status == null) || (Status?.Equals(other.Status) == true));
+                ((this.DeviceId == null && other.DeviceId == null) || (this.DeviceId?.Equals(other.DeviceId) == true)) &&
+                ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true)) &&
+                ((this.Status == null && other.Status == null) || (this.Status?.Equals(other.Status) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -2139546882;
 
-            if (DeviceId != null)
+            if (this.DeviceId != null)
             {
-               hashCode += DeviceId.GetHashCode();
+               hashCode += this.DeviceId.GetHashCode();
             }
 
-            if (CreatedAt != null)
+            if (this.CreatedAt != null)
             {
-               hashCode += CreatedAt.GetHashCode();
+               hashCode += this.CreatedAt.GetHashCode();
             }
 
-            if (Status != null)
+            if (this.Status != null)
             {
-               hashCode += Status.GetHashCode();
+               hashCode += this.Status.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.DeviceId = {(this.DeviceId == null ? "null" : this.DeviceId == string.Empty ? "" : this.DeviceId)}");
+            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt.ToString())}");
+            toStringOutput.Add($"this.Status = {(this.Status == null ? "null" : this.Status == string.Empty ? "" : this.Status)}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .DeviceId(DeviceId)
-                .CreatedAt(CreatedAt)
-                .Status(Status);
+                .DeviceId(this.DeviceId)
+                .CreatedAt(this.CreatedAt)
+                .Status(this.Status);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string deviceId;
             private Models.TimeRange createdAt;
             private string status;
 
-
-
+             /// <summary>
+             /// DeviceId.
+             /// </summary>
+             /// <param name="deviceId"> deviceId. </param>
+             /// <returns> Builder. </returns>
             public Builder DeviceId(string deviceId)
             {
                 this.deviceId = deviceId;
                 return this;
             }
 
+             /// <summary>
+             /// CreatedAt.
+             /// </summary>
+             /// <param name="createdAt"> createdAt. </param>
+             /// <returns> Builder. </returns>
             public Builder CreatedAt(Models.TimeRange createdAt)
             {
                 this.createdAt = createdAt;
                 return this;
             }
 
+             /// <summary>
+             /// Status.
+             /// </summary>
+             /// <param name="status"> status. </param>
+             /// <returns> Builder. </returns>
             public Builder Status(string status)
             {
                 this.status = status;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> TerminalCheckoutQueryFilter. </returns>
             public TerminalCheckoutQueryFilter Build()
             {
-                return new TerminalCheckoutQueryFilter(deviceId,
-                    createdAt,
-                    status);
+                return new TerminalCheckoutQueryFilter(
+                    this.deviceId,
+                    this.createdAt,
+                    this.status);
             }
         }
     }

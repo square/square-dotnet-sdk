@@ -11,7 +11,7 @@ Describes a slot available for booking, encapsulating appointment segments, the 
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `StartAt` | `string` | Optional | The RFC-3339 timestamp specifying the beginning time of the slot available for booking. |
+| `StartAt` | `string` | Optional | The RFC 3339 timestamp specifying the beginning time of the slot available for booking. |
 | `LocationId` | `string` | Optional | The ID of the location available for booking. |
 | `AppointmentSegments` | [`IList<Models.AppointmentSegment>`](/doc/models/appointment-segment.md) | Optional | The list of appointment segments available for booking |
 

@@ -1,29 +1,37 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class InvoiceSort 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// InvoiceSort.
+    /// </summary>
+    public class InvoiceSort
     {
-        public InvoiceSort(string field,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="InvoiceSort"/> class.
+        /// </summary>
+        /// <param name="field">field.</param>
+        /// <param name="order">order.</param>
+        public InvoiceSort(
+            string field,
             string order = null)
         {
-            Field = field;
-            Order = order;
+            this.Field = field;
+            this.Order = order;
         }
 
         /// <summary>
-        /// Field to use for sorting.
+        /// The field to use for sorting.
         /// </summary>
         [JsonProperty("field")]
         public string Field { get; }
@@ -34,6 +42,7 @@ namespace Square.Models
         [JsonProperty("order", NullValueHandling = NullValueHandling.Ignore)]
         public string Order { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -43,12 +52,7 @@ namespace Square.Models
             return $"InvoiceSort : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Field = {(Field == null ? "null" : Field == string.Empty ? "" : Field)}");
-            toStringOutput.Add($"Order = {(Order == null ? "null" : Order.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -62,60 +66,95 @@ namespace Square.Models
             }
 
             return obj is InvoiceSort other &&
-                ((Field == null && other.Field == null) || (Field?.Equals(other.Field) == true)) &&
-                ((Order == null && other.Order == null) || (Order?.Equals(other.Order) == true));
+                ((this.Field == null && other.Field == null) || (this.Field?.Equals(other.Field) == true)) &&
+                ((this.Order == null && other.Order == null) || (this.Order?.Equals(other.Order) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 1234776643;
 
-            if (Field != null)
+            if (this.Field != null)
             {
-               hashCode += Field.GetHashCode();
+               hashCode += this.Field.GetHashCode();
             }
 
-            if (Order != null)
+            if (this.Order != null)
             {
-               hashCode += Order.GetHashCode();
+               hashCode += this.Order.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Field = {(this.Field == null ? "null" : this.Field == string.Empty ? "" : this.Field)}");
+            toStringOutput.Add($"this.Order = {(this.Order == null ? "null" : this.Order.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
-            var builder = new Builder(Field)
-                .Order(Order);
+            var builder = new Builder(
+                this.Field)
+                .Order(this.Order);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string field;
             private string order;
 
-            public Builder(string field)
+            public Builder(
+                string field)
             {
                 this.field = field;
             }
 
+             /// <summary>
+             /// Field.
+             /// </summary>
+             /// <param name="field"> field. </param>
+             /// <returns> Builder. </returns>
             public Builder Field(string field)
             {
                 this.field = field;
                 return this;
             }
 
+             /// <summary>
+             /// Order.
+             /// </summary>
+             /// <param name="order"> order. </param>
+             /// <returns> Builder. </returns>
             public Builder Order(string order)
             {
                 this.order = order;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> InvoiceSort. </returns>
             public InvoiceSort Build()
             {
-                return new InvoiceSort(field,
-                    order);
+                return new InvoiceSort(
+                    this.field,
+                    this.order);
             }
         }
     }

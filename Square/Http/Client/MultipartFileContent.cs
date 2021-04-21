@@ -1,47 +1,86 @@
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using Square.Utilities;
-
 namespace Square.Http.Client
 {
+    using System.Collections.Generic;
+    using System.Net.Http;
+    using System.Net.Http.Headers;
+    using Square.Utilities;
+
+    /// <summary>
+    /// MultipartFileContent.
+    /// </summary>
     internal class MultipartFileContent : MultipartContent
     {
-        public FileStreamInfo File { get; }
-
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MultipartFileContent"/> class.
+        /// </summary>
+        /// <param name="file">file.</param>
         public MultipartFileContent(FileStreamInfo file)
         {
-            File = file;
+            this.File = file;
         }
 
-        public MultipartFileContent(FileStreamInfo file, IReadOnlyDictionary<string, IReadOnlyCollection<string>> headers) : base(headers)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MultipartFileContent"/> class.
+        /// </summary>
+        /// <param name="file">file.</param>
+        /// <param name="headers">headers.</param>
+        public MultipartFileContent(
+            FileStreamInfo file,
+            IReadOnlyDictionary<string,
+            IReadOnlyCollection<string>> headers)
+            : base(headers)
         {
-            File = file;
+            this.File = file;
         }
 
+        /// <summary>
+        /// Gets file.
+        /// </summary>
+        public FileStreamInfo File { get; }
+
+        /// <summary>
+        /// Rewind the stream.
+        /// </summary>
+        public override void Rewind()
+        {
+            this.File.FileStream.Position = 0;
+        }
+
+        /// <summary>
+        /// ToHttpContent.
+        /// </summary>
+        /// <param name="contentDispositionName">contentDispositionName.</param>
+        /// <returns>HttpContent.</returns>
         public override HttpContent ToHttpContent(string contentDispositionName)
         {
-            var streamContent = new StreamContent(File.FileStream);
-            SetHeaders(contentDispositionName, streamContent.Headers);
+            var streamContent = new StreamContent(this.File.FileStream);
+            this.SetHeaders(contentDispositionName, streamContent.Headers);
 
             return streamContent;
         }
 
-        protected override void SetHeaders(string contentDispositionName, HttpContentHeaders headers)
+        /// <summary>
+        /// SetHeaders.
+        /// </summary>
+        /// <param name="contentDispositionName">contentDispositionName.</param>
+        /// <param name="headers">headers.</param>
+        protected override void SetHeaders(
+            string contentDispositionName,
+            HttpContentHeaders headers)
         {
             base.SetHeaders(contentDispositionName, headers);
 
             headers.ContentDisposition = new ContentDispositionHeaderValue("form-data")
             {
                 Name = contentDispositionName,
-                FileName = string.IsNullOrWhiteSpace(File.FileName) ? "file" : File.FileName,
+                FileName = string.IsNullOrWhiteSpace(this.File.FileName) ? "file" : this.File.FileName,
             };
 
-            if (!string.IsNullOrEmpty(File.ContentType))
+            if (!string.IsNullOrEmpty(this.File.ContentType))
             {
-                headers.ContentType = new MediaTypeHeaderValue(File.ContentType);
+                headers.ContentType = new MediaTypeHeaderValue(this.File.ContentType);
             }
-            else if (!Headers.ContainsKey("content-type"))
+            else if (!this.Headers.ContainsKey("content-type"))
             {
                 headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
             }

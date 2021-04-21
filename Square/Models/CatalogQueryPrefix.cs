@@ -1,25 +1,33 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class CatalogQueryPrefix 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// CatalogQueryPrefix.
+    /// </summary>
+    public class CatalogQueryPrefix
     {
-        public CatalogQueryPrefix(string attributeName,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CatalogQueryPrefix"/> class.
+        /// </summary>
+        /// <param name="attributeName">attribute_name.</param>
+        /// <param name="attributePrefix">attribute_prefix.</param>
+        public CatalogQueryPrefix(
+            string attributeName,
             string attributePrefix)
         {
-            AttributeName = attributeName;
-            AttributePrefix = attributePrefix;
+            this.AttributeName = attributeName;
+            this.AttributePrefix = attributePrefix;
         }
 
         /// <summary>
@@ -34,6 +42,7 @@ namespace Square.Models
         [JsonProperty("attribute_prefix")]
         public string AttributePrefix { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -43,12 +52,7 @@ namespace Square.Models
             return $"CatalogQueryPrefix : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"AttributeName = {(AttributeName == null ? "null" : AttributeName == string.Empty ? "" : AttributeName)}");
-            toStringOutput.Add($"AttributePrefix = {(AttributePrefix == null ? "null" : AttributePrefix == string.Empty ? "" : AttributePrefix)}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -62,62 +66,97 @@ namespace Square.Models
             }
 
             return obj is CatalogQueryPrefix other &&
-                ((AttributeName == null && other.AttributeName == null) || (AttributeName?.Equals(other.AttributeName) == true)) &&
-                ((AttributePrefix == null && other.AttributePrefix == null) || (AttributePrefix?.Equals(other.AttributePrefix) == true));
+                ((this.AttributeName == null && other.AttributeName == null) || (this.AttributeName?.Equals(other.AttributeName) == true)) &&
+                ((this.AttributePrefix == null && other.AttributePrefix == null) || (this.AttributePrefix?.Equals(other.AttributePrefix) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -167354518;
 
-            if (AttributeName != null)
+            if (this.AttributeName != null)
             {
-               hashCode += AttributeName.GetHashCode();
+               hashCode += this.AttributeName.GetHashCode();
             }
 
-            if (AttributePrefix != null)
+            if (this.AttributePrefix != null)
             {
-               hashCode += AttributePrefix.GetHashCode();
+               hashCode += this.AttributePrefix.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.AttributeName = {(this.AttributeName == null ? "null" : this.AttributeName == string.Empty ? "" : this.AttributeName)}");
+            toStringOutput.Add($"this.AttributePrefix = {(this.AttributePrefix == null ? "null" : this.AttributePrefix == string.Empty ? "" : this.AttributePrefix)}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
-            var builder = new Builder(AttributeName,
-                AttributePrefix);
+            var builder = new Builder(
+                this.AttributeName,
+                this.AttributePrefix);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string attributeName;
             private string attributePrefix;
 
-            public Builder(string attributeName,
+            public Builder(
+                string attributeName,
                 string attributePrefix)
             {
                 this.attributeName = attributeName;
                 this.attributePrefix = attributePrefix;
             }
 
+             /// <summary>
+             /// AttributeName.
+             /// </summary>
+             /// <param name="attributeName"> attributeName. </param>
+             /// <returns> Builder. </returns>
             public Builder AttributeName(string attributeName)
             {
                 this.attributeName = attributeName;
                 return this;
             }
 
+             /// <summary>
+             /// AttributePrefix.
+             /// </summary>
+             /// <param name="attributePrefix"> attributePrefix. </param>
+             /// <returns> Builder. </returns>
             public Builder AttributePrefix(string attributePrefix)
             {
                 this.attributePrefix = attributePrefix;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> CatalogQueryPrefix. </returns>
             public CatalogQueryPrefix Build()
             {
-                return new CatalogQueryPrefix(attributeName,
-                    attributePrefix);
+                return new CatalogQueryPrefix(
+                    this.attributeName,
+                    this.attributePrefix);
             }
         }
     }

@@ -1,30 +1,42 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square.Http.Client;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class DeleteCatalogObjectResponse 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Http.Client;
+    using Square.Utilities;
+
+    /// <summary>
+    /// DeleteCatalogObjectResponse.
+    /// </summary>
+    public class DeleteCatalogObjectResponse
     {
-        public DeleteCatalogObjectResponse(IList<Models.Error> errors = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DeleteCatalogObjectResponse"/> class.
+        /// </summary>
+        /// <param name="errors">errors.</param>
+        /// <param name="deletedObjectIds">deleted_object_ids.</param>
+        /// <param name="deletedAt">deleted_at.</param>
+        public DeleteCatalogObjectResponse(
+            IList<Models.Error> errors = null,
             IList<string> deletedObjectIds = null,
             string deletedAt = null)
         {
-            Errors = errors;
-            DeletedObjectIds = deletedObjectIds;
-            DeletedAt = deletedAt;
+            this.Errors = errors;
+            this.DeletedObjectIds = deletedObjectIds;
+            this.DeletedAt = deletedAt;
         }
 
+        /// <summary>
+        /// Gets http context.
+        /// </summary>
         [JsonIgnore]
         public HttpContext Context { get; internal set; }
 
@@ -50,6 +62,7 @@ namespace Square.Models
         [JsonProperty("deleted_at", NullValueHandling = NullValueHandling.Ignore)]
         public string DeletedAt { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -59,13 +72,7 @@ namespace Square.Models
             return $"DeleteCatalogObjectResponse : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Errors = {(Errors == null ? "null" : $"[{ string.Join(", ", Errors)} ]")}");
-            toStringOutput.Add($"DeletedObjectIds = {(DeletedObjectIds == null ? "null" : $"[{ string.Join(", ", DeletedObjectIds)} ]")}");
-            toStringOutput.Add($"DeletedAt = {(DeletedAt == null ? "null" : DeletedAt == string.Empty ? "" : DeletedAt)}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -79,79 +86,116 @@ namespace Square.Models
             }
 
             return obj is DeleteCatalogObjectResponse other &&
-                ((Context == null && other.Context == null) || (Context?.Equals(other.Context) == true)) &&
-                ((Errors == null && other.Errors == null) || (Errors?.Equals(other.Errors) == true)) &&
-                ((DeletedObjectIds == null && other.DeletedObjectIds == null) || (DeletedObjectIds?.Equals(other.DeletedObjectIds) == true)) &&
-                ((DeletedAt == null && other.DeletedAt == null) || (DeletedAt?.Equals(other.DeletedAt) == true));
+                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
+                ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true)) &&
+                ((this.DeletedObjectIds == null && other.DeletedObjectIds == null) || (this.DeletedObjectIds?.Equals(other.DeletedObjectIds) == true)) &&
+                ((this.DeletedAt == null && other.DeletedAt == null) || (this.DeletedAt?.Equals(other.DeletedAt) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 98566356;
 
-            if (Context != null)
+            if (this.Context != null)
             {
-                hashCode += Context.GetHashCode();
+                hashCode += this.Context.GetHashCode();
             }
 
-            if (Errors != null)
+            if (this.Errors != null)
             {
-               hashCode += Errors.GetHashCode();
+               hashCode += this.Errors.GetHashCode();
             }
 
-            if (DeletedObjectIds != null)
+            if (this.DeletedObjectIds != null)
             {
-               hashCode += DeletedObjectIds.GetHashCode();
+               hashCode += this.DeletedObjectIds.GetHashCode();
             }
 
-            if (DeletedAt != null)
+            if (this.DeletedAt != null)
             {
-               hashCode += DeletedAt.GetHashCode();
+               hashCode += this.DeletedAt.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Errors = {(this.Errors == null ? "null" : $"[{string.Join(", ", this.Errors)} ]")}");
+            toStringOutput.Add($"this.DeletedObjectIds = {(this.DeletedObjectIds == null ? "null" : $"[{string.Join(", ", this.DeletedObjectIds)} ]")}");
+            toStringOutput.Add($"this.DeletedAt = {(this.DeletedAt == null ? "null" : this.DeletedAt == string.Empty ? "" : this.DeletedAt)}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .Errors(Errors)
-                .DeletedObjectIds(DeletedObjectIds)
-                .DeletedAt(DeletedAt);
+                .Errors(this.Errors)
+                .DeletedObjectIds(this.DeletedObjectIds)
+                .DeletedAt(this.DeletedAt);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private IList<Models.Error> errors;
             private IList<string> deletedObjectIds;
             private string deletedAt;
 
-
-
+             /// <summary>
+             /// Errors.
+             /// </summary>
+             /// <param name="errors"> errors. </param>
+             /// <returns> Builder. </returns>
             public Builder Errors(IList<Models.Error> errors)
             {
                 this.errors = errors;
                 return this;
             }
 
+             /// <summary>
+             /// DeletedObjectIds.
+             /// </summary>
+             /// <param name="deletedObjectIds"> deletedObjectIds. </param>
+             /// <returns> Builder. </returns>
             public Builder DeletedObjectIds(IList<string> deletedObjectIds)
             {
                 this.deletedObjectIds = deletedObjectIds;
                 return this;
             }
 
+             /// <summary>
+             /// DeletedAt.
+             /// </summary>
+             /// <param name="deletedAt"> deletedAt. </param>
+             /// <returns> Builder. </returns>
             public Builder DeletedAt(string deletedAt)
             {
                 this.deletedAt = deletedAt;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> DeleteCatalogObjectResponse. </returns>
             public DeleteCatalogObjectResponse Build()
             {
-                return new DeleteCatalogObjectResponse(errors,
-                    deletedObjectIds,
-                    deletedAt);
+                return new DeleteCatalogObjectResponse(
+                    this.errors,
+                    this.deletedObjectIds,
+                    this.deletedAt);
             }
         }
     }

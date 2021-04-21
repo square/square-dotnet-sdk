@@ -1,31 +1,42 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class CatalogItemOptionValue 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// CatalogItemOptionValue.
+    /// </summary>
+    public class CatalogItemOptionValue
     {
-        public CatalogItemOptionValue(string itemOptionId = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CatalogItemOptionValue"/> class.
+        /// </summary>
+        /// <param name="itemOptionId">item_option_id.</param>
+        /// <param name="name">name.</param>
+        /// <param name="description">description.</param>
+        /// <param name="color">color.</param>
+        /// <param name="ordinal">ordinal.</param>
+        public CatalogItemOptionValue(
+            string itemOptionId = null,
             string name = null,
             string description = null,
             string color = null,
             int? ordinal = null)
         {
-            ItemOptionId = itemOptionId;
-            Name = name;
-            Description = description;
-            Color = color;
-            Ordinal = ordinal;
+            this.ItemOptionId = itemOptionId;
+            this.Name = name;
+            this.Description = description;
+            this.Color = color;
+            this.Ordinal = ordinal;
         }
 
         /// <summary>
@@ -61,6 +72,7 @@ namespace Square.Models
         [JsonProperty("ordinal", NullValueHandling = NullValueHandling.Ignore)]
         public int? Ordinal { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -70,15 +82,7 @@ namespace Square.Models
             return $"CatalogItemOptionValue : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"ItemOptionId = {(ItemOptionId == null ? "null" : ItemOptionId == string.Empty ? "" : ItemOptionId)}");
-            toStringOutput.Add($"Name = {(Name == null ? "null" : Name == string.Empty ? "" : Name)}");
-            toStringOutput.Add($"Description = {(Description == null ? "null" : Description == string.Empty ? "" : Description)}");
-            toStringOutput.Add($"Color = {(Color == null ? "null" : Color == string.Empty ? "" : Color)}");
-            toStringOutput.Add($"Ordinal = {(Ordinal == null ? "null" : Ordinal.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -92,56 +96,77 @@ namespace Square.Models
             }
 
             return obj is CatalogItemOptionValue other &&
-                ((ItemOptionId == null && other.ItemOptionId == null) || (ItemOptionId?.Equals(other.ItemOptionId) == true)) &&
-                ((Name == null && other.Name == null) || (Name?.Equals(other.Name) == true)) &&
-                ((Description == null && other.Description == null) || (Description?.Equals(other.Description) == true)) &&
-                ((Color == null && other.Color == null) || (Color?.Equals(other.Color) == true)) &&
-                ((Ordinal == null && other.Ordinal == null) || (Ordinal?.Equals(other.Ordinal) == true));
+                ((this.ItemOptionId == null && other.ItemOptionId == null) || (this.ItemOptionId?.Equals(other.ItemOptionId) == true)) &&
+                ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
+                ((this.Description == null && other.Description == null) || (this.Description?.Equals(other.Description) == true)) &&
+                ((this.Color == null && other.Color == null) || (this.Color?.Equals(other.Color) == true)) &&
+                ((this.Ordinal == null && other.Ordinal == null) || (this.Ordinal?.Equals(other.Ordinal) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1107154058;
 
-            if (ItemOptionId != null)
+            if (this.ItemOptionId != null)
             {
-               hashCode += ItemOptionId.GetHashCode();
+               hashCode += this.ItemOptionId.GetHashCode();
             }
 
-            if (Name != null)
+            if (this.Name != null)
             {
-               hashCode += Name.GetHashCode();
+               hashCode += this.Name.GetHashCode();
             }
 
-            if (Description != null)
+            if (this.Description != null)
             {
-               hashCode += Description.GetHashCode();
+               hashCode += this.Description.GetHashCode();
             }
 
-            if (Color != null)
+            if (this.Color != null)
             {
-               hashCode += Color.GetHashCode();
+               hashCode += this.Color.GetHashCode();
             }
 
-            if (Ordinal != null)
+            if (this.Ordinal != null)
             {
-               hashCode += Ordinal.GetHashCode();
+               hashCode += this.Ordinal.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.ItemOptionId = {(this.ItemOptionId == null ? "null" : this.ItemOptionId == string.Empty ? "" : this.ItemOptionId)}");
+            toStringOutput.Add($"this.Name = {(this.Name == null ? "null" : this.Name == string.Empty ? "" : this.Name)}");
+            toStringOutput.Add($"this.Description = {(this.Description == null ? "null" : this.Description == string.Empty ? "" : this.Description)}");
+            toStringOutput.Add($"this.Color = {(this.Color == null ? "null" : this.Color == string.Empty ? "" : this.Color)}");
+            toStringOutput.Add($"this.Ordinal = {(this.Ordinal == null ? "null" : this.Ordinal.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .ItemOptionId(ItemOptionId)
-                .Name(Name)
-                .Description(Description)
-                .Color(Color)
-                .Ordinal(Ordinal);
+                .ItemOptionId(this.ItemOptionId)
+                .Name(this.Name)
+                .Description(this.Description)
+                .Color(this.Color)
+                .Ordinal(this.Ordinal);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string itemOptionId;
@@ -150,45 +175,73 @@ namespace Square.Models
             private string color;
             private int? ordinal;
 
-
-
+             /// <summary>
+             /// ItemOptionId.
+             /// </summary>
+             /// <param name="itemOptionId"> itemOptionId. </param>
+             /// <returns> Builder. </returns>
             public Builder ItemOptionId(string itemOptionId)
             {
                 this.itemOptionId = itemOptionId;
                 return this;
             }
 
+             /// <summary>
+             /// Name.
+             /// </summary>
+             /// <param name="name"> name. </param>
+             /// <returns> Builder. </returns>
             public Builder Name(string name)
             {
                 this.name = name;
                 return this;
             }
 
+             /// <summary>
+             /// Description.
+             /// </summary>
+             /// <param name="description"> description. </param>
+             /// <returns> Builder. </returns>
             public Builder Description(string description)
             {
                 this.description = description;
                 return this;
             }
 
+             /// <summary>
+             /// Color.
+             /// </summary>
+             /// <param name="color"> color. </param>
+             /// <returns> Builder. </returns>
             public Builder Color(string color)
             {
                 this.color = color;
                 return this;
             }
 
+             /// <summary>
+             /// Ordinal.
+             /// </summary>
+             /// <param name="ordinal"> ordinal. </param>
+             /// <returns> Builder. </returns>
             public Builder Ordinal(int? ordinal)
             {
                 this.ordinal = ordinal;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> CatalogItemOptionValue. </returns>
             public CatalogItemOptionValue Build()
             {
-                return new CatalogItemOptionValue(itemOptionId,
-                    name,
-                    description,
-                    color,
-                    ordinal);
+                return new CatalogItemOptionValue(
+                    this.itemOptionId,
+                    this.name,
+                    this.description,
+                    this.color,
+                    this.ordinal);
             }
         }
     }

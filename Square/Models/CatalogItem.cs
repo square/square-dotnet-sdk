@@ -1,21 +1,42 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class CatalogItem 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// CatalogItem.
+    /// </summary>
+    public class CatalogItem
     {
-        public CatalogItem(string name = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CatalogItem"/> class.
+        /// </summary>
+        /// <param name="name">name.</param>
+        /// <param name="description">description.</param>
+        /// <param name="abbreviation">abbreviation.</param>
+        /// <param name="labelColor">label_color.</param>
+        /// <param name="availableOnline">available_online.</param>
+        /// <param name="availableForPickup">available_for_pickup.</param>
+        /// <param name="availableElectronically">available_electronically.</param>
+        /// <param name="categoryId">category_id.</param>
+        /// <param name="taxIds">tax_ids.</param>
+        /// <param name="modifierListInfo">modifier_list_info.</param>
+        /// <param name="variations">variations.</param>
+        /// <param name="productType">product_type.</param>
+        /// <param name="skipModifierScreen">skip_modifier_screen.</param>
+        /// <param name="itemOptions">item_options.</param>
+        /// <param name="sortName">sort_name.</param>
+        public CatalogItem(
+            string name = null,
             string description = null,
             string abbreviation = null,
             string labelColor = null,
@@ -28,22 +49,24 @@ namespace Square.Models
             IList<Models.CatalogObject> variations = null,
             string productType = null,
             bool? skipModifierScreen = null,
-            IList<Models.CatalogItemOptionForItem> itemOptions = null)
+            IList<Models.CatalogItemOptionForItem> itemOptions = null,
+            string sortName = null)
         {
-            Name = name;
-            Description = description;
-            Abbreviation = abbreviation;
-            LabelColor = labelColor;
-            AvailableOnline = availableOnline;
-            AvailableForPickup = availableForPickup;
-            AvailableElectronically = availableElectronically;
-            CategoryId = categoryId;
-            TaxIds = taxIds;
-            ModifierListInfo = modifierListInfo;
-            Variations = variations;
-            ProductType = productType;
-            SkipModifierScreen = skipModifierScreen;
-            ItemOptions = itemOptions;
+            this.Name = name;
+            this.Description = description;
+            this.Abbreviation = abbreviation;
+            this.LabelColor = labelColor;
+            this.AvailableOnline = availableOnline;
+            this.AvailableForPickup = availableForPickup;
+            this.AvailableElectronically = availableElectronically;
+            this.CategoryId = categoryId;
+            this.TaxIds = taxIds;
+            this.ModifierListInfo = modifierListInfo;
+            this.Variations = variations;
+            this.ProductType = productType;
+            this.SkipModifierScreen = skipModifierScreen;
+            this.ItemOptions = itemOptions;
+            this.SortName = sortName;
         }
 
         /// <summary>
@@ -143,6 +166,14 @@ namespace Square.Models
         [JsonProperty("item_options", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.CatalogItemOptionForItem> ItemOptions { get; }
 
+        /// <summary>
+        /// A name to sort the item by. If this name is unspecified, namely, the `sort_name` field is absent, the regular `name` field is used for sorting.
+        /// It is currently supported for sellers of the Japanese locale only.
+        /// </summary>
+        [JsonProperty("sort_name", NullValueHandling = NullValueHandling.Ignore)]
+        public string SortName { get; }
+
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -152,24 +183,7 @@ namespace Square.Models
             return $"CatalogItem : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Name = {(Name == null ? "null" : Name == string.Empty ? "" : Name)}");
-            toStringOutput.Add($"Description = {(Description == null ? "null" : Description == string.Empty ? "" : Description)}");
-            toStringOutput.Add($"Abbreviation = {(Abbreviation == null ? "null" : Abbreviation == string.Empty ? "" : Abbreviation)}");
-            toStringOutput.Add($"LabelColor = {(LabelColor == null ? "null" : LabelColor == string.Empty ? "" : LabelColor)}");
-            toStringOutput.Add($"AvailableOnline = {(AvailableOnline == null ? "null" : AvailableOnline.ToString())}");
-            toStringOutput.Add($"AvailableForPickup = {(AvailableForPickup == null ? "null" : AvailableForPickup.ToString())}");
-            toStringOutput.Add($"AvailableElectronically = {(AvailableElectronically == null ? "null" : AvailableElectronically.ToString())}");
-            toStringOutput.Add($"CategoryId = {(CategoryId == null ? "null" : CategoryId == string.Empty ? "" : CategoryId)}");
-            toStringOutput.Add($"TaxIds = {(TaxIds == null ? "null" : $"[{ string.Join(", ", TaxIds)} ]")}");
-            toStringOutput.Add($"ModifierListInfo = {(ModifierListInfo == null ? "null" : $"[{ string.Join(", ", ModifierListInfo)} ]")}");
-            toStringOutput.Add($"Variations = {(Variations == null ? "null" : $"[{ string.Join(", ", Variations)} ]")}");
-            toStringOutput.Add($"ProductType = {(ProductType == null ? "null" : ProductType.ToString())}");
-            toStringOutput.Add($"SkipModifierScreen = {(SkipModifierScreen == null ? "null" : SkipModifierScreen.ToString())}");
-            toStringOutput.Add($"ItemOptions = {(ItemOptions == null ? "null" : $"[{ string.Join(", ", ItemOptions)} ]")}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -183,119 +197,157 @@ namespace Square.Models
             }
 
             return obj is CatalogItem other &&
-                ((Name == null && other.Name == null) || (Name?.Equals(other.Name) == true)) &&
-                ((Description == null && other.Description == null) || (Description?.Equals(other.Description) == true)) &&
-                ((Abbreviation == null && other.Abbreviation == null) || (Abbreviation?.Equals(other.Abbreviation) == true)) &&
-                ((LabelColor == null && other.LabelColor == null) || (LabelColor?.Equals(other.LabelColor) == true)) &&
-                ((AvailableOnline == null && other.AvailableOnline == null) || (AvailableOnline?.Equals(other.AvailableOnline) == true)) &&
-                ((AvailableForPickup == null && other.AvailableForPickup == null) || (AvailableForPickup?.Equals(other.AvailableForPickup) == true)) &&
-                ((AvailableElectronically == null && other.AvailableElectronically == null) || (AvailableElectronically?.Equals(other.AvailableElectronically) == true)) &&
-                ((CategoryId == null && other.CategoryId == null) || (CategoryId?.Equals(other.CategoryId) == true)) &&
-                ((TaxIds == null && other.TaxIds == null) || (TaxIds?.Equals(other.TaxIds) == true)) &&
-                ((ModifierListInfo == null && other.ModifierListInfo == null) || (ModifierListInfo?.Equals(other.ModifierListInfo) == true)) &&
-                ((Variations == null && other.Variations == null) || (Variations?.Equals(other.Variations) == true)) &&
-                ((ProductType == null && other.ProductType == null) || (ProductType?.Equals(other.ProductType) == true)) &&
-                ((SkipModifierScreen == null && other.SkipModifierScreen == null) || (SkipModifierScreen?.Equals(other.SkipModifierScreen) == true)) &&
-                ((ItemOptions == null && other.ItemOptions == null) || (ItemOptions?.Equals(other.ItemOptions) == true));
+                ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
+                ((this.Description == null && other.Description == null) || (this.Description?.Equals(other.Description) == true)) &&
+                ((this.Abbreviation == null && other.Abbreviation == null) || (this.Abbreviation?.Equals(other.Abbreviation) == true)) &&
+                ((this.LabelColor == null && other.LabelColor == null) || (this.LabelColor?.Equals(other.LabelColor) == true)) &&
+                ((this.AvailableOnline == null && other.AvailableOnline == null) || (this.AvailableOnline?.Equals(other.AvailableOnline) == true)) &&
+                ((this.AvailableForPickup == null && other.AvailableForPickup == null) || (this.AvailableForPickup?.Equals(other.AvailableForPickup) == true)) &&
+                ((this.AvailableElectronically == null && other.AvailableElectronically == null) || (this.AvailableElectronically?.Equals(other.AvailableElectronically) == true)) &&
+                ((this.CategoryId == null && other.CategoryId == null) || (this.CategoryId?.Equals(other.CategoryId) == true)) &&
+                ((this.TaxIds == null && other.TaxIds == null) || (this.TaxIds?.Equals(other.TaxIds) == true)) &&
+                ((this.ModifierListInfo == null && other.ModifierListInfo == null) || (this.ModifierListInfo?.Equals(other.ModifierListInfo) == true)) &&
+                ((this.Variations == null && other.Variations == null) || (this.Variations?.Equals(other.Variations) == true)) &&
+                ((this.ProductType == null && other.ProductType == null) || (this.ProductType?.Equals(other.ProductType) == true)) &&
+                ((this.SkipModifierScreen == null && other.SkipModifierScreen == null) || (this.SkipModifierScreen?.Equals(other.SkipModifierScreen) == true)) &&
+                ((this.ItemOptions == null && other.ItemOptions == null) || (this.ItemOptions?.Equals(other.ItemOptions) == true)) &&
+                ((this.SortName == null && other.SortName == null) || (this.SortName?.Equals(other.SortName) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -268666674;
+            int hashCode = -608183061;
 
-            if (Name != null)
+            if (this.Name != null)
             {
-               hashCode += Name.GetHashCode();
+               hashCode += this.Name.GetHashCode();
             }
 
-            if (Description != null)
+            if (this.Description != null)
             {
-               hashCode += Description.GetHashCode();
+               hashCode += this.Description.GetHashCode();
             }
 
-            if (Abbreviation != null)
+            if (this.Abbreviation != null)
             {
-               hashCode += Abbreviation.GetHashCode();
+               hashCode += this.Abbreviation.GetHashCode();
             }
 
-            if (LabelColor != null)
+            if (this.LabelColor != null)
             {
-               hashCode += LabelColor.GetHashCode();
+               hashCode += this.LabelColor.GetHashCode();
             }
 
-            if (AvailableOnline != null)
+            if (this.AvailableOnline != null)
             {
-               hashCode += AvailableOnline.GetHashCode();
+               hashCode += this.AvailableOnline.GetHashCode();
             }
 
-            if (AvailableForPickup != null)
+            if (this.AvailableForPickup != null)
             {
-               hashCode += AvailableForPickup.GetHashCode();
+               hashCode += this.AvailableForPickup.GetHashCode();
             }
 
-            if (AvailableElectronically != null)
+            if (this.AvailableElectronically != null)
             {
-               hashCode += AvailableElectronically.GetHashCode();
+               hashCode += this.AvailableElectronically.GetHashCode();
             }
 
-            if (CategoryId != null)
+            if (this.CategoryId != null)
             {
-               hashCode += CategoryId.GetHashCode();
+               hashCode += this.CategoryId.GetHashCode();
             }
 
-            if (TaxIds != null)
+            if (this.TaxIds != null)
             {
-               hashCode += TaxIds.GetHashCode();
+               hashCode += this.TaxIds.GetHashCode();
             }
 
-            if (ModifierListInfo != null)
+            if (this.ModifierListInfo != null)
             {
-               hashCode += ModifierListInfo.GetHashCode();
+               hashCode += this.ModifierListInfo.GetHashCode();
             }
 
-            if (Variations != null)
+            if (this.Variations != null)
             {
-               hashCode += Variations.GetHashCode();
+               hashCode += this.Variations.GetHashCode();
             }
 
-            if (ProductType != null)
+            if (this.ProductType != null)
             {
-               hashCode += ProductType.GetHashCode();
+               hashCode += this.ProductType.GetHashCode();
             }
 
-            if (SkipModifierScreen != null)
+            if (this.SkipModifierScreen != null)
             {
-               hashCode += SkipModifierScreen.GetHashCode();
+               hashCode += this.SkipModifierScreen.GetHashCode();
             }
 
-            if (ItemOptions != null)
+            if (this.ItemOptions != null)
             {
-               hashCode += ItemOptions.GetHashCode();
+               hashCode += this.ItemOptions.GetHashCode();
+            }
+
+            if (this.SortName != null)
+            {
+               hashCode += this.SortName.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Name = {(this.Name == null ? "null" : this.Name == string.Empty ? "" : this.Name)}");
+            toStringOutput.Add($"this.Description = {(this.Description == null ? "null" : this.Description == string.Empty ? "" : this.Description)}");
+            toStringOutput.Add($"this.Abbreviation = {(this.Abbreviation == null ? "null" : this.Abbreviation == string.Empty ? "" : this.Abbreviation)}");
+            toStringOutput.Add($"this.LabelColor = {(this.LabelColor == null ? "null" : this.LabelColor == string.Empty ? "" : this.LabelColor)}");
+            toStringOutput.Add($"this.AvailableOnline = {(this.AvailableOnline == null ? "null" : this.AvailableOnline.ToString())}");
+            toStringOutput.Add($"this.AvailableForPickup = {(this.AvailableForPickup == null ? "null" : this.AvailableForPickup.ToString())}");
+            toStringOutput.Add($"this.AvailableElectronically = {(this.AvailableElectronically == null ? "null" : this.AvailableElectronically.ToString())}");
+            toStringOutput.Add($"this.CategoryId = {(this.CategoryId == null ? "null" : this.CategoryId == string.Empty ? "" : this.CategoryId)}");
+            toStringOutput.Add($"this.TaxIds = {(this.TaxIds == null ? "null" : $"[{string.Join(", ", this.TaxIds)} ]")}");
+            toStringOutput.Add($"this.ModifierListInfo = {(this.ModifierListInfo == null ? "null" : $"[{string.Join(", ", this.ModifierListInfo)} ]")}");
+            toStringOutput.Add($"this.Variations = {(this.Variations == null ? "null" : $"[{string.Join(", ", this.Variations)} ]")}");
+            toStringOutput.Add($"this.ProductType = {(this.ProductType == null ? "null" : this.ProductType.ToString())}");
+            toStringOutput.Add($"this.SkipModifierScreen = {(this.SkipModifierScreen == null ? "null" : this.SkipModifierScreen.ToString())}");
+            toStringOutput.Add($"this.ItemOptions = {(this.ItemOptions == null ? "null" : $"[{string.Join(", ", this.ItemOptions)} ]")}");
+            toStringOutput.Add($"this.SortName = {(this.SortName == null ? "null" : this.SortName == string.Empty ? "" : this.SortName)}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .Name(Name)
-                .Description(Description)
-                .Abbreviation(Abbreviation)
-                .LabelColor(LabelColor)
-                .AvailableOnline(AvailableOnline)
-                .AvailableForPickup(AvailableForPickup)
-                .AvailableElectronically(AvailableElectronically)
-                .CategoryId(CategoryId)
-                .TaxIds(TaxIds)
-                .ModifierListInfo(ModifierListInfo)
-                .Variations(Variations)
-                .ProductType(ProductType)
-                .SkipModifierScreen(SkipModifierScreen)
-                .ItemOptions(ItemOptions);
+                .Name(this.Name)
+                .Description(this.Description)
+                .Abbreviation(this.Abbreviation)
+                .LabelColor(this.LabelColor)
+                .AvailableOnline(this.AvailableOnline)
+                .AvailableForPickup(this.AvailableForPickup)
+                .AvailableElectronically(this.AvailableElectronically)
+                .CategoryId(this.CategoryId)
+                .TaxIds(this.TaxIds)
+                .ModifierListInfo(this.ModifierListInfo)
+                .Variations(this.Variations)
+                .ProductType(this.ProductType)
+                .SkipModifierScreen(this.SkipModifierScreen)
+                .ItemOptions(this.ItemOptions)
+                .SortName(this.SortName);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string name;
@@ -312,109 +364,195 @@ namespace Square.Models
             private string productType;
             private bool? skipModifierScreen;
             private IList<Models.CatalogItemOptionForItem> itemOptions;
+            private string sortName;
 
-
-
+             /// <summary>
+             /// Name.
+             /// </summary>
+             /// <param name="name"> name. </param>
+             /// <returns> Builder. </returns>
             public Builder Name(string name)
             {
                 this.name = name;
                 return this;
             }
 
+             /// <summary>
+             /// Description.
+             /// </summary>
+             /// <param name="description"> description. </param>
+             /// <returns> Builder. </returns>
             public Builder Description(string description)
             {
                 this.description = description;
                 return this;
             }
 
+             /// <summary>
+             /// Abbreviation.
+             /// </summary>
+             /// <param name="abbreviation"> abbreviation. </param>
+             /// <returns> Builder. </returns>
             public Builder Abbreviation(string abbreviation)
             {
                 this.abbreviation = abbreviation;
                 return this;
             }
 
+             /// <summary>
+             /// LabelColor.
+             /// </summary>
+             /// <param name="labelColor"> labelColor. </param>
+             /// <returns> Builder. </returns>
             public Builder LabelColor(string labelColor)
             {
                 this.labelColor = labelColor;
                 return this;
             }
 
+             /// <summary>
+             /// AvailableOnline.
+             /// </summary>
+             /// <param name="availableOnline"> availableOnline. </param>
+             /// <returns> Builder. </returns>
             public Builder AvailableOnline(bool? availableOnline)
             {
                 this.availableOnline = availableOnline;
                 return this;
             }
 
+             /// <summary>
+             /// AvailableForPickup.
+             /// </summary>
+             /// <param name="availableForPickup"> availableForPickup. </param>
+             /// <returns> Builder. </returns>
             public Builder AvailableForPickup(bool? availableForPickup)
             {
                 this.availableForPickup = availableForPickup;
                 return this;
             }
 
+             /// <summary>
+             /// AvailableElectronically.
+             /// </summary>
+             /// <param name="availableElectronically"> availableElectronically. </param>
+             /// <returns> Builder. </returns>
             public Builder AvailableElectronically(bool? availableElectronically)
             {
                 this.availableElectronically = availableElectronically;
                 return this;
             }
 
+             /// <summary>
+             /// CategoryId.
+             /// </summary>
+             /// <param name="categoryId"> categoryId. </param>
+             /// <returns> Builder. </returns>
             public Builder CategoryId(string categoryId)
             {
                 this.categoryId = categoryId;
                 return this;
             }
 
+             /// <summary>
+             /// TaxIds.
+             /// </summary>
+             /// <param name="taxIds"> taxIds. </param>
+             /// <returns> Builder. </returns>
             public Builder TaxIds(IList<string> taxIds)
             {
                 this.taxIds = taxIds;
                 return this;
             }
 
+             /// <summary>
+             /// ModifierListInfo.
+             /// </summary>
+             /// <param name="modifierListInfo"> modifierListInfo. </param>
+             /// <returns> Builder. </returns>
             public Builder ModifierListInfo(IList<Models.CatalogItemModifierListInfo> modifierListInfo)
             {
                 this.modifierListInfo = modifierListInfo;
                 return this;
             }
 
+             /// <summary>
+             /// Variations.
+             /// </summary>
+             /// <param name="variations"> variations. </param>
+             /// <returns> Builder. </returns>
             public Builder Variations(IList<Models.CatalogObject> variations)
             {
                 this.variations = variations;
                 return this;
             }
 
+             /// <summary>
+             /// ProductType.
+             /// </summary>
+             /// <param name="productType"> productType. </param>
+             /// <returns> Builder. </returns>
             public Builder ProductType(string productType)
             {
                 this.productType = productType;
                 return this;
             }
 
+             /// <summary>
+             /// SkipModifierScreen.
+             /// </summary>
+             /// <param name="skipModifierScreen"> skipModifierScreen. </param>
+             /// <returns> Builder. </returns>
             public Builder SkipModifierScreen(bool? skipModifierScreen)
             {
                 this.skipModifierScreen = skipModifierScreen;
                 return this;
             }
 
+             /// <summary>
+             /// ItemOptions.
+             /// </summary>
+             /// <param name="itemOptions"> itemOptions. </param>
+             /// <returns> Builder. </returns>
             public Builder ItemOptions(IList<Models.CatalogItemOptionForItem> itemOptions)
             {
                 this.itemOptions = itemOptions;
                 return this;
             }
 
+             /// <summary>
+             /// SortName.
+             /// </summary>
+             /// <param name="sortName"> sortName. </param>
+             /// <returns> Builder. </returns>
+            public Builder SortName(string sortName)
+            {
+                this.sortName = sortName;
+                return this;
+            }
+
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> CatalogItem. </returns>
             public CatalogItem Build()
             {
-                return new CatalogItem(name,
-                    description,
-                    abbreviation,
-                    labelColor,
-                    availableOnline,
-                    availableForPickup,
-                    availableElectronically,
-                    categoryId,
-                    taxIds,
-                    modifierListInfo,
-                    variations,
-                    productType,
-                    skipModifierScreen,
-                    itemOptions);
+                return new CatalogItem(
+                    this.name,
+                    this.description,
+                    this.abbreviation,
+                    this.labelColor,
+                    this.availableOnline,
+                    this.availableForPickup,
+                    this.availableElectronically,
+                    this.categoryId,
+                    this.taxIds,
+                    this.modifierListInfo,
+                    this.variations,
+                    this.productType,
+                    this.skipModifierScreen,
+                    this.itemOptions,
+                    this.sortName);
             }
         }
     }

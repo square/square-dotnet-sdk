@@ -21,18 +21,19 @@ IInventoryApi inventoryApi = client.InventoryApi;
 
 # Retrieve Inventory Adjustment
 
-Returns the [InventoryAdjustment](#type-inventoryadjustment) object
+Returns the [InventoryAdjustment](/doc/models/inventory-adjustment.md) object
 with the provided `adjustment_id`.
 
 ```csharp
-RetrieveInventoryAdjustmentAsync(string adjustmentId)
+RetrieveInventoryAdjustmentAsync(
+    string adjustmentId)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `adjustmentId` | `string` | Template, Required | ID of the [InventoryAdjustment](#type-inventoryadjustment) to retrieve. |
+| `adjustmentId` | `string` | Template, Required | ID of the [InventoryAdjustment](/doc/models/inventory-adjustment.md) to retrieve. |
 
 ## Response Type
 
@@ -60,7 +61,8 @@ referenced in the request.
 On failure: returns a list of related errors.
 
 ```csharp
-BatchChangeInventoryAsync(Models.BatchChangeInventoryRequest body)
+BatchChangeInventoryAsync(
+    Models.BatchChangeInventoryRequest body)
 ```
 
 ## Parameters
@@ -103,11 +105,27 @@ var bodyChanges0Transfer = new InventoryTransfer.Builder()
     .FromLocationId("from_location_id2")
     .ToLocationId("to_location_id2")
     .Build();
+var bodyChanges0MeasurementUnitMeasurementUnitCustomUnit = new MeasurementUnitCustom.Builder(
+        "name0",
+        "abbreviation2")
+    .Build();
+var bodyChanges0MeasurementUnitMeasurementUnit = new MeasurementUnit.Builder()
+    .CustomUnit(bodyChanges0MeasurementUnitMeasurementUnitCustomUnit)
+    .AreaUnit("IMPERIAL_SQUARE_FOOT")
+    .LengthUnit("METRIC_METER")
+    .VolumeUnit("METRIC_MILLILITER")
+    .WeightUnit("IMPERIAL_WEIGHT_OUNCE")
+    .Build();
+var bodyChanges0MeasurementUnit = new CatalogMeasurementUnit.Builder()
+    .MeasurementUnit(bodyChanges0MeasurementUnitMeasurementUnit)
+    .Precision(26)
+    .Build();
 var bodyChanges0 = new InventoryChange.Builder()
     .Type("PHYSICAL_COUNT")
     .PhysicalCount(bodyChanges0PhysicalCount)
     .Adjustment(bodyChanges0Adjustment)
     .Transfer(bodyChanges0Transfer)
+    .MeasurementUnit(bodyChanges0MeasurementUnit)
     .Build();
 bodyChanges.Add(bodyChanges0);
 
@@ -137,7 +155,8 @@ BatchRetrieveInventoryChanges is a catch-all query endpoint for queries
 that cannot be handled by other, simpler endpoints.
 
 ```csharp
-BatchRetrieveInventoryChangesAsync(Models.BatchRetrieveInventoryChangesRequest body)
+BatchRetrieveInventoryChangesAsync(
+    Models.BatchRetrieveInventoryChangesRequest body)
 ```
 
 ## Parameters
@@ -181,8 +200,8 @@ catch (ApiException e){};
 # Batch Retrieve Inventory Counts
 
 Returns current counts for the provided
-[CatalogObject](#type-catalogobject)s at the requested
-[Location](#type-location)s.
+[CatalogObject](/doc/models/catalog-object.md)s at the requested
+[Location](/doc/models/location.md)s.
 
 Results are paginated and sorted in descending order according to their
 `calculated_at` timestamp (newest first).
@@ -193,7 +212,8 @@ returned. This allows clients to perform a "sync" operation, for example
 in response to receiving a Webhook notification.
 
 ```csharp
-BatchRetrieveInventoryCountsAsync(Models.BatchRetrieveInventoryCountsRequest body)
+BatchRetrieveInventoryCountsAsync(
+    Models.BatchRetrieveInventoryCountsRequest body)
 ```
 
 ## Parameters
@@ -233,18 +253,19 @@ catch (ApiException e){};
 
 # Retrieve Inventory Physical Count
 
-Returns the [InventoryPhysicalCount](#type-inventoryphysicalcount)
+Returns the [InventoryPhysicalCount](/doc/models/inventory-physical-count.md)
 object with the provided `physical_count_id`.
 
 ```csharp
-RetrieveInventoryPhysicalCountAsync(string physicalCountId)
+RetrieveInventoryPhysicalCountAsync(
+    string physicalCountId)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `physicalCountId` | `string` | Template, Required | ID of the<br>[InventoryPhysicalCount](#type-inventoryphysicalcount) to retrieve. |
+| `physicalCountId` | `string` | Template, Required | ID of the<br>[InventoryPhysicalCount](/doc/models/inventory-physical-count.md) to retrieve. |
 
 ## Response Type
 
@@ -266,20 +287,23 @@ catch (ApiException e){};
 # Retrieve Inventory Count
 
 Retrieves the current calculated stock count for a given
-[CatalogObject](#type-catalogobject) at a given set of
-[Location](#type-location)s. Responses are paginated and unsorted.
+[CatalogObject](/doc/models/catalog-object.md) at a given set of
+[Location](/doc/models/location.md)s. Responses are paginated and unsorted.
 For more sophisticated queries, use a batch endpoint.
 
 ```csharp
-RetrieveInventoryCountAsync(string catalogObjectId, string locationIds = null, string cursor = null)
+RetrieveInventoryCountAsync(
+    string catalogObjectId,
+    string locationIds = null,
+    string cursor = null)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `catalogObjectId` | `string` | Template, Required | ID of the [CatalogObject](#type-catalogobject) to retrieve. |
-| `locationIds` | `string` | Query, Optional | The [Location](#type-location) IDs to look up as a comma-separated<br>list. An empty list queries all locations. |
+| `catalogObjectId` | `string` | Template, Required | ID of the [CatalogObject](/doc/models/catalog-object.md) to retrieve. |
+| `locationIds` | `string` | Query, Optional | The [Location](/doc/models/location.md) IDs to look up as a comma-separated<br>list. An empty list queries all locations. |
 | `cursor` | `string` | Query, Optional | A pagination cursor returned by a previous call to this endpoint.<br>Provide this to retrieve the next set of results for the original query.<br><br>See the [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination) guide for more information. |
 
 ## Response Type
@@ -304,8 +328,8 @@ catch (ApiException e){};
 # Retrieve Inventory Changes
 
 Returns a set of physical counts and inventory adjustments for the
-provided [CatalogObject](#type-catalogobject) at the requested
-[Location](#type-location)s.
+provided [CatalogObject](/doc/models/catalog-object.md) at the requested
+[Location](/doc/models/location.md)s.
 
 Results are paginated and sorted in descending order according to their
 `occurred_at` timestamp (newest first).
@@ -315,15 +339,18 @@ used to display recent changes for a specific item. For more
 sophisticated queries, use a batch endpoint.
 
 ```csharp
-RetrieveInventoryChangesAsync(string catalogObjectId, string locationIds = null, string cursor = null)
+RetrieveInventoryChangesAsync(
+    string catalogObjectId,
+    string locationIds = null,
+    string cursor = null)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `catalogObjectId` | `string` | Template, Required | ID of the [CatalogObject](#type-catalogobject) to retrieve. |
-| `locationIds` | `string` | Query, Optional | The [Location](#type-location) IDs to look up as a comma-separated<br>list. An empty list queries all locations. |
+| `catalogObjectId` | `string` | Template, Required | ID of the [CatalogObject](/doc/models/catalog-object.md) to retrieve. |
+| `locationIds` | `string` | Query, Optional | The [Location](/doc/models/location.md) IDs to look up as a comma-separated<br>list. An empty list queries all locations. |
 | `cursor` | `string` | Query, Optional | A pagination cursor returned by a previous call to this endpoint.<br>Provide this to retrieve the next set of results for the original query.<br><br>See the [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination) guide for more information. |
 
 ## Response Type

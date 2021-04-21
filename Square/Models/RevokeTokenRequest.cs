@@ -1,29 +1,39 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class RevokeTokenRequest 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// RevokeTokenRequest.
+    /// </summary>
+    public class RevokeTokenRequest
     {
-        public RevokeTokenRequest(string clientId = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RevokeTokenRequest"/> class.
+        /// </summary>
+        /// <param name="clientId">client_id.</param>
+        /// <param name="accessToken">access_token.</param>
+        /// <param name="merchantId">merchant_id.</param>
+        /// <param name="revokeOnlyAccessToken">revoke_only_access_token.</param>
+        public RevokeTokenRequest(
+            string clientId = null,
             string accessToken = null,
             string merchantId = null,
             bool? revokeOnlyAccessToken = null)
         {
-            ClientId = clientId;
-            AccessToken = accessToken;
-            MerchantId = merchantId;
-            RevokeOnlyAccessToken = revokeOnlyAccessToken;
+            this.ClientId = clientId;
+            this.AccessToken = accessToken;
+            this.MerchantId = merchantId;
+            this.RevokeOnlyAccessToken = revokeOnlyAccessToken;
         }
 
         /// <summary>
@@ -55,6 +65,7 @@ namespace Square.Models
         [JsonProperty("revoke_only_access_token", NullValueHandling = NullValueHandling.Ignore)]
         public bool? RevokeOnlyAccessToken { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -64,14 +75,7 @@ namespace Square.Models
             return $"RevokeTokenRequest : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"ClientId = {(ClientId == null ? "null" : ClientId == string.Empty ? "" : ClientId)}");
-            toStringOutput.Add($"AccessToken = {(AccessToken == null ? "null" : AccessToken == string.Empty ? "" : AccessToken)}");
-            toStringOutput.Add($"MerchantId = {(MerchantId == null ? "null" : MerchantId == string.Empty ? "" : MerchantId)}");
-            toStringOutput.Add($"RevokeOnlyAccessToken = {(RevokeOnlyAccessToken == null ? "null" : RevokeOnlyAccessToken.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -85,49 +89,69 @@ namespace Square.Models
             }
 
             return obj is RevokeTokenRequest other &&
-                ((ClientId == null && other.ClientId == null) || (ClientId?.Equals(other.ClientId) == true)) &&
-                ((AccessToken == null && other.AccessToken == null) || (AccessToken?.Equals(other.AccessToken) == true)) &&
-                ((MerchantId == null && other.MerchantId == null) || (MerchantId?.Equals(other.MerchantId) == true)) &&
-                ((RevokeOnlyAccessToken == null && other.RevokeOnlyAccessToken == null) || (RevokeOnlyAccessToken?.Equals(other.RevokeOnlyAccessToken) == true));
+                ((this.ClientId == null && other.ClientId == null) || (this.ClientId?.Equals(other.ClientId) == true)) &&
+                ((this.AccessToken == null && other.AccessToken == null) || (this.AccessToken?.Equals(other.AccessToken) == true)) &&
+                ((this.MerchantId == null && other.MerchantId == null) || (this.MerchantId?.Equals(other.MerchantId) == true)) &&
+                ((this.RevokeOnlyAccessToken == null && other.RevokeOnlyAccessToken == null) || (this.RevokeOnlyAccessToken?.Equals(other.RevokeOnlyAccessToken) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 1546864389;
 
-            if (ClientId != null)
+            if (this.ClientId != null)
             {
-               hashCode += ClientId.GetHashCode();
+               hashCode += this.ClientId.GetHashCode();
             }
 
-            if (AccessToken != null)
+            if (this.AccessToken != null)
             {
-               hashCode += AccessToken.GetHashCode();
+               hashCode += this.AccessToken.GetHashCode();
             }
 
-            if (MerchantId != null)
+            if (this.MerchantId != null)
             {
-               hashCode += MerchantId.GetHashCode();
+               hashCode += this.MerchantId.GetHashCode();
             }
 
-            if (RevokeOnlyAccessToken != null)
+            if (this.RevokeOnlyAccessToken != null)
             {
-               hashCode += RevokeOnlyAccessToken.GetHashCode();
+               hashCode += this.RevokeOnlyAccessToken.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.ClientId = {(this.ClientId == null ? "null" : this.ClientId == string.Empty ? "" : this.ClientId)}");
+            toStringOutput.Add($"this.AccessToken = {(this.AccessToken == null ? "null" : this.AccessToken == string.Empty ? "" : this.AccessToken)}");
+            toStringOutput.Add($"this.MerchantId = {(this.MerchantId == null ? "null" : this.MerchantId == string.Empty ? "" : this.MerchantId)}");
+            toStringOutput.Add($"this.RevokeOnlyAccessToken = {(this.RevokeOnlyAccessToken == null ? "null" : this.RevokeOnlyAccessToken.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .ClientId(ClientId)
-                .AccessToken(AccessToken)
-                .MerchantId(MerchantId)
-                .RevokeOnlyAccessToken(RevokeOnlyAccessToken);
+                .ClientId(this.ClientId)
+                .AccessToken(this.AccessToken)
+                .MerchantId(this.MerchantId)
+                .RevokeOnlyAccessToken(this.RevokeOnlyAccessToken);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string clientId;
@@ -135,38 +159,61 @@ namespace Square.Models
             private string merchantId;
             private bool? revokeOnlyAccessToken;
 
-
-
+             /// <summary>
+             /// ClientId.
+             /// </summary>
+             /// <param name="clientId"> clientId. </param>
+             /// <returns> Builder. </returns>
             public Builder ClientId(string clientId)
             {
                 this.clientId = clientId;
                 return this;
             }
 
+             /// <summary>
+             /// AccessToken.
+             /// </summary>
+             /// <param name="accessToken"> accessToken. </param>
+             /// <returns> Builder. </returns>
             public Builder AccessToken(string accessToken)
             {
                 this.accessToken = accessToken;
                 return this;
             }
 
+             /// <summary>
+             /// MerchantId.
+             /// </summary>
+             /// <param name="merchantId"> merchantId. </param>
+             /// <returns> Builder. </returns>
             public Builder MerchantId(string merchantId)
             {
                 this.merchantId = merchantId;
                 return this;
             }
 
+             /// <summary>
+             /// RevokeOnlyAccessToken.
+             /// </summary>
+             /// <param name="revokeOnlyAccessToken"> revokeOnlyAccessToken. </param>
+             /// <returns> Builder. </returns>
             public Builder RevokeOnlyAccessToken(bool? revokeOnlyAccessToken)
             {
                 this.revokeOnlyAccessToken = revokeOnlyAccessToken;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> RevokeTokenRequest. </returns>
             public RevokeTokenRequest Build()
             {
-                return new RevokeTokenRequest(clientId,
-                    accessToken,
-                    merchantId,
-                    revokeOnlyAccessToken);
+                return new RevokeTokenRequest(
+                    this.clientId,
+                    this.accessToken,
+                    this.merchantId,
+                    this.revokeOnlyAccessToken);
             }
         }
     }

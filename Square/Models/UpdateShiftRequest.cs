@@ -1,23 +1,30 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class UpdateShiftRequest 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// UpdateShiftRequest.
+    /// </summary>
+    public class UpdateShiftRequest
     {
-        public UpdateShiftRequest(Models.Shift shift)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UpdateShiftRequest"/> class.
+        /// </summary>
+        /// <param name="shift">shift.</param>
+        public UpdateShiftRequest(
+            Models.Shift shift)
         {
-            Shift = shift;
+            this.Shift = shift;
         }
 
         /// <summary>
@@ -28,6 +35,7 @@ namespace Square.Models
         [JsonProperty("shift")]
         public Models.Shift Shift { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -37,11 +45,7 @@ namespace Square.Models
             return $"UpdateShiftRequest : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Shift = {(Shift == null ? "null" : Shift.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -55,45 +59,74 @@ namespace Square.Models
             }
 
             return obj is UpdateShiftRequest other &&
-                ((Shift == null && other.Shift == null) || (Shift?.Equals(other.Shift) == true));
+                ((this.Shift == null && other.Shift == null) || (this.Shift?.Equals(other.Shift) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 1511413014;
 
-            if (Shift != null)
+            if (this.Shift != null)
             {
-               hashCode += Shift.GetHashCode();
+               hashCode += this.Shift.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Shift = {(this.Shift == null ? "null" : this.Shift.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
-            var builder = new Builder(Shift);
+            var builder = new Builder(
+                this.Shift);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private Models.Shift shift;
 
-            public Builder(Models.Shift shift)
+            public Builder(
+                Models.Shift shift)
             {
                 this.shift = shift;
             }
 
+             /// <summary>
+             /// Shift.
+             /// </summary>
+             /// <param name="shift"> shift. </param>
+             /// <returns> Builder. </returns>
             public Builder Shift(Models.Shift shift)
             {
                 this.shift = shift;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> UpdateShiftRequest. </returns>
             public UpdateShiftRequest Build()
             {
-                return new UpdateShiftRequest(shift);
+                return new UpdateShiftRequest(
+                    this.shift);
             }
         }
     }

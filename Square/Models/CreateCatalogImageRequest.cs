@@ -1,27 +1,36 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class CreateCatalogImageRequest 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// CreateCatalogImageRequest.
+    /// </summary>
+    public class CreateCatalogImageRequest
     {
-        public CreateCatalogImageRequest(string idempotencyKey,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CreateCatalogImageRequest"/> class.
+        /// </summary>
+        /// <param name="idempotencyKey">idempotency_key.</param>
+        /// <param name="objectId">object_id.</param>
+        /// <param name="image">image.</param>
+        public CreateCatalogImageRequest(
+            string idempotencyKey,
             string objectId = null,
             Models.CatalogObject image = null)
         {
-            IdempotencyKey = idempotencyKey;
-            ObjectId = objectId;
-            Image = image;
+            this.IdempotencyKey = idempotencyKey;
+            this.ObjectId = objectId;
+            this.Image = image;
         }
 
         /// <summary>
@@ -65,6 +74,7 @@ namespace Square.Models
         [JsonProperty("image", NullValueHandling = NullValueHandling.Ignore)]
         public Models.CatalogObject Image { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -74,13 +84,7 @@ namespace Square.Models
             return $"CreateCatalogImageRequest : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"IdempotencyKey = {(IdempotencyKey == null ? "null" : IdempotencyKey == string.Empty ? "" : IdempotencyKey)}");
-            toStringOutput.Add($"ObjectId = {(ObjectId == null ? "null" : ObjectId == string.Empty ? "" : ObjectId)}");
-            toStringOutput.Add($"Image = {(Image == null ? "null" : Image.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -94,75 +98,116 @@ namespace Square.Models
             }
 
             return obj is CreateCatalogImageRequest other &&
-                ((IdempotencyKey == null && other.IdempotencyKey == null) || (IdempotencyKey?.Equals(other.IdempotencyKey) == true)) &&
-                ((ObjectId == null && other.ObjectId == null) || (ObjectId?.Equals(other.ObjectId) == true)) &&
-                ((Image == null && other.Image == null) || (Image?.Equals(other.Image) == true));
+                ((this.IdempotencyKey == null && other.IdempotencyKey == null) || (this.IdempotencyKey?.Equals(other.IdempotencyKey) == true)) &&
+                ((this.ObjectId == null && other.ObjectId == null) || (this.ObjectId?.Equals(other.ObjectId) == true)) &&
+                ((this.Image == null && other.Image == null) || (this.Image?.Equals(other.Image) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 1867152760;
 
-            if (IdempotencyKey != null)
+            if (this.IdempotencyKey != null)
             {
-               hashCode += IdempotencyKey.GetHashCode();
+               hashCode += this.IdempotencyKey.GetHashCode();
             }
 
-            if (ObjectId != null)
+            if (this.ObjectId != null)
             {
-               hashCode += ObjectId.GetHashCode();
+               hashCode += this.ObjectId.GetHashCode();
             }
 
-            if (Image != null)
+            if (this.Image != null)
             {
-               hashCode += Image.GetHashCode();
+               hashCode += this.Image.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.IdempotencyKey = {(this.IdempotencyKey == null ? "null" : this.IdempotencyKey == string.Empty ? "" : this.IdempotencyKey)}");
+            toStringOutput.Add($"this.ObjectId = {(this.ObjectId == null ? "null" : this.ObjectId == string.Empty ? "" : this.ObjectId)}");
+            toStringOutput.Add($"this.Image = {(this.Image == null ? "null" : this.Image.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
-            var builder = new Builder(IdempotencyKey)
-                .ObjectId(ObjectId)
-                .Image(Image);
+            var builder = new Builder(
+                this.IdempotencyKey)
+                .ObjectId(this.ObjectId)
+                .Image(this.Image);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string idempotencyKey;
             private string objectId;
             private Models.CatalogObject image;
 
-            public Builder(string idempotencyKey)
+            public Builder(
+                string idempotencyKey)
             {
                 this.idempotencyKey = idempotencyKey;
             }
 
+             /// <summary>
+             /// IdempotencyKey.
+             /// </summary>
+             /// <param name="idempotencyKey"> idempotencyKey. </param>
+             /// <returns> Builder. </returns>
             public Builder IdempotencyKey(string idempotencyKey)
             {
                 this.idempotencyKey = idempotencyKey;
                 return this;
             }
 
+             /// <summary>
+             /// ObjectId.
+             /// </summary>
+             /// <param name="objectId"> objectId. </param>
+             /// <returns> Builder. </returns>
             public Builder ObjectId(string objectId)
             {
                 this.objectId = objectId;
                 return this;
             }
 
+             /// <summary>
+             /// Image.
+             /// </summary>
+             /// <param name="image"> image. </param>
+             /// <returns> Builder. </returns>
             public Builder Image(Models.CatalogObject image)
             {
                 this.image = image;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> CreateCatalogImageRequest. </returns>
             public CreateCatalogImageRequest Build()
             {
-                return new CreateCatalogImageRequest(idempotencyKey,
-                    objectId,
-                    image);
+                return new CreateCatalogImageRequest(
+                    this.idempotencyKey,
+                    this.objectId,
+                    this.image);
             }
         }
     }

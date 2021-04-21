@@ -1,31 +1,42 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class TipSettings 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// TipSettings.
+    /// </summary>
+    public class TipSettings
     {
-        public TipSettings(bool? allowTipping = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TipSettings"/> class.
+        /// </summary>
+        /// <param name="allowTipping">allow_tipping.</param>
+        /// <param name="separateTipScreen">separate_tip_screen.</param>
+        /// <param name="customTipField">custom_tip_field.</param>
+        /// <param name="tipPercentages">tip_percentages.</param>
+        /// <param name="smartTipping">smart_tipping.</param>
+        public TipSettings(
+            bool? allowTipping = null,
             bool? separateTipScreen = null,
             bool? customTipField = null,
             IList<int> tipPercentages = null,
             bool? smartTipping = null)
         {
-            AllowTipping = allowTipping;
-            SeparateTipScreen = separateTipScreen;
-            CustomTipField = customTipField;
-            TipPercentages = tipPercentages;
-            SmartTipping = smartTipping;
+            this.AllowTipping = allowTipping;
+            this.SeparateTipScreen = separateTipScreen;
+            this.CustomTipField = customTipField;
+            this.TipPercentages = tipPercentages;
+            this.SmartTipping = smartTipping;
         }
 
         /// <summary>
@@ -66,6 +77,7 @@ namespace Square.Models
         [JsonProperty("smart_tipping", NullValueHandling = NullValueHandling.Ignore)]
         public bool? SmartTipping { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -75,15 +87,7 @@ namespace Square.Models
             return $"TipSettings : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"AllowTipping = {(AllowTipping == null ? "null" : AllowTipping.ToString())}");
-            toStringOutput.Add($"SeparateTipScreen = {(SeparateTipScreen == null ? "null" : SeparateTipScreen.ToString())}");
-            toStringOutput.Add($"CustomTipField = {(CustomTipField == null ? "null" : CustomTipField.ToString())}");
-            toStringOutput.Add($"TipPercentages = {(TipPercentages == null ? "null" : $"[{ string.Join(", ", TipPercentages)} ]")}");
-            toStringOutput.Add($"SmartTipping = {(SmartTipping == null ? "null" : SmartTipping.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -97,56 +101,77 @@ namespace Square.Models
             }
 
             return obj is TipSettings other &&
-                ((AllowTipping == null && other.AllowTipping == null) || (AllowTipping?.Equals(other.AllowTipping) == true)) &&
-                ((SeparateTipScreen == null && other.SeparateTipScreen == null) || (SeparateTipScreen?.Equals(other.SeparateTipScreen) == true)) &&
-                ((CustomTipField == null && other.CustomTipField == null) || (CustomTipField?.Equals(other.CustomTipField) == true)) &&
-                ((TipPercentages == null && other.TipPercentages == null) || (TipPercentages?.Equals(other.TipPercentages) == true)) &&
-                ((SmartTipping == null && other.SmartTipping == null) || (SmartTipping?.Equals(other.SmartTipping) == true));
+                ((this.AllowTipping == null && other.AllowTipping == null) || (this.AllowTipping?.Equals(other.AllowTipping) == true)) &&
+                ((this.SeparateTipScreen == null && other.SeparateTipScreen == null) || (this.SeparateTipScreen?.Equals(other.SeparateTipScreen) == true)) &&
+                ((this.CustomTipField == null && other.CustomTipField == null) || (this.CustomTipField?.Equals(other.CustomTipField) == true)) &&
+                ((this.TipPercentages == null && other.TipPercentages == null) || (this.TipPercentages?.Equals(other.TipPercentages) == true)) &&
+                ((this.SmartTipping == null && other.SmartTipping == null) || (this.SmartTipping?.Equals(other.SmartTipping) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 464455539;
 
-            if (AllowTipping != null)
+            if (this.AllowTipping != null)
             {
-               hashCode += AllowTipping.GetHashCode();
+               hashCode += this.AllowTipping.GetHashCode();
             }
 
-            if (SeparateTipScreen != null)
+            if (this.SeparateTipScreen != null)
             {
-               hashCode += SeparateTipScreen.GetHashCode();
+               hashCode += this.SeparateTipScreen.GetHashCode();
             }
 
-            if (CustomTipField != null)
+            if (this.CustomTipField != null)
             {
-               hashCode += CustomTipField.GetHashCode();
+               hashCode += this.CustomTipField.GetHashCode();
             }
 
-            if (TipPercentages != null)
+            if (this.TipPercentages != null)
             {
-               hashCode += TipPercentages.GetHashCode();
+               hashCode += this.TipPercentages.GetHashCode();
             }
 
-            if (SmartTipping != null)
+            if (this.SmartTipping != null)
             {
-               hashCode += SmartTipping.GetHashCode();
+               hashCode += this.SmartTipping.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.AllowTipping = {(this.AllowTipping == null ? "null" : this.AllowTipping.ToString())}");
+            toStringOutput.Add($"this.SeparateTipScreen = {(this.SeparateTipScreen == null ? "null" : this.SeparateTipScreen.ToString())}");
+            toStringOutput.Add($"this.CustomTipField = {(this.CustomTipField == null ? "null" : this.CustomTipField.ToString())}");
+            toStringOutput.Add($"this.TipPercentages = {(this.TipPercentages == null ? "null" : $"[{string.Join(", ", this.TipPercentages)} ]")}");
+            toStringOutput.Add($"this.SmartTipping = {(this.SmartTipping == null ? "null" : this.SmartTipping.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .AllowTipping(AllowTipping)
-                .SeparateTipScreen(SeparateTipScreen)
-                .CustomTipField(CustomTipField)
-                .TipPercentages(TipPercentages)
-                .SmartTipping(SmartTipping);
+                .AllowTipping(this.AllowTipping)
+                .SeparateTipScreen(this.SeparateTipScreen)
+                .CustomTipField(this.CustomTipField)
+                .TipPercentages(this.TipPercentages)
+                .SmartTipping(this.SmartTipping);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private bool? allowTipping;
@@ -155,45 +180,73 @@ namespace Square.Models
             private IList<int> tipPercentages;
             private bool? smartTipping;
 
-
-
+             /// <summary>
+             /// AllowTipping.
+             /// </summary>
+             /// <param name="allowTipping"> allowTipping. </param>
+             /// <returns> Builder. </returns>
             public Builder AllowTipping(bool? allowTipping)
             {
                 this.allowTipping = allowTipping;
                 return this;
             }
 
+             /// <summary>
+             /// SeparateTipScreen.
+             /// </summary>
+             /// <param name="separateTipScreen"> separateTipScreen. </param>
+             /// <returns> Builder. </returns>
             public Builder SeparateTipScreen(bool? separateTipScreen)
             {
                 this.separateTipScreen = separateTipScreen;
                 return this;
             }
 
+             /// <summary>
+             /// CustomTipField.
+             /// </summary>
+             /// <param name="customTipField"> customTipField. </param>
+             /// <returns> Builder. </returns>
             public Builder CustomTipField(bool? customTipField)
             {
                 this.customTipField = customTipField;
                 return this;
             }
 
+             /// <summary>
+             /// TipPercentages.
+             /// </summary>
+             /// <param name="tipPercentages"> tipPercentages. </param>
+             /// <returns> Builder. </returns>
             public Builder TipPercentages(IList<int> tipPercentages)
             {
                 this.tipPercentages = tipPercentages;
                 return this;
             }
 
+             /// <summary>
+             /// SmartTipping.
+             /// </summary>
+             /// <param name="smartTipping"> smartTipping. </param>
+             /// <returns> Builder. </returns>
             public Builder SmartTipping(bool? smartTipping)
             {
                 this.smartTipping = smartTipping;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> TipSettings. </returns>
             public TipSettings Build()
             {
-                return new TipSettings(allowTipping,
-                    separateTipScreen,
-                    customTipField,
-                    tipPercentages,
-                    smartTipping);
+                return new TipSettings(
+                    this.allowTipping,
+                    this.separateTipScreen,
+                    this.customTipField,
+                    this.tipPercentages,
+                    this.smartTipping);
             }
         }
     }

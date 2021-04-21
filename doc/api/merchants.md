@@ -22,11 +22,12 @@ If you don't know a `Merchant` ID, you can use this endpoint to retrieve the mer
 You can specify your personal access token to get your own merchant information or specify an OAuth token
 to get the information for the  merchant that granted you access.
 
-If you know the merchant ID, you can also use the [RetrieveMerchant](#endpoint-merchants-retrievemerchant)
+If you know the merchant ID, you can also use the [RetrieveMerchant](/doc/api/merchants.md#retrieve-merchant)
 endpoint to get the merchant information.
 
 ```csharp
-ListMerchantsAsync(int? cursor = null)
+ListMerchantsAsync(
+    int? cursor = null)
 ```
 
 ## Parameters
@@ -57,7 +58,8 @@ catch (ApiException e){};
 Retrieve a `Merchant` object for the given `merchant_id`.
 
 ```csharp
-RetrieveMerchantAsync(string merchantId)
+RetrieveMerchantAsync(
+    string merchantId)
 ```
 
 ## Parameters

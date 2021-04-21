@@ -1,28 +1,39 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square.Http.Client;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class GetDeviceCodeResponse 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Http.Client;
+    using Square.Utilities;
+
+    /// <summary>
+    /// GetDeviceCodeResponse.
+    /// </summary>
+    public class GetDeviceCodeResponse
     {
-        public GetDeviceCodeResponse(IList<Models.Error> errors = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GetDeviceCodeResponse"/> class.
+        /// </summary>
+        /// <param name="errors">errors.</param>
+        /// <param name="deviceCode">device_code.</param>
+        public GetDeviceCodeResponse(
+            IList<Models.Error> errors = null,
             Models.DeviceCode deviceCode = null)
         {
-            Errors = errors;
-            DeviceCode = deviceCode;
+            this.Errors = errors;
+            this.DeviceCode = deviceCode;
         }
 
+        /// <summary>
+        /// Gets http context.
+        /// </summary>
         [JsonIgnore]
         public HttpContext Context { get; internal set; }
 
@@ -33,11 +44,12 @@ namespace Square.Models
         public IList<Models.Error> Errors { get; }
 
         /// <summary>
-        /// Getter for device_code
+        /// Gets or sets DeviceCode.
         /// </summary>
         [JsonProperty("device_code", NullValueHandling = NullValueHandling.Ignore)]
         public Models.DeviceCode DeviceCode { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -47,12 +59,7 @@ namespace Square.Models
             return $"GetDeviceCodeResponse : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Errors = {(Errors == null ? "null" : $"[{ string.Join(", ", Errors)} ]")}");
-            toStringOutput.Add($"DeviceCode = {(DeviceCode == null ? "null" : DeviceCode.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -66,64 +73,95 @@ namespace Square.Models
             }
 
             return obj is GetDeviceCodeResponse other &&
-                ((Context == null && other.Context == null) || (Context?.Equals(other.Context) == true)) &&
-                ((Errors == null && other.Errors == null) || (Errors?.Equals(other.Errors) == true)) &&
-                ((DeviceCode == null && other.DeviceCode == null) || (DeviceCode?.Equals(other.DeviceCode) == true));
+                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
+                ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true)) &&
+                ((this.DeviceCode == null && other.DeviceCode == null) || (this.DeviceCode?.Equals(other.DeviceCode) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 550297213;
 
-            if (Context != null)
+            if (this.Context != null)
             {
-                hashCode += Context.GetHashCode();
+                hashCode += this.Context.GetHashCode();
             }
 
-            if (Errors != null)
+            if (this.Errors != null)
             {
-               hashCode += Errors.GetHashCode();
+               hashCode += this.Errors.GetHashCode();
             }
 
-            if (DeviceCode != null)
+            if (this.DeviceCode != null)
             {
-               hashCode += DeviceCode.GetHashCode();
+               hashCode += this.DeviceCode.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Errors = {(this.Errors == null ? "null" : $"[{string.Join(", ", this.Errors)} ]")}");
+            toStringOutput.Add($"this.DeviceCode = {(this.DeviceCode == null ? "null" : this.DeviceCode.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .Errors(Errors)
-                .DeviceCode(DeviceCode);
+                .Errors(this.Errors)
+                .DeviceCode(this.DeviceCode);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private IList<Models.Error> errors;
             private Models.DeviceCode deviceCode;
 
-
-
+             /// <summary>
+             /// Errors.
+             /// </summary>
+             /// <param name="errors"> errors. </param>
+             /// <returns> Builder. </returns>
             public Builder Errors(IList<Models.Error> errors)
             {
                 this.errors = errors;
                 return this;
             }
 
+             /// <summary>
+             /// DeviceCode.
+             /// </summary>
+             /// <param name="deviceCode"> deviceCode. </param>
+             /// <returns> Builder. </returns>
             public Builder DeviceCode(Models.DeviceCode deviceCode)
             {
                 this.deviceCode = deviceCode;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> GetDeviceCodeResponse. </returns>
             public GetDeviceCodeResponse Build()
             {
-                return new GetDeviceCodeResponse(errors,
-                    deviceCode);
+                return new GetDeviceCodeResponse(
+                    this.errors,
+                    this.deviceCode);
             }
         }
     }

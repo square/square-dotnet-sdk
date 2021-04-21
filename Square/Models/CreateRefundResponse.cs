@@ -1,28 +1,39 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square.Http.Client;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class CreateRefundResponse 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Http.Client;
+    using Square.Utilities;
+
+    /// <summary>
+    /// CreateRefundResponse.
+    /// </summary>
+    public class CreateRefundResponse
     {
-        public CreateRefundResponse(IList<Models.Error> errors = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CreateRefundResponse"/> class.
+        /// </summary>
+        /// <param name="errors">errors.</param>
+        /// <param name="refund">refund.</param>
+        public CreateRefundResponse(
+            IList<Models.Error> errors = null,
             Models.Refund refund = null)
         {
-            Errors = errors;
-            Refund = refund;
+            this.Errors = errors;
+            this.Refund = refund;
         }
 
+        /// <summary>
+        /// Gets http context.
+        /// </summary>
         [JsonIgnore]
         public HttpContext Context { get; internal set; }
 
@@ -38,6 +49,7 @@ namespace Square.Models
         [JsonProperty("refund", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Refund Refund { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -47,12 +59,7 @@ namespace Square.Models
             return $"CreateRefundResponse : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Errors = {(Errors == null ? "null" : $"[{ string.Join(", ", Errors)} ]")}");
-            toStringOutput.Add($"Refund = {(Refund == null ? "null" : Refund.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -66,64 +73,95 @@ namespace Square.Models
             }
 
             return obj is CreateRefundResponse other &&
-                ((Context == null && other.Context == null) || (Context?.Equals(other.Context) == true)) &&
-                ((Errors == null && other.Errors == null) || (Errors?.Equals(other.Errors) == true)) &&
-                ((Refund == null && other.Refund == null) || (Refund?.Equals(other.Refund) == true));
+                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
+                ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true)) &&
+                ((this.Refund == null && other.Refund == null) || (this.Refund?.Equals(other.Refund) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1017134499;
 
-            if (Context != null)
+            if (this.Context != null)
             {
-                hashCode += Context.GetHashCode();
+                hashCode += this.Context.GetHashCode();
             }
 
-            if (Errors != null)
+            if (this.Errors != null)
             {
-               hashCode += Errors.GetHashCode();
+               hashCode += this.Errors.GetHashCode();
             }
 
-            if (Refund != null)
+            if (this.Refund != null)
             {
-               hashCode += Refund.GetHashCode();
+               hashCode += this.Refund.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Errors = {(this.Errors == null ? "null" : $"[{string.Join(", ", this.Errors)} ]")}");
+            toStringOutput.Add($"this.Refund = {(this.Refund == null ? "null" : this.Refund.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .Errors(Errors)
-                .Refund(Refund);
+                .Errors(this.Errors)
+                .Refund(this.Refund);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private IList<Models.Error> errors;
             private Models.Refund refund;
 
-
-
+             /// <summary>
+             /// Errors.
+             /// </summary>
+             /// <param name="errors"> errors. </param>
+             /// <returns> Builder. </returns>
             public Builder Errors(IList<Models.Error> errors)
             {
                 this.errors = errors;
                 return this;
             }
 
+             /// <summary>
+             /// Refund.
+             /// </summary>
+             /// <param name="refund"> refund. </param>
+             /// <returns> Builder. </returns>
             public Builder Refund(Models.Refund refund)
             {
                 this.refund = refund;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> CreateRefundResponse. </returns>
             public CreateRefundResponse Build()
             {
-                return new CreateRefundResponse(errors,
-                    refund);
+                return new CreateRefundResponse(
+                    this.errors,
+                    this.refund);
             }
         }
     }

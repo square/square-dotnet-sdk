@@ -1,25 +1,33 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class ShiftWage 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// ShiftWage.
+    /// </summary>
+    public class ShiftWage
     {
-        public ShiftWage(string title = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ShiftWage"/> class.
+        /// </summary>
+        /// <param name="title">title.</param>
+        /// <param name="hourlyRate">hourly_rate.</param>
+        public ShiftWage(
+            string title = null,
             Models.Money hourlyRate = null)
         {
-            Title = title;
-            HourlyRate = hourlyRate;
+            this.Title = title;
+            this.HourlyRate = hourlyRate;
         }
 
         /// <summary>
@@ -40,6 +48,7 @@ namespace Square.Models
         [JsonProperty("hourly_rate", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Money HourlyRate { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -49,12 +58,7 @@ namespace Square.Models
             return $"ShiftWage : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Title = {(Title == null ? "null" : Title == string.Empty ? "" : Title)}");
-            toStringOutput.Add($"HourlyRate = {(HourlyRate == null ? "null" : HourlyRate.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -68,58 +72,89 @@ namespace Square.Models
             }
 
             return obj is ShiftWage other &&
-                ((Title == null && other.Title == null) || (Title?.Equals(other.Title) == true)) &&
-                ((HourlyRate == null && other.HourlyRate == null) || (HourlyRate?.Equals(other.HourlyRate) == true));
+                ((this.Title == null && other.Title == null) || (this.Title?.Equals(other.Title) == true)) &&
+                ((this.HourlyRate == null && other.HourlyRate == null) || (this.HourlyRate?.Equals(other.HourlyRate) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 1598945307;
 
-            if (Title != null)
+            if (this.Title != null)
             {
-               hashCode += Title.GetHashCode();
+               hashCode += this.Title.GetHashCode();
             }
 
-            if (HourlyRate != null)
+            if (this.HourlyRate != null)
             {
-               hashCode += HourlyRate.GetHashCode();
+               hashCode += this.HourlyRate.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Title = {(this.Title == null ? "null" : this.Title == string.Empty ? "" : this.Title)}");
+            toStringOutput.Add($"this.HourlyRate = {(this.HourlyRate == null ? "null" : this.HourlyRate.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .Title(Title)
-                .HourlyRate(HourlyRate);
+                .Title(this.Title)
+                .HourlyRate(this.HourlyRate);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string title;
             private Models.Money hourlyRate;
 
-
-
+             /// <summary>
+             /// Title.
+             /// </summary>
+             /// <param name="title"> title. </param>
+             /// <returns> Builder. </returns>
             public Builder Title(string title)
             {
                 this.title = title;
                 return this;
             }
 
+             /// <summary>
+             /// HourlyRate.
+             /// </summary>
+             /// <param name="hourlyRate"> hourlyRate. </param>
+             /// <returns> Builder. </returns>
             public Builder HourlyRate(Models.Money hourlyRate)
             {
                 this.hourlyRate = hourlyRate;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> ShiftWage. </returns>
             public ShiftWage Build()
             {
-                return new ShiftWage(title,
-                    hourlyRate);
+                return new ShiftWage(
+                    this.title,
+                    this.hourlyRate);
             }
         }
     }

@@ -1,27 +1,36 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class ListEmployeeWagesRequest 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// ListEmployeeWagesRequest.
+    /// </summary>
+    public class ListEmployeeWagesRequest
     {
-        public ListEmployeeWagesRequest(string employeeId = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ListEmployeeWagesRequest"/> class.
+        /// </summary>
+        /// <param name="employeeId">employee_id.</param>
+        /// <param name="limit">limit.</param>
+        /// <param name="cursor">cursor.</param>
+        public ListEmployeeWagesRequest(
+            string employeeId = null,
             int? limit = null,
             string cursor = null)
         {
-            EmployeeId = employeeId;
-            Limit = limit;
-            Cursor = cursor;
+            this.EmployeeId = employeeId;
+            this.Limit = limit;
+            this.Cursor = cursor;
         }
 
         /// <summary>
@@ -43,6 +52,7 @@ namespace Square.Models
         [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
         public string Cursor { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -52,13 +62,7 @@ namespace Square.Models
             return $"ListEmployeeWagesRequest : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"EmployeeId = {(EmployeeId == null ? "null" : EmployeeId == string.Empty ? "" : EmployeeId)}");
-            toStringOutput.Add($"Limit = {(Limit == null ? "null" : Limit.ToString())}");
-            toStringOutput.Add($"Cursor = {(Cursor == null ? "null" : Cursor == string.Empty ? "" : Cursor)}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -72,73 +76,110 @@ namespace Square.Models
             }
 
             return obj is ListEmployeeWagesRequest other &&
-                ((EmployeeId == null && other.EmployeeId == null) || (EmployeeId?.Equals(other.EmployeeId) == true)) &&
-                ((Limit == null && other.Limit == null) || (Limit?.Equals(other.Limit) == true)) &&
-                ((Cursor == null && other.Cursor == null) || (Cursor?.Equals(other.Cursor) == true));
+                ((this.EmployeeId == null && other.EmployeeId == null) || (this.EmployeeId?.Equals(other.EmployeeId) == true)) &&
+                ((this.Limit == null && other.Limit == null) || (this.Limit?.Equals(other.Limit) == true)) &&
+                ((this.Cursor == null && other.Cursor == null) || (this.Cursor?.Equals(other.Cursor) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -902472069;
 
-            if (EmployeeId != null)
+            if (this.EmployeeId != null)
             {
-               hashCode += EmployeeId.GetHashCode();
+               hashCode += this.EmployeeId.GetHashCode();
             }
 
-            if (Limit != null)
+            if (this.Limit != null)
             {
-               hashCode += Limit.GetHashCode();
+               hashCode += this.Limit.GetHashCode();
             }
 
-            if (Cursor != null)
+            if (this.Cursor != null)
             {
-               hashCode += Cursor.GetHashCode();
+               hashCode += this.Cursor.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.EmployeeId = {(this.EmployeeId == null ? "null" : this.EmployeeId == string.Empty ? "" : this.EmployeeId)}");
+            toStringOutput.Add($"this.Limit = {(this.Limit == null ? "null" : this.Limit.ToString())}");
+            toStringOutput.Add($"this.Cursor = {(this.Cursor == null ? "null" : this.Cursor == string.Empty ? "" : this.Cursor)}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .EmployeeId(EmployeeId)
-                .Limit(Limit)
-                .Cursor(Cursor);
+                .EmployeeId(this.EmployeeId)
+                .Limit(this.Limit)
+                .Cursor(this.Cursor);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string employeeId;
             private int? limit;
             private string cursor;
 
-
-
+             /// <summary>
+             /// EmployeeId.
+             /// </summary>
+             /// <param name="employeeId"> employeeId. </param>
+             /// <returns> Builder. </returns>
             public Builder EmployeeId(string employeeId)
             {
                 this.employeeId = employeeId;
                 return this;
             }
 
+             /// <summary>
+             /// Limit.
+             /// </summary>
+             /// <param name="limit"> limit. </param>
+             /// <returns> Builder. </returns>
             public Builder Limit(int? limit)
             {
                 this.limit = limit;
                 return this;
             }
 
+             /// <summary>
+             /// Cursor.
+             /// </summary>
+             /// <param name="cursor"> cursor. </param>
+             /// <returns> Builder. </returns>
             public Builder Cursor(string cursor)
             {
                 this.cursor = cursor;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> ListEmployeeWagesRequest. </returns>
             public ListEmployeeWagesRequest Build()
             {
-                return new ListEmployeeWagesRequest(employeeId,
-                    limit,
-                    cursor);
+                return new ListEmployeeWagesRequest(
+                    this.employeeId,
+                    this.limit,
+                    this.cursor);
             }
         }
     }

@@ -1,28 +1,39 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square.Http.Client;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class RetrieveMerchantResponse 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Http.Client;
+    using Square.Utilities;
+
+    /// <summary>
+    /// RetrieveMerchantResponse.
+    /// </summary>
+    public class RetrieveMerchantResponse
     {
-        public RetrieveMerchantResponse(IList<Models.Error> errors = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RetrieveMerchantResponse"/> class.
+        /// </summary>
+        /// <param name="errors">errors.</param>
+        /// <param name="merchant">merchant.</param>
+        public RetrieveMerchantResponse(
+            IList<Models.Error> errors = null,
             Models.Merchant merchant = null)
         {
-            Errors = errors;
-            Merchant = merchant;
+            this.Errors = errors;
+            this.Merchant = merchant;
         }
 
+        /// <summary>
+        /// Gets http context.
+        /// </summary>
         [JsonIgnore]
         public HttpContext Context { get; internal set; }
 
@@ -38,6 +49,7 @@ namespace Square.Models
         [JsonProperty("merchant", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Merchant Merchant { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -47,12 +59,7 @@ namespace Square.Models
             return $"RetrieveMerchantResponse : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Errors = {(Errors == null ? "null" : $"[{ string.Join(", ", Errors)} ]")}");
-            toStringOutput.Add($"Merchant = {(Merchant == null ? "null" : Merchant.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -66,64 +73,95 @@ namespace Square.Models
             }
 
             return obj is RetrieveMerchantResponse other &&
-                ((Context == null && other.Context == null) || (Context?.Equals(other.Context) == true)) &&
-                ((Errors == null && other.Errors == null) || (Errors?.Equals(other.Errors) == true)) &&
-                ((Merchant == null && other.Merchant == null) || (Merchant?.Equals(other.Merchant) == true));
+                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
+                ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true)) &&
+                ((this.Merchant == null && other.Merchant == null) || (this.Merchant?.Equals(other.Merchant) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 1177191163;
 
-            if (Context != null)
+            if (this.Context != null)
             {
-                hashCode += Context.GetHashCode();
+                hashCode += this.Context.GetHashCode();
             }
 
-            if (Errors != null)
+            if (this.Errors != null)
             {
-               hashCode += Errors.GetHashCode();
+               hashCode += this.Errors.GetHashCode();
             }
 
-            if (Merchant != null)
+            if (this.Merchant != null)
             {
-               hashCode += Merchant.GetHashCode();
+               hashCode += this.Merchant.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Errors = {(this.Errors == null ? "null" : $"[{string.Join(", ", this.Errors)} ]")}");
+            toStringOutput.Add($"this.Merchant = {(this.Merchant == null ? "null" : this.Merchant.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .Errors(Errors)
-                .Merchant(Merchant);
+                .Errors(this.Errors)
+                .Merchant(this.Merchant);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private IList<Models.Error> errors;
             private Models.Merchant merchant;
 
-
-
+             /// <summary>
+             /// Errors.
+             /// </summary>
+             /// <param name="errors"> errors. </param>
+             /// <returns> Builder. </returns>
             public Builder Errors(IList<Models.Error> errors)
             {
                 this.errors = errors;
                 return this;
             }
 
+             /// <summary>
+             /// Merchant.
+             /// </summary>
+             /// <param name="merchant"> merchant. </param>
+             /// <returns> Builder. </returns>
             public Builder Merchant(Models.Merchant merchant)
             {
                 this.merchant = merchant;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> RetrieveMerchantResponse. </returns>
             public RetrieveMerchantResponse Build()
             {
-                return new RetrieveMerchantResponse(errors,
-                    merchant);
+                return new RetrieveMerchantResponse(
+                    this.errors,
+                    this.merchant);
             }
         }
     }

@@ -1,21 +1,43 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class CardPaymentDetails 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// CardPaymentDetails.
+    /// </summary>
+    public class CardPaymentDetails
     {
-        public CardPaymentDetails(string status = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CardPaymentDetails"/> class.
+        /// </summary>
+        /// <param name="status">status.</param>
+        /// <param name="card">card.</param>
+        /// <param name="entryMethod">entry_method.</param>
+        /// <param name="cvvStatus">cvv_status.</param>
+        /// <param name="avsStatus">avs_status.</param>
+        /// <param name="authResultCode">auth_result_code.</param>
+        /// <param name="applicationIdentifier">application_identifier.</param>
+        /// <param name="applicationName">application_name.</param>
+        /// <param name="applicationCryptogram">application_cryptogram.</param>
+        /// <param name="verificationMethod">verification_method.</param>
+        /// <param name="verificationResults">verification_results.</param>
+        /// <param name="statementDescription">statement_description.</param>
+        /// <param name="deviceDetails">device_details.</param>
+        /// <param name="cardPaymentTimeline">card_payment_timeline.</param>
+        /// <param name="refundRequiresCardPresence">refund_requires_card_presence.</param>
+        /// <param name="errors">errors.</param>
+        public CardPaymentDetails(
+            string status = null,
             Models.Card card = null,
             string entryMethod = null,
             string cvvStatus = null,
@@ -32,22 +54,22 @@ namespace Square.Models
             bool? refundRequiresCardPresence = null,
             IList<Models.Error> errors = null)
         {
-            Status = status;
-            Card = card;
-            EntryMethod = entryMethod;
-            CvvStatus = cvvStatus;
-            AvsStatus = avsStatus;
-            AuthResultCode = authResultCode;
-            ApplicationIdentifier = applicationIdentifier;
-            ApplicationName = applicationName;
-            ApplicationCryptogram = applicationCryptogram;
-            VerificationMethod = verificationMethod;
-            VerificationResults = verificationResults;
-            StatementDescription = statementDescription;
-            DeviceDetails = deviceDetails;
-            CardPaymentTimeline = cardPaymentTimeline;
-            RefundRequiresCardPresence = refundRequiresCardPresence;
-            Errors = errors;
+            this.Status = status;
+            this.Card = card;
+            this.EntryMethod = entryMethod;
+            this.CvvStatus = cvvStatus;
+            this.AvsStatus = avsStatus;
+            this.AuthResultCode = authResultCode;
+            this.ApplicationIdentifier = applicationIdentifier;
+            this.ApplicationName = applicationName;
+            this.ApplicationCryptogram = applicationCryptogram;
+            this.VerificationMethod = verificationMethod;
+            this.VerificationResults = verificationResults;
+            this.StatementDescription = statementDescription;
+            this.DeviceDetails = deviceDetails;
+            this.CardPaymentTimeline = cardPaymentTimeline;
+            this.RefundRequiresCardPresence = refundRequiresCardPresence;
+            this.Errors = errors;
         }
 
         /// <summary>
@@ -157,6 +179,7 @@ namespace Square.Models
         [JsonProperty("errors", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.Error> Errors { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -166,26 +189,7 @@ namespace Square.Models
             return $"CardPaymentDetails : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Status = {(Status == null ? "null" : Status == string.Empty ? "" : Status)}");
-            toStringOutput.Add($"Card = {(Card == null ? "null" : Card.ToString())}");
-            toStringOutput.Add($"EntryMethod = {(EntryMethod == null ? "null" : EntryMethod == string.Empty ? "" : EntryMethod)}");
-            toStringOutput.Add($"CvvStatus = {(CvvStatus == null ? "null" : CvvStatus == string.Empty ? "" : CvvStatus)}");
-            toStringOutput.Add($"AvsStatus = {(AvsStatus == null ? "null" : AvsStatus == string.Empty ? "" : AvsStatus)}");
-            toStringOutput.Add($"AuthResultCode = {(AuthResultCode == null ? "null" : AuthResultCode == string.Empty ? "" : AuthResultCode)}");
-            toStringOutput.Add($"ApplicationIdentifier = {(ApplicationIdentifier == null ? "null" : ApplicationIdentifier == string.Empty ? "" : ApplicationIdentifier)}");
-            toStringOutput.Add($"ApplicationName = {(ApplicationName == null ? "null" : ApplicationName == string.Empty ? "" : ApplicationName)}");
-            toStringOutput.Add($"ApplicationCryptogram = {(ApplicationCryptogram == null ? "null" : ApplicationCryptogram == string.Empty ? "" : ApplicationCryptogram)}");
-            toStringOutput.Add($"VerificationMethod = {(VerificationMethod == null ? "null" : VerificationMethod == string.Empty ? "" : VerificationMethod)}");
-            toStringOutput.Add($"VerificationResults = {(VerificationResults == null ? "null" : VerificationResults == string.Empty ? "" : VerificationResults)}");
-            toStringOutput.Add($"StatementDescription = {(StatementDescription == null ? "null" : StatementDescription == string.Empty ? "" : StatementDescription)}");
-            toStringOutput.Add($"DeviceDetails = {(DeviceDetails == null ? "null" : DeviceDetails.ToString())}");
-            toStringOutput.Add($"CardPaymentTimeline = {(CardPaymentTimeline == null ? "null" : CardPaymentTimeline.ToString())}");
-            toStringOutput.Add($"RefundRequiresCardPresence = {(RefundRequiresCardPresence == null ? "null" : RefundRequiresCardPresence.ToString())}");
-            toStringOutput.Add($"Errors = {(Errors == null ? "null" : $"[{ string.Join(", ", Errors)} ]")}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -199,133 +203,165 @@ namespace Square.Models
             }
 
             return obj is CardPaymentDetails other &&
-                ((Status == null && other.Status == null) || (Status?.Equals(other.Status) == true)) &&
-                ((Card == null && other.Card == null) || (Card?.Equals(other.Card) == true)) &&
-                ((EntryMethod == null && other.EntryMethod == null) || (EntryMethod?.Equals(other.EntryMethod) == true)) &&
-                ((CvvStatus == null && other.CvvStatus == null) || (CvvStatus?.Equals(other.CvvStatus) == true)) &&
-                ((AvsStatus == null && other.AvsStatus == null) || (AvsStatus?.Equals(other.AvsStatus) == true)) &&
-                ((AuthResultCode == null && other.AuthResultCode == null) || (AuthResultCode?.Equals(other.AuthResultCode) == true)) &&
-                ((ApplicationIdentifier == null && other.ApplicationIdentifier == null) || (ApplicationIdentifier?.Equals(other.ApplicationIdentifier) == true)) &&
-                ((ApplicationName == null && other.ApplicationName == null) || (ApplicationName?.Equals(other.ApplicationName) == true)) &&
-                ((ApplicationCryptogram == null && other.ApplicationCryptogram == null) || (ApplicationCryptogram?.Equals(other.ApplicationCryptogram) == true)) &&
-                ((VerificationMethod == null && other.VerificationMethod == null) || (VerificationMethod?.Equals(other.VerificationMethod) == true)) &&
-                ((VerificationResults == null && other.VerificationResults == null) || (VerificationResults?.Equals(other.VerificationResults) == true)) &&
-                ((StatementDescription == null && other.StatementDescription == null) || (StatementDescription?.Equals(other.StatementDescription) == true)) &&
-                ((DeviceDetails == null && other.DeviceDetails == null) || (DeviceDetails?.Equals(other.DeviceDetails) == true)) &&
-                ((CardPaymentTimeline == null && other.CardPaymentTimeline == null) || (CardPaymentTimeline?.Equals(other.CardPaymentTimeline) == true)) &&
-                ((RefundRequiresCardPresence == null && other.RefundRequiresCardPresence == null) || (RefundRequiresCardPresence?.Equals(other.RefundRequiresCardPresence) == true)) &&
-                ((Errors == null && other.Errors == null) || (Errors?.Equals(other.Errors) == true));
+                ((this.Status == null && other.Status == null) || (this.Status?.Equals(other.Status) == true)) &&
+                ((this.Card == null && other.Card == null) || (this.Card?.Equals(other.Card) == true)) &&
+                ((this.EntryMethod == null && other.EntryMethod == null) || (this.EntryMethod?.Equals(other.EntryMethod) == true)) &&
+                ((this.CvvStatus == null && other.CvvStatus == null) || (this.CvvStatus?.Equals(other.CvvStatus) == true)) &&
+                ((this.AvsStatus == null && other.AvsStatus == null) || (this.AvsStatus?.Equals(other.AvsStatus) == true)) &&
+                ((this.AuthResultCode == null && other.AuthResultCode == null) || (this.AuthResultCode?.Equals(other.AuthResultCode) == true)) &&
+                ((this.ApplicationIdentifier == null && other.ApplicationIdentifier == null) || (this.ApplicationIdentifier?.Equals(other.ApplicationIdentifier) == true)) &&
+                ((this.ApplicationName == null && other.ApplicationName == null) || (this.ApplicationName?.Equals(other.ApplicationName) == true)) &&
+                ((this.ApplicationCryptogram == null && other.ApplicationCryptogram == null) || (this.ApplicationCryptogram?.Equals(other.ApplicationCryptogram) == true)) &&
+                ((this.VerificationMethod == null && other.VerificationMethod == null) || (this.VerificationMethod?.Equals(other.VerificationMethod) == true)) &&
+                ((this.VerificationResults == null && other.VerificationResults == null) || (this.VerificationResults?.Equals(other.VerificationResults) == true)) &&
+                ((this.StatementDescription == null && other.StatementDescription == null) || (this.StatementDescription?.Equals(other.StatementDescription) == true)) &&
+                ((this.DeviceDetails == null && other.DeviceDetails == null) || (this.DeviceDetails?.Equals(other.DeviceDetails) == true)) &&
+                ((this.CardPaymentTimeline == null && other.CardPaymentTimeline == null) || (this.CardPaymentTimeline?.Equals(other.CardPaymentTimeline) == true)) &&
+                ((this.RefundRequiresCardPresence == null && other.RefundRequiresCardPresence == null) || (this.RefundRequiresCardPresence?.Equals(other.RefundRequiresCardPresence) == true)) &&
+                ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 1465447186;
 
-            if (Status != null)
+            if (this.Status != null)
             {
-               hashCode += Status.GetHashCode();
+               hashCode += this.Status.GetHashCode();
             }
 
-            if (Card != null)
+            if (this.Card != null)
             {
-               hashCode += Card.GetHashCode();
+               hashCode += this.Card.GetHashCode();
             }
 
-            if (EntryMethod != null)
+            if (this.EntryMethod != null)
             {
-               hashCode += EntryMethod.GetHashCode();
+               hashCode += this.EntryMethod.GetHashCode();
             }
 
-            if (CvvStatus != null)
+            if (this.CvvStatus != null)
             {
-               hashCode += CvvStatus.GetHashCode();
+               hashCode += this.CvvStatus.GetHashCode();
             }
 
-            if (AvsStatus != null)
+            if (this.AvsStatus != null)
             {
-               hashCode += AvsStatus.GetHashCode();
+               hashCode += this.AvsStatus.GetHashCode();
             }
 
-            if (AuthResultCode != null)
+            if (this.AuthResultCode != null)
             {
-               hashCode += AuthResultCode.GetHashCode();
+               hashCode += this.AuthResultCode.GetHashCode();
             }
 
-            if (ApplicationIdentifier != null)
+            if (this.ApplicationIdentifier != null)
             {
-               hashCode += ApplicationIdentifier.GetHashCode();
+               hashCode += this.ApplicationIdentifier.GetHashCode();
             }
 
-            if (ApplicationName != null)
+            if (this.ApplicationName != null)
             {
-               hashCode += ApplicationName.GetHashCode();
+               hashCode += this.ApplicationName.GetHashCode();
             }
 
-            if (ApplicationCryptogram != null)
+            if (this.ApplicationCryptogram != null)
             {
-               hashCode += ApplicationCryptogram.GetHashCode();
+               hashCode += this.ApplicationCryptogram.GetHashCode();
             }
 
-            if (VerificationMethod != null)
+            if (this.VerificationMethod != null)
             {
-               hashCode += VerificationMethod.GetHashCode();
+               hashCode += this.VerificationMethod.GetHashCode();
             }
 
-            if (VerificationResults != null)
+            if (this.VerificationResults != null)
             {
-               hashCode += VerificationResults.GetHashCode();
+               hashCode += this.VerificationResults.GetHashCode();
             }
 
-            if (StatementDescription != null)
+            if (this.StatementDescription != null)
             {
-               hashCode += StatementDescription.GetHashCode();
+               hashCode += this.StatementDescription.GetHashCode();
             }
 
-            if (DeviceDetails != null)
+            if (this.DeviceDetails != null)
             {
-               hashCode += DeviceDetails.GetHashCode();
+               hashCode += this.DeviceDetails.GetHashCode();
             }
 
-            if (CardPaymentTimeline != null)
+            if (this.CardPaymentTimeline != null)
             {
-               hashCode += CardPaymentTimeline.GetHashCode();
+               hashCode += this.CardPaymentTimeline.GetHashCode();
             }
 
-            if (RefundRequiresCardPresence != null)
+            if (this.RefundRequiresCardPresence != null)
             {
-               hashCode += RefundRequiresCardPresence.GetHashCode();
+               hashCode += this.RefundRequiresCardPresence.GetHashCode();
             }
 
-            if (Errors != null)
+            if (this.Errors != null)
             {
-               hashCode += Errors.GetHashCode();
+               hashCode += this.Errors.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Status = {(this.Status == null ? "null" : this.Status == string.Empty ? "" : this.Status)}");
+            toStringOutput.Add($"this.Card = {(this.Card == null ? "null" : this.Card.ToString())}");
+            toStringOutput.Add($"this.EntryMethod = {(this.EntryMethod == null ? "null" : this.EntryMethod == string.Empty ? "" : this.EntryMethod)}");
+            toStringOutput.Add($"this.CvvStatus = {(this.CvvStatus == null ? "null" : this.CvvStatus == string.Empty ? "" : this.CvvStatus)}");
+            toStringOutput.Add($"this.AvsStatus = {(this.AvsStatus == null ? "null" : this.AvsStatus == string.Empty ? "" : this.AvsStatus)}");
+            toStringOutput.Add($"this.AuthResultCode = {(this.AuthResultCode == null ? "null" : this.AuthResultCode == string.Empty ? "" : this.AuthResultCode)}");
+            toStringOutput.Add($"this.ApplicationIdentifier = {(this.ApplicationIdentifier == null ? "null" : this.ApplicationIdentifier == string.Empty ? "" : this.ApplicationIdentifier)}");
+            toStringOutput.Add($"this.ApplicationName = {(this.ApplicationName == null ? "null" : this.ApplicationName == string.Empty ? "" : this.ApplicationName)}");
+            toStringOutput.Add($"this.ApplicationCryptogram = {(this.ApplicationCryptogram == null ? "null" : this.ApplicationCryptogram == string.Empty ? "" : this.ApplicationCryptogram)}");
+            toStringOutput.Add($"this.VerificationMethod = {(this.VerificationMethod == null ? "null" : this.VerificationMethod == string.Empty ? "" : this.VerificationMethod)}");
+            toStringOutput.Add($"this.VerificationResults = {(this.VerificationResults == null ? "null" : this.VerificationResults == string.Empty ? "" : this.VerificationResults)}");
+            toStringOutput.Add($"this.StatementDescription = {(this.StatementDescription == null ? "null" : this.StatementDescription == string.Empty ? "" : this.StatementDescription)}");
+            toStringOutput.Add($"this.DeviceDetails = {(this.DeviceDetails == null ? "null" : this.DeviceDetails.ToString())}");
+            toStringOutput.Add($"this.CardPaymentTimeline = {(this.CardPaymentTimeline == null ? "null" : this.CardPaymentTimeline.ToString())}");
+            toStringOutput.Add($"this.RefundRequiresCardPresence = {(this.RefundRequiresCardPresence == null ? "null" : this.RefundRequiresCardPresence.ToString())}");
+            toStringOutput.Add($"this.Errors = {(this.Errors == null ? "null" : $"[{string.Join(", ", this.Errors)} ]")}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .Status(Status)
-                .Card(Card)
-                .EntryMethod(EntryMethod)
-                .CvvStatus(CvvStatus)
-                .AvsStatus(AvsStatus)
-                .AuthResultCode(AuthResultCode)
-                .ApplicationIdentifier(ApplicationIdentifier)
-                .ApplicationName(ApplicationName)
-                .ApplicationCryptogram(ApplicationCryptogram)
-                .VerificationMethod(VerificationMethod)
-                .VerificationResults(VerificationResults)
-                .StatementDescription(StatementDescription)
-                .DeviceDetails(DeviceDetails)
-                .CardPaymentTimeline(CardPaymentTimeline)
-                .RefundRequiresCardPresence(RefundRequiresCardPresence)
-                .Errors(Errors);
+                .Status(this.Status)
+                .Card(this.Card)
+                .EntryMethod(this.EntryMethod)
+                .CvvStatus(this.CvvStatus)
+                .AvsStatus(this.AvsStatus)
+                .AuthResultCode(this.AuthResultCode)
+                .ApplicationIdentifier(this.ApplicationIdentifier)
+                .ApplicationName(this.ApplicationName)
+                .ApplicationCryptogram(this.ApplicationCryptogram)
+                .VerificationMethod(this.VerificationMethod)
+                .VerificationResults(this.VerificationResults)
+                .StatementDescription(this.StatementDescription)
+                .DeviceDetails(this.DeviceDetails)
+                .CardPaymentTimeline(this.CardPaymentTimeline)
+                .RefundRequiresCardPresence(this.RefundRequiresCardPresence)
+                .Errors(this.Errors);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string status;
@@ -345,122 +381,205 @@ namespace Square.Models
             private bool? refundRequiresCardPresence;
             private IList<Models.Error> errors;
 
-
-
+             /// <summary>
+             /// Status.
+             /// </summary>
+             /// <param name="status"> status. </param>
+             /// <returns> Builder. </returns>
             public Builder Status(string status)
             {
                 this.status = status;
                 return this;
             }
 
+             /// <summary>
+             /// Card.
+             /// </summary>
+             /// <param name="card"> card. </param>
+             /// <returns> Builder. </returns>
             public Builder Card(Models.Card card)
             {
                 this.card = card;
                 return this;
             }
 
+             /// <summary>
+             /// EntryMethod.
+             /// </summary>
+             /// <param name="entryMethod"> entryMethod. </param>
+             /// <returns> Builder. </returns>
             public Builder EntryMethod(string entryMethod)
             {
                 this.entryMethod = entryMethod;
                 return this;
             }
 
+             /// <summary>
+             /// CvvStatus.
+             /// </summary>
+             /// <param name="cvvStatus"> cvvStatus. </param>
+             /// <returns> Builder. </returns>
             public Builder CvvStatus(string cvvStatus)
             {
                 this.cvvStatus = cvvStatus;
                 return this;
             }
 
+             /// <summary>
+             /// AvsStatus.
+             /// </summary>
+             /// <param name="avsStatus"> avsStatus. </param>
+             /// <returns> Builder. </returns>
             public Builder AvsStatus(string avsStatus)
             {
                 this.avsStatus = avsStatus;
                 return this;
             }
 
+             /// <summary>
+             /// AuthResultCode.
+             /// </summary>
+             /// <param name="authResultCode"> authResultCode. </param>
+             /// <returns> Builder. </returns>
             public Builder AuthResultCode(string authResultCode)
             {
                 this.authResultCode = authResultCode;
                 return this;
             }
 
+             /// <summary>
+             /// ApplicationIdentifier.
+             /// </summary>
+             /// <param name="applicationIdentifier"> applicationIdentifier. </param>
+             /// <returns> Builder. </returns>
             public Builder ApplicationIdentifier(string applicationIdentifier)
             {
                 this.applicationIdentifier = applicationIdentifier;
                 return this;
             }
 
+             /// <summary>
+             /// ApplicationName.
+             /// </summary>
+             /// <param name="applicationName"> applicationName. </param>
+             /// <returns> Builder. </returns>
             public Builder ApplicationName(string applicationName)
             {
                 this.applicationName = applicationName;
                 return this;
             }
 
+             /// <summary>
+             /// ApplicationCryptogram.
+             /// </summary>
+             /// <param name="applicationCryptogram"> applicationCryptogram. </param>
+             /// <returns> Builder. </returns>
             public Builder ApplicationCryptogram(string applicationCryptogram)
             {
                 this.applicationCryptogram = applicationCryptogram;
                 return this;
             }
 
+             /// <summary>
+             /// VerificationMethod.
+             /// </summary>
+             /// <param name="verificationMethod"> verificationMethod. </param>
+             /// <returns> Builder. </returns>
             public Builder VerificationMethod(string verificationMethod)
             {
                 this.verificationMethod = verificationMethod;
                 return this;
             }
 
+             /// <summary>
+             /// VerificationResults.
+             /// </summary>
+             /// <param name="verificationResults"> verificationResults. </param>
+             /// <returns> Builder. </returns>
             public Builder VerificationResults(string verificationResults)
             {
                 this.verificationResults = verificationResults;
                 return this;
             }
 
+             /// <summary>
+             /// StatementDescription.
+             /// </summary>
+             /// <param name="statementDescription"> statementDescription. </param>
+             /// <returns> Builder. </returns>
             public Builder StatementDescription(string statementDescription)
             {
                 this.statementDescription = statementDescription;
                 return this;
             }
 
+             /// <summary>
+             /// DeviceDetails.
+             /// </summary>
+             /// <param name="deviceDetails"> deviceDetails. </param>
+             /// <returns> Builder. </returns>
             public Builder DeviceDetails(Models.DeviceDetails deviceDetails)
             {
                 this.deviceDetails = deviceDetails;
                 return this;
             }
 
+             /// <summary>
+             /// CardPaymentTimeline.
+             /// </summary>
+             /// <param name="cardPaymentTimeline"> cardPaymentTimeline. </param>
+             /// <returns> Builder. </returns>
             public Builder CardPaymentTimeline(Models.CardPaymentTimeline cardPaymentTimeline)
             {
                 this.cardPaymentTimeline = cardPaymentTimeline;
                 return this;
             }
 
+             /// <summary>
+             /// RefundRequiresCardPresence.
+             /// </summary>
+             /// <param name="refundRequiresCardPresence"> refundRequiresCardPresence. </param>
+             /// <returns> Builder. </returns>
             public Builder RefundRequiresCardPresence(bool? refundRequiresCardPresence)
             {
                 this.refundRequiresCardPresence = refundRequiresCardPresence;
                 return this;
             }
 
+             /// <summary>
+             /// Errors.
+             /// </summary>
+             /// <param name="errors"> errors. </param>
+             /// <returns> Builder. </returns>
             public Builder Errors(IList<Models.Error> errors)
             {
                 this.errors = errors;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> CardPaymentDetails. </returns>
             public CardPaymentDetails Build()
             {
-                return new CardPaymentDetails(status,
-                    card,
-                    entryMethod,
-                    cvvStatus,
-                    avsStatus,
-                    authResultCode,
-                    applicationIdentifier,
-                    applicationName,
-                    applicationCryptogram,
-                    verificationMethod,
-                    verificationResults,
-                    statementDescription,
-                    deviceDetails,
-                    cardPaymentTimeline,
-                    refundRequiresCardPresence,
-                    errors);
+                return new CardPaymentDetails(
+                    this.status,
+                    this.card,
+                    this.entryMethod,
+                    this.cvvStatus,
+                    this.avsStatus,
+                    this.authResultCode,
+                    this.applicationIdentifier,
+                    this.applicationName,
+                    this.applicationCryptogram,
+                    this.verificationMethod,
+                    this.verificationResults,
+                    this.statementDescription,
+                    this.deviceDetails,
+                    this.cardPaymentTimeline,
+                    this.refundRequiresCardPresence,
+                    this.errors);
             }
         }
     }

@@ -1,25 +1,33 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class CatalogIdMapping 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// CatalogIdMapping.
+    /// </summary>
+    public class CatalogIdMapping
     {
-        public CatalogIdMapping(string clientObjectId = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CatalogIdMapping"/> class.
+        /// </summary>
+        /// <param name="clientObjectId">client_object_id.</param>
+        /// <param name="objectId">object_id.</param>
+        public CatalogIdMapping(
+            string clientObjectId = null,
             string objectId = null)
         {
-            ClientObjectId = clientObjectId;
-            ObjectId = objectId;
+            this.ClientObjectId = clientObjectId;
+            this.ObjectId = objectId;
         }
 
         /// <summary>
@@ -34,6 +42,7 @@ namespace Square.Models
         [JsonProperty("object_id", NullValueHandling = NullValueHandling.Ignore)]
         public string ObjectId { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -43,12 +52,7 @@ namespace Square.Models
             return $"CatalogIdMapping : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"ClientObjectId = {(ClientObjectId == null ? "null" : ClientObjectId == string.Empty ? "" : ClientObjectId)}");
-            toStringOutput.Add($"ObjectId = {(ObjectId == null ? "null" : ObjectId == string.Empty ? "" : ObjectId)}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -62,58 +66,89 @@ namespace Square.Models
             }
 
             return obj is CatalogIdMapping other &&
-                ((ClientObjectId == null && other.ClientObjectId == null) || (ClientObjectId?.Equals(other.ClientObjectId) == true)) &&
-                ((ObjectId == null && other.ObjectId == null) || (ObjectId?.Equals(other.ObjectId) == true));
+                ((this.ClientObjectId == null && other.ClientObjectId == null) || (this.ClientObjectId?.Equals(other.ClientObjectId) == true)) &&
+                ((this.ObjectId == null && other.ObjectId == null) || (this.ObjectId?.Equals(other.ObjectId) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -2090188884;
 
-            if (ClientObjectId != null)
+            if (this.ClientObjectId != null)
             {
-               hashCode += ClientObjectId.GetHashCode();
+               hashCode += this.ClientObjectId.GetHashCode();
             }
 
-            if (ObjectId != null)
+            if (this.ObjectId != null)
             {
-               hashCode += ObjectId.GetHashCode();
+               hashCode += this.ObjectId.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.ClientObjectId = {(this.ClientObjectId == null ? "null" : this.ClientObjectId == string.Empty ? "" : this.ClientObjectId)}");
+            toStringOutput.Add($"this.ObjectId = {(this.ObjectId == null ? "null" : this.ObjectId == string.Empty ? "" : this.ObjectId)}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .ClientObjectId(ClientObjectId)
-                .ObjectId(ObjectId);
+                .ClientObjectId(this.ClientObjectId)
+                .ObjectId(this.ObjectId);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string clientObjectId;
             private string objectId;
 
-
-
+             /// <summary>
+             /// ClientObjectId.
+             /// </summary>
+             /// <param name="clientObjectId"> clientObjectId. </param>
+             /// <returns> Builder. </returns>
             public Builder ClientObjectId(string clientObjectId)
             {
                 this.clientObjectId = clientObjectId;
                 return this;
             }
 
+             /// <summary>
+             /// ObjectId.
+             /// </summary>
+             /// <param name="objectId"> objectId. </param>
+             /// <returns> Builder. </returns>
             public Builder ObjectId(string objectId)
             {
                 this.objectId = objectId;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> CatalogIdMapping. </returns>
             public CatalogIdMapping Build()
             {
-                return new CatalogIdMapping(clientObjectId,
-                    objectId);
+                return new CatalogIdMapping(
+                    this.clientObjectId,
+                    this.objectId);
             }
         }
     }

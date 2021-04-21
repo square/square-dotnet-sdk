@@ -1,21 +1,35 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class V1PaymentSurcharge 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// V1PaymentSurcharge.
+    /// </summary>
+    public class V1PaymentSurcharge
     {
-        public V1PaymentSurcharge(string name = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="V1PaymentSurcharge"/> class.
+        /// </summary>
+        /// <param name="name">name.</param>
+        /// <param name="appliedMoney">applied_money.</param>
+        /// <param name="rate">rate.</param>
+        /// <param name="amountMoney">amount_money.</param>
+        /// <param name="type">type.</param>
+        /// <param name="taxable">taxable.</param>
+        /// <param name="taxes">taxes.</param>
+        /// <param name="surchargeId">surcharge_id.</param>
+        public V1PaymentSurcharge(
+            string name = null,
             Models.V1Money appliedMoney = null,
             string rate = null,
             Models.V1Money amountMoney = null,
@@ -24,14 +38,14 @@ namespace Square.Models
             IList<Models.V1PaymentTax> taxes = null,
             string surchargeId = null)
         {
-            Name = name;
-            AppliedMoney = appliedMoney;
-            Rate = rate;
-            AmountMoney = amountMoney;
-            Type = type;
-            Taxable = taxable;
-            Taxes = taxes;
-            SurchargeId = surchargeId;
+            this.Name = name;
+            this.AppliedMoney = appliedMoney;
+            this.Rate = rate;
+            this.AmountMoney = amountMoney;
+            this.Type = type;
+            this.Taxable = taxable;
+            this.Taxes = taxes;
+            this.SurchargeId = surchargeId;
         }
 
         /// <summary>
@@ -41,7 +55,7 @@ namespace Square.Models
         public string Name { get; }
 
         /// <summary>
-        /// Getter for applied_money
+        /// Gets or sets AppliedMoney.
         /// </summary>
         [JsonProperty("applied_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1Money AppliedMoney { get; }
@@ -53,13 +67,13 @@ namespace Square.Models
         public string Rate { get; }
 
         /// <summary>
-        /// Getter for amount_money
+        /// Gets or sets AmountMoney.
         /// </summary>
         [JsonProperty("amount_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1Money AmountMoney { get; }
 
         /// <summary>
-        /// Getter for type
+        /// Gets or sets Type.
         /// </summary>
         [JsonProperty("type", NullValueHandling = NullValueHandling.Ignore)]
         public string Type { get; }
@@ -82,6 +96,7 @@ namespace Square.Models
         [JsonProperty("surcharge_id", NullValueHandling = NullValueHandling.Ignore)]
         public string SurchargeId { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -91,18 +106,7 @@ namespace Square.Models
             return $"V1PaymentSurcharge : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Name = {(Name == null ? "null" : Name == string.Empty ? "" : Name)}");
-            toStringOutput.Add($"AppliedMoney = {(AppliedMoney == null ? "null" : AppliedMoney.ToString())}");
-            toStringOutput.Add($"Rate = {(Rate == null ? "null" : Rate == string.Empty ? "" : Rate)}");
-            toStringOutput.Add($"AmountMoney = {(AmountMoney == null ? "null" : AmountMoney.ToString())}");
-            toStringOutput.Add($"Type = {(Type == null ? "null" : Type.ToString())}");
-            toStringOutput.Add($"Taxable = {(Taxable == null ? "null" : Taxable.ToString())}");
-            toStringOutput.Add($"Taxes = {(Taxes == null ? "null" : $"[{ string.Join(", ", Taxes)} ]")}");
-            toStringOutput.Add($"SurchargeId = {(SurchargeId == null ? "null" : SurchargeId == string.Empty ? "" : SurchargeId)}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -116,77 +120,101 @@ namespace Square.Models
             }
 
             return obj is V1PaymentSurcharge other &&
-                ((Name == null && other.Name == null) || (Name?.Equals(other.Name) == true)) &&
-                ((AppliedMoney == null && other.AppliedMoney == null) || (AppliedMoney?.Equals(other.AppliedMoney) == true)) &&
-                ((Rate == null && other.Rate == null) || (Rate?.Equals(other.Rate) == true)) &&
-                ((AmountMoney == null && other.AmountMoney == null) || (AmountMoney?.Equals(other.AmountMoney) == true)) &&
-                ((Type == null && other.Type == null) || (Type?.Equals(other.Type) == true)) &&
-                ((Taxable == null && other.Taxable == null) || (Taxable?.Equals(other.Taxable) == true)) &&
-                ((Taxes == null && other.Taxes == null) || (Taxes?.Equals(other.Taxes) == true)) &&
-                ((SurchargeId == null && other.SurchargeId == null) || (SurchargeId?.Equals(other.SurchargeId) == true));
+                ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
+                ((this.AppliedMoney == null && other.AppliedMoney == null) || (this.AppliedMoney?.Equals(other.AppliedMoney) == true)) &&
+                ((this.Rate == null && other.Rate == null) || (this.Rate?.Equals(other.Rate) == true)) &&
+                ((this.AmountMoney == null && other.AmountMoney == null) || (this.AmountMoney?.Equals(other.AmountMoney) == true)) &&
+                ((this.Type == null && other.Type == null) || (this.Type?.Equals(other.Type) == true)) &&
+                ((this.Taxable == null && other.Taxable == null) || (this.Taxable?.Equals(other.Taxable) == true)) &&
+                ((this.Taxes == null && other.Taxes == null) || (this.Taxes?.Equals(other.Taxes) == true)) &&
+                ((this.SurchargeId == null && other.SurchargeId == null) || (this.SurchargeId?.Equals(other.SurchargeId) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -446593569;
 
-            if (Name != null)
+            if (this.Name != null)
             {
-               hashCode += Name.GetHashCode();
+               hashCode += this.Name.GetHashCode();
             }
 
-            if (AppliedMoney != null)
+            if (this.AppliedMoney != null)
             {
-               hashCode += AppliedMoney.GetHashCode();
+               hashCode += this.AppliedMoney.GetHashCode();
             }
 
-            if (Rate != null)
+            if (this.Rate != null)
             {
-               hashCode += Rate.GetHashCode();
+               hashCode += this.Rate.GetHashCode();
             }
 
-            if (AmountMoney != null)
+            if (this.AmountMoney != null)
             {
-               hashCode += AmountMoney.GetHashCode();
+               hashCode += this.AmountMoney.GetHashCode();
             }
 
-            if (Type != null)
+            if (this.Type != null)
             {
-               hashCode += Type.GetHashCode();
+               hashCode += this.Type.GetHashCode();
             }
 
-            if (Taxable != null)
+            if (this.Taxable != null)
             {
-               hashCode += Taxable.GetHashCode();
+               hashCode += this.Taxable.GetHashCode();
             }
 
-            if (Taxes != null)
+            if (this.Taxes != null)
             {
-               hashCode += Taxes.GetHashCode();
+               hashCode += this.Taxes.GetHashCode();
             }
 
-            if (SurchargeId != null)
+            if (this.SurchargeId != null)
             {
-               hashCode += SurchargeId.GetHashCode();
+               hashCode += this.SurchargeId.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Name = {(this.Name == null ? "null" : this.Name == string.Empty ? "" : this.Name)}");
+            toStringOutput.Add($"this.AppliedMoney = {(this.AppliedMoney == null ? "null" : this.AppliedMoney.ToString())}");
+            toStringOutput.Add($"this.Rate = {(this.Rate == null ? "null" : this.Rate == string.Empty ? "" : this.Rate)}");
+            toStringOutput.Add($"this.AmountMoney = {(this.AmountMoney == null ? "null" : this.AmountMoney.ToString())}");
+            toStringOutput.Add($"this.Type = {(this.Type == null ? "null" : this.Type.ToString())}");
+            toStringOutput.Add($"this.Taxable = {(this.Taxable == null ? "null" : this.Taxable.ToString())}");
+            toStringOutput.Add($"this.Taxes = {(this.Taxes == null ? "null" : $"[{string.Join(", ", this.Taxes)} ]")}");
+            toStringOutput.Add($"this.SurchargeId = {(this.SurchargeId == null ? "null" : this.SurchargeId == string.Empty ? "" : this.SurchargeId)}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .Name(Name)
-                .AppliedMoney(AppliedMoney)
-                .Rate(Rate)
-                .AmountMoney(AmountMoney)
-                .Type(Type)
-                .Taxable(Taxable)
-                .Taxes(Taxes)
-                .SurchargeId(SurchargeId);
+                .Name(this.Name)
+                .AppliedMoney(this.AppliedMoney)
+                .Rate(this.Rate)
+                .AmountMoney(this.AmountMoney)
+                .Type(this.Type)
+                .Taxable(this.Taxable)
+                .Taxes(this.Taxes)
+                .SurchargeId(this.SurchargeId);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string name;
@@ -198,66 +226,109 @@ namespace Square.Models
             private IList<Models.V1PaymentTax> taxes;
             private string surchargeId;
 
-
-
+             /// <summary>
+             /// Name.
+             /// </summary>
+             /// <param name="name"> name. </param>
+             /// <returns> Builder. </returns>
             public Builder Name(string name)
             {
                 this.name = name;
                 return this;
             }
 
+             /// <summary>
+             /// AppliedMoney.
+             /// </summary>
+             /// <param name="appliedMoney"> appliedMoney. </param>
+             /// <returns> Builder. </returns>
             public Builder AppliedMoney(Models.V1Money appliedMoney)
             {
                 this.appliedMoney = appliedMoney;
                 return this;
             }
 
+             /// <summary>
+             /// Rate.
+             /// </summary>
+             /// <param name="rate"> rate. </param>
+             /// <returns> Builder. </returns>
             public Builder Rate(string rate)
             {
                 this.rate = rate;
                 return this;
             }
 
+             /// <summary>
+             /// AmountMoney.
+             /// </summary>
+             /// <param name="amountMoney"> amountMoney. </param>
+             /// <returns> Builder. </returns>
             public Builder AmountMoney(Models.V1Money amountMoney)
             {
                 this.amountMoney = amountMoney;
                 return this;
             }
 
+             /// <summary>
+             /// Type.
+             /// </summary>
+             /// <param name="type"> type. </param>
+             /// <returns> Builder. </returns>
             public Builder Type(string type)
             {
                 this.type = type;
                 return this;
             }
 
+             /// <summary>
+             /// Taxable.
+             /// </summary>
+             /// <param name="taxable"> taxable. </param>
+             /// <returns> Builder. </returns>
             public Builder Taxable(bool? taxable)
             {
                 this.taxable = taxable;
                 return this;
             }
 
+             /// <summary>
+             /// Taxes.
+             /// </summary>
+             /// <param name="taxes"> taxes. </param>
+             /// <returns> Builder. </returns>
             public Builder Taxes(IList<Models.V1PaymentTax> taxes)
             {
                 this.taxes = taxes;
                 return this;
             }
 
+             /// <summary>
+             /// SurchargeId.
+             /// </summary>
+             /// <param name="surchargeId"> surchargeId. </param>
+             /// <returns> Builder. </returns>
             public Builder SurchargeId(string surchargeId)
             {
                 this.surchargeId = surchargeId;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> V1PaymentSurcharge. </returns>
             public V1PaymentSurcharge Build()
             {
-                return new V1PaymentSurcharge(name,
-                    appliedMoney,
-                    rate,
-                    amountMoney,
-                    type,
-                    taxable,
-                    taxes,
-                    surchargeId);
+                return new V1PaymentSurcharge(
+                    this.name,
+                    this.appliedMoney,
+                    this.rate,
+                    this.amountMoney,
+                    this.type,
+                    this.taxable,
+                    this.taxes,
+                    this.surchargeId);
             }
         }
     }

@@ -1,21 +1,38 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class CatalogInfoResponseLimits 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// CatalogInfoResponseLimits.
+    /// </summary>
+    public class CatalogInfoResponseLimits
     {
-        public CatalogInfoResponseLimits(int? batchUpsertMaxObjectsPerBatch = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CatalogInfoResponseLimits"/> class.
+        /// </summary>
+        /// <param name="batchUpsertMaxObjectsPerBatch">batch_upsert_max_objects_per_batch.</param>
+        /// <param name="batchUpsertMaxTotalObjects">batch_upsert_max_total_objects.</param>
+        /// <param name="batchRetrieveMaxObjectIds">batch_retrieve_max_object_ids.</param>
+        /// <param name="searchMaxPageLimit">search_max_page_limit.</param>
+        /// <param name="batchDeleteMaxObjectIds">batch_delete_max_object_ids.</param>
+        /// <param name="updateItemTaxesMaxItemIds">update_item_taxes_max_item_ids.</param>
+        /// <param name="updateItemTaxesMaxTaxesToEnable">update_item_taxes_max_taxes_to_enable.</param>
+        /// <param name="updateItemTaxesMaxTaxesToDisable">update_item_taxes_max_taxes_to_disable.</param>
+        /// <param name="updateItemModifierListsMaxItemIds">update_item_modifier_lists_max_item_ids.</param>
+        /// <param name="updateItemModifierListsMaxModifierListsToEnable">update_item_modifier_lists_max_modifier_lists_to_enable.</param>
+        /// <param name="updateItemModifierListsMaxModifierListsToDisable">update_item_modifier_lists_max_modifier_lists_to_disable.</param>
+        public CatalogInfoResponseLimits(
+            int? batchUpsertMaxObjectsPerBatch = null,
             int? batchUpsertMaxTotalObjects = null,
             int? batchRetrieveMaxObjectIds = null,
             int? searchMaxPageLimit = null,
@@ -27,17 +44,17 @@ namespace Square.Models
             int? updateItemModifierListsMaxModifierListsToEnable = null,
             int? updateItemModifierListsMaxModifierListsToDisable = null)
         {
-            BatchUpsertMaxObjectsPerBatch = batchUpsertMaxObjectsPerBatch;
-            BatchUpsertMaxTotalObjects = batchUpsertMaxTotalObjects;
-            BatchRetrieveMaxObjectIds = batchRetrieveMaxObjectIds;
-            SearchMaxPageLimit = searchMaxPageLimit;
-            BatchDeleteMaxObjectIds = batchDeleteMaxObjectIds;
-            UpdateItemTaxesMaxItemIds = updateItemTaxesMaxItemIds;
-            UpdateItemTaxesMaxTaxesToEnable = updateItemTaxesMaxTaxesToEnable;
-            UpdateItemTaxesMaxTaxesToDisable = updateItemTaxesMaxTaxesToDisable;
-            UpdateItemModifierListsMaxItemIds = updateItemModifierListsMaxItemIds;
-            UpdateItemModifierListsMaxModifierListsToEnable = updateItemModifierListsMaxModifierListsToEnable;
-            UpdateItemModifierListsMaxModifierListsToDisable = updateItemModifierListsMaxModifierListsToDisable;
+            this.BatchUpsertMaxObjectsPerBatch = batchUpsertMaxObjectsPerBatch;
+            this.BatchUpsertMaxTotalObjects = batchUpsertMaxTotalObjects;
+            this.BatchRetrieveMaxObjectIds = batchRetrieveMaxObjectIds;
+            this.SearchMaxPageLimit = searchMaxPageLimit;
+            this.BatchDeleteMaxObjectIds = batchDeleteMaxObjectIds;
+            this.UpdateItemTaxesMaxItemIds = updateItemTaxesMaxItemIds;
+            this.UpdateItemTaxesMaxTaxesToEnable = updateItemTaxesMaxTaxesToEnable;
+            this.UpdateItemTaxesMaxTaxesToDisable = updateItemTaxesMaxTaxesToDisable;
+            this.UpdateItemModifierListsMaxItemIds = updateItemModifierListsMaxItemIds;
+            this.UpdateItemModifierListsMaxModifierListsToEnable = updateItemModifierListsMaxModifierListsToEnable;
+            this.UpdateItemModifierListsMaxModifierListsToDisable = updateItemModifierListsMaxModifierListsToDisable;
         }
 
         /// <summary>
@@ -117,6 +134,7 @@ namespace Square.Models
         [JsonProperty("update_item_modifier_lists_max_modifier_lists_to_disable", NullValueHandling = NullValueHandling.Ignore)]
         public int? UpdateItemModifierListsMaxModifierListsToDisable { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -126,21 +144,7 @@ namespace Square.Models
             return $"CatalogInfoResponseLimits : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"BatchUpsertMaxObjectsPerBatch = {(BatchUpsertMaxObjectsPerBatch == null ? "null" : BatchUpsertMaxObjectsPerBatch.ToString())}");
-            toStringOutput.Add($"BatchUpsertMaxTotalObjects = {(BatchUpsertMaxTotalObjects == null ? "null" : BatchUpsertMaxTotalObjects.ToString())}");
-            toStringOutput.Add($"BatchRetrieveMaxObjectIds = {(BatchRetrieveMaxObjectIds == null ? "null" : BatchRetrieveMaxObjectIds.ToString())}");
-            toStringOutput.Add($"SearchMaxPageLimit = {(SearchMaxPageLimit == null ? "null" : SearchMaxPageLimit.ToString())}");
-            toStringOutput.Add($"BatchDeleteMaxObjectIds = {(BatchDeleteMaxObjectIds == null ? "null" : BatchDeleteMaxObjectIds.ToString())}");
-            toStringOutput.Add($"UpdateItemTaxesMaxItemIds = {(UpdateItemTaxesMaxItemIds == null ? "null" : UpdateItemTaxesMaxItemIds.ToString())}");
-            toStringOutput.Add($"UpdateItemTaxesMaxTaxesToEnable = {(UpdateItemTaxesMaxTaxesToEnable == null ? "null" : UpdateItemTaxesMaxTaxesToEnable.ToString())}");
-            toStringOutput.Add($"UpdateItemTaxesMaxTaxesToDisable = {(UpdateItemTaxesMaxTaxesToDisable == null ? "null" : UpdateItemTaxesMaxTaxesToDisable.ToString())}");
-            toStringOutput.Add($"UpdateItemModifierListsMaxItemIds = {(UpdateItemModifierListsMaxItemIds == null ? "null" : UpdateItemModifierListsMaxItemIds.ToString())}");
-            toStringOutput.Add($"UpdateItemModifierListsMaxModifierListsToEnable = {(UpdateItemModifierListsMaxModifierListsToEnable == null ? "null" : UpdateItemModifierListsMaxModifierListsToEnable.ToString())}");
-            toStringOutput.Add($"UpdateItemModifierListsMaxModifierListsToDisable = {(UpdateItemModifierListsMaxModifierListsToDisable == null ? "null" : UpdateItemModifierListsMaxModifierListsToDisable.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -154,98 +158,125 @@ namespace Square.Models
             }
 
             return obj is CatalogInfoResponseLimits other &&
-                ((BatchUpsertMaxObjectsPerBatch == null && other.BatchUpsertMaxObjectsPerBatch == null) || (BatchUpsertMaxObjectsPerBatch?.Equals(other.BatchUpsertMaxObjectsPerBatch) == true)) &&
-                ((BatchUpsertMaxTotalObjects == null && other.BatchUpsertMaxTotalObjects == null) || (BatchUpsertMaxTotalObjects?.Equals(other.BatchUpsertMaxTotalObjects) == true)) &&
-                ((BatchRetrieveMaxObjectIds == null && other.BatchRetrieveMaxObjectIds == null) || (BatchRetrieveMaxObjectIds?.Equals(other.BatchRetrieveMaxObjectIds) == true)) &&
-                ((SearchMaxPageLimit == null && other.SearchMaxPageLimit == null) || (SearchMaxPageLimit?.Equals(other.SearchMaxPageLimit) == true)) &&
-                ((BatchDeleteMaxObjectIds == null && other.BatchDeleteMaxObjectIds == null) || (BatchDeleteMaxObjectIds?.Equals(other.BatchDeleteMaxObjectIds) == true)) &&
-                ((UpdateItemTaxesMaxItemIds == null && other.UpdateItemTaxesMaxItemIds == null) || (UpdateItemTaxesMaxItemIds?.Equals(other.UpdateItemTaxesMaxItemIds) == true)) &&
-                ((UpdateItemTaxesMaxTaxesToEnable == null && other.UpdateItemTaxesMaxTaxesToEnable == null) || (UpdateItemTaxesMaxTaxesToEnable?.Equals(other.UpdateItemTaxesMaxTaxesToEnable) == true)) &&
-                ((UpdateItemTaxesMaxTaxesToDisable == null && other.UpdateItemTaxesMaxTaxesToDisable == null) || (UpdateItemTaxesMaxTaxesToDisable?.Equals(other.UpdateItemTaxesMaxTaxesToDisable) == true)) &&
-                ((UpdateItemModifierListsMaxItemIds == null && other.UpdateItemModifierListsMaxItemIds == null) || (UpdateItemModifierListsMaxItemIds?.Equals(other.UpdateItemModifierListsMaxItemIds) == true)) &&
-                ((UpdateItemModifierListsMaxModifierListsToEnable == null && other.UpdateItemModifierListsMaxModifierListsToEnable == null) || (UpdateItemModifierListsMaxModifierListsToEnable?.Equals(other.UpdateItemModifierListsMaxModifierListsToEnable) == true)) &&
-                ((UpdateItemModifierListsMaxModifierListsToDisable == null && other.UpdateItemModifierListsMaxModifierListsToDisable == null) || (UpdateItemModifierListsMaxModifierListsToDisable?.Equals(other.UpdateItemModifierListsMaxModifierListsToDisable) == true));
+                ((this.BatchUpsertMaxObjectsPerBatch == null && other.BatchUpsertMaxObjectsPerBatch == null) || (this.BatchUpsertMaxObjectsPerBatch?.Equals(other.BatchUpsertMaxObjectsPerBatch) == true)) &&
+                ((this.BatchUpsertMaxTotalObjects == null && other.BatchUpsertMaxTotalObjects == null) || (this.BatchUpsertMaxTotalObjects?.Equals(other.BatchUpsertMaxTotalObjects) == true)) &&
+                ((this.BatchRetrieveMaxObjectIds == null && other.BatchRetrieveMaxObjectIds == null) || (this.BatchRetrieveMaxObjectIds?.Equals(other.BatchRetrieveMaxObjectIds) == true)) &&
+                ((this.SearchMaxPageLimit == null && other.SearchMaxPageLimit == null) || (this.SearchMaxPageLimit?.Equals(other.SearchMaxPageLimit) == true)) &&
+                ((this.BatchDeleteMaxObjectIds == null && other.BatchDeleteMaxObjectIds == null) || (this.BatchDeleteMaxObjectIds?.Equals(other.BatchDeleteMaxObjectIds) == true)) &&
+                ((this.UpdateItemTaxesMaxItemIds == null && other.UpdateItemTaxesMaxItemIds == null) || (this.UpdateItemTaxesMaxItemIds?.Equals(other.UpdateItemTaxesMaxItemIds) == true)) &&
+                ((this.UpdateItemTaxesMaxTaxesToEnable == null && other.UpdateItemTaxesMaxTaxesToEnable == null) || (this.UpdateItemTaxesMaxTaxesToEnable?.Equals(other.UpdateItemTaxesMaxTaxesToEnable) == true)) &&
+                ((this.UpdateItemTaxesMaxTaxesToDisable == null && other.UpdateItemTaxesMaxTaxesToDisable == null) || (this.UpdateItemTaxesMaxTaxesToDisable?.Equals(other.UpdateItemTaxesMaxTaxesToDisable) == true)) &&
+                ((this.UpdateItemModifierListsMaxItemIds == null && other.UpdateItemModifierListsMaxItemIds == null) || (this.UpdateItemModifierListsMaxItemIds?.Equals(other.UpdateItemModifierListsMaxItemIds) == true)) &&
+                ((this.UpdateItemModifierListsMaxModifierListsToEnable == null && other.UpdateItemModifierListsMaxModifierListsToEnable == null) || (this.UpdateItemModifierListsMaxModifierListsToEnable?.Equals(other.UpdateItemModifierListsMaxModifierListsToEnable) == true)) &&
+                ((this.UpdateItemModifierListsMaxModifierListsToDisable == null && other.UpdateItemModifierListsMaxModifierListsToDisable == null) || (this.UpdateItemModifierListsMaxModifierListsToDisable?.Equals(other.UpdateItemModifierListsMaxModifierListsToDisable) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 163529302;
 
-            if (BatchUpsertMaxObjectsPerBatch != null)
+            if (this.BatchUpsertMaxObjectsPerBatch != null)
             {
-               hashCode += BatchUpsertMaxObjectsPerBatch.GetHashCode();
+               hashCode += this.BatchUpsertMaxObjectsPerBatch.GetHashCode();
             }
 
-            if (BatchUpsertMaxTotalObjects != null)
+            if (this.BatchUpsertMaxTotalObjects != null)
             {
-               hashCode += BatchUpsertMaxTotalObjects.GetHashCode();
+               hashCode += this.BatchUpsertMaxTotalObjects.GetHashCode();
             }
 
-            if (BatchRetrieveMaxObjectIds != null)
+            if (this.BatchRetrieveMaxObjectIds != null)
             {
-               hashCode += BatchRetrieveMaxObjectIds.GetHashCode();
+               hashCode += this.BatchRetrieveMaxObjectIds.GetHashCode();
             }
 
-            if (SearchMaxPageLimit != null)
+            if (this.SearchMaxPageLimit != null)
             {
-               hashCode += SearchMaxPageLimit.GetHashCode();
+               hashCode += this.SearchMaxPageLimit.GetHashCode();
             }
 
-            if (BatchDeleteMaxObjectIds != null)
+            if (this.BatchDeleteMaxObjectIds != null)
             {
-               hashCode += BatchDeleteMaxObjectIds.GetHashCode();
+               hashCode += this.BatchDeleteMaxObjectIds.GetHashCode();
             }
 
-            if (UpdateItemTaxesMaxItemIds != null)
+            if (this.UpdateItemTaxesMaxItemIds != null)
             {
-               hashCode += UpdateItemTaxesMaxItemIds.GetHashCode();
+               hashCode += this.UpdateItemTaxesMaxItemIds.GetHashCode();
             }
 
-            if (UpdateItemTaxesMaxTaxesToEnable != null)
+            if (this.UpdateItemTaxesMaxTaxesToEnable != null)
             {
-               hashCode += UpdateItemTaxesMaxTaxesToEnable.GetHashCode();
+               hashCode += this.UpdateItemTaxesMaxTaxesToEnable.GetHashCode();
             }
 
-            if (UpdateItemTaxesMaxTaxesToDisable != null)
+            if (this.UpdateItemTaxesMaxTaxesToDisable != null)
             {
-               hashCode += UpdateItemTaxesMaxTaxesToDisable.GetHashCode();
+               hashCode += this.UpdateItemTaxesMaxTaxesToDisable.GetHashCode();
             }
 
-            if (UpdateItemModifierListsMaxItemIds != null)
+            if (this.UpdateItemModifierListsMaxItemIds != null)
             {
-               hashCode += UpdateItemModifierListsMaxItemIds.GetHashCode();
+               hashCode += this.UpdateItemModifierListsMaxItemIds.GetHashCode();
             }
 
-            if (UpdateItemModifierListsMaxModifierListsToEnable != null)
+            if (this.UpdateItemModifierListsMaxModifierListsToEnable != null)
             {
-               hashCode += UpdateItemModifierListsMaxModifierListsToEnable.GetHashCode();
+               hashCode += this.UpdateItemModifierListsMaxModifierListsToEnable.GetHashCode();
             }
 
-            if (UpdateItemModifierListsMaxModifierListsToDisable != null)
+            if (this.UpdateItemModifierListsMaxModifierListsToDisable != null)
             {
-               hashCode += UpdateItemModifierListsMaxModifierListsToDisable.GetHashCode();
+               hashCode += this.UpdateItemModifierListsMaxModifierListsToDisable.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.BatchUpsertMaxObjectsPerBatch = {(this.BatchUpsertMaxObjectsPerBatch == null ? "null" : this.BatchUpsertMaxObjectsPerBatch.ToString())}");
+            toStringOutput.Add($"this.BatchUpsertMaxTotalObjects = {(this.BatchUpsertMaxTotalObjects == null ? "null" : this.BatchUpsertMaxTotalObjects.ToString())}");
+            toStringOutput.Add($"this.BatchRetrieveMaxObjectIds = {(this.BatchRetrieveMaxObjectIds == null ? "null" : this.BatchRetrieveMaxObjectIds.ToString())}");
+            toStringOutput.Add($"this.SearchMaxPageLimit = {(this.SearchMaxPageLimit == null ? "null" : this.SearchMaxPageLimit.ToString())}");
+            toStringOutput.Add($"this.BatchDeleteMaxObjectIds = {(this.BatchDeleteMaxObjectIds == null ? "null" : this.BatchDeleteMaxObjectIds.ToString())}");
+            toStringOutput.Add($"this.UpdateItemTaxesMaxItemIds = {(this.UpdateItemTaxesMaxItemIds == null ? "null" : this.UpdateItemTaxesMaxItemIds.ToString())}");
+            toStringOutput.Add($"this.UpdateItemTaxesMaxTaxesToEnable = {(this.UpdateItemTaxesMaxTaxesToEnable == null ? "null" : this.UpdateItemTaxesMaxTaxesToEnable.ToString())}");
+            toStringOutput.Add($"this.UpdateItemTaxesMaxTaxesToDisable = {(this.UpdateItemTaxesMaxTaxesToDisable == null ? "null" : this.UpdateItemTaxesMaxTaxesToDisable.ToString())}");
+            toStringOutput.Add($"this.UpdateItemModifierListsMaxItemIds = {(this.UpdateItemModifierListsMaxItemIds == null ? "null" : this.UpdateItemModifierListsMaxItemIds.ToString())}");
+            toStringOutput.Add($"this.UpdateItemModifierListsMaxModifierListsToEnable = {(this.UpdateItemModifierListsMaxModifierListsToEnable == null ? "null" : this.UpdateItemModifierListsMaxModifierListsToEnable.ToString())}");
+            toStringOutput.Add($"this.UpdateItemModifierListsMaxModifierListsToDisable = {(this.UpdateItemModifierListsMaxModifierListsToDisable == null ? "null" : this.UpdateItemModifierListsMaxModifierListsToDisable.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .BatchUpsertMaxObjectsPerBatch(BatchUpsertMaxObjectsPerBatch)
-                .BatchUpsertMaxTotalObjects(BatchUpsertMaxTotalObjects)
-                .BatchRetrieveMaxObjectIds(BatchRetrieveMaxObjectIds)
-                .SearchMaxPageLimit(SearchMaxPageLimit)
-                .BatchDeleteMaxObjectIds(BatchDeleteMaxObjectIds)
-                .UpdateItemTaxesMaxItemIds(UpdateItemTaxesMaxItemIds)
-                .UpdateItemTaxesMaxTaxesToEnable(UpdateItemTaxesMaxTaxesToEnable)
-                .UpdateItemTaxesMaxTaxesToDisable(UpdateItemTaxesMaxTaxesToDisable)
-                .UpdateItemModifierListsMaxItemIds(UpdateItemModifierListsMaxItemIds)
-                .UpdateItemModifierListsMaxModifierListsToEnable(UpdateItemModifierListsMaxModifierListsToEnable)
-                .UpdateItemModifierListsMaxModifierListsToDisable(UpdateItemModifierListsMaxModifierListsToDisable);
+                .BatchUpsertMaxObjectsPerBatch(this.BatchUpsertMaxObjectsPerBatch)
+                .BatchUpsertMaxTotalObjects(this.BatchUpsertMaxTotalObjects)
+                .BatchRetrieveMaxObjectIds(this.BatchRetrieveMaxObjectIds)
+                .SearchMaxPageLimit(this.SearchMaxPageLimit)
+                .BatchDeleteMaxObjectIds(this.BatchDeleteMaxObjectIds)
+                .UpdateItemTaxesMaxItemIds(this.UpdateItemTaxesMaxItemIds)
+                .UpdateItemTaxesMaxTaxesToEnable(this.UpdateItemTaxesMaxTaxesToEnable)
+                .UpdateItemTaxesMaxTaxesToDisable(this.UpdateItemTaxesMaxTaxesToDisable)
+                .UpdateItemModifierListsMaxItemIds(this.UpdateItemModifierListsMaxItemIds)
+                .UpdateItemModifierListsMaxModifierListsToEnable(this.UpdateItemModifierListsMaxModifierListsToEnable)
+                .UpdateItemModifierListsMaxModifierListsToDisable(this.UpdateItemModifierListsMaxModifierListsToDisable);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private int? batchUpsertMaxObjectsPerBatch;
@@ -260,87 +291,145 @@ namespace Square.Models
             private int? updateItemModifierListsMaxModifierListsToEnable;
             private int? updateItemModifierListsMaxModifierListsToDisable;
 
-
-
+             /// <summary>
+             /// BatchUpsertMaxObjectsPerBatch.
+             /// </summary>
+             /// <param name="batchUpsertMaxObjectsPerBatch"> batchUpsertMaxObjectsPerBatch. </param>
+             /// <returns> Builder. </returns>
             public Builder BatchUpsertMaxObjectsPerBatch(int? batchUpsertMaxObjectsPerBatch)
             {
                 this.batchUpsertMaxObjectsPerBatch = batchUpsertMaxObjectsPerBatch;
                 return this;
             }
 
+             /// <summary>
+             /// BatchUpsertMaxTotalObjects.
+             /// </summary>
+             /// <param name="batchUpsertMaxTotalObjects"> batchUpsertMaxTotalObjects. </param>
+             /// <returns> Builder. </returns>
             public Builder BatchUpsertMaxTotalObjects(int? batchUpsertMaxTotalObjects)
             {
                 this.batchUpsertMaxTotalObjects = batchUpsertMaxTotalObjects;
                 return this;
             }
 
+             /// <summary>
+             /// BatchRetrieveMaxObjectIds.
+             /// </summary>
+             /// <param name="batchRetrieveMaxObjectIds"> batchRetrieveMaxObjectIds. </param>
+             /// <returns> Builder. </returns>
             public Builder BatchRetrieveMaxObjectIds(int? batchRetrieveMaxObjectIds)
             {
                 this.batchRetrieveMaxObjectIds = batchRetrieveMaxObjectIds;
                 return this;
             }
 
+             /// <summary>
+             /// SearchMaxPageLimit.
+             /// </summary>
+             /// <param name="searchMaxPageLimit"> searchMaxPageLimit. </param>
+             /// <returns> Builder. </returns>
             public Builder SearchMaxPageLimit(int? searchMaxPageLimit)
             {
                 this.searchMaxPageLimit = searchMaxPageLimit;
                 return this;
             }
 
+             /// <summary>
+             /// BatchDeleteMaxObjectIds.
+             /// </summary>
+             /// <param name="batchDeleteMaxObjectIds"> batchDeleteMaxObjectIds. </param>
+             /// <returns> Builder. </returns>
             public Builder BatchDeleteMaxObjectIds(int? batchDeleteMaxObjectIds)
             {
                 this.batchDeleteMaxObjectIds = batchDeleteMaxObjectIds;
                 return this;
             }
 
+             /// <summary>
+             /// UpdateItemTaxesMaxItemIds.
+             /// </summary>
+             /// <param name="updateItemTaxesMaxItemIds"> updateItemTaxesMaxItemIds. </param>
+             /// <returns> Builder. </returns>
             public Builder UpdateItemTaxesMaxItemIds(int? updateItemTaxesMaxItemIds)
             {
                 this.updateItemTaxesMaxItemIds = updateItemTaxesMaxItemIds;
                 return this;
             }
 
+             /// <summary>
+             /// UpdateItemTaxesMaxTaxesToEnable.
+             /// </summary>
+             /// <param name="updateItemTaxesMaxTaxesToEnable"> updateItemTaxesMaxTaxesToEnable. </param>
+             /// <returns> Builder. </returns>
             public Builder UpdateItemTaxesMaxTaxesToEnable(int? updateItemTaxesMaxTaxesToEnable)
             {
                 this.updateItemTaxesMaxTaxesToEnable = updateItemTaxesMaxTaxesToEnable;
                 return this;
             }
 
+             /// <summary>
+             /// UpdateItemTaxesMaxTaxesToDisable.
+             /// </summary>
+             /// <param name="updateItemTaxesMaxTaxesToDisable"> updateItemTaxesMaxTaxesToDisable. </param>
+             /// <returns> Builder. </returns>
             public Builder UpdateItemTaxesMaxTaxesToDisable(int? updateItemTaxesMaxTaxesToDisable)
             {
                 this.updateItemTaxesMaxTaxesToDisable = updateItemTaxesMaxTaxesToDisable;
                 return this;
             }
 
+             /// <summary>
+             /// UpdateItemModifierListsMaxItemIds.
+             /// </summary>
+             /// <param name="updateItemModifierListsMaxItemIds"> updateItemModifierListsMaxItemIds. </param>
+             /// <returns> Builder. </returns>
             public Builder UpdateItemModifierListsMaxItemIds(int? updateItemModifierListsMaxItemIds)
             {
                 this.updateItemModifierListsMaxItemIds = updateItemModifierListsMaxItemIds;
                 return this;
             }
 
+             /// <summary>
+             /// UpdateItemModifierListsMaxModifierListsToEnable.
+             /// </summary>
+             /// <param name="updateItemModifierListsMaxModifierListsToEnable"> updateItemModifierListsMaxModifierListsToEnable. </param>
+             /// <returns> Builder. </returns>
             public Builder UpdateItemModifierListsMaxModifierListsToEnable(int? updateItemModifierListsMaxModifierListsToEnable)
             {
                 this.updateItemModifierListsMaxModifierListsToEnable = updateItemModifierListsMaxModifierListsToEnable;
                 return this;
             }
 
+             /// <summary>
+             /// UpdateItemModifierListsMaxModifierListsToDisable.
+             /// </summary>
+             /// <param name="updateItemModifierListsMaxModifierListsToDisable"> updateItemModifierListsMaxModifierListsToDisable. </param>
+             /// <returns> Builder. </returns>
             public Builder UpdateItemModifierListsMaxModifierListsToDisable(int? updateItemModifierListsMaxModifierListsToDisable)
             {
                 this.updateItemModifierListsMaxModifierListsToDisable = updateItemModifierListsMaxModifierListsToDisable;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> CatalogInfoResponseLimits. </returns>
             public CatalogInfoResponseLimits Build()
             {
-                return new CatalogInfoResponseLimits(batchUpsertMaxObjectsPerBatch,
-                    batchUpsertMaxTotalObjects,
-                    batchRetrieveMaxObjectIds,
-                    searchMaxPageLimit,
-                    batchDeleteMaxObjectIds,
-                    updateItemTaxesMaxItemIds,
-                    updateItemTaxesMaxTaxesToEnable,
-                    updateItemTaxesMaxTaxesToDisable,
-                    updateItemModifierListsMaxItemIds,
-                    updateItemModifierListsMaxModifierListsToEnable,
-                    updateItemModifierListsMaxModifierListsToDisable);
+                return new CatalogInfoResponseLimits(
+                    this.batchUpsertMaxObjectsPerBatch,
+                    this.batchUpsertMaxTotalObjects,
+                    this.batchRetrieveMaxObjectIds,
+                    this.searchMaxPageLimit,
+                    this.batchDeleteMaxObjectIds,
+                    this.updateItemTaxesMaxItemIds,
+                    this.updateItemTaxesMaxTaxesToEnable,
+                    this.updateItemTaxesMaxTaxesToDisable,
+                    this.updateItemModifierListsMaxItemIds,
+                    this.updateItemModifierListsMaxModifierListsToEnable,
+                    this.updateItemModifierListsMaxModifierListsToDisable);
             }
         }
     }

@@ -1,28 +1,39 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square.Http.Client;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class CreateCustomerCardResponse 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Http.Client;
+    using Square.Utilities;
+
+    /// <summary>
+    /// CreateCustomerCardResponse.
+    /// </summary>
+    public class CreateCustomerCardResponse
     {
-        public CreateCustomerCardResponse(IList<Models.Error> errors = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CreateCustomerCardResponse"/> class.
+        /// </summary>
+        /// <param name="errors">errors.</param>
+        /// <param name="card">card.</param>
+        public CreateCustomerCardResponse(
+            IList<Models.Error> errors = null,
             Models.Card card = null)
         {
-            Errors = errors;
-            Card = card;
+            this.Errors = errors;
+            this.Card = card;
         }
 
+        /// <summary>
+        /// Gets http context.
+        /// </summary>
         [JsonIgnore]
         public HttpContext Context { get; internal set; }
 
@@ -39,6 +50,7 @@ namespace Square.Models
         [JsonProperty("card", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Card Card { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -48,12 +60,7 @@ namespace Square.Models
             return $"CreateCustomerCardResponse : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Errors = {(Errors == null ? "null" : $"[{ string.Join(", ", Errors)} ]")}");
-            toStringOutput.Add($"Card = {(Card == null ? "null" : Card.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -67,64 +74,95 @@ namespace Square.Models
             }
 
             return obj is CreateCustomerCardResponse other &&
-                ((Context == null && other.Context == null) || (Context?.Equals(other.Context) == true)) &&
-                ((Errors == null && other.Errors == null) || (Errors?.Equals(other.Errors) == true)) &&
-                ((Card == null && other.Card == null) || (Card?.Equals(other.Card) == true));
+                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
+                ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true)) &&
+                ((this.Card == null && other.Card == null) || (this.Card?.Equals(other.Card) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 2050854899;
 
-            if (Context != null)
+            if (this.Context != null)
             {
-                hashCode += Context.GetHashCode();
+                hashCode += this.Context.GetHashCode();
             }
 
-            if (Errors != null)
+            if (this.Errors != null)
             {
-               hashCode += Errors.GetHashCode();
+               hashCode += this.Errors.GetHashCode();
             }
 
-            if (Card != null)
+            if (this.Card != null)
             {
-               hashCode += Card.GetHashCode();
+               hashCode += this.Card.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Errors = {(this.Errors == null ? "null" : $"[{string.Join(", ", this.Errors)} ]")}");
+            toStringOutput.Add($"this.Card = {(this.Card == null ? "null" : this.Card.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .Errors(Errors)
-                .Card(Card);
+                .Errors(this.Errors)
+                .Card(this.Card);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private IList<Models.Error> errors;
             private Models.Card card;
 
-
-
+             /// <summary>
+             /// Errors.
+             /// </summary>
+             /// <param name="errors"> errors. </param>
+             /// <returns> Builder. </returns>
             public Builder Errors(IList<Models.Error> errors)
             {
                 this.errors = errors;
                 return this;
             }
 
+             /// <summary>
+             /// Card.
+             /// </summary>
+             /// <param name="card"> card. </param>
+             /// <returns> Builder. </returns>
             public Builder Card(Models.Card card)
             {
                 this.card = card;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> CreateCustomerCardResponse. </returns>
             public CreateCustomerCardResponse Build()
             {
-                return new CreateCustomerCardResponse(errors,
-                    card);
+                return new CreateCustomerCardResponse(
+                    this.errors,
+                    this.card);
             }
         }
     }

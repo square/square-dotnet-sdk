@@ -26,7 +26,10 @@ IDisputesApi disputesApi = client.DisputesApi;
 Returns a list of disputes associated with a particular account.
 
 ```csharp
-ListDisputesAsync(string cursor = null, string states = null, string locationId = null)
+ListDisputesAsync(
+    string cursor = null,
+    string states = null,
+    string locationId = null)
 ```
 
 ## Parameters
@@ -61,7 +64,8 @@ catch (ApiException e){};
 Returns details about a specific dispute.
 
 ```csharp
-RetrieveDisputeAsync(string disputeId)
+RetrieveDisputeAsync(
+    string disputeId)
 ```
 
 ## Parameters
@@ -96,7 +100,8 @@ Square debits the disputed amount from the seller’s Square account. If the Squ
 does not have sufficient funds, Square debits the associated bank account.
 
 ```csharp
-AcceptDisputeAsync(string disputeId)
+AcceptDisputeAsync(
+    string disputeId)
 ```
 
 ## Parameters
@@ -127,7 +132,8 @@ catch (ApiException e){};
 Returns a list of evidence associated with a dispute.
 
 ```csharp
-ListDisputeEvidenceAsync(string disputeId)
+ListDisputeEvidenceAsync(
+    string disputeId)
 ```
 
 ## Parameters
@@ -158,10 +164,12 @@ catch (ApiException e){};
 Removes specified evidence from a dispute.
 
 Square does not send the bank any evidence that is removed. Also, you cannot remove evidence after
-submitting it to the bank using [SubmitEvidence](https://developer.squareup.com/docs/reference/square/disputes-api/submit-evidence).
+submitting it to the bank using [SubmitEvidence](/doc/api/disputes.md#submit-evidence).
 
 ```csharp
-RemoveDisputeEvidenceAsync(string disputeId, string evidenceId)
+RemoveDisputeEvidenceAsync(
+    string disputeId,
+    string evidenceId)
 ```
 
 ## Parameters
@@ -197,7 +205,9 @@ You must maintain a copy of the evidence you upload if you want to reference it 
 download the evidence after you upload it.
 
 ```csharp
-RetrieveDisputeEvidenceAsync(string disputeId, string evidenceId)
+RetrieveDisputeEvidenceAsync(
+    string disputeId,
+    string evidenceId)
 ```
 
 ## Parameters
@@ -231,7 +241,10 @@ Uploads a file to use as evidence in a dispute challenge. The endpoint accepts H
 multipart/form-data file uploads in HEIC, HEIF, JPEG, PDF, PNG, and TIFF formats.
 
 ```csharp
-CreateDisputeEvidenceFileAsync(string disputeId, Models.CreateDisputeEvidenceFileRequest request = null, FileStreamInfo imageFile = null)
+CreateDisputeEvidenceFileAsync(
+    string disputeId,
+    Models.CreateDisputeEvidenceFileRequest request = null,
+    FileStreamInfo imageFile = null)
 ```
 
 ## Parameters
@@ -270,7 +283,9 @@ catch (ApiException e){};
 Uploads text to use as evidence for a dispute challenge.
 
 ```csharp
-CreateDisputeEvidenceTextAsync(string disputeId, Models.CreateDisputeEvidenceTextRequest body)
+CreateDisputeEvidenceTextAsync(
+    string disputeId,
+    Models.CreateDisputeEvidenceTextRequest body)
 ```
 
 ## Parameters
@@ -307,12 +322,13 @@ catch (ApiException e){};
 Submits evidence to the cardholder's bank.
 
 Before submitting evidence, Square compiles all available evidence. This includes evidence uploaded
-using the [CreateDisputeEvidenceFile](https://developer.squareup.com/docs/reference/square/disputes-api/create-dispute-evidence-file) and
-[CreateDisputeEvidenceText](https://developer.squareup.com/docs/reference/square/disputes-api/create-dispute-evidence-text) endpoints and
+using the [CreateDisputeEvidenceFile](/doc/api/disputes.md#create-dispute-evidence-file) and
+[CreateDisputeEvidenceText](/doc/api/disputes.md#create-dispute-evidence-text) endpoints and
 evidence automatically provided by Square, when available.
 
 ```csharp
-SubmitEvidenceAsync(string disputeId)
+SubmitEvidenceAsync(
+    string disputeId)
 ```
 
 ## Parameters

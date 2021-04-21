@@ -1,25 +1,33 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class RiskEvaluation 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// RiskEvaluation.
+    /// </summary>
+    public class RiskEvaluation
     {
-        public RiskEvaluation(string createdAt = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RiskEvaluation"/> class.
+        /// </summary>
+        /// <param name="createdAt">created_at.</param>
+        /// <param name="riskLevel">risk_level.</param>
+        public RiskEvaluation(
+            string createdAt = null,
             string riskLevel = null)
         {
-            CreatedAt = createdAt;
-            RiskLevel = riskLevel;
+            this.CreatedAt = createdAt;
+            this.RiskLevel = riskLevel;
         }
 
         /// <summary>
@@ -29,11 +37,12 @@ namespace Square.Models
         public string CreatedAt { get; }
 
         /// <summary>
-        /// Getter for risk_level
+        /// Gets or sets RiskLevel.
         /// </summary>
         [JsonProperty("risk_level", NullValueHandling = NullValueHandling.Ignore)]
         public string RiskLevel { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -43,12 +52,7 @@ namespace Square.Models
             return $"RiskEvaluation : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"CreatedAt = {(CreatedAt == null ? "null" : CreatedAt == string.Empty ? "" : CreatedAt)}");
-            toStringOutput.Add($"RiskLevel = {(RiskLevel == null ? "null" : RiskLevel.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -62,58 +66,89 @@ namespace Square.Models
             }
 
             return obj is RiskEvaluation other &&
-                ((CreatedAt == null && other.CreatedAt == null) || (CreatedAt?.Equals(other.CreatedAt) == true)) &&
-                ((RiskLevel == null && other.RiskLevel == null) || (RiskLevel?.Equals(other.RiskLevel) == true));
+                ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true)) &&
+                ((this.RiskLevel == null && other.RiskLevel == null) || (this.RiskLevel?.Equals(other.RiskLevel) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 692810603;
 
-            if (CreatedAt != null)
+            if (this.CreatedAt != null)
             {
-               hashCode += CreatedAt.GetHashCode();
+               hashCode += this.CreatedAt.GetHashCode();
             }
 
-            if (RiskLevel != null)
+            if (this.RiskLevel != null)
             {
-               hashCode += RiskLevel.GetHashCode();
+               hashCode += this.RiskLevel.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt == string.Empty ? "" : this.CreatedAt)}");
+            toStringOutput.Add($"this.RiskLevel = {(this.RiskLevel == null ? "null" : this.RiskLevel.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .CreatedAt(CreatedAt)
-                .RiskLevel(RiskLevel);
+                .CreatedAt(this.CreatedAt)
+                .RiskLevel(this.RiskLevel);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string createdAt;
             private string riskLevel;
 
-
-
+             /// <summary>
+             /// CreatedAt.
+             /// </summary>
+             /// <param name="createdAt"> createdAt. </param>
+             /// <returns> Builder. </returns>
             public Builder CreatedAt(string createdAt)
             {
                 this.createdAt = createdAt;
                 return this;
             }
 
+             /// <summary>
+             /// RiskLevel.
+             /// </summary>
+             /// <param name="riskLevel"> riskLevel. </param>
+             /// <returns> Builder. </returns>
             public Builder RiskLevel(string riskLevel)
             {
                 this.riskLevel = riskLevel;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> RiskEvaluation. </returns>
             public RiskEvaluation Build()
             {
-                return new RiskEvaluation(createdAt,
-                    riskLevel);
+                return new RiskEvaluation(
+                    this.createdAt,
+                    this.riskLevel);
             }
         }
     }

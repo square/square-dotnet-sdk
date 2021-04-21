@@ -1,27 +1,36 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class V1PaymentDiscount 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// V1PaymentDiscount.
+    /// </summary>
+    public class V1PaymentDiscount
     {
-        public V1PaymentDiscount(string name = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="V1PaymentDiscount"/> class.
+        /// </summary>
+        /// <param name="name">name.</param>
+        /// <param name="appliedMoney">applied_money.</param>
+        /// <param name="discountId">discount_id.</param>
+        public V1PaymentDiscount(
+            string name = null,
             Models.V1Money appliedMoney = null,
             string discountId = null)
         {
-            Name = name;
-            AppliedMoney = appliedMoney;
-            DiscountId = discountId;
+            this.Name = name;
+            this.AppliedMoney = appliedMoney;
+            this.DiscountId = discountId;
         }
 
         /// <summary>
@@ -31,7 +40,7 @@ namespace Square.Models
         public string Name { get; }
 
         /// <summary>
-        /// Getter for applied_money
+        /// Gets or sets AppliedMoney.
         /// </summary>
         [JsonProperty("applied_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1Money AppliedMoney { get; }
@@ -42,6 +51,7 @@ namespace Square.Models
         [JsonProperty("discount_id", NullValueHandling = NullValueHandling.Ignore)]
         public string DiscountId { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -51,13 +61,7 @@ namespace Square.Models
             return $"V1PaymentDiscount : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Name = {(Name == null ? "null" : Name == string.Empty ? "" : Name)}");
-            toStringOutput.Add($"AppliedMoney = {(AppliedMoney == null ? "null" : AppliedMoney.ToString())}");
-            toStringOutput.Add($"DiscountId = {(DiscountId == null ? "null" : DiscountId == string.Empty ? "" : DiscountId)}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -71,73 +75,110 @@ namespace Square.Models
             }
 
             return obj is V1PaymentDiscount other &&
-                ((Name == null && other.Name == null) || (Name?.Equals(other.Name) == true)) &&
-                ((AppliedMoney == null && other.AppliedMoney == null) || (AppliedMoney?.Equals(other.AppliedMoney) == true)) &&
-                ((DiscountId == null && other.DiscountId == null) || (DiscountId?.Equals(other.DiscountId) == true));
+                ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
+                ((this.AppliedMoney == null && other.AppliedMoney == null) || (this.AppliedMoney?.Equals(other.AppliedMoney) == true)) &&
+                ((this.DiscountId == null && other.DiscountId == null) || (this.DiscountId?.Equals(other.DiscountId) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 1602240589;
 
-            if (Name != null)
+            if (this.Name != null)
             {
-               hashCode += Name.GetHashCode();
+               hashCode += this.Name.GetHashCode();
             }
 
-            if (AppliedMoney != null)
+            if (this.AppliedMoney != null)
             {
-               hashCode += AppliedMoney.GetHashCode();
+               hashCode += this.AppliedMoney.GetHashCode();
             }
 
-            if (DiscountId != null)
+            if (this.DiscountId != null)
             {
-               hashCode += DiscountId.GetHashCode();
+               hashCode += this.DiscountId.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Name = {(this.Name == null ? "null" : this.Name == string.Empty ? "" : this.Name)}");
+            toStringOutput.Add($"this.AppliedMoney = {(this.AppliedMoney == null ? "null" : this.AppliedMoney.ToString())}");
+            toStringOutput.Add($"this.DiscountId = {(this.DiscountId == null ? "null" : this.DiscountId == string.Empty ? "" : this.DiscountId)}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .Name(Name)
-                .AppliedMoney(AppliedMoney)
-                .DiscountId(DiscountId);
+                .Name(this.Name)
+                .AppliedMoney(this.AppliedMoney)
+                .DiscountId(this.DiscountId);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string name;
             private Models.V1Money appliedMoney;
             private string discountId;
 
-
-
+             /// <summary>
+             /// Name.
+             /// </summary>
+             /// <param name="name"> name. </param>
+             /// <returns> Builder. </returns>
             public Builder Name(string name)
             {
                 this.name = name;
                 return this;
             }
 
+             /// <summary>
+             /// AppliedMoney.
+             /// </summary>
+             /// <param name="appliedMoney"> appliedMoney. </param>
+             /// <returns> Builder. </returns>
             public Builder AppliedMoney(Models.V1Money appliedMoney)
             {
                 this.appliedMoney = appliedMoney;
                 return this;
             }
 
+             /// <summary>
+             /// DiscountId.
+             /// </summary>
+             /// <param name="discountId"> discountId. </param>
+             /// <returns> Builder. </returns>
             public Builder DiscountId(string discountId)
             {
                 this.discountId = discountId;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> V1PaymentDiscount. </returns>
             public V1PaymentDiscount Build()
             {
-                return new V1PaymentDiscount(name,
-                    appliedMoney,
-                    discountId);
+                return new V1PaymentDiscount(
+                    this.name,
+                    this.appliedMoney,
+                    this.discountId);
             }
         }
     }

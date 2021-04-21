@@ -1,29 +1,39 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class SearchAvailabilityFilter 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// SearchAvailabilityFilter.
+    /// </summary>
+    public class SearchAvailabilityFilter
     {
-        public SearchAvailabilityFilter(Models.TimeRange startAtRange,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SearchAvailabilityFilter"/> class.
+        /// </summary>
+        /// <param name="startAtRange">start_at_range.</param>
+        /// <param name="locationId">location_id.</param>
+        /// <param name="segmentFilters">segment_filters.</param>
+        /// <param name="bookingId">booking_id.</param>
+        public SearchAvailabilityFilter(
+            Models.TimeRange startAtRange,
             string locationId = null,
             IList<Models.SegmentFilter> segmentFilters = null,
             string bookingId = null)
         {
-            StartAtRange = startAtRange;
-            LocationId = locationId;
-            SegmentFilters = segmentFilters;
-            BookingId = bookingId;
+            this.StartAtRange = startAtRange;
+            this.LocationId = locationId;
+            this.SegmentFilters = segmentFilters;
+            this.BookingId = bookingId;
         }
 
         /// <summary>
@@ -58,6 +68,7 @@ namespace Square.Models
         [JsonProperty("booking_id", NullValueHandling = NullValueHandling.Ignore)]
         public string BookingId { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -67,14 +78,7 @@ namespace Square.Models
             return $"SearchAvailabilityFilter : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"StartAtRange = {(StartAtRange == null ? "null" : StartAtRange.ToString())}");
-            toStringOutput.Add($"LocationId = {(LocationId == null ? "null" : LocationId == string.Empty ? "" : LocationId)}");
-            toStringOutput.Add($"SegmentFilters = {(SegmentFilters == null ? "null" : $"[{ string.Join(", ", SegmentFilters)} ]")}");
-            toStringOutput.Add($"BookingId = {(BookingId == null ? "null" : BookingId == string.Empty ? "" : BookingId)}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -88,48 +92,69 @@ namespace Square.Models
             }
 
             return obj is SearchAvailabilityFilter other &&
-                ((StartAtRange == null && other.StartAtRange == null) || (StartAtRange?.Equals(other.StartAtRange) == true)) &&
-                ((LocationId == null && other.LocationId == null) || (LocationId?.Equals(other.LocationId) == true)) &&
-                ((SegmentFilters == null && other.SegmentFilters == null) || (SegmentFilters?.Equals(other.SegmentFilters) == true)) &&
-                ((BookingId == null && other.BookingId == null) || (BookingId?.Equals(other.BookingId) == true));
+                ((this.StartAtRange == null && other.StartAtRange == null) || (this.StartAtRange?.Equals(other.StartAtRange) == true)) &&
+                ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true)) &&
+                ((this.SegmentFilters == null && other.SegmentFilters == null) || (this.SegmentFilters?.Equals(other.SegmentFilters) == true)) &&
+                ((this.BookingId == null && other.BookingId == null) || (this.BookingId?.Equals(other.BookingId) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -735515174;
 
-            if (StartAtRange != null)
+            if (this.StartAtRange != null)
             {
-               hashCode += StartAtRange.GetHashCode();
+               hashCode += this.StartAtRange.GetHashCode();
             }
 
-            if (LocationId != null)
+            if (this.LocationId != null)
             {
-               hashCode += LocationId.GetHashCode();
+               hashCode += this.LocationId.GetHashCode();
             }
 
-            if (SegmentFilters != null)
+            if (this.SegmentFilters != null)
             {
-               hashCode += SegmentFilters.GetHashCode();
+               hashCode += this.SegmentFilters.GetHashCode();
             }
 
-            if (BookingId != null)
+            if (this.BookingId != null)
             {
-               hashCode += BookingId.GetHashCode();
+               hashCode += this.BookingId.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.StartAtRange = {(this.StartAtRange == null ? "null" : this.StartAtRange.ToString())}");
+            toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId == string.Empty ? "" : this.LocationId)}");
+            toStringOutput.Add($"this.SegmentFilters = {(this.SegmentFilters == null ? "null" : $"[{string.Join(", ", this.SegmentFilters)} ]")}");
+            toStringOutput.Add($"this.BookingId = {(this.BookingId == null ? "null" : this.BookingId == string.Empty ? "" : this.BookingId)}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
-            var builder = new Builder(StartAtRange)
-                .LocationId(LocationId)
-                .SegmentFilters(SegmentFilters)
-                .BookingId(BookingId);
+            var builder = new Builder(
+                this.StartAtRange)
+                .LocationId(this.LocationId)
+                .SegmentFilters(this.SegmentFilters)
+                .BookingId(this.BookingId);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private Models.TimeRange startAtRange;
@@ -137,41 +162,67 @@ namespace Square.Models
             private IList<Models.SegmentFilter> segmentFilters;
             private string bookingId;
 
-            public Builder(Models.TimeRange startAtRange)
+            public Builder(
+                Models.TimeRange startAtRange)
             {
                 this.startAtRange = startAtRange;
             }
 
+             /// <summary>
+             /// StartAtRange.
+             /// </summary>
+             /// <param name="startAtRange"> startAtRange. </param>
+             /// <returns> Builder. </returns>
             public Builder StartAtRange(Models.TimeRange startAtRange)
             {
                 this.startAtRange = startAtRange;
                 return this;
             }
 
+             /// <summary>
+             /// LocationId.
+             /// </summary>
+             /// <param name="locationId"> locationId. </param>
+             /// <returns> Builder. </returns>
             public Builder LocationId(string locationId)
             {
                 this.locationId = locationId;
                 return this;
             }
 
+             /// <summary>
+             /// SegmentFilters.
+             /// </summary>
+             /// <param name="segmentFilters"> segmentFilters. </param>
+             /// <returns> Builder. </returns>
             public Builder SegmentFilters(IList<Models.SegmentFilter> segmentFilters)
             {
                 this.segmentFilters = segmentFilters;
                 return this;
             }
 
+             /// <summary>
+             /// BookingId.
+             /// </summary>
+             /// <param name="bookingId"> bookingId. </param>
+             /// <returns> Builder. </returns>
             public Builder BookingId(string bookingId)
             {
                 this.bookingId = bookingId;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> SearchAvailabilityFilter. </returns>
             public SearchAvailabilityFilter Build()
             {
-                return new SearchAvailabilityFilter(startAtRange,
-                    locationId,
-                    segmentFilters,
-                    bookingId);
+                return new SearchAvailabilityFilter(
+                    this.startAtRange,
+                    this.locationId,
+                    this.segmentFilters,
+                    this.bookingId);
             }
         }
     }

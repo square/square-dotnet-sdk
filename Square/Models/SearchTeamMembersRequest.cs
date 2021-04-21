@@ -1,27 +1,36 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class SearchTeamMembersRequest 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// SearchTeamMembersRequest.
+    /// </summary>
+    public class SearchTeamMembersRequest
     {
-        public SearchTeamMembersRequest(Models.SearchTeamMembersQuery query = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SearchTeamMembersRequest"/> class.
+        /// </summary>
+        /// <param name="query">query.</param>
+        /// <param name="limit">limit.</param>
+        /// <param name="cursor">cursor.</param>
+        public SearchTeamMembersRequest(
+            Models.SearchTeamMembersQuery query = null,
             int? limit = null,
             string cursor = null)
         {
-            Query = query;
-            Limit = limit;
-            Cursor = cursor;
+            this.Query = query;
+            this.Limit = limit;
+            this.Cursor = cursor;
         }
 
         /// <summary>
@@ -43,6 +52,7 @@ namespace Square.Models
         [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
         public string Cursor { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -52,13 +62,7 @@ namespace Square.Models
             return $"SearchTeamMembersRequest : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Query = {(Query == null ? "null" : Query.ToString())}");
-            toStringOutput.Add($"Limit = {(Limit == null ? "null" : Limit.ToString())}");
-            toStringOutput.Add($"Cursor = {(Cursor == null ? "null" : Cursor == string.Empty ? "" : Cursor)}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -72,73 +76,110 @@ namespace Square.Models
             }
 
             return obj is SearchTeamMembersRequest other &&
-                ((Query == null && other.Query == null) || (Query?.Equals(other.Query) == true)) &&
-                ((Limit == null && other.Limit == null) || (Limit?.Equals(other.Limit) == true)) &&
-                ((Cursor == null && other.Cursor == null) || (Cursor?.Equals(other.Cursor) == true));
+                ((this.Query == null && other.Query == null) || (this.Query?.Equals(other.Query) == true)) &&
+                ((this.Limit == null && other.Limit == null) || (this.Limit?.Equals(other.Limit) == true)) &&
+                ((this.Cursor == null && other.Cursor == null) || (this.Cursor?.Equals(other.Cursor) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -27201343;
 
-            if (Query != null)
+            if (this.Query != null)
             {
-               hashCode += Query.GetHashCode();
+               hashCode += this.Query.GetHashCode();
             }
 
-            if (Limit != null)
+            if (this.Limit != null)
             {
-               hashCode += Limit.GetHashCode();
+               hashCode += this.Limit.GetHashCode();
             }
 
-            if (Cursor != null)
+            if (this.Cursor != null)
             {
-               hashCode += Cursor.GetHashCode();
+               hashCode += this.Cursor.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Query = {(this.Query == null ? "null" : this.Query.ToString())}");
+            toStringOutput.Add($"this.Limit = {(this.Limit == null ? "null" : this.Limit.ToString())}");
+            toStringOutput.Add($"this.Cursor = {(this.Cursor == null ? "null" : this.Cursor == string.Empty ? "" : this.Cursor)}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .Query(Query)
-                .Limit(Limit)
-                .Cursor(Cursor);
+                .Query(this.Query)
+                .Limit(this.Limit)
+                .Cursor(this.Cursor);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private Models.SearchTeamMembersQuery query;
             private int? limit;
             private string cursor;
 
-
-
+             /// <summary>
+             /// Query.
+             /// </summary>
+             /// <param name="query"> query. </param>
+             /// <returns> Builder. </returns>
             public Builder Query(Models.SearchTeamMembersQuery query)
             {
                 this.query = query;
                 return this;
             }
 
+             /// <summary>
+             /// Limit.
+             /// </summary>
+             /// <param name="limit"> limit. </param>
+             /// <returns> Builder. </returns>
             public Builder Limit(int? limit)
             {
                 this.limit = limit;
                 return this;
             }
 
+             /// <summary>
+             /// Cursor.
+             /// </summary>
+             /// <param name="cursor"> cursor. </param>
+             /// <returns> Builder. </returns>
             public Builder Cursor(string cursor)
             {
                 this.cursor = cursor;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> SearchTeamMembersRequest. </returns>
             public SearchTeamMembersRequest Build()
             {
-                return new SearchTeamMembersRequest(query,
-                    limit,
-                    cursor);
+                return new SearchTeamMembersRequest(
+                    this.query,
+                    this.limit,
+                    this.cursor);
             }
         }
     }

@@ -1,21 +1,35 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class ListPaymentRefundsRequest 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// ListPaymentRefundsRequest.
+    /// </summary>
+    public class ListPaymentRefundsRequest
     {
-        public ListPaymentRefundsRequest(string beginTime = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ListPaymentRefundsRequest"/> class.
+        /// </summary>
+        /// <param name="beginTime">begin_time.</param>
+        /// <param name="endTime">end_time.</param>
+        /// <param name="sortOrder">sort_order.</param>
+        /// <param name="cursor">cursor.</param>
+        /// <param name="locationId">location_id.</param>
+        /// <param name="status">status.</param>
+        /// <param name="sourceType">source_type.</param>
+        /// <param name="limit">limit.</param>
+        public ListPaymentRefundsRequest(
+            string beginTime = null,
             string endTime = null,
             string sortOrder = null,
             string cursor = null,
@@ -24,14 +38,14 @@ namespace Square.Models
             string sourceType = null,
             int? limit = null)
         {
-            BeginTime = beginTime;
-            EndTime = endTime;
-            SortOrder = sortOrder;
-            Cursor = cursor;
-            LocationId = locationId;
-            Status = status;
-            SourceType = sourceType;
-            Limit = limit;
+            this.BeginTime = beginTime;
+            this.EndTime = endTime;
+            this.SortOrder = sortOrder;
+            this.Cursor = cursor;
+            this.LocationId = locationId;
+            this.Status = status;
+            this.SourceType = sourceType;
+            this.Limit = limit;
         }
 
         /// <summary>
@@ -73,7 +87,7 @@ namespace Square.Models
 
         /// <summary>
         /// If provided, only refunds with the given status are returned.
-        /// For a list of refund status values, see [PaymentRefund](#type-paymentrefund).
+        /// For a list of refund status values, see [PaymentRefund]($m/PaymentRefund).
         /// Default: If omitted, refunds are returned regardless of their status.
         /// </summary>
         [JsonProperty("status", NullValueHandling = NullValueHandling.Ignore)]
@@ -97,6 +111,7 @@ namespace Square.Models
         [JsonProperty("limit", NullValueHandling = NullValueHandling.Ignore)]
         public int? Limit { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -106,18 +121,7 @@ namespace Square.Models
             return $"ListPaymentRefundsRequest : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"BeginTime = {(BeginTime == null ? "null" : BeginTime == string.Empty ? "" : BeginTime)}");
-            toStringOutput.Add($"EndTime = {(EndTime == null ? "null" : EndTime == string.Empty ? "" : EndTime)}");
-            toStringOutput.Add($"SortOrder = {(SortOrder == null ? "null" : SortOrder == string.Empty ? "" : SortOrder)}");
-            toStringOutput.Add($"Cursor = {(Cursor == null ? "null" : Cursor == string.Empty ? "" : Cursor)}");
-            toStringOutput.Add($"LocationId = {(LocationId == null ? "null" : LocationId == string.Empty ? "" : LocationId)}");
-            toStringOutput.Add($"Status = {(Status == null ? "null" : Status == string.Empty ? "" : Status)}");
-            toStringOutput.Add($"SourceType = {(SourceType == null ? "null" : SourceType == string.Empty ? "" : SourceType)}");
-            toStringOutput.Add($"Limit = {(Limit == null ? "null" : Limit.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -131,77 +135,101 @@ namespace Square.Models
             }
 
             return obj is ListPaymentRefundsRequest other &&
-                ((BeginTime == null && other.BeginTime == null) || (BeginTime?.Equals(other.BeginTime) == true)) &&
-                ((EndTime == null && other.EndTime == null) || (EndTime?.Equals(other.EndTime) == true)) &&
-                ((SortOrder == null && other.SortOrder == null) || (SortOrder?.Equals(other.SortOrder) == true)) &&
-                ((Cursor == null && other.Cursor == null) || (Cursor?.Equals(other.Cursor) == true)) &&
-                ((LocationId == null && other.LocationId == null) || (LocationId?.Equals(other.LocationId) == true)) &&
-                ((Status == null && other.Status == null) || (Status?.Equals(other.Status) == true)) &&
-                ((SourceType == null && other.SourceType == null) || (SourceType?.Equals(other.SourceType) == true)) &&
-                ((Limit == null && other.Limit == null) || (Limit?.Equals(other.Limit) == true));
+                ((this.BeginTime == null && other.BeginTime == null) || (this.BeginTime?.Equals(other.BeginTime) == true)) &&
+                ((this.EndTime == null && other.EndTime == null) || (this.EndTime?.Equals(other.EndTime) == true)) &&
+                ((this.SortOrder == null && other.SortOrder == null) || (this.SortOrder?.Equals(other.SortOrder) == true)) &&
+                ((this.Cursor == null && other.Cursor == null) || (this.Cursor?.Equals(other.Cursor) == true)) &&
+                ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true)) &&
+                ((this.Status == null && other.Status == null) || (this.Status?.Equals(other.Status) == true)) &&
+                ((this.SourceType == null && other.SourceType == null) || (this.SourceType?.Equals(other.SourceType) == true)) &&
+                ((this.Limit == null && other.Limit == null) || (this.Limit?.Equals(other.Limit) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -211695136;
 
-            if (BeginTime != null)
+            if (this.BeginTime != null)
             {
-               hashCode += BeginTime.GetHashCode();
+               hashCode += this.BeginTime.GetHashCode();
             }
 
-            if (EndTime != null)
+            if (this.EndTime != null)
             {
-               hashCode += EndTime.GetHashCode();
+               hashCode += this.EndTime.GetHashCode();
             }
 
-            if (SortOrder != null)
+            if (this.SortOrder != null)
             {
-               hashCode += SortOrder.GetHashCode();
+               hashCode += this.SortOrder.GetHashCode();
             }
 
-            if (Cursor != null)
+            if (this.Cursor != null)
             {
-               hashCode += Cursor.GetHashCode();
+               hashCode += this.Cursor.GetHashCode();
             }
 
-            if (LocationId != null)
+            if (this.LocationId != null)
             {
-               hashCode += LocationId.GetHashCode();
+               hashCode += this.LocationId.GetHashCode();
             }
 
-            if (Status != null)
+            if (this.Status != null)
             {
-               hashCode += Status.GetHashCode();
+               hashCode += this.Status.GetHashCode();
             }
 
-            if (SourceType != null)
+            if (this.SourceType != null)
             {
-               hashCode += SourceType.GetHashCode();
+               hashCode += this.SourceType.GetHashCode();
             }
 
-            if (Limit != null)
+            if (this.Limit != null)
             {
-               hashCode += Limit.GetHashCode();
+               hashCode += this.Limit.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.BeginTime = {(this.BeginTime == null ? "null" : this.BeginTime == string.Empty ? "" : this.BeginTime)}");
+            toStringOutput.Add($"this.EndTime = {(this.EndTime == null ? "null" : this.EndTime == string.Empty ? "" : this.EndTime)}");
+            toStringOutput.Add($"this.SortOrder = {(this.SortOrder == null ? "null" : this.SortOrder == string.Empty ? "" : this.SortOrder)}");
+            toStringOutput.Add($"this.Cursor = {(this.Cursor == null ? "null" : this.Cursor == string.Empty ? "" : this.Cursor)}");
+            toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId == string.Empty ? "" : this.LocationId)}");
+            toStringOutput.Add($"this.Status = {(this.Status == null ? "null" : this.Status == string.Empty ? "" : this.Status)}");
+            toStringOutput.Add($"this.SourceType = {(this.SourceType == null ? "null" : this.SourceType == string.Empty ? "" : this.SourceType)}");
+            toStringOutput.Add($"this.Limit = {(this.Limit == null ? "null" : this.Limit.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .BeginTime(BeginTime)
-                .EndTime(EndTime)
-                .SortOrder(SortOrder)
-                .Cursor(Cursor)
-                .LocationId(LocationId)
-                .Status(Status)
-                .SourceType(SourceType)
-                .Limit(Limit);
+                .BeginTime(this.BeginTime)
+                .EndTime(this.EndTime)
+                .SortOrder(this.SortOrder)
+                .Cursor(this.Cursor)
+                .LocationId(this.LocationId)
+                .Status(this.Status)
+                .SourceType(this.SourceType)
+                .Limit(this.Limit);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string beginTime;
@@ -213,66 +241,109 @@ namespace Square.Models
             private string sourceType;
             private int? limit;
 
-
-
+             /// <summary>
+             /// BeginTime.
+             /// </summary>
+             /// <param name="beginTime"> beginTime. </param>
+             /// <returns> Builder. </returns>
             public Builder BeginTime(string beginTime)
             {
                 this.beginTime = beginTime;
                 return this;
             }
 
+             /// <summary>
+             /// EndTime.
+             /// </summary>
+             /// <param name="endTime"> endTime. </param>
+             /// <returns> Builder. </returns>
             public Builder EndTime(string endTime)
             {
                 this.endTime = endTime;
                 return this;
             }
 
+             /// <summary>
+             /// SortOrder.
+             /// </summary>
+             /// <param name="sortOrder"> sortOrder. </param>
+             /// <returns> Builder. </returns>
             public Builder SortOrder(string sortOrder)
             {
                 this.sortOrder = sortOrder;
                 return this;
             }
 
+             /// <summary>
+             /// Cursor.
+             /// </summary>
+             /// <param name="cursor"> cursor. </param>
+             /// <returns> Builder. </returns>
             public Builder Cursor(string cursor)
             {
                 this.cursor = cursor;
                 return this;
             }
 
+             /// <summary>
+             /// LocationId.
+             /// </summary>
+             /// <param name="locationId"> locationId. </param>
+             /// <returns> Builder. </returns>
             public Builder LocationId(string locationId)
             {
                 this.locationId = locationId;
                 return this;
             }
 
+             /// <summary>
+             /// Status.
+             /// </summary>
+             /// <param name="status"> status. </param>
+             /// <returns> Builder. </returns>
             public Builder Status(string status)
             {
                 this.status = status;
                 return this;
             }
 
+             /// <summary>
+             /// SourceType.
+             /// </summary>
+             /// <param name="sourceType"> sourceType. </param>
+             /// <returns> Builder. </returns>
             public Builder SourceType(string sourceType)
             {
                 this.sourceType = sourceType;
                 return this;
             }
 
+             /// <summary>
+             /// Limit.
+             /// </summary>
+             /// <param name="limit"> limit. </param>
+             /// <returns> Builder. </returns>
             public Builder Limit(int? limit)
             {
                 this.limit = limit;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> ListPaymentRefundsRequest. </returns>
             public ListPaymentRefundsRequest Build()
             {
-                return new ListPaymentRefundsRequest(beginTime,
-                    endTime,
-                    sortOrder,
-                    cursor,
-                    locationId,
-                    status,
-                    sourceType,
-                    limit);
+                return new ListPaymentRefundsRequest(
+                    this.beginTime,
+                    this.endTime,
+                    this.sortOrder,
+                    this.cursor,
+                    this.locationId,
+                    this.status,
+                    this.sourceType,
+                    this.limit);
             }
         }
     }

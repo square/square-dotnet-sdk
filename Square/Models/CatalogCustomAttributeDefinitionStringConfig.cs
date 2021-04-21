@@ -1,23 +1,30 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class CatalogCustomAttributeDefinitionStringConfig 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// CatalogCustomAttributeDefinitionStringConfig.
+    /// </summary>
+    public class CatalogCustomAttributeDefinitionStringConfig
     {
-        public CatalogCustomAttributeDefinitionStringConfig(bool? enforceUniqueness = null)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CatalogCustomAttributeDefinitionStringConfig"/> class.
+        /// </summary>
+        /// <param name="enforceUniqueness">enforce_uniqueness.</param>
+        public CatalogCustomAttributeDefinitionStringConfig(
+            bool? enforceUniqueness = null)
         {
-            EnforceUniqueness = enforceUniqueness;
+            this.EnforceUniqueness = enforceUniqueness;
         }
 
         /// <summary>
@@ -30,6 +37,7 @@ namespace Square.Models
         [JsonProperty("enforce_uniqueness", NullValueHandling = NullValueHandling.Ignore)]
         public bool? EnforceUniqueness { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -39,11 +47,7 @@ namespace Square.Models
             return $"CatalogCustomAttributeDefinitionStringConfig : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"EnforceUniqueness = {(EnforceUniqueness == null ? "null" : EnforceUniqueness.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -57,43 +61,68 @@ namespace Square.Models
             }
 
             return obj is CatalogCustomAttributeDefinitionStringConfig other &&
-                ((EnforceUniqueness == null && other.EnforceUniqueness == null) || (EnforceUniqueness?.Equals(other.EnforceUniqueness) == true));
+                ((this.EnforceUniqueness == null && other.EnforceUniqueness == null) || (this.EnforceUniqueness?.Equals(other.EnforceUniqueness) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 209404828;
 
-            if (EnforceUniqueness != null)
+            if (this.EnforceUniqueness != null)
             {
-               hashCode += EnforceUniqueness.GetHashCode();
+               hashCode += this.EnforceUniqueness.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.EnforceUniqueness = {(this.EnforceUniqueness == null ? "null" : this.EnforceUniqueness.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .EnforceUniqueness(EnforceUniqueness);
+                .EnforceUniqueness(this.EnforceUniqueness);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private bool? enforceUniqueness;
 
-
-
+             /// <summary>
+             /// EnforceUniqueness.
+             /// </summary>
+             /// <param name="enforceUniqueness"> enforceUniqueness. </param>
+             /// <returns> Builder. </returns>
             public Builder EnforceUniqueness(bool? enforceUniqueness)
             {
                 this.enforceUniqueness = enforceUniqueness;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> CatalogCustomAttributeDefinitionStringConfig. </returns>
             public CatalogCustomAttributeDefinitionStringConfig Build()
             {
-                return new CatalogCustomAttributeDefinitionStringConfig(enforceUniqueness);
+                return new CatalogCustomAttributeDefinitionStringConfig(
+                    this.enforceUniqueness);
             }
         }
     }

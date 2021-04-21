@@ -1,27 +1,36 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class SearchOrdersDateTimeFilter 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// SearchOrdersDateTimeFilter.
+    /// </summary>
+    public class SearchOrdersDateTimeFilter
     {
-        public SearchOrdersDateTimeFilter(Models.TimeRange createdAt = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SearchOrdersDateTimeFilter"/> class.
+        /// </summary>
+        /// <param name="createdAt">created_at.</param>
+        /// <param name="updatedAt">updated_at.</param>
+        /// <param name="closedAt">closed_at.</param>
+        public SearchOrdersDateTimeFilter(
+            Models.TimeRange createdAt = null,
             Models.TimeRange updatedAt = null,
             Models.TimeRange closedAt = null)
         {
-            CreatedAt = createdAt;
-            UpdatedAt = updatedAt;
-            ClosedAt = closedAt;
+            this.CreatedAt = createdAt;
+            this.UpdatedAt = updatedAt;
+            this.ClosedAt = closedAt;
         }
 
         /// <summary>
@@ -54,6 +63,7 @@ namespace Square.Models
         [JsonProperty("closed_at", NullValueHandling = NullValueHandling.Ignore)]
         public Models.TimeRange ClosedAt { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -63,13 +73,7 @@ namespace Square.Models
             return $"SearchOrdersDateTimeFilter : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"CreatedAt = {(CreatedAt == null ? "null" : CreatedAt.ToString())}");
-            toStringOutput.Add($"UpdatedAt = {(UpdatedAt == null ? "null" : UpdatedAt.ToString())}");
-            toStringOutput.Add($"ClosedAt = {(ClosedAt == null ? "null" : ClosedAt.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -83,73 +87,110 @@ namespace Square.Models
             }
 
             return obj is SearchOrdersDateTimeFilter other &&
-                ((CreatedAt == null && other.CreatedAt == null) || (CreatedAt?.Equals(other.CreatedAt) == true)) &&
-                ((UpdatedAt == null && other.UpdatedAt == null) || (UpdatedAt?.Equals(other.UpdatedAt) == true)) &&
-                ((ClosedAt == null && other.ClosedAt == null) || (ClosedAt?.Equals(other.ClosedAt) == true));
+                ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true)) &&
+                ((this.UpdatedAt == null && other.UpdatedAt == null) || (this.UpdatedAt?.Equals(other.UpdatedAt) == true)) &&
+                ((this.ClosedAt == null && other.ClosedAt == null) || (this.ClosedAt?.Equals(other.ClosedAt) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 713480227;
 
-            if (CreatedAt != null)
+            if (this.CreatedAt != null)
             {
-               hashCode += CreatedAt.GetHashCode();
+               hashCode += this.CreatedAt.GetHashCode();
             }
 
-            if (UpdatedAt != null)
+            if (this.UpdatedAt != null)
             {
-               hashCode += UpdatedAt.GetHashCode();
+               hashCode += this.UpdatedAt.GetHashCode();
             }
 
-            if (ClosedAt != null)
+            if (this.ClosedAt != null)
             {
-               hashCode += ClosedAt.GetHashCode();
+               hashCode += this.ClosedAt.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt.ToString())}");
+            toStringOutput.Add($"this.UpdatedAt = {(this.UpdatedAt == null ? "null" : this.UpdatedAt.ToString())}");
+            toStringOutput.Add($"this.ClosedAt = {(this.ClosedAt == null ? "null" : this.ClosedAt.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .CreatedAt(CreatedAt)
-                .UpdatedAt(UpdatedAt)
-                .ClosedAt(ClosedAt);
+                .CreatedAt(this.CreatedAt)
+                .UpdatedAt(this.UpdatedAt)
+                .ClosedAt(this.ClosedAt);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private Models.TimeRange createdAt;
             private Models.TimeRange updatedAt;
             private Models.TimeRange closedAt;
 
-
-
+             /// <summary>
+             /// CreatedAt.
+             /// </summary>
+             /// <param name="createdAt"> createdAt. </param>
+             /// <returns> Builder. </returns>
             public Builder CreatedAt(Models.TimeRange createdAt)
             {
                 this.createdAt = createdAt;
                 return this;
             }
 
+             /// <summary>
+             /// UpdatedAt.
+             /// </summary>
+             /// <param name="updatedAt"> updatedAt. </param>
+             /// <returns> Builder. </returns>
             public Builder UpdatedAt(Models.TimeRange updatedAt)
             {
                 this.updatedAt = updatedAt;
                 return this;
             }
 
+             /// <summary>
+             /// ClosedAt.
+             /// </summary>
+             /// <param name="closedAt"> closedAt. </param>
+             /// <returns> Builder. </returns>
             public Builder ClosedAt(Models.TimeRange closedAt)
             {
                 this.closedAt = closedAt;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> SearchOrdersDateTimeFilter. </returns>
             public SearchOrdersDateTimeFilter Build()
             {
-                return new SearchOrdersDateTimeFilter(createdAt,
-                    updatedAt,
-                    closedAt);
+                return new SearchOrdersDateTimeFilter(
+                    this.createdAt,
+                    this.updatedAt,
+                    this.closedAt);
             }
         }
     }

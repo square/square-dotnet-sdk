@@ -1,27 +1,36 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class BatchChangeInventoryRequest 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// BatchChangeInventoryRequest.
+    /// </summary>
+    public class BatchChangeInventoryRequest
     {
-        public BatchChangeInventoryRequest(string idempotencyKey = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BatchChangeInventoryRequest"/> class.
+        /// </summary>
+        /// <param name="idempotencyKey">idempotency_key.</param>
+        /// <param name="changes">changes.</param>
+        /// <param name="ignoreUnchangedCounts">ignore_unchanged_counts.</param>
+        public BatchChangeInventoryRequest(
+            string idempotencyKey = null,
             IList<Models.InventoryChange> changes = null,
             bool? ignoreUnchangedCounts = null)
         {
-            IdempotencyKey = idempotencyKey;
-            Changes = changes;
-            IgnoreUnchangedCounts = ignoreUnchangedCounts;
+            this.IdempotencyKey = idempotencyKey;
+            this.Changes = changes;
+            this.IgnoreUnchangedCounts = ignoreUnchangedCounts;
         }
 
         /// <summary>
@@ -49,6 +58,7 @@ namespace Square.Models
         [JsonProperty("ignore_unchanged_counts", NullValueHandling = NullValueHandling.Ignore)]
         public bool? IgnoreUnchangedCounts { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -58,13 +68,7 @@ namespace Square.Models
             return $"BatchChangeInventoryRequest : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"IdempotencyKey = {(IdempotencyKey == null ? "null" : IdempotencyKey == string.Empty ? "" : IdempotencyKey)}");
-            toStringOutput.Add($"Changes = {(Changes == null ? "null" : $"[{ string.Join(", ", Changes)} ]")}");
-            toStringOutput.Add($"IgnoreUnchangedCounts = {(IgnoreUnchangedCounts == null ? "null" : IgnoreUnchangedCounts.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -78,73 +82,110 @@ namespace Square.Models
             }
 
             return obj is BatchChangeInventoryRequest other &&
-                ((IdempotencyKey == null && other.IdempotencyKey == null) || (IdempotencyKey?.Equals(other.IdempotencyKey) == true)) &&
-                ((Changes == null && other.Changes == null) || (Changes?.Equals(other.Changes) == true)) &&
-                ((IgnoreUnchangedCounts == null && other.IgnoreUnchangedCounts == null) || (IgnoreUnchangedCounts?.Equals(other.IgnoreUnchangedCounts) == true));
+                ((this.IdempotencyKey == null && other.IdempotencyKey == null) || (this.IdempotencyKey?.Equals(other.IdempotencyKey) == true)) &&
+                ((this.Changes == null && other.Changes == null) || (this.Changes?.Equals(other.Changes) == true)) &&
+                ((this.IgnoreUnchangedCounts == null && other.IgnoreUnchangedCounts == null) || (this.IgnoreUnchangedCounts?.Equals(other.IgnoreUnchangedCounts) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 1934758425;
 
-            if (IdempotencyKey != null)
+            if (this.IdempotencyKey != null)
             {
-               hashCode += IdempotencyKey.GetHashCode();
+               hashCode += this.IdempotencyKey.GetHashCode();
             }
 
-            if (Changes != null)
+            if (this.Changes != null)
             {
-               hashCode += Changes.GetHashCode();
+               hashCode += this.Changes.GetHashCode();
             }
 
-            if (IgnoreUnchangedCounts != null)
+            if (this.IgnoreUnchangedCounts != null)
             {
-               hashCode += IgnoreUnchangedCounts.GetHashCode();
+               hashCode += this.IgnoreUnchangedCounts.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.IdempotencyKey = {(this.IdempotencyKey == null ? "null" : this.IdempotencyKey == string.Empty ? "" : this.IdempotencyKey)}");
+            toStringOutput.Add($"this.Changes = {(this.Changes == null ? "null" : $"[{string.Join(", ", this.Changes)} ]")}");
+            toStringOutput.Add($"this.IgnoreUnchangedCounts = {(this.IgnoreUnchangedCounts == null ? "null" : this.IgnoreUnchangedCounts.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .IdempotencyKey(IdempotencyKey)
-                .Changes(Changes)
-                .IgnoreUnchangedCounts(IgnoreUnchangedCounts);
+                .IdempotencyKey(this.IdempotencyKey)
+                .Changes(this.Changes)
+                .IgnoreUnchangedCounts(this.IgnoreUnchangedCounts);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string idempotencyKey;
             private IList<Models.InventoryChange> changes;
             private bool? ignoreUnchangedCounts;
 
-
-
+             /// <summary>
+             /// IdempotencyKey.
+             /// </summary>
+             /// <param name="idempotencyKey"> idempotencyKey. </param>
+             /// <returns> Builder. </returns>
             public Builder IdempotencyKey(string idempotencyKey)
             {
                 this.idempotencyKey = idempotencyKey;
                 return this;
             }
 
+             /// <summary>
+             /// Changes.
+             /// </summary>
+             /// <param name="changes"> changes. </param>
+             /// <returns> Builder. </returns>
             public Builder Changes(IList<Models.InventoryChange> changes)
             {
                 this.changes = changes;
                 return this;
             }
 
+             /// <summary>
+             /// IgnoreUnchangedCounts.
+             /// </summary>
+             /// <param name="ignoreUnchangedCounts"> ignoreUnchangedCounts. </param>
+             /// <returns> Builder. </returns>
             public Builder IgnoreUnchangedCounts(bool? ignoreUnchangedCounts)
             {
                 this.ignoreUnchangedCounts = ignoreUnchangedCounts;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> BatchChangeInventoryRequest. </returns>
             public BatchChangeInventoryRequest Build()
             {
-                return new BatchChangeInventoryRequest(idempotencyKey,
-                    changes,
-                    ignoreUnchangedCounts);
+                return new BatchChangeInventoryRequest(
+                    this.idempotencyKey,
+                    this.changes,
+                    this.ignoreUnchangedCounts);
             }
         }
     }

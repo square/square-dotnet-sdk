@@ -1,28 +1,39 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square.Http.Client;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class RetrieveCashDrawerShiftResponse 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Http.Client;
+    using Square.Utilities;
+
+    /// <summary>
+    /// RetrieveCashDrawerShiftResponse.
+    /// </summary>
+    public class RetrieveCashDrawerShiftResponse
     {
-        public RetrieveCashDrawerShiftResponse(Models.CashDrawerShift cashDrawerShift = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RetrieveCashDrawerShiftResponse"/> class.
+        /// </summary>
+        /// <param name="cashDrawerShift">cash_drawer_shift.</param>
+        /// <param name="errors">errors.</param>
+        public RetrieveCashDrawerShiftResponse(
+            Models.CashDrawerShift cashDrawerShift = null,
             IList<Models.Error> errors = null)
         {
-            CashDrawerShift = cashDrawerShift;
-            Errors = errors;
+            this.CashDrawerShift = cashDrawerShift;
+            this.Errors = errors;
         }
 
+        /// <summary>
+        /// Gets http context.
+        /// </summary>
         [JsonIgnore]
         public HttpContext Context { get; internal set; }
 
@@ -41,6 +52,7 @@ namespace Square.Models
         [JsonProperty("errors", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.Error> Errors { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -50,12 +62,7 @@ namespace Square.Models
             return $"RetrieveCashDrawerShiftResponse : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"CashDrawerShift = {(CashDrawerShift == null ? "null" : CashDrawerShift.ToString())}");
-            toStringOutput.Add($"Errors = {(Errors == null ? "null" : $"[{ string.Join(", ", Errors)} ]")}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -69,64 +76,95 @@ namespace Square.Models
             }
 
             return obj is RetrieveCashDrawerShiftResponse other &&
-                ((Context == null && other.Context == null) || (Context?.Equals(other.Context) == true)) &&
-                ((CashDrawerShift == null && other.CashDrawerShift == null) || (CashDrawerShift?.Equals(other.CashDrawerShift) == true)) &&
-                ((Errors == null && other.Errors == null) || (Errors?.Equals(other.Errors) == true));
+                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
+                ((this.CashDrawerShift == null && other.CashDrawerShift == null) || (this.CashDrawerShift?.Equals(other.CashDrawerShift) == true)) &&
+                ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -2011399353;
 
-            if (Context != null)
+            if (this.Context != null)
             {
-                hashCode += Context.GetHashCode();
+                hashCode += this.Context.GetHashCode();
             }
 
-            if (CashDrawerShift != null)
+            if (this.CashDrawerShift != null)
             {
-               hashCode += CashDrawerShift.GetHashCode();
+               hashCode += this.CashDrawerShift.GetHashCode();
             }
 
-            if (Errors != null)
+            if (this.Errors != null)
             {
-               hashCode += Errors.GetHashCode();
+               hashCode += this.Errors.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.CashDrawerShift = {(this.CashDrawerShift == null ? "null" : this.CashDrawerShift.ToString())}");
+            toStringOutput.Add($"this.Errors = {(this.Errors == null ? "null" : $"[{string.Join(", ", this.Errors)} ]")}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .CashDrawerShift(CashDrawerShift)
-                .Errors(Errors);
+                .CashDrawerShift(this.CashDrawerShift)
+                .Errors(this.Errors);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private Models.CashDrawerShift cashDrawerShift;
             private IList<Models.Error> errors;
 
-
-
+             /// <summary>
+             /// CashDrawerShift.
+             /// </summary>
+             /// <param name="cashDrawerShift"> cashDrawerShift. </param>
+             /// <returns> Builder. </returns>
             public Builder CashDrawerShift(Models.CashDrawerShift cashDrawerShift)
             {
                 this.cashDrawerShift = cashDrawerShift;
                 return this;
             }
 
+             /// <summary>
+             /// Errors.
+             /// </summary>
+             /// <param name="errors"> errors. </param>
+             /// <returns> Builder. </returns>
             public Builder Errors(IList<Models.Error> errors)
             {
                 this.errors = errors;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> RetrieveCashDrawerShiftResponse. </returns>
             public RetrieveCashDrawerShiftResponse Build()
             {
-                return new RetrieveCashDrawerShiftResponse(cashDrawerShift,
-                    errors);
+                return new RetrieveCashDrawerShiftResponse(
+                    this.cashDrawerShift,
+                    this.errors);
             }
         }
     }

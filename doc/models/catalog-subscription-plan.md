@@ -13,7 +13,7 @@ Describes a subscription plan. For more information, see
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `Name` | `string` | Optional | The name of the plan. |
-| `Phases` | [`IList<Models.SubscriptionPhase>`](/doc/models/subscription-phase.md) | Optional | A list of SubscriptionPhase containing the [SubscriptionPhase](#type-SubscriptionPhase) for this plan. |
+| `Phases` | [`IList<Models.SubscriptionPhase>`](/doc/models/subscription-phase.md) | Optional | A list of SubscriptionPhase containing the [SubscriptionPhase](/doc/models/subscription-phase.md) for this plan. |
 
 ## Example (as JSON)
 

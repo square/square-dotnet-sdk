@@ -1,35 +1,46 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class TeamMemberBookingProfile 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// TeamMemberBookingProfile.
+    /// </summary>
+    public class TeamMemberBookingProfile
     {
-        public TeamMemberBookingProfile(string teamMemberId = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TeamMemberBookingProfile"/> class.
+        /// </summary>
+        /// <param name="teamMemberId">team_member_id.</param>
+        /// <param name="description">description.</param>
+        /// <param name="displayName">display_name.</param>
+        /// <param name="isBookable">is_bookable.</param>
+        /// <param name="profileImageUrl">profile_image_url.</param>
+        public TeamMemberBookingProfile(
+            string teamMemberId = null,
             string description = null,
             string displayName = null,
             bool? isBookable = null,
             string profileImageUrl = null)
         {
-            TeamMemberId = teamMemberId;
-            Description = description;
-            DisplayName = displayName;
-            IsBookable = isBookable;
-            ProfileImageUrl = profileImageUrl;
+            this.TeamMemberId = teamMemberId;
+            this.Description = description;
+            this.DisplayName = displayName;
+            this.IsBookable = isBookable;
+            this.ProfileImageUrl = profileImageUrl;
         }
 
         /// <summary>
-        /// The ID of the [TeamMember](#type-TeamMember) object for the team member associated with the booking profile.
+        /// The ID of the [TeamMember]($m/TeamMember) object for the team member associated with the booking profile.
         /// </summary>
         [JsonProperty("team_member_id", NullValueHandling = NullValueHandling.Ignore)]
         public string TeamMemberId { get; }
@@ -58,6 +69,7 @@ namespace Square.Models
         [JsonProperty("profile_image_url", NullValueHandling = NullValueHandling.Ignore)]
         public string ProfileImageUrl { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -67,15 +79,7 @@ namespace Square.Models
             return $"TeamMemberBookingProfile : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"TeamMemberId = {(TeamMemberId == null ? "null" : TeamMemberId == string.Empty ? "" : TeamMemberId)}");
-            toStringOutput.Add($"Description = {(Description == null ? "null" : Description == string.Empty ? "" : Description)}");
-            toStringOutput.Add($"DisplayName = {(DisplayName == null ? "null" : DisplayName == string.Empty ? "" : DisplayName)}");
-            toStringOutput.Add($"IsBookable = {(IsBookable == null ? "null" : IsBookable.ToString())}");
-            toStringOutput.Add($"ProfileImageUrl = {(ProfileImageUrl == null ? "null" : ProfileImageUrl == string.Empty ? "" : ProfileImageUrl)}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -89,56 +93,77 @@ namespace Square.Models
             }
 
             return obj is TeamMemberBookingProfile other &&
-                ((TeamMemberId == null && other.TeamMemberId == null) || (TeamMemberId?.Equals(other.TeamMemberId) == true)) &&
-                ((Description == null && other.Description == null) || (Description?.Equals(other.Description) == true)) &&
-                ((DisplayName == null && other.DisplayName == null) || (DisplayName?.Equals(other.DisplayName) == true)) &&
-                ((IsBookable == null && other.IsBookable == null) || (IsBookable?.Equals(other.IsBookable) == true)) &&
-                ((ProfileImageUrl == null && other.ProfileImageUrl == null) || (ProfileImageUrl?.Equals(other.ProfileImageUrl) == true));
+                ((this.TeamMemberId == null && other.TeamMemberId == null) || (this.TeamMemberId?.Equals(other.TeamMemberId) == true)) &&
+                ((this.Description == null && other.Description == null) || (this.Description?.Equals(other.Description) == true)) &&
+                ((this.DisplayName == null && other.DisplayName == null) || (this.DisplayName?.Equals(other.DisplayName) == true)) &&
+                ((this.IsBookable == null && other.IsBookable == null) || (this.IsBookable?.Equals(other.IsBookable) == true)) &&
+                ((this.ProfileImageUrl == null && other.ProfileImageUrl == null) || (this.ProfileImageUrl?.Equals(other.ProfileImageUrl) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1821243729;
 
-            if (TeamMemberId != null)
+            if (this.TeamMemberId != null)
             {
-               hashCode += TeamMemberId.GetHashCode();
+               hashCode += this.TeamMemberId.GetHashCode();
             }
 
-            if (Description != null)
+            if (this.Description != null)
             {
-               hashCode += Description.GetHashCode();
+               hashCode += this.Description.GetHashCode();
             }
 
-            if (DisplayName != null)
+            if (this.DisplayName != null)
             {
-               hashCode += DisplayName.GetHashCode();
+               hashCode += this.DisplayName.GetHashCode();
             }
 
-            if (IsBookable != null)
+            if (this.IsBookable != null)
             {
-               hashCode += IsBookable.GetHashCode();
+               hashCode += this.IsBookable.GetHashCode();
             }
 
-            if (ProfileImageUrl != null)
+            if (this.ProfileImageUrl != null)
             {
-               hashCode += ProfileImageUrl.GetHashCode();
+               hashCode += this.ProfileImageUrl.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.TeamMemberId = {(this.TeamMemberId == null ? "null" : this.TeamMemberId == string.Empty ? "" : this.TeamMemberId)}");
+            toStringOutput.Add($"this.Description = {(this.Description == null ? "null" : this.Description == string.Empty ? "" : this.Description)}");
+            toStringOutput.Add($"this.DisplayName = {(this.DisplayName == null ? "null" : this.DisplayName == string.Empty ? "" : this.DisplayName)}");
+            toStringOutput.Add($"this.IsBookable = {(this.IsBookable == null ? "null" : this.IsBookable.ToString())}");
+            toStringOutput.Add($"this.ProfileImageUrl = {(this.ProfileImageUrl == null ? "null" : this.ProfileImageUrl == string.Empty ? "" : this.ProfileImageUrl)}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .TeamMemberId(TeamMemberId)
-                .Description(Description)
-                .DisplayName(DisplayName)
-                .IsBookable(IsBookable)
-                .ProfileImageUrl(ProfileImageUrl);
+                .TeamMemberId(this.TeamMemberId)
+                .Description(this.Description)
+                .DisplayName(this.DisplayName)
+                .IsBookable(this.IsBookable)
+                .ProfileImageUrl(this.ProfileImageUrl);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string teamMemberId;
@@ -147,45 +172,73 @@ namespace Square.Models
             private bool? isBookable;
             private string profileImageUrl;
 
-
-
+             /// <summary>
+             /// TeamMemberId.
+             /// </summary>
+             /// <param name="teamMemberId"> teamMemberId. </param>
+             /// <returns> Builder. </returns>
             public Builder TeamMemberId(string teamMemberId)
             {
                 this.teamMemberId = teamMemberId;
                 return this;
             }
 
+             /// <summary>
+             /// Description.
+             /// </summary>
+             /// <param name="description"> description. </param>
+             /// <returns> Builder. </returns>
             public Builder Description(string description)
             {
                 this.description = description;
                 return this;
             }
 
+             /// <summary>
+             /// DisplayName.
+             /// </summary>
+             /// <param name="displayName"> displayName. </param>
+             /// <returns> Builder. </returns>
             public Builder DisplayName(string displayName)
             {
                 this.displayName = displayName;
                 return this;
             }
 
+             /// <summary>
+             /// IsBookable.
+             /// </summary>
+             /// <param name="isBookable"> isBookable. </param>
+             /// <returns> Builder. </returns>
             public Builder IsBookable(bool? isBookable)
             {
                 this.isBookable = isBookable;
                 return this;
             }
 
+             /// <summary>
+             /// ProfileImageUrl.
+             /// </summary>
+             /// <param name="profileImageUrl"> profileImageUrl. </param>
+             /// <returns> Builder. </returns>
             public Builder ProfileImageUrl(string profileImageUrl)
             {
                 this.profileImageUrl = profileImageUrl;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> TeamMemberBookingProfile. </returns>
             public TeamMemberBookingProfile Build()
             {
-                return new TeamMemberBookingProfile(teamMemberId,
-                    description,
-                    displayName,
-                    isBookable,
-                    profileImageUrl);
+                return new TeamMemberBookingProfile(
+                    this.teamMemberId,
+                    this.description,
+                    this.displayName,
+                    this.isBookable,
+                    this.profileImageUrl);
             }
         }
     }

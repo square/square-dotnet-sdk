@@ -1,21 +1,44 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class OrderReturnLineItem 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// OrderReturnLineItem.
+    /// </summary>
+    public class OrderReturnLineItem
     {
-        public OrderReturnLineItem(string quantity,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="OrderReturnLineItem"/> class.
+        /// </summary>
+        /// <param name="quantity">quantity.</param>
+        /// <param name="uid">uid.</param>
+        /// <param name="sourceLineItemUid">source_line_item_uid.</param>
+        /// <param name="name">name.</param>
+        /// <param name="quantityUnit">quantity_unit.</param>
+        /// <param name="note">note.</param>
+        /// <param name="catalogObjectId">catalog_object_id.</param>
+        /// <param name="variationName">variation_name.</param>
+        /// <param name="returnModifiers">return_modifiers.</param>
+        /// <param name="appliedTaxes">applied_taxes.</param>
+        /// <param name="appliedDiscounts">applied_discounts.</param>
+        /// <param name="basePriceMoney">base_price_money.</param>
+        /// <param name="variationTotalPriceMoney">variation_total_price_money.</param>
+        /// <param name="grossReturnMoney">gross_return_money.</param>
+        /// <param name="totalTaxMoney">total_tax_money.</param>
+        /// <param name="totalDiscountMoney">total_discount_money.</param>
+        /// <param name="totalMoney">total_money.</param>
+        public OrderReturnLineItem(
+            string quantity,
             string uid = null,
             string sourceLineItemUid = null,
             string name = null,
@@ -33,23 +56,23 @@ namespace Square.Models
             Models.Money totalDiscountMoney = null,
             Models.Money totalMoney = null)
         {
-            Uid = uid;
-            SourceLineItemUid = sourceLineItemUid;
-            Name = name;
-            Quantity = quantity;
-            QuantityUnit = quantityUnit;
-            Note = note;
-            CatalogObjectId = catalogObjectId;
-            VariationName = variationName;
-            ReturnModifiers = returnModifiers;
-            AppliedTaxes = appliedTaxes;
-            AppliedDiscounts = appliedDiscounts;
-            BasePriceMoney = basePriceMoney;
-            VariationTotalPriceMoney = variationTotalPriceMoney;
-            GrossReturnMoney = grossReturnMoney;
-            TotalTaxMoney = totalTaxMoney;
-            TotalDiscountMoney = totalDiscountMoney;
-            TotalMoney = totalMoney;
+            this.Uid = uid;
+            this.SourceLineItemUid = sourceLineItemUid;
+            this.Name = name;
+            this.Quantity = quantity;
+            this.QuantityUnit = quantityUnit;
+            this.Note = note;
+            this.CatalogObjectId = catalogObjectId;
+            this.VariationName = variationName;
+            this.ReturnModifiers = returnModifiers;
+            this.AppliedTaxes = appliedTaxes;
+            this.AppliedDiscounts = appliedDiscounts;
+            this.BasePriceMoney = basePriceMoney;
+            this.VariationTotalPriceMoney = variationTotalPriceMoney;
+            this.GrossReturnMoney = grossReturnMoney;
+            this.TotalTaxMoney = totalTaxMoney;
+            this.TotalDiscountMoney = totalDiscountMoney;
+            this.TotalMoney = totalMoney;
         }
 
         /// <summary>
@@ -93,7 +116,7 @@ namespace Square.Models
         public string Note { get; }
 
         /// <summary>
-        /// The [CatalogItemVariation](#type-catalogitemvariation) id applied to this returned line item.
+        /// The [CatalogItemVariation]($m/CatalogItemVariation) id applied to this returned line item.
         /// </summary>
         [JsonProperty("catalog_object_id", NullValueHandling = NullValueHandling.Ignore)]
         public string CatalogObjectId { get; }
@@ -105,7 +128,7 @@ namespace Square.Models
         public string VariationName { get; }
 
         /// <summary>
-        /// The [CatalogModifier](#type-catalogmodifier)s applied to this line item.
+        /// The [CatalogModifier]($m/CatalogModifier)s applied to this line item.
         /// </summary>
         [JsonProperty("return_modifiers", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.OrderReturnLineItemModifier> ReturnModifiers { get; }
@@ -194,6 +217,7 @@ namespace Square.Models
         [JsonProperty("total_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Money TotalMoney { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -203,27 +227,7 @@ namespace Square.Models
             return $"OrderReturnLineItem : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Uid = {(Uid == null ? "null" : Uid == string.Empty ? "" : Uid)}");
-            toStringOutput.Add($"SourceLineItemUid = {(SourceLineItemUid == null ? "null" : SourceLineItemUid == string.Empty ? "" : SourceLineItemUid)}");
-            toStringOutput.Add($"Name = {(Name == null ? "null" : Name == string.Empty ? "" : Name)}");
-            toStringOutput.Add($"Quantity = {(Quantity == null ? "null" : Quantity == string.Empty ? "" : Quantity)}");
-            toStringOutput.Add($"QuantityUnit = {(QuantityUnit == null ? "null" : QuantityUnit.ToString())}");
-            toStringOutput.Add($"Note = {(Note == null ? "null" : Note == string.Empty ? "" : Note)}");
-            toStringOutput.Add($"CatalogObjectId = {(CatalogObjectId == null ? "null" : CatalogObjectId == string.Empty ? "" : CatalogObjectId)}");
-            toStringOutput.Add($"VariationName = {(VariationName == null ? "null" : VariationName == string.Empty ? "" : VariationName)}");
-            toStringOutput.Add($"ReturnModifiers = {(ReturnModifiers == null ? "null" : $"[{ string.Join(", ", ReturnModifiers)} ]")}");
-            toStringOutput.Add($"AppliedTaxes = {(AppliedTaxes == null ? "null" : $"[{ string.Join(", ", AppliedTaxes)} ]")}");
-            toStringOutput.Add($"AppliedDiscounts = {(AppliedDiscounts == null ? "null" : $"[{ string.Join(", ", AppliedDiscounts)} ]")}");
-            toStringOutput.Add($"BasePriceMoney = {(BasePriceMoney == null ? "null" : BasePriceMoney.ToString())}");
-            toStringOutput.Add($"VariationTotalPriceMoney = {(VariationTotalPriceMoney == null ? "null" : VariationTotalPriceMoney.ToString())}");
-            toStringOutput.Add($"GrossReturnMoney = {(GrossReturnMoney == null ? "null" : GrossReturnMoney.ToString())}");
-            toStringOutput.Add($"TotalTaxMoney = {(TotalTaxMoney == null ? "null" : TotalTaxMoney.ToString())}");
-            toStringOutput.Add($"TotalDiscountMoney = {(TotalDiscountMoney == null ? "null" : TotalDiscountMoney.ToString())}");
-            toStringOutput.Add($"TotalMoney = {(TotalMoney == null ? "null" : TotalMoney.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -237,139 +241,173 @@ namespace Square.Models
             }
 
             return obj is OrderReturnLineItem other &&
-                ((Uid == null && other.Uid == null) || (Uid?.Equals(other.Uid) == true)) &&
-                ((SourceLineItemUid == null && other.SourceLineItemUid == null) || (SourceLineItemUid?.Equals(other.SourceLineItemUid) == true)) &&
-                ((Name == null && other.Name == null) || (Name?.Equals(other.Name) == true)) &&
-                ((Quantity == null && other.Quantity == null) || (Quantity?.Equals(other.Quantity) == true)) &&
-                ((QuantityUnit == null && other.QuantityUnit == null) || (QuantityUnit?.Equals(other.QuantityUnit) == true)) &&
-                ((Note == null && other.Note == null) || (Note?.Equals(other.Note) == true)) &&
-                ((CatalogObjectId == null && other.CatalogObjectId == null) || (CatalogObjectId?.Equals(other.CatalogObjectId) == true)) &&
-                ((VariationName == null && other.VariationName == null) || (VariationName?.Equals(other.VariationName) == true)) &&
-                ((ReturnModifiers == null && other.ReturnModifiers == null) || (ReturnModifiers?.Equals(other.ReturnModifiers) == true)) &&
-                ((AppliedTaxes == null && other.AppliedTaxes == null) || (AppliedTaxes?.Equals(other.AppliedTaxes) == true)) &&
-                ((AppliedDiscounts == null && other.AppliedDiscounts == null) || (AppliedDiscounts?.Equals(other.AppliedDiscounts) == true)) &&
-                ((BasePriceMoney == null && other.BasePriceMoney == null) || (BasePriceMoney?.Equals(other.BasePriceMoney) == true)) &&
-                ((VariationTotalPriceMoney == null && other.VariationTotalPriceMoney == null) || (VariationTotalPriceMoney?.Equals(other.VariationTotalPriceMoney) == true)) &&
-                ((GrossReturnMoney == null && other.GrossReturnMoney == null) || (GrossReturnMoney?.Equals(other.GrossReturnMoney) == true)) &&
-                ((TotalTaxMoney == null && other.TotalTaxMoney == null) || (TotalTaxMoney?.Equals(other.TotalTaxMoney) == true)) &&
-                ((TotalDiscountMoney == null && other.TotalDiscountMoney == null) || (TotalDiscountMoney?.Equals(other.TotalDiscountMoney) == true)) &&
-                ((TotalMoney == null && other.TotalMoney == null) || (TotalMoney?.Equals(other.TotalMoney) == true));
+                ((this.Uid == null && other.Uid == null) || (this.Uid?.Equals(other.Uid) == true)) &&
+                ((this.SourceLineItemUid == null && other.SourceLineItemUid == null) || (this.SourceLineItemUid?.Equals(other.SourceLineItemUid) == true)) &&
+                ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
+                ((this.Quantity == null && other.Quantity == null) || (this.Quantity?.Equals(other.Quantity) == true)) &&
+                ((this.QuantityUnit == null && other.QuantityUnit == null) || (this.QuantityUnit?.Equals(other.QuantityUnit) == true)) &&
+                ((this.Note == null && other.Note == null) || (this.Note?.Equals(other.Note) == true)) &&
+                ((this.CatalogObjectId == null && other.CatalogObjectId == null) || (this.CatalogObjectId?.Equals(other.CatalogObjectId) == true)) &&
+                ((this.VariationName == null && other.VariationName == null) || (this.VariationName?.Equals(other.VariationName) == true)) &&
+                ((this.ReturnModifiers == null && other.ReturnModifiers == null) || (this.ReturnModifiers?.Equals(other.ReturnModifiers) == true)) &&
+                ((this.AppliedTaxes == null && other.AppliedTaxes == null) || (this.AppliedTaxes?.Equals(other.AppliedTaxes) == true)) &&
+                ((this.AppliedDiscounts == null && other.AppliedDiscounts == null) || (this.AppliedDiscounts?.Equals(other.AppliedDiscounts) == true)) &&
+                ((this.BasePriceMoney == null && other.BasePriceMoney == null) || (this.BasePriceMoney?.Equals(other.BasePriceMoney) == true)) &&
+                ((this.VariationTotalPriceMoney == null && other.VariationTotalPriceMoney == null) || (this.VariationTotalPriceMoney?.Equals(other.VariationTotalPriceMoney) == true)) &&
+                ((this.GrossReturnMoney == null && other.GrossReturnMoney == null) || (this.GrossReturnMoney?.Equals(other.GrossReturnMoney) == true)) &&
+                ((this.TotalTaxMoney == null && other.TotalTaxMoney == null) || (this.TotalTaxMoney?.Equals(other.TotalTaxMoney) == true)) &&
+                ((this.TotalDiscountMoney == null && other.TotalDiscountMoney == null) || (this.TotalDiscountMoney?.Equals(other.TotalDiscountMoney) == true)) &&
+                ((this.TotalMoney == null && other.TotalMoney == null) || (this.TotalMoney?.Equals(other.TotalMoney) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 1299728447;
 
-            if (Uid != null)
+            if (this.Uid != null)
             {
-               hashCode += Uid.GetHashCode();
+               hashCode += this.Uid.GetHashCode();
             }
 
-            if (SourceLineItemUid != null)
+            if (this.SourceLineItemUid != null)
             {
-               hashCode += SourceLineItemUid.GetHashCode();
+               hashCode += this.SourceLineItemUid.GetHashCode();
             }
 
-            if (Name != null)
+            if (this.Name != null)
             {
-               hashCode += Name.GetHashCode();
+               hashCode += this.Name.GetHashCode();
             }
 
-            if (Quantity != null)
+            if (this.Quantity != null)
             {
-               hashCode += Quantity.GetHashCode();
+               hashCode += this.Quantity.GetHashCode();
             }
 
-            if (QuantityUnit != null)
+            if (this.QuantityUnit != null)
             {
-               hashCode += QuantityUnit.GetHashCode();
+               hashCode += this.QuantityUnit.GetHashCode();
             }
 
-            if (Note != null)
+            if (this.Note != null)
             {
-               hashCode += Note.GetHashCode();
+               hashCode += this.Note.GetHashCode();
             }
 
-            if (CatalogObjectId != null)
+            if (this.CatalogObjectId != null)
             {
-               hashCode += CatalogObjectId.GetHashCode();
+               hashCode += this.CatalogObjectId.GetHashCode();
             }
 
-            if (VariationName != null)
+            if (this.VariationName != null)
             {
-               hashCode += VariationName.GetHashCode();
+               hashCode += this.VariationName.GetHashCode();
             }
 
-            if (ReturnModifiers != null)
+            if (this.ReturnModifiers != null)
             {
-               hashCode += ReturnModifiers.GetHashCode();
+               hashCode += this.ReturnModifiers.GetHashCode();
             }
 
-            if (AppliedTaxes != null)
+            if (this.AppliedTaxes != null)
             {
-               hashCode += AppliedTaxes.GetHashCode();
+               hashCode += this.AppliedTaxes.GetHashCode();
             }
 
-            if (AppliedDiscounts != null)
+            if (this.AppliedDiscounts != null)
             {
-               hashCode += AppliedDiscounts.GetHashCode();
+               hashCode += this.AppliedDiscounts.GetHashCode();
             }
 
-            if (BasePriceMoney != null)
+            if (this.BasePriceMoney != null)
             {
-               hashCode += BasePriceMoney.GetHashCode();
+               hashCode += this.BasePriceMoney.GetHashCode();
             }
 
-            if (VariationTotalPriceMoney != null)
+            if (this.VariationTotalPriceMoney != null)
             {
-               hashCode += VariationTotalPriceMoney.GetHashCode();
+               hashCode += this.VariationTotalPriceMoney.GetHashCode();
             }
 
-            if (GrossReturnMoney != null)
+            if (this.GrossReturnMoney != null)
             {
-               hashCode += GrossReturnMoney.GetHashCode();
+               hashCode += this.GrossReturnMoney.GetHashCode();
             }
 
-            if (TotalTaxMoney != null)
+            if (this.TotalTaxMoney != null)
             {
-               hashCode += TotalTaxMoney.GetHashCode();
+               hashCode += this.TotalTaxMoney.GetHashCode();
             }
 
-            if (TotalDiscountMoney != null)
+            if (this.TotalDiscountMoney != null)
             {
-               hashCode += TotalDiscountMoney.GetHashCode();
+               hashCode += this.TotalDiscountMoney.GetHashCode();
             }
 
-            if (TotalMoney != null)
+            if (this.TotalMoney != null)
             {
-               hashCode += TotalMoney.GetHashCode();
+               hashCode += this.TotalMoney.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Uid = {(this.Uid == null ? "null" : this.Uid == string.Empty ? "" : this.Uid)}");
+            toStringOutput.Add($"this.SourceLineItemUid = {(this.SourceLineItemUid == null ? "null" : this.SourceLineItemUid == string.Empty ? "" : this.SourceLineItemUid)}");
+            toStringOutput.Add($"this.Name = {(this.Name == null ? "null" : this.Name == string.Empty ? "" : this.Name)}");
+            toStringOutput.Add($"this.Quantity = {(this.Quantity == null ? "null" : this.Quantity == string.Empty ? "" : this.Quantity)}");
+            toStringOutput.Add($"this.QuantityUnit = {(this.QuantityUnit == null ? "null" : this.QuantityUnit.ToString())}");
+            toStringOutput.Add($"this.Note = {(this.Note == null ? "null" : this.Note == string.Empty ? "" : this.Note)}");
+            toStringOutput.Add($"this.CatalogObjectId = {(this.CatalogObjectId == null ? "null" : this.CatalogObjectId == string.Empty ? "" : this.CatalogObjectId)}");
+            toStringOutput.Add($"this.VariationName = {(this.VariationName == null ? "null" : this.VariationName == string.Empty ? "" : this.VariationName)}");
+            toStringOutput.Add($"this.ReturnModifiers = {(this.ReturnModifiers == null ? "null" : $"[{string.Join(", ", this.ReturnModifiers)} ]")}");
+            toStringOutput.Add($"this.AppliedTaxes = {(this.AppliedTaxes == null ? "null" : $"[{string.Join(", ", this.AppliedTaxes)} ]")}");
+            toStringOutput.Add($"this.AppliedDiscounts = {(this.AppliedDiscounts == null ? "null" : $"[{string.Join(", ", this.AppliedDiscounts)} ]")}");
+            toStringOutput.Add($"this.BasePriceMoney = {(this.BasePriceMoney == null ? "null" : this.BasePriceMoney.ToString())}");
+            toStringOutput.Add($"this.VariationTotalPriceMoney = {(this.VariationTotalPriceMoney == null ? "null" : this.VariationTotalPriceMoney.ToString())}");
+            toStringOutput.Add($"this.GrossReturnMoney = {(this.GrossReturnMoney == null ? "null" : this.GrossReturnMoney.ToString())}");
+            toStringOutput.Add($"this.TotalTaxMoney = {(this.TotalTaxMoney == null ? "null" : this.TotalTaxMoney.ToString())}");
+            toStringOutput.Add($"this.TotalDiscountMoney = {(this.TotalDiscountMoney == null ? "null" : this.TotalDiscountMoney.ToString())}");
+            toStringOutput.Add($"this.TotalMoney = {(this.TotalMoney == null ? "null" : this.TotalMoney.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
-            var builder = new Builder(Quantity)
-                .Uid(Uid)
-                .SourceLineItemUid(SourceLineItemUid)
-                .Name(Name)
-                .QuantityUnit(QuantityUnit)
-                .Note(Note)
-                .CatalogObjectId(CatalogObjectId)
-                .VariationName(VariationName)
-                .ReturnModifiers(ReturnModifiers)
-                .AppliedTaxes(AppliedTaxes)
-                .AppliedDiscounts(AppliedDiscounts)
-                .BasePriceMoney(BasePriceMoney)
-                .VariationTotalPriceMoney(VariationTotalPriceMoney)
-                .GrossReturnMoney(GrossReturnMoney)
-                .TotalTaxMoney(TotalTaxMoney)
-                .TotalDiscountMoney(TotalDiscountMoney)
-                .TotalMoney(TotalMoney);
+            var builder = new Builder(
+                this.Quantity)
+                .Uid(this.Uid)
+                .SourceLineItemUid(this.SourceLineItemUid)
+                .Name(this.Name)
+                .QuantityUnit(this.QuantityUnit)
+                .Note(this.Note)
+                .CatalogObjectId(this.CatalogObjectId)
+                .VariationName(this.VariationName)
+                .ReturnModifiers(this.ReturnModifiers)
+                .AppliedTaxes(this.AppliedTaxes)
+                .AppliedDiscounts(this.AppliedDiscounts)
+                .BasePriceMoney(this.BasePriceMoney)
+                .VariationTotalPriceMoney(this.VariationTotalPriceMoney)
+                .GrossReturnMoney(this.GrossReturnMoney)
+                .TotalTaxMoney(this.TotalTaxMoney)
+                .TotalDiscountMoney(this.TotalDiscountMoney)
+                .TotalMoney(this.TotalMoney);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string quantity;
@@ -390,132 +428,223 @@ namespace Square.Models
             private Models.Money totalDiscountMoney;
             private Models.Money totalMoney;
 
-            public Builder(string quantity)
+            public Builder(
+                string quantity)
             {
                 this.quantity = quantity;
             }
 
+             /// <summary>
+             /// Quantity.
+             /// </summary>
+             /// <param name="quantity"> quantity. </param>
+             /// <returns> Builder. </returns>
             public Builder Quantity(string quantity)
             {
                 this.quantity = quantity;
                 return this;
             }
 
+             /// <summary>
+             /// Uid.
+             /// </summary>
+             /// <param name="uid"> uid. </param>
+             /// <returns> Builder. </returns>
             public Builder Uid(string uid)
             {
                 this.uid = uid;
                 return this;
             }
 
+             /// <summary>
+             /// SourceLineItemUid.
+             /// </summary>
+             /// <param name="sourceLineItemUid"> sourceLineItemUid. </param>
+             /// <returns> Builder. </returns>
             public Builder SourceLineItemUid(string sourceLineItemUid)
             {
                 this.sourceLineItemUid = sourceLineItemUid;
                 return this;
             }
 
+             /// <summary>
+             /// Name.
+             /// </summary>
+             /// <param name="name"> name. </param>
+             /// <returns> Builder. </returns>
             public Builder Name(string name)
             {
                 this.name = name;
                 return this;
             }
 
+             /// <summary>
+             /// QuantityUnit.
+             /// </summary>
+             /// <param name="quantityUnit"> quantityUnit. </param>
+             /// <returns> Builder. </returns>
             public Builder QuantityUnit(Models.OrderQuantityUnit quantityUnit)
             {
                 this.quantityUnit = quantityUnit;
                 return this;
             }
 
+             /// <summary>
+             /// Note.
+             /// </summary>
+             /// <param name="note"> note. </param>
+             /// <returns> Builder. </returns>
             public Builder Note(string note)
             {
                 this.note = note;
                 return this;
             }
 
+             /// <summary>
+             /// CatalogObjectId.
+             /// </summary>
+             /// <param name="catalogObjectId"> catalogObjectId. </param>
+             /// <returns> Builder. </returns>
             public Builder CatalogObjectId(string catalogObjectId)
             {
                 this.catalogObjectId = catalogObjectId;
                 return this;
             }
 
+             /// <summary>
+             /// VariationName.
+             /// </summary>
+             /// <param name="variationName"> variationName. </param>
+             /// <returns> Builder. </returns>
             public Builder VariationName(string variationName)
             {
                 this.variationName = variationName;
                 return this;
             }
 
+             /// <summary>
+             /// ReturnModifiers.
+             /// </summary>
+             /// <param name="returnModifiers"> returnModifiers. </param>
+             /// <returns> Builder. </returns>
             public Builder ReturnModifiers(IList<Models.OrderReturnLineItemModifier> returnModifiers)
             {
                 this.returnModifiers = returnModifiers;
                 return this;
             }
 
+             /// <summary>
+             /// AppliedTaxes.
+             /// </summary>
+             /// <param name="appliedTaxes"> appliedTaxes. </param>
+             /// <returns> Builder. </returns>
             public Builder AppliedTaxes(IList<Models.OrderLineItemAppliedTax> appliedTaxes)
             {
                 this.appliedTaxes = appliedTaxes;
                 return this;
             }
 
+             /// <summary>
+             /// AppliedDiscounts.
+             /// </summary>
+             /// <param name="appliedDiscounts"> appliedDiscounts. </param>
+             /// <returns> Builder. </returns>
             public Builder AppliedDiscounts(IList<Models.OrderLineItemAppliedDiscount> appliedDiscounts)
             {
                 this.appliedDiscounts = appliedDiscounts;
                 return this;
             }
 
+             /// <summary>
+             /// BasePriceMoney.
+             /// </summary>
+             /// <param name="basePriceMoney"> basePriceMoney. </param>
+             /// <returns> Builder. </returns>
             public Builder BasePriceMoney(Models.Money basePriceMoney)
             {
                 this.basePriceMoney = basePriceMoney;
                 return this;
             }
 
+             /// <summary>
+             /// VariationTotalPriceMoney.
+             /// </summary>
+             /// <param name="variationTotalPriceMoney"> variationTotalPriceMoney. </param>
+             /// <returns> Builder. </returns>
             public Builder VariationTotalPriceMoney(Models.Money variationTotalPriceMoney)
             {
                 this.variationTotalPriceMoney = variationTotalPriceMoney;
                 return this;
             }
 
+             /// <summary>
+             /// GrossReturnMoney.
+             /// </summary>
+             /// <param name="grossReturnMoney"> grossReturnMoney. </param>
+             /// <returns> Builder. </returns>
             public Builder GrossReturnMoney(Models.Money grossReturnMoney)
             {
                 this.grossReturnMoney = grossReturnMoney;
                 return this;
             }
 
+             /// <summary>
+             /// TotalTaxMoney.
+             /// </summary>
+             /// <param name="totalTaxMoney"> totalTaxMoney. </param>
+             /// <returns> Builder. </returns>
             public Builder TotalTaxMoney(Models.Money totalTaxMoney)
             {
                 this.totalTaxMoney = totalTaxMoney;
                 return this;
             }
 
+             /// <summary>
+             /// TotalDiscountMoney.
+             /// </summary>
+             /// <param name="totalDiscountMoney"> totalDiscountMoney. </param>
+             /// <returns> Builder. </returns>
             public Builder TotalDiscountMoney(Models.Money totalDiscountMoney)
             {
                 this.totalDiscountMoney = totalDiscountMoney;
                 return this;
             }
 
+             /// <summary>
+             /// TotalMoney.
+             /// </summary>
+             /// <param name="totalMoney"> totalMoney. </param>
+             /// <returns> Builder. </returns>
             public Builder TotalMoney(Models.Money totalMoney)
             {
                 this.totalMoney = totalMoney;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> OrderReturnLineItem. </returns>
             public OrderReturnLineItem Build()
             {
-                return new OrderReturnLineItem(quantity,
-                    uid,
-                    sourceLineItemUid,
-                    name,
-                    quantityUnit,
-                    note,
-                    catalogObjectId,
-                    variationName,
-                    returnModifiers,
-                    appliedTaxes,
-                    appliedDiscounts,
-                    basePriceMoney,
-                    variationTotalPriceMoney,
-                    grossReturnMoney,
-                    totalTaxMoney,
-                    totalDiscountMoney,
-                    totalMoney);
+                return new OrderReturnLineItem(
+                    this.quantity,
+                    this.uid,
+                    this.sourceLineItemUid,
+                    this.name,
+                    this.quantityUnit,
+                    this.note,
+                    this.catalogObjectId,
+                    this.variationName,
+                    this.returnModifiers,
+                    this.appliedTaxes,
+                    this.appliedDiscounts,
+                    this.basePriceMoney,
+                    this.variationTotalPriceMoney,
+                    this.grossReturnMoney,
+                    this.totalTaxMoney,
+                    this.totalDiscountMoney,
+                    this.totalMoney);
             }
         }
     }

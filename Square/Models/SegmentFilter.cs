@@ -1,29 +1,37 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class SegmentFilter 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// SegmentFilter.
+    /// </summary>
+    public class SegmentFilter
     {
-        public SegmentFilter(string serviceVariationId,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SegmentFilter"/> class.
+        /// </summary>
+        /// <param name="serviceVariationId">service_variation_id.</param>
+        /// <param name="teamMemberIdFilter">team_member_id_filter.</param>
+        public SegmentFilter(
+            string serviceVariationId,
             Models.FilterValue teamMemberIdFilter = null)
         {
-            ServiceVariationId = serviceVariationId;
-            TeamMemberIdFilter = teamMemberIdFilter;
+            this.ServiceVariationId = serviceVariationId;
+            this.TeamMemberIdFilter = teamMemberIdFilter;
         }
 
         /// <summary>
-        /// The ID of the [CatalogItemVariation](#type-CatalogItemVariation) representing the service booked in this segment.
+        /// The ID of the [CatalogItemVariation]($m/CatalogItemVariation) representing the service booked in this segment.
         /// </summary>
         [JsonProperty("service_variation_id")]
         public string ServiceVariationId { get; }
@@ -37,6 +45,7 @@ namespace Square.Models
         [JsonProperty("team_member_id_filter", NullValueHandling = NullValueHandling.Ignore)]
         public Models.FilterValue TeamMemberIdFilter { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -46,12 +55,7 @@ namespace Square.Models
             return $"SegmentFilter : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"ServiceVariationId = {(ServiceVariationId == null ? "null" : ServiceVariationId == string.Empty ? "" : ServiceVariationId)}");
-            toStringOutput.Add($"TeamMemberIdFilter = {(TeamMemberIdFilter == null ? "null" : TeamMemberIdFilter.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -65,60 +69,95 @@ namespace Square.Models
             }
 
             return obj is SegmentFilter other &&
-                ((ServiceVariationId == null && other.ServiceVariationId == null) || (ServiceVariationId?.Equals(other.ServiceVariationId) == true)) &&
-                ((TeamMemberIdFilter == null && other.TeamMemberIdFilter == null) || (TeamMemberIdFilter?.Equals(other.TeamMemberIdFilter) == true));
+                ((this.ServiceVariationId == null && other.ServiceVariationId == null) || (this.ServiceVariationId?.Equals(other.ServiceVariationId) == true)) &&
+                ((this.TeamMemberIdFilter == null && other.TeamMemberIdFilter == null) || (this.TeamMemberIdFilter?.Equals(other.TeamMemberIdFilter) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -2080323319;
 
-            if (ServiceVariationId != null)
+            if (this.ServiceVariationId != null)
             {
-               hashCode += ServiceVariationId.GetHashCode();
+               hashCode += this.ServiceVariationId.GetHashCode();
             }
 
-            if (TeamMemberIdFilter != null)
+            if (this.TeamMemberIdFilter != null)
             {
-               hashCode += TeamMemberIdFilter.GetHashCode();
+               hashCode += this.TeamMemberIdFilter.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.ServiceVariationId = {(this.ServiceVariationId == null ? "null" : this.ServiceVariationId == string.Empty ? "" : this.ServiceVariationId)}");
+            toStringOutput.Add($"this.TeamMemberIdFilter = {(this.TeamMemberIdFilter == null ? "null" : this.TeamMemberIdFilter.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
-            var builder = new Builder(ServiceVariationId)
-                .TeamMemberIdFilter(TeamMemberIdFilter);
+            var builder = new Builder(
+                this.ServiceVariationId)
+                .TeamMemberIdFilter(this.TeamMemberIdFilter);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string serviceVariationId;
             private Models.FilterValue teamMemberIdFilter;
 
-            public Builder(string serviceVariationId)
+            public Builder(
+                string serviceVariationId)
             {
                 this.serviceVariationId = serviceVariationId;
             }
 
+             /// <summary>
+             /// ServiceVariationId.
+             /// </summary>
+             /// <param name="serviceVariationId"> serviceVariationId. </param>
+             /// <returns> Builder. </returns>
             public Builder ServiceVariationId(string serviceVariationId)
             {
                 this.serviceVariationId = serviceVariationId;
                 return this;
             }
 
+             /// <summary>
+             /// TeamMemberIdFilter.
+             /// </summary>
+             /// <param name="teamMemberIdFilter"> teamMemberIdFilter. </param>
+             /// <returns> Builder. </returns>
             public Builder TeamMemberIdFilter(Models.FilterValue teamMemberIdFilter)
             {
                 this.teamMemberIdFilter = teamMemberIdFilter;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> SegmentFilter. </returns>
             public SegmentFilter Build()
             {
-                return new SegmentFilter(serviceVariationId,
-                    teamMemberIdFilter);
+                return new SegmentFilter(
+                    this.serviceVariationId,
+                    this.teamMemberIdFilter);
             }
         }
     }

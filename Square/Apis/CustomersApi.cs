@@ -1,762 +1,840 @@
-using System;
-using System.Collections.Generic;
-using System.Dynamic;
-using System.Globalization;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-using Square.Http.Request;
-using Square.Http.Response;
-using Square.Http.Client;
-using Square.Authentication;
-
 namespace Square.Apis
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Dynamic;
+    using System.Globalization;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Authentication;
+    using Square.Http.Client;
+    using Square.Http.Request;
+    using Square.Http.Response;
+    using Square.Utilities;
+
+    /// <summary>
+    /// CustomersApi.
+    /// </summary>
     internal class CustomersApi : BaseApi, ICustomersApi
     {
-        internal CustomersApi(IConfiguration config, IHttpClient httpClient, IDictionary<string, IAuthManager> authManagers, HttpCallBack httpCallBack = null) :
-            base(config, httpClient, authManagers, httpCallBack)
-        { }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CustomersApi"/> class.
+        /// </summary>
+        /// <param name="config"> config instance. </param>
+        /// <param name="httpClient"> httpClient. </param>
+        /// <param name="authManagers"> authManager. </param>
+        /// <param name="httpCallBack"> httpCallBack. </param>
+        internal CustomersApi(IConfiguration config, IHttpClient httpClient, IDictionary<string, IAuthManager> authManagers, HttpCallBack httpCallBack = null)
+            : base(config, httpClient, authManagers, httpCallBack)
+        {
+        }
 
         /// <summary>
-        /// Lists customer profiles associated with a Square account.
-        /// Under normal operating conditions, newly created or updated customer profiles become available
-        /// for the listing operation in well under 30 seconds. Occasionally, propagation of the new or updated
-        /// profiles can take closer to one minute or longer, especially during network incidents and outages.
+        /// Lists customer profiles associated with a Square account..
+        /// Under normal operating conditions, newly created or updated customer profiles become available.
+        /// for the listing operation in well under 30 seconds. Occasionally, propagation of the new or updated.
+        /// profiles can take closer to one minute or longer, especially during network incidents and outages..
         /// </summary>
-        /// <param name="cursor">Optional parameter: A pagination cursor returned by a previous call to this endpoint. Provide this to retrieve the next set of results for your original query.  See the [Pagination guide](https://developer.squareup.com/docs/working-with-apis/pagination) for more information.</param>
-        /// <param name="sortField">Optional parameter: Indicates how Customers should be sorted.  Default: `DEFAULT`.</param>
-        /// <param name="sortOrder">Optional parameter: Indicates whether Customers should be sorted in ascending (`ASC`) or descending (`DESC`) order.  Default: `ASC`.</param>
-        /// <return>Returns the Models.ListCustomersResponse response from the API call</return>
-        public Models.ListCustomersResponse ListCustomers(string cursor = null, string sortField = null, string sortOrder = null)
+        /// <param name="cursor">Optional parameter: A pagination cursor returned by a previous call to this endpoint. Provide this cursor to retrieve the next set of results for your original query.  For more information, see [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination)..</param>
+        /// <param name="sortField">Optional parameter: Indicates how customers should be sorted.  Default: `DEFAULT`..</param>
+        /// <param name="sortOrder">Optional parameter: Indicates whether customers should be sorted in ascending (`ASC`) or descending (`DESC`) order.  Default: `ASC`..</param>
+        /// <returns>Returns the Models.ListCustomersResponse response from the API call.</returns>
+        public Models.ListCustomersResponse ListCustomers(
+                string cursor = null,
+                string sortField = null,
+                string sortOrder = null)
         {
-            Task<Models.ListCustomersResponse> t = ListCustomersAsync(cursor, sortField, sortOrder);
+            Task<Models.ListCustomersResponse> t = this.ListCustomersAsync(cursor, sortField, sortOrder);
             ApiHelper.RunTaskSynchronously(t);
             return t.Result;
         }
 
         /// <summary>
-        /// Lists customer profiles associated with a Square account.
-        /// Under normal operating conditions, newly created or updated customer profiles become available
-        /// for the listing operation in well under 30 seconds. Occasionally, propagation of the new or updated
-        /// profiles can take closer to one minute or longer, especially during network incidents and outages.
+        /// Lists customer profiles associated with a Square account..
+        /// Under normal operating conditions, newly created or updated customer profiles become available.
+        /// for the listing operation in well under 30 seconds. Occasionally, propagation of the new or updated.
+        /// profiles can take closer to one minute or longer, especially during network incidents and outages..
         /// </summary>
-        /// <param name="cursor">Optional parameter: A pagination cursor returned by a previous call to this endpoint. Provide this to retrieve the next set of results for your original query.  See the [Pagination guide](https://developer.squareup.com/docs/working-with-apis/pagination) for more information.</param>
-        /// <param name="sortField">Optional parameter: Indicates how Customers should be sorted.  Default: `DEFAULT`.</param>
-        /// <param name="sortOrder">Optional parameter: Indicates whether Customers should be sorted in ascending (`ASC`) or descending (`DESC`) order.  Default: `ASC`.</param>
-        /// <return>Returns the Models.ListCustomersResponse response from the API call</return>
-        public async Task<Models.ListCustomersResponse> ListCustomersAsync(string cursor = null, string sortField = null, string sortOrder = null, CancellationToken cancellationToken = default)
+        /// <param name="cursor">Optional parameter: A pagination cursor returned by a previous call to this endpoint. Provide this cursor to retrieve the next set of results for your original query.  For more information, see [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination)..</param>
+        /// <param name="sortField">Optional parameter: Indicates how customers should be sorted.  Default: `DEFAULT`..</param>
+        /// <param name="sortOrder">Optional parameter: Indicates whether customers should be sorted in ascending (`ASC`) or descending (`DESC`) order.  Default: `ASC`..</param>
+        /// <param name="cancellationToken"> cancellationToken. </param>
+        /// <returns>Returns the Models.ListCustomersResponse response from the API call.</returns>
+        public async Task<Models.ListCustomersResponse> ListCustomersAsync(
+                string cursor = null,
+                string sortField = null,
+                string sortOrder = null,
+                CancellationToken cancellationToken = default)
         {
-            //the base uri for api requests
-            string _baseUri = config.GetBaseUri();
+            // the base uri for api requests.
+            string baseUri = this.Config.GetBaseUri();
 
-            //prepare query string for API call
-            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
-            _queryBuilder.Append("/v2/customers");
+            // prepare query string for API call.
+            StringBuilder queryBuilder = new StringBuilder(baseUri);
+            queryBuilder.Append("/v2/customers");
 
-            //prepare specfied query parameters
-            var _queryParameters = new Dictionary<string, object>()
+            // prepare specfied query parameters.
+            var queryParams = new Dictionary<string, object>()
             {
                 { "cursor", cursor },
                 { "sort_field", sortField },
-                { "sort_order", sortOrder }
+                { "sort_order", sortOrder },
             };
 
-            //append request with appropriate headers and parameters
-            var _headers = new Dictionary<string, string>()
+            // append request with appropriate headers and parameters
+            var headers = new Dictionary<string, string>()
             {
-                { "user-agent", userAgent },
+                { "user-agent", this.UserAgent },
                 { "accept", "application/json" },
-                { "Square-Version", config.SquareVersion }
+                { "Square-Version", this.Config.SquareVersion },
             };
 
-            //prepare the API call request to fetch the response
-            HttpRequest _request = GetClientInstance().Get(_queryBuilder.ToString(), _headers, queryParameters: _queryParameters);
-            if (HttpCallBack != null)
+            // prepare the API call request to fetch the response.
+            HttpRequest httpRequest = this.GetClientInstance().Get(queryBuilder.ToString(), headers, queryParameters: queryParams);
+
+            if (this.HttpCallBack != null)
             {
-                HttpCallBack.OnBeforeHttpRequestEventHandler(GetClientInstance(), _request);
+                this.HttpCallBack.OnBeforeHttpRequestEventHandler(this.GetClientInstance(), httpRequest);
             }
 
-            _request = await authManagers["global"].ApplyAsync(_request).ConfigureAwait(false);
+            httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
 
-            //invoke request and get response
-            HttpStringResponse _response = await GetClientInstance().ExecuteAsStringAsync(_request, cancellationToken).ConfigureAwait(false);
-            HttpContext _context = new HttpContext(_request, _response);
-            if (HttpCallBack != null)
+            // invoke request and get response.
+            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+            HttpContext context = new HttpContext(httpRequest, response);
+            if (this.HttpCallBack != null)
             {
-                HttpCallBack.OnAfterHttpResponseEventHandler(GetClientInstance(), _response);
+                this.HttpCallBack.OnAfterHttpResponseEventHandler(this.GetClientInstance(), response);
             }
 
-            //handle errors defined at the API level
-            base.ValidateResponse(_response, _context);
+            // handle errors defined at the API level.
+            this.ValidateResponse(response, context);
 
-            var _responseModel = ApiHelper.JsonDeserialize<Models.ListCustomersResponse>(_response.Body);
-            _responseModel.Context = _context;
-            return _responseModel;
+            var responseModel = ApiHelper.JsonDeserialize<Models.ListCustomersResponse>(response.Body);
+            responseModel.Context = context;
+            return responseModel;
         }
 
         /// <summary>
-        /// Creates a new customer for a business, which can have associated cards on file.
-        /// You must provide __at least one__ of the following values in your request to this
-        /// endpoint:
-        /// - `given_name`
-        /// - `family_name`
-        /// - `company_name`
-        /// - `email_address`
-        /// - `phone_number`
+        /// Creates a new customer for a business, which can have associated cards on file..
+        /// You must provide at least one of the following values in your request to this.
+        /// endpoint:.
+        /// - `given_name`.
+        /// - `family_name`.
+        /// - `company_name`.
+        /// - `email_address`.
+        /// - `phone_number`.
         /// </summary>
-        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
-        /// <return>Returns the Models.CreateCustomerResponse response from the API call</return>
-        public Models.CreateCustomerResponse CreateCustomer(Models.CreateCustomerRequest body)
+        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
+        /// <returns>Returns the Models.CreateCustomerResponse response from the API call.</returns>
+        public Models.CreateCustomerResponse CreateCustomer(
+                Models.CreateCustomerRequest body)
         {
-            Task<Models.CreateCustomerResponse> t = CreateCustomerAsync(body);
+            Task<Models.CreateCustomerResponse> t = this.CreateCustomerAsync(body);
             ApiHelper.RunTaskSynchronously(t);
             return t.Result;
         }
 
         /// <summary>
-        /// Creates a new customer for a business, which can have associated cards on file.
-        /// You must provide __at least one__ of the following values in your request to this
-        /// endpoint:
-        /// - `given_name`
-        /// - `family_name`
-        /// - `company_name`
-        /// - `email_address`
-        /// - `phone_number`
+        /// Creates a new customer for a business, which can have associated cards on file..
+        /// You must provide at least one of the following values in your request to this.
+        /// endpoint:.
+        /// - `given_name`.
+        /// - `family_name`.
+        /// - `company_name`.
+        /// - `email_address`.
+        /// - `phone_number`.
         /// </summary>
-        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
-        /// <return>Returns the Models.CreateCustomerResponse response from the API call</return>
-        public async Task<Models.CreateCustomerResponse> CreateCustomerAsync(Models.CreateCustomerRequest body, CancellationToken cancellationToken = default)
+        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
+        /// <param name="cancellationToken"> cancellationToken. </param>
+        /// <returns>Returns the Models.CreateCustomerResponse response from the API call.</returns>
+        public async Task<Models.CreateCustomerResponse> CreateCustomerAsync(
+                Models.CreateCustomerRequest body,
+                CancellationToken cancellationToken = default)
         {
-            //the base uri for api requests
-            string _baseUri = config.GetBaseUri();
+            // the base uri for api requests.
+            string baseUri = this.Config.GetBaseUri();
 
-            //prepare query string for API call
-            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
-            _queryBuilder.Append("/v2/customers");
+            // prepare query string for API call.
+            StringBuilder queryBuilder = new StringBuilder(baseUri);
+            queryBuilder.Append("/v2/customers");
 
-            //append request with appropriate headers and parameters
-            var _headers = new Dictionary<string, string>()
+            // append request with appropriate headers and parameters
+            var headers = new Dictionary<string, string>()
             {
-                { "user-agent", userAgent },
-                { "accept", "application/json" },
-                { "content-type", "application/json; charset=utf-8" },
-                { "Square-Version", config.SquareVersion }
-            };
-
-            //append body params
-            var _body = ApiHelper.JsonSerialize(body);
-
-            //prepare the API call request to fetch the response
-            HttpRequest _request = GetClientInstance().PostBody(_queryBuilder.ToString(), _headers, _body);
-            if (HttpCallBack != null)
-            {
-                HttpCallBack.OnBeforeHttpRequestEventHandler(GetClientInstance(), _request);
-            }
-
-            _request = await authManagers["global"].ApplyAsync(_request).ConfigureAwait(false);
-
-            //invoke request and get response
-            HttpStringResponse _response = await GetClientInstance().ExecuteAsStringAsync(_request, cancellationToken).ConfigureAwait(false);
-            HttpContext _context = new HttpContext(_request, _response);
-            if (HttpCallBack != null)
-            {
-                HttpCallBack.OnAfterHttpResponseEventHandler(GetClientInstance(), _response);
-            }
-
-            //handle errors defined at the API level
-            base.ValidateResponse(_response, _context);
-
-            var _responseModel = ApiHelper.JsonDeserialize<Models.CreateCustomerResponse>(_response.Body);
-            _responseModel.Context = _context;
-            return _responseModel;
-        }
-
-        /// <summary>
-        /// Searches the customer profiles associated with a Square account using a supported query filter.
-        /// Calling `SearchCustomers` without any explicit query filter returns all
-        /// customer profiles ordered alphabetically based on `given_name` and
-        /// `family_name`.
-        /// Under normal operating conditions, newly created or updated customer profiles become available
-        /// for the search operation in well under 30 seconds. Occasionally, propagation of the new or updated
-        /// profiles can take closer to one minute or longer, especially during network incidents and outages.
-        /// </summary>
-        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
-        /// <return>Returns the Models.SearchCustomersResponse response from the API call</return>
-        public Models.SearchCustomersResponse SearchCustomers(Models.SearchCustomersRequest body)
-        {
-            Task<Models.SearchCustomersResponse> t = SearchCustomersAsync(body);
-            ApiHelper.RunTaskSynchronously(t);
-            return t.Result;
-        }
-
-        /// <summary>
-        /// Searches the customer profiles associated with a Square account using a supported query filter.
-        /// Calling `SearchCustomers` without any explicit query filter returns all
-        /// customer profiles ordered alphabetically based on `given_name` and
-        /// `family_name`.
-        /// Under normal operating conditions, newly created or updated customer profiles become available
-        /// for the search operation in well under 30 seconds. Occasionally, propagation of the new or updated
-        /// profiles can take closer to one minute or longer, especially during network incidents and outages.
-        /// </summary>
-        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
-        /// <return>Returns the Models.SearchCustomersResponse response from the API call</return>
-        public async Task<Models.SearchCustomersResponse> SearchCustomersAsync(Models.SearchCustomersRequest body, CancellationToken cancellationToken = default)
-        {
-            //the base uri for api requests
-            string _baseUri = config.GetBaseUri();
-
-            //prepare query string for API call
-            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
-            _queryBuilder.Append("/v2/customers/search");
-
-            //append request with appropriate headers and parameters
-            var _headers = new Dictionary<string, string>()
-            {
-                { "user-agent", userAgent },
+                { "user-agent", this.UserAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
-                { "Square-Version", config.SquareVersion }
+                { "Square-Version", this.Config.SquareVersion },
             };
 
-            //append body params
-            var _body = ApiHelper.JsonSerialize(body);
+            // append body params.
+            var bodyText = ApiHelper.JsonSerialize(body);
 
-            //prepare the API call request to fetch the response
-            HttpRequest _request = GetClientInstance().PostBody(_queryBuilder.ToString(), _headers, _body);
-            if (HttpCallBack != null)
+            // prepare the API call request to fetch the response.
+            HttpRequest httpRequest = this.GetClientInstance().PostBody(queryBuilder.ToString(), headers, bodyText);
+
+            if (this.HttpCallBack != null)
             {
-                HttpCallBack.OnBeforeHttpRequestEventHandler(GetClientInstance(), _request);
+                this.HttpCallBack.OnBeforeHttpRequestEventHandler(this.GetClientInstance(), httpRequest);
             }
 
-            _request = await authManagers["global"].ApplyAsync(_request).ConfigureAwait(false);
+            httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
 
-            //invoke request and get response
-            HttpStringResponse _response = await GetClientInstance().ExecuteAsStringAsync(_request, cancellationToken).ConfigureAwait(false);
-            HttpContext _context = new HttpContext(_request, _response);
-            if (HttpCallBack != null)
+            // invoke request and get response.
+            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+            HttpContext context = new HttpContext(httpRequest, response);
+            if (this.HttpCallBack != null)
             {
-                HttpCallBack.OnAfterHttpResponseEventHandler(GetClientInstance(), _response);
+                this.HttpCallBack.OnAfterHttpResponseEventHandler(this.GetClientInstance(), response);
             }
 
-            //handle errors defined at the API level
-            base.ValidateResponse(_response, _context);
+            // handle errors defined at the API level.
+            this.ValidateResponse(response, context);
 
-            var _responseModel = ApiHelper.JsonDeserialize<Models.SearchCustomersResponse>(_response.Body);
-            _responseModel.Context = _context;
-            return _responseModel;
+            var responseModel = ApiHelper.JsonDeserialize<Models.CreateCustomerResponse>(response.Body);
+            responseModel.Context = context;
+            return responseModel;
         }
 
         /// <summary>
-        /// Deletes a customer from a business, along with any linked cards on file. When two profiles
-        /// are merged into a single profile, that profile is assigned a new `customer_id`. You must use the
-        /// new `customer_id` to delete merged profiles.
+        /// Searches the customer profiles associated with a Square account using a supported query filter..
+        /// Calling `SearchCustomers` without any explicit query filter returns all.
+        /// customer profiles ordered alphabetically based on `given_name` and.
+        /// `family_name`..
+        /// Under normal operating conditions, newly created or updated customer profiles become available.
+        /// for the search operation in well under 30 seconds. Occasionally, propagation of the new or updated.
+        /// profiles can take closer to one minute or longer, especially during network incidents and outages..
         /// </summary>
-        /// <param name="customerId">Required parameter: The ID of the customer to delete.</param>
-        /// <return>Returns the Models.DeleteCustomerResponse response from the API call</return>
-        public Models.DeleteCustomerResponse DeleteCustomer(string customerId)
+        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
+        /// <returns>Returns the Models.SearchCustomersResponse response from the API call.</returns>
+        public Models.SearchCustomersResponse SearchCustomers(
+                Models.SearchCustomersRequest body)
         {
-            Task<Models.DeleteCustomerResponse> t = DeleteCustomerAsync(customerId);
+            Task<Models.SearchCustomersResponse> t = this.SearchCustomersAsync(body);
             ApiHelper.RunTaskSynchronously(t);
             return t.Result;
         }
 
         /// <summary>
-        /// Deletes a customer from a business, along with any linked cards on file. When two profiles
-        /// are merged into a single profile, that profile is assigned a new `customer_id`. You must use the
-        /// new `customer_id` to delete merged profiles.
+        /// Searches the customer profiles associated with a Square account using a supported query filter..
+        /// Calling `SearchCustomers` without any explicit query filter returns all.
+        /// customer profiles ordered alphabetically based on `given_name` and.
+        /// `family_name`..
+        /// Under normal operating conditions, newly created or updated customer profiles become available.
+        /// for the search operation in well under 30 seconds. Occasionally, propagation of the new or updated.
+        /// profiles can take closer to one minute or longer, especially during network incidents and outages..
         /// </summary>
-        /// <param name="customerId">Required parameter: The ID of the customer to delete.</param>
-        /// <return>Returns the Models.DeleteCustomerResponse response from the API call</return>
-        public async Task<Models.DeleteCustomerResponse> DeleteCustomerAsync(string customerId, CancellationToken cancellationToken = default)
+        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
+        /// <param name="cancellationToken"> cancellationToken. </param>
+        /// <returns>Returns the Models.SearchCustomersResponse response from the API call.</returns>
+        public async Task<Models.SearchCustomersResponse> SearchCustomersAsync(
+                Models.SearchCustomersRequest body,
+                CancellationToken cancellationToken = default)
         {
-            //the base uri for api requests
-            string _baseUri = config.GetBaseUri();
+            // the base uri for api requests.
+            string baseUri = this.Config.GetBaseUri();
 
-            //prepare query string for API call
-            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
-            _queryBuilder.Append("/v2/customers/{customer_id}");
+            // prepare query string for API call.
+            StringBuilder queryBuilder = new StringBuilder(baseUri);
+            queryBuilder.Append("/v2/customers/search");
 
-            //process optional template parameters
-            ApiHelper.AppendUrlWithTemplateParameters(_queryBuilder, new Dictionary<string, object>()
+            // append request with appropriate headers and parameters
+            var headers = new Dictionary<string, string>()
             {
-                { "customer_id", customerId }
-            });
-
-            //append request with appropriate headers and parameters
-            var _headers = new Dictionary<string, string>()
-            {
-                { "user-agent", userAgent },
-                { "accept", "application/json" },
-                { "Square-Version", config.SquareVersion }
-            };
-
-            //prepare the API call request to fetch the response
-            HttpRequest _request = GetClientInstance().Delete(_queryBuilder.ToString(), _headers, null);
-            if (HttpCallBack != null)
-            {
-                HttpCallBack.OnBeforeHttpRequestEventHandler(GetClientInstance(), _request);
-            }
-
-            _request = await authManagers["global"].ApplyAsync(_request).ConfigureAwait(false);
-
-            //invoke request and get response
-            HttpStringResponse _response = await GetClientInstance().ExecuteAsStringAsync(_request, cancellationToken).ConfigureAwait(false);
-            HttpContext _context = new HttpContext(_request, _response);
-            if (HttpCallBack != null)
-            {
-                HttpCallBack.OnAfterHttpResponseEventHandler(GetClientInstance(), _response);
-            }
-
-            //handle errors defined at the API level
-            base.ValidateResponse(_response, _context);
-
-            var _responseModel = ApiHelper.JsonDeserialize<Models.DeleteCustomerResponse>(_response.Body);
-            _responseModel.Context = _context;
-            return _responseModel;
-        }
-
-        /// <summary>
-        /// Returns details for a single customer.
-        /// </summary>
-        /// <param name="customerId">Required parameter: The ID of the customer to retrieve.</param>
-        /// <return>Returns the Models.RetrieveCustomerResponse response from the API call</return>
-        public Models.RetrieveCustomerResponse RetrieveCustomer(string customerId)
-        {
-            Task<Models.RetrieveCustomerResponse> t = RetrieveCustomerAsync(customerId);
-            ApiHelper.RunTaskSynchronously(t);
-            return t.Result;
-        }
-
-        /// <summary>
-        /// Returns details for a single customer.
-        /// </summary>
-        /// <param name="customerId">Required parameter: The ID of the customer to retrieve.</param>
-        /// <return>Returns the Models.RetrieveCustomerResponse response from the API call</return>
-        public async Task<Models.RetrieveCustomerResponse> RetrieveCustomerAsync(string customerId, CancellationToken cancellationToken = default)
-        {
-            //the base uri for api requests
-            string _baseUri = config.GetBaseUri();
-
-            //prepare query string for API call
-            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
-            _queryBuilder.Append("/v2/customers/{customer_id}");
-
-            //process optional template parameters
-            ApiHelper.AppendUrlWithTemplateParameters(_queryBuilder, new Dictionary<string, object>()
-            {
-                { "customer_id", customerId }
-            });
-
-            //append request with appropriate headers and parameters
-            var _headers = new Dictionary<string, string>()
-            {
-                { "user-agent", userAgent },
-                { "accept", "application/json" },
-                { "Square-Version", config.SquareVersion }
-            };
-
-            //prepare the API call request to fetch the response
-            HttpRequest _request = GetClientInstance().Get(_queryBuilder.ToString(), _headers);
-            if (HttpCallBack != null)
-            {
-                HttpCallBack.OnBeforeHttpRequestEventHandler(GetClientInstance(), _request);
-            }
-
-            _request = await authManagers["global"].ApplyAsync(_request).ConfigureAwait(false);
-
-            //invoke request and get response
-            HttpStringResponse _response = await GetClientInstance().ExecuteAsStringAsync(_request, cancellationToken).ConfigureAwait(false);
-            HttpContext _context = new HttpContext(_request, _response);
-            if (HttpCallBack != null)
-            {
-                HttpCallBack.OnAfterHttpResponseEventHandler(GetClientInstance(), _response);
-            }
-
-            //handle errors defined at the API level
-            base.ValidateResponse(_response, _context);
-
-            var _responseModel = ApiHelper.JsonDeserialize<Models.RetrieveCustomerResponse>(_response.Body);
-            _responseModel.Context = _context;
-            return _responseModel;
-        }
-
-        /// <summary>
-        /// Updates the details of an existing customer. When two profiles are merged
-        /// into a single profile, that profile is assigned a new `customer_id`. You must use
-        /// the new `customer_id` to update merged profiles.
-        /// You cannot edit a customer's cards on file with this endpoint. To make changes
-        /// to a card on file, you must delete the existing card on file with the
-        /// [DeleteCustomerCard](#endpoint-Customers-deletecustomercard) endpoint, then create a new one with the
-        /// [CreateCustomerCard](#endpoint-Customers-createcustomercard) endpoint.
-        /// </summary>
-        /// <param name="customerId">Required parameter: The ID of the customer to update.</param>
-        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
-        /// <return>Returns the Models.UpdateCustomerResponse response from the API call</return>
-        public Models.UpdateCustomerResponse UpdateCustomer(string customerId, Models.UpdateCustomerRequest body)
-        {
-            Task<Models.UpdateCustomerResponse> t = UpdateCustomerAsync(customerId, body);
-            ApiHelper.RunTaskSynchronously(t);
-            return t.Result;
-        }
-
-        /// <summary>
-        /// Updates the details of an existing customer. When two profiles are merged
-        /// into a single profile, that profile is assigned a new `customer_id`. You must use
-        /// the new `customer_id` to update merged profiles.
-        /// You cannot edit a customer's cards on file with this endpoint. To make changes
-        /// to a card on file, you must delete the existing card on file with the
-        /// [DeleteCustomerCard](#endpoint-Customers-deletecustomercard) endpoint, then create a new one with the
-        /// [CreateCustomerCard](#endpoint-Customers-createcustomercard) endpoint.
-        /// </summary>
-        /// <param name="customerId">Required parameter: The ID of the customer to update.</param>
-        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
-        /// <return>Returns the Models.UpdateCustomerResponse response from the API call</return>
-        public async Task<Models.UpdateCustomerResponse> UpdateCustomerAsync(string customerId, Models.UpdateCustomerRequest body, CancellationToken cancellationToken = default)
-        {
-            //the base uri for api requests
-            string _baseUri = config.GetBaseUri();
-
-            //prepare query string for API call
-            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
-            _queryBuilder.Append("/v2/customers/{customer_id}");
-
-            //process optional template parameters
-            ApiHelper.AppendUrlWithTemplateParameters(_queryBuilder, new Dictionary<string, object>()
-            {
-                { "customer_id", customerId }
-            });
-
-            //append request with appropriate headers and parameters
-            var _headers = new Dictionary<string, string>()
-            {
-                { "user-agent", userAgent },
+                { "user-agent", this.UserAgent },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
-                { "Square-Version", config.SquareVersion }
+                { "Square-Version", this.Config.SquareVersion },
             };
 
-            //append body params
-            var _body = ApiHelper.JsonSerialize(body);
+            // append body params.
+            var bodyText = ApiHelper.JsonSerialize(body);
 
-            //prepare the API call request to fetch the response
-            HttpRequest _request = GetClientInstance().PutBody(_queryBuilder.ToString(), _headers, _body);
-            if (HttpCallBack != null)
+            // prepare the API call request to fetch the response.
+            HttpRequest httpRequest = this.GetClientInstance().PostBody(queryBuilder.ToString(), headers, bodyText);
+
+            if (this.HttpCallBack != null)
             {
-                HttpCallBack.OnBeforeHttpRequestEventHandler(GetClientInstance(), _request);
+                this.HttpCallBack.OnBeforeHttpRequestEventHandler(this.GetClientInstance(), httpRequest);
             }
 
-            _request = await authManagers["global"].ApplyAsync(_request).ConfigureAwait(false);
+            httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
 
-            //invoke request and get response
-            HttpStringResponse _response = await GetClientInstance().ExecuteAsStringAsync(_request, cancellationToken).ConfigureAwait(false);
-            HttpContext _context = new HttpContext(_request, _response);
-            if (HttpCallBack != null)
+            // invoke request and get response.
+            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+            HttpContext context = new HttpContext(httpRequest, response);
+            if (this.HttpCallBack != null)
             {
-                HttpCallBack.OnAfterHttpResponseEventHandler(GetClientInstance(), _response);
+                this.HttpCallBack.OnAfterHttpResponseEventHandler(this.GetClientInstance(), response);
             }
 
-            //handle errors defined at the API level
-            base.ValidateResponse(_response, _context);
+            // handle errors defined at the API level.
+            this.ValidateResponse(response, context);
 
-            var _responseModel = ApiHelper.JsonDeserialize<Models.UpdateCustomerResponse>(_response.Body);
-            _responseModel.Context = _context;
-            return _responseModel;
+            var responseModel = ApiHelper.JsonDeserialize<Models.SearchCustomersResponse>(response.Body);
+            responseModel.Context = context;
+            return responseModel;
         }
 
         /// <summary>
-        /// Adds a card on file to an existing customer.
-        /// As with charges, calls to `CreateCustomerCard` are idempotent. Multiple
-        /// calls with the same card nonce return the same card record that was created
-        /// with the provided nonce during the _first_ call.
+        /// Deletes a customer profile from a business, including any linked cards on file. .
+        /// As a best practice, you should include the `version` field in the request to enable [optimistic concurrency](https://developer.squareup.com/docs/working-with-apis/optimistic-concurrency) control. The value must be set to the current version of the customer profile. .
+        /// To delete a customer profile that was created by merging existing profiles, you must use the ID of the newly created profile..
         /// </summary>
-        /// <param name="customerId">Required parameter: The Square ID of the customer profile the card is linked to.</param>
-        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
-        /// <return>Returns the Models.CreateCustomerCardResponse response from the API call</return>
-        public Models.CreateCustomerCardResponse CreateCustomerCard(string customerId, Models.CreateCustomerCardRequest body)
+        /// <param name="customerId">Required parameter: The ID of the customer to delete..</param>
+        /// <param name="version">Optional parameter: The current version of the customer profile.   As a best practice, you should include this parameter to enable [optimistic concurrency](https://developer.squareup.com/docs/working-with-apis/optimistic-concurrency) control.  For more information, see [Delete a customer profile](https://developer.squareup.com/docs/customers-api/use-the-api/keep-records#delete-customer-profile)..</param>
+        /// <returns>Returns the Models.DeleteCustomerResponse response from the API call.</returns>
+        public Models.DeleteCustomerResponse DeleteCustomer(
+                string customerId,
+                long? version = null)
         {
-            Task<Models.CreateCustomerCardResponse> t = CreateCustomerCardAsync(customerId, body);
+            Task<Models.DeleteCustomerResponse> t = this.DeleteCustomerAsync(customerId, version);
             ApiHelper.RunTaskSynchronously(t);
             return t.Result;
         }
 
         /// <summary>
-        /// Adds a card on file to an existing customer.
-        /// As with charges, calls to `CreateCustomerCard` are idempotent. Multiple
-        /// calls with the same card nonce return the same card record that was created
-        /// with the provided nonce during the _first_ call.
+        /// Deletes a customer profile from a business, including any linked cards on file. .
+        /// As a best practice, you should include the `version` field in the request to enable [optimistic concurrency](https://developer.squareup.com/docs/working-with-apis/optimistic-concurrency) control. The value must be set to the current version of the customer profile. .
+        /// To delete a customer profile that was created by merging existing profiles, you must use the ID of the newly created profile..
         /// </summary>
-        /// <param name="customerId">Required parameter: The Square ID of the customer profile the card is linked to.</param>
-        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details.</param>
-        /// <return>Returns the Models.CreateCustomerCardResponse response from the API call</return>
-        public async Task<Models.CreateCustomerCardResponse> CreateCustomerCardAsync(string customerId, Models.CreateCustomerCardRequest body, CancellationToken cancellationToken = default)
+        /// <param name="customerId">Required parameter: The ID of the customer to delete..</param>
+        /// <param name="version">Optional parameter: The current version of the customer profile.   As a best practice, you should include this parameter to enable [optimistic concurrency](https://developer.squareup.com/docs/working-with-apis/optimistic-concurrency) control.  For more information, see [Delete a customer profile](https://developer.squareup.com/docs/customers-api/use-the-api/keep-records#delete-customer-profile)..</param>
+        /// <param name="cancellationToken"> cancellationToken. </param>
+        /// <returns>Returns the Models.DeleteCustomerResponse response from the API call.</returns>
+        public async Task<Models.DeleteCustomerResponse> DeleteCustomerAsync(
+                string customerId,
+                long? version = null,
+                CancellationToken cancellationToken = default)
         {
-            //the base uri for api requests
-            string _baseUri = config.GetBaseUri();
+            // the base uri for api requests.
+            string baseUri = this.Config.GetBaseUri();
 
-            //prepare query string for API call
-            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
-            _queryBuilder.Append("/v2/customers/{customer_id}/cards");
+            // prepare query string for API call.
+            StringBuilder queryBuilder = new StringBuilder(baseUri);
+            queryBuilder.Append("/v2/customers/{customer_id}");
 
-            //process optional template parameters
-            ApiHelper.AppendUrlWithTemplateParameters(_queryBuilder, new Dictionary<string, object>()
-            {
-                { "customer_id", customerId }
-            });
-
-            //append request with appropriate headers and parameters
-            var _headers = new Dictionary<string, string>()
-            {
-                { "user-agent", userAgent },
-                { "accept", "application/json" },
-                { "content-type", "application/json; charset=utf-8" },
-                { "Square-Version", config.SquareVersion }
-            };
-
-            //append body params
-            var _body = ApiHelper.JsonSerialize(body);
-
-            //prepare the API call request to fetch the response
-            HttpRequest _request = GetClientInstance().PostBody(_queryBuilder.ToString(), _headers, _body);
-            if (HttpCallBack != null)
-            {
-                HttpCallBack.OnBeforeHttpRequestEventHandler(GetClientInstance(), _request);
-            }
-
-            _request = await authManagers["global"].ApplyAsync(_request).ConfigureAwait(false);
-
-            //invoke request and get response
-            HttpStringResponse _response = await GetClientInstance().ExecuteAsStringAsync(_request, cancellationToken).ConfigureAwait(false);
-            HttpContext _context = new HttpContext(_request, _response);
-            if (HttpCallBack != null)
-            {
-                HttpCallBack.OnAfterHttpResponseEventHandler(GetClientInstance(), _response);
-            }
-
-            //handle errors defined at the API level
-            base.ValidateResponse(_response, _context);
-
-            var _responseModel = ApiHelper.JsonDeserialize<Models.CreateCustomerCardResponse>(_response.Body);
-            _responseModel.Context = _context;
-            return _responseModel;
-        }
-
-        /// <summary>
-        /// Removes a card on file from a customer.
-        /// </summary>
-        /// <param name="customerId">Required parameter: The ID of the customer that the card on file belongs to.</param>
-        /// <param name="cardId">Required parameter: The ID of the card on file to delete.</param>
-        /// <return>Returns the Models.DeleteCustomerCardResponse response from the API call</return>
-        public Models.DeleteCustomerCardResponse DeleteCustomerCard(string customerId, string cardId)
-        {
-            Task<Models.DeleteCustomerCardResponse> t = DeleteCustomerCardAsync(customerId, cardId);
-            ApiHelper.RunTaskSynchronously(t);
-            return t.Result;
-        }
-
-        /// <summary>
-        /// Removes a card on file from a customer.
-        /// </summary>
-        /// <param name="customerId">Required parameter: The ID of the customer that the card on file belongs to.</param>
-        /// <param name="cardId">Required parameter: The ID of the card on file to delete.</param>
-        /// <return>Returns the Models.DeleteCustomerCardResponse response from the API call</return>
-        public async Task<Models.DeleteCustomerCardResponse> DeleteCustomerCardAsync(string customerId, string cardId, CancellationToken cancellationToken = default)
-        {
-            //the base uri for api requests
-            string _baseUri = config.GetBaseUri();
-
-            //prepare query string for API call
-            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
-            _queryBuilder.Append("/v2/customers/{customer_id}/cards/{card_id}");
-
-            //process optional template parameters
-            ApiHelper.AppendUrlWithTemplateParameters(_queryBuilder, new Dictionary<string, object>()
+            // process optional template parameters.
+            ApiHelper.AppendUrlWithTemplateParameters(queryBuilder, new Dictionary<string, object>()
             {
                 { "customer_id", customerId },
-                { "card_id", cardId }
             });
 
-            //append request with appropriate headers and parameters
-            var _headers = new Dictionary<string, string>()
+            // prepare specfied query parameters.
+            var queryParams = new Dictionary<string, object>()
             {
-                { "user-agent", userAgent },
-                { "accept", "application/json" },
-                { "Square-Version", config.SquareVersion }
+                { "version", version },
             };
 
-            //prepare the API call request to fetch the response
-            HttpRequest _request = GetClientInstance().Delete(_queryBuilder.ToString(), _headers, null);
-            if (HttpCallBack != null)
+            // append request with appropriate headers and parameters
+            var headers = new Dictionary<string, string>()
             {
-                HttpCallBack.OnBeforeHttpRequestEventHandler(GetClientInstance(), _request);
+                { "user-agent", this.UserAgent },
+                { "accept", "application/json" },
+                { "Square-Version", this.Config.SquareVersion },
+            };
+
+            // prepare the API call request to fetch the response.
+            HttpRequest httpRequest = this.GetClientInstance().Delete(queryBuilder.ToString(), headers, null, queryParameters: queryParams);
+
+            if (this.HttpCallBack != null)
+            {
+                this.HttpCallBack.OnBeforeHttpRequestEventHandler(this.GetClientInstance(), httpRequest);
             }
 
-            _request = await authManagers["global"].ApplyAsync(_request).ConfigureAwait(false);
+            httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
 
-            //invoke request and get response
-            HttpStringResponse _response = await GetClientInstance().ExecuteAsStringAsync(_request, cancellationToken).ConfigureAwait(false);
-            HttpContext _context = new HttpContext(_request, _response);
-            if (HttpCallBack != null)
+            // invoke request and get response.
+            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+            HttpContext context = new HttpContext(httpRequest, response);
+            if (this.HttpCallBack != null)
             {
-                HttpCallBack.OnAfterHttpResponseEventHandler(GetClientInstance(), _response);
+                this.HttpCallBack.OnAfterHttpResponseEventHandler(this.GetClientInstance(), response);
             }
 
-            //handle errors defined at the API level
-            base.ValidateResponse(_response, _context);
+            // handle errors defined at the API level.
+            this.ValidateResponse(response, context);
 
-            var _responseModel = ApiHelper.JsonDeserialize<Models.DeleteCustomerCardResponse>(_response.Body);
-            _responseModel.Context = _context;
-            return _responseModel;
+            var responseModel = ApiHelper.JsonDeserialize<Models.DeleteCustomerResponse>(response.Body);
+            responseModel.Context = context;
+            return responseModel;
         }
 
         /// <summary>
-        /// Removes a group membership from a customer. 
-        /// The customer is identified by the `customer_id` value 
-        /// and the customer group is identified by the `group_id` value.
+        /// Returns details for a single customer..
         /// </summary>
-        /// <param name="customerId">Required parameter: The ID of the customer to remove from the group.</param>
-        /// <param name="groupId">Required parameter: The ID of the customer group to remove the customer from.</param>
-        /// <return>Returns the Models.RemoveGroupFromCustomerResponse response from the API call</return>
-        public Models.RemoveGroupFromCustomerResponse RemoveGroupFromCustomer(string customerId, string groupId)
+        /// <param name="customerId">Required parameter: The ID of the customer to retrieve..</param>
+        /// <returns>Returns the Models.RetrieveCustomerResponse response from the API call.</returns>
+        public Models.RetrieveCustomerResponse RetrieveCustomer(
+                string customerId)
         {
-            Task<Models.RemoveGroupFromCustomerResponse> t = RemoveGroupFromCustomerAsync(customerId, groupId);
+            Task<Models.RetrieveCustomerResponse> t = this.RetrieveCustomerAsync(customerId);
             ApiHelper.RunTaskSynchronously(t);
             return t.Result;
         }
 
         /// <summary>
-        /// Removes a group membership from a customer. 
-        /// The customer is identified by the `customer_id` value 
-        /// and the customer group is identified by the `group_id` value.
+        /// Returns details for a single customer..
         /// </summary>
-        /// <param name="customerId">Required parameter: The ID of the customer to remove from the group.</param>
-        /// <param name="groupId">Required parameter: The ID of the customer group to remove the customer from.</param>
-        /// <return>Returns the Models.RemoveGroupFromCustomerResponse response from the API call</return>
-        public async Task<Models.RemoveGroupFromCustomerResponse> RemoveGroupFromCustomerAsync(string customerId, string groupId, CancellationToken cancellationToken = default)
+        /// <param name="customerId">Required parameter: The ID of the customer to retrieve..</param>
+        /// <param name="cancellationToken"> cancellationToken. </param>
+        /// <returns>Returns the Models.RetrieveCustomerResponse response from the API call.</returns>
+        public async Task<Models.RetrieveCustomerResponse> RetrieveCustomerAsync(
+                string customerId,
+                CancellationToken cancellationToken = default)
         {
-            //the base uri for api requests
-            string _baseUri = config.GetBaseUri();
+            // the base uri for api requests.
+            string baseUri = this.Config.GetBaseUri();
 
-            //prepare query string for API call
-            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
-            _queryBuilder.Append("/v2/customers/{customer_id}/groups/{group_id}");
+            // prepare query string for API call.
+            StringBuilder queryBuilder = new StringBuilder(baseUri);
+            queryBuilder.Append("/v2/customers/{customer_id}");
 
-            //process optional template parameters
-            ApiHelper.AppendUrlWithTemplateParameters(_queryBuilder, new Dictionary<string, object>()
+            // process optional template parameters.
+            ApiHelper.AppendUrlWithTemplateParameters(queryBuilder, new Dictionary<string, object>()
             {
                 { "customer_id", customerId },
-                { "group_id", groupId }
             });
 
-            //append request with appropriate headers and parameters
-            var _headers = new Dictionary<string, string>()
+            // append request with appropriate headers and parameters
+            var headers = new Dictionary<string, string>()
             {
-                { "user-agent", userAgent },
+                { "user-agent", this.UserAgent },
                 { "accept", "application/json" },
-                { "Square-Version", config.SquareVersion }
+                { "Square-Version", this.Config.SquareVersion },
             };
 
-            //prepare the API call request to fetch the response
-            HttpRequest _request = GetClientInstance().Delete(_queryBuilder.ToString(), _headers, null);
-            if (HttpCallBack != null)
+            // prepare the API call request to fetch the response.
+            HttpRequest httpRequest = this.GetClientInstance().Get(queryBuilder.ToString(), headers);
+
+            if (this.HttpCallBack != null)
             {
-                HttpCallBack.OnBeforeHttpRequestEventHandler(GetClientInstance(), _request);
+                this.HttpCallBack.OnBeforeHttpRequestEventHandler(this.GetClientInstance(), httpRequest);
             }
 
-            _request = await authManagers["global"].ApplyAsync(_request).ConfigureAwait(false);
+            httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
 
-            //invoke request and get response
-            HttpStringResponse _response = await GetClientInstance().ExecuteAsStringAsync(_request, cancellationToken).ConfigureAwait(false);
-            HttpContext _context = new HttpContext(_request, _response);
-            if (HttpCallBack != null)
+            // invoke request and get response.
+            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+            HttpContext context = new HttpContext(httpRequest, response);
+            if (this.HttpCallBack != null)
             {
-                HttpCallBack.OnAfterHttpResponseEventHandler(GetClientInstance(), _response);
+                this.HttpCallBack.OnAfterHttpResponseEventHandler(this.GetClientInstance(), response);
             }
 
-            //handle errors defined at the API level
-            base.ValidateResponse(_response, _context);
+            // handle errors defined at the API level.
+            this.ValidateResponse(response, context);
 
-            var _responseModel = ApiHelper.JsonDeserialize<Models.RemoveGroupFromCustomerResponse>(_response.Body);
-            _responseModel.Context = _context;
-            return _responseModel;
+            var responseModel = ApiHelper.JsonDeserialize<Models.RetrieveCustomerResponse>(response.Body);
+            responseModel.Context = context;
+            return responseModel;
         }
 
         /// <summary>
-        /// Adds a group membership to a customer. 
-        /// The customer is identified by the `customer_id` value 
-        /// and the customer group is identified by the `group_id` value.
+        /// Updates a customer profile. To change an attribute, specify the new value. To remove an attribute, specify the value as an empty string or empty object..
+        /// As a best practice, you should include the `version` field in the request to enable [optimistic concurrency](https://developer.squareup.com/docs/working-with-apis/optimistic-concurrency) control. The value must be set to the current version of the customer profile..
+        /// To update a customer profile that was created by merging existing profiles, you must use the ID of the newly created profile..
+        /// You cannot use this endpoint to change cards on file. To change a card on file, call [DeleteCustomerCard]($e/Customers/DeleteCustomerCard) to delete the existing card and then call [CreateCustomerCard]($e/Customers/CreateCustomerCard) to create a new card..
         /// </summary>
-        /// <param name="customerId">Required parameter: The ID of the customer to add to a group.</param>
-        /// <param name="groupId">Required parameter: The ID of the customer group to add the customer to.</param>
-        /// <return>Returns the Models.AddGroupToCustomerResponse response from the API call</return>
-        public Models.AddGroupToCustomerResponse AddGroupToCustomer(string customerId, string groupId)
+        /// <param name="customerId">Required parameter: The ID of the customer to update..</param>
+        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
+        /// <returns>Returns the Models.UpdateCustomerResponse response from the API call.</returns>
+        public Models.UpdateCustomerResponse UpdateCustomer(
+                string customerId,
+                Models.UpdateCustomerRequest body)
         {
-            Task<Models.AddGroupToCustomerResponse> t = AddGroupToCustomerAsync(customerId, groupId);
+            Task<Models.UpdateCustomerResponse> t = this.UpdateCustomerAsync(customerId, body);
             ApiHelper.RunTaskSynchronously(t);
             return t.Result;
         }
 
         /// <summary>
-        /// Adds a group membership to a customer. 
-        /// The customer is identified by the `customer_id` value 
-        /// and the customer group is identified by the `group_id` value.
+        /// Updates a customer profile. To change an attribute, specify the new value. To remove an attribute, specify the value as an empty string or empty object..
+        /// As a best practice, you should include the `version` field in the request to enable [optimistic concurrency](https://developer.squareup.com/docs/working-with-apis/optimistic-concurrency) control. The value must be set to the current version of the customer profile..
+        /// To update a customer profile that was created by merging existing profiles, you must use the ID of the newly created profile..
+        /// You cannot use this endpoint to change cards on file. To change a card on file, call [DeleteCustomerCard]($e/Customers/DeleteCustomerCard) to delete the existing card and then call [CreateCustomerCard]($e/Customers/CreateCustomerCard) to create a new card..
         /// </summary>
-        /// <param name="customerId">Required parameter: The ID of the customer to add to a group.</param>
-        /// <param name="groupId">Required parameter: The ID of the customer group to add the customer to.</param>
-        /// <return>Returns the Models.AddGroupToCustomerResponse response from the API call</return>
-        public async Task<Models.AddGroupToCustomerResponse> AddGroupToCustomerAsync(string customerId, string groupId, CancellationToken cancellationToken = default)
+        /// <param name="customerId">Required parameter: The ID of the customer to update..</param>
+        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
+        /// <param name="cancellationToken"> cancellationToken. </param>
+        /// <returns>Returns the Models.UpdateCustomerResponse response from the API call.</returns>
+        public async Task<Models.UpdateCustomerResponse> UpdateCustomerAsync(
+                string customerId,
+                Models.UpdateCustomerRequest body,
+                CancellationToken cancellationToken = default)
         {
-            //the base uri for api requests
-            string _baseUri = config.GetBaseUri();
+            // the base uri for api requests.
+            string baseUri = this.Config.GetBaseUri();
 
-            //prepare query string for API call
-            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
-            _queryBuilder.Append("/v2/customers/{customer_id}/groups/{group_id}");
+            // prepare query string for API call.
+            StringBuilder queryBuilder = new StringBuilder(baseUri);
+            queryBuilder.Append("/v2/customers/{customer_id}");
 
-            //process optional template parameters
-            ApiHelper.AppendUrlWithTemplateParameters(_queryBuilder, new Dictionary<string, object>()
+            // process optional template parameters.
+            ApiHelper.AppendUrlWithTemplateParameters(queryBuilder, new Dictionary<string, object>()
             {
                 { "customer_id", customerId },
-                { "group_id", groupId }
             });
 
-            //append request with appropriate headers and parameters
-            var _headers = new Dictionary<string, string>()
+            // append request with appropriate headers and parameters
+            var headers = new Dictionary<string, string>()
             {
-                { "user-agent", userAgent },
+                { "user-agent", this.UserAgent },
                 { "accept", "application/json" },
-                { "Square-Version", config.SquareVersion }
+                { "content-type", "application/json; charset=utf-8" },
+                { "Square-Version", this.Config.SquareVersion },
             };
 
-            //prepare the API call request to fetch the response
-            HttpRequest _request = GetClientInstance().Put(_queryBuilder.ToString(), _headers, null);
-            if (HttpCallBack != null)
+            // append body params.
+            var bodyText = ApiHelper.JsonSerialize(body);
+
+            // prepare the API call request to fetch the response.
+            HttpRequest httpRequest = this.GetClientInstance().PutBody(queryBuilder.ToString(), headers, bodyText);
+
+            if (this.HttpCallBack != null)
             {
-                HttpCallBack.OnBeforeHttpRequestEventHandler(GetClientInstance(), _request);
+                this.HttpCallBack.OnBeforeHttpRequestEventHandler(this.GetClientInstance(), httpRequest);
             }
 
-            _request = await authManagers["global"].ApplyAsync(_request).ConfigureAwait(false);
+            httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
 
-            //invoke request and get response
-            HttpStringResponse _response = await GetClientInstance().ExecuteAsStringAsync(_request, cancellationToken).ConfigureAwait(false);
-            HttpContext _context = new HttpContext(_request, _response);
-            if (HttpCallBack != null)
+            // invoke request and get response.
+            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+            HttpContext context = new HttpContext(httpRequest, response);
+            if (this.HttpCallBack != null)
             {
-                HttpCallBack.OnAfterHttpResponseEventHandler(GetClientInstance(), _response);
+                this.HttpCallBack.OnAfterHttpResponseEventHandler(this.GetClientInstance(), response);
             }
 
-            //handle errors defined at the API level
-            base.ValidateResponse(_response, _context);
+            // handle errors defined at the API level.
+            this.ValidateResponse(response, context);
 
-            var _responseModel = ApiHelper.JsonDeserialize<Models.AddGroupToCustomerResponse>(_response.Body);
-            _responseModel.Context = _context;
-            return _responseModel;
+            var responseModel = ApiHelper.JsonDeserialize<Models.UpdateCustomerResponse>(response.Body);
+            responseModel.Context = context;
+            return responseModel;
         }
 
+        /// <summary>
+        /// Adds a card on file to an existing customer..
+        /// As with charges, calls to `CreateCustomerCard` are idempotent. Multiple.
+        /// calls with the same card nonce return the same card record that was created.
+        /// with the provided nonce during the _first_ call..
+        /// </summary>
+        /// <param name="customerId">Required parameter: The Square ID of the customer profile the card is linked to..</param>
+        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
+        /// <returns>Returns the Models.CreateCustomerCardResponse response from the API call.</returns>
+        public Models.CreateCustomerCardResponse CreateCustomerCard(
+                string customerId,
+                Models.CreateCustomerCardRequest body)
+        {
+            Task<Models.CreateCustomerCardResponse> t = this.CreateCustomerCardAsync(customerId, body);
+            ApiHelper.RunTaskSynchronously(t);
+            return t.Result;
+        }
+
+        /// <summary>
+        /// Adds a card on file to an existing customer..
+        /// As with charges, calls to `CreateCustomerCard` are idempotent. Multiple.
+        /// calls with the same card nonce return the same card record that was created.
+        /// with the provided nonce during the _first_ call..
+        /// </summary>
+        /// <param name="customerId">Required parameter: The Square ID of the customer profile the card is linked to..</param>
+        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
+        /// <param name="cancellationToken"> cancellationToken. </param>
+        /// <returns>Returns the Models.CreateCustomerCardResponse response from the API call.</returns>
+        public async Task<Models.CreateCustomerCardResponse> CreateCustomerCardAsync(
+                string customerId,
+                Models.CreateCustomerCardRequest body,
+                CancellationToken cancellationToken = default)
+        {
+            // the base uri for api requests.
+            string baseUri = this.Config.GetBaseUri();
+
+            // prepare query string for API call.
+            StringBuilder queryBuilder = new StringBuilder(baseUri);
+            queryBuilder.Append("/v2/customers/{customer_id}/cards");
+
+            // process optional template parameters.
+            ApiHelper.AppendUrlWithTemplateParameters(queryBuilder, new Dictionary<string, object>()
+            {
+                { "customer_id", customerId },
+            });
+
+            // append request with appropriate headers and parameters
+            var headers = new Dictionary<string, string>()
+            {
+                { "user-agent", this.UserAgent },
+                { "accept", "application/json" },
+                { "content-type", "application/json; charset=utf-8" },
+                { "Square-Version", this.Config.SquareVersion },
+            };
+
+            // append body params.
+            var bodyText = ApiHelper.JsonSerialize(body);
+
+            // prepare the API call request to fetch the response.
+            HttpRequest httpRequest = this.GetClientInstance().PostBody(queryBuilder.ToString(), headers, bodyText);
+
+            if (this.HttpCallBack != null)
+            {
+                this.HttpCallBack.OnBeforeHttpRequestEventHandler(this.GetClientInstance(), httpRequest);
+            }
+
+            httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
+
+            // invoke request and get response.
+            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+            HttpContext context = new HttpContext(httpRequest, response);
+            if (this.HttpCallBack != null)
+            {
+                this.HttpCallBack.OnAfterHttpResponseEventHandler(this.GetClientInstance(), response);
+            }
+
+            // handle errors defined at the API level.
+            this.ValidateResponse(response, context);
+
+            var responseModel = ApiHelper.JsonDeserialize<Models.CreateCustomerCardResponse>(response.Body);
+            responseModel.Context = context;
+            return responseModel;
+        }
+
+        /// <summary>
+        /// Removes a card on file from a customer..
+        /// </summary>
+        /// <param name="customerId">Required parameter: The ID of the customer that the card on file belongs to..</param>
+        /// <param name="cardId">Required parameter: The ID of the card on file to delete..</param>
+        /// <returns>Returns the Models.DeleteCustomerCardResponse response from the API call.</returns>
+        public Models.DeleteCustomerCardResponse DeleteCustomerCard(
+                string customerId,
+                string cardId)
+        {
+            Task<Models.DeleteCustomerCardResponse> t = this.DeleteCustomerCardAsync(customerId, cardId);
+            ApiHelper.RunTaskSynchronously(t);
+            return t.Result;
+        }
+
+        /// <summary>
+        /// Removes a card on file from a customer..
+        /// </summary>
+        /// <param name="customerId">Required parameter: The ID of the customer that the card on file belongs to..</param>
+        /// <param name="cardId">Required parameter: The ID of the card on file to delete..</param>
+        /// <param name="cancellationToken"> cancellationToken. </param>
+        /// <returns>Returns the Models.DeleteCustomerCardResponse response from the API call.</returns>
+        public async Task<Models.DeleteCustomerCardResponse> DeleteCustomerCardAsync(
+                string customerId,
+                string cardId,
+                CancellationToken cancellationToken = default)
+        {
+            // the base uri for api requests.
+            string baseUri = this.Config.GetBaseUri();
+
+            // prepare query string for API call.
+            StringBuilder queryBuilder = new StringBuilder(baseUri);
+            queryBuilder.Append("/v2/customers/{customer_id}/cards/{card_id}");
+
+            // process optional template parameters.
+            ApiHelper.AppendUrlWithTemplateParameters(queryBuilder, new Dictionary<string, object>()
+            {
+                { "customer_id", customerId },
+                { "card_id", cardId },
+            });
+
+            // append request with appropriate headers and parameters
+            var headers = new Dictionary<string, string>()
+            {
+                { "user-agent", this.UserAgent },
+                { "accept", "application/json" },
+                { "Square-Version", this.Config.SquareVersion },
+            };
+
+            // prepare the API call request to fetch the response.
+            HttpRequest httpRequest = this.GetClientInstance().Delete(queryBuilder.ToString(), headers, null);
+
+            if (this.HttpCallBack != null)
+            {
+                this.HttpCallBack.OnBeforeHttpRequestEventHandler(this.GetClientInstance(), httpRequest);
+            }
+
+            httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
+
+            // invoke request and get response.
+            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+            HttpContext context = new HttpContext(httpRequest, response);
+            if (this.HttpCallBack != null)
+            {
+                this.HttpCallBack.OnAfterHttpResponseEventHandler(this.GetClientInstance(), response);
+            }
+
+            // handle errors defined at the API level.
+            this.ValidateResponse(response, context);
+
+            var responseModel = ApiHelper.JsonDeserialize<Models.DeleteCustomerCardResponse>(response.Body);
+            responseModel.Context = context;
+            return responseModel;
+        }
+
+        /// <summary>
+        /// Removes a group membership from a customer..
+        /// The customer is identified by the `customer_id` value.
+        /// and the customer group is identified by the `group_id` value..
+        /// </summary>
+        /// <param name="customerId">Required parameter: The ID of the customer to remove from the group..</param>
+        /// <param name="groupId">Required parameter: The ID of the customer group to remove the customer from..</param>
+        /// <returns>Returns the Models.RemoveGroupFromCustomerResponse response from the API call.</returns>
+        public Models.RemoveGroupFromCustomerResponse RemoveGroupFromCustomer(
+                string customerId,
+                string groupId)
+        {
+            Task<Models.RemoveGroupFromCustomerResponse> t = this.RemoveGroupFromCustomerAsync(customerId, groupId);
+            ApiHelper.RunTaskSynchronously(t);
+            return t.Result;
+        }
+
+        /// <summary>
+        /// Removes a group membership from a customer..
+        /// The customer is identified by the `customer_id` value.
+        /// and the customer group is identified by the `group_id` value..
+        /// </summary>
+        /// <param name="customerId">Required parameter: The ID of the customer to remove from the group..</param>
+        /// <param name="groupId">Required parameter: The ID of the customer group to remove the customer from..</param>
+        /// <param name="cancellationToken"> cancellationToken. </param>
+        /// <returns>Returns the Models.RemoveGroupFromCustomerResponse response from the API call.</returns>
+        public async Task<Models.RemoveGroupFromCustomerResponse> RemoveGroupFromCustomerAsync(
+                string customerId,
+                string groupId,
+                CancellationToken cancellationToken = default)
+        {
+            // the base uri for api requests.
+            string baseUri = this.Config.GetBaseUri();
+
+            // prepare query string for API call.
+            StringBuilder queryBuilder = new StringBuilder(baseUri);
+            queryBuilder.Append("/v2/customers/{customer_id}/groups/{group_id}");
+
+            // process optional template parameters.
+            ApiHelper.AppendUrlWithTemplateParameters(queryBuilder, new Dictionary<string, object>()
+            {
+                { "customer_id", customerId },
+                { "group_id", groupId },
+            });
+
+            // append request with appropriate headers and parameters
+            var headers = new Dictionary<string, string>()
+            {
+                { "user-agent", this.UserAgent },
+                { "accept", "application/json" },
+                { "Square-Version", this.Config.SquareVersion },
+            };
+
+            // prepare the API call request to fetch the response.
+            HttpRequest httpRequest = this.GetClientInstance().Delete(queryBuilder.ToString(), headers, null);
+
+            if (this.HttpCallBack != null)
+            {
+                this.HttpCallBack.OnBeforeHttpRequestEventHandler(this.GetClientInstance(), httpRequest);
+            }
+
+            httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
+
+            // invoke request and get response.
+            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+            HttpContext context = new HttpContext(httpRequest, response);
+            if (this.HttpCallBack != null)
+            {
+                this.HttpCallBack.OnAfterHttpResponseEventHandler(this.GetClientInstance(), response);
+            }
+
+            // handle errors defined at the API level.
+            this.ValidateResponse(response, context);
+
+            var responseModel = ApiHelper.JsonDeserialize<Models.RemoveGroupFromCustomerResponse>(response.Body);
+            responseModel.Context = context;
+            return responseModel;
+        }
+
+        /// <summary>
+        /// Adds a group membership to a customer..
+        /// The customer is identified by the `customer_id` value.
+        /// and the customer group is identified by the `group_id` value..
+        /// </summary>
+        /// <param name="customerId">Required parameter: The ID of the customer to add to a group..</param>
+        /// <param name="groupId">Required parameter: The ID of the customer group to add the customer to..</param>
+        /// <returns>Returns the Models.AddGroupToCustomerResponse response from the API call.</returns>
+        public Models.AddGroupToCustomerResponse AddGroupToCustomer(
+                string customerId,
+                string groupId)
+        {
+            Task<Models.AddGroupToCustomerResponse> t = this.AddGroupToCustomerAsync(customerId, groupId);
+            ApiHelper.RunTaskSynchronously(t);
+            return t.Result;
+        }
+
+        /// <summary>
+        /// Adds a group membership to a customer..
+        /// The customer is identified by the `customer_id` value.
+        /// and the customer group is identified by the `group_id` value..
+        /// </summary>
+        /// <param name="customerId">Required parameter: The ID of the customer to add to a group..</param>
+        /// <param name="groupId">Required parameter: The ID of the customer group to add the customer to..</param>
+        /// <param name="cancellationToken"> cancellationToken. </param>
+        /// <returns>Returns the Models.AddGroupToCustomerResponse response from the API call.</returns>
+        public async Task<Models.AddGroupToCustomerResponse> AddGroupToCustomerAsync(
+                string customerId,
+                string groupId,
+                CancellationToken cancellationToken = default)
+        {
+            // the base uri for api requests.
+            string baseUri = this.Config.GetBaseUri();
+
+            // prepare query string for API call.
+            StringBuilder queryBuilder = new StringBuilder(baseUri);
+            queryBuilder.Append("/v2/customers/{customer_id}/groups/{group_id}");
+
+            // process optional template parameters.
+            ApiHelper.AppendUrlWithTemplateParameters(queryBuilder, new Dictionary<string, object>()
+            {
+                { "customer_id", customerId },
+                { "group_id", groupId },
+            });
+
+            // append request with appropriate headers and parameters
+            var headers = new Dictionary<string, string>()
+            {
+                { "user-agent", this.UserAgent },
+                { "accept", "application/json" },
+                { "Square-Version", this.Config.SquareVersion },
+            };
+
+            // prepare the API call request to fetch the response.
+            HttpRequest httpRequest = this.GetClientInstance().Put(queryBuilder.ToString(), headers, null);
+
+            if (this.HttpCallBack != null)
+            {
+                this.HttpCallBack.OnBeforeHttpRequestEventHandler(this.GetClientInstance(), httpRequest);
+            }
+
+            httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
+
+            // invoke request and get response.
+            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+            HttpContext context = new HttpContext(httpRequest, response);
+            if (this.HttpCallBack != null)
+            {
+                this.HttpCallBack.OnAfterHttpResponseEventHandler(this.GetClientInstance(), response);
+            }
+
+            // handle errors defined at the API level.
+            this.ValidateResponse(response, context);
+
+            var responseModel = ApiHelper.JsonDeserialize<Models.AddGroupToCustomerResponse>(response.Body);
+            responseModel.Context = context;
+            return responseModel;
+        }
     }
 }

@@ -1,29 +1,39 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class V1PaymentItemDetail 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// V1PaymentItemDetail.
+    /// </summary>
+    public class V1PaymentItemDetail
     {
-        public V1PaymentItemDetail(string categoryName = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="V1PaymentItemDetail"/> class.
+        /// </summary>
+        /// <param name="categoryName">category_name.</param>
+        /// <param name="sku">sku.</param>
+        /// <param name="itemId">item_id.</param>
+        /// <param name="itemVariationId">item_variation_id.</param>
+        public V1PaymentItemDetail(
+            string categoryName = null,
             string sku = null,
             string itemId = null,
             string itemVariationId = null)
         {
-            CategoryName = categoryName;
-            Sku = sku;
-            ItemId = itemId;
-            ItemVariationId = itemVariationId;
+            this.CategoryName = categoryName;
+            this.Sku = sku;
+            this.ItemId = itemId;
+            this.ItemVariationId = itemVariationId;
         }
 
         /// <summary>
@@ -50,6 +60,7 @@ namespace Square.Models
         [JsonProperty("item_variation_id", NullValueHandling = NullValueHandling.Ignore)]
         public string ItemVariationId { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -59,14 +70,7 @@ namespace Square.Models
             return $"V1PaymentItemDetail : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"CategoryName = {(CategoryName == null ? "null" : CategoryName == string.Empty ? "" : CategoryName)}");
-            toStringOutput.Add($"Sku = {(Sku == null ? "null" : Sku == string.Empty ? "" : Sku)}");
-            toStringOutput.Add($"ItemId = {(ItemId == null ? "null" : ItemId == string.Empty ? "" : ItemId)}");
-            toStringOutput.Add($"ItemVariationId = {(ItemVariationId == null ? "null" : ItemVariationId == string.Empty ? "" : ItemVariationId)}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -80,49 +84,69 @@ namespace Square.Models
             }
 
             return obj is V1PaymentItemDetail other &&
-                ((CategoryName == null && other.CategoryName == null) || (CategoryName?.Equals(other.CategoryName) == true)) &&
-                ((Sku == null && other.Sku == null) || (Sku?.Equals(other.Sku) == true)) &&
-                ((ItemId == null && other.ItemId == null) || (ItemId?.Equals(other.ItemId) == true)) &&
-                ((ItemVariationId == null && other.ItemVariationId == null) || (ItemVariationId?.Equals(other.ItemVariationId) == true));
+                ((this.CategoryName == null && other.CategoryName == null) || (this.CategoryName?.Equals(other.CategoryName) == true)) &&
+                ((this.Sku == null && other.Sku == null) || (this.Sku?.Equals(other.Sku) == true)) &&
+                ((this.ItemId == null && other.ItemId == null) || (this.ItemId?.Equals(other.ItemId) == true)) &&
+                ((this.ItemVariationId == null && other.ItemVariationId == null) || (this.ItemVariationId?.Equals(other.ItemVariationId) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 1460876522;
 
-            if (CategoryName != null)
+            if (this.CategoryName != null)
             {
-               hashCode += CategoryName.GetHashCode();
+               hashCode += this.CategoryName.GetHashCode();
             }
 
-            if (Sku != null)
+            if (this.Sku != null)
             {
-               hashCode += Sku.GetHashCode();
+               hashCode += this.Sku.GetHashCode();
             }
 
-            if (ItemId != null)
+            if (this.ItemId != null)
             {
-               hashCode += ItemId.GetHashCode();
+               hashCode += this.ItemId.GetHashCode();
             }
 
-            if (ItemVariationId != null)
+            if (this.ItemVariationId != null)
             {
-               hashCode += ItemVariationId.GetHashCode();
+               hashCode += this.ItemVariationId.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.CategoryName = {(this.CategoryName == null ? "null" : this.CategoryName == string.Empty ? "" : this.CategoryName)}");
+            toStringOutput.Add($"this.Sku = {(this.Sku == null ? "null" : this.Sku == string.Empty ? "" : this.Sku)}");
+            toStringOutput.Add($"this.ItemId = {(this.ItemId == null ? "null" : this.ItemId == string.Empty ? "" : this.ItemId)}");
+            toStringOutput.Add($"this.ItemVariationId = {(this.ItemVariationId == null ? "null" : this.ItemVariationId == string.Empty ? "" : this.ItemVariationId)}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .CategoryName(CategoryName)
-                .Sku(Sku)
-                .ItemId(ItemId)
-                .ItemVariationId(ItemVariationId);
+                .CategoryName(this.CategoryName)
+                .Sku(this.Sku)
+                .ItemId(this.ItemId)
+                .ItemVariationId(this.ItemVariationId);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string categoryName;
@@ -130,38 +154,61 @@ namespace Square.Models
             private string itemId;
             private string itemVariationId;
 
-
-
+             /// <summary>
+             /// CategoryName.
+             /// </summary>
+             /// <param name="categoryName"> categoryName. </param>
+             /// <returns> Builder. </returns>
             public Builder CategoryName(string categoryName)
             {
                 this.categoryName = categoryName;
                 return this;
             }
 
+             /// <summary>
+             /// Sku.
+             /// </summary>
+             /// <param name="sku"> sku. </param>
+             /// <returns> Builder. </returns>
             public Builder Sku(string sku)
             {
                 this.sku = sku;
                 return this;
             }
 
+             /// <summary>
+             /// ItemId.
+             /// </summary>
+             /// <param name="itemId"> itemId. </param>
+             /// <returns> Builder. </returns>
             public Builder ItemId(string itemId)
             {
                 this.itemId = itemId;
                 return this;
             }
 
+             /// <summary>
+             /// ItemVariationId.
+             /// </summary>
+             /// <param name="itemVariationId"> itemVariationId. </param>
+             /// <returns> Builder. </returns>
             public Builder ItemVariationId(string itemVariationId)
             {
                 this.itemVariationId = itemVariationId;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> V1PaymentItemDetail. </returns>
             public V1PaymentItemDetail Build()
             {
-                return new V1PaymentItemDetail(categoryName,
-                    sku,
-                    itemId,
-                    itemVariationId);
+                return new V1PaymentItemDetail(
+                    this.categoryName,
+                    this.sku,
+                    this.itemId,
+                    this.itemVariationId);
             }
         }
     }

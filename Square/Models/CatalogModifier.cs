@@ -1,29 +1,39 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class CatalogModifier 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// CatalogModifier.
+    /// </summary>
+    public class CatalogModifier
     {
-        public CatalogModifier(string name = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CatalogModifier"/> class.
+        /// </summary>
+        /// <param name="name">name.</param>
+        /// <param name="priceMoney">price_money.</param>
+        /// <param name="ordinal">ordinal.</param>
+        /// <param name="modifierListId">modifier_list_id.</param>
+        public CatalogModifier(
+            string name = null,
             Models.Money priceMoney = null,
             int? ordinal = null,
             string modifierListId = null)
         {
-            Name = name;
-            PriceMoney = priceMoney;
-            Ordinal = ordinal;
-            ModifierListId = modifierListId;
+            this.Name = name;
+            this.PriceMoney = priceMoney;
+            this.Ordinal = ordinal;
+            this.ModifierListId = modifierListId;
         }
 
         /// <summary>
@@ -55,6 +65,7 @@ namespace Square.Models
         [JsonProperty("modifier_list_id", NullValueHandling = NullValueHandling.Ignore)]
         public string ModifierListId { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -64,14 +75,7 @@ namespace Square.Models
             return $"CatalogModifier : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Name = {(Name == null ? "null" : Name == string.Empty ? "" : Name)}");
-            toStringOutput.Add($"PriceMoney = {(PriceMoney == null ? "null" : PriceMoney.ToString())}");
-            toStringOutput.Add($"Ordinal = {(Ordinal == null ? "null" : Ordinal.ToString())}");
-            toStringOutput.Add($"ModifierListId = {(ModifierListId == null ? "null" : ModifierListId == string.Empty ? "" : ModifierListId)}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -85,49 +89,69 @@ namespace Square.Models
             }
 
             return obj is CatalogModifier other &&
-                ((Name == null && other.Name == null) || (Name?.Equals(other.Name) == true)) &&
-                ((PriceMoney == null && other.PriceMoney == null) || (PriceMoney?.Equals(other.PriceMoney) == true)) &&
-                ((Ordinal == null && other.Ordinal == null) || (Ordinal?.Equals(other.Ordinal) == true)) &&
-                ((ModifierListId == null && other.ModifierListId == null) || (ModifierListId?.Equals(other.ModifierListId) == true));
+                ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
+                ((this.PriceMoney == null && other.PriceMoney == null) || (this.PriceMoney?.Equals(other.PriceMoney) == true)) &&
+                ((this.Ordinal == null && other.Ordinal == null) || (this.Ordinal?.Equals(other.Ordinal) == true)) &&
+                ((this.ModifierListId == null && other.ModifierListId == null) || (this.ModifierListId?.Equals(other.ModifierListId) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 858792878;
 
-            if (Name != null)
+            if (this.Name != null)
             {
-               hashCode += Name.GetHashCode();
+               hashCode += this.Name.GetHashCode();
             }
 
-            if (PriceMoney != null)
+            if (this.PriceMoney != null)
             {
-               hashCode += PriceMoney.GetHashCode();
+               hashCode += this.PriceMoney.GetHashCode();
             }
 
-            if (Ordinal != null)
+            if (this.Ordinal != null)
             {
-               hashCode += Ordinal.GetHashCode();
+               hashCode += this.Ordinal.GetHashCode();
             }
 
-            if (ModifierListId != null)
+            if (this.ModifierListId != null)
             {
-               hashCode += ModifierListId.GetHashCode();
+               hashCode += this.ModifierListId.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Name = {(this.Name == null ? "null" : this.Name == string.Empty ? "" : this.Name)}");
+            toStringOutput.Add($"this.PriceMoney = {(this.PriceMoney == null ? "null" : this.PriceMoney.ToString())}");
+            toStringOutput.Add($"this.Ordinal = {(this.Ordinal == null ? "null" : this.Ordinal.ToString())}");
+            toStringOutput.Add($"this.ModifierListId = {(this.ModifierListId == null ? "null" : this.ModifierListId == string.Empty ? "" : this.ModifierListId)}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .Name(Name)
-                .PriceMoney(PriceMoney)
-                .Ordinal(Ordinal)
-                .ModifierListId(ModifierListId);
+                .Name(this.Name)
+                .PriceMoney(this.PriceMoney)
+                .Ordinal(this.Ordinal)
+                .ModifierListId(this.ModifierListId);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string name;
@@ -135,38 +159,61 @@ namespace Square.Models
             private int? ordinal;
             private string modifierListId;
 
-
-
+             /// <summary>
+             /// Name.
+             /// </summary>
+             /// <param name="name"> name. </param>
+             /// <returns> Builder. </returns>
             public Builder Name(string name)
             {
                 this.name = name;
                 return this;
             }
 
+             /// <summary>
+             /// PriceMoney.
+             /// </summary>
+             /// <param name="priceMoney"> priceMoney. </param>
+             /// <returns> Builder. </returns>
             public Builder PriceMoney(Models.Money priceMoney)
             {
                 this.priceMoney = priceMoney;
                 return this;
             }
 
+             /// <summary>
+             /// Ordinal.
+             /// </summary>
+             /// <param name="ordinal"> ordinal. </param>
+             /// <returns> Builder. </returns>
             public Builder Ordinal(int? ordinal)
             {
                 this.ordinal = ordinal;
                 return this;
             }
 
+             /// <summary>
+             /// ModifierListId.
+             /// </summary>
+             /// <param name="modifierListId"> modifierListId. </param>
+             /// <returns> Builder. </returns>
             public Builder ModifierListId(string modifierListId)
             {
                 this.modifierListId = modifierListId;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> CatalogModifier. </returns>
             public CatalogModifier Build()
             {
-                return new CatalogModifier(name,
-                    priceMoney,
-                    ordinal,
-                    modifierListId);
+                return new CatalogModifier(
+                    this.name,
+                    this.priceMoney,
+                    this.ordinal,
+                    this.modifierListId);
             }
         }
     }

@@ -1,33 +1,41 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class SearchOrdersSourceFilter 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// SearchOrdersSourceFilter.
+    /// </summary>
+    public class SearchOrdersSourceFilter
     {
-        public SearchOrdersSourceFilter(IList<string> sourceNames = null)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SearchOrdersSourceFilter"/> class.
+        /// </summary>
+        /// <param name="sourceNames">source_names.</param>
+        public SearchOrdersSourceFilter(
+            IList<string> sourceNames = null)
         {
-            SourceNames = sourceNames;
+            this.SourceNames = sourceNames;
         }
 
         /// <summary>
-        /// Filters by [Source](#type-ordersource) `name`. Will return any orders
+        /// Filters by [Source]($m/OrderSource) `name`. Will return any orders
         /// with with a `source.name` that matches any of the listed source names.
         /// Max: 10 source names.
         /// </summary>
         [JsonProperty("source_names", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> SourceNames { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -37,11 +45,7 @@ namespace Square.Models
             return $"SearchOrdersSourceFilter : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"SourceNames = {(SourceNames == null ? "null" : $"[{ string.Join(", ", SourceNames)} ]")}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -55,43 +59,68 @@ namespace Square.Models
             }
 
             return obj is SearchOrdersSourceFilter other &&
-                ((SourceNames == null && other.SourceNames == null) || (SourceNames?.Equals(other.SourceNames) == true));
+                ((this.SourceNames == null && other.SourceNames == null) || (this.SourceNames?.Equals(other.SourceNames) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -530513052;
 
-            if (SourceNames != null)
+            if (this.SourceNames != null)
             {
-               hashCode += SourceNames.GetHashCode();
+               hashCode += this.SourceNames.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.SourceNames = {(this.SourceNames == null ? "null" : $"[{string.Join(", ", this.SourceNames)} ]")}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .SourceNames(SourceNames);
+                .SourceNames(this.SourceNames);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private IList<string> sourceNames;
 
-
-
+             /// <summary>
+             /// SourceNames.
+             /// </summary>
+             /// <param name="sourceNames"> sourceNames. </param>
+             /// <returns> Builder. </returns>
             public Builder SourceNames(IList<string> sourceNames)
             {
                 this.sourceNames = sourceNames;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> SearchOrdersSourceFilter. </returns>
             public SearchOrdersSourceFilter Build()
             {
-                return new SearchOrdersSourceFilter(sourceNames);
+                return new SearchOrdersSourceFilter(
+                    this.sourceNames);
             }
         }
     }

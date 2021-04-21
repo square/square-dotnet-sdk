@@ -1,32 +1,45 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square.Http.Client;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class SearchCatalogItemsResponse 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Http.Client;
+    using Square.Utilities;
+
+    /// <summary>
+    /// SearchCatalogItemsResponse.
+    /// </summary>
+    public class SearchCatalogItemsResponse
     {
-        public SearchCatalogItemsResponse(IList<Models.Error> errors = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SearchCatalogItemsResponse"/> class.
+        /// </summary>
+        /// <param name="errors">errors.</param>
+        /// <param name="items">items.</param>
+        /// <param name="cursor">cursor.</param>
+        /// <param name="matchedVariationIds">matched_variation_ids.</param>
+        public SearchCatalogItemsResponse(
+            IList<Models.Error> errors = null,
             IList<Models.CatalogObject> items = null,
             string cursor = null,
             IList<string> matchedVariationIds = null)
         {
-            Errors = errors;
-            Items = items;
-            Cursor = cursor;
-            MatchedVariationIds = matchedVariationIds;
+            this.Errors = errors;
+            this.Items = items;
+            this.Cursor = cursor;
+            this.MatchedVariationIds = matchedVariationIds;
         }
 
+        /// <summary>
+        /// Gets http context.
+        /// </summary>
         [JsonIgnore]
         public HttpContext Context { get; internal set; }
 
@@ -54,6 +67,7 @@ namespace Square.Models
         [JsonProperty("matched_variation_ids", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> MatchedVariationIds { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -63,14 +77,7 @@ namespace Square.Models
             return $"SearchCatalogItemsResponse : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Errors = {(Errors == null ? "null" : $"[{ string.Join(", ", Errors)} ]")}");
-            toStringOutput.Add($"Items = {(Items == null ? "null" : $"[{ string.Join(", ", Items)} ]")}");
-            toStringOutput.Add($"Cursor = {(Cursor == null ? "null" : Cursor == string.Empty ? "" : Cursor)}");
-            toStringOutput.Add($"MatchedVariationIds = {(MatchedVariationIds == null ? "null" : $"[{ string.Join(", ", MatchedVariationIds)} ]")}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -84,55 +91,75 @@ namespace Square.Models
             }
 
             return obj is SearchCatalogItemsResponse other &&
-                ((Context == null && other.Context == null) || (Context?.Equals(other.Context) == true)) &&
-                ((Errors == null && other.Errors == null) || (Errors?.Equals(other.Errors) == true)) &&
-                ((Items == null && other.Items == null) || (Items?.Equals(other.Items) == true)) &&
-                ((Cursor == null && other.Cursor == null) || (Cursor?.Equals(other.Cursor) == true)) &&
-                ((MatchedVariationIds == null && other.MatchedVariationIds == null) || (MatchedVariationIds?.Equals(other.MatchedVariationIds) == true));
+                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
+                ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true)) &&
+                ((this.Items == null && other.Items == null) || (this.Items?.Equals(other.Items) == true)) &&
+                ((this.Cursor == null && other.Cursor == null) || (this.Cursor?.Equals(other.Cursor) == true)) &&
+                ((this.MatchedVariationIds == null && other.MatchedVariationIds == null) || (this.MatchedVariationIds?.Equals(other.MatchedVariationIds) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 1398933799;
 
-            if (Context != null)
+            if (this.Context != null)
             {
-                hashCode += Context.GetHashCode();
+                hashCode += this.Context.GetHashCode();
             }
 
-            if (Errors != null)
+            if (this.Errors != null)
             {
-               hashCode += Errors.GetHashCode();
+               hashCode += this.Errors.GetHashCode();
             }
 
-            if (Items != null)
+            if (this.Items != null)
             {
-               hashCode += Items.GetHashCode();
+               hashCode += this.Items.GetHashCode();
             }
 
-            if (Cursor != null)
+            if (this.Cursor != null)
             {
-               hashCode += Cursor.GetHashCode();
+               hashCode += this.Cursor.GetHashCode();
             }
 
-            if (MatchedVariationIds != null)
+            if (this.MatchedVariationIds != null)
             {
-               hashCode += MatchedVariationIds.GetHashCode();
+               hashCode += this.MatchedVariationIds.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Errors = {(this.Errors == null ? "null" : $"[{string.Join(", ", this.Errors)} ]")}");
+            toStringOutput.Add($"this.Items = {(this.Items == null ? "null" : $"[{string.Join(", ", this.Items)} ]")}");
+            toStringOutput.Add($"this.Cursor = {(this.Cursor == null ? "null" : this.Cursor == string.Empty ? "" : this.Cursor)}");
+            toStringOutput.Add($"this.MatchedVariationIds = {(this.MatchedVariationIds == null ? "null" : $"[{string.Join(", ", this.MatchedVariationIds)} ]")}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .Errors(Errors)
-                .Items(Items)
-                .Cursor(Cursor)
-                .MatchedVariationIds(MatchedVariationIds);
+                .Errors(this.Errors)
+                .Items(this.Items)
+                .Cursor(this.Cursor)
+                .MatchedVariationIds(this.MatchedVariationIds);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private IList<Models.Error> errors;
@@ -140,38 +167,61 @@ namespace Square.Models
             private string cursor;
             private IList<string> matchedVariationIds;
 
-
-
+             /// <summary>
+             /// Errors.
+             /// </summary>
+             /// <param name="errors"> errors. </param>
+             /// <returns> Builder. </returns>
             public Builder Errors(IList<Models.Error> errors)
             {
                 this.errors = errors;
                 return this;
             }
 
+             /// <summary>
+             /// Items.
+             /// </summary>
+             /// <param name="items"> items. </param>
+             /// <returns> Builder. </returns>
             public Builder Items(IList<Models.CatalogObject> items)
             {
                 this.items = items;
                 return this;
             }
 
+             /// <summary>
+             /// Cursor.
+             /// </summary>
+             /// <param name="cursor"> cursor. </param>
+             /// <returns> Builder. </returns>
             public Builder Cursor(string cursor)
             {
                 this.cursor = cursor;
                 return this;
             }
 
+             /// <summary>
+             /// MatchedVariationIds.
+             /// </summary>
+             /// <param name="matchedVariationIds"> matchedVariationIds. </param>
+             /// <returns> Builder. </returns>
             public Builder MatchedVariationIds(IList<string> matchedVariationIds)
             {
                 this.matchedVariationIds = matchedVariationIds;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> SearchCatalogItemsResponse. </returns>
             public SearchCatalogItemsResponse Build()
             {
-                return new SearchCatalogItemsResponse(errors,
-                    items,
-                    cursor,
-                    matchedVariationIds);
+                return new SearchCatalogItemsResponse(
+                    this.errors,
+                    this.items,
+                    this.cursor,
+                    this.matchedVariationIds);
             }
         }
     }

@@ -1,21 +1,41 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class V1PaymentItemization 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// V1PaymentItemization.
+    /// </summary>
+    public class V1PaymentItemization
     {
-        public V1PaymentItemization(string name = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="V1PaymentItemization"/> class.
+        /// </summary>
+        /// <param name="name">name.</param>
+        /// <param name="quantity">quantity.</param>
+        /// <param name="itemizationType">itemization_type.</param>
+        /// <param name="itemDetail">item_detail.</param>
+        /// <param name="notes">notes.</param>
+        /// <param name="itemVariationName">item_variation_name.</param>
+        /// <param name="totalMoney">total_money.</param>
+        /// <param name="singleQuantityMoney">single_quantity_money.</param>
+        /// <param name="grossSalesMoney">gross_sales_money.</param>
+        /// <param name="discountMoney">discount_money.</param>
+        /// <param name="netSalesMoney">net_sales_money.</param>
+        /// <param name="taxes">taxes.</param>
+        /// <param name="discounts">discounts.</param>
+        /// <param name="modifiers">modifiers.</param>
+        public V1PaymentItemization(
+            string name = null,
             double? quantity = null,
             string itemizationType = null,
             Models.V1PaymentItemDetail itemDetail = null,
@@ -30,20 +50,20 @@ namespace Square.Models
             IList<Models.V1PaymentDiscount> discounts = null,
             IList<Models.V1PaymentModifier> modifiers = null)
         {
-            Name = name;
-            Quantity = quantity;
-            ItemizationType = itemizationType;
-            ItemDetail = itemDetail;
-            Notes = notes;
-            ItemVariationName = itemVariationName;
-            TotalMoney = totalMoney;
-            SingleQuantityMoney = singleQuantityMoney;
-            GrossSalesMoney = grossSalesMoney;
-            DiscountMoney = discountMoney;
-            NetSalesMoney = netSalesMoney;
-            Taxes = taxes;
-            Discounts = discounts;
-            Modifiers = modifiers;
+            this.Name = name;
+            this.Quantity = quantity;
+            this.ItemizationType = itemizationType;
+            this.ItemDetail = itemDetail;
+            this.Notes = notes;
+            this.ItemVariationName = itemVariationName;
+            this.TotalMoney = totalMoney;
+            this.SingleQuantityMoney = singleQuantityMoney;
+            this.GrossSalesMoney = grossSalesMoney;
+            this.DiscountMoney = discountMoney;
+            this.NetSalesMoney = netSalesMoney;
+            this.Taxes = taxes;
+            this.Discounts = discounts;
+            this.Modifiers = modifiers;
         }
 
         /// <summary>
@@ -59,7 +79,7 @@ namespace Square.Models
         public double? Quantity { get; }
 
         /// <summary>
-        /// Getter for itemization_type
+        /// Gets or sets ItemizationType.
         /// </summary>
         [JsonProperty("itemization_type", NullValueHandling = NullValueHandling.Ignore)]
         public string ItemizationType { get; }
@@ -83,31 +103,31 @@ namespace Square.Models
         public string ItemVariationName { get; }
 
         /// <summary>
-        /// Getter for total_money
+        /// Gets or sets TotalMoney.
         /// </summary>
         [JsonProperty("total_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1Money TotalMoney { get; }
 
         /// <summary>
-        /// Getter for single_quantity_money
+        /// Gets or sets SingleQuantityMoney.
         /// </summary>
         [JsonProperty("single_quantity_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1Money SingleQuantityMoney { get; }
 
         /// <summary>
-        /// Getter for gross_sales_money
+        /// Gets or sets GrossSalesMoney.
         /// </summary>
         [JsonProperty("gross_sales_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1Money GrossSalesMoney { get; }
 
         /// <summary>
-        /// Getter for discount_money
+        /// Gets or sets DiscountMoney.
         /// </summary>
         [JsonProperty("discount_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1Money DiscountMoney { get; }
 
         /// <summary>
-        /// Getter for net_sales_money
+        /// Gets or sets NetSalesMoney.
         /// </summary>
         [JsonProperty("net_sales_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1Money NetSalesMoney { get; }
@@ -130,6 +150,7 @@ namespace Square.Models
         [JsonProperty("modifiers", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.V1PaymentModifier> Modifiers { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -139,24 +160,7 @@ namespace Square.Models
             return $"V1PaymentItemization : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Name = {(Name == null ? "null" : Name == string.Empty ? "" : Name)}");
-            toStringOutput.Add($"Quantity = {(Quantity == null ? "null" : Quantity.ToString())}");
-            toStringOutput.Add($"ItemizationType = {(ItemizationType == null ? "null" : ItemizationType.ToString())}");
-            toStringOutput.Add($"ItemDetail = {(ItemDetail == null ? "null" : ItemDetail.ToString())}");
-            toStringOutput.Add($"Notes = {(Notes == null ? "null" : Notes == string.Empty ? "" : Notes)}");
-            toStringOutput.Add($"ItemVariationName = {(ItemVariationName == null ? "null" : ItemVariationName == string.Empty ? "" : ItemVariationName)}");
-            toStringOutput.Add($"TotalMoney = {(TotalMoney == null ? "null" : TotalMoney.ToString())}");
-            toStringOutput.Add($"SingleQuantityMoney = {(SingleQuantityMoney == null ? "null" : SingleQuantityMoney.ToString())}");
-            toStringOutput.Add($"GrossSalesMoney = {(GrossSalesMoney == null ? "null" : GrossSalesMoney.ToString())}");
-            toStringOutput.Add($"DiscountMoney = {(DiscountMoney == null ? "null" : DiscountMoney.ToString())}");
-            toStringOutput.Add($"NetSalesMoney = {(NetSalesMoney == null ? "null" : NetSalesMoney.ToString())}");
-            toStringOutput.Add($"Taxes = {(Taxes == null ? "null" : $"[{ string.Join(", ", Taxes)} ]")}");
-            toStringOutput.Add($"Discounts = {(Discounts == null ? "null" : $"[{ string.Join(", ", Discounts)} ]")}");
-            toStringOutput.Add($"Modifiers = {(Modifiers == null ? "null" : $"[{ string.Join(", ", Modifiers)} ]")}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -170,119 +174,149 @@ namespace Square.Models
             }
 
             return obj is V1PaymentItemization other &&
-                ((Name == null && other.Name == null) || (Name?.Equals(other.Name) == true)) &&
-                ((Quantity == null && other.Quantity == null) || (Quantity?.Equals(other.Quantity) == true)) &&
-                ((ItemizationType == null && other.ItemizationType == null) || (ItemizationType?.Equals(other.ItemizationType) == true)) &&
-                ((ItemDetail == null && other.ItemDetail == null) || (ItemDetail?.Equals(other.ItemDetail) == true)) &&
-                ((Notes == null && other.Notes == null) || (Notes?.Equals(other.Notes) == true)) &&
-                ((ItemVariationName == null && other.ItemVariationName == null) || (ItemVariationName?.Equals(other.ItemVariationName) == true)) &&
-                ((TotalMoney == null && other.TotalMoney == null) || (TotalMoney?.Equals(other.TotalMoney) == true)) &&
-                ((SingleQuantityMoney == null && other.SingleQuantityMoney == null) || (SingleQuantityMoney?.Equals(other.SingleQuantityMoney) == true)) &&
-                ((GrossSalesMoney == null && other.GrossSalesMoney == null) || (GrossSalesMoney?.Equals(other.GrossSalesMoney) == true)) &&
-                ((DiscountMoney == null && other.DiscountMoney == null) || (DiscountMoney?.Equals(other.DiscountMoney) == true)) &&
-                ((NetSalesMoney == null && other.NetSalesMoney == null) || (NetSalesMoney?.Equals(other.NetSalesMoney) == true)) &&
-                ((Taxes == null && other.Taxes == null) || (Taxes?.Equals(other.Taxes) == true)) &&
-                ((Discounts == null && other.Discounts == null) || (Discounts?.Equals(other.Discounts) == true)) &&
-                ((Modifiers == null && other.Modifiers == null) || (Modifiers?.Equals(other.Modifiers) == true));
+                ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
+                ((this.Quantity == null && other.Quantity == null) || (this.Quantity?.Equals(other.Quantity) == true)) &&
+                ((this.ItemizationType == null && other.ItemizationType == null) || (this.ItemizationType?.Equals(other.ItemizationType) == true)) &&
+                ((this.ItemDetail == null && other.ItemDetail == null) || (this.ItemDetail?.Equals(other.ItemDetail) == true)) &&
+                ((this.Notes == null && other.Notes == null) || (this.Notes?.Equals(other.Notes) == true)) &&
+                ((this.ItemVariationName == null && other.ItemVariationName == null) || (this.ItemVariationName?.Equals(other.ItemVariationName) == true)) &&
+                ((this.TotalMoney == null && other.TotalMoney == null) || (this.TotalMoney?.Equals(other.TotalMoney) == true)) &&
+                ((this.SingleQuantityMoney == null && other.SingleQuantityMoney == null) || (this.SingleQuantityMoney?.Equals(other.SingleQuantityMoney) == true)) &&
+                ((this.GrossSalesMoney == null && other.GrossSalesMoney == null) || (this.GrossSalesMoney?.Equals(other.GrossSalesMoney) == true)) &&
+                ((this.DiscountMoney == null && other.DiscountMoney == null) || (this.DiscountMoney?.Equals(other.DiscountMoney) == true)) &&
+                ((this.NetSalesMoney == null && other.NetSalesMoney == null) || (this.NetSalesMoney?.Equals(other.NetSalesMoney) == true)) &&
+                ((this.Taxes == null && other.Taxes == null) || (this.Taxes?.Equals(other.Taxes) == true)) &&
+                ((this.Discounts == null && other.Discounts == null) || (this.Discounts?.Equals(other.Discounts) == true)) &&
+                ((this.Modifiers == null && other.Modifiers == null) || (this.Modifiers?.Equals(other.Modifiers) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 1047875174;
 
-            if (Name != null)
+            if (this.Name != null)
             {
-               hashCode += Name.GetHashCode();
+               hashCode += this.Name.GetHashCode();
             }
 
-            if (Quantity != null)
+            if (this.Quantity != null)
             {
-               hashCode += Quantity.GetHashCode();
+               hashCode += this.Quantity.GetHashCode();
             }
 
-            if (ItemizationType != null)
+            if (this.ItemizationType != null)
             {
-               hashCode += ItemizationType.GetHashCode();
+               hashCode += this.ItemizationType.GetHashCode();
             }
 
-            if (ItemDetail != null)
+            if (this.ItemDetail != null)
             {
-               hashCode += ItemDetail.GetHashCode();
+               hashCode += this.ItemDetail.GetHashCode();
             }
 
-            if (Notes != null)
+            if (this.Notes != null)
             {
-               hashCode += Notes.GetHashCode();
+               hashCode += this.Notes.GetHashCode();
             }
 
-            if (ItemVariationName != null)
+            if (this.ItemVariationName != null)
             {
-               hashCode += ItemVariationName.GetHashCode();
+               hashCode += this.ItemVariationName.GetHashCode();
             }
 
-            if (TotalMoney != null)
+            if (this.TotalMoney != null)
             {
-               hashCode += TotalMoney.GetHashCode();
+               hashCode += this.TotalMoney.GetHashCode();
             }
 
-            if (SingleQuantityMoney != null)
+            if (this.SingleQuantityMoney != null)
             {
-               hashCode += SingleQuantityMoney.GetHashCode();
+               hashCode += this.SingleQuantityMoney.GetHashCode();
             }
 
-            if (GrossSalesMoney != null)
+            if (this.GrossSalesMoney != null)
             {
-               hashCode += GrossSalesMoney.GetHashCode();
+               hashCode += this.GrossSalesMoney.GetHashCode();
             }
 
-            if (DiscountMoney != null)
+            if (this.DiscountMoney != null)
             {
-               hashCode += DiscountMoney.GetHashCode();
+               hashCode += this.DiscountMoney.GetHashCode();
             }
 
-            if (NetSalesMoney != null)
+            if (this.NetSalesMoney != null)
             {
-               hashCode += NetSalesMoney.GetHashCode();
+               hashCode += this.NetSalesMoney.GetHashCode();
             }
 
-            if (Taxes != null)
+            if (this.Taxes != null)
             {
-               hashCode += Taxes.GetHashCode();
+               hashCode += this.Taxes.GetHashCode();
             }
 
-            if (Discounts != null)
+            if (this.Discounts != null)
             {
-               hashCode += Discounts.GetHashCode();
+               hashCode += this.Discounts.GetHashCode();
             }
 
-            if (Modifiers != null)
+            if (this.Modifiers != null)
             {
-               hashCode += Modifiers.GetHashCode();
+               hashCode += this.Modifiers.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Name = {(this.Name == null ? "null" : this.Name == string.Empty ? "" : this.Name)}");
+            toStringOutput.Add($"this.Quantity = {(this.Quantity == null ? "null" : this.Quantity.ToString())}");
+            toStringOutput.Add($"this.ItemizationType = {(this.ItemizationType == null ? "null" : this.ItemizationType.ToString())}");
+            toStringOutput.Add($"this.ItemDetail = {(this.ItemDetail == null ? "null" : this.ItemDetail.ToString())}");
+            toStringOutput.Add($"this.Notes = {(this.Notes == null ? "null" : this.Notes == string.Empty ? "" : this.Notes)}");
+            toStringOutput.Add($"this.ItemVariationName = {(this.ItemVariationName == null ? "null" : this.ItemVariationName == string.Empty ? "" : this.ItemVariationName)}");
+            toStringOutput.Add($"this.TotalMoney = {(this.TotalMoney == null ? "null" : this.TotalMoney.ToString())}");
+            toStringOutput.Add($"this.SingleQuantityMoney = {(this.SingleQuantityMoney == null ? "null" : this.SingleQuantityMoney.ToString())}");
+            toStringOutput.Add($"this.GrossSalesMoney = {(this.GrossSalesMoney == null ? "null" : this.GrossSalesMoney.ToString())}");
+            toStringOutput.Add($"this.DiscountMoney = {(this.DiscountMoney == null ? "null" : this.DiscountMoney.ToString())}");
+            toStringOutput.Add($"this.NetSalesMoney = {(this.NetSalesMoney == null ? "null" : this.NetSalesMoney.ToString())}");
+            toStringOutput.Add($"this.Taxes = {(this.Taxes == null ? "null" : $"[{string.Join(", ", this.Taxes)} ]")}");
+            toStringOutput.Add($"this.Discounts = {(this.Discounts == null ? "null" : $"[{string.Join(", ", this.Discounts)} ]")}");
+            toStringOutput.Add($"this.Modifiers = {(this.Modifiers == null ? "null" : $"[{string.Join(", ", this.Modifiers)} ]")}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .Name(Name)
-                .Quantity(Quantity)
-                .ItemizationType(ItemizationType)
-                .ItemDetail(ItemDetail)
-                .Notes(Notes)
-                .ItemVariationName(ItemVariationName)
-                .TotalMoney(TotalMoney)
-                .SingleQuantityMoney(SingleQuantityMoney)
-                .GrossSalesMoney(GrossSalesMoney)
-                .DiscountMoney(DiscountMoney)
-                .NetSalesMoney(NetSalesMoney)
-                .Taxes(Taxes)
-                .Discounts(Discounts)
-                .Modifiers(Modifiers);
+                .Name(this.Name)
+                .Quantity(this.Quantity)
+                .ItemizationType(this.ItemizationType)
+                .ItemDetail(this.ItemDetail)
+                .Notes(this.Notes)
+                .ItemVariationName(this.ItemVariationName)
+                .TotalMoney(this.TotalMoney)
+                .SingleQuantityMoney(this.SingleQuantityMoney)
+                .GrossSalesMoney(this.GrossSalesMoney)
+                .DiscountMoney(this.DiscountMoney)
+                .NetSalesMoney(this.NetSalesMoney)
+                .Taxes(this.Taxes)
+                .Discounts(this.Discounts)
+                .Modifiers(this.Modifiers);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string name;
@@ -300,108 +334,181 @@ namespace Square.Models
             private IList<Models.V1PaymentDiscount> discounts;
             private IList<Models.V1PaymentModifier> modifiers;
 
-
-
+             /// <summary>
+             /// Name.
+             /// </summary>
+             /// <param name="name"> name. </param>
+             /// <returns> Builder. </returns>
             public Builder Name(string name)
             {
                 this.name = name;
                 return this;
             }
 
+             /// <summary>
+             /// Quantity.
+             /// </summary>
+             /// <param name="quantity"> quantity. </param>
+             /// <returns> Builder. </returns>
             public Builder Quantity(double? quantity)
             {
                 this.quantity = quantity;
                 return this;
             }
 
+             /// <summary>
+             /// ItemizationType.
+             /// </summary>
+             /// <param name="itemizationType"> itemizationType. </param>
+             /// <returns> Builder. </returns>
             public Builder ItemizationType(string itemizationType)
             {
                 this.itemizationType = itemizationType;
                 return this;
             }
 
+             /// <summary>
+             /// ItemDetail.
+             /// </summary>
+             /// <param name="itemDetail"> itemDetail. </param>
+             /// <returns> Builder. </returns>
             public Builder ItemDetail(Models.V1PaymentItemDetail itemDetail)
             {
                 this.itemDetail = itemDetail;
                 return this;
             }
 
+             /// <summary>
+             /// Notes.
+             /// </summary>
+             /// <param name="notes"> notes. </param>
+             /// <returns> Builder. </returns>
             public Builder Notes(string notes)
             {
                 this.notes = notes;
                 return this;
             }
 
+             /// <summary>
+             /// ItemVariationName.
+             /// </summary>
+             /// <param name="itemVariationName"> itemVariationName. </param>
+             /// <returns> Builder. </returns>
             public Builder ItemVariationName(string itemVariationName)
             {
                 this.itemVariationName = itemVariationName;
                 return this;
             }
 
+             /// <summary>
+             /// TotalMoney.
+             /// </summary>
+             /// <param name="totalMoney"> totalMoney. </param>
+             /// <returns> Builder. </returns>
             public Builder TotalMoney(Models.V1Money totalMoney)
             {
                 this.totalMoney = totalMoney;
                 return this;
             }
 
+             /// <summary>
+             /// SingleQuantityMoney.
+             /// </summary>
+             /// <param name="singleQuantityMoney"> singleQuantityMoney. </param>
+             /// <returns> Builder. </returns>
             public Builder SingleQuantityMoney(Models.V1Money singleQuantityMoney)
             {
                 this.singleQuantityMoney = singleQuantityMoney;
                 return this;
             }
 
+             /// <summary>
+             /// GrossSalesMoney.
+             /// </summary>
+             /// <param name="grossSalesMoney"> grossSalesMoney. </param>
+             /// <returns> Builder. </returns>
             public Builder GrossSalesMoney(Models.V1Money grossSalesMoney)
             {
                 this.grossSalesMoney = grossSalesMoney;
                 return this;
             }
 
+             /// <summary>
+             /// DiscountMoney.
+             /// </summary>
+             /// <param name="discountMoney"> discountMoney. </param>
+             /// <returns> Builder. </returns>
             public Builder DiscountMoney(Models.V1Money discountMoney)
             {
                 this.discountMoney = discountMoney;
                 return this;
             }
 
+             /// <summary>
+             /// NetSalesMoney.
+             /// </summary>
+             /// <param name="netSalesMoney"> netSalesMoney. </param>
+             /// <returns> Builder. </returns>
             public Builder NetSalesMoney(Models.V1Money netSalesMoney)
             {
                 this.netSalesMoney = netSalesMoney;
                 return this;
             }
 
+             /// <summary>
+             /// Taxes.
+             /// </summary>
+             /// <param name="taxes"> taxes. </param>
+             /// <returns> Builder. </returns>
             public Builder Taxes(IList<Models.V1PaymentTax> taxes)
             {
                 this.taxes = taxes;
                 return this;
             }
 
+             /// <summary>
+             /// Discounts.
+             /// </summary>
+             /// <param name="discounts"> discounts. </param>
+             /// <returns> Builder. </returns>
             public Builder Discounts(IList<Models.V1PaymentDiscount> discounts)
             {
                 this.discounts = discounts;
                 return this;
             }
 
+             /// <summary>
+             /// Modifiers.
+             /// </summary>
+             /// <param name="modifiers"> modifiers. </param>
+             /// <returns> Builder. </returns>
             public Builder Modifiers(IList<Models.V1PaymentModifier> modifiers)
             {
                 this.modifiers = modifiers;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> V1PaymentItemization. </returns>
             public V1PaymentItemization Build()
             {
-                return new V1PaymentItemization(name,
-                    quantity,
-                    itemizationType,
-                    itemDetail,
-                    notes,
-                    itemVariationName,
-                    totalMoney,
-                    singleQuantityMoney,
-                    grossSalesMoney,
-                    discountMoney,
-                    netSalesMoney,
-                    taxes,
-                    discounts,
-                    modifiers);
+                return new V1PaymentItemization(
+                    this.name,
+                    this.quantity,
+                    this.itemizationType,
+                    this.itemDetail,
+                    this.notes,
+                    this.itemVariationName,
+                    this.totalMoney,
+                    this.singleQuantityMoney,
+                    this.grossSalesMoney,
+                    this.discountMoney,
+                    this.netSalesMoney,
+                    this.taxes,
+                    this.discounts,
+                    this.modifiers);
             }
         }
     }

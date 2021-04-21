@@ -1,21 +1,37 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class Employee 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// Employee.
+    /// </summary>
+    public class Employee
     {
-        public Employee(string id = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Employee"/> class.
+        /// </summary>
+        /// <param name="id">id.</param>
+        /// <param name="firstName">first_name.</param>
+        /// <param name="lastName">last_name.</param>
+        /// <param name="email">email.</param>
+        /// <param name="phoneNumber">phone_number.</param>
+        /// <param name="locationIds">location_ids.</param>
+        /// <param name="status">status.</param>
+        /// <param name="isOwner">is_owner.</param>
+        /// <param name="createdAt">created_at.</param>
+        /// <param name="updatedAt">updated_at.</param>
+        public Employee(
+            string id = null,
             string firstName = null,
             string lastName = null,
             string email = null,
@@ -26,16 +42,16 @@ namespace Square.Models
             string createdAt = null,
             string updatedAt = null)
         {
-            Id = id;
-            FirstName = firstName;
-            LastName = lastName;
-            Email = email;
-            PhoneNumber = phoneNumber;
-            LocationIds = locationIds;
-            Status = status;
-            IsOwner = isOwner;
-            CreatedAt = createdAt;
-            UpdatedAt = updatedAt;
+            this.Id = id;
+            this.FirstName = firstName;
+            this.LastName = lastName;
+            this.Email = email;
+            this.PhoneNumber = phoneNumber;
+            this.LocationIds = locationIds;
+            this.Status = status;
+            this.IsOwner = isOwner;
+            this.CreatedAt = createdAt;
+            this.UpdatedAt = updatedAt;
         }
 
         /// <summary>
@@ -100,6 +116,7 @@ namespace Square.Models
         [JsonProperty("updated_at", NullValueHandling = NullValueHandling.Ignore)]
         public string UpdatedAt { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -109,20 +126,7 @@ namespace Square.Models
             return $"Employee : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Id = {(Id == null ? "null" : Id == string.Empty ? "" : Id)}");
-            toStringOutput.Add($"FirstName = {(FirstName == null ? "null" : FirstName == string.Empty ? "" : FirstName)}");
-            toStringOutput.Add($"LastName = {(LastName == null ? "null" : LastName == string.Empty ? "" : LastName)}");
-            toStringOutput.Add($"Email = {(Email == null ? "null" : Email == string.Empty ? "" : Email)}");
-            toStringOutput.Add($"PhoneNumber = {(PhoneNumber == null ? "null" : PhoneNumber == string.Empty ? "" : PhoneNumber)}");
-            toStringOutput.Add($"LocationIds = {(LocationIds == null ? "null" : $"[{ string.Join(", ", LocationIds)} ]")}");
-            toStringOutput.Add($"Status = {(Status == null ? "null" : Status.ToString())}");
-            toStringOutput.Add($"IsOwner = {(IsOwner == null ? "null" : IsOwner.ToString())}");
-            toStringOutput.Add($"CreatedAt = {(CreatedAt == null ? "null" : CreatedAt == string.Empty ? "" : CreatedAt)}");
-            toStringOutput.Add($"UpdatedAt = {(UpdatedAt == null ? "null" : UpdatedAt == string.Empty ? "" : UpdatedAt)}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -136,91 +140,117 @@ namespace Square.Models
             }
 
             return obj is Employee other &&
-                ((Id == null && other.Id == null) || (Id?.Equals(other.Id) == true)) &&
-                ((FirstName == null && other.FirstName == null) || (FirstName?.Equals(other.FirstName) == true)) &&
-                ((LastName == null && other.LastName == null) || (LastName?.Equals(other.LastName) == true)) &&
-                ((Email == null && other.Email == null) || (Email?.Equals(other.Email) == true)) &&
-                ((PhoneNumber == null && other.PhoneNumber == null) || (PhoneNumber?.Equals(other.PhoneNumber) == true)) &&
-                ((LocationIds == null && other.LocationIds == null) || (LocationIds?.Equals(other.LocationIds) == true)) &&
-                ((Status == null && other.Status == null) || (Status?.Equals(other.Status) == true)) &&
-                ((IsOwner == null && other.IsOwner == null) || (IsOwner?.Equals(other.IsOwner) == true)) &&
-                ((CreatedAt == null && other.CreatedAt == null) || (CreatedAt?.Equals(other.CreatedAt) == true)) &&
-                ((UpdatedAt == null && other.UpdatedAt == null) || (UpdatedAt?.Equals(other.UpdatedAt) == true));
+                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
+                ((this.FirstName == null && other.FirstName == null) || (this.FirstName?.Equals(other.FirstName) == true)) &&
+                ((this.LastName == null && other.LastName == null) || (this.LastName?.Equals(other.LastName) == true)) &&
+                ((this.Email == null && other.Email == null) || (this.Email?.Equals(other.Email) == true)) &&
+                ((this.PhoneNumber == null && other.PhoneNumber == null) || (this.PhoneNumber?.Equals(other.PhoneNumber) == true)) &&
+                ((this.LocationIds == null && other.LocationIds == null) || (this.LocationIds?.Equals(other.LocationIds) == true)) &&
+                ((this.Status == null && other.Status == null) || (this.Status?.Equals(other.Status) == true)) &&
+                ((this.IsOwner == null && other.IsOwner == null) || (this.IsOwner?.Equals(other.IsOwner) == true)) &&
+                ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true)) &&
+                ((this.UpdatedAt == null && other.UpdatedAt == null) || (this.UpdatedAt?.Equals(other.UpdatedAt) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1607883077;
 
-            if (Id != null)
+            if (this.Id != null)
             {
-               hashCode += Id.GetHashCode();
+               hashCode += this.Id.GetHashCode();
             }
 
-            if (FirstName != null)
+            if (this.FirstName != null)
             {
-               hashCode += FirstName.GetHashCode();
+               hashCode += this.FirstName.GetHashCode();
             }
 
-            if (LastName != null)
+            if (this.LastName != null)
             {
-               hashCode += LastName.GetHashCode();
+               hashCode += this.LastName.GetHashCode();
             }
 
-            if (Email != null)
+            if (this.Email != null)
             {
-               hashCode += Email.GetHashCode();
+               hashCode += this.Email.GetHashCode();
             }
 
-            if (PhoneNumber != null)
+            if (this.PhoneNumber != null)
             {
-               hashCode += PhoneNumber.GetHashCode();
+               hashCode += this.PhoneNumber.GetHashCode();
             }
 
-            if (LocationIds != null)
+            if (this.LocationIds != null)
             {
-               hashCode += LocationIds.GetHashCode();
+               hashCode += this.LocationIds.GetHashCode();
             }
 
-            if (Status != null)
+            if (this.Status != null)
             {
-               hashCode += Status.GetHashCode();
+               hashCode += this.Status.GetHashCode();
             }
 
-            if (IsOwner != null)
+            if (this.IsOwner != null)
             {
-               hashCode += IsOwner.GetHashCode();
+               hashCode += this.IsOwner.GetHashCode();
             }
 
-            if (CreatedAt != null)
+            if (this.CreatedAt != null)
             {
-               hashCode += CreatedAt.GetHashCode();
+               hashCode += this.CreatedAt.GetHashCode();
             }
 
-            if (UpdatedAt != null)
+            if (this.UpdatedAt != null)
             {
-               hashCode += UpdatedAt.GetHashCode();
+               hashCode += this.UpdatedAt.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id == string.Empty ? "" : this.Id)}");
+            toStringOutput.Add($"this.FirstName = {(this.FirstName == null ? "null" : this.FirstName == string.Empty ? "" : this.FirstName)}");
+            toStringOutput.Add($"this.LastName = {(this.LastName == null ? "null" : this.LastName == string.Empty ? "" : this.LastName)}");
+            toStringOutput.Add($"this.Email = {(this.Email == null ? "null" : this.Email == string.Empty ? "" : this.Email)}");
+            toStringOutput.Add($"this.PhoneNumber = {(this.PhoneNumber == null ? "null" : this.PhoneNumber == string.Empty ? "" : this.PhoneNumber)}");
+            toStringOutput.Add($"this.LocationIds = {(this.LocationIds == null ? "null" : $"[{string.Join(", ", this.LocationIds)} ]")}");
+            toStringOutput.Add($"this.Status = {(this.Status == null ? "null" : this.Status.ToString())}");
+            toStringOutput.Add($"this.IsOwner = {(this.IsOwner == null ? "null" : this.IsOwner.ToString())}");
+            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt == string.Empty ? "" : this.CreatedAt)}");
+            toStringOutput.Add($"this.UpdatedAt = {(this.UpdatedAt == null ? "null" : this.UpdatedAt == string.Empty ? "" : this.UpdatedAt)}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .Id(Id)
-                .FirstName(FirstName)
-                .LastName(LastName)
-                .Email(Email)
-                .PhoneNumber(PhoneNumber)
-                .LocationIds(LocationIds)
-                .Status(Status)
-                .IsOwner(IsOwner)
-                .CreatedAt(CreatedAt)
-                .UpdatedAt(UpdatedAt);
+                .Id(this.Id)
+                .FirstName(this.FirstName)
+                .LastName(this.LastName)
+                .Email(this.Email)
+                .PhoneNumber(this.PhoneNumber)
+                .LocationIds(this.LocationIds)
+                .Status(this.Status)
+                .IsOwner(this.IsOwner)
+                .CreatedAt(this.CreatedAt)
+                .UpdatedAt(this.UpdatedAt);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string id;
@@ -234,80 +264,133 @@ namespace Square.Models
             private string createdAt;
             private string updatedAt;
 
-
-
+             /// <summary>
+             /// Id.
+             /// </summary>
+             /// <param name="id"> id. </param>
+             /// <returns> Builder. </returns>
             public Builder Id(string id)
             {
                 this.id = id;
                 return this;
             }
 
+             /// <summary>
+             /// FirstName.
+             /// </summary>
+             /// <param name="firstName"> firstName. </param>
+             /// <returns> Builder. </returns>
             public Builder FirstName(string firstName)
             {
                 this.firstName = firstName;
                 return this;
             }
 
+             /// <summary>
+             /// LastName.
+             /// </summary>
+             /// <param name="lastName"> lastName. </param>
+             /// <returns> Builder. </returns>
             public Builder LastName(string lastName)
             {
                 this.lastName = lastName;
                 return this;
             }
 
+             /// <summary>
+             /// Email.
+             /// </summary>
+             /// <param name="email"> email. </param>
+             /// <returns> Builder. </returns>
             public Builder Email(string email)
             {
                 this.email = email;
                 return this;
             }
 
+             /// <summary>
+             /// PhoneNumber.
+             /// </summary>
+             /// <param name="phoneNumber"> phoneNumber. </param>
+             /// <returns> Builder. </returns>
             public Builder PhoneNumber(string phoneNumber)
             {
                 this.phoneNumber = phoneNumber;
                 return this;
             }
 
+             /// <summary>
+             /// LocationIds.
+             /// </summary>
+             /// <param name="locationIds"> locationIds. </param>
+             /// <returns> Builder. </returns>
             public Builder LocationIds(IList<string> locationIds)
             {
                 this.locationIds = locationIds;
                 return this;
             }
 
+             /// <summary>
+             /// Status.
+             /// </summary>
+             /// <param name="status"> status. </param>
+             /// <returns> Builder. </returns>
             public Builder Status(string status)
             {
                 this.status = status;
                 return this;
             }
 
+             /// <summary>
+             /// IsOwner.
+             /// </summary>
+             /// <param name="isOwner"> isOwner. </param>
+             /// <returns> Builder. </returns>
             public Builder IsOwner(bool? isOwner)
             {
                 this.isOwner = isOwner;
                 return this;
             }
 
+             /// <summary>
+             /// CreatedAt.
+             /// </summary>
+             /// <param name="createdAt"> createdAt. </param>
+             /// <returns> Builder. </returns>
             public Builder CreatedAt(string createdAt)
             {
                 this.createdAt = createdAt;
                 return this;
             }
 
+             /// <summary>
+             /// UpdatedAt.
+             /// </summary>
+             /// <param name="updatedAt"> updatedAt. </param>
+             /// <returns> Builder. </returns>
             public Builder UpdatedAt(string updatedAt)
             {
                 this.updatedAt = updatedAt;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> Employee. </returns>
             public Employee Build()
             {
-                return new Employee(id,
-                    firstName,
-                    lastName,
-                    email,
-                    phoneNumber,
-                    locationIds,
-                    status,
-                    isOwner,
-                    createdAt,
-                    updatedAt);
+                return new Employee(
+                    this.id,
+                    this.firstName,
+                    this.lastName,
+                    this.email,
+                    this.phoneNumber,
+                    this.locationIds,
+                    this.status,
+                    this.isOwner,
+                    this.createdAt,
+                    this.updatedAt);
             }
         }
     }

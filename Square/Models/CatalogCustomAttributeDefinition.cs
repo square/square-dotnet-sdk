@@ -1,21 +1,39 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class CatalogCustomAttributeDefinition 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// CatalogCustomAttributeDefinition.
+    /// </summary>
+    public class CatalogCustomAttributeDefinition
     {
-        public CatalogCustomAttributeDefinition(string type,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CatalogCustomAttributeDefinition"/> class.
+        /// </summary>
+        /// <param name="type">type.</param>
+        /// <param name="name">name.</param>
+        /// <param name="allowedObjectTypes">allowed_object_types.</param>
+        /// <param name="description">description.</param>
+        /// <param name="sourceApplication">source_application.</param>
+        /// <param name="sellerVisibility">seller_visibility.</param>
+        /// <param name="appVisibility">app_visibility.</param>
+        /// <param name="stringConfig">string_config.</param>
+        /// <param name="numberConfig">number_config.</param>
+        /// <param name="selectionConfig">selection_config.</param>
+        /// <param name="customAttributeUsageCount">custom_attribute_usage_count.</param>
+        /// <param name="key">key.</param>
+        public CatalogCustomAttributeDefinition(
+            string type,
             string name,
             IList<string> allowedObjectTypes,
             string description = null,
@@ -28,18 +46,18 @@ namespace Square.Models
             int? customAttributeUsageCount = null,
             string key = null)
         {
-            Type = type;
-            Name = name;
-            Description = description;
-            SourceApplication = sourceApplication;
-            AllowedObjectTypes = allowedObjectTypes;
-            SellerVisibility = sellerVisibility;
-            AppVisibility = appVisibility;
-            StringConfig = stringConfig;
-            NumberConfig = numberConfig;
-            SelectionConfig = selectionConfig;
-            CustomAttributeUsageCount = customAttributeUsageCount;
-            Key = key;
+            this.Type = type;
+            this.Name = name;
+            this.Description = description;
+            this.SourceApplication = sourceApplication;
+            this.AllowedObjectTypes = allowedObjectTypes;
+            this.SellerVisibility = sellerVisibility;
+            this.AppVisibility = appVisibility;
+            this.StringConfig = stringConfig;
+            this.NumberConfig = numberConfig;
+            this.SelectionConfig = selectionConfig;
+            this.CustomAttributeUsageCount = customAttributeUsageCount;
+            this.Key = key;
         }
 
         /// <summary>
@@ -99,7 +117,7 @@ namespace Square.Models
         public Models.CatalogCustomAttributeDefinitionStringConfig StringConfig { get; }
 
         /// <summary>
-        /// Getter for number_config
+        /// Gets or sets NumberConfig.
         /// </summary>
         [JsonProperty("number_config", NullValueHandling = NullValueHandling.Ignore)]
         public Models.CatalogCustomAttributeDefinitionNumberConfig NumberConfig { get; }
@@ -128,6 +146,7 @@ namespace Square.Models
         [JsonProperty("key", NullValueHandling = NullValueHandling.Ignore)]
         public string Key { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -137,22 +156,7 @@ namespace Square.Models
             return $"CatalogCustomAttributeDefinition : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Type = {(Type == null ? "null" : Type.ToString())}");
-            toStringOutput.Add($"Name = {(Name == null ? "null" : Name == string.Empty ? "" : Name)}");
-            toStringOutput.Add($"Description = {(Description == null ? "null" : Description == string.Empty ? "" : Description)}");
-            toStringOutput.Add($"SourceApplication = {(SourceApplication == null ? "null" : SourceApplication.ToString())}");
-            toStringOutput.Add($"AllowedObjectTypes = {(AllowedObjectTypes == null ? "null" : $"[{ string.Join(", ", AllowedObjectTypes)} ]")}");
-            toStringOutput.Add($"SellerVisibility = {(SellerVisibility == null ? "null" : SellerVisibility.ToString())}");
-            toStringOutput.Add($"AppVisibility = {(AppVisibility == null ? "null" : AppVisibility.ToString())}");
-            toStringOutput.Add($"StringConfig = {(StringConfig == null ? "null" : StringConfig.ToString())}");
-            toStringOutput.Add($"NumberConfig = {(NumberConfig == null ? "null" : NumberConfig.ToString())}");
-            toStringOutput.Add($"SelectionConfig = {(SelectionConfig == null ? "null" : SelectionConfig.ToString())}");
-            toStringOutput.Add($"CustomAttributeUsageCount = {(CustomAttributeUsageCount == null ? "null" : CustomAttributeUsageCount.ToString())}");
-            toStringOutput.Add($"Key = {(Key == null ? "null" : Key == string.Empty ? "" : Key)}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -166,104 +170,133 @@ namespace Square.Models
             }
 
             return obj is CatalogCustomAttributeDefinition other &&
-                ((Type == null && other.Type == null) || (Type?.Equals(other.Type) == true)) &&
-                ((Name == null && other.Name == null) || (Name?.Equals(other.Name) == true)) &&
-                ((Description == null && other.Description == null) || (Description?.Equals(other.Description) == true)) &&
-                ((SourceApplication == null && other.SourceApplication == null) || (SourceApplication?.Equals(other.SourceApplication) == true)) &&
-                ((AllowedObjectTypes == null && other.AllowedObjectTypes == null) || (AllowedObjectTypes?.Equals(other.AllowedObjectTypes) == true)) &&
-                ((SellerVisibility == null && other.SellerVisibility == null) || (SellerVisibility?.Equals(other.SellerVisibility) == true)) &&
-                ((AppVisibility == null && other.AppVisibility == null) || (AppVisibility?.Equals(other.AppVisibility) == true)) &&
-                ((StringConfig == null && other.StringConfig == null) || (StringConfig?.Equals(other.StringConfig) == true)) &&
-                ((NumberConfig == null && other.NumberConfig == null) || (NumberConfig?.Equals(other.NumberConfig) == true)) &&
-                ((SelectionConfig == null && other.SelectionConfig == null) || (SelectionConfig?.Equals(other.SelectionConfig) == true)) &&
-                ((CustomAttributeUsageCount == null && other.CustomAttributeUsageCount == null) || (CustomAttributeUsageCount?.Equals(other.CustomAttributeUsageCount) == true)) &&
-                ((Key == null && other.Key == null) || (Key?.Equals(other.Key) == true));
+                ((this.Type == null && other.Type == null) || (this.Type?.Equals(other.Type) == true)) &&
+                ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
+                ((this.Description == null && other.Description == null) || (this.Description?.Equals(other.Description) == true)) &&
+                ((this.SourceApplication == null && other.SourceApplication == null) || (this.SourceApplication?.Equals(other.SourceApplication) == true)) &&
+                ((this.AllowedObjectTypes == null && other.AllowedObjectTypes == null) || (this.AllowedObjectTypes?.Equals(other.AllowedObjectTypes) == true)) &&
+                ((this.SellerVisibility == null && other.SellerVisibility == null) || (this.SellerVisibility?.Equals(other.SellerVisibility) == true)) &&
+                ((this.AppVisibility == null && other.AppVisibility == null) || (this.AppVisibility?.Equals(other.AppVisibility) == true)) &&
+                ((this.StringConfig == null && other.StringConfig == null) || (this.StringConfig?.Equals(other.StringConfig) == true)) &&
+                ((this.NumberConfig == null && other.NumberConfig == null) || (this.NumberConfig?.Equals(other.NumberConfig) == true)) &&
+                ((this.SelectionConfig == null && other.SelectionConfig == null) || (this.SelectionConfig?.Equals(other.SelectionConfig) == true)) &&
+                ((this.CustomAttributeUsageCount == null && other.CustomAttributeUsageCount == null) || (this.CustomAttributeUsageCount?.Equals(other.CustomAttributeUsageCount) == true)) &&
+                ((this.Key == null && other.Key == null) || (this.Key?.Equals(other.Key) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 1892852076;
 
-            if (Type != null)
+            if (this.Type != null)
             {
-               hashCode += Type.GetHashCode();
+               hashCode += this.Type.GetHashCode();
             }
 
-            if (Name != null)
+            if (this.Name != null)
             {
-               hashCode += Name.GetHashCode();
+               hashCode += this.Name.GetHashCode();
             }
 
-            if (Description != null)
+            if (this.Description != null)
             {
-               hashCode += Description.GetHashCode();
+               hashCode += this.Description.GetHashCode();
             }
 
-            if (SourceApplication != null)
+            if (this.SourceApplication != null)
             {
-               hashCode += SourceApplication.GetHashCode();
+               hashCode += this.SourceApplication.GetHashCode();
             }
 
-            if (AllowedObjectTypes != null)
+            if (this.AllowedObjectTypes != null)
             {
-               hashCode += AllowedObjectTypes.GetHashCode();
+               hashCode += this.AllowedObjectTypes.GetHashCode();
             }
 
-            if (SellerVisibility != null)
+            if (this.SellerVisibility != null)
             {
-               hashCode += SellerVisibility.GetHashCode();
+               hashCode += this.SellerVisibility.GetHashCode();
             }
 
-            if (AppVisibility != null)
+            if (this.AppVisibility != null)
             {
-               hashCode += AppVisibility.GetHashCode();
+               hashCode += this.AppVisibility.GetHashCode();
             }
 
-            if (StringConfig != null)
+            if (this.StringConfig != null)
             {
-               hashCode += StringConfig.GetHashCode();
+               hashCode += this.StringConfig.GetHashCode();
             }
 
-            if (NumberConfig != null)
+            if (this.NumberConfig != null)
             {
-               hashCode += NumberConfig.GetHashCode();
+               hashCode += this.NumberConfig.GetHashCode();
             }
 
-            if (SelectionConfig != null)
+            if (this.SelectionConfig != null)
             {
-               hashCode += SelectionConfig.GetHashCode();
+               hashCode += this.SelectionConfig.GetHashCode();
             }
 
-            if (CustomAttributeUsageCount != null)
+            if (this.CustomAttributeUsageCount != null)
             {
-               hashCode += CustomAttributeUsageCount.GetHashCode();
+               hashCode += this.CustomAttributeUsageCount.GetHashCode();
             }
 
-            if (Key != null)
+            if (this.Key != null)
             {
-               hashCode += Key.GetHashCode();
+               hashCode += this.Key.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Type = {(this.Type == null ? "null" : this.Type.ToString())}");
+            toStringOutput.Add($"this.Name = {(this.Name == null ? "null" : this.Name == string.Empty ? "" : this.Name)}");
+            toStringOutput.Add($"this.Description = {(this.Description == null ? "null" : this.Description == string.Empty ? "" : this.Description)}");
+            toStringOutput.Add($"this.SourceApplication = {(this.SourceApplication == null ? "null" : this.SourceApplication.ToString())}");
+            toStringOutput.Add($"this.AllowedObjectTypes = {(this.AllowedObjectTypes == null ? "null" : $"[{string.Join(", ", this.AllowedObjectTypes)} ]")}");
+            toStringOutput.Add($"this.SellerVisibility = {(this.SellerVisibility == null ? "null" : this.SellerVisibility.ToString())}");
+            toStringOutput.Add($"this.AppVisibility = {(this.AppVisibility == null ? "null" : this.AppVisibility.ToString())}");
+            toStringOutput.Add($"this.StringConfig = {(this.StringConfig == null ? "null" : this.StringConfig.ToString())}");
+            toStringOutput.Add($"this.NumberConfig = {(this.NumberConfig == null ? "null" : this.NumberConfig.ToString())}");
+            toStringOutput.Add($"this.SelectionConfig = {(this.SelectionConfig == null ? "null" : this.SelectionConfig.ToString())}");
+            toStringOutput.Add($"this.CustomAttributeUsageCount = {(this.CustomAttributeUsageCount == null ? "null" : this.CustomAttributeUsageCount.ToString())}");
+            toStringOutput.Add($"this.Key = {(this.Key == null ? "null" : this.Key == string.Empty ? "" : this.Key)}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
-            var builder = new Builder(Type,
-                Name,
-                AllowedObjectTypes)
-                .Description(Description)
-                .SourceApplication(SourceApplication)
-                .SellerVisibility(SellerVisibility)
-                .AppVisibility(AppVisibility)
-                .StringConfig(StringConfig)
-                .NumberConfig(NumberConfig)
-                .SelectionConfig(SelectionConfig)
-                .CustomAttributeUsageCount(CustomAttributeUsageCount)
-                .Key(Key);
+            var builder = new Builder(
+                this.Type,
+                this.Name,
+                this.AllowedObjectTypes)
+                .Description(this.Description)
+                .SourceApplication(this.SourceApplication)
+                .SellerVisibility(this.SellerVisibility)
+                .AppVisibility(this.AppVisibility)
+                .StringConfig(this.StringConfig)
+                .NumberConfig(this.NumberConfig)
+                .SelectionConfig(this.SelectionConfig)
+                .CustomAttributeUsageCount(this.CustomAttributeUsageCount)
+                .Key(this.Key);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string type;
@@ -279,7 +312,8 @@ namespace Square.Models
             private int? customAttributeUsageCount;
             private string key;
 
-            public Builder(string type,
+            public Builder(
+                string type,
                 string name,
                 IList<string> allowedObjectTypes)
             {
@@ -288,92 +322,157 @@ namespace Square.Models
                 this.allowedObjectTypes = allowedObjectTypes;
             }
 
+             /// <summary>
+             /// Type.
+             /// </summary>
+             /// <param name="type"> type. </param>
+             /// <returns> Builder. </returns>
             public Builder Type(string type)
             {
                 this.type = type;
                 return this;
             }
 
+             /// <summary>
+             /// Name.
+             /// </summary>
+             /// <param name="name"> name. </param>
+             /// <returns> Builder. </returns>
             public Builder Name(string name)
             {
                 this.name = name;
                 return this;
             }
 
+             /// <summary>
+             /// AllowedObjectTypes.
+             /// </summary>
+             /// <param name="allowedObjectTypes"> allowedObjectTypes. </param>
+             /// <returns> Builder. </returns>
             public Builder AllowedObjectTypes(IList<string> allowedObjectTypes)
             {
                 this.allowedObjectTypes = allowedObjectTypes;
                 return this;
             }
 
+             /// <summary>
+             /// Description.
+             /// </summary>
+             /// <param name="description"> description. </param>
+             /// <returns> Builder. </returns>
             public Builder Description(string description)
             {
                 this.description = description;
                 return this;
             }
 
+             /// <summary>
+             /// SourceApplication.
+             /// </summary>
+             /// <param name="sourceApplication"> sourceApplication. </param>
+             /// <returns> Builder. </returns>
             public Builder SourceApplication(Models.SourceApplication sourceApplication)
             {
                 this.sourceApplication = sourceApplication;
                 return this;
             }
 
+             /// <summary>
+             /// SellerVisibility.
+             /// </summary>
+             /// <param name="sellerVisibility"> sellerVisibility. </param>
+             /// <returns> Builder. </returns>
             public Builder SellerVisibility(string sellerVisibility)
             {
                 this.sellerVisibility = sellerVisibility;
                 return this;
             }
 
+             /// <summary>
+             /// AppVisibility.
+             /// </summary>
+             /// <param name="appVisibility"> appVisibility. </param>
+             /// <returns> Builder. </returns>
             public Builder AppVisibility(string appVisibility)
             {
                 this.appVisibility = appVisibility;
                 return this;
             }
 
+             /// <summary>
+             /// StringConfig.
+             /// </summary>
+             /// <param name="stringConfig"> stringConfig. </param>
+             /// <returns> Builder. </returns>
             public Builder StringConfig(Models.CatalogCustomAttributeDefinitionStringConfig stringConfig)
             {
                 this.stringConfig = stringConfig;
                 return this;
             }
 
+             /// <summary>
+             /// NumberConfig.
+             /// </summary>
+             /// <param name="numberConfig"> numberConfig. </param>
+             /// <returns> Builder. </returns>
             public Builder NumberConfig(Models.CatalogCustomAttributeDefinitionNumberConfig numberConfig)
             {
                 this.numberConfig = numberConfig;
                 return this;
             }
 
+             /// <summary>
+             /// SelectionConfig.
+             /// </summary>
+             /// <param name="selectionConfig"> selectionConfig. </param>
+             /// <returns> Builder. </returns>
             public Builder SelectionConfig(Models.CatalogCustomAttributeDefinitionSelectionConfig selectionConfig)
             {
                 this.selectionConfig = selectionConfig;
                 return this;
             }
 
+             /// <summary>
+             /// CustomAttributeUsageCount.
+             /// </summary>
+             /// <param name="customAttributeUsageCount"> customAttributeUsageCount. </param>
+             /// <returns> Builder. </returns>
             public Builder CustomAttributeUsageCount(int? customAttributeUsageCount)
             {
                 this.customAttributeUsageCount = customAttributeUsageCount;
                 return this;
             }
 
+             /// <summary>
+             /// Key.
+             /// </summary>
+             /// <param name="key"> key. </param>
+             /// <returns> Builder. </returns>
             public Builder Key(string key)
             {
                 this.key = key;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> CatalogCustomAttributeDefinition. </returns>
             public CatalogCustomAttributeDefinition Build()
             {
-                return new CatalogCustomAttributeDefinition(type,
-                    name,
-                    allowedObjectTypes,
-                    description,
-                    sourceApplication,
-                    sellerVisibility,
-                    appVisibility,
-                    stringConfig,
-                    numberConfig,
-                    selectionConfig,
-                    customAttributeUsageCount,
-                    key);
+                return new CatalogCustomAttributeDefinition(
+                    this.type,
+                    this.name,
+                    this.allowedObjectTypes,
+                    this.description,
+                    this.sourceApplication,
+                    this.sellerVisibility,
+                    this.appVisibility,
+                    this.stringConfig,
+                    this.numberConfig,
+                    this.selectionConfig,
+                    this.customAttributeUsageCount,
+                    this.key);
             }
         }
     }

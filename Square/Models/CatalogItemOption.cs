@@ -1,31 +1,42 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class CatalogItemOption 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// CatalogItemOption.
+    /// </summary>
+    public class CatalogItemOption
     {
-        public CatalogItemOption(string name = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CatalogItemOption"/> class.
+        /// </summary>
+        /// <param name="name">name.</param>
+        /// <param name="displayName">display_name.</param>
+        /// <param name="description">description.</param>
+        /// <param name="showColors">show_colors.</param>
+        /// <param name="values">values.</param>
+        public CatalogItemOption(
+            string name = null,
             string displayName = null,
             string description = null,
             bool? showColors = null,
             IList<Models.CatalogObject> values = null)
         {
-            Name = name;
-            DisplayName = displayName;
-            Description = description;
-            ShowColors = showColors;
-            Values = values;
+            this.Name = name;
+            this.DisplayName = displayName;
+            this.Description = description;
+            this.ShowColors = showColors;
+            this.Values = values;
         }
 
         /// <summary>
@@ -62,6 +73,7 @@ namespace Square.Models
         [JsonProperty("values", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.CatalogObject> Values { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -71,15 +83,7 @@ namespace Square.Models
             return $"CatalogItemOption : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Name = {(Name == null ? "null" : Name == string.Empty ? "" : Name)}");
-            toStringOutput.Add($"DisplayName = {(DisplayName == null ? "null" : DisplayName == string.Empty ? "" : DisplayName)}");
-            toStringOutput.Add($"Description = {(Description == null ? "null" : Description == string.Empty ? "" : Description)}");
-            toStringOutput.Add($"ShowColors = {(ShowColors == null ? "null" : ShowColors.ToString())}");
-            toStringOutput.Add($"Values = {(Values == null ? "null" : $"[{ string.Join(", ", Values)} ]")}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -93,56 +97,77 @@ namespace Square.Models
             }
 
             return obj is CatalogItemOption other &&
-                ((Name == null && other.Name == null) || (Name?.Equals(other.Name) == true)) &&
-                ((DisplayName == null && other.DisplayName == null) || (DisplayName?.Equals(other.DisplayName) == true)) &&
-                ((Description == null && other.Description == null) || (Description?.Equals(other.Description) == true)) &&
-                ((ShowColors == null && other.ShowColors == null) || (ShowColors?.Equals(other.ShowColors) == true)) &&
-                ((Values == null && other.Values == null) || (Values?.Equals(other.Values) == true));
+                ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
+                ((this.DisplayName == null && other.DisplayName == null) || (this.DisplayName?.Equals(other.DisplayName) == true)) &&
+                ((this.Description == null && other.Description == null) || (this.Description?.Equals(other.Description) == true)) &&
+                ((this.ShowColors == null && other.ShowColors == null) || (this.ShowColors?.Equals(other.ShowColors) == true)) &&
+                ((this.Values == null && other.Values == null) || (this.Values?.Equals(other.Values) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 1353145437;
 
-            if (Name != null)
+            if (this.Name != null)
             {
-               hashCode += Name.GetHashCode();
+               hashCode += this.Name.GetHashCode();
             }
 
-            if (DisplayName != null)
+            if (this.DisplayName != null)
             {
-               hashCode += DisplayName.GetHashCode();
+               hashCode += this.DisplayName.GetHashCode();
             }
 
-            if (Description != null)
+            if (this.Description != null)
             {
-               hashCode += Description.GetHashCode();
+               hashCode += this.Description.GetHashCode();
             }
 
-            if (ShowColors != null)
+            if (this.ShowColors != null)
             {
-               hashCode += ShowColors.GetHashCode();
+               hashCode += this.ShowColors.GetHashCode();
             }
 
-            if (Values != null)
+            if (this.Values != null)
             {
-               hashCode += Values.GetHashCode();
+               hashCode += this.Values.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Name = {(this.Name == null ? "null" : this.Name == string.Empty ? "" : this.Name)}");
+            toStringOutput.Add($"this.DisplayName = {(this.DisplayName == null ? "null" : this.DisplayName == string.Empty ? "" : this.DisplayName)}");
+            toStringOutput.Add($"this.Description = {(this.Description == null ? "null" : this.Description == string.Empty ? "" : this.Description)}");
+            toStringOutput.Add($"this.ShowColors = {(this.ShowColors == null ? "null" : this.ShowColors.ToString())}");
+            toStringOutput.Add($"this.Values = {(this.Values == null ? "null" : $"[{string.Join(", ", this.Values)} ]")}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .Name(Name)
-                .DisplayName(DisplayName)
-                .Description(Description)
-                .ShowColors(ShowColors)
-                .Values(Values);
+                .Name(this.Name)
+                .DisplayName(this.DisplayName)
+                .Description(this.Description)
+                .ShowColors(this.ShowColors)
+                .Values(this.Values);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string name;
@@ -151,45 +176,73 @@ namespace Square.Models
             private bool? showColors;
             private IList<Models.CatalogObject> values;
 
-
-
+             /// <summary>
+             /// Name.
+             /// </summary>
+             /// <param name="name"> name. </param>
+             /// <returns> Builder. </returns>
             public Builder Name(string name)
             {
                 this.name = name;
                 return this;
             }
 
+             /// <summary>
+             /// DisplayName.
+             /// </summary>
+             /// <param name="displayName"> displayName. </param>
+             /// <returns> Builder. </returns>
             public Builder DisplayName(string displayName)
             {
                 this.displayName = displayName;
                 return this;
             }
 
+             /// <summary>
+             /// Description.
+             /// </summary>
+             /// <param name="description"> description. </param>
+             /// <returns> Builder. </returns>
             public Builder Description(string description)
             {
                 this.description = description;
                 return this;
             }
 
+             /// <summary>
+             /// ShowColors.
+             /// </summary>
+             /// <param name="showColors"> showColors. </param>
+             /// <returns> Builder. </returns>
             public Builder ShowColors(bool? showColors)
             {
                 this.showColors = showColors;
                 return this;
             }
 
+             /// <summary>
+             /// Values.
+             /// </summary>
+             /// <param name="values"> values. </param>
+             /// <returns> Builder. </returns>
             public Builder Values(IList<Models.CatalogObject> values)
             {
                 this.values = values;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> CatalogItemOption. </returns>
             public CatalogItemOption Build()
             {
-                return new CatalogItemOption(name,
-                    displayName,
-                    description,
-                    showColors,
-                    values);
+                return new CatalogItemOption(
+                    this.name,
+                    this.displayName,
+                    this.description,
+                    this.showColors,
+                    this.values);
             }
         }
     }

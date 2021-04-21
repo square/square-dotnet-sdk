@@ -7,13 +7,13 @@ HttpStringResponse inherits from HttpResponse and has additional property of str
 
 | Name | Description | Type |
 |  --- | --- | --- |
-| StatusCode | HTTP Status code of the http response. | `int` |
-| Headers | Headers of the http response. | `Dictionary<string, string>` |
-| Body | Raw string body of the http response. | `string` |
+| StatusCode | Gets the HTTP Status code of the http response. | `int` |
+| Headers | Gets the headers of the http response. | `Dictionary<string, string>` |
+| Body | Gets the raw string body of the http response. | `string` |
 
 ## Constructors
 
 | Name | Description |
 |  --- | --- |
-| `HttpStringResponse(int statusCode, Dictionary<string, string> headers, Stream rawBody, string body) : base(statusCode, headers, rawBody)` | Initializes a new HttpStringResponse object with the specified parameters. |
+| ```HttpStringResponse(int statusCode, Dictionary<string, string> headers, Stream rawBody, string body)<br>        : base(statusCode, headers, rawBody)```<br>``` | Initializes a new instance of the <see cref="HttpStringResponse"/> class. |
 

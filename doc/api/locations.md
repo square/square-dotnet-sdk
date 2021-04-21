@@ -21,7 +21,7 @@ ILocationsApi locationsApi = client.LocationsApi;
 Provides information of all locations of a business.
 
 Many Square API endpoints require a `location_id` parameter.
-The `id` field of the [`Location`](#type-location) objects returned by this
+The `id` field of the [`Location`](/doc/models/location.md) objects returned by this
 endpoint correspond to that `location_id` parameter.
 
 ```csharp
@@ -48,7 +48,8 @@ catch (ApiException e){};
 Creates a location.
 
 ```csharp
-CreateLocationAsync(Models.CreateLocationRequest body)
+CreateLocationAsync(
+    Models.CreateLocationRequest body)
 ```
 
 ## Parameters
@@ -74,9 +75,9 @@ var bodyLocationAddress = new Address.Builder()
     .PostalCode("30309")
     .Build();
 var bodyLocationCapabilities = new List<string>();
+bodyLocationCapabilities.Add("AUTOMATIC_TRANSFERS");
 bodyLocationCapabilities.Add("CREDIT_CARD_PROCESSING");
-bodyLocationCapabilities.Add("CREDIT_CARD_PROCESSING");
-bodyLocationCapabilities.Add("CREDIT_CARD_PROCESSING");
+bodyLocationCapabilities.Add("AUTOMATIC_TRANSFERS");
 var bodyLocation = new Location.Builder()
     .Id("id0")
     .Name("New location name")
@@ -105,7 +106,8 @@ as the location ID to retrieve details of the
 main location.
 
 ```csharp
-RetrieveLocationAsync(string locationId)
+RetrieveLocationAsync(
+    string locationId)
 ```
 
 ## Parameters
@@ -136,7 +138,9 @@ catch (ApiException e){};
 Updates a location.
 
 ```csharp
-UpdateLocationAsync(string locationId, Models.UpdateLocationRequest body)
+UpdateLocationAsync(
+    string locationId,
+    Models.UpdateLocationRequest body)
 ```
 
 ## Parameters
@@ -164,9 +168,9 @@ var bodyLocationAddress = new Address.Builder()
     .PostalCode("30309")
     .Build();
 var bodyLocationCapabilities = new List<string>();
+bodyLocationCapabilities.Add("AUTOMATIC_TRANSFERS");
 bodyLocationCapabilities.Add("CREDIT_CARD_PROCESSING");
-bodyLocationCapabilities.Add("CREDIT_CARD_PROCESSING");
-bodyLocationCapabilities.Add("CREDIT_CARD_PROCESSING");
+bodyLocationCapabilities.Add("AUTOMATIC_TRANSFERS");
 var bodyLocationBusinessHoursPeriods = new List<BusinessHoursPeriod>();
 
 var bodyLocationBusinessHoursPeriods0 = new BusinessHoursPeriod.Builder()

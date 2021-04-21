@@ -88,7 +88,8 @@ Employee entities cannot be deleted. To disable employee profiles,
 set the employee's status to <code>INACTIVE</code>
 
 ```csharp
-CreateEmployeeAsync(Models.V1Employee body)
+CreateEmployeeAsync(
+    Models.V1Employee body)
 ```
 
 ## Parameters
@@ -133,7 +134,8 @@ catch (ApiException e){};
 Provides the details for a single employee.
 
 ```csharp
-RetrieveEmployeeAsync(string employeeId)
+RetrieveEmployeeAsync(
+    string employeeId)
 ```
 
 ## Parameters
@@ -164,7 +166,9 @@ catch (ApiException e){};
 UpdateEmployee
 
 ```csharp
-UpdateEmployeeAsync(string employeeId, Models.V1Employee body)
+UpdateEmployeeAsync(
+    string employeeId,
+    Models.V1Employee body)
 ```
 
 ## Parameters
@@ -211,7 +215,10 @@ catch (ApiException e){};
 Provides summary information for all of a business's employee roles.
 
 ```csharp
-ListEmployeeRolesAsync(string order = null, int? limit = null, string batchToken = null)
+ListEmployeeRolesAsync(
+    string order = null,
+    int? limit = null,
+    string batchToken = null)
 ```
 
 ## Parameters
@@ -251,14 +258,15 @@ employee with that role. For example, an employee with a "Shift Manager"
 role might be able to issue refunds in Square Point of Sale, whereas an
 employee with a "Clerk" role might not.
 
-Roles are assigned with the [V1UpdateEmployee](#endpoint-v1updateemployee)
+Roles are assigned with the [V1UpdateEmployee](/doc/api/v1-employees.md#update-employee-role)
 endpoint. An employee can have only one role at a time.
 
 If an employee has no role, they have none of the permissions associated
 with roles. All employees can accept payments with Square Point of Sale.
 
 ```csharp
-CreateEmployeeRoleAsync(Models.V1EmployeeRole body)
+CreateEmployeeRoleAsync(
+    Models.V1EmployeeRole body)
 ```
 
 ## Parameters
@@ -300,7 +308,8 @@ catch (ApiException e){};
 Provides the details for a single employee role.
 
 ```csharp
-RetrieveEmployeeRoleAsync(string roleId)
+RetrieveEmployeeRoleAsync(
+    string roleId)
 ```
 
 ## Parameters
@@ -331,7 +340,9 @@ catch (ApiException e){};
 Modifies the details of an employee role.
 
 ```csharp
-UpdateEmployeeRoleAsync(string roleId, Models.V1EmployeeRole body)
+UpdateEmployeeRoleAsync(
+    string roleId,
+    Models.V1EmployeeRole body)
 ```
 
 ## Parameters

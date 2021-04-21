@@ -1,28 +1,39 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square.Http.Client;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class ChargeResponse 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Http.Client;
+    using Square.Utilities;
+
+    /// <summary>
+    /// ChargeResponse.
+    /// </summary>
+    public class ChargeResponse
     {
-        public ChargeResponse(IList<Models.Error> errors = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ChargeResponse"/> class.
+        /// </summary>
+        /// <param name="errors">errors.</param>
+        /// <param name="transaction">transaction.</param>
+        public ChargeResponse(
+            IList<Models.Error> errors = null,
             Models.Transaction transaction = null)
         {
-            Errors = errors;
-            Transaction = transaction;
+            this.Errors = errors;
+            this.Transaction = transaction;
         }
 
+        /// <summary>
+        /// Gets http context.
+        /// </summary>
         [JsonIgnore]
         public HttpContext Context { get; internal set; }
 
@@ -41,6 +52,7 @@ namespace Square.Models
         [JsonProperty("transaction", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Transaction Transaction { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -50,12 +62,7 @@ namespace Square.Models
             return $"ChargeResponse : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Errors = {(Errors == null ? "null" : $"[{ string.Join(", ", Errors)} ]")}");
-            toStringOutput.Add($"Transaction = {(Transaction == null ? "null" : Transaction.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -69,64 +76,95 @@ namespace Square.Models
             }
 
             return obj is ChargeResponse other &&
-                ((Context == null && other.Context == null) || (Context?.Equals(other.Context) == true)) &&
-                ((Errors == null && other.Errors == null) || (Errors?.Equals(other.Errors) == true)) &&
-                ((Transaction == null && other.Transaction == null) || (Transaction?.Equals(other.Transaction) == true));
+                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
+                ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true)) &&
+                ((this.Transaction == null && other.Transaction == null) || (this.Transaction?.Equals(other.Transaction) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1244238675;
 
-            if (Context != null)
+            if (this.Context != null)
             {
-                hashCode += Context.GetHashCode();
+                hashCode += this.Context.GetHashCode();
             }
 
-            if (Errors != null)
+            if (this.Errors != null)
             {
-               hashCode += Errors.GetHashCode();
+               hashCode += this.Errors.GetHashCode();
             }
 
-            if (Transaction != null)
+            if (this.Transaction != null)
             {
-               hashCode += Transaction.GetHashCode();
+               hashCode += this.Transaction.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Errors = {(this.Errors == null ? "null" : $"[{string.Join(", ", this.Errors)} ]")}");
+            toStringOutput.Add($"this.Transaction = {(this.Transaction == null ? "null" : this.Transaction.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .Errors(Errors)
-                .Transaction(Transaction);
+                .Errors(this.Errors)
+                .Transaction(this.Transaction);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private IList<Models.Error> errors;
             private Models.Transaction transaction;
 
-
-
+             /// <summary>
+             /// Errors.
+             /// </summary>
+             /// <param name="errors"> errors. </param>
+             /// <returns> Builder. </returns>
             public Builder Errors(IList<Models.Error> errors)
             {
                 this.errors = errors;
                 return this;
             }
 
+             /// <summary>
+             /// Transaction.
+             /// </summary>
+             /// <param name="transaction"> transaction. </param>
+             /// <returns> Builder. </returns>
             public Builder Transaction(Models.Transaction transaction)
             {
                 this.transaction = transaction;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> ChargeResponse. </returns>
             public ChargeResponse Build()
             {
-                return new ChargeResponse(errors,
-                    transaction);
+                return new ChargeResponse(
+                    this.errors,
+                    this.transaction);
             }
         }
     }

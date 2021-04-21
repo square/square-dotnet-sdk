@@ -1,21 +1,46 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class Customer 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// Customer.
+    /// </summary>
+    public class Customer
     {
-        public Customer(string id = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Customer"/> class.
+        /// </summary>
+        /// <param name="id">id.</param>
+        /// <param name="createdAt">created_at.</param>
+        /// <param name="updatedAt">updated_at.</param>
+        /// <param name="cards">cards.</param>
+        /// <param name="givenName">given_name.</param>
+        /// <param name="familyName">family_name.</param>
+        /// <param name="nickname">nickname.</param>
+        /// <param name="companyName">company_name.</param>
+        /// <param name="emailAddress">email_address.</param>
+        /// <param name="address">address.</param>
+        /// <param name="phoneNumber">phone_number.</param>
+        /// <param name="birthday">birthday.</param>
+        /// <param name="referenceId">reference_id.</param>
+        /// <param name="note">note.</param>
+        /// <param name="preferences">preferences.</param>
+        /// <param name="creationSource">creation_source.</param>
+        /// <param name="groupIds">group_ids.</param>
+        /// <param name="segmentIds">segment_ids.</param>
+        /// <param name="version">version.</param>
+        public Customer(
+            string id = null,
             string createdAt = null,
             string updatedAt = null,
             IList<Models.Card> cards = null,
@@ -30,30 +55,30 @@ namespace Square.Models
             string referenceId = null,
             string note = null,
             Models.CustomerPreferences preferences = null,
-            IList<Models.CustomerGroupInfo> groups = null,
             string creationSource = null,
             IList<string> groupIds = null,
-            IList<string> segmentIds = null)
+            IList<string> segmentIds = null,
+            long? version = null)
         {
-            Id = id;
-            CreatedAt = createdAt;
-            UpdatedAt = updatedAt;
-            Cards = cards;
-            GivenName = givenName;
-            FamilyName = familyName;
-            Nickname = nickname;
-            CompanyName = companyName;
-            EmailAddress = emailAddress;
-            Address = address;
-            PhoneNumber = phoneNumber;
-            Birthday = birthday;
-            ReferenceId = referenceId;
-            Note = note;
-            Preferences = preferences;
-            Groups = groups;
-            CreationSource = creationSource;
-            GroupIds = groupIds;
-            SegmentIds = segmentIds;
+            this.Id = id;
+            this.CreatedAt = createdAt;
+            this.UpdatedAt = updatedAt;
+            this.Cards = cards;
+            this.GivenName = givenName;
+            this.FamilyName = familyName;
+            this.Nickname = nickname;
+            this.CompanyName = companyName;
+            this.EmailAddress = emailAddress;
+            this.Address = address;
+            this.PhoneNumber = phoneNumber;
+            this.Birthday = birthday;
+            this.ReferenceId = referenceId;
+            this.Note = note;
+            this.Preferences = preferences;
+            this.CreationSource = creationSource;
+            this.GroupIds = groupIds;
+            this.SegmentIds = segmentIds;
+            this.Version = version;
         }
 
         /// <summary>
@@ -75,7 +100,7 @@ namespace Square.Models
         public string UpdatedAt { get; }
 
         /// <summary>
-        /// Payment details of cards stored on file for the customer profile.
+        /// Payment details of the credit, debit, and gift cards stored on file for the customer profile.
         /// </summary>
         [JsonProperty("cards", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.Card> Cards { get; }
@@ -123,16 +148,14 @@ namespace Square.Models
         public string PhoneNumber { get; }
 
         /// <summary>
-        /// The birthday associated with the customer profile, in RFC 3339 format.
-        /// Year is optional, timezone and times are not allowed.
-        /// For example: `0000-09-01T00:00:00-00:00` indicates a birthday on September 1st.
-        /// `1998-09-01T00:00:00-00:00` indications a birthday on September 1st __1998__.
+        /// The birthday associated with the customer profile, in RFC 3339 format. The year is optional. The timezone and time are not allowed.
+        /// For example, `0000-09-21T00:00:00-00:00` represents a birthday on September 21 and `1998-09-21T00:00:00-00:00` represents a birthday on September 21, 1998.
         /// </summary>
         [JsonProperty("birthday", NullValueHandling = NullValueHandling.Ignore)]
         public string Birthday { get; }
 
         /// <summary>
-        /// An optional, second ID used to associate the customer profile with an
+        /// An optional second ID used to associate the customer profile with an
         /// entity in another system.
         /// </summary>
         [JsonProperty("reference_id", NullValueHandling = NullValueHandling.Ignore)]
@@ -149,12 +172,6 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("preferences", NullValueHandling = NullValueHandling.Ignore)]
         public Models.CustomerPreferences Preferences { get; }
-
-        /// <summary>
-        /// The customer groups and segments the customer belongs to. This deprecated field has been replaced with  the dedicated `group_ids` for customer groups and the dedicated `segment_ids` field for customer segments. You can retrieve information about a given customer group and segment respectively using the Customer Groups API and Customer Segments API.
-        /// </summary>
-        [JsonProperty("groups", NullValueHandling = NullValueHandling.Ignore)]
-        public IList<Models.CustomerGroupInfo> Groups { get; }
 
         /// <summary>
         /// Indicates the method used to create the customer profile.
@@ -174,6 +191,13 @@ namespace Square.Models
         [JsonProperty("segment_ids", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> SegmentIds { get; }
 
+        /// <summary>
+        /// The Square-assigned version number of the customer profile. The version number is incremented each time an update is committed to the customer profile, except for changes to customer segment membership and cards on file.
+        /// </summary>
+        [JsonProperty("version", NullValueHandling = NullValueHandling.Ignore)]
+        public long? Version { get; }
+
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -183,29 +207,7 @@ namespace Square.Models
             return $"Customer : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Id = {(Id == null ? "null" : Id == string.Empty ? "" : Id)}");
-            toStringOutput.Add($"CreatedAt = {(CreatedAt == null ? "null" : CreatedAt == string.Empty ? "" : CreatedAt)}");
-            toStringOutput.Add($"UpdatedAt = {(UpdatedAt == null ? "null" : UpdatedAt == string.Empty ? "" : UpdatedAt)}");
-            toStringOutput.Add($"Cards = {(Cards == null ? "null" : $"[{ string.Join(", ", Cards)} ]")}");
-            toStringOutput.Add($"GivenName = {(GivenName == null ? "null" : GivenName == string.Empty ? "" : GivenName)}");
-            toStringOutput.Add($"FamilyName = {(FamilyName == null ? "null" : FamilyName == string.Empty ? "" : FamilyName)}");
-            toStringOutput.Add($"Nickname = {(Nickname == null ? "null" : Nickname == string.Empty ? "" : Nickname)}");
-            toStringOutput.Add($"CompanyName = {(CompanyName == null ? "null" : CompanyName == string.Empty ? "" : CompanyName)}");
-            toStringOutput.Add($"EmailAddress = {(EmailAddress == null ? "null" : EmailAddress == string.Empty ? "" : EmailAddress)}");
-            toStringOutput.Add($"Address = {(Address == null ? "null" : Address.ToString())}");
-            toStringOutput.Add($"PhoneNumber = {(PhoneNumber == null ? "null" : PhoneNumber == string.Empty ? "" : PhoneNumber)}");
-            toStringOutput.Add($"Birthday = {(Birthday == null ? "null" : Birthday == string.Empty ? "" : Birthday)}");
-            toStringOutput.Add($"ReferenceId = {(ReferenceId == null ? "null" : ReferenceId == string.Empty ? "" : ReferenceId)}");
-            toStringOutput.Add($"Note = {(Note == null ? "null" : Note == string.Empty ? "" : Note)}");
-            toStringOutput.Add($"Preferences = {(Preferences == null ? "null" : Preferences.ToString())}");
-            toStringOutput.Add($"Groups = {(Groups == null ? "null" : $"[{ string.Join(", ", Groups)} ]")}");
-            toStringOutput.Add($"CreationSource = {(CreationSource == null ? "null" : CreationSource.ToString())}");
-            toStringOutput.Add($"GroupIds = {(GroupIds == null ? "null" : $"[{ string.Join(", ", GroupIds)} ]")}");
-            toStringOutput.Add($"SegmentIds = {(SegmentIds == null ? "null" : $"[{ string.Join(", ", SegmentIds)} ]")}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -219,154 +221,189 @@ namespace Square.Models
             }
 
             return obj is Customer other &&
-                ((Id == null && other.Id == null) || (Id?.Equals(other.Id) == true)) &&
-                ((CreatedAt == null && other.CreatedAt == null) || (CreatedAt?.Equals(other.CreatedAt) == true)) &&
-                ((UpdatedAt == null && other.UpdatedAt == null) || (UpdatedAt?.Equals(other.UpdatedAt) == true)) &&
-                ((Cards == null && other.Cards == null) || (Cards?.Equals(other.Cards) == true)) &&
-                ((GivenName == null && other.GivenName == null) || (GivenName?.Equals(other.GivenName) == true)) &&
-                ((FamilyName == null && other.FamilyName == null) || (FamilyName?.Equals(other.FamilyName) == true)) &&
-                ((Nickname == null && other.Nickname == null) || (Nickname?.Equals(other.Nickname) == true)) &&
-                ((CompanyName == null && other.CompanyName == null) || (CompanyName?.Equals(other.CompanyName) == true)) &&
-                ((EmailAddress == null && other.EmailAddress == null) || (EmailAddress?.Equals(other.EmailAddress) == true)) &&
-                ((Address == null && other.Address == null) || (Address?.Equals(other.Address) == true)) &&
-                ((PhoneNumber == null && other.PhoneNumber == null) || (PhoneNumber?.Equals(other.PhoneNumber) == true)) &&
-                ((Birthday == null && other.Birthday == null) || (Birthday?.Equals(other.Birthday) == true)) &&
-                ((ReferenceId == null && other.ReferenceId == null) || (ReferenceId?.Equals(other.ReferenceId) == true)) &&
-                ((Note == null && other.Note == null) || (Note?.Equals(other.Note) == true)) &&
-                ((Preferences == null && other.Preferences == null) || (Preferences?.Equals(other.Preferences) == true)) &&
-                ((Groups == null && other.Groups == null) || (Groups?.Equals(other.Groups) == true)) &&
-                ((CreationSource == null && other.CreationSource == null) || (CreationSource?.Equals(other.CreationSource) == true)) &&
-                ((GroupIds == null && other.GroupIds == null) || (GroupIds?.Equals(other.GroupIds) == true)) &&
-                ((SegmentIds == null && other.SegmentIds == null) || (SegmentIds?.Equals(other.SegmentIds) == true));
+                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
+                ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true)) &&
+                ((this.UpdatedAt == null && other.UpdatedAt == null) || (this.UpdatedAt?.Equals(other.UpdatedAt) == true)) &&
+                ((this.Cards == null && other.Cards == null) || (this.Cards?.Equals(other.Cards) == true)) &&
+                ((this.GivenName == null && other.GivenName == null) || (this.GivenName?.Equals(other.GivenName) == true)) &&
+                ((this.FamilyName == null && other.FamilyName == null) || (this.FamilyName?.Equals(other.FamilyName) == true)) &&
+                ((this.Nickname == null && other.Nickname == null) || (this.Nickname?.Equals(other.Nickname) == true)) &&
+                ((this.CompanyName == null && other.CompanyName == null) || (this.CompanyName?.Equals(other.CompanyName) == true)) &&
+                ((this.EmailAddress == null && other.EmailAddress == null) || (this.EmailAddress?.Equals(other.EmailAddress) == true)) &&
+                ((this.Address == null && other.Address == null) || (this.Address?.Equals(other.Address) == true)) &&
+                ((this.PhoneNumber == null && other.PhoneNumber == null) || (this.PhoneNumber?.Equals(other.PhoneNumber) == true)) &&
+                ((this.Birthday == null && other.Birthday == null) || (this.Birthday?.Equals(other.Birthday) == true)) &&
+                ((this.ReferenceId == null && other.ReferenceId == null) || (this.ReferenceId?.Equals(other.ReferenceId) == true)) &&
+                ((this.Note == null && other.Note == null) || (this.Note?.Equals(other.Note) == true)) &&
+                ((this.Preferences == null && other.Preferences == null) || (this.Preferences?.Equals(other.Preferences) == true)) &&
+                ((this.CreationSource == null && other.CreationSource == null) || (this.CreationSource?.Equals(other.CreationSource) == true)) &&
+                ((this.GroupIds == null && other.GroupIds == null) || (this.GroupIds?.Equals(other.GroupIds) == true)) &&
+                ((this.SegmentIds == null && other.SegmentIds == null) || (this.SegmentIds?.Equals(other.SegmentIds) == true)) &&
+                ((this.Version == null && other.Version == null) || (this.Version?.Equals(other.Version) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 749289117;
+            int hashCode = 1039190242;
 
-            if (Id != null)
+            if (this.Id != null)
             {
-               hashCode += Id.GetHashCode();
+               hashCode += this.Id.GetHashCode();
             }
 
-            if (CreatedAt != null)
+            if (this.CreatedAt != null)
             {
-               hashCode += CreatedAt.GetHashCode();
+               hashCode += this.CreatedAt.GetHashCode();
             }
 
-            if (UpdatedAt != null)
+            if (this.UpdatedAt != null)
             {
-               hashCode += UpdatedAt.GetHashCode();
+               hashCode += this.UpdatedAt.GetHashCode();
             }
 
-            if (Cards != null)
+            if (this.Cards != null)
             {
-               hashCode += Cards.GetHashCode();
+               hashCode += this.Cards.GetHashCode();
             }
 
-            if (GivenName != null)
+            if (this.GivenName != null)
             {
-               hashCode += GivenName.GetHashCode();
+               hashCode += this.GivenName.GetHashCode();
             }
 
-            if (FamilyName != null)
+            if (this.FamilyName != null)
             {
-               hashCode += FamilyName.GetHashCode();
+               hashCode += this.FamilyName.GetHashCode();
             }
 
-            if (Nickname != null)
+            if (this.Nickname != null)
             {
-               hashCode += Nickname.GetHashCode();
+               hashCode += this.Nickname.GetHashCode();
             }
 
-            if (CompanyName != null)
+            if (this.CompanyName != null)
             {
-               hashCode += CompanyName.GetHashCode();
+               hashCode += this.CompanyName.GetHashCode();
             }
 
-            if (EmailAddress != null)
+            if (this.EmailAddress != null)
             {
-               hashCode += EmailAddress.GetHashCode();
+               hashCode += this.EmailAddress.GetHashCode();
             }
 
-            if (Address != null)
+            if (this.Address != null)
             {
-               hashCode += Address.GetHashCode();
+               hashCode += this.Address.GetHashCode();
             }
 
-            if (PhoneNumber != null)
+            if (this.PhoneNumber != null)
             {
-               hashCode += PhoneNumber.GetHashCode();
+               hashCode += this.PhoneNumber.GetHashCode();
             }
 
-            if (Birthday != null)
+            if (this.Birthday != null)
             {
-               hashCode += Birthday.GetHashCode();
+               hashCode += this.Birthday.GetHashCode();
             }
 
-            if (ReferenceId != null)
+            if (this.ReferenceId != null)
             {
-               hashCode += ReferenceId.GetHashCode();
+               hashCode += this.ReferenceId.GetHashCode();
             }
 
-            if (Note != null)
+            if (this.Note != null)
             {
-               hashCode += Note.GetHashCode();
+               hashCode += this.Note.GetHashCode();
             }
 
-            if (Preferences != null)
+            if (this.Preferences != null)
             {
-               hashCode += Preferences.GetHashCode();
+               hashCode += this.Preferences.GetHashCode();
             }
 
-            if (Groups != null)
+            if (this.CreationSource != null)
             {
-               hashCode += Groups.GetHashCode();
+               hashCode += this.CreationSource.GetHashCode();
             }
 
-            if (CreationSource != null)
+            if (this.GroupIds != null)
             {
-               hashCode += CreationSource.GetHashCode();
+               hashCode += this.GroupIds.GetHashCode();
             }
 
-            if (GroupIds != null)
+            if (this.SegmentIds != null)
             {
-               hashCode += GroupIds.GetHashCode();
+               hashCode += this.SegmentIds.GetHashCode();
             }
 
-            if (SegmentIds != null)
+            if (this.Version != null)
             {
-               hashCode += SegmentIds.GetHashCode();
+               hashCode += this.Version.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id == string.Empty ? "" : this.Id)}");
+            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt == string.Empty ? "" : this.CreatedAt)}");
+            toStringOutput.Add($"this.UpdatedAt = {(this.UpdatedAt == null ? "null" : this.UpdatedAt == string.Empty ? "" : this.UpdatedAt)}");
+            toStringOutput.Add($"this.Cards = {(this.Cards == null ? "null" : $"[{string.Join(", ", this.Cards)} ]")}");
+            toStringOutput.Add($"this.GivenName = {(this.GivenName == null ? "null" : this.GivenName == string.Empty ? "" : this.GivenName)}");
+            toStringOutput.Add($"this.FamilyName = {(this.FamilyName == null ? "null" : this.FamilyName == string.Empty ? "" : this.FamilyName)}");
+            toStringOutput.Add($"this.Nickname = {(this.Nickname == null ? "null" : this.Nickname == string.Empty ? "" : this.Nickname)}");
+            toStringOutput.Add($"this.CompanyName = {(this.CompanyName == null ? "null" : this.CompanyName == string.Empty ? "" : this.CompanyName)}");
+            toStringOutput.Add($"this.EmailAddress = {(this.EmailAddress == null ? "null" : this.EmailAddress == string.Empty ? "" : this.EmailAddress)}");
+            toStringOutput.Add($"this.Address = {(this.Address == null ? "null" : this.Address.ToString())}");
+            toStringOutput.Add($"this.PhoneNumber = {(this.PhoneNumber == null ? "null" : this.PhoneNumber == string.Empty ? "" : this.PhoneNumber)}");
+            toStringOutput.Add($"this.Birthday = {(this.Birthday == null ? "null" : this.Birthday == string.Empty ? "" : this.Birthday)}");
+            toStringOutput.Add($"this.ReferenceId = {(this.ReferenceId == null ? "null" : this.ReferenceId == string.Empty ? "" : this.ReferenceId)}");
+            toStringOutput.Add($"this.Note = {(this.Note == null ? "null" : this.Note == string.Empty ? "" : this.Note)}");
+            toStringOutput.Add($"this.Preferences = {(this.Preferences == null ? "null" : this.Preferences.ToString())}");
+            toStringOutput.Add($"this.CreationSource = {(this.CreationSource == null ? "null" : this.CreationSource.ToString())}");
+            toStringOutput.Add($"this.GroupIds = {(this.GroupIds == null ? "null" : $"[{string.Join(", ", this.GroupIds)} ]")}");
+            toStringOutput.Add($"this.SegmentIds = {(this.SegmentIds == null ? "null" : $"[{string.Join(", ", this.SegmentIds)} ]")}");
+            toStringOutput.Add($"this.Version = {(this.Version == null ? "null" : this.Version.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .Id(Id)
-                .CreatedAt(CreatedAt)
-                .UpdatedAt(UpdatedAt)
-                .Cards(Cards)
-                .GivenName(GivenName)
-                .FamilyName(FamilyName)
-                .Nickname(Nickname)
-                .CompanyName(CompanyName)
-                .EmailAddress(EmailAddress)
-                .Address(Address)
-                .PhoneNumber(PhoneNumber)
-                .Birthday(Birthday)
-                .ReferenceId(ReferenceId)
-                .Note(Note)
-                .Preferences(Preferences)
-                .Groups(Groups)
-                .CreationSource(CreationSource)
-                .GroupIds(GroupIds)
-                .SegmentIds(SegmentIds);
+                .Id(this.Id)
+                .CreatedAt(this.CreatedAt)
+                .UpdatedAt(this.UpdatedAt)
+                .Cards(this.Cards)
+                .GivenName(this.GivenName)
+                .FamilyName(this.FamilyName)
+                .Nickname(this.Nickname)
+                .CompanyName(this.CompanyName)
+                .EmailAddress(this.EmailAddress)
+                .Address(this.Address)
+                .PhoneNumber(this.PhoneNumber)
+                .Birthday(this.Birthday)
+                .ReferenceId(this.ReferenceId)
+                .Note(this.Note)
+                .Preferences(this.Preferences)
+                .CreationSource(this.CreationSource)
+                .GroupIds(this.GroupIds)
+                .SegmentIds(this.SegmentIds)
+                .Version(this.Version);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string id;
@@ -384,148 +421,246 @@ namespace Square.Models
             private string referenceId;
             private string note;
             private Models.CustomerPreferences preferences;
-            private IList<Models.CustomerGroupInfo> groups;
             private string creationSource;
             private IList<string> groupIds;
             private IList<string> segmentIds;
+            private long? version;
 
-
-
+             /// <summary>
+             /// Id.
+             /// </summary>
+             /// <param name="id"> id. </param>
+             /// <returns> Builder. </returns>
             public Builder Id(string id)
             {
                 this.id = id;
                 return this;
             }
 
+             /// <summary>
+             /// CreatedAt.
+             /// </summary>
+             /// <param name="createdAt"> createdAt. </param>
+             /// <returns> Builder. </returns>
             public Builder CreatedAt(string createdAt)
             {
                 this.createdAt = createdAt;
                 return this;
             }
 
+             /// <summary>
+             /// UpdatedAt.
+             /// </summary>
+             /// <param name="updatedAt"> updatedAt. </param>
+             /// <returns> Builder. </returns>
             public Builder UpdatedAt(string updatedAt)
             {
                 this.updatedAt = updatedAt;
                 return this;
             }
 
+             /// <summary>
+             /// Cards.
+             /// </summary>
+             /// <param name="cards"> cards. </param>
+             /// <returns> Builder. </returns>
             public Builder Cards(IList<Models.Card> cards)
             {
                 this.cards = cards;
                 return this;
             }
 
+             /// <summary>
+             /// GivenName.
+             /// </summary>
+             /// <param name="givenName"> givenName. </param>
+             /// <returns> Builder. </returns>
             public Builder GivenName(string givenName)
             {
                 this.givenName = givenName;
                 return this;
             }
 
+             /// <summary>
+             /// FamilyName.
+             /// </summary>
+             /// <param name="familyName"> familyName. </param>
+             /// <returns> Builder. </returns>
             public Builder FamilyName(string familyName)
             {
                 this.familyName = familyName;
                 return this;
             }
 
+             /// <summary>
+             /// Nickname.
+             /// </summary>
+             /// <param name="nickname"> nickname. </param>
+             /// <returns> Builder. </returns>
             public Builder Nickname(string nickname)
             {
                 this.nickname = nickname;
                 return this;
             }
 
+             /// <summary>
+             /// CompanyName.
+             /// </summary>
+             /// <param name="companyName"> companyName. </param>
+             /// <returns> Builder. </returns>
             public Builder CompanyName(string companyName)
             {
                 this.companyName = companyName;
                 return this;
             }
 
+             /// <summary>
+             /// EmailAddress.
+             /// </summary>
+             /// <param name="emailAddress"> emailAddress. </param>
+             /// <returns> Builder. </returns>
             public Builder EmailAddress(string emailAddress)
             {
                 this.emailAddress = emailAddress;
                 return this;
             }
 
+             /// <summary>
+             /// Address.
+             /// </summary>
+             /// <param name="address"> address. </param>
+             /// <returns> Builder. </returns>
             public Builder Address(Models.Address address)
             {
                 this.address = address;
                 return this;
             }
 
+             /// <summary>
+             /// PhoneNumber.
+             /// </summary>
+             /// <param name="phoneNumber"> phoneNumber. </param>
+             /// <returns> Builder. </returns>
             public Builder PhoneNumber(string phoneNumber)
             {
                 this.phoneNumber = phoneNumber;
                 return this;
             }
 
+             /// <summary>
+             /// Birthday.
+             /// </summary>
+             /// <param name="birthday"> birthday. </param>
+             /// <returns> Builder. </returns>
             public Builder Birthday(string birthday)
             {
                 this.birthday = birthday;
                 return this;
             }
 
+             /// <summary>
+             /// ReferenceId.
+             /// </summary>
+             /// <param name="referenceId"> referenceId. </param>
+             /// <returns> Builder. </returns>
             public Builder ReferenceId(string referenceId)
             {
                 this.referenceId = referenceId;
                 return this;
             }
 
+             /// <summary>
+             /// Note.
+             /// </summary>
+             /// <param name="note"> note. </param>
+             /// <returns> Builder. </returns>
             public Builder Note(string note)
             {
                 this.note = note;
                 return this;
             }
 
+             /// <summary>
+             /// Preferences.
+             /// </summary>
+             /// <param name="preferences"> preferences. </param>
+             /// <returns> Builder. </returns>
             public Builder Preferences(Models.CustomerPreferences preferences)
             {
                 this.preferences = preferences;
                 return this;
             }
 
-            public Builder Groups(IList<Models.CustomerGroupInfo> groups)
-            {
-                this.groups = groups;
-                return this;
-            }
-
+             /// <summary>
+             /// CreationSource.
+             /// </summary>
+             /// <param name="creationSource"> creationSource. </param>
+             /// <returns> Builder. </returns>
             public Builder CreationSource(string creationSource)
             {
                 this.creationSource = creationSource;
                 return this;
             }
 
+             /// <summary>
+             /// GroupIds.
+             /// </summary>
+             /// <param name="groupIds"> groupIds. </param>
+             /// <returns> Builder. </returns>
             public Builder GroupIds(IList<string> groupIds)
             {
                 this.groupIds = groupIds;
                 return this;
             }
 
+             /// <summary>
+             /// SegmentIds.
+             /// </summary>
+             /// <param name="segmentIds"> segmentIds. </param>
+             /// <returns> Builder. </returns>
             public Builder SegmentIds(IList<string> segmentIds)
             {
                 this.segmentIds = segmentIds;
                 return this;
             }
 
+             /// <summary>
+             /// Version.
+             /// </summary>
+             /// <param name="version"> version. </param>
+             /// <returns> Builder. </returns>
+            public Builder Version(long? version)
+            {
+                this.version = version;
+                return this;
+            }
+
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> Customer. </returns>
             public Customer Build()
             {
-                return new Customer(id,
-                    createdAt,
-                    updatedAt,
-                    cards,
-                    givenName,
-                    familyName,
-                    nickname,
-                    companyName,
-                    emailAddress,
-                    address,
-                    phoneNumber,
-                    birthday,
-                    referenceId,
-                    note,
-                    preferences,
-                    groups,
-                    creationSource,
-                    groupIds,
-                    segmentIds);
+                return new Customer(
+                    this.id,
+                    this.createdAt,
+                    this.updatedAt,
+                    this.cards,
+                    this.givenName,
+                    this.familyName,
+                    this.nickname,
+                    this.companyName,
+                    this.emailAddress,
+                    this.address,
+                    this.phoneNumber,
+                    this.birthday,
+                    this.referenceId,
+                    this.note,
+                    this.preferences,
+                    this.creationSource,
+                    this.groupIds,
+                    this.segmentIds,
+                    this.version);
             }
         }
     }

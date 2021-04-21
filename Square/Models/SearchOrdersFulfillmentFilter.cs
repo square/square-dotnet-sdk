@@ -1,29 +1,37 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class SearchOrdersFulfillmentFilter 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// SearchOrdersFulfillmentFilter.
+    /// </summary>
+    public class SearchOrdersFulfillmentFilter
     {
-        public SearchOrdersFulfillmentFilter(IList<string> fulfillmentTypes = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SearchOrdersFulfillmentFilter"/> class.
+        /// </summary>
+        /// <param name="fulfillmentTypes">fulfillment_types.</param>
+        /// <param name="fulfillmentStates">fulfillment_states.</param>
+        public SearchOrdersFulfillmentFilter(
+            IList<string> fulfillmentTypes = null,
             IList<string> fulfillmentStates = null)
         {
-            FulfillmentTypes = fulfillmentTypes;
-            FulfillmentStates = fulfillmentStates;
+            this.FulfillmentTypes = fulfillmentTypes;
+            this.FulfillmentStates = fulfillmentStates;
         }
 
         /// <summary>
-        /// List of [fulfillment types](#type-orderfulfillmenttype) to filter
+        /// List of [fulfillment types]($m/OrderFulfillmentType) to filter
         /// for. Will return orders if any of its fulfillments match any of the fulfillment types
         /// listed in this field.
         /// See [OrderFulfillmentType](#type-orderfulfillmenttype) for possible values
@@ -32,7 +40,7 @@ namespace Square.Models
         public IList<string> FulfillmentTypes { get; }
 
         /// <summary>
-        /// List of [fulfillment states](#type-orderfulfillmentstate) to filter
+        /// List of [fulfillment states]($m/OrderFulfillmentState) to filter
         /// for. Will return orders if any of its fulfillments match any of the
         /// fulfillment states listed in this field.
         /// See [OrderFulfillmentState](#type-orderfulfillmentstate) for possible values
@@ -40,6 +48,7 @@ namespace Square.Models
         [JsonProperty("fulfillment_states", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> FulfillmentStates { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -49,12 +58,7 @@ namespace Square.Models
             return $"SearchOrdersFulfillmentFilter : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"FulfillmentTypes = {(FulfillmentTypes == null ? "null" : $"[{ string.Join(", ", FulfillmentTypes)} ]")}");
-            toStringOutput.Add($"FulfillmentStates = {(FulfillmentStates == null ? "null" : $"[{ string.Join(", ", FulfillmentStates)} ]")}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -68,58 +72,89 @@ namespace Square.Models
             }
 
             return obj is SearchOrdersFulfillmentFilter other &&
-                ((FulfillmentTypes == null && other.FulfillmentTypes == null) || (FulfillmentTypes?.Equals(other.FulfillmentTypes) == true)) &&
-                ((FulfillmentStates == null && other.FulfillmentStates == null) || (FulfillmentStates?.Equals(other.FulfillmentStates) == true));
+                ((this.FulfillmentTypes == null && other.FulfillmentTypes == null) || (this.FulfillmentTypes?.Equals(other.FulfillmentTypes) == true)) &&
+                ((this.FulfillmentStates == null && other.FulfillmentStates == null) || (this.FulfillmentStates?.Equals(other.FulfillmentStates) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -747213754;
 
-            if (FulfillmentTypes != null)
+            if (this.FulfillmentTypes != null)
             {
-               hashCode += FulfillmentTypes.GetHashCode();
+               hashCode += this.FulfillmentTypes.GetHashCode();
             }
 
-            if (FulfillmentStates != null)
+            if (this.FulfillmentStates != null)
             {
-               hashCode += FulfillmentStates.GetHashCode();
+               hashCode += this.FulfillmentStates.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.FulfillmentTypes = {(this.FulfillmentTypes == null ? "null" : $"[{string.Join(", ", this.FulfillmentTypes)} ]")}");
+            toStringOutput.Add($"this.FulfillmentStates = {(this.FulfillmentStates == null ? "null" : $"[{string.Join(", ", this.FulfillmentStates)} ]")}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .FulfillmentTypes(FulfillmentTypes)
-                .FulfillmentStates(FulfillmentStates);
+                .FulfillmentTypes(this.FulfillmentTypes)
+                .FulfillmentStates(this.FulfillmentStates);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private IList<string> fulfillmentTypes;
             private IList<string> fulfillmentStates;
 
-
-
+             /// <summary>
+             /// FulfillmentTypes.
+             /// </summary>
+             /// <param name="fulfillmentTypes"> fulfillmentTypes. </param>
+             /// <returns> Builder. </returns>
             public Builder FulfillmentTypes(IList<string> fulfillmentTypes)
             {
                 this.fulfillmentTypes = fulfillmentTypes;
                 return this;
             }
 
+             /// <summary>
+             /// FulfillmentStates.
+             /// </summary>
+             /// <param name="fulfillmentStates"> fulfillmentStates. </param>
+             /// <returns> Builder. </returns>
             public Builder FulfillmentStates(IList<string> fulfillmentStates)
             {
                 this.fulfillmentStates = fulfillmentStates;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> SearchOrdersFulfillmentFilter. </returns>
             public SearchOrdersFulfillmentFilter Build()
             {
-                return new SearchOrdersFulfillmentFilter(fulfillmentTypes,
-                    fulfillmentStates);
+                return new SearchOrdersFulfillmentFilter(
+                    this.fulfillmentTypes,
+                    this.fulfillmentStates);
             }
         }
     }

@@ -1,27 +1,36 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class V1PaymentModifier 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// V1PaymentModifier.
+    /// </summary>
+    public class V1PaymentModifier
     {
-        public V1PaymentModifier(string name = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="V1PaymentModifier"/> class.
+        /// </summary>
+        /// <param name="name">name.</param>
+        /// <param name="appliedMoney">applied_money.</param>
+        /// <param name="modifierOptionId">modifier_option_id.</param>
+        public V1PaymentModifier(
+            string name = null,
             Models.V1Money appliedMoney = null,
             string modifierOptionId = null)
         {
-            Name = name;
-            AppliedMoney = appliedMoney;
-            ModifierOptionId = modifierOptionId;
+            this.Name = name;
+            this.AppliedMoney = appliedMoney;
+            this.ModifierOptionId = modifierOptionId;
         }
 
         /// <summary>
@@ -31,7 +40,7 @@ namespace Square.Models
         public string Name { get; }
 
         /// <summary>
-        /// Getter for applied_money
+        /// Gets or sets AppliedMoney.
         /// </summary>
         [JsonProperty("applied_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1Money AppliedMoney { get; }
@@ -42,6 +51,7 @@ namespace Square.Models
         [JsonProperty("modifier_option_id", NullValueHandling = NullValueHandling.Ignore)]
         public string ModifierOptionId { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -51,13 +61,7 @@ namespace Square.Models
             return $"V1PaymentModifier : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Name = {(Name == null ? "null" : Name == string.Empty ? "" : Name)}");
-            toStringOutput.Add($"AppliedMoney = {(AppliedMoney == null ? "null" : AppliedMoney.ToString())}");
-            toStringOutput.Add($"ModifierOptionId = {(ModifierOptionId == null ? "null" : ModifierOptionId == string.Empty ? "" : ModifierOptionId)}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -71,73 +75,110 @@ namespace Square.Models
             }
 
             return obj is V1PaymentModifier other &&
-                ((Name == null && other.Name == null) || (Name?.Equals(other.Name) == true)) &&
-                ((AppliedMoney == null && other.AppliedMoney == null) || (AppliedMoney?.Equals(other.AppliedMoney) == true)) &&
-                ((ModifierOptionId == null && other.ModifierOptionId == null) || (ModifierOptionId?.Equals(other.ModifierOptionId) == true));
+                ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
+                ((this.AppliedMoney == null && other.AppliedMoney == null) || (this.AppliedMoney?.Equals(other.AppliedMoney) == true)) &&
+                ((this.ModifierOptionId == null && other.ModifierOptionId == null) || (this.ModifierOptionId?.Equals(other.ModifierOptionId) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 255545397;
 
-            if (Name != null)
+            if (this.Name != null)
             {
-               hashCode += Name.GetHashCode();
+               hashCode += this.Name.GetHashCode();
             }
 
-            if (AppliedMoney != null)
+            if (this.AppliedMoney != null)
             {
-               hashCode += AppliedMoney.GetHashCode();
+               hashCode += this.AppliedMoney.GetHashCode();
             }
 
-            if (ModifierOptionId != null)
+            if (this.ModifierOptionId != null)
             {
-               hashCode += ModifierOptionId.GetHashCode();
+               hashCode += this.ModifierOptionId.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Name = {(this.Name == null ? "null" : this.Name == string.Empty ? "" : this.Name)}");
+            toStringOutput.Add($"this.AppliedMoney = {(this.AppliedMoney == null ? "null" : this.AppliedMoney.ToString())}");
+            toStringOutput.Add($"this.ModifierOptionId = {(this.ModifierOptionId == null ? "null" : this.ModifierOptionId == string.Empty ? "" : this.ModifierOptionId)}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .Name(Name)
-                .AppliedMoney(AppliedMoney)
-                .ModifierOptionId(ModifierOptionId);
+                .Name(this.Name)
+                .AppliedMoney(this.AppliedMoney)
+                .ModifierOptionId(this.ModifierOptionId);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string name;
             private Models.V1Money appliedMoney;
             private string modifierOptionId;
 
-
-
+             /// <summary>
+             /// Name.
+             /// </summary>
+             /// <param name="name"> name. </param>
+             /// <returns> Builder. </returns>
             public Builder Name(string name)
             {
                 this.name = name;
                 return this;
             }
 
+             /// <summary>
+             /// AppliedMoney.
+             /// </summary>
+             /// <param name="appliedMoney"> appliedMoney. </param>
+             /// <returns> Builder. </returns>
             public Builder AppliedMoney(Models.V1Money appliedMoney)
             {
                 this.appliedMoney = appliedMoney;
                 return this;
             }
 
+             /// <summary>
+             /// ModifierOptionId.
+             /// </summary>
+             /// <param name="modifierOptionId"> modifierOptionId. </param>
+             /// <returns> Builder. </returns>
             public Builder ModifierOptionId(string modifierOptionId)
             {
                 this.modifierOptionId = modifierOptionId;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> V1PaymentModifier. </returns>
             public V1PaymentModifier Build()
             {
-                return new V1PaymentModifier(name,
-                    appliedMoney,
-                    modifierOptionId);
+                return new V1PaymentModifier(
+                    this.name,
+                    this.appliedMoney,
+                    this.modifierOptionId);
             }
         }
     }

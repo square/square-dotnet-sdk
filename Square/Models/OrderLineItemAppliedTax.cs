@@ -1,27 +1,36 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class OrderLineItemAppliedTax 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// OrderLineItemAppliedTax.
+    /// </summary>
+    public class OrderLineItemAppliedTax
     {
-        public OrderLineItemAppliedTax(string taxUid,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="OrderLineItemAppliedTax"/> class.
+        /// </summary>
+        /// <param name="taxUid">tax_uid.</param>
+        /// <param name="uid">uid.</param>
+        /// <param name="appliedMoney">applied_money.</param>
+        public OrderLineItemAppliedTax(
+            string taxUid,
             string uid = null,
             Models.Money appliedMoney = null)
         {
-            Uid = uid;
-            TaxUid = taxUid;
-            AppliedMoney = appliedMoney;
+            this.Uid = uid;
+            this.TaxUid = taxUid;
+            this.AppliedMoney = appliedMoney;
         }
 
         /// <summary>
@@ -50,6 +59,7 @@ namespace Square.Models
         [JsonProperty("applied_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Money AppliedMoney { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -59,13 +69,7 @@ namespace Square.Models
             return $"OrderLineItemAppliedTax : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Uid = {(Uid == null ? "null" : Uid == string.Empty ? "" : Uid)}");
-            toStringOutput.Add($"TaxUid = {(TaxUid == null ? "null" : TaxUid == string.Empty ? "" : TaxUid)}");
-            toStringOutput.Add($"AppliedMoney = {(AppliedMoney == null ? "null" : AppliedMoney.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -79,75 +83,116 @@ namespace Square.Models
             }
 
             return obj is OrderLineItemAppliedTax other &&
-                ((Uid == null && other.Uid == null) || (Uid?.Equals(other.Uid) == true)) &&
-                ((TaxUid == null && other.TaxUid == null) || (TaxUid?.Equals(other.TaxUid) == true)) &&
-                ((AppliedMoney == null && other.AppliedMoney == null) || (AppliedMoney?.Equals(other.AppliedMoney) == true));
+                ((this.Uid == null && other.Uid == null) || (this.Uid?.Equals(other.Uid) == true)) &&
+                ((this.TaxUid == null && other.TaxUid == null) || (this.TaxUid?.Equals(other.TaxUid) == true)) &&
+                ((this.AppliedMoney == null && other.AppliedMoney == null) || (this.AppliedMoney?.Equals(other.AppliedMoney) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1624626539;
 
-            if (Uid != null)
+            if (this.Uid != null)
             {
-               hashCode += Uid.GetHashCode();
+               hashCode += this.Uid.GetHashCode();
             }
 
-            if (TaxUid != null)
+            if (this.TaxUid != null)
             {
-               hashCode += TaxUid.GetHashCode();
+               hashCode += this.TaxUid.GetHashCode();
             }
 
-            if (AppliedMoney != null)
+            if (this.AppliedMoney != null)
             {
-               hashCode += AppliedMoney.GetHashCode();
+               hashCode += this.AppliedMoney.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Uid = {(this.Uid == null ? "null" : this.Uid == string.Empty ? "" : this.Uid)}");
+            toStringOutput.Add($"this.TaxUid = {(this.TaxUid == null ? "null" : this.TaxUid == string.Empty ? "" : this.TaxUid)}");
+            toStringOutput.Add($"this.AppliedMoney = {(this.AppliedMoney == null ? "null" : this.AppliedMoney.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
-            var builder = new Builder(TaxUid)
-                .Uid(Uid)
-                .AppliedMoney(AppliedMoney);
+            var builder = new Builder(
+                this.TaxUid)
+                .Uid(this.Uid)
+                .AppliedMoney(this.AppliedMoney);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string taxUid;
             private string uid;
             private Models.Money appliedMoney;
 
-            public Builder(string taxUid)
+            public Builder(
+                string taxUid)
             {
                 this.taxUid = taxUid;
             }
 
+             /// <summary>
+             /// TaxUid.
+             /// </summary>
+             /// <param name="taxUid"> taxUid. </param>
+             /// <returns> Builder. </returns>
             public Builder TaxUid(string taxUid)
             {
                 this.taxUid = taxUid;
                 return this;
             }
 
+             /// <summary>
+             /// Uid.
+             /// </summary>
+             /// <param name="uid"> uid. </param>
+             /// <returns> Builder. </returns>
             public Builder Uid(string uid)
             {
                 this.uid = uid;
                 return this;
             }
 
+             /// <summary>
+             /// AppliedMoney.
+             /// </summary>
+             /// <param name="appliedMoney"> appliedMoney. </param>
+             /// <returns> Builder. </returns>
             public Builder AppliedMoney(Models.Money appliedMoney)
             {
                 this.appliedMoney = appliedMoney;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> OrderLineItemAppliedTax. </returns>
             public OrderLineItemAppliedTax Build()
             {
-                return new OrderLineItemAppliedTax(taxUid,
-                    uid,
-                    appliedMoney);
+                return new OrderLineItemAppliedTax(
+                    this.taxUid,
+                    this.uid,
+                    this.appliedMoney);
             }
         }
     }

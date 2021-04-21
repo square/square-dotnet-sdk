@@ -1,23 +1,30 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class UpdateTeamMemberRequest 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// UpdateTeamMemberRequest.
+    /// </summary>
+    public class UpdateTeamMemberRequest
     {
-        public UpdateTeamMemberRequest(Models.TeamMember teamMember = null)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UpdateTeamMemberRequest"/> class.
+        /// </summary>
+        /// <param name="teamMember">team_member.</param>
+        public UpdateTeamMemberRequest(
+            Models.TeamMember teamMember = null)
         {
-            TeamMember = teamMember;
+            this.TeamMember = teamMember;
         }
 
         /// <summary>
@@ -26,6 +33,7 @@ namespace Square.Models
         [JsonProperty("team_member", NullValueHandling = NullValueHandling.Ignore)]
         public Models.TeamMember TeamMember { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -35,11 +43,7 @@ namespace Square.Models
             return $"UpdateTeamMemberRequest : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"TeamMember = {(TeamMember == null ? "null" : TeamMember.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -53,43 +57,68 @@ namespace Square.Models
             }
 
             return obj is UpdateTeamMemberRequest other &&
-                ((TeamMember == null && other.TeamMember == null) || (TeamMember?.Equals(other.TeamMember) == true));
+                ((this.TeamMember == null && other.TeamMember == null) || (this.TeamMember?.Equals(other.TeamMember) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1973028988;
 
-            if (TeamMember != null)
+            if (this.TeamMember != null)
             {
-               hashCode += TeamMember.GetHashCode();
+               hashCode += this.TeamMember.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.TeamMember = {(this.TeamMember == null ? "null" : this.TeamMember.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .TeamMember(TeamMember);
+                .TeamMember(this.TeamMember);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private Models.TeamMember teamMember;
 
-
-
+             /// <summary>
+             /// TeamMember.
+             /// </summary>
+             /// <param name="teamMember"> teamMember. </param>
+             /// <returns> Builder. </returns>
             public Builder TeamMember(Models.TeamMember teamMember)
             {
                 this.teamMember = teamMember;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> UpdateTeamMemberRequest. </returns>
             public UpdateTeamMemberRequest Build()
             {
-                return new UpdateTeamMemberRequest(teamMember);
+                return new UpdateTeamMemberRequest(
+                    this.teamMember);
             }
         }
     }

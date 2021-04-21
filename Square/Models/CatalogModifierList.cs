@@ -1,29 +1,39 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class CatalogModifierList 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// CatalogModifierList.
+    /// </summary>
+    public class CatalogModifierList
     {
-        public CatalogModifierList(string name = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CatalogModifierList"/> class.
+        /// </summary>
+        /// <param name="name">name.</param>
+        /// <param name="ordinal">ordinal.</param>
+        /// <param name="selectionType">selection_type.</param>
+        /// <param name="modifiers">modifiers.</param>
+        public CatalogModifierList(
+            string name = null,
             int? ordinal = null,
             string selectionType = null,
             IList<Models.CatalogObject> modifiers = null)
         {
-            Name = name;
-            Ordinal = ordinal;
-            SelectionType = selectionType;
-            Modifiers = modifiers;
+            this.Name = name;
+            this.Ordinal = ordinal;
+            this.SelectionType = selectionType;
+            this.Modifiers = modifiers;
         }
 
         /// <summary>
@@ -53,6 +63,7 @@ namespace Square.Models
         [JsonProperty("modifiers", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.CatalogObject> Modifiers { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -62,14 +73,7 @@ namespace Square.Models
             return $"CatalogModifierList : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Name = {(Name == null ? "null" : Name == string.Empty ? "" : Name)}");
-            toStringOutput.Add($"Ordinal = {(Ordinal == null ? "null" : Ordinal.ToString())}");
-            toStringOutput.Add($"SelectionType = {(SelectionType == null ? "null" : SelectionType.ToString())}");
-            toStringOutput.Add($"Modifiers = {(Modifiers == null ? "null" : $"[{ string.Join(", ", Modifiers)} ]")}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -83,49 +87,69 @@ namespace Square.Models
             }
 
             return obj is CatalogModifierList other &&
-                ((Name == null && other.Name == null) || (Name?.Equals(other.Name) == true)) &&
-                ((Ordinal == null && other.Ordinal == null) || (Ordinal?.Equals(other.Ordinal) == true)) &&
-                ((SelectionType == null && other.SelectionType == null) || (SelectionType?.Equals(other.SelectionType) == true)) &&
-                ((Modifiers == null && other.Modifiers == null) || (Modifiers?.Equals(other.Modifiers) == true));
+                ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
+                ((this.Ordinal == null && other.Ordinal == null) || (this.Ordinal?.Equals(other.Ordinal) == true)) &&
+                ((this.SelectionType == null && other.SelectionType == null) || (this.SelectionType?.Equals(other.SelectionType) == true)) &&
+                ((this.Modifiers == null && other.Modifiers == null) || (this.Modifiers?.Equals(other.Modifiers) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 1257227706;
 
-            if (Name != null)
+            if (this.Name != null)
             {
-               hashCode += Name.GetHashCode();
+               hashCode += this.Name.GetHashCode();
             }
 
-            if (Ordinal != null)
+            if (this.Ordinal != null)
             {
-               hashCode += Ordinal.GetHashCode();
+               hashCode += this.Ordinal.GetHashCode();
             }
 
-            if (SelectionType != null)
+            if (this.SelectionType != null)
             {
-               hashCode += SelectionType.GetHashCode();
+               hashCode += this.SelectionType.GetHashCode();
             }
 
-            if (Modifiers != null)
+            if (this.Modifiers != null)
             {
-               hashCode += Modifiers.GetHashCode();
+               hashCode += this.Modifiers.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Name = {(this.Name == null ? "null" : this.Name == string.Empty ? "" : this.Name)}");
+            toStringOutput.Add($"this.Ordinal = {(this.Ordinal == null ? "null" : this.Ordinal.ToString())}");
+            toStringOutput.Add($"this.SelectionType = {(this.SelectionType == null ? "null" : this.SelectionType.ToString())}");
+            toStringOutput.Add($"this.Modifiers = {(this.Modifiers == null ? "null" : $"[{string.Join(", ", this.Modifiers)} ]")}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .Name(Name)
-                .Ordinal(Ordinal)
-                .SelectionType(SelectionType)
-                .Modifiers(Modifiers);
+                .Name(this.Name)
+                .Ordinal(this.Ordinal)
+                .SelectionType(this.SelectionType)
+                .Modifiers(this.Modifiers);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string name;
@@ -133,38 +157,61 @@ namespace Square.Models
             private string selectionType;
             private IList<Models.CatalogObject> modifiers;
 
-
-
+             /// <summary>
+             /// Name.
+             /// </summary>
+             /// <param name="name"> name. </param>
+             /// <returns> Builder. </returns>
             public Builder Name(string name)
             {
                 this.name = name;
                 return this;
             }
 
+             /// <summary>
+             /// Ordinal.
+             /// </summary>
+             /// <param name="ordinal"> ordinal. </param>
+             /// <returns> Builder. </returns>
             public Builder Ordinal(int? ordinal)
             {
                 this.ordinal = ordinal;
                 return this;
             }
 
+             /// <summary>
+             /// SelectionType.
+             /// </summary>
+             /// <param name="selectionType"> selectionType. </param>
+             /// <returns> Builder. </returns>
             public Builder SelectionType(string selectionType)
             {
                 this.selectionType = selectionType;
                 return this;
             }
 
+             /// <summary>
+             /// Modifiers.
+             /// </summary>
+             /// <param name="modifiers"> modifiers. </param>
+             /// <returns> Builder. </returns>
             public Builder Modifiers(IList<Models.CatalogObject> modifiers)
             {
                 this.modifiers = modifiers;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> CatalogModifierList. </returns>
             public CatalogModifierList Build()
             {
-                return new CatalogModifierList(name,
-                    ordinal,
-                    selectionType,
-                    modifiers);
+                return new CatalogModifierList(
+                    this.name,
+                    this.ordinal,
+                    this.selectionType,
+                    this.modifiers);
             }
         }
     }
