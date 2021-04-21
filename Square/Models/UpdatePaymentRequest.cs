@@ -1,25 +1,33 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class UpdatePaymentRequest 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// UpdatePaymentRequest.
+    /// </summary>
+    public class UpdatePaymentRequest
     {
-        public UpdatePaymentRequest(string idempotencyKey,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UpdatePaymentRequest"/> class.
+        /// </summary>
+        /// <param name="idempotencyKey">idempotency_key.</param>
+        /// <param name="payment">payment.</param>
+        public UpdatePaymentRequest(
+            string idempotencyKey,
             Models.Payment payment = null)
         {
-            Payment = payment;
-            IdempotencyKey = idempotencyKey;
+            this.Payment = payment;
+            this.IdempotencyKey = idempotencyKey;
         }
 
         /// <summary>
@@ -37,6 +45,7 @@ namespace Square.Models
         [JsonProperty("idempotency_key")]
         public string IdempotencyKey { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -46,12 +55,7 @@ namespace Square.Models
             return $"UpdatePaymentRequest : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Payment = {(Payment == null ? "null" : Payment.ToString())}");
-            toStringOutput.Add($"IdempotencyKey = {(IdempotencyKey == null ? "null" : IdempotencyKey == string.Empty ? "" : IdempotencyKey)}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -65,60 +69,95 @@ namespace Square.Models
             }
 
             return obj is UpdatePaymentRequest other &&
-                ((Payment == null && other.Payment == null) || (Payment?.Equals(other.Payment) == true)) &&
-                ((IdempotencyKey == null && other.IdempotencyKey == null) || (IdempotencyKey?.Equals(other.IdempotencyKey) == true));
+                ((this.Payment == null && other.Payment == null) || (this.Payment?.Equals(other.Payment) == true)) &&
+                ((this.IdempotencyKey == null && other.IdempotencyKey == null) || (this.IdempotencyKey?.Equals(other.IdempotencyKey) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1490098238;
 
-            if (Payment != null)
+            if (this.Payment != null)
             {
-               hashCode += Payment.GetHashCode();
+               hashCode += this.Payment.GetHashCode();
             }
 
-            if (IdempotencyKey != null)
+            if (this.IdempotencyKey != null)
             {
-               hashCode += IdempotencyKey.GetHashCode();
+               hashCode += this.IdempotencyKey.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Payment = {(this.Payment == null ? "null" : this.Payment.ToString())}");
+            toStringOutput.Add($"this.IdempotencyKey = {(this.IdempotencyKey == null ? "null" : this.IdempotencyKey == string.Empty ? "" : this.IdempotencyKey)}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
-            var builder = new Builder(IdempotencyKey)
-                .Payment(Payment);
+            var builder = new Builder(
+                this.IdempotencyKey)
+                .Payment(this.Payment);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string idempotencyKey;
             private Models.Payment payment;
 
-            public Builder(string idempotencyKey)
+            public Builder(
+                string idempotencyKey)
             {
                 this.idempotencyKey = idempotencyKey;
             }
 
+             /// <summary>
+             /// IdempotencyKey.
+             /// </summary>
+             /// <param name="idempotencyKey"> idempotencyKey. </param>
+             /// <returns> Builder. </returns>
             public Builder IdempotencyKey(string idempotencyKey)
             {
                 this.idempotencyKey = idempotencyKey;
                 return this;
             }
 
+             /// <summary>
+             /// Payment.
+             /// </summary>
+             /// <param name="payment"> payment. </param>
+             /// <returns> Builder. </returns>
             public Builder Payment(Models.Payment payment)
             {
                 this.payment = payment;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> UpdatePaymentRequest. </returns>
             public UpdatePaymentRequest Build()
             {
-                return new UpdatePaymentRequest(idempotencyKey,
-                    payment);
+                return new UpdatePaymentRequest(
+                    this.idempotencyKey,
+                    this.payment);
             }
         }
     }

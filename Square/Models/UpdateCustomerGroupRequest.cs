@@ -1,33 +1,41 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class UpdateCustomerGroupRequest 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// UpdateCustomerGroupRequest.
+    /// </summary>
+    public class UpdateCustomerGroupRequest
     {
-        public UpdateCustomerGroupRequest(Models.CustomerGroup mGroup)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UpdateCustomerGroupRequest"/> class.
+        /// </summary>
+        /// <param name="mGroup">group.</param>
+        public UpdateCustomerGroupRequest(
+            Models.CustomerGroup mGroup)
         {
-            MGroup = mGroup;
+            this.MGroup = mGroup;
         }
 
         /// <summary>
-        /// Represents a group of customer profiles. 
-        /// Customer groups can be created, modified, and have their membership defined either via 
-        /// the Customers API or within Customer Directory in the Square Dashboard or Point of Sale.
+        /// Represents a group of customer profiles.
+        /// Customer groups can be created, be modified, and have their membership defined using
+        /// the Customers API or within the Customer Directory in the Square Seller Dashboard or Point of Sale.
         /// </summary>
         [JsonProperty("group")]
         public Models.CustomerGroup MGroup { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -37,11 +45,7 @@ namespace Square.Models
             return $"UpdateCustomerGroupRequest : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"MGroup = {(MGroup == null ? "null" : MGroup.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -55,45 +59,74 @@ namespace Square.Models
             }
 
             return obj is UpdateCustomerGroupRequest other &&
-                ((MGroup == null && other.MGroup == null) || (MGroup?.Equals(other.MGroup) == true));
+                ((this.MGroup == null && other.MGroup == null) || (this.MGroup?.Equals(other.MGroup) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1040897599;
 
-            if (MGroup != null)
+            if (this.MGroup != null)
             {
-               hashCode += MGroup.GetHashCode();
+               hashCode += this.MGroup.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.MGroup = {(this.MGroup == null ? "null" : this.MGroup.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
-            var builder = new Builder(MGroup);
+            var builder = new Builder(
+                this.MGroup);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private Models.CustomerGroup mGroup;
 
-            public Builder(Models.CustomerGroup mGroup)
+            public Builder(
+                Models.CustomerGroup mGroup)
             {
                 this.mGroup = mGroup;
             }
 
+             /// <summary>
+             /// MGroup.
+             /// </summary>
+             /// <param name="mGroup"> mGroup. </param>
+             /// <returns> Builder. </returns>
             public Builder MGroup(Models.CustomerGroup mGroup)
             {
                 this.mGroup = mGroup;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> UpdateCustomerGroupRequest. </returns>
             public UpdateCustomerGroupRequest Build()
             {
-                return new UpdateCustomerGroupRequest(mGroup);
+                return new UpdateCustomerGroupRequest(
+                    this.mGroup);
             }
         }
     }

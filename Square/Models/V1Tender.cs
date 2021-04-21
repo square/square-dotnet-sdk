@@ -1,21 +1,43 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class V1Tender 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// V1Tender.
+    /// </summary>
+    public class V1Tender
     {
-        public V1Tender(string id = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="V1Tender"/> class.
+        /// </summary>
+        /// <param name="id">id.</param>
+        /// <param name="type">type.</param>
+        /// <param name="name">name.</param>
+        /// <param name="employeeId">employee_id.</param>
+        /// <param name="receiptUrl">receipt_url.</param>
+        /// <param name="cardBrand">card_brand.</param>
+        /// <param name="panSuffix">pan_suffix.</param>
+        /// <param name="entryMethod">entry_method.</param>
+        /// <param name="paymentNote">payment_note.</param>
+        /// <param name="totalMoney">total_money.</param>
+        /// <param name="tenderedMoney">tendered_money.</param>
+        /// <param name="tenderedAt">tendered_at.</param>
+        /// <param name="settledAt">settled_at.</param>
+        /// <param name="changeBackMoney">change_back_money.</param>
+        /// <param name="refundedMoney">refunded_money.</param>
+        /// <param name="isExchange">is_exchange.</param>
+        public V1Tender(
+            string id = null,
             string type = null,
             string name = null,
             string employeeId = null,
@@ -32,22 +54,22 @@ namespace Square.Models
             Models.V1Money refundedMoney = null,
             bool? isExchange = null)
         {
-            Id = id;
-            Type = type;
-            Name = name;
-            EmployeeId = employeeId;
-            ReceiptUrl = receiptUrl;
-            CardBrand = cardBrand;
-            PanSuffix = panSuffix;
-            EntryMethod = entryMethod;
-            PaymentNote = paymentNote;
-            TotalMoney = totalMoney;
-            TenderedMoney = tenderedMoney;
-            TenderedAt = tenderedAt;
-            SettledAt = settledAt;
-            ChangeBackMoney = changeBackMoney;
-            RefundedMoney = refundedMoney;
-            IsExchange = isExchange;
+            this.Id = id;
+            this.Type = type;
+            this.Name = name;
+            this.EmployeeId = employeeId;
+            this.ReceiptUrl = receiptUrl;
+            this.CardBrand = cardBrand;
+            this.PanSuffix = panSuffix;
+            this.EntryMethod = entryMethod;
+            this.PaymentNote = paymentNote;
+            this.TotalMoney = totalMoney;
+            this.TenderedMoney = tenderedMoney;
+            this.TenderedAt = tenderedAt;
+            this.SettledAt = settledAt;
+            this.ChangeBackMoney = changeBackMoney;
+            this.RefundedMoney = refundedMoney;
+            this.IsExchange = isExchange;
         }
 
         /// <summary>
@@ -57,7 +79,7 @@ namespace Square.Models
         public string Id { get; }
 
         /// <summary>
-        /// Getter for type
+        /// Gets or sets Type.
         /// </summary>
         [JsonProperty("type", NullValueHandling = NullValueHandling.Ignore)]
         public string Type { get; }
@@ -93,7 +115,7 @@ namespace Square.Models
         public string PanSuffix { get; }
 
         /// <summary>
-        /// Getter for entry_method
+        /// Gets or sets EntryMethod.
         /// </summary>
         [JsonProperty("entry_method", NullValueHandling = NullValueHandling.Ignore)]
         public string EntryMethod { get; }
@@ -105,13 +127,13 @@ namespace Square.Models
         public string PaymentNote { get; }
 
         /// <summary>
-        /// Getter for total_money
+        /// Gets or sets TotalMoney.
         /// </summary>
         [JsonProperty("total_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1Money TotalMoney { get; }
 
         /// <summary>
-        /// Getter for tendered_money
+        /// Gets or sets TenderedMoney.
         /// </summary>
         [JsonProperty("tendered_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1Money TenderedMoney { get; }
@@ -129,13 +151,13 @@ namespace Square.Models
         public string SettledAt { get; }
 
         /// <summary>
-        /// Getter for change_back_money
+        /// Gets or sets ChangeBackMoney.
         /// </summary>
         [JsonProperty("change_back_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1Money ChangeBackMoney { get; }
 
         /// <summary>
-        /// Getter for refunded_money
+        /// Gets or sets RefundedMoney.
         /// </summary>
         [JsonProperty("refunded_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1Money RefundedMoney { get; }
@@ -146,6 +168,7 @@ namespace Square.Models
         [JsonProperty("is_exchange", NullValueHandling = NullValueHandling.Ignore)]
         public bool? IsExchange { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -155,26 +178,7 @@ namespace Square.Models
             return $"V1Tender : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Id = {(Id == null ? "null" : Id == string.Empty ? "" : Id)}");
-            toStringOutput.Add($"Type = {(Type == null ? "null" : Type.ToString())}");
-            toStringOutput.Add($"Name = {(Name == null ? "null" : Name == string.Empty ? "" : Name)}");
-            toStringOutput.Add($"EmployeeId = {(EmployeeId == null ? "null" : EmployeeId == string.Empty ? "" : EmployeeId)}");
-            toStringOutput.Add($"ReceiptUrl = {(ReceiptUrl == null ? "null" : ReceiptUrl == string.Empty ? "" : ReceiptUrl)}");
-            toStringOutput.Add($"CardBrand = {(CardBrand == null ? "null" : CardBrand.ToString())}");
-            toStringOutput.Add($"PanSuffix = {(PanSuffix == null ? "null" : PanSuffix == string.Empty ? "" : PanSuffix)}");
-            toStringOutput.Add($"EntryMethod = {(EntryMethod == null ? "null" : EntryMethod.ToString())}");
-            toStringOutput.Add($"PaymentNote = {(PaymentNote == null ? "null" : PaymentNote == string.Empty ? "" : PaymentNote)}");
-            toStringOutput.Add($"TotalMoney = {(TotalMoney == null ? "null" : TotalMoney.ToString())}");
-            toStringOutput.Add($"TenderedMoney = {(TenderedMoney == null ? "null" : TenderedMoney.ToString())}");
-            toStringOutput.Add($"TenderedAt = {(TenderedAt == null ? "null" : TenderedAt == string.Empty ? "" : TenderedAt)}");
-            toStringOutput.Add($"SettledAt = {(SettledAt == null ? "null" : SettledAt == string.Empty ? "" : SettledAt)}");
-            toStringOutput.Add($"ChangeBackMoney = {(ChangeBackMoney == null ? "null" : ChangeBackMoney.ToString())}");
-            toStringOutput.Add($"RefundedMoney = {(RefundedMoney == null ? "null" : RefundedMoney.ToString())}");
-            toStringOutput.Add($"IsExchange = {(IsExchange == null ? "null" : IsExchange.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -188,133 +192,165 @@ namespace Square.Models
             }
 
             return obj is V1Tender other &&
-                ((Id == null && other.Id == null) || (Id?.Equals(other.Id) == true)) &&
-                ((Type == null && other.Type == null) || (Type?.Equals(other.Type) == true)) &&
-                ((Name == null && other.Name == null) || (Name?.Equals(other.Name) == true)) &&
-                ((EmployeeId == null && other.EmployeeId == null) || (EmployeeId?.Equals(other.EmployeeId) == true)) &&
-                ((ReceiptUrl == null && other.ReceiptUrl == null) || (ReceiptUrl?.Equals(other.ReceiptUrl) == true)) &&
-                ((CardBrand == null && other.CardBrand == null) || (CardBrand?.Equals(other.CardBrand) == true)) &&
-                ((PanSuffix == null && other.PanSuffix == null) || (PanSuffix?.Equals(other.PanSuffix) == true)) &&
-                ((EntryMethod == null && other.EntryMethod == null) || (EntryMethod?.Equals(other.EntryMethod) == true)) &&
-                ((PaymentNote == null && other.PaymentNote == null) || (PaymentNote?.Equals(other.PaymentNote) == true)) &&
-                ((TotalMoney == null && other.TotalMoney == null) || (TotalMoney?.Equals(other.TotalMoney) == true)) &&
-                ((TenderedMoney == null && other.TenderedMoney == null) || (TenderedMoney?.Equals(other.TenderedMoney) == true)) &&
-                ((TenderedAt == null && other.TenderedAt == null) || (TenderedAt?.Equals(other.TenderedAt) == true)) &&
-                ((SettledAt == null && other.SettledAt == null) || (SettledAt?.Equals(other.SettledAt) == true)) &&
-                ((ChangeBackMoney == null && other.ChangeBackMoney == null) || (ChangeBackMoney?.Equals(other.ChangeBackMoney) == true)) &&
-                ((RefundedMoney == null && other.RefundedMoney == null) || (RefundedMoney?.Equals(other.RefundedMoney) == true)) &&
-                ((IsExchange == null && other.IsExchange == null) || (IsExchange?.Equals(other.IsExchange) == true));
+                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
+                ((this.Type == null && other.Type == null) || (this.Type?.Equals(other.Type) == true)) &&
+                ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
+                ((this.EmployeeId == null && other.EmployeeId == null) || (this.EmployeeId?.Equals(other.EmployeeId) == true)) &&
+                ((this.ReceiptUrl == null && other.ReceiptUrl == null) || (this.ReceiptUrl?.Equals(other.ReceiptUrl) == true)) &&
+                ((this.CardBrand == null && other.CardBrand == null) || (this.CardBrand?.Equals(other.CardBrand) == true)) &&
+                ((this.PanSuffix == null && other.PanSuffix == null) || (this.PanSuffix?.Equals(other.PanSuffix) == true)) &&
+                ((this.EntryMethod == null && other.EntryMethod == null) || (this.EntryMethod?.Equals(other.EntryMethod) == true)) &&
+                ((this.PaymentNote == null && other.PaymentNote == null) || (this.PaymentNote?.Equals(other.PaymentNote) == true)) &&
+                ((this.TotalMoney == null && other.TotalMoney == null) || (this.TotalMoney?.Equals(other.TotalMoney) == true)) &&
+                ((this.TenderedMoney == null && other.TenderedMoney == null) || (this.TenderedMoney?.Equals(other.TenderedMoney) == true)) &&
+                ((this.TenderedAt == null && other.TenderedAt == null) || (this.TenderedAt?.Equals(other.TenderedAt) == true)) &&
+                ((this.SettledAt == null && other.SettledAt == null) || (this.SettledAt?.Equals(other.SettledAt) == true)) &&
+                ((this.ChangeBackMoney == null && other.ChangeBackMoney == null) || (this.ChangeBackMoney?.Equals(other.ChangeBackMoney) == true)) &&
+                ((this.RefundedMoney == null && other.RefundedMoney == null) || (this.RefundedMoney?.Equals(other.RefundedMoney) == true)) &&
+                ((this.IsExchange == null && other.IsExchange == null) || (this.IsExchange?.Equals(other.IsExchange) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 1002014939;
 
-            if (Id != null)
+            if (this.Id != null)
             {
-               hashCode += Id.GetHashCode();
+               hashCode += this.Id.GetHashCode();
             }
 
-            if (Type != null)
+            if (this.Type != null)
             {
-               hashCode += Type.GetHashCode();
+               hashCode += this.Type.GetHashCode();
             }
 
-            if (Name != null)
+            if (this.Name != null)
             {
-               hashCode += Name.GetHashCode();
+               hashCode += this.Name.GetHashCode();
             }
 
-            if (EmployeeId != null)
+            if (this.EmployeeId != null)
             {
-               hashCode += EmployeeId.GetHashCode();
+               hashCode += this.EmployeeId.GetHashCode();
             }
 
-            if (ReceiptUrl != null)
+            if (this.ReceiptUrl != null)
             {
-               hashCode += ReceiptUrl.GetHashCode();
+               hashCode += this.ReceiptUrl.GetHashCode();
             }
 
-            if (CardBrand != null)
+            if (this.CardBrand != null)
             {
-               hashCode += CardBrand.GetHashCode();
+               hashCode += this.CardBrand.GetHashCode();
             }
 
-            if (PanSuffix != null)
+            if (this.PanSuffix != null)
             {
-               hashCode += PanSuffix.GetHashCode();
+               hashCode += this.PanSuffix.GetHashCode();
             }
 
-            if (EntryMethod != null)
+            if (this.EntryMethod != null)
             {
-               hashCode += EntryMethod.GetHashCode();
+               hashCode += this.EntryMethod.GetHashCode();
             }
 
-            if (PaymentNote != null)
+            if (this.PaymentNote != null)
             {
-               hashCode += PaymentNote.GetHashCode();
+               hashCode += this.PaymentNote.GetHashCode();
             }
 
-            if (TotalMoney != null)
+            if (this.TotalMoney != null)
             {
-               hashCode += TotalMoney.GetHashCode();
+               hashCode += this.TotalMoney.GetHashCode();
             }
 
-            if (TenderedMoney != null)
+            if (this.TenderedMoney != null)
             {
-               hashCode += TenderedMoney.GetHashCode();
+               hashCode += this.TenderedMoney.GetHashCode();
             }
 
-            if (TenderedAt != null)
+            if (this.TenderedAt != null)
             {
-               hashCode += TenderedAt.GetHashCode();
+               hashCode += this.TenderedAt.GetHashCode();
             }
 
-            if (SettledAt != null)
+            if (this.SettledAt != null)
             {
-               hashCode += SettledAt.GetHashCode();
+               hashCode += this.SettledAt.GetHashCode();
             }
 
-            if (ChangeBackMoney != null)
+            if (this.ChangeBackMoney != null)
             {
-               hashCode += ChangeBackMoney.GetHashCode();
+               hashCode += this.ChangeBackMoney.GetHashCode();
             }
 
-            if (RefundedMoney != null)
+            if (this.RefundedMoney != null)
             {
-               hashCode += RefundedMoney.GetHashCode();
+               hashCode += this.RefundedMoney.GetHashCode();
             }
 
-            if (IsExchange != null)
+            if (this.IsExchange != null)
             {
-               hashCode += IsExchange.GetHashCode();
+               hashCode += this.IsExchange.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id == string.Empty ? "" : this.Id)}");
+            toStringOutput.Add($"this.Type = {(this.Type == null ? "null" : this.Type.ToString())}");
+            toStringOutput.Add($"this.Name = {(this.Name == null ? "null" : this.Name == string.Empty ? "" : this.Name)}");
+            toStringOutput.Add($"this.EmployeeId = {(this.EmployeeId == null ? "null" : this.EmployeeId == string.Empty ? "" : this.EmployeeId)}");
+            toStringOutput.Add($"this.ReceiptUrl = {(this.ReceiptUrl == null ? "null" : this.ReceiptUrl == string.Empty ? "" : this.ReceiptUrl)}");
+            toStringOutput.Add($"this.CardBrand = {(this.CardBrand == null ? "null" : this.CardBrand.ToString())}");
+            toStringOutput.Add($"this.PanSuffix = {(this.PanSuffix == null ? "null" : this.PanSuffix == string.Empty ? "" : this.PanSuffix)}");
+            toStringOutput.Add($"this.EntryMethod = {(this.EntryMethod == null ? "null" : this.EntryMethod.ToString())}");
+            toStringOutput.Add($"this.PaymentNote = {(this.PaymentNote == null ? "null" : this.PaymentNote == string.Empty ? "" : this.PaymentNote)}");
+            toStringOutput.Add($"this.TotalMoney = {(this.TotalMoney == null ? "null" : this.TotalMoney.ToString())}");
+            toStringOutput.Add($"this.TenderedMoney = {(this.TenderedMoney == null ? "null" : this.TenderedMoney.ToString())}");
+            toStringOutput.Add($"this.TenderedAt = {(this.TenderedAt == null ? "null" : this.TenderedAt == string.Empty ? "" : this.TenderedAt)}");
+            toStringOutput.Add($"this.SettledAt = {(this.SettledAt == null ? "null" : this.SettledAt == string.Empty ? "" : this.SettledAt)}");
+            toStringOutput.Add($"this.ChangeBackMoney = {(this.ChangeBackMoney == null ? "null" : this.ChangeBackMoney.ToString())}");
+            toStringOutput.Add($"this.RefundedMoney = {(this.RefundedMoney == null ? "null" : this.RefundedMoney.ToString())}");
+            toStringOutput.Add($"this.IsExchange = {(this.IsExchange == null ? "null" : this.IsExchange.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .Id(Id)
-                .Type(Type)
-                .Name(Name)
-                .EmployeeId(EmployeeId)
-                .ReceiptUrl(ReceiptUrl)
-                .CardBrand(CardBrand)
-                .PanSuffix(PanSuffix)
-                .EntryMethod(EntryMethod)
-                .PaymentNote(PaymentNote)
-                .TotalMoney(TotalMoney)
-                .TenderedMoney(TenderedMoney)
-                .TenderedAt(TenderedAt)
-                .SettledAt(SettledAt)
-                .ChangeBackMoney(ChangeBackMoney)
-                .RefundedMoney(RefundedMoney)
-                .IsExchange(IsExchange);
+                .Id(this.Id)
+                .Type(this.Type)
+                .Name(this.Name)
+                .EmployeeId(this.EmployeeId)
+                .ReceiptUrl(this.ReceiptUrl)
+                .CardBrand(this.CardBrand)
+                .PanSuffix(this.PanSuffix)
+                .EntryMethod(this.EntryMethod)
+                .PaymentNote(this.PaymentNote)
+                .TotalMoney(this.TotalMoney)
+                .TenderedMoney(this.TenderedMoney)
+                .TenderedAt(this.TenderedAt)
+                .SettledAt(this.SettledAt)
+                .ChangeBackMoney(this.ChangeBackMoney)
+                .RefundedMoney(this.RefundedMoney)
+                .IsExchange(this.IsExchange);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string id;
@@ -334,122 +370,205 @@ namespace Square.Models
             private Models.V1Money refundedMoney;
             private bool? isExchange;
 
-
-
+             /// <summary>
+             /// Id.
+             /// </summary>
+             /// <param name="id"> id. </param>
+             /// <returns> Builder. </returns>
             public Builder Id(string id)
             {
                 this.id = id;
                 return this;
             }
 
+             /// <summary>
+             /// Type.
+             /// </summary>
+             /// <param name="type"> type. </param>
+             /// <returns> Builder. </returns>
             public Builder Type(string type)
             {
                 this.type = type;
                 return this;
             }
 
+             /// <summary>
+             /// Name.
+             /// </summary>
+             /// <param name="name"> name. </param>
+             /// <returns> Builder. </returns>
             public Builder Name(string name)
             {
                 this.name = name;
                 return this;
             }
 
+             /// <summary>
+             /// EmployeeId.
+             /// </summary>
+             /// <param name="employeeId"> employeeId. </param>
+             /// <returns> Builder. </returns>
             public Builder EmployeeId(string employeeId)
             {
                 this.employeeId = employeeId;
                 return this;
             }
 
+             /// <summary>
+             /// ReceiptUrl.
+             /// </summary>
+             /// <param name="receiptUrl"> receiptUrl. </param>
+             /// <returns> Builder. </returns>
             public Builder ReceiptUrl(string receiptUrl)
             {
                 this.receiptUrl = receiptUrl;
                 return this;
             }
 
+             /// <summary>
+             /// CardBrand.
+             /// </summary>
+             /// <param name="cardBrand"> cardBrand. </param>
+             /// <returns> Builder. </returns>
             public Builder CardBrand(string cardBrand)
             {
                 this.cardBrand = cardBrand;
                 return this;
             }
 
+             /// <summary>
+             /// PanSuffix.
+             /// </summary>
+             /// <param name="panSuffix"> panSuffix. </param>
+             /// <returns> Builder. </returns>
             public Builder PanSuffix(string panSuffix)
             {
                 this.panSuffix = panSuffix;
                 return this;
             }
 
+             /// <summary>
+             /// EntryMethod.
+             /// </summary>
+             /// <param name="entryMethod"> entryMethod. </param>
+             /// <returns> Builder. </returns>
             public Builder EntryMethod(string entryMethod)
             {
                 this.entryMethod = entryMethod;
                 return this;
             }
 
+             /// <summary>
+             /// PaymentNote.
+             /// </summary>
+             /// <param name="paymentNote"> paymentNote. </param>
+             /// <returns> Builder. </returns>
             public Builder PaymentNote(string paymentNote)
             {
                 this.paymentNote = paymentNote;
                 return this;
             }
 
+             /// <summary>
+             /// TotalMoney.
+             /// </summary>
+             /// <param name="totalMoney"> totalMoney. </param>
+             /// <returns> Builder. </returns>
             public Builder TotalMoney(Models.V1Money totalMoney)
             {
                 this.totalMoney = totalMoney;
                 return this;
             }
 
+             /// <summary>
+             /// TenderedMoney.
+             /// </summary>
+             /// <param name="tenderedMoney"> tenderedMoney. </param>
+             /// <returns> Builder. </returns>
             public Builder TenderedMoney(Models.V1Money tenderedMoney)
             {
                 this.tenderedMoney = tenderedMoney;
                 return this;
             }
 
+             /// <summary>
+             /// TenderedAt.
+             /// </summary>
+             /// <param name="tenderedAt"> tenderedAt. </param>
+             /// <returns> Builder. </returns>
             public Builder TenderedAt(string tenderedAt)
             {
                 this.tenderedAt = tenderedAt;
                 return this;
             }
 
+             /// <summary>
+             /// SettledAt.
+             /// </summary>
+             /// <param name="settledAt"> settledAt. </param>
+             /// <returns> Builder. </returns>
             public Builder SettledAt(string settledAt)
             {
                 this.settledAt = settledAt;
                 return this;
             }
 
+             /// <summary>
+             /// ChangeBackMoney.
+             /// </summary>
+             /// <param name="changeBackMoney"> changeBackMoney. </param>
+             /// <returns> Builder. </returns>
             public Builder ChangeBackMoney(Models.V1Money changeBackMoney)
             {
                 this.changeBackMoney = changeBackMoney;
                 return this;
             }
 
+             /// <summary>
+             /// RefundedMoney.
+             /// </summary>
+             /// <param name="refundedMoney"> refundedMoney. </param>
+             /// <returns> Builder. </returns>
             public Builder RefundedMoney(Models.V1Money refundedMoney)
             {
                 this.refundedMoney = refundedMoney;
                 return this;
             }
 
+             /// <summary>
+             /// IsExchange.
+             /// </summary>
+             /// <param name="isExchange"> isExchange. </param>
+             /// <returns> Builder. </returns>
             public Builder IsExchange(bool? isExchange)
             {
                 this.isExchange = isExchange;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> V1Tender. </returns>
             public V1Tender Build()
             {
-                return new V1Tender(id,
-                    type,
-                    name,
-                    employeeId,
-                    receiptUrl,
-                    cardBrand,
-                    panSuffix,
-                    entryMethod,
-                    paymentNote,
-                    totalMoney,
-                    tenderedMoney,
-                    tenderedAt,
-                    settledAt,
-                    changeBackMoney,
-                    refundedMoney,
-                    isExchange);
+                return new V1Tender(
+                    this.id,
+                    this.type,
+                    this.name,
+                    this.employeeId,
+                    this.receiptUrl,
+                    this.cardBrand,
+                    this.panSuffix,
+                    this.entryMethod,
+                    this.paymentNote,
+                    this.totalMoney,
+                    this.tenderedMoney,
+                    this.tenderedAt,
+                    this.settledAt,
+                    this.changeBackMoney,
+                    this.refundedMoney,
+                    this.isExchange);
             }
         }
     }

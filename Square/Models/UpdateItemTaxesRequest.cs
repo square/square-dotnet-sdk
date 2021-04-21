@@ -1,27 +1,36 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class UpdateItemTaxesRequest 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// UpdateItemTaxesRequest.
+    /// </summary>
+    public class UpdateItemTaxesRequest
     {
-        public UpdateItemTaxesRequest(IList<string> itemIds,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UpdateItemTaxesRequest"/> class.
+        /// </summary>
+        /// <param name="itemIds">item_ids.</param>
+        /// <param name="taxesToEnable">taxes_to_enable.</param>
+        /// <param name="taxesToDisable">taxes_to_disable.</param>
+        public UpdateItemTaxesRequest(
+            IList<string> itemIds,
             IList<string> taxesToEnable = null,
             IList<string> taxesToDisable = null)
         {
-            ItemIds = itemIds;
-            TaxesToEnable = taxesToEnable;
-            TaxesToDisable = taxesToDisable;
+            this.ItemIds = itemIds;
+            this.TaxesToEnable = taxesToEnable;
+            this.TaxesToDisable = taxesToDisable;
         }
 
         /// <summary>
@@ -42,6 +51,7 @@ namespace Square.Models
         [JsonProperty("taxes_to_disable", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> TaxesToDisable { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -51,13 +61,7 @@ namespace Square.Models
             return $"UpdateItemTaxesRequest : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"ItemIds = {(ItemIds == null ? "null" : $"[{ string.Join(", ", ItemIds)} ]")}");
-            toStringOutput.Add($"TaxesToEnable = {(TaxesToEnable == null ? "null" : $"[{ string.Join(", ", TaxesToEnable)} ]")}");
-            toStringOutput.Add($"TaxesToDisable = {(TaxesToDisable == null ? "null" : $"[{ string.Join(", ", TaxesToDisable)} ]")}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -71,75 +75,116 @@ namespace Square.Models
             }
 
             return obj is UpdateItemTaxesRequest other &&
-                ((ItemIds == null && other.ItemIds == null) || (ItemIds?.Equals(other.ItemIds) == true)) &&
-                ((TaxesToEnable == null && other.TaxesToEnable == null) || (TaxesToEnable?.Equals(other.TaxesToEnable) == true)) &&
-                ((TaxesToDisable == null && other.TaxesToDisable == null) || (TaxesToDisable?.Equals(other.TaxesToDisable) == true));
+                ((this.ItemIds == null && other.ItemIds == null) || (this.ItemIds?.Equals(other.ItemIds) == true)) &&
+                ((this.TaxesToEnable == null && other.TaxesToEnable == null) || (this.TaxesToEnable?.Equals(other.TaxesToEnable) == true)) &&
+                ((this.TaxesToDisable == null && other.TaxesToDisable == null) || (this.TaxesToDisable?.Equals(other.TaxesToDisable) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 651000777;
 
-            if (ItemIds != null)
+            if (this.ItemIds != null)
             {
-               hashCode += ItemIds.GetHashCode();
+               hashCode += this.ItemIds.GetHashCode();
             }
 
-            if (TaxesToEnable != null)
+            if (this.TaxesToEnable != null)
             {
-               hashCode += TaxesToEnable.GetHashCode();
+               hashCode += this.TaxesToEnable.GetHashCode();
             }
 
-            if (TaxesToDisable != null)
+            if (this.TaxesToDisable != null)
             {
-               hashCode += TaxesToDisable.GetHashCode();
+               hashCode += this.TaxesToDisable.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.ItemIds = {(this.ItemIds == null ? "null" : $"[{string.Join(", ", this.ItemIds)} ]")}");
+            toStringOutput.Add($"this.TaxesToEnable = {(this.TaxesToEnable == null ? "null" : $"[{string.Join(", ", this.TaxesToEnable)} ]")}");
+            toStringOutput.Add($"this.TaxesToDisable = {(this.TaxesToDisable == null ? "null" : $"[{string.Join(", ", this.TaxesToDisable)} ]")}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
-            var builder = new Builder(ItemIds)
-                .TaxesToEnable(TaxesToEnable)
-                .TaxesToDisable(TaxesToDisable);
+            var builder = new Builder(
+                this.ItemIds)
+                .TaxesToEnable(this.TaxesToEnable)
+                .TaxesToDisable(this.TaxesToDisable);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private IList<string> itemIds;
             private IList<string> taxesToEnable;
             private IList<string> taxesToDisable;
 
-            public Builder(IList<string> itemIds)
+            public Builder(
+                IList<string> itemIds)
             {
                 this.itemIds = itemIds;
             }
 
+             /// <summary>
+             /// ItemIds.
+             /// </summary>
+             /// <param name="itemIds"> itemIds. </param>
+             /// <returns> Builder. </returns>
             public Builder ItemIds(IList<string> itemIds)
             {
                 this.itemIds = itemIds;
                 return this;
             }
 
+             /// <summary>
+             /// TaxesToEnable.
+             /// </summary>
+             /// <param name="taxesToEnable"> taxesToEnable. </param>
+             /// <returns> Builder. </returns>
             public Builder TaxesToEnable(IList<string> taxesToEnable)
             {
                 this.taxesToEnable = taxesToEnable;
                 return this;
             }
 
+             /// <summary>
+             /// TaxesToDisable.
+             /// </summary>
+             /// <param name="taxesToDisable"> taxesToDisable. </param>
+             /// <returns> Builder. </returns>
             public Builder TaxesToDisable(IList<string> taxesToDisable)
             {
                 this.taxesToDisable = taxesToDisable;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> UpdateItemTaxesRequest. </returns>
             public UpdateItemTaxesRequest Build()
             {
-                return new UpdateItemTaxesRequest(itemIds,
-                    taxesToEnable,
-                    taxesToDisable);
+                return new UpdateItemTaxesRequest(
+                    this.itemIds,
+                    this.taxesToEnable,
+                    this.taxesToDisable);
             }
         }
     }

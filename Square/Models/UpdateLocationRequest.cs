@@ -1,31 +1,39 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class UpdateLocationRequest 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// UpdateLocationRequest.
+    /// </summary>
+    public class UpdateLocationRequest
     {
-        public UpdateLocationRequest(Models.Location location = null)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UpdateLocationRequest"/> class.
+        /// </summary>
+        /// <param name="location">location.</param>
+        public UpdateLocationRequest(
+            Models.Location location = null)
         {
-            Location = location;
+            this.Location = location;
         }
 
         /// <summary>
-        /// Getter for location
+        /// Gets or sets Location.
         /// </summary>
         [JsonProperty("location", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Location Location { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -35,11 +43,7 @@ namespace Square.Models
             return $"UpdateLocationRequest : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Location = {(Location == null ? "null" : Location.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -53,43 +57,68 @@ namespace Square.Models
             }
 
             return obj is UpdateLocationRequest other &&
-                ((Location == null && other.Location == null) || (Location?.Equals(other.Location) == true));
+                ((this.Location == null && other.Location == null) || (this.Location?.Equals(other.Location) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 687060631;
 
-            if (Location != null)
+            if (this.Location != null)
             {
-               hashCode += Location.GetHashCode();
+               hashCode += this.Location.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Location = {(this.Location == null ? "null" : this.Location.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .Location(Location);
+                .Location(this.Location);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private Models.Location location;
 
-
-
+             /// <summary>
+             /// Location.
+             /// </summary>
+             /// <param name="location"> location. </param>
+             /// <returns> Builder. </returns>
             public Builder Location(Models.Location location)
             {
                 this.location = location;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> UpdateLocationRequest. </returns>
             public UpdateLocationRequest Build()
             {
-                return new UpdateLocationRequest(location);
+                return new UpdateLocationRequest(
+                    this.location);
             }
         }
     }

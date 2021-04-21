@@ -1,23 +1,30 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class SearchOrdersStateFilter 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// SearchOrdersStateFilter.
+    /// </summary>
+    public class SearchOrdersStateFilter
     {
-        public SearchOrdersStateFilter(IList<string> states)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SearchOrdersStateFilter"/> class.
+        /// </summary>
+        /// <param name="states">states.</param>
+        public SearchOrdersStateFilter(
+            IList<string> states)
         {
-            States = states;
+            this.States = states;
         }
 
         /// <summary>
@@ -27,6 +34,7 @@ namespace Square.Models
         [JsonProperty("states")]
         public IList<string> States { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -36,11 +44,7 @@ namespace Square.Models
             return $"SearchOrdersStateFilter : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"States = {(States == null ? "null" : $"[{ string.Join(", ", States)} ]")}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -54,45 +58,74 @@ namespace Square.Models
             }
 
             return obj is SearchOrdersStateFilter other &&
-                ((States == null && other.States == null) || (States?.Equals(other.States) == true));
+                ((this.States == null && other.States == null) || (this.States?.Equals(other.States) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 615021182;
 
-            if (States != null)
+            if (this.States != null)
             {
-               hashCode += States.GetHashCode();
+               hashCode += this.States.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.States = {(this.States == null ? "null" : $"[{string.Join(", ", this.States)} ]")}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
-            var builder = new Builder(States);
+            var builder = new Builder(
+                this.States);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private IList<string> states;
 
-            public Builder(IList<string> states)
+            public Builder(
+                IList<string> states)
             {
                 this.states = states;
             }
 
+             /// <summary>
+             /// States.
+             /// </summary>
+             /// <param name="states"> states. </param>
+             /// <returns> Builder. </returns>
             public Builder States(IList<string> states)
             {
                 this.states = states;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> SearchOrdersStateFilter. </returns>
             public SearchOrdersStateFilter Build()
             {
-                return new SearchOrdersStateFilter(states);
+                return new SearchOrdersStateFilter(
+                    this.states);
             }
         }
     }

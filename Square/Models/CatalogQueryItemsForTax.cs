@@ -1,23 +1,30 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class CatalogQueryItemsForTax 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// CatalogQueryItemsForTax.
+    /// </summary>
+    public class CatalogQueryItemsForTax
     {
-        public CatalogQueryItemsForTax(IList<string> taxIds)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CatalogQueryItemsForTax"/> class.
+        /// </summary>
+        /// <param name="taxIds">tax_ids.</param>
+        public CatalogQueryItemsForTax(
+            IList<string> taxIds)
         {
-            TaxIds = taxIds;
+            this.TaxIds = taxIds;
         }
 
         /// <summary>
@@ -26,6 +33,7 @@ namespace Square.Models
         [JsonProperty("tax_ids")]
         public IList<string> TaxIds { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -35,11 +43,7 @@ namespace Square.Models
             return $"CatalogQueryItemsForTax : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"TaxIds = {(TaxIds == null ? "null" : $"[{ string.Join(", ", TaxIds)} ]")}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -53,45 +57,74 @@ namespace Square.Models
             }
 
             return obj is CatalogQueryItemsForTax other &&
-                ((TaxIds == null && other.TaxIds == null) || (TaxIds?.Equals(other.TaxIds) == true));
+                ((this.TaxIds == null && other.TaxIds == null) || (this.TaxIds?.Equals(other.TaxIds) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 507867183;
 
-            if (TaxIds != null)
+            if (this.TaxIds != null)
             {
-               hashCode += TaxIds.GetHashCode();
+               hashCode += this.TaxIds.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.TaxIds = {(this.TaxIds == null ? "null" : $"[{string.Join(", ", this.TaxIds)} ]")}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
-            var builder = new Builder(TaxIds);
+            var builder = new Builder(
+                this.TaxIds);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private IList<string> taxIds;
 
-            public Builder(IList<string> taxIds)
+            public Builder(
+                IList<string> taxIds)
             {
                 this.taxIds = taxIds;
             }
 
+             /// <summary>
+             /// TaxIds.
+             /// </summary>
+             /// <param name="taxIds"> taxIds. </param>
+             /// <returns> Builder. </returns>
             public Builder TaxIds(IList<string> taxIds)
             {
                 this.taxIds = taxIds;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> CatalogQueryItemsForTax. </returns>
             public CatalogQueryItemsForTax Build()
             {
-                return new CatalogQueryItemsForTax(taxIds);
+                return new CatalogQueryItemsForTax(
+                    this.taxIds);
             }
         }
     }

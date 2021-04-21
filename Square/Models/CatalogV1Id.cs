@@ -1,25 +1,33 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class CatalogV1Id 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// CatalogV1Id.
+    /// </summary>
+    public class CatalogV1Id
     {
-        public CatalogV1Id(string catalogV1IdProp = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CatalogV1Id"/> class.
+        /// </summary>
+        /// <param name="catalogV1IdProp">catalog_v1_id.</param>
+        /// <param name="locationId">location_id.</param>
+        public CatalogV1Id(
+            string catalogV1IdProp = null,
             string locationId = null)
         {
-            CatalogV1IdProp = catalogV1IdProp;
-            LocationId = locationId;
+            this.CatalogV1IdProp = catalogV1IdProp;
+            this.LocationId = locationId;
         }
 
         /// <summary>
@@ -34,6 +42,7 @@ namespace Square.Models
         [JsonProperty("location_id", NullValueHandling = NullValueHandling.Ignore)]
         public string LocationId { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -43,12 +52,7 @@ namespace Square.Models
             return $"CatalogV1Id : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"CatalogV1IdProp = {(CatalogV1IdProp == null ? "null" : CatalogV1IdProp == string.Empty ? "" : CatalogV1IdProp)}");
-            toStringOutput.Add($"LocationId = {(LocationId == null ? "null" : LocationId == string.Empty ? "" : LocationId)}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -62,58 +66,89 @@ namespace Square.Models
             }
 
             return obj is CatalogV1Id other &&
-                ((CatalogV1IdProp == null && other.CatalogV1IdProp == null) || (CatalogV1IdProp?.Equals(other.CatalogV1IdProp) == true)) &&
-                ((LocationId == null && other.LocationId == null) || (LocationId?.Equals(other.LocationId) == true));
+                ((this.CatalogV1IdProp == null && other.CatalogV1IdProp == null) || (this.CatalogV1IdProp?.Equals(other.CatalogV1IdProp) == true)) &&
+                ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -908281753;
 
-            if (CatalogV1IdProp != null)
+            if (this.CatalogV1IdProp != null)
             {
-               hashCode += CatalogV1IdProp.GetHashCode();
+               hashCode += this.CatalogV1IdProp.GetHashCode();
             }
 
-            if (LocationId != null)
+            if (this.LocationId != null)
             {
-               hashCode += LocationId.GetHashCode();
+               hashCode += this.LocationId.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.CatalogV1IdProp = {(this.CatalogV1IdProp == null ? "null" : this.CatalogV1IdProp == string.Empty ? "" : this.CatalogV1IdProp)}");
+            toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId == string.Empty ? "" : this.LocationId)}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .CatalogV1IdProp(CatalogV1IdProp)
-                .LocationId(LocationId);
+                .CatalogV1IdProp(this.CatalogV1IdProp)
+                .LocationId(this.LocationId);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string catalogV1IdProp;
             private string locationId;
 
-
-
+             /// <summary>
+             /// CatalogV1IdProp.
+             /// </summary>
+             /// <param name="catalogV1IdProp"> catalogV1IdProp. </param>
+             /// <returns> Builder. </returns>
             public Builder CatalogV1IdProp(string catalogV1IdProp)
             {
                 this.catalogV1IdProp = catalogV1IdProp;
                 return this;
             }
 
+             /// <summary>
+             /// LocationId.
+             /// </summary>
+             /// <param name="locationId"> locationId. </param>
+             /// <returns> Builder. </returns>
             public Builder LocationId(string locationId)
             {
                 this.locationId = locationId;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> CatalogV1Id. </returns>
             public CatalogV1Id Build()
             {
-                return new CatalogV1Id(catalogV1IdProp,
-                    locationId);
+                return new CatalogV1Id(
+                    this.catalogV1IdProp,
+                    this.locationId);
             }
         }
     }

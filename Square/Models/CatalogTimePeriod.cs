@@ -1,23 +1,30 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class CatalogTimePeriod 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// CatalogTimePeriod.
+    /// </summary>
+    public class CatalogTimePeriod
     {
-        public CatalogTimePeriod(string mEvent = null)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CatalogTimePeriod"/> class.
+        /// </summary>
+        /// <param name="mEvent">event.</param>
+        public CatalogTimePeriod(
+            string mEvent = null)
         {
-            MEvent = mEvent;
+            this.MEvent = mEvent;
         }
 
         /// <summary>
@@ -37,6 +44,7 @@ namespace Square.Models
         [JsonProperty("event", NullValueHandling = NullValueHandling.Ignore)]
         public string MEvent { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -46,11 +54,7 @@ namespace Square.Models
             return $"CatalogTimePeriod : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"MEvent = {(MEvent == null ? "null" : MEvent == string.Empty ? "" : MEvent)}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -64,43 +68,68 @@ namespace Square.Models
             }
 
             return obj is CatalogTimePeriod other &&
-                ((MEvent == null && other.MEvent == null) || (MEvent?.Equals(other.MEvent) == true));
+                ((this.MEvent == null && other.MEvent == null) || (this.MEvent?.Equals(other.MEvent) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 1787594864;
 
-            if (MEvent != null)
+            if (this.MEvent != null)
             {
-               hashCode += MEvent.GetHashCode();
+               hashCode += this.MEvent.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.MEvent = {(this.MEvent == null ? "null" : this.MEvent == string.Empty ? "" : this.MEvent)}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .MEvent(MEvent);
+                .MEvent(this.MEvent);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string mEvent;
 
-
-
+             /// <summary>
+             /// MEvent.
+             /// </summary>
+             /// <param name="mEvent"> mEvent. </param>
+             /// <returns> Builder. </returns>
             public Builder MEvent(string mEvent)
             {
                 this.mEvent = mEvent;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> CatalogTimePeriod. </returns>
             public CatalogTimePeriod Build()
             {
-                return new CatalogTimePeriod(mEvent);
+                return new CatalogTimePeriod(
+                    this.mEvent);
             }
         }
     }

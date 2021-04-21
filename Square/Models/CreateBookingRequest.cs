@@ -1,25 +1,33 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class CreateBookingRequest 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// CreateBookingRequest.
+    /// </summary>
+    public class CreateBookingRequest
     {
-        public CreateBookingRequest(Models.Booking booking,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CreateBookingRequest"/> class.
+        /// </summary>
+        /// <param name="booking">booking.</param>
+        /// <param name="idempotencyKey">idempotency_key.</param>
+        public CreateBookingRequest(
+            Models.Booking booking,
             string idempotencyKey = null)
         {
-            IdempotencyKey = idempotencyKey;
-            Booking = booking;
+            this.IdempotencyKey = idempotencyKey;
+            this.Booking = booking;
         }
 
         /// <summary>
@@ -35,6 +43,7 @@ namespace Square.Models
         [JsonProperty("booking")]
         public Models.Booking Booking { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -44,12 +53,7 @@ namespace Square.Models
             return $"CreateBookingRequest : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"IdempotencyKey = {(IdempotencyKey == null ? "null" : IdempotencyKey == string.Empty ? "" : IdempotencyKey)}");
-            toStringOutput.Add($"Booking = {(Booking == null ? "null" : Booking.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -63,60 +67,95 @@ namespace Square.Models
             }
 
             return obj is CreateBookingRequest other &&
-                ((IdempotencyKey == null && other.IdempotencyKey == null) || (IdempotencyKey?.Equals(other.IdempotencyKey) == true)) &&
-                ((Booking == null && other.Booking == null) || (Booking?.Equals(other.Booking) == true));
+                ((this.IdempotencyKey == null && other.IdempotencyKey == null) || (this.IdempotencyKey?.Equals(other.IdempotencyKey) == true)) &&
+                ((this.Booking == null && other.Booking == null) || (this.Booking?.Equals(other.Booking) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -24081562;
 
-            if (IdempotencyKey != null)
+            if (this.IdempotencyKey != null)
             {
-               hashCode += IdempotencyKey.GetHashCode();
+               hashCode += this.IdempotencyKey.GetHashCode();
             }
 
-            if (Booking != null)
+            if (this.Booking != null)
             {
-               hashCode += Booking.GetHashCode();
+               hashCode += this.Booking.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.IdempotencyKey = {(this.IdempotencyKey == null ? "null" : this.IdempotencyKey == string.Empty ? "" : this.IdempotencyKey)}");
+            toStringOutput.Add($"this.Booking = {(this.Booking == null ? "null" : this.Booking.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
-            var builder = new Builder(Booking)
-                .IdempotencyKey(IdempotencyKey);
+            var builder = new Builder(
+                this.Booking)
+                .IdempotencyKey(this.IdempotencyKey);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private Models.Booking booking;
             private string idempotencyKey;
 
-            public Builder(Models.Booking booking)
+            public Builder(
+                Models.Booking booking)
             {
                 this.booking = booking;
             }
 
+             /// <summary>
+             /// Booking.
+             /// </summary>
+             /// <param name="booking"> booking. </param>
+             /// <returns> Builder. </returns>
             public Builder Booking(Models.Booking booking)
             {
                 this.booking = booking;
                 return this;
             }
 
+             /// <summary>
+             /// IdempotencyKey.
+             /// </summary>
+             /// <param name="idempotencyKey"> idempotencyKey. </param>
+             /// <returns> Builder. </returns>
             public Builder IdempotencyKey(string idempotencyKey)
             {
                 this.idempotencyKey = idempotencyKey;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> CreateBookingRequest. </returns>
             public CreateBookingRequest Build()
             {
-                return new CreateBookingRequest(booking,
-                    idempotencyKey);
+                return new CreateBookingRequest(
+                    this.booking,
+                    this.idempotencyKey);
             }
         }
     }

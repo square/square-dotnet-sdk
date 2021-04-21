@@ -1,157 +1,160 @@
-using System;
-using Square.Apis;
-
 namespace Square
 {
+    using System;
+    using Square.Apis;
+
+    /// <summary>
+    /// ISquareClient.
+    /// </summary>
     public interface ISquareClient : IConfiguration
     {
         /// <summary>
-        /// Instance for IMobileAuthorizationApi
+        /// Gets instance for IMobileAuthorizationApi.
         /// </summary>
         IMobileAuthorizationApi MobileAuthorizationApi { get; }
 
         /// <summary>
-        /// Instance for IOAuthApi
+        /// Gets instance for IOAuthApi.
         /// </summary>
         IOAuthApi OAuthApi { get; }
 
         /// <summary>
-        /// Instance for IV1EmployeesApi
+        /// Gets instance for IV1EmployeesApi.
         /// </summary>
         IV1EmployeesApi V1EmployeesApi { get; }
 
         /// <summary>
-        /// Instance for IV1TransactionsApi
+        /// Gets instance for IV1TransactionsApi.
         /// </summary>
         IV1TransactionsApi V1TransactionsApi { get; }
 
         /// <summary>
-        /// Instance for IApplePayApi
+        /// Gets instance for IApplePayApi.
         /// </summary>
         IApplePayApi ApplePayApi { get; }
 
         /// <summary>
-        /// Instance for IBankAccountsApi
+        /// Gets instance for IBankAccountsApi.
         /// </summary>
         IBankAccountsApi BankAccountsApi { get; }
 
         /// <summary>
-        /// Instance for IBookingsApi
+        /// Gets instance for IBookingsApi.
         /// </summary>
         IBookingsApi BookingsApi { get; }
 
         /// <summary>
-        /// Instance for ICashDrawersApi
+        /// Gets instance for ICashDrawersApi.
         /// </summary>
         ICashDrawersApi CashDrawersApi { get; }
 
         /// <summary>
-        /// Instance for ICatalogApi
+        /// Gets instance for ICatalogApi.
         /// </summary>
         ICatalogApi CatalogApi { get; }
 
         /// <summary>
-        /// Instance for ICustomersApi
+        /// Gets instance for ICustomersApi.
         /// </summary>
         ICustomersApi CustomersApi { get; }
 
         /// <summary>
-        /// Instance for ICustomerGroupsApi
+        /// Gets instance for ICustomerGroupsApi.
         /// </summary>
         ICustomerGroupsApi CustomerGroupsApi { get; }
 
         /// <summary>
-        /// Instance for ICustomerSegmentsApi
+        /// Gets instance for ICustomerSegmentsApi.
         /// </summary>
         ICustomerSegmentsApi CustomerSegmentsApi { get; }
 
         /// <summary>
-        /// Instance for IDevicesApi
+        /// Gets instance for IDevicesApi.
         /// </summary>
         IDevicesApi DevicesApi { get; }
 
         /// <summary>
-        /// Instance for IDisputesApi
+        /// Gets instance for IDisputesApi.
         /// </summary>
         IDisputesApi DisputesApi { get; }
 
         /// <summary>
-        /// Instance for IEmployeesApi
+        /// Gets instance for IEmployeesApi.
         /// </summary>
         IEmployeesApi EmployeesApi { get; }
 
         /// <summary>
-        /// Instance for IInventoryApi
+        /// Gets instance for IInventoryApi.
         /// </summary>
         IInventoryApi InventoryApi { get; }
 
         /// <summary>
-        /// Instance for IInvoicesApi
+        /// Gets instance for IInvoicesApi.
         /// </summary>
         IInvoicesApi InvoicesApi { get; }
 
         /// <summary>
-        /// Instance for ILaborApi
+        /// Gets instance for ILaborApi.
         /// </summary>
         ILaborApi LaborApi { get; }
 
         /// <summary>
-        /// Instance for ILocationsApi
+        /// Gets instance for ILocationsApi.
         /// </summary>
         ILocationsApi LocationsApi { get; }
 
         /// <summary>
-        /// Instance for ICheckoutApi
+        /// Gets instance for ICheckoutApi.
         /// </summary>
         ICheckoutApi CheckoutApi { get; }
 
         /// <summary>
-        /// Instance for ITransactionsApi
+        /// Gets instance for ITransactionsApi.
         /// </summary>
         ITransactionsApi TransactionsApi { get; }
 
         /// <summary>
-        /// Instance for ILoyaltyApi
+        /// Gets instance for ILoyaltyApi.
         /// </summary>
         ILoyaltyApi LoyaltyApi { get; }
 
         /// <summary>
-        /// Instance for IMerchantsApi
+        /// Gets instance for IMerchantsApi.
         /// </summary>
         IMerchantsApi MerchantsApi { get; }
 
         /// <summary>
-        /// Instance for IOrdersApi
+        /// Gets instance for IOrdersApi.
         /// </summary>
         IOrdersApi OrdersApi { get; }
 
         /// <summary>
-        /// Instance for IPaymentsApi
+        /// Gets instance for IPaymentsApi.
         /// </summary>
         IPaymentsApi PaymentsApi { get; }
 
         /// <summary>
-        /// Instance for IRefundsApi
+        /// Gets instance for IRefundsApi.
         /// </summary>
         IRefundsApi RefundsApi { get; }
 
         /// <summary>
-        /// Instance for ISubscriptionsApi
+        /// Gets instance for ISubscriptionsApi.
         /// </summary>
         ISubscriptionsApi SubscriptionsApi { get; }
 
         /// <summary>
-        /// Instance for ITeamApi
+        /// Gets instance for ITeamApi.
         /// </summary>
         ITeamApi TeamApi { get; }
 
         /// <summary>
-        /// Instance for ITerminalApi
+        /// Gets instance for ITerminalApi.
         /// </summary>
         ITerminalApi TerminalApi { get; }
 
         /// <summary>
-        /// Current version of the SDK
+        /// Gets the current version of the SDK.
         /// </summary>
         string SdkVersion { get; }
     }

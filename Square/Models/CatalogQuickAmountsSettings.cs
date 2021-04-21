@@ -1,27 +1,36 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class CatalogQuickAmountsSettings 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// CatalogQuickAmountsSettings.
+    /// </summary>
+    public class CatalogQuickAmountsSettings
     {
-        public CatalogQuickAmountsSettings(string option,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CatalogQuickAmountsSettings"/> class.
+        /// </summary>
+        /// <param name="option">option.</param>
+        /// <param name="eligibleForAutoAmounts">eligible_for_auto_amounts.</param>
+        /// <param name="amounts">amounts.</param>
+        public CatalogQuickAmountsSettings(
+            string option,
             bool? eligibleForAutoAmounts = null,
             IList<Models.CatalogQuickAmount> amounts = null)
         {
-            Option = option;
-            EligibleForAutoAmounts = eligibleForAutoAmounts;
-            Amounts = amounts;
+            this.Option = option;
+            this.EligibleForAutoAmounts = eligibleForAutoAmounts;
+            this.Amounts = amounts;
         }
 
         /// <summary>
@@ -43,6 +52,7 @@ namespace Square.Models
         [JsonProperty("amounts", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.CatalogQuickAmount> Amounts { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -52,13 +62,7 @@ namespace Square.Models
             return $"CatalogQuickAmountsSettings : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Option = {(Option == null ? "null" : Option.ToString())}");
-            toStringOutput.Add($"EligibleForAutoAmounts = {(EligibleForAutoAmounts == null ? "null" : EligibleForAutoAmounts.ToString())}");
-            toStringOutput.Add($"Amounts = {(Amounts == null ? "null" : $"[{ string.Join(", ", Amounts)} ]")}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -72,75 +76,116 @@ namespace Square.Models
             }
 
             return obj is CatalogQuickAmountsSettings other &&
-                ((Option == null && other.Option == null) || (Option?.Equals(other.Option) == true)) &&
-                ((EligibleForAutoAmounts == null && other.EligibleForAutoAmounts == null) || (EligibleForAutoAmounts?.Equals(other.EligibleForAutoAmounts) == true)) &&
-                ((Amounts == null && other.Amounts == null) || (Amounts?.Equals(other.Amounts) == true));
+                ((this.Option == null && other.Option == null) || (this.Option?.Equals(other.Option) == true)) &&
+                ((this.EligibleForAutoAmounts == null && other.EligibleForAutoAmounts == null) || (this.EligibleForAutoAmounts?.Equals(other.EligibleForAutoAmounts) == true)) &&
+                ((this.Amounts == null && other.Amounts == null) || (this.Amounts?.Equals(other.Amounts) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1326255280;
 
-            if (Option != null)
+            if (this.Option != null)
             {
-               hashCode += Option.GetHashCode();
+               hashCode += this.Option.GetHashCode();
             }
 
-            if (EligibleForAutoAmounts != null)
+            if (this.EligibleForAutoAmounts != null)
             {
-               hashCode += EligibleForAutoAmounts.GetHashCode();
+               hashCode += this.EligibleForAutoAmounts.GetHashCode();
             }
 
-            if (Amounts != null)
+            if (this.Amounts != null)
             {
-               hashCode += Amounts.GetHashCode();
+               hashCode += this.Amounts.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Option = {(this.Option == null ? "null" : this.Option.ToString())}");
+            toStringOutput.Add($"this.EligibleForAutoAmounts = {(this.EligibleForAutoAmounts == null ? "null" : this.EligibleForAutoAmounts.ToString())}");
+            toStringOutput.Add($"this.Amounts = {(this.Amounts == null ? "null" : $"[{string.Join(", ", this.Amounts)} ]")}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
-            var builder = new Builder(Option)
-                .EligibleForAutoAmounts(EligibleForAutoAmounts)
-                .Amounts(Amounts);
+            var builder = new Builder(
+                this.Option)
+                .EligibleForAutoAmounts(this.EligibleForAutoAmounts)
+                .Amounts(this.Amounts);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string option;
             private bool? eligibleForAutoAmounts;
             private IList<Models.CatalogQuickAmount> amounts;
 
-            public Builder(string option)
+            public Builder(
+                string option)
             {
                 this.option = option;
             }
 
+             /// <summary>
+             /// Option.
+             /// </summary>
+             /// <param name="option"> option. </param>
+             /// <returns> Builder. </returns>
             public Builder Option(string option)
             {
                 this.option = option;
                 return this;
             }
 
+             /// <summary>
+             /// EligibleForAutoAmounts.
+             /// </summary>
+             /// <param name="eligibleForAutoAmounts"> eligibleForAutoAmounts. </param>
+             /// <returns> Builder. </returns>
             public Builder EligibleForAutoAmounts(bool? eligibleForAutoAmounts)
             {
                 this.eligibleForAutoAmounts = eligibleForAutoAmounts;
                 return this;
             }
 
+             /// <summary>
+             /// Amounts.
+             /// </summary>
+             /// <param name="amounts"> amounts. </param>
+             /// <returns> Builder. </returns>
             public Builder Amounts(IList<Models.CatalogQuickAmount> amounts)
             {
                 this.amounts = amounts;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> CatalogQuickAmountsSettings. </returns>
             public CatalogQuickAmountsSettings Build()
             {
-                return new CatalogQuickAmountsSettings(option,
-                    eligibleForAutoAmounts,
-                    amounts);
+                return new CatalogQuickAmountsSettings(
+                    this.option,
+                    this.eligibleForAutoAmounts,
+                    this.amounts);
             }
         }
     }

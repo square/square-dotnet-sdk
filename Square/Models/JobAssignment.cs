@@ -1,31 +1,42 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class JobAssignment 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// JobAssignment.
+    /// </summary>
+    public class JobAssignment
     {
-        public JobAssignment(string jobTitle,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="JobAssignment"/> class.
+        /// </summary>
+        /// <param name="jobTitle">job_title.</param>
+        /// <param name="payType">pay_type.</param>
+        /// <param name="hourlyRate">hourly_rate.</param>
+        /// <param name="annualRate">annual_rate.</param>
+        /// <param name="weeklyHours">weekly_hours.</param>
+        public JobAssignment(
+            string jobTitle,
             string payType,
             Models.Money hourlyRate = null,
             Models.Money annualRate = null,
             int? weeklyHours = null)
         {
-            JobTitle = jobTitle;
-            PayType = payType;
-            HourlyRate = hourlyRate;
-            AnnualRate = annualRate;
-            WeeklyHours = weeklyHours;
+            this.JobTitle = jobTitle;
+            this.PayType = payType;
+            this.HourlyRate = hourlyRate;
+            this.AnnualRate = annualRate;
+            this.WeeklyHours = weeklyHours;
         }
 
         /// <summary>
@@ -68,6 +79,7 @@ namespace Square.Models
         [JsonProperty("weekly_hours", NullValueHandling = NullValueHandling.Ignore)]
         public int? WeeklyHours { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -77,15 +89,7 @@ namespace Square.Models
             return $"JobAssignment : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"JobTitle = {(JobTitle == null ? "null" : JobTitle == string.Empty ? "" : JobTitle)}");
-            toStringOutput.Add($"PayType = {(PayType == null ? "null" : PayType.ToString())}");
-            toStringOutput.Add($"HourlyRate = {(HourlyRate == null ? "null" : HourlyRate.ToString())}");
-            toStringOutput.Add($"AnnualRate = {(AnnualRate == null ? "null" : AnnualRate.ToString())}");
-            toStringOutput.Add($"WeeklyHours = {(WeeklyHours == null ? "null" : WeeklyHours.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -99,55 +103,77 @@ namespace Square.Models
             }
 
             return obj is JobAssignment other &&
-                ((JobTitle == null && other.JobTitle == null) || (JobTitle?.Equals(other.JobTitle) == true)) &&
-                ((PayType == null && other.PayType == null) || (PayType?.Equals(other.PayType) == true)) &&
-                ((HourlyRate == null && other.HourlyRate == null) || (HourlyRate?.Equals(other.HourlyRate) == true)) &&
-                ((AnnualRate == null && other.AnnualRate == null) || (AnnualRate?.Equals(other.AnnualRate) == true)) &&
-                ((WeeklyHours == null && other.WeeklyHours == null) || (WeeklyHours?.Equals(other.WeeklyHours) == true));
+                ((this.JobTitle == null && other.JobTitle == null) || (this.JobTitle?.Equals(other.JobTitle) == true)) &&
+                ((this.PayType == null && other.PayType == null) || (this.PayType?.Equals(other.PayType) == true)) &&
+                ((this.HourlyRate == null && other.HourlyRate == null) || (this.HourlyRate?.Equals(other.HourlyRate) == true)) &&
+                ((this.AnnualRate == null && other.AnnualRate == null) || (this.AnnualRate?.Equals(other.AnnualRate) == true)) &&
+                ((this.WeeklyHours == null && other.WeeklyHours == null) || (this.WeeklyHours?.Equals(other.WeeklyHours) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 2078452856;
 
-            if (JobTitle != null)
+            if (this.JobTitle != null)
             {
-               hashCode += JobTitle.GetHashCode();
+               hashCode += this.JobTitle.GetHashCode();
             }
 
-            if (PayType != null)
+            if (this.PayType != null)
             {
-               hashCode += PayType.GetHashCode();
+               hashCode += this.PayType.GetHashCode();
             }
 
-            if (HourlyRate != null)
+            if (this.HourlyRate != null)
             {
-               hashCode += HourlyRate.GetHashCode();
+               hashCode += this.HourlyRate.GetHashCode();
             }
 
-            if (AnnualRate != null)
+            if (this.AnnualRate != null)
             {
-               hashCode += AnnualRate.GetHashCode();
+               hashCode += this.AnnualRate.GetHashCode();
             }
 
-            if (WeeklyHours != null)
+            if (this.WeeklyHours != null)
             {
-               hashCode += WeeklyHours.GetHashCode();
+               hashCode += this.WeeklyHours.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.JobTitle = {(this.JobTitle == null ? "null" : this.JobTitle == string.Empty ? "" : this.JobTitle)}");
+            toStringOutput.Add($"this.PayType = {(this.PayType == null ? "null" : this.PayType.ToString())}");
+            toStringOutput.Add($"this.HourlyRate = {(this.HourlyRate == null ? "null" : this.HourlyRate.ToString())}");
+            toStringOutput.Add($"this.AnnualRate = {(this.AnnualRate == null ? "null" : this.AnnualRate.ToString())}");
+            toStringOutput.Add($"this.WeeklyHours = {(this.WeeklyHours == null ? "null" : this.WeeklyHours.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
-            var builder = new Builder(JobTitle,
-                PayType)
-                .HourlyRate(HourlyRate)
-                .AnnualRate(AnnualRate)
-                .WeeklyHours(WeeklyHours);
+            var builder = new Builder(
+                this.JobTitle,
+                this.PayType)
+                .HourlyRate(this.HourlyRate)
+                .AnnualRate(this.AnnualRate)
+                .WeeklyHours(this.WeeklyHours);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string jobTitle;
@@ -156,50 +182,81 @@ namespace Square.Models
             private Models.Money annualRate;
             private int? weeklyHours;
 
-            public Builder(string jobTitle,
+            public Builder(
+                string jobTitle,
                 string payType)
             {
                 this.jobTitle = jobTitle;
                 this.payType = payType;
             }
 
+             /// <summary>
+             /// JobTitle.
+             /// </summary>
+             /// <param name="jobTitle"> jobTitle. </param>
+             /// <returns> Builder. </returns>
             public Builder JobTitle(string jobTitle)
             {
                 this.jobTitle = jobTitle;
                 return this;
             }
 
+             /// <summary>
+             /// PayType.
+             /// </summary>
+             /// <param name="payType"> payType. </param>
+             /// <returns> Builder. </returns>
             public Builder PayType(string payType)
             {
                 this.payType = payType;
                 return this;
             }
 
+             /// <summary>
+             /// HourlyRate.
+             /// </summary>
+             /// <param name="hourlyRate"> hourlyRate. </param>
+             /// <returns> Builder. </returns>
             public Builder HourlyRate(Models.Money hourlyRate)
             {
                 this.hourlyRate = hourlyRate;
                 return this;
             }
 
+             /// <summary>
+             /// AnnualRate.
+             /// </summary>
+             /// <param name="annualRate"> annualRate. </param>
+             /// <returns> Builder. </returns>
             public Builder AnnualRate(Models.Money annualRate)
             {
                 this.annualRate = annualRate;
                 return this;
             }
 
+             /// <summary>
+             /// WeeklyHours.
+             /// </summary>
+             /// <param name="weeklyHours"> weeklyHours. </param>
+             /// <returns> Builder. </returns>
             public Builder WeeklyHours(int? weeklyHours)
             {
                 this.weeklyHours = weeklyHours;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> JobAssignment. </returns>
             public JobAssignment Build()
             {
-                return new JobAssignment(jobTitle,
-                    payType,
-                    hourlyRate,
-                    annualRate,
-                    weeklyHours);
+                return new JobAssignment(
+                    this.jobTitle,
+                    this.payType,
+                    this.hourlyRate,
+                    this.annualRate,
+                    this.weeklyHours);
             }
         }
     }

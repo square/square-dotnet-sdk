@@ -1,21 +1,36 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class V1ListEmployeesRequest 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// V1ListEmployeesRequest.
+    /// </summary>
+    public class V1ListEmployeesRequest
     {
-        public V1ListEmployeesRequest(string order = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="V1ListEmployeesRequest"/> class.
+        /// </summary>
+        /// <param name="order">order.</param>
+        /// <param name="beginUpdatedAt">begin_updated_at.</param>
+        /// <param name="endUpdatedAt">end_updated_at.</param>
+        /// <param name="beginCreatedAt">begin_created_at.</param>
+        /// <param name="endCreatedAt">end_created_at.</param>
+        /// <param name="status">status.</param>
+        /// <param name="externalId">external_id.</param>
+        /// <param name="limit">limit.</param>
+        /// <param name="batchToken">batch_token.</param>
+        public V1ListEmployeesRequest(
+            string order = null,
             string beginUpdatedAt = null,
             string endUpdatedAt = null,
             string beginCreatedAt = null,
@@ -25,15 +40,15 @@ namespace Square.Models
             int? limit = null,
             string batchToken = null)
         {
-            Order = order;
-            BeginUpdatedAt = beginUpdatedAt;
-            EndUpdatedAt = endUpdatedAt;
-            BeginCreatedAt = beginCreatedAt;
-            EndCreatedAt = endCreatedAt;
-            Status = status;
-            ExternalId = externalId;
-            Limit = limit;
-            BatchToken = batchToken;
+            this.Order = order;
+            this.BeginUpdatedAt = beginUpdatedAt;
+            this.EndUpdatedAt = endUpdatedAt;
+            this.BeginCreatedAt = beginCreatedAt;
+            this.EndCreatedAt = endCreatedAt;
+            this.Status = status;
+            this.ExternalId = externalId;
+            this.Limit = limit;
+            this.BatchToken = batchToken;
         }
 
         /// <summary>
@@ -67,7 +82,7 @@ namespace Square.Models
         public string EndCreatedAt { get; }
 
         /// <summary>
-        /// Getter for status
+        /// Gets or sets Status.
         /// </summary>
         [JsonProperty("status", NullValueHandling = NullValueHandling.Ignore)]
         public string Status { get; }
@@ -91,6 +106,7 @@ namespace Square.Models
         [JsonProperty("batch_token", NullValueHandling = NullValueHandling.Ignore)]
         public string BatchToken { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -100,19 +116,7 @@ namespace Square.Models
             return $"V1ListEmployeesRequest : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Order = {(Order == null ? "null" : Order.ToString())}");
-            toStringOutput.Add($"BeginUpdatedAt = {(BeginUpdatedAt == null ? "null" : BeginUpdatedAt == string.Empty ? "" : BeginUpdatedAt)}");
-            toStringOutput.Add($"EndUpdatedAt = {(EndUpdatedAt == null ? "null" : EndUpdatedAt == string.Empty ? "" : EndUpdatedAt)}");
-            toStringOutput.Add($"BeginCreatedAt = {(BeginCreatedAt == null ? "null" : BeginCreatedAt == string.Empty ? "" : BeginCreatedAt)}");
-            toStringOutput.Add($"EndCreatedAt = {(EndCreatedAt == null ? "null" : EndCreatedAt == string.Empty ? "" : EndCreatedAt)}");
-            toStringOutput.Add($"Status = {(Status == null ? "null" : Status.ToString())}");
-            toStringOutput.Add($"ExternalId = {(ExternalId == null ? "null" : ExternalId == string.Empty ? "" : ExternalId)}");
-            toStringOutput.Add($"Limit = {(Limit == null ? "null" : Limit.ToString())}");
-            toStringOutput.Add($"BatchToken = {(BatchToken == null ? "null" : BatchToken == string.Empty ? "" : BatchToken)}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -126,84 +130,109 @@ namespace Square.Models
             }
 
             return obj is V1ListEmployeesRequest other &&
-                ((Order == null && other.Order == null) || (Order?.Equals(other.Order) == true)) &&
-                ((BeginUpdatedAt == null && other.BeginUpdatedAt == null) || (BeginUpdatedAt?.Equals(other.BeginUpdatedAt) == true)) &&
-                ((EndUpdatedAt == null && other.EndUpdatedAt == null) || (EndUpdatedAt?.Equals(other.EndUpdatedAt) == true)) &&
-                ((BeginCreatedAt == null && other.BeginCreatedAt == null) || (BeginCreatedAt?.Equals(other.BeginCreatedAt) == true)) &&
-                ((EndCreatedAt == null && other.EndCreatedAt == null) || (EndCreatedAt?.Equals(other.EndCreatedAt) == true)) &&
-                ((Status == null && other.Status == null) || (Status?.Equals(other.Status) == true)) &&
-                ((ExternalId == null && other.ExternalId == null) || (ExternalId?.Equals(other.ExternalId) == true)) &&
-                ((Limit == null && other.Limit == null) || (Limit?.Equals(other.Limit) == true)) &&
-                ((BatchToken == null && other.BatchToken == null) || (BatchToken?.Equals(other.BatchToken) == true));
+                ((this.Order == null && other.Order == null) || (this.Order?.Equals(other.Order) == true)) &&
+                ((this.BeginUpdatedAt == null && other.BeginUpdatedAt == null) || (this.BeginUpdatedAt?.Equals(other.BeginUpdatedAt) == true)) &&
+                ((this.EndUpdatedAt == null && other.EndUpdatedAt == null) || (this.EndUpdatedAt?.Equals(other.EndUpdatedAt) == true)) &&
+                ((this.BeginCreatedAt == null && other.BeginCreatedAt == null) || (this.BeginCreatedAt?.Equals(other.BeginCreatedAt) == true)) &&
+                ((this.EndCreatedAt == null && other.EndCreatedAt == null) || (this.EndCreatedAt?.Equals(other.EndCreatedAt) == true)) &&
+                ((this.Status == null && other.Status == null) || (this.Status?.Equals(other.Status) == true)) &&
+                ((this.ExternalId == null && other.ExternalId == null) || (this.ExternalId?.Equals(other.ExternalId) == true)) &&
+                ((this.Limit == null && other.Limit == null) || (this.Limit?.Equals(other.Limit) == true)) &&
+                ((this.BatchToken == null && other.BatchToken == null) || (this.BatchToken?.Equals(other.BatchToken) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1221038871;
 
-            if (Order != null)
+            if (this.Order != null)
             {
-               hashCode += Order.GetHashCode();
+               hashCode += this.Order.GetHashCode();
             }
 
-            if (BeginUpdatedAt != null)
+            if (this.BeginUpdatedAt != null)
             {
-               hashCode += BeginUpdatedAt.GetHashCode();
+               hashCode += this.BeginUpdatedAt.GetHashCode();
             }
 
-            if (EndUpdatedAt != null)
+            if (this.EndUpdatedAt != null)
             {
-               hashCode += EndUpdatedAt.GetHashCode();
+               hashCode += this.EndUpdatedAt.GetHashCode();
             }
 
-            if (BeginCreatedAt != null)
+            if (this.BeginCreatedAt != null)
             {
-               hashCode += BeginCreatedAt.GetHashCode();
+               hashCode += this.BeginCreatedAt.GetHashCode();
             }
 
-            if (EndCreatedAt != null)
+            if (this.EndCreatedAt != null)
             {
-               hashCode += EndCreatedAt.GetHashCode();
+               hashCode += this.EndCreatedAt.GetHashCode();
             }
 
-            if (Status != null)
+            if (this.Status != null)
             {
-               hashCode += Status.GetHashCode();
+               hashCode += this.Status.GetHashCode();
             }
 
-            if (ExternalId != null)
+            if (this.ExternalId != null)
             {
-               hashCode += ExternalId.GetHashCode();
+               hashCode += this.ExternalId.GetHashCode();
             }
 
-            if (Limit != null)
+            if (this.Limit != null)
             {
-               hashCode += Limit.GetHashCode();
+               hashCode += this.Limit.GetHashCode();
             }
 
-            if (BatchToken != null)
+            if (this.BatchToken != null)
             {
-               hashCode += BatchToken.GetHashCode();
+               hashCode += this.BatchToken.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Order = {(this.Order == null ? "null" : this.Order.ToString())}");
+            toStringOutput.Add($"this.BeginUpdatedAt = {(this.BeginUpdatedAt == null ? "null" : this.BeginUpdatedAt == string.Empty ? "" : this.BeginUpdatedAt)}");
+            toStringOutput.Add($"this.EndUpdatedAt = {(this.EndUpdatedAt == null ? "null" : this.EndUpdatedAt == string.Empty ? "" : this.EndUpdatedAt)}");
+            toStringOutput.Add($"this.BeginCreatedAt = {(this.BeginCreatedAt == null ? "null" : this.BeginCreatedAt == string.Empty ? "" : this.BeginCreatedAt)}");
+            toStringOutput.Add($"this.EndCreatedAt = {(this.EndCreatedAt == null ? "null" : this.EndCreatedAt == string.Empty ? "" : this.EndCreatedAt)}");
+            toStringOutput.Add($"this.Status = {(this.Status == null ? "null" : this.Status.ToString())}");
+            toStringOutput.Add($"this.ExternalId = {(this.ExternalId == null ? "null" : this.ExternalId == string.Empty ? "" : this.ExternalId)}");
+            toStringOutput.Add($"this.Limit = {(this.Limit == null ? "null" : this.Limit.ToString())}");
+            toStringOutput.Add($"this.BatchToken = {(this.BatchToken == null ? "null" : this.BatchToken == string.Empty ? "" : this.BatchToken)}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .Order(Order)
-                .BeginUpdatedAt(BeginUpdatedAt)
-                .EndUpdatedAt(EndUpdatedAt)
-                .BeginCreatedAt(BeginCreatedAt)
-                .EndCreatedAt(EndCreatedAt)
-                .Status(Status)
-                .ExternalId(ExternalId)
-                .Limit(Limit)
-                .BatchToken(BatchToken);
+                .Order(this.Order)
+                .BeginUpdatedAt(this.BeginUpdatedAt)
+                .EndUpdatedAt(this.EndUpdatedAt)
+                .BeginCreatedAt(this.BeginCreatedAt)
+                .EndCreatedAt(this.EndCreatedAt)
+                .Status(this.Status)
+                .ExternalId(this.ExternalId)
+                .Limit(this.Limit)
+                .BatchToken(this.BatchToken);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string order;
@@ -216,73 +245,121 @@ namespace Square.Models
             private int? limit;
             private string batchToken;
 
-
-
+             /// <summary>
+             /// Order.
+             /// </summary>
+             /// <param name="order"> order. </param>
+             /// <returns> Builder. </returns>
             public Builder Order(string order)
             {
                 this.order = order;
                 return this;
             }
 
+             /// <summary>
+             /// BeginUpdatedAt.
+             /// </summary>
+             /// <param name="beginUpdatedAt"> beginUpdatedAt. </param>
+             /// <returns> Builder. </returns>
             public Builder BeginUpdatedAt(string beginUpdatedAt)
             {
                 this.beginUpdatedAt = beginUpdatedAt;
                 return this;
             }
 
+             /// <summary>
+             /// EndUpdatedAt.
+             /// </summary>
+             /// <param name="endUpdatedAt"> endUpdatedAt. </param>
+             /// <returns> Builder. </returns>
             public Builder EndUpdatedAt(string endUpdatedAt)
             {
                 this.endUpdatedAt = endUpdatedAt;
                 return this;
             }
 
+             /// <summary>
+             /// BeginCreatedAt.
+             /// </summary>
+             /// <param name="beginCreatedAt"> beginCreatedAt. </param>
+             /// <returns> Builder. </returns>
             public Builder BeginCreatedAt(string beginCreatedAt)
             {
                 this.beginCreatedAt = beginCreatedAt;
                 return this;
             }
 
+             /// <summary>
+             /// EndCreatedAt.
+             /// </summary>
+             /// <param name="endCreatedAt"> endCreatedAt. </param>
+             /// <returns> Builder. </returns>
             public Builder EndCreatedAt(string endCreatedAt)
             {
                 this.endCreatedAt = endCreatedAt;
                 return this;
             }
 
+             /// <summary>
+             /// Status.
+             /// </summary>
+             /// <param name="status"> status. </param>
+             /// <returns> Builder. </returns>
             public Builder Status(string status)
             {
                 this.status = status;
                 return this;
             }
 
+             /// <summary>
+             /// ExternalId.
+             /// </summary>
+             /// <param name="externalId"> externalId. </param>
+             /// <returns> Builder. </returns>
             public Builder ExternalId(string externalId)
             {
                 this.externalId = externalId;
                 return this;
             }
 
+             /// <summary>
+             /// Limit.
+             /// </summary>
+             /// <param name="limit"> limit. </param>
+             /// <returns> Builder. </returns>
             public Builder Limit(int? limit)
             {
                 this.limit = limit;
                 return this;
             }
 
+             /// <summary>
+             /// BatchToken.
+             /// </summary>
+             /// <param name="batchToken"> batchToken. </param>
+             /// <returns> Builder. </returns>
             public Builder BatchToken(string batchToken)
             {
                 this.batchToken = batchToken;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> V1ListEmployeesRequest. </returns>
             public V1ListEmployeesRequest Build()
             {
-                return new V1ListEmployeesRequest(order,
-                    beginUpdatedAt,
-                    endUpdatedAt,
-                    beginCreatedAt,
-                    endCreatedAt,
-                    status,
-                    externalId,
-                    limit,
-                    batchToken);
+                return new V1ListEmployeesRequest(
+                    this.order,
+                    this.beginUpdatedAt,
+                    this.endUpdatedAt,
+                    this.beginCreatedAt,
+                    this.endCreatedAt,
+                    this.status,
+                    this.externalId,
+                    this.limit,
+                    this.batchToken);
             }
         }
     }

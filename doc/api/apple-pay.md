@@ -22,7 +22,8 @@ To learn more about Web Apple Pay, see
 [Add the Apple Pay on the Web Button](https://developer.squareup.com/docs/payment-form/add-digital-wallets/apple-pay).
 
 ```csharp
-RegisterDomainAsync(Models.RegisterDomainRequest body)
+RegisterDomainAsync(
+    Models.RegisterDomainRequest body)
 ```
 
 ## Parameters

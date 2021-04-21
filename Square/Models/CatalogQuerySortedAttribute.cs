@@ -1,27 +1,36 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class CatalogQuerySortedAttribute 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// CatalogQuerySortedAttribute.
+    /// </summary>
+    public class CatalogQuerySortedAttribute
     {
-        public CatalogQuerySortedAttribute(string attributeName,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CatalogQuerySortedAttribute"/> class.
+        /// </summary>
+        /// <param name="attributeName">attribute_name.</param>
+        /// <param name="initialAttributeValue">initial_attribute_value.</param>
+        /// <param name="sortOrder">sort_order.</param>
+        public CatalogQuerySortedAttribute(
+            string attributeName,
             string initialAttributeValue = null,
             string sortOrder = null)
         {
-            AttributeName = attributeName;
-            InitialAttributeValue = initialAttributeValue;
-            SortOrder = sortOrder;
+            this.AttributeName = attributeName;
+            this.InitialAttributeValue = initialAttributeValue;
+            this.SortOrder = sortOrder;
         }
 
         /// <summary>
@@ -44,6 +53,7 @@ namespace Square.Models
         [JsonProperty("sort_order", NullValueHandling = NullValueHandling.Ignore)]
         public string SortOrder { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -53,13 +63,7 @@ namespace Square.Models
             return $"CatalogQuerySortedAttribute : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"AttributeName = {(AttributeName == null ? "null" : AttributeName == string.Empty ? "" : AttributeName)}");
-            toStringOutput.Add($"InitialAttributeValue = {(InitialAttributeValue == null ? "null" : InitialAttributeValue == string.Empty ? "" : InitialAttributeValue)}");
-            toStringOutput.Add($"SortOrder = {(SortOrder == null ? "null" : SortOrder.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -73,75 +77,116 @@ namespace Square.Models
             }
 
             return obj is CatalogQuerySortedAttribute other &&
-                ((AttributeName == null && other.AttributeName == null) || (AttributeName?.Equals(other.AttributeName) == true)) &&
-                ((InitialAttributeValue == null && other.InitialAttributeValue == null) || (InitialAttributeValue?.Equals(other.InitialAttributeValue) == true)) &&
-                ((SortOrder == null && other.SortOrder == null) || (SortOrder?.Equals(other.SortOrder) == true));
+                ((this.AttributeName == null && other.AttributeName == null) || (this.AttributeName?.Equals(other.AttributeName) == true)) &&
+                ((this.InitialAttributeValue == null && other.InitialAttributeValue == null) || (this.InitialAttributeValue?.Equals(other.InitialAttributeValue) == true)) &&
+                ((this.SortOrder == null && other.SortOrder == null) || (this.SortOrder?.Equals(other.SortOrder) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -406098695;
 
-            if (AttributeName != null)
+            if (this.AttributeName != null)
             {
-               hashCode += AttributeName.GetHashCode();
+               hashCode += this.AttributeName.GetHashCode();
             }
 
-            if (InitialAttributeValue != null)
+            if (this.InitialAttributeValue != null)
             {
-               hashCode += InitialAttributeValue.GetHashCode();
+               hashCode += this.InitialAttributeValue.GetHashCode();
             }
 
-            if (SortOrder != null)
+            if (this.SortOrder != null)
             {
-               hashCode += SortOrder.GetHashCode();
+               hashCode += this.SortOrder.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.AttributeName = {(this.AttributeName == null ? "null" : this.AttributeName == string.Empty ? "" : this.AttributeName)}");
+            toStringOutput.Add($"this.InitialAttributeValue = {(this.InitialAttributeValue == null ? "null" : this.InitialAttributeValue == string.Empty ? "" : this.InitialAttributeValue)}");
+            toStringOutput.Add($"this.SortOrder = {(this.SortOrder == null ? "null" : this.SortOrder.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
-            var builder = new Builder(AttributeName)
-                .InitialAttributeValue(InitialAttributeValue)
-                .SortOrder(SortOrder);
+            var builder = new Builder(
+                this.AttributeName)
+                .InitialAttributeValue(this.InitialAttributeValue)
+                .SortOrder(this.SortOrder);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string attributeName;
             private string initialAttributeValue;
             private string sortOrder;
 
-            public Builder(string attributeName)
+            public Builder(
+                string attributeName)
             {
                 this.attributeName = attributeName;
             }
 
+             /// <summary>
+             /// AttributeName.
+             /// </summary>
+             /// <param name="attributeName"> attributeName. </param>
+             /// <returns> Builder. </returns>
             public Builder AttributeName(string attributeName)
             {
                 this.attributeName = attributeName;
                 return this;
             }
 
+             /// <summary>
+             /// InitialAttributeValue.
+             /// </summary>
+             /// <param name="initialAttributeValue"> initialAttributeValue. </param>
+             /// <returns> Builder. </returns>
             public Builder InitialAttributeValue(string initialAttributeValue)
             {
                 this.initialAttributeValue = initialAttributeValue;
                 return this;
             }
 
+             /// <summary>
+             /// SortOrder.
+             /// </summary>
+             /// <param name="sortOrder"> sortOrder. </param>
+             /// <returns> Builder. </returns>
             public Builder SortOrder(string sortOrder)
             {
                 this.sortOrder = sortOrder;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> CatalogQuerySortedAttribute. </returns>
             public CatalogQuerySortedAttribute Build()
             {
-                return new CatalogQuerySortedAttribute(attributeName,
-                    initialAttributeValue,
-                    sortOrder);
+                return new CatalogQuerySortedAttribute(
+                    this.attributeName,
+                    this.initialAttributeValue,
+                    this.sortOrder);
             }
         }
     }

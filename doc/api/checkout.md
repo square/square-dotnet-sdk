@@ -16,7 +16,9 @@ directed to in order to provide their payment information using a
 payment processing workflow hosted on connect.squareup.com.
 
 ```csharp
-CreateCheckoutAsync(string locationId, Models.CreateCheckoutRequest body)
+CreateCheckoutAsync(
+    string locationId,
+    Models.CreateCheckoutRequest body)
 ```
 
 ## Parameters

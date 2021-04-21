@@ -1,49 +1,59 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class LoyaltyEventRedeemReward 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// LoyaltyEventRedeemReward.
+    /// </summary>
+    public class LoyaltyEventRedeemReward
     {
-        public LoyaltyEventRedeemReward(string loyaltyProgramId,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LoyaltyEventRedeemReward"/> class.
+        /// </summary>
+        /// <param name="loyaltyProgramId">loyalty_program_id.</param>
+        /// <param name="rewardId">reward_id.</param>
+        /// <param name="orderId">order_id.</param>
+        public LoyaltyEventRedeemReward(
+            string loyaltyProgramId,
             string rewardId = null,
             string orderId = null)
         {
-            LoyaltyProgramId = loyaltyProgramId;
-            RewardId = rewardId;
-            OrderId = orderId;
+            this.LoyaltyProgramId = loyaltyProgramId;
+            this.RewardId = rewardId;
+            this.OrderId = orderId;
         }
 
         /// <summary>
-        /// The ID of the [loyalty program](#type-LoyaltyProgram).
+        /// The ID of the [loyalty program]($m/LoyaltyProgram).
         /// </summary>
         [JsonProperty("loyalty_program_id")]
         public string LoyaltyProgramId { get; }
 
         /// <summary>
-        /// The ID of the redeemed [loyalty reward](#type-LoyaltyReward).
+        /// The ID of the redeemed [loyalty reward]($m/LoyaltyReward).
         /// This field is returned only if the event source is `LOYALTY_API`.
         /// </summary>
         [JsonProperty("reward_id", NullValueHandling = NullValueHandling.Ignore)]
         public string RewardId { get; }
 
         /// <summary>
-        /// The ID of the [order](#type-Order) that redeemed the reward.
+        /// The ID of the [order]($m/Order) that redeemed the reward.
         /// This field is returned only if the Orders API is used to process orders.
         /// </summary>
         [JsonProperty("order_id", NullValueHandling = NullValueHandling.Ignore)]
         public string OrderId { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -53,13 +63,7 @@ namespace Square.Models
             return $"LoyaltyEventRedeemReward : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"LoyaltyProgramId = {(LoyaltyProgramId == null ? "null" : LoyaltyProgramId == string.Empty ? "" : LoyaltyProgramId)}");
-            toStringOutput.Add($"RewardId = {(RewardId == null ? "null" : RewardId == string.Empty ? "" : RewardId)}");
-            toStringOutput.Add($"OrderId = {(OrderId == null ? "null" : OrderId == string.Empty ? "" : OrderId)}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -73,75 +77,116 @@ namespace Square.Models
             }
 
             return obj is LoyaltyEventRedeemReward other &&
-                ((LoyaltyProgramId == null && other.LoyaltyProgramId == null) || (LoyaltyProgramId?.Equals(other.LoyaltyProgramId) == true)) &&
-                ((RewardId == null && other.RewardId == null) || (RewardId?.Equals(other.RewardId) == true)) &&
-                ((OrderId == null && other.OrderId == null) || (OrderId?.Equals(other.OrderId) == true));
+                ((this.LoyaltyProgramId == null && other.LoyaltyProgramId == null) || (this.LoyaltyProgramId?.Equals(other.LoyaltyProgramId) == true)) &&
+                ((this.RewardId == null && other.RewardId == null) || (this.RewardId?.Equals(other.RewardId) == true)) &&
+                ((this.OrderId == null && other.OrderId == null) || (this.OrderId?.Equals(other.OrderId) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 2041086926;
 
-            if (LoyaltyProgramId != null)
+            if (this.LoyaltyProgramId != null)
             {
-               hashCode += LoyaltyProgramId.GetHashCode();
+               hashCode += this.LoyaltyProgramId.GetHashCode();
             }
 
-            if (RewardId != null)
+            if (this.RewardId != null)
             {
-               hashCode += RewardId.GetHashCode();
+               hashCode += this.RewardId.GetHashCode();
             }
 
-            if (OrderId != null)
+            if (this.OrderId != null)
             {
-               hashCode += OrderId.GetHashCode();
+               hashCode += this.OrderId.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.LoyaltyProgramId = {(this.LoyaltyProgramId == null ? "null" : this.LoyaltyProgramId == string.Empty ? "" : this.LoyaltyProgramId)}");
+            toStringOutput.Add($"this.RewardId = {(this.RewardId == null ? "null" : this.RewardId == string.Empty ? "" : this.RewardId)}");
+            toStringOutput.Add($"this.OrderId = {(this.OrderId == null ? "null" : this.OrderId == string.Empty ? "" : this.OrderId)}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
-            var builder = new Builder(LoyaltyProgramId)
-                .RewardId(RewardId)
-                .OrderId(OrderId);
+            var builder = new Builder(
+                this.LoyaltyProgramId)
+                .RewardId(this.RewardId)
+                .OrderId(this.OrderId);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string loyaltyProgramId;
             private string rewardId;
             private string orderId;
 
-            public Builder(string loyaltyProgramId)
+            public Builder(
+                string loyaltyProgramId)
             {
                 this.loyaltyProgramId = loyaltyProgramId;
             }
 
+             /// <summary>
+             /// LoyaltyProgramId.
+             /// </summary>
+             /// <param name="loyaltyProgramId"> loyaltyProgramId. </param>
+             /// <returns> Builder. </returns>
             public Builder LoyaltyProgramId(string loyaltyProgramId)
             {
                 this.loyaltyProgramId = loyaltyProgramId;
                 return this;
             }
 
+             /// <summary>
+             /// RewardId.
+             /// </summary>
+             /// <param name="rewardId"> rewardId. </param>
+             /// <returns> Builder. </returns>
             public Builder RewardId(string rewardId)
             {
                 this.rewardId = rewardId;
                 return this;
             }
 
+             /// <summary>
+             /// OrderId.
+             /// </summary>
+             /// <param name="orderId"> orderId. </param>
+             /// <returns> Builder. </returns>
             public Builder OrderId(string orderId)
             {
                 this.orderId = orderId;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> LoyaltyEventRedeemReward. </returns>
             public LoyaltyEventRedeemReward Build()
             {
-                return new LoyaltyEventRedeemReward(loyaltyProgramId,
-                    rewardId,
-                    orderId);
+                return new LoyaltyEventRedeemReward(
+                    this.loyaltyProgramId,
+                    this.rewardId,
+                    this.orderId);
             }
         }
     }

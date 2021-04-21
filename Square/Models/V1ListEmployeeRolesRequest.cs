@@ -1,27 +1,36 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class V1ListEmployeeRolesRequest 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// V1ListEmployeeRolesRequest.
+    /// </summary>
+    public class V1ListEmployeeRolesRequest
     {
-        public V1ListEmployeeRolesRequest(string order = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="V1ListEmployeeRolesRequest"/> class.
+        /// </summary>
+        /// <param name="order">order.</param>
+        /// <param name="limit">limit.</param>
+        /// <param name="batchToken">batch_token.</param>
+        public V1ListEmployeeRolesRequest(
+            string order = null,
             int? limit = null,
             string batchToken = null)
         {
-            Order = order;
-            Limit = limit;
-            BatchToken = batchToken;
+            this.Order = order;
+            this.Limit = limit;
+            this.BatchToken = batchToken;
         }
 
         /// <summary>
@@ -43,6 +52,7 @@ namespace Square.Models
         [JsonProperty("batch_token", NullValueHandling = NullValueHandling.Ignore)]
         public string BatchToken { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -52,13 +62,7 @@ namespace Square.Models
             return $"V1ListEmployeeRolesRequest : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Order = {(Order == null ? "null" : Order.ToString())}");
-            toStringOutput.Add($"Limit = {(Limit == null ? "null" : Limit.ToString())}");
-            toStringOutput.Add($"BatchToken = {(BatchToken == null ? "null" : BatchToken == string.Empty ? "" : BatchToken)}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -72,73 +76,110 @@ namespace Square.Models
             }
 
             return obj is V1ListEmployeeRolesRequest other &&
-                ((Order == null && other.Order == null) || (Order?.Equals(other.Order) == true)) &&
-                ((Limit == null && other.Limit == null) || (Limit?.Equals(other.Limit) == true)) &&
-                ((BatchToken == null && other.BatchToken == null) || (BatchToken?.Equals(other.BatchToken) == true));
+                ((this.Order == null && other.Order == null) || (this.Order?.Equals(other.Order) == true)) &&
+                ((this.Limit == null && other.Limit == null) || (this.Limit?.Equals(other.Limit) == true)) &&
+                ((this.BatchToken == null && other.BatchToken == null) || (this.BatchToken?.Equals(other.BatchToken) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -19547746;
 
-            if (Order != null)
+            if (this.Order != null)
             {
-               hashCode += Order.GetHashCode();
+               hashCode += this.Order.GetHashCode();
             }
 
-            if (Limit != null)
+            if (this.Limit != null)
             {
-               hashCode += Limit.GetHashCode();
+               hashCode += this.Limit.GetHashCode();
             }
 
-            if (BatchToken != null)
+            if (this.BatchToken != null)
             {
-               hashCode += BatchToken.GetHashCode();
+               hashCode += this.BatchToken.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Order = {(this.Order == null ? "null" : this.Order.ToString())}");
+            toStringOutput.Add($"this.Limit = {(this.Limit == null ? "null" : this.Limit.ToString())}");
+            toStringOutput.Add($"this.BatchToken = {(this.BatchToken == null ? "null" : this.BatchToken == string.Empty ? "" : this.BatchToken)}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .Order(Order)
-                .Limit(Limit)
-                .BatchToken(BatchToken);
+                .Order(this.Order)
+                .Limit(this.Limit)
+                .BatchToken(this.BatchToken);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string order;
             private int? limit;
             private string batchToken;
 
-
-
+             /// <summary>
+             /// Order.
+             /// </summary>
+             /// <param name="order"> order. </param>
+             /// <returns> Builder. </returns>
             public Builder Order(string order)
             {
                 this.order = order;
                 return this;
             }
 
+             /// <summary>
+             /// Limit.
+             /// </summary>
+             /// <param name="limit"> limit. </param>
+             /// <returns> Builder. </returns>
             public Builder Limit(int? limit)
             {
                 this.limit = limit;
                 return this;
             }
 
+             /// <summary>
+             /// BatchToken.
+             /// </summary>
+             /// <param name="batchToken"> batchToken. </param>
+             /// <returns> Builder. </returns>
             public Builder BatchToken(string batchToken)
             {
                 this.batchToken = batchToken;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> V1ListEmployeeRolesRequest. </returns>
             public V1ListEmployeeRolesRequest Build()
             {
-                return new V1ListEmployeeRolesRequest(order,
-                    limit,
-                    batchToken);
+                return new V1ListEmployeeRolesRequest(
+                    this.order,
+                    this.limit,
+                    this.batchToken);
             }
         }
     }

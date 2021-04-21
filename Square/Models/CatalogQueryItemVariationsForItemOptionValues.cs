@@ -1,23 +1,30 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class CatalogQueryItemVariationsForItemOptionValues 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// CatalogQueryItemVariationsForItemOptionValues.
+    /// </summary>
+    public class CatalogQueryItemVariationsForItemOptionValues
     {
-        public CatalogQueryItemVariationsForItemOptionValues(IList<string> itemOptionValueIds = null)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CatalogQueryItemVariationsForItemOptionValues"/> class.
+        /// </summary>
+        /// <param name="itemOptionValueIds">item_option_value_ids.</param>
+        public CatalogQueryItemVariationsForItemOptionValues(
+            IList<string> itemOptionValueIds = null)
         {
-            ItemOptionValueIds = itemOptionValueIds;
+            this.ItemOptionValueIds = itemOptionValueIds;
         }
 
         /// <summary>
@@ -28,6 +35,7 @@ namespace Square.Models
         [JsonProperty("item_option_value_ids", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> ItemOptionValueIds { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -37,11 +45,7 @@ namespace Square.Models
             return $"CatalogQueryItemVariationsForItemOptionValues : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"ItemOptionValueIds = {(ItemOptionValueIds == null ? "null" : $"[{ string.Join(", ", ItemOptionValueIds)} ]")}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -55,43 +59,68 @@ namespace Square.Models
             }
 
             return obj is CatalogQueryItemVariationsForItemOptionValues other &&
-                ((ItemOptionValueIds == null && other.ItemOptionValueIds == null) || (ItemOptionValueIds?.Equals(other.ItemOptionValueIds) == true));
+                ((this.ItemOptionValueIds == null && other.ItemOptionValueIds == null) || (this.ItemOptionValueIds?.Equals(other.ItemOptionValueIds) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 465531151;
 
-            if (ItemOptionValueIds != null)
+            if (this.ItemOptionValueIds != null)
             {
-               hashCode += ItemOptionValueIds.GetHashCode();
+               hashCode += this.ItemOptionValueIds.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.ItemOptionValueIds = {(this.ItemOptionValueIds == null ? "null" : $"[{string.Join(", ", this.ItemOptionValueIds)} ]")}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .ItemOptionValueIds(ItemOptionValueIds);
+                .ItemOptionValueIds(this.ItemOptionValueIds);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private IList<string> itemOptionValueIds;
 
-
-
+             /// <summary>
+             /// ItemOptionValueIds.
+             /// </summary>
+             /// <param name="itemOptionValueIds"> itemOptionValueIds. </param>
+             /// <returns> Builder. </returns>
             public Builder ItemOptionValueIds(IList<string> itemOptionValueIds)
             {
                 this.itemOptionValueIds = itemOptionValueIds;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> CatalogQueryItemVariationsForItemOptionValues. </returns>
             public CatalogQueryItemVariationsForItemOptionValues Build()
             {
-                return new CatalogQueryItemVariationsForItemOptionValues(itemOptionValueIds);
+                return new CatalogQueryItemVariationsForItemOptionValues(
+                    this.itemOptionValueIds);
             }
         }
     }

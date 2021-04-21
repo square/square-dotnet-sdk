@@ -1,29 +1,39 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class ExternalPaymentDetails 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// ExternalPaymentDetails.
+    /// </summary>
+    public class ExternalPaymentDetails
     {
-        public ExternalPaymentDetails(string type,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ExternalPaymentDetails"/> class.
+        /// </summary>
+        /// <param name="type">type.</param>
+        /// <param name="source">source.</param>
+        /// <param name="sourceId">source_id.</param>
+        /// <param name="sourceFeeMoney">source_fee_money.</param>
+        public ExternalPaymentDetails(
+            string type,
             string source,
             string sourceId = null,
             Models.Money sourceFeeMoney = null)
         {
-            Type = type;
-            Source = source;
-            SourceId = sourceId;
-            SourceFeeMoney = sourceFeeMoney;
+            this.Type = type;
+            this.Source = source;
+            this.SourceId = sourceId;
+            this.SourceFeeMoney = sourceFeeMoney;
         }
 
         /// <summary>
@@ -44,7 +54,7 @@ namespace Square.Models
         public string Type { get; }
 
         /// <summary>
-        /// A description of the external payment source. For example, 
+        /// A description of the external payment source. For example,
         /// "Food Delivery Service".
         /// </summary>
         [JsonProperty("source")]
@@ -67,6 +77,7 @@ namespace Square.Models
         [JsonProperty("source_fee_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Money SourceFeeMoney { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -76,14 +87,7 @@ namespace Square.Models
             return $"ExternalPaymentDetails : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Type = {(Type == null ? "null" : Type == string.Empty ? "" : Type)}");
-            toStringOutput.Add($"Source = {(Source == null ? "null" : Source == string.Empty ? "" : Source)}");
-            toStringOutput.Add($"SourceId = {(SourceId == null ? "null" : SourceId == string.Empty ? "" : SourceId)}");
-            toStringOutput.Add($"SourceFeeMoney = {(SourceFeeMoney == null ? "null" : SourceFeeMoney.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -97,48 +101,69 @@ namespace Square.Models
             }
 
             return obj is ExternalPaymentDetails other &&
-                ((Type == null && other.Type == null) || (Type?.Equals(other.Type) == true)) &&
-                ((Source == null && other.Source == null) || (Source?.Equals(other.Source) == true)) &&
-                ((SourceId == null && other.SourceId == null) || (SourceId?.Equals(other.SourceId) == true)) &&
-                ((SourceFeeMoney == null && other.SourceFeeMoney == null) || (SourceFeeMoney?.Equals(other.SourceFeeMoney) == true));
+                ((this.Type == null && other.Type == null) || (this.Type?.Equals(other.Type) == true)) &&
+                ((this.Source == null && other.Source == null) || (this.Source?.Equals(other.Source) == true)) &&
+                ((this.SourceId == null && other.SourceId == null) || (this.SourceId?.Equals(other.SourceId) == true)) &&
+                ((this.SourceFeeMoney == null && other.SourceFeeMoney == null) || (this.SourceFeeMoney?.Equals(other.SourceFeeMoney) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 2146282005;
 
-            if (Type != null)
+            if (this.Type != null)
             {
-               hashCode += Type.GetHashCode();
+               hashCode += this.Type.GetHashCode();
             }
 
-            if (Source != null)
+            if (this.Source != null)
             {
-               hashCode += Source.GetHashCode();
+               hashCode += this.Source.GetHashCode();
             }
 
-            if (SourceId != null)
+            if (this.SourceId != null)
             {
-               hashCode += SourceId.GetHashCode();
+               hashCode += this.SourceId.GetHashCode();
             }
 
-            if (SourceFeeMoney != null)
+            if (this.SourceFeeMoney != null)
             {
-               hashCode += SourceFeeMoney.GetHashCode();
+               hashCode += this.SourceFeeMoney.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Type = {(this.Type == null ? "null" : this.Type == string.Empty ? "" : this.Type)}");
+            toStringOutput.Add($"this.Source = {(this.Source == null ? "null" : this.Source == string.Empty ? "" : this.Source)}");
+            toStringOutput.Add($"this.SourceId = {(this.SourceId == null ? "null" : this.SourceId == string.Empty ? "" : this.SourceId)}");
+            toStringOutput.Add($"this.SourceFeeMoney = {(this.SourceFeeMoney == null ? "null" : this.SourceFeeMoney.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
-            var builder = new Builder(Type,
-                Source)
-                .SourceId(SourceId)
-                .SourceFeeMoney(SourceFeeMoney);
+            var builder = new Builder(
+                this.Type,
+                this.Source)
+                .SourceId(this.SourceId)
+                .SourceFeeMoney(this.SourceFeeMoney);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string type;
@@ -146,43 +171,69 @@ namespace Square.Models
             private string sourceId;
             private Models.Money sourceFeeMoney;
 
-            public Builder(string type,
+            public Builder(
+                string type,
                 string source)
             {
                 this.type = type;
                 this.source = source;
             }
 
+             /// <summary>
+             /// Type.
+             /// </summary>
+             /// <param name="type"> type. </param>
+             /// <returns> Builder. </returns>
             public Builder Type(string type)
             {
                 this.type = type;
                 return this;
             }
 
+             /// <summary>
+             /// Source.
+             /// </summary>
+             /// <param name="source"> source. </param>
+             /// <returns> Builder. </returns>
             public Builder Source(string source)
             {
                 this.source = source;
                 return this;
             }
 
+             /// <summary>
+             /// SourceId.
+             /// </summary>
+             /// <param name="sourceId"> sourceId. </param>
+             /// <returns> Builder. </returns>
             public Builder SourceId(string sourceId)
             {
                 this.sourceId = sourceId;
                 return this;
             }
 
+             /// <summary>
+             /// SourceFeeMoney.
+             /// </summary>
+             /// <param name="sourceFeeMoney"> sourceFeeMoney. </param>
+             /// <returns> Builder. </returns>
             public Builder SourceFeeMoney(Models.Money sourceFeeMoney)
             {
                 this.sourceFeeMoney = sourceFeeMoney;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> ExternalPaymentDetails. </returns>
             public ExternalPaymentDetails Build()
             {
-                return new ExternalPaymentDetails(type,
-                    source,
-                    sourceId,
-                    sourceFeeMoney);
+                return new ExternalPaymentDetails(
+                    this.type,
+                    this.source,
+                    this.sourceId,
+                    this.sourceFeeMoney);
             }
         }
     }

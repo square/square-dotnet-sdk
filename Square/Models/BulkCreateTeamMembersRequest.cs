@@ -1,23 +1,30 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class BulkCreateTeamMembersRequest 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// BulkCreateTeamMembersRequest.
+    /// </summary>
+    public class BulkCreateTeamMembersRequest
     {
-        public BulkCreateTeamMembersRequest(IDictionary<string, Models.CreateTeamMemberRequest> teamMembers)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BulkCreateTeamMembersRequest"/> class.
+        /// </summary>
+        /// <param name="teamMembers">team_members.</param>
+        public BulkCreateTeamMembersRequest(
+            IDictionary<string, Models.CreateTeamMemberRequest> teamMembers)
         {
-            TeamMembers = teamMembers;
+            this.TeamMembers = teamMembers;
         }
 
         /// <summary>
@@ -26,6 +33,7 @@ namespace Square.Models
         [JsonProperty("team_members")]
         public IDictionary<string, Models.CreateTeamMemberRequest> TeamMembers { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -35,11 +43,7 @@ namespace Square.Models
             return $"BulkCreateTeamMembersRequest : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"TeamMembers = {(TeamMembers == null ? "null" : TeamMembers.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -53,45 +57,74 @@ namespace Square.Models
             }
 
             return obj is BulkCreateTeamMembersRequest other &&
-                ((TeamMembers == null && other.TeamMembers == null) || (TeamMembers?.Equals(other.TeamMembers) == true));
+                ((this.TeamMembers == null && other.TeamMembers == null) || (this.TeamMembers?.Equals(other.TeamMembers) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1170567582;
 
-            if (TeamMembers != null)
+            if (this.TeamMembers != null)
             {
-               hashCode += TeamMembers.GetHashCode();
+               hashCode += this.TeamMembers.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"TeamMembers = {(this.TeamMembers == null ? "null" : this.TeamMembers.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
-            var builder = new Builder(TeamMembers);
+            var builder = new Builder(
+                this.TeamMembers);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private IDictionary<string, Models.CreateTeamMemberRequest> teamMembers;
 
-            public Builder(IDictionary<string, Models.CreateTeamMemberRequest> teamMembers)
+            public Builder(
+                IDictionary<string, Models.CreateTeamMemberRequest> teamMembers)
             {
                 this.teamMembers = teamMembers;
             }
 
+             /// <summary>
+             /// TeamMembers.
+             /// </summary>
+             /// <param name="teamMembers"> teamMembers. </param>
+             /// <returns> Builder. </returns>
             public Builder TeamMembers(IDictionary<string, Models.CreateTeamMemberRequest> teamMembers)
             {
                 this.teamMembers = teamMembers;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> BulkCreateTeamMembersRequest. </returns>
             public BulkCreateTeamMembersRequest Build()
             {
-                return new BulkCreateTeamMembersRequest(teamMembers);
+                return new BulkCreateTeamMembersRequest(
+                    this.teamMembers);
             }
         }
     }

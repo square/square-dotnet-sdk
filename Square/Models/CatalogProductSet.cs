@@ -1,21 +1,34 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class CatalogProductSet 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// CatalogProductSet.
+    /// </summary>
+    public class CatalogProductSet
     {
-        public CatalogProductSet(string name = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CatalogProductSet"/> class.
+        /// </summary>
+        /// <param name="name">name.</param>
+        /// <param name="productIdsAny">product_ids_any.</param>
+        /// <param name="productIdsAll">product_ids_all.</param>
+        /// <param name="quantityExact">quantity_exact.</param>
+        /// <param name="quantityMin">quantity_min.</param>
+        /// <param name="quantityMax">quantity_max.</param>
+        /// <param name="allProducts">all_products.</param>
+        public CatalogProductSet(
+            string name = null,
             IList<string> productIdsAny = null,
             IList<string> productIdsAll = null,
             long? quantityExact = null,
@@ -23,13 +36,13 @@ namespace Square.Models
             long? quantityMax = null,
             bool? allProducts = null)
         {
-            Name = name;
-            ProductIdsAny = productIdsAny;
-            ProductIdsAll = productIdsAll;
-            QuantityExact = quantityExact;
-            QuantityMin = quantityMin;
-            QuantityMax = quantityMax;
-            AllProducts = allProducts;
+            this.Name = name;
+            this.ProductIdsAny = productIdsAny;
+            this.ProductIdsAll = productIdsAll;
+            this.QuantityExact = quantityExact;
+            this.QuantityMin = quantityMin;
+            this.QuantityMax = quantityMax;
+            this.AllProducts = allProducts;
         }
 
         /// <summary>
@@ -90,6 +103,7 @@ namespace Square.Models
         [JsonProperty("all_products", NullValueHandling = NullValueHandling.Ignore)]
         public bool? AllProducts { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -99,17 +113,7 @@ namespace Square.Models
             return $"CatalogProductSet : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Name = {(Name == null ? "null" : Name == string.Empty ? "" : Name)}");
-            toStringOutput.Add($"ProductIdsAny = {(ProductIdsAny == null ? "null" : $"[{ string.Join(", ", ProductIdsAny)} ]")}");
-            toStringOutput.Add($"ProductIdsAll = {(ProductIdsAll == null ? "null" : $"[{ string.Join(", ", ProductIdsAll)} ]")}");
-            toStringOutput.Add($"QuantityExact = {(QuantityExact == null ? "null" : QuantityExact.ToString())}");
-            toStringOutput.Add($"QuantityMin = {(QuantityMin == null ? "null" : QuantityMin.ToString())}");
-            toStringOutput.Add($"QuantityMax = {(QuantityMax == null ? "null" : QuantityMax.ToString())}");
-            toStringOutput.Add($"AllProducts = {(AllProducts == null ? "null" : AllProducts.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -123,70 +127,93 @@ namespace Square.Models
             }
 
             return obj is CatalogProductSet other &&
-                ((Name == null && other.Name == null) || (Name?.Equals(other.Name) == true)) &&
-                ((ProductIdsAny == null && other.ProductIdsAny == null) || (ProductIdsAny?.Equals(other.ProductIdsAny) == true)) &&
-                ((ProductIdsAll == null && other.ProductIdsAll == null) || (ProductIdsAll?.Equals(other.ProductIdsAll) == true)) &&
-                ((QuantityExact == null && other.QuantityExact == null) || (QuantityExact?.Equals(other.QuantityExact) == true)) &&
-                ((QuantityMin == null && other.QuantityMin == null) || (QuantityMin?.Equals(other.QuantityMin) == true)) &&
-                ((QuantityMax == null && other.QuantityMax == null) || (QuantityMax?.Equals(other.QuantityMax) == true)) &&
-                ((AllProducts == null && other.AllProducts == null) || (AllProducts?.Equals(other.AllProducts) == true));
+                ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
+                ((this.ProductIdsAny == null && other.ProductIdsAny == null) || (this.ProductIdsAny?.Equals(other.ProductIdsAny) == true)) &&
+                ((this.ProductIdsAll == null && other.ProductIdsAll == null) || (this.ProductIdsAll?.Equals(other.ProductIdsAll) == true)) &&
+                ((this.QuantityExact == null && other.QuantityExact == null) || (this.QuantityExact?.Equals(other.QuantityExact) == true)) &&
+                ((this.QuantityMin == null && other.QuantityMin == null) || (this.QuantityMin?.Equals(other.QuantityMin) == true)) &&
+                ((this.QuantityMax == null && other.QuantityMax == null) || (this.QuantityMax?.Equals(other.QuantityMax) == true)) &&
+                ((this.AllProducts == null && other.AllProducts == null) || (this.AllProducts?.Equals(other.AllProducts) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -600323794;
 
-            if (Name != null)
+            if (this.Name != null)
             {
-               hashCode += Name.GetHashCode();
+               hashCode += this.Name.GetHashCode();
             }
 
-            if (ProductIdsAny != null)
+            if (this.ProductIdsAny != null)
             {
-               hashCode += ProductIdsAny.GetHashCode();
+               hashCode += this.ProductIdsAny.GetHashCode();
             }
 
-            if (ProductIdsAll != null)
+            if (this.ProductIdsAll != null)
             {
-               hashCode += ProductIdsAll.GetHashCode();
+               hashCode += this.ProductIdsAll.GetHashCode();
             }
 
-            if (QuantityExact != null)
+            if (this.QuantityExact != null)
             {
-               hashCode += QuantityExact.GetHashCode();
+               hashCode += this.QuantityExact.GetHashCode();
             }
 
-            if (QuantityMin != null)
+            if (this.QuantityMin != null)
             {
-               hashCode += QuantityMin.GetHashCode();
+               hashCode += this.QuantityMin.GetHashCode();
             }
 
-            if (QuantityMax != null)
+            if (this.QuantityMax != null)
             {
-               hashCode += QuantityMax.GetHashCode();
+               hashCode += this.QuantityMax.GetHashCode();
             }
 
-            if (AllProducts != null)
+            if (this.AllProducts != null)
             {
-               hashCode += AllProducts.GetHashCode();
+               hashCode += this.AllProducts.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Name = {(this.Name == null ? "null" : this.Name == string.Empty ? "" : this.Name)}");
+            toStringOutput.Add($"this.ProductIdsAny = {(this.ProductIdsAny == null ? "null" : $"[{string.Join(", ", this.ProductIdsAny)} ]")}");
+            toStringOutput.Add($"this.ProductIdsAll = {(this.ProductIdsAll == null ? "null" : $"[{string.Join(", ", this.ProductIdsAll)} ]")}");
+            toStringOutput.Add($"this.QuantityExact = {(this.QuantityExact == null ? "null" : this.QuantityExact.ToString())}");
+            toStringOutput.Add($"this.QuantityMin = {(this.QuantityMin == null ? "null" : this.QuantityMin.ToString())}");
+            toStringOutput.Add($"this.QuantityMax = {(this.QuantityMax == null ? "null" : this.QuantityMax.ToString())}");
+            toStringOutput.Add($"this.AllProducts = {(this.AllProducts == null ? "null" : this.AllProducts.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .Name(Name)
-                .ProductIdsAny(ProductIdsAny)
-                .ProductIdsAll(ProductIdsAll)
-                .QuantityExact(QuantityExact)
-                .QuantityMin(QuantityMin)
-                .QuantityMax(QuantityMax)
-                .AllProducts(AllProducts);
+                .Name(this.Name)
+                .ProductIdsAny(this.ProductIdsAny)
+                .ProductIdsAll(this.ProductIdsAll)
+                .QuantityExact(this.QuantityExact)
+                .QuantityMin(this.QuantityMin)
+                .QuantityMax(this.QuantityMax)
+                .AllProducts(this.AllProducts);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string name;
@@ -197,59 +224,97 @@ namespace Square.Models
             private long? quantityMax;
             private bool? allProducts;
 
-
-
+             /// <summary>
+             /// Name.
+             /// </summary>
+             /// <param name="name"> name. </param>
+             /// <returns> Builder. </returns>
             public Builder Name(string name)
             {
                 this.name = name;
                 return this;
             }
 
+             /// <summary>
+             /// ProductIdsAny.
+             /// </summary>
+             /// <param name="productIdsAny"> productIdsAny. </param>
+             /// <returns> Builder. </returns>
             public Builder ProductIdsAny(IList<string> productIdsAny)
             {
                 this.productIdsAny = productIdsAny;
                 return this;
             }
 
+             /// <summary>
+             /// ProductIdsAll.
+             /// </summary>
+             /// <param name="productIdsAll"> productIdsAll. </param>
+             /// <returns> Builder. </returns>
             public Builder ProductIdsAll(IList<string> productIdsAll)
             {
                 this.productIdsAll = productIdsAll;
                 return this;
             }
 
+             /// <summary>
+             /// QuantityExact.
+             /// </summary>
+             /// <param name="quantityExact"> quantityExact. </param>
+             /// <returns> Builder. </returns>
             public Builder QuantityExact(long? quantityExact)
             {
                 this.quantityExact = quantityExact;
                 return this;
             }
 
+             /// <summary>
+             /// QuantityMin.
+             /// </summary>
+             /// <param name="quantityMin"> quantityMin. </param>
+             /// <returns> Builder. </returns>
             public Builder QuantityMin(long? quantityMin)
             {
                 this.quantityMin = quantityMin;
                 return this;
             }
 
+             /// <summary>
+             /// QuantityMax.
+             /// </summary>
+             /// <param name="quantityMax"> quantityMax. </param>
+             /// <returns> Builder. </returns>
             public Builder QuantityMax(long? quantityMax)
             {
                 this.quantityMax = quantityMax;
                 return this;
             }
 
+             /// <summary>
+             /// AllProducts.
+             /// </summary>
+             /// <param name="allProducts"> allProducts. </param>
+             /// <returns> Builder. </returns>
             public Builder AllProducts(bool? allProducts)
             {
                 this.allProducts = allProducts;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> CatalogProductSet. </returns>
             public CatalogProductSet Build()
             {
-                return new CatalogProductSet(name,
-                    productIdsAny,
-                    productIdsAll,
-                    quantityExact,
-                    quantityMin,
-                    quantityMax,
-                    allProducts);
+                return new CatalogProductSet(
+                    this.name,
+                    this.productIdsAny,
+                    this.productIdsAll,
+                    this.quantityExact,
+                    this.quantityMin,
+                    this.quantityMax,
+                    this.allProducts);
             }
         }
     }

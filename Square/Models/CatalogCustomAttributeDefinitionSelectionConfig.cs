@@ -1,25 +1,33 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class CatalogCustomAttributeDefinitionSelectionConfig 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// CatalogCustomAttributeDefinitionSelectionConfig.
+    /// </summary>
+    public class CatalogCustomAttributeDefinitionSelectionConfig
     {
-        public CatalogCustomAttributeDefinitionSelectionConfig(int? maxAllowedSelections = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CatalogCustomAttributeDefinitionSelectionConfig"/> class.
+        /// </summary>
+        /// <param name="maxAllowedSelections">max_allowed_selections.</param>
+        /// <param name="allowedSelections">allowed_selections.</param>
+        public CatalogCustomAttributeDefinitionSelectionConfig(
+            int? maxAllowedSelections = null,
             IList<Models.CatalogCustomAttributeDefinitionSelectionConfigCustomAttributeSelection> allowedSelections = null)
         {
-            MaxAllowedSelections = maxAllowedSelections;
-            AllowedSelections = allowedSelections;
+            this.MaxAllowedSelections = maxAllowedSelections;
+            this.AllowedSelections = allowedSelections;
         }
 
         /// <summary>
@@ -38,6 +46,7 @@ namespace Square.Models
         [JsonProperty("allowed_selections", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.CatalogCustomAttributeDefinitionSelectionConfigCustomAttributeSelection> AllowedSelections { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -47,12 +56,7 @@ namespace Square.Models
             return $"CatalogCustomAttributeDefinitionSelectionConfig : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"MaxAllowedSelections = {(MaxAllowedSelections == null ? "null" : MaxAllowedSelections.ToString())}");
-            toStringOutput.Add($"AllowedSelections = {(AllowedSelections == null ? "null" : $"[{ string.Join(", ", AllowedSelections)} ]")}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -66,58 +70,89 @@ namespace Square.Models
             }
 
             return obj is CatalogCustomAttributeDefinitionSelectionConfig other &&
-                ((MaxAllowedSelections == null && other.MaxAllowedSelections == null) || (MaxAllowedSelections?.Equals(other.MaxAllowedSelections) == true)) &&
-                ((AllowedSelections == null && other.AllowedSelections == null) || (AllowedSelections?.Equals(other.AllowedSelections) == true));
+                ((this.MaxAllowedSelections == null && other.MaxAllowedSelections == null) || (this.MaxAllowedSelections?.Equals(other.MaxAllowedSelections) == true)) &&
+                ((this.AllowedSelections == null && other.AllowedSelections == null) || (this.AllowedSelections?.Equals(other.AllowedSelections) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 960165059;
 
-            if (MaxAllowedSelections != null)
+            if (this.MaxAllowedSelections != null)
             {
-               hashCode += MaxAllowedSelections.GetHashCode();
+               hashCode += this.MaxAllowedSelections.GetHashCode();
             }
 
-            if (AllowedSelections != null)
+            if (this.AllowedSelections != null)
             {
-               hashCode += AllowedSelections.GetHashCode();
+               hashCode += this.AllowedSelections.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.MaxAllowedSelections = {(this.MaxAllowedSelections == null ? "null" : this.MaxAllowedSelections.ToString())}");
+            toStringOutput.Add($"this.AllowedSelections = {(this.AllowedSelections == null ? "null" : $"[{string.Join(", ", this.AllowedSelections)} ]")}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .MaxAllowedSelections(MaxAllowedSelections)
-                .AllowedSelections(AllowedSelections);
+                .MaxAllowedSelections(this.MaxAllowedSelections)
+                .AllowedSelections(this.AllowedSelections);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private int? maxAllowedSelections;
             private IList<Models.CatalogCustomAttributeDefinitionSelectionConfigCustomAttributeSelection> allowedSelections;
 
-
-
+             /// <summary>
+             /// MaxAllowedSelections.
+             /// </summary>
+             /// <param name="maxAllowedSelections"> maxAllowedSelections. </param>
+             /// <returns> Builder. </returns>
             public Builder MaxAllowedSelections(int? maxAllowedSelections)
             {
                 this.maxAllowedSelections = maxAllowedSelections;
                 return this;
             }
 
+             /// <summary>
+             /// AllowedSelections.
+             /// </summary>
+             /// <param name="allowedSelections"> allowedSelections. </param>
+             /// <returns> Builder. </returns>
             public Builder AllowedSelections(IList<Models.CatalogCustomAttributeDefinitionSelectionConfigCustomAttributeSelection> allowedSelections)
             {
                 this.allowedSelections = allowedSelections;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> CatalogCustomAttributeDefinitionSelectionConfig. </returns>
             public CatalogCustomAttributeDefinitionSelectionConfig Build()
             {
-                return new CatalogCustomAttributeDefinitionSelectionConfig(maxAllowedSelections,
-                    allowedSelections);
+                return new CatalogCustomAttributeDefinitionSelectionConfig(
+                    this.maxAllowedSelections,
+                    this.allowedSelections);
             }
         }
     }

@@ -1,33 +1,45 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class V1PaymentTax 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// V1PaymentTax.
+    /// </summary>
+    public class V1PaymentTax
     {
-        public V1PaymentTax(IList<Models.Error> errors = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="V1PaymentTax"/> class.
+        /// </summary>
+        /// <param name="errors">errors.</param>
+        /// <param name="name">name.</param>
+        /// <param name="appliedMoney">applied_money.</param>
+        /// <param name="rate">rate.</param>
+        /// <param name="inclusionType">inclusion_type.</param>
+        /// <param name="feeId">fee_id.</param>
+        public V1PaymentTax(
+            IList<Models.Error> errors = null,
             string name = null,
             Models.V1Money appliedMoney = null,
             string rate = null,
             string inclusionType = null,
             string feeId = null)
         {
-            Errors = errors;
-            Name = name;
-            AppliedMoney = appliedMoney;
-            Rate = rate;
-            InclusionType = inclusionType;
-            FeeId = feeId;
+            this.Errors = errors;
+            this.Name = name;
+            this.AppliedMoney = appliedMoney;
+            this.Rate = rate;
+            this.InclusionType = inclusionType;
+            this.FeeId = feeId;
         }
 
         /// <summary>
@@ -43,7 +55,7 @@ namespace Square.Models
         public string Name { get; }
 
         /// <summary>
-        /// Getter for applied_money
+        /// Gets or sets AppliedMoney.
         /// </summary>
         [JsonProperty("applied_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1Money AppliedMoney { get; }
@@ -55,7 +67,7 @@ namespace Square.Models
         public string Rate { get; }
 
         /// <summary>
-        /// Getter for inclusion_type
+        /// Gets or sets InclusionType.
         /// </summary>
         [JsonProperty("inclusion_type", NullValueHandling = NullValueHandling.Ignore)]
         public string InclusionType { get; }
@@ -66,6 +78,7 @@ namespace Square.Models
         [JsonProperty("fee_id", NullValueHandling = NullValueHandling.Ignore)]
         public string FeeId { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -75,16 +88,7 @@ namespace Square.Models
             return $"V1PaymentTax : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Errors = {(Errors == null ? "null" : $"[{ string.Join(", ", Errors)} ]")}");
-            toStringOutput.Add($"Name = {(Name == null ? "null" : Name == string.Empty ? "" : Name)}");
-            toStringOutput.Add($"AppliedMoney = {(AppliedMoney == null ? "null" : AppliedMoney.ToString())}");
-            toStringOutput.Add($"Rate = {(Rate == null ? "null" : Rate == string.Empty ? "" : Rate)}");
-            toStringOutput.Add($"InclusionType = {(InclusionType == null ? "null" : InclusionType.ToString())}");
-            toStringOutput.Add($"FeeId = {(FeeId == null ? "null" : FeeId == string.Empty ? "" : FeeId)}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -98,63 +102,85 @@ namespace Square.Models
             }
 
             return obj is V1PaymentTax other &&
-                ((Errors == null && other.Errors == null) || (Errors?.Equals(other.Errors) == true)) &&
-                ((Name == null && other.Name == null) || (Name?.Equals(other.Name) == true)) &&
-                ((AppliedMoney == null && other.AppliedMoney == null) || (AppliedMoney?.Equals(other.AppliedMoney) == true)) &&
-                ((Rate == null && other.Rate == null) || (Rate?.Equals(other.Rate) == true)) &&
-                ((InclusionType == null && other.InclusionType == null) || (InclusionType?.Equals(other.InclusionType) == true)) &&
-                ((FeeId == null && other.FeeId == null) || (FeeId?.Equals(other.FeeId) == true));
+                ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true)) &&
+                ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
+                ((this.AppliedMoney == null && other.AppliedMoney == null) || (this.AppliedMoney?.Equals(other.AppliedMoney) == true)) &&
+                ((this.Rate == null && other.Rate == null) || (this.Rate?.Equals(other.Rate) == true)) &&
+                ((this.InclusionType == null && other.InclusionType == null) || (this.InclusionType?.Equals(other.InclusionType) == true)) &&
+                ((this.FeeId == null && other.FeeId == null) || (this.FeeId?.Equals(other.FeeId) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 2123751229;
 
-            if (Errors != null)
+            if (this.Errors != null)
             {
-               hashCode += Errors.GetHashCode();
+               hashCode += this.Errors.GetHashCode();
             }
 
-            if (Name != null)
+            if (this.Name != null)
             {
-               hashCode += Name.GetHashCode();
+               hashCode += this.Name.GetHashCode();
             }
 
-            if (AppliedMoney != null)
+            if (this.AppliedMoney != null)
             {
-               hashCode += AppliedMoney.GetHashCode();
+               hashCode += this.AppliedMoney.GetHashCode();
             }
 
-            if (Rate != null)
+            if (this.Rate != null)
             {
-               hashCode += Rate.GetHashCode();
+               hashCode += this.Rate.GetHashCode();
             }
 
-            if (InclusionType != null)
+            if (this.InclusionType != null)
             {
-               hashCode += InclusionType.GetHashCode();
+               hashCode += this.InclusionType.GetHashCode();
             }
 
-            if (FeeId != null)
+            if (this.FeeId != null)
             {
-               hashCode += FeeId.GetHashCode();
+               hashCode += this.FeeId.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Errors = {(this.Errors == null ? "null" : $"[{string.Join(", ", this.Errors)} ]")}");
+            toStringOutput.Add($"this.Name = {(this.Name == null ? "null" : this.Name == string.Empty ? "" : this.Name)}");
+            toStringOutput.Add($"this.AppliedMoney = {(this.AppliedMoney == null ? "null" : this.AppliedMoney.ToString())}");
+            toStringOutput.Add($"this.Rate = {(this.Rate == null ? "null" : this.Rate == string.Empty ? "" : this.Rate)}");
+            toStringOutput.Add($"this.InclusionType = {(this.InclusionType == null ? "null" : this.InclusionType.ToString())}");
+            toStringOutput.Add($"this.FeeId = {(this.FeeId == null ? "null" : this.FeeId == string.Empty ? "" : this.FeeId)}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .Errors(Errors)
-                .Name(Name)
-                .AppliedMoney(AppliedMoney)
-                .Rate(Rate)
-                .InclusionType(InclusionType)
-                .FeeId(FeeId);
+                .Errors(this.Errors)
+                .Name(this.Name)
+                .AppliedMoney(this.AppliedMoney)
+                .Rate(this.Rate)
+                .InclusionType(this.InclusionType)
+                .FeeId(this.FeeId);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private IList<Models.Error> errors;
@@ -164,52 +190,85 @@ namespace Square.Models
             private string inclusionType;
             private string feeId;
 
-
-
+             /// <summary>
+             /// Errors.
+             /// </summary>
+             /// <param name="errors"> errors. </param>
+             /// <returns> Builder. </returns>
             public Builder Errors(IList<Models.Error> errors)
             {
                 this.errors = errors;
                 return this;
             }
 
+             /// <summary>
+             /// Name.
+             /// </summary>
+             /// <param name="name"> name. </param>
+             /// <returns> Builder. </returns>
             public Builder Name(string name)
             {
                 this.name = name;
                 return this;
             }
 
+             /// <summary>
+             /// AppliedMoney.
+             /// </summary>
+             /// <param name="appliedMoney"> appliedMoney. </param>
+             /// <returns> Builder. </returns>
             public Builder AppliedMoney(Models.V1Money appliedMoney)
             {
                 this.appliedMoney = appliedMoney;
                 return this;
             }
 
+             /// <summary>
+             /// Rate.
+             /// </summary>
+             /// <param name="rate"> rate. </param>
+             /// <returns> Builder. </returns>
             public Builder Rate(string rate)
             {
                 this.rate = rate;
                 return this;
             }
 
+             /// <summary>
+             /// InclusionType.
+             /// </summary>
+             /// <param name="inclusionType"> inclusionType. </param>
+             /// <returns> Builder. </returns>
             public Builder InclusionType(string inclusionType)
             {
                 this.inclusionType = inclusionType;
                 return this;
             }
 
+             /// <summary>
+             /// FeeId.
+             /// </summary>
+             /// <param name="feeId"> feeId. </param>
+             /// <returns> Builder. </returns>
             public Builder FeeId(string feeId)
             {
                 this.feeId = feeId;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> V1PaymentTax. </returns>
             public V1PaymentTax Build()
             {
-                return new V1PaymentTax(errors,
-                    name,
-                    appliedMoney,
-                    rate,
-                    inclusionType,
-                    feeId);
+                return new V1PaymentTax(
+                    this.errors,
+                    this.name,
+                    this.appliedMoney,
+                    this.rate,
+                    this.inclusionType,
+                    this.feeId);
             }
         }
     }

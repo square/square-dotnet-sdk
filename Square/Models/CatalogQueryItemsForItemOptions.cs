@@ -1,23 +1,30 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class CatalogQueryItemsForItemOptions 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// CatalogQueryItemsForItemOptions.
+    /// </summary>
+    public class CatalogQueryItemsForItemOptions
     {
-        public CatalogQueryItemsForItemOptions(IList<string> itemOptionIds = null)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CatalogQueryItemsForItemOptions"/> class.
+        /// </summary>
+        /// <param name="itemOptionIds">item_option_ids.</param>
+        public CatalogQueryItemsForItemOptions(
+            IList<string> itemOptionIds = null)
         {
-            ItemOptionIds = itemOptionIds;
+            this.ItemOptionIds = itemOptionIds;
         }
 
         /// <summary>
@@ -28,6 +35,7 @@ namespace Square.Models
         [JsonProperty("item_option_ids", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> ItemOptionIds { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -37,11 +45,7 @@ namespace Square.Models
             return $"CatalogQueryItemsForItemOptions : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"ItemOptionIds = {(ItemOptionIds == null ? "null" : $"[{ string.Join(", ", ItemOptionIds)} ]")}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -55,43 +59,68 @@ namespace Square.Models
             }
 
             return obj is CatalogQueryItemsForItemOptions other &&
-                ((ItemOptionIds == null && other.ItemOptionIds == null) || (ItemOptionIds?.Equals(other.ItemOptionIds) == true));
+                ((this.ItemOptionIds == null && other.ItemOptionIds == null) || (this.ItemOptionIds?.Equals(other.ItemOptionIds) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 447703827;
 
-            if (ItemOptionIds != null)
+            if (this.ItemOptionIds != null)
             {
-               hashCode += ItemOptionIds.GetHashCode();
+               hashCode += this.ItemOptionIds.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.ItemOptionIds = {(this.ItemOptionIds == null ? "null" : $"[{string.Join(", ", this.ItemOptionIds)} ]")}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .ItemOptionIds(ItemOptionIds);
+                .ItemOptionIds(this.ItemOptionIds);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private IList<string> itemOptionIds;
 
-
-
+             /// <summary>
+             /// ItemOptionIds.
+             /// </summary>
+             /// <param name="itemOptionIds"> itemOptionIds. </param>
+             /// <returns> Builder. </returns>
             public Builder ItemOptionIds(IList<string> itemOptionIds)
             {
                 this.itemOptionIds = itemOptionIds;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> CatalogQueryItemsForItemOptions. </returns>
             public CatalogQueryItemsForItemOptions Build()
             {
-                return new CatalogQueryItemsForItemOptions(itemOptionIds);
+                return new CatalogQueryItemsForItemOptions(
+                    this.itemOptionIds);
             }
         }
     }

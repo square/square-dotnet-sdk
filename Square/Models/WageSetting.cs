@@ -1,33 +1,45 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class WageSetting 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// WageSetting.
+    /// </summary>
+    public class WageSetting
     {
-        public WageSetting(string teamMemberId = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="WageSetting"/> class.
+        /// </summary>
+        /// <param name="teamMemberId">team_member_id.</param>
+        /// <param name="jobAssignments">job_assignments.</param>
+        /// <param name="isOvertimeExempt">is_overtime_exempt.</param>
+        /// <param name="version">version.</param>
+        /// <param name="createdAt">created_at.</param>
+        /// <param name="updatedAt">updated_at.</param>
+        public WageSetting(
+            string teamMemberId = null,
             IList<Models.JobAssignment> jobAssignments = null,
             bool? isOvertimeExempt = null,
             int? version = null,
             string createdAt = null,
             string updatedAt = null)
         {
-            TeamMemberId = teamMemberId;
-            JobAssignments = jobAssignments;
-            IsOvertimeExempt = isOvertimeExempt;
-            Version = version;
-            CreatedAt = createdAt;
-            UpdatedAt = updatedAt;
+            this.TeamMemberId = teamMemberId;
+            this.JobAssignments = jobAssignments;
+            this.IsOvertimeExempt = isOvertimeExempt;
+            this.Version = version;
+            this.CreatedAt = createdAt;
+            this.UpdatedAt = updatedAt;
         }
 
         /// <summary>
@@ -75,6 +87,7 @@ namespace Square.Models
         [JsonProperty("updated_at", NullValueHandling = NullValueHandling.Ignore)]
         public string UpdatedAt { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -84,16 +97,7 @@ namespace Square.Models
             return $"WageSetting : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"TeamMemberId = {(TeamMemberId == null ? "null" : TeamMemberId == string.Empty ? "" : TeamMemberId)}");
-            toStringOutput.Add($"JobAssignments = {(JobAssignments == null ? "null" : $"[{ string.Join(", ", JobAssignments)} ]")}");
-            toStringOutput.Add($"IsOvertimeExempt = {(IsOvertimeExempt == null ? "null" : IsOvertimeExempt.ToString())}");
-            toStringOutput.Add($"Version = {(Version == null ? "null" : Version.ToString())}");
-            toStringOutput.Add($"CreatedAt = {(CreatedAt == null ? "null" : CreatedAt == string.Empty ? "" : CreatedAt)}");
-            toStringOutput.Add($"UpdatedAt = {(UpdatedAt == null ? "null" : UpdatedAt == string.Empty ? "" : UpdatedAt)}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -107,63 +111,85 @@ namespace Square.Models
             }
 
             return obj is WageSetting other &&
-                ((TeamMemberId == null && other.TeamMemberId == null) || (TeamMemberId?.Equals(other.TeamMemberId) == true)) &&
-                ((JobAssignments == null && other.JobAssignments == null) || (JobAssignments?.Equals(other.JobAssignments) == true)) &&
-                ((IsOvertimeExempt == null && other.IsOvertimeExempt == null) || (IsOvertimeExempt?.Equals(other.IsOvertimeExempt) == true)) &&
-                ((Version == null && other.Version == null) || (Version?.Equals(other.Version) == true)) &&
-                ((CreatedAt == null && other.CreatedAt == null) || (CreatedAt?.Equals(other.CreatedAt) == true)) &&
-                ((UpdatedAt == null && other.UpdatedAt == null) || (UpdatedAt?.Equals(other.UpdatedAt) == true));
+                ((this.TeamMemberId == null && other.TeamMemberId == null) || (this.TeamMemberId?.Equals(other.TeamMemberId) == true)) &&
+                ((this.JobAssignments == null && other.JobAssignments == null) || (this.JobAssignments?.Equals(other.JobAssignments) == true)) &&
+                ((this.IsOvertimeExempt == null && other.IsOvertimeExempt == null) || (this.IsOvertimeExempt?.Equals(other.IsOvertimeExempt) == true)) &&
+                ((this.Version == null && other.Version == null) || (this.Version?.Equals(other.Version) == true)) &&
+                ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true)) &&
+                ((this.UpdatedAt == null && other.UpdatedAt == null) || (this.UpdatedAt?.Equals(other.UpdatedAt) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -742786902;
 
-            if (TeamMemberId != null)
+            if (this.TeamMemberId != null)
             {
-               hashCode += TeamMemberId.GetHashCode();
+               hashCode += this.TeamMemberId.GetHashCode();
             }
 
-            if (JobAssignments != null)
+            if (this.JobAssignments != null)
             {
-               hashCode += JobAssignments.GetHashCode();
+               hashCode += this.JobAssignments.GetHashCode();
             }
 
-            if (IsOvertimeExempt != null)
+            if (this.IsOvertimeExempt != null)
             {
-               hashCode += IsOvertimeExempt.GetHashCode();
+               hashCode += this.IsOvertimeExempt.GetHashCode();
             }
 
-            if (Version != null)
+            if (this.Version != null)
             {
-               hashCode += Version.GetHashCode();
+               hashCode += this.Version.GetHashCode();
             }
 
-            if (CreatedAt != null)
+            if (this.CreatedAt != null)
             {
-               hashCode += CreatedAt.GetHashCode();
+               hashCode += this.CreatedAt.GetHashCode();
             }
 
-            if (UpdatedAt != null)
+            if (this.UpdatedAt != null)
             {
-               hashCode += UpdatedAt.GetHashCode();
+               hashCode += this.UpdatedAt.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.TeamMemberId = {(this.TeamMemberId == null ? "null" : this.TeamMemberId == string.Empty ? "" : this.TeamMemberId)}");
+            toStringOutput.Add($"this.JobAssignments = {(this.JobAssignments == null ? "null" : $"[{string.Join(", ", this.JobAssignments)} ]")}");
+            toStringOutput.Add($"this.IsOvertimeExempt = {(this.IsOvertimeExempt == null ? "null" : this.IsOvertimeExempt.ToString())}");
+            toStringOutput.Add($"this.Version = {(this.Version == null ? "null" : this.Version.ToString())}");
+            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt == string.Empty ? "" : this.CreatedAt)}");
+            toStringOutput.Add($"this.UpdatedAt = {(this.UpdatedAt == null ? "null" : this.UpdatedAt == string.Empty ? "" : this.UpdatedAt)}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .TeamMemberId(TeamMemberId)
-                .JobAssignments(JobAssignments)
-                .IsOvertimeExempt(IsOvertimeExempt)
-                .Version(Version)
-                .CreatedAt(CreatedAt)
-                .UpdatedAt(UpdatedAt);
+                .TeamMemberId(this.TeamMemberId)
+                .JobAssignments(this.JobAssignments)
+                .IsOvertimeExempt(this.IsOvertimeExempt)
+                .Version(this.Version)
+                .CreatedAt(this.CreatedAt)
+                .UpdatedAt(this.UpdatedAt);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string teamMemberId;
@@ -173,52 +199,85 @@ namespace Square.Models
             private string createdAt;
             private string updatedAt;
 
-
-
+             /// <summary>
+             /// TeamMemberId.
+             /// </summary>
+             /// <param name="teamMemberId"> teamMemberId. </param>
+             /// <returns> Builder. </returns>
             public Builder TeamMemberId(string teamMemberId)
             {
                 this.teamMemberId = teamMemberId;
                 return this;
             }
 
+             /// <summary>
+             /// JobAssignments.
+             /// </summary>
+             /// <param name="jobAssignments"> jobAssignments. </param>
+             /// <returns> Builder. </returns>
             public Builder JobAssignments(IList<Models.JobAssignment> jobAssignments)
             {
                 this.jobAssignments = jobAssignments;
                 return this;
             }
 
+             /// <summary>
+             /// IsOvertimeExempt.
+             /// </summary>
+             /// <param name="isOvertimeExempt"> isOvertimeExempt. </param>
+             /// <returns> Builder. </returns>
             public Builder IsOvertimeExempt(bool? isOvertimeExempt)
             {
                 this.isOvertimeExempt = isOvertimeExempt;
                 return this;
             }
 
+             /// <summary>
+             /// Version.
+             /// </summary>
+             /// <param name="version"> version. </param>
+             /// <returns> Builder. </returns>
             public Builder Version(int? version)
             {
                 this.version = version;
                 return this;
             }
 
+             /// <summary>
+             /// CreatedAt.
+             /// </summary>
+             /// <param name="createdAt"> createdAt. </param>
+             /// <returns> Builder. </returns>
             public Builder CreatedAt(string createdAt)
             {
                 this.createdAt = createdAt;
                 return this;
             }
 
+             /// <summary>
+             /// UpdatedAt.
+             /// </summary>
+             /// <param name="updatedAt"> updatedAt. </param>
+             /// <returns> Builder. </returns>
             public Builder UpdatedAt(string updatedAt)
             {
                 this.updatedAt = updatedAt;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> WageSetting. </returns>
             public WageSetting Build()
             {
-                return new WageSetting(teamMemberId,
-                    jobAssignments,
-                    isOvertimeExempt,
-                    version,
-                    createdAt,
-                    updatedAt);
+                return new WageSetting(
+                    this.teamMemberId,
+                    this.jobAssignments,
+                    this.isOvertimeExempt,
+                    this.version,
+                    this.createdAt,
+                    this.updatedAt);
             }
         }
     }

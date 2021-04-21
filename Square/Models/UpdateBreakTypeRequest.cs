@@ -1,23 +1,30 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class UpdateBreakTypeRequest 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// UpdateBreakTypeRequest.
+    /// </summary>
+    public class UpdateBreakTypeRequest
     {
-        public UpdateBreakTypeRequest(Models.BreakType breakType)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UpdateBreakTypeRequest"/> class.
+        /// </summary>
+        /// <param name="breakType">break_type.</param>
+        public UpdateBreakTypeRequest(
+            Models.BreakType breakType)
         {
-            BreakType = breakType;
+            this.BreakType = breakType;
         }
 
         /// <summary>
@@ -27,6 +34,7 @@ namespace Square.Models
         [JsonProperty("break_type")]
         public Models.BreakType BreakType { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -36,11 +44,7 @@ namespace Square.Models
             return $"UpdateBreakTypeRequest : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"BreakType = {(BreakType == null ? "null" : BreakType.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -54,45 +58,74 @@ namespace Square.Models
             }
 
             return obj is UpdateBreakTypeRequest other &&
-                ((BreakType == null && other.BreakType == null) || (BreakType?.Equals(other.BreakType) == true));
+                ((this.BreakType == null && other.BreakType == null) || (this.BreakType?.Equals(other.BreakType) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -934394320;
 
-            if (BreakType != null)
+            if (this.BreakType != null)
             {
-               hashCode += BreakType.GetHashCode();
+               hashCode += this.BreakType.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.BreakType = {(this.BreakType == null ? "null" : this.BreakType.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
-            var builder = new Builder(BreakType);
+            var builder = new Builder(
+                this.BreakType);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private Models.BreakType breakType;
 
-            public Builder(Models.BreakType breakType)
+            public Builder(
+                Models.BreakType breakType)
             {
                 this.breakType = breakType;
             }
 
+             /// <summary>
+             /// BreakType.
+             /// </summary>
+             /// <param name="breakType"> breakType. </param>
+             /// <returns> Builder. </returns>
             public Builder BreakType(Models.BreakType breakType)
             {
                 this.breakType = breakType;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> UpdateBreakTypeRequest. </returns>
             public UpdateBreakTypeRequest Build()
             {
-                return new UpdateBreakTypeRequest(breakType);
+                return new UpdateBreakTypeRequest(
+                    this.breakType);
             }
         }
     }

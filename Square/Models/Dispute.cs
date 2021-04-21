@@ -1,21 +1,41 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class Dispute 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// Dispute.
+    /// </summary>
+    public class Dispute
     {
-        public Dispute(string disputeId = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Dispute"/> class.
+        /// </summary>
+        /// <param name="disputeId">dispute_id.</param>
+        /// <param name="amountMoney">amount_money.</param>
+        /// <param name="reason">reason.</param>
+        /// <param name="state">state.</param>
+        /// <param name="dueAt">due_at.</param>
+        /// <param name="disputedPayment">disputed_payment.</param>
+        /// <param name="evidenceIds">evidence_ids.</param>
+        /// <param name="cardBrand">card_brand.</param>
+        /// <param name="createdAt">created_at.</param>
+        /// <param name="updatedAt">updated_at.</param>
+        /// <param name="brandDisputeId">brand_dispute_id.</param>
+        /// <param name="reportedDate">reported_date.</param>
+        /// <param name="version">version.</param>
+        /// <param name="locationId">location_id.</param>
+        public Dispute(
+            string disputeId = null,
             Models.Money amountMoney = null,
             string reason = null,
             string state = null,
@@ -30,20 +50,20 @@ namespace Square.Models
             int? version = null,
             string locationId = null)
         {
-            DisputeId = disputeId;
-            AmountMoney = amountMoney;
-            Reason = reason;
-            State = state;
-            DueAt = dueAt;
-            DisputedPayment = disputedPayment;
-            EvidenceIds = evidenceIds;
-            CardBrand = cardBrand;
-            CreatedAt = createdAt;
-            UpdatedAt = updatedAt;
-            BrandDisputeId = brandDisputeId;
-            ReportedDate = reportedDate;
-            Version = version;
-            LocationId = locationId;
+            this.DisputeId = disputeId;
+            this.AmountMoney = amountMoney;
+            this.Reason = reason;
+            this.State = state;
+            this.DueAt = dueAt;
+            this.DisputedPayment = disputedPayment;
+            this.EvidenceIds = evidenceIds;
+            this.CardBrand = cardBrand;
+            this.CreatedAt = createdAt;
+            this.UpdatedAt = updatedAt;
+            this.BrandDisputeId = brandDisputeId;
+            this.ReportedDate = reportedDate;
+            this.Version = version;
+            this.LocationId = locationId;
         }
 
         /// <summary>
@@ -136,6 +156,7 @@ namespace Square.Models
         [JsonProperty("location_id", NullValueHandling = NullValueHandling.Ignore)]
         public string LocationId { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -145,24 +166,7 @@ namespace Square.Models
             return $"Dispute : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"DisputeId = {(DisputeId == null ? "null" : DisputeId == string.Empty ? "" : DisputeId)}");
-            toStringOutput.Add($"AmountMoney = {(AmountMoney == null ? "null" : AmountMoney.ToString())}");
-            toStringOutput.Add($"Reason = {(Reason == null ? "null" : Reason.ToString())}");
-            toStringOutput.Add($"State = {(State == null ? "null" : State.ToString())}");
-            toStringOutput.Add($"DueAt = {(DueAt == null ? "null" : DueAt == string.Empty ? "" : DueAt)}");
-            toStringOutput.Add($"DisputedPayment = {(DisputedPayment == null ? "null" : DisputedPayment.ToString())}");
-            toStringOutput.Add($"EvidenceIds = {(EvidenceIds == null ? "null" : $"[{ string.Join(", ", EvidenceIds)} ]")}");
-            toStringOutput.Add($"CardBrand = {(CardBrand == null ? "null" : CardBrand.ToString())}");
-            toStringOutput.Add($"CreatedAt = {(CreatedAt == null ? "null" : CreatedAt == string.Empty ? "" : CreatedAt)}");
-            toStringOutput.Add($"UpdatedAt = {(UpdatedAt == null ? "null" : UpdatedAt == string.Empty ? "" : UpdatedAt)}");
-            toStringOutput.Add($"BrandDisputeId = {(BrandDisputeId == null ? "null" : BrandDisputeId == string.Empty ? "" : BrandDisputeId)}");
-            toStringOutput.Add($"ReportedDate = {(ReportedDate == null ? "null" : ReportedDate == string.Empty ? "" : ReportedDate)}");
-            toStringOutput.Add($"Version = {(Version == null ? "null" : Version.ToString())}");
-            toStringOutput.Add($"LocationId = {(LocationId == null ? "null" : LocationId == string.Empty ? "" : LocationId)}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -176,119 +180,149 @@ namespace Square.Models
             }
 
             return obj is Dispute other &&
-                ((DisputeId == null && other.DisputeId == null) || (DisputeId?.Equals(other.DisputeId) == true)) &&
-                ((AmountMoney == null && other.AmountMoney == null) || (AmountMoney?.Equals(other.AmountMoney) == true)) &&
-                ((Reason == null && other.Reason == null) || (Reason?.Equals(other.Reason) == true)) &&
-                ((State == null && other.State == null) || (State?.Equals(other.State) == true)) &&
-                ((DueAt == null && other.DueAt == null) || (DueAt?.Equals(other.DueAt) == true)) &&
-                ((DisputedPayment == null && other.DisputedPayment == null) || (DisputedPayment?.Equals(other.DisputedPayment) == true)) &&
-                ((EvidenceIds == null && other.EvidenceIds == null) || (EvidenceIds?.Equals(other.EvidenceIds) == true)) &&
-                ((CardBrand == null && other.CardBrand == null) || (CardBrand?.Equals(other.CardBrand) == true)) &&
-                ((CreatedAt == null && other.CreatedAt == null) || (CreatedAt?.Equals(other.CreatedAt) == true)) &&
-                ((UpdatedAt == null && other.UpdatedAt == null) || (UpdatedAt?.Equals(other.UpdatedAt) == true)) &&
-                ((BrandDisputeId == null && other.BrandDisputeId == null) || (BrandDisputeId?.Equals(other.BrandDisputeId) == true)) &&
-                ((ReportedDate == null && other.ReportedDate == null) || (ReportedDate?.Equals(other.ReportedDate) == true)) &&
-                ((Version == null && other.Version == null) || (Version?.Equals(other.Version) == true)) &&
-                ((LocationId == null && other.LocationId == null) || (LocationId?.Equals(other.LocationId) == true));
+                ((this.DisputeId == null && other.DisputeId == null) || (this.DisputeId?.Equals(other.DisputeId) == true)) &&
+                ((this.AmountMoney == null && other.AmountMoney == null) || (this.AmountMoney?.Equals(other.AmountMoney) == true)) &&
+                ((this.Reason == null && other.Reason == null) || (this.Reason?.Equals(other.Reason) == true)) &&
+                ((this.State == null && other.State == null) || (this.State?.Equals(other.State) == true)) &&
+                ((this.DueAt == null && other.DueAt == null) || (this.DueAt?.Equals(other.DueAt) == true)) &&
+                ((this.DisputedPayment == null && other.DisputedPayment == null) || (this.DisputedPayment?.Equals(other.DisputedPayment) == true)) &&
+                ((this.EvidenceIds == null && other.EvidenceIds == null) || (this.EvidenceIds?.Equals(other.EvidenceIds) == true)) &&
+                ((this.CardBrand == null && other.CardBrand == null) || (this.CardBrand?.Equals(other.CardBrand) == true)) &&
+                ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true)) &&
+                ((this.UpdatedAt == null && other.UpdatedAt == null) || (this.UpdatedAt?.Equals(other.UpdatedAt) == true)) &&
+                ((this.BrandDisputeId == null && other.BrandDisputeId == null) || (this.BrandDisputeId?.Equals(other.BrandDisputeId) == true)) &&
+                ((this.ReportedDate == null && other.ReportedDate == null) || (this.ReportedDate?.Equals(other.ReportedDate) == true)) &&
+                ((this.Version == null && other.Version == null) || (this.Version?.Equals(other.Version) == true)) &&
+                ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 1993475725;
 
-            if (DisputeId != null)
+            if (this.DisputeId != null)
             {
-               hashCode += DisputeId.GetHashCode();
+               hashCode += this.DisputeId.GetHashCode();
             }
 
-            if (AmountMoney != null)
+            if (this.AmountMoney != null)
             {
-               hashCode += AmountMoney.GetHashCode();
+               hashCode += this.AmountMoney.GetHashCode();
             }
 
-            if (Reason != null)
+            if (this.Reason != null)
             {
-               hashCode += Reason.GetHashCode();
+               hashCode += this.Reason.GetHashCode();
             }
 
-            if (State != null)
+            if (this.State != null)
             {
-               hashCode += State.GetHashCode();
+               hashCode += this.State.GetHashCode();
             }
 
-            if (DueAt != null)
+            if (this.DueAt != null)
             {
-               hashCode += DueAt.GetHashCode();
+               hashCode += this.DueAt.GetHashCode();
             }
 
-            if (DisputedPayment != null)
+            if (this.DisputedPayment != null)
             {
-               hashCode += DisputedPayment.GetHashCode();
+               hashCode += this.DisputedPayment.GetHashCode();
             }
 
-            if (EvidenceIds != null)
+            if (this.EvidenceIds != null)
             {
-               hashCode += EvidenceIds.GetHashCode();
+               hashCode += this.EvidenceIds.GetHashCode();
             }
 
-            if (CardBrand != null)
+            if (this.CardBrand != null)
             {
-               hashCode += CardBrand.GetHashCode();
+               hashCode += this.CardBrand.GetHashCode();
             }
 
-            if (CreatedAt != null)
+            if (this.CreatedAt != null)
             {
-               hashCode += CreatedAt.GetHashCode();
+               hashCode += this.CreatedAt.GetHashCode();
             }
 
-            if (UpdatedAt != null)
+            if (this.UpdatedAt != null)
             {
-               hashCode += UpdatedAt.GetHashCode();
+               hashCode += this.UpdatedAt.GetHashCode();
             }
 
-            if (BrandDisputeId != null)
+            if (this.BrandDisputeId != null)
             {
-               hashCode += BrandDisputeId.GetHashCode();
+               hashCode += this.BrandDisputeId.GetHashCode();
             }
 
-            if (ReportedDate != null)
+            if (this.ReportedDate != null)
             {
-               hashCode += ReportedDate.GetHashCode();
+               hashCode += this.ReportedDate.GetHashCode();
             }
 
-            if (Version != null)
+            if (this.Version != null)
             {
-               hashCode += Version.GetHashCode();
+               hashCode += this.Version.GetHashCode();
             }
 
-            if (LocationId != null)
+            if (this.LocationId != null)
             {
-               hashCode += LocationId.GetHashCode();
+               hashCode += this.LocationId.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.DisputeId = {(this.DisputeId == null ? "null" : this.DisputeId == string.Empty ? "" : this.DisputeId)}");
+            toStringOutput.Add($"this.AmountMoney = {(this.AmountMoney == null ? "null" : this.AmountMoney.ToString())}");
+            toStringOutput.Add($"this.Reason = {(this.Reason == null ? "null" : this.Reason.ToString())}");
+            toStringOutput.Add($"this.State = {(this.State == null ? "null" : this.State.ToString())}");
+            toStringOutput.Add($"this.DueAt = {(this.DueAt == null ? "null" : this.DueAt == string.Empty ? "" : this.DueAt)}");
+            toStringOutput.Add($"this.DisputedPayment = {(this.DisputedPayment == null ? "null" : this.DisputedPayment.ToString())}");
+            toStringOutput.Add($"this.EvidenceIds = {(this.EvidenceIds == null ? "null" : $"[{string.Join(", ", this.EvidenceIds)} ]")}");
+            toStringOutput.Add($"this.CardBrand = {(this.CardBrand == null ? "null" : this.CardBrand.ToString())}");
+            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt == string.Empty ? "" : this.CreatedAt)}");
+            toStringOutput.Add($"this.UpdatedAt = {(this.UpdatedAt == null ? "null" : this.UpdatedAt == string.Empty ? "" : this.UpdatedAt)}");
+            toStringOutput.Add($"this.BrandDisputeId = {(this.BrandDisputeId == null ? "null" : this.BrandDisputeId == string.Empty ? "" : this.BrandDisputeId)}");
+            toStringOutput.Add($"this.ReportedDate = {(this.ReportedDate == null ? "null" : this.ReportedDate == string.Empty ? "" : this.ReportedDate)}");
+            toStringOutput.Add($"this.Version = {(this.Version == null ? "null" : this.Version.ToString())}");
+            toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId == string.Empty ? "" : this.LocationId)}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .DisputeId(DisputeId)
-                .AmountMoney(AmountMoney)
-                .Reason(Reason)
-                .State(State)
-                .DueAt(DueAt)
-                .DisputedPayment(DisputedPayment)
-                .EvidenceIds(EvidenceIds)
-                .CardBrand(CardBrand)
-                .CreatedAt(CreatedAt)
-                .UpdatedAt(UpdatedAt)
-                .BrandDisputeId(BrandDisputeId)
-                .ReportedDate(ReportedDate)
-                .Version(Version)
-                .LocationId(LocationId);
+                .DisputeId(this.DisputeId)
+                .AmountMoney(this.AmountMoney)
+                .Reason(this.Reason)
+                .State(this.State)
+                .DueAt(this.DueAt)
+                .DisputedPayment(this.DisputedPayment)
+                .EvidenceIds(this.EvidenceIds)
+                .CardBrand(this.CardBrand)
+                .CreatedAt(this.CreatedAt)
+                .UpdatedAt(this.UpdatedAt)
+                .BrandDisputeId(this.BrandDisputeId)
+                .ReportedDate(this.ReportedDate)
+                .Version(this.Version)
+                .LocationId(this.LocationId);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string disputeId;
@@ -306,108 +340,181 @@ namespace Square.Models
             private int? version;
             private string locationId;
 
-
-
+             /// <summary>
+             /// DisputeId.
+             /// </summary>
+             /// <param name="disputeId"> disputeId. </param>
+             /// <returns> Builder. </returns>
             public Builder DisputeId(string disputeId)
             {
                 this.disputeId = disputeId;
                 return this;
             }
 
+             /// <summary>
+             /// AmountMoney.
+             /// </summary>
+             /// <param name="amountMoney"> amountMoney. </param>
+             /// <returns> Builder. </returns>
             public Builder AmountMoney(Models.Money amountMoney)
             {
                 this.amountMoney = amountMoney;
                 return this;
             }
 
+             /// <summary>
+             /// Reason.
+             /// </summary>
+             /// <param name="reason"> reason. </param>
+             /// <returns> Builder. </returns>
             public Builder Reason(string reason)
             {
                 this.reason = reason;
                 return this;
             }
 
+             /// <summary>
+             /// State.
+             /// </summary>
+             /// <param name="state"> state. </param>
+             /// <returns> Builder. </returns>
             public Builder State(string state)
             {
                 this.state = state;
                 return this;
             }
 
+             /// <summary>
+             /// DueAt.
+             /// </summary>
+             /// <param name="dueAt"> dueAt. </param>
+             /// <returns> Builder. </returns>
             public Builder DueAt(string dueAt)
             {
                 this.dueAt = dueAt;
                 return this;
             }
 
+             /// <summary>
+             /// DisputedPayment.
+             /// </summary>
+             /// <param name="disputedPayment"> disputedPayment. </param>
+             /// <returns> Builder. </returns>
             public Builder DisputedPayment(Models.DisputedPayment disputedPayment)
             {
                 this.disputedPayment = disputedPayment;
                 return this;
             }
 
+             /// <summary>
+             /// EvidenceIds.
+             /// </summary>
+             /// <param name="evidenceIds"> evidenceIds. </param>
+             /// <returns> Builder. </returns>
             public Builder EvidenceIds(IList<string> evidenceIds)
             {
                 this.evidenceIds = evidenceIds;
                 return this;
             }
 
+             /// <summary>
+             /// CardBrand.
+             /// </summary>
+             /// <param name="cardBrand"> cardBrand. </param>
+             /// <returns> Builder. </returns>
             public Builder CardBrand(string cardBrand)
             {
                 this.cardBrand = cardBrand;
                 return this;
             }
 
+             /// <summary>
+             /// CreatedAt.
+             /// </summary>
+             /// <param name="createdAt"> createdAt. </param>
+             /// <returns> Builder. </returns>
             public Builder CreatedAt(string createdAt)
             {
                 this.createdAt = createdAt;
                 return this;
             }
 
+             /// <summary>
+             /// UpdatedAt.
+             /// </summary>
+             /// <param name="updatedAt"> updatedAt. </param>
+             /// <returns> Builder. </returns>
             public Builder UpdatedAt(string updatedAt)
             {
                 this.updatedAt = updatedAt;
                 return this;
             }
 
+             /// <summary>
+             /// BrandDisputeId.
+             /// </summary>
+             /// <param name="brandDisputeId"> brandDisputeId. </param>
+             /// <returns> Builder. </returns>
             public Builder BrandDisputeId(string brandDisputeId)
             {
                 this.brandDisputeId = brandDisputeId;
                 return this;
             }
 
+             /// <summary>
+             /// ReportedDate.
+             /// </summary>
+             /// <param name="reportedDate"> reportedDate. </param>
+             /// <returns> Builder. </returns>
             public Builder ReportedDate(string reportedDate)
             {
                 this.reportedDate = reportedDate;
                 return this;
             }
 
+             /// <summary>
+             /// Version.
+             /// </summary>
+             /// <param name="version"> version. </param>
+             /// <returns> Builder. </returns>
             public Builder Version(int? version)
             {
                 this.version = version;
                 return this;
             }
 
+             /// <summary>
+             /// LocationId.
+             /// </summary>
+             /// <param name="locationId"> locationId. </param>
+             /// <returns> Builder. </returns>
             public Builder LocationId(string locationId)
             {
                 this.locationId = locationId;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> Dispute. </returns>
             public Dispute Build()
             {
-                return new Dispute(disputeId,
-                    amountMoney,
-                    reason,
-                    state,
-                    dueAt,
-                    disputedPayment,
-                    evidenceIds,
-                    cardBrand,
-                    createdAt,
-                    updatedAt,
-                    brandDisputeId,
-                    reportedDate,
-                    version,
-                    locationId);
+                return new Dispute(
+                    this.disputeId,
+                    this.amountMoney,
+                    this.reason,
+                    this.state,
+                    this.dueAt,
+                    this.disputedPayment,
+                    this.evidenceIds,
+                    this.cardBrand,
+                    this.createdAt,
+                    this.updatedAt,
+                    this.brandDisputeId,
+                    this.reportedDate,
+                    this.version,
+                    this.locationId);
             }
         }
     }

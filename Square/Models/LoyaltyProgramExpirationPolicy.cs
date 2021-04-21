@@ -1,23 +1,30 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class LoyaltyProgramExpirationPolicy 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// LoyaltyProgramExpirationPolicy.
+    /// </summary>
+    public class LoyaltyProgramExpirationPolicy
     {
-        public LoyaltyProgramExpirationPolicy(string expirationDuration)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LoyaltyProgramExpirationPolicy"/> class.
+        /// </summary>
+        /// <param name="expirationDuration">expiration_duration.</param>
+        public LoyaltyProgramExpirationPolicy(
+            string expirationDuration)
         {
-            ExpirationDuration = expirationDuration;
+            this.ExpirationDuration = expirationDuration;
         }
 
         /// <summary>
@@ -26,6 +33,7 @@ namespace Square.Models
         [JsonProperty("expiration_duration")]
         public string ExpirationDuration { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -35,11 +43,7 @@ namespace Square.Models
             return $"LoyaltyProgramExpirationPolicy : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"ExpirationDuration = {(ExpirationDuration == null ? "null" : ExpirationDuration == string.Empty ? "" : ExpirationDuration)}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -53,45 +57,74 @@ namespace Square.Models
             }
 
             return obj is LoyaltyProgramExpirationPolicy other &&
-                ((ExpirationDuration == null && other.ExpirationDuration == null) || (ExpirationDuration?.Equals(other.ExpirationDuration) == true));
+                ((this.ExpirationDuration == null && other.ExpirationDuration == null) || (this.ExpirationDuration?.Equals(other.ExpirationDuration) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1618599332;
 
-            if (ExpirationDuration != null)
+            if (this.ExpirationDuration != null)
             {
-               hashCode += ExpirationDuration.GetHashCode();
+               hashCode += this.ExpirationDuration.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.ExpirationDuration = {(this.ExpirationDuration == null ? "null" : this.ExpirationDuration == string.Empty ? "" : this.ExpirationDuration)}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
-            var builder = new Builder(ExpirationDuration);
+            var builder = new Builder(
+                this.ExpirationDuration);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string expirationDuration;
 
-            public Builder(string expirationDuration)
+            public Builder(
+                string expirationDuration)
             {
                 this.expirationDuration = expirationDuration;
             }
 
+             /// <summary>
+             /// ExpirationDuration.
+             /// </summary>
+             /// <param name="expirationDuration"> expirationDuration. </param>
+             /// <returns> Builder. </returns>
             public Builder ExpirationDuration(string expirationDuration)
             {
                 this.expirationDuration = expirationDuration;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> LoyaltyProgramExpirationPolicy. </returns>
             public LoyaltyProgramExpirationPolicy Build()
             {
-                return new LoyaltyProgramExpirationPolicy(expirationDuration);
+                return new LoyaltyProgramExpirationPolicy(
+                    this.expirationDuration);
             }
         }
     }

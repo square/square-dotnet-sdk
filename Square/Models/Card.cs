@@ -1,21 +1,38 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class Card 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// Card.
+    /// </summary>
+    public class Card
     {
-        public Card(string id = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Card"/> class.
+        /// </summary>
+        /// <param name="id">id.</param>
+        /// <param name="cardBrand">card_brand.</param>
+        /// <param name="last4">last_4.</param>
+        /// <param name="expMonth">exp_month.</param>
+        /// <param name="expYear">exp_year.</param>
+        /// <param name="cardholderName">cardholder_name.</param>
+        /// <param name="billingAddress">billing_address.</param>
+        /// <param name="fingerprint">fingerprint.</param>
+        /// <param name="cardType">card_type.</param>
+        /// <param name="prepaidType">prepaid_type.</param>
+        /// <param name="bin">bin.</param>
+        public Card(
+            string id = null,
             string cardBrand = null,
             string last4 = null,
             long? expMonth = null,
@@ -27,17 +44,17 @@ namespace Square.Models
             string prepaidType = null,
             string bin = null)
         {
-            Id = id;
-            CardBrand = cardBrand;
-            Last4 = last4;
-            ExpMonth = expMonth;
-            ExpYear = expYear;
-            CardholderName = cardholderName;
-            BillingAddress = billingAddress;
-            Fingerprint = fingerprint;
-            CardType = cardType;
-            PrepaidType = prepaidType;
-            Bin = bin;
+            this.Id = id;
+            this.CardBrand = cardBrand;
+            this.Last4 = last4;
+            this.ExpMonth = expMonth;
+            this.ExpYear = expYear;
+            this.CardholderName = cardholderName;
+            this.BillingAddress = billingAddress;
+            this.Fingerprint = fingerprint;
+            this.CardType = cardType;
+            this.PrepaidType = prepaidType;
+            this.Bin = bin;
         }
 
         /// <summary>
@@ -109,6 +126,7 @@ namespace Square.Models
         [JsonProperty("bin", NullValueHandling = NullValueHandling.Ignore)]
         public string Bin { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -118,21 +136,7 @@ namespace Square.Models
             return $"Card : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Id = {(Id == null ? "null" : Id == string.Empty ? "" : Id)}");
-            toStringOutput.Add($"CardBrand = {(CardBrand == null ? "null" : CardBrand.ToString())}");
-            toStringOutput.Add($"Last4 = {(Last4 == null ? "null" : Last4 == string.Empty ? "" : Last4)}");
-            toStringOutput.Add($"ExpMonth = {(ExpMonth == null ? "null" : ExpMonth.ToString())}");
-            toStringOutput.Add($"ExpYear = {(ExpYear == null ? "null" : ExpYear.ToString())}");
-            toStringOutput.Add($"CardholderName = {(CardholderName == null ? "null" : CardholderName == string.Empty ? "" : CardholderName)}");
-            toStringOutput.Add($"BillingAddress = {(BillingAddress == null ? "null" : BillingAddress.ToString())}");
-            toStringOutput.Add($"Fingerprint = {(Fingerprint == null ? "null" : Fingerprint == string.Empty ? "" : Fingerprint)}");
-            toStringOutput.Add($"CardType = {(CardType == null ? "null" : CardType.ToString())}");
-            toStringOutput.Add($"PrepaidType = {(PrepaidType == null ? "null" : PrepaidType.ToString())}");
-            toStringOutput.Add($"Bin = {(Bin == null ? "null" : Bin == string.Empty ? "" : Bin)}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -146,98 +150,125 @@ namespace Square.Models
             }
 
             return obj is Card other &&
-                ((Id == null && other.Id == null) || (Id?.Equals(other.Id) == true)) &&
-                ((CardBrand == null && other.CardBrand == null) || (CardBrand?.Equals(other.CardBrand) == true)) &&
-                ((Last4 == null && other.Last4 == null) || (Last4?.Equals(other.Last4) == true)) &&
-                ((ExpMonth == null && other.ExpMonth == null) || (ExpMonth?.Equals(other.ExpMonth) == true)) &&
-                ((ExpYear == null && other.ExpYear == null) || (ExpYear?.Equals(other.ExpYear) == true)) &&
-                ((CardholderName == null && other.CardholderName == null) || (CardholderName?.Equals(other.CardholderName) == true)) &&
-                ((BillingAddress == null && other.BillingAddress == null) || (BillingAddress?.Equals(other.BillingAddress) == true)) &&
-                ((Fingerprint == null && other.Fingerprint == null) || (Fingerprint?.Equals(other.Fingerprint) == true)) &&
-                ((CardType == null && other.CardType == null) || (CardType?.Equals(other.CardType) == true)) &&
-                ((PrepaidType == null && other.PrepaidType == null) || (PrepaidType?.Equals(other.PrepaidType) == true)) &&
-                ((Bin == null && other.Bin == null) || (Bin?.Equals(other.Bin) == true));
+                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
+                ((this.CardBrand == null && other.CardBrand == null) || (this.CardBrand?.Equals(other.CardBrand) == true)) &&
+                ((this.Last4 == null && other.Last4 == null) || (this.Last4?.Equals(other.Last4) == true)) &&
+                ((this.ExpMonth == null && other.ExpMonth == null) || (this.ExpMonth?.Equals(other.ExpMonth) == true)) &&
+                ((this.ExpYear == null && other.ExpYear == null) || (this.ExpYear?.Equals(other.ExpYear) == true)) &&
+                ((this.CardholderName == null && other.CardholderName == null) || (this.CardholderName?.Equals(other.CardholderName) == true)) &&
+                ((this.BillingAddress == null && other.BillingAddress == null) || (this.BillingAddress?.Equals(other.BillingAddress) == true)) &&
+                ((this.Fingerprint == null && other.Fingerprint == null) || (this.Fingerprint?.Equals(other.Fingerprint) == true)) &&
+                ((this.CardType == null && other.CardType == null) || (this.CardType?.Equals(other.CardType) == true)) &&
+                ((this.PrepaidType == null && other.PrepaidType == null) || (this.PrepaidType?.Equals(other.PrepaidType) == true)) &&
+                ((this.Bin == null && other.Bin == null) || (this.Bin?.Equals(other.Bin) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 1370361237;
 
-            if (Id != null)
+            if (this.Id != null)
             {
-               hashCode += Id.GetHashCode();
+               hashCode += this.Id.GetHashCode();
             }
 
-            if (CardBrand != null)
+            if (this.CardBrand != null)
             {
-               hashCode += CardBrand.GetHashCode();
+               hashCode += this.CardBrand.GetHashCode();
             }
 
-            if (Last4 != null)
+            if (this.Last4 != null)
             {
-               hashCode += Last4.GetHashCode();
+               hashCode += this.Last4.GetHashCode();
             }
 
-            if (ExpMonth != null)
+            if (this.ExpMonth != null)
             {
-               hashCode += ExpMonth.GetHashCode();
+               hashCode += this.ExpMonth.GetHashCode();
             }
 
-            if (ExpYear != null)
+            if (this.ExpYear != null)
             {
-               hashCode += ExpYear.GetHashCode();
+               hashCode += this.ExpYear.GetHashCode();
             }
 
-            if (CardholderName != null)
+            if (this.CardholderName != null)
             {
-               hashCode += CardholderName.GetHashCode();
+               hashCode += this.CardholderName.GetHashCode();
             }
 
-            if (BillingAddress != null)
+            if (this.BillingAddress != null)
             {
-               hashCode += BillingAddress.GetHashCode();
+               hashCode += this.BillingAddress.GetHashCode();
             }
 
-            if (Fingerprint != null)
+            if (this.Fingerprint != null)
             {
-               hashCode += Fingerprint.GetHashCode();
+               hashCode += this.Fingerprint.GetHashCode();
             }
 
-            if (CardType != null)
+            if (this.CardType != null)
             {
-               hashCode += CardType.GetHashCode();
+               hashCode += this.CardType.GetHashCode();
             }
 
-            if (PrepaidType != null)
+            if (this.PrepaidType != null)
             {
-               hashCode += PrepaidType.GetHashCode();
+               hashCode += this.PrepaidType.GetHashCode();
             }
 
-            if (Bin != null)
+            if (this.Bin != null)
             {
-               hashCode += Bin.GetHashCode();
+               hashCode += this.Bin.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id == string.Empty ? "" : this.Id)}");
+            toStringOutput.Add($"this.CardBrand = {(this.CardBrand == null ? "null" : this.CardBrand.ToString())}");
+            toStringOutput.Add($"this.Last4 = {(this.Last4 == null ? "null" : this.Last4 == string.Empty ? "" : this.Last4)}");
+            toStringOutput.Add($"this.ExpMonth = {(this.ExpMonth == null ? "null" : this.ExpMonth.ToString())}");
+            toStringOutput.Add($"this.ExpYear = {(this.ExpYear == null ? "null" : this.ExpYear.ToString())}");
+            toStringOutput.Add($"this.CardholderName = {(this.CardholderName == null ? "null" : this.CardholderName == string.Empty ? "" : this.CardholderName)}");
+            toStringOutput.Add($"this.BillingAddress = {(this.BillingAddress == null ? "null" : this.BillingAddress.ToString())}");
+            toStringOutput.Add($"this.Fingerprint = {(this.Fingerprint == null ? "null" : this.Fingerprint == string.Empty ? "" : this.Fingerprint)}");
+            toStringOutput.Add($"this.CardType = {(this.CardType == null ? "null" : this.CardType.ToString())}");
+            toStringOutput.Add($"this.PrepaidType = {(this.PrepaidType == null ? "null" : this.PrepaidType.ToString())}");
+            toStringOutput.Add($"this.Bin = {(this.Bin == null ? "null" : this.Bin == string.Empty ? "" : this.Bin)}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .Id(Id)
-                .CardBrand(CardBrand)
-                .Last4(Last4)
-                .ExpMonth(ExpMonth)
-                .ExpYear(ExpYear)
-                .CardholderName(CardholderName)
-                .BillingAddress(BillingAddress)
-                .Fingerprint(Fingerprint)
-                .CardType(CardType)
-                .PrepaidType(PrepaidType)
-                .Bin(Bin);
+                .Id(this.Id)
+                .CardBrand(this.CardBrand)
+                .Last4(this.Last4)
+                .ExpMonth(this.ExpMonth)
+                .ExpYear(this.ExpYear)
+                .CardholderName(this.CardholderName)
+                .BillingAddress(this.BillingAddress)
+                .Fingerprint(this.Fingerprint)
+                .CardType(this.CardType)
+                .PrepaidType(this.PrepaidType)
+                .Bin(this.Bin);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string id;
@@ -252,87 +283,145 @@ namespace Square.Models
             private string prepaidType;
             private string bin;
 
-
-
+             /// <summary>
+             /// Id.
+             /// </summary>
+             /// <param name="id"> id. </param>
+             /// <returns> Builder. </returns>
             public Builder Id(string id)
             {
                 this.id = id;
                 return this;
             }
 
+             /// <summary>
+             /// CardBrand.
+             /// </summary>
+             /// <param name="cardBrand"> cardBrand. </param>
+             /// <returns> Builder. </returns>
             public Builder CardBrand(string cardBrand)
             {
                 this.cardBrand = cardBrand;
                 return this;
             }
 
+             /// <summary>
+             /// Last4.
+             /// </summary>
+             /// <param name="last4"> last4. </param>
+             /// <returns> Builder. </returns>
             public Builder Last4(string last4)
             {
                 this.last4 = last4;
                 return this;
             }
 
+             /// <summary>
+             /// ExpMonth.
+             /// </summary>
+             /// <param name="expMonth"> expMonth. </param>
+             /// <returns> Builder. </returns>
             public Builder ExpMonth(long? expMonth)
             {
                 this.expMonth = expMonth;
                 return this;
             }
 
+             /// <summary>
+             /// ExpYear.
+             /// </summary>
+             /// <param name="expYear"> expYear. </param>
+             /// <returns> Builder. </returns>
             public Builder ExpYear(long? expYear)
             {
                 this.expYear = expYear;
                 return this;
             }
 
+             /// <summary>
+             /// CardholderName.
+             /// </summary>
+             /// <param name="cardholderName"> cardholderName. </param>
+             /// <returns> Builder. </returns>
             public Builder CardholderName(string cardholderName)
             {
                 this.cardholderName = cardholderName;
                 return this;
             }
 
+             /// <summary>
+             /// BillingAddress.
+             /// </summary>
+             /// <param name="billingAddress"> billingAddress. </param>
+             /// <returns> Builder. </returns>
             public Builder BillingAddress(Models.Address billingAddress)
             {
                 this.billingAddress = billingAddress;
                 return this;
             }
 
+             /// <summary>
+             /// Fingerprint.
+             /// </summary>
+             /// <param name="fingerprint"> fingerprint. </param>
+             /// <returns> Builder. </returns>
             public Builder Fingerprint(string fingerprint)
             {
                 this.fingerprint = fingerprint;
                 return this;
             }
 
+             /// <summary>
+             /// CardType.
+             /// </summary>
+             /// <param name="cardType"> cardType. </param>
+             /// <returns> Builder. </returns>
             public Builder CardType(string cardType)
             {
                 this.cardType = cardType;
                 return this;
             }
 
+             /// <summary>
+             /// PrepaidType.
+             /// </summary>
+             /// <param name="prepaidType"> prepaidType. </param>
+             /// <returns> Builder. </returns>
             public Builder PrepaidType(string prepaidType)
             {
                 this.prepaidType = prepaidType;
                 return this;
             }
 
+             /// <summary>
+             /// Bin.
+             /// </summary>
+             /// <param name="bin"> bin. </param>
+             /// <returns> Builder. </returns>
             public Builder Bin(string bin)
             {
                 this.bin = bin;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> Card. </returns>
             public Card Build()
             {
-                return new Card(id,
-                    cardBrand,
-                    last4,
-                    expMonth,
-                    expYear,
-                    cardholderName,
-                    billingAddress,
-                    fingerprint,
-                    cardType,
-                    prepaidType,
-                    bin);
+                return new Card(
+                    this.id,
+                    this.cardBrand,
+                    this.last4,
+                    this.expMonth,
+                    this.expYear,
+                    this.cardholderName,
+                    this.billingAddress,
+                    this.fingerprint,
+                    this.cardType,
+                    this.prepaidType,
+                    this.bin);
             }
         }
     }

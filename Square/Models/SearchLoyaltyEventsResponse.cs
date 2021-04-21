@@ -1,30 +1,42 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square.Http.Client;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class SearchLoyaltyEventsResponse 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Http.Client;
+    using Square.Utilities;
+
+    /// <summary>
+    /// SearchLoyaltyEventsResponse.
+    /// </summary>
+    public class SearchLoyaltyEventsResponse
     {
-        public SearchLoyaltyEventsResponse(IList<Models.Error> errors = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SearchLoyaltyEventsResponse"/> class.
+        /// </summary>
+        /// <param name="errors">errors.</param>
+        /// <param name="events">events.</param>
+        /// <param name="cursor">cursor.</param>
+        public SearchLoyaltyEventsResponse(
+            IList<Models.Error> errors = null,
             IList<Models.LoyaltyEvent> events = null,
             string cursor = null)
         {
-            Errors = errors;
-            Events = events;
-            Cursor = cursor;
+            this.Errors = errors;
+            this.Events = events;
+            this.Cursor = cursor;
         }
 
+        /// <summary>
+        /// Gets http context.
+        /// </summary>
         [JsonIgnore]
         public HttpContext Context { get; internal set; }
 
@@ -41,14 +53,15 @@ namespace Square.Models
         public IList<Models.LoyaltyEvent> Events { get; }
 
         /// <summary>
-        /// The pagination cursor to be used in a subsequent 
-        /// request. If empty, this is the final response. 
-        /// For more information, 
+        /// The pagination cursor to be used in a subsequent
+        /// request. If empty, this is the final response.
+        /// For more information,
         /// see [Pagination](https://developer.squareup.com/docs/basics/api101/pagination).
         /// </summary>
         [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
         public string Cursor { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -58,13 +71,7 @@ namespace Square.Models
             return $"SearchLoyaltyEventsResponse : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Errors = {(Errors == null ? "null" : $"[{ string.Join(", ", Errors)} ]")}");
-            toStringOutput.Add($"Events = {(Events == null ? "null" : $"[{ string.Join(", ", Events)} ]")}");
-            toStringOutput.Add($"Cursor = {(Cursor == null ? "null" : Cursor == string.Empty ? "" : Cursor)}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -78,79 +85,116 @@ namespace Square.Models
             }
 
             return obj is SearchLoyaltyEventsResponse other &&
-                ((Context == null && other.Context == null) || (Context?.Equals(other.Context) == true)) &&
-                ((Errors == null && other.Errors == null) || (Errors?.Equals(other.Errors) == true)) &&
-                ((Events == null && other.Events == null) || (Events?.Equals(other.Events) == true)) &&
-                ((Cursor == null && other.Cursor == null) || (Cursor?.Equals(other.Cursor) == true));
+                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
+                ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true)) &&
+                ((this.Events == null && other.Events == null) || (this.Events?.Equals(other.Events) == true)) &&
+                ((this.Cursor == null && other.Cursor == null) || (this.Cursor?.Equals(other.Cursor) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 571920361;
 
-            if (Context != null)
+            if (this.Context != null)
             {
-                hashCode += Context.GetHashCode();
+                hashCode += this.Context.GetHashCode();
             }
 
-            if (Errors != null)
+            if (this.Errors != null)
             {
-               hashCode += Errors.GetHashCode();
+               hashCode += this.Errors.GetHashCode();
             }
 
-            if (Events != null)
+            if (this.Events != null)
             {
-               hashCode += Events.GetHashCode();
+               hashCode += this.Events.GetHashCode();
             }
 
-            if (Cursor != null)
+            if (this.Cursor != null)
             {
-               hashCode += Cursor.GetHashCode();
+               hashCode += this.Cursor.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Errors = {(this.Errors == null ? "null" : $"[{string.Join(", ", this.Errors)} ]")}");
+            toStringOutput.Add($"this.Events = {(this.Events == null ? "null" : $"[{string.Join(", ", this.Events)} ]")}");
+            toStringOutput.Add($"this.Cursor = {(this.Cursor == null ? "null" : this.Cursor == string.Empty ? "" : this.Cursor)}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .Errors(Errors)
-                .Events(Events)
-                .Cursor(Cursor);
+                .Errors(this.Errors)
+                .Events(this.Events)
+                .Cursor(this.Cursor);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private IList<Models.Error> errors;
             private IList<Models.LoyaltyEvent> events;
             private string cursor;
 
-
-
+             /// <summary>
+             /// Errors.
+             /// </summary>
+             /// <param name="errors"> errors. </param>
+             /// <returns> Builder. </returns>
             public Builder Errors(IList<Models.Error> errors)
             {
                 this.errors = errors;
                 return this;
             }
 
+             /// <summary>
+             /// Events.
+             /// </summary>
+             /// <param name="events"> events. </param>
+             /// <returns> Builder. </returns>
             public Builder Events(IList<Models.LoyaltyEvent> events)
             {
                 this.events = events;
                 return this;
             }
 
+             /// <summary>
+             /// Cursor.
+             /// </summary>
+             /// <param name="cursor"> cursor. </param>
+             /// <returns> Builder. </returns>
             public Builder Cursor(string cursor)
             {
                 this.cursor = cursor;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> SearchLoyaltyEventsResponse. </returns>
             public SearchLoyaltyEventsResponse Build()
             {
-                return new SearchLoyaltyEventsResponse(errors,
-                    events,
-                    cursor);
+                return new SearchLoyaltyEventsResponse(
+                    this.errors,
+                    this.events,
+                    this.cursor);
             }
         }
     }

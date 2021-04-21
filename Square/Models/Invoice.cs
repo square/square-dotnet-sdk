@@ -1,21 +1,47 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class Invoice 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// Invoice.
+    /// </summary>
+    public class Invoice
     {
-        public Invoice(string id = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Invoice"/> class.
+        /// </summary>
+        /// <param name="id">id.</param>
+        /// <param name="version">version.</param>
+        /// <param name="locationId">location_id.</param>
+        /// <param name="orderId">order_id.</param>
+        /// <param name="primaryRecipient">primary_recipient.</param>
+        /// <param name="paymentRequests">payment_requests.</param>
+        /// <param name="deliveryMethod">delivery_method.</param>
+        /// <param name="invoiceNumber">invoice_number.</param>
+        /// <param name="title">title.</param>
+        /// <param name="description">description.</param>
+        /// <param name="scheduledAt">scheduled_at.</param>
+        /// <param name="publicUrl">public_url.</param>
+        /// <param name="nextPaymentAmountMoney">next_payment_amount_money.</param>
+        /// <param name="status">status.</param>
+        /// <param name="timezone">timezone.</param>
+        /// <param name="createdAt">created_at.</param>
+        /// <param name="updatedAt">updated_at.</param>
+        /// <param name="acceptedPaymentMethods">accepted_payment_methods.</param>
+        /// <param name="customFields">custom_fields.</param>
+        /// <param name="subscriptionId">subscription_id.</param>
+        public Invoice(
+            string id = null,
             int? version = null,
             string locationId = null,
             string orderId = null,
@@ -32,26 +58,30 @@ namespace Square.Models
             string timezone = null,
             string createdAt = null,
             string updatedAt = null,
-            IList<Models.InvoiceCustomField> customFields = null)
+            Models.InvoiceAcceptedPaymentMethods acceptedPaymentMethods = null,
+            IList<Models.InvoiceCustomField> customFields = null,
+            string subscriptionId = null)
         {
-            Id = id;
-            Version = version;
-            LocationId = locationId;
-            OrderId = orderId;
-            PrimaryRecipient = primaryRecipient;
-            PaymentRequests = paymentRequests;
-            DeliveryMethod = deliveryMethod;
-            InvoiceNumber = invoiceNumber;
-            Title = title;
-            Description = description;
-            ScheduledAt = scheduledAt;
-            PublicUrl = publicUrl;
-            NextPaymentAmountMoney = nextPaymentAmountMoney;
-            Status = status;
-            Timezone = timezone;
-            CreatedAt = createdAt;
-            UpdatedAt = updatedAt;
-            CustomFields = customFields;
+            this.Id = id;
+            this.Version = version;
+            this.LocationId = locationId;
+            this.OrderId = orderId;
+            this.PrimaryRecipient = primaryRecipient;
+            this.PaymentRequests = paymentRequests;
+            this.DeliveryMethod = deliveryMethod;
+            this.InvoiceNumber = invoiceNumber;
+            this.Title = title;
+            this.Description = description;
+            this.ScheduledAt = scheduledAt;
+            this.PublicUrl = publicUrl;
+            this.NextPaymentAmountMoney = nextPaymentAmountMoney;
+            this.Status = status;
+            this.Timezone = timezone;
+            this.CreatedAt = createdAt;
+            this.UpdatedAt = updatedAt;
+            this.AcceptedPaymentMethods = acceptedPaymentMethods;
+            this.CustomFields = customFields;
+            this.SubscriptionId = subscriptionId;
         }
 
         /// <summary>
@@ -74,7 +104,7 @@ namespace Square.Models
         public string LocationId { get; }
 
         /// <summary>
-        /// The ID of the [order](#type-order) for which the invoice is created.
+        /// The ID of the [order]($m/Order) for which the invoice is created.
         /// This order must be in the `OPEN` state and must belong to the `location_id`
         /// specified for this invoice. This field is required when creating an invoice.
         /// </summary>
@@ -98,7 +128,7 @@ namespace Square.Models
         public IList<Models.InvoicePaymentRequest> PaymentRequests { get; }
 
         /// <summary>
-        /// Indicates how Square delivers the [invoice](#type-Invoice) to the customer.
+        /// Indicates how Square delivers the [invoice]($m/Invoice) to the customer.
         /// </summary>
         [JsonProperty("delivery_method", NullValueHandling = NullValueHandling.Ignore)]
         public string DeliveryMethod { get; }
@@ -107,7 +137,7 @@ namespace Square.Models
         /// A user-friendly invoice number. The value is unique within a location.
         /// If not provided when creating an invoice, Square assigns a value.
         /// It increments from 1 and padded with zeros making it 7 characters long
-        /// for example, 0000001, 0000002.
+        /// (for example, 0000001 and 0000002).
         /// </summary>
         [JsonProperty("invoice_number", NullValueHandling = NullValueHandling.Ignore)]
         public string InvoiceNumber { get; }
@@ -126,7 +156,8 @@ namespace Square.Models
 
         /// <summary>
         /// The timestamp when the invoice is scheduled for processing, in RFC 3339 format.
-        /// After the invoice is published, Square processes the invoice on the specified date, according to the delivery method and payment request settings.
+        /// After the invoice is published, Square processes the invoice on the specified date,
+        /// according to the delivery method and payment request settings.
         /// If the field is not set, Square processes the invoice immediately after it is published.
         /// </summary>
         [JsonProperty("scheduled_at", NullValueHandling = NullValueHandling.Ignore)]
@@ -158,8 +189,12 @@ namespace Square.Models
         public string Status { get; }
 
         /// <summary>
-        /// The time zone used to interpret calendar dates on the invoice, such as `due_date`. When an invoice is created, this field is set to the `timezone` specified for the seller location. The value cannot be changed.
-        /// For example, a payment `due_date` of 2021-03-09 with a `timezone` of America/Los\_Angeles becomes overdue at midnight on March 9 in America/Los\_Angeles (which equals a UTC timestamp of 2021-03-10T08:00:00Z).
+        /// The time zone used to interpret calendar dates on the invoice, such as `due_date`.
+        /// When an invoice is created, this field is set to the `timezone` specified for the seller
+        /// location. The value cannot be changed.
+        /// For example, a payment `due_date` of 2021-03-09 with a `timezone` of America/Los\_Angeles
+        /// becomes overdue at midnight on March 9 in America/Los\_Angeles (which equals a UTC timestamp
+        /// of 2021-03-10T08:00:00Z).
         /// </summary>
         [JsonProperty("timezone", NullValueHandling = NullValueHandling.Ignore)]
         public string Timezone { get; }
@@ -177,6 +212,12 @@ namespace Square.Models
         public string UpdatedAt { get; }
 
         /// <summary>
+        /// The payment methods that customers can use to pay an invoice on the Square-hosted invoice page.
+        /// </summary>
+        [JsonProperty("accepted_payment_methods", NullValueHandling = NullValueHandling.Ignore)]
+        public Models.InvoiceAcceptedPaymentMethods AcceptedPaymentMethods { get; }
+
+        /// <summary>
         /// Additional seller-defined fields to render on the invoice. These fields are visible to sellers and buyers
         /// on the Square-hosted invoice page and in emailed or PDF copies of invoices. For more information, see
         /// [Custom fields](https://developer.squareup.com/docs/invoices-api/overview#custom-fields).
@@ -185,6 +226,14 @@ namespace Square.Models
         [JsonProperty("custom_fields", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.InvoiceCustomField> CustomFields { get; }
 
+        /// <summary>
+        /// The ID of the [subscription]($m/Subscription) associated with the invoice.
+        /// This field is present only on subscription billing invoices.
+        /// </summary>
+        [JsonProperty("subscription_id", NullValueHandling = NullValueHandling.Ignore)]
+        public string SubscriptionId { get; }
+
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -194,28 +243,7 @@ namespace Square.Models
             return $"Invoice : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Id = {(Id == null ? "null" : Id == string.Empty ? "" : Id)}");
-            toStringOutput.Add($"Version = {(Version == null ? "null" : Version.ToString())}");
-            toStringOutput.Add($"LocationId = {(LocationId == null ? "null" : LocationId == string.Empty ? "" : LocationId)}");
-            toStringOutput.Add($"OrderId = {(OrderId == null ? "null" : OrderId == string.Empty ? "" : OrderId)}");
-            toStringOutput.Add($"PrimaryRecipient = {(PrimaryRecipient == null ? "null" : PrimaryRecipient.ToString())}");
-            toStringOutput.Add($"PaymentRequests = {(PaymentRequests == null ? "null" : $"[{ string.Join(", ", PaymentRequests)} ]")}");
-            toStringOutput.Add($"DeliveryMethod = {(DeliveryMethod == null ? "null" : DeliveryMethod.ToString())}");
-            toStringOutput.Add($"InvoiceNumber = {(InvoiceNumber == null ? "null" : InvoiceNumber == string.Empty ? "" : InvoiceNumber)}");
-            toStringOutput.Add($"Title = {(Title == null ? "null" : Title == string.Empty ? "" : Title)}");
-            toStringOutput.Add($"Description = {(Description == null ? "null" : Description == string.Empty ? "" : Description)}");
-            toStringOutput.Add($"ScheduledAt = {(ScheduledAt == null ? "null" : ScheduledAt == string.Empty ? "" : ScheduledAt)}");
-            toStringOutput.Add($"PublicUrl = {(PublicUrl == null ? "null" : PublicUrl == string.Empty ? "" : PublicUrl)}");
-            toStringOutput.Add($"NextPaymentAmountMoney = {(NextPaymentAmountMoney == null ? "null" : NextPaymentAmountMoney.ToString())}");
-            toStringOutput.Add($"Status = {(Status == null ? "null" : Status.ToString())}");
-            toStringOutput.Add($"Timezone = {(Timezone == null ? "null" : Timezone == string.Empty ? "" : Timezone)}");
-            toStringOutput.Add($"CreatedAt = {(CreatedAt == null ? "null" : CreatedAt == string.Empty ? "" : CreatedAt)}");
-            toStringOutput.Add($"UpdatedAt = {(UpdatedAt == null ? "null" : UpdatedAt == string.Empty ? "" : UpdatedAt)}");
-            toStringOutput.Add($"CustomFields = {(CustomFields == null ? "null" : $"[{ string.Join(", ", CustomFields)} ]")}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -229,147 +257,197 @@ namespace Square.Models
             }
 
             return obj is Invoice other &&
-                ((Id == null && other.Id == null) || (Id?.Equals(other.Id) == true)) &&
-                ((Version == null && other.Version == null) || (Version?.Equals(other.Version) == true)) &&
-                ((LocationId == null && other.LocationId == null) || (LocationId?.Equals(other.LocationId) == true)) &&
-                ((OrderId == null && other.OrderId == null) || (OrderId?.Equals(other.OrderId) == true)) &&
-                ((PrimaryRecipient == null && other.PrimaryRecipient == null) || (PrimaryRecipient?.Equals(other.PrimaryRecipient) == true)) &&
-                ((PaymentRequests == null && other.PaymentRequests == null) || (PaymentRequests?.Equals(other.PaymentRequests) == true)) &&
-                ((DeliveryMethod == null && other.DeliveryMethod == null) || (DeliveryMethod?.Equals(other.DeliveryMethod) == true)) &&
-                ((InvoiceNumber == null && other.InvoiceNumber == null) || (InvoiceNumber?.Equals(other.InvoiceNumber) == true)) &&
-                ((Title == null && other.Title == null) || (Title?.Equals(other.Title) == true)) &&
-                ((Description == null && other.Description == null) || (Description?.Equals(other.Description) == true)) &&
-                ((ScheduledAt == null && other.ScheduledAt == null) || (ScheduledAt?.Equals(other.ScheduledAt) == true)) &&
-                ((PublicUrl == null && other.PublicUrl == null) || (PublicUrl?.Equals(other.PublicUrl) == true)) &&
-                ((NextPaymentAmountMoney == null && other.NextPaymentAmountMoney == null) || (NextPaymentAmountMoney?.Equals(other.NextPaymentAmountMoney) == true)) &&
-                ((Status == null && other.Status == null) || (Status?.Equals(other.Status) == true)) &&
-                ((Timezone == null && other.Timezone == null) || (Timezone?.Equals(other.Timezone) == true)) &&
-                ((CreatedAt == null && other.CreatedAt == null) || (CreatedAt?.Equals(other.CreatedAt) == true)) &&
-                ((UpdatedAt == null && other.UpdatedAt == null) || (UpdatedAt?.Equals(other.UpdatedAt) == true)) &&
-                ((CustomFields == null && other.CustomFields == null) || (CustomFields?.Equals(other.CustomFields) == true));
+                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
+                ((this.Version == null && other.Version == null) || (this.Version?.Equals(other.Version) == true)) &&
+                ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true)) &&
+                ((this.OrderId == null && other.OrderId == null) || (this.OrderId?.Equals(other.OrderId) == true)) &&
+                ((this.PrimaryRecipient == null && other.PrimaryRecipient == null) || (this.PrimaryRecipient?.Equals(other.PrimaryRecipient) == true)) &&
+                ((this.PaymentRequests == null && other.PaymentRequests == null) || (this.PaymentRequests?.Equals(other.PaymentRequests) == true)) &&
+                ((this.DeliveryMethod == null && other.DeliveryMethod == null) || (this.DeliveryMethod?.Equals(other.DeliveryMethod) == true)) &&
+                ((this.InvoiceNumber == null && other.InvoiceNumber == null) || (this.InvoiceNumber?.Equals(other.InvoiceNumber) == true)) &&
+                ((this.Title == null && other.Title == null) || (this.Title?.Equals(other.Title) == true)) &&
+                ((this.Description == null && other.Description == null) || (this.Description?.Equals(other.Description) == true)) &&
+                ((this.ScheduledAt == null && other.ScheduledAt == null) || (this.ScheduledAt?.Equals(other.ScheduledAt) == true)) &&
+                ((this.PublicUrl == null && other.PublicUrl == null) || (this.PublicUrl?.Equals(other.PublicUrl) == true)) &&
+                ((this.NextPaymentAmountMoney == null && other.NextPaymentAmountMoney == null) || (this.NextPaymentAmountMoney?.Equals(other.NextPaymentAmountMoney) == true)) &&
+                ((this.Status == null && other.Status == null) || (this.Status?.Equals(other.Status) == true)) &&
+                ((this.Timezone == null && other.Timezone == null) || (this.Timezone?.Equals(other.Timezone) == true)) &&
+                ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true)) &&
+                ((this.UpdatedAt == null && other.UpdatedAt == null) || (this.UpdatedAt?.Equals(other.UpdatedAt) == true)) &&
+                ((this.AcceptedPaymentMethods == null && other.AcceptedPaymentMethods == null) || (this.AcceptedPaymentMethods?.Equals(other.AcceptedPaymentMethods) == true)) &&
+                ((this.CustomFields == null && other.CustomFields == null) || (this.CustomFields?.Equals(other.CustomFields) == true)) &&
+                ((this.SubscriptionId == null && other.SubscriptionId == null) || (this.SubscriptionId?.Equals(other.SubscriptionId) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1321207967;
+            int hashCode = -1880042028;
 
-            if (Id != null)
+            if (this.Id != null)
             {
-               hashCode += Id.GetHashCode();
+               hashCode += this.Id.GetHashCode();
             }
 
-            if (Version != null)
+            if (this.Version != null)
             {
-               hashCode += Version.GetHashCode();
+               hashCode += this.Version.GetHashCode();
             }
 
-            if (LocationId != null)
+            if (this.LocationId != null)
             {
-               hashCode += LocationId.GetHashCode();
+               hashCode += this.LocationId.GetHashCode();
             }
 
-            if (OrderId != null)
+            if (this.OrderId != null)
             {
-               hashCode += OrderId.GetHashCode();
+               hashCode += this.OrderId.GetHashCode();
             }
 
-            if (PrimaryRecipient != null)
+            if (this.PrimaryRecipient != null)
             {
-               hashCode += PrimaryRecipient.GetHashCode();
+               hashCode += this.PrimaryRecipient.GetHashCode();
             }
 
-            if (PaymentRequests != null)
+            if (this.PaymentRequests != null)
             {
-               hashCode += PaymentRequests.GetHashCode();
+               hashCode += this.PaymentRequests.GetHashCode();
             }
 
-            if (DeliveryMethod != null)
+            if (this.DeliveryMethod != null)
             {
-               hashCode += DeliveryMethod.GetHashCode();
+               hashCode += this.DeliveryMethod.GetHashCode();
             }
 
-            if (InvoiceNumber != null)
+            if (this.InvoiceNumber != null)
             {
-               hashCode += InvoiceNumber.GetHashCode();
+               hashCode += this.InvoiceNumber.GetHashCode();
             }
 
-            if (Title != null)
+            if (this.Title != null)
             {
-               hashCode += Title.GetHashCode();
+               hashCode += this.Title.GetHashCode();
             }
 
-            if (Description != null)
+            if (this.Description != null)
             {
-               hashCode += Description.GetHashCode();
+               hashCode += this.Description.GetHashCode();
             }
 
-            if (ScheduledAt != null)
+            if (this.ScheduledAt != null)
             {
-               hashCode += ScheduledAt.GetHashCode();
+               hashCode += this.ScheduledAt.GetHashCode();
             }
 
-            if (PublicUrl != null)
+            if (this.PublicUrl != null)
             {
-               hashCode += PublicUrl.GetHashCode();
+               hashCode += this.PublicUrl.GetHashCode();
             }
 
-            if (NextPaymentAmountMoney != null)
+            if (this.NextPaymentAmountMoney != null)
             {
-               hashCode += NextPaymentAmountMoney.GetHashCode();
+               hashCode += this.NextPaymentAmountMoney.GetHashCode();
             }
 
-            if (Status != null)
+            if (this.Status != null)
             {
-               hashCode += Status.GetHashCode();
+               hashCode += this.Status.GetHashCode();
             }
 
-            if (Timezone != null)
+            if (this.Timezone != null)
             {
-               hashCode += Timezone.GetHashCode();
+               hashCode += this.Timezone.GetHashCode();
             }
 
-            if (CreatedAt != null)
+            if (this.CreatedAt != null)
             {
-               hashCode += CreatedAt.GetHashCode();
+               hashCode += this.CreatedAt.GetHashCode();
             }
 
-            if (UpdatedAt != null)
+            if (this.UpdatedAt != null)
             {
-               hashCode += UpdatedAt.GetHashCode();
+               hashCode += this.UpdatedAt.GetHashCode();
             }
 
-            if (CustomFields != null)
+            if (this.AcceptedPaymentMethods != null)
             {
-               hashCode += CustomFields.GetHashCode();
+               hashCode += this.AcceptedPaymentMethods.GetHashCode();
+            }
+
+            if (this.CustomFields != null)
+            {
+               hashCode += this.CustomFields.GetHashCode();
+            }
+
+            if (this.SubscriptionId != null)
+            {
+               hashCode += this.SubscriptionId.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id == string.Empty ? "" : this.Id)}");
+            toStringOutput.Add($"this.Version = {(this.Version == null ? "null" : this.Version.ToString())}");
+            toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId == string.Empty ? "" : this.LocationId)}");
+            toStringOutput.Add($"this.OrderId = {(this.OrderId == null ? "null" : this.OrderId == string.Empty ? "" : this.OrderId)}");
+            toStringOutput.Add($"this.PrimaryRecipient = {(this.PrimaryRecipient == null ? "null" : this.PrimaryRecipient.ToString())}");
+            toStringOutput.Add($"this.PaymentRequests = {(this.PaymentRequests == null ? "null" : $"[{string.Join(", ", this.PaymentRequests)} ]")}");
+            toStringOutput.Add($"this.DeliveryMethod = {(this.DeliveryMethod == null ? "null" : this.DeliveryMethod.ToString())}");
+            toStringOutput.Add($"this.InvoiceNumber = {(this.InvoiceNumber == null ? "null" : this.InvoiceNumber == string.Empty ? "" : this.InvoiceNumber)}");
+            toStringOutput.Add($"this.Title = {(this.Title == null ? "null" : this.Title == string.Empty ? "" : this.Title)}");
+            toStringOutput.Add($"this.Description = {(this.Description == null ? "null" : this.Description == string.Empty ? "" : this.Description)}");
+            toStringOutput.Add($"this.ScheduledAt = {(this.ScheduledAt == null ? "null" : this.ScheduledAt == string.Empty ? "" : this.ScheduledAt)}");
+            toStringOutput.Add($"this.PublicUrl = {(this.PublicUrl == null ? "null" : this.PublicUrl == string.Empty ? "" : this.PublicUrl)}");
+            toStringOutput.Add($"this.NextPaymentAmountMoney = {(this.NextPaymentAmountMoney == null ? "null" : this.NextPaymentAmountMoney.ToString())}");
+            toStringOutput.Add($"this.Status = {(this.Status == null ? "null" : this.Status.ToString())}");
+            toStringOutput.Add($"this.Timezone = {(this.Timezone == null ? "null" : this.Timezone == string.Empty ? "" : this.Timezone)}");
+            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt == string.Empty ? "" : this.CreatedAt)}");
+            toStringOutput.Add($"this.UpdatedAt = {(this.UpdatedAt == null ? "null" : this.UpdatedAt == string.Empty ? "" : this.UpdatedAt)}");
+            toStringOutput.Add($"this.AcceptedPaymentMethods = {(this.AcceptedPaymentMethods == null ? "null" : this.AcceptedPaymentMethods.ToString())}");
+            toStringOutput.Add($"this.CustomFields = {(this.CustomFields == null ? "null" : $"[{string.Join(", ", this.CustomFields)} ]")}");
+            toStringOutput.Add($"this.SubscriptionId = {(this.SubscriptionId == null ? "null" : this.SubscriptionId == string.Empty ? "" : this.SubscriptionId)}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .Id(Id)
-                .Version(Version)
-                .LocationId(LocationId)
-                .OrderId(OrderId)
-                .PrimaryRecipient(PrimaryRecipient)
-                .PaymentRequests(PaymentRequests)
-                .DeliveryMethod(DeliveryMethod)
-                .InvoiceNumber(InvoiceNumber)
-                .Title(Title)
-                .Description(Description)
-                .ScheduledAt(ScheduledAt)
-                .PublicUrl(PublicUrl)
-                .NextPaymentAmountMoney(NextPaymentAmountMoney)
-                .Status(Status)
-                .Timezone(Timezone)
-                .CreatedAt(CreatedAt)
-                .UpdatedAt(UpdatedAt)
-                .CustomFields(CustomFields);
+                .Id(this.Id)
+                .Version(this.Version)
+                .LocationId(this.LocationId)
+                .OrderId(this.OrderId)
+                .PrimaryRecipient(this.PrimaryRecipient)
+                .PaymentRequests(this.PaymentRequests)
+                .DeliveryMethod(this.DeliveryMethod)
+                .InvoiceNumber(this.InvoiceNumber)
+                .Title(this.Title)
+                .Description(this.Description)
+                .ScheduledAt(this.ScheduledAt)
+                .PublicUrl(this.PublicUrl)
+                .NextPaymentAmountMoney(this.NextPaymentAmountMoney)
+                .Status(this.Status)
+                .Timezone(this.Timezone)
+                .CreatedAt(this.CreatedAt)
+                .UpdatedAt(this.UpdatedAt)
+                .AcceptedPaymentMethods(this.AcceptedPaymentMethods)
+                .CustomFields(this.CustomFields)
+                .SubscriptionId(this.SubscriptionId);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string id;
@@ -389,138 +467,257 @@ namespace Square.Models
             private string timezone;
             private string createdAt;
             private string updatedAt;
+            private Models.InvoiceAcceptedPaymentMethods acceptedPaymentMethods;
             private IList<Models.InvoiceCustomField> customFields;
+            private string subscriptionId;
 
-
-
+             /// <summary>
+             /// Id.
+             /// </summary>
+             /// <param name="id"> id. </param>
+             /// <returns> Builder. </returns>
             public Builder Id(string id)
             {
                 this.id = id;
                 return this;
             }
 
+             /// <summary>
+             /// Version.
+             /// </summary>
+             /// <param name="version"> version. </param>
+             /// <returns> Builder. </returns>
             public Builder Version(int? version)
             {
                 this.version = version;
                 return this;
             }
 
+             /// <summary>
+             /// LocationId.
+             /// </summary>
+             /// <param name="locationId"> locationId. </param>
+             /// <returns> Builder. </returns>
             public Builder LocationId(string locationId)
             {
                 this.locationId = locationId;
                 return this;
             }
 
+             /// <summary>
+             /// OrderId.
+             /// </summary>
+             /// <param name="orderId"> orderId. </param>
+             /// <returns> Builder. </returns>
             public Builder OrderId(string orderId)
             {
                 this.orderId = orderId;
                 return this;
             }
 
+             /// <summary>
+             /// PrimaryRecipient.
+             /// </summary>
+             /// <param name="primaryRecipient"> primaryRecipient. </param>
+             /// <returns> Builder. </returns>
             public Builder PrimaryRecipient(Models.InvoiceRecipient primaryRecipient)
             {
                 this.primaryRecipient = primaryRecipient;
                 return this;
             }
 
+             /// <summary>
+             /// PaymentRequests.
+             /// </summary>
+             /// <param name="paymentRequests"> paymentRequests. </param>
+             /// <returns> Builder. </returns>
             public Builder PaymentRequests(IList<Models.InvoicePaymentRequest> paymentRequests)
             {
                 this.paymentRequests = paymentRequests;
                 return this;
             }
 
+             /// <summary>
+             /// DeliveryMethod.
+             /// </summary>
+             /// <param name="deliveryMethod"> deliveryMethod. </param>
+             /// <returns> Builder. </returns>
             public Builder DeliveryMethod(string deliveryMethod)
             {
                 this.deliveryMethod = deliveryMethod;
                 return this;
             }
 
+             /// <summary>
+             /// InvoiceNumber.
+             /// </summary>
+             /// <param name="invoiceNumber"> invoiceNumber. </param>
+             /// <returns> Builder. </returns>
             public Builder InvoiceNumber(string invoiceNumber)
             {
                 this.invoiceNumber = invoiceNumber;
                 return this;
             }
 
+             /// <summary>
+             /// Title.
+             /// </summary>
+             /// <param name="title"> title. </param>
+             /// <returns> Builder. </returns>
             public Builder Title(string title)
             {
                 this.title = title;
                 return this;
             }
 
+             /// <summary>
+             /// Description.
+             /// </summary>
+             /// <param name="description"> description. </param>
+             /// <returns> Builder. </returns>
             public Builder Description(string description)
             {
                 this.description = description;
                 return this;
             }
 
+             /// <summary>
+             /// ScheduledAt.
+             /// </summary>
+             /// <param name="scheduledAt"> scheduledAt. </param>
+             /// <returns> Builder. </returns>
             public Builder ScheduledAt(string scheduledAt)
             {
                 this.scheduledAt = scheduledAt;
                 return this;
             }
 
+             /// <summary>
+             /// PublicUrl.
+             /// </summary>
+             /// <param name="publicUrl"> publicUrl. </param>
+             /// <returns> Builder. </returns>
             public Builder PublicUrl(string publicUrl)
             {
                 this.publicUrl = publicUrl;
                 return this;
             }
 
+             /// <summary>
+             /// NextPaymentAmountMoney.
+             /// </summary>
+             /// <param name="nextPaymentAmountMoney"> nextPaymentAmountMoney. </param>
+             /// <returns> Builder. </returns>
             public Builder NextPaymentAmountMoney(Models.Money nextPaymentAmountMoney)
             {
                 this.nextPaymentAmountMoney = nextPaymentAmountMoney;
                 return this;
             }
 
+             /// <summary>
+             /// Status.
+             /// </summary>
+             /// <param name="status"> status. </param>
+             /// <returns> Builder. </returns>
             public Builder Status(string status)
             {
                 this.status = status;
                 return this;
             }
 
+             /// <summary>
+             /// Timezone.
+             /// </summary>
+             /// <param name="timezone"> timezone. </param>
+             /// <returns> Builder. </returns>
             public Builder Timezone(string timezone)
             {
                 this.timezone = timezone;
                 return this;
             }
 
+             /// <summary>
+             /// CreatedAt.
+             /// </summary>
+             /// <param name="createdAt"> createdAt. </param>
+             /// <returns> Builder. </returns>
             public Builder CreatedAt(string createdAt)
             {
                 this.createdAt = createdAt;
                 return this;
             }
 
+             /// <summary>
+             /// UpdatedAt.
+             /// </summary>
+             /// <param name="updatedAt"> updatedAt. </param>
+             /// <returns> Builder. </returns>
             public Builder UpdatedAt(string updatedAt)
             {
                 this.updatedAt = updatedAt;
                 return this;
             }
 
+             /// <summary>
+             /// AcceptedPaymentMethods.
+             /// </summary>
+             /// <param name="acceptedPaymentMethods"> acceptedPaymentMethods. </param>
+             /// <returns> Builder. </returns>
+            public Builder AcceptedPaymentMethods(Models.InvoiceAcceptedPaymentMethods acceptedPaymentMethods)
+            {
+                this.acceptedPaymentMethods = acceptedPaymentMethods;
+                return this;
+            }
+
+             /// <summary>
+             /// CustomFields.
+             /// </summary>
+             /// <param name="customFields"> customFields. </param>
+             /// <returns> Builder. </returns>
             public Builder CustomFields(IList<Models.InvoiceCustomField> customFields)
             {
                 this.customFields = customFields;
                 return this;
             }
 
+             /// <summary>
+             /// SubscriptionId.
+             /// </summary>
+             /// <param name="subscriptionId"> subscriptionId. </param>
+             /// <returns> Builder. </returns>
+            public Builder SubscriptionId(string subscriptionId)
+            {
+                this.subscriptionId = subscriptionId;
+                return this;
+            }
+
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> Invoice. </returns>
             public Invoice Build()
             {
-                return new Invoice(id,
-                    version,
-                    locationId,
-                    orderId,
-                    primaryRecipient,
-                    paymentRequests,
-                    deliveryMethod,
-                    invoiceNumber,
-                    title,
-                    description,
-                    scheduledAt,
-                    publicUrl,
-                    nextPaymentAmountMoney,
-                    status,
-                    timezone,
-                    createdAt,
-                    updatedAt,
-                    customFields);
+                return new Invoice(
+                    this.id,
+                    this.version,
+                    this.locationId,
+                    this.orderId,
+                    this.primaryRecipient,
+                    this.paymentRequests,
+                    this.deliveryMethod,
+                    this.invoiceNumber,
+                    this.title,
+                    this.description,
+                    this.scheduledAt,
+                    this.publicUrl,
+                    this.nextPaymentAmountMoney,
+                    this.status,
+                    this.timezone,
+                    this.createdAt,
+                    this.updatedAt,
+                    this.acceptedPaymentMethods,
+                    this.customFields,
+                    this.subscriptionId);
             }
         }
     }

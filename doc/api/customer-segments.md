@@ -19,14 +19,15 @@ ICustomerSegmentsApi customerSegmentsApi = client.CustomerSegmentsApi;
 Retrieves the list of customer segments of a business.
 
 ```csharp
-ListCustomerSegmentsAsync(string cursor = null)
+ListCustomerSegmentsAsync(
+    string cursor = null)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `cursor` | `string` | Query, Optional | A pagination cursor returned by previous calls to __ListCustomerSegments__.<br>Used to retrieve the next set of query results.<br><br>See the [Pagination guide](https://developer.squareup.com/docs/working-with-apis/pagination) for more information. |
+| `cursor` | `string` | Query, Optional | A pagination cursor returned by previous calls to `ListCustomerSegments`.<br>This cursor is used to retrieve the next set of query results.<br><br>For more information, see [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination). |
 
 ## Response Type
 
@@ -50,7 +51,8 @@ catch (ApiException e){};
 Retrieves a specific customer segment as identified by the `segment_id` value.
 
 ```csharp
-RetrieveCustomerSegmentAsync(string segmentId)
+RetrieveCustomerSegmentAsync(
+    string segmentId)
 ```
 
 ## Parameters

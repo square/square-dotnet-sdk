@@ -7,9 +7,9 @@ HttpResponse stores necessary information about the http response.
 
 | Name | Description | Type |
 |  --- | --- | --- |
-| StatusCode | HTTP Status code of the http response. | `int` |
-| Headers | Headers of the http response. | `Dictionary<string, string>` |
-| RawBody | Stream of the body. | `Stream` |
+| StatusCode | Gets the HTTP Status code of the http response. | `int` |
+| Headers | Gets the headers of the http response. | `Dictionary<string, string>` |
+| RawBody | Gets the stream of the body. | `Stream` |
 
 ## Constructors
 

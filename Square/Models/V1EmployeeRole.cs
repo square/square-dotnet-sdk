@@ -1,36 +1,51 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square.Http.Client;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class V1EmployeeRole 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Http.Client;
+    using Square.Utilities;
+
+    /// <summary>
+    /// V1EmployeeRole.
+    /// </summary>
+    public class V1EmployeeRole
     {
-        public V1EmployeeRole(string name,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="V1EmployeeRole"/> class.
+        /// </summary>
+        /// <param name="name">name.</param>
+        /// <param name="permissions">permissions.</param>
+        /// <param name="id">id.</param>
+        /// <param name="isOwner">is_owner.</param>
+        /// <param name="createdAt">created_at.</param>
+        /// <param name="updatedAt">updated_at.</param>
+        public V1EmployeeRole(
+            string name,
             IList<string> permissions,
             string id = null,
             bool? isOwner = null,
             string createdAt = null,
             string updatedAt = null)
         {
-            Id = id;
-            Name = name;
-            Permissions = permissions;
-            IsOwner = isOwner;
-            CreatedAt = createdAt;
-            UpdatedAt = updatedAt;
+            this.Id = id;
+            this.Name = name;
+            this.Permissions = permissions;
+            this.IsOwner = isOwner;
+            this.CreatedAt = createdAt;
+            this.UpdatedAt = updatedAt;
         }
 
+        /// <summary>
+        /// Gets http context.
+        /// </summary>
         [JsonIgnore]
         public HttpContext Context { get; internal set; }
 
@@ -71,6 +86,7 @@ namespace Square.Models
         [JsonProperty("updated_at", NullValueHandling = NullValueHandling.Ignore)]
         public string UpdatedAt { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -80,16 +96,7 @@ namespace Square.Models
             return $"V1EmployeeRole : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Id = {(Id == null ? "null" : Id == string.Empty ? "" : Id)}");
-            toStringOutput.Add($"Name = {(Name == null ? "null" : Name == string.Empty ? "" : Name)}");
-            toStringOutput.Add($"Permissions = {(Permissions == null ? "null" : $"[{ string.Join(", ", Permissions)} ]")}");
-            toStringOutput.Add($"IsOwner = {(IsOwner == null ? "null" : IsOwner.ToString())}");
-            toStringOutput.Add($"CreatedAt = {(CreatedAt == null ? "null" : CreatedAt == string.Empty ? "" : CreatedAt)}");
-            toStringOutput.Add($"UpdatedAt = {(UpdatedAt == null ? "null" : UpdatedAt == string.Empty ? "" : UpdatedAt)}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -103,68 +110,91 @@ namespace Square.Models
             }
 
             return obj is V1EmployeeRole other &&
-                ((Context == null && other.Context == null) || (Context?.Equals(other.Context) == true)) &&
-                ((Id == null && other.Id == null) || (Id?.Equals(other.Id) == true)) &&
-                ((Name == null && other.Name == null) || (Name?.Equals(other.Name) == true)) &&
-                ((Permissions == null && other.Permissions == null) || (Permissions?.Equals(other.Permissions) == true)) &&
-                ((IsOwner == null && other.IsOwner == null) || (IsOwner?.Equals(other.IsOwner) == true)) &&
-                ((CreatedAt == null && other.CreatedAt == null) || (CreatedAt?.Equals(other.CreatedAt) == true)) &&
-                ((UpdatedAt == null && other.UpdatedAt == null) || (UpdatedAt?.Equals(other.UpdatedAt) == true));
+                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
+                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
+                ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
+                ((this.Permissions == null && other.Permissions == null) || (this.Permissions?.Equals(other.Permissions) == true)) &&
+                ((this.IsOwner == null && other.IsOwner == null) || (this.IsOwner?.Equals(other.IsOwner) == true)) &&
+                ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true)) &&
+                ((this.UpdatedAt == null && other.UpdatedAt == null) || (this.UpdatedAt?.Equals(other.UpdatedAt) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1766900605;
 
-            if (Context != null)
+            if (this.Context != null)
             {
-                hashCode += Context.GetHashCode();
+                hashCode += this.Context.GetHashCode();
             }
 
-            if (Id != null)
+            if (this.Id != null)
             {
-               hashCode += Id.GetHashCode();
+               hashCode += this.Id.GetHashCode();
             }
 
-            if (Name != null)
+            if (this.Name != null)
             {
-               hashCode += Name.GetHashCode();
+               hashCode += this.Name.GetHashCode();
             }
 
-            if (Permissions != null)
+            if (this.Permissions != null)
             {
-               hashCode += Permissions.GetHashCode();
+               hashCode += this.Permissions.GetHashCode();
             }
 
-            if (IsOwner != null)
+            if (this.IsOwner != null)
             {
-               hashCode += IsOwner.GetHashCode();
+               hashCode += this.IsOwner.GetHashCode();
             }
 
-            if (CreatedAt != null)
+            if (this.CreatedAt != null)
             {
-               hashCode += CreatedAt.GetHashCode();
+               hashCode += this.CreatedAt.GetHashCode();
             }
 
-            if (UpdatedAt != null)
+            if (this.UpdatedAt != null)
             {
-               hashCode += UpdatedAt.GetHashCode();
+               hashCode += this.UpdatedAt.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id == string.Empty ? "" : this.Id)}");
+            toStringOutput.Add($"this.Name = {(this.Name == null ? "null" : this.Name == string.Empty ? "" : this.Name)}");
+            toStringOutput.Add($"this.Permissions = {(this.Permissions == null ? "null" : $"[{string.Join(", ", this.Permissions)} ]")}");
+            toStringOutput.Add($"this.IsOwner = {(this.IsOwner == null ? "null" : this.IsOwner.ToString())}");
+            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt == string.Empty ? "" : this.CreatedAt)}");
+            toStringOutput.Add($"this.UpdatedAt = {(this.UpdatedAt == null ? "null" : this.UpdatedAt == string.Empty ? "" : this.UpdatedAt)}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
-            var builder = new Builder(Name,
-                Permissions)
-                .Id(Id)
-                .IsOwner(IsOwner)
-                .CreatedAt(CreatedAt)
-                .UpdatedAt(UpdatedAt);
+            var builder = new Builder(
+                this.Name,
+                this.Permissions)
+                .Id(this.Id)
+                .IsOwner(this.IsOwner)
+                .CreatedAt(this.CreatedAt)
+                .UpdatedAt(this.UpdatedAt);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string name;
@@ -174,57 +204,93 @@ namespace Square.Models
             private string createdAt;
             private string updatedAt;
 
-            public Builder(string name,
+            public Builder(
+                string name,
                 IList<string> permissions)
             {
                 this.name = name;
                 this.permissions = permissions;
             }
 
+             /// <summary>
+             /// Name.
+             /// </summary>
+             /// <param name="name"> name. </param>
+             /// <returns> Builder. </returns>
             public Builder Name(string name)
             {
                 this.name = name;
                 return this;
             }
 
+             /// <summary>
+             /// Permissions.
+             /// </summary>
+             /// <param name="permissions"> permissions. </param>
+             /// <returns> Builder. </returns>
             public Builder Permissions(IList<string> permissions)
             {
                 this.permissions = permissions;
                 return this;
             }
 
+             /// <summary>
+             /// Id.
+             /// </summary>
+             /// <param name="id"> id. </param>
+             /// <returns> Builder. </returns>
             public Builder Id(string id)
             {
                 this.id = id;
                 return this;
             }
 
+             /// <summary>
+             /// IsOwner.
+             /// </summary>
+             /// <param name="isOwner"> isOwner. </param>
+             /// <returns> Builder. </returns>
             public Builder IsOwner(bool? isOwner)
             {
                 this.isOwner = isOwner;
                 return this;
             }
 
+             /// <summary>
+             /// CreatedAt.
+             /// </summary>
+             /// <param name="createdAt"> createdAt. </param>
+             /// <returns> Builder. </returns>
             public Builder CreatedAt(string createdAt)
             {
                 this.createdAt = createdAt;
                 return this;
             }
 
+             /// <summary>
+             /// UpdatedAt.
+             /// </summary>
+             /// <param name="updatedAt"> updatedAt. </param>
+             /// <returns> Builder. </returns>
             public Builder UpdatedAt(string updatedAt)
             {
                 this.updatedAt = updatedAt;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> V1EmployeeRole. </returns>
             public V1EmployeeRole Build()
             {
-                return new V1EmployeeRole(name,
-                    permissions,
-                    id,
-                    isOwner,
-                    createdAt,
-                    updatedAt);
+                return new V1EmployeeRole(
+                    this.name,
+                    this.permissions,
+                    this.id,
+                    this.isOwner,
+                    this.createdAt,
+                    this.updatedAt);
             }
         }
     }

@@ -1,27 +1,36 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class OrderLineItemAppliedDiscount 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// OrderLineItemAppliedDiscount.
+    /// </summary>
+    public class OrderLineItemAppliedDiscount
     {
-        public OrderLineItemAppliedDiscount(string discountUid,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="OrderLineItemAppliedDiscount"/> class.
+        /// </summary>
+        /// <param name="discountUid">discount_uid.</param>
+        /// <param name="uid">uid.</param>
+        /// <param name="appliedMoney">applied_money.</param>
+        public OrderLineItemAppliedDiscount(
+            string discountUid,
             string uid = null,
             Models.Money appliedMoney = null)
         {
-            Uid = uid;
-            DiscountUid = discountUid;
-            AppliedMoney = appliedMoney;
+            this.Uid = uid;
+            this.DiscountUid = discountUid;
+            this.AppliedMoney = appliedMoney;
         }
 
         /// <summary>
@@ -50,6 +59,7 @@ namespace Square.Models
         [JsonProperty("applied_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Money AppliedMoney { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -59,13 +69,7 @@ namespace Square.Models
             return $"OrderLineItemAppliedDiscount : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Uid = {(Uid == null ? "null" : Uid == string.Empty ? "" : Uid)}");
-            toStringOutput.Add($"DiscountUid = {(DiscountUid == null ? "null" : DiscountUid == string.Empty ? "" : DiscountUid)}");
-            toStringOutput.Add($"AppliedMoney = {(AppliedMoney == null ? "null" : AppliedMoney.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -79,75 +83,116 @@ namespace Square.Models
             }
 
             return obj is OrderLineItemAppliedDiscount other &&
-                ((Uid == null && other.Uid == null) || (Uid?.Equals(other.Uid) == true)) &&
-                ((DiscountUid == null && other.DiscountUid == null) || (DiscountUid?.Equals(other.DiscountUid) == true)) &&
-                ((AppliedMoney == null && other.AppliedMoney == null) || (AppliedMoney?.Equals(other.AppliedMoney) == true));
+                ((this.Uid == null && other.Uid == null) || (this.Uid?.Equals(other.Uid) == true)) &&
+                ((this.DiscountUid == null && other.DiscountUid == null) || (this.DiscountUid?.Equals(other.DiscountUid) == true)) &&
+                ((this.AppliedMoney == null && other.AppliedMoney == null) || (this.AppliedMoney?.Equals(other.AppliedMoney) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -855225717;
 
-            if (Uid != null)
+            if (this.Uid != null)
             {
-               hashCode += Uid.GetHashCode();
+               hashCode += this.Uid.GetHashCode();
             }
 
-            if (DiscountUid != null)
+            if (this.DiscountUid != null)
             {
-               hashCode += DiscountUid.GetHashCode();
+               hashCode += this.DiscountUid.GetHashCode();
             }
 
-            if (AppliedMoney != null)
+            if (this.AppliedMoney != null)
             {
-               hashCode += AppliedMoney.GetHashCode();
+               hashCode += this.AppliedMoney.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Uid = {(this.Uid == null ? "null" : this.Uid == string.Empty ? "" : this.Uid)}");
+            toStringOutput.Add($"this.DiscountUid = {(this.DiscountUid == null ? "null" : this.DiscountUid == string.Empty ? "" : this.DiscountUid)}");
+            toStringOutput.Add($"this.AppliedMoney = {(this.AppliedMoney == null ? "null" : this.AppliedMoney.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
-            var builder = new Builder(DiscountUid)
-                .Uid(Uid)
-                .AppliedMoney(AppliedMoney);
+            var builder = new Builder(
+                this.DiscountUid)
+                .Uid(this.Uid)
+                .AppliedMoney(this.AppliedMoney);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string discountUid;
             private string uid;
             private Models.Money appliedMoney;
 
-            public Builder(string discountUid)
+            public Builder(
+                string discountUid)
             {
                 this.discountUid = discountUid;
             }
 
+             /// <summary>
+             /// DiscountUid.
+             /// </summary>
+             /// <param name="discountUid"> discountUid. </param>
+             /// <returns> Builder. </returns>
             public Builder DiscountUid(string discountUid)
             {
                 this.discountUid = discountUid;
                 return this;
             }
 
+             /// <summary>
+             /// Uid.
+             /// </summary>
+             /// <param name="uid"> uid. </param>
+             /// <returns> Builder. </returns>
             public Builder Uid(string uid)
             {
                 this.uid = uid;
                 return this;
             }
 
+             /// <summary>
+             /// AppliedMoney.
+             /// </summary>
+             /// <param name="appliedMoney"> appliedMoney. </param>
+             /// <returns> Builder. </returns>
             public Builder AppliedMoney(Models.Money appliedMoney)
             {
                 this.appliedMoney = appliedMoney;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> OrderLineItemAppliedDiscount. </returns>
             public OrderLineItemAppliedDiscount Build()
             {
-                return new OrderLineItemAppliedDiscount(discountUid,
-                    uid,
-                    appliedMoney);
+                return new OrderLineItemAppliedDiscount(
+                    this.discountUid,
+                    this.uid,
+                    this.appliedMoney);
             }
         }
     }

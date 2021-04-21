@@ -1,36 +1,51 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square.Http.Client;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class RenewTokenResponse 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Http.Client;
+    using Square.Utilities;
+
+    /// <summary>
+    /// RenewTokenResponse.
+    /// </summary>
+    public class RenewTokenResponse
     {
-        public RenewTokenResponse(string accessToken = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RenewTokenResponse"/> class.
+        /// </summary>
+        /// <param name="accessToken">access_token.</param>
+        /// <param name="tokenType">token_type.</param>
+        /// <param name="expiresAt">expires_at.</param>
+        /// <param name="merchantId">merchant_id.</param>
+        /// <param name="subscriptionId">subscription_id.</param>
+        /// <param name="planId">plan_id.</param>
+        public RenewTokenResponse(
+            string accessToken = null,
             string tokenType = null,
             string expiresAt = null,
             string merchantId = null,
             string subscriptionId = null,
             string planId = null)
         {
-            AccessToken = accessToken;
-            TokenType = tokenType;
-            ExpiresAt = expiresAt;
-            MerchantId = merchantId;
-            SubscriptionId = subscriptionId;
-            PlanId = planId;
+            this.AccessToken = accessToken;
+            this.TokenType = tokenType;
+            this.ExpiresAt = expiresAt;
+            this.MerchantId = merchantId;
+            this.SubscriptionId = subscriptionId;
+            this.PlanId = planId;
         }
 
+        /// <summary>
+        /// Gets http context.
+        /// </summary>
         [JsonIgnore]
         public HttpContext Context { get; internal set; }
 
@@ -77,6 +92,7 @@ namespace Square.Models
         [JsonProperty("plan_id", NullValueHandling = NullValueHandling.Ignore)]
         public string PlanId { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -86,16 +102,7 @@ namespace Square.Models
             return $"RenewTokenResponse : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"AccessToken = {(AccessToken == null ? "null" : AccessToken == string.Empty ? "" : AccessToken)}");
-            toStringOutput.Add($"TokenType = {(TokenType == null ? "null" : TokenType == string.Empty ? "" : TokenType)}");
-            toStringOutput.Add($"ExpiresAt = {(ExpiresAt == null ? "null" : ExpiresAt == string.Empty ? "" : ExpiresAt)}");
-            toStringOutput.Add($"MerchantId = {(MerchantId == null ? "null" : MerchantId == string.Empty ? "" : MerchantId)}");
-            toStringOutput.Add($"SubscriptionId = {(SubscriptionId == null ? "null" : SubscriptionId == string.Empty ? "" : SubscriptionId)}");
-            toStringOutput.Add($"PlanId = {(PlanId == null ? "null" : PlanId == string.Empty ? "" : PlanId)}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -109,69 +116,91 @@ namespace Square.Models
             }
 
             return obj is RenewTokenResponse other &&
-                ((Context == null && other.Context == null) || (Context?.Equals(other.Context) == true)) &&
-                ((AccessToken == null && other.AccessToken == null) || (AccessToken?.Equals(other.AccessToken) == true)) &&
-                ((TokenType == null && other.TokenType == null) || (TokenType?.Equals(other.TokenType) == true)) &&
-                ((ExpiresAt == null && other.ExpiresAt == null) || (ExpiresAt?.Equals(other.ExpiresAt) == true)) &&
-                ((MerchantId == null && other.MerchantId == null) || (MerchantId?.Equals(other.MerchantId) == true)) &&
-                ((SubscriptionId == null && other.SubscriptionId == null) || (SubscriptionId?.Equals(other.SubscriptionId) == true)) &&
-                ((PlanId == null && other.PlanId == null) || (PlanId?.Equals(other.PlanId) == true));
+                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
+                ((this.AccessToken == null && other.AccessToken == null) || (this.AccessToken?.Equals(other.AccessToken) == true)) &&
+                ((this.TokenType == null && other.TokenType == null) || (this.TokenType?.Equals(other.TokenType) == true)) &&
+                ((this.ExpiresAt == null && other.ExpiresAt == null) || (this.ExpiresAt?.Equals(other.ExpiresAt) == true)) &&
+                ((this.MerchantId == null && other.MerchantId == null) || (this.MerchantId?.Equals(other.MerchantId) == true)) &&
+                ((this.SubscriptionId == null && other.SubscriptionId == null) || (this.SubscriptionId?.Equals(other.SubscriptionId) == true)) &&
+                ((this.PlanId == null && other.PlanId == null) || (this.PlanId?.Equals(other.PlanId) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 1777017961;
 
-            if (Context != null)
+            if (this.Context != null)
             {
-                hashCode += Context.GetHashCode();
+                hashCode += this.Context.GetHashCode();
             }
 
-            if (AccessToken != null)
+            if (this.AccessToken != null)
             {
-               hashCode += AccessToken.GetHashCode();
+               hashCode += this.AccessToken.GetHashCode();
             }
 
-            if (TokenType != null)
+            if (this.TokenType != null)
             {
-               hashCode += TokenType.GetHashCode();
+               hashCode += this.TokenType.GetHashCode();
             }
 
-            if (ExpiresAt != null)
+            if (this.ExpiresAt != null)
             {
-               hashCode += ExpiresAt.GetHashCode();
+               hashCode += this.ExpiresAt.GetHashCode();
             }
 
-            if (MerchantId != null)
+            if (this.MerchantId != null)
             {
-               hashCode += MerchantId.GetHashCode();
+               hashCode += this.MerchantId.GetHashCode();
             }
 
-            if (SubscriptionId != null)
+            if (this.SubscriptionId != null)
             {
-               hashCode += SubscriptionId.GetHashCode();
+               hashCode += this.SubscriptionId.GetHashCode();
             }
 
-            if (PlanId != null)
+            if (this.PlanId != null)
             {
-               hashCode += PlanId.GetHashCode();
+               hashCode += this.PlanId.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.AccessToken = {(this.AccessToken == null ? "null" : this.AccessToken == string.Empty ? "" : this.AccessToken)}");
+            toStringOutput.Add($"this.TokenType = {(this.TokenType == null ? "null" : this.TokenType == string.Empty ? "" : this.TokenType)}");
+            toStringOutput.Add($"this.ExpiresAt = {(this.ExpiresAt == null ? "null" : this.ExpiresAt == string.Empty ? "" : this.ExpiresAt)}");
+            toStringOutput.Add($"this.MerchantId = {(this.MerchantId == null ? "null" : this.MerchantId == string.Empty ? "" : this.MerchantId)}");
+            toStringOutput.Add($"this.SubscriptionId = {(this.SubscriptionId == null ? "null" : this.SubscriptionId == string.Empty ? "" : this.SubscriptionId)}");
+            toStringOutput.Add($"this.PlanId = {(this.PlanId == null ? "null" : this.PlanId == string.Empty ? "" : this.PlanId)}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .AccessToken(AccessToken)
-                .TokenType(TokenType)
-                .ExpiresAt(ExpiresAt)
-                .MerchantId(MerchantId)
-                .SubscriptionId(SubscriptionId)
-                .PlanId(PlanId);
+                .AccessToken(this.AccessToken)
+                .TokenType(this.TokenType)
+                .ExpiresAt(this.ExpiresAt)
+                .MerchantId(this.MerchantId)
+                .SubscriptionId(this.SubscriptionId)
+                .PlanId(this.PlanId);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string accessToken;
@@ -181,52 +210,85 @@ namespace Square.Models
             private string subscriptionId;
             private string planId;
 
-
-
+             /// <summary>
+             /// AccessToken.
+             /// </summary>
+             /// <param name="accessToken"> accessToken. </param>
+             /// <returns> Builder. </returns>
             public Builder AccessToken(string accessToken)
             {
                 this.accessToken = accessToken;
                 return this;
             }
 
+             /// <summary>
+             /// TokenType.
+             /// </summary>
+             /// <param name="tokenType"> tokenType. </param>
+             /// <returns> Builder. </returns>
             public Builder TokenType(string tokenType)
             {
                 this.tokenType = tokenType;
                 return this;
             }
 
+             /// <summary>
+             /// ExpiresAt.
+             /// </summary>
+             /// <param name="expiresAt"> expiresAt. </param>
+             /// <returns> Builder. </returns>
             public Builder ExpiresAt(string expiresAt)
             {
                 this.expiresAt = expiresAt;
                 return this;
             }
 
+             /// <summary>
+             /// MerchantId.
+             /// </summary>
+             /// <param name="merchantId"> merchantId. </param>
+             /// <returns> Builder. </returns>
             public Builder MerchantId(string merchantId)
             {
                 this.merchantId = merchantId;
                 return this;
             }
 
+             /// <summary>
+             /// SubscriptionId.
+             /// </summary>
+             /// <param name="subscriptionId"> subscriptionId. </param>
+             /// <returns> Builder. </returns>
             public Builder SubscriptionId(string subscriptionId)
             {
                 this.subscriptionId = subscriptionId;
                 return this;
             }
 
+             /// <summary>
+             /// PlanId.
+             /// </summary>
+             /// <param name="planId"> planId. </param>
+             /// <returns> Builder. </returns>
             public Builder PlanId(string planId)
             {
                 this.planId = planId;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> RenewTokenResponse. </returns>
             public RenewTokenResponse Build()
             {
-                return new RenewTokenResponse(accessToken,
-                    tokenType,
-                    expiresAt,
-                    merchantId,
-                    subscriptionId,
-                    planId);
+                return new RenewTokenResponse(
+                    this.accessToken,
+                    this.tokenType,
+                    this.expiresAt,
+                    this.merchantId,
+                    this.subscriptionId,
+                    this.planId);
             }
         }
     }

@@ -1,31 +1,42 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class SubscriptionPhase 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// SubscriptionPhase.
+    /// </summary>
+    public class SubscriptionPhase
     {
-        public SubscriptionPhase(string cadence,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SubscriptionPhase"/> class.
+        /// </summary>
+        /// <param name="cadence">cadence.</param>
+        /// <param name="recurringPriceMoney">recurring_price_money.</param>
+        /// <param name="uid">uid.</param>
+        /// <param name="periods">periods.</param>
+        /// <param name="ordinal">ordinal.</param>
+        public SubscriptionPhase(
+            string cadence,
             Models.Money recurringPriceMoney,
             string uid = null,
             int? periods = null,
             long? ordinal = null)
         {
-            Uid = uid;
-            Cadence = cadence;
-            Periods = periods;
-            RecurringPriceMoney = recurringPriceMoney;
-            Ordinal = ordinal;
+            this.Uid = uid;
+            this.Cadence = cadence;
+            this.Periods = periods;
+            this.RecurringPriceMoney = recurringPriceMoney;
+            this.Ordinal = ordinal;
         }
 
         /// <summary>
@@ -35,7 +46,7 @@ namespace Square.Models
         public string Uid { get; }
 
         /// <summary>
-        /// Determines the billing cadence of a [Subscription](#type-Subscription)
+        /// Determines the billing cadence of a [Subscription]($m/Subscription)
         /// </summary>
         [JsonProperty("cadence")]
         public string Cadence { get; }
@@ -63,6 +74,7 @@ namespace Square.Models
         [JsonProperty("ordinal", NullValueHandling = NullValueHandling.Ignore)]
         public long? Ordinal { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -72,15 +84,7 @@ namespace Square.Models
             return $"SubscriptionPhase : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Uid = {(Uid == null ? "null" : Uid == string.Empty ? "" : Uid)}");
-            toStringOutput.Add($"Cadence = {(Cadence == null ? "null" : Cadence.ToString())}");
-            toStringOutput.Add($"Periods = {(Periods == null ? "null" : Periods.ToString())}");
-            toStringOutput.Add($"RecurringPriceMoney = {(RecurringPriceMoney == null ? "null" : RecurringPriceMoney.ToString())}");
-            toStringOutput.Add($"Ordinal = {(Ordinal == null ? "null" : Ordinal.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -94,55 +98,77 @@ namespace Square.Models
             }
 
             return obj is SubscriptionPhase other &&
-                ((Uid == null && other.Uid == null) || (Uid?.Equals(other.Uid) == true)) &&
-                ((Cadence == null && other.Cadence == null) || (Cadence?.Equals(other.Cadence) == true)) &&
-                ((Periods == null && other.Periods == null) || (Periods?.Equals(other.Periods) == true)) &&
-                ((RecurringPriceMoney == null && other.RecurringPriceMoney == null) || (RecurringPriceMoney?.Equals(other.RecurringPriceMoney) == true)) &&
-                ((Ordinal == null && other.Ordinal == null) || (Ordinal?.Equals(other.Ordinal) == true));
+                ((this.Uid == null && other.Uid == null) || (this.Uid?.Equals(other.Uid) == true)) &&
+                ((this.Cadence == null && other.Cadence == null) || (this.Cadence?.Equals(other.Cadence) == true)) &&
+                ((this.Periods == null && other.Periods == null) || (this.Periods?.Equals(other.Periods) == true)) &&
+                ((this.RecurringPriceMoney == null && other.RecurringPriceMoney == null) || (this.RecurringPriceMoney?.Equals(other.RecurringPriceMoney) == true)) &&
+                ((this.Ordinal == null && other.Ordinal == null) || (this.Ordinal?.Equals(other.Ordinal) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 718353637;
 
-            if (Uid != null)
+            if (this.Uid != null)
             {
-               hashCode += Uid.GetHashCode();
+               hashCode += this.Uid.GetHashCode();
             }
 
-            if (Cadence != null)
+            if (this.Cadence != null)
             {
-               hashCode += Cadence.GetHashCode();
+               hashCode += this.Cadence.GetHashCode();
             }
 
-            if (Periods != null)
+            if (this.Periods != null)
             {
-               hashCode += Periods.GetHashCode();
+               hashCode += this.Periods.GetHashCode();
             }
 
-            if (RecurringPriceMoney != null)
+            if (this.RecurringPriceMoney != null)
             {
-               hashCode += RecurringPriceMoney.GetHashCode();
+               hashCode += this.RecurringPriceMoney.GetHashCode();
             }
 
-            if (Ordinal != null)
+            if (this.Ordinal != null)
             {
-               hashCode += Ordinal.GetHashCode();
+               hashCode += this.Ordinal.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Uid = {(this.Uid == null ? "null" : this.Uid == string.Empty ? "" : this.Uid)}");
+            toStringOutput.Add($"this.Cadence = {(this.Cadence == null ? "null" : this.Cadence.ToString())}");
+            toStringOutput.Add($"this.Periods = {(this.Periods == null ? "null" : this.Periods.ToString())}");
+            toStringOutput.Add($"this.RecurringPriceMoney = {(this.RecurringPriceMoney == null ? "null" : this.RecurringPriceMoney.ToString())}");
+            toStringOutput.Add($"this.Ordinal = {(this.Ordinal == null ? "null" : this.Ordinal.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
-            var builder = new Builder(Cadence,
-                RecurringPriceMoney)
-                .Uid(Uid)
-                .Periods(Periods)
-                .Ordinal(Ordinal);
+            var builder = new Builder(
+                this.Cadence,
+                this.RecurringPriceMoney)
+                .Uid(this.Uid)
+                .Periods(this.Periods)
+                .Ordinal(this.Ordinal);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string cadence;
@@ -151,50 +177,81 @@ namespace Square.Models
             private int? periods;
             private long? ordinal;
 
-            public Builder(string cadence,
+            public Builder(
+                string cadence,
                 Models.Money recurringPriceMoney)
             {
                 this.cadence = cadence;
                 this.recurringPriceMoney = recurringPriceMoney;
             }
 
+             /// <summary>
+             /// Cadence.
+             /// </summary>
+             /// <param name="cadence"> cadence. </param>
+             /// <returns> Builder. </returns>
             public Builder Cadence(string cadence)
             {
                 this.cadence = cadence;
                 return this;
             }
 
+             /// <summary>
+             /// RecurringPriceMoney.
+             /// </summary>
+             /// <param name="recurringPriceMoney"> recurringPriceMoney. </param>
+             /// <returns> Builder. </returns>
             public Builder RecurringPriceMoney(Models.Money recurringPriceMoney)
             {
                 this.recurringPriceMoney = recurringPriceMoney;
                 return this;
             }
 
+             /// <summary>
+             /// Uid.
+             /// </summary>
+             /// <param name="uid"> uid. </param>
+             /// <returns> Builder. </returns>
             public Builder Uid(string uid)
             {
                 this.uid = uid;
                 return this;
             }
 
+             /// <summary>
+             /// Periods.
+             /// </summary>
+             /// <param name="periods"> periods. </param>
+             /// <returns> Builder. </returns>
             public Builder Periods(int? periods)
             {
                 this.periods = periods;
                 return this;
             }
 
+             /// <summary>
+             /// Ordinal.
+             /// </summary>
+             /// <param name="ordinal"> ordinal. </param>
+             /// <returns> Builder. </returns>
             public Builder Ordinal(long? ordinal)
             {
                 this.ordinal = ordinal;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> SubscriptionPhase. </returns>
             public SubscriptionPhase Build()
             {
-                return new SubscriptionPhase(cadence,
-                    recurringPriceMoney,
-                    uid,
-                    periods,
-                    ordinal);
+                return new SubscriptionPhase(
+                    this.cadence,
+                    this.recurringPriceMoney,
+                    this.uid,
+                    this.periods,
+                    this.ordinal);
             }
         }
     }

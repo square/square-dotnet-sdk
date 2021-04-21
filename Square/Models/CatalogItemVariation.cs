@@ -1,21 +1,44 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class CatalogItemVariation 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// CatalogItemVariation.
+    /// </summary>
+    public class CatalogItemVariation
     {
-        public CatalogItemVariation(string itemId = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CatalogItemVariation"/> class.
+        /// </summary>
+        /// <param name="itemId">item_id.</param>
+        /// <param name="name">name.</param>
+        /// <param name="sku">sku.</param>
+        /// <param name="upc">upc.</param>
+        /// <param name="ordinal">ordinal.</param>
+        /// <param name="pricingType">pricing_type.</param>
+        /// <param name="priceMoney">price_money.</param>
+        /// <param name="locationOverrides">location_overrides.</param>
+        /// <param name="trackInventory">track_inventory.</param>
+        /// <param name="inventoryAlertType">inventory_alert_type.</param>
+        /// <param name="inventoryAlertThreshold">inventory_alert_threshold.</param>
+        /// <param name="userData">user_data.</param>
+        /// <param name="serviceDuration">service_duration.</param>
+        /// <param name="availableForBooking">available_for_booking.</param>
+        /// <param name="itemOptionValues">item_option_values.</param>
+        /// <param name="measurementUnitId">measurement_unit_id.</param>
+        /// <param name="teamMemberIds">team_member_ids.</param>
+        public CatalogItemVariation(
+            string itemId = null,
             string name = null,
             string sku = null,
             string upc = null,
@@ -33,23 +56,23 @@ namespace Square.Models
             string measurementUnitId = null,
             IList<string> teamMemberIds = null)
         {
-            ItemId = itemId;
-            Name = name;
-            Sku = sku;
-            Upc = upc;
-            Ordinal = ordinal;
-            PricingType = pricingType;
-            PriceMoney = priceMoney;
-            LocationOverrides = locationOverrides;
-            TrackInventory = trackInventory;
-            InventoryAlertType = inventoryAlertType;
-            InventoryAlertThreshold = inventoryAlertThreshold;
-            UserData = userData;
-            ServiceDuration = serviceDuration;
-            AvailableForBooking = availableForBooking;
-            ItemOptionValues = itemOptionValues;
-            MeasurementUnitId = measurementUnitId;
-            TeamMemberIds = teamMemberIds;
+            this.ItemId = itemId;
+            this.Name = name;
+            this.Sku = sku;
+            this.Upc = upc;
+            this.Ordinal = ordinal;
+            this.PricingType = pricingType;
+            this.PriceMoney = priceMoney;
+            this.LocationOverrides = locationOverrides;
+            this.TrackInventory = trackInventory;
+            this.InventoryAlertType = inventoryAlertType;
+            this.InventoryAlertThreshold = inventoryAlertThreshold;
+            this.UserData = userData;
+            this.ServiceDuration = serviceDuration;
+            this.AvailableForBooking = availableForBooking;
+            this.ItemOptionValues = itemOptionValues;
+            this.MeasurementUnitId = measurementUnitId;
+            this.TeamMemberIds = teamMemberIds;
         }
 
         /// <summary>
@@ -175,6 +198,7 @@ namespace Square.Models
         [JsonProperty("team_member_ids", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> TeamMemberIds { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -184,27 +208,7 @@ namespace Square.Models
             return $"CatalogItemVariation : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"ItemId = {(ItemId == null ? "null" : ItemId == string.Empty ? "" : ItemId)}");
-            toStringOutput.Add($"Name = {(Name == null ? "null" : Name == string.Empty ? "" : Name)}");
-            toStringOutput.Add($"Sku = {(Sku == null ? "null" : Sku == string.Empty ? "" : Sku)}");
-            toStringOutput.Add($"Upc = {(Upc == null ? "null" : Upc == string.Empty ? "" : Upc)}");
-            toStringOutput.Add($"Ordinal = {(Ordinal == null ? "null" : Ordinal.ToString())}");
-            toStringOutput.Add($"PricingType = {(PricingType == null ? "null" : PricingType.ToString())}");
-            toStringOutput.Add($"PriceMoney = {(PriceMoney == null ? "null" : PriceMoney.ToString())}");
-            toStringOutput.Add($"LocationOverrides = {(LocationOverrides == null ? "null" : $"[{ string.Join(", ", LocationOverrides)} ]")}");
-            toStringOutput.Add($"TrackInventory = {(TrackInventory == null ? "null" : TrackInventory.ToString())}");
-            toStringOutput.Add($"InventoryAlertType = {(InventoryAlertType == null ? "null" : InventoryAlertType.ToString())}");
-            toStringOutput.Add($"InventoryAlertThreshold = {(InventoryAlertThreshold == null ? "null" : InventoryAlertThreshold.ToString())}");
-            toStringOutput.Add($"UserData = {(UserData == null ? "null" : UserData == string.Empty ? "" : UserData)}");
-            toStringOutput.Add($"ServiceDuration = {(ServiceDuration == null ? "null" : ServiceDuration.ToString())}");
-            toStringOutput.Add($"AvailableForBooking = {(AvailableForBooking == null ? "null" : AvailableForBooking.ToString())}");
-            toStringOutput.Add($"ItemOptionValues = {(ItemOptionValues == null ? "null" : $"[{ string.Join(", ", ItemOptionValues)} ]")}");
-            toStringOutput.Add($"MeasurementUnitId = {(MeasurementUnitId == null ? "null" : MeasurementUnitId == string.Empty ? "" : MeasurementUnitId)}");
-            toStringOutput.Add($"TeamMemberIds = {(TeamMemberIds == null ? "null" : $"[{ string.Join(", ", TeamMemberIds)} ]")}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -218,140 +222,173 @@ namespace Square.Models
             }
 
             return obj is CatalogItemVariation other &&
-                ((ItemId == null && other.ItemId == null) || (ItemId?.Equals(other.ItemId) == true)) &&
-                ((Name == null && other.Name == null) || (Name?.Equals(other.Name) == true)) &&
-                ((Sku == null && other.Sku == null) || (Sku?.Equals(other.Sku) == true)) &&
-                ((Upc == null && other.Upc == null) || (Upc?.Equals(other.Upc) == true)) &&
-                ((Ordinal == null && other.Ordinal == null) || (Ordinal?.Equals(other.Ordinal) == true)) &&
-                ((PricingType == null && other.PricingType == null) || (PricingType?.Equals(other.PricingType) == true)) &&
-                ((PriceMoney == null && other.PriceMoney == null) || (PriceMoney?.Equals(other.PriceMoney) == true)) &&
-                ((LocationOverrides == null && other.LocationOverrides == null) || (LocationOverrides?.Equals(other.LocationOverrides) == true)) &&
-                ((TrackInventory == null && other.TrackInventory == null) || (TrackInventory?.Equals(other.TrackInventory) == true)) &&
-                ((InventoryAlertType == null && other.InventoryAlertType == null) || (InventoryAlertType?.Equals(other.InventoryAlertType) == true)) &&
-                ((InventoryAlertThreshold == null && other.InventoryAlertThreshold == null) || (InventoryAlertThreshold?.Equals(other.InventoryAlertThreshold) == true)) &&
-                ((UserData == null && other.UserData == null) || (UserData?.Equals(other.UserData) == true)) &&
-                ((ServiceDuration == null && other.ServiceDuration == null) || (ServiceDuration?.Equals(other.ServiceDuration) == true)) &&
-                ((AvailableForBooking == null && other.AvailableForBooking == null) || (AvailableForBooking?.Equals(other.AvailableForBooking) == true)) &&
-                ((ItemOptionValues == null && other.ItemOptionValues == null) || (ItemOptionValues?.Equals(other.ItemOptionValues) == true)) &&
-                ((MeasurementUnitId == null && other.MeasurementUnitId == null) || (MeasurementUnitId?.Equals(other.MeasurementUnitId) == true)) &&
-                ((TeamMemberIds == null && other.TeamMemberIds == null) || (TeamMemberIds?.Equals(other.TeamMemberIds) == true));
+                ((this.ItemId == null && other.ItemId == null) || (this.ItemId?.Equals(other.ItemId) == true)) &&
+                ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
+                ((this.Sku == null && other.Sku == null) || (this.Sku?.Equals(other.Sku) == true)) &&
+                ((this.Upc == null && other.Upc == null) || (this.Upc?.Equals(other.Upc) == true)) &&
+                ((this.Ordinal == null && other.Ordinal == null) || (this.Ordinal?.Equals(other.Ordinal) == true)) &&
+                ((this.PricingType == null && other.PricingType == null) || (this.PricingType?.Equals(other.PricingType) == true)) &&
+                ((this.PriceMoney == null && other.PriceMoney == null) || (this.PriceMoney?.Equals(other.PriceMoney) == true)) &&
+                ((this.LocationOverrides == null && other.LocationOverrides == null) || (this.LocationOverrides?.Equals(other.LocationOverrides) == true)) &&
+                ((this.TrackInventory == null && other.TrackInventory == null) || (this.TrackInventory?.Equals(other.TrackInventory) == true)) &&
+                ((this.InventoryAlertType == null && other.InventoryAlertType == null) || (this.InventoryAlertType?.Equals(other.InventoryAlertType) == true)) &&
+                ((this.InventoryAlertThreshold == null && other.InventoryAlertThreshold == null) || (this.InventoryAlertThreshold?.Equals(other.InventoryAlertThreshold) == true)) &&
+                ((this.UserData == null && other.UserData == null) || (this.UserData?.Equals(other.UserData) == true)) &&
+                ((this.ServiceDuration == null && other.ServiceDuration == null) || (this.ServiceDuration?.Equals(other.ServiceDuration) == true)) &&
+                ((this.AvailableForBooking == null && other.AvailableForBooking == null) || (this.AvailableForBooking?.Equals(other.AvailableForBooking) == true)) &&
+                ((this.ItemOptionValues == null && other.ItemOptionValues == null) || (this.ItemOptionValues?.Equals(other.ItemOptionValues) == true)) &&
+                ((this.MeasurementUnitId == null && other.MeasurementUnitId == null) || (this.MeasurementUnitId?.Equals(other.MeasurementUnitId) == true)) &&
+                ((this.TeamMemberIds == null && other.TeamMemberIds == null) || (this.TeamMemberIds?.Equals(other.TeamMemberIds) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1155387790;
 
-            if (ItemId != null)
+            if (this.ItemId != null)
             {
-               hashCode += ItemId.GetHashCode();
+               hashCode += this.ItemId.GetHashCode();
             }
 
-            if (Name != null)
+            if (this.Name != null)
             {
-               hashCode += Name.GetHashCode();
+               hashCode += this.Name.GetHashCode();
             }
 
-            if (Sku != null)
+            if (this.Sku != null)
             {
-               hashCode += Sku.GetHashCode();
+               hashCode += this.Sku.GetHashCode();
             }
 
-            if (Upc != null)
+            if (this.Upc != null)
             {
-               hashCode += Upc.GetHashCode();
+               hashCode += this.Upc.GetHashCode();
             }
 
-            if (Ordinal != null)
+            if (this.Ordinal != null)
             {
-               hashCode += Ordinal.GetHashCode();
+               hashCode += this.Ordinal.GetHashCode();
             }
 
-            if (PricingType != null)
+            if (this.PricingType != null)
             {
-               hashCode += PricingType.GetHashCode();
+               hashCode += this.PricingType.GetHashCode();
             }
 
-            if (PriceMoney != null)
+            if (this.PriceMoney != null)
             {
-               hashCode += PriceMoney.GetHashCode();
+               hashCode += this.PriceMoney.GetHashCode();
             }
 
-            if (LocationOverrides != null)
+            if (this.LocationOverrides != null)
             {
-               hashCode += LocationOverrides.GetHashCode();
+               hashCode += this.LocationOverrides.GetHashCode();
             }
 
-            if (TrackInventory != null)
+            if (this.TrackInventory != null)
             {
-               hashCode += TrackInventory.GetHashCode();
+               hashCode += this.TrackInventory.GetHashCode();
             }
 
-            if (InventoryAlertType != null)
+            if (this.InventoryAlertType != null)
             {
-               hashCode += InventoryAlertType.GetHashCode();
+               hashCode += this.InventoryAlertType.GetHashCode();
             }
 
-            if (InventoryAlertThreshold != null)
+            if (this.InventoryAlertThreshold != null)
             {
-               hashCode += InventoryAlertThreshold.GetHashCode();
+               hashCode += this.InventoryAlertThreshold.GetHashCode();
             }
 
-            if (UserData != null)
+            if (this.UserData != null)
             {
-               hashCode += UserData.GetHashCode();
+               hashCode += this.UserData.GetHashCode();
             }
 
-            if (ServiceDuration != null)
+            if (this.ServiceDuration != null)
             {
-               hashCode += ServiceDuration.GetHashCode();
+               hashCode += this.ServiceDuration.GetHashCode();
             }
 
-            if (AvailableForBooking != null)
+            if (this.AvailableForBooking != null)
             {
-               hashCode += AvailableForBooking.GetHashCode();
+               hashCode += this.AvailableForBooking.GetHashCode();
             }
 
-            if (ItemOptionValues != null)
+            if (this.ItemOptionValues != null)
             {
-               hashCode += ItemOptionValues.GetHashCode();
+               hashCode += this.ItemOptionValues.GetHashCode();
             }
 
-            if (MeasurementUnitId != null)
+            if (this.MeasurementUnitId != null)
             {
-               hashCode += MeasurementUnitId.GetHashCode();
+               hashCode += this.MeasurementUnitId.GetHashCode();
             }
 
-            if (TeamMemberIds != null)
+            if (this.TeamMemberIds != null)
             {
-               hashCode += TeamMemberIds.GetHashCode();
+               hashCode += this.TeamMemberIds.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.ItemId = {(this.ItemId == null ? "null" : this.ItemId == string.Empty ? "" : this.ItemId)}");
+            toStringOutput.Add($"this.Name = {(this.Name == null ? "null" : this.Name == string.Empty ? "" : this.Name)}");
+            toStringOutput.Add($"this.Sku = {(this.Sku == null ? "null" : this.Sku == string.Empty ? "" : this.Sku)}");
+            toStringOutput.Add($"this.Upc = {(this.Upc == null ? "null" : this.Upc == string.Empty ? "" : this.Upc)}");
+            toStringOutput.Add($"this.Ordinal = {(this.Ordinal == null ? "null" : this.Ordinal.ToString())}");
+            toStringOutput.Add($"this.PricingType = {(this.PricingType == null ? "null" : this.PricingType.ToString())}");
+            toStringOutput.Add($"this.PriceMoney = {(this.PriceMoney == null ? "null" : this.PriceMoney.ToString())}");
+            toStringOutput.Add($"this.LocationOverrides = {(this.LocationOverrides == null ? "null" : $"[{string.Join(", ", this.LocationOverrides)} ]")}");
+            toStringOutput.Add($"this.TrackInventory = {(this.TrackInventory == null ? "null" : this.TrackInventory.ToString())}");
+            toStringOutput.Add($"this.InventoryAlertType = {(this.InventoryAlertType == null ? "null" : this.InventoryAlertType.ToString())}");
+            toStringOutput.Add($"this.InventoryAlertThreshold = {(this.InventoryAlertThreshold == null ? "null" : this.InventoryAlertThreshold.ToString())}");
+            toStringOutput.Add($"this.UserData = {(this.UserData == null ? "null" : this.UserData == string.Empty ? "" : this.UserData)}");
+            toStringOutput.Add($"this.ServiceDuration = {(this.ServiceDuration == null ? "null" : this.ServiceDuration.ToString())}");
+            toStringOutput.Add($"this.AvailableForBooking = {(this.AvailableForBooking == null ? "null" : this.AvailableForBooking.ToString())}");
+            toStringOutput.Add($"this.ItemOptionValues = {(this.ItemOptionValues == null ? "null" : $"[{string.Join(", ", this.ItemOptionValues)} ]")}");
+            toStringOutput.Add($"this.MeasurementUnitId = {(this.MeasurementUnitId == null ? "null" : this.MeasurementUnitId == string.Empty ? "" : this.MeasurementUnitId)}");
+            toStringOutput.Add($"this.TeamMemberIds = {(this.TeamMemberIds == null ? "null" : $"[{string.Join(", ", this.TeamMemberIds)} ]")}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .ItemId(ItemId)
-                .Name(Name)
-                .Sku(Sku)
-                .Upc(Upc)
-                .Ordinal(Ordinal)
-                .PricingType(PricingType)
-                .PriceMoney(PriceMoney)
-                .LocationOverrides(LocationOverrides)
-                .TrackInventory(TrackInventory)
-                .InventoryAlertType(InventoryAlertType)
-                .InventoryAlertThreshold(InventoryAlertThreshold)
-                .UserData(UserData)
-                .ServiceDuration(ServiceDuration)
-                .AvailableForBooking(AvailableForBooking)
-                .ItemOptionValues(ItemOptionValues)
-                .MeasurementUnitId(MeasurementUnitId)
-                .TeamMemberIds(TeamMemberIds);
+                .ItemId(this.ItemId)
+                .Name(this.Name)
+                .Sku(this.Sku)
+                .Upc(this.Upc)
+                .Ordinal(this.Ordinal)
+                .PricingType(this.PricingType)
+                .PriceMoney(this.PriceMoney)
+                .LocationOverrides(this.LocationOverrides)
+                .TrackInventory(this.TrackInventory)
+                .InventoryAlertType(this.InventoryAlertType)
+                .InventoryAlertThreshold(this.InventoryAlertThreshold)
+                .UserData(this.UserData)
+                .ServiceDuration(this.ServiceDuration)
+                .AvailableForBooking(this.AvailableForBooking)
+                .ItemOptionValues(this.ItemOptionValues)
+                .MeasurementUnitId(this.MeasurementUnitId)
+                .TeamMemberIds(this.TeamMemberIds);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string itemId;
@@ -372,129 +409,217 @@ namespace Square.Models
             private string measurementUnitId;
             private IList<string> teamMemberIds;
 
-
-
+             /// <summary>
+             /// ItemId.
+             /// </summary>
+             /// <param name="itemId"> itemId. </param>
+             /// <returns> Builder. </returns>
             public Builder ItemId(string itemId)
             {
                 this.itemId = itemId;
                 return this;
             }
 
+             /// <summary>
+             /// Name.
+             /// </summary>
+             /// <param name="name"> name. </param>
+             /// <returns> Builder. </returns>
             public Builder Name(string name)
             {
                 this.name = name;
                 return this;
             }
 
+             /// <summary>
+             /// Sku.
+             /// </summary>
+             /// <param name="sku"> sku. </param>
+             /// <returns> Builder. </returns>
             public Builder Sku(string sku)
             {
                 this.sku = sku;
                 return this;
             }
 
+             /// <summary>
+             /// Upc.
+             /// </summary>
+             /// <param name="upc"> upc. </param>
+             /// <returns> Builder. </returns>
             public Builder Upc(string upc)
             {
                 this.upc = upc;
                 return this;
             }
 
+             /// <summary>
+             /// Ordinal.
+             /// </summary>
+             /// <param name="ordinal"> ordinal. </param>
+             /// <returns> Builder. </returns>
             public Builder Ordinal(int? ordinal)
             {
                 this.ordinal = ordinal;
                 return this;
             }
 
+             /// <summary>
+             /// PricingType.
+             /// </summary>
+             /// <param name="pricingType"> pricingType. </param>
+             /// <returns> Builder. </returns>
             public Builder PricingType(string pricingType)
             {
                 this.pricingType = pricingType;
                 return this;
             }
 
+             /// <summary>
+             /// PriceMoney.
+             /// </summary>
+             /// <param name="priceMoney"> priceMoney. </param>
+             /// <returns> Builder. </returns>
             public Builder PriceMoney(Models.Money priceMoney)
             {
                 this.priceMoney = priceMoney;
                 return this;
             }
 
+             /// <summary>
+             /// LocationOverrides.
+             /// </summary>
+             /// <param name="locationOverrides"> locationOverrides. </param>
+             /// <returns> Builder. </returns>
             public Builder LocationOverrides(IList<Models.ItemVariationLocationOverrides> locationOverrides)
             {
                 this.locationOverrides = locationOverrides;
                 return this;
             }
 
+             /// <summary>
+             /// TrackInventory.
+             /// </summary>
+             /// <param name="trackInventory"> trackInventory. </param>
+             /// <returns> Builder. </returns>
             public Builder TrackInventory(bool? trackInventory)
             {
                 this.trackInventory = trackInventory;
                 return this;
             }
 
+             /// <summary>
+             /// InventoryAlertType.
+             /// </summary>
+             /// <param name="inventoryAlertType"> inventoryAlertType. </param>
+             /// <returns> Builder. </returns>
             public Builder InventoryAlertType(string inventoryAlertType)
             {
                 this.inventoryAlertType = inventoryAlertType;
                 return this;
             }
 
+             /// <summary>
+             /// InventoryAlertThreshold.
+             /// </summary>
+             /// <param name="inventoryAlertThreshold"> inventoryAlertThreshold. </param>
+             /// <returns> Builder. </returns>
             public Builder InventoryAlertThreshold(long? inventoryAlertThreshold)
             {
                 this.inventoryAlertThreshold = inventoryAlertThreshold;
                 return this;
             }
 
+             /// <summary>
+             /// UserData.
+             /// </summary>
+             /// <param name="userData"> userData. </param>
+             /// <returns> Builder. </returns>
             public Builder UserData(string userData)
             {
                 this.userData = userData;
                 return this;
             }
 
+             /// <summary>
+             /// ServiceDuration.
+             /// </summary>
+             /// <param name="serviceDuration"> serviceDuration. </param>
+             /// <returns> Builder. </returns>
             public Builder ServiceDuration(long? serviceDuration)
             {
                 this.serviceDuration = serviceDuration;
                 return this;
             }
 
+             /// <summary>
+             /// AvailableForBooking.
+             /// </summary>
+             /// <param name="availableForBooking"> availableForBooking. </param>
+             /// <returns> Builder. </returns>
             public Builder AvailableForBooking(bool? availableForBooking)
             {
                 this.availableForBooking = availableForBooking;
                 return this;
             }
 
+             /// <summary>
+             /// ItemOptionValues.
+             /// </summary>
+             /// <param name="itemOptionValues"> itemOptionValues. </param>
+             /// <returns> Builder. </returns>
             public Builder ItemOptionValues(IList<Models.CatalogItemOptionValueForItemVariation> itemOptionValues)
             {
                 this.itemOptionValues = itemOptionValues;
                 return this;
             }
 
+             /// <summary>
+             /// MeasurementUnitId.
+             /// </summary>
+             /// <param name="measurementUnitId"> measurementUnitId. </param>
+             /// <returns> Builder. </returns>
             public Builder MeasurementUnitId(string measurementUnitId)
             {
                 this.measurementUnitId = measurementUnitId;
                 return this;
             }
 
+             /// <summary>
+             /// TeamMemberIds.
+             /// </summary>
+             /// <param name="teamMemberIds"> teamMemberIds. </param>
+             /// <returns> Builder. </returns>
             public Builder TeamMemberIds(IList<string> teamMemberIds)
             {
                 this.teamMemberIds = teamMemberIds;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> CatalogItemVariation. </returns>
             public CatalogItemVariation Build()
             {
-                return new CatalogItemVariation(itemId,
-                    name,
-                    sku,
-                    upc,
-                    ordinal,
-                    pricingType,
-                    priceMoney,
-                    locationOverrides,
-                    trackInventory,
-                    inventoryAlertType,
-                    inventoryAlertThreshold,
-                    userData,
-                    serviceDuration,
-                    availableForBooking,
-                    itemOptionValues,
-                    measurementUnitId,
-                    teamMemberIds);
+                return new CatalogItemVariation(
+                    this.itemId,
+                    this.name,
+                    this.sku,
+                    this.upc,
+                    this.ordinal,
+                    this.pricingType,
+                    this.priceMoney,
+                    this.locationOverrides,
+                    this.trackInventory,
+                    this.inventoryAlertType,
+                    this.inventoryAlertThreshold,
+                    this.userData,
+                    this.serviceDuration,
+                    this.availableForBooking,
+                    this.itemOptionValues,
+                    this.measurementUnitId,
+                    this.teamMemberIds);
             }
         }
     }

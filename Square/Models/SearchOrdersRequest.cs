@@ -1,31 +1,42 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class SearchOrdersRequest 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// SearchOrdersRequest.
+    /// </summary>
+    public class SearchOrdersRequest
     {
-        public SearchOrdersRequest(IList<string> locationIds = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SearchOrdersRequest"/> class.
+        /// </summary>
+        /// <param name="locationIds">location_ids.</param>
+        /// <param name="cursor">cursor.</param>
+        /// <param name="query">query.</param>
+        /// <param name="limit">limit.</param>
+        /// <param name="returnEntries">return_entries.</param>
+        public SearchOrdersRequest(
+            IList<string> locationIds = null,
             string cursor = null,
             Models.SearchOrdersQuery query = null,
             int? limit = null,
             bool? returnEntries = null)
         {
-            LocationIds = locationIds;
-            Cursor = cursor;
-            Query = query;
-            Limit = limit;
-            ReturnEntries = returnEntries;
+            this.LocationIds = locationIds;
+            this.Cursor = cursor;
+            this.Query = query;
+            this.Limit = limit;
+            this.ReturnEntries = returnEntries;
         }
 
         /// <summary>
@@ -40,7 +51,8 @@ namespace Square.Models
         /// <summary>
         /// A pagination cursor returned by a previous call to this endpoint.
         /// Provide this to retrieve the next set of results for your original query.
-        /// See [Pagination](https://developer.squareup.com/docs/basics/api101/pagination) for more information.
+        /// See [Pagination](https://developer.squareup.com/docs/basics/api101/pagination) for more
+        /// information.
         /// </summary>
         [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
         public string Cursor { get; }
@@ -61,13 +73,14 @@ namespace Square.Models
 
         /// <summary>
         /// Boolean that controls the format of the search results. If `true`,
-        /// SearchOrders will return [`OrderEntry`](#type-orderentry) objects. If `false`, SearchOrders
+        /// SearchOrders will return [`OrderEntry`]($m/OrderEntry) objects. If `false`, SearchOrders
         /// will return complete Order objects.
         /// Default: `false`.
         /// </summary>
         [JsonProperty("return_entries", NullValueHandling = NullValueHandling.Ignore)]
         public bool? ReturnEntries { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -77,15 +90,7 @@ namespace Square.Models
             return $"SearchOrdersRequest : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"LocationIds = {(LocationIds == null ? "null" : $"[{ string.Join(", ", LocationIds)} ]")}");
-            toStringOutput.Add($"Cursor = {(Cursor == null ? "null" : Cursor == string.Empty ? "" : Cursor)}");
-            toStringOutput.Add($"Query = {(Query == null ? "null" : Query.ToString())}");
-            toStringOutput.Add($"Limit = {(Limit == null ? "null" : Limit.ToString())}");
-            toStringOutput.Add($"ReturnEntries = {(ReturnEntries == null ? "null" : ReturnEntries.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -99,56 +104,77 @@ namespace Square.Models
             }
 
             return obj is SearchOrdersRequest other &&
-                ((LocationIds == null && other.LocationIds == null) || (LocationIds?.Equals(other.LocationIds) == true)) &&
-                ((Cursor == null && other.Cursor == null) || (Cursor?.Equals(other.Cursor) == true)) &&
-                ((Query == null && other.Query == null) || (Query?.Equals(other.Query) == true)) &&
-                ((Limit == null && other.Limit == null) || (Limit?.Equals(other.Limit) == true)) &&
-                ((ReturnEntries == null && other.ReturnEntries == null) || (ReturnEntries?.Equals(other.ReturnEntries) == true));
+                ((this.LocationIds == null && other.LocationIds == null) || (this.LocationIds?.Equals(other.LocationIds) == true)) &&
+                ((this.Cursor == null && other.Cursor == null) || (this.Cursor?.Equals(other.Cursor) == true)) &&
+                ((this.Query == null && other.Query == null) || (this.Query?.Equals(other.Query) == true)) &&
+                ((this.Limit == null && other.Limit == null) || (this.Limit?.Equals(other.Limit) == true)) &&
+                ((this.ReturnEntries == null && other.ReturnEntries == null) || (this.ReturnEntries?.Equals(other.ReturnEntries) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 455417059;
 
-            if (LocationIds != null)
+            if (this.LocationIds != null)
             {
-               hashCode += LocationIds.GetHashCode();
+               hashCode += this.LocationIds.GetHashCode();
             }
 
-            if (Cursor != null)
+            if (this.Cursor != null)
             {
-               hashCode += Cursor.GetHashCode();
+               hashCode += this.Cursor.GetHashCode();
             }
 
-            if (Query != null)
+            if (this.Query != null)
             {
-               hashCode += Query.GetHashCode();
+               hashCode += this.Query.GetHashCode();
             }
 
-            if (Limit != null)
+            if (this.Limit != null)
             {
-               hashCode += Limit.GetHashCode();
+               hashCode += this.Limit.GetHashCode();
             }
 
-            if (ReturnEntries != null)
+            if (this.ReturnEntries != null)
             {
-               hashCode += ReturnEntries.GetHashCode();
+               hashCode += this.ReturnEntries.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.LocationIds = {(this.LocationIds == null ? "null" : $"[{string.Join(", ", this.LocationIds)} ]")}");
+            toStringOutput.Add($"this.Cursor = {(this.Cursor == null ? "null" : this.Cursor == string.Empty ? "" : this.Cursor)}");
+            toStringOutput.Add($"this.Query = {(this.Query == null ? "null" : this.Query.ToString())}");
+            toStringOutput.Add($"this.Limit = {(this.Limit == null ? "null" : this.Limit.ToString())}");
+            toStringOutput.Add($"this.ReturnEntries = {(this.ReturnEntries == null ? "null" : this.ReturnEntries.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .LocationIds(LocationIds)
-                .Cursor(Cursor)
-                .Query(Query)
-                .Limit(Limit)
-                .ReturnEntries(ReturnEntries);
+                .LocationIds(this.LocationIds)
+                .Cursor(this.Cursor)
+                .Query(this.Query)
+                .Limit(this.Limit)
+                .ReturnEntries(this.ReturnEntries);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private IList<string> locationIds;
@@ -157,45 +183,73 @@ namespace Square.Models
             private int? limit;
             private bool? returnEntries;
 
-
-
+             /// <summary>
+             /// LocationIds.
+             /// </summary>
+             /// <param name="locationIds"> locationIds. </param>
+             /// <returns> Builder. </returns>
             public Builder LocationIds(IList<string> locationIds)
             {
                 this.locationIds = locationIds;
                 return this;
             }
 
+             /// <summary>
+             /// Cursor.
+             /// </summary>
+             /// <param name="cursor"> cursor. </param>
+             /// <returns> Builder. </returns>
             public Builder Cursor(string cursor)
             {
                 this.cursor = cursor;
                 return this;
             }
 
+             /// <summary>
+             /// Query.
+             /// </summary>
+             /// <param name="query"> query. </param>
+             /// <returns> Builder. </returns>
             public Builder Query(Models.SearchOrdersQuery query)
             {
                 this.query = query;
                 return this;
             }
 
+             /// <summary>
+             /// Limit.
+             /// </summary>
+             /// <param name="limit"> limit. </param>
+             /// <returns> Builder. </returns>
             public Builder Limit(int? limit)
             {
                 this.limit = limit;
                 return this;
             }
 
+             /// <summary>
+             /// ReturnEntries.
+             /// </summary>
+             /// <param name="returnEntries"> returnEntries. </param>
+             /// <returns> Builder. </returns>
             public Builder ReturnEntries(bool? returnEntries)
             {
                 this.returnEntries = returnEntries;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> SearchOrdersRequest. </returns>
             public SearchOrdersRequest Build()
             {
-                return new SearchOrdersRequest(locationIds,
-                    cursor,
-                    query,
-                    limit,
-                    returnEntries);
+                return new SearchOrdersRequest(
+                    this.locationIds,
+                    this.cursor,
+                    this.query,
+                    this.limit,
+                    this.returnEntries);
             }
         }
     }

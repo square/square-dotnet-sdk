@@ -1,23 +1,30 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class BusinessHours 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// BusinessHours.
+    /// </summary>
+    public class BusinessHours
     {
-        public BusinessHours(IList<Models.BusinessHoursPeriod> periods = null)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BusinessHours"/> class.
+        /// </summary>
+        /// <param name="periods">periods.</param>
+        public BusinessHours(
+            IList<Models.BusinessHoursPeriod> periods = null)
         {
-            Periods = periods;
+            this.Periods = periods;
         }
 
         /// <summary>
@@ -27,6 +34,7 @@ namespace Square.Models
         [JsonProperty("periods", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.BusinessHoursPeriod> Periods { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -36,11 +44,7 @@ namespace Square.Models
             return $"BusinessHours : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Periods = {(Periods == null ? "null" : $"[{ string.Join(", ", Periods)} ]")}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -54,43 +58,68 @@ namespace Square.Models
             }
 
             return obj is BusinessHours other &&
-                ((Periods == null && other.Periods == null) || (Periods?.Equals(other.Periods) == true));
+                ((this.Periods == null && other.Periods == null) || (this.Periods?.Equals(other.Periods) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1271827402;
 
-            if (Periods != null)
+            if (this.Periods != null)
             {
-               hashCode += Periods.GetHashCode();
+               hashCode += this.Periods.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Periods = {(this.Periods == null ? "null" : $"[{string.Join(", ", this.Periods)} ]")}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .Periods(Periods);
+                .Periods(this.Periods);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private IList<Models.BusinessHoursPeriod> periods;
 
-
-
+             /// <summary>
+             /// Periods.
+             /// </summary>
+             /// <param name="periods"> periods. </param>
+             /// <returns> Builder. </returns>
             public Builder Periods(IList<Models.BusinessHoursPeriod> periods)
             {
                 this.periods = periods;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> BusinessHours. </returns>
             public BusinessHours Build()
             {
-                return new BusinessHours(periods);
+                return new BusinessHours(
+                    this.periods);
             }
         }
     }

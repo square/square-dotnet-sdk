@@ -1,34 +1,44 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class PayOrderRequest 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// PayOrderRequest.
+    /// </summary>
+    public class PayOrderRequest
     {
-        public PayOrderRequest(string idempotencyKey,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PayOrderRequest"/> class.
+        /// </summary>
+        /// <param name="idempotencyKey">idempotency_key.</param>
+        /// <param name="orderVersion">order_version.</param>
+        /// <param name="paymentIds">payment_ids.</param>
+        public PayOrderRequest(
+            string idempotencyKey,
             int? orderVersion = null,
             IList<string> paymentIds = null)
         {
-            IdempotencyKey = idempotencyKey;
-            OrderVersion = orderVersion;
-            PaymentIds = paymentIds;
+            this.IdempotencyKey = idempotencyKey;
+            this.OrderVersion = orderVersion;
+            this.PaymentIds = paymentIds;
         }
 
         /// <summary>
         /// A value you specify that uniquely identifies this request among requests you've sent. If
         /// you're unsure whether a particular payment request was completed successfully, you can reattempt
         /// it with the same idempotency key without worrying about duplicate payments.
-        /// See [Idempotency](https://developer.squareup.com/docs/working-with-apis/idempotency) for more information.
+        /// See [Idempotency](https://developer.squareup.com/docs/working-with-apis/idempotency) for more
+        /// information.
         /// </summary>
         [JsonProperty("idempotency_key")]
         public string IdempotencyKey { get; }
@@ -40,12 +50,13 @@ namespace Square.Models
         public int? OrderVersion { get; }
 
         /// <summary>
-        /// The IDs of the [payments](#type-payment) to collect.
+        /// The IDs of the [payments]($m/Payment) to collect.
         /// The payment total must match the order total.
         /// </summary>
         [JsonProperty("payment_ids", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> PaymentIds { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -55,13 +66,7 @@ namespace Square.Models
             return $"PayOrderRequest : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"IdempotencyKey = {(IdempotencyKey == null ? "null" : IdempotencyKey == string.Empty ? "" : IdempotencyKey)}");
-            toStringOutput.Add($"OrderVersion = {(OrderVersion == null ? "null" : OrderVersion.ToString())}");
-            toStringOutput.Add($"PaymentIds = {(PaymentIds == null ? "null" : $"[{ string.Join(", ", PaymentIds)} ]")}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -75,75 +80,116 @@ namespace Square.Models
             }
 
             return obj is PayOrderRequest other &&
-                ((IdempotencyKey == null && other.IdempotencyKey == null) || (IdempotencyKey?.Equals(other.IdempotencyKey) == true)) &&
-                ((OrderVersion == null && other.OrderVersion == null) || (OrderVersion?.Equals(other.OrderVersion) == true)) &&
-                ((PaymentIds == null && other.PaymentIds == null) || (PaymentIds?.Equals(other.PaymentIds) == true));
+                ((this.IdempotencyKey == null && other.IdempotencyKey == null) || (this.IdempotencyKey?.Equals(other.IdempotencyKey) == true)) &&
+                ((this.OrderVersion == null && other.OrderVersion == null) || (this.OrderVersion?.Equals(other.OrderVersion) == true)) &&
+                ((this.PaymentIds == null && other.PaymentIds == null) || (this.PaymentIds?.Equals(other.PaymentIds) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -320446863;
 
-            if (IdempotencyKey != null)
+            if (this.IdempotencyKey != null)
             {
-               hashCode += IdempotencyKey.GetHashCode();
+               hashCode += this.IdempotencyKey.GetHashCode();
             }
 
-            if (OrderVersion != null)
+            if (this.OrderVersion != null)
             {
-               hashCode += OrderVersion.GetHashCode();
+               hashCode += this.OrderVersion.GetHashCode();
             }
 
-            if (PaymentIds != null)
+            if (this.PaymentIds != null)
             {
-               hashCode += PaymentIds.GetHashCode();
+               hashCode += this.PaymentIds.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.IdempotencyKey = {(this.IdempotencyKey == null ? "null" : this.IdempotencyKey == string.Empty ? "" : this.IdempotencyKey)}");
+            toStringOutput.Add($"this.OrderVersion = {(this.OrderVersion == null ? "null" : this.OrderVersion.ToString())}");
+            toStringOutput.Add($"this.PaymentIds = {(this.PaymentIds == null ? "null" : $"[{string.Join(", ", this.PaymentIds)} ]")}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
-            var builder = new Builder(IdempotencyKey)
-                .OrderVersion(OrderVersion)
-                .PaymentIds(PaymentIds);
+            var builder = new Builder(
+                this.IdempotencyKey)
+                .OrderVersion(this.OrderVersion)
+                .PaymentIds(this.PaymentIds);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string idempotencyKey;
             private int? orderVersion;
             private IList<string> paymentIds;
 
-            public Builder(string idempotencyKey)
+            public Builder(
+                string idempotencyKey)
             {
                 this.idempotencyKey = idempotencyKey;
             }
 
+             /// <summary>
+             /// IdempotencyKey.
+             /// </summary>
+             /// <param name="idempotencyKey"> idempotencyKey. </param>
+             /// <returns> Builder. </returns>
             public Builder IdempotencyKey(string idempotencyKey)
             {
                 this.idempotencyKey = idempotencyKey;
                 return this;
             }
 
+             /// <summary>
+             /// OrderVersion.
+             /// </summary>
+             /// <param name="orderVersion"> orderVersion. </param>
+             /// <returns> Builder. </returns>
             public Builder OrderVersion(int? orderVersion)
             {
                 this.orderVersion = orderVersion;
                 return this;
             }
 
+             /// <summary>
+             /// PaymentIds.
+             /// </summary>
+             /// <param name="paymentIds"> paymentIds. </param>
+             /// <returns> Builder. </returns>
             public Builder PaymentIds(IList<string> paymentIds)
             {
                 this.paymentIds = paymentIds;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> PayOrderRequest. </returns>
             public PayOrderRequest Build()
             {
-                return new PayOrderRequest(idempotencyKey,
-                    orderVersion,
-                    paymentIds);
+                return new PayOrderRequest(
+                    this.idempotencyKey,
+                    this.orderVersion,
+                    this.paymentIds);
             }
         }
     }

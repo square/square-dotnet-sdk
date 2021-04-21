@@ -1,25 +1,33 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class Money 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// Money.
+    /// </summary>
+    public class Money
     {
-        public Money(long? amount = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Money"/> class.
+        /// </summary>
+        /// <param name="amount">amount.</param>
+        /// <param name="currency">currency.</param>
+        public Money(
+            long? amount = null,
             string currency = null)
         {
-            Amount = amount;
-            Currency = currency;
+            this.Amount = amount;
+            this.Currency = currency;
         }
 
         /// <summary>
@@ -38,6 +46,7 @@ namespace Square.Models
         [JsonProperty("currency", NullValueHandling = NullValueHandling.Ignore)]
         public string Currency { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -47,12 +56,7 @@ namespace Square.Models
             return $"Money : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Amount = {(Amount == null ? "null" : Amount.ToString())}");
-            toStringOutput.Add($"Currency = {(Currency == null ? "null" : Currency.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -66,58 +70,89 @@ namespace Square.Models
             }
 
             return obj is Money other &&
-                ((Amount == null && other.Amount == null) || (Amount?.Equals(other.Amount) == true)) &&
-                ((Currency == null && other.Currency == null) || (Currency?.Equals(other.Currency) == true));
+                ((this.Amount == null && other.Amount == null) || (this.Amount?.Equals(other.Amount) == true)) &&
+                ((this.Currency == null && other.Currency == null) || (this.Currency?.Equals(other.Currency) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -205100821;
 
-            if (Amount != null)
+            if (this.Amount != null)
             {
-               hashCode += Amount.GetHashCode();
+               hashCode += this.Amount.GetHashCode();
             }
 
-            if (Currency != null)
+            if (this.Currency != null)
             {
-               hashCode += Currency.GetHashCode();
+               hashCode += this.Currency.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Amount = {(this.Amount == null ? "null" : this.Amount.ToString())}");
+            toStringOutput.Add($"this.Currency = {(this.Currency == null ? "null" : this.Currency.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .Amount(Amount)
-                .Currency(Currency);
+                .Amount(this.Amount)
+                .Currency(this.Currency);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private long? amount;
             private string currency;
 
-
-
+             /// <summary>
+             /// Amount.
+             /// </summary>
+             /// <param name="amount"> amount. </param>
+             /// <returns> Builder. </returns>
             public Builder Amount(long? amount)
             {
                 this.amount = amount;
                 return this;
             }
 
+             /// <summary>
+             /// Currency.
+             /// </summary>
+             /// <param name="currency"> currency. </param>
+             /// <returns> Builder. </returns>
             public Builder Currency(string currency)
             {
                 this.currency = currency;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> Money. </returns>
             public Money Build()
             {
-                return new Money(amount,
-                    currency);
+                return new Money(
+                    this.amount,
+                    this.currency);
             }
         }
     }

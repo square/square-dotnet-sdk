@@ -1,27 +1,36 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class FilterValue 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// FilterValue.
+    /// </summary>
+    public class FilterValue
     {
-        public FilterValue(IList<string> all = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FilterValue"/> class.
+        /// </summary>
+        /// <param name="all">all.</param>
+        /// <param name="any">any.</param>
+        /// <param name="none">none.</param>
+        public FilterValue(
+            IList<string> all = null,
             IList<string> any = null,
             IList<string> none = null)
         {
-            All = all;
-            Any = any;
-            None = none;
+            this.All = all;
+            this.Any = any;
+            this.None = none;
         }
 
         /// <summary>
@@ -43,6 +52,7 @@ namespace Square.Models
         [JsonProperty("none", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> None { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -52,13 +62,7 @@ namespace Square.Models
             return $"FilterValue : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"All = {(All == null ? "null" : $"[{ string.Join(", ", All)} ]")}");
-            toStringOutput.Add($"Any = {(Any == null ? "null" : $"[{ string.Join(", ", Any)} ]")}");
-            toStringOutput.Add($"None = {(None == null ? "null" : $"[{ string.Join(", ", None)} ]")}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -72,73 +76,110 @@ namespace Square.Models
             }
 
             return obj is FilterValue other &&
-                ((All == null && other.All == null) || (All?.Equals(other.All) == true)) &&
-                ((Any == null && other.Any == null) || (Any?.Equals(other.Any) == true)) &&
-                ((None == null && other.None == null) || (None?.Equals(other.None) == true));
+                ((this.All == null && other.All == null) || (this.All?.Equals(other.All) == true)) &&
+                ((this.Any == null && other.Any == null) || (this.Any?.Equals(other.Any) == true)) &&
+                ((this.None == null && other.None == null) || (this.None?.Equals(other.None) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 547827750;
 
-            if (All != null)
+            if (this.All != null)
             {
-               hashCode += All.GetHashCode();
+               hashCode += this.All.GetHashCode();
             }
 
-            if (Any != null)
+            if (this.Any != null)
             {
-               hashCode += Any.GetHashCode();
+               hashCode += this.Any.GetHashCode();
             }
 
-            if (None != null)
+            if (this.None != null)
             {
-               hashCode += None.GetHashCode();
+               hashCode += this.None.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.All = {(this.All == null ? "null" : $"[{string.Join(", ", this.All)} ]")}");
+            toStringOutput.Add($"this.Any = {(this.Any == null ? "null" : $"[{string.Join(", ", this.Any)} ]")}");
+            toStringOutput.Add($"this.None = {(this.None == null ? "null" : $"[{string.Join(", ", this.None)} ]")}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .All(All)
-                .Any(Any)
-                .None(None);
+                .All(this.All)
+                .Any(this.Any)
+                .None(this.None);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private IList<string> all;
             private IList<string> any;
             private IList<string> none;
 
-
-
+             /// <summary>
+             /// All.
+             /// </summary>
+             /// <param name="all"> all. </param>
+             /// <returns> Builder. </returns>
             public Builder All(IList<string> all)
             {
                 this.all = all;
                 return this;
             }
 
+             /// <summary>
+             /// Any.
+             /// </summary>
+             /// <param name="any"> any. </param>
+             /// <returns> Builder. </returns>
             public Builder Any(IList<string> any)
             {
                 this.any = any;
                 return this;
             }
 
+             /// <summary>
+             /// None.
+             /// </summary>
+             /// <param name="none"> none. </param>
+             /// <returns> Builder. </returns>
             public Builder None(IList<string> none)
             {
                 this.none = none;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> FilterValue. </returns>
             public FilterValue Build()
             {
-                return new FilterValue(all,
-                    any,
-                    none);
+                return new FilterValue(
+                    this.all,
+                    this.any,
+                    this.none);
             }
         }
     }

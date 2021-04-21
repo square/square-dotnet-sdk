@@ -1,27 +1,36 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class AccumulateLoyaltyPointsRequest 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// AccumulateLoyaltyPointsRequest.
+    /// </summary>
+    public class AccumulateLoyaltyPointsRequest
     {
-        public AccumulateLoyaltyPointsRequest(Models.LoyaltyEventAccumulatePoints accumulatePoints,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AccumulateLoyaltyPointsRequest"/> class.
+        /// </summary>
+        /// <param name="accumulatePoints">accumulate_points.</param>
+        /// <param name="idempotencyKey">idempotency_key.</param>
+        /// <param name="locationId">location_id.</param>
+        public AccumulateLoyaltyPointsRequest(
+            Models.LoyaltyEventAccumulatePoints accumulatePoints,
             string idempotencyKey,
             string locationId)
         {
-            AccumulatePoints = accumulatePoints;
-            IdempotencyKey = idempotencyKey;
-            LocationId = locationId;
+            this.AccumulatePoints = accumulatePoints;
+            this.IdempotencyKey = idempotencyKey;
+            this.LocationId = locationId;
         }
 
         /// <summary>
@@ -31,18 +40,19 @@ namespace Square.Models
         public Models.LoyaltyEventAccumulatePoints AccumulatePoints { get; }
 
         /// <summary>
-        /// A unique string that identifies the `AccumulateLoyaltyPoints` request. 
+        /// A unique string that identifies the `AccumulateLoyaltyPoints` request.
         /// Keys can be any valid string but must be unique for every request.
         /// </summary>
         [JsonProperty("idempotency_key")]
         public string IdempotencyKey { get; }
 
         /// <summary>
-        /// The [location](#type-Location) where the purchase was made.
+        /// The [location]($m/Location) where the purchase was made.
         /// </summary>
         [JsonProperty("location_id")]
         public string LocationId { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -52,13 +62,7 @@ namespace Square.Models
             return $"AccumulateLoyaltyPointsRequest : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"AccumulatePoints = {(AccumulatePoints == null ? "null" : AccumulatePoints.ToString())}");
-            toStringOutput.Add($"IdempotencyKey = {(IdempotencyKey == null ? "null" : IdempotencyKey == string.Empty ? "" : IdempotencyKey)}");
-            toStringOutput.Add($"LocationId = {(LocationId == null ? "null" : LocationId == string.Empty ? "" : LocationId)}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -72,48 +76,69 @@ namespace Square.Models
             }
 
             return obj is AccumulateLoyaltyPointsRequest other &&
-                ((AccumulatePoints == null && other.AccumulatePoints == null) || (AccumulatePoints?.Equals(other.AccumulatePoints) == true)) &&
-                ((IdempotencyKey == null && other.IdempotencyKey == null) || (IdempotencyKey?.Equals(other.IdempotencyKey) == true)) &&
-                ((LocationId == null && other.LocationId == null) || (LocationId?.Equals(other.LocationId) == true));
+                ((this.AccumulatePoints == null && other.AccumulatePoints == null) || (this.AccumulatePoints?.Equals(other.AccumulatePoints) == true)) &&
+                ((this.IdempotencyKey == null && other.IdempotencyKey == null) || (this.IdempotencyKey?.Equals(other.IdempotencyKey) == true)) &&
+                ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1421565193;
 
-            if (AccumulatePoints != null)
+            if (this.AccumulatePoints != null)
             {
-               hashCode += AccumulatePoints.GetHashCode();
+               hashCode += this.AccumulatePoints.GetHashCode();
             }
 
-            if (IdempotencyKey != null)
+            if (this.IdempotencyKey != null)
             {
-               hashCode += IdempotencyKey.GetHashCode();
+               hashCode += this.IdempotencyKey.GetHashCode();
             }
 
-            if (LocationId != null)
+            if (this.LocationId != null)
             {
-               hashCode += LocationId.GetHashCode();
+               hashCode += this.LocationId.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.AccumulatePoints = {(this.AccumulatePoints == null ? "null" : this.AccumulatePoints.ToString())}");
+            toStringOutput.Add($"this.IdempotencyKey = {(this.IdempotencyKey == null ? "null" : this.IdempotencyKey == string.Empty ? "" : this.IdempotencyKey)}");
+            toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId == string.Empty ? "" : this.LocationId)}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
-            var builder = new Builder(AccumulatePoints,
-                IdempotencyKey,
-                LocationId);
+            var builder = new Builder(
+                this.AccumulatePoints,
+                this.IdempotencyKey,
+                this.LocationId);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private Models.LoyaltyEventAccumulatePoints accumulatePoints;
             private string idempotencyKey;
             private string locationId;
 
-            public Builder(Models.LoyaltyEventAccumulatePoints accumulatePoints,
+            public Builder(
+                Models.LoyaltyEventAccumulatePoints accumulatePoints,
                 string idempotencyKey,
                 string locationId)
             {
@@ -122,29 +147,49 @@ namespace Square.Models
                 this.locationId = locationId;
             }
 
+             /// <summary>
+             /// AccumulatePoints.
+             /// </summary>
+             /// <param name="accumulatePoints"> accumulatePoints. </param>
+             /// <returns> Builder. </returns>
             public Builder AccumulatePoints(Models.LoyaltyEventAccumulatePoints accumulatePoints)
             {
                 this.accumulatePoints = accumulatePoints;
                 return this;
             }
 
+             /// <summary>
+             /// IdempotencyKey.
+             /// </summary>
+             /// <param name="idempotencyKey"> idempotencyKey. </param>
+             /// <returns> Builder. </returns>
             public Builder IdempotencyKey(string idempotencyKey)
             {
                 this.idempotencyKey = idempotencyKey;
                 return this;
             }
 
+             /// <summary>
+             /// LocationId.
+             /// </summary>
+             /// <param name="locationId"> locationId. </param>
+             /// <returns> Builder. </returns>
             public Builder LocationId(string locationId)
             {
                 this.locationId = locationId;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> AccumulateLoyaltyPointsRequest. </returns>
             public AccumulateLoyaltyPointsRequest Build()
             {
-                return new AccumulateLoyaltyPointsRequest(accumulatePoints,
-                    idempotencyKey,
-                    locationId);
+                return new AccumulateLoyaltyPointsRequest(
+                    this.accumulatePoints,
+                    this.idempotencyKey,
+                    this.locationId);
             }
         }
     }

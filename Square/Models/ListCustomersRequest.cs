@@ -1,33 +1,42 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class ListCustomersRequest 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// ListCustomersRequest.
+    /// </summary>
+    public class ListCustomersRequest
     {
-        public ListCustomersRequest(string cursor = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ListCustomersRequest"/> class.
+        /// </summary>
+        /// <param name="cursor">cursor.</param>
+        /// <param name="sortField">sort_field.</param>
+        /// <param name="sortOrder">sort_order.</param>
+        public ListCustomersRequest(
+            string cursor = null,
             string sortField = null,
             string sortOrder = null)
         {
-            Cursor = cursor;
-            SortField = sortField;
-            SortOrder = sortOrder;
+            this.Cursor = cursor;
+            this.SortField = sortField;
+            this.SortOrder = sortOrder;
         }
 
         /// <summary>
         /// A pagination cursor returned by a previous call to this endpoint.
-        /// Provide this to retrieve the next set of results for your original query.
-        /// See the [Pagination guide](https://developer.squareup.com/docs/working-with-apis/pagination) for more information.
+        /// Provide this cursor to retrieve the next set of results for your original query.
+        /// For more information, see [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination).
         /// </summary>
         [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
         public string Cursor { get; }
@@ -44,6 +53,7 @@ namespace Square.Models
         [JsonProperty("sort_order", NullValueHandling = NullValueHandling.Ignore)]
         public string SortOrder { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -53,13 +63,7 @@ namespace Square.Models
             return $"ListCustomersRequest : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Cursor = {(Cursor == null ? "null" : Cursor == string.Empty ? "" : Cursor)}");
-            toStringOutput.Add($"SortField = {(SortField == null ? "null" : SortField.ToString())}");
-            toStringOutput.Add($"SortOrder = {(SortOrder == null ? "null" : SortOrder.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -73,73 +77,110 @@ namespace Square.Models
             }
 
             return obj is ListCustomersRequest other &&
-                ((Cursor == null && other.Cursor == null) || (Cursor?.Equals(other.Cursor) == true)) &&
-                ((SortField == null && other.SortField == null) || (SortField?.Equals(other.SortField) == true)) &&
-                ((SortOrder == null && other.SortOrder == null) || (SortOrder?.Equals(other.SortOrder) == true));
+                ((this.Cursor == null && other.Cursor == null) || (this.Cursor?.Equals(other.Cursor) == true)) &&
+                ((this.SortField == null && other.SortField == null) || (this.SortField?.Equals(other.SortField) == true)) &&
+                ((this.SortOrder == null && other.SortOrder == null) || (this.SortOrder?.Equals(other.SortOrder) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 1351370085;
 
-            if (Cursor != null)
+            if (this.Cursor != null)
             {
-               hashCode += Cursor.GetHashCode();
+               hashCode += this.Cursor.GetHashCode();
             }
 
-            if (SortField != null)
+            if (this.SortField != null)
             {
-               hashCode += SortField.GetHashCode();
+               hashCode += this.SortField.GetHashCode();
             }
 
-            if (SortOrder != null)
+            if (this.SortOrder != null)
             {
-               hashCode += SortOrder.GetHashCode();
+               hashCode += this.SortOrder.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Cursor = {(this.Cursor == null ? "null" : this.Cursor == string.Empty ? "" : this.Cursor)}");
+            toStringOutput.Add($"this.SortField = {(this.SortField == null ? "null" : this.SortField.ToString())}");
+            toStringOutput.Add($"this.SortOrder = {(this.SortOrder == null ? "null" : this.SortOrder.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .Cursor(Cursor)
-                .SortField(SortField)
-                .SortOrder(SortOrder);
+                .Cursor(this.Cursor)
+                .SortField(this.SortField)
+                .SortOrder(this.SortOrder);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string cursor;
             private string sortField;
             private string sortOrder;
 
-
-
+             /// <summary>
+             /// Cursor.
+             /// </summary>
+             /// <param name="cursor"> cursor. </param>
+             /// <returns> Builder. </returns>
             public Builder Cursor(string cursor)
             {
                 this.cursor = cursor;
                 return this;
             }
 
+             /// <summary>
+             /// SortField.
+             /// </summary>
+             /// <param name="sortField"> sortField. </param>
+             /// <returns> Builder. </returns>
             public Builder SortField(string sortField)
             {
                 this.sortField = sortField;
                 return this;
             }
 
+             /// <summary>
+             /// SortOrder.
+             /// </summary>
+             /// <param name="sortOrder"> sortOrder. </param>
+             /// <returns> Builder. </returns>
             public Builder SortOrder(string sortOrder)
             {
                 this.sortOrder = sortOrder;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> ListCustomersRequest. </returns>
             public ListCustomersRequest Build()
             {
-                return new ListCustomersRequest(cursor,
-                    sortField,
-                    sortOrder);
+                return new ListCustomersRequest(
+                    this.cursor,
+                    this.sortField,
+                    this.sortOrder);
             }
         }
     }

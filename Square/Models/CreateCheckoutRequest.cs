@@ -1,21 +1,36 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class CreateCheckoutRequest 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// CreateCheckoutRequest.
+    /// </summary>
+    public class CreateCheckoutRequest
     {
-        public CreateCheckoutRequest(string idempotencyKey,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CreateCheckoutRequest"/> class.
+        /// </summary>
+        /// <param name="idempotencyKey">idempotency_key.</param>
+        /// <param name="order">order.</param>
+        /// <param name="askForShippingAddress">ask_for_shipping_address.</param>
+        /// <param name="merchantSupportEmail">merchant_support_email.</param>
+        /// <param name="prePopulateBuyerEmail">pre_populate_buyer_email.</param>
+        /// <param name="prePopulateShippingAddress">pre_populate_shipping_address.</param>
+        /// <param name="redirectUrl">redirect_url.</param>
+        /// <param name="additionalRecipients">additional_recipients.</param>
+        /// <param name="note">note.</param>
+        public CreateCheckoutRequest(
+            string idempotencyKey,
             Models.CreateOrderRequest order,
             bool? askForShippingAddress = null,
             string merchantSupportEmail = null,
@@ -25,21 +40,21 @@ namespace Square.Models
             IList<Models.ChargeRequestAdditionalRecipient> additionalRecipients = null,
             string note = null)
         {
-            IdempotencyKey = idempotencyKey;
-            Order = order;
-            AskForShippingAddress = askForShippingAddress;
-            MerchantSupportEmail = merchantSupportEmail;
-            PrePopulateBuyerEmail = prePopulateBuyerEmail;
-            PrePopulateShippingAddress = prePopulateShippingAddress;
-            RedirectUrl = redirectUrl;
-            AdditionalRecipients = additionalRecipients;
-            Note = note;
+            this.IdempotencyKey = idempotencyKey;
+            this.Order = order;
+            this.AskForShippingAddress = askForShippingAddress;
+            this.MerchantSupportEmail = merchantSupportEmail;
+            this.PrePopulateBuyerEmail = prePopulateBuyerEmail;
+            this.PrePopulateShippingAddress = prePopulateShippingAddress;
+            this.RedirectUrl = redirectUrl;
+            this.AdditionalRecipients = additionalRecipients;
+            this.Note = note;
         }
 
         /// <summary>
         /// A unique string that identifies this checkout among others you have created. It can be
         /// any valid string but must be unique for every order sent to Square Checkout for a given location ID.
-        /// The idempotency key is used to avoid processing the same order more than once. If you are 
+        /// The idempotency key is used to avoid processing the same order more than once. If you are
         /// unsure whether a particular checkout was created successfully, you can attempt it again with
         /// the same idempotency key and all the same other parameters without worrying about creating duplicates.
         /// You should use a random number/string generator native to the language
@@ -50,13 +65,13 @@ namespace Square.Models
         public string IdempotencyKey { get; }
 
         /// <summary>
-        /// Getter for order
+        /// Gets or sets Order.
         /// </summary>
         [JsonProperty("order")]
         public Models.CreateOrderRequest Order { get; }
 
         /// <summary>
-        /// If `true`, Square Checkout collects shipping information on your behalf and stores 
+        /// If `true`, Square Checkout collects shipping information on your behalf and stores
         /// that information with the transaction information in the Square Seller Dashboard.
         /// Default: `false`.
         /// </summary>
@@ -122,6 +137,7 @@ namespace Square.Models
         [JsonProperty("note", NullValueHandling = NullValueHandling.Ignore)]
         public string Note { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -131,19 +147,7 @@ namespace Square.Models
             return $"CreateCheckoutRequest : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"IdempotencyKey = {(IdempotencyKey == null ? "null" : IdempotencyKey == string.Empty ? "" : IdempotencyKey)}");
-            toStringOutput.Add($"Order = {(Order == null ? "null" : Order.ToString())}");
-            toStringOutput.Add($"AskForShippingAddress = {(AskForShippingAddress == null ? "null" : AskForShippingAddress.ToString())}");
-            toStringOutput.Add($"MerchantSupportEmail = {(MerchantSupportEmail == null ? "null" : MerchantSupportEmail == string.Empty ? "" : MerchantSupportEmail)}");
-            toStringOutput.Add($"PrePopulateBuyerEmail = {(PrePopulateBuyerEmail == null ? "null" : PrePopulateBuyerEmail == string.Empty ? "" : PrePopulateBuyerEmail)}");
-            toStringOutput.Add($"PrePopulateShippingAddress = {(PrePopulateShippingAddress == null ? "null" : PrePopulateShippingAddress.ToString())}");
-            toStringOutput.Add($"RedirectUrl = {(RedirectUrl == null ? "null" : RedirectUrl == string.Empty ? "" : RedirectUrl)}");
-            toStringOutput.Add($"AdditionalRecipients = {(AdditionalRecipients == null ? "null" : $"[{ string.Join(", ", AdditionalRecipients)} ]")}");
-            toStringOutput.Add($"Note = {(Note == null ? "null" : Note == string.Empty ? "" : Note)}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -157,83 +161,109 @@ namespace Square.Models
             }
 
             return obj is CreateCheckoutRequest other &&
-                ((IdempotencyKey == null && other.IdempotencyKey == null) || (IdempotencyKey?.Equals(other.IdempotencyKey) == true)) &&
-                ((Order == null && other.Order == null) || (Order?.Equals(other.Order) == true)) &&
-                ((AskForShippingAddress == null && other.AskForShippingAddress == null) || (AskForShippingAddress?.Equals(other.AskForShippingAddress) == true)) &&
-                ((MerchantSupportEmail == null && other.MerchantSupportEmail == null) || (MerchantSupportEmail?.Equals(other.MerchantSupportEmail) == true)) &&
-                ((PrePopulateBuyerEmail == null && other.PrePopulateBuyerEmail == null) || (PrePopulateBuyerEmail?.Equals(other.PrePopulateBuyerEmail) == true)) &&
-                ((PrePopulateShippingAddress == null && other.PrePopulateShippingAddress == null) || (PrePopulateShippingAddress?.Equals(other.PrePopulateShippingAddress) == true)) &&
-                ((RedirectUrl == null && other.RedirectUrl == null) || (RedirectUrl?.Equals(other.RedirectUrl) == true)) &&
-                ((AdditionalRecipients == null && other.AdditionalRecipients == null) || (AdditionalRecipients?.Equals(other.AdditionalRecipients) == true)) &&
-                ((Note == null && other.Note == null) || (Note?.Equals(other.Note) == true));
+                ((this.IdempotencyKey == null && other.IdempotencyKey == null) || (this.IdempotencyKey?.Equals(other.IdempotencyKey) == true)) &&
+                ((this.Order == null && other.Order == null) || (this.Order?.Equals(other.Order) == true)) &&
+                ((this.AskForShippingAddress == null && other.AskForShippingAddress == null) || (this.AskForShippingAddress?.Equals(other.AskForShippingAddress) == true)) &&
+                ((this.MerchantSupportEmail == null && other.MerchantSupportEmail == null) || (this.MerchantSupportEmail?.Equals(other.MerchantSupportEmail) == true)) &&
+                ((this.PrePopulateBuyerEmail == null && other.PrePopulateBuyerEmail == null) || (this.PrePopulateBuyerEmail?.Equals(other.PrePopulateBuyerEmail) == true)) &&
+                ((this.PrePopulateShippingAddress == null && other.PrePopulateShippingAddress == null) || (this.PrePopulateShippingAddress?.Equals(other.PrePopulateShippingAddress) == true)) &&
+                ((this.RedirectUrl == null && other.RedirectUrl == null) || (this.RedirectUrl?.Equals(other.RedirectUrl) == true)) &&
+                ((this.AdditionalRecipients == null && other.AdditionalRecipients == null) || (this.AdditionalRecipients?.Equals(other.AdditionalRecipients) == true)) &&
+                ((this.Note == null && other.Note == null) || (this.Note?.Equals(other.Note) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 1270416416;
 
-            if (IdempotencyKey != null)
+            if (this.IdempotencyKey != null)
             {
-               hashCode += IdempotencyKey.GetHashCode();
+               hashCode += this.IdempotencyKey.GetHashCode();
             }
 
-            if (Order != null)
+            if (this.Order != null)
             {
-               hashCode += Order.GetHashCode();
+               hashCode += this.Order.GetHashCode();
             }
 
-            if (AskForShippingAddress != null)
+            if (this.AskForShippingAddress != null)
             {
-               hashCode += AskForShippingAddress.GetHashCode();
+               hashCode += this.AskForShippingAddress.GetHashCode();
             }
 
-            if (MerchantSupportEmail != null)
+            if (this.MerchantSupportEmail != null)
             {
-               hashCode += MerchantSupportEmail.GetHashCode();
+               hashCode += this.MerchantSupportEmail.GetHashCode();
             }
 
-            if (PrePopulateBuyerEmail != null)
+            if (this.PrePopulateBuyerEmail != null)
             {
-               hashCode += PrePopulateBuyerEmail.GetHashCode();
+               hashCode += this.PrePopulateBuyerEmail.GetHashCode();
             }
 
-            if (PrePopulateShippingAddress != null)
+            if (this.PrePopulateShippingAddress != null)
             {
-               hashCode += PrePopulateShippingAddress.GetHashCode();
+               hashCode += this.PrePopulateShippingAddress.GetHashCode();
             }
 
-            if (RedirectUrl != null)
+            if (this.RedirectUrl != null)
             {
-               hashCode += RedirectUrl.GetHashCode();
+               hashCode += this.RedirectUrl.GetHashCode();
             }
 
-            if (AdditionalRecipients != null)
+            if (this.AdditionalRecipients != null)
             {
-               hashCode += AdditionalRecipients.GetHashCode();
+               hashCode += this.AdditionalRecipients.GetHashCode();
             }
 
-            if (Note != null)
+            if (this.Note != null)
             {
-               hashCode += Note.GetHashCode();
+               hashCode += this.Note.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.IdempotencyKey = {(this.IdempotencyKey == null ? "null" : this.IdempotencyKey == string.Empty ? "" : this.IdempotencyKey)}");
+            toStringOutput.Add($"this.Order = {(this.Order == null ? "null" : this.Order.ToString())}");
+            toStringOutput.Add($"this.AskForShippingAddress = {(this.AskForShippingAddress == null ? "null" : this.AskForShippingAddress.ToString())}");
+            toStringOutput.Add($"this.MerchantSupportEmail = {(this.MerchantSupportEmail == null ? "null" : this.MerchantSupportEmail == string.Empty ? "" : this.MerchantSupportEmail)}");
+            toStringOutput.Add($"this.PrePopulateBuyerEmail = {(this.PrePopulateBuyerEmail == null ? "null" : this.PrePopulateBuyerEmail == string.Empty ? "" : this.PrePopulateBuyerEmail)}");
+            toStringOutput.Add($"this.PrePopulateShippingAddress = {(this.PrePopulateShippingAddress == null ? "null" : this.PrePopulateShippingAddress.ToString())}");
+            toStringOutput.Add($"this.RedirectUrl = {(this.RedirectUrl == null ? "null" : this.RedirectUrl == string.Empty ? "" : this.RedirectUrl)}");
+            toStringOutput.Add($"this.AdditionalRecipients = {(this.AdditionalRecipients == null ? "null" : $"[{string.Join(", ", this.AdditionalRecipients)} ]")}");
+            toStringOutput.Add($"this.Note = {(this.Note == null ? "null" : this.Note == string.Empty ? "" : this.Note)}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
-            var builder = new Builder(IdempotencyKey,
-                Order)
-                .AskForShippingAddress(AskForShippingAddress)
-                .MerchantSupportEmail(MerchantSupportEmail)
-                .PrePopulateBuyerEmail(PrePopulateBuyerEmail)
-                .PrePopulateShippingAddress(PrePopulateShippingAddress)
-                .RedirectUrl(RedirectUrl)
-                .AdditionalRecipients(AdditionalRecipients)
-                .Note(Note);
+            var builder = new Builder(
+                this.IdempotencyKey,
+                this.Order)
+                .AskForShippingAddress(this.AskForShippingAddress)
+                .MerchantSupportEmail(this.MerchantSupportEmail)
+                .PrePopulateBuyerEmail(this.PrePopulateBuyerEmail)
+                .PrePopulateShippingAddress(this.PrePopulateShippingAddress)
+                .RedirectUrl(this.RedirectUrl)
+                .AdditionalRecipients(this.AdditionalRecipients)
+                .Note(this.Note);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string idempotencyKey;
@@ -246,78 +276,129 @@ namespace Square.Models
             private IList<Models.ChargeRequestAdditionalRecipient> additionalRecipients;
             private string note;
 
-            public Builder(string idempotencyKey,
+            public Builder(
+                string idempotencyKey,
                 Models.CreateOrderRequest order)
             {
                 this.idempotencyKey = idempotencyKey;
                 this.order = order;
             }
 
+             /// <summary>
+             /// IdempotencyKey.
+             /// </summary>
+             /// <param name="idempotencyKey"> idempotencyKey. </param>
+             /// <returns> Builder. </returns>
             public Builder IdempotencyKey(string idempotencyKey)
             {
                 this.idempotencyKey = idempotencyKey;
                 return this;
             }
 
+             /// <summary>
+             /// Order.
+             /// </summary>
+             /// <param name="order"> order. </param>
+             /// <returns> Builder. </returns>
             public Builder Order(Models.CreateOrderRequest order)
             {
                 this.order = order;
                 return this;
             }
 
+             /// <summary>
+             /// AskForShippingAddress.
+             /// </summary>
+             /// <param name="askForShippingAddress"> askForShippingAddress. </param>
+             /// <returns> Builder. </returns>
             public Builder AskForShippingAddress(bool? askForShippingAddress)
             {
                 this.askForShippingAddress = askForShippingAddress;
                 return this;
             }
 
+             /// <summary>
+             /// MerchantSupportEmail.
+             /// </summary>
+             /// <param name="merchantSupportEmail"> merchantSupportEmail. </param>
+             /// <returns> Builder. </returns>
             public Builder MerchantSupportEmail(string merchantSupportEmail)
             {
                 this.merchantSupportEmail = merchantSupportEmail;
                 return this;
             }
 
+             /// <summary>
+             /// PrePopulateBuyerEmail.
+             /// </summary>
+             /// <param name="prePopulateBuyerEmail"> prePopulateBuyerEmail. </param>
+             /// <returns> Builder. </returns>
             public Builder PrePopulateBuyerEmail(string prePopulateBuyerEmail)
             {
                 this.prePopulateBuyerEmail = prePopulateBuyerEmail;
                 return this;
             }
 
+             /// <summary>
+             /// PrePopulateShippingAddress.
+             /// </summary>
+             /// <param name="prePopulateShippingAddress"> prePopulateShippingAddress. </param>
+             /// <returns> Builder. </returns>
             public Builder PrePopulateShippingAddress(Models.Address prePopulateShippingAddress)
             {
                 this.prePopulateShippingAddress = prePopulateShippingAddress;
                 return this;
             }
 
+             /// <summary>
+             /// RedirectUrl.
+             /// </summary>
+             /// <param name="redirectUrl"> redirectUrl. </param>
+             /// <returns> Builder. </returns>
             public Builder RedirectUrl(string redirectUrl)
             {
                 this.redirectUrl = redirectUrl;
                 return this;
             }
 
+             /// <summary>
+             /// AdditionalRecipients.
+             /// </summary>
+             /// <param name="additionalRecipients"> additionalRecipients. </param>
+             /// <returns> Builder. </returns>
             public Builder AdditionalRecipients(IList<Models.ChargeRequestAdditionalRecipient> additionalRecipients)
             {
                 this.additionalRecipients = additionalRecipients;
                 return this;
             }
 
+             /// <summary>
+             /// Note.
+             /// </summary>
+             /// <param name="note"> note. </param>
+             /// <returns> Builder. </returns>
             public Builder Note(string note)
             {
                 this.note = note;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> CreateCheckoutRequest. </returns>
             public CreateCheckoutRequest Build()
             {
-                return new CreateCheckoutRequest(idempotencyKey,
-                    order,
-                    askForShippingAddress,
-                    merchantSupportEmail,
-                    prePopulateBuyerEmail,
-                    prePopulateShippingAddress,
-                    redirectUrl,
-                    additionalRecipients,
-                    note);
+                return new CreateCheckoutRequest(
+                    this.idempotencyKey,
+                    this.order,
+                    this.askForShippingAddress,
+                    this.merchantSupportEmail,
+                    this.prePopulateBuyerEmail,
+                    this.prePopulateShippingAddress,
+                    this.redirectUrl,
+                    this.additionalRecipients,
+                    this.note);
             }
         }
     }

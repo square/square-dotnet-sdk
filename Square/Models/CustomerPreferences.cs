@@ -1,31 +1,39 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class CustomerPreferences 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// CustomerPreferences.
+    /// </summary>
+    public class CustomerPreferences
     {
-        public CustomerPreferences(bool? emailUnsubscribed = null)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CustomerPreferences"/> class.
+        /// </summary>
+        /// <param name="emailUnsubscribed">email_unsubscribed.</param>
+        public CustomerPreferences(
+            bool? emailUnsubscribed = null)
         {
-            EmailUnsubscribed = emailUnsubscribed;
+            this.EmailUnsubscribed = emailUnsubscribed;
         }
 
         /// <summary>
-        /// The customer has unsubscribed from receiving marketing campaign emails.
+        /// Indicates whether the customer has unsubscribed from marketing campaign emails. A value of `true` means that the customer chose to opt out of email marketing from the current Square seller or from all Square sellers. This value is read-only from the Customers API.
         /// </summary>
         [JsonProperty("email_unsubscribed", NullValueHandling = NullValueHandling.Ignore)]
         public bool? EmailUnsubscribed { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -35,11 +43,7 @@ namespace Square.Models
             return $"CustomerPreferences : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"EmailUnsubscribed = {(EmailUnsubscribed == null ? "null" : EmailUnsubscribed.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -53,43 +57,68 @@ namespace Square.Models
             }
 
             return obj is CustomerPreferences other &&
-                ((EmailUnsubscribed == null && other.EmailUnsubscribed == null) || (EmailUnsubscribed?.Equals(other.EmailUnsubscribed) == true));
+                ((this.EmailUnsubscribed == null && other.EmailUnsubscribed == null) || (this.EmailUnsubscribed?.Equals(other.EmailUnsubscribed) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1448015667;
 
-            if (EmailUnsubscribed != null)
+            if (this.EmailUnsubscribed != null)
             {
-               hashCode += EmailUnsubscribed.GetHashCode();
+               hashCode += this.EmailUnsubscribed.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.EmailUnsubscribed = {(this.EmailUnsubscribed == null ? "null" : this.EmailUnsubscribed.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .EmailUnsubscribed(EmailUnsubscribed);
+                .EmailUnsubscribed(this.EmailUnsubscribed);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private bool? emailUnsubscribed;
 
-
-
+             /// <summary>
+             /// EmailUnsubscribed.
+             /// </summary>
+             /// <param name="emailUnsubscribed"> emailUnsubscribed. </param>
+             /// <returns> Builder. </returns>
             public Builder EmailUnsubscribed(bool? emailUnsubscribed)
             {
                 this.emailUnsubscribed = emailUnsubscribed;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> CustomerPreferences. </returns>
             public CustomerPreferences Build()
             {
-                return new CustomerPreferences(emailUnsubscribed);
+                return new CustomerPreferences(
+                    this.emailUnsubscribed);
             }
         }
     }

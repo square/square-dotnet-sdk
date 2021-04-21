@@ -1,29 +1,39 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class ListTeamMemberBookingProfilesRequest 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// ListTeamMemberBookingProfilesRequest.
+    /// </summary>
+    public class ListTeamMemberBookingProfilesRequest
     {
-        public ListTeamMemberBookingProfilesRequest(bool? bookableOnly = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ListTeamMemberBookingProfilesRequest"/> class.
+        /// </summary>
+        /// <param name="bookableOnly">bookable_only.</param>
+        /// <param name="limit">limit.</param>
+        /// <param name="cursor">cursor.</param>
+        /// <param name="locationId">location_id.</param>
+        public ListTeamMemberBookingProfilesRequest(
+            bool? bookableOnly = null,
             int? limit = null,
             string cursor = null,
             string locationId = null)
         {
-            BookableOnly = bookableOnly;
-            Limit = limit;
-            Cursor = cursor;
-            LocationId = locationId;
+            this.BookableOnly = bookableOnly;
+            this.Limit = limit;
+            this.Cursor = cursor;
+            this.LocationId = locationId;
         }
 
         /// <summary>
@@ -50,6 +60,7 @@ namespace Square.Models
         [JsonProperty("location_id", NullValueHandling = NullValueHandling.Ignore)]
         public string LocationId { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -59,14 +70,7 @@ namespace Square.Models
             return $"ListTeamMemberBookingProfilesRequest : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"BookableOnly = {(BookableOnly == null ? "null" : BookableOnly.ToString())}");
-            toStringOutput.Add($"Limit = {(Limit == null ? "null" : Limit.ToString())}");
-            toStringOutput.Add($"Cursor = {(Cursor == null ? "null" : Cursor == string.Empty ? "" : Cursor)}");
-            toStringOutput.Add($"LocationId = {(LocationId == null ? "null" : LocationId == string.Empty ? "" : LocationId)}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -80,49 +84,69 @@ namespace Square.Models
             }
 
             return obj is ListTeamMemberBookingProfilesRequest other &&
-                ((BookableOnly == null && other.BookableOnly == null) || (BookableOnly?.Equals(other.BookableOnly) == true)) &&
-                ((Limit == null && other.Limit == null) || (Limit?.Equals(other.Limit) == true)) &&
-                ((Cursor == null && other.Cursor == null) || (Cursor?.Equals(other.Cursor) == true)) &&
-                ((LocationId == null && other.LocationId == null) || (LocationId?.Equals(other.LocationId) == true));
+                ((this.BookableOnly == null && other.BookableOnly == null) || (this.BookableOnly?.Equals(other.BookableOnly) == true)) &&
+                ((this.Limit == null && other.Limit == null) || (this.Limit?.Equals(other.Limit) == true)) &&
+                ((this.Cursor == null && other.Cursor == null) || (this.Cursor?.Equals(other.Cursor) == true)) &&
+                ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -294097730;
 
-            if (BookableOnly != null)
+            if (this.BookableOnly != null)
             {
-               hashCode += BookableOnly.GetHashCode();
+               hashCode += this.BookableOnly.GetHashCode();
             }
 
-            if (Limit != null)
+            if (this.Limit != null)
             {
-               hashCode += Limit.GetHashCode();
+               hashCode += this.Limit.GetHashCode();
             }
 
-            if (Cursor != null)
+            if (this.Cursor != null)
             {
-               hashCode += Cursor.GetHashCode();
+               hashCode += this.Cursor.GetHashCode();
             }
 
-            if (LocationId != null)
+            if (this.LocationId != null)
             {
-               hashCode += LocationId.GetHashCode();
+               hashCode += this.LocationId.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.BookableOnly = {(this.BookableOnly == null ? "null" : this.BookableOnly.ToString())}");
+            toStringOutput.Add($"this.Limit = {(this.Limit == null ? "null" : this.Limit.ToString())}");
+            toStringOutput.Add($"this.Cursor = {(this.Cursor == null ? "null" : this.Cursor == string.Empty ? "" : this.Cursor)}");
+            toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId == string.Empty ? "" : this.LocationId)}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .BookableOnly(BookableOnly)
-                .Limit(Limit)
-                .Cursor(Cursor)
-                .LocationId(LocationId);
+                .BookableOnly(this.BookableOnly)
+                .Limit(this.Limit)
+                .Cursor(this.Cursor)
+                .LocationId(this.LocationId);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private bool? bookableOnly;
@@ -130,38 +154,61 @@ namespace Square.Models
             private string cursor;
             private string locationId;
 
-
-
+             /// <summary>
+             /// BookableOnly.
+             /// </summary>
+             /// <param name="bookableOnly"> bookableOnly. </param>
+             /// <returns> Builder. </returns>
             public Builder BookableOnly(bool? bookableOnly)
             {
                 this.bookableOnly = bookableOnly;
                 return this;
             }
 
+             /// <summary>
+             /// Limit.
+             /// </summary>
+             /// <param name="limit"> limit. </param>
+             /// <returns> Builder. </returns>
             public Builder Limit(int? limit)
             {
                 this.limit = limit;
                 return this;
             }
 
+             /// <summary>
+             /// Cursor.
+             /// </summary>
+             /// <param name="cursor"> cursor. </param>
+             /// <returns> Builder. </returns>
             public Builder Cursor(string cursor)
             {
                 this.cursor = cursor;
                 return this;
             }
 
+             /// <summary>
+             /// LocationId.
+             /// </summary>
+             /// <param name="locationId"> locationId. </param>
+             /// <returns> Builder. </returns>
             public Builder LocationId(string locationId)
             {
                 this.locationId = locationId;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> ListTeamMemberBookingProfilesRequest. </returns>
             public ListTeamMemberBookingProfilesRequest Build()
             {
-                return new ListTeamMemberBookingProfilesRequest(bookableOnly,
-                    limit,
-                    cursor,
-                    locationId);
+                return new ListTeamMemberBookingProfilesRequest(
+                    this.bookableOnly,
+                    this.limit,
+                    this.cursor,
+                    this.locationId);
             }
         }
     }

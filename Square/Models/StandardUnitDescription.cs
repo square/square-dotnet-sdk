@@ -1,27 +1,36 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class StandardUnitDescription 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// StandardUnitDescription.
+    /// </summary>
+    public class StandardUnitDescription
     {
-        public StandardUnitDescription(Models.MeasurementUnit unit = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="StandardUnitDescription"/> class.
+        /// </summary>
+        /// <param name="unit">unit.</param>
+        /// <param name="name">name.</param>
+        /// <param name="abbreviation">abbreviation.</param>
+        public StandardUnitDescription(
+            Models.MeasurementUnit unit = null,
             string name = null,
             string abbreviation = null)
         {
-            Unit = unit;
-            Name = name;
-            Abbreviation = abbreviation;
+            this.Unit = unit;
+            this.Name = name;
+            this.Abbreviation = abbreviation;
         }
 
         /// <summary>
@@ -44,6 +53,7 @@ namespace Square.Models
         [JsonProperty("abbreviation", NullValueHandling = NullValueHandling.Ignore)]
         public string Abbreviation { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -53,13 +63,7 @@ namespace Square.Models
             return $"StandardUnitDescription : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Unit = {(Unit == null ? "null" : Unit.ToString())}");
-            toStringOutput.Add($"Name = {(Name == null ? "null" : Name == string.Empty ? "" : Name)}");
-            toStringOutput.Add($"Abbreviation = {(Abbreviation == null ? "null" : Abbreviation == string.Empty ? "" : Abbreviation)}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -73,73 +77,110 @@ namespace Square.Models
             }
 
             return obj is StandardUnitDescription other &&
-                ((Unit == null && other.Unit == null) || (Unit?.Equals(other.Unit) == true)) &&
-                ((Name == null && other.Name == null) || (Name?.Equals(other.Name) == true)) &&
-                ((Abbreviation == null && other.Abbreviation == null) || (Abbreviation?.Equals(other.Abbreviation) == true));
+                ((this.Unit == null && other.Unit == null) || (this.Unit?.Equals(other.Unit) == true)) &&
+                ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
+                ((this.Abbreviation == null && other.Abbreviation == null) || (this.Abbreviation?.Equals(other.Abbreviation) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -845994350;
 
-            if (Unit != null)
+            if (this.Unit != null)
             {
-               hashCode += Unit.GetHashCode();
+               hashCode += this.Unit.GetHashCode();
             }
 
-            if (Name != null)
+            if (this.Name != null)
             {
-               hashCode += Name.GetHashCode();
+               hashCode += this.Name.GetHashCode();
             }
 
-            if (Abbreviation != null)
+            if (this.Abbreviation != null)
             {
-               hashCode += Abbreviation.GetHashCode();
+               hashCode += this.Abbreviation.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Unit = {(this.Unit == null ? "null" : this.Unit.ToString())}");
+            toStringOutput.Add($"this.Name = {(this.Name == null ? "null" : this.Name == string.Empty ? "" : this.Name)}");
+            toStringOutput.Add($"this.Abbreviation = {(this.Abbreviation == null ? "null" : this.Abbreviation == string.Empty ? "" : this.Abbreviation)}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .Unit(Unit)
-                .Name(Name)
-                .Abbreviation(Abbreviation);
+                .Unit(this.Unit)
+                .Name(this.Name)
+                .Abbreviation(this.Abbreviation);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private Models.MeasurementUnit unit;
             private string name;
             private string abbreviation;
 
-
-
+             /// <summary>
+             /// Unit.
+             /// </summary>
+             /// <param name="unit"> unit. </param>
+             /// <returns> Builder. </returns>
             public Builder Unit(Models.MeasurementUnit unit)
             {
                 this.unit = unit;
                 return this;
             }
 
+             /// <summary>
+             /// Name.
+             /// </summary>
+             /// <param name="name"> name. </param>
+             /// <returns> Builder. </returns>
             public Builder Name(string name)
             {
                 this.name = name;
                 return this;
             }
 
+             /// <summary>
+             /// Abbreviation.
+             /// </summary>
+             /// <param name="abbreviation"> abbreviation. </param>
+             /// <returns> Builder. </returns>
             public Builder Abbreviation(string abbreviation)
             {
                 this.abbreviation = abbreviation;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> StandardUnitDescription. </returns>
             public StandardUnitDescription Build()
             {
-                return new StandardUnitDescription(unit,
-                    name,
-                    abbreviation);
+                return new StandardUnitDescription(
+                    this.unit,
+                    this.name,
+                    this.abbreviation);
             }
         }
     }

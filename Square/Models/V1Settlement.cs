@@ -1,36 +1,51 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square.Http.Client;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class V1Settlement 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Http.Client;
+    using Square.Utilities;
+
+    /// <summary>
+    /// V1Settlement.
+    /// </summary>
+    public class V1Settlement
     {
-        public V1Settlement(string id = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="V1Settlement"/> class.
+        /// </summary>
+        /// <param name="id">id.</param>
+        /// <param name="status">status.</param>
+        /// <param name="totalMoney">total_money.</param>
+        /// <param name="initiatedAt">initiated_at.</param>
+        /// <param name="bankAccountId">bank_account_id.</param>
+        /// <param name="entries">entries.</param>
+        public V1Settlement(
+            string id = null,
             string status = null,
             Models.V1Money totalMoney = null,
             string initiatedAt = null,
             string bankAccountId = null,
             IList<Models.V1SettlementEntry> entries = null)
         {
-            Id = id;
-            Status = status;
-            TotalMoney = totalMoney;
-            InitiatedAt = initiatedAt;
-            BankAccountId = bankAccountId;
-            Entries = entries;
+            this.Id = id;
+            this.Status = status;
+            this.TotalMoney = totalMoney;
+            this.InitiatedAt = initiatedAt;
+            this.BankAccountId = bankAccountId;
+            this.Entries = entries;
         }
 
+        /// <summary>
+        /// Gets http context.
+        /// </summary>
         [JsonIgnore]
         public HttpContext Context { get; internal set; }
 
@@ -41,13 +56,13 @@ namespace Square.Models
         public string Id { get; }
 
         /// <summary>
-        /// Getter for status
+        /// Gets or sets Status.
         /// </summary>
         [JsonProperty("status", NullValueHandling = NullValueHandling.Ignore)]
         public string Status { get; }
 
         /// <summary>
-        /// Getter for total_money
+        /// Gets or sets TotalMoney.
         /// </summary>
         [JsonProperty("total_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1Money TotalMoney { get; }
@@ -70,6 +85,7 @@ namespace Square.Models
         [JsonProperty("entries", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.V1SettlementEntry> Entries { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -79,16 +95,7 @@ namespace Square.Models
             return $"V1Settlement : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Id = {(Id == null ? "null" : Id == string.Empty ? "" : Id)}");
-            toStringOutput.Add($"Status = {(Status == null ? "null" : Status.ToString())}");
-            toStringOutput.Add($"TotalMoney = {(TotalMoney == null ? "null" : TotalMoney.ToString())}");
-            toStringOutput.Add($"InitiatedAt = {(InitiatedAt == null ? "null" : InitiatedAt == string.Empty ? "" : InitiatedAt)}");
-            toStringOutput.Add($"BankAccountId = {(BankAccountId == null ? "null" : BankAccountId == string.Empty ? "" : BankAccountId)}");
-            toStringOutput.Add($"Entries = {(Entries == null ? "null" : $"[{ string.Join(", ", Entries)} ]")}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -102,69 +109,91 @@ namespace Square.Models
             }
 
             return obj is V1Settlement other &&
-                ((Context == null && other.Context == null) || (Context?.Equals(other.Context) == true)) &&
-                ((Id == null && other.Id == null) || (Id?.Equals(other.Id) == true)) &&
-                ((Status == null && other.Status == null) || (Status?.Equals(other.Status) == true)) &&
-                ((TotalMoney == null && other.TotalMoney == null) || (TotalMoney?.Equals(other.TotalMoney) == true)) &&
-                ((InitiatedAt == null && other.InitiatedAt == null) || (InitiatedAt?.Equals(other.InitiatedAt) == true)) &&
-                ((BankAccountId == null && other.BankAccountId == null) || (BankAccountId?.Equals(other.BankAccountId) == true)) &&
-                ((Entries == null && other.Entries == null) || (Entries?.Equals(other.Entries) == true));
+                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
+                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
+                ((this.Status == null && other.Status == null) || (this.Status?.Equals(other.Status) == true)) &&
+                ((this.TotalMoney == null && other.TotalMoney == null) || (this.TotalMoney?.Equals(other.TotalMoney) == true)) &&
+                ((this.InitiatedAt == null && other.InitiatedAt == null) || (this.InitiatedAt?.Equals(other.InitiatedAt) == true)) &&
+                ((this.BankAccountId == null && other.BankAccountId == null) || (this.BankAccountId?.Equals(other.BankAccountId) == true)) &&
+                ((this.Entries == null && other.Entries == null) || (this.Entries?.Equals(other.Entries) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 388412647;
 
-            if (Context != null)
+            if (this.Context != null)
             {
-                hashCode += Context.GetHashCode();
+                hashCode += this.Context.GetHashCode();
             }
 
-            if (Id != null)
+            if (this.Id != null)
             {
-               hashCode += Id.GetHashCode();
+               hashCode += this.Id.GetHashCode();
             }
 
-            if (Status != null)
+            if (this.Status != null)
             {
-               hashCode += Status.GetHashCode();
+               hashCode += this.Status.GetHashCode();
             }
 
-            if (TotalMoney != null)
+            if (this.TotalMoney != null)
             {
-               hashCode += TotalMoney.GetHashCode();
+               hashCode += this.TotalMoney.GetHashCode();
             }
 
-            if (InitiatedAt != null)
+            if (this.InitiatedAt != null)
             {
-               hashCode += InitiatedAt.GetHashCode();
+               hashCode += this.InitiatedAt.GetHashCode();
             }
 
-            if (BankAccountId != null)
+            if (this.BankAccountId != null)
             {
-               hashCode += BankAccountId.GetHashCode();
+               hashCode += this.BankAccountId.GetHashCode();
             }
 
-            if (Entries != null)
+            if (this.Entries != null)
             {
-               hashCode += Entries.GetHashCode();
+               hashCode += this.Entries.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id == string.Empty ? "" : this.Id)}");
+            toStringOutput.Add($"this.Status = {(this.Status == null ? "null" : this.Status.ToString())}");
+            toStringOutput.Add($"this.TotalMoney = {(this.TotalMoney == null ? "null" : this.TotalMoney.ToString())}");
+            toStringOutput.Add($"this.InitiatedAt = {(this.InitiatedAt == null ? "null" : this.InitiatedAt == string.Empty ? "" : this.InitiatedAt)}");
+            toStringOutput.Add($"this.BankAccountId = {(this.BankAccountId == null ? "null" : this.BankAccountId == string.Empty ? "" : this.BankAccountId)}");
+            toStringOutput.Add($"this.Entries = {(this.Entries == null ? "null" : $"[{string.Join(", ", this.Entries)} ]")}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .Id(Id)
-                .Status(Status)
-                .TotalMoney(TotalMoney)
-                .InitiatedAt(InitiatedAt)
-                .BankAccountId(BankAccountId)
-                .Entries(Entries);
+                .Id(this.Id)
+                .Status(this.Status)
+                .TotalMoney(this.TotalMoney)
+                .InitiatedAt(this.InitiatedAt)
+                .BankAccountId(this.BankAccountId)
+                .Entries(this.Entries);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string id;
@@ -174,52 +203,85 @@ namespace Square.Models
             private string bankAccountId;
             private IList<Models.V1SettlementEntry> entries;
 
-
-
+             /// <summary>
+             /// Id.
+             /// </summary>
+             /// <param name="id"> id. </param>
+             /// <returns> Builder. </returns>
             public Builder Id(string id)
             {
                 this.id = id;
                 return this;
             }
 
+             /// <summary>
+             /// Status.
+             /// </summary>
+             /// <param name="status"> status. </param>
+             /// <returns> Builder. </returns>
             public Builder Status(string status)
             {
                 this.status = status;
                 return this;
             }
 
+             /// <summary>
+             /// TotalMoney.
+             /// </summary>
+             /// <param name="totalMoney"> totalMoney. </param>
+             /// <returns> Builder. </returns>
             public Builder TotalMoney(Models.V1Money totalMoney)
             {
                 this.totalMoney = totalMoney;
                 return this;
             }
 
+             /// <summary>
+             /// InitiatedAt.
+             /// </summary>
+             /// <param name="initiatedAt"> initiatedAt. </param>
+             /// <returns> Builder. </returns>
             public Builder InitiatedAt(string initiatedAt)
             {
                 this.initiatedAt = initiatedAt;
                 return this;
             }
 
+             /// <summary>
+             /// BankAccountId.
+             /// </summary>
+             /// <param name="bankAccountId"> bankAccountId. </param>
+             /// <returns> Builder. </returns>
             public Builder BankAccountId(string bankAccountId)
             {
                 this.bankAccountId = bankAccountId;
                 return this;
             }
 
+             /// <summary>
+             /// Entries.
+             /// </summary>
+             /// <param name="entries"> entries. </param>
+             /// <returns> Builder. </returns>
             public Builder Entries(IList<Models.V1SettlementEntry> entries)
             {
                 this.entries = entries;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> V1Settlement. </returns>
             public V1Settlement Build()
             {
-                return new V1Settlement(id,
-                    status,
-                    totalMoney,
-                    initiatedAt,
-                    bankAccountId,
-                    entries);
+                return new V1Settlement(
+                    this.id,
+                    this.status,
+                    this.totalMoney,
+                    this.initiatedAt,
+                    this.bankAccountId,
+                    this.entries);
             }
         }
     }

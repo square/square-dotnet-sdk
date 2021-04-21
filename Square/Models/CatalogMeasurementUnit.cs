@@ -1,25 +1,33 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class CatalogMeasurementUnit 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// CatalogMeasurementUnit.
+    /// </summary>
+    public class CatalogMeasurementUnit
     {
-        public CatalogMeasurementUnit(Models.MeasurementUnit measurementUnit = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CatalogMeasurementUnit"/> class.
+        /// </summary>
+        /// <param name="measurementUnit">measurement_unit.</param>
+        /// <param name="precision">precision.</param>
+        public CatalogMeasurementUnit(
+            Models.MeasurementUnit measurementUnit = null,
             int? precision = null)
         {
-            MeasurementUnit = measurementUnit;
-            Precision = precision;
+            this.MeasurementUnit = measurementUnit;
+            this.Precision = precision;
         }
 
         /// <summary>
@@ -42,6 +50,7 @@ namespace Square.Models
         [JsonProperty("precision", NullValueHandling = NullValueHandling.Ignore)]
         public int? Precision { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -51,12 +60,7 @@ namespace Square.Models
             return $"CatalogMeasurementUnit : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"MeasurementUnit = {(MeasurementUnit == null ? "null" : MeasurementUnit.ToString())}");
-            toStringOutput.Add($"Precision = {(Precision == null ? "null" : Precision.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -70,58 +74,89 @@ namespace Square.Models
             }
 
             return obj is CatalogMeasurementUnit other &&
-                ((MeasurementUnit == null && other.MeasurementUnit == null) || (MeasurementUnit?.Equals(other.MeasurementUnit) == true)) &&
-                ((Precision == null && other.Precision == null) || (Precision?.Equals(other.Precision) == true));
+                ((this.MeasurementUnit == null && other.MeasurementUnit == null) || (this.MeasurementUnit?.Equals(other.MeasurementUnit) == true)) &&
+                ((this.Precision == null && other.Precision == null) || (this.Precision?.Equals(other.Precision) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 1544642162;
 
-            if (MeasurementUnit != null)
+            if (this.MeasurementUnit != null)
             {
-               hashCode += MeasurementUnit.GetHashCode();
+               hashCode += this.MeasurementUnit.GetHashCode();
             }
 
-            if (Precision != null)
+            if (this.Precision != null)
             {
-               hashCode += Precision.GetHashCode();
+               hashCode += this.Precision.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.MeasurementUnit = {(this.MeasurementUnit == null ? "null" : this.MeasurementUnit.ToString())}");
+            toStringOutput.Add($"this.Precision = {(this.Precision == null ? "null" : this.Precision.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .MeasurementUnit(MeasurementUnit)
-                .Precision(Precision);
+                .MeasurementUnit(this.MeasurementUnit)
+                .Precision(this.Precision);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private Models.MeasurementUnit measurementUnit;
             private int? precision;
 
-
-
+             /// <summary>
+             /// MeasurementUnit.
+             /// </summary>
+             /// <param name="measurementUnit"> measurementUnit. </param>
+             /// <returns> Builder. </returns>
             public Builder MeasurementUnit(Models.MeasurementUnit measurementUnit)
             {
                 this.measurementUnit = measurementUnit;
                 return this;
             }
 
+             /// <summary>
+             /// Precision.
+             /// </summary>
+             /// <param name="precision"> precision. </param>
+             /// <returns> Builder. </returns>
             public Builder Precision(int? precision)
             {
                 this.precision = precision;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> CatalogMeasurementUnit. </returns>
             public CatalogMeasurementUnit Build()
             {
-                return new CatalogMeasurementUnit(measurementUnit,
-                    precision);
+                return new CatalogMeasurementUnit(
+                    this.measurementUnit,
+                    this.precision);
             }
         }
     }

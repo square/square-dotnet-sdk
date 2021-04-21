@@ -1,29 +1,37 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class CalculateLoyaltyPointsRequest 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// CalculateLoyaltyPointsRequest.
+    /// </summary>
+    public class CalculateLoyaltyPointsRequest
     {
-        public CalculateLoyaltyPointsRequest(string orderId = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CalculateLoyaltyPointsRequest"/> class.
+        /// </summary>
+        /// <param name="orderId">order_id.</param>
+        /// <param name="transactionAmountMoney">transaction_amount_money.</param>
+        public CalculateLoyaltyPointsRequest(
+            string orderId = null,
             Models.Money transactionAmountMoney = null)
         {
-            OrderId = orderId;
-            TransactionAmountMoney = transactionAmountMoney;
+            this.OrderId = orderId;
+            this.TransactionAmountMoney = transactionAmountMoney;
         }
 
         /// <summary>
-        /// The [order](#type-Order) ID for which to calculate the points.
+        /// The [order]($m/Order) ID for which to calculate the points.
         /// Specify this field if your application uses the Orders API to process orders.
         /// Otherwise, specify the `transaction_amount`.
         /// </summary>
@@ -41,6 +49,7 @@ namespace Square.Models
         [JsonProperty("transaction_amount_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Money TransactionAmountMoney { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -50,12 +59,7 @@ namespace Square.Models
             return $"CalculateLoyaltyPointsRequest : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"OrderId = {(OrderId == null ? "null" : OrderId == string.Empty ? "" : OrderId)}");
-            toStringOutput.Add($"TransactionAmountMoney = {(TransactionAmountMoney == null ? "null" : TransactionAmountMoney.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -69,58 +73,89 @@ namespace Square.Models
             }
 
             return obj is CalculateLoyaltyPointsRequest other &&
-                ((OrderId == null && other.OrderId == null) || (OrderId?.Equals(other.OrderId) == true)) &&
-                ((TransactionAmountMoney == null && other.TransactionAmountMoney == null) || (TransactionAmountMoney?.Equals(other.TransactionAmountMoney) == true));
+                ((this.OrderId == null && other.OrderId == null) || (this.OrderId?.Equals(other.OrderId) == true)) &&
+                ((this.TransactionAmountMoney == null && other.TransactionAmountMoney == null) || (this.TransactionAmountMoney?.Equals(other.TransactionAmountMoney) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1468286611;
 
-            if (OrderId != null)
+            if (this.OrderId != null)
             {
-               hashCode += OrderId.GetHashCode();
+               hashCode += this.OrderId.GetHashCode();
             }
 
-            if (TransactionAmountMoney != null)
+            if (this.TransactionAmountMoney != null)
             {
-               hashCode += TransactionAmountMoney.GetHashCode();
+               hashCode += this.TransactionAmountMoney.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.OrderId = {(this.OrderId == null ? "null" : this.OrderId == string.Empty ? "" : this.OrderId)}");
+            toStringOutput.Add($"this.TransactionAmountMoney = {(this.TransactionAmountMoney == null ? "null" : this.TransactionAmountMoney.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .OrderId(OrderId)
-                .TransactionAmountMoney(TransactionAmountMoney);
+                .OrderId(this.OrderId)
+                .TransactionAmountMoney(this.TransactionAmountMoney);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string orderId;
             private Models.Money transactionAmountMoney;
 
-
-
+             /// <summary>
+             /// OrderId.
+             /// </summary>
+             /// <param name="orderId"> orderId. </param>
+             /// <returns> Builder. </returns>
             public Builder OrderId(string orderId)
             {
                 this.orderId = orderId;
                 return this;
             }
 
+             /// <summary>
+             /// TransactionAmountMoney.
+             /// </summary>
+             /// <param name="transactionAmountMoney"> transactionAmountMoney. </param>
+             /// <returns> Builder. </returns>
             public Builder TransactionAmountMoney(Models.Money transactionAmountMoney)
             {
                 this.transactionAmountMoney = transactionAmountMoney;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> CalculateLoyaltyPointsRequest. </returns>
             public CalculateLoyaltyPointsRequest Build()
             {
-                return new CalculateLoyaltyPointsRequest(orderId,
-                    transactionAmountMoney);
+                return new CalculateLoyaltyPointsRequest(
+                    this.orderId,
+                    this.transactionAmountMoney);
             }
         }
     }

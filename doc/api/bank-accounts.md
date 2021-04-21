@@ -17,10 +17,13 @@ IBankAccountsApi bankAccountsApi = client.BankAccountsApi;
 
 # List Bank Accounts
 
-Returns a list of [BankAccount](#type-bankaccount) objects linked to a Square account.
+Returns a list of [BankAccount](/doc/models/bank-account.md) objects linked to a Square account.
 
 ```csharp
-ListBankAccountsAsync(string cursor = null, int? limit = null, string locationId = null)
+ListBankAccountsAsync(
+    string cursor = null,
+    int? limit = null,
+    string locationId = null)
 ```
 
 ## Parameters
@@ -52,10 +55,11 @@ catch (ApiException e){};
 
 # Get Bank Account by V1 Id
 
-Returns details of a [BankAccount](#type-bankaccount) identified by V1 bank account ID.
+Returns details of a [BankAccount](/doc/models/bank-account.md) identified by V1 bank account ID.
 
 ```csharp
-GetBankAccountByV1IdAsync(string v1BankAccountId)
+GetBankAccountByV1IdAsync(
+    string v1BankAccountId)
 ```
 
 ## Parameters
@@ -83,11 +87,12 @@ catch (ApiException e){};
 
 # Get Bank Account
 
-Returns details of a [BankAccount](#type-bankaccount)
+Returns details of a [BankAccount](/doc/models/bank-account.md)
 linked to a Square account.
 
 ```csharp
-GetBankAccountAsync(string bankAccountId)
+GetBankAccountAsync(
+    string bankAccountId)
 ```
 
 ## Parameters

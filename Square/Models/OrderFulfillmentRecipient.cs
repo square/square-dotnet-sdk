@@ -1,31 +1,42 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class OrderFulfillmentRecipient 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// OrderFulfillmentRecipient.
+    /// </summary>
+    public class OrderFulfillmentRecipient
     {
-        public OrderFulfillmentRecipient(string customerId = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="OrderFulfillmentRecipient"/> class.
+        /// </summary>
+        /// <param name="customerId">customer_id.</param>
+        /// <param name="displayName">display_name.</param>
+        /// <param name="emailAddress">email_address.</param>
+        /// <param name="phoneNumber">phone_number.</param>
+        /// <param name="address">address.</param>
+        public OrderFulfillmentRecipient(
+            string customerId = null,
             string displayName = null,
             string emailAddress = null,
             string phoneNumber = null,
             Models.Address address = null)
         {
-            CustomerId = customerId;
-            DisplayName = displayName;
-            EmailAddress = emailAddress;
-            PhoneNumber = phoneNumber;
-            Address = address;
+            this.CustomerId = customerId;
+            this.DisplayName = displayName;
+            this.EmailAddress = emailAddress;
+            this.PhoneNumber = phoneNumber;
+            this.Address = address;
         }
 
         /// <summary>
@@ -67,6 +78,7 @@ namespace Square.Models
         [JsonProperty("address", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Address Address { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -76,15 +88,7 @@ namespace Square.Models
             return $"OrderFulfillmentRecipient : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"CustomerId = {(CustomerId == null ? "null" : CustomerId == string.Empty ? "" : CustomerId)}");
-            toStringOutput.Add($"DisplayName = {(DisplayName == null ? "null" : DisplayName == string.Empty ? "" : DisplayName)}");
-            toStringOutput.Add($"EmailAddress = {(EmailAddress == null ? "null" : EmailAddress == string.Empty ? "" : EmailAddress)}");
-            toStringOutput.Add($"PhoneNumber = {(PhoneNumber == null ? "null" : PhoneNumber == string.Empty ? "" : PhoneNumber)}");
-            toStringOutput.Add($"Address = {(Address == null ? "null" : Address.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -98,56 +102,77 @@ namespace Square.Models
             }
 
             return obj is OrderFulfillmentRecipient other &&
-                ((CustomerId == null && other.CustomerId == null) || (CustomerId?.Equals(other.CustomerId) == true)) &&
-                ((DisplayName == null && other.DisplayName == null) || (DisplayName?.Equals(other.DisplayName) == true)) &&
-                ((EmailAddress == null && other.EmailAddress == null) || (EmailAddress?.Equals(other.EmailAddress) == true)) &&
-                ((PhoneNumber == null && other.PhoneNumber == null) || (PhoneNumber?.Equals(other.PhoneNumber) == true)) &&
-                ((Address == null && other.Address == null) || (Address?.Equals(other.Address) == true));
+                ((this.CustomerId == null && other.CustomerId == null) || (this.CustomerId?.Equals(other.CustomerId) == true)) &&
+                ((this.DisplayName == null && other.DisplayName == null) || (this.DisplayName?.Equals(other.DisplayName) == true)) &&
+                ((this.EmailAddress == null && other.EmailAddress == null) || (this.EmailAddress?.Equals(other.EmailAddress) == true)) &&
+                ((this.PhoneNumber == null && other.PhoneNumber == null) || (this.PhoneNumber?.Equals(other.PhoneNumber) == true)) &&
+                ((this.Address == null && other.Address == null) || (this.Address?.Equals(other.Address) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1654316684;
 
-            if (CustomerId != null)
+            if (this.CustomerId != null)
             {
-               hashCode += CustomerId.GetHashCode();
+               hashCode += this.CustomerId.GetHashCode();
             }
 
-            if (DisplayName != null)
+            if (this.DisplayName != null)
             {
-               hashCode += DisplayName.GetHashCode();
+               hashCode += this.DisplayName.GetHashCode();
             }
 
-            if (EmailAddress != null)
+            if (this.EmailAddress != null)
             {
-               hashCode += EmailAddress.GetHashCode();
+               hashCode += this.EmailAddress.GetHashCode();
             }
 
-            if (PhoneNumber != null)
+            if (this.PhoneNumber != null)
             {
-               hashCode += PhoneNumber.GetHashCode();
+               hashCode += this.PhoneNumber.GetHashCode();
             }
 
-            if (Address != null)
+            if (this.Address != null)
             {
-               hashCode += Address.GetHashCode();
+               hashCode += this.Address.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.CustomerId = {(this.CustomerId == null ? "null" : this.CustomerId == string.Empty ? "" : this.CustomerId)}");
+            toStringOutput.Add($"this.DisplayName = {(this.DisplayName == null ? "null" : this.DisplayName == string.Empty ? "" : this.DisplayName)}");
+            toStringOutput.Add($"this.EmailAddress = {(this.EmailAddress == null ? "null" : this.EmailAddress == string.Empty ? "" : this.EmailAddress)}");
+            toStringOutput.Add($"this.PhoneNumber = {(this.PhoneNumber == null ? "null" : this.PhoneNumber == string.Empty ? "" : this.PhoneNumber)}");
+            toStringOutput.Add($"this.Address = {(this.Address == null ? "null" : this.Address.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .CustomerId(CustomerId)
-                .DisplayName(DisplayName)
-                .EmailAddress(EmailAddress)
-                .PhoneNumber(PhoneNumber)
-                .Address(Address);
+                .CustomerId(this.CustomerId)
+                .DisplayName(this.DisplayName)
+                .EmailAddress(this.EmailAddress)
+                .PhoneNumber(this.PhoneNumber)
+                .Address(this.Address);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string customerId;
@@ -156,45 +181,73 @@ namespace Square.Models
             private string phoneNumber;
             private Models.Address address;
 
-
-
+             /// <summary>
+             /// CustomerId.
+             /// </summary>
+             /// <param name="customerId"> customerId. </param>
+             /// <returns> Builder. </returns>
             public Builder CustomerId(string customerId)
             {
                 this.customerId = customerId;
                 return this;
             }
 
+             /// <summary>
+             /// DisplayName.
+             /// </summary>
+             /// <param name="displayName"> displayName. </param>
+             /// <returns> Builder. </returns>
             public Builder DisplayName(string displayName)
             {
                 this.displayName = displayName;
                 return this;
             }
 
+             /// <summary>
+             /// EmailAddress.
+             /// </summary>
+             /// <param name="emailAddress"> emailAddress. </param>
+             /// <returns> Builder. </returns>
             public Builder EmailAddress(string emailAddress)
             {
                 this.emailAddress = emailAddress;
                 return this;
             }
 
+             /// <summary>
+             /// PhoneNumber.
+             /// </summary>
+             /// <param name="phoneNumber"> phoneNumber. </param>
+             /// <returns> Builder. </returns>
             public Builder PhoneNumber(string phoneNumber)
             {
                 this.phoneNumber = phoneNumber;
                 return this;
             }
 
+             /// <summary>
+             /// Address.
+             /// </summary>
+             /// <param name="address"> address. </param>
+             /// <returns> Builder. </returns>
             public Builder Address(Models.Address address)
             {
                 this.address = address;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> OrderFulfillmentRecipient. </returns>
             public OrderFulfillmentRecipient Build()
             {
-                return new OrderFulfillmentRecipient(customerId,
-                    displayName,
-                    emailAddress,
-                    phoneNumber,
-                    address);
+                return new OrderFulfillmentRecipient(
+                    this.customerId,
+                    this.displayName,
+                    this.emailAddress,
+                    this.phoneNumber,
+                    this.address);
             }
         }
     }

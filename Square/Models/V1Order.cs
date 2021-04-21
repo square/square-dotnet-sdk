@@ -1,22 +1,53 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square.Http.Client;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class V1Order 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Http.Client;
+    using Square.Utilities;
+
+    /// <summary>
+    /// V1Order.
+    /// </summary>
+    public class V1Order
     {
-        public V1Order(IList<Models.Error> errors = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="V1Order"/> class.
+        /// </summary>
+        /// <param name="errors">errors.</param>
+        /// <param name="id">id.</param>
+        /// <param name="buyerEmail">buyer_email.</param>
+        /// <param name="recipientName">recipient_name.</param>
+        /// <param name="recipientPhoneNumber">recipient_phone_number.</param>
+        /// <param name="state">state.</param>
+        /// <param name="shippingAddress">shipping_address.</param>
+        /// <param name="subtotalMoney">subtotal_money.</param>
+        /// <param name="totalShippingMoney">total_shipping_money.</param>
+        /// <param name="totalTaxMoney">total_tax_money.</param>
+        /// <param name="totalPriceMoney">total_price_money.</param>
+        /// <param name="totalDiscountMoney">total_discount_money.</param>
+        /// <param name="createdAt">created_at.</param>
+        /// <param name="updatedAt">updated_at.</param>
+        /// <param name="expiresAt">expires_at.</param>
+        /// <param name="paymentId">payment_id.</param>
+        /// <param name="buyerNote">buyer_note.</param>
+        /// <param name="completedNote">completed_note.</param>
+        /// <param name="refundedNote">refunded_note.</param>
+        /// <param name="canceledNote">canceled_note.</param>
+        /// <param name="tender">tender.</param>
+        /// <param name="orderHistory">order_history.</param>
+        /// <param name="promoCode">promo_code.</param>
+        /// <param name="btcReceiveAddress">btc_receive_address.</param>
+        /// <param name="btcPriceSatoshi">btc_price_satoshi.</param>
+        public V1Order(
+            IList<Models.Error> errors = null,
             string id = null,
             string buyerEmail = null,
             string recipientName = null,
@@ -42,33 +73,36 @@ namespace Square.Models
             string btcReceiveAddress = null,
             double? btcPriceSatoshi = null)
         {
-            Errors = errors;
-            Id = id;
-            BuyerEmail = buyerEmail;
-            RecipientName = recipientName;
-            RecipientPhoneNumber = recipientPhoneNumber;
-            State = state;
-            ShippingAddress = shippingAddress;
-            SubtotalMoney = subtotalMoney;
-            TotalShippingMoney = totalShippingMoney;
-            TotalTaxMoney = totalTaxMoney;
-            TotalPriceMoney = totalPriceMoney;
-            TotalDiscountMoney = totalDiscountMoney;
-            CreatedAt = createdAt;
-            UpdatedAt = updatedAt;
-            ExpiresAt = expiresAt;
-            PaymentId = paymentId;
-            BuyerNote = buyerNote;
-            CompletedNote = completedNote;
-            RefundedNote = refundedNote;
-            CanceledNote = canceledNote;
-            Tender = tender;
-            OrderHistory = orderHistory;
-            PromoCode = promoCode;
-            BtcReceiveAddress = btcReceiveAddress;
-            BtcPriceSatoshi = btcPriceSatoshi;
+            this.Errors = errors;
+            this.Id = id;
+            this.BuyerEmail = buyerEmail;
+            this.RecipientName = recipientName;
+            this.RecipientPhoneNumber = recipientPhoneNumber;
+            this.State = state;
+            this.ShippingAddress = shippingAddress;
+            this.SubtotalMoney = subtotalMoney;
+            this.TotalShippingMoney = totalShippingMoney;
+            this.TotalTaxMoney = totalTaxMoney;
+            this.TotalPriceMoney = totalPriceMoney;
+            this.TotalDiscountMoney = totalDiscountMoney;
+            this.CreatedAt = createdAt;
+            this.UpdatedAt = updatedAt;
+            this.ExpiresAt = expiresAt;
+            this.PaymentId = paymentId;
+            this.BuyerNote = buyerNote;
+            this.CompletedNote = completedNote;
+            this.RefundedNote = refundedNote;
+            this.CanceledNote = canceledNote;
+            this.Tender = tender;
+            this.OrderHistory = orderHistory;
+            this.PromoCode = promoCode;
+            this.BtcReceiveAddress = btcReceiveAddress;
+            this.BtcPriceSatoshi = btcPriceSatoshi;
         }
 
+        /// <summary>
+        /// Gets http context.
+        /// </summary>
         [JsonIgnore]
         public HttpContext Context { get; internal set; }
 
@@ -103,7 +137,7 @@ namespace Square.Models
         public string RecipientPhoneNumber { get; }
 
         /// <summary>
-        /// Getter for state
+        /// Gets or sets State.
         /// </summary>
         [JsonProperty("state", NullValueHandling = NullValueHandling.Ignore)]
         public string State { get; }
@@ -115,31 +149,31 @@ namespace Square.Models
         public Models.Address ShippingAddress { get; }
 
         /// <summary>
-        /// Getter for subtotal_money
+        /// Gets or sets SubtotalMoney.
         /// </summary>
         [JsonProperty("subtotal_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1Money SubtotalMoney { get; }
 
         /// <summary>
-        /// Getter for total_shipping_money
+        /// Gets or sets TotalShippingMoney.
         /// </summary>
         [JsonProperty("total_shipping_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1Money TotalShippingMoney { get; }
 
         /// <summary>
-        /// Getter for total_tax_money
+        /// Gets or sets TotalTaxMoney.
         /// </summary>
         [JsonProperty("total_tax_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1Money TotalTaxMoney { get; }
 
         /// <summary>
-        /// Getter for total_price_money
+        /// Gets or sets TotalPriceMoney.
         /// </summary>
         [JsonProperty("total_price_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1Money TotalPriceMoney { get; }
 
         /// <summary>
-        /// Getter for total_discount_money
+        /// Gets or sets TotalDiscountMoney.
         /// </summary>
         [JsonProperty("total_discount_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1Money TotalDiscountMoney { get; }
@@ -238,6 +272,7 @@ namespace Square.Models
         [JsonProperty("btc_price_satoshi", NullValueHandling = NullValueHandling.Ignore)]
         public double? BtcPriceSatoshi { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -247,35 +282,7 @@ namespace Square.Models
             return $"V1Order : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Errors = {(Errors == null ? "null" : $"[{ string.Join(", ", Errors)} ]")}");
-            toStringOutput.Add($"Id = {(Id == null ? "null" : Id == string.Empty ? "" : Id)}");
-            toStringOutput.Add($"BuyerEmail = {(BuyerEmail == null ? "null" : BuyerEmail == string.Empty ? "" : BuyerEmail)}");
-            toStringOutput.Add($"RecipientName = {(RecipientName == null ? "null" : RecipientName == string.Empty ? "" : RecipientName)}");
-            toStringOutput.Add($"RecipientPhoneNumber = {(RecipientPhoneNumber == null ? "null" : RecipientPhoneNumber == string.Empty ? "" : RecipientPhoneNumber)}");
-            toStringOutput.Add($"State = {(State == null ? "null" : State.ToString())}");
-            toStringOutput.Add($"ShippingAddress = {(ShippingAddress == null ? "null" : ShippingAddress.ToString())}");
-            toStringOutput.Add($"SubtotalMoney = {(SubtotalMoney == null ? "null" : SubtotalMoney.ToString())}");
-            toStringOutput.Add($"TotalShippingMoney = {(TotalShippingMoney == null ? "null" : TotalShippingMoney.ToString())}");
-            toStringOutput.Add($"TotalTaxMoney = {(TotalTaxMoney == null ? "null" : TotalTaxMoney.ToString())}");
-            toStringOutput.Add($"TotalPriceMoney = {(TotalPriceMoney == null ? "null" : TotalPriceMoney.ToString())}");
-            toStringOutput.Add($"TotalDiscountMoney = {(TotalDiscountMoney == null ? "null" : TotalDiscountMoney.ToString())}");
-            toStringOutput.Add($"CreatedAt = {(CreatedAt == null ? "null" : CreatedAt == string.Empty ? "" : CreatedAt)}");
-            toStringOutput.Add($"UpdatedAt = {(UpdatedAt == null ? "null" : UpdatedAt == string.Empty ? "" : UpdatedAt)}");
-            toStringOutput.Add($"ExpiresAt = {(ExpiresAt == null ? "null" : ExpiresAt == string.Empty ? "" : ExpiresAt)}");
-            toStringOutput.Add($"PaymentId = {(PaymentId == null ? "null" : PaymentId == string.Empty ? "" : PaymentId)}");
-            toStringOutput.Add($"BuyerNote = {(BuyerNote == null ? "null" : BuyerNote == string.Empty ? "" : BuyerNote)}");
-            toStringOutput.Add($"CompletedNote = {(CompletedNote == null ? "null" : CompletedNote == string.Empty ? "" : CompletedNote)}");
-            toStringOutput.Add($"RefundedNote = {(RefundedNote == null ? "null" : RefundedNote == string.Empty ? "" : RefundedNote)}");
-            toStringOutput.Add($"CanceledNote = {(CanceledNote == null ? "null" : CanceledNote == string.Empty ? "" : CanceledNote)}");
-            toStringOutput.Add($"Tender = {(Tender == null ? "null" : Tender.ToString())}");
-            toStringOutput.Add($"OrderHistory = {(OrderHistory == null ? "null" : $"[{ string.Join(", ", OrderHistory)} ]")}");
-            toStringOutput.Add($"PromoCode = {(PromoCode == null ? "null" : PromoCode == string.Empty ? "" : PromoCode)}");
-            toStringOutput.Add($"BtcReceiveAddress = {(BtcReceiveAddress == null ? "null" : BtcReceiveAddress == string.Empty ? "" : BtcReceiveAddress)}");
-            toStringOutput.Add($"BtcPriceSatoshi = {(BtcPriceSatoshi == null ? "null" : BtcPriceSatoshi.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -289,202 +296,243 @@ namespace Square.Models
             }
 
             return obj is V1Order other &&
-                ((Context == null && other.Context == null) || (Context?.Equals(other.Context) == true)) &&
-                ((Errors == null && other.Errors == null) || (Errors?.Equals(other.Errors) == true)) &&
-                ((Id == null && other.Id == null) || (Id?.Equals(other.Id) == true)) &&
-                ((BuyerEmail == null && other.BuyerEmail == null) || (BuyerEmail?.Equals(other.BuyerEmail) == true)) &&
-                ((RecipientName == null && other.RecipientName == null) || (RecipientName?.Equals(other.RecipientName) == true)) &&
-                ((RecipientPhoneNumber == null && other.RecipientPhoneNumber == null) || (RecipientPhoneNumber?.Equals(other.RecipientPhoneNumber) == true)) &&
-                ((State == null && other.State == null) || (State?.Equals(other.State) == true)) &&
-                ((ShippingAddress == null && other.ShippingAddress == null) || (ShippingAddress?.Equals(other.ShippingAddress) == true)) &&
-                ((SubtotalMoney == null && other.SubtotalMoney == null) || (SubtotalMoney?.Equals(other.SubtotalMoney) == true)) &&
-                ((TotalShippingMoney == null && other.TotalShippingMoney == null) || (TotalShippingMoney?.Equals(other.TotalShippingMoney) == true)) &&
-                ((TotalTaxMoney == null && other.TotalTaxMoney == null) || (TotalTaxMoney?.Equals(other.TotalTaxMoney) == true)) &&
-                ((TotalPriceMoney == null && other.TotalPriceMoney == null) || (TotalPriceMoney?.Equals(other.TotalPriceMoney) == true)) &&
-                ((TotalDiscountMoney == null && other.TotalDiscountMoney == null) || (TotalDiscountMoney?.Equals(other.TotalDiscountMoney) == true)) &&
-                ((CreatedAt == null && other.CreatedAt == null) || (CreatedAt?.Equals(other.CreatedAt) == true)) &&
-                ((UpdatedAt == null && other.UpdatedAt == null) || (UpdatedAt?.Equals(other.UpdatedAt) == true)) &&
-                ((ExpiresAt == null && other.ExpiresAt == null) || (ExpiresAt?.Equals(other.ExpiresAt) == true)) &&
-                ((PaymentId == null && other.PaymentId == null) || (PaymentId?.Equals(other.PaymentId) == true)) &&
-                ((BuyerNote == null && other.BuyerNote == null) || (BuyerNote?.Equals(other.BuyerNote) == true)) &&
-                ((CompletedNote == null && other.CompletedNote == null) || (CompletedNote?.Equals(other.CompletedNote) == true)) &&
-                ((RefundedNote == null && other.RefundedNote == null) || (RefundedNote?.Equals(other.RefundedNote) == true)) &&
-                ((CanceledNote == null && other.CanceledNote == null) || (CanceledNote?.Equals(other.CanceledNote) == true)) &&
-                ((Tender == null && other.Tender == null) || (Tender?.Equals(other.Tender) == true)) &&
-                ((OrderHistory == null && other.OrderHistory == null) || (OrderHistory?.Equals(other.OrderHistory) == true)) &&
-                ((PromoCode == null && other.PromoCode == null) || (PromoCode?.Equals(other.PromoCode) == true)) &&
-                ((BtcReceiveAddress == null && other.BtcReceiveAddress == null) || (BtcReceiveAddress?.Equals(other.BtcReceiveAddress) == true)) &&
-                ((BtcPriceSatoshi == null && other.BtcPriceSatoshi == null) || (BtcPriceSatoshi?.Equals(other.BtcPriceSatoshi) == true));
+                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
+                ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true)) &&
+                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
+                ((this.BuyerEmail == null && other.BuyerEmail == null) || (this.BuyerEmail?.Equals(other.BuyerEmail) == true)) &&
+                ((this.RecipientName == null && other.RecipientName == null) || (this.RecipientName?.Equals(other.RecipientName) == true)) &&
+                ((this.RecipientPhoneNumber == null && other.RecipientPhoneNumber == null) || (this.RecipientPhoneNumber?.Equals(other.RecipientPhoneNumber) == true)) &&
+                ((this.State == null && other.State == null) || (this.State?.Equals(other.State) == true)) &&
+                ((this.ShippingAddress == null && other.ShippingAddress == null) || (this.ShippingAddress?.Equals(other.ShippingAddress) == true)) &&
+                ((this.SubtotalMoney == null && other.SubtotalMoney == null) || (this.SubtotalMoney?.Equals(other.SubtotalMoney) == true)) &&
+                ((this.TotalShippingMoney == null && other.TotalShippingMoney == null) || (this.TotalShippingMoney?.Equals(other.TotalShippingMoney) == true)) &&
+                ((this.TotalTaxMoney == null && other.TotalTaxMoney == null) || (this.TotalTaxMoney?.Equals(other.TotalTaxMoney) == true)) &&
+                ((this.TotalPriceMoney == null && other.TotalPriceMoney == null) || (this.TotalPriceMoney?.Equals(other.TotalPriceMoney) == true)) &&
+                ((this.TotalDiscountMoney == null && other.TotalDiscountMoney == null) || (this.TotalDiscountMoney?.Equals(other.TotalDiscountMoney) == true)) &&
+                ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true)) &&
+                ((this.UpdatedAt == null && other.UpdatedAt == null) || (this.UpdatedAt?.Equals(other.UpdatedAt) == true)) &&
+                ((this.ExpiresAt == null && other.ExpiresAt == null) || (this.ExpiresAt?.Equals(other.ExpiresAt) == true)) &&
+                ((this.PaymentId == null && other.PaymentId == null) || (this.PaymentId?.Equals(other.PaymentId) == true)) &&
+                ((this.BuyerNote == null && other.BuyerNote == null) || (this.BuyerNote?.Equals(other.BuyerNote) == true)) &&
+                ((this.CompletedNote == null && other.CompletedNote == null) || (this.CompletedNote?.Equals(other.CompletedNote) == true)) &&
+                ((this.RefundedNote == null && other.RefundedNote == null) || (this.RefundedNote?.Equals(other.RefundedNote) == true)) &&
+                ((this.CanceledNote == null && other.CanceledNote == null) || (this.CanceledNote?.Equals(other.CanceledNote) == true)) &&
+                ((this.Tender == null && other.Tender == null) || (this.Tender?.Equals(other.Tender) == true)) &&
+                ((this.OrderHistory == null && other.OrderHistory == null) || (this.OrderHistory?.Equals(other.OrderHistory) == true)) &&
+                ((this.PromoCode == null && other.PromoCode == null) || (this.PromoCode?.Equals(other.PromoCode) == true)) &&
+                ((this.BtcReceiveAddress == null && other.BtcReceiveAddress == null) || (this.BtcReceiveAddress?.Equals(other.BtcReceiveAddress) == true)) &&
+                ((this.BtcPriceSatoshi == null && other.BtcPriceSatoshi == null) || (this.BtcPriceSatoshi?.Equals(other.BtcPriceSatoshi) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 820864276;
 
-            if (Context != null)
+            if (this.Context != null)
             {
-                hashCode += Context.GetHashCode();
+                hashCode += this.Context.GetHashCode();
             }
 
-            if (Errors != null)
+            if (this.Errors != null)
             {
-               hashCode += Errors.GetHashCode();
+               hashCode += this.Errors.GetHashCode();
             }
 
-            if (Id != null)
+            if (this.Id != null)
             {
-               hashCode += Id.GetHashCode();
+               hashCode += this.Id.GetHashCode();
             }
 
-            if (BuyerEmail != null)
+            if (this.BuyerEmail != null)
             {
-               hashCode += BuyerEmail.GetHashCode();
+               hashCode += this.BuyerEmail.GetHashCode();
             }
 
-            if (RecipientName != null)
+            if (this.RecipientName != null)
             {
-               hashCode += RecipientName.GetHashCode();
+               hashCode += this.RecipientName.GetHashCode();
             }
 
-            if (RecipientPhoneNumber != null)
+            if (this.RecipientPhoneNumber != null)
             {
-               hashCode += RecipientPhoneNumber.GetHashCode();
+               hashCode += this.RecipientPhoneNumber.GetHashCode();
             }
 
-            if (State != null)
+            if (this.State != null)
             {
-               hashCode += State.GetHashCode();
+               hashCode += this.State.GetHashCode();
             }
 
-            if (ShippingAddress != null)
+            if (this.ShippingAddress != null)
             {
-               hashCode += ShippingAddress.GetHashCode();
+               hashCode += this.ShippingAddress.GetHashCode();
             }
 
-            if (SubtotalMoney != null)
+            if (this.SubtotalMoney != null)
             {
-               hashCode += SubtotalMoney.GetHashCode();
+               hashCode += this.SubtotalMoney.GetHashCode();
             }
 
-            if (TotalShippingMoney != null)
+            if (this.TotalShippingMoney != null)
             {
-               hashCode += TotalShippingMoney.GetHashCode();
+               hashCode += this.TotalShippingMoney.GetHashCode();
             }
 
-            if (TotalTaxMoney != null)
+            if (this.TotalTaxMoney != null)
             {
-               hashCode += TotalTaxMoney.GetHashCode();
+               hashCode += this.TotalTaxMoney.GetHashCode();
             }
 
-            if (TotalPriceMoney != null)
+            if (this.TotalPriceMoney != null)
             {
-               hashCode += TotalPriceMoney.GetHashCode();
+               hashCode += this.TotalPriceMoney.GetHashCode();
             }
 
-            if (TotalDiscountMoney != null)
+            if (this.TotalDiscountMoney != null)
             {
-               hashCode += TotalDiscountMoney.GetHashCode();
+               hashCode += this.TotalDiscountMoney.GetHashCode();
             }
 
-            if (CreatedAt != null)
+            if (this.CreatedAt != null)
             {
-               hashCode += CreatedAt.GetHashCode();
+               hashCode += this.CreatedAt.GetHashCode();
             }
 
-            if (UpdatedAt != null)
+            if (this.UpdatedAt != null)
             {
-               hashCode += UpdatedAt.GetHashCode();
+               hashCode += this.UpdatedAt.GetHashCode();
             }
 
-            if (ExpiresAt != null)
+            if (this.ExpiresAt != null)
             {
-               hashCode += ExpiresAt.GetHashCode();
+               hashCode += this.ExpiresAt.GetHashCode();
             }
 
-            if (PaymentId != null)
+            if (this.PaymentId != null)
             {
-               hashCode += PaymentId.GetHashCode();
+               hashCode += this.PaymentId.GetHashCode();
             }
 
-            if (BuyerNote != null)
+            if (this.BuyerNote != null)
             {
-               hashCode += BuyerNote.GetHashCode();
+               hashCode += this.BuyerNote.GetHashCode();
             }
 
-            if (CompletedNote != null)
+            if (this.CompletedNote != null)
             {
-               hashCode += CompletedNote.GetHashCode();
+               hashCode += this.CompletedNote.GetHashCode();
             }
 
-            if (RefundedNote != null)
+            if (this.RefundedNote != null)
             {
-               hashCode += RefundedNote.GetHashCode();
+               hashCode += this.RefundedNote.GetHashCode();
             }
 
-            if (CanceledNote != null)
+            if (this.CanceledNote != null)
             {
-               hashCode += CanceledNote.GetHashCode();
+               hashCode += this.CanceledNote.GetHashCode();
             }
 
-            if (Tender != null)
+            if (this.Tender != null)
             {
-               hashCode += Tender.GetHashCode();
+               hashCode += this.Tender.GetHashCode();
             }
 
-            if (OrderHistory != null)
+            if (this.OrderHistory != null)
             {
-               hashCode += OrderHistory.GetHashCode();
+               hashCode += this.OrderHistory.GetHashCode();
             }
 
-            if (PromoCode != null)
+            if (this.PromoCode != null)
             {
-               hashCode += PromoCode.GetHashCode();
+               hashCode += this.PromoCode.GetHashCode();
             }
 
-            if (BtcReceiveAddress != null)
+            if (this.BtcReceiveAddress != null)
             {
-               hashCode += BtcReceiveAddress.GetHashCode();
+               hashCode += this.BtcReceiveAddress.GetHashCode();
             }
 
-            if (BtcPriceSatoshi != null)
+            if (this.BtcPriceSatoshi != null)
             {
-               hashCode += BtcPriceSatoshi.GetHashCode();
+               hashCode += this.BtcPriceSatoshi.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Errors = {(this.Errors == null ? "null" : $"[{string.Join(", ", this.Errors)} ]")}");
+            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id == string.Empty ? "" : this.Id)}");
+            toStringOutput.Add($"this.BuyerEmail = {(this.BuyerEmail == null ? "null" : this.BuyerEmail == string.Empty ? "" : this.BuyerEmail)}");
+            toStringOutput.Add($"this.RecipientName = {(this.RecipientName == null ? "null" : this.RecipientName == string.Empty ? "" : this.RecipientName)}");
+            toStringOutput.Add($"this.RecipientPhoneNumber = {(this.RecipientPhoneNumber == null ? "null" : this.RecipientPhoneNumber == string.Empty ? "" : this.RecipientPhoneNumber)}");
+            toStringOutput.Add($"this.State = {(this.State == null ? "null" : this.State.ToString())}");
+            toStringOutput.Add($"this.ShippingAddress = {(this.ShippingAddress == null ? "null" : this.ShippingAddress.ToString())}");
+            toStringOutput.Add($"this.SubtotalMoney = {(this.SubtotalMoney == null ? "null" : this.SubtotalMoney.ToString())}");
+            toStringOutput.Add($"this.TotalShippingMoney = {(this.TotalShippingMoney == null ? "null" : this.TotalShippingMoney.ToString())}");
+            toStringOutput.Add($"this.TotalTaxMoney = {(this.TotalTaxMoney == null ? "null" : this.TotalTaxMoney.ToString())}");
+            toStringOutput.Add($"this.TotalPriceMoney = {(this.TotalPriceMoney == null ? "null" : this.TotalPriceMoney.ToString())}");
+            toStringOutput.Add($"this.TotalDiscountMoney = {(this.TotalDiscountMoney == null ? "null" : this.TotalDiscountMoney.ToString())}");
+            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt == string.Empty ? "" : this.CreatedAt)}");
+            toStringOutput.Add($"this.UpdatedAt = {(this.UpdatedAt == null ? "null" : this.UpdatedAt == string.Empty ? "" : this.UpdatedAt)}");
+            toStringOutput.Add($"this.ExpiresAt = {(this.ExpiresAt == null ? "null" : this.ExpiresAt == string.Empty ? "" : this.ExpiresAt)}");
+            toStringOutput.Add($"this.PaymentId = {(this.PaymentId == null ? "null" : this.PaymentId == string.Empty ? "" : this.PaymentId)}");
+            toStringOutput.Add($"this.BuyerNote = {(this.BuyerNote == null ? "null" : this.BuyerNote == string.Empty ? "" : this.BuyerNote)}");
+            toStringOutput.Add($"this.CompletedNote = {(this.CompletedNote == null ? "null" : this.CompletedNote == string.Empty ? "" : this.CompletedNote)}");
+            toStringOutput.Add($"this.RefundedNote = {(this.RefundedNote == null ? "null" : this.RefundedNote == string.Empty ? "" : this.RefundedNote)}");
+            toStringOutput.Add($"this.CanceledNote = {(this.CanceledNote == null ? "null" : this.CanceledNote == string.Empty ? "" : this.CanceledNote)}");
+            toStringOutput.Add($"this.Tender = {(this.Tender == null ? "null" : this.Tender.ToString())}");
+            toStringOutput.Add($"this.OrderHistory = {(this.OrderHistory == null ? "null" : $"[{string.Join(", ", this.OrderHistory)} ]")}");
+            toStringOutput.Add($"this.PromoCode = {(this.PromoCode == null ? "null" : this.PromoCode == string.Empty ? "" : this.PromoCode)}");
+            toStringOutput.Add($"this.BtcReceiveAddress = {(this.BtcReceiveAddress == null ? "null" : this.BtcReceiveAddress == string.Empty ? "" : this.BtcReceiveAddress)}");
+            toStringOutput.Add($"this.BtcPriceSatoshi = {(this.BtcPriceSatoshi == null ? "null" : this.BtcPriceSatoshi.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .Errors(Errors)
-                .Id(Id)
-                .BuyerEmail(BuyerEmail)
-                .RecipientName(RecipientName)
-                .RecipientPhoneNumber(RecipientPhoneNumber)
-                .State(State)
-                .ShippingAddress(ShippingAddress)
-                .SubtotalMoney(SubtotalMoney)
-                .TotalShippingMoney(TotalShippingMoney)
-                .TotalTaxMoney(TotalTaxMoney)
-                .TotalPriceMoney(TotalPriceMoney)
-                .TotalDiscountMoney(TotalDiscountMoney)
-                .CreatedAt(CreatedAt)
-                .UpdatedAt(UpdatedAt)
-                .ExpiresAt(ExpiresAt)
-                .PaymentId(PaymentId)
-                .BuyerNote(BuyerNote)
-                .CompletedNote(CompletedNote)
-                .RefundedNote(RefundedNote)
-                .CanceledNote(CanceledNote)
-                .Tender(Tender)
-                .OrderHistory(OrderHistory)
-                .PromoCode(PromoCode)
-                .BtcReceiveAddress(BtcReceiveAddress)
-                .BtcPriceSatoshi(BtcPriceSatoshi);
+                .Errors(this.Errors)
+                .Id(this.Id)
+                .BuyerEmail(this.BuyerEmail)
+                .RecipientName(this.RecipientName)
+                .RecipientPhoneNumber(this.RecipientPhoneNumber)
+                .State(this.State)
+                .ShippingAddress(this.ShippingAddress)
+                .SubtotalMoney(this.SubtotalMoney)
+                .TotalShippingMoney(this.TotalShippingMoney)
+                .TotalTaxMoney(this.TotalTaxMoney)
+                .TotalPriceMoney(this.TotalPriceMoney)
+                .TotalDiscountMoney(this.TotalDiscountMoney)
+                .CreatedAt(this.CreatedAt)
+                .UpdatedAt(this.UpdatedAt)
+                .ExpiresAt(this.ExpiresAt)
+                .PaymentId(this.PaymentId)
+                .BuyerNote(this.BuyerNote)
+                .CompletedNote(this.CompletedNote)
+                .RefundedNote(this.RefundedNote)
+                .CanceledNote(this.CanceledNote)
+                .Tender(this.Tender)
+                .OrderHistory(this.OrderHistory)
+                .PromoCode(this.PromoCode)
+                .BtcReceiveAddress(this.BtcReceiveAddress)
+                .BtcPriceSatoshi(this.BtcPriceSatoshi);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private IList<Models.Error> errors;
@@ -513,185 +561,313 @@ namespace Square.Models
             private string btcReceiveAddress;
             private double? btcPriceSatoshi;
 
-
-
+             /// <summary>
+             /// Errors.
+             /// </summary>
+             /// <param name="errors"> errors. </param>
+             /// <returns> Builder. </returns>
             public Builder Errors(IList<Models.Error> errors)
             {
                 this.errors = errors;
                 return this;
             }
 
+             /// <summary>
+             /// Id.
+             /// </summary>
+             /// <param name="id"> id. </param>
+             /// <returns> Builder. </returns>
             public Builder Id(string id)
             {
                 this.id = id;
                 return this;
             }
 
+             /// <summary>
+             /// BuyerEmail.
+             /// </summary>
+             /// <param name="buyerEmail"> buyerEmail. </param>
+             /// <returns> Builder. </returns>
             public Builder BuyerEmail(string buyerEmail)
             {
                 this.buyerEmail = buyerEmail;
                 return this;
             }
 
+             /// <summary>
+             /// RecipientName.
+             /// </summary>
+             /// <param name="recipientName"> recipientName. </param>
+             /// <returns> Builder. </returns>
             public Builder RecipientName(string recipientName)
             {
                 this.recipientName = recipientName;
                 return this;
             }
 
+             /// <summary>
+             /// RecipientPhoneNumber.
+             /// </summary>
+             /// <param name="recipientPhoneNumber"> recipientPhoneNumber. </param>
+             /// <returns> Builder. </returns>
             public Builder RecipientPhoneNumber(string recipientPhoneNumber)
             {
                 this.recipientPhoneNumber = recipientPhoneNumber;
                 return this;
             }
 
+             /// <summary>
+             /// State.
+             /// </summary>
+             /// <param name="state"> state. </param>
+             /// <returns> Builder. </returns>
             public Builder State(string state)
             {
                 this.state = state;
                 return this;
             }
 
+             /// <summary>
+             /// ShippingAddress.
+             /// </summary>
+             /// <param name="shippingAddress"> shippingAddress. </param>
+             /// <returns> Builder. </returns>
             public Builder ShippingAddress(Models.Address shippingAddress)
             {
                 this.shippingAddress = shippingAddress;
                 return this;
             }
 
+             /// <summary>
+             /// SubtotalMoney.
+             /// </summary>
+             /// <param name="subtotalMoney"> subtotalMoney. </param>
+             /// <returns> Builder. </returns>
             public Builder SubtotalMoney(Models.V1Money subtotalMoney)
             {
                 this.subtotalMoney = subtotalMoney;
                 return this;
             }
 
+             /// <summary>
+             /// TotalShippingMoney.
+             /// </summary>
+             /// <param name="totalShippingMoney"> totalShippingMoney. </param>
+             /// <returns> Builder. </returns>
             public Builder TotalShippingMoney(Models.V1Money totalShippingMoney)
             {
                 this.totalShippingMoney = totalShippingMoney;
                 return this;
             }
 
+             /// <summary>
+             /// TotalTaxMoney.
+             /// </summary>
+             /// <param name="totalTaxMoney"> totalTaxMoney. </param>
+             /// <returns> Builder. </returns>
             public Builder TotalTaxMoney(Models.V1Money totalTaxMoney)
             {
                 this.totalTaxMoney = totalTaxMoney;
                 return this;
             }
 
+             /// <summary>
+             /// TotalPriceMoney.
+             /// </summary>
+             /// <param name="totalPriceMoney"> totalPriceMoney. </param>
+             /// <returns> Builder. </returns>
             public Builder TotalPriceMoney(Models.V1Money totalPriceMoney)
             {
                 this.totalPriceMoney = totalPriceMoney;
                 return this;
             }
 
+             /// <summary>
+             /// TotalDiscountMoney.
+             /// </summary>
+             /// <param name="totalDiscountMoney"> totalDiscountMoney. </param>
+             /// <returns> Builder. </returns>
             public Builder TotalDiscountMoney(Models.V1Money totalDiscountMoney)
             {
                 this.totalDiscountMoney = totalDiscountMoney;
                 return this;
             }
 
+             /// <summary>
+             /// CreatedAt.
+             /// </summary>
+             /// <param name="createdAt"> createdAt. </param>
+             /// <returns> Builder. </returns>
             public Builder CreatedAt(string createdAt)
             {
                 this.createdAt = createdAt;
                 return this;
             }
 
+             /// <summary>
+             /// UpdatedAt.
+             /// </summary>
+             /// <param name="updatedAt"> updatedAt. </param>
+             /// <returns> Builder. </returns>
             public Builder UpdatedAt(string updatedAt)
             {
                 this.updatedAt = updatedAt;
                 return this;
             }
 
+             /// <summary>
+             /// ExpiresAt.
+             /// </summary>
+             /// <param name="expiresAt"> expiresAt. </param>
+             /// <returns> Builder. </returns>
             public Builder ExpiresAt(string expiresAt)
             {
                 this.expiresAt = expiresAt;
                 return this;
             }
 
+             /// <summary>
+             /// PaymentId.
+             /// </summary>
+             /// <param name="paymentId"> paymentId. </param>
+             /// <returns> Builder. </returns>
             public Builder PaymentId(string paymentId)
             {
                 this.paymentId = paymentId;
                 return this;
             }
 
+             /// <summary>
+             /// BuyerNote.
+             /// </summary>
+             /// <param name="buyerNote"> buyerNote. </param>
+             /// <returns> Builder. </returns>
             public Builder BuyerNote(string buyerNote)
             {
                 this.buyerNote = buyerNote;
                 return this;
             }
 
+             /// <summary>
+             /// CompletedNote.
+             /// </summary>
+             /// <param name="completedNote"> completedNote. </param>
+             /// <returns> Builder. </returns>
             public Builder CompletedNote(string completedNote)
             {
                 this.completedNote = completedNote;
                 return this;
             }
 
+             /// <summary>
+             /// RefundedNote.
+             /// </summary>
+             /// <param name="refundedNote"> refundedNote. </param>
+             /// <returns> Builder. </returns>
             public Builder RefundedNote(string refundedNote)
             {
                 this.refundedNote = refundedNote;
                 return this;
             }
 
+             /// <summary>
+             /// CanceledNote.
+             /// </summary>
+             /// <param name="canceledNote"> canceledNote. </param>
+             /// <returns> Builder. </returns>
             public Builder CanceledNote(string canceledNote)
             {
                 this.canceledNote = canceledNote;
                 return this;
             }
 
+             /// <summary>
+             /// Tender.
+             /// </summary>
+             /// <param name="tender"> tender. </param>
+             /// <returns> Builder. </returns>
             public Builder Tender(Models.V1Tender tender)
             {
                 this.tender = tender;
                 return this;
             }
 
+             /// <summary>
+             /// OrderHistory.
+             /// </summary>
+             /// <param name="orderHistory"> orderHistory. </param>
+             /// <returns> Builder. </returns>
             public Builder OrderHistory(IList<Models.V1OrderHistoryEntry> orderHistory)
             {
                 this.orderHistory = orderHistory;
                 return this;
             }
 
+             /// <summary>
+             /// PromoCode.
+             /// </summary>
+             /// <param name="promoCode"> promoCode. </param>
+             /// <returns> Builder. </returns>
             public Builder PromoCode(string promoCode)
             {
                 this.promoCode = promoCode;
                 return this;
             }
 
+             /// <summary>
+             /// BtcReceiveAddress.
+             /// </summary>
+             /// <param name="btcReceiveAddress"> btcReceiveAddress. </param>
+             /// <returns> Builder. </returns>
             public Builder BtcReceiveAddress(string btcReceiveAddress)
             {
                 this.btcReceiveAddress = btcReceiveAddress;
                 return this;
             }
 
+             /// <summary>
+             /// BtcPriceSatoshi.
+             /// </summary>
+             /// <param name="btcPriceSatoshi"> btcPriceSatoshi. </param>
+             /// <returns> Builder. </returns>
             public Builder BtcPriceSatoshi(double? btcPriceSatoshi)
             {
                 this.btcPriceSatoshi = btcPriceSatoshi;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> V1Order. </returns>
             public V1Order Build()
             {
-                return new V1Order(errors,
-                    id,
-                    buyerEmail,
-                    recipientName,
-                    recipientPhoneNumber,
-                    state,
-                    shippingAddress,
-                    subtotalMoney,
-                    totalShippingMoney,
-                    totalTaxMoney,
-                    totalPriceMoney,
-                    totalDiscountMoney,
-                    createdAt,
-                    updatedAt,
-                    expiresAt,
-                    paymentId,
-                    buyerNote,
-                    completedNote,
-                    refundedNote,
-                    canceledNote,
-                    tender,
-                    orderHistory,
-                    promoCode,
-                    btcReceiveAddress,
-                    btcPriceSatoshi);
+                return new V1Order(
+                    this.errors,
+                    this.id,
+                    this.buyerEmail,
+                    this.recipientName,
+                    this.recipientPhoneNumber,
+                    this.state,
+                    this.shippingAddress,
+                    this.subtotalMoney,
+                    this.totalShippingMoney,
+                    this.totalTaxMoney,
+                    this.totalPriceMoney,
+                    this.totalDiscountMoney,
+                    this.createdAt,
+                    this.updatedAt,
+                    this.expiresAt,
+                    this.paymentId,
+                    this.buyerNote,
+                    this.completedNote,
+                    this.refundedNote,
+                    this.canceledNote,
+                    this.tender,
+                    this.orderHistory,
+                    this.promoCode,
+                    this.btcReceiveAddress,
+                    this.btcPriceSatoshi);
             }
         }
     }

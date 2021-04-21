@@ -1,21 +1,39 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class OrderReturnServiceCharge 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// OrderReturnServiceCharge.
+    /// </summary>
+    public class OrderReturnServiceCharge
     {
-        public OrderReturnServiceCharge(string uid = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="OrderReturnServiceCharge"/> class.
+        /// </summary>
+        /// <param name="uid">uid.</param>
+        /// <param name="sourceServiceChargeUid">source_service_charge_uid.</param>
+        /// <param name="name">name.</param>
+        /// <param name="catalogObjectId">catalog_object_id.</param>
+        /// <param name="percentage">percentage.</param>
+        /// <param name="amountMoney">amount_money.</param>
+        /// <param name="appliedMoney">applied_money.</param>
+        /// <param name="totalMoney">total_money.</param>
+        /// <param name="totalTaxMoney">total_tax_money.</param>
+        /// <param name="calculationPhase">calculation_phase.</param>
+        /// <param name="taxable">taxable.</param>
+        /// <param name="appliedTaxes">applied_taxes.</param>
+        public OrderReturnServiceCharge(
+            string uid = null,
             string sourceServiceChargeUid = null,
             string name = null,
             string catalogObjectId = null,
@@ -28,18 +46,18 @@ namespace Square.Models
             bool? taxable = null,
             IList<Models.OrderLineItemAppliedTax> appliedTaxes = null)
         {
-            Uid = uid;
-            SourceServiceChargeUid = sourceServiceChargeUid;
-            Name = name;
-            CatalogObjectId = catalogObjectId;
-            Percentage = percentage;
-            AmountMoney = amountMoney;
-            AppliedMoney = appliedMoney;
-            TotalMoney = totalMoney;
-            TotalTaxMoney = totalTaxMoney;
-            CalculationPhase = calculationPhase;
-            Taxable = taxable;
-            AppliedTaxes = appliedTaxes;
+            this.Uid = uid;
+            this.SourceServiceChargeUid = sourceServiceChargeUid;
+            this.Name = name;
+            this.CatalogObjectId = catalogObjectId;
+            this.Percentage = percentage;
+            this.AmountMoney = amountMoney;
+            this.AppliedMoney = appliedMoney;
+            this.TotalMoney = totalMoney;
+            this.TotalTaxMoney = totalTaxMoney;
+            this.CalculationPhase = calculationPhase;
+            this.Taxable = taxable;
+            this.AppliedTaxes = appliedTaxes;
         }
 
         /// <summary>
@@ -63,7 +81,7 @@ namespace Square.Models
         public string Name { get; }
 
         /// <summary>
-        /// The catalog object ID of the associated [CatalogServiceCharge](#type-catalogservicecharge).
+        /// The catalog object ID of the associated [OrderServiceCharge]($m/OrderServiceCharge).
         /// </summary>
         [JsonProperty("catalog_object_id", NullValueHandling = NullValueHandling.Ignore)]
         public string CatalogObjectId { get; }
@@ -146,6 +164,7 @@ namespace Square.Models
         [JsonProperty("applied_taxes", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.OrderLineItemAppliedTax> AppliedTaxes { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -155,22 +174,7 @@ namespace Square.Models
             return $"OrderReturnServiceCharge : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Uid = {(Uid == null ? "null" : Uid == string.Empty ? "" : Uid)}");
-            toStringOutput.Add($"SourceServiceChargeUid = {(SourceServiceChargeUid == null ? "null" : SourceServiceChargeUid == string.Empty ? "" : SourceServiceChargeUid)}");
-            toStringOutput.Add($"Name = {(Name == null ? "null" : Name == string.Empty ? "" : Name)}");
-            toStringOutput.Add($"CatalogObjectId = {(CatalogObjectId == null ? "null" : CatalogObjectId == string.Empty ? "" : CatalogObjectId)}");
-            toStringOutput.Add($"Percentage = {(Percentage == null ? "null" : Percentage == string.Empty ? "" : Percentage)}");
-            toStringOutput.Add($"AmountMoney = {(AmountMoney == null ? "null" : AmountMoney.ToString())}");
-            toStringOutput.Add($"AppliedMoney = {(AppliedMoney == null ? "null" : AppliedMoney.ToString())}");
-            toStringOutput.Add($"TotalMoney = {(TotalMoney == null ? "null" : TotalMoney.ToString())}");
-            toStringOutput.Add($"TotalTaxMoney = {(TotalTaxMoney == null ? "null" : TotalTaxMoney.ToString())}");
-            toStringOutput.Add($"CalculationPhase = {(CalculationPhase == null ? "null" : CalculationPhase.ToString())}");
-            toStringOutput.Add($"Taxable = {(Taxable == null ? "null" : Taxable.ToString())}");
-            toStringOutput.Add($"AppliedTaxes = {(AppliedTaxes == null ? "null" : $"[{ string.Join(", ", AppliedTaxes)} ]")}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -184,105 +188,133 @@ namespace Square.Models
             }
 
             return obj is OrderReturnServiceCharge other &&
-                ((Uid == null && other.Uid == null) || (Uid?.Equals(other.Uid) == true)) &&
-                ((SourceServiceChargeUid == null && other.SourceServiceChargeUid == null) || (SourceServiceChargeUid?.Equals(other.SourceServiceChargeUid) == true)) &&
-                ((Name == null && other.Name == null) || (Name?.Equals(other.Name) == true)) &&
-                ((CatalogObjectId == null && other.CatalogObjectId == null) || (CatalogObjectId?.Equals(other.CatalogObjectId) == true)) &&
-                ((Percentage == null && other.Percentage == null) || (Percentage?.Equals(other.Percentage) == true)) &&
-                ((AmountMoney == null && other.AmountMoney == null) || (AmountMoney?.Equals(other.AmountMoney) == true)) &&
-                ((AppliedMoney == null && other.AppliedMoney == null) || (AppliedMoney?.Equals(other.AppliedMoney) == true)) &&
-                ((TotalMoney == null && other.TotalMoney == null) || (TotalMoney?.Equals(other.TotalMoney) == true)) &&
-                ((TotalTaxMoney == null && other.TotalTaxMoney == null) || (TotalTaxMoney?.Equals(other.TotalTaxMoney) == true)) &&
-                ((CalculationPhase == null && other.CalculationPhase == null) || (CalculationPhase?.Equals(other.CalculationPhase) == true)) &&
-                ((Taxable == null && other.Taxable == null) || (Taxable?.Equals(other.Taxable) == true)) &&
-                ((AppliedTaxes == null && other.AppliedTaxes == null) || (AppliedTaxes?.Equals(other.AppliedTaxes) == true));
+                ((this.Uid == null && other.Uid == null) || (this.Uid?.Equals(other.Uid) == true)) &&
+                ((this.SourceServiceChargeUid == null && other.SourceServiceChargeUid == null) || (this.SourceServiceChargeUid?.Equals(other.SourceServiceChargeUid) == true)) &&
+                ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
+                ((this.CatalogObjectId == null && other.CatalogObjectId == null) || (this.CatalogObjectId?.Equals(other.CatalogObjectId) == true)) &&
+                ((this.Percentage == null && other.Percentage == null) || (this.Percentage?.Equals(other.Percentage) == true)) &&
+                ((this.AmountMoney == null && other.AmountMoney == null) || (this.AmountMoney?.Equals(other.AmountMoney) == true)) &&
+                ((this.AppliedMoney == null && other.AppliedMoney == null) || (this.AppliedMoney?.Equals(other.AppliedMoney) == true)) &&
+                ((this.TotalMoney == null && other.TotalMoney == null) || (this.TotalMoney?.Equals(other.TotalMoney) == true)) &&
+                ((this.TotalTaxMoney == null && other.TotalTaxMoney == null) || (this.TotalTaxMoney?.Equals(other.TotalTaxMoney) == true)) &&
+                ((this.CalculationPhase == null && other.CalculationPhase == null) || (this.CalculationPhase?.Equals(other.CalculationPhase) == true)) &&
+                ((this.Taxable == null && other.Taxable == null) || (this.Taxable?.Equals(other.Taxable) == true)) &&
+                ((this.AppliedTaxes == null && other.AppliedTaxes == null) || (this.AppliedTaxes?.Equals(other.AppliedTaxes) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -2013241171;
 
-            if (Uid != null)
+            if (this.Uid != null)
             {
-               hashCode += Uid.GetHashCode();
+               hashCode += this.Uid.GetHashCode();
             }
 
-            if (SourceServiceChargeUid != null)
+            if (this.SourceServiceChargeUid != null)
             {
-               hashCode += SourceServiceChargeUid.GetHashCode();
+               hashCode += this.SourceServiceChargeUid.GetHashCode();
             }
 
-            if (Name != null)
+            if (this.Name != null)
             {
-               hashCode += Name.GetHashCode();
+               hashCode += this.Name.GetHashCode();
             }
 
-            if (CatalogObjectId != null)
+            if (this.CatalogObjectId != null)
             {
-               hashCode += CatalogObjectId.GetHashCode();
+               hashCode += this.CatalogObjectId.GetHashCode();
             }
 
-            if (Percentage != null)
+            if (this.Percentage != null)
             {
-               hashCode += Percentage.GetHashCode();
+               hashCode += this.Percentage.GetHashCode();
             }
 
-            if (AmountMoney != null)
+            if (this.AmountMoney != null)
             {
-               hashCode += AmountMoney.GetHashCode();
+               hashCode += this.AmountMoney.GetHashCode();
             }
 
-            if (AppliedMoney != null)
+            if (this.AppliedMoney != null)
             {
-               hashCode += AppliedMoney.GetHashCode();
+               hashCode += this.AppliedMoney.GetHashCode();
             }
 
-            if (TotalMoney != null)
+            if (this.TotalMoney != null)
             {
-               hashCode += TotalMoney.GetHashCode();
+               hashCode += this.TotalMoney.GetHashCode();
             }
 
-            if (TotalTaxMoney != null)
+            if (this.TotalTaxMoney != null)
             {
-               hashCode += TotalTaxMoney.GetHashCode();
+               hashCode += this.TotalTaxMoney.GetHashCode();
             }
 
-            if (CalculationPhase != null)
+            if (this.CalculationPhase != null)
             {
-               hashCode += CalculationPhase.GetHashCode();
+               hashCode += this.CalculationPhase.GetHashCode();
             }
 
-            if (Taxable != null)
+            if (this.Taxable != null)
             {
-               hashCode += Taxable.GetHashCode();
+               hashCode += this.Taxable.GetHashCode();
             }
 
-            if (AppliedTaxes != null)
+            if (this.AppliedTaxes != null)
             {
-               hashCode += AppliedTaxes.GetHashCode();
+               hashCode += this.AppliedTaxes.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Uid = {(this.Uid == null ? "null" : this.Uid == string.Empty ? "" : this.Uid)}");
+            toStringOutput.Add($"this.SourceServiceChargeUid = {(this.SourceServiceChargeUid == null ? "null" : this.SourceServiceChargeUid == string.Empty ? "" : this.SourceServiceChargeUid)}");
+            toStringOutput.Add($"this.Name = {(this.Name == null ? "null" : this.Name == string.Empty ? "" : this.Name)}");
+            toStringOutput.Add($"this.CatalogObjectId = {(this.CatalogObjectId == null ? "null" : this.CatalogObjectId == string.Empty ? "" : this.CatalogObjectId)}");
+            toStringOutput.Add($"this.Percentage = {(this.Percentage == null ? "null" : this.Percentage == string.Empty ? "" : this.Percentage)}");
+            toStringOutput.Add($"this.AmountMoney = {(this.AmountMoney == null ? "null" : this.AmountMoney.ToString())}");
+            toStringOutput.Add($"this.AppliedMoney = {(this.AppliedMoney == null ? "null" : this.AppliedMoney.ToString())}");
+            toStringOutput.Add($"this.TotalMoney = {(this.TotalMoney == null ? "null" : this.TotalMoney.ToString())}");
+            toStringOutput.Add($"this.TotalTaxMoney = {(this.TotalTaxMoney == null ? "null" : this.TotalTaxMoney.ToString())}");
+            toStringOutput.Add($"this.CalculationPhase = {(this.CalculationPhase == null ? "null" : this.CalculationPhase.ToString())}");
+            toStringOutput.Add($"this.Taxable = {(this.Taxable == null ? "null" : this.Taxable.ToString())}");
+            toStringOutput.Add($"this.AppliedTaxes = {(this.AppliedTaxes == null ? "null" : $"[{string.Join(", ", this.AppliedTaxes)} ]")}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .Uid(Uid)
-                .SourceServiceChargeUid(SourceServiceChargeUid)
-                .Name(Name)
-                .CatalogObjectId(CatalogObjectId)
-                .Percentage(Percentage)
-                .AmountMoney(AmountMoney)
-                .AppliedMoney(AppliedMoney)
-                .TotalMoney(TotalMoney)
-                .TotalTaxMoney(TotalTaxMoney)
-                .CalculationPhase(CalculationPhase)
-                .Taxable(Taxable)
-                .AppliedTaxes(AppliedTaxes);
+                .Uid(this.Uid)
+                .SourceServiceChargeUid(this.SourceServiceChargeUid)
+                .Name(this.Name)
+                .CatalogObjectId(this.CatalogObjectId)
+                .Percentage(this.Percentage)
+                .AmountMoney(this.AmountMoney)
+                .AppliedMoney(this.AppliedMoney)
+                .TotalMoney(this.TotalMoney)
+                .TotalTaxMoney(this.TotalTaxMoney)
+                .CalculationPhase(this.CalculationPhase)
+                .Taxable(this.Taxable)
+                .AppliedTaxes(this.AppliedTaxes);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string uid;
@@ -298,94 +330,157 @@ namespace Square.Models
             private bool? taxable;
             private IList<Models.OrderLineItemAppliedTax> appliedTaxes;
 
-
-
+             /// <summary>
+             /// Uid.
+             /// </summary>
+             /// <param name="uid"> uid. </param>
+             /// <returns> Builder. </returns>
             public Builder Uid(string uid)
             {
                 this.uid = uid;
                 return this;
             }
 
+             /// <summary>
+             /// SourceServiceChargeUid.
+             /// </summary>
+             /// <param name="sourceServiceChargeUid"> sourceServiceChargeUid. </param>
+             /// <returns> Builder. </returns>
             public Builder SourceServiceChargeUid(string sourceServiceChargeUid)
             {
                 this.sourceServiceChargeUid = sourceServiceChargeUid;
                 return this;
             }
 
+             /// <summary>
+             /// Name.
+             /// </summary>
+             /// <param name="name"> name. </param>
+             /// <returns> Builder. </returns>
             public Builder Name(string name)
             {
                 this.name = name;
                 return this;
             }
 
+             /// <summary>
+             /// CatalogObjectId.
+             /// </summary>
+             /// <param name="catalogObjectId"> catalogObjectId. </param>
+             /// <returns> Builder. </returns>
             public Builder CatalogObjectId(string catalogObjectId)
             {
                 this.catalogObjectId = catalogObjectId;
                 return this;
             }
 
+             /// <summary>
+             /// Percentage.
+             /// </summary>
+             /// <param name="percentage"> percentage. </param>
+             /// <returns> Builder. </returns>
             public Builder Percentage(string percentage)
             {
                 this.percentage = percentage;
                 return this;
             }
 
+             /// <summary>
+             /// AmountMoney.
+             /// </summary>
+             /// <param name="amountMoney"> amountMoney. </param>
+             /// <returns> Builder. </returns>
             public Builder AmountMoney(Models.Money amountMoney)
             {
                 this.amountMoney = amountMoney;
                 return this;
             }
 
+             /// <summary>
+             /// AppliedMoney.
+             /// </summary>
+             /// <param name="appliedMoney"> appliedMoney. </param>
+             /// <returns> Builder. </returns>
             public Builder AppliedMoney(Models.Money appliedMoney)
             {
                 this.appliedMoney = appliedMoney;
                 return this;
             }
 
+             /// <summary>
+             /// TotalMoney.
+             /// </summary>
+             /// <param name="totalMoney"> totalMoney. </param>
+             /// <returns> Builder. </returns>
             public Builder TotalMoney(Models.Money totalMoney)
             {
                 this.totalMoney = totalMoney;
                 return this;
             }
 
+             /// <summary>
+             /// TotalTaxMoney.
+             /// </summary>
+             /// <param name="totalTaxMoney"> totalTaxMoney. </param>
+             /// <returns> Builder. </returns>
             public Builder TotalTaxMoney(Models.Money totalTaxMoney)
             {
                 this.totalTaxMoney = totalTaxMoney;
                 return this;
             }
 
+             /// <summary>
+             /// CalculationPhase.
+             /// </summary>
+             /// <param name="calculationPhase"> calculationPhase. </param>
+             /// <returns> Builder. </returns>
             public Builder CalculationPhase(string calculationPhase)
             {
                 this.calculationPhase = calculationPhase;
                 return this;
             }
 
+             /// <summary>
+             /// Taxable.
+             /// </summary>
+             /// <param name="taxable"> taxable. </param>
+             /// <returns> Builder. </returns>
             public Builder Taxable(bool? taxable)
             {
                 this.taxable = taxable;
                 return this;
             }
 
+             /// <summary>
+             /// AppliedTaxes.
+             /// </summary>
+             /// <param name="appliedTaxes"> appliedTaxes. </param>
+             /// <returns> Builder. </returns>
             public Builder AppliedTaxes(IList<Models.OrderLineItemAppliedTax> appliedTaxes)
             {
                 this.appliedTaxes = appliedTaxes;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> OrderReturnServiceCharge. </returns>
             public OrderReturnServiceCharge Build()
             {
-                return new OrderReturnServiceCharge(uid,
-                    sourceServiceChargeUid,
-                    name,
-                    catalogObjectId,
-                    percentage,
-                    amountMoney,
-                    appliedMoney,
-                    totalMoney,
-                    totalTaxMoney,
-                    calculationPhase,
-                    taxable,
-                    appliedTaxes);
+                return new OrderReturnServiceCharge(
+                    this.uid,
+                    this.sourceServiceChargeUid,
+                    this.name,
+                    this.catalogObjectId,
+                    this.percentage,
+                    this.amountMoney,
+                    this.appliedMoney,
+                    this.totalMoney,
+                    this.totalTaxMoney,
+                    this.calculationPhase,
+                    this.taxable,
+                    this.appliedTaxes);
             }
         }
     }

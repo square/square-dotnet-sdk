@@ -14,7 +14,7 @@
 | `RewardTiers` | [`IList<Models.LoyaltyProgramRewardTier>`](/doc/models/loyalty-program-reward-tier.md) | Required | The list of rewards for buyers, sorted by ascending points. |
 | `ExpirationPolicy` | [`Models.LoyaltyProgramExpirationPolicy`](/doc/models/loyalty-program-expiration-policy.md) | Optional | Describes when the loyalty program expires. |
 | `Terminology` | [`Models.LoyaltyProgramTerminology`](/doc/models/loyalty-program-terminology.md) | Required | - |
-| `LocationIds` | `IList<string>` | Required | The [locations](#type-Location) at which the program is active. |
+| `LocationIds` | `IList<string>` | Required | The [locations](/doc/models/location.md) at which the program is active. |
 | `CreatedAt` | `string` | Required | The timestamp when the program was created, in RFC 3339 format.<br>**Constraints**: *Minimum Length*: `1` |
 | `UpdatedAt` | `string` | Required | The timestamp when the reward was last updated, in RFC 3339 format.<br>**Constraints**: *Minimum Length*: `1` |
 | `AccrualRules` | [`IList<Models.LoyaltyProgramAccrualRule>`](/doc/models/loyalty-program-accrual-rule.md) | Required | Defines how buyers can earn loyalty points. |

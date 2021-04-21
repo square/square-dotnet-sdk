@@ -1,36 +1,47 @@
-using System;
-using System.Collections.Generic;
-using System.Dynamic;
-using System.Globalization;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-using Square.Http.Request;
-using Square.Http.Response;
-using Square.Http.Client;
-using Square.Authentication;
-
 namespace Square.Apis
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Dynamic;
+    using System.Globalization;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Authentication;
+    using Square.Http.Client;
+    using Square.Http.Request;
+    using Square.Http.Response;
+    using Square.Utilities;
+
+    /// <summary>
+    /// EmployeesApi.
+    /// </summary>
     internal class EmployeesApi : BaseApi, IEmployeesApi
     {
-        internal EmployeesApi(IConfiguration config, IHttpClient httpClient, IDictionary<string, IAuthManager> authManagers, HttpCallBack httpCallBack = null) :
-            base(config, httpClient, authManagers, httpCallBack)
-        { }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="EmployeesApi"/> class.
+        /// </summary>
+        /// <param name="config"> config instance. </param>
+        /// <param name="httpClient"> httpClient. </param>
+        /// <param name="authManagers"> authManager. </param>
+        /// <param name="httpCallBack"> httpCallBack. </param>
+        internal EmployeesApi(IConfiguration config, IHttpClient httpClient, IDictionary<string, IAuthManager> authManagers, HttpCallBack httpCallBack = null)
+            : base(config, httpClient, authManagers, httpCallBack)
+        {
+        }
 
         /// <summary>
-        /// ListEmployees
+        /// ListEmployees.
         /// </summary>
-        /// <param name="locationId">Optional parameter: Example: </param>
-        /// <param name="status">Optional parameter: Specifies the EmployeeStatus to filter the employee by.</param>
-        /// <param name="limit">Optional parameter: The number of employees to be returned on each page.</param>
-        /// <param name="cursor">Optional parameter: The token required to retrieve the specified page of results.</param>
-        /// <return>Returns the Models.ListEmployeesResponse response from the API call</return>
+        /// <param name="locationId">Optional parameter: Example: .</param>
+        /// <param name="status">Optional parameter: Specifies the EmployeeStatus to filter the employee by..</param>
+        /// <param name="limit">Optional parameter: The number of employees to be returned on each page..</param>
+        /// <param name="cursor">Optional parameter: The token required to retrieve the specified page of results..</param>
+        /// <returns>Returns the Models.ListEmployeesResponse response from the API call.</returns>
         [Obsolete]
         public Models.ListEmployeesResponse ListEmployees(
                 string locationId = null,
@@ -38,141 +49,148 @@ namespace Square.Apis
                 int? limit = null,
                 string cursor = null)
         {
-            Task<Models.ListEmployeesResponse> t = ListEmployeesAsync(locationId, status, limit, cursor);
+            Task<Models.ListEmployeesResponse> t = this.ListEmployeesAsync(locationId, status, limit, cursor);
             ApiHelper.RunTaskSynchronously(t);
             return t.Result;
         }
 
         /// <summary>
-        /// ListEmployees
+        /// ListEmployees.
         /// </summary>
-        /// <param name="locationId">Optional parameter: Example: </param>
-        /// <param name="status">Optional parameter: Specifies the EmployeeStatus to filter the employee by.</param>
-        /// <param name="limit">Optional parameter: The number of employees to be returned on each page.</param>
-        /// <param name="cursor">Optional parameter: The token required to retrieve the specified page of results.</param>
-        /// <return>Returns the Models.ListEmployeesResponse response from the API call</return>
+        /// <param name="locationId">Optional parameter: Example: .</param>
+        /// <param name="status">Optional parameter: Specifies the EmployeeStatus to filter the employee by..</param>
+        /// <param name="limit">Optional parameter: The number of employees to be returned on each page..</param>
+        /// <param name="cursor">Optional parameter: The token required to retrieve the specified page of results..</param>
+        /// <param name="cancellationToken"> cancellationToken. </param>
+        /// <returns>Returns the Models.ListEmployeesResponse response from the API call.</returns>
         [Obsolete]
         public async Task<Models.ListEmployeesResponse> ListEmployeesAsync(
                 string locationId = null,
                 string status = null,
                 int? limit = null,
-                string cursor = null, CancellationToken cancellationToken = default)
+                string cursor = null,
+                CancellationToken cancellationToken = default)
         {
-            //the base uri for api requests
-            string _baseUri = config.GetBaseUri();
+            // the base uri for api requests.
+            string baseUri = this.Config.GetBaseUri();
 
-            //prepare query string for API call
-            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
-            _queryBuilder.Append("/v2/employees");
+            // prepare query string for API call.
+            StringBuilder queryBuilder = new StringBuilder(baseUri);
+            queryBuilder.Append("/v2/employees");
 
-            //prepare specfied query parameters
-            var _queryParameters = new Dictionary<string, object>()
+            // prepare specfied query parameters.
+            var queryParams = new Dictionary<string, object>()
             {
                 { "location_id", locationId },
                 { "status", status },
                 { "limit", limit },
-                { "cursor", cursor }
+                { "cursor", cursor },
             };
 
-            //append request with appropriate headers and parameters
-            var _headers = new Dictionary<string, string>()
+            // append request with appropriate headers and parameters
+            var headers = new Dictionary<string, string>()
             {
-                { "user-agent", userAgent },
+                { "user-agent", this.UserAgent },
                 { "accept", "application/json" },
-                { "Square-Version", config.SquareVersion }
+                { "Square-Version", this.Config.SquareVersion },
             };
 
-            //prepare the API call request to fetch the response
-            HttpRequest _request = GetClientInstance().Get(_queryBuilder.ToString(), _headers, queryParameters: _queryParameters);
-            if (HttpCallBack != null)
+            // prepare the API call request to fetch the response.
+            HttpRequest httpRequest = this.GetClientInstance().Get(queryBuilder.ToString(), headers, queryParameters: queryParams);
+
+            if (this.HttpCallBack != null)
             {
-                HttpCallBack.OnBeforeHttpRequestEventHandler(GetClientInstance(), _request);
+                this.HttpCallBack.OnBeforeHttpRequestEventHandler(this.GetClientInstance(), httpRequest);
             }
 
-            _request = await authManagers["global"].ApplyAsync(_request).ConfigureAwait(false);
+            httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
 
-            //invoke request and get response
-            HttpStringResponse _response = await GetClientInstance().ExecuteAsStringAsync(_request, cancellationToken).ConfigureAwait(false);
-            HttpContext _context = new HttpContext(_request, _response);
-            if (HttpCallBack != null)
+            // invoke request and get response.
+            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+            HttpContext context = new HttpContext(httpRequest, response);
+            if (this.HttpCallBack != null)
             {
-                HttpCallBack.OnAfterHttpResponseEventHandler(GetClientInstance(), _response);
+                this.HttpCallBack.OnAfterHttpResponseEventHandler(this.GetClientInstance(), response);
             }
 
-            //handle errors defined at the API level
-            base.ValidateResponse(_response, _context);
+            // handle errors defined at the API level.
+            this.ValidateResponse(response, context);
 
-            var _responseModel = ApiHelper.JsonDeserialize<Models.ListEmployeesResponse>(_response.Body);
-            _responseModel.Context = _context;
-            return _responseModel;
+            var responseModel = ApiHelper.JsonDeserialize<Models.ListEmployeesResponse>(response.Body);
+            responseModel.Context = context;
+            return responseModel;
         }
 
         /// <summary>
-        /// RetrieveEmployee
+        /// RetrieveEmployee.
         /// </summary>
-        /// <param name="id">Required parameter: UUID for the employee that was requested.</param>
-        /// <return>Returns the Models.RetrieveEmployeeResponse response from the API call</return>
+        /// <param name="id">Required parameter: UUID for the employee that was requested..</param>
+        /// <returns>Returns the Models.RetrieveEmployeeResponse response from the API call.</returns>
         [Obsolete]
-        public Models.RetrieveEmployeeResponse RetrieveEmployee(string id)
+        public Models.RetrieveEmployeeResponse RetrieveEmployee(
+                string id)
         {
-            Task<Models.RetrieveEmployeeResponse> t = RetrieveEmployeeAsync(id);
+            Task<Models.RetrieveEmployeeResponse> t = this.RetrieveEmployeeAsync(id);
             ApiHelper.RunTaskSynchronously(t);
             return t.Result;
         }
 
         /// <summary>
-        /// RetrieveEmployee
+        /// RetrieveEmployee.
         /// </summary>
-        /// <param name="id">Required parameter: UUID for the employee that was requested.</param>
-        /// <return>Returns the Models.RetrieveEmployeeResponse response from the API call</return>
+        /// <param name="id">Required parameter: UUID for the employee that was requested..</param>
+        /// <param name="cancellationToken"> cancellationToken. </param>
+        /// <returns>Returns the Models.RetrieveEmployeeResponse response from the API call.</returns>
         [Obsolete]
-        public async Task<Models.RetrieveEmployeeResponse> RetrieveEmployeeAsync(string id, CancellationToken cancellationToken = default)
+        public async Task<Models.RetrieveEmployeeResponse> RetrieveEmployeeAsync(
+                string id,
+                CancellationToken cancellationToken = default)
         {
-            //the base uri for api requests
-            string _baseUri = config.GetBaseUri();
+            // the base uri for api requests.
+            string baseUri = this.Config.GetBaseUri();
 
-            //prepare query string for API call
-            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
-            _queryBuilder.Append("/v2/employees/{id}");
+            // prepare query string for API call.
+            StringBuilder queryBuilder = new StringBuilder(baseUri);
+            queryBuilder.Append("/v2/employees/{id}");
 
-            //process optional template parameters
-            ApiHelper.AppendUrlWithTemplateParameters(_queryBuilder, new Dictionary<string, object>()
+            // process optional template parameters.
+            ApiHelper.AppendUrlWithTemplateParameters(queryBuilder, new Dictionary<string, object>()
             {
-                { "id", id }
+                { "id", id },
             });
 
-            //append request with appropriate headers and parameters
-            var _headers = new Dictionary<string, string>()
+            // append request with appropriate headers and parameters
+            var headers = new Dictionary<string, string>()
             {
-                { "user-agent", userAgent },
+                { "user-agent", this.UserAgent },
                 { "accept", "application/json" },
-                { "Square-Version", config.SquareVersion }
+                { "Square-Version", this.Config.SquareVersion },
             };
 
-            //prepare the API call request to fetch the response
-            HttpRequest _request = GetClientInstance().Get(_queryBuilder.ToString(), _headers);
-            if (HttpCallBack != null)
+            // prepare the API call request to fetch the response.
+            HttpRequest httpRequest = this.GetClientInstance().Get(queryBuilder.ToString(), headers);
+
+            if (this.HttpCallBack != null)
             {
-                HttpCallBack.OnBeforeHttpRequestEventHandler(GetClientInstance(), _request);
+                this.HttpCallBack.OnBeforeHttpRequestEventHandler(this.GetClientInstance(), httpRequest);
             }
 
-            _request = await authManagers["global"].ApplyAsync(_request).ConfigureAwait(false);
+            httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
 
-            //invoke request and get response
-            HttpStringResponse _response = await GetClientInstance().ExecuteAsStringAsync(_request, cancellationToken).ConfigureAwait(false);
-            HttpContext _context = new HttpContext(_request, _response);
-            if (HttpCallBack != null)
+            // invoke request and get response.
+            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+            HttpContext context = new HttpContext(httpRequest, response);
+            if (this.HttpCallBack != null)
             {
-                HttpCallBack.OnAfterHttpResponseEventHandler(GetClientInstance(), _response);
+                this.HttpCallBack.OnAfterHttpResponseEventHandler(this.GetClientInstance(), response);
             }
 
-            //handle errors defined at the API level
-            base.ValidateResponse(_response, _context);
+            // handle errors defined at the API level.
+            this.ValidateResponse(response, context);
 
-            var _responseModel = ApiHelper.JsonDeserialize<Models.RetrieveEmployeeResponse>(_response.Body);
-            _responseModel.Context = _context;
-            return _responseModel;
+            var responseModel = ApiHelper.JsonDeserialize<Models.RetrieveEmployeeResponse>(response.Body);
+            responseModel.Context = context;
+            return responseModel;
         }
-
     }
 }

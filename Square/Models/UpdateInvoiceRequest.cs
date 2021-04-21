@@ -1,27 +1,36 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class UpdateInvoiceRequest 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// UpdateInvoiceRequest.
+    /// </summary>
+    public class UpdateInvoiceRequest
     {
-        public UpdateInvoiceRequest(Models.Invoice invoice,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UpdateInvoiceRequest"/> class.
+        /// </summary>
+        /// <param name="invoice">invoice.</param>
+        /// <param name="idempotencyKey">idempotency_key.</param>
+        /// <param name="fieldsToClear">fields_to_clear.</param>
+        public UpdateInvoiceRequest(
+            Models.Invoice invoice,
             string idempotencyKey = null,
             IList<string> fieldsToClear = null)
         {
-            Invoice = invoice;
-            IdempotencyKey = idempotencyKey;
-            FieldsToClear = fieldsToClear;
+            this.Invoice = invoice;
+            this.IdempotencyKey = idempotencyKey;
+            this.FieldsToClear = fieldsToClear;
         }
 
         /// <summary>
@@ -47,6 +56,7 @@ namespace Square.Models
         [JsonProperty("fields_to_clear", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> FieldsToClear { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -56,13 +66,7 @@ namespace Square.Models
             return $"UpdateInvoiceRequest : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Invoice = {(Invoice == null ? "null" : Invoice.ToString())}");
-            toStringOutput.Add($"IdempotencyKey = {(IdempotencyKey == null ? "null" : IdempotencyKey == string.Empty ? "" : IdempotencyKey)}");
-            toStringOutput.Add($"FieldsToClear = {(FieldsToClear == null ? "null" : $"[{ string.Join(", ", FieldsToClear)} ]")}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -76,75 +80,116 @@ namespace Square.Models
             }
 
             return obj is UpdateInvoiceRequest other &&
-                ((Invoice == null && other.Invoice == null) || (Invoice?.Equals(other.Invoice) == true)) &&
-                ((IdempotencyKey == null && other.IdempotencyKey == null) || (IdempotencyKey?.Equals(other.IdempotencyKey) == true)) &&
-                ((FieldsToClear == null && other.FieldsToClear == null) || (FieldsToClear?.Equals(other.FieldsToClear) == true));
+                ((this.Invoice == null && other.Invoice == null) || (this.Invoice?.Equals(other.Invoice) == true)) &&
+                ((this.IdempotencyKey == null && other.IdempotencyKey == null) || (this.IdempotencyKey?.Equals(other.IdempotencyKey) == true)) &&
+                ((this.FieldsToClear == null && other.FieldsToClear == null) || (this.FieldsToClear?.Equals(other.FieldsToClear) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -281586426;
 
-            if (Invoice != null)
+            if (this.Invoice != null)
             {
-               hashCode += Invoice.GetHashCode();
+               hashCode += this.Invoice.GetHashCode();
             }
 
-            if (IdempotencyKey != null)
+            if (this.IdempotencyKey != null)
             {
-               hashCode += IdempotencyKey.GetHashCode();
+               hashCode += this.IdempotencyKey.GetHashCode();
             }
 
-            if (FieldsToClear != null)
+            if (this.FieldsToClear != null)
             {
-               hashCode += FieldsToClear.GetHashCode();
+               hashCode += this.FieldsToClear.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Invoice = {(this.Invoice == null ? "null" : this.Invoice.ToString())}");
+            toStringOutput.Add($"this.IdempotencyKey = {(this.IdempotencyKey == null ? "null" : this.IdempotencyKey == string.Empty ? "" : this.IdempotencyKey)}");
+            toStringOutput.Add($"this.FieldsToClear = {(this.FieldsToClear == null ? "null" : $"[{string.Join(", ", this.FieldsToClear)} ]")}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
-            var builder = new Builder(Invoice)
-                .IdempotencyKey(IdempotencyKey)
-                .FieldsToClear(FieldsToClear);
+            var builder = new Builder(
+                this.Invoice)
+                .IdempotencyKey(this.IdempotencyKey)
+                .FieldsToClear(this.FieldsToClear);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private Models.Invoice invoice;
             private string idempotencyKey;
             private IList<string> fieldsToClear;
 
-            public Builder(Models.Invoice invoice)
+            public Builder(
+                Models.Invoice invoice)
             {
                 this.invoice = invoice;
             }
 
+             /// <summary>
+             /// Invoice.
+             /// </summary>
+             /// <param name="invoice"> invoice. </param>
+             /// <returns> Builder. </returns>
             public Builder Invoice(Models.Invoice invoice)
             {
                 this.invoice = invoice;
                 return this;
             }
 
+             /// <summary>
+             /// IdempotencyKey.
+             /// </summary>
+             /// <param name="idempotencyKey"> idempotencyKey. </param>
+             /// <returns> Builder. </returns>
             public Builder IdempotencyKey(string idempotencyKey)
             {
                 this.idempotencyKey = idempotencyKey;
                 return this;
             }
 
+             /// <summary>
+             /// FieldsToClear.
+             /// </summary>
+             /// <param name="fieldsToClear"> fieldsToClear. </param>
+             /// <returns> Builder. </returns>
             public Builder FieldsToClear(IList<string> fieldsToClear)
             {
                 this.fieldsToClear = fieldsToClear;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> UpdateInvoiceRequest. </returns>
             public UpdateInvoiceRequest Build()
             {
-                return new UpdateInvoiceRequest(invoice,
-                    idempotencyKey,
-                    fieldsToClear);
+                return new UpdateInvoiceRequest(
+                    this.invoice,
+                    this.idempotencyKey,
+                    this.fieldsToClear);
             }
         }
     }

@@ -1,21 +1,34 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class InvoiceRecipient 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// InvoiceRecipient.
+    /// </summary>
+    public class InvoiceRecipient
     {
-        public InvoiceRecipient(string customerId = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="InvoiceRecipient"/> class.
+        /// </summary>
+        /// <param name="customerId">customer_id.</param>
+        /// <param name="givenName">given_name.</param>
+        /// <param name="familyName">family_name.</param>
+        /// <param name="emailAddress">email_address.</param>
+        /// <param name="address">address.</param>
+        /// <param name="phoneNumber">phone_number.</param>
+        /// <param name="companyName">company_name.</param>
+        public InvoiceRecipient(
+            string customerId = null,
             string givenName = null,
             string familyName = null,
             string emailAddress = null,
@@ -23,17 +36,17 @@ namespace Square.Models
             string phoneNumber = null,
             string companyName = null)
         {
-            CustomerId = customerId;
-            GivenName = givenName;
-            FamilyName = familyName;
-            EmailAddress = emailAddress;
-            Address = address;
-            PhoneNumber = phoneNumber;
-            CompanyName = companyName;
+            this.CustomerId = customerId;
+            this.GivenName = givenName;
+            this.FamilyName = familyName;
+            this.EmailAddress = emailAddress;
+            this.Address = address;
+            this.PhoneNumber = phoneNumber;
+            this.CompanyName = companyName;
         }
 
         /// <summary>
-        /// The ID of the customer. This is the customer profile ID that 
+        /// The ID of the customer. This is the customer profile ID that
         /// you provide when creating a draft invoice.
         /// </summary>
         [JsonProperty("customer_id", NullValueHandling = NullValueHandling.Ignore)]
@@ -75,6 +88,7 @@ namespace Square.Models
         [JsonProperty("company_name", NullValueHandling = NullValueHandling.Ignore)]
         public string CompanyName { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -84,17 +98,7 @@ namespace Square.Models
             return $"InvoiceRecipient : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"CustomerId = {(CustomerId == null ? "null" : CustomerId == string.Empty ? "" : CustomerId)}");
-            toStringOutput.Add($"GivenName = {(GivenName == null ? "null" : GivenName == string.Empty ? "" : GivenName)}");
-            toStringOutput.Add($"FamilyName = {(FamilyName == null ? "null" : FamilyName == string.Empty ? "" : FamilyName)}");
-            toStringOutput.Add($"EmailAddress = {(EmailAddress == null ? "null" : EmailAddress == string.Empty ? "" : EmailAddress)}");
-            toStringOutput.Add($"Address = {(Address == null ? "null" : Address.ToString())}");
-            toStringOutput.Add($"PhoneNumber = {(PhoneNumber == null ? "null" : PhoneNumber == string.Empty ? "" : PhoneNumber)}");
-            toStringOutput.Add($"CompanyName = {(CompanyName == null ? "null" : CompanyName == string.Empty ? "" : CompanyName)}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -108,70 +112,93 @@ namespace Square.Models
             }
 
             return obj is InvoiceRecipient other &&
-                ((CustomerId == null && other.CustomerId == null) || (CustomerId?.Equals(other.CustomerId) == true)) &&
-                ((GivenName == null && other.GivenName == null) || (GivenName?.Equals(other.GivenName) == true)) &&
-                ((FamilyName == null && other.FamilyName == null) || (FamilyName?.Equals(other.FamilyName) == true)) &&
-                ((EmailAddress == null && other.EmailAddress == null) || (EmailAddress?.Equals(other.EmailAddress) == true)) &&
-                ((Address == null && other.Address == null) || (Address?.Equals(other.Address) == true)) &&
-                ((PhoneNumber == null && other.PhoneNumber == null) || (PhoneNumber?.Equals(other.PhoneNumber) == true)) &&
-                ((CompanyName == null && other.CompanyName == null) || (CompanyName?.Equals(other.CompanyName) == true));
+                ((this.CustomerId == null && other.CustomerId == null) || (this.CustomerId?.Equals(other.CustomerId) == true)) &&
+                ((this.GivenName == null && other.GivenName == null) || (this.GivenName?.Equals(other.GivenName) == true)) &&
+                ((this.FamilyName == null && other.FamilyName == null) || (this.FamilyName?.Equals(other.FamilyName) == true)) &&
+                ((this.EmailAddress == null && other.EmailAddress == null) || (this.EmailAddress?.Equals(other.EmailAddress) == true)) &&
+                ((this.Address == null && other.Address == null) || (this.Address?.Equals(other.Address) == true)) &&
+                ((this.PhoneNumber == null && other.PhoneNumber == null) || (this.PhoneNumber?.Equals(other.PhoneNumber) == true)) &&
+                ((this.CompanyName == null && other.CompanyName == null) || (this.CompanyName?.Equals(other.CompanyName) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 1383071021;
 
-            if (CustomerId != null)
+            if (this.CustomerId != null)
             {
-               hashCode += CustomerId.GetHashCode();
+               hashCode += this.CustomerId.GetHashCode();
             }
 
-            if (GivenName != null)
+            if (this.GivenName != null)
             {
-               hashCode += GivenName.GetHashCode();
+               hashCode += this.GivenName.GetHashCode();
             }
 
-            if (FamilyName != null)
+            if (this.FamilyName != null)
             {
-               hashCode += FamilyName.GetHashCode();
+               hashCode += this.FamilyName.GetHashCode();
             }
 
-            if (EmailAddress != null)
+            if (this.EmailAddress != null)
             {
-               hashCode += EmailAddress.GetHashCode();
+               hashCode += this.EmailAddress.GetHashCode();
             }
 
-            if (Address != null)
+            if (this.Address != null)
             {
-               hashCode += Address.GetHashCode();
+               hashCode += this.Address.GetHashCode();
             }
 
-            if (PhoneNumber != null)
+            if (this.PhoneNumber != null)
             {
-               hashCode += PhoneNumber.GetHashCode();
+               hashCode += this.PhoneNumber.GetHashCode();
             }
 
-            if (CompanyName != null)
+            if (this.CompanyName != null)
             {
-               hashCode += CompanyName.GetHashCode();
+               hashCode += this.CompanyName.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.CustomerId = {(this.CustomerId == null ? "null" : this.CustomerId == string.Empty ? "" : this.CustomerId)}");
+            toStringOutput.Add($"this.GivenName = {(this.GivenName == null ? "null" : this.GivenName == string.Empty ? "" : this.GivenName)}");
+            toStringOutput.Add($"this.FamilyName = {(this.FamilyName == null ? "null" : this.FamilyName == string.Empty ? "" : this.FamilyName)}");
+            toStringOutput.Add($"this.EmailAddress = {(this.EmailAddress == null ? "null" : this.EmailAddress == string.Empty ? "" : this.EmailAddress)}");
+            toStringOutput.Add($"this.Address = {(this.Address == null ? "null" : this.Address.ToString())}");
+            toStringOutput.Add($"this.PhoneNumber = {(this.PhoneNumber == null ? "null" : this.PhoneNumber == string.Empty ? "" : this.PhoneNumber)}");
+            toStringOutput.Add($"this.CompanyName = {(this.CompanyName == null ? "null" : this.CompanyName == string.Empty ? "" : this.CompanyName)}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .CustomerId(CustomerId)
-                .GivenName(GivenName)
-                .FamilyName(FamilyName)
-                .EmailAddress(EmailAddress)
-                .Address(Address)
-                .PhoneNumber(PhoneNumber)
-                .CompanyName(CompanyName);
+                .CustomerId(this.CustomerId)
+                .GivenName(this.GivenName)
+                .FamilyName(this.FamilyName)
+                .EmailAddress(this.EmailAddress)
+                .Address(this.Address)
+                .PhoneNumber(this.PhoneNumber)
+                .CompanyName(this.CompanyName);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string customerId;
@@ -182,59 +209,97 @@ namespace Square.Models
             private string phoneNumber;
             private string companyName;
 
-
-
+             /// <summary>
+             /// CustomerId.
+             /// </summary>
+             /// <param name="customerId"> customerId. </param>
+             /// <returns> Builder. </returns>
             public Builder CustomerId(string customerId)
             {
                 this.customerId = customerId;
                 return this;
             }
 
+             /// <summary>
+             /// GivenName.
+             /// </summary>
+             /// <param name="givenName"> givenName. </param>
+             /// <returns> Builder. </returns>
             public Builder GivenName(string givenName)
             {
                 this.givenName = givenName;
                 return this;
             }
 
+             /// <summary>
+             /// FamilyName.
+             /// </summary>
+             /// <param name="familyName"> familyName. </param>
+             /// <returns> Builder. </returns>
             public Builder FamilyName(string familyName)
             {
                 this.familyName = familyName;
                 return this;
             }
 
+             /// <summary>
+             /// EmailAddress.
+             /// </summary>
+             /// <param name="emailAddress"> emailAddress. </param>
+             /// <returns> Builder. </returns>
             public Builder EmailAddress(string emailAddress)
             {
                 this.emailAddress = emailAddress;
                 return this;
             }
 
+             /// <summary>
+             /// Address.
+             /// </summary>
+             /// <param name="address"> address. </param>
+             /// <returns> Builder. </returns>
             public Builder Address(Models.Address address)
             {
                 this.address = address;
                 return this;
             }
 
+             /// <summary>
+             /// PhoneNumber.
+             /// </summary>
+             /// <param name="phoneNumber"> phoneNumber. </param>
+             /// <returns> Builder. </returns>
             public Builder PhoneNumber(string phoneNumber)
             {
                 this.phoneNumber = phoneNumber;
                 return this;
             }
 
+             /// <summary>
+             /// CompanyName.
+             /// </summary>
+             /// <param name="companyName"> companyName. </param>
+             /// <returns> Builder. </returns>
             public Builder CompanyName(string companyName)
             {
                 this.companyName = companyName;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> InvoiceRecipient. </returns>
             public InvoiceRecipient Build()
             {
-                return new InvoiceRecipient(customerId,
-                    givenName,
-                    familyName,
-                    emailAddress,
-                    address,
-                    phoneNumber,
-                    companyName);
+                return new InvoiceRecipient(
+                    this.customerId,
+                    this.givenName,
+                    this.familyName,
+                    this.emailAddress,
+                    this.address,
+                    this.phoneNumber,
+                    this.companyName);
             }
         }
     }

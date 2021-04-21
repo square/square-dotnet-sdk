@@ -1,25 +1,33 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class CreateTerminalRefundRequest 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// CreateTerminalRefundRequest.
+    /// </summary>
+    public class CreateTerminalRefundRequest
     {
-        public CreateTerminalRefundRequest(string idempotencyKey,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CreateTerminalRefundRequest"/> class.
+        /// </summary>
+        /// <param name="idempotencyKey">idempotency_key.</param>
+        /// <param name="refund">refund.</param>
+        public CreateTerminalRefundRequest(
+            string idempotencyKey,
             Models.TerminalRefund refund = null)
         {
-            IdempotencyKey = idempotencyKey;
-            Refund = refund;
+            this.IdempotencyKey = idempotencyKey;
+            this.Refund = refund;
         }
 
         /// <summary>
@@ -31,11 +39,12 @@ namespace Square.Models
         public string IdempotencyKey { get; }
 
         /// <summary>
-        /// Getter for refund
+        /// Gets or sets Refund.
         /// </summary>
         [JsonProperty("refund", NullValueHandling = NullValueHandling.Ignore)]
         public Models.TerminalRefund Refund { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -45,12 +54,7 @@ namespace Square.Models
             return $"CreateTerminalRefundRequest : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"IdempotencyKey = {(IdempotencyKey == null ? "null" : IdempotencyKey == string.Empty ? "" : IdempotencyKey)}");
-            toStringOutput.Add($"Refund = {(Refund == null ? "null" : Refund.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -64,60 +68,95 @@ namespace Square.Models
             }
 
             return obj is CreateTerminalRefundRequest other &&
-                ((IdempotencyKey == null && other.IdempotencyKey == null) || (IdempotencyKey?.Equals(other.IdempotencyKey) == true)) &&
-                ((Refund == null && other.Refund == null) || (Refund?.Equals(other.Refund) == true));
+                ((this.IdempotencyKey == null && other.IdempotencyKey == null) || (this.IdempotencyKey?.Equals(other.IdempotencyKey) == true)) &&
+                ((this.Refund == null && other.Refund == null) || (this.Refund?.Equals(other.Refund) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -475578715;
 
-            if (IdempotencyKey != null)
+            if (this.IdempotencyKey != null)
             {
-               hashCode += IdempotencyKey.GetHashCode();
+               hashCode += this.IdempotencyKey.GetHashCode();
             }
 
-            if (Refund != null)
+            if (this.Refund != null)
             {
-               hashCode += Refund.GetHashCode();
+               hashCode += this.Refund.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.IdempotencyKey = {(this.IdempotencyKey == null ? "null" : this.IdempotencyKey == string.Empty ? "" : this.IdempotencyKey)}");
+            toStringOutput.Add($"this.Refund = {(this.Refund == null ? "null" : this.Refund.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
-            var builder = new Builder(IdempotencyKey)
-                .Refund(Refund);
+            var builder = new Builder(
+                this.IdempotencyKey)
+                .Refund(this.Refund);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string idempotencyKey;
             private Models.TerminalRefund refund;
 
-            public Builder(string idempotencyKey)
+            public Builder(
+                string idempotencyKey)
             {
                 this.idempotencyKey = idempotencyKey;
             }
 
+             /// <summary>
+             /// IdempotencyKey.
+             /// </summary>
+             /// <param name="idempotencyKey"> idempotencyKey. </param>
+             /// <returns> Builder. </returns>
             public Builder IdempotencyKey(string idempotencyKey)
             {
                 this.idempotencyKey = idempotencyKey;
                 return this;
             }
 
+             /// <summary>
+             /// Refund.
+             /// </summary>
+             /// <param name="refund"> refund. </param>
+             /// <returns> Builder. </returns>
             public Builder Refund(Models.TerminalRefund refund)
             {
                 this.refund = refund;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> CreateTerminalRefundRequest. </returns>
             public CreateTerminalRefundRequest Build()
             {
-                return new CreateTerminalRefundRequest(idempotencyKey,
-                    refund);
+                return new CreateTerminalRefundRequest(
+                    this.idempotencyKey,
+                    this.refund);
             }
         }
     }

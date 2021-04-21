@@ -1,21 +1,34 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class SearchCatalogObjectsRequest 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// SearchCatalogObjectsRequest.
+    /// </summary>
+    public class SearchCatalogObjectsRequest
     {
-        public SearchCatalogObjectsRequest(string cursor = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SearchCatalogObjectsRequest"/> class.
+        /// </summary>
+        /// <param name="cursor">cursor.</param>
+        /// <param name="objectTypes">object_types.</param>
+        /// <param name="includeDeletedObjects">include_deleted_objects.</param>
+        /// <param name="includeRelatedObjects">include_related_objects.</param>
+        /// <param name="beginTime">begin_time.</param>
+        /// <param name="query">query.</param>
+        /// <param name="limit">limit.</param>
+        public SearchCatalogObjectsRequest(
+            string cursor = null,
             IList<string> objectTypes = null,
             bool? includeDeletedObjects = null,
             bool? includeRelatedObjects = null,
@@ -23,13 +36,13 @@ namespace Square.Models
             Models.CatalogQuery query = null,
             int? limit = null)
         {
-            Cursor = cursor;
-            ObjectTypes = objectTypes;
-            IncludeDeletedObjects = includeDeletedObjects;
-            IncludeRelatedObjects = includeRelatedObjects;
-            BeginTime = beginTime;
-            Query = query;
-            Limit = limit;
+            this.Cursor = cursor;
+            this.ObjectTypes = objectTypes;
+            this.IncludeDeletedObjects = includeDeletedObjects;
+            this.IncludeRelatedObjects = includeRelatedObjects;
+            this.BeginTime = beginTime;
+            this.Query = query;
+            this.Limit = limit;
         }
 
         /// <summary>
@@ -76,13 +89,13 @@ namespace Square.Models
 
         /// <summary>
         /// A query composed of one or more different types of filters to narrow the scope of targeted objects when calling the `SearchCatalogObjects` endpoint.
-        /// Although a query can have multiple filters, only certain query types can be combined per call to [SearchCatalogObjects](#endpoint-Catalog-SearchCatalogObjects).
+        /// Although a query can have multiple filters, only certain query types can be combined per call to [SearchCatalogObjects]($e/Catalog/SearchCatalogObjects).
         /// Any combination of the following types may be used together:
-        /// - [exact_query](#type-CatalogExactQuery)
-        /// - [prefix_query](#type-CatalogPrefixQuery)
-        /// - [range_query](#type-CatalogRangeQuery)
-        /// - [sorted_attribute_query](#type-CatalogSortedAttribute)
-        /// - [text_query](#type-CatalogTextQuery)
+        /// - [exact_query]($m/CatalogQueryExact)
+        /// - [prefix_query]($m/CatalogQueryPrefix)
+        /// - [range_query]($m/CatalogQueryRange)
+        /// - [sorted_attribute_query]($m/CatalogQuerySortedAttribute)
+        /// - [text_query]($m/CatalogQueryText)
         /// All other query types cannot be combined with any others.
         /// When a query filter is based on an attribute, the attribute must be searchable.
         /// Searchable attributes are listed as follows, along their parent types that can be searched for with applicable query filters.
@@ -94,7 +107,7 @@ namespace Square.Models
         /// - `sku`: `CatalogItemVariation`
         /// - `caption`: `CatalogImage`
         /// - `display_name`: `CatalogItemOption`
-        /// For example, to search for [CatalogItem](#type-CatalogItem) objects by searchable attributes, you can use
+        /// For example, to search for [CatalogItem]($m/CatalogItem) objects by searchable attributes, you can use
         /// the `"name"`, `"description"`, or `"abbreviation"` attribute in an applicable query filter.
         /// </summary>
         [JsonProperty("query", NullValueHandling = NullValueHandling.Ignore)]
@@ -108,6 +121,7 @@ namespace Square.Models
         [JsonProperty("limit", NullValueHandling = NullValueHandling.Ignore)]
         public int? Limit { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -117,17 +131,7 @@ namespace Square.Models
             return $"SearchCatalogObjectsRequest : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Cursor = {(Cursor == null ? "null" : Cursor == string.Empty ? "" : Cursor)}");
-            toStringOutput.Add($"ObjectTypes = {(ObjectTypes == null ? "null" : $"[{ string.Join(", ", ObjectTypes)} ]")}");
-            toStringOutput.Add($"IncludeDeletedObjects = {(IncludeDeletedObjects == null ? "null" : IncludeDeletedObjects.ToString())}");
-            toStringOutput.Add($"IncludeRelatedObjects = {(IncludeRelatedObjects == null ? "null" : IncludeRelatedObjects.ToString())}");
-            toStringOutput.Add($"BeginTime = {(BeginTime == null ? "null" : BeginTime == string.Empty ? "" : BeginTime)}");
-            toStringOutput.Add($"Query = {(Query == null ? "null" : Query.ToString())}");
-            toStringOutput.Add($"Limit = {(Limit == null ? "null" : Limit.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -141,70 +145,93 @@ namespace Square.Models
             }
 
             return obj is SearchCatalogObjectsRequest other &&
-                ((Cursor == null && other.Cursor == null) || (Cursor?.Equals(other.Cursor) == true)) &&
-                ((ObjectTypes == null && other.ObjectTypes == null) || (ObjectTypes?.Equals(other.ObjectTypes) == true)) &&
-                ((IncludeDeletedObjects == null && other.IncludeDeletedObjects == null) || (IncludeDeletedObjects?.Equals(other.IncludeDeletedObjects) == true)) &&
-                ((IncludeRelatedObjects == null && other.IncludeRelatedObjects == null) || (IncludeRelatedObjects?.Equals(other.IncludeRelatedObjects) == true)) &&
-                ((BeginTime == null && other.BeginTime == null) || (BeginTime?.Equals(other.BeginTime) == true)) &&
-                ((Query == null && other.Query == null) || (Query?.Equals(other.Query) == true)) &&
-                ((Limit == null && other.Limit == null) || (Limit?.Equals(other.Limit) == true));
+                ((this.Cursor == null && other.Cursor == null) || (this.Cursor?.Equals(other.Cursor) == true)) &&
+                ((this.ObjectTypes == null && other.ObjectTypes == null) || (this.ObjectTypes?.Equals(other.ObjectTypes) == true)) &&
+                ((this.IncludeDeletedObjects == null && other.IncludeDeletedObjects == null) || (this.IncludeDeletedObjects?.Equals(other.IncludeDeletedObjects) == true)) &&
+                ((this.IncludeRelatedObjects == null && other.IncludeRelatedObjects == null) || (this.IncludeRelatedObjects?.Equals(other.IncludeRelatedObjects) == true)) &&
+                ((this.BeginTime == null && other.BeginTime == null) || (this.BeginTime?.Equals(other.BeginTime) == true)) &&
+                ((this.Query == null && other.Query == null) || (this.Query?.Equals(other.Query) == true)) &&
+                ((this.Limit == null && other.Limit == null) || (this.Limit?.Equals(other.Limit) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 405501134;
 
-            if (Cursor != null)
+            if (this.Cursor != null)
             {
-               hashCode += Cursor.GetHashCode();
+               hashCode += this.Cursor.GetHashCode();
             }
 
-            if (ObjectTypes != null)
+            if (this.ObjectTypes != null)
             {
-               hashCode += ObjectTypes.GetHashCode();
+               hashCode += this.ObjectTypes.GetHashCode();
             }
 
-            if (IncludeDeletedObjects != null)
+            if (this.IncludeDeletedObjects != null)
             {
-               hashCode += IncludeDeletedObjects.GetHashCode();
+               hashCode += this.IncludeDeletedObjects.GetHashCode();
             }
 
-            if (IncludeRelatedObjects != null)
+            if (this.IncludeRelatedObjects != null)
             {
-               hashCode += IncludeRelatedObjects.GetHashCode();
+               hashCode += this.IncludeRelatedObjects.GetHashCode();
             }
 
-            if (BeginTime != null)
+            if (this.BeginTime != null)
             {
-               hashCode += BeginTime.GetHashCode();
+               hashCode += this.BeginTime.GetHashCode();
             }
 
-            if (Query != null)
+            if (this.Query != null)
             {
-               hashCode += Query.GetHashCode();
+               hashCode += this.Query.GetHashCode();
             }
 
-            if (Limit != null)
+            if (this.Limit != null)
             {
-               hashCode += Limit.GetHashCode();
+               hashCode += this.Limit.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Cursor = {(this.Cursor == null ? "null" : this.Cursor == string.Empty ? "" : this.Cursor)}");
+            toStringOutput.Add($"this.ObjectTypes = {(this.ObjectTypes == null ? "null" : $"[{string.Join(", ", this.ObjectTypes)} ]")}");
+            toStringOutput.Add($"this.IncludeDeletedObjects = {(this.IncludeDeletedObjects == null ? "null" : this.IncludeDeletedObjects.ToString())}");
+            toStringOutput.Add($"this.IncludeRelatedObjects = {(this.IncludeRelatedObjects == null ? "null" : this.IncludeRelatedObjects.ToString())}");
+            toStringOutput.Add($"this.BeginTime = {(this.BeginTime == null ? "null" : this.BeginTime == string.Empty ? "" : this.BeginTime)}");
+            toStringOutput.Add($"this.Query = {(this.Query == null ? "null" : this.Query.ToString())}");
+            toStringOutput.Add($"this.Limit = {(this.Limit == null ? "null" : this.Limit.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .Cursor(Cursor)
-                .ObjectTypes(ObjectTypes)
-                .IncludeDeletedObjects(IncludeDeletedObjects)
-                .IncludeRelatedObjects(IncludeRelatedObjects)
-                .BeginTime(BeginTime)
-                .Query(Query)
-                .Limit(Limit);
+                .Cursor(this.Cursor)
+                .ObjectTypes(this.ObjectTypes)
+                .IncludeDeletedObjects(this.IncludeDeletedObjects)
+                .IncludeRelatedObjects(this.IncludeRelatedObjects)
+                .BeginTime(this.BeginTime)
+                .Query(this.Query)
+                .Limit(this.Limit);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string cursor;
@@ -215,59 +242,97 @@ namespace Square.Models
             private Models.CatalogQuery query;
             private int? limit;
 
-
-
+             /// <summary>
+             /// Cursor.
+             /// </summary>
+             /// <param name="cursor"> cursor. </param>
+             /// <returns> Builder. </returns>
             public Builder Cursor(string cursor)
             {
                 this.cursor = cursor;
                 return this;
             }
 
+             /// <summary>
+             /// ObjectTypes.
+             /// </summary>
+             /// <param name="objectTypes"> objectTypes. </param>
+             /// <returns> Builder. </returns>
             public Builder ObjectTypes(IList<string> objectTypes)
             {
                 this.objectTypes = objectTypes;
                 return this;
             }
 
+             /// <summary>
+             /// IncludeDeletedObjects.
+             /// </summary>
+             /// <param name="includeDeletedObjects"> includeDeletedObjects. </param>
+             /// <returns> Builder. </returns>
             public Builder IncludeDeletedObjects(bool? includeDeletedObjects)
             {
                 this.includeDeletedObjects = includeDeletedObjects;
                 return this;
             }
 
+             /// <summary>
+             /// IncludeRelatedObjects.
+             /// </summary>
+             /// <param name="includeRelatedObjects"> includeRelatedObjects. </param>
+             /// <returns> Builder. </returns>
             public Builder IncludeRelatedObjects(bool? includeRelatedObjects)
             {
                 this.includeRelatedObjects = includeRelatedObjects;
                 return this;
             }
 
+             /// <summary>
+             /// BeginTime.
+             /// </summary>
+             /// <param name="beginTime"> beginTime. </param>
+             /// <returns> Builder. </returns>
             public Builder BeginTime(string beginTime)
             {
                 this.beginTime = beginTime;
                 return this;
             }
 
+             /// <summary>
+             /// Query.
+             /// </summary>
+             /// <param name="query"> query. </param>
+             /// <returns> Builder. </returns>
             public Builder Query(Models.CatalogQuery query)
             {
                 this.query = query;
                 return this;
             }
 
+             /// <summary>
+             /// Limit.
+             /// </summary>
+             /// <param name="limit"> limit. </param>
+             /// <returns> Builder. </returns>
             public Builder Limit(int? limit)
             {
                 this.limit = limit;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> SearchCatalogObjectsRequest. </returns>
             public SearchCatalogObjectsRequest Build()
             {
-                return new SearchCatalogObjectsRequest(cursor,
-                    objectTypes,
-                    includeDeletedObjects,
-                    includeRelatedObjects,
-                    beginTime,
-                    query,
-                    limit);
+                return new SearchCatalogObjectsRequest(
+                    this.cursor,
+                    this.objectTypes,
+                    this.includeDeletedObjects,
+                    this.includeRelatedObjects,
+                    this.beginTime,
+                    this.query,
+                    this.limit);
             }
         }
     }

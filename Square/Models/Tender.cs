@@ -1,21 +1,41 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class Tender 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// Tender.
+    /// </summary>
+    public class Tender
     {
-        public Tender(string type,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Tender"/> class.
+        /// </summary>
+        /// <param name="type">type.</param>
+        /// <param name="id">id.</param>
+        /// <param name="locationId">location_id.</param>
+        /// <param name="transactionId">transaction_id.</param>
+        /// <param name="createdAt">created_at.</param>
+        /// <param name="note">note.</param>
+        /// <param name="amountMoney">amount_money.</param>
+        /// <param name="tipMoney">tip_money.</param>
+        /// <param name="processingFeeMoney">processing_fee_money.</param>
+        /// <param name="customerId">customer_id.</param>
+        /// <param name="cardDetails">card_details.</param>
+        /// <param name="cashDetails">cash_details.</param>
+        /// <param name="additionalRecipients">additional_recipients.</param>
+        /// <param name="paymentId">payment_id.</param>
+        public Tender(
+            string type,
             string id = null,
             string locationId = null,
             string transactionId = null,
@@ -30,20 +50,20 @@ namespace Square.Models
             IList<Models.AdditionalRecipient> additionalRecipients = null,
             string paymentId = null)
         {
-            Id = id;
-            LocationId = locationId;
-            TransactionId = transactionId;
-            CreatedAt = createdAt;
-            Note = note;
-            AmountMoney = amountMoney;
-            TipMoney = tipMoney;
-            ProcessingFeeMoney = processingFeeMoney;
-            CustomerId = customerId;
-            Type = type;
-            CardDetails = cardDetails;
-            CashDetails = cashDetails;
-            AdditionalRecipients = additionalRecipients;
-            PaymentId = paymentId;
+            this.Id = id;
+            this.LocationId = locationId;
+            this.TransactionId = transactionId;
+            this.CreatedAt = createdAt;
+            this.Note = note;
+            this.AmountMoney = amountMoney;
+            this.TipMoney = tipMoney;
+            this.ProcessingFeeMoney = processingFeeMoney;
+            this.CustomerId = customerId;
+            this.Type = type;
+            this.CardDetails = cardDetails;
+            this.CashDetails = cashDetails;
+            this.AdditionalRecipients = additionalRecipients;
+            this.PaymentId = paymentId;
         }
 
         /// <summary>
@@ -142,12 +162,13 @@ namespace Square.Models
         public IList<Models.AdditionalRecipient> AdditionalRecipients { get; }
 
         /// <summary>
-        /// The ID of the [Payment](#type-payment) that corresponds to this tender.
+        /// The ID of the [Payment]($m/Payment) that corresponds to this tender.
         /// This value is only present for payments created with the v2 Payments API.
         /// </summary>
         [JsonProperty("payment_id", NullValueHandling = NullValueHandling.Ignore)]
         public string PaymentId { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -157,24 +178,7 @@ namespace Square.Models
             return $"Tender : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Id = {(Id == null ? "null" : Id == string.Empty ? "" : Id)}");
-            toStringOutput.Add($"LocationId = {(LocationId == null ? "null" : LocationId == string.Empty ? "" : LocationId)}");
-            toStringOutput.Add($"TransactionId = {(TransactionId == null ? "null" : TransactionId == string.Empty ? "" : TransactionId)}");
-            toStringOutput.Add($"CreatedAt = {(CreatedAt == null ? "null" : CreatedAt == string.Empty ? "" : CreatedAt)}");
-            toStringOutput.Add($"Note = {(Note == null ? "null" : Note == string.Empty ? "" : Note)}");
-            toStringOutput.Add($"AmountMoney = {(AmountMoney == null ? "null" : AmountMoney.ToString())}");
-            toStringOutput.Add($"TipMoney = {(TipMoney == null ? "null" : TipMoney.ToString())}");
-            toStringOutput.Add($"ProcessingFeeMoney = {(ProcessingFeeMoney == null ? "null" : ProcessingFeeMoney.ToString())}");
-            toStringOutput.Add($"CustomerId = {(CustomerId == null ? "null" : CustomerId == string.Empty ? "" : CustomerId)}");
-            toStringOutput.Add($"Type = {(Type == null ? "null" : Type.ToString())}");
-            toStringOutput.Add($"CardDetails = {(CardDetails == null ? "null" : CardDetails.ToString())}");
-            toStringOutput.Add($"CashDetails = {(CashDetails == null ? "null" : CashDetails.ToString())}");
-            toStringOutput.Add($"AdditionalRecipients = {(AdditionalRecipients == null ? "null" : $"[{ string.Join(", ", AdditionalRecipients)} ]")}");
-            toStringOutput.Add($"PaymentId = {(PaymentId == null ? "null" : PaymentId == string.Empty ? "" : PaymentId)}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -188,118 +192,149 @@ namespace Square.Models
             }
 
             return obj is Tender other &&
-                ((Id == null && other.Id == null) || (Id?.Equals(other.Id) == true)) &&
-                ((LocationId == null && other.LocationId == null) || (LocationId?.Equals(other.LocationId) == true)) &&
-                ((TransactionId == null && other.TransactionId == null) || (TransactionId?.Equals(other.TransactionId) == true)) &&
-                ((CreatedAt == null && other.CreatedAt == null) || (CreatedAt?.Equals(other.CreatedAt) == true)) &&
-                ((Note == null && other.Note == null) || (Note?.Equals(other.Note) == true)) &&
-                ((AmountMoney == null && other.AmountMoney == null) || (AmountMoney?.Equals(other.AmountMoney) == true)) &&
-                ((TipMoney == null && other.TipMoney == null) || (TipMoney?.Equals(other.TipMoney) == true)) &&
-                ((ProcessingFeeMoney == null && other.ProcessingFeeMoney == null) || (ProcessingFeeMoney?.Equals(other.ProcessingFeeMoney) == true)) &&
-                ((CustomerId == null && other.CustomerId == null) || (CustomerId?.Equals(other.CustomerId) == true)) &&
-                ((Type == null && other.Type == null) || (Type?.Equals(other.Type) == true)) &&
-                ((CardDetails == null && other.CardDetails == null) || (CardDetails?.Equals(other.CardDetails) == true)) &&
-                ((CashDetails == null && other.CashDetails == null) || (CashDetails?.Equals(other.CashDetails) == true)) &&
-                ((AdditionalRecipients == null && other.AdditionalRecipients == null) || (AdditionalRecipients?.Equals(other.AdditionalRecipients) == true)) &&
-                ((PaymentId == null && other.PaymentId == null) || (PaymentId?.Equals(other.PaymentId) == true));
+                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
+                ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true)) &&
+                ((this.TransactionId == null && other.TransactionId == null) || (this.TransactionId?.Equals(other.TransactionId) == true)) &&
+                ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true)) &&
+                ((this.Note == null && other.Note == null) || (this.Note?.Equals(other.Note) == true)) &&
+                ((this.AmountMoney == null && other.AmountMoney == null) || (this.AmountMoney?.Equals(other.AmountMoney) == true)) &&
+                ((this.TipMoney == null && other.TipMoney == null) || (this.TipMoney?.Equals(other.TipMoney) == true)) &&
+                ((this.ProcessingFeeMoney == null && other.ProcessingFeeMoney == null) || (this.ProcessingFeeMoney?.Equals(other.ProcessingFeeMoney) == true)) &&
+                ((this.CustomerId == null && other.CustomerId == null) || (this.CustomerId?.Equals(other.CustomerId) == true)) &&
+                ((this.Type == null && other.Type == null) || (this.Type?.Equals(other.Type) == true)) &&
+                ((this.CardDetails == null && other.CardDetails == null) || (this.CardDetails?.Equals(other.CardDetails) == true)) &&
+                ((this.CashDetails == null && other.CashDetails == null) || (this.CashDetails?.Equals(other.CashDetails) == true)) &&
+                ((this.AdditionalRecipients == null && other.AdditionalRecipients == null) || (this.AdditionalRecipients?.Equals(other.AdditionalRecipients) == true)) &&
+                ((this.PaymentId == null && other.PaymentId == null) || (this.PaymentId?.Equals(other.PaymentId) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1832006143;
 
-            if (Id != null)
+            if (this.Id != null)
             {
-               hashCode += Id.GetHashCode();
+               hashCode += this.Id.GetHashCode();
             }
 
-            if (LocationId != null)
+            if (this.LocationId != null)
             {
-               hashCode += LocationId.GetHashCode();
+               hashCode += this.LocationId.GetHashCode();
             }
 
-            if (TransactionId != null)
+            if (this.TransactionId != null)
             {
-               hashCode += TransactionId.GetHashCode();
+               hashCode += this.TransactionId.GetHashCode();
             }
 
-            if (CreatedAt != null)
+            if (this.CreatedAt != null)
             {
-               hashCode += CreatedAt.GetHashCode();
+               hashCode += this.CreatedAt.GetHashCode();
             }
 
-            if (Note != null)
+            if (this.Note != null)
             {
-               hashCode += Note.GetHashCode();
+               hashCode += this.Note.GetHashCode();
             }
 
-            if (AmountMoney != null)
+            if (this.AmountMoney != null)
             {
-               hashCode += AmountMoney.GetHashCode();
+               hashCode += this.AmountMoney.GetHashCode();
             }
 
-            if (TipMoney != null)
+            if (this.TipMoney != null)
             {
-               hashCode += TipMoney.GetHashCode();
+               hashCode += this.TipMoney.GetHashCode();
             }
 
-            if (ProcessingFeeMoney != null)
+            if (this.ProcessingFeeMoney != null)
             {
-               hashCode += ProcessingFeeMoney.GetHashCode();
+               hashCode += this.ProcessingFeeMoney.GetHashCode();
             }
 
-            if (CustomerId != null)
+            if (this.CustomerId != null)
             {
-               hashCode += CustomerId.GetHashCode();
+               hashCode += this.CustomerId.GetHashCode();
             }
 
-            if (Type != null)
+            if (this.Type != null)
             {
-               hashCode += Type.GetHashCode();
+               hashCode += this.Type.GetHashCode();
             }
 
-            if (CardDetails != null)
+            if (this.CardDetails != null)
             {
-               hashCode += CardDetails.GetHashCode();
+               hashCode += this.CardDetails.GetHashCode();
             }
 
-            if (CashDetails != null)
+            if (this.CashDetails != null)
             {
-               hashCode += CashDetails.GetHashCode();
+               hashCode += this.CashDetails.GetHashCode();
             }
 
-            if (AdditionalRecipients != null)
+            if (this.AdditionalRecipients != null)
             {
-               hashCode += AdditionalRecipients.GetHashCode();
+               hashCode += this.AdditionalRecipients.GetHashCode();
             }
 
-            if (PaymentId != null)
+            if (this.PaymentId != null)
             {
-               hashCode += PaymentId.GetHashCode();
+               hashCode += this.PaymentId.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id == string.Empty ? "" : this.Id)}");
+            toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId == string.Empty ? "" : this.LocationId)}");
+            toStringOutput.Add($"this.TransactionId = {(this.TransactionId == null ? "null" : this.TransactionId == string.Empty ? "" : this.TransactionId)}");
+            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt == string.Empty ? "" : this.CreatedAt)}");
+            toStringOutput.Add($"this.Note = {(this.Note == null ? "null" : this.Note == string.Empty ? "" : this.Note)}");
+            toStringOutput.Add($"this.AmountMoney = {(this.AmountMoney == null ? "null" : this.AmountMoney.ToString())}");
+            toStringOutput.Add($"this.TipMoney = {(this.TipMoney == null ? "null" : this.TipMoney.ToString())}");
+            toStringOutput.Add($"this.ProcessingFeeMoney = {(this.ProcessingFeeMoney == null ? "null" : this.ProcessingFeeMoney.ToString())}");
+            toStringOutput.Add($"this.CustomerId = {(this.CustomerId == null ? "null" : this.CustomerId == string.Empty ? "" : this.CustomerId)}");
+            toStringOutput.Add($"this.Type = {(this.Type == null ? "null" : this.Type.ToString())}");
+            toStringOutput.Add($"this.CardDetails = {(this.CardDetails == null ? "null" : this.CardDetails.ToString())}");
+            toStringOutput.Add($"this.CashDetails = {(this.CashDetails == null ? "null" : this.CashDetails.ToString())}");
+            toStringOutput.Add($"this.AdditionalRecipients = {(this.AdditionalRecipients == null ? "null" : $"[{string.Join(", ", this.AdditionalRecipients)} ]")}");
+            toStringOutput.Add($"this.PaymentId = {(this.PaymentId == null ? "null" : this.PaymentId == string.Empty ? "" : this.PaymentId)}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
-            var builder = new Builder(Type)
-                .Id(Id)
-                .LocationId(LocationId)
-                .TransactionId(TransactionId)
-                .CreatedAt(CreatedAt)
-                .Note(Note)
-                .AmountMoney(AmountMoney)
-                .TipMoney(TipMoney)
-                .ProcessingFeeMoney(ProcessingFeeMoney)
-                .CustomerId(CustomerId)
-                .CardDetails(CardDetails)
-                .CashDetails(CashDetails)
-                .AdditionalRecipients(AdditionalRecipients)
-                .PaymentId(PaymentId);
+            var builder = new Builder(
+                this.Type)
+                .Id(this.Id)
+                .LocationId(this.LocationId)
+                .TransactionId(this.TransactionId)
+                .CreatedAt(this.CreatedAt)
+                .Note(this.Note)
+                .AmountMoney(this.AmountMoney)
+                .TipMoney(this.TipMoney)
+                .ProcessingFeeMoney(this.ProcessingFeeMoney)
+                .CustomerId(this.CustomerId)
+                .CardDetails(this.CardDetails)
+                .CashDetails(this.CashDetails)
+                .AdditionalRecipients(this.AdditionalRecipients)
+                .PaymentId(this.PaymentId);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string type;
@@ -317,111 +352,187 @@ namespace Square.Models
             private IList<Models.AdditionalRecipient> additionalRecipients;
             private string paymentId;
 
-            public Builder(string type)
+            public Builder(
+                string type)
             {
                 this.type = type;
             }
 
+             /// <summary>
+             /// Type.
+             /// </summary>
+             /// <param name="type"> type. </param>
+             /// <returns> Builder. </returns>
             public Builder Type(string type)
             {
                 this.type = type;
                 return this;
             }
 
+             /// <summary>
+             /// Id.
+             /// </summary>
+             /// <param name="id"> id. </param>
+             /// <returns> Builder. </returns>
             public Builder Id(string id)
             {
                 this.id = id;
                 return this;
             }
 
+             /// <summary>
+             /// LocationId.
+             /// </summary>
+             /// <param name="locationId"> locationId. </param>
+             /// <returns> Builder. </returns>
             public Builder LocationId(string locationId)
             {
                 this.locationId = locationId;
                 return this;
             }
 
+             /// <summary>
+             /// TransactionId.
+             /// </summary>
+             /// <param name="transactionId"> transactionId. </param>
+             /// <returns> Builder. </returns>
             public Builder TransactionId(string transactionId)
             {
                 this.transactionId = transactionId;
                 return this;
             }
 
+             /// <summary>
+             /// CreatedAt.
+             /// </summary>
+             /// <param name="createdAt"> createdAt. </param>
+             /// <returns> Builder. </returns>
             public Builder CreatedAt(string createdAt)
             {
                 this.createdAt = createdAt;
                 return this;
             }
 
+             /// <summary>
+             /// Note.
+             /// </summary>
+             /// <param name="note"> note. </param>
+             /// <returns> Builder. </returns>
             public Builder Note(string note)
             {
                 this.note = note;
                 return this;
             }
 
+             /// <summary>
+             /// AmountMoney.
+             /// </summary>
+             /// <param name="amountMoney"> amountMoney. </param>
+             /// <returns> Builder. </returns>
             public Builder AmountMoney(Models.Money amountMoney)
             {
                 this.amountMoney = amountMoney;
                 return this;
             }
 
+             /// <summary>
+             /// TipMoney.
+             /// </summary>
+             /// <param name="tipMoney"> tipMoney. </param>
+             /// <returns> Builder. </returns>
             public Builder TipMoney(Models.Money tipMoney)
             {
                 this.tipMoney = tipMoney;
                 return this;
             }
 
+             /// <summary>
+             /// ProcessingFeeMoney.
+             /// </summary>
+             /// <param name="processingFeeMoney"> processingFeeMoney. </param>
+             /// <returns> Builder. </returns>
             public Builder ProcessingFeeMoney(Models.Money processingFeeMoney)
             {
                 this.processingFeeMoney = processingFeeMoney;
                 return this;
             }
 
+             /// <summary>
+             /// CustomerId.
+             /// </summary>
+             /// <param name="customerId"> customerId. </param>
+             /// <returns> Builder. </returns>
             public Builder CustomerId(string customerId)
             {
                 this.customerId = customerId;
                 return this;
             }
 
+             /// <summary>
+             /// CardDetails.
+             /// </summary>
+             /// <param name="cardDetails"> cardDetails. </param>
+             /// <returns> Builder. </returns>
             public Builder CardDetails(Models.TenderCardDetails cardDetails)
             {
                 this.cardDetails = cardDetails;
                 return this;
             }
 
+             /// <summary>
+             /// CashDetails.
+             /// </summary>
+             /// <param name="cashDetails"> cashDetails. </param>
+             /// <returns> Builder. </returns>
             public Builder CashDetails(Models.TenderCashDetails cashDetails)
             {
                 this.cashDetails = cashDetails;
                 return this;
             }
 
+             /// <summary>
+             /// AdditionalRecipients.
+             /// </summary>
+             /// <param name="additionalRecipients"> additionalRecipients. </param>
+             /// <returns> Builder. </returns>
             public Builder AdditionalRecipients(IList<Models.AdditionalRecipient> additionalRecipients)
             {
                 this.additionalRecipients = additionalRecipients;
                 return this;
             }
 
+             /// <summary>
+             /// PaymentId.
+             /// </summary>
+             /// <param name="paymentId"> paymentId. </param>
+             /// <returns> Builder. </returns>
             public Builder PaymentId(string paymentId)
             {
                 this.paymentId = paymentId;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> Tender. </returns>
             public Tender Build()
             {
-                return new Tender(type,
-                    id,
-                    locationId,
-                    transactionId,
-                    createdAt,
-                    note,
-                    amountMoney,
-                    tipMoney,
-                    processingFeeMoney,
-                    customerId,
-                    cardDetails,
-                    cashDetails,
-                    additionalRecipients,
-                    paymentId);
+                return new Tender(
+                    this.type,
+                    this.id,
+                    this.locationId,
+                    this.transactionId,
+                    this.createdAt,
+                    this.note,
+                    this.amountMoney,
+                    this.tipMoney,
+                    this.processingFeeMoney,
+                    this.customerId,
+                    this.cardDetails,
+                    this.cashDetails,
+                    this.additionalRecipients,
+                    this.paymentId);
             }
         }
     }

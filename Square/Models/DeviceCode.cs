@@ -1,21 +1,38 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class DeviceCode 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// DeviceCode.
+    /// </summary>
+    public class DeviceCode
     {
-        public DeviceCode(string productType,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DeviceCode"/> class.
+        /// </summary>
+        /// <param name="productType">product_type.</param>
+        /// <param name="id">id.</param>
+        /// <param name="name">name.</param>
+        /// <param name="code">code.</param>
+        /// <param name="deviceId">device_id.</param>
+        /// <param name="locationId">location_id.</param>
+        /// <param name="status">status.</param>
+        /// <param name="pairBy">pair_by.</param>
+        /// <param name="createdAt">created_at.</param>
+        /// <param name="statusChangedAt">status_changed_at.</param>
+        /// <param name="pairedAt">paired_at.</param>
+        public DeviceCode(
+            string productType,
             string id = null,
             string name = null,
             string code = null,
@@ -27,17 +44,17 @@ namespace Square.Models
             string statusChangedAt = null,
             string pairedAt = null)
         {
-            Id = id;
-            Name = name;
-            Code = code;
-            DeviceId = deviceId;
-            ProductType = productType;
-            LocationId = locationId;
-            Status = status;
-            PairBy = pairBy;
-            CreatedAt = createdAt;
-            StatusChangedAt = statusChangedAt;
-            PairedAt = pairedAt;
+            this.Id = id;
+            this.Name = name;
+            this.Code = code;
+            this.DeviceId = deviceId;
+            this.ProductType = productType;
+            this.LocationId = locationId;
+            this.Status = status;
+            this.PairBy = pairBy;
+            this.CreatedAt = createdAt;
+            this.StatusChangedAt = statusChangedAt;
+            this.PairedAt = pairedAt;
         }
 
         /// <summary>
@@ -65,7 +82,7 @@ namespace Square.Models
         public string DeviceId { get; }
 
         /// <summary>
-        /// Getter for product_type
+        /// Gets or sets ProductType.
         /// </summary>
         [JsonProperty("product_type")]
         public string ProductType { get; }
@@ -106,6 +123,7 @@ namespace Square.Models
         [JsonProperty("paired_at", NullValueHandling = NullValueHandling.Ignore)]
         public string PairedAt { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -115,21 +133,7 @@ namespace Square.Models
             return $"DeviceCode : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Id = {(Id == null ? "null" : Id == string.Empty ? "" : Id)}");
-            toStringOutput.Add($"Name = {(Name == null ? "null" : Name == string.Empty ? "" : Name)}");
-            toStringOutput.Add($"Code = {(Code == null ? "null" : Code == string.Empty ? "" : Code)}");
-            toStringOutput.Add($"DeviceId = {(DeviceId == null ? "null" : DeviceId == string.Empty ? "" : DeviceId)}");
-            toStringOutput.Add($"ProductType = {(ProductType == null ? "null" : ProductType == string.Empty ? "" : ProductType)}");
-            toStringOutput.Add($"LocationId = {(LocationId == null ? "null" : LocationId == string.Empty ? "" : LocationId)}");
-            toStringOutput.Add($"Status = {(Status == null ? "null" : Status.ToString())}");
-            toStringOutput.Add($"PairBy = {(PairBy == null ? "null" : PairBy == string.Empty ? "" : PairBy)}");
-            toStringOutput.Add($"CreatedAt = {(CreatedAt == null ? "null" : CreatedAt == string.Empty ? "" : CreatedAt)}");
-            toStringOutput.Add($"StatusChangedAt = {(StatusChangedAt == null ? "null" : StatusChangedAt == string.Empty ? "" : StatusChangedAt)}");
-            toStringOutput.Add($"PairedAt = {(PairedAt == null ? "null" : PairedAt == string.Empty ? "" : PairedAt)}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -143,97 +147,125 @@ namespace Square.Models
             }
 
             return obj is DeviceCode other &&
-                ((Id == null && other.Id == null) || (Id?.Equals(other.Id) == true)) &&
-                ((Name == null && other.Name == null) || (Name?.Equals(other.Name) == true)) &&
-                ((Code == null && other.Code == null) || (Code?.Equals(other.Code) == true)) &&
-                ((DeviceId == null && other.DeviceId == null) || (DeviceId?.Equals(other.DeviceId) == true)) &&
-                ((ProductType == null && other.ProductType == null) || (ProductType?.Equals(other.ProductType) == true)) &&
-                ((LocationId == null && other.LocationId == null) || (LocationId?.Equals(other.LocationId) == true)) &&
-                ((Status == null && other.Status == null) || (Status?.Equals(other.Status) == true)) &&
-                ((PairBy == null && other.PairBy == null) || (PairBy?.Equals(other.PairBy) == true)) &&
-                ((CreatedAt == null && other.CreatedAt == null) || (CreatedAt?.Equals(other.CreatedAt) == true)) &&
-                ((StatusChangedAt == null && other.StatusChangedAt == null) || (StatusChangedAt?.Equals(other.StatusChangedAt) == true)) &&
-                ((PairedAt == null && other.PairedAt == null) || (PairedAt?.Equals(other.PairedAt) == true));
+                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
+                ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
+                ((this.Code == null && other.Code == null) || (this.Code?.Equals(other.Code) == true)) &&
+                ((this.DeviceId == null && other.DeviceId == null) || (this.DeviceId?.Equals(other.DeviceId) == true)) &&
+                ((this.ProductType == null && other.ProductType == null) || (this.ProductType?.Equals(other.ProductType) == true)) &&
+                ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true)) &&
+                ((this.Status == null && other.Status == null) || (this.Status?.Equals(other.Status) == true)) &&
+                ((this.PairBy == null && other.PairBy == null) || (this.PairBy?.Equals(other.PairBy) == true)) &&
+                ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true)) &&
+                ((this.StatusChangedAt == null && other.StatusChangedAt == null) || (this.StatusChangedAt?.Equals(other.StatusChangedAt) == true)) &&
+                ((this.PairedAt == null && other.PairedAt == null) || (this.PairedAt?.Equals(other.PairedAt) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1978949756;
 
-            if (Id != null)
+            if (this.Id != null)
             {
-               hashCode += Id.GetHashCode();
+               hashCode += this.Id.GetHashCode();
             }
 
-            if (Name != null)
+            if (this.Name != null)
             {
-               hashCode += Name.GetHashCode();
+               hashCode += this.Name.GetHashCode();
             }
 
-            if (Code != null)
+            if (this.Code != null)
             {
-               hashCode += Code.GetHashCode();
+               hashCode += this.Code.GetHashCode();
             }
 
-            if (DeviceId != null)
+            if (this.DeviceId != null)
             {
-               hashCode += DeviceId.GetHashCode();
+               hashCode += this.DeviceId.GetHashCode();
             }
 
-            if (ProductType != null)
+            if (this.ProductType != null)
             {
-               hashCode += ProductType.GetHashCode();
+               hashCode += this.ProductType.GetHashCode();
             }
 
-            if (LocationId != null)
+            if (this.LocationId != null)
             {
-               hashCode += LocationId.GetHashCode();
+               hashCode += this.LocationId.GetHashCode();
             }
 
-            if (Status != null)
+            if (this.Status != null)
             {
-               hashCode += Status.GetHashCode();
+               hashCode += this.Status.GetHashCode();
             }
 
-            if (PairBy != null)
+            if (this.PairBy != null)
             {
-               hashCode += PairBy.GetHashCode();
+               hashCode += this.PairBy.GetHashCode();
             }
 
-            if (CreatedAt != null)
+            if (this.CreatedAt != null)
             {
-               hashCode += CreatedAt.GetHashCode();
+               hashCode += this.CreatedAt.GetHashCode();
             }
 
-            if (StatusChangedAt != null)
+            if (this.StatusChangedAt != null)
             {
-               hashCode += StatusChangedAt.GetHashCode();
+               hashCode += this.StatusChangedAt.GetHashCode();
             }
 
-            if (PairedAt != null)
+            if (this.PairedAt != null)
             {
-               hashCode += PairedAt.GetHashCode();
+               hashCode += this.PairedAt.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id == string.Empty ? "" : this.Id)}");
+            toStringOutput.Add($"this.Name = {(this.Name == null ? "null" : this.Name == string.Empty ? "" : this.Name)}");
+            toStringOutput.Add($"this.Code = {(this.Code == null ? "null" : this.Code == string.Empty ? "" : this.Code)}");
+            toStringOutput.Add($"this.DeviceId = {(this.DeviceId == null ? "null" : this.DeviceId == string.Empty ? "" : this.DeviceId)}");
+            toStringOutput.Add($"this.ProductType = {(this.ProductType == null ? "null" : this.ProductType == string.Empty ? "" : this.ProductType)}");
+            toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId == string.Empty ? "" : this.LocationId)}");
+            toStringOutput.Add($"this.Status = {(this.Status == null ? "null" : this.Status.ToString())}");
+            toStringOutput.Add($"this.PairBy = {(this.PairBy == null ? "null" : this.PairBy == string.Empty ? "" : this.PairBy)}");
+            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt == string.Empty ? "" : this.CreatedAt)}");
+            toStringOutput.Add($"this.StatusChangedAt = {(this.StatusChangedAt == null ? "null" : this.StatusChangedAt == string.Empty ? "" : this.StatusChangedAt)}");
+            toStringOutput.Add($"this.PairedAt = {(this.PairedAt == null ? "null" : this.PairedAt == string.Empty ? "" : this.PairedAt)}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
-            var builder = new Builder(ProductType)
-                .Id(Id)
-                .Name(Name)
-                .Code(Code)
-                .DeviceId(DeviceId)
-                .LocationId(LocationId)
-                .Status(Status)
-                .PairBy(PairBy)
-                .CreatedAt(CreatedAt)
-                .StatusChangedAt(StatusChangedAt)
-                .PairedAt(PairedAt);
+            var builder = new Builder(
+                this.ProductType)
+                .Id(this.Id)
+                .Name(this.Name)
+                .Code(this.Code)
+                .DeviceId(this.DeviceId)
+                .LocationId(this.LocationId)
+                .Status(this.Status)
+                .PairBy(this.PairBy)
+                .CreatedAt(this.CreatedAt)
+                .StatusChangedAt(this.StatusChangedAt)
+                .PairedAt(this.PairedAt);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string productType;
@@ -248,90 +280,151 @@ namespace Square.Models
             private string statusChangedAt;
             private string pairedAt;
 
-            public Builder(string productType)
+            public Builder(
+                string productType)
             {
                 this.productType = productType;
             }
 
+             /// <summary>
+             /// ProductType.
+             /// </summary>
+             /// <param name="productType"> productType. </param>
+             /// <returns> Builder. </returns>
             public Builder ProductType(string productType)
             {
                 this.productType = productType;
                 return this;
             }
 
+             /// <summary>
+             /// Id.
+             /// </summary>
+             /// <param name="id"> id. </param>
+             /// <returns> Builder. </returns>
             public Builder Id(string id)
             {
                 this.id = id;
                 return this;
             }
 
+             /// <summary>
+             /// Name.
+             /// </summary>
+             /// <param name="name"> name. </param>
+             /// <returns> Builder. </returns>
             public Builder Name(string name)
             {
                 this.name = name;
                 return this;
             }
 
+             /// <summary>
+             /// Code.
+             /// </summary>
+             /// <param name="code"> code. </param>
+             /// <returns> Builder. </returns>
             public Builder Code(string code)
             {
                 this.code = code;
                 return this;
             }
 
+             /// <summary>
+             /// DeviceId.
+             /// </summary>
+             /// <param name="deviceId"> deviceId. </param>
+             /// <returns> Builder. </returns>
             public Builder DeviceId(string deviceId)
             {
                 this.deviceId = deviceId;
                 return this;
             }
 
+             /// <summary>
+             /// LocationId.
+             /// </summary>
+             /// <param name="locationId"> locationId. </param>
+             /// <returns> Builder. </returns>
             public Builder LocationId(string locationId)
             {
                 this.locationId = locationId;
                 return this;
             }
 
+             /// <summary>
+             /// Status.
+             /// </summary>
+             /// <param name="status"> status. </param>
+             /// <returns> Builder. </returns>
             public Builder Status(string status)
             {
                 this.status = status;
                 return this;
             }
 
+             /// <summary>
+             /// PairBy.
+             /// </summary>
+             /// <param name="pairBy"> pairBy. </param>
+             /// <returns> Builder. </returns>
             public Builder PairBy(string pairBy)
             {
                 this.pairBy = pairBy;
                 return this;
             }
 
+             /// <summary>
+             /// CreatedAt.
+             /// </summary>
+             /// <param name="createdAt"> createdAt. </param>
+             /// <returns> Builder. </returns>
             public Builder CreatedAt(string createdAt)
             {
                 this.createdAt = createdAt;
                 return this;
             }
 
+             /// <summary>
+             /// StatusChangedAt.
+             /// </summary>
+             /// <param name="statusChangedAt"> statusChangedAt. </param>
+             /// <returns> Builder. </returns>
             public Builder StatusChangedAt(string statusChangedAt)
             {
                 this.statusChangedAt = statusChangedAt;
                 return this;
             }
 
+             /// <summary>
+             /// PairedAt.
+             /// </summary>
+             /// <param name="pairedAt"> pairedAt. </param>
+             /// <returns> Builder. </returns>
             public Builder PairedAt(string pairedAt)
             {
                 this.pairedAt = pairedAt;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> DeviceCode. </returns>
             public DeviceCode Build()
             {
-                return new DeviceCode(productType,
-                    id,
-                    name,
-                    code,
-                    deviceId,
-                    locationId,
-                    status,
-                    pairBy,
-                    createdAt,
-                    statusChangedAt,
-                    pairedAt);
+                return new DeviceCode(
+                    this.productType,
+                    this.id,
+                    this.name,
+                    this.code,
+                    this.deviceId,
+                    this.locationId,
+                    this.status,
+                    this.pairBy,
+                    this.createdAt,
+                    this.statusChangedAt,
+                    this.pairedAt);
             }
         }
     }

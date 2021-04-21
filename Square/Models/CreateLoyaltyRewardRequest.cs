@@ -1,40 +1,49 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class CreateLoyaltyRewardRequest 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// CreateLoyaltyRewardRequest.
+    /// </summary>
+    public class CreateLoyaltyRewardRequest
     {
-        public CreateLoyaltyRewardRequest(Models.LoyaltyReward reward,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CreateLoyaltyRewardRequest"/> class.
+        /// </summary>
+        /// <param name="reward">reward.</param>
+        /// <param name="idempotencyKey">idempotency_key.</param>
+        public CreateLoyaltyRewardRequest(
+            Models.LoyaltyReward reward,
             string idempotencyKey)
         {
-            Reward = reward;
-            IdempotencyKey = idempotencyKey;
+            this.Reward = reward;
+            this.IdempotencyKey = idempotencyKey;
         }
 
         /// <summary>
-        /// Getter for reward
+        /// Represents a contract to redeem loyalty points for a [reward tier]($m/LoyaltyProgramRewardTier) discount. Loyalty rewards can be in an ISSUED, REDEEMED, or DELETED state. For more information, see [Redeem loyalty rewards](https://developer.squareup.com/docs/loyalty-api/overview#redeem-loyalty-rewards).
         /// </summary>
         [JsonProperty("reward")]
         public Models.LoyaltyReward Reward { get; }
 
         /// <summary>
-        /// A unique string that identifies this `CreateLoyaltyReward` request. 
+        /// A unique string that identifies this `CreateLoyaltyReward` request.
         /// Keys can be any valid string, but must be unique for every request.
         /// </summary>
         [JsonProperty("idempotency_key")]
         public string IdempotencyKey { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -44,12 +53,7 @@ namespace Square.Models
             return $"CreateLoyaltyRewardRequest : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Reward = {(Reward == null ? "null" : Reward.ToString())}");
-            toStringOutput.Add($"IdempotencyKey = {(IdempotencyKey == null ? "null" : IdempotencyKey == string.Empty ? "" : IdempotencyKey)}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -63,62 +67,97 @@ namespace Square.Models
             }
 
             return obj is CreateLoyaltyRewardRequest other &&
-                ((Reward == null && other.Reward == null) || (Reward?.Equals(other.Reward) == true)) &&
-                ((IdempotencyKey == null && other.IdempotencyKey == null) || (IdempotencyKey?.Equals(other.IdempotencyKey) == true));
+                ((this.Reward == null && other.Reward == null) || (this.Reward?.Equals(other.Reward) == true)) &&
+                ((this.IdempotencyKey == null && other.IdempotencyKey == null) || (this.IdempotencyKey?.Equals(other.IdempotencyKey) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -767337134;
 
-            if (Reward != null)
+            if (this.Reward != null)
             {
-               hashCode += Reward.GetHashCode();
+               hashCode += this.Reward.GetHashCode();
             }
 
-            if (IdempotencyKey != null)
+            if (this.IdempotencyKey != null)
             {
-               hashCode += IdempotencyKey.GetHashCode();
+               hashCode += this.IdempotencyKey.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Reward = {(this.Reward == null ? "null" : this.Reward.ToString())}");
+            toStringOutput.Add($"this.IdempotencyKey = {(this.IdempotencyKey == null ? "null" : this.IdempotencyKey == string.Empty ? "" : this.IdempotencyKey)}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
-            var builder = new Builder(Reward,
-                IdempotencyKey);
+            var builder = new Builder(
+                this.Reward,
+                this.IdempotencyKey);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private Models.LoyaltyReward reward;
             private string idempotencyKey;
 
-            public Builder(Models.LoyaltyReward reward,
+            public Builder(
+                Models.LoyaltyReward reward,
                 string idempotencyKey)
             {
                 this.reward = reward;
                 this.idempotencyKey = idempotencyKey;
             }
 
+             /// <summary>
+             /// Reward.
+             /// </summary>
+             /// <param name="reward"> reward. </param>
+             /// <returns> Builder. </returns>
             public Builder Reward(Models.LoyaltyReward reward)
             {
                 this.reward = reward;
                 return this;
             }
 
+             /// <summary>
+             /// IdempotencyKey.
+             /// </summary>
+             /// <param name="idempotencyKey"> idempotencyKey. </param>
+             /// <returns> Builder. </returns>
             public Builder IdempotencyKey(string idempotencyKey)
             {
                 this.idempotencyKey = idempotencyKey;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> CreateLoyaltyRewardRequest. </returns>
             public CreateLoyaltyRewardRequest Build()
             {
-                return new CreateLoyaltyRewardRequest(reward,
-                    idempotencyKey);
+                return new CreateLoyaltyRewardRequest(
+                    this.reward,
+                    this.idempotencyKey);
             }
         }
     }

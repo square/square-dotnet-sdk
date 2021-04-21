@@ -1,25 +1,33 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class CustomerQuery 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// CustomerQuery.
+    /// </summary>
+    public class CustomerQuery
     {
-        public CustomerQuery(Models.CustomerFilter filter = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CustomerQuery"/> class.
+        /// </summary>
+        /// <param name="filter">filter.</param>
+        /// <param name="sort">sort.</param>
+        public CustomerQuery(
+            Models.CustomerFilter filter = null,
             Models.CustomerSort sort = null)
         {
-            Filter = filter;
-            Sort = sort;
+            this.Filter = filter;
+            this.Sort = sort;
         }
 
         /// <summary>
@@ -35,6 +43,7 @@ namespace Square.Models
         [JsonProperty("sort", NullValueHandling = NullValueHandling.Ignore)]
         public Models.CustomerSort Sort { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -44,12 +53,7 @@ namespace Square.Models
             return $"CustomerQuery : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Filter = {(Filter == null ? "null" : Filter.ToString())}");
-            toStringOutput.Add($"Sort = {(Sort == null ? "null" : Sort.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -63,58 +67,89 @@ namespace Square.Models
             }
 
             return obj is CustomerQuery other &&
-                ((Filter == null && other.Filter == null) || (Filter?.Equals(other.Filter) == true)) &&
-                ((Sort == null && other.Sort == null) || (Sort?.Equals(other.Sort) == true));
+                ((this.Filter == null && other.Filter == null) || (this.Filter?.Equals(other.Filter) == true)) &&
+                ((this.Sort == null && other.Sort == null) || (this.Sort?.Equals(other.Sort) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 1206368426;
 
-            if (Filter != null)
+            if (this.Filter != null)
             {
-               hashCode += Filter.GetHashCode();
+               hashCode += this.Filter.GetHashCode();
             }
 
-            if (Sort != null)
+            if (this.Sort != null)
             {
-               hashCode += Sort.GetHashCode();
+               hashCode += this.Sort.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Filter = {(this.Filter == null ? "null" : this.Filter.ToString())}");
+            toStringOutput.Add($"this.Sort = {(this.Sort == null ? "null" : this.Sort.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .Filter(Filter)
-                .Sort(Sort);
+                .Filter(this.Filter)
+                .Sort(this.Sort);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private Models.CustomerFilter filter;
             private Models.CustomerSort sort;
 
-
-
+             /// <summary>
+             /// Filter.
+             /// </summary>
+             /// <param name="filter"> filter. </param>
+             /// <returns> Builder. </returns>
             public Builder Filter(Models.CustomerFilter filter)
             {
                 this.filter = filter;
                 return this;
             }
 
+             /// <summary>
+             /// Sort.
+             /// </summary>
+             /// <param name="sort"> sort. </param>
+             /// <returns> Builder. </returns>
             public Builder Sort(Models.CustomerSort sort)
             {
                 this.sort = sort;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> CustomerQuery. </returns>
             public CustomerQuery Build()
             {
-                return new CustomerQuery(filter,
-                    sort);
+                return new CustomerQuery(
+                    this.filter,
+                    this.sort);
             }
         }
     }

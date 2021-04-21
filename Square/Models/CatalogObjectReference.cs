@@ -1,25 +1,33 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class CatalogObjectReference 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// CatalogObjectReference.
+    /// </summary>
+    public class CatalogObjectReference
     {
-        public CatalogObjectReference(string objectId = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CatalogObjectReference"/> class.
+        /// </summary>
+        /// <param name="objectId">object_id.</param>
+        /// <param name="catalogVersion">catalog_version.</param>
+        public CatalogObjectReference(
+            string objectId = null,
             long? catalogVersion = null)
         {
-            ObjectId = objectId;
-            CatalogVersion = catalogVersion;
+            this.ObjectId = objectId;
+            this.CatalogVersion = catalogVersion;
         }
 
         /// <summary>
@@ -34,6 +42,7 @@ namespace Square.Models
         [JsonProperty("catalog_version", NullValueHandling = NullValueHandling.Ignore)]
         public long? CatalogVersion { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -43,12 +52,7 @@ namespace Square.Models
             return $"CatalogObjectReference : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"ObjectId = {(ObjectId == null ? "null" : ObjectId == string.Empty ? "" : ObjectId)}");
-            toStringOutput.Add($"CatalogVersion = {(CatalogVersion == null ? "null" : CatalogVersion.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -62,58 +66,89 @@ namespace Square.Models
             }
 
             return obj is CatalogObjectReference other &&
-                ((ObjectId == null && other.ObjectId == null) || (ObjectId?.Equals(other.ObjectId) == true)) &&
-                ((CatalogVersion == null && other.CatalogVersion == null) || (CatalogVersion?.Equals(other.CatalogVersion) == true));
+                ((this.ObjectId == null && other.ObjectId == null) || (this.ObjectId?.Equals(other.ObjectId) == true)) &&
+                ((this.CatalogVersion == null && other.CatalogVersion == null) || (this.CatalogVersion?.Equals(other.CatalogVersion) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -703569584;
 
-            if (ObjectId != null)
+            if (this.ObjectId != null)
             {
-               hashCode += ObjectId.GetHashCode();
+               hashCode += this.ObjectId.GetHashCode();
             }
 
-            if (CatalogVersion != null)
+            if (this.CatalogVersion != null)
             {
-               hashCode += CatalogVersion.GetHashCode();
+               hashCode += this.CatalogVersion.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.ObjectId = {(this.ObjectId == null ? "null" : this.ObjectId == string.Empty ? "" : this.ObjectId)}");
+            toStringOutput.Add($"this.CatalogVersion = {(this.CatalogVersion == null ? "null" : this.CatalogVersion.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .ObjectId(ObjectId)
-                .CatalogVersion(CatalogVersion);
+                .ObjectId(this.ObjectId)
+                .CatalogVersion(this.CatalogVersion);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string objectId;
             private long? catalogVersion;
 
-
-
+             /// <summary>
+             /// ObjectId.
+             /// </summary>
+             /// <param name="objectId"> objectId. </param>
+             /// <returns> Builder. </returns>
             public Builder ObjectId(string objectId)
             {
                 this.objectId = objectId;
                 return this;
             }
 
+             /// <summary>
+             /// CatalogVersion.
+             /// </summary>
+             /// <param name="catalogVersion"> catalogVersion. </param>
+             /// <returns> Builder. </returns>
             public Builder CatalogVersion(long? catalogVersion)
             {
                 this.catalogVersion = catalogVersion;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> CatalogObjectReference. </returns>
             public CatalogObjectReference Build()
             {
-                return new CatalogObjectReference(objectId,
-                    catalogVersion);
+                return new CatalogObjectReference(
+                    this.objectId,
+                    this.catalogVersion);
             }
         }
     }

@@ -1,25 +1,33 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class SearchTeamMembersFilter 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// SearchTeamMembersFilter.
+    /// </summary>
+    public class SearchTeamMembersFilter
     {
-        public SearchTeamMembersFilter(IList<string> locationIds = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SearchTeamMembersFilter"/> class.
+        /// </summary>
+        /// <param name="locationIds">location_ids.</param>
+        /// <param name="status">status.</param>
+        public SearchTeamMembersFilter(
+            IList<string> locationIds = null,
             string status = null)
         {
-            LocationIds = locationIds;
-            Status = status;
+            this.LocationIds = locationIds;
+            this.Status = status;
         }
 
         /// <summary>
@@ -35,6 +43,7 @@ namespace Square.Models
         [JsonProperty("status", NullValueHandling = NullValueHandling.Ignore)]
         public string Status { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -44,12 +53,7 @@ namespace Square.Models
             return $"SearchTeamMembersFilter : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"LocationIds = {(LocationIds == null ? "null" : $"[{ string.Join(", ", LocationIds)} ]")}");
-            toStringOutput.Add($"Status = {(Status == null ? "null" : Status.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -63,58 +67,89 @@ namespace Square.Models
             }
 
             return obj is SearchTeamMembersFilter other &&
-                ((LocationIds == null && other.LocationIds == null) || (LocationIds?.Equals(other.LocationIds) == true)) &&
-                ((Status == null && other.Status == null) || (Status?.Equals(other.Status) == true));
+                ((this.LocationIds == null && other.LocationIds == null) || (this.LocationIds?.Equals(other.LocationIds) == true)) &&
+                ((this.Status == null && other.Status == null) || (this.Status?.Equals(other.Status) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 2068988289;
 
-            if (LocationIds != null)
+            if (this.LocationIds != null)
             {
-               hashCode += LocationIds.GetHashCode();
+               hashCode += this.LocationIds.GetHashCode();
             }
 
-            if (Status != null)
+            if (this.Status != null)
             {
-               hashCode += Status.GetHashCode();
+               hashCode += this.Status.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.LocationIds = {(this.LocationIds == null ? "null" : $"[{string.Join(", ", this.LocationIds)} ]")}");
+            toStringOutput.Add($"this.Status = {(this.Status == null ? "null" : this.Status.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .LocationIds(LocationIds)
-                .Status(Status);
+                .LocationIds(this.LocationIds)
+                .Status(this.Status);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private IList<string> locationIds;
             private string status;
 
-
-
+             /// <summary>
+             /// LocationIds.
+             /// </summary>
+             /// <param name="locationIds"> locationIds. </param>
+             /// <returns> Builder. </returns>
             public Builder LocationIds(IList<string> locationIds)
             {
                 this.locationIds = locationIds;
                 return this;
             }
 
+             /// <summary>
+             /// Status.
+             /// </summary>
+             /// <param name="status"> status. </param>
+             /// <returns> Builder. </returns>
             public Builder Status(string status)
             {
                 this.status = status;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> SearchTeamMembersFilter. </returns>
             public SearchTeamMembersFilter Build()
             {
-                return new SearchTeamMembersFilter(locationIds,
-                    status);
+                return new SearchTeamMembersFilter(
+                    this.locationIds,
+                    this.status);
             }
         }
     }

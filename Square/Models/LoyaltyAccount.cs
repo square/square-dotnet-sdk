@@ -1,39 +1,57 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class LoyaltyAccount 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// LoyaltyAccount.
+    /// </summary>
+    public class LoyaltyAccount
     {
-        public LoyaltyAccount(IList<Models.LoyaltyAccountMapping> mappings,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LoyaltyAccount"/> class.
+        /// </summary>
+        /// <param name="programId">program_id.</param>
+        /// <param name="id">id.</param>
+        /// <param name="mappings">mappings.</param>
+        /// <param name="balance">balance.</param>
+        /// <param name="lifetimePoints">lifetime_points.</param>
+        /// <param name="customerId">customer_id.</param>
+        /// <param name="enrolledAt">enrolled_at.</param>
+        /// <param name="createdAt">created_at.</param>
+        /// <param name="updatedAt">updated_at.</param>
+        /// <param name="mapping">mapping.</param>
+        public LoyaltyAccount(
             string programId,
             string id = null,
+            IList<Models.LoyaltyAccountMapping> mappings = null,
             int? balance = null,
             int? lifetimePoints = null,
             string customerId = null,
             string enrolledAt = null,
             string createdAt = null,
-            string updatedAt = null)
+            string updatedAt = null,
+            Models.LoyaltyAccountMapping mapping = null)
         {
-            Id = id;
-            Mappings = mappings;
-            ProgramId = programId;
-            Balance = balance;
-            LifetimePoints = lifetimePoints;
-            CustomerId = customerId;
-            EnrolledAt = enrolledAt;
-            CreatedAt = createdAt;
-            UpdatedAt = updatedAt;
+            this.Id = id;
+            this.Mappings = mappings;
+            this.ProgramId = programId;
+            this.Balance = balance;
+            this.LifetimePoints = lifetimePoints;
+            this.CustomerId = customerId;
+            this.EnrolledAt = enrolledAt;
+            this.CreatedAt = createdAt;
+            this.UpdatedAt = updatedAt;
+            this.Mapping = mapping;
         }
 
         /// <summary>
@@ -43,21 +61,24 @@ namespace Square.Models
         public string Id { get; }
 
         /// <summary>
-        /// The list of mappings that the account is associated with. 
-        /// Currently, a buyer can only be mapped to a loyalty account using 
+        /// The list of mappings that the account is associated with.
+        /// Currently, a buyer can only be mapped to a loyalty account using
         /// a phone number. Therefore, the list can only have one mapping.
+        /// One of the following is required when creating a loyalty account:
+        /// - (Preferred) The `mapping` field, with the buyer's phone number specified in the `phone_number` field.
+        /// - This `mappings` field.
         /// </summary>
-        [JsonProperty("mappings")]
+        [JsonProperty("mappings", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.LoyaltyAccountMapping> Mappings { get; }
 
         /// <summary>
-        /// The Square-assigned ID of the [loyalty program](#type-LoyaltyProgram) to which the account belongs.
+        /// The Square-assigned ID of the [loyalty program]($m/LoyaltyProgram) to which the account belongs.
         /// </summary>
         [JsonProperty("program_id")]
         public string ProgramId { get; }
 
         /// <summary>
-        /// The available point balance in the loyalty account.  
+        /// The available point balance in the loyalty account.
         /// Your application should be able to handle loyalty accounts that have a negative point balance (`balance` is less than 0). This might occur if a seller makes a manual adjustment or as a result of a refund or exchange.
         /// </summary>
         [JsonProperty("balance", NullValueHandling = NullValueHandling.Ignore)]
@@ -70,7 +91,7 @@ namespace Square.Models
         public int? LifetimePoints { get; }
 
         /// <summary>
-        /// The Square-assigned ID of the [customer](#type-Customer) that is associated with the account.
+        /// The Square-assigned ID of the [customer]($m/Customer) that is associated with the account.
         /// </summary>
         [JsonProperty("customer_id", NullValueHandling = NullValueHandling.Ignore)]
         public string CustomerId { get; }
@@ -93,6 +114,15 @@ namespace Square.Models
         [JsonProperty("updated_at", NullValueHandling = NullValueHandling.Ignore)]
         public string UpdatedAt { get; }
 
+        /// <summary>
+        /// Represents the mapping that associates a loyalty account with a buyer.
+        /// Currently, a loyalty account can only be mapped to a buyer by phone number. For more information, see
+        /// [Loyalty Overview](https://developer.squareup.com/docs/loyalty/overview).
+        /// </summary>
+        [JsonProperty("mapping", NullValueHandling = NullValueHandling.Ignore)]
+        public Models.LoyaltyAccountMapping Mapping { get; }
+
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -102,19 +132,7 @@ namespace Square.Models
             return $"LoyaltyAccount : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Id = {(Id == null ? "null" : Id == string.Empty ? "" : Id)}");
-            toStringOutput.Add($"Mappings = {(Mappings == null ? "null" : $"[{ string.Join(", ", Mappings)} ]")}");
-            toStringOutput.Add($"ProgramId = {(ProgramId == null ? "null" : ProgramId == string.Empty ? "" : ProgramId)}");
-            toStringOutput.Add($"Balance = {(Balance == null ? "null" : Balance.ToString())}");
-            toStringOutput.Add($"LifetimePoints = {(LifetimePoints == null ? "null" : LifetimePoints.ToString())}");
-            toStringOutput.Add($"CustomerId = {(CustomerId == null ? "null" : CustomerId == string.Empty ? "" : CustomerId)}");
-            toStringOutput.Add($"EnrolledAt = {(EnrolledAt == null ? "null" : EnrolledAt == string.Empty ? "" : EnrolledAt)}");
-            toStringOutput.Add($"CreatedAt = {(CreatedAt == null ? "null" : CreatedAt == string.Empty ? "" : CreatedAt)}");
-            toStringOutput.Add($"UpdatedAt = {(UpdatedAt == null ? "null" : UpdatedAt == string.Empty ? "" : UpdatedAt)}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -128,167 +146,263 @@ namespace Square.Models
             }
 
             return obj is LoyaltyAccount other &&
-                ((Id == null && other.Id == null) || (Id?.Equals(other.Id) == true)) &&
-                ((Mappings == null && other.Mappings == null) || (Mappings?.Equals(other.Mappings) == true)) &&
-                ((ProgramId == null && other.ProgramId == null) || (ProgramId?.Equals(other.ProgramId) == true)) &&
-                ((Balance == null && other.Balance == null) || (Balance?.Equals(other.Balance) == true)) &&
-                ((LifetimePoints == null && other.LifetimePoints == null) || (LifetimePoints?.Equals(other.LifetimePoints) == true)) &&
-                ((CustomerId == null && other.CustomerId == null) || (CustomerId?.Equals(other.CustomerId) == true)) &&
-                ((EnrolledAt == null && other.EnrolledAt == null) || (EnrolledAt?.Equals(other.EnrolledAt) == true)) &&
-                ((CreatedAt == null && other.CreatedAt == null) || (CreatedAt?.Equals(other.CreatedAt) == true)) &&
-                ((UpdatedAt == null && other.UpdatedAt == null) || (UpdatedAt?.Equals(other.UpdatedAt) == true));
+                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
+                ((this.Mappings == null && other.Mappings == null) || (this.Mappings?.Equals(other.Mappings) == true)) &&
+                ((this.ProgramId == null && other.ProgramId == null) || (this.ProgramId?.Equals(other.ProgramId) == true)) &&
+                ((this.Balance == null && other.Balance == null) || (this.Balance?.Equals(other.Balance) == true)) &&
+                ((this.LifetimePoints == null && other.LifetimePoints == null) || (this.LifetimePoints?.Equals(other.LifetimePoints) == true)) &&
+                ((this.CustomerId == null && other.CustomerId == null) || (this.CustomerId?.Equals(other.CustomerId) == true)) &&
+                ((this.EnrolledAt == null && other.EnrolledAt == null) || (this.EnrolledAt?.Equals(other.EnrolledAt) == true)) &&
+                ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true)) &&
+                ((this.UpdatedAt == null && other.UpdatedAt == null) || (this.UpdatedAt?.Equals(other.UpdatedAt) == true)) &&
+                ((this.Mapping == null && other.Mapping == null) || (this.Mapping?.Equals(other.Mapping) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -823121408;
+            int hashCode = 1177034769;
 
-            if (Id != null)
+            if (this.Id != null)
             {
-               hashCode += Id.GetHashCode();
+               hashCode += this.Id.GetHashCode();
             }
 
-            if (Mappings != null)
+            if (this.Mappings != null)
             {
-               hashCode += Mappings.GetHashCode();
+               hashCode += this.Mappings.GetHashCode();
             }
 
-            if (ProgramId != null)
+            if (this.ProgramId != null)
             {
-               hashCode += ProgramId.GetHashCode();
+               hashCode += this.ProgramId.GetHashCode();
             }
 
-            if (Balance != null)
+            if (this.Balance != null)
             {
-               hashCode += Balance.GetHashCode();
+               hashCode += this.Balance.GetHashCode();
             }
 
-            if (LifetimePoints != null)
+            if (this.LifetimePoints != null)
             {
-               hashCode += LifetimePoints.GetHashCode();
+               hashCode += this.LifetimePoints.GetHashCode();
             }
 
-            if (CustomerId != null)
+            if (this.CustomerId != null)
             {
-               hashCode += CustomerId.GetHashCode();
+               hashCode += this.CustomerId.GetHashCode();
             }
 
-            if (EnrolledAt != null)
+            if (this.EnrolledAt != null)
             {
-               hashCode += EnrolledAt.GetHashCode();
+               hashCode += this.EnrolledAt.GetHashCode();
             }
 
-            if (CreatedAt != null)
+            if (this.CreatedAt != null)
             {
-               hashCode += CreatedAt.GetHashCode();
+               hashCode += this.CreatedAt.GetHashCode();
             }
 
-            if (UpdatedAt != null)
+            if (this.UpdatedAt != null)
             {
-               hashCode += UpdatedAt.GetHashCode();
+               hashCode += this.UpdatedAt.GetHashCode();
+            }
+
+            if (this.Mapping != null)
+            {
+               hashCode += this.Mapping.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id == string.Empty ? "" : this.Id)}");
+            toStringOutput.Add($"this.Mappings = {(this.Mappings == null ? "null" : $"[{string.Join(", ", this.Mappings)} ]")}");
+            toStringOutput.Add($"this.ProgramId = {(this.ProgramId == null ? "null" : this.ProgramId == string.Empty ? "" : this.ProgramId)}");
+            toStringOutput.Add($"this.Balance = {(this.Balance == null ? "null" : this.Balance.ToString())}");
+            toStringOutput.Add($"this.LifetimePoints = {(this.LifetimePoints == null ? "null" : this.LifetimePoints.ToString())}");
+            toStringOutput.Add($"this.CustomerId = {(this.CustomerId == null ? "null" : this.CustomerId == string.Empty ? "" : this.CustomerId)}");
+            toStringOutput.Add($"this.EnrolledAt = {(this.EnrolledAt == null ? "null" : this.EnrolledAt == string.Empty ? "" : this.EnrolledAt)}");
+            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt == string.Empty ? "" : this.CreatedAt)}");
+            toStringOutput.Add($"this.UpdatedAt = {(this.UpdatedAt == null ? "null" : this.UpdatedAt == string.Empty ? "" : this.UpdatedAt)}");
+            toStringOutput.Add($"this.Mapping = {(this.Mapping == null ? "null" : this.Mapping.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
-            var builder = new Builder(Mappings,
-                ProgramId)
-                .Id(Id)
-                .Balance(Balance)
-                .LifetimePoints(LifetimePoints)
-                .CustomerId(CustomerId)
-                .EnrolledAt(EnrolledAt)
-                .CreatedAt(CreatedAt)
-                .UpdatedAt(UpdatedAt);
+            var builder = new Builder(
+                this.ProgramId)
+                .Id(this.Id)
+                .Mappings(this.Mappings)
+                .Balance(this.Balance)
+                .LifetimePoints(this.LifetimePoints)
+                .CustomerId(this.CustomerId)
+                .EnrolledAt(this.EnrolledAt)
+                .CreatedAt(this.CreatedAt)
+                .UpdatedAt(this.UpdatedAt)
+                .Mapping(this.Mapping);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
-            private IList<Models.LoyaltyAccountMapping> mappings;
             private string programId;
             private string id;
+            private IList<Models.LoyaltyAccountMapping> mappings;
             private int? balance;
             private int? lifetimePoints;
             private string customerId;
             private string enrolledAt;
             private string createdAt;
             private string updatedAt;
+            private Models.LoyaltyAccountMapping mapping;
 
-            public Builder(IList<Models.LoyaltyAccountMapping> mappings,
+            public Builder(
                 string programId)
             {
-                this.mappings = mappings;
                 this.programId = programId;
             }
 
-            public Builder Mappings(IList<Models.LoyaltyAccountMapping> mappings)
-            {
-                this.mappings = mappings;
-                return this;
-            }
-
+             /// <summary>
+             /// ProgramId.
+             /// </summary>
+             /// <param name="programId"> programId. </param>
+             /// <returns> Builder. </returns>
             public Builder ProgramId(string programId)
             {
                 this.programId = programId;
                 return this;
             }
 
+             /// <summary>
+             /// Id.
+             /// </summary>
+             /// <param name="id"> id. </param>
+             /// <returns> Builder. </returns>
             public Builder Id(string id)
             {
                 this.id = id;
                 return this;
             }
 
+             /// <summary>
+             /// Mappings.
+             /// </summary>
+             /// <param name="mappings"> mappings. </param>
+             /// <returns> Builder. </returns>
+            public Builder Mappings(IList<Models.LoyaltyAccountMapping> mappings)
+            {
+                this.mappings = mappings;
+                return this;
+            }
+
+             /// <summary>
+             /// Balance.
+             /// </summary>
+             /// <param name="balance"> balance. </param>
+             /// <returns> Builder. </returns>
             public Builder Balance(int? balance)
             {
                 this.balance = balance;
                 return this;
             }
 
+             /// <summary>
+             /// LifetimePoints.
+             /// </summary>
+             /// <param name="lifetimePoints"> lifetimePoints. </param>
+             /// <returns> Builder. </returns>
             public Builder LifetimePoints(int? lifetimePoints)
             {
                 this.lifetimePoints = lifetimePoints;
                 return this;
             }
 
+             /// <summary>
+             /// CustomerId.
+             /// </summary>
+             /// <param name="customerId"> customerId. </param>
+             /// <returns> Builder. </returns>
             public Builder CustomerId(string customerId)
             {
                 this.customerId = customerId;
                 return this;
             }
 
+             /// <summary>
+             /// EnrolledAt.
+             /// </summary>
+             /// <param name="enrolledAt"> enrolledAt. </param>
+             /// <returns> Builder. </returns>
             public Builder EnrolledAt(string enrolledAt)
             {
                 this.enrolledAt = enrolledAt;
                 return this;
             }
 
+             /// <summary>
+             /// CreatedAt.
+             /// </summary>
+             /// <param name="createdAt"> createdAt. </param>
+             /// <returns> Builder. </returns>
             public Builder CreatedAt(string createdAt)
             {
                 this.createdAt = createdAt;
                 return this;
             }
 
+             /// <summary>
+             /// UpdatedAt.
+             /// </summary>
+             /// <param name="updatedAt"> updatedAt. </param>
+             /// <returns> Builder. </returns>
             public Builder UpdatedAt(string updatedAt)
             {
                 this.updatedAt = updatedAt;
                 return this;
             }
 
+             /// <summary>
+             /// Mapping.
+             /// </summary>
+             /// <param name="mapping"> mapping. </param>
+             /// <returns> Builder. </returns>
+            public Builder Mapping(Models.LoyaltyAccountMapping mapping)
+            {
+                this.mapping = mapping;
+                return this;
+            }
+
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> LoyaltyAccount. </returns>
             public LoyaltyAccount Build()
             {
-                return new LoyaltyAccount(mappings,
-                    programId,
-                    id,
-                    balance,
-                    lifetimePoints,
-                    customerId,
-                    enrolledAt,
-                    createdAt,
-                    updatedAt);
+                return new LoyaltyAccount(
+                    this.programId,
+                    this.id,
+                    this.mappings,
+                    this.balance,
+                    this.lifetimePoints,
+                    this.customerId,
+                    this.enrolledAt,
+                    this.createdAt,
+                    this.updatedAt,
+                    this.mapping);
             }
         }
     }

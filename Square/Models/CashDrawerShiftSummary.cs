@@ -1,21 +1,36 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class CashDrawerShiftSummary 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// CashDrawerShiftSummary.
+    /// </summary>
+    public class CashDrawerShiftSummary
     {
-        public CashDrawerShiftSummary(string id = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CashDrawerShiftSummary"/> class.
+        /// </summary>
+        /// <param name="id">id.</param>
+        /// <param name="state">state.</param>
+        /// <param name="openedAt">opened_at.</param>
+        /// <param name="endedAt">ended_at.</param>
+        /// <param name="closedAt">closed_at.</param>
+        /// <param name="description">description.</param>
+        /// <param name="openedCashMoney">opened_cash_money.</param>
+        /// <param name="expectedCashMoney">expected_cash_money.</param>
+        /// <param name="closedCashMoney">closed_cash_money.</param>
+        public CashDrawerShiftSummary(
+            string id = null,
             string state = null,
             string openedAt = null,
             string endedAt = null,
@@ -25,15 +40,15 @@ namespace Square.Models
             Models.Money expectedCashMoney = null,
             Models.Money closedCashMoney = null)
         {
-            Id = id;
-            State = state;
-            OpenedAt = openedAt;
-            EndedAt = endedAt;
-            ClosedAt = closedAt;
-            Description = description;
-            OpenedCashMoney = openedCashMoney;
-            ExpectedCashMoney = expectedCashMoney;
-            ClosedCashMoney = closedCashMoney;
+            this.Id = id;
+            this.State = state;
+            this.OpenedAt = openedAt;
+            this.EndedAt = endedAt;
+            this.ClosedAt = closedAt;
+            this.Description = description;
+            this.OpenedCashMoney = openedCashMoney;
+            this.ExpectedCashMoney = expectedCashMoney;
+            this.ClosedCashMoney = closedCashMoney;
         }
 
         /// <summary>
@@ -105,6 +120,7 @@ namespace Square.Models
         [JsonProperty("closed_cash_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Money ClosedCashMoney { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -114,19 +130,7 @@ namespace Square.Models
             return $"CashDrawerShiftSummary : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Id = {(Id == null ? "null" : Id == string.Empty ? "" : Id)}");
-            toStringOutput.Add($"State = {(State == null ? "null" : State.ToString())}");
-            toStringOutput.Add($"OpenedAt = {(OpenedAt == null ? "null" : OpenedAt == string.Empty ? "" : OpenedAt)}");
-            toStringOutput.Add($"EndedAt = {(EndedAt == null ? "null" : EndedAt == string.Empty ? "" : EndedAt)}");
-            toStringOutput.Add($"ClosedAt = {(ClosedAt == null ? "null" : ClosedAt == string.Empty ? "" : ClosedAt)}");
-            toStringOutput.Add($"Description = {(Description == null ? "null" : Description == string.Empty ? "" : Description)}");
-            toStringOutput.Add($"OpenedCashMoney = {(OpenedCashMoney == null ? "null" : OpenedCashMoney.ToString())}");
-            toStringOutput.Add($"ExpectedCashMoney = {(ExpectedCashMoney == null ? "null" : ExpectedCashMoney.ToString())}");
-            toStringOutput.Add($"ClosedCashMoney = {(ClosedCashMoney == null ? "null" : ClosedCashMoney.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -140,84 +144,109 @@ namespace Square.Models
             }
 
             return obj is CashDrawerShiftSummary other &&
-                ((Id == null && other.Id == null) || (Id?.Equals(other.Id) == true)) &&
-                ((State == null && other.State == null) || (State?.Equals(other.State) == true)) &&
-                ((OpenedAt == null && other.OpenedAt == null) || (OpenedAt?.Equals(other.OpenedAt) == true)) &&
-                ((EndedAt == null && other.EndedAt == null) || (EndedAt?.Equals(other.EndedAt) == true)) &&
-                ((ClosedAt == null && other.ClosedAt == null) || (ClosedAt?.Equals(other.ClosedAt) == true)) &&
-                ((Description == null && other.Description == null) || (Description?.Equals(other.Description) == true)) &&
-                ((OpenedCashMoney == null && other.OpenedCashMoney == null) || (OpenedCashMoney?.Equals(other.OpenedCashMoney) == true)) &&
-                ((ExpectedCashMoney == null && other.ExpectedCashMoney == null) || (ExpectedCashMoney?.Equals(other.ExpectedCashMoney) == true)) &&
-                ((ClosedCashMoney == null && other.ClosedCashMoney == null) || (ClosedCashMoney?.Equals(other.ClosedCashMoney) == true));
+                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
+                ((this.State == null && other.State == null) || (this.State?.Equals(other.State) == true)) &&
+                ((this.OpenedAt == null && other.OpenedAt == null) || (this.OpenedAt?.Equals(other.OpenedAt) == true)) &&
+                ((this.EndedAt == null && other.EndedAt == null) || (this.EndedAt?.Equals(other.EndedAt) == true)) &&
+                ((this.ClosedAt == null && other.ClosedAt == null) || (this.ClosedAt?.Equals(other.ClosedAt) == true)) &&
+                ((this.Description == null && other.Description == null) || (this.Description?.Equals(other.Description) == true)) &&
+                ((this.OpenedCashMoney == null && other.OpenedCashMoney == null) || (this.OpenedCashMoney?.Equals(other.OpenedCashMoney) == true)) &&
+                ((this.ExpectedCashMoney == null && other.ExpectedCashMoney == null) || (this.ExpectedCashMoney?.Equals(other.ExpectedCashMoney) == true)) &&
+                ((this.ClosedCashMoney == null && other.ClosedCashMoney == null) || (this.ClosedCashMoney?.Equals(other.ClosedCashMoney) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -323366853;
 
-            if (Id != null)
+            if (this.Id != null)
             {
-               hashCode += Id.GetHashCode();
+               hashCode += this.Id.GetHashCode();
             }
 
-            if (State != null)
+            if (this.State != null)
             {
-               hashCode += State.GetHashCode();
+               hashCode += this.State.GetHashCode();
             }
 
-            if (OpenedAt != null)
+            if (this.OpenedAt != null)
             {
-               hashCode += OpenedAt.GetHashCode();
+               hashCode += this.OpenedAt.GetHashCode();
             }
 
-            if (EndedAt != null)
+            if (this.EndedAt != null)
             {
-               hashCode += EndedAt.GetHashCode();
+               hashCode += this.EndedAt.GetHashCode();
             }
 
-            if (ClosedAt != null)
+            if (this.ClosedAt != null)
             {
-               hashCode += ClosedAt.GetHashCode();
+               hashCode += this.ClosedAt.GetHashCode();
             }
 
-            if (Description != null)
+            if (this.Description != null)
             {
-               hashCode += Description.GetHashCode();
+               hashCode += this.Description.GetHashCode();
             }
 
-            if (OpenedCashMoney != null)
+            if (this.OpenedCashMoney != null)
             {
-               hashCode += OpenedCashMoney.GetHashCode();
+               hashCode += this.OpenedCashMoney.GetHashCode();
             }
 
-            if (ExpectedCashMoney != null)
+            if (this.ExpectedCashMoney != null)
             {
-               hashCode += ExpectedCashMoney.GetHashCode();
+               hashCode += this.ExpectedCashMoney.GetHashCode();
             }
 
-            if (ClosedCashMoney != null)
+            if (this.ClosedCashMoney != null)
             {
-               hashCode += ClosedCashMoney.GetHashCode();
+               hashCode += this.ClosedCashMoney.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id == string.Empty ? "" : this.Id)}");
+            toStringOutput.Add($"this.State = {(this.State == null ? "null" : this.State.ToString())}");
+            toStringOutput.Add($"this.OpenedAt = {(this.OpenedAt == null ? "null" : this.OpenedAt == string.Empty ? "" : this.OpenedAt)}");
+            toStringOutput.Add($"this.EndedAt = {(this.EndedAt == null ? "null" : this.EndedAt == string.Empty ? "" : this.EndedAt)}");
+            toStringOutput.Add($"this.ClosedAt = {(this.ClosedAt == null ? "null" : this.ClosedAt == string.Empty ? "" : this.ClosedAt)}");
+            toStringOutput.Add($"this.Description = {(this.Description == null ? "null" : this.Description == string.Empty ? "" : this.Description)}");
+            toStringOutput.Add($"this.OpenedCashMoney = {(this.OpenedCashMoney == null ? "null" : this.OpenedCashMoney.ToString())}");
+            toStringOutput.Add($"this.ExpectedCashMoney = {(this.ExpectedCashMoney == null ? "null" : this.ExpectedCashMoney.ToString())}");
+            toStringOutput.Add($"this.ClosedCashMoney = {(this.ClosedCashMoney == null ? "null" : this.ClosedCashMoney.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .Id(Id)
-                .State(State)
-                .OpenedAt(OpenedAt)
-                .EndedAt(EndedAt)
-                .ClosedAt(ClosedAt)
-                .Description(Description)
-                .OpenedCashMoney(OpenedCashMoney)
-                .ExpectedCashMoney(ExpectedCashMoney)
-                .ClosedCashMoney(ClosedCashMoney);
+                .Id(this.Id)
+                .State(this.State)
+                .OpenedAt(this.OpenedAt)
+                .EndedAt(this.EndedAt)
+                .ClosedAt(this.ClosedAt)
+                .Description(this.Description)
+                .OpenedCashMoney(this.OpenedCashMoney)
+                .ExpectedCashMoney(this.ExpectedCashMoney)
+                .ClosedCashMoney(this.ClosedCashMoney);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string id;
@@ -230,73 +259,121 @@ namespace Square.Models
             private Models.Money expectedCashMoney;
             private Models.Money closedCashMoney;
 
-
-
+             /// <summary>
+             /// Id.
+             /// </summary>
+             /// <param name="id"> id. </param>
+             /// <returns> Builder. </returns>
             public Builder Id(string id)
             {
                 this.id = id;
                 return this;
             }
 
+             /// <summary>
+             /// State.
+             /// </summary>
+             /// <param name="state"> state. </param>
+             /// <returns> Builder. </returns>
             public Builder State(string state)
             {
                 this.state = state;
                 return this;
             }
 
+             /// <summary>
+             /// OpenedAt.
+             /// </summary>
+             /// <param name="openedAt"> openedAt. </param>
+             /// <returns> Builder. </returns>
             public Builder OpenedAt(string openedAt)
             {
                 this.openedAt = openedAt;
                 return this;
             }
 
+             /// <summary>
+             /// EndedAt.
+             /// </summary>
+             /// <param name="endedAt"> endedAt. </param>
+             /// <returns> Builder. </returns>
             public Builder EndedAt(string endedAt)
             {
                 this.endedAt = endedAt;
                 return this;
             }
 
+             /// <summary>
+             /// ClosedAt.
+             /// </summary>
+             /// <param name="closedAt"> closedAt. </param>
+             /// <returns> Builder. </returns>
             public Builder ClosedAt(string closedAt)
             {
                 this.closedAt = closedAt;
                 return this;
             }
 
+             /// <summary>
+             /// Description.
+             /// </summary>
+             /// <param name="description"> description. </param>
+             /// <returns> Builder. </returns>
             public Builder Description(string description)
             {
                 this.description = description;
                 return this;
             }
 
+             /// <summary>
+             /// OpenedCashMoney.
+             /// </summary>
+             /// <param name="openedCashMoney"> openedCashMoney. </param>
+             /// <returns> Builder. </returns>
             public Builder OpenedCashMoney(Models.Money openedCashMoney)
             {
                 this.openedCashMoney = openedCashMoney;
                 return this;
             }
 
+             /// <summary>
+             /// ExpectedCashMoney.
+             /// </summary>
+             /// <param name="expectedCashMoney"> expectedCashMoney. </param>
+             /// <returns> Builder. </returns>
             public Builder ExpectedCashMoney(Models.Money expectedCashMoney)
             {
                 this.expectedCashMoney = expectedCashMoney;
                 return this;
             }
 
+             /// <summary>
+             /// ClosedCashMoney.
+             /// </summary>
+             /// <param name="closedCashMoney"> closedCashMoney. </param>
+             /// <returns> Builder. </returns>
             public Builder ClosedCashMoney(Models.Money closedCashMoney)
             {
                 this.closedCashMoney = closedCashMoney;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> CashDrawerShiftSummary. </returns>
             public CashDrawerShiftSummary Build()
             {
-                return new CashDrawerShiftSummary(id,
-                    state,
-                    openedAt,
-                    endedAt,
-                    closedAt,
-                    description,
-                    openedCashMoney,
-                    expectedCashMoney,
-                    closedCashMoney);
+                return new CashDrawerShiftSummary(
+                    this.id,
+                    this.state,
+                    this.openedAt,
+                    this.endedAt,
+                    this.closedAt,
+                    this.description,
+                    this.openedCashMoney,
+                    this.expectedCashMoney,
+                    this.closedCashMoney);
             }
         }
     }

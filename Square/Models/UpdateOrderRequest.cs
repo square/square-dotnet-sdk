@@ -1,27 +1,36 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class UpdateOrderRequest 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// UpdateOrderRequest.
+    /// </summary>
+    public class UpdateOrderRequest
     {
-        public UpdateOrderRequest(Models.Order order = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UpdateOrderRequest"/> class.
+        /// </summary>
+        /// <param name="order">order.</param>
+        /// <param name="fieldsToClear">fields_to_clear.</param>
+        /// <param name="idempotencyKey">idempotency_key.</param>
+        public UpdateOrderRequest(
+            Models.Order order = null,
             IList<string> fieldsToClear = null,
             string idempotencyKey = null)
         {
-            Order = order;
-            FieldsToClear = fieldsToClear;
-            IdempotencyKey = idempotencyKey;
+            this.Order = order;
+            this.FieldsToClear = fieldsToClear;
+            this.IdempotencyKey = idempotencyKey;
         }
 
         /// <summary>
@@ -53,6 +62,7 @@ namespace Square.Models
         [JsonProperty("idempotency_key", NullValueHandling = NullValueHandling.Ignore)]
         public string IdempotencyKey { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -62,13 +72,7 @@ namespace Square.Models
             return $"UpdateOrderRequest : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Order = {(Order == null ? "null" : Order.ToString())}");
-            toStringOutput.Add($"FieldsToClear = {(FieldsToClear == null ? "null" : $"[{ string.Join(", ", FieldsToClear)} ]")}");
-            toStringOutput.Add($"IdempotencyKey = {(IdempotencyKey == null ? "null" : IdempotencyKey == string.Empty ? "" : IdempotencyKey)}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -82,73 +86,110 @@ namespace Square.Models
             }
 
             return obj is UpdateOrderRequest other &&
-                ((Order == null && other.Order == null) || (Order?.Equals(other.Order) == true)) &&
-                ((FieldsToClear == null && other.FieldsToClear == null) || (FieldsToClear?.Equals(other.FieldsToClear) == true)) &&
-                ((IdempotencyKey == null && other.IdempotencyKey == null) || (IdempotencyKey?.Equals(other.IdempotencyKey) == true));
+                ((this.Order == null && other.Order == null) || (this.Order?.Equals(other.Order) == true)) &&
+                ((this.FieldsToClear == null && other.FieldsToClear == null) || (this.FieldsToClear?.Equals(other.FieldsToClear) == true)) &&
+                ((this.IdempotencyKey == null && other.IdempotencyKey == null) || (this.IdempotencyKey?.Equals(other.IdempotencyKey) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1953116001;
 
-            if (Order != null)
+            if (this.Order != null)
             {
-               hashCode += Order.GetHashCode();
+               hashCode += this.Order.GetHashCode();
             }
 
-            if (FieldsToClear != null)
+            if (this.FieldsToClear != null)
             {
-               hashCode += FieldsToClear.GetHashCode();
+               hashCode += this.FieldsToClear.GetHashCode();
             }
 
-            if (IdempotencyKey != null)
+            if (this.IdempotencyKey != null)
             {
-               hashCode += IdempotencyKey.GetHashCode();
+               hashCode += this.IdempotencyKey.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Order = {(this.Order == null ? "null" : this.Order.ToString())}");
+            toStringOutput.Add($"this.FieldsToClear = {(this.FieldsToClear == null ? "null" : $"[{string.Join(", ", this.FieldsToClear)} ]")}");
+            toStringOutput.Add($"this.IdempotencyKey = {(this.IdempotencyKey == null ? "null" : this.IdempotencyKey == string.Empty ? "" : this.IdempotencyKey)}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .Order(Order)
-                .FieldsToClear(FieldsToClear)
-                .IdempotencyKey(IdempotencyKey);
+                .Order(this.Order)
+                .FieldsToClear(this.FieldsToClear)
+                .IdempotencyKey(this.IdempotencyKey);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private Models.Order order;
             private IList<string> fieldsToClear;
             private string idempotencyKey;
 
-
-
+             /// <summary>
+             /// Order.
+             /// </summary>
+             /// <param name="order"> order. </param>
+             /// <returns> Builder. </returns>
             public Builder Order(Models.Order order)
             {
                 this.order = order;
                 return this;
             }
 
+             /// <summary>
+             /// FieldsToClear.
+             /// </summary>
+             /// <param name="fieldsToClear"> fieldsToClear. </param>
+             /// <returns> Builder. </returns>
             public Builder FieldsToClear(IList<string> fieldsToClear)
             {
                 this.fieldsToClear = fieldsToClear;
                 return this;
             }
 
+             /// <summary>
+             /// IdempotencyKey.
+             /// </summary>
+             /// <param name="idempotencyKey"> idempotencyKey. </param>
+             /// <returns> Builder. </returns>
             public Builder IdempotencyKey(string idempotencyKey)
             {
                 this.idempotencyKey = idempotencyKey;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> UpdateOrderRequest. </returns>
             public UpdateOrderRequest Build()
             {
-                return new UpdateOrderRequest(order,
-                    fieldsToClear,
-                    idempotencyKey);
+                return new UpdateOrderRequest(
+                    this.order,
+                    this.fieldsToClear,
+                    this.idempotencyKey);
             }
         }
     }

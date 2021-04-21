@@ -1,21 +1,34 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class Break 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// Break.
+    /// </summary>
+    public class Break
     {
-        public Break(string startAt,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Break"/> class.
+        /// </summary>
+        /// <param name="startAt">start_at.</param>
+        /// <param name="breakTypeId">break_type_id.</param>
+        /// <param name="name">name.</param>
+        /// <param name="expectedDuration">expected_duration.</param>
+        /// <param name="isPaid">is_paid.</param>
+        /// <param name="id">id.</param>
+        /// <param name="endAt">end_at.</param>
+        public Break(
+            string startAt,
             string breakTypeId,
             string name,
             string expectedDuration,
@@ -23,13 +36,13 @@ namespace Square.Models
             string id = null,
             string endAt = null)
         {
-            Id = id;
-            StartAt = startAt;
-            EndAt = endAt;
-            BreakTypeId = breakTypeId;
-            Name = name;
-            ExpectedDuration = expectedDuration;
-            IsPaid = isPaid;
+            this.Id = id;
+            this.StartAt = startAt;
+            this.EndAt = endAt;
+            this.BreakTypeId = breakTypeId;
+            this.Name = name;
+            this.ExpectedDuration = expectedDuration;
+            this.IsPaid = isPaid;
         }
 
         /// <summary>
@@ -78,6 +91,7 @@ namespace Square.Models
         [JsonProperty("is_paid")]
         public bool IsPaid { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -87,17 +101,7 @@ namespace Square.Models
             return $"Break : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Id = {(Id == null ? "null" : Id == string.Empty ? "" : Id)}");
-            toStringOutput.Add($"StartAt = {(StartAt == null ? "null" : StartAt == string.Empty ? "" : StartAt)}");
-            toStringOutput.Add($"EndAt = {(EndAt == null ? "null" : EndAt == string.Empty ? "" : EndAt)}");
-            toStringOutput.Add($"BreakTypeId = {(BreakTypeId == null ? "null" : BreakTypeId == string.Empty ? "" : BreakTypeId)}");
-            toStringOutput.Add($"Name = {(Name == null ? "null" : Name == string.Empty ? "" : Name)}");
-            toStringOutput.Add($"ExpectedDuration = {(ExpectedDuration == null ? "null" : ExpectedDuration == string.Empty ? "" : ExpectedDuration)}");
-            toStringOutput.Add($"IsPaid = {IsPaid}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -111,65 +115,90 @@ namespace Square.Models
             }
 
             return obj is Break other &&
-                ((Id == null && other.Id == null) || (Id?.Equals(other.Id) == true)) &&
-                ((StartAt == null && other.StartAt == null) || (StartAt?.Equals(other.StartAt) == true)) &&
-                ((EndAt == null && other.EndAt == null) || (EndAt?.Equals(other.EndAt) == true)) &&
-                ((BreakTypeId == null && other.BreakTypeId == null) || (BreakTypeId?.Equals(other.BreakTypeId) == true)) &&
-                ((Name == null && other.Name == null) || (Name?.Equals(other.Name) == true)) &&
-                ((ExpectedDuration == null && other.ExpectedDuration == null) || (ExpectedDuration?.Equals(other.ExpectedDuration) == true)) &&
-                IsPaid.Equals(other.IsPaid);
+                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
+                ((this.StartAt == null && other.StartAt == null) || (this.StartAt?.Equals(other.StartAt) == true)) &&
+                ((this.EndAt == null && other.EndAt == null) || (this.EndAt?.Equals(other.EndAt) == true)) &&
+                ((this.BreakTypeId == null && other.BreakTypeId == null) || (this.BreakTypeId?.Equals(other.BreakTypeId) == true)) &&
+                ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
+                ((this.ExpectedDuration == null && other.ExpectedDuration == null) || (this.ExpectedDuration?.Equals(other.ExpectedDuration) == true)) &&
+                this.IsPaid.Equals(other.IsPaid);
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 168552180;
 
-            if (Id != null)
+            if (this.Id != null)
             {
-               hashCode += Id.GetHashCode();
+               hashCode += this.Id.GetHashCode();
             }
 
-            if (StartAt != null)
+            if (this.StartAt != null)
             {
-               hashCode += StartAt.GetHashCode();
+               hashCode += this.StartAt.GetHashCode();
             }
 
-            if (EndAt != null)
+            if (this.EndAt != null)
             {
-               hashCode += EndAt.GetHashCode();
+               hashCode += this.EndAt.GetHashCode();
             }
 
-            if (BreakTypeId != null)
+            if (this.BreakTypeId != null)
             {
-               hashCode += BreakTypeId.GetHashCode();
+               hashCode += this.BreakTypeId.GetHashCode();
             }
 
-            if (Name != null)
+            if (this.Name != null)
             {
-               hashCode += Name.GetHashCode();
+               hashCode += this.Name.GetHashCode();
             }
 
-            if (ExpectedDuration != null)
+            if (this.ExpectedDuration != null)
             {
-               hashCode += ExpectedDuration.GetHashCode();
+               hashCode += this.ExpectedDuration.GetHashCode();
             }
-            hashCode += IsPaid.GetHashCode();
+
+            hashCode += this.IsPaid.GetHashCode();
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id == string.Empty ? "" : this.Id)}");
+            toStringOutput.Add($"this.StartAt = {(this.StartAt == null ? "null" : this.StartAt == string.Empty ? "" : this.StartAt)}");
+            toStringOutput.Add($"this.EndAt = {(this.EndAt == null ? "null" : this.EndAt == string.Empty ? "" : this.EndAt)}");
+            toStringOutput.Add($"this.BreakTypeId = {(this.BreakTypeId == null ? "null" : this.BreakTypeId == string.Empty ? "" : this.BreakTypeId)}");
+            toStringOutput.Add($"this.Name = {(this.Name == null ? "null" : this.Name == string.Empty ? "" : this.Name)}");
+            toStringOutput.Add($"this.ExpectedDuration = {(this.ExpectedDuration == null ? "null" : this.ExpectedDuration == string.Empty ? "" : this.ExpectedDuration)}");
+            toStringOutput.Add($"this.IsPaid = {this.IsPaid}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
-            var builder = new Builder(StartAt,
-                BreakTypeId,
-                Name,
-                ExpectedDuration,
-                IsPaid)
-                .Id(Id)
-                .EndAt(EndAt);
+            var builder = new Builder(
+                this.StartAt,
+                this.BreakTypeId,
+                this.Name,
+                this.ExpectedDuration,
+                this.IsPaid)
+                .Id(this.Id)
+                .EndAt(this.EndAt);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string startAt;
@@ -180,7 +209,8 @@ namespace Square.Models
             private string id;
             private string endAt;
 
-            public Builder(string startAt,
+            public Builder(
+                string startAt,
                 string breakTypeId,
                 string name,
                 string expectedDuration,
@@ -193,57 +223,97 @@ namespace Square.Models
                 this.isPaid = isPaid;
             }
 
+             /// <summary>
+             /// StartAt.
+             /// </summary>
+             /// <param name="startAt"> startAt. </param>
+             /// <returns> Builder. </returns>
             public Builder StartAt(string startAt)
             {
                 this.startAt = startAt;
                 return this;
             }
 
+             /// <summary>
+             /// BreakTypeId.
+             /// </summary>
+             /// <param name="breakTypeId"> breakTypeId. </param>
+             /// <returns> Builder. </returns>
             public Builder BreakTypeId(string breakTypeId)
             {
                 this.breakTypeId = breakTypeId;
                 return this;
             }
 
+             /// <summary>
+             /// Name.
+             /// </summary>
+             /// <param name="name"> name. </param>
+             /// <returns> Builder. </returns>
             public Builder Name(string name)
             {
                 this.name = name;
                 return this;
             }
 
+             /// <summary>
+             /// ExpectedDuration.
+             /// </summary>
+             /// <param name="expectedDuration"> expectedDuration. </param>
+             /// <returns> Builder. </returns>
             public Builder ExpectedDuration(string expectedDuration)
             {
                 this.expectedDuration = expectedDuration;
                 return this;
             }
 
+             /// <summary>
+             /// IsPaid.
+             /// </summary>
+             /// <param name="isPaid"> isPaid. </param>
+             /// <returns> Builder. </returns>
             public Builder IsPaid(bool isPaid)
             {
                 this.isPaid = isPaid;
                 return this;
             }
 
+             /// <summary>
+             /// Id.
+             /// </summary>
+             /// <param name="id"> id. </param>
+             /// <returns> Builder. </returns>
             public Builder Id(string id)
             {
                 this.id = id;
                 return this;
             }
 
+             /// <summary>
+             /// EndAt.
+             /// </summary>
+             /// <param name="endAt"> endAt. </param>
+             /// <returns> Builder. </returns>
             public Builder EndAt(string endAt)
             {
                 this.endAt = endAt;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> Break. </returns>
             public Break Build()
             {
-                return new Break(startAt,
-                    breakTypeId,
-                    name,
-                    expectedDuration,
-                    isPaid,
-                    id,
-                    endAt);
+                return new Break(
+                    this.startAt,
+                    this.breakTypeId,
+                    this.name,
+                    this.expectedDuration,
+                    this.isPaid,
+                    this.id,
+                    this.endAt);
             }
         }
     }

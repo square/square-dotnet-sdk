@@ -1,23 +1,30 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class SearchSubscriptionsQuery 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// SearchSubscriptionsQuery.
+    /// </summary>
+    public class SearchSubscriptionsQuery
     {
-        public SearchSubscriptionsQuery(Models.SearchSubscriptionsFilter filter = null)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SearchSubscriptionsQuery"/> class.
+        /// </summary>
+        /// <param name="filter">filter.</param>
+        public SearchSubscriptionsQuery(
+            Models.SearchSubscriptionsFilter filter = null)
         {
-            Filter = filter;
+            this.Filter = filter;
         }
 
         /// <summary>
@@ -26,6 +33,7 @@ namespace Square.Models
         [JsonProperty("filter", NullValueHandling = NullValueHandling.Ignore)]
         public Models.SearchSubscriptionsFilter Filter { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -35,11 +43,7 @@ namespace Square.Models
             return $"SearchSubscriptionsQuery : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Filter = {(Filter == null ? "null" : Filter.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -53,43 +57,68 @@ namespace Square.Models
             }
 
             return obj is SearchSubscriptionsQuery other &&
-                ((Filter == null && other.Filter == null) || (Filter?.Equals(other.Filter) == true));
+                ((this.Filter == null && other.Filter == null) || (this.Filter?.Equals(other.Filter) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1048089078;
 
-            if (Filter != null)
+            if (this.Filter != null)
             {
-               hashCode += Filter.GetHashCode();
+               hashCode += this.Filter.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Filter = {(this.Filter == null ? "null" : this.Filter.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .Filter(Filter);
+                .Filter(this.Filter);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private Models.SearchSubscriptionsFilter filter;
 
-
-
+             /// <summary>
+             /// Filter.
+             /// </summary>
+             /// <param name="filter"> filter. </param>
+             /// <returns> Builder. </returns>
             public Builder Filter(Models.SearchSubscriptionsFilter filter)
             {
                 this.filter = filter;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> SearchSubscriptionsQuery. </returns>
             public SearchSubscriptionsQuery Build()
             {
-                return new SearchSubscriptionsQuery(filter);
+                return new SearchSubscriptionsQuery(
+                    this.filter);
             }
         }
     }

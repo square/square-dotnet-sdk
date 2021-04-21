@@ -1,21 +1,34 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class CustomerFilter 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// CustomerFilter.
+    /// </summary>
+    public class CustomerFilter
     {
-        public CustomerFilter(Models.CustomerCreationSourceFilter creationSource = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CustomerFilter"/> class.
+        /// </summary>
+        /// <param name="creationSource">creation_source.</param>
+        /// <param name="createdAt">created_at.</param>
+        /// <param name="updatedAt">updated_at.</param>
+        /// <param name="emailAddress">email_address.</param>
+        /// <param name="phoneNumber">phone_number.</param>
+        /// <param name="referenceId">reference_id.</param>
+        /// <param name="groupIds">group_ids.</param>
+        public CustomerFilter(
+            Models.CustomerCreationSourceFilter creationSource = null,
             Models.TimeRange createdAt = null,
             Models.TimeRange updatedAt = null,
             Models.CustomerTextFilter emailAddress = null,
@@ -23,20 +36,19 @@ namespace Square.Models
             Models.CustomerTextFilter referenceId = null,
             Models.FilterValue groupIds = null)
         {
-            CreationSource = creationSource;
-            CreatedAt = createdAt;
-            UpdatedAt = updatedAt;
-            EmailAddress = emailAddress;
-            PhoneNumber = phoneNumber;
-            ReferenceId = referenceId;
-            GroupIds = groupIds;
+            this.CreationSource = creationSource;
+            this.CreatedAt = createdAt;
+            this.UpdatedAt = updatedAt;
+            this.EmailAddress = emailAddress;
+            this.PhoneNumber = phoneNumber;
+            this.ReferenceId = referenceId;
+            this.GroupIds = groupIds;
         }
 
         /// <summary>
-        /// Creation source filter.
+        /// The creation source filter.
         /// If one or more creation sources are set, customer profiles are included in,
-        /// or excluded from, the result if they match at least one of the filter
-        /// criteria.
+        /// or excluded from, the result if they match at least one of the filter criteria.
         /// </summary>
         [JsonProperty("creation_source", NullValueHandling = NullValueHandling.Ignore)]
         public Models.CustomerCreationSourceFilter CreationSource { get; }
@@ -63,24 +75,24 @@ namespace Square.Models
 
         /// <summary>
         /// A filter to select customers based on exact or fuzzy matching of
-        /// customer attributes against a specified query. Depending on customer attributes, 
-        /// the filter can be case sensitive. This filter can be either exact or fuzzy. It cannot be both.
+        /// customer attributes against a specified query. Depending on the customer attributes,
+        /// the filter can be case-sensitive. This filter can be exact or fuzzy, but it cannot be both.
         /// </summary>
         [JsonProperty("email_address", NullValueHandling = NullValueHandling.Ignore)]
         public Models.CustomerTextFilter EmailAddress { get; }
 
         /// <summary>
         /// A filter to select customers based on exact or fuzzy matching of
-        /// customer attributes against a specified query. Depending on customer attributes, 
-        /// the filter can be case sensitive. This filter can be either exact or fuzzy. It cannot be both.
+        /// customer attributes against a specified query. Depending on the customer attributes,
+        /// the filter can be case-sensitive. This filter can be exact or fuzzy, but it cannot be both.
         /// </summary>
         [JsonProperty("phone_number", NullValueHandling = NullValueHandling.Ignore)]
         public Models.CustomerTextFilter PhoneNumber { get; }
 
         /// <summary>
         /// A filter to select customers based on exact or fuzzy matching of
-        /// customer attributes against a specified query. Depending on customer attributes, 
-        /// the filter can be case sensitive. This filter can be either exact or fuzzy. It cannot be both.
+        /// customer attributes against a specified query. Depending on the customer attributes,
+        /// the filter can be case-sensitive. This filter can be exact or fuzzy, but it cannot be both.
         /// </summary>
         [JsonProperty("reference_id", NullValueHandling = NullValueHandling.Ignore)]
         public Models.CustomerTextFilter ReferenceId { get; }
@@ -94,6 +106,7 @@ namespace Square.Models
         [JsonProperty("group_ids", NullValueHandling = NullValueHandling.Ignore)]
         public Models.FilterValue GroupIds { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -103,17 +116,7 @@ namespace Square.Models
             return $"CustomerFilter : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"CreationSource = {(CreationSource == null ? "null" : CreationSource.ToString())}");
-            toStringOutput.Add($"CreatedAt = {(CreatedAt == null ? "null" : CreatedAt.ToString())}");
-            toStringOutput.Add($"UpdatedAt = {(UpdatedAt == null ? "null" : UpdatedAt.ToString())}");
-            toStringOutput.Add($"EmailAddress = {(EmailAddress == null ? "null" : EmailAddress.ToString())}");
-            toStringOutput.Add($"PhoneNumber = {(PhoneNumber == null ? "null" : PhoneNumber.ToString())}");
-            toStringOutput.Add($"ReferenceId = {(ReferenceId == null ? "null" : ReferenceId.ToString())}");
-            toStringOutput.Add($"GroupIds = {(GroupIds == null ? "null" : GroupIds.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -127,70 +130,93 @@ namespace Square.Models
             }
 
             return obj is CustomerFilter other &&
-                ((CreationSource == null && other.CreationSource == null) || (CreationSource?.Equals(other.CreationSource) == true)) &&
-                ((CreatedAt == null && other.CreatedAt == null) || (CreatedAt?.Equals(other.CreatedAt) == true)) &&
-                ((UpdatedAt == null && other.UpdatedAt == null) || (UpdatedAt?.Equals(other.UpdatedAt) == true)) &&
-                ((EmailAddress == null && other.EmailAddress == null) || (EmailAddress?.Equals(other.EmailAddress) == true)) &&
-                ((PhoneNumber == null && other.PhoneNumber == null) || (PhoneNumber?.Equals(other.PhoneNumber) == true)) &&
-                ((ReferenceId == null && other.ReferenceId == null) || (ReferenceId?.Equals(other.ReferenceId) == true)) &&
-                ((GroupIds == null && other.GroupIds == null) || (GroupIds?.Equals(other.GroupIds) == true));
+                ((this.CreationSource == null && other.CreationSource == null) || (this.CreationSource?.Equals(other.CreationSource) == true)) &&
+                ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true)) &&
+                ((this.UpdatedAt == null && other.UpdatedAt == null) || (this.UpdatedAt?.Equals(other.UpdatedAt) == true)) &&
+                ((this.EmailAddress == null && other.EmailAddress == null) || (this.EmailAddress?.Equals(other.EmailAddress) == true)) &&
+                ((this.PhoneNumber == null && other.PhoneNumber == null) || (this.PhoneNumber?.Equals(other.PhoneNumber) == true)) &&
+                ((this.ReferenceId == null && other.ReferenceId == null) || (this.ReferenceId?.Equals(other.ReferenceId) == true)) &&
+                ((this.GroupIds == null && other.GroupIds == null) || (this.GroupIds?.Equals(other.GroupIds) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 1632151242;
 
-            if (CreationSource != null)
+            if (this.CreationSource != null)
             {
-               hashCode += CreationSource.GetHashCode();
+               hashCode += this.CreationSource.GetHashCode();
             }
 
-            if (CreatedAt != null)
+            if (this.CreatedAt != null)
             {
-               hashCode += CreatedAt.GetHashCode();
+               hashCode += this.CreatedAt.GetHashCode();
             }
 
-            if (UpdatedAt != null)
+            if (this.UpdatedAt != null)
             {
-               hashCode += UpdatedAt.GetHashCode();
+               hashCode += this.UpdatedAt.GetHashCode();
             }
 
-            if (EmailAddress != null)
+            if (this.EmailAddress != null)
             {
-               hashCode += EmailAddress.GetHashCode();
+               hashCode += this.EmailAddress.GetHashCode();
             }
 
-            if (PhoneNumber != null)
+            if (this.PhoneNumber != null)
             {
-               hashCode += PhoneNumber.GetHashCode();
+               hashCode += this.PhoneNumber.GetHashCode();
             }
 
-            if (ReferenceId != null)
+            if (this.ReferenceId != null)
             {
-               hashCode += ReferenceId.GetHashCode();
+               hashCode += this.ReferenceId.GetHashCode();
             }
 
-            if (GroupIds != null)
+            if (this.GroupIds != null)
             {
-               hashCode += GroupIds.GetHashCode();
+               hashCode += this.GroupIds.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.CreationSource = {(this.CreationSource == null ? "null" : this.CreationSource.ToString())}");
+            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt.ToString())}");
+            toStringOutput.Add($"this.UpdatedAt = {(this.UpdatedAt == null ? "null" : this.UpdatedAt.ToString())}");
+            toStringOutput.Add($"this.EmailAddress = {(this.EmailAddress == null ? "null" : this.EmailAddress.ToString())}");
+            toStringOutput.Add($"this.PhoneNumber = {(this.PhoneNumber == null ? "null" : this.PhoneNumber.ToString())}");
+            toStringOutput.Add($"this.ReferenceId = {(this.ReferenceId == null ? "null" : this.ReferenceId.ToString())}");
+            toStringOutput.Add($"this.GroupIds = {(this.GroupIds == null ? "null" : this.GroupIds.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .CreationSource(CreationSource)
-                .CreatedAt(CreatedAt)
-                .UpdatedAt(UpdatedAt)
-                .EmailAddress(EmailAddress)
-                .PhoneNumber(PhoneNumber)
-                .ReferenceId(ReferenceId)
-                .GroupIds(GroupIds);
+                .CreationSource(this.CreationSource)
+                .CreatedAt(this.CreatedAt)
+                .UpdatedAt(this.UpdatedAt)
+                .EmailAddress(this.EmailAddress)
+                .PhoneNumber(this.PhoneNumber)
+                .ReferenceId(this.ReferenceId)
+                .GroupIds(this.GroupIds);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private Models.CustomerCreationSourceFilter creationSource;
@@ -201,59 +227,97 @@ namespace Square.Models
             private Models.CustomerTextFilter referenceId;
             private Models.FilterValue groupIds;
 
-
-
+             /// <summary>
+             /// CreationSource.
+             /// </summary>
+             /// <param name="creationSource"> creationSource. </param>
+             /// <returns> Builder. </returns>
             public Builder CreationSource(Models.CustomerCreationSourceFilter creationSource)
             {
                 this.creationSource = creationSource;
                 return this;
             }
 
+             /// <summary>
+             /// CreatedAt.
+             /// </summary>
+             /// <param name="createdAt"> createdAt. </param>
+             /// <returns> Builder. </returns>
             public Builder CreatedAt(Models.TimeRange createdAt)
             {
                 this.createdAt = createdAt;
                 return this;
             }
 
+             /// <summary>
+             /// UpdatedAt.
+             /// </summary>
+             /// <param name="updatedAt"> updatedAt. </param>
+             /// <returns> Builder. </returns>
             public Builder UpdatedAt(Models.TimeRange updatedAt)
             {
                 this.updatedAt = updatedAt;
                 return this;
             }
 
+             /// <summary>
+             /// EmailAddress.
+             /// </summary>
+             /// <param name="emailAddress"> emailAddress. </param>
+             /// <returns> Builder. </returns>
             public Builder EmailAddress(Models.CustomerTextFilter emailAddress)
             {
                 this.emailAddress = emailAddress;
                 return this;
             }
 
+             /// <summary>
+             /// PhoneNumber.
+             /// </summary>
+             /// <param name="phoneNumber"> phoneNumber. </param>
+             /// <returns> Builder. </returns>
             public Builder PhoneNumber(Models.CustomerTextFilter phoneNumber)
             {
                 this.phoneNumber = phoneNumber;
                 return this;
             }
 
+             /// <summary>
+             /// ReferenceId.
+             /// </summary>
+             /// <param name="referenceId"> referenceId. </param>
+             /// <returns> Builder. </returns>
             public Builder ReferenceId(Models.CustomerTextFilter referenceId)
             {
                 this.referenceId = referenceId;
                 return this;
             }
 
+             /// <summary>
+             /// GroupIds.
+             /// </summary>
+             /// <param name="groupIds"> groupIds. </param>
+             /// <returns> Builder. </returns>
             public Builder GroupIds(Models.FilterValue groupIds)
             {
                 this.groupIds = groupIds;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> CustomerFilter. </returns>
             public CustomerFilter Build()
             {
-                return new CustomerFilter(creationSource,
-                    createdAt,
-                    updatedAt,
-                    emailAddress,
-                    phoneNumber,
-                    referenceId,
-                    groupIds);
+                return new CustomerFilter(
+                    this.creationSource,
+                    this.createdAt,
+                    this.updatedAt,
+                    this.emailAddress,
+                    this.phoneNumber,
+                    this.referenceId,
+                    this.groupIds);
             }
         }
     }

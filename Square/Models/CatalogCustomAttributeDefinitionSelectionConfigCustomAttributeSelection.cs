@@ -1,25 +1,33 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class CatalogCustomAttributeDefinitionSelectionConfigCustomAttributeSelection 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// CatalogCustomAttributeDefinitionSelectionConfigCustomAttributeSelection.
+    /// </summary>
+    public class CatalogCustomAttributeDefinitionSelectionConfigCustomAttributeSelection
     {
-        public CatalogCustomAttributeDefinitionSelectionConfigCustomAttributeSelection(string name,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CatalogCustomAttributeDefinitionSelectionConfigCustomAttributeSelection"/> class.
+        /// </summary>
+        /// <param name="name">name.</param>
+        /// <param name="uid">uid.</param>
+        public CatalogCustomAttributeDefinitionSelectionConfigCustomAttributeSelection(
+            string name,
             string uid = null)
         {
-            Uid = uid;
-            Name = name;
+            this.Uid = uid;
+            this.Name = name;
         }
 
         /// <summary>
@@ -34,6 +42,7 @@ namespace Square.Models
         [JsonProperty("name")]
         public string Name { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -43,12 +52,7 @@ namespace Square.Models
             return $"CatalogCustomAttributeDefinitionSelectionConfigCustomAttributeSelection : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Uid = {(Uid == null ? "null" : Uid == string.Empty ? "" : Uid)}");
-            toStringOutput.Add($"Name = {(Name == null ? "null" : Name == string.Empty ? "" : Name)}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -62,60 +66,95 @@ namespace Square.Models
             }
 
             return obj is CatalogCustomAttributeDefinitionSelectionConfigCustomAttributeSelection other &&
-                ((Uid == null && other.Uid == null) || (Uid?.Equals(other.Uid) == true)) &&
-                ((Name == null && other.Name == null) || (Name?.Equals(other.Name) == true));
+                ((this.Uid == null && other.Uid == null) || (this.Uid?.Equals(other.Uid) == true)) &&
+                ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 829627827;
 
-            if (Uid != null)
+            if (this.Uid != null)
             {
-               hashCode += Uid.GetHashCode();
+               hashCode += this.Uid.GetHashCode();
             }
 
-            if (Name != null)
+            if (this.Name != null)
             {
-               hashCode += Name.GetHashCode();
+               hashCode += this.Name.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Uid = {(this.Uid == null ? "null" : this.Uid == string.Empty ? "" : this.Uid)}");
+            toStringOutput.Add($"this.Name = {(this.Name == null ? "null" : this.Name == string.Empty ? "" : this.Name)}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
-            var builder = new Builder(Name)
-                .Uid(Uid);
+            var builder = new Builder(
+                this.Name)
+                .Uid(this.Uid);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string name;
             private string uid;
 
-            public Builder(string name)
+            public Builder(
+                string name)
             {
                 this.name = name;
             }
 
+             /// <summary>
+             /// Name.
+             /// </summary>
+             /// <param name="name"> name. </param>
+             /// <returns> Builder. </returns>
             public Builder Name(string name)
             {
                 this.name = name;
                 return this;
             }
 
+             /// <summary>
+             /// Uid.
+             /// </summary>
+             /// <param name="uid"> uid. </param>
+             /// <returns> Builder. </returns>
             public Builder Uid(string uid)
             {
                 this.uid = uid;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> CatalogCustomAttributeDefinitionSelectionConfigCustomAttributeSelection. </returns>
             public CatalogCustomAttributeDefinitionSelectionConfigCustomAttributeSelection Build()
             {
-                return new CatalogCustomAttributeDefinitionSelectionConfigCustomAttributeSelection(name,
-                    uid);
+                return new CatalogCustomAttributeDefinitionSelectionConfigCustomAttributeSelection(
+                    this.name,
+                    this.uid);
             }
         }
     }

@@ -64,7 +64,8 @@ catch (ApiException e){};
 RetrieveEmployee
 
 ```csharp
-RetrieveEmployeeAsync(string id)
+RetrieveEmployeeAsync(
+    string id)
 ```
 
 ## Parameters

@@ -1,23 +1,30 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class SearchOrdersCustomerFilter 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// SearchOrdersCustomerFilter.
+    /// </summary>
+    public class SearchOrdersCustomerFilter
     {
-        public SearchOrdersCustomerFilter(IList<string> customerIds = null)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SearchOrdersCustomerFilter"/> class.
+        /// </summary>
+        /// <param name="customerIds">customer_ids.</param>
+        public SearchOrdersCustomerFilter(
+            IList<string> customerIds = null)
         {
-            CustomerIds = customerIds;
+            this.CustomerIds = customerIds;
         }
 
         /// <summary>
@@ -27,6 +34,7 @@ namespace Square.Models
         [JsonProperty("customer_ids", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> CustomerIds { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -36,11 +44,7 @@ namespace Square.Models
             return $"SearchOrdersCustomerFilter : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"CustomerIds = {(CustomerIds == null ? "null" : $"[{ string.Join(", ", CustomerIds)} ]")}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -54,43 +58,68 @@ namespace Square.Models
             }
 
             return obj is SearchOrdersCustomerFilter other &&
-                ((CustomerIds == null && other.CustomerIds == null) || (CustomerIds?.Equals(other.CustomerIds) == true));
+                ((this.CustomerIds == null && other.CustomerIds == null) || (this.CustomerIds?.Equals(other.CustomerIds) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 963322310;
 
-            if (CustomerIds != null)
+            if (this.CustomerIds != null)
             {
-               hashCode += CustomerIds.GetHashCode();
+               hashCode += this.CustomerIds.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.CustomerIds = {(this.CustomerIds == null ? "null" : $"[{string.Join(", ", this.CustomerIds)} ]")}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .CustomerIds(CustomerIds);
+                .CustomerIds(this.CustomerIds);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private IList<string> customerIds;
 
-
-
+             /// <summary>
+             /// CustomerIds.
+             /// </summary>
+             /// <param name="customerIds"> customerIds. </param>
+             /// <returns> Builder. </returns>
             public Builder CustomerIds(IList<string> customerIds)
             {
                 this.customerIds = customerIds;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> SearchOrdersCustomerFilter. </returns>
             public SearchOrdersCustomerFilter Build()
             {
-                return new SearchOrdersCustomerFilter(customerIds);
+                return new SearchOrdersCustomerFilter(
+                    this.customerIds);
             }
         }
     }

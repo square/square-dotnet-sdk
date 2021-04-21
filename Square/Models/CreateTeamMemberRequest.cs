@@ -1,25 +1,33 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class CreateTeamMemberRequest 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// CreateTeamMemberRequest.
+    /// </summary>
+    public class CreateTeamMemberRequest
     {
-        public CreateTeamMemberRequest(string idempotencyKey = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CreateTeamMemberRequest"/> class.
+        /// </summary>
+        /// <param name="idempotencyKey">idempotency_key.</param>
+        /// <param name="teamMember">team_member.</param>
+        public CreateTeamMemberRequest(
+            string idempotencyKey = null,
             Models.TeamMember teamMember = null)
         {
-            IdempotencyKey = idempotencyKey;
-            TeamMember = teamMember;
+            this.IdempotencyKey = idempotencyKey;
+            this.TeamMember = teamMember;
         }
 
         /// <summary>
@@ -38,6 +46,7 @@ namespace Square.Models
         [JsonProperty("team_member", NullValueHandling = NullValueHandling.Ignore)]
         public Models.TeamMember TeamMember { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -47,12 +56,7 @@ namespace Square.Models
             return $"CreateTeamMemberRequest : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"IdempotencyKey = {(IdempotencyKey == null ? "null" : IdempotencyKey == string.Empty ? "" : IdempotencyKey)}");
-            toStringOutput.Add($"TeamMember = {(TeamMember == null ? "null" : TeamMember.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -66,58 +70,89 @@ namespace Square.Models
             }
 
             return obj is CreateTeamMemberRequest other &&
-                ((IdempotencyKey == null && other.IdempotencyKey == null) || (IdempotencyKey?.Equals(other.IdempotencyKey) == true)) &&
-                ((TeamMember == null && other.TeamMember == null) || (TeamMember?.Equals(other.TeamMember) == true));
+                ((this.IdempotencyKey == null && other.IdempotencyKey == null) || (this.IdempotencyKey?.Equals(other.IdempotencyKey) == true)) &&
+                ((this.TeamMember == null && other.TeamMember == null) || (this.TeamMember?.Equals(other.TeamMember) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 1352322993;
 
-            if (IdempotencyKey != null)
+            if (this.IdempotencyKey != null)
             {
-               hashCode += IdempotencyKey.GetHashCode();
+               hashCode += this.IdempotencyKey.GetHashCode();
             }
 
-            if (TeamMember != null)
+            if (this.TeamMember != null)
             {
-               hashCode += TeamMember.GetHashCode();
+               hashCode += this.TeamMember.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.IdempotencyKey = {(this.IdempotencyKey == null ? "null" : this.IdempotencyKey == string.Empty ? "" : this.IdempotencyKey)}");
+            toStringOutput.Add($"this.TeamMember = {(this.TeamMember == null ? "null" : this.TeamMember.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .IdempotencyKey(IdempotencyKey)
-                .TeamMember(TeamMember);
+                .IdempotencyKey(this.IdempotencyKey)
+                .TeamMember(this.TeamMember);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string idempotencyKey;
             private Models.TeamMember teamMember;
 
-
-
+             /// <summary>
+             /// IdempotencyKey.
+             /// </summary>
+             /// <param name="idempotencyKey"> idempotencyKey. </param>
+             /// <returns> Builder. </returns>
             public Builder IdempotencyKey(string idempotencyKey)
             {
                 this.idempotencyKey = idempotencyKey;
                 return this;
             }
 
+             /// <summary>
+             /// TeamMember.
+             /// </summary>
+             /// <param name="teamMember"> teamMember. </param>
+             /// <returns> Builder. </returns>
             public Builder TeamMember(Models.TeamMember teamMember)
             {
                 this.teamMember = teamMember;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> CreateTeamMemberRequest. </returns>
             public CreateTeamMemberRequest Build()
             {
-                return new CreateTeamMemberRequest(idempotencyKey,
-                    teamMember);
+                return new CreateTeamMemberRequest(
+                    this.idempotencyKey,
+                    this.teamMember);
             }
         }
     }

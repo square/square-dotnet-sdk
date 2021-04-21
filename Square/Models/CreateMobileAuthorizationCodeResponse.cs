@@ -1,30 +1,42 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square.Http.Client;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class CreateMobileAuthorizationCodeResponse 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Http.Client;
+    using Square.Utilities;
+
+    /// <summary>
+    /// CreateMobileAuthorizationCodeResponse.
+    /// </summary>
+    public class CreateMobileAuthorizationCodeResponse
     {
-        public CreateMobileAuthorizationCodeResponse(string authorizationCode = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CreateMobileAuthorizationCodeResponse"/> class.
+        /// </summary>
+        /// <param name="authorizationCode">authorization_code.</param>
+        /// <param name="expiresAt">expires_at.</param>
+        /// <param name="error">error.</param>
+        public CreateMobileAuthorizationCodeResponse(
+            string authorizationCode = null,
             string expiresAt = null,
             Models.Error error = null)
         {
-            AuthorizationCode = authorizationCode;
-            ExpiresAt = expiresAt;
-            Error = error;
+            this.AuthorizationCode = authorizationCode;
+            this.ExpiresAt = expiresAt;
+            this.Error = error;
         }
 
+        /// <summary>
+        /// Gets http context.
+        /// </summary>
         [JsonIgnore]
         public HttpContext Context { get; internal set; }
 
@@ -44,11 +56,12 @@ namespace Square.Models
 
         /// <summary>
         /// Represents an error encountered during a request to the Connect API.
-        /// See [Handling errors](#handlingerrors) for more information.
+        /// See [Handling errors](https://developer.squareup.com/docs/build-basics/handling-errors) for more information.
         /// </summary>
         [JsonProperty("error", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Error Error { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -58,13 +71,7 @@ namespace Square.Models
             return $"CreateMobileAuthorizationCodeResponse : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"AuthorizationCode = {(AuthorizationCode == null ? "null" : AuthorizationCode == string.Empty ? "" : AuthorizationCode)}");
-            toStringOutput.Add($"ExpiresAt = {(ExpiresAt == null ? "null" : ExpiresAt == string.Empty ? "" : ExpiresAt)}");
-            toStringOutput.Add($"Error = {(Error == null ? "null" : Error.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -78,79 +85,116 @@ namespace Square.Models
             }
 
             return obj is CreateMobileAuthorizationCodeResponse other &&
-                ((Context == null && other.Context == null) || (Context?.Equals(other.Context) == true)) &&
-                ((AuthorizationCode == null && other.AuthorizationCode == null) || (AuthorizationCode?.Equals(other.AuthorizationCode) == true)) &&
-                ((ExpiresAt == null && other.ExpiresAt == null) || (ExpiresAt?.Equals(other.ExpiresAt) == true)) &&
-                ((Error == null && other.Error == null) || (Error?.Equals(other.Error) == true));
+                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
+                ((this.AuthorizationCode == null && other.AuthorizationCode == null) || (this.AuthorizationCode?.Equals(other.AuthorizationCode) == true)) &&
+                ((this.ExpiresAt == null && other.ExpiresAt == null) || (this.ExpiresAt?.Equals(other.ExpiresAt) == true)) &&
+                ((this.Error == null && other.Error == null) || (this.Error?.Equals(other.Error) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -942988970;
 
-            if (Context != null)
+            if (this.Context != null)
             {
-                hashCode += Context.GetHashCode();
+                hashCode += this.Context.GetHashCode();
             }
 
-            if (AuthorizationCode != null)
+            if (this.AuthorizationCode != null)
             {
-               hashCode += AuthorizationCode.GetHashCode();
+               hashCode += this.AuthorizationCode.GetHashCode();
             }
 
-            if (ExpiresAt != null)
+            if (this.ExpiresAt != null)
             {
-               hashCode += ExpiresAt.GetHashCode();
+               hashCode += this.ExpiresAt.GetHashCode();
             }
 
-            if (Error != null)
+            if (this.Error != null)
             {
-               hashCode += Error.GetHashCode();
+               hashCode += this.Error.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.AuthorizationCode = {(this.AuthorizationCode == null ? "null" : this.AuthorizationCode == string.Empty ? "" : this.AuthorizationCode)}");
+            toStringOutput.Add($"this.ExpiresAt = {(this.ExpiresAt == null ? "null" : this.ExpiresAt == string.Empty ? "" : this.ExpiresAt)}");
+            toStringOutput.Add($"this.Error = {(this.Error == null ? "null" : this.Error.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .AuthorizationCode(AuthorizationCode)
-                .ExpiresAt(ExpiresAt)
-                .Error(Error);
+                .AuthorizationCode(this.AuthorizationCode)
+                .ExpiresAt(this.ExpiresAt)
+                .Error(this.Error);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string authorizationCode;
             private string expiresAt;
             private Models.Error error;
 
-
-
+             /// <summary>
+             /// AuthorizationCode.
+             /// </summary>
+             /// <param name="authorizationCode"> authorizationCode. </param>
+             /// <returns> Builder. </returns>
             public Builder AuthorizationCode(string authorizationCode)
             {
                 this.authorizationCode = authorizationCode;
                 return this;
             }
 
+             /// <summary>
+             /// ExpiresAt.
+             /// </summary>
+             /// <param name="expiresAt"> expiresAt. </param>
+             /// <returns> Builder. </returns>
             public Builder ExpiresAt(string expiresAt)
             {
                 this.expiresAt = expiresAt;
                 return this;
             }
 
+             /// <summary>
+             /// Error.
+             /// </summary>
+             /// <param name="error"> error. </param>
+             /// <returns> Builder. </returns>
             public Builder Error(Models.Error error)
             {
                 this.error = error;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> CreateMobileAuthorizationCodeResponse. </returns>
             public CreateMobileAuthorizationCodeResponse Build()
             {
-                return new CreateMobileAuthorizationCodeResponse(authorizationCode,
-                    expiresAt,
-                    error);
+                return new CreateMobileAuthorizationCodeResponse(
+                    this.authorizationCode,
+                    this.expiresAt,
+                    this.error);
             }
         }
     }

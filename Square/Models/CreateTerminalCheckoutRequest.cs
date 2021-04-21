@@ -1,25 +1,33 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class CreateTerminalCheckoutRequest 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// CreateTerminalCheckoutRequest.
+    /// </summary>
+    public class CreateTerminalCheckoutRequest
     {
-        public CreateTerminalCheckoutRequest(string idempotencyKey,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CreateTerminalCheckoutRequest"/> class.
+        /// </summary>
+        /// <param name="idempotencyKey">idempotency_key.</param>
+        /// <param name="checkout">checkout.</param>
+        public CreateTerminalCheckoutRequest(
+            string idempotencyKey,
             Models.TerminalCheckout checkout)
         {
-            IdempotencyKey = idempotencyKey;
-            Checkout = checkout;
+            this.IdempotencyKey = idempotencyKey;
+            this.Checkout = checkout;
         }
 
         /// <summary>
@@ -31,11 +39,12 @@ namespace Square.Models
         public string IdempotencyKey { get; }
 
         /// <summary>
-        /// Getter for checkout
+        /// Gets or sets Checkout.
         /// </summary>
         [JsonProperty("checkout")]
         public Models.TerminalCheckout Checkout { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -45,12 +54,7 @@ namespace Square.Models
             return $"CreateTerminalCheckoutRequest : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"IdempotencyKey = {(IdempotencyKey == null ? "null" : IdempotencyKey == string.Empty ? "" : IdempotencyKey)}");
-            toStringOutput.Add($"Checkout = {(Checkout == null ? "null" : Checkout.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -64,62 +68,97 @@ namespace Square.Models
             }
 
             return obj is CreateTerminalCheckoutRequest other &&
-                ((IdempotencyKey == null && other.IdempotencyKey == null) || (IdempotencyKey?.Equals(other.IdempotencyKey) == true)) &&
-                ((Checkout == null && other.Checkout == null) || (Checkout?.Equals(other.Checkout) == true));
+                ((this.IdempotencyKey == null && other.IdempotencyKey == null) || (this.IdempotencyKey?.Equals(other.IdempotencyKey) == true)) &&
+                ((this.Checkout == null && other.Checkout == null) || (this.Checkout?.Equals(other.Checkout) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 418922267;
 
-            if (IdempotencyKey != null)
+            if (this.IdempotencyKey != null)
             {
-               hashCode += IdempotencyKey.GetHashCode();
+               hashCode += this.IdempotencyKey.GetHashCode();
             }
 
-            if (Checkout != null)
+            if (this.Checkout != null)
             {
-               hashCode += Checkout.GetHashCode();
+               hashCode += this.Checkout.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.IdempotencyKey = {(this.IdempotencyKey == null ? "null" : this.IdempotencyKey == string.Empty ? "" : this.IdempotencyKey)}");
+            toStringOutput.Add($"this.Checkout = {(this.Checkout == null ? "null" : this.Checkout.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
-            var builder = new Builder(IdempotencyKey,
-                Checkout);
+            var builder = new Builder(
+                this.IdempotencyKey,
+                this.Checkout);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string idempotencyKey;
             private Models.TerminalCheckout checkout;
 
-            public Builder(string idempotencyKey,
+            public Builder(
+                string idempotencyKey,
                 Models.TerminalCheckout checkout)
             {
                 this.idempotencyKey = idempotencyKey;
                 this.checkout = checkout;
             }
 
+             /// <summary>
+             /// IdempotencyKey.
+             /// </summary>
+             /// <param name="idempotencyKey"> idempotencyKey. </param>
+             /// <returns> Builder. </returns>
             public Builder IdempotencyKey(string idempotencyKey)
             {
                 this.idempotencyKey = idempotencyKey;
                 return this;
             }
 
+             /// <summary>
+             /// Checkout.
+             /// </summary>
+             /// <param name="checkout"> checkout. </param>
+             /// <returns> Builder. </returns>
             public Builder Checkout(Models.TerminalCheckout checkout)
             {
                 this.checkout = checkout;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> CreateTerminalCheckoutRequest. </returns>
             public CreateTerminalCheckoutRequest Build()
             {
-                return new CreateTerminalCheckoutRequest(idempotencyKey,
-                    checkout);
+                return new CreateTerminalCheckoutRequest(
+                    this.idempotencyKey,
+                    this.checkout);
             }
         }
     }

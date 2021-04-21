@@ -1,23 +1,30 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class V1CreateEmployeeRoleRequest 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// V1CreateEmployeeRoleRequest.
+    /// </summary>
+    public class V1CreateEmployeeRoleRequest
     {
-        public V1CreateEmployeeRoleRequest(Models.V1EmployeeRole employeeRole = null)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="V1CreateEmployeeRoleRequest"/> class.
+        /// </summary>
+        /// <param name="employeeRole">employee_role.</param>
+        public V1CreateEmployeeRoleRequest(
+            Models.V1EmployeeRole employeeRole = null)
         {
-            EmployeeRole = employeeRole;
+            this.EmployeeRole = employeeRole;
         }
 
         /// <summary>
@@ -26,6 +33,7 @@ namespace Square.Models
         [JsonProperty("employee_role", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1EmployeeRole EmployeeRole { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -35,11 +43,7 @@ namespace Square.Models
             return $"V1CreateEmployeeRoleRequest : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"EmployeeRole = {(EmployeeRole == null ? "null" : EmployeeRole.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -53,43 +57,68 @@ namespace Square.Models
             }
 
             return obj is V1CreateEmployeeRoleRequest other &&
-                ((EmployeeRole == null && other.EmployeeRole == null) || (EmployeeRole?.Equals(other.EmployeeRole) == true));
+                ((this.EmployeeRole == null && other.EmployeeRole == null) || (this.EmployeeRole?.Equals(other.EmployeeRole) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1970733130;
 
-            if (EmployeeRole != null)
+            if (this.EmployeeRole != null)
             {
-               hashCode += EmployeeRole.GetHashCode();
+               hashCode += this.EmployeeRole.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.EmployeeRole = {(this.EmployeeRole == null ? "null" : this.EmployeeRole.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .EmployeeRole(EmployeeRole);
+                .EmployeeRole(this.EmployeeRole);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private Models.V1EmployeeRole employeeRole;
 
-
-
+             /// <summary>
+             /// EmployeeRole.
+             /// </summary>
+             /// <param name="employeeRole"> employeeRole. </param>
+             /// <returns> Builder. </returns>
             public Builder EmployeeRole(Models.V1EmployeeRole employeeRole)
             {
                 this.employeeRole = employeeRole;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> V1CreateEmployeeRoleRequest. </returns>
             public V1CreateEmployeeRoleRequest Build()
             {
-                return new V1CreateEmployeeRoleRequest(employeeRole);
+                return new V1CreateEmployeeRoleRequest(
+                    this.employeeRole);
             }
         }
     }

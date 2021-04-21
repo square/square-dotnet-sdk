@@ -1,31 +1,42 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class BatchRetrieveInventoryCountsRequest 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// BatchRetrieveInventoryCountsRequest.
+    /// </summary>
+    public class BatchRetrieveInventoryCountsRequest
     {
-        public BatchRetrieveInventoryCountsRequest(IList<string> catalogObjectIds = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BatchRetrieveInventoryCountsRequest"/> class.
+        /// </summary>
+        /// <param name="catalogObjectIds">catalog_object_ids.</param>
+        /// <param name="locationIds">location_ids.</param>
+        /// <param name="updatedAfter">updated_after.</param>
+        /// <param name="cursor">cursor.</param>
+        /// <param name="states">states.</param>
+        public BatchRetrieveInventoryCountsRequest(
+            IList<string> catalogObjectIds = null,
             IList<string> locationIds = null,
             string updatedAfter = null,
             string cursor = null,
             IList<string> states = null)
         {
-            CatalogObjectIds = catalogObjectIds;
-            LocationIds = locationIds;
-            UpdatedAfter = updatedAfter;
-            Cursor = cursor;
-            States = states;
+            this.CatalogObjectIds = catalogObjectIds;
+            this.LocationIds = locationIds;
+            this.UpdatedAfter = updatedAfter;
+            this.Cursor = cursor;
+            this.States = states;
         }
 
         /// <summary>
@@ -36,15 +47,15 @@ namespace Square.Models
         public IList<string> CatalogObjectIds { get; }
 
         /// <summary>
-        /// The filter to return results by `Location` ID. 
+        /// The filter to return results by `Location` ID.
         /// This filter is applicable only when set. The default is null.
         /// </summary>
         [JsonProperty("location_ids", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> LocationIds { get; }
 
         /// <summary>
-        /// The filter to return results with their `calculated_at` value 
-        /// after the given time as specified in an RFC 3339 timestamp. 
+        /// The filter to return results with their `calculated_at` value
+        /// after the given time as specified in an RFC 3339 timestamp.
         /// The default value is the UNIX epoch of (`1970-01-01T00:00:00Z`).
         /// </summary>
         [JsonProperty("updated_after", NullValueHandling = NullValueHandling.Ignore)]
@@ -66,6 +77,7 @@ namespace Square.Models
         [JsonProperty("states", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> States { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -75,15 +87,7 @@ namespace Square.Models
             return $"BatchRetrieveInventoryCountsRequest : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"CatalogObjectIds = {(CatalogObjectIds == null ? "null" : $"[{ string.Join(", ", CatalogObjectIds)} ]")}");
-            toStringOutput.Add($"LocationIds = {(LocationIds == null ? "null" : $"[{ string.Join(", ", LocationIds)} ]")}");
-            toStringOutput.Add($"UpdatedAfter = {(UpdatedAfter == null ? "null" : UpdatedAfter == string.Empty ? "" : UpdatedAfter)}");
-            toStringOutput.Add($"Cursor = {(Cursor == null ? "null" : Cursor == string.Empty ? "" : Cursor)}");
-            toStringOutput.Add($"States = {(States == null ? "null" : $"[{ string.Join(", ", States)} ]")}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -97,56 +101,77 @@ namespace Square.Models
             }
 
             return obj is BatchRetrieveInventoryCountsRequest other &&
-                ((CatalogObjectIds == null && other.CatalogObjectIds == null) || (CatalogObjectIds?.Equals(other.CatalogObjectIds) == true)) &&
-                ((LocationIds == null && other.LocationIds == null) || (LocationIds?.Equals(other.LocationIds) == true)) &&
-                ((UpdatedAfter == null && other.UpdatedAfter == null) || (UpdatedAfter?.Equals(other.UpdatedAfter) == true)) &&
-                ((Cursor == null && other.Cursor == null) || (Cursor?.Equals(other.Cursor) == true)) &&
-                ((States == null && other.States == null) || (States?.Equals(other.States) == true));
+                ((this.CatalogObjectIds == null && other.CatalogObjectIds == null) || (this.CatalogObjectIds?.Equals(other.CatalogObjectIds) == true)) &&
+                ((this.LocationIds == null && other.LocationIds == null) || (this.LocationIds?.Equals(other.LocationIds) == true)) &&
+                ((this.UpdatedAfter == null && other.UpdatedAfter == null) || (this.UpdatedAfter?.Equals(other.UpdatedAfter) == true)) &&
+                ((this.Cursor == null && other.Cursor == null) || (this.Cursor?.Equals(other.Cursor) == true)) &&
+                ((this.States == null && other.States == null) || (this.States?.Equals(other.States) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1765897747;
 
-            if (CatalogObjectIds != null)
+            if (this.CatalogObjectIds != null)
             {
-               hashCode += CatalogObjectIds.GetHashCode();
+               hashCode += this.CatalogObjectIds.GetHashCode();
             }
 
-            if (LocationIds != null)
+            if (this.LocationIds != null)
             {
-               hashCode += LocationIds.GetHashCode();
+               hashCode += this.LocationIds.GetHashCode();
             }
 
-            if (UpdatedAfter != null)
+            if (this.UpdatedAfter != null)
             {
-               hashCode += UpdatedAfter.GetHashCode();
+               hashCode += this.UpdatedAfter.GetHashCode();
             }
 
-            if (Cursor != null)
+            if (this.Cursor != null)
             {
-               hashCode += Cursor.GetHashCode();
+               hashCode += this.Cursor.GetHashCode();
             }
 
-            if (States != null)
+            if (this.States != null)
             {
-               hashCode += States.GetHashCode();
+               hashCode += this.States.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.CatalogObjectIds = {(this.CatalogObjectIds == null ? "null" : $"[{string.Join(", ", this.CatalogObjectIds)} ]")}");
+            toStringOutput.Add($"this.LocationIds = {(this.LocationIds == null ? "null" : $"[{string.Join(", ", this.LocationIds)} ]")}");
+            toStringOutput.Add($"this.UpdatedAfter = {(this.UpdatedAfter == null ? "null" : this.UpdatedAfter == string.Empty ? "" : this.UpdatedAfter)}");
+            toStringOutput.Add($"this.Cursor = {(this.Cursor == null ? "null" : this.Cursor == string.Empty ? "" : this.Cursor)}");
+            toStringOutput.Add($"this.States = {(this.States == null ? "null" : $"[{string.Join(", ", this.States)} ]")}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .CatalogObjectIds(CatalogObjectIds)
-                .LocationIds(LocationIds)
-                .UpdatedAfter(UpdatedAfter)
-                .Cursor(Cursor)
-                .States(States);
+                .CatalogObjectIds(this.CatalogObjectIds)
+                .LocationIds(this.LocationIds)
+                .UpdatedAfter(this.UpdatedAfter)
+                .Cursor(this.Cursor)
+                .States(this.States);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private IList<string> catalogObjectIds;
@@ -155,45 +180,73 @@ namespace Square.Models
             private string cursor;
             private IList<string> states;
 
-
-
+             /// <summary>
+             /// CatalogObjectIds.
+             /// </summary>
+             /// <param name="catalogObjectIds"> catalogObjectIds. </param>
+             /// <returns> Builder. </returns>
             public Builder CatalogObjectIds(IList<string> catalogObjectIds)
             {
                 this.catalogObjectIds = catalogObjectIds;
                 return this;
             }
 
+             /// <summary>
+             /// LocationIds.
+             /// </summary>
+             /// <param name="locationIds"> locationIds. </param>
+             /// <returns> Builder. </returns>
             public Builder LocationIds(IList<string> locationIds)
             {
                 this.locationIds = locationIds;
                 return this;
             }
 
+             /// <summary>
+             /// UpdatedAfter.
+             /// </summary>
+             /// <param name="updatedAfter"> updatedAfter. </param>
+             /// <returns> Builder. </returns>
             public Builder UpdatedAfter(string updatedAfter)
             {
                 this.updatedAfter = updatedAfter;
                 return this;
             }
 
+             /// <summary>
+             /// Cursor.
+             /// </summary>
+             /// <param name="cursor"> cursor. </param>
+             /// <returns> Builder. </returns>
             public Builder Cursor(string cursor)
             {
                 this.cursor = cursor;
                 return this;
             }
 
+             /// <summary>
+             /// States.
+             /// </summary>
+             /// <param name="states"> states. </param>
+             /// <returns> Builder. </returns>
             public Builder States(IList<string> states)
             {
                 this.states = states;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> BatchRetrieveInventoryCountsRequest. </returns>
             public BatchRetrieveInventoryCountsRequest Build()
             {
-                return new BatchRetrieveInventoryCountsRequest(catalogObjectIds,
-                    locationIds,
-                    updatedAfter,
-                    cursor,
-                    states);
+                return new BatchRetrieveInventoryCountsRequest(
+                    this.catalogObjectIds,
+                    this.locationIds,
+                    this.updatedAfter,
+                    this.cursor,
+                    this.states);
             }
         }
     }

@@ -1,26 +1,36 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square.Http.Client;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class RevokeTokenResponse 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Http.Client;
+    using Square.Utilities;
+
+    /// <summary>
+    /// RevokeTokenResponse.
+    /// </summary>
+    public class RevokeTokenResponse
     {
-        public RevokeTokenResponse(bool? success = null)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RevokeTokenResponse"/> class.
+        /// </summary>
+        /// <param name="success">success.</param>
+        public RevokeTokenResponse(
+            bool? success = null)
         {
-            Success = success;
+            this.Success = success;
         }
 
+        /// <summary>
+        /// Gets http context.
+        /// </summary>
         [JsonIgnore]
         public HttpContext Context { get; internal set; }
 
@@ -30,6 +40,7 @@ namespace Square.Models
         [JsonProperty("success", NullValueHandling = NullValueHandling.Ignore)]
         public bool? Success { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -39,11 +50,7 @@ namespace Square.Models
             return $"RevokeTokenResponse : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Success = {(Success == null ? "null" : Success.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -57,49 +64,74 @@ namespace Square.Models
             }
 
             return obj is RevokeTokenResponse other &&
-                ((Context == null && other.Context == null) || (Context?.Equals(other.Context) == true)) &&
-                ((Success == null && other.Success == null) || (Success?.Equals(other.Success) == true));
+                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
+                ((this.Success == null && other.Success == null) || (this.Success?.Equals(other.Success) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 1055186132;
 
-            if (Context != null)
+            if (this.Context != null)
             {
-                hashCode += Context.GetHashCode();
+                hashCode += this.Context.GetHashCode();
             }
 
-            if (Success != null)
+            if (this.Success != null)
             {
-               hashCode += Success.GetHashCode();
+               hashCode += this.Success.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Success = {(this.Success == null ? "null" : this.Success.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .Success(Success);
+                .Success(this.Success);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private bool? success;
 
-
-
+             /// <summary>
+             /// Success.
+             /// </summary>
+             /// <param name="success"> success. </param>
+             /// <returns> Builder. </returns>
             public Builder Success(bool? success)
             {
                 this.success = success;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> RevokeTokenResponse. </returns>
             public RevokeTokenResponse Build()
             {
-                return new RevokeTokenResponse(success);
+                return new RevokeTokenResponse(
+                    this.success);
             }
         }
     }

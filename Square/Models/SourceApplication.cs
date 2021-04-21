@@ -1,27 +1,36 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class SourceApplication 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// SourceApplication.
+    /// </summary>
+    public class SourceApplication
     {
-        public SourceApplication(string product = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SourceApplication"/> class.
+        /// </summary>
+        /// <param name="product">product.</param>
+        /// <param name="applicationId">application_id.</param>
+        /// <param name="name">name.</param>
+        public SourceApplication(
+            string product = null,
             string applicationId = null,
             string name = null)
         {
-            Product = product;
-            ApplicationId = applicationId;
-            Name = name;
+            this.Product = product;
+            this.ApplicationId = applicationId;
+            this.Name = name;
         }
 
         /// <summary>
@@ -32,7 +41,7 @@ namespace Square.Models
 
         /// <summary>
         /// Read-only Square ID assigned to the application. Only used for
-        /// [Product](#type-product) type `EXTERNAL_API`.
+        /// [Product]($m/Product) type `EXTERNAL_API`.
         /// </summary>
         [JsonProperty("application_id", NullValueHandling = NullValueHandling.Ignore)]
         public string ApplicationId { get; }
@@ -44,6 +53,7 @@ namespace Square.Models
         [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
         public string Name { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -53,13 +63,7 @@ namespace Square.Models
             return $"SourceApplication : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Product = {(Product == null ? "null" : Product.ToString())}");
-            toStringOutput.Add($"ApplicationId = {(ApplicationId == null ? "null" : ApplicationId == string.Empty ? "" : ApplicationId)}");
-            toStringOutput.Add($"Name = {(Name == null ? "null" : Name == string.Empty ? "" : Name)}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -73,73 +77,110 @@ namespace Square.Models
             }
 
             return obj is SourceApplication other &&
-                ((Product == null && other.Product == null) || (Product?.Equals(other.Product) == true)) &&
-                ((ApplicationId == null && other.ApplicationId == null) || (ApplicationId?.Equals(other.ApplicationId) == true)) &&
-                ((Name == null && other.Name == null) || (Name?.Equals(other.Name) == true));
+                ((this.Product == null && other.Product == null) || (this.Product?.Equals(other.Product) == true)) &&
+                ((this.ApplicationId == null && other.ApplicationId == null) || (this.ApplicationId?.Equals(other.ApplicationId) == true)) &&
+                ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -850254546;
 
-            if (Product != null)
+            if (this.Product != null)
             {
-               hashCode += Product.GetHashCode();
+               hashCode += this.Product.GetHashCode();
             }
 
-            if (ApplicationId != null)
+            if (this.ApplicationId != null)
             {
-               hashCode += ApplicationId.GetHashCode();
+               hashCode += this.ApplicationId.GetHashCode();
             }
 
-            if (Name != null)
+            if (this.Name != null)
             {
-               hashCode += Name.GetHashCode();
+               hashCode += this.Name.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Product = {(this.Product == null ? "null" : this.Product.ToString())}");
+            toStringOutput.Add($"this.ApplicationId = {(this.ApplicationId == null ? "null" : this.ApplicationId == string.Empty ? "" : this.ApplicationId)}");
+            toStringOutput.Add($"this.Name = {(this.Name == null ? "null" : this.Name == string.Empty ? "" : this.Name)}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .Product(Product)
-                .ApplicationId(ApplicationId)
-                .Name(Name);
+                .Product(this.Product)
+                .ApplicationId(this.ApplicationId)
+                .Name(this.Name);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string product;
             private string applicationId;
             private string name;
 
-
-
+             /// <summary>
+             /// Product.
+             /// </summary>
+             /// <param name="product"> product. </param>
+             /// <returns> Builder. </returns>
             public Builder Product(string product)
             {
                 this.product = product;
                 return this;
             }
 
+             /// <summary>
+             /// ApplicationId.
+             /// </summary>
+             /// <param name="applicationId"> applicationId. </param>
+             /// <returns> Builder. </returns>
             public Builder ApplicationId(string applicationId)
             {
                 this.applicationId = applicationId;
                 return this;
             }
 
+             /// <summary>
+             /// Name.
+             /// </summary>
+             /// <param name="name"> name. </param>
+             /// <returns> Builder. </returns>
             public Builder Name(string name)
             {
                 this.name = name;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> SourceApplication. </returns>
             public SourceApplication Build()
             {
-                return new SourceApplication(product,
-                    applicationId,
-                    name);
+                return new SourceApplication(
+                    this.product,
+                    this.applicationId,
+                    this.name);
             }
         }
     }

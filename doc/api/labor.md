@@ -33,7 +33,10 @@ ILaborApi laborApi = client.LaborApi;
 Returns a paginated list of `BreakType` instances for a business.
 
 ```csharp
-ListBreakTypesAsync(string locationId = null, int? limit = null, string cursor = null)
+ListBreakTypesAsync(
+    string locationId = null,
+    int? limit = null,
+    string cursor = null)
 ```
 
 ## Parameters
@@ -81,7 +84,8 @@ You can only have 3 `BreakType` instances per location. If you attempt to add a 
 is returned.
 
 ```csharp
-CreateBreakTypeAsync(Models.CreateBreakTypeRequest body)
+CreateBreakTypeAsync(
+    Models.CreateBreakTypeRequest body)
 ```
 
 ## Parameters
@@ -127,7 +131,8 @@ Deletes an existing `BreakType`.
 A `BreakType` can be deleted even if it is referenced from a `Shift`.
 
 ```csharp
-DeleteBreakTypeAsync(string id)
+DeleteBreakTypeAsync(
+    string id)
 ```
 
 ## Parameters
@@ -158,7 +163,8 @@ catch (ApiException e){};
 Returns a single `BreakType` specified by id.
 
 ```csharp
-GetBreakTypeAsync(string id)
+GetBreakTypeAsync(
+    string id)
 ```
 
 ## Parameters
@@ -189,7 +195,9 @@ catch (ApiException e){};
 Updates an existing `BreakType`.
 
 ```csharp
-UpdateBreakTypeAsync(string id, Models.UpdateBreakTypeRequest body)
+UpdateBreakTypeAsync(
+    string id,
+    Models.UpdateBreakTypeRequest body)
 ```
 
 ## Parameters
@@ -236,7 +244,10 @@ catch (ApiException e){};
 Returns a paginated list of `EmployeeWage` instances for a business.
 
 ```csharp
-ListEmployeeWagesAsync(string employeeId = null, int? limit = null, string cursor = null)
+ListEmployeeWagesAsync(
+    string employeeId = null,
+    int? limit = null,
+    string cursor = null)
 ```
 
 ## Parameters
@@ -273,7 +284,8 @@ catch (ApiException e){};
 Returns a single `EmployeeWage` specified by id.
 
 ```csharp
-GetEmployeeWageAsync(string id)
+GetEmployeeWageAsync(
+    string id)
 ```
 
 ## Parameters
@@ -322,7 +334,8 @@ An attempt to create a new `Shift` can result in a `BAD_REQUEST` error when:
   the `Shift.end_at`
 
 ```csharp
-CreateShiftAsync(Models.CreateShiftRequest body)
+CreateShiftAsync(
+    Models.CreateShiftRequest body)
 ```
 
 ## Parameters
@@ -403,7 +416,8 @@ The list can be sorted by:
 - `updated_at`
 
 ```csharp
-SearchShiftsAsync(Models.SearchShiftsRequest body)
+SearchShiftsAsync(
+    Models.SearchShiftsRequest body)
 ```
 
 ## Parameters
@@ -479,7 +493,8 @@ catch (ApiException e){};
 Deletes a `Shift`.
 
 ```csharp
-DeleteShiftAsync(string id)
+DeleteShiftAsync(
+    string id)
 ```
 
 ## Parameters
@@ -510,7 +525,8 @@ catch (ApiException e){};
 Returns a single `Shift` specified by id.
 
 ```csharp
-GetShiftAsync(string id)
+GetShiftAsync(
+    string id)
 ```
 
 ## Parameters
@@ -547,7 +563,9 @@ When closing a `Shift`, all `Break` instances in the shift must be complete with
 set on each `Break`.
 
 ```csharp
-UpdateShiftAsync(string id, Models.UpdateShiftRequest body)
+UpdateShiftAsync(
+    string id,
+    Models.UpdateShiftRequest body)
 ```
 
 ## Parameters
@@ -615,7 +633,10 @@ catch (ApiException e){};
 Returns a paginated list of `TeamMemberWage` instances for a business.
 
 ```csharp
-ListTeamMemberWagesAsync(string teamMemberId = null, int? limit = null, string cursor = null)
+ListTeamMemberWagesAsync(
+    string teamMemberId = null,
+    int? limit = null,
+    string cursor = null)
 ```
 
 ## Parameters
@@ -650,7 +671,8 @@ catch (ApiException e){};
 Returns a single `TeamMemberWage` specified by id.
 
 ```csharp
-GetTeamMemberWageAsync(string id)
+GetTeamMemberWageAsync(
+    string id)
 ```
 
 ## Parameters
@@ -681,7 +703,9 @@ catch (ApiException e){};
 Returns a list of `WorkweekConfig` instances for a business.
 
 ```csharp
-ListWorkweekConfigsAsync(int? limit = null, string cursor = null)
+ListWorkweekConfigsAsync(
+    int? limit = null,
+    string cursor = null)
 ```
 
 ## Parameters
@@ -714,7 +738,9 @@ catch (ApiException e){};
 Updates a `WorkweekConfig`.
 
 ```csharp
-UpdateWorkweekConfigAsync(string id, Models.UpdateWorkweekConfigRequest body)
+UpdateWorkweekConfigAsync(
+    string id,
+    Models.UpdateWorkweekConfigRequest body)
 ```
 
 ## Parameters

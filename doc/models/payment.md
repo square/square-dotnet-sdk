@@ -32,7 +32,7 @@ Represents a payment processed by the Square API.
 | `LocationId` | `string` | Optional | The ID of the location associated with the payment.<br>**Constraints**: *Maximum Length*: `50` |
 | `OrderId` | `string` | Optional | The ID of the order associated with the payment.<br>**Constraints**: *Maximum Length*: `192` |
 | `ReferenceId` | `string` | Optional | An optional ID that associates the payment with an entity in<br>another system.<br>**Constraints**: *Maximum Length*: `40` |
-| `CustomerId` | `string` | Optional | The [Customer](#type-customer) ID of the customer associated with the payment.<br>**Constraints**: *Maximum Length*: `191` |
+| `CustomerId` | `string` | Optional | The [Customer](/doc/models/customer.md) ID of the customer associated with the payment.<br>**Constraints**: *Maximum Length*: `191` |
 | `EmployeeId` | `string` | Optional | An optional ID of the employee associated with taking the payment.<br>**Constraints**: *Maximum Length*: `192` |
 | `RefundIds` | `IList<string>` | Optional | A list of `refund_id`s identifying refunds for the payment. |
 | `RiskEvaluation` | [`Models.RiskEvaluation`](/doc/models/risk-evaluation.md) | Optional | Represents fraud risk information for the associated payment.<br><br>When you take a payment through Square's Payments API (using the `CreatePayment`<br>endpoint), Square evaluates it and assigns a risk level to the payment. Sellers<br>can use this information to determine the course of action (for example,<br>provide the goods/services or refund the payment). |

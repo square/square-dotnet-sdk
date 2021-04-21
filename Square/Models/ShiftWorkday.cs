@@ -1,27 +1,36 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class ShiftWorkday 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// ShiftWorkday.
+    /// </summary>
+    public class ShiftWorkday
     {
-        public ShiftWorkday(Models.DateRange dateRange = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ShiftWorkday"/> class.
+        /// </summary>
+        /// <param name="dateRange">date_range.</param>
+        /// <param name="matchShiftsBy">match_shifts_by.</param>
+        /// <param name="defaultTimezone">default_timezone.</param>
+        public ShiftWorkday(
+            Models.DateRange dateRange = null,
             string matchShiftsBy = null,
             string defaultTimezone = null)
         {
-            DateRange = dateRange;
-            MatchShiftsBy = matchShiftsBy;
-            DefaultTimezone = defaultTimezone;
+            this.DateRange = dateRange;
+            this.MatchShiftsBy = matchShiftsBy;
+            this.DefaultTimezone = defaultTimezone;
         }
 
         /// <summary>
@@ -46,6 +55,7 @@ namespace Square.Models
         [JsonProperty("default_timezone", NullValueHandling = NullValueHandling.Ignore)]
         public string DefaultTimezone { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -55,13 +65,7 @@ namespace Square.Models
             return $"ShiftWorkday : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"DateRange = {(DateRange == null ? "null" : DateRange.ToString())}");
-            toStringOutput.Add($"MatchShiftsBy = {(MatchShiftsBy == null ? "null" : MatchShiftsBy.ToString())}");
-            toStringOutput.Add($"DefaultTimezone = {(DefaultTimezone == null ? "null" : DefaultTimezone == string.Empty ? "" : DefaultTimezone)}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -75,73 +79,110 @@ namespace Square.Models
             }
 
             return obj is ShiftWorkday other &&
-                ((DateRange == null && other.DateRange == null) || (DateRange?.Equals(other.DateRange) == true)) &&
-                ((MatchShiftsBy == null && other.MatchShiftsBy == null) || (MatchShiftsBy?.Equals(other.MatchShiftsBy) == true)) &&
-                ((DefaultTimezone == null && other.DefaultTimezone == null) || (DefaultTimezone?.Equals(other.DefaultTimezone) == true));
+                ((this.DateRange == null && other.DateRange == null) || (this.DateRange?.Equals(other.DateRange) == true)) &&
+                ((this.MatchShiftsBy == null && other.MatchShiftsBy == null) || (this.MatchShiftsBy?.Equals(other.MatchShiftsBy) == true)) &&
+                ((this.DefaultTimezone == null && other.DefaultTimezone == null) || (this.DefaultTimezone?.Equals(other.DefaultTimezone) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1536716736;
 
-            if (DateRange != null)
+            if (this.DateRange != null)
             {
-               hashCode += DateRange.GetHashCode();
+               hashCode += this.DateRange.GetHashCode();
             }
 
-            if (MatchShiftsBy != null)
+            if (this.MatchShiftsBy != null)
             {
-               hashCode += MatchShiftsBy.GetHashCode();
+               hashCode += this.MatchShiftsBy.GetHashCode();
             }
 
-            if (DefaultTimezone != null)
+            if (this.DefaultTimezone != null)
             {
-               hashCode += DefaultTimezone.GetHashCode();
+               hashCode += this.DefaultTimezone.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.DateRange = {(this.DateRange == null ? "null" : this.DateRange.ToString())}");
+            toStringOutput.Add($"this.MatchShiftsBy = {(this.MatchShiftsBy == null ? "null" : this.MatchShiftsBy.ToString())}");
+            toStringOutput.Add($"this.DefaultTimezone = {(this.DefaultTimezone == null ? "null" : this.DefaultTimezone == string.Empty ? "" : this.DefaultTimezone)}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .DateRange(DateRange)
-                .MatchShiftsBy(MatchShiftsBy)
-                .DefaultTimezone(DefaultTimezone);
+                .DateRange(this.DateRange)
+                .MatchShiftsBy(this.MatchShiftsBy)
+                .DefaultTimezone(this.DefaultTimezone);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private Models.DateRange dateRange;
             private string matchShiftsBy;
             private string defaultTimezone;
 
-
-
+             /// <summary>
+             /// DateRange.
+             /// </summary>
+             /// <param name="dateRange"> dateRange. </param>
+             /// <returns> Builder. </returns>
             public Builder DateRange(Models.DateRange dateRange)
             {
                 this.dateRange = dateRange;
                 return this;
             }
 
+             /// <summary>
+             /// MatchShiftsBy.
+             /// </summary>
+             /// <param name="matchShiftsBy"> matchShiftsBy. </param>
+             /// <returns> Builder. </returns>
             public Builder MatchShiftsBy(string matchShiftsBy)
             {
                 this.matchShiftsBy = matchShiftsBy;
                 return this;
             }
 
+             /// <summary>
+             /// DefaultTimezone.
+             /// </summary>
+             /// <param name="defaultTimezone"> defaultTimezone. </param>
+             /// <returns> Builder. </returns>
             public Builder DefaultTimezone(string defaultTimezone)
             {
                 this.defaultTimezone = defaultTimezone;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> ShiftWorkday. </returns>
             public ShiftWorkday Build()
             {
-                return new ShiftWorkday(dateRange,
-                    matchShiftsBy,
-                    defaultTimezone);
+                return new ShiftWorkday(
+                    this.dateRange,
+                    this.matchShiftsBy,
+                    this.defaultTimezone);
             }
         }
     }

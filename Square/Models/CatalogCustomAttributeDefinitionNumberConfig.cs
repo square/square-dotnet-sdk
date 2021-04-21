@@ -1,23 +1,30 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class CatalogCustomAttributeDefinitionNumberConfig 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// CatalogCustomAttributeDefinitionNumberConfig.
+    /// </summary>
+    public class CatalogCustomAttributeDefinitionNumberConfig
     {
-        public CatalogCustomAttributeDefinitionNumberConfig(int? precision = null)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CatalogCustomAttributeDefinitionNumberConfig"/> class.
+        /// </summary>
+        /// <param name="precision">precision.</param>
+        public CatalogCustomAttributeDefinitionNumberConfig(
+            int? precision = null)
         {
-            Precision = precision;
+            this.Precision = precision;
         }
 
         /// <summary>
@@ -32,6 +39,7 @@ namespace Square.Models
         [JsonProperty("precision", NullValueHandling = NullValueHandling.Ignore)]
         public int? Precision { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -41,11 +49,7 @@ namespace Square.Models
             return $"CatalogCustomAttributeDefinitionNumberConfig : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Precision = {(Precision == null ? "null" : Precision.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -59,43 +63,68 @@ namespace Square.Models
             }
 
             return obj is CatalogCustomAttributeDefinitionNumberConfig other &&
-                ((Precision == null && other.Precision == null) || (Precision?.Equals(other.Precision) == true));
+                ((this.Precision == null && other.Precision == null) || (this.Precision?.Equals(other.Precision) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 196624818;
 
-            if (Precision != null)
+            if (this.Precision != null)
             {
-               hashCode += Precision.GetHashCode();
+               hashCode += this.Precision.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Precision = {(this.Precision == null ? "null" : this.Precision.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .Precision(Precision);
+                .Precision(this.Precision);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private int? precision;
 
-
-
+             /// <summary>
+             /// Precision.
+             /// </summary>
+             /// <param name="precision"> precision. </param>
+             /// <returns> Builder. </returns>
             public Builder Precision(int? precision)
             {
                 this.precision = precision;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> CatalogCustomAttributeDefinitionNumberConfig. </returns>
             public CatalogCustomAttributeDefinitionNumberConfig Build()
             {
-                return new CatalogCustomAttributeDefinitionNumberConfig(precision);
+                return new CatalogCustomAttributeDefinitionNumberConfig(
+                    this.precision);
             }
         }
     }

@@ -1,11 +1,11 @@
-using System;
-
 namespace Square.Authentication
 {
-    public interface IAccessTokenCredentials
+using System;
+
+public interface IAccessTokenCredentials
     {
         /// <summary>
-        /// Getter for accessToken
+        /// Gets accessToken.
         /// </summary>
         string AccessToken { get; }
 

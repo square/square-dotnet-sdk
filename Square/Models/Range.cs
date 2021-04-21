@@ -1,25 +1,33 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class Range 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// Range.
+    /// </summary>
+    public class Range
     {
-        public Range(string min = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Range"/> class.
+        /// </summary>
+        /// <param name="min">min.</param>
+        /// <param name="max">max.</param>
+        public Range(
+            string min = null,
             string max = null)
         {
-            Min = min;
-            Max = max;
+            this.Min = min;
+            this.Max = max;
         }
 
         /// <summary>
@@ -34,6 +42,7 @@ namespace Square.Models
         [JsonProperty("max", NullValueHandling = NullValueHandling.Ignore)]
         public string Max { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -43,12 +52,7 @@ namespace Square.Models
             return $"Range : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Min = {(Min == null ? "null" : Min == string.Empty ? "" : Min)}");
-            toStringOutput.Add($"Max = {(Max == null ? "null" : Max == string.Empty ? "" : Max)}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -62,58 +66,89 @@ namespace Square.Models
             }
 
             return obj is Range other &&
-                ((Min == null && other.Min == null) || (Min?.Equals(other.Min) == true)) &&
-                ((Max == null && other.Max == null) || (Max?.Equals(other.Max) == true));
+                ((this.Min == null && other.Min == null) || (this.Min?.Equals(other.Min) == true)) &&
+                ((this.Max == null && other.Max == null) || (this.Max?.Equals(other.Max) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1130495975;
 
-            if (Min != null)
+            if (this.Min != null)
             {
-               hashCode += Min.GetHashCode();
+               hashCode += this.Min.GetHashCode();
             }
 
-            if (Max != null)
+            if (this.Max != null)
             {
-               hashCode += Max.GetHashCode();
+               hashCode += this.Max.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Min = {(this.Min == null ? "null" : this.Min == string.Empty ? "" : this.Min)}");
+            toStringOutput.Add($"this.Max = {(this.Max == null ? "null" : this.Max == string.Empty ? "" : this.Max)}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .Min(Min)
-                .Max(Max);
+                .Min(this.Min)
+                .Max(this.Max);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string min;
             private string max;
 
-
-
+             /// <summary>
+             /// Min.
+             /// </summary>
+             /// <param name="min"> min. </param>
+             /// <returns> Builder. </returns>
             public Builder Min(string min)
             {
                 this.min = min;
                 return this;
             }
 
+             /// <summary>
+             /// Max.
+             /// </summary>
+             /// <param name="max"> max. </param>
+             /// <returns> Builder. </returns>
             public Builder Max(string max)
             {
                 this.max = max;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> Range. </returns>
             public Range Build()
             {
-                return new Range(min,
-                    max);
+                return new Range(
+                    this.min,
+                    this.max);
             }
         }
     }

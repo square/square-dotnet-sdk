@@ -1,43 +1,52 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class SearchLoyaltyAccountsRequestLoyaltyAccountQuery 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// SearchLoyaltyAccountsRequestLoyaltyAccountQuery.
+    /// </summary>
+    public class SearchLoyaltyAccountsRequestLoyaltyAccountQuery
     {
-        public SearchLoyaltyAccountsRequestLoyaltyAccountQuery(IList<Models.LoyaltyAccountMapping> mappings = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SearchLoyaltyAccountsRequestLoyaltyAccountQuery"/> class.
+        /// </summary>
+        /// <param name="mappings">mappings.</param>
+        /// <param name="customerIds">customer_ids.</param>
+        public SearchLoyaltyAccountsRequestLoyaltyAccountQuery(
+            IList<Models.LoyaltyAccountMapping> mappings = null,
             IList<string> customerIds = null)
         {
-            Mappings = mappings;
-            CustomerIds = customerIds;
+            this.Mappings = mappings;
+            this.CustomerIds = customerIds;
         }
 
         /// <summary>
-        /// The set of mappings to use in the loyalty account search.  
-        /// This cannot be combined with `customer_ids`.  
+        /// The set of mappings to use in the loyalty account search.
+        /// This cannot be combined with `customer_ids`.
         /// Max: 30 mappings
         /// </summary>
         [JsonProperty("mappings", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.LoyaltyAccountMapping> Mappings { get; }
 
         /// <summary>
-        /// The set of customer IDs to use in the loyalty account search.  
-        /// This cannot be combined with `mappings`.  
+        /// The set of customer IDs to use in the loyalty account search.
+        /// This cannot be combined with `mappings`.
         /// Max: 30 customer IDs
         /// </summary>
         [JsonProperty("customer_ids", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> CustomerIds { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -47,12 +56,7 @@ namespace Square.Models
             return $"SearchLoyaltyAccountsRequestLoyaltyAccountQuery : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Mappings = {(Mappings == null ? "null" : $"[{ string.Join(", ", Mappings)} ]")}");
-            toStringOutput.Add($"CustomerIds = {(CustomerIds == null ? "null" : $"[{ string.Join(", ", CustomerIds)} ]")}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -66,58 +70,89 @@ namespace Square.Models
             }
 
             return obj is SearchLoyaltyAccountsRequestLoyaltyAccountQuery other &&
-                ((Mappings == null && other.Mappings == null) || (Mappings?.Equals(other.Mappings) == true)) &&
-                ((CustomerIds == null && other.CustomerIds == null) || (CustomerIds?.Equals(other.CustomerIds) == true));
+                ((this.Mappings == null && other.Mappings == null) || (this.Mappings?.Equals(other.Mappings) == true)) &&
+                ((this.CustomerIds == null && other.CustomerIds == null) || (this.CustomerIds?.Equals(other.CustomerIds) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1219141926;
 
-            if (Mappings != null)
+            if (this.Mappings != null)
             {
-               hashCode += Mappings.GetHashCode();
+               hashCode += this.Mappings.GetHashCode();
             }
 
-            if (CustomerIds != null)
+            if (this.CustomerIds != null)
             {
-               hashCode += CustomerIds.GetHashCode();
+               hashCode += this.CustomerIds.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Mappings = {(this.Mappings == null ? "null" : $"[{string.Join(", ", this.Mappings)} ]")}");
+            toStringOutput.Add($"this.CustomerIds = {(this.CustomerIds == null ? "null" : $"[{string.Join(", ", this.CustomerIds)} ]")}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .Mappings(Mappings)
-                .CustomerIds(CustomerIds);
+                .Mappings(this.Mappings)
+                .CustomerIds(this.CustomerIds);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private IList<Models.LoyaltyAccountMapping> mappings;
             private IList<string> customerIds;
 
-
-
+             /// <summary>
+             /// Mappings.
+             /// </summary>
+             /// <param name="mappings"> mappings. </param>
+             /// <returns> Builder. </returns>
             public Builder Mappings(IList<Models.LoyaltyAccountMapping> mappings)
             {
                 this.mappings = mappings;
                 return this;
             }
 
+             /// <summary>
+             /// CustomerIds.
+             /// </summary>
+             /// <param name="customerIds"> customerIds. </param>
+             /// <returns> Builder. </returns>
             public Builder CustomerIds(IList<string> customerIds)
             {
                 this.customerIds = customerIds;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> SearchLoyaltyAccountsRequestLoyaltyAccountQuery. </returns>
             public SearchLoyaltyAccountsRequestLoyaltyAccountQuery Build()
             {
-                return new SearchLoyaltyAccountsRequestLoyaltyAccountQuery(mappings,
-                    customerIds);
+                return new SearchLoyaltyAccountsRequestLoyaltyAccountQuery(
+                    this.mappings,
+                    this.customerIds);
             }
         }
     }

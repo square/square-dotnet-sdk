@@ -53,13 +53,13 @@ namespace Square.Tests
         [Test]
         public void TestReturnApiType()
         {
-            Assert.IsInstanceOf<LocationsApi>(client.LocationsApi);
+            Assert.IsInstanceOf<LocationsApi>(this.Client.LocationsApi);
         }
 
         [Test]
         public void TestResponse()
         {
-            var api = client.LocationsApi;
+            var api = this.Client.LocationsApi;
             var res = api.ListLocations();
             Assert.AreEqual(res.Context.Response.StatusCode, 200);
         }
@@ -72,7 +72,7 @@ namespace Square.Tests
         [Test]
         public void TestFileUpload()
         {   
-            var api = client.CatalogApi;
+            var api = this.Client.CatalogApi;
 
             CreateCatalogImageRequest request = new CreateCatalogImageRequest.Builder(GenerateIdempotencyKey())
                 .Image(new CatalogObject.Builder("IMAGE", "#dotnet_sdk_test")
@@ -116,7 +116,7 @@ namespace Square.Tests
         [Test]
         public void TestCustomersCycle()
         {
-            var api = client.CustomersApi;
+            var api = this.Client.CustomersApi;
 
             // Create Customer
             var createCustomerRes = api.CreateCustomer(TestCreateCustomerRequest);

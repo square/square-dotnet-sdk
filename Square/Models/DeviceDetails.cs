@@ -1,27 +1,36 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class DeviceDetails 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// DeviceDetails.
+    /// </summary>
+    public class DeviceDetails
     {
-        public DeviceDetails(string deviceId = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DeviceDetails"/> class.
+        /// </summary>
+        /// <param name="deviceId">device_id.</param>
+        /// <param name="deviceInstallationId">device_installation_id.</param>
+        /// <param name="deviceName">device_name.</param>
+        public DeviceDetails(
+            string deviceId = null,
             string deviceInstallationId = null,
             string deviceName = null)
         {
-            DeviceId = deviceId;
-            DeviceInstallationId = deviceInstallationId;
-            DeviceName = deviceName;
+            this.DeviceId = deviceId;
+            this.DeviceInstallationId = deviceInstallationId;
+            this.DeviceName = deviceName;
         }
 
         /// <summary>
@@ -42,6 +51,7 @@ namespace Square.Models
         [JsonProperty("device_name", NullValueHandling = NullValueHandling.Ignore)]
         public string DeviceName { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -51,13 +61,7 @@ namespace Square.Models
             return $"DeviceDetails : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"DeviceId = {(DeviceId == null ? "null" : DeviceId == string.Empty ? "" : DeviceId)}");
-            toStringOutput.Add($"DeviceInstallationId = {(DeviceInstallationId == null ? "null" : DeviceInstallationId == string.Empty ? "" : DeviceInstallationId)}");
-            toStringOutput.Add($"DeviceName = {(DeviceName == null ? "null" : DeviceName == string.Empty ? "" : DeviceName)}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -71,73 +75,110 @@ namespace Square.Models
             }
 
             return obj is DeviceDetails other &&
-                ((DeviceId == null && other.DeviceId == null) || (DeviceId?.Equals(other.DeviceId) == true)) &&
-                ((DeviceInstallationId == null && other.DeviceInstallationId == null) || (DeviceInstallationId?.Equals(other.DeviceInstallationId) == true)) &&
-                ((DeviceName == null && other.DeviceName == null) || (DeviceName?.Equals(other.DeviceName) == true));
+                ((this.DeviceId == null && other.DeviceId == null) || (this.DeviceId?.Equals(other.DeviceId) == true)) &&
+                ((this.DeviceInstallationId == null && other.DeviceInstallationId == null) || (this.DeviceInstallationId?.Equals(other.DeviceInstallationId) == true)) &&
+                ((this.DeviceName == null && other.DeviceName == null) || (this.DeviceName?.Equals(other.DeviceName) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -363727408;
 
-            if (DeviceId != null)
+            if (this.DeviceId != null)
             {
-               hashCode += DeviceId.GetHashCode();
+               hashCode += this.DeviceId.GetHashCode();
             }
 
-            if (DeviceInstallationId != null)
+            if (this.DeviceInstallationId != null)
             {
-               hashCode += DeviceInstallationId.GetHashCode();
+               hashCode += this.DeviceInstallationId.GetHashCode();
             }
 
-            if (DeviceName != null)
+            if (this.DeviceName != null)
             {
-               hashCode += DeviceName.GetHashCode();
+               hashCode += this.DeviceName.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.DeviceId = {(this.DeviceId == null ? "null" : this.DeviceId == string.Empty ? "" : this.DeviceId)}");
+            toStringOutput.Add($"this.DeviceInstallationId = {(this.DeviceInstallationId == null ? "null" : this.DeviceInstallationId == string.Empty ? "" : this.DeviceInstallationId)}");
+            toStringOutput.Add($"this.DeviceName = {(this.DeviceName == null ? "null" : this.DeviceName == string.Empty ? "" : this.DeviceName)}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .DeviceId(DeviceId)
-                .DeviceInstallationId(DeviceInstallationId)
-                .DeviceName(DeviceName);
+                .DeviceId(this.DeviceId)
+                .DeviceInstallationId(this.DeviceInstallationId)
+                .DeviceName(this.DeviceName);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string deviceId;
             private string deviceInstallationId;
             private string deviceName;
 
-
-
+             /// <summary>
+             /// DeviceId.
+             /// </summary>
+             /// <param name="deviceId"> deviceId. </param>
+             /// <returns> Builder. </returns>
             public Builder DeviceId(string deviceId)
             {
                 this.deviceId = deviceId;
                 return this;
             }
 
+             /// <summary>
+             /// DeviceInstallationId.
+             /// </summary>
+             /// <param name="deviceInstallationId"> deviceInstallationId. </param>
+             /// <returns> Builder. </returns>
             public Builder DeviceInstallationId(string deviceInstallationId)
             {
                 this.deviceInstallationId = deviceInstallationId;
                 return this;
             }
 
+             /// <summary>
+             /// DeviceName.
+             /// </summary>
+             /// <param name="deviceName"> deviceName. </param>
+             /// <returns> Builder. </returns>
             public Builder DeviceName(string deviceName)
             {
                 this.deviceName = deviceName;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> DeviceDetails. </returns>
             public DeviceDetails Build()
             {
-                return new DeviceDetails(deviceId,
-                    deviceInstallationId,
-                    deviceName);
+                return new DeviceDetails(
+                    this.deviceId,
+                    this.deviceInstallationId,
+                    this.deviceName);
             }
         }
     }

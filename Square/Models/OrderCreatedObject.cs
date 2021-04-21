@@ -1,31 +1,39 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class OrderCreatedObject 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// OrderCreatedObject.
+    /// </summary>
+    public class OrderCreatedObject
     {
-        public OrderCreatedObject(Models.OrderCreated orderCreated = null)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="OrderCreatedObject"/> class.
+        /// </summary>
+        /// <param name="orderCreated">order_created.</param>
+        public OrderCreatedObject(
+            Models.OrderCreated orderCreated = null)
         {
-            OrderCreated = orderCreated;
+            this.OrderCreated = orderCreated;
         }
 
         /// <summary>
-        /// Getter for order_created
+        /// Gets or sets OrderCreated.
         /// </summary>
         [JsonProperty("order_created", NullValueHandling = NullValueHandling.Ignore)]
         public Models.OrderCreated OrderCreated { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -35,11 +43,7 @@ namespace Square.Models
             return $"OrderCreatedObject : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"OrderCreated = {(OrderCreated == null ? "null" : OrderCreated.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -53,43 +57,68 @@ namespace Square.Models
             }
 
             return obj is OrderCreatedObject other &&
-                ((OrderCreated == null && other.OrderCreated == null) || (OrderCreated?.Equals(other.OrderCreated) == true));
+                ((this.OrderCreated == null && other.OrderCreated == null) || (this.OrderCreated?.Equals(other.OrderCreated) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 529492832;
 
-            if (OrderCreated != null)
+            if (this.OrderCreated != null)
             {
-               hashCode += OrderCreated.GetHashCode();
+               hashCode += this.OrderCreated.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.OrderCreated = {(this.OrderCreated == null ? "null" : this.OrderCreated.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .OrderCreated(OrderCreated);
+                .OrderCreated(this.OrderCreated);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private Models.OrderCreated orderCreated;
 
-
-
+             /// <summary>
+             /// OrderCreated.
+             /// </summary>
+             /// <param name="orderCreated"> orderCreated. </param>
+             /// <returns> Builder. </returns>
             public Builder OrderCreated(Models.OrderCreated orderCreated)
             {
                 this.orderCreated = orderCreated;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> OrderCreatedObject. </returns>
             public OrderCreatedObject Build()
             {
-                return new OrderCreatedObject(orderCreated);
+                return new OrderCreatedObject(
+                    this.orderCreated);
             }
         }
     }

@@ -1,21 +1,42 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class Address 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// Address.
+    /// </summary>
+    public class Address
     {
-        public Address(string addressLine1 = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Address"/> class.
+        /// </summary>
+        /// <param name="addressLine1">address_line_1.</param>
+        /// <param name="addressLine2">address_line_2.</param>
+        /// <param name="addressLine3">address_line_3.</param>
+        /// <param name="locality">locality.</param>
+        /// <param name="sublocality">sublocality.</param>
+        /// <param name="sublocality2">sublocality_2.</param>
+        /// <param name="sublocality3">sublocality_3.</param>
+        /// <param name="administrativeDistrictLevel1">administrative_district_level_1.</param>
+        /// <param name="administrativeDistrictLevel2">administrative_district_level_2.</param>
+        /// <param name="administrativeDistrictLevel3">administrative_district_level_3.</param>
+        /// <param name="postalCode">postal_code.</param>
+        /// <param name="country">country.</param>
+        /// <param name="firstName">first_name.</param>
+        /// <param name="lastName">last_name.</param>
+        /// <param name="organization">organization.</param>
+        public Address(
+            string addressLine1 = null,
             string addressLine2 = null,
             string addressLine3 = null,
             string locality = null,
@@ -31,21 +52,21 @@ namespace Square.Models
             string lastName = null,
             string organization = null)
         {
-            AddressLine1 = addressLine1;
-            AddressLine2 = addressLine2;
-            AddressLine3 = addressLine3;
-            Locality = locality;
-            Sublocality = sublocality;
-            Sublocality2 = sublocality2;
-            Sublocality3 = sublocality3;
-            AdministrativeDistrictLevel1 = administrativeDistrictLevel1;
-            AdministrativeDistrictLevel2 = administrativeDistrictLevel2;
-            AdministrativeDistrictLevel3 = administrativeDistrictLevel3;
-            PostalCode = postalCode;
-            Country = country;
-            FirstName = firstName;
-            LastName = lastName;
-            Organization = organization;
+            this.AddressLine1 = addressLine1;
+            this.AddressLine2 = addressLine2;
+            this.AddressLine3 = addressLine3;
+            this.Locality = locality;
+            this.Sublocality = sublocality;
+            this.Sublocality2 = sublocality2;
+            this.Sublocality3 = sublocality3;
+            this.AdministrativeDistrictLevel1 = administrativeDistrictLevel1;
+            this.AdministrativeDistrictLevel2 = administrativeDistrictLevel2;
+            this.AdministrativeDistrictLevel3 = administrativeDistrictLevel3;
+            this.PostalCode = postalCode;
+            this.Country = country;
+            this.FirstName = firstName;
+            this.LastName = lastName;
+            this.Organization = organization;
         }
 
         /// <summary>
@@ -146,6 +167,7 @@ namespace Square.Models
         [JsonProperty("organization", NullValueHandling = NullValueHandling.Ignore)]
         public string Organization { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -155,25 +177,7 @@ namespace Square.Models
             return $"Address : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"AddressLine1 = {(AddressLine1 == null ? "null" : AddressLine1 == string.Empty ? "" : AddressLine1)}");
-            toStringOutput.Add($"AddressLine2 = {(AddressLine2 == null ? "null" : AddressLine2 == string.Empty ? "" : AddressLine2)}");
-            toStringOutput.Add($"AddressLine3 = {(AddressLine3 == null ? "null" : AddressLine3 == string.Empty ? "" : AddressLine3)}");
-            toStringOutput.Add($"Locality = {(Locality == null ? "null" : Locality == string.Empty ? "" : Locality)}");
-            toStringOutput.Add($"Sublocality = {(Sublocality == null ? "null" : Sublocality == string.Empty ? "" : Sublocality)}");
-            toStringOutput.Add($"Sublocality2 = {(Sublocality2 == null ? "null" : Sublocality2 == string.Empty ? "" : Sublocality2)}");
-            toStringOutput.Add($"Sublocality3 = {(Sublocality3 == null ? "null" : Sublocality3 == string.Empty ? "" : Sublocality3)}");
-            toStringOutput.Add($"AdministrativeDistrictLevel1 = {(AdministrativeDistrictLevel1 == null ? "null" : AdministrativeDistrictLevel1 == string.Empty ? "" : AdministrativeDistrictLevel1)}");
-            toStringOutput.Add($"AdministrativeDistrictLevel2 = {(AdministrativeDistrictLevel2 == null ? "null" : AdministrativeDistrictLevel2 == string.Empty ? "" : AdministrativeDistrictLevel2)}");
-            toStringOutput.Add($"AdministrativeDistrictLevel3 = {(AdministrativeDistrictLevel3 == null ? "null" : AdministrativeDistrictLevel3 == string.Empty ? "" : AdministrativeDistrictLevel3)}");
-            toStringOutput.Add($"PostalCode = {(PostalCode == null ? "null" : PostalCode == string.Empty ? "" : PostalCode)}");
-            toStringOutput.Add($"Country = {(Country == null ? "null" : Country.ToString())}");
-            toStringOutput.Add($"FirstName = {(FirstName == null ? "null" : FirstName == string.Empty ? "" : FirstName)}");
-            toStringOutput.Add($"LastName = {(LastName == null ? "null" : LastName == string.Empty ? "" : LastName)}");
-            toStringOutput.Add($"Organization = {(Organization == null ? "null" : Organization == string.Empty ? "" : Organization)}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -187,126 +191,157 @@ namespace Square.Models
             }
 
             return obj is Address other &&
-                ((AddressLine1 == null && other.AddressLine1 == null) || (AddressLine1?.Equals(other.AddressLine1) == true)) &&
-                ((AddressLine2 == null && other.AddressLine2 == null) || (AddressLine2?.Equals(other.AddressLine2) == true)) &&
-                ((AddressLine3 == null && other.AddressLine3 == null) || (AddressLine3?.Equals(other.AddressLine3) == true)) &&
-                ((Locality == null && other.Locality == null) || (Locality?.Equals(other.Locality) == true)) &&
-                ((Sublocality == null && other.Sublocality == null) || (Sublocality?.Equals(other.Sublocality) == true)) &&
-                ((Sublocality2 == null && other.Sublocality2 == null) || (Sublocality2?.Equals(other.Sublocality2) == true)) &&
-                ((Sublocality3 == null && other.Sublocality3 == null) || (Sublocality3?.Equals(other.Sublocality3) == true)) &&
-                ((AdministrativeDistrictLevel1 == null && other.AdministrativeDistrictLevel1 == null) || (AdministrativeDistrictLevel1?.Equals(other.AdministrativeDistrictLevel1) == true)) &&
-                ((AdministrativeDistrictLevel2 == null && other.AdministrativeDistrictLevel2 == null) || (AdministrativeDistrictLevel2?.Equals(other.AdministrativeDistrictLevel2) == true)) &&
-                ((AdministrativeDistrictLevel3 == null && other.AdministrativeDistrictLevel3 == null) || (AdministrativeDistrictLevel3?.Equals(other.AdministrativeDistrictLevel3) == true)) &&
-                ((PostalCode == null && other.PostalCode == null) || (PostalCode?.Equals(other.PostalCode) == true)) &&
-                ((Country == null && other.Country == null) || (Country?.Equals(other.Country) == true)) &&
-                ((FirstName == null && other.FirstName == null) || (FirstName?.Equals(other.FirstName) == true)) &&
-                ((LastName == null && other.LastName == null) || (LastName?.Equals(other.LastName) == true)) &&
-                ((Organization == null && other.Organization == null) || (Organization?.Equals(other.Organization) == true));
+                ((this.AddressLine1 == null && other.AddressLine1 == null) || (this.AddressLine1?.Equals(other.AddressLine1) == true)) &&
+                ((this.AddressLine2 == null && other.AddressLine2 == null) || (this.AddressLine2?.Equals(other.AddressLine2) == true)) &&
+                ((this.AddressLine3 == null && other.AddressLine3 == null) || (this.AddressLine3?.Equals(other.AddressLine3) == true)) &&
+                ((this.Locality == null && other.Locality == null) || (this.Locality?.Equals(other.Locality) == true)) &&
+                ((this.Sublocality == null && other.Sublocality == null) || (this.Sublocality?.Equals(other.Sublocality) == true)) &&
+                ((this.Sublocality2 == null && other.Sublocality2 == null) || (this.Sublocality2?.Equals(other.Sublocality2) == true)) &&
+                ((this.Sublocality3 == null && other.Sublocality3 == null) || (this.Sublocality3?.Equals(other.Sublocality3) == true)) &&
+                ((this.AdministrativeDistrictLevel1 == null && other.AdministrativeDistrictLevel1 == null) || (this.AdministrativeDistrictLevel1?.Equals(other.AdministrativeDistrictLevel1) == true)) &&
+                ((this.AdministrativeDistrictLevel2 == null && other.AdministrativeDistrictLevel2 == null) || (this.AdministrativeDistrictLevel2?.Equals(other.AdministrativeDistrictLevel2) == true)) &&
+                ((this.AdministrativeDistrictLevel3 == null && other.AdministrativeDistrictLevel3 == null) || (this.AdministrativeDistrictLevel3?.Equals(other.AdministrativeDistrictLevel3) == true)) &&
+                ((this.PostalCode == null && other.PostalCode == null) || (this.PostalCode?.Equals(other.PostalCode) == true)) &&
+                ((this.Country == null && other.Country == null) || (this.Country?.Equals(other.Country) == true)) &&
+                ((this.FirstName == null && other.FirstName == null) || (this.FirstName?.Equals(other.FirstName) == true)) &&
+                ((this.LastName == null && other.LastName == null) || (this.LastName?.Equals(other.LastName) == true)) &&
+                ((this.Organization == null && other.Organization == null) || (this.Organization?.Equals(other.Organization) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1623438759;
 
-            if (AddressLine1 != null)
+            if (this.AddressLine1 != null)
             {
-               hashCode += AddressLine1.GetHashCode();
+               hashCode += this.AddressLine1.GetHashCode();
             }
 
-            if (AddressLine2 != null)
+            if (this.AddressLine2 != null)
             {
-               hashCode += AddressLine2.GetHashCode();
+               hashCode += this.AddressLine2.GetHashCode();
             }
 
-            if (AddressLine3 != null)
+            if (this.AddressLine3 != null)
             {
-               hashCode += AddressLine3.GetHashCode();
+               hashCode += this.AddressLine3.GetHashCode();
             }
 
-            if (Locality != null)
+            if (this.Locality != null)
             {
-               hashCode += Locality.GetHashCode();
+               hashCode += this.Locality.GetHashCode();
             }
 
-            if (Sublocality != null)
+            if (this.Sublocality != null)
             {
-               hashCode += Sublocality.GetHashCode();
+               hashCode += this.Sublocality.GetHashCode();
             }
 
-            if (Sublocality2 != null)
+            if (this.Sublocality2 != null)
             {
-               hashCode += Sublocality2.GetHashCode();
+               hashCode += this.Sublocality2.GetHashCode();
             }
 
-            if (Sublocality3 != null)
+            if (this.Sublocality3 != null)
             {
-               hashCode += Sublocality3.GetHashCode();
+               hashCode += this.Sublocality3.GetHashCode();
             }
 
-            if (AdministrativeDistrictLevel1 != null)
+            if (this.AdministrativeDistrictLevel1 != null)
             {
-               hashCode += AdministrativeDistrictLevel1.GetHashCode();
+               hashCode += this.AdministrativeDistrictLevel1.GetHashCode();
             }
 
-            if (AdministrativeDistrictLevel2 != null)
+            if (this.AdministrativeDistrictLevel2 != null)
             {
-               hashCode += AdministrativeDistrictLevel2.GetHashCode();
+               hashCode += this.AdministrativeDistrictLevel2.GetHashCode();
             }
 
-            if (AdministrativeDistrictLevel3 != null)
+            if (this.AdministrativeDistrictLevel3 != null)
             {
-               hashCode += AdministrativeDistrictLevel3.GetHashCode();
+               hashCode += this.AdministrativeDistrictLevel3.GetHashCode();
             }
 
-            if (PostalCode != null)
+            if (this.PostalCode != null)
             {
-               hashCode += PostalCode.GetHashCode();
+               hashCode += this.PostalCode.GetHashCode();
             }
 
-            if (Country != null)
+            if (this.Country != null)
             {
-               hashCode += Country.GetHashCode();
+               hashCode += this.Country.GetHashCode();
             }
 
-            if (FirstName != null)
+            if (this.FirstName != null)
             {
-               hashCode += FirstName.GetHashCode();
+               hashCode += this.FirstName.GetHashCode();
             }
 
-            if (LastName != null)
+            if (this.LastName != null)
             {
-               hashCode += LastName.GetHashCode();
+               hashCode += this.LastName.GetHashCode();
             }
 
-            if (Organization != null)
+            if (this.Organization != null)
             {
-               hashCode += Organization.GetHashCode();
+               hashCode += this.Organization.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.AddressLine1 = {(this.AddressLine1 == null ? "null" : this.AddressLine1 == string.Empty ? "" : this.AddressLine1)}");
+            toStringOutput.Add($"this.AddressLine2 = {(this.AddressLine2 == null ? "null" : this.AddressLine2 == string.Empty ? "" : this.AddressLine2)}");
+            toStringOutput.Add($"this.AddressLine3 = {(this.AddressLine3 == null ? "null" : this.AddressLine3 == string.Empty ? "" : this.AddressLine3)}");
+            toStringOutput.Add($"this.Locality = {(this.Locality == null ? "null" : this.Locality == string.Empty ? "" : this.Locality)}");
+            toStringOutput.Add($"this.Sublocality = {(this.Sublocality == null ? "null" : this.Sublocality == string.Empty ? "" : this.Sublocality)}");
+            toStringOutput.Add($"this.Sublocality2 = {(this.Sublocality2 == null ? "null" : this.Sublocality2 == string.Empty ? "" : this.Sublocality2)}");
+            toStringOutput.Add($"this.Sublocality3 = {(this.Sublocality3 == null ? "null" : this.Sublocality3 == string.Empty ? "" : this.Sublocality3)}");
+            toStringOutput.Add($"this.AdministrativeDistrictLevel1 = {(this.AdministrativeDistrictLevel1 == null ? "null" : this.AdministrativeDistrictLevel1 == string.Empty ? "" : this.AdministrativeDistrictLevel1)}");
+            toStringOutput.Add($"this.AdministrativeDistrictLevel2 = {(this.AdministrativeDistrictLevel2 == null ? "null" : this.AdministrativeDistrictLevel2 == string.Empty ? "" : this.AdministrativeDistrictLevel2)}");
+            toStringOutput.Add($"this.AdministrativeDistrictLevel3 = {(this.AdministrativeDistrictLevel3 == null ? "null" : this.AdministrativeDistrictLevel3 == string.Empty ? "" : this.AdministrativeDistrictLevel3)}");
+            toStringOutput.Add($"this.PostalCode = {(this.PostalCode == null ? "null" : this.PostalCode == string.Empty ? "" : this.PostalCode)}");
+            toStringOutput.Add($"this.Country = {(this.Country == null ? "null" : this.Country.ToString())}");
+            toStringOutput.Add($"this.FirstName = {(this.FirstName == null ? "null" : this.FirstName == string.Empty ? "" : this.FirstName)}");
+            toStringOutput.Add($"this.LastName = {(this.LastName == null ? "null" : this.LastName == string.Empty ? "" : this.LastName)}");
+            toStringOutput.Add($"this.Organization = {(this.Organization == null ? "null" : this.Organization == string.Empty ? "" : this.Organization)}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .AddressLine1(AddressLine1)
-                .AddressLine2(AddressLine2)
-                .AddressLine3(AddressLine3)
-                .Locality(Locality)
-                .Sublocality(Sublocality)
-                .Sublocality2(Sublocality2)
-                .Sublocality3(Sublocality3)
-                .AdministrativeDistrictLevel1(AdministrativeDistrictLevel1)
-                .AdministrativeDistrictLevel2(AdministrativeDistrictLevel2)
-                .AdministrativeDistrictLevel3(AdministrativeDistrictLevel3)
-                .PostalCode(PostalCode)
-                .Country(Country)
-                .FirstName(FirstName)
-                .LastName(LastName)
-                .Organization(Organization);
+                .AddressLine1(this.AddressLine1)
+                .AddressLine2(this.AddressLine2)
+                .AddressLine3(this.AddressLine3)
+                .Locality(this.Locality)
+                .Sublocality(this.Sublocality)
+                .Sublocality2(this.Sublocality2)
+                .Sublocality3(this.Sublocality3)
+                .AdministrativeDistrictLevel1(this.AdministrativeDistrictLevel1)
+                .AdministrativeDistrictLevel2(this.AdministrativeDistrictLevel2)
+                .AdministrativeDistrictLevel3(this.AdministrativeDistrictLevel3)
+                .PostalCode(this.PostalCode)
+                .Country(this.Country)
+                .FirstName(this.FirstName)
+                .LastName(this.LastName)
+                .Organization(this.Organization);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string addressLine1;
@@ -325,115 +360,193 @@ namespace Square.Models
             private string lastName;
             private string organization;
 
-
-
+             /// <summary>
+             /// AddressLine1.
+             /// </summary>
+             /// <param name="addressLine1"> addressLine1. </param>
+             /// <returns> Builder. </returns>
             public Builder AddressLine1(string addressLine1)
             {
                 this.addressLine1 = addressLine1;
                 return this;
             }
 
+             /// <summary>
+             /// AddressLine2.
+             /// </summary>
+             /// <param name="addressLine2"> addressLine2. </param>
+             /// <returns> Builder. </returns>
             public Builder AddressLine2(string addressLine2)
             {
                 this.addressLine2 = addressLine2;
                 return this;
             }
 
+             /// <summary>
+             /// AddressLine3.
+             /// </summary>
+             /// <param name="addressLine3"> addressLine3. </param>
+             /// <returns> Builder. </returns>
             public Builder AddressLine3(string addressLine3)
             {
                 this.addressLine3 = addressLine3;
                 return this;
             }
 
+             /// <summary>
+             /// Locality.
+             /// </summary>
+             /// <param name="locality"> locality. </param>
+             /// <returns> Builder. </returns>
             public Builder Locality(string locality)
             {
                 this.locality = locality;
                 return this;
             }
 
+             /// <summary>
+             /// Sublocality.
+             /// </summary>
+             /// <param name="sublocality"> sublocality. </param>
+             /// <returns> Builder. </returns>
             public Builder Sublocality(string sublocality)
             {
                 this.sublocality = sublocality;
                 return this;
             }
 
+             /// <summary>
+             /// Sublocality2.
+             /// </summary>
+             /// <param name="sublocality2"> sublocality2. </param>
+             /// <returns> Builder. </returns>
             public Builder Sublocality2(string sublocality2)
             {
                 this.sublocality2 = sublocality2;
                 return this;
             }
 
+             /// <summary>
+             /// Sublocality3.
+             /// </summary>
+             /// <param name="sublocality3"> sublocality3. </param>
+             /// <returns> Builder. </returns>
             public Builder Sublocality3(string sublocality3)
             {
                 this.sublocality3 = sublocality3;
                 return this;
             }
 
+             /// <summary>
+             /// AdministrativeDistrictLevel1.
+             /// </summary>
+             /// <param name="administrativeDistrictLevel1"> administrativeDistrictLevel1. </param>
+             /// <returns> Builder. </returns>
             public Builder AdministrativeDistrictLevel1(string administrativeDistrictLevel1)
             {
                 this.administrativeDistrictLevel1 = administrativeDistrictLevel1;
                 return this;
             }
 
+             /// <summary>
+             /// AdministrativeDistrictLevel2.
+             /// </summary>
+             /// <param name="administrativeDistrictLevel2"> administrativeDistrictLevel2. </param>
+             /// <returns> Builder. </returns>
             public Builder AdministrativeDistrictLevel2(string administrativeDistrictLevel2)
             {
                 this.administrativeDistrictLevel2 = administrativeDistrictLevel2;
                 return this;
             }
 
+             /// <summary>
+             /// AdministrativeDistrictLevel3.
+             /// </summary>
+             /// <param name="administrativeDistrictLevel3"> administrativeDistrictLevel3. </param>
+             /// <returns> Builder. </returns>
             public Builder AdministrativeDistrictLevel3(string administrativeDistrictLevel3)
             {
                 this.administrativeDistrictLevel3 = administrativeDistrictLevel3;
                 return this;
             }
 
+             /// <summary>
+             /// PostalCode.
+             /// </summary>
+             /// <param name="postalCode"> postalCode. </param>
+             /// <returns> Builder. </returns>
             public Builder PostalCode(string postalCode)
             {
                 this.postalCode = postalCode;
                 return this;
             }
 
+             /// <summary>
+             /// Country.
+             /// </summary>
+             /// <param name="country"> country. </param>
+             /// <returns> Builder. </returns>
             public Builder Country(string country)
             {
                 this.country = country;
                 return this;
             }
 
+             /// <summary>
+             /// FirstName.
+             /// </summary>
+             /// <param name="firstName"> firstName. </param>
+             /// <returns> Builder. </returns>
             public Builder FirstName(string firstName)
             {
                 this.firstName = firstName;
                 return this;
             }
 
+             /// <summary>
+             /// LastName.
+             /// </summary>
+             /// <param name="lastName"> lastName. </param>
+             /// <returns> Builder. </returns>
             public Builder LastName(string lastName)
             {
                 this.lastName = lastName;
                 return this;
             }
 
+             /// <summary>
+             /// Organization.
+             /// </summary>
+             /// <param name="organization"> organization. </param>
+             /// <returns> Builder. </returns>
             public Builder Organization(string organization)
             {
                 this.organization = organization;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> Address. </returns>
             public Address Build()
             {
-                return new Address(addressLine1,
-                    addressLine2,
-                    addressLine3,
-                    locality,
-                    sublocality,
-                    sublocality2,
-                    sublocality3,
-                    administrativeDistrictLevel1,
-                    administrativeDistrictLevel2,
-                    administrativeDistrictLevel3,
-                    postalCode,
-                    country,
-                    firstName,
-                    lastName,
-                    organization);
+                return new Address(
+                    this.addressLine1,
+                    this.addressLine2,
+                    this.addressLine3,
+                    this.locality,
+                    this.sublocality,
+                    this.sublocality2,
+                    this.sublocality3,
+                    this.administrativeDistrictLevel1,
+                    this.administrativeDistrictLevel2,
+                    this.administrativeDistrictLevel3,
+                    this.postalCode,
+                    this.country,
+                    this.firstName,
+                    this.lastName,
+                    this.organization);
             }
         }
     }

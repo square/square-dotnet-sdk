@@ -1,21 +1,40 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class InvoicePaymentRequest 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// InvoicePaymentRequest.
+    /// </summary>
+    public class InvoicePaymentRequest
     {
-        public InvoicePaymentRequest(string uid = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="InvoicePaymentRequest"/> class.
+        /// </summary>
+        /// <param name="uid">uid.</param>
+        /// <param name="requestMethod">request_method.</param>
+        /// <param name="requestType">request_type.</param>
+        /// <param name="dueDate">due_date.</param>
+        /// <param name="fixedAmountRequestedMoney">fixed_amount_requested_money.</param>
+        /// <param name="percentageRequested">percentage_requested.</param>
+        /// <param name="tippingEnabled">tipping_enabled.</param>
+        /// <param name="automaticPaymentSource">automatic_payment_source.</param>
+        /// <param name="cardId">card_id.</param>
+        /// <param name="reminders">reminders.</param>
+        /// <param name="computedAmountMoney">computed_amount_money.</param>
+        /// <param name="totalCompletedAmountMoney">total_completed_amount_money.</param>
+        /// <param name="roundingAdjustmentIncludedMoney">rounding_adjustment_included_money.</param>
+        public InvoicePaymentRequest(
+            string uid = null,
             string requestMethod = null,
             string requestType = null,
             string dueDate = null,
@@ -29,30 +48,32 @@ namespace Square.Models
             Models.Money totalCompletedAmountMoney = null,
             Models.Money roundingAdjustmentIncludedMoney = null)
         {
-            Uid = uid;
-            RequestMethod = requestMethod;
-            RequestType = requestType;
-            DueDate = dueDate;
-            FixedAmountRequestedMoney = fixedAmountRequestedMoney;
-            PercentageRequested = percentageRequested;
-            TippingEnabled = tippingEnabled;
-            AutomaticPaymentSource = automaticPaymentSource;
-            CardId = cardId;
-            Reminders = reminders;
-            ComputedAmountMoney = computedAmountMoney;
-            TotalCompletedAmountMoney = totalCompletedAmountMoney;
-            RoundingAdjustmentIncludedMoney = roundingAdjustmentIncludedMoney;
+            this.Uid = uid;
+            this.RequestMethod = requestMethod;
+            this.RequestType = requestType;
+            this.DueDate = dueDate;
+            this.FixedAmountRequestedMoney = fixedAmountRequestedMoney;
+            this.PercentageRequested = percentageRequested;
+            this.TippingEnabled = tippingEnabled;
+            this.AutomaticPaymentSource = automaticPaymentSource;
+            this.CardId = cardId;
+            this.Reminders = reminders;
+            this.ComputedAmountMoney = computedAmountMoney;
+            this.TotalCompletedAmountMoney = totalCompletedAmountMoney;
+            this.RoundingAdjustmentIncludedMoney = roundingAdjustmentIncludedMoney;
         }
 
         /// <summary>
-        /// The Square-generated ID of the payment request in an [invoice](#type-invoice).
+        /// The Square-generated ID of the payment request in an [invoice]($m/Invoice).
         /// </summary>
         [JsonProperty("uid", NullValueHandling = NullValueHandling.Ignore)]
         public string Uid { get; }
 
         /// <summary>
-        /// Specifies the action for Square to take for processing the invoice. For example, 
-        /// email the invoice, charge a customer's card on file, or do nothing. DEPRECATED at version 2021-01-21. The corresponding `request_method` field is replaced by the `Invoice.delivery_method` and `InvoicePaymentRequest.automatic_payment_source` fields.
+        /// Specifies the action for Square to take for processing the invoice. For example,
+        /// email the invoice, charge a customer's card on file, or do nothing. DEPRECATED at
+        /// version 2021-01-21. The corresponding `request_method` field is replaced by the
+        /// `Invoice.delivery_method` and `InvoicePaymentRequest.automatic_payment_source` fields.
         /// </summary>
         [JsonProperty("request_method", NullValueHandling = NullValueHandling.Ignore)]
         public string RequestMethod { get; }
@@ -63,15 +84,18 @@ namespace Square.Models
         /// - 1 deposit with 1 balance
         /// - 2 - 12 installments
         /// - 1 deposit with 2 - 12 installments
-        /// For more information, 
+        /// For more information,
         /// see [Payment requests](https://developer.squareup.com/docs/invoices-api/overview#payment-requests).
         /// </summary>
         [JsonProperty("request_type", NullValueHandling = NullValueHandling.Ignore)]
         public string RequestType { get; }
 
         /// <summary>
-        /// The due date (in the invoice's time zone) for the payment request, in `YYYY-MM-DD` format. This field is required to create a payment request.
-        /// After this date, the invoice becomes overdue. For example, a payment `due_date` of 2021-03-09 with a `timezone` of America/Los\_Angeles becomes overdue at midnight on March 9 in America/Los\_Angeles (which equals a UTC timestamp of 2021-03-10T08:00:00Z).
+        /// The due date (in the invoice's time zone) for the payment request, in `YYYY-MM-DD` format. This field
+        /// is required to create a payment request.
+        /// After this date, the invoice becomes overdue. For example, a payment `due_date` of 2021-03-09 with a `timezone`
+        /// of America/Los\_Angeles becomes overdue at midnight on March 9 in America/Los\_Angeles (which equals a UTC
+        /// timestamp of 2021-03-10T08:00:00Z).
         /// </summary>
         [JsonProperty("due_date", NullValueHandling = NullValueHandling.Ignore)]
         public string DueDate { get; }
@@ -89,34 +113,34 @@ namespace Square.Models
 
         /// <summary>
         /// Specifies the amount for the payment request in percentage:
-        /// - When the payment `request_type` is `DEPOSIT`, it is the percentage of the order total amount.
-        /// - When the payment `request_type` is `INSTALLMENT`, it is the percentage of the order total less 
-        /// the deposit, if requested. The sum of the `percentage_requested` in all installment 
+        /// - When the payment `request_type` is `DEPOSIT`, it is the percentage of the order's total amount.
+        /// - When the payment `request_type` is `INSTALLMENT`, it is the percentage of the order's total less
+        /// the deposit, if requested. The sum of the `percentage_requested` in all installment
         /// payment requests must be equal to 100.
-        /// You cannot specify this when the payment `request_type` is `BALANCE` or when the 
+        /// You cannot specify this when the payment `request_type` is `BALANCE` or when the
         /// payment request specifies the `fixed_amount_requested_money` field.
         /// </summary>
         [JsonProperty("percentage_requested", NullValueHandling = NullValueHandling.Ignore)]
         public string PercentageRequested { get; }
 
         /// <summary>
-        /// If set to true, the Square-hosted invoice page (the `public_url` field of the invoice) 
-        /// provides a place for the customer to pay a tip. 
-        /// This field is allowed only on the final payment request  
+        /// If set to true, the Square-hosted invoice page (the `public_url` field of the invoice)
+        /// provides a place for the customer to pay a tip.
+        /// This field is allowed only on the final payment request
         /// and the payment `request_type` must be `BALANCE` or `INSTALLMENT`.
         /// </summary>
         [JsonProperty("tipping_enabled", NullValueHandling = NullValueHandling.Ignore)]
         public bool? TippingEnabled { get; }
 
         /// <summary>
-        /// Indicates the automatic payment method for an [invoice payment request](#type-InvoicePaymentRequest).
+        /// Indicates the automatic payment method for an [invoice payment request]($m/InvoicePaymentRequest).
         /// </summary>
         [JsonProperty("automatic_payment_source", NullValueHandling = NullValueHandling.Ignore)]
         public string AutomaticPaymentSource { get; }
 
         /// <summary>
         /// The ID of the card on file to charge for the payment request. To get the customer’s card on file,
-        /// use the `customer_id` of the invoice recipient to call [RetrieveCustomer](#endpoint-Customers-RetrieveCustomer)
+        /// use the `customer_id` of the invoice recipient to call [RetrieveCustomer]($e/Customers/RetrieveCustomer)
         /// in the Customers API. Then, get the ID of the target card from the `cards` field in the response.
         /// </summary>
         [JsonProperty("card_id", NullValueHandling = NullValueHandling.Ignore)]
@@ -161,6 +185,7 @@ namespace Square.Models
         [JsonProperty("rounding_adjustment_included_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Money RoundingAdjustmentIncludedMoney { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -170,23 +195,7 @@ namespace Square.Models
             return $"InvoicePaymentRequest : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Uid = {(Uid == null ? "null" : Uid == string.Empty ? "" : Uid)}");
-            toStringOutput.Add($"RequestMethod = {(RequestMethod == null ? "null" : RequestMethod.ToString())}");
-            toStringOutput.Add($"RequestType = {(RequestType == null ? "null" : RequestType.ToString())}");
-            toStringOutput.Add($"DueDate = {(DueDate == null ? "null" : DueDate == string.Empty ? "" : DueDate)}");
-            toStringOutput.Add($"FixedAmountRequestedMoney = {(FixedAmountRequestedMoney == null ? "null" : FixedAmountRequestedMoney.ToString())}");
-            toStringOutput.Add($"PercentageRequested = {(PercentageRequested == null ? "null" : PercentageRequested == string.Empty ? "" : PercentageRequested)}");
-            toStringOutput.Add($"TippingEnabled = {(TippingEnabled == null ? "null" : TippingEnabled.ToString())}");
-            toStringOutput.Add($"AutomaticPaymentSource = {(AutomaticPaymentSource == null ? "null" : AutomaticPaymentSource.ToString())}");
-            toStringOutput.Add($"CardId = {(CardId == null ? "null" : CardId == string.Empty ? "" : CardId)}");
-            toStringOutput.Add($"Reminders = {(Reminders == null ? "null" : $"[{ string.Join(", ", Reminders)} ]")}");
-            toStringOutput.Add($"ComputedAmountMoney = {(ComputedAmountMoney == null ? "null" : ComputedAmountMoney.ToString())}");
-            toStringOutput.Add($"TotalCompletedAmountMoney = {(TotalCompletedAmountMoney == null ? "null" : TotalCompletedAmountMoney.ToString())}");
-            toStringOutput.Add($"RoundingAdjustmentIncludedMoney = {(RoundingAdjustmentIncludedMoney == null ? "null" : RoundingAdjustmentIncludedMoney.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -200,112 +209,141 @@ namespace Square.Models
             }
 
             return obj is InvoicePaymentRequest other &&
-                ((Uid == null && other.Uid == null) || (Uid?.Equals(other.Uid) == true)) &&
-                ((RequestMethod == null && other.RequestMethod == null) || (RequestMethod?.Equals(other.RequestMethod) == true)) &&
-                ((RequestType == null && other.RequestType == null) || (RequestType?.Equals(other.RequestType) == true)) &&
-                ((DueDate == null && other.DueDate == null) || (DueDate?.Equals(other.DueDate) == true)) &&
-                ((FixedAmountRequestedMoney == null && other.FixedAmountRequestedMoney == null) || (FixedAmountRequestedMoney?.Equals(other.FixedAmountRequestedMoney) == true)) &&
-                ((PercentageRequested == null && other.PercentageRequested == null) || (PercentageRequested?.Equals(other.PercentageRequested) == true)) &&
-                ((TippingEnabled == null && other.TippingEnabled == null) || (TippingEnabled?.Equals(other.TippingEnabled) == true)) &&
-                ((AutomaticPaymentSource == null && other.AutomaticPaymentSource == null) || (AutomaticPaymentSource?.Equals(other.AutomaticPaymentSource) == true)) &&
-                ((CardId == null && other.CardId == null) || (CardId?.Equals(other.CardId) == true)) &&
-                ((Reminders == null && other.Reminders == null) || (Reminders?.Equals(other.Reminders) == true)) &&
-                ((ComputedAmountMoney == null && other.ComputedAmountMoney == null) || (ComputedAmountMoney?.Equals(other.ComputedAmountMoney) == true)) &&
-                ((TotalCompletedAmountMoney == null && other.TotalCompletedAmountMoney == null) || (TotalCompletedAmountMoney?.Equals(other.TotalCompletedAmountMoney) == true)) &&
-                ((RoundingAdjustmentIncludedMoney == null && other.RoundingAdjustmentIncludedMoney == null) || (RoundingAdjustmentIncludedMoney?.Equals(other.RoundingAdjustmentIncludedMoney) == true));
+                ((this.Uid == null && other.Uid == null) || (this.Uid?.Equals(other.Uid) == true)) &&
+                ((this.RequestMethod == null && other.RequestMethod == null) || (this.RequestMethod?.Equals(other.RequestMethod) == true)) &&
+                ((this.RequestType == null && other.RequestType == null) || (this.RequestType?.Equals(other.RequestType) == true)) &&
+                ((this.DueDate == null && other.DueDate == null) || (this.DueDate?.Equals(other.DueDate) == true)) &&
+                ((this.FixedAmountRequestedMoney == null && other.FixedAmountRequestedMoney == null) || (this.FixedAmountRequestedMoney?.Equals(other.FixedAmountRequestedMoney) == true)) &&
+                ((this.PercentageRequested == null && other.PercentageRequested == null) || (this.PercentageRequested?.Equals(other.PercentageRequested) == true)) &&
+                ((this.TippingEnabled == null && other.TippingEnabled == null) || (this.TippingEnabled?.Equals(other.TippingEnabled) == true)) &&
+                ((this.AutomaticPaymentSource == null && other.AutomaticPaymentSource == null) || (this.AutomaticPaymentSource?.Equals(other.AutomaticPaymentSource) == true)) &&
+                ((this.CardId == null && other.CardId == null) || (this.CardId?.Equals(other.CardId) == true)) &&
+                ((this.Reminders == null && other.Reminders == null) || (this.Reminders?.Equals(other.Reminders) == true)) &&
+                ((this.ComputedAmountMoney == null && other.ComputedAmountMoney == null) || (this.ComputedAmountMoney?.Equals(other.ComputedAmountMoney) == true)) &&
+                ((this.TotalCompletedAmountMoney == null && other.TotalCompletedAmountMoney == null) || (this.TotalCompletedAmountMoney?.Equals(other.TotalCompletedAmountMoney) == true)) &&
+                ((this.RoundingAdjustmentIncludedMoney == null && other.RoundingAdjustmentIncludedMoney == null) || (this.RoundingAdjustmentIncludedMoney?.Equals(other.RoundingAdjustmentIncludedMoney) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 772730141;
 
-            if (Uid != null)
+            if (this.Uid != null)
             {
-               hashCode += Uid.GetHashCode();
+               hashCode += this.Uid.GetHashCode();
             }
 
-            if (RequestMethod != null)
+            if (this.RequestMethod != null)
             {
-               hashCode += RequestMethod.GetHashCode();
+               hashCode += this.RequestMethod.GetHashCode();
             }
 
-            if (RequestType != null)
+            if (this.RequestType != null)
             {
-               hashCode += RequestType.GetHashCode();
+               hashCode += this.RequestType.GetHashCode();
             }
 
-            if (DueDate != null)
+            if (this.DueDate != null)
             {
-               hashCode += DueDate.GetHashCode();
+               hashCode += this.DueDate.GetHashCode();
             }
 
-            if (FixedAmountRequestedMoney != null)
+            if (this.FixedAmountRequestedMoney != null)
             {
-               hashCode += FixedAmountRequestedMoney.GetHashCode();
+               hashCode += this.FixedAmountRequestedMoney.GetHashCode();
             }
 
-            if (PercentageRequested != null)
+            if (this.PercentageRequested != null)
             {
-               hashCode += PercentageRequested.GetHashCode();
+               hashCode += this.PercentageRequested.GetHashCode();
             }
 
-            if (TippingEnabled != null)
+            if (this.TippingEnabled != null)
             {
-               hashCode += TippingEnabled.GetHashCode();
+               hashCode += this.TippingEnabled.GetHashCode();
             }
 
-            if (AutomaticPaymentSource != null)
+            if (this.AutomaticPaymentSource != null)
             {
-               hashCode += AutomaticPaymentSource.GetHashCode();
+               hashCode += this.AutomaticPaymentSource.GetHashCode();
             }
 
-            if (CardId != null)
+            if (this.CardId != null)
             {
-               hashCode += CardId.GetHashCode();
+               hashCode += this.CardId.GetHashCode();
             }
 
-            if (Reminders != null)
+            if (this.Reminders != null)
             {
-               hashCode += Reminders.GetHashCode();
+               hashCode += this.Reminders.GetHashCode();
             }
 
-            if (ComputedAmountMoney != null)
+            if (this.ComputedAmountMoney != null)
             {
-               hashCode += ComputedAmountMoney.GetHashCode();
+               hashCode += this.ComputedAmountMoney.GetHashCode();
             }
 
-            if (TotalCompletedAmountMoney != null)
+            if (this.TotalCompletedAmountMoney != null)
             {
-               hashCode += TotalCompletedAmountMoney.GetHashCode();
+               hashCode += this.TotalCompletedAmountMoney.GetHashCode();
             }
 
-            if (RoundingAdjustmentIncludedMoney != null)
+            if (this.RoundingAdjustmentIncludedMoney != null)
             {
-               hashCode += RoundingAdjustmentIncludedMoney.GetHashCode();
+               hashCode += this.RoundingAdjustmentIncludedMoney.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Uid = {(this.Uid == null ? "null" : this.Uid == string.Empty ? "" : this.Uid)}");
+            toStringOutput.Add($"this.RequestMethod = {(this.RequestMethod == null ? "null" : this.RequestMethod.ToString())}");
+            toStringOutput.Add($"this.RequestType = {(this.RequestType == null ? "null" : this.RequestType.ToString())}");
+            toStringOutput.Add($"this.DueDate = {(this.DueDate == null ? "null" : this.DueDate == string.Empty ? "" : this.DueDate)}");
+            toStringOutput.Add($"this.FixedAmountRequestedMoney = {(this.FixedAmountRequestedMoney == null ? "null" : this.FixedAmountRequestedMoney.ToString())}");
+            toStringOutput.Add($"this.PercentageRequested = {(this.PercentageRequested == null ? "null" : this.PercentageRequested == string.Empty ? "" : this.PercentageRequested)}");
+            toStringOutput.Add($"this.TippingEnabled = {(this.TippingEnabled == null ? "null" : this.TippingEnabled.ToString())}");
+            toStringOutput.Add($"this.AutomaticPaymentSource = {(this.AutomaticPaymentSource == null ? "null" : this.AutomaticPaymentSource.ToString())}");
+            toStringOutput.Add($"this.CardId = {(this.CardId == null ? "null" : this.CardId == string.Empty ? "" : this.CardId)}");
+            toStringOutput.Add($"this.Reminders = {(this.Reminders == null ? "null" : $"[{string.Join(", ", this.Reminders)} ]")}");
+            toStringOutput.Add($"this.ComputedAmountMoney = {(this.ComputedAmountMoney == null ? "null" : this.ComputedAmountMoney.ToString())}");
+            toStringOutput.Add($"this.TotalCompletedAmountMoney = {(this.TotalCompletedAmountMoney == null ? "null" : this.TotalCompletedAmountMoney.ToString())}");
+            toStringOutput.Add($"this.RoundingAdjustmentIncludedMoney = {(this.RoundingAdjustmentIncludedMoney == null ? "null" : this.RoundingAdjustmentIncludedMoney.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .Uid(Uid)
-                .RequestMethod(RequestMethod)
-                .RequestType(RequestType)
-                .DueDate(DueDate)
-                .FixedAmountRequestedMoney(FixedAmountRequestedMoney)
-                .PercentageRequested(PercentageRequested)
-                .TippingEnabled(TippingEnabled)
-                .AutomaticPaymentSource(AutomaticPaymentSource)
-                .CardId(CardId)
-                .Reminders(Reminders)
-                .ComputedAmountMoney(ComputedAmountMoney)
-                .TotalCompletedAmountMoney(TotalCompletedAmountMoney)
-                .RoundingAdjustmentIncludedMoney(RoundingAdjustmentIncludedMoney);
+                .Uid(this.Uid)
+                .RequestMethod(this.RequestMethod)
+                .RequestType(this.RequestType)
+                .DueDate(this.DueDate)
+                .FixedAmountRequestedMoney(this.FixedAmountRequestedMoney)
+                .PercentageRequested(this.PercentageRequested)
+                .TippingEnabled(this.TippingEnabled)
+                .AutomaticPaymentSource(this.AutomaticPaymentSource)
+                .CardId(this.CardId)
+                .Reminders(this.Reminders)
+                .ComputedAmountMoney(this.ComputedAmountMoney)
+                .TotalCompletedAmountMoney(this.TotalCompletedAmountMoney)
+                .RoundingAdjustmentIncludedMoney(this.RoundingAdjustmentIncludedMoney);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string uid;
@@ -322,101 +360,169 @@ namespace Square.Models
             private Models.Money totalCompletedAmountMoney;
             private Models.Money roundingAdjustmentIncludedMoney;
 
-
-
+             /// <summary>
+             /// Uid.
+             /// </summary>
+             /// <param name="uid"> uid. </param>
+             /// <returns> Builder. </returns>
             public Builder Uid(string uid)
             {
                 this.uid = uid;
                 return this;
             }
 
+             /// <summary>
+             /// RequestMethod.
+             /// </summary>
+             /// <param name="requestMethod"> requestMethod. </param>
+             /// <returns> Builder. </returns>
             public Builder RequestMethod(string requestMethod)
             {
                 this.requestMethod = requestMethod;
                 return this;
             }
 
+             /// <summary>
+             /// RequestType.
+             /// </summary>
+             /// <param name="requestType"> requestType. </param>
+             /// <returns> Builder. </returns>
             public Builder RequestType(string requestType)
             {
                 this.requestType = requestType;
                 return this;
             }
 
+             /// <summary>
+             /// DueDate.
+             /// </summary>
+             /// <param name="dueDate"> dueDate. </param>
+             /// <returns> Builder. </returns>
             public Builder DueDate(string dueDate)
             {
                 this.dueDate = dueDate;
                 return this;
             }
 
+             /// <summary>
+             /// FixedAmountRequestedMoney.
+             /// </summary>
+             /// <param name="fixedAmountRequestedMoney"> fixedAmountRequestedMoney. </param>
+             /// <returns> Builder. </returns>
             public Builder FixedAmountRequestedMoney(Models.Money fixedAmountRequestedMoney)
             {
                 this.fixedAmountRequestedMoney = fixedAmountRequestedMoney;
                 return this;
             }
 
+             /// <summary>
+             /// PercentageRequested.
+             /// </summary>
+             /// <param name="percentageRequested"> percentageRequested. </param>
+             /// <returns> Builder. </returns>
             public Builder PercentageRequested(string percentageRequested)
             {
                 this.percentageRequested = percentageRequested;
                 return this;
             }
 
+             /// <summary>
+             /// TippingEnabled.
+             /// </summary>
+             /// <param name="tippingEnabled"> tippingEnabled. </param>
+             /// <returns> Builder. </returns>
             public Builder TippingEnabled(bool? tippingEnabled)
             {
                 this.tippingEnabled = tippingEnabled;
                 return this;
             }
 
+             /// <summary>
+             /// AutomaticPaymentSource.
+             /// </summary>
+             /// <param name="automaticPaymentSource"> automaticPaymentSource. </param>
+             /// <returns> Builder. </returns>
             public Builder AutomaticPaymentSource(string automaticPaymentSource)
             {
                 this.automaticPaymentSource = automaticPaymentSource;
                 return this;
             }
 
+             /// <summary>
+             /// CardId.
+             /// </summary>
+             /// <param name="cardId"> cardId. </param>
+             /// <returns> Builder. </returns>
             public Builder CardId(string cardId)
             {
                 this.cardId = cardId;
                 return this;
             }
 
+             /// <summary>
+             /// Reminders.
+             /// </summary>
+             /// <param name="reminders"> reminders. </param>
+             /// <returns> Builder. </returns>
             public Builder Reminders(IList<Models.InvoicePaymentReminder> reminders)
             {
                 this.reminders = reminders;
                 return this;
             }
 
+             /// <summary>
+             /// ComputedAmountMoney.
+             /// </summary>
+             /// <param name="computedAmountMoney"> computedAmountMoney. </param>
+             /// <returns> Builder. </returns>
             public Builder ComputedAmountMoney(Models.Money computedAmountMoney)
             {
                 this.computedAmountMoney = computedAmountMoney;
                 return this;
             }
 
+             /// <summary>
+             /// TotalCompletedAmountMoney.
+             /// </summary>
+             /// <param name="totalCompletedAmountMoney"> totalCompletedAmountMoney. </param>
+             /// <returns> Builder. </returns>
             public Builder TotalCompletedAmountMoney(Models.Money totalCompletedAmountMoney)
             {
                 this.totalCompletedAmountMoney = totalCompletedAmountMoney;
                 return this;
             }
 
+             /// <summary>
+             /// RoundingAdjustmentIncludedMoney.
+             /// </summary>
+             /// <param name="roundingAdjustmentIncludedMoney"> roundingAdjustmentIncludedMoney. </param>
+             /// <returns> Builder. </returns>
             public Builder RoundingAdjustmentIncludedMoney(Models.Money roundingAdjustmentIncludedMoney)
             {
                 this.roundingAdjustmentIncludedMoney = roundingAdjustmentIncludedMoney;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> InvoicePaymentRequest. </returns>
             public InvoicePaymentRequest Build()
             {
-                return new InvoicePaymentRequest(uid,
-                    requestMethod,
-                    requestType,
-                    dueDate,
-                    fixedAmountRequestedMoney,
-                    percentageRequested,
-                    tippingEnabled,
-                    automaticPaymentSource,
-                    cardId,
-                    reminders,
-                    computedAmountMoney,
-                    totalCompletedAmountMoney,
-                    roundingAdjustmentIncludedMoney);
+                return new InvoicePaymentRequest(
+                    this.uid,
+                    this.requestMethod,
+                    this.requestType,
+                    this.dueDate,
+                    this.fixedAmountRequestedMoney,
+                    this.percentageRequested,
+                    this.tippingEnabled,
+                    this.automaticPaymentSource,
+                    this.cardId,
+                    this.reminders,
+                    this.computedAmountMoney,
+                    this.totalCompletedAmountMoney,
+                    this.roundingAdjustmentIncludedMoney);
             }
         }
     }

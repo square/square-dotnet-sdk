@@ -1,21 +1,38 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class UpdateCustomerRequest 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// UpdateCustomerRequest.
+    /// </summary>
+    public class UpdateCustomerRequest
     {
-        public UpdateCustomerRequest(string givenName = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UpdateCustomerRequest"/> class.
+        /// </summary>
+        /// <param name="givenName">given_name.</param>
+        /// <param name="familyName">family_name.</param>
+        /// <param name="companyName">company_name.</param>
+        /// <param name="nickname">nickname.</param>
+        /// <param name="emailAddress">email_address.</param>
+        /// <param name="address">address.</param>
+        /// <param name="phoneNumber">phone_number.</param>
+        /// <param name="referenceId">reference_id.</param>
+        /// <param name="note">note.</param>
+        /// <param name="birthday">birthday.</param>
+        /// <param name="version">version.</param>
+        public UpdateCustomerRequest(
+            string givenName = null,
             string familyName = null,
             string companyName = null,
             string nickname = null,
@@ -24,28 +41,30 @@ namespace Square.Models
             string phoneNumber = null,
             string referenceId = null,
             string note = null,
-            string birthday = null)
+            string birthday = null,
+            long? version = null)
         {
-            GivenName = givenName;
-            FamilyName = familyName;
-            CompanyName = companyName;
-            Nickname = nickname;
-            EmailAddress = emailAddress;
-            Address = address;
-            PhoneNumber = phoneNumber;
-            ReferenceId = referenceId;
-            Note = note;
-            Birthday = birthday;
+            this.GivenName = givenName;
+            this.FamilyName = familyName;
+            this.CompanyName = companyName;
+            this.Nickname = nickname;
+            this.EmailAddress = emailAddress;
+            this.Address = address;
+            this.PhoneNumber = phoneNumber;
+            this.ReferenceId = referenceId;
+            this.Note = note;
+            this.Birthday = birthday;
+            this.Version = version;
         }
 
         /// <summary>
-        /// The given (i.e., first) name associated with the customer profile.
+        /// The given name (that is, the first name) associated with the customer profile.
         /// </summary>
         [JsonProperty("given_name", NullValueHandling = NullValueHandling.Ignore)]
         public string GivenName { get; }
 
         /// <summary>
-        /// The family (i.e., last) name associated with the customer profile.
+        /// The family name (that is, the last name) associated with the customer profile.
         /// </summary>
         [JsonProperty("family_name", NullValueHandling = NullValueHandling.Ignore)]
         public string FamilyName { get; }
@@ -81,7 +100,7 @@ namespace Square.Models
         public string PhoneNumber { get; }
 
         /// <summary>
-        /// An optional, second ID used to associate the customer profile with an
+        /// An optional second ID used to associate the customer profile with an
         /// entity in another system.
         /// </summary>
         [JsonProperty("reference_id", NullValueHandling = NullValueHandling.Ignore)]
@@ -94,14 +113,21 @@ namespace Square.Models
         public string Note { get; }
 
         /// <summary>
-        /// The birthday associated with the customer profile, in RFC 3339 format.
-        /// Year is optional, timezone and times are not allowed.
-        /// For example: `0000-09-01T00:00:00-00:00` indicates a birthday on September 1st.
-        /// `1998-09-01T00:00:00-00:00` indications a birthday on September 1st __1998__.
+        /// The birthday associated with the customer profile, in RFC 3339 format. The year is optional. The timezone and time are not allowed.
+        /// For example, `0000-09-21T00:00:00-00:00` represents a birthday on September 21 and `1998-09-21T00:00:00-00:00` represents a birthday on September 21, 1998.
+        /// You can also specify this value in `YYYY-MM-DD` format.
         /// </summary>
         [JsonProperty("birthday", NullValueHandling = NullValueHandling.Ignore)]
         public string Birthday { get; }
 
+        /// <summary>
+        /// The current version of the customer profile.
+        /// As a best practice, you should include this field to enable [optimistic concurrency](https://developer.squareup.com/docs/working-with-apis/optimistic-concurrency) control. For more information, see [Update a customer profile](https://developer.squareup.com/docs/customers-api/use-the-api/keep-records#update-a-customer-profile).
+        /// </summary>
+        [JsonProperty("version", NullValueHandling = NullValueHandling.Ignore)]
+        public long? Version { get; }
+
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -111,20 +137,7 @@ namespace Square.Models
             return $"UpdateCustomerRequest : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"GivenName = {(GivenName == null ? "null" : GivenName == string.Empty ? "" : GivenName)}");
-            toStringOutput.Add($"FamilyName = {(FamilyName == null ? "null" : FamilyName == string.Empty ? "" : FamilyName)}");
-            toStringOutput.Add($"CompanyName = {(CompanyName == null ? "null" : CompanyName == string.Empty ? "" : CompanyName)}");
-            toStringOutput.Add($"Nickname = {(Nickname == null ? "null" : Nickname == string.Empty ? "" : Nickname)}");
-            toStringOutput.Add($"EmailAddress = {(EmailAddress == null ? "null" : EmailAddress == string.Empty ? "" : EmailAddress)}");
-            toStringOutput.Add($"Address = {(Address == null ? "null" : Address.ToString())}");
-            toStringOutput.Add($"PhoneNumber = {(PhoneNumber == null ? "null" : PhoneNumber == string.Empty ? "" : PhoneNumber)}");
-            toStringOutput.Add($"ReferenceId = {(ReferenceId == null ? "null" : ReferenceId == string.Empty ? "" : ReferenceId)}");
-            toStringOutput.Add($"Note = {(Note == null ? "null" : Note == string.Empty ? "" : Note)}");
-            toStringOutput.Add($"Birthday = {(Birthday == null ? "null" : Birthday == string.Empty ? "" : Birthday)}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -138,91 +151,125 @@ namespace Square.Models
             }
 
             return obj is UpdateCustomerRequest other &&
-                ((GivenName == null && other.GivenName == null) || (GivenName?.Equals(other.GivenName) == true)) &&
-                ((FamilyName == null && other.FamilyName == null) || (FamilyName?.Equals(other.FamilyName) == true)) &&
-                ((CompanyName == null && other.CompanyName == null) || (CompanyName?.Equals(other.CompanyName) == true)) &&
-                ((Nickname == null && other.Nickname == null) || (Nickname?.Equals(other.Nickname) == true)) &&
-                ((EmailAddress == null && other.EmailAddress == null) || (EmailAddress?.Equals(other.EmailAddress) == true)) &&
-                ((Address == null && other.Address == null) || (Address?.Equals(other.Address) == true)) &&
-                ((PhoneNumber == null && other.PhoneNumber == null) || (PhoneNumber?.Equals(other.PhoneNumber) == true)) &&
-                ((ReferenceId == null && other.ReferenceId == null) || (ReferenceId?.Equals(other.ReferenceId) == true)) &&
-                ((Note == null && other.Note == null) || (Note?.Equals(other.Note) == true)) &&
-                ((Birthday == null && other.Birthday == null) || (Birthday?.Equals(other.Birthday) == true));
+                ((this.GivenName == null && other.GivenName == null) || (this.GivenName?.Equals(other.GivenName) == true)) &&
+                ((this.FamilyName == null && other.FamilyName == null) || (this.FamilyName?.Equals(other.FamilyName) == true)) &&
+                ((this.CompanyName == null && other.CompanyName == null) || (this.CompanyName?.Equals(other.CompanyName) == true)) &&
+                ((this.Nickname == null && other.Nickname == null) || (this.Nickname?.Equals(other.Nickname) == true)) &&
+                ((this.EmailAddress == null && other.EmailAddress == null) || (this.EmailAddress?.Equals(other.EmailAddress) == true)) &&
+                ((this.Address == null && other.Address == null) || (this.Address?.Equals(other.Address) == true)) &&
+                ((this.PhoneNumber == null && other.PhoneNumber == null) || (this.PhoneNumber?.Equals(other.PhoneNumber) == true)) &&
+                ((this.ReferenceId == null && other.ReferenceId == null) || (this.ReferenceId?.Equals(other.ReferenceId) == true)) &&
+                ((this.Note == null && other.Note == null) || (this.Note?.Equals(other.Note) == true)) &&
+                ((this.Birthday == null && other.Birthday == null) || (this.Birthday?.Equals(other.Birthday) == true)) &&
+                ((this.Version == null && other.Version == null) || (this.Version?.Equals(other.Version) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -738294962;
+            int hashCode = 1250370317;
 
-            if (GivenName != null)
+            if (this.GivenName != null)
             {
-               hashCode += GivenName.GetHashCode();
+               hashCode += this.GivenName.GetHashCode();
             }
 
-            if (FamilyName != null)
+            if (this.FamilyName != null)
             {
-               hashCode += FamilyName.GetHashCode();
+               hashCode += this.FamilyName.GetHashCode();
             }
 
-            if (CompanyName != null)
+            if (this.CompanyName != null)
             {
-               hashCode += CompanyName.GetHashCode();
+               hashCode += this.CompanyName.GetHashCode();
             }
 
-            if (Nickname != null)
+            if (this.Nickname != null)
             {
-               hashCode += Nickname.GetHashCode();
+               hashCode += this.Nickname.GetHashCode();
             }
 
-            if (EmailAddress != null)
+            if (this.EmailAddress != null)
             {
-               hashCode += EmailAddress.GetHashCode();
+               hashCode += this.EmailAddress.GetHashCode();
             }
 
-            if (Address != null)
+            if (this.Address != null)
             {
-               hashCode += Address.GetHashCode();
+               hashCode += this.Address.GetHashCode();
             }
 
-            if (PhoneNumber != null)
+            if (this.PhoneNumber != null)
             {
-               hashCode += PhoneNumber.GetHashCode();
+               hashCode += this.PhoneNumber.GetHashCode();
             }
 
-            if (ReferenceId != null)
+            if (this.ReferenceId != null)
             {
-               hashCode += ReferenceId.GetHashCode();
+               hashCode += this.ReferenceId.GetHashCode();
             }
 
-            if (Note != null)
+            if (this.Note != null)
             {
-               hashCode += Note.GetHashCode();
+               hashCode += this.Note.GetHashCode();
             }
 
-            if (Birthday != null)
+            if (this.Birthday != null)
             {
-               hashCode += Birthday.GetHashCode();
+               hashCode += this.Birthday.GetHashCode();
+            }
+
+            if (this.Version != null)
+            {
+               hashCode += this.Version.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.GivenName = {(this.GivenName == null ? "null" : this.GivenName == string.Empty ? "" : this.GivenName)}");
+            toStringOutput.Add($"this.FamilyName = {(this.FamilyName == null ? "null" : this.FamilyName == string.Empty ? "" : this.FamilyName)}");
+            toStringOutput.Add($"this.CompanyName = {(this.CompanyName == null ? "null" : this.CompanyName == string.Empty ? "" : this.CompanyName)}");
+            toStringOutput.Add($"this.Nickname = {(this.Nickname == null ? "null" : this.Nickname == string.Empty ? "" : this.Nickname)}");
+            toStringOutput.Add($"this.EmailAddress = {(this.EmailAddress == null ? "null" : this.EmailAddress == string.Empty ? "" : this.EmailAddress)}");
+            toStringOutput.Add($"this.Address = {(this.Address == null ? "null" : this.Address.ToString())}");
+            toStringOutput.Add($"this.PhoneNumber = {(this.PhoneNumber == null ? "null" : this.PhoneNumber == string.Empty ? "" : this.PhoneNumber)}");
+            toStringOutput.Add($"this.ReferenceId = {(this.ReferenceId == null ? "null" : this.ReferenceId == string.Empty ? "" : this.ReferenceId)}");
+            toStringOutput.Add($"this.Note = {(this.Note == null ? "null" : this.Note == string.Empty ? "" : this.Note)}");
+            toStringOutput.Add($"this.Birthday = {(this.Birthday == null ? "null" : this.Birthday == string.Empty ? "" : this.Birthday)}");
+            toStringOutput.Add($"this.Version = {(this.Version == null ? "null" : this.Version.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .GivenName(GivenName)
-                .FamilyName(FamilyName)
-                .CompanyName(CompanyName)
-                .Nickname(Nickname)
-                .EmailAddress(EmailAddress)
-                .Address(Address)
-                .PhoneNumber(PhoneNumber)
-                .ReferenceId(ReferenceId)
-                .Note(Note)
-                .Birthday(Birthday);
+                .GivenName(this.GivenName)
+                .FamilyName(this.FamilyName)
+                .CompanyName(this.CompanyName)
+                .Nickname(this.Nickname)
+                .EmailAddress(this.EmailAddress)
+                .Address(this.Address)
+                .PhoneNumber(this.PhoneNumber)
+                .ReferenceId(this.ReferenceId)
+                .Note(this.Note)
+                .Birthday(this.Birthday)
+                .Version(this.Version);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string givenName;
@@ -235,81 +282,147 @@ namespace Square.Models
             private string referenceId;
             private string note;
             private string birthday;
+            private long? version;
 
-
-
+             /// <summary>
+             /// GivenName.
+             /// </summary>
+             /// <param name="givenName"> givenName. </param>
+             /// <returns> Builder. </returns>
             public Builder GivenName(string givenName)
             {
                 this.givenName = givenName;
                 return this;
             }
 
+             /// <summary>
+             /// FamilyName.
+             /// </summary>
+             /// <param name="familyName"> familyName. </param>
+             /// <returns> Builder. </returns>
             public Builder FamilyName(string familyName)
             {
                 this.familyName = familyName;
                 return this;
             }
 
+             /// <summary>
+             /// CompanyName.
+             /// </summary>
+             /// <param name="companyName"> companyName. </param>
+             /// <returns> Builder. </returns>
             public Builder CompanyName(string companyName)
             {
                 this.companyName = companyName;
                 return this;
             }
 
+             /// <summary>
+             /// Nickname.
+             /// </summary>
+             /// <param name="nickname"> nickname. </param>
+             /// <returns> Builder. </returns>
             public Builder Nickname(string nickname)
             {
                 this.nickname = nickname;
                 return this;
             }
 
+             /// <summary>
+             /// EmailAddress.
+             /// </summary>
+             /// <param name="emailAddress"> emailAddress. </param>
+             /// <returns> Builder. </returns>
             public Builder EmailAddress(string emailAddress)
             {
                 this.emailAddress = emailAddress;
                 return this;
             }
 
+             /// <summary>
+             /// Address.
+             /// </summary>
+             /// <param name="address"> address. </param>
+             /// <returns> Builder. </returns>
             public Builder Address(Models.Address address)
             {
                 this.address = address;
                 return this;
             }
 
+             /// <summary>
+             /// PhoneNumber.
+             /// </summary>
+             /// <param name="phoneNumber"> phoneNumber. </param>
+             /// <returns> Builder. </returns>
             public Builder PhoneNumber(string phoneNumber)
             {
                 this.phoneNumber = phoneNumber;
                 return this;
             }
 
+             /// <summary>
+             /// ReferenceId.
+             /// </summary>
+             /// <param name="referenceId"> referenceId. </param>
+             /// <returns> Builder. </returns>
             public Builder ReferenceId(string referenceId)
             {
                 this.referenceId = referenceId;
                 return this;
             }
 
+             /// <summary>
+             /// Note.
+             /// </summary>
+             /// <param name="note"> note. </param>
+             /// <returns> Builder. </returns>
             public Builder Note(string note)
             {
                 this.note = note;
                 return this;
             }
 
+             /// <summary>
+             /// Birthday.
+             /// </summary>
+             /// <param name="birthday"> birthday. </param>
+             /// <returns> Builder. </returns>
             public Builder Birthday(string birthday)
             {
                 this.birthday = birthday;
                 return this;
             }
 
+             /// <summary>
+             /// Version.
+             /// </summary>
+             /// <param name="version"> version. </param>
+             /// <returns> Builder. </returns>
+            public Builder Version(long? version)
+            {
+                this.version = version;
+                return this;
+            }
+
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> UpdateCustomerRequest. </returns>
             public UpdateCustomerRequest Build()
             {
-                return new UpdateCustomerRequest(givenName,
-                    familyName,
-                    companyName,
-                    nickname,
-                    emailAddress,
-                    address,
-                    phoneNumber,
-                    referenceId,
-                    note,
-                    birthday);
+                return new UpdateCustomerRequest(
+                    this.givenName,
+                    this.familyName,
+                    this.companyName,
+                    this.nickname,
+                    this.emailAddress,
+                    this.address,
+                    this.phoneNumber,
+                    this.referenceId,
+                    this.note,
+                    this.birthday,
+                    this.version);
             }
         }
     }

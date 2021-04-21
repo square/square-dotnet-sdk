@@ -1,21 +1,40 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class BusinessAppointmentSettings 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// BusinessAppointmentSettings.
+    /// </summary>
+    public class BusinessAppointmentSettings
     {
-        public BusinessAppointmentSettings(IList<string> locationTypes = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BusinessAppointmentSettings"/> class.
+        /// </summary>
+        /// <param name="locationTypes">location_types.</param>
+        /// <param name="alignmentTime">alignment_time.</param>
+        /// <param name="minBookingLeadTimeSeconds">min_booking_lead_time_seconds.</param>
+        /// <param name="maxBookingLeadTimeSeconds">max_booking_lead_time_seconds.</param>
+        /// <param name="anyTeamMemberBookingEnabled">any_team_member_booking_enabled.</param>
+        /// <param name="multipleServiceBookingEnabled">multiple_service_booking_enabled.</param>
+        /// <param name="maxAppointmentsPerDayLimitType">max_appointments_per_day_limit_type.</param>
+        /// <param name="maxAppointmentsPerDayLimit">max_appointments_per_day_limit.</param>
+        /// <param name="cancellationWindowSeconds">cancellation_window_seconds.</param>
+        /// <param name="cancellationFeeMoney">cancellation_fee_money.</param>
+        /// <param name="cancellationPolicy">cancellation_policy.</param>
+        /// <param name="cancellationPolicyText">cancellation_policy_text.</param>
+        /// <param name="skipBookingFlowStaffSelection">skip_booking_flow_staff_selection.</param>
+        public BusinessAppointmentSettings(
+            IList<string> locationTypes = null,
             string alignmentTime = null,
             int? minBookingLeadTimeSeconds = null,
             int? maxBookingLeadTimeSeconds = null,
@@ -29,19 +48,19 @@ namespace Square.Models
             string cancellationPolicyText = null,
             bool? skipBookingFlowStaffSelection = null)
         {
-            LocationTypes = locationTypes;
-            AlignmentTime = alignmentTime;
-            MinBookingLeadTimeSeconds = minBookingLeadTimeSeconds;
-            MaxBookingLeadTimeSeconds = maxBookingLeadTimeSeconds;
-            AnyTeamMemberBookingEnabled = anyTeamMemberBookingEnabled;
-            MultipleServiceBookingEnabled = multipleServiceBookingEnabled;
-            MaxAppointmentsPerDayLimitType = maxAppointmentsPerDayLimitType;
-            MaxAppointmentsPerDayLimit = maxAppointmentsPerDayLimit;
-            CancellationWindowSeconds = cancellationWindowSeconds;
-            CancellationFeeMoney = cancellationFeeMoney;
-            CancellationPolicy = cancellationPolicy;
-            CancellationPolicyText = cancellationPolicyText;
-            SkipBookingFlowStaffSelection = skipBookingFlowStaffSelection;
+            this.LocationTypes = locationTypes;
+            this.AlignmentTime = alignmentTime;
+            this.MinBookingLeadTimeSeconds = minBookingLeadTimeSeconds;
+            this.MaxBookingLeadTimeSeconds = maxBookingLeadTimeSeconds;
+            this.AnyTeamMemberBookingEnabled = anyTeamMemberBookingEnabled;
+            this.MultipleServiceBookingEnabled = multipleServiceBookingEnabled;
+            this.MaxAppointmentsPerDayLimitType = maxAppointmentsPerDayLimitType;
+            this.MaxAppointmentsPerDayLimit = maxAppointmentsPerDayLimit;
+            this.CancellationWindowSeconds = cancellationWindowSeconds;
+            this.CancellationFeeMoney = cancellationFeeMoney;
+            this.CancellationPolicy = cancellationPolicy;
+            this.CancellationPolicyText = cancellationPolicyText;
+            this.SkipBookingFlowStaffSelection = skipBookingFlowStaffSelection;
         }
 
         /// <summary>
@@ -129,6 +148,7 @@ namespace Square.Models
         [JsonProperty("skip_booking_flow_staff_selection", NullValueHandling = NullValueHandling.Ignore)]
         public bool? SkipBookingFlowStaffSelection { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -138,23 +158,7 @@ namespace Square.Models
             return $"BusinessAppointmentSettings : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"LocationTypes = {(LocationTypes == null ? "null" : $"[{ string.Join(", ", LocationTypes)} ]")}");
-            toStringOutput.Add($"AlignmentTime = {(AlignmentTime == null ? "null" : AlignmentTime.ToString())}");
-            toStringOutput.Add($"MinBookingLeadTimeSeconds = {(MinBookingLeadTimeSeconds == null ? "null" : MinBookingLeadTimeSeconds.ToString())}");
-            toStringOutput.Add($"MaxBookingLeadTimeSeconds = {(MaxBookingLeadTimeSeconds == null ? "null" : MaxBookingLeadTimeSeconds.ToString())}");
-            toStringOutput.Add($"AnyTeamMemberBookingEnabled = {(AnyTeamMemberBookingEnabled == null ? "null" : AnyTeamMemberBookingEnabled.ToString())}");
-            toStringOutput.Add($"MultipleServiceBookingEnabled = {(MultipleServiceBookingEnabled == null ? "null" : MultipleServiceBookingEnabled.ToString())}");
-            toStringOutput.Add($"MaxAppointmentsPerDayLimitType = {(MaxAppointmentsPerDayLimitType == null ? "null" : MaxAppointmentsPerDayLimitType.ToString())}");
-            toStringOutput.Add($"MaxAppointmentsPerDayLimit = {(MaxAppointmentsPerDayLimit == null ? "null" : MaxAppointmentsPerDayLimit.ToString())}");
-            toStringOutput.Add($"CancellationWindowSeconds = {(CancellationWindowSeconds == null ? "null" : CancellationWindowSeconds.ToString())}");
-            toStringOutput.Add($"CancellationFeeMoney = {(CancellationFeeMoney == null ? "null" : CancellationFeeMoney.ToString())}");
-            toStringOutput.Add($"CancellationPolicy = {(CancellationPolicy == null ? "null" : CancellationPolicy.ToString())}");
-            toStringOutput.Add($"CancellationPolicyText = {(CancellationPolicyText == null ? "null" : CancellationPolicyText == string.Empty ? "" : CancellationPolicyText)}");
-            toStringOutput.Add($"SkipBookingFlowStaffSelection = {(SkipBookingFlowStaffSelection == null ? "null" : SkipBookingFlowStaffSelection.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -168,112 +172,141 @@ namespace Square.Models
             }
 
             return obj is BusinessAppointmentSettings other &&
-                ((LocationTypes == null && other.LocationTypes == null) || (LocationTypes?.Equals(other.LocationTypes) == true)) &&
-                ((AlignmentTime == null && other.AlignmentTime == null) || (AlignmentTime?.Equals(other.AlignmentTime) == true)) &&
-                ((MinBookingLeadTimeSeconds == null && other.MinBookingLeadTimeSeconds == null) || (MinBookingLeadTimeSeconds?.Equals(other.MinBookingLeadTimeSeconds) == true)) &&
-                ((MaxBookingLeadTimeSeconds == null && other.MaxBookingLeadTimeSeconds == null) || (MaxBookingLeadTimeSeconds?.Equals(other.MaxBookingLeadTimeSeconds) == true)) &&
-                ((AnyTeamMemberBookingEnabled == null && other.AnyTeamMemberBookingEnabled == null) || (AnyTeamMemberBookingEnabled?.Equals(other.AnyTeamMemberBookingEnabled) == true)) &&
-                ((MultipleServiceBookingEnabled == null && other.MultipleServiceBookingEnabled == null) || (MultipleServiceBookingEnabled?.Equals(other.MultipleServiceBookingEnabled) == true)) &&
-                ((MaxAppointmentsPerDayLimitType == null && other.MaxAppointmentsPerDayLimitType == null) || (MaxAppointmentsPerDayLimitType?.Equals(other.MaxAppointmentsPerDayLimitType) == true)) &&
-                ((MaxAppointmentsPerDayLimit == null && other.MaxAppointmentsPerDayLimit == null) || (MaxAppointmentsPerDayLimit?.Equals(other.MaxAppointmentsPerDayLimit) == true)) &&
-                ((CancellationWindowSeconds == null && other.CancellationWindowSeconds == null) || (CancellationWindowSeconds?.Equals(other.CancellationWindowSeconds) == true)) &&
-                ((CancellationFeeMoney == null && other.CancellationFeeMoney == null) || (CancellationFeeMoney?.Equals(other.CancellationFeeMoney) == true)) &&
-                ((CancellationPolicy == null && other.CancellationPolicy == null) || (CancellationPolicy?.Equals(other.CancellationPolicy) == true)) &&
-                ((CancellationPolicyText == null && other.CancellationPolicyText == null) || (CancellationPolicyText?.Equals(other.CancellationPolicyText) == true)) &&
-                ((SkipBookingFlowStaffSelection == null && other.SkipBookingFlowStaffSelection == null) || (SkipBookingFlowStaffSelection?.Equals(other.SkipBookingFlowStaffSelection) == true));
+                ((this.LocationTypes == null && other.LocationTypes == null) || (this.LocationTypes?.Equals(other.LocationTypes) == true)) &&
+                ((this.AlignmentTime == null && other.AlignmentTime == null) || (this.AlignmentTime?.Equals(other.AlignmentTime) == true)) &&
+                ((this.MinBookingLeadTimeSeconds == null && other.MinBookingLeadTimeSeconds == null) || (this.MinBookingLeadTimeSeconds?.Equals(other.MinBookingLeadTimeSeconds) == true)) &&
+                ((this.MaxBookingLeadTimeSeconds == null && other.MaxBookingLeadTimeSeconds == null) || (this.MaxBookingLeadTimeSeconds?.Equals(other.MaxBookingLeadTimeSeconds) == true)) &&
+                ((this.AnyTeamMemberBookingEnabled == null && other.AnyTeamMemberBookingEnabled == null) || (this.AnyTeamMemberBookingEnabled?.Equals(other.AnyTeamMemberBookingEnabled) == true)) &&
+                ((this.MultipleServiceBookingEnabled == null && other.MultipleServiceBookingEnabled == null) || (this.MultipleServiceBookingEnabled?.Equals(other.MultipleServiceBookingEnabled) == true)) &&
+                ((this.MaxAppointmentsPerDayLimitType == null && other.MaxAppointmentsPerDayLimitType == null) || (this.MaxAppointmentsPerDayLimitType?.Equals(other.MaxAppointmentsPerDayLimitType) == true)) &&
+                ((this.MaxAppointmentsPerDayLimit == null && other.MaxAppointmentsPerDayLimit == null) || (this.MaxAppointmentsPerDayLimit?.Equals(other.MaxAppointmentsPerDayLimit) == true)) &&
+                ((this.CancellationWindowSeconds == null && other.CancellationWindowSeconds == null) || (this.CancellationWindowSeconds?.Equals(other.CancellationWindowSeconds) == true)) &&
+                ((this.CancellationFeeMoney == null && other.CancellationFeeMoney == null) || (this.CancellationFeeMoney?.Equals(other.CancellationFeeMoney) == true)) &&
+                ((this.CancellationPolicy == null && other.CancellationPolicy == null) || (this.CancellationPolicy?.Equals(other.CancellationPolicy) == true)) &&
+                ((this.CancellationPolicyText == null && other.CancellationPolicyText == null) || (this.CancellationPolicyText?.Equals(other.CancellationPolicyText) == true)) &&
+                ((this.SkipBookingFlowStaffSelection == null && other.SkipBookingFlowStaffSelection == null) || (this.SkipBookingFlowStaffSelection?.Equals(other.SkipBookingFlowStaffSelection) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 114929036;
 
-            if (LocationTypes != null)
+            if (this.LocationTypes != null)
             {
-               hashCode += LocationTypes.GetHashCode();
+               hashCode += this.LocationTypes.GetHashCode();
             }
 
-            if (AlignmentTime != null)
+            if (this.AlignmentTime != null)
             {
-               hashCode += AlignmentTime.GetHashCode();
+               hashCode += this.AlignmentTime.GetHashCode();
             }
 
-            if (MinBookingLeadTimeSeconds != null)
+            if (this.MinBookingLeadTimeSeconds != null)
             {
-               hashCode += MinBookingLeadTimeSeconds.GetHashCode();
+               hashCode += this.MinBookingLeadTimeSeconds.GetHashCode();
             }
 
-            if (MaxBookingLeadTimeSeconds != null)
+            if (this.MaxBookingLeadTimeSeconds != null)
             {
-               hashCode += MaxBookingLeadTimeSeconds.GetHashCode();
+               hashCode += this.MaxBookingLeadTimeSeconds.GetHashCode();
             }
 
-            if (AnyTeamMemberBookingEnabled != null)
+            if (this.AnyTeamMemberBookingEnabled != null)
             {
-               hashCode += AnyTeamMemberBookingEnabled.GetHashCode();
+               hashCode += this.AnyTeamMemberBookingEnabled.GetHashCode();
             }
 
-            if (MultipleServiceBookingEnabled != null)
+            if (this.MultipleServiceBookingEnabled != null)
             {
-               hashCode += MultipleServiceBookingEnabled.GetHashCode();
+               hashCode += this.MultipleServiceBookingEnabled.GetHashCode();
             }
 
-            if (MaxAppointmentsPerDayLimitType != null)
+            if (this.MaxAppointmentsPerDayLimitType != null)
             {
-               hashCode += MaxAppointmentsPerDayLimitType.GetHashCode();
+               hashCode += this.MaxAppointmentsPerDayLimitType.GetHashCode();
             }
 
-            if (MaxAppointmentsPerDayLimit != null)
+            if (this.MaxAppointmentsPerDayLimit != null)
             {
-               hashCode += MaxAppointmentsPerDayLimit.GetHashCode();
+               hashCode += this.MaxAppointmentsPerDayLimit.GetHashCode();
             }
 
-            if (CancellationWindowSeconds != null)
+            if (this.CancellationWindowSeconds != null)
             {
-               hashCode += CancellationWindowSeconds.GetHashCode();
+               hashCode += this.CancellationWindowSeconds.GetHashCode();
             }
 
-            if (CancellationFeeMoney != null)
+            if (this.CancellationFeeMoney != null)
             {
-               hashCode += CancellationFeeMoney.GetHashCode();
+               hashCode += this.CancellationFeeMoney.GetHashCode();
             }
 
-            if (CancellationPolicy != null)
+            if (this.CancellationPolicy != null)
             {
-               hashCode += CancellationPolicy.GetHashCode();
+               hashCode += this.CancellationPolicy.GetHashCode();
             }
 
-            if (CancellationPolicyText != null)
+            if (this.CancellationPolicyText != null)
             {
-               hashCode += CancellationPolicyText.GetHashCode();
+               hashCode += this.CancellationPolicyText.GetHashCode();
             }
 
-            if (SkipBookingFlowStaffSelection != null)
+            if (this.SkipBookingFlowStaffSelection != null)
             {
-               hashCode += SkipBookingFlowStaffSelection.GetHashCode();
+               hashCode += this.SkipBookingFlowStaffSelection.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.LocationTypes = {(this.LocationTypes == null ? "null" : $"[{string.Join(", ", this.LocationTypes)} ]")}");
+            toStringOutput.Add($"this.AlignmentTime = {(this.AlignmentTime == null ? "null" : this.AlignmentTime.ToString())}");
+            toStringOutput.Add($"this.MinBookingLeadTimeSeconds = {(this.MinBookingLeadTimeSeconds == null ? "null" : this.MinBookingLeadTimeSeconds.ToString())}");
+            toStringOutput.Add($"this.MaxBookingLeadTimeSeconds = {(this.MaxBookingLeadTimeSeconds == null ? "null" : this.MaxBookingLeadTimeSeconds.ToString())}");
+            toStringOutput.Add($"this.AnyTeamMemberBookingEnabled = {(this.AnyTeamMemberBookingEnabled == null ? "null" : this.AnyTeamMemberBookingEnabled.ToString())}");
+            toStringOutput.Add($"this.MultipleServiceBookingEnabled = {(this.MultipleServiceBookingEnabled == null ? "null" : this.MultipleServiceBookingEnabled.ToString())}");
+            toStringOutput.Add($"this.MaxAppointmentsPerDayLimitType = {(this.MaxAppointmentsPerDayLimitType == null ? "null" : this.MaxAppointmentsPerDayLimitType.ToString())}");
+            toStringOutput.Add($"this.MaxAppointmentsPerDayLimit = {(this.MaxAppointmentsPerDayLimit == null ? "null" : this.MaxAppointmentsPerDayLimit.ToString())}");
+            toStringOutput.Add($"this.CancellationWindowSeconds = {(this.CancellationWindowSeconds == null ? "null" : this.CancellationWindowSeconds.ToString())}");
+            toStringOutput.Add($"this.CancellationFeeMoney = {(this.CancellationFeeMoney == null ? "null" : this.CancellationFeeMoney.ToString())}");
+            toStringOutput.Add($"this.CancellationPolicy = {(this.CancellationPolicy == null ? "null" : this.CancellationPolicy.ToString())}");
+            toStringOutput.Add($"this.CancellationPolicyText = {(this.CancellationPolicyText == null ? "null" : this.CancellationPolicyText == string.Empty ? "" : this.CancellationPolicyText)}");
+            toStringOutput.Add($"this.SkipBookingFlowStaffSelection = {(this.SkipBookingFlowStaffSelection == null ? "null" : this.SkipBookingFlowStaffSelection.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .LocationTypes(LocationTypes)
-                .AlignmentTime(AlignmentTime)
-                .MinBookingLeadTimeSeconds(MinBookingLeadTimeSeconds)
-                .MaxBookingLeadTimeSeconds(MaxBookingLeadTimeSeconds)
-                .AnyTeamMemberBookingEnabled(AnyTeamMemberBookingEnabled)
-                .MultipleServiceBookingEnabled(MultipleServiceBookingEnabled)
-                .MaxAppointmentsPerDayLimitType(MaxAppointmentsPerDayLimitType)
-                .MaxAppointmentsPerDayLimit(MaxAppointmentsPerDayLimit)
-                .CancellationWindowSeconds(CancellationWindowSeconds)
-                .CancellationFeeMoney(CancellationFeeMoney)
-                .CancellationPolicy(CancellationPolicy)
-                .CancellationPolicyText(CancellationPolicyText)
-                .SkipBookingFlowStaffSelection(SkipBookingFlowStaffSelection);
+                .LocationTypes(this.LocationTypes)
+                .AlignmentTime(this.AlignmentTime)
+                .MinBookingLeadTimeSeconds(this.MinBookingLeadTimeSeconds)
+                .MaxBookingLeadTimeSeconds(this.MaxBookingLeadTimeSeconds)
+                .AnyTeamMemberBookingEnabled(this.AnyTeamMemberBookingEnabled)
+                .MultipleServiceBookingEnabled(this.MultipleServiceBookingEnabled)
+                .MaxAppointmentsPerDayLimitType(this.MaxAppointmentsPerDayLimitType)
+                .MaxAppointmentsPerDayLimit(this.MaxAppointmentsPerDayLimit)
+                .CancellationWindowSeconds(this.CancellationWindowSeconds)
+                .CancellationFeeMoney(this.CancellationFeeMoney)
+                .CancellationPolicy(this.CancellationPolicy)
+                .CancellationPolicyText(this.CancellationPolicyText)
+                .SkipBookingFlowStaffSelection(this.SkipBookingFlowStaffSelection);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private IList<string> locationTypes;
@@ -290,101 +323,169 @@ namespace Square.Models
             private string cancellationPolicyText;
             private bool? skipBookingFlowStaffSelection;
 
-
-
+             /// <summary>
+             /// LocationTypes.
+             /// </summary>
+             /// <param name="locationTypes"> locationTypes. </param>
+             /// <returns> Builder. </returns>
             public Builder LocationTypes(IList<string> locationTypes)
             {
                 this.locationTypes = locationTypes;
                 return this;
             }
 
+             /// <summary>
+             /// AlignmentTime.
+             /// </summary>
+             /// <param name="alignmentTime"> alignmentTime. </param>
+             /// <returns> Builder. </returns>
             public Builder AlignmentTime(string alignmentTime)
             {
                 this.alignmentTime = alignmentTime;
                 return this;
             }
 
+             /// <summary>
+             /// MinBookingLeadTimeSeconds.
+             /// </summary>
+             /// <param name="minBookingLeadTimeSeconds"> minBookingLeadTimeSeconds. </param>
+             /// <returns> Builder. </returns>
             public Builder MinBookingLeadTimeSeconds(int? minBookingLeadTimeSeconds)
             {
                 this.minBookingLeadTimeSeconds = minBookingLeadTimeSeconds;
                 return this;
             }
 
+             /// <summary>
+             /// MaxBookingLeadTimeSeconds.
+             /// </summary>
+             /// <param name="maxBookingLeadTimeSeconds"> maxBookingLeadTimeSeconds. </param>
+             /// <returns> Builder. </returns>
             public Builder MaxBookingLeadTimeSeconds(int? maxBookingLeadTimeSeconds)
             {
                 this.maxBookingLeadTimeSeconds = maxBookingLeadTimeSeconds;
                 return this;
             }
 
+             /// <summary>
+             /// AnyTeamMemberBookingEnabled.
+             /// </summary>
+             /// <param name="anyTeamMemberBookingEnabled"> anyTeamMemberBookingEnabled. </param>
+             /// <returns> Builder. </returns>
             public Builder AnyTeamMemberBookingEnabled(bool? anyTeamMemberBookingEnabled)
             {
                 this.anyTeamMemberBookingEnabled = anyTeamMemberBookingEnabled;
                 return this;
             }
 
+             /// <summary>
+             /// MultipleServiceBookingEnabled.
+             /// </summary>
+             /// <param name="multipleServiceBookingEnabled"> multipleServiceBookingEnabled. </param>
+             /// <returns> Builder. </returns>
             public Builder MultipleServiceBookingEnabled(bool? multipleServiceBookingEnabled)
             {
                 this.multipleServiceBookingEnabled = multipleServiceBookingEnabled;
                 return this;
             }
 
+             /// <summary>
+             /// MaxAppointmentsPerDayLimitType.
+             /// </summary>
+             /// <param name="maxAppointmentsPerDayLimitType"> maxAppointmentsPerDayLimitType. </param>
+             /// <returns> Builder. </returns>
             public Builder MaxAppointmentsPerDayLimitType(string maxAppointmentsPerDayLimitType)
             {
                 this.maxAppointmentsPerDayLimitType = maxAppointmentsPerDayLimitType;
                 return this;
             }
 
+             /// <summary>
+             /// MaxAppointmentsPerDayLimit.
+             /// </summary>
+             /// <param name="maxAppointmentsPerDayLimit"> maxAppointmentsPerDayLimit. </param>
+             /// <returns> Builder. </returns>
             public Builder MaxAppointmentsPerDayLimit(int? maxAppointmentsPerDayLimit)
             {
                 this.maxAppointmentsPerDayLimit = maxAppointmentsPerDayLimit;
                 return this;
             }
 
+             /// <summary>
+             /// CancellationWindowSeconds.
+             /// </summary>
+             /// <param name="cancellationWindowSeconds"> cancellationWindowSeconds. </param>
+             /// <returns> Builder. </returns>
             public Builder CancellationWindowSeconds(int? cancellationWindowSeconds)
             {
                 this.cancellationWindowSeconds = cancellationWindowSeconds;
                 return this;
             }
 
+             /// <summary>
+             /// CancellationFeeMoney.
+             /// </summary>
+             /// <param name="cancellationFeeMoney"> cancellationFeeMoney. </param>
+             /// <returns> Builder. </returns>
             public Builder CancellationFeeMoney(Models.Money cancellationFeeMoney)
             {
                 this.cancellationFeeMoney = cancellationFeeMoney;
                 return this;
             }
 
+             /// <summary>
+             /// CancellationPolicy.
+             /// </summary>
+             /// <param name="cancellationPolicy"> cancellationPolicy. </param>
+             /// <returns> Builder. </returns>
             public Builder CancellationPolicy(string cancellationPolicy)
             {
                 this.cancellationPolicy = cancellationPolicy;
                 return this;
             }
 
+             /// <summary>
+             /// CancellationPolicyText.
+             /// </summary>
+             /// <param name="cancellationPolicyText"> cancellationPolicyText. </param>
+             /// <returns> Builder. </returns>
             public Builder CancellationPolicyText(string cancellationPolicyText)
             {
                 this.cancellationPolicyText = cancellationPolicyText;
                 return this;
             }
 
+             /// <summary>
+             /// SkipBookingFlowStaffSelection.
+             /// </summary>
+             /// <param name="skipBookingFlowStaffSelection"> skipBookingFlowStaffSelection. </param>
+             /// <returns> Builder. </returns>
             public Builder SkipBookingFlowStaffSelection(bool? skipBookingFlowStaffSelection)
             {
                 this.skipBookingFlowStaffSelection = skipBookingFlowStaffSelection;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> BusinessAppointmentSettings. </returns>
             public BusinessAppointmentSettings Build()
             {
-                return new BusinessAppointmentSettings(locationTypes,
-                    alignmentTime,
-                    minBookingLeadTimeSeconds,
-                    maxBookingLeadTimeSeconds,
-                    anyTeamMemberBookingEnabled,
-                    multipleServiceBookingEnabled,
-                    maxAppointmentsPerDayLimitType,
-                    maxAppointmentsPerDayLimit,
-                    cancellationWindowSeconds,
-                    cancellationFeeMoney,
-                    cancellationPolicy,
-                    cancellationPolicyText,
-                    skipBookingFlowStaffSelection);
+                return new BusinessAppointmentSettings(
+                    this.locationTypes,
+                    this.alignmentTime,
+                    this.minBookingLeadTimeSeconds,
+                    this.maxBookingLeadTimeSeconds,
+                    this.anyTeamMemberBookingEnabled,
+                    this.multipleServiceBookingEnabled,
+                    this.maxAppointmentsPerDayLimitType,
+                    this.maxAppointmentsPerDayLimit,
+                    this.cancellationWindowSeconds,
+                    this.cancellationFeeMoney,
+                    this.cancellationPolicy,
+                    this.cancellationPolicyText,
+                    this.skipBookingFlowStaffSelection);
             }
         }
     }

@@ -1,31 +1,42 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class RefundPaymentRequest 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// RefundPaymentRequest.
+    /// </summary>
+    public class RefundPaymentRequest
     {
-        public RefundPaymentRequest(string idempotencyKey,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RefundPaymentRequest"/> class.
+        /// </summary>
+        /// <param name="idempotencyKey">idempotency_key.</param>
+        /// <param name="amountMoney">amount_money.</param>
+        /// <param name="paymentId">payment_id.</param>
+        /// <param name="appFeeMoney">app_fee_money.</param>
+        /// <param name="reason">reason.</param>
+        public RefundPaymentRequest(
+            string idempotencyKey,
             Models.Money amountMoney,
             string paymentId,
             Models.Money appFeeMoney = null,
             string reason = null)
         {
-            IdempotencyKey = idempotencyKey;
-            AmountMoney = amountMoney;
-            AppFeeMoney = appFeeMoney;
-            PaymentId = paymentId;
-            Reason = reason;
+            this.IdempotencyKey = idempotencyKey;
+            this.AmountMoney = amountMoney;
+            this.AppFeeMoney = appFeeMoney;
+            this.PaymentId = paymentId;
+            this.Reason = reason;
         }
 
         /// <summary>
@@ -70,6 +81,7 @@ namespace Square.Models
         [JsonProperty("reason", NullValueHandling = NullValueHandling.Ignore)]
         public string Reason { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -79,15 +91,7 @@ namespace Square.Models
             return $"RefundPaymentRequest : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"IdempotencyKey = {(IdempotencyKey == null ? "null" : IdempotencyKey == string.Empty ? "" : IdempotencyKey)}");
-            toStringOutput.Add($"AmountMoney = {(AmountMoney == null ? "null" : AmountMoney.ToString())}");
-            toStringOutput.Add($"AppFeeMoney = {(AppFeeMoney == null ? "null" : AppFeeMoney.ToString())}");
-            toStringOutput.Add($"PaymentId = {(PaymentId == null ? "null" : PaymentId == string.Empty ? "" : PaymentId)}");
-            toStringOutput.Add($"Reason = {(Reason == null ? "null" : Reason == string.Empty ? "" : Reason)}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -101,55 +105,77 @@ namespace Square.Models
             }
 
             return obj is RefundPaymentRequest other &&
-                ((IdempotencyKey == null && other.IdempotencyKey == null) || (IdempotencyKey?.Equals(other.IdempotencyKey) == true)) &&
-                ((AmountMoney == null && other.AmountMoney == null) || (AmountMoney?.Equals(other.AmountMoney) == true)) &&
-                ((AppFeeMoney == null && other.AppFeeMoney == null) || (AppFeeMoney?.Equals(other.AppFeeMoney) == true)) &&
-                ((PaymentId == null && other.PaymentId == null) || (PaymentId?.Equals(other.PaymentId) == true)) &&
-                ((Reason == null && other.Reason == null) || (Reason?.Equals(other.Reason) == true));
+                ((this.IdempotencyKey == null && other.IdempotencyKey == null) || (this.IdempotencyKey?.Equals(other.IdempotencyKey) == true)) &&
+                ((this.AmountMoney == null && other.AmountMoney == null) || (this.AmountMoney?.Equals(other.AmountMoney) == true)) &&
+                ((this.AppFeeMoney == null && other.AppFeeMoney == null) || (this.AppFeeMoney?.Equals(other.AppFeeMoney) == true)) &&
+                ((this.PaymentId == null && other.PaymentId == null) || (this.PaymentId?.Equals(other.PaymentId) == true)) &&
+                ((this.Reason == null && other.Reason == null) || (this.Reason?.Equals(other.Reason) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -682129491;
 
-            if (IdempotencyKey != null)
+            if (this.IdempotencyKey != null)
             {
-               hashCode += IdempotencyKey.GetHashCode();
+               hashCode += this.IdempotencyKey.GetHashCode();
             }
 
-            if (AmountMoney != null)
+            if (this.AmountMoney != null)
             {
-               hashCode += AmountMoney.GetHashCode();
+               hashCode += this.AmountMoney.GetHashCode();
             }
 
-            if (AppFeeMoney != null)
+            if (this.AppFeeMoney != null)
             {
-               hashCode += AppFeeMoney.GetHashCode();
+               hashCode += this.AppFeeMoney.GetHashCode();
             }
 
-            if (PaymentId != null)
+            if (this.PaymentId != null)
             {
-               hashCode += PaymentId.GetHashCode();
+               hashCode += this.PaymentId.GetHashCode();
             }
 
-            if (Reason != null)
+            if (this.Reason != null)
             {
-               hashCode += Reason.GetHashCode();
+               hashCode += this.Reason.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.IdempotencyKey = {(this.IdempotencyKey == null ? "null" : this.IdempotencyKey == string.Empty ? "" : this.IdempotencyKey)}");
+            toStringOutput.Add($"this.AmountMoney = {(this.AmountMoney == null ? "null" : this.AmountMoney.ToString())}");
+            toStringOutput.Add($"this.AppFeeMoney = {(this.AppFeeMoney == null ? "null" : this.AppFeeMoney.ToString())}");
+            toStringOutput.Add($"this.PaymentId = {(this.PaymentId == null ? "null" : this.PaymentId == string.Empty ? "" : this.PaymentId)}");
+            toStringOutput.Add($"this.Reason = {(this.Reason == null ? "null" : this.Reason == string.Empty ? "" : this.Reason)}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
-            var builder = new Builder(IdempotencyKey,
-                AmountMoney,
-                PaymentId)
-                .AppFeeMoney(AppFeeMoney)
-                .Reason(Reason);
+            var builder = new Builder(
+                this.IdempotencyKey,
+                this.AmountMoney,
+                this.PaymentId)
+                .AppFeeMoney(this.AppFeeMoney)
+                .Reason(this.Reason);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string idempotencyKey;
@@ -158,7 +184,8 @@ namespace Square.Models
             private Models.Money appFeeMoney;
             private string reason;
 
-            public Builder(string idempotencyKey,
+            public Builder(
+                string idempotencyKey,
                 Models.Money amountMoney,
                 string paymentId)
             {
@@ -167,43 +194,73 @@ namespace Square.Models
                 this.paymentId = paymentId;
             }
 
+             /// <summary>
+             /// IdempotencyKey.
+             /// </summary>
+             /// <param name="idempotencyKey"> idempotencyKey. </param>
+             /// <returns> Builder. </returns>
             public Builder IdempotencyKey(string idempotencyKey)
             {
                 this.idempotencyKey = idempotencyKey;
                 return this;
             }
 
+             /// <summary>
+             /// AmountMoney.
+             /// </summary>
+             /// <param name="amountMoney"> amountMoney. </param>
+             /// <returns> Builder. </returns>
             public Builder AmountMoney(Models.Money amountMoney)
             {
                 this.amountMoney = amountMoney;
                 return this;
             }
 
+             /// <summary>
+             /// PaymentId.
+             /// </summary>
+             /// <param name="paymentId"> paymentId. </param>
+             /// <returns> Builder. </returns>
             public Builder PaymentId(string paymentId)
             {
                 this.paymentId = paymentId;
                 return this;
             }
 
+             /// <summary>
+             /// AppFeeMoney.
+             /// </summary>
+             /// <param name="appFeeMoney"> appFeeMoney. </param>
+             /// <returns> Builder. </returns>
             public Builder AppFeeMoney(Models.Money appFeeMoney)
             {
                 this.appFeeMoney = appFeeMoney;
                 return this;
             }
 
+             /// <summary>
+             /// Reason.
+             /// </summary>
+             /// <param name="reason"> reason. </param>
+             /// <returns> Builder. </returns>
             public Builder Reason(string reason)
             {
                 this.reason = reason;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> RefundPaymentRequest. </returns>
             public RefundPaymentRequest Build()
             {
-                return new RefundPaymentRequest(idempotencyKey,
-                    amountMoney,
-                    paymentId,
-                    appFeeMoney,
-                    reason);
+                return new RefundPaymentRequest(
+                    this.idempotencyKey,
+                    this.amountMoney,
+                    this.paymentId,
+                    this.appFeeMoney,
+                    this.reason);
             }
         }
     }

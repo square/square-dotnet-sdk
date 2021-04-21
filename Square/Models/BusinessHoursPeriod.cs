@@ -1,27 +1,36 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class BusinessHoursPeriod 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// BusinessHoursPeriod.
+    /// </summary>
+    public class BusinessHoursPeriod
     {
-        public BusinessHoursPeriod(string dayOfWeek = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BusinessHoursPeriod"/> class.
+        /// </summary>
+        /// <param name="dayOfWeek">day_of_week.</param>
+        /// <param name="startLocalTime">start_local_time.</param>
+        /// <param name="endLocalTime">end_local_time.</param>
+        public BusinessHoursPeriod(
+            string dayOfWeek = null,
             string startLocalTime = null,
             string endLocalTime = null)
         {
-            DayOfWeek = dayOfWeek;
-            StartLocalTime = startLocalTime;
-            EndLocalTime = endLocalTime;
+            this.DayOfWeek = dayOfWeek;
+            this.StartLocalTime = startLocalTime;
+            this.EndLocalTime = endLocalTime;
         }
 
         /// <summary>
@@ -44,6 +53,7 @@ namespace Square.Models
         [JsonProperty("end_local_time", NullValueHandling = NullValueHandling.Ignore)]
         public string EndLocalTime { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -53,13 +63,7 @@ namespace Square.Models
             return $"BusinessHoursPeriod : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"DayOfWeek = {(DayOfWeek == null ? "null" : DayOfWeek.ToString())}");
-            toStringOutput.Add($"StartLocalTime = {(StartLocalTime == null ? "null" : StartLocalTime == string.Empty ? "" : StartLocalTime)}");
-            toStringOutput.Add($"EndLocalTime = {(EndLocalTime == null ? "null" : EndLocalTime == string.Empty ? "" : EndLocalTime)}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -73,73 +77,110 @@ namespace Square.Models
             }
 
             return obj is BusinessHoursPeriod other &&
-                ((DayOfWeek == null && other.DayOfWeek == null) || (DayOfWeek?.Equals(other.DayOfWeek) == true)) &&
-                ((StartLocalTime == null && other.StartLocalTime == null) || (StartLocalTime?.Equals(other.StartLocalTime) == true)) &&
-                ((EndLocalTime == null && other.EndLocalTime == null) || (EndLocalTime?.Equals(other.EndLocalTime) == true));
+                ((this.DayOfWeek == null && other.DayOfWeek == null) || (this.DayOfWeek?.Equals(other.DayOfWeek) == true)) &&
+                ((this.StartLocalTime == null && other.StartLocalTime == null) || (this.StartLocalTime?.Equals(other.StartLocalTime) == true)) &&
+                ((this.EndLocalTime == null && other.EndLocalTime == null) || (this.EndLocalTime?.Equals(other.EndLocalTime) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 870467587;
 
-            if (DayOfWeek != null)
+            if (this.DayOfWeek != null)
             {
-               hashCode += DayOfWeek.GetHashCode();
+               hashCode += this.DayOfWeek.GetHashCode();
             }
 
-            if (StartLocalTime != null)
+            if (this.StartLocalTime != null)
             {
-               hashCode += StartLocalTime.GetHashCode();
+               hashCode += this.StartLocalTime.GetHashCode();
             }
 
-            if (EndLocalTime != null)
+            if (this.EndLocalTime != null)
             {
-               hashCode += EndLocalTime.GetHashCode();
+               hashCode += this.EndLocalTime.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.DayOfWeek = {(this.DayOfWeek == null ? "null" : this.DayOfWeek.ToString())}");
+            toStringOutput.Add($"this.StartLocalTime = {(this.StartLocalTime == null ? "null" : this.StartLocalTime == string.Empty ? "" : this.StartLocalTime)}");
+            toStringOutput.Add($"this.EndLocalTime = {(this.EndLocalTime == null ? "null" : this.EndLocalTime == string.Empty ? "" : this.EndLocalTime)}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .DayOfWeek(DayOfWeek)
-                .StartLocalTime(StartLocalTime)
-                .EndLocalTime(EndLocalTime);
+                .DayOfWeek(this.DayOfWeek)
+                .StartLocalTime(this.StartLocalTime)
+                .EndLocalTime(this.EndLocalTime);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string dayOfWeek;
             private string startLocalTime;
             private string endLocalTime;
 
-
-
+             /// <summary>
+             /// DayOfWeek.
+             /// </summary>
+             /// <param name="dayOfWeek"> dayOfWeek. </param>
+             /// <returns> Builder. </returns>
             public Builder DayOfWeek(string dayOfWeek)
             {
                 this.dayOfWeek = dayOfWeek;
                 return this;
             }
 
+             /// <summary>
+             /// StartLocalTime.
+             /// </summary>
+             /// <param name="startLocalTime"> startLocalTime. </param>
+             /// <returns> Builder. </returns>
             public Builder StartLocalTime(string startLocalTime)
             {
                 this.startLocalTime = startLocalTime;
                 return this;
             }
 
+             /// <summary>
+             /// EndLocalTime.
+             /// </summary>
+             /// <param name="endLocalTime"> endLocalTime. </param>
+             /// <returns> Builder. </returns>
             public Builder EndLocalTime(string endLocalTime)
             {
                 this.endLocalTime = endLocalTime;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> BusinessHoursPeriod. </returns>
             public BusinessHoursPeriod Build()
             {
-                return new BusinessHoursPeriod(dayOfWeek,
-                    startLocalTime,
-                    endLocalTime);
+                return new BusinessHoursPeriod(
+                    this.dayOfWeek,
+                    this.startLocalTime,
+                    this.endLocalTime);
             }
         }
     }

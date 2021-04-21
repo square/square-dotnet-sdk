@@ -1,23 +1,30 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class RenewTokenRequest 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// RenewTokenRequest.
+    /// </summary>
+    public class RenewTokenRequest
     {
-        public RenewTokenRequest(string accessToken = null)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RenewTokenRequest"/> class.
+        /// </summary>
+        /// <param name="accessToken">access_token.</param>
+        public RenewTokenRequest(
+            string accessToken = null)
         {
-            AccessToken = accessToken;
+            this.AccessToken = accessToken;
         }
 
         /// <summary>
@@ -26,6 +33,7 @@ namespace Square.Models
         [JsonProperty("access_token", NullValueHandling = NullValueHandling.Ignore)]
         public string AccessToken { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -35,11 +43,7 @@ namespace Square.Models
             return $"RenewTokenRequest : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"AccessToken = {(AccessToken == null ? "null" : AccessToken == string.Empty ? "" : AccessToken)}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -53,43 +57,68 @@ namespace Square.Models
             }
 
             return obj is RenewTokenRequest other &&
-                ((AccessToken == null && other.AccessToken == null) || (AccessToken?.Equals(other.AccessToken) == true));
+                ((this.AccessToken == null && other.AccessToken == null) || (this.AccessToken?.Equals(other.AccessToken) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -475718546;
 
-            if (AccessToken != null)
+            if (this.AccessToken != null)
             {
-               hashCode += AccessToken.GetHashCode();
+               hashCode += this.AccessToken.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.AccessToken = {(this.AccessToken == null ? "null" : this.AccessToken == string.Empty ? "" : this.AccessToken)}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .AccessToken(AccessToken);
+                .AccessToken(this.AccessToken);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string accessToken;
 
-
-
+             /// <summary>
+             /// AccessToken.
+             /// </summary>
+             /// <param name="accessToken"> accessToken. </param>
+             /// <returns> Builder. </returns>
             public Builder AccessToken(string accessToken)
             {
                 this.accessToken = accessToken;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> RenewTokenRequest. </returns>
             public RenewTokenRequest Build()
             {
-                return new RenewTokenRequest(accessToken);
+                return new RenewTokenRequest(
+                    this.accessToken);
             }
         }
     }

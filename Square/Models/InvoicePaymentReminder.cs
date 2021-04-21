@@ -1,31 +1,42 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class InvoicePaymentReminder 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// InvoicePaymentReminder.
+    /// </summary>
+    public class InvoicePaymentReminder
     {
-        public InvoicePaymentReminder(string uid = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="InvoicePaymentReminder"/> class.
+        /// </summary>
+        /// <param name="uid">uid.</param>
+        /// <param name="relativeScheduledDays">relative_scheduled_days.</param>
+        /// <param name="message">message.</param>
+        /// <param name="status">status.</param>
+        /// <param name="sentAt">sent_at.</param>
+        public InvoicePaymentReminder(
+            string uid = null,
             int? relativeScheduledDays = null,
             string message = null,
             string status = null,
             string sentAt = null)
         {
-            Uid = uid;
-            RelativeScheduledDays = relativeScheduledDays;
-            Message = message;
-            Status = status;
-            SentAt = sentAt;
+            this.Uid = uid;
+            this.RelativeScheduledDays = relativeScheduledDays;
+            this.Message = message;
+            this.Status = status;
+            this.SentAt = sentAt;
         }
 
         /// <summary>
@@ -61,6 +72,7 @@ namespace Square.Models
         [JsonProperty("sent_at", NullValueHandling = NullValueHandling.Ignore)]
         public string SentAt { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -70,15 +82,7 @@ namespace Square.Models
             return $"InvoicePaymentReminder : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Uid = {(Uid == null ? "null" : Uid == string.Empty ? "" : Uid)}");
-            toStringOutput.Add($"RelativeScheduledDays = {(RelativeScheduledDays == null ? "null" : RelativeScheduledDays.ToString())}");
-            toStringOutput.Add($"Message = {(Message == null ? "null" : Message == string.Empty ? "" : Message)}");
-            toStringOutput.Add($"Status = {(Status == null ? "null" : Status.ToString())}");
-            toStringOutput.Add($"SentAt = {(SentAt == null ? "null" : SentAt == string.Empty ? "" : SentAt)}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -92,56 +96,77 @@ namespace Square.Models
             }
 
             return obj is InvoicePaymentReminder other &&
-                ((Uid == null && other.Uid == null) || (Uid?.Equals(other.Uid) == true)) &&
-                ((RelativeScheduledDays == null && other.RelativeScheduledDays == null) || (RelativeScheduledDays?.Equals(other.RelativeScheduledDays) == true)) &&
-                ((Message == null && other.Message == null) || (Message?.Equals(other.Message) == true)) &&
-                ((Status == null && other.Status == null) || (Status?.Equals(other.Status) == true)) &&
-                ((SentAt == null && other.SentAt == null) || (SentAt?.Equals(other.SentAt) == true));
+                ((this.Uid == null && other.Uid == null) || (this.Uid?.Equals(other.Uid) == true)) &&
+                ((this.RelativeScheduledDays == null && other.RelativeScheduledDays == null) || (this.RelativeScheduledDays?.Equals(other.RelativeScheduledDays) == true)) &&
+                ((this.Message == null && other.Message == null) || (this.Message?.Equals(other.Message) == true)) &&
+                ((this.Status == null && other.Status == null) || (this.Status?.Equals(other.Status) == true)) &&
+                ((this.SentAt == null && other.SentAt == null) || (this.SentAt?.Equals(other.SentAt) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1406942862;
 
-            if (Uid != null)
+            if (this.Uid != null)
             {
-               hashCode += Uid.GetHashCode();
+               hashCode += this.Uid.GetHashCode();
             }
 
-            if (RelativeScheduledDays != null)
+            if (this.RelativeScheduledDays != null)
             {
-               hashCode += RelativeScheduledDays.GetHashCode();
+               hashCode += this.RelativeScheduledDays.GetHashCode();
             }
 
-            if (Message != null)
+            if (this.Message != null)
             {
-               hashCode += Message.GetHashCode();
+               hashCode += this.Message.GetHashCode();
             }
 
-            if (Status != null)
+            if (this.Status != null)
             {
-               hashCode += Status.GetHashCode();
+               hashCode += this.Status.GetHashCode();
             }
 
-            if (SentAt != null)
+            if (this.SentAt != null)
             {
-               hashCode += SentAt.GetHashCode();
+               hashCode += this.SentAt.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Uid = {(this.Uid == null ? "null" : this.Uid == string.Empty ? "" : this.Uid)}");
+            toStringOutput.Add($"this.RelativeScheduledDays = {(this.RelativeScheduledDays == null ? "null" : this.RelativeScheduledDays.ToString())}");
+            toStringOutput.Add($"this.Message = {(this.Message == null ? "null" : this.Message == string.Empty ? "" : this.Message)}");
+            toStringOutput.Add($"this.Status = {(this.Status == null ? "null" : this.Status.ToString())}");
+            toStringOutput.Add($"this.SentAt = {(this.SentAt == null ? "null" : this.SentAt == string.Empty ? "" : this.SentAt)}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .Uid(Uid)
-                .RelativeScheduledDays(RelativeScheduledDays)
-                .Message(Message)
-                .Status(Status)
-                .SentAt(SentAt);
+                .Uid(this.Uid)
+                .RelativeScheduledDays(this.RelativeScheduledDays)
+                .Message(this.Message)
+                .Status(this.Status)
+                .SentAt(this.SentAt);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string uid;
@@ -150,45 +175,73 @@ namespace Square.Models
             private string status;
             private string sentAt;
 
-
-
+             /// <summary>
+             /// Uid.
+             /// </summary>
+             /// <param name="uid"> uid. </param>
+             /// <returns> Builder. </returns>
             public Builder Uid(string uid)
             {
                 this.uid = uid;
                 return this;
             }
 
+             /// <summary>
+             /// RelativeScheduledDays.
+             /// </summary>
+             /// <param name="relativeScheduledDays"> relativeScheduledDays. </param>
+             /// <returns> Builder. </returns>
             public Builder RelativeScheduledDays(int? relativeScheduledDays)
             {
                 this.relativeScheduledDays = relativeScheduledDays;
                 return this;
             }
 
+             /// <summary>
+             /// Message.
+             /// </summary>
+             /// <param name="message"> message. </param>
+             /// <returns> Builder. </returns>
             public Builder Message(string message)
             {
                 this.message = message;
                 return this;
             }
 
+             /// <summary>
+             /// Status.
+             /// </summary>
+             /// <param name="status"> status. </param>
+             /// <returns> Builder. </returns>
             public Builder Status(string status)
             {
                 this.status = status;
                 return this;
             }
 
+             /// <summary>
+             /// SentAt.
+             /// </summary>
+             /// <param name="sentAt"> sentAt. </param>
+             /// <returns> Builder. </returns>
             public Builder SentAt(string sentAt)
             {
                 this.sentAt = sentAt;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> InvoicePaymentReminder. </returns>
             public InvoicePaymentReminder Build()
             {
-                return new InvoicePaymentReminder(uid,
-                    relativeScheduledDays,
-                    message,
-                    status,
-                    sentAt);
+                return new InvoicePaymentReminder(
+                    this.uid,
+                    this.relativeScheduledDays,
+                    this.message,
+                    this.status,
+                    this.sentAt);
             }
         }
     }

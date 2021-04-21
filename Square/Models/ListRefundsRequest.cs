@@ -1,34 +1,44 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class ListRefundsRequest 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// ListRefundsRequest.
+    /// </summary>
+    public class ListRefundsRequest
     {
-        public ListRefundsRequest(string beginTime = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ListRefundsRequest"/> class.
+        /// </summary>
+        /// <param name="beginTime">begin_time.</param>
+        /// <param name="endTime">end_time.</param>
+        /// <param name="sortOrder">sort_order.</param>
+        /// <param name="cursor">cursor.</param>
+        public ListRefundsRequest(
+            string beginTime = null,
             string endTime = null,
             string sortOrder = null,
             string cursor = null)
         {
-            BeginTime = beginTime;
-            EndTime = endTime;
-            SortOrder = sortOrder;
-            Cursor = cursor;
+            this.BeginTime = beginTime;
+            this.EndTime = endTime;
+            this.SortOrder = sortOrder;
+            this.Cursor = cursor;
         }
 
         /// <summary>
         /// The beginning of the requested reporting period, in RFC 3339 format.
-        /// See [Date ranges](#dateranges) for details on date inclusivity/exclusivity.
+        /// See [Date ranges](https://developer.squareup.com/docs/build-basics/working-with-dates) for details on date inclusivity/exclusivity.
         /// Default value: The current time minus one year.
         /// </summary>
         [JsonProperty("begin_time", NullValueHandling = NullValueHandling.Ignore)]
@@ -36,7 +46,7 @@ namespace Square.Models
 
         /// <summary>
         /// The end of the requested reporting period, in RFC 3339 format.
-        /// See [Date ranges](#dateranges) for details on date inclusivity/exclusivity.
+        /// See [Date ranges](https://developer.squareup.com/docs/build-basics/working-with-dates) for details on date inclusivity/exclusivity.
         /// Default value: The current time.
         /// </summary>
         [JsonProperty("end_time", NullValueHandling = NullValueHandling.Ignore)]
@@ -51,11 +61,12 @@ namespace Square.Models
         /// <summary>
         /// A pagination cursor returned by a previous call to this endpoint.
         /// Provide this to retrieve the next set of results for your original query.
-        /// See [Paginating results](#paginatingresults) for more information.
+        /// See [Paginating results](https://developer.squareup.com/docs/working-with-apis/pagination) for more information.
         /// </summary>
         [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
         public string Cursor { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -65,14 +76,7 @@ namespace Square.Models
             return $"ListRefundsRequest : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"BeginTime = {(BeginTime == null ? "null" : BeginTime == string.Empty ? "" : BeginTime)}");
-            toStringOutput.Add($"EndTime = {(EndTime == null ? "null" : EndTime == string.Empty ? "" : EndTime)}");
-            toStringOutput.Add($"SortOrder = {(SortOrder == null ? "null" : SortOrder.ToString())}");
-            toStringOutput.Add($"Cursor = {(Cursor == null ? "null" : Cursor == string.Empty ? "" : Cursor)}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -86,49 +90,69 @@ namespace Square.Models
             }
 
             return obj is ListRefundsRequest other &&
-                ((BeginTime == null && other.BeginTime == null) || (BeginTime?.Equals(other.BeginTime) == true)) &&
-                ((EndTime == null && other.EndTime == null) || (EndTime?.Equals(other.EndTime) == true)) &&
-                ((SortOrder == null && other.SortOrder == null) || (SortOrder?.Equals(other.SortOrder) == true)) &&
-                ((Cursor == null && other.Cursor == null) || (Cursor?.Equals(other.Cursor) == true));
+                ((this.BeginTime == null && other.BeginTime == null) || (this.BeginTime?.Equals(other.BeginTime) == true)) &&
+                ((this.EndTime == null && other.EndTime == null) || (this.EndTime?.Equals(other.EndTime) == true)) &&
+                ((this.SortOrder == null && other.SortOrder == null) || (this.SortOrder?.Equals(other.SortOrder) == true)) &&
+                ((this.Cursor == null && other.Cursor == null) || (this.Cursor?.Equals(other.Cursor) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1413410039;
 
-            if (BeginTime != null)
+            if (this.BeginTime != null)
             {
-               hashCode += BeginTime.GetHashCode();
+               hashCode += this.BeginTime.GetHashCode();
             }
 
-            if (EndTime != null)
+            if (this.EndTime != null)
             {
-               hashCode += EndTime.GetHashCode();
+               hashCode += this.EndTime.GetHashCode();
             }
 
-            if (SortOrder != null)
+            if (this.SortOrder != null)
             {
-               hashCode += SortOrder.GetHashCode();
+               hashCode += this.SortOrder.GetHashCode();
             }
 
-            if (Cursor != null)
+            if (this.Cursor != null)
             {
-               hashCode += Cursor.GetHashCode();
+               hashCode += this.Cursor.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.BeginTime = {(this.BeginTime == null ? "null" : this.BeginTime == string.Empty ? "" : this.BeginTime)}");
+            toStringOutput.Add($"this.EndTime = {(this.EndTime == null ? "null" : this.EndTime == string.Empty ? "" : this.EndTime)}");
+            toStringOutput.Add($"this.SortOrder = {(this.SortOrder == null ? "null" : this.SortOrder.ToString())}");
+            toStringOutput.Add($"this.Cursor = {(this.Cursor == null ? "null" : this.Cursor == string.Empty ? "" : this.Cursor)}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .BeginTime(BeginTime)
-                .EndTime(EndTime)
-                .SortOrder(SortOrder)
-                .Cursor(Cursor);
+                .BeginTime(this.BeginTime)
+                .EndTime(this.EndTime)
+                .SortOrder(this.SortOrder)
+                .Cursor(this.Cursor);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string beginTime;
@@ -136,38 +160,61 @@ namespace Square.Models
             private string sortOrder;
             private string cursor;
 
-
-
+             /// <summary>
+             /// BeginTime.
+             /// </summary>
+             /// <param name="beginTime"> beginTime. </param>
+             /// <returns> Builder. </returns>
             public Builder BeginTime(string beginTime)
             {
                 this.beginTime = beginTime;
                 return this;
             }
 
+             /// <summary>
+             /// EndTime.
+             /// </summary>
+             /// <param name="endTime"> endTime. </param>
+             /// <returns> Builder. </returns>
             public Builder EndTime(string endTime)
             {
                 this.endTime = endTime;
                 return this;
             }
 
+             /// <summary>
+             /// SortOrder.
+             /// </summary>
+             /// <param name="sortOrder"> sortOrder. </param>
+             /// <returns> Builder. </returns>
             public Builder SortOrder(string sortOrder)
             {
                 this.sortOrder = sortOrder;
                 return this;
             }
 
+             /// <summary>
+             /// Cursor.
+             /// </summary>
+             /// <param name="cursor"> cursor. </param>
+             /// <returns> Builder. </returns>
             public Builder Cursor(string cursor)
             {
                 this.cursor = cursor;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> ListRefundsRequest. </returns>
             public ListRefundsRequest Build()
             {
-                return new ListRefundsRequest(beginTime,
-                    endTime,
-                    sortOrder,
-                    cursor);
+                return new ListRefundsRequest(
+                    this.beginTime,
+                    this.endTime,
+                    this.sortOrder,
+                    this.cursor);
             }
         }
     }

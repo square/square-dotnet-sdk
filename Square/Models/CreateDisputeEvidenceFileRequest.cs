@@ -1,27 +1,36 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class CreateDisputeEvidenceFileRequest 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// CreateDisputeEvidenceFileRequest.
+    /// </summary>
+    public class CreateDisputeEvidenceFileRequest
     {
-        public CreateDisputeEvidenceFileRequest(string idempotencyKey,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CreateDisputeEvidenceFileRequest"/> class.
+        /// </summary>
+        /// <param name="idempotencyKey">idempotency_key.</param>
+        /// <param name="evidenceType">evidence_type.</param>
+        /// <param name="contentType">content_type.</param>
+        public CreateDisputeEvidenceFileRequest(
+            string idempotencyKey,
             string evidenceType = null,
             string contentType = null)
         {
-            IdempotencyKey = idempotencyKey;
-            EvidenceType = evidenceType;
-            ContentType = contentType;
+            this.IdempotencyKey = idempotencyKey;
+            this.EvidenceType = evidenceType;
+            this.ContentType = contentType;
         }
 
         /// <summary>
@@ -43,6 +52,7 @@ namespace Square.Models
         [JsonProperty("content_type", NullValueHandling = NullValueHandling.Ignore)]
         public string ContentType { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -52,13 +62,7 @@ namespace Square.Models
             return $"CreateDisputeEvidenceFileRequest : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"IdempotencyKey = {(IdempotencyKey == null ? "null" : IdempotencyKey == string.Empty ? "" : IdempotencyKey)}");
-            toStringOutput.Add($"EvidenceType = {(EvidenceType == null ? "null" : EvidenceType.ToString())}");
-            toStringOutput.Add($"ContentType = {(ContentType == null ? "null" : ContentType == string.Empty ? "" : ContentType)}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -72,75 +76,116 @@ namespace Square.Models
             }
 
             return obj is CreateDisputeEvidenceFileRequest other &&
-                ((IdempotencyKey == null && other.IdempotencyKey == null) || (IdempotencyKey?.Equals(other.IdempotencyKey) == true)) &&
-                ((EvidenceType == null && other.EvidenceType == null) || (EvidenceType?.Equals(other.EvidenceType) == true)) &&
-                ((ContentType == null && other.ContentType == null) || (ContentType?.Equals(other.ContentType) == true));
+                ((this.IdempotencyKey == null && other.IdempotencyKey == null) || (this.IdempotencyKey?.Equals(other.IdempotencyKey) == true)) &&
+                ((this.EvidenceType == null && other.EvidenceType == null) || (this.EvidenceType?.Equals(other.EvidenceType) == true)) &&
+                ((this.ContentType == null && other.ContentType == null) || (this.ContentType?.Equals(other.ContentType) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 52028208;
 
-            if (IdempotencyKey != null)
+            if (this.IdempotencyKey != null)
             {
-               hashCode += IdempotencyKey.GetHashCode();
+               hashCode += this.IdempotencyKey.GetHashCode();
             }
 
-            if (EvidenceType != null)
+            if (this.EvidenceType != null)
             {
-               hashCode += EvidenceType.GetHashCode();
+               hashCode += this.EvidenceType.GetHashCode();
             }
 
-            if (ContentType != null)
+            if (this.ContentType != null)
             {
-               hashCode += ContentType.GetHashCode();
+               hashCode += this.ContentType.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.IdempotencyKey = {(this.IdempotencyKey == null ? "null" : this.IdempotencyKey == string.Empty ? "" : this.IdempotencyKey)}");
+            toStringOutput.Add($"this.EvidenceType = {(this.EvidenceType == null ? "null" : this.EvidenceType.ToString())}");
+            toStringOutput.Add($"this.ContentType = {(this.ContentType == null ? "null" : this.ContentType == string.Empty ? "" : this.ContentType)}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
-            var builder = new Builder(IdempotencyKey)
-                .EvidenceType(EvidenceType)
-                .ContentType(ContentType);
+            var builder = new Builder(
+                this.IdempotencyKey)
+                .EvidenceType(this.EvidenceType)
+                .ContentType(this.ContentType);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string idempotencyKey;
             private string evidenceType;
             private string contentType;
 
-            public Builder(string idempotencyKey)
+            public Builder(
+                string idempotencyKey)
             {
                 this.idempotencyKey = idempotencyKey;
             }
 
+             /// <summary>
+             /// IdempotencyKey.
+             /// </summary>
+             /// <param name="idempotencyKey"> idempotencyKey. </param>
+             /// <returns> Builder. </returns>
             public Builder IdempotencyKey(string idempotencyKey)
             {
                 this.idempotencyKey = idempotencyKey;
                 return this;
             }
 
+             /// <summary>
+             /// EvidenceType.
+             /// </summary>
+             /// <param name="evidenceType"> evidenceType. </param>
+             /// <returns> Builder. </returns>
             public Builder EvidenceType(string evidenceType)
             {
                 this.evidenceType = evidenceType;
                 return this;
             }
 
+             /// <summary>
+             /// ContentType.
+             /// </summary>
+             /// <param name="contentType"> contentType. </param>
+             /// <returns> Builder. </returns>
             public Builder ContentType(string contentType)
             {
                 this.contentType = contentType;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> CreateDisputeEvidenceFileRequest. </returns>
             public CreateDisputeEvidenceFileRequest Build()
             {
-                return new CreateDisputeEvidenceFileRequest(idempotencyKey,
-                    evidenceType,
-                    contentType);
+                return new CreateDisputeEvidenceFileRequest(
+                    this.idempotencyKey,
+                    this.evidenceType,
+                    this.contentType);
             }
         }
     }

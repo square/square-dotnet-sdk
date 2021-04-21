@@ -23,6 +23,9 @@ IPaymentsApi paymentsApi = client.PaymentsApi;
 
 Retrieves a list of payments taken by the account making the request.
 
+Results are eventually consistent, and new payments or changes to payments might take several
+seconds to appear.
+
 The maximum results per page is 100.
 
 ```csharp
@@ -83,13 +86,14 @@ Creates a payment using the provided source. You can use this endpoint
 to charge a card (credit/debit card or  
 Square gift card) or record a payment that the seller received outside of Square
 (cash payment from a buyer or a payment that an external entity
-procesed on behalf of the seller).
+processed on behalf of the seller).
 
 The endpoint creates a
 `Payment` object and returns it in the response.
 
 ```csharp
-CreatePaymentAsync(Models.CreatePaymentRequest body)
+CreatePaymentAsync(
+    Models.CreatePaymentRequest body)
 ```
 
 ## Parameters
@@ -155,7 +159,8 @@ Note that if no payment with the specified idempotency key is found, no action i
 returns successfully.
 
 ```csharp
-CancelPaymentByIdempotencyKeyAsync(Models.CancelPaymentByIdempotencyKeyRequest body)
+CancelPaymentByIdempotencyKeyAsync(
+    Models.CancelPaymentByIdempotencyKeyRequest body)
 ```
 
 ## Parameters
@@ -188,7 +193,8 @@ catch (ApiException e){};
 Retrieves details for a specific payment.
 
 ```csharp
-GetPaymentAsync(string paymentId)
+GetPaymentAsync(
+    string paymentId)
 ```
 
 ## Parameters
@@ -220,7 +226,9 @@ Updates a payment with the APPROVED status.
 You can update the `amount_money` and `tip_money` using this endpoint.
 
 ```csharp
-UpdatePaymentAsync(string paymentId, Models.UpdatePaymentRequest body)
+UpdatePaymentAsync(
+    string paymentId,
+    Models.UpdatePaymentRequest body)
 ```
 
 ## Parameters
@@ -273,7 +281,8 @@ Cancels (voids) a payment. You can use this endpoint to cancel a payment with
 the APPROVED `status`.
 
 ```csharp
-CancelPaymentAsync(string paymentId)
+CancelPaymentAsync(
+    string paymentId)
 ```
 
 ## Parameters
@@ -307,7 +316,8 @@ By default, payments are set to complete immediately after they are created.
 You can use this endpoint to complete a payment with the APPROVED `status`.
 
 ```csharp
-CompletePaymentAsync(string paymentId)
+CompletePaymentAsync(
+    string paymentId)
 ```
 
 ## Parameters

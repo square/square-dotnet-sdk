@@ -1,21 +1,34 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class CatalogDiscount 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// CatalogDiscount.
+    /// </summary>
+    public class CatalogDiscount
     {
-        public CatalogDiscount(string name = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CatalogDiscount"/> class.
+        /// </summary>
+        /// <param name="name">name.</param>
+        /// <param name="discountType">discount_type.</param>
+        /// <param name="percentage">percentage.</param>
+        /// <param name="amountMoney">amount_money.</param>
+        /// <param name="pinRequired">pin_required.</param>
+        /// <param name="labelColor">label_color.</param>
+        /// <param name="modifyTaxBasis">modify_tax_basis.</param>
+        public CatalogDiscount(
+            string name = null,
             string discountType = null,
             string percentage = null,
             Models.Money amountMoney = null,
@@ -23,13 +36,13 @@ namespace Square.Models
             string labelColor = null,
             string modifyTaxBasis = null)
         {
-            Name = name;
-            DiscountType = discountType;
-            Percentage = percentage;
-            AmountMoney = amountMoney;
-            PinRequired = pinRequired;
-            LabelColor = labelColor;
-            ModifyTaxBasis = modifyTaxBasis;
+            this.Name = name;
+            this.DiscountType = discountType;
+            this.Percentage = percentage;
+            this.AmountMoney = amountMoney;
+            this.PinRequired = pinRequired;
+            this.LabelColor = labelColor;
+            this.ModifyTaxBasis = modifyTaxBasis;
         }
 
         /// <summary>
@@ -78,11 +91,12 @@ namespace Square.Models
         public string LabelColor { get; }
 
         /// <summary>
-        /// Getter for modify_tax_basis
+        /// Gets or sets ModifyTaxBasis.
         /// </summary>
         [JsonProperty("modify_tax_basis", NullValueHandling = NullValueHandling.Ignore)]
         public string ModifyTaxBasis { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -92,17 +106,7 @@ namespace Square.Models
             return $"CatalogDiscount : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Name = {(Name == null ? "null" : Name == string.Empty ? "" : Name)}");
-            toStringOutput.Add($"DiscountType = {(DiscountType == null ? "null" : DiscountType.ToString())}");
-            toStringOutput.Add($"Percentage = {(Percentage == null ? "null" : Percentage == string.Empty ? "" : Percentage)}");
-            toStringOutput.Add($"AmountMoney = {(AmountMoney == null ? "null" : AmountMoney.ToString())}");
-            toStringOutput.Add($"PinRequired = {(PinRequired == null ? "null" : PinRequired.ToString())}");
-            toStringOutput.Add($"LabelColor = {(LabelColor == null ? "null" : LabelColor == string.Empty ? "" : LabelColor)}");
-            toStringOutput.Add($"ModifyTaxBasis = {(ModifyTaxBasis == null ? "null" : ModifyTaxBasis.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -116,70 +120,93 @@ namespace Square.Models
             }
 
             return obj is CatalogDiscount other &&
-                ((Name == null && other.Name == null) || (Name?.Equals(other.Name) == true)) &&
-                ((DiscountType == null && other.DiscountType == null) || (DiscountType?.Equals(other.DiscountType) == true)) &&
-                ((Percentage == null && other.Percentage == null) || (Percentage?.Equals(other.Percentage) == true)) &&
-                ((AmountMoney == null && other.AmountMoney == null) || (AmountMoney?.Equals(other.AmountMoney) == true)) &&
-                ((PinRequired == null && other.PinRequired == null) || (PinRequired?.Equals(other.PinRequired) == true)) &&
-                ((LabelColor == null && other.LabelColor == null) || (LabelColor?.Equals(other.LabelColor) == true)) &&
-                ((ModifyTaxBasis == null && other.ModifyTaxBasis == null) || (ModifyTaxBasis?.Equals(other.ModifyTaxBasis) == true));
+                ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
+                ((this.DiscountType == null && other.DiscountType == null) || (this.DiscountType?.Equals(other.DiscountType) == true)) &&
+                ((this.Percentage == null && other.Percentage == null) || (this.Percentage?.Equals(other.Percentage) == true)) &&
+                ((this.AmountMoney == null && other.AmountMoney == null) || (this.AmountMoney?.Equals(other.AmountMoney) == true)) &&
+                ((this.PinRequired == null && other.PinRequired == null) || (this.PinRequired?.Equals(other.PinRequired) == true)) &&
+                ((this.LabelColor == null && other.LabelColor == null) || (this.LabelColor?.Equals(other.LabelColor) == true)) &&
+                ((this.ModifyTaxBasis == null && other.ModifyTaxBasis == null) || (this.ModifyTaxBasis?.Equals(other.ModifyTaxBasis) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -419430818;
 
-            if (Name != null)
+            if (this.Name != null)
             {
-               hashCode += Name.GetHashCode();
+               hashCode += this.Name.GetHashCode();
             }
 
-            if (DiscountType != null)
+            if (this.DiscountType != null)
             {
-               hashCode += DiscountType.GetHashCode();
+               hashCode += this.DiscountType.GetHashCode();
             }
 
-            if (Percentage != null)
+            if (this.Percentage != null)
             {
-               hashCode += Percentage.GetHashCode();
+               hashCode += this.Percentage.GetHashCode();
             }
 
-            if (AmountMoney != null)
+            if (this.AmountMoney != null)
             {
-               hashCode += AmountMoney.GetHashCode();
+               hashCode += this.AmountMoney.GetHashCode();
             }
 
-            if (PinRequired != null)
+            if (this.PinRequired != null)
             {
-               hashCode += PinRequired.GetHashCode();
+               hashCode += this.PinRequired.GetHashCode();
             }
 
-            if (LabelColor != null)
+            if (this.LabelColor != null)
             {
-               hashCode += LabelColor.GetHashCode();
+               hashCode += this.LabelColor.GetHashCode();
             }
 
-            if (ModifyTaxBasis != null)
+            if (this.ModifyTaxBasis != null)
             {
-               hashCode += ModifyTaxBasis.GetHashCode();
+               hashCode += this.ModifyTaxBasis.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Name = {(this.Name == null ? "null" : this.Name == string.Empty ? "" : this.Name)}");
+            toStringOutput.Add($"this.DiscountType = {(this.DiscountType == null ? "null" : this.DiscountType.ToString())}");
+            toStringOutput.Add($"this.Percentage = {(this.Percentage == null ? "null" : this.Percentage == string.Empty ? "" : this.Percentage)}");
+            toStringOutput.Add($"this.AmountMoney = {(this.AmountMoney == null ? "null" : this.AmountMoney.ToString())}");
+            toStringOutput.Add($"this.PinRequired = {(this.PinRequired == null ? "null" : this.PinRequired.ToString())}");
+            toStringOutput.Add($"this.LabelColor = {(this.LabelColor == null ? "null" : this.LabelColor == string.Empty ? "" : this.LabelColor)}");
+            toStringOutput.Add($"this.ModifyTaxBasis = {(this.ModifyTaxBasis == null ? "null" : this.ModifyTaxBasis.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .Name(Name)
-                .DiscountType(DiscountType)
-                .Percentage(Percentage)
-                .AmountMoney(AmountMoney)
-                .PinRequired(PinRequired)
-                .LabelColor(LabelColor)
-                .ModifyTaxBasis(ModifyTaxBasis);
+                .Name(this.Name)
+                .DiscountType(this.DiscountType)
+                .Percentage(this.Percentage)
+                .AmountMoney(this.AmountMoney)
+                .PinRequired(this.PinRequired)
+                .LabelColor(this.LabelColor)
+                .ModifyTaxBasis(this.ModifyTaxBasis);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string name;
@@ -190,59 +217,97 @@ namespace Square.Models
             private string labelColor;
             private string modifyTaxBasis;
 
-
-
+             /// <summary>
+             /// Name.
+             /// </summary>
+             /// <param name="name"> name. </param>
+             /// <returns> Builder. </returns>
             public Builder Name(string name)
             {
                 this.name = name;
                 return this;
             }
 
+             /// <summary>
+             /// DiscountType.
+             /// </summary>
+             /// <param name="discountType"> discountType. </param>
+             /// <returns> Builder. </returns>
             public Builder DiscountType(string discountType)
             {
                 this.discountType = discountType;
                 return this;
             }
 
+             /// <summary>
+             /// Percentage.
+             /// </summary>
+             /// <param name="percentage"> percentage. </param>
+             /// <returns> Builder. </returns>
             public Builder Percentage(string percentage)
             {
                 this.percentage = percentage;
                 return this;
             }
 
+             /// <summary>
+             /// AmountMoney.
+             /// </summary>
+             /// <param name="amountMoney"> amountMoney. </param>
+             /// <returns> Builder. </returns>
             public Builder AmountMoney(Models.Money amountMoney)
             {
                 this.amountMoney = amountMoney;
                 return this;
             }
 
+             /// <summary>
+             /// PinRequired.
+             /// </summary>
+             /// <param name="pinRequired"> pinRequired. </param>
+             /// <returns> Builder. </returns>
             public Builder PinRequired(bool? pinRequired)
             {
                 this.pinRequired = pinRequired;
                 return this;
             }
 
+             /// <summary>
+             /// LabelColor.
+             /// </summary>
+             /// <param name="labelColor"> labelColor. </param>
+             /// <returns> Builder. </returns>
             public Builder LabelColor(string labelColor)
             {
                 this.labelColor = labelColor;
                 return this;
             }
 
+             /// <summary>
+             /// ModifyTaxBasis.
+             /// </summary>
+             /// <param name="modifyTaxBasis"> modifyTaxBasis. </param>
+             /// <returns> Builder. </returns>
             public Builder ModifyTaxBasis(string modifyTaxBasis)
             {
                 this.modifyTaxBasis = modifyTaxBasis;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> CatalogDiscount. </returns>
             public CatalogDiscount Build()
             {
-                return new CatalogDiscount(name,
-                    discountType,
-                    percentage,
-                    amountMoney,
-                    pinRequired,
-                    labelColor,
-                    modifyTaxBasis);
+                return new CatalogDiscount(
+                    this.name,
+                    this.discountType,
+                    this.percentage,
+                    this.amountMoney,
+                    this.pinRequired,
+                    this.labelColor,
+                    this.modifyTaxBasis);
             }
         }
     }

@@ -1,23 +1,30 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class LoyaltyEventDateTimeFilter 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// LoyaltyEventDateTimeFilter.
+    /// </summary>
+    public class LoyaltyEventDateTimeFilter
     {
-        public LoyaltyEventDateTimeFilter(Models.TimeRange createdAt)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LoyaltyEventDateTimeFilter"/> class.
+        /// </summary>
+        /// <param name="createdAt">created_at.</param>
+        public LoyaltyEventDateTimeFilter(
+            Models.TimeRange createdAt)
         {
-            CreatedAt = createdAt;
+            this.CreatedAt = createdAt;
         }
 
         /// <summary>
@@ -30,6 +37,7 @@ namespace Square.Models
         [JsonProperty("created_at")]
         public Models.TimeRange CreatedAt { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -39,11 +47,7 @@ namespace Square.Models
             return $"LoyaltyEventDateTimeFilter : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"CreatedAt = {(CreatedAt == null ? "null" : CreatedAt.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -57,45 +61,74 @@ namespace Square.Models
             }
 
             return obj is LoyaltyEventDateTimeFilter other &&
-                ((CreatedAt == null && other.CreatedAt == null) || (CreatedAt?.Equals(other.CreatedAt) == true));
+                ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 2053531921;
 
-            if (CreatedAt != null)
+            if (this.CreatedAt != null)
             {
-               hashCode += CreatedAt.GetHashCode();
+               hashCode += this.CreatedAt.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
-            var builder = new Builder(CreatedAt);
+            var builder = new Builder(
+                this.CreatedAt);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private Models.TimeRange createdAt;
 
-            public Builder(Models.TimeRange createdAt)
+            public Builder(
+                Models.TimeRange createdAt)
             {
                 this.createdAt = createdAt;
             }
 
+             /// <summary>
+             /// CreatedAt.
+             /// </summary>
+             /// <param name="createdAt"> createdAt. </param>
+             /// <returns> Builder. </returns>
             public Builder CreatedAt(Models.TimeRange createdAt)
             {
                 this.createdAt = createdAt;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> LoyaltyEventDateTimeFilter. </returns>
             public LoyaltyEventDateTimeFilter Build()
             {
-                return new LoyaltyEventDateTimeFilter(createdAt);
+                return new LoyaltyEventDateTimeFilter(
+                    this.createdAt);
             }
         }
     }

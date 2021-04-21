@@ -1,21 +1,53 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class Location 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// Location.
+    /// </summary>
+    public class Location
     {
-        public Location(string id = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Location"/> class.
+        /// </summary>
+        /// <param name="id">id.</param>
+        /// <param name="name">name.</param>
+        /// <param name="address">address.</param>
+        /// <param name="timezone">timezone.</param>
+        /// <param name="capabilities">capabilities.</param>
+        /// <param name="status">status.</param>
+        /// <param name="createdAt">created_at.</param>
+        /// <param name="merchantId">merchant_id.</param>
+        /// <param name="country">country.</param>
+        /// <param name="languageCode">language_code.</param>
+        /// <param name="currency">currency.</param>
+        /// <param name="phoneNumber">phone_number.</param>
+        /// <param name="businessName">business_name.</param>
+        /// <param name="type">type.</param>
+        /// <param name="websiteUrl">website_url.</param>
+        /// <param name="businessHours">business_hours.</param>
+        /// <param name="businessEmail">business_email.</param>
+        /// <param name="description">description.</param>
+        /// <param name="twitterUsername">twitter_username.</param>
+        /// <param name="instagramUsername">instagram_username.</param>
+        /// <param name="facebookUrl">facebook_url.</param>
+        /// <param name="coordinates">coordinates.</param>
+        /// <param name="logoUrl">logo_url.</param>
+        /// <param name="posBackgroundUrl">pos_background_url.</param>
+        /// <param name="mcc">mcc.</param>
+        /// <param name="fullFormatLogoUrl">full_format_logo_url.</param>
+        public Location(
+            string id = null,
             string name = null,
             Models.Address address = null,
             string timezone = null,
@@ -42,32 +74,32 @@ namespace Square.Models
             string mcc = null,
             string fullFormatLogoUrl = null)
         {
-            Id = id;
-            Name = name;
-            Address = address;
-            Timezone = timezone;
-            Capabilities = capabilities;
-            Status = status;
-            CreatedAt = createdAt;
-            MerchantId = merchantId;
-            Country = country;
-            LanguageCode = languageCode;
-            Currency = currency;
-            PhoneNumber = phoneNumber;
-            BusinessName = businessName;
-            Type = type;
-            WebsiteUrl = websiteUrl;
-            BusinessHours = businessHours;
-            BusinessEmail = businessEmail;
-            Description = description;
-            TwitterUsername = twitterUsername;
-            InstagramUsername = instagramUsername;
-            FacebookUrl = facebookUrl;
-            Coordinates = coordinates;
-            LogoUrl = logoUrl;
-            PosBackgroundUrl = posBackgroundUrl;
-            Mcc = mcc;
-            FullFormatLogoUrl = fullFormatLogoUrl;
+            this.Id = id;
+            this.Name = name;
+            this.Address = address;
+            this.Timezone = timezone;
+            this.Capabilities = capabilities;
+            this.Status = status;
+            this.CreatedAt = createdAt;
+            this.MerchantId = merchantId;
+            this.Country = country;
+            this.LanguageCode = languageCode;
+            this.Currency = currency;
+            this.PhoneNumber = phoneNumber;
+            this.BusinessName = businessName;
+            this.Type = type;
+            this.WebsiteUrl = websiteUrl;
+            this.BusinessHours = businessHours;
+            this.BusinessEmail = businessEmail;
+            this.Description = description;
+            this.TwitterUsername = twitterUsername;
+            this.InstagramUsername = instagramUsername;
+            this.FacebookUrl = facebookUrl;
+            this.Coordinates = coordinates;
+            this.LogoUrl = logoUrl;
+            this.PosBackgroundUrl = posBackgroundUrl;
+            this.Mcc = mcc;
+            this.FullFormatLogoUrl = fullFormatLogoUrl;
         }
 
         /// <summary>
@@ -99,7 +131,7 @@ namespace Square.Models
 
         /// <summary>
         /// The Square features that are enabled for the location.
-        /// See [LocationCapability](#type-locationcapability) for possible values.
+        /// See [LocationCapability]($m/LocationCapability) for possible values.
         /// See [LocationCapability](#type-locationcapability) for possible values
         /// </summary>
         [JsonProperty("capabilities", NullValueHandling = NullValueHandling.Ignore)]
@@ -245,6 +277,7 @@ namespace Square.Models
         [JsonProperty("full_format_logo_url", NullValueHandling = NullValueHandling.Ignore)]
         public string FullFormatLogoUrl { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -254,36 +287,7 @@ namespace Square.Models
             return $"Location : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Id = {(Id == null ? "null" : Id == string.Empty ? "" : Id)}");
-            toStringOutput.Add($"Name = {(Name == null ? "null" : Name == string.Empty ? "" : Name)}");
-            toStringOutput.Add($"Address = {(Address == null ? "null" : Address.ToString())}");
-            toStringOutput.Add($"Timezone = {(Timezone == null ? "null" : Timezone == string.Empty ? "" : Timezone)}");
-            toStringOutput.Add($"Capabilities = {(Capabilities == null ? "null" : $"[{ string.Join(", ", Capabilities)} ]")}");
-            toStringOutput.Add($"Status = {(Status == null ? "null" : Status.ToString())}");
-            toStringOutput.Add($"CreatedAt = {(CreatedAt == null ? "null" : CreatedAt == string.Empty ? "" : CreatedAt)}");
-            toStringOutput.Add($"MerchantId = {(MerchantId == null ? "null" : MerchantId == string.Empty ? "" : MerchantId)}");
-            toStringOutput.Add($"Country = {(Country == null ? "null" : Country.ToString())}");
-            toStringOutput.Add($"LanguageCode = {(LanguageCode == null ? "null" : LanguageCode == string.Empty ? "" : LanguageCode)}");
-            toStringOutput.Add($"Currency = {(Currency == null ? "null" : Currency.ToString())}");
-            toStringOutput.Add($"PhoneNumber = {(PhoneNumber == null ? "null" : PhoneNumber == string.Empty ? "" : PhoneNumber)}");
-            toStringOutput.Add($"BusinessName = {(BusinessName == null ? "null" : BusinessName == string.Empty ? "" : BusinessName)}");
-            toStringOutput.Add($"Type = {(Type == null ? "null" : Type.ToString())}");
-            toStringOutput.Add($"WebsiteUrl = {(WebsiteUrl == null ? "null" : WebsiteUrl == string.Empty ? "" : WebsiteUrl)}");
-            toStringOutput.Add($"BusinessHours = {(BusinessHours == null ? "null" : BusinessHours.ToString())}");
-            toStringOutput.Add($"BusinessEmail = {(BusinessEmail == null ? "null" : BusinessEmail == string.Empty ? "" : BusinessEmail)}");
-            toStringOutput.Add($"Description = {(Description == null ? "null" : Description == string.Empty ? "" : Description)}");
-            toStringOutput.Add($"TwitterUsername = {(TwitterUsername == null ? "null" : TwitterUsername == string.Empty ? "" : TwitterUsername)}");
-            toStringOutput.Add($"InstagramUsername = {(InstagramUsername == null ? "null" : InstagramUsername == string.Empty ? "" : InstagramUsername)}");
-            toStringOutput.Add($"FacebookUrl = {(FacebookUrl == null ? "null" : FacebookUrl == string.Empty ? "" : FacebookUrl)}");
-            toStringOutput.Add($"Coordinates = {(Coordinates == null ? "null" : Coordinates.ToString())}");
-            toStringOutput.Add($"LogoUrl = {(LogoUrl == null ? "null" : LogoUrl == string.Empty ? "" : LogoUrl)}");
-            toStringOutput.Add($"PosBackgroundUrl = {(PosBackgroundUrl == null ? "null" : PosBackgroundUrl == string.Empty ? "" : PosBackgroundUrl)}");
-            toStringOutput.Add($"Mcc = {(Mcc == null ? "null" : Mcc == string.Empty ? "" : Mcc)}");
-            toStringOutput.Add($"FullFormatLogoUrl = {(FullFormatLogoUrl == null ? "null" : FullFormatLogoUrl == string.Empty ? "" : FullFormatLogoUrl)}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -297,203 +301,245 @@ namespace Square.Models
             }
 
             return obj is Location other &&
-                ((Id == null && other.Id == null) || (Id?.Equals(other.Id) == true)) &&
-                ((Name == null && other.Name == null) || (Name?.Equals(other.Name) == true)) &&
-                ((Address == null && other.Address == null) || (Address?.Equals(other.Address) == true)) &&
-                ((Timezone == null && other.Timezone == null) || (Timezone?.Equals(other.Timezone) == true)) &&
-                ((Capabilities == null && other.Capabilities == null) || (Capabilities?.Equals(other.Capabilities) == true)) &&
-                ((Status == null && other.Status == null) || (Status?.Equals(other.Status) == true)) &&
-                ((CreatedAt == null && other.CreatedAt == null) || (CreatedAt?.Equals(other.CreatedAt) == true)) &&
-                ((MerchantId == null && other.MerchantId == null) || (MerchantId?.Equals(other.MerchantId) == true)) &&
-                ((Country == null && other.Country == null) || (Country?.Equals(other.Country) == true)) &&
-                ((LanguageCode == null && other.LanguageCode == null) || (LanguageCode?.Equals(other.LanguageCode) == true)) &&
-                ((Currency == null && other.Currency == null) || (Currency?.Equals(other.Currency) == true)) &&
-                ((PhoneNumber == null && other.PhoneNumber == null) || (PhoneNumber?.Equals(other.PhoneNumber) == true)) &&
-                ((BusinessName == null && other.BusinessName == null) || (BusinessName?.Equals(other.BusinessName) == true)) &&
-                ((Type == null && other.Type == null) || (Type?.Equals(other.Type) == true)) &&
-                ((WebsiteUrl == null && other.WebsiteUrl == null) || (WebsiteUrl?.Equals(other.WebsiteUrl) == true)) &&
-                ((BusinessHours == null && other.BusinessHours == null) || (BusinessHours?.Equals(other.BusinessHours) == true)) &&
-                ((BusinessEmail == null && other.BusinessEmail == null) || (BusinessEmail?.Equals(other.BusinessEmail) == true)) &&
-                ((Description == null && other.Description == null) || (Description?.Equals(other.Description) == true)) &&
-                ((TwitterUsername == null && other.TwitterUsername == null) || (TwitterUsername?.Equals(other.TwitterUsername) == true)) &&
-                ((InstagramUsername == null && other.InstagramUsername == null) || (InstagramUsername?.Equals(other.InstagramUsername) == true)) &&
-                ((FacebookUrl == null && other.FacebookUrl == null) || (FacebookUrl?.Equals(other.FacebookUrl) == true)) &&
-                ((Coordinates == null && other.Coordinates == null) || (Coordinates?.Equals(other.Coordinates) == true)) &&
-                ((LogoUrl == null && other.LogoUrl == null) || (LogoUrl?.Equals(other.LogoUrl) == true)) &&
-                ((PosBackgroundUrl == null && other.PosBackgroundUrl == null) || (PosBackgroundUrl?.Equals(other.PosBackgroundUrl) == true)) &&
-                ((Mcc == null && other.Mcc == null) || (Mcc?.Equals(other.Mcc) == true)) &&
-                ((FullFormatLogoUrl == null && other.FullFormatLogoUrl == null) || (FullFormatLogoUrl?.Equals(other.FullFormatLogoUrl) == true));
+                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
+                ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
+                ((this.Address == null && other.Address == null) || (this.Address?.Equals(other.Address) == true)) &&
+                ((this.Timezone == null && other.Timezone == null) || (this.Timezone?.Equals(other.Timezone) == true)) &&
+                ((this.Capabilities == null && other.Capabilities == null) || (this.Capabilities?.Equals(other.Capabilities) == true)) &&
+                ((this.Status == null && other.Status == null) || (this.Status?.Equals(other.Status) == true)) &&
+                ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true)) &&
+                ((this.MerchantId == null && other.MerchantId == null) || (this.MerchantId?.Equals(other.MerchantId) == true)) &&
+                ((this.Country == null && other.Country == null) || (this.Country?.Equals(other.Country) == true)) &&
+                ((this.LanguageCode == null && other.LanguageCode == null) || (this.LanguageCode?.Equals(other.LanguageCode) == true)) &&
+                ((this.Currency == null && other.Currency == null) || (this.Currency?.Equals(other.Currency) == true)) &&
+                ((this.PhoneNumber == null && other.PhoneNumber == null) || (this.PhoneNumber?.Equals(other.PhoneNumber) == true)) &&
+                ((this.BusinessName == null && other.BusinessName == null) || (this.BusinessName?.Equals(other.BusinessName) == true)) &&
+                ((this.Type == null && other.Type == null) || (this.Type?.Equals(other.Type) == true)) &&
+                ((this.WebsiteUrl == null && other.WebsiteUrl == null) || (this.WebsiteUrl?.Equals(other.WebsiteUrl) == true)) &&
+                ((this.BusinessHours == null && other.BusinessHours == null) || (this.BusinessHours?.Equals(other.BusinessHours) == true)) &&
+                ((this.BusinessEmail == null && other.BusinessEmail == null) || (this.BusinessEmail?.Equals(other.BusinessEmail) == true)) &&
+                ((this.Description == null && other.Description == null) || (this.Description?.Equals(other.Description) == true)) &&
+                ((this.TwitterUsername == null && other.TwitterUsername == null) || (this.TwitterUsername?.Equals(other.TwitterUsername) == true)) &&
+                ((this.InstagramUsername == null && other.InstagramUsername == null) || (this.InstagramUsername?.Equals(other.InstagramUsername) == true)) &&
+                ((this.FacebookUrl == null && other.FacebookUrl == null) || (this.FacebookUrl?.Equals(other.FacebookUrl) == true)) &&
+                ((this.Coordinates == null && other.Coordinates == null) || (this.Coordinates?.Equals(other.Coordinates) == true)) &&
+                ((this.LogoUrl == null && other.LogoUrl == null) || (this.LogoUrl?.Equals(other.LogoUrl) == true)) &&
+                ((this.PosBackgroundUrl == null && other.PosBackgroundUrl == null) || (this.PosBackgroundUrl?.Equals(other.PosBackgroundUrl) == true)) &&
+                ((this.Mcc == null && other.Mcc == null) || (this.Mcc?.Equals(other.Mcc) == true)) &&
+                ((this.FullFormatLogoUrl == null && other.FullFormatLogoUrl == null) || (this.FullFormatLogoUrl?.Equals(other.FullFormatLogoUrl) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -255518735;
 
-            if (Id != null)
+            if (this.Id != null)
             {
-               hashCode += Id.GetHashCode();
+               hashCode += this.Id.GetHashCode();
             }
 
-            if (Name != null)
+            if (this.Name != null)
             {
-               hashCode += Name.GetHashCode();
+               hashCode += this.Name.GetHashCode();
             }
 
-            if (Address != null)
+            if (this.Address != null)
             {
-               hashCode += Address.GetHashCode();
+               hashCode += this.Address.GetHashCode();
             }
 
-            if (Timezone != null)
+            if (this.Timezone != null)
             {
-               hashCode += Timezone.GetHashCode();
+               hashCode += this.Timezone.GetHashCode();
             }
 
-            if (Capabilities != null)
+            if (this.Capabilities != null)
             {
-               hashCode += Capabilities.GetHashCode();
+               hashCode += this.Capabilities.GetHashCode();
             }
 
-            if (Status != null)
+            if (this.Status != null)
             {
-               hashCode += Status.GetHashCode();
+               hashCode += this.Status.GetHashCode();
             }
 
-            if (CreatedAt != null)
+            if (this.CreatedAt != null)
             {
-               hashCode += CreatedAt.GetHashCode();
+               hashCode += this.CreatedAt.GetHashCode();
             }
 
-            if (MerchantId != null)
+            if (this.MerchantId != null)
             {
-               hashCode += MerchantId.GetHashCode();
+               hashCode += this.MerchantId.GetHashCode();
             }
 
-            if (Country != null)
+            if (this.Country != null)
             {
-               hashCode += Country.GetHashCode();
+               hashCode += this.Country.GetHashCode();
             }
 
-            if (LanguageCode != null)
+            if (this.LanguageCode != null)
             {
-               hashCode += LanguageCode.GetHashCode();
+               hashCode += this.LanguageCode.GetHashCode();
             }
 
-            if (Currency != null)
+            if (this.Currency != null)
             {
-               hashCode += Currency.GetHashCode();
+               hashCode += this.Currency.GetHashCode();
             }
 
-            if (PhoneNumber != null)
+            if (this.PhoneNumber != null)
             {
-               hashCode += PhoneNumber.GetHashCode();
+               hashCode += this.PhoneNumber.GetHashCode();
             }
 
-            if (BusinessName != null)
+            if (this.BusinessName != null)
             {
-               hashCode += BusinessName.GetHashCode();
+               hashCode += this.BusinessName.GetHashCode();
             }
 
-            if (Type != null)
+            if (this.Type != null)
             {
-               hashCode += Type.GetHashCode();
+               hashCode += this.Type.GetHashCode();
             }
 
-            if (WebsiteUrl != null)
+            if (this.WebsiteUrl != null)
             {
-               hashCode += WebsiteUrl.GetHashCode();
+               hashCode += this.WebsiteUrl.GetHashCode();
             }
 
-            if (BusinessHours != null)
+            if (this.BusinessHours != null)
             {
-               hashCode += BusinessHours.GetHashCode();
+               hashCode += this.BusinessHours.GetHashCode();
             }
 
-            if (BusinessEmail != null)
+            if (this.BusinessEmail != null)
             {
-               hashCode += BusinessEmail.GetHashCode();
+               hashCode += this.BusinessEmail.GetHashCode();
             }
 
-            if (Description != null)
+            if (this.Description != null)
             {
-               hashCode += Description.GetHashCode();
+               hashCode += this.Description.GetHashCode();
             }
 
-            if (TwitterUsername != null)
+            if (this.TwitterUsername != null)
             {
-               hashCode += TwitterUsername.GetHashCode();
+               hashCode += this.TwitterUsername.GetHashCode();
             }
 
-            if (InstagramUsername != null)
+            if (this.InstagramUsername != null)
             {
-               hashCode += InstagramUsername.GetHashCode();
+               hashCode += this.InstagramUsername.GetHashCode();
             }
 
-            if (FacebookUrl != null)
+            if (this.FacebookUrl != null)
             {
-               hashCode += FacebookUrl.GetHashCode();
+               hashCode += this.FacebookUrl.GetHashCode();
             }
 
-            if (Coordinates != null)
+            if (this.Coordinates != null)
             {
-               hashCode += Coordinates.GetHashCode();
+               hashCode += this.Coordinates.GetHashCode();
             }
 
-            if (LogoUrl != null)
+            if (this.LogoUrl != null)
             {
-               hashCode += LogoUrl.GetHashCode();
+               hashCode += this.LogoUrl.GetHashCode();
             }
 
-            if (PosBackgroundUrl != null)
+            if (this.PosBackgroundUrl != null)
             {
-               hashCode += PosBackgroundUrl.GetHashCode();
+               hashCode += this.PosBackgroundUrl.GetHashCode();
             }
 
-            if (Mcc != null)
+            if (this.Mcc != null)
             {
-               hashCode += Mcc.GetHashCode();
+               hashCode += this.Mcc.GetHashCode();
             }
 
-            if (FullFormatLogoUrl != null)
+            if (this.FullFormatLogoUrl != null)
             {
-               hashCode += FullFormatLogoUrl.GetHashCode();
+               hashCode += this.FullFormatLogoUrl.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id == string.Empty ? "" : this.Id)}");
+            toStringOutput.Add($"this.Name = {(this.Name == null ? "null" : this.Name == string.Empty ? "" : this.Name)}");
+            toStringOutput.Add($"this.Address = {(this.Address == null ? "null" : this.Address.ToString())}");
+            toStringOutput.Add($"this.Timezone = {(this.Timezone == null ? "null" : this.Timezone == string.Empty ? "" : this.Timezone)}");
+            toStringOutput.Add($"this.Capabilities = {(this.Capabilities == null ? "null" : $"[{string.Join(", ", this.Capabilities)} ]")}");
+            toStringOutput.Add($"this.Status = {(this.Status == null ? "null" : this.Status.ToString())}");
+            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt == string.Empty ? "" : this.CreatedAt)}");
+            toStringOutput.Add($"this.MerchantId = {(this.MerchantId == null ? "null" : this.MerchantId == string.Empty ? "" : this.MerchantId)}");
+            toStringOutput.Add($"this.Country = {(this.Country == null ? "null" : this.Country.ToString())}");
+            toStringOutput.Add($"this.LanguageCode = {(this.LanguageCode == null ? "null" : this.LanguageCode == string.Empty ? "" : this.LanguageCode)}");
+            toStringOutput.Add($"this.Currency = {(this.Currency == null ? "null" : this.Currency.ToString())}");
+            toStringOutput.Add($"this.PhoneNumber = {(this.PhoneNumber == null ? "null" : this.PhoneNumber == string.Empty ? "" : this.PhoneNumber)}");
+            toStringOutput.Add($"this.BusinessName = {(this.BusinessName == null ? "null" : this.BusinessName == string.Empty ? "" : this.BusinessName)}");
+            toStringOutput.Add($"this.Type = {(this.Type == null ? "null" : this.Type.ToString())}");
+            toStringOutput.Add($"this.WebsiteUrl = {(this.WebsiteUrl == null ? "null" : this.WebsiteUrl == string.Empty ? "" : this.WebsiteUrl)}");
+            toStringOutput.Add($"this.BusinessHours = {(this.BusinessHours == null ? "null" : this.BusinessHours.ToString())}");
+            toStringOutput.Add($"this.BusinessEmail = {(this.BusinessEmail == null ? "null" : this.BusinessEmail == string.Empty ? "" : this.BusinessEmail)}");
+            toStringOutput.Add($"this.Description = {(this.Description == null ? "null" : this.Description == string.Empty ? "" : this.Description)}");
+            toStringOutput.Add($"this.TwitterUsername = {(this.TwitterUsername == null ? "null" : this.TwitterUsername == string.Empty ? "" : this.TwitterUsername)}");
+            toStringOutput.Add($"this.InstagramUsername = {(this.InstagramUsername == null ? "null" : this.InstagramUsername == string.Empty ? "" : this.InstagramUsername)}");
+            toStringOutput.Add($"this.FacebookUrl = {(this.FacebookUrl == null ? "null" : this.FacebookUrl == string.Empty ? "" : this.FacebookUrl)}");
+            toStringOutput.Add($"this.Coordinates = {(this.Coordinates == null ? "null" : this.Coordinates.ToString())}");
+            toStringOutput.Add($"this.LogoUrl = {(this.LogoUrl == null ? "null" : this.LogoUrl == string.Empty ? "" : this.LogoUrl)}");
+            toStringOutput.Add($"this.PosBackgroundUrl = {(this.PosBackgroundUrl == null ? "null" : this.PosBackgroundUrl == string.Empty ? "" : this.PosBackgroundUrl)}");
+            toStringOutput.Add($"this.Mcc = {(this.Mcc == null ? "null" : this.Mcc == string.Empty ? "" : this.Mcc)}");
+            toStringOutput.Add($"this.FullFormatLogoUrl = {(this.FullFormatLogoUrl == null ? "null" : this.FullFormatLogoUrl == string.Empty ? "" : this.FullFormatLogoUrl)}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .Id(Id)
-                .Name(Name)
-                .Address(Address)
-                .Timezone(Timezone)
-                .Capabilities(Capabilities)
-                .Status(Status)
-                .CreatedAt(CreatedAt)
-                .MerchantId(MerchantId)
-                .Country(Country)
-                .LanguageCode(LanguageCode)
-                .Currency(Currency)
-                .PhoneNumber(PhoneNumber)
-                .BusinessName(BusinessName)
-                .Type(Type)
-                .WebsiteUrl(WebsiteUrl)
-                .BusinessHours(BusinessHours)
-                .BusinessEmail(BusinessEmail)
-                .Description(Description)
-                .TwitterUsername(TwitterUsername)
-                .InstagramUsername(InstagramUsername)
-                .FacebookUrl(FacebookUrl)
-                .Coordinates(Coordinates)
-                .LogoUrl(LogoUrl)
-                .PosBackgroundUrl(PosBackgroundUrl)
-                .Mcc(Mcc)
-                .FullFormatLogoUrl(FullFormatLogoUrl);
+                .Id(this.Id)
+                .Name(this.Name)
+                .Address(this.Address)
+                .Timezone(this.Timezone)
+                .Capabilities(this.Capabilities)
+                .Status(this.Status)
+                .CreatedAt(this.CreatedAt)
+                .MerchantId(this.MerchantId)
+                .Country(this.Country)
+                .LanguageCode(this.LanguageCode)
+                .Currency(this.Currency)
+                .PhoneNumber(this.PhoneNumber)
+                .BusinessName(this.BusinessName)
+                .Type(this.Type)
+                .WebsiteUrl(this.WebsiteUrl)
+                .BusinessHours(this.BusinessHours)
+                .BusinessEmail(this.BusinessEmail)
+                .Description(this.Description)
+                .TwitterUsername(this.TwitterUsername)
+                .InstagramUsername(this.InstagramUsername)
+                .FacebookUrl(this.FacebookUrl)
+                .Coordinates(this.Coordinates)
+                .LogoUrl(this.LogoUrl)
+                .PosBackgroundUrl(this.PosBackgroundUrl)
+                .Mcc(this.Mcc)
+                .FullFormatLogoUrl(this.FullFormatLogoUrl);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string id;
@@ -523,192 +569,325 @@ namespace Square.Models
             private string mcc;
             private string fullFormatLogoUrl;
 
-
-
+             /// <summary>
+             /// Id.
+             /// </summary>
+             /// <param name="id"> id. </param>
+             /// <returns> Builder. </returns>
             public Builder Id(string id)
             {
                 this.id = id;
                 return this;
             }
 
+             /// <summary>
+             /// Name.
+             /// </summary>
+             /// <param name="name"> name. </param>
+             /// <returns> Builder. </returns>
             public Builder Name(string name)
             {
                 this.name = name;
                 return this;
             }
 
+             /// <summary>
+             /// Address.
+             /// </summary>
+             /// <param name="address"> address. </param>
+             /// <returns> Builder. </returns>
             public Builder Address(Models.Address address)
             {
                 this.address = address;
                 return this;
             }
 
+             /// <summary>
+             /// Timezone.
+             /// </summary>
+             /// <param name="timezone"> timezone. </param>
+             /// <returns> Builder. </returns>
             public Builder Timezone(string timezone)
             {
                 this.timezone = timezone;
                 return this;
             }
 
+             /// <summary>
+             /// Capabilities.
+             /// </summary>
+             /// <param name="capabilities"> capabilities. </param>
+             /// <returns> Builder. </returns>
             public Builder Capabilities(IList<string> capabilities)
             {
                 this.capabilities = capabilities;
                 return this;
             }
 
+             /// <summary>
+             /// Status.
+             /// </summary>
+             /// <param name="status"> status. </param>
+             /// <returns> Builder. </returns>
             public Builder Status(string status)
             {
                 this.status = status;
                 return this;
             }
 
+             /// <summary>
+             /// CreatedAt.
+             /// </summary>
+             /// <param name="createdAt"> createdAt. </param>
+             /// <returns> Builder. </returns>
             public Builder CreatedAt(string createdAt)
             {
                 this.createdAt = createdAt;
                 return this;
             }
 
+             /// <summary>
+             /// MerchantId.
+             /// </summary>
+             /// <param name="merchantId"> merchantId. </param>
+             /// <returns> Builder. </returns>
             public Builder MerchantId(string merchantId)
             {
                 this.merchantId = merchantId;
                 return this;
             }
 
+             /// <summary>
+             /// Country.
+             /// </summary>
+             /// <param name="country"> country. </param>
+             /// <returns> Builder. </returns>
             public Builder Country(string country)
             {
                 this.country = country;
                 return this;
             }
 
+             /// <summary>
+             /// LanguageCode.
+             /// </summary>
+             /// <param name="languageCode"> languageCode. </param>
+             /// <returns> Builder. </returns>
             public Builder LanguageCode(string languageCode)
             {
                 this.languageCode = languageCode;
                 return this;
             }
 
+             /// <summary>
+             /// Currency.
+             /// </summary>
+             /// <param name="currency"> currency. </param>
+             /// <returns> Builder. </returns>
             public Builder Currency(string currency)
             {
                 this.currency = currency;
                 return this;
             }
 
+             /// <summary>
+             /// PhoneNumber.
+             /// </summary>
+             /// <param name="phoneNumber"> phoneNumber. </param>
+             /// <returns> Builder. </returns>
             public Builder PhoneNumber(string phoneNumber)
             {
                 this.phoneNumber = phoneNumber;
                 return this;
             }
 
+             /// <summary>
+             /// BusinessName.
+             /// </summary>
+             /// <param name="businessName"> businessName. </param>
+             /// <returns> Builder. </returns>
             public Builder BusinessName(string businessName)
             {
                 this.businessName = businessName;
                 return this;
             }
 
+             /// <summary>
+             /// Type.
+             /// </summary>
+             /// <param name="type"> type. </param>
+             /// <returns> Builder. </returns>
             public Builder Type(string type)
             {
                 this.type = type;
                 return this;
             }
 
+             /// <summary>
+             /// WebsiteUrl.
+             /// </summary>
+             /// <param name="websiteUrl"> websiteUrl. </param>
+             /// <returns> Builder. </returns>
             public Builder WebsiteUrl(string websiteUrl)
             {
                 this.websiteUrl = websiteUrl;
                 return this;
             }
 
+             /// <summary>
+             /// BusinessHours.
+             /// </summary>
+             /// <param name="businessHours"> businessHours. </param>
+             /// <returns> Builder. </returns>
             public Builder BusinessHours(Models.BusinessHours businessHours)
             {
                 this.businessHours = businessHours;
                 return this;
             }
 
+             /// <summary>
+             /// BusinessEmail.
+             /// </summary>
+             /// <param name="businessEmail"> businessEmail. </param>
+             /// <returns> Builder. </returns>
             public Builder BusinessEmail(string businessEmail)
             {
                 this.businessEmail = businessEmail;
                 return this;
             }
 
+             /// <summary>
+             /// Description.
+             /// </summary>
+             /// <param name="description"> description. </param>
+             /// <returns> Builder. </returns>
             public Builder Description(string description)
             {
                 this.description = description;
                 return this;
             }
 
+             /// <summary>
+             /// TwitterUsername.
+             /// </summary>
+             /// <param name="twitterUsername"> twitterUsername. </param>
+             /// <returns> Builder. </returns>
             public Builder TwitterUsername(string twitterUsername)
             {
                 this.twitterUsername = twitterUsername;
                 return this;
             }
 
+             /// <summary>
+             /// InstagramUsername.
+             /// </summary>
+             /// <param name="instagramUsername"> instagramUsername. </param>
+             /// <returns> Builder. </returns>
             public Builder InstagramUsername(string instagramUsername)
             {
                 this.instagramUsername = instagramUsername;
                 return this;
             }
 
+             /// <summary>
+             /// FacebookUrl.
+             /// </summary>
+             /// <param name="facebookUrl"> facebookUrl. </param>
+             /// <returns> Builder. </returns>
             public Builder FacebookUrl(string facebookUrl)
             {
                 this.facebookUrl = facebookUrl;
                 return this;
             }
 
+             /// <summary>
+             /// Coordinates.
+             /// </summary>
+             /// <param name="coordinates"> coordinates. </param>
+             /// <returns> Builder. </returns>
             public Builder Coordinates(Models.Coordinates coordinates)
             {
                 this.coordinates = coordinates;
                 return this;
             }
 
+             /// <summary>
+             /// LogoUrl.
+             /// </summary>
+             /// <param name="logoUrl"> logoUrl. </param>
+             /// <returns> Builder. </returns>
             public Builder LogoUrl(string logoUrl)
             {
                 this.logoUrl = logoUrl;
                 return this;
             }
 
+             /// <summary>
+             /// PosBackgroundUrl.
+             /// </summary>
+             /// <param name="posBackgroundUrl"> posBackgroundUrl. </param>
+             /// <returns> Builder. </returns>
             public Builder PosBackgroundUrl(string posBackgroundUrl)
             {
                 this.posBackgroundUrl = posBackgroundUrl;
                 return this;
             }
 
+             /// <summary>
+             /// Mcc.
+             /// </summary>
+             /// <param name="mcc"> mcc. </param>
+             /// <returns> Builder. </returns>
             public Builder Mcc(string mcc)
             {
                 this.mcc = mcc;
                 return this;
             }
 
+             /// <summary>
+             /// FullFormatLogoUrl.
+             /// </summary>
+             /// <param name="fullFormatLogoUrl"> fullFormatLogoUrl. </param>
+             /// <returns> Builder. </returns>
             public Builder FullFormatLogoUrl(string fullFormatLogoUrl)
             {
                 this.fullFormatLogoUrl = fullFormatLogoUrl;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> Location. </returns>
             public Location Build()
             {
-                return new Location(id,
-                    name,
-                    address,
-                    timezone,
-                    capabilities,
-                    status,
-                    createdAt,
-                    merchantId,
-                    country,
-                    languageCode,
-                    currency,
-                    phoneNumber,
-                    businessName,
-                    type,
-                    websiteUrl,
-                    businessHours,
-                    businessEmail,
-                    description,
-                    twitterUsername,
-                    instagramUsername,
-                    facebookUrl,
-                    coordinates,
-                    logoUrl,
-                    posBackgroundUrl,
-                    mcc,
-                    fullFormatLogoUrl);
+                return new Location(
+                    this.id,
+                    this.name,
+                    this.address,
+                    this.timezone,
+                    this.capabilities,
+                    this.status,
+                    this.createdAt,
+                    this.merchantId,
+                    this.country,
+                    this.languageCode,
+                    this.currency,
+                    this.phoneNumber,
+                    this.businessName,
+                    this.type,
+                    this.websiteUrl,
+                    this.businessHours,
+                    this.businessEmail,
+                    this.description,
+                    this.twitterUsername,
+                    this.instagramUsername,
+                    this.facebookUrl,
+                    this.coordinates,
+                    this.logoUrl,
+                    this.posBackgroundUrl,
+                    this.mcc,
+                    this.fullFormatLogoUrl);
             }
         }
     }

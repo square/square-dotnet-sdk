@@ -1,33 +1,45 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class V1ListSettlementsRequest 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// V1ListSettlementsRequest.
+    /// </summary>
+    public class V1ListSettlementsRequest
     {
-        public V1ListSettlementsRequest(string order = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="V1ListSettlementsRequest"/> class.
+        /// </summary>
+        /// <param name="order">order.</param>
+        /// <param name="beginTime">begin_time.</param>
+        /// <param name="endTime">end_time.</param>
+        /// <param name="limit">limit.</param>
+        /// <param name="status">status.</param>
+        /// <param name="batchToken">batch_token.</param>
+        public V1ListSettlementsRequest(
+            string order = null,
             string beginTime = null,
             string endTime = null,
             int? limit = null,
             string status = null,
             string batchToken = null)
         {
-            Order = order;
-            BeginTime = beginTime;
-            EndTime = endTime;
-            Limit = limit;
-            Status = status;
-            BatchToken = batchToken;
+            this.Order = order;
+            this.BeginTime = beginTime;
+            this.EndTime = endTime;
+            this.Limit = limit;
+            this.Status = status;
+            this.BatchToken = batchToken;
         }
 
         /// <summary>
@@ -55,7 +67,7 @@ namespace Square.Models
         public int? Limit { get; }
 
         /// <summary>
-        /// Getter for status
+        /// Gets or sets Status.
         /// </summary>
         [JsonProperty("status", NullValueHandling = NullValueHandling.Ignore)]
         public string Status { get; }
@@ -67,6 +79,7 @@ namespace Square.Models
         [JsonProperty("batch_token", NullValueHandling = NullValueHandling.Ignore)]
         public string BatchToken { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -76,16 +89,7 @@ namespace Square.Models
             return $"V1ListSettlementsRequest : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Order = {(Order == null ? "null" : Order.ToString())}");
-            toStringOutput.Add($"BeginTime = {(BeginTime == null ? "null" : BeginTime == string.Empty ? "" : BeginTime)}");
-            toStringOutput.Add($"EndTime = {(EndTime == null ? "null" : EndTime == string.Empty ? "" : EndTime)}");
-            toStringOutput.Add($"Limit = {(Limit == null ? "null" : Limit.ToString())}");
-            toStringOutput.Add($"Status = {(Status == null ? "null" : Status.ToString())}");
-            toStringOutput.Add($"BatchToken = {(BatchToken == null ? "null" : BatchToken == string.Empty ? "" : BatchToken)}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -99,63 +103,85 @@ namespace Square.Models
             }
 
             return obj is V1ListSettlementsRequest other &&
-                ((Order == null && other.Order == null) || (Order?.Equals(other.Order) == true)) &&
-                ((BeginTime == null && other.BeginTime == null) || (BeginTime?.Equals(other.BeginTime) == true)) &&
-                ((EndTime == null && other.EndTime == null) || (EndTime?.Equals(other.EndTime) == true)) &&
-                ((Limit == null && other.Limit == null) || (Limit?.Equals(other.Limit) == true)) &&
-                ((Status == null && other.Status == null) || (Status?.Equals(other.Status) == true)) &&
-                ((BatchToken == null && other.BatchToken == null) || (BatchToken?.Equals(other.BatchToken) == true));
+                ((this.Order == null && other.Order == null) || (this.Order?.Equals(other.Order) == true)) &&
+                ((this.BeginTime == null && other.BeginTime == null) || (this.BeginTime?.Equals(other.BeginTime) == true)) &&
+                ((this.EndTime == null && other.EndTime == null) || (this.EndTime?.Equals(other.EndTime) == true)) &&
+                ((this.Limit == null && other.Limit == null) || (this.Limit?.Equals(other.Limit) == true)) &&
+                ((this.Status == null && other.Status == null) || (this.Status?.Equals(other.Status) == true)) &&
+                ((this.BatchToken == null && other.BatchToken == null) || (this.BatchToken?.Equals(other.BatchToken) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 331726736;
 
-            if (Order != null)
+            if (this.Order != null)
             {
-               hashCode += Order.GetHashCode();
+               hashCode += this.Order.GetHashCode();
             }
 
-            if (BeginTime != null)
+            if (this.BeginTime != null)
             {
-               hashCode += BeginTime.GetHashCode();
+               hashCode += this.BeginTime.GetHashCode();
             }
 
-            if (EndTime != null)
+            if (this.EndTime != null)
             {
-               hashCode += EndTime.GetHashCode();
+               hashCode += this.EndTime.GetHashCode();
             }
 
-            if (Limit != null)
+            if (this.Limit != null)
             {
-               hashCode += Limit.GetHashCode();
+               hashCode += this.Limit.GetHashCode();
             }
 
-            if (Status != null)
+            if (this.Status != null)
             {
-               hashCode += Status.GetHashCode();
+               hashCode += this.Status.GetHashCode();
             }
 
-            if (BatchToken != null)
+            if (this.BatchToken != null)
             {
-               hashCode += BatchToken.GetHashCode();
+               hashCode += this.BatchToken.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Order = {(this.Order == null ? "null" : this.Order.ToString())}");
+            toStringOutput.Add($"this.BeginTime = {(this.BeginTime == null ? "null" : this.BeginTime == string.Empty ? "" : this.BeginTime)}");
+            toStringOutput.Add($"this.EndTime = {(this.EndTime == null ? "null" : this.EndTime == string.Empty ? "" : this.EndTime)}");
+            toStringOutput.Add($"this.Limit = {(this.Limit == null ? "null" : this.Limit.ToString())}");
+            toStringOutput.Add($"this.Status = {(this.Status == null ? "null" : this.Status.ToString())}");
+            toStringOutput.Add($"this.BatchToken = {(this.BatchToken == null ? "null" : this.BatchToken == string.Empty ? "" : this.BatchToken)}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .Order(Order)
-                .BeginTime(BeginTime)
-                .EndTime(EndTime)
-                .Limit(Limit)
-                .Status(Status)
-                .BatchToken(BatchToken);
+                .Order(this.Order)
+                .BeginTime(this.BeginTime)
+                .EndTime(this.EndTime)
+                .Limit(this.Limit)
+                .Status(this.Status)
+                .BatchToken(this.BatchToken);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string order;
@@ -165,52 +191,85 @@ namespace Square.Models
             private string status;
             private string batchToken;
 
-
-
+             /// <summary>
+             /// Order.
+             /// </summary>
+             /// <param name="order"> order. </param>
+             /// <returns> Builder. </returns>
             public Builder Order(string order)
             {
                 this.order = order;
                 return this;
             }
 
+             /// <summary>
+             /// BeginTime.
+             /// </summary>
+             /// <param name="beginTime"> beginTime. </param>
+             /// <returns> Builder. </returns>
             public Builder BeginTime(string beginTime)
             {
                 this.beginTime = beginTime;
                 return this;
             }
 
+             /// <summary>
+             /// EndTime.
+             /// </summary>
+             /// <param name="endTime"> endTime. </param>
+             /// <returns> Builder. </returns>
             public Builder EndTime(string endTime)
             {
                 this.endTime = endTime;
                 return this;
             }
 
+             /// <summary>
+             /// Limit.
+             /// </summary>
+             /// <param name="limit"> limit. </param>
+             /// <returns> Builder. </returns>
             public Builder Limit(int? limit)
             {
                 this.limit = limit;
                 return this;
             }
 
+             /// <summary>
+             /// Status.
+             /// </summary>
+             /// <param name="status"> status. </param>
+             /// <returns> Builder. </returns>
             public Builder Status(string status)
             {
                 this.status = status;
                 return this;
             }
 
+             /// <summary>
+             /// BatchToken.
+             /// </summary>
+             /// <param name="batchToken"> batchToken. </param>
+             /// <returns> Builder. </returns>
             public Builder BatchToken(string batchToken)
             {
                 this.batchToken = batchToken;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> V1ListSettlementsRequest. </returns>
             public V1ListSettlementsRequest Build()
             {
-                return new V1ListSettlementsRequest(order,
-                    beginTime,
-                    endTime,
-                    limit,
-                    status,
-                    batchToken);
+                return new V1ListSettlementsRequest(
+                    this.order,
+                    this.beginTime,
+                    this.endTime,
+                    this.limit,
+                    this.status,
+                    this.batchToken);
             }
         }
     }

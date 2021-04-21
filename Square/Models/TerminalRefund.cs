@@ -1,21 +1,41 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class TerminalRefund 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// TerminalRefund.
+    /// </summary>
+    public class TerminalRefund
     {
-        public TerminalRefund(string paymentId,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TerminalRefund"/> class.
+        /// </summary>
+        /// <param name="paymentId">payment_id.</param>
+        /// <param name="amountMoney">amount_money.</param>
+        /// <param name="id">id.</param>
+        /// <param name="refundId">refund_id.</param>
+        /// <param name="orderId">order_id.</param>
+        /// <param name="reason">reason.</param>
+        /// <param name="deviceId">device_id.</param>
+        /// <param name="deadlineDuration">deadline_duration.</param>
+        /// <param name="status">status.</param>
+        /// <param name="cancelReason">cancel_reason.</param>
+        /// <param name="createdAt">created_at.</param>
+        /// <param name="updatedAt">updated_at.</param>
+        /// <param name="appId">app_id.</param>
+        /// <param name="locationId">location_id.</param>
+        public TerminalRefund(
+            string paymentId,
             Models.Money amountMoney,
             string id = null,
             string refundId = null,
@@ -30,20 +50,20 @@ namespace Square.Models
             string appId = null,
             string locationId = null)
         {
-            Id = id;
-            RefundId = refundId;
-            PaymentId = paymentId;
-            OrderId = orderId;
-            AmountMoney = amountMoney;
-            Reason = reason;
-            DeviceId = deviceId;
-            DeadlineDuration = deadlineDuration;
-            Status = status;
-            CancelReason = cancelReason;
-            CreatedAt = createdAt;
-            UpdatedAt = updatedAt;
-            AppId = appId;
-            LocationId = locationId;
+            this.Id = id;
+            this.RefundId = refundId;
+            this.PaymentId = paymentId;
+            this.OrderId = orderId;
+            this.AmountMoney = amountMoney;
+            this.Reason = reason;
+            this.DeviceId = deviceId;
+            this.DeadlineDuration = deadlineDuration;
+            this.Status = status;
+            this.CancelReason = cancelReason;
+            this.CreatedAt = createdAt;
+            this.UpdatedAt = updatedAt;
+            this.AppId = appId;
+            this.LocationId = locationId;
         }
 
         /// <summary>
@@ -113,7 +133,7 @@ namespace Square.Models
         public string Status { get; }
 
         /// <summary>
-        /// Getter for cancel_reason
+        /// Gets or sets CancelReason.
         /// </summary>
         [JsonProperty("cancel_reason", NullValueHandling = NullValueHandling.Ignore)]
         public string CancelReason { get; }
@@ -142,6 +162,7 @@ namespace Square.Models
         [JsonProperty("location_id", NullValueHandling = NullValueHandling.Ignore)]
         public string LocationId { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -151,24 +172,7 @@ namespace Square.Models
             return $"TerminalRefund : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Id = {(Id == null ? "null" : Id == string.Empty ? "" : Id)}");
-            toStringOutput.Add($"RefundId = {(RefundId == null ? "null" : RefundId == string.Empty ? "" : RefundId)}");
-            toStringOutput.Add($"PaymentId = {(PaymentId == null ? "null" : PaymentId == string.Empty ? "" : PaymentId)}");
-            toStringOutput.Add($"OrderId = {(OrderId == null ? "null" : OrderId == string.Empty ? "" : OrderId)}");
-            toStringOutput.Add($"AmountMoney = {(AmountMoney == null ? "null" : AmountMoney.ToString())}");
-            toStringOutput.Add($"Reason = {(Reason == null ? "null" : Reason == string.Empty ? "" : Reason)}");
-            toStringOutput.Add($"DeviceId = {(DeviceId == null ? "null" : DeviceId == string.Empty ? "" : DeviceId)}");
-            toStringOutput.Add($"DeadlineDuration = {(DeadlineDuration == null ? "null" : DeadlineDuration == string.Empty ? "" : DeadlineDuration)}");
-            toStringOutput.Add($"Status = {(Status == null ? "null" : Status == string.Empty ? "" : Status)}");
-            toStringOutput.Add($"CancelReason = {(CancelReason == null ? "null" : CancelReason.ToString())}");
-            toStringOutput.Add($"CreatedAt = {(CreatedAt == null ? "null" : CreatedAt == string.Empty ? "" : CreatedAt)}");
-            toStringOutput.Add($"UpdatedAt = {(UpdatedAt == null ? "null" : UpdatedAt == string.Empty ? "" : UpdatedAt)}");
-            toStringOutput.Add($"AppId = {(AppId == null ? "null" : AppId == string.Empty ? "" : AppId)}");
-            toStringOutput.Add($"LocationId = {(LocationId == null ? "null" : LocationId == string.Empty ? "" : LocationId)}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -182,118 +186,149 @@ namespace Square.Models
             }
 
             return obj is TerminalRefund other &&
-                ((Id == null && other.Id == null) || (Id?.Equals(other.Id) == true)) &&
-                ((RefundId == null && other.RefundId == null) || (RefundId?.Equals(other.RefundId) == true)) &&
-                ((PaymentId == null && other.PaymentId == null) || (PaymentId?.Equals(other.PaymentId) == true)) &&
-                ((OrderId == null && other.OrderId == null) || (OrderId?.Equals(other.OrderId) == true)) &&
-                ((AmountMoney == null && other.AmountMoney == null) || (AmountMoney?.Equals(other.AmountMoney) == true)) &&
-                ((Reason == null && other.Reason == null) || (Reason?.Equals(other.Reason) == true)) &&
-                ((DeviceId == null && other.DeviceId == null) || (DeviceId?.Equals(other.DeviceId) == true)) &&
-                ((DeadlineDuration == null && other.DeadlineDuration == null) || (DeadlineDuration?.Equals(other.DeadlineDuration) == true)) &&
-                ((Status == null && other.Status == null) || (Status?.Equals(other.Status) == true)) &&
-                ((CancelReason == null && other.CancelReason == null) || (CancelReason?.Equals(other.CancelReason) == true)) &&
-                ((CreatedAt == null && other.CreatedAt == null) || (CreatedAt?.Equals(other.CreatedAt) == true)) &&
-                ((UpdatedAt == null && other.UpdatedAt == null) || (UpdatedAt?.Equals(other.UpdatedAt) == true)) &&
-                ((AppId == null && other.AppId == null) || (AppId?.Equals(other.AppId) == true)) &&
-                ((LocationId == null && other.LocationId == null) || (LocationId?.Equals(other.LocationId) == true));
+                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
+                ((this.RefundId == null && other.RefundId == null) || (this.RefundId?.Equals(other.RefundId) == true)) &&
+                ((this.PaymentId == null && other.PaymentId == null) || (this.PaymentId?.Equals(other.PaymentId) == true)) &&
+                ((this.OrderId == null && other.OrderId == null) || (this.OrderId?.Equals(other.OrderId) == true)) &&
+                ((this.AmountMoney == null && other.AmountMoney == null) || (this.AmountMoney?.Equals(other.AmountMoney) == true)) &&
+                ((this.Reason == null && other.Reason == null) || (this.Reason?.Equals(other.Reason) == true)) &&
+                ((this.DeviceId == null && other.DeviceId == null) || (this.DeviceId?.Equals(other.DeviceId) == true)) &&
+                ((this.DeadlineDuration == null && other.DeadlineDuration == null) || (this.DeadlineDuration?.Equals(other.DeadlineDuration) == true)) &&
+                ((this.Status == null && other.Status == null) || (this.Status?.Equals(other.Status) == true)) &&
+                ((this.CancelReason == null && other.CancelReason == null) || (this.CancelReason?.Equals(other.CancelReason) == true)) &&
+                ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true)) &&
+                ((this.UpdatedAt == null && other.UpdatedAt == null) || (this.UpdatedAt?.Equals(other.UpdatedAt) == true)) &&
+                ((this.AppId == null && other.AppId == null) || (this.AppId?.Equals(other.AppId) == true)) &&
+                ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 973053086;
 
-            if (Id != null)
+            if (this.Id != null)
             {
-               hashCode += Id.GetHashCode();
+               hashCode += this.Id.GetHashCode();
             }
 
-            if (RefundId != null)
+            if (this.RefundId != null)
             {
-               hashCode += RefundId.GetHashCode();
+               hashCode += this.RefundId.GetHashCode();
             }
 
-            if (PaymentId != null)
+            if (this.PaymentId != null)
             {
-               hashCode += PaymentId.GetHashCode();
+               hashCode += this.PaymentId.GetHashCode();
             }
 
-            if (OrderId != null)
+            if (this.OrderId != null)
             {
-               hashCode += OrderId.GetHashCode();
+               hashCode += this.OrderId.GetHashCode();
             }
 
-            if (AmountMoney != null)
+            if (this.AmountMoney != null)
             {
-               hashCode += AmountMoney.GetHashCode();
+               hashCode += this.AmountMoney.GetHashCode();
             }
 
-            if (Reason != null)
+            if (this.Reason != null)
             {
-               hashCode += Reason.GetHashCode();
+               hashCode += this.Reason.GetHashCode();
             }
 
-            if (DeviceId != null)
+            if (this.DeviceId != null)
             {
-               hashCode += DeviceId.GetHashCode();
+               hashCode += this.DeviceId.GetHashCode();
             }
 
-            if (DeadlineDuration != null)
+            if (this.DeadlineDuration != null)
             {
-               hashCode += DeadlineDuration.GetHashCode();
+               hashCode += this.DeadlineDuration.GetHashCode();
             }
 
-            if (Status != null)
+            if (this.Status != null)
             {
-               hashCode += Status.GetHashCode();
+               hashCode += this.Status.GetHashCode();
             }
 
-            if (CancelReason != null)
+            if (this.CancelReason != null)
             {
-               hashCode += CancelReason.GetHashCode();
+               hashCode += this.CancelReason.GetHashCode();
             }
 
-            if (CreatedAt != null)
+            if (this.CreatedAt != null)
             {
-               hashCode += CreatedAt.GetHashCode();
+               hashCode += this.CreatedAt.GetHashCode();
             }
 
-            if (UpdatedAt != null)
+            if (this.UpdatedAt != null)
             {
-               hashCode += UpdatedAt.GetHashCode();
+               hashCode += this.UpdatedAt.GetHashCode();
             }
 
-            if (AppId != null)
+            if (this.AppId != null)
             {
-               hashCode += AppId.GetHashCode();
+               hashCode += this.AppId.GetHashCode();
             }
 
-            if (LocationId != null)
+            if (this.LocationId != null)
             {
-               hashCode += LocationId.GetHashCode();
+               hashCode += this.LocationId.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id == string.Empty ? "" : this.Id)}");
+            toStringOutput.Add($"this.RefundId = {(this.RefundId == null ? "null" : this.RefundId == string.Empty ? "" : this.RefundId)}");
+            toStringOutput.Add($"this.PaymentId = {(this.PaymentId == null ? "null" : this.PaymentId == string.Empty ? "" : this.PaymentId)}");
+            toStringOutput.Add($"this.OrderId = {(this.OrderId == null ? "null" : this.OrderId == string.Empty ? "" : this.OrderId)}");
+            toStringOutput.Add($"this.AmountMoney = {(this.AmountMoney == null ? "null" : this.AmountMoney.ToString())}");
+            toStringOutput.Add($"this.Reason = {(this.Reason == null ? "null" : this.Reason == string.Empty ? "" : this.Reason)}");
+            toStringOutput.Add($"this.DeviceId = {(this.DeviceId == null ? "null" : this.DeviceId == string.Empty ? "" : this.DeviceId)}");
+            toStringOutput.Add($"this.DeadlineDuration = {(this.DeadlineDuration == null ? "null" : this.DeadlineDuration == string.Empty ? "" : this.DeadlineDuration)}");
+            toStringOutput.Add($"this.Status = {(this.Status == null ? "null" : this.Status == string.Empty ? "" : this.Status)}");
+            toStringOutput.Add($"this.CancelReason = {(this.CancelReason == null ? "null" : this.CancelReason.ToString())}");
+            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt == string.Empty ? "" : this.CreatedAt)}");
+            toStringOutput.Add($"this.UpdatedAt = {(this.UpdatedAt == null ? "null" : this.UpdatedAt == string.Empty ? "" : this.UpdatedAt)}");
+            toStringOutput.Add($"this.AppId = {(this.AppId == null ? "null" : this.AppId == string.Empty ? "" : this.AppId)}");
+            toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId == string.Empty ? "" : this.LocationId)}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
-            var builder = new Builder(PaymentId,
-                AmountMoney)
-                .Id(Id)
-                .RefundId(RefundId)
-                .OrderId(OrderId)
-                .Reason(Reason)
-                .DeviceId(DeviceId)
-                .DeadlineDuration(DeadlineDuration)
-                .Status(Status)
-                .CancelReason(CancelReason)
-                .CreatedAt(CreatedAt)
-                .UpdatedAt(UpdatedAt)
-                .AppId(AppId)
-                .LocationId(LocationId);
+            var builder = new Builder(
+                this.PaymentId,
+                this.AmountMoney)
+                .Id(this.Id)
+                .RefundId(this.RefundId)
+                .OrderId(this.OrderId)
+                .Reason(this.Reason)
+                .DeviceId(this.DeviceId)
+                .DeadlineDuration(this.DeadlineDuration)
+                .Status(this.Status)
+                .CancelReason(this.CancelReason)
+                .CreatedAt(this.CreatedAt)
+                .UpdatedAt(this.UpdatedAt)
+                .AppId(this.AppId)
+                .LocationId(this.LocationId);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string paymentId;
@@ -311,113 +346,189 @@ namespace Square.Models
             private string appId;
             private string locationId;
 
-            public Builder(string paymentId,
+            public Builder(
+                string paymentId,
                 Models.Money amountMoney)
             {
                 this.paymentId = paymentId;
                 this.amountMoney = amountMoney;
             }
 
+             /// <summary>
+             /// PaymentId.
+             /// </summary>
+             /// <param name="paymentId"> paymentId. </param>
+             /// <returns> Builder. </returns>
             public Builder PaymentId(string paymentId)
             {
                 this.paymentId = paymentId;
                 return this;
             }
 
+             /// <summary>
+             /// AmountMoney.
+             /// </summary>
+             /// <param name="amountMoney"> amountMoney. </param>
+             /// <returns> Builder. </returns>
             public Builder AmountMoney(Models.Money amountMoney)
             {
                 this.amountMoney = amountMoney;
                 return this;
             }
 
+             /// <summary>
+             /// Id.
+             /// </summary>
+             /// <param name="id"> id. </param>
+             /// <returns> Builder. </returns>
             public Builder Id(string id)
             {
                 this.id = id;
                 return this;
             }
 
+             /// <summary>
+             /// RefundId.
+             /// </summary>
+             /// <param name="refundId"> refundId. </param>
+             /// <returns> Builder. </returns>
             public Builder RefundId(string refundId)
             {
                 this.refundId = refundId;
                 return this;
             }
 
+             /// <summary>
+             /// OrderId.
+             /// </summary>
+             /// <param name="orderId"> orderId. </param>
+             /// <returns> Builder. </returns>
             public Builder OrderId(string orderId)
             {
                 this.orderId = orderId;
                 return this;
             }
 
+             /// <summary>
+             /// Reason.
+             /// </summary>
+             /// <param name="reason"> reason. </param>
+             /// <returns> Builder. </returns>
             public Builder Reason(string reason)
             {
                 this.reason = reason;
                 return this;
             }
 
+             /// <summary>
+             /// DeviceId.
+             /// </summary>
+             /// <param name="deviceId"> deviceId. </param>
+             /// <returns> Builder. </returns>
             public Builder DeviceId(string deviceId)
             {
                 this.deviceId = deviceId;
                 return this;
             }
 
+             /// <summary>
+             /// DeadlineDuration.
+             /// </summary>
+             /// <param name="deadlineDuration"> deadlineDuration. </param>
+             /// <returns> Builder. </returns>
             public Builder DeadlineDuration(string deadlineDuration)
             {
                 this.deadlineDuration = deadlineDuration;
                 return this;
             }
 
+             /// <summary>
+             /// Status.
+             /// </summary>
+             /// <param name="status"> status. </param>
+             /// <returns> Builder. </returns>
             public Builder Status(string status)
             {
                 this.status = status;
                 return this;
             }
 
+             /// <summary>
+             /// CancelReason.
+             /// </summary>
+             /// <param name="cancelReason"> cancelReason. </param>
+             /// <returns> Builder. </returns>
             public Builder CancelReason(string cancelReason)
             {
                 this.cancelReason = cancelReason;
                 return this;
             }
 
+             /// <summary>
+             /// CreatedAt.
+             /// </summary>
+             /// <param name="createdAt"> createdAt. </param>
+             /// <returns> Builder. </returns>
             public Builder CreatedAt(string createdAt)
             {
                 this.createdAt = createdAt;
                 return this;
             }
 
+             /// <summary>
+             /// UpdatedAt.
+             /// </summary>
+             /// <param name="updatedAt"> updatedAt. </param>
+             /// <returns> Builder. </returns>
             public Builder UpdatedAt(string updatedAt)
             {
                 this.updatedAt = updatedAt;
                 return this;
             }
 
+             /// <summary>
+             /// AppId.
+             /// </summary>
+             /// <param name="appId"> appId. </param>
+             /// <returns> Builder. </returns>
             public Builder AppId(string appId)
             {
                 this.appId = appId;
                 return this;
             }
 
+             /// <summary>
+             /// LocationId.
+             /// </summary>
+             /// <param name="locationId"> locationId. </param>
+             /// <returns> Builder. </returns>
             public Builder LocationId(string locationId)
             {
                 this.locationId = locationId;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> TerminalRefund. </returns>
             public TerminalRefund Build()
             {
-                return new TerminalRefund(paymentId,
-                    amountMoney,
-                    id,
-                    refundId,
-                    orderId,
-                    reason,
-                    deviceId,
-                    deadlineDuration,
-                    status,
-                    cancelReason,
-                    createdAt,
-                    updatedAt,
-                    appId,
-                    locationId);
+                return new TerminalRefund(
+                    this.paymentId,
+                    this.amountMoney,
+                    this.id,
+                    this.refundId,
+                    this.orderId,
+                    this.reason,
+                    this.deviceId,
+                    this.deadlineDuration,
+                    this.status,
+                    this.cancelReason,
+                    this.createdAt,
+                    this.updatedAt,
+                    this.appId,
+                    this.locationId);
             }
         }
     }

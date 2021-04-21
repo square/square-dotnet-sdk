@@ -1,21 +1,55 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class CatalogObject 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// CatalogObject.
+    /// </summary>
+    public class CatalogObject
     {
-        public CatalogObject(string type,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CatalogObject"/> class.
+        /// </summary>
+        /// <param name="type">type.</param>
+        /// <param name="id">id.</param>
+        /// <param name="updatedAt">updated_at.</param>
+        /// <param name="version">version.</param>
+        /// <param name="isDeleted">is_deleted.</param>
+        /// <param name="customAttributeValues">custom_attribute_values.</param>
+        /// <param name="catalogV1Ids">catalog_v1_ids.</param>
+        /// <param name="presentAtAllLocations">present_at_all_locations.</param>
+        /// <param name="presentAtLocationIds">present_at_location_ids.</param>
+        /// <param name="absentAtLocationIds">absent_at_location_ids.</param>
+        /// <param name="imageId">image_id.</param>
+        /// <param name="itemData">item_data.</param>
+        /// <param name="categoryData">category_data.</param>
+        /// <param name="itemVariationData">item_variation_data.</param>
+        /// <param name="taxData">tax_data.</param>
+        /// <param name="discountData">discount_data.</param>
+        /// <param name="modifierListData">modifier_list_data.</param>
+        /// <param name="modifierData">modifier_data.</param>
+        /// <param name="timePeriodData">time_period_data.</param>
+        /// <param name="productSetData">product_set_data.</param>
+        /// <param name="pricingRuleData">pricing_rule_data.</param>
+        /// <param name="imageData">image_data.</param>
+        /// <param name="measurementUnitData">measurement_unit_data.</param>
+        /// <param name="subscriptionPlanData">subscription_plan_data.</param>
+        /// <param name="itemOptionData">item_option_data.</param>
+        /// <param name="itemOptionValueData">item_option_value_data.</param>
+        /// <param name="customAttributeDefinitionData">custom_attribute_definition_data.</param>
+        /// <param name="quickAmountsSettingsData">quick_amounts_settings_data.</param>
+        public CatalogObject(
+            string type,
             string id,
             string updatedAt = null,
             long? version = null,
@@ -44,34 +78,34 @@ namespace Square.Models
             Models.CatalogCustomAttributeDefinition customAttributeDefinitionData = null,
             Models.CatalogQuickAmountsSettings quickAmountsSettingsData = null)
         {
-            Type = type;
-            Id = id;
-            UpdatedAt = updatedAt;
-            Version = version;
-            IsDeleted = isDeleted;
-            CustomAttributeValues = customAttributeValues;
-            CatalogV1Ids = catalogV1Ids;
-            PresentAtAllLocations = presentAtAllLocations;
-            PresentAtLocationIds = presentAtLocationIds;
-            AbsentAtLocationIds = absentAtLocationIds;
-            ImageId = imageId;
-            ItemData = itemData;
-            CategoryData = categoryData;
-            ItemVariationData = itemVariationData;
-            TaxData = taxData;
-            DiscountData = discountData;
-            ModifierListData = modifierListData;
-            ModifierData = modifierData;
-            TimePeriodData = timePeriodData;
-            ProductSetData = productSetData;
-            PricingRuleData = pricingRuleData;
-            ImageData = imageData;
-            MeasurementUnitData = measurementUnitData;
-            SubscriptionPlanData = subscriptionPlanData;
-            ItemOptionData = itemOptionData;
-            ItemOptionValueData = itemOptionValueData;
-            CustomAttributeDefinitionData = customAttributeDefinitionData;
-            QuickAmountsSettingsData = quickAmountsSettingsData;
+            this.Type = type;
+            this.Id = id;
+            this.UpdatedAt = updatedAt;
+            this.Version = version;
+            this.IsDeleted = isDeleted;
+            this.CustomAttributeValues = customAttributeValues;
+            this.CatalogV1Ids = catalogV1Ids;
+            this.PresentAtAllLocations = presentAtAllLocations;
+            this.PresentAtLocationIds = presentAtLocationIds;
+            this.AbsentAtLocationIds = absentAtLocationIds;
+            this.ImageId = imageId;
+            this.ItemData = itemData;
+            this.CategoryData = categoryData;
+            this.ItemVariationData = itemVariationData;
+            this.TaxData = taxData;
+            this.DiscountData = discountData;
+            this.ModifierListData = modifierListData;
+            this.ModifierData = modifierData;
+            this.TimePeriodData = timePeriodData;
+            this.ProductSetData = productSetData;
+            this.PricingRuleData = pricingRuleData;
+            this.ImageData = imageData;
+            this.MeasurementUnitData = measurementUnitData;
+            this.SubscriptionPlanData = subscriptionPlanData;
+            this.ItemOptionData = itemOptionData;
+            this.ItemOptionValueData = itemOptionValueData;
+            this.CustomAttributeDefinitionData = customAttributeDefinitionData;
+            this.QuickAmountsSettingsData = quickAmountsSettingsData;
         }
 
         /// <summary>
@@ -115,8 +149,8 @@ namespace Square.Models
 
         /// <summary>
         /// A map (key-value pairs) of application-defined custom attribute values. The value of a key-value pair
-        /// is a [CatalogCustomAttributeValue](#type-CatalogCustomAttributeValue) object. The key is the `key` attribute
-        /// value defined in the associated [CatalogCustomAttributeDefinition](#type-CatalogCustomAttributeDefinition)
+        /// is a [CatalogCustomAttributeValue]($m/CatalogCustomAttributeValue) object. The key is the `key` attribute
+        /// value defined in the associated [CatalogCustomAttributeDefinition]($m/CatalogCustomAttributeDefinition)
         /// object defined by the application making the request.
         /// If the `CatalogCustomAttributeDefinition` object is
         /// defined by another application, the `CatalogCustomAttributeDefinition`'s key attribute value is prefixed by
@@ -150,12 +184,14 @@ namespace Square.Models
 
         /// <summary>
         /// A list of locations where the object is present, even if `present_at_all_locations` is `false`.
+        /// This can include locations that are deactivated.
         /// </summary>
         [JsonProperty("present_at_location_ids", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> PresentAtLocationIds { get; }
 
         /// <summary>
         /// A list of locations where the object is not present, even if `present_at_all_locations` is `true`.
+        /// This can include locations that are deactivated.
         /// </summary>
         [JsonProperty("absent_at_location_ids", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> AbsentAtLocationIds { get; }
@@ -167,7 +203,7 @@ namespace Square.Models
         public string ImageId { get; }
 
         /// <summary>
-        /// A [CatalogObject](#type-CatalogObject) instance of the `ITEM` type, also referred to as an item, in the catalog.
+        /// A [CatalogObject]($m/CatalogObject) instance of the `ITEM` type, also referred to as an item, in the catalog.
         /// </summary>
         [JsonProperty("item_data", NullValueHandling = NullValueHandling.Ignore)]
         public Models.CatalogItem ItemData { get; }
@@ -287,6 +323,7 @@ namespace Square.Models
         [JsonProperty("quick_amounts_settings_data", NullValueHandling = NullValueHandling.Ignore)]
         public Models.CatalogQuickAmountsSettings QuickAmountsSettingsData { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -296,38 +333,7 @@ namespace Square.Models
             return $"CatalogObject : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Type = {(Type == null ? "null" : Type.ToString())}");
-            toStringOutput.Add($"Id = {(Id == null ? "null" : Id == string.Empty ? "" : Id)}");
-            toStringOutput.Add($"UpdatedAt = {(UpdatedAt == null ? "null" : UpdatedAt == string.Empty ? "" : UpdatedAt)}");
-            toStringOutput.Add($"Version = {(Version == null ? "null" : Version.ToString())}");
-            toStringOutput.Add($"IsDeleted = {(IsDeleted == null ? "null" : IsDeleted.ToString())}");
-            toStringOutput.Add($"CustomAttributeValues = {(CustomAttributeValues == null ? "null" : CustomAttributeValues.ToString())}");
-            toStringOutput.Add($"CatalogV1Ids = {(CatalogV1Ids == null ? "null" : $"[{ string.Join(", ", CatalogV1Ids)} ]")}");
-            toStringOutput.Add($"PresentAtAllLocations = {(PresentAtAllLocations == null ? "null" : PresentAtAllLocations.ToString())}");
-            toStringOutput.Add($"PresentAtLocationIds = {(PresentAtLocationIds == null ? "null" : $"[{ string.Join(", ", PresentAtLocationIds)} ]")}");
-            toStringOutput.Add($"AbsentAtLocationIds = {(AbsentAtLocationIds == null ? "null" : $"[{ string.Join(", ", AbsentAtLocationIds)} ]")}");
-            toStringOutput.Add($"ImageId = {(ImageId == null ? "null" : ImageId == string.Empty ? "" : ImageId)}");
-            toStringOutput.Add($"ItemData = {(ItemData == null ? "null" : ItemData.ToString())}");
-            toStringOutput.Add($"CategoryData = {(CategoryData == null ? "null" : CategoryData.ToString())}");
-            toStringOutput.Add($"ItemVariationData = {(ItemVariationData == null ? "null" : ItemVariationData.ToString())}");
-            toStringOutput.Add($"TaxData = {(TaxData == null ? "null" : TaxData.ToString())}");
-            toStringOutput.Add($"DiscountData = {(DiscountData == null ? "null" : DiscountData.ToString())}");
-            toStringOutput.Add($"ModifierListData = {(ModifierListData == null ? "null" : ModifierListData.ToString())}");
-            toStringOutput.Add($"ModifierData = {(ModifierData == null ? "null" : ModifierData.ToString())}");
-            toStringOutput.Add($"TimePeriodData = {(TimePeriodData == null ? "null" : TimePeriodData.ToString())}");
-            toStringOutput.Add($"ProductSetData = {(ProductSetData == null ? "null" : ProductSetData.ToString())}");
-            toStringOutput.Add($"PricingRuleData = {(PricingRuleData == null ? "null" : PricingRuleData.ToString())}");
-            toStringOutput.Add($"ImageData = {(ImageData == null ? "null" : ImageData.ToString())}");
-            toStringOutput.Add($"MeasurementUnitData = {(MeasurementUnitData == null ? "null" : MeasurementUnitData.ToString())}");
-            toStringOutput.Add($"SubscriptionPlanData = {(SubscriptionPlanData == null ? "null" : SubscriptionPlanData.ToString())}");
-            toStringOutput.Add($"ItemOptionData = {(ItemOptionData == null ? "null" : ItemOptionData.ToString())}");
-            toStringOutput.Add($"ItemOptionValueData = {(ItemOptionValueData == null ? "null" : ItemOptionValueData.ToString())}");
-            toStringOutput.Add($"CustomAttributeDefinitionData = {(CustomAttributeDefinitionData == null ? "null" : CustomAttributeDefinitionData.ToString())}");
-            toStringOutput.Add($"QuickAmountsSettingsData = {(QuickAmountsSettingsData == null ? "null" : QuickAmountsSettingsData.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -341,216 +347,261 @@ namespace Square.Models
             }
 
             return obj is CatalogObject other &&
-                ((Type == null && other.Type == null) || (Type?.Equals(other.Type) == true)) &&
-                ((Id == null && other.Id == null) || (Id?.Equals(other.Id) == true)) &&
-                ((UpdatedAt == null && other.UpdatedAt == null) || (UpdatedAt?.Equals(other.UpdatedAt) == true)) &&
-                ((Version == null && other.Version == null) || (Version?.Equals(other.Version) == true)) &&
-                ((IsDeleted == null && other.IsDeleted == null) || (IsDeleted?.Equals(other.IsDeleted) == true)) &&
-                ((CustomAttributeValues == null && other.CustomAttributeValues == null) || (CustomAttributeValues?.Equals(other.CustomAttributeValues) == true)) &&
-                ((CatalogV1Ids == null && other.CatalogV1Ids == null) || (CatalogV1Ids?.Equals(other.CatalogV1Ids) == true)) &&
-                ((PresentAtAllLocations == null && other.PresentAtAllLocations == null) || (PresentAtAllLocations?.Equals(other.PresentAtAllLocations) == true)) &&
-                ((PresentAtLocationIds == null && other.PresentAtLocationIds == null) || (PresentAtLocationIds?.Equals(other.PresentAtLocationIds) == true)) &&
-                ((AbsentAtLocationIds == null && other.AbsentAtLocationIds == null) || (AbsentAtLocationIds?.Equals(other.AbsentAtLocationIds) == true)) &&
-                ((ImageId == null && other.ImageId == null) || (ImageId?.Equals(other.ImageId) == true)) &&
-                ((ItemData == null && other.ItemData == null) || (ItemData?.Equals(other.ItemData) == true)) &&
-                ((CategoryData == null && other.CategoryData == null) || (CategoryData?.Equals(other.CategoryData) == true)) &&
-                ((ItemVariationData == null && other.ItemVariationData == null) || (ItemVariationData?.Equals(other.ItemVariationData) == true)) &&
-                ((TaxData == null && other.TaxData == null) || (TaxData?.Equals(other.TaxData) == true)) &&
-                ((DiscountData == null && other.DiscountData == null) || (DiscountData?.Equals(other.DiscountData) == true)) &&
-                ((ModifierListData == null && other.ModifierListData == null) || (ModifierListData?.Equals(other.ModifierListData) == true)) &&
-                ((ModifierData == null && other.ModifierData == null) || (ModifierData?.Equals(other.ModifierData) == true)) &&
-                ((TimePeriodData == null && other.TimePeriodData == null) || (TimePeriodData?.Equals(other.TimePeriodData) == true)) &&
-                ((ProductSetData == null && other.ProductSetData == null) || (ProductSetData?.Equals(other.ProductSetData) == true)) &&
-                ((PricingRuleData == null && other.PricingRuleData == null) || (PricingRuleData?.Equals(other.PricingRuleData) == true)) &&
-                ((ImageData == null && other.ImageData == null) || (ImageData?.Equals(other.ImageData) == true)) &&
-                ((MeasurementUnitData == null && other.MeasurementUnitData == null) || (MeasurementUnitData?.Equals(other.MeasurementUnitData) == true)) &&
-                ((SubscriptionPlanData == null && other.SubscriptionPlanData == null) || (SubscriptionPlanData?.Equals(other.SubscriptionPlanData) == true)) &&
-                ((ItemOptionData == null && other.ItemOptionData == null) || (ItemOptionData?.Equals(other.ItemOptionData) == true)) &&
-                ((ItemOptionValueData == null && other.ItemOptionValueData == null) || (ItemOptionValueData?.Equals(other.ItemOptionValueData) == true)) &&
-                ((CustomAttributeDefinitionData == null && other.CustomAttributeDefinitionData == null) || (CustomAttributeDefinitionData?.Equals(other.CustomAttributeDefinitionData) == true)) &&
-                ((QuickAmountsSettingsData == null && other.QuickAmountsSettingsData == null) || (QuickAmountsSettingsData?.Equals(other.QuickAmountsSettingsData) == true));
+                ((this.Type == null && other.Type == null) || (this.Type?.Equals(other.Type) == true)) &&
+                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
+                ((this.UpdatedAt == null && other.UpdatedAt == null) || (this.UpdatedAt?.Equals(other.UpdatedAt) == true)) &&
+                ((this.Version == null && other.Version == null) || (this.Version?.Equals(other.Version) == true)) &&
+                ((this.IsDeleted == null && other.IsDeleted == null) || (this.IsDeleted?.Equals(other.IsDeleted) == true)) &&
+                ((this.CustomAttributeValues == null && other.CustomAttributeValues == null) || (this.CustomAttributeValues?.Equals(other.CustomAttributeValues) == true)) &&
+                ((this.CatalogV1Ids == null && other.CatalogV1Ids == null) || (this.CatalogV1Ids?.Equals(other.CatalogV1Ids) == true)) &&
+                ((this.PresentAtAllLocations == null && other.PresentAtAllLocations == null) || (this.PresentAtAllLocations?.Equals(other.PresentAtAllLocations) == true)) &&
+                ((this.PresentAtLocationIds == null && other.PresentAtLocationIds == null) || (this.PresentAtLocationIds?.Equals(other.PresentAtLocationIds) == true)) &&
+                ((this.AbsentAtLocationIds == null && other.AbsentAtLocationIds == null) || (this.AbsentAtLocationIds?.Equals(other.AbsentAtLocationIds) == true)) &&
+                ((this.ImageId == null && other.ImageId == null) || (this.ImageId?.Equals(other.ImageId) == true)) &&
+                ((this.ItemData == null && other.ItemData == null) || (this.ItemData?.Equals(other.ItemData) == true)) &&
+                ((this.CategoryData == null && other.CategoryData == null) || (this.CategoryData?.Equals(other.CategoryData) == true)) &&
+                ((this.ItemVariationData == null && other.ItemVariationData == null) || (this.ItemVariationData?.Equals(other.ItemVariationData) == true)) &&
+                ((this.TaxData == null && other.TaxData == null) || (this.TaxData?.Equals(other.TaxData) == true)) &&
+                ((this.DiscountData == null && other.DiscountData == null) || (this.DiscountData?.Equals(other.DiscountData) == true)) &&
+                ((this.ModifierListData == null && other.ModifierListData == null) || (this.ModifierListData?.Equals(other.ModifierListData) == true)) &&
+                ((this.ModifierData == null && other.ModifierData == null) || (this.ModifierData?.Equals(other.ModifierData) == true)) &&
+                ((this.TimePeriodData == null && other.TimePeriodData == null) || (this.TimePeriodData?.Equals(other.TimePeriodData) == true)) &&
+                ((this.ProductSetData == null && other.ProductSetData == null) || (this.ProductSetData?.Equals(other.ProductSetData) == true)) &&
+                ((this.PricingRuleData == null && other.PricingRuleData == null) || (this.PricingRuleData?.Equals(other.PricingRuleData) == true)) &&
+                ((this.ImageData == null && other.ImageData == null) || (this.ImageData?.Equals(other.ImageData) == true)) &&
+                ((this.MeasurementUnitData == null && other.MeasurementUnitData == null) || (this.MeasurementUnitData?.Equals(other.MeasurementUnitData) == true)) &&
+                ((this.SubscriptionPlanData == null && other.SubscriptionPlanData == null) || (this.SubscriptionPlanData?.Equals(other.SubscriptionPlanData) == true)) &&
+                ((this.ItemOptionData == null && other.ItemOptionData == null) || (this.ItemOptionData?.Equals(other.ItemOptionData) == true)) &&
+                ((this.ItemOptionValueData == null && other.ItemOptionValueData == null) || (this.ItemOptionValueData?.Equals(other.ItemOptionValueData) == true)) &&
+                ((this.CustomAttributeDefinitionData == null && other.CustomAttributeDefinitionData == null) || (this.CustomAttributeDefinitionData?.Equals(other.CustomAttributeDefinitionData) == true)) &&
+                ((this.QuickAmountsSettingsData == null && other.QuickAmountsSettingsData == null) || (this.QuickAmountsSettingsData?.Equals(other.QuickAmountsSettingsData) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1814270990;
 
-            if (Type != null)
+            if (this.Type != null)
             {
-               hashCode += Type.GetHashCode();
+               hashCode += this.Type.GetHashCode();
             }
 
-            if (Id != null)
+            if (this.Id != null)
             {
-               hashCode += Id.GetHashCode();
+               hashCode += this.Id.GetHashCode();
             }
 
-            if (UpdatedAt != null)
+            if (this.UpdatedAt != null)
             {
-               hashCode += UpdatedAt.GetHashCode();
+               hashCode += this.UpdatedAt.GetHashCode();
             }
 
-            if (Version != null)
+            if (this.Version != null)
             {
-               hashCode += Version.GetHashCode();
+               hashCode += this.Version.GetHashCode();
             }
 
-            if (IsDeleted != null)
+            if (this.IsDeleted != null)
             {
-               hashCode += IsDeleted.GetHashCode();
+               hashCode += this.IsDeleted.GetHashCode();
             }
 
-            if (CustomAttributeValues != null)
+            if (this.CustomAttributeValues != null)
             {
-               hashCode += CustomAttributeValues.GetHashCode();
+               hashCode += this.CustomAttributeValues.GetHashCode();
             }
 
-            if (CatalogV1Ids != null)
+            if (this.CatalogV1Ids != null)
             {
-               hashCode += CatalogV1Ids.GetHashCode();
+               hashCode += this.CatalogV1Ids.GetHashCode();
             }
 
-            if (PresentAtAllLocations != null)
+            if (this.PresentAtAllLocations != null)
             {
-               hashCode += PresentAtAllLocations.GetHashCode();
+               hashCode += this.PresentAtAllLocations.GetHashCode();
             }
 
-            if (PresentAtLocationIds != null)
+            if (this.PresentAtLocationIds != null)
             {
-               hashCode += PresentAtLocationIds.GetHashCode();
+               hashCode += this.PresentAtLocationIds.GetHashCode();
             }
 
-            if (AbsentAtLocationIds != null)
+            if (this.AbsentAtLocationIds != null)
             {
-               hashCode += AbsentAtLocationIds.GetHashCode();
+               hashCode += this.AbsentAtLocationIds.GetHashCode();
             }
 
-            if (ImageId != null)
+            if (this.ImageId != null)
             {
-               hashCode += ImageId.GetHashCode();
+               hashCode += this.ImageId.GetHashCode();
             }
 
-            if (ItemData != null)
+            if (this.ItemData != null)
             {
-               hashCode += ItemData.GetHashCode();
+               hashCode += this.ItemData.GetHashCode();
             }
 
-            if (CategoryData != null)
+            if (this.CategoryData != null)
             {
-               hashCode += CategoryData.GetHashCode();
+               hashCode += this.CategoryData.GetHashCode();
             }
 
-            if (ItemVariationData != null)
+            if (this.ItemVariationData != null)
             {
-               hashCode += ItemVariationData.GetHashCode();
+               hashCode += this.ItemVariationData.GetHashCode();
             }
 
-            if (TaxData != null)
+            if (this.TaxData != null)
             {
-               hashCode += TaxData.GetHashCode();
+               hashCode += this.TaxData.GetHashCode();
             }
 
-            if (DiscountData != null)
+            if (this.DiscountData != null)
             {
-               hashCode += DiscountData.GetHashCode();
+               hashCode += this.DiscountData.GetHashCode();
             }
 
-            if (ModifierListData != null)
+            if (this.ModifierListData != null)
             {
-               hashCode += ModifierListData.GetHashCode();
+               hashCode += this.ModifierListData.GetHashCode();
             }
 
-            if (ModifierData != null)
+            if (this.ModifierData != null)
             {
-               hashCode += ModifierData.GetHashCode();
+               hashCode += this.ModifierData.GetHashCode();
             }
 
-            if (TimePeriodData != null)
+            if (this.TimePeriodData != null)
             {
-               hashCode += TimePeriodData.GetHashCode();
+               hashCode += this.TimePeriodData.GetHashCode();
             }
 
-            if (ProductSetData != null)
+            if (this.ProductSetData != null)
             {
-               hashCode += ProductSetData.GetHashCode();
+               hashCode += this.ProductSetData.GetHashCode();
             }
 
-            if (PricingRuleData != null)
+            if (this.PricingRuleData != null)
             {
-               hashCode += PricingRuleData.GetHashCode();
+               hashCode += this.PricingRuleData.GetHashCode();
             }
 
-            if (ImageData != null)
+            if (this.ImageData != null)
             {
-               hashCode += ImageData.GetHashCode();
+               hashCode += this.ImageData.GetHashCode();
             }
 
-            if (MeasurementUnitData != null)
+            if (this.MeasurementUnitData != null)
             {
-               hashCode += MeasurementUnitData.GetHashCode();
+               hashCode += this.MeasurementUnitData.GetHashCode();
             }
 
-            if (SubscriptionPlanData != null)
+            if (this.SubscriptionPlanData != null)
             {
-               hashCode += SubscriptionPlanData.GetHashCode();
+               hashCode += this.SubscriptionPlanData.GetHashCode();
             }
 
-            if (ItemOptionData != null)
+            if (this.ItemOptionData != null)
             {
-               hashCode += ItemOptionData.GetHashCode();
+               hashCode += this.ItemOptionData.GetHashCode();
             }
 
-            if (ItemOptionValueData != null)
+            if (this.ItemOptionValueData != null)
             {
-               hashCode += ItemOptionValueData.GetHashCode();
+               hashCode += this.ItemOptionValueData.GetHashCode();
             }
 
-            if (CustomAttributeDefinitionData != null)
+            if (this.CustomAttributeDefinitionData != null)
             {
-               hashCode += CustomAttributeDefinitionData.GetHashCode();
+               hashCode += this.CustomAttributeDefinitionData.GetHashCode();
             }
 
-            if (QuickAmountsSettingsData != null)
+            if (this.QuickAmountsSettingsData != null)
             {
-               hashCode += QuickAmountsSettingsData.GetHashCode();
+               hashCode += this.QuickAmountsSettingsData.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Type = {(this.Type == null ? "null" : this.Type.ToString())}");
+            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id == string.Empty ? "" : this.Id)}");
+            toStringOutput.Add($"this.UpdatedAt = {(this.UpdatedAt == null ? "null" : this.UpdatedAt == string.Empty ? "" : this.UpdatedAt)}");
+            toStringOutput.Add($"this.Version = {(this.Version == null ? "null" : this.Version.ToString())}");
+            toStringOutput.Add($"this.IsDeleted = {(this.IsDeleted == null ? "null" : this.IsDeleted.ToString())}");
+            toStringOutput.Add($"CustomAttributeValues = {(this.CustomAttributeValues == null ? "null" : this.CustomAttributeValues.ToString())}");
+            toStringOutput.Add($"this.CatalogV1Ids = {(this.CatalogV1Ids == null ? "null" : $"[{string.Join(", ", this.CatalogV1Ids)} ]")}");
+            toStringOutput.Add($"this.PresentAtAllLocations = {(this.PresentAtAllLocations == null ? "null" : this.PresentAtAllLocations.ToString())}");
+            toStringOutput.Add($"this.PresentAtLocationIds = {(this.PresentAtLocationIds == null ? "null" : $"[{string.Join(", ", this.PresentAtLocationIds)} ]")}");
+            toStringOutput.Add($"this.AbsentAtLocationIds = {(this.AbsentAtLocationIds == null ? "null" : $"[{string.Join(", ", this.AbsentAtLocationIds)} ]")}");
+            toStringOutput.Add($"this.ImageId = {(this.ImageId == null ? "null" : this.ImageId == string.Empty ? "" : this.ImageId)}");
+            toStringOutput.Add($"this.ItemData = {(this.ItemData == null ? "null" : this.ItemData.ToString())}");
+            toStringOutput.Add($"this.CategoryData = {(this.CategoryData == null ? "null" : this.CategoryData.ToString())}");
+            toStringOutput.Add($"this.ItemVariationData = {(this.ItemVariationData == null ? "null" : this.ItemVariationData.ToString())}");
+            toStringOutput.Add($"this.TaxData = {(this.TaxData == null ? "null" : this.TaxData.ToString())}");
+            toStringOutput.Add($"this.DiscountData = {(this.DiscountData == null ? "null" : this.DiscountData.ToString())}");
+            toStringOutput.Add($"this.ModifierListData = {(this.ModifierListData == null ? "null" : this.ModifierListData.ToString())}");
+            toStringOutput.Add($"this.ModifierData = {(this.ModifierData == null ? "null" : this.ModifierData.ToString())}");
+            toStringOutput.Add($"this.TimePeriodData = {(this.TimePeriodData == null ? "null" : this.TimePeriodData.ToString())}");
+            toStringOutput.Add($"this.ProductSetData = {(this.ProductSetData == null ? "null" : this.ProductSetData.ToString())}");
+            toStringOutput.Add($"this.PricingRuleData = {(this.PricingRuleData == null ? "null" : this.PricingRuleData.ToString())}");
+            toStringOutput.Add($"this.ImageData = {(this.ImageData == null ? "null" : this.ImageData.ToString())}");
+            toStringOutput.Add($"this.MeasurementUnitData = {(this.MeasurementUnitData == null ? "null" : this.MeasurementUnitData.ToString())}");
+            toStringOutput.Add($"this.SubscriptionPlanData = {(this.SubscriptionPlanData == null ? "null" : this.SubscriptionPlanData.ToString())}");
+            toStringOutput.Add($"this.ItemOptionData = {(this.ItemOptionData == null ? "null" : this.ItemOptionData.ToString())}");
+            toStringOutput.Add($"this.ItemOptionValueData = {(this.ItemOptionValueData == null ? "null" : this.ItemOptionValueData.ToString())}");
+            toStringOutput.Add($"this.CustomAttributeDefinitionData = {(this.CustomAttributeDefinitionData == null ? "null" : this.CustomAttributeDefinitionData.ToString())}");
+            toStringOutput.Add($"this.QuickAmountsSettingsData = {(this.QuickAmountsSettingsData == null ? "null" : this.QuickAmountsSettingsData.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
-            var builder = new Builder(Type,
-                Id)
-                .UpdatedAt(UpdatedAt)
-                .Version(Version)
-                .IsDeleted(IsDeleted)
-                .CustomAttributeValues(CustomAttributeValues)
-                .CatalogV1Ids(CatalogV1Ids)
-                .PresentAtAllLocations(PresentAtAllLocations)
-                .PresentAtLocationIds(PresentAtLocationIds)
-                .AbsentAtLocationIds(AbsentAtLocationIds)
-                .ImageId(ImageId)
-                .ItemData(ItemData)
-                .CategoryData(CategoryData)
-                .ItemVariationData(ItemVariationData)
-                .TaxData(TaxData)
-                .DiscountData(DiscountData)
-                .ModifierListData(ModifierListData)
-                .ModifierData(ModifierData)
-                .TimePeriodData(TimePeriodData)
-                .ProductSetData(ProductSetData)
-                .PricingRuleData(PricingRuleData)
-                .ImageData(ImageData)
-                .MeasurementUnitData(MeasurementUnitData)
-                .SubscriptionPlanData(SubscriptionPlanData)
-                .ItemOptionData(ItemOptionData)
-                .ItemOptionValueData(ItemOptionValueData)
-                .CustomAttributeDefinitionData(CustomAttributeDefinitionData)
-                .QuickAmountsSettingsData(QuickAmountsSettingsData);
+            var builder = new Builder(
+                this.Type,
+                this.Id)
+                .UpdatedAt(this.UpdatedAt)
+                .Version(this.Version)
+                .IsDeleted(this.IsDeleted)
+                .CustomAttributeValues(this.CustomAttributeValues)
+                .CatalogV1Ids(this.CatalogV1Ids)
+                .PresentAtAllLocations(this.PresentAtAllLocations)
+                .PresentAtLocationIds(this.PresentAtLocationIds)
+                .AbsentAtLocationIds(this.AbsentAtLocationIds)
+                .ImageId(this.ImageId)
+                .ItemData(this.ItemData)
+                .CategoryData(this.CategoryData)
+                .ItemVariationData(this.ItemVariationData)
+                .TaxData(this.TaxData)
+                .DiscountData(this.DiscountData)
+                .ModifierListData(this.ModifierListData)
+                .ModifierData(this.ModifierData)
+                .TimePeriodData(this.TimePeriodData)
+                .ProductSetData(this.ProductSetData)
+                .PricingRuleData(this.PricingRuleData)
+                .ImageData(this.ImageData)
+                .MeasurementUnitData(this.MeasurementUnitData)
+                .SubscriptionPlanData(this.SubscriptionPlanData)
+                .ItemOptionData(this.ItemOptionData)
+                .ItemOptionValueData(this.ItemOptionValueData)
+                .CustomAttributeDefinitionData(this.CustomAttributeDefinitionData)
+                .QuickAmountsSettingsData(this.QuickAmountsSettingsData);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string type;
@@ -582,211 +633,357 @@ namespace Square.Models
             private Models.CatalogCustomAttributeDefinition customAttributeDefinitionData;
             private Models.CatalogQuickAmountsSettings quickAmountsSettingsData;
 
-            public Builder(string type,
+            public Builder(
+                string type,
                 string id)
             {
                 this.type = type;
                 this.id = id;
             }
 
+             /// <summary>
+             /// Type.
+             /// </summary>
+             /// <param name="type"> type. </param>
+             /// <returns> Builder. </returns>
             public Builder Type(string type)
             {
                 this.type = type;
                 return this;
             }
 
+             /// <summary>
+             /// Id.
+             /// </summary>
+             /// <param name="id"> id. </param>
+             /// <returns> Builder. </returns>
             public Builder Id(string id)
             {
                 this.id = id;
                 return this;
             }
 
+             /// <summary>
+             /// UpdatedAt.
+             /// </summary>
+             /// <param name="updatedAt"> updatedAt. </param>
+             /// <returns> Builder. </returns>
             public Builder UpdatedAt(string updatedAt)
             {
                 this.updatedAt = updatedAt;
                 return this;
             }
 
+             /// <summary>
+             /// Version.
+             /// </summary>
+             /// <param name="version"> version. </param>
+             /// <returns> Builder. </returns>
             public Builder Version(long? version)
             {
                 this.version = version;
                 return this;
             }
 
+             /// <summary>
+             /// IsDeleted.
+             /// </summary>
+             /// <param name="isDeleted"> isDeleted. </param>
+             /// <returns> Builder. </returns>
             public Builder IsDeleted(bool? isDeleted)
             {
                 this.isDeleted = isDeleted;
                 return this;
             }
 
+             /// <summary>
+             /// CustomAttributeValues.
+             /// </summary>
+             /// <param name="customAttributeValues"> customAttributeValues. </param>
+             /// <returns> Builder. </returns>
             public Builder CustomAttributeValues(IDictionary<string, Models.CatalogCustomAttributeValue> customAttributeValues)
             {
                 this.customAttributeValues = customAttributeValues;
                 return this;
             }
 
+             /// <summary>
+             /// CatalogV1Ids.
+             /// </summary>
+             /// <param name="catalogV1Ids"> catalogV1Ids. </param>
+             /// <returns> Builder. </returns>
             public Builder CatalogV1Ids(IList<Models.CatalogV1Id> catalogV1Ids)
             {
                 this.catalogV1Ids = catalogV1Ids;
                 return this;
             }
 
+             /// <summary>
+             /// PresentAtAllLocations.
+             /// </summary>
+             /// <param name="presentAtAllLocations"> presentAtAllLocations. </param>
+             /// <returns> Builder. </returns>
             public Builder PresentAtAllLocations(bool? presentAtAllLocations)
             {
                 this.presentAtAllLocations = presentAtAllLocations;
                 return this;
             }
 
+             /// <summary>
+             /// PresentAtLocationIds.
+             /// </summary>
+             /// <param name="presentAtLocationIds"> presentAtLocationIds. </param>
+             /// <returns> Builder. </returns>
             public Builder PresentAtLocationIds(IList<string> presentAtLocationIds)
             {
                 this.presentAtLocationIds = presentAtLocationIds;
                 return this;
             }
 
+             /// <summary>
+             /// AbsentAtLocationIds.
+             /// </summary>
+             /// <param name="absentAtLocationIds"> absentAtLocationIds. </param>
+             /// <returns> Builder. </returns>
             public Builder AbsentAtLocationIds(IList<string> absentAtLocationIds)
             {
                 this.absentAtLocationIds = absentAtLocationIds;
                 return this;
             }
 
+             /// <summary>
+             /// ImageId.
+             /// </summary>
+             /// <param name="imageId"> imageId. </param>
+             /// <returns> Builder. </returns>
             public Builder ImageId(string imageId)
             {
                 this.imageId = imageId;
                 return this;
             }
 
+             /// <summary>
+             /// ItemData.
+             /// </summary>
+             /// <param name="itemData"> itemData. </param>
+             /// <returns> Builder. </returns>
             public Builder ItemData(Models.CatalogItem itemData)
             {
                 this.itemData = itemData;
                 return this;
             }
 
+             /// <summary>
+             /// CategoryData.
+             /// </summary>
+             /// <param name="categoryData"> categoryData. </param>
+             /// <returns> Builder. </returns>
             public Builder CategoryData(Models.CatalogCategory categoryData)
             {
                 this.categoryData = categoryData;
                 return this;
             }
 
+             /// <summary>
+             /// ItemVariationData.
+             /// </summary>
+             /// <param name="itemVariationData"> itemVariationData. </param>
+             /// <returns> Builder. </returns>
             public Builder ItemVariationData(Models.CatalogItemVariation itemVariationData)
             {
                 this.itemVariationData = itemVariationData;
                 return this;
             }
 
+             /// <summary>
+             /// TaxData.
+             /// </summary>
+             /// <param name="taxData"> taxData. </param>
+             /// <returns> Builder. </returns>
             public Builder TaxData(Models.CatalogTax taxData)
             {
                 this.taxData = taxData;
                 return this;
             }
 
+             /// <summary>
+             /// DiscountData.
+             /// </summary>
+             /// <param name="discountData"> discountData. </param>
+             /// <returns> Builder. </returns>
             public Builder DiscountData(Models.CatalogDiscount discountData)
             {
                 this.discountData = discountData;
                 return this;
             }
 
+             /// <summary>
+             /// ModifierListData.
+             /// </summary>
+             /// <param name="modifierListData"> modifierListData. </param>
+             /// <returns> Builder. </returns>
             public Builder ModifierListData(Models.CatalogModifierList modifierListData)
             {
                 this.modifierListData = modifierListData;
                 return this;
             }
 
+             /// <summary>
+             /// ModifierData.
+             /// </summary>
+             /// <param name="modifierData"> modifierData. </param>
+             /// <returns> Builder. </returns>
             public Builder ModifierData(Models.CatalogModifier modifierData)
             {
                 this.modifierData = modifierData;
                 return this;
             }
 
+             /// <summary>
+             /// TimePeriodData.
+             /// </summary>
+             /// <param name="timePeriodData"> timePeriodData. </param>
+             /// <returns> Builder. </returns>
             public Builder TimePeriodData(Models.CatalogTimePeriod timePeriodData)
             {
                 this.timePeriodData = timePeriodData;
                 return this;
             }
 
+             /// <summary>
+             /// ProductSetData.
+             /// </summary>
+             /// <param name="productSetData"> productSetData. </param>
+             /// <returns> Builder. </returns>
             public Builder ProductSetData(Models.CatalogProductSet productSetData)
             {
                 this.productSetData = productSetData;
                 return this;
             }
 
+             /// <summary>
+             /// PricingRuleData.
+             /// </summary>
+             /// <param name="pricingRuleData"> pricingRuleData. </param>
+             /// <returns> Builder. </returns>
             public Builder PricingRuleData(Models.CatalogPricingRule pricingRuleData)
             {
                 this.pricingRuleData = pricingRuleData;
                 return this;
             }
 
+             /// <summary>
+             /// ImageData.
+             /// </summary>
+             /// <param name="imageData"> imageData. </param>
+             /// <returns> Builder. </returns>
             public Builder ImageData(Models.CatalogImage imageData)
             {
                 this.imageData = imageData;
                 return this;
             }
 
+             /// <summary>
+             /// MeasurementUnitData.
+             /// </summary>
+             /// <param name="measurementUnitData"> measurementUnitData. </param>
+             /// <returns> Builder. </returns>
             public Builder MeasurementUnitData(Models.CatalogMeasurementUnit measurementUnitData)
             {
                 this.measurementUnitData = measurementUnitData;
                 return this;
             }
 
+             /// <summary>
+             /// SubscriptionPlanData.
+             /// </summary>
+             /// <param name="subscriptionPlanData"> subscriptionPlanData. </param>
+             /// <returns> Builder. </returns>
             public Builder SubscriptionPlanData(Models.CatalogSubscriptionPlan subscriptionPlanData)
             {
                 this.subscriptionPlanData = subscriptionPlanData;
                 return this;
             }
 
+             /// <summary>
+             /// ItemOptionData.
+             /// </summary>
+             /// <param name="itemOptionData"> itemOptionData. </param>
+             /// <returns> Builder. </returns>
             public Builder ItemOptionData(Models.CatalogItemOption itemOptionData)
             {
                 this.itemOptionData = itemOptionData;
                 return this;
             }
 
+             /// <summary>
+             /// ItemOptionValueData.
+             /// </summary>
+             /// <param name="itemOptionValueData"> itemOptionValueData. </param>
+             /// <returns> Builder. </returns>
             public Builder ItemOptionValueData(Models.CatalogItemOptionValue itemOptionValueData)
             {
                 this.itemOptionValueData = itemOptionValueData;
                 return this;
             }
 
+             /// <summary>
+             /// CustomAttributeDefinitionData.
+             /// </summary>
+             /// <param name="customAttributeDefinitionData"> customAttributeDefinitionData. </param>
+             /// <returns> Builder. </returns>
             public Builder CustomAttributeDefinitionData(Models.CatalogCustomAttributeDefinition customAttributeDefinitionData)
             {
                 this.customAttributeDefinitionData = customAttributeDefinitionData;
                 return this;
             }
 
+             /// <summary>
+             /// QuickAmountsSettingsData.
+             /// </summary>
+             /// <param name="quickAmountsSettingsData"> quickAmountsSettingsData. </param>
+             /// <returns> Builder. </returns>
             public Builder QuickAmountsSettingsData(Models.CatalogQuickAmountsSettings quickAmountsSettingsData)
             {
                 this.quickAmountsSettingsData = quickAmountsSettingsData;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> CatalogObject. </returns>
             public CatalogObject Build()
             {
-                return new CatalogObject(type,
-                    id,
-                    updatedAt,
-                    version,
-                    isDeleted,
-                    customAttributeValues,
-                    catalogV1Ids,
-                    presentAtAllLocations,
-                    presentAtLocationIds,
-                    absentAtLocationIds,
-                    imageId,
-                    itemData,
-                    categoryData,
-                    itemVariationData,
-                    taxData,
-                    discountData,
-                    modifierListData,
-                    modifierData,
-                    timePeriodData,
-                    productSetData,
-                    pricingRuleData,
-                    imageData,
-                    measurementUnitData,
-                    subscriptionPlanData,
-                    itemOptionData,
-                    itemOptionValueData,
-                    customAttributeDefinitionData,
-                    quickAmountsSettingsData);
+                return new CatalogObject(
+                    this.type,
+                    this.id,
+                    this.updatedAt,
+                    this.version,
+                    this.isDeleted,
+                    this.customAttributeValues,
+                    this.catalogV1Ids,
+                    this.presentAtAllLocations,
+                    this.presentAtLocationIds,
+                    this.absentAtLocationIds,
+                    this.imageId,
+                    this.itemData,
+                    this.categoryData,
+                    this.itemVariationData,
+                    this.taxData,
+                    this.discountData,
+                    this.modifierListData,
+                    this.modifierData,
+                    this.timePeriodData,
+                    this.productSetData,
+                    this.pricingRuleData,
+                    this.imageData,
+                    this.measurementUnitData,
+                    this.subscriptionPlanData,
+                    this.itemOptionData,
+                    this.itemOptionValueData,
+                    this.customAttributeDefinitionData,
+                    this.quickAmountsSettingsData);
             }
         }
     }

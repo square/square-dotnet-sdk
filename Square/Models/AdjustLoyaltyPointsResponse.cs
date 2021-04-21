@@ -1,28 +1,39 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square.Http.Client;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class AdjustLoyaltyPointsResponse 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Http.Client;
+    using Square.Utilities;
+
+    /// <summary>
+    /// AdjustLoyaltyPointsResponse.
+    /// </summary>
+    public class AdjustLoyaltyPointsResponse
     {
-        public AdjustLoyaltyPointsResponse(IList<Models.Error> errors = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AdjustLoyaltyPointsResponse"/> class.
+        /// </summary>
+        /// <param name="errors">errors.</param>
+        /// <param name="mEvent">event.</param>
+        public AdjustLoyaltyPointsResponse(
+            IList<Models.Error> errors = null,
             Models.LoyaltyEvent mEvent = null)
         {
-            Errors = errors;
-            MEvent = mEvent;
+            this.Errors = errors;
+            this.MEvent = mEvent;
         }
 
+        /// <summary>
+        /// Gets http context.
+        /// </summary>
         [JsonIgnore]
         public HttpContext Context { get; internal set; }
 
@@ -33,12 +44,13 @@ namespace Square.Models
         public IList<Models.Error> Errors { get; }
 
         /// <summary>
-        /// Provides information about a loyalty event. 
+        /// Provides information about a loyalty event.
         /// For more information, see [Loyalty events](https://developer.squareup.com/docs/loyalty-api/overview/#loyalty-events).
         /// </summary>
         [JsonProperty("event", NullValueHandling = NullValueHandling.Ignore)]
         public Models.LoyaltyEvent MEvent { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -48,12 +60,7 @@ namespace Square.Models
             return $"AdjustLoyaltyPointsResponse : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Errors = {(Errors == null ? "null" : $"[{ string.Join(", ", Errors)} ]")}");
-            toStringOutput.Add($"MEvent = {(MEvent == null ? "null" : MEvent.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -67,64 +74,95 @@ namespace Square.Models
             }
 
             return obj is AdjustLoyaltyPointsResponse other &&
-                ((Context == null && other.Context == null) || (Context?.Equals(other.Context) == true)) &&
-                ((Errors == null && other.Errors == null) || (Errors?.Equals(other.Errors) == true)) &&
-                ((MEvent == null && other.MEvent == null) || (MEvent?.Equals(other.MEvent) == true));
+                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
+                ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true)) &&
+                ((this.MEvent == null && other.MEvent == null) || (this.MEvent?.Equals(other.MEvent) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 1284922257;
 
-            if (Context != null)
+            if (this.Context != null)
             {
-                hashCode += Context.GetHashCode();
+                hashCode += this.Context.GetHashCode();
             }
 
-            if (Errors != null)
+            if (this.Errors != null)
             {
-               hashCode += Errors.GetHashCode();
+               hashCode += this.Errors.GetHashCode();
             }
 
-            if (MEvent != null)
+            if (this.MEvent != null)
             {
-               hashCode += MEvent.GetHashCode();
+               hashCode += this.MEvent.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Errors = {(this.Errors == null ? "null" : $"[{string.Join(", ", this.Errors)} ]")}");
+            toStringOutput.Add($"this.MEvent = {(this.MEvent == null ? "null" : this.MEvent.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .Errors(Errors)
-                .MEvent(MEvent);
+                .Errors(this.Errors)
+                .MEvent(this.MEvent);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private IList<Models.Error> errors;
             private Models.LoyaltyEvent mEvent;
 
-
-
+             /// <summary>
+             /// Errors.
+             /// </summary>
+             /// <param name="errors"> errors. </param>
+             /// <returns> Builder. </returns>
             public Builder Errors(IList<Models.Error> errors)
             {
                 this.errors = errors;
                 return this;
             }
 
+             /// <summary>
+             /// MEvent.
+             /// </summary>
+             /// <param name="mEvent"> mEvent. </param>
+             /// <returns> Builder. </returns>
             public Builder MEvent(Models.LoyaltyEvent mEvent)
             {
                 this.mEvent = mEvent;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> AdjustLoyaltyPointsResponse. </returns>
             public AdjustLoyaltyPointsResponse Build()
             {
-                return new AdjustLoyaltyPointsResponse(errors,
-                    mEvent);
+                return new AdjustLoyaltyPointsResponse(
+                    this.errors,
+                    this.mEvent);
             }
         }
     }

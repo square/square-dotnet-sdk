@@ -31,7 +31,8 @@ You must provide the following values in your request to this endpoint:
 Learn about [Troubleshooting the Teams API](https://developer.squareup.com/docs/team/troubleshooting#createteammember).
 
 ```csharp
-CreateTeamMemberAsync(Models.CreateTeamMemberRequest body)
+CreateTeamMemberAsync(
+    Models.CreateTeamMemberRequest body)
 ```
 
 ## Parameters
@@ -85,10 +86,11 @@ This process is non-transactional and will process as much of the request as is 
 the request cannot be successfully processed, the request will NOT be marked as failed, but the body of the response
 will contain explicit error information for this particular create.
 
-Learn about [Troubleshooting the Teams API](https://developer.squareup.com/docs/team/troubleshooting#bulkcreateteammembers).
+Learn about [Troubleshooting the Teams API](https://developer.squareup.com/docs/team/troubleshooting#bulk-create-team-members).
 
 ```csharp
-BulkCreateTeamMembersAsync(Models.BulkCreateTeamMembersRequest body)
+BulkCreateTeamMembersAsync(
+    Models.BulkCreateTeamMembersRequest body)
 ```
 
 ## Parameters
@@ -124,10 +126,11 @@ Updates multiple `TeamMember` objects. The updated `TeamMember` objects will be 
 This process is non-transactional and will process as much of the request as is possible. If one of the updates in
 the request cannot be successfully processed, the request will NOT be marked as failed, but the body of the response
 will contain explicit error information for this particular update.
-Learn about [Troubleshooting the Teams API](https://developer.squareup.com/docs/team/troubleshooting#bulkupdateteammembers).
+Learn about [Troubleshooting the Teams API](https://developer.squareup.com/docs/team/troubleshooting#bulk-update-team-members).
 
 ```csharp
-BulkUpdateTeamMembersAsync(Models.BulkUpdateTeamMembersRequest body)
+BulkUpdateTeamMembersAsync(
+    Models.BulkUpdateTeamMembersRequest body)
 ```
 
 ## Parameters
@@ -166,7 +169,8 @@ The list to be returned can be filtered by:
 - `status`
 
 ```csharp
-SearchTeamMembersAsync(Models.SearchTeamMembersRequest body)
+SearchTeamMembersAsync(
+    Models.SearchTeamMembersRequest body)
 ```
 
 ## Parameters
@@ -208,10 +212,11 @@ catch (ApiException e){};
 # Retrieve Team Member
 
 Retrieve a `TeamMember` object for the given `TeamMember.id`.
-Learn about [Troubleshooting the Teams API](https://developer.squareup.com/docs/team/troubleshooting#retrieveteammember).
+Learn about [Troubleshooting the Teams API](https://developer.squareup.com/docs/team/troubleshooting#retrieve-a-team-member).
 
 ```csharp
-RetrieveTeamMemberAsync(string teamMemberId)
+RetrieveTeamMemberAsync(
+    string teamMemberId)
 ```
 
 ## Parameters
@@ -240,10 +245,12 @@ catch (ApiException e){};
 # Update Team Member
 
 Updates a single `TeamMember` object. The `TeamMember` will be returned on successful updates.
-Learn about [Troubleshooting the Teams API](https://developer.squareup.com/docs/team/troubleshooting#updateteammember).
+Learn about [Troubleshooting the Teams API](https://developer.squareup.com/docs/team/troubleshooting#update-a-team-member).
 
 ```csharp
-UpdateTeamMemberAsync(string teamMemberId, Models.UpdateTeamMemberRequest body)
+UpdateTeamMemberAsync(
+    string teamMemberId,
+    Models.UpdateTeamMemberRequest body)
 ```
 
 ## Parameters
@@ -298,7 +305,8 @@ by `TeamMember.id`.
 Learn about [Troubleshooting the Teams API](https://developer.squareup.com/docs/team/troubleshooting#retrievewagesetting).
 
 ```csharp
-RetrieveWageSettingAsync(string teamMemberId)
+RetrieveWageSettingAsync(
+    string teamMemberId)
 ```
 
 ## Parameters
@@ -330,10 +338,12 @@ Creates or updates a `WageSetting` object. The object is created if a
 `WageSetting` with the specified `team_member_id` does not exist. Otherwise,
 it fully replaces the `WageSetting` object for the team member.
 The `WageSetting` will be returned upon successful update.
-Learn about [Troubleshooting the Teams API](https://developer.squareup.com/docs/team/troubleshooting#updatewagesetting).
+Learn about [Troubleshooting the Teams API](https://developer.squareup.com/docs/team/troubleshooting#create-or-update-a-wage-setting).
 
 ```csharp
-UpdateWageSettingAsync(string teamMemberId, Models.UpdateWageSettingRequest body)
+UpdateWageSettingAsync(
+    string teamMemberId,
+    Models.UpdateWageSettingRequest body)
 ```
 
 ## Parameters

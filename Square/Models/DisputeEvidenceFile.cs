@@ -1,25 +1,33 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class DisputeEvidenceFile 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// DisputeEvidenceFile.
+    /// </summary>
+    public class DisputeEvidenceFile
     {
-        public DisputeEvidenceFile(string filename = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DisputeEvidenceFile"/> class.
+        /// </summary>
+        /// <param name="filename">filename.</param>
+        /// <param name="filetype">filetype.</param>
+        public DisputeEvidenceFile(
+            string filename = null,
             string filetype = null)
         {
-            Filename = filename;
-            Filetype = filetype;
+            this.Filename = filename;
+            this.Filetype = filetype;
         }
 
         /// <summary>
@@ -34,6 +42,7 @@ namespace Square.Models
         [JsonProperty("filetype", NullValueHandling = NullValueHandling.Ignore)]
         public string Filetype { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -43,12 +52,7 @@ namespace Square.Models
             return $"DisputeEvidenceFile : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Filename = {(Filename == null ? "null" : Filename == string.Empty ? "" : Filename)}");
-            toStringOutput.Add($"Filetype = {(Filetype == null ? "null" : Filetype == string.Empty ? "" : Filetype)}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -62,58 +66,89 @@ namespace Square.Models
             }
 
             return obj is DisputeEvidenceFile other &&
-                ((Filename == null && other.Filename == null) || (Filename?.Equals(other.Filename) == true)) &&
-                ((Filetype == null && other.Filetype == null) || (Filetype?.Equals(other.Filetype) == true));
+                ((this.Filename == null && other.Filename == null) || (this.Filename?.Equals(other.Filename) == true)) &&
+                ((this.Filetype == null && other.Filetype == null) || (this.Filetype?.Equals(other.Filetype) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 868250934;
 
-            if (Filename != null)
+            if (this.Filename != null)
             {
-               hashCode += Filename.GetHashCode();
+               hashCode += this.Filename.GetHashCode();
             }
 
-            if (Filetype != null)
+            if (this.Filetype != null)
             {
-               hashCode += Filetype.GetHashCode();
+               hashCode += this.Filetype.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Filename = {(this.Filename == null ? "null" : this.Filename == string.Empty ? "" : this.Filename)}");
+            toStringOutput.Add($"this.Filetype = {(this.Filetype == null ? "null" : this.Filetype == string.Empty ? "" : this.Filetype)}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .Filename(Filename)
-                .Filetype(Filetype);
+                .Filename(this.Filename)
+                .Filetype(this.Filetype);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string filename;
             private string filetype;
 
-
-
+             /// <summary>
+             /// Filename.
+             /// </summary>
+             /// <param name="filename"> filename. </param>
+             /// <returns> Builder. </returns>
             public Builder Filename(string filename)
             {
                 this.filename = filename;
                 return this;
             }
 
+             /// <summary>
+             /// Filetype.
+             /// </summary>
+             /// <param name="filetype"> filetype. </param>
+             /// <returns> Builder. </returns>
             public Builder Filetype(string filetype)
             {
                 this.filetype = filetype;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> DisputeEvidenceFile. </returns>
             public DisputeEvidenceFile Build()
             {
-                return new DisputeEvidenceFile(filename,
-                    filetype);
+                return new DisputeEvidenceFile(
+                    this.filename,
+                    this.filetype);
             }
         }
     }

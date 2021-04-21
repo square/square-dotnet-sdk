@@ -1,19 +1,19 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Newtonsoft.Json.Linq;
-
 namespace Square.Utilities
 {
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Globalization;
+    using System.IO;
+    using System.Linq;
+    using System.Reflection;
+    using System.Text;
+    using System.Text.RegularExpressions;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Newtonsoft.Json.Linq;
+
     /// <summary>
     /// ApiHelper class contains a bunch of helper methods.
     /// </summary>
@@ -22,37 +22,31 @@ namespace Square.Utilities
         /// <summary>
         /// DateTime format to use for parsing and converting dates.
         /// </summary>
-        public static string DateTimeFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss.FFFFFFFK";
-
-        /// <summary>
-        /// Creates a deep clone of an object by serializing it into a json string 
-        /// and then deserializing back into an object.
-        /// </summary>
-        /// <typeparam name="T">The type of the obj parameter as well as the return object</typeparam>
-        /// <param name="obj">The object to clone</param>
-        /// <returns></returns>
-        internal static T DeepCloneObject<T>(T obj)
-        {
-            return JsonDeserialize<T>(JsonSerialize(obj));
-        }
+        private static readonly string DateTimeFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss.FFFFFFFK";
 
         /// <summary>
         /// JSON Serialization of a given object.
         /// </summary>
-        /// <param name="obj">The object to serialize into JSON</param>
-        /// <param name="converter">The converter to use for date time conversion</param>
-        /// <returns>The serialized Json string representation of the given object</returns>
+        /// <param name="obj">The object to serialize into JSON.</param>
+        /// <param name="converter">The converter to use for date time conversion.</param>
+        /// <returns>The serialized Json string representation of the given object.</returns>
         public static string JsonSerialize(object obj, JsonConverter converter = null)
         {
-            if (null == obj)
+            if (obj == null)
+            {
                 return null;
+            }
 
             var settings = new JsonSerializerSettings();
 
             if (converter == null)
+            {
                 settings.Converters.Add(new IsoDateTimeConverter());
+            }
             else
+            {
                 settings.Converters.Add(converter);
+            }
 
             return JsonConvert.SerializeObject(obj, Formatting.None, settings);
         }
@@ -60,54 +54,75 @@ namespace Square.Utilities
         /// <summary>
         /// JSON Deserialization of the given json string.
         /// </summary>
-        /// <param name="json">The json string to deserialize</param>
-        /// <param name="converter">The converter to use for date time conversion</param>
-        /// <typeparam name="T">The type of the object to desialize into</typeparam>
-        /// <returns>The deserialized object</returns>
+        /// <param name="json">The json string to deserialize.</param>
+        /// <param name="converter">The converter to use for date time conversion.</param>
+        /// <typeparam name="T">The type of the object to desialize into.</typeparam>
+        /// <returns>The deserialized object.</returns>
         public static T JsonDeserialize<T>(string json, JsonConverter converter = null)
         {
             if (string.IsNullOrWhiteSpace(json))
-                return default(T);
+            {
+                return default;
+            }
+
             if (converter == null)
+            {
                 return JsonConvert.DeserializeObject<T>(json, new IsoDateTimeConverter());
+            }
             else
+            {
                 return JsonConvert.DeserializeObject<T>(json, converter);
+            }
         }
 
         /// <summary>
         /// Replaces template parameters in the given url.
         /// </summary>
-        /// <param name="queryUrl">The query url string to replace the template parameters</param>
-        /// <param name="parameters">The parameters to replace in the url</param>
+        /// <param name="queryBuilder">The queryBuilder to replace the template parameters.</param>
+        /// <param name="parameters">The parameters to replace in the url.</param>
         public static void AppendUrlWithTemplateParameters(StringBuilder queryBuilder, IEnumerable<KeyValuePair<string, object>> parameters)
         {
-            //perform parameter validation
-            if (null == queryBuilder)
+            // perform parameter validation
+            if (queryBuilder == null)
+            {
                 throw new ArgumentNullException("queryBuilder");
+            }
 
-            if (null == parameters)
+            if (parameters == null)
+            {
                 return;
+            }
 
-            //iterate and replace parameters
+            // iterate and replace parameters
             foreach (KeyValuePair<string, object> pair in parameters)
             {
                 string replaceValue = string.Empty;
 
-                //load element value as string
-                if (null == pair.Value)
-                    replaceValue = "";
+                // load element value as string
+                if (pair.Value == null)
+                {
+                    replaceValue = string.Empty;
+                }
                 else if (pair.Value is ICollection)
-                    replaceValue = flattenCollection(pair.Value as ICollection, ArrayDeserialization.None, '/', false);
+                {
+                    replaceValue = FlattenCollection(pair.Value as ICollection, ArrayDeserialization.None, '/', false);
+                }
                 else if (pair.Value is DateTime)
+                {
                     replaceValue = ((DateTime)pair.Value).ToString(DateTimeFormat);
+                }
                 else if (pair.Value is DateTimeOffset)
-                    replaceValue = ((DateTimeOffset)pair.Value).ToString(DateTimeFormat);
+                {
+                replaceValue = ((DateTimeOffset)pair.Value).ToString(DateTimeFormat);
+                }
                 else
-                    replaceValue = pair.Value.ToString();
+                {
+                replaceValue = pair.Value.ToString();
+                }
 
                 replaceValue = Uri.EscapeUriString(replaceValue);
 
-                //find the template parameter and replace it with its value
+                // find the template parameter and replace it with its value
                 queryBuilder.Replace(string.Format("{{{0}}}", pair.Key), replaceValue);
             }
         }
@@ -115,172 +130,103 @@ namespace Square.Utilities
         /// <summary>
         /// Appends the given set of parameters to the given query string.
         /// </summary>
-        /// <param name="queryUrl">The query url string to append the parameters</param>
-        /// <param name="parameters">The parameters to append</param>
+        /// <param name="queryBuilder">The queryBuilder to append the parameters.</param>
+        /// <param name="parameters">The parameters to append.</param>
+        /// <param name="arrayDeserializationFormat">arrayDeserializationFormat.</param>
+        /// <param name="separator">separator.</param>
         public static void AppendUrlWithQueryParameters(StringBuilder queryBuilder, IEnumerable<KeyValuePair<string, object>> parameters, ArrayDeserialization arrayDeserializationFormat = ArrayDeserialization.UnIndexed, char separator = '&')
         {
-            //perform parameter validation
-            if (null == queryBuilder)
+            // perform parameter validation
+            if (queryBuilder == null)
+            {
                 throw new ArgumentNullException("queryBuilder");
+            }
 
-            if (null == parameters)
+            if (parameters == null)
+            {
                 return;
+            }
 
-            //does the query string already has parameters
-            bool hasParams = (indexOf(queryBuilder, "?") > 0);
+            // does the query string already has parameters
+            bool hasParams = IndexOf(queryBuilder, "?") > 0;
 
-            //iterate and append parameters
+            // iterate and append parameters
             foreach (KeyValuePair<string, object> pair in parameters)
             {
-                //ignore null values
+                // ignore null values
                 if (pair.Value == null)
-                    continue;
+                {
+                continue;
+                }
 
-                //if already has parameters, use the &amp; to append new parameters
-                queryBuilder.Append((hasParams) ? '&' : '?');
+                // if already has parameters, use the &amp; to append new parameters
+                queryBuilder.Append(hasParams ? '&' : '?');
 
-                //indicate that now the query has some params
+                // indicate that now the query has some params
                 hasParams = true;
 
                 string paramKeyValPair;
 
-                //load element value as string
+                // load element value as string
                 if (pair.Value is ICollection)
-                    paramKeyValPair = flattenCollection(pair.Value as ICollection, arrayDeserializationFormat, separator, true, Uri.EscapeDataString(pair.Key));
+                {
+                    paramKeyValPair = FlattenCollection(pair.Value as ICollection, arrayDeserializationFormat, separator, true, Uri.EscapeDataString(pair.Key));
+                }
                 else if (pair.Value is DateTime)
+                {
                     paramKeyValPair = string.Format("{0}={1}", Uri.EscapeDataString(pair.Key), ((DateTime)pair.Value).ToString(DateTimeFormat));
+                }
                 else if (pair.Value is DateTimeOffset)
+                {
                     paramKeyValPair = string.Format("{0}={1}", Uri.EscapeDataString(pair.Key), ((DateTimeOffset)pair.Value).ToString(DateTimeFormat));
+                }
                 else
+                {
                     paramKeyValPair = string.Format("{0}={1}", Uri.EscapeDataString(pair.Key), Uri.EscapeDataString(pair.Value.ToString()));
+                }
 
-                //append keyval pair for current parameter
+                // append keyval pair for current parameter
                 queryBuilder.Append(paramKeyValPair);
             }
         }
 
         /// <summary>
-        /// StringBuilder extension method to implement IndexOf functionality.
-        /// This does a StringComparison.Ordinal kind of comparison.
-        /// </summary>
-        /// <param name="stringBuilder">The string builder to find the index in</param>
-        /// <param name="strCheck">The string to locate in the string builder</param>
-        /// <returns>The index of string inside the string builder</returns>
-        private static int indexOf(StringBuilder stringBuilder, string strCheck)
-        {
-            if (stringBuilder == null)
-                throw new ArgumentNullException("stringBuilder");
-
-            if (strCheck == null)
-                return 0;
-
-            //iterate over the input
-            for (int inputCounter = 0; inputCounter < stringBuilder.Length; inputCounter++)
-            {
-                int matchCounter;
-
-                //attempt to locate a potential match
-                for (matchCounter = 0;
-                        (matchCounter < strCheck.Length)
-                        && (inputCounter + matchCounter < stringBuilder.Length)
-                        && (stringBuilder[inputCounter + matchCounter] == strCheck[matchCounter]);
-                    matchCounter++) ;
-
-                //verify the match
-                if (matchCounter == strCheck.Length)
-                    return inputCounter;
-            }
-
-            return -1;
-        }
-
-        /// <summary>
         /// Validates and processes the given query Url to clean empty slashes.
         /// </summary>
-        /// <param name="queryBuilder">The given query Url to process</param>
-        /// <returns>Clean Url as string</returns>
+        /// <param name="queryBuilder">The given query Url to process.</param>
+        /// <returns>Clean Url as string.</returns>
         public static string CleanUrl(StringBuilder queryBuilder)
         {
-            //convert to immutable string
+            // convert to immutable string
             string url = queryBuilder.ToString();
 
-            //ensure that the urls are absolute
+            // ensure that the urls are absolute
             Match match = Regex.Match(url, "^https?://[^/]+");
             if (!match.Success)
+            {
                 throw new ArgumentException("Invalid Url format.");
+            }
 
-            //remove redundant forward slashes
+            // remove redundant forward slashes
             int index = url.IndexOf('?');
             string protocol = match.Value;
             string query = url.Substring(protocol.Length, (index == -1 ? url.Length : index) - protocol.Length);
             query = Regex.Replace(query, "//+", "/");
-            string parameters = index == -1 ? "" : url.Substring(index);
+            string parameters = index == -1 ? string.Empty : url.Substring(index);
 
-            //return process url
+            // return process url
             return string.Concat(protocol, query, parameters);
-        }
-
-        /// <summary>
-        /// Used for flattening a collection of objects into a string 
-        /// </summary>
-        /// <param name="array">Array of elements to flatten</param>
-        /// <param name="fmt">Format string to use for array flattening</param>
-        /// <param name="separator">Separator to use for string concat</param>
-        /// <returns>Representative string made up of array elements</returns>
-        private static string flattenCollection(ICollection array, ArrayDeserialization fmt, char separator,
-            bool urlEncode, string key = "")
-        {
-            StringBuilder builder = new StringBuilder();
-
-            string format = string.Empty;
-            if (fmt == ArrayDeserialization.UnIndexed)
-                format = String.Format("{0}[]={{0}}{{1}}", key);
-            else if (fmt == ArrayDeserialization.Indexed)
-                format = String.Format("{0}[{{2}}]={{0}}{{1}}", key);
-            else if (fmt == ArrayDeserialization.Plain)
-                format = String.Format("{0}={{0}}{{1}}", key);
-            else if (fmt == ArrayDeserialization.Csv || fmt == ArrayDeserialization.Psv ||
-                     fmt == ArrayDeserialization.Tsv)
-            {
-                builder.Append(String.Format("{0}=", key));
-                format = "{0}{1}";
-            }
-            else
-                format = "{0}{1}";
-
-            //append all elements in the array into a string
-            int index = 0;
-            foreach (object element in array)
-                builder.AppendFormat(format, getElementValue(element, urlEncode), separator, index++);
-            //remove the last separator, if appended
-            if ((builder.Length > 1) && (builder[builder.Length - 1] == separator))
-                builder.Length -= 1;
-
-            return builder.ToString();
-        }
-
-        private static string getElementValue(object element, bool urlEncode)
-        {
-            string elemValue = null;
-
-            //replace null values with empty string to maintain index order
-            if (null == element)
-                elemValue = string.Empty;
-            else if (element is DateTime)
-                elemValue = ((DateTime) element).ToString(DateTimeFormat);
-            else if (element is DateTimeOffset)
-                elemValue = ((DateTimeOffset) element).ToString(DateTimeFormat);
-            else
-                elemValue = element.ToString();
-
-            if (urlEncode)
-                elemValue = Uri.EscapeDataString(elemValue);
-            return elemValue;
         }
 
         /// <summary>
         /// Prepares parameters for serialization as a form encoded string by flattening complex Types such as Collections and Models to a list of KeyValuePairs, where each value is a string representation of the original Type.
         /// </summary>
+        /// <param name="name">name.</param>
+        /// <param name="value">value.</param>
+        /// <param name="keys">keys.</param>
+        /// <param name="propInfo">propInfo.</param>
+        /// <param name="arrayDeserializationFormat">arrayDeserializationFormat.</param>
+        /// <returns>List of KeyValuePairs.</returns>
         public static List<KeyValuePair<string, object>> PrepareFormFieldsFromObject(string name, object value, List<KeyValuePair<string, object>> keys = null, PropertyInfo propInfo = null, ArrayDeserialization arrayDeserializationFormat = ArrayDeserialization.UnIndexed)
         {
             keys = keys ?? new List<KeyValuePair<string, object>>();
@@ -291,29 +237,29 @@ namespace Square.Utilities
             }
             else if (value is Stream)
             {
-                keys.Add(new KeyValuePair<string, object>(name,value));
+                keys.Add(new KeyValuePair<string, object>(name, value));
                 return keys;
             }
             else if (value is JObject)
             {
-                var valueAccept = (value as JObject);
+                var valueAccept = value as JObject;
                 foreach (var property in valueAccept.Properties())
                 {
                     string pKey = property.Name;
                     object pValue = property.Value;
                     var fullSubName = name + '[' + pKey + ']';
-                    PrepareFormFieldsFromObject(fullSubName, pValue, keys, propInfo,arrayDeserializationFormat);
+                    PrepareFormFieldsFromObject(fullSubName, pValue, keys, propInfo, arrayDeserializationFormat);
                 }
             }
             else if (value is IList)
             {
-                var enumerator = ((IEnumerable) value).GetEnumerator();
+                var enumerator = ((IEnumerable)value).GetEnumerator();
 
                 var hasNested = false;
                 while (enumerator.MoveNext())
                 {
                     var subValue = enumerator.Current;
-                    if (subValue != null && (subValue is JObject || subValue is IList || subValue is IDictionary || !(subValue.GetType().Namespace.StartsWith("System"))))
+                    if (subValue != null && (subValue is JObject || subValue is IList || subValue is IDictionary || !subValue.GetType().Namespace.StartsWith("System")))
                     {
                         hasNested = true;
                         break;
@@ -326,13 +272,21 @@ namespace Square.Utilities
                 {
                     var fullSubName = name + '[' + i + ']';
                     if (!hasNested && arrayDeserializationFormat == ArrayDeserialization.UnIndexed)
+                    {
                         fullSubName = name + "[]";
+                    }
                     else if (!hasNested && arrayDeserializationFormat == ArrayDeserialization.Plain)
+                    {
                         fullSubName = name;
-                    
+                    }
+
                     var subValue = enumerator.Current;
-                    if (subValue == null) continue;
-                    PrepareFormFieldsFromObject(fullSubName, subValue, keys, propInfo,arrayDeserializationFormat);
+                    if (subValue == null)
+                    {
+                        continue;
+                    }
+
+                    PrepareFormFieldsFromObject(fullSubName, subValue, keys, propInfo, arrayDeserializationFormat);
                     i++;
                 }
             }
@@ -342,43 +296,23 @@ namespace Square.Utilities
             }
             else if (value is Enum)
             {
-#if WINDOWS_UWP || NETSTANDARD1_3
-                Assembly thisAssembly = typeof(ApiHelper).GetTypeInfo().Assembly;
-#else
-                Assembly thisAssembly = Assembly.GetExecutingAssembly();
-#endif
-                string enumTypeName = value.GetType().FullName;
-                Type enumHelperType = thisAssembly.GetType(string.Format("{0}Helper", enumTypeName));
-                object enumValue = (int) value;
-
-                if (enumHelperType != null)
-                {
-                    //this enum has an associated helper, use that to load the value
-#if NETSTANDARD1_3
-                    MethodInfo enumHelperMethod = enumHelperType.GetRuntimeMethod("ToValue", new[] { value.GetType() });
-#else
-                    MethodInfo enumHelperMethod = enumHelperType.GetMethod("ToValue", new[] { value.GetType() });
-#endif
-                    if (enumHelperMethod != null)
-                        enumValue = enumHelperMethod.Invoke(null, new object[] {value});
-                }
-
+                var enumValue = JsonSerialize(value).Trim('\"');
                 keys.Add(new KeyValuePair<string, object>(name, enumValue));
             }
             else if (value is IDictionary)
             {
-                var obj = (IDictionary) value;
+                var obj = (IDictionary)value;
                 foreach (var sName in obj.Keys)
                 {
                     var subName = sName.ToString();
                     var subValue = obj[subName];
                     string fullSubName = string.IsNullOrWhiteSpace(name) ? subName : name + '[' + subName + ']';
-                    PrepareFormFieldsFromObject(fullSubName, subValue, keys, propInfo,arrayDeserializationFormat);
+                    PrepareFormFieldsFromObject(fullSubName, subValue, keys, propInfo, arrayDeserializationFormat);
                 }
             }
-            else if (!(value.GetType().Namespace.StartsWith("System")))
+            else if (!value.GetType().Namespace.StartsWith("System"))
             {
-                //Custom object Iterate through its properties
+                // Custom object Iterate through its properties
 #if NETSTANDARD1_3
                 var enumerator = value.GetType().GetRuntimeProperties().GetEnumerator();
 #else
@@ -390,11 +324,11 @@ namespace Square.Utilities
                 {
                     pInfo = enumerator.Current as PropertyInfo;
 
-                    var jsonProperty = (JsonPropertyAttribute) pInfo.GetCustomAttributes(t, true).FirstOrDefault();
+                    var jsonProperty = (JsonPropertyAttribute)pInfo.GetCustomAttributes(t, true).FirstOrDefault();
                     var subName = (jsonProperty != null) ? jsonProperty.PropertyName : pInfo.Name;
                     string fullSubName = string.IsNullOrWhiteSpace(name) ? subName : name + '[' + subName + ']';
                     var subValue = pInfo.GetValue(value, null);
-                    PrepareFormFieldsFromObject(fullSubName, subValue, keys, pInfo,arrayDeserializationFormat);
+                    PrepareFormFieldsFromObject(fullSubName, subValue, keys, pInfo, arrayDeserializationFormat);
                 }
             }
             else if (value is DateTime)
@@ -405,37 +339,39 @@ namespace Square.Utilities
 #else
                 object[] pInfo = null;
 #endif
-                if(propInfo!=null)
+                if (propInfo != null)
+                {
                     pInfo = propInfo.GetCustomAttributes(true);
+                }
+
                 if (pInfo != null)
                 {
                     foreach (object attr in pInfo)
                     {
                         JsonConverterAttribute converterAttr = attr as JsonConverterAttribute;
                         if (converterAttr != null)
-                            convertedValue =
-                                JsonSerialize(value,
-                                    (JsonConverter)
-                                        Activator.CreateInstance(converterAttr.ConverterType,
-                                            converterAttr.ConverterParameters)).Replace("\"", "");
+                        {
+                            convertedValue = JsonSerialize(value, (JsonConverter)Activator.CreateInstance(converterAttr.ConverterType, converterAttr.ConverterParameters)).Replace("\"", string.Empty);
+                        }
                     }
                 }
-                keys.Add(new KeyValuePair<string, object>(name, (convertedValue) ?? ((DateTime)value).ToString(DateTimeFormat)));
+
+                keys.Add(new KeyValuePair<string, object>(name, convertedValue ?? ((DateTime)value).ToString(DateTimeFormat)));
             }
             else
             {
-                keys.Add(new KeyValuePair<string, object>(name,value));
+                keys.Add(new KeyValuePair<string, object>(name, value));
             }
+
             return keys;
         }
 
         /// <summary>
         /// Add/update entries with the new dictionary.
         /// </summary>
-        /// <param name="dictionary"></param>
-        /// <param name="dictionary2"></param>
+        /// <param name="dictionary">first dictionary.</param>
+        /// <param name="dictionary2">second dictionary.</param>
         public static void Add(this Dictionary<string, object> dictionary, Dictionary<string, object> dictionary2)
-
         {
             foreach (var kvp in dictionary2)
             {
@@ -446,7 +382,7 @@ namespace Square.Utilities
         /// <summary>
         /// Runs asynchronous tasks synchronously and throws the first caught exception.
         /// </summary>
-        /// <param name="t">The task to be run synchronously</param>
+        /// <param name="t">The task to be run synchronously.</param>
         public static void RunTaskSynchronously(Task t)
         {
             try
@@ -456,10 +392,154 @@ namespace Square.Utilities
             catch (AggregateException e)
             {
                 if (e.InnerExceptions.Count > 0)
+                {
                     throw e.InnerExceptions[0];
+                }
                 else
+                {
                     throw;
+                }
             }
+        }
+
+        /// <summary>
+        /// Creates a deep clone of an object by serializing it into a json string
+        /// and then deserializing back into an object.
+        /// </summary>
+        /// <typeparam name="T">The type of the obj parameter as well as the return object.</typeparam>
+        /// <param name="obj">The object to clone.</param>
+        /// <returns>Template.</returns>
+        internal static T DeepCloneObject<T>(T obj)
+        {
+            return JsonDeserialize<T>(JsonSerialize(obj));
+        }
+
+        /// <summary>
+        /// StringBuilder extension method to implement IndexOf functionality.
+        /// This does a StringComparison.Ordinal kind of comparison.
+        /// </summary>
+        /// <param name="stringBuilder">The string builder to find the index in.</param>
+        /// <param name="strCheck">The string to locate in the string builder.</param>
+        /// <returns>The index of string inside the string builder.</returns>
+        private static int IndexOf(StringBuilder stringBuilder, string strCheck)
+        {
+            if (stringBuilder == null)
+            {
+                throw new ArgumentNullException("stringBuilder");
+            }
+
+            if (strCheck == null)
+            {
+                return 0;
+            }
+
+            // iterate over the input
+            for (int inputCounter = 0; inputCounter < stringBuilder.Length; inputCounter++)
+            {
+                int matchCounter;
+
+                // attempt to locate a potential match
+                for (matchCounter = 0;
+                        (matchCounter < strCheck.Length)
+                        && (inputCounter + matchCounter < stringBuilder.Length)
+                        && (stringBuilder[inputCounter + matchCounter] == strCheck[matchCounter]);
+                    matchCounter++)
+                {
+                }
+
+                // verify the match
+                if (matchCounter == strCheck.Length)
+                {
+                    return inputCounter;
+                }
+            }
+
+            return -1;
+        }
+
+        /// <summary>
+        /// Used for flattening a collection of objects into a string.
+        /// </summary>
+        /// <param name="array">Array of elements to flatten.</param>
+        /// <param name="fmt">Format string to use for array flattening.</param>
+        /// <param name="separator">Separator to use for string concat.</param>
+        /// <returns>Representative string made up of array elements.</returns>
+        private static string FlattenCollection(
+            ICollection array,
+            ArrayDeserialization fmt,
+            char separator,
+            bool urlEncode,
+            string key = "")
+        {
+            StringBuilder builder = new StringBuilder();
+
+            string format = string.Empty;
+            if (fmt == ArrayDeserialization.UnIndexed)
+            {
+                format = string.Format("{0}[]={{0}}{{1}}", key);
+            }
+            else if (fmt == ArrayDeserialization.Indexed)
+            {
+                format = string.Format("{0}[{{2}}]={{0}}{{1}}", key);
+            }
+            else if (fmt == ArrayDeserialization.Plain)
+            {
+                format = string.Format("{0}={{0}}{{1}}", key);
+            }
+            else if (fmt == ArrayDeserialization.Csv || fmt == ArrayDeserialization.Psv || fmt == ArrayDeserialization.Tsv)
+            {
+                builder.Append(string.Format("{0}=", key));
+                format = "{0}{1}";
+            }
+            else
+            {
+                format = "{0}{1}";
+            }
+
+            // append all elements in the array into a string
+            int index = 0;
+            foreach (object element in array)
+            {
+                builder.AppendFormat(format, GetElementValue(element, urlEncode), separator, index++);
+            }
+
+            // remove the last separator, if appended
+            if ((builder.Length > 1) && (builder[builder.Length - 1] == separator))
+            {
+                builder.Length -= 1;
+            }
+
+            return builder.ToString();
+        }
+
+        private static string GetElementValue(object element, bool urlEncode)
+        {
+            string elemValue = null;
+
+            // replace null values with empty string to maintain index order
+            if (element == null)
+            {
+                elemValue = string.Empty;
+            }
+            else if (element is DateTime)
+            {
+                elemValue = ((DateTime)element).ToString(DateTimeFormat);
+            }
+            else if (element is DateTimeOffset)
+            {
+                elemValue = ((DateTimeOffset)element).ToString(DateTimeFormat);
+            }
+            else
+            {
+                elemValue = element.ToString();
+            }
+
+            if (urlEncode)
+            {
+                elemValue = Uri.EscapeDataString(elemValue);
+            }
+
+            return elemValue;
         }
     }
 }

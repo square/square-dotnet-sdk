@@ -1,29 +1,39 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class CatalogQuickAmount 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// CatalogQuickAmount.
+    /// </summary>
+    public class CatalogQuickAmount
     {
-        public CatalogQuickAmount(string type,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CatalogQuickAmount"/> class.
+        /// </summary>
+        /// <param name="type">type.</param>
+        /// <param name="amount">amount.</param>
+        /// <param name="score">score.</param>
+        /// <param name="ordinal">ordinal.</param>
+        public CatalogQuickAmount(
+            string type,
             Models.Money amount,
             long? score = null,
             long? ordinal = null)
         {
-            Type = type;
-            Amount = amount;
-            Score = score;
-            Ordinal = ordinal;
+            this.Type = type;
+            this.Amount = amount;
+            this.Score = score;
+            this.Ordinal = ordinal;
         }
 
         /// <summary>
@@ -56,6 +66,7 @@ namespace Square.Models
         [JsonProperty("ordinal", NullValueHandling = NullValueHandling.Ignore)]
         public long? Ordinal { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -65,14 +76,7 @@ namespace Square.Models
             return $"CatalogQuickAmount : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Type = {(Type == null ? "null" : Type.ToString())}");
-            toStringOutput.Add($"Amount = {(Amount == null ? "null" : Amount.ToString())}");
-            toStringOutput.Add($"Score = {(Score == null ? "null" : Score.ToString())}");
-            toStringOutput.Add($"Ordinal = {(Ordinal == null ? "null" : Ordinal.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -86,48 +90,69 @@ namespace Square.Models
             }
 
             return obj is CatalogQuickAmount other &&
-                ((Type == null && other.Type == null) || (Type?.Equals(other.Type) == true)) &&
-                ((Amount == null && other.Amount == null) || (Amount?.Equals(other.Amount) == true)) &&
-                ((Score == null && other.Score == null) || (Score?.Equals(other.Score) == true)) &&
-                ((Ordinal == null && other.Ordinal == null) || (Ordinal?.Equals(other.Ordinal) == true));
+                ((this.Type == null && other.Type == null) || (this.Type?.Equals(other.Type) == true)) &&
+                ((this.Amount == null && other.Amount == null) || (this.Amount?.Equals(other.Amount) == true)) &&
+                ((this.Score == null && other.Score == null) || (this.Score?.Equals(other.Score) == true)) &&
+                ((this.Ordinal == null && other.Ordinal == null) || (this.Ordinal?.Equals(other.Ordinal) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1903352296;
 
-            if (Type != null)
+            if (this.Type != null)
             {
-               hashCode += Type.GetHashCode();
+               hashCode += this.Type.GetHashCode();
             }
 
-            if (Amount != null)
+            if (this.Amount != null)
             {
-               hashCode += Amount.GetHashCode();
+               hashCode += this.Amount.GetHashCode();
             }
 
-            if (Score != null)
+            if (this.Score != null)
             {
-               hashCode += Score.GetHashCode();
+               hashCode += this.Score.GetHashCode();
             }
 
-            if (Ordinal != null)
+            if (this.Ordinal != null)
             {
-               hashCode += Ordinal.GetHashCode();
+               hashCode += this.Ordinal.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Type = {(this.Type == null ? "null" : this.Type.ToString())}");
+            toStringOutput.Add($"this.Amount = {(this.Amount == null ? "null" : this.Amount.ToString())}");
+            toStringOutput.Add($"this.Score = {(this.Score == null ? "null" : this.Score.ToString())}");
+            toStringOutput.Add($"this.Ordinal = {(this.Ordinal == null ? "null" : this.Ordinal.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
-            var builder = new Builder(Type,
-                Amount)
-                .Score(Score)
-                .Ordinal(Ordinal);
+            var builder = new Builder(
+                this.Type,
+                this.Amount)
+                .Score(this.Score)
+                .Ordinal(this.Ordinal);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string type;
@@ -135,43 +160,69 @@ namespace Square.Models
             private long? score;
             private long? ordinal;
 
-            public Builder(string type,
+            public Builder(
+                string type,
                 Models.Money amount)
             {
                 this.type = type;
                 this.amount = amount;
             }
 
+             /// <summary>
+             /// Type.
+             /// </summary>
+             /// <param name="type"> type. </param>
+             /// <returns> Builder. </returns>
             public Builder Type(string type)
             {
                 this.type = type;
                 return this;
             }
 
+             /// <summary>
+             /// Amount.
+             /// </summary>
+             /// <param name="amount"> amount. </param>
+             /// <returns> Builder. </returns>
             public Builder Amount(Models.Money amount)
             {
                 this.amount = amount;
                 return this;
             }
 
+             /// <summary>
+             /// Score.
+             /// </summary>
+             /// <param name="score"> score. </param>
+             /// <returns> Builder. </returns>
             public Builder Score(long? score)
             {
                 this.score = score;
                 return this;
             }
 
+             /// <summary>
+             /// Ordinal.
+             /// </summary>
+             /// <param name="ordinal"> ordinal. </param>
+             /// <returns> Builder. </returns>
             public Builder Ordinal(long? ordinal)
             {
                 this.ordinal = ordinal;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> CatalogQuickAmount. </returns>
             public CatalogQuickAmount Build()
             {
-                return new CatalogQuickAmount(type,
-                    amount,
-                    score,
-                    ordinal);
+                return new CatalogQuickAmount(
+                    this.type,
+                    this.amount,
+                    this.score,
+                    this.ordinal);
             }
         }
     }

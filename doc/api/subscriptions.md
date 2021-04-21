@@ -16,6 +16,7 @@ ISubscriptionsApi subscriptionsApi = client.SubscriptionsApi;
 * [Update Subscription](/doc/api/subscriptions.md#update-subscription)
 * [Cancel Subscription](/doc/api/subscriptions.md#cancel-subscription)
 * [List Subscription Events](/doc/api/subscriptions.md#list-subscription-events)
+* [Resume Subscription](/doc/api/subscriptions.md#resume-subscription)
 
 
 # Create Subscription
@@ -28,7 +29,8 @@ address. The subscription starts immediately, unless the request includes
 the optional `start_date`. Each individual subscription is associated with a particular location.
 
 ```csharp
-CreateSubscriptionAsync(Models.CreateSubscriptionRequest body)
+CreateSubscriptionAsync(
+    Models.CreateSubscriptionRequest body)
 ```
 
 ## Parameters
@@ -89,7 +91,8 @@ For more information, see
 [Retrieve subscriptions](https://developer.squareup.com/docs/subscriptions-api/overview#retrieve-subscriptions).
 
 ```csharp
-SearchSubscriptionsAsync(Models.SearchSubscriptionsRequest body)
+SearchSubscriptionsAsync(
+    Models.SearchSubscriptionsRequest body)
 ```
 
 ## Parameters
@@ -135,7 +138,8 @@ catch (ApiException e){};
 Retrieves a subscription.
 
 ```csharp
-RetrieveSubscriptionAsync(string subscriptionId)
+RetrieveSubscriptionAsync(
+    string subscriptionId)
 ```
 
 ## Parameters
@@ -167,7 +171,9 @@ Updates a subscription. You can set, modify, and clear the
 `subscription` field values.
 
 ```csharp
-UpdateSubscriptionAsync(string subscriptionId, Models.UpdateSubscriptionRequest body)
+UpdateSubscriptionAsync(
+    string subscriptionId,
+    Models.UpdateSubscriptionRequest body)
 ```
 
 ## Parameters
@@ -217,7 +223,8 @@ Sets the `canceled_date` field to the end of the active billing period.
 After this date, the status changes from ACTIVE to CANCELED.
 
 ```csharp
-CancelSubscriptionAsync(string subscriptionId)
+CancelSubscriptionAsync(
+    string subscriptionId)
 ```
 
 ## Parameters
@@ -249,7 +256,10 @@ Lists all events for a specific subscription.
 In the current implementation, only `START_SUBSCRIPTION` and `STOP_SUBSCRIPTION` (when the subscription was canceled) events are returned.
 
 ```csharp
-ListSubscriptionEventsAsync(string subscriptionId, string cursor = null, int? limit = null)
+ListSubscriptionEventsAsync(
+    string subscriptionId,
+    string cursor = null,
+    int? limit = null)
 ```
 
 ## Parameters
@@ -274,6 +284,38 @@ int? limit = 172;
 try
 {
     ListSubscriptionEventsResponse result = await subscriptionsApi.ListSubscriptionEventsAsync(subscriptionId, cursor, limit);
+}
+catch (ApiException e){};
+```
+
+
+# Resume Subscription
+
+Resumes a deactivated subscription.
+
+```csharp
+ResumeSubscriptionAsync(
+    string subscriptionId)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `subscriptionId` | `string` | Template, Required | The ID of the subscription to resume. |
+
+## Response Type
+
+[`Task<Models.ResumeSubscriptionResponse>`](/doc/models/resume-subscription-response.md)
+
+## Example Usage
+
+```csharp
+string subscriptionId = "subscription_id0";
+
+try
+{
+    ResumeSubscriptionResponse result = await subscriptionsApi.ResumeSubscriptionAsync(subscriptionId);
 }
 catch (ApiException e){};
 ```

@@ -1,21 +1,40 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class Shift 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// Shift.
+    /// </summary>
+    public class Shift
     {
-        public Shift(string startAt,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Shift"/> class.
+        /// </summary>
+        /// <param name="startAt">start_at.</param>
+        /// <param name="id">id.</param>
+        /// <param name="employeeId">employee_id.</param>
+        /// <param name="locationId">location_id.</param>
+        /// <param name="timezone">timezone.</param>
+        /// <param name="endAt">end_at.</param>
+        /// <param name="wage">wage.</param>
+        /// <param name="breaks">breaks.</param>
+        /// <param name="status">status.</param>
+        /// <param name="version">version.</param>
+        /// <param name="createdAt">created_at.</param>
+        /// <param name="updatedAt">updated_at.</param>
+        /// <param name="teamMemberId">team_member_id.</param>
+        public Shift(
+            string startAt,
             string id = null,
             string employeeId = null,
             string locationId = null,
@@ -29,19 +48,19 @@ namespace Square.Models
             string updatedAt = null,
             string teamMemberId = null)
         {
-            Id = id;
-            EmployeeId = employeeId;
-            LocationId = locationId;
-            Timezone = timezone;
-            StartAt = startAt;
-            EndAt = endAt;
-            Wage = wage;
-            Breaks = breaks;
-            Status = status;
-            Version = version;
-            CreatedAt = createdAt;
-            UpdatedAt = updatedAt;
-            TeamMemberId = teamMemberId;
+            this.Id = id;
+            this.EmployeeId = employeeId;
+            this.LocationId = locationId;
+            this.Timezone = timezone;
+            this.StartAt = startAt;
+            this.EndAt = endAt;
+            this.Wage = wage;
+            this.Breaks = breaks;
+            this.Status = status;
+            this.Version = version;
+            this.CreatedAt = createdAt;
+            this.UpdatedAt = updatedAt;
+            this.TeamMemberId = teamMemberId;
         }
 
         /// <summary>
@@ -130,6 +149,7 @@ namespace Square.Models
         [JsonProperty("team_member_id", NullValueHandling = NullValueHandling.Ignore)]
         public string TeamMemberId { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -139,23 +159,7 @@ namespace Square.Models
             return $"Shift : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Id = {(Id == null ? "null" : Id == string.Empty ? "" : Id)}");
-            toStringOutput.Add($"EmployeeId = {(EmployeeId == null ? "null" : EmployeeId == string.Empty ? "" : EmployeeId)}");
-            toStringOutput.Add($"LocationId = {(LocationId == null ? "null" : LocationId == string.Empty ? "" : LocationId)}");
-            toStringOutput.Add($"Timezone = {(Timezone == null ? "null" : Timezone == string.Empty ? "" : Timezone)}");
-            toStringOutput.Add($"StartAt = {(StartAt == null ? "null" : StartAt == string.Empty ? "" : StartAt)}");
-            toStringOutput.Add($"EndAt = {(EndAt == null ? "null" : EndAt == string.Empty ? "" : EndAt)}");
-            toStringOutput.Add($"Wage = {(Wage == null ? "null" : Wage.ToString())}");
-            toStringOutput.Add($"Breaks = {(Breaks == null ? "null" : $"[{ string.Join(", ", Breaks)} ]")}");
-            toStringOutput.Add($"Status = {(Status == null ? "null" : Status.ToString())}");
-            toStringOutput.Add($"Version = {(Version == null ? "null" : Version.ToString())}");
-            toStringOutput.Add($"CreatedAt = {(CreatedAt == null ? "null" : CreatedAt == string.Empty ? "" : CreatedAt)}");
-            toStringOutput.Add($"UpdatedAt = {(UpdatedAt == null ? "null" : UpdatedAt == string.Empty ? "" : UpdatedAt)}");
-            toStringOutput.Add($"TeamMemberId = {(TeamMemberId == null ? "null" : TeamMemberId == string.Empty ? "" : TeamMemberId)}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -169,111 +173,141 @@ namespace Square.Models
             }
 
             return obj is Shift other &&
-                ((Id == null && other.Id == null) || (Id?.Equals(other.Id) == true)) &&
-                ((EmployeeId == null && other.EmployeeId == null) || (EmployeeId?.Equals(other.EmployeeId) == true)) &&
-                ((LocationId == null && other.LocationId == null) || (LocationId?.Equals(other.LocationId) == true)) &&
-                ((Timezone == null && other.Timezone == null) || (Timezone?.Equals(other.Timezone) == true)) &&
-                ((StartAt == null && other.StartAt == null) || (StartAt?.Equals(other.StartAt) == true)) &&
-                ((EndAt == null && other.EndAt == null) || (EndAt?.Equals(other.EndAt) == true)) &&
-                ((Wage == null && other.Wage == null) || (Wage?.Equals(other.Wage) == true)) &&
-                ((Breaks == null && other.Breaks == null) || (Breaks?.Equals(other.Breaks) == true)) &&
-                ((Status == null && other.Status == null) || (Status?.Equals(other.Status) == true)) &&
-                ((Version == null && other.Version == null) || (Version?.Equals(other.Version) == true)) &&
-                ((CreatedAt == null && other.CreatedAt == null) || (CreatedAt?.Equals(other.CreatedAt) == true)) &&
-                ((UpdatedAt == null && other.UpdatedAt == null) || (UpdatedAt?.Equals(other.UpdatedAt) == true)) &&
-                ((TeamMemberId == null && other.TeamMemberId == null) || (TeamMemberId?.Equals(other.TeamMemberId) == true));
+                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
+                ((this.EmployeeId == null && other.EmployeeId == null) || (this.EmployeeId?.Equals(other.EmployeeId) == true)) &&
+                ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true)) &&
+                ((this.Timezone == null && other.Timezone == null) || (this.Timezone?.Equals(other.Timezone) == true)) &&
+                ((this.StartAt == null && other.StartAt == null) || (this.StartAt?.Equals(other.StartAt) == true)) &&
+                ((this.EndAt == null && other.EndAt == null) || (this.EndAt?.Equals(other.EndAt) == true)) &&
+                ((this.Wage == null && other.Wage == null) || (this.Wage?.Equals(other.Wage) == true)) &&
+                ((this.Breaks == null && other.Breaks == null) || (this.Breaks?.Equals(other.Breaks) == true)) &&
+                ((this.Status == null && other.Status == null) || (this.Status?.Equals(other.Status) == true)) &&
+                ((this.Version == null && other.Version == null) || (this.Version?.Equals(other.Version) == true)) &&
+                ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true)) &&
+                ((this.UpdatedAt == null && other.UpdatedAt == null) || (this.UpdatedAt?.Equals(other.UpdatedAt) == true)) &&
+                ((this.TeamMemberId == null && other.TeamMemberId == null) || (this.TeamMemberId?.Equals(other.TeamMemberId) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1338935965;
 
-            if (Id != null)
+            if (this.Id != null)
             {
-               hashCode += Id.GetHashCode();
+               hashCode += this.Id.GetHashCode();
             }
 
-            if (EmployeeId != null)
+            if (this.EmployeeId != null)
             {
-               hashCode += EmployeeId.GetHashCode();
+               hashCode += this.EmployeeId.GetHashCode();
             }
 
-            if (LocationId != null)
+            if (this.LocationId != null)
             {
-               hashCode += LocationId.GetHashCode();
+               hashCode += this.LocationId.GetHashCode();
             }
 
-            if (Timezone != null)
+            if (this.Timezone != null)
             {
-               hashCode += Timezone.GetHashCode();
+               hashCode += this.Timezone.GetHashCode();
             }
 
-            if (StartAt != null)
+            if (this.StartAt != null)
             {
-               hashCode += StartAt.GetHashCode();
+               hashCode += this.StartAt.GetHashCode();
             }
 
-            if (EndAt != null)
+            if (this.EndAt != null)
             {
-               hashCode += EndAt.GetHashCode();
+               hashCode += this.EndAt.GetHashCode();
             }
 
-            if (Wage != null)
+            if (this.Wage != null)
             {
-               hashCode += Wage.GetHashCode();
+               hashCode += this.Wage.GetHashCode();
             }
 
-            if (Breaks != null)
+            if (this.Breaks != null)
             {
-               hashCode += Breaks.GetHashCode();
+               hashCode += this.Breaks.GetHashCode();
             }
 
-            if (Status != null)
+            if (this.Status != null)
             {
-               hashCode += Status.GetHashCode();
+               hashCode += this.Status.GetHashCode();
             }
 
-            if (Version != null)
+            if (this.Version != null)
             {
-               hashCode += Version.GetHashCode();
+               hashCode += this.Version.GetHashCode();
             }
 
-            if (CreatedAt != null)
+            if (this.CreatedAt != null)
             {
-               hashCode += CreatedAt.GetHashCode();
+               hashCode += this.CreatedAt.GetHashCode();
             }
 
-            if (UpdatedAt != null)
+            if (this.UpdatedAt != null)
             {
-               hashCode += UpdatedAt.GetHashCode();
+               hashCode += this.UpdatedAt.GetHashCode();
             }
 
-            if (TeamMemberId != null)
+            if (this.TeamMemberId != null)
             {
-               hashCode += TeamMemberId.GetHashCode();
+               hashCode += this.TeamMemberId.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id == string.Empty ? "" : this.Id)}");
+            toStringOutput.Add($"this.EmployeeId = {(this.EmployeeId == null ? "null" : this.EmployeeId == string.Empty ? "" : this.EmployeeId)}");
+            toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId == string.Empty ? "" : this.LocationId)}");
+            toStringOutput.Add($"this.Timezone = {(this.Timezone == null ? "null" : this.Timezone == string.Empty ? "" : this.Timezone)}");
+            toStringOutput.Add($"this.StartAt = {(this.StartAt == null ? "null" : this.StartAt == string.Empty ? "" : this.StartAt)}");
+            toStringOutput.Add($"this.EndAt = {(this.EndAt == null ? "null" : this.EndAt == string.Empty ? "" : this.EndAt)}");
+            toStringOutput.Add($"this.Wage = {(this.Wage == null ? "null" : this.Wage.ToString())}");
+            toStringOutput.Add($"this.Breaks = {(this.Breaks == null ? "null" : $"[{string.Join(", ", this.Breaks)} ]")}");
+            toStringOutput.Add($"this.Status = {(this.Status == null ? "null" : this.Status.ToString())}");
+            toStringOutput.Add($"this.Version = {(this.Version == null ? "null" : this.Version.ToString())}");
+            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt == string.Empty ? "" : this.CreatedAt)}");
+            toStringOutput.Add($"this.UpdatedAt = {(this.UpdatedAt == null ? "null" : this.UpdatedAt == string.Empty ? "" : this.UpdatedAt)}");
+            toStringOutput.Add($"this.TeamMemberId = {(this.TeamMemberId == null ? "null" : this.TeamMemberId == string.Empty ? "" : this.TeamMemberId)}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
-            var builder = new Builder(StartAt)
-                .Id(Id)
-                .EmployeeId(EmployeeId)
-                .LocationId(LocationId)
-                .Timezone(Timezone)
-                .EndAt(EndAt)
-                .Wage(Wage)
-                .Breaks(Breaks)
-                .Status(Status)
-                .Version(Version)
-                .CreatedAt(CreatedAt)
-                .UpdatedAt(UpdatedAt)
-                .TeamMemberId(TeamMemberId);
+            var builder = new Builder(
+                this.StartAt)
+                .Id(this.Id)
+                .EmployeeId(this.EmployeeId)
+                .LocationId(this.LocationId)
+                .Timezone(this.Timezone)
+                .EndAt(this.EndAt)
+                .Wage(this.Wage)
+                .Breaks(this.Breaks)
+                .Status(this.Status)
+                .Version(this.Version)
+                .CreatedAt(this.CreatedAt)
+                .UpdatedAt(this.UpdatedAt)
+                .TeamMemberId(this.TeamMemberId);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string startAt;
@@ -290,104 +324,175 @@ namespace Square.Models
             private string updatedAt;
             private string teamMemberId;
 
-            public Builder(string startAt)
+            public Builder(
+                string startAt)
             {
                 this.startAt = startAt;
             }
 
+             /// <summary>
+             /// StartAt.
+             /// </summary>
+             /// <param name="startAt"> startAt. </param>
+             /// <returns> Builder. </returns>
             public Builder StartAt(string startAt)
             {
                 this.startAt = startAt;
                 return this;
             }
 
+             /// <summary>
+             /// Id.
+             /// </summary>
+             /// <param name="id"> id. </param>
+             /// <returns> Builder. </returns>
             public Builder Id(string id)
             {
                 this.id = id;
                 return this;
             }
 
+             /// <summary>
+             /// EmployeeId.
+             /// </summary>
+             /// <param name="employeeId"> employeeId. </param>
+             /// <returns> Builder. </returns>
             public Builder EmployeeId(string employeeId)
             {
                 this.employeeId = employeeId;
                 return this;
             }
 
+             /// <summary>
+             /// LocationId.
+             /// </summary>
+             /// <param name="locationId"> locationId. </param>
+             /// <returns> Builder. </returns>
             public Builder LocationId(string locationId)
             {
                 this.locationId = locationId;
                 return this;
             }
 
+             /// <summary>
+             /// Timezone.
+             /// </summary>
+             /// <param name="timezone"> timezone. </param>
+             /// <returns> Builder. </returns>
             public Builder Timezone(string timezone)
             {
                 this.timezone = timezone;
                 return this;
             }
 
+             /// <summary>
+             /// EndAt.
+             /// </summary>
+             /// <param name="endAt"> endAt. </param>
+             /// <returns> Builder. </returns>
             public Builder EndAt(string endAt)
             {
                 this.endAt = endAt;
                 return this;
             }
 
+             /// <summary>
+             /// Wage.
+             /// </summary>
+             /// <param name="wage"> wage. </param>
+             /// <returns> Builder. </returns>
             public Builder Wage(Models.ShiftWage wage)
             {
                 this.wage = wage;
                 return this;
             }
 
+             /// <summary>
+             /// Breaks.
+             /// </summary>
+             /// <param name="breaks"> breaks. </param>
+             /// <returns> Builder. </returns>
             public Builder Breaks(IList<Models.Break> breaks)
             {
                 this.breaks = breaks;
                 return this;
             }
 
+             /// <summary>
+             /// Status.
+             /// </summary>
+             /// <param name="status"> status. </param>
+             /// <returns> Builder. </returns>
             public Builder Status(string status)
             {
                 this.status = status;
                 return this;
             }
 
+             /// <summary>
+             /// Version.
+             /// </summary>
+             /// <param name="version"> version. </param>
+             /// <returns> Builder. </returns>
             public Builder Version(int? version)
             {
                 this.version = version;
                 return this;
             }
 
+             /// <summary>
+             /// CreatedAt.
+             /// </summary>
+             /// <param name="createdAt"> createdAt. </param>
+             /// <returns> Builder. </returns>
             public Builder CreatedAt(string createdAt)
             {
                 this.createdAt = createdAt;
                 return this;
             }
 
+             /// <summary>
+             /// UpdatedAt.
+             /// </summary>
+             /// <param name="updatedAt"> updatedAt. </param>
+             /// <returns> Builder. </returns>
             public Builder UpdatedAt(string updatedAt)
             {
                 this.updatedAt = updatedAt;
                 return this;
             }
 
+             /// <summary>
+             /// TeamMemberId.
+             /// </summary>
+             /// <param name="teamMemberId"> teamMemberId. </param>
+             /// <returns> Builder. </returns>
             public Builder TeamMemberId(string teamMemberId)
             {
                 this.teamMemberId = teamMemberId;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> Shift. </returns>
             public Shift Build()
             {
-                return new Shift(startAt,
-                    id,
-                    employeeId,
-                    locationId,
-                    timezone,
-                    endAt,
-                    wage,
-                    breaks,
-                    status,
-                    version,
-                    createdAt,
-                    updatedAt,
-                    teamMemberId);
+                return new Shift(
+                    this.startAt,
+                    this.id,
+                    this.employeeId,
+                    this.locationId,
+                    this.timezone,
+                    this.endAt,
+                    this.wage,
+                    this.breaks,
+                    this.status,
+                    this.version,
+                    this.createdAt,
+                    this.updatedAt,
+                    this.teamMemberId);
             }
         }
     }

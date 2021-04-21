@@ -1,22 +1,55 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square.Http.Client;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class V1Payment 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Http.Client;
+    using Square.Utilities;
+
+    /// <summary>
+    /// V1Payment.
+    /// </summary>
+    public class V1Payment
     {
-        public V1Payment(string id = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="V1Payment"/> class.
+        /// </summary>
+        /// <param name="id">id.</param>
+        /// <param name="merchantId">merchant_id.</param>
+        /// <param name="createdAt">created_at.</param>
+        /// <param name="creatorId">creator_id.</param>
+        /// <param name="device">device.</param>
+        /// <param name="paymentUrl">payment_url.</param>
+        /// <param name="receiptUrl">receipt_url.</param>
+        /// <param name="inclusiveTaxMoney">inclusive_tax_money.</param>
+        /// <param name="additiveTaxMoney">additive_tax_money.</param>
+        /// <param name="taxMoney">tax_money.</param>
+        /// <param name="tipMoney">tip_money.</param>
+        /// <param name="discountMoney">discount_money.</param>
+        /// <param name="totalCollectedMoney">total_collected_money.</param>
+        /// <param name="processingFeeMoney">processing_fee_money.</param>
+        /// <param name="netTotalMoney">net_total_money.</param>
+        /// <param name="refundedMoney">refunded_money.</param>
+        /// <param name="swedishRoundingMoney">swedish_rounding_money.</param>
+        /// <param name="grossSalesMoney">gross_sales_money.</param>
+        /// <param name="netSalesMoney">net_sales_money.</param>
+        /// <param name="inclusiveTax">inclusive_tax.</param>
+        /// <param name="additiveTax">additive_tax.</param>
+        /// <param name="tender">tender.</param>
+        /// <param name="refunds">refunds.</param>
+        /// <param name="itemizations">itemizations.</param>
+        /// <param name="surchargeMoney">surcharge_money.</param>
+        /// <param name="surcharges">surcharges.</param>
+        /// <param name="isPartial">is_partial.</param>
+        public V1Payment(
+            string id = null,
             string merchantId = null,
             string createdAt = null,
             string creatorId = null,
@@ -44,35 +77,38 @@ namespace Square.Models
             IList<Models.V1PaymentSurcharge> surcharges = null,
             bool? isPartial = null)
         {
-            Id = id;
-            MerchantId = merchantId;
-            CreatedAt = createdAt;
-            CreatorId = creatorId;
-            Device = device;
-            PaymentUrl = paymentUrl;
-            ReceiptUrl = receiptUrl;
-            InclusiveTaxMoney = inclusiveTaxMoney;
-            AdditiveTaxMoney = additiveTaxMoney;
-            TaxMoney = taxMoney;
-            TipMoney = tipMoney;
-            DiscountMoney = discountMoney;
-            TotalCollectedMoney = totalCollectedMoney;
-            ProcessingFeeMoney = processingFeeMoney;
-            NetTotalMoney = netTotalMoney;
-            RefundedMoney = refundedMoney;
-            SwedishRoundingMoney = swedishRoundingMoney;
-            GrossSalesMoney = grossSalesMoney;
-            NetSalesMoney = netSalesMoney;
-            InclusiveTax = inclusiveTax;
-            AdditiveTax = additiveTax;
-            Tender = tender;
-            Refunds = refunds;
-            Itemizations = itemizations;
-            SurchargeMoney = surchargeMoney;
-            Surcharges = surcharges;
-            IsPartial = isPartial;
+            this.Id = id;
+            this.MerchantId = merchantId;
+            this.CreatedAt = createdAt;
+            this.CreatorId = creatorId;
+            this.Device = device;
+            this.PaymentUrl = paymentUrl;
+            this.ReceiptUrl = receiptUrl;
+            this.InclusiveTaxMoney = inclusiveTaxMoney;
+            this.AdditiveTaxMoney = additiveTaxMoney;
+            this.TaxMoney = taxMoney;
+            this.TipMoney = tipMoney;
+            this.DiscountMoney = discountMoney;
+            this.TotalCollectedMoney = totalCollectedMoney;
+            this.ProcessingFeeMoney = processingFeeMoney;
+            this.NetTotalMoney = netTotalMoney;
+            this.RefundedMoney = refundedMoney;
+            this.SwedishRoundingMoney = swedishRoundingMoney;
+            this.GrossSalesMoney = grossSalesMoney;
+            this.NetSalesMoney = netSalesMoney;
+            this.InclusiveTax = inclusiveTax;
+            this.AdditiveTax = additiveTax;
+            this.Tender = tender;
+            this.Refunds = refunds;
+            this.Itemizations = itemizations;
+            this.SurchargeMoney = surchargeMoney;
+            this.Surcharges = surcharges;
+            this.IsPartial = isPartial;
         }
 
+        /// <summary>
+        /// Gets http context.
+        /// </summary>
         [JsonIgnore]
         public HttpContext Context { get; internal set; }
 
@@ -101,7 +137,7 @@ namespace Square.Models
         public string CreatorId { get; }
 
         /// <summary>
-        /// Getter for device
+        /// Gets or sets Device.
         /// </summary>
         [JsonProperty("device", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Device Device { get; }
@@ -123,73 +159,73 @@ namespace Square.Models
         public string ReceiptUrl { get; }
 
         /// <summary>
-        /// Getter for inclusive_tax_money
+        /// Gets or sets InclusiveTaxMoney.
         /// </summary>
         [JsonProperty("inclusive_tax_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1Money InclusiveTaxMoney { get; }
 
         /// <summary>
-        /// Getter for additive_tax_money
+        /// Gets or sets AdditiveTaxMoney.
         /// </summary>
         [JsonProperty("additive_tax_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1Money AdditiveTaxMoney { get; }
 
         /// <summary>
-        /// Getter for tax_money
+        /// Gets or sets TaxMoney.
         /// </summary>
         [JsonProperty("tax_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1Money TaxMoney { get; }
 
         /// <summary>
-        /// Getter for tip_money
+        /// Gets or sets TipMoney.
         /// </summary>
         [JsonProperty("tip_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1Money TipMoney { get; }
 
         /// <summary>
-        /// Getter for discount_money
+        /// Gets or sets DiscountMoney.
         /// </summary>
         [JsonProperty("discount_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1Money DiscountMoney { get; }
 
         /// <summary>
-        /// Getter for total_collected_money
+        /// Gets or sets TotalCollectedMoney.
         /// </summary>
         [JsonProperty("total_collected_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1Money TotalCollectedMoney { get; }
 
         /// <summary>
-        /// Getter for processing_fee_money
+        /// Gets or sets ProcessingFeeMoney.
         /// </summary>
         [JsonProperty("processing_fee_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1Money ProcessingFeeMoney { get; }
 
         /// <summary>
-        /// Getter for net_total_money
+        /// Gets or sets NetTotalMoney.
         /// </summary>
         [JsonProperty("net_total_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1Money NetTotalMoney { get; }
 
         /// <summary>
-        /// Getter for refunded_money
+        /// Gets or sets RefundedMoney.
         /// </summary>
         [JsonProperty("refunded_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1Money RefundedMoney { get; }
 
         /// <summary>
-        /// Getter for swedish_rounding_money
+        /// Gets or sets SwedishRoundingMoney.
         /// </summary>
         [JsonProperty("swedish_rounding_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1Money SwedishRoundingMoney { get; }
 
         /// <summary>
-        /// Getter for gross_sales_money
+        /// Gets or sets GrossSalesMoney.
         /// </summary>
         [JsonProperty("gross_sales_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1Money GrossSalesMoney { get; }
 
         /// <summary>
-        /// Getter for net_sales_money
+        /// Gets or sets NetSalesMoney.
         /// </summary>
         [JsonProperty("net_sales_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1Money NetSalesMoney { get; }
@@ -225,7 +261,7 @@ namespace Square.Models
         public IList<Models.V1PaymentItemization> Itemizations { get; }
 
         /// <summary>
-        /// Getter for surcharge_money
+        /// Gets or sets SurchargeMoney.
         /// </summary>
         [JsonProperty("surcharge_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.V1Money SurchargeMoney { get; }
@@ -244,6 +280,7 @@ namespace Square.Models
         [JsonProperty("is_partial", NullValueHandling = NullValueHandling.Ignore)]
         public bool? IsPartial { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -253,37 +290,7 @@ namespace Square.Models
             return $"V1Payment : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Id = {(Id == null ? "null" : Id == string.Empty ? "" : Id)}");
-            toStringOutput.Add($"MerchantId = {(MerchantId == null ? "null" : MerchantId == string.Empty ? "" : MerchantId)}");
-            toStringOutput.Add($"CreatedAt = {(CreatedAt == null ? "null" : CreatedAt == string.Empty ? "" : CreatedAt)}");
-            toStringOutput.Add($"CreatorId = {(CreatorId == null ? "null" : CreatorId == string.Empty ? "" : CreatorId)}");
-            toStringOutput.Add($"Device = {(Device == null ? "null" : Device.ToString())}");
-            toStringOutput.Add($"PaymentUrl = {(PaymentUrl == null ? "null" : PaymentUrl == string.Empty ? "" : PaymentUrl)}");
-            toStringOutput.Add($"ReceiptUrl = {(ReceiptUrl == null ? "null" : ReceiptUrl == string.Empty ? "" : ReceiptUrl)}");
-            toStringOutput.Add($"InclusiveTaxMoney = {(InclusiveTaxMoney == null ? "null" : InclusiveTaxMoney.ToString())}");
-            toStringOutput.Add($"AdditiveTaxMoney = {(AdditiveTaxMoney == null ? "null" : AdditiveTaxMoney.ToString())}");
-            toStringOutput.Add($"TaxMoney = {(TaxMoney == null ? "null" : TaxMoney.ToString())}");
-            toStringOutput.Add($"TipMoney = {(TipMoney == null ? "null" : TipMoney.ToString())}");
-            toStringOutput.Add($"DiscountMoney = {(DiscountMoney == null ? "null" : DiscountMoney.ToString())}");
-            toStringOutput.Add($"TotalCollectedMoney = {(TotalCollectedMoney == null ? "null" : TotalCollectedMoney.ToString())}");
-            toStringOutput.Add($"ProcessingFeeMoney = {(ProcessingFeeMoney == null ? "null" : ProcessingFeeMoney.ToString())}");
-            toStringOutput.Add($"NetTotalMoney = {(NetTotalMoney == null ? "null" : NetTotalMoney.ToString())}");
-            toStringOutput.Add($"RefundedMoney = {(RefundedMoney == null ? "null" : RefundedMoney.ToString())}");
-            toStringOutput.Add($"SwedishRoundingMoney = {(SwedishRoundingMoney == null ? "null" : SwedishRoundingMoney.ToString())}");
-            toStringOutput.Add($"GrossSalesMoney = {(GrossSalesMoney == null ? "null" : GrossSalesMoney.ToString())}");
-            toStringOutput.Add($"NetSalesMoney = {(NetSalesMoney == null ? "null" : NetSalesMoney.ToString())}");
-            toStringOutput.Add($"InclusiveTax = {(InclusiveTax == null ? "null" : $"[{ string.Join(", ", InclusiveTax)} ]")}");
-            toStringOutput.Add($"AdditiveTax = {(AdditiveTax == null ? "null" : $"[{ string.Join(", ", AdditiveTax)} ]")}");
-            toStringOutput.Add($"Tender = {(Tender == null ? "null" : $"[{ string.Join(", ", Tender)} ]")}");
-            toStringOutput.Add($"Refunds = {(Refunds == null ? "null" : $"[{ string.Join(", ", Refunds)} ]")}");
-            toStringOutput.Add($"Itemizations = {(Itemizations == null ? "null" : $"[{ string.Join(", ", Itemizations)} ]")}");
-            toStringOutput.Add($"SurchargeMoney = {(SurchargeMoney == null ? "null" : SurchargeMoney.ToString())}");
-            toStringOutput.Add($"Surcharges = {(Surcharges == null ? "null" : $"[{ string.Join(", ", Surcharges)} ]")}");
-            toStringOutput.Add($"IsPartial = {(IsPartial == null ? "null" : IsPartial.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -297,216 +304,259 @@ namespace Square.Models
             }
 
             return obj is V1Payment other &&
-                ((Context == null && other.Context == null) || (Context?.Equals(other.Context) == true)) &&
-                ((Id == null && other.Id == null) || (Id?.Equals(other.Id) == true)) &&
-                ((MerchantId == null && other.MerchantId == null) || (MerchantId?.Equals(other.MerchantId) == true)) &&
-                ((CreatedAt == null && other.CreatedAt == null) || (CreatedAt?.Equals(other.CreatedAt) == true)) &&
-                ((CreatorId == null && other.CreatorId == null) || (CreatorId?.Equals(other.CreatorId) == true)) &&
-                ((Device == null && other.Device == null) || (Device?.Equals(other.Device) == true)) &&
-                ((PaymentUrl == null && other.PaymentUrl == null) || (PaymentUrl?.Equals(other.PaymentUrl) == true)) &&
-                ((ReceiptUrl == null && other.ReceiptUrl == null) || (ReceiptUrl?.Equals(other.ReceiptUrl) == true)) &&
-                ((InclusiveTaxMoney == null && other.InclusiveTaxMoney == null) || (InclusiveTaxMoney?.Equals(other.InclusiveTaxMoney) == true)) &&
-                ((AdditiveTaxMoney == null && other.AdditiveTaxMoney == null) || (AdditiveTaxMoney?.Equals(other.AdditiveTaxMoney) == true)) &&
-                ((TaxMoney == null && other.TaxMoney == null) || (TaxMoney?.Equals(other.TaxMoney) == true)) &&
-                ((TipMoney == null && other.TipMoney == null) || (TipMoney?.Equals(other.TipMoney) == true)) &&
-                ((DiscountMoney == null && other.DiscountMoney == null) || (DiscountMoney?.Equals(other.DiscountMoney) == true)) &&
-                ((TotalCollectedMoney == null && other.TotalCollectedMoney == null) || (TotalCollectedMoney?.Equals(other.TotalCollectedMoney) == true)) &&
-                ((ProcessingFeeMoney == null && other.ProcessingFeeMoney == null) || (ProcessingFeeMoney?.Equals(other.ProcessingFeeMoney) == true)) &&
-                ((NetTotalMoney == null && other.NetTotalMoney == null) || (NetTotalMoney?.Equals(other.NetTotalMoney) == true)) &&
-                ((RefundedMoney == null && other.RefundedMoney == null) || (RefundedMoney?.Equals(other.RefundedMoney) == true)) &&
-                ((SwedishRoundingMoney == null && other.SwedishRoundingMoney == null) || (SwedishRoundingMoney?.Equals(other.SwedishRoundingMoney) == true)) &&
-                ((GrossSalesMoney == null && other.GrossSalesMoney == null) || (GrossSalesMoney?.Equals(other.GrossSalesMoney) == true)) &&
-                ((NetSalesMoney == null && other.NetSalesMoney == null) || (NetSalesMoney?.Equals(other.NetSalesMoney) == true)) &&
-                ((InclusiveTax == null && other.InclusiveTax == null) || (InclusiveTax?.Equals(other.InclusiveTax) == true)) &&
-                ((AdditiveTax == null && other.AdditiveTax == null) || (AdditiveTax?.Equals(other.AdditiveTax) == true)) &&
-                ((Tender == null && other.Tender == null) || (Tender?.Equals(other.Tender) == true)) &&
-                ((Refunds == null && other.Refunds == null) || (Refunds?.Equals(other.Refunds) == true)) &&
-                ((Itemizations == null && other.Itemizations == null) || (Itemizations?.Equals(other.Itemizations) == true)) &&
-                ((SurchargeMoney == null && other.SurchargeMoney == null) || (SurchargeMoney?.Equals(other.SurchargeMoney) == true)) &&
-                ((Surcharges == null && other.Surcharges == null) || (Surcharges?.Equals(other.Surcharges) == true)) &&
-                ((IsPartial == null && other.IsPartial == null) || (IsPartial?.Equals(other.IsPartial) == true));
+                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
+                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
+                ((this.MerchantId == null && other.MerchantId == null) || (this.MerchantId?.Equals(other.MerchantId) == true)) &&
+                ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true)) &&
+                ((this.CreatorId == null && other.CreatorId == null) || (this.CreatorId?.Equals(other.CreatorId) == true)) &&
+                ((this.Device == null && other.Device == null) || (this.Device?.Equals(other.Device) == true)) &&
+                ((this.PaymentUrl == null && other.PaymentUrl == null) || (this.PaymentUrl?.Equals(other.PaymentUrl) == true)) &&
+                ((this.ReceiptUrl == null && other.ReceiptUrl == null) || (this.ReceiptUrl?.Equals(other.ReceiptUrl) == true)) &&
+                ((this.InclusiveTaxMoney == null && other.InclusiveTaxMoney == null) || (this.InclusiveTaxMoney?.Equals(other.InclusiveTaxMoney) == true)) &&
+                ((this.AdditiveTaxMoney == null && other.AdditiveTaxMoney == null) || (this.AdditiveTaxMoney?.Equals(other.AdditiveTaxMoney) == true)) &&
+                ((this.TaxMoney == null && other.TaxMoney == null) || (this.TaxMoney?.Equals(other.TaxMoney) == true)) &&
+                ((this.TipMoney == null && other.TipMoney == null) || (this.TipMoney?.Equals(other.TipMoney) == true)) &&
+                ((this.DiscountMoney == null && other.DiscountMoney == null) || (this.DiscountMoney?.Equals(other.DiscountMoney) == true)) &&
+                ((this.TotalCollectedMoney == null && other.TotalCollectedMoney == null) || (this.TotalCollectedMoney?.Equals(other.TotalCollectedMoney) == true)) &&
+                ((this.ProcessingFeeMoney == null && other.ProcessingFeeMoney == null) || (this.ProcessingFeeMoney?.Equals(other.ProcessingFeeMoney) == true)) &&
+                ((this.NetTotalMoney == null && other.NetTotalMoney == null) || (this.NetTotalMoney?.Equals(other.NetTotalMoney) == true)) &&
+                ((this.RefundedMoney == null && other.RefundedMoney == null) || (this.RefundedMoney?.Equals(other.RefundedMoney) == true)) &&
+                ((this.SwedishRoundingMoney == null && other.SwedishRoundingMoney == null) || (this.SwedishRoundingMoney?.Equals(other.SwedishRoundingMoney) == true)) &&
+                ((this.GrossSalesMoney == null && other.GrossSalesMoney == null) || (this.GrossSalesMoney?.Equals(other.GrossSalesMoney) == true)) &&
+                ((this.NetSalesMoney == null && other.NetSalesMoney == null) || (this.NetSalesMoney?.Equals(other.NetSalesMoney) == true)) &&
+                ((this.InclusiveTax == null && other.InclusiveTax == null) || (this.InclusiveTax?.Equals(other.InclusiveTax) == true)) &&
+                ((this.AdditiveTax == null && other.AdditiveTax == null) || (this.AdditiveTax?.Equals(other.AdditiveTax) == true)) &&
+                ((this.Tender == null && other.Tender == null) || (this.Tender?.Equals(other.Tender) == true)) &&
+                ((this.Refunds == null && other.Refunds == null) || (this.Refunds?.Equals(other.Refunds) == true)) &&
+                ((this.Itemizations == null && other.Itemizations == null) || (this.Itemizations?.Equals(other.Itemizations) == true)) &&
+                ((this.SurchargeMoney == null && other.SurchargeMoney == null) || (this.SurchargeMoney?.Equals(other.SurchargeMoney) == true)) &&
+                ((this.Surcharges == null && other.Surcharges == null) || (this.Surcharges?.Equals(other.Surcharges) == true)) &&
+                ((this.IsPartial == null && other.IsPartial == null) || (this.IsPartial?.Equals(other.IsPartial) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -215174345;
 
-            if (Context != null)
+            if (this.Context != null)
             {
-                hashCode += Context.GetHashCode();
+                hashCode += this.Context.GetHashCode();
             }
 
-            if (Id != null)
+            if (this.Id != null)
             {
-               hashCode += Id.GetHashCode();
+               hashCode += this.Id.GetHashCode();
             }
 
-            if (MerchantId != null)
+            if (this.MerchantId != null)
             {
-               hashCode += MerchantId.GetHashCode();
+               hashCode += this.MerchantId.GetHashCode();
             }
 
-            if (CreatedAt != null)
+            if (this.CreatedAt != null)
             {
-               hashCode += CreatedAt.GetHashCode();
+               hashCode += this.CreatedAt.GetHashCode();
             }
 
-            if (CreatorId != null)
+            if (this.CreatorId != null)
             {
-               hashCode += CreatorId.GetHashCode();
+               hashCode += this.CreatorId.GetHashCode();
             }
 
-            if (Device != null)
+            if (this.Device != null)
             {
-               hashCode += Device.GetHashCode();
+               hashCode += this.Device.GetHashCode();
             }
 
-            if (PaymentUrl != null)
+            if (this.PaymentUrl != null)
             {
-               hashCode += PaymentUrl.GetHashCode();
+               hashCode += this.PaymentUrl.GetHashCode();
             }
 
-            if (ReceiptUrl != null)
+            if (this.ReceiptUrl != null)
             {
-               hashCode += ReceiptUrl.GetHashCode();
+               hashCode += this.ReceiptUrl.GetHashCode();
             }
 
-            if (InclusiveTaxMoney != null)
+            if (this.InclusiveTaxMoney != null)
             {
-               hashCode += InclusiveTaxMoney.GetHashCode();
+               hashCode += this.InclusiveTaxMoney.GetHashCode();
             }
 
-            if (AdditiveTaxMoney != null)
+            if (this.AdditiveTaxMoney != null)
             {
-               hashCode += AdditiveTaxMoney.GetHashCode();
+               hashCode += this.AdditiveTaxMoney.GetHashCode();
             }
 
-            if (TaxMoney != null)
+            if (this.TaxMoney != null)
             {
-               hashCode += TaxMoney.GetHashCode();
+               hashCode += this.TaxMoney.GetHashCode();
             }
 
-            if (TipMoney != null)
+            if (this.TipMoney != null)
             {
-               hashCode += TipMoney.GetHashCode();
+               hashCode += this.TipMoney.GetHashCode();
             }
 
-            if (DiscountMoney != null)
+            if (this.DiscountMoney != null)
             {
-               hashCode += DiscountMoney.GetHashCode();
+               hashCode += this.DiscountMoney.GetHashCode();
             }
 
-            if (TotalCollectedMoney != null)
+            if (this.TotalCollectedMoney != null)
             {
-               hashCode += TotalCollectedMoney.GetHashCode();
+               hashCode += this.TotalCollectedMoney.GetHashCode();
             }
 
-            if (ProcessingFeeMoney != null)
+            if (this.ProcessingFeeMoney != null)
             {
-               hashCode += ProcessingFeeMoney.GetHashCode();
+               hashCode += this.ProcessingFeeMoney.GetHashCode();
             }
 
-            if (NetTotalMoney != null)
+            if (this.NetTotalMoney != null)
             {
-               hashCode += NetTotalMoney.GetHashCode();
+               hashCode += this.NetTotalMoney.GetHashCode();
             }
 
-            if (RefundedMoney != null)
+            if (this.RefundedMoney != null)
             {
-               hashCode += RefundedMoney.GetHashCode();
+               hashCode += this.RefundedMoney.GetHashCode();
             }
 
-            if (SwedishRoundingMoney != null)
+            if (this.SwedishRoundingMoney != null)
             {
-               hashCode += SwedishRoundingMoney.GetHashCode();
+               hashCode += this.SwedishRoundingMoney.GetHashCode();
             }
 
-            if (GrossSalesMoney != null)
+            if (this.GrossSalesMoney != null)
             {
-               hashCode += GrossSalesMoney.GetHashCode();
+               hashCode += this.GrossSalesMoney.GetHashCode();
             }
 
-            if (NetSalesMoney != null)
+            if (this.NetSalesMoney != null)
             {
-               hashCode += NetSalesMoney.GetHashCode();
+               hashCode += this.NetSalesMoney.GetHashCode();
             }
 
-            if (InclusiveTax != null)
+            if (this.InclusiveTax != null)
             {
-               hashCode += InclusiveTax.GetHashCode();
+               hashCode += this.InclusiveTax.GetHashCode();
             }
 
-            if (AdditiveTax != null)
+            if (this.AdditiveTax != null)
             {
-               hashCode += AdditiveTax.GetHashCode();
+               hashCode += this.AdditiveTax.GetHashCode();
             }
 
-            if (Tender != null)
+            if (this.Tender != null)
             {
-               hashCode += Tender.GetHashCode();
+               hashCode += this.Tender.GetHashCode();
             }
 
-            if (Refunds != null)
+            if (this.Refunds != null)
             {
-               hashCode += Refunds.GetHashCode();
+               hashCode += this.Refunds.GetHashCode();
             }
 
-            if (Itemizations != null)
+            if (this.Itemizations != null)
             {
-               hashCode += Itemizations.GetHashCode();
+               hashCode += this.Itemizations.GetHashCode();
             }
 
-            if (SurchargeMoney != null)
+            if (this.SurchargeMoney != null)
             {
-               hashCode += SurchargeMoney.GetHashCode();
+               hashCode += this.SurchargeMoney.GetHashCode();
             }
 
-            if (Surcharges != null)
+            if (this.Surcharges != null)
             {
-               hashCode += Surcharges.GetHashCode();
+               hashCode += this.Surcharges.GetHashCode();
             }
 
-            if (IsPartial != null)
+            if (this.IsPartial != null)
             {
-               hashCode += IsPartial.GetHashCode();
+               hashCode += this.IsPartial.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id == string.Empty ? "" : this.Id)}");
+            toStringOutput.Add($"this.MerchantId = {(this.MerchantId == null ? "null" : this.MerchantId == string.Empty ? "" : this.MerchantId)}");
+            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt == string.Empty ? "" : this.CreatedAt)}");
+            toStringOutput.Add($"this.CreatorId = {(this.CreatorId == null ? "null" : this.CreatorId == string.Empty ? "" : this.CreatorId)}");
+            toStringOutput.Add($"this.Device = {(this.Device == null ? "null" : this.Device.ToString())}");
+            toStringOutput.Add($"this.PaymentUrl = {(this.PaymentUrl == null ? "null" : this.PaymentUrl == string.Empty ? "" : this.PaymentUrl)}");
+            toStringOutput.Add($"this.ReceiptUrl = {(this.ReceiptUrl == null ? "null" : this.ReceiptUrl == string.Empty ? "" : this.ReceiptUrl)}");
+            toStringOutput.Add($"this.InclusiveTaxMoney = {(this.InclusiveTaxMoney == null ? "null" : this.InclusiveTaxMoney.ToString())}");
+            toStringOutput.Add($"this.AdditiveTaxMoney = {(this.AdditiveTaxMoney == null ? "null" : this.AdditiveTaxMoney.ToString())}");
+            toStringOutput.Add($"this.TaxMoney = {(this.TaxMoney == null ? "null" : this.TaxMoney.ToString())}");
+            toStringOutput.Add($"this.TipMoney = {(this.TipMoney == null ? "null" : this.TipMoney.ToString())}");
+            toStringOutput.Add($"this.DiscountMoney = {(this.DiscountMoney == null ? "null" : this.DiscountMoney.ToString())}");
+            toStringOutput.Add($"this.TotalCollectedMoney = {(this.TotalCollectedMoney == null ? "null" : this.TotalCollectedMoney.ToString())}");
+            toStringOutput.Add($"this.ProcessingFeeMoney = {(this.ProcessingFeeMoney == null ? "null" : this.ProcessingFeeMoney.ToString())}");
+            toStringOutput.Add($"this.NetTotalMoney = {(this.NetTotalMoney == null ? "null" : this.NetTotalMoney.ToString())}");
+            toStringOutput.Add($"this.RefundedMoney = {(this.RefundedMoney == null ? "null" : this.RefundedMoney.ToString())}");
+            toStringOutput.Add($"this.SwedishRoundingMoney = {(this.SwedishRoundingMoney == null ? "null" : this.SwedishRoundingMoney.ToString())}");
+            toStringOutput.Add($"this.GrossSalesMoney = {(this.GrossSalesMoney == null ? "null" : this.GrossSalesMoney.ToString())}");
+            toStringOutput.Add($"this.NetSalesMoney = {(this.NetSalesMoney == null ? "null" : this.NetSalesMoney.ToString())}");
+            toStringOutput.Add($"this.InclusiveTax = {(this.InclusiveTax == null ? "null" : $"[{string.Join(", ", this.InclusiveTax)} ]")}");
+            toStringOutput.Add($"this.AdditiveTax = {(this.AdditiveTax == null ? "null" : $"[{string.Join(", ", this.AdditiveTax)} ]")}");
+            toStringOutput.Add($"this.Tender = {(this.Tender == null ? "null" : $"[{string.Join(", ", this.Tender)} ]")}");
+            toStringOutput.Add($"this.Refunds = {(this.Refunds == null ? "null" : $"[{string.Join(", ", this.Refunds)} ]")}");
+            toStringOutput.Add($"this.Itemizations = {(this.Itemizations == null ? "null" : $"[{string.Join(", ", this.Itemizations)} ]")}");
+            toStringOutput.Add($"this.SurchargeMoney = {(this.SurchargeMoney == null ? "null" : this.SurchargeMoney.ToString())}");
+            toStringOutput.Add($"this.Surcharges = {(this.Surcharges == null ? "null" : $"[{string.Join(", ", this.Surcharges)} ]")}");
+            toStringOutput.Add($"this.IsPartial = {(this.IsPartial == null ? "null" : this.IsPartial.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .Id(Id)
-                .MerchantId(MerchantId)
-                .CreatedAt(CreatedAt)
-                .CreatorId(CreatorId)
-                .Device(Device)
-                .PaymentUrl(PaymentUrl)
-                .ReceiptUrl(ReceiptUrl)
-                .InclusiveTaxMoney(InclusiveTaxMoney)
-                .AdditiveTaxMoney(AdditiveTaxMoney)
-                .TaxMoney(TaxMoney)
-                .TipMoney(TipMoney)
-                .DiscountMoney(DiscountMoney)
-                .TotalCollectedMoney(TotalCollectedMoney)
-                .ProcessingFeeMoney(ProcessingFeeMoney)
-                .NetTotalMoney(NetTotalMoney)
-                .RefundedMoney(RefundedMoney)
-                .SwedishRoundingMoney(SwedishRoundingMoney)
-                .GrossSalesMoney(GrossSalesMoney)
-                .NetSalesMoney(NetSalesMoney)
-                .InclusiveTax(InclusiveTax)
-                .AdditiveTax(AdditiveTax)
-                .Tender(Tender)
-                .Refunds(Refunds)
-                .Itemizations(Itemizations)
-                .SurchargeMoney(SurchargeMoney)
-                .Surcharges(Surcharges)
-                .IsPartial(IsPartial);
+                .Id(this.Id)
+                .MerchantId(this.MerchantId)
+                .CreatedAt(this.CreatedAt)
+                .CreatorId(this.CreatorId)
+                .Device(this.Device)
+                .PaymentUrl(this.PaymentUrl)
+                .ReceiptUrl(this.ReceiptUrl)
+                .InclusiveTaxMoney(this.InclusiveTaxMoney)
+                .AdditiveTaxMoney(this.AdditiveTaxMoney)
+                .TaxMoney(this.TaxMoney)
+                .TipMoney(this.TipMoney)
+                .DiscountMoney(this.DiscountMoney)
+                .TotalCollectedMoney(this.TotalCollectedMoney)
+                .ProcessingFeeMoney(this.ProcessingFeeMoney)
+                .NetTotalMoney(this.NetTotalMoney)
+                .RefundedMoney(this.RefundedMoney)
+                .SwedishRoundingMoney(this.SwedishRoundingMoney)
+                .GrossSalesMoney(this.GrossSalesMoney)
+                .NetSalesMoney(this.NetSalesMoney)
+                .InclusiveTax(this.InclusiveTax)
+                .AdditiveTax(this.AdditiveTax)
+                .Tender(this.Tender)
+                .Refunds(this.Refunds)
+                .Itemizations(this.Itemizations)
+                .SurchargeMoney(this.SurchargeMoney)
+                .Surcharges(this.Surcharges)
+                .IsPartial(this.IsPartial);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string id;
@@ -537,199 +587,337 @@ namespace Square.Models
             private IList<Models.V1PaymentSurcharge> surcharges;
             private bool? isPartial;
 
-
-
+             /// <summary>
+             /// Id.
+             /// </summary>
+             /// <param name="id"> id. </param>
+             /// <returns> Builder. </returns>
             public Builder Id(string id)
             {
                 this.id = id;
                 return this;
             }
 
+             /// <summary>
+             /// MerchantId.
+             /// </summary>
+             /// <param name="merchantId"> merchantId. </param>
+             /// <returns> Builder. </returns>
             public Builder MerchantId(string merchantId)
             {
                 this.merchantId = merchantId;
                 return this;
             }
 
+             /// <summary>
+             /// CreatedAt.
+             /// </summary>
+             /// <param name="createdAt"> createdAt. </param>
+             /// <returns> Builder. </returns>
             public Builder CreatedAt(string createdAt)
             {
                 this.createdAt = createdAt;
                 return this;
             }
 
+             /// <summary>
+             /// CreatorId.
+             /// </summary>
+             /// <param name="creatorId"> creatorId. </param>
+             /// <returns> Builder. </returns>
             public Builder CreatorId(string creatorId)
             {
                 this.creatorId = creatorId;
                 return this;
             }
 
+             /// <summary>
+             /// Device.
+             /// </summary>
+             /// <param name="device"> device. </param>
+             /// <returns> Builder. </returns>
             public Builder Device(Models.Device device)
             {
                 this.device = device;
                 return this;
             }
 
+             /// <summary>
+             /// PaymentUrl.
+             /// </summary>
+             /// <param name="paymentUrl"> paymentUrl. </param>
+             /// <returns> Builder. </returns>
             public Builder PaymentUrl(string paymentUrl)
             {
                 this.paymentUrl = paymentUrl;
                 return this;
             }
 
+             /// <summary>
+             /// ReceiptUrl.
+             /// </summary>
+             /// <param name="receiptUrl"> receiptUrl. </param>
+             /// <returns> Builder. </returns>
             public Builder ReceiptUrl(string receiptUrl)
             {
                 this.receiptUrl = receiptUrl;
                 return this;
             }
 
+             /// <summary>
+             /// InclusiveTaxMoney.
+             /// </summary>
+             /// <param name="inclusiveTaxMoney"> inclusiveTaxMoney. </param>
+             /// <returns> Builder. </returns>
             public Builder InclusiveTaxMoney(Models.V1Money inclusiveTaxMoney)
             {
                 this.inclusiveTaxMoney = inclusiveTaxMoney;
                 return this;
             }
 
+             /// <summary>
+             /// AdditiveTaxMoney.
+             /// </summary>
+             /// <param name="additiveTaxMoney"> additiveTaxMoney. </param>
+             /// <returns> Builder. </returns>
             public Builder AdditiveTaxMoney(Models.V1Money additiveTaxMoney)
             {
                 this.additiveTaxMoney = additiveTaxMoney;
                 return this;
             }
 
+             /// <summary>
+             /// TaxMoney.
+             /// </summary>
+             /// <param name="taxMoney"> taxMoney. </param>
+             /// <returns> Builder. </returns>
             public Builder TaxMoney(Models.V1Money taxMoney)
             {
                 this.taxMoney = taxMoney;
                 return this;
             }
 
+             /// <summary>
+             /// TipMoney.
+             /// </summary>
+             /// <param name="tipMoney"> tipMoney. </param>
+             /// <returns> Builder. </returns>
             public Builder TipMoney(Models.V1Money tipMoney)
             {
                 this.tipMoney = tipMoney;
                 return this;
             }
 
+             /// <summary>
+             /// DiscountMoney.
+             /// </summary>
+             /// <param name="discountMoney"> discountMoney. </param>
+             /// <returns> Builder. </returns>
             public Builder DiscountMoney(Models.V1Money discountMoney)
             {
                 this.discountMoney = discountMoney;
                 return this;
             }
 
+             /// <summary>
+             /// TotalCollectedMoney.
+             /// </summary>
+             /// <param name="totalCollectedMoney"> totalCollectedMoney. </param>
+             /// <returns> Builder. </returns>
             public Builder TotalCollectedMoney(Models.V1Money totalCollectedMoney)
             {
                 this.totalCollectedMoney = totalCollectedMoney;
                 return this;
             }
 
+             /// <summary>
+             /// ProcessingFeeMoney.
+             /// </summary>
+             /// <param name="processingFeeMoney"> processingFeeMoney. </param>
+             /// <returns> Builder. </returns>
             public Builder ProcessingFeeMoney(Models.V1Money processingFeeMoney)
             {
                 this.processingFeeMoney = processingFeeMoney;
                 return this;
             }
 
+             /// <summary>
+             /// NetTotalMoney.
+             /// </summary>
+             /// <param name="netTotalMoney"> netTotalMoney. </param>
+             /// <returns> Builder. </returns>
             public Builder NetTotalMoney(Models.V1Money netTotalMoney)
             {
                 this.netTotalMoney = netTotalMoney;
                 return this;
             }
 
+             /// <summary>
+             /// RefundedMoney.
+             /// </summary>
+             /// <param name="refundedMoney"> refundedMoney. </param>
+             /// <returns> Builder. </returns>
             public Builder RefundedMoney(Models.V1Money refundedMoney)
             {
                 this.refundedMoney = refundedMoney;
                 return this;
             }
 
+             /// <summary>
+             /// SwedishRoundingMoney.
+             /// </summary>
+             /// <param name="swedishRoundingMoney"> swedishRoundingMoney. </param>
+             /// <returns> Builder. </returns>
             public Builder SwedishRoundingMoney(Models.V1Money swedishRoundingMoney)
             {
                 this.swedishRoundingMoney = swedishRoundingMoney;
                 return this;
             }
 
+             /// <summary>
+             /// GrossSalesMoney.
+             /// </summary>
+             /// <param name="grossSalesMoney"> grossSalesMoney. </param>
+             /// <returns> Builder. </returns>
             public Builder GrossSalesMoney(Models.V1Money grossSalesMoney)
             {
                 this.grossSalesMoney = grossSalesMoney;
                 return this;
             }
 
+             /// <summary>
+             /// NetSalesMoney.
+             /// </summary>
+             /// <param name="netSalesMoney"> netSalesMoney. </param>
+             /// <returns> Builder. </returns>
             public Builder NetSalesMoney(Models.V1Money netSalesMoney)
             {
                 this.netSalesMoney = netSalesMoney;
                 return this;
             }
 
+             /// <summary>
+             /// InclusiveTax.
+             /// </summary>
+             /// <param name="inclusiveTax"> inclusiveTax. </param>
+             /// <returns> Builder. </returns>
             public Builder InclusiveTax(IList<Models.V1PaymentTax> inclusiveTax)
             {
                 this.inclusiveTax = inclusiveTax;
                 return this;
             }
 
+             /// <summary>
+             /// AdditiveTax.
+             /// </summary>
+             /// <param name="additiveTax"> additiveTax. </param>
+             /// <returns> Builder. </returns>
             public Builder AdditiveTax(IList<Models.V1PaymentTax> additiveTax)
             {
                 this.additiveTax = additiveTax;
                 return this;
             }
 
+             /// <summary>
+             /// Tender.
+             /// </summary>
+             /// <param name="tender"> tender. </param>
+             /// <returns> Builder. </returns>
             public Builder Tender(IList<Models.V1Tender> tender)
             {
                 this.tender = tender;
                 return this;
             }
 
+             /// <summary>
+             /// Refunds.
+             /// </summary>
+             /// <param name="refunds"> refunds. </param>
+             /// <returns> Builder. </returns>
             public Builder Refunds(IList<Models.V1Refund> refunds)
             {
                 this.refunds = refunds;
                 return this;
             }
 
+             /// <summary>
+             /// Itemizations.
+             /// </summary>
+             /// <param name="itemizations"> itemizations. </param>
+             /// <returns> Builder. </returns>
             public Builder Itemizations(IList<Models.V1PaymentItemization> itemizations)
             {
                 this.itemizations = itemizations;
                 return this;
             }
 
+             /// <summary>
+             /// SurchargeMoney.
+             /// </summary>
+             /// <param name="surchargeMoney"> surchargeMoney. </param>
+             /// <returns> Builder. </returns>
             public Builder SurchargeMoney(Models.V1Money surchargeMoney)
             {
                 this.surchargeMoney = surchargeMoney;
                 return this;
             }
 
+             /// <summary>
+             /// Surcharges.
+             /// </summary>
+             /// <param name="surcharges"> surcharges. </param>
+             /// <returns> Builder. </returns>
             public Builder Surcharges(IList<Models.V1PaymentSurcharge> surcharges)
             {
                 this.surcharges = surcharges;
                 return this;
             }
 
+             /// <summary>
+             /// IsPartial.
+             /// </summary>
+             /// <param name="isPartial"> isPartial. </param>
+             /// <returns> Builder. </returns>
             public Builder IsPartial(bool? isPartial)
             {
                 this.isPartial = isPartial;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> V1Payment. </returns>
             public V1Payment Build()
             {
-                return new V1Payment(id,
-                    merchantId,
-                    createdAt,
-                    creatorId,
-                    device,
-                    paymentUrl,
-                    receiptUrl,
-                    inclusiveTaxMoney,
-                    additiveTaxMoney,
-                    taxMoney,
-                    tipMoney,
-                    discountMoney,
-                    totalCollectedMoney,
-                    processingFeeMoney,
-                    netTotalMoney,
-                    refundedMoney,
-                    swedishRoundingMoney,
-                    grossSalesMoney,
-                    netSalesMoney,
-                    inclusiveTax,
-                    additiveTax,
-                    tender,
-                    refunds,
-                    itemizations,
-                    surchargeMoney,
-                    surcharges,
-                    isPartial);
+                return new V1Payment(
+                    this.id,
+                    this.merchantId,
+                    this.createdAt,
+                    this.creatorId,
+                    this.device,
+                    this.paymentUrl,
+                    this.receiptUrl,
+                    this.inclusiveTaxMoney,
+                    this.additiveTaxMoney,
+                    this.taxMoney,
+                    this.tipMoney,
+                    this.discountMoney,
+                    this.totalCollectedMoney,
+                    this.processingFeeMoney,
+                    this.netTotalMoney,
+                    this.refundedMoney,
+                    this.swedishRoundingMoney,
+                    this.grossSalesMoney,
+                    this.netSalesMoney,
+                    this.inclusiveTax,
+                    this.additiveTax,
+                    this.tender,
+                    this.refunds,
+                    this.itemizations,
+                    this.surchargeMoney,
+                    this.surcharges,
+                    this.isPartial);
             }
         }
     }

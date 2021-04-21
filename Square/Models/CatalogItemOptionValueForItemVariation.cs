@@ -1,25 +1,33 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class CatalogItemOptionValueForItemVariation 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// CatalogItemOptionValueForItemVariation.
+    /// </summary>
+    public class CatalogItemOptionValueForItemVariation
     {
-        public CatalogItemOptionValueForItemVariation(string itemOptionId = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CatalogItemOptionValueForItemVariation"/> class.
+        /// </summary>
+        /// <param name="itemOptionId">item_option_id.</param>
+        /// <param name="itemOptionValueId">item_option_value_id.</param>
+        public CatalogItemOptionValueForItemVariation(
+            string itemOptionId = null,
             string itemOptionValueId = null)
         {
-            ItemOptionId = itemOptionId;
-            ItemOptionValueId = itemOptionValueId;
+            this.ItemOptionId = itemOptionId;
+            this.ItemOptionValueId = itemOptionValueId;
         }
 
         /// <summary>
@@ -34,6 +42,7 @@ namespace Square.Models
         [JsonProperty("item_option_value_id", NullValueHandling = NullValueHandling.Ignore)]
         public string ItemOptionValueId { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -43,12 +52,7 @@ namespace Square.Models
             return $"CatalogItemOptionValueForItemVariation : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"ItemOptionId = {(ItemOptionId == null ? "null" : ItemOptionId == string.Empty ? "" : ItemOptionId)}");
-            toStringOutput.Add($"ItemOptionValueId = {(ItemOptionValueId == null ? "null" : ItemOptionValueId == string.Empty ? "" : ItemOptionValueId)}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -62,58 +66,89 @@ namespace Square.Models
             }
 
             return obj is CatalogItemOptionValueForItemVariation other &&
-                ((ItemOptionId == null && other.ItemOptionId == null) || (ItemOptionId?.Equals(other.ItemOptionId) == true)) &&
-                ((ItemOptionValueId == null && other.ItemOptionValueId == null) || (ItemOptionValueId?.Equals(other.ItemOptionValueId) == true));
+                ((this.ItemOptionId == null && other.ItemOptionId == null) || (this.ItemOptionId?.Equals(other.ItemOptionId) == true)) &&
+                ((this.ItemOptionValueId == null && other.ItemOptionValueId == null) || (this.ItemOptionValueId?.Equals(other.ItemOptionValueId) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -727857243;
 
-            if (ItemOptionId != null)
+            if (this.ItemOptionId != null)
             {
-               hashCode += ItemOptionId.GetHashCode();
+               hashCode += this.ItemOptionId.GetHashCode();
             }
 
-            if (ItemOptionValueId != null)
+            if (this.ItemOptionValueId != null)
             {
-               hashCode += ItemOptionValueId.GetHashCode();
+               hashCode += this.ItemOptionValueId.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.ItemOptionId = {(this.ItemOptionId == null ? "null" : this.ItemOptionId == string.Empty ? "" : this.ItemOptionId)}");
+            toStringOutput.Add($"this.ItemOptionValueId = {(this.ItemOptionValueId == null ? "null" : this.ItemOptionValueId == string.Empty ? "" : this.ItemOptionValueId)}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .ItemOptionId(ItemOptionId)
-                .ItemOptionValueId(ItemOptionValueId);
+                .ItemOptionId(this.ItemOptionId)
+                .ItemOptionValueId(this.ItemOptionValueId);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string itemOptionId;
             private string itemOptionValueId;
 
-
-
+             /// <summary>
+             /// ItemOptionId.
+             /// </summary>
+             /// <param name="itemOptionId"> itemOptionId. </param>
+             /// <returns> Builder. </returns>
             public Builder ItemOptionId(string itemOptionId)
             {
                 this.itemOptionId = itemOptionId;
                 return this;
             }
 
+             /// <summary>
+             /// ItemOptionValueId.
+             /// </summary>
+             /// <param name="itemOptionValueId"> itemOptionValueId. </param>
+             /// <returns> Builder. </returns>
             public Builder ItemOptionValueId(string itemOptionValueId)
             {
                 this.itemOptionValueId = itemOptionValueId;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> CatalogItemOptionValueForItemVariation. </returns>
             public CatalogItemOptionValueForItemVariation Build()
             {
-                return new CatalogItemOptionValueForItemVariation(itemOptionId,
-                    itemOptionValueId);
+                return new CatalogItemOptionValueForItemVariation(
+                    this.itemOptionId,
+                    this.itemOptionValueId);
             }
         }
     }

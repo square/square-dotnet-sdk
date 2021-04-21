@@ -1,31 +1,42 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class CatalogItemModifierListInfo 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// CatalogItemModifierListInfo.
+    /// </summary>
+    public class CatalogItemModifierListInfo
     {
-        public CatalogItemModifierListInfo(string modifierListId,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CatalogItemModifierListInfo"/> class.
+        /// </summary>
+        /// <param name="modifierListId">modifier_list_id.</param>
+        /// <param name="modifierOverrides">modifier_overrides.</param>
+        /// <param name="minSelectedModifiers">min_selected_modifiers.</param>
+        /// <param name="maxSelectedModifiers">max_selected_modifiers.</param>
+        /// <param name="enabled">enabled.</param>
+        public CatalogItemModifierListInfo(
+            string modifierListId,
             IList<Models.CatalogModifierOverride> modifierOverrides = null,
             int? minSelectedModifiers = null,
             int? maxSelectedModifiers = null,
             bool? enabled = null)
         {
-            ModifierListId = modifierListId;
-            ModifierOverrides = modifierOverrides;
-            MinSelectedModifiers = minSelectedModifiers;
-            MaxSelectedModifiers = maxSelectedModifiers;
-            Enabled = enabled;
+            this.ModifierListId = modifierListId;
+            this.ModifierOverrides = modifierOverrides;
+            this.MinSelectedModifiers = minSelectedModifiers;
+            this.MaxSelectedModifiers = maxSelectedModifiers;
+            this.Enabled = enabled;
         }
 
         /// <summary>
@@ -58,6 +69,7 @@ namespace Square.Models
         [JsonProperty("enabled", NullValueHandling = NullValueHandling.Ignore)]
         public bool? Enabled { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -67,15 +79,7 @@ namespace Square.Models
             return $"CatalogItemModifierListInfo : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"ModifierListId = {(ModifierListId == null ? "null" : ModifierListId == string.Empty ? "" : ModifierListId)}");
-            toStringOutput.Add($"ModifierOverrides = {(ModifierOverrides == null ? "null" : $"[{ string.Join(", ", ModifierOverrides)} ]")}");
-            toStringOutput.Add($"MinSelectedModifiers = {(MinSelectedModifiers == null ? "null" : MinSelectedModifiers.ToString())}");
-            toStringOutput.Add($"MaxSelectedModifiers = {(MaxSelectedModifiers == null ? "null" : MaxSelectedModifiers.ToString())}");
-            toStringOutput.Add($"Enabled = {(Enabled == null ? "null" : Enabled.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -89,55 +93,77 @@ namespace Square.Models
             }
 
             return obj is CatalogItemModifierListInfo other &&
-                ((ModifierListId == null && other.ModifierListId == null) || (ModifierListId?.Equals(other.ModifierListId) == true)) &&
-                ((ModifierOverrides == null && other.ModifierOverrides == null) || (ModifierOverrides?.Equals(other.ModifierOverrides) == true)) &&
-                ((MinSelectedModifiers == null && other.MinSelectedModifiers == null) || (MinSelectedModifiers?.Equals(other.MinSelectedModifiers) == true)) &&
-                ((MaxSelectedModifiers == null && other.MaxSelectedModifiers == null) || (MaxSelectedModifiers?.Equals(other.MaxSelectedModifiers) == true)) &&
-                ((Enabled == null && other.Enabled == null) || (Enabled?.Equals(other.Enabled) == true));
+                ((this.ModifierListId == null && other.ModifierListId == null) || (this.ModifierListId?.Equals(other.ModifierListId) == true)) &&
+                ((this.ModifierOverrides == null && other.ModifierOverrides == null) || (this.ModifierOverrides?.Equals(other.ModifierOverrides) == true)) &&
+                ((this.MinSelectedModifiers == null && other.MinSelectedModifiers == null) || (this.MinSelectedModifiers?.Equals(other.MinSelectedModifiers) == true)) &&
+                ((this.MaxSelectedModifiers == null && other.MaxSelectedModifiers == null) || (this.MaxSelectedModifiers?.Equals(other.MaxSelectedModifiers) == true)) &&
+                ((this.Enabled == null && other.Enabled == null) || (this.Enabled?.Equals(other.Enabled) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 1904387422;
 
-            if (ModifierListId != null)
+            if (this.ModifierListId != null)
             {
-               hashCode += ModifierListId.GetHashCode();
+               hashCode += this.ModifierListId.GetHashCode();
             }
 
-            if (ModifierOverrides != null)
+            if (this.ModifierOverrides != null)
             {
-               hashCode += ModifierOverrides.GetHashCode();
+               hashCode += this.ModifierOverrides.GetHashCode();
             }
 
-            if (MinSelectedModifiers != null)
+            if (this.MinSelectedModifiers != null)
             {
-               hashCode += MinSelectedModifiers.GetHashCode();
+               hashCode += this.MinSelectedModifiers.GetHashCode();
             }
 
-            if (MaxSelectedModifiers != null)
+            if (this.MaxSelectedModifiers != null)
             {
-               hashCode += MaxSelectedModifiers.GetHashCode();
+               hashCode += this.MaxSelectedModifiers.GetHashCode();
             }
 
-            if (Enabled != null)
+            if (this.Enabled != null)
             {
-               hashCode += Enabled.GetHashCode();
+               hashCode += this.Enabled.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.ModifierListId = {(this.ModifierListId == null ? "null" : this.ModifierListId == string.Empty ? "" : this.ModifierListId)}");
+            toStringOutput.Add($"this.ModifierOverrides = {(this.ModifierOverrides == null ? "null" : $"[{string.Join(", ", this.ModifierOverrides)} ]")}");
+            toStringOutput.Add($"this.MinSelectedModifiers = {(this.MinSelectedModifiers == null ? "null" : this.MinSelectedModifiers.ToString())}");
+            toStringOutput.Add($"this.MaxSelectedModifiers = {(this.MaxSelectedModifiers == null ? "null" : this.MaxSelectedModifiers.ToString())}");
+            toStringOutput.Add($"this.Enabled = {(this.Enabled == null ? "null" : this.Enabled.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
-            var builder = new Builder(ModifierListId)
-                .ModifierOverrides(ModifierOverrides)
-                .MinSelectedModifiers(MinSelectedModifiers)
-                .MaxSelectedModifiers(MaxSelectedModifiers)
-                .Enabled(Enabled);
+            var builder = new Builder(
+                this.ModifierListId)
+                .ModifierOverrides(this.ModifierOverrides)
+                .MinSelectedModifiers(this.MinSelectedModifiers)
+                .MaxSelectedModifiers(this.MaxSelectedModifiers)
+                .Enabled(this.Enabled);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string modifierListId;
@@ -146,48 +172,79 @@ namespace Square.Models
             private int? maxSelectedModifiers;
             private bool? enabled;
 
-            public Builder(string modifierListId)
+            public Builder(
+                string modifierListId)
             {
                 this.modifierListId = modifierListId;
             }
 
+             /// <summary>
+             /// ModifierListId.
+             /// </summary>
+             /// <param name="modifierListId"> modifierListId. </param>
+             /// <returns> Builder. </returns>
             public Builder ModifierListId(string modifierListId)
             {
                 this.modifierListId = modifierListId;
                 return this;
             }
 
+             /// <summary>
+             /// ModifierOverrides.
+             /// </summary>
+             /// <param name="modifierOverrides"> modifierOverrides. </param>
+             /// <returns> Builder. </returns>
             public Builder ModifierOverrides(IList<Models.CatalogModifierOverride> modifierOverrides)
             {
                 this.modifierOverrides = modifierOverrides;
                 return this;
             }
 
+             /// <summary>
+             /// MinSelectedModifiers.
+             /// </summary>
+             /// <param name="minSelectedModifiers"> minSelectedModifiers. </param>
+             /// <returns> Builder. </returns>
             public Builder MinSelectedModifiers(int? minSelectedModifiers)
             {
                 this.minSelectedModifiers = minSelectedModifiers;
                 return this;
             }
 
+             /// <summary>
+             /// MaxSelectedModifiers.
+             /// </summary>
+             /// <param name="maxSelectedModifiers"> maxSelectedModifiers. </param>
+             /// <returns> Builder. </returns>
             public Builder MaxSelectedModifiers(int? maxSelectedModifiers)
             {
                 this.maxSelectedModifiers = maxSelectedModifiers;
                 return this;
             }
 
+             /// <summary>
+             /// Enabled.
+             /// </summary>
+             /// <param name="enabled"> enabled. </param>
+             /// <returns> Builder. </returns>
             public Builder Enabled(bool? enabled)
             {
                 this.enabled = enabled;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> CatalogItemModifierListInfo. </returns>
             public CatalogItemModifierListInfo Build()
             {
-                return new CatalogItemModifierListInfo(modifierListId,
-                    modifierOverrides,
-                    minSelectedModifiers,
-                    maxSelectedModifiers,
-                    enabled);
+                return new CatalogItemModifierListInfo(
+                    this.modifierListId,
+                    this.modifierOverrides,
+                    this.minSelectedModifiers,
+                    this.maxSelectedModifiers,
+                    this.enabled);
             }
         }
     }

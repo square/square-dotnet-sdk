@@ -1,27 +1,36 @@
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Square;
-using Square.Utilities;
-
 namespace Square.Models
 {
-    public class SearchSubscriptionsRequest 
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Square;
+    using Square.Utilities;
+
+    /// <summary>
+    /// SearchSubscriptionsRequest.
+    /// </summary>
+    public class SearchSubscriptionsRequest
     {
-        public SearchSubscriptionsRequest(string cursor = null,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SearchSubscriptionsRequest"/> class.
+        /// </summary>
+        /// <param name="cursor">cursor.</param>
+        /// <param name="limit">limit.</param>
+        /// <param name="query">query.</param>
+        public SearchSubscriptionsRequest(
+            string cursor = null,
             int? limit = null,
             Models.SearchSubscriptionsQuery query = null)
         {
-            Cursor = cursor;
-            Limit = limit;
-            Query = query;
+            this.Cursor = cursor;
+            this.Limit = limit;
+            this.Query = query;
         }
 
         /// <summary>
@@ -33,8 +42,8 @@ namespace Square.Models
         public string Cursor { get; }
 
         /// <summary>
-        /// The upper limit on the number of subscriptions to return 
-        /// in the response. 
+        /// The upper limit on the number of subscriptions to return
+        /// in the response.
         /// Default: `200`
         /// </summary>
         [JsonProperty("limit", NullValueHandling = NullValueHandling.Ignore)]
@@ -46,6 +55,7 @@ namespace Square.Models
         [JsonProperty("query", NullValueHandling = NullValueHandling.Ignore)]
         public Models.SearchSubscriptionsQuery Query { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
@@ -55,13 +65,7 @@ namespace Square.Models
             return $"SearchSubscriptionsRequest : ({string.Join(", ", toStringOutput)})";
         }
 
-        protected void ToString(List<string> toStringOutput)
-        {
-            toStringOutput.Add($"Cursor = {(Cursor == null ? "null" : Cursor == string.Empty ? "" : Cursor)}");
-            toStringOutput.Add($"Limit = {(Limit == null ? "null" : Limit.ToString())}");
-            toStringOutput.Add($"Query = {(Query == null ? "null" : Query.ToString())}");
-        }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -75,73 +79,110 @@ namespace Square.Models
             }
 
             return obj is SearchSubscriptionsRequest other &&
-                ((Cursor == null && other.Cursor == null) || (Cursor?.Equals(other.Cursor) == true)) &&
-                ((Limit == null && other.Limit == null) || (Limit?.Equals(other.Limit) == true)) &&
-                ((Query == null && other.Query == null) || (Query?.Equals(other.Query) == true));
+                ((this.Cursor == null && other.Cursor == null) || (this.Cursor?.Equals(other.Cursor) == true)) &&
+                ((this.Limit == null && other.Limit == null) || (this.Limit?.Equals(other.Limit) == true)) &&
+                ((this.Query == null && other.Query == null) || (this.Query?.Equals(other.Query) == true));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 193071717;
 
-            if (Cursor != null)
+            if (this.Cursor != null)
             {
-               hashCode += Cursor.GetHashCode();
+               hashCode += this.Cursor.GetHashCode();
             }
 
-            if (Limit != null)
+            if (this.Limit != null)
             {
-               hashCode += Limit.GetHashCode();
+               hashCode += this.Limit.GetHashCode();
             }
 
-            if (Query != null)
+            if (this.Query != null)
             {
-               hashCode += Query.GetHashCode();
+               hashCode += this.Query.GetHashCode();
             }
 
             return hashCode;
         }
 
+        /// <summary>
+        /// ToString overload.
+        /// </summary>
+        /// <param name="toStringOutput">List of strings.</param>
+        protected void ToString(List<string> toStringOutput)
+        {
+            toStringOutput.Add($"this.Cursor = {(this.Cursor == null ? "null" : this.Cursor == string.Empty ? "" : this.Cursor)}");
+            toStringOutput.Add($"this.Limit = {(this.Limit == null ? "null" : this.Limit.ToString())}");
+            toStringOutput.Add($"this.Query = {(this.Query == null ? "null" : this.Query.ToString())}");
+        }
+
+        /// <summary>
+        /// Converts to builder object.
+        /// </summary>
+        /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .Cursor(Cursor)
-                .Limit(Limit)
-                .Query(Query);
+                .Cursor(this.Cursor)
+                .Limit(this.Limit)
+                .Query(this.Query);
             return builder;
         }
 
+        /// <summary>
+        /// Builder class.
+        /// </summary>
         public class Builder
         {
             private string cursor;
             private int? limit;
             private Models.SearchSubscriptionsQuery query;
 
-
-
+             /// <summary>
+             /// Cursor.
+             /// </summary>
+             /// <param name="cursor"> cursor. </param>
+             /// <returns> Builder. </returns>
             public Builder Cursor(string cursor)
             {
                 this.cursor = cursor;
                 return this;
             }
 
+             /// <summary>
+             /// Limit.
+             /// </summary>
+             /// <param name="limit"> limit. </param>
+             /// <returns> Builder. </returns>
             public Builder Limit(int? limit)
             {
                 this.limit = limit;
                 return this;
             }
 
+             /// <summary>
+             /// Query.
+             /// </summary>
+             /// <param name="query"> query. </param>
+             /// <returns> Builder. </returns>
             public Builder Query(Models.SearchSubscriptionsQuery query)
             {
                 this.query = query;
                 return this;
             }
 
+            /// <summary>
+            /// Builds class object.
+            /// </summary>
+            /// <returns> SearchSubscriptionsRequest. </returns>
             public SearchSubscriptionsRequest Build()
             {
-                return new SearchSubscriptionsRequest(cursor,
-                    limit,
-                    query);
+                return new SearchSubscriptionsRequest(
+                    this.cursor,
+                    this.limit,
+                    this.query);
             }
         }
     }
