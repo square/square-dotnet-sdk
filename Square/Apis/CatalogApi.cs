@@ -447,7 +447,7 @@ namespace Square.Apis
         /// deleted catalog items, use [SearchCatalogObjects]($e/Catalog/SearchCatalogObjects).
         /// and set the `include_deleted_objects` attribute value to `true`..
         /// </summary>
-        /// <param name="cursor">Optional parameter: The pagination cursor returned in the previous response. Leave unset for an initial request. See [Pagination](https://developer.squareup.com/docs/basics/api101/pagination) for more information..</param>
+        /// <param name="cursor">Optional parameter: The pagination cursor returned in the previous response. Leave unset for an initial request. The page size is currently set to be 100. See [Pagination](https://developer.squareup.com/docs/basics/api101/pagination) for more information..</param>
         /// <param name="types">Optional parameter: An optional case-insensitive, comma-separated list of object types to retrieve, for example `ITEM,ITEM_VARIATION,CATEGORY,IMAGE`.  The legal values are taken from the CatalogObjectType enum: `ITEM`, `ITEM_VARIATION`, `CATEGORY`, `DISCOUNT`, `TAX`, `MODIFIER`, `MODIFIER_LIST`, or `IMAGE`..</param>
         /// <param name="catalogVersion">Optional parameter: The specific version of the catalog objects to be included in the response.  This allows you to retrieve historical versions of objects. The specified version value is matched against the [CatalogObject]($m/CatalogObject)s' `version` attribute..</param>
         /// <returns>Returns the Models.ListCatalogResponse response from the API call.</returns>
@@ -471,7 +471,7 @@ namespace Square.Apis
         /// deleted catalog items, use [SearchCatalogObjects]($e/Catalog/SearchCatalogObjects).
         /// and set the `include_deleted_objects` attribute value to `true`..
         /// </summary>
-        /// <param name="cursor">Optional parameter: The pagination cursor returned in the previous response. Leave unset for an initial request. See [Pagination](https://developer.squareup.com/docs/basics/api101/pagination) for more information..</param>
+        /// <param name="cursor">Optional parameter: The pagination cursor returned in the previous response. Leave unset for an initial request. The page size is currently set to be 100. See [Pagination](https://developer.squareup.com/docs/basics/api101/pagination) for more information..</param>
         /// <param name="types">Optional parameter: An optional case-insensitive, comma-separated list of object types to retrieve, for example `ITEM,ITEM_VARIATION,CATEGORY,IMAGE`.  The legal values are taken from the CatalogObjectType enum: `ITEM`, `ITEM_VARIATION`, `CATEGORY`, `DISCOUNT`, `TAX`, `MODIFIER`, `MODIFIER_LIST`, or `IMAGE`..</param>
         /// <param name="catalogVersion">Optional parameter: The specific version of the catalog objects to be included in the response.  This allows you to retrieve historical versions of objects. The specified version value is matched against the [CatalogObject]($m/CatalogObject)s' `version` attribute..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>

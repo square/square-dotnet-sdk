@@ -46,16 +46,16 @@ namespace Square.Models
         public string OrderId { get; }
 
         /// <summary>
-        /// Version number which is incremented each time an update is committed to the order.
-        /// Orders that were not created through the API will not include a version and
-        /// thus cannot be updated.
-        /// [Read more about working with versions](https://developer.squareup.com/docs/orders-api/manage-orders#update-orders)
+        /// The version number, which is incremented each time an update is committed to the order.
+        /// Orders that were not created through the API do not include a version number and
+        /// therefore cannot be updated.
+        /// [Read more about working with versions.](https://developer.squareup.com/docs/orders-api/manage-orders#update-orders)
         /// </summary>
         [JsonProperty("version", NullValueHandling = NullValueHandling.Ignore)]
         public int? Version { get; }
 
         /// <summary>
-        /// The ID of the merchant location this order is associated with.
+        /// The ID of the seller location that this order is associated with.
         /// </summary>
         [JsonProperty("location_id", NullValueHandling = NullValueHandling.Ignore)]
         public string LocationId { get; }
@@ -67,7 +67,7 @@ namespace Square.Models
         public string State { get; }
 
         /// <summary>
-        /// Timestamp for when the order was created in RFC 3339 format.
+        /// The timestamp for when the order was created, in RFC 3339 format.
         /// </summary>
         [JsonProperty("created_at", NullValueHandling = NullValueHandling.Ignore)]
         public string CreatedAt { get; }

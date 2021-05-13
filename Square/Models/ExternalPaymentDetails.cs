@@ -39,7 +39,7 @@ namespace Square.Models
         /// <summary>
         /// The type of external payment the seller received. It can be one of the following:
         /// - CHECK - Paid using a physical check.
-        /// - BANK_TRANSFER - Paid using ACH or another bank transfer.
+        /// - BANK_TRANSFER - Paid using external bank transfer.
         /// - OTHER\_GIFT\_CARD - Paid using a non-Square gift card.
         /// - CRYPTO - Paid using a crypto currency.
         /// - SQUARE_CASH - Paid using Square Cash App.

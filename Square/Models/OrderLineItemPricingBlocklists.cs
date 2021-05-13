@@ -32,7 +32,7 @@ namespace Square.Models
 
         /// <summary>
         /// A list of discounts blocked from applying to the line item.
-        /// Discounts can be blocked by the `discount_uid` (for ad-hoc discounts) or
+        /// Discounts can be blocked by the `discount_uid` (for ad hoc discounts) or
         /// the `discount_catalog_object_id` (for catalog discounts).
         /// </summary>
         [JsonProperty("blocked_discounts", NullValueHandling = NullValueHandling.Ignore)]
@@ -40,7 +40,7 @@ namespace Square.Models
 
         /// <summary>
         /// A list of taxes blocked from applying to the line item.
-        /// Taxes can be blocked by the `tax_uid` (for ad-hoc taxes) or
+        /// Taxes can be blocked by the `tax_uid` (for ad hoc taxes) or
         /// the `tax_catalog_object_id` (for catalog taxes).
         /// </summary>
         [JsonProperty("blocked_taxes", NullValueHandling = NullValueHandling.Ignore)]

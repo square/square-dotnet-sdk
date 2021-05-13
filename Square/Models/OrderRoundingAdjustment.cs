@@ -34,13 +34,13 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// Unique ID that identifies the rounding adjustment only within this order.
+        /// A unique ID that identifies the rounding adjustment only within this order.
         /// </summary>
         [JsonProperty("uid", NullValueHandling = NullValueHandling.Ignore)]
         public string Uid { get; }
 
         /// <summary>
-        /// The name of the rounding adjustment from the original sale Order.
+        /// The name of the rounding adjustment from the original sale order.
         /// </summary>
         [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
         public string Name { get; }

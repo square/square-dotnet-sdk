@@ -118,13 +118,13 @@ namespace Square.Models
         public string Id { get; }
 
         /// <summary>
-        /// The ID of the merchant location this order is associated with.
+        /// The ID of the seller location that this order is associated with.
         /// </summary>
         [JsonProperty("location_id")]
         public string LocationId { get; }
 
         /// <summary>
-        /// A client specified identifier to associate an entity in another system
+        /// A client-specified ID to associate an entity in another system
         /// with this order.
         /// </summary>
         [JsonProperty("reference_id", NullValueHandling = NullValueHandling.Ignore)]
@@ -137,7 +137,7 @@ namespace Square.Models
         public Models.OrderSource Source { get; }
 
         /// <summary>
-        /// The [Customer]($m/Customer) ID of the customer associated with the order.
+        /// The ID of the [customer]($m/Customer) associated with the order.
         /// </summary>
         [JsonProperty("customer_id", NullValueHandling = NullValueHandling.Ignore)]
         public string CustomerId { get; }
@@ -152,10 +152,10 @@ namespace Square.Models
         /// The list of all taxes associated with the order.
         /// Taxes can be scoped to either `ORDER` or `LINE_ITEM`. For taxes with `LINE_ITEM` scope, an
         /// `OrderLineItemAppliedTax` must be added to each line item that the tax applies to. For taxes
-        /// with `ORDER` scope, the server will generate an `OrderLineItemAppliedTax` for every line item.
-        /// On reads, each tax in the list will include the total amount of that tax applied to the order.
-        /// __IMPORTANT__: If `LINE_ITEM` scope is set on any taxes in this field, usage of the deprecated
-        /// `line_items.taxes` field will result in an error. Please use `line_items.applied_taxes`
+        /// with `ORDER` scope, the server generates an `OrderLineItemAppliedTax` for every line item.
+        /// On reads, each tax in the list includes the total amount of that tax applied to the order.
+        /// __IMPORTANT__: If `LINE_ITEM` scope is set on any taxes in this field, using the deprecated
+        /// `line_items.taxes` field results in an error. Use `line_items.applied_taxes`
         /// instead.
         /// </summary>
         [JsonProperty("taxes", NullValueHandling = NullValueHandling.Ignore)]
@@ -165,10 +165,10 @@ namespace Square.Models
         /// The list of all discounts associated with the order.
         /// Discounts can be scoped to either `ORDER` or `LINE_ITEM`. For discounts scoped to `LINE_ITEM`,
         /// an `OrderLineItemAppliedDiscount` must be added to each line item that the discount applies to.
-        /// For discounts with `ORDER` scope, the server will generate an `OrderLineItemAppliedDiscount`
+        /// For discounts with `ORDER` scope, the server generates an `OrderLineItemAppliedDiscount`
         /// for every line item.
-        /// __IMPORTANT__: If `LINE_ITEM` scope is set on any discounts in this field, usage of the deprecated
-        /// `line_items.discounts` field will result in an error. Please use `line_items.applied_discounts`
+        /// __IMPORTANT__: If `LINE_ITEM` scope is set on any discounts in this field, using the deprecated
+        /// `line_items.discounts` field results in an error. Use `line_items.applied_discounts`
         /// instead.
         /// </summary>
         [JsonProperty("discounts", NullValueHandling = NullValueHandling.Ignore)]
@@ -181,16 +181,16 @@ namespace Square.Models
         public IList<Models.OrderServiceCharge> ServiceCharges { get; }
 
         /// <summary>
-        /// Details on order fulfillment.
+        /// Details about order fulfillment.
         /// Orders can only be created with at most one fulfillment. However, orders returned
-        /// by the API may contain multiple fulfillments.
+        /// by the API might contain multiple fulfillments.
         /// </summary>
         [JsonProperty("fulfillments", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.OrderFulfillment> Fulfillments { get; }
 
         /// <summary>
-        /// Collection of items from sale Orders being returned in this one. Normally part of an
-        /// Itemized Return or Exchange.  There will be exactly one `Return` object per sale Order being
+        /// A collection of items from sale orders being returned in this one. Normally part of an
+        /// itemized return or exchange. There is exactly one `Return` object per sale `Order` being
         /// referenced.
         /// </summary>
         [JsonProperty("returns", NullValueHandling = NullValueHandling.Ignore)]
@@ -209,20 +209,20 @@ namespace Square.Models
         public Models.OrderMoneyAmounts NetAmounts { get; }
 
         /// <summary>
-        /// A rounding adjustment of the money being returned. Commonly used to apply Cash Rounding
-        /// when the minimum unit of account is smaller than the lowest physical denomination of currency.
+        /// A rounding adjustment of the money being returned. Commonly used to apply cash rounding
+        /// when the minimum unit of the account is smaller than the lowest physical denomination of the currency.
         /// </summary>
         [JsonProperty("rounding_adjustment", NullValueHandling = NullValueHandling.Ignore)]
         public Models.OrderRoundingAdjustment RoundingAdjustment { get; }
 
         /// <summary>
-        /// The Tenders which were used to pay for the Order.
+        /// The tenders that were used to pay for the order.
         /// </summary>
         [JsonProperty("tenders", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.Tender> Tenders { get; }
 
         /// <summary>
-        /// The Refunds that are part of this Order.
+        /// The refunds that are part of this order.
         /// </summary>
         [JsonProperty("refunds", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.Refund> Refunds { get; }
@@ -231,34 +231,34 @@ namespace Square.Models
         /// Application-defined data attached to this order. Metadata fields are intended
         /// to store descriptive references or associations with an entity in another system or store brief
         /// information about the object. Square does not process this field; it only stores and returns it
-        /// in relevant API calls. Do not use metadata to store any sensitive information (personally
-        /// identifiable information, card details, etc.).
+        /// in relevant API calls. Do not use metadata to store any sensitive information (such as personally
+        /// identifiable information or card details).
         /// Keys written by applications must be 60 characters or less and must be in the character set
-        /// `[a-zA-Z0-9_-]`. Entries may also include metadata generated by Square. These keys are prefixed
+        /// `[a-zA-Z0-9_-]`. Entries can also include metadata generated by Square. These keys are prefixed
         /// with a namespace, separated from the key with a ':' character.
-        /// Values have a max length of 255 characters.
-        /// An application may have up to 10 entries per metadata field.
+        /// Values have a maximum length of 255 characters.
+        /// An application can have up to 10 entries per metadata field.
         /// Entries written by applications are private and can only be read or modified by the same
         /// application.
-        /// See [Metadata](https://developer.squareup.com/docs/build-basics/metadata) for more information.
+        /// For more information, see  [Metadata](https://developer.squareup.com/docs/build-basics/metadata).
         /// </summary>
         [JsonProperty("metadata", NullValueHandling = NullValueHandling.Ignore)]
         public IDictionary<string, string> Metadata { get; }
 
         /// <summary>
-        /// Timestamp for when the order was created. In RFC 3339 format, e.g., "2016-09-04T23:59:33.123Z".
+        /// The timestamp for when the order was created, in RFC 3339 format (for example, "2016-09-04T23:59:33.123Z").
         /// </summary>
         [JsonProperty("created_at", NullValueHandling = NullValueHandling.Ignore)]
         public string CreatedAt { get; }
 
         /// <summary>
-        /// Timestamp for when the order was last updated. In RFC 3339 format, e.g., "2016-09-04T23:59:33.123Z".
+        /// The timestamp for when the order was last updated, in RFC 3339 format (for example, "2016-09-04T23:59:33.123Z").
         /// </summary>
         [JsonProperty("updated_at", NullValueHandling = NullValueHandling.Ignore)]
         public string UpdatedAt { get; }
 
         /// <summary>
-        /// Timestamp for when the order reached a terminal [state]($m/OrderState). In RFC 3339 format, e.g., "2016-09-04T23:59:33.123Z".
+        /// The timestamp for when the order reached a terminal [state]($m/OrderState), in RFC 3339 format (for example "2016-09-04T23:59:33.123Z").
         /// </summary>
         [JsonProperty("closed_at", NullValueHandling = NullValueHandling.Ignore)]
         public string ClosedAt { get; }
@@ -270,9 +270,9 @@ namespace Square.Models
         public string State { get; }
 
         /// <summary>
-        /// Version number which is incremented each time an update is committed to the order.
-        /// Orders that were not created through the API will not include a version and
-        /// thus cannot be updated.
+        /// The version number, which is incremented each time an update is committed to the order.
+        /// Orders not created through the API do not include a version number and
+        /// therefore cannot be updated.
         /// [Read more about working with versions](https://developer.squareup.com/docs/orders-api/manage-orders#update-orders).
         /// </summary>
         [JsonProperty("version", NullValueHandling = NullValueHandling.Ignore)]
@@ -335,14 +335,14 @@ namespace Square.Models
 
         /// <summary>
         /// Pricing options for an order. The options affect how the order's price is calculated.
-        /// They can be used, for example, to apply automatic price adjustments that are based on pre-configured
+        /// They can be used, for example, to apply automatic price adjustments that are based on preconfigured
         /// [pricing rules]($m/CatalogPricingRule).
         /// </summary>
         [JsonProperty("pricing_options", NullValueHandling = NullValueHandling.Ignore)]
         public Models.OrderPricingOptions PricingOptions { get; }
 
         /// <summary>
-        /// A set-like list of rewards that have been added to the order.
+        /// A set-like list of Rewards that have been added to the Order.
         /// </summary>
         [JsonProperty("rewards", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.OrderReward> Rewards { get; }

@@ -72,6 +72,8 @@ namespace Square
         private readonly Lazy<IOrdersApi> orders;
         private readonly Lazy<IPaymentsApi> payments;
         private readonly Lazy<IRefundsApi> refunds;
+        private readonly Lazy<ISitesApi> sites;
+        private readonly Lazy<ISnippetsApi> snippets;
         private readonly Lazy<ISubscriptionsApi> subscriptions;
         private readonly Lazy<ITeamApi> team;
         private readonly Lazy<ITerminalApi> terminal;
@@ -148,6 +150,10 @@ namespace Square
                 () => new PaymentsApi(this, this.httpClient, this.authManagers, this.httpCallBack));
             this.refunds = new Lazy<IRefundsApi>(
                 () => new RefundsApi(this, this.httpClient, this.authManagers, this.httpCallBack));
+            this.sites = new Lazy<ISitesApi>(
+                () => new SitesApi(this, this.httpClient, this.authManagers, this.httpCallBack));
+            this.snippets = new Lazy<ISnippetsApi>(
+                () => new SnippetsApi(this, this.httpClient, this.authManagers, this.httpCallBack));
             this.subscriptions = new Lazy<ISubscriptionsApi>(
                 () => new SubscriptionsApi(this, this.httpClient, this.authManagers, this.httpCallBack));
             this.team = new Lazy<ITeamApi>(
@@ -299,6 +305,16 @@ namespace Square
         public IRefundsApi RefundsApi => this.refunds.Value;
 
         /// <summary>
+        /// Gets SitesApi.
+        /// </summary>
+        public ISitesApi SitesApi => this.sites.Value;
+
+        /// <summary>
+        /// Gets SnippetsApi.
+        /// </summary>
+        public ISnippetsApi SnippetsApi => this.snippets.Value;
+
+        /// <summary>
         /// Gets SubscriptionsApi.
         /// </summary>
         public ISubscriptionsApi SubscriptionsApi => this.subscriptions.Value;
@@ -321,7 +337,7 @@ namespace Square
         /// <summary>
         /// Gets the current version of the SDK.
         /// </summary>
-        public string SdkVersion => "10.0.0";
+        public string SdkVersion => "11.0.0";
 
         /// <summary>
         /// Gets the configuration of the Http Client associated with this client.
@@ -470,7 +486,7 @@ namespace Square
         /// </summary>
         public class Builder
         {
-            private string squareVersion = "2021-04-21";
+            private string squareVersion = "2021-05-13";
             private Environment environment = Square.Environment.Production;
             private string customUrl = "https://connect.squareup.com";
             private string accessToken = "TODO: Replace";

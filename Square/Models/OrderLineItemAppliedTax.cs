@@ -34,16 +34,16 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// Unique ID that identifies the applied tax only within this order.
+        /// A unique ID that identifies the applied tax only within this order.
         /// </summary>
         [JsonProperty("uid", NullValueHandling = NullValueHandling.Ignore)]
         public string Uid { get; }
 
         /// <summary>
-        /// The `uid` of the tax for which this applied tax represents.  Must reference
+        /// The `uid` of the tax for which this applied tax represents. It must reference
         /// a tax present in the `order.taxes` field.
-        /// This field is immutable. To change which taxes apply to a line item, delete and add new
-        /// `OrderLineItemAppliedTax`s.
+        /// This field is immutable. To change which taxes apply to a line item, delete and add a new
+        /// `OrderLineItemAppliedTax`.
         /// </summary>
         [JsonProperty("tax_uid")]
         public string TaxUid { get; }

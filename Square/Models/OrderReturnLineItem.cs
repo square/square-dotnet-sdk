@@ -76,13 +76,13 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// Unique identifier for this return line item entry.
+        /// A unique ID for this return line-item entry.
         /// </summary>
         [JsonProperty("uid", NullValueHandling = NullValueHandling.Ignore)]
         public string Uid { get; }
 
         /// <summary>
-        /// `uid` of the LineItem in the original sale Order.
+        /// The `uid` of the line item in the original sale order.
         /// </summary>
         [JsonProperty("source_line_item_uid", NullValueHandling = NullValueHandling.Ignore)]
         public string SourceLineItemUid { get; }
@@ -95,34 +95,34 @@ namespace Square.Models
 
         /// <summary>
         /// The quantity returned, formatted as a decimal number.
-        /// For example: `"3"`.
+        /// For example, `"3"`.
         /// Line items with a `quantity_unit` can have non-integer quantities.
-        /// For example: `"1.70000"`.
+        /// For example, `"1.70000"`.
         /// </summary>
         [JsonProperty("quantity")]
         public string Quantity { get; }
 
         /// <summary>
-        /// Contains the measurement unit for a quantity and a precision which
+        /// Contains the measurement unit for a quantity and a precision that
         /// specifies the number of digits after the decimal point for decimal quantities.
         /// </summary>
         [JsonProperty("quantity_unit", NullValueHandling = NullValueHandling.Ignore)]
         public Models.OrderQuantityUnit QuantityUnit { get; }
 
         /// <summary>
-        /// The note of the returned line item.
+        /// The note of the return line item.
         /// </summary>
         [JsonProperty("note", NullValueHandling = NullValueHandling.Ignore)]
         public string Note { get; }
 
         /// <summary>
-        /// The [CatalogItemVariation]($m/CatalogItemVariation) id applied to this returned line item.
+        /// The [CatalogItemVariation]($m/CatalogItemVariation) ID applied to this return line item.
         /// </summary>
         [JsonProperty("catalog_object_id", NullValueHandling = NullValueHandling.Ignore)]
         public string CatalogObjectId { get; }
 
         /// <summary>
-        /// The name of the variation applied to this returned line item.
+        /// The name of the variation applied to this return line item.
         /// </summary>
         [JsonProperty("variation_name", NullValueHandling = NullValueHandling.Ignore)]
         public string VariationName { get; }
@@ -134,19 +134,19 @@ namespace Square.Models
         public IList<Models.OrderReturnLineItemModifier> ReturnModifiers { get; }
 
         /// <summary>
-        /// The list of references to `OrderReturnTax` entities applied to the returned line item. Each
+        /// The list of references to `OrderReturnTax` entities applied to the return line item. Each
         /// `OrderLineItemAppliedTax` has a `tax_uid` that references the `uid` of a top-level
-        /// `OrderReturnTax` applied to the returned line item. On reads, the amount applied
+        /// `OrderReturnTax` applied to the return line item. On reads, the applied amount
         /// is populated.
         /// </summary>
         [JsonProperty("applied_taxes", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.OrderLineItemAppliedTax> AppliedTaxes { get; }
 
         /// <summary>
-        /// The list of references to `OrderReturnDiscount` entities applied to the returned line item. Each
+        /// The list of references to `OrderReturnDiscount` entities applied to the return line item. Each
         /// `OrderLineItemAppliedDiscount` has a `discount_uid` that references the `uid` of a top-level
-        /// `OrderReturnDiscount` applied to the returned line item. On reads, the amount
-        /// applied is populated.
+        /// `OrderReturnDiscount` applied to the return line item. On reads, the applied amount
+        /// is populated.
         /// </summary>
         [JsonProperty("applied_discounts", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.OrderLineItemAppliedDiscount> AppliedDiscounts { get; }

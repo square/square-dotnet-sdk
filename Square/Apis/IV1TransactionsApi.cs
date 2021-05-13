@@ -27,6 +27,7 @@ namespace Square.Apis
         /// <param name="limit">Optional parameter: The maximum number of payments to return in a single response. This value cannot exceed 200..</param>
         /// <param name="batchToken">Optional parameter: A pagination cursor to retrieve the next set of results for your original query to the endpoint..</param>
         /// <returns>Returns the List<Models.V1Order> response from the API call.</returns>
+        [Obsolete]
         List<Models.V1Order> ListOrders(
                 string locationId,
                 string order = null,
@@ -42,6 +43,7 @@ namespace Square.Apis
         /// <param name="batchToken">Optional parameter: A pagination cursor to retrieve the next set of results for your original query to the endpoint..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the List<Models.V1Order> response from the API call.</returns>
+        [Obsolete]
         Task<List<Models.V1Order>> ListOrdersAsync(
                 string locationId,
                 string order = null,
@@ -55,6 +57,7 @@ namespace Square.Apis
         /// <param name="locationId">Required parameter: The ID of the order's associated location..</param>
         /// <param name="orderId">Required parameter: The order's Square-issued ID. You obtain this value from Order objects returned by the List Orders endpoint.</param>
         /// <returns>Returns the Models.V1Order response from the API call.</returns>
+        [Obsolete]
         Models.V1Order RetrieveOrder(
                 string locationId,
                 string orderId);
@@ -66,6 +69,7 @@ namespace Square.Apis
         /// <param name="orderId">Required parameter: The order's Square-issued ID. You obtain this value from Order objects returned by the List Orders endpoint.</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the Models.V1Order response from the API call.</returns>
+        [Obsolete]
         Task<Models.V1Order> RetrieveOrderAsync(
                 string locationId,
                 string orderId,
@@ -78,6 +82,7 @@ namespace Square.Apis
         /// <param name="orderId">Required parameter: The order's Square-issued ID. You obtain this value from Order objects returned by the List Orders endpoint.</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <returns>Returns the Models.V1Order response from the API call.</returns>
+        [Obsolete]
         Models.V1Order UpdateOrder(
                 string locationId,
                 string orderId,
@@ -91,6 +96,7 @@ namespace Square.Apis
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the Models.V1Order response from the API call.</returns>
+        [Obsolete]
         Task<Models.V1Order> UpdateOrderAsync(
                 string locationId,
                 string orderId,
@@ -117,6 +123,7 @@ namespace Square.Apis
         /// <param name="batchToken">Optional parameter: A pagination cursor to retrieve the next set of results for your original query to the endpoint..</param>
         /// <param name="includePartial">Optional parameter: Indicates whether or not to include partial payments in the response. Partial payments will have the tenders collected so far, but the itemizations will be empty until the payment is completed..</param>
         /// <returns>Returns the List<Models.V1Payment> response from the API call.</returns>
+        [Obsolete]
         List<Models.V1Payment> ListPayments(
                 string locationId,
                 string order = null,
@@ -147,6 +154,7 @@ namespace Square.Apis
         /// <param name="includePartial">Optional parameter: Indicates whether or not to include partial payments in the response. Partial payments will have the tenders collected so far, but the itemizations will be empty until the payment is completed..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the List<Models.V1Payment> response from the API call.</returns>
+        [Obsolete]
         Task<List<Models.V1Payment>> ListPaymentsAsync(
                 string locationId,
                 string order = null,
@@ -163,6 +171,7 @@ namespace Square.Apis
         /// <param name="locationId">Required parameter: The ID of the payment's associated location..</param>
         /// <param name="paymentId">Required parameter: The Square-issued payment ID. payment_id comes from Payment objects returned by the List Payments endpoint, Settlement objects returned by the List Settlements endpoint, or Refund objects returned by the List Refunds endpoint..</param>
         /// <returns>Returns the Models.V1Payment response from the API call.</returns>
+        [Obsolete]
         Models.V1Payment RetrievePayment(
                 string locationId,
                 string paymentId);
@@ -174,6 +183,7 @@ namespace Square.Apis
         /// <param name="paymentId">Required parameter: The Square-issued payment ID. payment_id comes from Payment objects returned by the List Payments endpoint, Settlement objects returned by the List Settlements endpoint, or Refund objects returned by the List Refunds endpoint..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the Models.V1Payment response from the API call.</returns>
+        [Obsolete]
         Task<Models.V1Payment> RetrievePaymentAsync(
                 string locationId,
                 string paymentId,
@@ -189,6 +199,7 @@ namespace Square.Apis
         /// <param name="limit">Optional parameter: The approximate number of refunds to return in a single response. Default: 100. Max: 200. Response may contain more results than the prescribed limit when refunds are made simultaneously to multiple tenders in a payment or when refunds are generated in an exchange to account for the value of returned goods..</param>
         /// <param name="batchToken">Optional parameter: A pagination cursor to retrieve the next set of results for your original query to the endpoint..</param>
         /// <returns>Returns the List<Models.V1Refund> response from the API call.</returns>
+        [Obsolete]
         List<Models.V1Refund> ListRefunds(
                 string locationId,
                 string order = null,
@@ -208,6 +219,7 @@ namespace Square.Apis
         /// <param name="batchToken">Optional parameter: A pagination cursor to retrieve the next set of results for your original query to the endpoint..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the List<Models.V1Refund> response from the API call.</returns>
+        [Obsolete]
         Task<List<Models.V1Refund>> ListRefundsAsync(
                 string locationId,
                 string order = null,
@@ -232,6 +244,7 @@ namespace Square.Apis
         /// <param name="locationId">Required parameter: The ID of the original payment's associated location..</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <returns>Returns the Models.V1Refund response from the API call.</returns>
+        [Obsolete]
         Models.V1Refund CreateRefund(
                 string locationId,
                 Models.V1CreateRefundRequest body);
@@ -252,6 +265,7 @@ namespace Square.Apis
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the Models.V1Refund response from the API call.</returns>
+        [Obsolete]
         Task<Models.V1Refund> CreateRefundAsync(
                 string locationId,
                 Models.V1CreateRefundRequest body,
@@ -272,6 +286,7 @@ namespace Square.Apis
         /// <param name="status">Optional parameter: Provide this parameter to retrieve only settlements with a particular status (SENT or FAILED)..</param>
         /// <param name="batchToken">Optional parameter: A pagination cursor to retrieve the next set of results for your original query to the endpoint..</param>
         /// <returns>Returns the List<Models.V1Settlement> response from the API call.</returns>
+        [Obsolete]
         List<Models.V1Settlement> ListSettlements(
                 string locationId,
                 string order = null,
@@ -297,6 +312,7 @@ namespace Square.Apis
         /// <param name="batchToken">Optional parameter: A pagination cursor to retrieve the next set of results for your original query to the endpoint..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the List<Models.V1Settlement> response from the API call.</returns>
+        [Obsolete]
         Task<List<Models.V1Settlement>> ListSettlementsAsync(
                 string locationId,
                 string order = null,
@@ -326,6 +342,7 @@ namespace Square.Apis
         /// <param name="locationId">Required parameter: The ID of the settlements's associated location..</param>
         /// <param name="settlementId">Required parameter: The settlement's Square-issued ID. You obtain this value from Settlement objects returned by the List Settlements endpoint..</param>
         /// <returns>Returns the Models.V1Settlement response from the API call.</returns>
+        [Obsolete]
         Models.V1Settlement RetrieveSettlement(
                 string locationId,
                 string settlementId);
@@ -350,6 +367,7 @@ namespace Square.Apis
         /// <param name="settlementId">Required parameter: The settlement's Square-issued ID. You obtain this value from Settlement objects returned by the List Settlements endpoint..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the Models.V1Settlement response from the API call.</returns>
+        [Obsolete]
         Task<Models.V1Settlement> RetrieveSettlementAsync(
                 string locationId,
                 string settlementId,

@@ -49,32 +49,32 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// Unique ID that identifies the return only within this order.
+        /// A unique ID that identifies the return only within this order.
         /// </summary>
         [JsonProperty("uid", NullValueHandling = NullValueHandling.Ignore)]
         public string Uid { get; }
 
         /// <summary>
-        /// Order which contains the original sale of these returned line items. This will be unset
+        /// An order that contains the original sale of these return line items. This is unset
         /// for unlinked returns.
         /// </summary>
         [JsonProperty("source_order_id", NullValueHandling = NullValueHandling.Ignore)]
         public string SourceOrderId { get; }
 
         /// <summary>
-        /// Collection of line items which are being returned.
+        /// A collection of line items that are being returned.
         /// </summary>
         [JsonProperty("return_line_items", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.OrderReturnLineItem> ReturnLineItems { get; }
 
         /// <summary>
-        /// Collection of service charges which are being returned.
+        /// A collection of service charges that are being returned.
         /// </summary>
         [JsonProperty("return_service_charges", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.OrderReturnServiceCharge> ReturnServiceCharges { get; }
 
         /// <summary>
-        /// Collection of references to taxes being returned for an order, including the total
+        /// A collection of references to taxes being returned for an order, including the total
         /// applied tax amount to be returned. The taxes must reference a top-level tax ID from the source
         /// order.
         /// </summary>
@@ -82,7 +82,7 @@ namespace Square.Models
         public IList<Models.OrderReturnTax> ReturnTaxes { get; }
 
         /// <summary>
-        /// Collection of references to discounts being returned for an order, including the total
+        /// A collection of references to discounts being returned for an order, including the total
         /// applied discount amount to be returned. The discounts must reference a top-level discount ID
         /// from the source order.
         /// </summary>
@@ -90,8 +90,8 @@ namespace Square.Models
         public IList<Models.OrderReturnDiscount> ReturnDiscounts { get; }
 
         /// <summary>
-        /// A rounding adjustment of the money being returned. Commonly used to apply Cash Rounding
-        /// when the minimum unit of account is smaller than the lowest physical denomination of currency.
+        /// A rounding adjustment of the money being returned. Commonly used to apply cash rounding
+        /// when the minimum unit of the account is smaller than the lowest physical denomination of the currency.
         /// </summary>
         [JsonProperty("rounding_adjustment", NullValueHandling = NullValueHandling.Ignore)]
         public Models.OrderRoundingAdjustment RoundingAdjustment { get; }

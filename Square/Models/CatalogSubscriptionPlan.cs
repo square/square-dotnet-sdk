@@ -23,8 +23,8 @@ namespace Square.Models
         /// <param name="name">name.</param>
         /// <param name="phases">phases.</param>
         public CatalogSubscriptionPlan(
-            string name = null,
-            IList<Models.SubscriptionPhase> phases = null)
+            string name,
+            IList<Models.SubscriptionPhase> phases)
         {
             this.Name = name;
             this.Phases = phases;
@@ -33,13 +33,13 @@ namespace Square.Models
         /// <summary>
         /// The name of the plan.
         /// </summary>
-        [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("name")]
         public string Name { get; }
 
         /// <summary>
         /// A list of SubscriptionPhase containing the [SubscriptionPhase]($m/SubscriptionPhase) for this plan.
         /// </summary>
-        [JsonProperty("phases", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("phases")]
         public IList<Models.SubscriptionPhase> Phases { get; }
 
         /// <inheritdoc/>
@@ -104,9 +104,9 @@ namespace Square.Models
         /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
-            var builder = new Builder()
-                .Name(this.Name)
-                .Phases(this.Phases);
+            var builder = new Builder(
+                this.Name,
+                this.Phases);
             return builder;
         }
 
@@ -117,6 +117,14 @@ namespace Square.Models
         {
             private string name;
             private IList<Models.SubscriptionPhase> phases;
+
+            public Builder(
+                string name,
+                IList<Models.SubscriptionPhase> phases)
+            {
+                this.name = name;
+                this.phases = phases;
+            }
 
              /// <summary>
              /// Name.

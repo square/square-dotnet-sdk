@@ -43,15 +43,15 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// The Square generated ID of the
-        /// `CatalogObject` being tracked.
+        /// The Square-generated ID of the
+        /// [CatalogObject]($m/CatalogObject) being tracked.
         /// </summary>
         [JsonProperty("catalog_object_id", NullValueHandling = NullValueHandling.Ignore)]
         public string CatalogObjectId { get; }
 
         /// <summary>
-        /// The `CatalogObjectType` of the
-        /// `CatalogObject` being tracked. Tracking is only
+        /// The [type]($m/CatalogObjectType) of the
+        /// [CatalogObject]($m/CatalogObject) being tracked. Tracking is only
         /// supported for the `ITEM_VARIATION` type.
         /// </summary>
         [JsonProperty("catalog_object_type", NullValueHandling = NullValueHandling.Ignore)]
@@ -64,8 +64,8 @@ namespace Square.Models
         public string State { get; }
 
         /// <summary>
-        /// The Square ID of the [Location]($m/Location) where the related
-        /// quantity of items are being tracked.
+        /// The Square-generated ID of the [Location]($m/Location) where the related
+        /// quantity of items is being tracked.
         /// </summary>
         [JsonProperty("location_id", NullValueHandling = NullValueHandling.Ignore)]
         public string LocationId { get; }
@@ -78,9 +78,8 @@ namespace Square.Models
         public string Quantity { get; }
 
         /// <summary>
-        /// A read-only timestamp in RFC 3339 format that indicates when Square
-        /// received the most recent physical count or adjustment that had an affect
-        /// on the estimated count.
+        /// An RFC 3339-formatted timestamp that indicates when the most recent physical count or adjustment affecting
+        /// the estimated count is received.
         /// </summary>
         [JsonProperty("calculated_at", NullValueHandling = NullValueHandling.Ignore)]
         public string CalculatedAt { get; }

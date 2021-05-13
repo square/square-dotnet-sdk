@@ -42,7 +42,7 @@ namespace Square.Models
         /// <summary>
         /// The location IDs for the orders to query. All locations must belong to
         /// the same merchant.
-        /// Min: 1 location IDs.
+        /// Min: 1 location ID.
         /// Max: 10 location IDs.
         /// </summary>
         [JsonProperty("location_ids", NullValueHandling = NullValueHandling.Ignore)]
@@ -50,9 +50,8 @@ namespace Square.Models
 
         /// <summary>
         /// A pagination cursor returned by a previous call to this endpoint.
-        /// Provide this to retrieve the next set of results for your original query.
-        /// See [Pagination](https://developer.squareup.com/docs/basics/api101/pagination) for more
-        /// information.
+        /// Provide this cursor to retrieve the next set of results for your original query.
+        /// For more information, see [Pagination](https://developer.squareup.com/docs/basics/api101/pagination).
         /// </summary>
         [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
         public string Cursor { get; }
@@ -64,7 +63,7 @@ namespace Square.Models
         public Models.SearchOrdersQuery Query { get; }
 
         /// <summary>
-        /// Maximum number of results to be returned in a single page. It is
+        /// The maximum number of results to be returned in a single page. It is
         /// possible to receive fewer results than the specified limit on a given page.
         /// Default: `500`
         /// </summary>
@@ -72,9 +71,9 @@ namespace Square.Models
         public int? Limit { get; }
 
         /// <summary>
-        /// Boolean that controls the format of the search results. If `true`,
-        /// SearchOrders will return [`OrderEntry`]($m/OrderEntry) objects. If `false`, SearchOrders
-        /// will return complete Order objects.
+        /// A Boolean that controls the format of the search results. If `true`,
+        /// `SearchOrders` returns [OrderEntry]($m/OrderEntry) objects. If `false`, `SearchOrders`
+        /// returns complete order objects.
         /// Default: `false`.
         /// </summary>
         [JsonProperty("return_entries", NullValueHandling = NullValueHandling.Ignore)]

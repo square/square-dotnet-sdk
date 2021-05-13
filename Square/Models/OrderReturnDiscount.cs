@@ -52,19 +52,19 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// Unique ID that identifies the return discount only within this order.
+        /// A unique ID that identifies the returned discount only within this order.
         /// </summary>
         [JsonProperty("uid", NullValueHandling = NullValueHandling.Ignore)]
         public string Uid { get; }
 
         /// <summary>
-        /// `uid` of the Discount from the Order which contains the original application of this discount.
+        /// The discount `uid` from the order that contains the original application of this discount.
         /// </summary>
         [JsonProperty("source_discount_uid", NullValueHandling = NullValueHandling.Ignore)]
         public string SourceDiscountUid { get; }
 
         /// <summary>
-        /// The catalog object id referencing [CatalogDiscount]($m/CatalogDiscount).
+        /// The catalog object ID referencing [CatalogDiscount]($m/CatalogDiscount).
         /// </summary>
         [JsonProperty("catalog_object_id", NullValueHandling = NullValueHandling.Ignore)]
         public string CatalogObjectId { get; }
@@ -83,7 +83,7 @@ namespace Square.Models
 
         /// <summary>
         /// The percentage of the tax, as a string representation of a decimal number.
-        /// A value of `7.25` corresponds to a percentage of 7.25%.
+        /// A value of `"7.25"` corresponds to a percentage of 7.25%.
         /// `percentage` is not set for amount-based discounts.
         /// </summary>
         [JsonProperty("percentage", NullValueHandling = NullValueHandling.Ignore)]
@@ -112,7 +112,7 @@ namespace Square.Models
         public Models.Money AppliedMoney { get; }
 
         /// <summary>
-        /// Indicates whether this is a line item or order level discount.
+        /// Indicates whether this is a line-item or order-level discount.
         /// </summary>
         [JsonProperty("scope", NullValueHandling = NullValueHandling.Ignore)]
         public string Scope { get; }
