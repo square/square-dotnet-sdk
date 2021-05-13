@@ -40,13 +40,13 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// Unique ID that identifies the modifier only within this order.
+        /// A unique ID that identifies the modifier only within this order.
         /// </summary>
         [JsonProperty("uid", NullValueHandling = NullValueHandling.Ignore)]
         public string Uid { get; }
 
         /// <summary>
-        /// The catalog object id referencing [CatalogModifier]($m/CatalogModifier).
+        /// The catalog object ID referencing [CatalogModifier]($m/CatalogModifier).
         /// </summary>
         [JsonProperty("catalog_object_id", NullValueHandling = NullValueHandling.Ignore)]
         public string CatalogObjectId { get; }

@@ -81,29 +81,29 @@ namespace Square.Models
         public string State { get; }
 
         /// <summary>
-        /// The Square ID of the [Location]($m/Location) where the related
-        /// quantity of items were tracked before the transfer.
+        /// The Square-generated ID of the [Location]($m/Location) where the related
+        /// quantity of items was tracked before the transfer.
         /// </summary>
         [JsonProperty("from_location_id", NullValueHandling = NullValueHandling.Ignore)]
         public string FromLocationId { get; }
 
         /// <summary>
-        /// The Square ID of the [Location]($m/Location) where the related
-        /// quantity of items were tracked after the transfer.
+        /// The Square-generated ID of the [Location]($m/Location) where the related
+        /// quantity of items was tracked after the transfer.
         /// </summary>
         [JsonProperty("to_location_id", NullValueHandling = NullValueHandling.Ignore)]
         public string ToLocationId { get; }
 
         /// <summary>
-        /// The Square generated ID of the
-        /// `CatalogObject` being tracked.
+        /// The Square-generated ID of the
+        /// [CatalogObject]($m/CatalogObject) being tracked.
         /// </summary>
         [JsonProperty("catalog_object_id", NullValueHandling = NullValueHandling.Ignore)]
         public string CatalogObjectId { get; }
 
         /// <summary>
-        /// The `CatalogObjectType` of the
-        /// `CatalogObject` being tracked.Tracking is only
+        /// The [type]($m/CatalogObjectType) of the
+        /// [CatalogObject]($m/CatalogObject) being tracked.Tracking is only
         /// supported for the `ITEM_VARIATION` type.
         /// </summary>
         [JsonProperty("catalog_object_type", NullValueHandling = NullValueHandling.Ignore)]
@@ -117,7 +117,7 @@ namespace Square.Models
         public string Quantity { get; }
 
         /// <summary>
-        /// A client-generated timestamp in RFC 3339 format that indicates when
+        /// A client-generated RFC 3339-formatted timestamp that indicates when
         /// the transfer took place. For write actions, the `occurred_at` timestamp
         /// cannot be older than 24 hours or in the future relative to the time of the
         /// request.
@@ -126,7 +126,7 @@ namespace Square.Models
         public string OccurredAt { get; }
 
         /// <summary>
-        /// A read-only timestamp in RFC 3339 format that indicates when Square
+        /// An RFC 3339-formatted timestamp that indicates when Square
         /// received the transfer request.
         /// </summary>
         [JsonProperty("created_at", NullValueHandling = NullValueHandling.Ignore)]
@@ -139,7 +139,7 @@ namespace Square.Models
         public Models.SourceApplication Source { get; }
 
         /// <summary>
-        /// The Square ID of the [Employee]($m/Employee) responsible for the
+        /// The Square-generated ID of the [Employee]($m/Employee) responsible for the
         /// inventory transfer.
         /// </summary>
         [JsonProperty("employee_id", NullValueHandling = NullValueHandling.Ignore)]

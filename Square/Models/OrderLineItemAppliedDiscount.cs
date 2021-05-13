@@ -34,13 +34,13 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// Unique ID that identifies the applied discount only within this order.
+        /// A unique ID that identifies the applied discount only within this order.
         /// </summary>
         [JsonProperty("uid", NullValueHandling = NullValueHandling.Ignore)]
         public string Uid { get; }
 
         /// <summary>
-        /// The `uid` of the discount the applied discount represents. Must
+        /// The `uid` of the discount that the applied discount represents. It must
         /// reference a discount present in the `order.discounts` field.
         /// This field is immutable. To change which discounts apply to a line item,
         /// you must delete the discount and re-add it as a new `OrderLineItemAppliedDiscount`.

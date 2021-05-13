@@ -28,7 +28,7 @@ ILoyaltyApi loyaltyApi = client.LoyaltyApi;
 
 # Create Loyalty Account
 
-Creates a loyalty account. To create a loyalty account, you must provide the `program_id` and either the `mapping` field (preferred) or the `mappings` field.
+Creates a loyalty account. To create a loyalty account, you must provide the `program_id` and a `mapping` with the `phone_number` of the buyer.
 
 ```csharp
 CreateLoyaltyAccountAsync(
@@ -48,31 +48,18 @@ CreateLoyaltyAccountAsync(
 ## Example Usage
 
 ```csharp
-var bodyLoyaltyAccountMappings = new List<LoyaltyAccountMapping>();
-
-var bodyLoyaltyAccountMappings0 = new LoyaltyAccountMapping.Builder()
-    .Id("id0")
-    .Type("PHONE")
-    .MValue("value2")
-    .CreatedAt("created_at8")
-    .PhoneNumber("phone_number8")
-    .Build();
-bodyLoyaltyAccountMappings.Add(bodyLoyaltyAccountMappings0);
-
 var bodyLoyaltyAccountMapping = new LoyaltyAccountMapping.Builder()
     .Id("id6")
-    .Type("PHONE")
-    .MValue("value8")
     .CreatedAt("created_at4")
     .PhoneNumber("+14155551234")
     .Build();
 var bodyLoyaltyAccount = new LoyaltyAccount.Builder(
         "d619f755-2d17-41f3-990d-c04ecedd64dd")
     .Id("id2")
-    .Mappings(bodyLoyaltyAccountMappings)
     .Balance(14)
     .LifetimePoints(38)
     .CustomerId("customer_id0")
+    .EnrolledAt("enrolled_at2")
     .Mapping(bodyLoyaltyAccountMapping)
     .Build();
 var body = new CreateLoyaltyAccountRequest.Builder(
@@ -118,8 +105,6 @@ var bodyQueryMappings = new List<LoyaltyAccountMapping>();
 
 var bodyQueryMappings0 = new LoyaltyAccountMapping.Builder()
     .Id("id4")
-    .Type("PHONE")
-    .MValue("value6")
     .CreatedAt("created_at8")
     .PhoneNumber("+14155551234")
     .Build();
@@ -360,8 +345,12 @@ catch (ApiException e){};
 
 # List Loyalty Programs
 
+**This endpoint is deprecated. **
+
 Returns a list of loyalty programs in the seller's account.
-Currently, a seller can only have one loyalty program.
+Loyalty programs define how buyers can earn points and redeem points for rewards. Square sellers can have only one loyalty program, which is created and managed from the Seller Dashboard. For more information, see [Loyalty Program Overview](https://developer.squareup.com/docs/loyalty/overview).
+
+Replaced with [RetrieveLoyaltyProgram](/doc/api/loyalty.md#retrieve-loyalty-program) when used with the keyword `main`.
 
 ```csharp
 ListLoyaltyProgramsAsync()

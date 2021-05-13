@@ -34,7 +34,7 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// Unique ID that identifies the fulfillment only within this order.
+        /// A unique ID that identifies the fulfillment only within this order.
         /// </summary>
         [JsonProperty("fulfillment_uid", NullValueHandling = NullValueHandling.Ignore)]
         public string FulfillmentUid { get; }

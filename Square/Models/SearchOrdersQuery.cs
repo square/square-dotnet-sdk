@@ -31,14 +31,14 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// Filtering criteria to use for a SearchOrders request. Multiple filters
-        /// will be ANDed together.
+        /// Filtering criteria to use for a `SearchOrders` request. Multiple filters
+        /// are ANDed together.
         /// </summary>
         [JsonProperty("filter", NullValueHandling = NullValueHandling.Ignore)]
         public Models.SearchOrdersFilter Filter { get; }
 
         /// <summary>
-        /// Sorting criteria for a SearchOrders request. Results can only be sorted
+        /// Sorting criteria for a `SearchOrders` request. Results can only be sorted
         /// by a timestamp field.
         /// </summary>
         [JsonProperty("sort", NullValueHandling = NullValueHandling.Ignore)]

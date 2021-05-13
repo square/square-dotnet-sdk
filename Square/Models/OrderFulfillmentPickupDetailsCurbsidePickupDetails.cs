@@ -31,15 +31,15 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// Specific details for curbside pickup, such as parking number, vehicle model, etc.
+        /// Specific details for curbside pickup, such as parking number and vehicle model.
         /// </summary>
         [JsonProperty("curbside_details", NullValueHandling = NullValueHandling.Ignore)]
         public string CurbsideDetails { get; }
 
         /// <summary>
         /// The [timestamp](https://developer.squareup.com/docs/build-basics/working-with-dates)
-        /// in RFC 3339 timestamp format, e.g., "2016-09-04T23:59:33.123Z", indicating when the buyer
-        /// arrived and is waiting for pickup.
+        /// indicating when the buyer arrived and is waiting for pickup. The timestamp must be in RFC 3339 format
+        /// (for example, "2016-09-04T23:59:33.123Z").
         /// </summary>
         [JsonProperty("buyer_arrived_at", NullValueHandling = NullValueHandling.Ignore)]
         public string BuyerArrivedAt { get; }

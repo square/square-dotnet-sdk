@@ -23,6 +23,8 @@ IV1TransactionsApi v1TransactionsApi = client.V1TransactionsApi;
 
 # List Orders
 
+**This endpoint is deprecated. **
+
 Provides summary information for a merchant's online store orders.
 
 ```csharp
@@ -64,6 +66,8 @@ catch (ApiException e){};
 
 # Retrieve Order
 
+**This endpoint is deprecated. **
+
 Provides comprehensive information for a single online store order, including the order's history.
 
 ```csharp
@@ -98,6 +102,8 @@ catch (ApiException e){};
 
 
 # Update Order
+
+**This endpoint is deprecated. **
 
 Updates the details of an online store order. Every update you perform on an order corresponds to one of three actions:
 
@@ -142,6 +148,8 @@ catch (ApiException e){};
 
 
 # List Payments
+
+**This endpoint is deprecated. **
 
 Provides summary information for all payments taken for a given
 Square account during a date range. Date ranges cannot exceed 1 year in
@@ -203,6 +211,8 @@ catch (ApiException e){};
 
 # Retrieve Payment
 
+**This endpoint is deprecated. **
+
 Provides comprehensive information for a single payment.
 
 ```csharp
@@ -237,6 +247,8 @@ catch (ApiException e){};
 
 
 # List Refunds
+
+**This endpoint is deprecated. **
 
 Provides the details for all refunds initiated by a merchant or any of the merchant's mobile staff during a date range. Date ranges cannot exceed one year in length.
 
@@ -284,6 +296,8 @@ catch (ApiException e){};
 
 
 # Create Refund
+
+**This endpoint is deprecated. **
 
 Issues a refund for a previously processed payment. You must issue
 a refund within 60 days of the associated payment.
@@ -341,6 +355,8 @@ catch (ApiException e){};
 
 # List Settlements
 
+**This endpoint is deprecated. **
+
 Provides summary information for all deposits and withdrawals
 initiated by Square to a linked bank account during a date range. Date
 ranges cannot exceed one year in length.
@@ -395,6 +411,8 @@ catch (ApiException e){};
 
 
 # Retrieve Settlement
+
+**This endpoint is deprecated. **
 
 Provides comprehensive information for a single settlement.
 

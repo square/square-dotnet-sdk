@@ -15,14 +15,14 @@ order subtotal.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `Uid` | `string` | Optional | Unique ID that identifies the return tax only within this order.<br>**Constraints**: *Maximum Length*: `60` |
-| `SourceTaxUid` | `string` | Optional | `uid` of the Tax from the Order which contains the original charge of this tax.<br>**Constraints**: *Maximum Length*: `60` |
-| `CatalogObjectId` | `string` | Optional | The catalog object id referencing [CatalogTax](/doc/models/catalog-tax.md).<br>**Constraints**: *Maximum Length*: `192` |
+| `Uid` | `string` | Optional | A unique ID that identifies the returned tax only within this order.<br>**Constraints**: *Maximum Length*: `60` |
+| `SourceTaxUid` | `string` | Optional | The tax `uid` from the order that contains the original tax charge.<br>**Constraints**: *Maximum Length*: `60` |
+| `CatalogObjectId` | `string` | Optional | The catalog object ID referencing [CatalogTax](/doc/models/catalog-tax.md).<br>**Constraints**: *Maximum Length*: `192` |
 | `Name` | `string` | Optional | The tax's name.<br>**Constraints**: *Maximum Length*: `255` |
 | `Type` | [`string`](/doc/models/order-line-item-tax-type.md) | Optional | Indicates how the tax is applied to the associated line item or order. |
 | `Percentage` | `string` | Optional | The percentage of the tax, as a string representation of a decimal number.<br>For example, a value of `"7.25"` corresponds to a percentage of 7.25%.<br>**Constraints**: *Maximum Length*: `10` |
 | `AppliedMoney` | [`Models.Money`](/doc/models/money.md) | Optional | Represents an amount of money. `Money` fields can be signed or unsigned.<br>Fields that do not explicitly define whether they are signed or unsigned are<br>considered unsigned and can only hold positive amounts. For signed fields, the<br>sign of the value indicates the purpose of the money transfer. See<br>[Working with Monetary Amounts](https://developer.squareup.com/docs/build-basics/working-with-monetary-amounts)<br>for more information. |
-| `Scope` | [`string`](/doc/models/order-line-item-tax-scope.md) | Optional | Indicates whether this is a line item or order level tax. |
+| `Scope` | [`string`](/doc/models/order-line-item-tax-scope.md) | Optional | Indicates whether this is a line-item or order-level tax. |
 
 ## Example (as JSON)
 

@@ -28,8 +28,8 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// Filters by [Source]($m/OrderSource) `name`. Will return any orders
-        /// with with a `source.name` that matches any of the listed source names.
+        /// Filters by the [Source]($m/OrderSource) `name`. The filter returns any orders
+        /// with a `source.name` that matches any of the listed source names.
         /// Max: 10 source names.
         /// </summary>
         [JsonProperty("source_names", NullValueHandling = NullValueHandling.Ignore)]

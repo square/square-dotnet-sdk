@@ -31,7 +31,7 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// Specifies which timestamp to use to sort SearchOrder results.
+        /// Specifies which timestamp to use to sort `SearchOrder` results.
         /// </summary>
         [JsonProperty("sort_field")]
         public string SortField { get; }

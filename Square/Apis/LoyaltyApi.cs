@@ -35,7 +35,7 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Creates a loyalty account. To create a loyalty account, you must provide the `program_id` and either the `mapping` field (preferred) or the `mappings` field..
+        /// Creates a loyalty account. To create a loyalty account, you must provide the `program_id` and a `mapping` with the `phone_number` of the buyer..
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <returns>Returns the Models.CreateLoyaltyAccountResponse response from the API call.</returns>
@@ -48,7 +48,7 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Creates a loyalty account. To create a loyalty account, you must provide the `program_id` and either the `mapping` field (preferred) or the `mappings` field..
+        /// Creates a loyalty account. To create a loyalty account, you must provide the `program_id` and a `mapping` with the `phone_number` of the buyer..
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
@@ -502,9 +502,11 @@ namespace Square.Apis
 
         /// <summary>
         /// Returns a list of loyalty programs in the seller's account..
-        /// Currently, a seller can only have one loyalty program..
+        /// Loyalty programs define how buyers can earn points and redeem points for rewards. Square sellers can have only one loyalty program, which is created and managed from the Seller Dashboard. For more information, see [Loyalty Program Overview](https://developer.squareup.com/docs/loyalty/overview)..
+        /// Replaced with [RetrieveLoyaltyProgram]($e/Loyalty/RetrieveLoyaltyProgram) when used with the keyword `main`..
         /// </summary>
         /// <returns>Returns the Models.ListLoyaltyProgramsResponse response from the API call.</returns>
+        [Obsolete]
         public Models.ListLoyaltyProgramsResponse ListLoyaltyPrograms()
         {
             Task<Models.ListLoyaltyProgramsResponse> t = this.ListLoyaltyProgramsAsync();
@@ -514,10 +516,12 @@ namespace Square.Apis
 
         /// <summary>
         /// Returns a list of loyalty programs in the seller's account..
-        /// Currently, a seller can only have one loyalty program..
+        /// Loyalty programs define how buyers can earn points and redeem points for rewards. Square sellers can have only one loyalty program, which is created and managed from the Seller Dashboard. For more information, see [Loyalty Program Overview](https://developer.squareup.com/docs/loyalty/overview)..
+        /// Replaced with [RetrieveLoyaltyProgram]($e/Loyalty/RetrieveLoyaltyProgram) when used with the keyword `main`..
         /// </summary>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the Models.ListLoyaltyProgramsResponse response from the API call.</returns>
+        [Obsolete]
         public async Task<Models.ListLoyaltyProgramsResponse> ListLoyaltyProgramsAsync(CancellationToken cancellationToken = default)
         {
             // the base uri for api requests.

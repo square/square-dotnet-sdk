@@ -49,19 +49,19 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// Unique ID that identifies the return tax only within this order.
+        /// A unique ID that identifies the returned tax only within this order.
         /// </summary>
         [JsonProperty("uid", NullValueHandling = NullValueHandling.Ignore)]
         public string Uid { get; }
 
         /// <summary>
-        /// `uid` of the Tax from the Order which contains the original charge of this tax.
+        /// The tax `uid` from the order that contains the original tax charge.
         /// </summary>
         [JsonProperty("source_tax_uid", NullValueHandling = NullValueHandling.Ignore)]
         public string SourceTaxUid { get; }
 
         /// <summary>
-        /// The catalog object id referencing [CatalogTax]($m/CatalogTax).
+        /// The catalog object ID referencing [CatalogTax]($m/CatalogTax).
         /// </summary>
         [JsonProperty("catalog_object_id", NullValueHandling = NullValueHandling.Ignore)]
         public string CatalogObjectId { get; }
@@ -97,7 +97,7 @@ namespace Square.Models
         public Models.Money AppliedMoney { get; }
 
         /// <summary>
-        /// Indicates whether this is a line item or order level tax.
+        /// Indicates whether this is a line-item or order-level tax.
         /// </summary>
         [JsonProperty("scope", NullValueHandling = NullValueHandling.Ignore)]
         public string Scope { get; }

@@ -34,11 +34,10 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// A value you specify that uniquely identifies this request among requests you've sent. If
-        /// you're unsure whether a particular payment request was completed successfully, you can reattempt
+        /// A value you specify that uniquely identifies this request among requests you have sent. If
+        /// you are unsure whether a particular payment request was completed successfully, you can reattempt
         /// it with the same idempotency key without worrying about duplicate payments.
-        /// See [Idempotency](https://developer.squareup.com/docs/working-with-apis/idempotency) for more
-        /// information.
+        /// For more information, see [Idempotency](https://developer.squareup.com/docs/working-with-apis/idempotency).
         /// </summary>
         [JsonProperty("idempotency_key")]
         public string IdempotencyKey { get; }

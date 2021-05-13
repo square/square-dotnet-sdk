@@ -24,7 +24,7 @@ namespace Square.Models
         /// <param name="changes">changes.</param>
         /// <param name="ignoreUnchangedCounts">ignore_unchanged_counts.</param>
         public BatchChangeInventoryRequest(
-            string idempotencyKey = null,
+            string idempotencyKey,
             IList<Models.InventoryChange> changes = null,
             bool? ignoreUnchangedCounts = null)
         {
@@ -40,7 +40,7 @@ namespace Square.Models
         /// [API Development 101](https://developer.squareup.com/docs/basics/api101/overview) section for more
         /// information.
         /// </summary>
-        [JsonProperty("idempotency_key", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("idempotency_key")]
         public string IdempotencyKey { get; }
 
         /// <summary>
@@ -127,8 +127,8 @@ namespace Square.Models
         /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
-            var builder = new Builder()
-                .IdempotencyKey(this.IdempotencyKey)
+            var builder = new Builder(
+                this.IdempotencyKey)
                 .Changes(this.Changes)
                 .IgnoreUnchangedCounts(this.IgnoreUnchangedCounts);
             return builder;
@@ -142,6 +142,12 @@ namespace Square.Models
             private string idempotencyKey;
             private IList<Models.InventoryChange> changes;
             private bool? ignoreUnchangedCounts;
+
+            public Builder(
+                string idempotencyKey)
+            {
+                this.idempotencyKey = idempotencyKey;
+            }
 
              /// <summary>
              /// IdempotencyKey.

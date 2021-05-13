@@ -31,8 +31,8 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// List of [fulfillment types]($m/OrderFulfillmentType) to filter
-        /// for. Will return orders if any of its fulfillments match any of the fulfillment types
+        /// A list of [fulfillment types]($m/OrderFulfillmentType) to filter
+        /// for. The list returns orders if any of its fulfillments match any of the fulfillment types
         /// listed in this field.
         /// See [OrderFulfillmentType](#type-orderfulfillmenttype) for possible values
         /// </summary>
@@ -40,8 +40,8 @@ namespace Square.Models
         public IList<string> FulfillmentTypes { get; }
 
         /// <summary>
-        /// List of [fulfillment states]($m/OrderFulfillmentState) to filter
-        /// for. Will return orders if any of its fulfillments match any of the
+        /// A list of [fulfillment states]($m/OrderFulfillmentState) to filter
+        /// for. The list returns orders if any of its fulfillments match any of the
         /// fulfillment states listed in this field.
         /// See [OrderFulfillmentState](#type-orderfulfillmentstate) for possible values
         /// </summary>

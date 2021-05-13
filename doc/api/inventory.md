@@ -129,8 +129,8 @@ var bodyChanges0 = new InventoryChange.Builder()
     .Build();
 bodyChanges.Add(bodyChanges0);
 
-var body = new BatchChangeInventoryRequest.Builder()
-    .IdempotencyKey("8fc6a5b0-9fe8-4b46-b46b-2ef95793abbe")
+var body = new BatchChangeInventoryRequest.Builder(
+        "8fc6a5b0-9fe8-4b46-b46b-2ef95793abbe")
     .Changes(bodyChanges)
     .IgnoreUnchangedCounts(true)
     .Build();

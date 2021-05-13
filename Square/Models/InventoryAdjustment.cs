@@ -103,22 +103,22 @@ namespace Square.Models
         public string ToState { get; }
 
         /// <summary>
-        /// The Square ID of the [Location]($m/Location) where the related
-        /// quantity of items are being tracked.
+        /// The Square-generated ID of the [Location]($m/Location) where the related
+        /// quantity of items is being tracked.
         /// </summary>
         [JsonProperty("location_id", NullValueHandling = NullValueHandling.Ignore)]
         public string LocationId { get; }
 
         /// <summary>
-        /// The Square generated ID of the
-        /// `CatalogObject` being tracked.
+        /// The Square-generated ID of the
+        /// [CatalogObject]($m/CatalogObject) being tracked.
         /// </summary>
         [JsonProperty("catalog_object_id", NullValueHandling = NullValueHandling.Ignore)]
         public string CatalogObjectId { get; }
 
         /// <summary>
-        /// The `CatalogObjectType` of the
-        /// `CatalogObject` being tracked. Tracking is only
+        /// The [type](entity:CatalogObjectType] of the
+        /// [CatalogObject]($m/CatalogObject) being tracked. Tracking is only
         /// supported for the `ITEM_VARIATION` type.
         /// </summary>
         [JsonProperty("catalog_object_type", NullValueHandling = NullValueHandling.Ignore)]
@@ -143,8 +143,8 @@ namespace Square.Models
         public Models.Money TotalPriceMoney { get; }
 
         /// <summary>
-        /// A client-generated timestamp in RFC 3339 format that indicates when
-        /// the adjustment took place. For write actions, the `occurred_at`
+        /// A client-generated RFC 3339-formatted timestamp that indicates when
+        /// the inventory adjustment took place. For inventory adjustment updates, the `occurred_at`
         /// timestamp cannot be older than 24 hours or in the future relative to the
         /// time of the request.
         /// </summary>
@@ -152,8 +152,7 @@ namespace Square.Models
         public string OccurredAt { get; }
 
         /// <summary>
-        /// A read-only timestamp in RFC 3339 format that indicates when Square
-        /// received the adjustment.
+        /// An RFC 3339-formatted timestamp that indicates when the inventory adjustment is received.
         /// </summary>
         [JsonProperty("created_at", NullValueHandling = NullValueHandling.Ignore)]
         public string CreatedAt { get; }
@@ -165,14 +164,14 @@ namespace Square.Models
         public Models.SourceApplication Source { get; }
 
         /// <summary>
-        /// The Square ID of the [Employee]($m/Employee) responsible for the
+        /// The Square-generated ID of the [Employee]($m/Employee) responsible for the
         /// inventory adjustment.
         /// </summary>
         [JsonProperty("employee_id", NullValueHandling = NullValueHandling.Ignore)]
         public string EmployeeId { get; }
 
         /// <summary>
-        /// The read-only Square ID of the [Transaction][#type-transaction] that
+        /// The Square-generated ID of the [Transaction][#type-transaction] that
         /// caused the adjustment. Only relevant for payment-related state
         /// transitions.
         /// </summary>
@@ -180,7 +179,7 @@ namespace Square.Models
         public string TransactionId { get; }
 
         /// <summary>
-        /// The read-only Square ID of the [Refund][#type-refund] that
+        /// The Square-generated ID of the [Refund][#type-refund] that
         /// caused the adjustment. Only relevant for refund-related state
         /// transitions.
         /// </summary>
@@ -188,7 +187,7 @@ namespace Square.Models
         public string RefundId { get; }
 
         /// <summary>
-        /// The read-only Square ID of the purchase order that caused the
+        /// The Square-generated ID of the purchase order that caused the
         /// adjustment. Only relevant for state transitions from the Square for Retail
         /// app.
         /// </summary>
@@ -196,7 +195,7 @@ namespace Square.Models
         public string PurchaseOrderId { get; }
 
         /// <summary>
-        /// The read-only Square ID of the Square goods receipt that caused the
+        /// The Square-generated ID of the goods receipt that caused the
         /// adjustment. Only relevant for state transitions from the Square for Retail
         /// app.
         /// </summary>

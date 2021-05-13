@@ -34,21 +34,21 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// Unique ID of the `BlockedTax` within the order.
+        /// A unique ID of the `BlockedTax` within the order.
         /// </summary>
         [JsonProperty("uid", NullValueHandling = NullValueHandling.Ignore)]
         public string Uid { get; }
 
         /// <summary>
         /// The `uid` of the tax that should be blocked. Use this field to block
-        /// ad-hoc taxes. For catalog taxes use the `tax_catalog_object_id` field.
+        /// ad hoc taxes. For catalog, taxes use the `tax_catalog_object_id` field.
         /// </summary>
         [JsonProperty("tax_uid", NullValueHandling = NullValueHandling.Ignore)]
         public string TaxUid { get; }
 
         /// <summary>
         /// The `catalog_object_id` of the tax that should be blocked.
-        /// Use this field to block catalog taxes. For ad-hoc taxes use the
+        /// Use this field to block catalog taxes. For ad hoc taxes, use the
         /// `tax_uid` field.
         /// </summary>
         [JsonProperty("tax_catalog_object_id", NullValueHandling = NullValueHandling.Ignore)]

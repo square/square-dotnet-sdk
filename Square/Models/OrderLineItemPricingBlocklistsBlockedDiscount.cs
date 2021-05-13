@@ -34,21 +34,21 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// Unique ID of the `BlockedDiscount` within the order.
+        /// A unique ID of the `BlockedDiscount` within the order.
         /// </summary>
         [JsonProperty("uid", NullValueHandling = NullValueHandling.Ignore)]
         public string Uid { get; }
 
         /// <summary>
         /// The `uid` of the discount that should be blocked. Use this field to block
-        /// ad-hoc discounts. For catalog discounts use the `discount_catalog_object_id` field.
+        /// ad hoc discounts. For catalog discounts, use the `discount_catalog_object_id` field.
         /// </summary>
         [JsonProperty("discount_uid", NullValueHandling = NullValueHandling.Ignore)]
         public string DiscountUid { get; }
 
         /// <summary>
         /// The `catalog_object_id` of the discount that should be blocked.
-        /// Use this field to block catalog discounts. For ad-hoc discounts use the
+        /// Use this field to block catalog discounts. For ad hoc discounts, use the
         /// `discount_uid` field.
         /// </summary>
         [JsonProperty("discount_catalog_object_id", NullValueHandling = NullValueHandling.Ignore)]

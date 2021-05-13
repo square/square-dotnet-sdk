@@ -37,6 +37,7 @@ namespace Square.Models
         /// <param name="sourceType">source_type.</param>
         /// <param name="cardDetails">card_details.</param>
         /// <param name="cashDetails">cash_details.</param>
+        /// <param name="bankAccountDetails">bank_account_details.</param>
         /// <param name="externalDetails">external_details.</param>
         /// <param name="locationId">location_id.</param>
         /// <param name="orderId">order_id.</param>
@@ -72,6 +73,7 @@ namespace Square.Models
             string sourceType = null,
             Models.CardPaymentDetails cardDetails = null,
             Models.CashPaymentDetails cashDetails = null,
+            Models.BankAccountPaymentDetails bankAccountDetails = null,
             Models.ExternalPaymentDetails externalDetails = null,
             string locationId = null,
             string orderId = null,
@@ -107,6 +109,7 @@ namespace Square.Models
             this.SourceType = sourceType;
             this.CardDetails = cardDetails;
             this.CashDetails = cashDetails;
+            this.BankAccountDetails = bankAccountDetails;
             this.ExternalDetails = externalDetails;
             this.LocationId = locationId;
             this.OrderId = orderId;
@@ -217,7 +220,7 @@ namespace Square.Models
         public Models.Money RefundedMoney { get; }
 
         /// <summary>
-        /// Indicates whether the payment is APPROVED, COMPLETED, CANCELED, or FAILED.
+        /// Indicates whether the payment is APPROVED, PENDING, COMPLETED, CANCELED, or FAILED.
         /// </summary>
         [JsonProperty("status", NullValueHandling = NullValueHandling.Ignore)]
         public string Status { get; }
@@ -257,7 +260,7 @@ namespace Square.Models
 
         /// <summary>
         /// The source type for this payment.
-        /// Current values include `CARD`, `CASH`, or `EXTERNAL`.
+        /// Current values include `CARD`, `BANK_ACCOUNT`, `CASH`, or `EXTERNAL`.
         /// </summary>
         [JsonProperty("source_type", NullValueHandling = NullValueHandling.Ignore)]
         public string SourceType { get; }
@@ -274,6 +277,12 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("cash_details", NullValueHandling = NullValueHandling.Ignore)]
         public Models.CashPaymentDetails CashDetails { get; }
+
+        /// <summary>
+        /// Additional details about BANK_ACCOUNT type payments.
+        /// </summary>
+        [JsonProperty("bank_account_details", NullValueHandling = NullValueHandling.Ignore)]
+        public Models.BankAccountPaymentDetails BankAccountDetails { get; }
 
         /// <summary>
         /// Stores details about an external payment. Contains only non-confidential information.
@@ -436,6 +445,7 @@ namespace Square.Models
                 ((this.SourceType == null && other.SourceType == null) || (this.SourceType?.Equals(other.SourceType) == true)) &&
                 ((this.CardDetails == null && other.CardDetails == null) || (this.CardDetails?.Equals(other.CardDetails) == true)) &&
                 ((this.CashDetails == null && other.CashDetails == null) || (this.CashDetails?.Equals(other.CashDetails) == true)) &&
+                ((this.BankAccountDetails == null && other.BankAccountDetails == null) || (this.BankAccountDetails?.Equals(other.BankAccountDetails) == true)) &&
                 ((this.ExternalDetails == null && other.ExternalDetails == null) || (this.ExternalDetails?.Equals(other.ExternalDetails) == true)) &&
                 ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true)) &&
                 ((this.OrderId == null && other.OrderId == null) || (this.OrderId?.Equals(other.OrderId) == true)) &&
@@ -458,7 +468,7 @@ namespace Square.Models
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 761606250;
+            int hashCode = 1832327146;
 
             if (this.Id != null)
             {
@@ -543,6 +553,11 @@ namespace Square.Models
             if (this.CashDetails != null)
             {
                hashCode += this.CashDetails.GetHashCode();
+            }
+
+            if (this.BankAccountDetails != null)
+            {
+               hashCode += this.BankAccountDetails.GetHashCode();
             }
 
             if (this.ExternalDetails != null)
@@ -656,6 +671,7 @@ namespace Square.Models
             toStringOutput.Add($"this.SourceType = {(this.SourceType == null ? "null" : this.SourceType == string.Empty ? "" : this.SourceType)}");
             toStringOutput.Add($"this.CardDetails = {(this.CardDetails == null ? "null" : this.CardDetails.ToString())}");
             toStringOutput.Add($"this.CashDetails = {(this.CashDetails == null ? "null" : this.CashDetails.ToString())}");
+            toStringOutput.Add($"this.BankAccountDetails = {(this.BankAccountDetails == null ? "null" : this.BankAccountDetails.ToString())}");
             toStringOutput.Add($"this.ExternalDetails = {(this.ExternalDetails == null ? "null" : this.ExternalDetails.ToString())}");
             toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId == string.Empty ? "" : this.LocationId)}");
             toStringOutput.Add($"this.OrderId = {(this.OrderId == null ? "null" : this.OrderId == string.Empty ? "" : this.OrderId)}");
@@ -699,6 +715,7 @@ namespace Square.Models
                 .SourceType(this.SourceType)
                 .CardDetails(this.CardDetails)
                 .CashDetails(this.CashDetails)
+                .BankAccountDetails(this.BankAccountDetails)
                 .ExternalDetails(this.ExternalDetails)
                 .LocationId(this.LocationId)
                 .OrderId(this.OrderId)
@@ -741,6 +758,7 @@ namespace Square.Models
             private string sourceType;
             private Models.CardPaymentDetails cardDetails;
             private Models.CashPaymentDetails cashDetails;
+            private Models.BankAccountPaymentDetails bankAccountDetails;
             private Models.ExternalPaymentDetails externalDetails;
             private string locationId;
             private string orderId;
@@ -943,6 +961,17 @@ namespace Square.Models
             public Builder CashDetails(Models.CashPaymentDetails cashDetails)
             {
                 this.cashDetails = cashDetails;
+                return this;
+            }
+
+             /// <summary>
+             /// BankAccountDetails.
+             /// </summary>
+             /// <param name="bankAccountDetails"> bankAccountDetails. </param>
+             /// <returns> Builder. </returns>
+            public Builder BankAccountDetails(Models.BankAccountPaymentDetails bankAccountDetails)
+            {
+                this.bankAccountDetails = bankAccountDetails;
                 return this;
             }
 
@@ -1157,6 +1186,7 @@ namespace Square.Models
                     this.sourceType,
                     this.cardDetails,
                     this.cashDetails,
+                    this.bankAccountDetails,
                     this.externalDetails,
                     this.locationId,
                     this.orderId,

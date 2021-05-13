@@ -61,14 +61,14 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// Unique ID that identifies the return service charge only within this order.
+        /// A unique ID that identifies the return service charge only within this order.
         /// </summary>
         [JsonProperty("uid", NullValueHandling = NullValueHandling.Ignore)]
         public string Uid { get; }
 
         /// <summary>
-        /// `uid` of the Service Charge from the Order containing the original
-        /// charge of the service charge. `source_service_charge_uid` is `null` for
+        /// The service charge `uid` from the order containing the original
+        /// service charge. `source_service_charge_uid` is `null` for
         /// unlinked returns.
         /// </summary>
         [JsonProperty("source_service_charge_uid", NullValueHandling = NullValueHandling.Ignore)]
@@ -90,7 +90,7 @@ namespace Square.Models
         /// The percentage of the service charge, as a string representation of
         /// a decimal number. For example, a value of `"7.25"` corresponds to a
         /// percentage of 7.25%.
-        /// Exactly one of `percentage` or `amount_money` should be set.
+        /// Either `percentage` or `amount_money` should be set, but not both.
         /// </summary>
         [JsonProperty("percentage", NullValueHandling = NullValueHandling.Ignore)]
         public string Percentage { get; }
@@ -141,7 +141,7 @@ namespace Square.Models
 
         /// <summary>
         /// Represents a phase in the process of calculating order totals.
-        /// Service charges are applied __after__ the indicated phase.
+        /// Service charges are applied after the indicated phase.
         /// [Read more about how order totals are calculated.](https://developer.squareup.com/docs/orders-api/how-it-works#how-totals-are-calculated)
         /// </summary>
         [JsonProperty("calculation_phase", NullValueHandling = NullValueHandling.Ignore)]
@@ -158,7 +158,7 @@ namespace Square.Models
         /// The list of references to `OrderReturnTax` entities applied to the
         /// `OrderReturnServiceCharge`. Each `OrderLineItemAppliedTax` has a `tax_uid`
         /// that references the `uid` of a top-level `OrderReturnTax` that is being
-        /// applied to the `OrderReturnServiceCharge`. On reads, the amount applied is
+        /// applied to the `OrderReturnServiceCharge`. On reads, the applied amount is
         /// populated.
         /// </summary>
         [JsonProperty("applied_taxes", NullValueHandling = NullValueHandling.Ignore)]

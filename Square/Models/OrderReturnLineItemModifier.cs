@@ -43,20 +43,20 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// Unique ID that identifies the return modifier only within this order.
+        /// A unique ID that identifies the return modifier only within this order.
         /// </summary>
         [JsonProperty("uid", NullValueHandling = NullValueHandling.Ignore)]
         public string Uid { get; }
 
         /// <summary>
-        /// `uid` of the Modifier from the LineItem from the Order which contains the
+        /// The modifier `uid` from the order's line item that contains the
         /// original sale of this line item modifier.
         /// </summary>
         [JsonProperty("source_modifier_uid", NullValueHandling = NullValueHandling.Ignore)]
         public string SourceModifierUid { get; }
 
         /// <summary>
-        /// The catalog object id referencing [CatalogModifier]($m/CatalogModifier).
+        /// The catalog object ID referencing [CatalogModifier]($m/CatalogModifier).
         /// </summary>
         [JsonProperty("catalog_object_id", NullValueHandling = NullValueHandling.Ignore)]
         public string CatalogObjectId { get; }

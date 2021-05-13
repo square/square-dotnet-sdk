@@ -22,7 +22,6 @@ namespace Square.Models
         /// </summary>
         /// <param name="programId">program_id.</param>
         /// <param name="id">id.</param>
-        /// <param name="mappings">mappings.</param>
         /// <param name="balance">balance.</param>
         /// <param name="lifetimePoints">lifetime_points.</param>
         /// <param name="customerId">customer_id.</param>
@@ -33,7 +32,6 @@ namespace Square.Models
         public LoyaltyAccount(
             string programId,
             string id = null,
-            IList<Models.LoyaltyAccountMapping> mappings = null,
             int? balance = null,
             int? lifetimePoints = null,
             string customerId = null,
@@ -43,7 +41,6 @@ namespace Square.Models
             Models.LoyaltyAccountMapping mapping = null)
         {
             this.Id = id;
-            this.Mappings = mappings;
             this.ProgramId = programId;
             this.Balance = balance;
             this.LifetimePoints = lifetimePoints;
@@ -59,17 +56,6 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("id", NullValueHandling = NullValueHandling.Ignore)]
         public string Id { get; }
-
-        /// <summary>
-        /// The list of mappings that the account is associated with.
-        /// Currently, a buyer can only be mapped to a loyalty account using
-        /// a phone number. Therefore, the list can only have one mapping.
-        /// One of the following is required when creating a loyalty account:
-        /// - (Preferred) The `mapping` field, with the buyer's phone number specified in the `phone_number` field.
-        /// - This `mappings` field.
-        /// </summary>
-        [JsonProperty("mappings", NullValueHandling = NullValueHandling.Ignore)]
-        public IList<Models.LoyaltyAccountMapping> Mappings { get; }
 
         /// <summary>
         /// The Square-assigned ID of the [loyalty program]($m/LoyaltyProgram) to which the account belongs.
@@ -147,7 +133,6 @@ namespace Square.Models
 
             return obj is LoyaltyAccount other &&
                 ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
-                ((this.Mappings == null && other.Mappings == null) || (this.Mappings?.Equals(other.Mappings) == true)) &&
                 ((this.ProgramId == null && other.ProgramId == null) || (this.ProgramId?.Equals(other.ProgramId) == true)) &&
                 ((this.Balance == null && other.Balance == null) || (this.Balance?.Equals(other.Balance) == true)) &&
                 ((this.LifetimePoints == null && other.LifetimePoints == null) || (this.LifetimePoints?.Equals(other.LifetimePoints) == true)) &&
@@ -161,16 +146,11 @@ namespace Square.Models
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1177034769;
+            int hashCode = -119285274;
 
             if (this.Id != null)
             {
                hashCode += this.Id.GetHashCode();
-            }
-
-            if (this.Mappings != null)
-            {
-               hashCode += this.Mappings.GetHashCode();
             }
 
             if (this.ProgramId != null)
@@ -223,7 +203,6 @@ namespace Square.Models
         protected void ToString(List<string> toStringOutput)
         {
             toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id == string.Empty ? "" : this.Id)}");
-            toStringOutput.Add($"this.Mappings = {(this.Mappings == null ? "null" : $"[{string.Join(", ", this.Mappings)} ]")}");
             toStringOutput.Add($"this.ProgramId = {(this.ProgramId == null ? "null" : this.ProgramId == string.Empty ? "" : this.ProgramId)}");
             toStringOutput.Add($"this.Balance = {(this.Balance == null ? "null" : this.Balance.ToString())}");
             toStringOutput.Add($"this.LifetimePoints = {(this.LifetimePoints == null ? "null" : this.LifetimePoints.ToString())}");
@@ -243,7 +222,6 @@ namespace Square.Models
             var builder = new Builder(
                 this.ProgramId)
                 .Id(this.Id)
-                .Mappings(this.Mappings)
                 .Balance(this.Balance)
                 .LifetimePoints(this.LifetimePoints)
                 .CustomerId(this.CustomerId)
@@ -261,7 +239,6 @@ namespace Square.Models
         {
             private string programId;
             private string id;
-            private IList<Models.LoyaltyAccountMapping> mappings;
             private int? balance;
             private int? lifetimePoints;
             private string customerId;
@@ -295,17 +272,6 @@ namespace Square.Models
             public Builder Id(string id)
             {
                 this.id = id;
-                return this;
-            }
-
-             /// <summary>
-             /// Mappings.
-             /// </summary>
-             /// <param name="mappings"> mappings. </param>
-             /// <returns> Builder. </returns>
-            public Builder Mappings(IList<Models.LoyaltyAccountMapping> mappings)
-            {
-                this.mappings = mappings;
                 return this;
             }
 
@@ -395,7 +361,6 @@ namespace Square.Models
                 return new LoyaltyAccount(
                     this.programId,
                     this.id,
-                    this.mappings,
                     this.balance,
                     this.lifetimePoints,
                     this.customerId,
