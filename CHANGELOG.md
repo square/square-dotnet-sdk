@@ -32,6 +32,10 @@ The Sites API and Snippets API are publicly available to all developers as part 
   
 ## Documentation updates
 * **Getting Started** Added step that shows how to use the API Logs to examine a transaction. 
+   
+## SDKs 
+* **.NET SDK:**
+  * The .NET SDK now uses .NET 2.0, upgraded from .NET 1.3.
 
 
 ## Version 10.0.0 (2021-04-21)
