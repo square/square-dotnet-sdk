@@ -82,13 +82,13 @@ namespace Square.Models
         public string Status { get; }
 
         /// <summary>
-        /// The given (i.e., first) name associated with the team member.
+        /// The given name (that is, the first name) associated with the team member.
         /// </summary>
         [JsonProperty("given_name", NullValueHandling = NullValueHandling.Ignore)]
         public string GivenName { get; }
 
         /// <summary>
-        /// The family (i.e., last) name associated with the team member.
+        /// The family name (that is, the last name) associated with the team member.
         /// </summary>
         [JsonProperty("family_name", NullValueHandling = NullValueHandling.Ignore)]
         public string FamilyName { get; }
@@ -100,7 +100,7 @@ namespace Square.Models
         public string EmailAddress { get; }
 
         /// <summary>
-        /// The team member's phone number in E.164 format. Examples:
+        /// The team member's phone number, in E.164 format. For example:
         /// +14155552671 - the country code is 1 for US
         /// +551155256325 - the country code is 55 for BR
         /// </summary>
@@ -108,15 +108,15 @@ namespace Square.Models
         public string PhoneNumber { get; }
 
         /// <summary>
-        /// The timestamp in RFC 3339 format describing when the team member was created.
-        /// Ex: "2018-10-04T04:00:00-07:00" or "2019-02-05T12:00:00Z"
+        /// The timestamp, in RFC 3339 format, describing when the team member was created.
+        /// For example, "2018-10-04T04:00:00-07:00" or "2019-02-05T12:00:00Z".
         /// </summary>
         [JsonProperty("created_at", NullValueHandling = NullValueHandling.Ignore)]
         public string CreatedAt { get; }
 
         /// <summary>
-        /// The timestamp in RFC 3339 format describing when the team member was last updated.
-        /// Ex: "2018-10-04T04:00:00-07:00" or "2019-02-05T12:00:00Z"
+        /// The timestamp, in RFC 3339 format, describing when the team member was last updated.
+        /// For example, "2018-10-04T04:00:00-07:00" or "2019-02-05T12:00:00Z".
         /// </summary>
         [JsonProperty("updated_at", NullValueHandling = NullValueHandling.Ignore)]
         public string UpdatedAt { get; }

@@ -25,18 +25,24 @@ namespace Square.Models
         /// <param name="visitMinimumAmountMoney">visit_minimum_amount_money.</param>
         /// <param name="spendAmountMoney">spend_amount_money.</param>
         /// <param name="catalogObjectId">catalog_object_id.</param>
+        /// <param name="excludedCategoryIds">excluded_category_ids.</param>
+        /// <param name="excludedItemVariationIds">excluded_item_variation_ids.</param>
         public LoyaltyProgramAccrualRule(
             string accrualType,
             int? points = null,
             Models.Money visitMinimumAmountMoney = null,
             Models.Money spendAmountMoney = null,
-            string catalogObjectId = null)
+            string catalogObjectId = null,
+            IList<string> excludedCategoryIds = null,
+            IList<string> excludedItemVariationIds = null)
         {
             this.AccrualType = accrualType;
             this.Points = points;
             this.VisitMinimumAmountMoney = visitMinimumAmountMoney;
             this.SpendAmountMoney = spendAmountMoney;
             this.CatalogObjectId = catalogObjectId;
+            this.ExcludedCategoryIds = excludedCategoryIds;
+            this.ExcludedItemVariationIds = excludedItemVariationIds;
         }
 
         /// <summary>
@@ -75,12 +81,31 @@ namespace Square.Models
         public Models.Money SpendAmountMoney { get; }
 
         /// <summary>
-        /// The ID of the [catalog object]($m/CatalogObject) to purchase to earn the number of points defined by the
-        /// rule. This is either an item variation or a category, depending on the type. This is defined on
-        /// `ITEM_VARIATION` rules and `CATEGORY` rules.
+        /// When the accrual rule is item-based or category-based, this field specifies the ID
+        /// of the [catalog object]($m/CatalogObject) that buyers can purchase to earn points.
+        /// If `accrual_type` is `ITEM_VARIATION`, the object is an item variation.
+        /// If `accrual_type` is `CATEGORY`, the object is a category.
         /// </summary>
         [JsonProperty("catalog_object_id", NullValueHandling = NullValueHandling.Ignore)]
         public string CatalogObjectId { get; }
+
+        /// <summary>
+        /// When the accrual rule is spend-based (`accrual_type` is `SPEND`), this field
+        /// lists the IDs of any `CATEGORY` catalog objects that are excluded from points accrual.
+        /// You can use the [BatchRetrieveCatalogObjects]($e/Catalog/BatchRetrieveCatalogObjects)
+        /// endpoint to retrieve information about the excluded categories.
+        /// </summary>
+        [JsonProperty("excluded_category_ids", NullValueHandling = NullValueHandling.Ignore)]
+        public IList<string> ExcludedCategoryIds { get; }
+
+        /// <summary>
+        /// When the accrual rule is spend-based (`accrual_type` is `SPEND`), this field
+        /// lists the IDs of any `ITEM_VARIATION` catalog objects that are excluded from points accrual.
+        /// You can use the [BatchRetrieveCatalogObjects]($e/Catalog/BatchRetrieveCatalogObjects)
+        /// endpoint to retrieve information about the excluded item variations.
+        /// </summary>
+        [JsonProperty("excluded_item_variation_ids", NullValueHandling = NullValueHandling.Ignore)]
+        public IList<string> ExcludedItemVariationIds { get; }
 
         /// <inheritdoc/>
         public override string ToString()
@@ -110,13 +135,15 @@ namespace Square.Models
                 ((this.Points == null && other.Points == null) || (this.Points?.Equals(other.Points) == true)) &&
                 ((this.VisitMinimumAmountMoney == null && other.VisitMinimumAmountMoney == null) || (this.VisitMinimumAmountMoney?.Equals(other.VisitMinimumAmountMoney) == true)) &&
                 ((this.SpendAmountMoney == null && other.SpendAmountMoney == null) || (this.SpendAmountMoney?.Equals(other.SpendAmountMoney) == true)) &&
-                ((this.CatalogObjectId == null && other.CatalogObjectId == null) || (this.CatalogObjectId?.Equals(other.CatalogObjectId) == true));
+                ((this.CatalogObjectId == null && other.CatalogObjectId == null) || (this.CatalogObjectId?.Equals(other.CatalogObjectId) == true)) &&
+                ((this.ExcludedCategoryIds == null && other.ExcludedCategoryIds == null) || (this.ExcludedCategoryIds?.Equals(other.ExcludedCategoryIds) == true)) &&
+                ((this.ExcludedItemVariationIds == null && other.ExcludedItemVariationIds == null) || (this.ExcludedItemVariationIds?.Equals(other.ExcludedItemVariationIds) == true));
         }
 
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -765894953;
+            int hashCode = 2086820232;
 
             if (this.AccrualType != null)
             {
@@ -143,6 +170,16 @@ namespace Square.Models
                hashCode += this.CatalogObjectId.GetHashCode();
             }
 
+            if (this.ExcludedCategoryIds != null)
+            {
+               hashCode += this.ExcludedCategoryIds.GetHashCode();
+            }
+
+            if (this.ExcludedItemVariationIds != null)
+            {
+               hashCode += this.ExcludedItemVariationIds.GetHashCode();
+            }
+
             return hashCode;
         }
 
@@ -157,6 +194,8 @@ namespace Square.Models
             toStringOutput.Add($"this.VisitMinimumAmountMoney = {(this.VisitMinimumAmountMoney == null ? "null" : this.VisitMinimumAmountMoney.ToString())}");
             toStringOutput.Add($"this.SpendAmountMoney = {(this.SpendAmountMoney == null ? "null" : this.SpendAmountMoney.ToString())}");
             toStringOutput.Add($"this.CatalogObjectId = {(this.CatalogObjectId == null ? "null" : this.CatalogObjectId == string.Empty ? "" : this.CatalogObjectId)}");
+            toStringOutput.Add($"this.ExcludedCategoryIds = {(this.ExcludedCategoryIds == null ? "null" : $"[{string.Join(", ", this.ExcludedCategoryIds)} ]")}");
+            toStringOutput.Add($"this.ExcludedItemVariationIds = {(this.ExcludedItemVariationIds == null ? "null" : $"[{string.Join(", ", this.ExcludedItemVariationIds)} ]")}");
         }
 
         /// <summary>
@@ -170,7 +209,9 @@ namespace Square.Models
                 .Points(this.Points)
                 .VisitMinimumAmountMoney(this.VisitMinimumAmountMoney)
                 .SpendAmountMoney(this.SpendAmountMoney)
-                .CatalogObjectId(this.CatalogObjectId);
+                .CatalogObjectId(this.CatalogObjectId)
+                .ExcludedCategoryIds(this.ExcludedCategoryIds)
+                .ExcludedItemVariationIds(this.ExcludedItemVariationIds);
             return builder;
         }
 
@@ -184,6 +225,8 @@ namespace Square.Models
             private Models.Money visitMinimumAmountMoney;
             private Models.Money spendAmountMoney;
             private string catalogObjectId;
+            private IList<string> excludedCategoryIds;
+            private IList<string> excludedItemVariationIds;
 
             public Builder(
                 string accrualType)
@@ -246,6 +289,28 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// ExcludedCategoryIds.
+             /// </summary>
+             /// <param name="excludedCategoryIds"> excludedCategoryIds. </param>
+             /// <returns> Builder. </returns>
+            public Builder ExcludedCategoryIds(IList<string> excludedCategoryIds)
+            {
+                this.excludedCategoryIds = excludedCategoryIds;
+                return this;
+            }
+
+             /// <summary>
+             /// ExcludedItemVariationIds.
+             /// </summary>
+             /// <param name="excludedItemVariationIds"> excludedItemVariationIds. </param>
+             /// <returns> Builder. </returns>
+            public Builder ExcludedItemVariationIds(IList<string> excludedItemVariationIds)
+            {
+                this.excludedItemVariationIds = excludedItemVariationIds;
+                return this;
+            }
+
             /// <summary>
             /// Builds class object.
             /// </summary>
@@ -257,7 +322,9 @@ namespace Square.Models
                     this.points,
                     this.visitMinimumAmountMoney,
                     this.spendAmountMoney,
-                    this.catalogObjectId);
+                    this.catalogObjectId,
+                    this.excludedCategoryIds,
+                    this.excludedItemVariationIds);
             }
         }
     }

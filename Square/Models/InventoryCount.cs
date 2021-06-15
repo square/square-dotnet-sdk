@@ -26,13 +26,15 @@ namespace Square.Models
         /// <param name="locationId">location_id.</param>
         /// <param name="quantity">quantity.</param>
         /// <param name="calculatedAt">calculated_at.</param>
+        /// <param name="isEstimated">is_estimated.</param>
         public InventoryCount(
             string catalogObjectId = null,
             string catalogObjectType = null,
             string state = null,
             string locationId = null,
             string quantity = null,
-            string calculatedAt = null)
+            string calculatedAt = null,
+            bool? isEstimated = null)
         {
             this.CatalogObjectId = catalogObjectId;
             this.CatalogObjectType = catalogObjectType;
@@ -40,6 +42,7 @@ namespace Square.Models
             this.LocationId = locationId;
             this.Quantity = quantity;
             this.CalculatedAt = calculatedAt;
+            this.IsEstimated = isEstimated;
         }
 
         /// <summary>
@@ -84,6 +87,16 @@ namespace Square.Models
         [JsonProperty("calculated_at", NullValueHandling = NullValueHandling.Ignore)]
         public string CalculatedAt { get; }
 
+        /// <summary>
+        /// Whether the inventory count is for composed variation (TRUE) or not (FALSE). If true, the inventory count will not be present in the response of
+        /// any of these endpoints: [BatchChangeInventory]($e/Inventory/BatchChangeInventory),
+        /// [BatchRetrieveInventoryChanges]($e/Inventory/BatchRetrieveInventoryChanges),
+        /// [BatchRetrieveInventoryCounts]($e/Inventory/BatchRetrieveInventoryCounts), and
+        /// [RetrieveInventoryChanges]($e/Inventory/RetrieveInventoryChanges).
+        /// </summary>
+        [JsonProperty("is_estimated", NullValueHandling = NullValueHandling.Ignore)]
+        public bool? IsEstimated { get; }
+
         /// <inheritdoc/>
         public override string ToString()
         {
@@ -113,13 +126,14 @@ namespace Square.Models
                 ((this.State == null && other.State == null) || (this.State?.Equals(other.State) == true)) &&
                 ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true)) &&
                 ((this.Quantity == null && other.Quantity == null) || (this.Quantity?.Equals(other.Quantity) == true)) &&
-                ((this.CalculatedAt == null && other.CalculatedAt == null) || (this.CalculatedAt?.Equals(other.CalculatedAt) == true));
+                ((this.CalculatedAt == null && other.CalculatedAt == null) || (this.CalculatedAt?.Equals(other.CalculatedAt) == true)) &&
+                ((this.IsEstimated == null && other.IsEstimated == null) || (this.IsEstimated?.Equals(other.IsEstimated) == true));
         }
 
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 151741649;
+            int hashCode = 1245291455;
 
             if (this.CatalogObjectId != null)
             {
@@ -151,6 +165,11 @@ namespace Square.Models
                hashCode += this.CalculatedAt.GetHashCode();
             }
 
+            if (this.IsEstimated != null)
+            {
+               hashCode += this.IsEstimated.GetHashCode();
+            }
+
             return hashCode;
         }
 
@@ -166,6 +185,7 @@ namespace Square.Models
             toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId == string.Empty ? "" : this.LocationId)}");
             toStringOutput.Add($"this.Quantity = {(this.Quantity == null ? "null" : this.Quantity == string.Empty ? "" : this.Quantity)}");
             toStringOutput.Add($"this.CalculatedAt = {(this.CalculatedAt == null ? "null" : this.CalculatedAt == string.Empty ? "" : this.CalculatedAt)}");
+            toStringOutput.Add($"this.IsEstimated = {(this.IsEstimated == null ? "null" : this.IsEstimated.ToString())}");
         }
 
         /// <summary>
@@ -180,7 +200,8 @@ namespace Square.Models
                 .State(this.State)
                 .LocationId(this.LocationId)
                 .Quantity(this.Quantity)
-                .CalculatedAt(this.CalculatedAt);
+                .CalculatedAt(this.CalculatedAt)
+                .IsEstimated(this.IsEstimated);
             return builder;
         }
 
@@ -195,6 +216,7 @@ namespace Square.Models
             private string locationId;
             private string quantity;
             private string calculatedAt;
+            private bool? isEstimated;
 
              /// <summary>
              /// CatalogObjectId.
@@ -262,6 +284,17 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// IsEstimated.
+             /// </summary>
+             /// <param name="isEstimated"> isEstimated. </param>
+             /// <returns> Builder. </returns>
+            public Builder IsEstimated(bool? isEstimated)
+            {
+                this.isEstimated = isEstimated;
+                return this;
+            }
+
             /// <summary>
             /// Builds class object.
             /// </summary>
@@ -274,7 +307,8 @@ namespace Square.Models
                     this.state,
                     this.locationId,
                     this.quantity,
-                    this.calculatedAt);
+                    this.calculatedAt,
+                    this.isEstimated);
             }
         }
     }

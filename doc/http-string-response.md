@@ -15,5 +15,5 @@ HttpStringResponse inherits from HttpResponse and has additional property of str
 
 | Name | Description |
 |  --- | --- |
-| ```HttpStringResponse(int statusCode, Dictionary<string, string> headers, Stream rawBody, string body)<br>        : base(statusCode, headers, rawBody)```<br>``` | Initializes a new instance of the <see cref="HttpStringResponse"/> class. |
+| `HttpStringResponse(int statusCode, Dictionary<string, string> headers, Stream rawBody, string body) : base(statusCode, headers, rawBody)` | Initializes a new instance of the <see cref="HttpStringResponse"/> class. |
 

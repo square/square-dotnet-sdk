@@ -44,8 +44,7 @@ namespace Square.Models
         public IList<Models.Error> Errors { get; }
 
         /// <summary>
-        /// Represents a Square customer profile, which can have one or more
-        /// cards on file associated with it.
+        /// Represents a Square customer profile in the Customer Directory of a Square seller.
         /// </summary>
         [JsonProperty("customer", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Customer Customer { get; }

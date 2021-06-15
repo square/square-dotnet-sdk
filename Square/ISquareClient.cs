@@ -44,6 +44,11 @@ namespace Square
         IBookingsApi BookingsApi { get; }
 
         /// <summary>
+        /// Gets instance for ICardsApi.
+        /// </summary>
+        ICardsApi CardsApi { get; }
+
+        /// <summary>
         /// Gets instance for ICashDrawersApi.
         /// </summary>
         ICashDrawersApi CashDrawersApi { get; }
@@ -82,6 +87,16 @@ namespace Square
         /// Gets instance for IEmployeesApi.
         /// </summary>
         IEmployeesApi EmployeesApi { get; }
+
+        /// <summary>
+        /// Gets instance for IGiftCardsApi.
+        /// </summary>
+        IGiftCardsApi GiftCardsApi { get; }
+
+        /// <summary>
+        /// Gets instance for IGiftCardActivitiesApi.
+        /// </summary>
+        IGiftCardActivitiesApi GiftCardActivitiesApi { get; }
 
         /// <summary>
         /// Gets instance for IInventoryApi.

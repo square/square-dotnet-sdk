@@ -27,6 +27,7 @@ namespace Square.Models
         /// <param name="note">note.</param>
         /// <param name="catalogObjectId">catalog_object_id.</param>
         /// <param name="variationName">variation_name.</param>
+        /// <param name="itemType">item_type.</param>
         /// <param name="metadata">metadata.</param>
         /// <param name="modifiers">modifiers.</param>
         /// <param name="appliedTaxes">applied_taxes.</param>
@@ -46,6 +47,7 @@ namespace Square.Models
             string note = null,
             string catalogObjectId = null,
             string variationName = null,
+            string itemType = null,
             IDictionary<string, string> metadata = null,
             IList<Models.OrderLineItemModifier> modifiers = null,
             IList<Models.OrderLineItemAppliedTax> appliedTaxes = null,
@@ -65,6 +67,7 @@ namespace Square.Models
             this.Note = note;
             this.CatalogObjectId = catalogObjectId;
             this.VariationName = variationName;
+            this.ItemType = itemType;
             this.Metadata = metadata;
             this.Modifiers = modifiers;
             this.AppliedTaxes = appliedTaxes;
@@ -125,6 +128,12 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("variation_name", NullValueHandling = NullValueHandling.Ignore)]
         public string VariationName { get; }
+
+        /// <summary>
+        /// Represents the line item type.
+        /// </summary>
+        [JsonProperty("item_type", NullValueHandling = NullValueHandling.Ignore)]
+        public string ItemType { get; }
 
         /// <summary>
         /// Application-defined data attached to this line item. Metadata fields are intended
@@ -283,6 +292,7 @@ namespace Square.Models
                 ((this.Note == null && other.Note == null) || (this.Note?.Equals(other.Note) == true)) &&
                 ((this.CatalogObjectId == null && other.CatalogObjectId == null) || (this.CatalogObjectId?.Equals(other.CatalogObjectId) == true)) &&
                 ((this.VariationName == null && other.VariationName == null) || (this.VariationName?.Equals(other.VariationName) == true)) &&
+                ((this.ItemType == null && other.ItemType == null) || (this.ItemType?.Equals(other.ItemType) == true)) &&
                 ((this.Metadata == null && other.Metadata == null) || (this.Metadata?.Equals(other.Metadata) == true)) &&
                 ((this.Modifiers == null && other.Modifiers == null) || (this.Modifiers?.Equals(other.Modifiers) == true)) &&
                 ((this.AppliedTaxes == null && other.AppliedTaxes == null) || (this.AppliedTaxes?.Equals(other.AppliedTaxes) == true)) &&
@@ -299,7 +309,7 @@ namespace Square.Models
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 441365892;
+            int hashCode = -1998474077;
 
             if (this.Uid != null)
             {
@@ -334,6 +344,11 @@ namespace Square.Models
             if (this.VariationName != null)
             {
                hashCode += this.VariationName.GetHashCode();
+            }
+
+            if (this.ItemType != null)
+            {
+               hashCode += this.ItemType.GetHashCode();
             }
 
             if (this.Metadata != null)
@@ -407,6 +422,7 @@ namespace Square.Models
             toStringOutput.Add($"this.Note = {(this.Note == null ? "null" : this.Note == string.Empty ? "" : this.Note)}");
             toStringOutput.Add($"this.CatalogObjectId = {(this.CatalogObjectId == null ? "null" : this.CatalogObjectId == string.Empty ? "" : this.CatalogObjectId)}");
             toStringOutput.Add($"this.VariationName = {(this.VariationName == null ? "null" : this.VariationName == string.Empty ? "" : this.VariationName)}");
+            toStringOutput.Add($"this.ItemType = {(this.ItemType == null ? "null" : this.ItemType.ToString())}");
             toStringOutput.Add($"Metadata = {(this.Metadata == null ? "null" : this.Metadata.ToString())}");
             toStringOutput.Add($"this.Modifiers = {(this.Modifiers == null ? "null" : $"[{string.Join(", ", this.Modifiers)} ]")}");
             toStringOutput.Add($"this.AppliedTaxes = {(this.AppliedTaxes == null ? "null" : $"[{string.Join(", ", this.AppliedTaxes)} ]")}");
@@ -434,6 +450,7 @@ namespace Square.Models
                 .Note(this.Note)
                 .CatalogObjectId(this.CatalogObjectId)
                 .VariationName(this.VariationName)
+                .ItemType(this.ItemType)
                 .Metadata(this.Metadata)
                 .Modifiers(this.Modifiers)
                 .AppliedTaxes(this.AppliedTaxes)
@@ -460,6 +477,7 @@ namespace Square.Models
             private string note;
             private string catalogObjectId;
             private string variationName;
+            private string itemType;
             private IDictionary<string, string> metadata;
             private IList<Models.OrderLineItemModifier> modifiers;
             private IList<Models.OrderLineItemAppliedTax> appliedTaxes;
@@ -552,6 +570,17 @@ namespace Square.Models
             public Builder VariationName(string variationName)
             {
                 this.variationName = variationName;
+                return this;
+            }
+
+             /// <summary>
+             /// ItemType.
+             /// </summary>
+             /// <param name="itemType"> itemType. </param>
+             /// <returns> Builder. </returns>
+            public Builder ItemType(string itemType)
+            {
+                this.itemType = itemType;
                 return this;
             }
 
@@ -690,6 +719,7 @@ namespace Square.Models
                     this.note,
                     this.catalogObjectId,
                     this.variationName,
+                    this.itemType,
                     this.metadata,
                     this.modifiers,
                     this.appliedTaxes,

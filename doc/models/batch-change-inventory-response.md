@@ -11,6 +11,7 @@
 |  --- | --- | --- | --- |
 | `Errors` | [`IList<Models.Error>`](/doc/models/error.md) | Optional | Any errors that occurred during the request. |
 | `Counts` | [`IList<Models.InventoryCount>`](/doc/models/inventory-count.md) | Optional | The current counts for all objects referenced in the request. |
+| `Changes` | [`IList<Models.InventoryChange>`](/doc/models/inventory-change.md) | Optional | Changes created for the request. |
 
 ## Example (as JSON)
 

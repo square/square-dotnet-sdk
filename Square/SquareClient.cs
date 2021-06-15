@@ -53,6 +53,7 @@ namespace Square
         private readonly Lazy<IApplePayApi> applePay;
         private readonly Lazy<IBankAccountsApi> bankAccounts;
         private readonly Lazy<IBookingsApi> bookings;
+        private readonly Lazy<ICardsApi> cards;
         private readonly Lazy<ICashDrawersApi> cashDrawers;
         private readonly Lazy<ICatalogApi> catalog;
         private readonly Lazy<ICustomersApi> customers;
@@ -61,6 +62,8 @@ namespace Square
         private readonly Lazy<IDevicesApi> devices;
         private readonly Lazy<IDisputesApi> disputes;
         private readonly Lazy<IEmployeesApi> employees;
+        private readonly Lazy<IGiftCardsApi> giftCards;
+        private readonly Lazy<IGiftCardActivitiesApi> giftCardActivities;
         private readonly Lazy<IInventoryApi> inventory;
         private readonly Lazy<IInvoicesApi> invoices;
         private readonly Lazy<ILaborApi> labor;
@@ -112,6 +115,8 @@ namespace Square
                 () => new BankAccountsApi(this, this.httpClient, this.authManagers, this.httpCallBack));
             this.bookings = new Lazy<IBookingsApi>(
                 () => new BookingsApi(this, this.httpClient, this.authManagers, this.httpCallBack));
+            this.cards = new Lazy<ICardsApi>(
+                () => new CardsApi(this, this.httpClient, this.authManagers, this.httpCallBack));
             this.cashDrawers = new Lazy<ICashDrawersApi>(
                 () => new CashDrawersApi(this, this.httpClient, this.authManagers, this.httpCallBack));
             this.catalog = new Lazy<ICatalogApi>(
@@ -128,6 +133,10 @@ namespace Square
                 () => new DisputesApi(this, this.httpClient, this.authManagers, this.httpCallBack));
             this.employees = new Lazy<IEmployeesApi>(
                 () => new EmployeesApi(this, this.httpClient, this.authManagers, this.httpCallBack));
+            this.giftCards = new Lazy<IGiftCardsApi>(
+                () => new GiftCardsApi(this, this.httpClient, this.authManagers, this.httpCallBack));
+            this.giftCardActivities = new Lazy<IGiftCardActivitiesApi>(
+                () => new GiftCardActivitiesApi(this, this.httpClient, this.authManagers, this.httpCallBack));
             this.inventory = new Lazy<IInventoryApi>(
                 () => new InventoryApi(this, this.httpClient, this.authManagers, this.httpCallBack));
             this.invoices = new Lazy<IInvoicesApi>(
@@ -210,6 +219,11 @@ namespace Square
         public IBookingsApi BookingsApi => this.bookings.Value;
 
         /// <summary>
+        /// Gets CardsApi.
+        /// </summary>
+        public ICardsApi CardsApi => this.cards.Value;
+
+        /// <summary>
         /// Gets CashDrawersApi.
         /// </summary>
         public ICashDrawersApi CashDrawersApi => this.cashDrawers.Value;
@@ -248,6 +262,16 @@ namespace Square
         /// Gets EmployeesApi.
         /// </summary>
         public IEmployeesApi EmployeesApi => this.employees.Value;
+
+        /// <summary>
+        /// Gets GiftCardsApi.
+        /// </summary>
+        public IGiftCardsApi GiftCardsApi => this.giftCards.Value;
+
+        /// <summary>
+        /// Gets GiftCardActivitiesApi.
+        /// </summary>
+        public IGiftCardActivitiesApi GiftCardActivitiesApi => this.giftCardActivities.Value;
 
         /// <summary>
         /// Gets InventoryApi.
@@ -337,7 +361,7 @@ namespace Square
         /// <summary>
         /// Gets the current version of the SDK.
         /// </summary>
-        public string SdkVersion => "11.0.0";
+        public string SdkVersion => "12.0.0";
 
         /// <summary>
         /// Gets the configuration of the Http Client associated with this client.
@@ -486,7 +510,7 @@ namespace Square
         /// </summary>
         public class Builder
         {
-            private string squareVersion = "2021-05-13";
+            private string squareVersion = "2021-06-16";
             private Environment environment = Square.Environment.Production;
             private string customUrl = "https://connect.squareup.com";
             private string accessToken = "TODO: Replace";

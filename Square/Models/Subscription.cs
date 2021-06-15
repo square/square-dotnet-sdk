@@ -26,6 +26,7 @@ namespace Square.Models
         /// <param name="customerId">customer_id.</param>
         /// <param name="startDate">start_date.</param>
         /// <param name="canceledDate">canceled_date.</param>
+        /// <param name="chargedThroughDate">charged_through_date.</param>
         /// <param name="status">status.</param>
         /// <param name="taxPercentage">tax_percentage.</param>
         /// <param name="invoiceIds">invoice_ids.</param>
@@ -33,7 +34,6 @@ namespace Square.Models
         /// <param name="version">version.</param>
         /// <param name="createdAt">created_at.</param>
         /// <param name="cardId">card_id.</param>
-        /// <param name="paidUntilDate">paid_until_date.</param>
         /// <param name="timezone">timezone.</param>
         public Subscription(
             string id = null,
@@ -42,6 +42,7 @@ namespace Square.Models
             string customerId = null,
             string startDate = null,
             string canceledDate = null,
+            string chargedThroughDate = null,
             string status = null,
             string taxPercentage = null,
             IList<string> invoiceIds = null,
@@ -49,7 +50,6 @@ namespace Square.Models
             long? version = null,
             string createdAt = null,
             string cardId = null,
-            string paidUntilDate = null,
             string timezone = null)
         {
             this.Id = id;
@@ -58,6 +58,7 @@ namespace Square.Models
             this.CustomerId = customerId;
             this.StartDate = startDate;
             this.CanceledDate = canceledDate;
+            this.ChargedThroughDate = chargedThroughDate;
             this.Status = status;
             this.TaxPercentage = taxPercentage;
             this.InvoiceIds = invoiceIds;
@@ -65,7 +66,6 @@ namespace Square.Models
             this.Version = version;
             this.CreatedAt = createdAt;
             this.CardId = cardId;
-            this.PaidUntilDate = paidUntilDate;
             this.Timezone = timezone;
         }
 
@@ -110,6 +110,19 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("canceled_date", NullValueHandling = NullValueHandling.Ignore)]
         public string CanceledDate { get; }
+
+        /// <summary>
+        /// The date up to which the customer is invoiced for the
+        /// subscription, in YYYY-MM-DD format (for example, 2013-01-15).
+        /// After the invoice is sent for a given billing period,
+        /// this date will be the last day of the billing period.
+        /// For example,
+        /// suppose for the month of May a customer gets an invoice
+        /// (or charged the card) on May 1. For the monthly billing scenario,
+        /// this date is then set to May 31.
+        /// </summary>
+        [JsonProperty("charged_through_date", NullValueHandling = NullValueHandling.Ignore)]
+        public string ChargedThroughDate { get; }
 
         /// <summary>
         /// Possible subscription status values.
@@ -167,19 +180,6 @@ namespace Square.Models
         public string CardId { get; }
 
         /// <summary>
-        /// The date up to which the customer is invoiced for the
-        /// subscription, in YYYY-MM-DD format (for example, 2013-01-15).
-        /// After the invoice is paid for a given billing period,
-        /// this date will be the last day of the billing period.
-        /// For example,
-        /// suppose for the month of May a customer gets an invoice
-        /// (or charged the card) on May 1. For the monthly billing scenario,
-        /// this date is then set to May 31.
-        /// </summary>
-        [JsonProperty("paid_until_date", NullValueHandling = NullValueHandling.Ignore)]
-        public string PaidUntilDate { get; }
-
-        /// <summary>
         /// Timezone that will be used in date calculations for the subscription.
         /// Defaults to the timezone of the location based on `location_id`.
         /// Format: the IANA Timezone Database identifier for the location timezone (for example, `America/Los_Angeles`).
@@ -217,6 +217,7 @@ namespace Square.Models
                 ((this.CustomerId == null && other.CustomerId == null) || (this.CustomerId?.Equals(other.CustomerId) == true)) &&
                 ((this.StartDate == null && other.StartDate == null) || (this.StartDate?.Equals(other.StartDate) == true)) &&
                 ((this.CanceledDate == null && other.CanceledDate == null) || (this.CanceledDate?.Equals(other.CanceledDate) == true)) &&
+                ((this.ChargedThroughDate == null && other.ChargedThroughDate == null) || (this.ChargedThroughDate?.Equals(other.ChargedThroughDate) == true)) &&
                 ((this.Status == null && other.Status == null) || (this.Status?.Equals(other.Status) == true)) &&
                 ((this.TaxPercentage == null && other.TaxPercentage == null) || (this.TaxPercentage?.Equals(other.TaxPercentage) == true)) &&
                 ((this.InvoiceIds == null && other.InvoiceIds == null) || (this.InvoiceIds?.Equals(other.InvoiceIds) == true)) &&
@@ -224,14 +225,13 @@ namespace Square.Models
                 ((this.Version == null && other.Version == null) || (this.Version?.Equals(other.Version) == true)) &&
                 ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true)) &&
                 ((this.CardId == null && other.CardId == null) || (this.CardId?.Equals(other.CardId) == true)) &&
-                ((this.PaidUntilDate == null && other.PaidUntilDate == null) || (this.PaidUntilDate?.Equals(other.PaidUntilDate) == true)) &&
                 ((this.Timezone == null && other.Timezone == null) || (this.Timezone?.Equals(other.Timezone) == true));
         }
 
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1265150766;
+            int hashCode = 176993475;
 
             if (this.Id != null)
             {
@@ -261,6 +261,11 @@ namespace Square.Models
             if (this.CanceledDate != null)
             {
                hashCode += this.CanceledDate.GetHashCode();
+            }
+
+            if (this.ChargedThroughDate != null)
+            {
+               hashCode += this.ChargedThroughDate.GetHashCode();
             }
 
             if (this.Status != null)
@@ -298,11 +303,6 @@ namespace Square.Models
                hashCode += this.CardId.GetHashCode();
             }
 
-            if (this.PaidUntilDate != null)
-            {
-               hashCode += this.PaidUntilDate.GetHashCode();
-            }
-
             if (this.Timezone != null)
             {
                hashCode += this.Timezone.GetHashCode();
@@ -323,6 +323,7 @@ namespace Square.Models
             toStringOutput.Add($"this.CustomerId = {(this.CustomerId == null ? "null" : this.CustomerId == string.Empty ? "" : this.CustomerId)}");
             toStringOutput.Add($"this.StartDate = {(this.StartDate == null ? "null" : this.StartDate == string.Empty ? "" : this.StartDate)}");
             toStringOutput.Add($"this.CanceledDate = {(this.CanceledDate == null ? "null" : this.CanceledDate == string.Empty ? "" : this.CanceledDate)}");
+            toStringOutput.Add($"this.ChargedThroughDate = {(this.ChargedThroughDate == null ? "null" : this.ChargedThroughDate == string.Empty ? "" : this.ChargedThroughDate)}");
             toStringOutput.Add($"this.Status = {(this.Status == null ? "null" : this.Status.ToString())}");
             toStringOutput.Add($"this.TaxPercentage = {(this.TaxPercentage == null ? "null" : this.TaxPercentage == string.Empty ? "" : this.TaxPercentage)}");
             toStringOutput.Add($"this.InvoiceIds = {(this.InvoiceIds == null ? "null" : $"[{string.Join(", ", this.InvoiceIds)} ]")}");
@@ -330,7 +331,6 @@ namespace Square.Models
             toStringOutput.Add($"this.Version = {(this.Version == null ? "null" : this.Version.ToString())}");
             toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt == string.Empty ? "" : this.CreatedAt)}");
             toStringOutput.Add($"this.CardId = {(this.CardId == null ? "null" : this.CardId == string.Empty ? "" : this.CardId)}");
-            toStringOutput.Add($"this.PaidUntilDate = {(this.PaidUntilDate == null ? "null" : this.PaidUntilDate == string.Empty ? "" : this.PaidUntilDate)}");
             toStringOutput.Add($"this.Timezone = {(this.Timezone == null ? "null" : this.Timezone == string.Empty ? "" : this.Timezone)}");
         }
 
@@ -347,6 +347,7 @@ namespace Square.Models
                 .CustomerId(this.CustomerId)
                 .StartDate(this.StartDate)
                 .CanceledDate(this.CanceledDate)
+                .ChargedThroughDate(this.ChargedThroughDate)
                 .Status(this.Status)
                 .TaxPercentage(this.TaxPercentage)
                 .InvoiceIds(this.InvoiceIds)
@@ -354,7 +355,6 @@ namespace Square.Models
                 .Version(this.Version)
                 .CreatedAt(this.CreatedAt)
                 .CardId(this.CardId)
-                .PaidUntilDate(this.PaidUntilDate)
                 .Timezone(this.Timezone);
             return builder;
         }
@@ -370,6 +370,7 @@ namespace Square.Models
             private string customerId;
             private string startDate;
             private string canceledDate;
+            private string chargedThroughDate;
             private string status;
             private string taxPercentage;
             private IList<string> invoiceIds;
@@ -377,7 +378,6 @@ namespace Square.Models
             private long? version;
             private string createdAt;
             private string cardId;
-            private string paidUntilDate;
             private string timezone;
 
              /// <summary>
@@ -443,6 +443,17 @@ namespace Square.Models
             public Builder CanceledDate(string canceledDate)
             {
                 this.canceledDate = canceledDate;
+                return this;
+            }
+
+             /// <summary>
+             /// ChargedThroughDate.
+             /// </summary>
+             /// <param name="chargedThroughDate"> chargedThroughDate. </param>
+             /// <returns> Builder. </returns>
+            public Builder ChargedThroughDate(string chargedThroughDate)
+            {
+                this.chargedThroughDate = chargedThroughDate;
                 return this;
             }
 
@@ -524,17 +535,6 @@ namespace Square.Models
             }
 
              /// <summary>
-             /// PaidUntilDate.
-             /// </summary>
-             /// <param name="paidUntilDate"> paidUntilDate. </param>
-             /// <returns> Builder. </returns>
-            public Builder PaidUntilDate(string paidUntilDate)
-            {
-                this.paidUntilDate = paidUntilDate;
-                return this;
-            }
-
-             /// <summary>
              /// Timezone.
              /// </summary>
              /// <param name="timezone"> timezone. </param>
@@ -558,6 +558,7 @@ namespace Square.Models
                     this.customerId,
                     this.startDate,
                     this.canceledDate,
+                    this.chargedThroughDate,
                     this.status,
                     this.taxPercentage,
                     this.invoiceIds,
@@ -565,7 +566,6 @@ namespace Square.Models
                     this.version,
                     this.createdAt,
                     this.cardId,
-                    this.paidUntilDate,
                     this.timezone);
             }
         }

@@ -544,7 +544,7 @@ ListCatalogAsync(
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `cursor` | `string` | Query, Optional | The pagination cursor returned in the previous response. Leave unset for an initial request.<br>The page size is currently set to be 100.<br>See [Pagination](https://developer.squareup.com/docs/basics/api101/pagination) for more information. |
-| `types` | `string` | Query, Optional | An optional case-insensitive, comma-separated list of object types to retrieve, for example<br>`ITEM,ITEM_VARIATION,CATEGORY,IMAGE`.<br><br>The legal values are taken from the CatalogObjectType enum:<br>`ITEM`, `ITEM_VARIATION`, `CATEGORY`, `DISCOUNT`, `TAX`,<br>`MODIFIER`, `MODIFIER_LIST`, or `IMAGE`. |
+| `types` | `string` | Query, Optional | An optional case-insensitive, comma-separated list of object types to retrieve.<br><br>The valid values are defined in the [CatalogObjectType](/doc/models/catalog-object-type.md) enum, including<br>`ITEM`, `ITEM_VARIATION`, `CATEGORY`, `DISCOUNT`, `TAX`,<br>`MODIFIER`, `MODIFIER_LIST`, or `IMAGE`.<br><br>If this is unspecified, the operation returns objects of all the types at the version of the Square API used to make the request. |
 | `catalogVersion` | `long?` | Query, Optional | The specific version of the catalog objects to be included in the response.<br>This allows you to retrieve historical<br>versions of objects. The specified version value is matched against<br>the [CatalogObject](/doc/models/catalog-object.md)s' `version` attribute. |
 
 ## Response Type
@@ -610,12 +610,92 @@ var bodyMObjectCatalogV1Ids2 = new CatalogV1Id.Builder()
     .Build();
 bodyMObjectCatalogV1Ids.Add(bodyMObjectCatalogV1Ids2);
 
+var bodyMObjectItemDataVariations = new List<CatalogObject>();
+
+var bodyMObjectItemDataVariations0CustomAttributeValues = new CatalogCustomAttributeValue.Builder()
+    .Build();
+var bodyMObjectItemDataVariations0CatalogV1Ids = new List<CatalogV1Id>();
+
+var bodyMObjectItemDataVariations0CatalogV1Ids0 = new CatalogV1Id.Builder()
+    .CatalogV1Id("catalog_v1_id9")
+    .LocationId("location_id9")
+    .Build();
+bodyMObjectItemDataVariations0CatalogV1Ids.Add(bodyMObjectItemDataVariations0CatalogV1Ids0);
+
+var bodyMObjectItemDataVariations0ItemVariationData = new CatalogItemVariation.Builder()
+    .ItemId("#Cocoa")
+    .Name("Small")
+    .Sku("sku3")
+    .Upc("upc1")
+    .Ordinal(119)
+    .PricingType("VARIABLE_PRICING")
+    .Build();
+var bodyMObjectItemDataVariations0 = new CatalogObject.Builder(
+        "ITEM_VARIATION",
+        "#Small")
+    .UpdatedAt("updated_at9")
+    .Version(69L)
+    .IsDeleted(true)
+    .CustomAttributeValues(bodyMObjectItemDataVariations0CustomAttributeValues)
+    .CatalogV1Ids(bodyMObjectItemDataVariations0CatalogV1Ids)
+    .ItemVariationData(bodyMObjectItemDataVariations0ItemVariationData)
+    .Build();
+bodyMObjectItemDataVariations.Add(bodyMObjectItemDataVariations0);
+
+var bodyMObjectItemDataVariations1CustomAttributeValues = new CatalogCustomAttributeValue.Builder()
+    .Build();
+var bodyMObjectItemDataVariations1CatalogV1Ids = new List<CatalogV1Id>();
+
+var bodyMObjectItemDataVariations1CatalogV1Ids0 = new CatalogV1Id.Builder()
+    .CatalogV1Id("catalog_v1_id8")
+    .LocationId("location_id8")
+    .Build();
+bodyMObjectItemDataVariations1CatalogV1Ids.Add(bodyMObjectItemDataVariations1CatalogV1Ids0);
+
+var bodyMObjectItemDataVariations1CatalogV1Ids1 = new CatalogV1Id.Builder()
+    .CatalogV1Id("catalog_v1_id9")
+    .LocationId("location_id9")
+    .Build();
+bodyMObjectItemDataVariations1CatalogV1Ids.Add(bodyMObjectItemDataVariations1CatalogV1Ids1);
+
+var bodyMObjectItemDataVariations1CatalogV1Ids2 = new CatalogV1Id.Builder()
+    .CatalogV1Id("catalog_v1_id0")
+    .LocationId("location_id0")
+    .Build();
+bodyMObjectItemDataVariations1CatalogV1Ids.Add(bodyMObjectItemDataVariations1CatalogV1Ids2);
+
+var bodyMObjectItemDataVariations1ItemVariationDataPriceMoney = new Money.Builder()
+    .Amount(400L)
+    .Currency("USD")
+    .Build();
+var bodyMObjectItemDataVariations1ItemVariationData = new CatalogItemVariation.Builder()
+    .ItemId("#Cocoa")
+    .Name("Large")
+    .Sku("sku4")
+    .Upc("upc2")
+    .Ordinal(118)
+    .PricingType("FIXED_PRICING")
+    .PriceMoney(bodyMObjectItemDataVariations1ItemVariationDataPriceMoney)
+    .Build();
+var bodyMObjectItemDataVariations1 = new CatalogObject.Builder(
+        "ITEM_VARIATION",
+        "#Large")
+    .UpdatedAt("updated_at0")
+    .Version(68L)
+    .IsDeleted(false)
+    .CustomAttributeValues(bodyMObjectItemDataVariations1CustomAttributeValues)
+    .CatalogV1Ids(bodyMObjectItemDataVariations1CatalogV1Ids)
+    .ItemVariationData(bodyMObjectItemDataVariations1ItemVariationData)
+    .Build();
+bodyMObjectItemDataVariations.Add(bodyMObjectItemDataVariations1);
+
 var bodyMObjectItemData = new CatalogItem.Builder()
     .Name("Cocoa")
-    .Description("Hot chocolate")
+    .Description("Hot Chocolate")
     .Abbreviation("Ch")
     .LabelColor("label_color4")
     .AvailableOnline(false)
+    .Variations(bodyMObjectItemDataVariations)
     .Build();
 var bodyMObject = new CatalogObject.Builder(
         "ITEM",

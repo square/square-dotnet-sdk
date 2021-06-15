@@ -37,6 +37,7 @@ namespace Square.Models
         /// <param name="refundId">refund_id.</param>
         /// <param name="purchaseOrderId">purchase_order_id.</param>
         /// <param name="goodsReceiptId">goods_receipt_id.</param>
+        /// <param name="adjustmentGroup">adjustment_group.</param>
         public InventoryAdjustment(
             string id = null,
             string referenceId = null,
@@ -54,7 +55,8 @@ namespace Square.Models
             string transactionId = null,
             string refundId = null,
             string purchaseOrderId = null,
-            string goodsReceiptId = null)
+            string goodsReceiptId = null,
+            Models.InventoryAdjustmentGroup adjustmentGroup = null)
         {
             this.Id = id;
             this.ReferenceId = referenceId;
@@ -73,6 +75,7 @@ namespace Square.Models
             this.RefundId = refundId;
             this.PurchaseOrderId = purchaseOrderId;
             this.GoodsReceiptId = goodsReceiptId;
+            this.AdjustmentGroup = adjustmentGroup;
         }
 
         /// <summary>
@@ -117,7 +120,7 @@ namespace Square.Models
         public string CatalogObjectId { get; }
 
         /// <summary>
-        /// The [type](entity:CatalogObjectType] of the
+        /// The [type]($m/CatalogObjectType) of the
         /// [CatalogObject]($m/CatalogObject) being tracked. Tracking is only
         /// supported for the `ITEM_VARIATION` type.
         /// </summary>
@@ -202,6 +205,12 @@ namespace Square.Models
         [JsonProperty("goods_receipt_id", NullValueHandling = NullValueHandling.Ignore)]
         public string GoodsReceiptId { get; }
 
+        /// <summary>
+        /// Gets or sets AdjustmentGroup.
+        /// </summary>
+        [JsonProperty("adjustment_group", NullValueHandling = NullValueHandling.Ignore)]
+        public Models.InventoryAdjustmentGroup AdjustmentGroup { get; }
+
         /// <inheritdoc/>
         public override string ToString()
         {
@@ -242,13 +251,14 @@ namespace Square.Models
                 ((this.TransactionId == null && other.TransactionId == null) || (this.TransactionId?.Equals(other.TransactionId) == true)) &&
                 ((this.RefundId == null && other.RefundId == null) || (this.RefundId?.Equals(other.RefundId) == true)) &&
                 ((this.PurchaseOrderId == null && other.PurchaseOrderId == null) || (this.PurchaseOrderId?.Equals(other.PurchaseOrderId) == true)) &&
-                ((this.GoodsReceiptId == null && other.GoodsReceiptId == null) || (this.GoodsReceiptId?.Equals(other.GoodsReceiptId) == true));
+                ((this.GoodsReceiptId == null && other.GoodsReceiptId == null) || (this.GoodsReceiptId?.Equals(other.GoodsReceiptId) == true)) &&
+                ((this.AdjustmentGroup == null && other.AdjustmentGroup == null) || (this.AdjustmentGroup?.Equals(other.AdjustmentGroup) == true));
         }
 
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -855846569;
+            int hashCode = -2122968944;
 
             if (this.Id != null)
             {
@@ -335,6 +345,11 @@ namespace Square.Models
                hashCode += this.GoodsReceiptId.GetHashCode();
             }
 
+            if (this.AdjustmentGroup != null)
+            {
+               hashCode += this.AdjustmentGroup.GetHashCode();
+            }
+
             return hashCode;
         }
 
@@ -361,6 +376,7 @@ namespace Square.Models
             toStringOutput.Add($"this.RefundId = {(this.RefundId == null ? "null" : this.RefundId == string.Empty ? "" : this.RefundId)}");
             toStringOutput.Add($"this.PurchaseOrderId = {(this.PurchaseOrderId == null ? "null" : this.PurchaseOrderId == string.Empty ? "" : this.PurchaseOrderId)}");
             toStringOutput.Add($"this.GoodsReceiptId = {(this.GoodsReceiptId == null ? "null" : this.GoodsReceiptId == string.Empty ? "" : this.GoodsReceiptId)}");
+            toStringOutput.Add($"this.AdjustmentGroup = {(this.AdjustmentGroup == null ? "null" : this.AdjustmentGroup.ToString())}");
         }
 
         /// <summary>
@@ -386,7 +402,8 @@ namespace Square.Models
                 .TransactionId(this.TransactionId)
                 .RefundId(this.RefundId)
                 .PurchaseOrderId(this.PurchaseOrderId)
-                .GoodsReceiptId(this.GoodsReceiptId);
+                .GoodsReceiptId(this.GoodsReceiptId)
+                .AdjustmentGroup(this.AdjustmentGroup);
             return builder;
         }
 
@@ -412,6 +429,7 @@ namespace Square.Models
             private string refundId;
             private string purchaseOrderId;
             private string goodsReceiptId;
+            private Models.InventoryAdjustmentGroup adjustmentGroup;
 
              /// <summary>
              /// Id.
@@ -600,6 +618,17 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// AdjustmentGroup.
+             /// </summary>
+             /// <param name="adjustmentGroup"> adjustmentGroup. </param>
+             /// <returns> Builder. </returns>
+            public Builder AdjustmentGroup(Models.InventoryAdjustmentGroup adjustmentGroup)
+            {
+                this.adjustmentGroup = adjustmentGroup;
+                return this;
+            }
+
             /// <summary>
             /// Builds class object.
             /// </summary>
@@ -623,7 +652,8 @@ namespace Square.Models
                     this.transactionId,
                     this.refundId,
                     this.purchaseOrderId,
-                    this.goodsReceiptId);
+                    this.goodsReceiptId,
+                    this.adjustmentGroup);
             }
         }
     }

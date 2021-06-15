@@ -16,7 +16,7 @@ IEmployeesApi employeesApi = client.EmployeesApi;
 
 # List Employees
 
-**This endpoint is deprecated. **
+**This endpoint is deprecated.**
 
 ListEmployees
 
@@ -59,7 +59,7 @@ catch (ApiException e){};
 
 # Retrieve Employee
 
-**This endpoint is deprecated. **
+**This endpoint is deprecated.**
 
 RetrieveEmployee
 

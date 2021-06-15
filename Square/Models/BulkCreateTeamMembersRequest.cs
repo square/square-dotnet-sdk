@@ -28,7 +28,7 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// The data which will be used to create the `TeamMember` objects. Each key is the `idempotency_key` that maps to the `CreateTeamMemberRequest`.
+        /// The data used to create the `TeamMember` objects. Each key is the `idempotency_key` that maps to the `CreateTeamMemberRequest`.
         /// </summary>
         [JsonProperty("team_members")]
         public IDictionary<string, Models.CreateTeamMemberRequest> TeamMembers { get; }

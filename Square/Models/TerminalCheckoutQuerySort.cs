@@ -28,9 +28,7 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// The order in which results are listed.
-        /// - `ASC` - Oldest to newest.
-        /// - `DESC` - Newest to oldest (default).
+        /// The order (e.g., chronological or alphabetical) in which results from a request are returned.
         /// </summary>
         [JsonProperty("sort_order", NullValueHandling = NullValueHandling.Ignore)]
         public string SortOrder { get; }
@@ -81,7 +79,7 @@ namespace Square.Models
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.SortOrder = {(this.SortOrder == null ? "null" : this.SortOrder == string.Empty ? "" : this.SortOrder)}");
+            toStringOutput.Add($"this.SortOrder = {(this.SortOrder == null ? "null" : this.SortOrder.ToString())}");
         }
 
         /// <summary>

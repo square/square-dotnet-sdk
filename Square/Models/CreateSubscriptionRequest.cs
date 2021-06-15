@@ -20,10 +20,10 @@ namespace Square.Models
         /// <summary>
         /// Initializes a new instance of the <see cref="CreateSubscriptionRequest"/> class.
         /// </summary>
-        /// <param name="idempotencyKey">idempotency_key.</param>
         /// <param name="locationId">location_id.</param>
         /// <param name="planId">plan_id.</param>
         /// <param name="customerId">customer_id.</param>
+        /// <param name="idempotencyKey">idempotency_key.</param>
         /// <param name="startDate">start_date.</param>
         /// <param name="canceledDate">canceled_date.</param>
         /// <param name="taxPercentage">tax_percentage.</param>
@@ -31,10 +31,10 @@ namespace Square.Models
         /// <param name="cardId">card_id.</param>
         /// <param name="timezone">timezone.</param>
         public CreateSubscriptionRequest(
-            string idempotencyKey,
             string locationId,
             string planId,
             string customerId,
+            string idempotencyKey = null,
             string startDate = null,
             string canceledDate = null,
             string taxPercentage = null,
@@ -60,7 +60,7 @@ namespace Square.Models
         /// the endpoint treats each request as independent.
         /// For more information, see [Idempotency keys](https://developer.squareup.com/docs/working-with-apis/idempotency).
         /// </summary>
-        [JsonProperty("idempotency_key")]
+        [JsonProperty("idempotency_key", NullValueHandling = NullValueHandling.Ignore)]
         public string IdempotencyKey { get; }
 
         /// <summary>
@@ -70,8 +70,10 @@ namespace Square.Models
         public string LocationId { get; }
 
         /// <summary>
-        /// The ID of the subscription plan. For more information, see
-        /// [Subscription Plan Overview](https://developer.squareup.com/docs/subscriptions/overview).
+        /// The ID of the subscription plan created using the Catalog API.
+        /// For more information, see
+        /// [Set Up and Manage a Subscription Plan](https://developer.squareup.com/docs/subscriptions-api/setup-plan) and
+        /// [Subscriptions Walkthrough](https://developer.squareup.com/docs/subscriptions-api/walkthrough).
         /// </summary>
         [JsonProperty("plan_id")]
         public string PlanId { get; }
@@ -254,10 +256,10 @@ namespace Square.Models
         public Builder ToBuilder()
         {
             var builder = new Builder(
-                this.IdempotencyKey,
                 this.LocationId,
                 this.PlanId,
                 this.CustomerId)
+                .IdempotencyKey(this.IdempotencyKey)
                 .StartDate(this.StartDate)
                 .CanceledDate(this.CanceledDate)
                 .TaxPercentage(this.TaxPercentage)
@@ -272,10 +274,10 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
-            private string idempotencyKey;
             private string locationId;
             private string planId;
             private string customerId;
+            private string idempotencyKey;
             private string startDate;
             private string canceledDate;
             private string taxPercentage;
@@ -284,26 +286,13 @@ namespace Square.Models
             private string timezone;
 
             public Builder(
-                string idempotencyKey,
                 string locationId,
                 string planId,
                 string customerId)
             {
-                this.idempotencyKey = idempotencyKey;
                 this.locationId = locationId;
                 this.planId = planId;
                 this.customerId = customerId;
-            }
-
-             /// <summary>
-             /// IdempotencyKey.
-             /// </summary>
-             /// <param name="idempotencyKey"> idempotencyKey. </param>
-             /// <returns> Builder. </returns>
-            public Builder IdempotencyKey(string idempotencyKey)
-            {
-                this.idempotencyKey = idempotencyKey;
-                return this;
             }
 
              /// <summary>
@@ -336,6 +325,17 @@ namespace Square.Models
             public Builder CustomerId(string customerId)
             {
                 this.customerId = customerId;
+                return this;
+            }
+
+             /// <summary>
+             /// IdempotencyKey.
+             /// </summary>
+             /// <param name="idempotencyKey"> idempotencyKey. </param>
+             /// <returns> Builder. </returns>
+            public Builder IdempotencyKey(string idempotencyKey)
+            {
+                this.idempotencyKey = idempotencyKey;
                 return this;
             }
 
@@ -412,10 +412,10 @@ namespace Square.Models
             public CreateSubscriptionRequest Build()
             {
                 return new CreateSubscriptionRequest(
-                    this.idempotencyKey,
                     this.locationId,
                     this.planId,
                     this.customerId,
+                    this.idempotencyKey,
                     this.startDate,
                     this.canceledDate,
                     this.taxPercentage,

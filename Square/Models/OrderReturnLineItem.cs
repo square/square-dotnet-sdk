@@ -28,6 +28,7 @@ namespace Square.Models
         /// <param name="note">note.</param>
         /// <param name="catalogObjectId">catalog_object_id.</param>
         /// <param name="variationName">variation_name.</param>
+        /// <param name="itemType">item_type.</param>
         /// <param name="returnModifiers">return_modifiers.</param>
         /// <param name="appliedTaxes">applied_taxes.</param>
         /// <param name="appliedDiscounts">applied_discounts.</param>
@@ -46,6 +47,7 @@ namespace Square.Models
             string note = null,
             string catalogObjectId = null,
             string variationName = null,
+            string itemType = null,
             IList<Models.OrderReturnLineItemModifier> returnModifiers = null,
             IList<Models.OrderLineItemAppliedTax> appliedTaxes = null,
             IList<Models.OrderLineItemAppliedDiscount> appliedDiscounts = null,
@@ -64,6 +66,7 @@ namespace Square.Models
             this.Note = note;
             this.CatalogObjectId = catalogObjectId;
             this.VariationName = variationName;
+            this.ItemType = itemType;
             this.ReturnModifiers = returnModifiers;
             this.AppliedTaxes = appliedTaxes;
             this.AppliedDiscounts = appliedDiscounts;
@@ -126,6 +129,12 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("variation_name", NullValueHandling = NullValueHandling.Ignore)]
         public string VariationName { get; }
+
+        /// <summary>
+        /// Represents the line item type.
+        /// </summary>
+        [JsonProperty("item_type", NullValueHandling = NullValueHandling.Ignore)]
+        public string ItemType { get; }
 
         /// <summary>
         /// The [CatalogModifier]($m/CatalogModifier)s applied to this line item.
@@ -249,6 +258,7 @@ namespace Square.Models
                 ((this.Note == null && other.Note == null) || (this.Note?.Equals(other.Note) == true)) &&
                 ((this.CatalogObjectId == null && other.CatalogObjectId == null) || (this.CatalogObjectId?.Equals(other.CatalogObjectId) == true)) &&
                 ((this.VariationName == null && other.VariationName == null) || (this.VariationName?.Equals(other.VariationName) == true)) &&
+                ((this.ItemType == null && other.ItemType == null) || (this.ItemType?.Equals(other.ItemType) == true)) &&
                 ((this.ReturnModifiers == null && other.ReturnModifiers == null) || (this.ReturnModifiers?.Equals(other.ReturnModifiers) == true)) &&
                 ((this.AppliedTaxes == null && other.AppliedTaxes == null) || (this.AppliedTaxes?.Equals(other.AppliedTaxes) == true)) &&
                 ((this.AppliedDiscounts == null && other.AppliedDiscounts == null) || (this.AppliedDiscounts?.Equals(other.AppliedDiscounts) == true)) &&
@@ -263,7 +273,7 @@ namespace Square.Models
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1299728447;
+            int hashCode = -196630176;
 
             if (this.Uid != null)
             {
@@ -303,6 +313,11 @@ namespace Square.Models
             if (this.VariationName != null)
             {
                hashCode += this.VariationName.GetHashCode();
+            }
+
+            if (this.ItemType != null)
+            {
+               hashCode += this.ItemType.GetHashCode();
             }
 
             if (this.ReturnModifiers != null)
@@ -367,6 +382,7 @@ namespace Square.Models
             toStringOutput.Add($"this.Note = {(this.Note == null ? "null" : this.Note == string.Empty ? "" : this.Note)}");
             toStringOutput.Add($"this.CatalogObjectId = {(this.CatalogObjectId == null ? "null" : this.CatalogObjectId == string.Empty ? "" : this.CatalogObjectId)}");
             toStringOutput.Add($"this.VariationName = {(this.VariationName == null ? "null" : this.VariationName == string.Empty ? "" : this.VariationName)}");
+            toStringOutput.Add($"this.ItemType = {(this.ItemType == null ? "null" : this.ItemType.ToString())}");
             toStringOutput.Add($"this.ReturnModifiers = {(this.ReturnModifiers == null ? "null" : $"[{string.Join(", ", this.ReturnModifiers)} ]")}");
             toStringOutput.Add($"this.AppliedTaxes = {(this.AppliedTaxes == null ? "null" : $"[{string.Join(", ", this.AppliedTaxes)} ]")}");
             toStringOutput.Add($"this.AppliedDiscounts = {(this.AppliedDiscounts == null ? "null" : $"[{string.Join(", ", this.AppliedDiscounts)} ]")}");
@@ -393,6 +409,7 @@ namespace Square.Models
                 .Note(this.Note)
                 .CatalogObjectId(this.CatalogObjectId)
                 .VariationName(this.VariationName)
+                .ItemType(this.ItemType)
                 .ReturnModifiers(this.ReturnModifiers)
                 .AppliedTaxes(this.AppliedTaxes)
                 .AppliedDiscounts(this.AppliedDiscounts)
@@ -418,6 +435,7 @@ namespace Square.Models
             private string note;
             private string catalogObjectId;
             private string variationName;
+            private string itemType;
             private IList<Models.OrderReturnLineItemModifier> returnModifiers;
             private IList<Models.OrderLineItemAppliedTax> appliedTaxes;
             private IList<Models.OrderLineItemAppliedDiscount> appliedDiscounts;
@@ -519,6 +537,17 @@ namespace Square.Models
             public Builder VariationName(string variationName)
             {
                 this.variationName = variationName;
+                return this;
+            }
+
+             /// <summary>
+             /// ItemType.
+             /// </summary>
+             /// <param name="itemType"> itemType. </param>
+             /// <returns> Builder. </returns>
+            public Builder ItemType(string itemType)
+            {
+                this.itemType = itemType;
                 return this;
             }
 
@@ -636,6 +665,7 @@ namespace Square.Models
                     this.note,
                     this.catalogObjectId,
                     this.variationName,
+                    this.itemType,
                     this.returnModifiers,
                     this.appliedTaxes,
                     this.appliedDiscounts,

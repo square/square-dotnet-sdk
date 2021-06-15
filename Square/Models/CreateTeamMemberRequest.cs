@@ -31,11 +31,10 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// A unique string that identifies this CreateTeamMember request.
-        /// Keys can be any valid string but must be unique for every request.
-        /// See [Idempotency keys](https://developer.squareup.com/docs/basics/api101/idempotency) for more information.
-        /// <br>
-        /// <b>Min Length 1    Max Length 45</b>
+        /// A unique string that identifies this `CreateTeamMember` request.
+        /// Keys can be any valid string, but must be unique for every request.
+        /// For more information, see [Idempotency](https://developer.squareup.com/docs/basics/api101/idempotency).
+        /// The minimum length is 1 and the maximum length is 45.
         /// </summary>
         [JsonProperty("idempotency_key", NullValueHandling = NullValueHandling.Ignore)]
         public string IdempotencyKey { get; }

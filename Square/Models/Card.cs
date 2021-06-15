@@ -28,9 +28,13 @@ namespace Square.Models
         /// <param name="cardholderName">cardholder_name.</param>
         /// <param name="billingAddress">billing_address.</param>
         /// <param name="fingerprint">fingerprint.</param>
+        /// <param name="customerId">customer_id.</param>
+        /// <param name="referenceId">reference_id.</param>
+        /// <param name="enabled">enabled.</param>
         /// <param name="cardType">card_type.</param>
         /// <param name="prepaidType">prepaid_type.</param>
         /// <param name="bin">bin.</param>
+        /// <param name="version">version.</param>
         public Card(
             string id = null,
             string cardBrand = null,
@@ -40,9 +44,13 @@ namespace Square.Models
             string cardholderName = null,
             Models.Address billingAddress = null,
             string fingerprint = null,
+            string customerId = null,
+            string referenceId = null,
+            bool? enabled = null,
             string cardType = null,
             string prepaidType = null,
-            string bin = null)
+            string bin = null,
+            long? version = null)
         {
             this.Id = id;
             this.CardBrand = cardBrand;
@@ -52,9 +60,13 @@ namespace Square.Models
             this.CardholderName = cardholderName;
             this.BillingAddress = billingAddress;
             this.Fingerprint = fingerprint;
+            this.CustomerId = customerId;
+            this.ReferenceId = referenceId;
+            this.Enabled = enabled;
             this.CardType = cardType;
             this.PrepaidType = prepaidType;
             this.Bin = bin;
+            this.Version = version;
         }
 
         /// <summary>
@@ -108,6 +120,26 @@ namespace Square.Models
         public string Fingerprint { get; }
 
         /// <summary>
+        /// The ID of a customer created using the Customers API to be associated with the card.
+        /// </summary>
+        [JsonProperty("customer_id", NullValueHandling = NullValueHandling.Ignore)]
+        public string CustomerId { get; }
+
+        /// <summary>
+        /// An optional user-defined reference ID that associates this card with
+        /// another entity in an external system. For example, a customer ID from an
+        /// external customer management system.
+        /// </summary>
+        [JsonProperty("reference_id", NullValueHandling = NullValueHandling.Ignore)]
+        public string ReferenceId { get; }
+
+        /// <summary>
+        /// Indicates whether or not a card can be used for payments.
+        /// </summary>
+        [JsonProperty("enabled", NullValueHandling = NullValueHandling.Ignore)]
+        public bool? Enabled { get; }
+
+        /// <summary>
         /// Indicates a card's type, such as `CREDIT` or `DEBIT`.
         /// </summary>
         [JsonProperty("card_type", NullValueHandling = NullValueHandling.Ignore)]
@@ -125,6 +157,14 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("bin", NullValueHandling = NullValueHandling.Ignore)]
         public string Bin { get; }
+
+        /// <summary>
+        /// Current version number of the card. Increments with each card update. Requests to update an
+        /// existing Card object will be rejected unless the version in the request matches the current
+        /// version for the Card.
+        /// </summary>
+        [JsonProperty("version", NullValueHandling = NullValueHandling.Ignore)]
+        public long? Version { get; }
 
         /// <inheritdoc/>
         public override string ToString()
@@ -158,15 +198,19 @@ namespace Square.Models
                 ((this.CardholderName == null && other.CardholderName == null) || (this.CardholderName?.Equals(other.CardholderName) == true)) &&
                 ((this.BillingAddress == null && other.BillingAddress == null) || (this.BillingAddress?.Equals(other.BillingAddress) == true)) &&
                 ((this.Fingerprint == null && other.Fingerprint == null) || (this.Fingerprint?.Equals(other.Fingerprint) == true)) &&
+                ((this.CustomerId == null && other.CustomerId == null) || (this.CustomerId?.Equals(other.CustomerId) == true)) &&
+                ((this.ReferenceId == null && other.ReferenceId == null) || (this.ReferenceId?.Equals(other.ReferenceId) == true)) &&
+                ((this.Enabled == null && other.Enabled == null) || (this.Enabled?.Equals(other.Enabled) == true)) &&
                 ((this.CardType == null && other.CardType == null) || (this.CardType?.Equals(other.CardType) == true)) &&
                 ((this.PrepaidType == null && other.PrepaidType == null) || (this.PrepaidType?.Equals(other.PrepaidType) == true)) &&
-                ((this.Bin == null && other.Bin == null) || (this.Bin?.Equals(other.Bin) == true));
+                ((this.Bin == null && other.Bin == null) || (this.Bin?.Equals(other.Bin) == true)) &&
+                ((this.Version == null && other.Version == null) || (this.Version?.Equals(other.Version) == true));
         }
 
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1370361237;
+            int hashCode = 1056966937;
 
             if (this.Id != null)
             {
@@ -208,6 +252,21 @@ namespace Square.Models
                hashCode += this.Fingerprint.GetHashCode();
             }
 
+            if (this.CustomerId != null)
+            {
+               hashCode += this.CustomerId.GetHashCode();
+            }
+
+            if (this.ReferenceId != null)
+            {
+               hashCode += this.ReferenceId.GetHashCode();
+            }
+
+            if (this.Enabled != null)
+            {
+               hashCode += this.Enabled.GetHashCode();
+            }
+
             if (this.CardType != null)
             {
                hashCode += this.CardType.GetHashCode();
@@ -221,6 +280,11 @@ namespace Square.Models
             if (this.Bin != null)
             {
                hashCode += this.Bin.GetHashCode();
+            }
+
+            if (this.Version != null)
+            {
+               hashCode += this.Version.GetHashCode();
             }
 
             return hashCode;
@@ -240,9 +304,13 @@ namespace Square.Models
             toStringOutput.Add($"this.CardholderName = {(this.CardholderName == null ? "null" : this.CardholderName == string.Empty ? "" : this.CardholderName)}");
             toStringOutput.Add($"this.BillingAddress = {(this.BillingAddress == null ? "null" : this.BillingAddress.ToString())}");
             toStringOutput.Add($"this.Fingerprint = {(this.Fingerprint == null ? "null" : this.Fingerprint == string.Empty ? "" : this.Fingerprint)}");
+            toStringOutput.Add($"this.CustomerId = {(this.CustomerId == null ? "null" : this.CustomerId == string.Empty ? "" : this.CustomerId)}");
+            toStringOutput.Add($"this.ReferenceId = {(this.ReferenceId == null ? "null" : this.ReferenceId == string.Empty ? "" : this.ReferenceId)}");
+            toStringOutput.Add($"this.Enabled = {(this.Enabled == null ? "null" : this.Enabled.ToString())}");
             toStringOutput.Add($"this.CardType = {(this.CardType == null ? "null" : this.CardType.ToString())}");
             toStringOutput.Add($"this.PrepaidType = {(this.PrepaidType == null ? "null" : this.PrepaidType.ToString())}");
             toStringOutput.Add($"this.Bin = {(this.Bin == null ? "null" : this.Bin == string.Empty ? "" : this.Bin)}");
+            toStringOutput.Add($"this.Version = {(this.Version == null ? "null" : this.Version.ToString())}");
         }
 
         /// <summary>
@@ -260,9 +328,13 @@ namespace Square.Models
                 .CardholderName(this.CardholderName)
                 .BillingAddress(this.BillingAddress)
                 .Fingerprint(this.Fingerprint)
+                .CustomerId(this.CustomerId)
+                .ReferenceId(this.ReferenceId)
+                .Enabled(this.Enabled)
                 .CardType(this.CardType)
                 .PrepaidType(this.PrepaidType)
-                .Bin(this.Bin);
+                .Bin(this.Bin)
+                .Version(this.Version);
             return builder;
         }
 
@@ -279,9 +351,13 @@ namespace Square.Models
             private string cardholderName;
             private Models.Address billingAddress;
             private string fingerprint;
+            private string customerId;
+            private string referenceId;
+            private bool? enabled;
             private string cardType;
             private string prepaidType;
             private string bin;
+            private long? version;
 
              /// <summary>
              /// Id.
@@ -372,6 +448,39 @@ namespace Square.Models
             }
 
              /// <summary>
+             /// CustomerId.
+             /// </summary>
+             /// <param name="customerId"> customerId. </param>
+             /// <returns> Builder. </returns>
+            public Builder CustomerId(string customerId)
+            {
+                this.customerId = customerId;
+                return this;
+            }
+
+             /// <summary>
+             /// ReferenceId.
+             /// </summary>
+             /// <param name="referenceId"> referenceId. </param>
+             /// <returns> Builder. </returns>
+            public Builder ReferenceId(string referenceId)
+            {
+                this.referenceId = referenceId;
+                return this;
+            }
+
+             /// <summary>
+             /// Enabled.
+             /// </summary>
+             /// <param name="enabled"> enabled. </param>
+             /// <returns> Builder. </returns>
+            public Builder Enabled(bool? enabled)
+            {
+                this.enabled = enabled;
+                return this;
+            }
+
+             /// <summary>
              /// CardType.
              /// </summary>
              /// <param name="cardType"> cardType. </param>
@@ -404,6 +513,17 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// Version.
+             /// </summary>
+             /// <param name="version"> version. </param>
+             /// <returns> Builder. </returns>
+            public Builder Version(long? version)
+            {
+                this.version = version;
+                return this;
+            }
+
             /// <summary>
             /// Builds class object.
             /// </summary>
@@ -419,9 +539,13 @@ namespace Square.Models
                     this.cardholderName,
                     this.billingAddress,
                     this.fingerprint,
+                    this.customerId,
+                    this.referenceId,
+                    this.enabled,
                     this.cardType,
                     this.prepaidType,
-                    this.bin);
+                    this.bin,
+                    this.version);
             }
         }
     }

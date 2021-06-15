@@ -101,6 +101,9 @@ namespace Square.Models
 
         /// <summary>
         /// Payment details of the credit, debit, and gift cards stored on file for the customer profile.
+        /// DEPRECATED at version 2021-06-16. Replaced by calling [ListCards]($e/Cards/ListCards) (for credit and debit cards on file)
+        /// or [ListGiftCards]($e/GiftCards/ListGiftCards) (for gift cards on file) and including the `customer_id` query parameter.
+        /// For more information, see [Migrate to the Cards API and Gift Cards API](https://developer.squareup.com/docs/customers-api/use-the-api/integrate-with-other-services#migrate-customer-cards).
         /// </summary>
         [JsonProperty("cards", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.Card> Cards { get; }

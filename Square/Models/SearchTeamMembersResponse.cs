@@ -47,8 +47,8 @@ namespace Square.Models
         public IList<Models.TeamMember> TeamMembers { get; }
 
         /// <summary>
-        /// The opaque cursor for fetching the next page. Read about
-        /// [pagination](https://developer.squareup.com/docs/working-with-apis/pagination) with Square APIs for more information.
+        /// The opaque cursor for fetching the next page. For more information, see
+        /// [pagination](https://developer.squareup.com/docs/working-with-apis/pagination).
         /// </summary>
         [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
         public string Cursor { get; }

@@ -77,7 +77,7 @@ namespace Square.Models
         public Models.LoyaltyProgramExpirationPolicy ExpirationPolicy { get; }
 
         /// <summary>
-        /// Gets or sets Terminology.
+        /// Represents the naming used for loyalty points.
         /// </summary>
         [JsonProperty("terminology")]
         public Models.LoyaltyProgramTerminology Terminology { get; }

@@ -53,14 +53,14 @@ namespace Square.Models
 
         /// <summary>
         /// The Square-issued ID of your application, available from the
-        /// [application dashboard](https://connect.squareup.com/apps).
+        /// [developer dashboard](https://developer.squareup.com/apps).
         /// </summary>
         [JsonProperty("client_id")]
         public string ClientId { get; }
 
         /// <summary>
         /// The Square-issued application secret for your application, available
-        /// from the [application dashboard](https://connect.squareup.com/apps).
+        /// from the [developer dashboard](https://developer.squareup.com/apps).
         /// </summary>
         [JsonProperty("client_secret")]
         public string ClientSecret { get; }
@@ -74,7 +74,7 @@ namespace Square.Models
         public string Code { get; }
 
         /// <summary>
-        /// The redirect URL assigned in the [application dashboard](https://connect.squareup.com/apps).
+        /// The redirect URL assigned in the [developer dashboard](https://developer.squareup.com/apps).
         /// </summary>
         [JsonProperty("redirect_uri", NullValueHandling = NullValueHandling.Ignore)]
         public string RedirectUri { get; }
@@ -88,8 +88,7 @@ namespace Square.Models
 
         /// <summary>
         /// A valid refresh token for generating a new OAuth access token.
-        /// A valid refresh token is required if `grant_type` is set to `refresh_token` ,
-        /// to indicate the application wants a replacement for an expired OAuth access token.
+        /// A valid refresh token is required if `grant_type` is set to `refresh_token` , to indicate the application wants a replacement for an expired OAuth access token.
         /// </summary>
         [JsonProperty("refresh_token", NullValueHandling = NullValueHandling.Ignore)]
         public string RefreshToken { get; }
@@ -105,7 +104,6 @@ namespace Square.Models
         public string MigrationToken { get; }
 
         /// <summary>
-        /// __OPTIONAL__
         /// A JSON list of strings representing the permissions the application is requesting.
         /// For example: "`["MERCHANT_PROFILE_READ","PAYMENTS_READ","BANK_ACCOUNTS_READ"]`"
         /// The access token returned in the response is granted the permissions
@@ -116,7 +114,6 @@ namespace Square.Models
         public IList<string> Scopes { get; }
 
         /// <summary>
-        /// __OPTIONAL__
         /// A boolean indicating a request for a short-lived access token.
         /// The short-lived access token returned in the response will expire in 24 hours.
         /// </summary>
