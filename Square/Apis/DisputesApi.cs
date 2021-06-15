@@ -264,11 +264,13 @@ namespace Square.Apis
         /// Returns a list of evidence associated with a dispute..
         /// </summary>
         /// <param name="disputeId">Required parameter: The ID of the dispute..</param>
+        /// <param name="cursor">Optional parameter: A pagination cursor returned by a previous call to this endpoint. Provide this cursor to retrieve the next set of results for the original query. For more information, see [Pagination](https://developer.squareup.com/docs/basics/api101/pagination)..</param>
         /// <returns>Returns the Models.ListDisputeEvidenceResponse response from the API call.</returns>
         public Models.ListDisputeEvidenceResponse ListDisputeEvidence(
-                string disputeId)
+                string disputeId,
+                string cursor = null)
         {
-            Task<Models.ListDisputeEvidenceResponse> t = this.ListDisputeEvidenceAsync(disputeId);
+            Task<Models.ListDisputeEvidenceResponse> t = this.ListDisputeEvidenceAsync(disputeId, cursor);
             ApiHelper.RunTaskSynchronously(t);
             return t.Result;
         }
@@ -277,10 +279,12 @@ namespace Square.Apis
         /// Returns a list of evidence associated with a dispute..
         /// </summary>
         /// <param name="disputeId">Required parameter: The ID of the dispute..</param>
+        /// <param name="cursor">Optional parameter: A pagination cursor returned by a previous call to this endpoint. Provide this cursor to retrieve the next set of results for the original query. For more information, see [Pagination](https://developer.squareup.com/docs/basics/api101/pagination)..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the Models.ListDisputeEvidenceResponse response from the API call.</returns>
         public async Task<Models.ListDisputeEvidenceResponse> ListDisputeEvidenceAsync(
                 string disputeId,
+                string cursor = null,
                 CancellationToken cancellationToken = default)
         {
             // the base uri for api requests.
@@ -296,6 +300,12 @@ namespace Square.Apis
                 { "dispute_id", disputeId },
             });
 
+            // prepare specfied query parameters.
+            var queryParams = new Dictionary<string, object>()
+            {
+                { "cursor", cursor },
+            };
+
             // append request with appropriate headers and parameters
             var headers = new Dictionary<string, string>()
             {
@@ -305,7 +315,7 @@ namespace Square.Apis
             };
 
             // prepare the API call request to fetch the response.
-            HttpRequest httpRequest = this.GetClientInstance().Get(queryBuilder.ToString(), headers);
+            HttpRequest httpRequest = this.GetClientInstance().Get(queryBuilder.ToString(), headers, queryParameters: queryParams);
 
             if (this.HttpCallBack != null)
             {
@@ -326,164 +336,6 @@ namespace Square.Apis
             this.ValidateResponse(response, context);
 
             var responseModel = ApiHelper.JsonDeserialize<Models.ListDisputeEvidenceResponse>(response.Body);
-            responseModel.Context = context;
-            return responseModel;
-        }
-
-        /// <summary>
-        /// Removes specified evidence from a dispute..
-        /// Square does not send the bank any evidence that is removed. Also, you cannot remove evidence after.
-        /// submitting it to the bank using [SubmitEvidence]($e/Disputes/SubmitEvidence)..
-        /// </summary>
-        /// <param name="disputeId">Required parameter: The ID of the dispute you want to remove evidence from..</param>
-        /// <param name="evidenceId">Required parameter: The ID of the evidence you want to remove..</param>
-        /// <returns>Returns the Models.RemoveDisputeEvidenceResponse response from the API call.</returns>
-        public Models.RemoveDisputeEvidenceResponse RemoveDisputeEvidence(
-                string disputeId,
-                string evidenceId)
-        {
-            Task<Models.RemoveDisputeEvidenceResponse> t = this.RemoveDisputeEvidenceAsync(disputeId, evidenceId);
-            ApiHelper.RunTaskSynchronously(t);
-            return t.Result;
-        }
-
-        /// <summary>
-        /// Removes specified evidence from a dispute..
-        /// Square does not send the bank any evidence that is removed. Also, you cannot remove evidence after.
-        /// submitting it to the bank using [SubmitEvidence]($e/Disputes/SubmitEvidence)..
-        /// </summary>
-        /// <param name="disputeId">Required parameter: The ID of the dispute you want to remove evidence from..</param>
-        /// <param name="evidenceId">Required parameter: The ID of the evidence you want to remove..</param>
-        /// <param name="cancellationToken"> cancellationToken. </param>
-        /// <returns>Returns the Models.RemoveDisputeEvidenceResponse response from the API call.</returns>
-        public async Task<Models.RemoveDisputeEvidenceResponse> RemoveDisputeEvidenceAsync(
-                string disputeId,
-                string evidenceId,
-                CancellationToken cancellationToken = default)
-        {
-            // the base uri for api requests.
-            string baseUri = this.Config.GetBaseUri();
-
-            // prepare query string for API call.
-            StringBuilder queryBuilder = new StringBuilder(baseUri);
-            queryBuilder.Append("/v2/disputes/{dispute_id}/evidence/{evidence_id}");
-
-            // process optional template parameters.
-            ApiHelper.AppendUrlWithTemplateParameters(queryBuilder, new Dictionary<string, object>()
-            {
-                { "dispute_id", disputeId },
-                { "evidence_id", evidenceId },
-            });
-
-            // append request with appropriate headers and parameters
-            var headers = new Dictionary<string, string>()
-            {
-                { "user-agent", this.UserAgent },
-                { "accept", "application/json" },
-                { "Square-Version", this.Config.SquareVersion },
-            };
-
-            // prepare the API call request to fetch the response.
-            HttpRequest httpRequest = this.GetClientInstance().Delete(queryBuilder.ToString(), headers, null);
-
-            if (this.HttpCallBack != null)
-            {
-                this.HttpCallBack.OnBeforeHttpRequestEventHandler(this.GetClientInstance(), httpRequest);
-            }
-
-            httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
-
-            // invoke request and get response.
-            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken).ConfigureAwait(false);
-            HttpContext context = new HttpContext(httpRequest, response);
-            if (this.HttpCallBack != null)
-            {
-                this.HttpCallBack.OnAfterHttpResponseEventHandler(this.GetClientInstance(), response);
-            }
-
-            // handle errors defined at the API level.
-            this.ValidateResponse(response, context);
-
-            var responseModel = ApiHelper.JsonDeserialize<Models.RemoveDisputeEvidenceResponse>(response.Body);
-            responseModel.Context = context;
-            return responseModel;
-        }
-
-        /// <summary>
-        /// Returns the specific evidence metadata associated with a specific dispute..
-        /// You must maintain a copy of the evidence you upload if you want to reference it later. You cannot.
-        /// download the evidence after you upload it..
-        /// </summary>
-        /// <param name="disputeId">Required parameter: The ID of the dispute that you want to retrieve evidence from..</param>
-        /// <param name="evidenceId">Required parameter: The ID of the evidence to retrieve..</param>
-        /// <returns>Returns the Models.RetrieveDisputeEvidenceResponse response from the API call.</returns>
-        public Models.RetrieveDisputeEvidenceResponse RetrieveDisputeEvidence(
-                string disputeId,
-                string evidenceId)
-        {
-            Task<Models.RetrieveDisputeEvidenceResponse> t = this.RetrieveDisputeEvidenceAsync(disputeId, evidenceId);
-            ApiHelper.RunTaskSynchronously(t);
-            return t.Result;
-        }
-
-        /// <summary>
-        /// Returns the specific evidence metadata associated with a specific dispute..
-        /// You must maintain a copy of the evidence you upload if you want to reference it later. You cannot.
-        /// download the evidence after you upload it..
-        /// </summary>
-        /// <param name="disputeId">Required parameter: The ID of the dispute that you want to retrieve evidence from..</param>
-        /// <param name="evidenceId">Required parameter: The ID of the evidence to retrieve..</param>
-        /// <param name="cancellationToken"> cancellationToken. </param>
-        /// <returns>Returns the Models.RetrieveDisputeEvidenceResponse response from the API call.</returns>
-        public async Task<Models.RetrieveDisputeEvidenceResponse> RetrieveDisputeEvidenceAsync(
-                string disputeId,
-                string evidenceId,
-                CancellationToken cancellationToken = default)
-        {
-            // the base uri for api requests.
-            string baseUri = this.Config.GetBaseUri();
-
-            // prepare query string for API call.
-            StringBuilder queryBuilder = new StringBuilder(baseUri);
-            queryBuilder.Append("/v2/disputes/{dispute_id}/evidence/{evidence_id}");
-
-            // process optional template parameters.
-            ApiHelper.AppendUrlWithTemplateParameters(queryBuilder, new Dictionary<string, object>()
-            {
-                { "dispute_id", disputeId },
-                { "evidence_id", evidenceId },
-            });
-
-            // append request with appropriate headers and parameters
-            var headers = new Dictionary<string, string>()
-            {
-                { "user-agent", this.UserAgent },
-                { "accept", "application/json" },
-                { "Square-Version", this.Config.SquareVersion },
-            };
-
-            // prepare the API call request to fetch the response.
-            HttpRequest httpRequest = this.GetClientInstance().Get(queryBuilder.ToString(), headers);
-
-            if (this.HttpCallBack != null)
-            {
-                this.HttpCallBack.OnBeforeHttpRequestEventHandler(this.GetClientInstance(), httpRequest);
-            }
-
-            httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
-
-            // invoke request and get response.
-            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken).ConfigureAwait(false);
-            HttpContext context = new HttpContext(httpRequest, response);
-            if (this.HttpCallBack != null)
-            {
-                this.HttpCallBack.OnAfterHttpResponseEventHandler(this.GetClientInstance(), response);
-            }
-
-            // handle errors defined at the API level.
-            this.ValidateResponse(response, context);
-
-            var responseModel = ApiHelper.JsonDeserialize<Models.RetrieveDisputeEvidenceResponse>(response.Body);
             responseModel.Context = context;
             return responseModel;
         }
@@ -526,7 +378,7 @@ namespace Square.Apis
 
             // prepare query string for API call.
             StringBuilder queryBuilder = new StringBuilder(baseUri);
-            queryBuilder.Append("/v2/disputes/{dispute_id}/evidence_file");
+            queryBuilder.Append("/v2/disputes/{dispute_id}/evidence-files");
 
             // process optional template parameters.
             ApiHelper.AppendUrlWithTemplateParameters(queryBuilder, new Dictionary<string, object>()
@@ -620,7 +472,7 @@ namespace Square.Apis
 
             // prepare query string for API call.
             StringBuilder queryBuilder = new StringBuilder(baseUri);
-            queryBuilder.Append("/v2/disputes/{dispute_id}/evidence_text");
+            queryBuilder.Append("/v2/disputes/{dispute_id}/evidence-text");
 
             // process optional template parameters.
             ApiHelper.AppendUrlWithTemplateParameters(queryBuilder, new Dictionary<string, object>()
@@ -662,6 +514,164 @@ namespace Square.Apis
             this.ValidateResponse(response, context);
 
             var responseModel = ApiHelper.JsonDeserialize<Models.CreateDisputeEvidenceTextResponse>(response.Body);
+            responseModel.Context = context;
+            return responseModel;
+        }
+
+        /// <summary>
+        /// Removes specified evidence from a dispute..
+        /// Square does not send the bank any evidence that is removed. Also, you cannot remove evidence after.
+        /// submitting it to the bank using [SubmitEvidence]($e/Disputes/SubmitEvidence)..
+        /// </summary>
+        /// <param name="disputeId">Required parameter: The ID of the dispute you want to remove evidence from..</param>
+        /// <param name="evidenceId">Required parameter: The ID of the evidence you want to remove..</param>
+        /// <returns>Returns the Models.DeleteDisputeEvidenceResponse response from the API call.</returns>
+        public Models.DeleteDisputeEvidenceResponse DeleteDisputeEvidence(
+                string disputeId,
+                string evidenceId)
+        {
+            Task<Models.DeleteDisputeEvidenceResponse> t = this.DeleteDisputeEvidenceAsync(disputeId, evidenceId);
+            ApiHelper.RunTaskSynchronously(t);
+            return t.Result;
+        }
+
+        /// <summary>
+        /// Removes specified evidence from a dispute..
+        /// Square does not send the bank any evidence that is removed. Also, you cannot remove evidence after.
+        /// submitting it to the bank using [SubmitEvidence]($e/Disputes/SubmitEvidence)..
+        /// </summary>
+        /// <param name="disputeId">Required parameter: The ID of the dispute you want to remove evidence from..</param>
+        /// <param name="evidenceId">Required parameter: The ID of the evidence you want to remove..</param>
+        /// <param name="cancellationToken"> cancellationToken. </param>
+        /// <returns>Returns the Models.DeleteDisputeEvidenceResponse response from the API call.</returns>
+        public async Task<Models.DeleteDisputeEvidenceResponse> DeleteDisputeEvidenceAsync(
+                string disputeId,
+                string evidenceId,
+                CancellationToken cancellationToken = default)
+        {
+            // the base uri for api requests.
+            string baseUri = this.Config.GetBaseUri();
+
+            // prepare query string for API call.
+            StringBuilder queryBuilder = new StringBuilder(baseUri);
+            queryBuilder.Append("/v2/disputes/{dispute_id}/evidence/{evidence_id}");
+
+            // process optional template parameters.
+            ApiHelper.AppendUrlWithTemplateParameters(queryBuilder, new Dictionary<string, object>()
+            {
+                { "dispute_id", disputeId },
+                { "evidence_id", evidenceId },
+            });
+
+            // append request with appropriate headers and parameters
+            var headers = new Dictionary<string, string>()
+            {
+                { "user-agent", this.UserAgent },
+                { "accept", "application/json" },
+                { "Square-Version", this.Config.SquareVersion },
+            };
+
+            // prepare the API call request to fetch the response.
+            HttpRequest httpRequest = this.GetClientInstance().Delete(queryBuilder.ToString(), headers, null);
+
+            if (this.HttpCallBack != null)
+            {
+                this.HttpCallBack.OnBeforeHttpRequestEventHandler(this.GetClientInstance(), httpRequest);
+            }
+
+            httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
+
+            // invoke request and get response.
+            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+            HttpContext context = new HttpContext(httpRequest, response);
+            if (this.HttpCallBack != null)
+            {
+                this.HttpCallBack.OnAfterHttpResponseEventHandler(this.GetClientInstance(), response);
+            }
+
+            // handle errors defined at the API level.
+            this.ValidateResponse(response, context);
+
+            var responseModel = ApiHelper.JsonDeserialize<Models.DeleteDisputeEvidenceResponse>(response.Body);
+            responseModel.Context = context;
+            return responseModel;
+        }
+
+        /// <summary>
+        /// Returns the evidence metadata specified by the evidence ID in the request URL path.
+        /// You must maintain a copy of the evidence you upload if you want to reference it later. You cannot.
+        /// download the evidence after you upload it..
+        /// </summary>
+        /// <param name="disputeId">Required parameter: The ID of the dispute that you want to retrieve evidence from..</param>
+        /// <param name="evidenceId">Required parameter: The ID of the evidence to retrieve..</param>
+        /// <returns>Returns the Models.RetrieveDisputeEvidenceResponse response from the API call.</returns>
+        public Models.RetrieveDisputeEvidenceResponse RetrieveDisputeEvidence(
+                string disputeId,
+                string evidenceId)
+        {
+            Task<Models.RetrieveDisputeEvidenceResponse> t = this.RetrieveDisputeEvidenceAsync(disputeId, evidenceId);
+            ApiHelper.RunTaskSynchronously(t);
+            return t.Result;
+        }
+
+        /// <summary>
+        /// Returns the evidence metadata specified by the evidence ID in the request URL path.
+        /// You must maintain a copy of the evidence you upload if you want to reference it later. You cannot.
+        /// download the evidence after you upload it..
+        /// </summary>
+        /// <param name="disputeId">Required parameter: The ID of the dispute that you want to retrieve evidence from..</param>
+        /// <param name="evidenceId">Required parameter: The ID of the evidence to retrieve..</param>
+        /// <param name="cancellationToken"> cancellationToken. </param>
+        /// <returns>Returns the Models.RetrieveDisputeEvidenceResponse response from the API call.</returns>
+        public async Task<Models.RetrieveDisputeEvidenceResponse> RetrieveDisputeEvidenceAsync(
+                string disputeId,
+                string evidenceId,
+                CancellationToken cancellationToken = default)
+        {
+            // the base uri for api requests.
+            string baseUri = this.Config.GetBaseUri();
+
+            // prepare query string for API call.
+            StringBuilder queryBuilder = new StringBuilder(baseUri);
+            queryBuilder.Append("/v2/disputes/{dispute_id}/evidence/{evidence_id}");
+
+            // process optional template parameters.
+            ApiHelper.AppendUrlWithTemplateParameters(queryBuilder, new Dictionary<string, object>()
+            {
+                { "dispute_id", disputeId },
+                { "evidence_id", evidenceId },
+            });
+
+            // append request with appropriate headers and parameters
+            var headers = new Dictionary<string, string>()
+            {
+                { "user-agent", this.UserAgent },
+                { "accept", "application/json" },
+                { "Square-Version", this.Config.SquareVersion },
+            };
+
+            // prepare the API call request to fetch the response.
+            HttpRequest httpRequest = this.GetClientInstance().Get(queryBuilder.ToString(), headers);
+
+            if (this.HttpCallBack != null)
+            {
+                this.HttpCallBack.OnBeforeHttpRequestEventHandler(this.GetClientInstance(), httpRequest);
+            }
+
+            httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
+
+            // invoke request and get response.
+            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+            HttpContext context = new HttpContext(httpRequest, response);
+            if (this.HttpCallBack != null)
+            {
+                this.HttpCallBack.OnAfterHttpResponseEventHandler(this.GetClientInstance(), response);
+            }
+
+            // handle errors defined at the API level.
+            this.ValidateResponse(response, context);
+
+            var responseModel = ApiHelper.JsonDeserialize<Models.RetrieveDisputeEvidenceResponse>(response.Body);
             responseModel.Context = context;
             return responseModel;
         }

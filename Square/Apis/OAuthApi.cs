@@ -36,7 +36,7 @@ namespace Square.Apis
 
         /// <summary>
         /// `RenewToken` is deprecated. For information about refreshing OAuth access tokens, see.
-        /// [Renew OAuth Token](https://developer.squareup.com/docs/oauth-api/cookbook/renew-oauth-tokens)..
+        /// [Migrate from Renew to Refresh OAuth Tokens](https://developer.squareup.com/docs/oauth-api/migrate-to-refresh-tokens)..
         /// Renews an OAuth access token before it expires..
         /// OAuth access tokens besides your application's personal access token expire after __30 days__..
         /// You can also renew expired tokens within __15 days__ of their expiration..
@@ -48,9 +48,9 @@ namespace Square.Apis
         /// Authorization: Client APPLICATION_SECRET.
         /// ```.
         /// Replace `APPLICATION_SECRET` with the application secret on the Credentials.
-        /// page in the [application dashboard](https://connect.squareup.com/apps)..
+        /// page in the [developer dashboard](https://developer.squareup.com/apps)..
         /// </summary>
-        /// <param name="clientId">Required parameter: Your application ID, available from the [application dashboard](https://connect.squareup.com/apps)..</param>
+        /// <param name="clientId">Required parameter: Your application ID, available from the [developer dashboard](https://developer.squareup.com/apps)..</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <param name="authorization">Required parameter: Client APPLICATION_SECRET.</param>
         /// <returns>Returns the Models.RenewTokenResponse response from the API call.</returns>
@@ -67,7 +67,7 @@ namespace Square.Apis
 
         /// <summary>
         /// `RenewToken` is deprecated. For information about refreshing OAuth access tokens, see.
-        /// [Renew OAuth Token](https://developer.squareup.com/docs/oauth-api/cookbook/renew-oauth-tokens)..
+        /// [Migrate from Renew to Refresh OAuth Tokens](https://developer.squareup.com/docs/oauth-api/migrate-to-refresh-tokens)..
         /// Renews an OAuth access token before it expires..
         /// OAuth access tokens besides your application's personal access token expire after __30 days__..
         /// You can also renew expired tokens within __15 days__ of their expiration..
@@ -79,9 +79,9 @@ namespace Square.Apis
         /// Authorization: Client APPLICATION_SECRET.
         /// ```.
         /// Replace `APPLICATION_SECRET` with the application secret on the Credentials.
-        /// page in the [application dashboard](https://connect.squareup.com/apps)..
+        /// page in the [developer dashboard](https://developer.squareup.com/apps)..
         /// </summary>
-        /// <param name="clientId">Required parameter: Your application ID, available from the [application dashboard](https://connect.squareup.com/apps)..</param>
+        /// <param name="clientId">Required parameter: Your application ID, available from the [developer dashboard](https://developer.squareup.com/apps)..</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <param name="authorization">Required parameter: Client APPLICATION_SECRET.</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
@@ -154,8 +154,8 @@ namespace Square.Apis
         /// ```.
         /// Authorization: Client APPLICATION_SECRET.
         /// ```.
-        /// Replace `APPLICATION_SECRET` with the application secret on the Credentials.
-        /// page in the [Developer Dashboard](https://developer.squareup.com/apps)..
+        /// Replace `APPLICATION_SECRET` with the application secret on the OAuth.
+        /// page in the [developer dashboard](https://developer.squareup.com/apps)..
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <param name="authorization">Required parameter: Client APPLICATION_SECRET.</param>
@@ -180,8 +180,8 @@ namespace Square.Apis
         /// ```.
         /// Authorization: Client APPLICATION_SECRET.
         /// ```.
-        /// Replace `APPLICATION_SECRET` with the application secret on the Credentials.
-        /// page in the [Developer Dashboard](https://developer.squareup.com/apps)..
+        /// Replace `APPLICATION_SECRET` with the application secret on the OAuth.
+        /// page in the [developer dashboard](https://developer.squareup.com/apps)..
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <param name="authorization">Required parameter: Client APPLICATION_SECRET.</param>

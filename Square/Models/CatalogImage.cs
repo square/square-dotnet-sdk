@@ -35,6 +35,9 @@ namespace Square.Models
 
         /// <summary>
         /// The internal name to identify this image in calls to the Square API.
+        /// This is a searchable attribute for use in applicable query filters
+        /// using the [SearchCatalogObjects]($e/Catalog/SearchCatalogObjects).
+        /// It is not unique and should not be shown in a buyer facing context.
         /// </summary>
         [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
         public string Name { get; }
@@ -48,7 +51,8 @@ namespace Square.Models
 
         /// <summary>
         /// A caption that describes what is shown in the image. Displayed in the
-        /// Square Online Store. This is a searchable attribute for use in applicable query filters.
+        /// Square Online Store. This is a searchable attribute for use in applicable query filters
+        /// using the [SearchCatalogObjects]($e/Catalog/SearchCatalogObjects).
         /// </summary>
         [JsonProperty("caption", NullValueHandling = NullValueHandling.Ignore)]
         public string Caption { get; }

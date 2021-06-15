@@ -14,10 +14,10 @@ IDisputesApi disputesApi = client.DisputesApi;
 * [Retrieve Dispute](/doc/api/disputes.md#retrieve-dispute)
 * [Accept Dispute](/doc/api/disputes.md#accept-dispute)
 * [List Dispute Evidence](/doc/api/disputes.md#list-dispute-evidence)
-* [Remove Dispute Evidence](/doc/api/disputes.md#remove-dispute-evidence)
-* [Retrieve Dispute Evidence](/doc/api/disputes.md#retrieve-dispute-evidence)
 * [Create Dispute Evidence File](/doc/api/disputes.md#create-dispute-evidence-file)
 * [Create Dispute Evidence Text](/doc/api/disputes.md#create-dispute-evidence-text)
+* [Delete Dispute Evidence](/doc/api/disputes.md#delete-dispute-evidence)
+* [Retrieve Dispute Evidence](/doc/api/disputes.md#retrieve-dispute-evidence)
 * [Submit Evidence](/doc/api/disputes.md#submit-evidence)
 
 
@@ -133,7 +133,8 @@ Returns a list of evidence associated with a dispute.
 
 ```csharp
 ListDisputeEvidenceAsync(
-    string disputeId)
+    string disputeId,
+    string cursor = null)
 ```
 
 ## Parameters
@@ -141,6 +142,7 @@ ListDisputeEvidenceAsync(
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `disputeId` | `string` | Template, Required | The ID of the dispute. |
+| `cursor` | `string` | Query, Optional | A pagination cursor returned by a previous call to this endpoint.<br>Provide this cursor to retrieve the next set of results for the original query.<br>For more information, see [Pagination](https://developer.squareup.com/docs/basics/api101/pagination). |
 
 ## Response Type
 
@@ -150,86 +152,11 @@ ListDisputeEvidenceAsync(
 
 ```csharp
 string disputeId = "dispute_id2";
+string cursor = "cursor6";
 
 try
 {
-    ListDisputeEvidenceResponse result = await disputesApi.ListDisputeEvidenceAsync(disputeId);
-}
-catch (ApiException e){};
-```
-
-
-# Remove Dispute Evidence
-
-Removes specified evidence from a dispute.
-
-Square does not send the bank any evidence that is removed. Also, you cannot remove evidence after
-submitting it to the bank using [SubmitEvidence](/doc/api/disputes.md#submit-evidence).
-
-```csharp
-RemoveDisputeEvidenceAsync(
-    string disputeId,
-    string evidenceId)
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `disputeId` | `string` | Template, Required | The ID of the dispute you want to remove evidence from. |
-| `evidenceId` | `string` | Template, Required | The ID of the evidence you want to remove. |
-
-## Response Type
-
-[`Task<Models.RemoveDisputeEvidenceResponse>`](/doc/models/remove-dispute-evidence-response.md)
-
-## Example Usage
-
-```csharp
-string disputeId = "dispute_id2";
-string evidenceId = "evidence_id2";
-
-try
-{
-    RemoveDisputeEvidenceResponse result = await disputesApi.RemoveDisputeEvidenceAsync(disputeId, evidenceId);
-}
-catch (ApiException e){};
-```
-
-
-# Retrieve Dispute Evidence
-
-Returns the specific evidence metadata associated with a specific dispute.
-
-You must maintain a copy of the evidence you upload if you want to reference it later. You cannot
-download the evidence after you upload it.
-
-```csharp
-RetrieveDisputeEvidenceAsync(
-    string disputeId,
-    string evidenceId)
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `disputeId` | `string` | Template, Required | The ID of the dispute that you want to retrieve evidence from. |
-| `evidenceId` | `string` | Template, Required | The ID of the evidence to retrieve. |
-
-## Response Type
-
-[`Task<Models.RetrieveDisputeEvidenceResponse>`](/doc/models/retrieve-dispute-evidence-response.md)
-
-## Example Usage
-
-```csharp
-string disputeId = "dispute_id2";
-string evidenceId = "evidence_id2";
-
-try
-{
-    RetrieveDisputeEvidenceResponse result = await disputesApi.RetrieveDisputeEvidenceAsync(disputeId, evidenceId);
+    ListDisputeEvidenceResponse result = await disputesApi.ListDisputeEvidenceAsync(disputeId, cursor);
 }
 catch (ApiException e){};
 ```
@@ -312,6 +239,82 @@ var body = new CreateDisputeEvidenceTextRequest.Builder(
 try
 {
     CreateDisputeEvidenceTextResponse result = await disputesApi.CreateDisputeEvidenceTextAsync(disputeId, body);
+}
+catch (ApiException e){};
+```
+
+
+# Delete Dispute Evidence
+
+Removes specified evidence from a dispute.
+
+Square does not send the bank any evidence that is removed. Also, you cannot remove evidence after
+submitting it to the bank using [SubmitEvidence](/doc/api/disputes.md#submit-evidence).
+
+```csharp
+DeleteDisputeEvidenceAsync(
+    string disputeId,
+    string evidenceId)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `disputeId` | `string` | Template, Required | The ID of the dispute you want to remove evidence from. |
+| `evidenceId` | `string` | Template, Required | The ID of the evidence you want to remove. |
+
+## Response Type
+
+[`Task<Models.DeleteDisputeEvidenceResponse>`](/doc/models/delete-dispute-evidence-response.md)
+
+## Example Usage
+
+```csharp
+string disputeId = "dispute_id2";
+string evidenceId = "evidence_id2";
+
+try
+{
+    DeleteDisputeEvidenceResponse result = await disputesApi.DeleteDisputeEvidenceAsync(disputeId, evidenceId);
+}
+catch (ApiException e){};
+```
+
+
+# Retrieve Dispute Evidence
+
+Returns the evidence metadata specified by the evidence ID in the request URL path
+
+You must maintain a copy of the evidence you upload if you want to reference it later. You cannot
+download the evidence after you upload it.
+
+```csharp
+RetrieveDisputeEvidenceAsync(
+    string disputeId,
+    string evidenceId)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `disputeId` | `string` | Template, Required | The ID of the dispute that you want to retrieve evidence from. |
+| `evidenceId` | `string` | Template, Required | The ID of the evidence to retrieve. |
+
+## Response Type
+
+[`Task<Models.RetrieveDisputeEvidenceResponse>`](/doc/models/retrieve-dispute-evidence-response.md)
+
+## Example Usage
+
+```csharp
+string disputeId = "dispute_id2";
+string evidenceId = "evidence_id2";
+
+try
+{
+    RetrieveDisputeEvidenceResponse result = await disputesApi.RetrieveDisputeEvidenceAsync(disputeId, evidenceId);
 }
 catch (ApiException e){};
 ```

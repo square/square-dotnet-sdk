@@ -10,35 +10,37 @@ namespace Square.Models
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
     using Square;
-    using Square.Http.Client;
     using Square.Utilities;
 
     /// <summary>
-    /// RemoveDisputeEvidenceResponse.
+    /// DeprecatedCreateDisputeEvidenceTextResponse.
     /// </summary>
-    public class RemoveDisputeEvidenceResponse
+    public class DeprecatedCreateDisputeEvidenceTextResponse
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="RemoveDisputeEvidenceResponse"/> class.
+        /// Initializes a new instance of the <see cref="DeprecatedCreateDisputeEvidenceTextResponse"/> class.
         /// </summary>
         /// <param name="errors">errors.</param>
-        public RemoveDisputeEvidenceResponse(
-            IList<Models.Error> errors = null)
+        /// <param name="evidence">evidence.</param>
+        public DeprecatedCreateDisputeEvidenceTextResponse(
+            IList<Models.Error> errors = null,
+            Models.DisputeEvidence evidence = null)
         {
             this.Errors = errors;
+            this.Evidence = evidence;
         }
 
         /// <summary>
-        /// Gets http context.
-        /// </summary>
-        [JsonIgnore]
-        public HttpContext Context { get; internal set; }
-
-        /// <summary>
-        /// Information about errors encountered during the request.
+        /// Any errors that occurred during the request.
         /// </summary>
         [JsonProperty("errors", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.Error> Errors { get; }
+
+        /// <summary>
+        /// Gets or sets Evidence.
+        /// </summary>
+        [JsonProperty("evidence", NullValueHandling = NullValueHandling.Ignore)]
+        public Models.DisputeEvidence Evidence { get; }
 
         /// <inheritdoc/>
         public override string ToString()
@@ -47,7 +49,7 @@ namespace Square.Models
 
             this.ToString(toStringOutput);
 
-            return $"RemoveDisputeEvidenceResponse : ({string.Join(", ", toStringOutput)})";
+            return $"DeprecatedCreateDisputeEvidenceTextResponse : ({string.Join(", ", toStringOutput)})";
         }
 
         /// <inheritdoc/>
@@ -63,24 +65,24 @@ namespace Square.Models
                 return true;
             }
 
-            return obj is RemoveDisputeEvidenceResponse other &&
-                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
-                ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true));
+            return obj is DeprecatedCreateDisputeEvidenceTextResponse other &&
+                ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true)) &&
+                ((this.Evidence == null && other.Evidence == null) || (this.Evidence?.Equals(other.Evidence) == true));
         }
 
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -243113484;
-
-            if (this.Context != null)
-            {
-                hashCode += this.Context.GetHashCode();
-            }
+            int hashCode = 1286420372;
 
             if (this.Errors != null)
             {
                hashCode += this.Errors.GetHashCode();
+            }
+
+            if (this.Evidence != null)
+            {
+               hashCode += this.Evidence.GetHashCode();
             }
 
             return hashCode;
@@ -93,6 +95,7 @@ namespace Square.Models
         protected void ToString(List<string> toStringOutput)
         {
             toStringOutput.Add($"this.Errors = {(this.Errors == null ? "null" : $"[{string.Join(", ", this.Errors)} ]")}");
+            toStringOutput.Add($"this.Evidence = {(this.Evidence == null ? "null" : this.Evidence.ToString())}");
         }
 
         /// <summary>
@@ -102,7 +105,8 @@ namespace Square.Models
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .Errors(this.Errors);
+                .Errors(this.Errors)
+                .Evidence(this.Evidence);
             return builder;
         }
 
@@ -112,6 +116,7 @@ namespace Square.Models
         public class Builder
         {
             private IList<Models.Error> errors;
+            private Models.DisputeEvidence evidence;
 
              /// <summary>
              /// Errors.
@@ -124,14 +129,26 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// Evidence.
+             /// </summary>
+             /// <param name="evidence"> evidence. </param>
+             /// <returns> Builder. </returns>
+            public Builder Evidence(Models.DisputeEvidence evidence)
+            {
+                this.evidence = evidence;
+                return this;
+            }
+
             /// <summary>
             /// Builds class object.
             /// </summary>
-            /// <returns> RemoveDisputeEvidenceResponse. </returns>
-            public RemoveDisputeEvidenceResponse Build()
+            /// <returns> DeprecatedCreateDisputeEvidenceTextResponse. </returns>
+            public DeprecatedCreateDisputeEvidenceTextResponse Build()
             {
-                return new RemoveDisputeEvidenceResponse(
-                    this.errors);
+                return new DeprecatedCreateDisputeEvidenceTextResponse(
+                    this.errors,
+                    this.evidence);
             }
         }
     }

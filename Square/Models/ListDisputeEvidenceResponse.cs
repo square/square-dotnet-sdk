@@ -23,12 +23,15 @@ namespace Square.Models
         /// </summary>
         /// <param name="evidence">evidence.</param>
         /// <param name="errors">errors.</param>
+        /// <param name="cursor">cursor.</param>
         public ListDisputeEvidenceResponse(
             IList<Models.DisputeEvidence> evidence = null,
-            IList<Models.Error> errors = null)
+            IList<Models.Error> errors = null,
+            string cursor = null)
         {
             this.Evidence = evidence;
             this.Errors = errors;
+            this.Cursor = cursor;
         }
 
         /// <summary>
@@ -48,6 +51,13 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("errors", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.Error> Errors { get; }
+
+        /// <summary>
+        /// The pagination cursor to be used in a subsequent request.
+        /// If unset, this is the final response. For more information, see [Pagination](https://developer.squareup.com/docs/basics/api101/pagination).
+        /// </summary>
+        [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
+        public string Cursor { get; }
 
         /// <inheritdoc/>
         public override string ToString()
@@ -75,13 +85,14 @@ namespace Square.Models
             return obj is ListDisputeEvidenceResponse other &&
                 ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
                 ((this.Evidence == null && other.Evidence == null) || (this.Evidence?.Equals(other.Evidence) == true)) &&
-                ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true));
+                ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true)) &&
+                ((this.Cursor == null && other.Cursor == null) || (this.Cursor?.Equals(other.Cursor) == true));
         }
 
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 529802035;
+            int hashCode = -1768925090;
 
             if (this.Context != null)
             {
@@ -98,6 +109,11 @@ namespace Square.Models
                hashCode += this.Errors.GetHashCode();
             }
 
+            if (this.Cursor != null)
+            {
+               hashCode += this.Cursor.GetHashCode();
+            }
+
             return hashCode;
         }
 
@@ -109,6 +125,7 @@ namespace Square.Models
         {
             toStringOutput.Add($"this.Evidence = {(this.Evidence == null ? "null" : $"[{string.Join(", ", this.Evidence)} ]")}");
             toStringOutput.Add($"this.Errors = {(this.Errors == null ? "null" : $"[{string.Join(", ", this.Errors)} ]")}");
+            toStringOutput.Add($"this.Cursor = {(this.Cursor == null ? "null" : this.Cursor == string.Empty ? "" : this.Cursor)}");
         }
 
         /// <summary>
@@ -119,7 +136,8 @@ namespace Square.Models
         {
             var builder = new Builder()
                 .Evidence(this.Evidence)
-                .Errors(this.Errors);
+                .Errors(this.Errors)
+                .Cursor(this.Cursor);
             return builder;
         }
 
@@ -130,6 +148,7 @@ namespace Square.Models
         {
             private IList<Models.DisputeEvidence> evidence;
             private IList<Models.Error> errors;
+            private string cursor;
 
              /// <summary>
              /// Evidence.
@@ -153,6 +172,17 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// Cursor.
+             /// </summary>
+             /// <param name="cursor"> cursor. </param>
+             /// <returns> Builder. </returns>
+            public Builder Cursor(string cursor)
+            {
+                this.cursor = cursor;
+                return this;
+            }
+
             /// <summary>
             /// Builds class object.
             /// </summary>
@@ -161,7 +191,8 @@ namespace Square.Models
             {
                 return new ListDisputeEvidenceResponse(
                     this.evidence,
-                    this.errors);
+                    this.errors,
+                    this.cursor);
             }
         }
     }

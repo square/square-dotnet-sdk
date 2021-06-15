@@ -136,7 +136,8 @@ namespace Square.Models
         public IList<Models.CatalogItemModifierListInfo> ModifierListInfo { get; }
 
         /// <summary>
-        /// A list of CatalogObjects containing the `CatalogItemVariation`s for this item.
+        /// A list of [CatalogItemVariation]($m/CatalogItemVariation) objects for this item. An item must have
+        /// at least one variation.
         /// </summary>
         [JsonProperty("variations", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.CatalogObject> Variations { get; }

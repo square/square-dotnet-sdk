@@ -31,7 +31,7 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// Enumerates the possible assignment types the team member can have
+        /// Enumerates the possible assignment types that the team member can have.
         /// </summary>
         [JsonProperty("assignment_type", NullValueHandling = NullValueHandling.Ignore)]
         public string AssignmentType { get; }

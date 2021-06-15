@@ -117,7 +117,7 @@ var bodyQueryFilter = new TerminalCheckoutQueryFilter.Builder()
     .Status("COMPLETED")
     .Build();
 var bodyQuerySort = new TerminalCheckoutQuerySort.Builder()
-    .SortOrder("sort_order8")
+    .SortOrder("DESC")
     .Build();
 var bodyQuery = new TerminalCheckoutQuery.Builder()
     .Filter(bodyQueryFilter)

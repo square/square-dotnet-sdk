@@ -44,7 +44,9 @@ namespace Square.Models
         public IList<Models.Error> Errors { get; }
 
         /// <summary>
-        /// Gets or sets Program.
+        /// Represents a Square loyalty program. Loyalty programs define how buyers can earn points and redeem points for rewards.
+        /// Square sellers can have only one loyalty program, which is created and managed from the Seller Dashboard.
+        /// For more information, see [Loyalty Program Overview](https://developer.squareup.com/docs/loyalty/overview).
         /// </summary>
         [JsonProperty("program", NullValueHandling = NullValueHandling.Ignore)]
         public Models.LoyaltyProgram Program { get; }

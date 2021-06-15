@@ -51,10 +51,10 @@ var bodyPriceOverrideMoney = new Money.Builder()
     .Currency("USD")
     .Build();
 var body = new CreateSubscriptionRequest.Builder(
-        "8193148c-9586-11e6-99f9-28cfe92138cf",
         "S8GWD5R9QB376",
         "6JHXF3B2CW3YKHDV4XEM674H",
         "CHFGVKYY8RSV93M5KCYTG4PN0G")
+    .IdempotencyKey("8193148c-9586-11e6-99f9-28cfe92138cf")
     .StartDate("2020-08-01")
     .CanceledDate("canceled_date0")
     .TaxPercentage("5")

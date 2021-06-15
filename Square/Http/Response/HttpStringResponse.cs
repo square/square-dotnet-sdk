@@ -18,8 +18,7 @@ namespace Square.Http.Response
         /// <param name="headers">headers.</param>
         /// <param name="rawBody">rawBody.</param>
         /// <param name="body">body.</param>
-        public HttpStringResponse(int statusCode, Dictionary<string, string> headers, Stream rawBody, string body)
-        : base(statusCode, headers, rawBody)
+        public HttpStringResponse(int statusCode, Dictionary<string, string> headers, Stream rawBody, string body) : base(statusCode, headers, rawBody)
         {
             this.Body = body;
         }

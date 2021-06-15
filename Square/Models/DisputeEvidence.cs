@@ -21,6 +21,7 @@ namespace Square.Models
         /// Initializes a new instance of the <see cref="DisputeEvidence"/> class.
         /// </summary>
         /// <param name="evidenceId">evidence_id.</param>
+        /// <param name="id">id.</param>
         /// <param name="disputeId">dispute_id.</param>
         /// <param name="evidenceFile">evidence_file.</param>
         /// <param name="evidenceText">evidence_text.</param>
@@ -28,6 +29,7 @@ namespace Square.Models
         /// <param name="evidenceType">evidence_type.</param>
         public DisputeEvidence(
             string evidenceId = null,
+            string id = null,
             string disputeId = null,
             Models.DisputeEvidenceFile evidenceFile = null,
             string evidenceText = null,
@@ -35,6 +37,7 @@ namespace Square.Models
             string evidenceType = null)
         {
             this.EvidenceId = evidenceId;
+            this.Id = id;
             this.DisputeId = disputeId;
             this.EvidenceFile = evidenceFile;
             this.EvidenceText = evidenceText;
@@ -47,6 +50,12 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("evidence_id", NullValueHandling = NullValueHandling.Ignore)]
         public string EvidenceId { get; }
+
+        /// <summary>
+        /// The Square-generated ID of the evidence.
+        /// </summary>
+        [JsonProperty("id", NullValueHandling = NullValueHandling.Ignore)]
+        public string Id { get; }
 
         /// <summary>
         /// The ID of the dispute the evidence is associated with.
@@ -103,6 +112,7 @@ namespace Square.Models
 
             return obj is DisputeEvidence other &&
                 ((this.EvidenceId == null && other.EvidenceId == null) || (this.EvidenceId?.Equals(other.EvidenceId) == true)) &&
+                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
                 ((this.DisputeId == null && other.DisputeId == null) || (this.DisputeId?.Equals(other.DisputeId) == true)) &&
                 ((this.EvidenceFile == null && other.EvidenceFile == null) || (this.EvidenceFile?.Equals(other.EvidenceFile) == true)) &&
                 ((this.EvidenceText == null && other.EvidenceText == null) || (this.EvidenceText?.Equals(other.EvidenceText) == true)) &&
@@ -113,11 +123,16 @@ namespace Square.Models
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -2126337961;
+            int hashCode = 139359175;
 
             if (this.EvidenceId != null)
             {
                hashCode += this.EvidenceId.GetHashCode();
+            }
+
+            if (this.Id != null)
+            {
+               hashCode += this.Id.GetHashCode();
             }
 
             if (this.DisputeId != null)
@@ -155,6 +170,7 @@ namespace Square.Models
         protected void ToString(List<string> toStringOutput)
         {
             toStringOutput.Add($"this.EvidenceId = {(this.EvidenceId == null ? "null" : this.EvidenceId == string.Empty ? "" : this.EvidenceId)}");
+            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id == string.Empty ? "" : this.Id)}");
             toStringOutput.Add($"this.DisputeId = {(this.DisputeId == null ? "null" : this.DisputeId == string.Empty ? "" : this.DisputeId)}");
             toStringOutput.Add($"this.EvidenceFile = {(this.EvidenceFile == null ? "null" : this.EvidenceFile.ToString())}");
             toStringOutput.Add($"this.EvidenceText = {(this.EvidenceText == null ? "null" : this.EvidenceText == string.Empty ? "" : this.EvidenceText)}");
@@ -170,6 +186,7 @@ namespace Square.Models
         {
             var builder = new Builder()
                 .EvidenceId(this.EvidenceId)
+                .Id(this.Id)
                 .DisputeId(this.DisputeId)
                 .EvidenceFile(this.EvidenceFile)
                 .EvidenceText(this.EvidenceText)
@@ -184,6 +201,7 @@ namespace Square.Models
         public class Builder
         {
             private string evidenceId;
+            private string id;
             private string disputeId;
             private Models.DisputeEvidenceFile evidenceFile;
             private string evidenceText;
@@ -198,6 +216,17 @@ namespace Square.Models
             public Builder EvidenceId(string evidenceId)
             {
                 this.evidenceId = evidenceId;
+                return this;
+            }
+
+             /// <summary>
+             /// Id.
+             /// </summary>
+             /// <param name="id"> id. </param>
+             /// <returns> Builder. </returns>
+            public Builder Id(string id)
+            {
+                this.id = id;
                 return this;
             }
 
@@ -264,6 +293,7 @@ namespace Square.Models
             {
                 return new DisputeEvidence(
                     this.evidenceId,
+                    this.id,
                     this.disputeId,
                     this.evidenceFile,
                     this.evidenceText,

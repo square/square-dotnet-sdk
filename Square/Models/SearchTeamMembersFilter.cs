@@ -31,8 +31,8 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// When present, filter by team members assigned to the specified locations.
-        /// When empty, include team members assigned to any location.
+        /// When present, filters by team members assigned to the specified locations.
+        /// When empty, includes team members assigned to any location.
         /// </summary>
         [JsonProperty("location_ids", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> LocationIds { get; }

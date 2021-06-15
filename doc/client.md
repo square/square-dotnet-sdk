@@ -5,7 +5,7 @@ The following parameters are configurable for the API Client:
 
 | Parameter | Type | Description |
 |  --- | --- | --- |
-| `SquareVersion` | `string` | Square Connect API versions<br>*Default*: `"2021-05-13"` |
+| `SquareVersion` | `string` | Square Connect API versions<br>*Default*: `"2021-06-16"` |
 | `CustomUrl` | `string` | Sets the base URL requests are made to. Defaults to `https://connect.squareup.com`<br>*Default*: `"https://connect.squareup.com"` |
 | `Environment` | `string` | The API environment. <br> **Default: `production`** |
 | `Timeout` | `TimeSpan` | Http client timeout.<br>*Default*: `TimeSpan.FromSeconds(60)` |
@@ -16,7 +16,7 @@ The API client can be initialized as follows:
 ```csharp
 Square.SquareClient client = new Square.SquareClient.Builder()
     .AccessToken("AccessToken")
-    .SquareVersion(GetEnvironmentVariable("2021-05-13"))
+    .SquareVersion(GetEnvironmentVariable("2021-06-16"))
     .Environment(Environment.Production)
     .CustomUrl("https://connect.squareup.com")
     .HttpClientConfig(config => config.NumberOfRetries(0))
@@ -45,7 +45,7 @@ namespace Testing
         {
             SquareClient client = new SquareClient.Builder()
                 .AccessToken("AccessToken")
-                .SquareVersion(GetEnvironmentVariable("2021-05-13"))
+                .SquareVersion(GetEnvironmentVariable("2021-06-16"))
                 .HttpClientConfig(config => config.NumberOfRetries(0))
                 .Build();
             ILocationsApi locationsApi = client.LocationsApi;
@@ -75,6 +75,7 @@ The gateway for the SDK. This class acts as a factory for the Apis and also hold
 | ApplePayApi | Gets ApplePayApi. |
 | BankAccountsApi | Gets BankAccountsApi. |
 | BookingsApi | Gets BookingsApi. |
+| CardsApi | Gets CardsApi. |
 | CashDrawersApi | Gets CashDrawersApi. |
 | CatalogApi | Gets CatalogApi. |
 | CustomersApi | Gets CustomersApi. |
@@ -83,6 +84,8 @@ The gateway for the SDK. This class acts as a factory for the Apis and also hold
 | DevicesApi | Gets DevicesApi. |
 | DisputesApi | Gets DisputesApi. |
 | EmployeesApi | Gets EmployeesApi. |
+| GiftCardsApi | Gets GiftCardsApi. |
+| GiftCardActivitiesApi | Gets GiftCardActivitiesApi. |
 | InventoryApi | Gets InventoryApi. |
 | InvoicesApi | Gets InvoicesApi. |
 | LaborApi | Gets LaborApi. |
@@ -127,6 +130,304 @@ Class to build instances of SquareClient.
 
 | Name | Description | Return Type |
 |  --- | --- | --- |
+| `HttpClientConfiguration(Action<HttpClientConfiguration.Builder> action)` | Gets the configuration of the Http Client associated with this client. | `Builder` |
+| `Timeout(TimeSpan timeout)` | Http client timeout. | `Builder` |
+| `Environment(Environment environment)` | Current API environment. | `Builder` |
+| `BaseUrl(string baseUrl)` | BaseUrl value. | `Builder` |
+| `AdditionalHeaders(IDictionary<string, List<string>> additionalHeaders)` | Gets the additional headers. | `Builder` |
+| `SdkVersion(string sdkVersion)` | Gets the additional headers. | `Builder` |
+| `HttpClientConfiguration(Action<HttpClientConfiguration.Builder> action)` | Gets the configuration of the Http Client associated with this client. | `Builder` |
+| `Timeout(TimeSpan timeout)` | Http client timeout. | `Builder` |
+| `SquareVersion(string squareVersion)` | Square Connect API versions | `Builder` |
+| `Environment(Environment environment)` | Current API environment. | `Builder` |
+| `CustomUrl(string customUrl)` | Sets the base URL requests are made to. Defaults to `https://connect.squareup.com` | `Builder` |
+| `AdditionalHeaders(IDictionary<string, List<string>> additionalHeaders)` | Gets the additional headers. | `Builder` |
+| `SdkVersion(string sdkVersion)` | Gets the additional headers. | `Builder` |
+| `HttpClientConfiguration(Action<HttpClientConfiguration.Builder> action)` | Gets the configuration of the Http Client associated with this client. | `Builder` |
+| `Timeout(TimeSpan timeout)` | Http client timeout. | `Builder` |
+| `SquareVersion(string squareVersion)` | Square Connect API versions | `Builder` |
+| `Environment(Environment environment)` | Current API environment. | `Builder` |
+| `CustomUrl(string customUrl)` | Sets the base URL requests are made to. Defaults to `https://connect.squareup.com` | `Builder` |
+| `AdditionalHeaders(IDictionary<string, List<string>> additionalHeaders)` | Gets the additional headers. | `Builder` |
+| `SdkVersion(string sdkVersion)` | Gets the additional headers. | `Builder` |
+| `HttpClientConfiguration(Action<HttpClientConfiguration.Builder> action)` | Gets the configuration of the Http Client associated with this client. | `Builder` |
+| `Timeout(TimeSpan timeout)` | Http client timeout. | `Builder` |
+| `SquareVersion(string squareVersion)` | Square Connect API versions | `Builder` |
+| `Environment(Environment environment)` | Current API environment. | `Builder` |
+| `CustomUrl(string customUrl)` | Sets the base URL requests are made to. Defaults to `https://connect.squareup.com` | `Builder` |
+| `AdditionalHeaders(IDictionary<string, List<string>> additionalHeaders)` | Gets the additional headers. | `Builder` |
+| `SdkVersion(string sdkVersion)` | Gets the additional headers. | `Builder` |
+| `HttpClientConfiguration(Action<HttpClientConfiguration.Builder> action)` | Gets the configuration of the Http Client associated with this client. | `Builder` |
+| `Timeout(TimeSpan timeout)` | Http client timeout. | `Builder` |
+| `SquareVersion(string squareVersion)` | Square Connect API versions | `Builder` |
+| `Environment(Environment environment)` | Current API environment. | `Builder` |
+| `CustomUrl(string customUrl)` | Sets the base URL requests are made to. Defaults to `https://connect.squareup.com` | `Builder` |
+| `AdditionalHeaders(IDictionary<string, List<string>> additionalHeaders)` | Gets the additional headers. | `Builder` |
+| `SdkVersion(string sdkVersion)` | Gets the additional headers. | `Builder` |
+| `HttpClientConfiguration(Action<HttpClientConfiguration.Builder> action)` | Gets the configuration of the Http Client associated with this client. | `Builder` |
+| `Timeout(TimeSpan timeout)` | Http client timeout. | `Builder` |
+| `SquareVersion(string squareVersion)` | Square Connect API versions | `Builder` |
+| `Environment(Environment environment)` | Current API environment. | `Builder` |
+| `CustomUrl(string customUrl)` | Sets the base URL requests are made to. Defaults to `https://connect.squareup.com` | `Builder` |
+| `AdditionalHeaders(IDictionary<string, List<string>> additionalHeaders)` | Gets the additional headers. | `Builder` |
+| `SdkVersion(string sdkVersion)` | Gets the additional headers. | `Builder` |
+| `HttpClientConfiguration(Action<HttpClientConfiguration.Builder> action)` | Gets the configuration of the Http Client associated with this client. | `Builder` |
+| `Timeout(TimeSpan timeout)` | Http client timeout. | `Builder` |
+| `SquareVersion(string squareVersion)` | Square Connect API versions | `Builder` |
+| `Environment(Environment environment)` | Current API environment. | `Builder` |
+| `CustomUrl(string customUrl)` | Sets the base URL requests are made to. Defaults to `https://connect.squareup.com` | `Builder` |
+| `AdditionalHeaders(IDictionary<string, List<string>> additionalHeaders)` | Gets the additional headers. | `Builder` |
+| `SdkVersion(string sdkVersion)` | Gets the additional headers. | `Builder` |
+| `HttpClientConfiguration(Action<HttpClientConfiguration.Builder> action)` | Gets the configuration of the Http Client associated with this client. | `Builder` |
+| `Timeout(TimeSpan timeout)` | Http client timeout. | `Builder` |
+| `SquareVersion(string squareVersion)` | Square Connect API versions | `Builder` |
+| `Environment(Environment environment)` | Current API environment. | `Builder` |
+| `CustomUrl(string customUrl)` | Sets the base URL requests are made to. Defaults to `https://connect.squareup.com` | `Builder` |
+| `AdditionalHeaders(IDictionary<string, List<string>> additionalHeaders)` | Gets the additional headers. | `Builder` |
+| `SdkVersion(string sdkVersion)` | Gets the additional headers. | `Builder` |
+| `HttpClientConfiguration(Action<HttpClientConfiguration.Builder> action)` | Gets the configuration of the Http Client associated with this client. | `Builder` |
+| `Timeout(TimeSpan timeout)` | Http client timeout. | `Builder` |
+| `SquareVersion(string squareVersion)` | Square Connect API versions | `Builder` |
+| `Environment(Environment environment)` | Current API environment. | `Builder` |
+| `CustomUrl(string customUrl)` | Sets the base URL requests are made to. Defaults to `https://connect.squareup.com` | `Builder` |
+| `AdditionalHeaders(IDictionary<string, List<string>> additionalHeaders)` | Gets the additional headers. | `Builder` |
+| `SdkVersion(string sdkVersion)` | Gets the additional headers. | `Builder` |
+| `HttpClientConfiguration(Action<HttpClientConfiguration.Builder> action)` | Gets the configuration of the Http Client associated with this client. | `Builder` |
+| `Timeout(TimeSpan timeout)` | Http client timeout. | `Builder` |
+| `SquareVersion(string squareVersion)` | Square Connect API versions | `Builder` |
+| `Environment(Environment environment)` | Current API environment. | `Builder` |
+| `CustomUrl(string customUrl)` | Sets the base URL requests are made to. Defaults to `https://connect.squareup.com` | `Builder` |
+| `AdditionalHeaders(IDictionary<string, List<string>> additionalHeaders)` | Gets the additional headers. | `Builder` |
+| `SdkVersion(string sdkVersion)` | Gets the additional headers. | `Builder` |
+| `HttpClientConfiguration(Action<HttpClientConfiguration.Builder> action)` | Gets the configuration of the Http Client associated with this client. | `Builder` |
+| `Timeout(TimeSpan timeout)` | Http client timeout. | `Builder` |
+| `SquareVersion(string squareVersion)` | Square Connect API versions | `Builder` |
+| `Environment(Environment environment)` | Current API environment. | `Builder` |
+| `CustomUrl(string customUrl)` | Sets the base URL requests are made to. Defaults to `https://connect.squareup.com` | `Builder` |
+| `AdditionalHeaders(IDictionary<string, List<string>> additionalHeaders)` | Gets the additional headers. | `Builder` |
+| `SdkVersion(string sdkVersion)` | Gets the additional headers. | `Builder` |
+| `HttpClientConfiguration(Action<HttpClientConfiguration.Builder> action)` | Gets the configuration of the Http Client associated with this client. | `Builder` |
+| `Timeout(TimeSpan timeout)` | Http client timeout. | `Builder` |
+| `SquareVersion(string squareVersion)` | Square Connect API versions | `Builder` |
+| `Environment(Environment environment)` | Current API environment. | `Builder` |
+| `CustomUrl(string customUrl)` | Sets the base URL requests are made to. Defaults to `https://connect.squareup.com` | `Builder` |
+| `AdditionalHeaders(IDictionary<string, List<string>> additionalHeaders)` | Gets the additional headers. | `Builder` |
+| `SdkVersion(string sdkVersion)` | Gets the additional headers. | `Builder` |
+| `HttpClientConfiguration(Action<HttpClientConfiguration.Builder> action)` | Gets the configuration of the Http Client associated with this client. | `Builder` |
+| `Timeout(TimeSpan timeout)` | Http client timeout. | `Builder` |
+| `SquareVersion(string squareVersion)` | Square Connect API versions | `Builder` |
+| `Environment(Environment environment)` | Current API environment. | `Builder` |
+| `CustomUrl(string customUrl)` | Sets the base URL requests are made to. Defaults to `https://connect.squareup.com` | `Builder` |
+| `AdditionalHeaders(IDictionary<string, List<string>> additionalHeaders)` | Gets the additional headers. | `Builder` |
+| `SdkVersion(string sdkVersion)` | Gets the additional headers. | `Builder` |
+| `HttpClientConfiguration(Action<HttpClientConfiguration.Builder> action)` | Gets the configuration of the Http Client associated with this client. | `Builder` |
+| `Timeout(TimeSpan timeout)` | Http client timeout. | `Builder` |
+| `SquareVersion(string squareVersion)` | Square Connect API versions | `Builder` |
+| `Environment(Environment environment)` | Current API environment. | `Builder` |
+| `CustomUrl(string customUrl)` | Sets the base URL requests are made to. Defaults to `https://connect.squareup.com` | `Builder` |
+| `AdditionalHeaders(IDictionary<string, List<string>> additionalHeaders)` | Gets the additional headers. | `Builder` |
+| `SdkVersion(string sdkVersion)` | Gets the additional headers. | `Builder` |
+| `HttpClientConfiguration(Action<HttpClientConfiguration.Builder> action)` | Gets the configuration of the Http Client associated with this client. | `Builder` |
+| `Timeout(TimeSpan timeout)` | Http client timeout. | `Builder` |
+| `SquareVersion(string squareVersion)` | Square Connect API versions | `Builder` |
+| `Environment(Environment environment)` | Current API environment. | `Builder` |
+| `CustomUrl(string customUrl)` | Sets the base URL requests are made to. Defaults to `https://connect.squareup.com` | `Builder` |
+| `AdditionalHeaders(IDictionary<string, List<string>> additionalHeaders)` | Gets the additional headers. | `Builder` |
+| `SdkVersion(string sdkVersion)` | Gets the additional headers. | `Builder` |
+| `HttpClientConfiguration(Action<HttpClientConfiguration.Builder> action)` | Gets the configuration of the Http Client associated with this client. | `Builder` |
+| `Timeout(TimeSpan timeout)` | Http client timeout. | `Builder` |
+| `SquareVersion(string squareVersion)` | Square Connect API versions | `Builder` |
+| `Environment(Environment environment)` | Current API environment. | `Builder` |
+| `CustomUrl(string customUrl)` | Sets the base URL requests are made to. Defaults to `https://connect.squareup.com` | `Builder` |
+| `AdditionalHeaders(IDictionary<string, List<string>> additionalHeaders)` | Gets the additional headers. | `Builder` |
+| `SdkVersion(string sdkVersion)` | Gets the additional headers. | `Builder` |
+| `HttpClientConfiguration(Action<HttpClientConfiguration.Builder> action)` | Gets the configuration of the Http Client associated with this client. | `Builder` |
+| `Timeout(TimeSpan timeout)` | Http client timeout. | `Builder` |
+| `SquareVersion(string squareVersion)` | Square Connect API versions | `Builder` |
+| `Environment(Environment environment)` | Current API environment. | `Builder` |
+| `CustomUrl(string customUrl)` | Sets the base URL requests are made to. Defaults to `https://connect.squareup.com` | `Builder` |
+| `AdditionalHeaders(IDictionary<string, List<string>> additionalHeaders)` | Gets the additional headers. | `Builder` |
+| `SdkVersion(string sdkVersion)` | Gets the additional headers. | `Builder` |
+| `HttpClientConfiguration(Action<HttpClientConfiguration.Builder> action)` | Gets the configuration of the Http Client associated with this client. | `Builder` |
+| `Timeout(TimeSpan timeout)` | Http client timeout. | `Builder` |
+| `SquareVersion(string squareVersion)` | Square Connect API versions | `Builder` |
+| `Environment(Environment environment)` | Current API environment. | `Builder` |
+| `CustomUrl(string customUrl)` | Sets the base URL requests are made to. Defaults to `https://connect.squareup.com` | `Builder` |
+| `AdditionalHeaders(IDictionary<string, List<string>> additionalHeaders)` | Gets the additional headers. | `Builder` |
+| `SdkVersion(string sdkVersion)` | Gets the additional headers. | `Builder` |
+| `HttpClientConfiguration(Action<HttpClientConfiguration.Builder> action)` | Gets the configuration of the Http Client associated with this client. | `Builder` |
+| `Timeout(TimeSpan timeout)` | Http client timeout. | `Builder` |
+| `SquareVersion(string squareVersion)` | Square Connect API versions | `Builder` |
+| `Environment(Environment environment)` | Current API environment. | `Builder` |
+| `CustomUrl(string customUrl)` | Sets the base URL requests are made to. Defaults to `https://connect.squareup.com` | `Builder` |
+| `AdditionalHeaders(IDictionary<string, List<string>> additionalHeaders)` | Gets the additional headers. | `Builder` |
+| `SdkVersion(string sdkVersion)` | Gets the additional headers. | `Builder` |
+| `HttpClientConfiguration(Action<HttpClientConfiguration.Builder> action)` | Gets the configuration of the Http Client associated with this client. | `Builder` |
+| `Timeout(TimeSpan timeout)` | Http client timeout. | `Builder` |
+| `SquareVersion(string squareVersion)` | Square Connect API versions | `Builder` |
+| `Environment(Environment environment)` | Current API environment. | `Builder` |
+| `CustomUrl(string customUrl)` | Sets the base URL requests are made to. Defaults to `https://connect.squareup.com` | `Builder` |
+| `AdditionalHeaders(IDictionary<string, List<string>> additionalHeaders)` | Gets the additional headers. | `Builder` |
+| `SdkVersion(string sdkVersion)` | Gets the additional headers. | `Builder` |
+| `HttpClientConfiguration(Action<HttpClientConfiguration.Builder> action)` | Gets the configuration of the Http Client associated with this client. | `Builder` |
+| `Timeout(TimeSpan timeout)` | Http client timeout. | `Builder` |
+| `SquareVersion(string squareVersion)` | Square Connect API versions | `Builder` |
+| `Environment(Environment environment)` | Current API environment. | `Builder` |
+| `CustomUrl(string customUrl)` | Sets the base URL requests are made to. Defaults to `https://connect.squareup.com` | `Builder` |
+| `AdditionalHeaders(IDictionary<string, List<string>> additionalHeaders)` | Gets the additional headers. | `Builder` |
+| `SdkVersion(string sdkVersion)` | Gets the additional headers. | `Builder` |
+| `HttpClientConfiguration(Action<HttpClientConfiguration.Builder> action)` | Gets the configuration of the Http Client associated with this client. | `Builder` |
+| `Timeout(TimeSpan timeout)` | Http client timeout. | `Builder` |
+| `SquareVersion(string squareVersion)` | Square Connect API versions | `Builder` |
+| `Environment(Environment environment)` | Current API environment. | `Builder` |
+| `CustomUrl(string customUrl)` | Sets the base URL requests are made to. Defaults to `https://connect.squareup.com` | `Builder` |
+| `AdditionalHeaders(IDictionary<string, List<string>> additionalHeaders)` | Gets the additional headers. | `Builder` |
+| `SdkVersion(string sdkVersion)` | Gets the additional headers. | `Builder` |
+| `HttpClientConfiguration(Action<HttpClientConfiguration.Builder> action)` | Gets the configuration of the Http Client associated with this client. | `Builder` |
+| `Timeout(TimeSpan timeout)` | Http client timeout. | `Builder` |
+| `SquareVersion(string squareVersion)` | Square Connect API versions | `Builder` |
+| `Environment(Environment environment)` | Current API environment. | `Builder` |
+| `CustomUrl(string customUrl)` | Sets the base URL requests are made to. Defaults to `https://connect.squareup.com` | `Builder` |
+| `AdditionalHeaders(IDictionary<string, List<string>> additionalHeaders)` | Gets the additional headers. | `Builder` |
+| `SdkVersion(string sdkVersion)` | Gets the additional headers. | `Builder` |
+| `HttpClientConfiguration(Action<HttpClientConfiguration.Builder> action)` | Gets the configuration of the Http Client associated with this client. | `Builder` |
+| `Timeout(TimeSpan timeout)` | Http client timeout. | `Builder` |
+| `SquareVersion(string squareVersion)` | Square Connect API versions | `Builder` |
+| `Environment(Environment environment)` | Current API environment. | `Builder` |
+| `CustomUrl(string customUrl)` | Sets the base URL requests are made to. Defaults to `https://connect.squareup.com` | `Builder` |
+| `AdditionalHeaders(IDictionary<string, List<string>> additionalHeaders)` | Gets the additional headers. | `Builder` |
+| `SdkVersion(string sdkVersion)` | Gets the additional headers. | `Builder` |
+| `HttpClientConfiguration(Action<HttpClientConfiguration.Builder> action)` | Gets the configuration of the Http Client associated with this client. | `Builder` |
+| `Timeout(TimeSpan timeout)` | Http client timeout. | `Builder` |
+| `SquareVersion(string squareVersion)` | Square Connect API versions | `Builder` |
+| `Environment(Environment environment)` | Current API environment. | `Builder` |
+| `CustomUrl(string customUrl)` | Sets the base URL requests are made to. Defaults to `https://connect.squareup.com` | `Builder` |
+| `AdditionalHeaders(IDictionary<string, List<string>> additionalHeaders)` | Gets the additional headers. | `Builder` |
+| `SdkVersion(string sdkVersion)` | Gets the additional headers. | `Builder` |
+| `HttpClientConfiguration(Action<HttpClientConfiguration.Builder> action)` | Gets the configuration of the Http Client associated with this client. | `Builder` |
+| `Timeout(TimeSpan timeout)` | Http client timeout. | `Builder` |
+| `SquareVersion(string squareVersion)` | Square Connect API versions | `Builder` |
+| `Environment(Environment environment)` | Current API environment. | `Builder` |
+| `CustomUrl(string customUrl)` | Sets the base URL requests are made to. Defaults to `https://connect.squareup.com` | `Builder` |
+| `AdditionalHeaders(IDictionary<string, List<string>> additionalHeaders)` | Gets the additional headers. | `Builder` |
+| `SdkVersion(string sdkVersion)` | Gets the additional headers. | `Builder` |
+| `HttpClientConfiguration(Action<HttpClientConfiguration.Builder> action)` | Gets the configuration of the Http Client associated with this client. | `Builder` |
+| `Timeout(TimeSpan timeout)` | Http client timeout. | `Builder` |
+| `SquareVersion(string squareVersion)` | Square Connect API versions | `Builder` |
+| `Environment(Environment environment)` | Current API environment. | `Builder` |
+| `CustomUrl(string customUrl)` | Sets the base URL requests are made to. Defaults to `https://connect.squareup.com` | `Builder` |
+| `AdditionalHeaders(IDictionary<string, List<string>> additionalHeaders)` | Gets the additional headers. | `Builder` |
+| `SdkVersion(string sdkVersion)` | Gets the additional headers. | `Builder` |
+| `HttpClientConfiguration(Action<HttpClientConfiguration.Builder> action)` | Gets the configuration of the Http Client associated with this client. | `Builder` |
+| `Timeout(TimeSpan timeout)` | Http client timeout. | `Builder` |
+| `SquareVersion(string squareVersion)` | Square Connect API versions | `Builder` |
+| `Environment(Environment environment)` | Current API environment. | `Builder` |
+| `CustomUrl(string customUrl)` | Sets the base URL requests are made to. Defaults to `https://connect.squareup.com` | `Builder` |
+| `AdditionalHeaders(IDictionary<string, List<string>> additionalHeaders)` | Gets the additional headers. | `Builder` |
+| `SdkVersion(string sdkVersion)` | Gets the additional headers. | `Builder` |
+| `HttpClientConfiguration(Action<HttpClientConfiguration.Builder> action)` | Gets the configuration of the Http Client associated with this client. | `Builder` |
+| `Timeout(TimeSpan timeout)` | Http client timeout. | `Builder` |
+| `SquareVersion(string squareVersion)` | Square Connect API versions | `Builder` |
+| `Environment(Environment environment)` | Current API environment. | `Builder` |
+| `CustomUrl(string customUrl)` | Sets the base URL requests are made to. Defaults to `https://connect.squareup.com` | `Builder` |
+| `AdditionalHeaders(IDictionary<string, List<string>> additionalHeaders)` | Gets the additional headers. | `Builder` |
+| `SdkVersion(string sdkVersion)` | Gets the additional headers. | `Builder` |
+| `HttpClientConfiguration(Action<HttpClientConfiguration.Builder> action)` | Gets the configuration of the Http Client associated with this client. | `Builder` |
+| `Timeout(TimeSpan timeout)` | Http client timeout. | `Builder` |
+| `SquareVersion(string squareVersion)` | Square Connect API versions | `Builder` |
+| `Environment(Environment environment)` | Current API environment. | `Builder` |
+| `CustomUrl(string customUrl)` | Sets the base URL requests are made to. Defaults to `https://connect.squareup.com` | `Builder` |
+| `AdditionalHeaders(IDictionary<string, List<string>> additionalHeaders)` | Gets the additional headers. | `Builder` |
+| `SdkVersion(string sdkVersion)` | Gets the additional headers. | `Builder` |
+| `HttpClientConfiguration(Action<HttpClientConfiguration.Builder> action)` | Gets the configuration of the Http Client associated with this client. | `Builder` |
+| `Timeout(TimeSpan timeout)` | Http client timeout. | `Builder` |
+| `SquareVersion(string squareVersion)` | Square Connect API versions | `Builder` |
+| `Environment(Environment environment)` | Current API environment. | `Builder` |
+| `CustomUrl(string customUrl)` | Sets the base URL requests are made to. Defaults to `https://connect.squareup.com` | `Builder` |
+| `AdditionalHeaders(IDictionary<string, List<string>> additionalHeaders)` | Gets the additional headers. | `Builder` |
+| `SdkVersion(string sdkVersion)` | Gets the additional headers. | `Builder` |
+| `HttpClientConfiguration(Action<HttpClientConfiguration.Builder> action)` | Gets the configuration of the Http Client associated with this client. | `Builder` |
+| `Timeout(TimeSpan timeout)` | Http client timeout. | `Builder` |
+| `SquareVersion(string squareVersion)` | Square Connect API versions | `Builder` |
+| `Environment(Environment environment)` | Current API environment. | `Builder` |
+| `CustomUrl(string customUrl)` | Sets the base URL requests are made to. Defaults to `https://connect.squareup.com` | `Builder` |
+| `AdditionalHeaders(IDictionary<string, List<string>> additionalHeaders)` | Gets the additional headers. | `Builder` |
+| `SdkVersion(string sdkVersion)` | Gets the additional headers. | `Builder` |
+| `HttpClientConfiguration(Action<HttpClientConfiguration.Builder> action)` | Gets the configuration of the Http Client associated with this client. | `Builder` |
+| `Timeout(TimeSpan timeout)` | Http client timeout. | `Builder` |
+| `SquareVersion(string squareVersion)` | Square Connect API versions | `Builder` |
+| `Environment(Environment environment)` | Current API environment. | `Builder` |
+| `CustomUrl(string customUrl)` | Sets the base URL requests are made to. Defaults to `https://connect.squareup.com` | `Builder` |
+| `AdditionalHeaders(IDictionary<string, List<string>> additionalHeaders)` | Gets the additional headers. | `Builder` |
+| `SdkVersion(string sdkVersion)` | Gets the additional headers. | `Builder` |
+| `HttpClientConfiguration(Action<HttpClientConfiguration.Builder> action)` | Gets the configuration of the Http Client associated with this client. | `Builder` |
+| `Timeout(TimeSpan timeout)` | Http client timeout. | `Builder` |
+| `SquareVersion(string squareVersion)` | Square Connect API versions | `Builder` |
+| `Environment(Environment environment)` | Current API environment. | `Builder` |
+| `CustomUrl(string customUrl)` | Sets the base URL requests are made to. Defaults to `https://connect.squareup.com` | `Builder` |
+| `AdditionalHeaders(IDictionary<string, List<string>> additionalHeaders)` | Gets the additional headers. | `Builder` |
+| `SdkVersion(string sdkVersion)` | Gets the additional headers. | `Builder` |
+| `HttpClientConfiguration(Action<HttpClientConfiguration.Builder> action)` | Gets the configuration of the Http Client associated with this client. | `Builder` |
+| `Timeout(TimeSpan timeout)` | Http client timeout. | `Builder` |
+| `SquareVersion(string squareVersion)` | Square Connect API versions | `Builder` |
+| `Environment(Environment environment)` | Current API environment. | `Builder` |
+| `CustomUrl(string customUrl)` | Sets the base URL requests are made to. Defaults to `https://connect.squareup.com` | `Builder` |
+| `AdditionalHeaders(IDictionary<string, List<string>> additionalHeaders)` | Gets the additional headers. | `Builder` |
+| `SdkVersion(string sdkVersion)` | Gets the additional headers. | `Builder` |
+| `HttpClientConfiguration(Action<HttpClientConfiguration.Builder> action)` | Gets the configuration of the Http Client associated with this client. | `Builder` |
+| `Timeout(TimeSpan timeout)` | Http client timeout. | `Builder` |
+| `SquareVersion(string squareVersion)` | Square Connect API versions | `Builder` |
+| `Environment(Environment environment)` | Current API environment. | `Builder` |
+| `CustomUrl(string customUrl)` | Sets the base URL requests are made to. Defaults to `https://connect.squareup.com` | `Builder` |
+| `AdditionalHeaders(IDictionary<string, List<string>> additionalHeaders)` | Gets the additional headers. | `Builder` |
+| `SdkVersion(string sdkVersion)` | Gets the additional headers. | `Builder` |
+| `HttpClientConfiguration(Action<HttpClientConfiguration.Builder> action)` | Gets the configuration of the Http Client associated with this client. | `Builder` |
+| `Timeout(TimeSpan timeout)` | Http client timeout. | `Builder` |
+| `SquareVersion(string squareVersion)` | Square Connect API versions | `Builder` |
+| `Environment(Environment environment)` | Current API environment. | `Builder` |
+| `CustomUrl(string customUrl)` | Sets the base URL requests are made to. Defaults to `https://connect.squareup.com` | `Builder` |
+| `AdditionalHeaders(IDictionary<string, List<string>> additionalHeaders)` | Gets the additional headers. | `Builder` |
+| `SdkVersion(string sdkVersion)` | Gets the additional headers. | `Builder` |
+| `HttpClientConfiguration(Action<HttpClientConfiguration.Builder> action)` | Gets the configuration of the Http Client associated with this client. | `Builder` |
+| `Timeout(TimeSpan timeout)` | Http client timeout. | `Builder` |
+| `SquareVersion(string squareVersion)` | Square Connect API versions | `Builder` |
+| `Environment(Environment environment)` | Current API environment. | `Builder` |
+| `CustomUrl(string customUrl)` | Sets the base URL requests are made to. Defaults to `https://connect.squareup.com` | `Builder` |
+| `AdditionalHeaders(IDictionary<string, List<string>> additionalHeaders)` | Gets the additional headers. | `Builder` |
+| `SdkVersion(string sdkVersion)` | Gets the additional headers. | `Builder` |
+| `HttpClientConfiguration(Action<HttpClientConfiguration.Builder> action)` | Gets the configuration of the Http Client associated with this client. | `Builder` |
+| `Timeout(TimeSpan timeout)` | Http client timeout. | `Builder` |
+| `SquareVersion(string squareVersion)` | Square Connect API versions | `Builder` |
+| `Environment(Environment environment)` | Current API environment. | `Builder` |
+| `CustomUrl(string customUrl)` | Sets the base URL requests are made to. Defaults to `https://connect.squareup.com` | `Builder` |
+| `AdditionalHeaders(IDictionary<string, List<string>> additionalHeaders)` | Gets the additional headers. | `Builder` |
+| `SdkVersion(string sdkVersion)` | Gets the additional headers. | `Builder` |
+| `HttpClientConfiguration(Action<HttpClientConfiguration.Builder> action)` | Gets the configuration of the Http Client associated with this client. | `Builder` |
+| `Timeout(TimeSpan timeout)` | Http client timeout. | `Builder` |
+| `SquareVersion(string squareVersion)` | Square Connect API versions | `Builder` |
+| `Environment(Environment environment)` | Current API environment. | `Builder` |
+| `CustomUrl(string customUrl)` | Sets the base URL requests are made to. Defaults to `https://connect.squareup.com` | `Builder` |
+| `AdditionalHeaders(IDictionary<string, List<string>> additionalHeaders)` | Gets the additional headers. | `Builder` |
+| `SdkVersion(string sdkVersion)` | Gets the additional headers. | `Builder` |
+| `HttpClientConfiguration(Action<HttpClientConfiguration.Builder> action)` | Gets the configuration of the Http Client associated with this client. | `Builder` |
+| `Timeout(TimeSpan timeout)` | Http client timeout. | `Builder` |
+| `SquareVersion(string squareVersion)` | Square Connect API versions | `Builder` |
+| `Environment(Environment environment)` | Current API environment. | `Builder` |
+| `CustomUrl(string customUrl)` | Sets the base URL requests are made to. Defaults to `https://connect.squareup.com` | `Builder` |
+| `AdditionalHeaders(IDictionary<string, List<string>> additionalHeaders)` | Gets the additional headers. | `Builder` |
+| `SdkVersion(string sdkVersion)` | Gets the additional headers. | `Builder` |
+| `HttpClientConfiguration(Action<HttpClientConfiguration.Builder> action)` | Gets the configuration of the Http Client associated with this client. | `Builder` |
+| `Timeout(TimeSpan timeout)` | Http client timeout. | `Builder` |
+| `SquareVersion(string squareVersion)` | Square Connect API versions | `Builder` |
+| `Environment(Environment environment)` | Current API environment. | `Builder` |
+| `CustomUrl(string customUrl)` | Sets the base URL requests are made to. Defaults to `https://connect.squareup.com` | `Builder` |
+| `AdditionalHeaders(IDictionary<string, List<string>> additionalHeaders)` | Gets the additional headers. | `Builder` |
+| `SdkVersion(string sdkVersion)` | Gets the additional headers. | `Builder` |
+| `HttpClientConfiguration(Action<HttpClientConfiguration.Builder> action)` | Gets the configuration of the Http Client associated with this client. | `Builder` |
+| `Timeout(TimeSpan timeout)` | Http client timeout. | `Builder` |
+| `SquareVersion(string squareVersion)` | Square Connect API versions | `Builder` |
+| `Environment(Environment environment)` | Current API environment. | `Builder` |
+| `CustomUrl(string customUrl)` | Sets the base URL requests are made to. Defaults to `https://connect.squareup.com` | `Builder` |
 | `AdditionalHeaders(IDictionary<string, List<string>> additionalHeaders)` | Gets the additional headers. | `Builder` |
 | `SdkVersion(string sdkVersion)` | Gets the additional headers. | `Builder` |
 | `HttpClientConfiguration(Action<HttpClientConfiguration.Builder> action)` | Gets the configuration of the Http Client associated with this client. | `Builder` |

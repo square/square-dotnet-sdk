@@ -98,15 +98,14 @@ namespace Square.Models
 
         /// <summary>
         /// The ID of the location that this invoice is associated with.
-        /// This field is required when creating an invoice.
+        /// If specified in a `CreateInvoice` request, the value must match the `location_id` of the associated order.
         /// </summary>
         [JsonProperty("location_id", NullValueHandling = NullValueHandling.Ignore)]
         public string LocationId { get; }
 
         /// <summary>
         /// The ID of the [order]($m/Order) for which the invoice is created.
-        /// This order must be in the `OPEN` state and must belong to the `location_id`
-        /// specified for this invoice. This field is required when creating an invoice.
+        /// This order must be in the `OPEN` state. This field is required when creating an invoice.
         /// </summary>
         [JsonProperty("order_id", NullValueHandling = NullValueHandling.Ignore)]
         public string OrderId { get; }

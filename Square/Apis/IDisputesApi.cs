@@ -91,70 +91,22 @@ namespace Square.Apis
         /// Returns a list of evidence associated with a dispute..
         /// </summary>
         /// <param name="disputeId">Required parameter: The ID of the dispute..</param>
+        /// <param name="cursor">Optional parameter: A pagination cursor returned by a previous call to this endpoint. Provide this cursor to retrieve the next set of results for the original query. For more information, see [Pagination](https://developer.squareup.com/docs/basics/api101/pagination)..</param>
         /// <returns>Returns the Models.ListDisputeEvidenceResponse response from the API call.</returns>
         Models.ListDisputeEvidenceResponse ListDisputeEvidence(
-                string disputeId);
+                string disputeId,
+                string cursor = null);
 
         /// <summary>
         /// Returns a list of evidence associated with a dispute..
         /// </summary>
         /// <param name="disputeId">Required parameter: The ID of the dispute..</param>
+        /// <param name="cursor">Optional parameter: A pagination cursor returned by a previous call to this endpoint. Provide this cursor to retrieve the next set of results for the original query. For more information, see [Pagination](https://developer.squareup.com/docs/basics/api101/pagination)..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the Models.ListDisputeEvidenceResponse response from the API call.</returns>
         Task<Models.ListDisputeEvidenceResponse> ListDisputeEvidenceAsync(
                 string disputeId,
-                CancellationToken cancellationToken = default);
-
-        /// <summary>
-        /// Removes specified evidence from a dispute..
-        /// Square does not send the bank any evidence that is removed. Also, you cannot remove evidence after.
-        /// submitting it to the bank using [SubmitEvidence]($e/Disputes/SubmitEvidence)..
-        /// </summary>
-        /// <param name="disputeId">Required parameter: The ID of the dispute you want to remove evidence from..</param>
-        /// <param name="evidenceId">Required parameter: The ID of the evidence you want to remove..</param>
-        /// <returns>Returns the Models.RemoveDisputeEvidenceResponse response from the API call.</returns>
-        Models.RemoveDisputeEvidenceResponse RemoveDisputeEvidence(
-                string disputeId,
-                string evidenceId);
-
-        /// <summary>
-        /// Removes specified evidence from a dispute..
-        /// Square does not send the bank any evidence that is removed. Also, you cannot remove evidence after.
-        /// submitting it to the bank using [SubmitEvidence]($e/Disputes/SubmitEvidence)..
-        /// </summary>
-        /// <param name="disputeId">Required parameter: The ID of the dispute you want to remove evidence from..</param>
-        /// <param name="evidenceId">Required parameter: The ID of the evidence you want to remove..</param>
-        /// <param name="cancellationToken"> cancellationToken. </param>
-        /// <returns>Returns the Models.RemoveDisputeEvidenceResponse response from the API call.</returns>
-        Task<Models.RemoveDisputeEvidenceResponse> RemoveDisputeEvidenceAsync(
-                string disputeId,
-                string evidenceId,
-                CancellationToken cancellationToken = default);
-
-        /// <summary>
-        /// Returns the specific evidence metadata associated with a specific dispute..
-        /// You must maintain a copy of the evidence you upload if you want to reference it later. You cannot.
-        /// download the evidence after you upload it..
-        /// </summary>
-        /// <param name="disputeId">Required parameter: The ID of the dispute that you want to retrieve evidence from..</param>
-        /// <param name="evidenceId">Required parameter: The ID of the evidence to retrieve..</param>
-        /// <returns>Returns the Models.RetrieveDisputeEvidenceResponse response from the API call.</returns>
-        Models.RetrieveDisputeEvidenceResponse RetrieveDisputeEvidence(
-                string disputeId,
-                string evidenceId);
-
-        /// <summary>
-        /// Returns the specific evidence metadata associated with a specific dispute..
-        /// You must maintain a copy of the evidence you upload if you want to reference it later. You cannot.
-        /// download the evidence after you upload it..
-        /// </summary>
-        /// <param name="disputeId">Required parameter: The ID of the dispute that you want to retrieve evidence from..</param>
-        /// <param name="evidenceId">Required parameter: The ID of the evidence to retrieve..</param>
-        /// <param name="cancellationToken"> cancellationToken. </param>
-        /// <returns>Returns the Models.RetrieveDisputeEvidenceResponse response from the API call.</returns>
-        Task<Models.RetrieveDisputeEvidenceResponse> RetrieveDisputeEvidenceAsync(
-                string disputeId,
-                string evidenceId,
+                string cursor = null,
                 CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -205,6 +157,58 @@ namespace Square.Apis
         Task<Models.CreateDisputeEvidenceTextResponse> CreateDisputeEvidenceTextAsync(
                 string disputeId,
                 Models.CreateDisputeEvidenceTextRequest body,
+                CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Removes specified evidence from a dispute..
+        /// Square does not send the bank any evidence that is removed. Also, you cannot remove evidence after.
+        /// submitting it to the bank using [SubmitEvidence]($e/Disputes/SubmitEvidence)..
+        /// </summary>
+        /// <param name="disputeId">Required parameter: The ID of the dispute you want to remove evidence from..</param>
+        /// <param name="evidenceId">Required parameter: The ID of the evidence you want to remove..</param>
+        /// <returns>Returns the Models.DeleteDisputeEvidenceResponse response from the API call.</returns>
+        Models.DeleteDisputeEvidenceResponse DeleteDisputeEvidence(
+                string disputeId,
+                string evidenceId);
+
+        /// <summary>
+        /// Removes specified evidence from a dispute..
+        /// Square does not send the bank any evidence that is removed. Also, you cannot remove evidence after.
+        /// submitting it to the bank using [SubmitEvidence]($e/Disputes/SubmitEvidence)..
+        /// </summary>
+        /// <param name="disputeId">Required parameter: The ID of the dispute you want to remove evidence from..</param>
+        /// <param name="evidenceId">Required parameter: The ID of the evidence you want to remove..</param>
+        /// <param name="cancellationToken"> cancellationToken. </param>
+        /// <returns>Returns the Models.DeleteDisputeEvidenceResponse response from the API call.</returns>
+        Task<Models.DeleteDisputeEvidenceResponse> DeleteDisputeEvidenceAsync(
+                string disputeId,
+                string evidenceId,
+                CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Returns the evidence metadata specified by the evidence ID in the request URL path.
+        /// You must maintain a copy of the evidence you upload if you want to reference it later. You cannot.
+        /// download the evidence after you upload it..
+        /// </summary>
+        /// <param name="disputeId">Required parameter: The ID of the dispute that you want to retrieve evidence from..</param>
+        /// <param name="evidenceId">Required parameter: The ID of the evidence to retrieve..</param>
+        /// <returns>Returns the Models.RetrieveDisputeEvidenceResponse response from the API call.</returns>
+        Models.RetrieveDisputeEvidenceResponse RetrieveDisputeEvidence(
+                string disputeId,
+                string evidenceId);
+
+        /// <summary>
+        /// Returns the evidence metadata specified by the evidence ID in the request URL path.
+        /// You must maintain a copy of the evidence you upload if you want to reference it later. You cannot.
+        /// download the evidence after you upload it..
+        /// </summary>
+        /// <param name="disputeId">Required parameter: The ID of the dispute that you want to retrieve evidence from..</param>
+        /// <param name="evidenceId">Required parameter: The ID of the evidence to retrieve..</param>
+        /// <param name="cancellationToken"> cancellationToken. </param>
+        /// <returns>Returns the Models.RetrieveDisputeEvidenceResponse response from the API call.</returns>
+        Task<Models.RetrieveDisputeEvidenceResponse> RetrieveDisputeEvidenceAsync(
+                string disputeId,
+                string evidenceId,
                 CancellationToken cancellationToken = default);
 
         /// <summary>

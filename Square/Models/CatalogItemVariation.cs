@@ -36,7 +36,9 @@ namespace Square.Models
         /// <param name="availableForBooking">available_for_booking.</param>
         /// <param name="itemOptionValues">item_option_values.</param>
         /// <param name="measurementUnitId">measurement_unit_id.</param>
+        /// <param name="stockable">stockable.</param>
         /// <param name="teamMemberIds">team_member_ids.</param>
+        /// <param name="stockableConversion">stockable_conversion.</param>
         public CatalogItemVariation(
             string itemId = null,
             string name = null,
@@ -54,7 +56,9 @@ namespace Square.Models
             bool? availableForBooking = null,
             IList<Models.CatalogItemOptionValueForItemVariation> itemOptionValues = null,
             string measurementUnitId = null,
-            IList<string> teamMemberIds = null)
+            bool? stockable = null,
+            IList<string> teamMemberIds = null,
+            Models.CatalogStockConversion stockableConversion = null)
         {
             this.ItemId = itemId;
             this.Name = name;
@@ -72,7 +76,9 @@ namespace Square.Models
             this.AvailableForBooking = availableForBooking;
             this.ItemOptionValues = itemOptionValues;
             this.MeasurementUnitId = measurementUnitId;
+            this.Stockable = stockable;
             this.TeamMemberIds = teamMemberIds;
+            this.StockableConversion = stockableConversion;
         }
 
         /// <summary>
@@ -192,11 +198,26 @@ namespace Square.Models
         public string MeasurementUnitId { get; }
 
         /// <summary>
+        /// Whether stock is counted directly on this variation (TRUE) or only on its components (FALSE).
+        /// For backward compatibility missing values will be interpreted as TRUE.
+        /// </summary>
+        [JsonProperty("stockable", NullValueHandling = NullValueHandling.Ignore)]
+        public bool? Stockable { get; }
+
+        /// <summary>
         /// Tokens of employees that can perform the service represented by this variation. Only valid for
         /// variations of type `APPOINTMENTS_SERVICE`.
         /// </summary>
         [JsonProperty("team_member_ids", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> TeamMemberIds { get; }
+
+        /// <summary>
+        /// Represents the rule of conversion between a stockable [CatalogItemVariation]($m/CatalogItemVariation)
+        /// and a non-stockable sell-by or receive-by `CatalogItemVariation` that
+        /// share the same underlying stock.
+        /// </summary>
+        [JsonProperty("stockable_conversion", NullValueHandling = NullValueHandling.Ignore)]
+        public Models.CatalogStockConversion StockableConversion { get; }
 
         /// <inheritdoc/>
         public override string ToString()
@@ -238,13 +259,15 @@ namespace Square.Models
                 ((this.AvailableForBooking == null && other.AvailableForBooking == null) || (this.AvailableForBooking?.Equals(other.AvailableForBooking) == true)) &&
                 ((this.ItemOptionValues == null && other.ItemOptionValues == null) || (this.ItemOptionValues?.Equals(other.ItemOptionValues) == true)) &&
                 ((this.MeasurementUnitId == null && other.MeasurementUnitId == null) || (this.MeasurementUnitId?.Equals(other.MeasurementUnitId) == true)) &&
-                ((this.TeamMemberIds == null && other.TeamMemberIds == null) || (this.TeamMemberIds?.Equals(other.TeamMemberIds) == true));
+                ((this.Stockable == null && other.Stockable == null) || (this.Stockable?.Equals(other.Stockable) == true)) &&
+                ((this.TeamMemberIds == null && other.TeamMemberIds == null) || (this.TeamMemberIds?.Equals(other.TeamMemberIds) == true)) &&
+                ((this.StockableConversion == null && other.StockableConversion == null) || (this.StockableConversion?.Equals(other.StockableConversion) == true));
         }
 
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1155387790;
+            int hashCode = -1179613553;
 
             if (this.ItemId != null)
             {
@@ -326,9 +349,19 @@ namespace Square.Models
                hashCode += this.MeasurementUnitId.GetHashCode();
             }
 
+            if (this.Stockable != null)
+            {
+               hashCode += this.Stockable.GetHashCode();
+            }
+
             if (this.TeamMemberIds != null)
             {
                hashCode += this.TeamMemberIds.GetHashCode();
+            }
+
+            if (this.StockableConversion != null)
+            {
+               hashCode += this.StockableConversion.GetHashCode();
             }
 
             return hashCode;
@@ -356,7 +389,9 @@ namespace Square.Models
             toStringOutput.Add($"this.AvailableForBooking = {(this.AvailableForBooking == null ? "null" : this.AvailableForBooking.ToString())}");
             toStringOutput.Add($"this.ItemOptionValues = {(this.ItemOptionValues == null ? "null" : $"[{string.Join(", ", this.ItemOptionValues)} ]")}");
             toStringOutput.Add($"this.MeasurementUnitId = {(this.MeasurementUnitId == null ? "null" : this.MeasurementUnitId == string.Empty ? "" : this.MeasurementUnitId)}");
+            toStringOutput.Add($"this.Stockable = {(this.Stockable == null ? "null" : this.Stockable.ToString())}");
             toStringOutput.Add($"this.TeamMemberIds = {(this.TeamMemberIds == null ? "null" : $"[{string.Join(", ", this.TeamMemberIds)} ]")}");
+            toStringOutput.Add($"this.StockableConversion = {(this.StockableConversion == null ? "null" : this.StockableConversion.ToString())}");
         }
 
         /// <summary>
@@ -382,7 +417,9 @@ namespace Square.Models
                 .AvailableForBooking(this.AvailableForBooking)
                 .ItemOptionValues(this.ItemOptionValues)
                 .MeasurementUnitId(this.MeasurementUnitId)
-                .TeamMemberIds(this.TeamMemberIds);
+                .Stockable(this.Stockable)
+                .TeamMemberIds(this.TeamMemberIds)
+                .StockableConversion(this.StockableConversion);
             return builder;
         }
 
@@ -407,7 +444,9 @@ namespace Square.Models
             private bool? availableForBooking;
             private IList<Models.CatalogItemOptionValueForItemVariation> itemOptionValues;
             private string measurementUnitId;
+            private bool? stockable;
             private IList<string> teamMemberIds;
+            private Models.CatalogStockConversion stockableConversion;
 
              /// <summary>
              /// ItemId.
@@ -586,6 +625,17 @@ namespace Square.Models
             }
 
              /// <summary>
+             /// Stockable.
+             /// </summary>
+             /// <param name="stockable"> stockable. </param>
+             /// <returns> Builder. </returns>
+            public Builder Stockable(bool? stockable)
+            {
+                this.stockable = stockable;
+                return this;
+            }
+
+             /// <summary>
              /// TeamMemberIds.
              /// </summary>
              /// <param name="teamMemberIds"> teamMemberIds. </param>
@@ -593,6 +643,17 @@ namespace Square.Models
             public Builder TeamMemberIds(IList<string> teamMemberIds)
             {
                 this.teamMemberIds = teamMemberIds;
+                return this;
+            }
+
+             /// <summary>
+             /// StockableConversion.
+             /// </summary>
+             /// <param name="stockableConversion"> stockableConversion. </param>
+             /// <returns> Builder. </returns>
+            public Builder StockableConversion(Models.CatalogStockConversion stockableConversion)
+            {
+                this.stockableConversion = stockableConversion;
                 return this;
             }
 
@@ -619,7 +680,9 @@ namespace Square.Models
                     this.availableForBooking,
                     this.itemOptionValues,
                     this.measurementUnitId,
-                    this.teamMemberIds);
+                    this.stockable,
+                    this.teamMemberIds,
+                    this.stockableConversion);
             }
         }
     }

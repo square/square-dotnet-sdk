@@ -95,13 +95,13 @@ var bodyChanges0Adjustment = new InventoryAdjustment.Builder()
     .Id("id6")
     .ReferenceId("reference_id4")
     .FromState("SOLD")
-    .ToState("IN_TRANSIT_TO")
+    .ToState("SOLD_ONLINE")
     .LocationId("location_id0")
     .Build();
 var bodyChanges0Transfer = new InventoryTransfer.Builder()
     .Id("id0")
     .ReferenceId("reference_id8")
-    .State("SOLD")
+    .State("UNLINKED_RETURN")
     .FromLocationId("from_location_id2")
     .ToLocationId("to_location_id2")
     .Build();
@@ -234,7 +234,7 @@ bodyCatalogObjectIds.Add("W62UWFY35CWMYGVWK6TWJDNI");
 var bodyLocationIds = new List<string>();
 bodyLocationIds.Add("59TNP9SA8VGDA");
 var bodyStates = new List<string>();
-bodyStates.Add("IN_TRANSIT_TO");
+bodyStates.Add("SUPPORTED_BY_NEWER_VERSION");
 var body = new BatchRetrieveInventoryCountsRequest.Builder()
     .CatalogObjectIds(bodyCatalogObjectIds)
     .LocationIds(bodyLocationIds)

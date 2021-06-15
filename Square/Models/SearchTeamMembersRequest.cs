@@ -40,14 +40,14 @@ namespace Square.Models
         public Models.SearchTeamMembersQuery Query { get; }
 
         /// <summary>
-        /// The maximum number of `TeamMember` objects in a page (25 by default).
+        /// The maximum number of `TeamMember` objects in a page (100 by default).
         /// </summary>
         [JsonProperty("limit", NullValueHandling = NullValueHandling.Ignore)]
         public int? Limit { get; }
 
         /// <summary>
-        /// The opaque cursor for fetching the next page. Read about
-        /// [pagination](https://developer.squareup.com/docs/working-with-apis/pagination) with Square APIs for more information.
+        /// The opaque cursor for fetching the next page. For more information, see
+        /// [pagination](https://developer.squareup.com/docs/working-with-apis/pagination).
         /// </summary>
         [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
         public string Cursor { get; }
