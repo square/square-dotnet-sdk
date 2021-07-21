@@ -15,39 +15,26 @@ namespace Square.Http.Client
         /// Initializes a new instance of the <see cref="HttpClientConfiguration"/>
         /// class.
         /// </summary>
-        internal HttpClientConfiguration()
-        {
-            this.Timeout = TimeSpan.FromSeconds(60);
-            this.NumberOfRetries = 0;
-            this.BackoffFactor = 2;
-            this.RetryInterval = 1;
-            this.BackoffMax = TimeSpan.FromSeconds(0);
-            this.StatusCodesToRetry = new List<int>
-            {
-                408, 413, 429, 500, 502, 503, 504, 521, 522, 524,
-            }.ToImmutableList();
-            this.RequestMethodsToRetry = new List<string>
-            {
-                "GET", "PUT",
-            }.Select(val => new HttpMethod(val)).ToImmutableList();
-        }
-
         private HttpClientConfiguration(
             TimeSpan timeout,
             int numberOfRetries,
             int backoffFactor,
             double retryInterval,
-            TimeSpan backoffMax,
+            TimeSpan maximumRetryWaitTime,
             IList<int> statusCodesToRetry,
-            IList<HttpMethod> requestMethodsToRetry)
+            IList<HttpMethod> requestMethodsToRetry,
+            HttpClient httpClientInstance,
+            bool overrideHttpClientConfiguration)
         {
             this.Timeout = timeout;
             this.NumberOfRetries = numberOfRetries;
             this.BackoffFactor = backoffFactor;
             this.RetryInterval = retryInterval;
-            this.BackoffMax = backoffMax;
+            this.MaximumRetryWaitTime = maximumRetryWaitTime;
             this.StatusCodesToRetry = statusCodesToRetry;
             this.RequestMethodsToRetry = requestMethodsToRetry;
+            this.HttpClientInstance = httpClientInstance;
+            this.OverrideHttpClientConfiguration = overrideHttpClientConfiguration;
         }
 
         /// <summary>
@@ -71,9 +58,9 @@ namespace Square.Http.Client
         public double RetryInterval { get; }
 
         /// <summary>
-        /// Gets The maximum back off time.
+        /// Gets The maximum retry wait time.
         /// </summary>
-        public TimeSpan BackoffMax { get; }
+        public TimeSpan MaximumRetryWaitTime { get; }
 
         /// <summary>
         /// Gets List of Http status codes to invoke retry.
@@ -85,6 +72,16 @@ namespace Square.Http.Client
         /// </summary>
         public IList<HttpMethod> RequestMethodsToRetry { get; }
 
+        /// <summary>
+        /// Gets HttpClient instance used to make the HTTP calls
+        /// </summary>
+        public HttpClient HttpClientInstance { get; }
+
+        /// <summary>
+        /// Gets Boolean which allows the SDK to override http client instance's settings used for features like retries, timeouts etc.
+        /// </summary>
+        public bool OverrideHttpClientConfiguration { get; }
+
         /// <inheritdoc/>
         public override string ToString()
         {
@@ -93,9 +90,11 @@ namespace Square.Http.Client
                 $"{this.NumberOfRetries} , " +
                 $"{this.BackoffFactor} , " +
                 $"{this.RetryInterval} , " +
-                $"{this.BackoffMax} , " +
+                $"{this.MaximumRetryWaitTime} , " +
                 $"{this.StatusCodesToRetry} , " +
-                $"{this.RequestMethodsToRetry} ";
+                $"{this.RequestMethodsToRetry} , " +
+                $"{this.HttpClientInstance} , " +
+                $"{this.OverrideHttpClientConfiguration} ";
         }
 
         /// <summary>
@@ -109,9 +108,10 @@ namespace Square.Http.Client
                 .NumberOfRetries(this.NumberOfRetries)
                 .BackoffFactor(this.BackoffFactor)
                 .RetryInterval(this.RetryInterval)
-                .BackoffMax(this.BackoffMax)
+                .MaximumRetryWaitTime(this.MaximumRetryWaitTime)
                 .StatusCodesToRetry(this.StatusCodesToRetry)
-                .RequestMethodsToRetry(this.RequestMethodsToRetry);
+                .RequestMethodsToRetry(this.RequestMethodsToRetry)
+                .HttpClientInstance(this.HttpClientInstance, this.OverrideHttpClientConfiguration);
 
             return builder;
         }
@@ -125,7 +125,7 @@ namespace Square.Http.Client
             private int numberOfRetries = 0;
             private int backoffFactor = 2;
             private double retryInterval = 1;
-            private TimeSpan backoffMax = TimeSpan.FromSeconds(0);
+            private TimeSpan maximumRetryWaitTime = TimeSpan.FromSeconds(0);
             private IList<int> statusCodesToRetry = new List<int>
             {
                 408, 413, 429, 500, 502, 503, 504, 521, 522, 524,
@@ -134,6 +134,8 @@ namespace Square.Http.Client
             {
                 "GET", "PUT",
             }.Select(val => new HttpMethod(val)).ToImmutableList();
+            private HttpClient httpClientInstance = new HttpClient();
+            private bool overrideHttpClientConfiguration = true;
 
             /// <summary>
             /// Sets the Timeout.
@@ -180,13 +182,13 @@ namespace Square.Http.Client
             }
 
             /// <summary>
-            /// Sets the BackoffMax.
+            /// Sets the MaximumRetryWaitTime.
             /// </summary>
-            /// <param name="backoffMax"> BackoffMax. </param>
+            /// <param name="maximumRetryWaitTime"> MaximumRetryWaitTime. </param>
             /// <returns>Builder.</returns>
-            public Builder BackoffMax(TimeSpan backoffMax)
+            public Builder MaximumRetryWaitTime(TimeSpan maximumRetryWaitTime)
             {
-                this.backoffMax = backoffMax.TotalSeconds < 0 ? TimeSpan.FromSeconds(0) : backoffMax;
+                this.maximumRetryWaitTime = maximumRetryWaitTime.TotalSeconds < 0 ? TimeSpan.FromSeconds(0) : maximumRetryWaitTime;
                 return this;
             }
 
@@ -213,6 +215,19 @@ namespace Square.Http.Client
             }
 
             /// <summary>
+            /// Sets the HttpClientInstance.
+            /// </summary>
+            /// <param name="httpClientInstance"> HttpClientInstance. </param>
+            /// <param name="overrideHttpClientConfiguration"> OverrideHttpClientConfiguration. </param>
+            /// <returns>Builder.</returns>
+            public Builder HttpClientInstance(HttpClient httpClientInstance, bool overrideHttpClientConfiguration = true)
+            {
+                this.httpClientInstance = httpClientInstance ?? new HttpClient();
+                this.overrideHttpClientConfiguration = overrideHttpClientConfiguration;
+                return this;
+            }
+
+            /// <summary>
             /// Creates an object of the HttpClientConfiguration using the values provided for the builder.
             /// </summary>
             /// <returns>HttpClientConfiguration.</returns>
@@ -223,9 +238,11 @@ namespace Square.Http.Client
                         this.numberOfRetries,
                         this.backoffFactor,
                         this.retryInterval,
-                        this.backoffMax,
+                        this.maximumRetryWaitTime,
                         this.statusCodesToRetry,
-                        this.requestMethodsToRetry);
+                        this.requestMethodsToRetry,
+                        this.httpClientInstance,
+                        this.overrideHttpClientConfiguration);
             }
         }
     }

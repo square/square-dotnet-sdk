@@ -138,6 +138,10 @@ namespace Square.Models
 
         /// <summary>
         /// The ID of the [customer]($m/Customer) associated with the order.
+        /// __IMPORTANT:__ You should specify a `customer_id` if you want the corresponding payment transactions
+        /// to be explicitly linked to the customer in the Seller Dashboard. If this field is omitted, the
+        /// `customer_id` assigned to any underlying `Payment` objects is ignored and might result in the
+        /// creation of new [instant profiles](https://developer.squareup.com/docs/customers-api/what-it-does#instant-profiles).
         /// </summary>
         [JsonProperty("customer_id", NullValueHandling = NullValueHandling.Ignore)]
         public string CustomerId { get; }

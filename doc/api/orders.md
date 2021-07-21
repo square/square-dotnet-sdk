@@ -66,6 +66,7 @@ var bodyOrderLineItems0QuantityUnitMeasurementUnit = new MeasurementUnit.Builder
 var bodyOrderLineItems0QuantityUnit = new OrderQuantityUnit.Builder()
     .MeasurementUnit(bodyOrderLineItems0QuantityUnitMeasurementUnit)
     .Precision(189)
+    .CatalogVersion(133L)
     .Build();
 var bodyOrderLineItems0BasePriceMoney = new Money.Builder()
     .Amount(1599L)
@@ -96,6 +97,7 @@ var bodyOrderLineItems1QuantityUnitMeasurementUnit = new MeasurementUnit.Builder
 var bodyOrderLineItems1QuantityUnit = new OrderQuantityUnit.Builder()
     .MeasurementUnit(bodyOrderLineItems1QuantityUnitMeasurementUnit)
     .Precision(188)
+    .CatalogVersion(134L)
     .Build();
 var bodyOrderLineItems1Modifiers = new List<OrderLineItemModifier>();
 
@@ -103,16 +105,12 @@ var bodyOrderLineItems1Modifiers0BasePriceMoney = new Money.Builder()
     .Amount(53L)
     .Currency("TTD")
     .Build();
-var bodyOrderLineItems1Modifiers0TotalPriceMoney = new Money.Builder()
-    .Amount(51L)
-    .Currency("EUR")
-    .Build();
 var bodyOrderLineItems1Modifiers0 = new OrderLineItemModifier.Builder()
     .Uid("uid1")
     .CatalogObjectId("CHQX7Y4KY6N5KINJKZCFURPZ")
+    .CatalogVersion(69L)
     .Name("name1")
     .BasePriceMoney(bodyOrderLineItems1Modifiers0BasePriceMoney)
-    .TotalPriceMoney(bodyOrderLineItems1Modifiers0TotalPriceMoney)
     .Build();
 bodyOrderLineItems1Modifiers.Add(bodyOrderLineItems1Modifiers0);
 
@@ -146,6 +144,7 @@ var bodyOrderTaxes = new List<OrderLineItemTax>();
 var bodyOrderTaxes0 = new OrderLineItemTax.Builder()
     .Uid("state-sales-tax")
     .CatalogObjectId("catalog_object_id1")
+    .CatalogVersion(189L)
     .Name("State Sales Tax")
     .Type("UNKNOWN_TAX")
     .Percentage("9")
@@ -158,6 +157,7 @@ var bodyOrderDiscounts = new List<OrderLineItemDiscount>();
 var bodyOrderDiscounts0 = new OrderLineItemDiscount.Builder()
     .Uid("labor-day-sale")
     .CatalogObjectId("catalog_object_id5")
+    .CatalogVersion(89L)
     .Name("Labor Day Sale")
     .Type("FIXED_PERCENTAGE")
     .Percentage("5")
@@ -168,9 +168,9 @@ bodyOrderDiscounts.Add(bodyOrderDiscounts0);
 var bodyOrderDiscounts1 = new OrderLineItemDiscount.Builder()
     .Uid("membership-discount")
     .CatalogObjectId("DB7L55ZH2BGWI4H23ULIWOQ7")
+    .CatalogVersion(90L)
     .Name("name2")
     .Type("FIXED_AMOUNT")
-    .Percentage("percentage0")
     .Scope("ORDER")
     .Build();
 bodyOrderDiscounts.Add(bodyOrderDiscounts1);
@@ -182,9 +182,9 @@ var bodyOrderDiscounts2AmountMoney = new Money.Builder()
 var bodyOrderDiscounts2 = new OrderLineItemDiscount.Builder()
     .Uid("one-dollar-off")
     .CatalogObjectId("catalog_object_id7")
+    .CatalogVersion(91L)
     .Name("Sale - $1.00 off")
     .Type("VARIABLE_PERCENTAGE")
-    .Percentage("percentage1")
     .AmountMoney(bodyOrderDiscounts2AmountMoney)
     .Scope("LINE_ITEM")
     .Build();
@@ -294,6 +294,7 @@ var bodyOrderLineItems0QuantityUnitMeasurementUnit = new MeasurementUnit.Builder
 var bodyOrderLineItems0QuantityUnit = new OrderQuantityUnit.Builder()
     .MeasurementUnit(bodyOrderLineItems0QuantityUnitMeasurementUnit)
     .Precision(189)
+    .CatalogVersion(133L)
     .Build();
 var bodyOrderLineItems0BasePriceMoney = new Money.Builder()
     .Amount(500L)
@@ -324,6 +325,7 @@ var bodyOrderLineItems1QuantityUnitMeasurementUnit = new MeasurementUnit.Builder
 var bodyOrderLineItems1QuantityUnit = new OrderQuantityUnit.Builder()
     .MeasurementUnit(bodyOrderLineItems1QuantityUnitMeasurementUnit)
     .Precision(188)
+    .CatalogVersion(134L)
     .Build();
 var bodyOrderLineItems1BasePriceMoney = new Money.Builder()
     .Amount(300L)
@@ -345,6 +347,7 @@ var bodyOrderDiscounts = new List<OrderLineItemDiscount>();
 var bodyOrderDiscounts0 = new OrderLineItemDiscount.Builder()
     .Uid("uid1")
     .CatalogObjectId("catalog_object_id5")
+    .CatalogVersion(89L)
     .Name("50% Off")
     .Type("FIXED_PERCENTAGE")
     .Percentage("50")
@@ -598,6 +601,7 @@ var bodyOrderLineItems0QuantityUnitMeasurementUnit = new MeasurementUnit.Builder
 var bodyOrderLineItems0QuantityUnit = new OrderQuantityUnit.Builder()
     .MeasurementUnit(bodyOrderLineItems0QuantityUnitMeasurementUnit)
     .Precision(189)
+    .CatalogVersion(133L)
     .Build();
 var bodyOrderLineItems0 = new OrderLineItem.Builder(
         "quantity7")
@@ -623,6 +627,7 @@ var bodyOrderLineItems1QuantityUnitMeasurementUnit = new MeasurementUnit.Builder
 var bodyOrderLineItems1QuantityUnit = new OrderQuantityUnit.Builder()
     .MeasurementUnit(bodyOrderLineItems1QuantityUnitMeasurementUnit)
     .Precision(188)
+    .CatalogVersion(134L)
     .Build();
 var bodyOrderLineItems1 = new OrderLineItem.Builder(
         "quantity6")

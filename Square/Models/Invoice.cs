@@ -105,7 +105,9 @@ namespace Square.Models
 
         /// <summary>
         /// The ID of the [order]($m/Order) for which the invoice is created.
-        /// This order must be in the `OPEN` state. This field is required when creating an invoice.
+        /// This field is required when creating an invoice, and the order must be in the `OPEN` state.
+        /// To view the line items and other information for the associated order, call the
+        /// [RetrieveOrder]($e/Orders/RetrieveOrder) endpoint using the order ID.
         /// </summary>
         [JsonProperty("order_id", NullValueHandling = NullValueHandling.Ignore)]
         public string OrderId { get; }

@@ -23,6 +23,7 @@ namespace Square.Models
         /// <param name="uid">uid.</param>
         /// <param name="sourceModifierUid">source_modifier_uid.</param>
         /// <param name="catalogObjectId">catalog_object_id.</param>
+        /// <param name="catalogVersion">catalog_version.</param>
         /// <param name="name">name.</param>
         /// <param name="basePriceMoney">base_price_money.</param>
         /// <param name="totalPriceMoney">total_price_money.</param>
@@ -30,6 +31,7 @@ namespace Square.Models
             string uid = null,
             string sourceModifierUid = null,
             string catalogObjectId = null,
+            long? catalogVersion = null,
             string name = null,
             Models.Money basePriceMoney = null,
             Models.Money totalPriceMoney = null)
@@ -37,6 +39,7 @@ namespace Square.Models
             this.Uid = uid;
             this.SourceModifierUid = sourceModifierUid;
             this.CatalogObjectId = catalogObjectId;
+            this.CatalogVersion = catalogVersion;
             this.Name = name;
             this.BasePriceMoney = basePriceMoney;
             this.TotalPriceMoney = totalPriceMoney;
@@ -60,6 +63,12 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("catalog_object_id", NullValueHandling = NullValueHandling.Ignore)]
         public string CatalogObjectId { get; }
+
+        /// <summary>
+        /// The version of the catalog object that this line item modifier references.
+        /// </summary>
+        [JsonProperty("catalog_version", NullValueHandling = NullValueHandling.Ignore)]
+        public long? CatalogVersion { get; }
 
         /// <summary>
         /// The name of the item modifier.
@@ -116,6 +125,7 @@ namespace Square.Models
                 ((this.Uid == null && other.Uid == null) || (this.Uid?.Equals(other.Uid) == true)) &&
                 ((this.SourceModifierUid == null && other.SourceModifierUid == null) || (this.SourceModifierUid?.Equals(other.SourceModifierUid) == true)) &&
                 ((this.CatalogObjectId == null && other.CatalogObjectId == null) || (this.CatalogObjectId?.Equals(other.CatalogObjectId) == true)) &&
+                ((this.CatalogVersion == null && other.CatalogVersion == null) || (this.CatalogVersion?.Equals(other.CatalogVersion) == true)) &&
                 ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
                 ((this.BasePriceMoney == null && other.BasePriceMoney == null) || (this.BasePriceMoney?.Equals(other.BasePriceMoney) == true)) &&
                 ((this.TotalPriceMoney == null && other.TotalPriceMoney == null) || (this.TotalPriceMoney?.Equals(other.TotalPriceMoney) == true));
@@ -124,7 +134,7 @@ namespace Square.Models
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 909107113;
+            int hashCode = -1205555538;
 
             if (this.Uid != null)
             {
@@ -139,6 +149,11 @@ namespace Square.Models
             if (this.CatalogObjectId != null)
             {
                hashCode += this.CatalogObjectId.GetHashCode();
+            }
+
+            if (this.CatalogVersion != null)
+            {
+               hashCode += this.CatalogVersion.GetHashCode();
             }
 
             if (this.Name != null)
@@ -168,6 +183,7 @@ namespace Square.Models
             toStringOutput.Add($"this.Uid = {(this.Uid == null ? "null" : this.Uid == string.Empty ? "" : this.Uid)}");
             toStringOutput.Add($"this.SourceModifierUid = {(this.SourceModifierUid == null ? "null" : this.SourceModifierUid == string.Empty ? "" : this.SourceModifierUid)}");
             toStringOutput.Add($"this.CatalogObjectId = {(this.CatalogObjectId == null ? "null" : this.CatalogObjectId == string.Empty ? "" : this.CatalogObjectId)}");
+            toStringOutput.Add($"this.CatalogVersion = {(this.CatalogVersion == null ? "null" : this.CatalogVersion.ToString())}");
             toStringOutput.Add($"this.Name = {(this.Name == null ? "null" : this.Name == string.Empty ? "" : this.Name)}");
             toStringOutput.Add($"this.BasePriceMoney = {(this.BasePriceMoney == null ? "null" : this.BasePriceMoney.ToString())}");
             toStringOutput.Add($"this.TotalPriceMoney = {(this.TotalPriceMoney == null ? "null" : this.TotalPriceMoney.ToString())}");
@@ -183,6 +199,7 @@ namespace Square.Models
                 .Uid(this.Uid)
                 .SourceModifierUid(this.SourceModifierUid)
                 .CatalogObjectId(this.CatalogObjectId)
+                .CatalogVersion(this.CatalogVersion)
                 .Name(this.Name)
                 .BasePriceMoney(this.BasePriceMoney)
                 .TotalPriceMoney(this.TotalPriceMoney);
@@ -197,6 +214,7 @@ namespace Square.Models
             private string uid;
             private string sourceModifierUid;
             private string catalogObjectId;
+            private long? catalogVersion;
             private string name;
             private Models.Money basePriceMoney;
             private Models.Money totalPriceMoney;
@@ -231,6 +249,17 @@ namespace Square.Models
             public Builder CatalogObjectId(string catalogObjectId)
             {
                 this.catalogObjectId = catalogObjectId;
+                return this;
+            }
+
+             /// <summary>
+             /// CatalogVersion.
+             /// </summary>
+             /// <param name="catalogVersion"> catalogVersion. </param>
+             /// <returns> Builder. </returns>
+            public Builder CatalogVersion(long? catalogVersion)
+            {
+                this.catalogVersion = catalogVersion;
                 return this;
             }
 
@@ -277,6 +306,7 @@ namespace Square.Models
                     this.uid,
                     this.sourceModifierUid,
                     this.catalogObjectId,
+                    this.catalogVersion,
                     this.name,
                     this.basePriceMoney,
                     this.totalPriceMoney);

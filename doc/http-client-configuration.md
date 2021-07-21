@@ -11,9 +11,11 @@ HttpClientConfiguration represents the current state of the Http Client.
 | NumberOfRetries | Number of times the request is retried. | `int` |
 | BackoffFactor | Exponential backoff factor for duration between retry calls. | `int` |
 | RetryInterval | The time interval between the endpoint calls. | `double` |
-| BackoffMax | The maximum back off time. | `TimeSpan` |
+| MaximumRetryWaitTime | The maximum retry wait time. | `TimeSpan` |
 | StatusCodesToRetry | List of Http status codes to invoke retry. | `IList<int>` |
 | RequestMethodsToRetry | List of Http request methods to invoke retry. | `IList<HttpMethod>` |
+| HttpClientInstance | HttpClient instance used to make the HTTP calls | `HttpClient` |
+| OverrideHttpClientConfiguration | Boolean which allows the SDK to override http client instance's settings used for features like retries, timeouts etc. | `bool` |
 
 ## Methods
 

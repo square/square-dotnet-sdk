@@ -13,31 +13,23 @@ namespace Square.Models
     using Square.Utilities;
 
     /// <summary>
-    /// BalancePaymentDetails.
+    /// DigitalWalletDetails.
     /// </summary>
-    public class BalancePaymentDetails
+    public class DigitalWalletDetails
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="BalancePaymentDetails"/> class.
+        /// Initializes a new instance of the <see cref="DigitalWalletDetails"/> class.
         /// </summary>
-        /// <param name="accountId">account_id.</param>
         /// <param name="status">status.</param>
-        public BalancePaymentDetails(
-            string accountId = null,
+        public DigitalWalletDetails(
             string status = null)
         {
-            this.AccountId = accountId;
             this.Status = status;
         }
 
         /// <summary>
-        /// The ID of the account used to fund the payment.
-        /// </summary>
-        [JsonProperty("account_id", NullValueHandling = NullValueHandling.Ignore)]
-        public string AccountId { get; }
-
-        /// <summary>
-        /// The balance payment’s current state. The state can be COMPLETED or FAILED.
+        /// The status of the `WALLET` payment. The status can be `AUTHORIZED`, `CAPTURED`, `VOIDED`, or
+        /// `FAILED`.
         /// </summary>
         [JsonProperty("status", NullValueHandling = NullValueHandling.Ignore)]
         public string Status { get; }
@@ -49,7 +41,7 @@ namespace Square.Models
 
             this.ToString(toStringOutput);
 
-            return $"BalancePaymentDetails : ({string.Join(", ", toStringOutput)})";
+            return $"DigitalWalletDetails : ({string.Join(", ", toStringOutput)})";
         }
 
         /// <inheritdoc/>
@@ -65,20 +57,14 @@ namespace Square.Models
                 return true;
             }
 
-            return obj is BalancePaymentDetails other &&
-                ((this.AccountId == null && other.AccountId == null) || (this.AccountId?.Equals(other.AccountId) == true)) &&
+            return obj is DigitalWalletDetails other &&
                 ((this.Status == null && other.Status == null) || (this.Status?.Equals(other.Status) == true));
         }
 
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1939833591;
-
-            if (this.AccountId != null)
-            {
-               hashCode += this.AccountId.GetHashCode();
-            }
+            int hashCode = 821484446;
 
             if (this.Status != null)
             {
@@ -94,7 +80,6 @@ namespace Square.Models
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.AccountId = {(this.AccountId == null ? "null" : this.AccountId == string.Empty ? "" : this.AccountId)}");
             toStringOutput.Add($"this.Status = {(this.Status == null ? "null" : this.Status == string.Empty ? "" : this.Status)}");
         }
 
@@ -105,7 +90,6 @@ namespace Square.Models
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .AccountId(this.AccountId)
                 .Status(this.Status);
             return builder;
         }
@@ -115,19 +99,7 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
-            private string accountId;
             private string status;
-
-             /// <summary>
-             /// AccountId.
-             /// </summary>
-             /// <param name="accountId"> accountId. </param>
-             /// <returns> Builder. </returns>
-            public Builder AccountId(string accountId)
-            {
-                this.accountId = accountId;
-                return this;
-            }
 
              /// <summary>
              /// Status.
@@ -143,11 +115,10 @@ namespace Square.Models
             /// <summary>
             /// Builds class object.
             /// </summary>
-            /// <returns> BalancePaymentDetails. </returns>
-            public BalancePaymentDetails Build()
+            /// <returns> DigitalWalletDetails. </returns>
+            public DigitalWalletDetails Build()
             {
-                return new BalancePaymentDetails(
-                    this.accountId,
+                return new DigitalWalletDetails(
                     this.status);
             }
         }

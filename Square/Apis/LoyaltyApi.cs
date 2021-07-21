@@ -250,10 +250,11 @@ namespace Square.Apis
         /// The endpoint reads the order to compute points to add to the buyer's account..
         /// - If you are not using the Orders API to manage orders, .
         /// you first perform a client-side computation to compute the points.  .
-        /// For spend-based and visit-based programs, you can call .
-        /// [CalculateLoyaltyPoints]($e/Loyalty/CalculateLoyaltyPoints) to compute the points. For more information, .
-        /// see [Loyalty Program Overview](https://developer.squareup.com/docs/loyalty/overview). .
-        /// You then provide the points in a request to this endpoint..
+        /// For spend-based and visit-based programs, you can first call .
+        /// [CalculateLoyaltyPoints]($e/Loyalty/CalculateLoyaltyPoints) to compute the points  .
+        /// that you provide to this endpoint. .
+        /// __Note:__ The country of the seller's Square account determines whether tax is included in the purchase amount when accruing points for spend-based and visit-based programs. .
+        /// For more information, see [Availability of Square Loyalty](https://developer.squareup.com/docs/loyalty-api/overview#loyalty-market-availability)..
         /// </summary>
         /// <param name="accountId">Required parameter: The [loyalty account]($m/LoyaltyAccount) ID to which to add the points..</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
@@ -273,10 +274,11 @@ namespace Square.Apis
         /// The endpoint reads the order to compute points to add to the buyer's account..
         /// - If you are not using the Orders API to manage orders, .
         /// you first perform a client-side computation to compute the points.  .
-        /// For spend-based and visit-based programs, you can call .
-        /// [CalculateLoyaltyPoints]($e/Loyalty/CalculateLoyaltyPoints) to compute the points. For more information, .
-        /// see [Loyalty Program Overview](https://developer.squareup.com/docs/loyalty/overview). .
-        /// You then provide the points in a request to this endpoint..
+        /// For spend-based and visit-based programs, you can first call .
+        /// [CalculateLoyaltyPoints]($e/Loyalty/CalculateLoyaltyPoints) to compute the points  .
+        /// that you provide to this endpoint. .
+        /// __Note:__ The country of the seller's Square account determines whether tax is included in the purchase amount when accruing points for spend-based and visit-based programs. .
+        /// For more information, see [Availability of Square Loyalty](https://developer.squareup.com/docs/loyalty-api/overview#loyalty-market-availability)..
         /// </summary>
         /// <param name="accountId">Required parameter: The [loyalty account]($m/LoyaltyAccount) ID to which to add the points..</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
@@ -645,6 +647,8 @@ namespace Square.Apis
         /// the request for the endpoint to calculate the points..
         /// An application might call this endpoint to show the points that a buyer can earn with the .
         /// specific purchase..
+        /// __Note:__ The country of the seller's Square account determines whether tax is included in the purchase amount when accruing points for spend-based and visit-based programs. .
+        /// For more information, see [Availability of Square Loyalty](https://developer.squareup.com/docs/loyalty-api/overview#loyalty-market-availability)..
         /// </summary>
         /// <param name="programId">Required parameter: The [loyalty program]($m/LoyaltyProgram) ID, which defines the rules for accruing points..</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
@@ -666,6 +670,8 @@ namespace Square.Apis
         /// the request for the endpoint to calculate the points..
         /// An application might call this endpoint to show the points that a buyer can earn with the .
         /// specific purchase..
+        /// __Note:__ The country of the seller's Square account determines whether tax is included in the purchase amount when accruing points for spend-based and visit-based programs. .
+        /// For more information, see [Availability of Square Loyalty](https://developer.squareup.com/docs/loyalty-api/overview#loyalty-market-availability)..
         /// </summary>
         /// <param name="programId">Required parameter: The [loyalty program]($m/LoyaltyProgram) ID, which defines the rules for accruing points..</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>

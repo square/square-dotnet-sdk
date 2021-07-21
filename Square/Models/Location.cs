@@ -46,6 +46,7 @@ namespace Square.Models
         /// <param name="posBackgroundUrl">pos_background_url.</param>
         /// <param name="mcc">mcc.</param>
         /// <param name="fullFormatLogoUrl">full_format_logo_url.</param>
+        /// <param name="taxIds">tax_ids.</param>
         public Location(
             string id = null,
             string name = null,
@@ -72,7 +73,8 @@ namespace Square.Models
             string logoUrl = null,
             string posBackgroundUrl = null,
             string mcc = null,
-            string fullFormatLogoUrl = null)
+            string fullFormatLogoUrl = null,
+            Models.TaxIds taxIds = null)
         {
             this.Id = id;
             this.Name = name;
@@ -100,6 +102,7 @@ namespace Square.Models
             this.PosBackgroundUrl = posBackgroundUrl;
             this.Mcc = mcc;
             this.FullFormatLogoUrl = fullFormatLogoUrl;
+            this.TaxIds = taxIds;
         }
 
         /// <summary>
@@ -165,6 +168,7 @@ namespace Square.Models
         /// <summary>
         /// The language associated with the location, in
         /// [BCP 47 format](https://tools.ietf.org/html/bcp47#appendix-A).
+        /// For more information, see [Location language code](https://developer.squareup.com/docs/locations-api#location-language-code).
         /// </summary>
         [JsonProperty("language_code", NullValueHandling = NullValueHandling.Ignore)]
         public string LanguageCode { get; }
@@ -277,6 +281,12 @@ namespace Square.Models
         [JsonProperty("full_format_logo_url", NullValueHandling = NullValueHandling.Ignore)]
         public string FullFormatLogoUrl { get; }
 
+        /// <summary>
+        /// The tax IDs that a Location is operating under.
+        /// </summary>
+        [JsonProperty("tax_ids", NullValueHandling = NullValueHandling.Ignore)]
+        public Models.TaxIds TaxIds { get; }
+
         /// <inheritdoc/>
         public override string ToString()
         {
@@ -326,13 +336,14 @@ namespace Square.Models
                 ((this.LogoUrl == null && other.LogoUrl == null) || (this.LogoUrl?.Equals(other.LogoUrl) == true)) &&
                 ((this.PosBackgroundUrl == null && other.PosBackgroundUrl == null) || (this.PosBackgroundUrl?.Equals(other.PosBackgroundUrl) == true)) &&
                 ((this.Mcc == null && other.Mcc == null) || (this.Mcc?.Equals(other.Mcc) == true)) &&
-                ((this.FullFormatLogoUrl == null && other.FullFormatLogoUrl == null) || (this.FullFormatLogoUrl?.Equals(other.FullFormatLogoUrl) == true));
+                ((this.FullFormatLogoUrl == null && other.FullFormatLogoUrl == null) || (this.FullFormatLogoUrl?.Equals(other.FullFormatLogoUrl) == true)) &&
+                ((this.TaxIds == null && other.TaxIds == null) || (this.TaxIds?.Equals(other.TaxIds) == true));
         }
 
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -255518735;
+            int hashCode = 232879438;
 
             if (this.Id != null)
             {
@@ -464,6 +475,11 @@ namespace Square.Models
                hashCode += this.FullFormatLogoUrl.GetHashCode();
             }
 
+            if (this.TaxIds != null)
+            {
+               hashCode += this.TaxIds.GetHashCode();
+            }
+
             return hashCode;
         }
 
@@ -499,6 +515,7 @@ namespace Square.Models
             toStringOutput.Add($"this.PosBackgroundUrl = {(this.PosBackgroundUrl == null ? "null" : this.PosBackgroundUrl == string.Empty ? "" : this.PosBackgroundUrl)}");
             toStringOutput.Add($"this.Mcc = {(this.Mcc == null ? "null" : this.Mcc == string.Empty ? "" : this.Mcc)}");
             toStringOutput.Add($"this.FullFormatLogoUrl = {(this.FullFormatLogoUrl == null ? "null" : this.FullFormatLogoUrl == string.Empty ? "" : this.FullFormatLogoUrl)}");
+            toStringOutput.Add($"this.TaxIds = {(this.TaxIds == null ? "null" : this.TaxIds.ToString())}");
         }
 
         /// <summary>
@@ -533,7 +550,8 @@ namespace Square.Models
                 .LogoUrl(this.LogoUrl)
                 .PosBackgroundUrl(this.PosBackgroundUrl)
                 .Mcc(this.Mcc)
-                .FullFormatLogoUrl(this.FullFormatLogoUrl);
+                .FullFormatLogoUrl(this.FullFormatLogoUrl)
+                .TaxIds(this.TaxIds);
             return builder;
         }
 
@@ -568,6 +586,7 @@ namespace Square.Models
             private string posBackgroundUrl;
             private string mcc;
             private string fullFormatLogoUrl;
+            private Models.TaxIds taxIds;
 
              /// <summary>
              /// Id.
@@ -855,6 +874,17 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// TaxIds.
+             /// </summary>
+             /// <param name="taxIds"> taxIds. </param>
+             /// <returns> Builder. </returns>
+            public Builder TaxIds(Models.TaxIds taxIds)
+            {
+                this.taxIds = taxIds;
+                return this;
+            }
+
             /// <summary>
             /// Builds class object.
             /// </summary>
@@ -887,7 +917,8 @@ namespace Square.Models
                     this.logoUrl,
                     this.posBackgroundUrl,
                     this.mcc,
-                    this.fullFormatLogoUrl);
+                    this.fullFormatLogoUrl,
+                    this.taxIds);
             }
         }
     }

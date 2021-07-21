@@ -279,7 +279,8 @@ namespace Square.Helpers
             // if file does not exist locally, download it
             if (!fileInfo.Exists)
             {
-                IHttpClient client = new HttpClientWrapper();
+                var httpClientConfiguration = new HttpClientConfiguration.Builder().Build();
+                IHttpClient client = new HttpClientWrapper(httpClientConfiguration);
                 HttpRequest req = client.Get(url);
                 HttpResponse resp = client.ExecuteAsBinary(req);
                 fileStream = System.IO.File.Create(filePath);

@@ -22,6 +22,7 @@ namespace Square.Models
         /// </summary>
         /// <param name="uid">uid.</param>
         /// <param name="catalogObjectId">catalog_object_id.</param>
+        /// <param name="catalogVersion">catalog_version.</param>
         /// <param name="name">name.</param>
         /// <param name="type">type.</param>
         /// <param name="percentage">percentage.</param>
@@ -32,6 +33,7 @@ namespace Square.Models
         public OrderLineItemTax(
             string uid = null,
             string catalogObjectId = null,
+            long? catalogVersion = null,
             string name = null,
             string type = null,
             string percentage = null,
@@ -42,6 +44,7 @@ namespace Square.Models
         {
             this.Uid = uid;
             this.CatalogObjectId = catalogObjectId;
+            this.CatalogVersion = catalogVersion;
             this.Name = name;
             this.Type = type;
             this.Percentage = percentage;
@@ -62,6 +65,12 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("catalog_object_id", NullValueHandling = NullValueHandling.Ignore)]
         public string CatalogObjectId { get; }
+
+        /// <summary>
+        /// The version of the catalog object that this tax references.
+        /// </summary>
+        [JsonProperty("catalog_version", NullValueHandling = NullValueHandling.Ignore)]
+        public long? CatalogVersion { get; }
 
         /// <summary>
         /// The tax's name.
@@ -152,6 +161,7 @@ namespace Square.Models
             return obj is OrderLineItemTax other &&
                 ((this.Uid == null && other.Uid == null) || (this.Uid?.Equals(other.Uid) == true)) &&
                 ((this.CatalogObjectId == null && other.CatalogObjectId == null) || (this.CatalogObjectId?.Equals(other.CatalogObjectId) == true)) &&
+                ((this.CatalogVersion == null && other.CatalogVersion == null) || (this.CatalogVersion?.Equals(other.CatalogVersion) == true)) &&
                 ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
                 ((this.Type == null && other.Type == null) || (this.Type?.Equals(other.Type) == true)) &&
                 ((this.Percentage == null && other.Percentage == null) || (this.Percentage?.Equals(other.Percentage) == true)) &&
@@ -164,7 +174,7 @@ namespace Square.Models
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -687616842;
+            int hashCode = 670391105;
 
             if (this.Uid != null)
             {
@@ -174,6 +184,11 @@ namespace Square.Models
             if (this.CatalogObjectId != null)
             {
                hashCode += this.CatalogObjectId.GetHashCode();
+            }
+
+            if (this.CatalogVersion != null)
+            {
+               hashCode += this.CatalogVersion.GetHashCode();
             }
 
             if (this.Name != null)
@@ -222,6 +237,7 @@ namespace Square.Models
         {
             toStringOutput.Add($"this.Uid = {(this.Uid == null ? "null" : this.Uid == string.Empty ? "" : this.Uid)}");
             toStringOutput.Add($"this.CatalogObjectId = {(this.CatalogObjectId == null ? "null" : this.CatalogObjectId == string.Empty ? "" : this.CatalogObjectId)}");
+            toStringOutput.Add($"this.CatalogVersion = {(this.CatalogVersion == null ? "null" : this.CatalogVersion.ToString())}");
             toStringOutput.Add($"this.Name = {(this.Name == null ? "null" : this.Name == string.Empty ? "" : this.Name)}");
             toStringOutput.Add($"this.Type = {(this.Type == null ? "null" : this.Type.ToString())}");
             toStringOutput.Add($"this.Percentage = {(this.Percentage == null ? "null" : this.Percentage == string.Empty ? "" : this.Percentage)}");
@@ -240,6 +256,7 @@ namespace Square.Models
             var builder = new Builder()
                 .Uid(this.Uid)
                 .CatalogObjectId(this.CatalogObjectId)
+                .CatalogVersion(this.CatalogVersion)
                 .Name(this.Name)
                 .Type(this.Type)
                 .Percentage(this.Percentage)
@@ -257,6 +274,7 @@ namespace Square.Models
         {
             private string uid;
             private string catalogObjectId;
+            private long? catalogVersion;
             private string name;
             private string type;
             private string percentage;
@@ -284,6 +302,17 @@ namespace Square.Models
             public Builder CatalogObjectId(string catalogObjectId)
             {
                 this.catalogObjectId = catalogObjectId;
+                return this;
+            }
+
+             /// <summary>
+             /// CatalogVersion.
+             /// </summary>
+             /// <param name="catalogVersion"> catalogVersion. </param>
+             /// <returns> Builder. </returns>
+            public Builder CatalogVersion(long? catalogVersion)
+            {
+                this.catalogVersion = catalogVersion;
                 return this;
             }
 
@@ -373,6 +402,7 @@ namespace Square.Models
                 return new OrderLineItemTax(
                     this.uid,
                     this.catalogObjectId,
+                    this.catalogVersion,
                     this.name,
                     this.type,
                     this.percentage,

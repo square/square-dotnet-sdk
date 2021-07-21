@@ -26,6 +26,7 @@ namespace Square.Models
         /// <param name="quantityUnit">quantity_unit.</param>
         /// <param name="note">note.</param>
         /// <param name="catalogObjectId">catalog_object_id.</param>
+        /// <param name="catalogVersion">catalog_version.</param>
         /// <param name="variationName">variation_name.</param>
         /// <param name="itemType">item_type.</param>
         /// <param name="metadata">metadata.</param>
@@ -46,6 +47,7 @@ namespace Square.Models
             Models.OrderQuantityUnit quantityUnit = null,
             string note = null,
             string catalogObjectId = null,
+            long? catalogVersion = null,
             string variationName = null,
             string itemType = null,
             IDictionary<string, string> metadata = null,
@@ -66,6 +68,7 @@ namespace Square.Models
             this.QuantityUnit = quantityUnit;
             this.Note = note;
             this.CatalogObjectId = catalogObjectId;
+            this.CatalogVersion = catalogVersion;
             this.VariationName = variationName;
             this.ItemType = itemType;
             this.Metadata = metadata;
@@ -122,6 +125,12 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("catalog_object_id", NullValueHandling = NullValueHandling.Ignore)]
         public string CatalogObjectId { get; }
+
+        /// <summary>
+        /// The version of the catalog object that this line item references.
+        /// </summary>
+        [JsonProperty("catalog_version", NullValueHandling = NullValueHandling.Ignore)]
+        public long? CatalogVersion { get; }
 
         /// <summary>
         /// The name of the variation applied to this line item.
@@ -291,6 +300,7 @@ namespace Square.Models
                 ((this.QuantityUnit == null && other.QuantityUnit == null) || (this.QuantityUnit?.Equals(other.QuantityUnit) == true)) &&
                 ((this.Note == null && other.Note == null) || (this.Note?.Equals(other.Note) == true)) &&
                 ((this.CatalogObjectId == null && other.CatalogObjectId == null) || (this.CatalogObjectId?.Equals(other.CatalogObjectId) == true)) &&
+                ((this.CatalogVersion == null && other.CatalogVersion == null) || (this.CatalogVersion?.Equals(other.CatalogVersion) == true)) &&
                 ((this.VariationName == null && other.VariationName == null) || (this.VariationName?.Equals(other.VariationName) == true)) &&
                 ((this.ItemType == null && other.ItemType == null) || (this.ItemType?.Equals(other.ItemType) == true)) &&
                 ((this.Metadata == null && other.Metadata == null) || (this.Metadata?.Equals(other.Metadata) == true)) &&
@@ -309,7 +319,7 @@ namespace Square.Models
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1998474077;
+            int hashCode = -269037292;
 
             if (this.Uid != null)
             {
@@ -339,6 +349,11 @@ namespace Square.Models
             if (this.CatalogObjectId != null)
             {
                hashCode += this.CatalogObjectId.GetHashCode();
+            }
+
+            if (this.CatalogVersion != null)
+            {
+               hashCode += this.CatalogVersion.GetHashCode();
             }
 
             if (this.VariationName != null)
@@ -421,6 +436,7 @@ namespace Square.Models
             toStringOutput.Add($"this.QuantityUnit = {(this.QuantityUnit == null ? "null" : this.QuantityUnit.ToString())}");
             toStringOutput.Add($"this.Note = {(this.Note == null ? "null" : this.Note == string.Empty ? "" : this.Note)}");
             toStringOutput.Add($"this.CatalogObjectId = {(this.CatalogObjectId == null ? "null" : this.CatalogObjectId == string.Empty ? "" : this.CatalogObjectId)}");
+            toStringOutput.Add($"this.CatalogVersion = {(this.CatalogVersion == null ? "null" : this.CatalogVersion.ToString())}");
             toStringOutput.Add($"this.VariationName = {(this.VariationName == null ? "null" : this.VariationName == string.Empty ? "" : this.VariationName)}");
             toStringOutput.Add($"this.ItemType = {(this.ItemType == null ? "null" : this.ItemType.ToString())}");
             toStringOutput.Add($"Metadata = {(this.Metadata == null ? "null" : this.Metadata.ToString())}");
@@ -449,6 +465,7 @@ namespace Square.Models
                 .QuantityUnit(this.QuantityUnit)
                 .Note(this.Note)
                 .CatalogObjectId(this.CatalogObjectId)
+                .CatalogVersion(this.CatalogVersion)
                 .VariationName(this.VariationName)
                 .ItemType(this.ItemType)
                 .Metadata(this.Metadata)
@@ -476,6 +493,7 @@ namespace Square.Models
             private Models.OrderQuantityUnit quantityUnit;
             private string note;
             private string catalogObjectId;
+            private long? catalogVersion;
             private string variationName;
             private string itemType;
             private IDictionary<string, string> metadata;
@@ -559,6 +577,17 @@ namespace Square.Models
             public Builder CatalogObjectId(string catalogObjectId)
             {
                 this.catalogObjectId = catalogObjectId;
+                return this;
+            }
+
+             /// <summary>
+             /// CatalogVersion.
+             /// </summary>
+             /// <param name="catalogVersion"> catalogVersion. </param>
+             /// <returns> Builder. </returns>
+            public Builder CatalogVersion(long? catalogVersion)
+            {
+                this.catalogVersion = catalogVersion;
                 return this;
             }
 
@@ -718,6 +747,7 @@ namespace Square.Models
                     this.quantityUnit,
                     this.note,
                     this.catalogObjectId,
+                    this.catalogVersion,
                     this.variationName,
                     this.itemType,
                     this.metadata,

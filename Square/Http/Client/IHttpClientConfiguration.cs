@@ -30,9 +30,9 @@ namespace Square.Http.Client
         double RetryInterval { get; }
 
         /// <summary>
-        /// The maximum back off time.
+        /// The maximum retry wait time.
         /// </summary>
-        TimeSpan BackoffMax { get; }
+        TimeSpan MaximumRetryWaitTime { get; }
 
         /// <summary>
         /// List of Http status codes to invoke retry.
@@ -43,5 +43,15 @@ namespace Square.Http.Client
         /// List of Http request methods to invoke retry.
         /// </summary>
         IList<HttpMethod> RequestMethodsToRetry { get; }
+
+        /// <summary>
+        /// HttpClient instance used to make the HTTP calls
+        /// </summary>
+        HttpClient HttpClientInstance { get; }
+
+        /// <summary>
+        /// Boolean which allows the SDK to override http client instance's settings used for features like retries, timeouts etc.
+        /// </summary>
+        bool OverrideHttpClientConfiguration { get; }
     }
 }
