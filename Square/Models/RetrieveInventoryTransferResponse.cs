@@ -14,21 +14,21 @@ namespace Square.Models
     using Square.Utilities;
 
     /// <summary>
-    /// CreateLoyaltyAccountResponse.
+    /// RetrieveInventoryTransferResponse.
     /// </summary>
-    public class CreateLoyaltyAccountResponse
+    public class RetrieveInventoryTransferResponse
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="CreateLoyaltyAccountResponse"/> class.
+        /// Initializes a new instance of the <see cref="RetrieveInventoryTransferResponse"/> class.
         /// </summary>
         /// <param name="errors">errors.</param>
-        /// <param name="loyaltyAccount">loyalty_account.</param>
-        public CreateLoyaltyAccountResponse(
+        /// <param name="transfer">transfer.</param>
+        public RetrieveInventoryTransferResponse(
             IList<Models.Error> errors = null,
-            Models.LoyaltyAccount loyaltyAccount = null)
+            Models.InventoryTransfer transfer = null)
         {
             this.Errors = errors;
-            this.LoyaltyAccount = loyaltyAccount;
+            this.Transfer = transfer;
         }
 
         /// <summary>
@@ -44,11 +44,11 @@ namespace Square.Models
         public IList<Models.Error> Errors { get; }
 
         /// <summary>
-        /// Describes a loyalty account. For more information, see
-        /// [Manage Loyalty Accounts Using the Loyalty API](https://developer.squareup.com/docs/loyalty-api/overview).
+        /// Represents the transfer of a quantity of product inventory at a
+        /// particular time from one location to another.
         /// </summary>
-        [JsonProperty("loyalty_account", NullValueHandling = NullValueHandling.Ignore)]
-        public Models.LoyaltyAccount LoyaltyAccount { get; }
+        [JsonProperty("transfer", NullValueHandling = NullValueHandling.Ignore)]
+        public Models.InventoryTransfer Transfer { get; }
 
         /// <inheritdoc/>
         public override string ToString()
@@ -57,7 +57,7 @@ namespace Square.Models
 
             this.ToString(toStringOutput);
 
-            return $"CreateLoyaltyAccountResponse : ({string.Join(", ", toStringOutput)})";
+            return $"RetrieveInventoryTransferResponse : ({string.Join(", ", toStringOutput)})";
         }
 
         /// <inheritdoc/>
@@ -73,16 +73,16 @@ namespace Square.Models
                 return true;
             }
 
-            return obj is CreateLoyaltyAccountResponse other &&
+            return obj is RetrieveInventoryTransferResponse other &&
                 ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
                 ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true)) &&
-                ((this.LoyaltyAccount == null && other.LoyaltyAccount == null) || (this.LoyaltyAccount?.Equals(other.LoyaltyAccount) == true));
+                ((this.Transfer == null && other.Transfer == null) || (this.Transfer?.Equals(other.Transfer) == true));
         }
 
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -963021991;
+            int hashCode = -1482325954;
 
             if (this.Context != null)
             {
@@ -94,9 +94,9 @@ namespace Square.Models
                hashCode += this.Errors.GetHashCode();
             }
 
-            if (this.LoyaltyAccount != null)
+            if (this.Transfer != null)
             {
-               hashCode += this.LoyaltyAccount.GetHashCode();
+               hashCode += this.Transfer.GetHashCode();
             }
 
             return hashCode;
@@ -109,7 +109,7 @@ namespace Square.Models
         protected void ToString(List<string> toStringOutput)
         {
             toStringOutput.Add($"this.Errors = {(this.Errors == null ? "null" : $"[{string.Join(", ", this.Errors)} ]")}");
-            toStringOutput.Add($"this.LoyaltyAccount = {(this.LoyaltyAccount == null ? "null" : this.LoyaltyAccount.ToString())}");
+            toStringOutput.Add($"this.Transfer = {(this.Transfer == null ? "null" : this.Transfer.ToString())}");
         }
 
         /// <summary>
@@ -120,7 +120,7 @@ namespace Square.Models
         {
             var builder = new Builder()
                 .Errors(this.Errors)
-                .LoyaltyAccount(this.LoyaltyAccount);
+                .Transfer(this.Transfer);
             return builder;
         }
 
@@ -130,7 +130,7 @@ namespace Square.Models
         public class Builder
         {
             private IList<Models.Error> errors;
-            private Models.LoyaltyAccount loyaltyAccount;
+            private Models.InventoryTransfer transfer;
 
              /// <summary>
              /// Errors.
@@ -144,25 +144,25 @@ namespace Square.Models
             }
 
              /// <summary>
-             /// LoyaltyAccount.
+             /// Transfer.
              /// </summary>
-             /// <param name="loyaltyAccount"> loyaltyAccount. </param>
+             /// <param name="transfer"> transfer. </param>
              /// <returns> Builder. </returns>
-            public Builder LoyaltyAccount(Models.LoyaltyAccount loyaltyAccount)
+            public Builder Transfer(Models.InventoryTransfer transfer)
             {
-                this.loyaltyAccount = loyaltyAccount;
+                this.transfer = transfer;
                 return this;
             }
 
             /// <summary>
             /// Builds class object.
             /// </summary>
-            /// <returns> CreateLoyaltyAccountResponse. </returns>
-            public CreateLoyaltyAccountResponse Build()
+            /// <returns> RetrieveInventoryTransferResponse. </returns>
+            public RetrieveInventoryTransferResponse Build()
             {
-                return new CreateLoyaltyAccountResponse(
+                return new RetrieveInventoryTransferResponse(
                     this.errors,
-                    this.loyaltyAccount);
+                    this.transfer);
             }
         }
     }

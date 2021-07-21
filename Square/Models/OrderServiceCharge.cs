@@ -23,6 +23,7 @@ namespace Square.Models
         /// <param name="uid">uid.</param>
         /// <param name="name">name.</param>
         /// <param name="catalogObjectId">catalog_object_id.</param>
+        /// <param name="catalogVersion">catalog_version.</param>
         /// <param name="percentage">percentage.</param>
         /// <param name="amountMoney">amount_money.</param>
         /// <param name="appliedMoney">applied_money.</param>
@@ -32,10 +33,12 @@ namespace Square.Models
         /// <param name="taxable">taxable.</param>
         /// <param name="appliedTaxes">applied_taxes.</param>
         /// <param name="metadata">metadata.</param>
+        /// <param name="type">type.</param>
         public OrderServiceCharge(
             string uid = null,
             string name = null,
             string catalogObjectId = null,
+            long? catalogVersion = null,
             string percentage = null,
             Models.Money amountMoney = null,
             Models.Money appliedMoney = null,
@@ -44,11 +47,13 @@ namespace Square.Models
             string calculationPhase = null,
             bool? taxable = null,
             IList<Models.OrderLineItemAppliedTax> appliedTaxes = null,
-            IDictionary<string, string> metadata = null)
+            IDictionary<string, string> metadata = null,
+            string type = null)
         {
             this.Uid = uid;
             this.Name = name;
             this.CatalogObjectId = catalogObjectId;
+            this.CatalogVersion = catalogVersion;
             this.Percentage = percentage;
             this.AmountMoney = amountMoney;
             this.AppliedMoney = appliedMoney;
@@ -58,6 +63,7 @@ namespace Square.Models
             this.Taxable = taxable;
             this.AppliedTaxes = appliedTaxes;
             this.Metadata = metadata;
+            this.Type = type;
         }
 
         /// <summary>
@@ -77,6 +83,12 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("catalog_object_id", NullValueHandling = NullValueHandling.Ignore)]
         public string CatalogObjectId { get; }
+
+        /// <summary>
+        /// The version of the catalog object that this service charge references.
+        /// </summary>
+        [JsonProperty("catalog_version", NullValueHandling = NullValueHandling.Ignore)]
+        public long? CatalogVersion { get; }
 
         /// <summary>
         /// The service charge percentage as a string representation of a
@@ -179,6 +191,12 @@ namespace Square.Models
         [JsonProperty("metadata", NullValueHandling = NullValueHandling.Ignore)]
         public IDictionary<string, string> Metadata { get; }
 
+        /// <summary>
+        /// Gets or sets Type.
+        /// </summary>
+        [JsonProperty("type", NullValueHandling = NullValueHandling.Ignore)]
+        public string Type { get; }
+
         /// <inheritdoc/>
         public override string ToString()
         {
@@ -206,6 +224,7 @@ namespace Square.Models
                 ((this.Uid == null && other.Uid == null) || (this.Uid?.Equals(other.Uid) == true)) &&
                 ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
                 ((this.CatalogObjectId == null && other.CatalogObjectId == null) || (this.CatalogObjectId?.Equals(other.CatalogObjectId) == true)) &&
+                ((this.CatalogVersion == null && other.CatalogVersion == null) || (this.CatalogVersion?.Equals(other.CatalogVersion) == true)) &&
                 ((this.Percentage == null && other.Percentage == null) || (this.Percentage?.Equals(other.Percentage) == true)) &&
                 ((this.AmountMoney == null && other.AmountMoney == null) || (this.AmountMoney?.Equals(other.AmountMoney) == true)) &&
                 ((this.AppliedMoney == null && other.AppliedMoney == null) || (this.AppliedMoney?.Equals(other.AppliedMoney) == true)) &&
@@ -214,13 +233,14 @@ namespace Square.Models
                 ((this.CalculationPhase == null && other.CalculationPhase == null) || (this.CalculationPhase?.Equals(other.CalculationPhase) == true)) &&
                 ((this.Taxable == null && other.Taxable == null) || (this.Taxable?.Equals(other.Taxable) == true)) &&
                 ((this.AppliedTaxes == null && other.AppliedTaxes == null) || (this.AppliedTaxes?.Equals(other.AppliedTaxes) == true)) &&
-                ((this.Metadata == null && other.Metadata == null) || (this.Metadata?.Equals(other.Metadata) == true));
+                ((this.Metadata == null && other.Metadata == null) || (this.Metadata?.Equals(other.Metadata) == true)) &&
+                ((this.Type == null && other.Type == null) || (this.Type?.Equals(other.Type) == true));
         }
 
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1266271501;
+            int hashCode = -131914007;
 
             if (this.Uid != null)
             {
@@ -235,6 +255,11 @@ namespace Square.Models
             if (this.CatalogObjectId != null)
             {
                hashCode += this.CatalogObjectId.GetHashCode();
+            }
+
+            if (this.CatalogVersion != null)
+            {
+               hashCode += this.CatalogVersion.GetHashCode();
             }
 
             if (this.Percentage != null)
@@ -282,6 +307,11 @@ namespace Square.Models
                hashCode += this.Metadata.GetHashCode();
             }
 
+            if (this.Type != null)
+            {
+               hashCode += this.Type.GetHashCode();
+            }
+
             return hashCode;
         }
 
@@ -294,6 +324,7 @@ namespace Square.Models
             toStringOutput.Add($"this.Uid = {(this.Uid == null ? "null" : this.Uid == string.Empty ? "" : this.Uid)}");
             toStringOutput.Add($"this.Name = {(this.Name == null ? "null" : this.Name == string.Empty ? "" : this.Name)}");
             toStringOutput.Add($"this.CatalogObjectId = {(this.CatalogObjectId == null ? "null" : this.CatalogObjectId == string.Empty ? "" : this.CatalogObjectId)}");
+            toStringOutput.Add($"this.CatalogVersion = {(this.CatalogVersion == null ? "null" : this.CatalogVersion.ToString())}");
             toStringOutput.Add($"this.Percentage = {(this.Percentage == null ? "null" : this.Percentage == string.Empty ? "" : this.Percentage)}");
             toStringOutput.Add($"this.AmountMoney = {(this.AmountMoney == null ? "null" : this.AmountMoney.ToString())}");
             toStringOutput.Add($"this.AppliedMoney = {(this.AppliedMoney == null ? "null" : this.AppliedMoney.ToString())}");
@@ -303,6 +334,7 @@ namespace Square.Models
             toStringOutput.Add($"this.Taxable = {(this.Taxable == null ? "null" : this.Taxable.ToString())}");
             toStringOutput.Add($"this.AppliedTaxes = {(this.AppliedTaxes == null ? "null" : $"[{string.Join(", ", this.AppliedTaxes)} ]")}");
             toStringOutput.Add($"Metadata = {(this.Metadata == null ? "null" : this.Metadata.ToString())}");
+            toStringOutput.Add($"this.Type = {(this.Type == null ? "null" : this.Type.ToString())}");
         }
 
         /// <summary>
@@ -315,6 +347,7 @@ namespace Square.Models
                 .Uid(this.Uid)
                 .Name(this.Name)
                 .CatalogObjectId(this.CatalogObjectId)
+                .CatalogVersion(this.CatalogVersion)
                 .Percentage(this.Percentage)
                 .AmountMoney(this.AmountMoney)
                 .AppliedMoney(this.AppliedMoney)
@@ -323,7 +356,8 @@ namespace Square.Models
                 .CalculationPhase(this.CalculationPhase)
                 .Taxable(this.Taxable)
                 .AppliedTaxes(this.AppliedTaxes)
-                .Metadata(this.Metadata);
+                .Metadata(this.Metadata)
+                .Type(this.Type);
             return builder;
         }
 
@@ -335,6 +369,7 @@ namespace Square.Models
             private string uid;
             private string name;
             private string catalogObjectId;
+            private long? catalogVersion;
             private string percentage;
             private Models.Money amountMoney;
             private Models.Money appliedMoney;
@@ -344,6 +379,7 @@ namespace Square.Models
             private bool? taxable;
             private IList<Models.OrderLineItemAppliedTax> appliedTaxes;
             private IDictionary<string, string> metadata;
+            private string type;
 
              /// <summary>
              /// Uid.
@@ -375,6 +411,17 @@ namespace Square.Models
             public Builder CatalogObjectId(string catalogObjectId)
             {
                 this.catalogObjectId = catalogObjectId;
+                return this;
+            }
+
+             /// <summary>
+             /// CatalogVersion.
+             /// </summary>
+             /// <param name="catalogVersion"> catalogVersion. </param>
+             /// <returns> Builder. </returns>
+            public Builder CatalogVersion(long? catalogVersion)
+            {
+                this.catalogVersion = catalogVersion;
                 return this;
             }
 
@@ -477,6 +524,17 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// Type.
+             /// </summary>
+             /// <param name="type"> type. </param>
+             /// <returns> Builder. </returns>
+            public Builder Type(string type)
+            {
+                this.type = type;
+                return this;
+            }
+
             /// <summary>
             /// Builds class object.
             /// </summary>
@@ -487,6 +545,7 @@ namespace Square.Models
                     this.uid,
                     this.name,
                     this.catalogObjectId,
+                    this.catalogVersion,
                     this.percentage,
                     this.amountMoney,
                     this.appliedMoney,
@@ -495,7 +554,8 @@ namespace Square.Models
                     this.calculationPhase,
                     this.taxable,
                     this.appliedTaxes,
-                    this.metadata);
+                    this.metadata,
+                    this.type);
             }
         }
     }

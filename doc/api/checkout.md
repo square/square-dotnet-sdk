@@ -50,6 +50,7 @@ var bodyOrderOrderLineItems0QuantityUnitMeasurementUnit = new MeasurementUnit.Bu
 var bodyOrderOrderLineItems0QuantityUnit = new OrderQuantityUnit.Builder()
     .MeasurementUnit(bodyOrderOrderLineItems0QuantityUnitMeasurementUnit)
     .Precision(191)
+    .CatalogVersion(131L)
     .Build();
 var bodyOrderOrderLineItems0AppliedTaxes = new List<OrderLineItemAppliedTax>();
 
@@ -103,6 +104,7 @@ var bodyOrderOrderLineItems1QuantityUnitMeasurementUnit = new MeasurementUnit.Bu
 var bodyOrderOrderLineItems1QuantityUnit = new OrderQuantityUnit.Builder()
     .MeasurementUnit(bodyOrderOrderLineItems1QuantityUnitMeasurementUnit)
     .Precision(192)
+    .CatalogVersion(130L)
     .Build();
 var bodyOrderOrderLineItems1BasePriceMoney = new Money.Builder()
     .Amount(2500L)
@@ -128,6 +130,7 @@ var bodyOrderOrderLineItems2QuantityUnitMeasurementUnit = new MeasurementUnit.Bu
 var bodyOrderOrderLineItems2QuantityUnit = new OrderQuantityUnit.Builder()
     .MeasurementUnit(bodyOrderOrderLineItems2QuantityUnitMeasurementUnit)
     .Precision(193)
+    .CatalogVersion(129L)
     .Build();
 var bodyOrderOrderLineItems2BasePriceMoney = new Money.Builder()
     .Amount(3500L)
@@ -149,6 +152,7 @@ var bodyOrderOrderTaxes = new List<OrderLineItemTax>();
 var bodyOrderOrderTaxes0 = new OrderLineItemTax.Builder()
     .Uid("38ze1696-z1e3-5628-af6d-f1e04d947fg3")
     .CatalogObjectId("catalog_object_id7")
+    .CatalogVersion(47L)
     .Name("name9")
     .Type("INCLUSIVE")
     .Percentage("7.75")
@@ -165,9 +169,9 @@ var bodyOrderOrderDiscounts0AmountMoney = new Money.Builder()
 var bodyOrderOrderDiscounts0 = new OrderLineItemDiscount.Builder()
     .Uid("56ae1696-z1e3-9328-af6d-f1e04d947gd4")
     .CatalogObjectId("catalog_object_id1")
+    .CatalogVersion(73L)
     .Name("name7")
     .Type("FIXED_AMOUNT")
-    .Percentage("percentage5")
     .AmountMoney(bodyOrderOrderDiscounts0AmountMoney)
     .Scope("LINE_ITEM")
     .Build();

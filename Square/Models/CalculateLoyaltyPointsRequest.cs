@@ -33,7 +33,7 @@ namespace Square.Models
         /// <summary>
         /// The [order]($m/Order) ID for which to calculate the points.
         /// Specify this field if your application uses the Orders API to process orders.
-        /// Otherwise, specify the `transaction_amount`.
+        /// Otherwise, specify the `transaction_amount_money`.
         /// </summary>
         [JsonProperty("order_id", NullValueHandling = NullValueHandling.Ignore)]
         public string OrderId { get; }

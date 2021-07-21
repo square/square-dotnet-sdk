@@ -361,7 +361,7 @@ namespace Square
         /// <summary>
         /// Gets the current version of the SDK.
         /// </summary>
-        public string SdkVersion => "12.0.0";
+        public string SdkVersion => "13.0.0";
 
         /// <summary>
         /// Gets the configuration of the Http Client associated with this client.
@@ -510,12 +510,11 @@ namespace Square
         /// </summary>
         public class Builder
         {
-            private string squareVersion = "2021-06-16";
+            private string squareVersion = "2021-07-21";
             private Environment environment = Square.Environment.Production;
             private string customUrl = "https://connect.squareup.com";
             private string accessToken = "TODO: Replace";
             private IDictionary<string, IAuthManager> authManagers = new Dictionary<string, IAuthManager>();
-            private bool createCustomHttpClient = false;
             private HttpClientConfiguration.Builder httpClientConfig = new HttpClientConfiguration.Builder();
             private IHttpClient httpClient;
             private HttpCallBack httpCallBack;
@@ -578,7 +577,6 @@ namespace Square
                 }
 
                 action(this.httpClientConfig);
-                this.createCustomHttpClient = true;
                 return this;
             }
 
@@ -667,14 +665,7 @@ namespace Square
             /// <returns>SquareClient.</returns>
             public SquareClient Build()
             {
-                if (this.createCustomHttpClient)
-                {
-                    this.httpClient = new HttpClientWrapper(this.httpClientConfig.Build());
-                }
-                else
-                {
-                    this.httpClient = new HttpClientWrapper();
-                }
+                this.httpClient = new HttpClientWrapper(this.httpClientConfig.Build());
 
                 return new SquareClient(
                     this.squareVersion,

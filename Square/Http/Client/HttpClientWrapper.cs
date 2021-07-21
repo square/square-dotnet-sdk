@@ -24,37 +24,16 @@ namespace Square.Http.Client
     /// </summary>
     internal sealed class HttpClientWrapper : IHttpClient
     {
-        private static readonly object SyncObject = new object();
-        private static HttpClient defaultHttpClient;
         private static char parameterSeparator = '&';
         private readonly int numberOfRetries;
         private readonly int backoffFactor;
         private readonly double retryInterval;
-        private readonly TimeSpan backoffMax;
+        private readonly TimeSpan maximumRetryWaitTime;
         private ArrayDeserialization arrayDeserializationFormat = ArrayDeserialization.Indexed;
         private HttpClient client;
         private IList<HttpStatusCode> statusCodesToRetry;
         private IList<HttpMethod> requestMethodsToRetry;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="HttpClientWrapper"/> class.
-        /// </summary>
-        public HttpClientWrapper()
-        {
-            HttpClientConfiguration httpClientConfig = new HttpClientConfiguration();
-            this.statusCodesToRetry = httpClientConfig.StatusCodesToRetry
-                .Where(val => Enum.IsDefined(typeof(HttpStatusCode), val))
-                .Select(val => (HttpStatusCode)val).ToImmutableList();
-
-            this.requestMethodsToRetry = httpClientConfig.RequestMethodsToRetry
-                .Select(method => new HttpMethod(method.ToString())).ToList();
-
-            this.numberOfRetries = httpClientConfig.NumberOfRetries;
-            this.backoffFactor = httpClientConfig.BackoffFactor;
-            this.retryInterval = httpClientConfig.RetryInterval;
-            this.backoffMax = httpClientConfig.BackoffMax;
-            this.client = this.GetDefaultHttpClient();
-        }
+        private bool overrideHttpClientConfiguration;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="HttpClientWrapper"/> class.
@@ -62,21 +41,24 @@ namespace Square.Http.Client
         /// <param name="httpClientConfig"> HttpClientConfiguration object.</param>
         public HttpClientWrapper(HttpClientConfiguration httpClientConfig)
         {
-            this.statusCodesToRetry = httpClientConfig.StatusCodesToRetry
+            this.client = httpClientConfig.HttpClientInstance;
+            this.overrideHttpClientConfiguration = httpClientConfig.OverrideHttpClientConfiguration;
+
+            if (overrideHttpClientConfiguration)
+            {
+                this.statusCodesToRetry = httpClientConfig.StatusCodesToRetry
                 .Where(val => Enum.IsDefined(typeof(HttpStatusCode), val))
                 .Select(val => (HttpStatusCode)val).ToImmutableList();
 
-            this.requestMethodsToRetry = httpClientConfig.RequestMethodsToRetry
-                .Select(method => new HttpMethod(method.ToString())).ToList();
+                this.requestMethodsToRetry = httpClientConfig.RequestMethodsToRetry
+                    .Select(method => new HttpMethod(method.ToString())).ToList();
 
-            this.numberOfRetries = httpClientConfig.NumberOfRetries;
-            this.backoffFactor = httpClientConfig.BackoffFactor;
-            this.retryInterval = httpClientConfig.RetryInterval;
-            this.backoffMax = httpClientConfig.BackoffMax;
-            this.client = new HttpClient()
-            {
-                Timeout = httpClientConfig.Timeout,
-            };
+                this.numberOfRetries = httpClientConfig.NumberOfRetries;
+                this.backoffFactor = httpClientConfig.BackoffFactor;
+                this.retryInterval = httpClientConfig.RetryInterval;
+                this.maximumRetryWaitTime = httpClientConfig.MaximumRetryWaitTime;
+                this.client.Timeout = httpClientConfig.Timeout;
+            }
         }
 
         /// <summary>
@@ -114,9 +96,18 @@ namespace Square.Http.Client
             // raise the on before request event.
             this.RaiseOnBeforeHttpRequestEvent(request);
 
-            HttpResponseMessage responseMessage = await this.GetCombinedPolicy().ExecuteAsync(
-                async (cancellation) => await this.HttpResponseMessage(request, cancellation).ConfigureAwait(false), cancellationToken)
-                .ConfigureAwait(false);
+            HttpResponseMessage responseMessage;
+
+            if (overrideHttpClientConfiguration)
+            {
+                responseMessage = await this.GetCombinedPolicy().ExecuteAsync(
+                    async (cancellation) => await this.HttpResponseMessage(request, cancellation).ConfigureAwait(false), cancellationToken)
+                    .ConfigureAwait(false);
+            }
+            else
+            {
+                responseMessage = await this.HttpResponseMessage(request, cancellationToken).ConfigureAwait(false);
+            }
 
             int statusCode = (int)responseMessage.StatusCode;
             var headers = GetCombinedResponseHeaders(responseMessage);
@@ -156,9 +147,18 @@ namespace Square.Http.Client
             // raise the on before request event.
             this.RaiseOnBeforeHttpRequestEvent(request);
 
-            HttpResponseMessage responseMessage = await this.GetCombinedPolicy().ExecuteAsync(
-                async (cancellation) => await this.HttpResponseMessage(request, cancellation).ConfigureAwait(false), cancellationToken)
-                .ConfigureAwait(false);
+            HttpResponseMessage responseMessage;
+
+            if (overrideHttpClientConfiguration)
+            {
+                responseMessage = await this.GetCombinedPolicy().ExecuteAsync(
+                    async (cancellation) => await this.HttpResponseMessage(request, cancellation).ConfigureAwait(false), cancellationToken)
+                    .ConfigureAwait(false);
+            }
+            else
+            {
+                responseMessage = await this.HttpResponseMessage(request, cancellationToken).ConfigureAwait(false);
+            }
 
             int statusCode = (int)responseMessage.StatusCode;
             var headers = GetCombinedResponseHeaders(responseMessage);
@@ -591,22 +591,6 @@ namespace Square.Http.Client
             return await this.client.SendAsync(requestMessage, cancellationToken).ConfigureAwait(false);
         }
 
-        private HttpClient GetDefaultHttpClient()
-        {
-            if (defaultHttpClient == null)
-            {
-                lock (SyncObject)
-                {
-                    if (defaultHttpClient == null)
-                    {
-                        defaultHttpClient = new HttpClient();
-                    }
-                }
-            }
-
-            return defaultHttpClient;
-        }
-
         private bool ShouldRetry(HttpResponseMessage r)
         {
             return this.requestMethodsToRetry.Contains(r.RequestMessage.Method) &&
@@ -641,9 +625,9 @@ namespace Square.Http.Client
 
         private AsyncTimeoutPolicy GetTimeoutPolicy()
         {
-            return this.backoffMax.TotalSeconds == 0
+            return this.maximumRetryWaitTime.TotalSeconds == 0
                 ? Policy.TimeoutAsync(Timeout.InfiniteTimeSpan)
-                : Policy.TimeoutAsync(this.backoffMax);
+                : Policy.TimeoutAsync(this.maximumRetryWaitTime);
         }
 
         private AsyncPolicyWrap<HttpResponseMessage> GetCombinedPolicy()

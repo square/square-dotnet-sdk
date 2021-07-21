@@ -24,6 +24,7 @@ namespace Square.Models
         /// <param name="sourceServiceChargeUid">source_service_charge_uid.</param>
         /// <param name="name">name.</param>
         /// <param name="catalogObjectId">catalog_object_id.</param>
+        /// <param name="catalogVersion">catalog_version.</param>
         /// <param name="percentage">percentage.</param>
         /// <param name="amountMoney">amount_money.</param>
         /// <param name="appliedMoney">applied_money.</param>
@@ -37,6 +38,7 @@ namespace Square.Models
             string sourceServiceChargeUid = null,
             string name = null,
             string catalogObjectId = null,
+            long? catalogVersion = null,
             string percentage = null,
             Models.Money amountMoney = null,
             Models.Money appliedMoney = null,
@@ -50,6 +52,7 @@ namespace Square.Models
             this.SourceServiceChargeUid = sourceServiceChargeUid;
             this.Name = name;
             this.CatalogObjectId = catalogObjectId;
+            this.CatalogVersion = catalogVersion;
             this.Percentage = percentage;
             this.AmountMoney = amountMoney;
             this.AppliedMoney = appliedMoney;
@@ -85,6 +88,12 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("catalog_object_id", NullValueHandling = NullValueHandling.Ignore)]
         public string CatalogObjectId { get; }
+
+        /// <summary>
+        /// The version of the catalog object that this service charge references.
+        /// </summary>
+        [JsonProperty("catalog_version", NullValueHandling = NullValueHandling.Ignore)]
+        public long? CatalogVersion { get; }
 
         /// <summary>
         /// The percentage of the service charge, as a string representation of
@@ -192,6 +201,7 @@ namespace Square.Models
                 ((this.SourceServiceChargeUid == null && other.SourceServiceChargeUid == null) || (this.SourceServiceChargeUid?.Equals(other.SourceServiceChargeUid) == true)) &&
                 ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
                 ((this.CatalogObjectId == null && other.CatalogObjectId == null) || (this.CatalogObjectId?.Equals(other.CatalogObjectId) == true)) &&
+                ((this.CatalogVersion == null && other.CatalogVersion == null) || (this.CatalogVersion?.Equals(other.CatalogVersion) == true)) &&
                 ((this.Percentage == null && other.Percentage == null) || (this.Percentage?.Equals(other.Percentage) == true)) &&
                 ((this.AmountMoney == null && other.AmountMoney == null) || (this.AmountMoney?.Equals(other.AmountMoney) == true)) &&
                 ((this.AppliedMoney == null && other.AppliedMoney == null) || (this.AppliedMoney?.Equals(other.AppliedMoney) == true)) &&
@@ -205,7 +215,7 @@ namespace Square.Models
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -2013241171;
+            int hashCode = -704882254;
 
             if (this.Uid != null)
             {
@@ -225,6 +235,11 @@ namespace Square.Models
             if (this.CatalogObjectId != null)
             {
                hashCode += this.CatalogObjectId.GetHashCode();
+            }
+
+            if (this.CatalogVersion != null)
+            {
+               hashCode += this.CatalogVersion.GetHashCode();
             }
 
             if (this.Percentage != null)
@@ -280,6 +295,7 @@ namespace Square.Models
             toStringOutput.Add($"this.SourceServiceChargeUid = {(this.SourceServiceChargeUid == null ? "null" : this.SourceServiceChargeUid == string.Empty ? "" : this.SourceServiceChargeUid)}");
             toStringOutput.Add($"this.Name = {(this.Name == null ? "null" : this.Name == string.Empty ? "" : this.Name)}");
             toStringOutput.Add($"this.CatalogObjectId = {(this.CatalogObjectId == null ? "null" : this.CatalogObjectId == string.Empty ? "" : this.CatalogObjectId)}");
+            toStringOutput.Add($"this.CatalogVersion = {(this.CatalogVersion == null ? "null" : this.CatalogVersion.ToString())}");
             toStringOutput.Add($"this.Percentage = {(this.Percentage == null ? "null" : this.Percentage == string.Empty ? "" : this.Percentage)}");
             toStringOutput.Add($"this.AmountMoney = {(this.AmountMoney == null ? "null" : this.AmountMoney.ToString())}");
             toStringOutput.Add($"this.AppliedMoney = {(this.AppliedMoney == null ? "null" : this.AppliedMoney.ToString())}");
@@ -301,6 +317,7 @@ namespace Square.Models
                 .SourceServiceChargeUid(this.SourceServiceChargeUid)
                 .Name(this.Name)
                 .CatalogObjectId(this.CatalogObjectId)
+                .CatalogVersion(this.CatalogVersion)
                 .Percentage(this.Percentage)
                 .AmountMoney(this.AmountMoney)
                 .AppliedMoney(this.AppliedMoney)
@@ -321,6 +338,7 @@ namespace Square.Models
             private string sourceServiceChargeUid;
             private string name;
             private string catalogObjectId;
+            private long? catalogVersion;
             private string percentage;
             private Models.Money amountMoney;
             private Models.Money appliedMoney;
@@ -371,6 +389,17 @@ namespace Square.Models
             public Builder CatalogObjectId(string catalogObjectId)
             {
                 this.catalogObjectId = catalogObjectId;
+                return this;
+            }
+
+             /// <summary>
+             /// CatalogVersion.
+             /// </summary>
+             /// <param name="catalogVersion"> catalogVersion. </param>
+             /// <returns> Builder. </returns>
+            public Builder CatalogVersion(long? catalogVersion)
+            {
+                this.catalogVersion = catalogVersion;
                 return this;
             }
 
@@ -473,6 +502,7 @@ namespace Square.Models
                     this.sourceServiceChargeUid,
                     this.name,
                     this.catalogObjectId,
+                    this.catalogVersion,
                     this.percentage,
                     this.amountMoney,
                     this.appliedMoney,

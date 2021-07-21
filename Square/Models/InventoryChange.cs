@@ -43,7 +43,7 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// Indicates how the inventory change was applied to a tracked quantity of items.
+        /// Indicates how the inventory change was applied to a tracked product quantity.
         /// </summary>
         [JsonProperty("type", NullValueHandling = NullValueHandling.Ignore)]
         public string Type { get; }
