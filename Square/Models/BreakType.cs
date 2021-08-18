@@ -49,7 +49,7 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// UUID for this object.
+        /// The UUID for this object.
         /// </summary>
         [JsonProperty("id", NullValueHandling = NullValueHandling.Ignore)]
         public string Id { get; }
@@ -61,7 +61,7 @@ namespace Square.Models
         public string LocationId { get; }
 
         /// <summary>
-        /// A human-readable name for this type of break. Will be displayed to
+        /// A human-readable name for this type of break. The name is displayed to
         /// employees in Square products.
         /// </summary>
         [JsonProperty("break_name")]
@@ -69,7 +69,7 @@ namespace Square.Models
 
         /// <summary>
         /// Format: RFC-3339 P[n]Y[n]M[n]DT[n]H[n]M[n]S. The expected length of
-        /// this break. Precision below minutes is truncated.
+        /// this break. Precision less than minutes is truncated.
         /// </summary>
         [JsonProperty("expected_duration")]
         public string ExpectedDuration { get; }
@@ -82,8 +82,8 @@ namespace Square.Models
         public bool IsPaid { get; }
 
         /// <summary>
-        /// Used for resolving concurrency issues; request will fail if version
-        /// provided does not match server version at time of request. If a value is not
+        /// Used for resolving concurrency issues. The request fails if the version
+        /// provided does not match the server version at the time of the request. If a value is not
         /// provided, Square's servers execute a "blind" write; potentially
         /// overwriting another writer's data.
         /// </summary>

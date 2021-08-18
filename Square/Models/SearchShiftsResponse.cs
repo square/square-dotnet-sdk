@@ -41,13 +41,13 @@ namespace Square.Models
         public HttpContext Context { get; internal set; }
 
         /// <summary>
-        /// Shifts
+        /// Shifts.
         /// </summary>
         [JsonProperty("shifts", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.Shift> Shifts { get; }
 
         /// <summary>
-        /// Opaque cursor for fetching the next page.
+        /// An opaque cursor for fetching the next page.
         /// </summary>
         [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
         public string Cursor { get; }

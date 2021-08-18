@@ -47,8 +47,8 @@ namespace Square.Models
         public IList<Models.BreakType> BreakTypes { get; }
 
         /// <summary>
-        /// Value supplied in the subsequent request to fetch the next next page
-        /// of Break Type results.
+        /// The value supplied in the subsequent request to fetch the next page
+        /// of `BreakType` results.
         /// </summary>
         [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
         public string Cursor { get; }

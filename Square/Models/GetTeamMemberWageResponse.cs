@@ -38,7 +38,7 @@ namespace Square.Models
         public HttpContext Context { get; internal set; }
 
         /// <summary>
-        /// The hourly wage rate that a team member will earn on a `Shift` for doing the job
+        /// The hourly wage rate that a team member earns on a `Shift` for doing the job
         /// specified by the `title` property of this object.
         /// </summary>
         [JsonProperty("team_member_wage", NullValueHandling = NullValueHandling.Ignore)]
