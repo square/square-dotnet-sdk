@@ -52,7 +52,7 @@ namespace Square.Models
         public IList<string> LocationIds { get; }
 
         /// <summary>
-        /// Fetch shifts for the specified employees. DEPRECATED at version 2020-08-26. Use `team_member_ids` instead
+        /// Fetch shifts for the specified employees. DEPRECATED at version 2020-08-26. Use `team_member_ids` instead.
         /// </summary>
         [JsonProperty("employee_ids", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> EmployeeIds { get; }
@@ -91,7 +91,7 @@ namespace Square.Models
         public Models.ShiftWorkday Workday { get; }
 
         /// <summary>
-        /// Fetch shifts for the specified team members. Replaced `employee_ids` at version "2020-08-26"
+        /// Fetch shifts for the specified team members. Replaced `employee_ids` at version "2020-08-26".
         /// </summary>
         [JsonProperty("team_member_ids")]
         public IList<string> TeamMemberIds { get; }

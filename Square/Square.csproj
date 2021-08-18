@@ -4,13 +4,13 @@
   <PropertyGroup>
     <TargetFramework>netstandard1.3</TargetFramework>
     <AssemblyName>Square</AssemblyName>
-    <Version>13.0.0.0</Version>
+    <Version>13.1.0.0</Version>
     <Authors>Square Developer Platform</Authors>
     <Owners>Square Developer Platform</Owners>
     <Product>Square</Product>
     <Copyright>Copyright ©  2019</Copyright>
-    <AssemblyVersion>13.0.0.0</AssemblyVersion>
-    <FileVersion>13.0.0.0</FileVersion>
+    <AssemblyVersion>13.1.0.0</AssemblyVersion>
+    <FileVersion>13.1.0.0</FileVersion>
     <Description>.NET client library for the Square API</Description>
     <LangVersion>7.3</LangVersion>
   </PropertyGroup>
@@ -18,7 +18,6 @@
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="Polly" Version="7.2.1" />
-    <PackageReference Include="System.Collections.Immutable" Version="1.5.0" />
     <PackageReference Include="System.Collections.Immutable" Version="1.5.0" />
     <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
         <_Parameter1>Square.Tests</_Parameter1>

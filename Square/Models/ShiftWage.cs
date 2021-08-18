@@ -32,7 +32,7 @@ namespace Square.Models
 
         /// <summary>
         /// The name of the job performed during this shift. Square
-        /// labor-reporting UIs may group shifts together by title.
+        /// labor-reporting UIs might group shifts together by title.
         /// </summary>
         [JsonProperty("title", NullValueHandling = NullValueHandling.Ignore)]
         public string Title { get; }
