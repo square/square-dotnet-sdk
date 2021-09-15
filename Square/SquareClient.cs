@@ -361,7 +361,7 @@ namespace Square
         /// <summary>
         /// Gets the current version of the SDK.
         /// </summary>
-        public string SdkVersion => "13.0.0";
+        public string SdkVersion => "14.0.0";
 
         /// <summary>
         /// Gets the configuration of the Http Client associated with this client.

@@ -137,4 +137,11 @@ Class to build instances of SquareClient.
 | `SquareVersion(string squareVersion)` | Square Connect API versions | `Builder` |
 | `Environment(Environment environment)` | Current API environment. | `Builder` |
 | `CustomUrl(string customUrl)` | Sets the base URL requests are made to. Defaults to `https://connect.squareup.com` | `Builder` |
+| `AdditionalHeaders(IDictionary<string, List<string>> additionalHeaders)` | Gets the additional headers. | `Builder` |
+| `SdkVersion(string sdkVersion)` | Gets the additional headers. | `Builder` |
+| `HttpClientConfiguration(Action<HttpClientConfiguration.Builder> action)` | Gets the configuration of the Http Client associated with this client. | `Builder` |
+| `Timeout(TimeSpan timeout)` | Http client timeout. | `Builder` |
+| `SquareVersion(string squareVersion)` | Square Connect API versions | `Builder` |
+| `Environment(Environment environment)` | Current API environment. | `Builder` |
+| `CustomUrl(string customUrl)` | Sets the base URL requests are made to. Defaults to `https://connect.squareup.com` | `Builder` |
 
