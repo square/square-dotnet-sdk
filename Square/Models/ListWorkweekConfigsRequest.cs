@@ -31,13 +31,13 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// The maximum number of `WorkweekConfigs` results to return per page.
+        /// Maximum number of Workweek Configs to return per page.
         /// </summary>
         [JsonProperty("limit", NullValueHandling = NullValueHandling.Ignore)]
         public int? Limit { get; }
 
         /// <summary>
-        /// A pointer to the next page of `WorkweekConfig` results to fetch.
+        /// Pointer to the next page of Workweek Config results to fetch.
         /// </summary>
         [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
         public string Cursor { get; }

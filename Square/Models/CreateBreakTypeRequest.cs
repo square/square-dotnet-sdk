@@ -31,7 +31,7 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// A unique string value to ensure the idempotency of the operation.
+        /// Unique string value to insure idempotency of the operation
         /// </summary>
         [JsonProperty("idempotency_key", NullValueHandling = NullValueHandling.Ignore)]
         public string IdempotencyKey { get; }

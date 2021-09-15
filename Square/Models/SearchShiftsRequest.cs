@@ -34,19 +34,19 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// The parameters of a `Shift` search query, which includes filter and sort options.
+        /// The parameters of a `Shift` search query. Includes filter and sort options.
         /// </summary>
         [JsonProperty("query", NullValueHandling = NullValueHandling.Ignore)]
         public Models.ShiftQuery Query { get; }
 
         /// <summary>
-        /// The number of resources in a page (200 by default).
+        /// number of resources in a page (200 by default).
         /// </summary>
         [JsonProperty("limit", NullValueHandling = NullValueHandling.Ignore)]
         public int? Limit { get; }
 
         /// <summary>
-        /// An opaque cursor for fetching the next page.
+        /// opaque cursor for fetching the next page.
         /// </summary>
         [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
         public string Cursor { get; }

@@ -21,13 +21,10 @@ namespace Square.Models
         /// Initializes a new instance of the <see cref="ListCustomerSegmentsRequest"/> class.
         /// </summary>
         /// <param name="cursor">cursor.</param>
-        /// <param name="limit">limit.</param>
         public ListCustomerSegmentsRequest(
-            string cursor = null,
-            int? limit = null)
+            string cursor = null)
         {
             this.Cursor = cursor;
-            this.Limit = limit;
         }
 
         /// <summary>
@@ -37,14 +34,6 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
         public string Cursor { get; }
-
-        /// <summary>
-        /// The maximum number of results to return in a single page. This limit is advisory. The response might contain more or fewer results.
-        /// The limit is ignored if it is less than 1 or greater than 50. The default value is 50.
-        /// For more information, see [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination).
-        /// </summary>
-        [JsonProperty("limit", NullValueHandling = NullValueHandling.Ignore)]
-        public int? Limit { get; }
 
         /// <inheritdoc/>
         public override string ToString()
@@ -70,23 +59,17 @@ namespace Square.Models
             }
 
             return obj is ListCustomerSegmentsRequest other &&
-                ((this.Cursor == null && other.Cursor == null) || (this.Cursor?.Equals(other.Cursor) == true)) &&
-                ((this.Limit == null && other.Limit == null) || (this.Limit?.Equals(other.Limit) == true));
+                ((this.Cursor == null && other.Cursor == null) || (this.Cursor?.Equals(other.Cursor) == true));
         }
 
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -234381529;
+            int hashCode = 300445990;
 
             if (this.Cursor != null)
             {
                hashCode += this.Cursor.GetHashCode();
-            }
-
-            if (this.Limit != null)
-            {
-               hashCode += this.Limit.GetHashCode();
             }
 
             return hashCode;
@@ -99,7 +82,6 @@ namespace Square.Models
         protected void ToString(List<string> toStringOutput)
         {
             toStringOutput.Add($"this.Cursor = {(this.Cursor == null ? "null" : this.Cursor == string.Empty ? "" : this.Cursor)}");
-            toStringOutput.Add($"this.Limit = {(this.Limit == null ? "null" : this.Limit.ToString())}");
         }
 
         /// <summary>
@@ -109,8 +91,7 @@ namespace Square.Models
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .Cursor(this.Cursor)
-                .Limit(this.Limit);
+                .Cursor(this.Cursor);
             return builder;
         }
 
@@ -120,7 +101,6 @@ namespace Square.Models
         public class Builder
         {
             private string cursor;
-            private int? limit;
 
              /// <summary>
              /// Cursor.
@@ -133,17 +113,6 @@ namespace Square.Models
                 return this;
             }
 
-             /// <summary>
-             /// Limit.
-             /// </summary>
-             /// <param name="limit"> limit. </param>
-             /// <returns> Builder. </returns>
-            public Builder Limit(int? limit)
-            {
-                this.limit = limit;
-                return this;
-            }
-
             /// <summary>
             /// Builds class object.
             /// </summary>
@@ -151,8 +120,7 @@ namespace Square.Models
             public ListCustomerSegmentsRequest Build()
             {
                 return new ListCustomerSegmentsRequest(
-                    this.cursor,
-                    this.limit);
+                    this.cursor);
             }
         }
     }

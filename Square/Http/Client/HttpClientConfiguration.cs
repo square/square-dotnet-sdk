@@ -128,11 +128,11 @@ namespace Square.Http.Client
             private TimeSpan maximumRetryWaitTime = TimeSpan.FromSeconds(0);
             private IList<int> statusCodesToRetry = new List<int>
             {
-                408, 413, 429, 500, 502, 503, 504, 521, 522, 524,
+                408, 413, 429, 500, 502, 503, 504, 521, 522, 524
             }.ToImmutableList();
             private IList<HttpMethod> requestMethodsToRetry = new List<string>
             {
-                "GET", "PUT",
+                "GET", "PUT"
             }.Select(val => new HttpMethod(val)).ToImmutableList();
             private HttpClient httpClientInstance = new HttpClient();
             private bool overrideHttpClientConfiguration = true;

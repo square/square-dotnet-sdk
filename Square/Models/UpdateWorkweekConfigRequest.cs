@@ -28,8 +28,8 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// Sets the day of the week and hour of the day that a business starts a
-        /// workweek. This is used to calculate overtime pay.
+        /// Sets the Day of the week and hour of the day that a business starts a
+        /// work week. Used for the calculation of overtime pay.
         /// </summary>
         [JsonProperty("workweek_config")]
         public Models.WorkweekConfig WorkweekConfig { get; }

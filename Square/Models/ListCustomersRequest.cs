@@ -21,17 +21,14 @@ namespace Square.Models
         /// Initializes a new instance of the <see cref="ListCustomersRequest"/> class.
         /// </summary>
         /// <param name="cursor">cursor.</param>
-        /// <param name="limit">limit.</param>
         /// <param name="sortField">sort_field.</param>
         /// <param name="sortOrder">sort_order.</param>
         public ListCustomersRequest(
             string cursor = null,
-            int? limit = null,
             string sortField = null,
             string sortOrder = null)
         {
             this.Cursor = cursor;
-            this.Limit = limit;
             this.SortField = sortField;
             this.SortOrder = sortOrder;
         }
@@ -43,14 +40,6 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
         public string Cursor { get; }
-
-        /// <summary>
-        /// The maximum number of results to return in a single page. This limit is advisory. The response might contain more or fewer results.
-        /// The limit is ignored if it is less than 1 or greater than 100. The default value is 100.
-        /// For more information, see [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination).
-        /// </summary>
-        [JsonProperty("limit", NullValueHandling = NullValueHandling.Ignore)]
-        public int? Limit { get; }
 
         /// <summary>
         /// Specifies customer attributes as the sort key to customer profiles returned from a search.
@@ -89,7 +78,6 @@ namespace Square.Models
 
             return obj is ListCustomersRequest other &&
                 ((this.Cursor == null && other.Cursor == null) || (this.Cursor?.Equals(other.Cursor) == true)) &&
-                ((this.Limit == null && other.Limit == null) || (this.Limit?.Equals(other.Limit) == true)) &&
                 ((this.SortField == null && other.SortField == null) || (this.SortField?.Equals(other.SortField) == true)) &&
                 ((this.SortOrder == null && other.SortOrder == null) || (this.SortOrder?.Equals(other.SortOrder) == true));
         }
@@ -97,16 +85,11 @@ namespace Square.Models
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1279199220;
+            int hashCode = 1351370085;
 
             if (this.Cursor != null)
             {
                hashCode += this.Cursor.GetHashCode();
-            }
-
-            if (this.Limit != null)
-            {
-               hashCode += this.Limit.GetHashCode();
             }
 
             if (this.SortField != null)
@@ -129,7 +112,6 @@ namespace Square.Models
         protected void ToString(List<string> toStringOutput)
         {
             toStringOutput.Add($"this.Cursor = {(this.Cursor == null ? "null" : this.Cursor == string.Empty ? "" : this.Cursor)}");
-            toStringOutput.Add($"this.Limit = {(this.Limit == null ? "null" : this.Limit.ToString())}");
             toStringOutput.Add($"this.SortField = {(this.SortField == null ? "null" : this.SortField.ToString())}");
             toStringOutput.Add($"this.SortOrder = {(this.SortOrder == null ? "null" : this.SortOrder.ToString())}");
         }
@@ -142,7 +124,6 @@ namespace Square.Models
         {
             var builder = new Builder()
                 .Cursor(this.Cursor)
-                .Limit(this.Limit)
                 .SortField(this.SortField)
                 .SortOrder(this.SortOrder);
             return builder;
@@ -154,7 +135,6 @@ namespace Square.Models
         public class Builder
         {
             private string cursor;
-            private int? limit;
             private string sortField;
             private string sortOrder;
 
@@ -166,17 +146,6 @@ namespace Square.Models
             public Builder Cursor(string cursor)
             {
                 this.cursor = cursor;
-                return this;
-            }
-
-             /// <summary>
-             /// Limit.
-             /// </summary>
-             /// <param name="limit"> limit. </param>
-             /// <returns> Builder. </returns>
-            public Builder Limit(int? limit)
-            {
-                this.limit = limit;
                 return this;
             }
 
@@ -210,7 +179,6 @@ namespace Square.Models
             {
                 return new ListCustomersRequest(
                     this.cursor,
-                    this.limit,
                     this.sortField,
                     this.sortOrder);
             }

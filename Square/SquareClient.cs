@@ -361,7 +361,7 @@ namespace Square
         /// <summary>
         /// Gets the current version of the SDK.
         /// </summary>
-        public string SdkVersion => "13.1.0";
+        public string SdkVersion => "13.0.0";
 
         /// <summary>
         /// Gets the configuration of the Http Client associated with this client.
@@ -510,7 +510,7 @@ namespace Square
         /// </summary>
         public class Builder
         {
-            private string squareVersion = "2021-08-18";
+            private string squareVersion = "2021-07-21";
             private Environment environment = Square.Environment.Production;
             private string customUrl = "https://connect.squareup.com";
             private string accessToken = "TODO: Replace";

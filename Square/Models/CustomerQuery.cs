@@ -32,7 +32,7 @@ namespace Square.Models
 
         /// <summary>
         /// Represents a set of `CustomerQuery` filters used to limit the set of
-        /// customers returned by the [SearchCustomers]($e/Customers/SearchCustomers) endpoint.
+        /// `Customers` returned by `SearchCustomers`.
         /// </summary>
         [JsonProperty("filter", NullValueHandling = NullValueHandling.Ignore)]
         public Models.CustomerFilter Filter { get; }

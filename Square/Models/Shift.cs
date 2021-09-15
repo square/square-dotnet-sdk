@@ -64,41 +64,41 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// The UUID for this object.
+        /// UUID for this object
         /// </summary>
         [JsonProperty("id", NullValueHandling = NullValueHandling.Ignore)]
         public string Id { get; }
 
         /// <summary>
-        /// The ID of the employee this shift belongs to. DEPRECATED at version 2020-08-26. Use `team_member_id` instead.
+        /// The ID of the employee this shift belongs to. DEPRECATED at version 2020-08-26. Use `team_member_id` instead
         /// </summary>
         [JsonProperty("employee_id", NullValueHandling = NullValueHandling.Ignore)]
         public string EmployeeId { get; }
 
         /// <summary>
-        /// The ID of the location this shift occurred at. The location should be based on
+        /// The ID of the location this shift occurred at. Should be based on
         /// where the employee clocked in.
         /// </summary>
         [JsonProperty("location_id", NullValueHandling = NullValueHandling.Ignore)]
         public string LocationId { get; }
 
         /// <summary>
-        /// The read-only convenience value that is calculated from the location based
-        /// on the `location_id`. Format: the IANA timezone database identifier for the
+        /// Read-only convenience value that is calculated from the location based
+        /// on `location_id`. Format: the IANA Timezone Database identifier for the
         /// location timezone.
         /// </summary>
         [JsonProperty("timezone", NullValueHandling = NullValueHandling.Ignore)]
         public string Timezone { get; }
 
         /// <summary>
-        /// RFC 3339; shifted to the location timezone + offset. Precision up to the
+        /// RFC 3339; shifted to location timezone + offset. Precision up to the
         /// minute is respected; seconds are truncated.
         /// </summary>
         [JsonProperty("start_at")]
         public string StartAt { get; }
 
         /// <summary>
-        /// RFC 3339; shifted to the timezone + offset. Precision up to the minute is
+        /// RFC 3339; shifted to timezone + offset. Precision up to the minute is
         /// respected; seconds are truncated.
         /// </summary>
         [JsonProperty("end_at", NullValueHandling = NullValueHandling.Ignore)]
@@ -111,20 +111,20 @@ namespace Square.Models
         public Models.ShiftWage Wage { get; }
 
         /// <summary>
-        /// A list of all the paid or unpaid breaks that were taken during this shift.
+        /// A list of any paid or unpaid breaks that were taken during this shift.
         /// </summary>
         [JsonProperty("breaks", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.Break> Breaks { get; }
 
         /// <summary>
-        /// Enumerates the possible status of a `Shift`.
+        /// Enumerates the possible status of a `Shift`
         /// </summary>
         [JsonProperty("status", NullValueHandling = NullValueHandling.Ignore)]
         public string Status { get; }
 
         /// <summary>
-        /// Used for resolving concurrency issues. The request fails if the version
-        /// provided does not match the server version at the time of the request. If not provided,
+        /// Used for resolving concurrency issues; request will fail if version
+        /// provided does not match server version at time of request. If not provided,
         /// Square executes a blind write; potentially overwriting data from another
         /// write.
         /// </summary>
@@ -144,7 +144,7 @@ namespace Square.Models
         public string UpdatedAt { get; }
 
         /// <summary>
-        /// The ID of the team member this shift belongs to. Replaced `employee_id` at version "2020-08-26".
+        /// The ID of the team member this shift belongs to. Replaced `employee_id` at version "2020-08-26"
         /// </summary>
         [JsonProperty("team_member_id", NullValueHandling = NullValueHandling.Ignore)]
         public string TeamMemberId { get; }

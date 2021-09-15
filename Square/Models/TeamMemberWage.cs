@@ -37,13 +37,13 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// The UUID for this object.
+        /// UUID for this object.
         /// </summary>
         [JsonProperty("id", NullValueHandling = NullValueHandling.Ignore)]
         public string Id { get; }
 
         /// <summary>
-        /// The `TeamMember` that this wage is assigned to.
+        /// The `Team Member` that this wage is assigned to.
         /// </summary>
         [JsonProperty("team_member_id", NullValueHandling = NullValueHandling.Ignore)]
         public string TeamMemberId { get; }
