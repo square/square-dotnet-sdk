@@ -34,21 +34,21 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// Filter the returned `BreakType` results to only those that are associated with the
+        /// Filter Break Types returned to only those that are associated with the
         /// specified location.
         /// </summary>
         [JsonProperty("location_id", NullValueHandling = NullValueHandling.Ignore)]
         public string LocationId { get; }
 
         /// <summary>
-        /// The maximum number of `BreakType` results to return per page. The number can range between 1
-        /// and 200. The default is 200.
+        /// Maximum number of Break Types to return per page. Can range between 1
+        /// and 200. The default is the maximum at 200.
         /// </summary>
         [JsonProperty("limit", NullValueHandling = NullValueHandling.Ignore)]
         public int? Limit { get; }
 
         /// <summary>
-        /// A pointer to the next page of `BreakType` results to fetch.
+        /// Pointer to the next page of Break Type results to fetch.
         /// </summary>
         [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
         public string Cursor { get; }

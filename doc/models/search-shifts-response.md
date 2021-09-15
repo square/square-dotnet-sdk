@@ -1,8 +1,8 @@
 
 # Search Shifts Response
 
-The response to a request for `Shift` objects. The response contains
-the requested `Shift` objects and might contain a set of `Error` objects if
+The response to a request for `Shift` objects. Contains
+the requested `Shift` objects. May contain a set of `Error` objects if
 the request resulted in errors.
 
 ## Structure
@@ -13,8 +13,8 @@ the request resulted in errors.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `Shifts` | [`IList<Models.Shift>`](/doc/models/shift.md) | Optional | Shifts. |
-| `Cursor` | `string` | Optional | An opaque cursor for fetching the next page. |
+| `Shifts` | [`IList<Models.Shift>`](/doc/models/shift.md) | Optional | Shifts |
+| `Cursor` | `string` | Optional | Opaque cursor for fetching the next page. |
 | `Errors` | [`IList<Models.Error>`](/doc/models/error.md) | Optional | Any errors that occurred during the request. |
 
 ## Example (as JSON)

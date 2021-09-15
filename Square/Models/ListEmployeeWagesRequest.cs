@@ -34,20 +34,20 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// Filter the returned wages to only those that are associated with the specified employee.
+        /// Filter wages returned to only those that are associated with the specified employee.
         /// </summary>
         [JsonProperty("employee_id", NullValueHandling = NullValueHandling.Ignore)]
         public string EmployeeId { get; }
 
         /// <summary>
-        /// The maximum number of `EmployeeWage` results to return per page. The number can range between
-        /// 1 and 200. The default is 200.
+        /// Maximum number of Employee Wages to return per page. Can range between
+        /// 1 and 200. The default is the maximum at 200.
         /// </summary>
         [JsonProperty("limit", NullValueHandling = NullValueHandling.Ignore)]
         public int? Limit { get; }
 
         /// <summary>
-        /// A pointer to the next page of `EmployeeWage` results to fetch.
+        /// Pointer to the next page of Employee Wage results to fetch.
         /// </summary>
         [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
         public string Cursor { get; }

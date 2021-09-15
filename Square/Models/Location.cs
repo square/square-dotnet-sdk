@@ -120,31 +120,7 @@ namespace Square.Models
         public string Name { get; }
 
         /// <summary>
-        /// Represents a postal address in a country. The address format is based
-        /// on an [open-source library from Google](https://github.com/google/libaddressinput). For more information,
-        /// see [AddressValidationMetadata](https://github.com/google/libaddressinput/wiki/AddressValidationMetadata).
-        /// This format has dedicated fields for four address components: postal code,
-        /// locality (city), administrative district (state, prefecture, or province), and
-        /// sublocality (town or village). These components have dedicated fields in the
-        /// `Address` object because software sometimes behaves differently based on them.
-        /// For example, sales tax software may charge different amounts of sales tax
-        /// based on the postal code, and some software is only available in
-        /// certain states due to compliance reasons.
-        /// For the remaining address components, the `Address` type provides the
-        /// `address_line_1` and `address_line_2` fields for free-form data entry.
-        /// These fields are free-form because the remaining address components have
-        /// too many variations around the world and typical software does not parse
-        /// these components. These fields enable users to enter anything they want.
-        /// Note that, in the current implementation, all other `Address` type fields are blank.
-        /// These include `address_line_3`, `sublocality_2`, `sublocality_3`,
-        /// `administrative_district_level_2`, `administrative_district_level_3`,
-        /// `first_name`, `last_name`, and `organization`.
-        /// When it comes to localization, the seller's language preferences
-        /// (see [Language preferences](https://developer.squareup.com/docs/locations-api#location-specific-and-seller-level-language-preferences))
-        /// are ignored for addresses. Even though Square products (such as Square Point of Sale
-        /// and the Seller Dashboard) mostly use a seller's language preference in
-        /// communication, when it comes to addresses, they will use English for a US address,
-        /// Japanese for an address in Japan, and so on.
+        /// Represents a physical address.
         /// </summary>
         [JsonProperty("address", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Address Address { get; }
@@ -172,7 +148,6 @@ namespace Square.Models
 
         /// <summary>
         /// The time when the location was created, in RFC 3339 format.
-        /// For more information, see [Working with Dates](https://developer.squareup.com/docs/build-basics/working-with-dates).
         /// </summary>
         [JsonProperty("created_at", NullValueHandling = NullValueHandling.Ignore)]
         public string CreatedAt { get; }
@@ -206,7 +181,7 @@ namespace Square.Models
         public string Currency { get; }
 
         /// <summary>
-        /// The phone number of the location in human readable format. For example, `+353 80 0 098 8099`.
+        /// The phone number of the location in human readable format.
         /// </summary>
         [JsonProperty("phone_number", NullValueHandling = NullValueHandling.Ignore)]
         public string PhoneNumber { get; }
@@ -226,7 +201,7 @@ namespace Square.Models
         public string Type { get; }
 
         /// <summary>
-        /// The website URL of the location.  For example, `https://squareup.com`.
+        /// The website URL of the location.
         /// </summary>
         [JsonProperty("website_url", NullValueHandling = NullValueHandling.Ignore)]
         public string WebsiteUrl { get; }
@@ -241,7 +216,6 @@ namespace Square.Models
         /// The email of the location.
         /// This email is visible to the customers of the location.
         /// For example, the email appears on customer receipts.
-        /// For example, `help@squareup.com`.
         /// </summary>
         [JsonProperty("business_email", NullValueHandling = NullValueHandling.Ignore)]
         public string BusinessEmail { get; }
@@ -253,19 +227,19 @@ namespace Square.Models
         public string Description { get; }
 
         /// <summary>
-        /// The Twitter username of the location without the '@' symbol. For example, `Square`.
+        /// The Twitter username of the location without the '@' symbol.
         /// </summary>
         [JsonProperty("twitter_username", NullValueHandling = NullValueHandling.Ignore)]
         public string TwitterUsername { get; }
 
         /// <summary>
-        /// The Instagram username of the location without the '@' symbol. For example, `square`.
+        /// The Instagram username of the location without the '@' symbol.
         /// </summary>
         [JsonProperty("instagram_username", NullValueHandling = NullValueHandling.Ignore)]
         public string InstagramUsername { get; }
 
         /// <summary>
-        /// The Facebook profile URL of the location. The URL should begin with 'facebook.com/'. For example, `https://www.facebook.com/square`.
+        /// The Facebook profile URL of the location. The URL should begin with 'facebook.com/'.
         /// </summary>
         [JsonProperty("facebook_url", NullValueHandling = NullValueHandling.Ignore)]
         public string FacebookUrl { get; }

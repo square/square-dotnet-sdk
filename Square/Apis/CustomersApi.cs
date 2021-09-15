@@ -41,17 +41,15 @@ namespace Square.Apis
         /// profiles can take closer to one minute or longer, especially during network incidents and outages..
         /// </summary>
         /// <param name="cursor">Optional parameter: A pagination cursor returned by a previous call to this endpoint. Provide this cursor to retrieve the next set of results for your original query.  For more information, see [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination)..</param>
-        /// <param name="limit">Optional parameter: The maximum number of results to return in a single page. This limit is advisory. The response might contain more or fewer results.  The limit is ignored if it is less than 1 or greater than 100. The default value is 100.  For more information, see [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination)..</param>
-        /// <param name="sortField">Optional parameter: Indicates how customers should be sorted.  The default value is `DEFAULT`..</param>
-        /// <param name="sortOrder">Optional parameter: Indicates whether customers should be sorted in ascending (`ASC`) or descending (`DESC`) order.  The default value is `ASC`..</param>
+        /// <param name="sortField">Optional parameter: Indicates how customers should be sorted.  Default: `DEFAULT`..</param>
+        /// <param name="sortOrder">Optional parameter: Indicates whether customers should be sorted in ascending (`ASC`) or descending (`DESC`) order.  Default: `ASC`..</param>
         /// <returns>Returns the Models.ListCustomersResponse response from the API call.</returns>
         public Models.ListCustomersResponse ListCustomers(
                 string cursor = null,
-                int? limit = null,
                 string sortField = null,
                 string sortOrder = null)
         {
-            Task<Models.ListCustomersResponse> t = this.ListCustomersAsync(cursor, limit, sortField, sortOrder);
+            Task<Models.ListCustomersResponse> t = this.ListCustomersAsync(cursor, sortField, sortOrder);
             ApiHelper.RunTaskSynchronously(t);
             return t.Result;
         }
@@ -63,14 +61,12 @@ namespace Square.Apis
         /// profiles can take closer to one minute or longer, especially during network incidents and outages..
         /// </summary>
         /// <param name="cursor">Optional parameter: A pagination cursor returned by a previous call to this endpoint. Provide this cursor to retrieve the next set of results for your original query.  For more information, see [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination)..</param>
-        /// <param name="limit">Optional parameter: The maximum number of results to return in a single page. This limit is advisory. The response might contain more or fewer results.  The limit is ignored if it is less than 1 or greater than 100. The default value is 100.  For more information, see [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination)..</param>
-        /// <param name="sortField">Optional parameter: Indicates how customers should be sorted.  The default value is `DEFAULT`..</param>
-        /// <param name="sortOrder">Optional parameter: Indicates whether customers should be sorted in ascending (`ASC`) or descending (`DESC`) order.  The default value is `ASC`..</param>
+        /// <param name="sortField">Optional parameter: Indicates how customers should be sorted.  Default: `DEFAULT`..</param>
+        /// <param name="sortOrder">Optional parameter: Indicates whether customers should be sorted in ascending (`ASC`) or descending (`DESC`) order.  Default: `ASC`..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the Models.ListCustomersResponse response from the API call.</returns>
         public async Task<Models.ListCustomersResponse> ListCustomersAsync(
                 string cursor = null,
-                int? limit = null,
                 string sortField = null,
                 string sortOrder = null,
                 CancellationToken cancellationToken = default)
@@ -86,7 +82,6 @@ namespace Square.Apis
             var queryParams = new Dictionary<string, object>()
             {
                 { "cursor", cursor },
-                { "limit", limit },
                 { "sort_field", sortField },
                 { "sort_order", sortOrder },
             };
@@ -293,7 +288,7 @@ namespace Square.Apis
         /// To delete a customer profile that was created by merging existing profiles, you must use the ID of the newly created profile..
         /// </summary>
         /// <param name="customerId">Required parameter: The ID of the customer to delete..</param>
-        /// <param name="version">Optional parameter: The current version of the customer profile.  As a best practice, you should include this parameter to enable [optimistic concurrency](https://developer.squareup.com/docs/working-with-apis/optimistic-concurrency) control.  For more information, see [Delete a customer profile](https://developer.squareup.com/docs/customers-api/use-the-api/keep-records#delete-customer-profile)..</param>
+        /// <param name="version">Optional parameter: The current version of the customer profile.   As a best practice, you should include this parameter to enable [optimistic concurrency](https://developer.squareup.com/docs/working-with-apis/optimistic-concurrency) control.  For more information, see [Delete a customer profile](https://developer.squareup.com/docs/customers-api/use-the-api/keep-records#delete-customer-profile)..</param>
         /// <returns>Returns the Models.DeleteCustomerResponse response from the API call.</returns>
         public Models.DeleteCustomerResponse DeleteCustomer(
                 string customerId,
@@ -310,7 +305,7 @@ namespace Square.Apis
         /// To delete a customer profile that was created by merging existing profiles, you must use the ID of the newly created profile..
         /// </summary>
         /// <param name="customerId">Required parameter: The ID of the customer to delete..</param>
-        /// <param name="version">Optional parameter: The current version of the customer profile.  As a best practice, you should include this parameter to enable [optimistic concurrency](https://developer.squareup.com/docs/working-with-apis/optimistic-concurrency) control.  For more information, see [Delete a customer profile](https://developer.squareup.com/docs/customers-api/use-the-api/keep-records#delete-customer-profile)..</param>
+        /// <param name="version">Optional parameter: The current version of the customer profile.   As a best practice, you should include this parameter to enable [optimistic concurrency](https://developer.squareup.com/docs/working-with-apis/optimistic-concurrency) control.  For more information, see [Delete a customer profile](https://developer.squareup.com/docs/customers-api/use-the-api/keep-records#delete-customer-profile)..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the Models.DeleteCustomerResponse response from the API call.</returns>
         public async Task<Models.DeleteCustomerResponse> DeleteCustomerAsync(

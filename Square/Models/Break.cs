@@ -46,27 +46,27 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// The UUID for this object.
+        /// UUID for this object
         /// </summary>
         [JsonProperty("id", NullValueHandling = NullValueHandling.Ignore)]
         public string Id { get; }
 
         /// <summary>
-        /// RFC 3339; follows the same timezone information as `Shift`. Precision up to
+        /// RFC 3339; follows same timezone info as `Shift`. Precision up to
         /// the minute is respected; seconds are truncated.
         /// </summary>
         [JsonProperty("start_at")]
         public string StartAt { get; }
 
         /// <summary>
-        /// RFC 3339; follows the same timezone information as `Shift`. Precision up to
+        /// RFC 3339; follows same timezone info as `Shift`. Precision up to
         /// the minute is respected; seconds are truncated.
         /// </summary>
         [JsonProperty("end_at", NullValueHandling = NullValueHandling.Ignore)]
         public string EndAt { get; }
 
         /// <summary>
-        /// The `BreakType` that this `Break` was templated on.
+        /// The `BreakType` this `Break` was templated on.
         /// </summary>
         [JsonProperty("break_type_id")]
         public string BreakTypeId { get; }

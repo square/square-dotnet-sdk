@@ -41,14 +41,14 @@ namespace Square.Models
         public HttpContext Context { get; internal set; }
 
         /// <summary>
-        /// A page of `EmployeeWage` results.
+        /// A page of Employee Wage results.
         /// </summary>
         [JsonProperty("workweek_configs", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.WorkweekConfig> WorkweekConfigs { get; }
 
         /// <summary>
-        /// The value supplied in the subsequent request to fetch the next page of
-        /// `EmployeeWage` results.
+        /// Value supplied in the subsequent request to fetch the next page of
+        /// Employee Wage results.
         /// </summary>
         [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
         public string Cursor { get; }
