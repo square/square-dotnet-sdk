@@ -40,6 +40,7 @@ namespace Square.Models
         /// <param name="acceptedPaymentMethods">accepted_payment_methods.</param>
         /// <param name="customFields">custom_fields.</param>
         /// <param name="subscriptionId">subscription_id.</param>
+        /// <param name="saleOrServiceDate">sale_or_service_date.</param>
         public Invoice(
             string id = null,
             int? version = null,
@@ -60,7 +61,8 @@ namespace Square.Models
             string updatedAt = null,
             Models.InvoiceAcceptedPaymentMethods acceptedPaymentMethods = null,
             IList<Models.InvoiceCustomField> customFields = null,
-            string subscriptionId = null)
+            string subscriptionId = null,
+            string saleOrServiceDate = null)
         {
             this.Id = id;
             this.Version = version;
@@ -82,6 +84,7 @@ namespace Square.Models
             this.AcceptedPaymentMethods = acceptedPaymentMethods;
             this.CustomFields = customFields;
             this.SubscriptionId = subscriptionId;
+            this.SaleOrServiceDate = saleOrServiceDate;
         }
 
         /// <summary>
@@ -120,10 +123,16 @@ namespace Square.Models
 
         /// <summary>
         /// The payment schedule for the invoice, represented by one or more payment requests that
-        /// define payment settings, such as amount due and due date. You can specify a maximum of 13
-        /// payment requests, with up to 12 `INSTALLMENT` request types. For more information, see
-        /// [Payment requests](https://developer.squareup.com/docs/invoices-api/overview#payment-requests).
+        /// define payment settings, such as amount due and due date. An invoice supports the following payment request combinations:
+        /// - One balance
+        /// - One deposit with one balance
+        /// - 2–12 installments
+        /// - One deposit with 2–12 installments
         /// This field is required when creating an invoice. It must contain at least one payment request.
+        /// All payment requests for the invoice must equal the total order amount. For more information, see
+        /// [Payment requests](https://developer.squareup.com/docs/invoices-api/overview#payment-requests).
+        /// Adding `INSTALLMENT` payment requests to an invoice requires an
+        /// [Invoices Plus subscription](https://developer.squareup.com/docs/invoices-api/overview#invoices-plus-subscription).
         /// </summary>
         [JsonProperty("payment_requests", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.InvoicePaymentRequest> PaymentRequests { get; }
@@ -222,6 +231,8 @@ namespace Square.Models
         /// Additional seller-defined fields to render on the invoice. These fields are visible to sellers and buyers
         /// on the Square-hosted invoice page and in emailed or PDF copies of invoices. For more information, see
         /// [Custom fields](https://developer.squareup.com/docs/invoices-api/overview#custom-fields).
+        /// Adding custom fields to an invoice requires an
+        /// [Invoices Plus subscription](https://developer.squareup.com/docs/invoices-api/overview#invoices-plus-subscription).
         /// Max: 2 custom fields
         /// </summary>
         [JsonProperty("custom_fields", NullValueHandling = NullValueHandling.Ignore)]
@@ -233,6 +244,13 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("subscription_id", NullValueHandling = NullValueHandling.Ignore)]
         public string SubscriptionId { get; }
+
+        /// <summary>
+        /// The date of the sale or the date that the service is rendered, in `YYYY-MM-DD` format.
+        /// This field can be used to specify a past or future date which is displayed on the invoice.
+        /// </summary>
+        [JsonProperty("sale_or_service_date", NullValueHandling = NullValueHandling.Ignore)]
+        public string SaleOrServiceDate { get; }
 
         /// <inheritdoc/>
         public override string ToString()
@@ -277,13 +295,14 @@ namespace Square.Models
                 ((this.UpdatedAt == null && other.UpdatedAt == null) || (this.UpdatedAt?.Equals(other.UpdatedAt) == true)) &&
                 ((this.AcceptedPaymentMethods == null && other.AcceptedPaymentMethods == null) || (this.AcceptedPaymentMethods?.Equals(other.AcceptedPaymentMethods) == true)) &&
                 ((this.CustomFields == null && other.CustomFields == null) || (this.CustomFields?.Equals(other.CustomFields) == true)) &&
-                ((this.SubscriptionId == null && other.SubscriptionId == null) || (this.SubscriptionId?.Equals(other.SubscriptionId) == true));
+                ((this.SubscriptionId == null && other.SubscriptionId == null) || (this.SubscriptionId?.Equals(other.SubscriptionId) == true)) &&
+                ((this.SaleOrServiceDate == null && other.SaleOrServiceDate == null) || (this.SaleOrServiceDate?.Equals(other.SaleOrServiceDate) == true));
         }
 
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1880042028;
+            int hashCode = 998088589;
 
             if (this.Id != null)
             {
@@ -385,6 +404,11 @@ namespace Square.Models
                hashCode += this.SubscriptionId.GetHashCode();
             }
 
+            if (this.SaleOrServiceDate != null)
+            {
+               hashCode += this.SaleOrServiceDate.GetHashCode();
+            }
+
             return hashCode;
         }
 
@@ -414,6 +438,7 @@ namespace Square.Models
             toStringOutput.Add($"this.AcceptedPaymentMethods = {(this.AcceptedPaymentMethods == null ? "null" : this.AcceptedPaymentMethods.ToString())}");
             toStringOutput.Add($"this.CustomFields = {(this.CustomFields == null ? "null" : $"[{string.Join(", ", this.CustomFields)} ]")}");
             toStringOutput.Add($"this.SubscriptionId = {(this.SubscriptionId == null ? "null" : this.SubscriptionId == string.Empty ? "" : this.SubscriptionId)}");
+            toStringOutput.Add($"this.SaleOrServiceDate = {(this.SaleOrServiceDate == null ? "null" : this.SaleOrServiceDate == string.Empty ? "" : this.SaleOrServiceDate)}");
         }
 
         /// <summary>
@@ -442,7 +467,8 @@ namespace Square.Models
                 .UpdatedAt(this.UpdatedAt)
                 .AcceptedPaymentMethods(this.AcceptedPaymentMethods)
                 .CustomFields(this.CustomFields)
-                .SubscriptionId(this.SubscriptionId);
+                .SubscriptionId(this.SubscriptionId)
+                .SaleOrServiceDate(this.SaleOrServiceDate);
             return builder;
         }
 
@@ -471,6 +497,7 @@ namespace Square.Models
             private Models.InvoiceAcceptedPaymentMethods acceptedPaymentMethods;
             private IList<Models.InvoiceCustomField> customFields;
             private string subscriptionId;
+            private string saleOrServiceDate;
 
              /// <summary>
              /// Id.
@@ -692,6 +719,17 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// SaleOrServiceDate.
+             /// </summary>
+             /// <param name="saleOrServiceDate"> saleOrServiceDate. </param>
+             /// <returns> Builder. </returns>
+            public Builder SaleOrServiceDate(string saleOrServiceDate)
+            {
+                this.saleOrServiceDate = saleOrServiceDate;
+                return this;
+            }
+
             /// <summary>
             /// Builds class object.
             /// </summary>
@@ -718,7 +756,8 @@ namespace Square.Models
                     this.updatedAt,
                     this.acceptedPaymentMethods,
                     this.customFields,
-                    this.subscriptionId);
+                    this.subscriptionId,
+                    this.saleOrServiceDate);
             }
         }
     }

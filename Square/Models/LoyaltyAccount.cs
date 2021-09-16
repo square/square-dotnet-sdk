@@ -29,6 +29,7 @@ namespace Square.Models
         /// <param name="createdAt">created_at.</param>
         /// <param name="updatedAt">updated_at.</param>
         /// <param name="mapping">mapping.</param>
+        /// <param name="expiringPointDeadlines">expiring_point_deadlines.</param>
         public LoyaltyAccount(
             string programId,
             string id = null,
@@ -38,7 +39,8 @@ namespace Square.Models
             string enrolledAt = null,
             string createdAt = null,
             string updatedAt = null,
-            Models.LoyaltyAccountMapping mapping = null)
+            Models.LoyaltyAccountMapping mapping = null,
+            IList<Models.LoyaltyAccountExpiringPointDeadline> expiringPointDeadlines = null)
         {
             this.Id = id;
             this.ProgramId = programId;
@@ -49,6 +51,7 @@ namespace Square.Models
             this.CreatedAt = createdAt;
             this.UpdatedAt = updatedAt;
             this.Mapping = mapping;
+            this.ExpiringPointDeadlines = expiringPointDeadlines;
         }
 
         /// <summary>
@@ -64,7 +67,7 @@ namespace Square.Models
         public string ProgramId { get; }
 
         /// <summary>
-        /// The available point balance in the loyalty account.
+        /// The available point balance in the loyalty account. If points are scheduled to expire, they are listed in the `expiring_point_deadlines` field.
         /// Your application should be able to handle loyalty accounts that have a negative point balance (`balance` is less than 0). This might occur if a seller makes a manual adjustment or as a result of a refund or exchange.
         /// </summary>
         [JsonProperty("balance", NullValueHandling = NullValueHandling.Ignore)]
@@ -108,6 +111,13 @@ namespace Square.Models
         [JsonProperty("mapping", NullValueHandling = NullValueHandling.Ignore)]
         public Models.LoyaltyAccountMapping Mapping { get; }
 
+        /// <summary>
+        /// The schedule for when points expire in the loyalty account balance. This field is present only if the account has points that are scheduled to expire.
+        /// The total number of points in this field equals the number of points in the `balance` field.
+        /// </summary>
+        [JsonProperty("expiring_point_deadlines", NullValueHandling = NullValueHandling.Ignore)]
+        public IList<Models.LoyaltyAccountExpiringPointDeadline> ExpiringPointDeadlines { get; }
+
         /// <inheritdoc/>
         public override string ToString()
         {
@@ -140,13 +150,14 @@ namespace Square.Models
                 ((this.EnrolledAt == null && other.EnrolledAt == null) || (this.EnrolledAt?.Equals(other.EnrolledAt) == true)) &&
                 ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true)) &&
                 ((this.UpdatedAt == null && other.UpdatedAt == null) || (this.UpdatedAt?.Equals(other.UpdatedAt) == true)) &&
-                ((this.Mapping == null && other.Mapping == null) || (this.Mapping?.Equals(other.Mapping) == true));
+                ((this.Mapping == null && other.Mapping == null) || (this.Mapping?.Equals(other.Mapping) == true)) &&
+                ((this.ExpiringPointDeadlines == null && other.ExpiringPointDeadlines == null) || (this.ExpiringPointDeadlines?.Equals(other.ExpiringPointDeadlines) == true));
         }
 
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -119285274;
+            int hashCode = 302731941;
 
             if (this.Id != null)
             {
@@ -193,6 +204,11 @@ namespace Square.Models
                hashCode += this.Mapping.GetHashCode();
             }
 
+            if (this.ExpiringPointDeadlines != null)
+            {
+               hashCode += this.ExpiringPointDeadlines.GetHashCode();
+            }
+
             return hashCode;
         }
 
@@ -211,6 +227,7 @@ namespace Square.Models
             toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt == string.Empty ? "" : this.CreatedAt)}");
             toStringOutput.Add($"this.UpdatedAt = {(this.UpdatedAt == null ? "null" : this.UpdatedAt == string.Empty ? "" : this.UpdatedAt)}");
             toStringOutput.Add($"this.Mapping = {(this.Mapping == null ? "null" : this.Mapping.ToString())}");
+            toStringOutput.Add($"this.ExpiringPointDeadlines = {(this.ExpiringPointDeadlines == null ? "null" : $"[{string.Join(", ", this.ExpiringPointDeadlines)} ]")}");
         }
 
         /// <summary>
@@ -228,7 +245,8 @@ namespace Square.Models
                 .EnrolledAt(this.EnrolledAt)
                 .CreatedAt(this.CreatedAt)
                 .UpdatedAt(this.UpdatedAt)
-                .Mapping(this.Mapping);
+                .Mapping(this.Mapping)
+                .ExpiringPointDeadlines(this.ExpiringPointDeadlines);
             return builder;
         }
 
@@ -246,6 +264,7 @@ namespace Square.Models
             private string createdAt;
             private string updatedAt;
             private Models.LoyaltyAccountMapping mapping;
+            private IList<Models.LoyaltyAccountExpiringPointDeadline> expiringPointDeadlines;
 
             public Builder(
                 string programId)
@@ -352,6 +371,17 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// ExpiringPointDeadlines.
+             /// </summary>
+             /// <param name="expiringPointDeadlines"> expiringPointDeadlines. </param>
+             /// <returns> Builder. </returns>
+            public Builder ExpiringPointDeadlines(IList<Models.LoyaltyAccountExpiringPointDeadline> expiringPointDeadlines)
+            {
+                this.expiringPointDeadlines = expiringPointDeadlines;
+                return this;
+            }
+
             /// <summary>
             /// Builds class object.
             /// </summary>
@@ -367,7 +397,8 @@ namespace Square.Models
                     this.enrolledAt,
                     this.createdAt,
                     this.updatedAt,
-                    this.mapping);
+                    this.mapping,
+                    this.expiringPointDeadlines);
             }
         }
     }

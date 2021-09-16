@@ -47,6 +47,7 @@ namespace Square.Models
         /// <param name="totalDiscountMoney">total_discount_money.</param>
         /// <param name="totalTipMoney">total_tip_money.</param>
         /// <param name="totalServiceChargeMoney">total_service_charge_money.</param>
+        /// <param name="ticketName">ticket_name.</param>
         /// <param name="pricingOptions">pricing_options.</param>
         /// <param name="rewards">rewards.</param>
         public Order(
@@ -77,6 +78,7 @@ namespace Square.Models
             Models.Money totalDiscountMoney = null,
             Models.Money totalTipMoney = null,
             Models.Money totalServiceChargeMoney = null,
+            string ticketName = null,
             Models.OrderPricingOptions pricingOptions = null,
             IList<Models.OrderReward> rewards = null)
         {
@@ -107,6 +109,7 @@ namespace Square.Models
             this.TotalDiscountMoney = totalDiscountMoney;
             this.TotalTipMoney = totalTipMoney;
             this.TotalServiceChargeMoney = totalServiceChargeMoney;
+            this.TicketName = ticketName;
             this.PricingOptions = pricingOptions;
             this.Rewards = rewards;
         }
@@ -338,6 +341,15 @@ namespace Square.Models
         public Models.Money TotalServiceChargeMoney { get; }
 
         /// <summary>
+        /// A short-term identifier for the order (such as a customer first name, table number, or
+        /// auto-generated order number that resets daily). For orders created in Square Point of Sale, the `ticket_name` is
+        /// printed on in-person tickets and stubs. It converts to the `kitchen_printing.name` field in the
+        /// bill cart feature details.
+        /// </summary>
+        [JsonProperty("ticket_name", NullValueHandling = NullValueHandling.Ignore)]
+        public string TicketName { get; }
+
+        /// <summary>
         /// Pricing options for an order. The options affect how the order's price is calculated.
         /// They can be used, for example, to apply automatic price adjustments that are based on preconfigured
         /// [pricing rules]($m/CatalogPricingRule).
@@ -402,6 +414,7 @@ namespace Square.Models
                 ((this.TotalDiscountMoney == null && other.TotalDiscountMoney == null) || (this.TotalDiscountMoney?.Equals(other.TotalDiscountMoney) == true)) &&
                 ((this.TotalTipMoney == null && other.TotalTipMoney == null) || (this.TotalTipMoney?.Equals(other.TotalTipMoney) == true)) &&
                 ((this.TotalServiceChargeMoney == null && other.TotalServiceChargeMoney == null) || (this.TotalServiceChargeMoney?.Equals(other.TotalServiceChargeMoney) == true)) &&
+                ((this.TicketName == null && other.TicketName == null) || (this.TicketName?.Equals(other.TicketName) == true)) &&
                 ((this.PricingOptions == null && other.PricingOptions == null) || (this.PricingOptions?.Equals(other.PricingOptions) == true)) &&
                 ((this.Rewards == null && other.Rewards == null) || (this.Rewards?.Equals(other.Rewards) == true));
         }
@@ -409,7 +422,7 @@ namespace Square.Models
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 401631729;
+            int hashCode = 541536520;
 
             if (this.Id != null)
             {
@@ -546,6 +559,11 @@ namespace Square.Models
                hashCode += this.TotalServiceChargeMoney.GetHashCode();
             }
 
+            if (this.TicketName != null)
+            {
+               hashCode += this.TicketName.GetHashCode();
+            }
+
             if (this.PricingOptions != null)
             {
                hashCode += this.PricingOptions.GetHashCode();
@@ -592,6 +610,7 @@ namespace Square.Models
             toStringOutput.Add($"this.TotalDiscountMoney = {(this.TotalDiscountMoney == null ? "null" : this.TotalDiscountMoney.ToString())}");
             toStringOutput.Add($"this.TotalTipMoney = {(this.TotalTipMoney == null ? "null" : this.TotalTipMoney.ToString())}");
             toStringOutput.Add($"this.TotalServiceChargeMoney = {(this.TotalServiceChargeMoney == null ? "null" : this.TotalServiceChargeMoney.ToString())}");
+            toStringOutput.Add($"this.TicketName = {(this.TicketName == null ? "null" : this.TicketName == string.Empty ? "" : this.TicketName)}");
             toStringOutput.Add($"this.PricingOptions = {(this.PricingOptions == null ? "null" : this.PricingOptions.ToString())}");
             toStringOutput.Add($"this.Rewards = {(this.Rewards == null ? "null" : $"[{string.Join(", ", this.Rewards)} ]")}");
         }
@@ -630,6 +649,7 @@ namespace Square.Models
                 .TotalDiscountMoney(this.TotalDiscountMoney)
                 .TotalTipMoney(this.TotalTipMoney)
                 .TotalServiceChargeMoney(this.TotalServiceChargeMoney)
+                .TicketName(this.TicketName)
                 .PricingOptions(this.PricingOptions)
                 .Rewards(this.Rewards);
             return builder;
@@ -667,6 +687,7 @@ namespace Square.Models
             private Models.Money totalDiscountMoney;
             private Models.Money totalTipMoney;
             private Models.Money totalServiceChargeMoney;
+            private string ticketName;
             private Models.OrderPricingOptions pricingOptions;
             private IList<Models.OrderReward> rewards;
 
@@ -974,6 +995,17 @@ namespace Square.Models
             }
 
              /// <summary>
+             /// TicketName.
+             /// </summary>
+             /// <param name="ticketName"> ticketName. </param>
+             /// <returns> Builder. </returns>
+            public Builder TicketName(string ticketName)
+            {
+                this.ticketName = ticketName;
+                return this;
+            }
+
+             /// <summary>
              /// PricingOptions.
              /// </summary>
              /// <param name="pricingOptions"> pricingOptions. </param>
@@ -1029,6 +1061,7 @@ namespace Square.Models
                     this.totalDiscountMoney,
                     this.totalTipMoney,
                     this.totalServiceChargeMoney,
+                    this.ticketName,
                     this.pricingOptions,
                     this.rewards);
             }

@@ -50,6 +50,7 @@ var bodyOrderOrderLineItems0QuantityUnitMeasurementUnit = new MeasurementUnit.Bu
 var bodyOrderOrderLineItems0QuantityUnit = new OrderQuantityUnit.Builder()
     .MeasurementUnit(bodyOrderOrderLineItems0QuantityUnitMeasurementUnit)
     .Precision(191)
+    .CatalogObjectId("catalog_object_id7")
     .CatalogVersion(131L)
     .Build();
 var bodyOrderOrderLineItems0AppliedTaxes = new List<OrderLineItemAppliedTax>();
@@ -104,6 +105,7 @@ var bodyOrderOrderLineItems1QuantityUnitMeasurementUnit = new MeasurementUnit.Bu
 var bodyOrderOrderLineItems1QuantityUnit = new OrderQuantityUnit.Builder()
     .MeasurementUnit(bodyOrderOrderLineItems1QuantityUnitMeasurementUnit)
     .Precision(192)
+    .CatalogObjectId("catalog_object_id6")
     .CatalogVersion(130L)
     .Build();
 var bodyOrderOrderLineItems1BasePriceMoney = new Money.Builder()
@@ -130,6 +132,7 @@ var bodyOrderOrderLineItems2QuantityUnitMeasurementUnit = new MeasurementUnit.Bu
 var bodyOrderOrderLineItems2QuantityUnit = new OrderQuantityUnit.Builder()
     .MeasurementUnit(bodyOrderOrderLineItems2QuantityUnitMeasurementUnit)
     .Precision(193)
+    .CatalogObjectId("catalog_object_id5")
     .CatalogVersion(129L)
     .Build();
 var bodyOrderOrderLineItems2BasePriceMoney = new Money.Builder()

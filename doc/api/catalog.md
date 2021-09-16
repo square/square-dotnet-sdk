@@ -482,9 +482,9 @@ var requestImage = new CatalogObject.Builder(
     .ImageData(requestImageImageData)
     .Build();
 var request = new CreateCatalogImageRequest.Builder(
-        "528dea59-7bfb-43c1-bd48-4a6bba7dd61f86")
+        "528dea59-7bfb-43c1-bd48-4a6bba7dd61f86",
+        requestImage)
     .ObjectId("ND6EA5AAJEO5WL3JNNIAQA32")
-    .Image(requestImage)
     .Build();
 FileStreamInfo imageFile = new FileStreamInfo(new FileStream("dummy_file",FileMode.Open));
 
@@ -804,7 +804,7 @@ catch (ApiException e){};
 # Search Catalog Objects
 
 Searches for [CatalogObject](/doc/models/catalog-object.md) of any type by matching supported search attribute values,
-excluding custom attribute values on items or item variations, against one or more of the specified query expressions.
+excluding custom attribute values on items or item variations, against one or more of the specified query filters.
 
 This (`SearchCatalogObjects`) endpoint differs from the [SearchCatalogItems](/doc/api/catalog.md#search-catalog-items)
 endpoint in the following aspects:
@@ -886,7 +886,7 @@ catch (ApiException e){};
 # Search Catalog Items
 
 Searches for catalog items or item variations by matching supported search attribute values, including
-custom attribute values, against one or more of the specified query expressions.
+custom attribute values, against one or more of the specified query filters.
 
 This (`SearchCatalogItems`) endpoint differs from the [SearchCatalogObjects](/doc/api/catalog.md#search-catalog-objects)
 endpoint in the following aspects:

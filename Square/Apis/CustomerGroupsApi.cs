@@ -38,11 +38,13 @@ namespace Square.Apis
         /// Retrieves the list of customer groups of a business..
         /// </summary>
         /// <param name="cursor">Optional parameter: A pagination cursor returned by a previous call to this endpoint. Provide this cursor to retrieve the next set of results for your original query.  For more information, see [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination)..</param>
+        /// <param name="limit">Optional parameter: The maximum number of results to return in a single page. This limit is advisory. The response might contain more or fewer results.  The limit is ignored if it is less than 1 or greater than 50. The default value is 50.  For more information, see [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination)..</param>
         /// <returns>Returns the Models.ListCustomerGroupsResponse response from the API call.</returns>
         public Models.ListCustomerGroupsResponse ListCustomerGroups(
-                string cursor = null)
+                string cursor = null,
+                int? limit = null)
         {
-            Task<Models.ListCustomerGroupsResponse> t = this.ListCustomerGroupsAsync(cursor);
+            Task<Models.ListCustomerGroupsResponse> t = this.ListCustomerGroupsAsync(cursor, limit);
             ApiHelper.RunTaskSynchronously(t);
             return t.Result;
         }
@@ -51,10 +53,12 @@ namespace Square.Apis
         /// Retrieves the list of customer groups of a business..
         /// </summary>
         /// <param name="cursor">Optional parameter: A pagination cursor returned by a previous call to this endpoint. Provide this cursor to retrieve the next set of results for your original query.  For more information, see [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination)..</param>
+        /// <param name="limit">Optional parameter: The maximum number of results to return in a single page. This limit is advisory. The response might contain more or fewer results.  The limit is ignored if it is less than 1 or greater than 50. The default value is 50.  For more information, see [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination)..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the Models.ListCustomerGroupsResponse response from the API call.</returns>
         public async Task<Models.ListCustomerGroupsResponse> ListCustomerGroupsAsync(
                 string cursor = null,
+                int? limit = null,
                 CancellationToken cancellationToken = default)
         {
             // the base uri for api requests.
@@ -68,6 +72,7 @@ namespace Square.Apis
             var queryParams = new Dictionary<string, object>()
             {
                 { "cursor", cursor },
+                { "limit", limit },
             };
 
             // append request with appropriate headers and parameters

@@ -109,8 +109,8 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// Possible types of CatalogObjects returned from the Catalog, each
-        /// containing type-specific properties in the `*_data` field corresponding to the object type.
+        /// Possible types of CatalogObjects returned from the catalog, each
+        /// containing type-specific properties in the `*_data` field corresponding to the specfied object type.
         /// </summary>
         [JsonProperty("type")]
         public string Type { get; }
@@ -273,8 +273,12 @@ namespace Square.Models
         public Models.CatalogPricingRule PricingRuleData { get; }
 
         /// <summary>
-        /// An image file to use in Square catalogs. It can be associated with catalog
-        /// items, item variations, and categories.
+        /// An image file to use in Square catalogs. It can be associated with
+        /// `CatalogItem`, `CatalogItemVariation`, `CatalogCategory`, and `CatalogModifierList` objects.
+        /// Only the images on items and item variations are exposed in Dashboard.
+        /// Only the first image on an item is displayed in Square Point of Sale (SPOS).
+        /// Images on items and variations are displayed through Square Online Store.
+        /// Images on other object types are for use by 3rd party application developers.
         /// </summary>
         [JsonProperty("image_data", NullValueHandling = NullValueHandling.Ignore)]
         public Models.CatalogImage ImageData { get; }

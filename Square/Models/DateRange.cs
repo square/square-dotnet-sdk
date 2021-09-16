@@ -31,17 +31,17 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// String in `YYYY-MM-DD` format, e.g. `2017-10-31` per the ISO 8601
+        /// A string in `YYYY-MM-DD` format, such as `2017-10-31`, per the ISO 8601
         /// extended format for calendar dates.
-        /// The beginning of a date range (inclusive)
+        /// The beginning of a date range (inclusive).
         /// </summary>
         [JsonProperty("start_date", NullValueHandling = NullValueHandling.Ignore)]
         public string StartDate { get; }
 
         /// <summary>
-        /// String in `YYYY-MM-DD` format, e.g. `2017-10-31` per the ISO 8601
+        /// A string in `YYYY-MM-DD` format, such as `2017-10-31`, per the ISO 8601
         /// extended format for calendar dates.
-        /// The end of a date range (inclusive)
+        /// The end of a date range (inclusive).
         /// </summary>
         [JsonProperty("end_date", NullValueHandling = NullValueHandling.Ignore)]
         public string EndDate { get; }

@@ -84,6 +84,26 @@ namespace Square.Apis
                 CancellationToken cancellationToken = default);
 
         /// <summary>
+        /// Creates a new order, in the `DRAFT` state, by duplicating an existing order. The newly created order has .
+        /// only the core fields (such as line items, taxes, and discounts) copied from the original order..
+        /// </summary>
+        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
+        /// <returns>Returns the Models.CloneOrderResponse response from the API call.</returns>
+        Models.CloneOrderResponse CloneOrder(
+                Models.CloneOrderRequest body);
+
+        /// <summary>
+        /// Creates a new order, in the `DRAFT` state, by duplicating an existing order. The newly created order has .
+        /// only the core fields (such as line items, taxes, and discounts) copied from the original order..
+        /// </summary>
+        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
+        /// <param name="cancellationToken"> cancellationToken. </param>
+        /// <returns>Returns the Models.CloneOrderResponse response from the API call.</returns>
+        Task<Models.CloneOrderResponse> CloneOrderAsync(
+                Models.CloneOrderRequest body,
+                CancellationToken cancellationToken = default);
+
+        /// <summary>
         /// Search all orders for one or more locations. Orders include all sales,.
         /// returns, and exchanges regardless of how or when they entered the Square.
         /// ecosystem (such as Point of Sale, Invoices, and Connect APIs)..

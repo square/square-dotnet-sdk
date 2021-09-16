@@ -48,7 +48,6 @@ namespace Square
 
         private readonly Lazy<IMobileAuthorizationApi> mobileAuthorization;
         private readonly Lazy<IOAuthApi> oAuth;
-        private readonly Lazy<IV1EmployeesApi> v1Employees;
         private readonly Lazy<IV1TransactionsApi> v1Transactions;
         private readonly Lazy<IApplePayApi> applePay;
         private readonly Lazy<IBankAccountsApi> bankAccounts;
@@ -105,8 +104,6 @@ namespace Square
                 () => new MobileAuthorizationApi(this, this.httpClient, this.authManagers, this.httpCallBack));
             this.oAuth = new Lazy<IOAuthApi>(
                 () => new OAuthApi(this, this.httpClient, this.authManagers, this.httpCallBack));
-            this.v1Employees = new Lazy<IV1EmployeesApi>(
-                () => new V1EmployeesApi(this, this.httpClient, this.authManagers, this.httpCallBack));
             this.v1Transactions = new Lazy<IV1TransactionsApi>(
                 () => new V1TransactionsApi(this, this.httpClient, this.authManagers, this.httpCallBack));
             this.applePay = new Lazy<IApplePayApi>(
@@ -192,11 +189,6 @@ namespace Square
         /// Gets OAuthApi.
         /// </summary>
         public IOAuthApi OAuthApi => this.oAuth.Value;
-
-        /// <summary>
-        /// Gets V1EmployeesApi.
-        /// </summary>
-        public IV1EmployeesApi V1EmployeesApi => this.v1Employees.Value;
 
         /// <summary>
         /// Gets V1TransactionsApi.
@@ -361,7 +353,7 @@ namespace Square
         /// <summary>
         /// Gets the current version of the SDK.
         /// </summary>
-        public string SdkVersion => "14.0.0";
+        public string SdkVersion => "14.1.0";
 
         /// <summary>
         /// Gets the configuration of the Http Client associated with this client.
@@ -510,7 +502,7 @@ namespace Square
         /// </summary>
         public class Builder
         {
-            private string squareVersion = "2021-07-21";
+            private string squareVersion = "2021-09-15";
             private Environment environment = Square.Environment.Production;
             private string customUrl = "https://connect.squareup.com";
             private string accessToken = "TODO: Replace";

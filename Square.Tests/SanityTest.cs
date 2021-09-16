@@ -69,21 +69,25 @@ namespace Square.Tests
             return Guid.NewGuid().ToString();
         }
 
-        [Test]
-        public void TestFileUpload()
-        {   
-            var api = this.Client.CatalogApi;
-
-            CreateCatalogImageRequest request = new CreateCatalogImageRequest.Builder(GenerateIdempotencyKey())
-                .Image(new CatalogObject.Builder("IMAGE", "#dotnet_sdk_test")
-                        .ImageData(new Models.CatalogImage.Builder()
-                        .Caption("Image for Test File Upload")
-                        .Build()
-                    )
+        private CatalogObject GenerateCatalogImage()
+        {
+            return new CatalogObject.Builder("IMAGE", "#dotnet_sdk_test")
+                .ImageData(new Models.CatalogImage.Builder()
+                    .Caption("Image for Test File Upload")
                     .Build()
                 )
                 .Build();
-            
+        }
+
+        [Test]
+        public void TestFileUpload()
+        {
+            var api = this.Client.CatalogApi;
+
+            CreateCatalogImageRequest request = new CreateCatalogImageRequest
+                .Builder(GenerateIdempotencyKey(), GenerateCatalogImage())
+                .Build();
+
             // Using MemoryStream instead of FileStream for testing purpose
             var response = api.CreateCatalogImage(request, new Http.Client.FileStreamInfo(new MemoryStream()));
             Assert.IsNotNull(response.Image.ImageData.Url);
@@ -94,7 +98,7 @@ namespace Square.Tests
         }
 
         // We are addressing an issue associated with this test at the moment 20191202
-        [Test] 
+        [Test]
         public void TestV2APIException()
         {
             SquareClient badClient = new SquareClient.Builder()

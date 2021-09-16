@@ -21,12 +21,12 @@ namespace Square.Models
         /// Initializes a new instance of the <see cref="CreateCatalogImageRequest"/> class.
         /// </summary>
         /// <param name="idempotencyKey">idempotency_key.</param>
-        /// <param name="objectId">object_id.</param>
         /// <param name="image">image.</param>
+        /// <param name="objectId">object_id.</param>
         public CreateCatalogImageRequest(
             string idempotencyKey,
-            string objectId = null,
-            Models.CatalogObject image = null)
+            Models.CatalogObject image,
+            string objectId = null)
         {
             this.IdempotencyKey = idempotencyKey;
             this.ObjectId = objectId;
@@ -50,28 +50,14 @@ namespace Square.Models
         public string ObjectId { get; }
 
         /// <summary>
-        /// The wrapper object for the Catalog entries of a given object type.
-        /// The type of a particular `CatalogObject` is determined by the value of the
-        /// `type` attribute and only the corresponding data attribute can be set on the `CatalogObject` instance.
-        /// For example, the following list shows some instances of `CatalogObject` of a given `type` and
-        /// their corresponding data attribute that can be set:
-        /// - For a `CatalogObject` of the `ITEM` type, set the `item_data` attribute to yield the `CatalogItem` object.
-        /// - For a `CatalogObject` of the `ITEM_VARIATION` type, set the `item_variation_data` attribute to yield the `CatalogItemVariation` object.
-        /// - For a `CatalogObject` of the `MODIFIER` type, set the `modifier_data` attribute to yield the `CatalogModifier` object.
-        /// - For a `CatalogObject` of the `MODIFIER_LIST` type, set the `modifier_list_data` attribute to yield the `CatalogModifierList` object.
-        /// - For a `CatalogObject` of the `CATEGORY` type, set the `category_data` attribute to yield the `CatalogCategory` object.
-        /// - For a `CatalogObject` of the `DISCOUNT` type, set the `discount_data` attribute to yield the `CatalogDiscount` object.
-        /// - For a `CatalogObject` of the `TAX` type, set the `tax_data` attribute to yield the `CatalogTax` object.
-        /// - For a `CatalogObject` of the `IMAGE` type, set the `image_data` attribute to yield the `CatalogImageData`  object.
-        /// - For a `CatalogObject` of the `QUICK_AMOUNTS_SETTINGS` type, set the `quick_amounts_settings_data` attribute to yield the `CatalogQuickAmountsSettings` object.
-        /// - For a `CatalogObject` of the `PRICING_RULE` type, set the `pricing_rule_data` attribute to yield the `CatalogPricingRule` object.
-        /// - For a `CatalogObject` of the `TIME_PERIOD` type, set the `time_period_data` attribute to yield the `CatalogTimePeriod` object.
-        /// - For a `CatalogObject` of the `PRODUCT_SET` type, set the `product_set_data` attribute to yield the `CatalogProductSet`  object.
-        /// - For a `CatalogObject` of the `SUBSCRIPTION_PLAN` type, set the `subscription_plan_data` attribute to yield the `CatalogSubscriptionPlan` object.
+        /// The wrapper object for the catalog entries of a given object type.
+        /// Depending on the `type` attribute value, a `CatalogObject` instance assumes a type-specific data to yield the corresponding type of catalog object.
+        /// For example, if `type=ITEM`, the `CatalogObject` instance must have the ITEM-specific data set on the `item_data` attribute. The resulting `CatalogObject` instance is also a `CatalogItem` instance.
+        /// In general, if `type=<OBJECT_TYPE>`, the `CatalogObject` instance must have the `<OBJECT_TYPE>`-specific data set on the `<object_type>_data` attribute. The resulting `CatalogObject` instance is also a `Catalog<ObjectType>` instance.
         /// For a more detailed discussion of the Catalog data model, please see the
         /// [Design a Catalog](https://developer.squareup.com/docs/catalog-api/design-a-catalog) guide.
         /// </summary>
-        [JsonProperty("image", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("image")]
         public Models.CatalogObject Image { get; }
 
         /// <inheritdoc/>
@@ -144,9 +130,9 @@ namespace Square.Models
         public Builder ToBuilder()
         {
             var builder = new Builder(
-                this.IdempotencyKey)
-                .ObjectId(this.ObjectId)
-                .Image(this.Image);
+                this.IdempotencyKey,
+                this.Image)
+                .ObjectId(this.ObjectId);
             return builder;
         }
 
@@ -156,13 +142,15 @@ namespace Square.Models
         public class Builder
         {
             private string idempotencyKey;
-            private string objectId;
             private Models.CatalogObject image;
+            private string objectId;
 
             public Builder(
-                string idempotencyKey)
+                string idempotencyKey,
+                Models.CatalogObject image)
             {
                 this.idempotencyKey = idempotencyKey;
+                this.image = image;
             }
 
              /// <summary>
@@ -177,17 +165,6 @@ namespace Square.Models
             }
 
              /// <summary>
-             /// ObjectId.
-             /// </summary>
-             /// <param name="objectId"> objectId. </param>
-             /// <returns> Builder. </returns>
-            public Builder ObjectId(string objectId)
-            {
-                this.objectId = objectId;
-                return this;
-            }
-
-             /// <summary>
              /// Image.
              /// </summary>
              /// <param name="image"> image. </param>
@@ -195,6 +172,17 @@ namespace Square.Models
             public Builder Image(Models.CatalogObject image)
             {
                 this.image = image;
+                return this;
+            }
+
+             /// <summary>
+             /// ObjectId.
+             /// </summary>
+             /// <param name="objectId"> objectId. </param>
+             /// <returns> Builder. </returns>
+            public Builder ObjectId(string objectId)
+            {
+                this.objectId = objectId;
                 return this;
             }
 
@@ -206,8 +194,8 @@ namespace Square.Models
             {
                 return new CreateCatalogImageRequest(
                     this.idempotencyKey,
-                    this.objectId,
-                    this.image);
+                    this.image,
+                    this.objectId);
             }
         }
     }

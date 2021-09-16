@@ -22,12 +22,15 @@ namespace Square.Models
         /// </summary>
         /// <param name="locationIds">location_ids.</param>
         /// <param name="status">status.</param>
+        /// <param name="isOwner">is_owner.</param>
         public SearchTeamMembersFilter(
             IList<string> locationIds = null,
-            string status = null)
+            string status = null,
+            bool? isOwner = null)
         {
             this.LocationIds = locationIds;
             this.Status = status;
+            this.IsOwner = isOwner;
         }
 
         /// <summary>
@@ -42,6 +45,12 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("status", NullValueHandling = NullValueHandling.Ignore)]
         public string Status { get; }
+
+        /// <summary>
+        /// When present and set to true, returns the team member who is the owner of the Square account.
+        /// </summary>
+        [JsonProperty("is_owner", NullValueHandling = NullValueHandling.Ignore)]
+        public bool? IsOwner { get; }
 
         /// <inheritdoc/>
         public override string ToString()
@@ -68,13 +77,14 @@ namespace Square.Models
 
             return obj is SearchTeamMembersFilter other &&
                 ((this.LocationIds == null && other.LocationIds == null) || (this.LocationIds?.Equals(other.LocationIds) == true)) &&
-                ((this.Status == null && other.Status == null) || (this.Status?.Equals(other.Status) == true));
+                ((this.Status == null && other.Status == null) || (this.Status?.Equals(other.Status) == true)) &&
+                ((this.IsOwner == null && other.IsOwner == null) || (this.IsOwner?.Equals(other.IsOwner) == true));
         }
 
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 2068988289;
+            int hashCode = 1386663614;
 
             if (this.LocationIds != null)
             {
@@ -84,6 +94,11 @@ namespace Square.Models
             if (this.Status != null)
             {
                hashCode += this.Status.GetHashCode();
+            }
+
+            if (this.IsOwner != null)
+            {
+               hashCode += this.IsOwner.GetHashCode();
             }
 
             return hashCode;
@@ -97,6 +112,7 @@ namespace Square.Models
         {
             toStringOutput.Add($"this.LocationIds = {(this.LocationIds == null ? "null" : $"[{string.Join(", ", this.LocationIds)} ]")}");
             toStringOutput.Add($"this.Status = {(this.Status == null ? "null" : this.Status.ToString())}");
+            toStringOutput.Add($"this.IsOwner = {(this.IsOwner == null ? "null" : this.IsOwner.ToString())}");
         }
 
         /// <summary>
@@ -107,7 +123,8 @@ namespace Square.Models
         {
             var builder = new Builder()
                 .LocationIds(this.LocationIds)
-                .Status(this.Status);
+                .Status(this.Status)
+                .IsOwner(this.IsOwner);
             return builder;
         }
 
@@ -118,6 +135,7 @@ namespace Square.Models
         {
             private IList<string> locationIds;
             private string status;
+            private bool? isOwner;
 
              /// <summary>
              /// LocationIds.
@@ -141,6 +159,17 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// IsOwner.
+             /// </summary>
+             /// <param name="isOwner"> isOwner. </param>
+             /// <returns> Builder. </returns>
+            public Builder IsOwner(bool? isOwner)
+            {
+                this.isOwner = isOwner;
+                return this;
+            }
+
             /// <summary>
             /// Builds class object.
             /// </summary>
@@ -149,7 +178,8 @@ namespace Square.Models
             {
                 return new SearchTeamMembersFilter(
                     this.locationIds,
-                    this.status);
+                    this.status,
+                    this.isOwner);
             }
         }
     }
