@@ -13,6 +13,7 @@ IOrdersApi ordersApi = client.OrdersApi;
 * [Create Order](/doc/api/orders.md#create-order)
 * [Batch Retrieve Orders](/doc/api/orders.md#batch-retrieve-orders)
 * [Calculate Order](/doc/api/orders.md#calculate-order)
+* [Clone Order](/doc/api/orders.md#clone-order)
 * [Search Orders](/doc/api/orders.md#search-orders)
 * [Retrieve Order](/doc/api/orders.md#retrieve-order)
 * [Update Order](/doc/api/orders.md#update-order)
@@ -66,6 +67,7 @@ var bodyOrderLineItems0QuantityUnitMeasurementUnit = new MeasurementUnit.Builder
 var bodyOrderLineItems0QuantityUnit = new OrderQuantityUnit.Builder()
     .MeasurementUnit(bodyOrderLineItems0QuantityUnitMeasurementUnit)
     .Precision(189)
+    .CatalogObjectId("catalog_object_id1")
     .CatalogVersion(133L)
     .Build();
 var bodyOrderLineItems0BasePriceMoney = new Money.Builder()
@@ -97,6 +99,7 @@ var bodyOrderLineItems1QuantityUnitMeasurementUnit = new MeasurementUnit.Builder
 var bodyOrderLineItems1QuantityUnit = new OrderQuantityUnit.Builder()
     .MeasurementUnit(bodyOrderLineItems1QuantityUnitMeasurementUnit)
     .Precision(188)
+    .CatalogObjectId("catalog_object_id0")
     .CatalogVersion(134L)
     .Build();
 var bodyOrderLineItems1Modifiers = new List<OrderLineItemModifier>();
@@ -294,6 +297,7 @@ var bodyOrderLineItems0QuantityUnitMeasurementUnit = new MeasurementUnit.Builder
 var bodyOrderLineItems0QuantityUnit = new OrderQuantityUnit.Builder()
     .MeasurementUnit(bodyOrderLineItems0QuantityUnitMeasurementUnit)
     .Precision(189)
+    .CatalogObjectId("catalog_object_id1")
     .CatalogVersion(133L)
     .Build();
 var bodyOrderLineItems0BasePriceMoney = new Money.Builder()
@@ -325,6 +329,7 @@ var bodyOrderLineItems1QuantityUnitMeasurementUnit = new MeasurementUnit.Builder
 var bodyOrderLineItems1QuantityUnit = new OrderQuantityUnit.Builder()
     .MeasurementUnit(bodyOrderLineItems1QuantityUnitMeasurementUnit)
     .Precision(188)
+    .CatalogObjectId("catalog_object_id0")
     .CatalogVersion(134L)
     .Build();
 var bodyOrderLineItems1BasePriceMoney = new Money.Builder()
@@ -392,6 +397,43 @@ var body = new CalculateOrderRequest.Builder(
 try
 {
     CalculateOrderResponse result = await ordersApi.CalculateOrderAsync(body);
+}
+catch (ApiException e){};
+```
+
+
+# Clone Order
+
+Creates a new order, in the `DRAFT` state, by duplicating an existing order. The newly created order has
+only the core fields (such as line items, taxes, and discounts) copied from the original order.
+
+```csharp
+CloneOrderAsync(
+    Models.CloneOrderRequest body)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `body` | [`Models.CloneOrderRequest`](/doc/models/clone-order-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+
+## Response Type
+
+[`Task<Models.CloneOrderResponse>`](/doc/models/clone-order-response.md)
+
+## Example Usage
+
+```csharp
+var body = new CloneOrderRequest.Builder(
+        "ZAISEM52YcpmcWAzERDOyiWS123")
+    .Version(3)
+    .IdempotencyKey("UNIQUE_STRING")
+    .Build();
+
+try
+{
+    CloneOrderResponse result = await ordersApi.CloneOrderAsync(body);
 }
 catch (ApiException e){};
 ```
@@ -601,6 +643,7 @@ var bodyOrderLineItems0QuantityUnitMeasurementUnit = new MeasurementUnit.Builder
 var bodyOrderLineItems0QuantityUnit = new OrderQuantityUnit.Builder()
     .MeasurementUnit(bodyOrderLineItems0QuantityUnitMeasurementUnit)
     .Precision(189)
+    .CatalogObjectId("catalog_object_id1")
     .CatalogVersion(133L)
     .Build();
 var bodyOrderLineItems0 = new OrderLineItem.Builder(
@@ -627,6 +670,7 @@ var bodyOrderLineItems1QuantityUnitMeasurementUnit = new MeasurementUnit.Builder
 var bodyOrderLineItems1QuantityUnit = new OrderQuantityUnit.Builder()
     .MeasurementUnit(bodyOrderLineItems1QuantityUnitMeasurementUnit)
     .Precision(188)
+    .CatalogObjectId("catalog_object_id0")
     .CatalogVersion(134L)
     .Build();
 var bodyOrderLineItems1 = new OrderLineItem.Builder(

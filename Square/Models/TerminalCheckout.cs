@@ -34,6 +34,7 @@ namespace Square.Models
         /// <param name="appId">app_id.</param>
         /// <param name="locationId">location_id.</param>
         /// <param name="paymentType">payment_type.</param>
+        /// <param name="customerId">customer_id.</param>
         public TerminalCheckout(
             Models.Money amountMoney,
             Models.DeviceCheckoutOptions deviceOptions,
@@ -48,7 +49,8 @@ namespace Square.Models
             string updatedAt = null,
             string appId = null,
             string locationId = null,
-            string paymentType = null)
+            string paymentType = null,
+            string customerId = null)
         {
             this.Id = id;
             this.AmountMoney = amountMoney;
@@ -64,6 +66,7 @@ namespace Square.Models
             this.AppId = appId;
             this.LocationId = locationId;
             this.PaymentType = paymentType;
+            this.CustomerId = customerId;
         }
 
         /// <summary>
@@ -163,6 +166,12 @@ namespace Square.Models
         [JsonProperty("payment_type", NullValueHandling = NullValueHandling.Ignore)]
         public string PaymentType { get; }
 
+        /// <summary>
+        /// An optional ID of the customer associated with the checkout.
+        /// </summary>
+        [JsonProperty("customer_id", NullValueHandling = NullValueHandling.Ignore)]
+        public string CustomerId { get; }
+
         /// <inheritdoc/>
         public override string ToString()
         {
@@ -200,13 +209,14 @@ namespace Square.Models
                 ((this.UpdatedAt == null && other.UpdatedAt == null) || (this.UpdatedAt?.Equals(other.UpdatedAt) == true)) &&
                 ((this.AppId == null && other.AppId == null) || (this.AppId?.Equals(other.AppId) == true)) &&
                 ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true)) &&
-                ((this.PaymentType == null && other.PaymentType == null) || (this.PaymentType?.Equals(other.PaymentType) == true));
+                ((this.PaymentType == null && other.PaymentType == null) || (this.PaymentType?.Equals(other.PaymentType) == true)) &&
+                ((this.CustomerId == null && other.CustomerId == null) || (this.CustomerId?.Equals(other.CustomerId) == true));
         }
 
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1916281180;
+            int hashCode = -1994036817;
 
             if (this.Id != null)
             {
@@ -278,6 +288,11 @@ namespace Square.Models
                hashCode += this.PaymentType.GetHashCode();
             }
 
+            if (this.CustomerId != null)
+            {
+               hashCode += this.CustomerId.GetHashCode();
+            }
+
             return hashCode;
         }
 
@@ -301,6 +316,7 @@ namespace Square.Models
             toStringOutput.Add($"this.AppId = {(this.AppId == null ? "null" : this.AppId == string.Empty ? "" : this.AppId)}");
             toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId == string.Empty ? "" : this.LocationId)}");
             toStringOutput.Add($"this.PaymentType = {(this.PaymentType == null ? "null" : this.PaymentType.ToString())}");
+            toStringOutput.Add($"this.CustomerId = {(this.CustomerId == null ? "null" : this.CustomerId == string.Empty ? "" : this.CustomerId)}");
         }
 
         /// <summary>
@@ -323,7 +339,8 @@ namespace Square.Models
                 .UpdatedAt(this.UpdatedAt)
                 .AppId(this.AppId)
                 .LocationId(this.LocationId)
-                .PaymentType(this.PaymentType);
+                .PaymentType(this.PaymentType)
+                .CustomerId(this.CustomerId);
             return builder;
         }
 
@@ -346,6 +363,7 @@ namespace Square.Models
             private string appId;
             private string locationId;
             private string paymentType;
+            private string customerId;
 
             public Builder(
                 Models.Money amountMoney,
@@ -509,6 +527,17 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// CustomerId.
+             /// </summary>
+             /// <param name="customerId"> customerId. </param>
+             /// <returns> Builder. </returns>
+            public Builder CustomerId(string customerId)
+            {
+                this.customerId = customerId;
+                return this;
+            }
+
             /// <summary>
             /// Builds class object.
             /// </summary>
@@ -529,7 +558,8 @@ namespace Square.Models
                     this.updatedAt,
                     this.appId,
                     this.locationId,
-                    this.paymentType);
+                    this.paymentType,
+                    this.customerId);
             }
         }
     }

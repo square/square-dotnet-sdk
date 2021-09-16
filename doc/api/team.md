@@ -191,6 +191,7 @@ bodyQueryFilterLocationIds.Add("0G5P3VGACMMQZ");
 var bodyQueryFilter = new SearchTeamMembersFilter.Builder()
     .LocationIds(bodyQueryFilterLocationIds)
     .Status("ACTIVE")
+    .IsOwner(false)
     .Build();
 var bodyQuery = new SearchTeamMembersQuery.Builder()
     .Filter(bodyQueryFilter)

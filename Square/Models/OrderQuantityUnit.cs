@@ -22,14 +22,17 @@ namespace Square.Models
         /// </summary>
         /// <param name="measurementUnit">measurement_unit.</param>
         /// <param name="precision">precision.</param>
+        /// <param name="catalogObjectId">catalog_object_id.</param>
         /// <param name="catalogVersion">catalog_version.</param>
         public OrderQuantityUnit(
             Models.MeasurementUnit measurementUnit = null,
             int? precision = null,
+            string catalogObjectId = null,
             long? catalogVersion = null)
         {
             this.MeasurementUnit = measurementUnit;
             this.Precision = precision;
+            this.CatalogObjectId = catalogObjectId;
             this.CatalogVersion = catalogVersion;
         }
 
@@ -49,6 +52,14 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("precision", NullValueHandling = NullValueHandling.Ignore)]
         public int? Precision { get; }
+
+        /// <summary>
+        /// The catalog object ID referencing the
+        /// [CatalogMeasurementUnit]($m/CatalogMeasurementUnit).
+        /// This field is set when this is a catalog-backed measurement unit.
+        /// </summary>
+        [JsonProperty("catalog_object_id", NullValueHandling = NullValueHandling.Ignore)]
+        public string CatalogObjectId { get; }
 
         /// <summary>
         /// The version of the catalog object that this measurement unit references.
@@ -83,13 +94,14 @@ namespace Square.Models
             return obj is OrderQuantityUnit other &&
                 ((this.MeasurementUnit == null && other.MeasurementUnit == null) || (this.MeasurementUnit?.Equals(other.MeasurementUnit) == true)) &&
                 ((this.Precision == null && other.Precision == null) || (this.Precision?.Equals(other.Precision) == true)) &&
+                ((this.CatalogObjectId == null && other.CatalogObjectId == null) || (this.CatalogObjectId?.Equals(other.CatalogObjectId) == true)) &&
                 ((this.CatalogVersion == null && other.CatalogVersion == null) || (this.CatalogVersion?.Equals(other.CatalogVersion) == true));
         }
 
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 174888101;
+            int hashCode = -1360372013;
 
             if (this.MeasurementUnit != null)
             {
@@ -99,6 +111,11 @@ namespace Square.Models
             if (this.Precision != null)
             {
                hashCode += this.Precision.GetHashCode();
+            }
+
+            if (this.CatalogObjectId != null)
+            {
+               hashCode += this.CatalogObjectId.GetHashCode();
             }
 
             if (this.CatalogVersion != null)
@@ -117,6 +134,7 @@ namespace Square.Models
         {
             toStringOutput.Add($"this.MeasurementUnit = {(this.MeasurementUnit == null ? "null" : this.MeasurementUnit.ToString())}");
             toStringOutput.Add($"this.Precision = {(this.Precision == null ? "null" : this.Precision.ToString())}");
+            toStringOutput.Add($"this.CatalogObjectId = {(this.CatalogObjectId == null ? "null" : this.CatalogObjectId == string.Empty ? "" : this.CatalogObjectId)}");
             toStringOutput.Add($"this.CatalogVersion = {(this.CatalogVersion == null ? "null" : this.CatalogVersion.ToString())}");
         }
 
@@ -129,6 +147,7 @@ namespace Square.Models
             var builder = new Builder()
                 .MeasurementUnit(this.MeasurementUnit)
                 .Precision(this.Precision)
+                .CatalogObjectId(this.CatalogObjectId)
                 .CatalogVersion(this.CatalogVersion);
             return builder;
         }
@@ -140,6 +159,7 @@ namespace Square.Models
         {
             private Models.MeasurementUnit measurementUnit;
             private int? precision;
+            private string catalogObjectId;
             private long? catalogVersion;
 
              /// <summary>
@@ -165,6 +185,17 @@ namespace Square.Models
             }
 
              /// <summary>
+             /// CatalogObjectId.
+             /// </summary>
+             /// <param name="catalogObjectId"> catalogObjectId. </param>
+             /// <returns> Builder. </returns>
+            public Builder CatalogObjectId(string catalogObjectId)
+            {
+                this.catalogObjectId = catalogObjectId;
+                return this;
+            }
+
+             /// <summary>
              /// CatalogVersion.
              /// </summary>
              /// <param name="catalogVersion"> catalogVersion. </param>
@@ -184,6 +215,7 @@ namespace Square.Models
                 return new OrderQuantityUnit(
                     this.measurementUnit,
                     this.precision,
+                    this.catalogObjectId,
                     this.catalogVersion);
             }
         }

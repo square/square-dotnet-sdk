@@ -249,6 +249,76 @@ namespace Square.Apis
         }
 
         /// <summary>
+        /// Creates a new order, in the `DRAFT` state, by duplicating an existing order. The newly created order has .
+        /// only the core fields (such as line items, taxes, and discounts) copied from the original order..
+        /// </summary>
+        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
+        /// <returns>Returns the Models.CloneOrderResponse response from the API call.</returns>
+        public Models.CloneOrderResponse CloneOrder(
+                Models.CloneOrderRequest body)
+        {
+            Task<Models.CloneOrderResponse> t = this.CloneOrderAsync(body);
+            ApiHelper.RunTaskSynchronously(t);
+            return t.Result;
+        }
+
+        /// <summary>
+        /// Creates a new order, in the `DRAFT` state, by duplicating an existing order. The newly created order has .
+        /// only the core fields (such as line items, taxes, and discounts) copied from the original order..
+        /// </summary>
+        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
+        /// <param name="cancellationToken"> cancellationToken. </param>
+        /// <returns>Returns the Models.CloneOrderResponse response from the API call.</returns>
+        public async Task<Models.CloneOrderResponse> CloneOrderAsync(
+                Models.CloneOrderRequest body,
+                CancellationToken cancellationToken = default)
+        {
+            // the base uri for api requests.
+            string baseUri = this.Config.GetBaseUri();
+
+            // prepare query string for API call.
+            StringBuilder queryBuilder = new StringBuilder(baseUri);
+            queryBuilder.Append("/v2/orders/clone");
+
+            // append request with appropriate headers and parameters
+            var headers = new Dictionary<string, string>()
+            {
+                { "user-agent", this.UserAgent },
+                { "accept", "application/json" },
+                { "content-type", "application/json; charset=utf-8" },
+                { "Square-Version", this.Config.SquareVersion },
+            };
+
+            // append body params.
+            var bodyText = ApiHelper.JsonSerialize(body);
+
+            // prepare the API call request to fetch the response.
+            HttpRequest httpRequest = this.GetClientInstance().PostBody(queryBuilder.ToString(), headers, bodyText);
+
+            if (this.HttpCallBack != null)
+            {
+                this.HttpCallBack.OnBeforeHttpRequestEventHandler(this.GetClientInstance(), httpRequest);
+            }
+
+            httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
+
+            // invoke request and get response.
+            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+            HttpContext context = new HttpContext(httpRequest, response);
+            if (this.HttpCallBack != null)
+            {
+                this.HttpCallBack.OnAfterHttpResponseEventHandler(this.GetClientInstance(), response);
+            }
+
+            // handle errors defined at the API level.
+            this.ValidateResponse(response, context);
+
+            var responseModel = ApiHelper.JsonDeserialize<Models.CloneOrderResponse>(response.Body);
+            responseModel.Context = context;
+            return responseModel;
+        }
+
+        /// <summary>
         /// Search all orders for one or more locations. Orders include all sales,.
         /// returns, and exchanges regardless of how or when they entered the Square.
         /// ecosystem (such as Point of Sale, Invoices, and Connect APIs)..

@@ -52,15 +52,15 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// The Square-issued ID of your application, available from the
-        /// [developer dashboard](https://developer.squareup.com/apps).
+        /// The Square-issued ID of your application, available from the OAuth page
+        /// for your application on the Developer Dashboard.
         /// </summary>
         [JsonProperty("client_id")]
         public string ClientId { get; }
 
         /// <summary>
         /// The Square-issued application secret for your application, available
-        /// from the [developer dashboard](https://developer.squareup.com/apps).
+        /// from the OAuth page for your application on the Developer Dashboard.
         /// </summary>
         [JsonProperty("client_secret")]
         public string ClientSecret { get; }
@@ -74,7 +74,7 @@ namespace Square.Models
         public string Code { get; }
 
         /// <summary>
-        /// The redirect URL assigned in the [developer dashboard](https://developer.squareup.com/apps).
+        /// The redirect URL assigned in the OAuth page for your application on the Developer Dashboard.
         /// </summary>
         [JsonProperty("redirect_uri", NullValueHandling = NullValueHandling.Ignore)]
         public string RedirectUri { get; }
@@ -115,7 +115,7 @@ namespace Square.Models
 
         /// <summary>
         /// A boolean indicating a request for a short-lived access token.
-        /// The short-lived access token returned in the response will expire in 24 hours.
+        /// The short-lived access token returned in the response expires in 24 hours.
         /// </summary>
         [JsonProperty("short_lived", NullValueHandling = NullValueHandling.Ignore)]
         public bool? ShortLived { get; }

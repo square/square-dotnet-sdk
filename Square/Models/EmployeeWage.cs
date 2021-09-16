@@ -37,7 +37,7 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// UUID for this object.
+        /// The UUID for this object.
         /// </summary>
         [JsonProperty("id", NullValueHandling = NullValueHandling.Ignore)]
         public string Id { get; }

@@ -164,6 +164,7 @@ var bodyInvoice = new Invoice.Builder()
     .ScheduledAt("2030-01-13T10:00:00Z")
     .AcceptedPaymentMethods(bodyInvoiceAcceptedPaymentMethods)
     .CustomFields(bodyInvoiceCustomFields)
+    .SaleOrServiceDate("2030-01-24")
     .Build();
 var body = new CreateInvoiceRequest.Builder(
         bodyInvoice)

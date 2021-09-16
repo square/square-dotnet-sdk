@@ -45,6 +45,9 @@ dotnet add package Square
 * [Disputes]
 * [Checkout]
 * [Apple Pay]
+* [Cards]
+
+### Terminal
 * [Terminal]
 
 ### Orders
@@ -68,6 +71,10 @@ dotnet add package Square
 ### Loyalty
 * [Loyalty]
 
+### Gift Cards
+* [Gift Cards]
+* [Gift Card Activities]
+
 ### Bookings
 * [Bookings]
 
@@ -75,12 +82,11 @@ dotnet add package Square
 * [Merchants]
 * [Locations]
 * [Devices]
+* [Cash Drawers]
 
 ### Team
 * [Team]
-* [Employees]
 * [Labor]
-* [Cash Drawers]
 
 ### Financials
 * [Bank Accounts]
@@ -94,6 +100,7 @@ dotnet add package Square
 * [OAuth]
 
 ### Deprecated APIs
+* [Employees]
 * [V1 Employees]
 * [V1 Transactions]
 * [V1 Items]
@@ -357,3 +364,6 @@ You can also use the Square API to create applications or services that work wit
 [Transactions]: doc/api/transactions.md
 [Sites]: doc/api/sites.md
 [Snippets]: doc/api/snippets.md
+[Cards]: doc/api/cards.md
+[Gift Cards]: doc/api/gift-cards.md
+[Gift Card Activities]: doc/api/gift-card-activities.md

@@ -33,6 +33,7 @@ profiles can take closer to one minute or longer, especially during network inci
 ```csharp
 ListCustomersAsync(
     string cursor = null,
+    int? limit = null,
     string sortField = null,
     string sortOrder = null)
 ```
@@ -42,8 +43,9 @@ ListCustomersAsync(
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `cursor` | `string` | Query, Optional | A pagination cursor returned by a previous call to this endpoint.<br>Provide this cursor to retrieve the next set of results for your original query.<br><br>For more information, see [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination). |
-| `sortField` | [`string`](/doc/models/customer-sort-field.md) | Query, Optional | Indicates how customers should be sorted.<br><br>Default: `DEFAULT`. |
-| `sortOrder` | [`string`](/doc/models/sort-order.md) | Query, Optional | Indicates whether customers should be sorted in ascending (`ASC`) or<br>descending (`DESC`) order.<br><br>Default: `ASC`. |
+| `limit` | `int?` | Query, Optional | The maximum number of results to return in a single page. This limit is advisory. The response might contain more or fewer results.<br>The limit is ignored if it is less than 1 or greater than 100. The default value is 100.<br><br>For more information, see [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination). |
+| `sortField` | [`string`](/doc/models/customer-sort-field.md) | Query, Optional | Indicates how customers should be sorted.<br><br>The default value is `DEFAULT`. |
+| `sortOrder` | [`string`](/doc/models/sort-order.md) | Query, Optional | Indicates whether customers should be sorted in ascending (`ASC`) or<br>descending (`DESC`) order.<br><br>The default value is `ASC`. |
 
 ## Response Type
 
@@ -53,12 +55,13 @@ ListCustomersAsync(
 
 ```csharp
 string cursor = "cursor6";
+int? limit = 172;
 string sortField = "DEFAULT";
 string sortOrder = "DESC";
 
 try
 {
-    ListCustomersResponse result = await customersApi.ListCustomersAsync(cursor, sortField, sortOrder);
+    ListCustomersResponse result = await customersApi.ListCustomersAsync(cursor, limit, sortField, sortOrder);
 }
 catch (ApiException e){};
 ```
