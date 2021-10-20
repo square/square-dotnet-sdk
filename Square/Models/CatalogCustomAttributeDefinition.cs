@@ -183,75 +183,18 @@ namespace Square.Models
                 ((this.CustomAttributeUsageCount == null && other.CustomAttributeUsageCount == null) || (this.CustomAttributeUsageCount?.Equals(other.CustomAttributeUsageCount) == true)) &&
                 ((this.Key == null && other.Key == null) || (this.Key?.Equals(other.Key) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 1892852076;
+            hashCode = HashCode.Combine(this.Type, this.Name, this.Description, this.SourceApplication, this.AllowedObjectTypes, this.SellerVisibility, this.AppVisibility);
 
-            if (this.Type != null)
-            {
-               hashCode += this.Type.GetHashCode();
-            }
-
-            if (this.Name != null)
-            {
-               hashCode += this.Name.GetHashCode();
-            }
-
-            if (this.Description != null)
-            {
-               hashCode += this.Description.GetHashCode();
-            }
-
-            if (this.SourceApplication != null)
-            {
-               hashCode += this.SourceApplication.GetHashCode();
-            }
-
-            if (this.AllowedObjectTypes != null)
-            {
-               hashCode += this.AllowedObjectTypes.GetHashCode();
-            }
-
-            if (this.SellerVisibility != null)
-            {
-               hashCode += this.SellerVisibility.GetHashCode();
-            }
-
-            if (this.AppVisibility != null)
-            {
-               hashCode += this.AppVisibility.GetHashCode();
-            }
-
-            if (this.StringConfig != null)
-            {
-               hashCode += this.StringConfig.GetHashCode();
-            }
-
-            if (this.NumberConfig != null)
-            {
-               hashCode += this.NumberConfig.GetHashCode();
-            }
-
-            if (this.SelectionConfig != null)
-            {
-               hashCode += this.SelectionConfig.GetHashCode();
-            }
-
-            if (this.CustomAttributeUsageCount != null)
-            {
-               hashCode += this.CustomAttributeUsageCount.GetHashCode();
-            }
-
-            if (this.Key != null)
-            {
-               hashCode += this.Key.GetHashCode();
-            }
+            hashCode = HashCode.Combine(hashCode, this.StringConfig, this.NumberConfig, this.SelectionConfig, this.CustomAttributeUsageCount, this.Key);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

@@ -149,16 +149,11 @@ namespace Square.Utilities
 
             // does the query string already has parameters
             bool hasParams = IndexOf(queryBuilder, "?") > 0;
+            var processedParameters = ProcessQueryParamsForCustomTypes(parameters);
 
             // iterate and append parameters
-            foreach (KeyValuePair<string, object> pair in parameters)
+            foreach (KeyValuePair<string, object> pair in processedParameters)
             {
-                // ignore null values
-                if (pair.Value == null)
-                {
-                continue;
-                }
-
                 // if already has parameters, use the &amp; to append new parameters
                 queryBuilder.Append(hasParams ? '&' : '?');
 
@@ -540,6 +535,114 @@ namespace Square.Utilities
             }
 
             return elemValue;
+        }
+
+        /// <summary>
+        /// Apply appropriate serialization to query parameters.
+        /// </summary>
+        /// <param name="parameters"> Parameters. </param>
+        /// <returns> List of processed query parameters. </returns>
+        private static List<KeyValuePair<string, object>> ProcessQueryParamsForCustomTypes(IEnumerable<KeyValuePair<string, object>> parameters)
+        {
+            var processedParameters = new List<KeyValuePair<string, object>>();
+
+            foreach (var kvp in parameters)
+            {
+                // ignore null values
+                if (kvp.Value == null)
+                {
+                    continue;
+                }
+
+                if (kvp.Value.GetType().Namespace.StartsWith("System"))
+                {
+                    if (kvp.Value is IList)
+                    {
+                        var list = kvp.Value as IList;
+
+                        if (list?.Count != 0)
+                        {
+                            var item = list[0];
+
+                            if (item.GetType().Namespace.StartsWith("System"))
+                            {
+                                // List of scalar type
+                                processedParameters.Add(kvp);
+                            }
+                            else
+                            {
+                                // List of custom type
+                                var innerList = PrepareFormFieldsFromObject(kvp.Key, kvp.Value, arrayDeserializationFormat: ArrayDeserialization.Indexed);
+                                innerList = ApplySerializationFormatToScalarArrays(innerList);
+                                processedParameters.AddRange(innerList);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        // Scalar type
+                        processedParameters.Add(kvp);
+                    }
+                }
+                else
+                {
+                    // Custom type
+                    var list = PrepareFormFieldsFromObject(kvp.Key, kvp.Value, arrayDeserializationFormat: ArrayDeserialization.Indexed);
+                    list = ApplySerializationFormatToScalarArrays(list);
+                    processedParameters.AddRange(list);
+                }
+            }
+
+            return processedParameters;
+        }
+
+        /// <summary>
+        /// Apply serialization to scalar arrays in custom objects.
+        /// </summary>
+        /// <param name="parameters"> Parameters. </param>
+        /// <returns> List of processed query parameters. </returns>
+        private static List<KeyValuePair<string, object>> ApplySerializationFormatToScalarArrays(IEnumerable<KeyValuePair<string, object>> parameters)
+        {
+            var processedParams = new List<KeyValuePair<string, object>>();
+            var unprocessedParams = parameters.Where(x => IsScalarValuesArray(x.Key) != true);
+
+            // Extract scalar arrays and group them by key
+            var arraysGroupedByKey = parameters
+                .Where(x => IsScalarValuesArray(x.Key) == true)
+                .Select(x =>
+                {
+                    return new KeyValuePair<string, object>(
+                        x.Key.Substring(0, x.Key.LastIndexOf('[')),
+                        x.Value);
+                })
+                .GroupBy(x => x.Key);
+
+            foreach (var group in arraysGroupedByKey)
+            {
+                var key = group.Key;
+                var values = new List<object>();
+                foreach (var aaa in group)
+                {
+                    values.Add(aaa.Value);
+                }
+
+                processedParams.Add(new KeyValuePair<string, object>(key, values));
+            }
+
+            processedParams.AddRange(unprocessedParams);
+
+            return processedParams;
+        }
+
+        /// <summary>
+        /// Checks if the provided string is part of a scalar array
+        /// </summary>
+        /// <param name="input"> Input string.</param>
+        /// <returns> True or False </returns>
+        private static bool IsScalarValuesArray(string input)
+        {
+            var regex = new Regex("\\[\\d+\\]$", RegexOptions.IgnoreCase);
+            return regex.IsMatch(input);
         }
     }
 }

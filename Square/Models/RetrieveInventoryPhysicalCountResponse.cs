@@ -80,7 +80,7 @@ namespace Square.Models
                 ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true)) &&
                 ((this.Count == null && other.Count == null) || (this.Count?.Equals(other.Count) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
@@ -90,20 +90,11 @@ namespace Square.Models
             {
                 hashCode += this.Context.GetHashCode();
             }
-
-            if (this.Errors != null)
-            {
-               hashCode += this.Errors.GetHashCode();
-            }
-
-            if (this.Count != null)
-            {
-               hashCode += this.Count.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.Errors, this.Count);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

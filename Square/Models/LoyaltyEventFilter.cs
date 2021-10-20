@@ -99,40 +99,16 @@ namespace Square.Models
                 ((this.LocationFilter == null && other.LocationFilter == null) || (this.LocationFilter?.Equals(other.LocationFilter) == true)) &&
                 ((this.OrderFilter == null && other.OrderFilter == null) || (this.OrderFilter?.Equals(other.OrderFilter) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 1266972041;
-
-            if (this.LoyaltyAccountFilter != null)
-            {
-               hashCode += this.LoyaltyAccountFilter.GetHashCode();
-            }
-
-            if (this.TypeFilter != null)
-            {
-               hashCode += this.TypeFilter.GetHashCode();
-            }
-
-            if (this.DateTimeFilter != null)
-            {
-               hashCode += this.DateTimeFilter.GetHashCode();
-            }
-
-            if (this.LocationFilter != null)
-            {
-               hashCode += this.LocationFilter.GetHashCode();
-            }
-
-            if (this.OrderFilter != null)
-            {
-               hashCode += this.OrderFilter.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.LoyaltyAccountFilter, this.TypeFilter, this.DateTimeFilter, this.LocationFilter, this.OrderFilter);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

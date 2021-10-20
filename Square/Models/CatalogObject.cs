@@ -380,155 +380,22 @@ namespace Square.Models
                 ((this.CustomAttributeDefinitionData == null && other.CustomAttributeDefinitionData == null) || (this.CustomAttributeDefinitionData?.Equals(other.CustomAttributeDefinitionData) == true)) &&
                 ((this.QuickAmountsSettingsData == null && other.QuickAmountsSettingsData == null) || (this.QuickAmountsSettingsData?.Equals(other.QuickAmountsSettingsData) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1814270990;
+            hashCode = HashCode.Combine(this.Type, this.Id, this.UpdatedAt, this.Version, this.IsDeleted, this.CustomAttributeValues, this.CatalogV1Ids);
 
-            if (this.Type != null)
-            {
-               hashCode += this.Type.GetHashCode();
-            }
+            hashCode = HashCode.Combine(hashCode, this.PresentAtAllLocations, this.PresentAtLocationIds, this.AbsentAtLocationIds, this.ImageId, this.ItemData, this.CategoryData, this.ItemVariationData);
 
-            if (this.Id != null)
-            {
-               hashCode += this.Id.GetHashCode();
-            }
+            hashCode = HashCode.Combine(hashCode, this.TaxData, this.DiscountData, this.ModifierListData, this.ModifierData, this.TimePeriodData, this.ProductSetData, this.PricingRuleData);
 
-            if (this.UpdatedAt != null)
-            {
-               hashCode += this.UpdatedAt.GetHashCode();
-            }
-
-            if (this.Version != null)
-            {
-               hashCode += this.Version.GetHashCode();
-            }
-
-            if (this.IsDeleted != null)
-            {
-               hashCode += this.IsDeleted.GetHashCode();
-            }
-
-            if (this.CustomAttributeValues != null)
-            {
-               hashCode += this.CustomAttributeValues.GetHashCode();
-            }
-
-            if (this.CatalogV1Ids != null)
-            {
-               hashCode += this.CatalogV1Ids.GetHashCode();
-            }
-
-            if (this.PresentAtAllLocations != null)
-            {
-               hashCode += this.PresentAtAllLocations.GetHashCode();
-            }
-
-            if (this.PresentAtLocationIds != null)
-            {
-               hashCode += this.PresentAtLocationIds.GetHashCode();
-            }
-
-            if (this.AbsentAtLocationIds != null)
-            {
-               hashCode += this.AbsentAtLocationIds.GetHashCode();
-            }
-
-            if (this.ImageId != null)
-            {
-               hashCode += this.ImageId.GetHashCode();
-            }
-
-            if (this.ItemData != null)
-            {
-               hashCode += this.ItemData.GetHashCode();
-            }
-
-            if (this.CategoryData != null)
-            {
-               hashCode += this.CategoryData.GetHashCode();
-            }
-
-            if (this.ItemVariationData != null)
-            {
-               hashCode += this.ItemVariationData.GetHashCode();
-            }
-
-            if (this.TaxData != null)
-            {
-               hashCode += this.TaxData.GetHashCode();
-            }
-
-            if (this.DiscountData != null)
-            {
-               hashCode += this.DiscountData.GetHashCode();
-            }
-
-            if (this.ModifierListData != null)
-            {
-               hashCode += this.ModifierListData.GetHashCode();
-            }
-
-            if (this.ModifierData != null)
-            {
-               hashCode += this.ModifierData.GetHashCode();
-            }
-
-            if (this.TimePeriodData != null)
-            {
-               hashCode += this.TimePeriodData.GetHashCode();
-            }
-
-            if (this.ProductSetData != null)
-            {
-               hashCode += this.ProductSetData.GetHashCode();
-            }
-
-            if (this.PricingRuleData != null)
-            {
-               hashCode += this.PricingRuleData.GetHashCode();
-            }
-
-            if (this.ImageData != null)
-            {
-               hashCode += this.ImageData.GetHashCode();
-            }
-
-            if (this.MeasurementUnitData != null)
-            {
-               hashCode += this.MeasurementUnitData.GetHashCode();
-            }
-
-            if (this.SubscriptionPlanData != null)
-            {
-               hashCode += this.SubscriptionPlanData.GetHashCode();
-            }
-
-            if (this.ItemOptionData != null)
-            {
-               hashCode += this.ItemOptionData.GetHashCode();
-            }
-
-            if (this.ItemOptionValueData != null)
-            {
-               hashCode += this.ItemOptionValueData.GetHashCode();
-            }
-
-            if (this.CustomAttributeDefinitionData != null)
-            {
-               hashCode += this.CustomAttributeDefinitionData.GetHashCode();
-            }
-
-            if (this.QuickAmountsSettingsData != null)
-            {
-               hashCode += this.QuickAmountsSettingsData.GetHashCode();
-            }
+            hashCode = HashCode.Combine(hashCode, this.ImageData, this.MeasurementUnitData, this.SubscriptionPlanData, this.ItemOptionData, this.ItemOptionValueData, this.CustomAttributeDefinitionData, this.QuickAmountsSettingsData);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

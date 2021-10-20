@@ -117,7 +117,7 @@ namespace Square.Models
                 ((this.BankAccountId == null && other.BankAccountId == null) || (this.BankAccountId?.Equals(other.BankAccountId) == true)) &&
                 ((this.Entries == null && other.Entries == null) || (this.Entries?.Equals(other.Entries) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
@@ -127,40 +127,11 @@ namespace Square.Models
             {
                 hashCode += this.Context.GetHashCode();
             }
-
-            if (this.Id != null)
-            {
-               hashCode += this.Id.GetHashCode();
-            }
-
-            if (this.Status != null)
-            {
-               hashCode += this.Status.GetHashCode();
-            }
-
-            if (this.TotalMoney != null)
-            {
-               hashCode += this.TotalMoney.GetHashCode();
-            }
-
-            if (this.InitiatedAt != null)
-            {
-               hashCode += this.InitiatedAt.GetHashCode();
-            }
-
-            if (this.BankAccountId != null)
-            {
-               hashCode += this.BankAccountId.GetHashCode();
-            }
-
-            if (this.Entries != null)
-            {
-               hashCode += this.Entries.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.Id, this.Status, this.TotalMoney, this.InitiatedAt, this.BankAccountId, this.Entries);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

@@ -59,20 +59,16 @@ namespace Square.Models
             return obj is SearchAvailabilityQuery other &&
                 ((this.Filter == null && other.Filter == null) || (this.Filter?.Equals(other.Filter) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 2004874460;
-
-            if (this.Filter != null)
-            {
-               hashCode += this.Filter.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.Filter);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

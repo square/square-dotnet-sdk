@@ -114,45 +114,16 @@ namespace Square.Models
                 ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true)) &&
                 ((this.UpdatedAt == null && other.UpdatedAt == null) || (this.UpdatedAt?.Equals(other.UpdatedAt) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 1176790268;
-
-            if (this.Id != null)
-            {
-               hashCode += this.Id.GetHashCode();
-            }
-
-            if (this.StartOfWeek != null)
-            {
-               hashCode += this.StartOfWeek.GetHashCode();
-            }
-
-            if (this.StartOfDayLocalTime != null)
-            {
-               hashCode += this.StartOfDayLocalTime.GetHashCode();
-            }
-
-            if (this.Version != null)
-            {
-               hashCode += this.Version.GetHashCode();
-            }
-
-            if (this.CreatedAt != null)
-            {
-               hashCode += this.CreatedAt.GetHashCode();
-            }
-
-            if (this.UpdatedAt != null)
-            {
-               hashCode += this.UpdatedAt.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.Id, this.StartOfWeek, this.StartOfDayLocalTime, this.Version, this.CreatedAt, this.UpdatedAt);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

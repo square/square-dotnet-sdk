@@ -230,93 +230,20 @@ namespace Square.Models
                 ((this.Version == null && other.Version == null) || (this.Version?.Equals(other.Version) == true)) &&
                 ((this.BankName == null && other.BankName == null) || (this.BankName?.Equals(other.BankName) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 424336074;
+            hashCode = HashCode.Combine(this.Id, this.AccountNumberSuffix, this.Country, this.Currency, this.AccountType, this.HolderName, this.PrimaryBankIdentificationNumber);
 
-            if (this.Id != null)
-            {
-               hashCode += this.Id.GetHashCode();
-            }
+            hashCode = HashCode.Combine(hashCode, this.SecondaryBankIdentificationNumber, this.DebitMandateReferenceId, this.ReferenceId, this.LocationId, this.Status, this.Creditable, this.Debitable);
 
-            if (this.AccountNumberSuffix != null)
-            {
-               hashCode += this.AccountNumberSuffix.GetHashCode();
-            }
-
-            if (this.Country != null)
-            {
-               hashCode += this.Country.GetHashCode();
-            }
-
-            if (this.Currency != null)
-            {
-               hashCode += this.Currency.GetHashCode();
-            }
-
-            if (this.AccountType != null)
-            {
-               hashCode += this.AccountType.GetHashCode();
-            }
-
-            if (this.HolderName != null)
-            {
-               hashCode += this.HolderName.GetHashCode();
-            }
-
-            if (this.PrimaryBankIdentificationNumber != null)
-            {
-               hashCode += this.PrimaryBankIdentificationNumber.GetHashCode();
-            }
-
-            if (this.SecondaryBankIdentificationNumber != null)
-            {
-               hashCode += this.SecondaryBankIdentificationNumber.GetHashCode();
-            }
-
-            if (this.DebitMandateReferenceId != null)
-            {
-               hashCode += this.DebitMandateReferenceId.GetHashCode();
-            }
-
-            if (this.ReferenceId != null)
-            {
-               hashCode += this.ReferenceId.GetHashCode();
-            }
-
-            if (this.LocationId != null)
-            {
-               hashCode += this.LocationId.GetHashCode();
-            }
-
-            if (this.Status != null)
-            {
-               hashCode += this.Status.GetHashCode();
-            }
-
-            hashCode += this.Creditable.GetHashCode();
-            hashCode += this.Debitable.GetHashCode();
-
-            if (this.Fingerprint != null)
-            {
-               hashCode += this.Fingerprint.GetHashCode();
-            }
-
-            if (this.Version != null)
-            {
-               hashCode += this.Version.GetHashCode();
-            }
-
-            if (this.BankName != null)
-            {
-               hashCode += this.BankName.GetHashCode();
-            }
+            hashCode = HashCode.Combine(hashCode, this.Fingerprint, this.Version, this.BankName);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

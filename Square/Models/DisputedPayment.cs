@@ -59,20 +59,16 @@ namespace Square.Models
             return obj is DisputedPayment other &&
                 ((this.PaymentId == null && other.PaymentId == null) || (this.PaymentId?.Equals(other.PaymentId) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 1880326021;
-
-            if (this.PaymentId != null)
-            {
-               hashCode += this.PaymentId.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.PaymentId);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

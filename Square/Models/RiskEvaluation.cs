@@ -69,25 +69,16 @@ namespace Square.Models
                 ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true)) &&
                 ((this.RiskLevel == null && other.RiskLevel == null) || (this.RiskLevel?.Equals(other.RiskLevel) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 692810603;
-
-            if (this.CreatedAt != null)
-            {
-               hashCode += this.CreatedAt.GetHashCode();
-            }
-
-            if (this.RiskLevel != null)
-            {
-               hashCode += this.RiskLevel.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.CreatedAt, this.RiskLevel);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

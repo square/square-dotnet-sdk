@@ -84,30 +84,16 @@ namespace Square.Models
                 ((this.Limit == null && other.Limit == null) || (this.Limit?.Equals(other.Limit) == true)) &&
                 ((this.Query == null && other.Query == null) || (this.Query?.Equals(other.Query) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 236271593;
-
-            if (this.Cursor != null)
-            {
-               hashCode += this.Cursor.GetHashCode();
-            }
-
-            if (this.Limit != null)
-            {
-               hashCode += this.Limit.GetHashCode();
-            }
-
-            if (this.Query != null)
-            {
-               hashCode += this.Query.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.Cursor, this.Limit, this.Query);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

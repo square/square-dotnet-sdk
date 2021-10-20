@@ -159,70 +159,18 @@ namespace Square.Models
                 ((this.StatusChangedAt == null && other.StatusChangedAt == null) || (this.StatusChangedAt?.Equals(other.StatusChangedAt) == true)) &&
                 ((this.PairedAt == null && other.PairedAt == null) || (this.PairedAt?.Equals(other.PairedAt) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1978949756;
+            hashCode = HashCode.Combine(this.Id, this.Name, this.Code, this.DeviceId, this.ProductType, this.LocationId, this.Status);
 
-            if (this.Id != null)
-            {
-               hashCode += this.Id.GetHashCode();
-            }
-
-            if (this.Name != null)
-            {
-               hashCode += this.Name.GetHashCode();
-            }
-
-            if (this.Code != null)
-            {
-               hashCode += this.Code.GetHashCode();
-            }
-
-            if (this.DeviceId != null)
-            {
-               hashCode += this.DeviceId.GetHashCode();
-            }
-
-            if (this.ProductType != null)
-            {
-               hashCode += this.ProductType.GetHashCode();
-            }
-
-            if (this.LocationId != null)
-            {
-               hashCode += this.LocationId.GetHashCode();
-            }
-
-            if (this.Status != null)
-            {
-               hashCode += this.Status.GetHashCode();
-            }
-
-            if (this.PairBy != null)
-            {
-               hashCode += this.PairBy.GetHashCode();
-            }
-
-            if (this.CreatedAt != null)
-            {
-               hashCode += this.CreatedAt.GetHashCode();
-            }
-
-            if (this.StatusChangedAt != null)
-            {
-               hashCode += this.StatusChangedAt.GetHashCode();
-            }
-
-            if (this.PairedAt != null)
-            {
-               hashCode += this.PairedAt.GetHashCode();
-            }
+            hashCode = HashCode.Combine(hashCode, this.PairBy, this.CreatedAt, this.StatusChangedAt, this.PairedAt);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

@@ -78,7 +78,7 @@ namespace Square.Models
                 ((this.EmployeeWage == null && other.EmployeeWage == null) || (this.EmployeeWage?.Equals(other.EmployeeWage) == true)) &&
                 ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
@@ -88,20 +88,11 @@ namespace Square.Models
             {
                 hashCode += this.Context.GetHashCode();
             }
-
-            if (this.EmployeeWage != null)
-            {
-               hashCode += this.EmployeeWage.GetHashCode();
-            }
-
-            if (this.Errors != null)
-            {
-               hashCode += this.Errors.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.EmployeeWage, this.Errors);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

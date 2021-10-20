@@ -73,25 +73,16 @@ namespace Square.Models
                 ((this.BlockedDiscounts == null && other.BlockedDiscounts == null) || (this.BlockedDiscounts?.Equals(other.BlockedDiscounts) == true)) &&
                 ((this.BlockedTaxes == null && other.BlockedTaxes == null) || (this.BlockedTaxes?.Equals(other.BlockedTaxes) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 497511120;
-
-            if (this.BlockedDiscounts != null)
-            {
-               hashCode += this.BlockedDiscounts.GetHashCode();
-            }
-
-            if (this.BlockedTaxes != null)
-            {
-               hashCode += this.BlockedTaxes.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.BlockedDiscounts, this.BlockedTaxes);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

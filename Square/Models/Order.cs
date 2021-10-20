@@ -418,165 +418,24 @@ namespace Square.Models
                 ((this.PricingOptions == null && other.PricingOptions == null) || (this.PricingOptions?.Equals(other.PricingOptions) == true)) &&
                 ((this.Rewards == null && other.Rewards == null) || (this.Rewards?.Equals(other.Rewards) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 541536520;
+            hashCode = HashCode.Combine(this.Id, this.LocationId, this.ReferenceId, this.Source, this.CustomerId, this.LineItems, this.Taxes);
 
-            if (this.Id != null)
-            {
-               hashCode += this.Id.GetHashCode();
-            }
+            hashCode = HashCode.Combine(hashCode, this.Discounts, this.ServiceCharges, this.Fulfillments, this.Returns, this.ReturnAmounts, this.NetAmounts, this.RoundingAdjustment);
 
-            if (this.LocationId != null)
-            {
-               hashCode += this.LocationId.GetHashCode();
-            }
+            hashCode = HashCode.Combine(hashCode, this.Tenders, this.Refunds, this.Metadata, this.CreatedAt, this.UpdatedAt, this.ClosedAt, this.State);
 
-            if (this.ReferenceId != null)
-            {
-               hashCode += this.ReferenceId.GetHashCode();
-            }
+            hashCode = HashCode.Combine(hashCode, this.Version, this.TotalMoney, this.TotalTaxMoney, this.TotalDiscountMoney, this.TotalTipMoney, this.TotalServiceChargeMoney, this.TicketName);
 
-            if (this.Source != null)
-            {
-               hashCode += this.Source.GetHashCode();
-            }
-
-            if (this.CustomerId != null)
-            {
-               hashCode += this.CustomerId.GetHashCode();
-            }
-
-            if (this.LineItems != null)
-            {
-               hashCode += this.LineItems.GetHashCode();
-            }
-
-            if (this.Taxes != null)
-            {
-               hashCode += this.Taxes.GetHashCode();
-            }
-
-            if (this.Discounts != null)
-            {
-               hashCode += this.Discounts.GetHashCode();
-            }
-
-            if (this.ServiceCharges != null)
-            {
-               hashCode += this.ServiceCharges.GetHashCode();
-            }
-
-            if (this.Fulfillments != null)
-            {
-               hashCode += this.Fulfillments.GetHashCode();
-            }
-
-            if (this.Returns != null)
-            {
-               hashCode += this.Returns.GetHashCode();
-            }
-
-            if (this.ReturnAmounts != null)
-            {
-               hashCode += this.ReturnAmounts.GetHashCode();
-            }
-
-            if (this.NetAmounts != null)
-            {
-               hashCode += this.NetAmounts.GetHashCode();
-            }
-
-            if (this.RoundingAdjustment != null)
-            {
-               hashCode += this.RoundingAdjustment.GetHashCode();
-            }
-
-            if (this.Tenders != null)
-            {
-               hashCode += this.Tenders.GetHashCode();
-            }
-
-            if (this.Refunds != null)
-            {
-               hashCode += this.Refunds.GetHashCode();
-            }
-
-            if (this.Metadata != null)
-            {
-               hashCode += this.Metadata.GetHashCode();
-            }
-
-            if (this.CreatedAt != null)
-            {
-               hashCode += this.CreatedAt.GetHashCode();
-            }
-
-            if (this.UpdatedAt != null)
-            {
-               hashCode += this.UpdatedAt.GetHashCode();
-            }
-
-            if (this.ClosedAt != null)
-            {
-               hashCode += this.ClosedAt.GetHashCode();
-            }
-
-            if (this.State != null)
-            {
-               hashCode += this.State.GetHashCode();
-            }
-
-            if (this.Version != null)
-            {
-               hashCode += this.Version.GetHashCode();
-            }
-
-            if (this.TotalMoney != null)
-            {
-               hashCode += this.TotalMoney.GetHashCode();
-            }
-
-            if (this.TotalTaxMoney != null)
-            {
-               hashCode += this.TotalTaxMoney.GetHashCode();
-            }
-
-            if (this.TotalDiscountMoney != null)
-            {
-               hashCode += this.TotalDiscountMoney.GetHashCode();
-            }
-
-            if (this.TotalTipMoney != null)
-            {
-               hashCode += this.TotalTipMoney.GetHashCode();
-            }
-
-            if (this.TotalServiceChargeMoney != null)
-            {
-               hashCode += this.TotalServiceChargeMoney.GetHashCode();
-            }
-
-            if (this.TicketName != null)
-            {
-               hashCode += this.TicketName.GetHashCode();
-            }
-
-            if (this.PricingOptions != null)
-            {
-               hashCode += this.PricingOptions.GetHashCode();
-            }
-
-            if (this.Rewards != null)
-            {
-               hashCode += this.Rewards.GetHashCode();
-            }
+            hashCode = HashCode.Combine(hashCode, this.PricingOptions, this.Rewards);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

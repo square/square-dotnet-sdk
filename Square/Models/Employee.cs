@@ -151,65 +151,18 @@ namespace Square.Models
                 ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true)) &&
                 ((this.UpdatedAt == null && other.UpdatedAt == null) || (this.UpdatedAt?.Equals(other.UpdatedAt) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1607883077;
+            hashCode = HashCode.Combine(this.Id, this.FirstName, this.LastName, this.Email, this.PhoneNumber, this.LocationIds, this.Status);
 
-            if (this.Id != null)
-            {
-               hashCode += this.Id.GetHashCode();
-            }
-
-            if (this.FirstName != null)
-            {
-               hashCode += this.FirstName.GetHashCode();
-            }
-
-            if (this.LastName != null)
-            {
-               hashCode += this.LastName.GetHashCode();
-            }
-
-            if (this.Email != null)
-            {
-               hashCode += this.Email.GetHashCode();
-            }
-
-            if (this.PhoneNumber != null)
-            {
-               hashCode += this.PhoneNumber.GetHashCode();
-            }
-
-            if (this.LocationIds != null)
-            {
-               hashCode += this.LocationIds.GetHashCode();
-            }
-
-            if (this.Status != null)
-            {
-               hashCode += this.Status.GetHashCode();
-            }
-
-            if (this.IsOwner != null)
-            {
-               hashCode += this.IsOwner.GetHashCode();
-            }
-
-            if (this.CreatedAt != null)
-            {
-               hashCode += this.CreatedAt.GetHashCode();
-            }
-
-            if (this.UpdatedAt != null)
-            {
-               hashCode += this.UpdatedAt.GetHashCode();
-            }
+            hashCode = HashCode.Combine(hashCode, this.IsOwner, this.CreatedAt, this.UpdatedAt);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

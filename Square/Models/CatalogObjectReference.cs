@@ -69,25 +69,16 @@ namespace Square.Models
                 ((this.ObjectId == null && other.ObjectId == null) || (this.ObjectId?.Equals(other.ObjectId) == true)) &&
                 ((this.CatalogVersion == null && other.CatalogVersion == null) || (this.CatalogVersion?.Equals(other.CatalogVersion) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -703569584;
-
-            if (this.ObjectId != null)
-            {
-               hashCode += this.ObjectId.GetHashCode();
-            }
-
-            if (this.CatalogVersion != null)
-            {
-               hashCode += this.CatalogVersion.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.ObjectId, this.CatalogVersion);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

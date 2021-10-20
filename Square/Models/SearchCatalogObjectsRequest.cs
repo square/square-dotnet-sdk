@@ -54,6 +54,10 @@ namespace Square.Models
 
         /// <summary>
         /// The desired set of object types to appear in the search results.
+        /// If not specified, the following catalog object types will be used as default:
+        /// ITEM, CATEGORY, TAX, DISCOUNT, MODIFIER_LIST, DINING_OPTION, TAX_EXEMPTION,
+        /// SERVICE_CHARGE, PRICING_RULE, PRODUCT_SET, TIME_PERIOD, MEASUREMENT_UNIT,
+        /// SUBSCRIPTION_PLAN, ITEM_OPTION, CUSTOM_ATTRIBUTE_DEFINITION, QUICK_AMOUNT_SETTINGS.
         /// </summary>
         [JsonProperty("object_types", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> ObjectTypes { get; }
@@ -153,50 +157,16 @@ namespace Square.Models
                 ((this.Query == null && other.Query == null) || (this.Query?.Equals(other.Query) == true)) &&
                 ((this.Limit == null && other.Limit == null) || (this.Limit?.Equals(other.Limit) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 405501134;
-
-            if (this.Cursor != null)
-            {
-               hashCode += this.Cursor.GetHashCode();
-            }
-
-            if (this.ObjectTypes != null)
-            {
-               hashCode += this.ObjectTypes.GetHashCode();
-            }
-
-            if (this.IncludeDeletedObjects != null)
-            {
-               hashCode += this.IncludeDeletedObjects.GetHashCode();
-            }
-
-            if (this.IncludeRelatedObjects != null)
-            {
-               hashCode += this.IncludeRelatedObjects.GetHashCode();
-            }
-
-            if (this.BeginTime != null)
-            {
-               hashCode += this.BeginTime.GetHashCode();
-            }
-
-            if (this.Query != null)
-            {
-               hashCode += this.Query.GetHashCode();
-            }
-
-            if (this.Limit != null)
-            {
-               hashCode += this.Limit.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.Cursor, this.ObjectTypes, this.IncludeDeletedObjects, this.IncludeRelatedObjects, this.BeginTime, this.Query, this.Limit);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

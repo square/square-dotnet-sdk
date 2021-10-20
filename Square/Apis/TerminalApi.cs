@@ -36,7 +36,7 @@ namespace Square.Apis
 
         /// <summary>
         /// Creates a Terminal checkout request and sends it to the specified device to take a payment.
-        /// for the requested amount..
+        /// for the requested amount.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <returns>Returns the Models.CreateTerminalCheckoutResponse response from the API call.</returns>
@@ -50,7 +50,7 @@ namespace Square.Apis
 
         /// <summary>
         /// Creates a Terminal checkout request and sends it to the specified device to take a payment.
-        /// for the requested amount..
+        /// for the requested amount.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
@@ -105,7 +105,7 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Retrieves a filtered list of Terminal checkout requests created by the account making the request..
+        /// Retrieves a filtered list of Terminal checkout requests created by the account making the request.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <returns>Returns the Models.SearchTerminalCheckoutsResponse response from the API call.</returns>
@@ -118,7 +118,7 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Retrieves a filtered list of Terminal checkout requests created by the account making the request..
+        /// Retrieves a filtered list of Terminal checkout requests created by the account making the request.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
@@ -173,7 +173,7 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Retrieves a Terminal checkout request by `checkout_id`..
+        /// Retrieves a Terminal checkout request by `checkout_id`.
         /// </summary>
         /// <param name="checkoutId">Required parameter: The unique ID for the desired `TerminalCheckout`..</param>
         /// <returns>Returns the Models.GetTerminalCheckoutResponse response from the API call.</returns>
@@ -186,7 +186,7 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Retrieves a Terminal checkout request by `checkout_id`..
+        /// Retrieves a Terminal checkout request by `checkout_id`.
         /// </summary>
         /// <param name="checkoutId">Required parameter: The unique ID for the desired `TerminalCheckout`..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
@@ -243,7 +243,7 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Cancels a Terminal checkout request if the status of the request permits it..
+        /// Cancels a Terminal checkout request if the status of the request permits it.
         /// </summary>
         /// <param name="checkoutId">Required parameter: The unique ID for the desired `TerminalCheckout`..</param>
         /// <returns>Returns the Models.CancelTerminalCheckoutResponse response from the API call.</returns>
@@ -256,7 +256,7 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Cancels a Terminal checkout request if the status of the request permits it..
+        /// Cancels a Terminal checkout request if the status of the request permits it.
         /// </summary>
         /// <param name="checkoutId">Required parameter: The unique ID for the desired `TerminalCheckout`..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
@@ -313,7 +313,7 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Creates a request to refund an Interac payment completed on a Square Terminal..
+        /// Creates a request to refund an Interac payment completed on a Square Terminal.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <returns>Returns the Models.CreateTerminalRefundResponse response from the API call.</returns>
@@ -326,7 +326,7 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Creates a request to refund an Interac payment completed on a Square Terminal..
+        /// Creates a request to refund an Interac payment completed on a Square Terminal.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
@@ -381,7 +381,7 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Retrieves a filtered list of Interac Terminal refund requests created by the seller making the request..
+        /// Retrieves a filtered list of Interac Terminal refund requests created by the seller making the request.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <returns>Returns the Models.SearchTerminalRefundsResponse response from the API call.</returns>
@@ -394,7 +394,7 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Retrieves a filtered list of Interac Terminal refund requests created by the seller making the request..
+        /// Retrieves a filtered list of Interac Terminal refund requests created by the seller making the request.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
@@ -449,7 +449,7 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Retrieves an Interac Terminal refund object by ID..
+        /// Retrieves an Interac Terminal refund object by ID.
         /// </summary>
         /// <param name="terminalRefundId">Required parameter: The unique ID for the desired `TerminalRefund`..</param>
         /// <returns>Returns the Models.GetTerminalRefundResponse response from the API call.</returns>
@@ -462,7 +462,7 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Retrieves an Interac Terminal refund object by ID..
+        /// Retrieves an Interac Terminal refund object by ID.
         /// </summary>
         /// <param name="terminalRefundId">Required parameter: The unique ID for the desired `TerminalRefund`..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
@@ -519,7 +519,7 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Cancels an Interac Terminal refund request by refund request ID if the status of the request permits it..
+        /// Cancels an Interac Terminal refund request by refund request ID if the status of the request permits it.
         /// </summary>
         /// <param name="terminalRefundId">Required parameter: The unique ID for the desired `TerminalRefund`..</param>
         /// <returns>Returns the Models.CancelTerminalRefundResponse response from the API call.</returns>
@@ -532,7 +532,7 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Cancels an Interac Terminal refund request by refund request ID if the status of the request permits it..
+        /// Cancels an Interac Terminal refund request by refund request ID if the status of the request permits it.
         /// </summary>
         /// <param name="terminalRefundId">Required parameter: The unique ID for the desired `TerminalRefund`..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>

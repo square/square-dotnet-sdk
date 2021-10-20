@@ -25,10 +25,10 @@ namespace Square.Apis
         /// the response. Deletion is a cascading event such that all children of the.
         /// targeted object are also deleted. For example, deleting a CatalogItem will.
         /// also delete all of its [CatalogItemVariation]($m/CatalogItemVariation).
-        /// children..
+        /// children.
         /// `BatchDeleteCatalogObjects` succeeds even if only a portion of the targeted.
         /// IDs can be deleted. The response will only include IDs that were.
-        /// actually deleted..
+        /// actually deleted.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <returns>Returns the Models.BatchDeleteCatalogObjectsResponse response from the API call.</returns>
@@ -41,10 +41,10 @@ namespace Square.Apis
         /// the response. Deletion is a cascading event such that all children of the.
         /// targeted object are also deleted. For example, deleting a CatalogItem will.
         /// also delete all of its [CatalogItemVariation]($m/CatalogItemVariation).
-        /// children..
+        /// children.
         /// `BatchDeleteCatalogObjects` succeeds even if only a portion of the targeted.
         /// IDs can be deleted. The response will only include IDs that were.
-        /// actually deleted..
+        /// actually deleted.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
@@ -54,12 +54,12 @@ namespace Square.Apis
                 CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Returns a set of objects based on the provided ID..
+        /// Returns a set of objects based on the provided ID.
         /// Each [CatalogItem]($m/CatalogItem) returned in the set includes all of its.
         /// child information including: all of its.
         /// [CatalogItemVariation]($m/CatalogItemVariation) objects, references to.
         /// its [CatalogModifierList]($m/CatalogModifierList) objects, and the ids of.
-        /// any [CatalogTax]($m/CatalogTax) objects that apply to it..
+        /// any [CatalogTax]($m/CatalogTax) objects that apply to it.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <returns>Returns the Models.BatchRetrieveCatalogObjectsResponse response from the API call.</returns>
@@ -67,12 +67,12 @@ namespace Square.Apis
                 Models.BatchRetrieveCatalogObjectsRequest body);
 
         /// <summary>
-        /// Returns a set of objects based on the provided ID..
+        /// Returns a set of objects based on the provided ID.
         /// Each [CatalogItem]($m/CatalogItem) returned in the set includes all of its.
         /// child information including: all of its.
         /// [CatalogItemVariation]($m/CatalogItemVariation) objects, references to.
         /// its [CatalogModifierList]($m/CatalogModifierList) objects, and the ids of.
-        /// any [CatalogTax]($m/CatalogTax) objects that apply to it..
+        /// any [CatalogTax]($m/CatalogTax) objects that apply to it.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
@@ -90,7 +90,7 @@ namespace Square.Apis
         /// request may still succeed. Each batch may contain up to 1,000 objects, and.
         /// batches will be processed in order as long as the total object count for the.
         /// request (items, variations, modifier lists, discounts, and taxes) is no more.
-        /// than 10,000..
+        /// than 10,000.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <returns>Returns the Models.BatchUpsertCatalogObjectsResponse response from the API call.</returns>
@@ -106,7 +106,7 @@ namespace Square.Apis
         /// request may still succeed. Each batch may contain up to 1,000 objects, and.
         /// batches will be processed in order as long as the total object count for the.
         /// request (items, variations, modifier lists, discounts, and taxes) is no more.
-        /// than 10,000..
+        /// than 10,000.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
@@ -118,9 +118,9 @@ namespace Square.Apis
         /// <summary>
         /// Uploads an image file to be represented by a [CatalogImage]($m/CatalogImage) object linked to an existing.
         /// [CatalogObject]($m/CatalogObject) instance. A call to this endpoint can upload an image, link an image to.
-        /// a catalog object, or do both..
+        /// a catalog object, or do both.
         /// This `CreateCatalogImage` endpoint accepts HTTP multipart/form-data requests with a JSON part and an image file part in.
-        /// JPEG, PJPEG, PNG, or GIF format. The maximum file size is 15MB..
+        /// JPEG, PJPEG, PNG, or GIF format. The maximum file size is 15MB.
         /// </summary>
         /// <param name="request">Optional parameter: Example: .</param>
         /// <param name="imageFile">Optional parameter: Example: .</param>
@@ -132,9 +132,9 @@ namespace Square.Apis
         /// <summary>
         /// Uploads an image file to be represented by a [CatalogImage]($m/CatalogImage) object linked to an existing.
         /// [CatalogObject]($m/CatalogObject) instance. A call to this endpoint can upload an image, link an image to.
-        /// a catalog object, or do both..
+        /// a catalog object, or do both.
         /// This `CreateCatalogImage` endpoint accepts HTTP multipart/form-data requests with a JSON part and an image file part in.
-        /// JPEG, PJPEG, PNG, or GIF format. The maximum file size is 15MB..
+        /// JPEG, PJPEG, PNG, or GIF format. The maximum file size is 15MB.
         /// </summary>
         /// <param name="request">Optional parameter: Example: .</param>
         /// <param name="imageFile">Optional parameter: Example: .</param>
@@ -147,14 +147,14 @@ namespace Square.Apis
 
         /// <summary>
         /// Retrieves information about the Square Catalog API, such as batch size.
-        /// limits that can be used by the `BatchUpsertCatalogObjects` endpoint..
+        /// limits that can be used by the `BatchUpsertCatalogObjects` endpoint.
         /// </summary>
         /// <returns>Returns the Models.CatalogInfoResponse response from the API call.</returns>
         Models.CatalogInfoResponse CatalogInfo();
 
         /// <summary>
         /// Retrieves information about the Square Catalog API, such as batch size.
-        /// limits that can be used by the `BatchUpsertCatalogObjects` endpoint..
+        /// limits that can be used by the `BatchUpsertCatalogObjects` endpoint.
         /// </summary>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the Models.CatalogInfoResponse response from the API call.</returns>
@@ -165,10 +165,10 @@ namespace Square.Apis
         /// all objects of a set of desired types (for example, all [CatalogItem]($m/CatalogItem).
         /// and [CatalogTax]($m/CatalogTax) objects) in the catalog. The `types` parameter.
         /// is specified as a comma-separated list of valid [CatalogObject]($m/CatalogObject) types:.
-        /// `ITEM`, `ITEM_VARIATION`, `MODIFIER`, `MODIFIER_LIST`, `CATEGORY`, `DISCOUNT`, `TAX`, `IMAGE`..
+        /// `ITEM`, `ITEM_VARIATION`, `MODIFIER`, `MODIFIER_LIST`, `CATEGORY`, `DISCOUNT`, `TAX`, `IMAGE`.
         /// __Important:__ ListCatalog does not return deleted catalog items. To retrieve.
         /// deleted catalog items, use [SearchCatalogObjects]($e/Catalog/SearchCatalogObjects).
-        /// and set the `include_deleted_objects` attribute value to `true`..
+        /// and set the `include_deleted_objects` attribute value to `true`.
         /// </summary>
         /// <param name="cursor">Optional parameter: The pagination cursor returned in the previous response. Leave unset for an initial request. The page size is currently set to be 100. See [Pagination](https://developer.squareup.com/docs/basics/api101/pagination) for more information..</param>
         /// <param name="types">Optional parameter: An optional case-insensitive, comma-separated list of object types to retrieve.  The valid values are defined in the [CatalogObjectType]($m/CatalogObjectType) enum, including `ITEM`, `ITEM_VARIATION`, `CATEGORY`, `DISCOUNT`, `TAX`, `MODIFIER`, `MODIFIER_LIST`, or `IMAGE`.  If this is unspecified, the operation returns objects of all the types at the version of the Square API used to make the request..</param>
@@ -184,10 +184,10 @@ namespace Square.Apis
         /// all objects of a set of desired types (for example, all [CatalogItem]($m/CatalogItem).
         /// and [CatalogTax]($m/CatalogTax) objects) in the catalog. The `types` parameter.
         /// is specified as a comma-separated list of valid [CatalogObject]($m/CatalogObject) types:.
-        /// `ITEM`, `ITEM_VARIATION`, `MODIFIER`, `MODIFIER_LIST`, `CATEGORY`, `DISCOUNT`, `TAX`, `IMAGE`..
+        /// `ITEM`, `ITEM_VARIATION`, `MODIFIER`, `MODIFIER_LIST`, `CATEGORY`, `DISCOUNT`, `TAX`, `IMAGE`.
         /// __Important:__ ListCatalog does not return deleted catalog items. To retrieve.
         /// deleted catalog items, use [SearchCatalogObjects]($e/Catalog/SearchCatalogObjects).
-        /// and set the `include_deleted_objects` attribute value to `true`..
+        /// and set the `include_deleted_objects` attribute value to `true`.
         /// </summary>
         /// <param name="cursor">Optional parameter: The pagination cursor returned in the previous response. Leave unset for an initial request. The page size is currently set to be 100. See [Pagination](https://developer.squareup.com/docs/basics/api101/pagination) for more information..</param>
         /// <param name="types">Optional parameter: An optional case-insensitive, comma-separated list of object types to retrieve.  The valid values are defined in the [CatalogObjectType]($m/CatalogObjectType) enum, including `ITEM`, `ITEM_VARIATION`, `CATEGORY`, `DISCOUNT`, `TAX`, `MODIFIER`, `MODIFIER_LIST`, or `IMAGE`.  If this is unspecified, the operation returns objects of all the types at the version of the Square API used to make the request..</param>
@@ -201,7 +201,7 @@ namespace Square.Apis
                 CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Creates or updates the target [CatalogObject]($m/CatalogObject)..
+        /// Creates or updates the target [CatalogObject]($m/CatalogObject).
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <returns>Returns the Models.UpsertCatalogObjectResponse response from the API call.</returns>
@@ -209,7 +209,7 @@ namespace Square.Apis
                 Models.UpsertCatalogObjectRequest body);
 
         /// <summary>
-        /// Creates or updates the target [CatalogObject]($m/CatalogObject)..
+        /// Creates or updates the target [CatalogObject]($m/CatalogObject).
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
@@ -220,11 +220,11 @@ namespace Square.Apis
 
         /// <summary>
         /// Deletes a single [CatalogObject]($m/CatalogObject) based on the.
-        /// provided ID and returns the set of successfully deleted IDs in the response..
+        /// provided ID and returns the set of successfully deleted IDs in the response.
         /// Deletion is a cascading event such that all children of the targeted object.
         /// are also deleted. For example, deleting a [CatalogItem]($m/CatalogItem).
         /// will also delete all of its.
-        /// [CatalogItemVariation]($m/CatalogItemVariation) children..
+        /// [CatalogItemVariation]($m/CatalogItemVariation) children.
         /// </summary>
         /// <param name="objectId">Required parameter: The ID of the catalog object to be deleted. When an object is deleted, other objects in the graph that depend on that object will be deleted as well (for example, deleting a catalog item will delete its catalog item variations)..</param>
         /// <returns>Returns the Models.DeleteCatalogObjectResponse response from the API call.</returns>
@@ -233,11 +233,11 @@ namespace Square.Apis
 
         /// <summary>
         /// Deletes a single [CatalogObject]($m/CatalogObject) based on the.
-        /// provided ID and returns the set of successfully deleted IDs in the response..
+        /// provided ID and returns the set of successfully deleted IDs in the response.
         /// Deletion is a cascading event such that all children of the targeted object.
         /// are also deleted. For example, deleting a [CatalogItem]($m/CatalogItem).
         /// will also delete all of its.
-        /// [CatalogItemVariation]($m/CatalogItemVariation) children..
+        /// [CatalogItemVariation]($m/CatalogItemVariation) children.
         /// </summary>
         /// <param name="objectId">Required parameter: The ID of the catalog object to be deleted. When an object is deleted, other objects in the graph that depend on that object will be deleted as well (for example, deleting a catalog item will delete its catalog item variations)..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
@@ -253,7 +253,7 @@ namespace Square.Apis
         /// information including: [CatalogItemVariation]($m/CatalogItemVariation).
         /// children, references to its.
         /// [CatalogModifierList]($m/CatalogModifierList) objects, and the ids of.
-        /// any [CatalogTax]($m/CatalogTax) objects that apply to it..
+        /// any [CatalogTax]($m/CatalogTax) objects that apply to it.
         /// </summary>
         /// <param name="objectId">Required parameter: The object ID of any type of catalog objects to be retrieved..</param>
         /// <param name="includeRelatedObjects">Optional parameter: If `true`, the response will include additional objects that are related to the requested object, as follows:  If the `object` field of the response contains a `CatalogItem`, its associated `CatalogCategory`, `CatalogTax`, `CatalogImage` and `CatalogModifierList` objects will be returned in the `related_objects` field of the response. If the `object` field of the response contains a `CatalogItemVariation`, its parent `CatalogItem` will be returned in the `related_objects` field of the response.  Default value: `false`.</param>
@@ -271,7 +271,7 @@ namespace Square.Apis
         /// information including: [CatalogItemVariation]($m/CatalogItemVariation).
         /// children, references to its.
         /// [CatalogModifierList]($m/CatalogModifierList) objects, and the ids of.
-        /// any [CatalogTax]($m/CatalogTax) objects that apply to it..
+        /// any [CatalogTax]($m/CatalogTax) objects that apply to it.
         /// </summary>
         /// <param name="objectId">Required parameter: The object ID of any type of catalog objects to be retrieved..</param>
         /// <param name="includeRelatedObjects">Optional parameter: If `true`, the response will include additional objects that are related to the requested object, as follows:  If the `object` field of the response contains a `CatalogItem`, its associated `CatalogCategory`, `CatalogTax`, `CatalogImage` and `CatalogModifierList` objects will be returned in the `related_objects` field of the response. If the `object` field of the response contains a `CatalogItemVariation`, its parent `CatalogItem` will be returned in the `related_objects` field of the response.  Default value: `false`.</param>
@@ -286,13 +286,13 @@ namespace Square.Apis
 
         /// <summary>
         /// Searches for [CatalogObject]($m/CatalogObject) of any type by matching supported search attribute values,.
-        /// excluding custom attribute values on items or item variations, against one or more of the specified query filters..
+        /// excluding custom attribute values on items or item variations, against one or more of the specified query filters.
         /// This (`SearchCatalogObjects`) endpoint differs from the [SearchCatalogItems]($e/Catalog/SearchCatalogItems).
         /// endpoint in the following aspects:.
-        /// - `SearchCatalogItems` can only search for items or item variations, whereas `SearchCatalogObjects` can search for any type of catalog objects..
-        /// - `SearchCatalogItems` supports the custom attribute query filters to return items or item variations that contain custom attribute values, where `SearchCatalogObjects` does not..
-        /// - `SearchCatalogItems` does not support the `include_deleted_objects` filter to search for deleted items or item variations, whereas `SearchCatalogObjects` does..
-        /// - The both endpoints have different call conventions, including the query filter formats..
+        /// - `SearchCatalogItems` can only search for items or item variations, whereas `SearchCatalogObjects` can search for any type of catalog objects.
+        /// - `SearchCatalogItems` supports the custom attribute query filters to return items or item variations that contain custom attribute values, where `SearchCatalogObjects` does not.
+        /// - `SearchCatalogItems` does not support the `include_deleted_objects` filter to search for deleted items or item variations, whereas `SearchCatalogObjects` does.
+        /// - The both endpoints have different call conventions, including the query filter formats.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <returns>Returns the Models.SearchCatalogObjectsResponse response from the API call.</returns>
@@ -301,13 +301,13 @@ namespace Square.Apis
 
         /// <summary>
         /// Searches for [CatalogObject]($m/CatalogObject) of any type by matching supported search attribute values,.
-        /// excluding custom attribute values on items or item variations, against one or more of the specified query filters..
+        /// excluding custom attribute values on items or item variations, against one or more of the specified query filters.
         /// This (`SearchCatalogObjects`) endpoint differs from the [SearchCatalogItems]($e/Catalog/SearchCatalogItems).
         /// endpoint in the following aspects:.
-        /// - `SearchCatalogItems` can only search for items or item variations, whereas `SearchCatalogObjects` can search for any type of catalog objects..
-        /// - `SearchCatalogItems` supports the custom attribute query filters to return items or item variations that contain custom attribute values, where `SearchCatalogObjects` does not..
-        /// - `SearchCatalogItems` does not support the `include_deleted_objects` filter to search for deleted items or item variations, whereas `SearchCatalogObjects` does..
-        /// - The both endpoints have different call conventions, including the query filter formats..
+        /// - `SearchCatalogItems` can only search for items or item variations, whereas `SearchCatalogObjects` can search for any type of catalog objects.
+        /// - `SearchCatalogItems` supports the custom attribute query filters to return items or item variations that contain custom attribute values, where `SearchCatalogObjects` does not.
+        /// - `SearchCatalogItems` does not support the `include_deleted_objects` filter to search for deleted items or item variations, whereas `SearchCatalogObjects` does.
+        /// - The both endpoints have different call conventions, including the query filter formats.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
@@ -318,13 +318,13 @@ namespace Square.Apis
 
         /// <summary>
         /// Searches for catalog items or item variations by matching supported search attribute values, including.
-        /// custom attribute values, against one or more of the specified query filters..
+        /// custom attribute values, against one or more of the specified query filters.
         /// This (`SearchCatalogItems`) endpoint differs from the [SearchCatalogObjects]($e/Catalog/SearchCatalogObjects).
         /// endpoint in the following aspects:.
-        /// - `SearchCatalogItems` can only search for items or item variations, whereas `SearchCatalogObjects` can search for any type of catalog objects..
-        /// - `SearchCatalogItems` supports the custom attribute query filters to return items or item variations that contain custom attribute values, where `SearchCatalogObjects` does not..
-        /// - `SearchCatalogItems` does not support the `include_deleted_objects` filter to search for deleted items or item variations, whereas `SearchCatalogObjects` does..
-        /// - The both endpoints use different call conventions, including the query filter formats..
+        /// - `SearchCatalogItems` can only search for items or item variations, whereas `SearchCatalogObjects` can search for any type of catalog objects.
+        /// - `SearchCatalogItems` supports the custom attribute query filters to return items or item variations that contain custom attribute values, where `SearchCatalogObjects` does not.
+        /// - `SearchCatalogItems` does not support the `include_deleted_objects` filter to search for deleted items or item variations, whereas `SearchCatalogObjects` does.
+        /// - The both endpoints use different call conventions, including the query filter formats.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <returns>Returns the Models.SearchCatalogItemsResponse response from the API call.</returns>
@@ -333,13 +333,13 @@ namespace Square.Apis
 
         /// <summary>
         /// Searches for catalog items or item variations by matching supported search attribute values, including.
-        /// custom attribute values, against one or more of the specified query filters..
+        /// custom attribute values, against one or more of the specified query filters.
         /// This (`SearchCatalogItems`) endpoint differs from the [SearchCatalogObjects]($e/Catalog/SearchCatalogObjects).
         /// endpoint in the following aspects:.
-        /// - `SearchCatalogItems` can only search for items or item variations, whereas `SearchCatalogObjects` can search for any type of catalog objects..
-        /// - `SearchCatalogItems` supports the custom attribute query filters to return items or item variations that contain custom attribute values, where `SearchCatalogObjects` does not..
-        /// - `SearchCatalogItems` does not support the `include_deleted_objects` filter to search for deleted items or item variations, whereas `SearchCatalogObjects` does..
-        /// - The both endpoints use different call conventions, including the query filter formats..
+        /// - `SearchCatalogItems` can only search for items or item variations, whereas `SearchCatalogObjects` can search for any type of catalog objects.
+        /// - `SearchCatalogItems` supports the custom attribute query filters to return items or item variations that contain custom attribute values, where `SearchCatalogObjects` does not.
+        /// - `SearchCatalogItems` does not support the `include_deleted_objects` filter to search for deleted items or item variations, whereas `SearchCatalogObjects` does.
+        /// - The both endpoints use different call conventions, including the query filter formats.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
@@ -351,7 +351,7 @@ namespace Square.Apis
         /// <summary>
         /// Updates the [CatalogModifierList]($m/CatalogModifierList) objects.
         /// that apply to the targeted [CatalogItem]($m/CatalogItem) without having.
-        /// to perform an upsert on the entire item..
+        /// to perform an upsert on the entire item.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <returns>Returns the Models.UpdateItemModifierListsResponse response from the API call.</returns>
@@ -361,7 +361,7 @@ namespace Square.Apis
         /// <summary>
         /// Updates the [CatalogModifierList]($m/CatalogModifierList) objects.
         /// that apply to the targeted [CatalogItem]($m/CatalogItem) without having.
-        /// to perform an upsert on the entire item..
+        /// to perform an upsert on the entire item.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
@@ -373,7 +373,7 @@ namespace Square.Apis
         /// <summary>
         /// Updates the [CatalogTax]($m/CatalogTax) objects that apply to the.
         /// targeted [CatalogItem]($m/CatalogItem) without having to perform an.
-        /// upsert on the entire item..
+        /// upsert on the entire item.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <returns>Returns the Models.UpdateItemTaxesResponse response from the API call.</returns>
@@ -383,7 +383,7 @@ namespace Square.Apis
         /// <summary>
         /// Updates the [CatalogTax]($m/CatalogTax) objects that apply to the.
         /// targeted [CatalogItem]($m/CatalogItem) without having to perform an.
-        /// upsert on the entire item..
+        /// upsert on the entire item.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>

@@ -61,20 +61,16 @@ namespace Square.Models
             return obj is UpdateCustomerGroupRequest other &&
                 ((this.MGroup == null && other.MGroup == null) || (this.MGroup?.Equals(other.MGroup) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1040897599;
-
-            if (this.MGroup != null)
-            {
-               hashCode += this.MGroup.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.MGroup);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

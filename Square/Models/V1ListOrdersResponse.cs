@@ -59,20 +59,16 @@ namespace Square.Models
             return obj is V1ListOrdersResponse other &&
                 ((this.Items == null && other.Items == null) || (this.Items?.Equals(other.Items) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 166605431;
-
-            if (this.Items != null)
-            {
-               hashCode += this.Items.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.Items);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

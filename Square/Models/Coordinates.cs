@@ -69,25 +69,16 @@ namespace Square.Models
                 ((this.Latitude == null && other.Latitude == null) || (this.Latitude?.Equals(other.Latitude) == true)) &&
                 ((this.Longitude == null && other.Longitude == null) || (this.Longitude?.Equals(other.Longitude) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1577606388;
-
-            if (this.Latitude != null)
-            {
-               hashCode += this.Latitude.GetHashCode();
-            }
-
-            if (this.Longitude != null)
-            {
-               hashCode += this.Longitude.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.Latitude, this.Longitude);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

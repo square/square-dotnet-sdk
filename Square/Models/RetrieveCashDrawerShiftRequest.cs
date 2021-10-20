@@ -59,20 +59,16 @@ namespace Square.Models
             return obj is RetrieveCashDrawerShiftRequest other &&
                 ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -413218697;
-
-            if (this.LocationId != null)
-            {
-               hashCode += this.LocationId.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.LocationId);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

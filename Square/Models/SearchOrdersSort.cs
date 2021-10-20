@@ -69,25 +69,16 @@ namespace Square.Models
                 ((this.SortField == null && other.SortField == null) || (this.SortField?.Equals(other.SortField) == true)) &&
                 ((this.SortOrder == null && other.SortOrder == null) || (this.SortOrder?.Equals(other.SortOrder) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 962710037;
-
-            if (this.SortField != null)
-            {
-               hashCode += this.SortField.GetHashCode();
-            }
-
-            if (this.SortOrder != null)
-            {
-               hashCode += this.SortOrder.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.SortField, this.SortOrder);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

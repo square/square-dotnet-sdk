@@ -263,110 +263,20 @@ namespace Square.Models
                 ((this.TeamMemberIds == null && other.TeamMemberIds == null) || (this.TeamMemberIds?.Equals(other.TeamMemberIds) == true)) &&
                 ((this.StockableConversion == null && other.StockableConversion == null) || (this.StockableConversion?.Equals(other.StockableConversion) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1179613553;
+            hashCode = HashCode.Combine(this.ItemId, this.Name, this.Sku, this.Upc, this.Ordinal, this.PricingType, this.PriceMoney);
 
-            if (this.ItemId != null)
-            {
-               hashCode += this.ItemId.GetHashCode();
-            }
+            hashCode = HashCode.Combine(hashCode, this.LocationOverrides, this.TrackInventory, this.InventoryAlertType, this.InventoryAlertThreshold, this.UserData, this.ServiceDuration, this.AvailableForBooking);
 
-            if (this.Name != null)
-            {
-               hashCode += this.Name.GetHashCode();
-            }
-
-            if (this.Sku != null)
-            {
-               hashCode += this.Sku.GetHashCode();
-            }
-
-            if (this.Upc != null)
-            {
-               hashCode += this.Upc.GetHashCode();
-            }
-
-            if (this.Ordinal != null)
-            {
-               hashCode += this.Ordinal.GetHashCode();
-            }
-
-            if (this.PricingType != null)
-            {
-               hashCode += this.PricingType.GetHashCode();
-            }
-
-            if (this.PriceMoney != null)
-            {
-               hashCode += this.PriceMoney.GetHashCode();
-            }
-
-            if (this.LocationOverrides != null)
-            {
-               hashCode += this.LocationOverrides.GetHashCode();
-            }
-
-            if (this.TrackInventory != null)
-            {
-               hashCode += this.TrackInventory.GetHashCode();
-            }
-
-            if (this.InventoryAlertType != null)
-            {
-               hashCode += this.InventoryAlertType.GetHashCode();
-            }
-
-            if (this.InventoryAlertThreshold != null)
-            {
-               hashCode += this.InventoryAlertThreshold.GetHashCode();
-            }
-
-            if (this.UserData != null)
-            {
-               hashCode += this.UserData.GetHashCode();
-            }
-
-            if (this.ServiceDuration != null)
-            {
-               hashCode += this.ServiceDuration.GetHashCode();
-            }
-
-            if (this.AvailableForBooking != null)
-            {
-               hashCode += this.AvailableForBooking.GetHashCode();
-            }
-
-            if (this.ItemOptionValues != null)
-            {
-               hashCode += this.ItemOptionValues.GetHashCode();
-            }
-
-            if (this.MeasurementUnitId != null)
-            {
-               hashCode += this.MeasurementUnitId.GetHashCode();
-            }
-
-            if (this.Stockable != null)
-            {
-               hashCode += this.Stockable.GetHashCode();
-            }
-
-            if (this.TeamMemberIds != null)
-            {
-               hashCode += this.TeamMemberIds.GetHashCode();
-            }
-
-            if (this.StockableConversion != null)
-            {
-               hashCode += this.StockableConversion.GetHashCode();
-            }
+            hashCode = HashCode.Combine(hashCode, this.ItemOptionValues, this.MeasurementUnitId, this.Stockable, this.TeamMemberIds, this.StockableConversion);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

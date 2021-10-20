@@ -31,6 +31,7 @@ namespace Square.Models
         /// <param name="note">note.</param>
         /// <param name="birthday">birthday.</param>
         /// <param name="version">version.</param>
+        /// <param name="taxIds">tax_ids.</param>
         public UpdateCustomerRequest(
             string givenName = null,
             string familyName = null,
@@ -42,7 +43,8 @@ namespace Square.Models
             string referenceId = null,
             string note = null,
             string birthday = null,
-            long? version = null)
+            long? version = null,
+            Models.CustomerTaxIds taxIds = null)
         {
             this.GivenName = givenName;
             this.FamilyName = familyName;
@@ -55,6 +57,7 @@ namespace Square.Models
             this.Note = note;
             this.Birthday = birthday;
             this.Version = version;
+            this.TaxIds = taxIds;
         }
 
         /// <summary>
@@ -151,6 +154,13 @@ namespace Square.Models
         [JsonProperty("version", NullValueHandling = NullValueHandling.Ignore)]
         public long? Version { get; }
 
+        /// <summary>
+        /// Represents the tax ID associated with a customer profile. The corresponding `tax_ids` field is available only for customers of sellers in France, Ireland, or the United Kingdom.
+        /// For more information, see [Customer tax IDs](https://developer.squareup.com/docs/customers-api/what-it-does#customer-tax-ids).
+        /// </summary>
+        [JsonProperty("tax_ids", NullValueHandling = NullValueHandling.Ignore)]
+        public Models.CustomerTaxIds TaxIds { get; }
+
         /// <inheritdoc/>
         public override string ToString()
         {
@@ -185,72 +195,21 @@ namespace Square.Models
                 ((this.ReferenceId == null && other.ReferenceId == null) || (this.ReferenceId?.Equals(other.ReferenceId) == true)) &&
                 ((this.Note == null && other.Note == null) || (this.Note?.Equals(other.Note) == true)) &&
                 ((this.Birthday == null && other.Birthday == null) || (this.Birthday?.Equals(other.Birthday) == true)) &&
-                ((this.Version == null && other.Version == null) || (this.Version?.Equals(other.Version) == true));
+                ((this.Version == null && other.Version == null) || (this.Version?.Equals(other.Version) == true)) &&
+                ((this.TaxIds == null && other.TaxIds == null) || (this.TaxIds?.Equals(other.TaxIds) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1250370317;
+            int hashCode = 939559978;
+            hashCode = HashCode.Combine(this.GivenName, this.FamilyName, this.CompanyName, this.Nickname, this.EmailAddress, this.Address, this.PhoneNumber);
 
-            if (this.GivenName != null)
-            {
-               hashCode += this.GivenName.GetHashCode();
-            }
-
-            if (this.FamilyName != null)
-            {
-               hashCode += this.FamilyName.GetHashCode();
-            }
-
-            if (this.CompanyName != null)
-            {
-               hashCode += this.CompanyName.GetHashCode();
-            }
-
-            if (this.Nickname != null)
-            {
-               hashCode += this.Nickname.GetHashCode();
-            }
-
-            if (this.EmailAddress != null)
-            {
-               hashCode += this.EmailAddress.GetHashCode();
-            }
-
-            if (this.Address != null)
-            {
-               hashCode += this.Address.GetHashCode();
-            }
-
-            if (this.PhoneNumber != null)
-            {
-               hashCode += this.PhoneNumber.GetHashCode();
-            }
-
-            if (this.ReferenceId != null)
-            {
-               hashCode += this.ReferenceId.GetHashCode();
-            }
-
-            if (this.Note != null)
-            {
-               hashCode += this.Note.GetHashCode();
-            }
-
-            if (this.Birthday != null)
-            {
-               hashCode += this.Birthday.GetHashCode();
-            }
-
-            if (this.Version != null)
-            {
-               hashCode += this.Version.GetHashCode();
-            }
+            hashCode = HashCode.Combine(hashCode, this.ReferenceId, this.Note, this.Birthday, this.Version, this.TaxIds);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -268,6 +227,7 @@ namespace Square.Models
             toStringOutput.Add($"this.Note = {(this.Note == null ? "null" : this.Note == string.Empty ? "" : this.Note)}");
             toStringOutput.Add($"this.Birthday = {(this.Birthday == null ? "null" : this.Birthday == string.Empty ? "" : this.Birthday)}");
             toStringOutput.Add($"this.Version = {(this.Version == null ? "null" : this.Version.ToString())}");
+            toStringOutput.Add($"this.TaxIds = {(this.TaxIds == null ? "null" : this.TaxIds.ToString())}");
         }
 
         /// <summary>
@@ -287,7 +247,8 @@ namespace Square.Models
                 .ReferenceId(this.ReferenceId)
                 .Note(this.Note)
                 .Birthday(this.Birthday)
-                .Version(this.Version);
+                .Version(this.Version)
+                .TaxIds(this.TaxIds);
             return builder;
         }
 
@@ -307,6 +268,7 @@ namespace Square.Models
             private string note;
             private string birthday;
             private long? version;
+            private Models.CustomerTaxIds taxIds;
 
              /// <summary>
              /// GivenName.
@@ -429,6 +391,17 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// TaxIds.
+             /// </summary>
+             /// <param name="taxIds"> taxIds. </param>
+             /// <returns> Builder. </returns>
+            public Builder TaxIds(Models.CustomerTaxIds taxIds)
+            {
+                this.taxIds = taxIds;
+                return this;
+            }
+
             /// <summary>
             /// Builds class object.
             /// </summary>
@@ -446,7 +419,8 @@ namespace Square.Models
                     this.referenceId,
                     this.note,
                     this.birthday,
-                    this.version);
+                    this.version,
+                    this.taxIds);
             }
         }
     }

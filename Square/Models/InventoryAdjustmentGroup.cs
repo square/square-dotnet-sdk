@@ -90,35 +90,16 @@ namespace Square.Models
                 ((this.FromState == null && other.FromState == null) || (this.FromState?.Equals(other.FromState) == true)) &&
                 ((this.ToState == null && other.ToState == null) || (this.ToState?.Equals(other.ToState) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1783874998;
-
-            if (this.Id != null)
-            {
-               hashCode += this.Id.GetHashCode();
-            }
-
-            if (this.RootAdjustmentId != null)
-            {
-               hashCode += this.RootAdjustmentId.GetHashCode();
-            }
-
-            if (this.FromState != null)
-            {
-               hashCode += this.FromState.GetHashCode();
-            }
-
-            if (this.ToState != null)
-            {
-               hashCode += this.ToState.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.Id, this.RootAdjustmentId, this.FromState, this.ToState);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

@@ -77,7 +77,7 @@ namespace Square.Models
                 ((this.BusinessBookingProfile == null && other.BusinessBookingProfile == null) || (this.BusinessBookingProfile?.Equals(other.BusinessBookingProfile) == true)) &&
                 ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
@@ -87,20 +87,11 @@ namespace Square.Models
             {
                 hashCode += this.Context.GetHashCode();
             }
-
-            if (this.BusinessBookingProfile != null)
-            {
-               hashCode += this.BusinessBookingProfile.GetHashCode();
-            }
-
-            if (this.Errors != null)
-            {
-               hashCode += this.Errors.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.BusinessBookingProfile, this.Errors);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

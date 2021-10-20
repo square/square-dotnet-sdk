@@ -10,7 +10,6 @@ namespace Square.Models
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
     using Square;
-    using Square.Http.Client;
     using Square.Utilities;
 
     /// <summary>
@@ -33,12 +32,6 @@ namespace Square.Models
             this.Refunds = refunds;
             this.Cursor = cursor;
         }
-
-        /// <summary>
-        /// Gets http context.
-        /// </summary>
-        [JsonIgnore]
-        public HttpContext Context { get; internal set; }
 
         /// <summary>
         /// Any errors that occurred during the request.
@@ -85,40 +78,20 @@ namespace Square.Models
             }
 
             return obj is ListRefundsResponse other &&
-                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
                 ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true)) &&
                 ((this.Refunds == null && other.Refunds == null) || (this.Refunds?.Equals(other.Refunds) == true)) &&
                 ((this.Cursor == null && other.Cursor == null) || (this.Cursor?.Equals(other.Cursor) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 603042183;
-
-            if (this.Context != null)
-            {
-                hashCode += this.Context.GetHashCode();
-            }
-
-            if (this.Errors != null)
-            {
-               hashCode += this.Errors.GetHashCode();
-            }
-
-            if (this.Refunds != null)
-            {
-               hashCode += this.Refunds.GetHashCode();
-            }
-
-            if (this.Cursor != null)
-            {
-               hashCode += this.Cursor.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.Errors, this.Refunds, this.Cursor);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

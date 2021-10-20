@@ -60,20 +60,16 @@ namespace Square.Models
             return obj is LoyaltyProgramExpirationPolicy other &&
                 ((this.ExpirationDuration == null && other.ExpirationDuration == null) || (this.ExpirationDuration?.Equals(other.ExpirationDuration) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1618599332;
-
-            if (this.ExpirationDuration != null)
-            {
-               hashCode += this.ExpirationDuration.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.ExpirationDuration);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

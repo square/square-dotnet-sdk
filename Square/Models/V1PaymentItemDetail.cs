@@ -89,35 +89,16 @@ namespace Square.Models
                 ((this.ItemId == null && other.ItemId == null) || (this.ItemId?.Equals(other.ItemId) == true)) &&
                 ((this.ItemVariationId == null && other.ItemVariationId == null) || (this.ItemVariationId?.Equals(other.ItemVariationId) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 1460876522;
-
-            if (this.CategoryName != null)
-            {
-               hashCode += this.CategoryName.GetHashCode();
-            }
-
-            if (this.Sku != null)
-            {
-               hashCode += this.Sku.GetHashCode();
-            }
-
-            if (this.ItemId != null)
-            {
-               hashCode += this.ItemId.GetHashCode();
-            }
-
-            if (this.ItemVariationId != null)
-            {
-               hashCode += this.ItemVariationId.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.CategoryName, this.Sku, this.ItemId, this.ItemVariationId);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

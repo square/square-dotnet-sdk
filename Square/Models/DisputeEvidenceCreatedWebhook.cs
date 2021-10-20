@@ -109,45 +109,16 @@ namespace Square.Models
                 ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true)) &&
                 ((this.Data == null && other.Data == null) || (this.Data?.Equals(other.Data) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1543364320;
-
-            if (this.MerchantId != null)
-            {
-               hashCode += this.MerchantId.GetHashCode();
-            }
-
-            if (this.LocationId != null)
-            {
-               hashCode += this.LocationId.GetHashCode();
-            }
-
-            if (this.Type != null)
-            {
-               hashCode += this.Type.GetHashCode();
-            }
-
-            if (this.EventId != null)
-            {
-               hashCode += this.EventId.GetHashCode();
-            }
-
-            if (this.CreatedAt != null)
-            {
-               hashCode += this.CreatedAt.GetHashCode();
-            }
-
-            if (this.Data != null)
-            {
-               hashCode += this.Data.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.MerchantId, this.LocationId, this.Type, this.EventId, this.CreatedAt, this.Data);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

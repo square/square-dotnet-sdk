@@ -153,65 +153,18 @@ namespace Square.Models
                 ((this.Mapping == null && other.Mapping == null) || (this.Mapping?.Equals(other.Mapping) == true)) &&
                 ((this.ExpiringPointDeadlines == null && other.ExpiringPointDeadlines == null) || (this.ExpiringPointDeadlines?.Equals(other.ExpiringPointDeadlines) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 302731941;
+            hashCode = HashCode.Combine(this.Id, this.ProgramId, this.Balance, this.LifetimePoints, this.CustomerId, this.EnrolledAt, this.CreatedAt);
 
-            if (this.Id != null)
-            {
-               hashCode += this.Id.GetHashCode();
-            }
-
-            if (this.ProgramId != null)
-            {
-               hashCode += this.ProgramId.GetHashCode();
-            }
-
-            if (this.Balance != null)
-            {
-               hashCode += this.Balance.GetHashCode();
-            }
-
-            if (this.LifetimePoints != null)
-            {
-               hashCode += this.LifetimePoints.GetHashCode();
-            }
-
-            if (this.CustomerId != null)
-            {
-               hashCode += this.CustomerId.GetHashCode();
-            }
-
-            if (this.EnrolledAt != null)
-            {
-               hashCode += this.EnrolledAt.GetHashCode();
-            }
-
-            if (this.CreatedAt != null)
-            {
-               hashCode += this.CreatedAt.GetHashCode();
-            }
-
-            if (this.UpdatedAt != null)
-            {
-               hashCode += this.UpdatedAt.GetHashCode();
-            }
-
-            if (this.Mapping != null)
-            {
-               hashCode += this.Mapping.GetHashCode();
-            }
-
-            if (this.ExpiringPointDeadlines != null)
-            {
-               hashCode += this.ExpiringPointDeadlines.GetHashCode();
-            }
+            hashCode = HashCode.Combine(hashCode, this.UpdatedAt, this.Mapping, this.ExpiringPointDeadlines);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

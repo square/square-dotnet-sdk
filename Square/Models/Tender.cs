@@ -207,85 +207,18 @@ namespace Square.Models
                 ((this.AdditionalRecipients == null && other.AdditionalRecipients == null) || (this.AdditionalRecipients?.Equals(other.AdditionalRecipients) == true)) &&
                 ((this.PaymentId == null && other.PaymentId == null) || (this.PaymentId?.Equals(other.PaymentId) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1832006143;
+            hashCode = HashCode.Combine(this.Id, this.LocationId, this.TransactionId, this.CreatedAt, this.Note, this.AmountMoney, this.TipMoney);
 
-            if (this.Id != null)
-            {
-               hashCode += this.Id.GetHashCode();
-            }
-
-            if (this.LocationId != null)
-            {
-               hashCode += this.LocationId.GetHashCode();
-            }
-
-            if (this.TransactionId != null)
-            {
-               hashCode += this.TransactionId.GetHashCode();
-            }
-
-            if (this.CreatedAt != null)
-            {
-               hashCode += this.CreatedAt.GetHashCode();
-            }
-
-            if (this.Note != null)
-            {
-               hashCode += this.Note.GetHashCode();
-            }
-
-            if (this.AmountMoney != null)
-            {
-               hashCode += this.AmountMoney.GetHashCode();
-            }
-
-            if (this.TipMoney != null)
-            {
-               hashCode += this.TipMoney.GetHashCode();
-            }
-
-            if (this.ProcessingFeeMoney != null)
-            {
-               hashCode += this.ProcessingFeeMoney.GetHashCode();
-            }
-
-            if (this.CustomerId != null)
-            {
-               hashCode += this.CustomerId.GetHashCode();
-            }
-
-            if (this.Type != null)
-            {
-               hashCode += this.Type.GetHashCode();
-            }
-
-            if (this.CardDetails != null)
-            {
-               hashCode += this.CardDetails.GetHashCode();
-            }
-
-            if (this.CashDetails != null)
-            {
-               hashCode += this.CashDetails.GetHashCode();
-            }
-
-            if (this.AdditionalRecipients != null)
-            {
-               hashCode += this.AdditionalRecipients.GetHashCode();
-            }
-
-            if (this.PaymentId != null)
-            {
-               hashCode += this.PaymentId.GetHashCode();
-            }
+            hashCode = HashCode.Combine(hashCode, this.ProcessingFeeMoney, this.CustomerId, this.Type, this.CardDetails, this.CashDetails, this.AdditionalRecipients, this.PaymentId);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

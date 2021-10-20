@@ -120,35 +120,16 @@ namespace Square.Models
                 ((this.CardholderName == null && other.CardholderName == null) || (this.CardholderName?.Equals(other.CardholderName) == true)) &&
                 ((this.VerificationToken == null && other.VerificationToken == null) || (this.VerificationToken?.Equals(other.VerificationToken) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 1509386817;
-
-            if (this.CardNonce != null)
-            {
-               hashCode += this.CardNonce.GetHashCode();
-            }
-
-            if (this.BillingAddress != null)
-            {
-               hashCode += this.BillingAddress.GetHashCode();
-            }
-
-            if (this.CardholderName != null)
-            {
-               hashCode += this.CardholderName.GetHashCode();
-            }
-
-            if (this.VerificationToken != null)
-            {
-               hashCode += this.VerificationToken.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.CardNonce, this.BillingAddress, this.CardholderName, this.VerificationToken);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

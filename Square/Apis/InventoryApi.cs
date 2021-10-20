@@ -36,7 +36,7 @@ namespace Square.Apis
 
         /// <summary>
         /// Deprecated version of [RetrieveInventoryAdjustment]($e/Inventory/RetrieveInventoryAdjustment) after the endpoint URL .
-        /// is updated to conform to the standard convention..
+        /// is updated to conform to the standard convention.
         /// </summary>
         /// <param name="adjustmentId">Required parameter: ID of the [InventoryAdjustment]($m/InventoryAdjustment) to retrieve..</param>
         /// <returns>Returns the Models.RetrieveInventoryAdjustmentResponse response from the API call.</returns>
@@ -51,7 +51,7 @@ namespace Square.Apis
 
         /// <summary>
         /// Deprecated version of [RetrieveInventoryAdjustment]($e/Inventory/RetrieveInventoryAdjustment) after the endpoint URL .
-        /// is updated to conform to the standard convention..
+        /// is updated to conform to the standard convention.
         /// </summary>
         /// <param name="adjustmentId">Required parameter: ID of the [InventoryAdjustment]($m/InventoryAdjustment) to retrieve..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
@@ -110,7 +110,7 @@ namespace Square.Apis
 
         /// <summary>
         /// Returns the [InventoryAdjustment]($m/InventoryAdjustment) object.
-        /// with the provided `adjustment_id`..
+        /// with the provided `adjustment_id`.
         /// </summary>
         /// <param name="adjustmentId">Required parameter: ID of the [InventoryAdjustment]($m/InventoryAdjustment) to retrieve..</param>
         /// <returns>Returns the Models.RetrieveInventoryAdjustmentResponse response from the API call.</returns>
@@ -124,7 +124,7 @@ namespace Square.Apis
 
         /// <summary>
         /// Returns the [InventoryAdjustment]($m/InventoryAdjustment) object.
-        /// with the provided `adjustment_id`..
+        /// with the provided `adjustment_id`.
         /// </summary>
         /// <param name="adjustmentId">Required parameter: ID of the [InventoryAdjustment]($m/InventoryAdjustment) to retrieve..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
@@ -182,7 +182,7 @@ namespace Square.Apis
 
         /// <summary>
         /// Deprecated version of [BatchChangeInventory]($e/Inventory/BatchChangeInventory) after the endpoint URL .
-        /// is updated to conform to the standard convention..
+        /// is updated to conform to the standard convention.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <returns>Returns the Models.BatchChangeInventoryResponse response from the API call.</returns>
@@ -197,7 +197,7 @@ namespace Square.Apis
 
         /// <summary>
         /// Deprecated version of [BatchChangeInventory]($e/Inventory/BatchChangeInventory) after the endpoint URL .
-        /// is updated to conform to the standard convention..
+        /// is updated to conform to the standard convention.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
@@ -254,7 +254,7 @@ namespace Square.Apis
 
         /// <summary>
         /// Deprecated version of [BatchRetrieveInventoryChanges]($e/Inventory/BatchRetrieveInventoryChanges) after the endpoint URL .
-        /// is updated to conform to the standard convention..
+        /// is updated to conform to the standard convention.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <returns>Returns the Models.BatchRetrieveInventoryChangesResponse response from the API call.</returns>
@@ -269,7 +269,7 @@ namespace Square.Apis
 
         /// <summary>
         /// Deprecated version of [BatchRetrieveInventoryChanges]($e/Inventory/BatchRetrieveInventoryChanges) after the endpoint URL .
-        /// is updated to conform to the standard convention..
+        /// is updated to conform to the standard convention.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
@@ -326,7 +326,7 @@ namespace Square.Apis
 
         /// <summary>
         /// Deprecated version of [BatchRetrieveInventoryCounts]($e/Inventory/BatchRetrieveInventoryCounts) after the endpoint URL .
-        /// is updated to conform to the standard convention..
+        /// is updated to conform to the standard convention.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <returns>Returns the Models.BatchRetrieveInventoryCountsResponse response from the API call.</returns>
@@ -341,7 +341,7 @@ namespace Square.Apis
 
         /// <summary>
         /// Deprecated version of [BatchRetrieveInventoryCounts]($e/Inventory/BatchRetrieveInventoryCounts) after the endpoint URL .
-        /// is updated to conform to the standard convention..
+        /// is updated to conform to the standard convention.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
@@ -397,10 +397,10 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Applies adjustments and counts to the provided item quantities..
+        /// Applies adjustments and counts to the provided item quantities.
         /// On success: returns the current calculated counts for all objects.
-        /// referenced in the request..
-        /// On failure: returns a list of related errors..
+        /// referenced in the request.
+        /// On failure: returns a list of related errors.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <returns>Returns the Models.BatchChangeInventoryResponse response from the API call.</returns>
@@ -413,10 +413,10 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Applies adjustments and counts to the provided item quantities..
+        /// Applies adjustments and counts to the provided item quantities.
         /// On success: returns the current calculated counts for all objects.
-        /// referenced in the request..
-        /// On failure: returns a list of related errors..
+        /// referenced in the request.
+        /// On failure: returns a list of related errors.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
@@ -472,11 +472,11 @@ namespace Square.Apis
 
         /// <summary>
         /// Returns historical physical counts and adjustments based on the.
-        /// provided filter criteria..
+        /// provided filter criteria.
         /// Results are paginated and sorted in ascending order according their.
-        /// `occurred_at` timestamp (oldest first)..
+        /// `occurred_at` timestamp (oldest first).
         /// BatchRetrieveInventoryChanges is a catch-all query endpoint for queries.
-        /// that cannot be handled by other, simpler endpoints..
+        /// that cannot be handled by other, simpler endpoints.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <returns>Returns the Models.BatchRetrieveInventoryChangesResponse response from the API call.</returns>
@@ -490,11 +490,11 @@ namespace Square.Apis
 
         /// <summary>
         /// Returns historical physical counts and adjustments based on the.
-        /// provided filter criteria..
+        /// provided filter criteria.
         /// Results are paginated and sorted in ascending order according their.
-        /// `occurred_at` timestamp (oldest first)..
+        /// `occurred_at` timestamp (oldest first).
         /// BatchRetrieveInventoryChanges is a catch-all query endpoint for queries.
-        /// that cannot be handled by other, simpler endpoints..
+        /// that cannot be handled by other, simpler endpoints.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
@@ -551,13 +551,13 @@ namespace Square.Apis
         /// <summary>
         /// Returns current counts for the provided.
         /// [CatalogObject]($m/CatalogObject)s at the requested.
-        /// [Location]($m/Location)s..
+        /// [Location]($m/Location)s.
         /// Results are paginated and sorted in descending order according to their.
-        /// `calculated_at` timestamp (newest first)..
+        /// `calculated_at` timestamp (newest first).
         /// When `updated_after` is specified, only counts that have changed since that.
         /// time (based on the server timestamp for the most recent change) are.
         /// returned. This allows clients to perform a "sync" operation, for example.
-        /// in response to receiving a Webhook notification..
+        /// in response to receiving a Webhook notification.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <returns>Returns the Models.BatchRetrieveInventoryCountsResponse response from the API call.</returns>
@@ -572,13 +572,13 @@ namespace Square.Apis
         /// <summary>
         /// Returns current counts for the provided.
         /// [CatalogObject]($m/CatalogObject)s at the requested.
-        /// [Location]($m/Location)s..
+        /// [Location]($m/Location)s.
         /// Results are paginated and sorted in descending order according to their.
-        /// `calculated_at` timestamp (newest first)..
+        /// `calculated_at` timestamp (newest first).
         /// When `updated_after` is specified, only counts that have changed since that.
         /// time (based on the server timestamp for the most recent change) are.
         /// returned. This allows clients to perform a "sync" operation, for example.
-        /// in response to receiving a Webhook notification..
+        /// in response to receiving a Webhook notification.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
@@ -634,7 +634,7 @@ namespace Square.Apis
 
         /// <summary>
         /// Deprecated version of [RetrieveInventoryPhysicalCount]($e/Inventory/RetrieveInventoryPhysicalCount) after the endpoint URL .
-        /// is updated to conform to the standard convention..
+        /// is updated to conform to the standard convention.
         /// </summary>
         /// <param name="physicalCountId">Required parameter: ID of the [InventoryPhysicalCount]($m/InventoryPhysicalCount) to retrieve..</param>
         /// <returns>Returns the Models.RetrieveInventoryPhysicalCountResponse response from the API call.</returns>
@@ -649,7 +649,7 @@ namespace Square.Apis
 
         /// <summary>
         /// Deprecated version of [RetrieveInventoryPhysicalCount]($e/Inventory/RetrieveInventoryPhysicalCount) after the endpoint URL .
-        /// is updated to conform to the standard convention..
+        /// is updated to conform to the standard convention.
         /// </summary>
         /// <param name="physicalCountId">Required parameter: ID of the [InventoryPhysicalCount]($m/InventoryPhysicalCount) to retrieve..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
@@ -708,7 +708,7 @@ namespace Square.Apis
 
         /// <summary>
         /// Returns the [InventoryPhysicalCount]($m/InventoryPhysicalCount).
-        /// object with the provided `physical_count_id`..
+        /// object with the provided `physical_count_id`.
         /// </summary>
         /// <param name="physicalCountId">Required parameter: ID of the [InventoryPhysicalCount]($m/InventoryPhysicalCount) to retrieve..</param>
         /// <returns>Returns the Models.RetrieveInventoryPhysicalCountResponse response from the API call.</returns>
@@ -722,7 +722,7 @@ namespace Square.Apis
 
         /// <summary>
         /// Returns the [InventoryPhysicalCount]($m/InventoryPhysicalCount).
-        /// object with the provided `physical_count_id`..
+        /// object with the provided `physical_count_id`.
         /// </summary>
         /// <param name="physicalCountId">Required parameter: ID of the [InventoryPhysicalCount]($m/InventoryPhysicalCount) to retrieve..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
@@ -780,7 +780,7 @@ namespace Square.Apis
 
         /// <summary>
         /// Returns the [InventoryTransfer]($m/InventoryTransfer) object.
-        /// with the provided `transfer_id`..
+        /// with the provided `transfer_id`.
         /// </summary>
         /// <param name="transferId">Required parameter: ID of the [InventoryTransfer]($m/InventoryTransfer) to retrieve..</param>
         /// <returns>Returns the Models.RetrieveInventoryTransferResponse response from the API call.</returns>
@@ -794,7 +794,7 @@ namespace Square.Apis
 
         /// <summary>
         /// Returns the [InventoryTransfer]($m/InventoryTransfer) object.
-        /// with the provided `transfer_id`..
+        /// with the provided `transfer_id`.
         /// </summary>
         /// <param name="transferId">Required parameter: ID of the [InventoryTransfer]($m/InventoryTransfer) to retrieve..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
@@ -853,8 +853,8 @@ namespace Square.Apis
         /// <summary>
         /// Retrieves the current calculated stock count for a given.
         /// [CatalogObject]($m/CatalogObject) at a given set of.
-        /// [Location]($m/Location)s. Responses are paginated and unsorted..
-        /// For more sophisticated queries, use a batch endpoint..
+        /// [Location]($m/Location)s. Responses are paginated and unsorted.
+        /// For more sophisticated queries, use a batch endpoint.
         /// </summary>
         /// <param name="catalogObjectId">Required parameter: ID of the [CatalogObject]($m/CatalogObject) to retrieve..</param>
         /// <param name="locationIds">Optional parameter: The [Location]($m/Location) IDs to look up as a comma-separated list. An empty list queries all locations..</param>
@@ -873,8 +873,8 @@ namespace Square.Apis
         /// <summary>
         /// Retrieves the current calculated stock count for a given.
         /// [CatalogObject]($m/CatalogObject) at a given set of.
-        /// [Location]($m/Location)s. Responses are paginated and unsorted..
-        /// For more sophisticated queries, use a batch endpoint..
+        /// [Location]($m/Location)s. Responses are paginated and unsorted.
+        /// For more sophisticated queries, use a batch endpoint.
         /// </summary>
         /// <param name="catalogObjectId">Required parameter: ID of the [CatalogObject]($m/CatalogObject) to retrieve..</param>
         /// <param name="locationIds">Optional parameter: The [Location]($m/Location) IDs to look up as a comma-separated list. An empty list queries all locations..</param>
@@ -946,12 +946,12 @@ namespace Square.Apis
         /// provided [CatalogObject]($m/CatalogObject) at the requested.
         /// [Location]($m/Location)s. .
         /// You can achieve the same result by calling [BatchRetrieveInventoryChanges]($e/Inventory/BatchRetrieveInventoryChanges) .
-        /// and having the `catalog_object_ids` list contain a single element of the `CatalogObject` ID..
+        /// and having the `catalog_object_ids` list contain a single element of the `CatalogObject` ID.
         /// Results are paginated and sorted in descending order according to their.
-        /// `occurred_at` timestamp (newest first)..
+        /// `occurred_at` timestamp (newest first).
         /// There are no limits on how far back the caller can page. This endpoint can be .
         /// used to display recent changes for a specific item. For more.
-        /// sophisticated queries, use a batch endpoint..
+        /// sophisticated queries, use a batch endpoint.
         /// </summary>
         /// <param name="catalogObjectId">Required parameter: ID of the [CatalogObject]($m/CatalogObject) to retrieve..</param>
         /// <param name="locationIds">Optional parameter: The [Location]($m/Location) IDs to look up as a comma-separated list. An empty list queries all locations..</param>
@@ -973,12 +973,12 @@ namespace Square.Apis
         /// provided [CatalogObject]($m/CatalogObject) at the requested.
         /// [Location]($m/Location)s. .
         /// You can achieve the same result by calling [BatchRetrieveInventoryChanges]($e/Inventory/BatchRetrieveInventoryChanges) .
-        /// and having the `catalog_object_ids` list contain a single element of the `CatalogObject` ID..
+        /// and having the `catalog_object_ids` list contain a single element of the `CatalogObject` ID.
         /// Results are paginated and sorted in descending order according to their.
-        /// `occurred_at` timestamp (newest first)..
+        /// `occurred_at` timestamp (newest first).
         /// There are no limits on how far back the caller can page. This endpoint can be .
         /// used to display recent changes for a specific item. For more.
-        /// sophisticated queries, use a batch endpoint..
+        /// sophisticated queries, use a batch endpoint.
         /// </summary>
         /// <param name="catalogObjectId">Required parameter: ID of the [CatalogObject]($m/CatalogObject) to retrieve..</param>
         /// <param name="locationIds">Optional parameter: The [Location]($m/Location) IDs to look up as a comma-separated list. An empty list queries all locations..</param>

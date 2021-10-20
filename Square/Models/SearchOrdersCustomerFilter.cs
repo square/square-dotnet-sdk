@@ -60,20 +60,16 @@ namespace Square.Models
             return obj is SearchOrdersCustomerFilter other &&
                 ((this.CustomerIds == null && other.CustomerIds == null) || (this.CustomerIds?.Equals(other.CustomerIds) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 963322310;
-
-            if (this.CustomerIds != null)
-            {
-               hashCode += this.CustomerIds.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.CustomerIds);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

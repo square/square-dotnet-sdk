@@ -81,30 +81,16 @@ namespace Square.Models
                 ((this.StartLocalTime == null && other.StartLocalTime == null) || (this.StartLocalTime?.Equals(other.StartLocalTime) == true)) &&
                 ((this.EndLocalTime == null && other.EndLocalTime == null) || (this.EndLocalTime?.Equals(other.EndLocalTime) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 870467587;
-
-            if (this.DayOfWeek != null)
-            {
-               hashCode += this.DayOfWeek.GetHashCode();
-            }
-
-            if (this.StartLocalTime != null)
-            {
-               hashCode += this.StartLocalTime.GetHashCode();
-            }
-
-            if (this.EndLocalTime != null)
-            {
-               hashCode += this.EndLocalTime.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.DayOfWeek, this.StartLocalTime, this.EndLocalTime);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

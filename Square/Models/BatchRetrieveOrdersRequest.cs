@@ -70,25 +70,16 @@ namespace Square.Models
                 ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true)) &&
                 ((this.OrderIds == null && other.OrderIds == null) || (this.OrderIds?.Equals(other.OrderIds) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 224728365;
-
-            if (this.LocationId != null)
-            {
-               hashCode += this.LocationId.GetHashCode();
-            }
-
-            if (this.OrderIds != null)
-            {
-               hashCode += this.OrderIds.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.LocationId, this.OrderIds);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

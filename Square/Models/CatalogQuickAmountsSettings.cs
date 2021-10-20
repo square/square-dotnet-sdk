@@ -80,30 +80,16 @@ namespace Square.Models
                 ((this.EligibleForAutoAmounts == null && other.EligibleForAutoAmounts == null) || (this.EligibleForAutoAmounts?.Equals(other.EligibleForAutoAmounts) == true)) &&
                 ((this.Amounts == null && other.Amounts == null) || (this.Amounts?.Equals(other.Amounts) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1326255280;
-
-            if (this.Option != null)
-            {
-               hashCode += this.Option.GetHashCode();
-            }
-
-            if (this.EligibleForAutoAmounts != null)
-            {
-               hashCode += this.EligibleForAutoAmounts.GetHashCode();
-            }
-
-            if (this.Amounts != null)
-            {
-               hashCode += this.Amounts.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.Option, this.EligibleForAutoAmounts, this.Amounts);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

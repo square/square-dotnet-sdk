@@ -69,25 +69,16 @@ namespace Square.Models
                 ((this.Action == null && other.Action == null) || (this.Action?.Equals(other.Action) == true)) &&
                 ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -2009518531;
-
-            if (this.Action != null)
-            {
-               hashCode += this.Action.GetHashCode();
-            }
-
-            if (this.CreatedAt != null)
-            {
-               hashCode += this.CreatedAt.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.Action, this.CreatedAt);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

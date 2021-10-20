@@ -27,6 +27,7 @@ namespace Square.Models
         /// <param name="address">address.</param>
         /// <param name="phoneNumber">phone_number.</param>
         /// <param name="companyName">company_name.</param>
+        /// <param name="taxIds">tax_ids.</param>
         public InvoiceRecipient(
             string customerId = null,
             string givenName = null,
@@ -34,7 +35,8 @@ namespace Square.Models
             string emailAddress = null,
             Models.Address address = null,
             string phoneNumber = null,
-            string companyName = null)
+            string companyName = null,
+            Models.InvoiceRecipientTaxIds taxIds = null)
         {
             this.CustomerId = customerId;
             this.GivenName = givenName;
@@ -43,6 +45,7 @@ namespace Square.Models
             this.Address = address;
             this.PhoneNumber = phoneNumber;
             this.CompanyName = companyName;
+            this.TaxIds = taxIds;
         }
 
         /// <summary>
@@ -112,6 +115,14 @@ namespace Square.Models
         [JsonProperty("company_name", NullValueHandling = NullValueHandling.Ignore)]
         public string CompanyName { get; }
 
+        /// <summary>
+        /// Represents the tax IDs for an invoice recipient. The country of the seller account determines
+        /// whether the corresponding `tax_ids` field is available for the customer. For more information,
+        /// see [Invoice recipient tax IDs](https://developer.squareup.com/docs/invoices-api/overview#recipient-tax-ids).
+        /// </summary>
+        [JsonProperty("tax_ids", NullValueHandling = NullValueHandling.Ignore)]
+        public Models.InvoiceRecipientTaxIds TaxIds { get; }
+
         /// <inheritdoc/>
         public override string ToString()
         {
@@ -142,52 +153,21 @@ namespace Square.Models
                 ((this.EmailAddress == null && other.EmailAddress == null) || (this.EmailAddress?.Equals(other.EmailAddress) == true)) &&
                 ((this.Address == null && other.Address == null) || (this.Address?.Equals(other.Address) == true)) &&
                 ((this.PhoneNumber == null && other.PhoneNumber == null) || (this.PhoneNumber?.Equals(other.PhoneNumber) == true)) &&
-                ((this.CompanyName == null && other.CompanyName == null) || (this.CompanyName?.Equals(other.CompanyName) == true));
+                ((this.CompanyName == null && other.CompanyName == null) || (this.CompanyName?.Equals(other.CompanyName) == true)) &&
+                ((this.TaxIds == null && other.TaxIds == null) || (this.TaxIds?.Equals(other.TaxIds) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1383071021;
+            int hashCode = 570259352;
+            hashCode = HashCode.Combine(this.CustomerId, this.GivenName, this.FamilyName, this.EmailAddress, this.Address, this.PhoneNumber, this.CompanyName);
 
-            if (this.CustomerId != null)
-            {
-               hashCode += this.CustomerId.GetHashCode();
-            }
-
-            if (this.GivenName != null)
-            {
-               hashCode += this.GivenName.GetHashCode();
-            }
-
-            if (this.FamilyName != null)
-            {
-               hashCode += this.FamilyName.GetHashCode();
-            }
-
-            if (this.EmailAddress != null)
-            {
-               hashCode += this.EmailAddress.GetHashCode();
-            }
-
-            if (this.Address != null)
-            {
-               hashCode += this.Address.GetHashCode();
-            }
-
-            if (this.PhoneNumber != null)
-            {
-               hashCode += this.PhoneNumber.GetHashCode();
-            }
-
-            if (this.CompanyName != null)
-            {
-               hashCode += this.CompanyName.GetHashCode();
-            }
+            hashCode = HashCode.Combine(hashCode, this.TaxIds);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -201,6 +181,7 @@ namespace Square.Models
             toStringOutput.Add($"this.Address = {(this.Address == null ? "null" : this.Address.ToString())}");
             toStringOutput.Add($"this.PhoneNumber = {(this.PhoneNumber == null ? "null" : this.PhoneNumber == string.Empty ? "" : this.PhoneNumber)}");
             toStringOutput.Add($"this.CompanyName = {(this.CompanyName == null ? "null" : this.CompanyName == string.Empty ? "" : this.CompanyName)}");
+            toStringOutput.Add($"this.TaxIds = {(this.TaxIds == null ? "null" : this.TaxIds.ToString())}");
         }
 
         /// <summary>
@@ -216,7 +197,8 @@ namespace Square.Models
                 .EmailAddress(this.EmailAddress)
                 .Address(this.Address)
                 .PhoneNumber(this.PhoneNumber)
-                .CompanyName(this.CompanyName);
+                .CompanyName(this.CompanyName)
+                .TaxIds(this.TaxIds);
             return builder;
         }
 
@@ -232,6 +214,7 @@ namespace Square.Models
             private Models.Address address;
             private string phoneNumber;
             private string companyName;
+            private Models.InvoiceRecipientTaxIds taxIds;
 
              /// <summary>
              /// CustomerId.
@@ -310,6 +293,17 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// TaxIds.
+             /// </summary>
+             /// <param name="taxIds"> taxIds. </param>
+             /// <returns> Builder. </returns>
+            public Builder TaxIds(Models.InvoiceRecipientTaxIds taxIds)
+            {
+                this.taxIds = taxIds;
+                return this;
+            }
+
             /// <summary>
             /// Builds class object.
             /// </summary>
@@ -323,7 +317,8 @@ namespace Square.Models
                     this.emailAddress,
                     this.address,
                     this.phoneNumber,
-                    this.companyName);
+                    this.companyName,
+                    this.taxIds);
             }
         }
     }

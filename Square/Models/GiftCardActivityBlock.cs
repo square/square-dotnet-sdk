@@ -59,20 +59,16 @@ namespace Square.Models
             return obj is GiftCardActivityBlock other &&
                 ((this.Reason == null && other.Reason == null) || (this.Reason?.Equals(other.Reason) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -580952757;
-
-            if (this.Reason != null)
-            {
-               hashCode += this.Reason.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.Reason);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

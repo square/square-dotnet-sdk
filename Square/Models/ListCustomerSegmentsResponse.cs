@@ -90,7 +90,7 @@ namespace Square.Models
                 ((this.Segments == null && other.Segments == null) || (this.Segments?.Equals(other.Segments) == true)) &&
                 ((this.Cursor == null && other.Cursor == null) || (this.Cursor?.Equals(other.Cursor) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
@@ -100,25 +100,11 @@ namespace Square.Models
             {
                 hashCode += this.Context.GetHashCode();
             }
-
-            if (this.Errors != null)
-            {
-               hashCode += this.Errors.GetHashCode();
-            }
-
-            if (this.Segments != null)
-            {
-               hashCode += this.Segments.GetHashCode();
-            }
-
-            if (this.Cursor != null)
-            {
-               hashCode += this.Cursor.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.Errors, this.Segments, this.Cursor);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

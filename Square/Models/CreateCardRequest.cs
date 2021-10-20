@@ -96,35 +96,16 @@ namespace Square.Models
                 ((this.VerificationToken == null && other.VerificationToken == null) || (this.VerificationToken?.Equals(other.VerificationToken) == true)) &&
                 ((this.Card == null && other.Card == null) || (this.Card?.Equals(other.Card) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 732228113;
-
-            if (this.IdempotencyKey != null)
-            {
-               hashCode += this.IdempotencyKey.GetHashCode();
-            }
-
-            if (this.SourceId != null)
-            {
-               hashCode += this.SourceId.GetHashCode();
-            }
-
-            if (this.VerificationToken != null)
-            {
-               hashCode += this.VerificationToken.GetHashCode();
-            }
-
-            if (this.Card != null)
-            {
-               hashCode += this.Card.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.IdempotencyKey, this.SourceId, this.VerificationToken, this.Card);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

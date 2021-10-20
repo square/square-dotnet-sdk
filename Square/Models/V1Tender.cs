@@ -209,95 +209,20 @@ namespace Square.Models
                 ((this.RefundedMoney == null && other.RefundedMoney == null) || (this.RefundedMoney?.Equals(other.RefundedMoney) == true)) &&
                 ((this.IsExchange == null && other.IsExchange == null) || (this.IsExchange?.Equals(other.IsExchange) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 1002014939;
+            hashCode = HashCode.Combine(this.Id, this.Type, this.Name, this.EmployeeId, this.ReceiptUrl, this.CardBrand, this.PanSuffix);
 
-            if (this.Id != null)
-            {
-               hashCode += this.Id.GetHashCode();
-            }
+            hashCode = HashCode.Combine(hashCode, this.EntryMethod, this.PaymentNote, this.TotalMoney, this.TenderedMoney, this.TenderedAt, this.SettledAt, this.ChangeBackMoney);
 
-            if (this.Type != null)
-            {
-               hashCode += this.Type.GetHashCode();
-            }
-
-            if (this.Name != null)
-            {
-               hashCode += this.Name.GetHashCode();
-            }
-
-            if (this.EmployeeId != null)
-            {
-               hashCode += this.EmployeeId.GetHashCode();
-            }
-
-            if (this.ReceiptUrl != null)
-            {
-               hashCode += this.ReceiptUrl.GetHashCode();
-            }
-
-            if (this.CardBrand != null)
-            {
-               hashCode += this.CardBrand.GetHashCode();
-            }
-
-            if (this.PanSuffix != null)
-            {
-               hashCode += this.PanSuffix.GetHashCode();
-            }
-
-            if (this.EntryMethod != null)
-            {
-               hashCode += this.EntryMethod.GetHashCode();
-            }
-
-            if (this.PaymentNote != null)
-            {
-               hashCode += this.PaymentNote.GetHashCode();
-            }
-
-            if (this.TotalMoney != null)
-            {
-               hashCode += this.TotalMoney.GetHashCode();
-            }
-
-            if (this.TenderedMoney != null)
-            {
-               hashCode += this.TenderedMoney.GetHashCode();
-            }
-
-            if (this.TenderedAt != null)
-            {
-               hashCode += this.TenderedAt.GetHashCode();
-            }
-
-            if (this.SettledAt != null)
-            {
-               hashCode += this.SettledAt.GetHashCode();
-            }
-
-            if (this.ChangeBackMoney != null)
-            {
-               hashCode += this.ChangeBackMoney.GetHashCode();
-            }
-
-            if (this.RefundedMoney != null)
-            {
-               hashCode += this.RefundedMoney.GetHashCode();
-            }
-
-            if (this.IsExchange != null)
-            {
-               hashCode += this.IsExchange.GetHashCode();
-            }
+            hashCode = HashCode.Combine(hashCode, this.RefundedMoney, this.IsExchange);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

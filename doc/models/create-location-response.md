@@ -12,7 +12,7 @@ Response object returned by the [CreateLocation](/doc/api/locations.md#create-lo
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `Errors` | [`IList<Models.Error>`](/doc/models/error.md) | Optional | Information on errors encountered during the request. |
-| `Location` | [`Models.Location`](/doc/models/location.md) | Optional | - |
+| `Location` | [`Models.Location`](/doc/models/location.md) | Optional | Represents one of a business's locations. |
 
 ## Example (as JSON)
 

@@ -84,30 +84,16 @@ namespace Square.Models
                 ((this.FrSiret == null && other.FrSiret == null) || (this.FrSiret?.Equals(other.FrSiret) == true)) &&
                 ((this.FrNaf == null && other.FrNaf == null) || (this.FrNaf?.Equals(other.FrNaf) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -821356672;
-
-            if (this.EuVat != null)
-            {
-               hashCode += this.EuVat.GetHashCode();
-            }
-
-            if (this.FrSiret != null)
-            {
-               hashCode += this.FrSiret.GetHashCode();
-            }
-
-            if (this.FrNaf != null)
-            {
-               hashCode += this.FrNaf.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.EuVat, this.FrSiret, this.FrNaf);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

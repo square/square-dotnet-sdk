@@ -69,25 +69,16 @@ namespace Square.Models
                 ((this.StandardUnitDescriptions == null && other.StandardUnitDescriptions == null) || (this.StandardUnitDescriptions?.Equals(other.StandardUnitDescriptions) == true)) &&
                 ((this.LanguageCode == null && other.LanguageCode == null) || (this.LanguageCode?.Equals(other.LanguageCode) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1512557629;
-
-            if (this.StandardUnitDescriptions != null)
-            {
-               hashCode += this.StandardUnitDescriptions.GetHashCode();
-            }
-
-            if (this.LanguageCode != null)
-            {
-               hashCode += this.LanguageCode.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.StandardUnitDescriptions, this.LanguageCode);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

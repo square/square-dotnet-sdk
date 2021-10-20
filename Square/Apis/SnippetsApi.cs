@@ -35,9 +35,9 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Removes your snippet from a Square Online site..
-        /// You can call [ListSites]($e/Sites/ListSites) to get the IDs of the sites that belong to a seller..
-        /// __Note:__ Square Online APIs are publicly available as part of an early access program. For more information, see [Early access program for Square Online APIs](https://developer.squareup.com/docs/online-api#early-access-program-for-square-online-apis)..
+        /// Removes your snippet from a Square Online site.
+        /// You can call [ListSites]($e/Sites/ListSites) to get the IDs of the sites that belong to a seller.
+        /// __Note:__ Square Online APIs are publicly available as part of an early access program. For more information, see [Early access program for Square Online APIs](https://developer.squareup.com/docs/online-api#early-access-program-for-square-online-apis).
         /// </summary>
         /// <param name="siteId">Required parameter: The ID of the site that contains the snippet..</param>
         /// <returns>Returns the Models.DeleteSnippetResponse response from the API call.</returns>
@@ -50,9 +50,9 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Removes your snippet from a Square Online site..
-        /// You can call [ListSites]($e/Sites/ListSites) to get the IDs of the sites that belong to a seller..
-        /// __Note:__ Square Online APIs are publicly available as part of an early access program. For more information, see [Early access program for Square Online APIs](https://developer.squareup.com/docs/online-api#early-access-program-for-square-online-apis)..
+        /// Removes your snippet from a Square Online site.
+        /// You can call [ListSites]($e/Sites/ListSites) to get the IDs of the sites that belong to a seller.
+        /// __Note:__ Square Online APIs are publicly available as part of an early access program. For more information, see [Early access program for Square Online APIs](https://developer.squareup.com/docs/online-api#early-access-program-for-square-online-apis).
         /// </summary>
         /// <param name="siteId">Required parameter: The ID of the site that contains the snippet..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
@@ -109,9 +109,9 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Retrieves your snippet from a Square Online site. A site can contain snippets from multiple snippet applications, but you can retrieve only the snippet that was added by your application..
-        /// You can call [ListSites]($e/Sites/ListSites) to get the IDs of the sites that belong to a seller..
-        /// __Note:__ Square Online APIs are publicly available as part of an early access program. For more information, see [Early access program for Square Online APIs](https://developer.squareup.com/docs/online-api#early-access-program-for-square-online-apis)..
+        /// Retrieves your snippet from a Square Online site. A site can contain snippets from multiple snippet applications, but you can retrieve only the snippet that was added by your application.
+        /// You can call [ListSites]($e/Sites/ListSites) to get the IDs of the sites that belong to a seller.
+        /// __Note:__ Square Online APIs are publicly available as part of an early access program. For more information, see [Early access program for Square Online APIs](https://developer.squareup.com/docs/online-api#early-access-program-for-square-online-apis).
         /// </summary>
         /// <param name="siteId">Required parameter: The ID of the site that contains the snippet..</param>
         /// <returns>Returns the Models.RetrieveSnippetResponse response from the API call.</returns>
@@ -124,9 +124,9 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Retrieves your snippet from a Square Online site. A site can contain snippets from multiple snippet applications, but you can retrieve only the snippet that was added by your application..
-        /// You can call [ListSites]($e/Sites/ListSites) to get the IDs of the sites that belong to a seller..
-        /// __Note:__ Square Online APIs are publicly available as part of an early access program. For more information, see [Early access program for Square Online APIs](https://developer.squareup.com/docs/online-api#early-access-program-for-square-online-apis)..
+        /// Retrieves your snippet from a Square Online site. A site can contain snippets from multiple snippet applications, but you can retrieve only the snippet that was added by your application.
+        /// You can call [ListSites]($e/Sites/ListSites) to get the IDs of the sites that belong to a seller.
+        /// __Note:__ Square Online APIs are publicly available as part of an early access program. For more information, see [Early access program for Square Online APIs](https://developer.squareup.com/docs/online-api#early-access-program-for-square-online-apis).
         /// </summary>
         /// <param name="siteId">Required parameter: The ID of the site that contains the snippet..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
@@ -185,8 +185,8 @@ namespace Square.Apis
         /// <summary>
         /// Adds a snippet to a Square Online site or updates the existing snippet on the site. .
         /// The snippet code is appended to the end of the `head` element on every page of the site, except checkout pages. A snippet application can add one snippet to a given site. .
-        /// You can call [ListSites]($e/Sites/ListSites) to get the IDs of the sites that belong to a seller..
-        /// __Note:__ Square Online APIs are publicly available as part of an early access program. For more information, see [Early access program for Square Online APIs](https://developer.squareup.com/docs/online-api#early-access-program-for-square-online-apis)..
+        /// You can call [ListSites]($e/Sites/ListSites) to get the IDs of the sites that belong to a seller.
+        /// __Note:__ Square Online APIs are publicly available as part of an early access program. For more information, see [Early access program for Square Online APIs](https://developer.squareup.com/docs/online-api#early-access-program-for-square-online-apis).
         /// </summary>
         /// <param name="siteId">Required parameter: The ID of the site where you want to add or update the snippet..</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
@@ -203,8 +203,8 @@ namespace Square.Apis
         /// <summary>
         /// Adds a snippet to a Square Online site or updates the existing snippet on the site. .
         /// The snippet code is appended to the end of the `head` element on every page of the site, except checkout pages. A snippet application can add one snippet to a given site. .
-        /// You can call [ListSites]($e/Sites/ListSites) to get the IDs of the sites that belong to a seller..
-        /// __Note:__ Square Online APIs are publicly available as part of an early access program. For more information, see [Early access program for Square Online APIs](https://developer.squareup.com/docs/online-api#early-access-program-for-square-online-apis)..
+        /// You can call [ListSites]($e/Sites/ListSites) to get the IDs of the sites that belong to a seller.
+        /// __Note:__ Square Online APIs are publicly available as part of an early access program. For more information, see [Early access program for Square Online APIs](https://developer.squareup.com/docs/online-api#early-access-program-for-square-online-apis).
         /// </summary>
         /// <param name="siteId">Required parameter: The ID of the site where you want to add or update the snippet..</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>

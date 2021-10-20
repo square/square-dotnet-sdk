@@ -59,20 +59,16 @@ namespace Square.Models
             return obj is CustomerPreferences other &&
                 ((this.EmailUnsubscribed == null && other.EmailUnsubscribed == null) || (this.EmailUnsubscribed?.Equals(other.EmailUnsubscribed) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1448015667;
-
-            if (this.EmailUnsubscribed != null)
-            {
-               hashCode += this.EmailUnsubscribed.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.EmailUnsubscribed);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

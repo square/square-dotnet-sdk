@@ -60,20 +60,16 @@ namespace Square.Models
             return obj is OrderSource other &&
                 ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 2055021713;
-
-            if (this.Name != null)
-            {
-               hashCode += this.Name.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.Name);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

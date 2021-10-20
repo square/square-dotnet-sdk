@@ -258,105 +258,20 @@ namespace Square.Models
                 ((this.IsCurbsidePickup == null && other.IsCurbsidePickup == null) || (this.IsCurbsidePickup?.Equals(other.IsCurbsidePickup) == true)) &&
                 ((this.CurbsidePickupDetails == null && other.CurbsidePickupDetails == null) || (this.CurbsidePickupDetails?.Equals(other.CurbsidePickupDetails) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -657729285;
+            hashCode = HashCode.Combine(this.Recipient, this.ExpiresAt, this.AutoCompleteDuration, this.ScheduleType, this.PickupAt, this.PickupWindowDuration, this.PrepTimeDuration);
 
-            if (this.Recipient != null)
-            {
-               hashCode += this.Recipient.GetHashCode();
-            }
+            hashCode = HashCode.Combine(hashCode, this.Note, this.PlacedAt, this.AcceptedAt, this.RejectedAt, this.ReadyAt, this.ExpiredAt, this.PickedUpAt);
 
-            if (this.ExpiresAt != null)
-            {
-               hashCode += this.ExpiresAt.GetHashCode();
-            }
-
-            if (this.AutoCompleteDuration != null)
-            {
-               hashCode += this.AutoCompleteDuration.GetHashCode();
-            }
-
-            if (this.ScheduleType != null)
-            {
-               hashCode += this.ScheduleType.GetHashCode();
-            }
-
-            if (this.PickupAt != null)
-            {
-               hashCode += this.PickupAt.GetHashCode();
-            }
-
-            if (this.PickupWindowDuration != null)
-            {
-               hashCode += this.PickupWindowDuration.GetHashCode();
-            }
-
-            if (this.PrepTimeDuration != null)
-            {
-               hashCode += this.PrepTimeDuration.GetHashCode();
-            }
-
-            if (this.Note != null)
-            {
-               hashCode += this.Note.GetHashCode();
-            }
-
-            if (this.PlacedAt != null)
-            {
-               hashCode += this.PlacedAt.GetHashCode();
-            }
-
-            if (this.AcceptedAt != null)
-            {
-               hashCode += this.AcceptedAt.GetHashCode();
-            }
-
-            if (this.RejectedAt != null)
-            {
-               hashCode += this.RejectedAt.GetHashCode();
-            }
-
-            if (this.ReadyAt != null)
-            {
-               hashCode += this.ReadyAt.GetHashCode();
-            }
-
-            if (this.ExpiredAt != null)
-            {
-               hashCode += this.ExpiredAt.GetHashCode();
-            }
-
-            if (this.PickedUpAt != null)
-            {
-               hashCode += this.PickedUpAt.GetHashCode();
-            }
-
-            if (this.CanceledAt != null)
-            {
-               hashCode += this.CanceledAt.GetHashCode();
-            }
-
-            if (this.CancelReason != null)
-            {
-               hashCode += this.CancelReason.GetHashCode();
-            }
-
-            if (this.IsCurbsidePickup != null)
-            {
-               hashCode += this.IsCurbsidePickup.GetHashCode();
-            }
-
-            if (this.CurbsidePickupDetails != null)
-            {
-               hashCode += this.CurbsidePickupDetails.GetHashCode();
-            }
+            hashCode = HashCode.Combine(hashCode, this.CanceledAt, this.CancelReason, this.IsCurbsidePickup, this.CurbsidePickupDetails);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

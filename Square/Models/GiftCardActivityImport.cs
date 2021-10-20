@@ -64,20 +64,16 @@ namespace Square.Models
             return obj is GiftCardActivityImport other &&
                 ((this.AmountMoney == null && other.AmountMoney == null) || (this.AmountMoney?.Equals(other.AmountMoney) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1619319185;
-
-            if (this.AmountMoney != null)
-            {
-               hashCode += this.AmountMoney.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.AmountMoney);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

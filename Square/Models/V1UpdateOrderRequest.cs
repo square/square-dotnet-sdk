@@ -99,40 +99,16 @@ namespace Square.Models
                 ((this.RefundedNote == null && other.RefundedNote == null) || (this.RefundedNote?.Equals(other.RefundedNote) == true)) &&
                 ((this.CanceledNote == null && other.CanceledNote == null) || (this.CanceledNote?.Equals(other.CanceledNote) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -553282521;
-
-            if (this.Action != null)
-            {
-               hashCode += this.Action.GetHashCode();
-            }
-
-            if (this.ShippedTrackingNumber != null)
-            {
-               hashCode += this.ShippedTrackingNumber.GetHashCode();
-            }
-
-            if (this.CompletedNote != null)
-            {
-               hashCode += this.CompletedNote.GetHashCode();
-            }
-
-            if (this.RefundedNote != null)
-            {
-               hashCode += this.RefundedNote.GetHashCode();
-            }
-
-            if (this.CanceledNote != null)
-            {
-               hashCode += this.CanceledNote.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.Action, this.ShippedTrackingNumber, this.CompletedNote, this.RefundedNote, this.CanceledNote);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

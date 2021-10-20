@@ -69,25 +69,16 @@ namespace Square.Models
                 ((this.CallingCode == null && other.CallingCode == null) || (this.CallingCode?.Equals(other.CallingCode) == true)) &&
                 ((this.Number == null && other.Number == null) || (this.Number?.Equals(other.Number) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 343986405;
-
-            if (this.CallingCode != null)
-            {
-               hashCode += this.CallingCode.GetHashCode();
-            }
-
-            if (this.Number != null)
-            {
-               hashCode += this.Number.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.CallingCode, this.Number);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

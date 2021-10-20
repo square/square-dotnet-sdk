@@ -79,30 +79,16 @@ namespace Square.Models
                 ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true)) &&
                 ((this.AppointmentSegments == null && other.AppointmentSegments == null) || (this.AppointmentSegments?.Equals(other.AppointmentSegments) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 133095493;
-
-            if (this.StartAt != null)
-            {
-               hashCode += this.StartAt.GetHashCode();
-            }
-
-            if (this.LocationId != null)
-            {
-               hashCode += this.LocationId.GetHashCode();
-            }
-
-            if (this.AppointmentSegments != null)
-            {
-               hashCode += this.AppointmentSegments.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.StartAt, this.LocationId, this.AppointmentSegments);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

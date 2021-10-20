@@ -59,20 +59,16 @@ namespace Square.Models
             return obj is CatalogQueryText other &&
                 ((this.Keywords == null && other.Keywords == null) || (this.Keywords?.Equals(other.Keywords) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -192618322;
-
-            if (this.Keywords != null)
-            {
-               hashCode += this.Keywords.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.Keywords);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

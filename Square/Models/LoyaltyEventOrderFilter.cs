@@ -59,20 +59,16 @@ namespace Square.Models
             return obj is LoyaltyEventOrderFilter other &&
                 ((this.OrderId == null && other.OrderId == null) || (this.OrderId?.Equals(other.OrderId) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 1504536925;
-
-            if (this.OrderId != null)
-            {
-               hashCode += this.OrderId.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.OrderId);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

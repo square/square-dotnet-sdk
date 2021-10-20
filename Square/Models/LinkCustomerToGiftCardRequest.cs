@@ -59,20 +59,16 @@ namespace Square.Models
             return obj is LinkCustomerToGiftCardRequest other &&
                 ((this.CustomerId == null && other.CustomerId == null) || (this.CustomerId?.Equals(other.CustomerId) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 225193807;
-
-            if (this.CustomerId != null)
-            {
-               hashCode += this.CustomerId.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.CustomerId);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

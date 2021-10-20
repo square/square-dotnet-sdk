@@ -192,75 +192,18 @@ namespace Square.Models
                 ((this.ExcludeStrategy == null && other.ExcludeStrategy == null) || (this.ExcludeStrategy?.Equals(other.ExcludeStrategy) == true)) &&
                 ((this.CustomerGroupIdsAny == null && other.CustomerGroupIdsAny == null) || (this.CustomerGroupIdsAny?.Equals(other.CustomerGroupIdsAny) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 1692018639;
+            hashCode = HashCode.Combine(this.Name, this.TimePeriodIds, this.DiscountId, this.MatchProductsId, this.ApplyProductsId, this.ExcludeProductsId, this.ValidFromDate);
 
-            if (this.Name != null)
-            {
-               hashCode += this.Name.GetHashCode();
-            }
-
-            if (this.TimePeriodIds != null)
-            {
-               hashCode += this.TimePeriodIds.GetHashCode();
-            }
-
-            if (this.DiscountId != null)
-            {
-               hashCode += this.DiscountId.GetHashCode();
-            }
-
-            if (this.MatchProductsId != null)
-            {
-               hashCode += this.MatchProductsId.GetHashCode();
-            }
-
-            if (this.ApplyProductsId != null)
-            {
-               hashCode += this.ApplyProductsId.GetHashCode();
-            }
-
-            if (this.ExcludeProductsId != null)
-            {
-               hashCode += this.ExcludeProductsId.GetHashCode();
-            }
-
-            if (this.ValidFromDate != null)
-            {
-               hashCode += this.ValidFromDate.GetHashCode();
-            }
-
-            if (this.ValidFromLocalTime != null)
-            {
-               hashCode += this.ValidFromLocalTime.GetHashCode();
-            }
-
-            if (this.ValidUntilDate != null)
-            {
-               hashCode += this.ValidUntilDate.GetHashCode();
-            }
-
-            if (this.ValidUntilLocalTime != null)
-            {
-               hashCode += this.ValidUntilLocalTime.GetHashCode();
-            }
-
-            if (this.ExcludeStrategy != null)
-            {
-               hashCode += this.ExcludeStrategy.GetHashCode();
-            }
-
-            if (this.CustomerGroupIdsAny != null)
-            {
-               hashCode += this.CustomerGroupIdsAny.GetHashCode();
-            }
+            hashCode = HashCode.Combine(hashCode, this.ValidFromLocalTime, this.ValidUntilDate, this.ValidUntilLocalTime, this.ExcludeStrategy, this.CustomerGroupIdsAny);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

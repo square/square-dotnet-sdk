@@ -61,20 +61,16 @@ namespace Square.Models
             return obj is TerminalRefundQuerySort other &&
                 ((this.SortOrder == null && other.SortOrder == null) || (this.SortOrder?.Equals(other.SortOrder) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -926271698;
-
-            if (this.SortOrder != null)
-            {
-               hashCode += this.SortOrder.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.SortOrder);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

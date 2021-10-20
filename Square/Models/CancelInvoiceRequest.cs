@@ -61,16 +61,16 @@ namespace Square.Models
             return obj is CancelInvoiceRequest other &&
                 this.Version.Equals(other.Version);
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 1350501489;
-            hashCode += this.Version.GetHashCode();
+            hashCode = HashCode.Combine(this.Version);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

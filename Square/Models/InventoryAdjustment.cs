@@ -254,105 +254,20 @@ namespace Square.Models
                 ((this.GoodsReceiptId == null && other.GoodsReceiptId == null) || (this.GoodsReceiptId?.Equals(other.GoodsReceiptId) == true)) &&
                 ((this.AdjustmentGroup == null && other.AdjustmentGroup == null) || (this.AdjustmentGroup?.Equals(other.AdjustmentGroup) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -2122968944;
+            hashCode = HashCode.Combine(this.Id, this.ReferenceId, this.FromState, this.ToState, this.LocationId, this.CatalogObjectId, this.CatalogObjectType);
 
-            if (this.Id != null)
-            {
-               hashCode += this.Id.GetHashCode();
-            }
+            hashCode = HashCode.Combine(hashCode, this.Quantity, this.TotalPriceMoney, this.OccurredAt, this.CreatedAt, this.Source, this.EmployeeId, this.TransactionId);
 
-            if (this.ReferenceId != null)
-            {
-               hashCode += this.ReferenceId.GetHashCode();
-            }
-
-            if (this.FromState != null)
-            {
-               hashCode += this.FromState.GetHashCode();
-            }
-
-            if (this.ToState != null)
-            {
-               hashCode += this.ToState.GetHashCode();
-            }
-
-            if (this.LocationId != null)
-            {
-               hashCode += this.LocationId.GetHashCode();
-            }
-
-            if (this.CatalogObjectId != null)
-            {
-               hashCode += this.CatalogObjectId.GetHashCode();
-            }
-
-            if (this.CatalogObjectType != null)
-            {
-               hashCode += this.CatalogObjectType.GetHashCode();
-            }
-
-            if (this.Quantity != null)
-            {
-               hashCode += this.Quantity.GetHashCode();
-            }
-
-            if (this.TotalPriceMoney != null)
-            {
-               hashCode += this.TotalPriceMoney.GetHashCode();
-            }
-
-            if (this.OccurredAt != null)
-            {
-               hashCode += this.OccurredAt.GetHashCode();
-            }
-
-            if (this.CreatedAt != null)
-            {
-               hashCode += this.CreatedAt.GetHashCode();
-            }
-
-            if (this.Source != null)
-            {
-               hashCode += this.Source.GetHashCode();
-            }
-
-            if (this.EmployeeId != null)
-            {
-               hashCode += this.EmployeeId.GetHashCode();
-            }
-
-            if (this.TransactionId != null)
-            {
-               hashCode += this.TransactionId.GetHashCode();
-            }
-
-            if (this.RefundId != null)
-            {
-               hashCode += this.RefundId.GetHashCode();
-            }
-
-            if (this.PurchaseOrderId != null)
-            {
-               hashCode += this.PurchaseOrderId.GetHashCode();
-            }
-
-            if (this.GoodsReceiptId != null)
-            {
-               hashCode += this.GoodsReceiptId.GetHashCode();
-            }
-
-            if (this.AdjustmentGroup != null)
-            {
-               hashCode += this.AdjustmentGroup.GetHashCode();
-            }
+            hashCode = HashCode.Combine(hashCode, this.RefundId, this.PurchaseOrderId, this.GoodsReceiptId, this.AdjustmentGroup);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

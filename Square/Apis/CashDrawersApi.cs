@@ -36,7 +36,7 @@ namespace Square.Apis
 
         /// <summary>
         /// Provides the details for all of the cash drawer shifts for a location.
-        /// in a date range..
+        /// in a date range.
         /// </summary>
         /// <param name="locationId">Required parameter: The ID of the location to query for a list of cash drawer shifts..</param>
         /// <param name="sortOrder">Optional parameter: The order in which cash drawer shifts are listed in the response, based on their opened_at field. Default value: ASC.</param>
@@ -60,7 +60,7 @@ namespace Square.Apis
 
         /// <summary>
         /// Provides the details for all of the cash drawer shifts for a location.
-        /// in a date range..
+        /// in a date range.
         /// </summary>
         /// <param name="locationId">Required parameter: The ID of the location to query for a list of cash drawer shifts..</param>
         /// <param name="sortOrder">Optional parameter: The order in which cash drawer shifts are listed in the response, based on their opened_at field. Default value: ASC.</param>
@@ -133,7 +133,7 @@ namespace Square.Apis
 
         /// <summary>
         /// Provides the summary details for a single cash drawer shift. See.
-        /// [ListCashDrawerShiftEvents]($e/CashDrawers/ListCashDrawerShiftEvents) for a list of cash drawer shift events..
+        /// [ListCashDrawerShiftEvents]($e/CashDrawers/ListCashDrawerShiftEvents) for a list of cash drawer shift events.
         /// </summary>
         /// <param name="locationId">Required parameter: The ID of the location to retrieve cash drawer shifts from..</param>
         /// <param name="shiftId">Required parameter: The shift ID..</param>
@@ -149,7 +149,7 @@ namespace Square.Apis
 
         /// <summary>
         /// Provides the summary details for a single cash drawer shift. See.
-        /// [ListCashDrawerShiftEvents]($e/CashDrawers/ListCashDrawerShiftEvents) for a list of cash drawer shift events..
+        /// [ListCashDrawerShiftEvents]($e/CashDrawers/ListCashDrawerShiftEvents) for a list of cash drawer shift events.
         /// </summary>
         /// <param name="locationId">Required parameter: The ID of the location to retrieve cash drawer shifts from..</param>
         /// <param name="shiftId">Required parameter: The shift ID..</param>
@@ -214,7 +214,7 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Provides a paginated list of events for a single cash drawer shift..
+        /// Provides a paginated list of events for a single cash drawer shift.
         /// </summary>
         /// <param name="locationId">Required parameter: The ID of the location to list cash drawer shifts for..</param>
         /// <param name="shiftId">Required parameter: The shift ID..</param>
@@ -233,7 +233,7 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Provides a paginated list of events for a single cash drawer shift..
+        /// Provides a paginated list of events for a single cash drawer shift.
         /// </summary>
         /// <param name="locationId">Required parameter: The ID of the location to list cash drawer shifts for..</param>
         /// <param name="shiftId">Required parameter: The shift ID..</param>

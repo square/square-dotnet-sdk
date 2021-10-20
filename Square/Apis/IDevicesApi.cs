@@ -20,7 +20,7 @@ namespace Square.Apis
     public interface IDevicesApi
     {
         /// <summary>
-        /// Lists all DeviceCodes associated with the merchant..
+        /// Lists all DeviceCodes associated with the merchant.
         /// </summary>
         /// <param name="cursor">Optional parameter: A pagination cursor returned by a previous call to this endpoint. Provide this to retrieve the next set of results for your original query.  See [Paginating results](https://developer.squareup.com/docs/working-with-apis/pagination) for more information..</param>
         /// <param name="locationId">Optional parameter: If specified, only returns DeviceCodes of the specified location. Returns DeviceCodes of all locations if empty..</param>
@@ -34,7 +34,7 @@ namespace Square.Apis
                 string status = null);
 
         /// <summary>
-        /// Lists all DeviceCodes associated with the merchant..
+        /// Lists all DeviceCodes associated with the merchant.
         /// </summary>
         /// <param name="cursor">Optional parameter: A pagination cursor returned by a previous call to this endpoint. Provide this to retrieve the next set of results for your original query.  See [Paginating results](https://developer.squareup.com/docs/working-with-apis/pagination) for more information..</param>
         /// <param name="locationId">Optional parameter: If specified, only returns DeviceCodes of the specified location. Returns DeviceCodes of all locations if empty..</param>
@@ -51,7 +51,7 @@ namespace Square.Apis
 
         /// <summary>
         /// Creates a DeviceCode that can be used to login to a Square Terminal device to enter the connected.
-        /// terminal mode..
+        /// terminal mode.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <returns>Returns the Models.CreateDeviceCodeResponse response from the API call.</returns>
@@ -60,7 +60,7 @@ namespace Square.Apis
 
         /// <summary>
         /// Creates a DeviceCode that can be used to login to a Square Terminal device to enter the connected.
-        /// terminal mode..
+        /// terminal mode.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
@@ -70,7 +70,7 @@ namespace Square.Apis
                 CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Retrieves DeviceCode with the associated ID..
+        /// Retrieves DeviceCode with the associated ID.
         /// </summary>
         /// <param name="id">Required parameter: The unique identifier for the device code..</param>
         /// <returns>Returns the Models.GetDeviceCodeResponse response from the API call.</returns>
@@ -78,7 +78,7 @@ namespace Square.Apis
                 string id);
 
         /// <summary>
-        /// Retrieves DeviceCode with the associated ID..
+        /// Retrieves DeviceCode with the associated ID.
         /// </summary>
         /// <param name="id">Required parameter: The unique identifier for the device code..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>

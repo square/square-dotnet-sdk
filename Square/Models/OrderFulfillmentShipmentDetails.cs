@@ -215,90 +215,20 @@ namespace Square.Models
                 ((this.FailedAt == null && other.FailedAt == null) || (this.FailedAt?.Equals(other.FailedAt) == true)) &&
                 ((this.FailureReason == null && other.FailureReason == null) || (this.FailureReason?.Equals(other.FailureReason) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 1108362053;
+            hashCode = HashCode.Combine(this.Recipient, this.Carrier, this.ShippingNote, this.ShippingType, this.TrackingNumber, this.TrackingUrl, this.PlacedAt);
 
-            if (this.Recipient != null)
-            {
-               hashCode += this.Recipient.GetHashCode();
-            }
+            hashCode = HashCode.Combine(hashCode, this.InProgressAt, this.PackagedAt, this.ExpectedShippedAt, this.ShippedAt, this.CanceledAt, this.CancelReason, this.FailedAt);
 
-            if (this.Carrier != null)
-            {
-               hashCode += this.Carrier.GetHashCode();
-            }
-
-            if (this.ShippingNote != null)
-            {
-               hashCode += this.ShippingNote.GetHashCode();
-            }
-
-            if (this.ShippingType != null)
-            {
-               hashCode += this.ShippingType.GetHashCode();
-            }
-
-            if (this.TrackingNumber != null)
-            {
-               hashCode += this.TrackingNumber.GetHashCode();
-            }
-
-            if (this.TrackingUrl != null)
-            {
-               hashCode += this.TrackingUrl.GetHashCode();
-            }
-
-            if (this.PlacedAt != null)
-            {
-               hashCode += this.PlacedAt.GetHashCode();
-            }
-
-            if (this.InProgressAt != null)
-            {
-               hashCode += this.InProgressAt.GetHashCode();
-            }
-
-            if (this.PackagedAt != null)
-            {
-               hashCode += this.PackagedAt.GetHashCode();
-            }
-
-            if (this.ExpectedShippedAt != null)
-            {
-               hashCode += this.ExpectedShippedAt.GetHashCode();
-            }
-
-            if (this.ShippedAt != null)
-            {
-               hashCode += this.ShippedAt.GetHashCode();
-            }
-
-            if (this.CanceledAt != null)
-            {
-               hashCode += this.CanceledAt.GetHashCode();
-            }
-
-            if (this.CancelReason != null)
-            {
-               hashCode += this.CancelReason.GetHashCode();
-            }
-
-            if (this.FailedAt != null)
-            {
-               hashCode += this.FailedAt.GetHashCode();
-            }
-
-            if (this.FailureReason != null)
-            {
-               hashCode += this.FailureReason.GetHashCode();
-            }
+            hashCode = HashCode.Combine(hashCode, this.FailureReason);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

@@ -110,7 +110,7 @@ CreatePaymentAsync(
 
 ```csharp
 var bodyAmountMoney = new Money.Builder()
-    .Amount(200L)
+    .Amount(1000L)
     .Currency("USD")
     .Build();
 var bodyTipMoney = new Money.Builder()
@@ -122,16 +122,16 @@ var bodyAppFeeMoney = new Money.Builder()
     .Currency("USD")
     .Build();
 var body = new CreatePaymentRequest.Builder(
-        "ccof:uIbfJXhXETSP197M3GB",
-        "4935a656-a929-4792-b97c-8848be85c27c",
+        "ccof:GaJGNaZa8x4OgDJn4GB",
+        "7b0f3ec5-086a-4871-8f13-3c81b3875218",
         bodyAmountMoney)
     .TipMoney(bodyTipMoney)
     .AppFeeMoney(bodyAppFeeMoney)
     .DelayDuration("delay_duration6")
     .Autocomplete(true)
     .OrderId("order_id0")
-    .CustomerId("VDKXEEKPJN48QDG3BGGFAK05P8")
-    .LocationId("XK3DBG77NJBFX")
+    .CustomerId("W92WH6P11H4Z77CTET0RNTGFW8")
+    .LocationId("L88917AVBK2S5")
     .ReferenceId("123456")
     .Note("Brief description")
     .Build();
@@ -251,7 +251,7 @@ var bodyPaymentAmountMoney = new Money.Builder()
     .Currency("USD")
     .Build();
 var bodyPaymentTipMoney = new Money.Builder()
-    .Amount(300L)
+    .Amount(100L)
     .Currency("USD")
     .Build();
 var bodyPayment = new Payment.Builder()
@@ -260,10 +260,10 @@ var bodyPayment = new Payment.Builder()
     .UpdatedAt("updated_at8")
     .AmountMoney(bodyPaymentAmountMoney)
     .TipMoney(bodyPaymentTipMoney)
-    .VersionToken("Z3okDzm2VRv5m5nE3WGx381ItTNhvjkB4VapByyz54h6o")
+    .VersionToken("ODhwVQ35xwlzRuoZEwKXucfu7583sPTzK48c5zoGd0g6o")
     .Build();
 var body = new UpdatePaymentRequest.Builder(
-        "3d3c3b22-9572-4fc6-1111-e4d2f41b4122")
+        "956f8b13-e4ec-45d6-85e8-d1d95ef0c5de")
     .Payment(bodyPayment)
     .Build();
 
@@ -317,7 +317,8 @@ You can use this endpoint to complete a payment with the APPROVED `status`.
 
 ```csharp
 CompletePaymentAsync(
-    string paymentId)
+    string paymentId,
+    Models.CompletePaymentRequest body)
 ```
 
 ## Parameters
@@ -325,6 +326,7 @@ CompletePaymentAsync(
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `paymentId` | `string` | Template, Required | The unique ID identifying the payment to be completed. |
+| `body` | [`Models.CompletePaymentRequest`](/doc/models/complete-payment-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
 
@@ -334,10 +336,13 @@ CompletePaymentAsync(
 
 ```csharp
 string paymentId = "payment_id0";
+var body = new CompletePaymentRequest.Builder()
+    .VersionToken("version_token2")
+    .Build();
 
 try
 {
-    CompletePaymentResponse result = await paymentsApi.CompletePaymentAsync(paymentId);
+    CompletePaymentResponse result = await paymentsApi.CompletePaymentAsync(paymentId, body);
 }
 catch (ApiException e){};
 ```

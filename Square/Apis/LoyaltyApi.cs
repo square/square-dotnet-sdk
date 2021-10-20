@@ -35,7 +35,7 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Creates a loyalty account. To create a loyalty account, you must provide the `program_id` and a `mapping` with the `phone_number` of the buyer..
+        /// Creates a loyalty account. To create a loyalty account, you must provide the `program_id` and a `mapping` with the `phone_number` of the buyer.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <returns>Returns the Models.CreateLoyaltyAccountResponse response from the API call.</returns>
@@ -48,7 +48,7 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Creates a loyalty account. To create a loyalty account, you must provide the `program_id` and a `mapping` with the `phone_number` of the buyer..
+        /// Creates a loyalty account. To create a loyalty account, you must provide the `program_id` and a `mapping` with the `phone_number` of the buyer.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
@@ -105,7 +105,7 @@ namespace Square.Apis
         /// <summary>
         /// Searches for loyalty accounts in a loyalty program.  .
         /// You can search for a loyalty account using the phone number or customer ID associated with the account. To return all loyalty accounts, specify an empty `query` object or omit it entirely.  .
-        /// Search results are sorted by `created_at` in ascending order..
+        /// Search results are sorted by `created_at` in ascending order.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <returns>Returns the Models.SearchLoyaltyAccountsResponse response from the API call.</returns>
@@ -120,7 +120,7 @@ namespace Square.Apis
         /// <summary>
         /// Searches for loyalty accounts in a loyalty program.  .
         /// You can search for a loyalty account using the phone number or customer ID associated with the account. To return all loyalty accounts, specify an empty `query` object or omit it entirely.  .
-        /// Search results are sorted by `created_at` in ascending order..
+        /// Search results are sorted by `created_at` in ascending order.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
@@ -175,7 +175,7 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Retrieves a loyalty account..
+        /// Retrieves a loyalty account.
         /// </summary>
         /// <param name="accountId">Required parameter: The ID of the [loyalty account]($m/LoyaltyAccount) to retrieve..</param>
         /// <returns>Returns the Models.RetrieveLoyaltyAccountResponse response from the API call.</returns>
@@ -188,7 +188,7 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Retrieves a loyalty account..
+        /// Retrieves a loyalty account.
         /// </summary>
         /// <param name="accountId">Required parameter: The ID of the [loyalty account]($m/LoyaltyAccount) to retrieve..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
@@ -245,16 +245,16 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Adds points to a loyalty account..
+        /// Adds points to a loyalty account.
         /// - If you are using the Orders API to manage orders, you only provide the `order_id`. .
-        /// The endpoint reads the order to compute points to add to the buyer's account..
+        /// The endpoint reads the order to compute points to add to the buyer's account.
         /// - If you are not using the Orders API to manage orders, .
         /// you first perform a client-side computation to compute the points.  .
         /// For spend-based and visit-based programs, you can first call .
         /// [CalculateLoyaltyPoints]($e/Loyalty/CalculateLoyaltyPoints) to compute the points  .
         /// that you provide to this endpoint. .
         /// __Note:__ The country of the seller's Square account determines whether tax is included in the purchase amount when accruing points for spend-based and visit-based programs. .
-        /// For more information, see [Availability of Square Loyalty](https://developer.squareup.com/docs/loyalty-api/overview#loyalty-market-availability)..
+        /// For more information, see [Availability of Square Loyalty](https://developer.squareup.com/docs/loyalty-api/overview#loyalty-market-availability).
         /// </summary>
         /// <param name="accountId">Required parameter: The [loyalty account]($m/LoyaltyAccount) ID to which to add the points..</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
@@ -269,16 +269,16 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Adds points to a loyalty account..
+        /// Adds points to a loyalty account.
         /// - If you are using the Orders API to manage orders, you only provide the `order_id`. .
-        /// The endpoint reads the order to compute points to add to the buyer's account..
+        /// The endpoint reads the order to compute points to add to the buyer's account.
         /// - If you are not using the Orders API to manage orders, .
         /// you first perform a client-side computation to compute the points.  .
         /// For spend-based and visit-based programs, you can first call .
         /// [CalculateLoyaltyPoints]($e/Loyalty/CalculateLoyaltyPoints) to compute the points  .
         /// that you provide to this endpoint. .
         /// __Note:__ The country of the seller's Square account determines whether tax is included in the purchase amount when accruing points for spend-based and visit-based programs. .
-        /// For more information, see [Availability of Square Loyalty](https://developer.squareup.com/docs/loyalty-api/overview#loyalty-market-availability)..
+        /// For more information, see [Availability of Square Loyalty](https://developer.squareup.com/docs/loyalty-api/overview#loyalty-market-availability).
         /// </summary>
         /// <param name="accountId">Required parameter: The [loyalty account]($m/LoyaltyAccount) ID to which to add the points..</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
@@ -344,7 +344,7 @@ namespace Square.Apis
         /// Adds points to or subtracts points from a buyer's account. .
         /// Use this endpoint only when you need to manually adjust points. Otherwise, in your application flow, you call .
         /// [AccumulateLoyaltyPoints]($e/Loyalty/AccumulateLoyaltyPoints) .
-        /// to add points when a buyer pays for the purchase..
+        /// to add points when a buyer pays for the purchase.
         /// </summary>
         /// <param name="accountId">Required parameter: The ID of the [loyalty account]($m/LoyaltyAccount) in which to adjust the points..</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
@@ -362,7 +362,7 @@ namespace Square.Apis
         /// Adds points to or subtracts points from a buyer's account. .
         /// Use this endpoint only when you need to manually adjust points. Otherwise, in your application flow, you call .
         /// [AccumulateLoyaltyPoints]($e/Loyalty/AccumulateLoyaltyPoints) .
-        /// to add points when a buyer pays for the purchase..
+        /// to add points when a buyer pays for the purchase.
         /// </summary>
         /// <param name="accountId">Required parameter: The ID of the [loyalty account]($m/LoyaltyAccount) in which to adjust the points..</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
@@ -425,12 +425,12 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Searches for loyalty events..
+        /// Searches for loyalty events.
         /// A Square loyalty program maintains a ledger of events that occur during the lifetime of a .
         /// buyer's loyalty account. Each change in the point balance .
         /// (for example, points earned, points redeemed, and points expired) is .
-        /// recorded in the ledger. Using this endpoint, you can search the ledger for events..
-        /// Search results are sorted by `created_at` in descending order..
+        /// recorded in the ledger. Using this endpoint, you can search the ledger for events.
+        /// Search results are sorted by `created_at` in descending order.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <returns>Returns the Models.SearchLoyaltyEventsResponse response from the API call.</returns>
@@ -443,12 +443,12 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Searches for loyalty events..
+        /// Searches for loyalty events.
         /// A Square loyalty program maintains a ledger of events that occur during the lifetime of a .
         /// buyer's loyalty account. Each change in the point balance .
         /// (for example, points earned, points redeemed, and points expired) is .
-        /// recorded in the ledger. Using this endpoint, you can search the ledger for events..
-        /// Search results are sorted by `created_at` in descending order..
+        /// recorded in the ledger. Using this endpoint, you can search the ledger for events.
+        /// Search results are sorted by `created_at` in descending order.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
@@ -503,9 +503,9 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Returns a list of loyalty programs in the seller's account..
-        /// Loyalty programs define how buyers can earn points and redeem points for rewards. Square sellers can have only one loyalty program, which is created and managed from the Seller Dashboard. For more information, see [Loyalty Program Overview](https://developer.squareup.com/docs/loyalty/overview)..
-        /// Replaced with [RetrieveLoyaltyProgram]($e/Loyalty/RetrieveLoyaltyProgram) when used with the keyword `main`..
+        /// Returns a list of loyalty programs in the seller's account.
+        /// Loyalty programs define how buyers can earn points and redeem points for rewards. Square sellers can have only one loyalty program, which is created and managed from the Seller Dashboard. For more information, see [Loyalty Program Overview](https://developer.squareup.com/docs/loyalty/overview).
+        /// Replaced with [RetrieveLoyaltyProgram]($e/Loyalty/RetrieveLoyaltyProgram) when used with the keyword `main`.
         /// </summary>
         /// <returns>Returns the Models.ListLoyaltyProgramsResponse response from the API call.</returns>
         [Obsolete]
@@ -517,9 +517,9 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Returns a list of loyalty programs in the seller's account..
-        /// Loyalty programs define how buyers can earn points and redeem points for rewards. Square sellers can have only one loyalty program, which is created and managed from the Seller Dashboard. For more information, see [Loyalty Program Overview](https://developer.squareup.com/docs/loyalty/overview)..
-        /// Replaced with [RetrieveLoyaltyProgram]($e/Loyalty/RetrieveLoyaltyProgram) when used with the keyword `main`..
+        /// Returns a list of loyalty programs in the seller's account.
+        /// Loyalty programs define how buyers can earn points and redeem points for rewards. Square sellers can have only one loyalty program, which is created and managed from the Seller Dashboard. For more information, see [Loyalty Program Overview](https://developer.squareup.com/docs/loyalty/overview).
+        /// Replaced with [RetrieveLoyaltyProgram]($e/Loyalty/RetrieveLoyaltyProgram) when used with the keyword `main`.
         /// </summary>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the Models.ListLoyaltyProgramsResponse response from the API call.</returns>
@@ -569,7 +569,7 @@ namespace Square.Apis
 
         /// <summary>
         /// Retrieves the loyalty program in a seller's account, specified by the program ID or the keyword `main`. .
-        /// Loyalty programs define how buyers can earn points and redeem points for rewards. Square sellers can have only one loyalty program, which is created and managed from the Seller Dashboard. For more information, see [Loyalty Program Overview](https://developer.squareup.com/docs/loyalty/overview)..
+        /// Loyalty programs define how buyers can earn points and redeem points for rewards. Square sellers can have only one loyalty program, which is created and managed from the Seller Dashboard. For more information, see [Loyalty Program Overview](https://developer.squareup.com/docs/loyalty/overview).
         /// </summary>
         /// <param name="programId">Required parameter: The ID of the loyalty program or the keyword `main`. Either value can be used to retrieve the single loyalty program that belongs to the seller..</param>
         /// <returns>Returns the Models.RetrieveLoyaltyProgramResponse response from the API call.</returns>
@@ -583,7 +583,7 @@ namespace Square.Apis
 
         /// <summary>
         /// Retrieves the loyalty program in a seller's account, specified by the program ID or the keyword `main`. .
-        /// Loyalty programs define how buyers can earn points and redeem points for rewards. Square sellers can have only one loyalty program, which is created and managed from the Seller Dashboard. For more information, see [Loyalty Program Overview](https://developer.squareup.com/docs/loyalty/overview)..
+        /// Loyalty programs define how buyers can earn points and redeem points for rewards. Square sellers can have only one loyalty program, which is created and managed from the Seller Dashboard. For more information, see [Loyalty Program Overview](https://developer.squareup.com/docs/loyalty/overview).
         /// </summary>
         /// <param name="programId">Required parameter: The ID of the loyalty program or the keyword `main`. Either value can be used to retrieve the single loyalty program that belongs to the seller..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
@@ -640,15 +640,15 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Calculates the points a purchase earns..
+        /// Calculates the points a purchase earns.
         /// - If you are using the Orders API to manage orders, you provide `order_id` in the request. The .
-        /// endpoint calculates the points by reading the order..
+        /// endpoint calculates the points by reading the order.
         /// - If you are not using the Orders API to manage orders, you provide the purchase amount in .
-        /// the request for the endpoint to calculate the points..
+        /// the request for the endpoint to calculate the points.
         /// An application might call this endpoint to show the points that a buyer can earn with the .
-        /// specific purchase..
+        /// specific purchase.
         /// __Note:__ The country of the seller's Square account determines whether tax is included in the purchase amount when accruing points for spend-based and visit-based programs. .
-        /// For more information, see [Availability of Square Loyalty](https://developer.squareup.com/docs/loyalty-api/overview#loyalty-market-availability)..
+        /// For more information, see [Availability of Square Loyalty](https://developer.squareup.com/docs/loyalty-api/overview#loyalty-market-availability).
         /// </summary>
         /// <param name="programId">Required parameter: The [loyalty program]($m/LoyaltyProgram) ID, which defines the rules for accruing points..</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
@@ -663,15 +663,15 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Calculates the points a purchase earns..
+        /// Calculates the points a purchase earns.
         /// - If you are using the Orders API to manage orders, you provide `order_id` in the request. The .
-        /// endpoint calculates the points by reading the order..
+        /// endpoint calculates the points by reading the order.
         /// - If you are not using the Orders API to manage orders, you provide the purchase amount in .
-        /// the request for the endpoint to calculate the points..
+        /// the request for the endpoint to calculate the points.
         /// An application might call this endpoint to show the points that a buyer can earn with the .
-        /// specific purchase..
+        /// specific purchase.
         /// __Note:__ The country of the seller's Square account determines whether tax is included in the purchase amount when accruing points for spend-based and visit-based programs. .
-        /// For more information, see [Availability of Square Loyalty](https://developer.squareup.com/docs/loyalty-api/overview#loyalty-market-availability)..
+        /// For more information, see [Availability of Square Loyalty](https://developer.squareup.com/docs/loyalty-api/overview#loyalty-market-availability).
         /// </summary>
         /// <param name="programId">Required parameter: The [loyalty program]($m/LoyaltyProgram) ID, which defines the rules for accruing points..</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
@@ -739,7 +739,7 @@ namespace Square.Apis
         /// to lock for this reward. .
         /// - If the request includes `order_id`, it adds the reward and related discount to the order. .
         /// After a reward is created, the points are locked and .
-        /// not available for the buyer to redeem another reward..
+        /// not available for the buyer to redeem another reward.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <returns>Returns the Models.CreateLoyaltyRewardResponse response from the API call.</returns>
@@ -757,7 +757,7 @@ namespace Square.Apis
         /// to lock for this reward. .
         /// - If the request includes `order_id`, it adds the reward and related discount to the order. .
         /// After a reward is created, the points are locked and .
-        /// not available for the buyer to redeem another reward..
+        /// not available for the buyer to redeem another reward.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
@@ -813,10 +813,10 @@ namespace Square.Apis
 
         /// <summary>
         /// Searches for loyalty rewards in a loyalty account. .
-        /// In the current implementation, the endpoint supports search by the reward `status`..
+        /// In the current implementation, the endpoint supports search by the reward `status`.
         /// If you know a reward ID, use the .
-        /// [RetrieveLoyaltyReward]($e/Loyalty/RetrieveLoyaltyReward) endpoint..
-        /// Search results are sorted by `updated_at` in descending order..
+        /// [RetrieveLoyaltyReward]($e/Loyalty/RetrieveLoyaltyReward) endpoint.
+        /// Search results are sorted by `updated_at` in descending order.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <returns>Returns the Models.SearchLoyaltyRewardsResponse response from the API call.</returns>
@@ -830,10 +830,10 @@ namespace Square.Apis
 
         /// <summary>
         /// Searches for loyalty rewards in a loyalty account. .
-        /// In the current implementation, the endpoint supports search by the reward `status`..
+        /// In the current implementation, the endpoint supports search by the reward `status`.
         /// If you know a reward ID, use the .
-        /// [RetrieveLoyaltyReward]($e/Loyalty/RetrieveLoyaltyReward) endpoint..
-        /// Search results are sorted by `updated_at` in descending order..
+        /// [RetrieveLoyaltyReward]($e/Loyalty/RetrieveLoyaltyReward) endpoint.
+        /// Search results are sorted by `updated_at` in descending order.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
@@ -889,12 +889,12 @@ namespace Square.Apis
 
         /// <summary>
         /// Deletes a loyalty reward by doing the following:.
-        /// - Returns the loyalty points back to the loyalty account..
+        /// - Returns the loyalty points back to the loyalty account.
         /// - If an order ID was specified when the reward was created .
         /// (see [CreateLoyaltyReward]($e/Loyalty/CreateLoyaltyReward)), .
         /// it updates the order by removing the reward and related .
-        /// discounts..
-        /// You cannot delete a reward that has reached the terminal state (REDEEMED)..
+        /// discounts.
+        /// You cannot delete a reward that has reached the terminal state (REDEEMED).
         /// </summary>
         /// <param name="rewardId">Required parameter: The ID of the [loyalty reward]($m/LoyaltyReward) to delete..</param>
         /// <returns>Returns the Models.DeleteLoyaltyRewardResponse response from the API call.</returns>
@@ -908,12 +908,12 @@ namespace Square.Apis
 
         /// <summary>
         /// Deletes a loyalty reward by doing the following:.
-        /// - Returns the loyalty points back to the loyalty account..
+        /// - Returns the loyalty points back to the loyalty account.
         /// - If an order ID was specified when the reward was created .
         /// (see [CreateLoyaltyReward]($e/Loyalty/CreateLoyaltyReward)), .
         /// it updates the order by removing the reward and related .
-        /// discounts..
-        /// You cannot delete a reward that has reached the terminal state (REDEEMED)..
+        /// discounts.
+        /// You cannot delete a reward that has reached the terminal state (REDEEMED).
         /// </summary>
         /// <param name="rewardId">Required parameter: The ID of the [loyalty reward]($m/LoyaltyReward) to delete..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
@@ -970,7 +970,7 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Retrieves a loyalty reward..
+        /// Retrieves a loyalty reward.
         /// </summary>
         /// <param name="rewardId">Required parameter: The ID of the [loyalty reward]($m/LoyaltyReward) to retrieve..</param>
         /// <returns>Returns the Models.RetrieveLoyaltyRewardResponse response from the API call.</returns>
@@ -983,7 +983,7 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Retrieves a loyalty reward..
+        /// Retrieves a loyalty reward.
         /// </summary>
         /// <param name="rewardId">Required parameter: The ID of the [loyalty reward]($m/LoyaltyReward) to retrieve..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
@@ -1040,14 +1040,14 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Redeems a loyalty reward..
+        /// Redeems a loyalty reward.
         /// The endpoint sets the reward to the `REDEEMED` terminal state. .
         /// If you are using your own order processing system (not using the .
         /// Orders API), you call this endpoint after the buyer paid for the .
-        /// purchase..
+        /// purchase.
         /// After the reward reaches the terminal state, it cannot be deleted. .
         /// In other words, points used for the reward cannot be returned .
-        /// to the account..
+        /// to the account.
         /// </summary>
         /// <param name="rewardId">Required parameter: The ID of the [loyalty reward]($m/LoyaltyReward) to redeem..</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
@@ -1062,14 +1062,14 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Redeems a loyalty reward..
+        /// Redeems a loyalty reward.
         /// The endpoint sets the reward to the `REDEEMED` terminal state. .
         /// If you are using your own order processing system (not using the .
         /// Orders API), you call this endpoint after the buyer paid for the .
-        /// purchase..
+        /// purchase.
         /// After the reward reaches the terminal state, it cannot be deleted. .
         /// In other words, points used for the reward cannot be returned .
-        /// to the account..
+        /// to the account.
         /// </summary>
         /// <param name="rewardId">Required parameter: The ID of the [loyalty reward]($m/LoyaltyReward) to redeem..</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>

@@ -28,7 +28,7 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// Gets or sets Location.
+        /// Represents one of a business's locations.
         /// </summary>
         [JsonProperty("location", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Location Location { get; }
@@ -59,20 +59,16 @@ namespace Square.Models
             return obj is CreateLocationRequest other &&
                 ((this.Location == null && other.Location == null) || (this.Location?.Equals(other.Location) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1009906280;
-
-            if (this.Location != null)
-            {
-               hashCode += this.Location.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.Location);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

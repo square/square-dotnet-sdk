@@ -71,25 +71,16 @@ namespace Square.Models
                 ((this.CurbsideDetails == null && other.CurbsideDetails == null) || (this.CurbsideDetails?.Equals(other.CurbsideDetails) == true)) &&
                 ((this.BuyerArrivedAt == null && other.BuyerArrivedAt == null) || (this.BuyerArrivedAt?.Equals(other.BuyerArrivedAt) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -126196706;
-
-            if (this.CurbsideDetails != null)
-            {
-               hashCode += this.CurbsideDetails.GetHashCode();
-            }
-
-            if (this.BuyerArrivedAt != null)
-            {
-               hashCode += this.BuyerArrivedAt.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.CurbsideDetails, this.BuyerArrivedAt);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

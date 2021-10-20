@@ -59,20 +59,16 @@ namespace Square.Models
             return obj is OrderCreatedObject other &&
                 ((this.OrderCreated == null && other.OrderCreated == null) || (this.OrderCreated?.Equals(other.OrderCreated) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 529492832;
-
-            if (this.OrderCreated != null)
-            {
-               hashCode += this.OrderCreated.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.OrderCreated);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

@@ -61,20 +61,16 @@ namespace Square.Models
             return obj is UpdateSubscriptionRequest other &&
                 ((this.Subscription == null && other.Subscription == null) || (this.Subscription?.Equals(other.Subscription) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -881287883;
-
-            if (this.Subscription != null)
-            {
-               hashCode += this.Subscription.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.Subscription);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

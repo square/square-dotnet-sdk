@@ -72,25 +72,16 @@ namespace Square.Models
                 ((this.Payment == null && other.Payment == null) || (this.Payment?.Equals(other.Payment) == true)) &&
                 ((this.IdempotencyKey == null && other.IdempotencyKey == null) || (this.IdempotencyKey?.Equals(other.IdempotencyKey) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1490098238;
-
-            if (this.Payment != null)
-            {
-               hashCode += this.Payment.GetHashCode();
-            }
-
-            if (this.IdempotencyKey != null)
-            {
-               hashCode += this.IdempotencyKey.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.Payment, this.IdempotencyKey);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

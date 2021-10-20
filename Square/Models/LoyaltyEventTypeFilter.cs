@@ -62,20 +62,16 @@ namespace Square.Models
             return obj is LoyaltyEventTypeFilter other &&
                 ((this.Types == null && other.Types == null) || (this.Types?.Equals(other.Types) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 474693041;
-
-            if (this.Types != null)
-            {
-               hashCode += this.Types.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.Types);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

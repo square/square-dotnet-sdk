@@ -79,30 +79,16 @@ namespace Square.Models
                 ((this.ModifierListsToEnable == null && other.ModifierListsToEnable == null) || (this.ModifierListsToEnable?.Equals(other.ModifierListsToEnable) == true)) &&
                 ((this.ModifierListsToDisable == null && other.ModifierListsToDisable == null) || (this.ModifierListsToDisable?.Equals(other.ModifierListsToDisable) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 1248477288;
-
-            if (this.ItemIds != null)
-            {
-               hashCode += this.ItemIds.GetHashCode();
-            }
-
-            if (this.ModifierListsToEnable != null)
-            {
-               hashCode += this.ModifierListsToEnable.GetHashCode();
-            }
-
-            if (this.ModifierListsToDisable != null)
-            {
-               hashCode += this.ModifierListsToDisable.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.ItemIds, this.ModifierListsToEnable, this.ModifierListsToDisable);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

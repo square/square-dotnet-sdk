@@ -94,35 +94,16 @@ namespace Square.Models
                 ((this.MerchantId == null && other.MerchantId == null) || (this.MerchantId?.Equals(other.MerchantId) == true)) &&
                 ((this.RevokeOnlyAccessToken == null && other.RevokeOnlyAccessToken == null) || (this.RevokeOnlyAccessToken?.Equals(other.RevokeOnlyAccessToken) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 1546864389;
-
-            if (this.ClientId != null)
-            {
-               hashCode += this.ClientId.GetHashCode();
-            }
-
-            if (this.AccessToken != null)
-            {
-               hashCode += this.AccessToken.GetHashCode();
-            }
-
-            if (this.MerchantId != null)
-            {
-               hashCode += this.MerchantId.GetHashCode();
-            }
-
-            if (this.RevokeOnlyAccessToken != null)
-            {
-               hashCode += this.RevokeOnlyAccessToken.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.ClientId, this.AccessToken, this.MerchantId, this.RevokeOnlyAccessToken);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

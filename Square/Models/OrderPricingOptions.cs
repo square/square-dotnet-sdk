@@ -71,25 +71,16 @@ namespace Square.Models
                 ((this.AutoApplyDiscounts == null && other.AutoApplyDiscounts == null) || (this.AutoApplyDiscounts?.Equals(other.AutoApplyDiscounts) == true)) &&
                 ((this.AutoApplyTaxes == null && other.AutoApplyTaxes == null) || (this.AutoApplyTaxes?.Equals(other.AutoApplyTaxes) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1105954045;
-
-            if (this.AutoApplyDiscounts != null)
-            {
-               hashCode += this.AutoApplyDiscounts.GetHashCode();
-            }
-
-            if (this.AutoApplyTaxes != null)
-            {
-               hashCode += this.AutoApplyTaxes.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.AutoApplyDiscounts, this.AutoApplyTaxes);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

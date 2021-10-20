@@ -150,65 +150,18 @@ namespace Square.Models
                 ((this.ItemsForItemOptionsQuery == null && other.ItemsForItemOptionsQuery == null) || (this.ItemsForItemOptionsQuery?.Equals(other.ItemsForItemOptionsQuery) == true)) &&
                 ((this.ItemVariationsForItemOptionValuesQuery == null && other.ItemVariationsForItemOptionValuesQuery == null) || (this.ItemVariationsForItemOptionValuesQuery?.Equals(other.ItemVariationsForItemOptionValuesQuery) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 1871698487;
+            hashCode = HashCode.Combine(this.SortedAttributeQuery, this.ExactQuery, this.SetQuery, this.PrefixQuery, this.RangeQuery, this.TextQuery, this.ItemsForTaxQuery);
 
-            if (this.SortedAttributeQuery != null)
-            {
-               hashCode += this.SortedAttributeQuery.GetHashCode();
-            }
-
-            if (this.ExactQuery != null)
-            {
-               hashCode += this.ExactQuery.GetHashCode();
-            }
-
-            if (this.SetQuery != null)
-            {
-               hashCode += this.SetQuery.GetHashCode();
-            }
-
-            if (this.PrefixQuery != null)
-            {
-               hashCode += this.PrefixQuery.GetHashCode();
-            }
-
-            if (this.RangeQuery != null)
-            {
-               hashCode += this.RangeQuery.GetHashCode();
-            }
-
-            if (this.TextQuery != null)
-            {
-               hashCode += this.TextQuery.GetHashCode();
-            }
-
-            if (this.ItemsForTaxQuery != null)
-            {
-               hashCode += this.ItemsForTaxQuery.GetHashCode();
-            }
-
-            if (this.ItemsForModifierListQuery != null)
-            {
-               hashCode += this.ItemsForModifierListQuery.GetHashCode();
-            }
-
-            if (this.ItemsForItemOptionsQuery != null)
-            {
-               hashCode += this.ItemsForItemOptionsQuery.GetHashCode();
-            }
-
-            if (this.ItemVariationsForItemOptionValuesQuery != null)
-            {
-               hashCode += this.ItemVariationsForItemOptionValuesQuery.GetHashCode();
-            }
+            hashCode = HashCode.Combine(hashCode, this.ItemsForModifierListQuery, this.ItemsForItemOptionsQuery, this.ItemVariationsForItemOptionValuesQuery);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

@@ -128,50 +128,16 @@ namespace Square.Models
                 ((this.LabelColor == null && other.LabelColor == null) || (this.LabelColor?.Equals(other.LabelColor) == true)) &&
                 ((this.ModifyTaxBasis == null && other.ModifyTaxBasis == null) || (this.ModifyTaxBasis?.Equals(other.ModifyTaxBasis) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -419430818;
-
-            if (this.Name != null)
-            {
-               hashCode += this.Name.GetHashCode();
-            }
-
-            if (this.DiscountType != null)
-            {
-               hashCode += this.DiscountType.GetHashCode();
-            }
-
-            if (this.Percentage != null)
-            {
-               hashCode += this.Percentage.GetHashCode();
-            }
-
-            if (this.AmountMoney != null)
-            {
-               hashCode += this.AmountMoney.GetHashCode();
-            }
-
-            if (this.PinRequired != null)
-            {
-               hashCode += this.PinRequired.GetHashCode();
-            }
-
-            if (this.LabelColor != null)
-            {
-               hashCode += this.LabelColor.GetHashCode();
-            }
-
-            if (this.ModifyTaxBasis != null)
-            {
-               hashCode += this.ModifyTaxBasis.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.Name, this.DiscountType, this.Percentage, this.AmountMoney, this.PinRequired, this.LabelColor, this.ModifyTaxBasis);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

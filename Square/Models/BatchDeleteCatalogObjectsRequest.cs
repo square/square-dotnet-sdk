@@ -61,20 +61,16 @@ namespace Square.Models
             return obj is BatchDeleteCatalogObjectsRequest other &&
                 ((this.ObjectIds == null && other.ObjectIds == null) || (this.ObjectIds?.Equals(other.ObjectIds) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1606600759;
-
-            if (this.ObjectIds != null)
-            {
-               hashCode += this.ObjectIds.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.ObjectIds);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

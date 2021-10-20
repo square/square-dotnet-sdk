@@ -20,8 +20,8 @@ namespace Square.Apis
     public interface ICardsApi
     {
         /// <summary>
-        /// Retrieves a list of cards owned by the account making the request..
-        /// A max of 25 cards will be returned..
+        /// Retrieves a list of cards owned by the account making the request.
+        /// A max of 25 cards will be returned.
         /// </summary>
         /// <param name="cursor">Optional parameter: A pagination cursor returned by a previous call to this endpoint. Provide this to retrieve the next set of results for your original query.  See [Pagination](https://developer.squareup.com/docs/basics/api101/pagination) for more information..</param>
         /// <param name="customerId">Optional parameter: Limit results to cards associated with the customer supplied. By default, all cards owned by the merchant are returned..</param>
@@ -37,8 +37,8 @@ namespace Square.Apis
                 string sortOrder = null);
 
         /// <summary>
-        /// Retrieves a list of cards owned by the account making the request..
-        /// A max of 25 cards will be returned..
+        /// Retrieves a list of cards owned by the account making the request.
+        /// A max of 25 cards will be returned.
         /// </summary>
         /// <param name="cursor">Optional parameter: A pagination cursor returned by a previous call to this endpoint. Provide this to retrieve the next set of results for your original query.  See [Pagination](https://developer.squareup.com/docs/basics/api101/pagination) for more information..</param>
         /// <param name="customerId">Optional parameter: Limit results to cards associated with the customer supplied. By default, all cards owned by the merchant are returned..</param>
@@ -56,7 +56,7 @@ namespace Square.Apis
                 CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Adds a card on file to an existing merchant..
+        /// Adds a card on file to an existing merchant.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <returns>Returns the Models.CreateCardResponse response from the API call.</returns>
@@ -64,7 +64,7 @@ namespace Square.Apis
                 Models.CreateCardRequest body);
 
         /// <summary>
-        /// Adds a card on file to an existing merchant..
+        /// Adds a card on file to an existing merchant.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
@@ -74,7 +74,7 @@ namespace Square.Apis
                 CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Retrieves details for a specific Card..
+        /// Retrieves details for a specific Card.
         /// </summary>
         /// <param name="cardId">Required parameter: Unique ID for the desired Card..</param>
         /// <returns>Returns the Models.RetrieveCardResponse response from the API call.</returns>
@@ -82,7 +82,7 @@ namespace Square.Apis
                 string cardId);
 
         /// <summary>
-        /// Retrieves details for a specific Card..
+        /// Retrieves details for a specific Card.
         /// </summary>
         /// <param name="cardId">Required parameter: Unique ID for the desired Card..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
@@ -92,8 +92,8 @@ namespace Square.Apis
                 CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Disables the card, preventing any further updates or charges..
-        /// Disabling an already disabled card is allowed but has no effect..
+        /// Disables the card, preventing any further updates or charges.
+        /// Disabling an already disabled card is allowed but has no effect.
         /// </summary>
         /// <param name="cardId">Required parameter: Unique ID for the desired Card..</param>
         /// <returns>Returns the Models.DisableCardResponse response from the API call.</returns>
@@ -101,8 +101,8 @@ namespace Square.Apis
                 string cardId);
 
         /// <summary>
-        /// Disables the card, preventing any further updates or charges..
-        /// Disabling an already disabled card is allowed but has no effect..
+        /// Disables the card, preventing any further updates or charges.
+        /// Disabling an already disabled card is allowed but has no effect.
         /// </summary>
         /// <param name="cardId">Required parameter: Unique ID for the desired Card..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>

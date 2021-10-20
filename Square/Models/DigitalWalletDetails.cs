@@ -60,20 +60,16 @@ namespace Square.Models
             return obj is DigitalWalletDetails other &&
                 ((this.Status == null && other.Status == null) || (this.Status?.Equals(other.Status) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 821484446;
-
-            if (this.Status != null)
-            {
-               hashCode += this.Status.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.Status);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

@@ -129,55 +129,18 @@ namespace Square.Models
                 ((this.Taxes == null && other.Taxes == null) || (this.Taxes?.Equals(other.Taxes) == true)) &&
                 ((this.SurchargeId == null && other.SurchargeId == null) || (this.SurchargeId?.Equals(other.SurchargeId) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -446593569;
+            hashCode = HashCode.Combine(this.Name, this.AppliedMoney, this.Rate, this.AmountMoney, this.Type, this.Taxable, this.Taxes);
 
-            if (this.Name != null)
-            {
-               hashCode += this.Name.GetHashCode();
-            }
-
-            if (this.AppliedMoney != null)
-            {
-               hashCode += this.AppliedMoney.GetHashCode();
-            }
-
-            if (this.Rate != null)
-            {
-               hashCode += this.Rate.GetHashCode();
-            }
-
-            if (this.AmountMoney != null)
-            {
-               hashCode += this.AmountMoney.GetHashCode();
-            }
-
-            if (this.Type != null)
-            {
-               hashCode += this.Type.GetHashCode();
-            }
-
-            if (this.Taxable != null)
-            {
-               hashCode += this.Taxable.GetHashCode();
-            }
-
-            if (this.Taxes != null)
-            {
-               hashCode += this.Taxes.GetHashCode();
-            }
-
-            if (this.SurchargeId != null)
-            {
-               hashCode += this.SurchargeId.GetHashCode();
-            }
+            hashCode = HashCode.Combine(hashCode, this.SurchargeId);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

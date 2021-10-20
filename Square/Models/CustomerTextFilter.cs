@@ -72,25 +72,16 @@ namespace Square.Models
                 ((this.Exact == null && other.Exact == null) || (this.Exact?.Equals(other.Exact) == true)) &&
                 ((this.Fuzzy == null && other.Fuzzy == null) || (this.Fuzzy?.Equals(other.Fuzzy) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1444472756;
-
-            if (this.Exact != null)
-            {
-               hashCode += this.Exact.GetHashCode();
-            }
-
-            if (this.Fuzzy != null)
-            {
-               hashCode += this.Fuzzy.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.Exact, this.Fuzzy);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

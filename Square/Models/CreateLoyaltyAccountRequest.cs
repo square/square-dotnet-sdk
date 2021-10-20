@@ -71,25 +71,16 @@ namespace Square.Models
                 ((this.LoyaltyAccount == null && other.LoyaltyAccount == null) || (this.LoyaltyAccount?.Equals(other.LoyaltyAccount) == true)) &&
                 ((this.IdempotencyKey == null && other.IdempotencyKey == null) || (this.IdempotencyKey?.Equals(other.IdempotencyKey) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -436956469;
-
-            if (this.LoyaltyAccount != null)
-            {
-               hashCode += this.LoyaltyAccount.GetHashCode();
-            }
-
-            if (this.IdempotencyKey != null)
-            {
-               hashCode += this.IdempotencyKey.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.LoyaltyAccount, this.IdempotencyKey);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

@@ -82,30 +82,16 @@ namespace Square.Models
                 ((this.TaxUid == null && other.TaxUid == null) || (this.TaxUid?.Equals(other.TaxUid) == true)) &&
                 ((this.TaxCatalogObjectId == null && other.TaxCatalogObjectId == null) || (this.TaxCatalogObjectId?.Equals(other.TaxCatalogObjectId) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 91458610;
-
-            if (this.Uid != null)
-            {
-               hashCode += this.Uid.GetHashCode();
-            }
-
-            if (this.TaxUid != null)
-            {
-               hashCode += this.TaxUid.GetHashCode();
-            }
-
-            if (this.TaxCatalogObjectId != null)
-            {
-               hashCode += this.TaxCatalogObjectId.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.Uid, this.TaxUid, this.TaxCatalogObjectId);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

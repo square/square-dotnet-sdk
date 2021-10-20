@@ -75,25 +75,16 @@ namespace Square.Models
                 ((this.FulfillmentTypes == null && other.FulfillmentTypes == null) || (this.FulfillmentTypes?.Equals(other.FulfillmentTypes) == true)) &&
                 ((this.FulfillmentStates == null && other.FulfillmentStates == null) || (this.FulfillmentStates?.Equals(other.FulfillmentStates) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -747213754;
-
-            if (this.FulfillmentTypes != null)
-            {
-               hashCode += this.FulfillmentTypes.GetHashCode();
-            }
-
-            if (this.FulfillmentStates != null)
-            {
-               hashCode += this.FulfillmentStates.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.FulfillmentTypes, this.FulfillmentStates);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

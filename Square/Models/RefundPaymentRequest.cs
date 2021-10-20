@@ -25,18 +25,24 @@ namespace Square.Models
         /// <param name="paymentId">payment_id.</param>
         /// <param name="appFeeMoney">app_fee_money.</param>
         /// <param name="reason">reason.</param>
+        /// <param name="paymentVersionToken">payment_version_token.</param>
+        /// <param name="teamMemberId">team_member_id.</param>
         public RefundPaymentRequest(
             string idempotencyKey,
             Models.Money amountMoney,
             string paymentId,
             Models.Money appFeeMoney = null,
-            string reason = null)
+            string reason = null,
+            string paymentVersionToken = null,
+            string teamMemberId = null)
         {
             this.IdempotencyKey = idempotencyKey;
             this.AmountMoney = amountMoney;
             this.AppFeeMoney = appFeeMoney;
             this.PaymentId = paymentId;
             this.Reason = reason;
+            this.PaymentVersionToken = paymentVersionToken;
+            this.TeamMemberId = teamMemberId;
         }
 
         /// <summary>
@@ -81,6 +87,21 @@ namespace Square.Models
         [JsonProperty("reason", NullValueHandling = NullValueHandling.Ignore)]
         public string Reason { get; }
 
+        /// <summary>
+        /// Used for optimistic concurrency. This opaque token identifies the current `Payment`
+        /// version that the caller expects. If the server has a different version of the Payment,
+        /// the update fails and a response with a VERSION_MISMATCH error is returned.
+        /// If the versions match, or the field is not provided, the refund proceeds as normal.
+        /// </summary>
+        [JsonProperty("payment_version_token", NullValueHandling = NullValueHandling.Ignore)]
+        public string PaymentVersionToken { get; }
+
+        /// <summary>
+        /// An optional [TeamMember]($m/TeamMember) ID to associate with this refund.
+        /// </summary>
+        [JsonProperty("team_member_id", NullValueHandling = NullValueHandling.Ignore)]
+        public string TeamMemberId { get; }
+
         /// <inheritdoc/>
         public override string ToString()
         {
@@ -109,42 +130,20 @@ namespace Square.Models
                 ((this.AmountMoney == null && other.AmountMoney == null) || (this.AmountMoney?.Equals(other.AmountMoney) == true)) &&
                 ((this.AppFeeMoney == null && other.AppFeeMoney == null) || (this.AppFeeMoney?.Equals(other.AppFeeMoney) == true)) &&
                 ((this.PaymentId == null && other.PaymentId == null) || (this.PaymentId?.Equals(other.PaymentId) == true)) &&
-                ((this.Reason == null && other.Reason == null) || (this.Reason?.Equals(other.Reason) == true));
+                ((this.Reason == null && other.Reason == null) || (this.Reason?.Equals(other.Reason) == true)) &&
+                ((this.PaymentVersionToken == null && other.PaymentVersionToken == null) || (this.PaymentVersionToken?.Equals(other.PaymentVersionToken) == true)) &&
+                ((this.TeamMemberId == null && other.TeamMemberId == null) || (this.TeamMemberId?.Equals(other.TeamMemberId) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -682129491;
-
-            if (this.IdempotencyKey != null)
-            {
-               hashCode += this.IdempotencyKey.GetHashCode();
-            }
-
-            if (this.AmountMoney != null)
-            {
-               hashCode += this.AmountMoney.GetHashCode();
-            }
-
-            if (this.AppFeeMoney != null)
-            {
-               hashCode += this.AppFeeMoney.GetHashCode();
-            }
-
-            if (this.PaymentId != null)
-            {
-               hashCode += this.PaymentId.GetHashCode();
-            }
-
-            if (this.Reason != null)
-            {
-               hashCode += this.Reason.GetHashCode();
-            }
+            int hashCode = -789771424;
+            hashCode = HashCode.Combine(this.IdempotencyKey, this.AmountMoney, this.AppFeeMoney, this.PaymentId, this.Reason, this.PaymentVersionToken, this.TeamMemberId);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -156,6 +155,8 @@ namespace Square.Models
             toStringOutput.Add($"this.AppFeeMoney = {(this.AppFeeMoney == null ? "null" : this.AppFeeMoney.ToString())}");
             toStringOutput.Add($"this.PaymentId = {(this.PaymentId == null ? "null" : this.PaymentId == string.Empty ? "" : this.PaymentId)}");
             toStringOutput.Add($"this.Reason = {(this.Reason == null ? "null" : this.Reason == string.Empty ? "" : this.Reason)}");
+            toStringOutput.Add($"this.PaymentVersionToken = {(this.PaymentVersionToken == null ? "null" : this.PaymentVersionToken == string.Empty ? "" : this.PaymentVersionToken)}");
+            toStringOutput.Add($"this.TeamMemberId = {(this.TeamMemberId == null ? "null" : this.TeamMemberId == string.Empty ? "" : this.TeamMemberId)}");
         }
 
         /// <summary>
@@ -169,7 +170,9 @@ namespace Square.Models
                 this.AmountMoney,
                 this.PaymentId)
                 .AppFeeMoney(this.AppFeeMoney)
-                .Reason(this.Reason);
+                .Reason(this.Reason)
+                .PaymentVersionToken(this.PaymentVersionToken)
+                .TeamMemberId(this.TeamMemberId);
             return builder;
         }
 
@@ -183,6 +186,8 @@ namespace Square.Models
             private string paymentId;
             private Models.Money appFeeMoney;
             private string reason;
+            private string paymentVersionToken;
+            private string teamMemberId;
 
             public Builder(
                 string idempotencyKey,
@@ -249,6 +254,28 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// PaymentVersionToken.
+             /// </summary>
+             /// <param name="paymentVersionToken"> paymentVersionToken. </param>
+             /// <returns> Builder. </returns>
+            public Builder PaymentVersionToken(string paymentVersionToken)
+            {
+                this.paymentVersionToken = paymentVersionToken;
+                return this;
+            }
+
+             /// <summary>
+             /// TeamMemberId.
+             /// </summary>
+             /// <param name="teamMemberId"> teamMemberId. </param>
+             /// <returns> Builder. </returns>
+            public Builder TeamMemberId(string teamMemberId)
+            {
+                this.teamMemberId = teamMemberId;
+                return this;
+            }
+
             /// <summary>
             /// Builds class object.
             /// </summary>
@@ -260,7 +287,9 @@ namespace Square.Models
                     this.amountMoney,
                     this.paymentId,
                     this.appFeeMoney,
-                    this.reason);
+                    this.reason,
+                    this.paymentVersionToken,
+                    this.teamMemberId);
             }
         }
     }

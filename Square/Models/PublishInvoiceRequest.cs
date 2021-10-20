@@ -73,21 +73,16 @@ namespace Square.Models
                 this.Version.Equals(other.Version) &&
                 ((this.IdempotencyKey == null && other.IdempotencyKey == null) || (this.IdempotencyKey?.Equals(other.IdempotencyKey) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1055593006;
-            hashCode += this.Version.GetHashCode();
-
-            if (this.IdempotencyKey != null)
-            {
-               hashCode += this.IdempotencyKey.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.Version, this.IdempotencyKey);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

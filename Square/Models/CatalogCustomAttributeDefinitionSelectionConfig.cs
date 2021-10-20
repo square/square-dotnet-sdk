@@ -73,25 +73,16 @@ namespace Square.Models
                 ((this.MaxAllowedSelections == null && other.MaxAllowedSelections == null) || (this.MaxAllowedSelections?.Equals(other.MaxAllowedSelections) == true)) &&
                 ((this.AllowedSelections == null && other.AllowedSelections == null) || (this.AllowedSelections?.Equals(other.AllowedSelections) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 960165059;
-
-            if (this.MaxAllowedSelections != null)
-            {
-               hashCode += this.MaxAllowedSelections.GetHashCode();
-            }
-
-            if (this.AllowedSelections != null)
-            {
-               hashCode += this.AllowedSelections.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.MaxAllowedSelections, this.AllowedSelections);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

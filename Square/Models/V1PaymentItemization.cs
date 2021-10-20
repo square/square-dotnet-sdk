@@ -189,85 +189,18 @@ namespace Square.Models
                 ((this.Discounts == null && other.Discounts == null) || (this.Discounts?.Equals(other.Discounts) == true)) &&
                 ((this.Modifiers == null && other.Modifiers == null) || (this.Modifiers?.Equals(other.Modifiers) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 1047875174;
+            hashCode = HashCode.Combine(this.Name, this.Quantity, this.ItemizationType, this.ItemDetail, this.Notes, this.ItemVariationName, this.TotalMoney);
 
-            if (this.Name != null)
-            {
-               hashCode += this.Name.GetHashCode();
-            }
-
-            if (this.Quantity != null)
-            {
-               hashCode += this.Quantity.GetHashCode();
-            }
-
-            if (this.ItemizationType != null)
-            {
-               hashCode += this.ItemizationType.GetHashCode();
-            }
-
-            if (this.ItemDetail != null)
-            {
-               hashCode += this.ItemDetail.GetHashCode();
-            }
-
-            if (this.Notes != null)
-            {
-               hashCode += this.Notes.GetHashCode();
-            }
-
-            if (this.ItemVariationName != null)
-            {
-               hashCode += this.ItemVariationName.GetHashCode();
-            }
-
-            if (this.TotalMoney != null)
-            {
-               hashCode += this.TotalMoney.GetHashCode();
-            }
-
-            if (this.SingleQuantityMoney != null)
-            {
-               hashCode += this.SingleQuantityMoney.GetHashCode();
-            }
-
-            if (this.GrossSalesMoney != null)
-            {
-               hashCode += this.GrossSalesMoney.GetHashCode();
-            }
-
-            if (this.DiscountMoney != null)
-            {
-               hashCode += this.DiscountMoney.GetHashCode();
-            }
-
-            if (this.NetSalesMoney != null)
-            {
-               hashCode += this.NetSalesMoney.GetHashCode();
-            }
-
-            if (this.Taxes != null)
-            {
-               hashCode += this.Taxes.GetHashCode();
-            }
-
-            if (this.Discounts != null)
-            {
-               hashCode += this.Discounts.GetHashCode();
-            }
-
-            if (this.Modifiers != null)
-            {
-               hashCode += this.Modifiers.GetHashCode();
-            }
+            hashCode = HashCode.Combine(hashCode, this.SingleQuantityMoney, this.GrossSalesMoney, this.DiscountMoney, this.NetSalesMoney, this.Taxes, this.Discounts, this.Modifiers);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

@@ -139,55 +139,18 @@ namespace Square.Models
                 ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true)) &&
                 ((this.CustomerIds == null && other.CustomerIds == null) || (this.CustomerIds?.Equals(other.CustomerIds) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -2027493314;
+            hashCode = HashCode.Combine(this.Id, this.Type, this.GanSource, this.State, this.BalanceMoney, this.Gan, this.CreatedAt);
 
-            if (this.Id != null)
-            {
-               hashCode += this.Id.GetHashCode();
-            }
-
-            if (this.Type != null)
-            {
-               hashCode += this.Type.GetHashCode();
-            }
-
-            if (this.GanSource != null)
-            {
-               hashCode += this.GanSource.GetHashCode();
-            }
-
-            if (this.State != null)
-            {
-               hashCode += this.State.GetHashCode();
-            }
-
-            if (this.BalanceMoney != null)
-            {
-               hashCode += this.BalanceMoney.GetHashCode();
-            }
-
-            if (this.Gan != null)
-            {
-               hashCode += this.Gan.GetHashCode();
-            }
-
-            if (this.CreatedAt != null)
-            {
-               hashCode += this.CreatedAt.GetHashCode();
-            }
-
-            if (this.CustomerIds != null)
-            {
-               hashCode += this.CustomerIds.GetHashCode();
-            }
+            hashCode = HashCode.Combine(hashCode, this.CustomerIds);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

@@ -111,45 +111,16 @@ namespace Square.Models
                 ((this.AppliesToCustomAmounts == null && other.AppliesToCustomAmounts == null) || (this.AppliesToCustomAmounts?.Equals(other.AppliesToCustomAmounts) == true)) &&
                 ((this.Enabled == null && other.Enabled == null) || (this.Enabled?.Equals(other.Enabled) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 29476180;
-
-            if (this.Name != null)
-            {
-               hashCode += this.Name.GetHashCode();
-            }
-
-            if (this.CalculationPhase != null)
-            {
-               hashCode += this.CalculationPhase.GetHashCode();
-            }
-
-            if (this.InclusionType != null)
-            {
-               hashCode += this.InclusionType.GetHashCode();
-            }
-
-            if (this.Percentage != null)
-            {
-               hashCode += this.Percentage.GetHashCode();
-            }
-
-            if (this.AppliesToCustomAmounts != null)
-            {
-               hashCode += this.AppliesToCustomAmounts.GetHashCode();
-            }
-
-            if (this.Enabled != null)
-            {
-               hashCode += this.Enabled.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.Name, this.CalculationPhase, this.InclusionType, this.Percentage, this.AppliesToCustomAmounts, this.Enabled);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

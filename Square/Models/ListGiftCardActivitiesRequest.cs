@@ -140,55 +140,18 @@ namespace Square.Models
                 ((this.Cursor == null && other.Cursor == null) || (this.Cursor?.Equals(other.Cursor) == true)) &&
                 ((this.SortOrder == null && other.SortOrder == null) || (this.SortOrder?.Equals(other.SortOrder) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 467092355;
+            hashCode = HashCode.Combine(this.GiftCardId, this.Type, this.LocationId, this.BeginTime, this.EndTime, this.Limit, this.Cursor);
 
-            if (this.GiftCardId != null)
-            {
-               hashCode += this.GiftCardId.GetHashCode();
-            }
-
-            if (this.Type != null)
-            {
-               hashCode += this.Type.GetHashCode();
-            }
-
-            if (this.LocationId != null)
-            {
-               hashCode += this.LocationId.GetHashCode();
-            }
-
-            if (this.BeginTime != null)
-            {
-               hashCode += this.BeginTime.GetHashCode();
-            }
-
-            if (this.EndTime != null)
-            {
-               hashCode += this.EndTime.GetHashCode();
-            }
-
-            if (this.Limit != null)
-            {
-               hashCode += this.Limit.GetHashCode();
-            }
-
-            if (this.Cursor != null)
-            {
-               hashCode += this.Cursor.GetHashCode();
-            }
-
-            if (this.SortOrder != null)
-            {
-               hashCode += this.SortOrder.GetHashCode();
-            }
+            hashCode = HashCode.Combine(hashCode, this.SortOrder);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

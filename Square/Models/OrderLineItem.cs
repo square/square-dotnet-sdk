@@ -315,115 +315,20 @@ namespace Square.Models
                 ((this.TotalMoney == null && other.TotalMoney == null) || (this.TotalMoney?.Equals(other.TotalMoney) == true)) &&
                 ((this.PricingBlocklists == null && other.PricingBlocklists == null) || (this.PricingBlocklists?.Equals(other.PricingBlocklists) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -269037292;
+            hashCode = HashCode.Combine(this.Uid, this.Name, this.Quantity, this.QuantityUnit, this.Note, this.CatalogObjectId, this.CatalogVersion);
 
-            if (this.Uid != null)
-            {
-               hashCode += this.Uid.GetHashCode();
-            }
+            hashCode = HashCode.Combine(hashCode, this.VariationName, this.ItemType, this.Metadata, this.Modifiers, this.AppliedTaxes, this.AppliedDiscounts, this.BasePriceMoney);
 
-            if (this.Name != null)
-            {
-               hashCode += this.Name.GetHashCode();
-            }
-
-            if (this.Quantity != null)
-            {
-               hashCode += this.Quantity.GetHashCode();
-            }
-
-            if (this.QuantityUnit != null)
-            {
-               hashCode += this.QuantityUnit.GetHashCode();
-            }
-
-            if (this.Note != null)
-            {
-               hashCode += this.Note.GetHashCode();
-            }
-
-            if (this.CatalogObjectId != null)
-            {
-               hashCode += this.CatalogObjectId.GetHashCode();
-            }
-
-            if (this.CatalogVersion != null)
-            {
-               hashCode += this.CatalogVersion.GetHashCode();
-            }
-
-            if (this.VariationName != null)
-            {
-               hashCode += this.VariationName.GetHashCode();
-            }
-
-            if (this.ItemType != null)
-            {
-               hashCode += this.ItemType.GetHashCode();
-            }
-
-            if (this.Metadata != null)
-            {
-               hashCode += this.Metadata.GetHashCode();
-            }
-
-            if (this.Modifiers != null)
-            {
-               hashCode += this.Modifiers.GetHashCode();
-            }
-
-            if (this.AppliedTaxes != null)
-            {
-               hashCode += this.AppliedTaxes.GetHashCode();
-            }
-
-            if (this.AppliedDiscounts != null)
-            {
-               hashCode += this.AppliedDiscounts.GetHashCode();
-            }
-
-            if (this.BasePriceMoney != null)
-            {
-               hashCode += this.BasePriceMoney.GetHashCode();
-            }
-
-            if (this.VariationTotalPriceMoney != null)
-            {
-               hashCode += this.VariationTotalPriceMoney.GetHashCode();
-            }
-
-            if (this.GrossSalesMoney != null)
-            {
-               hashCode += this.GrossSalesMoney.GetHashCode();
-            }
-
-            if (this.TotalTaxMoney != null)
-            {
-               hashCode += this.TotalTaxMoney.GetHashCode();
-            }
-
-            if (this.TotalDiscountMoney != null)
-            {
-               hashCode += this.TotalDiscountMoney.GetHashCode();
-            }
-
-            if (this.TotalMoney != null)
-            {
-               hashCode += this.TotalMoney.GetHashCode();
-            }
-
-            if (this.PricingBlocklists != null)
-            {
-               hashCode += this.PricingBlocklists.GetHashCode();
-            }
+            hashCode = HashCode.Combine(hashCode, this.VariationTotalPriceMoney, this.GrossSalesMoney, this.TotalTaxMoney, this.TotalDiscountMoney, this.TotalMoney, this.PricingBlocklists);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

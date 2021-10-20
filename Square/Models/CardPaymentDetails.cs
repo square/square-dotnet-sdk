@@ -220,95 +220,20 @@ namespace Square.Models
                 ((this.RefundRequiresCardPresence == null && other.RefundRequiresCardPresence == null) || (this.RefundRequiresCardPresence?.Equals(other.RefundRequiresCardPresence) == true)) &&
                 ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 1465447186;
+            hashCode = HashCode.Combine(this.Status, this.Card, this.EntryMethod, this.CvvStatus, this.AvsStatus, this.AuthResultCode, this.ApplicationIdentifier);
 
-            if (this.Status != null)
-            {
-               hashCode += this.Status.GetHashCode();
-            }
+            hashCode = HashCode.Combine(hashCode, this.ApplicationName, this.ApplicationCryptogram, this.VerificationMethod, this.VerificationResults, this.StatementDescription, this.DeviceDetails, this.CardPaymentTimeline);
 
-            if (this.Card != null)
-            {
-               hashCode += this.Card.GetHashCode();
-            }
-
-            if (this.EntryMethod != null)
-            {
-               hashCode += this.EntryMethod.GetHashCode();
-            }
-
-            if (this.CvvStatus != null)
-            {
-               hashCode += this.CvvStatus.GetHashCode();
-            }
-
-            if (this.AvsStatus != null)
-            {
-               hashCode += this.AvsStatus.GetHashCode();
-            }
-
-            if (this.AuthResultCode != null)
-            {
-               hashCode += this.AuthResultCode.GetHashCode();
-            }
-
-            if (this.ApplicationIdentifier != null)
-            {
-               hashCode += this.ApplicationIdentifier.GetHashCode();
-            }
-
-            if (this.ApplicationName != null)
-            {
-               hashCode += this.ApplicationName.GetHashCode();
-            }
-
-            if (this.ApplicationCryptogram != null)
-            {
-               hashCode += this.ApplicationCryptogram.GetHashCode();
-            }
-
-            if (this.VerificationMethod != null)
-            {
-               hashCode += this.VerificationMethod.GetHashCode();
-            }
-
-            if (this.VerificationResults != null)
-            {
-               hashCode += this.VerificationResults.GetHashCode();
-            }
-
-            if (this.StatementDescription != null)
-            {
-               hashCode += this.StatementDescription.GetHashCode();
-            }
-
-            if (this.DeviceDetails != null)
-            {
-               hashCode += this.DeviceDetails.GetHashCode();
-            }
-
-            if (this.CardPaymentTimeline != null)
-            {
-               hashCode += this.CardPaymentTimeline.GetHashCode();
-            }
-
-            if (this.RefundRequiresCardPresence != null)
-            {
-               hashCode += this.RefundRequiresCardPresence.GetHashCode();
-            }
-
-            if (this.Errors != null)
-            {
-               hashCode += this.Errors.GetHashCode();
-            }
+            hashCode = HashCode.Combine(hashCode, this.RefundRequiresCardPresence, this.Errors);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

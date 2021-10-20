@@ -77,7 +77,7 @@ namespace Square.Models
                 ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true)) &&
                 ((this.GiftCardActivity == null && other.GiftCardActivity == null) || (this.GiftCardActivity?.Equals(other.GiftCardActivity) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
@@ -87,20 +87,11 @@ namespace Square.Models
             {
                 hashCode += this.Context.GetHashCode();
             }
-
-            if (this.Errors != null)
-            {
-               hashCode += this.Errors.GetHashCode();
-            }
-
-            if (this.GiftCardActivity != null)
-            {
-               hashCode += this.GiftCardActivity.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.Errors, this.GiftCardActivity);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

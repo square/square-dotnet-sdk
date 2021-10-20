@@ -129,50 +129,16 @@ namespace Square.Models
                 ((this.CalculatedAt == null && other.CalculatedAt == null) || (this.CalculatedAt?.Equals(other.CalculatedAt) == true)) &&
                 ((this.IsEstimated == null && other.IsEstimated == null) || (this.IsEstimated?.Equals(other.IsEstimated) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 1245291455;
-
-            if (this.CatalogObjectId != null)
-            {
-               hashCode += this.CatalogObjectId.GetHashCode();
-            }
-
-            if (this.CatalogObjectType != null)
-            {
-               hashCode += this.CatalogObjectType.GetHashCode();
-            }
-
-            if (this.State != null)
-            {
-               hashCode += this.State.GetHashCode();
-            }
-
-            if (this.LocationId != null)
-            {
-               hashCode += this.LocationId.GetHashCode();
-            }
-
-            if (this.Quantity != null)
-            {
-               hashCode += this.Quantity.GetHashCode();
-            }
-
-            if (this.CalculatedAt != null)
-            {
-               hashCode += this.CalculatedAt.GetHashCode();
-            }
-
-            if (this.IsEstimated != null)
-            {
-               hashCode += this.IsEstimated.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.CatalogObjectId, this.CatalogObjectType, this.State, this.LocationId, this.Quantity, this.CalculatedAt, this.IsEstimated);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

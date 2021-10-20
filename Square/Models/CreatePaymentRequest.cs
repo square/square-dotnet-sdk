@@ -30,6 +30,7 @@ namespace Square.Models
         /// <param name="orderId">order_id.</param>
         /// <param name="customerId">customer_id.</param>
         /// <param name="locationId">location_id.</param>
+        /// <param name="teamMemberId">team_member_id.</param>
         /// <param name="referenceId">reference_id.</param>
         /// <param name="verificationToken">verification_token.</param>
         /// <param name="acceptPartialAuthorization">accept_partial_authorization.</param>
@@ -51,6 +52,7 @@ namespace Square.Models
             string orderId = null,
             string customerId = null,
             string locationId = null,
+            string teamMemberId = null,
             string referenceId = null,
             string verificationToken = null,
             bool? acceptPartialAuthorization = null,
@@ -72,6 +74,7 @@ namespace Square.Models
             this.OrderId = orderId;
             this.CustomerId = customerId;
             this.LocationId = locationId;
+            this.TeamMemberId = teamMemberId;
             this.ReferenceId = referenceId;
             this.VerificationToken = verificationToken;
             this.AcceptPartialAuthorization = acceptPartialAuthorization;
@@ -183,6 +186,13 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("location_id", NullValueHandling = NullValueHandling.Ignore)]
         public string LocationId { get; }
+
+        /// <summary>
+        /// An optional [TeamMember]($m/TeamMember) ID to associate with
+        /// this payment.
+        /// </summary>
+        [JsonProperty("team_member_id", NullValueHandling = NullValueHandling.Ignore)]
+        public string TeamMemberId { get; }
 
         /// <summary>
         /// A user-defined ID to associate with the payment.
@@ -348,6 +358,7 @@ namespace Square.Models
                 ((this.OrderId == null && other.OrderId == null) || (this.OrderId?.Equals(other.OrderId) == true)) &&
                 ((this.CustomerId == null && other.CustomerId == null) || (this.CustomerId?.Equals(other.CustomerId) == true)) &&
                 ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true)) &&
+                ((this.TeamMemberId == null && other.TeamMemberId == null) || (this.TeamMemberId?.Equals(other.TeamMemberId) == true)) &&
                 ((this.ReferenceId == null && other.ReferenceId == null) || (this.ReferenceId?.Equals(other.ReferenceId) == true)) &&
                 ((this.VerificationToken == null && other.VerificationToken == null) || (this.VerificationToken?.Equals(other.VerificationToken) == true)) &&
                 ((this.AcceptPartialAuthorization == null && other.AcceptPartialAuthorization == null) || (this.AcceptPartialAuthorization?.Equals(other.AcceptPartialAuthorization) == true)) &&
@@ -359,115 +370,20 @@ namespace Square.Models
                 ((this.CashDetails == null && other.CashDetails == null) || (this.CashDetails?.Equals(other.CashDetails) == true)) &&
                 ((this.ExternalDetails == null && other.ExternalDetails == null) || (this.ExternalDetails?.Equals(other.ExternalDetails) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -277054975;
+            int hashCode = -1245154050;
+            hashCode = HashCode.Combine(this.SourceId, this.IdempotencyKey, this.AmountMoney, this.TipMoney, this.AppFeeMoney, this.DelayDuration, this.Autocomplete);
 
-            if (this.SourceId != null)
-            {
-               hashCode += this.SourceId.GetHashCode();
-            }
+            hashCode = HashCode.Combine(hashCode, this.OrderId, this.CustomerId, this.LocationId, this.TeamMemberId, this.ReferenceId, this.VerificationToken, this.AcceptPartialAuthorization);
 
-            if (this.IdempotencyKey != null)
-            {
-               hashCode += this.IdempotencyKey.GetHashCode();
-            }
-
-            if (this.AmountMoney != null)
-            {
-               hashCode += this.AmountMoney.GetHashCode();
-            }
-
-            if (this.TipMoney != null)
-            {
-               hashCode += this.TipMoney.GetHashCode();
-            }
-
-            if (this.AppFeeMoney != null)
-            {
-               hashCode += this.AppFeeMoney.GetHashCode();
-            }
-
-            if (this.DelayDuration != null)
-            {
-               hashCode += this.DelayDuration.GetHashCode();
-            }
-
-            if (this.Autocomplete != null)
-            {
-               hashCode += this.Autocomplete.GetHashCode();
-            }
-
-            if (this.OrderId != null)
-            {
-               hashCode += this.OrderId.GetHashCode();
-            }
-
-            if (this.CustomerId != null)
-            {
-               hashCode += this.CustomerId.GetHashCode();
-            }
-
-            if (this.LocationId != null)
-            {
-               hashCode += this.LocationId.GetHashCode();
-            }
-
-            if (this.ReferenceId != null)
-            {
-               hashCode += this.ReferenceId.GetHashCode();
-            }
-
-            if (this.VerificationToken != null)
-            {
-               hashCode += this.VerificationToken.GetHashCode();
-            }
-
-            if (this.AcceptPartialAuthorization != null)
-            {
-               hashCode += this.AcceptPartialAuthorization.GetHashCode();
-            }
-
-            if (this.BuyerEmailAddress != null)
-            {
-               hashCode += this.BuyerEmailAddress.GetHashCode();
-            }
-
-            if (this.BillingAddress != null)
-            {
-               hashCode += this.BillingAddress.GetHashCode();
-            }
-
-            if (this.ShippingAddress != null)
-            {
-               hashCode += this.ShippingAddress.GetHashCode();
-            }
-
-            if (this.Note != null)
-            {
-               hashCode += this.Note.GetHashCode();
-            }
-
-            if (this.StatementDescriptionIdentifier != null)
-            {
-               hashCode += this.StatementDescriptionIdentifier.GetHashCode();
-            }
-
-            if (this.CashDetails != null)
-            {
-               hashCode += this.CashDetails.GetHashCode();
-            }
-
-            if (this.ExternalDetails != null)
-            {
-               hashCode += this.ExternalDetails.GetHashCode();
-            }
+            hashCode = HashCode.Combine(hashCode, this.BuyerEmailAddress, this.BillingAddress, this.ShippingAddress, this.Note, this.StatementDescriptionIdentifier, this.CashDetails, this.ExternalDetails);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -484,6 +400,7 @@ namespace Square.Models
             toStringOutput.Add($"this.OrderId = {(this.OrderId == null ? "null" : this.OrderId == string.Empty ? "" : this.OrderId)}");
             toStringOutput.Add($"this.CustomerId = {(this.CustomerId == null ? "null" : this.CustomerId == string.Empty ? "" : this.CustomerId)}");
             toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId == string.Empty ? "" : this.LocationId)}");
+            toStringOutput.Add($"this.TeamMemberId = {(this.TeamMemberId == null ? "null" : this.TeamMemberId == string.Empty ? "" : this.TeamMemberId)}");
             toStringOutput.Add($"this.ReferenceId = {(this.ReferenceId == null ? "null" : this.ReferenceId == string.Empty ? "" : this.ReferenceId)}");
             toStringOutput.Add($"this.VerificationToken = {(this.VerificationToken == null ? "null" : this.VerificationToken == string.Empty ? "" : this.VerificationToken)}");
             toStringOutput.Add($"this.AcceptPartialAuthorization = {(this.AcceptPartialAuthorization == null ? "null" : this.AcceptPartialAuthorization.ToString())}");
@@ -513,6 +430,7 @@ namespace Square.Models
                 .OrderId(this.OrderId)
                 .CustomerId(this.CustomerId)
                 .LocationId(this.LocationId)
+                .TeamMemberId(this.TeamMemberId)
                 .ReferenceId(this.ReferenceId)
                 .VerificationToken(this.VerificationToken)
                 .AcceptPartialAuthorization(this.AcceptPartialAuthorization)
@@ -541,6 +459,7 @@ namespace Square.Models
             private string orderId;
             private string customerId;
             private string locationId;
+            private string teamMemberId;
             private string referenceId;
             private string verificationToken;
             private bool? acceptPartialAuthorization;
@@ -673,6 +592,17 @@ namespace Square.Models
             }
 
              /// <summary>
+             /// TeamMemberId.
+             /// </summary>
+             /// <param name="teamMemberId"> teamMemberId. </param>
+             /// <returns> Builder. </returns>
+            public Builder TeamMemberId(string teamMemberId)
+            {
+                this.teamMemberId = teamMemberId;
+                return this;
+            }
+
+             /// <summary>
              /// ReferenceId.
              /// </summary>
              /// <param name="referenceId"> referenceId. </param>
@@ -799,6 +729,7 @@ namespace Square.Models
                     this.orderId,
                     this.customerId,
                     this.locationId,
+                    this.teamMemberId,
                     this.referenceId,
                     this.verificationToken,
                     this.acceptPartialAuthorization,

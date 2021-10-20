@@ -59,20 +59,16 @@ namespace Square.Models
             return obj is CatalogItemOptionForItem other &&
                 ((this.ItemOptionId == null && other.ItemOptionId == null) || (this.ItemOptionId?.Equals(other.ItemOptionId) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 1801897765;
-
-            if (this.ItemOptionId != null)
-            {
-               hashCode += this.ItemOptionId.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.ItemOptionId);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

@@ -94,35 +94,16 @@ namespace Square.Models
                 ((this.AmountMoney == null && other.AmountMoney == null) || (this.AmountMoney?.Equals(other.AmountMoney) == true)) &&
                 ((this.ReceivableId == null && other.ReceivableId == null) || (this.ReceivableId?.Equals(other.ReceivableId) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1717136415;
-
-            if (this.LocationId != null)
-            {
-               hashCode += this.LocationId.GetHashCode();
-            }
-
-            if (this.Description != null)
-            {
-               hashCode += this.Description.GetHashCode();
-            }
-
-            if (this.AmountMoney != null)
-            {
-               hashCode += this.AmountMoney.GetHashCode();
-            }
-
-            if (this.ReceivableId != null)
-            {
-               hashCode += this.ReceivableId.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.LocationId, this.Description, this.AmountMoney, this.ReceivableId);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

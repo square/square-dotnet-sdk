@@ -163,70 +163,18 @@ namespace Square.Models
                 ((this.UpdatedAt == null && other.UpdatedAt == null) || (this.UpdatedAt?.Equals(other.UpdatedAt) == true)) &&
                 ((this.AssignedLocations == null && other.AssignedLocations == null) || (this.AssignedLocations?.Equals(other.AssignedLocations) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1084182002;
+            hashCode = HashCode.Combine(this.Id, this.ReferenceId, this.IsOwner, this.Status, this.GivenName, this.FamilyName, this.EmailAddress);
 
-            if (this.Id != null)
-            {
-               hashCode += this.Id.GetHashCode();
-            }
-
-            if (this.ReferenceId != null)
-            {
-               hashCode += this.ReferenceId.GetHashCode();
-            }
-
-            if (this.IsOwner != null)
-            {
-               hashCode += this.IsOwner.GetHashCode();
-            }
-
-            if (this.Status != null)
-            {
-               hashCode += this.Status.GetHashCode();
-            }
-
-            if (this.GivenName != null)
-            {
-               hashCode += this.GivenName.GetHashCode();
-            }
-
-            if (this.FamilyName != null)
-            {
-               hashCode += this.FamilyName.GetHashCode();
-            }
-
-            if (this.EmailAddress != null)
-            {
-               hashCode += this.EmailAddress.GetHashCode();
-            }
-
-            if (this.PhoneNumber != null)
-            {
-               hashCode += this.PhoneNumber.GetHashCode();
-            }
-
-            if (this.CreatedAt != null)
-            {
-               hashCode += this.CreatedAt.GetHashCode();
-            }
-
-            if (this.UpdatedAt != null)
-            {
-               hashCode += this.UpdatedAt.GetHashCode();
-            }
-
-            if (this.AssignedLocations != null)
-            {
-               hashCode += this.AssignedLocations.GetHashCode();
-            }
+            hashCode = HashCode.Combine(hashCode, this.PhoneNumber, this.CreatedAt, this.UpdatedAt, this.AssignedLocations);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

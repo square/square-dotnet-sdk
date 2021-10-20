@@ -65,20 +65,16 @@ namespace Square.Models
             return obj is CatalogCustomAttributeDefinitionNumberConfig other &&
                 ((this.Precision == null && other.Precision == null) || (this.Precision?.Equals(other.Precision) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 196624818;
-
-            if (this.Precision != null)
-            {
-               hashCode += this.Precision.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.Precision);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

@@ -60,20 +60,16 @@ namespace Square.Models
             return obj is PaymentOptions other &&
                 ((this.Autocomplete == null && other.Autocomplete == null) || (this.Autocomplete?.Equals(other.Autocomplete) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 449968409;
-
-            if (this.Autocomplete != null)
-            {
-               hashCode += this.Autocomplete.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.Autocomplete);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

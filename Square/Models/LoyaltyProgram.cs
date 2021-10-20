@@ -140,60 +140,18 @@ namespace Square.Models
                 ((this.UpdatedAt == null && other.UpdatedAt == null) || (this.UpdatedAt?.Equals(other.UpdatedAt) == true)) &&
                 ((this.AccrualRules == null && other.AccrualRules == null) || (this.AccrualRules?.Equals(other.AccrualRules) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 2031047851;
+            hashCode = HashCode.Combine(this.Id, this.Status, this.RewardTiers, this.ExpirationPolicy, this.Terminology, this.LocationIds, this.CreatedAt);
 
-            if (this.Id != null)
-            {
-               hashCode += this.Id.GetHashCode();
-            }
-
-            if (this.Status != null)
-            {
-               hashCode += this.Status.GetHashCode();
-            }
-
-            if (this.RewardTiers != null)
-            {
-               hashCode += this.RewardTiers.GetHashCode();
-            }
-
-            if (this.ExpirationPolicy != null)
-            {
-               hashCode += this.ExpirationPolicy.GetHashCode();
-            }
-
-            if (this.Terminology != null)
-            {
-               hashCode += this.Terminology.GetHashCode();
-            }
-
-            if (this.LocationIds != null)
-            {
-               hashCode += this.LocationIds.GetHashCode();
-            }
-
-            if (this.CreatedAt != null)
-            {
-               hashCode += this.CreatedAt.GetHashCode();
-            }
-
-            if (this.UpdatedAt != null)
-            {
-               hashCode += this.UpdatedAt.GetHashCode();
-            }
-
-            if (this.AccrualRules != null)
-            {
-               hashCode += this.AccrualRules.GetHashCode();
-            }
+            hashCode = HashCode.Combine(hashCode, this.UpdatedAt, this.AccrualRules);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

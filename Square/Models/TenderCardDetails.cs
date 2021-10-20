@@ -80,30 +80,16 @@ namespace Square.Models
                 ((this.Card == null && other.Card == null) || (this.Card?.Equals(other.Card) == true)) &&
                 ((this.EntryMethod == null && other.EntryMethod == null) || (this.EntryMethod?.Equals(other.EntryMethod) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1919501986;
-
-            if (this.Status != null)
-            {
-               hashCode += this.Status.GetHashCode();
-            }
-
-            if (this.Card != null)
-            {
-               hashCode += this.Card.GetHashCode();
-            }
-
-            if (this.EntryMethod != null)
-            {
-               hashCode += this.EntryMethod.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.Status, this.Card, this.EntryMethod);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

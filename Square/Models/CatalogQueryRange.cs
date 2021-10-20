@@ -79,30 +79,16 @@ namespace Square.Models
                 ((this.AttributeMinValue == null && other.AttributeMinValue == null) || (this.AttributeMinValue?.Equals(other.AttributeMinValue) == true)) &&
                 ((this.AttributeMaxValue == null && other.AttributeMaxValue == null) || (this.AttributeMaxValue?.Equals(other.AttributeMaxValue) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 946255455;
-
-            if (this.AttributeName != null)
-            {
-               hashCode += this.AttributeName.GetHashCode();
-            }
-
-            if (this.AttributeMinValue != null)
-            {
-               hashCode += this.AttributeMinValue.GetHashCode();
-            }
-
-            if (this.AttributeMaxValue != null)
-            {
-               hashCode += this.AttributeMaxValue.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.AttributeName, this.AttributeMinValue, this.AttributeMaxValue);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

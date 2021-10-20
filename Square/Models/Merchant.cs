@@ -121,50 +121,16 @@ namespace Square.Models
                 ((this.Status == null && other.Status == null) || (this.Status?.Equals(other.Status) == true)) &&
                 ((this.MainLocationId == null && other.MainLocationId == null) || (this.MainLocationId?.Equals(other.MainLocationId) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1340049772;
-
-            if (this.Id != null)
-            {
-               hashCode += this.Id.GetHashCode();
-            }
-
-            if (this.BusinessName != null)
-            {
-               hashCode += this.BusinessName.GetHashCode();
-            }
-
-            if (this.Country != null)
-            {
-               hashCode += this.Country.GetHashCode();
-            }
-
-            if (this.LanguageCode != null)
-            {
-               hashCode += this.LanguageCode.GetHashCode();
-            }
-
-            if (this.Currency != null)
-            {
-               hashCode += this.Currency.GetHashCode();
-            }
-
-            if (this.Status != null)
-            {
-               hashCode += this.Status.GetHashCode();
-            }
-
-            if (this.MainLocationId != null)
-            {
-               hashCode += this.MainLocationId.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.Id, this.BusinessName, this.Country, this.LanguageCode, this.Currency, this.Status, this.MainLocationId);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

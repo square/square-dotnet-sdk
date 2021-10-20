@@ -212,90 +212,20 @@ namespace Square.Models
                 ((this.PaymentType == null && other.PaymentType == null) || (this.PaymentType?.Equals(other.PaymentType) == true)) &&
                 ((this.CustomerId == null && other.CustomerId == null) || (this.CustomerId?.Equals(other.CustomerId) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1994036817;
+            hashCode = HashCode.Combine(this.Id, this.AmountMoney, this.ReferenceId, this.Note, this.DeviceOptions, this.DeadlineDuration, this.Status);
 
-            if (this.Id != null)
-            {
-               hashCode += this.Id.GetHashCode();
-            }
+            hashCode = HashCode.Combine(hashCode, this.CancelReason, this.PaymentIds, this.CreatedAt, this.UpdatedAt, this.AppId, this.LocationId, this.PaymentType);
 
-            if (this.AmountMoney != null)
-            {
-               hashCode += this.AmountMoney.GetHashCode();
-            }
-
-            if (this.ReferenceId != null)
-            {
-               hashCode += this.ReferenceId.GetHashCode();
-            }
-
-            if (this.Note != null)
-            {
-               hashCode += this.Note.GetHashCode();
-            }
-
-            if (this.DeviceOptions != null)
-            {
-               hashCode += this.DeviceOptions.GetHashCode();
-            }
-
-            if (this.DeadlineDuration != null)
-            {
-               hashCode += this.DeadlineDuration.GetHashCode();
-            }
-
-            if (this.Status != null)
-            {
-               hashCode += this.Status.GetHashCode();
-            }
-
-            if (this.CancelReason != null)
-            {
-               hashCode += this.CancelReason.GetHashCode();
-            }
-
-            if (this.PaymentIds != null)
-            {
-               hashCode += this.PaymentIds.GetHashCode();
-            }
-
-            if (this.CreatedAt != null)
-            {
-               hashCode += this.CreatedAt.GetHashCode();
-            }
-
-            if (this.UpdatedAt != null)
-            {
-               hashCode += this.UpdatedAt.GetHashCode();
-            }
-
-            if (this.AppId != null)
-            {
-               hashCode += this.AppId.GetHashCode();
-            }
-
-            if (this.LocationId != null)
-            {
-               hashCode += this.LocationId.GetHashCode();
-            }
-
-            if (this.PaymentType != null)
-            {
-               hashCode += this.PaymentType.GetHashCode();
-            }
-
-            if (this.CustomerId != null)
-            {
-               hashCode += this.CustomerId.GetHashCode();
-            }
+            hashCode = HashCode.Combine(hashCode, this.CustomerId);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

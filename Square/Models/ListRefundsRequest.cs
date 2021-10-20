@@ -95,35 +95,16 @@ namespace Square.Models
                 ((this.SortOrder == null && other.SortOrder == null) || (this.SortOrder?.Equals(other.SortOrder) == true)) &&
                 ((this.Cursor == null && other.Cursor == null) || (this.Cursor?.Equals(other.Cursor) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1413410039;
-
-            if (this.BeginTime != null)
-            {
-               hashCode += this.BeginTime.GetHashCode();
-            }
-
-            if (this.EndTime != null)
-            {
-               hashCode += this.EndTime.GetHashCode();
-            }
-
-            if (this.SortOrder != null)
-            {
-               hashCode += this.SortOrder.GetHashCode();
-            }
-
-            if (this.Cursor != null)
-            {
-               hashCode += this.Cursor.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.BeginTime, this.EndTime, this.SortOrder, this.Cursor);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

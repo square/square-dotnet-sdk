@@ -101,40 +101,16 @@ namespace Square.Models
                 ((this.RefundedMoney == null && other.RefundedMoney == null) || (this.RefundedMoney?.Equals(other.RefundedMoney) == true)) &&
                 ((this.RequestIdempotenceKey == null && other.RequestIdempotenceKey == null) || (this.RequestIdempotenceKey?.Equals(other.RequestIdempotenceKey) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 1278947048;
-
-            if (this.PaymentId != null)
-            {
-               hashCode += this.PaymentId.GetHashCode();
-            }
-
-            if (this.Type != null)
-            {
-               hashCode += this.Type.GetHashCode();
-            }
-
-            if (this.Reason != null)
-            {
-               hashCode += this.Reason.GetHashCode();
-            }
-
-            if (this.RefundedMoney != null)
-            {
-               hashCode += this.RefundedMoney.GetHashCode();
-            }
-
-            if (this.RequestIdempotenceKey != null)
-            {
-               hashCode += this.RequestIdempotenceKey.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.PaymentId, this.Type, this.Reason, this.RefundedMoney, this.RequestIdempotenceKey);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

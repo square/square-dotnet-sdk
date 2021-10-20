@@ -90,30 +90,16 @@ namespace Square.Models
                 ((this.StockableQuantity == null && other.StockableQuantity == null) || (this.StockableQuantity?.Equals(other.StockableQuantity) == true)) &&
                 ((this.NonstockableQuantity == null && other.NonstockableQuantity == null) || (this.NonstockableQuantity?.Equals(other.NonstockableQuantity) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -670296029;
-
-            if (this.StockableItemVariationId != null)
-            {
-               hashCode += this.StockableItemVariationId.GetHashCode();
-            }
-
-            if (this.StockableQuantity != null)
-            {
-               hashCode += this.StockableQuantity.GetHashCode();
-            }
-
-            if (this.NonstockableQuantity != null)
-            {
-               hashCode += this.NonstockableQuantity.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.StockableItemVariationId, this.StockableQuantity, this.NonstockableQuantity);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

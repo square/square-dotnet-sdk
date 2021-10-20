@@ -20,10 +20,10 @@ namespace Square.Apis
     public interface IRefundsApi
     {
         /// <summary>
-        /// Retrieves a list of refunds for the account making the request..
+        /// Retrieves a list of refunds for the account making the request.
         /// Results are eventually consistent, and new refunds or changes to refunds might take several.
-        /// seconds to appear..
-        /// The maximum results per page is 100..
+        /// seconds to appear.
+        /// The maximum results per page is 100.
         /// </summary>
         /// <param name="beginTime">Optional parameter: The timestamp for the beginning of the requested reporting period, in RFC 3339 format.  Default: The current time minus one year..</param>
         /// <param name="endTime">Optional parameter: The timestamp for the end of the requested reporting period, in RFC 3339 format.  Default: The current time..</param>
@@ -45,10 +45,10 @@ namespace Square.Apis
                 int? limit = null);
 
         /// <summary>
-        /// Retrieves a list of refunds for the account making the request..
+        /// Retrieves a list of refunds for the account making the request.
         /// Results are eventually consistent, and new refunds or changes to refunds might take several.
-        /// seconds to appear..
-        /// The maximum results per page is 100..
+        /// seconds to appear.
+        /// The maximum results per page is 100.
         /// </summary>
         /// <param name="beginTime">Optional parameter: The timestamp for the beginning of the requested reporting period, in RFC 3339 format.  Default: The current time minus one year..</param>
         /// <param name="endTime">Optional parameter: The timestamp for the end of the requested reporting period, in RFC 3339 format.  Default: The current time..</param>
@@ -75,7 +75,7 @@ namespace Square.Apis
         /// Refunds a payment. You can refund the entire payment amount or a.
         /// portion of it. You can use this endpoint to refund a card payment or record a .
         /// refund of a cash or external payment. For more information, see.
-        /// [Refund Payment](https://developer.squareup.com/docs/payments-api/refund-payments)..
+        /// [Refund Payment](https://developer.squareup.com/docs/payments-api/refund-payments).
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <returns>Returns the Models.RefundPaymentResponse response from the API call.</returns>
@@ -86,7 +86,7 @@ namespace Square.Apis
         /// Refunds a payment. You can refund the entire payment amount or a.
         /// portion of it. You can use this endpoint to refund a card payment or record a .
         /// refund of a cash or external payment. For more information, see.
-        /// [Refund Payment](https://developer.squareup.com/docs/payments-api/refund-payments)..
+        /// [Refund Payment](https://developer.squareup.com/docs/payments-api/refund-payments).
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
@@ -96,7 +96,7 @@ namespace Square.Apis
                 CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Retrieves a specific refund using the `refund_id`..
+        /// Retrieves a specific refund using the `refund_id`.
         /// </summary>
         /// <param name="refundId">Required parameter: The unique ID for the desired `PaymentRefund`..</param>
         /// <returns>Returns the Models.GetPaymentRefundResponse response from the API call.</returns>
@@ -104,7 +104,7 @@ namespace Square.Apis
                 string refundId);
 
         /// <summary>
-        /// Retrieves a specific refund using the `refund_id`..
+        /// Retrieves a specific refund using the `refund_id`.
         /// </summary>
         /// <param name="refundId">Required parameter: The unique ID for the desired `PaymentRefund`..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>

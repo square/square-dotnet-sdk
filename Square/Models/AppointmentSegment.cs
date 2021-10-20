@@ -89,28 +89,16 @@ namespace Square.Models
                 ((this.TeamMemberId == null && other.TeamMemberId == null) || (this.TeamMemberId?.Equals(other.TeamMemberId) == true)) &&
                 this.ServiceVariationVersion.Equals(other.ServiceVariationVersion);
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1009100920;
-            hashCode += this.DurationMinutes.GetHashCode();
-
-            if (this.ServiceVariationId != null)
-            {
-               hashCode += this.ServiceVariationId.GetHashCode();
-            }
-
-            if (this.TeamMemberId != null)
-            {
-               hashCode += this.TeamMemberId.GetHashCode();
-            }
-
-            hashCode += this.ServiceVariationVersion.GetHashCode();
+            hashCode = HashCode.Combine(this.DurationMinutes, this.ServiceVariationId, this.TeamMemberId, this.ServiceVariationVersion);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

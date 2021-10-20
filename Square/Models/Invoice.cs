@@ -116,7 +116,11 @@ namespace Square.Models
         public string OrderId { get; }
 
         /// <summary>
-        /// Provides customer data that Square uses to deliver an invoice.
+        /// Represents a snapshot of customer data. This object stores customer data that is displayed on the invoice
+        /// and that Square uses to deliver the invoice.
+        /// When you provide a customer ID for a draft invoice, Square retrieves the associated customer profile and populates
+        /// the remaining `InvoiceRecipient` fields. You cannot update these fields after the invoice is published.
+        /// Square updates the customer ID in response to a merge operation, but does not update other fields.
         /// </summary>
         [JsonProperty("primary_recipient", NullValueHandling = NullValueHandling.Ignore)]
         public Models.InvoiceRecipient PrimaryRecipient { get; }
@@ -298,120 +302,20 @@ namespace Square.Models
                 ((this.SubscriptionId == null && other.SubscriptionId == null) || (this.SubscriptionId?.Equals(other.SubscriptionId) == true)) &&
                 ((this.SaleOrServiceDate == null && other.SaleOrServiceDate == null) || (this.SaleOrServiceDate?.Equals(other.SaleOrServiceDate) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 998088589;
+            hashCode = HashCode.Combine(this.Id, this.Version, this.LocationId, this.OrderId, this.PrimaryRecipient, this.PaymentRequests, this.DeliveryMethod);
 
-            if (this.Id != null)
-            {
-               hashCode += this.Id.GetHashCode();
-            }
+            hashCode = HashCode.Combine(hashCode, this.InvoiceNumber, this.Title, this.Description, this.ScheduledAt, this.PublicUrl, this.NextPaymentAmountMoney, this.Status);
 
-            if (this.Version != null)
-            {
-               hashCode += this.Version.GetHashCode();
-            }
-
-            if (this.LocationId != null)
-            {
-               hashCode += this.LocationId.GetHashCode();
-            }
-
-            if (this.OrderId != null)
-            {
-               hashCode += this.OrderId.GetHashCode();
-            }
-
-            if (this.PrimaryRecipient != null)
-            {
-               hashCode += this.PrimaryRecipient.GetHashCode();
-            }
-
-            if (this.PaymentRequests != null)
-            {
-               hashCode += this.PaymentRequests.GetHashCode();
-            }
-
-            if (this.DeliveryMethod != null)
-            {
-               hashCode += this.DeliveryMethod.GetHashCode();
-            }
-
-            if (this.InvoiceNumber != null)
-            {
-               hashCode += this.InvoiceNumber.GetHashCode();
-            }
-
-            if (this.Title != null)
-            {
-               hashCode += this.Title.GetHashCode();
-            }
-
-            if (this.Description != null)
-            {
-               hashCode += this.Description.GetHashCode();
-            }
-
-            if (this.ScheduledAt != null)
-            {
-               hashCode += this.ScheduledAt.GetHashCode();
-            }
-
-            if (this.PublicUrl != null)
-            {
-               hashCode += this.PublicUrl.GetHashCode();
-            }
-
-            if (this.NextPaymentAmountMoney != null)
-            {
-               hashCode += this.NextPaymentAmountMoney.GetHashCode();
-            }
-
-            if (this.Status != null)
-            {
-               hashCode += this.Status.GetHashCode();
-            }
-
-            if (this.Timezone != null)
-            {
-               hashCode += this.Timezone.GetHashCode();
-            }
-
-            if (this.CreatedAt != null)
-            {
-               hashCode += this.CreatedAt.GetHashCode();
-            }
-
-            if (this.UpdatedAt != null)
-            {
-               hashCode += this.UpdatedAt.GetHashCode();
-            }
-
-            if (this.AcceptedPaymentMethods != null)
-            {
-               hashCode += this.AcceptedPaymentMethods.GetHashCode();
-            }
-
-            if (this.CustomFields != null)
-            {
-               hashCode += this.CustomFields.GetHashCode();
-            }
-
-            if (this.SubscriptionId != null)
-            {
-               hashCode += this.SubscriptionId.GetHashCode();
-            }
-
-            if (this.SaleOrServiceDate != null)
-            {
-               hashCode += this.SaleOrServiceDate.GetHashCode();
-            }
+            hashCode = HashCode.Combine(hashCode, this.Timezone, this.CreatedAt, this.UpdatedAt, this.AcceptedPaymentMethods, this.CustomFields, this.SubscriptionId, this.SaleOrServiceDate);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

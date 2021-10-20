@@ -72,25 +72,16 @@ namespace Square.Models
                 ((this.ServiceVariationId == null && other.ServiceVariationId == null) || (this.ServiceVariationId?.Equals(other.ServiceVariationId) == true)) &&
                 ((this.TeamMemberIdFilter == null && other.TeamMemberIdFilter == null) || (this.TeamMemberIdFilter?.Equals(other.TeamMemberIdFilter) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -2080323319;
-
-            if (this.ServiceVariationId != null)
-            {
-               hashCode += this.ServiceVariationId.GetHashCode();
-            }
-
-            if (this.TeamMemberIdFilter != null)
-            {
-               hashCode += this.TeamMemberIdFilter.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.ServiceVariationId, this.TeamMemberIdFilter);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

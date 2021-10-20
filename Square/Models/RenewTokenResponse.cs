@@ -124,7 +124,7 @@ namespace Square.Models
                 ((this.SubscriptionId == null && other.SubscriptionId == null) || (this.SubscriptionId?.Equals(other.SubscriptionId) == true)) &&
                 ((this.PlanId == null && other.PlanId == null) || (this.PlanId?.Equals(other.PlanId) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
@@ -134,40 +134,11 @@ namespace Square.Models
             {
                 hashCode += this.Context.GetHashCode();
             }
-
-            if (this.AccessToken != null)
-            {
-               hashCode += this.AccessToken.GetHashCode();
-            }
-
-            if (this.TokenType != null)
-            {
-               hashCode += this.TokenType.GetHashCode();
-            }
-
-            if (this.ExpiresAt != null)
-            {
-               hashCode += this.ExpiresAt.GetHashCode();
-            }
-
-            if (this.MerchantId != null)
-            {
-               hashCode += this.MerchantId.GetHashCode();
-            }
-
-            if (this.SubscriptionId != null)
-            {
-               hashCode += this.SubscriptionId.GetHashCode();
-            }
-
-            if (this.PlanId != null)
-            {
-               hashCode += this.PlanId.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.AccessToken, this.TokenType, this.ExpiresAt, this.MerchantId, this.SubscriptionId, this.PlanId);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

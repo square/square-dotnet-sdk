@@ -80,30 +80,16 @@ namespace Square.Models
                 ((this.Any == null && other.Any == null) || (this.Any?.Equals(other.Any) == true)) &&
                 ((this.None == null && other.None == null) || (this.None?.Equals(other.None) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 547827750;
-
-            if (this.All != null)
-            {
-               hashCode += this.All.GetHashCode();
-            }
-
-            if (this.Any != null)
-            {
-               hashCode += this.Any.GetHashCode();
-            }
-
-            if (this.None != null)
-            {
-               hashCode += this.None.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.All, this.Any, this.None);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

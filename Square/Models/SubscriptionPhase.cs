@@ -104,40 +104,16 @@ namespace Square.Models
                 ((this.RecurringPriceMoney == null && other.RecurringPriceMoney == null) || (this.RecurringPriceMoney?.Equals(other.RecurringPriceMoney) == true)) &&
                 ((this.Ordinal == null && other.Ordinal == null) || (this.Ordinal?.Equals(other.Ordinal) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 718353637;
-
-            if (this.Uid != null)
-            {
-               hashCode += this.Uid.GetHashCode();
-            }
-
-            if (this.Cadence != null)
-            {
-               hashCode += this.Cadence.GetHashCode();
-            }
-
-            if (this.Periods != null)
-            {
-               hashCode += this.Periods.GetHashCode();
-            }
-
-            if (this.RecurringPriceMoney != null)
-            {
-               hashCode += this.RecurringPriceMoney.GetHashCode();
-            }
-
-            if (this.Ordinal != null)
-            {
-               hashCode += this.Ordinal.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.Uid, this.Cadence, this.Periods, this.RecurringPriceMoney, this.Ordinal);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

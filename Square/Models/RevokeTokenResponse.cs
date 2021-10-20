@@ -67,7 +67,7 @@ namespace Square.Models
                 ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
                 ((this.Success == null && other.Success == null) || (this.Success?.Equals(other.Success) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
@@ -77,15 +77,11 @@ namespace Square.Models
             {
                 hashCode += this.Context.GetHashCode();
             }
-
-            if (this.Success != null)
-            {
-               hashCode += this.Success.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.Success);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

@@ -110,45 +110,16 @@ namespace Square.Models
                 ((this.Status == null && other.Status == null) || (this.Status?.Equals(other.Status) == true)) &&
                 ((this.BatchToken == null && other.BatchToken == null) || (this.BatchToken?.Equals(other.BatchToken) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 331726736;
-
-            if (this.Order != null)
-            {
-               hashCode += this.Order.GetHashCode();
-            }
-
-            if (this.BeginTime != null)
-            {
-               hashCode += this.BeginTime.GetHashCode();
-            }
-
-            if (this.EndTime != null)
-            {
-               hashCode += this.EndTime.GetHashCode();
-            }
-
-            if (this.Limit != null)
-            {
-               hashCode += this.Limit.GetHashCode();
-            }
-
-            if (this.Status != null)
-            {
-               hashCode += this.Status.GetHashCode();
-            }
-
-            if (this.BatchToken != null)
-            {
-               hashCode += this.BatchToken.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.Order, this.BeginTime, this.EndTime, this.Limit, this.Status, this.BatchToken);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

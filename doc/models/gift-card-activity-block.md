@@ -11,7 +11,7 @@ Describes a gift card activity of the BLOCK type.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `Reason` | `string` | Required | **Default**: `"CHARGEBACK_BLOCK"`<br>*Default: `"CHARGEBACK_BLOCK"`* |
+| `Reason` | `string` | Required, Constant | **Default**: `"CHARGEBACK_BLOCK"`<br>*Default: `"CHARGEBACK_BLOCK"`* |
 
 ## Example (as JSON)
 

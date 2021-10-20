@@ -31,6 +31,7 @@ namespace Square.Models
         /// <param name="reason">reason.</param>
         /// <param name="createdAt">created_at.</param>
         /// <param name="updatedAt">updated_at.</param>
+        /// <param name="teamMemberId">team_member_id.</param>
         public PaymentRefund(
             string id,
             Models.Money amountMoney,
@@ -42,7 +43,8 @@ namespace Square.Models
             string orderId = null,
             string reason = null,
             string createdAt = null,
-            string updatedAt = null)
+            string updatedAt = null,
+            string teamMemberId = null)
         {
             this.Id = id;
             this.Status = status;
@@ -55,6 +57,7 @@ namespace Square.Models
             this.Reason = reason;
             this.CreatedAt = createdAt;
             this.UpdatedAt = updatedAt;
+            this.TeamMemberId = teamMemberId;
         }
 
         /// <summary>
@@ -137,6 +140,12 @@ namespace Square.Models
         [JsonProperty("updated_at", NullValueHandling = NullValueHandling.Ignore)]
         public string UpdatedAt { get; }
 
+        /// <summary>
+        /// An optional ID of the team member associated with taking the payment.
+        /// </summary>
+        [JsonProperty("team_member_id", NullValueHandling = NullValueHandling.Ignore)]
+        public string TeamMemberId { get; }
+
         /// <inheritdoc/>
         public override string ToString()
         {
@@ -171,72 +180,21 @@ namespace Square.Models
                 ((this.OrderId == null && other.OrderId == null) || (this.OrderId?.Equals(other.OrderId) == true)) &&
                 ((this.Reason == null && other.Reason == null) || (this.Reason?.Equals(other.Reason) == true)) &&
                 ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true)) &&
-                ((this.UpdatedAt == null && other.UpdatedAt == null) || (this.UpdatedAt?.Equals(other.UpdatedAt) == true));
+                ((this.UpdatedAt == null && other.UpdatedAt == null) || (this.UpdatedAt?.Equals(other.UpdatedAt) == true)) &&
+                ((this.TeamMemberId == null && other.TeamMemberId == null) || (this.TeamMemberId?.Equals(other.TeamMemberId) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1029518993;
+            int hashCode = 1337028920;
+            hashCode = HashCode.Combine(this.Id, this.Status, this.LocationId, this.AmountMoney, this.AppFeeMoney, this.ProcessingFee, this.PaymentId);
 
-            if (this.Id != null)
-            {
-               hashCode += this.Id.GetHashCode();
-            }
-
-            if (this.Status != null)
-            {
-               hashCode += this.Status.GetHashCode();
-            }
-
-            if (this.LocationId != null)
-            {
-               hashCode += this.LocationId.GetHashCode();
-            }
-
-            if (this.AmountMoney != null)
-            {
-               hashCode += this.AmountMoney.GetHashCode();
-            }
-
-            if (this.AppFeeMoney != null)
-            {
-               hashCode += this.AppFeeMoney.GetHashCode();
-            }
-
-            if (this.ProcessingFee != null)
-            {
-               hashCode += this.ProcessingFee.GetHashCode();
-            }
-
-            if (this.PaymentId != null)
-            {
-               hashCode += this.PaymentId.GetHashCode();
-            }
-
-            if (this.OrderId != null)
-            {
-               hashCode += this.OrderId.GetHashCode();
-            }
-
-            if (this.Reason != null)
-            {
-               hashCode += this.Reason.GetHashCode();
-            }
-
-            if (this.CreatedAt != null)
-            {
-               hashCode += this.CreatedAt.GetHashCode();
-            }
-
-            if (this.UpdatedAt != null)
-            {
-               hashCode += this.UpdatedAt.GetHashCode();
-            }
+            hashCode = HashCode.Combine(hashCode, this.OrderId, this.Reason, this.CreatedAt, this.UpdatedAt, this.TeamMemberId);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -254,6 +212,7 @@ namespace Square.Models
             toStringOutput.Add($"this.Reason = {(this.Reason == null ? "null" : this.Reason == string.Empty ? "" : this.Reason)}");
             toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt == string.Empty ? "" : this.CreatedAt)}");
             toStringOutput.Add($"this.UpdatedAt = {(this.UpdatedAt == null ? "null" : this.UpdatedAt == string.Empty ? "" : this.UpdatedAt)}");
+            toStringOutput.Add($"this.TeamMemberId = {(this.TeamMemberId == null ? "null" : this.TeamMemberId == string.Empty ? "" : this.TeamMemberId)}");
         }
 
         /// <summary>
@@ -273,7 +232,8 @@ namespace Square.Models
                 .OrderId(this.OrderId)
                 .Reason(this.Reason)
                 .CreatedAt(this.CreatedAt)
-                .UpdatedAt(this.UpdatedAt);
+                .UpdatedAt(this.UpdatedAt)
+                .TeamMemberId(this.TeamMemberId);
             return builder;
         }
 
@@ -293,6 +253,7 @@ namespace Square.Models
             private string reason;
             private string createdAt;
             private string updatedAt;
+            private string teamMemberId;
 
             public Builder(
                 string id,
@@ -423,6 +384,17 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// TeamMemberId.
+             /// </summary>
+             /// <param name="teamMemberId"> teamMemberId. </param>
+             /// <returns> Builder. </returns>
+            public Builder TeamMemberId(string teamMemberId)
+            {
+                this.teamMemberId = teamMemberId;
+                return this;
+            }
+
             /// <summary>
             /// Builds class object.
             /// </summary>
@@ -440,7 +412,8 @@ namespace Square.Models
                     this.orderId,
                     this.reason,
                     this.createdAt,
-                    this.updatedAt);
+                    this.updatedAt,
+                    this.teamMemberId);
             }
         }
     }

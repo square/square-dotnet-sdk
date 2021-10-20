@@ -61,20 +61,16 @@ namespace Square.Models
             return obj is DeleteInvoiceRequest other &&
                 ((this.Version == null && other.Version == null) || (this.Version?.Equals(other.Version) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -231963317;
-
-            if (this.Version != null)
-            {
-               hashCode += this.Version.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.Version);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

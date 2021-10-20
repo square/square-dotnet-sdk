@@ -35,10 +35,10 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Retrieves the list of customer segments of a business..
+        /// Retrieves the list of customer segments of a business.
         /// </summary>
         /// <param name="cursor">Optional parameter: A pagination cursor returned by previous calls to `ListCustomerSegments`. This cursor is used to retrieve the next set of query results.  For more information, see [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination)..</param>
-        /// <param name="limit">Optional parameter: The maximum number of results to return in a single page. This limit is advisory. The response might contain more or fewer results.  The limit is ignored if it is less than 1 or greater than 50. The default value is 50.  For more information, see [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination)..</param>
+        /// <param name="limit">Optional parameter: The maximum number of results to return in a single page. This limit is advisory. The response might contain more or fewer results. The limit is ignored if it is less than 1 or greater than 50. The default value is 50.  For more information, see [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination)..</param>
         /// <returns>Returns the Models.ListCustomerSegmentsResponse response from the API call.</returns>
         public Models.ListCustomerSegmentsResponse ListCustomerSegments(
                 string cursor = null,
@@ -50,10 +50,10 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Retrieves the list of customer segments of a business..
+        /// Retrieves the list of customer segments of a business.
         /// </summary>
         /// <param name="cursor">Optional parameter: A pagination cursor returned by previous calls to `ListCustomerSegments`. This cursor is used to retrieve the next set of query results.  For more information, see [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination)..</param>
-        /// <param name="limit">Optional parameter: The maximum number of results to return in a single page. This limit is advisory. The response might contain more or fewer results.  The limit is ignored if it is less than 1 or greater than 50. The default value is 50.  For more information, see [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination)..</param>
+        /// <param name="limit">Optional parameter: The maximum number of results to return in a single page. This limit is advisory. The response might contain more or fewer results. The limit is ignored if it is less than 1 or greater than 50. The default value is 50.  For more information, see [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination)..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the Models.ListCustomerSegmentsResponse response from the API call.</returns>
         public async Task<Models.ListCustomerSegmentsResponse> ListCustomerSegmentsAsync(
@@ -110,7 +110,7 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Retrieves a specific customer segment as identified by the `segment_id` value..
+        /// Retrieves a specific customer segment as identified by the `segment_id` value.
         /// </summary>
         /// <param name="segmentId">Required parameter: The Square-issued ID of the customer segment..</param>
         /// <returns>Returns the Models.RetrieveCustomerSegmentResponse response from the API call.</returns>
@@ -123,7 +123,7 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Retrieves a specific customer segment as identified by the `segment_id` value..
+        /// Retrieves a specific customer segment as identified by the `segment_id` value.
         /// </summary>
         /// <param name="segmentId">Required parameter: The Square-issued ID of the customer segment..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>

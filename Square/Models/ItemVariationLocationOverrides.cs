@@ -116,45 +116,16 @@ namespace Square.Models
                 ((this.InventoryAlertType == null && other.InventoryAlertType == null) || (this.InventoryAlertType?.Equals(other.InventoryAlertType) == true)) &&
                 ((this.InventoryAlertThreshold == null && other.InventoryAlertThreshold == null) || (this.InventoryAlertThreshold?.Equals(other.InventoryAlertThreshold) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -598612092;
-
-            if (this.LocationId != null)
-            {
-               hashCode += this.LocationId.GetHashCode();
-            }
-
-            if (this.PriceMoney != null)
-            {
-               hashCode += this.PriceMoney.GetHashCode();
-            }
-
-            if (this.PricingType != null)
-            {
-               hashCode += this.PricingType.GetHashCode();
-            }
-
-            if (this.TrackInventory != null)
-            {
-               hashCode += this.TrackInventory.GetHashCode();
-            }
-
-            if (this.InventoryAlertType != null)
-            {
-               hashCode += this.InventoryAlertType.GetHashCode();
-            }
-
-            if (this.InventoryAlertThreshold != null)
-            {
-               hashCode += this.InventoryAlertThreshold.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.LocationId, this.PriceMoney, this.PricingType, this.TrackInventory, this.InventoryAlertType, this.InventoryAlertThreshold);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

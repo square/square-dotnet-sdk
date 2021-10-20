@@ -10,7 +10,6 @@ namespace Square.Models
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
     using Square;
-    using Square.Http.Client;
     using Square.Utilities;
 
     /// <summary>
@@ -30,12 +29,6 @@ namespace Square.Models
             this.Errors = errors;
             this.Refund = refund;
         }
-
-        /// <summary>
-        /// Gets http context.
-        /// </summary>
-        [JsonIgnore]
-        public HttpContext Context { get; internal set; }
 
         /// <summary>
         /// Any errors that occurred during the request.
@@ -73,34 +66,19 @@ namespace Square.Models
             }
 
             return obj is CreateRefundResponse other &&
-                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
                 ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true)) &&
                 ((this.Refund == null && other.Refund == null) || (this.Refund?.Equals(other.Refund) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1017134499;
-
-            if (this.Context != null)
-            {
-                hashCode += this.Context.GetHashCode();
-            }
-
-            if (this.Errors != null)
-            {
-               hashCode += this.Errors.GetHashCode();
-            }
-
-            if (this.Refund != null)
-            {
-               hashCode += this.Refund.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.Errors, this.Refund);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

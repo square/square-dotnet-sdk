@@ -255,115 +255,20 @@ namespace Square.Models
                 ((this.UnblockActivityDetails == null && other.UnblockActivityDetails == null) || (this.UnblockActivityDetails?.Equals(other.UnblockActivityDetails) == true)) &&
                 ((this.ImportReversalActivityDetails == null && other.ImportReversalActivityDetails == null) || (this.ImportReversalActivityDetails?.Equals(other.ImportReversalActivityDetails) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -110440547;
+            hashCode = HashCode.Combine(this.Id, this.Type, this.LocationId, this.CreatedAt, this.GiftCardId, this.GiftCardGan, this.GiftCardBalanceMoney);
 
-            if (this.Id != null)
-            {
-               hashCode += this.Id.GetHashCode();
-            }
+            hashCode = HashCode.Combine(hashCode, this.LoadActivityDetails, this.ActivateActivityDetails, this.RedeemActivityDetails, this.ClearBalanceActivityDetails, this.DeactivateActivityDetails, this.AdjustIncrementActivityDetails, this.AdjustDecrementActivityDetails);
 
-            if (this.Type != null)
-            {
-               hashCode += this.Type.GetHashCode();
-            }
-
-            if (this.LocationId != null)
-            {
-               hashCode += this.LocationId.GetHashCode();
-            }
-
-            if (this.CreatedAt != null)
-            {
-               hashCode += this.CreatedAt.GetHashCode();
-            }
-
-            if (this.GiftCardId != null)
-            {
-               hashCode += this.GiftCardId.GetHashCode();
-            }
-
-            if (this.GiftCardGan != null)
-            {
-               hashCode += this.GiftCardGan.GetHashCode();
-            }
-
-            if (this.GiftCardBalanceMoney != null)
-            {
-               hashCode += this.GiftCardBalanceMoney.GetHashCode();
-            }
-
-            if (this.LoadActivityDetails != null)
-            {
-               hashCode += this.LoadActivityDetails.GetHashCode();
-            }
-
-            if (this.ActivateActivityDetails != null)
-            {
-               hashCode += this.ActivateActivityDetails.GetHashCode();
-            }
-
-            if (this.RedeemActivityDetails != null)
-            {
-               hashCode += this.RedeemActivityDetails.GetHashCode();
-            }
-
-            if (this.ClearBalanceActivityDetails != null)
-            {
-               hashCode += this.ClearBalanceActivityDetails.GetHashCode();
-            }
-
-            if (this.DeactivateActivityDetails != null)
-            {
-               hashCode += this.DeactivateActivityDetails.GetHashCode();
-            }
-
-            if (this.AdjustIncrementActivityDetails != null)
-            {
-               hashCode += this.AdjustIncrementActivityDetails.GetHashCode();
-            }
-
-            if (this.AdjustDecrementActivityDetails != null)
-            {
-               hashCode += this.AdjustDecrementActivityDetails.GetHashCode();
-            }
-
-            if (this.RefundActivityDetails != null)
-            {
-               hashCode += this.RefundActivityDetails.GetHashCode();
-            }
-
-            if (this.UnlinkedActivityRefundActivityDetails != null)
-            {
-               hashCode += this.UnlinkedActivityRefundActivityDetails.GetHashCode();
-            }
-
-            if (this.ImportActivityDetails != null)
-            {
-               hashCode += this.ImportActivityDetails.GetHashCode();
-            }
-
-            if (this.BlockActivityDetails != null)
-            {
-               hashCode += this.BlockActivityDetails.GetHashCode();
-            }
-
-            if (this.UnblockActivityDetails != null)
-            {
-               hashCode += this.UnblockActivityDetails.GetHashCode();
-            }
-
-            if (this.ImportReversalActivityDetails != null)
-            {
-               hashCode += this.ImportReversalActivityDetails.GetHashCode();
-            }
+            hashCode = HashCode.Combine(hashCode, this.RefundActivityDetails, this.UnlinkedActivityRefundActivityDetails, this.ImportActivityDetails, this.BlockActivityDetails, this.UnblockActivityDetails, this.ImportReversalActivityDetails);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>
