@@ -63,20 +63,16 @@ namespace Square.Models
             return obj is CatalogCustomAttributeDefinitionStringConfig other &&
                 ((this.EnforceUniqueness == null && other.EnforceUniqueness == null) || (this.EnforceUniqueness?.Equals(other.EnforceUniqueness) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 209404828;
-
-            if (this.EnforceUniqueness != null)
-            {
-               hashCode += this.EnforceUniqueness.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.EnforceUniqueness);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

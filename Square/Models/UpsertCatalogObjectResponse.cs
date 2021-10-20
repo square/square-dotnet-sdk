@@ -92,7 +92,7 @@ namespace Square.Models
                 ((this.CatalogObject == null && other.CatalogObject == null) || (this.CatalogObject?.Equals(other.CatalogObject) == true)) &&
                 ((this.IdMappings == null && other.IdMappings == null) || (this.IdMappings?.Equals(other.IdMappings) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
@@ -102,25 +102,11 @@ namespace Square.Models
             {
                 hashCode += this.Context.GetHashCode();
             }
-
-            if (this.Errors != null)
-            {
-               hashCode += this.Errors.GetHashCode();
-            }
-
-            if (this.CatalogObject != null)
-            {
-               hashCode += this.CatalogObject.GetHashCode();
-            }
-
-            if (this.IdMappings != null)
-            {
-               hashCode += this.IdMappings.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.Errors, this.CatalogObject, this.IdMappings);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

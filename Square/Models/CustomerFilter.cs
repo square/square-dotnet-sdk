@@ -138,50 +138,16 @@ namespace Square.Models
                 ((this.ReferenceId == null && other.ReferenceId == null) || (this.ReferenceId?.Equals(other.ReferenceId) == true)) &&
                 ((this.GroupIds == null && other.GroupIds == null) || (this.GroupIds?.Equals(other.GroupIds) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 1632151242;
-
-            if (this.CreationSource != null)
-            {
-               hashCode += this.CreationSource.GetHashCode();
-            }
-
-            if (this.CreatedAt != null)
-            {
-               hashCode += this.CreatedAt.GetHashCode();
-            }
-
-            if (this.UpdatedAt != null)
-            {
-               hashCode += this.UpdatedAt.GetHashCode();
-            }
-
-            if (this.EmailAddress != null)
-            {
-               hashCode += this.EmailAddress.GetHashCode();
-            }
-
-            if (this.PhoneNumber != null)
-            {
-               hashCode += this.PhoneNumber.GetHashCode();
-            }
-
-            if (this.ReferenceId != null)
-            {
-               hashCode += this.ReferenceId.GetHashCode();
-            }
-
-            if (this.GroupIds != null)
-            {
-               hashCode += this.GroupIds.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.CreationSource, this.CreatedAt, this.UpdatedAt, this.EmailAddress, this.PhoneNumber, this.ReferenceId, this.GroupIds);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

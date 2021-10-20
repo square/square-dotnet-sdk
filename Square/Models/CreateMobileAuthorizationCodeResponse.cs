@@ -90,7 +90,7 @@ namespace Square.Models
                 ((this.ExpiresAt == null && other.ExpiresAt == null) || (this.ExpiresAt?.Equals(other.ExpiresAt) == true)) &&
                 ((this.Error == null && other.Error == null) || (this.Error?.Equals(other.Error) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
@@ -100,25 +100,11 @@ namespace Square.Models
             {
                 hashCode += this.Context.GetHashCode();
             }
-
-            if (this.AuthorizationCode != null)
-            {
-               hashCode += this.AuthorizationCode.GetHashCode();
-            }
-
-            if (this.ExpiresAt != null)
-            {
-               hashCode += this.ExpiresAt.GetHashCode();
-            }
-
-            if (this.Error != null)
-            {
-               hashCode += this.Error.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.AuthorizationCode, this.ExpiresAt, this.Error);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

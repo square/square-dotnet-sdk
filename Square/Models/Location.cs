@@ -365,150 +365,22 @@ namespace Square.Models
                 ((this.FullFormatLogoUrl == null && other.FullFormatLogoUrl == null) || (this.FullFormatLogoUrl?.Equals(other.FullFormatLogoUrl) == true)) &&
                 ((this.TaxIds == null && other.TaxIds == null) || (this.TaxIds?.Equals(other.TaxIds) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 232879438;
+            hashCode = HashCode.Combine(this.Id, this.Name, this.Address, this.Timezone, this.Capabilities, this.Status, this.CreatedAt);
 
-            if (this.Id != null)
-            {
-               hashCode += this.Id.GetHashCode();
-            }
+            hashCode = HashCode.Combine(hashCode, this.MerchantId, this.Country, this.LanguageCode, this.Currency, this.PhoneNumber, this.BusinessName, this.Type);
 
-            if (this.Name != null)
-            {
-               hashCode += this.Name.GetHashCode();
-            }
+            hashCode = HashCode.Combine(hashCode, this.WebsiteUrl, this.BusinessHours, this.BusinessEmail, this.Description, this.TwitterUsername, this.InstagramUsername, this.FacebookUrl);
 
-            if (this.Address != null)
-            {
-               hashCode += this.Address.GetHashCode();
-            }
-
-            if (this.Timezone != null)
-            {
-               hashCode += this.Timezone.GetHashCode();
-            }
-
-            if (this.Capabilities != null)
-            {
-               hashCode += this.Capabilities.GetHashCode();
-            }
-
-            if (this.Status != null)
-            {
-               hashCode += this.Status.GetHashCode();
-            }
-
-            if (this.CreatedAt != null)
-            {
-               hashCode += this.CreatedAt.GetHashCode();
-            }
-
-            if (this.MerchantId != null)
-            {
-               hashCode += this.MerchantId.GetHashCode();
-            }
-
-            if (this.Country != null)
-            {
-               hashCode += this.Country.GetHashCode();
-            }
-
-            if (this.LanguageCode != null)
-            {
-               hashCode += this.LanguageCode.GetHashCode();
-            }
-
-            if (this.Currency != null)
-            {
-               hashCode += this.Currency.GetHashCode();
-            }
-
-            if (this.PhoneNumber != null)
-            {
-               hashCode += this.PhoneNumber.GetHashCode();
-            }
-
-            if (this.BusinessName != null)
-            {
-               hashCode += this.BusinessName.GetHashCode();
-            }
-
-            if (this.Type != null)
-            {
-               hashCode += this.Type.GetHashCode();
-            }
-
-            if (this.WebsiteUrl != null)
-            {
-               hashCode += this.WebsiteUrl.GetHashCode();
-            }
-
-            if (this.BusinessHours != null)
-            {
-               hashCode += this.BusinessHours.GetHashCode();
-            }
-
-            if (this.BusinessEmail != null)
-            {
-               hashCode += this.BusinessEmail.GetHashCode();
-            }
-
-            if (this.Description != null)
-            {
-               hashCode += this.Description.GetHashCode();
-            }
-
-            if (this.TwitterUsername != null)
-            {
-               hashCode += this.TwitterUsername.GetHashCode();
-            }
-
-            if (this.InstagramUsername != null)
-            {
-               hashCode += this.InstagramUsername.GetHashCode();
-            }
-
-            if (this.FacebookUrl != null)
-            {
-               hashCode += this.FacebookUrl.GetHashCode();
-            }
-
-            if (this.Coordinates != null)
-            {
-               hashCode += this.Coordinates.GetHashCode();
-            }
-
-            if (this.LogoUrl != null)
-            {
-               hashCode += this.LogoUrl.GetHashCode();
-            }
-
-            if (this.PosBackgroundUrl != null)
-            {
-               hashCode += this.PosBackgroundUrl.GetHashCode();
-            }
-
-            if (this.Mcc != null)
-            {
-               hashCode += this.Mcc.GetHashCode();
-            }
-
-            if (this.FullFormatLogoUrl != null)
-            {
-               hashCode += this.FullFormatLogoUrl.GetHashCode();
-            }
-
-            if (this.TaxIds != null)
-            {
-               hashCode += this.TaxIds.GetHashCode();
-            }
+            hashCode = HashCode.Combine(hashCode, this.Coordinates, this.LogoUrl, this.PosBackgroundUrl, this.Mcc, this.FullFormatLogoUrl, this.TaxIds);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

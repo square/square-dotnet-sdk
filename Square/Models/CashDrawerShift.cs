@@ -266,105 +266,20 @@ namespace Square.Models
                 ((this.ClosedCashMoney == null && other.ClosedCashMoney == null) || (this.ClosedCashMoney?.Equals(other.ClosedCashMoney) == true)) &&
                 ((this.Device == null && other.Device == null) || (this.Device?.Equals(other.Device) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -498109440;
+            hashCode = HashCode.Combine(this.Id, this.State, this.OpenedAt, this.EndedAt, this.ClosedAt, this.EmployeeIds, this.OpeningEmployeeId);
 
-            if (this.Id != null)
-            {
-               hashCode += this.Id.GetHashCode();
-            }
+            hashCode = HashCode.Combine(hashCode, this.EndingEmployeeId, this.ClosingEmployeeId, this.Description, this.OpenedCashMoney, this.CashPaymentMoney, this.CashRefundsMoney, this.CashPaidInMoney);
 
-            if (this.State != null)
-            {
-               hashCode += this.State.GetHashCode();
-            }
-
-            if (this.OpenedAt != null)
-            {
-               hashCode += this.OpenedAt.GetHashCode();
-            }
-
-            if (this.EndedAt != null)
-            {
-               hashCode += this.EndedAt.GetHashCode();
-            }
-
-            if (this.ClosedAt != null)
-            {
-               hashCode += this.ClosedAt.GetHashCode();
-            }
-
-            if (this.EmployeeIds != null)
-            {
-               hashCode += this.EmployeeIds.GetHashCode();
-            }
-
-            if (this.OpeningEmployeeId != null)
-            {
-               hashCode += this.OpeningEmployeeId.GetHashCode();
-            }
-
-            if (this.EndingEmployeeId != null)
-            {
-               hashCode += this.EndingEmployeeId.GetHashCode();
-            }
-
-            if (this.ClosingEmployeeId != null)
-            {
-               hashCode += this.ClosingEmployeeId.GetHashCode();
-            }
-
-            if (this.Description != null)
-            {
-               hashCode += this.Description.GetHashCode();
-            }
-
-            if (this.OpenedCashMoney != null)
-            {
-               hashCode += this.OpenedCashMoney.GetHashCode();
-            }
-
-            if (this.CashPaymentMoney != null)
-            {
-               hashCode += this.CashPaymentMoney.GetHashCode();
-            }
-
-            if (this.CashRefundsMoney != null)
-            {
-               hashCode += this.CashRefundsMoney.GetHashCode();
-            }
-
-            if (this.CashPaidInMoney != null)
-            {
-               hashCode += this.CashPaidInMoney.GetHashCode();
-            }
-
-            if (this.CashPaidOutMoney != null)
-            {
-               hashCode += this.CashPaidOutMoney.GetHashCode();
-            }
-
-            if (this.ExpectedCashMoney != null)
-            {
-               hashCode += this.ExpectedCashMoney.GetHashCode();
-            }
-
-            if (this.ClosedCashMoney != null)
-            {
-               hashCode += this.ClosedCashMoney.GetHashCode();
-            }
-
-            if (this.Device != null)
-            {
-               hashCode += this.Device.GetHashCode();
-            }
+            hashCode = HashCode.Combine(hashCode, this.CashPaidOutMoney, this.ExpectedCashMoney, this.ClosedCashMoney, this.Device);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

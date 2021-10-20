@@ -131,55 +131,18 @@ namespace Square.Models
                 ((this.AchDetails == null && other.AchDetails == null) || (this.AchDetails?.Equals(other.AchDetails) == true)) &&
                 ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 863047892;
+            hashCode = HashCode.Combine(this.BankName, this.TransferType, this.AccountOwnershipType, this.Fingerprint, this.Country, this.StatementDescription, this.AchDetails);
 
-            if (this.BankName != null)
-            {
-               hashCode += this.BankName.GetHashCode();
-            }
-
-            if (this.TransferType != null)
-            {
-               hashCode += this.TransferType.GetHashCode();
-            }
-
-            if (this.AccountOwnershipType != null)
-            {
-               hashCode += this.AccountOwnershipType.GetHashCode();
-            }
-
-            if (this.Fingerprint != null)
-            {
-               hashCode += this.Fingerprint.GetHashCode();
-            }
-
-            if (this.Country != null)
-            {
-               hashCode += this.Country.GetHashCode();
-            }
-
-            if (this.StatementDescription != null)
-            {
-               hashCode += this.StatementDescription.GetHashCode();
-            }
-
-            if (this.AchDetails != null)
-            {
-               hashCode += this.AchDetails.GetHashCode();
-            }
-
-            if (this.Errors != null)
-            {
-               hashCode += this.Errors.GetHashCode();
-            }
+            hashCode = HashCode.Combine(hashCode, this.Errors);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

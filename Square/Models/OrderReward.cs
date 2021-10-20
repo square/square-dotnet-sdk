@@ -69,25 +69,16 @@ namespace Square.Models
                 ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
                 ((this.RewardTierId == null && other.RewardTierId == null) || (this.RewardTierId?.Equals(other.RewardTierId) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 2052630566;
-
-            if (this.Id != null)
-            {
-               hashCode += this.Id.GetHashCode();
-            }
-
-            if (this.RewardTierId != null)
-            {
-               hashCode += this.RewardTierId.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.Id, this.RewardTierId);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

@@ -154,60 +154,18 @@ namespace Square.Models
                 ((this.Scopes == null && other.Scopes == null) || (this.Scopes?.Equals(other.Scopes) == true)) &&
                 ((this.ShortLived == null && other.ShortLived == null) || (this.ShortLived?.Equals(other.ShortLived) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -994318680;
+            hashCode = HashCode.Combine(this.ClientId, this.ClientSecret, this.Code, this.RedirectUri, this.GrantType, this.RefreshToken, this.MigrationToken);
 
-            if (this.ClientId != null)
-            {
-               hashCode += this.ClientId.GetHashCode();
-            }
-
-            if (this.ClientSecret != null)
-            {
-               hashCode += this.ClientSecret.GetHashCode();
-            }
-
-            if (this.Code != null)
-            {
-               hashCode += this.Code.GetHashCode();
-            }
-
-            if (this.RedirectUri != null)
-            {
-               hashCode += this.RedirectUri.GetHashCode();
-            }
-
-            if (this.GrantType != null)
-            {
-               hashCode += this.GrantType.GetHashCode();
-            }
-
-            if (this.RefreshToken != null)
-            {
-               hashCode += this.RefreshToken.GetHashCode();
-            }
-
-            if (this.MigrationToken != null)
-            {
-               hashCode += this.MigrationToken.GetHashCode();
-            }
-
-            if (this.Scopes != null)
-            {
-               hashCode += this.Scopes.GetHashCode();
-            }
-
-            if (this.ShortLived != null)
-            {
-               hashCode += this.ShortLived.GetHashCode();
-            }
+            hashCode = HashCode.Combine(hashCode, this.Scopes, this.ShortLived);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

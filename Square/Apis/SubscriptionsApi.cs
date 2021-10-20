@@ -35,11 +35,11 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Creates a subscription for a customer to a subscription plan..
+        /// Creates a subscription for a customer to a subscription plan.
         /// If you provide a card on file in the request, Square charges the card for.
         /// the subscription. Otherwise, Square bills an invoice to the customer's email.
         /// address. The subscription starts immediately, unless the request includes.
-        /// the optional `start_date`. Each individual subscription is associated with a particular location..
+        /// the optional `start_date`. Each individual subscription is associated with a particular location.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <returns>Returns the Models.CreateSubscriptionResponse response from the API call.</returns>
@@ -52,11 +52,11 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Creates a subscription for a customer to a subscription plan..
+        /// Creates a subscription for a customer to a subscription plan.
         /// If you provide a card on file in the request, Square charges the card for.
         /// the subscription. Otherwise, Square bills an invoice to the customer's email.
         /// address. The subscription starts immediately, unless the request includes.
-        /// the optional `start_date`. Each individual subscription is associated with a particular location..
+        /// the optional `start_date`. Each individual subscription is associated with a particular location.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
@@ -111,20 +111,20 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Searches for subscriptions..
+        /// Searches for subscriptions.
         /// Results are ordered chronologically by subscription creation date. If.
         /// the request specifies more than one location ID,.
         /// the endpoint orders the result.
         /// by location ID, and then by creation date within each location. If no locations are given.
-        /// in the query, all locations are searched..
-        /// You can also optionally specify `customer_ids` to search by customer..
+        /// in the query, all locations are searched.
+        /// You can also optionally specify `customer_ids` to search by customer.
         /// If left unset, all customers.
-        /// associated with the specified locations are returned..
+        /// associated with the specified locations are returned.
         /// If the request specifies customer IDs, the endpoint orders results.
         /// first by location, within location by customer ID, and within.
-        /// customer by subscription creation date..
+        /// customer by subscription creation date.
         /// For more information, see.
-        /// [Retrieve subscriptions](https://developer.squareup.com/docs/subscriptions-api/overview#retrieve-subscriptions)..
+        /// [Retrieve subscriptions](https://developer.squareup.com/docs/subscriptions-api/overview#retrieve-subscriptions).
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <returns>Returns the Models.SearchSubscriptionsResponse response from the API call.</returns>
@@ -137,20 +137,20 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Searches for subscriptions..
+        /// Searches for subscriptions.
         /// Results are ordered chronologically by subscription creation date. If.
         /// the request specifies more than one location ID,.
         /// the endpoint orders the result.
         /// by location ID, and then by creation date within each location. If no locations are given.
-        /// in the query, all locations are searched..
-        /// You can also optionally specify `customer_ids` to search by customer..
+        /// in the query, all locations are searched.
+        /// You can also optionally specify `customer_ids` to search by customer.
         /// If left unset, all customers.
-        /// associated with the specified locations are returned..
+        /// associated with the specified locations are returned.
         /// If the request specifies customer IDs, the endpoint orders results.
         /// first by location, within location by customer ID, and within.
-        /// customer by subscription creation date..
+        /// customer by subscription creation date.
         /// For more information, see.
-        /// [Retrieve subscriptions](https://developer.squareup.com/docs/subscriptions-api/overview#retrieve-subscriptions)..
+        /// [Retrieve subscriptions](https://developer.squareup.com/docs/subscriptions-api/overview#retrieve-subscriptions).
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
@@ -205,7 +205,7 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Retrieves a subscription..
+        /// Retrieves a subscription.
         /// </summary>
         /// <param name="subscriptionId">Required parameter: The ID of the subscription to retrieve..</param>
         /// <returns>Returns the Models.RetrieveSubscriptionResponse response from the API call.</returns>
@@ -218,7 +218,7 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Retrieves a subscription..
+        /// Retrieves a subscription.
         /// </summary>
         /// <param name="subscriptionId">Required parameter: The ID of the subscription to retrieve..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
@@ -276,7 +276,7 @@ namespace Square.Apis
 
         /// <summary>
         /// Updates a subscription. You can set, modify, and clear the.
-        /// `subscription` field values..
+        /// `subscription` field values.
         /// </summary>
         /// <param name="subscriptionId">Required parameter: The ID for the subscription to update..</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
@@ -292,7 +292,7 @@ namespace Square.Apis
 
         /// <summary>
         /// Updates a subscription. You can set, modify, and clear the.
-        /// `subscription` field values..
+        /// `subscription` field values.
         /// </summary>
         /// <param name="subscriptionId">Required parameter: The ID for the subscription to update..</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
@@ -355,8 +355,8 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Sets the `canceled_date` field to the end of the active billing period..
-        /// After this date, the status changes from ACTIVE to CANCELED..
+        /// Sets the `canceled_date` field to the end of the active billing period.
+        /// After this date, the status changes from ACTIVE to CANCELED.
         /// </summary>
         /// <param name="subscriptionId">Required parameter: The ID of the subscription to cancel..</param>
         /// <returns>Returns the Models.CancelSubscriptionResponse response from the API call.</returns>
@@ -369,8 +369,8 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Sets the `canceled_date` field to the end of the active billing period..
-        /// After this date, the status changes from ACTIVE to CANCELED..
+        /// Sets the `canceled_date` field to the end of the active billing period.
+        /// After this date, the status changes from ACTIVE to CANCELED.
         /// </summary>
         /// <param name="subscriptionId">Required parameter: The ID of the subscription to cancel..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
@@ -427,8 +427,8 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Lists all events for a specific subscription..
-        /// In the current implementation, only `START_SUBSCRIPTION` and `STOP_SUBSCRIPTION` (when the subscription was canceled) events are returned..
+        /// Lists all events for a specific subscription.
+        /// In the current implementation, only `START_SUBSCRIPTION` and `STOP_SUBSCRIPTION` (when the subscription was canceled) events are returned.
         /// </summary>
         /// <param name="subscriptionId">Required parameter: The ID of the subscription to retrieve the events for..</param>
         /// <param name="cursor">Optional parameter: A pagination cursor returned by a previous call to this endpoint. Provide this to retrieve the next set of results for the original query.  For more information, see [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination)..</param>
@@ -445,8 +445,8 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Lists all events for a specific subscription..
-        /// In the current implementation, only `START_SUBSCRIPTION` and `STOP_SUBSCRIPTION` (when the subscription was canceled) events are returned..
+        /// Lists all events for a specific subscription.
+        /// In the current implementation, only `START_SUBSCRIPTION` and `STOP_SUBSCRIPTION` (when the subscription was canceled) events are returned.
         /// </summary>
         /// <param name="subscriptionId">Required parameter: The ID of the subscription to retrieve the events for..</param>
         /// <param name="cursor">Optional parameter: A pagination cursor returned by a previous call to this endpoint. Provide this to retrieve the next set of results for the original query.  For more information, see [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination)..</param>
@@ -514,7 +514,7 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Resumes a deactivated subscription..
+        /// Resumes a deactivated subscription.
         /// </summary>
         /// <param name="subscriptionId">Required parameter: The ID of the subscription to resume..</param>
         /// <returns>Returns the Models.ResumeSubscriptionResponse response from the API call.</returns>
@@ -527,7 +527,7 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Resumes a deactivated subscription..
+        /// Resumes a deactivated subscription.
         /// </summary>
         /// <param name="subscriptionId">Required parameter: The ID of the subscription to resume..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>

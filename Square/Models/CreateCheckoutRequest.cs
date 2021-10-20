@@ -194,60 +194,18 @@ namespace Square.Models
                 ((this.AdditionalRecipients == null && other.AdditionalRecipients == null) || (this.AdditionalRecipients?.Equals(other.AdditionalRecipients) == true)) &&
                 ((this.Note == null && other.Note == null) || (this.Note?.Equals(other.Note) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 1270416416;
+            hashCode = HashCode.Combine(this.IdempotencyKey, this.Order, this.AskForShippingAddress, this.MerchantSupportEmail, this.PrePopulateBuyerEmail, this.PrePopulateShippingAddress, this.RedirectUrl);
 
-            if (this.IdempotencyKey != null)
-            {
-               hashCode += this.IdempotencyKey.GetHashCode();
-            }
-
-            if (this.Order != null)
-            {
-               hashCode += this.Order.GetHashCode();
-            }
-
-            if (this.AskForShippingAddress != null)
-            {
-               hashCode += this.AskForShippingAddress.GetHashCode();
-            }
-
-            if (this.MerchantSupportEmail != null)
-            {
-               hashCode += this.MerchantSupportEmail.GetHashCode();
-            }
-
-            if (this.PrePopulateBuyerEmail != null)
-            {
-               hashCode += this.PrePopulateBuyerEmail.GetHashCode();
-            }
-
-            if (this.PrePopulateShippingAddress != null)
-            {
-               hashCode += this.PrePopulateShippingAddress.GetHashCode();
-            }
-
-            if (this.RedirectUrl != null)
-            {
-               hashCode += this.RedirectUrl.GetHashCode();
-            }
-
-            if (this.AdditionalRecipients != null)
-            {
-               hashCode += this.AdditionalRecipients.GetHashCode();
-            }
-
-            if (this.Note != null)
-            {
-               hashCode += this.Note.GetHashCode();
-            }
+            hashCode = HashCode.Combine(hashCode, this.AdditionalRecipients, this.Note);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

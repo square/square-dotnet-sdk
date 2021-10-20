@@ -74,7 +74,7 @@ namespace Square.Models
         public string TokenType { get; }
 
         /// <summary>
-        /// The date when access_token expires, in [ISO 8601](http://www.iso.org/iso/home/standards/iso8601.htm) format.
+        /// The date when the access_token expires, in [ISO 8601](http://www.iso.org/iso/home/standards/iso8601.htm) format.
         /// </summary>
         [JsonProperty("expires_at", NullValueHandling = NullValueHandling.Ignore)]
         public string ExpiresAt { get; }
@@ -101,7 +101,7 @@ namespace Square.Models
         public string PlanId { get; }
 
         /// <summary>
-        /// Then OpenID token belonging to this person. Only present if the
+        /// The OpenID token belonging to this person. Only present if the
         /// OPENID scope is included in the authorization request.
         /// </summary>
         [JsonProperty("id_token", NullValueHandling = NullValueHandling.Ignore)]
@@ -156,7 +156,7 @@ namespace Square.Models
                 ((this.RefreshToken == null && other.RefreshToken == null) || (this.RefreshToken?.Equals(other.RefreshToken) == true)) &&
                 ((this.ShortLived == null && other.ShortLived == null) || (this.ShortLived?.Equals(other.ShortLived) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
@@ -166,55 +166,13 @@ namespace Square.Models
             {
                 hashCode += this.Context.GetHashCode();
             }
+            hashCode = HashCode.Combine(this.AccessToken, this.TokenType, this.ExpiresAt, this.MerchantId, this.SubscriptionId, this.PlanId, this.IdToken);
 
-            if (this.AccessToken != null)
-            {
-               hashCode += this.AccessToken.GetHashCode();
-            }
-
-            if (this.TokenType != null)
-            {
-               hashCode += this.TokenType.GetHashCode();
-            }
-
-            if (this.ExpiresAt != null)
-            {
-               hashCode += this.ExpiresAt.GetHashCode();
-            }
-
-            if (this.MerchantId != null)
-            {
-               hashCode += this.MerchantId.GetHashCode();
-            }
-
-            if (this.SubscriptionId != null)
-            {
-               hashCode += this.SubscriptionId.GetHashCode();
-            }
-
-            if (this.PlanId != null)
-            {
-               hashCode += this.PlanId.GetHashCode();
-            }
-
-            if (this.IdToken != null)
-            {
-               hashCode += this.IdToken.GetHashCode();
-            }
-
-            if (this.RefreshToken != null)
-            {
-               hashCode += this.RefreshToken.GetHashCode();
-            }
-
-            if (this.ShortLived != null)
-            {
-               hashCode += this.ShortLived.GetHashCode();
-            }
+            hashCode = HashCode.Combine(hashCode, this.RefreshToken, this.ShortLived);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

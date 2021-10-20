@@ -61,20 +61,16 @@ namespace Square.Models
             return obj is SearchOrdersSourceFilter other &&
                 ((this.SourceNames == null && other.SourceNames == null) || (this.SourceNames?.Equals(other.SourceNames) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -530513052;
-
-            if (this.SourceNames != null)
-            {
-               hashCode += this.SourceNames.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.SourceNames);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

@@ -80,7 +80,7 @@ CreateDeviceCodeAsync(
 
 ```csharp
 var bodyDeviceCode = new DeviceCode.Builder(
-        "TERMINAL_API")
+        null)
     .Id("id0")
     .Name("Counter 1")
     .Code("code8")

@@ -59,20 +59,16 @@ namespace Square.Models
             return obj is CatalogObjectBatch other &&
                 ((this.Objects == null && other.Objects == null) || (this.Objects?.Equals(other.Objects) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -481009855;
-
-            if (this.Objects != null)
-            {
-               hashCode += this.Objects.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.Objects);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

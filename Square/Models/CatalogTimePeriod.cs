@@ -70,20 +70,16 @@ namespace Square.Models
             return obj is CatalogTimePeriod other &&
                 ((this.MEvent == null && other.MEvent == null) || (this.MEvent?.Equals(other.MEvent) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 1787594864;
-
-            if (this.MEvent != null)
-            {
-               hashCode += this.MEvent.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.MEvent);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

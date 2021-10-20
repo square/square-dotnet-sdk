@@ -69,25 +69,16 @@ namespace Square.Models
                 ((this.AttributeName == null && other.AttributeName == null) || (this.AttributeName?.Equals(other.AttributeName) == true)) &&
                 ((this.AttributePrefix == null && other.AttributePrefix == null) || (this.AttributePrefix?.Equals(other.AttributePrefix) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -167354518;
-
-            if (this.AttributeName != null)
-            {
-               hashCode += this.AttributeName.GetHashCode();
-            }
-
-            if (this.AttributePrefix != null)
-            {
-               hashCode += this.AttributePrefix.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.AttributeName, this.AttributePrefix);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

@@ -170,70 +170,18 @@ namespace Square.Models
                 ((this.UpdateItemModifierListsMaxModifierListsToEnable == null && other.UpdateItemModifierListsMaxModifierListsToEnable == null) || (this.UpdateItemModifierListsMaxModifierListsToEnable?.Equals(other.UpdateItemModifierListsMaxModifierListsToEnable) == true)) &&
                 ((this.UpdateItemModifierListsMaxModifierListsToDisable == null && other.UpdateItemModifierListsMaxModifierListsToDisable == null) || (this.UpdateItemModifierListsMaxModifierListsToDisable?.Equals(other.UpdateItemModifierListsMaxModifierListsToDisable) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 163529302;
+            hashCode = HashCode.Combine(this.BatchUpsertMaxObjectsPerBatch, this.BatchUpsertMaxTotalObjects, this.BatchRetrieveMaxObjectIds, this.SearchMaxPageLimit, this.BatchDeleteMaxObjectIds, this.UpdateItemTaxesMaxItemIds, this.UpdateItemTaxesMaxTaxesToEnable);
 
-            if (this.BatchUpsertMaxObjectsPerBatch != null)
-            {
-               hashCode += this.BatchUpsertMaxObjectsPerBatch.GetHashCode();
-            }
-
-            if (this.BatchUpsertMaxTotalObjects != null)
-            {
-               hashCode += this.BatchUpsertMaxTotalObjects.GetHashCode();
-            }
-
-            if (this.BatchRetrieveMaxObjectIds != null)
-            {
-               hashCode += this.BatchRetrieveMaxObjectIds.GetHashCode();
-            }
-
-            if (this.SearchMaxPageLimit != null)
-            {
-               hashCode += this.SearchMaxPageLimit.GetHashCode();
-            }
-
-            if (this.BatchDeleteMaxObjectIds != null)
-            {
-               hashCode += this.BatchDeleteMaxObjectIds.GetHashCode();
-            }
-
-            if (this.UpdateItemTaxesMaxItemIds != null)
-            {
-               hashCode += this.UpdateItemTaxesMaxItemIds.GetHashCode();
-            }
-
-            if (this.UpdateItemTaxesMaxTaxesToEnable != null)
-            {
-               hashCode += this.UpdateItemTaxesMaxTaxesToEnable.GetHashCode();
-            }
-
-            if (this.UpdateItemTaxesMaxTaxesToDisable != null)
-            {
-               hashCode += this.UpdateItemTaxesMaxTaxesToDisable.GetHashCode();
-            }
-
-            if (this.UpdateItemModifierListsMaxItemIds != null)
-            {
-               hashCode += this.UpdateItemModifierListsMaxItemIds.GetHashCode();
-            }
-
-            if (this.UpdateItemModifierListsMaxModifierListsToEnable != null)
-            {
-               hashCode += this.UpdateItemModifierListsMaxModifierListsToEnable.GetHashCode();
-            }
-
-            if (this.UpdateItemModifierListsMaxModifierListsToDisable != null)
-            {
-               hashCode += this.UpdateItemModifierListsMaxModifierListsToDisable.GetHashCode();
-            }
+            hashCode = HashCode.Combine(hashCode, this.UpdateItemTaxesMaxTaxesToDisable, this.UpdateItemModifierListsMaxItemIds, this.UpdateItemModifierListsMaxModifierListsToEnable, this.UpdateItemModifierListsMaxModifierListsToDisable);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

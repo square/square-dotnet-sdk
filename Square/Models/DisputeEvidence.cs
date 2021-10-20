@@ -119,50 +119,16 @@ namespace Square.Models
                 ((this.UploadedAt == null && other.UploadedAt == null) || (this.UploadedAt?.Equals(other.UploadedAt) == true)) &&
                 ((this.EvidenceType == null && other.EvidenceType == null) || (this.EvidenceType?.Equals(other.EvidenceType) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 139359175;
-
-            if (this.EvidenceId != null)
-            {
-               hashCode += this.EvidenceId.GetHashCode();
-            }
-
-            if (this.Id != null)
-            {
-               hashCode += this.Id.GetHashCode();
-            }
-
-            if (this.DisputeId != null)
-            {
-               hashCode += this.DisputeId.GetHashCode();
-            }
-
-            if (this.EvidenceFile != null)
-            {
-               hashCode += this.EvidenceFile.GetHashCode();
-            }
-
-            if (this.EvidenceText != null)
-            {
-               hashCode += this.EvidenceText.GetHashCode();
-            }
-
-            if (this.UploadedAt != null)
-            {
-               hashCode += this.UploadedAt.GetHashCode();
-            }
-
-            if (this.EvidenceType != null)
-            {
-               hashCode += this.EvidenceType.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.EvidenceId, this.Id, this.DisputeId, this.EvidenceFile, this.EvidenceText, this.UploadedAt, this.EvidenceType);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

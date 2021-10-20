@@ -45,6 +45,7 @@ namespace Square.Models
         /// <param name="referenceId">reference_id.</param>
         /// <param name="customerId">customer_id.</param>
         /// <param name="employeeId">employee_id.</param>
+        /// <param name="teamMemberId">team_member_id.</param>
         /// <param name="refundIds">refund_ids.</param>
         /// <param name="riskEvaluation">risk_evaluation.</param>
         /// <param name="buyerEmailAddress">buyer_email_address.</param>
@@ -55,6 +56,8 @@ namespace Square.Models
         /// <param name="capabilities">capabilities.</param>
         /// <param name="receiptNumber">receipt_number.</param>
         /// <param name="receiptUrl">receipt_url.</param>
+        /// <param name="deviceDetails">device_details.</param>
+        /// <param name="applicationDetails">application_details.</param>
         /// <param name="versionToken">version_token.</param>
         public Payment(
             string id = null,
@@ -82,6 +85,7 @@ namespace Square.Models
             string referenceId = null,
             string customerId = null,
             string employeeId = null,
+            string teamMemberId = null,
             IList<string> refundIds = null,
             Models.RiskEvaluation riskEvaluation = null,
             string buyerEmailAddress = null,
@@ -92,6 +96,8 @@ namespace Square.Models
             IList<string> capabilities = null,
             string receiptNumber = null,
             string receiptUrl = null,
+            Models.DeviceDetails deviceDetails = null,
+            Models.ApplicationDetails applicationDetails = null,
             string versionToken = null)
         {
             this.Id = id;
@@ -119,6 +125,7 @@ namespace Square.Models
             this.ReferenceId = referenceId;
             this.CustomerId = customerId;
             this.EmployeeId = employeeId;
+            this.TeamMemberId = teamMemberId;
             this.RefundIds = refundIds;
             this.RiskEvaluation = riskEvaluation;
             this.BuyerEmailAddress = buyerEmailAddress;
@@ -129,6 +136,8 @@ namespace Square.Models
             this.Capabilities = capabilities;
             this.ReceiptNumber = receiptNumber;
             this.ReceiptUrl = receiptUrl;
+            this.DeviceDetails = deviceDetails;
+            this.ApplicationDetails = applicationDetails;
             this.VersionToken = versionToken;
         }
 
@@ -327,10 +336,17 @@ namespace Square.Models
         public string CustomerId { get; }
 
         /// <summary>
+        /// __Deprecated__: Use `Payment.team_member_id` instead.
         /// An optional ID of the employee associated with taking the payment.
         /// </summary>
         [JsonProperty("employee_id", NullValueHandling = NullValueHandling.Ignore)]
         public string EmployeeId { get; }
+
+        /// <summary>
+        /// An optional ID of the [TeamMember]($m/TeamMember) associated with taking the payment.
+        /// </summary>
+        [JsonProperty("team_member_id", NullValueHandling = NullValueHandling.Ignore)]
+        public string TeamMemberId { get; }
 
         /// <summary>
         /// A list of `refund_id`s identifying refunds for the payment.
@@ -455,6 +471,18 @@ namespace Square.Models
         public string ReceiptUrl { get; }
 
         /// <summary>
+        /// Details about the device that took the payment.
+        /// </summary>
+        [JsonProperty("device_details", NullValueHandling = NullValueHandling.Ignore)]
+        public Models.DeviceDetails DeviceDetails { get; }
+
+        /// <summary>
+        /// Details about the application that took the payment.
+        /// </summary>
+        [JsonProperty("application_details", NullValueHandling = NullValueHandling.Ignore)]
+        public Models.ApplicationDetails ApplicationDetails { get; }
+
+        /// <summary>
         /// Used for optimistic concurrency. This opaque token identifies a specific version of the
         /// `Payment` object.
         /// </summary>
@@ -510,6 +538,7 @@ namespace Square.Models
                 ((this.ReferenceId == null && other.ReferenceId == null) || (this.ReferenceId?.Equals(other.ReferenceId) == true)) &&
                 ((this.CustomerId == null && other.CustomerId == null) || (this.CustomerId?.Equals(other.CustomerId) == true)) &&
                 ((this.EmployeeId == null && other.EmployeeId == null) || (this.EmployeeId?.Equals(other.EmployeeId) == true)) &&
+                ((this.TeamMemberId == null && other.TeamMemberId == null) || (this.TeamMemberId?.Equals(other.TeamMemberId) == true)) &&
                 ((this.RefundIds == null && other.RefundIds == null) || (this.RefundIds?.Equals(other.RefundIds) == true)) &&
                 ((this.RiskEvaluation == null && other.RiskEvaluation == null) || (this.RiskEvaluation?.Equals(other.RiskEvaluation) == true)) &&
                 ((this.BuyerEmailAddress == null && other.BuyerEmailAddress == null) || (this.BuyerEmailAddress?.Equals(other.BuyerEmailAddress) == true)) &&
@@ -520,197 +549,30 @@ namespace Square.Models
                 ((this.Capabilities == null && other.Capabilities == null) || (this.Capabilities?.Equals(other.Capabilities) == true)) &&
                 ((this.ReceiptNumber == null && other.ReceiptNumber == null) || (this.ReceiptNumber?.Equals(other.ReceiptNumber) == true)) &&
                 ((this.ReceiptUrl == null && other.ReceiptUrl == null) || (this.ReceiptUrl?.Equals(other.ReceiptUrl) == true)) &&
+                ((this.DeviceDetails == null && other.DeviceDetails == null) || (this.DeviceDetails?.Equals(other.DeviceDetails) == true)) &&
+                ((this.ApplicationDetails == null && other.ApplicationDetails == null) || (this.ApplicationDetails?.Equals(other.ApplicationDetails) == true)) &&
                 ((this.VersionToken == null && other.VersionToken == null) || (this.VersionToken?.Equals(other.VersionToken) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1690238793;
+            int hashCode = 252401640;
+            hashCode = HashCode.Combine(this.Id, this.CreatedAt, this.UpdatedAt, this.AmountMoney, this.TipMoney, this.TotalMoney, this.AppFeeMoney);
 
-            if (this.Id != null)
-            {
-               hashCode += this.Id.GetHashCode();
-            }
+            hashCode = HashCode.Combine(hashCode, this.ApprovedMoney, this.ProcessingFee, this.RefundedMoney, this.Status, this.DelayDuration, this.DelayAction, this.DelayedUntil);
 
-            if (this.CreatedAt != null)
-            {
-               hashCode += this.CreatedAt.GetHashCode();
-            }
+            hashCode = HashCode.Combine(hashCode, this.SourceType, this.CardDetails, this.CashDetails, this.BankAccountDetails, this.ExternalDetails, this.WalletDetails, this.LocationId);
 
-            if (this.UpdatedAt != null)
-            {
-               hashCode += this.UpdatedAt.GetHashCode();
-            }
+            hashCode = HashCode.Combine(hashCode, this.OrderId, this.ReferenceId, this.CustomerId, this.EmployeeId, this.TeamMemberId, this.RefundIds, this.RiskEvaluation);
 
-            if (this.AmountMoney != null)
-            {
-               hashCode += this.AmountMoney.GetHashCode();
-            }
+            hashCode = HashCode.Combine(hashCode, this.BuyerEmailAddress, this.BillingAddress, this.ShippingAddress, this.Note, this.StatementDescriptionIdentifier, this.Capabilities, this.ReceiptNumber);
 
-            if (this.TipMoney != null)
-            {
-               hashCode += this.TipMoney.GetHashCode();
-            }
-
-            if (this.TotalMoney != null)
-            {
-               hashCode += this.TotalMoney.GetHashCode();
-            }
-
-            if (this.AppFeeMoney != null)
-            {
-               hashCode += this.AppFeeMoney.GetHashCode();
-            }
-
-            if (this.ApprovedMoney != null)
-            {
-               hashCode += this.ApprovedMoney.GetHashCode();
-            }
-
-            if (this.ProcessingFee != null)
-            {
-               hashCode += this.ProcessingFee.GetHashCode();
-            }
-
-            if (this.RefundedMoney != null)
-            {
-               hashCode += this.RefundedMoney.GetHashCode();
-            }
-
-            if (this.Status != null)
-            {
-               hashCode += this.Status.GetHashCode();
-            }
-
-            if (this.DelayDuration != null)
-            {
-               hashCode += this.DelayDuration.GetHashCode();
-            }
-
-            if (this.DelayAction != null)
-            {
-               hashCode += this.DelayAction.GetHashCode();
-            }
-
-            if (this.DelayedUntil != null)
-            {
-               hashCode += this.DelayedUntil.GetHashCode();
-            }
-
-            if (this.SourceType != null)
-            {
-               hashCode += this.SourceType.GetHashCode();
-            }
-
-            if (this.CardDetails != null)
-            {
-               hashCode += this.CardDetails.GetHashCode();
-            }
-
-            if (this.CashDetails != null)
-            {
-               hashCode += this.CashDetails.GetHashCode();
-            }
-
-            if (this.BankAccountDetails != null)
-            {
-               hashCode += this.BankAccountDetails.GetHashCode();
-            }
-
-            if (this.ExternalDetails != null)
-            {
-               hashCode += this.ExternalDetails.GetHashCode();
-            }
-
-            if (this.WalletDetails != null)
-            {
-               hashCode += this.WalletDetails.GetHashCode();
-            }
-
-            if (this.LocationId != null)
-            {
-               hashCode += this.LocationId.GetHashCode();
-            }
-
-            if (this.OrderId != null)
-            {
-               hashCode += this.OrderId.GetHashCode();
-            }
-
-            if (this.ReferenceId != null)
-            {
-               hashCode += this.ReferenceId.GetHashCode();
-            }
-
-            if (this.CustomerId != null)
-            {
-               hashCode += this.CustomerId.GetHashCode();
-            }
-
-            if (this.EmployeeId != null)
-            {
-               hashCode += this.EmployeeId.GetHashCode();
-            }
-
-            if (this.RefundIds != null)
-            {
-               hashCode += this.RefundIds.GetHashCode();
-            }
-
-            if (this.RiskEvaluation != null)
-            {
-               hashCode += this.RiskEvaluation.GetHashCode();
-            }
-
-            if (this.BuyerEmailAddress != null)
-            {
-               hashCode += this.BuyerEmailAddress.GetHashCode();
-            }
-
-            if (this.BillingAddress != null)
-            {
-               hashCode += this.BillingAddress.GetHashCode();
-            }
-
-            if (this.ShippingAddress != null)
-            {
-               hashCode += this.ShippingAddress.GetHashCode();
-            }
-
-            if (this.Note != null)
-            {
-               hashCode += this.Note.GetHashCode();
-            }
-
-            if (this.StatementDescriptionIdentifier != null)
-            {
-               hashCode += this.StatementDescriptionIdentifier.GetHashCode();
-            }
-
-            if (this.Capabilities != null)
-            {
-               hashCode += this.Capabilities.GetHashCode();
-            }
-
-            if (this.ReceiptNumber != null)
-            {
-               hashCode += this.ReceiptNumber.GetHashCode();
-            }
-
-            if (this.ReceiptUrl != null)
-            {
-               hashCode += this.ReceiptUrl.GetHashCode();
-            }
-
-            if (this.VersionToken != null)
-            {
-               hashCode += this.VersionToken.GetHashCode();
-            }
+            hashCode = HashCode.Combine(hashCode, this.ReceiptUrl, this.DeviceDetails, this.ApplicationDetails, this.VersionToken);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -742,6 +604,7 @@ namespace Square.Models
             toStringOutput.Add($"this.ReferenceId = {(this.ReferenceId == null ? "null" : this.ReferenceId == string.Empty ? "" : this.ReferenceId)}");
             toStringOutput.Add($"this.CustomerId = {(this.CustomerId == null ? "null" : this.CustomerId == string.Empty ? "" : this.CustomerId)}");
             toStringOutput.Add($"this.EmployeeId = {(this.EmployeeId == null ? "null" : this.EmployeeId == string.Empty ? "" : this.EmployeeId)}");
+            toStringOutput.Add($"this.TeamMemberId = {(this.TeamMemberId == null ? "null" : this.TeamMemberId == string.Empty ? "" : this.TeamMemberId)}");
             toStringOutput.Add($"this.RefundIds = {(this.RefundIds == null ? "null" : $"[{string.Join(", ", this.RefundIds)} ]")}");
             toStringOutput.Add($"this.RiskEvaluation = {(this.RiskEvaluation == null ? "null" : this.RiskEvaluation.ToString())}");
             toStringOutput.Add($"this.BuyerEmailAddress = {(this.BuyerEmailAddress == null ? "null" : this.BuyerEmailAddress == string.Empty ? "" : this.BuyerEmailAddress)}");
@@ -752,6 +615,8 @@ namespace Square.Models
             toStringOutput.Add($"this.Capabilities = {(this.Capabilities == null ? "null" : $"[{string.Join(", ", this.Capabilities)} ]")}");
             toStringOutput.Add($"this.ReceiptNumber = {(this.ReceiptNumber == null ? "null" : this.ReceiptNumber == string.Empty ? "" : this.ReceiptNumber)}");
             toStringOutput.Add($"this.ReceiptUrl = {(this.ReceiptUrl == null ? "null" : this.ReceiptUrl == string.Empty ? "" : this.ReceiptUrl)}");
+            toStringOutput.Add($"this.DeviceDetails = {(this.DeviceDetails == null ? "null" : this.DeviceDetails.ToString())}");
+            toStringOutput.Add($"this.ApplicationDetails = {(this.ApplicationDetails == null ? "null" : this.ApplicationDetails.ToString())}");
             toStringOutput.Add($"this.VersionToken = {(this.VersionToken == null ? "null" : this.VersionToken == string.Empty ? "" : this.VersionToken)}");
         }
 
@@ -787,6 +652,7 @@ namespace Square.Models
                 .ReferenceId(this.ReferenceId)
                 .CustomerId(this.CustomerId)
                 .EmployeeId(this.EmployeeId)
+                .TeamMemberId(this.TeamMemberId)
                 .RefundIds(this.RefundIds)
                 .RiskEvaluation(this.RiskEvaluation)
                 .BuyerEmailAddress(this.BuyerEmailAddress)
@@ -797,6 +663,8 @@ namespace Square.Models
                 .Capabilities(this.Capabilities)
                 .ReceiptNumber(this.ReceiptNumber)
                 .ReceiptUrl(this.ReceiptUrl)
+                .DeviceDetails(this.DeviceDetails)
+                .ApplicationDetails(this.ApplicationDetails)
                 .VersionToken(this.VersionToken);
             return builder;
         }
@@ -831,6 +699,7 @@ namespace Square.Models
             private string referenceId;
             private string customerId;
             private string employeeId;
+            private string teamMemberId;
             private IList<string> refundIds;
             private Models.RiskEvaluation riskEvaluation;
             private string buyerEmailAddress;
@@ -841,6 +710,8 @@ namespace Square.Models
             private IList<string> capabilities;
             private string receiptNumber;
             private string receiptUrl;
+            private Models.DeviceDetails deviceDetails;
+            private Models.ApplicationDetails applicationDetails;
             private string versionToken;
 
              /// <summary>
@@ -1119,6 +990,17 @@ namespace Square.Models
             }
 
              /// <summary>
+             /// TeamMemberId.
+             /// </summary>
+             /// <param name="teamMemberId"> teamMemberId. </param>
+             /// <returns> Builder. </returns>
+            public Builder TeamMemberId(string teamMemberId)
+            {
+                this.teamMemberId = teamMemberId;
+                return this;
+            }
+
+             /// <summary>
              /// RefundIds.
              /// </summary>
              /// <param name="refundIds"> refundIds. </param>
@@ -1229,6 +1111,28 @@ namespace Square.Models
             }
 
              /// <summary>
+             /// DeviceDetails.
+             /// </summary>
+             /// <param name="deviceDetails"> deviceDetails. </param>
+             /// <returns> Builder. </returns>
+            public Builder DeviceDetails(Models.DeviceDetails deviceDetails)
+            {
+                this.deviceDetails = deviceDetails;
+                return this;
+            }
+
+             /// <summary>
+             /// ApplicationDetails.
+             /// </summary>
+             /// <param name="applicationDetails"> applicationDetails. </param>
+             /// <returns> Builder. </returns>
+            public Builder ApplicationDetails(Models.ApplicationDetails applicationDetails)
+            {
+                this.applicationDetails = applicationDetails;
+                return this;
+            }
+
+             /// <summary>
              /// VersionToken.
              /// </summary>
              /// <param name="versionToken"> versionToken. </param>
@@ -1271,6 +1175,7 @@ namespace Square.Models
                     this.referenceId,
                     this.customerId,
                     this.employeeId,
+                    this.teamMemberId,
                     this.refundIds,
                     this.riskEvaluation,
                     this.buyerEmailAddress,
@@ -1281,6 +1186,8 @@ namespace Square.Models
                     this.capabilities,
                     this.receiptNumber,
                     this.receiptUrl,
+                    this.deviceDetails,
+                    this.applicationDetails,
                     this.versionToken);
             }
         }

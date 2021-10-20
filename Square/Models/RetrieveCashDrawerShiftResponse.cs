@@ -80,7 +80,7 @@ namespace Square.Models
                 ((this.CashDrawerShift == null && other.CashDrawerShift == null) || (this.CashDrawerShift?.Equals(other.CashDrawerShift) == true)) &&
                 ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
@@ -90,20 +90,11 @@ namespace Square.Models
             {
                 hashCode += this.Context.GetHashCode();
             }
-
-            if (this.CashDrawerShift != null)
-            {
-               hashCode += this.CashDrawerShift.GetHashCode();
-            }
-
-            if (this.Errors != null)
-            {
-               hashCode += this.Errors.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.CashDrawerShift, this.Errors);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

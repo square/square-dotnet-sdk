@@ -69,21 +69,16 @@ namespace Square.Models
                 this.Points.Equals(other.Points) &&
                 ((this.ExpiresAt == null && other.ExpiresAt == null) || (this.ExpiresAt?.Equals(other.ExpiresAt) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 1494271948;
-            hashCode += this.Points.GetHashCode();
-
-            if (this.ExpiresAt != null)
-            {
-               hashCode += this.ExpiresAt.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.Points, this.ExpiresAt);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

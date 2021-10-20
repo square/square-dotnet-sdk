@@ -115,45 +115,16 @@ namespace Square.Models
                 ((this.MeasurementUnit == null && other.MeasurementUnit == null) || (this.MeasurementUnit?.Equals(other.MeasurementUnit) == true)) &&
                 ((this.MeasurementUnitId == null && other.MeasurementUnitId == null) || (this.MeasurementUnitId?.Equals(other.MeasurementUnitId) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1147135160;
-
-            if (this.Type != null)
-            {
-               hashCode += this.Type.GetHashCode();
-            }
-
-            if (this.PhysicalCount != null)
-            {
-               hashCode += this.PhysicalCount.GetHashCode();
-            }
-
-            if (this.Adjustment != null)
-            {
-               hashCode += this.Adjustment.GetHashCode();
-            }
-
-            if (this.Transfer != null)
-            {
-               hashCode += this.Transfer.GetHashCode();
-            }
-
-            if (this.MeasurementUnit != null)
-            {
-               hashCode += this.MeasurementUnit.GetHashCode();
-            }
-
-            if (this.MeasurementUnitId != null)
-            {
-               hashCode += this.MeasurementUnitId.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.Type, this.PhysicalCount, this.Adjustment, this.Transfer, this.MeasurementUnit, this.MeasurementUnitId);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

@@ -197,65 +197,18 @@ namespace Square.Models
                 ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true)) &&
                 ((this.AdditionalRecipients == null && other.AdditionalRecipients == null) || (this.AdditionalRecipients?.Equals(other.AdditionalRecipients) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 1629433824;
+            hashCode = HashCode.Combine(this.Id, this.CheckoutPageUrl, this.AskForShippingAddress, this.MerchantSupportEmail, this.PrePopulateBuyerEmail, this.PrePopulateShippingAddress, this.RedirectUrl);
 
-            if (this.Id != null)
-            {
-               hashCode += this.Id.GetHashCode();
-            }
-
-            if (this.CheckoutPageUrl != null)
-            {
-               hashCode += this.CheckoutPageUrl.GetHashCode();
-            }
-
-            if (this.AskForShippingAddress != null)
-            {
-               hashCode += this.AskForShippingAddress.GetHashCode();
-            }
-
-            if (this.MerchantSupportEmail != null)
-            {
-               hashCode += this.MerchantSupportEmail.GetHashCode();
-            }
-
-            if (this.PrePopulateBuyerEmail != null)
-            {
-               hashCode += this.PrePopulateBuyerEmail.GetHashCode();
-            }
-
-            if (this.PrePopulateShippingAddress != null)
-            {
-               hashCode += this.PrePopulateShippingAddress.GetHashCode();
-            }
-
-            if (this.RedirectUrl != null)
-            {
-               hashCode += this.RedirectUrl.GetHashCode();
-            }
-
-            if (this.Order != null)
-            {
-               hashCode += this.Order.GetHashCode();
-            }
-
-            if (this.CreatedAt != null)
-            {
-               hashCode += this.CreatedAt.GetHashCode();
-            }
-
-            if (this.AdditionalRecipients != null)
-            {
-               hashCode += this.AdditionalRecipients.GetHashCode();
-            }
+            hashCode = HashCode.Combine(hashCode, this.Order, this.CreatedAt, this.AdditionalRecipients);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

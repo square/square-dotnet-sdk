@@ -135,55 +135,18 @@ namespace Square.Models
                 ((this.RoundingAdjustment == null && other.RoundingAdjustment == null) || (this.RoundingAdjustment?.Equals(other.RoundingAdjustment) == true)) &&
                 ((this.ReturnAmounts == null && other.ReturnAmounts == null) || (this.ReturnAmounts?.Equals(other.ReturnAmounts) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 2075174143;
+            hashCode = HashCode.Combine(this.Uid, this.SourceOrderId, this.ReturnLineItems, this.ReturnServiceCharges, this.ReturnTaxes, this.ReturnDiscounts, this.RoundingAdjustment);
 
-            if (this.Uid != null)
-            {
-               hashCode += this.Uid.GetHashCode();
-            }
-
-            if (this.SourceOrderId != null)
-            {
-               hashCode += this.SourceOrderId.GetHashCode();
-            }
-
-            if (this.ReturnLineItems != null)
-            {
-               hashCode += this.ReturnLineItems.GetHashCode();
-            }
-
-            if (this.ReturnServiceCharges != null)
-            {
-               hashCode += this.ReturnServiceCharges.GetHashCode();
-            }
-
-            if (this.ReturnTaxes != null)
-            {
-               hashCode += this.ReturnTaxes.GetHashCode();
-            }
-
-            if (this.ReturnDiscounts != null)
-            {
-               hashCode += this.ReturnDiscounts.GetHashCode();
-            }
-
-            if (this.RoundingAdjustment != null)
-            {
-               hashCode += this.RoundingAdjustment.GetHashCode();
-            }
-
-            if (this.ReturnAmounts != null)
-            {
-               hashCode += this.ReturnAmounts.GetHashCode();
-            }
+            hashCode = HashCode.Combine(hashCode, this.ReturnAmounts);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

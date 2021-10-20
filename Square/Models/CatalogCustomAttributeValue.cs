@@ -130,55 +130,18 @@ namespace Square.Models
                 ((this.SelectionUidValues == null && other.SelectionUidValues == null) || (this.SelectionUidValues?.Equals(other.SelectionUidValues) == true)) &&
                 ((this.Key == null && other.Key == null) || (this.Key?.Equals(other.Key) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 1910658984;
+            hashCode = HashCode.Combine(this.Name, this.StringValue, this.CustomAttributeDefinitionId, this.Type, this.NumberValue, this.BooleanValue, this.SelectionUidValues);
 
-            if (this.Name != null)
-            {
-               hashCode += this.Name.GetHashCode();
-            }
-
-            if (this.StringValue != null)
-            {
-               hashCode += this.StringValue.GetHashCode();
-            }
-
-            if (this.CustomAttributeDefinitionId != null)
-            {
-               hashCode += this.CustomAttributeDefinitionId.GetHashCode();
-            }
-
-            if (this.Type != null)
-            {
-               hashCode += this.Type.GetHashCode();
-            }
-
-            if (this.NumberValue != null)
-            {
-               hashCode += this.NumberValue.GetHashCode();
-            }
-
-            if (this.BooleanValue != null)
-            {
-               hashCode += this.BooleanValue.GetHashCode();
-            }
-
-            if (this.SelectionUidValues != null)
-            {
-               hashCode += this.SelectionUidValues.GetHashCode();
-            }
-
-            if (this.Key != null)
-            {
-               hashCode += this.Key.GetHashCode();
-            }
+            hashCode = HashCode.Combine(hashCode, this.Key);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

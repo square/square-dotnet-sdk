@@ -36,7 +36,7 @@ namespace Square.Apis
 
         /// <summary>
         /// Lists all gift cards. You can specify optional filters to retrieve .
-        /// a subset of the gift cards..
+        /// a subset of the gift cards.
         /// </summary>
         /// <param name="type">Optional parameter: If a type is provided, gift cards of this type are returned  (see [GiftCardType]($m/GiftCardType)). If no type is provided, it returns gift cards of all types..</param>
         /// <param name="state">Optional parameter: If the state is provided, it returns the gift cards in the specified state  (see [GiftCardStatus]($m/GiftCardStatus)). Otherwise, it returns the gift cards of all states..</param>
@@ -58,7 +58,7 @@ namespace Square.Apis
 
         /// <summary>
         /// Lists all gift cards. You can specify optional filters to retrieve .
-        /// a subset of the gift cards..
+        /// a subset of the gift cards.
         /// </summary>
         /// <param name="type">Optional parameter: If a type is provided, gift cards of this type are returned  (see [GiftCardType]($m/GiftCardType)). If no type is provided, it returns gift cards of all types..</param>
         /// <param name="state">Optional parameter: If the state is provided, it returns the gift cards in the specified state  (see [GiftCardStatus]($m/GiftCardStatus)). Otherwise, it returns the gift cards of all states..</param>
@@ -129,7 +129,7 @@ namespace Square.Apis
         /// <summary>
         /// Creates a digital gift card or registers a physical (plastic) gift card. You must activate the gift card before .
         /// it can be used for payment. For more information, see .
-        /// [Selling gift cards](https://developer.squareup.com/docs/gift-cards/using-gift-cards-api#selling-square-gift-cards)..
+        /// [Selling gift cards](https://developer.squareup.com/docs/gift-cards/using-gift-cards-api#selling-square-gift-cards).
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <returns>Returns the Models.CreateGiftCardResponse response from the API call.</returns>
@@ -144,7 +144,7 @@ namespace Square.Apis
         /// <summary>
         /// Creates a digital gift card or registers a physical (plastic) gift card. You must activate the gift card before .
         /// it can be used for payment. For more information, see .
-        /// [Selling gift cards](https://developer.squareup.com/docs/gift-cards/using-gift-cards-api#selling-square-gift-cards)..
+        /// [Selling gift cards](https://developer.squareup.com/docs/gift-cards/using-gift-cards-api#selling-square-gift-cards).
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
@@ -199,7 +199,7 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Retrieves a gift card using the gift card account number (GAN)..
+        /// Retrieves a gift card using the gift card account number (GAN).
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <returns>Returns the Models.RetrieveGiftCardFromGANResponse response from the API call.</returns>
@@ -212,7 +212,7 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Retrieves a gift card using the gift card account number (GAN)..
+        /// Retrieves a gift card using the gift card account number (GAN).
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
@@ -267,7 +267,7 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Retrieves a gift card using a nonce (a secure token) that represents the gift card..
+        /// Retrieves a gift card using a nonce (a secure token) that represents the gift card.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <returns>Returns the Models.RetrieveGiftCardFromNonceResponse response from the API call.</returns>
@@ -280,7 +280,7 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Retrieves a gift card using a nonce (a secure token) that represents the gift card..
+        /// Retrieves a gift card using a nonce (a secure token) that represents the gift card.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
@@ -491,7 +491,7 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Retrieves a gift card using its ID..
+        /// Retrieves a gift card using its ID.
         /// </summary>
         /// <param name="id">Required parameter: The ID of the gift card to retrieve..</param>
         /// <returns>Returns the Models.RetrieveGiftCardResponse response from the API call.</returns>
@@ -504,7 +504,7 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Retrieves a gift card using its ID..
+        /// Retrieves a gift card using its ID.
         /// </summary>
         /// <param name="id">Required parameter: The ID of the gift card to retrieve..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>

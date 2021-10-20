@@ -86,30 +86,16 @@ namespace Square.Models
                 ((this.Changes == null && other.Changes == null) || (this.Changes?.Equals(other.Changes) == true)) &&
                 ((this.IgnoreUnchangedCounts == null && other.IgnoreUnchangedCounts == null) || (this.IgnoreUnchangedCounts?.Equals(other.IgnoreUnchangedCounts) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 1934758425;
-
-            if (this.IdempotencyKey != null)
-            {
-               hashCode += this.IdempotencyKey.GetHashCode();
-            }
-
-            if (this.Changes != null)
-            {
-               hashCode += this.Changes.GetHashCode();
-            }
-
-            if (this.IgnoreUnchangedCounts != null)
-            {
-               hashCode += this.IgnoreUnchangedCounts.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.IdempotencyKey, this.Changes, this.IgnoreUnchangedCounts);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

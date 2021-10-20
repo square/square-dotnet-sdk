@@ -215,95 +215,20 @@ namespace Square.Models
                 ((this.Version == null && other.Version == null) || (this.Version?.Equals(other.Version) == true)) &&
                 ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 1811133941;
+            hashCode = HashCode.Combine(this.DisputeId, this.Id, this.AmountMoney, this.Reason, this.State, this.DueAt, this.DisputedPayment);
 
-            if (this.DisputeId != null)
-            {
-               hashCode += this.DisputeId.GetHashCode();
-            }
+            hashCode = HashCode.Combine(hashCode, this.EvidenceIds, this.CardBrand, this.CreatedAt, this.UpdatedAt, this.BrandDisputeId, this.ReportedDate, this.ReportedAt);
 
-            if (this.Id != null)
-            {
-               hashCode += this.Id.GetHashCode();
-            }
-
-            if (this.AmountMoney != null)
-            {
-               hashCode += this.AmountMoney.GetHashCode();
-            }
-
-            if (this.Reason != null)
-            {
-               hashCode += this.Reason.GetHashCode();
-            }
-
-            if (this.State != null)
-            {
-               hashCode += this.State.GetHashCode();
-            }
-
-            if (this.DueAt != null)
-            {
-               hashCode += this.DueAt.GetHashCode();
-            }
-
-            if (this.DisputedPayment != null)
-            {
-               hashCode += this.DisputedPayment.GetHashCode();
-            }
-
-            if (this.EvidenceIds != null)
-            {
-               hashCode += this.EvidenceIds.GetHashCode();
-            }
-
-            if (this.CardBrand != null)
-            {
-               hashCode += this.CardBrand.GetHashCode();
-            }
-
-            if (this.CreatedAt != null)
-            {
-               hashCode += this.CreatedAt.GetHashCode();
-            }
-
-            if (this.UpdatedAt != null)
-            {
-               hashCode += this.UpdatedAt.GetHashCode();
-            }
-
-            if (this.BrandDisputeId != null)
-            {
-               hashCode += this.BrandDisputeId.GetHashCode();
-            }
-
-            if (this.ReportedDate != null)
-            {
-               hashCode += this.ReportedDate.GetHashCode();
-            }
-
-            if (this.ReportedAt != null)
-            {
-               hashCode += this.ReportedAt.GetHashCode();
-            }
-
-            if (this.Version != null)
-            {
-               hashCode += this.Version.GetHashCode();
-            }
-
-            if (this.LocationId != null)
-            {
-               hashCode += this.LocationId.GetHashCode();
-            }
+            hashCode = HashCode.Combine(hashCode, this.Version, this.LocationId);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

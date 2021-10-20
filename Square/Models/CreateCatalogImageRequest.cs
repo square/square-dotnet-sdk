@@ -88,30 +88,16 @@ namespace Square.Models
                 ((this.ObjectId == null && other.ObjectId == null) || (this.ObjectId?.Equals(other.ObjectId) == true)) &&
                 ((this.Image == null && other.Image == null) || (this.Image?.Equals(other.Image) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 1867152760;
-
-            if (this.IdempotencyKey != null)
-            {
-               hashCode += this.IdempotencyKey.GetHashCode();
-            }
-
-            if (this.ObjectId != null)
-            {
-               hashCode += this.ObjectId.GetHashCode();
-            }
-
-            if (this.Image != null)
-            {
-               hashCode += this.Image.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.IdempotencyKey, this.ObjectId, this.Image);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

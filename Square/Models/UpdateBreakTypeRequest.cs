@@ -60,20 +60,16 @@ namespace Square.Models
             return obj is UpdateBreakTypeRequest other &&
                 ((this.BreakType == null && other.BreakType == null) || (this.BreakType?.Equals(other.BreakType) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -934394320;
-
-            if (this.BreakType != null)
-            {
-               hashCode += this.BreakType.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.BreakType);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

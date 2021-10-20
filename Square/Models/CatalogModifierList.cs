@@ -92,35 +92,16 @@ namespace Square.Models
                 ((this.SelectionType == null && other.SelectionType == null) || (this.SelectionType?.Equals(other.SelectionType) == true)) &&
                 ((this.Modifiers == null && other.Modifiers == null) || (this.Modifiers?.Equals(other.Modifiers) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 1257227706;
-
-            if (this.Name != null)
-            {
-               hashCode += this.Name.GetHashCode();
-            }
-
-            if (this.Ordinal != null)
-            {
-               hashCode += this.Ordinal.GetHashCode();
-            }
-
-            if (this.SelectionType != null)
-            {
-               hashCode += this.SelectionType.GetHashCode();
-            }
-
-            if (this.Modifiers != null)
-            {
-               hashCode += this.Modifiers.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.Name, this.Ordinal, this.SelectionType, this.Modifiers);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

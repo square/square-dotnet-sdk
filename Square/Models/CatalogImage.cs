@@ -86,30 +86,16 @@ namespace Square.Models
                 ((this.Url == null && other.Url == null) || (this.Url?.Equals(other.Url) == true)) &&
                 ((this.Caption == null && other.Caption == null) || (this.Caption?.Equals(other.Caption) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -261675541;
-
-            if (this.Name != null)
-            {
-               hashCode += this.Name.GetHashCode();
-            }
-
-            if (this.Url != null)
-            {
-               hashCode += this.Url.GetHashCode();
-            }
-
-            if (this.Caption != null)
-            {
-               hashCode += this.Caption.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.Name, this.Url, this.Caption);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

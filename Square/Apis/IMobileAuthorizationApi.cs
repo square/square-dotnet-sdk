@@ -21,13 +21,13 @@ namespace Square.Apis
     {
         /// <summary>
         /// Generates code to authorize a mobile application to connect to a Square card reader.
-        /// Authorization codes are one-time-use and expire __60 minutes__ after being issued..
+        /// Authorization codes are one-time-use and expire __60 minutes__ after being issued.
         /// __Important:__ The `Authorization` header you provide to this endpoint must have the following format:.
         /// ```.
         /// Authorization: Bearer ACCESS_TOKEN.
         /// ```.
         /// Replace `ACCESS_TOKEN` with a.
-        /// [valid production authorization credential](https://developer.squareup.com/docs/build-basics/access-tokens)..
+        /// [valid production authorization credential](https://developer.squareup.com/docs/build-basics/access-tokens).
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <returns>Returns the Models.CreateMobileAuthorizationCodeResponse response from the API call.</returns>
@@ -36,13 +36,13 @@ namespace Square.Apis
 
         /// <summary>
         /// Generates code to authorize a mobile application to connect to a Square card reader.
-        /// Authorization codes are one-time-use and expire __60 minutes__ after being issued..
+        /// Authorization codes are one-time-use and expire __60 minutes__ after being issued.
         /// __Important:__ The `Authorization` header you provide to this endpoint must have the following format:.
         /// ```.
         /// Authorization: Bearer ACCESS_TOKEN.
         /// ```.
         /// Replace `ACCESS_TOKEN` with a.
-        /// [valid production authorization credential](https://developer.squareup.com/docs/build-basics/access-tokens)..
+        /// [valid production authorization credential](https://developer.squareup.com/docs/build-basics/access-tokens).
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>

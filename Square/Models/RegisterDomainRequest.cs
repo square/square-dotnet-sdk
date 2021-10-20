@@ -59,20 +59,16 @@ namespace Square.Models
             return obj is RegisterDomainRequest other &&
                 ((this.DomainName == null && other.DomainName == null) || (this.DomainName?.Equals(other.DomainName) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 1345788057;
-
-            if (this.DomainName != null)
-            {
-               hashCode += this.DomainName.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.DomainName);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

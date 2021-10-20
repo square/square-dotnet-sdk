@@ -20,10 +20,10 @@ namespace Square.Apis
     public interface IPaymentsApi
     {
         /// <summary>
-        /// Retrieves a list of payments taken by the account making the request..
+        /// Retrieves a list of payments taken by the account making the request.
         /// Results are eventually consistent, and new payments or changes to payments might take several.
-        /// seconds to appear..
-        /// The maximum results per page is 100..
+        /// seconds to appear.
+        /// The maximum results per page is 100.
         /// </summary>
         /// <param name="beginTime">Optional parameter: The timestamp for the beginning of the reporting period, in RFC 3339 format. Inclusive. Default: The current time minus one year..</param>
         /// <param name="endTime">Optional parameter: The timestamp for the end of the reporting period, in RFC 3339 format.  Default: The current time..</param>
@@ -47,10 +47,10 @@ namespace Square.Apis
                 int? limit = null);
 
         /// <summary>
-        /// Retrieves a list of payments taken by the account making the request..
+        /// Retrieves a list of payments taken by the account making the request.
         /// Results are eventually consistent, and new payments or changes to payments might take several.
-        /// seconds to appear..
-        /// The maximum results per page is 100..
+        /// seconds to appear.
+        /// The maximum results per page is 100.
         /// </summary>
         /// <param name="beginTime">Optional parameter: The timestamp for the beginning of the reporting period, in RFC 3339 format. Inclusive. Default: The current time minus one year..</param>
         /// <param name="endTime">Optional parameter: The timestamp for the end of the reporting period, in RFC 3339 format.  Default: The current time..</param>
@@ -80,9 +80,9 @@ namespace Square.Apis
         /// to charge a card (credit/debit card or    .
         /// Square gift card) or record a payment that the seller received outside of Square .
         /// (cash payment from a buyer or a payment that an external entity .
-        /// processed on behalf of the seller)..
+        /// processed on behalf of the seller).
         /// The endpoint creates a .
-        /// `Payment` object and returns it in the response..
+        /// `Payment` object and returns it in the response.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <returns>Returns the Models.CreatePaymentResponse response from the API call.</returns>
@@ -94,9 +94,9 @@ namespace Square.Apis
         /// to charge a card (credit/debit card or    .
         /// Square gift card) or record a payment that the seller received outside of Square .
         /// (cash payment from a buyer or a payment that an external entity .
-        /// processed on behalf of the seller)..
+        /// processed on behalf of the seller).
         /// The endpoint creates a .
-        /// `Payment` object and returns it in the response..
+        /// `Payment` object and returns it in the response.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
@@ -107,14 +107,14 @@ namespace Square.Apis
 
         /// <summary>
         /// Cancels (voids) a payment identified by the idempotency key that is specified in the.
-        /// request..
+        /// request.
         /// Use this method when the status of a `CreatePayment` request is unknown (for example, after you send a.
         /// `CreatePayment` request, a network error occurs and you do not get a response). In this case, you can.
         /// direct Square to cancel the payment using this endpoint. In the request, you provide the same.
         /// idempotency key that you provided in your `CreatePayment` request that you want to cancel. After.
-        /// canceling the payment, you can submit your `CreatePayment` request again..
+        /// canceling the payment, you can submit your `CreatePayment` request again.
         /// Note that if no payment with the specified idempotency key is found, no action is taken and the endpoint.
-        /// returns successfully..
+        /// returns successfully.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <returns>Returns the Models.CancelPaymentByIdempotencyKeyResponse response from the API call.</returns>
@@ -123,14 +123,14 @@ namespace Square.Apis
 
         /// <summary>
         /// Cancels (voids) a payment identified by the idempotency key that is specified in the.
-        /// request..
+        /// request.
         /// Use this method when the status of a `CreatePayment` request is unknown (for example, after you send a.
         /// `CreatePayment` request, a network error occurs and you do not get a response). In this case, you can.
         /// direct Square to cancel the payment using this endpoint. In the request, you provide the same.
         /// idempotency key that you provided in your `CreatePayment` request that you want to cancel. After.
-        /// canceling the payment, you can submit your `CreatePayment` request again..
+        /// canceling the payment, you can submit your `CreatePayment` request again.
         /// Note that if no payment with the specified idempotency key is found, no action is taken and the endpoint.
-        /// returns successfully..
+        /// returns successfully.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
@@ -140,7 +140,7 @@ namespace Square.Apis
                 CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Retrieves details for a specific payment..
+        /// Retrieves details for a specific payment.
         /// </summary>
         /// <param name="paymentId">Required parameter: A unique ID for the desired payment..</param>
         /// <returns>Returns the Models.GetPaymentResponse response from the API call.</returns>
@@ -148,7 +148,7 @@ namespace Square.Apis
                 string paymentId);
 
         /// <summary>
-        /// Retrieves details for a specific payment..
+        /// Retrieves details for a specific payment.
         /// </summary>
         /// <param name="paymentId">Required parameter: A unique ID for the desired payment..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
@@ -158,8 +158,8 @@ namespace Square.Apis
                 CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Updates a payment with the APPROVED status..
-        /// You can update the `amount_money` and `tip_money` using this endpoint..
+        /// Updates a payment with the APPROVED status.
+        /// You can update the `amount_money` and `tip_money` using this endpoint.
         /// </summary>
         /// <param name="paymentId">Required parameter: The ID of the payment to update..</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
@@ -169,8 +169,8 @@ namespace Square.Apis
                 Models.UpdatePaymentRequest body);
 
         /// <summary>
-        /// Updates a payment with the APPROVED status..
-        /// You can update the `amount_money` and `tip_money` using this endpoint..
+        /// Updates a payment with the APPROVED status.
+        /// You can update the `amount_money` and `tip_money` using this endpoint.
         /// </summary>
         /// <param name="paymentId">Required parameter: The ID of the payment to update..</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
@@ -183,7 +183,7 @@ namespace Square.Apis
 
         /// <summary>
         /// Cancels (voids) a payment. You can use this endpoint to cancel a payment with .
-        /// the APPROVED `status`..
+        /// the APPROVED `status`.
         /// </summary>
         /// <param name="paymentId">Required parameter: The ID of the payment to cancel..</param>
         /// <returns>Returns the Models.CancelPaymentResponse response from the API call.</returns>
@@ -192,7 +192,7 @@ namespace Square.Apis
 
         /// <summary>
         /// Cancels (voids) a payment. You can use this endpoint to cancel a payment with .
-        /// the APPROVED `status`..
+        /// the APPROVED `status`.
         /// </summary>
         /// <param name="paymentId">Required parameter: The ID of the payment to cancel..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
@@ -202,25 +202,29 @@ namespace Square.Apis
                 CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Completes (captures) a payment..
-        /// By default, payments are set to complete immediately after they are created..
-        /// You can use this endpoint to complete a payment with the APPROVED `status`..
+        /// Completes (captures) a payment.
+        /// By default, payments are set to complete immediately after they are created.
+        /// You can use this endpoint to complete a payment with the APPROVED `status`.
         /// </summary>
         /// <param name="paymentId">Required parameter: The unique ID identifying the payment to be completed..</param>
+        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <returns>Returns the Models.CompletePaymentResponse response from the API call.</returns>
         Models.CompletePaymentResponse CompletePayment(
-                string paymentId);
+                string paymentId,
+                Models.CompletePaymentRequest body);
 
         /// <summary>
-        /// Completes (captures) a payment..
-        /// By default, payments are set to complete immediately after they are created..
-        /// You can use this endpoint to complete a payment with the APPROVED `status`..
+        /// Completes (captures) a payment.
+        /// By default, payments are set to complete immediately after they are created.
+        /// You can use this endpoint to complete a payment with the APPROVED `status`.
         /// </summary>
         /// <param name="paymentId">Required parameter: The unique ID identifying the payment to be completed..</param>
+        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the Models.CompletePaymentResponse response from the API call.</returns>
         Task<Models.CompletePaymentResponse> CompletePaymentAsync(
                 string paymentId,
+                Models.CompletePaymentRequest body,
                 CancellationToken cancellationToken = default);
     }
 }

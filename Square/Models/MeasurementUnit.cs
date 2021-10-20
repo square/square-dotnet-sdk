@@ -129,55 +129,18 @@ namespace Square.Models
                 ((this.TimeUnit == null && other.TimeUnit == null) || (this.TimeUnit?.Equals(other.TimeUnit) == true)) &&
                 ((this.Type == null && other.Type == null) || (this.Type?.Equals(other.Type) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1167462471;
+            hashCode = HashCode.Combine(this.CustomUnit, this.AreaUnit, this.LengthUnit, this.VolumeUnit, this.WeightUnit, this.GenericUnit, this.TimeUnit);
 
-            if (this.CustomUnit != null)
-            {
-               hashCode += this.CustomUnit.GetHashCode();
-            }
-
-            if (this.AreaUnit != null)
-            {
-               hashCode += this.AreaUnit.GetHashCode();
-            }
-
-            if (this.LengthUnit != null)
-            {
-               hashCode += this.LengthUnit.GetHashCode();
-            }
-
-            if (this.VolumeUnit != null)
-            {
-               hashCode += this.VolumeUnit.GetHashCode();
-            }
-
-            if (this.WeightUnit != null)
-            {
-               hashCode += this.WeightUnit.GetHashCode();
-            }
-
-            if (this.GenericUnit != null)
-            {
-               hashCode += this.GenericUnit.GetHashCode();
-            }
-
-            if (this.TimeUnit != null)
-            {
-               hashCode += this.TimeUnit.GetHashCode();
-            }
-
-            if (this.Type != null)
-            {
-               hashCode += this.Type.GetHashCode();
-            }
+            hashCode = HashCode.Combine(hashCode, this.Type);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

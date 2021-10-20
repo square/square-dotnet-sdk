@@ -69,25 +69,16 @@ namespace Square.Models
                 ((this.Filename == null && other.Filename == null) || (this.Filename?.Equals(other.Filename) == true)) &&
                 ((this.Filetype == null && other.Filetype == null) || (this.Filetype?.Equals(other.Filetype) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 868250934;
-
-            if (this.Filename != null)
-            {
-               hashCode += this.Filename.GetHashCode();
-            }
-
-            if (this.Filetype != null)
-            {
-               hashCode += this.Filetype.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.Filename, this.Filetype);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

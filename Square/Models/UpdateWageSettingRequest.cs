@@ -59,20 +59,16 @@ namespace Square.Models
             return obj is UpdateWageSettingRequest other &&
                 ((this.WageSetting == null && other.WageSetting == null) || (this.WageSetting?.Equals(other.WageSetting) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 316748925;
-
-            if (this.WageSetting != null)
-            {
-               hashCode += this.WageSetting.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.WageSetting);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

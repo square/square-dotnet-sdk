@@ -207,90 +207,20 @@ namespace Square.Models
                 ((this.LastName == null && other.LastName == null) || (this.LastName?.Equals(other.LastName) == true)) &&
                 ((this.Organization == null && other.Organization == null) || (this.Organization?.Equals(other.Organization) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1623438759;
+            hashCode = HashCode.Combine(this.AddressLine1, this.AddressLine2, this.AddressLine3, this.Locality, this.Sublocality, this.Sublocality2, this.Sublocality3);
 
-            if (this.AddressLine1 != null)
-            {
-               hashCode += this.AddressLine1.GetHashCode();
-            }
+            hashCode = HashCode.Combine(hashCode, this.AdministrativeDistrictLevel1, this.AdministrativeDistrictLevel2, this.AdministrativeDistrictLevel3, this.PostalCode, this.Country, this.FirstName, this.LastName);
 
-            if (this.AddressLine2 != null)
-            {
-               hashCode += this.AddressLine2.GetHashCode();
-            }
-
-            if (this.AddressLine3 != null)
-            {
-               hashCode += this.AddressLine3.GetHashCode();
-            }
-
-            if (this.Locality != null)
-            {
-               hashCode += this.Locality.GetHashCode();
-            }
-
-            if (this.Sublocality != null)
-            {
-               hashCode += this.Sublocality.GetHashCode();
-            }
-
-            if (this.Sublocality2 != null)
-            {
-               hashCode += this.Sublocality2.GetHashCode();
-            }
-
-            if (this.Sublocality3 != null)
-            {
-               hashCode += this.Sublocality3.GetHashCode();
-            }
-
-            if (this.AdministrativeDistrictLevel1 != null)
-            {
-               hashCode += this.AdministrativeDistrictLevel1.GetHashCode();
-            }
-
-            if (this.AdministrativeDistrictLevel2 != null)
-            {
-               hashCode += this.AdministrativeDistrictLevel2.GetHashCode();
-            }
-
-            if (this.AdministrativeDistrictLevel3 != null)
-            {
-               hashCode += this.AdministrativeDistrictLevel3.GetHashCode();
-            }
-
-            if (this.PostalCode != null)
-            {
-               hashCode += this.PostalCode.GetHashCode();
-            }
-
-            if (this.Country != null)
-            {
-               hashCode += this.Country.GetHashCode();
-            }
-
-            if (this.FirstName != null)
-            {
-               hashCode += this.FirstName.GetHashCode();
-            }
-
-            if (this.LastName != null)
-            {
-               hashCode += this.LastName.GetHashCode();
-            }
-
-            if (this.Organization != null)
-            {
-               hashCode += this.Organization.GetHashCode();
-            }
+            hashCode = HashCode.Combine(hashCode, this.Organization);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

@@ -187,80 +187,18 @@ namespace Square.Models
                 ((this.UpdatedAt == null && other.UpdatedAt == null) || (this.UpdatedAt?.Equals(other.UpdatedAt) == true)) &&
                 ((this.TeamMemberId == null && other.TeamMemberId == null) || (this.TeamMemberId?.Equals(other.TeamMemberId) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1338935965;
+            hashCode = HashCode.Combine(this.Id, this.EmployeeId, this.LocationId, this.Timezone, this.StartAt, this.EndAt, this.Wage);
 
-            if (this.Id != null)
-            {
-               hashCode += this.Id.GetHashCode();
-            }
-
-            if (this.EmployeeId != null)
-            {
-               hashCode += this.EmployeeId.GetHashCode();
-            }
-
-            if (this.LocationId != null)
-            {
-               hashCode += this.LocationId.GetHashCode();
-            }
-
-            if (this.Timezone != null)
-            {
-               hashCode += this.Timezone.GetHashCode();
-            }
-
-            if (this.StartAt != null)
-            {
-               hashCode += this.StartAt.GetHashCode();
-            }
-
-            if (this.EndAt != null)
-            {
-               hashCode += this.EndAt.GetHashCode();
-            }
-
-            if (this.Wage != null)
-            {
-               hashCode += this.Wage.GetHashCode();
-            }
-
-            if (this.Breaks != null)
-            {
-               hashCode += this.Breaks.GetHashCode();
-            }
-
-            if (this.Status != null)
-            {
-               hashCode += this.Status.GetHashCode();
-            }
-
-            if (this.Version != null)
-            {
-               hashCode += this.Version.GetHashCode();
-            }
-
-            if (this.CreatedAt != null)
-            {
-               hashCode += this.CreatedAt.GetHashCode();
-            }
-
-            if (this.UpdatedAt != null)
-            {
-               hashCode += this.UpdatedAt.GetHashCode();
-            }
-
-            if (this.TeamMemberId != null)
-            {
-               hashCode += this.TeamMemberId.GetHashCode();
-            }
+            hashCode = HashCode.Combine(hashCode, this.Breaks, this.Status, this.Version, this.CreatedAt, this.UpdatedAt, this.TeamMemberId);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

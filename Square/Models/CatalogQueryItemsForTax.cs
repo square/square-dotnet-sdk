@@ -59,20 +59,16 @@ namespace Square.Models
             return obj is CatalogQueryItemsForTax other &&
                 ((this.TaxIds == null && other.TaxIds == null) || (this.TaxIds?.Equals(other.TaxIds) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 507867183;
-
-            if (this.TaxIds != null)
-            {
-               hashCode += this.TaxIds.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.TaxIds);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

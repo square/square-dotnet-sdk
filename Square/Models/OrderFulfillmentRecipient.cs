@@ -132,40 +132,16 @@ namespace Square.Models
                 ((this.PhoneNumber == null && other.PhoneNumber == null) || (this.PhoneNumber?.Equals(other.PhoneNumber) == true)) &&
                 ((this.Address == null && other.Address == null) || (this.Address?.Equals(other.Address) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1654316684;
-
-            if (this.CustomerId != null)
-            {
-               hashCode += this.CustomerId.GetHashCode();
-            }
-
-            if (this.DisplayName != null)
-            {
-               hashCode += this.DisplayName.GetHashCode();
-            }
-
-            if (this.EmailAddress != null)
-            {
-               hashCode += this.EmailAddress.GetHashCode();
-            }
-
-            if (this.PhoneNumber != null)
-            {
-               hashCode += this.PhoneNumber.GetHashCode();
-            }
-
-            if (this.Address != null)
-            {
-               hashCode += this.Address.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.CustomerId, this.DisplayName, this.EmailAddress, this.PhoneNumber, this.Address);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

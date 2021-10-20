@@ -160,65 +160,18 @@ namespace Square.Models
                 ((this.ProcessingFeeMoney == null && other.ProcessingFeeMoney == null) || (this.ProcessingFeeMoney?.Equals(other.ProcessingFeeMoney) == true)) &&
                 ((this.AdditionalRecipients == null && other.AdditionalRecipients == null) || (this.AdditionalRecipients?.Equals(other.AdditionalRecipients) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -772282082;
+            hashCode = HashCode.Combine(this.Id, this.LocationId, this.TransactionId, this.TenderId, this.CreatedAt, this.Reason, this.AmountMoney);
 
-            if (this.Id != null)
-            {
-               hashCode += this.Id.GetHashCode();
-            }
-
-            if (this.LocationId != null)
-            {
-               hashCode += this.LocationId.GetHashCode();
-            }
-
-            if (this.TransactionId != null)
-            {
-               hashCode += this.TransactionId.GetHashCode();
-            }
-
-            if (this.TenderId != null)
-            {
-               hashCode += this.TenderId.GetHashCode();
-            }
-
-            if (this.CreatedAt != null)
-            {
-               hashCode += this.CreatedAt.GetHashCode();
-            }
-
-            if (this.Reason != null)
-            {
-               hashCode += this.Reason.GetHashCode();
-            }
-
-            if (this.AmountMoney != null)
-            {
-               hashCode += this.AmountMoney.GetHashCode();
-            }
-
-            if (this.Status != null)
-            {
-               hashCode += this.Status.GetHashCode();
-            }
-
-            if (this.ProcessingFeeMoney != null)
-            {
-               hashCode += this.ProcessingFeeMoney.GetHashCode();
-            }
-
-            if (this.AdditionalRecipients != null)
-            {
-               hashCode += this.AdditionalRecipients.GetHashCode();
-            }
+            hashCode = HashCode.Combine(hashCode, this.Status, this.ProcessingFeeMoney, this.AdditionalRecipients);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

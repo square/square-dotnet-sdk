@@ -136,7 +136,7 @@ namespace Square.Models
         public Models.Address BillingAddress { get; }
 
         /// <summary>
-        /// __Not currently set.__ Intended as a Square-assigned identifier, based
+        /// Intended as a Square-assigned identifier, based
         /// on the card number, to identify the card across multiple locations within a
         /// single application.
         /// </summary>
@@ -230,90 +230,20 @@ namespace Square.Models
                 ((this.Bin == null && other.Bin == null) || (this.Bin?.Equals(other.Bin) == true)) &&
                 ((this.Version == null && other.Version == null) || (this.Version?.Equals(other.Version) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 1056966937;
+            hashCode = HashCode.Combine(this.Id, this.CardBrand, this.Last4, this.ExpMonth, this.ExpYear, this.CardholderName, this.BillingAddress);
 
-            if (this.Id != null)
-            {
-               hashCode += this.Id.GetHashCode();
-            }
+            hashCode = HashCode.Combine(hashCode, this.Fingerprint, this.CustomerId, this.ReferenceId, this.Enabled, this.CardType, this.PrepaidType, this.Bin);
 
-            if (this.CardBrand != null)
-            {
-               hashCode += this.CardBrand.GetHashCode();
-            }
-
-            if (this.Last4 != null)
-            {
-               hashCode += this.Last4.GetHashCode();
-            }
-
-            if (this.ExpMonth != null)
-            {
-               hashCode += this.ExpMonth.GetHashCode();
-            }
-
-            if (this.ExpYear != null)
-            {
-               hashCode += this.ExpYear.GetHashCode();
-            }
-
-            if (this.CardholderName != null)
-            {
-               hashCode += this.CardholderName.GetHashCode();
-            }
-
-            if (this.BillingAddress != null)
-            {
-               hashCode += this.BillingAddress.GetHashCode();
-            }
-
-            if (this.Fingerprint != null)
-            {
-               hashCode += this.Fingerprint.GetHashCode();
-            }
-
-            if (this.CustomerId != null)
-            {
-               hashCode += this.CustomerId.GetHashCode();
-            }
-
-            if (this.ReferenceId != null)
-            {
-               hashCode += this.ReferenceId.GetHashCode();
-            }
-
-            if (this.Enabled != null)
-            {
-               hashCode += this.Enabled.GetHashCode();
-            }
-
-            if (this.CardType != null)
-            {
-               hashCode += this.CardType.GetHashCode();
-            }
-
-            if (this.PrepaidType != null)
-            {
-               hashCode += this.PrepaidType.GetHashCode();
-            }
-
-            if (this.Bin != null)
-            {
-               hashCode += this.Bin.GetHashCode();
-            }
-
-            if (this.Version != null)
-            {
-               hashCode += this.Version.GetHashCode();
-            }
+            hashCode = HashCode.Combine(hashCode, this.Version);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

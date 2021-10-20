@@ -109,7 +109,7 @@ namespace Square.Models
                 ((this.RelatedObjects == null && other.RelatedObjects == null) || (this.RelatedObjects?.Equals(other.RelatedObjects) == true)) &&
                 ((this.LatestTime == null && other.LatestTime == null) || (this.LatestTime?.Equals(other.LatestTime) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
@@ -119,35 +119,11 @@ namespace Square.Models
             {
                 hashCode += this.Context.GetHashCode();
             }
-
-            if (this.Errors != null)
-            {
-               hashCode += this.Errors.GetHashCode();
-            }
-
-            if (this.Cursor != null)
-            {
-               hashCode += this.Cursor.GetHashCode();
-            }
-
-            if (this.Objects != null)
-            {
-               hashCode += this.Objects.GetHashCode();
-            }
-
-            if (this.RelatedObjects != null)
-            {
-               hashCode += this.RelatedObjects.GetHashCode();
-            }
-
-            if (this.LatestTime != null)
-            {
-               hashCode += this.LatestTime.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.Errors, this.Cursor, this.Objects, this.RelatedObjects, this.LatestTime);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

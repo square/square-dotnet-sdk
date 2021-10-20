@@ -277,85 +277,18 @@ namespace Square.Models
                 ((this.AdditionalRecipients == null && other.AdditionalRecipients == null) || (this.AdditionalRecipients?.Equals(other.AdditionalRecipients) == true)) &&
                 ((this.VerificationToken == null && other.VerificationToken == null) || (this.VerificationToken?.Equals(other.VerificationToken) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 851688088;
+            hashCode = HashCode.Combine(this.IdempotencyKey, this.AmountMoney, this.CardNonce, this.CustomerCardId, this.DelayCapture, this.ReferenceId, this.Note);
 
-            if (this.IdempotencyKey != null)
-            {
-               hashCode += this.IdempotencyKey.GetHashCode();
-            }
-
-            if (this.AmountMoney != null)
-            {
-               hashCode += this.AmountMoney.GetHashCode();
-            }
-
-            if (this.CardNonce != null)
-            {
-               hashCode += this.CardNonce.GetHashCode();
-            }
-
-            if (this.CustomerCardId != null)
-            {
-               hashCode += this.CustomerCardId.GetHashCode();
-            }
-
-            if (this.DelayCapture != null)
-            {
-               hashCode += this.DelayCapture.GetHashCode();
-            }
-
-            if (this.ReferenceId != null)
-            {
-               hashCode += this.ReferenceId.GetHashCode();
-            }
-
-            if (this.Note != null)
-            {
-               hashCode += this.Note.GetHashCode();
-            }
-
-            if (this.CustomerId != null)
-            {
-               hashCode += this.CustomerId.GetHashCode();
-            }
-
-            if (this.BillingAddress != null)
-            {
-               hashCode += this.BillingAddress.GetHashCode();
-            }
-
-            if (this.ShippingAddress != null)
-            {
-               hashCode += this.ShippingAddress.GetHashCode();
-            }
-
-            if (this.BuyerEmailAddress != null)
-            {
-               hashCode += this.BuyerEmailAddress.GetHashCode();
-            }
-
-            if (this.OrderId != null)
-            {
-               hashCode += this.OrderId.GetHashCode();
-            }
-
-            if (this.AdditionalRecipients != null)
-            {
-               hashCode += this.AdditionalRecipients.GetHashCode();
-            }
-
-            if (this.VerificationToken != null)
-            {
-               hashCode += this.VerificationToken.GetHashCode();
-            }
+            hashCode = HashCode.Combine(hashCode, this.CustomerId, this.BillingAddress, this.ShippingAddress, this.BuyerEmailAddress, this.OrderId, this.AdditionalRecipients, this.VerificationToken);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

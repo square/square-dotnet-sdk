@@ -347,7 +347,7 @@ namespace Square.Models
                 ((this.BtcReceiveAddress == null && other.BtcReceiveAddress == null) || (this.BtcReceiveAddress?.Equals(other.BtcReceiveAddress) == true)) &&
                 ((this.BtcPriceSatoshi == null && other.BtcPriceSatoshi == null) || (this.BtcPriceSatoshi?.Equals(other.BtcPriceSatoshi) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
@@ -357,135 +357,17 @@ namespace Square.Models
             {
                 hashCode += this.Context.GetHashCode();
             }
+            hashCode = HashCode.Combine(this.Errors, this.Id, this.BuyerEmail, this.RecipientName, this.RecipientPhoneNumber, this.State, this.ShippingAddress);
 
-            if (this.Errors != null)
-            {
-               hashCode += this.Errors.GetHashCode();
-            }
+            hashCode = HashCode.Combine(hashCode, this.SubtotalMoney, this.TotalShippingMoney, this.TotalTaxMoney, this.TotalPriceMoney, this.TotalDiscountMoney, this.CreatedAt, this.UpdatedAt);
 
-            if (this.Id != null)
-            {
-               hashCode += this.Id.GetHashCode();
-            }
+            hashCode = HashCode.Combine(hashCode, this.ExpiresAt, this.PaymentId, this.BuyerNote, this.CompletedNote, this.RefundedNote, this.CanceledNote, this.Tender);
 
-            if (this.BuyerEmail != null)
-            {
-               hashCode += this.BuyerEmail.GetHashCode();
-            }
-
-            if (this.RecipientName != null)
-            {
-               hashCode += this.RecipientName.GetHashCode();
-            }
-
-            if (this.RecipientPhoneNumber != null)
-            {
-               hashCode += this.RecipientPhoneNumber.GetHashCode();
-            }
-
-            if (this.State != null)
-            {
-               hashCode += this.State.GetHashCode();
-            }
-
-            if (this.ShippingAddress != null)
-            {
-               hashCode += this.ShippingAddress.GetHashCode();
-            }
-
-            if (this.SubtotalMoney != null)
-            {
-               hashCode += this.SubtotalMoney.GetHashCode();
-            }
-
-            if (this.TotalShippingMoney != null)
-            {
-               hashCode += this.TotalShippingMoney.GetHashCode();
-            }
-
-            if (this.TotalTaxMoney != null)
-            {
-               hashCode += this.TotalTaxMoney.GetHashCode();
-            }
-
-            if (this.TotalPriceMoney != null)
-            {
-               hashCode += this.TotalPriceMoney.GetHashCode();
-            }
-
-            if (this.TotalDiscountMoney != null)
-            {
-               hashCode += this.TotalDiscountMoney.GetHashCode();
-            }
-
-            if (this.CreatedAt != null)
-            {
-               hashCode += this.CreatedAt.GetHashCode();
-            }
-
-            if (this.UpdatedAt != null)
-            {
-               hashCode += this.UpdatedAt.GetHashCode();
-            }
-
-            if (this.ExpiresAt != null)
-            {
-               hashCode += this.ExpiresAt.GetHashCode();
-            }
-
-            if (this.PaymentId != null)
-            {
-               hashCode += this.PaymentId.GetHashCode();
-            }
-
-            if (this.BuyerNote != null)
-            {
-               hashCode += this.BuyerNote.GetHashCode();
-            }
-
-            if (this.CompletedNote != null)
-            {
-               hashCode += this.CompletedNote.GetHashCode();
-            }
-
-            if (this.RefundedNote != null)
-            {
-               hashCode += this.RefundedNote.GetHashCode();
-            }
-
-            if (this.CanceledNote != null)
-            {
-               hashCode += this.CanceledNote.GetHashCode();
-            }
-
-            if (this.Tender != null)
-            {
-               hashCode += this.Tender.GetHashCode();
-            }
-
-            if (this.OrderHistory != null)
-            {
-               hashCode += this.OrderHistory.GetHashCode();
-            }
-
-            if (this.PromoCode != null)
-            {
-               hashCode += this.PromoCode.GetHashCode();
-            }
-
-            if (this.BtcReceiveAddress != null)
-            {
-               hashCode += this.BtcReceiveAddress.GetHashCode();
-            }
-
-            if (this.BtcPriceSatoshi != null)
-            {
-               hashCode += this.BtcPriceSatoshi.GetHashCode();
-            }
+            hashCode = HashCode.Combine(hashCode, this.OrderHistory, this.PromoCode, this.BtcReceiveAddress, this.BtcPriceSatoshi);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

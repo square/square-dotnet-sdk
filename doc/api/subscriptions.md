@@ -50,17 +50,21 @@ var bodyPriceOverrideMoney = new Money.Builder()
     .Amount(100L)
     .Currency("USD")
     .Build();
+var bodySource = new SubscriptionSource.Builder()
+    .Name("My App")
+    .Build();
 var body = new CreateSubscriptionRequest.Builder(
         "S8GWD5R9QB376",
         "6JHXF3B2CW3YKHDV4XEM674H",
         "CHFGVKYY8RSV93M5KCYTG4PN0G")
     .IdempotencyKey("8193148c-9586-11e6-99f9-28cfe92138cf")
-    .StartDate("2020-08-01")
+    .StartDate("2021-10-20")
     .CanceledDate("canceled_date0")
     .TaxPercentage("5")
     .PriceOverrideMoney(bodyPriceOverrideMoney)
     .CardId("ccof:qy5x8hHGYsgLrp4Q4GB")
     .Timezone("America/Los_Angeles")
+    .Source(bodySource)
     .Build();
 
 try
@@ -112,9 +116,12 @@ var bodyQueryFilterCustomerIds = new List<string>();
 bodyQueryFilterCustomerIds.Add("CHFGVKYY8RSV93M5KCYTG4PN0G");
 var bodyQueryFilterLocationIds = new List<string>();
 bodyQueryFilterLocationIds.Add("S8GWD5R9QB376");
+var bodyQueryFilterSourceNames = new List<string>();
+bodyQueryFilterSourceNames.Add("My App");
 var bodyQueryFilter = new SearchSubscriptionsFilter.Builder()
     .CustomerIds(bodyQueryFilterCustomerIds)
     .LocationIds(bodyQueryFilterLocationIds)
+    .SourceNames(bodyQueryFilterSourceNames)
     .Build();
 var bodyQuery = new SearchSubscriptionsQuery.Builder()
     .Filter(bodyQueryFilter)

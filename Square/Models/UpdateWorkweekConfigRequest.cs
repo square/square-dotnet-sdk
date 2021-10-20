@@ -60,20 +60,16 @@ namespace Square.Models
             return obj is UpdateWorkweekConfigRequest other &&
                 ((this.WorkweekConfig == null && other.WorkweekConfig == null) || (this.WorkweekConfig?.Equals(other.WorkweekConfig) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -161126356;
-
-            if (this.WorkweekConfig != null)
-            {
-               hashCode += this.WorkweekConfig.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.WorkweekConfig);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

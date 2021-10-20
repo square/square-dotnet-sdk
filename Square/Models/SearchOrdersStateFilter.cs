@@ -60,20 +60,16 @@ namespace Square.Models
             return obj is SearchOrdersStateFilter other &&
                 ((this.States == null && other.States == null) || (this.States?.Equals(other.States) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 615021182;
-
-            if (this.States != null)
-            {
-               hashCode += this.States.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.States);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

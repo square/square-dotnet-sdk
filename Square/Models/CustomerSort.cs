@@ -69,25 +69,16 @@ namespace Square.Models
                 ((this.Field == null && other.Field == null) || (this.Field?.Equals(other.Field) == true)) &&
                 ((this.Order == null && other.Order == null) || (this.Order?.Equals(other.Order) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 1908123602;
-
-            if (this.Field != null)
-            {
-               hashCode += this.Field.GetHashCode();
-            }
-
-            if (this.Order != null)
-            {
-               hashCode += this.Order.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.Field, this.Order);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

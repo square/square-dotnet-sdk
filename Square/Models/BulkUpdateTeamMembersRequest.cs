@@ -59,20 +59,16 @@ namespace Square.Models
             return obj is BulkUpdateTeamMembersRequest other &&
                 ((this.TeamMembers == null && other.TeamMembers == null) || (this.TeamMembers?.Equals(other.TeamMembers) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 676588886;
-
-            if (this.TeamMembers != null)
-            {
-               hashCode += this.TeamMembers.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.TeamMembers);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

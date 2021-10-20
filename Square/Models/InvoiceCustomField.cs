@@ -80,30 +80,16 @@ namespace Square.Models
                 ((this.MValue == null && other.MValue == null) || (this.MValue?.Equals(other.MValue) == true)) &&
                 ((this.Placement == null && other.Placement == null) || (this.Placement?.Equals(other.Placement) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -295655815;
-
-            if (this.Label != null)
-            {
-               hashCode += this.Label.GetHashCode();
-            }
-
-            if (this.MValue != null)
-            {
-               hashCode += this.MValue.GetHashCode();
-            }
-
-            if (this.Placement != null)
-            {
-               hashCode += this.Placement.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.Label, this.MValue, this.Placement);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

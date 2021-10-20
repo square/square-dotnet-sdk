@@ -127,45 +127,16 @@ namespace Square.Models
                 ((this.FixedDiscountMoney == null && other.FixedDiscountMoney == null) || (this.FixedDiscountMoney?.Equals(other.FixedDiscountMoney) == true)) &&
                 ((this.MaxDiscountMoney == null && other.MaxDiscountMoney == null) || (this.MaxDiscountMoney?.Equals(other.MaxDiscountMoney) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 1536175793;
-
-            if (this.Scope != null)
-            {
-               hashCode += this.Scope.GetHashCode();
-            }
-
-            if (this.DiscountType != null)
-            {
-               hashCode += this.DiscountType.GetHashCode();
-            }
-
-            if (this.PercentageDiscount != null)
-            {
-               hashCode += this.PercentageDiscount.GetHashCode();
-            }
-
-            if (this.CatalogObjectIds != null)
-            {
-               hashCode += this.CatalogObjectIds.GetHashCode();
-            }
-
-            if (this.FixedDiscountMoney != null)
-            {
-               hashCode += this.FixedDiscountMoney.GetHashCode();
-            }
-
-            if (this.MaxDiscountMoney != null)
-            {
-               hashCode += this.MaxDiscountMoney.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.Scope, this.DiscountType, this.PercentageDiscount, this.CatalogObjectIds, this.FixedDiscountMoney, this.MaxDiscountMoney);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

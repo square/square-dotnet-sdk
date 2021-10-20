@@ -160,70 +160,18 @@ namespace Square.Models
                 ((this.SellerNote == null && other.SellerNote == null) || (this.SellerNote?.Equals(other.SellerNote) == true)) &&
                 ((this.AppointmentSegments == null && other.AppointmentSegments == null) || (this.AppointmentSegments?.Equals(other.AppointmentSegments) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 219005029;
+            hashCode = HashCode.Combine(this.Id, this.Version, this.Status, this.CreatedAt, this.UpdatedAt, this.StartAt, this.LocationId);
 
-            if (this.Id != null)
-            {
-               hashCode += this.Id.GetHashCode();
-            }
-
-            if (this.Version != null)
-            {
-               hashCode += this.Version.GetHashCode();
-            }
-
-            if (this.Status != null)
-            {
-               hashCode += this.Status.GetHashCode();
-            }
-
-            if (this.CreatedAt != null)
-            {
-               hashCode += this.CreatedAt.GetHashCode();
-            }
-
-            if (this.UpdatedAt != null)
-            {
-               hashCode += this.UpdatedAt.GetHashCode();
-            }
-
-            if (this.StartAt != null)
-            {
-               hashCode += this.StartAt.GetHashCode();
-            }
-
-            if (this.LocationId != null)
-            {
-               hashCode += this.LocationId.GetHashCode();
-            }
-
-            if (this.CustomerId != null)
-            {
-               hashCode += this.CustomerId.GetHashCode();
-            }
-
-            if (this.CustomerNote != null)
-            {
-               hashCode += this.CustomerNote.GetHashCode();
-            }
-
-            if (this.SellerNote != null)
-            {
-               hashCode += this.SellerNote.GetHashCode();
-            }
-
-            if (this.AppointmentSegments != null)
-            {
-               hashCode += this.AppointmentSegments.GetHashCode();
-            }
+            hashCode = HashCode.Combine(hashCode, this.CustomerId, this.CustomerNote, this.SellerNote, this.AppointmentSegments);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

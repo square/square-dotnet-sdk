@@ -61,20 +61,16 @@ namespace Square.Models
             return obj is RetrieveGiftCardFromGANRequest other &&
                 ((this.Gan == null && other.Gan == null) || (this.Gan?.Equals(other.Gan) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -506152524;
-
-            if (this.Gan != null)
-            {
-               hashCode += this.Gan.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.Gan);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

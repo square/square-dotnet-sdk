@@ -186,80 +186,18 @@ namespace Square.Models
                 ((this.CancellationPolicyText == null && other.CancellationPolicyText == null) || (this.CancellationPolicyText?.Equals(other.CancellationPolicyText) == true)) &&
                 ((this.SkipBookingFlowStaffSelection == null && other.SkipBookingFlowStaffSelection == null) || (this.SkipBookingFlowStaffSelection?.Equals(other.SkipBookingFlowStaffSelection) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 114929036;
+            hashCode = HashCode.Combine(this.LocationTypes, this.AlignmentTime, this.MinBookingLeadTimeSeconds, this.MaxBookingLeadTimeSeconds, this.AnyTeamMemberBookingEnabled, this.MultipleServiceBookingEnabled, this.MaxAppointmentsPerDayLimitType);
 
-            if (this.LocationTypes != null)
-            {
-               hashCode += this.LocationTypes.GetHashCode();
-            }
-
-            if (this.AlignmentTime != null)
-            {
-               hashCode += this.AlignmentTime.GetHashCode();
-            }
-
-            if (this.MinBookingLeadTimeSeconds != null)
-            {
-               hashCode += this.MinBookingLeadTimeSeconds.GetHashCode();
-            }
-
-            if (this.MaxBookingLeadTimeSeconds != null)
-            {
-               hashCode += this.MaxBookingLeadTimeSeconds.GetHashCode();
-            }
-
-            if (this.AnyTeamMemberBookingEnabled != null)
-            {
-               hashCode += this.AnyTeamMemberBookingEnabled.GetHashCode();
-            }
-
-            if (this.MultipleServiceBookingEnabled != null)
-            {
-               hashCode += this.MultipleServiceBookingEnabled.GetHashCode();
-            }
-
-            if (this.MaxAppointmentsPerDayLimitType != null)
-            {
-               hashCode += this.MaxAppointmentsPerDayLimitType.GetHashCode();
-            }
-
-            if (this.MaxAppointmentsPerDayLimit != null)
-            {
-               hashCode += this.MaxAppointmentsPerDayLimit.GetHashCode();
-            }
-
-            if (this.CancellationWindowSeconds != null)
-            {
-               hashCode += this.CancellationWindowSeconds.GetHashCode();
-            }
-
-            if (this.CancellationFeeMoney != null)
-            {
-               hashCode += this.CancellationFeeMoney.GetHashCode();
-            }
-
-            if (this.CancellationPolicy != null)
-            {
-               hashCode += this.CancellationPolicy.GetHashCode();
-            }
-
-            if (this.CancellationPolicyText != null)
-            {
-               hashCode += this.CancellationPolicyText.GetHashCode();
-            }
-
-            if (this.SkipBookingFlowStaffSelection != null)
-            {
-               hashCode += this.SkipBookingFlowStaffSelection.GetHashCode();
-            }
+            hashCode = HashCode.Combine(hashCode, this.MaxAppointmentsPerDayLimit, this.CancellationWindowSeconds, this.CancellationFeeMoney, this.CancellationPolicy, this.CancellationPolicyText, this.SkipBookingFlowStaffSelection);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

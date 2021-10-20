@@ -139,60 +139,18 @@ namespace Square.Models
                 ((this.UpdatedAt == null && other.UpdatedAt == null) || (this.UpdatedAt?.Equals(other.UpdatedAt) == true)) &&
                 ((this.RedeemedAt == null && other.RedeemedAt == null) || (this.RedeemedAt?.Equals(other.RedeemedAt) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1604808841;
+            hashCode = HashCode.Combine(this.Id, this.Status, this.LoyaltyAccountId, this.RewardTierId, this.Points, this.OrderId, this.CreatedAt);
 
-            if (this.Id != null)
-            {
-               hashCode += this.Id.GetHashCode();
-            }
-
-            if (this.Status != null)
-            {
-               hashCode += this.Status.GetHashCode();
-            }
-
-            if (this.LoyaltyAccountId != null)
-            {
-               hashCode += this.LoyaltyAccountId.GetHashCode();
-            }
-
-            if (this.RewardTierId != null)
-            {
-               hashCode += this.RewardTierId.GetHashCode();
-            }
-
-            if (this.Points != null)
-            {
-               hashCode += this.Points.GetHashCode();
-            }
-
-            if (this.OrderId != null)
-            {
-               hashCode += this.OrderId.GetHashCode();
-            }
-
-            if (this.CreatedAt != null)
-            {
-               hashCode += this.CreatedAt.GetHashCode();
-            }
-
-            if (this.UpdatedAt != null)
-            {
-               hashCode += this.UpdatedAt.GetHashCode();
-            }
-
-            if (this.RedeemedAt != null)
-            {
-               hashCode += this.RedeemedAt.GetHashCode();
-            }
+            hashCode = HashCode.Combine(hashCode, this.UpdatedAt, this.RedeemedAt);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

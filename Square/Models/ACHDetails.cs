@@ -80,30 +80,16 @@ namespace Square.Models
                 ((this.AccountNumberSuffix == null && other.AccountNumberSuffix == null) || (this.AccountNumberSuffix?.Equals(other.AccountNumberSuffix) == true)) &&
                 ((this.AccountType == null && other.AccountType == null) || (this.AccountType?.Equals(other.AccountType) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1480381198;
-
-            if (this.RoutingNumber != null)
-            {
-               hashCode += this.RoutingNumber.GetHashCode();
-            }
-
-            if (this.AccountNumberSuffix != null)
-            {
-               hashCode += this.AccountNumberSuffix.GetHashCode();
-            }
-
-            if (this.AccountType != null)
-            {
-               hashCode += this.AccountType.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.RoutingNumber, this.AccountNumberSuffix, this.AccountType);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

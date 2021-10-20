@@ -79,25 +79,16 @@ namespace Square.Models
                 ((this.BuyerTenderedMoney == null && other.BuyerTenderedMoney == null) || (this.BuyerTenderedMoney?.Equals(other.BuyerTenderedMoney) == true)) &&
                 ((this.ChangeBackMoney == null && other.ChangeBackMoney == null) || (this.ChangeBackMoney?.Equals(other.ChangeBackMoney) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1409552788;
-
-            if (this.BuyerTenderedMoney != null)
-            {
-               hashCode += this.BuyerTenderedMoney.GetHashCode();
-            }
-
-            if (this.ChangeBackMoney != null)
-            {
-               hashCode += this.ChangeBackMoney.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.BuyerTenderedMoney, this.ChangeBackMoney);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

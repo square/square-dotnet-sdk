@@ -99,40 +99,16 @@ namespace Square.Models
                 ((this.IsBookable == null && other.IsBookable == null) || (this.IsBookable?.Equals(other.IsBookable) == true)) &&
                 ((this.ProfileImageUrl == null && other.ProfileImageUrl == null) || (this.ProfileImageUrl?.Equals(other.ProfileImageUrl) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1821243729;
-
-            if (this.TeamMemberId != null)
-            {
-               hashCode += this.TeamMemberId.GetHashCode();
-            }
-
-            if (this.Description != null)
-            {
-               hashCode += this.Description.GetHashCode();
-            }
-
-            if (this.DisplayName != null)
-            {
-               hashCode += this.DisplayName.GetHashCode();
-            }
-
-            if (this.IsBookable != null)
-            {
-               hashCode += this.IsBookable.GetHashCode();
-            }
-
-            if (this.ProfileImageUrl != null)
-            {
-               hashCode += this.ProfileImageUrl.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.TeamMemberId, this.Description, this.DisplayName, this.IsBookable, this.ProfileImageUrl);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

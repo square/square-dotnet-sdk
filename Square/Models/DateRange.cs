@@ -73,25 +73,16 @@ namespace Square.Models
                 ((this.StartDate == null && other.StartDate == null) || (this.StartDate?.Equals(other.StartDate) == true)) &&
                 ((this.EndDate == null && other.EndDate == null) || (this.EndDate?.Equals(other.EndDate) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1178039224;
-
-            if (this.StartDate != null)
-            {
-               hashCode += this.StartDate.GetHashCode();
-            }
-
-            if (this.EndDate != null)
-            {
-               hashCode += this.EndDate.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.StartDate, this.EndDate);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

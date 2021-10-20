@@ -21,10 +21,10 @@ namespace Square.Apis
     {
         /// <summary>
         /// Creates a new [order]($m/Order) that can include information about products for.
-        /// purchase and settings to apply to the purchase..
+        /// purchase and settings to apply to the purchase.
         /// To pay for a created order, see .
-        /// [Pay for Orders](https://developer.squareup.com/docs/orders-api/pay-for-orders)..
-        /// You can modify open orders using the [UpdateOrder]($e/Orders/UpdateOrder) endpoint..
+        /// [Pay for Orders](https://developer.squareup.com/docs/orders-api/pay-for-orders).
+        /// You can modify open orders using the [UpdateOrder]($e/Orders/UpdateOrder) endpoint.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <returns>Returns the Models.CreateOrderResponse response from the API call.</returns>
@@ -33,10 +33,10 @@ namespace Square.Apis
 
         /// <summary>
         /// Creates a new [order]($m/Order) that can include information about products for.
-        /// purchase and settings to apply to the purchase..
+        /// purchase and settings to apply to the purchase.
         /// To pay for a created order, see .
-        /// [Pay for Orders](https://developer.squareup.com/docs/orders-api/pay-for-orders)..
-        /// You can modify open orders using the [UpdateOrder]($e/Orders/UpdateOrder) endpoint..
+        /// [Pay for Orders](https://developer.squareup.com/docs/orders-api/pay-for-orders).
+        /// You can modify open orders using the [UpdateOrder]($e/Orders/UpdateOrder) endpoint.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
@@ -46,8 +46,8 @@ namespace Square.Apis
                 CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Retrieves a set of [orders]($m/Order) by their IDs..
-        /// If a given order ID does not exist, the ID is ignored instead of generating an error..
+        /// Retrieves a set of [orders]($m/Order) by their IDs.
+        /// If a given order ID does not exist, the ID is ignored instead of generating an error.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <returns>Returns the Models.BatchRetrieveOrdersResponse response from the API call.</returns>
@@ -55,8 +55,8 @@ namespace Square.Apis
                 Models.BatchRetrieveOrdersRequest body);
 
         /// <summary>
-        /// Retrieves a set of [orders]($m/Order) by their IDs..
-        /// If a given order ID does not exist, the ID is ignored instead of generating an error..
+        /// Retrieves a set of [orders]($m/Order) by their IDs.
+        /// If a given order ID does not exist, the ID is ignored instead of generating an error.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
@@ -66,7 +66,7 @@ namespace Square.Apis
                 CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Enables applications to preview order pricing without creating an order..
+        /// Enables applications to preview order pricing without creating an order.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <returns>Returns the Models.CalculateOrderResponse response from the API call.</returns>
@@ -74,7 +74,7 @@ namespace Square.Apis
                 Models.CalculateOrderRequest body);
 
         /// <summary>
-        /// Enables applications to preview order pricing without creating an order..
+        /// Enables applications to preview order pricing without creating an order.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
@@ -85,7 +85,7 @@ namespace Square.Apis
 
         /// <summary>
         /// Creates a new order, in the `DRAFT` state, by duplicating an existing order. The newly created order has .
-        /// only the core fields (such as line items, taxes, and discounts) copied from the original order..
+        /// only the core fields (such as line items, taxes, and discounts) copied from the original order.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <returns>Returns the Models.CloneOrderResponse response from the API call.</returns>
@@ -94,7 +94,7 @@ namespace Square.Apis
 
         /// <summary>
         /// Creates a new order, in the `DRAFT` state, by duplicating an existing order. The newly created order has .
-        /// only the core fields (such as line items, taxes, and discounts) copied from the original order..
+        /// only the core fields (such as line items, taxes, and discounts) copied from the original order.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
@@ -106,18 +106,18 @@ namespace Square.Apis
         /// <summary>
         /// Search all orders for one or more locations. Orders include all sales,.
         /// returns, and exchanges regardless of how or when they entered the Square.
-        /// ecosystem (such as Point of Sale, Invoices, and Connect APIs)..
+        /// ecosystem (such as Point of Sale, Invoices, and Connect APIs).
         /// `SearchOrders` requests need to specify which locations to search and define a.
         /// [SearchOrdersQuery]($m/SearchOrdersQuery) object that controls.
         /// how to sort or filter the results. Your `SearchOrdersQuery` can:.
-        ///   Set filter criteria..
-        ///   Set the sort order..
+        ///   Set filter criteria.
+        ///   Set the sort order.
         ///   Determine whether to return results as complete `Order` objects or as.
-        /// [OrderEntry]($m/OrderEntry) objects..
+        /// [OrderEntry]($m/OrderEntry) objects.
         /// Note that details for orders processed with Square Point of Sale while in.
         /// offline mode might not be transmitted to Square for up to 72 hours. Offline.
         /// orders have a `created_at` value that reflects the time the order was created,.
-        /// not the time it was subsequently transmitted to Square..
+        /// not the time it was subsequently transmitted to Square.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <returns>Returns the Models.SearchOrdersResponse response from the API call.</returns>
@@ -127,18 +127,18 @@ namespace Square.Apis
         /// <summary>
         /// Search all orders for one or more locations. Orders include all sales,.
         /// returns, and exchanges regardless of how or when they entered the Square.
-        /// ecosystem (such as Point of Sale, Invoices, and Connect APIs)..
+        /// ecosystem (such as Point of Sale, Invoices, and Connect APIs).
         /// `SearchOrders` requests need to specify which locations to search and define a.
         /// [SearchOrdersQuery]($m/SearchOrdersQuery) object that controls.
         /// how to sort or filter the results. Your `SearchOrdersQuery` can:.
-        ///   Set filter criteria..
-        ///   Set the sort order..
+        ///   Set filter criteria.
+        ///   Set the sort order.
         ///   Determine whether to return results as complete `Order` objects or as.
-        /// [OrderEntry]($m/OrderEntry) objects..
+        /// [OrderEntry]($m/OrderEntry) objects.
         /// Note that details for orders processed with Square Point of Sale while in.
         /// offline mode might not be transmitted to Square for up to 72 hours. Offline.
         /// orders have a `created_at` value that reflects the time the order was created,.
-        /// not the time it was subsequently transmitted to Square..
+        /// not the time it was subsequently transmitted to Square.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
@@ -148,7 +148,7 @@ namespace Square.Apis
                 CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Retrieves an [Order]($m/Order) by ID..
+        /// Retrieves an [Order]($m/Order) by ID.
         /// </summary>
         /// <param name="orderId">Required parameter: The ID of the order to retrieve..</param>
         /// <returns>Returns the Models.RetrieveOrderResponse response from the API call.</returns>
@@ -156,7 +156,7 @@ namespace Square.Apis
                 string orderId);
 
         /// <summary>
-        /// Retrieves an [Order]($m/Order) by ID..
+        /// Retrieves an [Order]($m/Order) by ID.
         /// </summary>
         /// <param name="orderId">Required parameter: The ID of the order to retrieve..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
@@ -167,17 +167,17 @@ namespace Square.Apis
 
         /// <summary>
         /// Updates an open [order]($m/Order) by adding, replacing, or deleting.
-        /// fields. Orders with a `COMPLETED` or `CANCELED` state cannot be updated..
+        /// fields. Orders with a `COMPLETED` or `CANCELED` state cannot be updated.
         /// An `UpdateOrder` request requires the following:.
-        /// - The `order_id` in the endpoint path, identifying the order to update..
-        /// - The latest `version` of the order to update..
+        /// - The `order_id` in the endpoint path, identifying the order to update.
+        /// - The latest `version` of the order to update.
         /// - The [sparse order](https://developer.squareup.com/docs/orders-api/manage-orders#sparse-order-objects).
         /// containing only the fields to update and the version to which the update is.
-        /// being applied..
+        /// being applied.
         /// - If deleting fields, the [dot notation paths](https://developer.squareup.com/docs/orders-api/manage-orders#on-dot-notation).
-        /// identifying the fields to clear..
+        /// identifying the fields to clear.
         /// To pay for an order, see .
-        /// [Pay for Orders](https://developer.squareup.com/docs/orders-api/pay-for-orders)..
+        /// [Pay for Orders](https://developer.squareup.com/docs/orders-api/pay-for-orders).
         /// </summary>
         /// <param name="orderId">Required parameter: The ID of the order to update..</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
@@ -188,17 +188,17 @@ namespace Square.Apis
 
         /// <summary>
         /// Updates an open [order]($m/Order) by adding, replacing, or deleting.
-        /// fields. Orders with a `COMPLETED` or `CANCELED` state cannot be updated..
+        /// fields. Orders with a `COMPLETED` or `CANCELED` state cannot be updated.
         /// An `UpdateOrder` request requires the following:.
-        /// - The `order_id` in the endpoint path, identifying the order to update..
-        /// - The latest `version` of the order to update..
+        /// - The `order_id` in the endpoint path, identifying the order to update.
+        /// - The latest `version` of the order to update.
         /// - The [sparse order](https://developer.squareup.com/docs/orders-api/manage-orders#sparse-order-objects).
         /// containing only the fields to update and the version to which the update is.
-        /// being applied..
+        /// being applied.
         /// - If deleting fields, the [dot notation paths](https://developer.squareup.com/docs/orders-api/manage-orders#on-dot-notation).
-        /// identifying the fields to clear..
+        /// identifying the fields to clear.
         /// To pay for an order, see .
-        /// [Pay for Orders](https://developer.squareup.com/docs/orders-api/pay-for-orders)..
+        /// [Pay for Orders](https://developer.squareup.com/docs/orders-api/pay-for-orders).
         /// </summary>
         /// <param name="orderId">Required parameter: The ID of the order to update..</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
@@ -211,16 +211,16 @@ namespace Square.Apis
 
         /// <summary>
         /// Pay for an [order]($m/Order) using one or more approved [payments]($m/Payment).
-        /// or settle an order with a total of `0`..
+        /// or settle an order with a total of `0`.
         /// The total of the `payment_ids` listed in the request must be equal to the order.
         /// total. Orders with a total amount of `0` can be marked as paid by specifying an empty.
-        /// array of `payment_ids` in the request..
+        /// array of `payment_ids` in the request.
         /// To be used with `PayOrder`, a payment must:.
-        /// - Reference the order by specifying the `order_id` when [creating the payment]($e/Payments/CreatePayment)..
+        /// - Reference the order by specifying the `order_id` when [creating the payment]($e/Payments/CreatePayment).
         /// Any approved payments that reference the same `order_id` not specified in the.
-        /// `payment_ids` is canceled..
-        /// - Be approved with [delayed capture](https://developer.squareup.com/docs/payments-api/take-payments#delayed-capture)..
-        /// Using a delayed capture payment with `PayOrder` completes the approved payment..
+        /// `payment_ids` is canceled.
+        /// - Be approved with [delayed capture](https://developer.squareup.com/docs/payments-api/take-payments#delayed-capture).
+        /// Using a delayed capture payment with `PayOrder` completes the approved payment.
         /// </summary>
         /// <param name="orderId">Required parameter: The ID of the order being paid..</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
@@ -231,16 +231,16 @@ namespace Square.Apis
 
         /// <summary>
         /// Pay for an [order]($m/Order) using one or more approved [payments]($m/Payment).
-        /// or settle an order with a total of `0`..
+        /// or settle an order with a total of `0`.
         /// The total of the `payment_ids` listed in the request must be equal to the order.
         /// total. Orders with a total amount of `0` can be marked as paid by specifying an empty.
-        /// array of `payment_ids` in the request..
+        /// array of `payment_ids` in the request.
         /// To be used with `PayOrder`, a payment must:.
-        /// - Reference the order by specifying the `order_id` when [creating the payment]($e/Payments/CreatePayment)..
+        /// - Reference the order by specifying the `order_id` when [creating the payment]($e/Payments/CreatePayment).
         /// Any approved payments that reference the same `order_id` not specified in the.
-        /// `payment_ids` is canceled..
-        /// - Be approved with [delayed capture](https://developer.squareup.com/docs/payments-api/take-payments#delayed-capture)..
-        /// Using a delayed capture payment with `PayOrder` completes the approved payment..
+        /// `payment_ids` is canceled.
+        /// - Be approved with [delayed capture](https://developer.squareup.com/docs/payments-api/take-payments#delayed-capture).
+        /// Using a delayed capture payment with `PayOrder` completes the approved payment.
         /// </summary>
         /// <param name="orderId">Required parameter: The ID of the order being paid..</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>

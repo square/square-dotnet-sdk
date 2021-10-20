@@ -59,20 +59,16 @@ namespace Square.Models
             return obj is RetrieveGiftCardFromNonceRequest other &&
                 ((this.Nonce == null && other.Nonce == null) || (this.Nonce?.Equals(other.Nonce) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1175736546;
-
-            if (this.Nonce != null)
-            {
-               hashCode += this.Nonce.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.Nonce);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

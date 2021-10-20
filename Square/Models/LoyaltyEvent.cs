@@ -179,80 +179,18 @@ namespace Square.Models
                 ((this.ExpirePoints == null && other.ExpirePoints == null) || (this.ExpirePoints?.Equals(other.ExpirePoints) == true)) &&
                 ((this.OtherEvent == null && other.OtherEvent == null) || (this.OtherEvent?.Equals(other.OtherEvent) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 1490090338;
+            hashCode = HashCode.Combine(this.Id, this.Type, this.CreatedAt, this.AccumulatePoints, this.CreateReward, this.RedeemReward, this.DeleteReward);
 
-            if (this.Id != null)
-            {
-               hashCode += this.Id.GetHashCode();
-            }
-
-            if (this.Type != null)
-            {
-               hashCode += this.Type.GetHashCode();
-            }
-
-            if (this.CreatedAt != null)
-            {
-               hashCode += this.CreatedAt.GetHashCode();
-            }
-
-            if (this.AccumulatePoints != null)
-            {
-               hashCode += this.AccumulatePoints.GetHashCode();
-            }
-
-            if (this.CreateReward != null)
-            {
-               hashCode += this.CreateReward.GetHashCode();
-            }
-
-            if (this.RedeemReward != null)
-            {
-               hashCode += this.RedeemReward.GetHashCode();
-            }
-
-            if (this.DeleteReward != null)
-            {
-               hashCode += this.DeleteReward.GetHashCode();
-            }
-
-            if (this.AdjustPoints != null)
-            {
-               hashCode += this.AdjustPoints.GetHashCode();
-            }
-
-            if (this.LoyaltyAccountId != null)
-            {
-               hashCode += this.LoyaltyAccountId.GetHashCode();
-            }
-
-            if (this.LocationId != null)
-            {
-               hashCode += this.LocationId.GetHashCode();
-            }
-
-            if (this.Source != null)
-            {
-               hashCode += this.Source.GetHashCode();
-            }
-
-            if (this.ExpirePoints != null)
-            {
-               hashCode += this.ExpirePoints.GetHashCode();
-            }
-
-            if (this.OtherEvent != null)
-            {
-               hashCode += this.OtherEvent.GetHashCode();
-            }
+            hashCode = HashCode.Combine(hashCode, this.AdjustPoints, this.LoyaltyAccountId, this.LocationId, this.Source, this.ExpirePoints, this.OtherEvent);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

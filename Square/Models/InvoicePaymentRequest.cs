@@ -217,80 +217,18 @@ namespace Square.Models
                 ((this.TotalCompletedAmountMoney == null && other.TotalCompletedAmountMoney == null) || (this.TotalCompletedAmountMoney?.Equals(other.TotalCompletedAmountMoney) == true)) &&
                 ((this.RoundingAdjustmentIncludedMoney == null && other.RoundingAdjustmentIncludedMoney == null) || (this.RoundingAdjustmentIncludedMoney?.Equals(other.RoundingAdjustmentIncludedMoney) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 772730141;
+            hashCode = HashCode.Combine(this.Uid, this.RequestMethod, this.RequestType, this.DueDate, this.FixedAmountRequestedMoney, this.PercentageRequested, this.TippingEnabled);
 
-            if (this.Uid != null)
-            {
-               hashCode += this.Uid.GetHashCode();
-            }
-
-            if (this.RequestMethod != null)
-            {
-               hashCode += this.RequestMethod.GetHashCode();
-            }
-
-            if (this.RequestType != null)
-            {
-               hashCode += this.RequestType.GetHashCode();
-            }
-
-            if (this.DueDate != null)
-            {
-               hashCode += this.DueDate.GetHashCode();
-            }
-
-            if (this.FixedAmountRequestedMoney != null)
-            {
-               hashCode += this.FixedAmountRequestedMoney.GetHashCode();
-            }
-
-            if (this.PercentageRequested != null)
-            {
-               hashCode += this.PercentageRequested.GetHashCode();
-            }
-
-            if (this.TippingEnabled != null)
-            {
-               hashCode += this.TippingEnabled.GetHashCode();
-            }
-
-            if (this.AutomaticPaymentSource != null)
-            {
-               hashCode += this.AutomaticPaymentSource.GetHashCode();
-            }
-
-            if (this.CardId != null)
-            {
-               hashCode += this.CardId.GetHashCode();
-            }
-
-            if (this.Reminders != null)
-            {
-               hashCode += this.Reminders.GetHashCode();
-            }
-
-            if (this.ComputedAmountMoney != null)
-            {
-               hashCode += this.ComputedAmountMoney.GetHashCode();
-            }
-
-            if (this.TotalCompletedAmountMoney != null)
-            {
-               hashCode += this.TotalCompletedAmountMoney.GetHashCode();
-            }
-
-            if (this.RoundingAdjustmentIncludedMoney != null)
-            {
-               hashCode += this.RoundingAdjustmentIncludedMoney.GetHashCode();
-            }
+            hashCode = HashCode.Combine(hashCode, this.AutomaticPaymentSource, this.CardId, this.Reminders, this.ComputedAmountMoney, this.TotalCompletedAmountMoney, this.RoundingAdjustmentIncludedMoney);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

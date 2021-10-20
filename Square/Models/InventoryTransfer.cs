@@ -182,75 +182,18 @@ namespace Square.Models
                 ((this.Source == null && other.Source == null) || (this.Source?.Equals(other.Source) == true)) &&
                 ((this.EmployeeId == null && other.EmployeeId == null) || (this.EmployeeId?.Equals(other.EmployeeId) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -136136157;
+            hashCode = HashCode.Combine(this.Id, this.ReferenceId, this.State, this.FromLocationId, this.ToLocationId, this.CatalogObjectId, this.CatalogObjectType);
 
-            if (this.Id != null)
-            {
-               hashCode += this.Id.GetHashCode();
-            }
-
-            if (this.ReferenceId != null)
-            {
-               hashCode += this.ReferenceId.GetHashCode();
-            }
-
-            if (this.State != null)
-            {
-               hashCode += this.State.GetHashCode();
-            }
-
-            if (this.FromLocationId != null)
-            {
-               hashCode += this.FromLocationId.GetHashCode();
-            }
-
-            if (this.ToLocationId != null)
-            {
-               hashCode += this.ToLocationId.GetHashCode();
-            }
-
-            if (this.CatalogObjectId != null)
-            {
-               hashCode += this.CatalogObjectId.GetHashCode();
-            }
-
-            if (this.CatalogObjectType != null)
-            {
-               hashCode += this.CatalogObjectType.GetHashCode();
-            }
-
-            if (this.Quantity != null)
-            {
-               hashCode += this.Quantity.GetHashCode();
-            }
-
-            if (this.OccurredAt != null)
-            {
-               hashCode += this.OccurredAt.GetHashCode();
-            }
-
-            if (this.CreatedAt != null)
-            {
-               hashCode += this.CreatedAt.GetHashCode();
-            }
-
-            if (this.Source != null)
-            {
-               hashCode += this.Source.GetHashCode();
-            }
-
-            if (this.EmployeeId != null)
-            {
-               hashCode += this.EmployeeId.GetHashCode();
-            }
+            hashCode = HashCode.Combine(hashCode, this.Quantity, this.OccurredAt, this.CreatedAt, this.Source, this.EmployeeId);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

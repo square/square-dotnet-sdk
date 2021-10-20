@@ -60,20 +60,16 @@ namespace Square.Models
             return obj is BusinessHours other &&
                 ((this.Periods == null && other.Periods == null) || (this.Periods?.Equals(other.Periods) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1271827402;
-
-            if (this.Periods != null)
-            {
-               hashCode += this.Periods.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.Periods);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

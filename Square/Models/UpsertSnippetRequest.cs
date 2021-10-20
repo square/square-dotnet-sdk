@@ -59,20 +59,16 @@ namespace Square.Models
             return obj is UpsertSnippetRequest other &&
                 ((this.Snippet == null && other.Snippet == null) || (this.Snippet?.Equals(other.Snippet) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1430080341;
-
-            if (this.Snippet != null)
-            {
-               hashCode += this.Snippet.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.Snippet);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

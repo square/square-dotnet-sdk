@@ -97,35 +97,16 @@ namespace Square.Models
                 ((this.SegmentFilters == null && other.SegmentFilters == null) || (this.SegmentFilters?.Equals(other.SegmentFilters) == true)) &&
                 ((this.BookingId == null && other.BookingId == null) || (this.BookingId?.Equals(other.BookingId) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -735515174;
-
-            if (this.StartAtRange != null)
-            {
-               hashCode += this.StartAtRange.GetHashCode();
-            }
-
-            if (this.LocationId != null)
-            {
-               hashCode += this.LocationId.GetHashCode();
-            }
-
-            if (this.SegmentFilters != null)
-            {
-               hashCode += this.SegmentFilters.GetHashCode();
-            }
-
-            if (this.BookingId != null)
-            {
-               hashCode += this.BookingId.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.StartAtRange, this.LocationId, this.SegmentFilters, this.BookingId);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

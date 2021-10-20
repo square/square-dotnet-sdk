@@ -100,40 +100,16 @@ namespace Square.Models
                 ((this.PlanId == null && other.PlanId == null) || (this.PlanId?.Equals(other.PlanId) == true)) &&
                 ((this.Info == null && other.Info == null) || (this.Info?.Equals(other.Info) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 1280044689;
-
-            if (this.Id != null)
-            {
-               hashCode += this.Id.GetHashCode();
-            }
-
-            if (this.SubscriptionEventType != null)
-            {
-               hashCode += this.SubscriptionEventType.GetHashCode();
-            }
-
-            if (this.EffectiveDate != null)
-            {
-               hashCode += this.EffectiveDate.GetHashCode();
-            }
-
-            if (this.PlanId != null)
-            {
-               hashCode += this.PlanId.GetHashCode();
-            }
-
-            if (this.Info != null)
-            {
-               hashCode += this.Info.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.Id, this.SubscriptionEventType, this.EffectiveDate, this.PlanId, this.Info);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

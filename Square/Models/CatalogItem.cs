@@ -214,90 +214,20 @@ namespace Square.Models
                 ((this.ItemOptions == null && other.ItemOptions == null) || (this.ItemOptions?.Equals(other.ItemOptions) == true)) &&
                 ((this.SortName == null && other.SortName == null) || (this.SortName?.Equals(other.SortName) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -608183061;
+            hashCode = HashCode.Combine(this.Name, this.Description, this.Abbreviation, this.LabelColor, this.AvailableOnline, this.AvailableForPickup, this.AvailableElectronically);
 
-            if (this.Name != null)
-            {
-               hashCode += this.Name.GetHashCode();
-            }
+            hashCode = HashCode.Combine(hashCode, this.CategoryId, this.TaxIds, this.ModifierListInfo, this.Variations, this.ProductType, this.SkipModifierScreen, this.ItemOptions);
 
-            if (this.Description != null)
-            {
-               hashCode += this.Description.GetHashCode();
-            }
-
-            if (this.Abbreviation != null)
-            {
-               hashCode += this.Abbreviation.GetHashCode();
-            }
-
-            if (this.LabelColor != null)
-            {
-               hashCode += this.LabelColor.GetHashCode();
-            }
-
-            if (this.AvailableOnline != null)
-            {
-               hashCode += this.AvailableOnline.GetHashCode();
-            }
-
-            if (this.AvailableForPickup != null)
-            {
-               hashCode += this.AvailableForPickup.GetHashCode();
-            }
-
-            if (this.AvailableElectronically != null)
-            {
-               hashCode += this.AvailableElectronically.GetHashCode();
-            }
-
-            if (this.CategoryId != null)
-            {
-               hashCode += this.CategoryId.GetHashCode();
-            }
-
-            if (this.TaxIds != null)
-            {
-               hashCode += this.TaxIds.GetHashCode();
-            }
-
-            if (this.ModifierListInfo != null)
-            {
-               hashCode += this.ModifierListInfo.GetHashCode();
-            }
-
-            if (this.Variations != null)
-            {
-               hashCode += this.Variations.GetHashCode();
-            }
-
-            if (this.ProductType != null)
-            {
-               hashCode += this.ProductType.GetHashCode();
-            }
-
-            if (this.SkipModifierScreen != null)
-            {
-               hashCode += this.SkipModifierScreen.GetHashCode();
-            }
-
-            if (this.ItemOptions != null)
-            {
-               hashCode += this.ItemOptions.GetHashCode();
-            }
-
-            if (this.SortName != null)
-            {
-               hashCode += this.SortName.GetHashCode();
-            }
+            hashCode = HashCode.Combine(hashCode, this.SortName);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

@@ -145,60 +145,18 @@ namespace Square.Models
                 ((this.AppliedMoney == null && other.AppliedMoney == null) || (this.AppliedMoney?.Equals(other.AppliedMoney) == true)) &&
                 ((this.Scope == null && other.Scope == null) || (this.Scope?.Equals(other.Scope) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -565177385;
+            hashCode = HashCode.Combine(this.Uid, this.SourceTaxUid, this.CatalogObjectId, this.CatalogVersion, this.Name, this.Type, this.Percentage);
 
-            if (this.Uid != null)
-            {
-               hashCode += this.Uid.GetHashCode();
-            }
-
-            if (this.SourceTaxUid != null)
-            {
-               hashCode += this.SourceTaxUid.GetHashCode();
-            }
-
-            if (this.CatalogObjectId != null)
-            {
-               hashCode += this.CatalogObjectId.GetHashCode();
-            }
-
-            if (this.CatalogVersion != null)
-            {
-               hashCode += this.CatalogVersion.GetHashCode();
-            }
-
-            if (this.Name != null)
-            {
-               hashCode += this.Name.GetHashCode();
-            }
-
-            if (this.Type != null)
-            {
-               hashCode += this.Type.GetHashCode();
-            }
-
-            if (this.Percentage != null)
-            {
-               hashCode += this.Percentage.GetHashCode();
-            }
-
-            if (this.AppliedMoney != null)
-            {
-               hashCode += this.AppliedMoney.GetHashCode();
-            }
-
-            if (this.Scope != null)
-            {
-               hashCode += this.Scope.GetHashCode();
-            }
+            hashCode = HashCode.Combine(hashCode, this.AppliedMoney, this.Scope);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

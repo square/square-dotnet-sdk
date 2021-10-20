@@ -107,40 +107,16 @@ namespace Square.Models
                 ((this.TipPercentages == null && other.TipPercentages == null) || (this.TipPercentages?.Equals(other.TipPercentages) == true)) &&
                 ((this.SmartTipping == null && other.SmartTipping == null) || (this.SmartTipping?.Equals(other.SmartTipping) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 464455539;
-
-            if (this.AllowTipping != null)
-            {
-               hashCode += this.AllowTipping.GetHashCode();
-            }
-
-            if (this.SeparateTipScreen != null)
-            {
-               hashCode += this.SeparateTipScreen.GetHashCode();
-            }
-
-            if (this.CustomTipField != null)
-            {
-               hashCode += this.CustomTipField.GetHashCode();
-            }
-
-            if (this.TipPercentages != null)
-            {
-               hashCode += this.TipPercentages.GetHashCode();
-            }
-
-            if (this.SmartTipping != null)
-            {
-               hashCode += this.SmartTipping.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.AllowTipping, this.SeparateTipScreen, this.CustomTipField, this.TipPercentages, this.SmartTipping);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

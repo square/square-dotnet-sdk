@@ -84,30 +84,16 @@ namespace Square.Models
                 ((this.IdempotencyKey == null && other.IdempotencyKey == null) || (this.IdempotencyKey?.Equals(other.IdempotencyKey) == true)) &&
                 ((this.FieldsToClear == null && other.FieldsToClear == null) || (this.FieldsToClear?.Equals(other.FieldsToClear) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -281586426;
-
-            if (this.Invoice != null)
-            {
-               hashCode += this.Invoice.GetHashCode();
-            }
-
-            if (this.IdempotencyKey != null)
-            {
-               hashCode += this.IdempotencyKey.GetHashCode();
-            }
-
-            if (this.FieldsToClear != null)
-            {
-               hashCode += this.FieldsToClear.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.Invoice, this.IdempotencyKey, this.FieldsToClear);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

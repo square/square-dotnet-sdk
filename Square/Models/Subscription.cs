@@ -35,6 +35,7 @@ namespace Square.Models
         /// <param name="createdAt">created_at.</param>
         /// <param name="cardId">card_id.</param>
         /// <param name="timezone">timezone.</param>
+        /// <param name="source">source.</param>
         public Subscription(
             string id = null,
             string locationId = null,
@@ -50,7 +51,8 @@ namespace Square.Models
             long? version = null,
             string createdAt = null,
             string cardId = null,
-            string timezone = null)
+            string timezone = null,
+            Models.SubscriptionSource source = null)
         {
             this.Id = id;
             this.LocationId = locationId;
@@ -67,6 +69,7 @@ namespace Square.Models
             this.CreatedAt = createdAt;
             this.CardId = cardId;
             this.Timezone = timezone;
+            this.Source = source;
         }
 
         /// <summary>
@@ -187,6 +190,12 @@ namespace Square.Models
         [JsonProperty("timezone", NullValueHandling = NullValueHandling.Ignore)]
         public string Timezone { get; }
 
+        /// <summary>
+        /// The origination details of the subscription.
+        /// </summary>
+        [JsonProperty("source", NullValueHandling = NullValueHandling.Ignore)]
+        public Models.SubscriptionSource Source { get; }
+
         /// <inheritdoc/>
         public override string ToString()
         {
@@ -225,92 +234,23 @@ namespace Square.Models
                 ((this.Version == null && other.Version == null) || (this.Version?.Equals(other.Version) == true)) &&
                 ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true)) &&
                 ((this.CardId == null && other.CardId == null) || (this.CardId?.Equals(other.CardId) == true)) &&
-                ((this.Timezone == null && other.Timezone == null) || (this.Timezone?.Equals(other.Timezone) == true));
+                ((this.Timezone == null && other.Timezone == null) || (this.Timezone?.Equals(other.Timezone) == true)) &&
+                ((this.Source == null && other.Source == null) || (this.Source?.Equals(other.Source) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 176993475;
+            int hashCode = 1839255532;
+            hashCode = HashCode.Combine(this.Id, this.LocationId, this.PlanId, this.CustomerId, this.StartDate, this.CanceledDate, this.ChargedThroughDate);
 
-            if (this.Id != null)
-            {
-               hashCode += this.Id.GetHashCode();
-            }
+            hashCode = HashCode.Combine(hashCode, this.Status, this.TaxPercentage, this.InvoiceIds, this.PriceOverrideMoney, this.Version, this.CreatedAt, this.CardId);
 
-            if (this.LocationId != null)
-            {
-               hashCode += this.LocationId.GetHashCode();
-            }
-
-            if (this.PlanId != null)
-            {
-               hashCode += this.PlanId.GetHashCode();
-            }
-
-            if (this.CustomerId != null)
-            {
-               hashCode += this.CustomerId.GetHashCode();
-            }
-
-            if (this.StartDate != null)
-            {
-               hashCode += this.StartDate.GetHashCode();
-            }
-
-            if (this.CanceledDate != null)
-            {
-               hashCode += this.CanceledDate.GetHashCode();
-            }
-
-            if (this.ChargedThroughDate != null)
-            {
-               hashCode += this.ChargedThroughDate.GetHashCode();
-            }
-
-            if (this.Status != null)
-            {
-               hashCode += this.Status.GetHashCode();
-            }
-
-            if (this.TaxPercentage != null)
-            {
-               hashCode += this.TaxPercentage.GetHashCode();
-            }
-
-            if (this.InvoiceIds != null)
-            {
-               hashCode += this.InvoiceIds.GetHashCode();
-            }
-
-            if (this.PriceOverrideMoney != null)
-            {
-               hashCode += this.PriceOverrideMoney.GetHashCode();
-            }
-
-            if (this.Version != null)
-            {
-               hashCode += this.Version.GetHashCode();
-            }
-
-            if (this.CreatedAt != null)
-            {
-               hashCode += this.CreatedAt.GetHashCode();
-            }
-
-            if (this.CardId != null)
-            {
-               hashCode += this.CardId.GetHashCode();
-            }
-
-            if (this.Timezone != null)
-            {
-               hashCode += this.Timezone.GetHashCode();
-            }
+            hashCode = HashCode.Combine(hashCode, this.Timezone, this.Source);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -332,6 +272,7 @@ namespace Square.Models
             toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt == string.Empty ? "" : this.CreatedAt)}");
             toStringOutput.Add($"this.CardId = {(this.CardId == null ? "null" : this.CardId == string.Empty ? "" : this.CardId)}");
             toStringOutput.Add($"this.Timezone = {(this.Timezone == null ? "null" : this.Timezone == string.Empty ? "" : this.Timezone)}");
+            toStringOutput.Add($"this.Source = {(this.Source == null ? "null" : this.Source.ToString())}");
         }
 
         /// <summary>
@@ -355,7 +296,8 @@ namespace Square.Models
                 .Version(this.Version)
                 .CreatedAt(this.CreatedAt)
                 .CardId(this.CardId)
-                .Timezone(this.Timezone);
+                .Timezone(this.Timezone)
+                .Source(this.Source);
             return builder;
         }
 
@@ -379,6 +321,7 @@ namespace Square.Models
             private string createdAt;
             private string cardId;
             private string timezone;
+            private Models.SubscriptionSource source;
 
              /// <summary>
              /// Id.
@@ -545,6 +488,17 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// Source.
+             /// </summary>
+             /// <param name="source"> source. </param>
+             /// <returns> Builder. </returns>
+            public Builder Source(Models.SubscriptionSource source)
+            {
+                this.source = source;
+                return this;
+            }
+
             /// <summary>
             /// Builds class object.
             /// </summary>
@@ -566,7 +520,8 @@ namespace Square.Models
                     this.version,
                     this.createdAt,
                     this.cardId,
-                    this.timezone);
+                    this.timezone,
+                    this.source);
             }
         }
     }

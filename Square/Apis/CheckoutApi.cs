@@ -37,7 +37,7 @@ namespace Square.Apis
         /// <summary>
         /// Links a `checkoutId` to a `checkout_page_url` that customers are.
         /// directed to in order to provide their payment information using a.
-        /// payment processing workflow hosted on connect.squareup.com..
+        /// payment processing workflow hosted on connect.squareup.com.
         /// </summary>
         /// <param name="locationId">Required parameter: The ID of the business location to associate the checkout with..</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
@@ -54,7 +54,7 @@ namespace Square.Apis
         /// <summary>
         /// Links a `checkoutId` to a `checkout_page_url` that customers are.
         /// directed to in order to provide their payment information using a.
-        /// payment processing workflow hosted on connect.squareup.com..
+        /// payment processing workflow hosted on connect.squareup.com.
         /// </summary>
         /// <param name="locationId">Required parameter: The ID of the business location to associate the checkout with..</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>

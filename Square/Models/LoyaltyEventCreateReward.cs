@@ -80,27 +80,16 @@ namespace Square.Models
                 ((this.RewardId == null && other.RewardId == null) || (this.RewardId?.Equals(other.RewardId) == true)) &&
                 this.Points.Equals(other.Points);
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 860504367;
-
-            if (this.LoyaltyProgramId != null)
-            {
-               hashCode += this.LoyaltyProgramId.GetHashCode();
-            }
-
-            if (this.RewardId != null)
-            {
-               hashCode += this.RewardId.GetHashCode();
-            }
-
-            hashCode += this.Points.GetHashCode();
+            hashCode = HashCode.Combine(this.LoyaltyProgramId, this.RewardId, this.Points);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

@@ -79,30 +79,16 @@ namespace Square.Models
                 ((this.DeviceInstallationId == null && other.DeviceInstallationId == null) || (this.DeviceInstallationId?.Equals(other.DeviceInstallationId) == true)) &&
                 ((this.DeviceName == null && other.DeviceName == null) || (this.DeviceName?.Equals(other.DeviceName) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -363727408;
-
-            if (this.DeviceId != null)
-            {
-               hashCode += this.DeviceId.GetHashCode();
-            }
-
-            if (this.DeviceInstallationId != null)
-            {
-               hashCode += this.DeviceInstallationId.GetHashCode();
-            }
-
-            if (this.DeviceName != null)
-            {
-               hashCode += this.DeviceName.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.DeviceId, this.DeviceInstallationId, this.DeviceName);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

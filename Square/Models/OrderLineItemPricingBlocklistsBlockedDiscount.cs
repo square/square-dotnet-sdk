@@ -82,30 +82,16 @@ namespace Square.Models
                 ((this.DiscountUid == null && other.DiscountUid == null) || (this.DiscountUid?.Equals(other.DiscountUid) == true)) &&
                 ((this.DiscountCatalogObjectId == null && other.DiscountCatalogObjectId == null) || (this.DiscountCatalogObjectId?.Equals(other.DiscountCatalogObjectId) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 532800568;
-
-            if (this.Uid != null)
-            {
-               hashCode += this.Uid.GetHashCode();
-            }
-
-            if (this.DiscountUid != null)
-            {
-               hashCode += this.DiscountUid.GetHashCode();
-            }
-
-            if (this.DiscountCatalogObjectId != null)
-            {
-               hashCode += this.DiscountCatalogObjectId.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.Uid, this.DiscountUid, this.DiscountCatalogObjectId);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

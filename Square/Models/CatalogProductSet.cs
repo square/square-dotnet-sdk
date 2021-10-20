@@ -135,50 +135,16 @@ namespace Square.Models
                 ((this.QuantityMax == null && other.QuantityMax == null) || (this.QuantityMax?.Equals(other.QuantityMax) == true)) &&
                 ((this.AllProducts == null && other.AllProducts == null) || (this.AllProducts?.Equals(other.AllProducts) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -600323794;
-
-            if (this.Name != null)
-            {
-               hashCode += this.Name.GetHashCode();
-            }
-
-            if (this.ProductIdsAny != null)
-            {
-               hashCode += this.ProductIdsAny.GetHashCode();
-            }
-
-            if (this.ProductIdsAll != null)
-            {
-               hashCode += this.ProductIdsAll.GetHashCode();
-            }
-
-            if (this.QuantityExact != null)
-            {
-               hashCode += this.QuantityExact.GetHashCode();
-            }
-
-            if (this.QuantityMin != null)
-            {
-               hashCode += this.QuantityMin.GetHashCode();
-            }
-
-            if (this.QuantityMax != null)
-            {
-               hashCode += this.QuantityMax.GetHashCode();
-            }
-
-            if (this.AllProducts != null)
-            {
-               hashCode += this.AllProducts.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.Name, this.ProductIdsAny, this.ProductIdsAll, this.QuantityExact, this.QuantityMin, this.QuantityMax, this.AllProducts);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

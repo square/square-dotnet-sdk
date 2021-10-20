@@ -71,25 +71,16 @@ namespace Square.Models
                 ((this.StartAt == null && other.StartAt == null) || (this.StartAt?.Equals(other.StartAt) == true)) &&
                 ((this.EndAt == null && other.EndAt == null) || (this.EndAt?.Equals(other.EndAt) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 1397829395;
-
-            if (this.StartAt != null)
-            {
-               hashCode += this.StartAt.GetHashCode();
-            }
-
-            if (this.EndAt != null)
-            {
-               hashCode += this.EndAt.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.StartAt, this.EndAt);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

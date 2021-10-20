@@ -81,30 +81,16 @@ namespace Square.Models
                 ((this.SkipReceiptScreen == null && other.SkipReceiptScreen == null) || (this.SkipReceiptScreen?.Equals(other.SkipReceiptScreen) == true)) &&
                 ((this.TipSettings == null && other.TipSettings == null) || (this.TipSettings?.Equals(other.TipSettings) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1796237610;
-
-            if (this.DeviceId != null)
-            {
-               hashCode += this.DeviceId.GetHashCode();
-            }
-
-            if (this.SkipReceiptScreen != null)
-            {
-               hashCode += this.SkipReceiptScreen.GetHashCode();
-            }
-
-            if (this.TipSettings != null)
-            {
-               hashCode += this.TipSettings.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.DeviceId, this.SkipReceiptScreen, this.TipSettings);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

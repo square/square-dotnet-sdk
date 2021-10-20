@@ -121,45 +121,16 @@ namespace Square.Models
                 ((this.PickupDetails == null && other.PickupDetails == null) || (this.PickupDetails?.Equals(other.PickupDetails) == true)) &&
                 ((this.ShipmentDetails == null && other.ShipmentDetails == null) || (this.ShipmentDetails?.Equals(other.ShipmentDetails) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1081474364;
-
-            if (this.Uid != null)
-            {
-               hashCode += this.Uid.GetHashCode();
-            }
-
-            if (this.Type != null)
-            {
-               hashCode += this.Type.GetHashCode();
-            }
-
-            if (this.State != null)
-            {
-               hashCode += this.State.GetHashCode();
-            }
-
-            if (this.Metadata != null)
-            {
-               hashCode += this.Metadata.GetHashCode();
-            }
-
-            if (this.PickupDetails != null)
-            {
-               hashCode += this.PickupDetails.GetHashCode();
-            }
-
-            if (this.ShipmentDetails != null)
-            {
-               hashCode += this.ShipmentDetails.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.Uid, this.Type, this.State, this.Metadata, this.PickupDetails, this.ShipmentDetails);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

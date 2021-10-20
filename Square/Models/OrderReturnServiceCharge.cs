@@ -211,80 +211,18 @@ namespace Square.Models
                 ((this.Taxable == null && other.Taxable == null) || (this.Taxable?.Equals(other.Taxable) == true)) &&
                 ((this.AppliedTaxes == null && other.AppliedTaxes == null) || (this.AppliedTaxes?.Equals(other.AppliedTaxes) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -704882254;
+            hashCode = HashCode.Combine(this.Uid, this.SourceServiceChargeUid, this.Name, this.CatalogObjectId, this.CatalogVersion, this.Percentage, this.AmountMoney);
 
-            if (this.Uid != null)
-            {
-               hashCode += this.Uid.GetHashCode();
-            }
-
-            if (this.SourceServiceChargeUid != null)
-            {
-               hashCode += this.SourceServiceChargeUid.GetHashCode();
-            }
-
-            if (this.Name != null)
-            {
-               hashCode += this.Name.GetHashCode();
-            }
-
-            if (this.CatalogObjectId != null)
-            {
-               hashCode += this.CatalogObjectId.GetHashCode();
-            }
-
-            if (this.CatalogVersion != null)
-            {
-               hashCode += this.CatalogVersion.GetHashCode();
-            }
-
-            if (this.Percentage != null)
-            {
-               hashCode += this.Percentage.GetHashCode();
-            }
-
-            if (this.AmountMoney != null)
-            {
-               hashCode += this.AmountMoney.GetHashCode();
-            }
-
-            if (this.AppliedMoney != null)
-            {
-               hashCode += this.AppliedMoney.GetHashCode();
-            }
-
-            if (this.TotalMoney != null)
-            {
-               hashCode += this.TotalMoney.GetHashCode();
-            }
-
-            if (this.TotalTaxMoney != null)
-            {
-               hashCode += this.TotalTaxMoney.GetHashCode();
-            }
-
-            if (this.CalculationPhase != null)
-            {
-               hashCode += this.CalculationPhase.GetHashCode();
-            }
-
-            if (this.Taxable != null)
-            {
-               hashCode += this.Taxable.GetHashCode();
-            }
-
-            if (this.AppliedTaxes != null)
-            {
-               hashCode += this.AppliedTaxes.GetHashCode();
-            }
+            hashCode = HashCode.Combine(hashCode, this.AppliedMoney, this.TotalMoney, this.TotalTaxMoney, this.CalculationPhase, this.Taxable, this.AppliedTaxes);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

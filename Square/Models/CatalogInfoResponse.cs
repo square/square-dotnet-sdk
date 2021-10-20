@@ -87,7 +87,7 @@ namespace Square.Models
                 ((this.Limits == null && other.Limits == null) || (this.Limits?.Equals(other.Limits) == true)) &&
                 ((this.StandardUnitDescriptionGroup == null && other.StandardUnitDescriptionGroup == null) || (this.StandardUnitDescriptionGroup?.Equals(other.StandardUnitDescriptionGroup) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
@@ -97,25 +97,11 @@ namespace Square.Models
             {
                 hashCode += this.Context.GetHashCode();
             }
-
-            if (this.Errors != null)
-            {
-               hashCode += this.Errors.GetHashCode();
-            }
-
-            if (this.Limits != null)
-            {
-               hashCode += this.Limits.GetHashCode();
-            }
-
-            if (this.StandardUnitDescriptionGroup != null)
-            {
-               hashCode += this.StandardUnitDescriptionGroup.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.Errors, this.Limits, this.StandardUnitDescriptionGroup);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

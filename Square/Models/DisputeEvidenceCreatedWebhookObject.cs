@@ -59,20 +59,16 @@ namespace Square.Models
             return obj is DisputeEvidenceCreatedWebhookObject other &&
                 ((this.MObject == null && other.MObject == null) || (this.MObject?.Equals(other.MObject) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1419891964;
-
-            if (this.MObject != null)
-            {
-               hashCode += this.MObject.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.MObject);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

@@ -83,30 +83,16 @@ namespace Square.Models
                 ((this.MatchShiftsBy == null && other.MatchShiftsBy == null) || (this.MatchShiftsBy?.Equals(other.MatchShiftsBy) == true)) &&
                 ((this.DefaultTimezone == null && other.DefaultTimezone == null) || (this.DefaultTimezone?.Equals(other.DefaultTimezone) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1536716736;
-
-            if (this.DateRange != null)
-            {
-               hashCode += this.DateRange.GetHashCode();
-            }
-
-            if (this.MatchShiftsBy != null)
-            {
-               hashCode += this.MatchShiftsBy.GetHashCode();
-            }
-
-            if (this.DefaultTimezone != null)
-            {
-               hashCode += this.DefaultTimezone.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.DateRange, this.MatchShiftsBy, this.DefaultTimezone);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

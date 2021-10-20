@@ -59,20 +59,16 @@ namespace Square.Models
             return obj is RenewTokenRequest other &&
                 ((this.AccessToken == null && other.AccessToken == null) || (this.AccessToken?.Equals(other.AccessToken) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -475718546;
-
-            if (this.AccessToken != null)
-            {
-               hashCode += this.AccessToken.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.AccessToken);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

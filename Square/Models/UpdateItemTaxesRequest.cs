@@ -79,30 +79,16 @@ namespace Square.Models
                 ((this.TaxesToEnable == null && other.TaxesToEnable == null) || (this.TaxesToEnable?.Equals(other.TaxesToEnable) == true)) &&
                 ((this.TaxesToDisable == null && other.TaxesToDisable == null) || (this.TaxesToDisable?.Equals(other.TaxesToDisable) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 651000777;
-
-            if (this.ItemIds != null)
-            {
-               hashCode += this.ItemIds.GetHashCode();
-            }
-
-            if (this.TaxesToEnable != null)
-            {
-               hashCode += this.TaxesToEnable.GetHashCode();
-            }
-
-            if (this.TaxesToDisable != null)
-            {
-               hashCode += this.TaxesToDisable.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.ItemIds, this.TaxesToEnable, this.TaxesToDisable);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

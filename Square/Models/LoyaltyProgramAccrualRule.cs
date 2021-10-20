@@ -139,50 +139,16 @@ namespace Square.Models
                 ((this.ExcludedCategoryIds == null && other.ExcludedCategoryIds == null) || (this.ExcludedCategoryIds?.Equals(other.ExcludedCategoryIds) == true)) &&
                 ((this.ExcludedItemVariationIds == null && other.ExcludedItemVariationIds == null) || (this.ExcludedItemVariationIds?.Equals(other.ExcludedItemVariationIds) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 2086820232;
-
-            if (this.AccrualType != null)
-            {
-               hashCode += this.AccrualType.GetHashCode();
-            }
-
-            if (this.Points != null)
-            {
-               hashCode += this.Points.GetHashCode();
-            }
-
-            if (this.VisitMinimumAmountMoney != null)
-            {
-               hashCode += this.VisitMinimumAmountMoney.GetHashCode();
-            }
-
-            if (this.SpendAmountMoney != null)
-            {
-               hashCode += this.SpendAmountMoney.GetHashCode();
-            }
-
-            if (this.CatalogObjectId != null)
-            {
-               hashCode += this.CatalogObjectId.GetHashCode();
-            }
-
-            if (this.ExcludedCategoryIds != null)
-            {
-               hashCode += this.ExcludedCategoryIds.GetHashCode();
-            }
-
-            if (this.ExcludedItemVariationIds != null)
-            {
-               hashCode += this.ExcludedItemVariationIds.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.AccrualType, this.Points, this.VisitMinimumAmountMoney, this.SpendAmountMoney, this.CatalogObjectId, this.ExcludedCategoryIds, this.ExcludedItemVariationIds);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

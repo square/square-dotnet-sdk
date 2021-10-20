@@ -91,7 +91,7 @@ namespace Square.Models
                 ((this.DeletedObjectIds == null && other.DeletedObjectIds == null) || (this.DeletedObjectIds?.Equals(other.DeletedObjectIds) == true)) &&
                 ((this.DeletedAt == null && other.DeletedAt == null) || (this.DeletedAt?.Equals(other.DeletedAt) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
@@ -101,25 +101,11 @@ namespace Square.Models
             {
                 hashCode += this.Context.GetHashCode();
             }
-
-            if (this.Errors != null)
-            {
-               hashCode += this.Errors.GetHashCode();
-            }
-
-            if (this.DeletedObjectIds != null)
-            {
-               hashCode += this.DeletedObjectIds.GetHashCode();
-            }
-
-            if (this.DeletedAt != null)
-            {
-               hashCode += this.DeletedAt.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.Errors, this.DeletedObjectIds, this.DeletedAt);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

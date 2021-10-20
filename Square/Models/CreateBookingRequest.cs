@@ -70,25 +70,16 @@ namespace Square.Models
                 ((this.IdempotencyKey == null && other.IdempotencyKey == null) || (this.IdempotencyKey?.Equals(other.IdempotencyKey) == true)) &&
                 ((this.Booking == null && other.Booking == null) || (this.Booking?.Equals(other.Booking) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -24081562;
-
-            if (this.IdempotencyKey != null)
-            {
-               hashCode += this.IdempotencyKey.GetHashCode();
-            }
-
-            if (this.Booking != null)
-            {
-               hashCode += this.Booking.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.IdempotencyKey, this.Booking);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

@@ -79,30 +79,16 @@ namespace Square.Models
                 ((this.EvidenceType == null && other.EvidenceType == null) || (this.EvidenceType?.Equals(other.EvidenceType) == true)) &&
                 ((this.EvidenceText == null && other.EvidenceText == null) || (this.EvidenceText?.Equals(other.EvidenceText) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -322571953;
-
-            if (this.IdempotencyKey != null)
-            {
-               hashCode += this.IdempotencyKey.GetHashCode();
-            }
-
-            if (this.EvidenceType != null)
-            {
-               hashCode += this.EvidenceType.GetHashCode();
-            }
-
-            if (this.EvidenceText != null)
-            {
-               hashCode += this.EvidenceText.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.IdempotencyKey, this.EvidenceType, this.EvidenceText);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

@@ -22,12 +22,15 @@ namespace Square.Models
         /// </summary>
         /// <param name="customerIds">customer_ids.</param>
         /// <param name="locationIds">location_ids.</param>
+        /// <param name="sourceNames">source_names.</param>
         public SearchSubscriptionsFilter(
             IList<string> customerIds = null,
-            IList<string> locationIds = null)
+            IList<string> locationIds = null,
+            IList<string> sourceNames = null)
         {
             this.CustomerIds = customerIds;
             this.LocationIds = locationIds;
+            this.SourceNames = sourceNames;
         }
 
         /// <summary>
@@ -41,6 +44,12 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("location_ids", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> LocationIds { get; }
+
+        /// <summary>
+        /// A filter to select subscriptions based on the source application.
+        /// </summary>
+        [JsonProperty("source_names", NullValueHandling = NullValueHandling.Ignore)]
+        public IList<string> SourceNames { get; }
 
         /// <inheritdoc/>
         public override string ToString()
@@ -67,27 +76,19 @@ namespace Square.Models
 
             return obj is SearchSubscriptionsFilter other &&
                 ((this.CustomerIds == null && other.CustomerIds == null) || (this.CustomerIds?.Equals(other.CustomerIds) == true)) &&
-                ((this.LocationIds == null && other.LocationIds == null) || (this.LocationIds?.Equals(other.LocationIds) == true));
+                ((this.LocationIds == null && other.LocationIds == null) || (this.LocationIds?.Equals(other.LocationIds) == true)) &&
+                ((this.SourceNames == null && other.SourceNames == null) || (this.SourceNames?.Equals(other.SourceNames) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1711926547;
-
-            if (this.CustomerIds != null)
-            {
-               hashCode += this.CustomerIds.GetHashCode();
-            }
-
-            if (this.LocationIds != null)
-            {
-               hashCode += this.LocationIds.GetHashCode();
-            }
+            int hashCode = 951931587;
+            hashCode = HashCode.Combine(this.CustomerIds, this.LocationIds, this.SourceNames);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -96,6 +97,7 @@ namespace Square.Models
         {
             toStringOutput.Add($"this.CustomerIds = {(this.CustomerIds == null ? "null" : $"[{string.Join(", ", this.CustomerIds)} ]")}");
             toStringOutput.Add($"this.LocationIds = {(this.LocationIds == null ? "null" : $"[{string.Join(", ", this.LocationIds)} ]")}");
+            toStringOutput.Add($"this.SourceNames = {(this.SourceNames == null ? "null" : $"[{string.Join(", ", this.SourceNames)} ]")}");
         }
 
         /// <summary>
@@ -106,7 +108,8 @@ namespace Square.Models
         {
             var builder = new Builder()
                 .CustomerIds(this.CustomerIds)
-                .LocationIds(this.LocationIds);
+                .LocationIds(this.LocationIds)
+                .SourceNames(this.SourceNames);
             return builder;
         }
 
@@ -117,6 +120,7 @@ namespace Square.Models
         {
             private IList<string> customerIds;
             private IList<string> locationIds;
+            private IList<string> sourceNames;
 
              /// <summary>
              /// CustomerIds.
@@ -140,6 +144,17 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// SourceNames.
+             /// </summary>
+             /// <param name="sourceNames"> sourceNames. </param>
+             /// <returns> Builder. </returns>
+            public Builder SourceNames(IList<string> sourceNames)
+            {
+                this.sourceNames = sourceNames;
+                return this;
+            }
+
             /// <summary>
             /// Builds class object.
             /// </summary>
@@ -148,7 +163,8 @@ namespace Square.Models
             {
                 return new SearchSubscriptionsFilter(
                     this.customerIds,
-                    this.locationIds);
+                    this.locationIds,
+                    this.sourceNames);
             }
         }
     }

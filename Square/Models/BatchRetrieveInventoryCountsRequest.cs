@@ -107,40 +107,16 @@ namespace Square.Models
                 ((this.Cursor == null && other.Cursor == null) || (this.Cursor?.Equals(other.Cursor) == true)) &&
                 ((this.States == null && other.States == null) || (this.States?.Equals(other.States) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1765897747;
-
-            if (this.CatalogObjectIds != null)
-            {
-               hashCode += this.CatalogObjectIds.GetHashCode();
-            }
-
-            if (this.LocationIds != null)
-            {
-               hashCode += this.LocationIds.GetHashCode();
-            }
-
-            if (this.UpdatedAfter != null)
-            {
-               hashCode += this.UpdatedAfter.GetHashCode();
-            }
-
-            if (this.Cursor != null)
-            {
-               hashCode += this.Cursor.GetHashCode();
-            }
-
-            if (this.States != null)
-            {
-               hashCode += this.States.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.CatalogObjectIds, this.LocationIds, this.UpdatedAfter, this.Cursor, this.States);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

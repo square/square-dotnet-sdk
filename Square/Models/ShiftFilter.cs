@@ -128,50 +128,16 @@ namespace Square.Models
                 ((this.Workday == null && other.Workday == null) || (this.Workday?.Equals(other.Workday) == true)) &&
                 ((this.TeamMemberIds == null && other.TeamMemberIds == null) || (this.TeamMemberIds?.Equals(other.TeamMemberIds) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 432854802;
-
-            if (this.LocationIds != null)
-            {
-               hashCode += this.LocationIds.GetHashCode();
-            }
-
-            if (this.EmployeeIds != null)
-            {
-               hashCode += this.EmployeeIds.GetHashCode();
-            }
-
-            if (this.Status != null)
-            {
-               hashCode += this.Status.GetHashCode();
-            }
-
-            if (this.Start != null)
-            {
-               hashCode += this.Start.GetHashCode();
-            }
-
-            if (this.End != null)
-            {
-               hashCode += this.End.GetHashCode();
-            }
-
-            if (this.Workday != null)
-            {
-               hashCode += this.Workday.GetHashCode();
-            }
-
-            if (this.TeamMemberIds != null)
-            {
-               hashCode += this.TeamMemberIds.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.LocationIds, this.EmployeeIds, this.Status, this.Start, this.End, this.Workday, this.TeamMemberIds);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

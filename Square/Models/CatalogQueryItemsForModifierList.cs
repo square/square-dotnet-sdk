@@ -59,20 +59,16 @@ namespace Square.Models
             return obj is CatalogQueryItemsForModifierList other &&
                 ((this.ModifierListIds == null && other.ModifierListIds == null) || (this.ModifierListIds?.Equals(other.ModifierListIds) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 969503410;
-
-            if (this.ModifierListIds != null)
-            {
-               hashCode += this.ModifierListIds.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.ModifierListIds);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

@@ -119,45 +119,16 @@ namespace Square.Models
                 ((this.SelectionUidsFilter == null && other.SelectionUidsFilter == null) || (this.SelectionUidsFilter?.Equals(other.SelectionUidsFilter) == true)) &&
                 ((this.BoolFilter == null && other.BoolFilter == null) || (this.BoolFilter?.Equals(other.BoolFilter) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 1810299489;
-
-            if (this.CustomAttributeDefinitionId != null)
-            {
-               hashCode += this.CustomAttributeDefinitionId.GetHashCode();
-            }
-
-            if (this.Key != null)
-            {
-               hashCode += this.Key.GetHashCode();
-            }
-
-            if (this.StringFilter != null)
-            {
-               hashCode += this.StringFilter.GetHashCode();
-            }
-
-            if (this.NumberFilter != null)
-            {
-               hashCode += this.NumberFilter.GetHashCode();
-            }
-
-            if (this.SelectionUidsFilter != null)
-            {
-               hashCode += this.SelectionUidsFilter.GetHashCode();
-            }
-
-            if (this.BoolFilter != null)
-            {
-               hashCode += this.BoolFilter.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.CustomAttributeDefinitionId, this.Key, this.StringFilter, this.NumberFilter, this.SelectionUidsFilter, this.BoolFilter);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

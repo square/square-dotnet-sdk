@@ -20,7 +20,7 @@ namespace Square.Apis
     public interface IBookingsApi
     {
         /// <summary>
-        /// Creates a booking..
+        /// Creates a booking.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <returns>Returns the Models.CreateBookingResponse response from the API call.</returns>
@@ -28,7 +28,7 @@ namespace Square.Apis
                 Models.CreateBookingRequest body);
 
         /// <summary>
-        /// Creates a booking..
+        /// Creates a booking.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
@@ -38,7 +38,7 @@ namespace Square.Apis
                 CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Searches for availabilities for booking..
+        /// Searches for availabilities for booking.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <returns>Returns the Models.SearchAvailabilityResponse response from the API call.</returns>
@@ -46,7 +46,7 @@ namespace Square.Apis
                 Models.SearchAvailabilityRequest body);
 
         /// <summary>
-        /// Searches for availabilities for booking..
+        /// Searches for availabilities for booking.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
@@ -56,20 +56,20 @@ namespace Square.Apis
                 CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Retrieves a seller's booking profile..
+        /// Retrieves a seller's booking profile.
         /// </summary>
         /// <returns>Returns the Models.RetrieveBusinessBookingProfileResponse response from the API call.</returns>
         Models.RetrieveBusinessBookingProfileResponse RetrieveBusinessBookingProfile();
 
         /// <summary>
-        /// Retrieves a seller's booking profile..
+        /// Retrieves a seller's booking profile.
         /// </summary>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the Models.RetrieveBusinessBookingProfileResponse response from the API call.</returns>
         Task<Models.RetrieveBusinessBookingProfileResponse> RetrieveBusinessBookingProfileAsync(CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Lists booking profiles for team members..
+        /// Lists booking profiles for team members.
         /// </summary>
         /// <param name="bookableOnly">Optional parameter: Indicates whether to include only bookable team members in the returned result (`true`) or not (`false`)..</param>
         /// <param name="limit">Optional parameter: The maximum number of results to return..</param>
@@ -83,7 +83,7 @@ namespace Square.Apis
                 string locationId = null);
 
         /// <summary>
-        /// Lists booking profiles for team members..
+        /// Lists booking profiles for team members.
         /// </summary>
         /// <param name="bookableOnly">Optional parameter: Indicates whether to include only bookable team members in the returned result (`true`) or not (`false`)..</param>
         /// <param name="limit">Optional parameter: The maximum number of results to return..</param>
@@ -99,7 +99,7 @@ namespace Square.Apis
                 CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Retrieves a team member's booking profile..
+        /// Retrieves a team member's booking profile.
         /// </summary>
         /// <param name="teamMemberId">Required parameter: The ID of the team member to retrieve..</param>
         /// <returns>Returns the Models.RetrieveTeamMemberBookingProfileResponse response from the API call.</returns>
@@ -107,7 +107,7 @@ namespace Square.Apis
                 string teamMemberId);
 
         /// <summary>
-        /// Retrieves a team member's booking profile..
+        /// Retrieves a team member's booking profile.
         /// </summary>
         /// <param name="teamMemberId">Required parameter: The ID of the team member to retrieve..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
@@ -117,7 +117,7 @@ namespace Square.Apis
                 CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Retrieves a booking..
+        /// Retrieves a booking.
         /// </summary>
         /// <param name="bookingId">Required parameter: The ID of the [Booking]($m/Booking) object representing the to-be-retrieved booking..</param>
         /// <returns>Returns the Models.RetrieveBookingResponse response from the API call.</returns>
@@ -125,7 +125,7 @@ namespace Square.Apis
                 string bookingId);
 
         /// <summary>
-        /// Retrieves a booking..
+        /// Retrieves a booking.
         /// </summary>
         /// <param name="bookingId">Required parameter: The ID of the [Booking]($m/Booking) object representing the to-be-retrieved booking..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
@@ -135,7 +135,7 @@ namespace Square.Apis
                 CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Updates a booking..
+        /// Updates a booking.
         /// </summary>
         /// <param name="bookingId">Required parameter: The ID of the [Booking]($m/Booking) object representing the to-be-updated booking..</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
@@ -145,7 +145,7 @@ namespace Square.Apis
                 Models.UpdateBookingRequest body);
 
         /// <summary>
-        /// Updates a booking..
+        /// Updates a booking.
         /// </summary>
         /// <param name="bookingId">Required parameter: The ID of the [Booking]($m/Booking) object representing the to-be-updated booking..</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
@@ -157,7 +157,7 @@ namespace Square.Apis
                 CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Cancels an existing booking..
+        /// Cancels an existing booking.
         /// </summary>
         /// <param name="bookingId">Required parameter: The ID of the [Booking]($m/Booking) object representing the to-be-cancelled booking..</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
@@ -167,7 +167,7 @@ namespace Square.Apis
                 Models.CancelBookingRequest body);
 
         /// <summary>
-        /// Cancels an existing booking..
+        /// Cancels an existing booking.
         /// </summary>
         /// <param name="bookingId">Required parameter: The ID of the [Booking]($m/Booking) object representing the to-be-cancelled booking..</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>

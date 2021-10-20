@@ -10,7 +10,6 @@ namespace Square.Models
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
     using Square;
-    using Square.Http.Client;
     using Square.Utilities;
 
     /// <summary>
@@ -30,12 +29,6 @@ namespace Square.Models
             this.Errors = errors;
             this.Transaction = transaction;
         }
-
-        /// <summary>
-        /// Gets http context.
-        /// </summary>
-        [JsonIgnore]
-        public HttpContext Context { get; internal set; }
 
         /// <summary>
         /// Any errors that occurred during the request.
@@ -76,34 +69,19 @@ namespace Square.Models
             }
 
             return obj is ChargeResponse other &&
-                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
                 ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true)) &&
                 ((this.Transaction == null && other.Transaction == null) || (this.Transaction?.Equals(other.Transaction) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1244238675;
-
-            if (this.Context != null)
-            {
-                hashCode += this.Context.GetHashCode();
-            }
-
-            if (this.Errors != null)
-            {
-               hashCode += this.Errors.GetHashCode();
-            }
-
-            if (this.Transaction != null)
-            {
-               hashCode += this.Transaction.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.Errors, this.Transaction);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

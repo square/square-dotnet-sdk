@@ -72,25 +72,16 @@ namespace Square.Models
                 ((this.Quantity == null && other.Quantity == null) || (this.Quantity?.Equals(other.Quantity) == true)) &&
                 ((this.QuantityDenominator == null && other.QuantityDenominator == null) || (this.QuantityDenominator?.Equals(other.QuantityDenominator) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -151581231;
-
-            if (this.Quantity != null)
-            {
-               hashCode += this.Quantity.GetHashCode();
-            }
-
-            if (this.QuantityDenominator != null)
-            {
-               hashCode += this.QuantityDenominator.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.Quantity, this.QuantityDenominator);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

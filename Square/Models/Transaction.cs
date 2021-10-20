@@ -182,65 +182,18 @@ namespace Square.Models
                 ((this.ShippingAddress == null && other.ShippingAddress == null) || (this.ShippingAddress?.Equals(other.ShippingAddress) == true)) &&
                 ((this.OrderId == null && other.OrderId == null) || (this.OrderId?.Equals(other.OrderId) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 226628405;
+            hashCode = HashCode.Combine(this.Id, this.LocationId, this.CreatedAt, this.Tenders, this.Refunds, this.ReferenceId, this.Product);
 
-            if (this.Id != null)
-            {
-               hashCode += this.Id.GetHashCode();
-            }
-
-            if (this.LocationId != null)
-            {
-               hashCode += this.LocationId.GetHashCode();
-            }
-
-            if (this.CreatedAt != null)
-            {
-               hashCode += this.CreatedAt.GetHashCode();
-            }
-
-            if (this.Tenders != null)
-            {
-               hashCode += this.Tenders.GetHashCode();
-            }
-
-            if (this.Refunds != null)
-            {
-               hashCode += this.Refunds.GetHashCode();
-            }
-
-            if (this.ReferenceId != null)
-            {
-               hashCode += this.ReferenceId.GetHashCode();
-            }
-
-            if (this.Product != null)
-            {
-               hashCode += this.Product.GetHashCode();
-            }
-
-            if (this.ClientId != null)
-            {
-               hashCode += this.ClientId.GetHashCode();
-            }
-
-            if (this.ShippingAddress != null)
-            {
-               hashCode += this.ShippingAddress.GetHashCode();
-            }
-
-            if (this.OrderId != null)
-            {
-               hashCode += this.OrderId.GetHashCode();
-            }
+            hashCode = HashCode.Combine(hashCode, this.ClientId, this.ShippingAddress, this.OrderId);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

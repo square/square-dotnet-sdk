@@ -200,75 +200,18 @@ namespace Square.Models
                 ((this.RewardIds == null && other.RewardIds == null) || (this.RewardIds?.Equals(other.RewardIds) == true)) &&
                 ((this.PricingRuleId == null && other.PricingRuleId == null) || (this.PricingRuleId?.Equals(other.PricingRuleId) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 751682986;
+            hashCode = HashCode.Combine(this.Uid, this.CatalogObjectId, this.CatalogVersion, this.Name, this.Type, this.Percentage, this.AmountMoney);
 
-            if (this.Uid != null)
-            {
-               hashCode += this.Uid.GetHashCode();
-            }
-
-            if (this.CatalogObjectId != null)
-            {
-               hashCode += this.CatalogObjectId.GetHashCode();
-            }
-
-            if (this.CatalogVersion != null)
-            {
-               hashCode += this.CatalogVersion.GetHashCode();
-            }
-
-            if (this.Name != null)
-            {
-               hashCode += this.Name.GetHashCode();
-            }
-
-            if (this.Type != null)
-            {
-               hashCode += this.Type.GetHashCode();
-            }
-
-            if (this.Percentage != null)
-            {
-               hashCode += this.Percentage.GetHashCode();
-            }
-
-            if (this.AmountMoney != null)
-            {
-               hashCode += this.AmountMoney.GetHashCode();
-            }
-
-            if (this.AppliedMoney != null)
-            {
-               hashCode += this.AppliedMoney.GetHashCode();
-            }
-
-            if (this.Metadata != null)
-            {
-               hashCode += this.Metadata.GetHashCode();
-            }
-
-            if (this.Scope != null)
-            {
-               hashCode += this.Scope.GetHashCode();
-            }
-
-            if (this.RewardIds != null)
-            {
-               hashCode += this.RewardIds.GetHashCode();
-            }
-
-            if (this.PricingRuleId != null)
-            {
-               hashCode += this.PricingRuleId.GetHashCode();
-            }
+            hashCode = HashCode.Combine(hashCode, this.AppliedMoney, this.Metadata, this.Scope, this.RewardIds, this.PricingRuleId);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

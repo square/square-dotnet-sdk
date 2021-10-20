@@ -99,19 +99,21 @@ RefundPaymentAsync(
 
 ```csharp
 var bodyAmountMoney = new Money.Builder()
-    .Amount(100L)
+    .Amount(1000L)
     .Currency("USD")
     .Build();
 var bodyAppFeeMoney = new Money.Builder()
-    .Amount(114L)
-    .Currency("GEL")
+    .Amount(10L)
+    .Currency("USD")
     .Build();
 var body = new RefundPaymentRequest.Builder(
-        "a7e36d40-d24b-11e8-b568-0800200c9a66",
+        "9b7f2dcf-49da-4411-b23e-a2d6af21333a",
         bodyAmountMoney,
-        "UNOE3kv2BZwqHlJ830RCt5YCuaB")
+        "R2B3Z8WMVt3EAmzYWLZvz7Y69EbZY")
     .AppFeeMoney(bodyAppFeeMoney)
-    .Reason("reason8")
+    .Reason("Example")
+    .PaymentVersionToken("payment_version_token6")
+    .TeamMemberId("team_member_id4")
     .Build();
 
 try

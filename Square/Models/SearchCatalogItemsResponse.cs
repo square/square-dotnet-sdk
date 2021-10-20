@@ -97,7 +97,7 @@ namespace Square.Models
                 ((this.Cursor == null && other.Cursor == null) || (this.Cursor?.Equals(other.Cursor) == true)) &&
                 ((this.MatchedVariationIds == null && other.MatchedVariationIds == null) || (this.MatchedVariationIds?.Equals(other.MatchedVariationIds) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
@@ -107,30 +107,11 @@ namespace Square.Models
             {
                 hashCode += this.Context.GetHashCode();
             }
-
-            if (this.Errors != null)
-            {
-               hashCode += this.Errors.GetHashCode();
-            }
-
-            if (this.Items != null)
-            {
-               hashCode += this.Items.GetHashCode();
-            }
-
-            if (this.Cursor != null)
-            {
-               hashCode += this.Cursor.GetHashCode();
-            }
-
-            if (this.MatchedVariationIds != null)
-            {
-               hashCode += this.MatchedVariationIds.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.Errors, this.Items, this.Cursor, this.MatchedVariationIds);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

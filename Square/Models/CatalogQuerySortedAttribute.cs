@@ -81,30 +81,16 @@ namespace Square.Models
                 ((this.InitialAttributeValue == null && other.InitialAttributeValue == null) || (this.InitialAttributeValue?.Equals(other.InitialAttributeValue) == true)) &&
                 ((this.SortOrder == null && other.SortOrder == null) || (this.SortOrder?.Equals(other.SortOrder) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -406098695;
-
-            if (this.AttributeName != null)
-            {
-               hashCode += this.AttributeName.GetHashCode();
-            }
-
-            if (this.InitialAttributeValue != null)
-            {
-               hashCode += this.InitialAttributeValue.GetHashCode();
-            }
-
-            if (this.SortOrder != null)
-            {
-               hashCode += this.SortOrder.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.AttributeName, this.InitialAttributeValue, this.SortOrder);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

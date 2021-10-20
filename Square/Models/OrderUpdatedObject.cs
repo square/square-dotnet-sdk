@@ -59,20 +59,16 @@ namespace Square.Models
             return obj is OrderUpdatedObject other &&
                 ((this.OrderUpdated == null && other.OrderUpdated == null) || (this.OrderUpdated?.Equals(other.OrderUpdated) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -155189447;
-
-            if (this.OrderUpdated != null)
-            {
-               hashCode += this.OrderUpdated.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.OrderUpdated);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

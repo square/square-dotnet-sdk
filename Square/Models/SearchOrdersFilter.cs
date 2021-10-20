@@ -112,40 +112,16 @@ namespace Square.Models
                 ((this.SourceFilter == null && other.SourceFilter == null) || (this.SourceFilter?.Equals(other.SourceFilter) == true)) &&
                 ((this.CustomerFilter == null && other.CustomerFilter == null) || (this.CustomerFilter?.Equals(other.CustomerFilter) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -566134060;
-
-            if (this.StateFilter != null)
-            {
-               hashCode += this.StateFilter.GetHashCode();
-            }
-
-            if (this.DateTimeFilter != null)
-            {
-               hashCode += this.DateTimeFilter.GetHashCode();
-            }
-
-            if (this.FulfillmentFilter != null)
-            {
-               hashCode += this.FulfillmentFilter.GetHashCode();
-            }
-
-            if (this.SourceFilter != null)
-            {
-               hashCode += this.SourceFilter.GetHashCode();
-            }
-
-            if (this.CustomerFilter != null)
-            {
-               hashCode += this.CustomerFilter.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.StateFilter, this.DateTimeFilter, this.FulfillmentFilter, this.SourceFilter, this.CustomerFilter);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

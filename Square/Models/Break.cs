@@ -123,47 +123,16 @@ namespace Square.Models
                 ((this.ExpectedDuration == null && other.ExpectedDuration == null) || (this.ExpectedDuration?.Equals(other.ExpectedDuration) == true)) &&
                 this.IsPaid.Equals(other.IsPaid);
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 168552180;
-
-            if (this.Id != null)
-            {
-               hashCode += this.Id.GetHashCode();
-            }
-
-            if (this.StartAt != null)
-            {
-               hashCode += this.StartAt.GetHashCode();
-            }
-
-            if (this.EndAt != null)
-            {
-               hashCode += this.EndAt.GetHashCode();
-            }
-
-            if (this.BreakTypeId != null)
-            {
-               hashCode += this.BreakTypeId.GetHashCode();
-            }
-
-            if (this.Name != null)
-            {
-               hashCode += this.Name.GetHashCode();
-            }
-
-            if (this.ExpectedDuration != null)
-            {
-               hashCode += this.ExpectedDuration.GetHashCode();
-            }
-
-            hashCode += this.IsPaid.GetHashCode();
+            hashCode = HashCode.Combine(this.Id, this.StartAt, this.EndAt, this.BreakTypeId, this.Name, this.ExpectedDuration, this.IsPaid);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

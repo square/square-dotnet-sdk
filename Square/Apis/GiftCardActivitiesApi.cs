@@ -38,7 +38,7 @@ namespace Square.Apis
         /// Lists gift card activities. By default, you get gift card activities for all.
         /// gift cards in the seller's account. You can optionally specify query parameters to.
         /// filter the list. For example, you can get a list of gift card activities for a gift card,.
-        /// for all gift cards in a specific region, or for activities within a time window..
+        /// for all gift cards in a specific region, or for activities within a time window.
         /// </summary>
         /// <param name="giftCardId">Optional parameter: If you provide a gift card ID, the endpoint returns activities that belong  to the specified gift card. Otherwise, the endpoint returns all gift card activities for  the seller..</param>
         /// <param name="type">Optional parameter: If you provide a type, the endpoint returns gift card activities of this type.  Otherwise, the endpoint returns all types of gift card activities..</param>
@@ -68,7 +68,7 @@ namespace Square.Apis
         /// Lists gift card activities. By default, you get gift card activities for all.
         /// gift cards in the seller's account. You can optionally specify query parameters to.
         /// filter the list. For example, you can get a list of gift card activities for a gift card,.
-        /// for all gift cards in a specific region, or for activities within a time window..
+        /// for all gift cards in a specific region, or for activities within a time window.
         /// </summary>
         /// <param name="giftCardId">Optional parameter: If you provide a gift card ID, the endpoint returns activities that belong  to the specified gift card. Otherwise, the endpoint returns all gift card activities for  the seller..</param>
         /// <param name="type">Optional parameter: If you provide a type, the endpoint returns gift card activities of this type.  Otherwise, the endpoint returns all types of gift card activities..</param>
@@ -148,7 +148,7 @@ namespace Square.Apis
         /// <summary>
         /// Creates a gift card activity. For more information, see .
         /// [GiftCardActivity](https://developer.squareup.com/docs/gift-cards/using-gift-cards-api#giftcardactivity) and .
-        /// [Using activated gift cards](https://developer.squareup.com/docs/gift-cards/using-gift-cards-api#using-activated-gift-cards)..
+        /// [Using activated gift cards](https://developer.squareup.com/docs/gift-cards/using-gift-cards-api#using-activated-gift-cards).
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <returns>Returns the Models.CreateGiftCardActivityResponse response from the API call.</returns>
@@ -163,7 +163,7 @@ namespace Square.Apis
         /// <summary>
         /// Creates a gift card activity. For more information, see .
         /// [GiftCardActivity](https://developer.squareup.com/docs/gift-cards/using-gift-cards-api#giftcardactivity) and .
-        /// [Using activated gift cards](https://developer.squareup.com/docs/gift-cards/using-gift-cards-api#using-activated-gift-cards)..
+        /// [Using activated gift cards](https://developer.squareup.com/docs/gift-cards/using-gift-cards-api#using-activated-gift-cards).
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>

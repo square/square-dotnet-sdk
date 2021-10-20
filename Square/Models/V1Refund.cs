@@ -237,7 +237,7 @@ namespace Square.Models
                 ((this.MerchantId == null && other.MerchantId == null) || (this.MerchantId?.Equals(other.MerchantId) == true)) &&
                 ((this.IsExchange == null && other.IsExchange == null) || (this.IsExchange?.Equals(other.IsExchange) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
@@ -247,100 +247,15 @@ namespace Square.Models
             {
                 hashCode += this.Context.GetHashCode();
             }
+            hashCode = HashCode.Combine(this.Type, this.Reason, this.RefundedMoney, this.RefundedProcessingFeeMoney, this.RefundedTaxMoney, this.RefundedAdditiveTaxMoney, this.RefundedAdditiveTax);
 
-            if (this.Type != null)
-            {
-               hashCode += this.Type.GetHashCode();
-            }
+            hashCode = HashCode.Combine(hashCode, this.RefundedInclusiveTaxMoney, this.RefundedInclusiveTax, this.RefundedTipMoney, this.RefundedDiscountMoney, this.RefundedSurchargeMoney, this.RefundedSurcharges, this.CreatedAt);
 
-            if (this.Reason != null)
-            {
-               hashCode += this.Reason.GetHashCode();
-            }
-
-            if (this.RefundedMoney != null)
-            {
-               hashCode += this.RefundedMoney.GetHashCode();
-            }
-
-            if (this.RefundedProcessingFeeMoney != null)
-            {
-               hashCode += this.RefundedProcessingFeeMoney.GetHashCode();
-            }
-
-            if (this.RefundedTaxMoney != null)
-            {
-               hashCode += this.RefundedTaxMoney.GetHashCode();
-            }
-
-            if (this.RefundedAdditiveTaxMoney != null)
-            {
-               hashCode += this.RefundedAdditiveTaxMoney.GetHashCode();
-            }
-
-            if (this.RefundedAdditiveTax != null)
-            {
-               hashCode += this.RefundedAdditiveTax.GetHashCode();
-            }
-
-            if (this.RefundedInclusiveTaxMoney != null)
-            {
-               hashCode += this.RefundedInclusiveTaxMoney.GetHashCode();
-            }
-
-            if (this.RefundedInclusiveTax != null)
-            {
-               hashCode += this.RefundedInclusiveTax.GetHashCode();
-            }
-
-            if (this.RefundedTipMoney != null)
-            {
-               hashCode += this.RefundedTipMoney.GetHashCode();
-            }
-
-            if (this.RefundedDiscountMoney != null)
-            {
-               hashCode += this.RefundedDiscountMoney.GetHashCode();
-            }
-
-            if (this.RefundedSurchargeMoney != null)
-            {
-               hashCode += this.RefundedSurchargeMoney.GetHashCode();
-            }
-
-            if (this.RefundedSurcharges != null)
-            {
-               hashCode += this.RefundedSurcharges.GetHashCode();
-            }
-
-            if (this.CreatedAt != null)
-            {
-               hashCode += this.CreatedAt.GetHashCode();
-            }
-
-            if (this.ProcessedAt != null)
-            {
-               hashCode += this.ProcessedAt.GetHashCode();
-            }
-
-            if (this.PaymentId != null)
-            {
-               hashCode += this.PaymentId.GetHashCode();
-            }
-
-            if (this.MerchantId != null)
-            {
-               hashCode += this.MerchantId.GetHashCode();
-            }
-
-            if (this.IsExchange != null)
-            {
-               hashCode += this.IsExchange.GetHashCode();
-            }
+            hashCode = HashCode.Combine(hashCode, this.ProcessedAt, this.PaymentId, this.MerchantId, this.IsExchange);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

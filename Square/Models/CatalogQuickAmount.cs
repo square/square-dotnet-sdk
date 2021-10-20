@@ -95,35 +95,16 @@ namespace Square.Models
                 ((this.Score == null && other.Score == null) || (this.Score?.Equals(other.Score) == true)) &&
                 ((this.Ordinal == null && other.Ordinal == null) || (this.Ordinal?.Equals(other.Ordinal) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1903352296;
-
-            if (this.Type != null)
-            {
-               hashCode += this.Type.GetHashCode();
-            }
-
-            if (this.Amount != null)
-            {
-               hashCode += this.Amount.GetHashCode();
-            }
-
-            if (this.Score != null)
-            {
-               hashCode += this.Score.GetHashCode();
-            }
-
-            if (this.Ordinal != null)
-            {
-               hashCode += this.Ordinal.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.Type, this.Amount, this.Score, this.Ordinal);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

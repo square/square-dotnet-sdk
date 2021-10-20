@@ -79,30 +79,16 @@ namespace Square.Models
                 ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true)) &&
                 ((this.GiftCard == null && other.GiftCard == null) || (this.GiftCard?.Equals(other.GiftCard) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -117711612;
-
-            if (this.IdempotencyKey != null)
-            {
-               hashCode += this.IdempotencyKey.GetHashCode();
-            }
-
-            if (this.LocationId != null)
-            {
-               hashCode += this.LocationId.GetHashCode();
-            }
-
-            if (this.GiftCard != null)
-            {
-               hashCode += this.GiftCard.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.IdempotencyKey, this.LocationId, this.GiftCard);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

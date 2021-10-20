@@ -83,30 +83,16 @@ namespace Square.Models
                 ((this.OrderVersion == null && other.OrderVersion == null) || (this.OrderVersion?.Equals(other.OrderVersion) == true)) &&
                 ((this.PaymentIds == null && other.PaymentIds == null) || (this.PaymentIds?.Equals(other.PaymentIds) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -320446863;
-
-            if (this.IdempotencyKey != null)
-            {
-               hashCode += this.IdempotencyKey.GetHashCode();
-            }
-
-            if (this.OrderVersion != null)
-            {
-               hashCode += this.OrderVersion.GetHashCode();
-            }
-
-            if (this.PaymentIds != null)
-            {
-               hashCode += this.PaymentIds.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.IdempotencyKey, this.OrderVersion, this.PaymentIds);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

@@ -102,40 +102,16 @@ namespace Square.Models
                 ((this.Status == null && other.Status == null) || (this.Status?.Equals(other.Status) == true)) &&
                 ((this.SentAt == null && other.SentAt == null) || (this.SentAt?.Equals(other.SentAt) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1406942862;
-
-            if (this.Uid != null)
-            {
-               hashCode += this.Uid.GetHashCode();
-            }
-
-            if (this.RelativeScheduledDays != null)
-            {
-               hashCode += this.RelativeScheduledDays.GetHashCode();
-            }
-
-            if (this.Message != null)
-            {
-               hashCode += this.Message.GetHashCode();
-            }
-
-            if (this.Status != null)
-            {
-               hashCode += this.Status.GetHashCode();
-            }
-
-            if (this.SentAt != null)
-            {
-               hashCode += this.SentAt.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.Uid, this.RelativeScheduledDays, this.Message, this.Status, this.SentAt);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

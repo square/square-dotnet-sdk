@@ -170,65 +170,18 @@ namespace Square.Models
                 ((this.Scope == null && other.Scope == null) || (this.Scope?.Equals(other.Scope) == true)) &&
                 ((this.AutoApplied == null && other.AutoApplied == null) || (this.AutoApplied?.Equals(other.AutoApplied) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 670391105;
+            hashCode = HashCode.Combine(this.Uid, this.CatalogObjectId, this.CatalogVersion, this.Name, this.Type, this.Percentage, this.Metadata);
 
-            if (this.Uid != null)
-            {
-               hashCode += this.Uid.GetHashCode();
-            }
-
-            if (this.CatalogObjectId != null)
-            {
-               hashCode += this.CatalogObjectId.GetHashCode();
-            }
-
-            if (this.CatalogVersion != null)
-            {
-               hashCode += this.CatalogVersion.GetHashCode();
-            }
-
-            if (this.Name != null)
-            {
-               hashCode += this.Name.GetHashCode();
-            }
-
-            if (this.Type != null)
-            {
-               hashCode += this.Type.GetHashCode();
-            }
-
-            if (this.Percentage != null)
-            {
-               hashCode += this.Percentage.GetHashCode();
-            }
-
-            if (this.Metadata != null)
-            {
-               hashCode += this.Metadata.GetHashCode();
-            }
-
-            if (this.AppliedMoney != null)
-            {
-               hashCode += this.AppliedMoney.GetHashCode();
-            }
-
-            if (this.Scope != null)
-            {
-               hashCode += this.Scope.GetHashCode();
-            }
-
-            if (this.AutoApplied != null)
-            {
-               hashCode += this.AutoApplied.GetHashCode();
-            }
+            hashCode = HashCode.Combine(hashCode, this.AppliedMoney, this.Scope, this.AutoApplied);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

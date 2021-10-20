@@ -59,20 +59,16 @@ namespace Square.Models
             return obj is UpdateTeamMemberRequest other &&
                 ((this.TeamMember == null && other.TeamMember == null) || (this.TeamMember?.Equals(other.TeamMember) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1973028988;
-
-            if (this.TeamMember != null)
-            {
-               hashCode += this.TeamMember.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.TeamMember);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

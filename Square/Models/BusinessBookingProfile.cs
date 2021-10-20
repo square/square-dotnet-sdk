@@ -119,50 +119,16 @@ namespace Square.Models
                 ((this.AllowUserCancel == null && other.AllowUserCancel == null) || (this.AllowUserCancel?.Equals(other.AllowUserCancel) == true)) &&
                 ((this.BusinessAppointmentSettings == null && other.BusinessAppointmentSettings == null) || (this.BusinessAppointmentSettings?.Equals(other.BusinessAppointmentSettings) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = 604613904;
-
-            if (this.SellerId != null)
-            {
-               hashCode += this.SellerId.GetHashCode();
-            }
-
-            if (this.CreatedAt != null)
-            {
-               hashCode += this.CreatedAt.GetHashCode();
-            }
-
-            if (this.BookingEnabled != null)
-            {
-               hashCode += this.BookingEnabled.GetHashCode();
-            }
-
-            if (this.CustomerTimezoneChoice != null)
-            {
-               hashCode += this.CustomerTimezoneChoice.GetHashCode();
-            }
-
-            if (this.BookingPolicy != null)
-            {
-               hashCode += this.BookingPolicy.GetHashCode();
-            }
-
-            if (this.AllowUserCancel != null)
-            {
-               hashCode += this.AllowUserCancel.GetHashCode();
-            }
-
-            if (this.BusinessAppointmentSettings != null)
-            {
-               hashCode += this.BusinessAppointmentSettings.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.SellerId, this.CreatedAt, this.BookingEnabled, this.CustomerTimezoneChoice, this.BookingPolicy, this.AllowUserCancel, this.BusinessAppointmentSettings);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>

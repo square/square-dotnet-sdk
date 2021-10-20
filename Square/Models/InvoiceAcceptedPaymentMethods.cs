@@ -80,30 +80,16 @@ namespace Square.Models
                 ((this.SquareGiftCard == null && other.SquareGiftCard == null) || (this.SquareGiftCard?.Equals(other.SquareGiftCard) == true)) &&
                 ((this.BankAccount == null && other.BankAccount == null) || (this.BankAccount?.Equals(other.BankAccount) == true));
         }
-
+        
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             int hashCode = -1321205176;
-
-            if (this.Card != null)
-            {
-               hashCode += this.Card.GetHashCode();
-            }
-
-            if (this.SquareGiftCard != null)
-            {
-               hashCode += this.SquareGiftCard.GetHashCode();
-            }
-
-            if (this.BankAccount != null)
-            {
-               hashCode += this.BankAccount.GetHashCode();
-            }
+            hashCode = HashCode.Combine(this.Card, this.SquareGiftCard, this.BankAccount);
 
             return hashCode;
         }
-
+  
         /// <summary>
         /// ToString overload.
         /// </summary>
