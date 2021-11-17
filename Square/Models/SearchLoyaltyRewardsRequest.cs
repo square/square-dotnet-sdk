@@ -40,7 +40,7 @@ namespace Square.Models
         public Models.SearchLoyaltyRewardsRequestLoyaltyRewardQuery Query { get; }
 
         /// <summary>
-        /// The maximum number of results to return in the response.
+        /// The maximum number of results to return in the response. The default value is 30.
         /// </summary>
         [JsonProperty("limit", NullValueHandling = NullValueHandling.Ignore)]
         public int? Limit { get; }

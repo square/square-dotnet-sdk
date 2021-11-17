@@ -31,8 +31,9 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// A pagination cursor returned by a previous call to this endpoint.
-        /// Provide this to retrieve the next set of results for the original query.
+        /// When the total number of resulting subscription events exceeds the limit of a paged response,
+        /// specify the cursor returned from a preceding response here to fetch the next set of results.
+        /// If the cursor is unset, the response contains the last page of the results.
         /// For more information, see [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination).
         /// </summary>
         [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
@@ -40,8 +41,7 @@ namespace Square.Models
 
         /// <summary>
         /// The upper limit on the number of subscription events to return
-        /// in the response.
-        /// Default: `200`
+        /// in a paged response.
         /// </summary>
         [JsonProperty("limit", NullValueHandling = NullValueHandling.Ignore)]
         public int? Limit { get; }

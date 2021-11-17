@@ -35,6 +35,101 @@ namespace Square.Apis
         }
 
         /// <summary>
+        /// Retrieve a collection of bookings.
+        /// </summary>
+        /// <param name="limit">Optional parameter: The maximum number of results per page to return in a paged response..</param>
+        /// <param name="cursor">Optional parameter: The pagination cursor from the preceding response to return the next page of the results. Do not set this when retrieving the first page of the results..</param>
+        /// <param name="teamMemberId">Optional parameter: The team member for whom to retrieve bookings. If this is not set, bookings of all members are retrieved..</param>
+        /// <param name="locationId">Optional parameter: The location for which to retrieve bookings. If this is not set, all locations' bookings are retrieved..</param>
+        /// <param name="startAtMin">Optional parameter: The RFC 3339 timestamp specifying the earliest of the start time. If this is not set, the current time is used..</param>
+        /// <param name="startAtMax">Optional parameter: The RFC 3339 timestamp specifying the latest of the start time. If this is not set, the time of 31 days after `start_at_min` is used..</param>
+        /// <returns>Returns the Models.ListBookingsResponse response from the API call.</returns>
+        public Models.ListBookingsResponse ListBookings(
+                int? limit = null,
+                string cursor = null,
+                string teamMemberId = null,
+                string locationId = null,
+                string startAtMin = null,
+                string startAtMax = null)
+        {
+            Task<Models.ListBookingsResponse> t = this.ListBookingsAsync(limit, cursor, teamMemberId, locationId, startAtMin, startAtMax);
+            ApiHelper.RunTaskSynchronously(t);
+            return t.Result;
+        }
+
+        /// <summary>
+        /// Retrieve a collection of bookings.
+        /// </summary>
+        /// <param name="limit">Optional parameter: The maximum number of results per page to return in a paged response..</param>
+        /// <param name="cursor">Optional parameter: The pagination cursor from the preceding response to return the next page of the results. Do not set this when retrieving the first page of the results..</param>
+        /// <param name="teamMemberId">Optional parameter: The team member for whom to retrieve bookings. If this is not set, bookings of all members are retrieved..</param>
+        /// <param name="locationId">Optional parameter: The location for which to retrieve bookings. If this is not set, all locations' bookings are retrieved..</param>
+        /// <param name="startAtMin">Optional parameter: The RFC 3339 timestamp specifying the earliest of the start time. If this is not set, the current time is used..</param>
+        /// <param name="startAtMax">Optional parameter: The RFC 3339 timestamp specifying the latest of the start time. If this is not set, the time of 31 days after `start_at_min` is used..</param>
+        /// <param name="cancellationToken"> cancellationToken. </param>
+        /// <returns>Returns the Models.ListBookingsResponse response from the API call.</returns>
+        public async Task<Models.ListBookingsResponse> ListBookingsAsync(
+                int? limit = null,
+                string cursor = null,
+                string teamMemberId = null,
+                string locationId = null,
+                string startAtMin = null,
+                string startAtMax = null,
+                CancellationToken cancellationToken = default)
+        {
+            // the base uri for api requests.
+            string baseUri = this.Config.GetBaseUri();
+
+            // prepare query string for API call.
+            StringBuilder queryBuilder = new StringBuilder(baseUri);
+            queryBuilder.Append("/v2/bookings");
+
+            // prepare specfied query parameters.
+            var queryParams = new Dictionary<string, object>()
+            {
+                { "limit", limit },
+                { "cursor", cursor },
+                { "team_member_id", teamMemberId },
+                { "location_id", locationId },
+                { "start_at_min", startAtMin },
+                { "start_at_max", startAtMax },
+            };
+
+            // append request with appropriate headers and parameters
+            var headers = new Dictionary<string, string>()
+            {
+                { "user-agent", this.UserAgent },
+                { "accept", "application/json" },
+                { "Square-Version", this.Config.SquareVersion },
+            };
+
+            // prepare the API call request to fetch the response.
+            HttpRequest httpRequest = this.GetClientInstance().Get(queryBuilder.ToString(), headers, queryParameters: queryParams);
+
+            if (this.HttpCallBack != null)
+            {
+                this.HttpCallBack.OnBeforeHttpRequestEventHandler(this.GetClientInstance(), httpRequest);
+            }
+
+            httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
+
+            // invoke request and get response.
+            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+            HttpContext context = new HttpContext(httpRequest, response);
+            if (this.HttpCallBack != null)
+            {
+                this.HttpCallBack.OnAfterHttpResponseEventHandler(this.GetClientInstance(), response);
+            }
+
+            // handle errors defined at the API level.
+            this.ValidateResponse(response, context);
+
+            var responseModel = ApiHelper.JsonDeserialize<Models.ListBookingsResponse>(response.Body);
+            responseModel.Context = context;
+            return responseModel;
+        }
+
+        /// <summary>
         /// Creates a booking.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
@@ -69,7 +164,7 @@ namespace Square.Apis
             {
                 { "user-agent", this.UserAgent },
                 { "accept", "application/json" },
-                { "content-type", "application/json; charset=utf-8" },
+                { "Content-Type", "application/json" },
                 { "Square-Version", this.Config.SquareVersion },
             };
 
@@ -137,7 +232,7 @@ namespace Square.Apis
             {
                 { "user-agent", this.UserAgent },
                 { "accept", "application/json" },
-                { "content-type", "application/json; charset=utf-8" },
+                { "Content-Type", "application/json" },
                 { "Square-Version", this.Config.SquareVersion },
             };
 
@@ -499,7 +594,7 @@ namespace Square.Apis
             {
                 { "user-agent", this.UserAgent },
                 { "accept", "application/json" },
-                { "content-type", "application/json; charset=utf-8" },
+                { "Content-Type", "application/json" },
                 { "Square-Version", this.Config.SquareVersion },
             };
 
@@ -577,7 +672,7 @@ namespace Square.Apis
             {
                 { "user-agent", this.UserAgent },
                 { "accept", "application/json" },
-                { "content-type", "application/json; charset=utf-8" },
+                { "Content-Type", "application/json" },
                 { "Square-Version", this.Config.SquareVersion },
             };
 

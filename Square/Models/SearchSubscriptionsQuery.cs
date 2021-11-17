@@ -28,7 +28,8 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// Represents a set of SearchSubscriptionsQuery filters used to limit the set of Subscriptions returned by SearchSubscriptions.
+        /// Represents a set of query expressions (filters) to narrow the scope of targeted subscriptions returned by
+        /// the [SearchSubscriptions]($e/Subscriptions/SearchSubscriptions) endpoint.
         /// </summary>
         [JsonProperty("filter", NullValueHandling = NullValueHandling.Ignore)]
         public Models.SearchSubscriptionsFilter Filter { get; }

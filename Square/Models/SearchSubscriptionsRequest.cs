@@ -23,19 +23,23 @@ namespace Square.Models
         /// <param name="cursor">cursor.</param>
         /// <param name="limit">limit.</param>
         /// <param name="query">query.</param>
+        /// <param name="include">include.</param>
         public SearchSubscriptionsRequest(
             string cursor = null,
             int? limit = null,
-            Models.SearchSubscriptionsQuery query = null)
+            Models.SearchSubscriptionsQuery query = null,
+            IList<string> include = null)
         {
             this.Cursor = cursor;
             this.Limit = limit;
             this.Query = query;
+            this.Include = include;
         }
 
         /// <summary>
-        /// A pagination cursor returned by a previous call to this endpoint.
-        /// Provide this to retrieve the next set of results for the original query.
+        /// When the total number of resulting subscriptions exceeds the limit of a paged response,
+        /// specify the cursor returned from a preceding response here to fetch the next set of results.
+        /// If the cursor is unset, the response contains the last page of the results.
         /// For more information, see [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination).
         /// </summary>
         [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
@@ -43,17 +47,24 @@ namespace Square.Models
 
         /// <summary>
         /// The upper limit on the number of subscriptions to return
-        /// in the response.
-        /// Default: `200`
+        /// in a paged response.
         /// </summary>
         [JsonProperty("limit", NullValueHandling = NullValueHandling.Ignore)]
         public int? Limit { get; }
 
         /// <summary>
-        /// Represents a query (including filtering criteria) used to search for subscriptions.
+        /// Represents a query, consisting of specified query expressions, used to search for subscriptions.
         /// </summary>
         [JsonProperty("query", NullValueHandling = NullValueHandling.Ignore)]
         public Models.SearchSubscriptionsQuery Query { get; }
+
+        /// <summary>
+        /// A query parameter to specify related information to be included in the response.
+        /// The supported query parameter values are:
+        /// - `actions`: to include scheduled actions on the targeted subscriptions.
+        /// </summary>
+        [JsonProperty("include", NullValueHandling = NullValueHandling.Ignore)]
+        public IList<string> Include { get; }
 
         /// <inheritdoc/>
         public override string ToString()
@@ -81,14 +92,15 @@ namespace Square.Models
             return obj is SearchSubscriptionsRequest other &&
                 ((this.Cursor == null && other.Cursor == null) || (this.Cursor?.Equals(other.Cursor) == true)) &&
                 ((this.Limit == null && other.Limit == null) || (this.Limit?.Equals(other.Limit) == true)) &&
-                ((this.Query == null && other.Query == null) || (this.Query?.Equals(other.Query) == true));
+                ((this.Query == null && other.Query == null) || (this.Query?.Equals(other.Query) == true)) &&
+                ((this.Include == null && other.Include == null) || (this.Include?.Equals(other.Include) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 193071717;
-            hashCode = HashCode.Combine(this.Cursor, this.Limit, this.Query);
+            int hashCode = 363002383;
+            hashCode = HashCode.Combine(this.Cursor, this.Limit, this.Query, this.Include);
 
             return hashCode;
         }
@@ -102,6 +114,7 @@ namespace Square.Models
             toStringOutput.Add($"this.Cursor = {(this.Cursor == null ? "null" : this.Cursor == string.Empty ? "" : this.Cursor)}");
             toStringOutput.Add($"this.Limit = {(this.Limit == null ? "null" : this.Limit.ToString())}");
             toStringOutput.Add($"this.Query = {(this.Query == null ? "null" : this.Query.ToString())}");
+            toStringOutput.Add($"this.Include = {(this.Include == null ? "null" : $"[{string.Join(", ", this.Include)} ]")}");
         }
 
         /// <summary>
@@ -113,7 +126,8 @@ namespace Square.Models
             var builder = new Builder()
                 .Cursor(this.Cursor)
                 .Limit(this.Limit)
-                .Query(this.Query);
+                .Query(this.Query)
+                .Include(this.Include);
             return builder;
         }
 
@@ -125,6 +139,7 @@ namespace Square.Models
             private string cursor;
             private int? limit;
             private Models.SearchSubscriptionsQuery query;
+            private IList<string> include;
 
              /// <summary>
              /// Cursor.
@@ -159,6 +174,17 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// Include.
+             /// </summary>
+             /// <param name="include"> include. </param>
+             /// <returns> Builder. </returns>
+            public Builder Include(IList<string> include)
+            {
+                this.include = include;
+                return this;
+            }
+
             /// <summary>
             /// Builds class object.
             /// </summary>
@@ -168,7 +194,8 @@ namespace Square.Models
                 return new SearchSubscriptionsRequest(
                     this.cursor,
                     this.limit,
-                    this.query);
+                    this.query,
+                    this.include);
             }
         }
     }

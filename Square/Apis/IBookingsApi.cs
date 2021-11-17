@@ -20,6 +20,44 @@ namespace Square.Apis
     public interface IBookingsApi
     {
         /// <summary>
+        /// Retrieve a collection of bookings.
+        /// </summary>
+        /// <param name="limit">Optional parameter: The maximum number of results per page to return in a paged response..</param>
+        /// <param name="cursor">Optional parameter: The pagination cursor from the preceding response to return the next page of the results. Do not set this when retrieving the first page of the results..</param>
+        /// <param name="teamMemberId">Optional parameter: The team member for whom to retrieve bookings. If this is not set, bookings of all members are retrieved..</param>
+        /// <param name="locationId">Optional parameter: The location for which to retrieve bookings. If this is not set, all locations' bookings are retrieved..</param>
+        /// <param name="startAtMin">Optional parameter: The RFC 3339 timestamp specifying the earliest of the start time. If this is not set, the current time is used..</param>
+        /// <param name="startAtMax">Optional parameter: The RFC 3339 timestamp specifying the latest of the start time. If this is not set, the time of 31 days after `start_at_min` is used..</param>
+        /// <returns>Returns the Models.ListBookingsResponse response from the API call.</returns>
+        Models.ListBookingsResponse ListBookings(
+                int? limit = null,
+                string cursor = null,
+                string teamMemberId = null,
+                string locationId = null,
+                string startAtMin = null,
+                string startAtMax = null);
+
+        /// <summary>
+        /// Retrieve a collection of bookings.
+        /// </summary>
+        /// <param name="limit">Optional parameter: The maximum number of results per page to return in a paged response..</param>
+        /// <param name="cursor">Optional parameter: The pagination cursor from the preceding response to return the next page of the results. Do not set this when retrieving the first page of the results..</param>
+        /// <param name="teamMemberId">Optional parameter: The team member for whom to retrieve bookings. If this is not set, bookings of all members are retrieved..</param>
+        /// <param name="locationId">Optional parameter: The location for which to retrieve bookings. If this is not set, all locations' bookings are retrieved..</param>
+        /// <param name="startAtMin">Optional parameter: The RFC 3339 timestamp specifying the earliest of the start time. If this is not set, the current time is used..</param>
+        /// <param name="startAtMax">Optional parameter: The RFC 3339 timestamp specifying the latest of the start time. If this is not set, the time of 31 days after `start_at_min` is used..</param>
+        /// <param name="cancellationToken"> cancellationToken. </param>
+        /// <returns>Returns the Models.ListBookingsResponse response from the API call.</returns>
+        Task<Models.ListBookingsResponse> ListBookingsAsync(
+                int? limit = null,
+                string cursor = null,
+                string teamMemberId = null,
+                string locationId = null,
+                string startAtMin = null,
+                string startAtMax = null,
+                CancellationToken cancellationToken = default);
+
+        /// <summary>
         /// Creates a booking.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>

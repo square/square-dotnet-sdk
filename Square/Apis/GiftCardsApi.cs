@@ -38,11 +38,11 @@ namespace Square.Apis
         /// Lists all gift cards. You can specify optional filters to retrieve .
         /// a subset of the gift cards.
         /// </summary>
-        /// <param name="type">Optional parameter: If a type is provided, gift cards of this type are returned  (see [GiftCardType]($m/GiftCardType)). If no type is provided, it returns gift cards of all types..</param>
-        /// <param name="state">Optional parameter: If the state is provided, it returns the gift cards in the specified state  (see [GiftCardStatus]($m/GiftCardStatus)). Otherwise, it returns the gift cards of all states..</param>
-        /// <param name="limit">Optional parameter: If a value is provided, it returns only that number of results per page. The maximum number of results allowed per page is 50. The default value is 30..</param>
-        /// <param name="cursor">Optional parameter: A pagination cursor returned by a previous call to this endpoint. Provide this cursor to retrieve the next set of results for the original query. If a cursor is not provided, it returns the first page of the results.  For more information, see [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination)..</param>
-        /// <param name="customerId">Optional parameter: If a value is provided, returns only the gift cards linked to the specified customer.</param>
+        /// <param name="type">Optional parameter: If a [type]($m/GiftCardType) is provided, the endpoint returns gift cards of the specified type. Otherwise, the endpoint returns gift cards of all types..</param>
+        /// <param name="state">Optional parameter: If a [state]($m/GiftCardStatus) is provided, the endpoint returns the gift cards in the specified state. Otherwise, the endpoint returns the gift cards of all states..</param>
+        /// <param name="limit">Optional parameter: If a limit is provided, the endpoint returns only the specified number of results per page. The maximum value is 50. The default value is 30. For more information, see [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination)..</param>
+        /// <param name="cursor">Optional parameter: A pagination cursor returned by a previous call to this endpoint. Provide this cursor to retrieve the next set of results for the original query. If a cursor is not provided, the endpoint returns the first page of the results.  For more information, see [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination)..</param>
+        /// <param name="customerId">Optional parameter: If a customer ID is provided, the endpoint returns only the gift cards linked to the specified customer..</param>
         /// <returns>Returns the Models.ListGiftCardsResponse response from the API call.</returns>
         public Models.ListGiftCardsResponse ListGiftCards(
                 string type = null,
@@ -60,11 +60,11 @@ namespace Square.Apis
         /// Lists all gift cards. You can specify optional filters to retrieve .
         /// a subset of the gift cards.
         /// </summary>
-        /// <param name="type">Optional parameter: If a type is provided, gift cards of this type are returned  (see [GiftCardType]($m/GiftCardType)). If no type is provided, it returns gift cards of all types..</param>
-        /// <param name="state">Optional parameter: If the state is provided, it returns the gift cards in the specified state  (see [GiftCardStatus]($m/GiftCardStatus)). Otherwise, it returns the gift cards of all states..</param>
-        /// <param name="limit">Optional parameter: If a value is provided, it returns only that number of results per page. The maximum number of results allowed per page is 50. The default value is 30..</param>
-        /// <param name="cursor">Optional parameter: A pagination cursor returned by a previous call to this endpoint. Provide this cursor to retrieve the next set of results for the original query. If a cursor is not provided, it returns the first page of the results.  For more information, see [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination)..</param>
-        /// <param name="customerId">Optional parameter: If a value is provided, returns only the gift cards linked to the specified customer.</param>
+        /// <param name="type">Optional parameter: If a [type]($m/GiftCardType) is provided, the endpoint returns gift cards of the specified type. Otherwise, the endpoint returns gift cards of all types..</param>
+        /// <param name="state">Optional parameter: If a [state]($m/GiftCardStatus) is provided, the endpoint returns the gift cards in the specified state. Otherwise, the endpoint returns the gift cards of all states..</param>
+        /// <param name="limit">Optional parameter: If a limit is provided, the endpoint returns only the specified number of results per page. The maximum value is 50. The default value is 30. For more information, see [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination)..</param>
+        /// <param name="cursor">Optional parameter: A pagination cursor returned by a previous call to this endpoint. Provide this cursor to retrieve the next set of results for the original query. If a cursor is not provided, the endpoint returns the first page of the results.  For more information, see [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination)..</param>
+        /// <param name="customerId">Optional parameter: If a customer ID is provided, the endpoint returns only the gift cards linked to the specified customer..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the Models.ListGiftCardsResponse response from the API call.</returns>
         public async Task<Models.ListGiftCardsResponse> ListGiftCardsAsync(
@@ -165,7 +165,7 @@ namespace Square.Apis
             {
                 { "user-agent", this.UserAgent },
                 { "accept", "application/json" },
-                { "content-type", "application/json; charset=utf-8" },
+                { "Content-Type", "application/json" },
                 { "Square-Version", this.Config.SquareVersion },
             };
 
@@ -233,7 +233,7 @@ namespace Square.Apis
             {
                 { "user-agent", this.UserAgent },
                 { "accept", "application/json" },
-                { "content-type", "application/json; charset=utf-8" },
+                { "Content-Type", "application/json" },
                 { "Square-Version", this.Config.SquareVersion },
             };
 
@@ -267,7 +267,7 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Retrieves a gift card using a nonce (a secure token) that represents the gift card.
+        /// Retrieves a gift card using a secure payment token that represents the gift card.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <returns>Returns the Models.RetrieveGiftCardFromNonceResponse response from the API call.</returns>
@@ -280,7 +280,7 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Retrieves a gift card using a nonce (a secure token) that represents the gift card.
+        /// Retrieves a gift card using a secure payment token that represents the gift card.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
@@ -301,7 +301,7 @@ namespace Square.Apis
             {
                 { "user-agent", this.UserAgent },
                 { "accept", "application/json" },
-                { "content-type", "application/json; charset=utf-8" },
+                { "Content-Type", "application/json" },
                 { "Square-Version", this.Config.SquareVersion },
             };
 
@@ -335,9 +335,9 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Links a customer to a gift card.
+        /// Links a customer to a gift card, which is also referred to as adding a card on file.
         /// </summary>
-        /// <param name="giftCardId">Required parameter: The ID of the gift card to link..</param>
+        /// <param name="giftCardId">Required parameter: The ID of the gift card to be linked..</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <returns>Returns the Models.LinkCustomerToGiftCardResponse response from the API call.</returns>
         public Models.LinkCustomerToGiftCardResponse LinkCustomerToGiftCard(
@@ -350,9 +350,9 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Links a customer to a gift card.
+        /// Links a customer to a gift card, which is also referred to as adding a card on file.
         /// </summary>
-        /// <param name="giftCardId">Required parameter: The ID of the gift card to link..</param>
+        /// <param name="giftCardId">Required parameter: The ID of the gift card to be linked..</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the Models.LinkCustomerToGiftCardResponse response from the API call.</returns>
@@ -379,7 +379,7 @@ namespace Square.Apis
             {
                 { "user-agent", this.UserAgent },
                 { "accept", "application/json" },
-                { "content-type", "application/json; charset=utf-8" },
+                { "Content-Type", "application/json" },
                 { "Square-Version", this.Config.SquareVersion },
             };
 
@@ -413,9 +413,9 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Unlinks a customer from a gift card.
+        /// Unlinks a customer from a gift card, which is also referred to as removing a card on file.
         /// </summary>
-        /// <param name="giftCardId">Required parameter: Example: .</param>
+        /// <param name="giftCardId">Required parameter: The ID of the gift card to be unlinked..</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <returns>Returns the Models.UnlinkCustomerFromGiftCardResponse response from the API call.</returns>
         public Models.UnlinkCustomerFromGiftCardResponse UnlinkCustomerFromGiftCard(
@@ -428,9 +428,9 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Unlinks a customer from a gift card.
+        /// Unlinks a customer from a gift card, which is also referred to as removing a card on file.
         /// </summary>
-        /// <param name="giftCardId">Required parameter: Example: .</param>
+        /// <param name="giftCardId">Required parameter: The ID of the gift card to be unlinked..</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the Models.UnlinkCustomerFromGiftCardResponse response from the API call.</returns>
@@ -457,7 +457,7 @@ namespace Square.Apis
             {
                 { "user-agent", this.UserAgent },
                 { "accept", "application/json" },
-                { "content-type", "application/json; charset=utf-8" },
+                { "Content-Type", "application/json" },
                 { "Square-Version", this.Config.SquareVersion },
             };
 

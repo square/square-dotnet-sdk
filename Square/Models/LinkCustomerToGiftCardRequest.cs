@@ -28,7 +28,7 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// The ID of the customer to be linked.
+        /// The ID of the customer to link to the gift card.
         /// </summary>
         [JsonProperty("customer_id")]
         public string CustomerId { get; }

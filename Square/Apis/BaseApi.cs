@@ -62,7 +62,7 @@ namespace Square.Apis
         /// <summary>
         ///  Gets User-Agent header value.
         /// </summary>
-        protected string UserAgent => "Square-DotNet-SDK/15.0.0";
+        protected string UserAgent => "Square-DotNet-SDK/16.0.0";
 
         /// <summary>
         /// Create JSON-encoded multipart content from input.

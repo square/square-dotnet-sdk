@@ -483,10 +483,15 @@ namespace Square.Http.Client
             if (request.HttpMethod.Equals(HttpMethod.Delete) || request.HttpMethod.Equals(HttpMethod.Post) || request.HttpMethod.Equals(HttpMethod.Put) || request.HttpMethod.Equals(new HttpMethod("PATCH")))
             {
                 bool multipartRequest = request.FormParameters != null &&
-                    (request.FormParameters.Any(f => f.Value is MultipartContent) || request.FormParameters.Any(f => f.Value is FileStreamInfo));
+                        (request.FormParameters.Any(f => f.Value is MultipartContent) ||
+                        request.FormParameters.Any(f => f.Value is FileStreamInfo));
 
                 if (request.Body != null)
                 {
+                    string contentType = request.Headers.Where(p => p.Key.Equals("content-type", StringComparison.InvariantCultureIgnoreCase))
+                                                    .Select(x => x.Value)
+                                                    .FirstOrDefault();
+
                     if (request.Body is FileStreamInfo file)
                     {
                         file.FileStream.Position = 0;
@@ -495,25 +500,20 @@ namespace Square.Http.Client
                         {
                             requestMessage.Content.Headers.ContentType = new MediaTypeHeaderValue(file.ContentType);
                         }
-                        else if (request.Headers.Any(h => h.Key.Equals("content-type", StringComparison.OrdinalIgnoreCase)))
+                        else if (!string.IsNullOrEmpty(contentType))
                         {
-                            requestMessage.Content.Headers.ContentType = new MediaTypeHeaderValue(
-                                request.Headers.First(h =>
-                                    h.Key.Equals("content-type", StringComparison.OrdinalIgnoreCase)).Value);
+                            requestMessage.Content.Headers.ContentType = new MediaTypeHeaderValue(contentType);
                         }
                         else
                         {
                             requestMessage.Content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
                         }
                     }
-                    else if (request.Headers.ContainsKey("content-type") && string.Equals(
-                        request.Headers["content-type"],
-                        "application/json; charset=utf-8",
-                        StringComparison.OrdinalIgnoreCase))
+                    else if (!string.IsNullOrEmpty(contentType) && contentType.Equals("application/json; charset=utf-8", StringComparison.OrdinalIgnoreCase))
                     {
                         requestMessage.Content = new StringContent((string)request.Body ?? string.Empty, Encoding.UTF8, "application/json");
                     }
-                    else if (request.Headers.ContainsKey("content-type"))
+                    else if (!string.IsNullOrEmpty(contentType))
                     {
                         byte[] bytes = null;
 
@@ -539,11 +539,11 @@ namespace Square.Http.Client
 
                         try
                         {
-                            requestMessage.Content.Headers.ContentType = MediaTypeHeaderValue.Parse(request.Headers["content-type"]);
+                            requestMessage.Content.Headers.ContentType = MediaTypeHeaderValue.Parse(contentType);
                         }
                         catch (Exception)
                         {
-                            requestMessage.Content.Headers.TryAddWithoutValidation("content-type", request.Headers["content-type"]);
+                            requestMessage.Content.Headers.TryAddWithoutValidation("content-type", contentType);
                         }
                     }
                     else

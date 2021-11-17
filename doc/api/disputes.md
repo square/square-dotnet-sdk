@@ -48,7 +48,7 @@ ListDisputesAsync(
 
 ```csharp
 string cursor = "cursor6";
-string states = "EVIDENCE_REQUIRED";
+string states = "INQUIRY_EVIDENCE_REQUIRED";
 string locationId = "location_id4";
 
 try

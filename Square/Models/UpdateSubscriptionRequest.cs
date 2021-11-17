@@ -28,7 +28,7 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// Represents a customer subscription to a subscription plan.
+        /// Represents a subscription to a subscription plan by a subscriber.
         /// For an overview of the `Subscription` type, see
         /// [Subscription object](https://developer.squareup.com/docs/subscriptions-api/overview#subscription-object-overview).
         /// </summary>

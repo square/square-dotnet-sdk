@@ -22,16 +22,16 @@ namespace Square.Models
         /// </summary>
         /// <param name="idempotencyKey">idempotency_key.</param>
         /// <param name="amountMoney">amount_money.</param>
-        /// <param name="paymentId">payment_id.</param>
         /// <param name="appFeeMoney">app_fee_money.</param>
+        /// <param name="paymentId">payment_id.</param>
         /// <param name="reason">reason.</param>
         /// <param name="paymentVersionToken">payment_version_token.</param>
         /// <param name="teamMemberId">team_member_id.</param>
         public RefundPaymentRequest(
             string idempotencyKey,
             Models.Money amountMoney,
-            string paymentId,
             Models.Money appFeeMoney = null,
+            string paymentId = null,
             string reason = null,
             string paymentVersionToken = null,
             string teamMemberId = null)
@@ -76,9 +76,9 @@ namespace Square.Models
         public Models.Money AppFeeMoney { get; }
 
         /// <summary>
-        /// The unique ID of the payment being refunded.
+        /// The unique ID of the payment being refunded. Must be provided and non-empty.
         /// </summary>
-        [JsonProperty("payment_id")]
+        [JsonProperty("payment_id", NullValueHandling = NullValueHandling.Ignore)]
         public string PaymentId { get; }
 
         /// <summary>
@@ -167,9 +167,9 @@ namespace Square.Models
         {
             var builder = new Builder(
                 this.IdempotencyKey,
-                this.AmountMoney,
-                this.PaymentId)
+                this.AmountMoney)
                 .AppFeeMoney(this.AppFeeMoney)
+                .PaymentId(this.PaymentId)
                 .Reason(this.Reason)
                 .PaymentVersionToken(this.PaymentVersionToken)
                 .TeamMemberId(this.TeamMemberId);
@@ -183,20 +183,18 @@ namespace Square.Models
         {
             private string idempotencyKey;
             private Models.Money amountMoney;
-            private string paymentId;
             private Models.Money appFeeMoney;
+            private string paymentId;
             private string reason;
             private string paymentVersionToken;
             private string teamMemberId;
 
             public Builder(
                 string idempotencyKey,
-                Models.Money amountMoney,
-                string paymentId)
+                Models.Money amountMoney)
             {
                 this.idempotencyKey = idempotencyKey;
                 this.amountMoney = amountMoney;
-                this.paymentId = paymentId;
             }
 
              /// <summary>
@@ -222,17 +220,6 @@ namespace Square.Models
             }
 
              /// <summary>
-             /// PaymentId.
-             /// </summary>
-             /// <param name="paymentId"> paymentId. </param>
-             /// <returns> Builder. </returns>
-            public Builder PaymentId(string paymentId)
-            {
-                this.paymentId = paymentId;
-                return this;
-            }
-
-             /// <summary>
              /// AppFeeMoney.
              /// </summary>
              /// <param name="appFeeMoney"> appFeeMoney. </param>
@@ -240,6 +227,17 @@ namespace Square.Models
             public Builder AppFeeMoney(Models.Money appFeeMoney)
             {
                 this.appFeeMoney = appFeeMoney;
+                return this;
+            }
+
+             /// <summary>
+             /// PaymentId.
+             /// </summary>
+             /// <param name="paymentId"> paymentId. </param>
+             /// <returns> Builder. </returns>
+            public Builder PaymentId(string paymentId)
+            {
+                this.paymentId = paymentId;
                 return this;
             }
 
@@ -285,8 +283,8 @@ namespace Square.Models
                 return new RefundPaymentRequest(
                     this.idempotencyKey,
                     this.amountMoney,
-                    this.paymentId,
                     this.appFeeMoney,
+                    this.paymentId,
                     this.reason,
                     this.paymentVersionToken,
                     this.teamMemberId);

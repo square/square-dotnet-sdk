@@ -23,12 +23,15 @@ namespace Square.Models
         /// </summary>
         /// <param name="errors">errors.</param>
         /// <param name="subscription">subscription.</param>
+        /// <param name="actions">actions.</param>
         public CancelSubscriptionResponse(
             IList<Models.Error> errors = null,
-            Models.Subscription subscription = null)
+            Models.Subscription subscription = null,
+            IList<Models.SubscriptionAction> actions = null)
         {
             this.Errors = errors;
             this.Subscription = subscription;
+            this.Actions = actions;
         }
 
         /// <summary>
@@ -38,18 +41,24 @@ namespace Square.Models
         public HttpContext Context { get; internal set; }
 
         /// <summary>
-        /// Information about errors encountered during the request.
+        /// Errors encountered during the request.
         /// </summary>
         [JsonProperty("errors", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.Error> Errors { get; }
 
         /// <summary>
-        /// Represents a customer subscription to a subscription plan.
+        /// Represents a subscription to a subscription plan by a subscriber.
         /// For an overview of the `Subscription` type, see
         /// [Subscription object](https://developer.squareup.com/docs/subscriptions-api/overview#subscription-object-overview).
         /// </summary>
         [JsonProperty("subscription", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Subscription Subscription { get; }
+
+        /// <summary>
+        /// A list of a single `CANCEL` action scheduled for the subscription.
+        /// </summary>
+        [JsonProperty("actions", NullValueHandling = NullValueHandling.Ignore)]
+        public IList<Models.SubscriptionAction> Actions { get; }
 
         /// <inheritdoc/>
         public override string ToString()
@@ -77,19 +86,20 @@ namespace Square.Models
             return obj is CancelSubscriptionResponse other &&
                 ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
                 ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true)) &&
-                ((this.Subscription == null && other.Subscription == null) || (this.Subscription?.Equals(other.Subscription) == true));
+                ((this.Subscription == null && other.Subscription == null) || (this.Subscription?.Equals(other.Subscription) == true)) &&
+                ((this.Actions == null && other.Actions == null) || (this.Actions?.Equals(other.Actions) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -2139913384;
+            int hashCode = 920383025;
 
             if (this.Context != null)
             {
                 hashCode += this.Context.GetHashCode();
             }
-            hashCode = HashCode.Combine(this.Errors, this.Subscription);
+            hashCode = HashCode.Combine(this.Errors, this.Subscription, this.Actions);
 
             return hashCode;
         }
@@ -102,6 +112,7 @@ namespace Square.Models
         {
             toStringOutput.Add($"this.Errors = {(this.Errors == null ? "null" : $"[{string.Join(", ", this.Errors)} ]")}");
             toStringOutput.Add($"this.Subscription = {(this.Subscription == null ? "null" : this.Subscription.ToString())}");
+            toStringOutput.Add($"this.Actions = {(this.Actions == null ? "null" : $"[{string.Join(", ", this.Actions)} ]")}");
         }
 
         /// <summary>
@@ -112,7 +123,8 @@ namespace Square.Models
         {
             var builder = new Builder()
                 .Errors(this.Errors)
-                .Subscription(this.Subscription);
+                .Subscription(this.Subscription)
+                .Actions(this.Actions);
             return builder;
         }
 
@@ -123,6 +135,7 @@ namespace Square.Models
         {
             private IList<Models.Error> errors;
             private Models.Subscription subscription;
+            private IList<Models.SubscriptionAction> actions;
 
              /// <summary>
              /// Errors.
@@ -146,6 +159,17 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// Actions.
+             /// </summary>
+             /// <param name="actions"> actions. </param>
+             /// <returns> Builder. </returns>
+            public Builder Actions(IList<Models.SubscriptionAction> actions)
+            {
+                this.actions = actions;
+                return this;
+            }
+
             /// <summary>
             /// Builds class object.
             /// </summary>
@@ -154,7 +178,8 @@ namespace Square.Models
             {
                 return new CancelSubscriptionResponse(
                     this.errors,
-                    this.subscription);
+                    this.subscription,
+                    this.actions);
             }
         }
     }

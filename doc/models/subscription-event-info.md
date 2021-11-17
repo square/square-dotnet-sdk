@@ -12,14 +12,14 @@ Provides information about the subscription event.
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `Detail` | `string` | Optional | A human-readable explanation for the event. |
-| `Code` | [`string`](/doc/models/subscription-event-info-code.md) | Optional | The possible subscription event info codes. |
+| `Code` | [`string`](/doc/models/subscription-event-info-code.md) | Optional | Supported info codes of a subscription event. |
 
 ## Example (as JSON)
 
 ```json
 {
   "detail": "detail6",
-  "code": "CUSTOMER_NO_EMAIL"
+  "code": "CUSTOMER_DELETED"
 }
 ```
 

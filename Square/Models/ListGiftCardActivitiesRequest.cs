@@ -49,7 +49,7 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// If you provide a gift card ID, the endpoint returns activities that belong
+        /// If a gift card ID is provided, the endpoint returns activities related
         /// to the specified gift card. Otherwise, the endpoint returns all gift card activities for
         /// the seller.
         /// </summary>
@@ -57,14 +57,14 @@ namespace Square.Models
         public string GiftCardId { get; }
 
         /// <summary>
-        /// If you provide a type, the endpoint returns gift card activities of this type.
+        /// If a [type]($m/GiftCardActivityType) is provided, the endpoint returns gift card activities of the specified type.
         /// Otherwise, the endpoint returns all types of gift card activities.
         /// </summary>
         [JsonProperty("type", NullValueHandling = NullValueHandling.Ignore)]
         public string Type { get; }
 
         /// <summary>
-        /// If you provide a location ID, the endpoint returns gift card activities for that location.
+        /// If a location ID is provided, the endpoint returns gift card activities for the specified location.
         /// Otherwise, the endpoint returns gift card activities for all locations.
         /// </summary>
         [JsonProperty("location_id", NullValueHandling = NullValueHandling.Ignore)]
@@ -72,21 +72,22 @@ namespace Square.Models
 
         /// <summary>
         /// The timestamp for the beginning of the reporting period, in RFC 3339 format.
-        /// Inclusive. Default: The current time minus one year.
+        /// This start time is inclusive. The default value is the current time minus one year.
         /// </summary>
         [JsonProperty("begin_time", NullValueHandling = NullValueHandling.Ignore)]
         public string BeginTime { get; }
 
         /// <summary>
         /// The timestamp for the end of the reporting period, in RFC 3339 format.
-        /// Inclusive. Default: The current time.
+        /// This end time is inclusive. The default value is the current time.
         /// </summary>
         [JsonProperty("end_time", NullValueHandling = NullValueHandling.Ignore)]
         public string EndTime { get; }
 
         /// <summary>
-        /// If you provide a limit value, the endpoint returns the specified number
-        /// of results (or less) per page. A maximum value is 100. The default value is 50.
+        /// If a limit is provided, the endpoint returns the specified number
+        /// of results (or fewer) per page. The maximum value is 100. The default value is 50.
+        /// For more information, see [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination).
         /// </summary>
         [JsonProperty("limit", NullValueHandling = NullValueHandling.Ignore)]
         public int? Limit { get; }
@@ -94,7 +95,8 @@ namespace Square.Models
         /// <summary>
         /// A pagination cursor returned by a previous call to this endpoint.
         /// Provide this cursor to retrieve the next set of results for the original query.
-        /// If you do not provide the cursor, the call returns the first page of the results.
+        /// If a cursor is not provided, the endpoint returns the first page of the results.
+        /// For more information, see [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination).
         /// </summary>
         [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
         public string Cursor { get; }
