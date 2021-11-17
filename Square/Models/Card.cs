@@ -29,6 +29,7 @@ namespace Square.Models
         /// <param name="billingAddress">billing_address.</param>
         /// <param name="fingerprint">fingerprint.</param>
         /// <param name="customerId">customer_id.</param>
+        /// <param name="merchantId">merchant_id.</param>
         /// <param name="referenceId">reference_id.</param>
         /// <param name="enabled">enabled.</param>
         /// <param name="cardType">card_type.</param>
@@ -45,6 +46,7 @@ namespace Square.Models
             Models.Address billingAddress = null,
             string fingerprint = null,
             string customerId = null,
+            string merchantId = null,
             string referenceId = null,
             bool? enabled = null,
             string cardType = null,
@@ -61,6 +63,7 @@ namespace Square.Models
             this.BillingAddress = billingAddress;
             this.Fingerprint = fingerprint;
             this.CustomerId = customerId;
+            this.MerchantId = merchantId;
             this.ReferenceId = referenceId;
             this.Enabled = enabled;
             this.CardType = cardType;
@@ -150,6 +153,12 @@ namespace Square.Models
         public string CustomerId { get; }
 
         /// <summary>
+        /// The ID of the merchant associated with the card.
+        /// </summary>
+        [JsonProperty("merchant_id", NullValueHandling = NullValueHandling.Ignore)]
+        public string MerchantId { get; }
+
+        /// <summary>
         /// An optional user-defined reference ID that associates this card with
         /// another entity in an external system. For example, a customer ID from an
         /// external customer management system.
@@ -223,6 +232,7 @@ namespace Square.Models
                 ((this.BillingAddress == null && other.BillingAddress == null) || (this.BillingAddress?.Equals(other.BillingAddress) == true)) &&
                 ((this.Fingerprint == null && other.Fingerprint == null) || (this.Fingerprint?.Equals(other.Fingerprint) == true)) &&
                 ((this.CustomerId == null && other.CustomerId == null) || (this.CustomerId?.Equals(other.CustomerId) == true)) &&
+                ((this.MerchantId == null && other.MerchantId == null) || (this.MerchantId?.Equals(other.MerchantId) == true)) &&
                 ((this.ReferenceId == null && other.ReferenceId == null) || (this.ReferenceId?.Equals(other.ReferenceId) == true)) &&
                 ((this.Enabled == null && other.Enabled == null) || (this.Enabled?.Equals(other.Enabled) == true)) &&
                 ((this.CardType == null && other.CardType == null) || (this.CardType?.Equals(other.CardType) == true)) &&
@@ -234,12 +244,12 @@ namespace Square.Models
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1056966937;
+            int hashCode = 1690313038;
             hashCode = HashCode.Combine(this.Id, this.CardBrand, this.Last4, this.ExpMonth, this.ExpYear, this.CardholderName, this.BillingAddress);
 
-            hashCode = HashCode.Combine(hashCode, this.Fingerprint, this.CustomerId, this.ReferenceId, this.Enabled, this.CardType, this.PrepaidType, this.Bin);
+            hashCode = HashCode.Combine(hashCode, this.Fingerprint, this.CustomerId, this.MerchantId, this.ReferenceId, this.Enabled, this.CardType, this.PrepaidType);
 
-            hashCode = HashCode.Combine(hashCode, this.Version);
+            hashCode = HashCode.Combine(hashCode, this.Bin, this.Version);
 
             return hashCode;
         }
@@ -259,6 +269,7 @@ namespace Square.Models
             toStringOutput.Add($"this.BillingAddress = {(this.BillingAddress == null ? "null" : this.BillingAddress.ToString())}");
             toStringOutput.Add($"this.Fingerprint = {(this.Fingerprint == null ? "null" : this.Fingerprint == string.Empty ? "" : this.Fingerprint)}");
             toStringOutput.Add($"this.CustomerId = {(this.CustomerId == null ? "null" : this.CustomerId == string.Empty ? "" : this.CustomerId)}");
+            toStringOutput.Add($"this.MerchantId = {(this.MerchantId == null ? "null" : this.MerchantId == string.Empty ? "" : this.MerchantId)}");
             toStringOutput.Add($"this.ReferenceId = {(this.ReferenceId == null ? "null" : this.ReferenceId == string.Empty ? "" : this.ReferenceId)}");
             toStringOutput.Add($"this.Enabled = {(this.Enabled == null ? "null" : this.Enabled.ToString())}");
             toStringOutput.Add($"this.CardType = {(this.CardType == null ? "null" : this.CardType.ToString())}");
@@ -283,6 +294,7 @@ namespace Square.Models
                 .BillingAddress(this.BillingAddress)
                 .Fingerprint(this.Fingerprint)
                 .CustomerId(this.CustomerId)
+                .MerchantId(this.MerchantId)
                 .ReferenceId(this.ReferenceId)
                 .Enabled(this.Enabled)
                 .CardType(this.CardType)
@@ -306,6 +318,7 @@ namespace Square.Models
             private Models.Address billingAddress;
             private string fingerprint;
             private string customerId;
+            private string merchantId;
             private string referenceId;
             private bool? enabled;
             private string cardType;
@@ -413,6 +426,17 @@ namespace Square.Models
             }
 
              /// <summary>
+             /// MerchantId.
+             /// </summary>
+             /// <param name="merchantId"> merchantId. </param>
+             /// <returns> Builder. </returns>
+            public Builder MerchantId(string merchantId)
+            {
+                this.merchantId = merchantId;
+                return this;
+            }
+
+             /// <summary>
              /// ReferenceId.
              /// </summary>
              /// <param name="referenceId"> referenceId. </param>
@@ -494,6 +518,7 @@ namespace Square.Models
                     this.billingAddress,
                     this.fingerprint,
                     this.customerId,
+                    this.merchantId,
                     this.referenceId,
                     this.enabled,
                     this.cardType,

@@ -12,7 +12,7 @@ Represents an action performed on a gift card that affects its state or balance.
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `Id` | `string` | Optional | The unique ID of the gift card activity. |
-| `Type` | [`string`](/doc/models/gift-card-activity-type.md) | Required | - |
+| `Type` | [`string`](/doc/models/gift-card-activity-type.md) | Required | Indicates the gift card activity type. |
 | `LocationId` | `string` | Required | The ID of the location at which the activity occurred. |
 | `CreatedAt` | `string` | Optional | The timestamp when the gift card activity was created, in RFC 3339 format. |
 | `GiftCardId` | `string` | Optional | The gift card ID. The ID is not required if a GAN is present. |

@@ -85,7 +85,7 @@ namespace Square.Apis
             {
                 { "user-agent", this.UserAgent },
                 { "accept", "application/json" },
-                { "content-type", "application/json; charset=utf-8" },
+                { "Content-Type", "application/json" },
                 { "Square-Version", this.Config.SquareVersion },
             };
 
@@ -163,7 +163,7 @@ namespace Square.Apis
             {
                 { "user-agent", this.UserAgent },
                 { "accept", "application/json" },
-                { "content-type", "application/json; charset=utf-8" },
+                { "Content-Type", "application/json" },
                 { "Square-Version", this.Config.SquareVersion },
             };
 
@@ -247,7 +247,7 @@ namespace Square.Apis
             {
                 { "user-agent", this.UserAgent },
                 { "accept", "application/json" },
-                { "content-type", "application/json; charset=utf-8" },
+                { "Content-Type", "application/json" },
                 { "Square-Version", this.Config.SquareVersion },
             };
 
@@ -327,6 +327,7 @@ namespace Square.Apis
             {
                 { "user-agent", this.UserAgent },
                 { "accept", "application/json" },
+                { "Content-Type", "multipart/form-data" },
                 { "Square-Version", this.Config.SquareVersion },
             };
 
@@ -566,7 +567,7 @@ namespace Square.Apis
             {
                 { "user-agent", this.UserAgent },
                 { "accept", "application/json" },
-                { "content-type", "application/json; charset=utf-8" },
+                { "Content-Type", "application/json" },
                 { "Square-Version", this.Config.SquareVersion },
             };
 
@@ -825,7 +826,7 @@ namespace Square.Apis
             {
                 { "user-agent", this.UserAgent },
                 { "accept", "application/json" },
-                { "content-type", "application/json; charset=utf-8" },
+                { "Content-Type", "application/json" },
                 { "Square-Version", this.Config.SquareVersion },
             };
 
@@ -907,7 +908,7 @@ namespace Square.Apis
             {
                 { "user-agent", this.UserAgent },
                 { "accept", "application/json" },
-                { "content-type", "application/json; charset=utf-8" },
+                { "Content-Type", "application/json" },
                 { "Square-Version", this.Config.SquareVersion },
             };
 
@@ -979,7 +980,7 @@ namespace Square.Apis
             {
                 { "user-agent", this.UserAgent },
                 { "accept", "application/json" },
-                { "content-type", "application/json; charset=utf-8" },
+                { "Content-Type", "application/json" },
                 { "Square-Version", this.Config.SquareVersion },
             };
 
@@ -1051,7 +1052,7 @@ namespace Square.Apis
             {
                 { "user-agent", this.UserAgent },
                 { "accept", "application/json" },
-                { "content-type", "application/json; charset=utf-8" },
+                { "Content-Type", "application/json" },
                 { "Square-Version", this.Config.SquareVersion },
             };
 

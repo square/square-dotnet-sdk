@@ -154,10 +154,10 @@ namespace Example
                     //Display all the headers except Authorization
                     if (item.Key != "Authorization")
                     {
-                        Console.WriteLine("\t{0}: \{1}", item.Key, item.Value);
+                        Console.WriteLine("\t{0}: \t{1}", item.Key, item.Value);
                     }
                 }
-                Console.WriteLine("Status Code: \{0}", statusCode);
+                Console.WriteLine("Status Code: \t{0}", statusCode);
                 foreach (Error error in errors)
                 {
                     Console.WriteLine("Error Category:{0} Code:{1} Detail:{2}", error.Category, error.Code, error.Detail);

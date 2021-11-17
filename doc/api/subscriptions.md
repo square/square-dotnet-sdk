@@ -14,14 +14,17 @@ ISubscriptionsApi subscriptionsApi = client.SubscriptionsApi;
 * [Search Subscriptions](/doc/api/subscriptions.md#search-subscriptions)
 * [Retrieve Subscription](/doc/api/subscriptions.md#retrieve-subscription)
 * [Update Subscription](/doc/api/subscriptions.md#update-subscription)
+* [Delete Subscription Action](/doc/api/subscriptions.md#delete-subscription-action)
 * [Cancel Subscription](/doc/api/subscriptions.md#cancel-subscription)
 * [List Subscription Events](/doc/api/subscriptions.md#list-subscription-events)
+* [Pause Subscription](/doc/api/subscriptions.md#pause-subscription)
 * [Resume Subscription](/doc/api/subscriptions.md#resume-subscription)
+* [Swap Plan](/doc/api/subscriptions.md#swap-plan)
 
 
 # Create Subscription
 
-Creates a subscription for a customer to a subscription plan.
+Creates a subscription to a subscription plan by a customer.
 
 If you provide a card on file in the request, Square charges the card for
 the subscription. Otherwise, Square bills an invoice to the customer's email
@@ -78,6 +81,7 @@ catch (ApiException e){};
 # Search Subscriptions
 
 Searches for subscriptions.
+
 Results are ordered chronologically by subscription creation date. If
 the request specifies more than one location ID,
 the endpoint orders the result
@@ -126,10 +130,15 @@ var bodyQueryFilter = new SearchSubscriptionsFilter.Builder()
 var bodyQuery = new SearchSubscriptionsQuery.Builder()
     .Filter(bodyQueryFilter)
     .Build();
+var bodyInclude = new List<string>();
+bodyInclude.Add("include4");
+bodyInclude.Add("include5");
+bodyInclude.Add("include6");
 var body = new SearchSubscriptionsRequest.Builder()
     .Cursor("cursor0")
     .Limit(164)
     .Query(bodyQuery)
+    .Include(bodyInclude)
     .Build();
 
 try
@@ -146,7 +155,8 @@ Retrieves a subscription.
 
 ```csharp
 RetrieveSubscriptionAsync(
-    string subscriptionId)
+    string subscriptionId,
+    string include = null)
 ```
 
 ## Parameters
@@ -154,6 +164,7 @@ RetrieveSubscriptionAsync(
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `subscriptionId` | `string` | Template, Required | The ID of the subscription to retrieve. |
+| `include` | `string` | Query, Optional | A query parameter to specify related information to be included in the response.<br><br>The supported query parameter values are:<br><br>- `actions`: to include scheduled actions on the targeted subscription. |
 
 ## Response Type
 
@@ -163,10 +174,11 @@ RetrieveSubscriptionAsync(
 
 ```csharp
 string subscriptionId = "subscription_id0";
+string include = "include2";
 
 try
 {
-    RetrieveSubscriptionResponse result = await subscriptionsApi.RetrieveSubscriptionAsync(subscriptionId);
+    RetrieveSubscriptionResponse result = await subscriptionsApi.RetrieveSubscriptionAsync(subscriptionId, include);
 }
 catch (ApiException e){};
 ```
@@ -187,7 +199,7 @@ UpdateSubscriptionAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `string` | Template, Required | The ID for the subscription to update. |
+| `subscriptionId` | `string` | Template, Required | The ID of the subscription to update. |
 | `body` | [`Models.UpdateSubscriptionRequest`](/doc/models/update-subscription-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
@@ -224,10 +236,46 @@ catch (ApiException e){};
 ```
 
 
+# Delete Subscription Action
+
+Deletes a scheduled action for a subscription.
+
+```csharp
+DeleteSubscriptionActionAsync(
+    string subscriptionId,
+    string actionId)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `subscriptionId` | `string` | Template, Required | The ID of the subscription the targeted action is to act upon. |
+| `actionId` | `string` | Template, Required | The ID of the targeted action to be deleted. |
+
+## Response Type
+
+[`Task<Models.DeleteSubscriptionActionResponse>`](/doc/models/delete-subscription-action-response.md)
+
+## Example Usage
+
+```csharp
+string subscriptionId = "subscription_id0";
+string actionId = "action_id6";
+
+try
+{
+    DeleteSubscriptionActionResponse result = await subscriptionsApi.DeleteSubscriptionActionAsync(subscriptionId, actionId);
+}
+catch (ApiException e){};
+```
+
+
 # Cancel Subscription
 
-Sets the `canceled_date` field to the end of the active billing period.
-After this date, the status changes from ACTIVE to CANCELED.
+Schedules a `CANCEL` action to cancel an active subscription
+by setting the `canceled_date` field to the end of the active billing period
+and changing the subscription status from ACTIVE to CANCELED after this date.
 
 ```csharp
 CancelSubscriptionAsync(
@@ -274,8 +322,8 @@ ListSubscriptionEventsAsync(
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `subscriptionId` | `string` | Template, Required | The ID of the subscription to retrieve the events for. |
-| `cursor` | `string` | Query, Optional | A pagination cursor returned by a previous call to this endpoint.<br>Provide this to retrieve the next set of results for the original query.<br><br>For more information, see [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination). |
-| `limit` | `int?` | Query, Optional | The upper limit on the number of subscription events to return<br>in the response.<br><br>Default: `200` |
+| `cursor` | `string` | Query, Optional | When the total number of resulting subscription events exceeds the limit of a paged response,<br>specify the cursor returned from a preceding response here to fetch the next set of results.<br>If the cursor is unset, the response contains the last page of the results.<br><br>For more information, see [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination). |
+| `limit` | `int?` | Query, Optional | The upper limit on the number of subscription events to return<br>in a paged response. |
 
 ## Response Type
 
@@ -296,13 +344,55 @@ catch (ApiException e){};
 ```
 
 
+# Pause Subscription
+
+Schedules a `PAUSE` action to pause an active subscription.
+
+```csharp
+PauseSubscriptionAsync(
+    string subscriptionId,
+    Models.PauseSubscriptionRequest body)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `subscriptionId` | `string` | Template, Required | The ID of the subscription to pause. |
+| `body` | [`Models.PauseSubscriptionRequest`](/doc/models/pause-subscription-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+
+## Response Type
+
+[`Task<Models.PauseSubscriptionResponse>`](/doc/models/pause-subscription-response.md)
+
+## Example Usage
+
+```csharp
+string subscriptionId = "subscription_id0";
+var body = new PauseSubscriptionRequest.Builder()
+    .PauseEffectiveDate("pause_effective_date6")
+    .PauseCycleDuration(94L)
+    .ResumeEffectiveDate("resume_effective_date4")
+    .ResumeChangeTiming("IMMEDIATE")
+    .PauseReason("pause_reason2")
+    .Build();
+
+try
+{
+    PauseSubscriptionResponse result = await subscriptionsApi.PauseSubscriptionAsync(subscriptionId, body);
+}
+catch (ApiException e){};
+```
+
+
 # Resume Subscription
 
-Resumes a deactivated subscription.
+Schedules a `RESUME` action to resume a paused or a deactivated subscription.
 
 ```csharp
 ResumeSubscriptionAsync(
-    string subscriptionId)
+    string subscriptionId,
+    Models.ResumeSubscriptionRequest body)
 ```
 
 ## Parameters
@@ -310,6 +400,7 @@ ResumeSubscriptionAsync(
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `subscriptionId` | `string` | Template, Required | The ID of the subscription to resume. |
+| `body` | [`Models.ResumeSubscriptionRequest`](/doc/models/resume-subscription-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
 
@@ -319,10 +410,51 @@ ResumeSubscriptionAsync(
 
 ```csharp
 string subscriptionId = "subscription_id0";
+var body = new ResumeSubscriptionRequest.Builder()
+    .ResumeEffectiveDate("resume_effective_date4")
+    .ResumeChangeTiming("IMMEDIATE")
+    .Build();
 
 try
 {
-    ResumeSubscriptionResponse result = await subscriptionsApi.ResumeSubscriptionAsync(subscriptionId);
+    ResumeSubscriptionResponse result = await subscriptionsApi.ResumeSubscriptionAsync(subscriptionId, body);
+}
+catch (ApiException e){};
+```
+
+
+# Swap Plan
+
+Schedules a `SWAP_PLAN` action to swap a subscription plan in an existing subscription.
+
+```csharp
+SwapPlanAsync(
+    string subscriptionId,
+    Models.SwapPlanRequest body)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `subscriptionId` | `string` | Template, Required | The ID of the subscription to swap the subscription plan for. |
+| `body` | [`Models.SwapPlanRequest`](/doc/models/swap-plan-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+
+## Response Type
+
+[`Task<Models.SwapPlanResponse>`](/doc/models/swap-plan-response.md)
+
+## Example Usage
+
+```csharp
+string subscriptionId = "subscription_id0";
+var body = new SwapPlanRequest.Builder(
+        "new_plan_id2")
+    .Build();
+
+try
+{
+    SwapPlanResponse result = await subscriptionsApi.SwapPlanAsync(subscriptionId, body);
 }
 catch (ApiException e){};
 ```

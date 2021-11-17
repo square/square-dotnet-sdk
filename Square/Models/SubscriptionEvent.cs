@@ -46,14 +46,13 @@ namespace Square.Models
         public string Id { get; }
 
         /// <summary>
-        /// The possible subscription event types.
+        /// Supported types of an event occurred to a subscription.
         /// </summary>
         [JsonProperty("subscription_event_type")]
         public string SubscriptionEventType { get; }
 
         /// <summary>
-        /// The date, in YYYY-MM-DD format (for
-        /// example, 2013-01-15), when the subscription event went into effect.
+        /// The `YYYY-MM-DD`-formatted date (for example, 2013-01-15) when the subscription event occurred.
         /// </summary>
         [JsonProperty("effective_date")]
         public string EffectiveDate { get; }

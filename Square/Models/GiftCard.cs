@@ -55,7 +55,7 @@ namespace Square.Models
         public string Id { get; }
 
         /// <summary>
-        /// Gets or sets Type.
+        /// Indicates the gift card type.
         /// </summary>
         [JsonProperty("type")]
         public string Type { get; }

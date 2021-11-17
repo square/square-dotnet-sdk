@@ -272,7 +272,8 @@ namespace Square.Models
 
         /// <summary>
         /// The source type for this payment.
-        /// Current values include `CARD`, `BANK_ACCOUNT`, `WALLET`, `CASH`, or `EXTERNAL`.
+        /// Current values include `CARD`, `BANK_ACCOUNT`, `WALLET`, `BUY_NOW_PAY_LATER`, `CASH`, or
+        /// `EXTERNAL`.
         /// </summary>
         [JsonProperty("source_type", NullValueHandling = NullValueHandling.Ignore)]
         public string SourceType { get; }

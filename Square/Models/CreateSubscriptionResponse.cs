@@ -38,13 +38,13 @@ namespace Square.Models
         public HttpContext Context { get; internal set; }
 
         /// <summary>
-        /// Information about errors encountered during the request.
+        /// Errors encountered during the request.
         /// </summary>
         [JsonProperty("errors", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.Error> Errors { get; }
 
         /// <summary>
-        /// Represents a customer subscription to a subscription plan.
+        /// Represents a subscription to a subscription plan by a subscriber.
         /// For an overview of the `Subscription` type, see
         /// [Subscription object](https://developer.squareup.com/docs/subscriptions-api/overview#subscription-object-overview).
         /// </summary>

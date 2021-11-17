@@ -47,15 +47,16 @@ namespace Square.Models
         public IList<Models.Error> Errors { get; }
 
         /// <summary>
-        /// Gift cards retrieved.
+        /// The requested gift cards or an empty object if none are found.
         /// </summary>
         [JsonProperty("gift_cards", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.GiftCard> GiftCards { get; }
 
         /// <summary>
         /// When a response is truncated, it includes a cursor that you can use in a
-        /// subsequent request to fetch the next set of gift cards. If empty, this is
+        /// subsequent request to retrieve the next set of gift cards. If a cursor is not present, this is
         /// the final response.
+        /// For more information, see [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination).
         /// </summary>
         [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
         public string Cursor { get; }

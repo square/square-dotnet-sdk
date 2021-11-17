@@ -100,7 +100,7 @@ namespace Square.Models
         public string LocationId { get; }
 
         /// <summary>
-        /// The ID of the [Customer]($m/Customer) object representing the customer attending this booking
+        /// The ID of the [Customer]($m/Customer) object representing the customer receiving the booked service.
         /// </summary>
         [JsonProperty("customer_id", NullValueHandling = NullValueHandling.Ignore)]
         public string CustomerId { get; }

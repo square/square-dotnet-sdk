@@ -34,13 +34,13 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// A filter to select subscriptions based on the customer.
+        /// A filter to select subscriptions based on the subscribing customer IDs.
         /// </summary>
         [JsonProperty("customer_ids", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> CustomerIds { get; }
 
         /// <summary>
-        /// A filter to select subscriptions based the location.
+        /// A filter to select subscriptions based on the location.
         /// </summary>
         [JsonProperty("location_ids", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> LocationIds { get; }

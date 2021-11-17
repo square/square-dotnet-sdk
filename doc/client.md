@@ -5,7 +5,7 @@ The following parameters are configurable for the API Client:
 
 | Parameter | Type | Description |
 |  --- | --- | --- |
-| `SquareVersion` | `string` | Square Connect API versions<br>*Default*: `"2021-10-20"` |
+| `SquareVersion` | `string` | Square Connect API versions<br>*Default*: `"2021-11-17"` |
 | `CustomUrl` | `string` | Sets the base URL requests are made to. Defaults to `https://connect.squareup.com`<br>*Default*: `"https://connect.squareup.com"` |
 | `Environment` | `string` | The API environment. <br> **Default: `production`** |
 | `Timeout` | `TimeSpan` | Http client timeout.<br>*Default*: `TimeSpan.FromSeconds(60)` |
@@ -16,7 +16,7 @@ The API client can be initialized as follows:
 ```csharp
 Square.SquareClient client = new Square.SquareClient.Builder()
     .AccessToken("AccessToken")
-    .SquareVersion(GetEnvironmentVariable("2021-10-20"))
+    .SquareVersion(GetEnvironmentVariable("2021-11-17"))
     .Environment(Square.Environment.Production)
     .CustomUrl("https://connect.squareup.com")
     .HttpClientConfig(config => config.NumberOfRetries(0))
@@ -45,7 +45,7 @@ namespace Testing
         {
             SquareClient client = new SquareClient.Builder()
                 .AccessToken("AccessToken")
-                .SquareVersion(GetEnvironmentVariable("2021-10-20"))
+                .SquareVersion(GetEnvironmentVariable("2021-11-17"))
                 .HttpClientConfig(config => config.NumberOfRetries(0))
                 .Build();
             ILocationsApi locationsApi = client.LocationsApi;

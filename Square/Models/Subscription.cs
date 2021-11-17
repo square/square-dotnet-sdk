@@ -36,6 +36,7 @@ namespace Square.Models
         /// <param name="cardId">card_id.</param>
         /// <param name="timezone">timezone.</param>
         /// <param name="source">source.</param>
+        /// <param name="actions">actions.</param>
         public Subscription(
             string id = null,
             string locationId = null,
@@ -52,7 +53,8 @@ namespace Square.Models
             string createdAt = null,
             string cardId = null,
             string timezone = null,
-            Models.SubscriptionSource source = null)
+            Models.SubscriptionSource source = null,
+            IList<Models.SubscriptionAction> actions = null)
         {
             this.Id = id;
             this.LocationId = locationId;
@@ -70,6 +72,7 @@ namespace Square.Models
             this.CardId = cardId;
             this.Timezone = timezone;
             this.Source = source;
+            this.Actions = actions;
         }
 
         /// <summary>
@@ -85,42 +88,39 @@ namespace Square.Models
         public string LocationId { get; }
 
         /// <summary>
-        /// The ID of the associated [subscription plan]($m/CatalogSubscriptionPlan).
+        /// The ID of the subscribed-to [subscription plan]($m/CatalogSubscriptionPlan).
         /// </summary>
         [JsonProperty("plan_id", NullValueHandling = NullValueHandling.Ignore)]
         public string PlanId { get; }
 
         /// <summary>
-        /// The ID of the associated [customer]($m/Customer) profile.
+        /// The ID of the subscribing [customer]($m/Customer) profile.
         /// </summary>
         [JsonProperty("customer_id", NullValueHandling = NullValueHandling.Ignore)]
         public string CustomerId { get; }
 
         /// <summary>
-        /// The start date of the subscription, in YYYY-MM-DD format (for example,
-        /// 2013-01-15).
+        /// The `YYYY-MM-DD`-formatted date (for example, 2013-01-15) to start the subscription.
         /// </summary>
         [JsonProperty("start_date", NullValueHandling = NullValueHandling.Ignore)]
         public string StartDate { get; }
 
         /// <summary>
-        /// The subscription cancellation date, in YYYY-MM-DD format (for
-        /// example, 2013-01-15). On this date, the subscription status changes
-        /// to `CANCELED` and the subscription billing stops.
-        /// If you don't set this field, the subscription plan dictates if and
-        /// when subscription ends.
-        /// You cannot update this field, you can only clear it.
+        /// The `YYYY-MM-DD`-formatted date (for example, 2013-01-15) to cancel the subscription,
+        /// when the subscription status changes to `CANCELED` and the subscription billing stops.
+        /// If this field is not set, the subscription ends according its subscription plan.
+        /// This field cannot be updated, other than being cleared.
         /// </summary>
         [JsonProperty("canceled_date", NullValueHandling = NullValueHandling.Ignore)]
         public string CanceledDate { get; }
 
         /// <summary>
-        /// The date up to which the customer is invoiced for the
-        /// subscription, in YYYY-MM-DD format (for example, 2013-01-15).
+        /// The `YYYY-MM-DD`-formatted date up to when the subscriber is invoiced for the
+        /// subscription.
         /// After the invoice is sent for a given billing period,
         /// this date will be the last day of the billing period.
         /// For example,
-        /// suppose for the month of May a customer gets an invoice
+        /// suppose for the month of May a subscriber gets an invoice
         /// (or charged the card) on May 1. For the monthly billing scenario,
         /// this date is then set to May 31.
         /// </summary>
@@ -128,7 +128,7 @@ namespace Square.Models
         public string ChargedThroughDate { get; }
 
         /// <summary>
-        /// Possible subscription status values.
+        /// Supported subscription statuses.
         /// </summary>
         [JsonProperty("status", NullValueHandling = NullValueHandling.Ignore)]
         public string Status { get; }
@@ -176,8 +176,8 @@ namespace Square.Models
         public string CreatedAt { get; }
 
         /// <summary>
-        /// The ID of the [customer]($m/Customer) [card]($m/Card)
-        /// that is charged for the subscription.
+        /// The ID of the [subscriber's]($m/Customer) [card]($m/Card)
+        /// used to charge for the subscription.
         /// </summary>
         [JsonProperty("card_id", NullValueHandling = NullValueHandling.Ignore)]
         public string CardId { get; }
@@ -195,6 +195,15 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("source", NullValueHandling = NullValueHandling.Ignore)]
         public Models.SubscriptionSource Source { get; }
+
+        /// <summary>
+        /// The list of scheduled actions on this subscription. It is set only in the response from the
+        /// [RetrieveSubscription]($e/Subscriptions/RetrieveSubscription) or
+        /// [SearchSubscriptions]($e/Subscriptions/SearchSubscriptions) endpoint with the query parameter
+        /// of `include=actions`.
+        /// </summary>
+        [JsonProperty("actions", NullValueHandling = NullValueHandling.Ignore)]
+        public IList<Models.SubscriptionAction> Actions { get; }
 
         /// <inheritdoc/>
         public override string ToString()
@@ -235,18 +244,19 @@ namespace Square.Models
                 ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true)) &&
                 ((this.CardId == null && other.CardId == null) || (this.CardId?.Equals(other.CardId) == true)) &&
                 ((this.Timezone == null && other.Timezone == null) || (this.Timezone?.Equals(other.Timezone) == true)) &&
-                ((this.Source == null && other.Source == null) || (this.Source?.Equals(other.Source) == true));
+                ((this.Source == null && other.Source == null) || (this.Source?.Equals(other.Source) == true)) &&
+                ((this.Actions == null && other.Actions == null) || (this.Actions?.Equals(other.Actions) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1839255532;
+            int hashCode = -1644874003;
             hashCode = HashCode.Combine(this.Id, this.LocationId, this.PlanId, this.CustomerId, this.StartDate, this.CanceledDate, this.ChargedThroughDate);
 
             hashCode = HashCode.Combine(hashCode, this.Status, this.TaxPercentage, this.InvoiceIds, this.PriceOverrideMoney, this.Version, this.CreatedAt, this.CardId);
 
-            hashCode = HashCode.Combine(hashCode, this.Timezone, this.Source);
+            hashCode = HashCode.Combine(hashCode, this.Timezone, this.Source, this.Actions);
 
             return hashCode;
         }
@@ -273,6 +283,7 @@ namespace Square.Models
             toStringOutput.Add($"this.CardId = {(this.CardId == null ? "null" : this.CardId == string.Empty ? "" : this.CardId)}");
             toStringOutput.Add($"this.Timezone = {(this.Timezone == null ? "null" : this.Timezone == string.Empty ? "" : this.Timezone)}");
             toStringOutput.Add($"this.Source = {(this.Source == null ? "null" : this.Source.ToString())}");
+            toStringOutput.Add($"this.Actions = {(this.Actions == null ? "null" : $"[{string.Join(", ", this.Actions)} ]")}");
         }
 
         /// <summary>
@@ -297,7 +308,8 @@ namespace Square.Models
                 .CreatedAt(this.CreatedAt)
                 .CardId(this.CardId)
                 .Timezone(this.Timezone)
-                .Source(this.Source);
+                .Source(this.Source)
+                .Actions(this.Actions);
             return builder;
         }
 
@@ -322,6 +334,7 @@ namespace Square.Models
             private string cardId;
             private string timezone;
             private Models.SubscriptionSource source;
+            private IList<Models.SubscriptionAction> actions;
 
              /// <summary>
              /// Id.
@@ -499,6 +512,17 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// Actions.
+             /// </summary>
+             /// <param name="actions"> actions. </param>
+             /// <returns> Builder. </returns>
+            public Builder Actions(IList<Models.SubscriptionAction> actions)
+            {
+                this.actions = actions;
+                return this;
+            }
+
             /// <summary>
             /// Builds class object.
             /// </summary>
@@ -521,7 +545,8 @@ namespace Square.Models
                     this.createdAt,
                     this.cardId,
                     this.timezone,
-                    this.source);
+                    this.source,
+                    this.actions);
             }
         }
     }

@@ -108,9 +108,9 @@ var bodyAppFeeMoney = new Money.Builder()
     .Build();
 var body = new RefundPaymentRequest.Builder(
         "9b7f2dcf-49da-4411-b23e-a2d6af21333a",
-        bodyAmountMoney,
-        "R2B3Z8WMVt3EAmzYWLZvz7Y69EbZY")
+        bodyAmountMoney)
     .AppFeeMoney(bodyAppFeeMoney)
+    .PaymentId("R2B3Z8WMVt3EAmzYWLZvz7Y69EbZY")
     .Reason("Example")
     .PaymentVersionToken("payment_version_token6")
     .TeamMemberId("team_member_id4")

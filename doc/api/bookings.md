@@ -10,6 +10,7 @@ IBookingsApi bookingsApi = client.BookingsApi;
 
 ## Methods
 
+* [List Bookings](/doc/api/bookings.md#list-bookings)
 * [Create Booking](/doc/api/bookings.md#create-booking)
 * [Search Availability](/doc/api/bookings.md#search-availability)
 * [Retrieve Business Booking Profile](/doc/api/bookings.md#retrieve-business-booking-profile)
@@ -18,6 +19,53 @@ IBookingsApi bookingsApi = client.BookingsApi;
 * [Retrieve Booking](/doc/api/bookings.md#retrieve-booking)
 * [Update Booking](/doc/api/bookings.md#update-booking)
 * [Cancel Booking](/doc/api/bookings.md#cancel-booking)
+
+
+# List Bookings
+
+Retrieve a collection of bookings.
+
+```csharp
+ListBookingsAsync(
+    int? limit = null,
+    string cursor = null,
+    string teamMemberId = null,
+    string locationId = null,
+    string startAtMin = null,
+    string startAtMax = null)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `limit` | `int?` | Query, Optional | The maximum number of results per page to return in a paged response. |
+| `cursor` | `string` | Query, Optional | The pagination cursor from the preceding response to return the next page of the results. Do not set this when retrieving the first page of the results. |
+| `teamMemberId` | `string` | Query, Optional | The team member for whom to retrieve bookings. If this is not set, bookings of all members are retrieved. |
+| `locationId` | `string` | Query, Optional | The location for which to retrieve bookings. If this is not set, all locations' bookings are retrieved. |
+| `startAtMin` | `string` | Query, Optional | The RFC 3339 timestamp specifying the earliest of the start time. If this is not set, the current time is used. |
+| `startAtMax` | `string` | Query, Optional | The RFC 3339 timestamp specifying the latest of the start time. If this is not set, the time of 31 days after `start_at_min` is used. |
+
+## Response Type
+
+[`Task<Models.ListBookingsResponse>`](/doc/models/list-bookings-response.md)
+
+## Example Usage
+
+```csharp
+int? limit = 172;
+string cursor = "cursor6";
+string teamMemberId = "team_member_id0";
+string locationId = "location_id4";
+string startAtMin = "start_at_min8";
+string startAtMax = "start_at_max8";
+
+try
+{
+    ListBookingsResponse result = await bookingsApi.ListBookingsAsync(limit, cursor, teamMemberId, locationId, startAtMin, startAtMax);
+}
+catch (ApiException e){};
+```
 
 
 # Create Booking

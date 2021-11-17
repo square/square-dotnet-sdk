@@ -37,7 +37,7 @@ namespace Square.Models
         public string Detail { get; }
 
         /// <summary>
-        /// The possible subscription event info codes.
+        /// Supported info codes of a subscription event.
         /// </summary>
         [JsonProperty("code", NullValueHandling = NullValueHandling.Ignore)]
         public string Code { get; }

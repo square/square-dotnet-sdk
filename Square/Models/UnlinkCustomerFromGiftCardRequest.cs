@@ -28,7 +28,7 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// Gets or sets CustomerId.
+        /// The ID of the customer to unlink from the gift card.
         /// </summary>
         [JsonProperty("customer_id")]
         public string CustomerId { get; }
