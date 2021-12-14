@@ -21,10 +21,13 @@ namespace Square.Models
         /// Initializes a new instance of the <see cref="CatalogCategory"/> class.
         /// </summary>
         /// <param name="name">name.</param>
+        /// <param name="imageIds">image_ids.</param>
         public CatalogCategory(
-            string name = null)
+            string name = null,
+            IList<string> imageIds = null)
         {
             this.Name = name;
+            this.ImageIds = imageIds;
         }
 
         /// <summary>
@@ -32,6 +35,13 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
         public string Name { get; }
+
+        /// <summary>
+        /// The IDs of images associated with this `CatalogCategory` instance.
+        /// Currently these images are not displayed by Square, but are free to be displayed in 3rd party applications.
+        /// </summary>
+        [JsonProperty("image_ids", NullValueHandling = NullValueHandling.Ignore)]
+        public IList<string> ImageIds { get; }
 
         /// <inheritdoc/>
         public override string ToString()
@@ -57,14 +67,15 @@ namespace Square.Models
             }
 
             return obj is CatalogCategory other &&
-                ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true));
+                ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
+                ((this.ImageIds == null && other.ImageIds == null) || (this.ImageIds?.Equals(other.ImageIds) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1264434683;
-            hashCode = HashCode.Combine(this.Name);
+            int hashCode = -1003634873;
+            hashCode = HashCode.Combine(this.Name, this.ImageIds);
 
             return hashCode;
         }
@@ -76,6 +87,7 @@ namespace Square.Models
         protected void ToString(List<string> toStringOutput)
         {
             toStringOutput.Add($"this.Name = {(this.Name == null ? "null" : this.Name == string.Empty ? "" : this.Name)}");
+            toStringOutput.Add($"this.ImageIds = {(this.ImageIds == null ? "null" : $"[{string.Join(", ", this.ImageIds)} ]")}");
         }
 
         /// <summary>
@@ -85,7 +97,8 @@ namespace Square.Models
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .Name(this.Name);
+                .Name(this.Name)
+                .ImageIds(this.ImageIds);
             return builder;
         }
 
@@ -95,6 +108,7 @@ namespace Square.Models
         public class Builder
         {
             private string name;
+            private IList<string> imageIds;
 
              /// <summary>
              /// Name.
@@ -107,6 +121,17 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// ImageIds.
+             /// </summary>
+             /// <param name="imageIds"> imageIds. </param>
+             /// <returns> Builder. </returns>
+            public Builder ImageIds(IList<string> imageIds)
+            {
+                this.imageIds = imageIds;
+                return this;
+            }
+
             /// <summary>
             /// Builds class object.
             /// </summary>
@@ -114,7 +139,8 @@ namespace Square.Models
             public CatalogCategory Build()
             {
                 return new CatalogCategory(
-                    this.name);
+                    this.name,
+                    this.imageIds);
             }
         }
     }

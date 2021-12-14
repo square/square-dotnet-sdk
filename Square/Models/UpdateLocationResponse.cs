@@ -44,7 +44,7 @@ namespace Square.Models
         public IList<Models.Error> Errors { get; }
 
         /// <summary>
-        /// Represents one of a business's locations.
+        /// Represents one of a business's [locations](https://developer.squareup.com/docs/locations-api).
         /// </summary>
         [JsonProperty("location", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Location Location { get; }

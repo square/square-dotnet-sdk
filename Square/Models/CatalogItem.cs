@@ -34,6 +34,7 @@ namespace Square.Models
         /// <param name="productType">product_type.</param>
         /// <param name="skipModifierScreen">skip_modifier_screen.</param>
         /// <param name="itemOptions">item_options.</param>
+        /// <param name="imageIds">image_ids.</param>
         /// <param name="sortName">sort_name.</param>
         public CatalogItem(
             string name = null,
@@ -50,6 +51,7 @@ namespace Square.Models
             string productType = null,
             bool? skipModifierScreen = null,
             IList<Models.CatalogItemOptionForItem> itemOptions = null,
+            IList<string> imageIds = null,
             string sortName = null)
         {
             this.Name = name;
@@ -66,6 +68,7 @@ namespace Square.Models
             this.ProductType = productType;
             this.SkipModifierScreen = skipModifierScreen;
             this.ItemOptions = itemOptions;
+            this.ImageIds = imageIds;
             this.SortName = sortName;
         }
 
@@ -168,6 +171,14 @@ namespace Square.Models
         public IList<Models.CatalogItemOptionForItem> ItemOptions { get; }
 
         /// <summary>
+        /// The IDs of images associated with this `CatalogItem` instance.
+        /// These images will be shown to customers in Square Online Store.
+        /// The first image will show up as the icon for this item in POS.
+        /// </summary>
+        [JsonProperty("image_ids", NullValueHandling = NullValueHandling.Ignore)]
+        public IList<string> ImageIds { get; }
+
+        /// <summary>
         /// A name to sort the item by. If this name is unspecified, namely, the `sort_name` field is absent, the regular `name` field is used for sorting.
         /// It is currently supported for sellers of the Japanese locale only.
         /// </summary>
@@ -212,18 +223,19 @@ namespace Square.Models
                 ((this.ProductType == null && other.ProductType == null) || (this.ProductType?.Equals(other.ProductType) == true)) &&
                 ((this.SkipModifierScreen == null && other.SkipModifierScreen == null) || (this.SkipModifierScreen?.Equals(other.SkipModifierScreen) == true)) &&
                 ((this.ItemOptions == null && other.ItemOptions == null) || (this.ItemOptions?.Equals(other.ItemOptions) == true)) &&
+                ((this.ImageIds == null && other.ImageIds == null) || (this.ImageIds?.Equals(other.ImageIds) == true)) &&
                 ((this.SortName == null && other.SortName == null) || (this.SortName?.Equals(other.SortName) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -608183061;
+            int hashCode = -2045483367;
             hashCode = HashCode.Combine(this.Name, this.Description, this.Abbreviation, this.LabelColor, this.AvailableOnline, this.AvailableForPickup, this.AvailableElectronically);
 
             hashCode = HashCode.Combine(hashCode, this.CategoryId, this.TaxIds, this.ModifierListInfo, this.Variations, this.ProductType, this.SkipModifierScreen, this.ItemOptions);
 
-            hashCode = HashCode.Combine(hashCode, this.SortName);
+            hashCode = HashCode.Combine(hashCode, this.ImageIds, this.SortName);
 
             return hashCode;
         }
@@ -248,6 +260,7 @@ namespace Square.Models
             toStringOutput.Add($"this.ProductType = {(this.ProductType == null ? "null" : this.ProductType.ToString())}");
             toStringOutput.Add($"this.SkipModifierScreen = {(this.SkipModifierScreen == null ? "null" : this.SkipModifierScreen.ToString())}");
             toStringOutput.Add($"this.ItemOptions = {(this.ItemOptions == null ? "null" : $"[{string.Join(", ", this.ItemOptions)} ]")}");
+            toStringOutput.Add($"this.ImageIds = {(this.ImageIds == null ? "null" : $"[{string.Join(", ", this.ImageIds)} ]")}");
             toStringOutput.Add($"this.SortName = {(this.SortName == null ? "null" : this.SortName == string.Empty ? "" : this.SortName)}");
         }
 
@@ -272,6 +285,7 @@ namespace Square.Models
                 .ProductType(this.ProductType)
                 .SkipModifierScreen(this.SkipModifierScreen)
                 .ItemOptions(this.ItemOptions)
+                .ImageIds(this.ImageIds)
                 .SortName(this.SortName);
             return builder;
         }
@@ -295,6 +309,7 @@ namespace Square.Models
             private string productType;
             private bool? skipModifierScreen;
             private IList<Models.CatalogItemOptionForItem> itemOptions;
+            private IList<string> imageIds;
             private string sortName;
 
              /// <summary>
@@ -452,6 +467,17 @@ namespace Square.Models
             }
 
              /// <summary>
+             /// ImageIds.
+             /// </summary>
+             /// <param name="imageIds"> imageIds. </param>
+             /// <returns> Builder. </returns>
+            public Builder ImageIds(IList<string> imageIds)
+            {
+                this.imageIds = imageIds;
+                return this;
+            }
+
+             /// <summary>
              /// SortName.
              /// </summary>
              /// <param name="sortName"> sortName. </param>
@@ -483,6 +509,7 @@ namespace Square.Models
                     this.productType,
                     this.skipModifierScreen,
                     this.itemOptions,
+                    this.imageIds,
                     this.sortName);
             }
         }

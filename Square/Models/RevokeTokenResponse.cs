@@ -35,7 +35,7 @@ namespace Square.Models
         public HttpContext Context { get; internal set; }
 
         /// <summary>
-        /// If the request is successful, this is true.
+        /// If the request is successful, this is `true`.
         /// </summary>
         [JsonProperty("success", NullValueHandling = NullValueHandling.Ignore)]
         public bool? Success { get; }

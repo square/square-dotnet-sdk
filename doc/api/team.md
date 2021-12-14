@@ -106,8 +106,17 @@ BulkCreateTeamMembersAsync(
 ## Example Usage
 
 ```csharp
-var bodyTeamMembers = new CreateTeamMemberRequest.Builder()
+var bodyTeamMembers = new Dictionary<string, CreateTeamMemberRequest>();
+
+
+var bodyTeamMembers0 = new CreateTeamMemberRequest.Builder()
     .Build();
+bodyTeamMembers.Add("",bodyTeamMembers0);
+
+var bodyTeamMembers1 = new CreateTeamMemberRequest.Builder()
+    .Build();
+bodyTeamMembers.Add("",bodyTeamMembers1);
+
 var body = new BulkCreateTeamMembersRequest.Builder(
         bodyTeamMembers)
     .Build();
@@ -146,8 +155,17 @@ BulkUpdateTeamMembersAsync(
 ## Example Usage
 
 ```csharp
-var bodyTeamMembers = new UpdateTeamMemberRequest.Builder()
+var bodyTeamMembers = new Dictionary<string, UpdateTeamMemberRequest>();
+
+
+var bodyTeamMembers0 = new UpdateTeamMemberRequest.Builder()
     .Build();
+bodyTeamMembers.Add("",bodyTeamMembers0);
+
+var bodyTeamMembers1 = new UpdateTeamMemberRequest.Builder()
+    .Build();
+bodyTeamMembers.Add("",bodyTeamMembers1);
+
 var body = new BulkUpdateTeamMembersRequest.Builder(
         bodyTeamMembers)
     .Build();

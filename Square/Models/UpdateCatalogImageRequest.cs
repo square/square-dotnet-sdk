@@ -13,33 +13,24 @@ namespace Square.Models
     using Square.Utilities;
 
     /// <summary>
-    /// UpdatePaymentRequest.
+    /// UpdateCatalogImageRequest.
     /// </summary>
-    public class UpdatePaymentRequest
+    public class UpdateCatalogImageRequest
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="UpdatePaymentRequest"/> class.
+        /// Initializes a new instance of the <see cref="UpdateCatalogImageRequest"/> class.
         /// </summary>
         /// <param name="idempotencyKey">idempotency_key.</param>
-        /// <param name="payment">payment.</param>
-        public UpdatePaymentRequest(
-            string idempotencyKey,
-            Models.Payment payment = null)
+        public UpdateCatalogImageRequest(
+            string idempotencyKey)
         {
-            this.Payment = payment;
             this.IdempotencyKey = idempotencyKey;
         }
 
         /// <summary>
-        /// Represents a payment processed by the Square API.
-        /// </summary>
-        [JsonProperty("payment", NullValueHandling = NullValueHandling.Ignore)]
-        public Models.Payment Payment { get; }
-
-        /// <summary>
-        /// A unique string that identifies this `UpdatePayment` request. Keys can be any valid string
-        /// but must be unique for every `UpdatePayment` request.
-        /// For more information, see [Idempotency](https://developer.squareup.com/docs/basics/api101/idempotency).
+        /// A unique string that identifies this UpdateCatalogImage request.
+        /// Keys can be any valid string but must be unique for every UpdateCatalogImage request.
+        /// See [Idempotency keys](https://developer.squareup.com/docs/basics/api101/idempotency) for more information.
         /// </summary>
         [JsonProperty("idempotency_key")]
         public string IdempotencyKey { get; }
@@ -51,7 +42,7 @@ namespace Square.Models
 
             this.ToString(toStringOutput);
 
-            return $"UpdatePaymentRequest : ({string.Join(", ", toStringOutput)})";
+            return $"UpdateCatalogImageRequest : ({string.Join(", ", toStringOutput)})";
         }
 
         /// <inheritdoc/>
@@ -67,16 +58,15 @@ namespace Square.Models
                 return true;
             }
 
-            return obj is UpdatePaymentRequest other &&
-                ((this.Payment == null && other.Payment == null) || (this.Payment?.Equals(other.Payment) == true)) &&
+            return obj is UpdateCatalogImageRequest other &&
                 ((this.IdempotencyKey == null && other.IdempotencyKey == null) || (this.IdempotencyKey?.Equals(other.IdempotencyKey) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1490098238;
-            hashCode = HashCode.Combine(this.Payment, this.IdempotencyKey);
+            int hashCode = -793116434;
+            hashCode = HashCode.Combine(this.IdempotencyKey);
 
             return hashCode;
         }
@@ -87,7 +77,6 @@ namespace Square.Models
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Payment = {(this.Payment == null ? "null" : this.Payment.ToString())}");
             toStringOutput.Add($"this.IdempotencyKey = {(this.IdempotencyKey == null ? "null" : this.IdempotencyKey == string.Empty ? "" : this.IdempotencyKey)}");
         }
 
@@ -98,8 +87,7 @@ namespace Square.Models
         public Builder ToBuilder()
         {
             var builder = new Builder(
-                this.IdempotencyKey)
-                .Payment(this.Payment);
+                this.IdempotencyKey);
             return builder;
         }
 
@@ -109,7 +97,6 @@ namespace Square.Models
         public class Builder
         {
             private string idempotencyKey;
-            private Models.Payment payment;
 
             public Builder(
                 string idempotencyKey)
@@ -128,26 +115,14 @@ namespace Square.Models
                 return this;
             }
 
-             /// <summary>
-             /// Payment.
-             /// </summary>
-             /// <param name="payment"> payment. </param>
-             /// <returns> Builder. </returns>
-            public Builder Payment(Models.Payment payment)
-            {
-                this.payment = payment;
-                return this;
-            }
-
             /// <summary>
             /// Builds class object.
             /// </summary>
-            /// <returns> UpdatePaymentRequest. </returns>
-            public UpdatePaymentRequest Build()
+            /// <returns> UpdateCatalogImageRequest. </returns>
+            public UpdateCatalogImageRequest Build()
             {
-                return new UpdatePaymentRequest(
-                    this.idempotencyKey,
-                    this.payment);
+                return new UpdateCatalogImageRequest(
+                    this.idempotencyKey);
             }
         }
     }

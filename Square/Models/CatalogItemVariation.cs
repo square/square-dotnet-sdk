@@ -37,6 +37,7 @@ namespace Square.Models
         /// <param name="itemOptionValues">item_option_values.</param>
         /// <param name="measurementUnitId">measurement_unit_id.</param>
         /// <param name="stockable">stockable.</param>
+        /// <param name="imageIds">image_ids.</param>
         /// <param name="teamMemberIds">team_member_ids.</param>
         /// <param name="stockableConversion">stockable_conversion.</param>
         public CatalogItemVariation(
@@ -57,6 +58,7 @@ namespace Square.Models
             IList<Models.CatalogItemOptionValueForItemVariation> itemOptionValues = null,
             string measurementUnitId = null,
             bool? stockable = null,
+            IList<string> imageIds = null,
             IList<string> teamMemberIds = null,
             Models.CatalogStockConversion stockableConversion = null)
         {
@@ -77,6 +79,7 @@ namespace Square.Models
             this.ItemOptionValues = itemOptionValues;
             this.MeasurementUnitId = measurementUnitId;
             this.Stockable = stockable;
+            this.ImageIds = imageIds;
             this.TeamMemberIds = teamMemberIds;
             this.StockableConversion = stockableConversion;
         }
@@ -205,6 +208,13 @@ namespace Square.Models
         public bool? Stockable { get; }
 
         /// <summary>
+        /// The IDs of images associated with this `CatalogItemVariation` instance.
+        /// These images will be shown to customers in Square Online Store.
+        /// </summary>
+        [JsonProperty("image_ids", NullValueHandling = NullValueHandling.Ignore)]
+        public IList<string> ImageIds { get; }
+
+        /// <summary>
         /// Tokens of employees that can perform the service represented by this variation. Only valid for
         /// variations of type `APPOINTMENTS_SERVICE`.
         /// </summary>
@@ -260,6 +270,7 @@ namespace Square.Models
                 ((this.ItemOptionValues == null && other.ItemOptionValues == null) || (this.ItemOptionValues?.Equals(other.ItemOptionValues) == true)) &&
                 ((this.MeasurementUnitId == null && other.MeasurementUnitId == null) || (this.MeasurementUnitId?.Equals(other.MeasurementUnitId) == true)) &&
                 ((this.Stockable == null && other.Stockable == null) || (this.Stockable?.Equals(other.Stockable) == true)) &&
+                ((this.ImageIds == null && other.ImageIds == null) || (this.ImageIds?.Equals(other.ImageIds) == true)) &&
                 ((this.TeamMemberIds == null && other.TeamMemberIds == null) || (this.TeamMemberIds?.Equals(other.TeamMemberIds) == true)) &&
                 ((this.StockableConversion == null && other.StockableConversion == null) || (this.StockableConversion?.Equals(other.StockableConversion) == true));
         }
@@ -267,12 +278,12 @@ namespace Square.Models
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1179613553;
+            int hashCode = -1549765555;
             hashCode = HashCode.Combine(this.ItemId, this.Name, this.Sku, this.Upc, this.Ordinal, this.PricingType, this.PriceMoney);
 
             hashCode = HashCode.Combine(hashCode, this.LocationOverrides, this.TrackInventory, this.InventoryAlertType, this.InventoryAlertThreshold, this.UserData, this.ServiceDuration, this.AvailableForBooking);
 
-            hashCode = HashCode.Combine(hashCode, this.ItemOptionValues, this.MeasurementUnitId, this.Stockable, this.TeamMemberIds, this.StockableConversion);
+            hashCode = HashCode.Combine(hashCode, this.ItemOptionValues, this.MeasurementUnitId, this.Stockable, this.ImageIds, this.TeamMemberIds, this.StockableConversion);
 
             return hashCode;
         }
@@ -300,6 +311,7 @@ namespace Square.Models
             toStringOutput.Add($"this.ItemOptionValues = {(this.ItemOptionValues == null ? "null" : $"[{string.Join(", ", this.ItemOptionValues)} ]")}");
             toStringOutput.Add($"this.MeasurementUnitId = {(this.MeasurementUnitId == null ? "null" : this.MeasurementUnitId == string.Empty ? "" : this.MeasurementUnitId)}");
             toStringOutput.Add($"this.Stockable = {(this.Stockable == null ? "null" : this.Stockable.ToString())}");
+            toStringOutput.Add($"this.ImageIds = {(this.ImageIds == null ? "null" : $"[{string.Join(", ", this.ImageIds)} ]")}");
             toStringOutput.Add($"this.TeamMemberIds = {(this.TeamMemberIds == null ? "null" : $"[{string.Join(", ", this.TeamMemberIds)} ]")}");
             toStringOutput.Add($"this.StockableConversion = {(this.StockableConversion == null ? "null" : this.StockableConversion.ToString())}");
         }
@@ -328,6 +340,7 @@ namespace Square.Models
                 .ItemOptionValues(this.ItemOptionValues)
                 .MeasurementUnitId(this.MeasurementUnitId)
                 .Stockable(this.Stockable)
+                .ImageIds(this.ImageIds)
                 .TeamMemberIds(this.TeamMemberIds)
                 .StockableConversion(this.StockableConversion);
             return builder;
@@ -355,6 +368,7 @@ namespace Square.Models
             private IList<Models.CatalogItemOptionValueForItemVariation> itemOptionValues;
             private string measurementUnitId;
             private bool? stockable;
+            private IList<string> imageIds;
             private IList<string> teamMemberIds;
             private Models.CatalogStockConversion stockableConversion;
 
@@ -546,6 +560,17 @@ namespace Square.Models
             }
 
              /// <summary>
+             /// ImageIds.
+             /// </summary>
+             /// <param name="imageIds"> imageIds. </param>
+             /// <returns> Builder. </returns>
+            public Builder ImageIds(IList<string> imageIds)
+            {
+                this.imageIds = imageIds;
+                return this;
+            }
+
+             /// <summary>
              /// TeamMemberIds.
              /// </summary>
              /// <param name="teamMemberIds"> teamMemberIds. </param>
@@ -591,6 +616,7 @@ namespace Square.Models
                     this.itemOptionValues,
                     this.measurementUnitId,
                     this.stockable,
+                    this.imageIds,
                     this.teamMemberIds,
                     this.stockableConversion);
             }

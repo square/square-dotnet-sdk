@@ -24,16 +24,19 @@ namespace Square.Models
         /// <param name="ordinal">ordinal.</param>
         /// <param name="selectionType">selection_type.</param>
         /// <param name="modifiers">modifiers.</param>
+        /// <param name="imageIds">image_ids.</param>
         public CatalogModifierList(
             string name = null,
             int? ordinal = null,
             string selectionType = null,
-            IList<Models.CatalogObject> modifiers = null)
+            IList<Models.CatalogObject> modifiers = null,
+            IList<string> imageIds = null)
         {
             this.Name = name;
             this.Ordinal = ordinal;
             this.SelectionType = selectionType;
             this.Modifiers = modifiers;
+            this.ImageIds = imageIds;
         }
 
         /// <summary>
@@ -63,6 +66,13 @@ namespace Square.Models
         [JsonProperty("modifiers", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.CatalogObject> Modifiers { get; }
 
+        /// <summary>
+        /// The IDs of images associated with this `CatalogModifierList` instance.
+        /// Currently these images are not displayed by Square, but are free to be displayed in 3rd party applications.
+        /// </summary>
+        [JsonProperty("image_ids", NullValueHandling = NullValueHandling.Ignore)]
+        public IList<string> ImageIds { get; }
+
         /// <inheritdoc/>
         public override string ToString()
         {
@@ -90,14 +100,15 @@ namespace Square.Models
                 ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
                 ((this.Ordinal == null && other.Ordinal == null) || (this.Ordinal?.Equals(other.Ordinal) == true)) &&
                 ((this.SelectionType == null && other.SelectionType == null) || (this.SelectionType?.Equals(other.SelectionType) == true)) &&
-                ((this.Modifiers == null && other.Modifiers == null) || (this.Modifiers?.Equals(other.Modifiers) == true));
+                ((this.Modifiers == null && other.Modifiers == null) || (this.Modifiers?.Equals(other.Modifiers) == true)) &&
+                ((this.ImageIds == null && other.ImageIds == null) || (this.ImageIds?.Equals(other.ImageIds) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1257227706;
-            hashCode = HashCode.Combine(this.Name, this.Ordinal, this.SelectionType, this.Modifiers);
+            int hashCode = -1226843592;
+            hashCode = HashCode.Combine(this.Name, this.Ordinal, this.SelectionType, this.Modifiers, this.ImageIds);
 
             return hashCode;
         }
@@ -112,6 +123,7 @@ namespace Square.Models
             toStringOutput.Add($"this.Ordinal = {(this.Ordinal == null ? "null" : this.Ordinal.ToString())}");
             toStringOutput.Add($"this.SelectionType = {(this.SelectionType == null ? "null" : this.SelectionType.ToString())}");
             toStringOutput.Add($"this.Modifiers = {(this.Modifiers == null ? "null" : $"[{string.Join(", ", this.Modifiers)} ]")}");
+            toStringOutput.Add($"this.ImageIds = {(this.ImageIds == null ? "null" : $"[{string.Join(", ", this.ImageIds)} ]")}");
         }
 
         /// <summary>
@@ -124,7 +136,8 @@ namespace Square.Models
                 .Name(this.Name)
                 .Ordinal(this.Ordinal)
                 .SelectionType(this.SelectionType)
-                .Modifiers(this.Modifiers);
+                .Modifiers(this.Modifiers)
+                .ImageIds(this.ImageIds);
             return builder;
         }
 
@@ -137,6 +150,7 @@ namespace Square.Models
             private int? ordinal;
             private string selectionType;
             private IList<Models.CatalogObject> modifiers;
+            private IList<string> imageIds;
 
              /// <summary>
              /// Name.
@@ -182,6 +196,17 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// ImageIds.
+             /// </summary>
+             /// <param name="imageIds"> imageIds. </param>
+             /// <returns> Builder. </returns>
+            public Builder ImageIds(IList<string> imageIds)
+            {
+                this.imageIds = imageIds;
+                return this;
+            }
+
             /// <summary>
             /// Builds class object.
             /// </summary>
@@ -192,7 +217,8 @@ namespace Square.Models
                     this.name,
                     this.ordinal,
                     this.selectionType,
-                    this.modifiers);
+                    this.modifiers,
+                    this.imageIds);
             }
         }
     }

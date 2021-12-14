@@ -30,7 +30,6 @@ namespace Square.Models
         /// <param name="presentAtAllLocations">present_at_all_locations.</param>
         /// <param name="presentAtLocationIds">present_at_location_ids.</param>
         /// <param name="absentAtLocationIds">absent_at_location_ids.</param>
-        /// <param name="imageId">image_id.</param>
         /// <param name="itemData">item_data.</param>
         /// <param name="categoryData">category_data.</param>
         /// <param name="itemVariationData">item_variation_data.</param>
@@ -59,7 +58,6 @@ namespace Square.Models
             bool? presentAtAllLocations = null,
             IList<string> presentAtLocationIds = null,
             IList<string> absentAtLocationIds = null,
-            string imageId = null,
             Models.CatalogItem itemData = null,
             Models.CatalogCategory categoryData = null,
             Models.CatalogItemVariation itemVariationData = null,
@@ -88,7 +86,6 @@ namespace Square.Models
             this.PresentAtAllLocations = presentAtAllLocations;
             this.PresentAtLocationIds = presentAtLocationIds;
             this.AbsentAtLocationIds = absentAtLocationIds;
-            this.ImageId = imageId;
             this.ItemData = itemData;
             this.CategoryData = categoryData;
             this.ItemVariationData = itemVariationData;
@@ -195,12 +192,6 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("absent_at_location_ids", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> AbsentAtLocationIds { get; }
-
-        /// <summary>
-        /// Identifies the `CatalogImage` attached to this `CatalogObject`.
-        /// </summary>
-        [JsonProperty("image_id", NullValueHandling = NullValueHandling.Ignore)]
-        public string ImageId { get; }
 
         /// <summary>
         /// A [CatalogObject]($m/CatalogObject) instance of the `ITEM` type, also referred to as an item, in the catalog.
@@ -361,7 +352,6 @@ namespace Square.Models
                 ((this.PresentAtAllLocations == null && other.PresentAtAllLocations == null) || (this.PresentAtAllLocations?.Equals(other.PresentAtAllLocations) == true)) &&
                 ((this.PresentAtLocationIds == null && other.PresentAtLocationIds == null) || (this.PresentAtLocationIds?.Equals(other.PresentAtLocationIds) == true)) &&
                 ((this.AbsentAtLocationIds == null && other.AbsentAtLocationIds == null) || (this.AbsentAtLocationIds?.Equals(other.AbsentAtLocationIds) == true)) &&
-                ((this.ImageId == null && other.ImageId == null) || (this.ImageId?.Equals(other.ImageId) == true)) &&
                 ((this.ItemData == null && other.ItemData == null) || (this.ItemData?.Equals(other.ItemData) == true)) &&
                 ((this.CategoryData == null && other.CategoryData == null) || (this.CategoryData?.Equals(other.CategoryData) == true)) &&
                 ((this.ItemVariationData == null && other.ItemVariationData == null) || (this.ItemVariationData?.Equals(other.ItemVariationData) == true)) &&
@@ -384,14 +374,14 @@ namespace Square.Models
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1814270990;
+            int hashCode = -1969973906;
             hashCode = HashCode.Combine(this.Type, this.Id, this.UpdatedAt, this.Version, this.IsDeleted, this.CustomAttributeValues, this.CatalogV1Ids);
 
-            hashCode = HashCode.Combine(hashCode, this.PresentAtAllLocations, this.PresentAtLocationIds, this.AbsentAtLocationIds, this.ImageId, this.ItemData, this.CategoryData, this.ItemVariationData);
+            hashCode = HashCode.Combine(hashCode, this.PresentAtAllLocations, this.PresentAtLocationIds, this.AbsentAtLocationIds, this.ItemData, this.CategoryData, this.ItemVariationData, this.TaxData);
 
-            hashCode = HashCode.Combine(hashCode, this.TaxData, this.DiscountData, this.ModifierListData, this.ModifierData, this.TimePeriodData, this.ProductSetData, this.PricingRuleData);
+            hashCode = HashCode.Combine(hashCode, this.DiscountData, this.ModifierListData, this.ModifierData, this.TimePeriodData, this.ProductSetData, this.PricingRuleData, this.ImageData);
 
-            hashCode = HashCode.Combine(hashCode, this.ImageData, this.MeasurementUnitData, this.SubscriptionPlanData, this.ItemOptionData, this.ItemOptionValueData, this.CustomAttributeDefinitionData, this.QuickAmountsSettingsData);
+            hashCode = HashCode.Combine(hashCode, this.MeasurementUnitData, this.SubscriptionPlanData, this.ItemOptionData, this.ItemOptionValueData, this.CustomAttributeDefinitionData, this.QuickAmountsSettingsData);
 
             return hashCode;
         }
@@ -412,7 +402,6 @@ namespace Square.Models
             toStringOutput.Add($"this.PresentAtAllLocations = {(this.PresentAtAllLocations == null ? "null" : this.PresentAtAllLocations.ToString())}");
             toStringOutput.Add($"this.PresentAtLocationIds = {(this.PresentAtLocationIds == null ? "null" : $"[{string.Join(", ", this.PresentAtLocationIds)} ]")}");
             toStringOutput.Add($"this.AbsentAtLocationIds = {(this.AbsentAtLocationIds == null ? "null" : $"[{string.Join(", ", this.AbsentAtLocationIds)} ]")}");
-            toStringOutput.Add($"this.ImageId = {(this.ImageId == null ? "null" : this.ImageId == string.Empty ? "" : this.ImageId)}");
             toStringOutput.Add($"this.ItemData = {(this.ItemData == null ? "null" : this.ItemData.ToString())}");
             toStringOutput.Add($"this.CategoryData = {(this.CategoryData == null ? "null" : this.CategoryData.ToString())}");
             toStringOutput.Add($"this.ItemVariationData = {(this.ItemVariationData == null ? "null" : this.ItemVariationData.ToString())}");
@@ -449,7 +438,6 @@ namespace Square.Models
                 .PresentAtAllLocations(this.PresentAtAllLocations)
                 .PresentAtLocationIds(this.PresentAtLocationIds)
                 .AbsentAtLocationIds(this.AbsentAtLocationIds)
-                .ImageId(this.ImageId)
                 .ItemData(this.ItemData)
                 .CategoryData(this.CategoryData)
                 .ItemVariationData(this.ItemVariationData)
@@ -485,7 +473,6 @@ namespace Square.Models
             private bool? presentAtAllLocations;
             private IList<string> presentAtLocationIds;
             private IList<string> absentAtLocationIds;
-            private string imageId;
             private Models.CatalogItem itemData;
             private Models.CatalogCategory categoryData;
             private Models.CatalogItemVariation itemVariationData;
@@ -619,17 +606,6 @@ namespace Square.Models
             public Builder AbsentAtLocationIds(IList<string> absentAtLocationIds)
             {
                 this.absentAtLocationIds = absentAtLocationIds;
-                return this;
-            }
-
-             /// <summary>
-             /// ImageId.
-             /// </summary>
-             /// <param name="imageId"> imageId. </param>
-             /// <returns> Builder. </returns>
-            public Builder ImageId(string imageId)
-            {
-                this.imageId = imageId;
                 return this;
             }
 
@@ -837,7 +813,6 @@ namespace Square.Models
                     this.presentAtAllLocations,
                     this.presentAtLocationIds,
                     this.absentAtLocationIds,
-                    this.imageId,
                     this.itemData,
                     this.categoryData,
                     this.itemVariationData,

@@ -28,7 +28,7 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// The Square location ID the authorization code should be tied to.
+        /// The Square location ID that the authorization code should be tied to.
         /// </summary>
         [JsonProperty("location_id", NullValueHandling = NullValueHandling.Ignore)]
         public string LocationId { get; }

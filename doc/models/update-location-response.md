@@ -12,7 +12,7 @@ Response object returned by the [UpdateLocation](/doc/api/locations.md#update-lo
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `Errors` | [`IList<Models.Error>`](/doc/models/error.md) | Optional | Information on errors encountered during the request. |
-| `Location` | [`Models.Location`](/doc/models/location.md) | Optional | Represents one of a business's locations. |
+| `Location` | [`Models.Location`](/doc/models/location.md) | Optional | Represents one of a business's [locations](https://developer.squareup.com/docs/locations-api). |
 
 ## Example (as JSON)
 

@@ -31,13 +31,15 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// The lower bound of the number range.
+        /// The lower bound of the number range. At least one of `min` or `max` must be specified.
+        /// If unspecified, the results will have no minimum value.
         /// </summary>
         [JsonProperty("min", NullValueHandling = NullValueHandling.Ignore)]
         public string Min { get; }
 
         /// <summary>
-        /// The upper bound of the number range.
+        /// The upper bound of the number range. At least one of `min` or `max` must be specified.
+        /// If unspecified, the results will have no maximum value.
         /// </summary>
         [JsonProperty("max", NullValueHandling = NullValueHandling.Ignore)]
         public string Max { get; }

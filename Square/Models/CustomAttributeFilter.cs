@@ -44,24 +44,24 @@ namespace Square.Models
 
         /// <summary>
         /// A query expression to filter items or item variations by matching their custom attributes'
-        /// `custom_attribute_definition_id`
-        /// property value against the the specified id.
+        /// `custom_attribute_definition_id` property value against the the specified id.
+        /// Exactly one of `custom_attribute_definition_id` or `key` must be specified.
         /// </summary>
         [JsonProperty("custom_attribute_definition_id", NullValueHandling = NullValueHandling.Ignore)]
         public string CustomAttributeDefinitionId { get; }
 
         /// <summary>
         /// A query expression to filter items or item variations by matching their custom attributes'
-        /// `key` property value against
-        /// the specified key.
+        /// `key` property value against the specified key.
+        /// Exactly one of `custom_attribute_definition_id` or `key` must be specified.
         /// </summary>
         [JsonProperty("key", NullValueHandling = NullValueHandling.Ignore)]
         public string Key { get; }
 
         /// <summary>
         /// A query expression to filter items or item variations by matching their custom attributes'
-        /// `string_value`  property value
-        /// against the specified text.
+        /// `string_value`  property value against the specified text.
+        /// Exactly one of `string_filter`, `number_filter`, `selection_uids_filter`, or `bool_filter` must be specified.
         /// </summary>
         [JsonProperty("string_filter", NullValueHandling = NullValueHandling.Ignore)]
         public string StringFilter { get; }
@@ -74,16 +74,16 @@ namespace Square.Models
 
         /// <summary>
         /// A query expression to filter items or item variations by matching  their custom attributes'
-        /// `selection_uid_values`
-        /// values against the specified selection uids.
+        /// `selection_uid_values` values against the specified selection uids.
+        /// Exactly one of `string_filter`, `number_filter`, `selection_uids_filter`, or `bool_filter` must be specified.
         /// </summary>
         [JsonProperty("selection_uids_filter", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> SelectionUidsFilter { get; }
 
         /// <summary>
         /// A query expression to filter items or item variations by matching their custom attributes'
-        /// `boolean_value` property values
-        /// against the specified Boolean expression.
+        /// `boolean_value` property values against the specified Boolean expression.
+        /// Exactly one of `string_filter`, `number_filter`, `selection_uids_filter`, or `bool_filter` must be specified.
         /// </summary>
         [JsonProperty("bool_filter", NullValueHandling = NullValueHandling.Ignore)]
         public bool? BoolFilter { get; }

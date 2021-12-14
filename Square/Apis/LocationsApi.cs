@@ -35,10 +35,8 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Provides information of all locations of a business.
-        /// Many Square API endpoints require a `location_id` parameter.
-        /// The `id` field of the [`Location`]($m/Location) objects returned by this.
-        /// endpoint correspond to that `location_id` parameter.
+        /// Provides details about all of the seller's locations,.
+        /// including those with an inactive status.
         /// </summary>
         /// <returns>Returns the Models.ListLocationsResponse response from the API call.</returns>
         public Models.ListLocationsResponse ListLocations()
@@ -49,10 +47,8 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Provides information of all locations of a business.
-        /// Many Square API endpoints require a `location_id` parameter.
-        /// The `id` field of the [`Location`]($m/Location) objects returned by this.
-        /// endpoint correspond to that `location_id` parameter.
+        /// Provides details about all of the seller's locations,.
+        /// including those with an inactive status.
         /// </summary>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the Models.ListLocationsResponse response from the API call.</returns>
@@ -100,7 +96,13 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Creates a location.
+        /// Creates a [location](https://developer.squareup.com/docs/locations-api).
+        /// Creating new locations allows for separate configuration of receipt layouts, item prices, .
+        /// and sales reports. Developers can use locations to separate sales activity via applications .
+        /// that integrate with Square from sales activity elsewhere in a seller's account. .
+        /// Locations created programmatically with the Locations API will last forever and .
+        /// are visible to the seller for their own management, so ensure that .
+        /// each location has a sensible and unique name.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <returns>Returns the Models.CreateLocationResponse response from the API call.</returns>
@@ -113,7 +115,13 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Creates a location.
+        /// Creates a [location](https://developer.squareup.com/docs/locations-api).
+        /// Creating new locations allows for separate configuration of receipt layouts, item prices, .
+        /// and sales reports. Developers can use locations to separate sales activity via applications .
+        /// that integrate with Square from sales activity elsewhere in a seller's account. .
+        /// Locations created programmatically with the Locations API will last forever and .
+        /// are visible to the seller for their own management, so ensure that .
+        /// each location has a sensible and unique name.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
@@ -168,11 +176,10 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Retrieves details of a location. You can specify "main" .
-        /// as the location ID to retrieve details of the .
-        /// main location.
+        /// Retrieves details of a single location. Specify "main".
+        /// as the location ID to retrieve details of the [main location](https://developer.squareup.com/docs/locations-api#about-the-main-location).
         /// </summary>
-        /// <param name="locationId">Required parameter: The ID of the location to retrieve. If you specify the string "main", then the endpoint returns the main location..</param>
+        /// <param name="locationId">Required parameter: The ID of the location to retrieve. Specify the string "main" to return the main location..</param>
         /// <returns>Returns the Models.RetrieveLocationResponse response from the API call.</returns>
         public Models.RetrieveLocationResponse RetrieveLocation(
                 string locationId)
@@ -183,11 +190,10 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Retrieves details of a location. You can specify "main" .
-        /// as the location ID to retrieve details of the .
-        /// main location.
+        /// Retrieves details of a single location. Specify "main".
+        /// as the location ID to retrieve details of the [main location](https://developer.squareup.com/docs/locations-api#about-the-main-location).
         /// </summary>
-        /// <param name="locationId">Required parameter: The ID of the location to retrieve. If you specify the string "main", then the endpoint returns the main location..</param>
+        /// <param name="locationId">Required parameter: The ID of the location to retrieve. Specify the string "main" to return the main location..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the Models.RetrieveLocationResponse response from the API call.</returns>
         public async Task<Models.RetrieveLocationResponse> RetrieveLocationAsync(

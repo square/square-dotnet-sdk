@@ -197,10 +197,11 @@ namespace Square.Models
         public Models.SubscriptionSource Source { get; }
 
         /// <summary>
-        /// The list of scheduled actions on this subscription. It is set only in the response from the
-        /// [RetrieveSubscription]($e/Subscriptions/RetrieveSubscription) or
-        /// [SearchSubscriptions]($e/Subscriptions/SearchSubscriptions) endpoint with the query parameter
-        /// of `include=actions`.
+        /// The list of scheduled actions on this subscription. It is set only in the response from
+        /// [RetrieveSubscription]($e/Subscriptions/RetrieveSubscription) with the query parameter
+        /// of `include=actions` or from
+        /// [SearchSubscriptions]($e/Subscriptions/SearchSubscriptions) with the input parameter
+        /// of `include:["actions"]`.
         /// </summary>
         [JsonProperty("actions", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.SubscriptionAction> Actions { get; }

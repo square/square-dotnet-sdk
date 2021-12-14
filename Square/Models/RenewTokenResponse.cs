@@ -65,7 +65,7 @@ namespace Square.Models
         public string TokenType { get; }
 
         /// <summary>
-        /// The date when access_token expires, in [ISO 8601](http://www.iso.org/iso/home/standards/iso8601.htm) format.
+        /// The date when the `access_token` expires, in [ISO 8601](http://www.iso.org/iso/home/standards/iso8601.htm) format.
         /// </summary>
         [JsonProperty("expires_at", NullValueHandling = NullValueHandling.Ignore)]
         public string ExpiresAt { get; }
@@ -78,15 +78,15 @@ namespace Square.Models
 
         /// <summary>
         /// __LEGACY FIELD__. The ID of the merchant subscription associated with
-        /// the authorization. Only present if the merchant signed up for a subscription
-        /// during authorization..
+        /// the authorization. The ID is only present if the merchant signed up for a subscription
+        /// during authorization.
         /// </summary>
         [JsonProperty("subscription_id", NullValueHandling = NullValueHandling.Ignore)]
         public string SubscriptionId { get; }
 
         /// <summary>
         /// __LEGACY FIELD__. The ID of the subscription plan the merchant signed
-        /// up for. Only present if the merchant signed up for a subscription during
+        /// up for. The ID is only present if the merchant signed up for a subscription plan during
         /// authorization.
         /// </summary>
         [JsonProperty("plan_id", NullValueHandling = NullValueHandling.Ignore)]

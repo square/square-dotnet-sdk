@@ -61,8 +61,7 @@ namespace Square.Models
         /// <summary>
         /// A valid OAuth access token. OAuth access tokens are 64 bytes long.
         /// Provide the access token in a header with every request to Connect API
-        /// endpoints. See [OAuth API: Walkthrough](https://developer.squareup.com/docs/oauth-api/walkthrough)
-        /// for more information.
+        /// endpoints. For more information, see [OAuth API: Walkthrough](https://developer.squareup.com/docs/oauth-api/walkthrough).
         /// </summary>
         [JsonProperty("access_token", NullValueHandling = NullValueHandling.Ignore)]
         public string AccessToken { get; }
@@ -74,7 +73,7 @@ namespace Square.Models
         public string TokenType { get; }
 
         /// <summary>
-        /// The date when the access_token expires, in [ISO 8601](http://www.iso.org/iso/home/standards/iso8601.htm) format.
+        /// The date when the `access_token` expires, in [ISO 8601](http://www.iso.org/iso/home/standards/iso8601.htm) format.
         /// </summary>
         [JsonProperty("expires_at", NullValueHandling = NullValueHandling.Ignore)]
         public string ExpiresAt { get; }
@@ -87,21 +86,21 @@ namespace Square.Models
 
         /// <summary>
         /// __LEGACY FIELD__. The ID of a subscription plan the merchant signed up
-        /// for. Only present if the merchant signed up for a subscription during authorization.
+        /// for. The ID is only present if the merchant signed up for a subscription plan during authorization.
         /// </summary>
         [JsonProperty("subscription_id", NullValueHandling = NullValueHandling.Ignore)]
         public string SubscriptionId { get; }
 
         /// <summary>
         /// __LEGACY FIELD__. The ID of the subscription plan the merchant signed
-        /// up for. Only present if the merchant signed up for a subscription during
+        /// up for. The ID is only present if the merchant signed up for a subscription plan during
         /// authorization.
         /// </summary>
         [JsonProperty("plan_id", NullValueHandling = NullValueHandling.Ignore)]
         public string PlanId { get; }
 
         /// <summary>
-        /// The OpenID token belonging to this person. Only present if the
+        /// The OpenID token belonging to this person. This token is only present if the
         /// OPENID scope is included in the authorization request.
         /// </summary>
         [JsonProperty("id_token", NullValueHandling = NullValueHandling.Ignore)]
@@ -115,8 +114,8 @@ namespace Square.Models
         public string RefreshToken { get; }
 
         /// <summary>
-        /// A boolean indicating the access token is a short-lived access token.
-        /// The short-lived access token returned in the response will expire in 24 hours.
+        /// A Boolean indicating that the access token is a short-lived access token.
+        /// The short-lived access token returned in the response expires in 24 hours.
         /// </summary>
         [JsonProperty("short_lived", NullValueHandling = NullValueHandling.Ignore)]
         public bool? ShortLived { get; }

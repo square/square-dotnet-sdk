@@ -41,12 +41,14 @@ namespace Square.Models
 
         /// <summary>
         /// The IDs of the CatalogModifierList objects to enable for the CatalogItem.
+        /// At least one of `modifier_lists_to_enable` or `modifier_lists_to_disable` must be specified.
         /// </summary>
         [JsonProperty("modifier_lists_to_enable", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> ModifierListsToEnable { get; }
 
         /// <summary>
         /// The IDs of the CatalogModifierList objects to disable for the CatalogItem.
+        /// At least one of `modifier_lists_to_enable` or `modifier_lists_to_disable` must be specified.
         /// </summary>
         [JsonProperty("modifier_lists_to_disable", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> ModifierListsToDisable { get; }
