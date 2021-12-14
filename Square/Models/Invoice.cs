@@ -41,6 +41,7 @@ namespace Square.Models
         /// <param name="customFields">custom_fields.</param>
         /// <param name="subscriptionId">subscription_id.</param>
         /// <param name="saleOrServiceDate">sale_or_service_date.</param>
+        /// <param name="paymentConditions">payment_conditions.</param>
         public Invoice(
             string id = null,
             int? version = null,
@@ -62,7 +63,8 @@ namespace Square.Models
             Models.InvoiceAcceptedPaymentMethods acceptedPaymentMethods = null,
             IList<Models.InvoiceCustomField> customFields = null,
             string subscriptionId = null,
-            string saleOrServiceDate = null)
+            string saleOrServiceDate = null,
+            string paymentConditions = null)
         {
             this.Id = id;
             this.Version = version;
@@ -85,6 +87,7 @@ namespace Square.Models
             this.CustomFields = customFields;
             this.SubscriptionId = subscriptionId;
             this.SaleOrServiceDate = saleOrServiceDate;
+            this.PaymentConditions = paymentConditions;
         }
 
         /// <summary>
@@ -148,22 +151,22 @@ namespace Square.Models
         public string DeliveryMethod { get; }
 
         /// <summary>
-        /// A user-friendly invoice number. The value is unique within a location.
+        /// A user-friendly invoice number that is displayed on the invoice. The value is unique within a location.
         /// If not provided when creating an invoice, Square assigns a value.
-        /// It increments from 1 and padded with zeros making it 7 characters long
+        /// It increments from 1 and is padded with zeros making it 7 characters long
         /// (for example, 0000001 and 0000002).
         /// </summary>
         [JsonProperty("invoice_number", NullValueHandling = NullValueHandling.Ignore)]
         public string InvoiceNumber { get; }
 
         /// <summary>
-        /// The title of the invoice.
+        /// The title of the invoice, which is displayed on the invoice.
         /// </summary>
         [JsonProperty("title", NullValueHandling = NullValueHandling.Ignore)]
         public string Title { get; }
 
         /// <summary>
-        /// The description of the invoice. This is visible to the customer receiving the invoice.
+        /// The description of the invoice, which is displayed on the invoice.
         /// </summary>
         [JsonProperty("description", NullValueHandling = NullValueHandling.Ignore)]
         public string Description { get; }
@@ -232,8 +235,7 @@ namespace Square.Models
         public Models.InvoiceAcceptedPaymentMethods AcceptedPaymentMethods { get; }
 
         /// <summary>
-        /// Additional seller-defined fields to render on the invoice. These fields are visible to sellers and buyers
-        /// on the Square-hosted invoice page and in emailed or PDF copies of invoices. For more information, see
+        /// Additional seller-defined fields that are displayed on the invoice. For more information, see
         /// [Custom fields](https://developer.squareup.com/docs/invoices-api/overview#custom-fields).
         /// Adding custom fields to an invoice requires an
         /// [Invoices Plus subscription](https://developer.squareup.com/docs/invoices-api/overview#invoices-plus-subscription).
@@ -255,6 +257,15 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("sale_or_service_date", NullValueHandling = NullValueHandling.Ignore)]
         public string SaleOrServiceDate { get; }
+
+        /// <summary>
+        /// **France only.** The payment terms and conditions that are displayed on the invoice. For more information,
+        /// see [Payment conditions](https://developer.squareup.com/docs/invoices-api/overview#payment-conditions).
+        /// For countries other than France, Square returns an `INVALID_REQUEST_ERROR` with a `BAD_REQUEST` code and
+        /// "Payment conditions are not supported for this location's country" detail if this field is included in `CreateInvoice` or `UpdateInvoice` requests.
+        /// </summary>
+        [JsonProperty("payment_conditions", NullValueHandling = NullValueHandling.Ignore)]
+        public string PaymentConditions { get; }
 
         /// <inheritdoc/>
         public override string ToString()
@@ -300,18 +311,21 @@ namespace Square.Models
                 ((this.AcceptedPaymentMethods == null && other.AcceptedPaymentMethods == null) || (this.AcceptedPaymentMethods?.Equals(other.AcceptedPaymentMethods) == true)) &&
                 ((this.CustomFields == null && other.CustomFields == null) || (this.CustomFields?.Equals(other.CustomFields) == true)) &&
                 ((this.SubscriptionId == null && other.SubscriptionId == null) || (this.SubscriptionId?.Equals(other.SubscriptionId) == true)) &&
-                ((this.SaleOrServiceDate == null && other.SaleOrServiceDate == null) || (this.SaleOrServiceDate?.Equals(other.SaleOrServiceDate) == true));
+                ((this.SaleOrServiceDate == null && other.SaleOrServiceDate == null) || (this.SaleOrServiceDate?.Equals(other.SaleOrServiceDate) == true)) &&
+                ((this.PaymentConditions == null && other.PaymentConditions == null) || (this.PaymentConditions?.Equals(other.PaymentConditions) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 998088589;
+            int hashCode = -799470695;
             hashCode = HashCode.Combine(this.Id, this.Version, this.LocationId, this.OrderId, this.PrimaryRecipient, this.PaymentRequests, this.DeliveryMethod);
 
             hashCode = HashCode.Combine(hashCode, this.InvoiceNumber, this.Title, this.Description, this.ScheduledAt, this.PublicUrl, this.NextPaymentAmountMoney, this.Status);
 
             hashCode = HashCode.Combine(hashCode, this.Timezone, this.CreatedAt, this.UpdatedAt, this.AcceptedPaymentMethods, this.CustomFields, this.SubscriptionId, this.SaleOrServiceDate);
+
+            hashCode = HashCode.Combine(hashCode, this.PaymentConditions);
 
             return hashCode;
         }
@@ -343,6 +357,7 @@ namespace Square.Models
             toStringOutput.Add($"this.CustomFields = {(this.CustomFields == null ? "null" : $"[{string.Join(", ", this.CustomFields)} ]")}");
             toStringOutput.Add($"this.SubscriptionId = {(this.SubscriptionId == null ? "null" : this.SubscriptionId == string.Empty ? "" : this.SubscriptionId)}");
             toStringOutput.Add($"this.SaleOrServiceDate = {(this.SaleOrServiceDate == null ? "null" : this.SaleOrServiceDate == string.Empty ? "" : this.SaleOrServiceDate)}");
+            toStringOutput.Add($"this.PaymentConditions = {(this.PaymentConditions == null ? "null" : this.PaymentConditions == string.Empty ? "" : this.PaymentConditions)}");
         }
 
         /// <summary>
@@ -372,7 +387,8 @@ namespace Square.Models
                 .AcceptedPaymentMethods(this.AcceptedPaymentMethods)
                 .CustomFields(this.CustomFields)
                 .SubscriptionId(this.SubscriptionId)
-                .SaleOrServiceDate(this.SaleOrServiceDate);
+                .SaleOrServiceDate(this.SaleOrServiceDate)
+                .PaymentConditions(this.PaymentConditions);
             return builder;
         }
 
@@ -402,6 +418,7 @@ namespace Square.Models
             private IList<Models.InvoiceCustomField> customFields;
             private string subscriptionId;
             private string saleOrServiceDate;
+            private string paymentConditions;
 
              /// <summary>
              /// Id.
@@ -634,6 +651,17 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// PaymentConditions.
+             /// </summary>
+             /// <param name="paymentConditions"> paymentConditions. </param>
+             /// <returns> Builder. </returns>
+            public Builder PaymentConditions(string paymentConditions)
+            {
+                this.paymentConditions = paymentConditions;
+                return this;
+            }
+
             /// <summary>
             /// Builds class object.
             /// </summary>
@@ -661,7 +689,8 @@ namespace Square.Models
                     this.acceptedPaymentMethods,
                     this.customFields,
                     this.subscriptionId,
-                    this.saleOrServiceDate);
+                    this.saleOrServiceDate,
+                    this.paymentConditions);
             }
         }
     }

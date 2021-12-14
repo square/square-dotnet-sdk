@@ -23,14 +23,17 @@ namespace Square.Models
         /// <param name="name">name.</param>
         /// <param name="url">url.</param>
         /// <param name="caption">caption.</param>
+        /// <param name="photoStudioOrderId">photo_studio_order_id.</param>
         public CatalogImage(
             string name = null,
             string url = null,
-            string caption = null)
+            string caption = null,
+            string photoStudioOrderId = null)
         {
             this.Name = name;
             this.Url = url;
             this.Caption = caption;
+            this.PhotoStudioOrderId = photoStudioOrderId;
         }
 
         /// <summary>
@@ -58,6 +61,12 @@ namespace Square.Models
         [JsonProperty("caption", NullValueHandling = NullValueHandling.Ignore)]
         public string Caption { get; }
 
+        /// <summary>
+        /// The immutable order ID for this image object created by the Photo Studio service in Square Online Store.
+        /// </summary>
+        [JsonProperty("photo_studio_order_id", NullValueHandling = NullValueHandling.Ignore)]
+        public string PhotoStudioOrderId { get; }
+
         /// <inheritdoc/>
         public override string ToString()
         {
@@ -84,14 +93,15 @@ namespace Square.Models
             return obj is CatalogImage other &&
                 ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
                 ((this.Url == null && other.Url == null) || (this.Url?.Equals(other.Url) == true)) &&
-                ((this.Caption == null && other.Caption == null) || (this.Caption?.Equals(other.Caption) == true));
+                ((this.Caption == null && other.Caption == null) || (this.Caption?.Equals(other.Caption) == true)) &&
+                ((this.PhotoStudioOrderId == null && other.PhotoStudioOrderId == null) || (this.PhotoStudioOrderId?.Equals(other.PhotoStudioOrderId) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -261675541;
-            hashCode = HashCode.Combine(this.Name, this.Url, this.Caption);
+            int hashCode = 1007024352;
+            hashCode = HashCode.Combine(this.Name, this.Url, this.Caption, this.PhotoStudioOrderId);
 
             return hashCode;
         }
@@ -105,6 +115,7 @@ namespace Square.Models
             toStringOutput.Add($"this.Name = {(this.Name == null ? "null" : this.Name == string.Empty ? "" : this.Name)}");
             toStringOutput.Add($"this.Url = {(this.Url == null ? "null" : this.Url == string.Empty ? "" : this.Url)}");
             toStringOutput.Add($"this.Caption = {(this.Caption == null ? "null" : this.Caption == string.Empty ? "" : this.Caption)}");
+            toStringOutput.Add($"this.PhotoStudioOrderId = {(this.PhotoStudioOrderId == null ? "null" : this.PhotoStudioOrderId == string.Empty ? "" : this.PhotoStudioOrderId)}");
         }
 
         /// <summary>
@@ -116,7 +127,8 @@ namespace Square.Models
             var builder = new Builder()
                 .Name(this.Name)
                 .Url(this.Url)
-                .Caption(this.Caption);
+                .Caption(this.Caption)
+                .PhotoStudioOrderId(this.PhotoStudioOrderId);
             return builder;
         }
 
@@ -128,6 +140,7 @@ namespace Square.Models
             private string name;
             private string url;
             private string caption;
+            private string photoStudioOrderId;
 
              /// <summary>
              /// Name.
@@ -162,6 +175,17 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// PhotoStudioOrderId.
+             /// </summary>
+             /// <param name="photoStudioOrderId"> photoStudioOrderId. </param>
+             /// <returns> Builder. </returns>
+            public Builder PhotoStudioOrderId(string photoStudioOrderId)
+            {
+                this.photoStudioOrderId = photoStudioOrderId;
+                return this;
+            }
+
             /// <summary>
             /// Builds class object.
             /// </summary>
@@ -171,7 +195,8 @@ namespace Square.Models
                 return new CatalogImage(
                     this.name,
                     this.url,
-                    this.caption);
+                    this.caption,
+                    this.photoStudioOrderId);
             }
         }
     }

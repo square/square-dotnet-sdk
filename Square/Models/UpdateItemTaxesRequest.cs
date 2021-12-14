@@ -35,18 +35,21 @@ namespace Square.Models
 
         /// <summary>
         /// IDs for the CatalogItems associated with the CatalogTax objects being updated.
+        /// No more than 1,000 IDs may be provided.
         /// </summary>
         [JsonProperty("item_ids")]
         public IList<string> ItemIds { get; }
 
         /// <summary>
         /// IDs of the CatalogTax objects to enable.
+        /// At least one of `taxes_to_enable` or `taxes_to_disable` must be specified.
         /// </summary>
         [JsonProperty("taxes_to_enable", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> TaxesToEnable { get; }
 
         /// <summary>
         /// IDs of the CatalogTax objects to disable.
+        /// At least one of `taxes_to_enable` or `taxes_to_disable` must be specified.
         /// </summary>
         [JsonProperty("taxes_to_disable", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> TaxesToDisable { get; }

@@ -106,7 +106,7 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// The Square-issued ID of the location.
+        /// A short, generated string of letters and numbers that uniquely identifies this location instance.
         /// </summary>
         [JsonProperty("id", NullValueHandling = NullValueHandling.Ignore)]
         public string Id { get; }
@@ -151,7 +151,7 @@ namespace Square.Models
 
         /// <summary>
         /// The [IANA Timezone](https://www.iana.org/time-zones) identifier for
-        /// the timezone of the location.
+        /// the timezone of the location. For example, `"America/Los_Angeles"`.
         /// </summary>
         [JsonProperty("timezone", NullValueHandling = NullValueHandling.Ignore)]
         public string Timezone { get; }
@@ -165,7 +165,7 @@ namespace Square.Models
         public IList<string> Capabilities { get; }
 
         /// <summary>
-        /// The status of the location, whether a location is active or inactive.
+        /// A location's status.
         /// </summary>
         [JsonProperty("status", NullValueHandling = NullValueHandling.Ignore)]
         public string Status { get; }
@@ -212,15 +212,13 @@ namespace Square.Models
         public string PhoneNumber { get; }
 
         /// <summary>
-        /// The business name of the location
-        /// This is the name visible to the customers of the location.
-        /// For example, this name appears on customer receipts.
+        /// The business name of the location, visible to the location's customers.
         /// </summary>
         [JsonProperty("business_name", NullValueHandling = NullValueHandling.Ignore)]
         public string BusinessName { get; }
 
         /// <summary>
-        /// A location's physical or mobile type.
+        /// A location's type.
         /// </summary>
         [JsonProperty("type", NullValueHandling = NullValueHandling.Ignore)]
         public string Type { get; }
@@ -232,22 +230,20 @@ namespace Square.Models
         public string WebsiteUrl { get; }
 
         /// <summary>
-        /// Represents the hours of operation for a business location.
+        /// The hours of operation for a location.
         /// </summary>
         [JsonProperty("business_hours", NullValueHandling = NullValueHandling.Ignore)]
         public Models.BusinessHours BusinessHours { get; }
 
         /// <summary>
-        /// The email of the location.
-        /// This email is visible to the customers of the location.
-        /// For example, the email appears on customer receipts.
-        /// For example, `help@squareup.com`.
+        /// The email address of the location, visible to the location's customers.
+        /// This can be unique to the location, and is not always the email address for the business owner or admin.
         /// </summary>
         [JsonProperty("business_email", NullValueHandling = NullValueHandling.Ignore)]
         public string BusinessEmail { get; }
 
         /// <summary>
-        /// The description of the location.
+        /// The description of the location. For example, `Main Street location`.
         /// </summary>
         [JsonProperty("description", NullValueHandling = NullValueHandling.Ignore)]
         public string Description { get; }
@@ -277,10 +273,10 @@ namespace Square.Models
         public Models.Coordinates Coordinates { get; }
 
         /// <summary>
-        /// The URL of the logo image for the location. The Seller must choose this logo in the Seller
-        /// dashboard (Receipts section) for the logo to appear on transactions (such as receipts, invoices)
-        /// that Square generates on behalf of the Seller. This image should have an aspect ratio
-        /// close to 1:1 and is recommended to be at least 200x200 pixels.
+        /// The URL of the logo image for the location. When configured in the Seller
+        /// dashboard (Receipts section), the logo appears on transactions (such as receipts and invoices)
+        /// that Square generates on behalf of the Seller. This image should have a roughly square (1:1) aspect ratio
+        /// and is recommended to be at least 200x200 pixels.
         /// </summary>
         [JsonProperty("logo_url", NullValueHandling = NullValueHandling.Ignore)]
         public string LogoUrl { get; }
@@ -292,16 +288,17 @@ namespace Square.Models
         public string PosBackgroundUrl { get; }
 
         /// <summary>
-        /// The merchant category code (MCC) of the location, as standardized by ISO 18245.
-        /// The MCC describes the kind of goods or services sold at the location.
+        /// A four-digit number that describes the kind of goods or services sold at the location.
+        /// The merchant category code (MCC) of the location is standardized by ISO 18245.
+        /// For example, `5045`.
         /// </summary>
         [JsonProperty("mcc", NullValueHandling = NullValueHandling.Ignore)]
         public string Mcc { get; }
 
         /// <summary>
-        /// The URL of a full-format logo image for the location. The Seller must choose this logo in the
-        /// Seller dashboard (Receipts section) for the logo to appear on transactions (such as receipts, invoices)
-        /// that Square generates on behalf of the Seller. This image can have an aspect ratio of 2:1 or greater
+        /// The URL of a full-format logo image for the location. When configured in the Seller
+        /// dashboard (Receipts section), the logo appears on transactions (such as receipts and invoices)
+        /// that Square generates on behalf of the Seller. This image can be wider than it is tall,
         /// and is recommended to be at least 1280x648 pixels.
         /// </summary>
         [JsonProperty("full_format_logo_url", NullValueHandling = NullValueHandling.Ignore)]

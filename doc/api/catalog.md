@@ -14,6 +14,7 @@ ICatalogApi catalogApi = client.CatalogApi;
 * [Batch Retrieve Catalog Objects](/doc/api/catalog.md#batch-retrieve-catalog-objects)
 * [Batch Upsert Catalog Objects](/doc/api/catalog.md#batch-upsert-catalog-objects)
 * [Create Catalog Image](/doc/api/catalog.md#create-catalog-image)
+* [Update Catalog Image](/doc/api/catalog.md#update-catalog-image)
 * [Catalog Info](/doc/api/catalog.md#catalog-info)
 * [List Catalog](/doc/api/catalog.md#list-catalog)
 * [Upsert Catalog Object](/doc/api/catalog.md#upsert-catalog-object)
@@ -149,8 +150,27 @@ var bodyBatches = new List<CatalogObjectBatch>();
 
 var bodyBatches0Objects = new List<CatalogObject>();
 
-var bodyBatches0Objects0CustomAttributeValues = new CatalogCustomAttributeValue.Builder()
+var bodyBatches0Objects0CustomAttributeValues = new Dictionary<string, CatalogCustomAttributeValue>();
+
+
+var bodyBatches0Objects0CustomAttributeValues0 = new CatalogCustomAttributeValue.Builder()
+    .Name("name1")
+    .StringValue("string_value5")
+    .CustomAttributeDefinitionId("custom_attribute_definition_id1")
+    .Type("SELECTION")
+    .NumberValue("number_value1")
     .Build();
+bodyBatches0Objects0CustomAttributeValues.Add("key0",bodyBatches0Objects0CustomAttributeValues0);
+
+var bodyBatches0Objects0CustomAttributeValues1 = new CatalogCustomAttributeValue.Builder()
+    .Name("name0")
+    .StringValue("string_value4")
+    .CustomAttributeDefinitionId("custom_attribute_definition_id2")
+    .Type("STRING")
+    .NumberValue("number_value0")
+    .Build();
+bodyBatches0Objects0CustomAttributeValues.Add("key1",bodyBatches0Objects0CustomAttributeValues1);
+
 var bodyBatches0Objects0CatalogV1Ids = new List<CatalogV1Id>();
 
 var bodyBatches0Objects0CatalogV1Ids0 = new CatalogV1Id.Builder()
@@ -163,8 +183,27 @@ var bodyBatches0Objects0ItemDataTaxIds = new List<string>();
 bodyBatches0Objects0ItemDataTaxIds.Add("#SalesTax");
 var bodyBatches0Objects0ItemDataVariations = new List<CatalogObject>();
 
-var bodyBatches0Objects0ItemDataVariations0CustomAttributeValues = new CatalogCustomAttributeValue.Builder()
+var bodyBatches0Objects0ItemDataVariations0CustomAttributeValues = new Dictionary<string, CatalogCustomAttributeValue>();
+
+
+var bodyBatches0Objects0ItemDataVariations0CustomAttributeValues0 = new CatalogCustomAttributeValue.Builder()
+    .Name("name0")
+    .StringValue("string_value4")
+    .CustomAttributeDefinitionId("custom_attribute_definition_id2")
+    .Type("STRING")
+    .NumberValue("number_value0")
     .Build();
+bodyBatches0Objects0ItemDataVariations0CustomAttributeValues.Add("key0",bodyBatches0Objects0ItemDataVariations0CustomAttributeValues0);
+
+var bodyBatches0Objects0ItemDataVariations0CustomAttributeValues1 = new CatalogCustomAttributeValue.Builder()
+    .Name("name1")
+    .StringValue("string_value5")
+    .CustomAttributeDefinitionId("custom_attribute_definition_id1")
+    .Type("SELECTION")
+    .NumberValue("number_value1")
+    .Build();
+bodyBatches0Objects0ItemDataVariations0CustomAttributeValues.Add("key1",bodyBatches0Objects0ItemDataVariations0CustomAttributeValues1);
+
 var bodyBatches0Objects0ItemDataVariations0CatalogV1Ids = new List<CatalogV1Id>();
 
 var bodyBatches0Objects0ItemDataVariations0CatalogV1Ids0 = new CatalogV1Id.Builder()
@@ -217,8 +256,18 @@ var bodyBatches0Objects0 = new CatalogObject.Builder(
     .Build();
 bodyBatches0Objects.Add(bodyBatches0Objects0);
 
-var bodyBatches0Objects1CustomAttributeValues = new CatalogCustomAttributeValue.Builder()
+var bodyBatches0Objects1CustomAttributeValues = new Dictionary<string, CatalogCustomAttributeValue>();
+
+
+var bodyBatches0Objects1CustomAttributeValues0 = new CatalogCustomAttributeValue.Builder()
+    .Name("name2")
+    .StringValue("string_value6")
+    .CustomAttributeDefinitionId("custom_attribute_definition_id0")
+    .Type("NUMBER")
+    .NumberValue("number_value2")
     .Build();
+bodyBatches0Objects1CustomAttributeValues.Add("key0",bodyBatches0Objects1CustomAttributeValues0);
+
 var bodyBatches0Objects1CatalogV1Ids = new List<CatalogV1Id>();
 
 var bodyBatches0Objects1CatalogV1Ids0 = new CatalogV1Id.Builder()
@@ -237,8 +286,18 @@ var bodyBatches0Objects1ItemDataTaxIds = new List<string>();
 bodyBatches0Objects1ItemDataTaxIds.Add("#SalesTax");
 var bodyBatches0Objects1ItemDataVariations = new List<CatalogObject>();
 
-var bodyBatches0Objects1ItemDataVariations0CustomAttributeValues = new CatalogCustomAttributeValue.Builder()
+var bodyBatches0Objects1ItemDataVariations0CustomAttributeValues = new Dictionary<string, CatalogCustomAttributeValue>();
+
+
+var bodyBatches0Objects1ItemDataVariations0CustomAttributeValues0 = new CatalogCustomAttributeValue.Builder()
+    .Name("name9")
+    .StringValue("string_value3")
+    .CustomAttributeDefinitionId("custom_attribute_definition_id3")
+    .Type("BOOLEAN")
+    .NumberValue("number_value9")
     .Build();
+bodyBatches0Objects1ItemDataVariations0CustomAttributeValues.Add("key0",bodyBatches0Objects1ItemDataVariations0CustomAttributeValues0);
+
 var bodyBatches0Objects1ItemDataVariations0CatalogV1Ids = new List<CatalogV1Id>();
 
 var bodyBatches0Objects1ItemDataVariations0CatalogV1Ids0 = new CatalogV1Id.Builder()
@@ -274,8 +333,36 @@ var bodyBatches0Objects1ItemDataVariations0 = new CatalogObject.Builder(
     .Build();
 bodyBatches0Objects1ItemDataVariations.Add(bodyBatches0Objects1ItemDataVariations0);
 
-var bodyBatches0Objects1ItemDataVariations1CustomAttributeValues = new CatalogCustomAttributeValue.Builder()
+var bodyBatches0Objects1ItemDataVariations1CustomAttributeValues = new Dictionary<string, CatalogCustomAttributeValue>();
+
+
+var bodyBatches0Objects1ItemDataVariations1CustomAttributeValues0 = new CatalogCustomAttributeValue.Builder()
+    .Name("name8")
+    .StringValue("string_value2")
+    .CustomAttributeDefinitionId("custom_attribute_definition_id4")
+    .Type("NUMBER")
+    .NumberValue("number_value8")
     .Build();
+bodyBatches0Objects1ItemDataVariations1CustomAttributeValues.Add("key0",bodyBatches0Objects1ItemDataVariations1CustomAttributeValues0);
+
+var bodyBatches0Objects1ItemDataVariations1CustomAttributeValues1 = new CatalogCustomAttributeValue.Builder()
+    .Name("name9")
+    .StringValue("string_value3")
+    .CustomAttributeDefinitionId("custom_attribute_definition_id3")
+    .Type("BOOLEAN")
+    .NumberValue("number_value9")
+    .Build();
+bodyBatches0Objects1ItemDataVariations1CustomAttributeValues.Add("key1",bodyBatches0Objects1ItemDataVariations1CustomAttributeValues1);
+
+var bodyBatches0Objects1ItemDataVariations1CustomAttributeValues2 = new CatalogCustomAttributeValue.Builder()
+    .Name("name0")
+    .StringValue("string_value4")
+    .CustomAttributeDefinitionId("custom_attribute_definition_id2")
+    .Type("STRING")
+    .NumberValue("number_value0")
+    .Build();
+bodyBatches0Objects1ItemDataVariations1CustomAttributeValues.Add("key2",bodyBatches0Objects1ItemDataVariations1CustomAttributeValues2);
+
 var bodyBatches0Objects1ItemDataVariations1CatalogV1Ids = new List<CatalogV1Id>();
 
 var bodyBatches0Objects1ItemDataVariations1CatalogV1Ids0 = new CatalogV1Id.Builder()
@@ -340,8 +427,36 @@ var bodyBatches0Objects1 = new CatalogObject.Builder(
     .Build();
 bodyBatches0Objects.Add(bodyBatches0Objects1);
 
-var bodyBatches0Objects2CustomAttributeValues = new CatalogCustomAttributeValue.Builder()
+var bodyBatches0Objects2CustomAttributeValues = new Dictionary<string, CatalogCustomAttributeValue>();
+
+
+var bodyBatches0Objects2CustomAttributeValues0 = new CatalogCustomAttributeValue.Builder()
+    .Name("name3")
+    .StringValue("string_value7")
+    .CustomAttributeDefinitionId("custom_attribute_definition_id9")
+    .Type("BOOLEAN")
+    .NumberValue("number_value3")
     .Build();
+bodyBatches0Objects2CustomAttributeValues.Add("key0",bodyBatches0Objects2CustomAttributeValues0);
+
+var bodyBatches0Objects2CustomAttributeValues1 = new CatalogCustomAttributeValue.Builder()
+    .Name("name2")
+    .StringValue("string_value6")
+    .CustomAttributeDefinitionId("custom_attribute_definition_id0")
+    .Type("NUMBER")
+    .NumberValue("number_value2")
+    .Build();
+bodyBatches0Objects2CustomAttributeValues.Add("key1",bodyBatches0Objects2CustomAttributeValues1);
+
+var bodyBatches0Objects2CustomAttributeValues2 = new CatalogCustomAttributeValue.Builder()
+    .Name("name1")
+    .StringValue("string_value5")
+    .CustomAttributeDefinitionId("custom_attribute_definition_id1")
+    .Type("SELECTION")
+    .NumberValue("number_value1")
+    .Build();
+bodyBatches0Objects2CustomAttributeValues.Add("key2",bodyBatches0Objects2CustomAttributeValues2);
+
 var bodyBatches0Objects2CatalogV1Ids = new List<CatalogV1Id>();
 
 var bodyBatches0Objects2CatalogV1Ids0 = new CatalogV1Id.Builder()
@@ -362,8 +477,12 @@ var bodyBatches0Objects2CatalogV1Ids2 = new CatalogV1Id.Builder()
     .Build();
 bodyBatches0Objects2CatalogV1Ids.Add(bodyBatches0Objects2CatalogV1Ids2);
 
+var bodyBatches0Objects2CategoryDataImageIds = new List<string>();
+bodyBatches0Objects2CategoryDataImageIds.Add("image_ids1");
+bodyBatches0Objects2CategoryDataImageIds.Add("image_ids2");
 var bodyBatches0Objects2CategoryData = new CatalogCategory.Builder()
     .Name("Beverages")
+    .ImageIds(bodyBatches0Objects2CategoryDataImageIds)
     .Build();
 var bodyBatches0Objects2 = new CatalogObject.Builder(
         "CATEGORY",
@@ -378,8 +497,27 @@ var bodyBatches0Objects2 = new CatalogObject.Builder(
     .Build();
 bodyBatches0Objects.Add(bodyBatches0Objects2);
 
-var bodyBatches0Objects3CustomAttributeValues = new CatalogCustomAttributeValue.Builder()
+var bodyBatches0Objects3CustomAttributeValues = new Dictionary<string, CatalogCustomAttributeValue>();
+
+
+var bodyBatches0Objects3CustomAttributeValues0 = new CatalogCustomAttributeValue.Builder()
+    .Name("name4")
+    .StringValue("string_value8")
+    .CustomAttributeDefinitionId("custom_attribute_definition_id8")
+    .Type("STRING")
+    .NumberValue("number_value4")
     .Build();
+bodyBatches0Objects3CustomAttributeValues.Add("key0",bodyBatches0Objects3CustomAttributeValues0);
+
+var bodyBatches0Objects3CustomAttributeValues1 = new CatalogCustomAttributeValue.Builder()
+    .Name("name3")
+    .StringValue("string_value7")
+    .CustomAttributeDefinitionId("custom_attribute_definition_id9")
+    .Type("BOOLEAN")
+    .NumberValue("number_value3")
+    .Build();
+bodyBatches0Objects3CustomAttributeValues.Add("key1",bodyBatches0Objects3CustomAttributeValues1);
+
 var bodyBatches0Objects3CatalogV1Ids = new List<CatalogV1Id>();
 
 var bodyBatches0Objects3CatalogV1Ids0 = new CatalogV1Id.Builder()
@@ -429,9 +567,9 @@ catch (ApiException e){};
 
 # Create Catalog Image
 
-Uploads an image file to be represented by a [CatalogImage](/doc/models/catalog-image.md) object linked to an existing
-[CatalogObject](/doc/models/catalog-object.md) instance. A call to this endpoint can upload an image, link an image to
-a catalog object, or do both.
+Uploads an image file to be represented by a [CatalogImage](/doc/models/catalog-image.md) object that can be linked to an existing
+[CatalogObject](/doc/models/catalog-object.md) instance. The resulting `CatalogImage` is unattached to any `CatalogObject` if the `object_id`
+is not specified.
 
 This `CreateCatalogImage` endpoint accepts HTTP multipart/form-data requests with a JSON part and an image file part in
 JPEG, PJPEG, PNG, or GIF format. The maximum file size is 15MB.
@@ -456,8 +594,17 @@ CreateCatalogImageAsync(
 ## Example Usage
 
 ```csharp
-var requestImageCustomAttributeValues = new CatalogCustomAttributeValue.Builder()
+var requestImageCustomAttributeValues = new Dictionary<string, CatalogCustomAttributeValue>();
+
+
+var requestImageCustomAttributeValues0 = new CatalogCustomAttributeValue.Builder()
     .Build();
+requestImageCustomAttributeValues.Add("",requestImageCustomAttributeValues0);
+
+var requestImageCustomAttributeValues1 = new CatalogCustomAttributeValue.Builder()
+    .Build();
+requestImageCustomAttributeValues.Add("",requestImageCustomAttributeValues1);
+
 var requestImageCatalogV1Ids = new List<CatalogV1Id>();
 
 var requestImageCatalogV1Ids0 = new CatalogV1Id.Builder()
@@ -470,6 +617,7 @@ var requestImageImageData = new CatalogImage.Builder()
     .Name("name0")
     .Url("url4")
     .Caption("A picture of a cup of coffee")
+    .PhotoStudioOrderId("photo_studio_order_id2")
     .Build();
 var requestImage = new CatalogObject.Builder(
         "IMAGE",
@@ -485,12 +633,56 @@ var request = new CreateCatalogImageRequest.Builder(
         "528dea59-7bfb-43c1-bd48-4a6bba7dd61f86",
         requestImage)
     .ObjectId("ND6EA5AAJEO5WL3JNNIAQA32")
+    .IsPrimary(false)
     .Build();
 FileStreamInfo imageFile = new FileStreamInfo(new FileStream("dummy_file",FileMode.Open));
 
 try
 {
     CreateCatalogImageResponse result = await catalogApi.CreateCatalogImageAsync(request, imageFile);
+}
+catch (ApiException e){};
+```
+
+
+# Update Catalog Image
+
+Uploads a new image file to replace the existing one in the specified [CatalogImage](/doc/models/catalog-image.md) object.
+
+This `UpdateCatalogImage` endpoint accepts HTTP multipart/form-data requests with a JSON part and an image file part in
+JPEG, PJPEG, PNG, or GIF format. The maximum file size is 15MB.
+
+```csharp
+UpdateCatalogImageAsync(
+    string imageId,
+    Models.UpdateCatalogImageRequest request = null,
+    FileStreamInfo imageFile = null)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `imageId` | `string` | Template, Required | The ID of the `CatalogImage` object to update the encapsulated image file. |
+| `request` | [`Models.UpdateCatalogImageRequest`](/doc/models/update-catalog-image-request.md) | Form, Optional | - |
+| `imageFile` | `FileStreamInfo` | Form, Optional | - |
+
+## Response Type
+
+[`Task<Models.UpdateCatalogImageResponse>`](/doc/models/update-catalog-image-response.md)
+
+## Example Usage
+
+```csharp
+string imageId = "image_id4";
+var request = new UpdateCatalogImageRequest.Builder(
+        "528dea59-7bfb-43c1-bd48-4a6bba7dd61f86")
+    .Build();
+FileStreamInfo imageFile = new FileStreamInfo(new FileStream("dummy_file",FileMode.Open));
+
+try
+{
+    UpdateCatalogImageResponse result = await catalogApi.UpdateCatalogImageAsync(imageId, request, imageFile);
 }
 catch (ApiException e){};
 ```
@@ -522,11 +714,10 @@ catch (ApiException e){};
 
 # List Catalog
 
-Returns a list of [CatalogObject](/doc/models/catalog-object.md)s that includes
-all objects of a set of desired types (for example, all [CatalogItem](/doc/models/catalog-item.md)
-and [CatalogTax](/doc/models/catalog-tax.md) objects) in the catalog. The `types` parameter
-is specified as a comma-separated list of valid [CatalogObject](/doc/models/catalog-object.md) types:
-`ITEM`, `ITEM_VARIATION`, `MODIFIER`, `MODIFIER_LIST`, `CATEGORY`, `DISCOUNT`, `TAX`, `IMAGE`.
+Returns a list of all [CatalogObject](/doc/models/catalog-object.md)s of the specified types in the catalog.
+
+The `types` parameter is specified as a comma-separated list of the [CatalogObjectType](/doc/models/catalog-object-type.md) values,
+for example, "`ITEM`, `ITEM_VARIATION`, `MODIFIER`, `MODIFIER_LIST`, `CATEGORY`, `DISCOUNT`, `TAX`, `IMAGE`".
 
 __Important:__ ListCatalog does not return deleted catalog items. To retrieve
 deleted catalog items, use [SearchCatalogObjects](/doc/api/catalog.md#search-catalog-objects)
@@ -544,8 +735,8 @@ ListCatalogAsync(
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `cursor` | `string` | Query, Optional | The pagination cursor returned in the previous response. Leave unset for an initial request.<br>The page size is currently set to be 100.<br>See [Pagination](https://developer.squareup.com/docs/basics/api101/pagination) for more information. |
-| `types` | `string` | Query, Optional | An optional case-insensitive, comma-separated list of object types to retrieve.<br><br>The valid values are defined in the [CatalogObjectType](/doc/models/catalog-object-type.md) enum, including<br>`ITEM`, `ITEM_VARIATION`, `CATEGORY`, `DISCOUNT`, `TAX`,<br>`MODIFIER`, `MODIFIER_LIST`, or `IMAGE`.<br><br>If this is unspecified, the operation returns objects of all the types at the version of the Square API used to make the request. |
-| `catalogVersion` | `long?` | Query, Optional | The specific version of the catalog objects to be included in the response.<br>This allows you to retrieve historical<br>versions of objects. The specified version value is matched against<br>the [CatalogObject](/doc/models/catalog-object.md)s' `version` attribute. |
+| `types` | `string` | Query, Optional | An optional case-insensitive, comma-separated list of object types to retrieve.<br><br>The valid values are defined in the [CatalogObjectType](/doc/models/catalog-object-type.md) enum, for example,<br>`ITEM`, `ITEM_VARIATION`, `CATEGORY`, `DISCOUNT`, `TAX`,<br>`MODIFIER`, `MODIFIER_LIST`, `IMAGE`, etc.<br><br>If this is unspecified, the operation returns objects of all the top level types at the version<br>of the Square API used to make the request. Object types that are nested onto other object types<br>are not included in the defaults.<br><br>At the current API version the default object types are:<br>ITEM, CATEGORY, TAX, DISCOUNT, MODIFIER_LIST, DINING_OPTION, TAX_EXEMPTION,<br>SERVICE_CHARGE, PRICING_RULE, PRODUCT_SET, TIME_PERIOD, MEASUREMENT_UNIT,<br>SUBSCRIPTION_PLAN, ITEM_OPTION, CUSTOM_ATTRIBUTE_DEFINITION, QUICK_AMOUNT_SETTINGS. |
+| `catalogVersion` | `long?` | Query, Optional | The specific version of the catalog objects to be included in the response.<br>This allows you to retrieve historical<br>versions of objects. The specified version value is matched against<br>the [CatalogObject](/doc/models/catalog-object.md)s' `version` attribute.  If not included, results will<br>be from the current version of the catalog. |
 
 ## Response Type
 
@@ -588,8 +779,21 @@ UpsertCatalogObjectAsync(
 ## Example Usage
 
 ```csharp
-var bodyMObjectCustomAttributeValues = new CatalogCustomAttributeValue.Builder()
+var bodyMObjectCustomAttributeValues = new Dictionary<string, CatalogCustomAttributeValue>();
+
+
+var bodyMObjectCustomAttributeValues0 = new CatalogCustomAttributeValue.Builder()
     .Build();
+bodyMObjectCustomAttributeValues.Add("",bodyMObjectCustomAttributeValues0);
+
+var bodyMObjectCustomAttributeValues1 = new CatalogCustomAttributeValue.Builder()
+    .Build();
+bodyMObjectCustomAttributeValues.Add("",bodyMObjectCustomAttributeValues1);
+
+var bodyMObjectCustomAttributeValues2 = new CatalogCustomAttributeValue.Builder()
+    .Build();
+bodyMObjectCustomAttributeValues.Add("",bodyMObjectCustomAttributeValues2);
+
 var bodyMObjectCatalogV1Ids = new List<CatalogV1Id>();
 
 var bodyMObjectCatalogV1Ids0 = new CatalogV1Id.Builder()
@@ -612,8 +816,27 @@ bodyMObjectCatalogV1Ids.Add(bodyMObjectCatalogV1Ids2);
 
 var bodyMObjectItemDataVariations = new List<CatalogObject>();
 
-var bodyMObjectItemDataVariations0CustomAttributeValues = new CatalogCustomAttributeValue.Builder()
+var bodyMObjectItemDataVariations0CustomAttributeValues = new Dictionary<string, CatalogCustomAttributeValue>();
+
+
+var bodyMObjectItemDataVariations0CustomAttributeValues0 = new CatalogCustomAttributeValue.Builder()
+    .Name("name4")
+    .StringValue("string_value8")
+    .CustomAttributeDefinitionId("custom_attribute_definition_id8")
+    .Type("NUMBER")
+    .NumberValue("number_value4")
     .Build();
+bodyMObjectItemDataVariations0CustomAttributeValues.Add("key0",bodyMObjectItemDataVariations0CustomAttributeValues0);
+
+var bodyMObjectItemDataVariations0CustomAttributeValues1 = new CatalogCustomAttributeValue.Builder()
+    .Name("name5")
+    .StringValue("string_value9")
+    .CustomAttributeDefinitionId("custom_attribute_definition_id7")
+    .Type("BOOLEAN")
+    .NumberValue("number_value5")
+    .Build();
+bodyMObjectItemDataVariations0CustomAttributeValues.Add("key1",bodyMObjectItemDataVariations0CustomAttributeValues1);
+
 var bodyMObjectItemDataVariations0CatalogV1Ids = new List<CatalogV1Id>();
 
 var bodyMObjectItemDataVariations0CatalogV1Ids0 = new CatalogV1Id.Builder()
@@ -642,8 +865,36 @@ var bodyMObjectItemDataVariations0 = new CatalogObject.Builder(
     .Build();
 bodyMObjectItemDataVariations.Add(bodyMObjectItemDataVariations0);
 
-var bodyMObjectItemDataVariations1CustomAttributeValues = new CatalogCustomAttributeValue.Builder()
+var bodyMObjectItemDataVariations1CustomAttributeValues = new Dictionary<string, CatalogCustomAttributeValue>();
+
+
+var bodyMObjectItemDataVariations1CustomAttributeValues0 = new CatalogCustomAttributeValue.Builder()
+    .Name("name5")
+    .StringValue("string_value9")
+    .CustomAttributeDefinitionId("custom_attribute_definition_id7")
+    .Type("BOOLEAN")
+    .NumberValue("number_value5")
     .Build();
+bodyMObjectItemDataVariations1CustomAttributeValues.Add("key0",bodyMObjectItemDataVariations1CustomAttributeValues0);
+
+var bodyMObjectItemDataVariations1CustomAttributeValues1 = new CatalogCustomAttributeValue.Builder()
+    .Name("name6")
+    .StringValue("string_value0")
+    .CustomAttributeDefinitionId("custom_attribute_definition_id6")
+    .Type("STRING")
+    .NumberValue("number_value6")
+    .Build();
+bodyMObjectItemDataVariations1CustomAttributeValues.Add("key1",bodyMObjectItemDataVariations1CustomAttributeValues1);
+
+var bodyMObjectItemDataVariations1CustomAttributeValues2 = new CatalogCustomAttributeValue.Builder()
+    .Name("name7")
+    .StringValue("string_value1")
+    .CustomAttributeDefinitionId("custom_attribute_definition_id5")
+    .Type("SELECTION")
+    .NumberValue("number_value7")
+    .Build();
+bodyMObjectItemDataVariations1CustomAttributeValues.Add("key2",bodyMObjectItemDataVariations1CustomAttributeValues2);
+
 var bodyMObjectItemDataVariations1CatalogV1Ids = new List<CatalogV1Id>();
 
 var bodyMObjectItemDataVariations1CatalogV1Ids0 = new CatalogV1Id.Builder()
@@ -779,8 +1030,8 @@ RetrieveCatalogObjectAsync(
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `objectId` | `string` | Template, Required | The object ID of any type of catalog objects to be retrieved. |
-| `includeRelatedObjects` | `bool?` | Query, Optional | If `true`, the response will include additional objects that are related to the<br>requested object, as follows:<br><br>If the `object` field of the response contains a `CatalogItem`, its associated<br>`CatalogCategory`, `CatalogTax`, `CatalogImage` and `CatalogModifierList` objects will<br>be returned in the `related_objects` field of the response. If the `object` field of<br>the response contains a `CatalogItemVariation`, its parent `CatalogItem` will be returned<br>in the `related_objects` field of the response.<br><br>Default value: `false`<br>**Default**: `false` |
-| `catalogVersion` | `long?` | Query, Optional | Requests objects as of a specific version of the catalog. This allows you to retrieve historical<br>versions of objects. The value to retrieve a specific version of an object can be found<br>in the version field of [CatalogObject](/doc/models/catalog-object.md)s. |
+| `includeRelatedObjects` | `bool?` | Query, Optional | If `true`, the response will include additional objects that are related to the<br>requested objects. Related objects are defined as any objects referenced by ID by the results in the `objects` field<br>of the response. These objects are put in the `related_objects` field. Setting this to `true` is<br>helpful when the objects are needed for immediate display to a user.<br>This process only goes one level deep. Objects referenced by the related objects will not be included. For example,<br><br>if the `objects` field of the response contains a CatalogItem, its associated<br>CatalogCategory objects, CatalogTax objects, CatalogImage objects and<br>CatalogModifierLists will be returned in the `related_objects` field of the<br>response. If the `objects` field of the response contains a CatalogItemVariation,<br>its parent CatalogItem will be returned in the `related_objects` field of<br>the response.<br><br>Default value: `false`<br>**Default**: `false` |
+| `catalogVersion` | `long?` | Query, Optional | Requests objects as of a specific version of the catalog. This allows you to retrieve historical<br>versions of objects. The value to retrieve a specific version of an object can be found<br>in the version field of [CatalogObject](/doc/models/catalog-object.md)s. If not included, results will<br>be from the current version of the catalog. |
 
 ## Response Type
 

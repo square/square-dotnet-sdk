@@ -41,15 +41,15 @@ namespace Square.Models
         public HttpContext Context { get; internal set; }
 
         /// <summary>
-        /// Generated authorization code that connects a mobile application instance
+        /// The generated authorization code that connects a mobile application instance
         /// to a Square account.
         /// </summary>
         [JsonProperty("authorization_code", NullValueHandling = NullValueHandling.Ignore)]
         public string AuthorizationCode { get; }
 
         /// <summary>
-        /// The timestamp when `authorization_code` expires in
-        /// [RFC 3339](https://tools.ietf.org/html/rfc3339) format, e.g., "2016-09-04T23:59:33.123Z".
+        /// The timestamp when `authorization_code` expires, in
+        /// [RFC 3339](https://tools.ietf.org/html/rfc3339) format (for example, "2016-09-04T23:59:33.123Z").
         /// </summary>
         [JsonProperty("expires_at", NullValueHandling = NullValueHandling.Ignore)]
         public string ExpiresAt { get; }

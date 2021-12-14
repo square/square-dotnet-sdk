@@ -23,14 +23,17 @@ namespace Square.Models
         /// <param name="idempotencyKey">idempotency_key.</param>
         /// <param name="image">image.</param>
         /// <param name="objectId">object_id.</param>
+        /// <param name="isPrimary">is_primary.</param>
         public CreateCatalogImageRequest(
             string idempotencyKey,
             Models.CatalogObject image,
-            string objectId = null)
+            string objectId = null,
+            bool? isPrimary = null)
         {
             this.IdempotencyKey = idempotencyKey;
             this.ObjectId = objectId;
             this.Image = image;
+            this.IsPrimary = isPrimary;
         }
 
         /// <summary>
@@ -42,9 +45,9 @@ namespace Square.Models
         public string IdempotencyKey { get; }
 
         /// <summary>
-        /// Unique ID of the `CatalogObject` to attach to this `CatalogImage`. Leave this
+        /// Unique ID of the `CatalogObject` to attach this `CatalogImage` object to. Leave this
         /// field empty to create unattached images, for example if you are building an integration
-        /// where these images can be attached to catalog items at a later time.
+        /// where an image can be attached to catalog items at a later time.
         /// </summary>
         [JsonProperty("object_id", NullValueHandling = NullValueHandling.Ignore)]
         public string ObjectId { get; }
@@ -59,6 +62,15 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("image")]
         public Models.CatalogObject Image { get; }
+
+        /// <summary>
+        /// If this is set to `true`, the image created will be the primary, or first image of the object referenced by `object_id`.
+        /// If the `CatalogObject` already has a primary `CatalogImage`, setting this field to `true` will replace the primary image.
+        /// If this is set to `false` and you use the Square API version 2021-12-15 or later, the image id will be appended to the list of `image_ids` on the object.
+        /// With Square API version 2021-12-15 or later, the default value is `false`. Otherwise, the effective default value is `true`.
+        /// </summary>
+        [JsonProperty("is_primary", NullValueHandling = NullValueHandling.Ignore)]
+        public bool? IsPrimary { get; }
 
         /// <inheritdoc/>
         public override string ToString()
@@ -86,14 +98,15 @@ namespace Square.Models
             return obj is CreateCatalogImageRequest other &&
                 ((this.IdempotencyKey == null && other.IdempotencyKey == null) || (this.IdempotencyKey?.Equals(other.IdempotencyKey) == true)) &&
                 ((this.ObjectId == null && other.ObjectId == null) || (this.ObjectId?.Equals(other.ObjectId) == true)) &&
-                ((this.Image == null && other.Image == null) || (this.Image?.Equals(other.Image) == true));
+                ((this.Image == null && other.Image == null) || (this.Image?.Equals(other.Image) == true)) &&
+                ((this.IsPrimary == null && other.IsPrimary == null) || (this.IsPrimary?.Equals(other.IsPrimary) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1867152760;
-            hashCode = HashCode.Combine(this.IdempotencyKey, this.ObjectId, this.Image);
+            int hashCode = -432630368;
+            hashCode = HashCode.Combine(this.IdempotencyKey, this.ObjectId, this.Image, this.IsPrimary);
 
             return hashCode;
         }
@@ -107,6 +120,7 @@ namespace Square.Models
             toStringOutput.Add($"this.IdempotencyKey = {(this.IdempotencyKey == null ? "null" : this.IdempotencyKey == string.Empty ? "" : this.IdempotencyKey)}");
             toStringOutput.Add($"this.ObjectId = {(this.ObjectId == null ? "null" : this.ObjectId == string.Empty ? "" : this.ObjectId)}");
             toStringOutput.Add($"this.Image = {(this.Image == null ? "null" : this.Image.ToString())}");
+            toStringOutput.Add($"this.IsPrimary = {(this.IsPrimary == null ? "null" : this.IsPrimary.ToString())}");
         }
 
         /// <summary>
@@ -118,7 +132,8 @@ namespace Square.Models
             var builder = new Builder(
                 this.IdempotencyKey,
                 this.Image)
-                .ObjectId(this.ObjectId);
+                .ObjectId(this.ObjectId)
+                .IsPrimary(this.IsPrimary);
             return builder;
         }
 
@@ -130,6 +145,7 @@ namespace Square.Models
             private string idempotencyKey;
             private Models.CatalogObject image;
             private string objectId;
+            private bool? isPrimary;
 
             public Builder(
                 string idempotencyKey,
@@ -172,6 +188,17 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// IsPrimary.
+             /// </summary>
+             /// <param name="isPrimary"> isPrimary. </param>
+             /// <returns> Builder. </returns>
+            public Builder IsPrimary(bool? isPrimary)
+            {
+                this.isPrimary = isPrimary;
+                return this;
+            }
+
             /// <summary>
             /// Builds class object.
             /// </summary>
@@ -181,7 +208,8 @@ namespace Square.Models
                 return new CreateCatalogImageRequest(
                     this.idempotencyKey,
                     this.image,
-                    this.objectId);
+                    this.objectId,
+                    this.isPrimary);
             }
         }
     }

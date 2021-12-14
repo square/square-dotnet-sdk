@@ -391,7 +391,6 @@ namespace Square.Apis
             {
                 { "user-agent", this.UserAgent },
                 { "accept", "application/json" },
-                { "Content-Type", "multipart/form-data" },
                 { "Square-Version", this.Config.SquareVersion },
             };
 

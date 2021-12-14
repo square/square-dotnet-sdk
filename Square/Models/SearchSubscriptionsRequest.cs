@@ -59,8 +59,8 @@ namespace Square.Models
         public Models.SearchSubscriptionsQuery Query { get; }
 
         /// <summary>
-        /// A query parameter to specify related information to be included in the response.
-        /// The supported query parameter values are:
+        /// An option to include related information in the response.
+        /// The supported values are:
         /// - `actions`: to include scheduled actions on the targeted subscriptions.
         /// </summary>
         [JsonProperty("include", NullValueHandling = NullValueHandling.Ignore)]

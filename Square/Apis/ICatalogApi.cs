@@ -116,9 +116,9 @@ namespace Square.Apis
                 CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Uploads an image file to be represented by a [CatalogImage]($m/CatalogImage) object linked to an existing.
-        /// [CatalogObject]($m/CatalogObject) instance. A call to this endpoint can upload an image, link an image to.
-        /// a catalog object, or do both.
+        /// Uploads an image file to be represented by a [CatalogImage]($m/CatalogImage) object that can be linked to an existing.
+        /// [CatalogObject]($m/CatalogObject) instance. The resulting `CatalogImage` is unattached to any `CatalogObject` if the `object_id`.
+        /// is not specified.
         /// This `CreateCatalogImage` endpoint accepts HTTP multipart/form-data requests with a JSON part and an image file part in.
         /// JPEG, PJPEG, PNG, or GIF format. The maximum file size is 15MB.
         /// </summary>
@@ -130,9 +130,9 @@ namespace Square.Apis
                 FileStreamInfo imageFile = null);
 
         /// <summary>
-        /// Uploads an image file to be represented by a [CatalogImage]($m/CatalogImage) object linked to an existing.
-        /// [CatalogObject]($m/CatalogObject) instance. A call to this endpoint can upload an image, link an image to.
-        /// a catalog object, or do both.
+        /// Uploads an image file to be represented by a [CatalogImage]($m/CatalogImage) object that can be linked to an existing.
+        /// [CatalogObject]($m/CatalogObject) instance. The resulting `CatalogImage` is unattached to any `CatalogObject` if the `object_id`.
+        /// is not specified.
         /// This `CreateCatalogImage` endpoint accepts HTTP multipart/form-data requests with a JSON part and an image file part in.
         /// JPEG, PJPEG, PNG, or GIF format. The maximum file size is 15MB.
         /// </summary>
@@ -142,6 +142,36 @@ namespace Square.Apis
         /// <returns>Returns the Models.CreateCatalogImageResponse response from the API call.</returns>
         Task<Models.CreateCatalogImageResponse> CreateCatalogImageAsync(
                 Models.CreateCatalogImageRequest request = null,
+                FileStreamInfo imageFile = null,
+                CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Uploads a new image file to replace the existing one in the specified [CatalogImage]($m/CatalogImage) object. .
+        /// This `UpdateCatalogImage` endpoint accepts HTTP multipart/form-data requests with a JSON part and an image file part in.
+        /// JPEG, PJPEG, PNG, or GIF format. The maximum file size is 15MB.
+        /// </summary>
+        /// <param name="imageId">Required parameter: The ID of the `CatalogImage` object to update the encapsulated image file..</param>
+        /// <param name="request">Optional parameter: Example: .</param>
+        /// <param name="imageFile">Optional parameter: Example: .</param>
+        /// <returns>Returns the Models.UpdateCatalogImageResponse response from the API call.</returns>
+        Models.UpdateCatalogImageResponse UpdateCatalogImage(
+                string imageId,
+                Models.UpdateCatalogImageRequest request = null,
+                FileStreamInfo imageFile = null);
+
+        /// <summary>
+        /// Uploads a new image file to replace the existing one in the specified [CatalogImage]($m/CatalogImage) object. .
+        /// This `UpdateCatalogImage` endpoint accepts HTTP multipart/form-data requests with a JSON part and an image file part in.
+        /// JPEG, PJPEG, PNG, or GIF format. The maximum file size is 15MB.
+        /// </summary>
+        /// <param name="imageId">Required parameter: The ID of the `CatalogImage` object to update the encapsulated image file..</param>
+        /// <param name="request">Optional parameter: Example: .</param>
+        /// <param name="imageFile">Optional parameter: Example: .</param>
+        /// <param name="cancellationToken"> cancellationToken. </param>
+        /// <returns>Returns the Models.UpdateCatalogImageResponse response from the API call.</returns>
+        Task<Models.UpdateCatalogImageResponse> UpdateCatalogImageAsync(
+                string imageId,
+                Models.UpdateCatalogImageRequest request = null,
                 FileStreamInfo imageFile = null,
                 CancellationToken cancellationToken = default);
 
@@ -161,18 +191,16 @@ namespace Square.Apis
         Task<Models.CatalogInfoResponse> CatalogInfoAsync(CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Returns a list of [CatalogObject]($m/CatalogObject)s that includes.
-        /// all objects of a set of desired types (for example, all [CatalogItem]($m/CatalogItem).
-        /// and [CatalogTax]($m/CatalogTax) objects) in the catalog. The `types` parameter.
-        /// is specified as a comma-separated list of valid [CatalogObject]($m/CatalogObject) types:.
-        /// `ITEM`, `ITEM_VARIATION`, `MODIFIER`, `MODIFIER_LIST`, `CATEGORY`, `DISCOUNT`, `TAX`, `IMAGE`.
+        /// Returns a list of all [CatalogObject]($m/CatalogObject)s of the specified types in the catalog. .
+        /// The `types` parameter is specified as a comma-separated list of the [CatalogObjectType]($m/CatalogObjectType) values, .
+        /// for example, "`ITEM`, `ITEM_VARIATION`, `MODIFIER`, `MODIFIER_LIST`, `CATEGORY`, `DISCOUNT`, `TAX`, `IMAGE`".
         /// __Important:__ ListCatalog does not return deleted catalog items. To retrieve.
         /// deleted catalog items, use [SearchCatalogObjects]($e/Catalog/SearchCatalogObjects).
         /// and set the `include_deleted_objects` attribute value to `true`.
         /// </summary>
         /// <param name="cursor">Optional parameter: The pagination cursor returned in the previous response. Leave unset for an initial request. The page size is currently set to be 100. See [Pagination](https://developer.squareup.com/docs/basics/api101/pagination) for more information..</param>
-        /// <param name="types">Optional parameter: An optional case-insensitive, comma-separated list of object types to retrieve.  The valid values are defined in the [CatalogObjectType]($m/CatalogObjectType) enum, including `ITEM`, `ITEM_VARIATION`, `CATEGORY`, `DISCOUNT`, `TAX`, `MODIFIER`, `MODIFIER_LIST`, or `IMAGE`.  If this is unspecified, the operation returns objects of all the types at the version of the Square API used to make the request..</param>
-        /// <param name="catalogVersion">Optional parameter: The specific version of the catalog objects to be included in the response.  This allows you to retrieve historical versions of objects. The specified version value is matched against the [CatalogObject]($m/CatalogObject)s' `version` attribute..</param>
+        /// <param name="types">Optional parameter: An optional case-insensitive, comma-separated list of object types to retrieve.  The valid values are defined in the [CatalogObjectType]($m/CatalogObjectType) enum, for example, `ITEM`, `ITEM_VARIATION`, `CATEGORY`, `DISCOUNT`, `TAX`, `MODIFIER`, `MODIFIER_LIST`, `IMAGE`, etc.  If this is unspecified, the operation returns objects of all the top level types at the version of the Square API used to make the request. Object types that are nested onto other object types are not included in the defaults.  At the current API version the default object types are: ITEM, CATEGORY, TAX, DISCOUNT, MODIFIER_LIST, DINING_OPTION, TAX_EXEMPTION, SERVICE_CHARGE, PRICING_RULE, PRODUCT_SET, TIME_PERIOD, MEASUREMENT_UNIT, SUBSCRIPTION_PLAN, ITEM_OPTION, CUSTOM_ATTRIBUTE_DEFINITION, QUICK_AMOUNT_SETTINGS..</param>
+        /// <param name="catalogVersion">Optional parameter: The specific version of the catalog objects to be included in the response.  This allows you to retrieve historical versions of objects. The specified version value is matched against the [CatalogObject]($m/CatalogObject)s' `version` attribute.  If not included, results will be from the current version of the catalog..</param>
         /// <returns>Returns the Models.ListCatalogResponse response from the API call.</returns>
         Models.ListCatalogResponse ListCatalog(
                 string cursor = null,
@@ -180,18 +208,16 @@ namespace Square.Apis
                 long? catalogVersion = null);
 
         /// <summary>
-        /// Returns a list of [CatalogObject]($m/CatalogObject)s that includes.
-        /// all objects of a set of desired types (for example, all [CatalogItem]($m/CatalogItem).
-        /// and [CatalogTax]($m/CatalogTax) objects) in the catalog. The `types` parameter.
-        /// is specified as a comma-separated list of valid [CatalogObject]($m/CatalogObject) types:.
-        /// `ITEM`, `ITEM_VARIATION`, `MODIFIER`, `MODIFIER_LIST`, `CATEGORY`, `DISCOUNT`, `TAX`, `IMAGE`.
+        /// Returns a list of all [CatalogObject]($m/CatalogObject)s of the specified types in the catalog. .
+        /// The `types` parameter is specified as a comma-separated list of the [CatalogObjectType]($m/CatalogObjectType) values, .
+        /// for example, "`ITEM`, `ITEM_VARIATION`, `MODIFIER`, `MODIFIER_LIST`, `CATEGORY`, `DISCOUNT`, `TAX`, `IMAGE`".
         /// __Important:__ ListCatalog does not return deleted catalog items. To retrieve.
         /// deleted catalog items, use [SearchCatalogObjects]($e/Catalog/SearchCatalogObjects).
         /// and set the `include_deleted_objects` attribute value to `true`.
         /// </summary>
         /// <param name="cursor">Optional parameter: The pagination cursor returned in the previous response. Leave unset for an initial request. The page size is currently set to be 100. See [Pagination](https://developer.squareup.com/docs/basics/api101/pagination) for more information..</param>
-        /// <param name="types">Optional parameter: An optional case-insensitive, comma-separated list of object types to retrieve.  The valid values are defined in the [CatalogObjectType]($m/CatalogObjectType) enum, including `ITEM`, `ITEM_VARIATION`, `CATEGORY`, `DISCOUNT`, `TAX`, `MODIFIER`, `MODIFIER_LIST`, or `IMAGE`.  If this is unspecified, the operation returns objects of all the types at the version of the Square API used to make the request..</param>
-        /// <param name="catalogVersion">Optional parameter: The specific version of the catalog objects to be included in the response.  This allows you to retrieve historical versions of objects. The specified version value is matched against the [CatalogObject]($m/CatalogObject)s' `version` attribute..</param>
+        /// <param name="types">Optional parameter: An optional case-insensitive, comma-separated list of object types to retrieve.  The valid values are defined in the [CatalogObjectType]($m/CatalogObjectType) enum, for example, `ITEM`, `ITEM_VARIATION`, `CATEGORY`, `DISCOUNT`, `TAX`, `MODIFIER`, `MODIFIER_LIST`, `IMAGE`, etc.  If this is unspecified, the operation returns objects of all the top level types at the version of the Square API used to make the request. Object types that are nested onto other object types are not included in the defaults.  At the current API version the default object types are: ITEM, CATEGORY, TAX, DISCOUNT, MODIFIER_LIST, DINING_OPTION, TAX_EXEMPTION, SERVICE_CHARGE, PRICING_RULE, PRODUCT_SET, TIME_PERIOD, MEASUREMENT_UNIT, SUBSCRIPTION_PLAN, ITEM_OPTION, CUSTOM_ATTRIBUTE_DEFINITION, QUICK_AMOUNT_SETTINGS..</param>
+        /// <param name="catalogVersion">Optional parameter: The specific version of the catalog objects to be included in the response.  This allows you to retrieve historical versions of objects. The specified version value is matched against the [CatalogObject]($m/CatalogObject)s' `version` attribute.  If not included, results will be from the current version of the catalog..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the Models.ListCatalogResponse response from the API call.</returns>
         Task<Models.ListCatalogResponse> ListCatalogAsync(
@@ -256,8 +282,8 @@ namespace Square.Apis
         /// any [CatalogTax]($m/CatalogTax) objects that apply to it.
         /// </summary>
         /// <param name="objectId">Required parameter: The object ID of any type of catalog objects to be retrieved..</param>
-        /// <param name="includeRelatedObjects">Optional parameter: If `true`, the response will include additional objects that are related to the requested object, as follows:  If the `object` field of the response contains a `CatalogItem`, its associated `CatalogCategory`, `CatalogTax`, `CatalogImage` and `CatalogModifierList` objects will be returned in the `related_objects` field of the response. If the `object` field of the response contains a `CatalogItemVariation`, its parent `CatalogItem` will be returned in the `related_objects` field of the response.  Default value: `false`.</param>
-        /// <param name="catalogVersion">Optional parameter: Requests objects as of a specific version of the catalog. This allows you to retrieve historical versions of objects. The value to retrieve a specific version of an object can be found in the version field of [CatalogObject]($m/CatalogObject)s..</param>
+        /// <param name="includeRelatedObjects">Optional parameter: If `true`, the response will include additional objects that are related to the requested objects. Related objects are defined as any objects referenced by ID by the results in the `objects` field of the response. These objects are put in the `related_objects` field. Setting this to `true` is helpful when the objects are needed for immediate display to a user. This process only goes one level deep. Objects referenced by the related objects will not be included. For example,  if the `objects` field of the response contains a CatalogItem, its associated CatalogCategory objects, CatalogTax objects, CatalogImage objects and CatalogModifierLists will be returned in the `related_objects` field of the response. If the `objects` field of the response contains a CatalogItemVariation, its parent CatalogItem will be returned in the `related_objects` field of the response.  Default value: `false`.</param>
+        /// <param name="catalogVersion">Optional parameter: Requests objects as of a specific version of the catalog. This allows you to retrieve historical versions of objects. The value to retrieve a specific version of an object can be found in the version field of [CatalogObject]($m/CatalogObject)s. If not included, results will be from the current version of the catalog..</param>
         /// <returns>Returns the Models.RetrieveCatalogObjectResponse response from the API call.</returns>
         Models.RetrieveCatalogObjectResponse RetrieveCatalogObject(
                 string objectId,
@@ -274,8 +300,8 @@ namespace Square.Apis
         /// any [CatalogTax]($m/CatalogTax) objects that apply to it.
         /// </summary>
         /// <param name="objectId">Required parameter: The object ID of any type of catalog objects to be retrieved..</param>
-        /// <param name="includeRelatedObjects">Optional parameter: If `true`, the response will include additional objects that are related to the requested object, as follows:  If the `object` field of the response contains a `CatalogItem`, its associated `CatalogCategory`, `CatalogTax`, `CatalogImage` and `CatalogModifierList` objects will be returned in the `related_objects` field of the response. If the `object` field of the response contains a `CatalogItemVariation`, its parent `CatalogItem` will be returned in the `related_objects` field of the response.  Default value: `false`.</param>
-        /// <param name="catalogVersion">Optional parameter: Requests objects as of a specific version of the catalog. This allows you to retrieve historical versions of objects. The value to retrieve a specific version of an object can be found in the version field of [CatalogObject]($m/CatalogObject)s..</param>
+        /// <param name="includeRelatedObjects">Optional parameter: If `true`, the response will include additional objects that are related to the requested objects. Related objects are defined as any objects referenced by ID by the results in the `objects` field of the response. These objects are put in the `related_objects` field. Setting this to `true` is helpful when the objects are needed for immediate display to a user. This process only goes one level deep. Objects referenced by the related objects will not be included. For example,  if the `objects` field of the response contains a CatalogItem, its associated CatalogCategory objects, CatalogTax objects, CatalogImage objects and CatalogModifierLists will be returned in the `related_objects` field of the response. If the `objects` field of the response contains a CatalogItemVariation, its parent CatalogItem will be returned in the `related_objects` field of the response.  Default value: `false`.</param>
+        /// <param name="catalogVersion">Optional parameter: Requests objects as of a specific version of the catalog. This allows you to retrieve historical versions of objects. The value to retrieve a specific version of an object can be found in the version field of [CatalogObject]($m/CatalogObject)s. If not included, results will be from the current version of the catalog..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the Models.RetrieveCatalogObjectResponse response from the API call.</returns>
         Task<Models.RetrieveCatalogObjectResponse> RetrieveCatalogObjectAsync(

@@ -9,9 +9,9 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `ItemIds` | `IList<string>` | Required | IDs for the CatalogItems associated with the CatalogTax objects being updated. |
-| `TaxesToEnable` | `IList<string>` | Optional | IDs of the CatalogTax objects to enable. |
-| `TaxesToDisable` | `IList<string>` | Optional | IDs of the CatalogTax objects to disable. |
+| `ItemIds` | `IList<string>` | Required | IDs for the CatalogItems associated with the CatalogTax objects being updated.<br>No more than 1,000 IDs may be provided. |
+| `TaxesToEnable` | `IList<string>` | Optional | IDs of the CatalogTax objects to enable.<br>At least one of `taxes_to_enable` or `taxes_to_disable` must be specified. |
+| `TaxesToDisable` | `IList<string>` | Optional | IDs of the CatalogTax objects to disable.<br>At least one of `taxes_to_enable` or `taxes_to_disable` must be specified. |
 
 ## Example (as JSON)
 

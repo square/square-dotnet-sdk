@@ -14,21 +14,21 @@ namespace Square.Models
     using Square.Utilities;
 
     /// <summary>
-    /// RetrieveLocationResponse.
+    /// UpdateCatalogImageResponse.
     /// </summary>
-    public class RetrieveLocationResponse
+    public class UpdateCatalogImageResponse
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="RetrieveLocationResponse"/> class.
+        /// Initializes a new instance of the <see cref="UpdateCatalogImageResponse"/> class.
         /// </summary>
         /// <param name="errors">errors.</param>
-        /// <param name="location">location.</param>
-        public RetrieveLocationResponse(
+        /// <param name="image">image.</param>
+        public UpdateCatalogImageResponse(
             IList<Models.Error> errors = null,
-            Models.Location location = null)
+            Models.CatalogObject image = null)
         {
             this.Errors = errors;
-            this.Location = location;
+            this.Image = image;
         }
 
         /// <summary>
@@ -38,16 +38,21 @@ namespace Square.Models
         public HttpContext Context { get; internal set; }
 
         /// <summary>
-        /// Information on errors encountered during the request.
+        /// Any errors that occurred during the request.
         /// </summary>
         [JsonProperty("errors", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.Error> Errors { get; }
 
         /// <summary>
-        /// Represents one of a business's [locations](https://developer.squareup.com/docs/locations-api).
+        /// The wrapper object for the catalog entries of a given object type.
+        /// Depending on the `type` attribute value, a `CatalogObject` instance assumes a type-specific data to yield the corresponding type of catalog object.
+        /// For example, if `type=ITEM`, the `CatalogObject` instance must have the ITEM-specific data set on the `item_data` attribute. The resulting `CatalogObject` instance is also a `CatalogItem` instance.
+        /// In general, if `type=<OBJECT_TYPE>`, the `CatalogObject` instance must have the `<OBJECT_TYPE>`-specific data set on the `<object_type>_data` attribute. The resulting `CatalogObject` instance is also a `Catalog<ObjectType>` instance.
+        /// For a more detailed discussion of the Catalog data model, please see the
+        /// [Design a Catalog](https://developer.squareup.com/docs/catalog-api/design-a-catalog) guide.
         /// </summary>
-        [JsonProperty("location", NullValueHandling = NullValueHandling.Ignore)]
-        public Models.Location Location { get; }
+        [JsonProperty("image", NullValueHandling = NullValueHandling.Ignore)]
+        public Models.CatalogObject Image { get; }
 
         /// <inheritdoc/>
         public override string ToString()
@@ -56,7 +61,7 @@ namespace Square.Models
 
             this.ToString(toStringOutput);
 
-            return $"RetrieveLocationResponse : ({string.Join(", ", toStringOutput)})";
+            return $"UpdateCatalogImageResponse : ({string.Join(", ", toStringOutput)})";
         }
 
         /// <inheritdoc/>
@@ -72,22 +77,22 @@ namespace Square.Models
                 return true;
             }
 
-            return obj is RetrieveLocationResponse other &&
+            return obj is UpdateCatalogImageResponse other &&
                 ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
                 ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true)) &&
-                ((this.Location == null && other.Location == null) || (this.Location?.Equals(other.Location) == true));
+                ((this.Image == null && other.Image == null) || (this.Image?.Equals(other.Image) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -320770352;
+            int hashCode = -1571855715;
 
             if (this.Context != null)
             {
                 hashCode += this.Context.GetHashCode();
             }
-            hashCode = HashCode.Combine(this.Errors, this.Location);
+            hashCode = HashCode.Combine(this.Errors, this.Image);
 
             return hashCode;
         }
@@ -99,7 +104,7 @@ namespace Square.Models
         protected void ToString(List<string> toStringOutput)
         {
             toStringOutput.Add($"this.Errors = {(this.Errors == null ? "null" : $"[{string.Join(", ", this.Errors)} ]")}");
-            toStringOutput.Add($"this.Location = {(this.Location == null ? "null" : this.Location.ToString())}");
+            toStringOutput.Add($"this.Image = {(this.Image == null ? "null" : this.Image.ToString())}");
         }
 
         /// <summary>
@@ -110,7 +115,7 @@ namespace Square.Models
         {
             var builder = new Builder()
                 .Errors(this.Errors)
-                .Location(this.Location);
+                .Image(this.Image);
             return builder;
         }
 
@@ -120,7 +125,7 @@ namespace Square.Models
         public class Builder
         {
             private IList<Models.Error> errors;
-            private Models.Location location;
+            private Models.CatalogObject image;
 
              /// <summary>
              /// Errors.
@@ -134,25 +139,25 @@ namespace Square.Models
             }
 
              /// <summary>
-             /// Location.
+             /// Image.
              /// </summary>
-             /// <param name="location"> location. </param>
+             /// <param name="image"> image. </param>
              /// <returns> Builder. </returns>
-            public Builder Location(Models.Location location)
+            public Builder Image(Models.CatalogObject image)
             {
-                this.location = location;
+                this.image = image;
                 return this;
             }
 
             /// <summary>
             /// Builds class object.
             /// </summary>
-            /// <returns> RetrieveLocationResponse. </returns>
-            public RetrieveLocationResponse Build()
+            /// <returns> UpdateCatalogImageResponse. </returns>
+            public UpdateCatalogImageResponse Build()
             {
-                return new RetrieveLocationResponse(
+                return new UpdateCatalogImageResponse(
                     this.errors,
-                    this.location);
+                    this.image);
             }
         }
     }
