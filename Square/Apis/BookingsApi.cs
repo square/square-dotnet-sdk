@@ -35,7 +35,9 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Retrieve a collection of bookings.
+        /// Retrieve a collection of bookings. .
+        /// To call this endpoint with buyer-level permissions, set `APPOINTMENTS_READ` for the OAuth scope.  .
+        /// To call this endpoint with seller-level permissions, set `APPOINTMENTS_ALL_READ` and `APPOINTMENTS_READ` for the OAuth scope.
         /// </summary>
         /// <param name="limit">Optional parameter: The maximum number of results per page to return in a paged response..</param>
         /// <param name="cursor">Optional parameter: The pagination cursor from the preceding response to return the next page of the results. Do not set this when retrieving the first page of the results..</param>
@@ -58,7 +60,9 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Retrieve a collection of bookings.
+        /// Retrieve a collection of bookings. .
+        /// To call this endpoint with buyer-level permissions, set `APPOINTMENTS_READ` for the OAuth scope.  .
+        /// To call this endpoint with seller-level permissions, set `APPOINTMENTS_ALL_READ` and `APPOINTMENTS_READ` for the OAuth scope.
         /// </summary>
         /// <param name="limit">Optional parameter: The maximum number of results per page to return in a paged response..</param>
         /// <param name="cursor">Optional parameter: The pagination cursor from the preceding response to return the next page of the results. Do not set this when retrieving the first page of the results..</param>
@@ -130,7 +134,9 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Creates a booking.
+        /// Creates a booking. .
+        /// To call this endpoint with buyer-level permissions, set `APPOINTMENTS_WRITE` for the OAuth scope.  .
+        /// To call this endpoint with seller-level permissions, set `APPOINTMENTS_ALL_WRITE` and `APPOINTMENTS_WRITE` for the OAuth scope.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <returns>Returns the Models.CreateBookingResponse response from the API call.</returns>
@@ -143,7 +149,9 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Creates a booking.
+        /// Creates a booking. .
+        /// To call this endpoint with buyer-level permissions, set `APPOINTMENTS_WRITE` for the OAuth scope.  .
+        /// To call this endpoint with seller-level permissions, set `APPOINTMENTS_ALL_WRITE` and `APPOINTMENTS_WRITE` for the OAuth scope.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
@@ -198,7 +206,9 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Searches for availabilities for booking.
+        /// Searches for availabilities for booking. .
+        /// To call this endpoint with buyer-level permissions, set `APPOINTMENTS_READ` for the OAuth scope.  .
+        /// To call this endpoint with seller-level permissions, set `APPOINTMENTS_ALL_READ` and `APPOINTMENTS_READ` for the OAuth scope.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <returns>Returns the Models.SearchAvailabilityResponse response from the API call.</returns>
@@ -211,7 +221,9 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Searches for availabilities for booking.
+        /// Searches for availabilities for booking. .
+        /// To call this endpoint with buyer-level permissions, set `APPOINTMENTS_READ` for the OAuth scope.  .
+        /// To call this endpoint with seller-level permissions, set `APPOINTMENTS_ALL_READ` and `APPOINTMENTS_READ` for the OAuth scope.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
@@ -328,8 +340,8 @@ namespace Square.Apis
         /// Lists booking profiles for team members.
         /// </summary>
         /// <param name="bookableOnly">Optional parameter: Indicates whether to include only bookable team members in the returned result (`true`) or not (`false`)..</param>
-        /// <param name="limit">Optional parameter: The maximum number of results to return..</param>
-        /// <param name="cursor">Optional parameter: The cursor for paginating through the results..</param>
+        /// <param name="limit">Optional parameter: The maximum number of results to return in a paged response..</param>
+        /// <param name="cursor">Optional parameter: The pagination cursor from the preceding response to return the next page of the results. Do not set this when retrieving the first page of the results..</param>
         /// <param name="locationId">Optional parameter: Indicates whether to include only team members enabled at the given location in the returned result..</param>
         /// <returns>Returns the Models.ListTeamMemberBookingProfilesResponse response from the API call.</returns>
         public Models.ListTeamMemberBookingProfilesResponse ListTeamMemberBookingProfiles(
@@ -347,8 +359,8 @@ namespace Square.Apis
         /// Lists booking profiles for team members.
         /// </summary>
         /// <param name="bookableOnly">Optional parameter: Indicates whether to include only bookable team members in the returned result (`true`) or not (`false`)..</param>
-        /// <param name="limit">Optional parameter: The maximum number of results to return..</param>
-        /// <param name="cursor">Optional parameter: The cursor for paginating through the results..</param>
+        /// <param name="limit">Optional parameter: The maximum number of results to return in a paged response..</param>
+        /// <param name="cursor">Optional parameter: The pagination cursor from the preceding response to return the next page of the results. Do not set this when retrieving the first page of the results..</param>
         /// <param name="locationId">Optional parameter: Indicates whether to include only team members enabled at the given location in the returned result..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the Models.ListTeamMemberBookingProfilesResponse response from the API call.</returns>
@@ -480,7 +492,9 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Retrieves a booking.
+        /// Retrieves a booking. .
+        /// To call this endpoint with buyer-level permissions, set `APPOINTMENTS_READ` for the OAuth scope.  .
+        /// To call this endpoint with seller-level permissions, set `APPOINTMENTS_ALL_READ` and `APPOINTMENTS_READ` for the OAuth scope.
         /// </summary>
         /// <param name="bookingId">Required parameter: The ID of the [Booking]($m/Booking) object representing the to-be-retrieved booking..</param>
         /// <returns>Returns the Models.RetrieveBookingResponse response from the API call.</returns>
@@ -493,7 +507,9 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Retrieves a booking.
+        /// Retrieves a booking. .
+        /// To call this endpoint with buyer-level permissions, set `APPOINTMENTS_READ` for the OAuth scope.  .
+        /// To call this endpoint with seller-level permissions, set `APPOINTMENTS_ALL_READ` and `APPOINTMENTS_READ` for the OAuth scope.
         /// </summary>
         /// <param name="bookingId">Required parameter: The ID of the [Booking]($m/Booking) object representing the to-be-retrieved booking..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
@@ -550,7 +566,9 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Updates a booking.
+        /// Updates a booking. .
+        /// To call this endpoint with buyer-level permissions, set `APPOINTMENTS_WRITE` for the OAuth scope.  .
+        /// To call this endpoint with seller-level permissions, set `APPOINTMENTS_ALL_WRITE` and `APPOINTMENTS_WRITE` for the OAuth scope.
         /// </summary>
         /// <param name="bookingId">Required parameter: The ID of the [Booking]($m/Booking) object representing the to-be-updated booking..</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
@@ -565,7 +583,9 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Updates a booking.
+        /// Updates a booking. .
+        /// To call this endpoint with buyer-level permissions, set `APPOINTMENTS_WRITE` for the OAuth scope.  .
+        /// To call this endpoint with seller-level permissions, set `APPOINTMENTS_ALL_WRITE` and `APPOINTMENTS_WRITE` for the OAuth scope.
         /// </summary>
         /// <param name="bookingId">Required parameter: The ID of the [Booking]($m/Booking) object representing the to-be-updated booking..</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
@@ -628,7 +648,9 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Cancels an existing booking.
+        /// Cancels an existing booking. .
+        /// To call this endpoint with buyer-level permissions, set `APPOINTMENTS_WRITE` for the OAuth scope.  .
+        /// To call this endpoint with seller-level permissions, set `APPOINTMENTS_ALL_WRITE` and `APPOINTMENTS_WRITE` for the OAuth scope.
         /// </summary>
         /// <param name="bookingId">Required parameter: The ID of the [Booking]($m/Booking) object representing the to-be-cancelled booking..</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
@@ -643,7 +665,9 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Cancels an existing booking.
+        /// Cancels an existing booking. .
+        /// To call this endpoint with buyer-level permissions, set `APPOINTMENTS_WRITE` for the OAuth scope.  .
+        /// To call this endpoint with seller-level permissions, set `APPOINTMENTS_ALL_WRITE` and `APPOINTMENTS_WRITE` for the OAuth scope.
         /// </summary>
         /// <param name="bookingId">Required parameter: The ID of the [Booking]($m/Booking) object representing the to-be-cancelled booking..</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>

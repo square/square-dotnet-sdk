@@ -27,6 +27,7 @@ namespace Square.Models
         /// <param name="currency">currency.</param>
         /// <param name="status">status.</param>
         /// <param name="mainLocationId">main_location_id.</param>
+        /// <param name="createdAt">created_at.</param>
         public Merchant(
             string country,
             string id = null,
@@ -34,7 +35,8 @@ namespace Square.Models
             string languageCode = null,
             string currency = null,
             string status = null,
-            string mainLocationId = null)
+            string mainLocationId = null,
+            string createdAt = null)
         {
             this.Id = id;
             this.BusinessName = businessName;
@@ -43,6 +45,7 @@ namespace Square.Models
             this.Currency = currency;
             this.Status = status;
             this.MainLocationId = mainLocationId;
+            this.CreatedAt = createdAt;
         }
 
         /// <summary>
@@ -89,6 +92,13 @@ namespace Square.Models
         [JsonProperty("main_location_id", NullValueHandling = NullValueHandling.Ignore)]
         public string MainLocationId { get; }
 
+        /// <summary>
+        /// The time when the merchant was created, in RFC 3339 format.
+        ///    For more information, see [Working with Dates](https://developer.squareup.com/docs/build-basics/working-with-dates).
+        /// </summary>
+        [JsonProperty("created_at", NullValueHandling = NullValueHandling.Ignore)]
+        public string CreatedAt { get; }
+
         /// <inheritdoc/>
         public override string ToString()
         {
@@ -119,14 +129,17 @@ namespace Square.Models
                 ((this.LanguageCode == null && other.LanguageCode == null) || (this.LanguageCode?.Equals(other.LanguageCode) == true)) &&
                 ((this.Currency == null && other.Currency == null) || (this.Currency?.Equals(other.Currency) == true)) &&
                 ((this.Status == null && other.Status == null) || (this.Status?.Equals(other.Status) == true)) &&
-                ((this.MainLocationId == null && other.MainLocationId == null) || (this.MainLocationId?.Equals(other.MainLocationId) == true));
+                ((this.MainLocationId == null && other.MainLocationId == null) || (this.MainLocationId?.Equals(other.MainLocationId) == true)) &&
+                ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1340049772;
+            int hashCode = -1868202221;
             hashCode = HashCode.Combine(this.Id, this.BusinessName, this.Country, this.LanguageCode, this.Currency, this.Status, this.MainLocationId);
+
+            hashCode = HashCode.Combine(hashCode, this.CreatedAt);
 
             return hashCode;
         }
@@ -144,6 +157,7 @@ namespace Square.Models
             toStringOutput.Add($"this.Currency = {(this.Currency == null ? "null" : this.Currency.ToString())}");
             toStringOutput.Add($"this.Status = {(this.Status == null ? "null" : this.Status.ToString())}");
             toStringOutput.Add($"this.MainLocationId = {(this.MainLocationId == null ? "null" : this.MainLocationId == string.Empty ? "" : this.MainLocationId)}");
+            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt == string.Empty ? "" : this.CreatedAt)}");
         }
 
         /// <summary>
@@ -159,7 +173,8 @@ namespace Square.Models
                 .LanguageCode(this.LanguageCode)
                 .Currency(this.Currency)
                 .Status(this.Status)
-                .MainLocationId(this.MainLocationId);
+                .MainLocationId(this.MainLocationId)
+                .CreatedAt(this.CreatedAt);
             return builder;
         }
 
@@ -175,6 +190,7 @@ namespace Square.Models
             private string currency;
             private string status;
             private string mainLocationId;
+            private string createdAt;
 
             public Builder(
                 string country)
@@ -259,6 +275,17 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// CreatedAt.
+             /// </summary>
+             /// <param name="createdAt"> createdAt. </param>
+             /// <returns> Builder. </returns>
+            public Builder CreatedAt(string createdAt)
+            {
+                this.createdAt = createdAt;
+                return this;
+            }
+
             /// <summary>
             /// Builds class object.
             /// </summary>
@@ -272,7 +299,8 @@ namespace Square.Models
                     this.languageCode,
                     this.currency,
                     this.status,
-                    this.mainLocationId);
+                    this.mainLocationId,
+                    this.createdAt);
             }
         }
     }

@@ -35,7 +35,7 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Provides details about all of the seller's locations,.
+        /// Provides details about all of the seller's [locations](https://developer.squareup.com/docs/locations-api),.
         /// including those with an inactive status.
         /// </summary>
         /// <returns>Returns the Models.ListLocationsResponse response from the API call.</returns>
@@ -47,7 +47,7 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Provides details about all of the seller's locations,.
+        /// Provides details about all of the seller's [locations](https://developer.squareup.com/docs/locations-api),.
         /// including those with an inactive status.
         /// </summary>
         /// <param name="cancellationToken"> cancellationToken. </param>
@@ -248,7 +248,7 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Updates a location.
+        /// Updates a [location](https://developer.squareup.com/docs/locations-api).
         /// </summary>
         /// <param name="locationId">Required parameter: The ID of the location to update..</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
@@ -263,7 +263,7 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Updates a location.
+        /// Updates a [location](https://developer.squareup.com/docs/locations-api).
         /// </summary>
         /// <param name="locationId">Required parameter: The ID of the location to update..</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>

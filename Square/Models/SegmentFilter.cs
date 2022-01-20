@@ -31,7 +31,7 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// The ID of the [CatalogItemVariation]($m/CatalogItemVariation) representing the service booked in this segment.
+        /// The ID of the [CatalogItemVariation]($m/CatalogItemVariation) object representing the service booked in this segment.
         /// </summary>
         [JsonProperty("service_variation_id")]
         public string ServiceVariationId { get; }

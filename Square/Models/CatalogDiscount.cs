@@ -27,6 +27,7 @@ namespace Square.Models
         /// <param name="pinRequired">pin_required.</param>
         /// <param name="labelColor">label_color.</param>
         /// <param name="modifyTaxBasis">modify_tax_basis.</param>
+        /// <param name="maximumAmountMoney">maximum_amount_money.</param>
         public CatalogDiscount(
             string name = null,
             string discountType = null,
@@ -34,7 +35,8 @@ namespace Square.Models
             Models.Money amountMoney = null,
             bool? pinRequired = null,
             string labelColor = null,
-            string modifyTaxBasis = null)
+            string modifyTaxBasis = null,
+            Models.Money maximumAmountMoney = null)
         {
             this.Name = name;
             this.DiscountType = discountType;
@@ -43,6 +45,7 @@ namespace Square.Models
             this.PinRequired = pinRequired;
             this.LabelColor = labelColor;
             this.ModifyTaxBasis = modifyTaxBasis;
+            this.MaximumAmountMoney = maximumAmountMoney;
         }
 
         /// <summary>
@@ -96,6 +99,17 @@ namespace Square.Models
         [JsonProperty("modify_tax_basis", NullValueHandling = NullValueHandling.Ignore)]
         public string ModifyTaxBasis { get; }
 
+        /// <summary>
+        /// Represents an amount of money. `Money` fields can be signed or unsigned.
+        /// Fields that do not explicitly define whether they are signed or unsigned are
+        /// considered unsigned and can only hold positive amounts. For signed fields, the
+        /// sign of the value indicates the purpose of the money transfer. See
+        /// [Working with Monetary Amounts](https://developer.squareup.com/docs/build-basics/working-with-monetary-amounts)
+        /// for more information.
+        /// </summary>
+        [JsonProperty("maximum_amount_money", NullValueHandling = NullValueHandling.Ignore)]
+        public Models.Money MaximumAmountMoney { get; }
+
         /// <inheritdoc/>
         public override string ToString()
         {
@@ -126,14 +140,17 @@ namespace Square.Models
                 ((this.AmountMoney == null && other.AmountMoney == null) || (this.AmountMoney?.Equals(other.AmountMoney) == true)) &&
                 ((this.PinRequired == null && other.PinRequired == null) || (this.PinRequired?.Equals(other.PinRequired) == true)) &&
                 ((this.LabelColor == null && other.LabelColor == null) || (this.LabelColor?.Equals(other.LabelColor) == true)) &&
-                ((this.ModifyTaxBasis == null && other.ModifyTaxBasis == null) || (this.ModifyTaxBasis?.Equals(other.ModifyTaxBasis) == true));
+                ((this.ModifyTaxBasis == null && other.ModifyTaxBasis == null) || (this.ModifyTaxBasis?.Equals(other.ModifyTaxBasis) == true)) &&
+                ((this.MaximumAmountMoney == null && other.MaximumAmountMoney == null) || (this.MaximumAmountMoney?.Equals(other.MaximumAmountMoney) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -419430818;
+            int hashCode = 1315753358;
             hashCode = HashCode.Combine(this.Name, this.DiscountType, this.Percentage, this.AmountMoney, this.PinRequired, this.LabelColor, this.ModifyTaxBasis);
+
+            hashCode = HashCode.Combine(hashCode, this.MaximumAmountMoney);
 
             return hashCode;
         }
@@ -151,6 +168,7 @@ namespace Square.Models
             toStringOutput.Add($"this.PinRequired = {(this.PinRequired == null ? "null" : this.PinRequired.ToString())}");
             toStringOutput.Add($"this.LabelColor = {(this.LabelColor == null ? "null" : this.LabelColor == string.Empty ? "" : this.LabelColor)}");
             toStringOutput.Add($"this.ModifyTaxBasis = {(this.ModifyTaxBasis == null ? "null" : this.ModifyTaxBasis.ToString())}");
+            toStringOutput.Add($"this.MaximumAmountMoney = {(this.MaximumAmountMoney == null ? "null" : this.MaximumAmountMoney.ToString())}");
         }
 
         /// <summary>
@@ -166,7 +184,8 @@ namespace Square.Models
                 .AmountMoney(this.AmountMoney)
                 .PinRequired(this.PinRequired)
                 .LabelColor(this.LabelColor)
-                .ModifyTaxBasis(this.ModifyTaxBasis);
+                .ModifyTaxBasis(this.ModifyTaxBasis)
+                .MaximumAmountMoney(this.MaximumAmountMoney);
             return builder;
         }
 
@@ -182,6 +201,7 @@ namespace Square.Models
             private bool? pinRequired;
             private string labelColor;
             private string modifyTaxBasis;
+            private Models.Money maximumAmountMoney;
 
              /// <summary>
              /// Name.
@@ -260,6 +280,17 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// MaximumAmountMoney.
+             /// </summary>
+             /// <param name="maximumAmountMoney"> maximumAmountMoney. </param>
+             /// <returns> Builder. </returns>
+            public Builder MaximumAmountMoney(Models.Money maximumAmountMoney)
+            {
+                this.maximumAmountMoney = maximumAmountMoney;
+                return this;
+            }
+
             /// <summary>
             /// Builds class object.
             /// </summary>
@@ -273,7 +304,8 @@ namespace Square.Models
                     this.amountMoney,
                     this.pinRequired,
                     this.labelColor,
-                    this.modifyTaxBasis);
+                    this.modifyTaxBasis,
+                    this.maximumAmountMoney);
             }
         }
     }

@@ -28,7 +28,7 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// Query conditions to search for availabilities of bookings.
+        /// The query used to search for buyer-accessible availabilities of bookings.
         /// </summary>
         [JsonProperty("query")]
         public Models.SearchAvailabilityQuery Query { get; }

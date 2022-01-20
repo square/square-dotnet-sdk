@@ -47,23 +47,24 @@ namespace Square.Models
         public Models.TimeRange StartAtRange { get; }
 
         /// <summary>
-        /// The query expression to search for availabilities matching the specified seller location IDs.
-        /// This query expression is not applicable when `booking_id` is present.
+        /// The query expression to search for buyer-accessible availabilities with their location IDs matching the specified location ID.
+        /// This query expression cannot be set if `booking_id` is set.
         /// </summary>
         [JsonProperty("location_id", NullValueHandling = NullValueHandling.Ignore)]
         public string LocationId { get; }
 
         /// <summary>
-        /// The list of segment filters to apply. A query with `n` segment filters returns availabilities with `n` segments per
-        /// availability. It is not applicable when `booking_id` is present.
+        /// The query expression to search for buyer-accessible availabilities matching the specified list of segment filters.
+        /// If the size of the `segment_filters` list is `n`, the search returns availabilities with `n` segments per availability.
+        /// This query expression cannot be set if `booking_id` is set.
         /// </summary>
         [JsonProperty("segment_filters", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.SegmentFilter> SegmentFilters { get; }
 
         /// <summary>
-        /// The query expression to search for availabilities for an existing booking by matching the specified `booking_id` value.
+        /// The query expression to search for buyer-accessible availabilities for an existing booking by matching the specified `booking_id` value.
         /// This is commonly used to reschedule an appointment.
-        /// If this expression is specified, the `location_id` and `segment_filters` expressions are not allowed.
+        /// If this expression is set, the `location_id` and `segment_filters` expressions cannot be set.
         /// </summary>
         [JsonProperty("booking_id", NullValueHandling = NullValueHandling.Ignore)]
         public string BookingId { get; }

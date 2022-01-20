@@ -45,7 +45,7 @@ namespace Square.Models
         public Models.Booking Booking { get; }
 
         /// <summary>
-        /// Any errors that occurred during the request.
+        /// Errors that occurred during the request.
         /// </summary>
         [JsonProperty("errors", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.Error> Errors { get; }

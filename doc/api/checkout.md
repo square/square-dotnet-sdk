@@ -203,8 +203,6 @@ var bodyPrePopulateShippingAddress = new Address.Builder()
     .AdministrativeDistrictLevel1("CA")
     .PostalCode("94103")
     .Country("US")
-    .FirstName("Jane")
-    .LastName("Doe")
     .Build();
 var bodyAdditionalRecipients = new List<ChargeRequestAdditionalRecipient>();
 

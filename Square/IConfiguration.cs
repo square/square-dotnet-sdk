@@ -16,6 +16,11 @@ namespace Square
         string SquareVersion { get; }
 
         /// <summary>
+        /// Gets User-Agent detail.
+        /// </summary>
+        string UserAgentDetail { get; }
+
+        /// <summary>
         /// Gets Current API environment.
         /// </summary>
         Environment Environment { get; }

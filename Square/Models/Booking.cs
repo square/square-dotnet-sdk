@@ -31,6 +31,11 @@ namespace Square.Models
         /// <param name="customerNote">customer_note.</param>
         /// <param name="sellerNote">seller_note.</param>
         /// <param name="appointmentSegments">appointment_segments.</param>
+        /// <param name="transitionTimeMinutes">transition_time_minutes.</param>
+        /// <param name="allDay">all_day.</param>
+        /// <param name="locationType">location_type.</param>
+        /// <param name="creatorDetails">creator_details.</param>
+        /// <param name="source">source.</param>
         public Booking(
             string id = null,
             int? version = null,
@@ -42,7 +47,12 @@ namespace Square.Models
             string customerId = null,
             string customerNote = null,
             string sellerNote = null,
-            IList<Models.AppointmentSegment> appointmentSegments = null)
+            IList<Models.AppointmentSegment> appointmentSegments = null,
+            int? transitionTimeMinutes = null,
+            bool? allDay = null,
+            string locationType = null,
+            Models.BookingCreatorDetails creatorDetails = null,
+            string source = null)
         {
             this.Id = id;
             this.Version = version;
@@ -55,6 +65,11 @@ namespace Square.Models
             this.CustomerNote = customerNote;
             this.SellerNote = sellerNote;
             this.AppointmentSegments = appointmentSegments;
+            this.TransitionTimeMinutes = transitionTimeMinutes;
+            this.AllDay = allDay;
+            this.LocationType = locationType;
+            this.CreatorDetails = creatorDetails;
+            this.Source = source;
         }
 
         /// <summary>
@@ -76,19 +91,19 @@ namespace Square.Models
         public string Status { get; }
 
         /// <summary>
-        /// The timestamp specifying the creation time of this booking, in RFC 3339 format.
+        /// The RFC 3339 timestamp specifying the creation time of this booking.
         /// </summary>
         [JsonProperty("created_at", NullValueHandling = NullValueHandling.Ignore)]
         public string CreatedAt { get; }
 
         /// <summary>
-        /// The timestamp specifying the most recent update time of this booking, in RFC 3339 format.
+        /// The RFC 3339 timestamp specifying the most recent update time of this booking.
         /// </summary>
         [JsonProperty("updated_at", NullValueHandling = NullValueHandling.Ignore)]
         public string UpdatedAt { get; }
 
         /// <summary>
-        /// The timestamp specifying the starting time of this booking, in RFC 3339 format.
+        /// The RFC 3339 timestamp specifying the starting time of this booking.
         /// </summary>
         [JsonProperty("start_at", NullValueHandling = NullValueHandling.Ignore)]
         public string StartAt { get; }
@@ -124,6 +139,37 @@ namespace Square.Models
         [JsonProperty("appointment_segments", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.AppointmentSegment> AppointmentSegments { get; }
 
+        /// <summary>
+        /// Additional time at the end of a booking.
+        /// Applications should not make this field visible to customers of a seller.
+        /// </summary>
+        [JsonProperty("transition_time_minutes", NullValueHandling = NullValueHandling.Ignore)]
+        public int? TransitionTimeMinutes { get; }
+
+        /// <summary>
+        /// Whether the booking is of a full business day.
+        /// </summary>
+        [JsonProperty("all_day", NullValueHandling = NullValueHandling.Ignore)]
+        public bool? AllDay { get; }
+
+        /// <summary>
+        /// Supported types of location where service is provided.
+        /// </summary>
+        [JsonProperty("location_type", NullValueHandling = NullValueHandling.Ignore)]
+        public string LocationType { get; }
+
+        /// <summary>
+        /// Information about a booking creator.
+        /// </summary>
+        [JsonProperty("creator_details", NullValueHandling = NullValueHandling.Ignore)]
+        public Models.BookingCreatorDetails CreatorDetails { get; }
+
+        /// <summary>
+        /// Supported sources a booking was created from.
+        /// </summary>
+        [JsonProperty("source", NullValueHandling = NullValueHandling.Ignore)]
+        public string Source { get; }
+
         /// <inheritdoc/>
         public override string ToString()
         {
@@ -158,16 +204,23 @@ namespace Square.Models
                 ((this.CustomerId == null && other.CustomerId == null) || (this.CustomerId?.Equals(other.CustomerId) == true)) &&
                 ((this.CustomerNote == null && other.CustomerNote == null) || (this.CustomerNote?.Equals(other.CustomerNote) == true)) &&
                 ((this.SellerNote == null && other.SellerNote == null) || (this.SellerNote?.Equals(other.SellerNote) == true)) &&
-                ((this.AppointmentSegments == null && other.AppointmentSegments == null) || (this.AppointmentSegments?.Equals(other.AppointmentSegments) == true));
+                ((this.AppointmentSegments == null && other.AppointmentSegments == null) || (this.AppointmentSegments?.Equals(other.AppointmentSegments) == true)) &&
+                ((this.TransitionTimeMinutes == null && other.TransitionTimeMinutes == null) || (this.TransitionTimeMinutes?.Equals(other.TransitionTimeMinutes) == true)) &&
+                ((this.AllDay == null && other.AllDay == null) || (this.AllDay?.Equals(other.AllDay) == true)) &&
+                ((this.LocationType == null && other.LocationType == null) || (this.LocationType?.Equals(other.LocationType) == true)) &&
+                ((this.CreatorDetails == null && other.CreatorDetails == null) || (this.CreatorDetails?.Equals(other.CreatorDetails) == true)) &&
+                ((this.Source == null && other.Source == null) || (this.Source?.Equals(other.Source) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 219005029;
+            int hashCode = 817434864;
             hashCode = HashCode.Combine(this.Id, this.Version, this.Status, this.CreatedAt, this.UpdatedAt, this.StartAt, this.LocationId);
 
-            hashCode = HashCode.Combine(hashCode, this.CustomerId, this.CustomerNote, this.SellerNote, this.AppointmentSegments);
+            hashCode = HashCode.Combine(hashCode, this.CustomerId, this.CustomerNote, this.SellerNote, this.AppointmentSegments, this.TransitionTimeMinutes, this.AllDay, this.LocationType);
+
+            hashCode = HashCode.Combine(hashCode, this.CreatorDetails, this.Source);
 
             return hashCode;
         }
@@ -189,6 +242,11 @@ namespace Square.Models
             toStringOutput.Add($"this.CustomerNote = {(this.CustomerNote == null ? "null" : this.CustomerNote == string.Empty ? "" : this.CustomerNote)}");
             toStringOutput.Add($"this.SellerNote = {(this.SellerNote == null ? "null" : this.SellerNote == string.Empty ? "" : this.SellerNote)}");
             toStringOutput.Add($"this.AppointmentSegments = {(this.AppointmentSegments == null ? "null" : $"[{string.Join(", ", this.AppointmentSegments)} ]")}");
+            toStringOutput.Add($"this.TransitionTimeMinutes = {(this.TransitionTimeMinutes == null ? "null" : this.TransitionTimeMinutes.ToString())}");
+            toStringOutput.Add($"this.AllDay = {(this.AllDay == null ? "null" : this.AllDay.ToString())}");
+            toStringOutput.Add($"this.LocationType = {(this.LocationType == null ? "null" : this.LocationType.ToString())}");
+            toStringOutput.Add($"this.CreatorDetails = {(this.CreatorDetails == null ? "null" : this.CreatorDetails.ToString())}");
+            toStringOutput.Add($"this.Source = {(this.Source == null ? "null" : this.Source.ToString())}");
         }
 
         /// <summary>
@@ -208,7 +266,12 @@ namespace Square.Models
                 .CustomerId(this.CustomerId)
                 .CustomerNote(this.CustomerNote)
                 .SellerNote(this.SellerNote)
-                .AppointmentSegments(this.AppointmentSegments);
+                .AppointmentSegments(this.AppointmentSegments)
+                .TransitionTimeMinutes(this.TransitionTimeMinutes)
+                .AllDay(this.AllDay)
+                .LocationType(this.LocationType)
+                .CreatorDetails(this.CreatorDetails)
+                .Source(this.Source);
             return builder;
         }
 
@@ -228,6 +291,11 @@ namespace Square.Models
             private string customerNote;
             private string sellerNote;
             private IList<Models.AppointmentSegment> appointmentSegments;
+            private int? transitionTimeMinutes;
+            private bool? allDay;
+            private string locationType;
+            private Models.BookingCreatorDetails creatorDetails;
+            private string source;
 
              /// <summary>
              /// Id.
@@ -350,6 +418,61 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// TransitionTimeMinutes.
+             /// </summary>
+             /// <param name="transitionTimeMinutes"> transitionTimeMinutes. </param>
+             /// <returns> Builder. </returns>
+            public Builder TransitionTimeMinutes(int? transitionTimeMinutes)
+            {
+                this.transitionTimeMinutes = transitionTimeMinutes;
+                return this;
+            }
+
+             /// <summary>
+             /// AllDay.
+             /// </summary>
+             /// <param name="allDay"> allDay. </param>
+             /// <returns> Builder. </returns>
+            public Builder AllDay(bool? allDay)
+            {
+                this.allDay = allDay;
+                return this;
+            }
+
+             /// <summary>
+             /// LocationType.
+             /// </summary>
+             /// <param name="locationType"> locationType. </param>
+             /// <returns> Builder. </returns>
+            public Builder LocationType(string locationType)
+            {
+                this.locationType = locationType;
+                return this;
+            }
+
+             /// <summary>
+             /// CreatorDetails.
+             /// </summary>
+             /// <param name="creatorDetails"> creatorDetails. </param>
+             /// <returns> Builder. </returns>
+            public Builder CreatorDetails(Models.BookingCreatorDetails creatorDetails)
+            {
+                this.creatorDetails = creatorDetails;
+                return this;
+            }
+
+             /// <summary>
+             /// Source.
+             /// </summary>
+             /// <param name="source"> source. </param>
+             /// <returns> Builder. </returns>
+            public Builder Source(string source)
+            {
+                this.source = source;
+                return this;
+            }
+
             /// <summary>
             /// Builds class object.
             /// </summary>
@@ -367,7 +490,12 @@ namespace Square.Models
                     this.customerId,
                     this.customerNote,
                     this.sellerNote,
-                    this.appointmentSegments);
+                    this.appointmentSegments,
+                    this.transitionTimeMinutes,
+                    this.allDay,
+                    this.locationType,
+                    this.creatorDetails,
+                    this.source);
             }
         }
     }

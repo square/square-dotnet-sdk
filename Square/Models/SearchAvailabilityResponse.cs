@@ -38,13 +38,13 @@ namespace Square.Models
         public HttpContext Context { get; internal set; }
 
         /// <summary>
-        /// List of slots available for booking.
+        /// List of appointment slots available for booking.
         /// </summary>
         [JsonProperty("availabilities", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.Availability> Availabilities { get; }
 
         /// <summary>
-        /// Any errors that occurred during the request.
+        /// Errors that occurred during the request.
         /// </summary>
         [JsonProperty("errors", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.Error> Errors { get; }

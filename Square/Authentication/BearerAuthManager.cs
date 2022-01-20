@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 using Square.Http.Request;
 
 /// <summary>
-/// AccessTokenManager.
+/// BearerAuthManager.
 /// </summary>
-internal class AccessTokenManager : IAccessTokenCredentials, IAuthManager
+internal class BearerAuthManager : IBearerAuthCredentials, IAuthManager
 {
         /// <summary>
-        /// Initializes a new instance of the <see cref="AccessTokenManager"/> class.
+        /// Initializes a new instance of the <see cref="BearerAuthManager"/> class.
         /// </summary>
         /// <param name="accessToken">accessToken.</param>
-        public AccessTokenManager(string accessToken)
+        public BearerAuthManager(string accessToken)
         {
             this.AccessToken = accessToken;
         }

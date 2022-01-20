@@ -34,7 +34,7 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// The EU VAT number for this location. For example, "IE3426675K".
+        /// The EU VAT number for this location. For example, `IE3426675K`.
         /// If the EU VAT number is present, it is well-formed and has been
         /// validated with VIES, the VAT Information Exchange System.
         /// </summary>
@@ -43,7 +43,7 @@ namespace Square.Models
 
         /// <summary>
         /// The SIRET (Système d'Identification du Répertoire des Entreprises et de leurs Etablissements)
-        /// number is a 14 digits code issued by the French INSEE. For example, "39922799000021".
+        /// number is a 14 digit code issued by the French INSEE. For example, `39922799000021`.
         /// </summary>
         [JsonProperty("fr_siret", NullValueHandling = NullValueHandling.Ignore)]
         public string FrSiret { get; }
@@ -51,7 +51,7 @@ namespace Square.Models
         /// <summary>
         /// The French government uses the NAF (Nomenclature des Activités Françaises) to display and
         /// track economic statistical data. This is also called the APE (Activite Principale de l’Entreprise) code.
-        /// For example, 6910Z.
+        /// For example, `6910Z`.
         /// </summary>
         [JsonProperty("fr_naf", NullValueHandling = NullValueHandling.Ignore)]
         public string FrNaf { get; }
