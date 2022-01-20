@@ -9,6 +9,8 @@ namespace Square.Apis
     using Square.Http.Client;
     using Square.Http.Response;
     using Square.Utilities;
+    using System.Runtime.InteropServices;
+    using System.Text.RegularExpressions;
 
     /// <summary>
     /// The base class for all controller classes.
@@ -19,6 +21,8 @@ namespace Square.Apis
         /// HttpClient instance.
         /// </summary>
         private readonly IHttpClient httpClient;
+        private string internalUserAgent = string.Empty;
+
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BaseApi"/> class.
@@ -37,6 +41,7 @@ namespace Square.Apis
             this.httpClient = httpClient;
             this.AuthManagers = authManagers;
             this.HttpCallBack = httpCallBack;
+            this.UpdateUserAgent();
         }
 
         /// <summary>
@@ -62,7 +67,7 @@ namespace Square.Apis
         /// <summary>
         ///  Gets User-Agent header value.
         /// </summary>
-        protected string UserAgent => "Square-DotNet-SDK/17.0.0";
+        protected string UserAgent => internalUserAgent;
 
         /// <summary>
         /// Create JSON-encoded multipart content from input.
@@ -114,6 +119,25 @@ namespace Square.Apis
             {
                 throw new ApiException(@"HTTP Response Not OK", context);
             }
+        }
+        /// <summary>
+        /// Adds runtime information to the placeholders in User-Agent.
+        /// </summary>
+        private void UpdateUserAgent()
+        {
+            internalUserAgent = "Square-DotNet-SDK/17.1.0 ({api-version}) {engine}/{engine-version} ({os-info}) {detail}";
+            string userAgentDetail = string.Empty;
+
+            if (!string.IsNullOrEmpty(Config.UserAgentDetail))
+            {
+                userAgentDetail = Uri.EscapeDataString(Config.UserAgentDetail);
+            }
+
+            internalUserAgent = Regex.Replace(internalUserAgent, "{detail}", userAgentDetail, RegexOptions.IgnoreCase);
+            internalUserAgent = Regex.Replace(internalUserAgent, "{api-version}", Config.SquareVersion ?? string.Empty, RegexOptions.IgnoreCase);
+            internalUserAgent = Regex.Replace(internalUserAgent, "{engine}", RuntimeInformation.FrameworkDescription.ToString(), RegexOptions.IgnoreCase);
+            internalUserAgent = Regex.Replace(internalUserAgent, "{engine-version}", System.Environment.Version.ToString(), RegexOptions.IgnoreCase);
+            internalUserAgent = Regex.Replace(internalUserAgent, "{os-info}", System.Environment.OSVersion.ToString(), RegexOptions.IgnoreCase);
         }
     }
 }

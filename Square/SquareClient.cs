@@ -44,7 +44,7 @@ namespace Square
         private readonly IDictionary<string, List<string>> additionalHeaders;
         private readonly IHttpClient httpClient;
         private readonly HttpCallBack httpCallBack;
-        private readonly AccessTokenManager accessTokenManager;
+        private readonly BearerAuthManager bearerAuthManager;
 
         private readonly Lazy<IMobileAuthorizationApi> mobileAuthorization;
         private readonly Lazy<IOAuthApi> oAuth;
@@ -82,6 +82,7 @@ namespace Square
 
         private SquareClient(
             string squareVersion,
+            string userAgentDetail,
             Environment environment,
             string customUrl,
             string accessToken,
@@ -92,6 +93,7 @@ namespace Square
             IHttpClientConfiguration httpClientConfiguration)
         {
             this.SquareVersion = squareVersion;
+            this.UserAgentDetail = userAgentDetail;
             this.Environment = environment;
             this.CustomUrl = customUrl;
             this.httpCallBack = httpCallBack;
@@ -169,14 +171,14 @@ namespace Square
 
             if (this.authManagers.ContainsKey("global"))
             {
-                this.accessTokenManager = (AccessTokenManager)this.authManagers["global"];
+                this.bearerAuthManager = (BearerAuthManager)this.authManagers["global"];
             }
 
             if (!this.authManagers.ContainsKey("global")
-                || !this.AccessTokenCredentials.Equals(accessToken))
+                || !this.BearerAuthCredentials.Equals(accessToken))
             {
-                this.accessTokenManager = new AccessTokenManager(accessToken);
-                this.authManagers["global"] = this.accessTokenManager;
+                this.bearerAuthManager = new BearerAuthManager(accessToken);
+                this.authManagers["global"] = this.bearerAuthManager;
             }
         }
 
@@ -353,7 +355,7 @@ namespace Square
         /// <summary>
         /// Gets the current version of the SDK.
         /// </summary>
-        public string SdkVersion => "17.0.0";
+        public string SdkVersion => "17.1.0";
 
         /// <summary>
         /// Gets the configuration of the Http Client associated with this client.
@@ -365,6 +367,12 @@ namespace Square
         /// Square Connect API versions.
         /// </summary>
         public string SquareVersion { get; }
+
+        /// <summary>
+        /// Gets UserAgentDetail.
+        /// User-Agent detail.
+        /// </summary>
+        public string UserAgentDetail { get; }
 
         /// <summary>
         /// Gets Environment.
@@ -394,14 +402,14 @@ namespace Square
         internal HttpCallBack HttpCallBack => this.httpCallBack;
 
         /// <summary>
-        /// Gets the credentials to use with AccessToken.
+        /// Gets the credentials to use with BearerAuth.
         /// </summary>
-        private IAccessTokenCredentials AccessTokenCredentials => this.accessTokenManager;
+        private IBearerAuthCredentials BearerAuthCredentials => this.bearerAuthManager;
 
         /// <summary>
         /// Gets the access token to use with OAuth 2 authentication.
         /// </summary>
-        public string AccessToken => this.AccessTokenCredentials.AccessToken;
+        public string AccessToken => this.BearerAuthCredentials.AccessToken;
 
         /// <summary>
         /// Gets the URL for a particular alias in the current environment and appends
@@ -425,9 +433,10 @@ namespace Square
         {
             Builder builder = new Builder()
                 .SquareVersion(this.SquareVersion)
+                .UserAgentDetail(this.UserAgentDetail)
                 .Environment(this.Environment)
                 .CustomUrl(this.CustomUrl)
-                .AccessToken(this.AccessTokenCredentials.AccessToken)
+                .AccessToken(this.BearerAuthCredentials.AccessToken)
                 .AdditionalHeaders(this.additionalHeaders)
                 .HttpCallBack(this.httpCallBack)
                 .HttpClient(this.httpClient)
@@ -442,6 +451,7 @@ namespace Square
         {
             return
                 $"SquareVersion = {this.SquareVersion}, " +
+                $"UserAgentDetail = {this.UserAgentDetail}, " +
                 $"Environment = {this.Environment}, " +
                 $"CustomUrl = {this.CustomUrl}, " +
                 $"additionalHeaders = {ApiHelper.JsonSerialize(this.additionalHeaders)}, " +
@@ -502,7 +512,8 @@ namespace Square
         /// </summary>
         public class Builder
         {
-            private string squareVersion = "2021-12-15";
+            private string squareVersion = "2022-01-20";
+            private string userAgentDetail = null;
             private Environment environment = Square.Environment.Production;
             private string customUrl = "https://connect.squareup.com";
             private string accessToken = "";
@@ -513,7 +524,7 @@ namespace Square
             private IDictionary<string, List<string>> additionalHeaders = new Dictionary<string, List<string>>();
 
             /// <summary>
-            /// Sets credentials for AccessToken.
+            /// Sets credentials for BearerAuth.
             /// </summary>
             /// <param name="accessToken">AccessToken.</param>
             /// <returns>Builder.</returns>
@@ -534,6 +545,17 @@ namespace Square
                 return this;
             }
 
+            /// <summary>
+            /// Sets UserAgentDetail.
+            /// </summary>
+            /// <param name="userAgentDetail"> UserAgentDetail. </param>
+            /// <returns> Builder. </returns>
+            public Builder UserAgentDetail(string userAgentDetail)
+            {
+                if(userAgentDetail != null && userAgentDetail.Count() > 128) throw new ArgumentException("The length of user-agent detail should not exceed 128 characters.");
+                this.userAgentDetail = userAgentDetail;
+                return this;
+            }
             /// <summary>
             /// Sets Environment.
             /// </summary>
@@ -661,6 +683,7 @@ namespace Square
 
                 return new SquareClient(
                     this.squareVersion,
+                    this.userAgentDetail,
                     this.environment,
                     this.customUrl,
                     this.accessToken,

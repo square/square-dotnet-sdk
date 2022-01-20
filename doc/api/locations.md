@@ -18,7 +18,7 @@ ILocationsApi locationsApi = client.LocationsApi;
 
 # List Locations
 
-Provides details about all of the seller's locations,
+Provides details about all of the seller's [locations](https://developer.squareup.com/docs/locations-api),
 including those with an inactive status.
 
 ```csharp
@@ -137,7 +137,7 @@ catch (ApiException e){};
 
 # Update Location
 
-Updates a location.
+Updates a [location](https://developer.squareup.com/docs/locations-api).
 
 ```csharp
 UpdateLocationAsync(

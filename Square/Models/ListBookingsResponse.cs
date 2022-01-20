@@ -47,13 +47,13 @@ namespace Square.Models
         public IList<Models.Booking> Bookings { get; }
 
         /// <summary>
-        /// The pagination cursor to be used in the following request to get the next page of the results. Stop retrieving the next page of the results when the cursor is not set.
+        /// The pagination cursor to be used in the subsequent request to get the next page of the results. Stop retrieving the next page of the results when the cursor is not set.
         /// </summary>
         [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
         public string Cursor { get; }
 
         /// <summary>
-        /// Any errors that occurred during the request.
+        /// Errors that occurred during the request.
         /// </summary>
         [JsonProperty("errors", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.Error> Errors { get; }

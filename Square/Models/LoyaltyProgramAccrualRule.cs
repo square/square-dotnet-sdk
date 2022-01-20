@@ -22,27 +22,24 @@ namespace Square.Models
         /// </summary>
         /// <param name="accrualType">accrual_type.</param>
         /// <param name="points">points.</param>
-        /// <param name="visitMinimumAmountMoney">visit_minimum_amount_money.</param>
-        /// <param name="spendAmountMoney">spend_amount_money.</param>
-        /// <param name="catalogObjectId">catalog_object_id.</param>
-        /// <param name="excludedCategoryIds">excluded_category_ids.</param>
-        /// <param name="excludedItemVariationIds">excluded_item_variation_ids.</param>
+        /// <param name="visitData">visit_data.</param>
+        /// <param name="spendData">spend_data.</param>
+        /// <param name="itemVariationData">item_variation_data.</param>
+        /// <param name="categoryData">category_data.</param>
         public LoyaltyProgramAccrualRule(
             string accrualType,
             int? points = null,
-            Models.Money visitMinimumAmountMoney = null,
-            Models.Money spendAmountMoney = null,
-            string catalogObjectId = null,
-            IList<string> excludedCategoryIds = null,
-            IList<string> excludedItemVariationIds = null)
+            Models.LoyaltyProgramAccrualRuleVisitData visitData = null,
+            Models.LoyaltyProgramAccrualRuleSpendData spendData = null,
+            Models.LoyaltyProgramAccrualRuleItemVariationData itemVariationData = null,
+            Models.LoyaltyProgramAccrualRuleCategoryData categoryData = null)
         {
             this.AccrualType = accrualType;
             this.Points = points;
-            this.VisitMinimumAmountMoney = visitMinimumAmountMoney;
-            this.SpendAmountMoney = spendAmountMoney;
-            this.CatalogObjectId = catalogObjectId;
-            this.ExcludedCategoryIds = excludedCategoryIds;
-            this.ExcludedItemVariationIds = excludedItemVariationIds;
+            this.VisitData = visitData;
+            this.SpendData = spendData;
+            this.ItemVariationData = itemVariationData;
+            this.CategoryData = categoryData;
         }
 
         /// <summary>
@@ -59,53 +56,28 @@ namespace Square.Models
         public int? Points { get; }
 
         /// <summary>
-        /// Represents an amount of money. `Money` fields can be signed or unsigned.
-        /// Fields that do not explicitly define whether they are signed or unsigned are
-        /// considered unsigned and can only hold positive amounts. For signed fields, the
-        /// sign of the value indicates the purpose of the money transfer. See
-        /// [Working with Monetary Amounts](https://developer.squareup.com/docs/build-basics/working-with-monetary-amounts)
-        /// for more information.
+        /// Represents additional data for rules with the `VISIT` accrual type.
         /// </summary>
-        [JsonProperty("visit_minimum_amount_money", NullValueHandling = NullValueHandling.Ignore)]
-        public Models.Money VisitMinimumAmountMoney { get; }
+        [JsonProperty("visit_data", NullValueHandling = NullValueHandling.Ignore)]
+        public Models.LoyaltyProgramAccrualRuleVisitData VisitData { get; }
 
         /// <summary>
-        /// Represents an amount of money. `Money` fields can be signed or unsigned.
-        /// Fields that do not explicitly define whether they are signed or unsigned are
-        /// considered unsigned and can only hold positive amounts. For signed fields, the
-        /// sign of the value indicates the purpose of the money transfer. See
-        /// [Working with Monetary Amounts](https://developer.squareup.com/docs/build-basics/working-with-monetary-amounts)
-        /// for more information.
+        /// Represents additional data for rules with the `SPEND` accrual type.
         /// </summary>
-        [JsonProperty("spend_amount_money", NullValueHandling = NullValueHandling.Ignore)]
-        public Models.Money SpendAmountMoney { get; }
+        [JsonProperty("spend_data", NullValueHandling = NullValueHandling.Ignore)]
+        public Models.LoyaltyProgramAccrualRuleSpendData SpendData { get; }
 
         /// <summary>
-        /// When the accrual rule is item-based or category-based, this field specifies the ID
-        /// of the [catalog object]($m/CatalogObject) that buyers can purchase to earn points.
-        /// If `accrual_type` is `ITEM_VARIATION`, the object is an item variation.
-        /// If `accrual_type` is `CATEGORY`, the object is a category.
+        /// Represents additional data for rules with the `ITEM_VARIATION` accrual type.
         /// </summary>
-        [JsonProperty("catalog_object_id", NullValueHandling = NullValueHandling.Ignore)]
-        public string CatalogObjectId { get; }
+        [JsonProperty("item_variation_data", NullValueHandling = NullValueHandling.Ignore)]
+        public Models.LoyaltyProgramAccrualRuleItemVariationData ItemVariationData { get; }
 
         /// <summary>
-        /// When the accrual rule is spend-based (`accrual_type` is `SPEND`), this field
-        /// lists the IDs of any `CATEGORY` catalog objects that are excluded from points accrual.
-        /// You can use the [BatchRetrieveCatalogObjects]($e/Catalog/BatchRetrieveCatalogObjects)
-        /// endpoint to retrieve information about the excluded categories.
+        /// Represents additional data for rules with the `CATEGORY` accrual type.
         /// </summary>
-        [JsonProperty("excluded_category_ids", NullValueHandling = NullValueHandling.Ignore)]
-        public IList<string> ExcludedCategoryIds { get; }
-
-        /// <summary>
-        /// When the accrual rule is spend-based (`accrual_type` is `SPEND`), this field
-        /// lists the IDs of any `ITEM_VARIATION` catalog objects that are excluded from points accrual.
-        /// You can use the [BatchRetrieveCatalogObjects]($e/Catalog/BatchRetrieveCatalogObjects)
-        /// endpoint to retrieve information about the excluded item variations.
-        /// </summary>
-        [JsonProperty("excluded_item_variation_ids", NullValueHandling = NullValueHandling.Ignore)]
-        public IList<string> ExcludedItemVariationIds { get; }
+        [JsonProperty("category_data", NullValueHandling = NullValueHandling.Ignore)]
+        public Models.LoyaltyProgramAccrualRuleCategoryData CategoryData { get; }
 
         /// <inheritdoc/>
         public override string ToString()
@@ -133,18 +105,17 @@ namespace Square.Models
             return obj is LoyaltyProgramAccrualRule other &&
                 ((this.AccrualType == null && other.AccrualType == null) || (this.AccrualType?.Equals(other.AccrualType) == true)) &&
                 ((this.Points == null && other.Points == null) || (this.Points?.Equals(other.Points) == true)) &&
-                ((this.VisitMinimumAmountMoney == null && other.VisitMinimumAmountMoney == null) || (this.VisitMinimumAmountMoney?.Equals(other.VisitMinimumAmountMoney) == true)) &&
-                ((this.SpendAmountMoney == null && other.SpendAmountMoney == null) || (this.SpendAmountMoney?.Equals(other.SpendAmountMoney) == true)) &&
-                ((this.CatalogObjectId == null && other.CatalogObjectId == null) || (this.CatalogObjectId?.Equals(other.CatalogObjectId) == true)) &&
-                ((this.ExcludedCategoryIds == null && other.ExcludedCategoryIds == null) || (this.ExcludedCategoryIds?.Equals(other.ExcludedCategoryIds) == true)) &&
-                ((this.ExcludedItemVariationIds == null && other.ExcludedItemVariationIds == null) || (this.ExcludedItemVariationIds?.Equals(other.ExcludedItemVariationIds) == true));
+                ((this.VisitData == null && other.VisitData == null) || (this.VisitData?.Equals(other.VisitData) == true)) &&
+                ((this.SpendData == null && other.SpendData == null) || (this.SpendData?.Equals(other.SpendData) == true)) &&
+                ((this.ItemVariationData == null && other.ItemVariationData == null) || (this.ItemVariationData?.Equals(other.ItemVariationData) == true)) &&
+                ((this.CategoryData == null && other.CategoryData == null) || (this.CategoryData?.Equals(other.CategoryData) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 2086820232;
-            hashCode = HashCode.Combine(this.AccrualType, this.Points, this.VisitMinimumAmountMoney, this.SpendAmountMoney, this.CatalogObjectId, this.ExcludedCategoryIds, this.ExcludedItemVariationIds);
+            int hashCode = 1357142668;
+            hashCode = HashCode.Combine(this.AccrualType, this.Points, this.VisitData, this.SpendData, this.ItemVariationData, this.CategoryData);
 
             return hashCode;
         }
@@ -157,11 +128,10 @@ namespace Square.Models
         {
             toStringOutput.Add($"this.AccrualType = {(this.AccrualType == null ? "null" : this.AccrualType.ToString())}");
             toStringOutput.Add($"this.Points = {(this.Points == null ? "null" : this.Points.ToString())}");
-            toStringOutput.Add($"this.VisitMinimumAmountMoney = {(this.VisitMinimumAmountMoney == null ? "null" : this.VisitMinimumAmountMoney.ToString())}");
-            toStringOutput.Add($"this.SpendAmountMoney = {(this.SpendAmountMoney == null ? "null" : this.SpendAmountMoney.ToString())}");
-            toStringOutput.Add($"this.CatalogObjectId = {(this.CatalogObjectId == null ? "null" : this.CatalogObjectId == string.Empty ? "" : this.CatalogObjectId)}");
-            toStringOutput.Add($"this.ExcludedCategoryIds = {(this.ExcludedCategoryIds == null ? "null" : $"[{string.Join(", ", this.ExcludedCategoryIds)} ]")}");
-            toStringOutput.Add($"this.ExcludedItemVariationIds = {(this.ExcludedItemVariationIds == null ? "null" : $"[{string.Join(", ", this.ExcludedItemVariationIds)} ]")}");
+            toStringOutput.Add($"this.VisitData = {(this.VisitData == null ? "null" : this.VisitData.ToString())}");
+            toStringOutput.Add($"this.SpendData = {(this.SpendData == null ? "null" : this.SpendData.ToString())}");
+            toStringOutput.Add($"this.ItemVariationData = {(this.ItemVariationData == null ? "null" : this.ItemVariationData.ToString())}");
+            toStringOutput.Add($"this.CategoryData = {(this.CategoryData == null ? "null" : this.CategoryData.ToString())}");
         }
 
         /// <summary>
@@ -173,11 +143,10 @@ namespace Square.Models
             var builder = new Builder(
                 this.AccrualType)
                 .Points(this.Points)
-                .VisitMinimumAmountMoney(this.VisitMinimumAmountMoney)
-                .SpendAmountMoney(this.SpendAmountMoney)
-                .CatalogObjectId(this.CatalogObjectId)
-                .ExcludedCategoryIds(this.ExcludedCategoryIds)
-                .ExcludedItemVariationIds(this.ExcludedItemVariationIds);
+                .VisitData(this.VisitData)
+                .SpendData(this.SpendData)
+                .ItemVariationData(this.ItemVariationData)
+                .CategoryData(this.CategoryData);
             return builder;
         }
 
@@ -188,11 +157,10 @@ namespace Square.Models
         {
             private string accrualType;
             private int? points;
-            private Models.Money visitMinimumAmountMoney;
-            private Models.Money spendAmountMoney;
-            private string catalogObjectId;
-            private IList<string> excludedCategoryIds;
-            private IList<string> excludedItemVariationIds;
+            private Models.LoyaltyProgramAccrualRuleVisitData visitData;
+            private Models.LoyaltyProgramAccrualRuleSpendData spendData;
+            private Models.LoyaltyProgramAccrualRuleItemVariationData itemVariationData;
+            private Models.LoyaltyProgramAccrualRuleCategoryData categoryData;
 
             public Builder(
                 string accrualType)
@@ -223,57 +191,46 @@ namespace Square.Models
             }
 
              /// <summary>
-             /// VisitMinimumAmountMoney.
+             /// VisitData.
              /// </summary>
-             /// <param name="visitMinimumAmountMoney"> visitMinimumAmountMoney. </param>
+             /// <param name="visitData"> visitData. </param>
              /// <returns> Builder. </returns>
-            public Builder VisitMinimumAmountMoney(Models.Money visitMinimumAmountMoney)
+            public Builder VisitData(Models.LoyaltyProgramAccrualRuleVisitData visitData)
             {
-                this.visitMinimumAmountMoney = visitMinimumAmountMoney;
+                this.visitData = visitData;
                 return this;
             }
 
              /// <summary>
-             /// SpendAmountMoney.
+             /// SpendData.
              /// </summary>
-             /// <param name="spendAmountMoney"> spendAmountMoney. </param>
+             /// <param name="spendData"> spendData. </param>
              /// <returns> Builder. </returns>
-            public Builder SpendAmountMoney(Models.Money spendAmountMoney)
+            public Builder SpendData(Models.LoyaltyProgramAccrualRuleSpendData spendData)
             {
-                this.spendAmountMoney = spendAmountMoney;
+                this.spendData = spendData;
                 return this;
             }
 
              /// <summary>
-             /// CatalogObjectId.
+             /// ItemVariationData.
              /// </summary>
-             /// <param name="catalogObjectId"> catalogObjectId. </param>
+             /// <param name="itemVariationData"> itemVariationData. </param>
              /// <returns> Builder. </returns>
-            public Builder CatalogObjectId(string catalogObjectId)
+            public Builder ItemVariationData(Models.LoyaltyProgramAccrualRuleItemVariationData itemVariationData)
             {
-                this.catalogObjectId = catalogObjectId;
+                this.itemVariationData = itemVariationData;
                 return this;
             }
 
              /// <summary>
-             /// ExcludedCategoryIds.
+             /// CategoryData.
              /// </summary>
-             /// <param name="excludedCategoryIds"> excludedCategoryIds. </param>
+             /// <param name="categoryData"> categoryData. </param>
              /// <returns> Builder. </returns>
-            public Builder ExcludedCategoryIds(IList<string> excludedCategoryIds)
+            public Builder CategoryData(Models.LoyaltyProgramAccrualRuleCategoryData categoryData)
             {
-                this.excludedCategoryIds = excludedCategoryIds;
-                return this;
-            }
-
-             /// <summary>
-             /// ExcludedItemVariationIds.
-             /// </summary>
-             /// <param name="excludedItemVariationIds"> excludedItemVariationIds. </param>
-             /// <returns> Builder. </returns>
-            public Builder ExcludedItemVariationIds(IList<string> excludedItemVariationIds)
-            {
-                this.excludedItemVariationIds = excludedItemVariationIds;
+                this.categoryData = categoryData;
                 return this;
             }
 
@@ -286,11 +243,10 @@ namespace Square.Models
                 return new LoyaltyProgramAccrualRule(
                     this.accrualType,
                     this.points,
-                    this.visitMinimumAmountMoney,
-                    this.spendAmountMoney,
-                    this.catalogObjectId,
-                    this.excludedCategoryIds,
-                    this.excludedItemVariationIds);
+                    this.visitData,
+                    this.spendData,
+                    this.itemVariationData,
+                    this.categoryData);
             }
         }
     }

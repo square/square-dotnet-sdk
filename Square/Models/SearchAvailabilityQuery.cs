@@ -28,7 +28,7 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// A query filter to search for availabilities by.
+        /// A query filter to search for buyer-accessible availabilities by.
         /// </summary>
         [JsonProperty("filter")]
         public Models.SearchAvailabilityFilter Filter { get; }

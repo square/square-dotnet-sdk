@@ -2,7 +2,7 @@ namespace Square.Authentication
 {
     using System;
 
-    public interface IAccessTokenCredentials
+    public interface IBearerAuthCredentials
     {
         /// <summary>
         /// Gets accessToken.

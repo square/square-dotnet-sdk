@@ -43,13 +43,13 @@ namespace Square.Models
         public bool? BookableOnly { get; }
 
         /// <summary>
-        /// The maximum number of results to return.
+        /// The maximum number of results to return in a paged response.
         /// </summary>
         [JsonProperty("limit", NullValueHandling = NullValueHandling.Ignore)]
         public int? Limit { get; }
 
         /// <summary>
-        /// The cursor for paginating through the results.
+        /// The pagination cursor from the preceding response to return the next page of the results. Do not set this when retrieving the first page of the results.
         /// </summary>
         [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
         public string Cursor { get; }
