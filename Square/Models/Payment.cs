@@ -40,6 +40,7 @@ namespace Square.Models
         /// <param name="bankAccountDetails">bank_account_details.</param>
         /// <param name="externalDetails">external_details.</param>
         /// <param name="walletDetails">wallet_details.</param>
+        /// <param name="buyNowPayLaterDetails">buy_now_pay_later_details.</param>
         /// <param name="locationId">location_id.</param>
         /// <param name="orderId">order_id.</param>
         /// <param name="referenceId">reference_id.</param>
@@ -80,6 +81,7 @@ namespace Square.Models
             Models.BankAccountPaymentDetails bankAccountDetails = null,
             Models.ExternalPaymentDetails externalDetails = null,
             Models.DigitalWalletDetails walletDetails = null,
+            Models.BuyNowPayLaterDetails buyNowPayLaterDetails = null,
             string locationId = null,
             string orderId = null,
             string referenceId = null,
@@ -120,6 +122,7 @@ namespace Square.Models
             this.BankAccountDetails = bankAccountDetails;
             this.ExternalDetails = externalDetails;
             this.WalletDetails = walletDetails;
+            this.BuyNowPayLaterDetails = buyNowPayLaterDetails;
             this.LocationId = locationId;
             this.OrderId = orderId;
             this.ReferenceId = referenceId;
@@ -313,6 +316,12 @@ namespace Square.Models
         public Models.DigitalWalletDetails WalletDetails { get; }
 
         /// <summary>
+        /// Additional details about a Buy Now Pay Later payment type.
+        /// </summary>
+        [JsonProperty("buy_now_pay_later_details", NullValueHandling = NullValueHandling.Ignore)]
+        public Models.BuyNowPayLaterDetails BuyNowPayLaterDetails { get; }
+
+        /// <summary>
         /// The ID of the location associated with the payment.
         /// </summary>
         [JsonProperty("location_id", NullValueHandling = NullValueHandling.Ignore)]
@@ -489,6 +498,7 @@ namespace Square.Models
                 ((this.BankAccountDetails == null && other.BankAccountDetails == null) || (this.BankAccountDetails?.Equals(other.BankAccountDetails) == true)) &&
                 ((this.ExternalDetails == null && other.ExternalDetails == null) || (this.ExternalDetails?.Equals(other.ExternalDetails) == true)) &&
                 ((this.WalletDetails == null && other.WalletDetails == null) || (this.WalletDetails?.Equals(other.WalletDetails) == true)) &&
+                ((this.BuyNowPayLaterDetails == null && other.BuyNowPayLaterDetails == null) || (this.BuyNowPayLaterDetails?.Equals(other.BuyNowPayLaterDetails) == true)) &&
                 ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true)) &&
                 ((this.OrderId == null && other.OrderId == null) || (this.OrderId?.Equals(other.OrderId) == true)) &&
                 ((this.ReferenceId == null && other.ReferenceId == null) || (this.ReferenceId?.Equals(other.ReferenceId) == true)) &&
@@ -513,18 +523,18 @@ namespace Square.Models
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 252401640;
+            int hashCode = 1418416036;
             hashCode = HashCode.Combine(this.Id, this.CreatedAt, this.UpdatedAt, this.AmountMoney, this.TipMoney, this.TotalMoney, this.AppFeeMoney);
 
             hashCode = HashCode.Combine(hashCode, this.ApprovedMoney, this.ProcessingFee, this.RefundedMoney, this.Status, this.DelayDuration, this.DelayAction, this.DelayedUntil);
 
-            hashCode = HashCode.Combine(hashCode, this.SourceType, this.CardDetails, this.CashDetails, this.BankAccountDetails, this.ExternalDetails, this.WalletDetails, this.LocationId);
+            hashCode = HashCode.Combine(hashCode, this.SourceType, this.CardDetails, this.CashDetails, this.BankAccountDetails, this.ExternalDetails, this.WalletDetails, this.BuyNowPayLaterDetails);
 
-            hashCode = HashCode.Combine(hashCode, this.OrderId, this.ReferenceId, this.CustomerId, this.EmployeeId, this.TeamMemberId, this.RefundIds, this.RiskEvaluation);
+            hashCode = HashCode.Combine(hashCode, this.LocationId, this.OrderId, this.ReferenceId, this.CustomerId, this.EmployeeId, this.TeamMemberId, this.RefundIds);
 
-            hashCode = HashCode.Combine(hashCode, this.BuyerEmailAddress, this.BillingAddress, this.ShippingAddress, this.Note, this.StatementDescriptionIdentifier, this.Capabilities, this.ReceiptNumber);
+            hashCode = HashCode.Combine(hashCode, this.RiskEvaluation, this.BuyerEmailAddress, this.BillingAddress, this.ShippingAddress, this.Note, this.StatementDescriptionIdentifier, this.Capabilities);
 
-            hashCode = HashCode.Combine(hashCode, this.ReceiptUrl, this.DeviceDetails, this.ApplicationDetails, this.VersionToken);
+            hashCode = HashCode.Combine(hashCode, this.ReceiptNumber, this.ReceiptUrl, this.DeviceDetails, this.ApplicationDetails, this.VersionToken);
 
             return hashCode;
         }
@@ -555,6 +565,7 @@ namespace Square.Models
             toStringOutput.Add($"this.BankAccountDetails = {(this.BankAccountDetails == null ? "null" : this.BankAccountDetails.ToString())}");
             toStringOutput.Add($"this.ExternalDetails = {(this.ExternalDetails == null ? "null" : this.ExternalDetails.ToString())}");
             toStringOutput.Add($"this.WalletDetails = {(this.WalletDetails == null ? "null" : this.WalletDetails.ToString())}");
+            toStringOutput.Add($"this.BuyNowPayLaterDetails = {(this.BuyNowPayLaterDetails == null ? "null" : this.BuyNowPayLaterDetails.ToString())}");
             toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId == string.Empty ? "" : this.LocationId)}");
             toStringOutput.Add($"this.OrderId = {(this.OrderId == null ? "null" : this.OrderId == string.Empty ? "" : this.OrderId)}");
             toStringOutput.Add($"this.ReferenceId = {(this.ReferenceId == null ? "null" : this.ReferenceId == string.Empty ? "" : this.ReferenceId)}");
@@ -603,6 +614,7 @@ namespace Square.Models
                 .BankAccountDetails(this.BankAccountDetails)
                 .ExternalDetails(this.ExternalDetails)
                 .WalletDetails(this.WalletDetails)
+                .BuyNowPayLaterDetails(this.BuyNowPayLaterDetails)
                 .LocationId(this.LocationId)
                 .OrderId(this.OrderId)
                 .ReferenceId(this.ReferenceId)
@@ -650,6 +662,7 @@ namespace Square.Models
             private Models.BankAccountPaymentDetails bankAccountDetails;
             private Models.ExternalPaymentDetails externalDetails;
             private Models.DigitalWalletDetails walletDetails;
+            private Models.BuyNowPayLaterDetails buyNowPayLaterDetails;
             private string locationId;
             private string orderId;
             private string referenceId;
@@ -891,6 +904,17 @@ namespace Square.Models
             }
 
              /// <summary>
+             /// BuyNowPayLaterDetails.
+             /// </summary>
+             /// <param name="buyNowPayLaterDetails"> buyNowPayLaterDetails. </param>
+             /// <returns> Builder. </returns>
+            public Builder BuyNowPayLaterDetails(Models.BuyNowPayLaterDetails buyNowPayLaterDetails)
+            {
+                this.buyNowPayLaterDetails = buyNowPayLaterDetails;
+                return this;
+            }
+
+             /// <summary>
              /// LocationId.
              /// </summary>
              /// <param name="locationId"> locationId. </param>
@@ -1126,6 +1150,7 @@ namespace Square.Models
                     this.bankAccountDetails,
                     this.externalDetails,
                     this.walletDetails,
+                    this.buyNowPayLaterDetails,
                     this.locationId,
                     this.orderId,
                     this.referenceId,

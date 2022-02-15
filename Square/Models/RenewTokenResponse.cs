@@ -27,13 +27,15 @@ namespace Square.Models
         /// <param name="merchantId">merchant_id.</param>
         /// <param name="subscriptionId">subscription_id.</param>
         /// <param name="planId">plan_id.</param>
+        /// <param name="errors">errors.</param>
         public RenewTokenResponse(
             string accessToken = null,
             string tokenType = null,
             string expiresAt = null,
             string merchantId = null,
             string subscriptionId = null,
-            string planId = null)
+            string planId = null,
+            IList<Models.Error> errors = null)
         {
             this.AccessToken = accessToken;
             this.TokenType = tokenType;
@@ -41,6 +43,7 @@ namespace Square.Models
             this.MerchantId = merchantId;
             this.SubscriptionId = subscriptionId;
             this.PlanId = planId;
+            this.Errors = errors;
         }
 
         /// <summary>
@@ -92,6 +95,13 @@ namespace Square.Models
         [JsonProperty("plan_id", NullValueHandling = NullValueHandling.Ignore)]
         public string PlanId { get; }
 
+        /// <summary>
+        /// An error object that provides details about how creation of the obtain
+        /// token failed.
+        /// </summary>
+        [JsonProperty("errors", NullValueHandling = NullValueHandling.Ignore)]
+        public IList<Models.Error> Errors { get; }
+
         /// <inheritdoc/>
         public override string ToString()
         {
@@ -122,19 +132,20 @@ namespace Square.Models
                 ((this.ExpiresAt == null && other.ExpiresAt == null) || (this.ExpiresAt?.Equals(other.ExpiresAt) == true)) &&
                 ((this.MerchantId == null && other.MerchantId == null) || (this.MerchantId?.Equals(other.MerchantId) == true)) &&
                 ((this.SubscriptionId == null && other.SubscriptionId == null) || (this.SubscriptionId?.Equals(other.SubscriptionId) == true)) &&
-                ((this.PlanId == null && other.PlanId == null) || (this.PlanId?.Equals(other.PlanId) == true));
+                ((this.PlanId == null && other.PlanId == null) || (this.PlanId?.Equals(other.PlanId) == true)) &&
+                ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1777017961;
+            int hashCode = -709188927;
 
             if (this.Context != null)
             {
                 hashCode += this.Context.GetHashCode();
             }
-            hashCode = HashCode.Combine(this.AccessToken, this.TokenType, this.ExpiresAt, this.MerchantId, this.SubscriptionId, this.PlanId);
+            hashCode = HashCode.Combine(this.AccessToken, this.TokenType, this.ExpiresAt, this.MerchantId, this.SubscriptionId, this.PlanId, this.Errors);
 
             return hashCode;
         }
@@ -151,6 +162,7 @@ namespace Square.Models
             toStringOutput.Add($"this.MerchantId = {(this.MerchantId == null ? "null" : this.MerchantId == string.Empty ? "" : this.MerchantId)}");
             toStringOutput.Add($"this.SubscriptionId = {(this.SubscriptionId == null ? "null" : this.SubscriptionId == string.Empty ? "" : this.SubscriptionId)}");
             toStringOutput.Add($"this.PlanId = {(this.PlanId == null ? "null" : this.PlanId == string.Empty ? "" : this.PlanId)}");
+            toStringOutput.Add($"this.Errors = {(this.Errors == null ? "null" : $"[{string.Join(", ", this.Errors)} ]")}");
         }
 
         /// <summary>
@@ -165,7 +177,8 @@ namespace Square.Models
                 .ExpiresAt(this.ExpiresAt)
                 .MerchantId(this.MerchantId)
                 .SubscriptionId(this.SubscriptionId)
-                .PlanId(this.PlanId);
+                .PlanId(this.PlanId)
+                .Errors(this.Errors);
             return builder;
         }
 
@@ -180,6 +193,7 @@ namespace Square.Models
             private string merchantId;
             private string subscriptionId;
             private string planId;
+            private IList<Models.Error> errors;
 
              /// <summary>
              /// AccessToken.
@@ -247,6 +261,17 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// Errors.
+             /// </summary>
+             /// <param name="errors"> errors. </param>
+             /// <returns> Builder. </returns>
+            public Builder Errors(IList<Models.Error> errors)
+            {
+                this.errors = errors;
+                return this;
+            }
+
             /// <summary>
             /// Builds class object.
             /// </summary>
@@ -259,7 +284,8 @@ namespace Square.Models
                     this.expiresAt,
                     this.merchantId,
                     this.subscriptionId,
-                    this.planId);
+                    this.planId,
+                    this.errors);
             }
         }
     }

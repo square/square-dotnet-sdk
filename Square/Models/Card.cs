@@ -124,7 +124,7 @@ namespace Square.Models
         public string Fingerprint { get; }
 
         /// <summary>
-        /// The ID of a customer created using the Customers API to be associated with the card.
+        /// **Required** The ID of a customer created using the Customers API to be associated with the card.
         /// </summary>
         [JsonProperty("customer_id", NullValueHandling = NullValueHandling.Ignore)]
         public string CustomerId { get; }

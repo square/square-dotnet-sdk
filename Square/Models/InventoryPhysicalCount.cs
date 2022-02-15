@@ -29,6 +29,7 @@ namespace Square.Models
         /// <param name="quantity">quantity.</param>
         /// <param name="source">source.</param>
         /// <param name="employeeId">employee_id.</param>
+        /// <param name="teamMemberId">team_member_id.</param>
         /// <param name="occurredAt">occurred_at.</param>
         /// <param name="createdAt">created_at.</param>
         public InventoryPhysicalCount(
@@ -41,6 +42,7 @@ namespace Square.Models
             string quantity = null,
             Models.SourceApplication source = null,
             string employeeId = null,
+            string teamMemberId = null,
             string occurredAt = null,
             string createdAt = null)
         {
@@ -53,6 +55,7 @@ namespace Square.Models
             this.Quantity = quantity;
             this.Source = source;
             this.EmployeeId = employeeId;
+            this.TeamMemberId = teamMemberId;
             this.OccurredAt = occurredAt;
             this.CreatedAt = createdAt;
         }
@@ -121,6 +124,13 @@ namespace Square.Models
         public string EmployeeId { get; }
 
         /// <summary>
+        /// The Square-generated ID of the [Team Member]($m/TeamMember) responsible for the
+        /// physical count.
+        /// </summary>
+        [JsonProperty("team_member_id", NullValueHandling = NullValueHandling.Ignore)]
+        public string TeamMemberId { get; }
+
+        /// <summary>
         /// A client-generated RFC 3339-formatted timestamp that indicates when
         /// the physical count was examined. For physical count updates, the `occurred_at`
         /// timestamp cannot be older than 24 hours or in the future relative to the
@@ -168,6 +178,7 @@ namespace Square.Models
                 ((this.Quantity == null && other.Quantity == null) || (this.Quantity?.Equals(other.Quantity) == true)) &&
                 ((this.Source == null && other.Source == null) || (this.Source?.Equals(other.Source) == true)) &&
                 ((this.EmployeeId == null && other.EmployeeId == null) || (this.EmployeeId?.Equals(other.EmployeeId) == true)) &&
+                ((this.TeamMemberId == null && other.TeamMemberId == null) || (this.TeamMemberId?.Equals(other.TeamMemberId) == true)) &&
                 ((this.OccurredAt == null && other.OccurredAt == null) || (this.OccurredAt?.Equals(other.OccurredAt) == true)) &&
                 ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true));
         }
@@ -175,10 +186,10 @@ namespace Square.Models
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1953859747;
+            int hashCode = -1611758334;
             hashCode = HashCode.Combine(this.Id, this.ReferenceId, this.CatalogObjectId, this.CatalogObjectType, this.State, this.LocationId, this.Quantity);
 
-            hashCode = HashCode.Combine(hashCode, this.Source, this.EmployeeId, this.OccurredAt, this.CreatedAt);
+            hashCode = HashCode.Combine(hashCode, this.Source, this.EmployeeId, this.TeamMemberId, this.OccurredAt, this.CreatedAt);
 
             return hashCode;
         }
@@ -198,6 +209,7 @@ namespace Square.Models
             toStringOutput.Add($"this.Quantity = {(this.Quantity == null ? "null" : this.Quantity == string.Empty ? "" : this.Quantity)}");
             toStringOutput.Add($"this.Source = {(this.Source == null ? "null" : this.Source.ToString())}");
             toStringOutput.Add($"this.EmployeeId = {(this.EmployeeId == null ? "null" : this.EmployeeId == string.Empty ? "" : this.EmployeeId)}");
+            toStringOutput.Add($"this.TeamMemberId = {(this.TeamMemberId == null ? "null" : this.TeamMemberId == string.Empty ? "" : this.TeamMemberId)}");
             toStringOutput.Add($"this.OccurredAt = {(this.OccurredAt == null ? "null" : this.OccurredAt == string.Empty ? "" : this.OccurredAt)}");
             toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt == string.Empty ? "" : this.CreatedAt)}");
         }
@@ -218,6 +230,7 @@ namespace Square.Models
                 .Quantity(this.Quantity)
                 .Source(this.Source)
                 .EmployeeId(this.EmployeeId)
+                .TeamMemberId(this.TeamMemberId)
                 .OccurredAt(this.OccurredAt)
                 .CreatedAt(this.CreatedAt);
             return builder;
@@ -237,6 +250,7 @@ namespace Square.Models
             private string quantity;
             private Models.SourceApplication source;
             private string employeeId;
+            private string teamMemberId;
             private string occurredAt;
             private string createdAt;
 
@@ -340,6 +354,17 @@ namespace Square.Models
             }
 
              /// <summary>
+             /// TeamMemberId.
+             /// </summary>
+             /// <param name="teamMemberId"> teamMemberId. </param>
+             /// <returns> Builder. </returns>
+            public Builder TeamMemberId(string teamMemberId)
+            {
+                this.teamMemberId = teamMemberId;
+                return this;
+            }
+
+             /// <summary>
              /// OccurredAt.
              /// </summary>
              /// <param name="occurredAt"> occurredAt. </param>
@@ -377,6 +402,7 @@ namespace Square.Models
                     this.quantity,
                     this.source,
                     this.employeeId,
+                    this.teamMemberId,
                     this.occurredAt,
                     this.createdAt);
             }

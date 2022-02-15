@@ -32,6 +32,7 @@ namespace Square.Models
         /// <param name="createdAt">created_at.</param>
         /// <param name="source">source.</param>
         /// <param name="employeeId">employee_id.</param>
+        /// <param name="teamMemberId">team_member_id.</param>
         public InventoryTransfer(
             string id = null,
             string referenceId = null,
@@ -44,7 +45,8 @@ namespace Square.Models
             string occurredAt = null,
             string createdAt = null,
             Models.SourceApplication source = null,
-            string employeeId = null)
+            string employeeId = null,
+            string teamMemberId = null)
         {
             this.Id = id;
             this.ReferenceId = referenceId;
@@ -58,6 +60,7 @@ namespace Square.Models
             this.CreatedAt = createdAt;
             this.Source = source;
             this.EmployeeId = employeeId;
+            this.TeamMemberId = teamMemberId;
         }
 
         /// <summary>
@@ -145,6 +148,13 @@ namespace Square.Models
         [JsonProperty("employee_id", NullValueHandling = NullValueHandling.Ignore)]
         public string EmployeeId { get; }
 
+        /// <summary>
+        /// The Square-generated ID of the [Team Member]($m/TeamMember) responsible for the
+        /// inventory transfer.
+        /// </summary>
+        [JsonProperty("team_member_id", NullValueHandling = NullValueHandling.Ignore)]
+        public string TeamMemberId { get; }
+
         /// <inheritdoc/>
         public override string ToString()
         {
@@ -180,16 +190,17 @@ namespace Square.Models
                 ((this.OccurredAt == null && other.OccurredAt == null) || (this.OccurredAt?.Equals(other.OccurredAt) == true)) &&
                 ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true)) &&
                 ((this.Source == null && other.Source == null) || (this.Source?.Equals(other.Source) == true)) &&
-                ((this.EmployeeId == null && other.EmployeeId == null) || (this.EmployeeId?.Equals(other.EmployeeId) == true));
+                ((this.EmployeeId == null && other.EmployeeId == null) || (this.EmployeeId?.Equals(other.EmployeeId) == true)) &&
+                ((this.TeamMemberId == null && other.TeamMemberId == null) || (this.TeamMemberId?.Equals(other.TeamMemberId) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -136136157;
+            int hashCode = -116753516;
             hashCode = HashCode.Combine(this.Id, this.ReferenceId, this.State, this.FromLocationId, this.ToLocationId, this.CatalogObjectId, this.CatalogObjectType);
 
-            hashCode = HashCode.Combine(hashCode, this.Quantity, this.OccurredAt, this.CreatedAt, this.Source, this.EmployeeId);
+            hashCode = HashCode.Combine(hashCode, this.Quantity, this.OccurredAt, this.CreatedAt, this.Source, this.EmployeeId, this.TeamMemberId);
 
             return hashCode;
         }
@@ -212,6 +223,7 @@ namespace Square.Models
             toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt == string.Empty ? "" : this.CreatedAt)}");
             toStringOutput.Add($"this.Source = {(this.Source == null ? "null" : this.Source.ToString())}");
             toStringOutput.Add($"this.EmployeeId = {(this.EmployeeId == null ? "null" : this.EmployeeId == string.Empty ? "" : this.EmployeeId)}");
+            toStringOutput.Add($"this.TeamMemberId = {(this.TeamMemberId == null ? "null" : this.TeamMemberId == string.Empty ? "" : this.TeamMemberId)}");
         }
 
         /// <summary>
@@ -232,7 +244,8 @@ namespace Square.Models
                 .OccurredAt(this.OccurredAt)
                 .CreatedAt(this.CreatedAt)
                 .Source(this.Source)
-                .EmployeeId(this.EmployeeId);
+                .EmployeeId(this.EmployeeId)
+                .TeamMemberId(this.TeamMemberId);
             return builder;
         }
 
@@ -253,6 +266,7 @@ namespace Square.Models
             private string createdAt;
             private Models.SourceApplication source;
             private string employeeId;
+            private string teamMemberId;
 
              /// <summary>
              /// Id.
@@ -386,6 +400,17 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// TeamMemberId.
+             /// </summary>
+             /// <param name="teamMemberId"> teamMemberId. </param>
+             /// <returns> Builder. </returns>
+            public Builder TeamMemberId(string teamMemberId)
+            {
+                this.teamMemberId = teamMemberId;
+                return this;
+            }
+
             /// <summary>
             /// Builds class object.
             /// </summary>
@@ -404,7 +429,8 @@ namespace Square.Models
                     this.occurredAt,
                     this.createdAt,
                     this.source,
-                    this.employeeId);
+                    this.employeeId,
+                    this.teamMemberId);
             }
         }
     }

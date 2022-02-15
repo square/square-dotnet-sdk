@@ -55,7 +55,7 @@ namespace Square.Models
         public string Id { get; }
 
         /// <summary>
-        /// The business name of the merchant.
+        /// The name of the merchant's overall business.
         /// </summary>
         [JsonProperty("business_name", NullValueHandling = NullValueHandling.Ignore)]
         public string BusinessName { get; }
@@ -68,7 +68,7 @@ namespace Square.Models
         public string Country { get; }
 
         /// <summary>
-        /// The language code associated with the merchant account, in BCP 47 format.
+        /// The code indicating the [language preferences](https://developer.squareup.com/docs/build-basics/general-considerations/language-preferences) of the merchant, in [BCP 47 format](https://tools.ietf.org/html/bcp47#appendix-A). For example, `en-US` or `fr-CA`.
         /// </summary>
         [JsonProperty("language_code", NullValueHandling = NullValueHandling.Ignore)]
         public string LanguageCode { get; }
@@ -87,7 +87,7 @@ namespace Square.Models
         public string Status { get; }
 
         /// <summary>
-        /// The ID of the main `Location` for this merchant.
+        /// The ID of the [main `Location`](https://developer.squareup.com/docs/locations-api#about-the-main-location) for this merchant.
         /// </summary>
         [JsonProperty("main_location_id", NullValueHandling = NullValueHandling.Ignore)]
         public string MainLocationId { get; }

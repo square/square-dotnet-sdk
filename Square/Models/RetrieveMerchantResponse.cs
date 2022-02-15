@@ -44,7 +44,7 @@ namespace Square.Models
         public IList<Models.Error> Errors { get; }
 
         /// <summary>
-        /// Represents a Square seller.
+        /// Represents a business that sells with Square.
         /// </summary>
         [JsonProperty("merchant", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Merchant Merchant { get; }

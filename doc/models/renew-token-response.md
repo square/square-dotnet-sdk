@@ -15,6 +15,7 @@
 | `MerchantId` | `string` | Optional | The ID of the authorizing merchant's business.<br>**Constraints**: *Minimum Length*: `8`, *Maximum Length*: `191` |
 | `SubscriptionId` | `string` | Optional | __LEGACY FIELD__. The ID of the merchant subscription associated with<br>the authorization. The ID is only present if the merchant signed up for a subscription<br>during authorization. |
 | `PlanId` | `string` | Optional | __LEGACY FIELD__. The ID of the subscription plan the merchant signed<br>up for. The ID is only present if the merchant signed up for a subscription plan during<br>authorization. |
+| `Errors` | [`IList<Models.Error>`](/doc/models/error.md) | Optional | An error object that provides details about how creation of the obtain<br>token failed. |
 
 ## Example (as JSON)
 

@@ -26,3 +26,31 @@ HttpRequest stores necessary information about the http request.
 | `JsonSerialize(object obj, JsonConverter converter = null)` | JSON Serialization of a given object. | `string` |
 | `JsonDeserialize<T>(string json, JsonConverter converter = null)` | JSON Deserialization of the given json string. | `T` |
 
+## JsonObject Class
+
+Class to wrap JSON object.
+
+### Methods
+
+| Name | Description | Return Type |
+|  --- | --- | --- |
+| `FromJsonString(string json)` | Initializes JsonObject instance with JSON string. | `JsonObject` |
+| `ToJsonString()` | String representation of the stored JSON. | `string` |
+
+## JsonValue Class
+
+Class to wrap any JSON value.
+
+### Methods
+
+| Name | Description | Return Type |
+|  --- | --- | --- |
+| `FromString(string value)` | Initializes JsonValue instance with string value. | `JsonValue` |
+| `FromBoolean(bool? value)` | Initializes JsonValue instance with boolean value. | `JsonValue` |
+| `FromInteger(int? value)` | Initializes JsonValue instance with integer value. | `JsonValue` |
+| `FromDouble(double? value)` | Initializes JsonValue instance with double value. | `JsonValue` |
+| `FromLong(long? value)` | Initializes JsonValue instance with long value. | `JsonValue` |
+| `FromObject(object value)` | Initializes JsonValue instance with any object value. | `JsonValue` |
+| `FromArray<T>(List<T> values)` | Initializes JsonValue instance with an array of the given type. | `JsonValue` |
+| `ToJsonString()` | String representation of the stored JSON. | `string` |
+
