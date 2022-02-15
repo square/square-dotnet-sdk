@@ -22,10 +22,13 @@ namespace Square.Models
         /// Initializes a new instance of the <see cref="RevokeTokenResponse"/> class.
         /// </summary>
         /// <param name="success">success.</param>
+        /// <param name="errors">errors.</param>
         public RevokeTokenResponse(
-            bool? success = null)
+            bool? success = null,
+            IList<Models.Error> errors = null)
         {
             this.Success = success;
+            this.Errors = errors;
         }
 
         /// <summary>
@@ -39,6 +42,13 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("success", NullValueHandling = NullValueHandling.Ignore)]
         public bool? Success { get; }
+
+        /// <summary>
+        /// An error object that provides details about how creation of the obtain
+        /// token failed.
+        /// </summary>
+        [JsonProperty("errors", NullValueHandling = NullValueHandling.Ignore)]
+        public IList<Models.Error> Errors { get; }
 
         /// <inheritdoc/>
         public override string ToString()
@@ -65,19 +75,20 @@ namespace Square.Models
 
             return obj is RevokeTokenResponse other &&
                 ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
-                ((this.Success == null && other.Success == null) || (this.Success?.Equals(other.Success) == true));
+                ((this.Success == null && other.Success == null) || (this.Success?.Equals(other.Success) == true)) &&
+                ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1055186132;
+            int hashCode = -2103509140;
 
             if (this.Context != null)
             {
                 hashCode += this.Context.GetHashCode();
             }
-            hashCode = HashCode.Combine(this.Success);
+            hashCode = HashCode.Combine(this.Success, this.Errors);
 
             return hashCode;
         }
@@ -89,6 +100,7 @@ namespace Square.Models
         protected void ToString(List<string> toStringOutput)
         {
             toStringOutput.Add($"this.Success = {(this.Success == null ? "null" : this.Success.ToString())}");
+            toStringOutput.Add($"this.Errors = {(this.Errors == null ? "null" : $"[{string.Join(", ", this.Errors)} ]")}");
         }
 
         /// <summary>
@@ -98,7 +110,8 @@ namespace Square.Models
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .Success(this.Success);
+                .Success(this.Success)
+                .Errors(this.Errors);
             return builder;
         }
 
@@ -108,6 +121,7 @@ namespace Square.Models
         public class Builder
         {
             private bool? success;
+            private IList<Models.Error> errors;
 
              /// <summary>
              /// Success.
@@ -120,6 +134,17 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// Errors.
+             /// </summary>
+             /// <param name="errors"> errors. </param>
+             /// <returns> Builder. </returns>
+            public Builder Errors(IList<Models.Error> errors)
+            {
+                this.errors = errors;
+                return this;
+            }
+
             /// <summary>
             /// Builds class object.
             /// </summary>
@@ -127,7 +152,8 @@ namespace Square.Models
             public RevokeTokenResponse Build()
             {
                 return new RevokeTokenResponse(
-                    this.success);
+                    this.success,
+                    this.errors);
             }
         }
     }

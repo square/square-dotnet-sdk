@@ -33,6 +33,7 @@ namespace Square.Models
         /// <param name="createdAt">created_at.</param>
         /// <param name="source">source.</param>
         /// <param name="employeeId">employee_id.</param>
+        /// <param name="teamMemberId">team_member_id.</param>
         /// <param name="transactionId">transaction_id.</param>
         /// <param name="refundId">refund_id.</param>
         /// <param name="purchaseOrderId">purchase_order_id.</param>
@@ -52,6 +53,7 @@ namespace Square.Models
             string createdAt = null,
             Models.SourceApplication source = null,
             string employeeId = null,
+            string teamMemberId = null,
             string transactionId = null,
             string refundId = null,
             string purchaseOrderId = null,
@@ -71,6 +73,7 @@ namespace Square.Models
             this.CreatedAt = createdAt;
             this.Source = source;
             this.EmployeeId = employeeId;
+            this.TeamMemberId = teamMemberId;
             this.TransactionId = transactionId;
             this.RefundId = refundId;
             this.PurchaseOrderId = purchaseOrderId;
@@ -174,6 +177,13 @@ namespace Square.Models
         public string EmployeeId { get; }
 
         /// <summary>
+        /// The Square-generated ID of the [Team Member]($m/TeamMember) responsible for the
+        /// inventory adjustment.
+        /// </summary>
+        [JsonProperty("team_member_id", NullValueHandling = NullValueHandling.Ignore)]
+        public string TeamMemberId { get; }
+
+        /// <summary>
         /// The Square-generated ID of the [Transaction][#type-transaction] that
         /// caused the adjustment. Only relevant for payment-related state
         /// transitions.
@@ -248,6 +258,7 @@ namespace Square.Models
                 ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true)) &&
                 ((this.Source == null && other.Source == null) || (this.Source?.Equals(other.Source) == true)) &&
                 ((this.EmployeeId == null && other.EmployeeId == null) || (this.EmployeeId?.Equals(other.EmployeeId) == true)) &&
+                ((this.TeamMemberId == null && other.TeamMemberId == null) || (this.TeamMemberId?.Equals(other.TeamMemberId) == true)) &&
                 ((this.TransactionId == null && other.TransactionId == null) || (this.TransactionId?.Equals(other.TransactionId) == true)) &&
                 ((this.RefundId == null && other.RefundId == null) || (this.RefundId?.Equals(other.RefundId) == true)) &&
                 ((this.PurchaseOrderId == null && other.PurchaseOrderId == null) || (this.PurchaseOrderId?.Equals(other.PurchaseOrderId) == true)) &&
@@ -258,12 +269,12 @@ namespace Square.Models
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -2122968944;
+            int hashCode = -1008310977;
             hashCode = HashCode.Combine(this.Id, this.ReferenceId, this.FromState, this.ToState, this.LocationId, this.CatalogObjectId, this.CatalogObjectType);
 
-            hashCode = HashCode.Combine(hashCode, this.Quantity, this.TotalPriceMoney, this.OccurredAt, this.CreatedAt, this.Source, this.EmployeeId, this.TransactionId);
+            hashCode = HashCode.Combine(hashCode, this.Quantity, this.TotalPriceMoney, this.OccurredAt, this.CreatedAt, this.Source, this.EmployeeId, this.TeamMemberId);
 
-            hashCode = HashCode.Combine(hashCode, this.RefundId, this.PurchaseOrderId, this.GoodsReceiptId, this.AdjustmentGroup);
+            hashCode = HashCode.Combine(hashCode, this.TransactionId, this.RefundId, this.PurchaseOrderId, this.GoodsReceiptId, this.AdjustmentGroup);
 
             return hashCode;
         }
@@ -287,6 +298,7 @@ namespace Square.Models
             toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt == string.Empty ? "" : this.CreatedAt)}");
             toStringOutput.Add($"this.Source = {(this.Source == null ? "null" : this.Source.ToString())}");
             toStringOutput.Add($"this.EmployeeId = {(this.EmployeeId == null ? "null" : this.EmployeeId == string.Empty ? "" : this.EmployeeId)}");
+            toStringOutput.Add($"this.TeamMemberId = {(this.TeamMemberId == null ? "null" : this.TeamMemberId == string.Empty ? "" : this.TeamMemberId)}");
             toStringOutput.Add($"this.TransactionId = {(this.TransactionId == null ? "null" : this.TransactionId == string.Empty ? "" : this.TransactionId)}");
             toStringOutput.Add($"this.RefundId = {(this.RefundId == null ? "null" : this.RefundId == string.Empty ? "" : this.RefundId)}");
             toStringOutput.Add($"this.PurchaseOrderId = {(this.PurchaseOrderId == null ? "null" : this.PurchaseOrderId == string.Empty ? "" : this.PurchaseOrderId)}");
@@ -314,6 +326,7 @@ namespace Square.Models
                 .CreatedAt(this.CreatedAt)
                 .Source(this.Source)
                 .EmployeeId(this.EmployeeId)
+                .TeamMemberId(this.TeamMemberId)
                 .TransactionId(this.TransactionId)
                 .RefundId(this.RefundId)
                 .PurchaseOrderId(this.PurchaseOrderId)
@@ -340,6 +353,7 @@ namespace Square.Models
             private string createdAt;
             private Models.SourceApplication source;
             private string employeeId;
+            private string teamMemberId;
             private string transactionId;
             private string refundId;
             private string purchaseOrderId;
@@ -490,6 +504,17 @@ namespace Square.Models
             }
 
              /// <summary>
+             /// TeamMemberId.
+             /// </summary>
+             /// <param name="teamMemberId"> teamMemberId. </param>
+             /// <returns> Builder. </returns>
+            public Builder TeamMemberId(string teamMemberId)
+            {
+                this.teamMemberId = teamMemberId;
+                return this;
+            }
+
+             /// <summary>
              /// TransactionId.
              /// </summary>
              /// <param name="transactionId"> transactionId. </param>
@@ -564,6 +589,7 @@ namespace Square.Models
                     this.createdAt,
                     this.source,
                     this.employeeId,
+                    this.teamMemberId,
                     this.transactionId,
                     this.refundId,
                     this.purchaseOrderId,

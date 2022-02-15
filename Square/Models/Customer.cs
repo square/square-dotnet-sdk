@@ -86,6 +86,8 @@ namespace Square.Models
 
         /// <summary>
         /// A unique Square-assigned ID for the customer profile.
+        /// If you need this ID for an API request, use the ID returned when you created the customer profile or call the [SearchCustomers]($e/Customers/SearchCustomers)
+        /// or [ListCustomers]($e/Customers/ListCustomers) endpoint.
         /// </summary>
         [JsonProperty("id", NullValueHandling = NullValueHandling.Ignore)]
         public string Id { get; }
@@ -205,7 +207,7 @@ namespace Square.Models
         public long? Version { get; }
 
         /// <summary>
-        /// Represents the tax ID associated with a customer profile. The corresponding `tax_ids` field is available only for customers of sellers in France, Ireland, or the United Kingdom.
+        /// Represents the tax ID associated with a [customer profile]($m/Customer). The corresponding `tax_ids` field is available only for customers of sellers in EU countries or the United Kingdom.
         /// For more information, see [Customer tax IDs](https://developer.squareup.com/docs/customers-api/what-it-does#customer-tax-ids).
         /// </summary>
         [JsonProperty("tax_ids", NullValueHandling = NullValueHandling.Ignore)]

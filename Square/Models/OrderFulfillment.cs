@@ -23,6 +23,8 @@ namespace Square.Models
         /// <param name="uid">uid.</param>
         /// <param name="type">type.</param>
         /// <param name="state">state.</param>
+        /// <param name="lineItemApplication">line_item_application.</param>
+        /// <param name="entries">entries.</param>
         /// <param name="metadata">metadata.</param>
         /// <param name="pickupDetails">pickup_details.</param>
         /// <param name="shipmentDetails">shipment_details.</param>
@@ -30,6 +32,8 @@ namespace Square.Models
             string uid = null,
             string type = null,
             string state = null,
+            string lineItemApplication = null,
+            IList<Models.OrderFulfillmentFulfillmentEntry> entries = null,
             IDictionary<string, string> metadata = null,
             Models.OrderFulfillmentPickupDetails pickupDetails = null,
             Models.OrderFulfillmentShipmentDetails shipmentDetails = null)
@@ -37,6 +41,8 @@ namespace Square.Models
             this.Uid = uid;
             this.Type = type;
             this.State = state;
+            this.LineItemApplication = lineItemApplication;
+            this.Entries = entries;
             this.Metadata = metadata;
             this.PickupDetails = pickupDetails;
             this.ShipmentDetails = shipmentDetails;
@@ -59,6 +65,27 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("state", NullValueHandling = NullValueHandling.Ignore)]
         public string State { get; }
+
+        /// <summary>
+        /// The `line_item_application` describes what order line items this fulfillment applies
+        /// to. It can be `ALL` or `ENTRY_LIST` with a supplied list of fulfillment entries.
+        /// </summary>
+        [JsonProperty("line_item_application", NullValueHandling = NullValueHandling.Ignore)]
+        public string LineItemApplication { get; }
+
+        /// <summary>
+        /// A list of entries pertaining to the fulfillment of an order. Each entry must reference
+        /// a valid `uid` for an order line item in the `line_item_uid` field, as well as a `quantity` to
+        /// fulfill.
+        /// Multiple entries can reference the same line item `uid`, as long as the total quantity among
+        /// all fulfillment entries referencing a single line item does not exceed the quantity of the
+        /// order's line item itself.
+        /// An order cannot be marked as `COMPLETED` before all fulfillments are `COMPLETED`,
+        /// `CANCELED`, or `FAILED`. Fulfillments can be created and completed independently
+        /// before order completion.
+        /// </summary>
+        [JsonProperty("entries", NullValueHandling = NullValueHandling.Ignore)]
+        public IList<Models.OrderFulfillmentFulfillmentEntry> Entries { get; }
 
         /// <summary>
         /// Application-defined data attached to this fulfillment. Metadata fields are intended
@@ -117,6 +144,8 @@ namespace Square.Models
                 ((this.Uid == null && other.Uid == null) || (this.Uid?.Equals(other.Uid) == true)) &&
                 ((this.Type == null && other.Type == null) || (this.Type?.Equals(other.Type) == true)) &&
                 ((this.State == null && other.State == null) || (this.State?.Equals(other.State) == true)) &&
+                ((this.LineItemApplication == null && other.LineItemApplication == null) || (this.LineItemApplication?.Equals(other.LineItemApplication) == true)) &&
+                ((this.Entries == null && other.Entries == null) || (this.Entries?.Equals(other.Entries) == true)) &&
                 ((this.Metadata == null && other.Metadata == null) || (this.Metadata?.Equals(other.Metadata) == true)) &&
                 ((this.PickupDetails == null && other.PickupDetails == null) || (this.PickupDetails?.Equals(other.PickupDetails) == true)) &&
                 ((this.ShipmentDetails == null && other.ShipmentDetails == null) || (this.ShipmentDetails?.Equals(other.ShipmentDetails) == true));
@@ -125,8 +154,10 @@ namespace Square.Models
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1081474364;
-            hashCode = HashCode.Combine(this.Uid, this.Type, this.State, this.Metadata, this.PickupDetails, this.ShipmentDetails);
+            int hashCode = 15891887;
+            hashCode = HashCode.Combine(this.Uid, this.Type, this.State, this.LineItemApplication, this.Entries, this.Metadata, this.PickupDetails);
+
+            hashCode = HashCode.Combine(hashCode, this.ShipmentDetails);
 
             return hashCode;
         }
@@ -140,6 +171,8 @@ namespace Square.Models
             toStringOutput.Add($"this.Uid = {(this.Uid == null ? "null" : this.Uid == string.Empty ? "" : this.Uid)}");
             toStringOutput.Add($"this.Type = {(this.Type == null ? "null" : this.Type.ToString())}");
             toStringOutput.Add($"this.State = {(this.State == null ? "null" : this.State.ToString())}");
+            toStringOutput.Add($"this.LineItemApplication = {(this.LineItemApplication == null ? "null" : this.LineItemApplication.ToString())}");
+            toStringOutput.Add($"this.Entries = {(this.Entries == null ? "null" : $"[{string.Join(", ", this.Entries)} ]")}");
             toStringOutput.Add($"Metadata = {(this.Metadata == null ? "null" : this.Metadata.ToString())}");
             toStringOutput.Add($"this.PickupDetails = {(this.PickupDetails == null ? "null" : this.PickupDetails.ToString())}");
             toStringOutput.Add($"this.ShipmentDetails = {(this.ShipmentDetails == null ? "null" : this.ShipmentDetails.ToString())}");
@@ -155,6 +188,8 @@ namespace Square.Models
                 .Uid(this.Uid)
                 .Type(this.Type)
                 .State(this.State)
+                .LineItemApplication(this.LineItemApplication)
+                .Entries(this.Entries)
                 .Metadata(this.Metadata)
                 .PickupDetails(this.PickupDetails)
                 .ShipmentDetails(this.ShipmentDetails);
@@ -169,6 +204,8 @@ namespace Square.Models
             private string uid;
             private string type;
             private string state;
+            private string lineItemApplication;
+            private IList<Models.OrderFulfillmentFulfillmentEntry> entries;
             private IDictionary<string, string> metadata;
             private Models.OrderFulfillmentPickupDetails pickupDetails;
             private Models.OrderFulfillmentShipmentDetails shipmentDetails;
@@ -203,6 +240,28 @@ namespace Square.Models
             public Builder State(string state)
             {
                 this.state = state;
+                return this;
+            }
+
+             /// <summary>
+             /// LineItemApplication.
+             /// </summary>
+             /// <param name="lineItemApplication"> lineItemApplication. </param>
+             /// <returns> Builder. </returns>
+            public Builder LineItemApplication(string lineItemApplication)
+            {
+                this.lineItemApplication = lineItemApplication;
+                return this;
+            }
+
+             /// <summary>
+             /// Entries.
+             /// </summary>
+             /// <param name="entries"> entries. </param>
+             /// <returns> Builder. </returns>
+            public Builder Entries(IList<Models.OrderFulfillmentFulfillmentEntry> entries)
+            {
+                this.entries = entries;
                 return this;
             }
 
@@ -249,6 +308,8 @@ namespace Square.Models
                     this.uid,
                     this.type,
                     this.state,
+                    this.lineItemApplication,
+                    this.entries,
                     this.metadata,
                     this.pickupDetails,
                     this.shipmentDetails);

@@ -31,7 +31,7 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// Describes a loyalty account. For more information, see
+        /// Describes a loyalty account in a [loyalty program]($m/LoyaltyProgram). For more information, see
         /// [Manage Loyalty Accounts Using the Loyalty API](https://developer.squareup.com/docs/loyalty-api/overview).
         /// </summary>
         [JsonProperty("loyalty_account")]

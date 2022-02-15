@@ -30,6 +30,7 @@ namespace Square.Models
         /// <param name="idToken">id_token.</param>
         /// <param name="refreshToken">refresh_token.</param>
         /// <param name="shortLived">short_lived.</param>
+        /// <param name="errors">errors.</param>
         public ObtainTokenResponse(
             string accessToken = null,
             string tokenType = null,
@@ -39,7 +40,8 @@ namespace Square.Models
             string planId = null,
             string idToken = null,
             string refreshToken = null,
-            bool? shortLived = null)
+            bool? shortLived = null,
+            IList<Models.Error> errors = null)
         {
             this.AccessToken = accessToken;
             this.TokenType = tokenType;
@@ -50,6 +52,7 @@ namespace Square.Models
             this.IdToken = idToken;
             this.RefreshToken = refreshToken;
             this.ShortLived = shortLived;
+            this.Errors = errors;
         }
 
         /// <summary>
@@ -120,6 +123,13 @@ namespace Square.Models
         [JsonProperty("short_lived", NullValueHandling = NullValueHandling.Ignore)]
         public bool? ShortLived { get; }
 
+        /// <summary>
+        /// An error object that provides details about how creation of the obtain
+        /// token failed.
+        /// </summary>
+        [JsonProperty("errors", NullValueHandling = NullValueHandling.Ignore)]
+        public IList<Models.Error> Errors { get; }
+
         /// <inheritdoc/>
         public override string ToString()
         {
@@ -153,13 +163,14 @@ namespace Square.Models
                 ((this.PlanId == null && other.PlanId == null) || (this.PlanId?.Equals(other.PlanId) == true)) &&
                 ((this.IdToken == null && other.IdToken == null) || (this.IdToken?.Equals(other.IdToken) == true)) &&
                 ((this.RefreshToken == null && other.RefreshToken == null) || (this.RefreshToken?.Equals(other.RefreshToken) == true)) &&
-                ((this.ShortLived == null && other.ShortLived == null) || (this.ShortLived?.Equals(other.ShortLived) == true));
+                ((this.ShortLived == null && other.ShortLived == null) || (this.ShortLived?.Equals(other.ShortLived) == true)) &&
+                ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1685690023;
+            int hashCode = -827529497;
 
             if (this.Context != null)
             {
@@ -167,7 +178,7 @@ namespace Square.Models
             }
             hashCode = HashCode.Combine(this.AccessToken, this.TokenType, this.ExpiresAt, this.MerchantId, this.SubscriptionId, this.PlanId, this.IdToken);
 
-            hashCode = HashCode.Combine(hashCode, this.RefreshToken, this.ShortLived);
+            hashCode = HashCode.Combine(hashCode, this.RefreshToken, this.ShortLived, this.Errors);
 
             return hashCode;
         }
@@ -187,6 +198,7 @@ namespace Square.Models
             toStringOutput.Add($"this.IdToken = {(this.IdToken == null ? "null" : this.IdToken == string.Empty ? "" : this.IdToken)}");
             toStringOutput.Add($"this.RefreshToken = {(this.RefreshToken == null ? "null" : this.RefreshToken == string.Empty ? "" : this.RefreshToken)}");
             toStringOutput.Add($"this.ShortLived = {(this.ShortLived == null ? "null" : this.ShortLived.ToString())}");
+            toStringOutput.Add($"this.Errors = {(this.Errors == null ? "null" : $"[{string.Join(", ", this.Errors)} ]")}");
         }
 
         /// <summary>
@@ -204,7 +216,8 @@ namespace Square.Models
                 .PlanId(this.PlanId)
                 .IdToken(this.IdToken)
                 .RefreshToken(this.RefreshToken)
-                .ShortLived(this.ShortLived);
+                .ShortLived(this.ShortLived)
+                .Errors(this.Errors);
             return builder;
         }
 
@@ -222,6 +235,7 @@ namespace Square.Models
             private string idToken;
             private string refreshToken;
             private bool? shortLived;
+            private IList<Models.Error> errors;
 
              /// <summary>
              /// AccessToken.
@@ -322,6 +336,17 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// Errors.
+             /// </summary>
+             /// <param name="errors"> errors. </param>
+             /// <returns> Builder. </returns>
+            public Builder Errors(IList<Models.Error> errors)
+            {
+                this.errors = errors;
+                return this;
+            }
+
             /// <summary>
             /// Builds class object.
             /// </summary>
@@ -337,7 +362,8 @@ namespace Square.Models
                     this.planId,
                     this.idToken,
                     this.refreshToken,
-                    this.shortLived);
+                    this.shortLived,
+                    this.errors);
             }
         }
     }

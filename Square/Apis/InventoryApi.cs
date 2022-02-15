@@ -35,7 +35,7 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Deprecated version of [RetrieveInventoryAdjustment]($e/Inventory/RetrieveInventoryAdjustment) after the endpoint URL .
+        /// Deprecated version of [RetrieveInventoryAdjustment]($e/Inventory/RetrieveInventoryAdjustment) after the endpoint URL.
         /// is updated to conform to the standard convention.
         /// </summary>
         /// <param name="adjustmentId">Required parameter: ID of the [InventoryAdjustment]($m/InventoryAdjustment) to retrieve..</param>
@@ -50,7 +50,7 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Deprecated version of [RetrieveInventoryAdjustment]($e/Inventory/RetrieveInventoryAdjustment) after the endpoint URL .
+        /// Deprecated version of [RetrieveInventoryAdjustment]($e/Inventory/RetrieveInventoryAdjustment) after the endpoint URL.
         /// is updated to conform to the standard convention.
         /// </summary>
         /// <param name="adjustmentId">Required parameter: ID of the [InventoryAdjustment]($m/InventoryAdjustment) to retrieve..</param>
@@ -181,7 +181,7 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Deprecated version of [BatchChangeInventory]($e/Inventory/BatchChangeInventory) after the endpoint URL .
+        /// Deprecated version of [BatchChangeInventory]($e/Inventory/BatchChangeInventory) after the endpoint URL.
         /// is updated to conform to the standard convention.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
@@ -196,7 +196,7 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Deprecated version of [BatchChangeInventory]($e/Inventory/BatchChangeInventory) after the endpoint URL .
+        /// Deprecated version of [BatchChangeInventory]($e/Inventory/BatchChangeInventory) after the endpoint URL.
         /// is updated to conform to the standard convention.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
@@ -253,7 +253,7 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Deprecated version of [BatchRetrieveInventoryChanges]($e/Inventory/BatchRetrieveInventoryChanges) after the endpoint URL .
+        /// Deprecated version of [BatchRetrieveInventoryChanges]($e/Inventory/BatchRetrieveInventoryChanges) after the endpoint URL.
         /// is updated to conform to the standard convention.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
@@ -268,7 +268,7 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Deprecated version of [BatchRetrieveInventoryChanges]($e/Inventory/BatchRetrieveInventoryChanges) after the endpoint URL .
+        /// Deprecated version of [BatchRetrieveInventoryChanges]($e/Inventory/BatchRetrieveInventoryChanges) after the endpoint URL.
         /// is updated to conform to the standard convention.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
@@ -325,7 +325,7 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Deprecated version of [BatchRetrieveInventoryCounts]($e/Inventory/BatchRetrieveInventoryCounts) after the endpoint URL .
+        /// Deprecated version of [BatchRetrieveInventoryCounts]($e/Inventory/BatchRetrieveInventoryCounts) after the endpoint URL.
         /// is updated to conform to the standard convention.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
@@ -340,7 +340,7 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Deprecated version of [BatchRetrieveInventoryCounts]($e/Inventory/BatchRetrieveInventoryCounts) after the endpoint URL .
+        /// Deprecated version of [BatchRetrieveInventoryCounts]($e/Inventory/BatchRetrieveInventoryCounts) after the endpoint URL.
         /// is updated to conform to the standard convention.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
@@ -633,7 +633,7 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Deprecated version of [RetrieveInventoryPhysicalCount]($e/Inventory/RetrieveInventoryPhysicalCount) after the endpoint URL .
+        /// Deprecated version of [RetrieveInventoryPhysicalCount]($e/Inventory/RetrieveInventoryPhysicalCount) after the endpoint URL.
         /// is updated to conform to the standard convention.
         /// </summary>
         /// <param name="physicalCountId">Required parameter: ID of the [InventoryPhysicalCount]($m/InventoryPhysicalCount) to retrieve..</param>
@@ -648,7 +648,7 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Deprecated version of [RetrieveInventoryPhysicalCount]($e/Inventory/RetrieveInventoryPhysicalCount) after the endpoint URL .
+        /// Deprecated version of [RetrieveInventoryPhysicalCount]($e/Inventory/RetrieveInventoryPhysicalCount) after the endpoint URL.
         /// is updated to conform to the standard convention.
         /// </summary>
         /// <param name="physicalCountId">Required parameter: ID of the [InventoryPhysicalCount]($m/InventoryPhysicalCount) to retrieve..</param>
@@ -944,12 +944,12 @@ namespace Square.Apis
         /// <summary>
         /// Returns a set of physical counts and inventory adjustments for the.
         /// provided [CatalogObject]($m/CatalogObject) at the requested.
-        /// [Location]($m/Location)s. .
-        /// You can achieve the same result by calling [BatchRetrieveInventoryChanges]($e/Inventory/BatchRetrieveInventoryChanges) .
+        /// [Location]($m/Location)s.
+        /// You can achieve the same result by calling [BatchRetrieveInventoryChanges]($e/Inventory/BatchRetrieveInventoryChanges).
         /// and having the `catalog_object_ids` list contain a single element of the `CatalogObject` ID.
         /// Results are paginated and sorted in descending order according to their.
         /// `occurred_at` timestamp (newest first).
-        /// There are no limits on how far back the caller can page. This endpoint can be .
+        /// There are no limits on how far back the caller can page. This endpoint can be.
         /// used to display recent changes for a specific item. For more.
         /// sophisticated queries, use a batch endpoint.
         /// </summary>
@@ -971,12 +971,12 @@ namespace Square.Apis
         /// <summary>
         /// Returns a set of physical counts and inventory adjustments for the.
         /// provided [CatalogObject]($m/CatalogObject) at the requested.
-        /// [Location]($m/Location)s. .
-        /// You can achieve the same result by calling [BatchRetrieveInventoryChanges]($e/Inventory/BatchRetrieveInventoryChanges) .
+        /// [Location]($m/Location)s.
+        /// You can achieve the same result by calling [BatchRetrieveInventoryChanges]($e/Inventory/BatchRetrieveInventoryChanges).
         /// and having the `catalog_object_ids` list contain a single element of the `CatalogObject` ID.
         /// Results are paginated and sorted in descending order according to their.
         /// `occurred_at` timestamp (newest first).
-        /// There are no limits on how far back the caller can page. This endpoint can be .
+        /// There are no limits on how far back the caller can page. This endpoint can be.
         /// used to display recent changes for a specific item. For more.
         /// sophisticated queries, use a batch endpoint.
         /// </summary>

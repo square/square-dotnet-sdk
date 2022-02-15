@@ -305,6 +305,14 @@ namespace Square.Utilities
                     PrepareFormFieldsFromObject(fullSubName, subValue, keys, propInfo, arrayDeserializationFormat);
                 }
             }
+            else if(value is JsonObject)
+            {
+                PrepareFormFieldsFromObject(name, RemoveNullValues((value as JsonObject).GetStoredObject()), keys, propInfo, arrayDeserializationFormat);
+            }
+            else if (value is JsonValue)
+            {
+                PrepareFormFieldsFromObject(name, (value as JsonValue).GetStoredValue(), keys, propInfo, arrayDeserializationFormat);
+            }
             else if (!value.GetType().Namespace.StartsWith("System"))
             {
                 // Custom object Iterate through its properties
@@ -644,5 +652,29 @@ namespace Square.Utilities
             var regex = new Regex("\\[\\d+\\]$", RegexOptions.IgnoreCase);
             return regex.IsMatch(input);
         }
-    }
+
+        /// <summary>
+        /// Removes null values for fields preparation for forms
+        /// </summary>
+        /// <param name="token"> Input from which null values have to be removed.</param>
+        /// <returns> JToken without null values </returns>
+        private static JToken RemoveNullValues(JToken token)
+        {
+            JObject copy = new JObject();
+            
+            foreach (JProperty prop in token.Children<JProperty>())
+            {
+                JToken child = prop.Value;
+                if (child.HasValues)
+                {
+                    child = RemoveNullValues(child);
+                }
+                if (child.Type != JTokenType.Null)
+                {
+                    copy.Add(prop.Name, child);
+                }
+            }
+
+            return copy;
+        }    }
 }
