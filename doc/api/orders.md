@@ -10,25 +10,25 @@ IOrdersApi ordersApi = client.OrdersApi;
 
 ## Methods
 
-* [Create Order](/doc/api/orders.md#create-order)
-* [Batch Retrieve Orders](/doc/api/orders.md#batch-retrieve-orders)
-* [Calculate Order](/doc/api/orders.md#calculate-order)
-* [Clone Order](/doc/api/orders.md#clone-order)
-* [Search Orders](/doc/api/orders.md#search-orders)
-* [Retrieve Order](/doc/api/orders.md#retrieve-order)
-* [Update Order](/doc/api/orders.md#update-order)
-* [Pay Order](/doc/api/orders.md#pay-order)
+* [Create Order](../../doc/api/orders.md#create-order)
+* [Batch Retrieve Orders](../../doc/api/orders.md#batch-retrieve-orders)
+* [Calculate Order](../../doc/api/orders.md#calculate-order)
+* [Clone Order](../../doc/api/orders.md#clone-order)
+* [Search Orders](../../doc/api/orders.md#search-orders)
+* [Retrieve Order](../../doc/api/orders.md#retrieve-order)
+* [Update Order](../../doc/api/orders.md#update-order)
+* [Pay Order](../../doc/api/orders.md#pay-order)
 
 
 # Create Order
 
-Creates a new [order](/doc/models/order.md) that can include information about products for
+Creates a new [order](../../doc/models/order.md) that can include information about products for
 purchase and settings to apply to the purchase.
 
 To pay for a created order, see
-[Pay for Orders](https://developer.squareup.com/docs/orders-api/pay-for-orders).
+[Pay for Orders](../../https://developer.squareup.com/docs/orders-api/pay-for-orders).
 
-You can modify open orders using the [UpdateOrder](/doc/api/orders.md#update-order) endpoint.
+You can modify open orders using the [UpdateOrder](../../doc/api/orders.md#update-order) endpoint.
 
 ```csharp
 CreateOrderAsync(
@@ -39,11 +39,11 @@ CreateOrderAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Models.CreateOrderRequest`](/doc/models/create-order-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Models.CreateOrderRequest`](../../doc/models/create-order-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
 
-[`Task<Models.CreateOrderResponse>`](/doc/models/create-order-response.md)
+[`Task<Models.CreateOrderResponse>`](../../doc/models/create-order-response.md)
 
 ## Example Usage
 
@@ -218,7 +218,7 @@ catch (ApiException e){};
 
 # Batch Retrieve Orders
 
-Retrieves a set of [orders](/doc/models/order.md) by their IDs.
+Retrieves a set of [orders](../../doc/models/order.md) by their IDs.
 
 If a given order ID does not exist, the ID is ignored instead of generating an error.
 
@@ -231,16 +231,16 @@ BatchRetrieveOrdersAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Models.BatchRetrieveOrdersRequest`](/doc/models/batch-retrieve-orders-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Models.BatchRetrieveOrdersRequest`](../../doc/models/batch-retrieve-orders-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
 
-[`Task<Models.BatchRetrieveOrdersResponse>`](/doc/models/batch-retrieve-orders-response.md)
+[`Task<Models.BatchRetrieveOrdersResponse>`](../../doc/models/batch-retrieve-orders-response.md)
 
 ## Example Usage
 
 ```csharp
-var bodyOrderIds = new List<string>();
+var bodyOrderIds = new IList<string>();
 bodyOrderIds.Add("CAISEM82RcpmcFBM0TfOyiHV3es");
 bodyOrderIds.Add("CAISENgvlJ6jLWAzERDzjyHVybY");
 var body = new BatchRetrieveOrdersRequest.Builder(
@@ -269,11 +269,11 @@ CalculateOrderAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Models.CalculateOrderRequest`](/doc/models/calculate-order-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Models.CalculateOrderRequest`](../../doc/models/calculate-order-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
 
-[`Task<Models.CalculateOrderResponse>`](/doc/models/calculate-order-response.md)
+[`Task<Models.CalculateOrderResponse>`](../../doc/models/calculate-order-response.md)
 
 ## Example Usage
 
@@ -416,11 +416,11 @@ CloneOrderAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Models.CloneOrderRequest`](/doc/models/clone-order-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Models.CloneOrderRequest`](../../doc/models/clone-order-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
 
-[`Task<Models.CloneOrderResponse>`](/doc/models/clone-order-response.md)
+[`Task<Models.CloneOrderResponse>`](../../doc/models/clone-order-response.md)
 
 ## Example Usage
 
@@ -446,13 +446,13 @@ returns, and exchanges regardless of how or when they entered the Square
 ecosystem (such as Point of Sale, Invoices, and Connect APIs).
 
 `SearchOrders` requests need to specify which locations to search and define a
-[SearchOrdersQuery](/doc/models/search-orders-query.md) object that controls
+[SearchOrdersQuery](../../doc/models/search-orders-query.md) object that controls
 how to sort or filter the results. Your `SearchOrdersQuery` can:
 
 Set filter criteria.
 Set the sort order.
 Determine whether to return results as complete `Order` objects or as
-[OrderEntry](/doc/models/order-entry.md) objects.
+[OrderEntry](../../doc/models/order-entry.md) objects.
 
 Note that details for orders processed with Square Point of Sale while in
 offline mode might not be transmitted to Square for up to 72 hours. Offline
@@ -468,19 +468,19 @@ SearchOrdersAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Models.SearchOrdersRequest`](/doc/models/search-orders-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Models.SearchOrdersRequest`](../../doc/models/search-orders-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
 
-[`Task<Models.SearchOrdersResponse>`](/doc/models/search-orders-response.md)
+[`Task<Models.SearchOrdersResponse>`](../../doc/models/search-orders-response.md)
 
 ## Example Usage
 
 ```csharp
-var bodyLocationIds = new List<string>();
+var bodyLocationIds = new IList<string>();
 bodyLocationIds.Add("057P5VYJ4A5X1");
 bodyLocationIds.Add("18YC4JDH91E1H");
-var bodyQueryFilterStateFilterStates = new List<string>();
+var bodyQueryFilterStateFilterStates = new IList<string>();
 bodyQueryFilterStateFilterStates.Add("COMPLETED");
 var bodyQueryFilterStateFilter = new SearchOrdersStateFilter.Builder(
         bodyQueryFilterStateFilterStates)
@@ -502,21 +502,21 @@ var bodyQueryFilterDateTimeFilter = new SearchOrdersDateTimeFilter.Builder()
     .UpdatedAt(bodyQueryFilterDateTimeFilterUpdatedAt)
     .ClosedAt(bodyQueryFilterDateTimeFilterClosedAt)
     .Build();
-var bodyQueryFilterFulfillmentFilterFulfillmentTypes = new List<string>();
+var bodyQueryFilterFulfillmentFilterFulfillmentTypes = new IList<string>();
 bodyQueryFilterFulfillmentFilterFulfillmentTypes.Add("SHIPMENT");
-var bodyQueryFilterFulfillmentFilterFulfillmentStates = new List<string>();
+var bodyQueryFilterFulfillmentFilterFulfillmentStates = new IList<string>();
 bodyQueryFilterFulfillmentFilterFulfillmentStates.Add("CANCELED");
 bodyQueryFilterFulfillmentFilterFulfillmentStates.Add("FAILED");
 var bodyQueryFilterFulfillmentFilter = new SearchOrdersFulfillmentFilter.Builder()
     .FulfillmentTypes(bodyQueryFilterFulfillmentFilterFulfillmentTypes)
     .FulfillmentStates(bodyQueryFilterFulfillmentFilterFulfillmentStates)
     .Build();
-var bodyQueryFilterSourceFilterSourceNames = new List<string>();
+var bodyQueryFilterSourceFilterSourceNames = new IList<string>();
 bodyQueryFilterSourceFilterSourceNames.Add("source_names8");
 var bodyQueryFilterSourceFilter = new SearchOrdersSourceFilter.Builder()
     .SourceNames(bodyQueryFilterSourceFilterSourceNames)
     .Build();
-var bodyQueryFilterCustomerFilterCustomerIds = new List<string>();
+var bodyQueryFilterCustomerFilterCustomerIds = new IList<string>();
 bodyQueryFilterCustomerFilterCustomerIds.Add("customer_ids5");
 bodyQueryFilterCustomerFilterCustomerIds.Add("customer_ids6");
 var bodyQueryFilterCustomerFilter = new SearchOrdersCustomerFilter.Builder()
@@ -555,7 +555,7 @@ catch (ApiException e){};
 
 # Retrieve Order
 
-Retrieves an [Order](/doc/models/order.md) by ID.
+Retrieves an [Order](../../doc/models/order.md) by ID.
 
 ```csharp
 RetrieveOrderAsync(
@@ -570,7 +570,7 @@ RetrieveOrderAsync(
 
 ## Response Type
 
-[`Task<Models.RetrieveOrderResponse>`](/doc/models/retrieve-order-response.md)
+[`Task<Models.RetrieveOrderResponse>`](../../doc/models/retrieve-order-response.md)
 
 ## Example Usage
 
@@ -587,21 +587,21 @@ catch (ApiException e){};
 
 # Update Order
 
-Updates an open [order](/doc/models/order.md) by adding, replacing, or deleting
+Updates an open [order](../../doc/models/order.md) by adding, replacing, or deleting
 fields. Orders with a `COMPLETED` or `CANCELED` state cannot be updated.
 
 An `UpdateOrder` request requires the following:
 
 - The `order_id` in the endpoint path, identifying the order to update.
 - The latest `version` of the order to update.
-- The [sparse order](https://developer.squareup.com/docs/orders-api/manage-orders#sparse-order-objects)
+- The [sparse order](../../https://developer.squareup.com/docs/orders-api/manage-orders#sparse-order-objects)
   containing only the fields to update and the version to which the update is
   being applied.
-- If deleting fields, the [dot notation paths](https://developer.squareup.com/docs/orders-api/manage-orders#on-dot-notation)
+- If deleting fields, the [dot notation paths](../../https://developer.squareup.com/docs/orders-api/manage-orders#on-dot-notation)
   identifying the fields to clear.
 
 To pay for an order, see
-[Pay for Orders](https://developer.squareup.com/docs/orders-api/pay-for-orders).
+[Pay for Orders](../../https://developer.squareup.com/docs/orders-api/pay-for-orders).
 
 ```csharp
 UpdateOrderAsync(
@@ -614,11 +614,11 @@ UpdateOrderAsync(
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `orderId` | `string` | Template, Required | The ID of the order to update. |
-| `body` | [`Models.UpdateOrderRequest`](/doc/models/update-order-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Models.UpdateOrderRequest`](../../doc/models/update-order-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
 
-[`Task<Models.UpdateOrderResponse>`](/doc/models/update-order-response.md)
+[`Task<Models.UpdateOrderResponse>`](../../doc/models/update-order-response.md)
 
 ## Example Usage
 
@@ -691,7 +691,7 @@ var bodyOrder = new Order.Builder(
     .CustomerId("customer_id8")
     .LineItems(bodyOrderLineItems)
     .Build();
-var bodyFieldsToClear = new List<string>();
+var bodyFieldsToClear = new IList<string>();
 bodyFieldsToClear.Add("fields_to_clear7");
 bodyFieldsToClear.Add("fields_to_clear8");
 var body = new UpdateOrderRequest.Builder()
@@ -710,7 +710,7 @@ catch (ApiException e){};
 
 # Pay Order
 
-Pay for an [order](/doc/models/order.md) using one or more approved [payments](/doc/models/payment.md)
+Pay for an [order](../../doc/models/order.md) using one or more approved [payments](../../doc/models/payment.md)
 or settle an order with a total of `0`.
 
 The total of the `payment_ids` listed in the request must be equal to the order
@@ -719,10 +719,10 @@ array of `payment_ids` in the request.
 
 To be used with `PayOrder`, a payment must:
 
-- Reference the order by specifying the `order_id` when [creating the payment](/doc/api/payments.md#create-payment).
+- Reference the order by specifying the `order_id` when [creating the payment](../../doc/api/payments.md#create-payment).
   Any approved payments that reference the same `order_id` not specified in the
   `payment_ids` is canceled.
-- Be approved with [delayed capture](https://developer.squareup.com/docs/payments-api/take-payments#delayed-capture).
+- Be approved with [delayed capture](../../https://developer.squareup.com/docs/payments-api/take-payments#delayed-capture).
   Using a delayed capture payment with `PayOrder` completes the approved payment.
 
 ```csharp
@@ -736,17 +736,17 @@ PayOrderAsync(
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `orderId` | `string` | Template, Required | The ID of the order being paid. |
-| `body` | [`Models.PayOrderRequest`](/doc/models/pay-order-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Models.PayOrderRequest`](../../doc/models/pay-order-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
 
-[`Task<Models.PayOrderResponse>`](/doc/models/pay-order-response.md)
+[`Task<Models.PayOrderResponse>`](../../doc/models/pay-order-response.md)
 
 ## Example Usage
 
 ```csharp
 string orderId = "order_id6";
-var bodyPaymentIds = new List<string>();
+var bodyPaymentIds = new IList<string>();
 bodyPaymentIds.Add("EnZdNAlWCmfh6Mt5FMNST1o7taB");
 bodyPaymentIds.Add("0LRiVlbXVwe8ozu4KbZxd12mvaB");
 var body = new PayOrderRequest.Builder(

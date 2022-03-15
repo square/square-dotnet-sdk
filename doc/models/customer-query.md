@@ -12,8 +12,8 @@ for customer profiles.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `Filter` | [`Models.CustomerFilter`](/doc/models/customer-filter.md) | Optional | Represents a set of `CustomerQuery` filters used to limit the set of<br>customers returned by the [SearchCustomers](/doc/api/customers.md#search-customers) endpoint. |
-| `Sort` | [`Models.CustomerSort`](/doc/models/customer-sort.md) | Optional | Specifies how searched customers profiles are sorted, including the sort key and sort order. |
+| `Filter` | [`Models.CustomerFilter`](../../doc/models/customer-filter.md) | Optional | Represents a set of `CustomerQuery` filters used to limit the set of<br>customers returned by the [SearchCustomers](../../doc/api/customers.md#search-customers) endpoint. |
+| `Sort` | [`Models.CustomerSort`](../../doc/models/customer-sort.md) | Optional | Specifies how searched customers profiles are sorted, including the sort key and sort order. |
 
 ## Example (as JSON)
 

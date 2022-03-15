@@ -22,7 +22,7 @@ Authorization: Bearer ACCESS_TOKEN
 ```
 
 Replace `ACCESS_TOKEN` with a
-[valid production authorization credential](https://developer.squareup.com/docs/build-basics/access-tokens).
+[valid production authorization credential](../../https://developer.squareup.com/docs/build-basics/access-tokens).
 
 ```csharp
 CreateMobileAuthorizationCodeAsync(
@@ -33,11 +33,11 @@ CreateMobileAuthorizationCodeAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Models.CreateMobileAuthorizationCodeRequest`](/doc/models/create-mobile-authorization-code-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Models.CreateMobileAuthorizationCodeRequest`](../../doc/models/create-mobile-authorization-code-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
 
-[`Task<Models.CreateMobileAuthorizationCodeResponse>`](/doc/models/create-mobile-authorization-code-response.md)
+[`Task<Models.CreateMobileAuthorizationCodeResponse>`](../../doc/models/create-mobile-authorization-code-response.md)
 
 ## Example Usage
 

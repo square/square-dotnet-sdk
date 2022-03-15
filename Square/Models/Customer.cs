@@ -108,19 +108,19 @@ namespace Square.Models
         /// Payment details of the credit, debit, and gift cards stored on file for the customer profile.
         /// DEPRECATED at version 2021-06-16. Replaced by calling [ListCards]($e/Cards/ListCards) (for credit and debit cards on file)
         /// or [ListGiftCards]($e/GiftCards/ListGiftCards) (for gift cards on file) and including the `customer_id` query parameter.
-        /// For more information, see [Migrate to the Cards API and Gift Cards API](https://developer.squareup.com/docs/customers-api/use-the-api/integrate-with-other-services#migrate-customer-cards).
+        /// For more information, see [Migration notes](https://developer.squareup.com/docs/customers-api/what-it-does#migrate-customer-cards).
         /// </summary>
         [JsonProperty("cards", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.Card> Cards { get; }
 
         /// <summary>
-        /// The given (i.e., first) name associated with the customer profile.
+        /// The given name (that is, the first name) associated with the customer profile.
         /// </summary>
         [JsonProperty("given_name", NullValueHandling = NullValueHandling.Ignore)]
         public string GivenName { get; }
 
         /// <summary>
-        /// The family (i.e., last) name associated with the customer profile.
+        /// The family name (that is, the last name) associated with the customer profile.
         /// </summary>
         [JsonProperty("family_name", NullValueHandling = NullValueHandling.Ignore)]
         public string FamilyName { get; }
@@ -151,7 +151,7 @@ namespace Square.Models
         public Models.Address Address { get; }
 
         /// <summary>
-        /// The 11-digit phone number associated with the customer profile.
+        /// The phone number associated with the customer profile. A phone number can contain 9–16 digits, with an optional `+` prefix.
         /// </summary>
         [JsonProperty("phone_number", NullValueHandling = NullValueHandling.Ignore)]
         public string PhoneNumber { get; }

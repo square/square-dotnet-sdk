@@ -189,7 +189,7 @@ namespace Square.Models
         public string PhoneNumber { get; }
 
         /// <summary>
-        /// The business name of the location.
+        /// The name of the location's overall business. This name is present on receipts and other customer-facing branding.
         /// </summary>
         [JsonProperty("business_name", NullValueHandling = NullValueHandling.Ignore)]
         public string BusinessName { get; }

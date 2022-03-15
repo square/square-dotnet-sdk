@@ -10,8 +10,8 @@ IMerchantsApi merchantsApi = client.MerchantsApi;
 
 ## Methods
 
-* [List Merchants](/doc/api/merchants.md#list-merchants)
-* [Retrieve Merchant](/doc/api/merchants.md#retrieve-merchant)
+* [List Merchants](../../doc/api/merchants.md#list-merchants)
+* [Retrieve Merchant](../../doc/api/merchants.md#retrieve-merchant)
 
 
 # List Merchants
@@ -24,7 +24,7 @@ with a single `Merchant` object. You can specify your personal access token
 to get your own merchant information or specify an OAuth token to get the
 information for the merchant that granted your application access.
 
-If you know the merchant ID, you can also use the [RetrieveMerchant](/doc/api/merchants.md#retrieve-merchant)
+If you know the merchant ID, you can also use the [RetrieveMerchant](../../doc/api/merchants.md#retrieve-merchant)
 endpoint to retrieve the merchant information.
 
 ```csharp
@@ -40,7 +40,7 @@ ListMerchantsAsync(
 
 ## Response Type
 
-[`Task<Models.ListMerchantsResponse>`](/doc/models/list-merchants-response.md)
+[`Task<Models.ListMerchantsResponse>`](../../doc/models/list-merchants-response.md)
 
 ## Example Usage
 
@@ -72,7 +72,7 @@ RetrieveMerchantAsync(
 
 ## Response Type
 
-[`Task<Models.RetrieveMerchantResponse>`](/doc/models/retrieve-merchant-response.md)
+[`Task<Models.RetrieveMerchantResponse>`](../../doc/models/retrieve-merchant-response.md)
 
 ## Example Usage
 

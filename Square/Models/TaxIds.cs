@@ -23,14 +23,17 @@ namespace Square.Models
         /// <param name="euVat">eu_vat.</param>
         /// <param name="frSiret">fr_siret.</param>
         /// <param name="frNaf">fr_naf.</param>
+        /// <param name="esNif">es_nif.</param>
         public TaxIds(
             string euVat = null,
             string frSiret = null,
-            string frNaf = null)
+            string frNaf = null,
+            string esNif = null)
         {
             this.EuVat = euVat;
             this.FrSiret = frSiret;
             this.FrNaf = frNaf;
+            this.EsNif = esNif;
         }
 
         /// <summary>
@@ -55,6 +58,13 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("fr_naf", NullValueHandling = NullValueHandling.Ignore)]
         public string FrNaf { get; }
+
+        /// <summary>
+        /// The NIF (Numero de Identificacion Fiscal) number is a 9 character tax identifier used in Spain.
+        /// If it is present, it has been validated. For example, `73628495A`.
+        /// </summary>
+        [JsonProperty("es_nif", NullValueHandling = NullValueHandling.Ignore)]
+        public string EsNif { get; }
 
         /// <inheritdoc/>
         public override string ToString()
@@ -82,14 +92,15 @@ namespace Square.Models
             return obj is TaxIds other &&
                 ((this.EuVat == null && other.EuVat == null) || (this.EuVat?.Equals(other.EuVat) == true)) &&
                 ((this.FrSiret == null && other.FrSiret == null) || (this.FrSiret?.Equals(other.FrSiret) == true)) &&
-                ((this.FrNaf == null && other.FrNaf == null) || (this.FrNaf?.Equals(other.FrNaf) == true));
+                ((this.FrNaf == null && other.FrNaf == null) || (this.FrNaf?.Equals(other.FrNaf) == true)) &&
+                ((this.EsNif == null && other.EsNif == null) || (this.EsNif?.Equals(other.EsNif) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -821356672;
-            hashCode = HashCode.Combine(this.EuVat, this.FrSiret, this.FrNaf);
+            int hashCode = 1210359385;
+            hashCode = HashCode.Combine(this.EuVat, this.FrSiret, this.FrNaf, this.EsNif);
 
             return hashCode;
         }
@@ -103,6 +114,7 @@ namespace Square.Models
             toStringOutput.Add($"this.EuVat = {(this.EuVat == null ? "null" : this.EuVat == string.Empty ? "" : this.EuVat)}");
             toStringOutput.Add($"this.FrSiret = {(this.FrSiret == null ? "null" : this.FrSiret == string.Empty ? "" : this.FrSiret)}");
             toStringOutput.Add($"this.FrNaf = {(this.FrNaf == null ? "null" : this.FrNaf == string.Empty ? "" : this.FrNaf)}");
+            toStringOutput.Add($"this.EsNif = {(this.EsNif == null ? "null" : this.EsNif == string.Empty ? "" : this.EsNif)}");
         }
 
         /// <summary>
@@ -114,7 +126,8 @@ namespace Square.Models
             var builder = new Builder()
                 .EuVat(this.EuVat)
                 .FrSiret(this.FrSiret)
-                .FrNaf(this.FrNaf);
+                .FrNaf(this.FrNaf)
+                .EsNif(this.EsNif);
             return builder;
         }
 
@@ -126,6 +139,7 @@ namespace Square.Models
             private string euVat;
             private string frSiret;
             private string frNaf;
+            private string esNif;
 
              /// <summary>
              /// EuVat.
@@ -160,6 +174,17 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// EsNif.
+             /// </summary>
+             /// <param name="esNif"> esNif. </param>
+             /// <returns> Builder. </returns>
+            public Builder EsNif(string esNif)
+            {
+                this.esNif = esNif;
+                return this;
+            }
+
             /// <summary>
             /// Builds class object.
             /// </summary>
@@ -169,7 +194,8 @@ namespace Square.Models
                 return new TaxIds(
                     this.euVat,
                     this.frSiret,
-                    this.frNaf);
+                    this.frNaf,
+                    this.esNif);
             }
         }
     }

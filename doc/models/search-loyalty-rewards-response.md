@@ -11,8 +11,8 @@ A response that includes the loyalty rewards satisfying the search criteria.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `Errors` | [`IList<Models.Error>`](/doc/models/error.md) | Optional | Any errors that occurred during the request. |
-| `Rewards` | [`IList<Models.LoyaltyReward>`](/doc/models/loyalty-reward.md) | Optional | The loyalty rewards that satisfy the search criteria.<br>These are returned in descending order by `updated_at`. |
+| `Errors` | [`IList<Models.Error>`](../../doc/models/error.md) | Optional | Any errors that occurred during the request. |
+| `Rewards` | [`IList<Models.LoyaltyReward>`](../../doc/models/loyalty-reward.md) | Optional | The loyalty rewards that satisfy the search criteria.<br>These are returned in descending order by `updated_at`. |
 | `Cursor` | `string` | Optional | The pagination cursor to be used in a subsequent<br>request. If empty, this is the final response. |
 
 ## Example (as JSON)

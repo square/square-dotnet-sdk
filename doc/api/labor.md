@@ -10,22 +10,22 @@ ILaborApi laborApi = client.LaborApi;
 
 ## Methods
 
-* [List Break Types](/doc/api/labor.md#list-break-types)
-* [Create Break Type](/doc/api/labor.md#create-break-type)
-* [Delete Break Type](/doc/api/labor.md#delete-break-type)
-* [Get Break Type](/doc/api/labor.md#get-break-type)
-* [Update Break Type](/doc/api/labor.md#update-break-type)
-* [List Employee Wages](/doc/api/labor.md#list-employee-wages)
-* [Get Employee Wage](/doc/api/labor.md#get-employee-wage)
-* [Create Shift](/doc/api/labor.md#create-shift)
-* [Search Shifts](/doc/api/labor.md#search-shifts)
-* [Delete Shift](/doc/api/labor.md#delete-shift)
-* [Get Shift](/doc/api/labor.md#get-shift)
-* [Update Shift](/doc/api/labor.md#update-shift)
-* [List Team Member Wages](/doc/api/labor.md#list-team-member-wages)
-* [Get Team Member Wage](/doc/api/labor.md#get-team-member-wage)
-* [List Workweek Configs](/doc/api/labor.md#list-workweek-configs)
-* [Update Workweek Config](/doc/api/labor.md#update-workweek-config)
+* [List Break Types](../../doc/api/labor.md#list-break-types)
+* [Create Break Type](../../doc/api/labor.md#create-break-type)
+* [Delete Break Type](../../doc/api/labor.md#delete-break-type)
+* [Get Break Type](../../doc/api/labor.md#get-break-type)
+* [Update Break Type](../../doc/api/labor.md#update-break-type)
+* [List Employee Wages](../../doc/api/labor.md#list-employee-wages)
+* [Get Employee Wage](../../doc/api/labor.md#get-employee-wage)
+* [Create Shift](../../doc/api/labor.md#create-shift)
+* [Search Shifts](../../doc/api/labor.md#search-shifts)
+* [Delete Shift](../../doc/api/labor.md#delete-shift)
+* [Get Shift](../../doc/api/labor.md#get-shift)
+* [Update Shift](../../doc/api/labor.md#update-shift)
+* [List Team Member Wages](../../doc/api/labor.md#list-team-member-wages)
+* [Get Team Member Wage](../../doc/api/labor.md#get-team-member-wage)
+* [List Workweek Configs](../../doc/api/labor.md#list-workweek-configs)
+* [Update Workweek Config](../../doc/api/labor.md#update-workweek-config)
 
 
 # List Break Types
@@ -49,7 +49,7 @@ ListBreakTypesAsync(
 
 ## Response Type
 
-[`Task<Models.ListBreakTypesResponse>`](/doc/models/list-break-types-response.md)
+[`Task<Models.ListBreakTypesResponse>`](../../doc/models/list-break-types-response.md)
 
 ## Example Usage
 
@@ -92,11 +92,11 @@ CreateBreakTypeAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Models.CreateBreakTypeRequest`](/doc/models/create-break-type-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Models.CreateBreakTypeRequest`](../../doc/models/create-break-type-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
 
-[`Task<Models.CreateBreakTypeResponse>`](/doc/models/create-break-type-response.md)
+[`Task<Models.CreateBreakTypeResponse>`](../../doc/models/create-break-type-response.md)
 
 ## Example Usage
 
@@ -143,7 +143,7 @@ DeleteBreakTypeAsync(
 
 ## Response Type
 
-[`Task<Models.DeleteBreakTypeResponse>`](/doc/models/delete-break-type-response.md)
+[`Task<Models.DeleteBreakTypeResponse>`](../../doc/models/delete-break-type-response.md)
 
 ## Example Usage
 
@@ -175,7 +175,7 @@ GetBreakTypeAsync(
 
 ## Response Type
 
-[`Task<Models.GetBreakTypeResponse>`](/doc/models/get-break-type-response.md)
+[`Task<Models.GetBreakTypeResponse>`](../../doc/models/get-break-type-response.md)
 
 ## Example Usage
 
@@ -205,11 +205,11 @@ UpdateBreakTypeAsync(
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `id` | `string` | Template, Required | The UUID for the `BreakType` being updated. |
-| `body` | [`Models.UpdateBreakTypeRequest`](/doc/models/update-break-type-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Models.UpdateBreakTypeRequest`](../../doc/models/update-break-type-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
 
-[`Task<Models.UpdateBreakTypeResponse>`](/doc/models/update-break-type-response.md)
+[`Task<Models.UpdateBreakTypeResponse>`](../../doc/models/update-break-type-response.md)
 
 ## Example Usage
 
@@ -260,7 +260,7 @@ ListEmployeeWagesAsync(
 
 ## Response Type
 
-[`Task<Models.ListEmployeeWagesResponse>`](/doc/models/list-employee-wages-response.md)
+[`Task<Models.ListEmployeeWagesResponse>`](../../doc/models/list-employee-wages-response.md)
 
 ## Example Usage
 
@@ -296,7 +296,7 @@ GetEmployeeWageAsync(
 
 ## Response Type
 
-[`Task<Models.GetEmployeeWageResponse>`](/doc/models/get-employee-wage-response.md)
+[`Task<Models.GetEmployeeWageResponse>`](../../doc/models/get-employee-wage-response.md)
 
 ## Example Usage
 
@@ -342,11 +342,11 @@ CreateShiftAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Models.CreateShiftRequest`](/doc/models/create-shift-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Models.CreateShiftRequest`](../../doc/models/create-shift-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
 
-[`Task<Models.CreateShiftResponse>`](/doc/models/create-shift-response.md)
+[`Task<Models.CreateShiftResponse>`](../../doc/models/create-shift-response.md)
 
 ## Example Usage
 
@@ -424,21 +424,21 @@ SearchShiftsAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Models.SearchShiftsRequest`](/doc/models/search-shifts-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Models.SearchShiftsRequest`](../../doc/models/search-shifts-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
 
-[`Task<Models.SearchShiftsResponse>`](/doc/models/search-shifts-response.md)
+[`Task<Models.SearchShiftsResponse>`](../../doc/models/search-shifts-response.md)
 
 ## Example Usage
 
 ```csharp
-var bodyQueryFilterLocationIds = new List<string>();
+var bodyQueryFilterLocationIds = new IList<string>();
 bodyQueryFilterLocationIds.Add("location_ids2");
-var bodyQueryFilterTeamMemberIds = new List<string>();
+var bodyQueryFilterTeamMemberIds = new IList<string>();
 bodyQueryFilterTeamMemberIds.Add("team_member_ids9");
 bodyQueryFilterTeamMemberIds.Add("team_member_ids0");
-var bodyQueryFilterEmployeeIds = new List<string>();
+var bodyQueryFilterEmployeeIds = new IList<string>();
 bodyQueryFilterEmployeeIds.Add("employee_ids7");
 var bodyQueryFilterStart = new TimeRange.Builder()
     .StartAt("start_at8")
@@ -505,7 +505,7 @@ DeleteShiftAsync(
 
 ## Response Type
 
-[`Task<Models.DeleteShiftResponse>`](/doc/models/delete-shift-response.md)
+[`Task<Models.DeleteShiftResponse>`](../../doc/models/delete-shift-response.md)
 
 ## Example Usage
 
@@ -537,7 +537,7 @@ GetShiftAsync(
 
 ## Response Type
 
-[`Task<Models.GetShiftResponse>`](/doc/models/get-shift-response.md)
+[`Task<Models.GetShiftResponse>`](../../doc/models/get-shift-response.md)
 
 ## Example Usage
 
@@ -573,11 +573,11 @@ UpdateShiftAsync(
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `id` | `string` | Template, Required | The ID of the object being updated. |
-| `body` | [`Models.UpdateShiftRequest`](/doc/models/update-shift-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Models.UpdateShiftRequest`](../../doc/models/update-shift-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
 
-[`Task<Models.UpdateShiftResponse>`](/doc/models/update-shift-response.md)
+[`Task<Models.UpdateShiftResponse>`](../../doc/models/update-shift-response.md)
 
 ## Example Usage
 
@@ -649,7 +649,7 @@ ListTeamMemberWagesAsync(
 
 ## Response Type
 
-[`Task<Models.ListTeamMemberWagesResponse>`](/doc/models/list-team-member-wages-response.md)
+[`Task<Models.ListTeamMemberWagesResponse>`](../../doc/models/list-team-member-wages-response.md)
 
 ## Example Usage
 
@@ -683,7 +683,7 @@ GetTeamMemberWageAsync(
 
 ## Response Type
 
-[`Task<Models.GetTeamMemberWageResponse>`](/doc/models/get-team-member-wage-response.md)
+[`Task<Models.GetTeamMemberWageResponse>`](../../doc/models/get-team-member-wage-response.md)
 
 ## Example Usage
 
@@ -717,7 +717,7 @@ ListWorkweekConfigsAsync(
 
 ## Response Type
 
-[`Task<Models.ListWorkweekConfigsResponse>`](/doc/models/list-workweek-configs-response.md)
+[`Task<Models.ListWorkweekConfigsResponse>`](../../doc/models/list-workweek-configs-response.md)
 
 ## Example Usage
 
@@ -748,11 +748,11 @@ UpdateWorkweekConfigAsync(
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `id` | `string` | Template, Required | The UUID for the `WorkweekConfig` object being updated. |
-| `body` | [`Models.UpdateWorkweekConfigRequest`](/doc/models/update-workweek-config-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Models.UpdateWorkweekConfigRequest`](../../doc/models/update-workweek-config-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
 
-[`Task<Models.UpdateWorkweekConfigResponse>`](/doc/models/update-workweek-config-response.md)
+[`Task<Models.UpdateWorkweekConfigResponse>`](../../doc/models/update-workweek-config-response.md)
 
 ## Example Usage
 

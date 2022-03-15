@@ -44,8 +44,7 @@ namespace Square.Models
         public bool? Success { get; }
 
         /// <summary>
-        /// An error object that provides details about how creation of the obtain
-        /// token failed.
+        /// Any errors that occurred during the request.
         /// </summary>
         [JsonProperty("errors", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.Error> Errors { get; }

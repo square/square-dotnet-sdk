@@ -12,7 +12,7 @@ a specified purchase.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `Errors` | [`IList<Models.Error>`](/doc/models/error.md) | Optional | Any errors that occurred during the request. |
+| `Errors` | [`IList<Models.Error>`](../../doc/models/error.md) | Optional | Any errors that occurred during the request. |
 | `Points` | `int?` | Optional | The points that the buyer can earn from a specified purchase. |
 
 ## Example (as JSON)

@@ -13,8 +13,8 @@ Either `errors` or `segment` is present in a given response (never both).
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `Errors` | [`IList<Models.Error>`](/doc/models/error.md) | Optional | Any errors that occurred during the request. |
-| `Segment` | [`Models.CustomerSegment`](/doc/models/customer-segment.md) | Optional | Represents a group of customer profiles that match one or more predefined filter criteria.<br><br>Segments (also known as Smart Groups) are defined and created within the Customer Directory in the<br>Square Seller Dashboard or Point of Sale. |
+| `Errors` | [`IList<Models.Error>`](../../doc/models/error.md) | Optional | Any errors that occurred during the request. |
+| `Segment` | [`Models.CustomerSegment`](../../doc/models/customer-segment.md) | Optional | Represents a group of customer profiles that match one or more predefined filter criteria.<br><br>Segments (also known as Smart Groups) are defined and created within the Customer Directory in the<br>Square Seller Dashboard or Point of Sale. |
 
 ## Example (as JSON)
 

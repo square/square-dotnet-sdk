@@ -3,7 +3,7 @@
 
 An instance of a custom attribute. Custom attributes can be defined and
 added to `ITEM` and `ITEM_VARIATION` type catalog objects.
-[Read more about custom attributes](https://developer.squareup.com/docs/catalog-api/add-custom-attributes).
+[Read more about custom attributes](../../https://developer.squareup.com/docs/catalog-api/add-custom-attributes).
 
 ## Structure
 
@@ -15,8 +15,8 @@ added to `ITEM` and `ITEM_VARIATION` type catalog objects.
 |  --- | --- | --- | --- |
 | `Name` | `string` | Optional | The name of the custom attribute. |
 | `StringValue` | `string` | Optional | The string value of the custom attribute.  Populated if `type` = `STRING`. |
-| `CustomAttributeDefinitionId` | `string` | Optional | __Read-only.__ The id of the [CatalogCustomAttributeDefinition](/doc/models/catalog-custom-attribute-definition.md) this value belongs to. |
-| `Type` | [`string`](/doc/models/catalog-custom-attribute-definition-type.md) | Optional | Defines the possible types for a custom attribute. |
+| `CustomAttributeDefinitionId` | `string` | Optional | __Read-only.__ The id of the [CatalogCustomAttributeDefinition](../../doc/models/catalog-custom-attribute-definition.md) this value belongs to. |
+| `Type` | [`string`](../../doc/models/catalog-custom-attribute-definition-type.md) | Optional | Defines the possible types for a custom attribute. |
 | `NumberValue` | `string` | Optional | Populated if `type` = `NUMBER`. Contains a string<br>representation of a decimal number, using a `.` as the decimal separator. |
 | `BooleanValue` | `bool?` | Optional | A `true` or `false` value. Populated if `type` = `BOOLEAN`. |
 | `SelectionUidValues` | `IList<string>` | Optional | One or more choices from `allowed_selections`. Populated if `type` = `SELECTION`. |

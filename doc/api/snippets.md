@@ -10,18 +10,18 @@ ISnippetsApi snippetsApi = client.SnippetsApi;
 
 ## Methods
 
-* [Delete Snippet](/doc/api/snippets.md#delete-snippet)
-* [Retrieve Snippet](/doc/api/snippets.md#retrieve-snippet)
-* [Upsert Snippet](/doc/api/snippets.md#upsert-snippet)
+* [Delete Snippet](../../doc/api/snippets.md#delete-snippet)
+* [Retrieve Snippet](../../doc/api/snippets.md#retrieve-snippet)
+* [Upsert Snippet](../../doc/api/snippets.md#upsert-snippet)
 
 
 # Delete Snippet
 
 Removes your snippet from a Square Online site.
 
-You can call [ListSites](/doc/api/sites.md#list-sites) to get the IDs of the sites that belong to a seller.
+You can call [ListSites](../../doc/api/sites.md#list-sites) to get the IDs of the sites that belong to a seller.
 
-__Note:__ Square Online APIs are publicly available as part of an early access program. For more information, see [Early access program for Square Online APIs](https://developer.squareup.com/docs/online-api#early-access-program-for-square-online-apis).
+__Note:__ Square Online APIs are publicly available as part of an early access program. For more information, see [Early access program for Square Online APIs](../../https://developer.squareup.com/docs/online-api#early-access-program-for-square-online-apis).
 
 ```csharp
 DeleteSnippetAsync(
@@ -36,7 +36,7 @@ DeleteSnippetAsync(
 
 ## Response Type
 
-[`Task<Models.DeleteSnippetResponse>`](/doc/models/delete-snippet-response.md)
+[`Task<Models.DeleteSnippetResponse>`](../../doc/models/delete-snippet-response.md)
 
 ## Example Usage
 
@@ -55,9 +55,9 @@ catch (ApiException e){};
 
 Retrieves your snippet from a Square Online site. A site can contain snippets from multiple snippet applications, but you can retrieve only the snippet that was added by your application.
 
-You can call [ListSites](/doc/api/sites.md#list-sites) to get the IDs of the sites that belong to a seller.
+You can call [ListSites](../../doc/api/sites.md#list-sites) to get the IDs of the sites that belong to a seller.
 
-__Note:__ Square Online APIs are publicly available as part of an early access program. For more information, see [Early access program for Square Online APIs](https://developer.squareup.com/docs/online-api#early-access-program-for-square-online-apis).
+__Note:__ Square Online APIs are publicly available as part of an early access program. For more information, see [Early access program for Square Online APIs](../../https://developer.squareup.com/docs/online-api#early-access-program-for-square-online-apis).
 
 ```csharp
 RetrieveSnippetAsync(
@@ -72,7 +72,7 @@ RetrieveSnippetAsync(
 
 ## Response Type
 
-[`Task<Models.RetrieveSnippetResponse>`](/doc/models/retrieve-snippet-response.md)
+[`Task<Models.RetrieveSnippetResponse>`](../../doc/models/retrieve-snippet-response.md)
 
 ## Example Usage
 
@@ -92,9 +92,9 @@ catch (ApiException e){};
 Adds a snippet to a Square Online site or updates the existing snippet on the site.
 The snippet code is appended to the end of the `head` element on every page of the site, except checkout pages. A snippet application can add one snippet to a given site.
 
-You can call [ListSites](/doc/api/sites.md#list-sites) to get the IDs of the sites that belong to a seller.
+You can call [ListSites](../../doc/api/sites.md#list-sites) to get the IDs of the sites that belong to a seller.
 
-__Note:__ Square Online APIs are publicly available as part of an early access program. For more information, see [Early access program for Square Online APIs](https://developer.squareup.com/docs/online-api#early-access-program-for-square-online-apis).
+__Note:__ Square Online APIs are publicly available as part of an early access program. For more information, see [Early access program for Square Online APIs](../../https://developer.squareup.com/docs/online-api#early-access-program-for-square-online-apis).
 
 ```csharp
 UpsertSnippetAsync(
@@ -107,11 +107,11 @@ UpsertSnippetAsync(
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `siteId` | `string` | Template, Required | The ID of the site where you want to add or update the snippet. |
-| `body` | [`Models.UpsertSnippetRequest`](/doc/models/upsert-snippet-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Models.UpsertSnippetRequest`](../../doc/models/upsert-snippet-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
 
-[`Task<Models.UpsertSnippetResponse>`](/doc/models/upsert-snippet-response.md)
+[`Task<Models.UpsertSnippetResponse>`](../../doc/models/upsert-snippet-response.md)
 
 ## Example Usage
 

@@ -12,8 +12,8 @@ a request to the `BatchRetrieveOrders` endpoint.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `Orders` | [`IList<Models.Order>`](/doc/models/order.md) | Optional | The requested orders. This will omit any requested orders that do not exist. |
-| `Errors` | [`IList<Models.Error>`](/doc/models/error.md) | Optional | Any errors that occurred during the request. |
+| `Orders` | [`IList<Models.Order>`](../../doc/models/order.md) | Optional | The requested orders. This will omit any requested orders that do not exist. |
+| `Errors` | [`IList<Models.Error>`](../../doc/models/error.md) | Optional | Any errors that occurred during the request. |
 
 ## Example (as JSON)
 

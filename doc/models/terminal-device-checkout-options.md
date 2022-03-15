@@ -10,7 +10,7 @@
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `SkipReceiptScreen` | `bool?` | Optional | Instructs the device to skip the receipt screen. Defaults to false. |
-| `TipSettings` | [`Models.TipSettings`](/doc/models/tip-settings.md) | Optional | - |
+| `TipSettings` | [`Models.TipSettings`](../../doc/models/tip-settings.md) | Optional | - |
 
 ## Example (as JSON)
 

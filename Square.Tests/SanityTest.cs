@@ -88,13 +88,15 @@ namespace Square.Tests
                 .Builder(GenerateIdempotencyKey(), GenerateCatalogImage())
                 .Build();
 
-            // Using MemoryStream instead of FileStream for testing purpose
-            var response = api.CreateCatalogImage(request, new Http.Client.FileStreamInfo(new MemoryStream()));
-            Assert.IsNotNull(response.Image.ImageData.Url);
+            using (FileStream fs = File.OpenRead("../../../resources/square.png"))
+            {
+                var response = api.CreateCatalogImage(request, new Http.Client.FileStreamInfo(fs));
+                Assert.IsNotNull(response.Image.ImageData.Url);
 
-            // Clean up the test
-            var createdImageId = response.Image.Id;
-            api.DeleteCatalogObject(createdImageId);
+                // Clean up the test
+                var createdImageId = response.Image.Id;
+                api.DeleteCatalogObject(createdImageId);
+            }
         }
 
         // We are addressing an issue associated with this test at the moment 20191202

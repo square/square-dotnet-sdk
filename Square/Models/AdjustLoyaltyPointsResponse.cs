@@ -45,7 +45,7 @@ namespace Square.Models
 
         /// <summary>
         /// Provides information about a loyalty event.
-        /// For more information, see [Loyalty events](https://developer.squareup.com/docs/loyalty-api/overview/#loyalty-events).
+        /// For more information, see [Search for Balance-Changing Loyalty Events](https://developer.squareup.com/docs/loyalty-api/loyalty-events).
         /// </summary>
         [JsonProperty("event", NullValueHandling = NullValueHandling.Ignore)]
         public Models.LoyaltyEvent MEvent { get; }

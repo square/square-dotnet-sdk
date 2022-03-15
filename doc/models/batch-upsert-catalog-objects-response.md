@@ -9,10 +9,10 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `Errors` | [`IList<Models.Error>`](/doc/models/error.md) | Optional | Any errors that occurred during the request. |
-| `Objects` | [`IList<Models.CatalogObject>`](/doc/models/catalog-object.md) | Optional | The created successfully created CatalogObjects. |
-| `UpdatedAt` | `string` | Optional | The database [timestamp](https://developer.squareup.com/docs/build-basics/working-with-dates) of this update in RFC 3339 format, e.g., "2016-09-04T23:59:33.123Z". |
-| `IdMappings` | [`IList<Models.CatalogIdMapping>`](/doc/models/catalog-id-mapping.md) | Optional | The mapping between client and server IDs for this upsert. |
+| `Errors` | [`IList<Models.Error>`](../../doc/models/error.md) | Optional | Any errors that occurred during the request. |
+| `Objects` | [`IList<Models.CatalogObject>`](../../doc/models/catalog-object.md) | Optional | The created successfully created CatalogObjects. |
+| `UpdatedAt` | `string` | Optional | The database [timestamp](../../https://developer.squareup.com/docs/build-basics/working-with-dates) of this update in RFC 3339 format, e.g., "2016-09-04T23:59:33.123Z". |
+| `IdMappings` | [`IList<Models.CatalogIdMapping>`](../../doc/models/catalog-id-mapping.md) | Optional | The mapping between client and server IDs for this upsert. |
 
 ## Example (as JSON)
 

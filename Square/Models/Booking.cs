@@ -109,7 +109,7 @@ namespace Square.Models
         public string StartAt { get; }
 
         /// <summary>
-        /// The ID of the [Location]($m/Location) object representing the location where the booked service is provided.
+        /// The ID of the [Location]($m/Location) object representing the location where the booked service is provided. Once set when the booking is created, its value cannot be changed.
         /// </summary>
         [JsonProperty("location_id", NullValueHandling = NullValueHandling.Ignore)]
         public string LocationId { get; }

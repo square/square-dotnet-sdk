@@ -44,7 +44,9 @@ namespace Square.Models
         public IList<Models.Error> Errors { get; }
 
         /// <summary>
-        /// Gets or sets BankAccount.
+        /// Represents a bank account. For more information about
+        /// linking a bank account to a Square account, see
+        /// [Bank Accounts API](https://developer.squareup.com/docs/bank-accounts-api).
         /// </summary>
         [JsonProperty("bank_account", NullValueHandling = NullValueHandling.Ignore)]
         public Models.BankAccount BankAccount { get; }

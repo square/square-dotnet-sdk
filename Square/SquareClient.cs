@@ -79,6 +79,7 @@ namespace Square
         private readonly Lazy<ISubscriptionsApi> subscriptions;
         private readonly Lazy<ITeamApi> team;
         private readonly Lazy<ITerminalApi> terminal;
+        private readonly Lazy<IVendorsApi> vendors;
 
         private SquareClient(
             string squareVersion,
@@ -168,6 +169,8 @@ namespace Square
                 () => new TeamApi(this, this.httpClient, this.authManagers, this.httpCallBack));
             this.terminal = new Lazy<ITerminalApi>(
                 () => new TerminalApi(this, this.httpClient, this.authManagers, this.httpCallBack));
+            this.vendors = new Lazy<IVendorsApi>(
+                () => new VendorsApi(this, this.httpClient, this.authManagers, this.httpCallBack));
 
             if (this.authManagers.ContainsKey("global"))
             {
@@ -348,6 +351,11 @@ namespace Square
         public ITerminalApi TerminalApi => this.terminal.Value;
 
         /// <summary>
+        /// Gets VendorsApi.
+        /// </summary>
+        public IVendorsApi VendorsApi => this.vendors.Value;
+
+        /// <summary>
         /// Gets the additional headers.
         /// </summary>
         public IDictionary<string, List<string>> AdditionalHeaders => this.additionalHeaders.ToDictionary(s => s.Key, s => new List<string>(s.Value));
@@ -355,7 +363,7 @@ namespace Square
         /// <summary>
         /// Gets the current version of the SDK.
         /// </summary>
-        public string SdkVersion => "17.2.0";
+        public string SdkVersion => "17.3.0";
 
         /// <summary>
         /// Gets the configuration of the Http Client associated with this client.
@@ -512,7 +520,7 @@ namespace Square
         /// </summary>
         public class Builder
         {
-            private string squareVersion = "2022-02-16";
+            private string squareVersion = "2022-03-16";
             private string userAgentDetail = null;
             private Environment environment = Square.Environment.Production;
             private string customUrl = "https://connect.squareup.com";

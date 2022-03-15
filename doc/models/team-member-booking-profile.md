@@ -11,11 +11,11 @@ The booking profile of a seller's team member, including the team member's ID, d
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `TeamMemberId` | `string` | Optional | The ID of the [TeamMember](/doc/models/team-member.md) object for the team member associated with the booking profile. |
-| `Description` | `string` | Optional | The description of the team member. |
-| `DisplayName` | `string` | Optional | The display name of the team member. |
+| `TeamMemberId` | `string` | Optional | The ID of the [TeamMember](../../doc/models/team-member.md) object for the team member associated with the booking profile.<br>**Constraints**: *Maximum Length*: `32` |
+| `Description` | `string` | Optional | The description of the team member.<br>**Constraints**: *Maximum Length*: `65536` |
+| `DisplayName` | `string` | Optional | The display name of the team member.<br>**Constraints**: *Maximum Length*: `512` |
 | `IsBookable` | `bool?` | Optional | Indicates whether the team member can be booked through the Bookings API or the seller's online booking channel or site (`true) or not (`false`). |
-| `ProfileImageUrl` | `string` | Optional | The URL of the team member's image for the bookings profile. |
+| `ProfileImageUrl` | `string` | Optional | The URL of the team member's image for the bookings profile.<br>**Constraints**: *Maximum Length*: `2048` |
 
 ## Example (as JSON)
 

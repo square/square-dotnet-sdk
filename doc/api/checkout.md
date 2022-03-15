@@ -26,11 +26,11 @@ CreateCheckoutAsync(
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `locationId` | `string` | Template, Required | The ID of the business location to associate the checkout with. |
-| `body` | [`Models.CreateCheckoutRequest`](/doc/models/create-checkout-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Models.CreateCheckoutRequest`](../../doc/models/create-checkout-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
 
-[`Task<Models.CreateCheckoutResponse>`](/doc/models/create-checkout-response.md)
+[`Task<Models.CreateCheckoutResponse>`](../../doc/models/create-checkout-response.md)
 
 ## Example Usage
 
