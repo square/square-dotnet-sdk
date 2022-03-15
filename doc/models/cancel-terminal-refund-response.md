@@ -9,8 +9,8 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `Errors` | [`IList<Models.Error>`](/doc/models/error.md) | Optional | Information about errors encountered during the request. |
-| `Refund` | [`Models.TerminalRefund`](/doc/models/terminal-refund.md) | Optional | - |
+| `Errors` | [`IList<Models.Error>`](../../doc/models/error.md) | Optional | Information about errors encountered during the request. |
+| `Refund` | [`Models.TerminalRefund`](../../doc/models/terminal-refund.md) | Optional | - |
 
 ## Example (as JSON)
 

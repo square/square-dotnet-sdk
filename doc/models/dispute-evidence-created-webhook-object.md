@@ -9,7 +9,7 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `MObject` | [`Models.Dispute`](/doc/models/dispute.md) | Optional | Represents a dispute a cardholder initiated with their bank. |
+| `MObject` | [`Models.Dispute`](../../doc/models/dispute.md) | Optional | Represents a dispute a cardholder initiated with their bank. |
 
 ## Example (as JSON)
 

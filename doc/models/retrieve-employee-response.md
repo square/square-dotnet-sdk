@@ -9,8 +9,8 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `Employee` | [`Models.Employee`](/doc/models/employee.md) | Optional | An employee object that is used by the external API. |
-| `Errors` | [`IList<Models.Error>`](/doc/models/error.md) | Optional | Any errors that occurred during the request. |
+| `Employee` | [`Models.Employee`](../../doc/models/employee.md) | Optional | An employee object that is used by the external API. |
+| `Errors` | [`IList<Models.Error>`](../../doc/models/error.md) | Optional | Any errors that occurred during the request. |
 
 ## Example (as JSON)
 

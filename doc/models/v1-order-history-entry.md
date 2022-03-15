@@ -11,7 +11,7 @@ V1OrderHistoryEntry
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `Action` | [`string`](/doc/models/v1-order-history-entry-action.md) | Optional | - |
+| `Action` | [`string`](../../doc/models/v1-order-history-entry-action.md) | Optional | - |
 | `CreatedAt` | `string` | Optional | The time when the action was performed, in ISO 8601 format. |
 
 ## Example (as JSON)

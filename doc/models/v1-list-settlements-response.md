@@ -9,7 +9,7 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `Items` | [`IList<Models.V1Settlement>`](/doc/models/v1-settlement.md) | Optional | - |
+| `Items` | [`IList<Models.V1Settlement>`](../../doc/models/v1-settlement.md) | Optional | - |
 
 ## Example (as JSON)
 

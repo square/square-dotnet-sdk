@@ -10,9 +10,9 @@ IDevicesApi devicesApi = client.DevicesApi;
 
 ## Methods
 
-* [List Device Codes](/doc/api/devices.md#list-device-codes)
-* [Create Device Code](/doc/api/devices.md#create-device-code)
-* [Get Device Code](/doc/api/devices.md#get-device-code)
+* [List Device Codes](../../doc/api/devices.md#list-device-codes)
+* [Create Device Code](../../doc/api/devices.md#create-device-code)
+* [Get Device Code](../../doc/api/devices.md#get-device-code)
 
 
 # List Device Codes
@@ -31,14 +31,14 @@ ListDeviceCodesAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `cursor` | `string` | Query, Optional | A pagination cursor returned by a previous call to this endpoint.<br>Provide this to retrieve the next set of results for your original query.<br><br>See [Paginating results](https://developer.squareup.com/docs/working-with-apis/pagination) for more information. |
+| `cursor` | `string` | Query, Optional | A pagination cursor returned by a previous call to this endpoint.<br>Provide this to retrieve the next set of results for your original query.<br><br>See [Paginating results](../../https://developer.squareup.com/docs/working-with-apis/pagination) for more information. |
 | `locationId` | `string` | Query, Optional | If specified, only returns DeviceCodes of the specified location.<br>Returns DeviceCodes of all locations if empty. |
-| `productType` | [`string`](/doc/models/product-type.md) | Query, Optional | If specified, only returns DeviceCodes targeting the specified product type.<br>Returns DeviceCodes of all product types if empty. |
-| `status` | [`string`](/doc/models/device-code-status.md) | Query, Optional | If specified, returns DeviceCodes with the specified statuses.<br>Returns DeviceCodes of status `PAIRED` and `UNPAIRED` if empty. |
+| `productType` | [`string`](../../doc/models/product-type.md) | Query, Optional | If specified, only returns DeviceCodes targeting the specified product type.<br>Returns DeviceCodes of all product types if empty. |
+| `status` | [`string`](../../doc/models/device-code-status.md) | Query, Optional | If specified, returns DeviceCodes with the specified statuses.<br>Returns DeviceCodes of status `PAIRED` and `UNPAIRED` if empty. |
 
 ## Response Type
 
-[`Task<Models.ListDeviceCodesResponse>`](/doc/models/list-device-codes-response.md)
+[`Task<Models.ListDeviceCodesResponse>`](../../doc/models/list-device-codes-response.md)
 
 ## Example Usage
 
@@ -70,11 +70,11 @@ CreateDeviceCodeAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Models.CreateDeviceCodeRequest`](/doc/models/create-device-code-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Models.CreateDeviceCodeRequest`](../../doc/models/create-device-code-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
 
-[`Task<Models.CreateDeviceCodeResponse>`](/doc/models/create-device-code-response.md)
+[`Task<Models.CreateDeviceCodeResponse>`](../../doc/models/create-device-code-response.md)
 
 ## Example Usage
 
@@ -117,7 +117,7 @@ GetDeviceCodeAsync(
 
 ## Response Type
 
-[`Task<Models.GetDeviceCodeResponse>`](/doc/models/get-device-code-response.md)
+[`Task<Models.GetDeviceCodeResponse>`](../../doc/models/get-device-code-response.md)
 
 ## Example Usage
 

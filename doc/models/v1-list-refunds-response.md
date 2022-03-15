@@ -9,7 +9,7 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `Items` | [`IList<Models.V1Refund>`](/doc/models/v1-refund.md) | Optional | - |
+| `Items` | [`IList<Models.V1Refund>`](../../doc/models/v1-refund.md) | Optional | - |
 
 ## Example (as JSON)
 

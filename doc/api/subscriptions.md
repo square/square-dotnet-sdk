@@ -10,16 +10,16 @@ ISubscriptionsApi subscriptionsApi = client.SubscriptionsApi;
 
 ## Methods
 
-* [Create Subscription](/doc/api/subscriptions.md#create-subscription)
-* [Search Subscriptions](/doc/api/subscriptions.md#search-subscriptions)
-* [Retrieve Subscription](/doc/api/subscriptions.md#retrieve-subscription)
-* [Update Subscription](/doc/api/subscriptions.md#update-subscription)
-* [Delete Subscription Action](/doc/api/subscriptions.md#delete-subscription-action)
-* [Cancel Subscription](/doc/api/subscriptions.md#cancel-subscription)
-* [List Subscription Events](/doc/api/subscriptions.md#list-subscription-events)
-* [Pause Subscription](/doc/api/subscriptions.md#pause-subscription)
-* [Resume Subscription](/doc/api/subscriptions.md#resume-subscription)
-* [Swap Plan](/doc/api/subscriptions.md#swap-plan)
+* [Create Subscription](../../doc/api/subscriptions.md#create-subscription)
+* [Search Subscriptions](../../doc/api/subscriptions.md#search-subscriptions)
+* [Retrieve Subscription](../../doc/api/subscriptions.md#retrieve-subscription)
+* [Update Subscription](../../doc/api/subscriptions.md#update-subscription)
+* [Delete Subscription Action](../../doc/api/subscriptions.md#delete-subscription-action)
+* [Cancel Subscription](../../doc/api/subscriptions.md#cancel-subscription)
+* [List Subscription Events](../../doc/api/subscriptions.md#list-subscription-events)
+* [Pause Subscription](../../doc/api/subscriptions.md#pause-subscription)
+* [Resume Subscription](../../doc/api/subscriptions.md#resume-subscription)
+* [Swap Plan](../../doc/api/subscriptions.md#swap-plan)
 
 
 # Create Subscription
@@ -40,11 +40,11 @@ CreateSubscriptionAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Models.CreateSubscriptionRequest`](/doc/models/create-subscription-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Models.CreateSubscriptionRequest`](../../doc/models/create-subscription-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
 
-[`Task<Models.CreateSubscriptionResponse>`](/doc/models/create-subscription-response.md)
+[`Task<Models.CreateSubscriptionResponse>`](../../doc/models/create-subscription-response.md)
 
 ## Example Usage
 
@@ -96,7 +96,7 @@ first by location, within location by customer ID, and within
 customer by subscription creation date.
 
 For more information, see
-[Retrieve subscriptions](https://developer.squareup.com/docs/subscriptions-api/overview#retrieve-subscriptions).
+[Retrieve subscriptions](../../https://developer.squareup.com/docs/subscriptions-api/overview#retrieve-subscriptions).
 
 ```csharp
 SearchSubscriptionsAsync(
@@ -107,20 +107,20 @@ SearchSubscriptionsAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Models.SearchSubscriptionsRequest`](/doc/models/search-subscriptions-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Models.SearchSubscriptionsRequest`](../../doc/models/search-subscriptions-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
 
-[`Task<Models.SearchSubscriptionsResponse>`](/doc/models/search-subscriptions-response.md)
+[`Task<Models.SearchSubscriptionsResponse>`](../../doc/models/search-subscriptions-response.md)
 
 ## Example Usage
 
 ```csharp
-var bodyQueryFilterCustomerIds = new List<string>();
+var bodyQueryFilterCustomerIds = new IList<string>();
 bodyQueryFilterCustomerIds.Add("CHFGVKYY8RSV93M5KCYTG4PN0G");
-var bodyQueryFilterLocationIds = new List<string>();
+var bodyQueryFilterLocationIds = new IList<string>();
 bodyQueryFilterLocationIds.Add("S8GWD5R9QB376");
-var bodyQueryFilterSourceNames = new List<string>();
+var bodyQueryFilterSourceNames = new IList<string>();
 bodyQueryFilterSourceNames.Add("My App");
 var bodyQueryFilter = new SearchSubscriptionsFilter.Builder()
     .CustomerIds(bodyQueryFilterCustomerIds)
@@ -130,7 +130,7 @@ var bodyQueryFilter = new SearchSubscriptionsFilter.Builder()
 var bodyQuery = new SearchSubscriptionsQuery.Builder()
     .Filter(bodyQueryFilter)
     .Build();
-var bodyInclude = new List<string>();
+var bodyInclude = new IList<string>();
 bodyInclude.Add("include4");
 bodyInclude.Add("include5");
 bodyInclude.Add("include6");
@@ -168,7 +168,7 @@ RetrieveSubscriptionAsync(
 
 ## Response Type
 
-[`Task<Models.RetrieveSubscriptionResponse>`](/doc/models/retrieve-subscription-response.md)
+[`Task<Models.RetrieveSubscriptionResponse>`](../../doc/models/retrieve-subscription-response.md)
 
 ## Example Usage
 
@@ -200,11 +200,11 @@ UpdateSubscriptionAsync(
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `subscriptionId` | `string` | Template, Required | The ID of the subscription to update. |
-| `body` | [`Models.UpdateSubscriptionRequest`](/doc/models/update-subscription-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Models.UpdateSubscriptionRequest`](../../doc/models/update-subscription-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
 
-[`Task<Models.UpdateSubscriptionResponse>`](/doc/models/update-subscription-response.md)
+[`Task<Models.UpdateSubscriptionResponse>`](../../doc/models/update-subscription-response.md)
 
 ## Example Usage
 
@@ -255,7 +255,7 @@ DeleteSubscriptionActionAsync(
 
 ## Response Type
 
-[`Task<Models.DeleteSubscriptionActionResponse>`](/doc/models/delete-subscription-action-response.md)
+[`Task<Models.DeleteSubscriptionActionResponse>`](../../doc/models/delete-subscription-action-response.md)
 
 ## Example Usage
 
@@ -290,7 +290,7 @@ CancelSubscriptionAsync(
 
 ## Response Type
 
-[`Task<Models.CancelSubscriptionResponse>`](/doc/models/cancel-subscription-response.md)
+[`Task<Models.CancelSubscriptionResponse>`](../../doc/models/cancel-subscription-response.md)
 
 ## Example Usage
 
@@ -322,12 +322,12 @@ ListSubscriptionEventsAsync(
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `subscriptionId` | `string` | Template, Required | The ID of the subscription to retrieve the events for. |
-| `cursor` | `string` | Query, Optional | When the total number of resulting subscription events exceeds the limit of a paged response,<br>specify the cursor returned from a preceding response here to fetch the next set of results.<br>If the cursor is unset, the response contains the last page of the results.<br><br>For more information, see [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination). |
+| `cursor` | `string` | Query, Optional | When the total number of resulting subscription events exceeds the limit of a paged response,<br>specify the cursor returned from a preceding response here to fetch the next set of results.<br>If the cursor is unset, the response contains the last page of the results.<br><br>For more information, see [Pagination](../../https://developer.squareup.com/docs/working-with-apis/pagination). |
 | `limit` | `int?` | Query, Optional | The upper limit on the number of subscription events to return<br>in a paged response. |
 
 ## Response Type
 
-[`Task<Models.ListSubscriptionEventsResponse>`](/doc/models/list-subscription-events-response.md)
+[`Task<Models.ListSubscriptionEventsResponse>`](../../doc/models/list-subscription-events-response.md)
 
 ## Example Usage
 
@@ -359,11 +359,11 @@ PauseSubscriptionAsync(
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `subscriptionId` | `string` | Template, Required | The ID of the subscription to pause. |
-| `body` | [`Models.PauseSubscriptionRequest`](/doc/models/pause-subscription-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Models.PauseSubscriptionRequest`](../../doc/models/pause-subscription-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
 
-[`Task<Models.PauseSubscriptionResponse>`](/doc/models/pause-subscription-response.md)
+[`Task<Models.PauseSubscriptionResponse>`](../../doc/models/pause-subscription-response.md)
 
 ## Example Usage
 
@@ -400,11 +400,11 @@ ResumeSubscriptionAsync(
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `subscriptionId` | `string` | Template, Required | The ID of the subscription to resume. |
-| `body` | [`Models.ResumeSubscriptionRequest`](/doc/models/resume-subscription-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Models.ResumeSubscriptionRequest`](../../doc/models/resume-subscription-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
 
-[`Task<Models.ResumeSubscriptionResponse>`](/doc/models/resume-subscription-response.md)
+[`Task<Models.ResumeSubscriptionResponse>`](../../doc/models/resume-subscription-response.md)
 
 ## Example Usage
 
@@ -438,11 +438,11 @@ SwapPlanAsync(
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `subscriptionId` | `string` | Template, Required | The ID of the subscription to swap the subscription plan for. |
-| `body` | [`Models.SwapPlanRequest`](/doc/models/swap-plan-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Models.SwapPlanRequest`](../../doc/models/swap-plan-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
 
-[`Task<Models.SwapPlanResponse>`](/doc/models/swap-plan-response.md)
+[`Task<Models.SwapPlanResponse>`](../../doc/models/swap-plan-response.md)
 
 ## Example Usage
 

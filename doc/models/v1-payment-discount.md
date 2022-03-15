@@ -12,7 +12,7 @@ V1PaymentDiscount
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `Name` | `string` | Optional | The discount's name. |
-| `AppliedMoney` | [`Models.V1Money`](/doc/models/v1-money.md) | Optional | - |
+| `AppliedMoney` | [`Models.V1Money`](../../doc/models/v1-money.md) | Optional | - |
 | `DiscountId` | `string` | Optional | The ID of the applied discount, if available. Discounts applied in older versions of Square Register might not have an ID. |
 
 ## Example (as JSON)

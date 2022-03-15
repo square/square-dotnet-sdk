@@ -10,14 +10,14 @@ IInvoicesApi invoicesApi = client.InvoicesApi;
 
 ## Methods
 
-* [List Invoices](/doc/api/invoices.md#list-invoices)
-* [Create Invoice](/doc/api/invoices.md#create-invoice)
-* [Search Invoices](/doc/api/invoices.md#search-invoices)
-* [Delete Invoice](/doc/api/invoices.md#delete-invoice)
-* [Get Invoice](/doc/api/invoices.md#get-invoice)
-* [Update Invoice](/doc/api/invoices.md#update-invoice)
-* [Cancel Invoice](/doc/api/invoices.md#cancel-invoice)
-* [Publish Invoice](/doc/api/invoices.md#publish-invoice)
+* [List Invoices](../../doc/api/invoices.md#list-invoices)
+* [Create Invoice](../../doc/api/invoices.md#create-invoice)
+* [Search Invoices](../../doc/api/invoices.md#search-invoices)
+* [Delete Invoice](../../doc/api/invoices.md#delete-invoice)
+* [Get Invoice](../../doc/api/invoices.md#get-invoice)
+* [Update Invoice](../../doc/api/invoices.md#update-invoice)
+* [Cancel Invoice](../../doc/api/invoices.md#cancel-invoice)
+* [Publish Invoice](../../doc/api/invoices.md#publish-invoice)
 
 
 # List Invoices
@@ -38,12 +38,12 @@ ListInvoicesAsync(
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `locationId` | `string` | Query, Required | The ID of the location for which to list invoices. |
-| `cursor` | `string` | Query, Optional | A pagination cursor returned by a previous call to this endpoint.<br>Provide this cursor to retrieve the next set of results for your original query.<br><br>For more information, see [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination). |
+| `cursor` | `string` | Query, Optional | A pagination cursor returned by a previous call to this endpoint.<br>Provide this cursor to retrieve the next set of results for your original query.<br><br>For more information, see [Pagination](../../https://developer.squareup.com/docs/working-with-apis/pagination). |
 | `limit` | `int?` | Query, Optional | The maximum number of invoices to return (200 is the maximum `limit`).<br>If not provided, the server uses a default limit of 100 invoices. |
 
 ## Response Type
 
-[`Task<Models.ListInvoicesResponse>`](/doc/models/list-invoices-response.md)
+[`Task<Models.ListInvoicesResponse>`](../../doc/models/list-invoices-response.md)
 
 ## Example Usage
 
@@ -62,7 +62,7 @@ catch (ApiException e){};
 
 # Create Invoice
 
-Creates a draft [invoice](/doc/models/invoice.md)
+Creates a draft [invoice](../../doc/models/invoice.md)
 for an order created using the Orders API.
 
 A draft invoice remains in your account and no action is taken.
@@ -77,11 +77,11 @@ CreateInvoiceAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Models.CreateInvoiceRequest`](/doc/models/create-invoice-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Models.CreateInvoiceRequest`](../../doc/models/create-invoice-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
 
-[`Task<Models.CreateInvoiceResponse>`](/doc/models/create-invoice-response.md)
+[`Task<Models.CreateInvoiceResponse>`](../../doc/models/create-invoice-response.md)
 
 ## Example Usage
 
@@ -198,18 +198,18 @@ SearchInvoicesAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Models.SearchInvoicesRequest`](/doc/models/search-invoices-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Models.SearchInvoicesRequest`](../../doc/models/search-invoices-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
 
-[`Task<Models.SearchInvoicesResponse>`](/doc/models/search-invoices-response.md)
+[`Task<Models.SearchInvoicesResponse>`](../../doc/models/search-invoices-response.md)
 
 ## Example Usage
 
 ```csharp
-var bodyQueryFilterLocationIds = new List<string>();
+var bodyQueryFilterLocationIds = new IList<string>();
 bodyQueryFilterLocationIds.Add("ES0RJRZYEC39A");
-var bodyQueryFilterCustomerIds = new List<string>();
+var bodyQueryFilterCustomerIds = new IList<string>();
 bodyQueryFilterCustomerIds.Add("JDKYHBWT1D4F8MFH63DBMEN8Y4");
 var bodyQueryFilter = new InvoiceFilter.Builder(
         bodyQueryFilterLocationIds)
@@ -254,11 +254,11 @@ DeleteInvoiceAsync(
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `invoiceId` | `string` | Template, Required | The ID of the invoice to delete. |
-| `version` | `int?` | Query, Optional | The version of the [invoice](/doc/models/invoice.md) to delete.<br>If you do not know the version, you can call [GetInvoice](/doc/api/invoices.md#get-invoice) or<br>[ListInvoices](/doc/api/invoices.md#list-invoices). |
+| `version` | `int?` | Query, Optional | The version of the [invoice](../../doc/models/invoice.md) to delete.<br>If you do not know the version, you can call [GetInvoice](../../doc/api/invoices.md#get-invoice) or<br>[ListInvoices](../../doc/api/invoices.md#list-invoices). |
 
 ## Response Type
 
-[`Task<Models.DeleteInvoiceResponse>`](/doc/models/delete-invoice-response.md)
+[`Task<Models.DeleteInvoiceResponse>`](../../doc/models/delete-invoice-response.md)
 
 ## Example Usage
 
@@ -291,7 +291,7 @@ GetInvoiceAsync(
 
 ## Response Type
 
-[`Task<Models.GetInvoiceResponse>`](/doc/models/get-invoice-response.md)
+[`Task<Models.GetInvoiceResponse>`](../../doc/models/get-invoice-response.md)
 
 ## Example Usage
 
@@ -324,11 +324,11 @@ UpdateInvoiceAsync(
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `invoiceId` | `string` | Template, Required | The ID of the invoice to update. |
-| `body` | [`Models.UpdateInvoiceRequest`](/doc/models/update-invoice-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Models.UpdateInvoiceRequest`](../../doc/models/update-invoice-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
 
-[`Task<Models.UpdateInvoiceResponse>`](/doc/models/update-invoice-response.md)
+[`Task<Models.UpdateInvoiceResponse>`](../../doc/models/update-invoice-response.md)
 
 ## Example Usage
 
@@ -372,7 +372,7 @@ var bodyInvoice = new Invoice.Builder()
     .PrimaryRecipient(bodyInvoicePrimaryRecipient)
     .PaymentRequests(bodyInvoicePaymentRequests)
     .Build();
-var bodyFieldsToClear = new List<string>();
+var bodyFieldsToClear = new IList<string>();
 bodyFieldsToClear.Add("payments_requests[2da7964f-f3d2-4f43-81e8-5aa220bf3355].reminders");
 var body = new UpdateInvoiceRequest.Builder(
         bodyInvoice)
@@ -405,12 +405,12 @@ CancelInvoiceAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `invoiceId` | `string` | Template, Required | The ID of the [invoice](/doc/models/invoice.md) to cancel. |
-| `body` | [`Models.CancelInvoiceRequest`](/doc/models/cancel-invoice-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `invoiceId` | `string` | Template, Required | The ID of the [invoice](../../doc/models/invoice.md) to cancel. |
+| `body` | [`Models.CancelInvoiceRequest`](../../doc/models/cancel-invoice-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
 
-[`Task<Models.CancelInvoiceResponse>`](/doc/models/cancel-invoice-response.md)
+[`Task<Models.CancelInvoiceResponse>`](../../doc/models/cancel-invoice-response.md)
 
 ## Example Usage
 
@@ -453,11 +453,11 @@ PublishInvoiceAsync(
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `invoiceId` | `string` | Template, Required | The ID of the invoice to publish. |
-| `body` | [`Models.PublishInvoiceRequest`](/doc/models/publish-invoice-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Models.PublishInvoiceRequest`](../../doc/models/publish-invoice-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
 
-[`Task<Models.PublishInvoiceResponse>`](/doc/models/publish-invoice-response.md)
+[`Task<Models.PublishInvoiceResponse>`](../../doc/models/publish-invoice-response.md)
 
 ## Example Usage
 

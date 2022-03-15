@@ -10,8 +10,8 @@ IEmployeesApi employeesApi = client.EmployeesApi;
 
 ## Methods
 
-* [List Employees](/doc/api/employees.md#list-employees)
-* [Retrieve Employee](/doc/api/employees.md#retrieve-employee)
+* [List Employees](../../doc/api/employees.md#list-employees)
+* [Retrieve Employee](../../doc/api/employees.md#retrieve-employee)
 
 
 # List Employees
@@ -33,13 +33,13 @@ ListEmployeesAsync(
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `locationId` | `string` | Query, Optional | - |
-| `status` | [`string`](/doc/models/employee-status.md) | Query, Optional | Specifies the EmployeeStatus to filter the employee by. |
+| `status` | [`string`](../../doc/models/employee-status.md) | Query, Optional | Specifies the EmployeeStatus to filter the employee by. |
 | `limit` | `int?` | Query, Optional | The number of employees to be returned on each page. |
 | `cursor` | `string` | Query, Optional | The token required to retrieve the specified page of results. |
 
 ## Response Type
 
-[`Task<Models.ListEmployeesResponse>`](/doc/models/list-employees-response.md)
+[`Task<Models.ListEmployeesResponse>`](../../doc/models/list-employees-response.md)
 
 ## Example Usage
 
@@ -76,7 +76,7 @@ RetrieveEmployeeAsync(
 
 ## Response Type
 
-[`Task<Models.RetrieveEmployeeResponse>`](/doc/models/retrieve-employee-response.md)
+[`Task<Models.RetrieveEmployeeResponse>`](../../doc/models/retrieve-employee-response.md)
 
 ## Example Usage
 

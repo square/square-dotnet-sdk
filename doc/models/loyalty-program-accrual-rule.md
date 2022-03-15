@@ -11,12 +11,12 @@ Defines an accrual rule, which is how buyers can earn points.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `AccrualType` | [`string`](/doc/models/loyalty-program-accrual-rule-type.md) | Required | The type of the accrual rule that defines how buyers can earn points. |
+| `AccrualType` | [`string`](../../doc/models/loyalty-program-accrual-rule-type.md) | Required | The type of the accrual rule that defines how buyers can earn points. |
 | `Points` | `int?` | Optional | The number of points that<br>buyers earn based on the `accrual_type`.<br>**Constraints**: `>= 1` |
-| `VisitData` | [`Models.LoyaltyProgramAccrualRuleVisitData`](/doc/models/loyalty-program-accrual-rule-visit-data.md) | Optional | Represents additional data for rules with the `VISIT` accrual type. |
-| `SpendData` | [`Models.LoyaltyProgramAccrualRuleSpendData`](/doc/models/loyalty-program-accrual-rule-spend-data.md) | Optional | Represents additional data for rules with the `SPEND` accrual type. |
-| `ItemVariationData` | [`Models.LoyaltyProgramAccrualRuleItemVariationData`](/doc/models/loyalty-program-accrual-rule-item-variation-data.md) | Optional | Represents additional data for rules with the `ITEM_VARIATION` accrual type. |
-| `CategoryData` | [`Models.LoyaltyProgramAccrualRuleCategoryData`](/doc/models/loyalty-program-accrual-rule-category-data.md) | Optional | Represents additional data for rules with the `CATEGORY` accrual type. |
+| `VisitData` | [`Models.LoyaltyProgramAccrualRuleVisitData`](../../doc/models/loyalty-program-accrual-rule-visit-data.md) | Optional | Represents additional data for rules with the `VISIT` accrual type. |
+| `SpendData` | [`Models.LoyaltyProgramAccrualRuleSpendData`](../../doc/models/loyalty-program-accrual-rule-spend-data.md) | Optional | Represents additional data for rules with the `SPEND` accrual type. |
+| `ItemVariationData` | [`Models.LoyaltyProgramAccrualRuleItemVariationData`](../../doc/models/loyalty-program-accrual-rule-item-variation-data.md) | Optional | Represents additional data for rules with the `ITEM_VARIATION` accrual type. |
+| `CategoryData` | [`Models.LoyaltyProgramAccrualRuleCategoryData`](../../doc/models/loyalty-program-accrual-rule-category-data.md) | Optional | Represents additional data for rules with the `CATEGORY` accrual type. |
 
 ## Example (as JSON)
 

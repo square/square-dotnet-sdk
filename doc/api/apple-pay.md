@@ -19,7 +19,7 @@ This endpoint provides an easy way for platform developers to bulk activate
 Apple Pay on the Web with Square for merchants using their platform.
 
 To learn more about Web Apple Pay, see
-[Add the Apple Pay on the Web Button](https://developer.squareup.com/docs/payment-form/add-digital-wallets/apple-pay).
+[Add the Apple Pay on the Web Button](../../https://developer.squareup.com/docs/payment-form/add-digital-wallets/apple-pay).
 
 ```csharp
 RegisterDomainAsync(
@@ -30,11 +30,11 @@ RegisterDomainAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Models.RegisterDomainRequest`](/doc/models/register-domain-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Models.RegisterDomainRequest`](../../doc/models/register-domain-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
 
-[`Task<Models.RegisterDomainResponse>`](/doc/models/register-domain-response.md)
+[`Task<Models.RegisterDomainResponse>`](../../doc/models/register-domain-response.md)
 
 ## Example Usage
 

@@ -13,9 +13,9 @@ the request resulted in errors.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `Shifts` | [`IList<Models.Shift>`](/doc/models/shift.md) | Optional | Shifts. |
+| `Shifts` | [`IList<Models.Shift>`](../../doc/models/shift.md) | Optional | Shifts. |
 | `Cursor` | `string` | Optional | An opaque cursor for fetching the next page. |
-| `Errors` | [`IList<Models.Error>`](/doc/models/error.md) | Optional | Any errors that occurred during the request. |
+| `Errors` | [`IList<Models.Error>`](../../doc/models/error.md) | Optional | Any errors that occurred during the request. |
 
 ## Example (as JSON)
 

@@ -76,7 +76,7 @@ namespace Square.Models
         public string EvidenceText { get; }
 
         /// <summary>
-        /// The time when the next action is due, in RFC 3339 format.
+        /// The time when the evidence was uploaded, in RFC 3339 format.
         /// </summary>
         [JsonProperty("uploaded_at", NullValueHandling = NullValueHandling.Ignore)]
         public string UploadedAt { get; }

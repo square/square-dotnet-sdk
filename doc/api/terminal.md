@@ -10,14 +10,14 @@ ITerminalApi terminalApi = client.TerminalApi;
 
 ## Methods
 
-* [Create Terminal Checkout](/doc/api/terminal.md#create-terminal-checkout)
-* [Search Terminal Checkouts](/doc/api/terminal.md#search-terminal-checkouts)
-* [Get Terminal Checkout](/doc/api/terminal.md#get-terminal-checkout)
-* [Cancel Terminal Checkout](/doc/api/terminal.md#cancel-terminal-checkout)
-* [Create Terminal Refund](/doc/api/terminal.md#create-terminal-refund)
-* [Search Terminal Refunds](/doc/api/terminal.md#search-terminal-refunds)
-* [Get Terminal Refund](/doc/api/terminal.md#get-terminal-refund)
-* [Cancel Terminal Refund](/doc/api/terminal.md#cancel-terminal-refund)
+* [Create Terminal Checkout](../../doc/api/terminal.md#create-terminal-checkout)
+* [Search Terminal Checkouts](../../doc/api/terminal.md#search-terminal-checkouts)
+* [Get Terminal Checkout](../../doc/api/terminal.md#get-terminal-checkout)
+* [Cancel Terminal Checkout](../../doc/api/terminal.md#cancel-terminal-checkout)
+* [Create Terminal Refund](../../doc/api/terminal.md#create-terminal-refund)
+* [Search Terminal Refunds](../../doc/api/terminal.md#search-terminal-refunds)
+* [Get Terminal Refund](../../doc/api/terminal.md#get-terminal-refund)
+* [Cancel Terminal Refund](../../doc/api/terminal.md#cancel-terminal-refund)
 
 
 # Create Terminal Checkout
@@ -34,11 +34,11 @@ CreateTerminalCheckoutAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Models.CreateTerminalCheckoutRequest`](/doc/models/create-terminal-checkout-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Models.CreateTerminalCheckoutRequest`](../../doc/models/create-terminal-checkout-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
 
-[`Task<Models.CreateTerminalCheckoutResponse>`](/doc/models/create-terminal-checkout-response.md)
+[`Task<Models.CreateTerminalCheckoutResponse>`](../../doc/models/create-terminal-checkout-response.md)
 
 ## Example Usage
 
@@ -47,7 +47,7 @@ var bodyCheckoutAmountMoney = new Money.Builder()
     .Amount(2610L)
     .Currency("USD")
     .Build();
-var bodyCheckoutDeviceOptionsTipSettingsTipPercentages = new List<int?>();
+var bodyCheckoutDeviceOptionsTipSettingsTipPercentages = new IList<int>();
 bodyCheckoutDeviceOptionsTipSettingsTipPercentages.Add(148);
 bodyCheckoutDeviceOptionsTipSettingsTipPercentages.Add(149);
 bodyCheckoutDeviceOptionsTipSettingsTipPercentages.Add(150);
@@ -98,11 +98,11 @@ SearchTerminalCheckoutsAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Models.SearchTerminalCheckoutsRequest`](/doc/models/search-terminal-checkouts-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Models.SearchTerminalCheckoutsRequest`](../../doc/models/search-terminal-checkouts-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
 
-[`Task<Models.SearchTerminalCheckoutsResponse>`](/doc/models/search-terminal-checkouts-response.md)
+[`Task<Models.SearchTerminalCheckoutsResponse>`](../../doc/models/search-terminal-checkouts-response.md)
 
 ## Example Usage
 
@@ -154,7 +154,7 @@ GetTerminalCheckoutAsync(
 
 ## Response Type
 
-[`Task<Models.GetTerminalCheckoutResponse>`](/doc/models/get-terminal-checkout-response.md)
+[`Task<Models.GetTerminalCheckoutResponse>`](../../doc/models/get-terminal-checkout-response.md)
 
 ## Example Usage
 
@@ -186,7 +186,7 @@ CancelTerminalCheckoutAsync(
 
 ## Response Type
 
-[`Task<Models.CancelTerminalCheckoutResponse>`](/doc/models/cancel-terminal-checkout-response.md)
+[`Task<Models.CancelTerminalCheckoutResponse>`](../../doc/models/cancel-terminal-checkout-response.md)
 
 ## Example Usage
 
@@ -214,11 +214,11 @@ CreateTerminalRefundAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Models.CreateTerminalRefundRequest`](/doc/models/create-terminal-refund-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Models.CreateTerminalRefundRequest`](../../doc/models/create-terminal-refund-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
 
-[`Task<Models.CreateTerminalRefundResponse>`](/doc/models/create-terminal-refund-response.md)
+[`Task<Models.CreateTerminalRefundResponse>`](../../doc/models/create-terminal-refund-response.md)
 
 ## Example Usage
 
@@ -262,11 +262,11 @@ SearchTerminalRefundsAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Models.SearchTerminalRefundsRequest`](/doc/models/search-terminal-refunds-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Models.SearchTerminalRefundsRequest`](../../doc/models/search-terminal-refunds-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
 
-[`Task<Models.SearchTerminalRefundsResponse>`](/doc/models/search-terminal-refunds-response.md)
+[`Task<Models.SearchTerminalRefundsResponse>`](../../doc/models/search-terminal-refunds-response.md)
 
 ## Example Usage
 
@@ -318,7 +318,7 @@ GetTerminalRefundAsync(
 
 ## Response Type
 
-[`Task<Models.GetTerminalRefundResponse>`](/doc/models/get-terminal-refund-response.md)
+[`Task<Models.GetTerminalRefundResponse>`](../../doc/models/get-terminal-refund-response.md)
 
 ## Example Usage
 
@@ -350,7 +350,7 @@ CancelTerminalRefundAsync(
 
 ## Response Type
 
-[`Task<Models.CancelTerminalRefundResponse>`](/doc/models/cancel-terminal-refund-response.md)
+[`Task<Models.CancelTerminalRefundResponse>`](../../doc/models/cancel-terminal-refund-response.md)
 
 ## Example Usage
 

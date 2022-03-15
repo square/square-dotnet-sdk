@@ -10,9 +10,9 @@ IOAuthApi oAuthApi = client.OAuthApi;
 
 ## Methods
 
-* [Renew Token](/doc/api/o-auth.md#renew-token)
-* [Revoke Token](/doc/api/o-auth.md#revoke-token)
-* [Obtain Token](/doc/api/o-auth.md#obtain-token)
+* [Renew Token](../../doc/api/o-auth.md#renew-token)
+* [Revoke Token](../../doc/api/o-auth.md#revoke-token)
+* [Obtain Token](../../doc/api/o-auth.md#obtain-token)
 
 
 # Renew Token
@@ -20,7 +20,7 @@ IOAuthApi oAuthApi = client.OAuthApi;
 **This endpoint is deprecated.**
 
 `RenewToken` is deprecated. For information about refreshing OAuth access tokens, see
-[Migrate from Renew to Refresh OAuth Tokens](https://developer.squareup.com/docs/oauth-api/migrate-to-refresh-tokens).
+[Migrate from Renew to Refresh OAuth Tokens](../../https://developer.squareup.com/docs/oauth-api/migrate-to-refresh-tokens).
 
 Renews an OAuth access token before it expires.
 
@@ -37,7 +37,7 @@ Authorization: Client APPLICATION_SECRET
 ```
 
 Replace `APPLICATION_SECRET` with the application secret on the Credentials
-page in the [Developer Dashboard](https://developer.squareup.com/apps).
+page in the [Developer Dashboard](../../https://developer.squareup.com/apps).
 
 :information_source: **Note** This endpoint does not require authentication.
 
@@ -52,13 +52,13 @@ RenewTokenAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `clientId` | `string` | Template, Required | Your application ID, which is available in the OAuth page in the [Developer Dashboard](https://developer.squareup.com/apps). |
-| `body` | [`Models.RenewTokenRequest`](/doc/models/renew-token-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `clientId` | `string` | Template, Required | Your application ID, which is available in the OAuth page in the [Developer Dashboard](../../https://developer.squareup.com/apps). |
+| `body` | [`Models.RenewTokenRequest`](../../doc/models/renew-token-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 | `authorization` | `string` | Header, Required | Client APPLICATION_SECRET |
 
 ## Response Type
 
-[`Task<Models.RenewTokenResponse>`](/doc/models/renew-token-response.md)
+[`Task<Models.RenewTokenResponse>`](../../doc/models/renew-token-response.md)
 
 ## Example Usage
 
@@ -108,12 +108,12 @@ RevokeTokenAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Models.RevokeTokenRequest`](/doc/models/revoke-token-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Models.RevokeTokenRequest`](../../doc/models/revoke-token-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 | `authorization` | `string` | Header, Required | Client APPLICATION_SECRET |
 
 ## Response Type
 
-[`Task<Models.RevokeTokenResponse>`](/doc/models/revoke-token-response.md)
+[`Task<Models.RevokeTokenResponse>`](../../doc/models/revoke-token-response.md)
 
 ## Example Usage
 
@@ -165,16 +165,16 @@ ObtainTokenAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Models.ObtainTokenRequest`](/doc/models/obtain-token-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Models.ObtainTokenRequest`](../../doc/models/obtain-token-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
 
-[`Task<Models.ObtainTokenResponse>`](/doc/models/obtain-token-response.md)
+[`Task<Models.ObtainTokenResponse>`](../../doc/models/obtain-token-response.md)
 
 ## Example Usage
 
 ```csharp
-var bodyScopes = new List<string>();
+var bodyScopes = new IList<string>();
 bodyScopes.Add("scopes6");
 bodyScopes.Add("scopes7");
 bodyScopes.Add("scopes8");

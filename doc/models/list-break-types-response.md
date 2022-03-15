@@ -13,9 +13,9 @@ the request resulted in errors.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `BreakTypes` | [`IList<Models.BreakType>`](/doc/models/break-type.md) | Optional | A page of `BreakType` results. |
+| `BreakTypes` | [`IList<Models.BreakType>`](../../doc/models/break-type.md) | Optional | A page of `BreakType` results. |
 | `Cursor` | `string` | Optional | The value supplied in the subsequent request to fetch the next page<br>of `BreakType` results. |
-| `Errors` | [`IList<Models.Error>`](/doc/models/error.md) | Optional | Any errors that occurred during the request. |
+| `Errors` | [`IList<Models.Error>`](../../doc/models/error.md) | Optional | Any errors that occurred during the request. |
 
 ## Example (as JSON)
 

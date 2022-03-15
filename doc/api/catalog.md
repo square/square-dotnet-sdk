@@ -10,29 +10,29 @@ ICatalogApi catalogApi = client.CatalogApi;
 
 ## Methods
 
-* [Batch Delete Catalog Objects](/doc/api/catalog.md#batch-delete-catalog-objects)
-* [Batch Retrieve Catalog Objects](/doc/api/catalog.md#batch-retrieve-catalog-objects)
-* [Batch Upsert Catalog Objects](/doc/api/catalog.md#batch-upsert-catalog-objects)
-* [Create Catalog Image](/doc/api/catalog.md#create-catalog-image)
-* [Update Catalog Image](/doc/api/catalog.md#update-catalog-image)
-* [Catalog Info](/doc/api/catalog.md#catalog-info)
-* [List Catalog](/doc/api/catalog.md#list-catalog)
-* [Upsert Catalog Object](/doc/api/catalog.md#upsert-catalog-object)
-* [Delete Catalog Object](/doc/api/catalog.md#delete-catalog-object)
-* [Retrieve Catalog Object](/doc/api/catalog.md#retrieve-catalog-object)
-* [Search Catalog Objects](/doc/api/catalog.md#search-catalog-objects)
-* [Search Catalog Items](/doc/api/catalog.md#search-catalog-items)
-* [Update Item Modifier Lists](/doc/api/catalog.md#update-item-modifier-lists)
-* [Update Item Taxes](/doc/api/catalog.md#update-item-taxes)
+* [Batch Delete Catalog Objects](../../doc/api/catalog.md#batch-delete-catalog-objects)
+* [Batch Retrieve Catalog Objects](../../doc/api/catalog.md#batch-retrieve-catalog-objects)
+* [Batch Upsert Catalog Objects](../../doc/api/catalog.md#batch-upsert-catalog-objects)
+* [Create Catalog Image](../../doc/api/catalog.md#create-catalog-image)
+* [Update Catalog Image](../../doc/api/catalog.md#update-catalog-image)
+* [Catalog Info](../../doc/api/catalog.md#catalog-info)
+* [List Catalog](../../doc/api/catalog.md#list-catalog)
+* [Upsert Catalog Object](../../doc/api/catalog.md#upsert-catalog-object)
+* [Delete Catalog Object](../../doc/api/catalog.md#delete-catalog-object)
+* [Retrieve Catalog Object](../../doc/api/catalog.md#retrieve-catalog-object)
+* [Search Catalog Objects](../../doc/api/catalog.md#search-catalog-objects)
+* [Search Catalog Items](../../doc/api/catalog.md#search-catalog-items)
+* [Update Item Modifier Lists](../../doc/api/catalog.md#update-item-modifier-lists)
+* [Update Item Taxes](../../doc/api/catalog.md#update-item-taxes)
 
 
 # Batch Delete Catalog Objects
 
-Deletes a set of [CatalogItem](/doc/models/catalog-item.md)s based on the
+Deletes a set of [CatalogItem](../../doc/models/catalog-item.md)s based on the
 provided list of target IDs and returns a set of successfully deleted IDs in
 the response. Deletion is a cascading event such that all children of the
 targeted object are also deleted. For example, deleting a CatalogItem will
-also delete all of its [CatalogItemVariation](/doc/models/catalog-item-variation.md)
+also delete all of its [CatalogItemVariation](../../doc/models/catalog-item-variation.md)
 children.
 
 `BatchDeleteCatalogObjects` succeeds even if only a portion of the targeted
@@ -48,16 +48,16 @@ BatchDeleteCatalogObjectsAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Models.BatchDeleteCatalogObjectsRequest`](/doc/models/batch-delete-catalog-objects-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Models.BatchDeleteCatalogObjectsRequest`](../../doc/models/batch-delete-catalog-objects-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
 
-[`Task<Models.BatchDeleteCatalogObjectsResponse>`](/doc/models/batch-delete-catalog-objects-response.md)
+[`Task<Models.BatchDeleteCatalogObjectsResponse>`](../../doc/models/batch-delete-catalog-objects-response.md)
 
 ## Example Usage
 
 ```csharp
-var bodyObjectIds = new List<string>();
+var bodyObjectIds = new IList<string>();
 bodyObjectIds.Add("W62UWFY35CWMYGVWK6TWJDNI");
 bodyObjectIds.Add("AA27W3M2GGTF3H6AVPNB77CK");
 var body = new BatchDeleteCatalogObjectsRequest.Builder()
@@ -75,11 +75,11 @@ catch (ApiException e){};
 # Batch Retrieve Catalog Objects
 
 Returns a set of objects based on the provided ID.
-Each [CatalogItem](/doc/models/catalog-item.md) returned in the set includes all of its
+Each [CatalogItem](../../doc/models/catalog-item.md) returned in the set includes all of its
 child information including: all of its
-[CatalogItemVariation](/doc/models/catalog-item-variation.md) objects, references to
-its [CatalogModifierList](/doc/models/catalog-modifier-list.md) objects, and the ids of
-any [CatalogTax](/doc/models/catalog-tax.md) objects that apply to it.
+[CatalogItemVariation](../../doc/models/catalog-item-variation.md) objects, references to
+its [CatalogModifierList](../../doc/models/catalog-modifier-list.md) objects, and the ids of
+any [CatalogTax](../../doc/models/catalog-tax.md) objects that apply to it.
 
 ```csharp
 BatchRetrieveCatalogObjectsAsync(
@@ -90,16 +90,16 @@ BatchRetrieveCatalogObjectsAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Models.BatchRetrieveCatalogObjectsRequest`](/doc/models/batch-retrieve-catalog-objects-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Models.BatchRetrieveCatalogObjectsRequest`](../../doc/models/batch-retrieve-catalog-objects-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
 
-[`Task<Models.BatchRetrieveCatalogObjectsResponse>`](/doc/models/batch-retrieve-catalog-objects-response.md)
+[`Task<Models.BatchRetrieveCatalogObjectsResponse>`](../../doc/models/batch-retrieve-catalog-objects-response.md)
 
 ## Example Usage
 
 ```csharp
-var bodyObjectIds = new List<string>();
+var bodyObjectIds = new IList<string>();
 bodyObjectIds.Add("W62UWFY35CWMYGVWK6TWJDNI");
 bodyObjectIds.Add("AA27W3M2GGTF3H6AVPNB77CK");
 var body = new BatchRetrieveCatalogObjectsRequest.Builder(
@@ -137,11 +137,11 @@ BatchUpsertCatalogObjectsAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Models.BatchUpsertCatalogObjectsRequest`](/doc/models/batch-upsert-catalog-objects-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Models.BatchUpsertCatalogObjectsRequest`](../../doc/models/batch-upsert-catalog-objects-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
 
-[`Task<Models.BatchUpsertCatalogObjectsResponse>`](/doc/models/batch-upsert-catalog-objects-response.md)
+[`Task<Models.BatchUpsertCatalogObjectsResponse>`](../../doc/models/batch-upsert-catalog-objects-response.md)
 
 ## Example Usage
 
@@ -179,7 +179,7 @@ var bodyBatches0Objects0CatalogV1Ids0 = new CatalogV1Id.Builder()
     .Build();
 bodyBatches0Objects0CatalogV1Ids.Add(bodyBatches0Objects0CatalogV1Ids0);
 
-var bodyBatches0Objects0ItemDataTaxIds = new List<string>();
+var bodyBatches0Objects0ItemDataTaxIds = new IList<string>();
 bodyBatches0Objects0ItemDataTaxIds.Add("#SalesTax");
 var bodyBatches0Objects0ItemDataVariations = new List<CatalogObject>();
 
@@ -282,7 +282,7 @@ var bodyBatches0Objects1CatalogV1Ids1 = new CatalogV1Id.Builder()
     .Build();
 bodyBatches0Objects1CatalogV1Ids.Add(bodyBatches0Objects1CatalogV1Ids1);
 
-var bodyBatches0Objects1ItemDataTaxIds = new List<string>();
+var bodyBatches0Objects1ItemDataTaxIds = new IList<string>();
 bodyBatches0Objects1ItemDataTaxIds.Add("#SalesTax");
 var bodyBatches0Objects1ItemDataVariations = new List<CatalogObject>();
 
@@ -477,7 +477,7 @@ var bodyBatches0Objects2CatalogV1Ids2 = new CatalogV1Id.Builder()
     .Build();
 bodyBatches0Objects2CatalogV1Ids.Add(bodyBatches0Objects2CatalogV1Ids2);
 
-var bodyBatches0Objects2CategoryDataImageIds = new List<string>();
+var bodyBatches0Objects2CategoryDataImageIds = new IList<string>();
 bodyBatches0Objects2CategoryDataImageIds.Add("image_ids1");
 bodyBatches0Objects2CategoryDataImageIds.Add("image_ids2");
 var bodyBatches0Objects2CategoryData = new CatalogCategory.Builder()
@@ -567,8 +567,8 @@ catch (ApiException e){};
 
 # Create Catalog Image
 
-Uploads an image file to be represented by a [CatalogImage](/doc/models/catalog-image.md) object that can be linked to an existing
-[CatalogObject](/doc/models/catalog-object.md) instance. The resulting `CatalogImage` is unattached to any `CatalogObject` if the `object_id`
+Uploads an image file to be represented by a [CatalogImage](../../doc/models/catalog-image.md) object that can be linked to an existing
+[CatalogObject](../../doc/models/catalog-object.md) instance. The resulting `CatalogImage` is unattached to any `CatalogObject` if the `object_id`
 is not specified.
 
 This `CreateCatalogImage` endpoint accepts HTTP multipart/form-data requests with a JSON part and an image file part in
@@ -584,12 +584,12 @@ CreateCatalogImageAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `request` | [`Models.CreateCatalogImageRequest`](/doc/models/create-catalog-image-request.md) | Form, Optional | - |
+| `request` | [`Models.CreateCatalogImageRequest`](../../doc/models/create-catalog-image-request.md) | Form, Optional | - |
 | `imageFile` | `FileStreamInfo` | Form, Optional | - |
 
 ## Response Type
 
-[`Task<Models.CreateCatalogImageResponse>`](/doc/models/create-catalog-image-response.md)
+[`Task<Models.CreateCatalogImageResponse>`](../../doc/models/create-catalog-image-response.md)
 
 ## Example Usage
 
@@ -647,7 +647,7 @@ catch (ApiException e){};
 
 # Update Catalog Image
 
-Uploads a new image file to replace the existing one in the specified [CatalogImage](/doc/models/catalog-image.md) object.
+Uploads a new image file to replace the existing one in the specified [CatalogImage](../../doc/models/catalog-image.md) object.
 
 This `UpdateCatalogImage` endpoint accepts HTTP multipart/form-data requests with a JSON part and an image file part in
 JPEG, PJPEG, PNG, or GIF format. The maximum file size is 15MB.
@@ -664,12 +664,12 @@ UpdateCatalogImageAsync(
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `imageId` | `string` | Template, Required | The ID of the `CatalogImage` object to update the encapsulated image file. |
-| `request` | [`Models.UpdateCatalogImageRequest`](/doc/models/update-catalog-image-request.md) | Form, Optional | - |
+| `request` | [`Models.UpdateCatalogImageRequest`](../../doc/models/update-catalog-image-request.md) | Form, Optional | - |
 | `imageFile` | `FileStreamInfo` | Form, Optional | - |
 
 ## Response Type
 
-[`Task<Models.UpdateCatalogImageResponse>`](/doc/models/update-catalog-image-response.md)
+[`Task<Models.UpdateCatalogImageResponse>`](../../doc/models/update-catalog-image-response.md)
 
 ## Example Usage
 
@@ -699,7 +699,7 @@ CatalogInfoAsync()
 
 ## Response Type
 
-[`Task<Models.CatalogInfoResponse>`](/doc/models/catalog-info-response.md)
+[`Task<Models.CatalogInfoResponse>`](../../doc/models/catalog-info-response.md)
 
 ## Example Usage
 
@@ -714,13 +714,13 @@ catch (ApiException e){};
 
 # List Catalog
 
-Returns a list of all [CatalogObject](/doc/models/catalog-object.md)s of the specified types in the catalog.
+Returns a list of all [CatalogObject](../../doc/models/catalog-object.md)s of the specified types in the catalog.
 
-The `types` parameter is specified as a comma-separated list of the [CatalogObjectType](/doc/models/catalog-object-type.md) values,
+The `types` parameter is specified as a comma-separated list of the [CatalogObjectType](../../doc/models/catalog-object-type.md) values,
 for example, "`ITEM`, `ITEM_VARIATION`, `MODIFIER`, `MODIFIER_LIST`, `CATEGORY`, `DISCOUNT`, `TAX`, `IMAGE`".
 
 __Important:__ ListCatalog does not return deleted catalog items. To retrieve
-deleted catalog items, use [SearchCatalogObjects](/doc/api/catalog.md#search-catalog-objects)
+deleted catalog items, use [SearchCatalogObjects](../../doc/api/catalog.md#search-catalog-objects)
 and set the `include_deleted_objects` attribute value to `true`.
 
 ```csharp
@@ -734,13 +734,13 @@ ListCatalogAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `cursor` | `string` | Query, Optional | The pagination cursor returned in the previous response. Leave unset for an initial request.<br>The page size is currently set to be 100.<br>See [Pagination](https://developer.squareup.com/docs/basics/api101/pagination) for more information. |
-| `types` | `string` | Query, Optional | An optional case-insensitive, comma-separated list of object types to retrieve.<br><br>The valid values are defined in the [CatalogObjectType](/doc/models/catalog-object-type.md) enum, for example,<br>`ITEM`, `ITEM_VARIATION`, `CATEGORY`, `DISCOUNT`, `TAX`,<br>`MODIFIER`, `MODIFIER_LIST`, `IMAGE`, etc.<br><br>If this is unspecified, the operation returns objects of all the top level types at the version<br>of the Square API used to make the request. Object types that are nested onto other object types<br>are not included in the defaults.<br><br>At the current API version the default object types are:<br>ITEM, CATEGORY, TAX, DISCOUNT, MODIFIER_LIST, DINING_OPTION, TAX_EXEMPTION,<br>SERVICE_CHARGE, PRICING_RULE, PRODUCT_SET, TIME_PERIOD, MEASUREMENT_UNIT,<br>SUBSCRIPTION_PLAN, ITEM_OPTION, CUSTOM_ATTRIBUTE_DEFINITION, QUICK_AMOUNT_SETTINGS. |
-| `catalogVersion` | `long?` | Query, Optional | The specific version of the catalog objects to be included in the response.<br>This allows you to retrieve historical<br>versions of objects. The specified version value is matched against<br>the [CatalogObject](/doc/models/catalog-object.md)s' `version` attribute.  If not included, results will<br>be from the current version of the catalog. |
+| `cursor` | `string` | Query, Optional | The pagination cursor returned in the previous response. Leave unset for an initial request.<br>The page size is currently set to be 100.<br>See [Pagination](../../https://developer.squareup.com/docs/basics/api101/pagination) for more information. |
+| `types` | `string` | Query, Optional | An optional case-insensitive, comma-separated list of object types to retrieve.<br><br>The valid values are defined in the [CatalogObjectType](../../doc/models/catalog-object-type.md) enum, for example,<br>`ITEM`, `ITEM_VARIATION`, `CATEGORY`, `DISCOUNT`, `TAX`,<br>`MODIFIER`, `MODIFIER_LIST`, `IMAGE`, etc.<br><br>If this is unspecified, the operation returns objects of all the top level types at the version<br>of the Square API used to make the request. Object types that are nested onto other object types<br>are not included in the defaults.<br><br>At the current API version the default object types are:<br>ITEM, CATEGORY, TAX, DISCOUNT, MODIFIER_LIST, DINING_OPTION, TAX_EXEMPTION,<br>SERVICE_CHARGE, PRICING_RULE, PRODUCT_SET, TIME_PERIOD, MEASUREMENT_UNIT,<br>SUBSCRIPTION_PLAN, ITEM_OPTION, CUSTOM_ATTRIBUTE_DEFINITION, QUICK_AMOUNT_SETTINGS. |
+| `catalogVersion` | `long?` | Query, Optional | The specific version of the catalog objects to be included in the response.<br>This allows you to retrieve historical<br>versions of objects. The specified version value is matched against<br>the [CatalogObject](../../doc/models/catalog-object.md)s' `version` attribute.  If not included, results will<br>be from the current version of the catalog. |
 
 ## Response Type
 
-[`Task<Models.ListCatalogResponse>`](/doc/models/list-catalog-response.md)
+[`Task<Models.ListCatalogResponse>`](../../doc/models/list-catalog-response.md)
 
 ## Example Usage
 
@@ -759,7 +759,7 @@ catch (ApiException e){};
 
 # Upsert Catalog Object
 
-Creates or updates the target [CatalogObject](/doc/models/catalog-object.md).
+Creates or updates the target [CatalogObject](../../doc/models/catalog-object.md).
 
 ```csharp
 UpsertCatalogObjectAsync(
@@ -770,11 +770,11 @@ UpsertCatalogObjectAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Models.UpsertCatalogObjectRequest`](/doc/models/upsert-catalog-object-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Models.UpsertCatalogObjectRequest`](../../doc/models/upsert-catalog-object-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
 
-[`Task<Models.UpsertCatalogObjectResponse>`](/doc/models/upsert-catalog-object-response.md)
+[`Task<Models.UpsertCatalogObjectResponse>`](../../doc/models/upsert-catalog-object-response.md)
 
 ## Example Usage
 
@@ -973,12 +973,12 @@ catch (ApiException e){};
 
 # Delete Catalog Object
 
-Deletes a single [CatalogObject](/doc/models/catalog-object.md) based on the
+Deletes a single [CatalogObject](../../doc/models/catalog-object.md) based on the
 provided ID and returns the set of successfully deleted IDs in the response.
 Deletion is a cascading event such that all children of the targeted object
-are also deleted. For example, deleting a [CatalogItem](/doc/models/catalog-item.md)
+are also deleted. For example, deleting a [CatalogItem](../../doc/models/catalog-item.md)
 will also delete all of its
-[CatalogItemVariation](/doc/models/catalog-item-variation.md) children.
+[CatalogItemVariation](../../doc/models/catalog-item-variation.md) children.
 
 ```csharp
 DeleteCatalogObjectAsync(
@@ -993,7 +993,7 @@ DeleteCatalogObjectAsync(
 
 ## Response Type
 
-[`Task<Models.DeleteCatalogObjectResponse>`](/doc/models/delete-catalog-object-response.md)
+[`Task<Models.DeleteCatalogObjectResponse>`](../../doc/models/delete-catalog-object-response.md)
 
 ## Example Usage
 
@@ -1010,13 +1010,13 @@ catch (ApiException e){};
 
 # Retrieve Catalog Object
 
-Returns a single [CatalogItem](/doc/models/catalog-item.md) as a
-[CatalogObject](/doc/models/catalog-object.md) based on the provided ID. The returned
-object includes all of the relevant [CatalogItem](/doc/models/catalog-item.md)
-information including: [CatalogItemVariation](/doc/models/catalog-item-variation.md)
+Returns a single [CatalogItem](../../doc/models/catalog-item.md) as a
+[CatalogObject](../../doc/models/catalog-object.md) based on the provided ID. The returned
+object includes all of the relevant [CatalogItem](../../doc/models/catalog-item.md)
+information including: [CatalogItemVariation](../../doc/models/catalog-item-variation.md)
 children, references to its
-[CatalogModifierList](/doc/models/catalog-modifier-list.md) objects, and the ids of
-any [CatalogTax](/doc/models/catalog-tax.md) objects that apply to it.
+[CatalogModifierList](../../doc/models/catalog-modifier-list.md) objects, and the ids of
+any [CatalogTax](../../doc/models/catalog-tax.md) objects that apply to it.
 
 ```csharp
 RetrieveCatalogObjectAsync(
@@ -1031,11 +1031,11 @@ RetrieveCatalogObjectAsync(
 |  --- | --- | --- | --- |
 | `objectId` | `string` | Template, Required | The object ID of any type of catalog objects to be retrieved. |
 | `includeRelatedObjects` | `bool?` | Query, Optional | If `true`, the response will include additional objects that are related to the<br>requested objects. Related objects are defined as any objects referenced by ID by the results in the `objects` field<br>of the response. These objects are put in the `related_objects` field. Setting this to `true` is<br>helpful when the objects are needed for immediate display to a user.<br>This process only goes one level deep. Objects referenced by the related objects will not be included. For example,<br><br>if the `objects` field of the response contains a CatalogItem, its associated<br>CatalogCategory objects, CatalogTax objects, CatalogImage objects and<br>CatalogModifierLists will be returned in the `related_objects` field of the<br>response. If the `objects` field of the response contains a CatalogItemVariation,<br>its parent CatalogItem will be returned in the `related_objects` field of<br>the response.<br><br>Default value: `false`<br>**Default**: `false` |
-| `catalogVersion` | `long?` | Query, Optional | Requests objects as of a specific version of the catalog. This allows you to retrieve historical<br>versions of objects. The value to retrieve a specific version of an object can be found<br>in the version field of [CatalogObject](/doc/models/catalog-object.md)s. If not included, results will<br>be from the current version of the catalog. |
+| `catalogVersion` | `long?` | Query, Optional | Requests objects as of a specific version of the catalog. This allows you to retrieve historical<br>versions of objects. The value to retrieve a specific version of an object can be found<br>in the version field of [CatalogObject](../../doc/models/catalog-object.md)s. If not included, results will<br>be from the current version of the catalog. |
 
 ## Response Type
 
-[`Task<Models.RetrieveCatalogObjectResponse>`](/doc/models/retrieve-catalog-object-response.md)
+[`Task<Models.RetrieveCatalogObjectResponse>`](../../doc/models/retrieve-catalog-object-response.md)
 
 ## Example Usage
 
@@ -1054,10 +1054,10 @@ catch (ApiException e){};
 
 # Search Catalog Objects
 
-Searches for [CatalogObject](/doc/models/catalog-object.md) of any type by matching supported search attribute values,
+Searches for [CatalogObject](../../doc/models/catalog-object.md) of any type by matching supported search attribute values,
 excluding custom attribute values on items or item variations, against one or more of the specified query filters.
 
-This (`SearchCatalogObjects`) endpoint differs from the [SearchCatalogItems](/doc/api/catalog.md#search-catalog-items)
+This (`SearchCatalogObjects`) endpoint differs from the [SearchCatalogItems](../../doc/api/catalog.md#search-catalog-items)
 endpoint in the following aspects:
 
 - `SearchCatalogItems` can only search for items or item variations, whereas `SearchCatalogObjects` can search for any type of catalog objects.
@@ -1074,16 +1074,16 @@ SearchCatalogObjectsAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Models.SearchCatalogObjectsRequest`](/doc/models/search-catalog-objects-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Models.SearchCatalogObjectsRequest`](../../doc/models/search-catalog-objects-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
 
-[`Task<Models.SearchCatalogObjectsResponse>`](/doc/models/search-catalog-objects-response.md)
+[`Task<Models.SearchCatalogObjectsResponse>`](../../doc/models/search-catalog-objects-response.md)
 
 ## Example Usage
 
 ```csharp
-var bodyObjectTypes = new List<string>();
+var bodyObjectTypes = new IList<string>();
 bodyObjectTypes.Add("ITEM");
 var bodyQuerySortedAttributeQuery = new CatalogQuerySortedAttribute.Builder(
         "attribute_name6")
@@ -1094,7 +1094,7 @@ var bodyQueryExactQuery = new CatalogQueryExact.Builder(
         "attribute_name2",
         "attribute_value2")
     .Build();
-var bodyQuerySetQueryAttributeValues = new List<string>();
+var bodyQuerySetQueryAttributeValues = new IList<string>();
 bodyQuerySetQueryAttributeValues.Add("attribute_values0");
 var bodyQuerySetQuery = new CatalogQuerySet.Builder(
         "attribute_name8",
@@ -1139,7 +1139,7 @@ catch (ApiException e){};
 Searches for catalog items or item variations by matching supported search attribute values, including
 custom attribute values, against one or more of the specified query filters.
 
-This (`SearchCatalogItems`) endpoint differs from the [SearchCatalogObjects](/doc/api/catalog.md#search-catalog-objects)
+This (`SearchCatalogItems`) endpoint differs from the [SearchCatalogObjects](../../doc/api/catalog.md#search-catalog-objects)
 endpoint in the following aspects:
 
 - `SearchCatalogItems` can only search for items or item variations, whereas `SearchCatalogObjects` can search for any type of catalog objects.
@@ -1156,23 +1156,23 @@ SearchCatalogItemsAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Models.SearchCatalogItemsRequest`](/doc/models/search-catalog-items-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Models.SearchCatalogItemsRequest`](../../doc/models/search-catalog-items-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
 
-[`Task<Models.SearchCatalogItemsResponse>`](/doc/models/search-catalog-items-response.md)
+[`Task<Models.SearchCatalogItemsResponse>`](../../doc/models/search-catalog-items-response.md)
 
 ## Example Usage
 
 ```csharp
-var bodyCategoryIds = new List<string>();
+var bodyCategoryIds = new IList<string>();
 bodyCategoryIds.Add("WINE_CATEGORY_ID");
-var bodyStockLevels = new List<string>();
+var bodyStockLevels = new IList<string>();
 bodyStockLevels.Add("OUT");
 bodyStockLevels.Add("LOW");
-var bodyEnabledLocationIds = new List<string>();
+var bodyEnabledLocationIds = new IList<string>();
 bodyEnabledLocationIds.Add("ATL_LOCATION_ID");
-var bodyProductTypes = new List<string>();
+var bodyProductTypes = new IList<string>();
 bodyProductTypes.Add("REGULAR");
 var bodyCustomAttributeFilters = new List<CustomAttributeFilter>();
 
@@ -1180,7 +1180,7 @@ var bodyCustomAttributeFilters0NumberFilter = new Range.Builder()
     .Min("min0")
     .Max("max2")
     .Build();
-var bodyCustomAttributeFilters0SelectionUidsFilter = new List<string>();
+var bodyCustomAttributeFilters0SelectionUidsFilter = new IList<string>();
 bodyCustomAttributeFilters0SelectionUidsFilter.Add("selection_uids_filter2");
 bodyCustomAttributeFilters0SelectionUidsFilter.Add("selection_uids_filter3");
 var bodyCustomAttributeFilters0 = new CustomAttributeFilter.Builder()
@@ -1197,7 +1197,7 @@ var bodyCustomAttributeFilters1NumberFilter = new Range.Builder()
     .Min("min1")
     .Max("max1")
     .Build();
-var bodyCustomAttributeFilters1SelectionUidsFilter = new List<string>();
+var bodyCustomAttributeFilters1SelectionUidsFilter = new IList<string>();
 bodyCustomAttributeFilters1SelectionUidsFilter.Add("selection_uids_filter1");
 var bodyCustomAttributeFilters1 = new CustomAttributeFilter.Builder()
     .CustomAttributeDefinitionId("BRAND_DEFINITION_ID")
@@ -1212,7 +1212,7 @@ var bodyCustomAttributeFilters2NumberFilter = new Range.Builder()
     .Min("2017")
     .Max("2018")
     .Build();
-var bodyCustomAttributeFilters2SelectionUidsFilter = new List<string>();
+var bodyCustomAttributeFilters2SelectionUidsFilter = new IList<string>();
 bodyCustomAttributeFilters2SelectionUidsFilter.Add("selection_uids_filter0");
 bodyCustomAttributeFilters2SelectionUidsFilter.Add("selection_uids_filter1");
 bodyCustomAttributeFilters2SelectionUidsFilter.Add("selection_uids_filter2");
@@ -1229,7 +1229,7 @@ var bodyCustomAttributeFilters3NumberFilter = new Range.Builder()
     .Min("min3")
     .Max("max9")
     .Build();
-var bodyCustomAttributeFilters3SelectionUidsFilter = new List<string>();
+var bodyCustomAttributeFilters3SelectionUidsFilter = new IList<string>();
 bodyCustomAttributeFilters3SelectionUidsFilter.Add("selection_uids_filter9");
 bodyCustomAttributeFilters3SelectionUidsFilter.Add("selection_uids_filter0");
 var bodyCustomAttributeFilters3 = new CustomAttributeFilter.Builder()
@@ -1263,8 +1263,8 @@ catch (ApiException e){};
 
 # Update Item Modifier Lists
 
-Updates the [CatalogModifierList](/doc/models/catalog-modifier-list.md) objects
-that apply to the targeted [CatalogItem](/doc/models/catalog-item.md) without having
+Updates the [CatalogModifierList](../../doc/models/catalog-modifier-list.md) objects
+that apply to the targeted [CatalogItem](../../doc/models/catalog-item.md) without having
 to perform an upsert on the entire item.
 
 ```csharp
@@ -1276,22 +1276,22 @@ UpdateItemModifierListsAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Models.UpdateItemModifierListsRequest`](/doc/models/update-item-modifier-lists-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Models.UpdateItemModifierListsRequest`](../../doc/models/update-item-modifier-lists-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
 
-[`Task<Models.UpdateItemModifierListsResponse>`](/doc/models/update-item-modifier-lists-response.md)
+[`Task<Models.UpdateItemModifierListsResponse>`](../../doc/models/update-item-modifier-lists-response.md)
 
 ## Example Usage
 
 ```csharp
-var bodyItemIds = new List<string>();
+var bodyItemIds = new IList<string>();
 bodyItemIds.Add("H42BRLUJ5KTZTTMPVSLFAACQ");
 bodyItemIds.Add("2JXOBJIHCWBQ4NZ3RIXQGJA6");
-var bodyModifierListsToEnable = new List<string>();
+var bodyModifierListsToEnable = new IList<string>();
 bodyModifierListsToEnable.Add("H42BRLUJ5KTZTTMPVSLFAACQ");
 bodyModifierListsToEnable.Add("2JXOBJIHCWBQ4NZ3RIXQGJA6");
-var bodyModifierListsToDisable = new List<string>();
+var bodyModifierListsToDisable = new IList<string>();
 bodyModifierListsToDisable.Add("7WRC16CJZDVLSNDQ35PP6YAD");
 var body = new UpdateItemModifierListsRequest.Builder(
         bodyItemIds)
@@ -1309,8 +1309,8 @@ catch (ApiException e){};
 
 # Update Item Taxes
 
-Updates the [CatalogTax](/doc/models/catalog-tax.md) objects that apply to the
-targeted [CatalogItem](/doc/models/catalog-item.md) without having to perform an
+Updates the [CatalogTax](../../doc/models/catalog-tax.md) objects that apply to the
+targeted [CatalogItem](../../doc/models/catalog-item.md) without having to perform an
 upsert on the entire item.
 
 ```csharp
@@ -1322,21 +1322,21 @@ UpdateItemTaxesAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Models.UpdateItemTaxesRequest`](/doc/models/update-item-taxes-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Models.UpdateItemTaxesRequest`](../../doc/models/update-item-taxes-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
 
-[`Task<Models.UpdateItemTaxesResponse>`](/doc/models/update-item-taxes-response.md)
+[`Task<Models.UpdateItemTaxesResponse>`](../../doc/models/update-item-taxes-response.md)
 
 ## Example Usage
 
 ```csharp
-var bodyItemIds = new List<string>();
+var bodyItemIds = new IList<string>();
 bodyItemIds.Add("H42BRLUJ5KTZTTMPVSLFAACQ");
 bodyItemIds.Add("2JXOBJIHCWBQ4NZ3RIXQGJA6");
-var bodyTaxesToEnable = new List<string>();
+var bodyTaxesToEnable = new IList<string>();
 bodyTaxesToEnable.Add("4WRCNHCJZDVLSNDQ35PP6YAD");
-var bodyTaxesToDisable = new List<string>();
+var bodyTaxesToDisable = new IList<string>();
 bodyTaxesToDisable.Add("AQCEGCEBBQONINDOHRGZISEX");
 var body = new UpdateItemTaxesRequest.Builder(
         bodyItemIds)

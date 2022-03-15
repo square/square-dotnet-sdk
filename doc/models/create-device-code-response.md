@@ -9,8 +9,8 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `Errors` | [`IList<Models.Error>`](/doc/models/error.md) | Optional | Any errors that occurred during the request. |
-| `DeviceCode` | [`Models.DeviceCode`](/doc/models/device-code.md) | Optional | - |
+| `Errors` | [`IList<Models.Error>`](../../doc/models/error.md) | Optional | Any errors that occurred during the request. |
+| `DeviceCode` | [`Models.DeviceCode`](../../doc/models/device-code.md) | Optional | - |
 
 ## Example (as JSON)
 

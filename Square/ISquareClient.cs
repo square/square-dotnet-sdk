@@ -174,6 +174,11 @@ namespace Square
         ITerminalApi TerminalApi { get; }
 
         /// <summary>
+        /// Gets instance for IVendorsApi.
+        /// </summary>
+        IVendorsApi VendorsApi { get; }
+
+        /// <summary>
         /// Gets the current version of the SDK.
         /// </summary>
         string SdkVersion { get; }
