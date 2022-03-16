@@ -17,7 +17,7 @@ present.
 |  --- | --- | --- | --- |
 | `Errors` | [`IList<Models.Error>`](../../doc/models/error.md) | Optional | Information on errors encountered during the request. |
 | `Cards` | [`IList<Models.Card>`](../../doc/models/card.md) | Optional | The requested list of `Card`s. |
-| `Cursor` | `string` | Optional | The pagination cursor to be used in a subsequent request. If empty,<br>this is the final response.<br><br>See [Pagination](../../https://developer.squareup.com/docs/basics/api101/pagination) for more information. |
+| `Cursor` | `string` | Optional | The pagination cursor to be used in a subsequent request. If empty,<br>this is the final response.<br><br>See [Pagination](https://developer.squareup.com/docs/basics/api101/pagination) for more information. |
 
 ## Example (as JSON)
 

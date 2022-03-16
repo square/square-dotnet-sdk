@@ -16,7 +16,7 @@ Either `errors` or `groups` is present in a given response (never both).
 |  --- | --- | --- | --- |
 | `Errors` | [`IList<Models.Error>`](../../doc/models/error.md) | Optional | Any errors that occurred during the request. |
 | `Groups` | [`IList<Models.CustomerGroup>`](../../doc/models/customer-group.md) | Optional | A list of customer groups belonging to the current seller. |
-| `Cursor` | `string` | Optional | A pagination cursor to retrieve the next set of results for your<br>original query to the endpoint. This value is present only if the request<br>succeeded and additional results are available.<br><br>For more information, see [Pagination](../../https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination). |
+| `Cursor` | `string` | Optional | A pagination cursor to retrieve the next set of results for your<br>original query to the endpoint. This value is present only if the request<br>succeeded and additional results are available.<br><br>For more information, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination). |
 
 ## Example (as JSON)
 

@@ -11,7 +11,7 @@ Represents an input to a call to [CreateVendor.](../../doc/api/vendors.md#create
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `IdempotencyKey` | `string` | Required | A client-supplied, universally unique identifier (UUID) to make this [CreateVendor](../../doc/api/vendors.md#create-vendor) call idempotent.<br><br>See [Idempotency](../../https://developer.squareup.com/docs/basics/api101/idempotency) in the<br>[API Development 101](../../https://developer.squareup.com/docs/basics/api101/overview) section for more<br>information.<br>**Constraints**: *Minimum Length*: `1`, *Maximum Length*: `128` |
+| `IdempotencyKey` | `string` | Required | A client-supplied, universally unique identifier (UUID) to make this [CreateVendor](../../doc/api/vendors.md#create-vendor) call idempotent.<br><br>See [Idempotency](https://developer.squareup.com/docs/basics/api101/idempotency) in the<br>[API Development 101](https://developer.squareup.com/docs/basics/api101/overview) section for more<br>information.<br>**Constraints**: *Minimum Length*: `1`, *Maximum Length*: `128` |
 | `Vendor` | [`Models.Vendor`](../../doc/models/vendor.md) | Optional | Represents a supplier to a seller. |
 
 ## Example (as JSON)
