@@ -13,7 +13,7 @@ Defines the fields in a `ListDisputeEvidence` response.
 |  --- | --- | --- | --- |
 | `Evidence` | [`IList<Models.DisputeEvidence>`](../../doc/models/dispute-evidence.md) | Optional | The list of evidence previously uploaded to the specified dispute. |
 | `Errors` | [`IList<Models.Error>`](../../doc/models/error.md) | Optional | Information about errors encountered during the request. |
-| `Cursor` | `string` | Optional | The pagination cursor to be used in a subsequent request.<br>If unset, this is the final response. For more information, see [Pagination](../../https://developer.squareup.com/docs/basics/api101/pagination). |
+| `Cursor` | `string` | Optional | The pagination cursor to be used in a subsequent request.<br>If unset, this is the final response. For more information, see [Pagination](https://developer.squareup.com/docs/basics/api101/pagination). |
 
 ## Example (as JSON)
 
