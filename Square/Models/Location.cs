@@ -106,14 +106,14 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// A short, generated string of letters and numbers that uniquely identifies this location instance.
+        /// A short generated string of letters and numbers that uniquely identifies this location instance.
         /// </summary>
         [JsonProperty("id", NullValueHandling = NullValueHandling.Ignore)]
         public string Id { get; }
 
         /// <summary>
         /// The name of the location.
-        /// This information appears in the dashboard as the nickname.
+        /// This information appears in the Seller Dashboard as the nickname.
         /// A location name must be unique within a seller account.
         /// </summary>
         [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
@@ -127,8 +127,8 @@ namespace Square.Models
         public Models.Address Address { get; }
 
         /// <summary>
-        /// The [IANA Timezone](https://www.iana.org/time-zones) identifier for
-        /// the timezone of the location. For example, `America/Los_Angeles`.
+        /// The [IANA time zone](https://www.iana.org/time-zones) identifier for
+        /// the time zone of the location. For example, `America/Los_Angeles`.
         /// </summary>
         [JsonProperty("timezone", NullValueHandling = NullValueHandling.Ignore)]
         public string Timezone { get; }
@@ -213,7 +213,7 @@ namespace Square.Models
         public Models.BusinessHours BusinessHours { get; }
 
         /// <summary>
-        /// The email address of the location. This can be unique to the location, and is not always the email address for the business owner or admin.
+        /// The email address of the location. This can be unique to the location and is not always the email address for the business owner or administrator.
         /// </summary>
         [JsonProperty("business_email", NullValueHandling = NullValueHandling.Ignore)]
         public string BusinessEmail { get; }
@@ -250,9 +250,8 @@ namespace Square.Models
 
         /// <summary>
         /// The URL of the logo image for the location. When configured in the Seller
-        /// dashboard (Receipts section), the logo appears on transactions (such as receipts and invoices)
-        /// that Square generates on behalf of the Seller. This image should have a roughly square (1:1) aspect ratio
-        /// and is recommended to be at least 200x200 pixels.
+        /// Dashboard (Receipts section), the logo appears on transactions (such as receipts and invoices) that Square generates on behalf of the seller.
+        /// This image should have a roughly square (1:1) aspect ratio and should be at least 200x200 pixels.
         /// </summary>
         [JsonProperty("logo_url", NullValueHandling = NullValueHandling.Ignore)]
         public string LogoUrl { get; }
@@ -273,9 +272,8 @@ namespace Square.Models
 
         /// <summary>
         /// The URL of a full-format logo image for the location. When configured in the Seller
-        /// dashboard (Receipts section), the logo appears on transactions (such as receipts and invoices)
-        /// that Square generates on behalf of the Seller. This image can be wider than it is tall,
-        /// and is recommended to be at least 1280x648 pixels.
+        /// Dashboard (Receipts section), the logo appears on transactions (such as receipts and invoices) that Square generates on behalf of the seller.
+        /// This image can be wider than it is tall and should be at least 1280x648 pixels.
         /// </summary>
         [JsonProperty("full_format_logo_url", NullValueHandling = NullValueHandling.Ignore)]
         public string FullFormatLogoUrl { get; }

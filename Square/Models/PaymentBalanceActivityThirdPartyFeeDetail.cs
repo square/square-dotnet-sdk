@@ -13,26 +13,25 @@ namespace Square.Models
     using Square.Utilities;
 
     /// <summary>
-    /// PaymentOptions.
+    /// PaymentBalanceActivityThirdPartyFeeDetail.
     /// </summary>
-    public class PaymentOptions
+    public class PaymentBalanceActivityThirdPartyFeeDetail
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="PaymentOptions"/> class.
+        /// Initializes a new instance of the <see cref="PaymentBalanceActivityThirdPartyFeeDetail"/> class.
         /// </summary>
-        /// <param name="autocomplete">autocomplete.</param>
-        public PaymentOptions(
-            bool? autocomplete = null)
+        /// <param name="paymentId">payment_id.</param>
+        public PaymentBalanceActivityThirdPartyFeeDetail(
+            string paymentId = null)
         {
-            this.Autocomplete = autocomplete;
+            this.PaymentId = paymentId;
         }
 
         /// <summary>
-        /// Indicates whether the `Payment` objects created from this `TerminalCheckout` are automatically
-        /// `COMPLETED` or left in an `APPROVED` state for later modification.
+        /// The ID of the payment associated with this activity.
         /// </summary>
-        [JsonProperty("autocomplete", NullValueHandling = NullValueHandling.Ignore)]
-        public bool? Autocomplete { get; }
+        [JsonProperty("payment_id", NullValueHandling = NullValueHandling.Ignore)]
+        public string PaymentId { get; }
 
         /// <inheritdoc/>
         public override string ToString()
@@ -41,7 +40,7 @@ namespace Square.Models
 
             this.ToString(toStringOutput);
 
-            return $"PaymentOptions : ({string.Join(", ", toStringOutput)})";
+            return $"PaymentBalanceActivityThirdPartyFeeDetail : ({string.Join(", ", toStringOutput)})";
         }
 
         /// <inheritdoc/>
@@ -57,15 +56,15 @@ namespace Square.Models
                 return true;
             }
 
-            return obj is PaymentOptions other &&
-                ((this.Autocomplete == null && other.Autocomplete == null) || (this.Autocomplete?.Equals(other.Autocomplete) == true));
+            return obj is PaymentBalanceActivityThirdPartyFeeDetail other &&
+                ((this.PaymentId == null && other.PaymentId == null) || (this.PaymentId?.Equals(other.PaymentId) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 449968409;
-            hashCode = HashCode.Combine(this.Autocomplete);
+            int hashCode = -1217930506;
+            hashCode = HashCode.Combine(this.PaymentId);
 
             return hashCode;
         }
@@ -76,7 +75,7 @@ namespace Square.Models
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Autocomplete = {(this.Autocomplete == null ? "null" : this.Autocomplete.ToString())}");
+            toStringOutput.Add($"this.PaymentId = {(this.PaymentId == null ? "null" : this.PaymentId == string.Empty ? "" : this.PaymentId)}");
         }
 
         /// <summary>
@@ -86,7 +85,7 @@ namespace Square.Models
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .Autocomplete(this.Autocomplete);
+                .PaymentId(this.PaymentId);
             return builder;
         }
 
@@ -95,27 +94,27 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
-            private bool? autocomplete;
+            private string paymentId;
 
              /// <summary>
-             /// Autocomplete.
+             /// PaymentId.
              /// </summary>
-             /// <param name="autocomplete"> autocomplete. </param>
+             /// <param name="paymentId"> paymentId. </param>
              /// <returns> Builder. </returns>
-            public Builder Autocomplete(bool? autocomplete)
+            public Builder PaymentId(string paymentId)
             {
-                this.autocomplete = autocomplete;
+                this.paymentId = paymentId;
                 return this;
             }
 
             /// <summary>
             /// Builds class object.
             /// </summary>
-            /// <returns> PaymentOptions. </returns>
-            public PaymentOptions Build()
+            /// <returns> PaymentBalanceActivityThirdPartyFeeDetail. </returns>
+            public PaymentBalanceActivityThirdPartyFeeDetail Build()
             {
-                return new PaymentOptions(
-                    this.autocomplete);
+                return new PaymentBalanceActivityThirdPartyFeeDetail(
+                    this.paymentId);
             }
         }
     }

@@ -38,13 +38,13 @@ namespace Square.Models
         public HttpContext Context { get; internal set; }
 
         /// <summary>
-        /// Information on [errors](https://developer.squareup.com/docs/build-basics/handling-errors) encountered during the request.
+        /// Information about [errors](https://developer.squareup.com/docs/build-basics/handling-errors) encountered during the request.
         /// </summary>
         [JsonProperty("errors", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.Error> Errors { get; }
 
         /// <summary>
-        /// Represents one of a business's [locations](https://developer.squareup.com/docs/locations-api).
+        /// Represents one of a business' [locations](https://developer.squareup.com/docs/locations-api).
         /// </summary>
         [JsonProperty("location", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Location Location { get; }

@@ -311,7 +311,7 @@ namespace Square.Utilities
             }
             else if (value is JsonValue)
             {
-                PrepareFormFieldsFromObject(name, (value as JsonValue).GetStoredValue(), keys, propInfo, arrayDeserializationFormat);
+                PrepareFormFieldsFromObject(name, (value as JsonValue).GetStoredObject(), keys, propInfo, arrayDeserializationFormat);
             }
             else if (!value.GetType().Namespace.StartsWith("System"))
             {

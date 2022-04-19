@@ -36,6 +36,7 @@ namespace Square.Models
         /// <param name="availableForBooking">available_for_booking.</param>
         /// <param name="itemOptionValues">item_option_values.</param>
         /// <param name="measurementUnitId">measurement_unit_id.</param>
+        /// <param name="sellable">sellable.</param>
         /// <param name="stockable">stockable.</param>
         /// <param name="imageIds">image_ids.</param>
         /// <param name="teamMemberIds">team_member_ids.</param>
@@ -57,6 +58,7 @@ namespace Square.Models
             bool? availableForBooking = null,
             IList<Models.CatalogItemOptionValueForItemVariation> itemOptionValues = null,
             string measurementUnitId = null,
+            bool? sellable = null,
             bool? stockable = null,
             IList<string> imageIds = null,
             IList<string> teamMemberIds = null,
@@ -78,6 +80,7 @@ namespace Square.Models
             this.AvailableForBooking = availableForBooking;
             this.ItemOptionValues = itemOptionValues;
             this.MeasurementUnitId = measurementUnitId;
+            this.Sellable = sellable;
             this.Stockable = stockable;
             this.ImageIds = imageIds;
             this.TeamMemberIds = teamMemberIds;
@@ -201,8 +204,13 @@ namespace Square.Models
         public string MeasurementUnitId { get; }
 
         /// <summary>
+        /// Whether this variation can be sold.
+        /// </summary>
+        [JsonProperty("sellable", NullValueHandling = NullValueHandling.Ignore)]
+        public bool? Sellable { get; }
+
+        /// <summary>
         /// Whether stock is counted directly on this variation (TRUE) or only on its components (FALSE).
-        /// For backward compatibility missing values will be interpreted as TRUE.
         /// </summary>
         [JsonProperty("stockable", NullValueHandling = NullValueHandling.Ignore)]
         public bool? Stockable { get; }
@@ -269,6 +277,7 @@ namespace Square.Models
                 ((this.AvailableForBooking == null && other.AvailableForBooking == null) || (this.AvailableForBooking?.Equals(other.AvailableForBooking) == true)) &&
                 ((this.ItemOptionValues == null && other.ItemOptionValues == null) || (this.ItemOptionValues?.Equals(other.ItemOptionValues) == true)) &&
                 ((this.MeasurementUnitId == null && other.MeasurementUnitId == null) || (this.MeasurementUnitId?.Equals(other.MeasurementUnitId) == true)) &&
+                ((this.Sellable == null && other.Sellable == null) || (this.Sellable?.Equals(other.Sellable) == true)) &&
                 ((this.Stockable == null && other.Stockable == null) || (this.Stockable?.Equals(other.Stockable) == true)) &&
                 ((this.ImageIds == null && other.ImageIds == null) || (this.ImageIds?.Equals(other.ImageIds) == true)) &&
                 ((this.TeamMemberIds == null && other.TeamMemberIds == null) || (this.TeamMemberIds?.Equals(other.TeamMemberIds) == true)) &&
@@ -278,12 +287,12 @@ namespace Square.Models
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1549765555;
+            int hashCode = -1883269802;
             hashCode = HashCode.Combine(this.ItemId, this.Name, this.Sku, this.Upc, this.Ordinal, this.PricingType, this.PriceMoney);
 
             hashCode = HashCode.Combine(hashCode, this.LocationOverrides, this.TrackInventory, this.InventoryAlertType, this.InventoryAlertThreshold, this.UserData, this.ServiceDuration, this.AvailableForBooking);
 
-            hashCode = HashCode.Combine(hashCode, this.ItemOptionValues, this.MeasurementUnitId, this.Stockable, this.ImageIds, this.TeamMemberIds, this.StockableConversion);
+            hashCode = HashCode.Combine(hashCode, this.ItemOptionValues, this.MeasurementUnitId, this.Sellable, this.Stockable, this.ImageIds, this.TeamMemberIds, this.StockableConversion);
 
             return hashCode;
         }
@@ -310,6 +319,7 @@ namespace Square.Models
             toStringOutput.Add($"this.AvailableForBooking = {(this.AvailableForBooking == null ? "null" : this.AvailableForBooking.ToString())}");
             toStringOutput.Add($"this.ItemOptionValues = {(this.ItemOptionValues == null ? "null" : $"[{string.Join(", ", this.ItemOptionValues)} ]")}");
             toStringOutput.Add($"this.MeasurementUnitId = {(this.MeasurementUnitId == null ? "null" : this.MeasurementUnitId == string.Empty ? "" : this.MeasurementUnitId)}");
+            toStringOutput.Add($"this.Sellable = {(this.Sellable == null ? "null" : this.Sellable.ToString())}");
             toStringOutput.Add($"this.Stockable = {(this.Stockable == null ? "null" : this.Stockable.ToString())}");
             toStringOutput.Add($"this.ImageIds = {(this.ImageIds == null ? "null" : $"[{string.Join(", ", this.ImageIds)} ]")}");
             toStringOutput.Add($"this.TeamMemberIds = {(this.TeamMemberIds == null ? "null" : $"[{string.Join(", ", this.TeamMemberIds)} ]")}");
@@ -339,6 +349,7 @@ namespace Square.Models
                 .AvailableForBooking(this.AvailableForBooking)
                 .ItemOptionValues(this.ItemOptionValues)
                 .MeasurementUnitId(this.MeasurementUnitId)
+                .Sellable(this.Sellable)
                 .Stockable(this.Stockable)
                 .ImageIds(this.ImageIds)
                 .TeamMemberIds(this.TeamMemberIds)
@@ -367,6 +378,7 @@ namespace Square.Models
             private bool? availableForBooking;
             private IList<Models.CatalogItemOptionValueForItemVariation> itemOptionValues;
             private string measurementUnitId;
+            private bool? sellable;
             private bool? stockable;
             private IList<string> imageIds;
             private IList<string> teamMemberIds;
@@ -549,6 +561,17 @@ namespace Square.Models
             }
 
              /// <summary>
+             /// Sellable.
+             /// </summary>
+             /// <param name="sellable"> sellable. </param>
+             /// <returns> Builder. </returns>
+            public Builder Sellable(bool? sellable)
+            {
+                this.sellable = sellable;
+                return this;
+            }
+
+             /// <summary>
              /// Stockable.
              /// </summary>
              /// <param name="stockable"> stockable. </param>
@@ -615,6 +638,7 @@ namespace Square.Models
                     this.availableForBooking,
                     this.itemOptionValues,
                     this.measurementUnitId,
+                    this.sellable,
                     this.stockable,
                     this.imageIds,
                     this.teamMemberIds,

@@ -73,6 +73,7 @@ namespace Square
         private readonly Lazy<IMerchantsApi> merchants;
         private readonly Lazy<IOrdersApi> orders;
         private readonly Lazy<IPaymentsApi> payments;
+        private readonly Lazy<IPayoutsApi> payouts;
         private readonly Lazy<IRefundsApi> refunds;
         private readonly Lazy<ISitesApi> sites;
         private readonly Lazy<ISnippetsApi> snippets;
@@ -157,6 +158,8 @@ namespace Square
                 () => new OrdersApi(this, this.httpClient, this.authManagers, this.httpCallBack));
             this.payments = new Lazy<IPaymentsApi>(
                 () => new PaymentsApi(this, this.httpClient, this.authManagers, this.httpCallBack));
+            this.payouts = new Lazy<IPayoutsApi>(
+                () => new PayoutsApi(this, this.httpClient, this.authManagers, this.httpCallBack));
             this.refunds = new Lazy<IRefundsApi>(
                 () => new RefundsApi(this, this.httpClient, this.authManagers, this.httpCallBack));
             this.sites = new Lazy<ISitesApi>(
@@ -321,6 +324,11 @@ namespace Square
         public IPaymentsApi PaymentsApi => this.payments.Value;
 
         /// <summary>
+        /// Gets PayoutsApi.
+        /// </summary>
+        public IPayoutsApi PayoutsApi => this.payouts.Value;
+
+        /// <summary>
         /// Gets RefundsApi.
         /// </summary>
         public IRefundsApi RefundsApi => this.refunds.Value;
@@ -363,7 +371,7 @@ namespace Square
         /// <summary>
         /// Gets the current version of the SDK.
         /// </summary>
-        public string SdkVersion => "17.3.0";
+        public string SdkVersion => "18.0.0";
 
         /// <summary>
         /// Gets the configuration of the Http Client associated with this client.
@@ -520,7 +528,7 @@ namespace Square
         /// </summary>
         public class Builder
         {
-            private string squareVersion = "2022-03-16";
+            private string squareVersion = "2022-04-20";
             private string userAgentDetail = null;
             private Environment environment = Square.Environment.Production;
             private string customUrl = "https://connect.squareup.com";

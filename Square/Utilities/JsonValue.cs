@@ -79,9 +79,9 @@ namespace Square.Utilities
         }
 
         /// <summary>
-        /// Getter for current value.
+        /// Getter for the stored object.
         /// </summary>
-        internal object GetStoredValue()
+        public object GetStoredObject()
         {
             return value;
         }
@@ -89,9 +89,9 @@ namespace Square.Utilities
         /// <summary>
         /// Converts current value into string.
         /// </summary>
-        public string ToJsonString()
+        public override string ToString()
         {
-            return ApiHelper.JsonSerialize(value);
+            return JsonConvert.SerializeObject(value, Formatting.None);
         }
     }
 
@@ -104,7 +104,7 @@ namespace Square.Utilities
 
         public override void WriteJson(JsonWriter writer, JsonValue value, JsonSerializer serializer)
         {
-            writer.WriteRawValue(value.ToJsonString());
+            writer.WriteRawValue(value.ToString());
         }
     }
 }

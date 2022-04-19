@@ -97,6 +97,7 @@ namespace Square.Models
 
         /// <summary>
         /// An optional note to associate with the checkout, as well as with any payments used to complete the checkout.
+        /// Note: maximum 500 characters
         /// </summary>
         [JsonProperty("note", NullValueHandling = NullValueHandling.Ignore)]
         public string Note { get; }

@@ -14,6 +14,7 @@ namespace Square.Apis
     using Square.Authentication;
     using Square.Http.Client;
     using Square.Http.Request;
+    using Square.Http.Request.Configuration;
     using Square.Http.Response;
     using Square.Utilities;
 
@@ -80,7 +81,7 @@ namespace Square.Apis
             httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
 
             // invoke request and get response.
-            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken: cancellationToken).ConfigureAwait(false);
             HttpContext context = new HttpContext(httpRequest, response);
             if (this.HttpCallBack != null)
             {
@@ -97,11 +98,11 @@ namespace Square.Apis
 
         /// <summary>
         /// Creates a [location](https://developer.squareup.com/docs/locations-api).
-        /// Creating new locations allows for separate configuration of receipt layouts, item prices, .
-        /// and sales reports. Developers can use locations to separate sales activity via applications .
-        /// that integrate with Square from sales activity elsewhere in a seller's account. .
-        /// Locations created programmatically with the Locations API will last forever and .
-        /// are visible to the seller for their own management, so ensure that .
+        /// Creating new locations allows for separate configuration of receipt layouts, item prices,.
+        /// and sales reports. Developers can use locations to separate sales activity through applications.
+        /// that integrate with Square from sales activity elsewhere in a seller's account.
+        /// Locations created programmatically with the Locations API last forever and.
+        /// are visible to the seller for their own management. Therefore, ensure that.
         /// each location has a sensible and unique name.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
@@ -116,11 +117,11 @@ namespace Square.Apis
 
         /// <summary>
         /// Creates a [location](https://developer.squareup.com/docs/locations-api).
-        /// Creating new locations allows for separate configuration of receipt layouts, item prices, .
-        /// and sales reports. Developers can use locations to separate sales activity via applications .
-        /// that integrate with Square from sales activity elsewhere in a seller's account. .
-        /// Locations created programmatically with the Locations API will last forever and .
-        /// are visible to the seller for their own management, so ensure that .
+        /// Creating new locations allows for separate configuration of receipt layouts, item prices,.
+        /// and sales reports. Developers can use locations to separate sales activity through applications.
+        /// that integrate with Square from sales activity elsewhere in a seller's account.
+        /// Locations created programmatically with the Locations API last forever and.
+        /// are visible to the seller for their own management. Therefore, ensure that.
         /// each location has a sensible and unique name.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
@@ -160,7 +161,7 @@ namespace Square.Apis
             httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
 
             // invoke request and get response.
-            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken: cancellationToken).ConfigureAwait(false);
             HttpContext context = new HttpContext(httpRequest, response);
             if (this.HttpCallBack != null)
             {
@@ -232,7 +233,7 @@ namespace Square.Apis
             httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
 
             // invoke request and get response.
-            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken: cancellationToken).ConfigureAwait(false);
             HttpContext context = new HttpContext(httpRequest, response);
             if (this.HttpCallBack != null)
             {
@@ -310,7 +311,7 @@ namespace Square.Apis
             httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
 
             // invoke request and get response.
-            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken: cancellationToken).ConfigureAwait(false);
             HttpContext context = new HttpContext(httpRequest, response);
             if (this.HttpCallBack != null)
             {

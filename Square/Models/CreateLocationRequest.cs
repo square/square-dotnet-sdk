@@ -28,7 +28,7 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// Represents one of a business's [locations](https://developer.squareup.com/docs/locations-api).
+        /// Represents one of a business' [locations](https://developer.squareup.com/docs/locations-api).
         /// </summary>
         [JsonProperty("location", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Location Location { get; }

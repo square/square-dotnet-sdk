@@ -26,13 +26,17 @@ namespace Square.Models
         /// <param name="trackInventory">track_inventory.</param>
         /// <param name="inventoryAlertType">inventory_alert_type.</param>
         /// <param name="inventoryAlertThreshold">inventory_alert_threshold.</param>
+        /// <param name="soldOut">sold_out.</param>
+        /// <param name="soldOutValidUntil">sold_out_valid_until.</param>
         public ItemVariationLocationOverrides(
             string locationId = null,
             Models.Money priceMoney = null,
             string pricingType = null,
             bool? trackInventory = null,
             string inventoryAlertType = null,
-            long? inventoryAlertThreshold = null)
+            long? inventoryAlertThreshold = null,
+            bool? soldOut = null,
+            string soldOutValidUntil = null)
         {
             this.LocationId = locationId;
             this.PriceMoney = priceMoney;
@@ -40,6 +44,8 @@ namespace Square.Models
             this.TrackInventory = trackInventory;
             this.InventoryAlertType = inventoryAlertType;
             this.InventoryAlertThreshold = inventoryAlertThreshold;
+            this.SoldOut = soldOut;
+            this.SoldOutValidUntil = soldOutValidUntil;
         }
 
         /// <summary>
@@ -85,6 +91,25 @@ namespace Square.Models
         [JsonProperty("inventory_alert_threshold", NullValueHandling = NullValueHandling.Ignore)]
         public long? InventoryAlertThreshold { get; }
 
+        /// <summary>
+        /// Indicates whether the overridden item variation is sold out at the specified location.
+        /// When inventory tracking is enabled on the item variation either globally or at the specified location,
+        /// the item variation is automatically marked as sold out when its inventory count reaches zero. The seller
+        /// can manually set the item variation as sold out even when the inventory count is greater than zero.
+        /// Attempts by an application to set this attribute are ignored. Regardless how the sold-out status is set,
+        /// applications should treat its inventory count as zero when this attribute value is `true`.
+        /// </summary>
+        [JsonProperty("sold_out", NullValueHandling = NullValueHandling.Ignore)]
+        public bool? SoldOut { get; }
+
+        /// <summary>
+        /// The seller-assigned timestamp, of the RFC 3339 format, to indicate when this sold-out variation
+        /// becomes available again at the specified location. Attempts by an application to set this attribute are ignored.
+        /// When the current time is later than this attribute value, the affected item variation is no longer sold out.
+        /// </summary>
+        [JsonProperty("sold_out_valid_until", NullValueHandling = NullValueHandling.Ignore)]
+        public string SoldOutValidUntil { get; }
+
         /// <inheritdoc/>
         public override string ToString()
         {
@@ -114,14 +139,18 @@ namespace Square.Models
                 ((this.PricingType == null && other.PricingType == null) || (this.PricingType?.Equals(other.PricingType) == true)) &&
                 ((this.TrackInventory == null && other.TrackInventory == null) || (this.TrackInventory?.Equals(other.TrackInventory) == true)) &&
                 ((this.InventoryAlertType == null && other.InventoryAlertType == null) || (this.InventoryAlertType?.Equals(other.InventoryAlertType) == true)) &&
-                ((this.InventoryAlertThreshold == null && other.InventoryAlertThreshold == null) || (this.InventoryAlertThreshold?.Equals(other.InventoryAlertThreshold) == true));
+                ((this.InventoryAlertThreshold == null && other.InventoryAlertThreshold == null) || (this.InventoryAlertThreshold?.Equals(other.InventoryAlertThreshold) == true)) &&
+                ((this.SoldOut == null && other.SoldOut == null) || (this.SoldOut?.Equals(other.SoldOut) == true)) &&
+                ((this.SoldOutValidUntil == null && other.SoldOutValidUntil == null) || (this.SoldOutValidUntil?.Equals(other.SoldOutValidUntil) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -598612092;
-            hashCode = HashCode.Combine(this.LocationId, this.PriceMoney, this.PricingType, this.TrackInventory, this.InventoryAlertType, this.InventoryAlertThreshold);
+            int hashCode = -292188840;
+            hashCode = HashCode.Combine(this.LocationId, this.PriceMoney, this.PricingType, this.TrackInventory, this.InventoryAlertType, this.InventoryAlertThreshold, this.SoldOut);
+
+            hashCode = HashCode.Combine(hashCode, this.SoldOutValidUntil);
 
             return hashCode;
         }
@@ -138,6 +167,8 @@ namespace Square.Models
             toStringOutput.Add($"this.TrackInventory = {(this.TrackInventory == null ? "null" : this.TrackInventory.ToString())}");
             toStringOutput.Add($"this.InventoryAlertType = {(this.InventoryAlertType == null ? "null" : this.InventoryAlertType.ToString())}");
             toStringOutput.Add($"this.InventoryAlertThreshold = {(this.InventoryAlertThreshold == null ? "null" : this.InventoryAlertThreshold.ToString())}");
+            toStringOutput.Add($"this.SoldOut = {(this.SoldOut == null ? "null" : this.SoldOut.ToString())}");
+            toStringOutput.Add($"this.SoldOutValidUntil = {(this.SoldOutValidUntil == null ? "null" : this.SoldOutValidUntil == string.Empty ? "" : this.SoldOutValidUntil)}");
         }
 
         /// <summary>
@@ -152,7 +183,9 @@ namespace Square.Models
                 .PricingType(this.PricingType)
                 .TrackInventory(this.TrackInventory)
                 .InventoryAlertType(this.InventoryAlertType)
-                .InventoryAlertThreshold(this.InventoryAlertThreshold);
+                .InventoryAlertThreshold(this.InventoryAlertThreshold)
+                .SoldOut(this.SoldOut)
+                .SoldOutValidUntil(this.SoldOutValidUntil);
             return builder;
         }
 
@@ -167,6 +200,8 @@ namespace Square.Models
             private bool? trackInventory;
             private string inventoryAlertType;
             private long? inventoryAlertThreshold;
+            private bool? soldOut;
+            private string soldOutValidUntil;
 
              /// <summary>
              /// LocationId.
@@ -234,6 +269,28 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// SoldOut.
+             /// </summary>
+             /// <param name="soldOut"> soldOut. </param>
+             /// <returns> Builder. </returns>
+            public Builder SoldOut(bool? soldOut)
+            {
+                this.soldOut = soldOut;
+                return this;
+            }
+
+             /// <summary>
+             /// SoldOutValidUntil.
+             /// </summary>
+             /// <param name="soldOutValidUntil"> soldOutValidUntil. </param>
+             /// <returns> Builder. </returns>
+            public Builder SoldOutValidUntil(string soldOutValidUntil)
+            {
+                this.soldOutValidUntil = soldOutValidUntil;
+                return this;
+            }
+
             /// <summary>
             /// Builds class object.
             /// </summary>
@@ -246,7 +303,9 @@ namespace Square.Models
                     this.pricingType,
                     this.trackInventory,
                     this.inventoryAlertType,
-                    this.inventoryAlertThreshold);
+                    this.inventoryAlertThreshold,
+                    this.soldOut,
+                    this.soldOutValidUntil);
             }
         }
     }

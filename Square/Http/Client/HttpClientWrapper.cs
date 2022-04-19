@@ -16,6 +16,7 @@ namespace Square.Http.Client
     using Polly.Timeout;
     using Polly.Wrap;
     using Square.Http.Request;
+    using Square.Http.Request.Configuration;
     using Square.Http.Response;
     using Square.Utilities;
 
@@ -75,10 +76,11 @@ namespace Square.Http.Client
         /// Executes the http request.
         /// </summary>
         /// <param name="request">Http request.</param>
+        /// <param name="retryConfiguration">The <see cref="RetryConfiguration"/> for request.</param>
         /// <returns>HttpStringResponse.</returns>
-        public HttpStringResponse ExecuteAsString(HttpRequest request)
+        public HttpStringResponse ExecuteAsString(HttpRequest request, RetryConfiguration retryConfiguration = null)
         {
-            Task<HttpStringResponse> t = this.ExecuteAsStringAsync(request);
+            Task<HttpStringResponse> t = this.ExecuteAsStringAsync(request, retryConfiguration);
             ApiHelper.RunTaskSynchronously(t);
             return t.Result;
         }
@@ -88,9 +90,11 @@ namespace Square.Http.Client
         /// </summary>
         /// <param name="request">Http request.</param>
         /// <param name="cancellationToken"> cancellationToken.</param>
+        /// <param name="retryConfiguration">The <see cref="RetryConfiguration"/> for request.</param>
         /// <returns>Returns the HttpStringResponse.</returns>
         public async Task<HttpStringResponse> ExecuteAsStringAsync(
             HttpRequest request,
+            RetryConfiguration retryConfiguration = null,
             CancellationToken cancellationToken = default)
         {
             // raise the on before request event.
@@ -100,7 +104,7 @@ namespace Square.Http.Client
 
             if (overrideHttpClientConfiguration)
             {
-                responseMessage = await this.GetCombinedPolicy().ExecuteAsync(
+                responseMessage = await this.GetCombinedPolicy(retryConfiguration).ExecuteAsync(
                     async (cancellation) => await this.HttpResponseMessage(request, cancellation).ConfigureAwait(false), cancellationToken)
                     .ConfigureAwait(false);
             }
@@ -126,10 +130,11 @@ namespace Square.Http.Client
         /// Executes the http request.
         /// </summary>
         /// <param name="request">Http request.</param>
+        /// <param name="retryConfiguration">The <see cref="RetryConfiguration"/> for request.</param>
         /// <returns>HttpResponse.</returns>
-        public HttpResponse ExecuteAsBinary(HttpRequest request)
+        public HttpResponse ExecuteAsBinary(HttpRequest request, RetryConfiguration retryConfiguration = null)
         {
-            Task<HttpResponse> t = this.ExecuteAsBinaryAsync(request);
+            Task<HttpResponse> t = this.ExecuteAsBinaryAsync(request, retryConfiguration);
             ApiHelper.RunTaskSynchronously(t);
             return t.Result;
         }
@@ -139,9 +144,11 @@ namespace Square.Http.Client
         /// </summary>
         /// <param name="request">Http request.</param>
         /// <param name="cancellationToken">cancellationToken.</param>
+        /// <param name="retryConfiguration">The <see cref="RetryConfiguration"/> for request.</param>
         /// <returns>HttpResponse.</returns>
         public async Task<HttpResponse> ExecuteAsBinaryAsync(
             HttpRequest request,
+            RetryConfiguration retryConfiguration = null,
             CancellationToken cancellationToken = default)
         {
             // raise the on before request event.
@@ -151,7 +158,7 @@ namespace Square.Http.Client
 
             if (overrideHttpClientConfiguration)
             {
-                responseMessage = await this.GetCombinedPolicy().ExecuteAsync(
+                responseMessage = await this.GetCombinedPolicy(retryConfiguration).ExecuteAsync(
                     async (cancellation) => await this.HttpResponseMessage(request, cancellation).ConfigureAwait(false), cancellationToken)
                     .ConfigureAwait(false);
             }
@@ -591,11 +598,12 @@ namespace Square.Http.Client
             return await this.client.SendAsync(requestMessage, cancellationToken).ConfigureAwait(false);
         }
 
-        private bool ShouldRetry(HttpResponseMessage r)
+        private bool ShouldRetry(HttpResponseMessage response, RetryConfiguration retryConfiguration)
         {
-            return this.requestMethodsToRetry.Contains(r.RequestMessage.Method) &&
-                (this.statusCodesToRetry.Contains(r.StatusCode) ||
-                r?.Headers?.RetryAfter != null);
+            bool isWhiteListedMethod = this.requestMethodsToRetry.Contains(response.RequestMessage.Method);
+
+            return retryConfiguration.RetryOption.IsRetryAllowed(isWhiteListedMethod) && 
+                (this.statusCodesToRetry.Contains(response.StatusCode) || response?.Headers?.RetryAfter != null);
         }
 
         private TimeSpan GetServerWaitDuration(DelegateResult<HttpResponseMessage> response)
@@ -611,9 +619,9 @@ namespace Square.Http.Client
                 : retryAfter.Delta.GetValueOrDefault(TimeSpan.Zero);
         }
 
-        private AsyncRetryPolicy<HttpResponseMessage> GetRetryPolicy()
+        private AsyncRetryPolicy<HttpResponseMessage> GetRetryPolicy(RetryConfiguration retryConfiguration)
         {
-            return Policy.HandleResult<HttpResponseMessage>(r => this.ShouldRetry(r))
+            return Policy.HandleResult<HttpResponseMessage>(response => this.ShouldRetry(response, retryConfiguration))
                 .Or<TaskCanceledException>()
                 .Or<HttpRequestException>()
                 .WaitAndRetryAsync(
@@ -630,9 +638,14 @@ namespace Square.Http.Client
                 : Policy.TimeoutAsync(this.maximumRetryWaitTime);
         }
 
-        private AsyncPolicyWrap<HttpResponseMessage> GetCombinedPolicy()
+        private AsyncPolicyWrap<HttpResponseMessage> GetCombinedPolicy(RetryConfiguration retryConfiguration = null)
         {
-            return this.GetTimeoutPolicy().WrapAsync(this.GetRetryPolicy());
+            if (retryConfiguration == null)
+            {
+                retryConfiguration = DefaultRetryConfiguration.RetryConfiguration;
+            }
+
+            return this.GetTimeoutPolicy().WrapAsync(this.GetRetryPolicy(retryConfiguration));
         }
 
         private double GetExponentialWaitTime(int retryAttempt)

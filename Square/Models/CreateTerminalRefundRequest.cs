@@ -39,7 +39,7 @@ namespace Square.Models
         public string IdempotencyKey { get; }
 
         /// <summary>
-        /// Gets or sets Refund.
+        /// Represents a payment refund processed by the Square Terminal. Only supports Interac (Canadian debit network) payment refunds.
         /// </summary>
         [JsonProperty("refund", NullValueHandling = NullValueHandling.Ignore)]
         public Models.TerminalRefund Refund { get; }
