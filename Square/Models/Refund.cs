@@ -22,22 +22,22 @@ namespace Square.Models
         /// </summary>
         /// <param name="id">id.</param>
         /// <param name="locationId">location_id.</param>
-        /// <param name="transactionId">transaction_id.</param>
         /// <param name="tenderId">tender_id.</param>
         /// <param name="reason">reason.</param>
         /// <param name="amountMoney">amount_money.</param>
         /// <param name="status">status.</param>
+        /// <param name="transactionId">transaction_id.</param>
         /// <param name="createdAt">created_at.</param>
         /// <param name="processingFeeMoney">processing_fee_money.</param>
         /// <param name="additionalRecipients">additional_recipients.</param>
         public Refund(
             string id,
             string locationId,
-            string transactionId,
             string tenderId,
             string reason,
             Models.Money amountMoney,
             string status,
+            string transactionId = null,
             string createdAt = null,
             Models.Money processingFeeMoney = null,
             IList<Models.AdditionalRecipient> additionalRecipients = null)
@@ -69,7 +69,7 @@ namespace Square.Models
         /// <summary>
         /// The ID of the transaction that the refunded tender is part of.
         /// </summary>
-        [JsonProperty("transaction_id")]
+        [JsonProperty("transaction_id", NullValueHandling = NullValueHandling.Ignore)]
         public string TransactionId { get; }
 
         /// <summary>
@@ -199,11 +199,11 @@ namespace Square.Models
             var builder = new Builder(
                 this.Id,
                 this.LocationId,
-                this.TransactionId,
                 this.TenderId,
                 this.Reason,
                 this.AmountMoney,
                 this.Status)
+                .TransactionId(this.TransactionId)
                 .CreatedAt(this.CreatedAt)
                 .ProcessingFeeMoney(this.ProcessingFeeMoney)
                 .AdditionalRecipients(this.AdditionalRecipients);
@@ -217,11 +217,11 @@ namespace Square.Models
         {
             private string id;
             private string locationId;
-            private string transactionId;
             private string tenderId;
             private string reason;
             private Models.Money amountMoney;
             private string status;
+            private string transactionId;
             private string createdAt;
             private Models.Money processingFeeMoney;
             private IList<Models.AdditionalRecipient> additionalRecipients;
@@ -229,7 +229,6 @@ namespace Square.Models
             public Builder(
                 string id,
                 string locationId,
-                string transactionId,
                 string tenderId,
                 string reason,
                 Models.Money amountMoney,
@@ -237,7 +236,6 @@ namespace Square.Models
             {
                 this.id = id;
                 this.locationId = locationId;
-                this.transactionId = transactionId;
                 this.tenderId = tenderId;
                 this.reason = reason;
                 this.amountMoney = amountMoney;
@@ -263,17 +261,6 @@ namespace Square.Models
             public Builder LocationId(string locationId)
             {
                 this.locationId = locationId;
-                return this;
-            }
-
-             /// <summary>
-             /// TransactionId.
-             /// </summary>
-             /// <param name="transactionId"> transactionId. </param>
-             /// <returns> Builder. </returns>
-            public Builder TransactionId(string transactionId)
-            {
-                this.transactionId = transactionId;
                 return this;
             }
 
@@ -322,6 +309,17 @@ namespace Square.Models
             }
 
              /// <summary>
+             /// TransactionId.
+             /// </summary>
+             /// <param name="transactionId"> transactionId. </param>
+             /// <returns> Builder. </returns>
+            public Builder TransactionId(string transactionId)
+            {
+                this.transactionId = transactionId;
+                return this;
+            }
+
+             /// <summary>
              /// CreatedAt.
              /// </summary>
              /// <param name="createdAt"> createdAt. </param>
@@ -363,11 +361,11 @@ namespace Square.Models
                 return new Refund(
                     this.id,
                     this.locationId,
-                    this.transactionId,
                     this.tenderId,
                     this.reason,
                     this.amountMoney,
                     this.status,
+                    this.transactionId,
                     this.createdAt,
                     this.processingFeeMoney,
                     this.additionalRecipients);

@@ -46,7 +46,7 @@ namespace Square.Models
         /// <summary>
         /// A set of [CreateVendorResponse]($m/CreateVendorResponse) objects encapsulating successfully created [Vendor]($m/Vendor)
         /// objects or error responses for failed attempts. The set is represented by
-        /// a collection of idempotency-key/`Vendor`-object or idempotency-key/error-object pairs. The impotency keys correspond to those specified
+        /// a collection of idempotency-key/`Vendor`-object or idempotency-key/error-object pairs. The idempotency keys correspond to those specified
         /// in the input.
         /// </summary>
         [JsonProperty("responses", NullValueHandling = NullValueHandling.Ignore)]

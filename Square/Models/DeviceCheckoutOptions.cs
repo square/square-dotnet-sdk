@@ -22,14 +22,17 @@ namespace Square.Models
         /// </summary>
         /// <param name="deviceId">device_id.</param>
         /// <param name="skipReceiptScreen">skip_receipt_screen.</param>
+        /// <param name="collectSignature">collect_signature.</param>
         /// <param name="tipSettings">tip_settings.</param>
         public DeviceCheckoutOptions(
             string deviceId,
             bool? skipReceiptScreen = null,
+            bool? collectSignature = null,
             Models.TipSettings tipSettings = null)
         {
             this.DeviceId = deviceId;
             this.SkipReceiptScreen = skipReceiptScreen;
+            this.CollectSignature = collectSignature;
             this.TipSettings = tipSettings;
         }
 
@@ -46,6 +49,12 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("skip_receipt_screen", NullValueHandling = NullValueHandling.Ignore)]
         public bool? SkipReceiptScreen { get; }
+
+        /// <summary>
+        /// Indicates that signature collection is desired during checkout. Defaults to false.
+        /// </summary>
+        [JsonProperty("collect_signature", NullValueHandling = NullValueHandling.Ignore)]
+        public bool? CollectSignature { get; }
 
         /// <summary>
         /// Gets or sets TipSettings.
@@ -79,14 +88,15 @@ namespace Square.Models
             return obj is DeviceCheckoutOptions other &&
                 ((this.DeviceId == null && other.DeviceId == null) || (this.DeviceId?.Equals(other.DeviceId) == true)) &&
                 ((this.SkipReceiptScreen == null && other.SkipReceiptScreen == null) || (this.SkipReceiptScreen?.Equals(other.SkipReceiptScreen) == true)) &&
+                ((this.CollectSignature == null && other.CollectSignature == null) || (this.CollectSignature?.Equals(other.CollectSignature) == true)) &&
                 ((this.TipSettings == null && other.TipSettings == null) || (this.TipSettings?.Equals(other.TipSettings) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1796237610;
-            hashCode = HashCode.Combine(this.DeviceId, this.SkipReceiptScreen, this.TipSettings);
+            int hashCode = -110219774;
+            hashCode = HashCode.Combine(this.DeviceId, this.SkipReceiptScreen, this.CollectSignature, this.TipSettings);
 
             return hashCode;
         }
@@ -99,6 +109,7 @@ namespace Square.Models
         {
             toStringOutput.Add($"this.DeviceId = {(this.DeviceId == null ? "null" : this.DeviceId == string.Empty ? "" : this.DeviceId)}");
             toStringOutput.Add($"this.SkipReceiptScreen = {(this.SkipReceiptScreen == null ? "null" : this.SkipReceiptScreen.ToString())}");
+            toStringOutput.Add($"this.CollectSignature = {(this.CollectSignature == null ? "null" : this.CollectSignature.ToString())}");
             toStringOutput.Add($"this.TipSettings = {(this.TipSettings == null ? "null" : this.TipSettings.ToString())}");
         }
 
@@ -111,6 +122,7 @@ namespace Square.Models
             var builder = new Builder(
                 this.DeviceId)
                 .SkipReceiptScreen(this.SkipReceiptScreen)
+                .CollectSignature(this.CollectSignature)
                 .TipSettings(this.TipSettings);
             return builder;
         }
@@ -122,6 +134,7 @@ namespace Square.Models
         {
             private string deviceId;
             private bool? skipReceiptScreen;
+            private bool? collectSignature;
             private Models.TipSettings tipSettings;
 
             public Builder(
@@ -153,6 +166,17 @@ namespace Square.Models
             }
 
              /// <summary>
+             /// CollectSignature.
+             /// </summary>
+             /// <param name="collectSignature"> collectSignature. </param>
+             /// <returns> Builder. </returns>
+            public Builder CollectSignature(bool? collectSignature)
+            {
+                this.collectSignature = collectSignature;
+                return this;
+            }
+
+             /// <summary>
              /// TipSettings.
              /// </summary>
              /// <param name="tipSettings"> tipSettings. </param>
@@ -172,6 +196,7 @@ namespace Square.Models
                 return new DeviceCheckoutOptions(
                     this.deviceId,
                     this.skipReceiptScreen,
+                    this.collectSignature,
                     this.tipSettings);
             }
         }

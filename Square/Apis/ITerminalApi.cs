@@ -40,7 +40,7 @@ namespace Square.Apis
                 CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Retrieves a filtered list of Terminal checkout requests created by the account making the request.
+        /// Returns a filtered list of Terminal checkout requests created by the application making the request. Only Terminal checkout requests created for the merchant scoped to the OAuth token are returned. Terminal checkout requests are available for 30 days.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <returns>Returns the Models.SearchTerminalCheckoutsResponse response from the API call.</returns>
@@ -48,7 +48,7 @@ namespace Square.Apis
                 Models.SearchTerminalCheckoutsRequest body);
 
         /// <summary>
-        /// Retrieves a filtered list of Terminal checkout requests created by the account making the request.
+        /// Returns a filtered list of Terminal checkout requests created by the application making the request. Only Terminal checkout requests created for the merchant scoped to the OAuth token are returned. Terminal checkout requests are available for 30 days.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
@@ -58,7 +58,7 @@ namespace Square.Apis
                 CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Retrieves a Terminal checkout request by `checkout_id`.
+        /// Retrieves a Terminal checkout request by `checkout_id`. Terminal checkout requests are available for 30 days.
         /// </summary>
         /// <param name="checkoutId">Required parameter: The unique ID for the desired `TerminalCheckout`..</param>
         /// <returns>Returns the Models.GetTerminalCheckoutResponse response from the API call.</returns>
@@ -66,7 +66,7 @@ namespace Square.Apis
                 string checkoutId);
 
         /// <summary>
-        /// Retrieves a Terminal checkout request by `checkout_id`.
+        /// Retrieves a Terminal checkout request by `checkout_id`. Terminal checkout requests are available for 30 days.
         /// </summary>
         /// <param name="checkoutId">Required parameter: The unique ID for the desired `TerminalCheckout`..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
@@ -94,7 +94,7 @@ namespace Square.Apis
                 CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Creates a request to refund an Interac payment completed on a Square Terminal.
+        /// Creates a request to refund an Interac payment completed on a Square Terminal. Refunds for Interac payments on a Square Terminal are supported only for Interac debit cards in Canada. Other refunds for Terminal payments should use the Refunds API. For more information, see [Refunds API]($e/Refunds).
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <returns>Returns the Models.CreateTerminalRefundResponse response from the API call.</returns>
@@ -102,7 +102,7 @@ namespace Square.Apis
                 Models.CreateTerminalRefundRequest body);
 
         /// <summary>
-        /// Creates a request to refund an Interac payment completed on a Square Terminal.
+        /// Creates a request to refund an Interac payment completed on a Square Terminal. Refunds for Interac payments on a Square Terminal are supported only for Interac debit cards in Canada. Other refunds for Terminal payments should use the Refunds API. For more information, see [Refunds API]($e/Refunds).
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
@@ -112,7 +112,7 @@ namespace Square.Apis
                 CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Retrieves a filtered list of Interac Terminal refund requests created by the seller making the request.
+        /// Retrieves a filtered list of Interac Terminal refund requests created by the seller making the request. Terminal refund requests are available for 30 days.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <returns>Returns the Models.SearchTerminalRefundsResponse response from the API call.</returns>
@@ -120,7 +120,7 @@ namespace Square.Apis
                 Models.SearchTerminalRefundsRequest body);
 
         /// <summary>
-        /// Retrieves a filtered list of Interac Terminal refund requests created by the seller making the request.
+        /// Retrieves a filtered list of Interac Terminal refund requests created by the seller making the request. Terminal refund requests are available for 30 days.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
@@ -130,7 +130,7 @@ namespace Square.Apis
                 CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Retrieves an Interac Terminal refund object by ID.
+        /// Retrieves an Interac Terminal refund object by ID. Terminal refund objects are available for 30 days.
         /// </summary>
         /// <param name="terminalRefundId">Required parameter: The unique ID for the desired `TerminalRefund`..</param>
         /// <returns>Returns the Models.GetTerminalRefundResponse response from the API call.</returns>
@@ -138,7 +138,7 @@ namespace Square.Apis
                 string terminalRefundId);
 
         /// <summary>
-        /// Retrieves an Interac Terminal refund object by ID.
+        /// Retrieves an Interac Terminal refund object by ID. Terminal refund objects are available for 30 days.
         /// </summary>
         /// <param name="terminalRefundId">Required parameter: The unique ID for the desired `TerminalRefund`..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>

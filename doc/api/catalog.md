@@ -106,6 +106,7 @@ var body = new BatchRetrieveCatalogObjectsRequest.Builder(
         bodyObjectIds)
     .IncludeRelatedObjects(true)
     .CatalogVersion(118L)
+    .IncludeDeletedObjects(false)
     .Build();
 
 try

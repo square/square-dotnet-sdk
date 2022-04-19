@@ -23,14 +23,17 @@ namespace Square.Models
         /// <param name="objectIds">object_ids.</param>
         /// <param name="includeRelatedObjects">include_related_objects.</param>
         /// <param name="catalogVersion">catalog_version.</param>
+        /// <param name="includeDeletedObjects">include_deleted_objects.</param>
         public BatchRetrieveCatalogObjectsRequest(
             IList<string> objectIds,
             bool? includeRelatedObjects = null,
-            long? catalogVersion = null)
+            long? catalogVersion = null,
+            bool? includeDeletedObjects = null)
         {
             this.ObjectIds = objectIds;
             this.IncludeRelatedObjects = includeRelatedObjects;
             this.CatalogVersion = catalogVersion;
+            this.IncludeDeletedObjects = includeDeletedObjects;
         }
 
         /// <summary>
@@ -65,6 +68,12 @@ namespace Square.Models
         [JsonProperty("catalog_version", NullValueHandling = NullValueHandling.Ignore)]
         public long? CatalogVersion { get; }
 
+        /// <summary>
+        /// Indicates whether to include (`true`) or not (`false`) in the response deleted objects, namely, those with the `is_deleted` attribute set to `true`.
+        /// </summary>
+        [JsonProperty("include_deleted_objects", NullValueHandling = NullValueHandling.Ignore)]
+        public bool? IncludeDeletedObjects { get; }
+
         /// <inheritdoc/>
         public override string ToString()
         {
@@ -91,14 +100,15 @@ namespace Square.Models
             return obj is BatchRetrieveCatalogObjectsRequest other &&
                 ((this.ObjectIds == null && other.ObjectIds == null) || (this.ObjectIds?.Equals(other.ObjectIds) == true)) &&
                 ((this.IncludeRelatedObjects == null && other.IncludeRelatedObjects == null) || (this.IncludeRelatedObjects?.Equals(other.IncludeRelatedObjects) == true)) &&
-                ((this.CatalogVersion == null && other.CatalogVersion == null) || (this.CatalogVersion?.Equals(other.CatalogVersion) == true));
+                ((this.CatalogVersion == null && other.CatalogVersion == null) || (this.CatalogVersion?.Equals(other.CatalogVersion) == true)) &&
+                ((this.IncludeDeletedObjects == null && other.IncludeDeletedObjects == null) || (this.IncludeDeletedObjects?.Equals(other.IncludeDeletedObjects) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 664426275;
-            hashCode = HashCode.Combine(this.ObjectIds, this.IncludeRelatedObjects, this.CatalogVersion);
+            int hashCode = -1492875239;
+            hashCode = HashCode.Combine(this.ObjectIds, this.IncludeRelatedObjects, this.CatalogVersion, this.IncludeDeletedObjects);
 
             return hashCode;
         }
@@ -112,6 +122,7 @@ namespace Square.Models
             toStringOutput.Add($"this.ObjectIds = {(this.ObjectIds == null ? "null" : $"[{string.Join(", ", this.ObjectIds)} ]")}");
             toStringOutput.Add($"this.IncludeRelatedObjects = {(this.IncludeRelatedObjects == null ? "null" : this.IncludeRelatedObjects.ToString())}");
             toStringOutput.Add($"this.CatalogVersion = {(this.CatalogVersion == null ? "null" : this.CatalogVersion.ToString())}");
+            toStringOutput.Add($"this.IncludeDeletedObjects = {(this.IncludeDeletedObjects == null ? "null" : this.IncludeDeletedObjects.ToString())}");
         }
 
         /// <summary>
@@ -123,7 +134,8 @@ namespace Square.Models
             var builder = new Builder(
                 this.ObjectIds)
                 .IncludeRelatedObjects(this.IncludeRelatedObjects)
-                .CatalogVersion(this.CatalogVersion);
+                .CatalogVersion(this.CatalogVersion)
+                .IncludeDeletedObjects(this.IncludeDeletedObjects);
             return builder;
         }
 
@@ -135,6 +147,7 @@ namespace Square.Models
             private IList<string> objectIds;
             private bool? includeRelatedObjects;
             private long? catalogVersion;
+            private bool? includeDeletedObjects;
 
             public Builder(
                 IList<string> objectIds)
@@ -175,6 +188,17 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// IncludeDeletedObjects.
+             /// </summary>
+             /// <param name="includeDeletedObjects"> includeDeletedObjects. </param>
+             /// <returns> Builder. </returns>
+            public Builder IncludeDeletedObjects(bool? includeDeletedObjects)
+            {
+                this.includeDeletedObjects = includeDeletedObjects;
+                return this;
+            }
+
             /// <summary>
             /// Builds class object.
             /// </summary>
@@ -184,7 +208,8 @@ namespace Square.Models
                 return new BatchRetrieveCatalogObjectsRequest(
                     this.objectIds,
                     this.includeRelatedObjects,
-                    this.catalogVersion);
+                    this.catalogVersion,
+                    this.includeDeletedObjects);
             }
         }
     }

@@ -6,8 +6,8 @@ namespace Square.Utilities
     using Newtonsoft.Json.Linq;
 
     [JsonConverter(typeof(JsonObjectSerializer))]
-    public class JsonObject 
-    {     
+    public class JsonObject
+    {
         private readonly JToken json;
 
         private JsonObject(JObject json)
@@ -18,14 +18,9 @@ namespace Square.Utilities
         /// <summary>
         /// Return current JSON string.
         /// </summary>
-        public string ToJsonString()
+        public override string ToString()
         {
-            if (json == null)
-            {
-                return null;
-            }
-
-            return json.ToString(Formatting.None);
+            return JsonConvert.SerializeObject(json, Formatting.None);
         }
 
         /// <summary>
@@ -52,9 +47,9 @@ namespace Square.Utilities
         }
 
         /// <summary>
-        /// Getter for current JSON.
+        /// Getter for the stored JSON.
         /// </summary>
-        internal JToken GetStoredObject()
+        public JToken GetStoredObject()
         {
             return json;
         }
@@ -69,7 +64,7 @@ namespace Square.Utilities
 
         public override void WriteJson(JsonWriter writer, JsonObject value, JsonSerializer serializer)
         {
-            writer.WriteRawValue(value.ToJsonString());
+            writer.WriteRawValue(value.ToString());
         }
     }
 }

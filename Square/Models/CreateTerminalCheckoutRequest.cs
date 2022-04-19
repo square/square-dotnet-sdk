@@ -39,7 +39,7 @@ namespace Square.Models
         public string IdempotencyKey { get; }
 
         /// <summary>
-        /// Gets or sets Checkout.
+        /// Represents a checkout processed by the Square Terminal.
         /// </summary>
         [JsonProperty("checkout")]
         public Models.TerminalCheckout Checkout { get; }

@@ -184,7 +184,7 @@ namespace Square.Models
         public string TeamMemberId { get; }
 
         /// <summary>
-        /// The Square-generated ID of the [Transaction][#type-transaction] that
+        /// The Square-generated ID of the [Transaction]($m/Transaction) that
         /// caused the adjustment. Only relevant for payment-related state
         /// transitions.
         /// </summary>
@@ -192,7 +192,7 @@ namespace Square.Models
         public string TransactionId { get; }
 
         /// <summary>
-        /// The Square-generated ID of the [Refund][#type-refund] that
+        /// The Square-generated ID of the [Refund]($m/Refund) that
         /// caused the adjustment. Only relevant for refund-related state
         /// transitions.
         /// </summary>

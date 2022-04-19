@@ -145,7 +145,7 @@ namespace Square.Models
         /// <summary>
         /// The IDs of the [invoices]($m/Invoice) created for the
         /// subscription, listed in order when the invoices were created
-        /// (oldest invoices appear first).
+        /// (newest invoices appear first).
         /// </summary>
         [JsonProperty("invoice_ids", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> InvoiceIds { get; }

@@ -44,7 +44,7 @@ namespace Square.Models
         public IList<Models.Error> Errors { get; }
 
         /// <summary>
-        /// Gets or sets Checkout.
+        /// Represents a checkout processed by the Square Terminal.
         /// </summary>
         [JsonProperty("checkout", NullValueHandling = NullValueHandling.Ignore)]
         public Models.TerminalCheckout Checkout { get; }

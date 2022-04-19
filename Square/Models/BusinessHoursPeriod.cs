@@ -42,7 +42,7 @@ namespace Square.Models
         /// <summary>
         /// The start time of a business hours period, specified in local time using partial-time
         /// RFC 3339 format. For example, `8:30:00` for a period starting at 8:30 in the morning.
-        /// Note that the seconds value will always be :00, but it is appended for conformance to the RFC.
+        /// Note that the seconds value is always :00, but it is appended for conformance to the RFC.
         /// </summary>
         [JsonProperty("start_local_time", NullValueHandling = NullValueHandling.Ignore)]
         public string StartLocalTime { get; }
@@ -50,7 +50,7 @@ namespace Square.Models
         /// <summary>
         /// The end time of a business hours period, specified in local time using partial-time
         /// RFC 3339 format. For example, `21:00:00` for a period ending at 9:00 in the evening.
-        /// Note that the seconds value will always be :00, but it is appended for conformance to the RFC.
+        /// Note that the seconds value is always :00, but it is appended for conformance to the RFC.
         /// </summary>
         [JsonProperty("end_local_time", NullValueHandling = NullValueHandling.Ignore)]
         public string EndLocalTime { get; }

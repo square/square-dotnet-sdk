@@ -28,8 +28,7 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// The list of time periods during which the business is open. There may be at most 10
-        /// periods per day.
+        /// The list of time periods during which the business is open. There can be at most 10 periods per day.
         /// </summary>
         [JsonProperty("periods", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.BusinessHoursPeriod> Periods { get; }

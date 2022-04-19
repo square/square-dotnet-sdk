@@ -67,7 +67,7 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// The tender's unique ID.
+        /// The tender's unique ID. It is the associated payment ID.
         /// </summary>
         [JsonProperty("id", NullValueHandling = NullValueHandling.Ignore)]
         public string Id { get; }

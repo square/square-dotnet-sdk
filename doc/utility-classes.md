@@ -35,7 +35,8 @@ Class to wrap JSON object.
 | Name | Description | Return Type |
 |  --- | --- | --- |
 | `FromJsonString(string json)` | Initializes JsonObject instance with JSON string. | `JsonObject` |
-| `ToJsonString()` | String representation of the stored JSON. | `string` |
+| `GetStoredObject()` | Getter for the stored JSON object. | `JToken` |
+| `ToString()` | String representation of the stored JSON. | `string` |
 
 ## JsonValue Class
 
@@ -52,5 +53,6 @@ Class to wrap any JSON value.
 | `FromLong(long? value)` | Initializes JsonValue instance with long value. | `JsonValue` |
 | `FromObject(object value)` | Initializes JsonValue instance with any object value. | `JsonValue` |
 | `FromArray<T>(List<T> values)` | Initializes JsonValue instance with an array of the given type. | `JsonValue` |
-| `ToJsonString()` | String representation of the stored JSON. | `string` |
+| `GetStoredObject()` | Getter for the stored object. | `object` |
+| `ToString()` | String representation of the stored JSON. | `string` |
 

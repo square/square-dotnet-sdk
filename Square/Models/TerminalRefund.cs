@@ -22,11 +22,11 @@ namespace Square.Models
         /// </summary>
         /// <param name="paymentId">payment_id.</param>
         /// <param name="amountMoney">amount_money.</param>
+        /// <param name="reason">reason.</param>
+        /// <param name="deviceId">device_id.</param>
         /// <param name="id">id.</param>
         /// <param name="refundId">refund_id.</param>
         /// <param name="orderId">order_id.</param>
-        /// <param name="reason">reason.</param>
-        /// <param name="deviceId">device_id.</param>
         /// <param name="deadlineDuration">deadline_duration.</param>
         /// <param name="status">status.</param>
         /// <param name="cancelReason">cancel_reason.</param>
@@ -37,11 +37,11 @@ namespace Square.Models
         public TerminalRefund(
             string paymentId,
             Models.Money amountMoney,
+            string reason,
+            string deviceId,
             string id = null,
             string refundId = null,
             string orderId = null,
-            string reason = null,
-            string deviceId = null,
             string deadlineDuration = null,
             string status = null,
             string cancelReason = null,
@@ -103,16 +103,15 @@ namespace Square.Models
 
         /// <summary>
         /// A description of the reason for the refund.
-        /// Note: maximum 192 characters
         /// </summary>
-        [JsonProperty("reason", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("reason")]
         public string Reason { get; }
 
         /// <summary>
         /// The unique ID of the device intended for this `TerminalRefund`.
         /// The Id can be retrieved from /v2/devices api.
         /// </summary>
-        [JsonProperty("device_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("device_id")]
         public string DeviceId { get; }
 
         /// <summary>
@@ -127,7 +126,7 @@ namespace Square.Models
 
         /// <summary>
         /// The status of the `TerminalRefund`.
-        /// Options: `PENDING`, `IN_PROGRESS`, `CANCELED`, or `COMPLETED`.
+        /// Options: `PENDING`, `IN_PROGRESS`, `CANCEL_REQUESTED`, `CANCELED`, or `COMPLETED`.
         /// </summary>
         [JsonProperty("status", NullValueHandling = NullValueHandling.Ignore)]
         public string Status { get; }
@@ -243,12 +242,12 @@ namespace Square.Models
         {
             var builder = new Builder(
                 this.PaymentId,
-                this.AmountMoney)
+                this.AmountMoney,
+                this.Reason,
+                this.DeviceId)
                 .Id(this.Id)
                 .RefundId(this.RefundId)
                 .OrderId(this.OrderId)
-                .Reason(this.Reason)
-                .DeviceId(this.DeviceId)
                 .DeadlineDuration(this.DeadlineDuration)
                 .Status(this.Status)
                 .CancelReason(this.CancelReason)
@@ -266,11 +265,11 @@ namespace Square.Models
         {
             private string paymentId;
             private Models.Money amountMoney;
+            private string reason;
+            private string deviceId;
             private string id;
             private string refundId;
             private string orderId;
-            private string reason;
-            private string deviceId;
             private string deadlineDuration;
             private string status;
             private string cancelReason;
@@ -281,10 +280,14 @@ namespace Square.Models
 
             public Builder(
                 string paymentId,
-                Models.Money amountMoney)
+                Models.Money amountMoney,
+                string reason,
+                string deviceId)
             {
                 this.paymentId = paymentId;
                 this.amountMoney = amountMoney;
+                this.reason = reason;
+                this.deviceId = deviceId;
             }
 
              /// <summary>
@@ -306,6 +309,28 @@ namespace Square.Models
             public Builder AmountMoney(Models.Money amountMoney)
             {
                 this.amountMoney = amountMoney;
+                return this;
+            }
+
+             /// <summary>
+             /// Reason.
+             /// </summary>
+             /// <param name="reason"> reason. </param>
+             /// <returns> Builder. </returns>
+            public Builder Reason(string reason)
+            {
+                this.reason = reason;
+                return this;
+            }
+
+             /// <summary>
+             /// DeviceId.
+             /// </summary>
+             /// <param name="deviceId"> deviceId. </param>
+             /// <returns> Builder. </returns>
+            public Builder DeviceId(string deviceId)
+            {
+                this.deviceId = deviceId;
                 return this;
             }
 
@@ -339,28 +364,6 @@ namespace Square.Models
             public Builder OrderId(string orderId)
             {
                 this.orderId = orderId;
-                return this;
-            }
-
-             /// <summary>
-             /// Reason.
-             /// </summary>
-             /// <param name="reason"> reason. </param>
-             /// <returns> Builder. </returns>
-            public Builder Reason(string reason)
-            {
-                this.reason = reason;
-                return this;
-            }
-
-             /// <summary>
-             /// DeviceId.
-             /// </summary>
-             /// <param name="deviceId"> deviceId. </param>
-             /// <returns> Builder. </returns>
-            public Builder DeviceId(string deviceId)
-            {
-                this.deviceId = deviceId;
                 return this;
             }
 
@@ -450,11 +453,11 @@ namespace Square.Models
                 return new TerminalRefund(
                     this.paymentId,
                     this.amountMoney,
+                    this.reason,
+                    this.deviceId,
                     this.id,
                     this.refundId,
                     this.orderId,
-                    this.reason,
-                    this.deviceId,
                     this.deadlineDuration,
                     this.status,
                     this.cancelReason,

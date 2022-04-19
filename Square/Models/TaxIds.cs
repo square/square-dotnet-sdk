@@ -46,7 +46,7 @@ namespace Square.Models
 
         /// <summary>
         /// The SIRET (Système d'Identification du Répertoire des Entreprises et de leurs Etablissements)
-        /// number is a 14 digit code issued by the French INSEE. For example, `39922799000021`.
+        /// number is a 14-digit code issued by the French INSEE. For example, `39922799000021`.
         /// </summary>
         [JsonProperty("fr_siret", NullValueHandling = NullValueHandling.Ignore)]
         public string FrSiret { get; }
@@ -60,7 +60,7 @@ namespace Square.Models
         public string FrNaf { get; }
 
         /// <summary>
-        /// The NIF (Numero de Identificacion Fiscal) number is a 9 character tax identifier used in Spain.
+        /// The NIF (Numero de Identificacion Fiscal) number is a nine-character tax identifier used in Spain.
         /// If it is present, it has been validated. For example, `73628495A`.
         /// </summary>
         [JsonProperty("es_nif", NullValueHandling = NullValueHandling.Ignore)]

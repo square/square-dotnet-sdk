@@ -104,16 +104,12 @@ var bodyOrderLineItems1QuantityUnit = new OrderQuantityUnit.Builder()
     .Build();
 var bodyOrderLineItems1Modifiers = new List<OrderLineItemModifier>();
 
-var bodyOrderLineItems1Modifiers0BasePriceMoney = new Money.Builder()
-    .Amount(53L)
-    .Currency("TTD")
-    .Build();
 var bodyOrderLineItems1Modifiers0 = new OrderLineItemModifier.Builder()
     .Uid("uid1")
     .CatalogObjectId("CHQX7Y4KY6N5KINJKZCFURPZ")
     .CatalogVersion(69L)
     .Name("name1")
-    .BasePriceMoney(bodyOrderLineItems1Modifiers0BasePriceMoney)
+    .Quantity("quantity7")
     .Build();
 bodyOrderLineItems1Modifiers.Add(bodyOrderLineItems1Modifiers0);
 
@@ -722,7 +718,7 @@ To be used with `PayOrder`, a payment must:
 - Reference the order by specifying the `order_id` when [creating the payment](../../doc/api/payments.md#create-payment).
   Any approved payments that reference the same `order_id` not specified in the
   `payment_ids` is canceled.
-- Be approved with [delayed capture](https://developer.squareup.com/docs/payments-api/take-payments#delayed-capture).
+- Be approved with [delayed capture](https://developer.squareup.com/docs/payments-api/take-payments/card-payments/delayed-capture).
   Using a delayed capture payment with `PayOrder` completes the approved payment.
 
 ```csharp

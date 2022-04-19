@@ -144,6 +144,11 @@ namespace Square
         IPaymentsApi PaymentsApi { get; }
 
         /// <summary>
+        /// Gets instance for IPayoutsApi.
+        /// </summary>
+        IPayoutsApi PayoutsApi { get; }
+
+        /// <summary>
         /// Gets instance for IRefundsApi.
         /// </summary>
         IRefundsApi RefundsApi { get; }

@@ -61,6 +61,7 @@ var bodyCheckoutDeviceOptionsTipSettings = new TipSettings.Builder()
 var bodyCheckoutDeviceOptions = new DeviceCheckoutOptions.Builder(
         "dbb5d83a-7838-11ea-bc55-0242ac130003")
     .SkipReceiptScreen(false)
+    .CollectSignature(false)
     .TipSettings(bodyCheckoutDeviceOptionsTipSettings)
     .Build();
 var bodyCheckout = new TerminalCheckout.Builder(
@@ -87,7 +88,7 @@ catch (ApiException e){};
 
 # Search Terminal Checkouts
 
-Retrieves a filtered list of Terminal checkout requests created by the account making the request.
+Returns a filtered list of Terminal checkout requests created by the application making the request. Only Terminal checkout requests created for the merchant scoped to the OAuth token are returned. Terminal checkout requests are available for 30 days.
 
 ```csharp
 SearchTerminalCheckoutsAsync(
@@ -139,7 +140,7 @@ catch (ApiException e){};
 
 # Get Terminal Checkout
 
-Retrieves a Terminal checkout request by `checkout_id`.
+Retrieves a Terminal checkout request by `checkout_id`. Terminal checkout requests are available for 30 days.
 
 ```csharp
 GetTerminalCheckoutAsync(
@@ -203,7 +204,7 @@ catch (ApiException e){};
 
 # Create Terminal Refund
 
-Creates a request to refund an Interac payment completed on a Square Terminal.
+Creates a request to refund an Interac payment completed on a Square Terminal. Refunds for Interac payments on a Square Terminal are supported only for Interac debit cards in Canada. Other refunds for Terminal payments should use the Refunds API. For more information, see [Refunds API](../../doc/api/refunds.md).
 
 ```csharp
 CreateTerminalRefundAsync(
@@ -229,12 +230,14 @@ var bodyRefundAmountMoney = new Money.Builder()
     .Build();
 var bodyRefund = new TerminalRefund.Builder(
         "5O5OvgkcNUhl7JBuINflcjKqUzXZY",
-        bodyRefundAmountMoney)
+        bodyRefundAmountMoney,
+        "Returning items",
+        "f72dfb8e-4d65-4e56-aade-ec3fb8d33291")
     .Id("id4")
     .RefundId("refund_id8")
     .OrderId("order_id8")
-    .Reason("Returning items")
-    .DeviceId("f72dfb8e-4d65-4e56-aade-ec3fb8d33291")
+    .DeadlineDuration("deadline_duration6")
+    .Status("status6")
     .Build();
 var body = new CreateTerminalRefundRequest.Builder(
         "402a640b-b26f-401f-b406-46f839590c04")
@@ -251,7 +254,7 @@ catch (ApiException e){};
 
 # Search Terminal Refunds
 
-Retrieves a filtered list of Interac Terminal refund requests created by the seller making the request.
+Retrieves a filtered list of Interac Terminal refund requests created by the seller making the request. Terminal refund requests are available for 30 days.
 
 ```csharp
 SearchTerminalRefundsAsync(
@@ -303,7 +306,7 @@ catch (ApiException e){};
 
 # Get Terminal Refund
 
-Retrieves an Interac Terminal refund object by ID.
+Retrieves an Interac Terminal refund object by ID. Terminal refund objects are available for 30 days.
 
 ```csharp
 GetTerminalRefundAsync(

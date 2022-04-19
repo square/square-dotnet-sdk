@@ -24,6 +24,7 @@ namespace Square.Models
         /// <param name="catalogObjectId">catalog_object_id.</param>
         /// <param name="catalogVersion">catalog_version.</param>
         /// <param name="name">name.</param>
+        /// <param name="quantity">quantity.</param>
         /// <param name="basePriceMoney">base_price_money.</param>
         /// <param name="totalPriceMoney">total_price_money.</param>
         /// <param name="metadata">metadata.</param>
@@ -32,6 +33,7 @@ namespace Square.Models
             string catalogObjectId = null,
             long? catalogVersion = null,
             string name = null,
+            string quantity = null,
             Models.Money basePriceMoney = null,
             Models.Money totalPriceMoney = null,
             IDictionary<string, string> metadata = null)
@@ -40,6 +42,7 @@ namespace Square.Models
             this.CatalogObjectId = catalogObjectId;
             this.CatalogVersion = catalogVersion;
             this.Name = name;
+            this.Quantity = quantity;
             this.BasePriceMoney = basePriceMoney;
             this.TotalPriceMoney = totalPriceMoney;
             this.Metadata = metadata;
@@ -68,6 +71,18 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
         public string Name { get; }
+
+        /// <summary>
+        /// The quantity of the line item modifier. The modifier quantity can be 0 or more.
+        /// For example, suppose a restaurant offers a cheeseburger on the menu. When a buyer orders
+        /// this item, the restaurant records the purchase by creating an `Order` object with a line item
+        /// for a burger. The line item includes a line item modifier: the name is cheese and the quantity
+        /// is 1. The buyer has the option to order extra cheese (or no cheese). If the buyer chooses
+        /// the extra cheese option, the modifier quantity increases to 2. If the buyer does not want
+        /// any cheese, the modifier quantity is set to 0.
+        /// </summary>
+        [JsonProperty("quantity", NullValueHandling = NullValueHandling.Ignore)]
+        public string Quantity { get; }
 
         /// <summary>
         /// Represents an amount of money. `Money` fields can be signed or unsigned.
@@ -137,6 +152,7 @@ namespace Square.Models
                 ((this.CatalogObjectId == null && other.CatalogObjectId == null) || (this.CatalogObjectId?.Equals(other.CatalogObjectId) == true)) &&
                 ((this.CatalogVersion == null && other.CatalogVersion == null) || (this.CatalogVersion?.Equals(other.CatalogVersion) == true)) &&
                 ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
+                ((this.Quantity == null && other.Quantity == null) || (this.Quantity?.Equals(other.Quantity) == true)) &&
                 ((this.BasePriceMoney == null && other.BasePriceMoney == null) || (this.BasePriceMoney?.Equals(other.BasePriceMoney) == true)) &&
                 ((this.TotalPriceMoney == null && other.TotalPriceMoney == null) || (this.TotalPriceMoney?.Equals(other.TotalPriceMoney) == true)) &&
                 ((this.Metadata == null && other.Metadata == null) || (this.Metadata?.Equals(other.Metadata) == true));
@@ -145,8 +161,10 @@ namespace Square.Models
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 289056611;
-            hashCode = HashCode.Combine(this.Uid, this.CatalogObjectId, this.CatalogVersion, this.Name, this.BasePriceMoney, this.TotalPriceMoney, this.Metadata);
+            int hashCode = -845315375;
+            hashCode = HashCode.Combine(this.Uid, this.CatalogObjectId, this.CatalogVersion, this.Name, this.Quantity, this.BasePriceMoney, this.TotalPriceMoney);
+
+            hashCode = HashCode.Combine(hashCode, this.Metadata);
 
             return hashCode;
         }
@@ -161,6 +179,7 @@ namespace Square.Models
             toStringOutput.Add($"this.CatalogObjectId = {(this.CatalogObjectId == null ? "null" : this.CatalogObjectId == string.Empty ? "" : this.CatalogObjectId)}");
             toStringOutput.Add($"this.CatalogVersion = {(this.CatalogVersion == null ? "null" : this.CatalogVersion.ToString())}");
             toStringOutput.Add($"this.Name = {(this.Name == null ? "null" : this.Name == string.Empty ? "" : this.Name)}");
+            toStringOutput.Add($"this.Quantity = {(this.Quantity == null ? "null" : this.Quantity == string.Empty ? "" : this.Quantity)}");
             toStringOutput.Add($"this.BasePriceMoney = {(this.BasePriceMoney == null ? "null" : this.BasePriceMoney.ToString())}");
             toStringOutput.Add($"this.TotalPriceMoney = {(this.TotalPriceMoney == null ? "null" : this.TotalPriceMoney.ToString())}");
             toStringOutput.Add($"Metadata = {(this.Metadata == null ? "null" : this.Metadata.ToString())}");
@@ -177,6 +196,7 @@ namespace Square.Models
                 .CatalogObjectId(this.CatalogObjectId)
                 .CatalogVersion(this.CatalogVersion)
                 .Name(this.Name)
+                .Quantity(this.Quantity)
                 .BasePriceMoney(this.BasePriceMoney)
                 .TotalPriceMoney(this.TotalPriceMoney)
                 .Metadata(this.Metadata);
@@ -192,6 +212,7 @@ namespace Square.Models
             private string catalogObjectId;
             private long? catalogVersion;
             private string name;
+            private string quantity;
             private Models.Money basePriceMoney;
             private Models.Money totalPriceMoney;
             private IDictionary<string, string> metadata;
@@ -241,6 +262,17 @@ namespace Square.Models
             }
 
              /// <summary>
+             /// Quantity.
+             /// </summary>
+             /// <param name="quantity"> quantity. </param>
+             /// <returns> Builder. </returns>
+            public Builder Quantity(string quantity)
+            {
+                this.quantity = quantity;
+                return this;
+            }
+
+             /// <summary>
              /// BasePriceMoney.
              /// </summary>
              /// <param name="basePriceMoney"> basePriceMoney. </param>
@@ -284,6 +316,7 @@ namespace Square.Models
                     this.catalogObjectId,
                     this.catalogVersion,
                     this.name,
+                    this.quantity,
                     this.basePriceMoney,
                     this.totalPriceMoney,
                     this.metadata);
