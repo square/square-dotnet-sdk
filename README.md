@@ -56,6 +56,7 @@ dotnet test
 * [Checkout]
 * [Apple Pay]
 * [Cards]
+* [Payouts]
 
 ### Terminal
 * [Terminal]
@@ -155,5 +156,6 @@ dotnet test
 [Sites]: doc/api/sites.md
 [Snippets]: doc/api/snippets.md
 [Cards]: doc/api/cards.md
+[Payouts]: doc/api/payouts.md
 [Gift Cards]: doc/api/gift-cards.md
 [Gift Card Activities]: doc/api/gift-card-activities.md
