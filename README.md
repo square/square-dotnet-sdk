@@ -76,6 +76,7 @@ dotnet test
 
 ### Customers
 * [Customers]
+* [Customer Custom Attributes]
 * [Customer Groups]
 * [Customer Segments]
 
@@ -94,6 +95,7 @@ dotnet test
 * [Locations]
 * [Devices]
 * [Cash Drawers]
+* [Vendors]
 
 ### Team
 * [Team]
@@ -127,6 +129,7 @@ dotnet test
 [Disputes]: doc/api/disputes.md
 [Terminal]: doc/api/terminal.md
 [Cash Drawers]: doc/api/cash-drawers.md
+[Vendors]: doc/api/vendors.md
 [Customer Groups]: doc/api/customer-groups.md
 [Customer Segments]: doc/api/customer-segments.md
 [Bank Accounts]: doc/api/bank-accounts.md
@@ -134,6 +137,7 @@ dotnet test
 [Checkout]: doc/api/checkout.md
 [Catalog]: doc/api/catalog.md
 [Customers]: doc/api/customers.md
+[Customer Custom Attributes]: doc/api/customer-custom-attributes.md
 [Employees]: doc/api/employees.md
 [Inventory]: doc/api/inventory.md
 [Labor]: doc/api/labor.md

@@ -38,12 +38,9 @@ ListCustomerSegmentsAsync(
 ## Example Usage
 
 ```csharp
-string cursor = "cursor6";
-int? limit = 172;
-
 try
 {
-    ListCustomerSegmentsResponse result = await customerSegmentsApi.ListCustomerSegmentsAsync(cursor, limit);
+    ListCustomerSegmentsResponse result = await customerSegmentsApi.ListCustomerSegmentsAsync(null, null);
 }
 catch (ApiException e){};
 ```

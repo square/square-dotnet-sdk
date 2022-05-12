@@ -128,9 +128,9 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Creates a digital gift card or registers a physical (plastic) gift card. You must activate the gift card before .
-        /// it can be used for payment. For more information, see .
-        /// [Selling gift cards](https://developer.squareup.com/docs/gift-cards/using-gift-cards-api#selling-square-gift-cards).
+        /// Creates a digital gift card or registers a physical (plastic) gift card. After the gift card .
+        /// is created, you must call [CreateGiftCardActivity]($e/GiftCardActivities/CreateGiftCardActivity) .
+        /// to activate the card with an initial balance before it can be used for payment.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <returns>Returns the Models.CreateGiftCardResponse response from the API call.</returns>
@@ -143,9 +143,9 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Creates a digital gift card or registers a physical (plastic) gift card. You must activate the gift card before .
-        /// it can be used for payment. For more information, see .
-        /// [Selling gift cards](https://developer.squareup.com/docs/gift-cards/using-gift-cards-api#selling-square-gift-cards).
+        /// Creates a digital gift card or registers a physical (plastic) gift card. After the gift card .
+        /// is created, you must call [CreateGiftCardActivity]($e/GiftCardActivities/CreateGiftCardActivity) .
+        /// to activate the card with an initial balance before it can be used for payment.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
@@ -492,7 +492,7 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Retrieves a gift card using its ID.
+        /// Retrieves a gift card using the gift card ID.
         /// </summary>
         /// <param name="id">Required parameter: The ID of the gift card to retrieve..</param>
         /// <returns>Returns the Models.RetrieveGiftCardResponse response from the API call.</returns>
@@ -505,7 +505,7 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Retrieves a gift card using its ID.
+        /// Retrieves a gift card using the gift card ID.
         /// </summary>
         /// <param name="id">Required parameter: The ID of the gift card to retrieve..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>

@@ -49,15 +49,10 @@ ListCashDrawerShiftsAsync(
 
 ```csharp
 string locationId = "location_id4";
-string sortOrder = "DESC";
-string beginTime = "begin_time2";
-string endTime = "end_time2";
-int? limit = 172;
-string cursor = "cursor6";
 
 try
 {
-    ListCashDrawerShiftsResponse result = await cashDrawersApi.ListCashDrawerShiftsAsync(locationId, sortOrder, beginTime, endTime, limit, cursor);
+    ListCashDrawerShiftsResponse result = await cashDrawersApi.ListCashDrawerShiftsAsync(locationId, null, null, null, null, null);
 }
 catch (ApiException e){};
 ```
@@ -129,12 +124,10 @@ ListCashDrawerShiftEventsAsync(
 ```csharp
 string locationId = "location_id4";
 string shiftId = "shift_id0";
-int? limit = 172;
-string cursor = "cursor6";
 
 try
 {
-    ListCashDrawerShiftEventsResponse result = await cashDrawersApi.ListCashDrawerShiftEventsAsync(locationId, shiftId, limit, cursor);
+    ListCashDrawerShiftEventsResponse result = await cashDrawersApi.ListCashDrawerShiftEventsAsync(locationId, shiftId, null, null);
 }
 catch (ApiException e){};
 ```

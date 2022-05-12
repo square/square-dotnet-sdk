@@ -47,13 +47,9 @@ ListDisputesAsync(
 ## Example Usage
 
 ```csharp
-string cursor = "cursor6";
-string states = "INQUIRY_EVIDENCE_REQUIRED";
-string locationId = "location_id4";
-
 try
 {
-    ListDisputesResponse result = await disputesApi.ListDisputesAsync(cursor, states, locationId);
+    ListDisputesResponse result = await disputesApi.ListDisputesAsync(null, null, null);
 }
 catch (ApiException e){};
 ```
@@ -152,11 +148,10 @@ ListDisputeEvidenceAsync(
 
 ```csharp
 string disputeId = "dispute_id2";
-string cursor = "cursor6";
 
 try
 {
-    ListDisputeEvidenceResponse result = await disputesApi.ListDisputeEvidenceAsync(disputeId, cursor);
+    ListDisputeEvidenceResponse result = await disputesApi.ListDisputeEvidenceAsync(disputeId, null);
 }
 catch (ApiException e){};
 ```
@@ -190,16 +185,10 @@ CreateDisputeEvidenceFileAsync(
 
 ```csharp
 string disputeId = "dispute_id2";
-var request = new CreateDisputeEvidenceFileRequest.Builder(
-        "idempotency_key2")
-    .EvidenceType("REBUTTAL_EXPLANATION")
-    .ContentType("content_type0")
-    .Build();
-FileStreamInfo imageFile = new FileStreamInfo(new FileStream("dummy_file",FileMode.Open));
 
 try
 {
-    CreateDisputeEvidenceFileResponse result = await disputesApi.CreateDisputeEvidenceFileAsync(disputeId, request, imageFile);
+    CreateDisputeEvidenceFileResponse result = await disputesApi.CreateDisputeEvidenceFileAsync(disputeId, null, null);
 }
 catch (ApiException e){};
 ```

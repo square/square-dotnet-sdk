@@ -34,21 +34,21 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// Indicates the Square product used to generate an inventory change.
+        /// Indicates the Square product used to generate a change.
         /// </summary>
         [JsonProperty("product", NullValueHandling = NullValueHandling.Ignore)]
         public string Product { get; }
 
         /// <summary>
-        /// Read-only Square ID assigned to the application. Only used for
-        /// [Product]($m/Product) type `EXTERNAL_API`.
+        /// __Read only__ The Square-assigned ID of the application. This field is used only if the
+        /// [product]($m/Product) type is `EXTERNAL_API`.
         /// </summary>
         [JsonProperty("application_id", NullValueHandling = NullValueHandling.Ignore)]
         public string ApplicationId { get; }
 
         /// <summary>
-        /// Read-only display name assigned to the application
-        /// (e.g. `"Custom Application"`, `"Square POS 4.74 for Android"`).
+        /// __Read only__ The display name of the application
+        /// (for example, `"Custom Application"` or `"Square POS 4.74 for Android"`).
         /// </summary>
         [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
         public string Name { get; }

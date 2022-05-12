@@ -56,6 +56,7 @@ namespace Square
         private readonly Lazy<ICashDrawersApi> cashDrawers;
         private readonly Lazy<ICatalogApi> catalog;
         private readonly Lazy<ICustomersApi> customers;
+        private readonly Lazy<ICustomerCustomAttributesApi> customerCustomAttributes;
         private readonly Lazy<ICustomerGroupsApi> customerGroups;
         private readonly Lazy<ICustomerSegmentsApi> customerSegments;
         private readonly Lazy<IDevicesApi> devices;
@@ -124,6 +125,8 @@ namespace Square
                 () => new CatalogApi(this, this.httpClient, this.authManagers, this.httpCallBack));
             this.customers = new Lazy<ICustomersApi>(
                 () => new CustomersApi(this, this.httpClient, this.authManagers, this.httpCallBack));
+            this.customerCustomAttributes = new Lazy<ICustomerCustomAttributesApi>(
+                () => new CustomerCustomAttributesApi(this, this.httpClient, this.authManagers, this.httpCallBack));
             this.customerGroups = new Lazy<ICustomerGroupsApi>(
                 () => new CustomerGroupsApi(this, this.httpClient, this.authManagers, this.httpCallBack));
             this.customerSegments = new Lazy<ICustomerSegmentsApi>(
@@ -237,6 +240,11 @@ namespace Square
         /// Gets CustomersApi.
         /// </summary>
         public ICustomersApi CustomersApi => this.customers.Value;
+
+        /// <summary>
+        /// Gets CustomerCustomAttributesApi.
+        /// </summary>
+        public ICustomerCustomAttributesApi CustomerCustomAttributesApi => this.customerCustomAttributes.Value;
 
         /// <summary>
         /// Gets CustomerGroupsApi.
@@ -371,7 +379,7 @@ namespace Square
         /// <summary>
         /// Gets the current version of the SDK.
         /// </summary>
-        public string SdkVersion => "18.0.0";
+        public string SdkVersion => "19.0.0";
 
         /// <summary>
         /// Gets the configuration of the Http Client associated with this client.
@@ -528,7 +536,7 @@ namespace Square
         /// </summary>
         public class Builder
         {
-            private string squareVersion = "2022-04-20";
+            private string squareVersion = "2022-05-12";
             private string userAgentDetail = null;
             private Environment environment = Square.Environment.Production;
             private string customUrl = "https://connect.squareup.com";

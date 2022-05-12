@@ -60,7 +60,7 @@ namespace Square.Models
         public Models.Money AmountMoney { get; }
 
         /// <summary>
-        /// The unique ID for this [AdditionalRecipientReceivable]($m/AdditionalRecipientReceivable), assigned by the server.
+        /// The unique ID for the RETIRED `AdditionalRecipientReceivable` object. This field should be empty for any `AdditionalRecipient` objects created after the retirement.
         /// </summary>
         [JsonProperty("receivable_id", NullValueHandling = NullValueHandling.Ignore)]
         public string ReceivableId { get; }

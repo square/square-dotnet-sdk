@@ -82,7 +82,7 @@ namespace Square.Models
         public string Description { get; }
 
         /// <summary>
-        /// Provides information about the application used to generate a change.
+        /// Represents information about the application used to generate a change.
         /// </summary>
         [JsonProperty("source_application", NullValueHandling = NullValueHandling.Ignore)]
         public Models.SourceApplication SourceApplication { get; }
@@ -129,7 +129,7 @@ namespace Square.Models
         public Models.CatalogCustomAttributeDefinitionSelectionConfig SelectionConfig { get; }
 
         /// <summary>
-        /// __Read-only.__ The number of custom attributes that reference this
+        /// The number of custom attributes that reference this
         /// custom attribute definition. Set by the server in response to a ListCatalog
         /// request with `include_counts` set to `true`.  If the actual count is greater
         /// than 100, `custom_attribute_usage_count` will be set to `100`.

@@ -61,7 +61,7 @@ namespace Square.Models
         public string StringValue { get; }
 
         /// <summary>
-        /// __Read-only.__ The id of the [CatalogCustomAttributeDefinition]($m/CatalogCustomAttributeDefinition) this value belongs to.
+        /// The id of the [CatalogCustomAttributeDefinition]($m/CatalogCustomAttributeDefinition) this value belongs to.
         /// </summary>
         [JsonProperty("custom_attribute_definition_id", NullValueHandling = NullValueHandling.Ignore)]
         public string CustomAttributeDefinitionId { get; }
@@ -92,7 +92,7 @@ namespace Square.Models
         public IList<string> SelectionUidValues { get; }
 
         /// <summary>
-        /// __Read-only.__ A copy of key from the associated `CatalogCustomAttributeDefinition`.
+        /// A copy of key from the associated `CatalogCustomAttributeDefinition`.
         /// </summary>
         [JsonProperty("key", NullValueHandling = NullValueHandling.Ignore)]
         public string Key { get; }

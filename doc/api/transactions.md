@@ -54,14 +54,10 @@ ListTransactionsAsync(
 
 ```csharp
 string locationId = "location_id4";
-string beginTime = "begin_time2";
-string endTime = "end_time2";
-string sortOrder = "DESC";
-string cursor = "cursor6";
 
 try
 {
-    ListTransactionsResponse result = await transactionsApi.ListTransactionsAsync(locationId, beginTime, endTime, sortOrder, cursor);
+    ListTransactionsResponse result = await transactionsApi.ListTransactionsAsync(locationId, null, null, null, null);
 }
 catch (ApiException e){};
 ```

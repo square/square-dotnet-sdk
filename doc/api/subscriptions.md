@@ -62,7 +62,6 @@ var body = new CreateSubscriptionRequest.Builder(
         "CHFGVKYY8RSV93M5KCYTG4PN0G")
     .IdempotencyKey("8193148c-9586-11e6-99f9-28cfe92138cf")
     .StartDate("2021-10-20")
-    .CanceledDate("canceled_date0")
     .TaxPercentage("5")
     .PriceOverrideMoney(bodyPriceOverrideMoney)
     .CardId("ccof:qy5x8hHGYsgLrp4Q4GB")
@@ -130,15 +129,8 @@ var bodyQueryFilter = new SearchSubscriptionsFilter.Builder()
 var bodyQuery = new SearchSubscriptionsQuery.Builder()
     .Filter(bodyQueryFilter)
     .Build();
-var bodyInclude = new IList<string>();
-bodyInclude.Add("include4");
-bodyInclude.Add("include5");
-bodyInclude.Add("include6");
 var body = new SearchSubscriptionsRequest.Builder()
-    .Cursor("cursor0")
-    .Limit(164)
     .Query(bodyQuery)
-    .Include(bodyInclude)
     .Build();
 
 try
@@ -174,11 +166,10 @@ RetrieveSubscriptionAsync(
 
 ```csharp
 string subscriptionId = "subscription_id0";
-string include = "include2";
 
 try
 {
-    RetrieveSubscriptionResponse result = await subscriptionsApi.RetrieveSubscriptionAsync(subscriptionId, include);
+    RetrieveSubscriptionResponse result = await subscriptionsApi.RetrieveSubscriptionAsync(subscriptionId, null);
 }
 catch (ApiException e){};
 ```
@@ -215,11 +206,6 @@ var bodySubscriptionPriceOverrideMoney = new Money.Builder()
     .Currency("USD")
     .Build();
 var bodySubscription = new Subscription.Builder()
-    .Id("id8")
-    .LocationId("location_id2")
-    .PlanId("plan_id0")
-    .CustomerId("customer_id6")
-    .StartDate("start_date2")
     .TaxPercentage("null")
     .PriceOverrideMoney(bodySubscriptionPriceOverrideMoney)
     .Version(1594155459464L)
@@ -332,12 +318,10 @@ ListSubscriptionEventsAsync(
 
 ```csharp
 string subscriptionId = "subscription_id0";
-string cursor = "cursor6";
-int? limit = 172;
 
 try
 {
-    ListSubscriptionEventsResponse result = await subscriptionsApi.ListSubscriptionEventsAsync(subscriptionId, cursor, limit);
+    ListSubscriptionEventsResponse result = await subscriptionsApi.ListSubscriptionEventsAsync(subscriptionId, null, null);
 }
 catch (ApiException e){};
 ```
@@ -369,11 +353,6 @@ PauseSubscriptionAsync(
 ```csharp
 string subscriptionId = "subscription_id0";
 var body = new PauseSubscriptionRequest.Builder()
-    .PauseEffectiveDate("pause_effective_date6")
-    .PauseCycleDuration(94L)
-    .ResumeEffectiveDate("resume_effective_date4")
-    .ResumeChangeTiming("IMMEDIATE")
-    .PauseReason("pause_reason2")
     .Build();
 
 try
@@ -410,8 +389,6 @@ ResumeSubscriptionAsync(
 ```csharp
 string subscriptionId = "subscription_id0";
 var body = new ResumeSubscriptionRequest.Builder()
-    .ResumeEffectiveDate("resume_effective_date4")
-    .ResumeChangeTiming("IMMEDIATE")
     .Build();
 
 try

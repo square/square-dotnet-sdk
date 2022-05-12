@@ -56,16 +56,9 @@ ListBookingsAsync(
 ## Example Usage
 
 ```csharp
-int? limit = 172;
-string cursor = "cursor6";
-string teamMemberId = "team_member_id0";
-string locationId = "location_id4";
-string startAtMin = "start_at_min8";
-string startAtMax = "start_at_max8";
-
 try
 {
-    ListBookingsResponse result = await bookingsApi.ListBookingsAsync(limit, cursor, teamMemberId, locationId, startAtMin, startAtMax);
+    ListBookingsResponse result = await bookingsApi.ListBookingsAsync(null, null, null, null, null, null);
 }
 catch (ApiException e){};
 ```
@@ -77,6 +70,9 @@ Creates a booking.
 
 To call this endpoint with buyer-level permissions, set `APPOINTMENTS_WRITE` for the OAuth scope.
 To call this endpoint with seller-level permissions, set `APPOINTMENTS_ALL_WRITE` and `APPOINTMENTS_WRITE` for the OAuth scope.
+
+For calls to this endpoint with seller-level permissions to succeed, the seller must have subscribed to *Appointments Plus*
+or *Appointments Premium*.
 
 ```csharp
 CreateBookingAsync(
@@ -97,15 +93,9 @@ CreateBookingAsync(
 
 ```csharp
 var bodyBooking = new Booking.Builder()
-    .Id("id8")
-    .Version(148)
-    .Status("ACCEPTED")
-    .CreatedAt("created_at6")
-    .UpdatedAt("updated_at4")
     .Build();
 var body = new CreateBookingRequest.Builder(
         bodyBooking)
-    .IdempotencyKey("idempotency_key2")
     .Build();
 
 try
@@ -142,56 +132,9 @@ SearchAvailabilityAsync(
 
 ```csharp
 var bodyQueryFilterStartAtRange = new TimeRange.Builder()
-    .StartAt("start_at8")
-    .EndAt("end_at4")
     .Build();
-var bodyQueryFilterSegmentFilters = new List<SegmentFilter>();
-
-var bodyQueryFilterSegmentFilters0TeamMemberIdFilterAll = new IList<string>();
-bodyQueryFilterSegmentFilters0TeamMemberIdFilterAll.Add("all7");
-var bodyQueryFilterSegmentFilters0TeamMemberIdFilterAny = new IList<string>();
-bodyQueryFilterSegmentFilters0TeamMemberIdFilterAny.Add("any0");
-bodyQueryFilterSegmentFilters0TeamMemberIdFilterAny.Add("any1");
-var bodyQueryFilterSegmentFilters0TeamMemberIdFilterNone = new IList<string>();
-bodyQueryFilterSegmentFilters0TeamMemberIdFilterNone.Add("none5");
-var bodyQueryFilterSegmentFilters0TeamMemberIdFilter = new FilterValue.Builder()
-    .All(bodyQueryFilterSegmentFilters0TeamMemberIdFilterAll)
-    .Any(bodyQueryFilterSegmentFilters0TeamMemberIdFilterAny)
-    .None(bodyQueryFilterSegmentFilters0TeamMemberIdFilterNone)
-    .Build();
-var bodyQueryFilterSegmentFilters0 = new SegmentFilter.Builder(
-        "service_variation_id8")
-    .TeamMemberIdFilter(bodyQueryFilterSegmentFilters0TeamMemberIdFilter)
-    .Build();
-bodyQueryFilterSegmentFilters.Add(bodyQueryFilterSegmentFilters0);
-
-var bodyQueryFilterSegmentFilters1TeamMemberIdFilterAll = new IList<string>();
-bodyQueryFilterSegmentFilters1TeamMemberIdFilterAll.Add("all6");
-bodyQueryFilterSegmentFilters1TeamMemberIdFilterAll.Add("all7");
-bodyQueryFilterSegmentFilters1TeamMemberIdFilterAll.Add("all8");
-var bodyQueryFilterSegmentFilters1TeamMemberIdFilterAny = new IList<string>();
-bodyQueryFilterSegmentFilters1TeamMemberIdFilterAny.Add("any1");
-bodyQueryFilterSegmentFilters1TeamMemberIdFilterAny.Add("any2");
-bodyQueryFilterSegmentFilters1TeamMemberIdFilterAny.Add("any3");
-var bodyQueryFilterSegmentFilters1TeamMemberIdFilterNone = new IList<string>();
-bodyQueryFilterSegmentFilters1TeamMemberIdFilterNone.Add("none6");
-bodyQueryFilterSegmentFilters1TeamMemberIdFilterNone.Add("none7");
-var bodyQueryFilterSegmentFilters1TeamMemberIdFilter = new FilterValue.Builder()
-    .All(bodyQueryFilterSegmentFilters1TeamMemberIdFilterAll)
-    .Any(bodyQueryFilterSegmentFilters1TeamMemberIdFilterAny)
-    .None(bodyQueryFilterSegmentFilters1TeamMemberIdFilterNone)
-    .Build();
-var bodyQueryFilterSegmentFilters1 = new SegmentFilter.Builder(
-        "service_variation_id7")
-    .TeamMemberIdFilter(bodyQueryFilterSegmentFilters1TeamMemberIdFilter)
-    .Build();
-bodyQueryFilterSegmentFilters.Add(bodyQueryFilterSegmentFilters1);
-
 var bodyQueryFilter = new SearchAvailabilityFilter.Builder(
         bodyQueryFilterStartAtRange)
-    .LocationId("location_id6")
-    .SegmentFilters(bodyQueryFilterSegmentFilters)
-    .BookingId("booking_id6")
     .Build();
 var bodyQuery = new SearchAvailabilityQuery.Builder(
         bodyQueryFilter)
@@ -260,13 +203,10 @@ ListTeamMemberBookingProfilesAsync(
 
 ```csharp
 bool? bookableOnly = false;
-int? limit = 172;
-string cursor = "cursor6";
-string locationId = "location_id4";
 
 try
 {
-    ListTeamMemberBookingProfilesResponse result = await bookingsApi.ListTeamMemberBookingProfilesAsync(bookableOnly, limit, cursor, locationId);
+    ListTeamMemberBookingProfilesResponse result = await bookingsApi.ListTeamMemberBookingProfilesAsync(bookableOnly, null, null, null);
 }
 catch (ApiException e){};
 ```
@@ -346,6 +286,9 @@ Updates a booking.
 To call this endpoint with buyer-level permissions, set `APPOINTMENTS_WRITE` for the OAuth scope.
 To call this endpoint with seller-level permissions, set `APPOINTMENTS_ALL_WRITE` and `APPOINTMENTS_WRITE` for the OAuth scope.
 
+For calls to this endpoint with seller-level permissions to succeed, the seller must have subscribed to *Appointments Plus*
+or *Appointments Premium*.
+
 ```csharp
 UpdateBookingAsync(
     string bookingId,
@@ -368,15 +311,9 @@ UpdateBookingAsync(
 ```csharp
 string bookingId = "booking_id4";
 var bodyBooking = new Booking.Builder()
-    .Id("id8")
-    .Version(148)
-    .Status("ACCEPTED")
-    .CreatedAt("created_at6")
-    .UpdatedAt("updated_at4")
     .Build();
 var body = new UpdateBookingRequest.Builder(
         bodyBooking)
-    .IdempotencyKey("idempotency_key2")
     .Build();
 
 try
@@ -393,6 +330,9 @@ Cancels an existing booking.
 
 To call this endpoint with buyer-level permissions, set `APPOINTMENTS_WRITE` for the OAuth scope.
 To call this endpoint with seller-level permissions, set `APPOINTMENTS_ALL_WRITE` and `APPOINTMENTS_WRITE` for the OAuth scope.
+
+For calls to this endpoint with seller-level permissions to succeed, the seller must have subscribed to *Appointments Plus*
+or *Appointments Premium*.
 
 ```csharp
 CancelBookingAsync(
@@ -416,8 +356,6 @@ CancelBookingAsync(
 ```csharp
 string bookingId = "booking_id4";
 var body = new CancelBookingRequest.Builder()
-    .IdempotencyKey("idempotency_key2")
-    .BookingVersion(8)
     .Build();
 
 try

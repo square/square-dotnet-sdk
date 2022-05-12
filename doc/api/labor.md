@@ -54,13 +54,9 @@ ListBreakTypesAsync(
 ## Example Usage
 
 ```csharp
-string locationId = "location_id4";
-int? limit = 172;
-string cursor = "cursor6";
-
 try
 {
-    ListBreakTypesResponse result = await laborApi.ListBreakTypesAsync(locationId, limit, cursor);
+    ListBreakTypesResponse result = await laborApi.ListBreakTypesAsync(null, null, null);
 }
 catch (ApiException e){};
 ```
@@ -106,10 +102,6 @@ var bodyBreakType = new BreakType.Builder(
         "Lunch Break",
         "PT30M",
         true)
-    .Id("id2")
-    .Version(124)
-    .CreatedAt("created_at0")
-    .UpdatedAt("updated_at8")
     .Build();
 var body = new CreateBreakTypeRequest.Builder(
         bodyBreakType)
@@ -220,10 +212,7 @@ var bodyBreakType = new BreakType.Builder(
         "Lunch",
         "PT50M",
         true)
-    .Id("id2")
     .Version(1)
-    .CreatedAt("created_at0")
-    .UpdatedAt("updated_at8")
     .Build();
 var body = new UpdateBreakTypeRequest.Builder(
         bodyBreakType)
@@ -265,13 +254,9 @@ ListEmployeeWagesAsync(
 ## Example Usage
 
 ```csharp
-string employeeId = "employee_id0";
-int? limit = 172;
-string cursor = "cursor6";
-
 try
 {
-    ListEmployeeWagesResponse result = await laborApi.ListEmployeeWagesAsync(employeeId, limit, cursor);
+    ListEmployeeWagesResponse result = await laborApi.ListEmployeeWagesAsync(null, null, null);
 }
 catch (ApiException e){};
 ```
@@ -367,17 +352,13 @@ var bodyShiftBreaks0 = new Break.Builder(
         "Tea Break",
         "PT5M",
         true)
-    .Id("id4")
     .EndAt("2019-01-25T06:16:00-05:00")
     .Build();
 bodyShiftBreaks.Add(bodyShiftBreaks0);
 
 var bodyShift = new Shift.Builder(
         "2019-01-25T03:11:00-05:00")
-    .Id("id8")
-    .EmployeeId("employee_id2")
     .LocationId("PAA1RJZZKXBFG")
-    .Timezone("timezone2")
     .EndAt("2019-01-25T13:11:00-05:00")
     .Wage(bodyShiftWage)
     .Breaks(bodyShiftBreaks)
@@ -433,51 +414,7 @@ SearchShiftsAsync(
 ## Example Usage
 
 ```csharp
-var bodyQueryFilterLocationIds = new IList<string>();
-bodyQueryFilterLocationIds.Add("location_ids2");
-var bodyQueryFilterTeamMemberIds = new IList<string>();
-bodyQueryFilterTeamMemberIds.Add("team_member_ids9");
-bodyQueryFilterTeamMemberIds.Add("team_member_ids0");
-var bodyQueryFilterEmployeeIds = new IList<string>();
-bodyQueryFilterEmployeeIds.Add("employee_ids7");
-var bodyQueryFilterStart = new TimeRange.Builder()
-    .StartAt("start_at8")
-    .EndAt("end_at4")
-    .Build();
-var bodyQueryFilterEnd = new TimeRange.Builder()
-    .StartAt("start_at2")
-    .EndAt("end_at0")
-    .Build();
-var bodyQueryFilterWorkdayDateRange = new DateRange.Builder()
-    .StartDate("start_date8")
-    .EndDate("end_date4")
-    .Build();
-var bodyQueryFilterWorkday = new ShiftWorkday.Builder()
-    .DateRange(bodyQueryFilterWorkdayDateRange)
-    .MatchShiftsBy("START_AT")
-    .DefaultTimezone("default_timezone8")
-    .Build();
-var bodyQueryFilter = new ShiftFilter.Builder(
-        bodyQueryFilterLocationIds,
-        bodyQueryFilterTeamMemberIds)
-    .EmployeeIds(bodyQueryFilterEmployeeIds)
-    .Status("OPEN")
-    .Start(bodyQueryFilterStart)
-    .End(bodyQueryFilterEnd)
-    .Workday(bodyQueryFilterWorkday)
-    .Build();
-var bodyQuerySort = new ShiftSort.Builder()
-    .Field("CREATED_AT")
-    .Order("DESC")
-    .Build();
-var bodyQuery = new ShiftQuery.Builder()
-    .Filter(bodyQueryFilter)
-    .Sort(bodyQuerySort)
-    .Build();
 var body = new SearchShiftsRequest.Builder()
-    .Query(bodyQuery)
-    .Limit(164)
-    .Cursor("cursor0")
     .Build();
 
 try
@@ -606,10 +543,7 @@ bodyShiftBreaks.Add(bodyShiftBreaks0);
 
 var bodyShift = new Shift.Builder(
         "2019-01-25T03:11:00-05:00")
-    .Id("id8")
-    .EmployeeId("employee_id2")
     .LocationId("PAA1RJZZKXBFG")
-    .Timezone("timezone2")
     .EndAt("2019-01-25T13:11:00-05:00")
     .Wage(bodyShiftWage)
     .Breaks(bodyShiftBreaks)
@@ -654,13 +588,9 @@ ListTeamMemberWagesAsync(
 ## Example Usage
 
 ```csharp
-string teamMemberId = "team_member_id0";
-int? limit = 172;
-string cursor = "cursor6";
-
 try
 {
-    ListTeamMemberWagesResponse result = await laborApi.ListTeamMemberWagesAsync(teamMemberId, limit, cursor);
+    ListTeamMemberWagesResponse result = await laborApi.ListTeamMemberWagesAsync(null, null, null);
 }
 catch (ApiException e){};
 ```
@@ -722,12 +652,9 @@ ListWorkweekConfigsAsync(
 ## Example Usage
 
 ```csharp
-int? limit = 172;
-string cursor = "cursor6";
-
 try
 {
-    ListWorkweekConfigsResponse result = await laborApi.ListWorkweekConfigsAsync(limit, cursor);
+    ListWorkweekConfigsResponse result = await laborApi.ListWorkweekConfigsAsync(null, null);
 }
 catch (ApiException e){};
 ```
@@ -761,10 +688,7 @@ string id = "id0";
 var bodyWorkweekConfig = new WorkweekConfig.Builder(
         "MON",
         "10:00")
-    .Id("id4")
     .Version(10)
-    .CreatedAt("created_at2")
-    .UpdatedAt("updated_at0")
     .Build();
 var body = new UpdateWorkweekConfigRequest.Builder(
         bodyWorkweekConfig)

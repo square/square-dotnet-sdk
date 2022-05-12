@@ -45,11 +45,9 @@ ListMerchantsAsync(
 ## Example Usage
 
 ```csharp
-int? cursor = 210;
-
 try
 {
-    ListMerchantsResponse result = await merchantsApi.ListMerchantsAsync(cursor);
+    ListMerchantsResponse result = await merchantsApi.ListMerchantsAsync(null);
 }
 catch (ApiException e){};
 ```

@@ -27,6 +27,7 @@ namespace Square.Models
         /// <param name="bookingPolicy">booking_policy.</param>
         /// <param name="allowUserCancel">allow_user_cancel.</param>
         /// <param name="businessAppointmentSettings">business_appointment_settings.</param>
+        /// <param name="supportSellerLevelWrites">support_seller_level_writes.</param>
         public BusinessBookingProfile(
             string sellerId = null,
             string createdAt = null,
@@ -34,7 +35,8 @@ namespace Square.Models
             string customerTimezoneChoice = null,
             string bookingPolicy = null,
             bool? allowUserCancel = null,
-            Models.BusinessAppointmentSettings businessAppointmentSettings = null)
+            Models.BusinessAppointmentSettings businessAppointmentSettings = null,
+            bool? supportSellerLevelWrites = null)
         {
             this.SellerId = sellerId;
             this.CreatedAt = createdAt;
@@ -43,6 +45,7 @@ namespace Square.Models
             this.BookingPolicy = bookingPolicy;
             this.AllowUserCancel = allowUserCancel;
             this.BusinessAppointmentSettings = businessAppointmentSettings;
+            this.SupportSellerLevelWrites = supportSellerLevelWrites;
         }
 
         /// <summary>
@@ -87,6 +90,12 @@ namespace Square.Models
         [JsonProperty("business_appointment_settings", NullValueHandling = NullValueHandling.Ignore)]
         public Models.BusinessAppointmentSettings BusinessAppointmentSettings { get; }
 
+        /// <summary>
+        /// Indicates whether the seller's subscription to Square Appointments supports creating, updating or canceling an appointment through the API (`true`) or not (`false`) using seller permission.
+        /// </summary>
+        [JsonProperty("support_seller_level_writes", NullValueHandling = NullValueHandling.Ignore)]
+        public bool? SupportSellerLevelWrites { get; }
+
         /// <inheritdoc/>
         public override string ToString()
         {
@@ -117,14 +126,17 @@ namespace Square.Models
                 ((this.CustomerTimezoneChoice == null && other.CustomerTimezoneChoice == null) || (this.CustomerTimezoneChoice?.Equals(other.CustomerTimezoneChoice) == true)) &&
                 ((this.BookingPolicy == null && other.BookingPolicy == null) || (this.BookingPolicy?.Equals(other.BookingPolicy) == true)) &&
                 ((this.AllowUserCancel == null && other.AllowUserCancel == null) || (this.AllowUserCancel?.Equals(other.AllowUserCancel) == true)) &&
-                ((this.BusinessAppointmentSettings == null && other.BusinessAppointmentSettings == null) || (this.BusinessAppointmentSettings?.Equals(other.BusinessAppointmentSettings) == true));
+                ((this.BusinessAppointmentSettings == null && other.BusinessAppointmentSettings == null) || (this.BusinessAppointmentSettings?.Equals(other.BusinessAppointmentSettings) == true)) &&
+                ((this.SupportSellerLevelWrites == null && other.SupportSellerLevelWrites == null) || (this.SupportSellerLevelWrites?.Equals(other.SupportSellerLevelWrites) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 604613904;
+            int hashCode = -513318848;
             hashCode = HashCode.Combine(this.SellerId, this.CreatedAt, this.BookingEnabled, this.CustomerTimezoneChoice, this.BookingPolicy, this.AllowUserCancel, this.BusinessAppointmentSettings);
+
+            hashCode = HashCode.Combine(hashCode, this.SupportSellerLevelWrites);
 
             return hashCode;
         }
@@ -142,6 +154,7 @@ namespace Square.Models
             toStringOutput.Add($"this.BookingPolicy = {(this.BookingPolicy == null ? "null" : this.BookingPolicy.ToString())}");
             toStringOutput.Add($"this.AllowUserCancel = {(this.AllowUserCancel == null ? "null" : this.AllowUserCancel.ToString())}");
             toStringOutput.Add($"this.BusinessAppointmentSettings = {(this.BusinessAppointmentSettings == null ? "null" : this.BusinessAppointmentSettings.ToString())}");
+            toStringOutput.Add($"this.SupportSellerLevelWrites = {(this.SupportSellerLevelWrites == null ? "null" : this.SupportSellerLevelWrites.ToString())}");
         }
 
         /// <summary>
@@ -157,7 +170,8 @@ namespace Square.Models
                 .CustomerTimezoneChoice(this.CustomerTimezoneChoice)
                 .BookingPolicy(this.BookingPolicy)
                 .AllowUserCancel(this.AllowUserCancel)
-                .BusinessAppointmentSettings(this.BusinessAppointmentSettings);
+                .BusinessAppointmentSettings(this.BusinessAppointmentSettings)
+                .SupportSellerLevelWrites(this.SupportSellerLevelWrites);
             return builder;
         }
 
@@ -173,6 +187,7 @@ namespace Square.Models
             private string bookingPolicy;
             private bool? allowUserCancel;
             private Models.BusinessAppointmentSettings businessAppointmentSettings;
+            private bool? supportSellerLevelWrites;
 
              /// <summary>
              /// SellerId.
@@ -251,6 +266,17 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// SupportSellerLevelWrites.
+             /// </summary>
+             /// <param name="supportSellerLevelWrites"> supportSellerLevelWrites. </param>
+             /// <returns> Builder. </returns>
+            public Builder SupportSellerLevelWrites(bool? supportSellerLevelWrites)
+            {
+                this.supportSellerLevelWrites = supportSellerLevelWrites;
+                return this;
+            }
+
             /// <summary>
             /// Builds class object.
             /// </summary>
@@ -264,7 +290,8 @@ namespace Square.Models
                     this.customerTimezoneChoice,
                     this.bookingPolicy,
                     this.allowUserCancel,
-                    this.businessAppointmentSettings);
+                    this.businessAppointmentSettings,
+                    this.supportSellerLevelWrites);
             }
         }
     }

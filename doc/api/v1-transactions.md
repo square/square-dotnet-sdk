@@ -52,13 +52,10 @@ ListOrdersAsync(
 
 ```csharp
 string locationId = "location_id4";
-string order = "DESC";
-int? limit = 172;
-string batchToken = "batch_token2";
 
 try
 {
-    List<V1Order> result = await v1TransactionsApi.ListOrdersAsync(locationId, order, limit, batchToken);
+    List<V1Order> result = await v1TransactionsApi.ListOrdersAsync(locationId, null, null, null);
 }
 catch (ApiException e){};
 ```
@@ -133,10 +130,6 @@ string locationId = "location_id4";
 string orderId = "order_id6";
 var body = new V1UpdateOrderRequest.Builder(
         "REFUND")
-    .ShippedTrackingNumber("shipped_tracking_number6")
-    .CompletedNote("completed_note6")
-    .RefundedNote("refunded_note0")
-    .CanceledNote("canceled_note4")
     .Build();
 
 try
@@ -194,16 +187,11 @@ ListPaymentsAsync(
 
 ```csharp
 string locationId = "location_id4";
-string order = "DESC";
-string beginTime = "begin_time2";
-string endTime = "end_time2";
-int? limit = 172;
-string batchToken = "batch_token2";
 bool? includePartial = false;
 
 try
 {
-    List<V1Payment> result = await v1TransactionsApi.ListPaymentsAsync(locationId, order, beginTime, endTime, limit, batchToken, includePartial);
+    List<V1Payment> result = await v1TransactionsApi.ListPaymentsAsync(locationId, null, null, null, null, null, includePartial);
 }
 catch (ApiException e){};
 ```
@@ -281,15 +269,10 @@ ListRefundsAsync(
 
 ```csharp
 string locationId = "location_id4";
-string order = "DESC";
-string beginTime = "begin_time2";
-string endTime = "end_time2";
-int? limit = 172;
-string batchToken = "batch_token2";
 
 try
 {
-    List<V1Refund> result = await v1TransactionsApi.ListRefundsAsync(locationId, order, beginTime, endTime, limit, batchToken);
+    List<V1Refund> result = await v1TransactionsApi.ListRefundsAsync(locationId, null, null, null, null, null);
 }
 catch (ApiException e){};
 ```
@@ -333,16 +316,10 @@ CreateRefundAsync(
 
 ```csharp
 string locationId = "location_id4";
-var bodyRefundedMoney = new V1Money.Builder()
-    .Amount(222)
-    .CurrencyCode("CLF")
-    .Build();
 var body = new V1CreateRefundRequest.Builder(
         "payment_id6",
         "FULL",
         "reason8")
-    .RefundedMoney(bodyRefundedMoney)
-    .RequestIdempotenceKey("request_idempotence_key2")
     .Build();
 
 try
@@ -395,16 +372,10 @@ ListSettlementsAsync(
 
 ```csharp
 string locationId = "location_id4";
-string order = "DESC";
-string beginTime = "begin_time2";
-string endTime = "end_time2";
-int? limit = 172;
-string status = "SENT";
-string batchToken = "batch_token2";
 
 try
 {
-    List<V1Settlement> result = await v1TransactionsApi.ListSettlementsAsync(locationId, order, beginTime, endTime, limit, status, batchToken);
+    List<V1Settlement> result = await v1TransactionsApi.ListSettlementsAsync(locationId, null, null, null, null, null, null);
 }
 catch (ApiException e){};
 ```

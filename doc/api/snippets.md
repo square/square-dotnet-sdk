@@ -119,10 +119,6 @@ UpsertSnippetAsync(
 string siteId = "site_id6";
 var bodySnippet = new Snippet.Builder(
         "<script>var js = 1;</script>")
-    .Id("id4")
-    .SiteId("site_id0")
-    .CreatedAt("created_at8")
-    .UpdatedAt("updated_at0")
     .Build();
 var body = new UpsertSnippetRequest.Builder(
         bodySnippet)

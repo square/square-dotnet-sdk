@@ -121,51 +121,17 @@ DeprecatedBatchChangeInventoryAsync(
 var bodyChanges = new List<InventoryChange>();
 
 var bodyChanges0PhysicalCount = new InventoryPhysicalCount.Builder()
-    .Id("id0")
     .ReferenceId("1536bfbf-efed-48bf-b17d-a197141b2a92")
     .CatalogObjectId("W62UWFY35CWMYGVWK6TWJDNI")
-    .CatalogObjectType("catalog_object_type4")
     .State("IN_STOCK")
     .LocationId("C6W5YS5QM06F5")
     .Quantity("53")
     .TeamMemberId("LRK57NSQ5X7PUD05")
     .OccurredAt("2016-11-16T22:25:24.878Z")
     .Build();
-var bodyChanges0Adjustment = new InventoryAdjustment.Builder()
-    .Id("id6")
-    .ReferenceId("reference_id4")
-    .FromState("SOLD")
-    .ToState("SOLD_ONLINE")
-    .LocationId("location_id0")
-    .Build();
-var bodyChanges0Transfer = new InventoryTransfer.Builder()
-    .Id("id0")
-    .ReferenceId("reference_id8")
-    .State("UNLINKED_RETURN")
-    .FromLocationId("from_location_id2")
-    .ToLocationId("to_location_id2")
-    .Build();
-var bodyChanges0MeasurementUnitMeasurementUnitCustomUnit = new MeasurementUnitCustom.Builder(
-        "name0",
-        "abbreviation2")
-    .Build();
-var bodyChanges0MeasurementUnitMeasurementUnit = new MeasurementUnit.Builder()
-    .CustomUnit(bodyChanges0MeasurementUnitMeasurementUnitCustomUnit)
-    .AreaUnit("IMPERIAL_SQUARE_FOOT")
-    .LengthUnit("METRIC_METER")
-    .VolumeUnit("METRIC_MILLILITER")
-    .WeightUnit("IMPERIAL_WEIGHT_OUNCE")
-    .Build();
-var bodyChanges0MeasurementUnit = new CatalogMeasurementUnit.Builder()
-    .MeasurementUnit(bodyChanges0MeasurementUnitMeasurementUnit)
-    .Precision(26)
-    .Build();
 var bodyChanges0 = new InventoryChange.Builder()
     .Type("PHYSICAL_COUNT")
     .PhysicalCount(bodyChanges0PhysicalCount)
-    .Adjustment(bodyChanges0Adjustment)
-    .Transfer(bodyChanges0Transfer)
-    .MeasurementUnit(bodyChanges0MeasurementUnit)
     .Build();
 bodyChanges.Add(bodyChanges0);
 
@@ -262,14 +228,10 @@ var bodyCatalogObjectIds = new IList<string>();
 bodyCatalogObjectIds.Add("W62UWFY35CWMYGVWK6TWJDNI");
 var bodyLocationIds = new IList<string>();
 bodyLocationIds.Add("59TNP9SA8VGDA");
-var bodyStates = new IList<string>();
-bodyStates.Add("SUPPORTED_BY_NEWER_VERSION");
 var body = new BatchRetrieveInventoryCountsRequest.Builder()
     .CatalogObjectIds(bodyCatalogObjectIds)
     .LocationIds(bodyLocationIds)
     .UpdatedAfter("2016-11-16T00:00:00.000Z")
-    .Cursor("cursor0")
-    .States(bodyStates)
     .Build();
 
 try
@@ -309,51 +271,17 @@ BatchChangeInventoryAsync(
 var bodyChanges = new List<InventoryChange>();
 
 var bodyChanges0PhysicalCount = new InventoryPhysicalCount.Builder()
-    .Id("id0")
     .ReferenceId("1536bfbf-efed-48bf-b17d-a197141b2a92")
     .CatalogObjectId("W62UWFY35CWMYGVWK6TWJDNI")
-    .CatalogObjectType("catalog_object_type4")
     .State("IN_STOCK")
     .LocationId("C6W5YS5QM06F5")
     .Quantity("53")
     .TeamMemberId("LRK57NSQ5X7PUD05")
     .OccurredAt("2016-11-16T22:25:24.878Z")
     .Build();
-var bodyChanges0Adjustment = new InventoryAdjustment.Builder()
-    .Id("id6")
-    .ReferenceId("reference_id4")
-    .FromState("SOLD")
-    .ToState("SOLD_ONLINE")
-    .LocationId("location_id0")
-    .Build();
-var bodyChanges0Transfer = new InventoryTransfer.Builder()
-    .Id("id0")
-    .ReferenceId("reference_id8")
-    .State("UNLINKED_RETURN")
-    .FromLocationId("from_location_id2")
-    .ToLocationId("to_location_id2")
-    .Build();
-var bodyChanges0MeasurementUnitMeasurementUnitCustomUnit = new MeasurementUnitCustom.Builder(
-        "name0",
-        "abbreviation2")
-    .Build();
-var bodyChanges0MeasurementUnitMeasurementUnit = new MeasurementUnit.Builder()
-    .CustomUnit(bodyChanges0MeasurementUnitMeasurementUnitCustomUnit)
-    .AreaUnit("IMPERIAL_SQUARE_FOOT")
-    .LengthUnit("METRIC_METER")
-    .VolumeUnit("METRIC_MILLILITER")
-    .WeightUnit("IMPERIAL_WEIGHT_OUNCE")
-    .Build();
-var bodyChanges0MeasurementUnit = new CatalogMeasurementUnit.Builder()
-    .MeasurementUnit(bodyChanges0MeasurementUnitMeasurementUnit)
-    .Precision(26)
-    .Build();
 var bodyChanges0 = new InventoryChange.Builder()
     .Type("PHYSICAL_COUNT")
     .PhysicalCount(bodyChanges0PhysicalCount)
-    .Adjustment(bodyChanges0Adjustment)
-    .Transfer(bodyChanges0Transfer)
-    .MeasurementUnit(bodyChanges0MeasurementUnit)
     .Build();
 bodyChanges.Add(bodyChanges0);
 
@@ -461,14 +389,10 @@ var bodyCatalogObjectIds = new IList<string>();
 bodyCatalogObjectIds.Add("W62UWFY35CWMYGVWK6TWJDNI");
 var bodyLocationIds = new IList<string>();
 bodyLocationIds.Add("59TNP9SA8VGDA");
-var bodyStates = new IList<string>();
-bodyStates.Add("SUPPORTED_BY_NEWER_VERSION");
 var body = new BatchRetrieveInventoryCountsRequest.Builder()
     .CatalogObjectIds(bodyCatalogObjectIds)
     .LocationIds(bodyLocationIds)
     .UpdatedAfter("2016-11-16T00:00:00.000Z")
-    .Cursor("cursor0")
-    .States(bodyStates)
     .Build();
 
 try
@@ -610,12 +534,10 @@ RetrieveInventoryCountAsync(
 
 ```csharp
 string catalogObjectId = "catalog_object_id6";
-string locationIds = "location_ids0";
-string cursor = "cursor6";
 
 try
 {
-    RetrieveInventoryCountResponse result = await inventoryApi.RetrieveInventoryCountAsync(catalogObjectId, locationIds, cursor);
+    RetrieveInventoryCountResponse result = await inventoryApi.RetrieveInventoryCountAsync(catalogObjectId, null, null);
 }
 catch (ApiException e){};
 ```
@@ -662,12 +584,10 @@ RetrieveInventoryChangesAsync(
 
 ```csharp
 string catalogObjectId = "catalog_object_id6";
-string locationIds = "location_ids0";
-string cursor = "cursor6";
 
 try
 {
-    RetrieveInventoryChangesResponse result = await inventoryApi.RetrieveInventoryChangesAsync(catalogObjectId, locationIds, cursor);
+    RetrieveInventoryChangesResponse result = await inventoryApi.RetrieveInventoryChangesAsync(catalogObjectId, null, null);
 }
 catch (ApiException e){};
 ```
