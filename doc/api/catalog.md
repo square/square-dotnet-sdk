@@ -105,8 +105,6 @@ bodyObjectIds.Add("AA27W3M2GGTF3H6AVPNB77CK");
 var body = new BatchRetrieveCatalogObjectsRequest.Builder(
         bodyObjectIds)
     .IncludeRelatedObjects(true)
-    .CatalogVersion(118L)
-    .IncludeDeletedObjects(false)
     .Build();
 
 try
@@ -151,84 +149,18 @@ var bodyBatches = new List<CatalogObjectBatch>();
 
 var bodyBatches0Objects = new List<CatalogObject>();
 
-var bodyBatches0Objects0CustomAttributeValues = new Dictionary<string, CatalogCustomAttributeValue>();
-
-
-var bodyBatches0Objects0CustomAttributeValues0 = new CatalogCustomAttributeValue.Builder()
-    .Name("name1")
-    .StringValue("string_value5")
-    .CustomAttributeDefinitionId("custom_attribute_definition_id1")
-    .Type("SELECTION")
-    .NumberValue("number_value1")
-    .Build();
-bodyBatches0Objects0CustomAttributeValues.Add("key0",bodyBatches0Objects0CustomAttributeValues0);
-
-var bodyBatches0Objects0CustomAttributeValues1 = new CatalogCustomAttributeValue.Builder()
-    .Name("name0")
-    .StringValue("string_value4")
-    .CustomAttributeDefinitionId("custom_attribute_definition_id2")
-    .Type("STRING")
-    .NumberValue("number_value0")
-    .Build();
-bodyBatches0Objects0CustomAttributeValues.Add("key1",bodyBatches0Objects0CustomAttributeValues1);
-
-var bodyBatches0Objects0CatalogV1Ids = new List<CatalogV1Id>();
-
-var bodyBatches0Objects0CatalogV1Ids0 = new CatalogV1Id.Builder()
-    .CatalogV1Id("catalog_v1_id4")
-    .LocationId("location_id4")
-    .Build();
-bodyBatches0Objects0CatalogV1Ids.Add(bodyBatches0Objects0CatalogV1Ids0);
-
 var bodyBatches0Objects0ItemDataTaxIds = new IList<string>();
 bodyBatches0Objects0ItemDataTaxIds.Add("#SalesTax");
 var bodyBatches0Objects0ItemDataVariations = new List<CatalogObject>();
 
-var bodyBatches0Objects0ItemDataVariations0CustomAttributeValues = new Dictionary<string, CatalogCustomAttributeValue>();
-
-
-var bodyBatches0Objects0ItemDataVariations0CustomAttributeValues0 = new CatalogCustomAttributeValue.Builder()
-    .Name("name0")
-    .StringValue("string_value4")
-    .CustomAttributeDefinitionId("custom_attribute_definition_id2")
-    .Type("STRING")
-    .NumberValue("number_value0")
-    .Build();
-bodyBatches0Objects0ItemDataVariations0CustomAttributeValues.Add("key0",bodyBatches0Objects0ItemDataVariations0CustomAttributeValues0);
-
-var bodyBatches0Objects0ItemDataVariations0CustomAttributeValues1 = new CatalogCustomAttributeValue.Builder()
-    .Name("name1")
-    .StringValue("string_value5")
-    .CustomAttributeDefinitionId("custom_attribute_definition_id1")
-    .Type("SELECTION")
-    .NumberValue("number_value1")
-    .Build();
-bodyBatches0Objects0ItemDataVariations0CustomAttributeValues.Add("key1",bodyBatches0Objects0ItemDataVariations0CustomAttributeValues1);
-
-var bodyBatches0Objects0ItemDataVariations0CatalogV1Ids = new List<CatalogV1Id>();
-
-var bodyBatches0Objects0ItemDataVariations0CatalogV1Ids0 = new CatalogV1Id.Builder()
-    .CatalogV1Id("catalog_v1_id3")
-    .LocationId("location_id3")
-    .Build();
-bodyBatches0Objects0ItemDataVariations0CatalogV1Ids.Add(bodyBatches0Objects0ItemDataVariations0CatalogV1Ids0);
-
 var bodyBatches0Objects0ItemDataVariations0ItemVariationData = new CatalogItemVariation.Builder()
     .ItemId("#Tea")
     .Name("Mug")
-    .Sku("sku9")
-    .Upc("upc7")
-    .Ordinal(149)
     .PricingType("FIXED_PRICING")
     .Build();
 var bodyBatches0Objects0ItemDataVariations0 = new CatalogObject.Builder(
         "ITEM_VARIATION",
         "#Tea_Mug")
-    .UpdatedAt("updated_at5")
-    .Version(99L)
-    .IsDeleted(true)
-    .CustomAttributeValues(bodyBatches0Objects0ItemDataVariations0CustomAttributeValues)
-    .CatalogV1Ids(bodyBatches0Objects0ItemDataVariations0CatalogV1Ids)
     .PresentAtAllLocations(true)
     .ItemVariationData(bodyBatches0Objects0ItemDataVariations0ItemVariationData)
     .Build();
@@ -237,9 +169,6 @@ bodyBatches0Objects0ItemDataVariations.Add(bodyBatches0Objects0ItemDataVariation
 var bodyBatches0Objects0ItemData = new CatalogItem.Builder()
     .Name("Tea")
     .Description("Hot Leaf Juice")
-    .Abbreviation("abbreviation0")
-    .LabelColor("label_color0")
-    .AvailableOnline(false)
     .CategoryId("#Beverages")
     .TaxIds(bodyBatches0Objects0ItemDataTaxIds)
     .Variations(bodyBatches0Objects0ItemDataVariations)
@@ -247,159 +176,36 @@ var bodyBatches0Objects0ItemData = new CatalogItem.Builder()
 var bodyBatches0Objects0 = new CatalogObject.Builder(
         "ITEM",
         "#Tea")
-    .UpdatedAt("updated_at6")
-    .Version(252L)
-    .IsDeleted(false)
-    .CustomAttributeValues(bodyBatches0Objects0CustomAttributeValues)
-    .CatalogV1Ids(bodyBatches0Objects0CatalogV1Ids)
     .PresentAtAllLocations(true)
     .ItemData(bodyBatches0Objects0ItemData)
     .Build();
 bodyBatches0Objects.Add(bodyBatches0Objects0);
 
-var bodyBatches0Objects1CustomAttributeValues = new Dictionary<string, CatalogCustomAttributeValue>();
-
-
-var bodyBatches0Objects1CustomAttributeValues0 = new CatalogCustomAttributeValue.Builder()
-    .Name("name2")
-    .StringValue("string_value6")
-    .CustomAttributeDefinitionId("custom_attribute_definition_id0")
-    .Type("NUMBER")
-    .NumberValue("number_value2")
-    .Build();
-bodyBatches0Objects1CustomAttributeValues.Add("key0",bodyBatches0Objects1CustomAttributeValues0);
-
-var bodyBatches0Objects1CatalogV1Ids = new List<CatalogV1Id>();
-
-var bodyBatches0Objects1CatalogV1Ids0 = new CatalogV1Id.Builder()
-    .CatalogV1Id("catalog_v1_id5")
-    .LocationId("location_id5")
-    .Build();
-bodyBatches0Objects1CatalogV1Ids.Add(bodyBatches0Objects1CatalogV1Ids0);
-
-var bodyBatches0Objects1CatalogV1Ids1 = new CatalogV1Id.Builder()
-    .CatalogV1Id("catalog_v1_id6")
-    .LocationId("location_id6")
-    .Build();
-bodyBatches0Objects1CatalogV1Ids.Add(bodyBatches0Objects1CatalogV1Ids1);
-
 var bodyBatches0Objects1ItemDataTaxIds = new IList<string>();
 bodyBatches0Objects1ItemDataTaxIds.Add("#SalesTax");
 var bodyBatches0Objects1ItemDataVariations = new List<CatalogObject>();
 
-var bodyBatches0Objects1ItemDataVariations0CustomAttributeValues = new Dictionary<string, CatalogCustomAttributeValue>();
-
-
-var bodyBatches0Objects1ItemDataVariations0CustomAttributeValues0 = new CatalogCustomAttributeValue.Builder()
-    .Name("name9")
-    .StringValue("string_value3")
-    .CustomAttributeDefinitionId("custom_attribute_definition_id3")
-    .Type("BOOLEAN")
-    .NumberValue("number_value9")
-    .Build();
-bodyBatches0Objects1ItemDataVariations0CustomAttributeValues.Add("key0",bodyBatches0Objects1ItemDataVariations0CustomAttributeValues0);
-
-var bodyBatches0Objects1ItemDataVariations0CatalogV1Ids = new List<CatalogV1Id>();
-
-var bodyBatches0Objects1ItemDataVariations0CatalogV1Ids0 = new CatalogV1Id.Builder()
-    .CatalogV1Id("catalog_v1_id4")
-    .LocationId("location_id4")
-    .Build();
-bodyBatches0Objects1ItemDataVariations0CatalogV1Ids.Add(bodyBatches0Objects1ItemDataVariations0CatalogV1Ids0);
-
-var bodyBatches0Objects1ItemDataVariations0CatalogV1Ids1 = new CatalogV1Id.Builder()
-    .CatalogV1Id("catalog_v1_id5")
-    .LocationId("location_id5")
-    .Build();
-bodyBatches0Objects1ItemDataVariations0CatalogV1Ids.Add(bodyBatches0Objects1ItemDataVariations0CatalogV1Ids1);
-
 var bodyBatches0Objects1ItemDataVariations0ItemVariationData = new CatalogItemVariation.Builder()
     .ItemId("#Coffee")
     .Name("Regular")
-    .Sku("sku8")
-    .Upc("upc6")
-    .Ordinal(150)
     .PricingType("FIXED_PRICING")
     .Build();
 var bodyBatches0Objects1ItemDataVariations0 = new CatalogObject.Builder(
         "ITEM_VARIATION",
         "#Coffee_Regular")
-    .UpdatedAt("updated_at4")
-    .Version(100L)
-    .IsDeleted(false)
-    .CustomAttributeValues(bodyBatches0Objects1ItemDataVariations0CustomAttributeValues)
-    .CatalogV1Ids(bodyBatches0Objects1ItemDataVariations0CatalogV1Ids)
     .PresentAtAllLocations(true)
     .ItemVariationData(bodyBatches0Objects1ItemDataVariations0ItemVariationData)
     .Build();
 bodyBatches0Objects1ItemDataVariations.Add(bodyBatches0Objects1ItemDataVariations0);
 
-var bodyBatches0Objects1ItemDataVariations1CustomAttributeValues = new Dictionary<string, CatalogCustomAttributeValue>();
-
-
-var bodyBatches0Objects1ItemDataVariations1CustomAttributeValues0 = new CatalogCustomAttributeValue.Builder()
-    .Name("name8")
-    .StringValue("string_value2")
-    .CustomAttributeDefinitionId("custom_attribute_definition_id4")
-    .Type("NUMBER")
-    .NumberValue("number_value8")
-    .Build();
-bodyBatches0Objects1ItemDataVariations1CustomAttributeValues.Add("key0",bodyBatches0Objects1ItemDataVariations1CustomAttributeValues0);
-
-var bodyBatches0Objects1ItemDataVariations1CustomAttributeValues1 = new CatalogCustomAttributeValue.Builder()
-    .Name("name9")
-    .StringValue("string_value3")
-    .CustomAttributeDefinitionId("custom_attribute_definition_id3")
-    .Type("BOOLEAN")
-    .NumberValue("number_value9")
-    .Build();
-bodyBatches0Objects1ItemDataVariations1CustomAttributeValues.Add("key1",bodyBatches0Objects1ItemDataVariations1CustomAttributeValues1);
-
-var bodyBatches0Objects1ItemDataVariations1CustomAttributeValues2 = new CatalogCustomAttributeValue.Builder()
-    .Name("name0")
-    .StringValue("string_value4")
-    .CustomAttributeDefinitionId("custom_attribute_definition_id2")
-    .Type("STRING")
-    .NumberValue("number_value0")
-    .Build();
-bodyBatches0Objects1ItemDataVariations1CustomAttributeValues.Add("key2",bodyBatches0Objects1ItemDataVariations1CustomAttributeValues2);
-
-var bodyBatches0Objects1ItemDataVariations1CatalogV1Ids = new List<CatalogV1Id>();
-
-var bodyBatches0Objects1ItemDataVariations1CatalogV1Ids0 = new CatalogV1Id.Builder()
-    .CatalogV1Id("catalog_v1_id5")
-    .LocationId("location_id5")
-    .Build();
-bodyBatches0Objects1ItemDataVariations1CatalogV1Ids.Add(bodyBatches0Objects1ItemDataVariations1CatalogV1Ids0);
-
-var bodyBatches0Objects1ItemDataVariations1CatalogV1Ids1 = new CatalogV1Id.Builder()
-    .CatalogV1Id("catalog_v1_id6")
-    .LocationId("location_id6")
-    .Build();
-bodyBatches0Objects1ItemDataVariations1CatalogV1Ids.Add(bodyBatches0Objects1ItemDataVariations1CatalogV1Ids1);
-
-var bodyBatches0Objects1ItemDataVariations1CatalogV1Ids2 = new CatalogV1Id.Builder()
-    .CatalogV1Id("catalog_v1_id7")
-    .LocationId("location_id7")
-    .Build();
-bodyBatches0Objects1ItemDataVariations1CatalogV1Ids.Add(bodyBatches0Objects1ItemDataVariations1CatalogV1Ids2);
-
 var bodyBatches0Objects1ItemDataVariations1ItemVariationData = new CatalogItemVariation.Builder()
     .ItemId("#Coffee")
     .Name("Large")
-    .Sku("sku7")
-    .Upc("upc5")
-    .Ordinal(151)
     .PricingType("FIXED_PRICING")
     .Build();
 var bodyBatches0Objects1ItemDataVariations1 = new CatalogObject.Builder(
         "ITEM_VARIATION",
         "#Coffee_Large")
-    .UpdatedAt("updated_at3")
-    .Version(101L)
-    .IsDeleted(true)
-    .CustomAttributeValues(bodyBatches0Objects1ItemDataVariations1CustomAttributeValues)
-    .CatalogV1Ids(bodyBatches0Objects1ItemDataVariations1CatalogV1Ids)
     .PresentAtAllLocations(true)
     .ItemVariationData(bodyBatches0Objects1ItemDataVariations1ItemVariationData)
     .Build();
@@ -408,9 +214,6 @@ bodyBatches0Objects1ItemDataVariations.Add(bodyBatches0Objects1ItemDataVariation
 var bodyBatches0Objects1ItemData = new CatalogItem.Builder()
     .Name("Coffee")
     .Description("Hot Bean Juice")
-    .Abbreviation("abbreviation9")
-    .LabelColor("label_color9")
-    .AvailableOnline(true)
     .CategoryId("#Beverages")
     .TaxIds(bodyBatches0Objects1ItemDataTaxIds)
     .Variations(bodyBatches0Objects1ItemDataVariations)
@@ -418,114 +221,21 @@ var bodyBatches0Objects1ItemData = new CatalogItem.Builder()
 var bodyBatches0Objects1 = new CatalogObject.Builder(
         "ITEM",
         "#Coffee")
-    .UpdatedAt("updated_at7")
-    .Version(253L)
-    .IsDeleted(true)
-    .CustomAttributeValues(bodyBatches0Objects1CustomAttributeValues)
-    .CatalogV1Ids(bodyBatches0Objects1CatalogV1Ids)
     .PresentAtAllLocations(true)
     .ItemData(bodyBatches0Objects1ItemData)
     .Build();
 bodyBatches0Objects.Add(bodyBatches0Objects1);
 
-var bodyBatches0Objects2CustomAttributeValues = new Dictionary<string, CatalogCustomAttributeValue>();
-
-
-var bodyBatches0Objects2CustomAttributeValues0 = new CatalogCustomAttributeValue.Builder()
-    .Name("name3")
-    .StringValue("string_value7")
-    .CustomAttributeDefinitionId("custom_attribute_definition_id9")
-    .Type("BOOLEAN")
-    .NumberValue("number_value3")
-    .Build();
-bodyBatches0Objects2CustomAttributeValues.Add("key0",bodyBatches0Objects2CustomAttributeValues0);
-
-var bodyBatches0Objects2CustomAttributeValues1 = new CatalogCustomAttributeValue.Builder()
-    .Name("name2")
-    .StringValue("string_value6")
-    .CustomAttributeDefinitionId("custom_attribute_definition_id0")
-    .Type("NUMBER")
-    .NumberValue("number_value2")
-    .Build();
-bodyBatches0Objects2CustomAttributeValues.Add("key1",bodyBatches0Objects2CustomAttributeValues1);
-
-var bodyBatches0Objects2CustomAttributeValues2 = new CatalogCustomAttributeValue.Builder()
-    .Name("name1")
-    .StringValue("string_value5")
-    .CustomAttributeDefinitionId("custom_attribute_definition_id1")
-    .Type("SELECTION")
-    .NumberValue("number_value1")
-    .Build();
-bodyBatches0Objects2CustomAttributeValues.Add("key2",bodyBatches0Objects2CustomAttributeValues2);
-
-var bodyBatches0Objects2CatalogV1Ids = new List<CatalogV1Id>();
-
-var bodyBatches0Objects2CatalogV1Ids0 = new CatalogV1Id.Builder()
-    .CatalogV1Id("catalog_v1_id6")
-    .LocationId("location_id6")
-    .Build();
-bodyBatches0Objects2CatalogV1Ids.Add(bodyBatches0Objects2CatalogV1Ids0);
-
-var bodyBatches0Objects2CatalogV1Ids1 = new CatalogV1Id.Builder()
-    .CatalogV1Id("catalog_v1_id7")
-    .LocationId("location_id7")
-    .Build();
-bodyBatches0Objects2CatalogV1Ids.Add(bodyBatches0Objects2CatalogV1Ids1);
-
-var bodyBatches0Objects2CatalogV1Ids2 = new CatalogV1Id.Builder()
-    .CatalogV1Id("catalog_v1_id8")
-    .LocationId("location_id8")
-    .Build();
-bodyBatches0Objects2CatalogV1Ids.Add(bodyBatches0Objects2CatalogV1Ids2);
-
-var bodyBatches0Objects2CategoryDataImageIds = new IList<string>();
-bodyBatches0Objects2CategoryDataImageIds.Add("image_ids1");
-bodyBatches0Objects2CategoryDataImageIds.Add("image_ids2");
 var bodyBatches0Objects2CategoryData = new CatalogCategory.Builder()
     .Name("Beverages")
-    .ImageIds(bodyBatches0Objects2CategoryDataImageIds)
     .Build();
 var bodyBatches0Objects2 = new CatalogObject.Builder(
         "CATEGORY",
         "#Beverages")
-    .UpdatedAt("updated_at8")
-    .Version(254L)
-    .IsDeleted(false)
-    .CustomAttributeValues(bodyBatches0Objects2CustomAttributeValues)
-    .CatalogV1Ids(bodyBatches0Objects2CatalogV1Ids)
     .PresentAtAllLocations(true)
     .CategoryData(bodyBatches0Objects2CategoryData)
     .Build();
 bodyBatches0Objects.Add(bodyBatches0Objects2);
-
-var bodyBatches0Objects3CustomAttributeValues = new Dictionary<string, CatalogCustomAttributeValue>();
-
-
-var bodyBatches0Objects3CustomAttributeValues0 = new CatalogCustomAttributeValue.Builder()
-    .Name("name4")
-    .StringValue("string_value8")
-    .CustomAttributeDefinitionId("custom_attribute_definition_id8")
-    .Type("STRING")
-    .NumberValue("number_value4")
-    .Build();
-bodyBatches0Objects3CustomAttributeValues.Add("key0",bodyBatches0Objects3CustomAttributeValues0);
-
-var bodyBatches0Objects3CustomAttributeValues1 = new CatalogCustomAttributeValue.Builder()
-    .Name("name3")
-    .StringValue("string_value7")
-    .CustomAttributeDefinitionId("custom_attribute_definition_id9")
-    .Type("BOOLEAN")
-    .NumberValue("number_value3")
-    .Build();
-bodyBatches0Objects3CustomAttributeValues.Add("key1",bodyBatches0Objects3CustomAttributeValues1);
-
-var bodyBatches0Objects3CatalogV1Ids = new List<CatalogV1Id>();
-
-var bodyBatches0Objects3CatalogV1Ids0 = new CatalogV1Id.Builder()
-    .CatalogV1Id("catalog_v1_id7")
-    .LocationId("location_id7")
-    .Build();
-bodyBatches0Objects3CatalogV1Ids.Add(bodyBatches0Objects3CatalogV1Ids0);
 
 var bodyBatches0Objects3TaxData = new CatalogTax.Builder()
     .Name("Sales Tax")
@@ -538,11 +248,6 @@ var bodyBatches0Objects3TaxData = new CatalogTax.Builder()
 var bodyBatches0Objects3 = new CatalogObject.Builder(
         "TAX",
         "#SalesTax")
-    .UpdatedAt("updated_at9")
-    .Version(255L)
-    .IsDeleted(true)
-    .CustomAttributeValues(bodyBatches0Objects3CustomAttributeValues)
-    .CatalogV1Ids(bodyBatches0Objects3CatalogV1Ids)
     .PresentAtAllLocations(true)
     .TaxData(bodyBatches0Objects3TaxData)
     .Build();
@@ -595,52 +300,23 @@ CreateCatalogImageAsync(
 ## Example Usage
 
 ```csharp
-var requestImageCustomAttributeValues = new Dictionary<string, CatalogCustomAttributeValue>();
-
-
-var requestImageCustomAttributeValues0 = new CatalogCustomAttributeValue.Builder()
-    .Build();
-requestImageCustomAttributeValues.Add("",requestImageCustomAttributeValues0);
-
-var requestImageCustomAttributeValues1 = new CatalogCustomAttributeValue.Builder()
-    .Build();
-requestImageCustomAttributeValues.Add("",requestImageCustomAttributeValues1);
-
-var requestImageCatalogV1Ids = new List<CatalogV1Id>();
-
-var requestImageCatalogV1Ids0 = new CatalogV1Id.Builder()
-    .CatalogV1Id("catalog_v1_id4")
-    .LocationId("location_id4")
-    .Build();
-requestImageCatalogV1Ids.Add(requestImageCatalogV1Ids0);
-
 var requestImageImageData = new CatalogImage.Builder()
-    .Name("name0")
-    .Url("url4")
     .Caption("A picture of a cup of coffee")
-    .PhotoStudioOrderId("photo_studio_order_id2")
     .Build();
 var requestImage = new CatalogObject.Builder(
         "IMAGE",
         "#TEMP_ID")
-    .UpdatedAt("updated_at4")
-    .Version(68L)
-    .IsDeleted(false)
-    .CustomAttributeValues(requestImageCustomAttributeValues)
-    .CatalogV1Ids(requestImageCatalogV1Ids)
     .ImageData(requestImageImageData)
     .Build();
 var request = new CreateCatalogImageRequest.Builder(
         "528dea59-7bfb-43c1-bd48-4a6bba7dd61f86",
         requestImage)
     .ObjectId("ND6EA5AAJEO5WL3JNNIAQA32")
-    .IsPrimary(false)
     .Build();
-FileStreamInfo imageFile = new FileStreamInfo(new FileStream("dummy_file",FileMode.Open));
 
 try
 {
-    CreateCatalogImageResponse result = await catalogApi.CreateCatalogImageAsync(request, imageFile);
+    CreateCatalogImageResponse result = await catalogApi.CreateCatalogImageAsync(request, null);
 }
 catch (ApiException e){};
 ```
@@ -679,11 +355,10 @@ string imageId = "image_id4";
 var request = new UpdateCatalogImageRequest.Builder(
         "528dea59-7bfb-43c1-bd48-4a6bba7dd61f86")
     .Build();
-FileStreamInfo imageFile = new FileStreamInfo(new FileStream("dummy_file",FileMode.Open));
 
 try
 {
-    UpdateCatalogImageResponse result = await catalogApi.UpdateCatalogImageAsync(imageId, request, imageFile);
+    UpdateCatalogImageResponse result = await catalogApi.UpdateCatalogImageAsync(imageId, request, null);
 }
 catch (ApiException e){};
 ```
@@ -746,13 +421,9 @@ ListCatalogAsync(
 ## Example Usage
 
 ```csharp
-string cursor = "cursor6";
-string types = "types6";
-long? catalogVersion = 126L;
-
 try
 {
-    ListCatalogResponse result = await catalogApi.ListCatalogAsync(cursor, types, catalogVersion);
+    ListCatalogResponse result = await catalogApi.ListCatalogAsync(null, null, null);
 }
 catch (ApiException e){};
 ```
@@ -780,141 +451,19 @@ UpsertCatalogObjectAsync(
 ## Example Usage
 
 ```csharp
-var bodyMObjectCustomAttributeValues = new Dictionary<string, CatalogCustomAttributeValue>();
-
-
-var bodyMObjectCustomAttributeValues0 = new CatalogCustomAttributeValue.Builder()
-    .Build();
-bodyMObjectCustomAttributeValues.Add("",bodyMObjectCustomAttributeValues0);
-
-var bodyMObjectCustomAttributeValues1 = new CatalogCustomAttributeValue.Builder()
-    .Build();
-bodyMObjectCustomAttributeValues.Add("",bodyMObjectCustomAttributeValues1);
-
-var bodyMObjectCustomAttributeValues2 = new CatalogCustomAttributeValue.Builder()
-    .Build();
-bodyMObjectCustomAttributeValues.Add("",bodyMObjectCustomAttributeValues2);
-
-var bodyMObjectCatalogV1Ids = new List<CatalogV1Id>();
-
-var bodyMObjectCatalogV1Ids0 = new CatalogV1Id.Builder()
-    .CatalogV1Id("catalog_v1_id0")
-    .LocationId("location_id0")
-    .Build();
-bodyMObjectCatalogV1Ids.Add(bodyMObjectCatalogV1Ids0);
-
-var bodyMObjectCatalogV1Ids1 = new CatalogV1Id.Builder()
-    .CatalogV1Id("catalog_v1_id1")
-    .LocationId("location_id1")
-    .Build();
-bodyMObjectCatalogV1Ids.Add(bodyMObjectCatalogV1Ids1);
-
-var bodyMObjectCatalogV1Ids2 = new CatalogV1Id.Builder()
-    .CatalogV1Id("catalog_v1_id2")
-    .LocationId("location_id2")
-    .Build();
-bodyMObjectCatalogV1Ids.Add(bodyMObjectCatalogV1Ids2);
-
 var bodyMObjectItemDataVariations = new List<CatalogObject>();
-
-var bodyMObjectItemDataVariations0CustomAttributeValues = new Dictionary<string, CatalogCustomAttributeValue>();
-
-
-var bodyMObjectItemDataVariations0CustomAttributeValues0 = new CatalogCustomAttributeValue.Builder()
-    .Name("name4")
-    .StringValue("string_value8")
-    .CustomAttributeDefinitionId("custom_attribute_definition_id8")
-    .Type("NUMBER")
-    .NumberValue("number_value4")
-    .Build();
-bodyMObjectItemDataVariations0CustomAttributeValues.Add("key0",bodyMObjectItemDataVariations0CustomAttributeValues0);
-
-var bodyMObjectItemDataVariations0CustomAttributeValues1 = new CatalogCustomAttributeValue.Builder()
-    .Name("name5")
-    .StringValue("string_value9")
-    .CustomAttributeDefinitionId("custom_attribute_definition_id7")
-    .Type("BOOLEAN")
-    .NumberValue("number_value5")
-    .Build();
-bodyMObjectItemDataVariations0CustomAttributeValues.Add("key1",bodyMObjectItemDataVariations0CustomAttributeValues1);
-
-var bodyMObjectItemDataVariations0CatalogV1Ids = new List<CatalogV1Id>();
-
-var bodyMObjectItemDataVariations0CatalogV1Ids0 = new CatalogV1Id.Builder()
-    .CatalogV1Id("catalog_v1_id9")
-    .LocationId("location_id9")
-    .Build();
-bodyMObjectItemDataVariations0CatalogV1Ids.Add(bodyMObjectItemDataVariations0CatalogV1Ids0);
 
 var bodyMObjectItemDataVariations0ItemVariationData = new CatalogItemVariation.Builder()
     .ItemId("#Cocoa")
     .Name("Small")
-    .Sku("sku3")
-    .Upc("upc1")
-    .Ordinal(119)
     .PricingType("VARIABLE_PRICING")
     .Build();
 var bodyMObjectItemDataVariations0 = new CatalogObject.Builder(
         "ITEM_VARIATION",
         "#Small")
-    .UpdatedAt("updated_at9")
-    .Version(69L)
-    .IsDeleted(true)
-    .CustomAttributeValues(bodyMObjectItemDataVariations0CustomAttributeValues)
-    .CatalogV1Ids(bodyMObjectItemDataVariations0CatalogV1Ids)
     .ItemVariationData(bodyMObjectItemDataVariations0ItemVariationData)
     .Build();
 bodyMObjectItemDataVariations.Add(bodyMObjectItemDataVariations0);
-
-var bodyMObjectItemDataVariations1CustomAttributeValues = new Dictionary<string, CatalogCustomAttributeValue>();
-
-
-var bodyMObjectItemDataVariations1CustomAttributeValues0 = new CatalogCustomAttributeValue.Builder()
-    .Name("name5")
-    .StringValue("string_value9")
-    .CustomAttributeDefinitionId("custom_attribute_definition_id7")
-    .Type("BOOLEAN")
-    .NumberValue("number_value5")
-    .Build();
-bodyMObjectItemDataVariations1CustomAttributeValues.Add("key0",bodyMObjectItemDataVariations1CustomAttributeValues0);
-
-var bodyMObjectItemDataVariations1CustomAttributeValues1 = new CatalogCustomAttributeValue.Builder()
-    .Name("name6")
-    .StringValue("string_value0")
-    .CustomAttributeDefinitionId("custom_attribute_definition_id6")
-    .Type("STRING")
-    .NumberValue("number_value6")
-    .Build();
-bodyMObjectItemDataVariations1CustomAttributeValues.Add("key1",bodyMObjectItemDataVariations1CustomAttributeValues1);
-
-var bodyMObjectItemDataVariations1CustomAttributeValues2 = new CatalogCustomAttributeValue.Builder()
-    .Name("name7")
-    .StringValue("string_value1")
-    .CustomAttributeDefinitionId("custom_attribute_definition_id5")
-    .Type("SELECTION")
-    .NumberValue("number_value7")
-    .Build();
-bodyMObjectItemDataVariations1CustomAttributeValues.Add("key2",bodyMObjectItemDataVariations1CustomAttributeValues2);
-
-var bodyMObjectItemDataVariations1CatalogV1Ids = new List<CatalogV1Id>();
-
-var bodyMObjectItemDataVariations1CatalogV1Ids0 = new CatalogV1Id.Builder()
-    .CatalogV1Id("catalog_v1_id8")
-    .LocationId("location_id8")
-    .Build();
-bodyMObjectItemDataVariations1CatalogV1Ids.Add(bodyMObjectItemDataVariations1CatalogV1Ids0);
-
-var bodyMObjectItemDataVariations1CatalogV1Ids1 = new CatalogV1Id.Builder()
-    .CatalogV1Id("catalog_v1_id9")
-    .LocationId("location_id9")
-    .Build();
-bodyMObjectItemDataVariations1CatalogV1Ids.Add(bodyMObjectItemDataVariations1CatalogV1Ids1);
-
-var bodyMObjectItemDataVariations1CatalogV1Ids2 = new CatalogV1Id.Builder()
-    .CatalogV1Id("catalog_v1_id0")
-    .LocationId("location_id0")
-    .Build();
-bodyMObjectItemDataVariations1CatalogV1Ids.Add(bodyMObjectItemDataVariations1CatalogV1Ids2);
 
 var bodyMObjectItemDataVariations1ItemVariationDataPriceMoney = new Money.Builder()
     .Amount(400L)
@@ -923,20 +472,12 @@ var bodyMObjectItemDataVariations1ItemVariationDataPriceMoney = new Money.Builde
 var bodyMObjectItemDataVariations1ItemVariationData = new CatalogItemVariation.Builder()
     .ItemId("#Cocoa")
     .Name("Large")
-    .Sku("sku4")
-    .Upc("upc2")
-    .Ordinal(118)
     .PricingType("FIXED_PRICING")
     .PriceMoney(bodyMObjectItemDataVariations1ItemVariationDataPriceMoney)
     .Build();
 var bodyMObjectItemDataVariations1 = new CatalogObject.Builder(
         "ITEM_VARIATION",
         "#Large")
-    .UpdatedAt("updated_at0")
-    .Version(68L)
-    .IsDeleted(false)
-    .CustomAttributeValues(bodyMObjectItemDataVariations1CustomAttributeValues)
-    .CatalogV1Ids(bodyMObjectItemDataVariations1CatalogV1Ids)
     .ItemVariationData(bodyMObjectItemDataVariations1ItemVariationData)
     .Build();
 bodyMObjectItemDataVariations.Add(bodyMObjectItemDataVariations1);
@@ -945,18 +486,11 @@ var bodyMObjectItemData = new CatalogItem.Builder()
     .Name("Cocoa")
     .Description("Hot Chocolate")
     .Abbreviation("Ch")
-    .LabelColor("label_color4")
-    .AvailableOnline(false)
     .Variations(bodyMObjectItemDataVariations)
     .Build();
 var bodyMObject = new CatalogObject.Builder(
         "ITEM",
         "#Cocoa")
-    .UpdatedAt("updated_at8")
-    .Version(252L)
-    .IsDeleted(false)
-    .CustomAttributeValues(bodyMObjectCustomAttributeValues)
-    .CatalogV1Ids(bodyMObjectCatalogV1Ids)
     .ItemData(bodyMObjectItemData)
     .Build();
 var body = new UpsertCatalogObjectRequest.Builder(
@@ -1043,11 +577,10 @@ RetrieveCatalogObjectAsync(
 ```csharp
 string objectId = "object_id8";
 bool? includeRelatedObjects = false;
-long? catalogVersion = 126L;
 
 try
 {
-    RetrieveCatalogObjectResponse result = await catalogApi.RetrieveCatalogObjectAsync(objectId, includeRelatedObjects, catalogVersion);
+    RetrieveCatalogObjectResponse result = await catalogApi.RetrieveCatalogObjectAsync(objectId, includeRelatedObjects, null);
 }
 catch (ApiException e){};
 ```
@@ -1086,43 +619,15 @@ SearchCatalogObjectsAsync(
 ```csharp
 var bodyObjectTypes = new IList<string>();
 bodyObjectTypes.Add("ITEM");
-var bodyQuerySortedAttributeQuery = new CatalogQuerySortedAttribute.Builder(
-        "attribute_name6")
-    .InitialAttributeValue("initial_attribute_value4")
-    .SortOrder("DESC")
-    .Build();
-var bodyQueryExactQuery = new CatalogQueryExact.Builder(
-        "attribute_name2",
-        "attribute_value2")
-    .Build();
-var bodyQuerySetQueryAttributeValues = new IList<string>();
-bodyQuerySetQueryAttributeValues.Add("attribute_values0");
-var bodyQuerySetQuery = new CatalogQuerySet.Builder(
-        "attribute_name8",
-        bodyQuerySetQueryAttributeValues)
-    .Build();
 var bodyQueryPrefixQuery = new CatalogQueryPrefix.Builder(
         "name",
         "tea")
     .Build();
-var bodyQueryRangeQuery = new CatalogQueryRange.Builder(
-        "attribute_name6")
-    .AttributeMinValue(14L)
-    .AttributeMaxValue(180L)
-    .Build();
 var bodyQuery = new CatalogQuery.Builder()
-    .SortedAttributeQuery(bodyQuerySortedAttributeQuery)
-    .ExactQuery(bodyQueryExactQuery)
-    .SetQuery(bodyQuerySetQuery)
     .PrefixQuery(bodyQueryPrefixQuery)
-    .RangeQuery(bodyQueryRangeQuery)
     .Build();
 var body = new SearchCatalogObjectsRequest.Builder()
-    .Cursor("cursor0")
     .ObjectTypes(bodyObjectTypes)
-    .IncludeDeletedObjects(false)
-    .IncludeRelatedObjects(false)
-    .BeginTime("begin_time4")
     .Query(bodyQuery)
     .Limit(100)
     .Build();
@@ -1177,35 +682,15 @@ var bodyProductTypes = new IList<string>();
 bodyProductTypes.Add("REGULAR");
 var bodyCustomAttributeFilters = new List<CustomAttributeFilter>();
 
-var bodyCustomAttributeFilters0NumberFilter = new Range.Builder()
-    .Min("min0")
-    .Max("max2")
-    .Build();
-var bodyCustomAttributeFilters0SelectionUidsFilter = new IList<string>();
-bodyCustomAttributeFilters0SelectionUidsFilter.Add("selection_uids_filter2");
-bodyCustomAttributeFilters0SelectionUidsFilter.Add("selection_uids_filter3");
 var bodyCustomAttributeFilters0 = new CustomAttributeFilter.Builder()
     .CustomAttributeDefinitionId("VEGAN_DEFINITION_ID")
-    .Key("key2")
-    .StringFilter("string_filter4")
-    .NumberFilter(bodyCustomAttributeFilters0NumberFilter)
-    .SelectionUidsFilter(bodyCustomAttributeFilters0SelectionUidsFilter)
     .BoolFilter(true)
     .Build();
 bodyCustomAttributeFilters.Add(bodyCustomAttributeFilters0);
 
-var bodyCustomAttributeFilters1NumberFilter = new Range.Builder()
-    .Min("min1")
-    .Max("max1")
-    .Build();
-var bodyCustomAttributeFilters1SelectionUidsFilter = new IList<string>();
-bodyCustomAttributeFilters1SelectionUidsFilter.Add("selection_uids_filter1");
 var bodyCustomAttributeFilters1 = new CustomAttributeFilter.Builder()
     .CustomAttributeDefinitionId("BRAND_DEFINITION_ID")
-    .Key("key3")
     .StringFilter("Dark Horse")
-    .NumberFilter(bodyCustomAttributeFilters1NumberFilter)
-    .SelectionUidsFilter(bodyCustomAttributeFilters1SelectionUidsFilter)
     .Build();
 bodyCustomAttributeFilters.Add(bodyCustomAttributeFilters1);
 
@@ -1213,32 +698,14 @@ var bodyCustomAttributeFilters2NumberFilter = new Range.Builder()
     .Min("2017")
     .Max("2018")
     .Build();
-var bodyCustomAttributeFilters2SelectionUidsFilter = new IList<string>();
-bodyCustomAttributeFilters2SelectionUidsFilter.Add("selection_uids_filter0");
-bodyCustomAttributeFilters2SelectionUidsFilter.Add("selection_uids_filter1");
-bodyCustomAttributeFilters2SelectionUidsFilter.Add("selection_uids_filter2");
 var bodyCustomAttributeFilters2 = new CustomAttributeFilter.Builder()
-    .CustomAttributeDefinitionId("custom_attribute_definition_id8")
     .Key("VINTAGE")
-    .StringFilter("string_filter6")
     .NumberFilter(bodyCustomAttributeFilters2NumberFilter)
-    .SelectionUidsFilter(bodyCustomAttributeFilters2SelectionUidsFilter)
     .Build();
 bodyCustomAttributeFilters.Add(bodyCustomAttributeFilters2);
 
-var bodyCustomAttributeFilters3NumberFilter = new Range.Builder()
-    .Min("min3")
-    .Max("max9")
-    .Build();
-var bodyCustomAttributeFilters3SelectionUidsFilter = new IList<string>();
-bodyCustomAttributeFilters3SelectionUidsFilter.Add("selection_uids_filter9");
-bodyCustomAttributeFilters3SelectionUidsFilter.Add("selection_uids_filter0");
 var bodyCustomAttributeFilters3 = new CustomAttributeFilter.Builder()
     .CustomAttributeDefinitionId("VARIETAL_DEFINITION_ID")
-    .Key("key5")
-    .StringFilter("string_filter7")
-    .NumberFilter(bodyCustomAttributeFilters3NumberFilter)
-    .SelectionUidsFilter(bodyCustomAttributeFilters3SelectionUidsFilter)
     .Build();
 bodyCustomAttributeFilters.Add(bodyCustomAttributeFilters3);
 
@@ -1247,7 +714,6 @@ var body = new SearchCatalogItemsRequest.Builder()
     .CategoryIds(bodyCategoryIds)
     .StockLevels(bodyStockLevels)
     .EnabledLocationIds(bodyEnabledLocationIds)
-    .Cursor("cursor0")
     .Limit(100)
     .SortOrder("ASC")
     .ProductTypes(bodyProductTypes)

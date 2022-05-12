@@ -20,18 +20,18 @@ namespace Square.Models
         /// <summary>
         /// Initializes a new instance of the <see cref="AppointmentSegment"/> class.
         /// </summary>
-        /// <param name="durationMinutes">duration_minutes.</param>
         /// <param name="serviceVariationId">service_variation_id.</param>
         /// <param name="teamMemberId">team_member_id.</param>
         /// <param name="serviceVariationVersion">service_variation_version.</param>
+        /// <param name="durationMinutes">duration_minutes.</param>
         /// <param name="intermissionMinutes">intermission_minutes.</param>
         /// <param name="anyTeamMember">any_team_member.</param>
         /// <param name="resourceIds">resource_ids.</param>
         public AppointmentSegment(
-            int durationMinutes,
             string serviceVariationId,
             string teamMemberId,
             long serviceVariationVersion,
+            int? durationMinutes = null,
             int? intermissionMinutes = null,
             bool? anyTeamMember = null,
             IList<string> resourceIds = null)
@@ -48,8 +48,8 @@ namespace Square.Models
         /// <summary>
         /// The time span in minutes of an appointment segment.
         /// </summary>
-        [JsonProperty("duration_minutes")]
-        public int DurationMinutes { get; }
+        [JsonProperty("duration_minutes", NullValueHandling = NullValueHandling.Ignore)]
+        public int? DurationMinutes { get; }
 
         /// <summary>
         /// The ID of the [CatalogItemVariation]($m/CatalogItemVariation) object representing the service booked in this segment.
@@ -111,7 +111,7 @@ namespace Square.Models
             }
 
             return obj is AppointmentSegment other &&
-                this.DurationMinutes.Equals(other.DurationMinutes) &&
+                ((this.DurationMinutes == null && other.DurationMinutes == null) || (this.DurationMinutes?.Equals(other.DurationMinutes) == true)) &&
                 ((this.ServiceVariationId == null && other.ServiceVariationId == null) || (this.ServiceVariationId?.Equals(other.ServiceVariationId) == true)) &&
                 ((this.TeamMemberId == null && other.TeamMemberId == null) || (this.TeamMemberId?.Equals(other.TeamMemberId) == true)) &&
                 this.ServiceVariationVersion.Equals(other.ServiceVariationVersion) &&
@@ -123,7 +123,7 @@ namespace Square.Models
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1449493207;
+            int hashCode = -116171158;
             hashCode = HashCode.Combine(this.DurationMinutes, this.ServiceVariationId, this.TeamMemberId, this.ServiceVariationVersion, this.IntermissionMinutes, this.AnyTeamMember, this.ResourceIds);
 
             return hashCode;
@@ -135,7 +135,7 @@ namespace Square.Models
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.DurationMinutes = {this.DurationMinutes}");
+            toStringOutput.Add($"this.DurationMinutes = {(this.DurationMinutes == null ? "null" : this.DurationMinutes.ToString())}");
             toStringOutput.Add($"this.ServiceVariationId = {(this.ServiceVariationId == null ? "null" : this.ServiceVariationId == string.Empty ? "" : this.ServiceVariationId)}");
             toStringOutput.Add($"this.TeamMemberId = {(this.TeamMemberId == null ? "null" : this.TeamMemberId == string.Empty ? "" : this.TeamMemberId)}");
             toStringOutput.Add($"this.ServiceVariationVersion = {this.ServiceVariationVersion}");
@@ -151,10 +151,10 @@ namespace Square.Models
         public Builder ToBuilder()
         {
             var builder = new Builder(
-                this.DurationMinutes,
                 this.ServiceVariationId,
                 this.TeamMemberId,
                 this.ServiceVariationVersion)
+                .DurationMinutes(this.DurationMinutes)
                 .IntermissionMinutes(this.IntermissionMinutes)
                 .AnyTeamMember(this.AnyTeamMember)
                 .ResourceIds(this.ResourceIds);
@@ -166,35 +166,22 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
-            private int durationMinutes;
             private string serviceVariationId;
             private string teamMemberId;
             private long serviceVariationVersion;
+            private int? durationMinutes;
             private int? intermissionMinutes;
             private bool? anyTeamMember;
             private IList<string> resourceIds;
 
             public Builder(
-                int durationMinutes,
                 string serviceVariationId,
                 string teamMemberId,
                 long serviceVariationVersion)
             {
-                this.durationMinutes = durationMinutes;
                 this.serviceVariationId = serviceVariationId;
                 this.teamMemberId = teamMemberId;
                 this.serviceVariationVersion = serviceVariationVersion;
-            }
-
-             /// <summary>
-             /// DurationMinutes.
-             /// </summary>
-             /// <param name="durationMinutes"> durationMinutes. </param>
-             /// <returns> Builder. </returns>
-            public Builder DurationMinutes(int durationMinutes)
-            {
-                this.durationMinutes = durationMinutes;
-                return this;
             }
 
              /// <summary>
@@ -227,6 +214,17 @@ namespace Square.Models
             public Builder ServiceVariationVersion(long serviceVariationVersion)
             {
                 this.serviceVariationVersion = serviceVariationVersion;
+                return this;
+            }
+
+             /// <summary>
+             /// DurationMinutes.
+             /// </summary>
+             /// <param name="durationMinutes"> durationMinutes. </param>
+             /// <returns> Builder. </returns>
+            public Builder DurationMinutes(int? durationMinutes)
+            {
+                this.durationMinutes = durationMinutes;
                 return this;
             }
 
@@ -270,10 +268,10 @@ namespace Square.Models
             public AppointmentSegment Build()
             {
                 return new AppointmentSegment(
-                    this.durationMinutes,
                     this.serviceVariationId,
                     this.teamMemberId,
                     this.serviceVariationVersion,
+                    this.durationMinutes,
                     this.intermissionMinutes,
                     this.anyTeamMember,
                     this.resourceIds);

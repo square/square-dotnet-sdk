@@ -20,6 +20,80 @@ namespace Square.Apis
     public interface ITerminalApi
     {
         /// <summary>
+        /// Creates a Terminal action request and sends it to the specified device to take a payment.
+        /// for the requested amount.
+        /// </summary>
+        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
+        /// <returns>Returns the Models.CreateTerminalActionResponse response from the API call.</returns>
+        Models.CreateTerminalActionResponse CreateTerminalAction(
+                Models.CreateTerminalActionRequest body);
+
+        /// <summary>
+        /// Creates a Terminal action request and sends it to the specified device to take a payment.
+        /// for the requested amount.
+        /// </summary>
+        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
+        /// <param name="cancellationToken"> cancellationToken. </param>
+        /// <returns>Returns the Models.CreateTerminalActionResponse response from the API call.</returns>
+        Task<Models.CreateTerminalActionResponse> CreateTerminalActionAsync(
+                Models.CreateTerminalActionRequest body,
+                CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Retrieves a filtered list of Terminal action requests created by the account making the request. Terminal action requests are available for 30 days.
+        /// </summary>
+        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
+        /// <returns>Returns the Models.SearchTerminalActionsResponse response from the API call.</returns>
+        Models.SearchTerminalActionsResponse SearchTerminalActions(
+                Models.SearchTerminalActionsRequest body);
+
+        /// <summary>
+        /// Retrieves a filtered list of Terminal action requests created by the account making the request. Terminal action requests are available for 30 days.
+        /// </summary>
+        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
+        /// <param name="cancellationToken"> cancellationToken. </param>
+        /// <returns>Returns the Models.SearchTerminalActionsResponse response from the API call.</returns>
+        Task<Models.SearchTerminalActionsResponse> SearchTerminalActionsAsync(
+                Models.SearchTerminalActionsRequest body,
+                CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Retrieves a Terminal action request by `action_id`. Terminal action requests are available for 30 days.
+        /// </summary>
+        /// <param name="actionId">Required parameter: Unique ID for the desired `TerminalAction`.</param>
+        /// <returns>Returns the Models.GetTerminalActionResponse response from the API call.</returns>
+        Models.GetTerminalActionResponse GetTerminalAction(
+                string actionId);
+
+        /// <summary>
+        /// Retrieves a Terminal action request by `action_id`. Terminal action requests are available for 30 days.
+        /// </summary>
+        /// <param name="actionId">Required parameter: Unique ID for the desired `TerminalAction`.</param>
+        /// <param name="cancellationToken"> cancellationToken. </param>
+        /// <returns>Returns the Models.GetTerminalActionResponse response from the API call.</returns>
+        Task<Models.GetTerminalActionResponse> GetTerminalActionAsync(
+                string actionId,
+                CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Cancels a Terminal action request if the status of the request permits it.
+        /// </summary>
+        /// <param name="actionId">Required parameter: Unique ID for the desired `TerminalAction`.</param>
+        /// <returns>Returns the Models.CancelTerminalActionResponse response from the API call.</returns>
+        Models.CancelTerminalActionResponse CancelTerminalAction(
+                string actionId);
+
+        /// <summary>
+        /// Cancels a Terminal action request if the status of the request permits it.
+        /// </summary>
+        /// <param name="actionId">Required parameter: Unique ID for the desired `TerminalAction`.</param>
+        /// <param name="cancellationToken"> cancellationToken. </param>
+        /// <returns>Returns the Models.CancelTerminalActionResponse response from the API call.</returns>
+        Task<Models.CancelTerminalActionResponse> CancelTerminalActionAsync(
+                string actionId,
+                CancellationToken cancellationToken = default);
+
+        /// <summary>
         /// Creates a Terminal checkout request and sends it to the specified device to take a payment.
         /// for the requested amount.
         /// </summary>

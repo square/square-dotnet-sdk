@@ -41,12 +41,9 @@ ListCustomerGroupsAsync(
 ## Example Usage
 
 ```csharp
-string cursor = "cursor6";
-int? limit = 172;
-
 try
 {
-    ListCustomerGroupsResponse result = await customerGroupsApi.ListCustomerGroupsAsync(cursor, limit);
+    ListCustomerGroupsResponse result = await customerGroupsApi.ListCustomerGroupsAsync(null, null);
 }
 catch (ApiException e){};
 ```
@@ -78,13 +75,9 @@ CreateCustomerGroupAsync(
 ```csharp
 var bodyGroup = new CustomerGroup.Builder(
         "Loyal Customers")
-    .Id("id4")
-    .CreatedAt("created_at2")
-    .UpdatedAt("updated_at0")
     .Build();
 var body = new CreateCustomerGroupRequest.Builder(
         bodyGroup)
-    .IdempotencyKey("idempotency_key2")
     .Build();
 
 try
@@ -186,9 +179,6 @@ UpdateCustomerGroupAsync(
 string groupId = "group_id0";
 var bodyGroup = new CustomerGroup.Builder(
         "Loyal Customers")
-    .Id("id4")
-    .CreatedAt("created_at2")
-    .UpdatedAt("updated_at0")
     .Build();
 var body = new UpdateCustomerGroupRequest.Builder(
         bodyGroup)

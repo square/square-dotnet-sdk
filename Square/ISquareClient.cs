@@ -59,6 +59,11 @@ namespace Square
         ICustomersApi CustomersApi { get; }
 
         /// <summary>
+        /// Gets instance for ICustomerCustomAttributesApi.
+        /// </summary>
+        ICustomerCustomAttributesApi CustomerCustomAttributesApi { get; }
+
+        /// <summary>
         /// Gets instance for ICustomerGroupsApi.
         /// </summary>
         ICustomerGroupsApi CustomerGroupsApi { get; }

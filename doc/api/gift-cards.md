@@ -50,15 +50,9 @@ ListGiftCardsAsync(
 ## Example Usage
 
 ```csharp
-string type = "type0";
-string state = "state4";
-int? limit = 172;
-string cursor = "cursor6";
-string customerId = "customer_id8";
-
 try
 {
-    ListGiftCardsResponse result = await giftCardsApi.ListGiftCardsAsync(type, state, limit, cursor, customerId);
+    ListGiftCardsResponse result = await giftCardsApi.ListGiftCardsAsync(null, null, null, null, null);
 }
 catch (ApiException e){};
 ```
@@ -66,9 +60,9 @@ catch (ApiException e){};
 
 # Create Gift Card
 
-Creates a digital gift card or registers a physical (plastic) gift card. You must activate the gift card before
-it can be used for payment. For more information, see
-[Selling gift cards](https://developer.squareup.com/docs/gift-cards/using-gift-cards-api#selling-square-gift-cards).
+Creates a digital gift card or registers a physical (plastic) gift card. After the gift card
+is created, you must call [CreateGiftCardActivity](../../doc/api/gift-card-activities.md#create-gift-card-activity)
+to activate the card with an initial balance before it can be used for payment.
 
 ```csharp
 CreateGiftCardAsync(
@@ -88,17 +82,8 @@ CreateGiftCardAsync(
 ## Example Usage
 
 ```csharp
-var bodyGiftCardBalanceMoney = new Money.Builder()
-    .Amount(2L)
-    .Currency("DOP")
-    .Build();
 var bodyGiftCard = new GiftCard.Builder(
         "DIGITAL")
-    .Id("id4")
-    .GanSource("SQUARE")
-    .State("ACTIVE")
-    .BalanceMoney(bodyGiftCardBalanceMoney)
-    .Gan("gan0")
     .Build();
 var body = new CreateGiftCardRequest.Builder(
         "NC9Tm69EjbjtConu",
@@ -258,7 +243,7 @@ catch (ApiException e){};
 
 # Retrieve Gift Card
 
-Retrieves a gift card using its ID.
+Retrieves a gift card using the gift card ID.
 
 ```csharp
 RetrieveGiftCardAsync(

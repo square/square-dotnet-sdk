@@ -121,8 +121,6 @@ RevokeTokenAsync(
 var body = new RevokeTokenRequest.Builder()
     .ClientId("CLIENT_ID")
     .AccessToken("ACCESS_TOKEN")
-    .MerchantId("merchant_id6")
-    .RevokeOnlyAccessToken(false)
     .Build();
 string authorization = "Client CLIENT_SECRET";
 
@@ -174,19 +172,11 @@ ObtainTokenAsync(
 ## Example Usage
 
 ```csharp
-var bodyScopes = new IList<string>();
-bodyScopes.Add("scopes6");
-bodyScopes.Add("scopes7");
-bodyScopes.Add("scopes8");
 var body = new ObtainTokenRequest.Builder(
         "APPLICATION_ID",
         "APPLICATION_SECRET",
         "authorization_code")
     .Code("CODE_FROM_AUTHORIZE")
-    .RedirectUri("redirect_uri4")
-    .RefreshToken("refresh_token6")
-    .MigrationToken("migration_token4")
-    .Scopes(bodyScopes)
     .Build();
 
 try

@@ -47,15 +47,11 @@ ListCardsAsync(
 ## Example Usage
 
 ```csharp
-string cursor = "cursor6";
-string customerId = "customer_id8";
 bool? includeDisabled = false;
-string referenceId = "reference_id2";
-string sortOrder = "DESC";
 
 try
 {
-    ListCardsResponse result = await cardsApi.ListCardsAsync(cursor, customerId, includeDisabled, referenceId, sortOrder);
+    ListCardsResponse result = await cardsApi.ListCardsAsync(null, null, includeDisabled, null, null);
 }
 catch (ApiException e){};
 ```
@@ -86,19 +82,12 @@ CreateCardAsync(
 var bodyCardBillingAddress = new Address.Builder()
     .AddressLine1("500 Electric Ave")
     .AddressLine2("Suite 600")
-    .AddressLine3("address_line_34")
     .Locality("New York")
-    .Sublocality("sublocality8")
     .AdministrativeDistrictLevel1("NY")
     .PostalCode("10003")
     .Country("US")
     .Build();
 var bodyCard = new Card.Builder()
-    .Id("id0")
-    .CardBrand("INTERAC")
-    .Last4("last_42")
-    .ExpMonth(236L)
-    .ExpYear(60L)
     .CardholderName("Amelia Earhart")
     .BillingAddress(bodyCardBillingAddress)
     .CustomerId("VDKXEEKPJN48QDG3BGGFAK05P8")
@@ -108,7 +97,6 @@ var body = new CreateCardRequest.Builder(
         "4935a656-a929-4792-b97c-8848be85c27c",
         "cnon:uIbfJXhXETSP197M3GB",
         bodyCard)
-    .VerificationToken("verification_token0")
     .Build();
 
 try

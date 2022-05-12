@@ -44,14 +44,9 @@ ListEmployeesAsync(
 ## Example Usage
 
 ```csharp
-string locationId = "location_id4";
-string status = "ACTIVE";
-int? limit = 172;
-string cursor = "cursor6";
-
 try
 {
-    ListEmployeesResponse result = await employeesApi.ListEmployeesAsync(locationId, status, limit, cursor);
+    ListEmployeesResponse result = await employeesApi.ListEmployeesAsync(null, null, null, null);
 }
 catch (ApiException e){};
 ```

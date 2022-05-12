@@ -10,6 +10,10 @@ ITerminalApi terminalApi = client.TerminalApi;
 
 ## Methods
 
+* [Create Terminal Action](../../doc/api/terminal.md#create-terminal-action)
+* [Search Terminal Actions](../../doc/api/terminal.md#search-terminal-actions)
+* [Get Terminal Action](../../doc/api/terminal.md#get-terminal-action)
+* [Cancel Terminal Action](../../doc/api/terminal.md#cancel-terminal-action)
 * [Create Terminal Checkout](../../doc/api/terminal.md#create-terminal-checkout)
 * [Search Terminal Checkouts](../../doc/api/terminal.md#search-terminal-checkouts)
 * [Get Terminal Checkout](../../doc/api/terminal.md#get-terminal-checkout)
@@ -18,6 +22,164 @@ ITerminalApi terminalApi = client.TerminalApi;
 * [Search Terminal Refunds](../../doc/api/terminal.md#search-terminal-refunds)
 * [Get Terminal Refund](../../doc/api/terminal.md#get-terminal-refund)
 * [Cancel Terminal Refund](../../doc/api/terminal.md#cancel-terminal-refund)
+
+
+# Create Terminal Action
+
+Creates a Terminal action request and sends it to the specified device to take a payment
+for the requested amount.
+
+```csharp
+CreateTerminalActionAsync(
+    Models.CreateTerminalActionRequest body)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `body` | [`Models.CreateTerminalActionRequest`](../../doc/models/create-terminal-action-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+
+## Response Type
+
+[`Task<Models.CreateTerminalActionResponse>`](../../doc/models/create-terminal-action-response.md)
+
+## Example Usage
+
+```csharp
+var bodyActionSaveCardOptions = new SaveCardOptions.Builder(
+        "{{CUSTOMER_ID}}")
+    .ReferenceId("user-id-1")
+    .Build();
+var bodyAction = new TerminalAction.Builder()
+    .DeviceId("{{DEVICE_ID}}")
+    .DeadlineDuration("PT5M")
+    .Type("SAVE_CARD")
+    .SaveCardOptions(bodyActionSaveCardOptions)
+    .Build();
+var body = new CreateTerminalActionRequest.Builder(
+        "thahn-70e75c10-47f7-4ab6-88cc-aaa4076d065e",
+        bodyAction)
+    .Build();
+
+try
+{
+    CreateTerminalActionResponse result = await terminalApi.CreateTerminalActionAsync(body);
+}
+catch (ApiException e){};
+```
+
+
+# Search Terminal Actions
+
+Retrieves a filtered list of Terminal action requests created by the account making the request. Terminal action requests are available for 30 days.
+
+```csharp
+SearchTerminalActionsAsync(
+    Models.SearchTerminalActionsRequest body)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `body` | [`Models.SearchTerminalActionsRequest`](../../doc/models/search-terminal-actions-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+
+## Response Type
+
+[`Task<Models.SearchTerminalActionsResponse>`](../../doc/models/search-terminal-actions-response.md)
+
+## Example Usage
+
+```csharp
+var bodyQueryFilterCreatedAt = new TimeRange.Builder()
+    .StartAt("2022-04-01T00:00:00.000Z")
+    .Build();
+var bodyQueryFilter = new TerminalActionQueryFilter.Builder()
+    .CreatedAt(bodyQueryFilterCreatedAt)
+    .Build();
+var bodyQuerySort = new TerminalActionQuerySort.Builder()
+    .SortOrder("DESC")
+    .Build();
+var bodyQuery = new TerminalActionQuery.Builder()
+    .Filter(bodyQueryFilter)
+    .Sort(bodyQuerySort)
+    .Build();
+var body = new SearchTerminalActionsRequest.Builder()
+    .Query(bodyQuery)
+    .Limit(2)
+    .Build();
+
+try
+{
+    SearchTerminalActionsResponse result = await terminalApi.SearchTerminalActionsAsync(body);
+}
+catch (ApiException e){};
+```
+
+
+# Get Terminal Action
+
+Retrieves a Terminal action request by `action_id`. Terminal action requests are available for 30 days.
+
+```csharp
+GetTerminalActionAsync(
+    string actionId)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `actionId` | `string` | Template, Required | Unique ID for the desired `TerminalAction` |
+
+## Response Type
+
+[`Task<Models.GetTerminalActionResponse>`](../../doc/models/get-terminal-action-response.md)
+
+## Example Usage
+
+```csharp
+string actionId = "action_id6";
+
+try
+{
+    GetTerminalActionResponse result = await terminalApi.GetTerminalActionAsync(actionId);
+}
+catch (ApiException e){};
+```
+
+
+# Cancel Terminal Action
+
+Cancels a Terminal action request if the status of the request permits it.
+
+```csharp
+CancelTerminalActionAsync(
+    string actionId)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `actionId` | `string` | Template, Required | Unique ID for the desired `TerminalAction` |
+
+## Response Type
+
+[`Task<Models.CancelTerminalActionResponse>`](../../doc/models/cancel-terminal-action-response.md)
+
+## Example Usage
+
+```csharp
+string actionId = "action_id6";
+
+try
+{
+    CancelTerminalActionResponse result = await terminalApi.CancelTerminalActionAsync(actionId);
+}
+catch (ApiException e){};
+```
 
 
 # Create Terminal Checkout
@@ -47,31 +209,14 @@ var bodyCheckoutAmountMoney = new Money.Builder()
     .Amount(2610L)
     .Currency("USD")
     .Build();
-var bodyCheckoutDeviceOptionsTipSettingsTipPercentages = new IList<int>();
-bodyCheckoutDeviceOptionsTipSettingsTipPercentages.Add(148);
-bodyCheckoutDeviceOptionsTipSettingsTipPercentages.Add(149);
-bodyCheckoutDeviceOptionsTipSettingsTipPercentages.Add(150);
-var bodyCheckoutDeviceOptionsTipSettings = new TipSettings.Builder()
-    .AllowTipping(false)
-    .SeparateTipScreen(false)
-    .CustomTipField(false)
-    .TipPercentages(bodyCheckoutDeviceOptionsTipSettingsTipPercentages)
-    .SmartTipping(false)
-    .Build();
 var bodyCheckoutDeviceOptions = new DeviceCheckoutOptions.Builder(
         "dbb5d83a-7838-11ea-bc55-0242ac130003")
-    .SkipReceiptScreen(false)
-    .CollectSignature(false)
-    .TipSettings(bodyCheckoutDeviceOptionsTipSettings)
     .Build();
 var bodyCheckout = new TerminalCheckout.Builder(
         bodyCheckoutAmountMoney,
         bodyCheckoutDeviceOptions)
-    .Id("id8")
     .ReferenceId("id11572")
     .Note("A brief note")
-    .DeadlineDuration("deadline_duration0")
-    .Status("status0")
     .Build();
 var body = new CreateTerminalCheckoutRequest.Builder(
         "28a0c3bc-7839-11ea-bc55-0242ac130003",
@@ -108,25 +253,14 @@ SearchTerminalCheckoutsAsync(
 ## Example Usage
 
 ```csharp
-var bodyQueryFilterCreatedAt = new TimeRange.Builder()
-    .StartAt("start_at2")
-    .EndAt("end_at0")
-    .Build();
 var bodyQueryFilter = new TerminalCheckoutQueryFilter.Builder()
-    .DeviceId("device_id8")
-    .CreatedAt(bodyQueryFilterCreatedAt)
     .Status("COMPLETED")
-    .Build();
-var bodyQuerySort = new TerminalCheckoutQuerySort.Builder()
-    .SortOrder("DESC")
     .Build();
 var bodyQuery = new TerminalCheckoutQuery.Builder()
     .Filter(bodyQueryFilter)
-    .Sort(bodyQuerySort)
     .Build();
 var body = new SearchTerminalCheckoutsRequest.Builder()
     .Query(bodyQuery)
-    .Cursor("cursor0")
     .Limit(2)
     .Build();
 
@@ -233,11 +367,6 @@ var bodyRefund = new TerminalRefund.Builder(
         bodyRefundAmountMoney,
         "Returning items",
         "f72dfb8e-4d65-4e56-aade-ec3fb8d33291")
-    .Id("id4")
-    .RefundId("refund_id8")
-    .OrderId("order_id8")
-    .DeadlineDuration("deadline_duration6")
-    .Status("status6")
     .Build();
 var body = new CreateTerminalRefundRequest.Builder(
         "402a640b-b26f-401f-b406-46f839590c04")
@@ -274,25 +403,14 @@ SearchTerminalRefundsAsync(
 ## Example Usage
 
 ```csharp
-var bodyQueryFilterCreatedAt = new TimeRange.Builder()
-    .StartAt("start_at2")
-    .EndAt("end_at0")
-    .Build();
 var bodyQueryFilter = new TerminalRefundQueryFilter.Builder()
-    .DeviceId("device_id8")
-    .CreatedAt(bodyQueryFilterCreatedAt)
     .Status("COMPLETED")
-    .Build();
-var bodyQuerySort = new TerminalRefundQuerySort.Builder()
-    .SortOrder("sort_order8")
     .Build();
 var bodyQuery = new TerminalRefundQuery.Builder()
     .Filter(bodyQueryFilter)
-    .Sort(bodyQuerySort)
     .Build();
 var body = new SearchTerminalRefundsRequest.Builder()
     .Query(bodyQuery)
-    .Cursor("cursor0")
     .Limit(1)
     .Build();
 

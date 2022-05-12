@@ -25,6 +25,8 @@ namespace Square.Models
         /// <param name="id">id.</param>
         /// <param name="referenceId">reference_id.</param>
         /// <param name="note">note.</param>
+        /// <param name="orderId">order_id.</param>
+        /// <param name="paymentOptions">payment_options.</param>
         /// <param name="deadlineDuration">deadline_duration.</param>
         /// <param name="status">status.</param>
         /// <param name="cancelReason">cancel_reason.</param>
@@ -35,12 +37,15 @@ namespace Square.Models
         /// <param name="locationId">location_id.</param>
         /// <param name="paymentType">payment_type.</param>
         /// <param name="customerId">customer_id.</param>
+        /// <param name="appFeeMoney">app_fee_money.</param>
         public TerminalCheckout(
             Models.Money amountMoney,
             Models.DeviceCheckoutOptions deviceOptions,
             string id = null,
             string referenceId = null,
             string note = null,
+            string orderId = null,
+            Models.PaymentOptions paymentOptions = null,
             string deadlineDuration = null,
             string status = null,
             string cancelReason = null,
@@ -50,12 +55,15 @@ namespace Square.Models
             string appId = null,
             string locationId = null,
             string paymentType = null,
-            string customerId = null)
+            string customerId = null,
+            Models.Money appFeeMoney = null)
         {
             this.Id = id;
             this.AmountMoney = amountMoney;
             this.ReferenceId = referenceId;
             this.Note = note;
+            this.OrderId = orderId;
+            this.PaymentOptions = paymentOptions;
             this.DeviceOptions = deviceOptions;
             this.DeadlineDuration = deadlineDuration;
             this.Status = status;
@@ -67,6 +75,7 @@ namespace Square.Models
             this.LocationId = locationId;
             this.PaymentType = paymentType;
             this.CustomerId = customerId;
+            this.AppFeeMoney = appFeeMoney;
         }
 
         /// <summary>
@@ -101,6 +110,18 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("note", NullValueHandling = NullValueHandling.Ignore)]
         public string Note { get; }
+
+        /// <summary>
+        /// The reference to the Square order ID for the checkout request.
+        /// </summary>
+        [JsonProperty("order_id", NullValueHandling = NullValueHandling.Ignore)]
+        public string OrderId { get; }
+
+        /// <summary>
+        /// Gets or sets PaymentOptions.
+        /// </summary>
+        [JsonProperty("payment_options", NullValueHandling = NullValueHandling.Ignore)]
+        public Models.PaymentOptions PaymentOptions { get; }
 
         /// <summary>
         /// Gets or sets DeviceOptions.
@@ -173,6 +194,17 @@ namespace Square.Models
         [JsonProperty("customer_id", NullValueHandling = NullValueHandling.Ignore)]
         public string CustomerId { get; }
 
+        /// <summary>
+        /// Represents an amount of money. `Money` fields can be signed or unsigned.
+        /// Fields that do not explicitly define whether they are signed or unsigned are
+        /// considered unsigned and can only hold positive amounts. For signed fields, the
+        /// sign of the value indicates the purpose of the money transfer. See
+        /// [Working with Monetary Amounts](https://developer.squareup.com/docs/build-basics/working-with-monetary-amounts)
+        /// for more information.
+        /// </summary>
+        [JsonProperty("app_fee_money", NullValueHandling = NullValueHandling.Ignore)]
+        public Models.Money AppFeeMoney { get; }
+
         /// <inheritdoc/>
         public override string ToString()
         {
@@ -201,6 +233,8 @@ namespace Square.Models
                 ((this.AmountMoney == null && other.AmountMoney == null) || (this.AmountMoney?.Equals(other.AmountMoney) == true)) &&
                 ((this.ReferenceId == null && other.ReferenceId == null) || (this.ReferenceId?.Equals(other.ReferenceId) == true)) &&
                 ((this.Note == null && other.Note == null) || (this.Note?.Equals(other.Note) == true)) &&
+                ((this.OrderId == null && other.OrderId == null) || (this.OrderId?.Equals(other.OrderId) == true)) &&
+                ((this.PaymentOptions == null && other.PaymentOptions == null) || (this.PaymentOptions?.Equals(other.PaymentOptions) == true)) &&
                 ((this.DeviceOptions == null && other.DeviceOptions == null) || (this.DeviceOptions?.Equals(other.DeviceOptions) == true)) &&
                 ((this.DeadlineDuration == null && other.DeadlineDuration == null) || (this.DeadlineDuration?.Equals(other.DeadlineDuration) == true)) &&
                 ((this.Status == null && other.Status == null) || (this.Status?.Equals(other.Status) == true)) &&
@@ -211,18 +245,19 @@ namespace Square.Models
                 ((this.AppId == null && other.AppId == null) || (this.AppId?.Equals(other.AppId) == true)) &&
                 ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true)) &&
                 ((this.PaymentType == null && other.PaymentType == null) || (this.PaymentType?.Equals(other.PaymentType) == true)) &&
-                ((this.CustomerId == null && other.CustomerId == null) || (this.CustomerId?.Equals(other.CustomerId) == true));
+                ((this.CustomerId == null && other.CustomerId == null) || (this.CustomerId?.Equals(other.CustomerId) == true)) &&
+                ((this.AppFeeMoney == null && other.AppFeeMoney == null) || (this.AppFeeMoney?.Equals(other.AppFeeMoney) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1994036817;
-            hashCode = HashCode.Combine(this.Id, this.AmountMoney, this.ReferenceId, this.Note, this.DeviceOptions, this.DeadlineDuration, this.Status);
+            int hashCode = -262904942;
+            hashCode = HashCode.Combine(this.Id, this.AmountMoney, this.ReferenceId, this.Note, this.OrderId, this.PaymentOptions, this.DeviceOptions);
 
-            hashCode = HashCode.Combine(hashCode, this.CancelReason, this.PaymentIds, this.CreatedAt, this.UpdatedAt, this.AppId, this.LocationId, this.PaymentType);
+            hashCode = HashCode.Combine(hashCode, this.DeadlineDuration, this.Status, this.CancelReason, this.PaymentIds, this.CreatedAt, this.UpdatedAt, this.AppId);
 
-            hashCode = HashCode.Combine(hashCode, this.CustomerId);
+            hashCode = HashCode.Combine(hashCode, this.LocationId, this.PaymentType, this.CustomerId, this.AppFeeMoney);
 
             return hashCode;
         }
@@ -237,6 +272,8 @@ namespace Square.Models
             toStringOutput.Add($"this.AmountMoney = {(this.AmountMoney == null ? "null" : this.AmountMoney.ToString())}");
             toStringOutput.Add($"this.ReferenceId = {(this.ReferenceId == null ? "null" : this.ReferenceId == string.Empty ? "" : this.ReferenceId)}");
             toStringOutput.Add($"this.Note = {(this.Note == null ? "null" : this.Note == string.Empty ? "" : this.Note)}");
+            toStringOutput.Add($"this.OrderId = {(this.OrderId == null ? "null" : this.OrderId == string.Empty ? "" : this.OrderId)}");
+            toStringOutput.Add($"this.PaymentOptions = {(this.PaymentOptions == null ? "null" : this.PaymentOptions.ToString())}");
             toStringOutput.Add($"this.DeviceOptions = {(this.DeviceOptions == null ? "null" : this.DeviceOptions.ToString())}");
             toStringOutput.Add($"this.DeadlineDuration = {(this.DeadlineDuration == null ? "null" : this.DeadlineDuration == string.Empty ? "" : this.DeadlineDuration)}");
             toStringOutput.Add($"this.Status = {(this.Status == null ? "null" : this.Status == string.Empty ? "" : this.Status)}");
@@ -248,6 +285,7 @@ namespace Square.Models
             toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId == string.Empty ? "" : this.LocationId)}");
             toStringOutput.Add($"this.PaymentType = {(this.PaymentType == null ? "null" : this.PaymentType.ToString())}");
             toStringOutput.Add($"this.CustomerId = {(this.CustomerId == null ? "null" : this.CustomerId == string.Empty ? "" : this.CustomerId)}");
+            toStringOutput.Add($"this.AppFeeMoney = {(this.AppFeeMoney == null ? "null" : this.AppFeeMoney.ToString())}");
         }
 
         /// <summary>
@@ -262,6 +300,8 @@ namespace Square.Models
                 .Id(this.Id)
                 .ReferenceId(this.ReferenceId)
                 .Note(this.Note)
+                .OrderId(this.OrderId)
+                .PaymentOptions(this.PaymentOptions)
                 .DeadlineDuration(this.DeadlineDuration)
                 .Status(this.Status)
                 .CancelReason(this.CancelReason)
@@ -271,7 +311,8 @@ namespace Square.Models
                 .AppId(this.AppId)
                 .LocationId(this.LocationId)
                 .PaymentType(this.PaymentType)
-                .CustomerId(this.CustomerId);
+                .CustomerId(this.CustomerId)
+                .AppFeeMoney(this.AppFeeMoney);
             return builder;
         }
 
@@ -285,6 +326,8 @@ namespace Square.Models
             private string id;
             private string referenceId;
             private string note;
+            private string orderId;
+            private Models.PaymentOptions paymentOptions;
             private string deadlineDuration;
             private string status;
             private string cancelReason;
@@ -295,6 +338,7 @@ namespace Square.Models
             private string locationId;
             private string paymentType;
             private string customerId;
+            private Models.Money appFeeMoney;
 
             public Builder(
                 Models.Money amountMoney,
@@ -356,6 +400,28 @@ namespace Square.Models
             public Builder Note(string note)
             {
                 this.note = note;
+                return this;
+            }
+
+             /// <summary>
+             /// OrderId.
+             /// </summary>
+             /// <param name="orderId"> orderId. </param>
+             /// <returns> Builder. </returns>
+            public Builder OrderId(string orderId)
+            {
+                this.orderId = orderId;
+                return this;
+            }
+
+             /// <summary>
+             /// PaymentOptions.
+             /// </summary>
+             /// <param name="paymentOptions"> paymentOptions. </param>
+             /// <returns> Builder. </returns>
+            public Builder PaymentOptions(Models.PaymentOptions paymentOptions)
+            {
+                this.paymentOptions = paymentOptions;
                 return this;
             }
 
@@ -469,6 +535,17 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// AppFeeMoney.
+             /// </summary>
+             /// <param name="appFeeMoney"> appFeeMoney. </param>
+             /// <returns> Builder. </returns>
+            public Builder AppFeeMoney(Models.Money appFeeMoney)
+            {
+                this.appFeeMoney = appFeeMoney;
+                return this;
+            }
+
             /// <summary>
             /// Builds class object.
             /// </summary>
@@ -481,6 +558,8 @@ namespace Square.Models
                     this.id,
                     this.referenceId,
                     this.note,
+                    this.orderId,
+                    this.paymentOptions,
                     this.deadlineDuration,
                     this.status,
                     this.cancelReason,
@@ -490,7 +569,8 @@ namespace Square.Models
                     this.appId,
                     this.locationId,
                     this.paymentType,
-                    this.customerId);
+                    this.customerId,
+                    this.appFeeMoney);
             }
         }
     }

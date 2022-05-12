@@ -173,23 +173,8 @@ CreateVendorAsync(
 ## Example Usage
 
 ```csharp
-var bodyVendorAddress = new Address.Builder()
-    .AddressLine1("address_line_18")
-    .AddressLine2("address_line_28")
-    .AddressLine3("address_line_34")
-    .Locality("locality8")
-    .Sublocality("sublocality8")
-    .Build();
-var bodyVendor = new Vendor.Builder()
-    .Id("id2")
-    .CreatedAt("created_at0")
-    .UpdatedAt("updated_at8")
-    .Name("name2")
-    .Address(bodyVendorAddress)
-    .Build();
 var body = new CreateVendorRequest.Builder(
         "idempotency_key2")
-    .Vendor(bodyVendor)
     .Build();
 
 try
@@ -222,23 +207,7 @@ SearchVendorsAsync(
 ## Example Usage
 
 ```csharp
-var bodyFilterName = new IList<string>();
-bodyFilterName.Add("name8");
-bodyFilterName.Add("name9");
-var bodyFilterStatus = new IList<string>();
-bodyFilterStatus.Add("ACTIVE");
-var bodyFilter = new SearchVendorsRequestFilter.Builder()
-    .Name(bodyFilterName)
-    .Status(bodyFilterStatus)
-    .Build();
-var bodySort = new SearchVendorsRequestSort.Builder()
-    .Field("NAME")
-    .Order("DESC")
-    .Build();
 var body = new SearchVendorsRequest.Builder()
-    .Filter(bodyFilter)
-    .Sort(bodySort)
-    .Cursor("cursor0")
     .Build();
 
 try
@@ -305,19 +274,9 @@ UpdateVendorAsync(
 ## Example Usage
 
 ```csharp
-var bodyVendorAddress = new Address.Builder()
-    .AddressLine1("address_line_18")
-    .AddressLine2("address_line_28")
-    .AddressLine3("address_line_34")
-    .Locality("locality8")
-    .Sublocality("sublocality8")
-    .Build();
 var bodyVendor = new Vendor.Builder()
     .Id("INV_V_JDKYHBWT1D4F8MFH63DBMEN8Y4")
-    .CreatedAt("created_at0")
-    .UpdatedAt("updated_at8")
     .Name("Jack's Chicken Shack")
-    .Address(bodyVendorAddress)
     .Version(1)
     .Status("ACTIVE")
     .Build();

@@ -85,7 +85,8 @@ namespace Square.Models
         public Models.Money BalanceMoney { get; }
 
         /// <summary>
-        /// The gift card account number.
+        /// The gift card account number (GAN). Buyers can use the GAN to make purchases or check
+        /// the gift card balance.
         /// </summary>
         [JsonProperty("gan", NullValueHandling = NullValueHandling.Ignore)]
         public string Gan { get; }
@@ -101,7 +102,7 @@ namespace Square.Models
         public string CreatedAt { get; }
 
         /// <summary>
-        /// The IDs of the customers to whom this gift card is linked.
+        /// The IDs of the [customer profiles]($m/Customer) to whom this gift card is linked.
         /// </summary>
         [JsonProperty("customer_ids", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> CustomerIds { get; }

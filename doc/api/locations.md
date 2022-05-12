@@ -70,23 +70,13 @@ CreateLocationAsync(
 ```csharp
 var bodyLocationAddress = new Address.Builder()
     .AddressLine1("1234 Peachtree St. NE")
-    .AddressLine2("address_line_26")
-    .AddressLine3("address_line_32")
     .Locality("Atlanta")
-    .Sublocality("sublocality6")
     .AdministrativeDistrictLevel1("GA")
     .PostalCode("30309")
     .Build();
-var bodyLocationCapabilities = new IList<string>();
-bodyLocationCapabilities.Add("AUTOMATIC_TRANSFERS");
-bodyLocationCapabilities.Add("CREDIT_CARD_PROCESSING");
-bodyLocationCapabilities.Add("AUTOMATIC_TRANSFERS");
 var bodyLocation = new Location.Builder()
-    .Id("id0")
     .Name("Midtown")
     .Address(bodyLocationAddress)
-    .Timezone("timezone0")
-    .Capabilities(bodyLocationCapabilities)
     .Description("Midtown Atlanta store")
     .Build();
 var body = new CreateLocationRequest.Builder()
@@ -159,17 +149,6 @@ UpdateLocationAsync(
 
 ```csharp
 string locationId = "location_id4";
-var bodyLocationAddress = new Address.Builder()
-    .AddressLine1("address_line_16")
-    .AddressLine2("address_line_26")
-    .AddressLine3("address_line_32")
-    .Locality("locality6")
-    .Sublocality("sublocality6")
-    .Build();
-var bodyLocationCapabilities = new IList<string>();
-bodyLocationCapabilities.Add("AUTOMATIC_TRANSFERS");
-bodyLocationCapabilities.Add("CREDIT_CARD_PROCESSING");
-bodyLocationCapabilities.Add("AUTOMATIC_TRANSFERS");
 var bodyLocationBusinessHoursPeriods = new List<BusinessHoursPeriod>();
 
 var bodyLocationBusinessHoursPeriods0 = new BusinessHoursPeriod.Builder()
@@ -197,11 +176,6 @@ var bodyLocationBusinessHours = new BusinessHours.Builder()
     .Periods(bodyLocationBusinessHoursPeriods)
     .Build();
 var bodyLocation = new Location.Builder()
-    .Id("id0")
-    .Name("name0")
-    .Address(bodyLocationAddress)
-    .Timezone("timezone0")
-    .Capabilities(bodyLocationCapabilities)
     .BusinessHours(bodyLocationBusinessHours)
     .Description("Midtown Atlanta store - Open weekends")
     .Build();

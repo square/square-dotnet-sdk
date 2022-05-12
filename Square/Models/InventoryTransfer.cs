@@ -136,7 +136,7 @@ namespace Square.Models
         public string CreatedAt { get; }
 
         /// <summary>
-        /// Provides information about the application used to generate a change.
+        /// Represents information about the application used to generate a change.
         /// </summary>
         [JsonProperty("source", NullValueHandling = NullValueHandling.Ignore)]
         public Models.SourceApplication Source { get; }

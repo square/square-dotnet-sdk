@@ -43,14 +43,9 @@ ListDeviceCodesAsync(
 ## Example Usage
 
 ```csharp
-string cursor = "cursor6";
-string locationId = "location_id4";
-string productType = "TERMINAL_API";
-string status = "UNKNOWN";
-
 try
 {
-    ListDeviceCodesResponse result = await devicesApi.ListDeviceCodesAsync(cursor, locationId, productType, status);
+    ListDeviceCodesResponse result = await devicesApi.ListDeviceCodesAsync(null, null, null, null);
 }
 catch (ApiException e){};
 ```
@@ -81,10 +76,7 @@ CreateDeviceCodeAsync(
 ```csharp
 var bodyDeviceCode = new DeviceCode.Builder(
         null)
-    .Id("id0")
     .Name("Counter 1")
-    .Code("code8")
-    .DeviceId("device_id6")
     .LocationId("B5E4484SHHNYH")
     .Build();
 var body = new CreateDeviceCodeRequest.Builder(

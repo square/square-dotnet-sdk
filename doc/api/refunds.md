@@ -56,18 +56,9 @@ ListPaymentRefundsAsync(
 ## Example Usage
 
 ```csharp
-string beginTime = "begin_time2";
-string endTime = "end_time2";
-string sortOrder = "sort_order0";
-string cursor = "cursor6";
-string locationId = "location_id4";
-string status = "status8";
-string sourceType = "source_type0";
-int? limit = 172;
-
 try
 {
-    ListPaymentRefundsResponse result = await refundsApi.ListPaymentRefundsAsync(beginTime, endTime, sortOrder, cursor, locationId, status, sourceType, limit);
+    ListPaymentRefundsResponse result = await refundsApi.ListPaymentRefundsAsync(null, null, null, null, null, null, null, null);
 }
 catch (ApiException e){};
 ```
@@ -112,8 +103,6 @@ var body = new RefundPaymentRequest.Builder(
     .AppFeeMoney(bodyAppFeeMoney)
     .PaymentId("R2B3Z8WMVt3EAmzYWLZvz7Y69EbZY")
     .Reason("Example")
-    .PaymentVersionToken("payment_version_token6")
-    .TeamMemberId("team_member_id4")
     .Build();
 
 try

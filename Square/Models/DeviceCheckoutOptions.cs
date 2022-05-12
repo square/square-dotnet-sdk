@@ -24,16 +24,19 @@ namespace Square.Models
         /// <param name="skipReceiptScreen">skip_receipt_screen.</param>
         /// <param name="collectSignature">collect_signature.</param>
         /// <param name="tipSettings">tip_settings.</param>
+        /// <param name="showItemizedCart">show_itemized_cart.</param>
         public DeviceCheckoutOptions(
             string deviceId,
             bool? skipReceiptScreen = null,
             bool? collectSignature = null,
-            Models.TipSettings tipSettings = null)
+            Models.TipSettings tipSettings = null,
+            bool? showItemizedCart = null)
         {
             this.DeviceId = deviceId;
             this.SkipReceiptScreen = skipReceiptScreen;
             this.CollectSignature = collectSignature;
             this.TipSettings = tipSettings;
+            this.ShowItemizedCart = showItemizedCart;
         }
 
         /// <summary>
@@ -62,6 +65,13 @@ namespace Square.Models
         [JsonProperty("tip_settings", NullValueHandling = NullValueHandling.Ignore)]
         public Models.TipSettings TipSettings { get; }
 
+        /// <summary>
+        /// Show the itemization screen prior to taking a payment. This field is only meaningful when the
+        /// checkout includes an order ID. Defaults to true.
+        /// </summary>
+        [JsonProperty("show_itemized_cart", NullValueHandling = NullValueHandling.Ignore)]
+        public bool? ShowItemizedCart { get; }
+
         /// <inheritdoc/>
         public override string ToString()
         {
@@ -89,14 +99,15 @@ namespace Square.Models
                 ((this.DeviceId == null && other.DeviceId == null) || (this.DeviceId?.Equals(other.DeviceId) == true)) &&
                 ((this.SkipReceiptScreen == null && other.SkipReceiptScreen == null) || (this.SkipReceiptScreen?.Equals(other.SkipReceiptScreen) == true)) &&
                 ((this.CollectSignature == null && other.CollectSignature == null) || (this.CollectSignature?.Equals(other.CollectSignature) == true)) &&
-                ((this.TipSettings == null && other.TipSettings == null) || (this.TipSettings?.Equals(other.TipSettings) == true));
+                ((this.TipSettings == null && other.TipSettings == null) || (this.TipSettings?.Equals(other.TipSettings) == true)) &&
+                ((this.ShowItemizedCart == null && other.ShowItemizedCart == null) || (this.ShowItemizedCart?.Equals(other.ShowItemizedCart) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -110219774;
-            hashCode = HashCode.Combine(this.DeviceId, this.SkipReceiptScreen, this.CollectSignature, this.TipSettings);
+            int hashCode = 1038046407;
+            hashCode = HashCode.Combine(this.DeviceId, this.SkipReceiptScreen, this.CollectSignature, this.TipSettings, this.ShowItemizedCart);
 
             return hashCode;
         }
@@ -111,6 +122,7 @@ namespace Square.Models
             toStringOutput.Add($"this.SkipReceiptScreen = {(this.SkipReceiptScreen == null ? "null" : this.SkipReceiptScreen.ToString())}");
             toStringOutput.Add($"this.CollectSignature = {(this.CollectSignature == null ? "null" : this.CollectSignature.ToString())}");
             toStringOutput.Add($"this.TipSettings = {(this.TipSettings == null ? "null" : this.TipSettings.ToString())}");
+            toStringOutput.Add($"this.ShowItemizedCart = {(this.ShowItemizedCart == null ? "null" : this.ShowItemizedCart.ToString())}");
         }
 
         /// <summary>
@@ -123,7 +135,8 @@ namespace Square.Models
                 this.DeviceId)
                 .SkipReceiptScreen(this.SkipReceiptScreen)
                 .CollectSignature(this.CollectSignature)
-                .TipSettings(this.TipSettings);
+                .TipSettings(this.TipSettings)
+                .ShowItemizedCart(this.ShowItemizedCart);
             return builder;
         }
 
@@ -136,6 +149,7 @@ namespace Square.Models
             private bool? skipReceiptScreen;
             private bool? collectSignature;
             private Models.TipSettings tipSettings;
+            private bool? showItemizedCart;
 
             public Builder(
                 string deviceId)
@@ -187,6 +201,17 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// ShowItemizedCart.
+             /// </summary>
+             /// <param name="showItemizedCart"> showItemizedCart. </param>
+             /// <returns> Builder. </returns>
+            public Builder ShowItemizedCart(bool? showItemizedCart)
+            {
+                this.showItemizedCart = showItemizedCart;
+                return this;
+            }
+
             /// <summary>
             /// Builds class object.
             /// </summary>
@@ -197,7 +222,8 @@ namespace Square.Models
                     this.deviceId,
                     this.skipReceiptScreen,
                     this.collectSignature,
-                    this.tipSettings);
+                    this.tipSettings,
+                    this.showItemizedCart);
             }
         }
     }

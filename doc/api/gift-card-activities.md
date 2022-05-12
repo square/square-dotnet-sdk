@@ -53,18 +53,9 @@ ListGiftCardActivitiesAsync(
 ## Example Usage
 
 ```csharp
-string giftCardId = "gift_card_id8";
-string type = "type0";
-string locationId = "location_id4";
-string beginTime = "begin_time2";
-string endTime = "end_time2";
-int? limit = 172;
-string cursor = "cursor6";
-string sortOrder = "sort_order0";
-
 try
 {
-    ListGiftCardActivitiesResponse result = await giftCardActivitiesApi.ListGiftCardActivitiesAsync(giftCardId, type, locationId, beginTime, endTime, limit, cursor, sortOrder);
+    ListGiftCardActivitiesResponse result = await giftCardActivitiesApi.ListGiftCardActivitiesAsync(null, null, null, null, null, null, null, null);
 }
 catch (ApiException e){};
 ```
@@ -72,9 +63,9 @@ catch (ApiException e){};
 
 # Create Gift Card Activity
 
-Creates a gift card activity. For more information, see
-[GiftCardActivity](https://developer.squareup.com/docs/gift-cards/using-gift-cards-api#giftcardactivity) and
-[Using activated gift cards](https://developer.squareup.com/docs/gift-cards/using-gift-cards-api#using-activated-gift-cards).
+Creates a gift card activity to manage the balance or state of a [gift card](../../doc/models/gift-card.md).
+For example, you create an `ACTIVATE` activity to activate a gift card with an initial balance
+before the gift card can be used.
 
 ```csharp
 CreateGiftCardActivityAsync(
@@ -94,33 +85,14 @@ CreateGiftCardActivityAsync(
 ## Example Usage
 
 ```csharp
-var bodyGiftCardActivityGiftCardBalanceMoney = new Money.Builder()
-    .Amount(88L)
-    .Currency("ANG")
-    .Build();
-var bodyGiftCardActivityActivateActivityDetailsAmountMoney = new Money.Builder()
-    .Amount(10L)
-    .Currency("MXV")
-    .Build();
-var bodyGiftCardActivityActivateActivityDetailsBuyerPaymentInstrumentIds = new IList<string>();
-bodyGiftCardActivityActivateActivityDetailsBuyerPaymentInstrumentIds.Add("buyer_payment_instrument_ids4");
-bodyGiftCardActivityActivateActivityDetailsBuyerPaymentInstrumentIds.Add("buyer_payment_instrument_ids5");
-bodyGiftCardActivityActivateActivityDetailsBuyerPaymentInstrumentIds.Add("buyer_payment_instrument_ids6");
 var bodyGiftCardActivityActivateActivityDetails = new GiftCardActivityActivate.Builder()
-    .AmountMoney(bodyGiftCardActivityActivateActivityDetailsAmountMoney)
     .OrderId("jJNGHm4gLI6XkFbwtiSLqK72KkAZY")
     .LineItemUid("eIWl7X0nMuO9Ewbh0ChIx")
-    .ReferenceId("reference_id4")
-    .BuyerPaymentInstrumentIds(bodyGiftCardActivityActivateActivityDetailsBuyerPaymentInstrumentIds)
     .Build();
 var bodyGiftCardActivity = new GiftCardActivity.Builder(
         "ACTIVATE",
         "81FN9BNFZTKS4")
-    .Id("id2")
-    .CreatedAt("created_at0")
     .GiftCardId("gftc:6d55a72470d940c6ba09c0ab8ad08d20")
-    .GiftCardGan("gift_card_gan8")
-    .GiftCardBalanceMoney(bodyGiftCardActivityGiftCardBalanceMoney)
     .ActivateActivityDetails(bodyGiftCardActivityActivateActivityDetails)
     .Build();
 var body = new CreateGiftCardActivityRequest.Builder(

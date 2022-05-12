@@ -51,17 +51,9 @@ ListPayoutsAsync(
 ## Example Usage
 
 ```csharp
-string locationId = "location_id4";
-string status = "PAID";
-string beginTime = "begin_time2";
-string endTime = "end_time2";
-string sortOrder = "DESC";
-string cursor = "cursor6";
-int? limit = 172;
-
 try
 {
-    ListPayoutsResponse result = await payoutsApi.ListPayoutsAsync(locationId, status, beginTime, endTime, sortOrder, cursor, limit);
+    ListPayoutsResponse result = await payoutsApi.ListPayoutsAsync(null, null, null, null, null, null, null);
 }
 catch (ApiException e){};
 ```
@@ -130,13 +122,10 @@ ListPayoutEntriesAsync(
 
 ```csharp
 string payoutId = "payout_id6";
-string sortOrder = "DESC";
-string cursor = "cursor6";
-int? limit = 172;
 
 try
 {
-    ListPayoutEntriesResponse result = await payoutsApi.ListPayoutEntriesAsync(payoutId, sortOrder, cursor, limit);
+    ListPayoutEntriesResponse result = await payoutsApi.ListPayoutEntriesAsync(payoutId, null, null, null);
 }
 catch (ApiException e){};
 ```

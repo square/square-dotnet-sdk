@@ -56,9 +56,7 @@ var bodyTeamMemberAssignedLocations = new TeamMemberAssignedLocations.Builder()
     .LocationIds(bodyTeamMemberAssignedLocationsLocationIds)
     .Build();
 var bodyTeamMember = new TeamMember.Builder()
-    .Id("id2")
     .ReferenceId("reference_id_1")
-    .IsOwner(false)
     .Status("ACTIVE")
     .GivenName("Joe")
     .FamilyName("Doe")
@@ -209,7 +207,6 @@ bodyQueryFilterLocationIds.Add("0G5P3VGACMMQZ");
 var bodyQueryFilter = new SearchTeamMembersFilter.Builder()
     .LocationIds(bodyQueryFilterLocationIds)
     .Status("ACTIVE")
-    .IsOwner(false)
     .Build();
 var bodyQuery = new SearchTeamMembersQuery.Builder()
     .Filter(bodyQueryFilter)
@@ -217,7 +214,6 @@ var bodyQuery = new SearchTeamMembersQuery.Builder()
 var body = new SearchTeamMembersRequest.Builder()
     .Query(bodyQuery)
     .Limit(10)
-    .Cursor("cursor0")
     .Build();
 
 try
@@ -295,9 +291,7 @@ var bodyTeamMemberAssignedLocations = new TeamMemberAssignedLocations.Builder()
     .LocationIds(bodyTeamMemberAssignedLocationsLocationIds)
     .Build();
 var bodyTeamMember = new TeamMember.Builder()
-    .Id("id2")
     .ReferenceId("reference_id_1")
-    .IsOwner(false)
     .Status("ACTIVE")
     .GivenName("Joe")
     .FamilyName("Doe")
@@ -382,10 +376,6 @@ UpdateWageSettingAsync(
 string teamMemberId = "team_member_id0";
 var bodyWageSettingJobAssignments = new List<JobAssignment>();
 
-var bodyWageSettingJobAssignments0HourlyRate = new Money.Builder()
-    .Amount(117L)
-    .Currency("ERN")
-    .Build();
 var bodyWageSettingJobAssignments0AnnualRate = new Money.Builder()
     .Amount(3000000L)
     .Currency("USD")
@@ -393,7 +383,6 @@ var bodyWageSettingJobAssignments0AnnualRate = new Money.Builder()
 var bodyWageSettingJobAssignments0 = new JobAssignment.Builder(
         "Manager",
         "SALARY")
-    .HourlyRate(bodyWageSettingJobAssignments0HourlyRate)
     .AnnualRate(bodyWageSettingJobAssignments0AnnualRate)
     .WeeklyHours(40)
     .Build();
@@ -403,25 +392,16 @@ var bodyWageSettingJobAssignments1HourlyRate = new Money.Builder()
     .Amount(1200L)
     .Currency("USD")
     .Build();
-var bodyWageSettingJobAssignments1AnnualRate = new Money.Builder()
-    .Amount(58L)
-    .Currency("DZD")
-    .Build();
 var bodyWageSettingJobAssignments1 = new JobAssignment.Builder(
         "Cashier",
         "HOURLY")
     .HourlyRate(bodyWageSettingJobAssignments1HourlyRate)
-    .AnnualRate(bodyWageSettingJobAssignments1AnnualRate)
-    .WeeklyHours(226)
     .Build();
 bodyWageSettingJobAssignments.Add(bodyWageSettingJobAssignments1);
 
 var bodyWageSetting = new WageSetting.Builder()
-    .TeamMemberId("team_member_id2")
     .JobAssignments(bodyWageSettingJobAssignments)
     .IsOvertimeExempt(true)
-    .Version(122)
-    .CreatedAt("created_at0")
     .Build();
 var body = new UpdateWageSettingRequest.Builder(
         bodyWageSetting)

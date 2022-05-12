@@ -36,6 +36,284 @@ namespace Square.Apis
         }
 
         /// <summary>
+        /// Creates a Terminal action request and sends it to the specified device to take a payment.
+        /// for the requested amount.
+        /// </summary>
+        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
+        /// <returns>Returns the Models.CreateTerminalActionResponse response from the API call.</returns>
+        public Models.CreateTerminalActionResponse CreateTerminalAction(
+                Models.CreateTerminalActionRequest body)
+        {
+            Task<Models.CreateTerminalActionResponse> t = this.CreateTerminalActionAsync(body);
+            ApiHelper.RunTaskSynchronously(t);
+            return t.Result;
+        }
+
+        /// <summary>
+        /// Creates a Terminal action request and sends it to the specified device to take a payment.
+        /// for the requested amount.
+        /// </summary>
+        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
+        /// <param name="cancellationToken"> cancellationToken. </param>
+        /// <returns>Returns the Models.CreateTerminalActionResponse response from the API call.</returns>
+        public async Task<Models.CreateTerminalActionResponse> CreateTerminalActionAsync(
+                Models.CreateTerminalActionRequest body,
+                CancellationToken cancellationToken = default)
+        {
+            // the base uri for api requests.
+            string baseUri = this.Config.GetBaseUri();
+
+            // prepare query string for API call.
+            StringBuilder queryBuilder = new StringBuilder(baseUri);
+            queryBuilder.Append("/v2/terminals/actions");
+
+            // append request with appropriate headers and parameters
+            var headers = new Dictionary<string, string>()
+            {
+                { "user-agent", this.UserAgent },
+                { "accept", "application/json" },
+                { "Content-Type", "application/json" },
+                { "Square-Version", this.Config.SquareVersion },
+            };
+
+            // append body params.
+            var bodyText = ApiHelper.JsonSerialize(body);
+
+            // prepare the API call request to fetch the response.
+            HttpRequest httpRequest = this.GetClientInstance().PostBody(queryBuilder.ToString(), headers, bodyText);
+
+            if (this.HttpCallBack != null)
+            {
+                this.HttpCallBack.OnBeforeHttpRequestEventHandler(this.GetClientInstance(), httpRequest);
+            }
+
+            httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
+
+            // invoke request and get response.
+            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken: cancellationToken).ConfigureAwait(false);
+            HttpContext context = new HttpContext(httpRequest, response);
+            if (this.HttpCallBack != null)
+            {
+                this.HttpCallBack.OnAfterHttpResponseEventHandler(this.GetClientInstance(), response);
+            }
+
+            // handle errors defined at the API level.
+            this.ValidateResponse(response, context);
+
+            var responseModel = ApiHelper.JsonDeserialize<Models.CreateTerminalActionResponse>(response.Body);
+            responseModel.Context = context;
+            return responseModel;
+        }
+
+        /// <summary>
+        /// Retrieves a filtered list of Terminal action requests created by the account making the request. Terminal action requests are available for 30 days.
+        /// </summary>
+        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
+        /// <returns>Returns the Models.SearchTerminalActionsResponse response from the API call.</returns>
+        public Models.SearchTerminalActionsResponse SearchTerminalActions(
+                Models.SearchTerminalActionsRequest body)
+        {
+            Task<Models.SearchTerminalActionsResponse> t = this.SearchTerminalActionsAsync(body);
+            ApiHelper.RunTaskSynchronously(t);
+            return t.Result;
+        }
+
+        /// <summary>
+        /// Retrieves a filtered list of Terminal action requests created by the account making the request. Terminal action requests are available for 30 days.
+        /// </summary>
+        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
+        /// <param name="cancellationToken"> cancellationToken. </param>
+        /// <returns>Returns the Models.SearchTerminalActionsResponse response from the API call.</returns>
+        public async Task<Models.SearchTerminalActionsResponse> SearchTerminalActionsAsync(
+                Models.SearchTerminalActionsRequest body,
+                CancellationToken cancellationToken = default)
+        {
+            // the base uri for api requests.
+            string baseUri = this.Config.GetBaseUri();
+
+            // prepare query string for API call.
+            StringBuilder queryBuilder = new StringBuilder(baseUri);
+            queryBuilder.Append("/v2/terminals/actions/search");
+
+            // append request with appropriate headers and parameters
+            var headers = new Dictionary<string, string>()
+            {
+                { "user-agent", this.UserAgent },
+                { "accept", "application/json" },
+                { "Content-Type", "application/json" },
+                { "Square-Version", this.Config.SquareVersion },
+            };
+
+            // append body params.
+            var bodyText = ApiHelper.JsonSerialize(body);
+
+            // prepare the API call request to fetch the response.
+            HttpRequest httpRequest = this.GetClientInstance().PostBody(queryBuilder.ToString(), headers, bodyText);
+
+            if (this.HttpCallBack != null)
+            {
+                this.HttpCallBack.OnBeforeHttpRequestEventHandler(this.GetClientInstance(), httpRequest);
+            }
+
+            httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
+
+            // invoke request and get response.
+            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken: cancellationToken).ConfigureAwait(false);
+            HttpContext context = new HttpContext(httpRequest, response);
+            if (this.HttpCallBack != null)
+            {
+                this.HttpCallBack.OnAfterHttpResponseEventHandler(this.GetClientInstance(), response);
+            }
+
+            // handle errors defined at the API level.
+            this.ValidateResponse(response, context);
+
+            var responseModel = ApiHelper.JsonDeserialize<Models.SearchTerminalActionsResponse>(response.Body);
+            responseModel.Context = context;
+            return responseModel;
+        }
+
+        /// <summary>
+        /// Retrieves a Terminal action request by `action_id`. Terminal action requests are available for 30 days.
+        /// </summary>
+        /// <param name="actionId">Required parameter: Unique ID for the desired `TerminalAction`.</param>
+        /// <returns>Returns the Models.GetTerminalActionResponse response from the API call.</returns>
+        public Models.GetTerminalActionResponse GetTerminalAction(
+                string actionId)
+        {
+            Task<Models.GetTerminalActionResponse> t = this.GetTerminalActionAsync(actionId);
+            ApiHelper.RunTaskSynchronously(t);
+            return t.Result;
+        }
+
+        /// <summary>
+        /// Retrieves a Terminal action request by `action_id`. Terminal action requests are available for 30 days.
+        /// </summary>
+        /// <param name="actionId">Required parameter: Unique ID for the desired `TerminalAction`.</param>
+        /// <param name="cancellationToken"> cancellationToken. </param>
+        /// <returns>Returns the Models.GetTerminalActionResponse response from the API call.</returns>
+        public async Task<Models.GetTerminalActionResponse> GetTerminalActionAsync(
+                string actionId,
+                CancellationToken cancellationToken = default)
+        {
+            // the base uri for api requests.
+            string baseUri = this.Config.GetBaseUri();
+
+            // prepare query string for API call.
+            StringBuilder queryBuilder = new StringBuilder(baseUri);
+            queryBuilder.Append("/v2/terminals/actions/{action_id}");
+
+            // process optional template parameters.
+            ApiHelper.AppendUrlWithTemplateParameters(queryBuilder, new Dictionary<string, object>()
+            {
+                { "action_id", actionId },
+            });
+
+            // append request with appropriate headers and parameters
+            var headers = new Dictionary<string, string>()
+            {
+                { "user-agent", this.UserAgent },
+                { "accept", "application/json" },
+                { "Square-Version", this.Config.SquareVersion },
+            };
+
+            // prepare the API call request to fetch the response.
+            HttpRequest httpRequest = this.GetClientInstance().Get(queryBuilder.ToString(), headers);
+
+            if (this.HttpCallBack != null)
+            {
+                this.HttpCallBack.OnBeforeHttpRequestEventHandler(this.GetClientInstance(), httpRequest);
+            }
+
+            httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
+
+            // invoke request and get response.
+            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken: cancellationToken).ConfigureAwait(false);
+            HttpContext context = new HttpContext(httpRequest, response);
+            if (this.HttpCallBack != null)
+            {
+                this.HttpCallBack.OnAfterHttpResponseEventHandler(this.GetClientInstance(), response);
+            }
+
+            // handle errors defined at the API level.
+            this.ValidateResponse(response, context);
+
+            var responseModel = ApiHelper.JsonDeserialize<Models.GetTerminalActionResponse>(response.Body);
+            responseModel.Context = context;
+            return responseModel;
+        }
+
+        /// <summary>
+        /// Cancels a Terminal action request if the status of the request permits it.
+        /// </summary>
+        /// <param name="actionId">Required parameter: Unique ID for the desired `TerminalAction`.</param>
+        /// <returns>Returns the Models.CancelTerminalActionResponse response from the API call.</returns>
+        public Models.CancelTerminalActionResponse CancelTerminalAction(
+                string actionId)
+        {
+            Task<Models.CancelTerminalActionResponse> t = this.CancelTerminalActionAsync(actionId);
+            ApiHelper.RunTaskSynchronously(t);
+            return t.Result;
+        }
+
+        /// <summary>
+        /// Cancels a Terminal action request if the status of the request permits it.
+        /// </summary>
+        /// <param name="actionId">Required parameter: Unique ID for the desired `TerminalAction`.</param>
+        /// <param name="cancellationToken"> cancellationToken. </param>
+        /// <returns>Returns the Models.CancelTerminalActionResponse response from the API call.</returns>
+        public async Task<Models.CancelTerminalActionResponse> CancelTerminalActionAsync(
+                string actionId,
+                CancellationToken cancellationToken = default)
+        {
+            // the base uri for api requests.
+            string baseUri = this.Config.GetBaseUri();
+
+            // prepare query string for API call.
+            StringBuilder queryBuilder = new StringBuilder(baseUri);
+            queryBuilder.Append("/v2/terminals/actions/{action_id}/cancel");
+
+            // process optional template parameters.
+            ApiHelper.AppendUrlWithTemplateParameters(queryBuilder, new Dictionary<string, object>()
+            {
+                { "action_id", actionId },
+            });
+
+            // append request with appropriate headers and parameters
+            var headers = new Dictionary<string, string>()
+            {
+                { "user-agent", this.UserAgent },
+                { "accept", "application/json" },
+                { "Square-Version", this.Config.SquareVersion },
+            };
+
+            // prepare the API call request to fetch the response.
+            HttpRequest httpRequest = this.GetClientInstance().Post(queryBuilder.ToString(), headers, null);
+
+            if (this.HttpCallBack != null)
+            {
+                this.HttpCallBack.OnBeforeHttpRequestEventHandler(this.GetClientInstance(), httpRequest);
+            }
+
+            httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
+
+            // invoke request and get response.
+            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken: cancellationToken).ConfigureAwait(false);
+            HttpContext context = new HttpContext(httpRequest, response);
+            if (this.HttpCallBack != null)
+            {
+                this.HttpCallBack.OnAfterHttpResponseEventHandler(this.GetClientInstance(), response);
+            }
+
+            // handle errors defined at the API level.
+            this.ValidateResponse(response, context);
+
+            var responseModel = ApiHelper.JsonDeserialize<Models.CancelTerminalActionResponse>(response.Body);
+            responseModel.Context = context;
+            return responseModel;
+        }
+
+        /// <summary>
         /// Creates a Terminal checkout request and sends it to the specified device to take a payment.
         /// for the requested amount.
         /// </summary>

@@ -48,90 +48,35 @@ CreateOrderAsync(
 ## Example Usage
 
 ```csharp
-var bodyOrderSource = new OrderSource.Builder()
-    .Name("name6")
-    .Build();
 var bodyOrderLineItems = new List<OrderLineItem>();
 
-var bodyOrderLineItems0QuantityUnitMeasurementUnitCustomUnit = new MeasurementUnitCustom.Builder(
-        "name9",
-        "abbreviation1")
-    .Build();
-var bodyOrderLineItems0QuantityUnitMeasurementUnit = new MeasurementUnit.Builder()
-    .CustomUnit(bodyOrderLineItems0QuantityUnitMeasurementUnitCustomUnit)
-    .AreaUnit("IMPERIAL_SQUARE_INCH")
-    .LengthUnit("METRIC_KILOMETER")
-    .VolumeUnit("GENERIC_QUART")
-    .WeightUnit("METRIC_MILLIGRAM")
-    .Build();
-var bodyOrderLineItems0QuantityUnit = new OrderQuantityUnit.Builder()
-    .MeasurementUnit(bodyOrderLineItems0QuantityUnitMeasurementUnit)
-    .Precision(189)
-    .CatalogObjectId("catalog_object_id1")
-    .CatalogVersion(133L)
-    .Build();
 var bodyOrderLineItems0BasePriceMoney = new Money.Builder()
     .Amount(1599L)
     .Currency("USD")
     .Build();
 var bodyOrderLineItems0 = new OrderLineItem.Builder(
         "1")
-    .Uid("uid1")
     .Name("New York Strip Steak")
-    .QuantityUnit(bodyOrderLineItems0QuantityUnit)
-    .Note("note3")
-    .CatalogObjectId("catalog_object_id5")
     .BasePriceMoney(bodyOrderLineItems0BasePriceMoney)
     .Build();
 bodyOrderLineItems.Add(bodyOrderLineItems0);
 
-var bodyOrderLineItems1QuantityUnitMeasurementUnitCustomUnit = new MeasurementUnitCustom.Builder(
-        "name8",
-        "abbreviation0")
-    .Build();
-var bodyOrderLineItems1QuantityUnitMeasurementUnit = new MeasurementUnit.Builder()
-    .CustomUnit(bodyOrderLineItems1QuantityUnitMeasurementUnitCustomUnit)
-    .AreaUnit("IMPERIAL_ACRE")
-    .LengthUnit("IMPERIAL_INCH")
-    .VolumeUnit("GENERIC_PINT")
-    .WeightUnit("METRIC_GRAM")
-    .Build();
-var bodyOrderLineItems1QuantityUnit = new OrderQuantityUnit.Builder()
-    .MeasurementUnit(bodyOrderLineItems1QuantityUnitMeasurementUnit)
-    .Precision(188)
-    .CatalogObjectId("catalog_object_id0")
-    .CatalogVersion(134L)
-    .Build();
 var bodyOrderLineItems1Modifiers = new List<OrderLineItemModifier>();
 
 var bodyOrderLineItems1Modifiers0 = new OrderLineItemModifier.Builder()
-    .Uid("uid1")
     .CatalogObjectId("CHQX7Y4KY6N5KINJKZCFURPZ")
-    .CatalogVersion(69L)
-    .Name("name1")
-    .Quantity("quantity7")
     .Build();
 bodyOrderLineItems1Modifiers.Add(bodyOrderLineItems1Modifiers0);
 
 var bodyOrderLineItems1AppliedDiscounts = new List<OrderLineItemAppliedDiscount>();
 
-var bodyOrderLineItems1AppliedDiscounts0AppliedMoney = new Money.Builder()
-    .Amount(164L)
-    .Currency("CUC")
-    .Build();
 var bodyOrderLineItems1AppliedDiscounts0 = new OrderLineItemAppliedDiscount.Builder(
         "one-dollar-off")
-    .Uid("uid4")
-    .AppliedMoney(bodyOrderLineItems1AppliedDiscounts0AppliedMoney)
     .Build();
 bodyOrderLineItems1AppliedDiscounts.Add(bodyOrderLineItems1AppliedDiscounts0);
 
 var bodyOrderLineItems1 = new OrderLineItem.Builder(
         "2")
-    .Uid("uid0")
-    .Name("name0")
-    .QuantityUnit(bodyOrderLineItems1QuantityUnit)
-    .Note("note4")
     .CatalogObjectId("BEMYCSMIJL46OCDV4KYIKXIB")
     .Modifiers(bodyOrderLineItems1Modifiers)
     .AppliedDiscounts(bodyOrderLineItems1AppliedDiscounts)
@@ -142,10 +87,7 @@ var bodyOrderTaxes = new List<OrderLineItemTax>();
 
 var bodyOrderTaxes0 = new OrderLineItemTax.Builder()
     .Uid("state-sales-tax")
-    .CatalogObjectId("catalog_object_id1")
-    .CatalogVersion(189L)
     .Name("State Sales Tax")
-    .Type("UNKNOWN_TAX")
     .Percentage("9")
     .Scope("ORDER")
     .Build();
@@ -155,10 +97,7 @@ var bodyOrderDiscounts = new List<OrderLineItemDiscount>();
 
 var bodyOrderDiscounts0 = new OrderLineItemDiscount.Builder()
     .Uid("labor-day-sale")
-    .CatalogObjectId("catalog_object_id5")
-    .CatalogVersion(89L)
     .Name("Labor Day Sale")
-    .Type("FIXED_PERCENTAGE")
     .Percentage("5")
     .Scope("ORDER")
     .Build();
@@ -167,9 +106,6 @@ bodyOrderDiscounts.Add(bodyOrderDiscounts0);
 var bodyOrderDiscounts1 = new OrderLineItemDiscount.Builder()
     .Uid("membership-discount")
     .CatalogObjectId("DB7L55ZH2BGWI4H23ULIWOQ7")
-    .CatalogVersion(90L)
-    .Name("name2")
-    .Type("FIXED_AMOUNT")
     .Scope("ORDER")
     .Build();
 bodyOrderDiscounts.Add(bodyOrderDiscounts1);
@@ -180,10 +116,7 @@ var bodyOrderDiscounts2AmountMoney = new Money.Builder()
     .Build();
 var bodyOrderDiscounts2 = new OrderLineItemDiscount.Builder()
     .Uid("one-dollar-off")
-    .CatalogObjectId("catalog_object_id7")
-    .CatalogVersion(91L)
     .Name("Sale - $1.00 off")
-    .Type("VARIABLE_PERCENTAGE")
     .AmountMoney(bodyOrderDiscounts2AmountMoney)
     .Scope("LINE_ITEM")
     .Build();
@@ -191,10 +124,7 @@ bodyOrderDiscounts.Add(bodyOrderDiscounts2);
 
 var bodyOrder = new Order.Builder(
         "057P5VYJ4A5X1")
-    .Id("id0")
     .ReferenceId("my-order-001")
-    .Source(bodyOrderSource)
-    .CustomerId("customer_id8")
     .LineItems(bodyOrderLineItems)
     .Taxes(bodyOrderTaxes)
     .Discounts(bodyOrderDiscounts)
@@ -274,71 +204,26 @@ CalculateOrderAsync(
 ## Example Usage
 
 ```csharp
-var bodyOrderSource = new OrderSource.Builder()
-    .Name("name6")
-    .Build();
 var bodyOrderLineItems = new List<OrderLineItem>();
 
-var bodyOrderLineItems0QuantityUnitMeasurementUnitCustomUnit = new MeasurementUnitCustom.Builder(
-        "name9",
-        "abbreviation1")
-    .Build();
-var bodyOrderLineItems0QuantityUnitMeasurementUnit = new MeasurementUnit.Builder()
-    .CustomUnit(bodyOrderLineItems0QuantityUnitMeasurementUnitCustomUnit)
-    .AreaUnit("IMPERIAL_SQUARE_INCH")
-    .LengthUnit("METRIC_KILOMETER")
-    .VolumeUnit("GENERIC_QUART")
-    .WeightUnit("METRIC_MILLIGRAM")
-    .Build();
-var bodyOrderLineItems0QuantityUnit = new OrderQuantityUnit.Builder()
-    .MeasurementUnit(bodyOrderLineItems0QuantityUnitMeasurementUnit)
-    .Precision(189)
-    .CatalogObjectId("catalog_object_id1")
-    .CatalogVersion(133L)
-    .Build();
 var bodyOrderLineItems0BasePriceMoney = new Money.Builder()
     .Amount(500L)
     .Currency("USD")
     .Build();
 var bodyOrderLineItems0 = new OrderLineItem.Builder(
         "1")
-    .Uid("uid1")
     .Name("Item 1")
-    .QuantityUnit(bodyOrderLineItems0QuantityUnit)
-    .Note("note3")
-    .CatalogObjectId("catalog_object_id5")
     .BasePriceMoney(bodyOrderLineItems0BasePriceMoney)
     .Build();
 bodyOrderLineItems.Add(bodyOrderLineItems0);
 
-var bodyOrderLineItems1QuantityUnitMeasurementUnitCustomUnit = new MeasurementUnitCustom.Builder(
-        "name8",
-        "abbreviation0")
-    .Build();
-var bodyOrderLineItems1QuantityUnitMeasurementUnit = new MeasurementUnit.Builder()
-    .CustomUnit(bodyOrderLineItems1QuantityUnitMeasurementUnitCustomUnit)
-    .AreaUnit("IMPERIAL_ACRE")
-    .LengthUnit("IMPERIAL_INCH")
-    .VolumeUnit("GENERIC_PINT")
-    .WeightUnit("METRIC_GRAM")
-    .Build();
-var bodyOrderLineItems1QuantityUnit = new OrderQuantityUnit.Builder()
-    .MeasurementUnit(bodyOrderLineItems1QuantityUnitMeasurementUnit)
-    .Precision(188)
-    .CatalogObjectId("catalog_object_id0")
-    .CatalogVersion(134L)
-    .Build();
 var bodyOrderLineItems1BasePriceMoney = new Money.Builder()
     .Amount(300L)
     .Currency("USD")
     .Build();
 var bodyOrderLineItems1 = new OrderLineItem.Builder(
         "2")
-    .Uid("uid0")
     .Name("Item 2")
-    .QuantityUnit(bodyOrderLineItems1QuantityUnit)
-    .Note("note4")
-    .CatalogObjectId("catalog_object_id6")
     .BasePriceMoney(bodyOrderLineItems1BasePriceMoney)
     .Build();
 bodyOrderLineItems.Add(bodyOrderLineItems1);
@@ -346,11 +231,7 @@ bodyOrderLineItems.Add(bodyOrderLineItems1);
 var bodyOrderDiscounts = new List<OrderLineItemDiscount>();
 
 var bodyOrderDiscounts0 = new OrderLineItemDiscount.Builder()
-    .Uid("uid1")
-    .CatalogObjectId("catalog_object_id5")
-    .CatalogVersion(89L)
     .Name("50% Off")
-    .Type("FIXED_PERCENTAGE")
     .Percentage("50")
     .Scope("ORDER")
     .Build();
@@ -358,36 +239,11 @@ bodyOrderDiscounts.Add(bodyOrderDiscounts0);
 
 var bodyOrder = new Order.Builder(
         "D7AVYMEAPJ3A3")
-    .Id("id0")
-    .ReferenceId("reference_id8")
-    .Source(bodyOrderSource)
-    .CustomerId("customer_id8")
     .LineItems(bodyOrderLineItems)
     .Discounts(bodyOrderDiscounts)
     .Build();
-var bodyProposedRewards = new List<OrderReward>();
-
-var bodyProposedRewards0 = new OrderReward.Builder(
-        "id6",
-        "reward_tier_id2")
-    .Build();
-bodyProposedRewards.Add(bodyProposedRewards0);
-
-var bodyProposedRewards1 = new OrderReward.Builder(
-        "id7",
-        "reward_tier_id3")
-    .Build();
-bodyProposedRewards.Add(bodyProposedRewards1);
-
-var bodyProposedRewards2 = new OrderReward.Builder(
-        "id8",
-        "reward_tier_id4")
-    .Build();
-bodyProposedRewards.Add(bodyProposedRewards2);
-
 var body = new CalculateOrderRequest.Builder(
         bodyOrder)
-    .ProposedRewards(bodyProposedRewards)
     .Build();
 
 try
@@ -481,49 +337,16 @@ bodyQueryFilterStateFilterStates.Add("COMPLETED");
 var bodyQueryFilterStateFilter = new SearchOrdersStateFilter.Builder(
         bodyQueryFilterStateFilterStates)
     .Build();
-var bodyQueryFilterDateTimeFilterCreatedAt = new TimeRange.Builder()
-    .StartAt("start_at8")
-    .EndAt("end_at4")
-    .Build();
-var bodyQueryFilterDateTimeFilterUpdatedAt = new TimeRange.Builder()
-    .StartAt("start_at6")
-    .EndAt("end_at6")
-    .Build();
 var bodyQueryFilterDateTimeFilterClosedAt = new TimeRange.Builder()
     .StartAt("2018-03-03T20:00:00+00:00")
     .EndAt("2019-03-04T21:54:45+00:00")
     .Build();
 var bodyQueryFilterDateTimeFilter = new SearchOrdersDateTimeFilter.Builder()
-    .CreatedAt(bodyQueryFilterDateTimeFilterCreatedAt)
-    .UpdatedAt(bodyQueryFilterDateTimeFilterUpdatedAt)
     .ClosedAt(bodyQueryFilterDateTimeFilterClosedAt)
-    .Build();
-var bodyQueryFilterFulfillmentFilterFulfillmentTypes = new IList<string>();
-bodyQueryFilterFulfillmentFilterFulfillmentTypes.Add("SHIPMENT");
-var bodyQueryFilterFulfillmentFilterFulfillmentStates = new IList<string>();
-bodyQueryFilterFulfillmentFilterFulfillmentStates.Add("CANCELED");
-bodyQueryFilterFulfillmentFilterFulfillmentStates.Add("FAILED");
-var bodyQueryFilterFulfillmentFilter = new SearchOrdersFulfillmentFilter.Builder()
-    .FulfillmentTypes(bodyQueryFilterFulfillmentFilterFulfillmentTypes)
-    .FulfillmentStates(bodyQueryFilterFulfillmentFilterFulfillmentStates)
-    .Build();
-var bodyQueryFilterSourceFilterSourceNames = new IList<string>();
-bodyQueryFilterSourceFilterSourceNames.Add("source_names8");
-var bodyQueryFilterSourceFilter = new SearchOrdersSourceFilter.Builder()
-    .SourceNames(bodyQueryFilterSourceFilterSourceNames)
-    .Build();
-var bodyQueryFilterCustomerFilterCustomerIds = new IList<string>();
-bodyQueryFilterCustomerFilterCustomerIds.Add("customer_ids5");
-bodyQueryFilterCustomerFilterCustomerIds.Add("customer_ids6");
-var bodyQueryFilterCustomerFilter = new SearchOrdersCustomerFilter.Builder()
-    .CustomerIds(bodyQueryFilterCustomerFilterCustomerIds)
     .Build();
 var bodyQueryFilter = new SearchOrdersFilter.Builder()
     .StateFilter(bodyQueryFilterStateFilter)
     .DateTimeFilter(bodyQueryFilterDateTimeFilter)
-    .FulfillmentFilter(bodyQueryFilterFulfillmentFilter)
-    .SourceFilter(bodyQueryFilterSourceFilter)
-    .CustomerFilter(bodyQueryFilterCustomerFilter)
     .Build();
 var bodyQuerySort = new SearchOrdersSort.Builder(
         "CLOSED_AT")
@@ -535,7 +358,6 @@ var bodyQuery = new SearchOrdersQuery.Builder()
     .Build();
 var body = new SearchOrdersRequest.Builder()
     .LocationIds(bodyLocationIds)
-    .Cursor("cursor0")
     .Query(bodyQuery)
     .Limit(3)
     .ReturnEntries(true)
@@ -620,80 +442,7 @@ UpdateOrderAsync(
 
 ```csharp
 string orderId = "order_id6";
-var bodyOrderSource = new OrderSource.Builder()
-    .Name("name6")
-    .Build();
-var bodyOrderLineItems = new List<OrderLineItem>();
-
-var bodyOrderLineItems0QuantityUnitMeasurementUnitCustomUnit = new MeasurementUnitCustom.Builder(
-        "name9",
-        "abbreviation1")
-    .Build();
-var bodyOrderLineItems0QuantityUnitMeasurementUnit = new MeasurementUnit.Builder()
-    .CustomUnit(bodyOrderLineItems0QuantityUnitMeasurementUnitCustomUnit)
-    .AreaUnit("IMPERIAL_SQUARE_INCH")
-    .LengthUnit("METRIC_KILOMETER")
-    .VolumeUnit("GENERIC_QUART")
-    .WeightUnit("METRIC_MILLIGRAM")
-    .Build();
-var bodyOrderLineItems0QuantityUnit = new OrderQuantityUnit.Builder()
-    .MeasurementUnit(bodyOrderLineItems0QuantityUnitMeasurementUnit)
-    .Precision(189)
-    .CatalogObjectId("catalog_object_id1")
-    .CatalogVersion(133L)
-    .Build();
-var bodyOrderLineItems0 = new OrderLineItem.Builder(
-        "quantity7")
-    .Uid("uid1")
-    .Name("name1")
-    .QuantityUnit(bodyOrderLineItems0QuantityUnit)
-    .Note("note3")
-    .CatalogObjectId("catalog_object_id5")
-    .Build();
-bodyOrderLineItems.Add(bodyOrderLineItems0);
-
-var bodyOrderLineItems1QuantityUnitMeasurementUnitCustomUnit = new MeasurementUnitCustom.Builder(
-        "name8",
-        "abbreviation0")
-    .Build();
-var bodyOrderLineItems1QuantityUnitMeasurementUnit = new MeasurementUnit.Builder()
-    .CustomUnit(bodyOrderLineItems1QuantityUnitMeasurementUnitCustomUnit)
-    .AreaUnit("IMPERIAL_ACRE")
-    .LengthUnit("IMPERIAL_INCH")
-    .VolumeUnit("GENERIC_PINT")
-    .WeightUnit("METRIC_GRAM")
-    .Build();
-var bodyOrderLineItems1QuantityUnit = new OrderQuantityUnit.Builder()
-    .MeasurementUnit(bodyOrderLineItems1QuantityUnitMeasurementUnit)
-    .Precision(188)
-    .CatalogObjectId("catalog_object_id0")
-    .CatalogVersion(134L)
-    .Build();
-var bodyOrderLineItems1 = new OrderLineItem.Builder(
-        "quantity6")
-    .Uid("uid0")
-    .Name("name0")
-    .QuantityUnit(bodyOrderLineItems1QuantityUnit)
-    .Note("note4")
-    .CatalogObjectId("catalog_object_id6")
-    .Build();
-bodyOrderLineItems.Add(bodyOrderLineItems1);
-
-var bodyOrder = new Order.Builder(
-        "location_id4")
-    .Id("id0")
-    .ReferenceId("reference_id8")
-    .Source(bodyOrderSource)
-    .CustomerId("customer_id8")
-    .LineItems(bodyOrderLineItems)
-    .Build();
-var bodyFieldsToClear = new IList<string>();
-bodyFieldsToClear.Add("fields_to_clear7");
-bodyFieldsToClear.Add("fields_to_clear8");
 var body = new UpdateOrderRequest.Builder()
-    .Order(bodyOrder)
-    .FieldsToClear(bodyFieldsToClear)
-    .IdempotencyKey("idempotency_key2")
     .Build();
 
 try
@@ -747,7 +496,6 @@ bodyPaymentIds.Add("EnZdNAlWCmfh6Mt5FMNST1o7taB");
 bodyPaymentIds.Add("0LRiVlbXVwe8ozu4KbZxd12mvaB");
 var body = new PayOrderRequest.Builder(
         "c043a359-7ad9-4136-82a9-c3f1d66dcbff")
-    .OrderVersion(82)
     .PaymentIds(bodyPaymentIds)
     .Build();
 

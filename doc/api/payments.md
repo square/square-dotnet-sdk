@@ -62,19 +62,9 @@ ListPaymentsAsync(
 ## Example Usage
 
 ```csharp
-string beginTime = "begin_time2";
-string endTime = "end_time2";
-string sortOrder = "sort_order0";
-string cursor = "cursor6";
-string locationId = "location_id4";
-long? total = 10L;
-string last4 = "last_42";
-string cardBrand = "card_brand6";
-int? limit = 172;
-
 try
 {
-    ListPaymentsResponse result = await paymentsApi.ListPaymentsAsync(beginTime, endTime, sortOrder, cursor, locationId, total, last4, cardBrand, limit);
+    ListPaymentsResponse result = await paymentsApi.ListPaymentsAsync(null, null, null, null, null, null, null, null, null);
 }
 catch (ApiException e){};
 ```
@@ -113,10 +103,6 @@ var bodyAmountMoney = new Money.Builder()
     .Amount(1000L)
     .Currency("USD")
     .Build();
-var bodyTipMoney = new Money.Builder()
-    .Amount(198L)
-    .Currency("CHF")
-    .Build();
 var bodyAppFeeMoney = new Money.Builder()
     .Amount(10L)
     .Currency("USD")
@@ -125,11 +111,8 @@ var body = new CreatePaymentRequest.Builder(
         "ccof:GaJGNaZa8x4OgDJn4GB",
         "7b0f3ec5-086a-4871-8f13-3c81b3875218",
         bodyAmountMoney)
-    .TipMoney(bodyTipMoney)
     .AppFeeMoney(bodyAppFeeMoney)
-    .DelayDuration("delay_duration6")
     .Autocomplete(true)
-    .OrderId("order_id0")
     .CustomerId("W92WH6P11H4Z77CTET0RNTGFW8")
     .LocationId("L88917AVBK2S5")
     .ReferenceId("123456")
@@ -255,9 +238,6 @@ var bodyPaymentTipMoney = new Money.Builder()
     .Currency("USD")
     .Build();
 var bodyPayment = new Payment.Builder()
-    .Id("id2")
-    .CreatedAt("created_at0")
-    .UpdatedAt("updated_at8")
     .AmountMoney(bodyPaymentAmountMoney)
     .TipMoney(bodyPaymentTipMoney)
     .VersionToken("ODhwVQ35xwlzRuoZEwKXucfu7583sPTzK48c5zoGd0g6o")
@@ -337,7 +317,6 @@ CompletePaymentAsync(
 ```csharp
 string paymentId = "payment_id0";
 var body = new CompletePaymentRequest.Builder()
-    .VersionToken("version_token2")
     .Build();
 
 try
