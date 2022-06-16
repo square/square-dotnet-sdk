@@ -23,14 +23,17 @@ namespace Square.Models
         /// <param name="amountMoney">amount_money.</param>
         /// <param name="paymentId">payment_id.</param>
         /// <param name="referenceId">reference_id.</param>
+        /// <param name="status">status.</param>
         public GiftCardActivityRedeem(
             Models.Money amountMoney,
             string paymentId = null,
-            string referenceId = null)
+            string referenceId = null,
+            string status = null)
         {
             this.AmountMoney = amountMoney;
             this.PaymentId = paymentId;
             this.ReferenceId = referenceId;
+            this.Status = status;
         }
 
         /// <summary>
@@ -45,20 +48,27 @@ namespace Square.Models
         public Models.Money AmountMoney { get; }
 
         /// <summary>
-        /// When the Square Payments API is used, Redeem is not called on the Gift Cards API.
-        /// However, when Square reads a Redeem activity from the Gift Cards API, developers need to know the
-        /// associated `payment_id`.
+        /// The ID of the payment that represents the gift card redemption. Square populates this field
+        /// if the payment was processed by Square.
         /// </summary>
         [JsonProperty("payment_id", NullValueHandling = NullValueHandling.Ignore)]
         public string PaymentId { get; }
 
         /// <summary>
-        /// A client-specified ID to associate an entity, in another system, with this gift card
-        /// activity. This can be used to track the order or payment related information when the Square Orders
-        /// API is not being used.
+        /// A client-specified ID that associates the gift card activity with an entity in another system.
+        /// Applications that use a custom payment processing system can use this field to track information
+        /// related to an order or payment.
         /// </summary>
         [JsonProperty("reference_id", NullValueHandling = NullValueHandling.Ignore)]
         public string ReferenceId { get; }
+
+        /// <summary>
+        /// Indicates the status of a [gift card]($m/GiftCard) redemption. This status is relevant only for
+        /// redemptions made from Square products (such as Square Point of Sale) because Square products use a
+        /// two-state process. Gift cards redeemed using the Gift Card Activities API always have a `COMPLETED` status.
+        /// </summary>
+        [JsonProperty("status", NullValueHandling = NullValueHandling.Ignore)]
+        public string Status { get; }
 
         /// <inheritdoc/>
         public override string ToString()
@@ -86,14 +96,15 @@ namespace Square.Models
             return obj is GiftCardActivityRedeem other &&
                 ((this.AmountMoney == null && other.AmountMoney == null) || (this.AmountMoney?.Equals(other.AmountMoney) == true)) &&
                 ((this.PaymentId == null && other.PaymentId == null) || (this.PaymentId?.Equals(other.PaymentId) == true)) &&
-                ((this.ReferenceId == null && other.ReferenceId == null) || (this.ReferenceId?.Equals(other.ReferenceId) == true));
+                ((this.ReferenceId == null && other.ReferenceId == null) || (this.ReferenceId?.Equals(other.ReferenceId) == true)) &&
+                ((this.Status == null && other.Status == null) || (this.Status?.Equals(other.Status) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -960472333;
-            hashCode = HashCode.Combine(this.AmountMoney, this.PaymentId, this.ReferenceId);
+            int hashCode = 1898558398;
+            hashCode = HashCode.Combine(this.AmountMoney, this.PaymentId, this.ReferenceId, this.Status);
 
             return hashCode;
         }
@@ -107,6 +118,7 @@ namespace Square.Models
             toStringOutput.Add($"this.AmountMoney = {(this.AmountMoney == null ? "null" : this.AmountMoney.ToString())}");
             toStringOutput.Add($"this.PaymentId = {(this.PaymentId == null ? "null" : this.PaymentId == string.Empty ? "" : this.PaymentId)}");
             toStringOutput.Add($"this.ReferenceId = {(this.ReferenceId == null ? "null" : this.ReferenceId == string.Empty ? "" : this.ReferenceId)}");
+            toStringOutput.Add($"this.Status = {(this.Status == null ? "null" : this.Status.ToString())}");
         }
 
         /// <summary>
@@ -118,7 +130,8 @@ namespace Square.Models
             var builder = new Builder(
                 this.AmountMoney)
                 .PaymentId(this.PaymentId)
-                .ReferenceId(this.ReferenceId);
+                .ReferenceId(this.ReferenceId)
+                .Status(this.Status);
             return builder;
         }
 
@@ -130,6 +143,7 @@ namespace Square.Models
             private Models.Money amountMoney;
             private string paymentId;
             private string referenceId;
+            private string status;
 
             public Builder(
                 Models.Money amountMoney)
@@ -170,6 +184,17 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// Status.
+             /// </summary>
+             /// <param name="status"> status. </param>
+             /// <returns> Builder. </returns>
+            public Builder Status(string status)
+            {
+                this.status = status;
+                return this;
+            }
+
             /// <summary>
             /// Builds class object.
             /// </summary>
@@ -179,7 +204,8 @@ namespace Square.Models
                 return new GiftCardActivityRedeem(
                     this.amountMoney,
                     this.paymentId,
-                    this.referenceId);
+                    this.referenceId,
+                    this.status);
             }
         }
     }

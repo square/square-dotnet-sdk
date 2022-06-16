@@ -21,15 +21,15 @@ namespace Square.Models
         /// Initializes a new instance of the <see cref="SubscriptionPhase"/> class.
         /// </summary>
         /// <param name="cadence">cadence.</param>
-        /// <param name="recurringPriceMoney">recurring_price_money.</param>
         /// <param name="uid">uid.</param>
         /// <param name="periods">periods.</param>
+        /// <param name="recurringPriceMoney">recurring_price_money.</param>
         /// <param name="ordinal">ordinal.</param>
         public SubscriptionPhase(
             string cadence,
-            Models.Money recurringPriceMoney,
             string uid = null,
             int? periods = null,
+            Models.Money recurringPriceMoney = null,
             long? ordinal = null)
         {
             this.Uid = uid;
@@ -65,7 +65,7 @@ namespace Square.Models
         /// [Working with Monetary Amounts](https://developer.squareup.com/docs/build-basics/working-with-monetary-amounts)
         /// for more information.
         /// </summary>
-        [JsonProperty("recurring_price_money")]
+        [JsonProperty("recurring_price_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Money RecurringPriceMoney { get; }
 
         /// <summary>
@@ -134,10 +134,10 @@ namespace Square.Models
         public Builder ToBuilder()
         {
             var builder = new Builder(
-                this.Cadence,
-                this.RecurringPriceMoney)
+                this.Cadence)
                 .Uid(this.Uid)
                 .Periods(this.Periods)
+                .RecurringPriceMoney(this.RecurringPriceMoney)
                 .Ordinal(this.Ordinal);
             return builder;
         }
@@ -148,17 +148,15 @@ namespace Square.Models
         public class Builder
         {
             private string cadence;
-            private Models.Money recurringPriceMoney;
             private string uid;
             private int? periods;
+            private Models.Money recurringPriceMoney;
             private long? ordinal;
 
             public Builder(
-                string cadence,
-                Models.Money recurringPriceMoney)
+                string cadence)
             {
                 this.cadence = cadence;
-                this.recurringPriceMoney = recurringPriceMoney;
             }
 
              /// <summary>
@@ -169,17 +167,6 @@ namespace Square.Models
             public Builder Cadence(string cadence)
             {
                 this.cadence = cadence;
-                return this;
-            }
-
-             /// <summary>
-             /// RecurringPriceMoney.
-             /// </summary>
-             /// <param name="recurringPriceMoney"> recurringPriceMoney. </param>
-             /// <returns> Builder. </returns>
-            public Builder RecurringPriceMoney(Models.Money recurringPriceMoney)
-            {
-                this.recurringPriceMoney = recurringPriceMoney;
                 return this;
             }
 
@@ -206,6 +193,17 @@ namespace Square.Models
             }
 
              /// <summary>
+             /// RecurringPriceMoney.
+             /// </summary>
+             /// <param name="recurringPriceMoney"> recurringPriceMoney. </param>
+             /// <returns> Builder. </returns>
+            public Builder RecurringPriceMoney(Models.Money recurringPriceMoney)
+            {
+                this.recurringPriceMoney = recurringPriceMoney;
+                return this;
+            }
+
+             /// <summary>
              /// Ordinal.
              /// </summary>
              /// <param name="ordinal"> ordinal. </param>
@@ -224,9 +222,9 @@ namespace Square.Models
             {
                 return new SubscriptionPhase(
                     this.cadence,
-                    this.recurringPriceMoney,
                     this.uid,
                     this.periods,
+                    this.recurringPriceMoney,
                     this.ordinal);
             }
         }

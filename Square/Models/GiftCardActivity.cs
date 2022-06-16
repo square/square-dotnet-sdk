@@ -85,19 +85,19 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// The unique ID of the gift card activity.
+        /// The Square-assigned ID of the gift card activity.
         /// </summary>
         [JsonProperty("id", NullValueHandling = NullValueHandling.Ignore)]
         public string Id { get; }
 
         /// <summary>
-        /// Indicates the gift card activity type.
+        /// Indicates the type of [gift card activity]($m/GiftCardActivity).
         /// </summary>
         [JsonProperty("type")]
         public string Type { get; }
 
         /// <summary>
-        /// The ID of the location at which the activity occurred.
+        /// The ID of the [business location]($m/Location) where the activity occurred.
         /// </summary>
         [JsonProperty("location_id")]
         public string LocationId { get; }
@@ -109,13 +109,15 @@ namespace Square.Models
         public string CreatedAt { get; }
 
         /// <summary>
-        /// The gift card ID. The ID is not required if a GAN is present.
+        /// The gift card ID. When creating a gift card activity, `gift_card_id` is not required if
+        /// `gift_card_gan` is specified.
         /// </summary>
         [JsonProperty("gift_card_id", NullValueHandling = NullValueHandling.Ignore)]
         public string GiftCardId { get; }
 
         /// <summary>
-        /// The gift card GAN. The GAN is not required if `gift_card_id` is present.
+        /// The gift card account number (GAN). When creating a gift card activity, `gift_card_gan`
+        /// is not required if `gift_card_id` is specified.
         /// </summary>
         [JsonProperty("gift_card_gan", NullValueHandling = NullValueHandling.Ignore)]
         public string GiftCardGan { get; }
@@ -132,80 +134,81 @@ namespace Square.Models
         public Models.Money GiftCardBalanceMoney { get; }
 
         /// <summary>
-        /// Present only when `GiftCardActivityType` is LOAD.
+        /// Represents details about a `LOAD` [gift card activity type]($m/GiftCardActivityType).
         /// </summary>
         [JsonProperty("load_activity_details", NullValueHandling = NullValueHandling.Ignore)]
         public Models.GiftCardActivityLoad LoadActivityDetails { get; }
 
         /// <summary>
-        /// Describes a gift card activity of the ACTIVATE type.
+        /// Represents details about an `ACTIVATE` [gift card activity type]($m/GiftCardActivityType).
         /// </summary>
         [JsonProperty("activate_activity_details", NullValueHandling = NullValueHandling.Ignore)]
         public Models.GiftCardActivityActivate ActivateActivityDetails { get; }
 
         /// <summary>
-        /// Present only when `GiftCardActivityType` is REDEEM.
+        /// Represents details about a `REDEEM` [gift card activity type]($m/GiftCardActivityType).
         /// </summary>
         [JsonProperty("redeem_activity_details", NullValueHandling = NullValueHandling.Ignore)]
         public Models.GiftCardActivityRedeem RedeemActivityDetails { get; }
 
         /// <summary>
-        /// Describes a gift card activity of the CLEAR_BALANCE type.
+        /// Represents details about a `CLEAR_BALANCE` [gift card activity type]($m/GiftCardActivityType).
         /// </summary>
         [JsonProperty("clear_balance_activity_details", NullValueHandling = NullValueHandling.Ignore)]
         public Models.GiftCardActivityClearBalance ClearBalanceActivityDetails { get; }
 
         /// <summary>
-        /// Describes a gift card activity of the DEACTIVATE type.
+        /// Represents details about a `DEACTIVATE` [gift card activity type]($m/GiftCardActivityType).
         /// </summary>
         [JsonProperty("deactivate_activity_details", NullValueHandling = NullValueHandling.Ignore)]
         public Models.GiftCardActivityDeactivate DeactivateActivityDetails { get; }
 
         /// <summary>
-        /// Describes a gift card activity of the ADJUST_INCREMENT type.
+        /// Represents details about an `ADJUST_INCREMENT` [gift card activity type]($m/GiftCardActivityType).
         /// </summary>
         [JsonProperty("adjust_increment_activity_details", NullValueHandling = NullValueHandling.Ignore)]
         public Models.GiftCardActivityAdjustIncrement AdjustIncrementActivityDetails { get; }
 
         /// <summary>
-        /// Describes a gift card activity of the ADJUST_DECREMENT type.
+        /// Represents details about an `ADJUST_DECREMENT` [gift card activity type]($m/GiftCardActivityType).
         /// </summary>
         [JsonProperty("adjust_decrement_activity_details", NullValueHandling = NullValueHandling.Ignore)]
         public Models.GiftCardActivityAdjustDecrement AdjustDecrementActivityDetails { get; }
 
         /// <summary>
-        /// Present only when `GiftCardActivityType` is REFUND.
+        /// Represents details about a `REFUND` [gift card activity type]($m/GiftCardActivityType).
         /// </summary>
         [JsonProperty("refund_activity_details", NullValueHandling = NullValueHandling.Ignore)]
         public Models.GiftCardActivityRefund RefundActivityDetails { get; }
 
         /// <summary>
-        /// Present only when `GiftCardActivityType` is UNLINKED_ACTIVITY_REFUND.
+        /// Represents details about an `UNLINKED_ACTIVITY_REFUND` [gift card activity type]($m/GiftCardActivityType).
         /// </summary>
         [JsonProperty("unlinked_activity_refund_activity_details", NullValueHandling = NullValueHandling.Ignore)]
         public Models.GiftCardActivityUnlinkedActivityRefund UnlinkedActivityRefundActivityDetails { get; }
 
         /// <summary>
-        /// Describes a gift card activity of the IMPORT type and the `GiftCardGANSource` is OTHER
-        /// (a third-party gift card).
+        /// Represents details about an `IMPORT` [gift card activity type]($m/GiftCardActivityType).
+        /// This activity type is used when Square imports a third-party gift card, in which case the
+        /// `gan_source` of the gift card is set to `OTHER`.
         /// </summary>
         [JsonProperty("import_activity_details", NullValueHandling = NullValueHandling.Ignore)]
         public Models.GiftCardActivityImport ImportActivityDetails { get; }
 
         /// <summary>
-        /// Describes a gift card activity of the BLOCK type.
+        /// Represents details about a `BLOCK` [gift card activity type]($m/GiftCardActivityType).
         /// </summary>
         [JsonProperty("block_activity_details", NullValueHandling = NullValueHandling.Ignore)]
         public Models.GiftCardActivityBlock BlockActivityDetails { get; }
 
         /// <summary>
-        /// Present only when `GiftCardActivityType` is UNBLOCK.
+        /// Represents details about an `UNBLOCK` [gift card activity type]($m/GiftCardActivityType).
         /// </summary>
         [JsonProperty("unblock_activity_details", NullValueHandling = NullValueHandling.Ignore)]
         public Models.GiftCardActivityUnblock UnblockActivityDetails { get; }
 
         /// <summary>
-        /// Present only when GiftCardActivityType is IMPORT_REVERSAL and GiftCardGANSource is OTHER
+        /// Represents details about an `IMPORT_REVERSAL` [gift card activity type]($m/GiftCardActivityType).
         /// </summary>
         [JsonProperty("import_reversal_activity_details", NullValueHandling = NullValueHandling.Ignore)]
         public Models.GiftCardActivityImportReversal ImportReversalActivityDetails { get; }

@@ -30,6 +30,7 @@ namespace Square.Models
         /// <param name="appId">app_id.</param>
         /// <param name="type">type.</param>
         /// <param name="saveCardOptions">save_card_options.</param>
+        /// <param name="deviceMetadata">device_metadata.</param>
         public TerminalAction(
             string id = null,
             string deviceId = null,
@@ -40,7 +41,8 @@ namespace Square.Models
             string updatedAt = null,
             string appId = null,
             string type = null,
-            Models.SaveCardOptions saveCardOptions = null)
+            Models.SaveCardOptions saveCardOptions = null,
+            Models.DeviceMetadata deviceMetadata = null)
         {
             this.Id = id;
             this.DeviceId = deviceId;
@@ -52,6 +54,7 @@ namespace Square.Models
             this.AppId = appId;
             this.Type = type;
             this.SaveCardOptions = saveCardOptions;
+            this.DeviceMetadata = deviceMetadata;
         }
 
         /// <summary>
@@ -120,6 +123,12 @@ namespace Square.Models
         [JsonProperty("save_card_options", NullValueHandling = NullValueHandling.Ignore)]
         public Models.SaveCardOptions SaveCardOptions { get; }
 
+        /// <summary>
+        /// Gets or sets DeviceMetadata.
+        /// </summary>
+        [JsonProperty("device_metadata", NullValueHandling = NullValueHandling.Ignore)]
+        public Models.DeviceMetadata DeviceMetadata { get; }
+
         /// <inheritdoc/>
         public override string ToString()
         {
@@ -153,16 +162,17 @@ namespace Square.Models
                 ((this.UpdatedAt == null && other.UpdatedAt == null) || (this.UpdatedAt?.Equals(other.UpdatedAt) == true)) &&
                 ((this.AppId == null && other.AppId == null) || (this.AppId?.Equals(other.AppId) == true)) &&
                 ((this.Type == null && other.Type == null) || (this.Type?.Equals(other.Type) == true)) &&
-                ((this.SaveCardOptions == null && other.SaveCardOptions == null) || (this.SaveCardOptions?.Equals(other.SaveCardOptions) == true));
+                ((this.SaveCardOptions == null && other.SaveCardOptions == null) || (this.SaveCardOptions?.Equals(other.SaveCardOptions) == true)) &&
+                ((this.DeviceMetadata == null && other.DeviceMetadata == null) || (this.DeviceMetadata?.Equals(other.DeviceMetadata) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1724608928;
+            int hashCode = -1559694977;
             hashCode = HashCode.Combine(this.Id, this.DeviceId, this.DeadlineDuration, this.Status, this.CancelReason, this.CreatedAt, this.UpdatedAt);
 
-            hashCode = HashCode.Combine(hashCode, this.AppId, this.Type, this.SaveCardOptions);
+            hashCode = HashCode.Combine(hashCode, this.AppId, this.Type, this.SaveCardOptions, this.DeviceMetadata);
 
             return hashCode;
         }
@@ -183,6 +193,7 @@ namespace Square.Models
             toStringOutput.Add($"this.AppId = {(this.AppId == null ? "null" : this.AppId == string.Empty ? "" : this.AppId)}");
             toStringOutput.Add($"this.Type = {(this.Type == null ? "null" : this.Type.ToString())}");
             toStringOutput.Add($"this.SaveCardOptions = {(this.SaveCardOptions == null ? "null" : this.SaveCardOptions.ToString())}");
+            toStringOutput.Add($"this.DeviceMetadata = {(this.DeviceMetadata == null ? "null" : this.DeviceMetadata.ToString())}");
         }
 
         /// <summary>
@@ -201,7 +212,8 @@ namespace Square.Models
                 .UpdatedAt(this.UpdatedAt)
                 .AppId(this.AppId)
                 .Type(this.Type)
-                .SaveCardOptions(this.SaveCardOptions);
+                .SaveCardOptions(this.SaveCardOptions)
+                .DeviceMetadata(this.DeviceMetadata);
             return builder;
         }
 
@@ -220,6 +232,7 @@ namespace Square.Models
             private string appId;
             private string type;
             private Models.SaveCardOptions saveCardOptions;
+            private Models.DeviceMetadata deviceMetadata;
 
              /// <summary>
              /// Id.
@@ -331,6 +344,17 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// DeviceMetadata.
+             /// </summary>
+             /// <param name="deviceMetadata"> deviceMetadata. </param>
+             /// <returns> Builder. </returns>
+            public Builder DeviceMetadata(Models.DeviceMetadata deviceMetadata)
+            {
+                this.deviceMetadata = deviceMetadata;
+                return this;
+            }
+
             /// <summary>
             /// Builds class object.
             /// </summary>
@@ -347,7 +371,8 @@ namespace Square.Models
                     this.updatedAt,
                     this.appId,
                     this.type,
-                    this.saveCardOptions);
+                    this.saveCardOptions,
+                    this.deviceMetadata);
             }
         }
     }

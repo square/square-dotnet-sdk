@@ -36,6 +36,7 @@ namespace Square.Models
         /// <param name="prepaidType">prepaid_type.</param>
         /// <param name="bin">bin.</param>
         /// <param name="version">version.</param>
+        /// <param name="cardCoBrand">card_co_brand.</param>
         public Card(
             string id = null,
             string cardBrand = null,
@@ -52,7 +53,8 @@ namespace Square.Models
             string cardType = null,
             string prepaidType = null,
             string bin = null,
-            long? version = null)
+            long? version = null,
+            string cardCoBrand = null)
         {
             this.Id = id;
             this.CardBrand = cardBrand;
@@ -70,6 +72,7 @@ namespace Square.Models
             this.PrepaidType = prepaidType;
             this.Bin = bin;
             this.Version = version;
+            this.CardCoBrand = cardCoBrand;
         }
 
         /// <summary>
@@ -176,6 +179,12 @@ namespace Square.Models
         [JsonProperty("version", NullValueHandling = NullValueHandling.Ignore)]
         public long? Version { get; }
 
+        /// <summary>
+        /// Indicates the brand for a co-branded card.
+        /// </summary>
+        [JsonProperty("card_co_brand", NullValueHandling = NullValueHandling.Ignore)]
+        public string CardCoBrand { get; }
+
         /// <inheritdoc/>
         public override string ToString()
         {
@@ -215,18 +224,19 @@ namespace Square.Models
                 ((this.CardType == null && other.CardType == null) || (this.CardType?.Equals(other.CardType) == true)) &&
                 ((this.PrepaidType == null && other.PrepaidType == null) || (this.PrepaidType?.Equals(other.PrepaidType) == true)) &&
                 ((this.Bin == null && other.Bin == null) || (this.Bin?.Equals(other.Bin) == true)) &&
-                ((this.Version == null && other.Version == null) || (this.Version?.Equals(other.Version) == true));
+                ((this.Version == null && other.Version == null) || (this.Version?.Equals(other.Version) == true)) &&
+                ((this.CardCoBrand == null && other.CardCoBrand == null) || (this.CardCoBrand?.Equals(other.CardCoBrand) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1690313038;
+            int hashCode = -1800511148;
             hashCode = HashCode.Combine(this.Id, this.CardBrand, this.Last4, this.ExpMonth, this.ExpYear, this.CardholderName, this.BillingAddress);
 
             hashCode = HashCode.Combine(hashCode, this.Fingerprint, this.CustomerId, this.MerchantId, this.ReferenceId, this.Enabled, this.CardType, this.PrepaidType);
 
-            hashCode = HashCode.Combine(hashCode, this.Bin, this.Version);
+            hashCode = HashCode.Combine(hashCode, this.Bin, this.Version, this.CardCoBrand);
 
             return hashCode;
         }
@@ -253,6 +263,7 @@ namespace Square.Models
             toStringOutput.Add($"this.PrepaidType = {(this.PrepaidType == null ? "null" : this.PrepaidType.ToString())}");
             toStringOutput.Add($"this.Bin = {(this.Bin == null ? "null" : this.Bin == string.Empty ? "" : this.Bin)}");
             toStringOutput.Add($"this.Version = {(this.Version == null ? "null" : this.Version.ToString())}");
+            toStringOutput.Add($"this.CardCoBrand = {(this.CardCoBrand == null ? "null" : this.CardCoBrand.ToString())}");
         }
 
         /// <summary>
@@ -277,7 +288,8 @@ namespace Square.Models
                 .CardType(this.CardType)
                 .PrepaidType(this.PrepaidType)
                 .Bin(this.Bin)
-                .Version(this.Version);
+                .Version(this.Version)
+                .CardCoBrand(this.CardCoBrand);
             return builder;
         }
 
@@ -302,6 +314,7 @@ namespace Square.Models
             private string prepaidType;
             private string bin;
             private long? version;
+            private string cardCoBrand;
 
              /// <summary>
              /// Id.
@@ -479,6 +492,17 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// CardCoBrand.
+             /// </summary>
+             /// <param name="cardCoBrand"> cardCoBrand. </param>
+             /// <returns> Builder. </returns>
+            public Builder CardCoBrand(string cardCoBrand)
+            {
+                this.cardCoBrand = cardCoBrand;
+                return this;
+            }
+
             /// <summary>
             /// Builds class object.
             /// </summary>
@@ -501,7 +525,8 @@ namespace Square.Models
                     this.cardType,
                     this.prepaidType,
                     this.bin,
-                    this.version);
+                    this.version,
+                    this.cardCoBrand);
             }
         }
     }

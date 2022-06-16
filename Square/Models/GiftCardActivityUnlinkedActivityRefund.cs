@@ -45,16 +45,13 @@ namespace Square.Models
         public Models.Money AmountMoney { get; }
 
         /// <summary>
-        /// A client-specified ID to associate an entity, in another system, with this gift card
-        /// activity. This can be used to track the order or payment related information when the Square Payments
-        /// API is not being used.
+        /// A client-specified ID that associates the gift card activity with an entity in another system.
         /// </summary>
         [JsonProperty("reference_id", NullValueHandling = NullValueHandling.Ignore)]
         public string ReferenceId { get; }
 
         /// <summary>
-        /// When using the Square Payments API, the ID of the payment that was refunded to this gift
-        /// card.
+        /// The ID of the refunded payment. This field is not used starting in Square version 2022-06-16.
         /// </summary>
         [JsonProperty("payment_id", NullValueHandling = NullValueHandling.Ignore)]
         public string PaymentId { get; }

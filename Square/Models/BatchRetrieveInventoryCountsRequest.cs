@@ -25,18 +25,21 @@ namespace Square.Models
         /// <param name="updatedAfter">updated_after.</param>
         /// <param name="cursor">cursor.</param>
         /// <param name="states">states.</param>
+        /// <param name="limit">limit.</param>
         public BatchRetrieveInventoryCountsRequest(
             IList<string> catalogObjectIds = null,
             IList<string> locationIds = null,
             string updatedAfter = null,
             string cursor = null,
-            IList<string> states = null)
+            IList<string> states = null,
+            int? limit = null)
         {
             this.CatalogObjectIds = catalogObjectIds;
             this.LocationIds = locationIds;
             this.UpdatedAfter = updatedAfter;
             this.Cursor = cursor;
             this.States = states;
+            this.Limit = limit;
         }
 
         /// <summary>
@@ -77,6 +80,12 @@ namespace Square.Models
         [JsonProperty("states", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> States { get; }
 
+        /// <summary>
+        /// Gets or sets Limit.
+        /// </summary>
+        [JsonProperty("limit", NullValueHandling = NullValueHandling.Ignore)]
+        public int? Limit { get; }
+
         /// <inheritdoc/>
         public override string ToString()
         {
@@ -105,14 +114,15 @@ namespace Square.Models
                 ((this.LocationIds == null && other.LocationIds == null) || (this.LocationIds?.Equals(other.LocationIds) == true)) &&
                 ((this.UpdatedAfter == null && other.UpdatedAfter == null) || (this.UpdatedAfter?.Equals(other.UpdatedAfter) == true)) &&
                 ((this.Cursor == null && other.Cursor == null) || (this.Cursor?.Equals(other.Cursor) == true)) &&
-                ((this.States == null && other.States == null) || (this.States?.Equals(other.States) == true));
+                ((this.States == null && other.States == null) || (this.States?.Equals(other.States) == true)) &&
+                ((this.Limit == null && other.Limit == null) || (this.Limit?.Equals(other.Limit) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1765897747;
-            hashCode = HashCode.Combine(this.CatalogObjectIds, this.LocationIds, this.UpdatedAfter, this.Cursor, this.States);
+            int hashCode = -189950820;
+            hashCode = HashCode.Combine(this.CatalogObjectIds, this.LocationIds, this.UpdatedAfter, this.Cursor, this.States, this.Limit);
 
             return hashCode;
         }
@@ -128,6 +138,7 @@ namespace Square.Models
             toStringOutput.Add($"this.UpdatedAfter = {(this.UpdatedAfter == null ? "null" : this.UpdatedAfter == string.Empty ? "" : this.UpdatedAfter)}");
             toStringOutput.Add($"this.Cursor = {(this.Cursor == null ? "null" : this.Cursor == string.Empty ? "" : this.Cursor)}");
             toStringOutput.Add($"this.States = {(this.States == null ? "null" : $"[{string.Join(", ", this.States)} ]")}");
+            toStringOutput.Add($"this.Limit = {(this.Limit == null ? "null" : this.Limit.ToString())}");
         }
 
         /// <summary>
@@ -141,7 +152,8 @@ namespace Square.Models
                 .LocationIds(this.LocationIds)
                 .UpdatedAfter(this.UpdatedAfter)
                 .Cursor(this.Cursor)
-                .States(this.States);
+                .States(this.States)
+                .Limit(this.Limit);
             return builder;
         }
 
@@ -155,6 +167,7 @@ namespace Square.Models
             private string updatedAfter;
             private string cursor;
             private IList<string> states;
+            private int? limit;
 
              /// <summary>
              /// CatalogObjectIds.
@@ -211,6 +224,17 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// Limit.
+             /// </summary>
+             /// <param name="limit"> limit. </param>
+             /// <returns> Builder. </returns>
+            public Builder Limit(int? limit)
+            {
+                this.limit = limit;
+                return this;
+            }
+
             /// <summary>
             /// Builds class object.
             /// </summary>
@@ -222,7 +246,8 @@ namespace Square.Models
                     this.locationIds,
                     this.updatedAfter,
                     this.cursor,
-                    this.states);
+                    this.states,
+                    this.limit);
             }
         }
     }

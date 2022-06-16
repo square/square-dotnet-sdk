@@ -39,7 +39,7 @@ namespace Square.Models
         public string IdempotencyKey { get; }
 
         /// <summary>
-        /// Gets or sets Action.
+        /// Represents an action processed by the Square Terminal.
         /// </summary>
         [JsonProperty("action")]
         public Models.TerminalAction Action { get; }

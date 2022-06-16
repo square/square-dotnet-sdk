@@ -21,7 +21,7 @@ external bank account or to the Square balance.
 | `Destination` | [`Models.Destination`](../../doc/models/destination.md) | Optional | Information about the destination against which the payout was made. |
 | `Version` | `int?` | Optional | The version number, which is incremented each time an update is made to this payout record.<br>The version number helps developers receive event notifications or feeds out of order. |
 | `Type` | [`string`](../../doc/models/payout-type.md) | Optional | The type of payout: “BATCH” or “SIMPLE”.<br>BATCH payouts include a list of payout entries that can be considered settled.<br>SIMPLE payouts do not have any payout entries associated with them<br>and will show up as one of the payout entries in a future BATCH payout. |
-| `PayoutFee` | [`IList<Models.PayoutFee>`](../../doc/models/payout-fee.md) | Optional | A list of processing fees and any taxes on the fees assessed by Square for this payout. |
+| `PayoutFee` | [`IList<Models.PayoutFee>`](../../doc/models/payout-fee.md) | Optional | A list of transfer fees and any taxes on the fees assessed by Square for this payout. |
 | `ArrivalDate` | `string` | Optional | The calendar date, in ISO 8601 format (YYYY-MM-DD), when the payout is due to arrive in the seller’s banking destination. |
 
 ## Example (as JSON)

@@ -51,32 +51,37 @@ namespace Square.Models
         public Models.Money AmountMoney { get; }
 
         /// <summary>
-        /// The ID of the order associated with the activity.
-        /// This is required if your application uses the Square Orders API.
+        /// The ID of the [order]($m/Order) that contains the `GIFT_CARD` line item.
+        /// Applications that use the Square Orders API to process orders must specify the order ID
+        /// [CreateGiftCardActivity]($e/GiftCardActivities/CreateGiftCardActivity) request.
         /// </summary>
         [JsonProperty("order_id", NullValueHandling = NullValueHandling.Ignore)]
         public string OrderId { get; }
 
         /// <summary>
-        /// The `line_item_uid` of the gift card line item in an order.
-        /// This is required if your application uses the Square Orders API.
+        /// The UID of the `GIFT_CARD` line item in the order that represents the gift card purchase.
+        /// Applications that use the Square Orders API to process orders must specify the line item UID
+        /// in the [CreateGiftCardActivity]($e/GiftCardActivities/CreateGiftCardActivity) request.
         /// </summary>
         [JsonProperty("line_item_uid", NullValueHandling = NullValueHandling.Ignore)]
         public string LineItemUid { get; }
 
         /// <summary>
-        /// If your application does not use the Square Orders API, you can optionally use this field
-        /// to associate the gift card activity with a client-side entity.
+        /// A client-specified ID that associates the gift card activity with an entity in another system.
+        /// Applications that use a custom order processing system can use this field to track information
+        /// related to an order or payment.
         /// </summary>
         [JsonProperty("reference_id", NullValueHandling = NullValueHandling.Ignore)]
         public string ReferenceId { get; }
 
         /// <summary>
-        /// Required if your application does not use the Square Orders API.
-        /// This is a list of client-provided payment instrument IDs.
+        /// The payment instrument IDs used to process the gift card purchase, such as a credit card ID
+        /// or bank account ID.
+        /// Applications that use a custom order processing system must specify payment instrument IDs in
+        /// the [CreateGiftCardActivity]($e/GiftCardActivities/CreateGiftCardActivity) request.
         /// Square uses this information to perform compliance checks.
-        /// If you use the Square Orders API, Square has the necessary instrument IDs to perform necessary
-        /// compliance checks.
+        /// For applications that use the Square Orders API to process payments, Square has the necessary
+        /// instrument IDs to perform compliance checks.
         /// </summary>
         [JsonProperty("buyer_payment_instrument_ids", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> BuyerPaymentInstrumentIds { get; }

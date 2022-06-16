@@ -121,7 +121,7 @@ namespace Square.Models
         public string Type { get; }
 
         /// <summary>
-        /// A list of processing fees and any taxes on the fees assessed by Square for this payout.
+        /// A list of transfer fees and any taxes on the fees assessed by Square for this payout.
         /// </summary>
         [JsonProperty("payout_fee", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.PayoutFee> PayoutFee { get; }

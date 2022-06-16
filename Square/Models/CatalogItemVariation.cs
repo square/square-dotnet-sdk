@@ -206,14 +206,14 @@ namespace Square.Models
         /// <summary>
         /// Whether this variation can be sold. The inventory count of a sellable variation indicates
         /// the number of units available for sale. When a variation is both stockable and sellable,
-        /// its sellable inventory count can be smaller than or equal to its stocable count.
+        /// its sellable inventory count can be smaller than or equal to its stockable count.
         /// </summary>
         [JsonProperty("sellable", NullValueHandling = NullValueHandling.Ignore)]
         public bool? Sellable { get; }
 
         /// <summary>
         /// Whether stock is counted directly on this variation (TRUE) or only on its components (FALSE).
-        /// The inventory count of a stockable variation keeps track of the number of units of this variation in stock
+        /// When a variation is both stockable and sellable, the inventory count of a stockable variation keeps track of the number of units of this variation in stock
         /// and is not an indicator of the number of units of the variation that can be sold.
         /// </summary>
         [JsonProperty("stockable", NullValueHandling = NullValueHandling.Ignore)]

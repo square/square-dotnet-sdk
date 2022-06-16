@@ -28,7 +28,7 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// Gets or sets Reason.
+        /// Indicates the reason for deactivating a [gift card]($m/GiftCard).
         /// </summary>
         [JsonProperty("reason")]
         public string Reason { get; }

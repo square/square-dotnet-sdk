@@ -42,7 +42,7 @@ namespace Square.Models
         public Models.Money AmountMoney { get; }
 
         /// <summary>
-        /// Gets or sets Reason.
+        /// Indicates the reason for deducting money from a [gift card]($m/GiftCard).
         /// </summary>
         [JsonProperty("reason")]
         public string Reason { get; }
