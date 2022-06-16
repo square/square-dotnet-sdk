@@ -397,12 +397,20 @@ namespace Square.Apis
 
             var requestHeaders = new Dictionary<string, IReadOnlyCollection<string>>(StringComparer.OrdinalIgnoreCase)
             {
-                { "Content-Type", new[] { "application/json; charset=utf-8" } },
+                { "Content-Type", new[]
+                    {
+                        "application/json; charset=utf-8",
+                    }
+                },
             };
 
             var imageFileHeaders = new Dictionary<string, IReadOnlyCollection<string>>(StringComparer.OrdinalIgnoreCase)
             {
-                { "Content-Type", new[] { string.IsNullOrEmpty(imageFile.ContentType) ? "image/jpeg" : imageFile.ContentType } },
+                { "Content-Type", new[]
+                    {
+                        string.IsNullOrEmpty(imageFile.ContentType) ? "image/jpeg" : imageFile.ContentType,
+                    }
+                },
             };
 
             // append form/field parameters.

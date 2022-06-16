@@ -20,8 +20,7 @@ namespace Square.Apis
     public interface ITerminalApi
     {
         /// <summary>
-        /// Creates a Terminal action request and sends it to the specified device to take a payment.
-        /// for the requested amount.
+        /// Creates a Terminal action request and sends it to the specified device.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <returns>Returns the Models.CreateTerminalActionResponse response from the API call.</returns>
@@ -29,8 +28,7 @@ namespace Square.Apis
                 Models.CreateTerminalActionRequest body);
 
         /// <summary>
-        /// Creates a Terminal action request and sends it to the specified device to take a payment.
-        /// for the requested amount.
+        /// Creates a Terminal action request and sends it to the specified device.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>

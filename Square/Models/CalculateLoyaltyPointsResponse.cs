@@ -45,6 +45,7 @@ namespace Square.Models
 
         /// <summary>
         /// The points that the buyer can earn from a specified purchase.
+        /// This value does not include additional points earned from a loyalty promotion.
         /// </summary>
         [JsonProperty("points", NullValueHandling = NullValueHandling.Ignore)]
         public int? Points { get; }

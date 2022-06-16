@@ -246,14 +246,15 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Adds points to a loyalty account.
+        /// Adds points earned from the base loyalty program to a loyalty account.
         /// - If you are using the Orders API to manage orders, you only provide the `order_id`. .
         /// The endpoint reads the order to compute points to add to the buyer's account.
         /// - If you are not using the Orders API to manage orders, .
         /// you first perform a client-side computation to compute the points.  .
         /// For spend-based and visit-based programs, you can first call .
         /// [CalculateLoyaltyPoints]($e/Loyalty/CalculateLoyaltyPoints) to compute the points  .
-        /// that you provide to this endpoint.
+        /// that you provide to this endpoint. .
+        /// This endpoint excludes additional points earned from loyalty promotions.
         /// </summary>
         /// <param name="accountId">Required parameter: The [loyalty account]($m/LoyaltyAccount) ID to which to add the points..</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
@@ -268,14 +269,15 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Adds points to a loyalty account.
+        /// Adds points earned from the base loyalty program to a loyalty account.
         /// - If you are using the Orders API to manage orders, you only provide the `order_id`. .
         /// The endpoint reads the order to compute points to add to the buyer's account.
         /// - If you are not using the Orders API to manage orders, .
         /// you first perform a client-side computation to compute the points.  .
         /// For spend-based and visit-based programs, you can first call .
         /// [CalculateLoyaltyPoints]($e/Loyalty/CalculateLoyaltyPoints) to compute the points  .
-        /// that you provide to this endpoint.
+        /// that you provide to this endpoint. .
+        /// This endpoint excludes additional points earned from loyalty promotions.
         /// </summary>
         /// <param name="accountId">Required parameter: The [loyalty account]($m/LoyaltyAccount) ID to which to add the points..</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
@@ -637,7 +639,7 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Calculates the points a purchase earns.
+        /// Calculates the points a purchase earns from the base loyalty program.
         /// - If you are using the Orders API to manage orders, you provide the `order_id` in the request. The .
         /// endpoint calculates the points by reading the order.
         /// - If you are not using the Orders API to manage orders, you provide the purchase amount in .
@@ -659,7 +661,7 @@ namespace Square.Apis
         }
 
         /// <summary>
-        /// Calculates the points a purchase earns.
+        /// Calculates the points a purchase earns from the base loyalty program.
         /// - If you are using the Orders API to manage orders, you provide the `order_id` in the request. The .
         /// endpoint calculates the points by reading the order.
         /// - If you are not using the Orders API to manage orders, you provide the purchase amount in .

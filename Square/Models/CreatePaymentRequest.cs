@@ -26,6 +26,7 @@ namespace Square.Models
         /// <param name="tipMoney">tip_money.</param>
         /// <param name="appFeeMoney">app_fee_money.</param>
         /// <param name="delayDuration">delay_duration.</param>
+        /// <param name="delayAction">delay_action.</param>
         /// <param name="autocomplete">autocomplete.</param>
         /// <param name="orderId">order_id.</param>
         /// <param name="customerId">customer_id.</param>
@@ -48,6 +49,7 @@ namespace Square.Models
             Models.Money tipMoney = null,
             Models.Money appFeeMoney = null,
             string delayDuration = null,
+            string delayAction = null,
             bool? autocomplete = null,
             string orderId = null,
             string customerId = null,
@@ -70,6 +72,7 @@ namespace Square.Models
             this.TipMoney = tipMoney;
             this.AppFeeMoney = appFeeMoney;
             this.DelayDuration = delayDuration;
+            this.DelayAction = delayAction;
             this.Autocomplete = autocomplete;
             this.OrderId = orderId;
             this.CustomerId = customerId;
@@ -142,11 +145,11 @@ namespace Square.Models
         public Models.Money AppFeeMoney { get; }
 
         /// <summary>
-        /// The duration of time after the payment's creation when Square automatically cancels the
-        /// payment. This automatic cancellation applies only to payments that do not reach a terminal state
-        /// (COMPLETED, CANCELED, or FAILED) before the `delay_duration` time period.
-        /// This parameter should be specified as a time duration, in RFC 3339 format, with a minimum value
-        /// of 1 minute.
+        /// The duration of time after the payment's creation when Square automatically
+        /// either completes or cancels the payment depending on the `delay_action` field value.
+        /// For more information, see
+        /// [Time threshold](https://developer.squareup.com/docs/payments-api/take-payments/card-payments/delayed-capture#time-threshold).
+        /// This parameter should be specified as a time duration, in RFC 3339 format.
         /// Note: This feature is only supported for card payments. This parameter can only be set for a delayed
         /// capture payment (`autocomplete=false`).
         /// Default:
@@ -155,6 +158,15 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("delay_duration", NullValueHandling = NullValueHandling.Ignore)]
         public string DelayDuration { get; }
+
+        /// <summary>
+        /// The action to be applied to the payment when the `delay_duration` has elapsed. The action must be
+        /// CANCEL or COMPLETE. For more information, see
+        /// [Time Threshold](https://developer.squareup.com/docs/payments-api/take-payments/card-payments/delayed-capture#time-threshold).
+        /// Default: CANCEL
+        /// </summary>
+        [JsonProperty("delay_action", NullValueHandling = NullValueHandling.Ignore)]
+        public string DelayAction { get; }
 
         /// <summary>
         /// If set to `true`, this payment will be completed when possible. If
@@ -305,6 +317,7 @@ namespace Square.Models
                 ((this.TipMoney == null && other.TipMoney == null) || (this.TipMoney?.Equals(other.TipMoney) == true)) &&
                 ((this.AppFeeMoney == null && other.AppFeeMoney == null) || (this.AppFeeMoney?.Equals(other.AppFeeMoney) == true)) &&
                 ((this.DelayDuration == null && other.DelayDuration == null) || (this.DelayDuration?.Equals(other.DelayDuration) == true)) &&
+                ((this.DelayAction == null && other.DelayAction == null) || (this.DelayAction?.Equals(other.DelayAction) == true)) &&
                 ((this.Autocomplete == null && other.Autocomplete == null) || (this.Autocomplete?.Equals(other.Autocomplete) == true)) &&
                 ((this.OrderId == null && other.OrderId == null) || (this.OrderId?.Equals(other.OrderId) == true)) &&
                 ((this.CustomerId == null && other.CustomerId == null) || (this.CustomerId?.Equals(other.CustomerId) == true)) &&
@@ -325,12 +338,14 @@ namespace Square.Models
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1245154050;
-            hashCode = HashCode.Combine(this.SourceId, this.IdempotencyKey, this.AmountMoney, this.TipMoney, this.AppFeeMoney, this.DelayDuration, this.Autocomplete);
+            int hashCode = 1754918315;
+            hashCode = HashCode.Combine(this.SourceId, this.IdempotencyKey, this.AmountMoney, this.TipMoney, this.AppFeeMoney, this.DelayDuration, this.DelayAction);
 
-            hashCode = HashCode.Combine(hashCode, this.OrderId, this.CustomerId, this.LocationId, this.TeamMemberId, this.ReferenceId, this.VerificationToken, this.AcceptPartialAuthorization);
+            hashCode = HashCode.Combine(hashCode, this.Autocomplete, this.OrderId, this.CustomerId, this.LocationId, this.TeamMemberId, this.ReferenceId, this.VerificationToken);
 
-            hashCode = HashCode.Combine(hashCode, this.BuyerEmailAddress, this.BillingAddress, this.ShippingAddress, this.Note, this.StatementDescriptionIdentifier, this.CashDetails, this.ExternalDetails);
+            hashCode = HashCode.Combine(hashCode, this.AcceptPartialAuthorization, this.BuyerEmailAddress, this.BillingAddress, this.ShippingAddress, this.Note, this.StatementDescriptionIdentifier, this.CashDetails);
+
+            hashCode = HashCode.Combine(hashCode, this.ExternalDetails);
 
             return hashCode;
         }
@@ -347,6 +362,7 @@ namespace Square.Models
             toStringOutput.Add($"this.TipMoney = {(this.TipMoney == null ? "null" : this.TipMoney.ToString())}");
             toStringOutput.Add($"this.AppFeeMoney = {(this.AppFeeMoney == null ? "null" : this.AppFeeMoney.ToString())}");
             toStringOutput.Add($"this.DelayDuration = {(this.DelayDuration == null ? "null" : this.DelayDuration == string.Empty ? "" : this.DelayDuration)}");
+            toStringOutput.Add($"this.DelayAction = {(this.DelayAction == null ? "null" : this.DelayAction == string.Empty ? "" : this.DelayAction)}");
             toStringOutput.Add($"this.Autocomplete = {(this.Autocomplete == null ? "null" : this.Autocomplete.ToString())}");
             toStringOutput.Add($"this.OrderId = {(this.OrderId == null ? "null" : this.OrderId == string.Empty ? "" : this.OrderId)}");
             toStringOutput.Add($"this.CustomerId = {(this.CustomerId == null ? "null" : this.CustomerId == string.Empty ? "" : this.CustomerId)}");
@@ -377,6 +393,7 @@ namespace Square.Models
                 .TipMoney(this.TipMoney)
                 .AppFeeMoney(this.AppFeeMoney)
                 .DelayDuration(this.DelayDuration)
+                .DelayAction(this.DelayAction)
                 .Autocomplete(this.Autocomplete)
                 .OrderId(this.OrderId)
                 .CustomerId(this.CustomerId)
@@ -406,6 +423,7 @@ namespace Square.Models
             private Models.Money tipMoney;
             private Models.Money appFeeMoney;
             private string delayDuration;
+            private string delayAction;
             private bool? autocomplete;
             private string orderId;
             private string customerId;
@@ -495,6 +513,17 @@ namespace Square.Models
             public Builder DelayDuration(string delayDuration)
             {
                 this.delayDuration = delayDuration;
+                return this;
+            }
+
+             /// <summary>
+             /// DelayAction.
+             /// </summary>
+             /// <param name="delayAction"> delayAction. </param>
+             /// <returns> Builder. </returns>
+            public Builder DelayAction(string delayAction)
+            {
+                this.delayAction = delayAction;
                 return this;
             }
 
@@ -676,6 +705,7 @@ namespace Square.Models
                     this.tipMoney,
                     this.appFeeMoney,
                     this.delayDuration,
+                    this.delayAction,
                     this.autocomplete,
                     this.orderId,
                     this.customerId,
