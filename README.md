@@ -23,7 +23,7 @@ For more information, see [Install Square packages](https://developer.squareup.c
 For more information, see [Square .NET SDK Quickstart](https://developer.squareup.com/docs/sdks/dotnet/quick-start).
 
 ## Usage
-For more information, see [Using the Square .NET SDK](https://developer.com/docs/sdks/dotnet/using-dot-net-sdk).
+For more information, see [Using the Square .NET SDK](https://developer.squareup.com/docs/sdks/dotnet/using-dot-net-sdk).
 
 ## Tests
 
