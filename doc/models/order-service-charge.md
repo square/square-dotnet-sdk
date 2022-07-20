@@ -12,7 +12,7 @@ Represents a service charge applied to an order.
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `Uid` | `string` | Optional | A unique ID that identifies the service charge only within this order.<br>**Constraints**: *Maximum Length*: `60` |
-| `Name` | `string` | Optional | The name of the service charge.<br>**Constraints**: *Maximum Length*: `255` |
+| `Name` | `string` | Optional | The name of the service charge.<br>**Constraints**: *Maximum Length*: `512` |
 | `CatalogObjectId` | `string` | Optional | The catalog object ID referencing the service charge [CatalogObject](../../doc/models/catalog-object.md).<br>**Constraints**: *Maximum Length*: `192` |
 | `CatalogVersion` | `long?` | Optional | The version of the catalog object that this service charge references. |
 | `Percentage` | `string` | Optional | The service charge percentage as a string representation of a<br>decimal number. For example, `"7.25"` indicates a service charge of 7.25%.<br><br>Exactly 1 of `percentage` or `amount_money` should be set.<br>**Constraints**: *Maximum Length*: `10` |

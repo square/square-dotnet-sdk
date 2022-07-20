@@ -187,8 +187,8 @@ var body = new BatchRetrieveInventoryChangesRequest.Builder()
     .LocationIds(bodyLocationIds)
     .Types(bodyTypes)
     .States(bodyStates)
-    .UpdatedAfter("2016-11-01T00:00:00.000Z")
-    .UpdatedBefore("2016-12-01T00:00:00.000Z")
+    .UpdatedAfter("2016-11-01T00:00:00Z")
+    .UpdatedBefore("2016-12-01T00:00:00Z")
     .Build();
 
 try
@@ -231,7 +231,7 @@ bodyLocationIds.Add("59TNP9SA8VGDA");
 var body = new BatchRetrieveInventoryCountsRequest.Builder()
     .CatalogObjectIds(bodyCatalogObjectIds)
     .LocationIds(bodyLocationIds)
-    .UpdatedAfter("2016-11-16T00:00:00.000Z")
+    .UpdatedAfter("2016-11-16T00:00:00Z")
     .Build();
 
 try
@@ -341,8 +341,8 @@ var body = new BatchRetrieveInventoryChangesRequest.Builder()
     .LocationIds(bodyLocationIds)
     .Types(bodyTypes)
     .States(bodyStates)
-    .UpdatedAfter("2016-11-01T00:00:00.000Z")
-    .UpdatedBefore("2016-12-01T00:00:00.000Z")
+    .UpdatedAfter("2016-11-01T00:00:00Z")
+    .UpdatedBefore("2016-12-01T00:00:00Z")
     .Build();
 
 try
@@ -392,7 +392,7 @@ bodyLocationIds.Add("59TNP9SA8VGDA");
 var body = new BatchRetrieveInventoryCountsRequest.Builder()
     .CatalogObjectIds(bodyCatalogObjectIds)
     .LocationIds(bodyLocationIds)
-    .UpdatedAfter("2016-11-16T00:00:00.000Z")
+    .UpdatedAfter("2016-11-16T00:00:00Z")
     .Build();
 
 try

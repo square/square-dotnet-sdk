@@ -81,7 +81,7 @@ namespace Square.Models
         public IList<string> States { get; }
 
         /// <summary>
-        /// Gets or sets Limit.
+        /// The number of [records]($m/InventoryCount) to return.
         /// </summary>
         [JsonProperty("limit", NullValueHandling = NullValueHandling.Ignore)]
         public int? Limit { get; }

@@ -41,7 +41,7 @@ namespace Square.Models
         public string Status { get; }
 
         /// <summary>
-        /// The brand used for the `WALLET` payment. The brand can be `CASH_APP` or `UNKNOWN`.
+        /// The brand used for the `WALLET` payment. The brand can be `CASH_APP`, `PAYPAY` or `UNKNOWN`.
         /// </summary>
         [JsonProperty("brand", NullValueHandling = NullValueHandling.Ignore)]
         public string Brand { get; }

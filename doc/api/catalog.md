@@ -168,10 +168,10 @@ bodyBatches0Objects0ItemDataVariations.Add(bodyBatches0Objects0ItemDataVariation
 
 var bodyBatches0Objects0ItemData = new CatalogItem.Builder()
     .Name("Tea")
-    .Description("Hot Leaf Juice")
     .CategoryId("#Beverages")
     .TaxIds(bodyBatches0Objects0ItemDataTaxIds)
     .Variations(bodyBatches0Objects0ItemDataVariations)
+    .DescriptionHtml("<p><strong>Hot</strong> Leaf Juice</p>")
     .Build();
 var bodyBatches0Objects0 = new CatalogObject.Builder(
         "ITEM",
@@ -213,10 +213,10 @@ bodyBatches0Objects1ItemDataVariations.Add(bodyBatches0Objects1ItemDataVariation
 
 var bodyBatches0Objects1ItemData = new CatalogItem.Builder()
     .Name("Coffee")
-    .Description("Hot Bean Juice")
     .CategoryId("#Beverages")
     .TaxIds(bodyBatches0Objects1ItemDataTaxIds)
     .Variations(bodyBatches0Objects1ItemDataVariations)
+    .DescriptionHtml("<p>Hot <em>Bean Juice</em></p>")
     .Build();
 var bodyBatches0Objects1 = new CatalogObject.Builder(
         "ITEM",
@@ -290,7 +290,7 @@ CreateCatalogImageAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `request` | [`Models.CreateCatalogImageRequest`](../../doc/models/create-catalog-image-request.md) | Form, Optional | - |
+| `request` | [`Models.CreateCatalogImageRequest`](../../doc/models/create-catalog-image-request.md) | Form (JSON-Encoded), Optional | - |
 | `imageFile` | `FileStreamInfo` | Form, Optional | - |
 
 ## Response Type
@@ -341,7 +341,7 @@ UpdateCatalogImageAsync(
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `imageId` | `string` | Template, Required | The ID of the `CatalogImage` object to update the encapsulated image file. |
-| `request` | [`Models.UpdateCatalogImageRequest`](../../doc/models/update-catalog-image-request.md) | Form, Optional | - |
+| `request` | [`Models.UpdateCatalogImageRequest`](../../doc/models/update-catalog-image-request.md) | Form (JSON-Encoded), Optional | - |
 | `imageFile` | `FileStreamInfo` | Form, Optional | - |
 
 ## Response Type
@@ -484,9 +484,9 @@ bodyMObjectItemDataVariations.Add(bodyMObjectItemDataVariations1);
 
 var bodyMObjectItemData = new CatalogItem.Builder()
     .Name("Cocoa")
-    .Description("Hot Chocolate")
     .Abbreviation("Ch")
     .Variations(bodyMObjectItemDataVariations)
+    .DescriptionHtml("<p><strong>Hot</strong> Chocolate</p>")
     .Build();
 var bodyMObject = new CatalogObject.Builder(
         "ITEM",

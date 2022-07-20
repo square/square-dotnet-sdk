@@ -156,8 +156,8 @@ var bodyQueryFilterCreationSource = new CustomerCreationSourceFilter.Builder()
     .Rule("INCLUDE")
     .Build();
 var bodyQueryFilterCreatedAt = new TimeRange.Builder()
-    .StartAt("2018-01-01T00:00:00-00:00")
-    .EndAt("2018-02-01T00:00:00-00:00")
+    .StartAt("2018-01-01T00:00:00+00:00")
+    .EndAt("2018-02-01T00:00:00+00:00")
     .Build();
 var bodyQueryFilterEmailAddress = new CustomerTextFilter.Builder()
     .Fuzzy("example.com")

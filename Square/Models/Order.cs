@@ -50,6 +50,7 @@ namespace Square.Models
         /// <param name="ticketName">ticket_name.</param>
         /// <param name="pricingOptions">pricing_options.</param>
         /// <param name="rewards">rewards.</param>
+        /// <param name="netAmountDueMoney">net_amount_due_money.</param>
         public Order(
             string locationId,
             string id = null,
@@ -80,7 +81,8 @@ namespace Square.Models
             Models.Money totalServiceChargeMoney = null,
             string ticketName = null,
             Models.OrderPricingOptions pricingOptions = null,
-            IList<Models.OrderReward> rewards = null)
+            IList<Models.OrderReward> rewards = null,
+            Models.Money netAmountDueMoney = null)
         {
             this.Id = id;
             this.LocationId = locationId;
@@ -112,6 +114,7 @@ namespace Square.Models
             this.TicketName = ticketName;
             this.PricingOptions = pricingOptions;
             this.Rewards = rewards;
+            this.NetAmountDueMoney = netAmountDueMoney;
         }
 
         /// <summary>
@@ -363,6 +366,17 @@ namespace Square.Models
         [JsonProperty("rewards", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.OrderReward> Rewards { get; }
 
+        /// <summary>
+        /// Represents an amount of money. `Money` fields can be signed or unsigned.
+        /// Fields that do not explicitly define whether they are signed or unsigned are
+        /// considered unsigned and can only hold positive amounts. For signed fields, the
+        /// sign of the value indicates the purpose of the money transfer. See
+        /// [Working with Monetary Amounts](https://developer.squareup.com/docs/build-basics/working-with-monetary-amounts)
+        /// for more information.
+        /// </summary>
+        [JsonProperty("net_amount_due_money", NullValueHandling = NullValueHandling.Ignore)]
+        public Models.Money NetAmountDueMoney { get; }
+
         /// <inheritdoc/>
         public override string ToString()
         {
@@ -416,13 +430,14 @@ namespace Square.Models
                 ((this.TotalServiceChargeMoney == null && other.TotalServiceChargeMoney == null) || (this.TotalServiceChargeMoney?.Equals(other.TotalServiceChargeMoney) == true)) &&
                 ((this.TicketName == null && other.TicketName == null) || (this.TicketName?.Equals(other.TicketName) == true)) &&
                 ((this.PricingOptions == null && other.PricingOptions == null) || (this.PricingOptions?.Equals(other.PricingOptions) == true)) &&
-                ((this.Rewards == null && other.Rewards == null) || (this.Rewards?.Equals(other.Rewards) == true));
+                ((this.Rewards == null && other.Rewards == null) || (this.Rewards?.Equals(other.Rewards) == true)) &&
+                ((this.NetAmountDueMoney == null && other.NetAmountDueMoney == null) || (this.NetAmountDueMoney?.Equals(other.NetAmountDueMoney) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 541536520;
+            int hashCode = 656946818;
             hashCode = HashCode.Combine(this.Id, this.LocationId, this.ReferenceId, this.Source, this.CustomerId, this.LineItems, this.Taxes);
 
             hashCode = HashCode.Combine(hashCode, this.Discounts, this.ServiceCharges, this.Fulfillments, this.Returns, this.ReturnAmounts, this.NetAmounts, this.RoundingAdjustment);
@@ -431,7 +446,7 @@ namespace Square.Models
 
             hashCode = HashCode.Combine(hashCode, this.Version, this.TotalMoney, this.TotalTaxMoney, this.TotalDiscountMoney, this.TotalTipMoney, this.TotalServiceChargeMoney, this.TicketName);
 
-            hashCode = HashCode.Combine(hashCode, this.PricingOptions, this.Rewards);
+            hashCode = HashCode.Combine(hashCode, this.PricingOptions, this.Rewards, this.NetAmountDueMoney);
 
             return hashCode;
         }
@@ -472,6 +487,7 @@ namespace Square.Models
             toStringOutput.Add($"this.TicketName = {(this.TicketName == null ? "null" : this.TicketName == string.Empty ? "" : this.TicketName)}");
             toStringOutput.Add($"this.PricingOptions = {(this.PricingOptions == null ? "null" : this.PricingOptions.ToString())}");
             toStringOutput.Add($"this.Rewards = {(this.Rewards == null ? "null" : $"[{string.Join(", ", this.Rewards)} ]")}");
+            toStringOutput.Add($"this.NetAmountDueMoney = {(this.NetAmountDueMoney == null ? "null" : this.NetAmountDueMoney.ToString())}");
         }
 
         /// <summary>
@@ -510,7 +526,8 @@ namespace Square.Models
                 .TotalServiceChargeMoney(this.TotalServiceChargeMoney)
                 .TicketName(this.TicketName)
                 .PricingOptions(this.PricingOptions)
-                .Rewards(this.Rewards);
+                .Rewards(this.Rewards)
+                .NetAmountDueMoney(this.NetAmountDueMoney);
             return builder;
         }
 
@@ -549,6 +566,7 @@ namespace Square.Models
             private string ticketName;
             private Models.OrderPricingOptions pricingOptions;
             private IList<Models.OrderReward> rewards;
+            private Models.Money netAmountDueMoney;
 
             public Builder(
                 string locationId)
@@ -886,6 +904,17 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// NetAmountDueMoney.
+             /// </summary>
+             /// <param name="netAmountDueMoney"> netAmountDueMoney. </param>
+             /// <returns> Builder. </returns>
+            public Builder NetAmountDueMoney(Models.Money netAmountDueMoney)
+            {
+                this.netAmountDueMoney = netAmountDueMoney;
+                return this;
+            }
+
             /// <summary>
             /// Builds class object.
             /// </summary>
@@ -922,7 +951,8 @@ namespace Square.Models
                     this.totalServiceChargeMoney,
                     this.ticketName,
                     this.pricingOptions,
-                    this.rewards);
+                    this.rewards,
+                    this.netAmountDueMoney);
             }
         }
     }

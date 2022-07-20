@@ -24,7 +24,6 @@ namespace Square.Models
         /// <param name="schema">schema.</param>
         /// <param name="name">name.</param>
         /// <param name="description">description.</param>
-        /// <param name="sourceApplication">source_application.</param>
         /// <param name="visibility">visibility.</param>
         /// <param name="version">version.</param>
         /// <param name="updatedAt">updated_at.</param>
@@ -34,7 +33,6 @@ namespace Square.Models
             JsonObject schema = null,
             string name = null,
             string description = null,
-            Models.SourceApplication sourceApplication = null,
             string visibility = null,
             int? version = null,
             string updatedAt = null,
@@ -44,7 +42,6 @@ namespace Square.Models
             this.Schema = schema;
             this.Name = name;
             this.Description = description;
-            this.SourceApplication = sourceApplication;
             this.Visibility = visibility;
             this.Version = version;
             this.UpdatedAt = updatedAt;
@@ -91,12 +88,6 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("description", NullValueHandling = NullValueHandling.Ignore)]
         public string Description { get; }
-
-        /// <summary>
-        /// Represents information about the application used to generate a change.
-        /// </summary>
-        [JsonProperty("source_application", NullValueHandling = NullValueHandling.Ignore)]
-        public Models.SourceApplication SourceApplication { get; }
 
         /// <summary>
         /// The level of permission that a seller or other applications requires to
@@ -161,7 +152,6 @@ namespace Square.Models
                 ((this.Schema == null && other.Schema == null) || (this.Schema?.Equals(other.Schema) == true)) &&
                 ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
                 ((this.Description == null && other.Description == null) || (this.Description?.Equals(other.Description) == true)) &&
-                ((this.SourceApplication == null && other.SourceApplication == null) || (this.SourceApplication?.Equals(other.SourceApplication) == true)) &&
                 ((this.Visibility == null && other.Visibility == null) || (this.Visibility?.Equals(other.Visibility) == true)) &&
                 ((this.Version == null && other.Version == null) || (this.Version?.Equals(other.Version) == true)) &&
                 ((this.UpdatedAt == null && other.UpdatedAt == null) || (this.UpdatedAt?.Equals(other.UpdatedAt) == true)) &&
@@ -171,10 +161,10 @@ namespace Square.Models
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 2086121184;
-            hashCode = HashCode.Combine(this.Key, this.Schema, this.Name, this.Description, this.SourceApplication, this.Visibility, this.Version);
+            int hashCode = 1168711231;
+            hashCode = HashCode.Combine(this.Key, this.Schema, this.Name, this.Description, this.Visibility, this.Version, this.UpdatedAt);
 
-            hashCode = HashCode.Combine(hashCode, this.UpdatedAt, this.CreatedAt);
+            hashCode = HashCode.Combine(hashCode, this.CreatedAt);
 
             return hashCode;
         }
@@ -189,7 +179,6 @@ namespace Square.Models
             toStringOutput.Add($"Schema = {(this.Schema == null ? "null" : this.Schema.ToString())}");
             toStringOutput.Add($"this.Name = {(this.Name == null ? "null" : this.Name == string.Empty ? "" : this.Name)}");
             toStringOutput.Add($"this.Description = {(this.Description == null ? "null" : this.Description == string.Empty ? "" : this.Description)}");
-            toStringOutput.Add($"this.SourceApplication = {(this.SourceApplication == null ? "null" : this.SourceApplication.ToString())}");
             toStringOutput.Add($"this.Visibility = {(this.Visibility == null ? "null" : this.Visibility.ToString())}");
             toStringOutput.Add($"this.Version = {(this.Version == null ? "null" : this.Version.ToString())}");
             toStringOutput.Add($"this.UpdatedAt = {(this.UpdatedAt == null ? "null" : this.UpdatedAt == string.Empty ? "" : this.UpdatedAt)}");
@@ -207,7 +196,6 @@ namespace Square.Models
                 .Schema(this.Schema)
                 .Name(this.Name)
                 .Description(this.Description)
-                .SourceApplication(this.SourceApplication)
                 .Visibility(this.Visibility)
                 .Version(this.Version)
                 .UpdatedAt(this.UpdatedAt)
@@ -224,7 +212,6 @@ namespace Square.Models
             private JsonObject schema;
             private string name;
             private string description;
-            private Models.SourceApplication sourceApplication;
             private string visibility;
             private int? version;
             private string updatedAt;
@@ -271,17 +258,6 @@ namespace Square.Models
             public Builder Description(string description)
             {
                 this.description = description;
-                return this;
-            }
-
-             /// <summary>
-             /// SourceApplication.
-             /// </summary>
-             /// <param name="sourceApplication"> sourceApplication. </param>
-             /// <returns> Builder. </returns>
-            public Builder SourceApplication(Models.SourceApplication sourceApplication)
-            {
-                this.sourceApplication = sourceApplication;
                 return this;
             }
 
@@ -340,7 +316,6 @@ namespace Square.Models
                     this.schema,
                     this.name,
                     this.description,
-                    this.sourceApplication,
                     this.visibility,
                     this.version,
                     this.updatedAt,
