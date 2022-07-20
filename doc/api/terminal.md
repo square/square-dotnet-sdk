@@ -92,7 +92,7 @@ SearchTerminalActionsAsync(
 
 ```csharp
 var bodyQueryFilterCreatedAt = new TimeRange.Builder()
-    .StartAt("2022-04-01T00:00:00.000Z")
+    .StartAt("2022-04-01T00:00:00Z")
     .Build();
 var bodyQueryFilter = new TerminalActionQueryFilter.Builder()
     .CreatedAt(bodyQueryFilterCreatedAt)

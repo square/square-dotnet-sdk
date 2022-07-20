@@ -20,15 +20,15 @@ internal class BearerAuthManager : IBearerAuthCredentials, IAuthManager
         }
 
         /// <summary>
-        /// Gets accessToken.
+        /// Gets string value for accessToken.
         /// </summary>
         public string AccessToken { get; }
 
         /// <summary>
         /// Check if credentials match.
         /// </summary>
-        /// <param name="accessToken"> AccessToken.</param>
-        /// <returns> The boolean value.</returns>
+        /// <param name="accessToken"> The string value for credentials.</param>
+        /// <returns> True if credentials matched.</returns>
         public bool Equals(string accessToken)
         {
             return accessToken.Equals(this.AccessToken);

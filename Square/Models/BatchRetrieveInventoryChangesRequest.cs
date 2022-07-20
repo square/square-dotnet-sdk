@@ -102,7 +102,7 @@ namespace Square.Models
         public string Cursor { get; }
 
         /// <summary>
-        /// Gets or sets Limit.
+        /// The number of [records]($m/InventoryChange) to return.
         /// </summary>
         [JsonProperty("limit", NullValueHandling = NullValueHandling.Ignore)]
         public int? Limit { get; }

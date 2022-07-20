@@ -112,7 +112,7 @@ namespace Square.Models
         public string Note { get; }
 
         /// <summary>
-        /// The reference to the Square order ID for the checkout request.
+        /// The reference to the Square order ID for the checkout request. Supported only in the US.
         /// </summary>
         [JsonProperty("order_id", NullValueHandling = NullValueHandling.Ignore)]
         public string OrderId { get; }

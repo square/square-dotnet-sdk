@@ -36,6 +36,8 @@ namespace Square.Models
         /// <param name="itemOptions">item_options.</param>
         /// <param name="imageIds">image_ids.</param>
         /// <param name="sortName">sort_name.</param>
+        /// <param name="descriptionHtml">description_html.</param>
+        /// <param name="descriptionPlaintext">description_plaintext.</param>
         public CatalogItem(
             string name = null,
             string description = null,
@@ -52,7 +54,9 @@ namespace Square.Models
             bool? skipModifierScreen = null,
             IList<Models.CatalogItemOptionForItem> itemOptions = null,
             IList<string> imageIds = null,
-            string sortName = null)
+            string sortName = null,
+            string descriptionHtml = null,
+            string descriptionPlaintext = null)
         {
             this.Name = name;
             this.Description = description;
@@ -70,6 +74,8 @@ namespace Square.Models
             this.ItemOptions = itemOptions;
             this.ImageIds = imageIds;
             this.SortName = sortName;
+            this.DescriptionHtml = descriptionHtml;
+            this.DescriptionPlaintext = descriptionPlaintext;
         }
 
         /// <summary>
@@ -80,6 +86,11 @@ namespace Square.Models
 
         /// <summary>
         /// The item's description. This is a searchable attribute for use in applicable query filters, and its value length is of Unicode code points.
+        /// Deprecated at 2022-07-20, this field is planned to retire in 6 months. You should migrate to use `description_html` to set the description
+        /// of the [CatalogItem]($m/CatalogItem) instance.  The `description` and `description_html` field values are kept in sync. If you try to
+        /// set the both fields, the `description_html` text value overwrites the `description` value. Updates in one field are also reflected in the other,
+        /// except for when you use an early version before Square API 2022-07-20 and `description_html` is set to blank, setting the `description` value to null
+        /// does not nullify `description_html`.
         /// </summary>
         [JsonProperty("description", NullValueHandling = NullValueHandling.Ignore)]
         public string Description { get; }
@@ -185,6 +196,38 @@ namespace Square.Models
         [JsonProperty("sort_name", NullValueHandling = NullValueHandling.Ignore)]
         public string SortName { get; }
 
+        /// <summary>
+        /// The item's description as expressed in valid HTML elements. The length of this field value, including those of HTML tags,
+        /// is of Unicode points. With application query filters, the text values of the HTML elements and attributes are searchable. Invalid or
+        /// unsupported HTML elements or attributes are ignored.
+        /// Supported HTML elements include:
+        /// - `a`: Link. Supports linking to website URLs, email address, and telephone numbers.
+        /// - `b`, `strong`:  Bold text
+        /// - `br`: Line break
+        /// - `code`: Computer code
+        /// - `div`: Section
+        /// - `h1-h6`: Headings
+        /// - `i`, `em`: Italics
+        /// - `li`: List element
+        /// - `ol`: Numbered list
+        /// - `p`: Paragraph
+        /// - `ul`: Bullet list
+        /// - `u`: Underline
+        /// Supported HTML attributes include:
+        /// - `align`: Alignment of the text content
+        /// - `href`: Link destination
+        /// - `rel`: Relationship between link's target and source
+        /// - `target`: Place to open the linked document
+        /// </summary>
+        [JsonProperty("description_html", NullValueHandling = NullValueHandling.Ignore)]
+        public string DescriptionHtml { get; }
+
+        /// <summary>
+        /// A server-generated plaintext version of the `description_html` field, without formatting tags.
+        /// </summary>
+        [JsonProperty("description_plaintext", NullValueHandling = NullValueHandling.Ignore)]
+        public string DescriptionPlaintext { get; }
+
         /// <inheritdoc/>
         public override string ToString()
         {
@@ -224,18 +267,20 @@ namespace Square.Models
                 ((this.SkipModifierScreen == null && other.SkipModifierScreen == null) || (this.SkipModifierScreen?.Equals(other.SkipModifierScreen) == true)) &&
                 ((this.ItemOptions == null && other.ItemOptions == null) || (this.ItemOptions?.Equals(other.ItemOptions) == true)) &&
                 ((this.ImageIds == null && other.ImageIds == null) || (this.ImageIds?.Equals(other.ImageIds) == true)) &&
-                ((this.SortName == null && other.SortName == null) || (this.SortName?.Equals(other.SortName) == true));
+                ((this.SortName == null && other.SortName == null) || (this.SortName?.Equals(other.SortName) == true)) &&
+                ((this.DescriptionHtml == null && other.DescriptionHtml == null) || (this.DescriptionHtml?.Equals(other.DescriptionHtml) == true)) &&
+                ((this.DescriptionPlaintext == null && other.DescriptionPlaintext == null) || (this.DescriptionPlaintext?.Equals(other.DescriptionPlaintext) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -2045483367;
+            int hashCode = -135597555;
             hashCode = HashCode.Combine(this.Name, this.Description, this.Abbreviation, this.LabelColor, this.AvailableOnline, this.AvailableForPickup, this.AvailableElectronically);
 
             hashCode = HashCode.Combine(hashCode, this.CategoryId, this.TaxIds, this.ModifierListInfo, this.Variations, this.ProductType, this.SkipModifierScreen, this.ItemOptions);
 
-            hashCode = HashCode.Combine(hashCode, this.ImageIds, this.SortName);
+            hashCode = HashCode.Combine(hashCode, this.ImageIds, this.SortName, this.DescriptionHtml, this.DescriptionPlaintext);
 
             return hashCode;
         }
@@ -262,6 +307,8 @@ namespace Square.Models
             toStringOutput.Add($"this.ItemOptions = {(this.ItemOptions == null ? "null" : $"[{string.Join(", ", this.ItemOptions)} ]")}");
             toStringOutput.Add($"this.ImageIds = {(this.ImageIds == null ? "null" : $"[{string.Join(", ", this.ImageIds)} ]")}");
             toStringOutput.Add($"this.SortName = {(this.SortName == null ? "null" : this.SortName == string.Empty ? "" : this.SortName)}");
+            toStringOutput.Add($"this.DescriptionHtml = {(this.DescriptionHtml == null ? "null" : this.DescriptionHtml == string.Empty ? "" : this.DescriptionHtml)}");
+            toStringOutput.Add($"this.DescriptionPlaintext = {(this.DescriptionPlaintext == null ? "null" : this.DescriptionPlaintext == string.Empty ? "" : this.DescriptionPlaintext)}");
         }
 
         /// <summary>
@@ -286,7 +333,9 @@ namespace Square.Models
                 .SkipModifierScreen(this.SkipModifierScreen)
                 .ItemOptions(this.ItemOptions)
                 .ImageIds(this.ImageIds)
-                .SortName(this.SortName);
+                .SortName(this.SortName)
+                .DescriptionHtml(this.DescriptionHtml)
+                .DescriptionPlaintext(this.DescriptionPlaintext);
             return builder;
         }
 
@@ -311,6 +360,8 @@ namespace Square.Models
             private IList<Models.CatalogItemOptionForItem> itemOptions;
             private IList<string> imageIds;
             private string sortName;
+            private string descriptionHtml;
+            private string descriptionPlaintext;
 
              /// <summary>
              /// Name.
@@ -488,6 +539,28 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// DescriptionHtml.
+             /// </summary>
+             /// <param name="descriptionHtml"> descriptionHtml. </param>
+             /// <returns> Builder. </returns>
+            public Builder DescriptionHtml(string descriptionHtml)
+            {
+                this.descriptionHtml = descriptionHtml;
+                return this;
+            }
+
+             /// <summary>
+             /// DescriptionPlaintext.
+             /// </summary>
+             /// <param name="descriptionPlaintext"> descriptionPlaintext. </param>
+             /// <returns> Builder. </returns>
+            public Builder DescriptionPlaintext(string descriptionPlaintext)
+            {
+                this.descriptionPlaintext = descriptionPlaintext;
+                return this;
+            }
+
             /// <summary>
             /// Builds class object.
             /// </summary>
@@ -510,7 +583,9 @@ namespace Square.Models
                     this.skipModifierScreen,
                     this.itemOptions,
                     this.imageIds,
-                    this.sortName);
+                    this.sortName,
+                    this.descriptionHtml,
+                    this.descriptionPlaintext);
             }
         }
     }

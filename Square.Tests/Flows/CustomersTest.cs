@@ -158,7 +158,6 @@ namespace Square.Tests.Flows
             Assert.AreEqual(CUSTOM_ATTRIBUTE_KEY, response.CustomAttributeDefinition.Key);
             Assert.AreEqual("Favorite Drink", response.CustomAttributeDefinition.Name);
             Assert.AreEqual("The customer's favorite drink", response.CustomAttributeDefinition.Description);
-            Assert.NotNull(response.CustomAttributeDefinition.SourceApplication?.ApplicationId);
             Assert.AreEqual("VISIBILITY_READ_WRITE_VALUES", response.CustomAttributeDefinition.Visibility);
             Assert.AreEqual(1, response.CustomAttributeDefinition.Version);
             Assert.AreEqual("{\"$ref\":\"https://developer-production-s.squarecdn.com/schemas/v1/common.json#squareup.common.String\"}", response.CustomAttributeDefinition.Schema.ToString());

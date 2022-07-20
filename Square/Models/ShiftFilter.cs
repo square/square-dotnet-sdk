@@ -21,20 +21,20 @@ namespace Square.Models
         /// Initializes a new instance of the <see cref="ShiftFilter"/> class.
         /// </summary>
         /// <param name="locationIds">location_ids.</param>
-        /// <param name="teamMemberIds">team_member_ids.</param>
         /// <param name="employeeIds">employee_ids.</param>
         /// <param name="status">status.</param>
         /// <param name="start">start.</param>
         /// <param name="end">end.</param>
         /// <param name="workday">workday.</param>
+        /// <param name="teamMemberIds">team_member_ids.</param>
         public ShiftFilter(
-            IList<string> locationIds,
-            IList<string> teamMemberIds,
+            IList<string> locationIds = null,
             IList<string> employeeIds = null,
             string status = null,
             Models.TimeRange start = null,
             Models.TimeRange end = null,
-            Models.ShiftWorkday workday = null)
+            Models.ShiftWorkday workday = null,
+            IList<string> teamMemberIds = null)
         {
             this.LocationIds = locationIds;
             this.EmployeeIds = employeeIds;
@@ -48,7 +48,7 @@ namespace Square.Models
         /// <summary>
         /// Fetch shifts for the specified location.
         /// </summary>
-        [JsonProperty("location_ids")]
+        [JsonProperty("location_ids", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> LocationIds { get; }
 
         /// <summary>
@@ -93,7 +93,7 @@ namespace Square.Models
         /// <summary>
         /// Fetch shifts for the specified team members. Replaced `employee_ids` at version "2020-08-26".
         /// </summary>
-        [JsonProperty("team_member_ids")]
+        [JsonProperty("team_member_ids", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> TeamMemberIds { get; }
 
         /// <inheritdoc/>
@@ -159,14 +159,14 @@ namespace Square.Models
         /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
-            var builder = new Builder(
-                this.LocationIds,
-                this.TeamMemberIds)
+            var builder = new Builder()
+                .LocationIds(this.LocationIds)
                 .EmployeeIds(this.EmployeeIds)
                 .Status(this.Status)
                 .Start(this.Start)
                 .End(this.End)
-                .Workday(this.Workday);
+                .Workday(this.Workday)
+                .TeamMemberIds(this.TeamMemberIds);
             return builder;
         }
 
@@ -176,20 +176,12 @@ namespace Square.Models
         public class Builder
         {
             private IList<string> locationIds;
-            private IList<string> teamMemberIds;
             private IList<string> employeeIds;
             private string status;
             private Models.TimeRange start;
             private Models.TimeRange end;
             private Models.ShiftWorkday workday;
-
-            public Builder(
-                IList<string> locationIds,
-                IList<string> teamMemberIds)
-            {
-                this.locationIds = locationIds;
-                this.teamMemberIds = teamMemberIds;
-            }
+            private IList<string> teamMemberIds;
 
              /// <summary>
              /// LocationIds.
@@ -199,17 +191,6 @@ namespace Square.Models
             public Builder LocationIds(IList<string> locationIds)
             {
                 this.locationIds = locationIds;
-                return this;
-            }
-
-             /// <summary>
-             /// TeamMemberIds.
-             /// </summary>
-             /// <param name="teamMemberIds"> teamMemberIds. </param>
-             /// <returns> Builder. </returns>
-            public Builder TeamMemberIds(IList<string> teamMemberIds)
-            {
-                this.teamMemberIds = teamMemberIds;
                 return this;
             }
 
@@ -268,6 +249,17 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// TeamMemberIds.
+             /// </summary>
+             /// <param name="teamMemberIds"> teamMemberIds. </param>
+             /// <returns> Builder. </returns>
+            public Builder TeamMemberIds(IList<string> teamMemberIds)
+            {
+                this.teamMemberIds = teamMemberIds;
+                return this;
+            }
+
             /// <summary>
             /// Builds class object.
             /// </summary>
@@ -276,12 +268,12 @@ namespace Square.Models
             {
                 return new ShiftFilter(
                     this.locationIds,
-                    this.teamMemberIds,
                     this.employeeIds,
                     this.status,
                     this.start,
                     this.end,
-                    this.workday);
+                    this.workday,
+                    this.teamMemberIds);
             }
         }
     }

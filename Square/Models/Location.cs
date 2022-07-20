@@ -170,7 +170,7 @@ namespace Square.Models
         /// <summary>
         /// The language associated with the location, in
         /// [BCP 47 format](https://tools.ietf.org/html/bcp47#appendix-A).
-        /// For more information, see [Location language code](https://developer.squareup.com/docs/locations-api#location-language-code).
+        /// For more information, see [Language Preferences](https://developer.squareup.com/docs/build-basics/general-considerations/language-preferences).
         /// </summary>
         [JsonProperty("language_code", NullValueHandling = NullValueHandling.Ignore)]
         public string LanguageCode { get; }

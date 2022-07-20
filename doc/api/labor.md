@@ -347,19 +347,19 @@ var bodyShiftWage = new ShiftWage.Builder()
 var bodyShiftBreaks = new List<Break>();
 
 var bodyShiftBreaks0 = new Break.Builder(
-        "2019-01-25T06:11:00-05:00",
+        "2019-01-25T11:11:00+00:00",
         "REGS1EQR1TPZ5",
         "Tea Break",
         "PT5M",
         true)
-    .EndAt("2019-01-25T06:16:00-05:00")
+    .EndAt("2019-01-25T11:16:00+00:00")
     .Build();
 bodyShiftBreaks.Add(bodyShiftBreaks0);
 
 var bodyShift = new Shift.Builder(
-        "2019-01-25T03:11:00-05:00")
+        "2019-01-25T08:11:00+00:00")
     .LocationId("PAA1RJZZKXBFG")
-    .EndAt("2019-01-25T13:11:00-05:00")
+    .EndAt("2019-01-25T18:11:00+00:00")
     .Wage(bodyShiftWage)
     .Breaks(bodyShiftBreaks)
     .TeamMemberId("ormj0jJJZ5OZIzxrZYJI")
@@ -414,7 +414,24 @@ SearchShiftsAsync(
 ## Example Usage
 
 ```csharp
+var bodyQueryFilterWorkdayDateRange = new DateRange.Builder()
+    .StartDate("2019-01-20")
+    .EndDate("2019-02-03")
+    .Build();
+var bodyQueryFilterWorkday = new ShiftWorkday.Builder()
+    .DateRange(bodyQueryFilterWorkdayDateRange)
+    .MatchShiftsBy("START_AT")
+    .DefaultTimezone("America/Los_Angeles")
+    .Build();
+var bodyQueryFilter = new ShiftFilter.Builder()
+    .Workday(bodyQueryFilterWorkday)
+    .Build();
+var bodyQuery = new ShiftQuery.Builder()
+    .Filter(bodyQueryFilter)
+    .Build();
 var body = new SearchShiftsRequest.Builder()
+    .Query(bodyQuery)
+    .Limit(100)
     .Build();
 
 try
@@ -531,20 +548,20 @@ var bodyShiftWage = new ShiftWage.Builder()
 var bodyShiftBreaks = new List<Break>();
 
 var bodyShiftBreaks0 = new Break.Builder(
-        "2019-01-25T06:11:00-05:00",
+        "2019-01-25T11:11:00+00:00",
         "REGS1EQR1TPZ5",
         "Tea Break",
         "PT5M",
         true)
     .Id("X7GAQYVVRRG6P")
-    .EndAt("2019-01-25T06:16:00-05:00")
+    .EndAt("2019-01-25T11:16:00+00:00")
     .Build();
 bodyShiftBreaks.Add(bodyShiftBreaks0);
 
 var bodyShift = new Shift.Builder(
-        "2019-01-25T03:11:00-05:00")
+        "2019-01-25T08:11:00+00:00")
     .LocationId("PAA1RJZZKXBFG")
-    .EndAt("2019-01-25T13:11:00-05:00")
+    .EndAt("2019-01-25T18:11:00+00:00")
     .Wage(bodyShiftWage)
     .Breaks(bodyShiftBreaks)
     .Version(1)

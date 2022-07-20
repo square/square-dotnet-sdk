@@ -21,7 +21,7 @@ namespace Square.Exceptions
         /// </summary>
         /// <param name="reason"> The reason for throwing exception.</param>
         /// <param name="context"> The HTTP context that encapsulates request and response objects.</param>
-        public ApiException(string reason, HttpContext context)
+        public ApiException(string reason, HttpContext context = null)
             : base(reason)
         {
             this.HttpContext = context;

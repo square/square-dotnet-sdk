@@ -16,5 +16,5 @@ This is the base class for all exceptions that represent an error response from 
 
 | Name | Description |
 |  --- | --- |
-| `ApiException(string reason, HttpContext context)` | Initializes a new instance of the <see cref="ApiException"/> class. |
+| `ApiException(string reason, HttpContext context = null)` | Initializes a new instance of the <see cref="ApiException"/> class. |
 

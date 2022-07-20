@@ -70,7 +70,7 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// Contains information about the recipient of a fulfillment.
+        /// Information about the fulfillment recipient.
         /// </summary>
         [JsonProperty("recipient", NullValueHandling = NullValueHandling.Ignore)]
         public Models.OrderFulfillmentRecipient Recipient { get; }

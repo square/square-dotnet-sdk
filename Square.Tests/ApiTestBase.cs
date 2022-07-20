@@ -38,8 +38,9 @@ namespace Square
         [OneTimeSetUp]
         public void SetUp()
         {
+            SquareClient config = SquareClient.CreateFromEnvironment();
             this.HttpCallBackHandler = new HttpCallBack();
-            this.Client = SquareClient.CreateFromEnvironment().ToBuilder()
+            this.Client = config.ToBuilder()
                 .HttpCallBack(this.HttpCallBackHandler)
                 .Build();
         }

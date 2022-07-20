@@ -79,7 +79,7 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// Contains information about the recipient of a fulfillment.
+        /// Information about the fulfillment recipient.
         /// </summary>
         [JsonProperty("recipient", NullValueHandling = NullValueHandling.Ignore)]
         public Models.OrderFulfillmentRecipient Recipient { get; }
@@ -135,7 +135,7 @@ namespace Square.Models
         public string PrepTimeDuration { get; }
 
         /// <summary>
-        /// A note meant to provide additional instructions about the pickup
+        /// A note to provide additional instructions about the pickup
         /// fulfillment displayed in the Square Point of Sale application and set by the API.
         /// </summary>
         [JsonProperty("note", NullValueHandling = NullValueHandling.Ignore)]
