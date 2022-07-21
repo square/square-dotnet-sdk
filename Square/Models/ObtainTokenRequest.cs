@@ -29,6 +29,7 @@ namespace Square.Models
         /// <param name="migrationToken">migration_token.</param>
         /// <param name="scopes">scopes.</param>
         /// <param name="shortLived">short_lived.</param>
+        /// <param name="codeVerifier">code_verifier.</param>
         public ObtainTokenRequest(
             string clientId,
             string clientSecret,
@@ -38,7 +39,8 @@ namespace Square.Models
             string refreshToken = null,
             string migrationToken = null,
             IList<string> scopes = null,
-            bool? shortLived = null)
+            bool? shortLived = null,
+            string codeVerifier = null)
         {
             this.ClientId = clientId;
             this.ClientSecret = clientSecret;
@@ -49,6 +51,7 @@ namespace Square.Models
             this.MigrationToken = migrationToken;
             this.Scopes = scopes;
             this.ShortLived = shortLived;
+            this.CodeVerifier = codeVerifier;
         }
 
         /// <summary>
@@ -121,6 +124,13 @@ namespace Square.Models
         [JsonProperty("short_lived", NullValueHandling = NullValueHandling.Ignore)]
         public bool? ShortLived { get; }
 
+        /// <summary>
+        /// Must be provided when using PKCE OAuth flow. The `code_verifier` will be used to verify against the
+        /// `code_challenge` associated with the `authorization_code`.
+        /// </summary>
+        [JsonProperty("code_verifier", NullValueHandling = NullValueHandling.Ignore)]
+        public string CodeVerifier { get; }
+
         /// <inheritdoc/>
         public override string ToString()
         {
@@ -153,16 +163,17 @@ namespace Square.Models
                 ((this.RefreshToken == null && other.RefreshToken == null) || (this.RefreshToken?.Equals(other.RefreshToken) == true)) &&
                 ((this.MigrationToken == null && other.MigrationToken == null) || (this.MigrationToken?.Equals(other.MigrationToken) == true)) &&
                 ((this.Scopes == null && other.Scopes == null) || (this.Scopes?.Equals(other.Scopes) == true)) &&
-                ((this.ShortLived == null && other.ShortLived == null) || (this.ShortLived?.Equals(other.ShortLived) == true));
+                ((this.ShortLived == null && other.ShortLived == null) || (this.ShortLived?.Equals(other.ShortLived) == true)) &&
+                ((this.CodeVerifier == null && other.CodeVerifier == null) || (this.CodeVerifier?.Equals(other.CodeVerifier) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -994318680;
+            int hashCode = -798532521;
             hashCode = HashCode.Combine(this.ClientId, this.ClientSecret, this.Code, this.RedirectUri, this.GrantType, this.RefreshToken, this.MigrationToken);
 
-            hashCode = HashCode.Combine(hashCode, this.Scopes, this.ShortLived);
+            hashCode = HashCode.Combine(hashCode, this.Scopes, this.ShortLived, this.CodeVerifier);
 
             return hashCode;
         }
@@ -182,6 +193,7 @@ namespace Square.Models
             toStringOutput.Add($"this.MigrationToken = {(this.MigrationToken == null ? "null" : this.MigrationToken == string.Empty ? "" : this.MigrationToken)}");
             toStringOutput.Add($"this.Scopes = {(this.Scopes == null ? "null" : $"[{string.Join(", ", this.Scopes)} ]")}");
             toStringOutput.Add($"this.ShortLived = {(this.ShortLived == null ? "null" : this.ShortLived.ToString())}");
+            toStringOutput.Add($"this.CodeVerifier = {(this.CodeVerifier == null ? "null" : this.CodeVerifier == string.Empty ? "" : this.CodeVerifier)}");
         }
 
         /// <summary>
@@ -199,7 +211,8 @@ namespace Square.Models
                 .RefreshToken(this.RefreshToken)
                 .MigrationToken(this.MigrationToken)
                 .Scopes(this.Scopes)
-                .ShortLived(this.ShortLived);
+                .ShortLived(this.ShortLived)
+                .CodeVerifier(this.CodeVerifier);
             return builder;
         }
 
@@ -217,6 +230,7 @@ namespace Square.Models
             private string migrationToken;
             private IList<string> scopes;
             private bool? shortLived;
+            private string codeVerifier;
 
             public Builder(
                 string clientId,
@@ -327,6 +341,17 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// CodeVerifier.
+             /// </summary>
+             /// <param name="codeVerifier"> codeVerifier. </param>
+             /// <returns> Builder. </returns>
+            public Builder CodeVerifier(string codeVerifier)
+            {
+                this.codeVerifier = codeVerifier;
+                return this;
+            }
+
             /// <summary>
             /// Builds class object.
             /// </summary>
@@ -342,7 +367,8 @@ namespace Square.Models
                     this.refreshToken,
                     this.migrationToken,
                     this.scopes,
-                    this.shortLived);
+                    this.shortLived,
+                    this.codeVerifier);
             }
         }
     }
