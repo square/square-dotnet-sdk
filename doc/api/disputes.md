@@ -37,8 +37,8 @@ ListDisputesAsync(
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `cursor` | `string` | Query, Optional | A pagination cursor returned by a previous call to this endpoint.<br>Provide this cursor to retrieve the next set of results for the original query.<br>For more information, see [Pagination](https://developer.squareup.com/docs/basics/api101/pagination). |
-| `states` | [`string`](../../doc/models/dispute-state.md) | Query, Optional | The dispute states to filter the result.<br>If not specified, the endpoint returns all open disputes (the dispute status is not `INQUIRY_CLOSED`, `WON`,<br>or `LOST`). |
-| `locationId` | `string` | Query, Optional | The ID of the location for which to return a list of disputes. If not specified, the endpoint returns<br>all open disputes (the dispute status is not `INQUIRY_CLOSED`, `WON`, or `LOST`) associated with all locations. |
+| `states` | [`string`](../../doc/models/dispute-state.md) | Query, Optional | The dispute states used to filter the result. If not specified, the endpoint returns all disputes. |
+| `locationId` | `string` | Query, Optional | The ID of the location for which to return a list of disputes.<br>If not specified, the endpoint returns disputes associated with all locations. |
 
 ## Response Type
 
@@ -138,7 +138,7 @@ ListDisputeEvidenceAsync(
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `disputeId` | `string` | Template, Required | The ID of the dispute. |
-| `cursor` | `string` | Query, Optional | A pagination cursor returned by a previous call to this endpoint.<br>Provide this cursor to retrieve the next set of results for the original query.<br>For more information, see [Pagination](https://developer.squareup.com/docs/basics/api101/pagination). |
+| `cursor` | `string` | Query, Optional | A pagination cursor returned by a previous call to this endpoint.<br>Provide this cursor to retrieve the next set of results for the original query.<br>For more information, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination). |
 
 ## Response Type
 
@@ -173,7 +173,7 @@ CreateDisputeEvidenceFileAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `disputeId` | `string` | Template, Required | The ID of the dispute you want to upload evidence for. |
+| `disputeId` | `string` | Template, Required | The ID of the dispute for which you want to upload evidence. |
 | `request` | [`Models.CreateDisputeEvidenceFileRequest`](../../doc/models/create-dispute-evidence-file-request.md) | Form (JSON-Encoded), Optional | Defines the parameters for a `CreateDisputeEvidenceFile` request. |
 | `imageFile` | `FileStreamInfo` | Form, Optional | - |
 
@@ -208,7 +208,7 @@ CreateDisputeEvidenceTextAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `disputeId` | `string` | Template, Required | The ID of the dispute you want to upload evidence for. |
+| `disputeId` | `string` | Template, Required | The ID of the dispute for which you want to upload evidence. |
 | `body` | [`Models.CreateDisputeEvidenceTextRequest`](../../doc/models/create-dispute-evidence-text-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
@@ -236,9 +236,7 @@ catch (ApiException e){};
 # Delete Dispute Evidence
 
 Removes specified evidence from a dispute.
-
-Square does not send the bank any evidence that is removed. Also, you cannot remove evidence after
-submitting it to the bank using [SubmitEvidence](../../doc/api/disputes.md#submit-evidence).
+Square does not send the bank any evidence that is removed.
 
 ```csharp
 DeleteDisputeEvidenceAsync(
@@ -250,7 +248,7 @@ DeleteDisputeEvidenceAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `disputeId` | `string` | Template, Required | The ID of the dispute you want to remove evidence from. |
+| `disputeId` | `string` | Template, Required | The ID of the dispute from which you want to remove evidence. |
 | `evidenceId` | `string` | Template, Required | The ID of the evidence you want to remove. |
 
 ## Response Type
@@ -273,10 +271,9 @@ catch (ApiException e){};
 
 # Retrieve Dispute Evidence
 
-Returns the evidence metadata specified by the evidence ID in the request URL path
+Returns the metadata for the evidence specified in the request URL path.
 
-You must maintain a copy of the evidence you upload if you want to reference it later. You cannot
-download the evidence after you upload it.
+You must maintain a copy of any evidence uploaded if you want to reference it later. Evidence cannot be downloaded after you upload it.
 
 ```csharp
 RetrieveDisputeEvidenceAsync(
@@ -288,7 +285,7 @@ RetrieveDisputeEvidenceAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `disputeId` | `string` | Template, Required | The ID of the dispute that you want to retrieve evidence from. |
+| `disputeId` | `string` | Template, Required | The ID of the dispute from which you want to retrieve evidence metadata. |
 | `evidenceId` | `string` | Template, Required | The ID of the evidence to retrieve. |
 
 ## Response Type
@@ -313,10 +310,11 @@ catch (ApiException e){};
 
 Submits evidence to the cardholder's bank.
 
-Before submitting evidence, Square compiles all available evidence. This includes evidence uploaded
+The evidence submitted by this endpoint includes evidence uploaded
 using the [CreateDisputeEvidenceFile](../../doc/api/disputes.md#create-dispute-evidence-file) and
 [CreateDisputeEvidenceText](../../doc/api/disputes.md#create-dispute-evidence-text) endpoints and
-evidence automatically provided by Square, when available.
+evidence automatically provided by Square, when available. Evidence cannot be removed from
+a dispute after submission.
 
 ```csharp
 SubmitEvidenceAsync(
@@ -327,7 +325,7 @@ SubmitEvidenceAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `disputeId` | `string` | Template, Required | The ID of the dispute that you want to submit evidence for. |
+| `disputeId` | `string` | Template, Required | The ID of the dispute for which you want to submit evidence. |
 
 ## Response Type
 

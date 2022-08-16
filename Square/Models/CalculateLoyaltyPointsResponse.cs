@@ -23,12 +23,15 @@ namespace Square.Models
         /// </summary>
         /// <param name="errors">errors.</param>
         /// <param name="points">points.</param>
+        /// <param name="promotionPoints">promotion_points.</param>
         public CalculateLoyaltyPointsResponse(
             IList<Models.Error> errors = null,
-            int? points = null)
+            int? points = null,
+            int? promotionPoints = null)
         {
             this.Errors = errors;
             this.Points = points;
+            this.PromotionPoints = promotionPoints;
         }
 
         /// <summary>
@@ -44,11 +47,18 @@ namespace Square.Models
         public IList<Models.Error> Errors { get; }
 
         /// <summary>
-        /// The points that the buyer can earn from a specified purchase.
-        /// This value does not include additional points earned from a loyalty promotion.
+        /// The number of points that the buyer can earn from the base loyalty program.
         /// </summary>
         [JsonProperty("points", NullValueHandling = NullValueHandling.Ignore)]
         public int? Points { get; }
+
+        /// <summary>
+        /// The number of points that the buyer can earn from a loyalty promotion. To be eligible
+        /// to earn promotion points, the purchase must first qualify for program points. When `order_id`
+        /// is not provided in the request, this value is always 0.
+        /// </summary>
+        [JsonProperty("promotion_points", NullValueHandling = NullValueHandling.Ignore)]
+        public int? PromotionPoints { get; }
 
         /// <inheritdoc/>
         public override string ToString()
@@ -76,19 +86,20 @@ namespace Square.Models
             return obj is CalculateLoyaltyPointsResponse other &&
                 ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
                 ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true)) &&
-                ((this.Points == null && other.Points == null) || (this.Points?.Equals(other.Points) == true));
+                ((this.Points == null && other.Points == null) || (this.Points?.Equals(other.Points) == true)) &&
+                ((this.PromotionPoints == null && other.PromotionPoints == null) || (this.PromotionPoints?.Equals(other.PromotionPoints) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -109320925;
+            int hashCode = 1658359664;
 
             if (this.Context != null)
             {
                 hashCode += this.Context.GetHashCode();
             }
-            hashCode = HashCode.Combine(this.Errors, this.Points);
+            hashCode = HashCode.Combine(this.Errors, this.Points, this.PromotionPoints);
 
             return hashCode;
         }
@@ -101,6 +112,7 @@ namespace Square.Models
         {
             toStringOutput.Add($"this.Errors = {(this.Errors == null ? "null" : $"[{string.Join(", ", this.Errors)} ]")}");
             toStringOutput.Add($"this.Points = {(this.Points == null ? "null" : this.Points.ToString())}");
+            toStringOutput.Add($"this.PromotionPoints = {(this.PromotionPoints == null ? "null" : this.PromotionPoints.ToString())}");
         }
 
         /// <summary>
@@ -111,7 +123,8 @@ namespace Square.Models
         {
             var builder = new Builder()
                 .Errors(this.Errors)
-                .Points(this.Points);
+                .Points(this.Points)
+                .PromotionPoints(this.PromotionPoints);
             return builder;
         }
 
@@ -122,6 +135,7 @@ namespace Square.Models
         {
             private IList<Models.Error> errors;
             private int? points;
+            private int? promotionPoints;
 
              /// <summary>
              /// Errors.
@@ -145,6 +159,17 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// PromotionPoints.
+             /// </summary>
+             /// <param name="promotionPoints"> promotionPoints. </param>
+             /// <returns> Builder. </returns>
+            public Builder PromotionPoints(int? promotionPoints)
+            {
+                this.promotionPoints = promotionPoints;
+                return this;
+            }
+
             /// <summary>
             /// Builds class object.
             /// </summary>
@@ -153,7 +178,8 @@ namespace Square.Models
             {
                 return new CalculateLoyaltyPointsResponse(
                     this.errors,
-                    this.points);
+                    this.points,
+                    this.promotionPoints);
             }
         }
     }

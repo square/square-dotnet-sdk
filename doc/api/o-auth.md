@@ -174,8 +174,8 @@ ObtainTokenAsync(
 ```csharp
 var body = new ObtainTokenRequest.Builder(
         "APPLICATION_ID",
-        "APPLICATION_SECRET",
         "authorization_code")
+    .ClientSecret("APPLICATION_SECRET")
     .Code("CODE_FROM_AUTHORIZE")
     .Build();
 

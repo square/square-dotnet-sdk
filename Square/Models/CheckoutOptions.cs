@@ -27,6 +27,8 @@ namespace Square.Models
         /// <param name="merchantSupportEmail">merchant_support_email.</param>
         /// <param name="askForShippingAddress">ask_for_shipping_address.</param>
         /// <param name="acceptedPaymentMethods">accepted_payment_methods.</param>
+        /// <param name="appFeeMoney">app_fee_money.</param>
+        /// <param name="shippingFee">shipping_fee.</param>
         public CheckoutOptions(
             bool? allowTipping = null,
             IList<Models.CustomField> customFields = null,
@@ -34,7 +36,9 @@ namespace Square.Models
             string redirectUrl = null,
             string merchantSupportEmail = null,
             bool? askForShippingAddress = null,
-            Models.AcceptedPaymentMethods acceptedPaymentMethods = null)
+            Models.AcceptedPaymentMethods acceptedPaymentMethods = null,
+            Models.Money appFeeMoney = null,
+            Models.ShippingFee shippingFee = null)
         {
             this.AllowTipping = allowTipping;
             this.CustomFields = customFields;
@@ -43,6 +47,8 @@ namespace Square.Models
             this.MerchantSupportEmail = merchantSupportEmail;
             this.AskForShippingAddress = askForShippingAddress;
             this.AcceptedPaymentMethods = acceptedPaymentMethods;
+            this.AppFeeMoney = appFeeMoney;
+            this.ShippingFee = shippingFee;
         }
 
         /// <summary>
@@ -88,6 +94,23 @@ namespace Square.Models
         [JsonProperty("accepted_payment_methods", NullValueHandling = NullValueHandling.Ignore)]
         public Models.AcceptedPaymentMethods AcceptedPaymentMethods { get; }
 
+        /// <summary>
+        /// Represents an amount of money. `Money` fields can be signed or unsigned.
+        /// Fields that do not explicitly define whether they are signed or unsigned are
+        /// considered unsigned and can only hold positive amounts. For signed fields, the
+        /// sign of the value indicates the purpose of the money transfer. See
+        /// [Working with Monetary Amounts](https://developer.squareup.com/docs/build-basics/working-with-monetary-amounts)
+        /// for more information.
+        /// </summary>
+        [JsonProperty("app_fee_money", NullValueHandling = NullValueHandling.Ignore)]
+        public Models.Money AppFeeMoney { get; }
+
+        /// <summary>
+        /// Gets or sets ShippingFee.
+        /// </summary>
+        [JsonProperty("shipping_fee", NullValueHandling = NullValueHandling.Ignore)]
+        public Models.ShippingFee ShippingFee { get; }
+
         /// <inheritdoc/>
         public override string ToString()
         {
@@ -118,14 +141,18 @@ namespace Square.Models
                 ((this.RedirectUrl == null && other.RedirectUrl == null) || (this.RedirectUrl?.Equals(other.RedirectUrl) == true)) &&
                 ((this.MerchantSupportEmail == null && other.MerchantSupportEmail == null) || (this.MerchantSupportEmail?.Equals(other.MerchantSupportEmail) == true)) &&
                 ((this.AskForShippingAddress == null && other.AskForShippingAddress == null) || (this.AskForShippingAddress?.Equals(other.AskForShippingAddress) == true)) &&
-                ((this.AcceptedPaymentMethods == null && other.AcceptedPaymentMethods == null) || (this.AcceptedPaymentMethods?.Equals(other.AcceptedPaymentMethods) == true));
+                ((this.AcceptedPaymentMethods == null && other.AcceptedPaymentMethods == null) || (this.AcceptedPaymentMethods?.Equals(other.AcceptedPaymentMethods) == true)) &&
+                ((this.AppFeeMoney == null && other.AppFeeMoney == null) || (this.AppFeeMoney?.Equals(other.AppFeeMoney) == true)) &&
+                ((this.ShippingFee == null && other.ShippingFee == null) || (this.ShippingFee?.Equals(other.ShippingFee) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -962206928;
+            int hashCode = -2115752998;
             hashCode = HashCode.Combine(this.AllowTipping, this.CustomFields, this.SubscriptionPlanId, this.RedirectUrl, this.MerchantSupportEmail, this.AskForShippingAddress, this.AcceptedPaymentMethods);
+
+            hashCode = HashCode.Combine(hashCode, this.AppFeeMoney, this.ShippingFee);
 
             return hashCode;
         }
@@ -143,6 +170,8 @@ namespace Square.Models
             toStringOutput.Add($"this.MerchantSupportEmail = {(this.MerchantSupportEmail == null ? "null" : this.MerchantSupportEmail == string.Empty ? "" : this.MerchantSupportEmail)}");
             toStringOutput.Add($"this.AskForShippingAddress = {(this.AskForShippingAddress == null ? "null" : this.AskForShippingAddress.ToString())}");
             toStringOutput.Add($"this.AcceptedPaymentMethods = {(this.AcceptedPaymentMethods == null ? "null" : this.AcceptedPaymentMethods.ToString())}");
+            toStringOutput.Add($"this.AppFeeMoney = {(this.AppFeeMoney == null ? "null" : this.AppFeeMoney.ToString())}");
+            toStringOutput.Add($"this.ShippingFee = {(this.ShippingFee == null ? "null" : this.ShippingFee.ToString())}");
         }
 
         /// <summary>
@@ -158,7 +187,9 @@ namespace Square.Models
                 .RedirectUrl(this.RedirectUrl)
                 .MerchantSupportEmail(this.MerchantSupportEmail)
                 .AskForShippingAddress(this.AskForShippingAddress)
-                .AcceptedPaymentMethods(this.AcceptedPaymentMethods);
+                .AcceptedPaymentMethods(this.AcceptedPaymentMethods)
+                .AppFeeMoney(this.AppFeeMoney)
+                .ShippingFee(this.ShippingFee);
             return builder;
         }
 
@@ -174,6 +205,8 @@ namespace Square.Models
             private string merchantSupportEmail;
             private bool? askForShippingAddress;
             private Models.AcceptedPaymentMethods acceptedPaymentMethods;
+            private Models.Money appFeeMoney;
+            private Models.ShippingFee shippingFee;
 
              /// <summary>
              /// AllowTipping.
@@ -252,6 +285,28 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// AppFeeMoney.
+             /// </summary>
+             /// <param name="appFeeMoney"> appFeeMoney. </param>
+             /// <returns> Builder. </returns>
+            public Builder AppFeeMoney(Models.Money appFeeMoney)
+            {
+                this.appFeeMoney = appFeeMoney;
+                return this;
+            }
+
+             /// <summary>
+             /// ShippingFee.
+             /// </summary>
+             /// <param name="shippingFee"> shippingFee. </param>
+             /// <returns> Builder. </returns>
+            public Builder ShippingFee(Models.ShippingFee shippingFee)
+            {
+                this.shippingFee = shippingFee;
+                return this;
+            }
+
             /// <summary>
             /// Builds class object.
             /// </summary>
@@ -265,7 +320,9 @@ namespace Square.Models
                     this.redirectUrl,
                     this.merchantSupportEmail,
                     this.askForShippingAddress,
-                    this.acceptedPaymentMethods);
+                    this.acceptedPaymentMethods,
+                    this.appFeeMoney,
+                    this.shippingFee);
             }
         }
     }

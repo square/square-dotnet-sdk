@@ -37,25 +37,25 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// Whether Apple Pay is accepted at checkout
+        /// Whether Apple Pay is accepted at checkout.
         /// </summary>
         [JsonProperty("apple_pay", NullValueHandling = NullValueHandling.Ignore)]
         public bool? ApplePay { get; }
 
         /// <summary>
-        /// Whether Google Pay is accepted at checkout
+        /// Whether Google Pay is accepted at checkout.
         /// </summary>
         [JsonProperty("google_pay", NullValueHandling = NullValueHandling.Ignore)]
         public bool? GooglePay { get; }
 
         /// <summary>
-        /// Whether Cash App Pay is accepted at checkout
+        /// Whether Cash App Pay is accepted at checkout.
         /// </summary>
         [JsonProperty("cash_app_pay", NullValueHandling = NullValueHandling.Ignore)]
         public bool? CashAppPay { get; }
 
         /// <summary>
-        /// Whether Afterpay/Clearpay is accepted at checkout
+        /// Whether Afterpay/Clearpay is accepted at checkout.
         /// </summary>
         [JsonProperty("afterpay_clearpay", NullValueHandling = NullValueHandling.Ignore)]
         public bool? AfterpayClearpay { get; }

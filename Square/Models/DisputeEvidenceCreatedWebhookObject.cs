@@ -28,7 +28,7 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// Represents a dispute a cardholder initiated with their bank.
+        /// Represents a [dispute](https://developer.squareup.com/docs/disputes-api/overview) a cardholder initiated with their bank.
         /// </summary>
         [JsonProperty("object", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Dispute MObject { get; }

@@ -21,8 +21,8 @@ namespace Square.Models
         /// Initializes a new instance of the <see cref="ObtainTokenRequest"/> class.
         /// </summary>
         /// <param name="clientId">client_id.</param>
-        /// <param name="clientSecret">client_secret.</param>
         /// <param name="grantType">grant_type.</param>
+        /// <param name="clientSecret">client_secret.</param>
         /// <param name="code">code.</param>
         /// <param name="redirectUri">redirect_uri.</param>
         /// <param name="refreshToken">refresh_token.</param>
@@ -32,8 +32,8 @@ namespace Square.Models
         /// <param name="codeVerifier">code_verifier.</param>
         public ObtainTokenRequest(
             string clientId,
-            string clientSecret,
             string grantType,
+            string clientSecret = null,
             string code = null,
             string redirectUri = null,
             string refreshToken = null,
@@ -63,9 +63,10 @@ namespace Square.Models
 
         /// <summary>
         /// The Square-issued application secret for your application, which is available in the OAuth page
-        /// in the [Developer Dashboard](https://developer.squareup.com/apps).
+        /// in the [Developer Dashboard](https://developer.squareup.com/apps). This parameter is only required when you are not using the [OAuth PKCE (Proof Key for Code Exchange) flow](https://developer.squareup.com/docs/oauth-api/overview#pkce-flow).
+        /// The PKCE flow requires a `code_verifier` instead of a `client_secret`.
         /// </summary>
-        [JsonProperty("client_secret")]
+        [JsonProperty("client_secret", NullValueHandling = NullValueHandling.Ignore)]
         public string ClientSecret { get; }
 
         /// <summary>
@@ -204,8 +205,8 @@ namespace Square.Models
         {
             var builder = new Builder(
                 this.ClientId,
-                this.ClientSecret,
                 this.GrantType)
+                .ClientSecret(this.ClientSecret)
                 .Code(this.Code)
                 .RedirectUri(this.RedirectUri)
                 .RefreshToken(this.RefreshToken)
@@ -222,8 +223,8 @@ namespace Square.Models
         public class Builder
         {
             private string clientId;
-            private string clientSecret;
             private string grantType;
+            private string clientSecret;
             private string code;
             private string redirectUri;
             private string refreshToken;
@@ -234,11 +235,9 @@ namespace Square.Models
 
             public Builder(
                 string clientId,
-                string clientSecret,
                 string grantType)
             {
                 this.clientId = clientId;
-                this.clientSecret = clientSecret;
                 this.grantType = grantType;
             }
 
@@ -254,17 +253,6 @@ namespace Square.Models
             }
 
              /// <summary>
-             /// ClientSecret.
-             /// </summary>
-             /// <param name="clientSecret"> clientSecret. </param>
-             /// <returns> Builder. </returns>
-            public Builder ClientSecret(string clientSecret)
-            {
-                this.clientSecret = clientSecret;
-                return this;
-            }
-
-             /// <summary>
              /// GrantType.
              /// </summary>
              /// <param name="grantType"> grantType. </param>
@@ -272,6 +260,17 @@ namespace Square.Models
             public Builder GrantType(string grantType)
             {
                 this.grantType = grantType;
+                return this;
+            }
+
+             /// <summary>
+             /// ClientSecret.
+             /// </summary>
+             /// <param name="clientSecret"> clientSecret. </param>
+             /// <returns> Builder. </returns>
+            public Builder ClientSecret(string clientSecret)
+            {
+                this.clientSecret = clientSecret;
                 return this;
             }
 
@@ -360,8 +359,8 @@ namespace Square.Models
             {
                 return new ObtainTokenRequest(
                     this.clientId,
-                    this.clientSecret,
                     this.grantType,
+                    this.clientSecret,
                     this.code,
                     this.redirectUri,
                     this.refreshToken,

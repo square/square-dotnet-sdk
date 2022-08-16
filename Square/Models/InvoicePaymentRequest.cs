@@ -80,14 +80,15 @@ namespace Square.Models
 
         /// <summary>
         /// Indicates the type of the payment request. For more information, see
-        /// [Payment requests](https://developer.squareup.com/docs/invoices-api/overview#payment-requests).
+        /// [Configuring payment requests](https://developer.squareup.com/docs/invoices-api/create-publish-invoices#payment-requests).
         /// </summary>
         [JsonProperty("request_type", NullValueHandling = NullValueHandling.Ignore)]
         public string RequestType { get; }
 
         /// <summary>
         /// The due date (in the invoice's time zone) for the payment request, in `YYYY-MM-DD` format. This field
-        /// is required to create a payment request.
+        /// is required to create a payment request. If an `automatic_payment_source` is defined for the request, Square
+        /// charges the payment source on this date.
         /// After this date, the invoice becomes overdue. For example, a payment `due_date` of 2021-03-09 with a `timezone`
         /// of America/Los\_Angeles becomes overdue at midnight on March 9 in America/Los\_Angeles (which equals a UTC
         /// timestamp of 2021-03-10T08:00:00Z).

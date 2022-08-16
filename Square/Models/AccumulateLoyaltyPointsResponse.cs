@@ -23,12 +23,15 @@ namespace Square.Models
         /// </summary>
         /// <param name="errors">errors.</param>
         /// <param name="mEvent">event.</param>
+        /// <param name="events">events.</param>
         public AccumulateLoyaltyPointsResponse(
             IList<Models.Error> errors = null,
-            Models.LoyaltyEvent mEvent = null)
+            Models.LoyaltyEvent mEvent = null,
+            IList<Models.LoyaltyEvent> events = null)
         {
             this.Errors = errors;
             this.MEvent = mEvent;
+            this.Events = events;
         }
 
         /// <summary>
@@ -49,6 +52,14 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("event", NullValueHandling = NullValueHandling.Ignore)]
         public Models.LoyaltyEvent MEvent { get; }
+
+        /// <summary>
+        /// The resulting loyalty events. The `ACCUMULATE_POINTS` event is always included.
+        /// When using the Orders API, the `ACCUMULATE_PROMOTION_POINTS` event is included
+        /// if the purchase also qualifies for a loyalty promotion.
+        /// </summary>
+        [JsonProperty("events", NullValueHandling = NullValueHandling.Ignore)]
+        public IList<Models.LoyaltyEvent> Events { get; }
 
         /// <inheritdoc/>
         public override string ToString()
@@ -76,19 +87,20 @@ namespace Square.Models
             return obj is AccumulateLoyaltyPointsResponse other &&
                 ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
                 ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true)) &&
-                ((this.MEvent == null && other.MEvent == null) || (this.MEvent?.Equals(other.MEvent) == true));
+                ((this.MEvent == null && other.MEvent == null) || (this.MEvent?.Equals(other.MEvent) == true)) &&
+                ((this.Events == null && other.Events == null) || (this.Events?.Equals(other.Events) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1333597480;
+            int hashCode = 1983236594;
 
             if (this.Context != null)
             {
                 hashCode += this.Context.GetHashCode();
             }
-            hashCode = HashCode.Combine(this.Errors, this.MEvent);
+            hashCode = HashCode.Combine(this.Errors, this.MEvent, this.Events);
 
             return hashCode;
         }
@@ -101,6 +113,7 @@ namespace Square.Models
         {
             toStringOutput.Add($"this.Errors = {(this.Errors == null ? "null" : $"[{string.Join(", ", this.Errors)} ]")}");
             toStringOutput.Add($"this.MEvent = {(this.MEvent == null ? "null" : this.MEvent.ToString())}");
+            toStringOutput.Add($"this.Events = {(this.Events == null ? "null" : $"[{string.Join(", ", this.Events)} ]")}");
         }
 
         /// <summary>
@@ -111,7 +124,8 @@ namespace Square.Models
         {
             var builder = new Builder()
                 .Errors(this.Errors)
-                .MEvent(this.MEvent);
+                .MEvent(this.MEvent)
+                .Events(this.Events);
             return builder;
         }
 
@@ -122,6 +136,7 @@ namespace Square.Models
         {
             private IList<Models.Error> errors;
             private Models.LoyaltyEvent mEvent;
+            private IList<Models.LoyaltyEvent> events;
 
              /// <summary>
              /// Errors.
@@ -145,6 +160,17 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// Events.
+             /// </summary>
+             /// <param name="events"> events. </param>
+             /// <returns> Builder. </returns>
+            public Builder Events(IList<Models.LoyaltyEvent> events)
+            {
+                this.events = events;
+                return this;
+            }
+
             /// <summary>
             /// Builds class object.
             /// </summary>
@@ -153,7 +179,8 @@ namespace Square.Models
             {
                 return new AccumulateLoyaltyPointsResponse(
                     this.errors,
-                    this.mEvent);
+                    this.mEvent,
+                    this.events);
             }
         }
     }

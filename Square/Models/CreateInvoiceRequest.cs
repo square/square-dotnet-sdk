@@ -32,7 +32,7 @@ namespace Square.Models
 
         /// <summary>
         /// Stores information about an invoice. You use the Invoices API to create and manage
-        /// invoices. For more information, see [Manage Invoices Using the Invoices API](https://developer.squareup.com/docs/invoices-api/overview).
+        /// invoices. For more information, see [Invoices API Overview](https://developer.squareup.com/docs/invoices-api/overview).
         /// </summary>
         [JsonProperty("invoice")]
         public Models.Invoice Invoice { get; }

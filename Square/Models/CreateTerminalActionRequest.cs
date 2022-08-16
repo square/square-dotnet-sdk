@@ -33,7 +33,8 @@ namespace Square.Models
         /// <summary>
         /// A unique string that identifies this `CreateAction` request. Keys can be any valid string
         /// but must be unique for every `CreateAction` request.
-        /// See [Idempotency keys](https://developer.squareup.com/docs/basics/api101/idempotency) for more information.
+        /// See [Idempotency keys](https://developer.squareup.com/docs/basics/api101/idempotency) for more
+        /// information.
         /// </summary>
         [JsonProperty("idempotency_key")]
         public string IdempotencyKey { get; }

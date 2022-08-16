@@ -31,6 +31,7 @@ namespace Square.Apis
         /// <param name="locationId">Required parameter: The ID of the business location to associate the checkout with..</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <returns>Returns the Models.CreateCheckoutResponse response from the API call.</returns>
+        [Obsolete]
         Models.CreateCheckoutResponse CreateCheckout(
                 string locationId,
                 Models.CreateCheckoutRequest body);
@@ -48,6 +49,7 @@ namespace Square.Apis
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the Models.CreateCheckoutResponse response from the API call.</returns>
+        [Obsolete]
         Task<Models.CreateCheckoutResponse> CreateCheckoutAsync(
                 string locationId,
                 Models.CreateCheckoutRequest body,
@@ -56,8 +58,8 @@ namespace Square.Apis
         /// <summary>
         /// Lists all payment links.
         /// </summary>
-        /// <param name="cursor">Optional parameter: A pagination cursor returned by a previous call to this endpoint.  Provide this cursor to retrieve the next set of results for the original query.  If a cursor is not provided, the endpoint returns the first page of the results.  For more  information, see [Pagination](https://developer.squareup.com/docs/basics/api101/pagination)..</param>
-        /// <param name="limit">Optional parameter: A limit on the number of results to return per page. The limit is advisory and  the implementation might return more or less results. If the supplied limit is negative, zero, or greater than the maximum limit of 1000, it is ignored.  Default value: `100`.</param>
+        /// <param name="cursor">Optional parameter: A pagination cursor returned by a previous call to this endpoint. Provide this cursor to retrieve the next set of results for the original query. If a cursor is not provided, the endpoint returns the first page of the results. For more  information, see [Pagination](https://developer.squareup.com/docs/basics/api101/pagination)..</param>
+        /// <param name="limit">Optional parameter: A limit on the number of results to return per page. The limit is advisory and the implementation might return more or less results. If the supplied limit is negative, zero, or greater than the maximum limit of 1000, it is ignored.  Default value: `100`.</param>
         /// <returns>Returns the Models.ListPaymentLinksResponse response from the API call.</returns>
         Models.ListPaymentLinksResponse ListPaymentLinks(
                 string cursor = null,
@@ -66,8 +68,8 @@ namespace Square.Apis
         /// <summary>
         /// Lists all payment links.
         /// </summary>
-        /// <param name="cursor">Optional parameter: A pagination cursor returned by a previous call to this endpoint.  Provide this cursor to retrieve the next set of results for the original query.  If a cursor is not provided, the endpoint returns the first page of the results.  For more  information, see [Pagination](https://developer.squareup.com/docs/basics/api101/pagination)..</param>
-        /// <param name="limit">Optional parameter: A limit on the number of results to return per page. The limit is advisory and  the implementation might return more or less results. If the supplied limit is negative, zero, or greater than the maximum limit of 1000, it is ignored.  Default value: `100`.</param>
+        /// <param name="cursor">Optional parameter: A pagination cursor returned by a previous call to this endpoint. Provide this cursor to retrieve the next set of results for the original query. If a cursor is not provided, the endpoint returns the first page of the results. For more  information, see [Pagination](https://developer.squareup.com/docs/basics/api101/pagination)..</param>
+        /// <param name="limit">Optional parameter: A limit on the number of results to return per page. The limit is advisory and the implementation might return more or less results. If the supplied limit is negative, zero, or greater than the maximum limit of 1000, it is ignored.  Default value: `100`.</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the Models.ListPaymentLinksResponse response from the API call.</returns>
         Task<Models.ListPaymentLinksResponse> ListPaymentLinksAsync(
@@ -130,8 +132,8 @@ namespace Square.Apis
                 CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Updates a payment link. You can update the `payment_link` fields such as .
-        /// `description`, `checkout_options`, and  `pre_populated_data`. .
+        /// Updates a payment link. You can update the `payment_link` fields such as.
+        /// `description`, `checkout_options`, and  `pre_populated_data`.
         /// You cannot update other fields such as the `order_id`, `version`, `URL`, or `timestamp` field.
         /// </summary>
         /// <param name="id">Required parameter: The ID of the payment link to update..</param>
@@ -142,8 +144,8 @@ namespace Square.Apis
                 Models.UpdatePaymentLinkRequest body);
 
         /// <summary>
-        /// Updates a payment link. You can update the `payment_link` fields such as .
-        /// `description`, `checkout_options`, and  `pre_populated_data`. .
+        /// Updates a payment link. You can update the `payment_link` fields such as.
+        /// `description`, `checkout_options`, and  `pre_populated_data`.
         /// You cannot update other fields such as the `order_id`, `version`, `URL`, or `timestamp` field.
         /// </summary>
         /// <param name="id">Required parameter: The ID of the payment link to update..</param>

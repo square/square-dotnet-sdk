@@ -78,17 +78,19 @@ namespace Square.Apis
                 CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Adds points earned from the base loyalty program to a loyalty account.
-        /// - If you are using the Orders API to manage orders, you only provide the `order_id`. .
-        /// The endpoint reads the order to compute points to add to the buyer's account.
-        /// - If you are not using the Orders API to manage orders, .
-        /// you first perform a client-side computation to compute the points.  .
-        /// For spend-based and visit-based programs, you can first call .
-        /// [CalculateLoyaltyPoints]($e/Loyalty/CalculateLoyaltyPoints) to compute the points  .
-        /// that you provide to this endpoint. .
-        /// This endpoint excludes additional points earned from loyalty promotions.
+        /// Adds points earned from a purchase to a [loyalty account]($m/LoyaltyAccount).
+        /// - If you are using the Orders API to manage orders, provide the `order_id`. Square reads the order.
+        /// to compute the points earned from both the base loyalty program and an associated.
+        /// [loyalty promotion]($m/LoyaltyPromotion). For purchases that qualify for multiple accrual.
+        /// rules, Square computes points based on the accrual rule that grants the most points.
+        /// For purchases that qualify for multiple promotions, Square computes points based on the most.
+        /// recently created promotion. A purchase must first qualify for program points to be eligible for promotion points.
+        /// - If you are not using the Orders API to manage orders, provide `points` with the number of points to add.
+        /// You must first perform a client-side computation of the points earned from the loyalty program and.
+        /// loyalty promotion. For spend-based and visit-based programs, you can call [CalculateLoyaltyPoints]($e/Loyalty/CalculateLoyaltyPoints).
+        /// to compute the points earned from the loyalty program (but not points earned from a loyalty promotion).
         /// </summary>
-        /// <param name="accountId">Required parameter: The [loyalty account]($m/LoyaltyAccount) ID to which to add the points..</param>
+        /// <param name="accountId">Required parameter: The ID of the target [loyalty account]($m/LoyaltyAccount)..</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <returns>Returns the Models.AccumulateLoyaltyPointsResponse response from the API call.</returns>
         Models.AccumulateLoyaltyPointsResponse AccumulateLoyaltyPoints(
@@ -96,17 +98,19 @@ namespace Square.Apis
                 Models.AccumulateLoyaltyPointsRequest body);
 
         /// <summary>
-        /// Adds points earned from the base loyalty program to a loyalty account.
-        /// - If you are using the Orders API to manage orders, you only provide the `order_id`. .
-        /// The endpoint reads the order to compute points to add to the buyer's account.
-        /// - If you are not using the Orders API to manage orders, .
-        /// you first perform a client-side computation to compute the points.  .
-        /// For spend-based and visit-based programs, you can first call .
-        /// [CalculateLoyaltyPoints]($e/Loyalty/CalculateLoyaltyPoints) to compute the points  .
-        /// that you provide to this endpoint. .
-        /// This endpoint excludes additional points earned from loyalty promotions.
+        /// Adds points earned from a purchase to a [loyalty account]($m/LoyaltyAccount).
+        /// - If you are using the Orders API to manage orders, provide the `order_id`. Square reads the order.
+        /// to compute the points earned from both the base loyalty program and an associated.
+        /// [loyalty promotion]($m/LoyaltyPromotion). For purchases that qualify for multiple accrual.
+        /// rules, Square computes points based on the accrual rule that grants the most points.
+        /// For purchases that qualify for multiple promotions, Square computes points based on the most.
+        /// recently created promotion. A purchase must first qualify for program points to be eligible for promotion points.
+        /// - If you are not using the Orders API to manage orders, provide `points` with the number of points to add.
+        /// You must first perform a client-side computation of the points earned from the loyalty program and.
+        /// loyalty promotion. For spend-based and visit-based programs, you can call [CalculateLoyaltyPoints]($e/Loyalty/CalculateLoyaltyPoints).
+        /// to compute the points earned from the loyalty program (but not points earned from a loyalty promotion).
         /// </summary>
-        /// <param name="accountId">Required parameter: The [loyalty account]($m/LoyaltyAccount) ID to which to add the points..</param>
+        /// <param name="accountId">Required parameter: The ID of the target [loyalty account]($m/LoyaltyAccount)..</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the Models.AccumulateLoyaltyPointsResponse response from the API call.</returns>
@@ -121,7 +125,7 @@ namespace Square.Apis
         /// [AccumulateLoyaltyPoints]($e/Loyalty/AccumulateLoyaltyPoints) .
         /// to add points when a buyer pays for the purchase.
         /// </summary>
-        /// <param name="accountId">Required parameter: The ID of the [loyalty account]($m/LoyaltyAccount) in which to adjust the points..</param>
+        /// <param name="accountId">Required parameter: The ID of the target [loyalty account]($m/LoyaltyAccount)..</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <returns>Returns the Models.AdjustLoyaltyPointsResponse response from the API call.</returns>
         Models.AdjustLoyaltyPointsResponse AdjustLoyaltyPoints(
@@ -134,7 +138,7 @@ namespace Square.Apis
         /// [AccumulateLoyaltyPoints]($e/Loyalty/AccumulateLoyaltyPoints) .
         /// to add points when a buyer pays for the purchase.
         /// </summary>
-        /// <param name="accountId">Required parameter: The ID of the [loyalty account]($m/LoyaltyAccount) in which to adjust the points..</param>
+        /// <param name="accountId">Required parameter: The ID of the target [loyalty account]($m/LoyaltyAccount)..</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the Models.AdjustLoyaltyPointsResponse response from the API call.</returns>
@@ -211,16 +215,21 @@ namespace Square.Apis
                 CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Calculates the points a purchase earns from the base loyalty program.
-        /// - If you are using the Orders API to manage orders, you provide the `order_id` in the request. The .
-        /// endpoint calculates the points by reading the order.
-        /// - If you are not using the Orders API to manage orders, you provide the purchase amount in .
-        /// the request for the endpoint to calculate the points.
-        /// An application might call this endpoint to show the points that a buyer can earn with the .
-        /// specific purchase.
-        /// For spend-based and visit-based programs, the `tax_mode` setting of the accrual rule indicates how taxes should be treated for loyalty points accrual.
+        /// Calculates the number of points a buyer can earn from a purchase. Applications might call this endpoint.
+        /// to display the points to the buyer.
+        /// - If you are using the Orders API to manage orders, provide the `order_id` and (optional) `loyalty_account_id`.
+        /// Square reads the order to compute the points earned from the base loyalty program and an associated.
+        /// [loyalty promotion]($m/LoyaltyPromotion).
+        /// - If you are not using the Orders API to manage orders, provide `transaction_amount_money` with the.
+        /// purchase amount. Square uses this amount to calculate the points earned from the base loyalty program,.
+        /// but not points earned from a loyalty promotion. For spend-based and visit-based programs, the `tax_mode`.
+        /// setting of the accrual rule indicates how taxes should be treated for loyalty points accrual.
+        /// If the purchase qualifies for program points, call.
+        /// [ListLoyaltyPromotions]($e/Loyalty/ListLoyaltyPromotions) and perform a client-side computation.
+        /// to calculate whether the purchase also qualifies for promotion points. For more information, see.
+        /// [Calculating promotion points](https://developer.squareup.com/docs/loyalty-api/loyalty-promotions#calculate-promotion-points).
         /// </summary>
-        /// <param name="programId">Required parameter: The [loyalty program]($m/LoyaltyProgram) ID, which defines the rules for accruing points..</param>
+        /// <param name="programId">Required parameter: The ID of the [loyalty program]($m/LoyaltyProgram), which defines the rules for accruing points..</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <returns>Returns the Models.CalculateLoyaltyPointsResponse response from the API call.</returns>
         Models.CalculateLoyaltyPointsResponse CalculateLoyaltyPoints(
@@ -228,22 +237,141 @@ namespace Square.Apis
                 Models.CalculateLoyaltyPointsRequest body);
 
         /// <summary>
-        /// Calculates the points a purchase earns from the base loyalty program.
-        /// - If you are using the Orders API to manage orders, you provide the `order_id` in the request. The .
-        /// endpoint calculates the points by reading the order.
-        /// - If you are not using the Orders API to manage orders, you provide the purchase amount in .
-        /// the request for the endpoint to calculate the points.
-        /// An application might call this endpoint to show the points that a buyer can earn with the .
-        /// specific purchase.
-        /// For spend-based and visit-based programs, the `tax_mode` setting of the accrual rule indicates how taxes should be treated for loyalty points accrual.
+        /// Calculates the number of points a buyer can earn from a purchase. Applications might call this endpoint.
+        /// to display the points to the buyer.
+        /// - If you are using the Orders API to manage orders, provide the `order_id` and (optional) `loyalty_account_id`.
+        /// Square reads the order to compute the points earned from the base loyalty program and an associated.
+        /// [loyalty promotion]($m/LoyaltyPromotion).
+        /// - If you are not using the Orders API to manage orders, provide `transaction_amount_money` with the.
+        /// purchase amount. Square uses this amount to calculate the points earned from the base loyalty program,.
+        /// but not points earned from a loyalty promotion. For spend-based and visit-based programs, the `tax_mode`.
+        /// setting of the accrual rule indicates how taxes should be treated for loyalty points accrual.
+        /// If the purchase qualifies for program points, call.
+        /// [ListLoyaltyPromotions]($e/Loyalty/ListLoyaltyPromotions) and perform a client-side computation.
+        /// to calculate whether the purchase also qualifies for promotion points. For more information, see.
+        /// [Calculating promotion points](https://developer.squareup.com/docs/loyalty-api/loyalty-promotions#calculate-promotion-points).
         /// </summary>
-        /// <param name="programId">Required parameter: The [loyalty program]($m/LoyaltyProgram) ID, which defines the rules for accruing points..</param>
+        /// <param name="programId">Required parameter: The ID of the [loyalty program]($m/LoyaltyProgram), which defines the rules for accruing points..</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the Models.CalculateLoyaltyPointsResponse response from the API call.</returns>
         Task<Models.CalculateLoyaltyPointsResponse> CalculateLoyaltyPointsAsync(
                 string programId,
                 Models.CalculateLoyaltyPointsRequest body,
+                CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Lists the loyalty promotions associated with a [loyalty program]($m/LoyaltyProgram).
+        /// Results are sorted by the `created_at` date in descending order (newest to oldest).
+        /// </summary>
+        /// <param name="programId">Required parameter: The ID of the base [loyalty program]($m/LoyaltyProgram). To get the program ID, call [RetrieveLoyaltyProgram]($e/Loyalty/RetrieveLoyaltyProgram) using the `main` keyword..</param>
+        /// <param name="status">Optional parameter: The status to filter the results by. If a status is provided, only loyalty promotions with the specified status are returned. Otherwise, all loyalty promotions associated with the loyalty program are returned..</param>
+        /// <param name="cursor">Optional parameter: The cursor returned in the paged response from the previous call to this endpoint. Provide this cursor to retrieve the next page of results for your original request. For more information, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination)..</param>
+        /// <param name="limit">Optional parameter: The maximum number of results to return in a single paged response. The minimum value is 1 and the maximum value is 30. The default value is 30. For more information, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination)..</param>
+        /// <returns>Returns the Models.ListLoyaltyPromotionsResponse response from the API call.</returns>
+        Models.ListLoyaltyPromotionsResponse ListLoyaltyPromotions(
+                string programId,
+                string status = null,
+                string cursor = null,
+                int? limit = null);
+
+        /// <summary>
+        /// Lists the loyalty promotions associated with a [loyalty program]($m/LoyaltyProgram).
+        /// Results are sorted by the `created_at` date in descending order (newest to oldest).
+        /// </summary>
+        /// <param name="programId">Required parameter: The ID of the base [loyalty program]($m/LoyaltyProgram). To get the program ID, call [RetrieveLoyaltyProgram]($e/Loyalty/RetrieveLoyaltyProgram) using the `main` keyword..</param>
+        /// <param name="status">Optional parameter: The status to filter the results by. If a status is provided, only loyalty promotions with the specified status are returned. Otherwise, all loyalty promotions associated with the loyalty program are returned..</param>
+        /// <param name="cursor">Optional parameter: The cursor returned in the paged response from the previous call to this endpoint. Provide this cursor to retrieve the next page of results for your original request. For more information, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination)..</param>
+        /// <param name="limit">Optional parameter: The maximum number of results to return in a single paged response. The minimum value is 1 and the maximum value is 30. The default value is 30. For more information, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination)..</param>
+        /// <param name="cancellationToken"> cancellationToken. </param>
+        /// <returns>Returns the Models.ListLoyaltyPromotionsResponse response from the API call.</returns>
+        Task<Models.ListLoyaltyPromotionsResponse> ListLoyaltyPromotionsAsync(
+                string programId,
+                string status = null,
+                string cursor = null,
+                int? limit = null,
+                CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Creates a loyalty promotion for a [loyalty program]($m/LoyaltyProgram). A loyalty promotion.
+        /// enables buyers to earn points in addition to those earned from the base loyalty program.
+        /// This endpoint sets the loyalty promotion to the `ACTIVE` or `SCHEDULED` status, depending on the.
+        /// `available_time` setting. A loyalty program can have a maximum of 10 loyalty promotions with an.
+        /// `ACTIVE` or `SCHEDULED` status.
+        /// </summary>
+        /// <param name="programId">Required parameter: The ID of the [loyalty program]($m/LoyaltyProgram) to associate with the promotion. To get the program ID, call [RetrieveLoyaltyProgram]($e/Loyalty/RetrieveLoyaltyProgram) using the `main` keyword..</param>
+        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
+        /// <returns>Returns the Models.CreateLoyaltyPromotionResponse response from the API call.</returns>
+        Models.CreateLoyaltyPromotionResponse CreateLoyaltyPromotion(
+                string programId,
+                Models.CreateLoyaltyPromotionRequest body);
+
+        /// <summary>
+        /// Creates a loyalty promotion for a [loyalty program]($m/LoyaltyProgram). A loyalty promotion.
+        /// enables buyers to earn points in addition to those earned from the base loyalty program.
+        /// This endpoint sets the loyalty promotion to the `ACTIVE` or `SCHEDULED` status, depending on the.
+        /// `available_time` setting. A loyalty program can have a maximum of 10 loyalty promotions with an.
+        /// `ACTIVE` or `SCHEDULED` status.
+        /// </summary>
+        /// <param name="programId">Required parameter: The ID of the [loyalty program]($m/LoyaltyProgram) to associate with the promotion. To get the program ID, call [RetrieveLoyaltyProgram]($e/Loyalty/RetrieveLoyaltyProgram) using the `main` keyword..</param>
+        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
+        /// <param name="cancellationToken"> cancellationToken. </param>
+        /// <returns>Returns the Models.CreateLoyaltyPromotionResponse response from the API call.</returns>
+        Task<Models.CreateLoyaltyPromotionResponse> CreateLoyaltyPromotionAsync(
+                string programId,
+                Models.CreateLoyaltyPromotionRequest body,
+                CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Retrieves a loyalty promotion.
+        /// </summary>
+        /// <param name="promotionId">Required parameter: The ID of the [loyalty promotion]($m/LoyaltyPromotion) to retrieve..</param>
+        /// <param name="programId">Required parameter: The ID of the base [loyalty program]($m/LoyaltyProgram). To get the program ID, call [RetrieveLoyaltyProgram]($e/Loyalty/RetrieveLoyaltyProgram) using the `main` keyword..</param>
+        /// <returns>Returns the Models.RetrieveLoyaltyPromotionResponse response from the API call.</returns>
+        Models.RetrieveLoyaltyPromotionResponse RetrieveLoyaltyPromotion(
+                string promotionId,
+                string programId);
+
+        /// <summary>
+        /// Retrieves a loyalty promotion.
+        /// </summary>
+        /// <param name="promotionId">Required parameter: The ID of the [loyalty promotion]($m/LoyaltyPromotion) to retrieve..</param>
+        /// <param name="programId">Required parameter: The ID of the base [loyalty program]($m/LoyaltyProgram). To get the program ID, call [RetrieveLoyaltyProgram]($e/Loyalty/RetrieveLoyaltyProgram) using the `main` keyword..</param>
+        /// <param name="cancellationToken"> cancellationToken. </param>
+        /// <returns>Returns the Models.RetrieveLoyaltyPromotionResponse response from the API call.</returns>
+        Task<Models.RetrieveLoyaltyPromotionResponse> RetrieveLoyaltyPromotionAsync(
+                string promotionId,
+                string programId,
+                CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Cancels a loyalty promotion. Use this endpoint to cancel an `ACTIVE` promotion earlier than the.
+        /// end date, cancel an `ACTIVE` promotion when an end date is not specified, or cancel a `SCHEDULED` promotion.
+        /// Because updating a promotion is not supported, you can also use this endpoint to cancel a promotion before.
+        /// you create a new one.
+        /// This endpoint sets the loyalty promotion to the `CANCELED` state.
+        /// </summary>
+        /// <param name="promotionId">Required parameter: The ID of the [loyalty promotion]($m/LoyaltyPromotion) to cancel. You can cancel a promotion that has an `ACTIVE` or `SCHEDULED` status..</param>
+        /// <param name="programId">Required parameter: The ID of the base [loyalty program]($m/LoyaltyProgram)..</param>
+        /// <returns>Returns the Models.CancelLoyaltyPromotionResponse response from the API call.</returns>
+        Models.CancelLoyaltyPromotionResponse CancelLoyaltyPromotion(
+                string promotionId,
+                string programId);
+
+        /// <summary>
+        /// Cancels a loyalty promotion. Use this endpoint to cancel an `ACTIVE` promotion earlier than the.
+        /// end date, cancel an `ACTIVE` promotion when an end date is not specified, or cancel a `SCHEDULED` promotion.
+        /// Because updating a promotion is not supported, you can also use this endpoint to cancel a promotion before.
+        /// you create a new one.
+        /// This endpoint sets the loyalty promotion to the `CANCELED` state.
+        /// </summary>
+        /// <param name="promotionId">Required parameter: The ID of the [loyalty promotion]($m/LoyaltyPromotion) to cancel. You can cancel a promotion that has an `ACTIVE` or `SCHEDULED` status..</param>
+        /// <param name="programId">Required parameter: The ID of the base [loyalty program]($m/LoyaltyProgram)..</param>
+        /// <param name="cancellationToken"> cancellationToken. </param>
+        /// <returns>Returns the Models.CancelLoyaltyPromotionResponse response from the API call.</returns>
+        Task<Models.CancelLoyaltyPromotionResponse> CancelLoyaltyPromotionAsync(
+                string promotionId,
+                string programId,
                 CancellationToken cancellationToken = default);
 
         /// <summary>

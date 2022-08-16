@@ -24,21 +24,21 @@ namespace Square.Models
         /// <param name="status">status.</param>
         /// <param name="rewardTiers">reward_tiers.</param>
         /// <param name="terminology">terminology.</param>
-        /// <param name="locationIds">location_ids.</param>
         /// <param name="createdAt">created_at.</param>
         /// <param name="updatedAt">updated_at.</param>
         /// <param name="accrualRules">accrual_rules.</param>
         /// <param name="expirationPolicy">expiration_policy.</param>
+        /// <param name="locationIds">location_ids.</param>
         public LoyaltyProgram(
             string id,
             string status,
             IList<Models.LoyaltyProgramRewardTier> rewardTiers,
             Models.LoyaltyProgramTerminology terminology,
-            IList<string> locationIds,
             string createdAt,
             string updatedAt,
             IList<Models.LoyaltyProgramAccrualRule> accrualRules,
-            Models.LoyaltyProgramExpirationPolicy expirationPolicy = null)
+            Models.LoyaltyProgramExpirationPolicy expirationPolicy = null,
+            IList<string> locationIds = null)
         {
             this.Id = id;
             this.Status = status;
@@ -85,7 +85,7 @@ namespace Square.Models
         /// <summary>
         /// The [locations]($m/Location) at which the program is active.
         /// </summary>
-        [JsonProperty("location_ids")]
+        [JsonProperty("location_ids", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> LocationIds { get; }
 
         /// <summary>
@@ -101,7 +101,9 @@ namespace Square.Models
         public string UpdatedAt { get; }
 
         /// <summary>
-        /// Defines how buyers can earn loyalty points.
+        /// Defines how buyers can earn loyalty points from the base loyalty program.
+        /// To check for associated [loyalty promotions]($m/LoyaltyPromotion) that enable
+        /// buyers to earn extra points, call [ListLoyaltyPromotions]($e/Loyalty/ListLoyaltyPromotions).
         /// </summary>
         [JsonProperty("accrual_rules")]
         public IList<Models.LoyaltyProgramAccrualRule> AccrualRules { get; }
@@ -180,11 +182,11 @@ namespace Square.Models
                 this.Status,
                 this.RewardTiers,
                 this.Terminology,
-                this.LocationIds,
                 this.CreatedAt,
                 this.UpdatedAt,
                 this.AccrualRules)
-                .ExpirationPolicy(this.ExpirationPolicy);
+                .ExpirationPolicy(this.ExpirationPolicy)
+                .LocationIds(this.LocationIds);
             return builder;
         }
 
@@ -197,18 +199,17 @@ namespace Square.Models
             private string status;
             private IList<Models.LoyaltyProgramRewardTier> rewardTiers;
             private Models.LoyaltyProgramTerminology terminology;
-            private IList<string> locationIds;
             private string createdAt;
             private string updatedAt;
             private IList<Models.LoyaltyProgramAccrualRule> accrualRules;
             private Models.LoyaltyProgramExpirationPolicy expirationPolicy;
+            private IList<string> locationIds;
 
             public Builder(
                 string id,
                 string status,
                 IList<Models.LoyaltyProgramRewardTier> rewardTiers,
                 Models.LoyaltyProgramTerminology terminology,
-                IList<string> locationIds,
                 string createdAt,
                 string updatedAt,
                 IList<Models.LoyaltyProgramAccrualRule> accrualRules)
@@ -217,7 +218,6 @@ namespace Square.Models
                 this.status = status;
                 this.rewardTiers = rewardTiers;
                 this.terminology = terminology;
-                this.locationIds = locationIds;
                 this.createdAt = createdAt;
                 this.updatedAt = updatedAt;
                 this.accrualRules = accrualRules;
@@ -268,17 +268,6 @@ namespace Square.Models
             }
 
              /// <summary>
-             /// LocationIds.
-             /// </summary>
-             /// <param name="locationIds"> locationIds. </param>
-             /// <returns> Builder. </returns>
-            public Builder LocationIds(IList<string> locationIds)
-            {
-                this.locationIds = locationIds;
-                return this;
-            }
-
-             /// <summary>
              /// CreatedAt.
              /// </summary>
              /// <param name="createdAt"> createdAt. </param>
@@ -322,6 +311,17 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// LocationIds.
+             /// </summary>
+             /// <param name="locationIds"> locationIds. </param>
+             /// <returns> Builder. </returns>
+            public Builder LocationIds(IList<string> locationIds)
+            {
+                this.locationIds = locationIds;
+                return this;
+            }
+
             /// <summary>
             /// Builds class object.
             /// </summary>
@@ -333,11 +333,11 @@ namespace Square.Models
                     this.status,
                     this.rewardTiers,
                     this.terminology,
-                    this.locationIds,
                     this.createdAt,
                     this.updatedAt,
                     this.accrualRules,
-                    this.expirationPolicy);
+                    this.expirationPolicy,
+                    this.locationIds);
             }
         }
     }
