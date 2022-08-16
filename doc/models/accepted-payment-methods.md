@@ -9,10 +9,10 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `ApplePay` | `bool?` | Optional | Whether Apple Pay is accepted at checkout |
-| `GooglePay` | `bool?` | Optional | Whether Google Pay is accepted at checkout |
-| `CashAppPay` | `bool?` | Optional | Whether Cash App Pay is accepted at checkout |
-| `AfterpayClearpay` | `bool?` | Optional | Whether Afterpay/Clearpay is accepted at checkout |
+| `ApplePay` | `bool?` | Optional | Whether Apple Pay is accepted at checkout. |
+| `GooglePay` | `bool?` | Optional | Whether Google Pay is accepted at checkout. |
+| `CashAppPay` | `bool?` | Optional | Whether Cash App Pay is accepted at checkout. |
+| `AfterpayClearpay` | `bool?` | Optional | Whether Afterpay/Clearpay is accepted at checkout. |
 
 ## Example (as JSON)
 

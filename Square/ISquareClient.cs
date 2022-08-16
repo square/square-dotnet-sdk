@@ -189,6 +189,11 @@ namespace Square
         IVendorsApi VendorsApi { get; }
 
         /// <summary>
+        /// Gets instance for IWebhookSubscriptionsApi.
+        /// </summary>
+        IWebhookSubscriptionsApi WebhookSubscriptionsApi { get; }
+
+        /// <summary>
         /// Gets the current version of the SDK.
         /// </summary>
         string SdkVersion { get; }

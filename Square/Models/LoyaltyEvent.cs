@@ -33,6 +33,7 @@ namespace Square.Models
         /// <param name="locationId">location_id.</param>
         /// <param name="expirePoints">expire_points.</param>
         /// <param name="otherEvent">other_event.</param>
+        /// <param name="accumulatePromotionPoints">accumulate_promotion_points.</param>
         public LoyaltyEvent(
             string id,
             string type,
@@ -46,7 +47,8 @@ namespace Square.Models
             Models.LoyaltyEventAdjustPoints adjustPoints = null,
             string locationId = null,
             Models.LoyaltyEventExpirePoints expirePoints = null,
-            Models.LoyaltyEventOther otherEvent = null)
+            Models.LoyaltyEventOther otherEvent = null,
+            Models.LoyaltyEventAccumulatePromotionPoints accumulatePromotionPoints = null)
         {
             this.Id = id;
             this.Type = type;
@@ -61,6 +63,7 @@ namespace Square.Models
             this.Source = source;
             this.ExpirePoints = expirePoints;
             this.OtherEvent = otherEvent;
+            this.AccumulatePromotionPoints = accumulatePromotionPoints;
         }
 
         /// <summary>
@@ -112,7 +115,7 @@ namespace Square.Models
         public Models.LoyaltyEventAdjustPoints AdjustPoints { get; }
 
         /// <summary>
-        /// The ID of the [loyalty account]($m/LoyaltyAccount) in which the event occurred.
+        /// The ID of the [loyalty account]($m/LoyaltyAccount) associated with the event.
         /// </summary>
         [JsonProperty("loyalty_account_id")]
         public string LoyaltyAccountId { get; }
@@ -140,6 +143,12 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("other_event", NullValueHandling = NullValueHandling.Ignore)]
         public Models.LoyaltyEventOther OtherEvent { get; }
+
+        /// <summary>
+        /// Provides metadata when the event `type` is `ACCUMULATE_PROMOTION_POINTS`.
+        /// </summary>
+        [JsonProperty("accumulate_promotion_points", NullValueHandling = NullValueHandling.Ignore)]
+        public Models.LoyaltyEventAccumulatePromotionPoints AccumulatePromotionPoints { get; }
 
         /// <inheritdoc/>
         public override string ToString()
@@ -177,16 +186,17 @@ namespace Square.Models
                 ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true)) &&
                 ((this.Source == null && other.Source == null) || (this.Source?.Equals(other.Source) == true)) &&
                 ((this.ExpirePoints == null && other.ExpirePoints == null) || (this.ExpirePoints?.Equals(other.ExpirePoints) == true)) &&
-                ((this.OtherEvent == null && other.OtherEvent == null) || (this.OtherEvent?.Equals(other.OtherEvent) == true));
+                ((this.OtherEvent == null && other.OtherEvent == null) || (this.OtherEvent?.Equals(other.OtherEvent) == true)) &&
+                ((this.AccumulatePromotionPoints == null && other.AccumulatePromotionPoints == null) || (this.AccumulatePromotionPoints?.Equals(other.AccumulatePromotionPoints) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1490090338;
+            int hashCode = -1796206158;
             hashCode = HashCode.Combine(this.Id, this.Type, this.CreatedAt, this.AccumulatePoints, this.CreateReward, this.RedeemReward, this.DeleteReward);
 
-            hashCode = HashCode.Combine(hashCode, this.AdjustPoints, this.LoyaltyAccountId, this.LocationId, this.Source, this.ExpirePoints, this.OtherEvent);
+            hashCode = HashCode.Combine(hashCode, this.AdjustPoints, this.LoyaltyAccountId, this.LocationId, this.Source, this.ExpirePoints, this.OtherEvent, this.AccumulatePromotionPoints);
 
             return hashCode;
         }
@@ -210,6 +220,7 @@ namespace Square.Models
             toStringOutput.Add($"this.Source = {(this.Source == null ? "null" : this.Source.ToString())}");
             toStringOutput.Add($"this.ExpirePoints = {(this.ExpirePoints == null ? "null" : this.ExpirePoints.ToString())}");
             toStringOutput.Add($"this.OtherEvent = {(this.OtherEvent == null ? "null" : this.OtherEvent.ToString())}");
+            toStringOutput.Add($"this.AccumulatePromotionPoints = {(this.AccumulatePromotionPoints == null ? "null" : this.AccumulatePromotionPoints.ToString())}");
         }
 
         /// <summary>
@@ -231,7 +242,8 @@ namespace Square.Models
                 .AdjustPoints(this.AdjustPoints)
                 .LocationId(this.LocationId)
                 .ExpirePoints(this.ExpirePoints)
-                .OtherEvent(this.OtherEvent);
+                .OtherEvent(this.OtherEvent)
+                .AccumulatePromotionPoints(this.AccumulatePromotionPoints);
             return builder;
         }
 
@@ -253,6 +265,7 @@ namespace Square.Models
             private string locationId;
             private Models.LoyaltyEventExpirePoints expirePoints;
             private Models.LoyaltyEventOther otherEvent;
+            private Models.LoyaltyEventAccumulatePromotionPoints accumulatePromotionPoints;
 
             public Builder(
                 string id,
@@ -411,6 +424,17 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// AccumulatePromotionPoints.
+             /// </summary>
+             /// <param name="accumulatePromotionPoints"> accumulatePromotionPoints. </param>
+             /// <returns> Builder. </returns>
+            public Builder AccumulatePromotionPoints(Models.LoyaltyEventAccumulatePromotionPoints accumulatePromotionPoints)
+            {
+                this.accumulatePromotionPoints = accumulatePromotionPoints;
+                return this;
+            }
+
             /// <summary>
             /// Builds class object.
             /// </summary>
@@ -430,7 +454,8 @@ namespace Square.Models
                     this.adjustPoints,
                     this.locationId,
                     this.expirePoints,
-                    this.otherEvent);
+                    this.otherEvent,
+                    this.accumulatePromotionPoints);
             }
         }
     }

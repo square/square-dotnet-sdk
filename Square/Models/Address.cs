@@ -25,27 +25,45 @@ namespace Square.Models
         /// <param name="addressLine3">address_line_3.</param>
         /// <param name="locality">locality.</param>
         /// <param name="sublocality">sublocality.</param>
+        /// <param name="sublocality2">sublocality_2.</param>
+        /// <param name="sublocality3">sublocality_3.</param>
         /// <param name="administrativeDistrictLevel1">administrative_district_level_1.</param>
+        /// <param name="administrativeDistrictLevel2">administrative_district_level_2.</param>
+        /// <param name="administrativeDistrictLevel3">administrative_district_level_3.</param>
         /// <param name="postalCode">postal_code.</param>
         /// <param name="country">country.</param>
+        /// <param name="firstName">first_name.</param>
+        /// <param name="lastName">last_name.</param>
         public Address(
             string addressLine1 = null,
             string addressLine2 = null,
             string addressLine3 = null,
             string locality = null,
             string sublocality = null,
+            string sublocality2 = null,
+            string sublocality3 = null,
             string administrativeDistrictLevel1 = null,
+            string administrativeDistrictLevel2 = null,
+            string administrativeDistrictLevel3 = null,
             string postalCode = null,
-            string country = null)
+            string country = null,
+            string firstName = null,
+            string lastName = null)
         {
             this.AddressLine1 = addressLine1;
             this.AddressLine2 = addressLine2;
             this.AddressLine3 = addressLine3;
             this.Locality = locality;
             this.Sublocality = sublocality;
+            this.Sublocality2 = sublocality2;
+            this.Sublocality3 = sublocality3;
             this.AdministrativeDistrictLevel1 = administrativeDistrictLevel1;
+            this.AdministrativeDistrictLevel2 = administrativeDistrictLevel2;
+            this.AdministrativeDistrictLevel3 = administrativeDistrictLevel3;
             this.PostalCode = postalCode;
             this.Country = country;
+            this.FirstName = firstName;
+            this.LastName = lastName;
         }
 
         /// <summary>
@@ -83,11 +101,37 @@ namespace Square.Models
         public string Sublocality { get; }
 
         /// <summary>
+        /// A civil region within the address's `sublocality`, if any.
+        /// </summary>
+        [JsonProperty("sublocality_2", NullValueHandling = NullValueHandling.Ignore)]
+        public string Sublocality2 { get; }
+
+        /// <summary>
+        /// A civil region within the address's `sublocality_2`, if any.
+        /// </summary>
+        [JsonProperty("sublocality_3", NullValueHandling = NullValueHandling.Ignore)]
+        public string Sublocality3 { get; }
+
+        /// <summary>
         /// A civil entity within the address's country. In the US, this
         /// is the state. For a full list of field meanings by country, see [Working with Addresses](https://developer.squareup.com/docs/build-basics/working-with-addresses).
         /// </summary>
         [JsonProperty("administrative_district_level_1", NullValueHandling = NullValueHandling.Ignore)]
         public string AdministrativeDistrictLevel1 { get; }
+
+        /// <summary>
+        /// A civil entity within the address's `administrative_district_level_1`.
+        /// In the US, this is the county.
+        /// </summary>
+        [JsonProperty("administrative_district_level_2", NullValueHandling = NullValueHandling.Ignore)]
+        public string AdministrativeDistrictLevel2 { get; }
+
+        /// <summary>
+        /// A civil entity within the address's `administrative_district_level_2`,
+        /// if any.
+        /// </summary>
+        [JsonProperty("administrative_district_level_3", NullValueHandling = NullValueHandling.Ignore)]
+        public string AdministrativeDistrictLevel3 { get; }
 
         /// <summary>
         /// The address's postal code. For a full list of field meanings by country, see [Working with Addresses](https://developer.squareup.com/docs/build-basics/working-with-addresses).
@@ -101,6 +145,18 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("country", NullValueHandling = NullValueHandling.Ignore)]
         public string Country { get; }
+
+        /// <summary>
+        /// Optional first name when it's representing recipient.
+        /// </summary>
+        [JsonProperty("first_name", NullValueHandling = NullValueHandling.Ignore)]
+        public string FirstName { get; }
+
+        /// <summary>
+        /// Optional last name when it's representing recipient.
+        /// </summary>
+        [JsonProperty("last_name", NullValueHandling = NullValueHandling.Ignore)]
+        public string LastName { get; }
 
         /// <inheritdoc/>
         public override string ToString()
@@ -131,18 +187,24 @@ namespace Square.Models
                 ((this.AddressLine3 == null && other.AddressLine3 == null) || (this.AddressLine3?.Equals(other.AddressLine3) == true)) &&
                 ((this.Locality == null && other.Locality == null) || (this.Locality?.Equals(other.Locality) == true)) &&
                 ((this.Sublocality == null && other.Sublocality == null) || (this.Sublocality?.Equals(other.Sublocality) == true)) &&
+                ((this.Sublocality2 == null && other.Sublocality2 == null) || (this.Sublocality2?.Equals(other.Sublocality2) == true)) &&
+                ((this.Sublocality3 == null && other.Sublocality3 == null) || (this.Sublocality3?.Equals(other.Sublocality3) == true)) &&
                 ((this.AdministrativeDistrictLevel1 == null && other.AdministrativeDistrictLevel1 == null) || (this.AdministrativeDistrictLevel1?.Equals(other.AdministrativeDistrictLevel1) == true)) &&
+                ((this.AdministrativeDistrictLevel2 == null && other.AdministrativeDistrictLevel2 == null) || (this.AdministrativeDistrictLevel2?.Equals(other.AdministrativeDistrictLevel2) == true)) &&
+                ((this.AdministrativeDistrictLevel3 == null && other.AdministrativeDistrictLevel3 == null) || (this.AdministrativeDistrictLevel3?.Equals(other.AdministrativeDistrictLevel3) == true)) &&
                 ((this.PostalCode == null && other.PostalCode == null) || (this.PostalCode?.Equals(other.PostalCode) == true)) &&
-                ((this.Country == null && other.Country == null) || (this.Country?.Equals(other.Country) == true));
+                ((this.Country == null && other.Country == null) || (this.Country?.Equals(other.Country) == true)) &&
+                ((this.FirstName == null && other.FirstName == null) || (this.FirstName?.Equals(other.FirstName) == true)) &&
+                ((this.LastName == null && other.LastName == null) || (this.LastName?.Equals(other.LastName) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1686660835;
-            hashCode = HashCode.Combine(this.AddressLine1, this.AddressLine2, this.AddressLine3, this.Locality, this.Sublocality, this.AdministrativeDistrictLevel1, this.PostalCode);
+            int hashCode = 1866796447;
+            hashCode = HashCode.Combine(this.AddressLine1, this.AddressLine2, this.AddressLine3, this.Locality, this.Sublocality, this.Sublocality2, this.Sublocality3);
 
-            hashCode = HashCode.Combine(hashCode, this.Country);
+            hashCode = HashCode.Combine(hashCode, this.AdministrativeDistrictLevel1, this.AdministrativeDistrictLevel2, this.AdministrativeDistrictLevel3, this.PostalCode, this.Country, this.FirstName, this.LastName);
 
             return hashCode;
         }
@@ -158,9 +220,15 @@ namespace Square.Models
             toStringOutput.Add($"this.AddressLine3 = {(this.AddressLine3 == null ? "null" : this.AddressLine3 == string.Empty ? "" : this.AddressLine3)}");
             toStringOutput.Add($"this.Locality = {(this.Locality == null ? "null" : this.Locality == string.Empty ? "" : this.Locality)}");
             toStringOutput.Add($"this.Sublocality = {(this.Sublocality == null ? "null" : this.Sublocality == string.Empty ? "" : this.Sublocality)}");
+            toStringOutput.Add($"this.Sublocality2 = {(this.Sublocality2 == null ? "null" : this.Sublocality2 == string.Empty ? "" : this.Sublocality2)}");
+            toStringOutput.Add($"this.Sublocality3 = {(this.Sublocality3 == null ? "null" : this.Sublocality3 == string.Empty ? "" : this.Sublocality3)}");
             toStringOutput.Add($"this.AdministrativeDistrictLevel1 = {(this.AdministrativeDistrictLevel1 == null ? "null" : this.AdministrativeDistrictLevel1 == string.Empty ? "" : this.AdministrativeDistrictLevel1)}");
+            toStringOutput.Add($"this.AdministrativeDistrictLevel2 = {(this.AdministrativeDistrictLevel2 == null ? "null" : this.AdministrativeDistrictLevel2 == string.Empty ? "" : this.AdministrativeDistrictLevel2)}");
+            toStringOutput.Add($"this.AdministrativeDistrictLevel3 = {(this.AdministrativeDistrictLevel3 == null ? "null" : this.AdministrativeDistrictLevel3 == string.Empty ? "" : this.AdministrativeDistrictLevel3)}");
             toStringOutput.Add($"this.PostalCode = {(this.PostalCode == null ? "null" : this.PostalCode == string.Empty ? "" : this.PostalCode)}");
             toStringOutput.Add($"this.Country = {(this.Country == null ? "null" : this.Country.ToString())}");
+            toStringOutput.Add($"this.FirstName = {(this.FirstName == null ? "null" : this.FirstName == string.Empty ? "" : this.FirstName)}");
+            toStringOutput.Add($"this.LastName = {(this.LastName == null ? "null" : this.LastName == string.Empty ? "" : this.LastName)}");
         }
 
         /// <summary>
@@ -175,9 +243,15 @@ namespace Square.Models
                 .AddressLine3(this.AddressLine3)
                 .Locality(this.Locality)
                 .Sublocality(this.Sublocality)
+                .Sublocality2(this.Sublocality2)
+                .Sublocality3(this.Sublocality3)
                 .AdministrativeDistrictLevel1(this.AdministrativeDistrictLevel1)
+                .AdministrativeDistrictLevel2(this.AdministrativeDistrictLevel2)
+                .AdministrativeDistrictLevel3(this.AdministrativeDistrictLevel3)
                 .PostalCode(this.PostalCode)
-                .Country(this.Country);
+                .Country(this.Country)
+                .FirstName(this.FirstName)
+                .LastName(this.LastName);
             return builder;
         }
 
@@ -191,9 +265,15 @@ namespace Square.Models
             private string addressLine3;
             private string locality;
             private string sublocality;
+            private string sublocality2;
+            private string sublocality3;
             private string administrativeDistrictLevel1;
+            private string administrativeDistrictLevel2;
+            private string administrativeDistrictLevel3;
             private string postalCode;
             private string country;
+            private string firstName;
+            private string lastName;
 
              /// <summary>
              /// AddressLine1.
@@ -251,6 +331,28 @@ namespace Square.Models
             }
 
              /// <summary>
+             /// Sublocality2.
+             /// </summary>
+             /// <param name="sublocality2"> sublocality2. </param>
+             /// <returns> Builder. </returns>
+            public Builder Sublocality2(string sublocality2)
+            {
+                this.sublocality2 = sublocality2;
+                return this;
+            }
+
+             /// <summary>
+             /// Sublocality3.
+             /// </summary>
+             /// <param name="sublocality3"> sublocality3. </param>
+             /// <returns> Builder. </returns>
+            public Builder Sublocality3(string sublocality3)
+            {
+                this.sublocality3 = sublocality3;
+                return this;
+            }
+
+             /// <summary>
              /// AdministrativeDistrictLevel1.
              /// </summary>
              /// <param name="administrativeDistrictLevel1"> administrativeDistrictLevel1. </param>
@@ -258,6 +360,28 @@ namespace Square.Models
             public Builder AdministrativeDistrictLevel1(string administrativeDistrictLevel1)
             {
                 this.administrativeDistrictLevel1 = administrativeDistrictLevel1;
+                return this;
+            }
+
+             /// <summary>
+             /// AdministrativeDistrictLevel2.
+             /// </summary>
+             /// <param name="administrativeDistrictLevel2"> administrativeDistrictLevel2. </param>
+             /// <returns> Builder. </returns>
+            public Builder AdministrativeDistrictLevel2(string administrativeDistrictLevel2)
+            {
+                this.administrativeDistrictLevel2 = administrativeDistrictLevel2;
+                return this;
+            }
+
+             /// <summary>
+             /// AdministrativeDistrictLevel3.
+             /// </summary>
+             /// <param name="administrativeDistrictLevel3"> administrativeDistrictLevel3. </param>
+             /// <returns> Builder. </returns>
+            public Builder AdministrativeDistrictLevel3(string administrativeDistrictLevel3)
+            {
+                this.administrativeDistrictLevel3 = administrativeDistrictLevel3;
                 return this;
             }
 
@@ -283,6 +407,28 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// FirstName.
+             /// </summary>
+             /// <param name="firstName"> firstName. </param>
+             /// <returns> Builder. </returns>
+            public Builder FirstName(string firstName)
+            {
+                this.firstName = firstName;
+                return this;
+            }
+
+             /// <summary>
+             /// LastName.
+             /// </summary>
+             /// <param name="lastName"> lastName. </param>
+             /// <returns> Builder. </returns>
+            public Builder LastName(string lastName)
+            {
+                this.lastName = lastName;
+                return this;
+            }
+
             /// <summary>
             /// Builds class object.
             /// </summary>
@@ -295,9 +441,15 @@ namespace Square.Models
                     this.addressLine3,
                     this.locality,
                     this.sublocality,
+                    this.sublocality2,
+                    this.sublocality3,
                     this.administrativeDistrictLevel1,
+                    this.administrativeDistrictLevel2,
+                    this.administrativeDistrictLevel3,
                     this.postalCode,
-                    this.country);
+                    this.country,
+                    this.firstName,
+                    this.lastName);
             }
         }
     }

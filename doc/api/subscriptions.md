@@ -54,7 +54,6 @@ var bodyPriceOverrideMoney = new Money.Builder()
     .Currency("USD")
     .Build();
 var bodySource = new SubscriptionSource.Builder()
-    .Name("My App")
     .Build();
 var body = new CreateSubscriptionRequest.Builder(
         "S8GWD5R9QB376",
@@ -415,7 +414,7 @@ SwapPlanAsync(
 ```csharp
 string subscriptionId = "subscription_id0";
 var body = new SwapPlanRequest.Builder(
-        "new_plan_id2")
+        null)
     .Build();
 
 try

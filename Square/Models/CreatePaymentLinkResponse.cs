@@ -23,12 +23,15 @@ namespace Square.Models
         /// </summary>
         /// <param name="errors">errors.</param>
         /// <param name="paymentLink">payment_link.</param>
+        /// <param name="relatedResources">related_resources.</param>
         public CreatePaymentLinkResponse(
             IList<Models.Error> errors = null,
-            Models.PaymentLink paymentLink = null)
+            Models.PaymentLink paymentLink = null,
+            Models.PaymentLinkRelatedResources relatedResources = null)
         {
             this.Errors = errors;
             this.PaymentLink = paymentLink;
+            this.RelatedResources = relatedResources;
         }
 
         /// <summary>
@@ -48,6 +51,12 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("payment_link", NullValueHandling = NullValueHandling.Ignore)]
         public Models.PaymentLink PaymentLink { get; }
+
+        /// <summary>
+        /// Gets or sets RelatedResources.
+        /// </summary>
+        [JsonProperty("related_resources", NullValueHandling = NullValueHandling.Ignore)]
+        public Models.PaymentLinkRelatedResources RelatedResources { get; }
 
         /// <inheritdoc/>
         public override string ToString()
@@ -75,19 +84,20 @@ namespace Square.Models
             return obj is CreatePaymentLinkResponse other &&
                 ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
                 ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true)) &&
-                ((this.PaymentLink == null && other.PaymentLink == null) || (this.PaymentLink?.Equals(other.PaymentLink) == true));
+                ((this.PaymentLink == null && other.PaymentLink == null) || (this.PaymentLink?.Equals(other.PaymentLink) == true)) &&
+                ((this.RelatedResources == null && other.RelatedResources == null) || (this.RelatedResources?.Equals(other.RelatedResources) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -155059764;
+            int hashCode = 383213681;
 
             if (this.Context != null)
             {
                 hashCode += this.Context.GetHashCode();
             }
-            hashCode = HashCode.Combine(this.Errors, this.PaymentLink);
+            hashCode = HashCode.Combine(this.Errors, this.PaymentLink, this.RelatedResources);
 
             return hashCode;
         }
@@ -100,6 +110,7 @@ namespace Square.Models
         {
             toStringOutput.Add($"this.Errors = {(this.Errors == null ? "null" : $"[{string.Join(", ", this.Errors)} ]")}");
             toStringOutput.Add($"this.PaymentLink = {(this.PaymentLink == null ? "null" : this.PaymentLink.ToString())}");
+            toStringOutput.Add($"this.RelatedResources = {(this.RelatedResources == null ? "null" : this.RelatedResources.ToString())}");
         }
 
         /// <summary>
@@ -110,7 +121,8 @@ namespace Square.Models
         {
             var builder = new Builder()
                 .Errors(this.Errors)
-                .PaymentLink(this.PaymentLink);
+                .PaymentLink(this.PaymentLink)
+                .RelatedResources(this.RelatedResources);
             return builder;
         }
 
@@ -121,6 +133,7 @@ namespace Square.Models
         {
             private IList<Models.Error> errors;
             private Models.PaymentLink paymentLink;
+            private Models.PaymentLinkRelatedResources relatedResources;
 
              /// <summary>
              /// Errors.
@@ -144,6 +157,17 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// RelatedResources.
+             /// </summary>
+             /// <param name="relatedResources"> relatedResources. </param>
+             /// <returns> Builder. </returns>
+            public Builder RelatedResources(Models.PaymentLinkRelatedResources relatedResources)
+            {
+                this.relatedResources = relatedResources;
+                return this;
+            }
+
             /// <summary>
             /// Builds class object.
             /// </summary>
@@ -152,7 +176,8 @@ namespace Square.Models
             {
                 return new CreatePaymentLinkResponse(
                     this.errors,
-                    this.paymentLink);
+                    this.paymentLink,
+                    this.relatedResources);
             }
         }
     }

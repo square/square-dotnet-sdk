@@ -22,12 +22,15 @@ namespace Square.Models
         /// </summary>
         /// <param name="orderId">order_id.</param>
         /// <param name="transactionAmountMoney">transaction_amount_money.</param>
+        /// <param name="loyaltyAccountId">loyalty_account_id.</param>
         public CalculateLoyaltyPointsRequest(
             string orderId = null,
-            Models.Money transactionAmountMoney = null)
+            Models.Money transactionAmountMoney = null,
+            string loyaltyAccountId = null)
         {
             this.OrderId = orderId;
             this.TransactionAmountMoney = transactionAmountMoney;
+            this.LoyaltyAccountId = loyaltyAccountId;
         }
 
         /// <summary>
@@ -48,6 +51,18 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("transaction_amount_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Money TransactionAmountMoney { get; }
+
+        /// <summary>
+        /// The ID of the target [loyalty account]($m/LoyaltyAccount). Optionally specify this field
+        /// if your application uses the Orders API to process orders.
+        /// If specified, the `promotion_points` field in the response shows the number of points the buyer would
+        /// earn from the purchase. In this case, Square uses the account ID to determine whether the promotion's
+        /// `trigger_limit` (the maximum number of times that a buyer can trigger the promotion) has been reached.
+        /// If not specified, the `promotion_points` field shows the number of points the purchase qualifies
+        /// for regardless of the trigger limit.
+        /// </summary>
+        [JsonProperty("loyalty_account_id", NullValueHandling = NullValueHandling.Ignore)]
+        public string LoyaltyAccountId { get; }
 
         /// <inheritdoc/>
         public override string ToString()
@@ -74,14 +89,15 @@ namespace Square.Models
 
             return obj is CalculateLoyaltyPointsRequest other &&
                 ((this.OrderId == null && other.OrderId == null) || (this.OrderId?.Equals(other.OrderId) == true)) &&
-                ((this.TransactionAmountMoney == null && other.TransactionAmountMoney == null) || (this.TransactionAmountMoney?.Equals(other.TransactionAmountMoney) == true));
+                ((this.TransactionAmountMoney == null && other.TransactionAmountMoney == null) || (this.TransactionAmountMoney?.Equals(other.TransactionAmountMoney) == true)) &&
+                ((this.LoyaltyAccountId == null && other.LoyaltyAccountId == null) || (this.LoyaltyAccountId?.Equals(other.LoyaltyAccountId) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1468286611;
-            hashCode = HashCode.Combine(this.OrderId, this.TransactionAmountMoney);
+            int hashCode = 528944996;
+            hashCode = HashCode.Combine(this.OrderId, this.TransactionAmountMoney, this.LoyaltyAccountId);
 
             return hashCode;
         }
@@ -94,6 +110,7 @@ namespace Square.Models
         {
             toStringOutput.Add($"this.OrderId = {(this.OrderId == null ? "null" : this.OrderId == string.Empty ? "" : this.OrderId)}");
             toStringOutput.Add($"this.TransactionAmountMoney = {(this.TransactionAmountMoney == null ? "null" : this.TransactionAmountMoney.ToString())}");
+            toStringOutput.Add($"this.LoyaltyAccountId = {(this.LoyaltyAccountId == null ? "null" : this.LoyaltyAccountId == string.Empty ? "" : this.LoyaltyAccountId)}");
         }
 
         /// <summary>
@@ -104,7 +121,8 @@ namespace Square.Models
         {
             var builder = new Builder()
                 .OrderId(this.OrderId)
-                .TransactionAmountMoney(this.TransactionAmountMoney);
+                .TransactionAmountMoney(this.TransactionAmountMoney)
+                .LoyaltyAccountId(this.LoyaltyAccountId);
             return builder;
         }
 
@@ -115,6 +133,7 @@ namespace Square.Models
         {
             private string orderId;
             private Models.Money transactionAmountMoney;
+            private string loyaltyAccountId;
 
              /// <summary>
              /// OrderId.
@@ -138,6 +157,17 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// LoyaltyAccountId.
+             /// </summary>
+             /// <param name="loyaltyAccountId"> loyaltyAccountId. </param>
+             /// <returns> Builder. </returns>
+            public Builder LoyaltyAccountId(string loyaltyAccountId)
+            {
+                this.loyaltyAccountId = loyaltyAccountId;
+                return this;
+            }
+
             /// <summary>
             /// Builds class object.
             /// </summary>
@@ -146,7 +176,8 @@ namespace Square.Models
             {
                 return new CalculateLoyaltyPointsRequest(
                     this.orderId,
-                    this.transactionAmountMoney);
+                    this.transactionAmountMoney,
+                    this.loyaltyAccountId);
             }
         }
     }

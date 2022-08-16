@@ -22,12 +22,15 @@ namespace Square.Models
         /// </summary>
         /// <param name="idempotencyKey">idempotency_key.</param>
         /// <param name="adjustPoints">adjust_points.</param>
+        /// <param name="allowNegativeBalance">allow_negative_balance.</param>
         public AdjustLoyaltyPointsRequest(
             string idempotencyKey,
-            Models.LoyaltyEventAdjustPoints adjustPoints)
+            Models.LoyaltyEventAdjustPoints adjustPoints,
+            bool? allowNegativeBalance = null)
         {
             this.IdempotencyKey = idempotencyKey;
             this.AdjustPoints = adjustPoints;
+            this.AllowNegativeBalance = allowNegativeBalance;
         }
 
         /// <summary>
@@ -42,6 +45,14 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("adjust_points")]
         public Models.LoyaltyEventAdjustPoints AdjustPoints { get; }
+
+        /// <summary>
+        /// Indicates whether to allow a negative adjustment to result in a negative balance. If `true`, a negative
+        /// balance is allowed when subtracting points. If `false`, Square returns a `BAD_REQUEST` error when subtracting
+        /// the specified number of points would result in a negative balance. The default value is `false`.
+        /// </summary>
+        [JsonProperty("allow_negative_balance", NullValueHandling = NullValueHandling.Ignore)]
+        public bool? AllowNegativeBalance { get; }
 
         /// <inheritdoc/>
         public override string ToString()
@@ -68,14 +79,15 @@ namespace Square.Models
 
             return obj is AdjustLoyaltyPointsRequest other &&
                 ((this.IdempotencyKey == null && other.IdempotencyKey == null) || (this.IdempotencyKey?.Equals(other.IdempotencyKey) == true)) &&
-                ((this.AdjustPoints == null && other.AdjustPoints == null) || (this.AdjustPoints?.Equals(other.AdjustPoints) == true));
+                ((this.AdjustPoints == null && other.AdjustPoints == null) || (this.AdjustPoints?.Equals(other.AdjustPoints) == true)) &&
+                ((this.AllowNegativeBalance == null && other.AllowNegativeBalance == null) || (this.AllowNegativeBalance?.Equals(other.AllowNegativeBalance) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -855879166;
-            hashCode = HashCode.Combine(this.IdempotencyKey, this.AdjustPoints);
+            int hashCode = 134703595;
+            hashCode = HashCode.Combine(this.IdempotencyKey, this.AdjustPoints, this.AllowNegativeBalance);
 
             return hashCode;
         }
@@ -88,6 +100,7 @@ namespace Square.Models
         {
             toStringOutput.Add($"this.IdempotencyKey = {(this.IdempotencyKey == null ? "null" : this.IdempotencyKey == string.Empty ? "" : this.IdempotencyKey)}");
             toStringOutput.Add($"this.AdjustPoints = {(this.AdjustPoints == null ? "null" : this.AdjustPoints.ToString())}");
+            toStringOutput.Add($"this.AllowNegativeBalance = {(this.AllowNegativeBalance == null ? "null" : this.AllowNegativeBalance.ToString())}");
         }
 
         /// <summary>
@@ -98,7 +111,8 @@ namespace Square.Models
         {
             var builder = new Builder(
                 this.IdempotencyKey,
-                this.AdjustPoints);
+                this.AdjustPoints)
+                .AllowNegativeBalance(this.AllowNegativeBalance);
             return builder;
         }
 
@@ -109,6 +123,7 @@ namespace Square.Models
         {
             private string idempotencyKey;
             private Models.LoyaltyEventAdjustPoints adjustPoints;
+            private bool? allowNegativeBalance;
 
             public Builder(
                 string idempotencyKey,
@@ -140,6 +155,17 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// AllowNegativeBalance.
+             /// </summary>
+             /// <param name="allowNegativeBalance"> allowNegativeBalance. </param>
+             /// <returns> Builder. </returns>
+            public Builder AllowNegativeBalance(bool? allowNegativeBalance)
+            {
+                this.allowNegativeBalance = allowNegativeBalance;
+                return this;
+            }
+
             /// <summary>
             /// Builds class object.
             /// </summary>
@@ -148,7 +174,8 @@ namespace Square.Models
             {
                 return new AdjustLoyaltyPointsRequest(
                     this.idempotencyKey,
-                    this.adjustPoints);
+                    this.adjustPoints,
+                    this.allowNegativeBalance);
             }
         }
     }

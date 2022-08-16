@@ -344,10 +344,8 @@ namespace Square.Models
         public Models.Money TotalServiceChargeMoney { get; }
 
         /// <summary>
-        /// A short-term identifier for the order (such as a customer first name, table number, or
-        /// auto-generated order number that resets daily). For orders created in Square Point of Sale, the `ticket_name` is
-        /// printed on in-person tickets and stubs. It converts to the `kitchen_printing.name` field in the
-        /// bill cart feature details.
+        /// A short-term identifier for the order (such as a customer first name,
+        /// table number, or auto-generated order number that resets daily).
         /// </summary>
         [JsonProperty("ticket_name", NullValueHandling = NullValueHandling.Ignore)]
         public string TicketName { get; }

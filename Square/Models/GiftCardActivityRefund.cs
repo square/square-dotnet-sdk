@@ -39,11 +39,10 @@ namespace Square.Models
         /// <summary>
         /// The ID of the refunded `REDEEM` gift card activity. Square populates this field if the
         /// `payment_id` in the corresponding [RefundPayment]($e/Refunds/RefundPayment) request
-        /// represents a redemption made by the same gift card. Note that you must use `RefundPayment` when refunding a
-        /// gift card payment made using the Payments API, Square Point of Sale, or the Seller Dashboard to the same gift card.
-        /// Applications that use a custom payment processing system can use this field in a
-        /// [CreateGiftCardActivity]($e/GiftCardActivities/CreateGiftCardActivity)
-        /// request to link a refund with a `REDEEM` activity for the same gift card.
+        /// represents a redemption made by the same gift card. Note that you must use `RefundPayment`
+        /// to refund a gift card payment to the same gift card if the payment was processed by Square.
+        /// For applications that use a custom payment processing system, this field is required when creating
+        /// a `REFUND` activity. The provided `REDEEM` activity ID must be linked to the same gift card.
         /// </summary>
         [JsonProperty("redeem_activity_id", NullValueHandling = NullValueHandling.Ignore)]
         public string RedeemActivityId { get; }
@@ -60,8 +59,7 @@ namespace Square.Models
         public Models.Money AmountMoney { get; }
 
         /// <summary>
-        /// A client-specified ID that associates the gift card activity with an order, payment, or other entity.
-        /// This field can be used to track information related to Square entities or entities in another system.
+        /// A client-specified ID that associates the gift card activity with an entity in another system.
         /// </summary>
         [JsonProperty("reference_id", NullValueHandling = NullValueHandling.Ignore)]
         public string ReferenceId { get; }

@@ -35,7 +35,7 @@ namespace Square.Models
 
         /// <summary>
         /// Stores information about an invoice. You use the Invoices API to create and manage
-        /// invoices. For more information, see [Manage Invoices Using the Invoices API](https://developer.squareup.com/docs/invoices-api/overview).
+        /// invoices. For more information, see [Invoices API Overview](https://developer.squareup.com/docs/invoices-api/overview).
         /// </summary>
         [JsonProperty("invoice")]
         public Models.Invoice Invoice { get; }
@@ -51,7 +51,7 @@ namespace Square.Models
 
         /// <summary>
         /// The list of fields to clear.
-        /// For examples, see [Update an invoice](https://developer.squareup.com/docs/invoices-api/overview#update-an-invoice).
+        /// For examples, see [Update an Invoice](https://developer.squareup.com/docs/invoices-api/update-invoices).
         /// </summary>
         [JsonProperty("fields_to_clear", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> FieldsToClear { get; }

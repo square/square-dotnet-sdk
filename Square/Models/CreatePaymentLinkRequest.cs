@@ -26,7 +26,6 @@ namespace Square.Models
         /// <param name="order">order.</param>
         /// <param name="checkoutOptions">checkout_options.</param>
         /// <param name="prePopulatedData">pre_populated_data.</param>
-        /// <param name="source">source.</param>
         /// <param name="paymentNote">payment_note.</param>
         public CreatePaymentLinkRequest(
             string idempotencyKey = null,
@@ -35,7 +34,6 @@ namespace Square.Models
             Models.Order order = null,
             Models.CheckoutOptions checkoutOptions = null,
             Models.PrePopulatedData prePopulatedData = null,
-            string source = null,
             string paymentNote = null)
         {
             this.IdempotencyKey = idempotencyKey;
@@ -44,7 +42,6 @@ namespace Square.Models
             this.Order = order;
             this.CheckoutOptions = checkoutOptions;
             this.PrePopulatedData = prePopulatedData;
-            this.Source = source;
             this.PaymentNote = paymentNote;
         }
 
@@ -97,12 +94,6 @@ namespace Square.Models
         public Models.PrePopulatedData PrePopulatedData { get; }
 
         /// <summary>
-        /// The application that created the payment link.
-        /// </summary>
-        [JsonProperty("source", NullValueHandling = NullValueHandling.Ignore)]
-        public string Source { get; }
-
-        /// <summary>
         /// A note for the payment. After processing the payment, Square adds this note to the resulting `Payment`.
         /// </summary>
         [JsonProperty("payment_note", NullValueHandling = NullValueHandling.Ignore)]
@@ -138,17 +129,14 @@ namespace Square.Models
                 ((this.Order == null && other.Order == null) || (this.Order?.Equals(other.Order) == true)) &&
                 ((this.CheckoutOptions == null && other.CheckoutOptions == null) || (this.CheckoutOptions?.Equals(other.CheckoutOptions) == true)) &&
                 ((this.PrePopulatedData == null && other.PrePopulatedData == null) || (this.PrePopulatedData?.Equals(other.PrePopulatedData) == true)) &&
-                ((this.Source == null && other.Source == null) || (this.Source?.Equals(other.Source) == true)) &&
                 ((this.PaymentNote == null && other.PaymentNote == null) || (this.PaymentNote?.Equals(other.PaymentNote) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1603266550;
-            hashCode = HashCode.Combine(this.IdempotencyKey, this.Description, this.QuickPay, this.Order, this.CheckoutOptions, this.PrePopulatedData, this.Source);
-
-            hashCode = HashCode.Combine(hashCode, this.PaymentNote);
+            int hashCode = 1695889538;
+            hashCode = HashCode.Combine(this.IdempotencyKey, this.Description, this.QuickPay, this.Order, this.CheckoutOptions, this.PrePopulatedData, this.PaymentNote);
 
             return hashCode;
         }
@@ -165,7 +153,6 @@ namespace Square.Models
             toStringOutput.Add($"this.Order = {(this.Order == null ? "null" : this.Order.ToString())}");
             toStringOutput.Add($"this.CheckoutOptions = {(this.CheckoutOptions == null ? "null" : this.CheckoutOptions.ToString())}");
             toStringOutput.Add($"this.PrePopulatedData = {(this.PrePopulatedData == null ? "null" : this.PrePopulatedData.ToString())}");
-            toStringOutput.Add($"this.Source = {(this.Source == null ? "null" : this.Source == string.Empty ? "" : this.Source)}");
             toStringOutput.Add($"this.PaymentNote = {(this.PaymentNote == null ? "null" : this.PaymentNote == string.Empty ? "" : this.PaymentNote)}");
         }
 
@@ -182,7 +169,6 @@ namespace Square.Models
                 .Order(this.Order)
                 .CheckoutOptions(this.CheckoutOptions)
                 .PrePopulatedData(this.PrePopulatedData)
-                .Source(this.Source)
                 .PaymentNote(this.PaymentNote);
             return builder;
         }
@@ -198,7 +184,6 @@ namespace Square.Models
             private Models.Order order;
             private Models.CheckoutOptions checkoutOptions;
             private Models.PrePopulatedData prePopulatedData;
-            private string source;
             private string paymentNote;
 
              /// <summary>
@@ -268,17 +253,6 @@ namespace Square.Models
             }
 
              /// <summary>
-             /// Source.
-             /// </summary>
-             /// <param name="source"> source. </param>
-             /// <returns> Builder. </returns>
-            public Builder Source(string source)
-            {
-                this.source = source;
-                return this;
-            }
-
-             /// <summary>
              /// PaymentNote.
              /// </summary>
              /// <param name="paymentNote"> paymentNote. </param>
@@ -302,7 +276,6 @@ namespace Square.Models
                     this.order,
                     this.checkoutOptions,
                     this.prePopulatedData,
-                    this.source,
                     this.paymentNote);
             }
         }

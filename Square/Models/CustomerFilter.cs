@@ -27,6 +27,7 @@ namespace Square.Models
         /// <param name="phoneNumber">phone_number.</param>
         /// <param name="referenceId">reference_id.</param>
         /// <param name="groupIds">group_ids.</param>
+        /// <param name="customAttribute">custom_attribute.</param>
         public CustomerFilter(
             Models.CustomerCreationSourceFilter creationSource = null,
             Models.TimeRange createdAt = null,
@@ -34,7 +35,8 @@ namespace Square.Models
             Models.CustomerTextFilter emailAddress = null,
             Models.CustomerTextFilter phoneNumber = null,
             Models.CustomerTextFilter referenceId = null,
-            Models.FilterValue groupIds = null)
+            Models.FilterValue groupIds = null,
+            Models.CustomerCustomAttributeFilters customAttribute = null)
         {
             this.CreationSource = creationSource;
             this.CreatedAt = createdAt;
@@ -43,6 +45,7 @@ namespace Square.Models
             this.PhoneNumber = phoneNumber;
             this.ReferenceId = referenceId;
             this.GroupIds = groupIds;
+            this.CustomAttribute = customAttribute;
         }
 
         /// <summary>
@@ -106,6 +109,14 @@ namespace Square.Models
         [JsonProperty("group_ids", NullValueHandling = NullValueHandling.Ignore)]
         public Models.FilterValue GroupIds { get; }
 
+        /// <summary>
+        /// The custom attribute filters in a set of [customer filters]($m/CustomerFilter) used in a search query. Use this filter
+        /// to search based on [custom attributes]($m/CustomAttribute) that are assigned to customer profiles. For more information, see
+        /// [Search by custom attribute](https://developer.squareup.com/docs/customers-api/use-the-api/search-customers#search-by-custom-attribute).
+        /// </summary>
+        [JsonProperty("custom_attribute", NullValueHandling = NullValueHandling.Ignore)]
+        public Models.CustomerCustomAttributeFilters CustomAttribute { get; }
+
         /// <inheritdoc/>
         public override string ToString()
         {
@@ -136,14 +147,17 @@ namespace Square.Models
                 ((this.EmailAddress == null && other.EmailAddress == null) || (this.EmailAddress?.Equals(other.EmailAddress) == true)) &&
                 ((this.PhoneNumber == null && other.PhoneNumber == null) || (this.PhoneNumber?.Equals(other.PhoneNumber) == true)) &&
                 ((this.ReferenceId == null && other.ReferenceId == null) || (this.ReferenceId?.Equals(other.ReferenceId) == true)) &&
-                ((this.GroupIds == null && other.GroupIds == null) || (this.GroupIds?.Equals(other.GroupIds) == true));
+                ((this.GroupIds == null && other.GroupIds == null) || (this.GroupIds?.Equals(other.GroupIds) == true)) &&
+                ((this.CustomAttribute == null && other.CustomAttribute == null) || (this.CustomAttribute?.Equals(other.CustomAttribute) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1632151242;
+            int hashCode = 575697742;
             hashCode = HashCode.Combine(this.CreationSource, this.CreatedAt, this.UpdatedAt, this.EmailAddress, this.PhoneNumber, this.ReferenceId, this.GroupIds);
+
+            hashCode = HashCode.Combine(hashCode, this.CustomAttribute);
 
             return hashCode;
         }
@@ -161,6 +175,7 @@ namespace Square.Models
             toStringOutput.Add($"this.PhoneNumber = {(this.PhoneNumber == null ? "null" : this.PhoneNumber.ToString())}");
             toStringOutput.Add($"this.ReferenceId = {(this.ReferenceId == null ? "null" : this.ReferenceId.ToString())}");
             toStringOutput.Add($"this.GroupIds = {(this.GroupIds == null ? "null" : this.GroupIds.ToString())}");
+            toStringOutput.Add($"this.CustomAttribute = {(this.CustomAttribute == null ? "null" : this.CustomAttribute.ToString())}");
         }
 
         /// <summary>
@@ -176,7 +191,8 @@ namespace Square.Models
                 .EmailAddress(this.EmailAddress)
                 .PhoneNumber(this.PhoneNumber)
                 .ReferenceId(this.ReferenceId)
-                .GroupIds(this.GroupIds);
+                .GroupIds(this.GroupIds)
+                .CustomAttribute(this.CustomAttribute);
             return builder;
         }
 
@@ -192,6 +208,7 @@ namespace Square.Models
             private Models.CustomerTextFilter phoneNumber;
             private Models.CustomerTextFilter referenceId;
             private Models.FilterValue groupIds;
+            private Models.CustomerCustomAttributeFilters customAttribute;
 
              /// <summary>
              /// CreationSource.
@@ -270,6 +287,17 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// CustomAttribute.
+             /// </summary>
+             /// <param name="customAttribute"> customAttribute. </param>
+             /// <returns> Builder. </returns>
+            public Builder CustomAttribute(Models.CustomerCustomAttributeFilters customAttribute)
+            {
+                this.customAttribute = customAttribute;
+                return this;
+            }
+
             /// <summary>
             /// Builds class object.
             /// </summary>
@@ -283,7 +311,8 @@ namespace Square.Models
                     this.emailAddress,
                     this.phoneNumber,
                     this.referenceId,
-                    this.groupIds);
+                    this.groupIds,
+                    this.customAttribute);
             }
         }
     }

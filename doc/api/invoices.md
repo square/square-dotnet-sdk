@@ -315,6 +315,7 @@ var bodyInvoicePaymentRequests0 = new InvoicePaymentRequest.Builder()
 bodyInvoicePaymentRequests.Add(bodyInvoicePaymentRequests0);
 
 var bodyInvoice = new Invoice.Builder()
+    .Version(1)
     .PaymentRequests(bodyInvoicePaymentRequests)
     .Build();
 var bodyFieldsToClear = new IList<string>();

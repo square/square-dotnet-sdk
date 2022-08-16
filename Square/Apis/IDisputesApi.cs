@@ -23,8 +23,8 @@ namespace Square.Apis
         /// Returns a list of disputes associated with a particular account.
         /// </summary>
         /// <param name="cursor">Optional parameter: A pagination cursor returned by a previous call to this endpoint. Provide this cursor to retrieve the next set of results for the original query. For more information, see [Pagination](https://developer.squareup.com/docs/basics/api101/pagination)..</param>
-        /// <param name="states">Optional parameter: The dispute states to filter the result. If not specified, the endpoint returns all open disputes (the dispute status is not `INQUIRY_CLOSED`, `WON`, or `LOST`)..</param>
-        /// <param name="locationId">Optional parameter: The ID of the location for which to return a list of disputes. If not specified, the endpoint returns all open disputes (the dispute status is not `INQUIRY_CLOSED`, `WON`, or `LOST`) associated with all locations..</param>
+        /// <param name="states">Optional parameter: The dispute states used to filter the result. If not specified, the endpoint returns all disputes..</param>
+        /// <param name="locationId">Optional parameter: The ID of the location for which to return a list of disputes. If not specified, the endpoint returns disputes associated with all locations..</param>
         /// <returns>Returns the Models.ListDisputesResponse response from the API call.</returns>
         Models.ListDisputesResponse ListDisputes(
                 string cursor = null,
@@ -35,8 +35,8 @@ namespace Square.Apis
         /// Returns a list of disputes associated with a particular account.
         /// </summary>
         /// <param name="cursor">Optional parameter: A pagination cursor returned by a previous call to this endpoint. Provide this cursor to retrieve the next set of results for the original query. For more information, see [Pagination](https://developer.squareup.com/docs/basics/api101/pagination)..</param>
-        /// <param name="states">Optional parameter: The dispute states to filter the result. If not specified, the endpoint returns all open disputes (the dispute status is not `INQUIRY_CLOSED`, `WON`, or `LOST`)..</param>
-        /// <param name="locationId">Optional parameter: The ID of the location for which to return a list of disputes. If not specified, the endpoint returns all open disputes (the dispute status is not `INQUIRY_CLOSED`, `WON`, or `LOST`) associated with all locations..</param>
+        /// <param name="states">Optional parameter: The dispute states used to filter the result. If not specified, the endpoint returns all disputes..</param>
+        /// <param name="locationId">Optional parameter: The ID of the location for which to return a list of disputes. If not specified, the endpoint returns disputes associated with all locations..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the Models.ListDisputesResponse response from the API call.</returns>
         Task<Models.ListDisputesResponse> ListDisputesAsync(
@@ -91,7 +91,7 @@ namespace Square.Apis
         /// Returns a list of evidence associated with a dispute.
         /// </summary>
         /// <param name="disputeId">Required parameter: The ID of the dispute..</param>
-        /// <param name="cursor">Optional parameter: A pagination cursor returned by a previous call to this endpoint. Provide this cursor to retrieve the next set of results for the original query. For more information, see [Pagination](https://developer.squareup.com/docs/basics/api101/pagination)..</param>
+        /// <param name="cursor">Optional parameter: A pagination cursor returned by a previous call to this endpoint. Provide this cursor to retrieve the next set of results for the original query. For more information, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination)..</param>
         /// <returns>Returns the Models.ListDisputeEvidenceResponse response from the API call.</returns>
         Models.ListDisputeEvidenceResponse ListDisputeEvidence(
                 string disputeId,
@@ -101,7 +101,7 @@ namespace Square.Apis
         /// Returns a list of evidence associated with a dispute.
         /// </summary>
         /// <param name="disputeId">Required parameter: The ID of the dispute..</param>
-        /// <param name="cursor">Optional parameter: A pagination cursor returned by a previous call to this endpoint. Provide this cursor to retrieve the next set of results for the original query. For more information, see [Pagination](https://developer.squareup.com/docs/basics/api101/pagination)..</param>
+        /// <param name="cursor">Optional parameter: A pagination cursor returned by a previous call to this endpoint. Provide this cursor to retrieve the next set of results for the original query. For more information, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination)..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the Models.ListDisputeEvidenceResponse response from the API call.</returns>
         Task<Models.ListDisputeEvidenceResponse> ListDisputeEvidenceAsync(
@@ -113,7 +113,7 @@ namespace Square.Apis
         /// Uploads a file to use as evidence in a dispute challenge. The endpoint accepts HTTP.
         /// multipart/form-data file uploads in HEIC, HEIF, JPEG, PDF, PNG, and TIFF formats.
         /// </summary>
-        /// <param name="disputeId">Required parameter: The ID of the dispute you want to upload evidence for..</param>
+        /// <param name="disputeId">Required parameter: The ID of the dispute for which you want to upload evidence..</param>
         /// <param name="request">Optional parameter: Defines the parameters for a `CreateDisputeEvidenceFile` request..</param>
         /// <param name="imageFile">Optional parameter: Example: .</param>
         /// <returns>Returns the Models.CreateDisputeEvidenceFileResponse response from the API call.</returns>
@@ -126,7 +126,7 @@ namespace Square.Apis
         /// Uploads a file to use as evidence in a dispute challenge. The endpoint accepts HTTP.
         /// multipart/form-data file uploads in HEIC, HEIF, JPEG, PDF, PNG, and TIFF formats.
         /// </summary>
-        /// <param name="disputeId">Required parameter: The ID of the dispute you want to upload evidence for..</param>
+        /// <param name="disputeId">Required parameter: The ID of the dispute for which you want to upload evidence..</param>
         /// <param name="request">Optional parameter: Defines the parameters for a `CreateDisputeEvidenceFile` request..</param>
         /// <param name="imageFile">Optional parameter: Example: .</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
@@ -140,7 +140,7 @@ namespace Square.Apis
         /// <summary>
         /// Uploads text to use as evidence for a dispute challenge.
         /// </summary>
-        /// <param name="disputeId">Required parameter: The ID of the dispute you want to upload evidence for..</param>
+        /// <param name="disputeId">Required parameter: The ID of the dispute for which you want to upload evidence..</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <returns>Returns the Models.CreateDisputeEvidenceTextResponse response from the API call.</returns>
         Models.CreateDisputeEvidenceTextResponse CreateDisputeEvidenceText(
@@ -150,7 +150,7 @@ namespace Square.Apis
         /// <summary>
         /// Uploads text to use as evidence for a dispute challenge.
         /// </summary>
-        /// <param name="disputeId">Required parameter: The ID of the dispute you want to upload evidence for..</param>
+        /// <param name="disputeId">Required parameter: The ID of the dispute for which you want to upload evidence..</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the Models.CreateDisputeEvidenceTextResponse response from the API call.</returns>
@@ -161,10 +161,9 @@ namespace Square.Apis
 
         /// <summary>
         /// Removes specified evidence from a dispute.
-        /// Square does not send the bank any evidence that is removed. Also, you cannot remove evidence after.
-        /// submitting it to the bank using [SubmitEvidence]($e/Disputes/SubmitEvidence).
+        /// Square does not send the bank any evidence that is removed.
         /// </summary>
-        /// <param name="disputeId">Required parameter: The ID of the dispute you want to remove evidence from..</param>
+        /// <param name="disputeId">Required parameter: The ID of the dispute from which you want to remove evidence..</param>
         /// <param name="evidenceId">Required parameter: The ID of the evidence you want to remove..</param>
         /// <returns>Returns the Models.DeleteDisputeEvidenceResponse response from the API call.</returns>
         Models.DeleteDisputeEvidenceResponse DeleteDisputeEvidence(
@@ -173,10 +172,9 @@ namespace Square.Apis
 
         /// <summary>
         /// Removes specified evidence from a dispute.
-        /// Square does not send the bank any evidence that is removed. Also, you cannot remove evidence after.
-        /// submitting it to the bank using [SubmitEvidence]($e/Disputes/SubmitEvidence).
+        /// Square does not send the bank any evidence that is removed.
         /// </summary>
-        /// <param name="disputeId">Required parameter: The ID of the dispute you want to remove evidence from..</param>
+        /// <param name="disputeId">Required parameter: The ID of the dispute from which you want to remove evidence..</param>
         /// <param name="evidenceId">Required parameter: The ID of the evidence you want to remove..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the Models.DeleteDisputeEvidenceResponse response from the API call.</returns>
@@ -186,11 +184,10 @@ namespace Square.Apis
                 CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Returns the evidence metadata specified by the evidence ID in the request URL path.
-        /// You must maintain a copy of the evidence you upload if you want to reference it later. You cannot.
-        /// download the evidence after you upload it.
+        /// Returns the metadata for the evidence specified in the request URL path.
+        /// You must maintain a copy of any evidence uploaded if you want to reference it later. Evidence cannot be downloaded after you upload it.
         /// </summary>
-        /// <param name="disputeId">Required parameter: The ID of the dispute that you want to retrieve evidence from..</param>
+        /// <param name="disputeId">Required parameter: The ID of the dispute from which you want to retrieve evidence metadata..</param>
         /// <param name="evidenceId">Required parameter: The ID of the evidence to retrieve..</param>
         /// <returns>Returns the Models.RetrieveDisputeEvidenceResponse response from the API call.</returns>
         Models.RetrieveDisputeEvidenceResponse RetrieveDisputeEvidence(
@@ -198,11 +195,10 @@ namespace Square.Apis
                 string evidenceId);
 
         /// <summary>
-        /// Returns the evidence metadata specified by the evidence ID in the request URL path.
-        /// You must maintain a copy of the evidence you upload if you want to reference it later. You cannot.
-        /// download the evidence after you upload it.
+        /// Returns the metadata for the evidence specified in the request URL path.
+        /// You must maintain a copy of any evidence uploaded if you want to reference it later. Evidence cannot be downloaded after you upload it.
         /// </summary>
-        /// <param name="disputeId">Required parameter: The ID of the dispute that you want to retrieve evidence from..</param>
+        /// <param name="disputeId">Required parameter: The ID of the dispute from which you want to retrieve evidence metadata..</param>
         /// <param name="evidenceId">Required parameter: The ID of the evidence to retrieve..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the Models.RetrieveDisputeEvidenceResponse response from the API call.</returns>
@@ -213,24 +209,26 @@ namespace Square.Apis
 
         /// <summary>
         /// Submits evidence to the cardholder's bank.
-        /// Before submitting evidence, Square compiles all available evidence. This includes evidence uploaded.
+        /// The evidence submitted by this endpoint includes evidence uploaded.
         /// using the [CreateDisputeEvidenceFile]($e/Disputes/CreateDisputeEvidenceFile) and.
         /// [CreateDisputeEvidenceText]($e/Disputes/CreateDisputeEvidenceText) endpoints and.
-        /// evidence automatically provided by Square, when available.
+        /// evidence automatically provided by Square, when available. Evidence cannot be removed from.
+        /// a dispute after submission.
         /// </summary>
-        /// <param name="disputeId">Required parameter: The ID of the dispute that you want to submit evidence for..</param>
+        /// <param name="disputeId">Required parameter: The ID of the dispute for which you want to submit evidence..</param>
         /// <returns>Returns the Models.SubmitEvidenceResponse response from the API call.</returns>
         Models.SubmitEvidenceResponse SubmitEvidence(
                 string disputeId);
 
         /// <summary>
         /// Submits evidence to the cardholder's bank.
-        /// Before submitting evidence, Square compiles all available evidence. This includes evidence uploaded.
+        /// The evidence submitted by this endpoint includes evidence uploaded.
         /// using the [CreateDisputeEvidenceFile]($e/Disputes/CreateDisputeEvidenceFile) and.
         /// [CreateDisputeEvidenceText]($e/Disputes/CreateDisputeEvidenceText) endpoints and.
-        /// evidence automatically provided by Square, when available.
+        /// evidence automatically provided by Square, when available. Evidence cannot be removed from.
+        /// a dispute after submission.
         /// </summary>
-        /// <param name="disputeId">Required parameter: The ID of the dispute that you want to submit evidence for..</param>
+        /// <param name="disputeId">Required parameter: The ID of the dispute for which you want to submit evidence..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the Models.SubmitEvidenceResponse response from the API call.</returns>
         Task<Models.SubmitEvidenceResponse> SubmitEvidenceAsync(

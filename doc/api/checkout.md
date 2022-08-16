@@ -20,6 +20,8 @@ ICheckoutApi checkoutApi = client.CheckoutApi;
 
 # Create Checkout
 
+**This endpoint is deprecated.**
+
 Links a `checkoutId` to a `checkout_page_url` that customers are
 directed to in order to provide their payment information using a
 payment processing workflow hosted on connect.squareup.com.
@@ -144,6 +146,8 @@ var bodyPrePopulateShippingAddress = new Address.Builder()
     .AdministrativeDistrictLevel1("CA")
     .PostalCode("94103")
     .Country("US")
+    .FirstName("Jane")
+    .LastName("Doe")
     .Build();
 var bodyAdditionalRecipients = new List<ChargeRequestAdditionalRecipient>();
 

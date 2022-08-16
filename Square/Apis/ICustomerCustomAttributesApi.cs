@@ -20,10 +20,11 @@ namespace Square.Apis
     public interface ICustomerCustomAttributesApi
     {
         /// <summary>
-        /// Lists the customer-related custom attribute definitions that belong to a Square seller account.
+        /// Lists the customer-related [custom attribute definitions]($m/CustomAttributeDefinition) that belong to a Square seller account.
         /// When all response pages are retrieved, the results include all custom attribute definitions.
         /// that are visible to the requesting application, including those that are created by other.
-        /// applications and set to `VISIBILITY_READ_ONLY` or `VISIBILITY_READ_WRITE_VALUES`.
+        /// applications and set to `VISIBILITY_READ_ONLY` or `VISIBILITY_READ_WRITE_VALUES`. Note that.
+        /// seller-defined custom attributes (also known as custom fields) are always set to `VISIBILITY_READ_WRITE_VALUES`.
         /// </summary>
         /// <param name="limit">Optional parameter: The maximum number of results to return in a single paged response. This limit is advisory. The response might contain more or fewer results. The minimum value is 1 and the maximum value is 100. The default value is 20. For more information, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination)..</param>
         /// <param name="cursor">Optional parameter: The cursor returned in the paged response from the previous call to this endpoint. Provide this cursor to retrieve the next page of results for your original request. For more information, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination)..</param>
@@ -33,10 +34,11 @@ namespace Square.Apis
                 string cursor = null);
 
         /// <summary>
-        /// Lists the customer-related custom attribute definitions that belong to a Square seller account.
+        /// Lists the customer-related [custom attribute definitions]($m/CustomAttributeDefinition) that belong to a Square seller account.
         /// When all response pages are retrieved, the results include all custom attribute definitions.
         /// that are visible to the requesting application, including those that are created by other.
-        /// applications and set to `VISIBILITY_READ_ONLY` or `VISIBILITY_READ_WRITE_VALUES`.
+        /// applications and set to `VISIBILITY_READ_ONLY` or `VISIBILITY_READ_WRITE_VALUES`. Note that.
+        /// seller-defined custom attributes (also known as custom fields) are always set to `VISIBILITY_READ_WRITE_VALUES`.
         /// </summary>
         /// <param name="limit">Optional parameter: The maximum number of results to return in a single paged response. This limit is advisory. The response might contain more or fewer results. The minimum value is 1 and the maximum value is 100. The default value is 20. For more information, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination)..</param>
         /// <param name="cursor">Optional parameter: The cursor returned in the paged response from the previous call to this endpoint. Provide this cursor to retrieve the next page of results for your original request. For more information, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination)..</param>
@@ -48,8 +50,8 @@ namespace Square.Apis
                 CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Creates a customer-related custom attribute definition for a Square seller account. Use this.
-        /// endpoint to define a custom attribute that can be associated with customer profiles.
+        /// Creates a customer-related [custom attribute definition]($m/CustomAttributeDefinition) for a Square seller account.
+        /// Use this endpoint to define a custom attribute that can be associated with customer profiles.
         /// A custom attribute definition specifies the `key`, `visibility`, `schema`, and other properties.
         /// for a custom attribute. After the definition is created, you can call.
         /// [UpsertCustomerCustomAttribute]($e/CustomerCustomAttributes/UpsertCustomerCustomAttribute) or.
@@ -64,8 +66,8 @@ namespace Square.Apis
                 Models.CreateCustomerCustomAttributeDefinitionRequest body);
 
         /// <summary>
-        /// Creates a customer-related custom attribute definition for a Square seller account. Use this.
-        /// endpoint to define a custom attribute that can be associated with customer profiles.
+        /// Creates a customer-related [custom attribute definition]($m/CustomAttributeDefinition) for a Square seller account.
+        /// Use this endpoint to define a custom attribute that can be associated with customer profiles.
         /// A custom attribute definition specifies the `key`, `visibility`, `schema`, and other properties.
         /// for a custom attribute. After the definition is created, you can call.
         /// [UpsertCustomerCustomAttribute]($e/CustomerCustomAttributes/UpsertCustomerCustomAttribute) or.
@@ -82,7 +84,7 @@ namespace Square.Apis
                 CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Deletes a customer-related custom attribute definition from a Square seller account.
+        /// Deletes a customer-related [custom attribute definition]($m/CustomAttributeDefinition) from a Square seller account.
         /// Deleting a custom attribute definition also deletes the corresponding custom attribute from.
         /// all customer profiles in the seller's Customer Directory.
         /// Only the definition owner can delete a custom attribute definition.
@@ -93,7 +95,7 @@ namespace Square.Apis
                 string key);
 
         /// <summary>
-        /// Deletes a customer-related custom attribute definition from a Square seller account.
+        /// Deletes a customer-related [custom attribute definition]($m/CustomAttributeDefinition) from a Square seller account.
         /// Deleting a custom attribute definition also deletes the corresponding custom attribute from.
         /// all customer profiles in the seller's Customer Directory.
         /// Only the definition owner can delete a custom attribute definition.
@@ -106,9 +108,10 @@ namespace Square.Apis
                 CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Retrieves a customer-related custom attribute definition from a Square seller account.
+        /// Retrieves a customer-related [custom attribute definition]($m/CustomAttributeDefinition) from a Square seller account.
         /// To retrieve a custom attribute definition created by another application, the `visibility`.
-        /// setting must be `VISIBILITY_READ_ONLY` or `VISIBILITY_READ_WRITE_VALUES`.
+        /// setting must be `VISIBILITY_READ_ONLY` or `VISIBILITY_READ_WRITE_VALUES`. Note that seller-defined custom attributes.
+        /// (also known as custom fields) are always set to `VISIBILITY_READ_WRITE_VALUES`.
         /// </summary>
         /// <param name="key">Required parameter: The key of the custom attribute definition to retrieve. If the requesting application is not the definition owner, you must use the qualified key..</param>
         /// <param name="version">Optional parameter: The current version of the custom attribute definition, which is used for strongly consistent reads to guarantee that you receive the most up-to-date data. When included in the request, Square returns the specified version or a higher version if one exists. If the specified version is higher than the current version, Square returns a `BAD_REQUEST` error..</param>
@@ -118,9 +121,10 @@ namespace Square.Apis
                 int? version = null);
 
         /// <summary>
-        /// Retrieves a customer-related custom attribute definition from a Square seller account.
+        /// Retrieves a customer-related [custom attribute definition]($m/CustomAttributeDefinition) from a Square seller account.
         /// To retrieve a custom attribute definition created by another application, the `visibility`.
-        /// setting must be `VISIBILITY_READ_ONLY` or `VISIBILITY_READ_WRITE_VALUES`.
+        /// setting must be `VISIBILITY_READ_ONLY` or `VISIBILITY_READ_WRITE_VALUES`. Note that seller-defined custom attributes.
+        /// (also known as custom fields) are always set to `VISIBILITY_READ_WRITE_VALUES`.
         /// </summary>
         /// <param name="key">Required parameter: The key of the custom attribute definition to retrieve. If the requesting application is not the definition owner, you must use the qualified key..</param>
         /// <param name="version">Optional parameter: The current version of the custom attribute definition, which is used for strongly consistent reads to guarantee that you receive the most up-to-date data. When included in the request, Square returns the specified version or a higher version if one exists. If the specified version is higher than the current version, Square returns a `BAD_REQUEST` error..</param>
@@ -132,7 +136,7 @@ namespace Square.Apis
                 CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Updates a customer-related custom attribute definition for a Square seller account.
+        /// Updates a customer-related [custom attribute definition]($m/CustomAttributeDefinition) for a Square seller account.
         /// Use this endpoint to update the following fields: `name`, `description`, `visibility`, or the.
         /// `schema` for a `Selection` data type.
         /// Only the definition owner can update a custom attribute definition. Note that sellers can view.
@@ -146,7 +150,7 @@ namespace Square.Apis
                 Models.UpdateCustomerCustomAttributeDefinitionRequest body);
 
         /// <summary>
-        /// Updates a customer-related custom attribute definition for a Square seller account.
+        /// Updates a customer-related [custom attribute definition]($m/CustomAttributeDefinition) for a Square seller account.
         /// Use this endpoint to update the following fields: `name`, `description`, `visibility`, or the.
         /// `schema` for a `Selection` data type.
         /// Only the definition owner can update a custom attribute definition. Note that sellers can view.
@@ -162,7 +166,7 @@ namespace Square.Apis
                 CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Creates or updates custom attributes for customer profiles as a bulk operation.
+        /// Creates or updates [custom attributes]($m/CustomAttribute) for customer profiles as a bulk operation.
         /// Use this endpoint to set the value of one or more custom attributes for one or more customer profiles.
         /// A custom attribute is based on a custom attribute definition in a Square seller account, which is.
         /// created using the [CreateCustomerCustomAttributeDefinition]($e/CustomerCustomAttributes/CreateCustomerCustomAttributeDefinition) endpoint.
@@ -171,7 +175,8 @@ namespace Square.Apis
         /// and provides a customer ID and custom attribute. Each upsert response is returned with the ID .
         /// of the corresponding request.
         /// To create or update a custom attribute owned by another application, the `visibility` setting.
-        /// must be `VISIBILITY_READ_WRITE_VALUES`.
+        /// must be `VISIBILITY_READ_WRITE_VALUES`. Note that seller-defined custom attributes.
+        /// (also known as custom fields) are always set to `VISIBILITY_READ_WRITE_VALUES`.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <returns>Returns the Models.BulkUpsertCustomerCustomAttributesResponse response from the API call.</returns>
@@ -179,7 +184,7 @@ namespace Square.Apis
                 Models.BulkUpsertCustomerCustomAttributesRequest body);
 
         /// <summary>
-        /// Creates or updates custom attributes for customer profiles as a bulk operation.
+        /// Creates or updates [custom attributes]($m/CustomAttribute) for customer profiles as a bulk operation.
         /// Use this endpoint to set the value of one or more custom attributes for one or more customer profiles.
         /// A custom attribute is based on a custom attribute definition in a Square seller account, which is.
         /// created using the [CreateCustomerCustomAttributeDefinition]($e/CustomerCustomAttributes/CreateCustomerCustomAttributeDefinition) endpoint.
@@ -188,7 +193,8 @@ namespace Square.Apis
         /// and provides a customer ID and custom attribute. Each upsert response is returned with the ID .
         /// of the corresponding request.
         /// To create or update a custom attribute owned by another application, the `visibility` setting.
-        /// must be `VISIBILITY_READ_WRITE_VALUES`.
+        /// must be `VISIBILITY_READ_WRITE_VALUES`. Note that seller-defined custom attributes.
+        /// (also known as custom fields) are always set to `VISIBILITY_READ_WRITE_VALUES`.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
@@ -198,7 +204,7 @@ namespace Square.Apis
                 CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Lists the custom attributes associated with a customer profile.
+        /// Lists the [custom attributes]($m/CustomAttribute) associated with a customer profile.
         /// You can use the `with_definitions` query parameter to also retrieve custom attribute definitions.
         /// in the same call.
         /// When all response pages are retrieved, the results include all custom attributes that are.
@@ -217,7 +223,7 @@ namespace Square.Apis
                 bool? withDefinitions = false);
 
         /// <summary>
-        /// Lists the custom attributes associated with a customer profile.
+        /// Lists the [custom attributes]($m/CustomAttribute) associated with a customer profile.
         /// You can use the `with_definitions` query parameter to also retrieve custom attribute definitions.
         /// in the same call.
         /// When all response pages are retrieved, the results include all custom attributes that are.
@@ -238,9 +244,10 @@ namespace Square.Apis
                 CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Deletes a custom attribute associated with a customer profile.
+        /// Deletes a [custom attribute]($m/CustomAttribute) associated with a customer profile.
         /// To delete a custom attribute owned by another application, the `visibility` setting must be.
-        /// `VISIBILITY_READ_WRITE_VALUES`.
+        /// `VISIBILITY_READ_WRITE_VALUES`. Note that seller-defined custom attributes.
+        /// (also known as custom fields) are always set to `VISIBILITY_READ_WRITE_VALUES`.
         /// </summary>
         /// <param name="customerId">Required parameter: The ID of the target [customer profile]($m/Customer)..</param>
         /// <param name="key">Required parameter: The key of the custom attribute to delete. This key must match the `key` of a custom attribute definition in the Square seller account. If the requesting application is not the definition owner, you must use the qualified key..</param>
@@ -250,9 +257,10 @@ namespace Square.Apis
                 string key);
 
         /// <summary>
-        /// Deletes a custom attribute associated with a customer profile.
+        /// Deletes a [custom attribute]($m/CustomAttribute) associated with a customer profile.
         /// To delete a custom attribute owned by another application, the `visibility` setting must be.
-        /// `VISIBILITY_READ_WRITE_VALUES`.
+        /// `VISIBILITY_READ_WRITE_VALUES`. Note that seller-defined custom attributes.
+        /// (also known as custom fields) are always set to `VISIBILITY_READ_WRITE_VALUES`.
         /// </summary>
         /// <param name="customerId">Required parameter: The ID of the target [customer profile]($m/Customer)..</param>
         /// <param name="key">Required parameter: The key of the custom attribute to delete. This key must match the `key` of a custom attribute definition in the Square seller account. If the requesting application is not the definition owner, you must use the qualified key..</param>
@@ -264,11 +272,12 @@ namespace Square.Apis
                 CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Retrieves a custom attribute associated with a customer profile.
+        /// Retrieves a [custom attribute]($m/CustomAttribute) associated with a customer profile.
         /// You can use the `with_definition` query parameter to also retrieve the custom attribute definition.
         /// in the same call.
         /// To retrieve a custom attribute owned by another application, the `visibility` setting must be.
-        /// `VISIBILITY_READ_ONLY` or `VISIBILITY_READ_WRITE_VALUES`.
+        /// `VISIBILITY_READ_ONLY` or `VISIBILITY_READ_WRITE_VALUES`. Note that seller-defined custom attributes.
+        /// (also known as custom fields) are always set to `VISIBILITY_READ_WRITE_VALUES`.
         /// </summary>
         /// <param name="customerId">Required parameter: The ID of the target [customer profile]($m/Customer)..</param>
         /// <param name="key">Required parameter: The key of the custom attribute to retrieve. This key must match the `key` of a custom attribute definition in the Square seller account. If the requesting application is not the definition owner, you must use the qualified key..</param>
@@ -282,11 +291,12 @@ namespace Square.Apis
                 int? version = null);
 
         /// <summary>
-        /// Retrieves a custom attribute associated with a customer profile.
+        /// Retrieves a [custom attribute]($m/CustomAttribute) associated with a customer profile.
         /// You can use the `with_definition` query parameter to also retrieve the custom attribute definition.
         /// in the same call.
         /// To retrieve a custom attribute owned by another application, the `visibility` setting must be.
-        /// `VISIBILITY_READ_ONLY` or `VISIBILITY_READ_WRITE_VALUES`.
+        /// `VISIBILITY_READ_ONLY` or `VISIBILITY_READ_WRITE_VALUES`. Note that seller-defined custom attributes.
+        /// (also known as custom fields) are always set to `VISIBILITY_READ_WRITE_VALUES`.
         /// </summary>
         /// <param name="customerId">Required parameter: The ID of the target [customer profile]($m/Customer)..</param>
         /// <param name="key">Required parameter: The key of the custom attribute to retrieve. This key must match the `key` of a custom attribute definition in the Square seller account. If the requesting application is not the definition owner, you must use the qualified key..</param>
@@ -302,12 +312,13 @@ namespace Square.Apis
                 CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Creates or updates a custom attribute for a customer profile.
+        /// Creates or updates a [custom attribute]($m/CustomAttribute) for a customer profile.
         /// Use this endpoint to set the value of a custom attribute for a specified customer profile.
         /// A custom attribute is based on a custom attribute definition in a Square seller account, which.
         /// is created using the [CreateCustomerCustomAttributeDefinition]($e/CustomerCustomAttributes/CreateCustomerCustomAttributeDefinition) endpoint.
         /// To create or update a custom attribute owned by another application, the `visibility` setting.
-        /// must be `VISIBILITY_READ_WRITE_VALUES`.
+        /// must be `VISIBILITY_READ_WRITE_VALUES`. Note that seller-defined custom attributes.
+        /// (also known as custom fields) are always set to `VISIBILITY_READ_WRITE_VALUES`.
         /// </summary>
         /// <param name="customerId">Required parameter: The ID of the target [customer profile]($m/Customer)..</param>
         /// <param name="key">Required parameter: The key of the custom attribute to create or update. This key must match the `key` of a custom attribute definition in the Square seller account. If the requesting application is not the definition owner, you must use the qualified key..</param>
@@ -319,12 +330,13 @@ namespace Square.Apis
                 Models.UpsertCustomerCustomAttributeRequest body);
 
         /// <summary>
-        /// Creates or updates a custom attribute for a customer profile.
+        /// Creates or updates a [custom attribute]($m/CustomAttribute) for a customer profile.
         /// Use this endpoint to set the value of a custom attribute for a specified customer profile.
         /// A custom attribute is based on a custom attribute definition in a Square seller account, which.
         /// is created using the [CreateCustomerCustomAttributeDefinition]($e/CustomerCustomAttributes/CreateCustomerCustomAttributeDefinition) endpoint.
         /// To create or update a custom attribute owned by another application, the `visibility` setting.
-        /// must be `VISIBILITY_READ_WRITE_VALUES`.
+        /// must be `VISIBILITY_READ_WRITE_VALUES`. Note that seller-defined custom attributes.
+        /// (also known as custom fields) are always set to `VISIBILITY_READ_WRITE_VALUES`.
         /// </summary>
         /// <param name="customerId">Required parameter: The ID of the target [customer profile]($m/Customer)..</param>
         /// <param name="key">Required parameter: The key of the custom attribute to create or update. This key must match the `key` of a custom attribute definition in the Square seller account. If the requesting application is not the definition owner, you must use the qualified key..</param>

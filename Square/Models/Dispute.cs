@@ -109,7 +109,7 @@ namespace Square.Models
         public string State { get; }
 
         /// <summary>
-        /// The time when the next action is due, in RFC 3339 format.
+        /// The deadline by which the seller must respond to the dispute, in [RFC 3339 format](https://developer.squareup.com/docs/build-basics/common-data-types/working-with-dates).
         /// </summary>
         [JsonProperty("due_at", NullValueHandling = NullValueHandling.Ignore)]
         public string DueAt { get; }

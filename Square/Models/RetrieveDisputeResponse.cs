@@ -44,7 +44,7 @@ namespace Square.Models
         public IList<Models.Error> Errors { get; }
 
         /// <summary>
-        /// Represents a dispute a cardholder initiated with their bank.
+        /// Represents a [dispute](https://developer.squareup.com/docs/disputes-api/overview) a cardholder initiated with their bank.
         /// </summary>
         [JsonProperty("dispute", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Dispute Dispute { get; }
