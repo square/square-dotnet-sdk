@@ -22,17 +22,20 @@ namespace Square.Models
         /// </summary>
         /// <param name="brand">brand.</param>
         /// <param name="afterpayDetails">afterpay_details.</param>
+        /// <param name="clearpayDetails">clearpay_details.</param>
         public BuyNowPayLaterDetails(
             string brand = null,
-            Models.AfterpayDetails afterpayDetails = null)
+            Models.AfterpayDetails afterpayDetails = null,
+            Models.ClearpayDetails clearpayDetails = null)
         {
             this.Brand = brand;
             this.AfterpayDetails = afterpayDetails;
+            this.ClearpayDetails = clearpayDetails;
         }
 
         /// <summary>
         /// The brand used for the Buy Now Pay Later payment.
-        /// The brand can be `AFTERPAY` or `UNKNOWN`.
+        /// The brand can be `AFTERPAY`, `CLEARPAY` or `UNKNOWN`.
         /// </summary>
         [JsonProperty("brand", NullValueHandling = NullValueHandling.Ignore)]
         public string Brand { get; }
@@ -42,6 +45,12 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("afterpay_details", NullValueHandling = NullValueHandling.Ignore)]
         public Models.AfterpayDetails AfterpayDetails { get; }
+
+        /// <summary>
+        /// Additional details about Clearpay payments.
+        /// </summary>
+        [JsonProperty("clearpay_details", NullValueHandling = NullValueHandling.Ignore)]
+        public Models.ClearpayDetails ClearpayDetails { get; }
 
         /// <inheritdoc/>
         public override string ToString()
@@ -68,14 +77,15 @@ namespace Square.Models
 
             return obj is BuyNowPayLaterDetails other &&
                 ((this.Brand == null && other.Brand == null) || (this.Brand?.Equals(other.Brand) == true)) &&
-                ((this.AfterpayDetails == null && other.AfterpayDetails == null) || (this.AfterpayDetails?.Equals(other.AfterpayDetails) == true));
+                ((this.AfterpayDetails == null && other.AfterpayDetails == null) || (this.AfterpayDetails?.Equals(other.AfterpayDetails) == true)) &&
+                ((this.ClearpayDetails == null && other.ClearpayDetails == null) || (this.ClearpayDetails?.Equals(other.ClearpayDetails) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1354392029;
-            hashCode = HashCode.Combine(this.Brand, this.AfterpayDetails);
+            int hashCode = -1757190860;
+            hashCode = HashCode.Combine(this.Brand, this.AfterpayDetails, this.ClearpayDetails);
 
             return hashCode;
         }
@@ -88,6 +98,7 @@ namespace Square.Models
         {
             toStringOutput.Add($"this.Brand = {(this.Brand == null ? "null" : this.Brand == string.Empty ? "" : this.Brand)}");
             toStringOutput.Add($"this.AfterpayDetails = {(this.AfterpayDetails == null ? "null" : this.AfterpayDetails.ToString())}");
+            toStringOutput.Add($"this.ClearpayDetails = {(this.ClearpayDetails == null ? "null" : this.ClearpayDetails.ToString())}");
         }
 
         /// <summary>
@@ -98,7 +109,8 @@ namespace Square.Models
         {
             var builder = new Builder()
                 .Brand(this.Brand)
-                .AfterpayDetails(this.AfterpayDetails);
+                .AfterpayDetails(this.AfterpayDetails)
+                .ClearpayDetails(this.ClearpayDetails);
             return builder;
         }
 
@@ -109,6 +121,7 @@ namespace Square.Models
         {
             private string brand;
             private Models.AfterpayDetails afterpayDetails;
+            private Models.ClearpayDetails clearpayDetails;
 
              /// <summary>
              /// Brand.
@@ -132,6 +145,17 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// ClearpayDetails.
+             /// </summary>
+             /// <param name="clearpayDetails"> clearpayDetails. </param>
+             /// <returns> Builder. </returns>
+            public Builder ClearpayDetails(Models.ClearpayDetails clearpayDetails)
+            {
+                this.clearpayDetails = clearpayDetails;
+                return this;
+            }
+
             /// <summary>
             /// Builds class object.
             /// </summary>
@@ -140,7 +164,8 @@ namespace Square.Models
             {
                 return new BuyNowPayLaterDetails(
                     this.brand,
-                    this.afterpayDetails);
+                    this.afterpayDetails,
+                    this.clearpayDetails);
             }
         }
     }
