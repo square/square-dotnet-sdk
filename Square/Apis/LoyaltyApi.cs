@@ -256,7 +256,8 @@ namespace Square.Apis
         /// - If you are not using the Orders API to manage orders, provide `points` with the number of points to add.
         /// You must first perform a client-side computation of the points earned from the loyalty program and.
         /// loyalty promotion. For spend-based and visit-based programs, you can call [CalculateLoyaltyPoints]($e/Loyalty/CalculateLoyaltyPoints).
-        /// to compute the points earned from the loyalty program (but not points earned from a loyalty promotion).
+        /// to compute the points earned from the base loyalty program. For information about computing points earned from a loyalty promotion, see.
+        /// [Calculating promotion points](https://developer.squareup.com/docs/loyalty-api/loyalty-promotions#calculate-promotion-points).
         /// </summary>
         /// <param name="accountId">Required parameter: The ID of the target [loyalty account]($m/LoyaltyAccount)..</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
@@ -281,7 +282,8 @@ namespace Square.Apis
         /// - If you are not using the Orders API to manage orders, provide `points` with the number of points to add.
         /// You must first perform a client-side computation of the points earned from the loyalty program and.
         /// loyalty promotion. For spend-based and visit-based programs, you can call [CalculateLoyaltyPoints]($e/Loyalty/CalculateLoyaltyPoints).
-        /// to compute the points earned from the loyalty program (but not points earned from a loyalty promotion).
+        /// to compute the points earned from the base loyalty program. For information about computing points earned from a loyalty promotion, see.
+        /// [Calculating promotion points](https://developer.squareup.com/docs/loyalty-api/loyalty-promotions#calculate-promotion-points).
         /// </summary>
         /// <param name="accountId">Required parameter: The ID of the target [loyalty account]($m/LoyaltyAccount)..</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>

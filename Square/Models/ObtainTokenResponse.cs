@@ -32,8 +32,6 @@ namespace Square.Models
         /// <param name="shortLived">short_lived.</param>
         /// <param name="errors">errors.</param>
         /// <param name="refreshTokenExpiresAt">refresh_token_expires_at.</param>
-        /// <param name="appSubscriptionId">app_subscription_id.</param>
-        /// <param name="appPlanId">app_plan_id.</param>
         public ObtainTokenResponse(
             string accessToken = null,
             string tokenType = null,
@@ -45,9 +43,7 @@ namespace Square.Models
             string refreshToken = null,
             bool? shortLived = null,
             IList<Models.Error> errors = null,
-            string refreshTokenExpiresAt = null,
-            string appSubscriptionId = null,
-            string appPlanId = null)
+            string refreshTokenExpiresAt = null)
         {
             this.AccessToken = accessToken;
             this.TokenType = tokenType;
@@ -60,8 +56,6 @@ namespace Square.Models
             this.ShortLived = shortLived;
             this.Errors = errors;
             this.RefreshTokenExpiresAt = refreshTokenExpiresAt;
-            this.AppSubscriptionId = appSubscriptionId;
-            this.AppPlanId = appPlanId;
         }
 
         /// <summary>
@@ -144,20 +138,6 @@ namespace Square.Models
         [JsonProperty("refresh_token_expires_at", NullValueHandling = NullValueHandling.Ignore)]
         public string RefreshTokenExpiresAt { get; }
 
-        /// <summary>
-        /// The subscription id of a v2 subscription the merchant signed up
-        /// for. The subscription id is only present if the merchant signed up for a subscription during authorization.
-        /// </summary>
-        [JsonProperty("app_subscription_id", NullValueHandling = NullValueHandling.Ignore)]
-        public string AppSubscriptionId { get; }
-
-        /// <summary>
-        /// The plan id of a v2 subscription plan the merchant signed up
-        /// for. The plan id is only present if the merchant signed up for a subscription plan during authorization.
-        /// </summary>
-        [JsonProperty("app_plan_id", NullValueHandling = NullValueHandling.Ignore)]
-        public string AppPlanId { get; }
-
         /// <inheritdoc/>
         public override string ToString()
         {
@@ -193,15 +173,13 @@ namespace Square.Models
                 ((this.RefreshToken == null && other.RefreshToken == null) || (this.RefreshToken?.Equals(other.RefreshToken) == true)) &&
                 ((this.ShortLived == null && other.ShortLived == null) || (this.ShortLived?.Equals(other.ShortLived) == true)) &&
                 ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true)) &&
-                ((this.RefreshTokenExpiresAt == null && other.RefreshTokenExpiresAt == null) || (this.RefreshTokenExpiresAt?.Equals(other.RefreshTokenExpiresAt) == true)) &&
-                ((this.AppSubscriptionId == null && other.AppSubscriptionId == null) || (this.AppSubscriptionId?.Equals(other.AppSubscriptionId) == true)) &&
-                ((this.AppPlanId == null && other.AppPlanId == null) || (this.AppPlanId?.Equals(other.AppPlanId) == true));
+                ((this.RefreshTokenExpiresAt == null && other.RefreshTokenExpiresAt == null) || (this.RefreshTokenExpiresAt?.Equals(other.RefreshTokenExpiresAt) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 878100722;
+            int hashCode = -62575650;
 
             if (this.Context != null)
             {
@@ -209,7 +187,7 @@ namespace Square.Models
             }
             hashCode = HashCode.Combine(this.AccessToken, this.TokenType, this.ExpiresAt, this.MerchantId, this.SubscriptionId, this.PlanId, this.IdToken);
 
-            hashCode = HashCode.Combine(hashCode, this.RefreshToken, this.ShortLived, this.Errors, this.RefreshTokenExpiresAt, this.AppSubscriptionId, this.AppPlanId);
+            hashCode = HashCode.Combine(hashCode, this.RefreshToken, this.ShortLived, this.Errors, this.RefreshTokenExpiresAt);
 
             return hashCode;
         }
@@ -231,8 +209,6 @@ namespace Square.Models
             toStringOutput.Add($"this.ShortLived = {(this.ShortLived == null ? "null" : this.ShortLived.ToString())}");
             toStringOutput.Add($"this.Errors = {(this.Errors == null ? "null" : $"[{string.Join(", ", this.Errors)} ]")}");
             toStringOutput.Add($"this.RefreshTokenExpiresAt = {(this.RefreshTokenExpiresAt == null ? "null" : this.RefreshTokenExpiresAt == string.Empty ? "" : this.RefreshTokenExpiresAt)}");
-            toStringOutput.Add($"this.AppSubscriptionId = {(this.AppSubscriptionId == null ? "null" : this.AppSubscriptionId == string.Empty ? "" : this.AppSubscriptionId)}");
-            toStringOutput.Add($"this.AppPlanId = {(this.AppPlanId == null ? "null" : this.AppPlanId == string.Empty ? "" : this.AppPlanId)}");
         }
 
         /// <summary>
@@ -252,9 +228,7 @@ namespace Square.Models
                 .RefreshToken(this.RefreshToken)
                 .ShortLived(this.ShortLived)
                 .Errors(this.Errors)
-                .RefreshTokenExpiresAt(this.RefreshTokenExpiresAt)
-                .AppSubscriptionId(this.AppSubscriptionId)
-                .AppPlanId(this.AppPlanId);
+                .RefreshTokenExpiresAt(this.RefreshTokenExpiresAt);
             return builder;
         }
 
@@ -274,8 +248,6 @@ namespace Square.Models
             private bool? shortLived;
             private IList<Models.Error> errors;
             private string refreshTokenExpiresAt;
-            private string appSubscriptionId;
-            private string appPlanId;
 
              /// <summary>
              /// AccessToken.
@@ -398,28 +370,6 @@ namespace Square.Models
                 return this;
             }
 
-             /// <summary>
-             /// AppSubscriptionId.
-             /// </summary>
-             /// <param name="appSubscriptionId"> appSubscriptionId. </param>
-             /// <returns> Builder. </returns>
-            public Builder AppSubscriptionId(string appSubscriptionId)
-            {
-                this.appSubscriptionId = appSubscriptionId;
-                return this;
-            }
-
-             /// <summary>
-             /// AppPlanId.
-             /// </summary>
-             /// <param name="appPlanId"> appPlanId. </param>
-             /// <returns> Builder. </returns>
-            public Builder AppPlanId(string appPlanId)
-            {
-                this.appPlanId = appPlanId;
-                return this;
-            }
-
             /// <summary>
             /// Builds class object.
             /// </summary>
@@ -437,9 +387,7 @@ namespace Square.Models
                     this.refreshToken,
                     this.shortLived,
                     this.errors,
-                    this.refreshTokenExpiresAt,
-                    this.appSubscriptionId,
-                    this.appPlanId);
+                    this.refreshTokenExpiresAt);
             }
         }
     }

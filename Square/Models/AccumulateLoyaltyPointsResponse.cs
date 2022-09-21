@@ -54,8 +54,8 @@ namespace Square.Models
         public Models.LoyaltyEvent MEvent { get; }
 
         /// <summary>
-        /// The resulting loyalty events. The `ACCUMULATE_POINTS` event is always included.
-        /// When using the Orders API, the `ACCUMULATE_PROMOTION_POINTS` event is included
+        /// The resulting loyalty events. If the purchase qualifies for points, the `ACCUMULATE_POINTS` event
+        /// is always included. When using the Orders API, the `ACCUMULATE_PROMOTION_POINTS` event is included
         /// if the purchase also qualifies for a loyalty promotion.
         /// </summary>
         [JsonProperty("events", NullValueHandling = NullValueHandling.Ignore)]

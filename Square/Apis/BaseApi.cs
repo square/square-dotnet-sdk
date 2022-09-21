@@ -77,6 +77,10 @@ namespace Square.Apis
         /// <returns> MultipartContent. </returns>
         internal static MultipartContent CreateJsonEncodedMultipartContent(object input, Dictionary<string, IReadOnlyCollection<string>> headers)
         {
+            if (input == null)
+            {
+                return null;
+            }
             return new MultipartByteArrayContent(Encoding.ASCII.GetBytes(ApiHelper.JsonSerialize(input)), headers);
         }
 
@@ -88,14 +92,15 @@ namespace Square.Apis
         /// <returns> MultipartContent. </returns>
         internal static MultipartContent CreateFileMultipartContent(FileStreamInfo input, Dictionary<string, IReadOnlyCollection<string>> headers = null)
         {
+            if (input == null)
+            {
+                return null;
+            }
             if (headers == null)
             {
                 return new MultipartFileContent(input);
             }
-            else
-            {
-                return new MultipartFileContent(input, headers);
-            }
+            return new MultipartFileContent(input, headers);
         }
 
         /// <summary>
@@ -125,7 +130,7 @@ namespace Square.Apis
         /// </summary>
         private void UpdateUserAgent()
         {
-            internalUserAgent = "Square-DotNet-SDK/21.1.0 ({api-version}) {engine}/{engine-version} ({os-info}) {detail}";
+            internalUserAgent = "Square-DotNet-SDK/22.0.0 ({api-version}) {engine}/{engine-version} ({os-info}) {detail}";
             string userAgentDetail = string.Empty;
 
             if (!string.IsNullOrEmpty(Config.UserAgentDetail))

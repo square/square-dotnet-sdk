@@ -55,7 +55,7 @@ namespace Square.Models
 
         /// <summary>
         /// Filter results with the desired status of the `TerminalAction`
-        /// Options: PENDING, IN_PROGRESS, CANCELED, COMPLETED
+        /// Options: `PENDING`, `IN_PROGRESS`, `CANCEL_REQUESTED`, `CANCELED`, `COMPLETED`
         /// </summary>
         [JsonProperty("status", NullValueHandling = NullValueHandling.Ignore)]
         public string Status { get; }

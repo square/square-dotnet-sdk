@@ -111,7 +111,7 @@ namespace Square.Apis
         /// <param name="cursor">Optional parameter: A pagination cursor returned by a previous call to this endpoint. Provide this to retrieve the next set of results for your original query.  For more information, see [Pagination](https://developer.squareup.com/docs/basics/api101/pagination)..</param>
         /// <param name="includeDisabled">Optional parameter: Includes disabled [Subscription]($m/WebhookSubscription)s. By default, all enabled [Subscription]($m/WebhookSubscription)s are returned..</param>
         /// <param name="sortOrder">Optional parameter: Sorts the returned list by when the [Subscription]($m/WebhookSubscription) was created with the specified order. This field defaults to ASC..</param>
-        /// <param name="limit">Optional parameter: The maximum number of results to be returned in a single page. It is possible to receive fewer results than the specified limit on a given page. The default value of 100 is also the maximum allowed value. If the provided value is greater than 100, it is ignored and the default value is used instead.  Default: 100.</param>
+        /// <param name="limit">Optional parameter: The maximum number of results to be returned in a single page. It is possible to receive fewer results than the specified limit on a given page. The default value of 100 is also the maximum allowed value.  Default: 100.</param>
         /// <returns>Returns the Models.ListWebhookSubscriptionsResponse response from the API call.</returns>
         public Models.ListWebhookSubscriptionsResponse ListWebhookSubscriptions(
                 string cursor = null,
@@ -130,7 +130,7 @@ namespace Square.Apis
         /// <param name="cursor">Optional parameter: A pagination cursor returned by a previous call to this endpoint. Provide this to retrieve the next set of results for your original query.  For more information, see [Pagination](https://developer.squareup.com/docs/basics/api101/pagination)..</param>
         /// <param name="includeDisabled">Optional parameter: Includes disabled [Subscription]($m/WebhookSubscription)s. By default, all enabled [Subscription]($m/WebhookSubscription)s are returned..</param>
         /// <param name="sortOrder">Optional parameter: Sorts the returned list by when the [Subscription]($m/WebhookSubscription) was created with the specified order. This field defaults to ASC..</param>
-        /// <param name="limit">Optional parameter: The maximum number of results to be returned in a single page. It is possible to receive fewer results than the specified limit on a given page. The default value of 100 is also the maximum allowed value. If the provided value is greater than 100, it is ignored and the default value is used instead.  Default: 100.</param>
+        /// <param name="limit">Optional parameter: The maximum number of results to be returned in a single page. It is possible to receive fewer results than the specified limit on a given page. The default value of 100 is also the maximum allowed value.  Default: 100.</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the Models.ListWebhookSubscriptionsResponse response from the API call.</returns>
         public async Task<Models.ListWebhookSubscriptionsResponse> ListWebhookSubscriptionsAsync(

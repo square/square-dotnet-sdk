@@ -10,25 +10,25 @@ IV1TransactionsApi v1TransactionsApi = client.V1TransactionsApi;
 
 ## Methods
 
-* [List Orders](../../doc/api/v1-transactions.md#list-orders)
-* [Retrieve Order](../../doc/api/v1-transactions.md#retrieve-order)
-* [Update Order](../../doc/api/v1-transactions.md#update-order)
-* [List Payments](../../doc/api/v1-transactions.md#list-payments)
-* [Retrieve Payment](../../doc/api/v1-transactions.md#retrieve-payment)
-* [List Refunds](../../doc/api/v1-transactions.md#list-refunds)
-* [Create Refund](../../doc/api/v1-transactions.md#create-refund)
-* [List Settlements](../../doc/api/v1-transactions.md#list-settlements)
-* [Retrieve Settlement](../../doc/api/v1-transactions.md#retrieve-settlement)
+* [V1 List Orders](../../doc/api/v1-transactions.md#v1-list-orders)
+* [V1 Retrieve Order](../../doc/api/v1-transactions.md#v1-retrieve-order)
+* [V1 Update Order](../../doc/api/v1-transactions.md#v1-update-order)
+* [V1 List Payments](../../doc/api/v1-transactions.md#v1-list-payments)
+* [V1 Retrieve Payment](../../doc/api/v1-transactions.md#v1-retrieve-payment)
+* [V1 List Refunds](../../doc/api/v1-transactions.md#v1-list-refunds)
+* [V1 Create Refund](../../doc/api/v1-transactions.md#v1-create-refund)
+* [V1 List Settlements](../../doc/api/v1-transactions.md#v1-list-settlements)
+* [V1 Retrieve Settlement](../../doc/api/v1-transactions.md#v1-retrieve-settlement)
 
 
-# List Orders
+# V1 List Orders
 
 **This endpoint is deprecated.**
 
 Provides summary information for a merchant's online store orders.
 
 ```csharp
-ListOrdersAsync(
+V1ListOrdersAsync(
     string locationId,
     string order = null,
     int? limit = null,
@@ -55,20 +55,20 @@ string locationId = "location_id4";
 
 try
 {
-    List<V1Order> result = await v1TransactionsApi.ListOrdersAsync(locationId, null, null, null);
+    List<V1Order> result = await v1TransactionsApi.V1ListOrdersAsync(locationId, null, null, null);
 }
 catch (ApiException e){};
 ```
 
 
-# Retrieve Order
+# V1 Retrieve Order
 
 **This endpoint is deprecated.**
 
 Provides comprehensive information for a single online store order, including the order's history.
 
 ```csharp
-RetrieveOrderAsync(
+V1RetrieveOrderAsync(
     string locationId,
     string orderId)
 ```
@@ -92,20 +92,20 @@ string orderId = "order_id6";
 
 try
 {
-    V1Order result = await v1TransactionsApi.RetrieveOrderAsync(locationId, orderId);
+    V1Order result = await v1TransactionsApi.V1RetrieveOrderAsync(locationId, orderId);
 }
 catch (ApiException e){};
 ```
 
 
-# Update Order
+# V1 Update Order
 
 **This endpoint is deprecated.**
 
 Updates the details of an online store order. Every update you perform on an order corresponds to one of three actions:
 
 ```csharp
-UpdateOrderAsync(
+V1UpdateOrderAsync(
     string locationId,
     string orderId,
     Models.V1UpdateOrderRequest body)
@@ -134,13 +134,13 @@ var body = new V1UpdateOrderRequest.Builder(
 
 try
 {
-    V1Order result = await v1TransactionsApi.UpdateOrderAsync(locationId, orderId, body);
+    V1Order result = await v1TransactionsApi.V1UpdateOrderAsync(locationId, orderId, body);
 }
 catch (ApiException e){};
 ```
 
 
-# List Payments
+# V1 List Payments
 
 **This endpoint is deprecated.**
 
@@ -157,7 +157,7 @@ list an offline payment chronologically between online payments that
 were seen in a previous request.
 
 ```csharp
-ListPaymentsAsync(
+V1ListPaymentsAsync(
     string locationId,
     string order = null,
     string beginTime = null,
@@ -191,20 +191,20 @@ bool? includePartial = false;
 
 try
 {
-    List<V1Payment> result = await v1TransactionsApi.ListPaymentsAsync(locationId, null, null, null, null, null, includePartial);
+    List<V1Payment> result = await v1TransactionsApi.V1ListPaymentsAsync(locationId, null, null, null, null, null, includePartial);
 }
 catch (ApiException e){};
 ```
 
 
-# Retrieve Payment
+# V1 Retrieve Payment
 
 **This endpoint is deprecated.**
 
 Provides comprehensive information for a single payment.
 
 ```csharp
-RetrievePaymentAsync(
+V1RetrievePaymentAsync(
     string locationId,
     string paymentId)
 ```
@@ -228,20 +228,20 @@ string paymentId = "payment_id0";
 
 try
 {
-    V1Payment result = await v1TransactionsApi.RetrievePaymentAsync(locationId, paymentId);
+    V1Payment result = await v1TransactionsApi.V1RetrievePaymentAsync(locationId, paymentId);
 }
 catch (ApiException e){};
 ```
 
 
-# List Refunds
+# V1 List Refunds
 
 **This endpoint is deprecated.**
 
 Provides the details for all refunds initiated by a merchant or any of the merchant's mobile staff during a date range. Date ranges cannot exceed one year in length.
 
 ```csharp
-ListRefundsAsync(
+V1ListRefundsAsync(
     string locationId,
     string order = null,
     string beginTime = null,
@@ -272,13 +272,13 @@ string locationId = "location_id4";
 
 try
 {
-    List<V1Refund> result = await v1TransactionsApi.ListRefundsAsync(locationId, null, null, null, null, null);
+    List<V1Refund> result = await v1TransactionsApi.V1ListRefundsAsync(locationId, null, null, null, null, null);
 }
 catch (ApiException e){};
 ```
 
 
-# Create Refund
+# V1 Create Refund
 
 **This endpoint is deprecated.**
 
@@ -296,7 +296,7 @@ purposes, you can create fake cash payments in Square Point of Sale and
 refund them.
 
 ```csharp
-CreateRefundAsync(
+V1CreateRefundAsync(
     string locationId,
     Models.V1CreateRefundRequest body)
 ```
@@ -324,13 +324,13 @@ var body = new V1CreateRefundRequest.Builder(
 
 try
 {
-    V1Refund result = await v1TransactionsApi.CreateRefundAsync(locationId, body);
+    V1Refund result = await v1TransactionsApi.V1CreateRefundAsync(locationId, body);
 }
 catch (ApiException e){};
 ```
 
 
-# List Settlements
+# V1 List Settlements
 
 **This endpoint is deprecated.**
 
@@ -342,7 +342,7 @@ ranges cannot exceed one year in length.
 information.
 
 ```csharp
-ListSettlementsAsync(
+V1ListSettlementsAsync(
     string locationId,
     string order = null,
     string beginTime = null,
@@ -375,13 +375,13 @@ string locationId = "location_id4";
 
 try
 {
-    List<V1Settlement> result = await v1TransactionsApi.ListSettlementsAsync(locationId, null, null, null, null, null, null);
+    List<V1Settlement> result = await v1TransactionsApi.V1ListSettlementsAsync(locationId, null, null, null, null, null, null);
 }
 catch (ApiException e){};
 ```
 
 
-# Retrieve Settlement
+# V1 Retrieve Settlement
 
 **This endpoint is deprecated.**
 
@@ -404,7 +404,7 @@ a bank account within 3 business days, but in exceptional cases it may
 take longer.
 
 ```csharp
-RetrieveSettlementAsync(
+V1RetrieveSettlementAsync(
     string locationId,
     string settlementId)
 ```
@@ -428,7 +428,7 @@ string settlementId = "settlement_id0";
 
 try
 {
-    V1Settlement result = await v1TransactionsApi.RetrieveSettlementAsync(locationId, settlementId);
+    V1Settlement result = await v1TransactionsApi.V1RetrieveSettlementAsync(locationId, settlementId);
 }
 catch (ApiException e){};
 ```

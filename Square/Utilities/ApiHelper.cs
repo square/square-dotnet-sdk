@@ -37,7 +37,10 @@ namespace Square.Utilities
                 return null;
             }
 
-            var settings = new JsonSerializerSettings();
+            var settings = new JsonSerializerSettings()
+            {
+                MaxDepth = 128
+            };
 
             if (converter == null)
             {

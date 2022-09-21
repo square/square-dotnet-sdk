@@ -140,6 +140,7 @@ var bodyInvoice = new Invoice.Builder()
     .AcceptedPaymentMethods(bodyInvoiceAcceptedPaymentMethods)
     .CustomFields(bodyInvoiceCustomFields)
     .SaleOrServiceDate("2030-01-24")
+    .StorePaymentMethodEnabled(false)
     .Build();
 var body = new CreateInvoiceRequest.Builder(
         bodyInvoice)

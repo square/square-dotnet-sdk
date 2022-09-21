@@ -42,6 +42,7 @@ namespace Square.Models
         /// <param name="subscriptionId">subscription_id.</param>
         /// <param name="saleOrServiceDate">sale_or_service_date.</param>
         /// <param name="paymentConditions">payment_conditions.</param>
+        /// <param name="storePaymentMethodEnabled">store_payment_method_enabled.</param>
         public Invoice(
             string id = null,
             int? version = null,
@@ -64,7 +65,8 @@ namespace Square.Models
             IList<Models.InvoiceCustomField> customFields = null,
             string subscriptionId = null,
             string saleOrServiceDate = null,
-            string paymentConditions = null)
+            string paymentConditions = null,
+            bool? storePaymentMethodEnabled = null)
         {
             this.Id = id;
             this.Version = version;
@@ -88,6 +90,7 @@ namespace Square.Models
             this.SubscriptionId = subscriptionId;
             this.SaleOrServiceDate = saleOrServiceDate;
             this.PaymentConditions = paymentConditions;
+            this.StorePaymentMethodEnabled = storePaymentMethodEnabled;
         }
 
         /// <summary>
@@ -267,6 +270,14 @@ namespace Square.Models
         [JsonProperty("payment_conditions", NullValueHandling = NullValueHandling.Ignore)]
         public string PaymentConditions { get; }
 
+        /// <summary>
+        /// Indicates whether to allow a customer to save a credit or debit card as a card on file or a bank transfer as a
+        /// bank account on file. If `true`, Square displays a __Save my card on file__ or __Save my bank on file__ checkbox on the
+        /// invoice payment page. Stored payment information can be used for future automatic payments. The default value is `false`.
+        /// </summary>
+        [JsonProperty("store_payment_method_enabled", NullValueHandling = NullValueHandling.Ignore)]
+        public bool? StorePaymentMethodEnabled { get; }
+
         /// <inheritdoc/>
         public override string ToString()
         {
@@ -312,20 +323,21 @@ namespace Square.Models
                 ((this.CustomFields == null && other.CustomFields == null) || (this.CustomFields?.Equals(other.CustomFields) == true)) &&
                 ((this.SubscriptionId == null && other.SubscriptionId == null) || (this.SubscriptionId?.Equals(other.SubscriptionId) == true)) &&
                 ((this.SaleOrServiceDate == null && other.SaleOrServiceDate == null) || (this.SaleOrServiceDate?.Equals(other.SaleOrServiceDate) == true)) &&
-                ((this.PaymentConditions == null && other.PaymentConditions == null) || (this.PaymentConditions?.Equals(other.PaymentConditions) == true));
+                ((this.PaymentConditions == null && other.PaymentConditions == null) || (this.PaymentConditions?.Equals(other.PaymentConditions) == true)) &&
+                ((this.StorePaymentMethodEnabled == null && other.StorePaymentMethodEnabled == null) || (this.StorePaymentMethodEnabled?.Equals(other.StorePaymentMethodEnabled) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -799470695;
+            int hashCode = -1679181268;
             hashCode = HashCode.Combine(this.Id, this.Version, this.LocationId, this.OrderId, this.PrimaryRecipient, this.PaymentRequests, this.DeliveryMethod);
 
             hashCode = HashCode.Combine(hashCode, this.InvoiceNumber, this.Title, this.Description, this.ScheduledAt, this.PublicUrl, this.NextPaymentAmountMoney, this.Status);
 
             hashCode = HashCode.Combine(hashCode, this.Timezone, this.CreatedAt, this.UpdatedAt, this.AcceptedPaymentMethods, this.CustomFields, this.SubscriptionId, this.SaleOrServiceDate);
 
-            hashCode = HashCode.Combine(hashCode, this.PaymentConditions);
+            hashCode = HashCode.Combine(hashCode, this.PaymentConditions, this.StorePaymentMethodEnabled);
 
             return hashCode;
         }
@@ -358,6 +370,7 @@ namespace Square.Models
             toStringOutput.Add($"this.SubscriptionId = {(this.SubscriptionId == null ? "null" : this.SubscriptionId == string.Empty ? "" : this.SubscriptionId)}");
             toStringOutput.Add($"this.SaleOrServiceDate = {(this.SaleOrServiceDate == null ? "null" : this.SaleOrServiceDate == string.Empty ? "" : this.SaleOrServiceDate)}");
             toStringOutput.Add($"this.PaymentConditions = {(this.PaymentConditions == null ? "null" : this.PaymentConditions == string.Empty ? "" : this.PaymentConditions)}");
+            toStringOutput.Add($"this.StorePaymentMethodEnabled = {(this.StorePaymentMethodEnabled == null ? "null" : this.StorePaymentMethodEnabled.ToString())}");
         }
 
         /// <summary>
@@ -388,7 +401,8 @@ namespace Square.Models
                 .CustomFields(this.CustomFields)
                 .SubscriptionId(this.SubscriptionId)
                 .SaleOrServiceDate(this.SaleOrServiceDate)
-                .PaymentConditions(this.PaymentConditions);
+                .PaymentConditions(this.PaymentConditions)
+                .StorePaymentMethodEnabled(this.StorePaymentMethodEnabled);
             return builder;
         }
 
@@ -419,6 +433,7 @@ namespace Square.Models
             private string subscriptionId;
             private string saleOrServiceDate;
             private string paymentConditions;
+            private bool? storePaymentMethodEnabled;
 
              /// <summary>
              /// Id.
@@ -662,6 +677,17 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// StorePaymentMethodEnabled.
+             /// </summary>
+             /// <param name="storePaymentMethodEnabled"> storePaymentMethodEnabled. </param>
+             /// <returns> Builder. </returns>
+            public Builder StorePaymentMethodEnabled(bool? storePaymentMethodEnabled)
+            {
+                this.storePaymentMethodEnabled = storePaymentMethodEnabled;
+                return this;
+            }
+
             /// <summary>
             /// Builds class object.
             /// </summary>
@@ -690,7 +716,8 @@ namespace Square.Models
                     this.customFields,
                     this.subscriptionId,
                     this.saleOrServiceDate,
-                    this.paymentConditions);
+                    this.paymentConditions,
+                    this.storePaymentMethodEnabled);
             }
         }
     }
