@@ -110,6 +110,7 @@ var bodyInvoiceAcceptedPaymentMethods = new InvoiceAcceptedPaymentMethods.Builde
     .Card(true)
     .SquareGiftCard(false)
     .BankAccount(false)
+    .BuyNowPayLater(false)
     .Build();
 var bodyInvoiceCustomFields = new List<InvoiceCustomField>();
 

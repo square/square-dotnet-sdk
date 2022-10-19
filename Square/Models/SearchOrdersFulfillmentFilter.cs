@@ -31,19 +31,19 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// A list of [fulfillment types]($m/OrderFulfillmentType) to filter
+        /// A list of [fulfillment types]($m/FulfillmentType) to filter
         /// for. The list returns orders if any of its fulfillments match any of the fulfillment types
         /// listed in this field.
-        /// See [OrderFulfillmentType](#type-orderfulfillmenttype) for possible values
+        /// See [FulfillmentType](#type-fulfillmenttype) for possible values
         /// </summary>
         [JsonProperty("fulfillment_types", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> FulfillmentTypes { get; }
 
         /// <summary>
-        /// A list of [fulfillment states]($m/OrderFulfillmentState) to filter
+        /// A list of [fulfillment states]($m/FulfillmentState) to filter
         /// for. The list returns orders if any of its fulfillments match any of the
         /// fulfillment states listed in this field.
-        /// See [OrderFulfillmentState](#type-orderfulfillmentstate) for possible values
+        /// See [FulfillmentState](#type-fulfillmentstate) for possible values
         /// </summary>
         [JsonProperty("fulfillment_states", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> FulfillmentStates { get; }

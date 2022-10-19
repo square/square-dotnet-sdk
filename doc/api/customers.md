@@ -106,7 +106,7 @@ var body = new CreateCustomerRequest.Builder()
     .FamilyName("Earhart")
     .EmailAddress("Amelia.Earhart@example.com")
     .Address(bodyAddress)
-    .PhoneNumber("1-212-555-4240")
+    .PhoneNumber("+1-212-555-4240")
     .ReferenceId("YOUR_REFERENCE_ID")
     .Note("a customer")
     .Build();

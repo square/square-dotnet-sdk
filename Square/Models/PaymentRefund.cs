@@ -24,6 +24,9 @@ namespace Square.Models
         /// <param name="amountMoney">amount_money.</param>
         /// <param name="status">status.</param>
         /// <param name="locationId">location_id.</param>
+        /// <param name="unlinked">unlinked.</param>
+        /// <param name="destinationType">destination_type.</param>
+        /// <param name="destinationDetails">destination_details.</param>
         /// <param name="appFeeMoney">app_fee_money.</param>
         /// <param name="processingFee">processing_fee.</param>
         /// <param name="paymentId">payment_id.</param>
@@ -37,6 +40,9 @@ namespace Square.Models
             Models.Money amountMoney,
             string status = null,
             string locationId = null,
+            bool? unlinked = null,
+            string destinationType = null,
+            Models.DestinationDetails destinationDetails = null,
             Models.Money appFeeMoney = null,
             IList<Models.ProcessingFee> processingFee = null,
             string paymentId = null,
@@ -49,6 +55,9 @@ namespace Square.Models
             this.Id = id;
             this.Status = status;
             this.LocationId = locationId;
+            this.Unlinked = unlinked;
+            this.DestinationType = destinationType;
+            this.DestinationDetails = destinationDetails;
             this.AmountMoney = amountMoney;
             this.AppFeeMoney = appFeeMoney;
             this.ProcessingFee = processingFee;
@@ -81,6 +90,25 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("location_id", NullValueHandling = NullValueHandling.Ignore)]
         public string LocationId { get; }
+
+        /// <summary>
+        /// Flag indicating whether or not the refund is linked to an existing payment in Square.
+        /// </summary>
+        [JsonProperty("unlinked", NullValueHandling = NullValueHandling.Ignore)]
+        public bool? Unlinked { get; }
+
+        /// <summary>
+        /// The destination type for this refund.
+        /// Current values include `CARD`, `BANK_ACCOUNT`, `WALLET`, `CASH`, or `EXTERNAL`.
+        /// </summary>
+        [JsonProperty("destination_type", NullValueHandling = NullValueHandling.Ignore)]
+        public string DestinationType { get; }
+
+        /// <summary>
+        /// Details about a refund's destination.
+        /// </summary>
+        [JsonProperty("destination_details", NullValueHandling = NullValueHandling.Ignore)]
+        public Models.DestinationDetails DestinationDetails { get; }
 
         /// <summary>
         /// Represents an amount of money. `Money` fields can be signed or unsigned.
@@ -173,6 +201,9 @@ namespace Square.Models
                 ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
                 ((this.Status == null && other.Status == null) || (this.Status?.Equals(other.Status) == true)) &&
                 ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true)) &&
+                ((this.Unlinked == null && other.Unlinked == null) || (this.Unlinked?.Equals(other.Unlinked) == true)) &&
+                ((this.DestinationType == null && other.DestinationType == null) || (this.DestinationType?.Equals(other.DestinationType) == true)) &&
+                ((this.DestinationDetails == null && other.DestinationDetails == null) || (this.DestinationDetails?.Equals(other.DestinationDetails) == true)) &&
                 ((this.AmountMoney == null && other.AmountMoney == null) || (this.AmountMoney?.Equals(other.AmountMoney) == true)) &&
                 ((this.AppFeeMoney == null && other.AppFeeMoney == null) || (this.AppFeeMoney?.Equals(other.AppFeeMoney) == true)) &&
                 ((this.ProcessingFee == null && other.ProcessingFee == null) || (this.ProcessingFee?.Equals(other.ProcessingFee) == true)) &&
@@ -187,10 +218,12 @@ namespace Square.Models
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1337028920;
-            hashCode = HashCode.Combine(this.Id, this.Status, this.LocationId, this.AmountMoney, this.AppFeeMoney, this.ProcessingFee, this.PaymentId);
+            int hashCode = 181999010;
+            hashCode = HashCode.Combine(this.Id, this.Status, this.LocationId, this.Unlinked, this.DestinationType, this.DestinationDetails, this.AmountMoney);
 
-            hashCode = HashCode.Combine(hashCode, this.OrderId, this.Reason, this.CreatedAt, this.UpdatedAt, this.TeamMemberId);
+            hashCode = HashCode.Combine(hashCode, this.AppFeeMoney, this.ProcessingFee, this.PaymentId, this.OrderId, this.Reason, this.CreatedAt, this.UpdatedAt);
+
+            hashCode = HashCode.Combine(hashCode, this.TeamMemberId);
 
             return hashCode;
         }
@@ -204,6 +237,9 @@ namespace Square.Models
             toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id == string.Empty ? "" : this.Id)}");
             toStringOutput.Add($"this.Status = {(this.Status == null ? "null" : this.Status == string.Empty ? "" : this.Status)}");
             toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId == string.Empty ? "" : this.LocationId)}");
+            toStringOutput.Add($"this.Unlinked = {(this.Unlinked == null ? "null" : this.Unlinked.ToString())}");
+            toStringOutput.Add($"this.DestinationType = {(this.DestinationType == null ? "null" : this.DestinationType == string.Empty ? "" : this.DestinationType)}");
+            toStringOutput.Add($"this.DestinationDetails = {(this.DestinationDetails == null ? "null" : this.DestinationDetails.ToString())}");
             toStringOutput.Add($"this.AmountMoney = {(this.AmountMoney == null ? "null" : this.AmountMoney.ToString())}");
             toStringOutput.Add($"this.AppFeeMoney = {(this.AppFeeMoney == null ? "null" : this.AppFeeMoney.ToString())}");
             toStringOutput.Add($"this.ProcessingFee = {(this.ProcessingFee == null ? "null" : $"[{string.Join(", ", this.ProcessingFee)} ]")}");
@@ -226,6 +262,9 @@ namespace Square.Models
                 this.AmountMoney)
                 .Status(this.Status)
                 .LocationId(this.LocationId)
+                .Unlinked(this.Unlinked)
+                .DestinationType(this.DestinationType)
+                .DestinationDetails(this.DestinationDetails)
                 .AppFeeMoney(this.AppFeeMoney)
                 .ProcessingFee(this.ProcessingFee)
                 .PaymentId(this.PaymentId)
@@ -246,6 +285,9 @@ namespace Square.Models
             private Models.Money amountMoney;
             private string status;
             private string locationId;
+            private bool? unlinked;
+            private string destinationType;
+            private Models.DestinationDetails destinationDetails;
             private Models.Money appFeeMoney;
             private IList<Models.ProcessingFee> processingFee;
             private string paymentId;
@@ -304,6 +346,39 @@ namespace Square.Models
             public Builder LocationId(string locationId)
             {
                 this.locationId = locationId;
+                return this;
+            }
+
+             /// <summary>
+             /// Unlinked.
+             /// </summary>
+             /// <param name="unlinked"> unlinked. </param>
+             /// <returns> Builder. </returns>
+            public Builder Unlinked(bool? unlinked)
+            {
+                this.unlinked = unlinked;
+                return this;
+            }
+
+             /// <summary>
+             /// DestinationType.
+             /// </summary>
+             /// <param name="destinationType"> destinationType. </param>
+             /// <returns> Builder. </returns>
+            public Builder DestinationType(string destinationType)
+            {
+                this.destinationType = destinationType;
+                return this;
+            }
+
+             /// <summary>
+             /// DestinationDetails.
+             /// </summary>
+             /// <param name="destinationDetails"> destinationDetails. </param>
+             /// <returns> Builder. </returns>
+            public Builder DestinationDetails(Models.DestinationDetails destinationDetails)
+            {
+                this.destinationDetails = destinationDetails;
                 return this;
             }
 
@@ -406,6 +481,9 @@ namespace Square.Models
                     this.amountMoney,
                     this.status,
                     this.locationId,
+                    this.unlinked,
+                    this.destinationType,
+                    this.destinationDetails,
                     this.appFeeMoney,
                     this.processingFee,
                     this.paymentId,
