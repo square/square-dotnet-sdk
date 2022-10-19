@@ -232,7 +232,7 @@ namespace Square.Models
         public string UpdatedAt { get; }
 
         /// <summary>
-        /// The payment methods that customers can use to pay an invoice on the Square-hosted invoice page.
+        /// The payment methods that customers can use to pay an [invoice]($m/Invoice) on the Square-hosted invoice payment page.
         /// </summary>
         [JsonProperty("accepted_payment_methods", NullValueHandling = NullValueHandling.Ignore)]
         public Models.InvoiceAcceptedPaymentMethods AcceptedPaymentMethods { get; }

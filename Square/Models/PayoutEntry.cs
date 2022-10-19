@@ -27,6 +27,8 @@ namespace Square.Models
         /// <param name="grossAmountMoney">gross_amount_money.</param>
         /// <param name="feeAmountMoney">fee_amount_money.</param>
         /// <param name="netAmountMoney">net_amount_money.</param>
+        /// <param name="typeAppFeeRevenueDetails">type_app_fee_revenue_details.</param>
+        /// <param name="typeAppFeeRefundDetails">type_app_fee_refund_details.</param>
         /// <param name="typeAutomaticSavingsDetails">type_automatic_savings_details.</param>
         /// <param name="typeAutomaticSavingsReversedDetails">type_automatic_savings_reversed_details.</param>
         /// <param name="typeChargeDetails">type_charge_details.</param>
@@ -55,6 +57,8 @@ namespace Square.Models
             Models.Money grossAmountMoney = null,
             Models.Money feeAmountMoney = null,
             Models.Money netAmountMoney = null,
+            Models.PaymentBalanceActivityAppFeeRevenueDetail typeAppFeeRevenueDetails = null,
+            Models.PaymentBalanceActivityAppFeeRefundDetail typeAppFeeRefundDetails = null,
             Models.PaymentBalanceActivityAutomaticSavingsDetail typeAutomaticSavingsDetails = null,
             Models.PaymentBalanceActivityAutomaticSavingsReversedDetail typeAutomaticSavingsReversedDetails = null,
             Models.PaymentBalanceActivityChargeDetail typeChargeDetails = null,
@@ -83,6 +87,8 @@ namespace Square.Models
             this.GrossAmountMoney = grossAmountMoney;
             this.FeeAmountMoney = feeAmountMoney;
             this.NetAmountMoney = netAmountMoney;
+            this.TypeAppFeeRevenueDetails = typeAppFeeRevenueDetails;
+            this.TypeAppFeeRefundDetails = typeAppFeeRefundDetails;
             this.TypeAutomaticSavingsDetails = typeAutomaticSavingsDetails;
             this.TypeAutomaticSavingsReversedDetails = typeAutomaticSavingsReversedDetails;
             this.TypeChargeDetails = typeChargeDetails;
@@ -161,6 +167,18 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("net_amount_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Money NetAmountMoney { get; }
+
+        /// <summary>
+        /// Gets or sets TypeAppFeeRevenueDetails.
+        /// </summary>
+        [JsonProperty("type_app_fee_revenue_details", NullValueHandling = NullValueHandling.Ignore)]
+        public Models.PaymentBalanceActivityAppFeeRevenueDetail TypeAppFeeRevenueDetails { get; }
+
+        /// <summary>
+        /// Gets or sets TypeAppFeeRefundDetails.
+        /// </summary>
+        [JsonProperty("type_app_fee_refund_details", NullValueHandling = NullValueHandling.Ignore)]
+        public Models.PaymentBalanceActivityAppFeeRefundDetail TypeAppFeeRefundDetails { get; }
 
         /// <summary>
         /// Gets or sets TypeAutomaticSavingsDetails.
@@ -313,6 +331,8 @@ namespace Square.Models
                 ((this.GrossAmountMoney == null && other.GrossAmountMoney == null) || (this.GrossAmountMoney?.Equals(other.GrossAmountMoney) == true)) &&
                 ((this.FeeAmountMoney == null && other.FeeAmountMoney == null) || (this.FeeAmountMoney?.Equals(other.FeeAmountMoney) == true)) &&
                 ((this.NetAmountMoney == null && other.NetAmountMoney == null) || (this.NetAmountMoney?.Equals(other.NetAmountMoney) == true)) &&
+                ((this.TypeAppFeeRevenueDetails == null && other.TypeAppFeeRevenueDetails == null) || (this.TypeAppFeeRevenueDetails?.Equals(other.TypeAppFeeRevenueDetails) == true)) &&
+                ((this.TypeAppFeeRefundDetails == null && other.TypeAppFeeRefundDetails == null) || (this.TypeAppFeeRefundDetails?.Equals(other.TypeAppFeeRefundDetails) == true)) &&
                 ((this.TypeAutomaticSavingsDetails == null && other.TypeAutomaticSavingsDetails == null) || (this.TypeAutomaticSavingsDetails?.Equals(other.TypeAutomaticSavingsDetails) == true)) &&
                 ((this.TypeAutomaticSavingsReversedDetails == null && other.TypeAutomaticSavingsReversedDetails == null) || (this.TypeAutomaticSavingsReversedDetails?.Equals(other.TypeAutomaticSavingsReversedDetails) == true)) &&
                 ((this.TypeChargeDetails == null && other.TypeChargeDetails == null) || (this.TypeChargeDetails?.Equals(other.TypeChargeDetails) == true)) &&
@@ -338,14 +358,16 @@ namespace Square.Models
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 861620268;
+            int hashCode = 2018225012;
             hashCode = HashCode.Combine(this.Id, this.PayoutId, this.EffectiveAt, this.Type, this.GrossAmountMoney, this.FeeAmountMoney, this.NetAmountMoney);
 
-            hashCode = HashCode.Combine(hashCode, this.TypeAutomaticSavingsDetails, this.TypeAutomaticSavingsReversedDetails, this.TypeChargeDetails, this.TypeDepositFeeDetails, this.TypeDisputeDetails, this.TypeFeeDetails, this.TypeFreeProcessingDetails);
+            hashCode = HashCode.Combine(hashCode, this.TypeAppFeeRevenueDetails, this.TypeAppFeeRefundDetails, this.TypeAutomaticSavingsDetails, this.TypeAutomaticSavingsReversedDetails, this.TypeChargeDetails, this.TypeDepositFeeDetails, this.TypeDisputeDetails);
 
-            hashCode = HashCode.Combine(hashCode, this.TypeHoldAdjustmentDetails, this.TypeOpenDisputeDetails, this.TypeOtherDetails, this.TypeOtherAdjustmentDetails, this.TypeRefundDetails, this.TypeReleaseAdjustmentDetails, this.TypeReserveHoldDetails);
+            hashCode = HashCode.Combine(hashCode, this.TypeFeeDetails, this.TypeFreeProcessingDetails, this.TypeHoldAdjustmentDetails, this.TypeOpenDisputeDetails, this.TypeOtherDetails, this.TypeOtherAdjustmentDetails, this.TypeRefundDetails);
 
-            hashCode = HashCode.Combine(hashCode, this.TypeReserveReleaseDetails, this.TypeSquareCapitalPaymentDetails, this.TypeSquareCapitalReversedPaymentDetails, this.TypeTaxOnFeeDetails, this.TypeThirdPartyFeeDetails, this.TypeThirdPartyFeeRefundDetails);
+            hashCode = HashCode.Combine(hashCode, this.TypeReleaseAdjustmentDetails, this.TypeReserveHoldDetails, this.TypeReserveReleaseDetails, this.TypeSquareCapitalPaymentDetails, this.TypeSquareCapitalReversedPaymentDetails, this.TypeTaxOnFeeDetails, this.TypeThirdPartyFeeDetails);
+
+            hashCode = HashCode.Combine(hashCode, this.TypeThirdPartyFeeRefundDetails);
 
             return hashCode;
         }
@@ -363,6 +385,8 @@ namespace Square.Models
             toStringOutput.Add($"this.GrossAmountMoney = {(this.GrossAmountMoney == null ? "null" : this.GrossAmountMoney.ToString())}");
             toStringOutput.Add($"this.FeeAmountMoney = {(this.FeeAmountMoney == null ? "null" : this.FeeAmountMoney.ToString())}");
             toStringOutput.Add($"this.NetAmountMoney = {(this.NetAmountMoney == null ? "null" : this.NetAmountMoney.ToString())}");
+            toStringOutput.Add($"this.TypeAppFeeRevenueDetails = {(this.TypeAppFeeRevenueDetails == null ? "null" : this.TypeAppFeeRevenueDetails.ToString())}");
+            toStringOutput.Add($"this.TypeAppFeeRefundDetails = {(this.TypeAppFeeRefundDetails == null ? "null" : this.TypeAppFeeRefundDetails.ToString())}");
             toStringOutput.Add($"this.TypeAutomaticSavingsDetails = {(this.TypeAutomaticSavingsDetails == null ? "null" : this.TypeAutomaticSavingsDetails.ToString())}");
             toStringOutput.Add($"this.TypeAutomaticSavingsReversedDetails = {(this.TypeAutomaticSavingsReversedDetails == null ? "null" : this.TypeAutomaticSavingsReversedDetails.ToString())}");
             toStringOutput.Add($"this.TypeChargeDetails = {(this.TypeChargeDetails == null ? "null" : this.TypeChargeDetails.ToString())}");
@@ -399,6 +423,8 @@ namespace Square.Models
                 .GrossAmountMoney(this.GrossAmountMoney)
                 .FeeAmountMoney(this.FeeAmountMoney)
                 .NetAmountMoney(this.NetAmountMoney)
+                .TypeAppFeeRevenueDetails(this.TypeAppFeeRevenueDetails)
+                .TypeAppFeeRefundDetails(this.TypeAppFeeRefundDetails)
                 .TypeAutomaticSavingsDetails(this.TypeAutomaticSavingsDetails)
                 .TypeAutomaticSavingsReversedDetails(this.TypeAutomaticSavingsReversedDetails)
                 .TypeChargeDetails(this.TypeChargeDetails)
@@ -434,6 +460,8 @@ namespace Square.Models
             private Models.Money grossAmountMoney;
             private Models.Money feeAmountMoney;
             private Models.Money netAmountMoney;
+            private Models.PaymentBalanceActivityAppFeeRevenueDetail typeAppFeeRevenueDetails;
+            private Models.PaymentBalanceActivityAppFeeRefundDetail typeAppFeeRefundDetails;
             private Models.PaymentBalanceActivityAutomaticSavingsDetail typeAutomaticSavingsDetails;
             private Models.PaymentBalanceActivityAutomaticSavingsReversedDetail typeAutomaticSavingsReversedDetails;
             private Models.PaymentBalanceActivityChargeDetail typeChargeDetails;
@@ -537,6 +565,28 @@ namespace Square.Models
             public Builder NetAmountMoney(Models.Money netAmountMoney)
             {
                 this.netAmountMoney = netAmountMoney;
+                return this;
+            }
+
+             /// <summary>
+             /// TypeAppFeeRevenueDetails.
+             /// </summary>
+             /// <param name="typeAppFeeRevenueDetails"> typeAppFeeRevenueDetails. </param>
+             /// <returns> Builder. </returns>
+            public Builder TypeAppFeeRevenueDetails(Models.PaymentBalanceActivityAppFeeRevenueDetail typeAppFeeRevenueDetails)
+            {
+                this.typeAppFeeRevenueDetails = typeAppFeeRevenueDetails;
+                return this;
+            }
+
+             /// <summary>
+             /// TypeAppFeeRefundDetails.
+             /// </summary>
+             /// <param name="typeAppFeeRefundDetails"> typeAppFeeRefundDetails. </param>
+             /// <returns> Builder. </returns>
+            public Builder TypeAppFeeRefundDetails(Models.PaymentBalanceActivityAppFeeRefundDetail typeAppFeeRefundDetails)
+            {
+                this.typeAppFeeRefundDetails = typeAppFeeRefundDetails;
                 return this;
             }
 
@@ -774,6 +824,8 @@ namespace Square.Models
                     this.grossAmountMoney,
                     this.feeAmountMoney,
                     this.netAmountMoney,
+                    this.typeAppFeeRevenueDetails,
+                    this.typeAppFeeRefundDetails,
                     this.typeAutomaticSavingsDetails,
                     this.typeAutomaticSavingsReversedDetails,
                     this.typeChargeDetails,

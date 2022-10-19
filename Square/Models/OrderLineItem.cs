@@ -263,8 +263,8 @@ namespace Square.Models
         public Models.Money TotalMoney { get; }
 
         /// <summary>
-        /// Describes pricing adjustments that are blocked from manual and
-        /// automatic application to a line item. For more information, see
+        /// Describes pricing adjustments that are blocked from automatic
+        /// application to a line item. For more information, see
         /// [Apply Taxes and Discounts](https://developer.squareup.com/docs/orders-api/apply-taxes-and-discounts).
         /// </summary>
         [JsonProperty("pricing_blocklists", NullValueHandling = NullValueHandling.Ignore)]

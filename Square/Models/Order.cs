@@ -61,7 +61,7 @@ namespace Square.Models
             IList<Models.OrderLineItemTax> taxes = null,
             IList<Models.OrderLineItemDiscount> discounts = null,
             IList<Models.OrderServiceCharge> serviceCharges = null,
-            IList<Models.OrderFulfillment> fulfillments = null,
+            IList<Models.Fulfillment> fulfillments = null,
             IList<Models.OrderReturn> returns = null,
             Models.OrderMoneyAmounts returnAmounts = null,
             Models.OrderMoneyAmounts netAmounts = null,
@@ -196,7 +196,7 @@ namespace Square.Models
         /// by the API might contain multiple fulfillments.
         /// </summary>
         [JsonProperty("fulfillments", NullValueHandling = NullValueHandling.Ignore)]
-        public IList<Models.OrderFulfillment> Fulfillments { get; }
+        public IList<Models.Fulfillment> Fulfillments { get; }
 
         /// <summary>
         /// A collection of items from sale orders being returned in this one. Normally part of an
@@ -435,7 +435,7 @@ namespace Square.Models
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 656946818;
+            int hashCode = -1044839112;
             hashCode = HashCode.Combine(this.Id, this.LocationId, this.ReferenceId, this.Source, this.CustomerId, this.LineItems, this.Taxes);
 
             hashCode = HashCode.Combine(hashCode, this.Discounts, this.ServiceCharges, this.Fulfillments, this.Returns, this.ReturnAmounts, this.NetAmounts, this.RoundingAdjustment);
@@ -543,7 +543,7 @@ namespace Square.Models
             private IList<Models.OrderLineItemTax> taxes;
             private IList<Models.OrderLineItemDiscount> discounts;
             private IList<Models.OrderServiceCharge> serviceCharges;
-            private IList<Models.OrderFulfillment> fulfillments;
+            private IList<Models.Fulfillment> fulfillments;
             private IList<Models.OrderReturn> returns;
             private Models.OrderMoneyAmounts returnAmounts;
             private Models.OrderMoneyAmounts netAmounts;
@@ -676,7 +676,7 @@ namespace Square.Models
              /// </summary>
              /// <param name="fulfillments"> fulfillments. </param>
              /// <returns> Builder. </returns>
-            public Builder Fulfillments(IList<Models.OrderFulfillment> fulfillments)
+            public Builder Fulfillments(IList<Models.Fulfillment> fulfillments)
             {
                 this.fulfillments = fulfillments;
                 return this;

@@ -21,10 +21,13 @@ namespace Square.Models
         /// Initializes a new instance of the <see cref="PaymentBalanceActivityThirdPartyFeeRefundDetail"/> class.
         /// </summary>
         /// <param name="paymentId">payment_id.</param>
+        /// <param name="refundId">refund_id.</param>
         public PaymentBalanceActivityThirdPartyFeeRefundDetail(
-            string paymentId = null)
+            string paymentId = null,
+            string refundId = null)
         {
             this.PaymentId = paymentId;
+            this.RefundId = refundId;
         }
 
         /// <summary>
@@ -32,6 +35,12 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("payment_id", NullValueHandling = NullValueHandling.Ignore)]
         public string PaymentId { get; }
+
+        /// <summary>
+        /// The public refund id associated with this activity.
+        /// </summary>
+        [JsonProperty("refund_id", NullValueHandling = NullValueHandling.Ignore)]
+        public string RefundId { get; }
 
         /// <inheritdoc/>
         public override string ToString()
@@ -57,14 +66,15 @@ namespace Square.Models
             }
 
             return obj is PaymentBalanceActivityThirdPartyFeeRefundDetail other &&
-                ((this.PaymentId == null && other.PaymentId == null) || (this.PaymentId?.Equals(other.PaymentId) == true));
+                ((this.PaymentId == null && other.PaymentId == null) || (this.PaymentId?.Equals(other.PaymentId) == true)) &&
+                ((this.RefundId == null && other.RefundId == null) || (this.RefundId?.Equals(other.RefundId) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1836619484;
-            hashCode = HashCode.Combine(this.PaymentId);
+            int hashCode = -784602603;
+            hashCode = HashCode.Combine(this.PaymentId, this.RefundId);
 
             return hashCode;
         }
@@ -76,6 +86,7 @@ namespace Square.Models
         protected void ToString(List<string> toStringOutput)
         {
             toStringOutput.Add($"this.PaymentId = {(this.PaymentId == null ? "null" : this.PaymentId == string.Empty ? "" : this.PaymentId)}");
+            toStringOutput.Add($"this.RefundId = {(this.RefundId == null ? "null" : this.RefundId == string.Empty ? "" : this.RefundId)}");
         }
 
         /// <summary>
@@ -85,7 +96,8 @@ namespace Square.Models
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .PaymentId(this.PaymentId);
+                .PaymentId(this.PaymentId)
+                .RefundId(this.RefundId);
             return builder;
         }
 
@@ -95,6 +107,7 @@ namespace Square.Models
         public class Builder
         {
             private string paymentId;
+            private string refundId;
 
              /// <summary>
              /// PaymentId.
@@ -107,6 +120,17 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// RefundId.
+             /// </summary>
+             /// <param name="refundId"> refundId. </param>
+             /// <returns> Builder. </returns>
+            public Builder RefundId(string refundId)
+            {
+                this.refundId = refundId;
+                return this;
+            }
+
             /// <summary>
             /// Builds class object.
             /// </summary>
@@ -114,7 +138,8 @@ namespace Square.Models
             public PaymentBalanceActivityThirdPartyFeeRefundDetail Build()
             {
                 return new PaymentBalanceActivityThirdPartyFeeRefundDetail(
-                    this.paymentId);
+                    this.paymentId,
+                    this.refundId);
             }
         }
     }

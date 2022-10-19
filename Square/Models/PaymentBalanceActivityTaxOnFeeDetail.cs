@@ -21,10 +21,13 @@ namespace Square.Models
         /// Initializes a new instance of the <see cref="PaymentBalanceActivityTaxOnFeeDetail"/> class.
         /// </summary>
         /// <param name="paymentId">payment_id.</param>
+        /// <param name="taxRateDescription">tax_rate_description.</param>
         public PaymentBalanceActivityTaxOnFeeDetail(
-            string paymentId = null)
+            string paymentId = null,
+            string taxRateDescription = null)
         {
             this.PaymentId = paymentId;
+            this.TaxRateDescription = taxRateDescription;
         }
 
         /// <summary>
@@ -32,6 +35,12 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("payment_id", NullValueHandling = NullValueHandling.Ignore)]
         public string PaymentId { get; }
+
+        /// <summary>
+        /// The description of the tax rate being applied. For example: "GST", "HST".
+        /// </summary>
+        [JsonProperty("tax_rate_description", NullValueHandling = NullValueHandling.Ignore)]
+        public string TaxRateDescription { get; }
 
         /// <inheritdoc/>
         public override string ToString()
@@ -57,14 +66,15 @@ namespace Square.Models
             }
 
             return obj is PaymentBalanceActivityTaxOnFeeDetail other &&
-                ((this.PaymentId == null && other.PaymentId == null) || (this.PaymentId?.Equals(other.PaymentId) == true));
+                ((this.PaymentId == null && other.PaymentId == null) || (this.PaymentId?.Equals(other.PaymentId) == true)) &&
+                ((this.TaxRateDescription == null && other.TaxRateDescription == null) || (this.TaxRateDescription?.Equals(other.TaxRateDescription) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1321810157;
-            hashCode = HashCode.Combine(this.PaymentId);
+            int hashCode = -1979815303;
+            hashCode = HashCode.Combine(this.PaymentId, this.TaxRateDescription);
 
             return hashCode;
         }
@@ -76,6 +86,7 @@ namespace Square.Models
         protected void ToString(List<string> toStringOutput)
         {
             toStringOutput.Add($"this.PaymentId = {(this.PaymentId == null ? "null" : this.PaymentId == string.Empty ? "" : this.PaymentId)}");
+            toStringOutput.Add($"this.TaxRateDescription = {(this.TaxRateDescription == null ? "null" : this.TaxRateDescription == string.Empty ? "" : this.TaxRateDescription)}");
         }
 
         /// <summary>
@@ -85,7 +96,8 @@ namespace Square.Models
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .PaymentId(this.PaymentId);
+                .PaymentId(this.PaymentId)
+                .TaxRateDescription(this.TaxRateDescription);
             return builder;
         }
 
@@ -95,6 +107,7 @@ namespace Square.Models
         public class Builder
         {
             private string paymentId;
+            private string taxRateDescription;
 
              /// <summary>
              /// PaymentId.
@@ -107,6 +120,17 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// TaxRateDescription.
+             /// </summary>
+             /// <param name="taxRateDescription"> taxRateDescription. </param>
+             /// <returns> Builder. </returns>
+            public Builder TaxRateDescription(string taxRateDescription)
+            {
+                this.taxRateDescription = taxRateDescription;
+                return this;
+            }
+
             /// <summary>
             /// Builds class object.
             /// </summary>
@@ -114,7 +138,8 @@ namespace Square.Models
             public PaymentBalanceActivityTaxOnFeeDetail Build()
             {
                 return new PaymentBalanceActivityTaxOnFeeDetail(
-                    this.paymentId);
+                    this.paymentId,
+                    this.taxRateDescription);
             }
         }
     }

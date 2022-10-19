@@ -22,7 +22,7 @@ namespace Square.Apis
         /// <summary>
         /// Creates a new [order]($m/Order) that can include information about products for.
         /// purchase and settings to apply to the purchase.
-        /// To pay for a created order, see .
+        /// To pay for a created order, see.
         /// [Pay for Orders](https://developer.squareup.com/docs/orders-api/pay-for-orders).
         /// You can modify open orders using the [UpdateOrder]($e/Orders/UpdateOrder) endpoint.
         /// </summary>
@@ -34,7 +34,7 @@ namespace Square.Apis
         /// <summary>
         /// Creates a new [order]($m/Order) that can include information about products for.
         /// purchase and settings to apply to the purchase.
-        /// To pay for a created order, see .
+        /// To pay for a created order, see.
         /// [Pay for Orders](https://developer.squareup.com/docs/orders-api/pay-for-orders).
         /// You can modify open orders using the [UpdateOrder]($e/Orders/UpdateOrder) endpoint.
         /// </summary>
@@ -84,7 +84,7 @@ namespace Square.Apis
                 CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Creates a new order, in the `DRAFT` state, by duplicating an existing order. The newly created order has .
+        /// Creates a new order, in the `DRAFT` state, by duplicating an existing order. The newly created order has.
         /// only the core fields (such as line items, taxes, and discounts) copied from the original order.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
@@ -93,7 +93,7 @@ namespace Square.Apis
                 Models.CloneOrderRequest body);
 
         /// <summary>
-        /// Creates a new order, in the `DRAFT` state, by duplicating an existing order. The newly created order has .
+        /// Creates a new order, in the `DRAFT` state, by duplicating an existing order. The newly created order has.
         /// only the core fields (such as line items, taxes, and discounts) copied from the original order.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
@@ -176,7 +176,7 @@ namespace Square.Apis
         /// being applied.
         /// - If deleting fields, the [dot notation paths](https://developer.squareup.com/docs/orders-api/manage-orders#on-dot-notation).
         /// identifying the fields to clear.
-        /// To pay for an order, see .
+        /// To pay for an order, see.
         /// [Pay for Orders](https://developer.squareup.com/docs/orders-api/pay-for-orders).
         /// </summary>
         /// <param name="orderId">Required parameter: The ID of the order to update..</param>
@@ -197,7 +197,7 @@ namespace Square.Apis
         /// being applied.
         /// - If deleting fields, the [dot notation paths](https://developer.squareup.com/docs/orders-api/manage-orders#on-dot-notation).
         /// identifying the fields to clear.
-        /// To pay for an order, see .
+        /// To pay for an order, see.
         /// [Pay for Orders](https://developer.squareup.com/docs/orders-api/pay-for-orders).
         /// </summary>
         /// <param name="orderId">Required parameter: The ID of the order to update..</param>

@@ -63,7 +63,7 @@ namespace Square.Models
         public Models.SearchOrdersDateTimeFilter DateTimeFilter { get; }
 
         /// <summary>
-        /// Filter based on [order fulfillment]($m/OrderFulfillment) information.
+        /// Filter based on [order fulfillment]($m/Fulfillment) information.
         /// </summary>
         [JsonProperty("fulfillment_filter", NullValueHandling = NullValueHandling.Ignore)]
         public Models.SearchOrdersFulfillmentFilter FulfillmentFilter { get; }
@@ -77,7 +77,7 @@ namespace Square.Models
         /// <summary>
         /// A filter based on the order `customer_id` and any tender `customer_id`
         /// associated with the order. It does not filter based on the
-        /// [FulfillmentRecipient]($m/OrderFulfillmentRecipient) `customer_id`.
+        /// [FulfillmentRecipient]($m/FulfillmentRecipient) `customer_id`.
         /// </summary>
         [JsonProperty("customer_filter", NullValueHandling = NullValueHandling.Ignore)]
         public Models.SearchOrdersCustomerFilter CustomerFilter { get; }
