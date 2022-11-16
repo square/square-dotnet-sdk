@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class ListWebhookEventTypesRequest
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="ListWebhookEventTypesRequest"/> class.
         /// </summary>
@@ -24,13 +25,29 @@ namespace Square.Models
         public ListWebhookEventTypesRequest(
             string apiVersion = null)
         {
-            this.ApiVersion = apiVersion;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "api_version", false }
+            };
+
+            if (apiVersion != null)
+            {
+                shouldSerialize["api_version"] = true;
+                this.ApiVersion = apiVersion;
+            }
+
+        }
+        internal ListWebhookEventTypesRequest(Dictionary<string, bool> shouldSerialize,
+            string apiVersion = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            ApiVersion = apiVersion;
         }
 
         /// <summary>
         /// The API version for which to list event types. Setting this field overrides the default version used by the application.
         /// </summary>
-        [JsonProperty("api_version", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("api_version")]
         public string ApiVersion { get; }
 
         /// <inheritdoc/>
@@ -41,6 +58,15 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"ListWebhookEventTypesRequest : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeApiVersion()
+        {
+            return this.shouldSerialize["api_version"];
         }
 
         /// <inheritdoc/>
@@ -94,6 +120,11 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "api_version", false },
+            };
+
             private string apiVersion;
 
              /// <summary>
@@ -103,9 +134,19 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder ApiVersion(string apiVersion)
             {
+                shouldSerialize["api_version"] = true;
                 this.apiVersion = apiVersion;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetApiVersion()
+            {
+                this.shouldSerialize["api_version"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -113,7 +154,7 @@ namespace Square.Models
             /// <returns> ListWebhookEventTypesRequest. </returns>
             public ListWebhookEventTypesRequest Build()
             {
-                return new ListWebhookEventTypesRequest(
+                return new ListWebhookEventTypesRequest(shouldSerialize,
                     this.apiVersion);
             }
         }

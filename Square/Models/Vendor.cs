@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class Vendor
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="Vendor"/> class.
         /// </summary>
@@ -42,16 +43,68 @@ namespace Square.Models
             int? version = null,
             string status = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "name", false },
+                { "contacts", false },
+                { "account_number", false },
+                { "note", false }
+            };
+
             this.Id = id;
             this.CreatedAt = createdAt;
             this.UpdatedAt = updatedAt;
-            this.Name = name;
+            if (name != null)
+            {
+                shouldSerialize["name"] = true;
+                this.Name = name;
+            }
+
             this.Address = address;
-            this.Contacts = contacts;
-            this.AccountNumber = accountNumber;
-            this.Note = note;
+            if (contacts != null)
+            {
+                shouldSerialize["contacts"] = true;
+                this.Contacts = contacts;
+            }
+
+            if (accountNumber != null)
+            {
+                shouldSerialize["account_number"] = true;
+                this.AccountNumber = accountNumber;
+            }
+
+            if (note != null)
+            {
+                shouldSerialize["note"] = true;
+                this.Note = note;
+            }
+
             this.Version = version;
             this.Status = status;
+        }
+        internal Vendor(Dictionary<string, bool> shouldSerialize,
+            string id = null,
+            string createdAt = null,
+            string updatedAt = null,
+            string name = null,
+            Models.Address address = null,
+            IList<Models.VendorContact> contacts = null,
+            string accountNumber = null,
+            string note = null,
+            int? version = null,
+            string status = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Id = id;
+            CreatedAt = createdAt;
+            UpdatedAt = updatedAt;
+            Name = name;
+            Address = address;
+            Contacts = contacts;
+            AccountNumber = accountNumber;
+            Note = note;
+            Version = version;
+            Status = status;
         }
 
         /// <summary>
@@ -79,7 +132,7 @@ namespace Square.Models
         /// The name of the [Vendor]($m/Vendor).
         /// This field is required when attempting to create or update a [Vendor]($m/Vendor).
         /// </summary>
-        [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("name")]
         public string Name { get; }
 
         /// <summary>
@@ -92,19 +145,19 @@ namespace Square.Models
         /// <summary>
         /// The contacts of the [Vendor]($m/Vendor).
         /// </summary>
-        [JsonProperty("contacts", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("contacts")]
         public IList<Models.VendorContact> Contacts { get; }
 
         /// <summary>
         /// The account number of the [Vendor]($m/Vendor).
         /// </summary>
-        [JsonProperty("account_number", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("account_number")]
         public string AccountNumber { get; }
 
         /// <summary>
         /// A note detailing information about the [Vendor]($m/Vendor).
         /// </summary>
-        [JsonProperty("note", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("note")]
         public string Note { get; }
 
         /// <summary>
@@ -128,6 +181,42 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"Vendor : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeName()
+        {
+            return this.shouldSerialize["name"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeContacts()
+        {
+            return this.shouldSerialize["contacts"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeAccountNumber()
+        {
+            return this.shouldSerialize["account_number"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeNote()
+        {
+            return this.shouldSerialize["note"];
         }
 
         /// <inheritdoc/>
@@ -210,6 +299,14 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "name", false },
+                { "contacts", false },
+                { "account_number", false },
+                { "note", false },
+            };
+
             private string id;
             private string createdAt;
             private string updatedAt;
@@ -261,6 +358,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Name(string name)
             {
+                shouldSerialize["name"] = true;
                 this.name = name;
                 return this;
             }
@@ -283,6 +381,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Contacts(IList<Models.VendorContact> contacts)
             {
+                shouldSerialize["contacts"] = true;
                 this.contacts = contacts;
                 return this;
             }
@@ -294,6 +393,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder AccountNumber(string accountNumber)
             {
+                shouldSerialize["account_number"] = true;
                 this.accountNumber = accountNumber;
                 return this;
             }
@@ -305,6 +405,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Note(string note)
             {
+                shouldSerialize["note"] = true;
                 this.note = note;
                 return this;
             }
@@ -332,12 +433,45 @@ namespace Square.Models
             }
 
             /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetName()
+            {
+                this.shouldSerialize["name"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetContacts()
+            {
+                this.shouldSerialize["contacts"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetAccountNumber()
+            {
+                this.shouldSerialize["account_number"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetNote()
+            {
+                this.shouldSerialize["note"] = false;
+            }
+
+
+            /// <summary>
             /// Builds class object.
             /// </summary>
             /// <returns> Vendor. </returns>
             public Vendor Build()
             {
-                return new Vendor(
+                return new Vendor(shouldSerialize,
                     this.id,
                     this.createdAt,
                     this.updatedAt,

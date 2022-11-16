@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class BankAccountPaymentDetails
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="BankAccountPaymentDetails"/> class.
         /// </summary>
@@ -38,52 +39,118 @@ namespace Square.Models
             Models.ACHDetails achDetails = null,
             IList<Models.Error> errors = null)
         {
-            this.BankName = bankName;
-            this.TransferType = transferType;
-            this.AccountOwnershipType = accountOwnershipType;
-            this.Fingerprint = fingerprint;
-            this.Country = country;
-            this.StatementDescription = statementDescription;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "bank_name", false },
+                { "transfer_type", false },
+                { "account_ownership_type", false },
+                { "fingerprint", false },
+                { "country", false },
+                { "statement_description", false },
+                { "errors", false }
+            };
+
+            if (bankName != null)
+            {
+                shouldSerialize["bank_name"] = true;
+                this.BankName = bankName;
+            }
+
+            if (transferType != null)
+            {
+                shouldSerialize["transfer_type"] = true;
+                this.TransferType = transferType;
+            }
+
+            if (accountOwnershipType != null)
+            {
+                shouldSerialize["account_ownership_type"] = true;
+                this.AccountOwnershipType = accountOwnershipType;
+            }
+
+            if (fingerprint != null)
+            {
+                shouldSerialize["fingerprint"] = true;
+                this.Fingerprint = fingerprint;
+            }
+
+            if (country != null)
+            {
+                shouldSerialize["country"] = true;
+                this.Country = country;
+            }
+
+            if (statementDescription != null)
+            {
+                shouldSerialize["statement_description"] = true;
+                this.StatementDescription = statementDescription;
+            }
+
             this.AchDetails = achDetails;
-            this.Errors = errors;
+            if (errors != null)
+            {
+                shouldSerialize["errors"] = true;
+                this.Errors = errors;
+            }
+
+        }
+        internal BankAccountPaymentDetails(Dictionary<string, bool> shouldSerialize,
+            string bankName = null,
+            string transferType = null,
+            string accountOwnershipType = null,
+            string fingerprint = null,
+            string country = null,
+            string statementDescription = null,
+            Models.ACHDetails achDetails = null,
+            IList<Models.Error> errors = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            BankName = bankName;
+            TransferType = transferType;
+            AccountOwnershipType = accountOwnershipType;
+            Fingerprint = fingerprint;
+            Country = country;
+            StatementDescription = statementDescription;
+            AchDetails = achDetails;
+            Errors = errors;
         }
 
         /// <summary>
         /// The name of the bank associated with the bank account.
         /// </summary>
-        [JsonProperty("bank_name", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("bank_name")]
         public string BankName { get; }
 
         /// <summary>
         /// The type of the bank transfer. The type can be `ACH` or `UNKNOWN`.
         /// </summary>
-        [JsonProperty("transfer_type", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("transfer_type")]
         public string TransferType { get; }
 
         /// <summary>
         /// The ownership type of the bank account performing the transfer.
         /// The type can be `INDIVIDUAL`, `COMPANY`, or `UNKNOWN`.
         /// </summary>
-        [JsonProperty("account_ownership_type", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("account_ownership_type")]
         public string AccountOwnershipType { get; }
 
         /// <summary>
         /// Uniquely identifies the bank account for this seller and can be used
         /// to determine if payments are from the same bank account.
         /// </summary>
-        [JsonProperty("fingerprint", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("fingerprint")]
         public string Fingerprint { get; }
 
         /// <summary>
         /// The two-letter ISO code representing the country the bank account is located in.
         /// </summary>
-        [JsonProperty("country", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("country")]
         public string Country { get; }
 
         /// <summary>
         /// The statement description as sent to the bank.
         /// </summary>
-        [JsonProperty("statement_description", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("statement_description")]
         public string StatementDescription { get; }
 
         /// <summary>
@@ -95,7 +162,7 @@ namespace Square.Models
         /// <summary>
         /// Information about errors encountered during the request.
         /// </summary>
-        [JsonProperty("errors", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("errors")]
         public IList<Models.Error> Errors { get; }
 
         /// <inheritdoc/>
@@ -106,6 +173,69 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"BankAccountPaymentDetails : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeBankName()
+        {
+            return this.shouldSerialize["bank_name"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeTransferType()
+        {
+            return this.shouldSerialize["transfer_type"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeAccountOwnershipType()
+        {
+            return this.shouldSerialize["account_ownership_type"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeFingerprint()
+        {
+            return this.shouldSerialize["fingerprint"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeCountry()
+        {
+            return this.shouldSerialize["country"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeStatementDescription()
+        {
+            return this.shouldSerialize["statement_description"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeErrors()
+        {
+            return this.shouldSerialize["errors"];
         }
 
         /// <inheritdoc/>
@@ -182,6 +312,17 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "bank_name", false },
+                { "transfer_type", false },
+                { "account_ownership_type", false },
+                { "fingerprint", false },
+                { "country", false },
+                { "statement_description", false },
+                { "errors", false },
+            };
+
             private string bankName;
             private string transferType;
             private string accountOwnershipType;
@@ -198,6 +339,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder BankName(string bankName)
             {
+                shouldSerialize["bank_name"] = true;
                 this.bankName = bankName;
                 return this;
             }
@@ -209,6 +351,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder TransferType(string transferType)
             {
+                shouldSerialize["transfer_type"] = true;
                 this.transferType = transferType;
                 return this;
             }
@@ -220,6 +363,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder AccountOwnershipType(string accountOwnershipType)
             {
+                shouldSerialize["account_ownership_type"] = true;
                 this.accountOwnershipType = accountOwnershipType;
                 return this;
             }
@@ -231,6 +375,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Fingerprint(string fingerprint)
             {
+                shouldSerialize["fingerprint"] = true;
                 this.fingerprint = fingerprint;
                 return this;
             }
@@ -242,6 +387,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Country(string country)
             {
+                shouldSerialize["country"] = true;
                 this.country = country;
                 return this;
             }
@@ -253,6 +399,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder StatementDescription(string statementDescription)
             {
+                shouldSerialize["statement_description"] = true;
                 this.statementDescription = statementDescription;
                 return this;
             }
@@ -275,9 +422,67 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Errors(IList<Models.Error> errors)
             {
+                shouldSerialize["errors"] = true;
                 this.errors = errors;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetBankName()
+            {
+                this.shouldSerialize["bank_name"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetTransferType()
+            {
+                this.shouldSerialize["transfer_type"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetAccountOwnershipType()
+            {
+                this.shouldSerialize["account_ownership_type"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetFingerprint()
+            {
+                this.shouldSerialize["fingerprint"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetCountry()
+            {
+                this.shouldSerialize["country"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetStatementDescription()
+            {
+                this.shouldSerialize["statement_description"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetErrors()
+            {
+                this.shouldSerialize["errors"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -285,7 +490,7 @@ namespace Square.Models
             /// <returns> BankAccountPaymentDetails. </returns>
             public BankAccountPaymentDetails Build()
             {
-                return new BankAccountPaymentDetails(
+                return new BankAccountPaymentDetails(shouldSerialize,
                     this.bankName,
                     this.transferType,
                     this.accountOwnershipType,

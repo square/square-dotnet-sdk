@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class FulfillmentPickupDetails
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="FulfillmentPickupDetails"/> class.
         /// </summary>
@@ -58,14 +59,56 @@ namespace Square.Models
             bool? isCurbsidePickup = null,
             Models.FulfillmentPickupDetailsCurbsidePickupDetails curbsidePickupDetails = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "expires_at", false },
+                { "auto_complete_duration", false },
+                { "pickup_at", false },
+                { "pickup_window_duration", false },
+                { "prep_time_duration", false },
+                { "note", false },
+                { "cancel_reason", false },
+                { "is_curbside_pickup", false }
+            };
+
             this.Recipient = recipient;
-            this.ExpiresAt = expiresAt;
-            this.AutoCompleteDuration = autoCompleteDuration;
+            if (expiresAt != null)
+            {
+                shouldSerialize["expires_at"] = true;
+                this.ExpiresAt = expiresAt;
+            }
+
+            if (autoCompleteDuration != null)
+            {
+                shouldSerialize["auto_complete_duration"] = true;
+                this.AutoCompleteDuration = autoCompleteDuration;
+            }
+
             this.ScheduleType = scheduleType;
-            this.PickupAt = pickupAt;
-            this.PickupWindowDuration = pickupWindowDuration;
-            this.PrepTimeDuration = prepTimeDuration;
-            this.Note = note;
+            if (pickupAt != null)
+            {
+                shouldSerialize["pickup_at"] = true;
+                this.PickupAt = pickupAt;
+            }
+
+            if (pickupWindowDuration != null)
+            {
+                shouldSerialize["pickup_window_duration"] = true;
+                this.PickupWindowDuration = pickupWindowDuration;
+            }
+
+            if (prepTimeDuration != null)
+            {
+                shouldSerialize["prep_time_duration"] = true;
+                this.PrepTimeDuration = prepTimeDuration;
+            }
+
+            if (note != null)
+            {
+                shouldSerialize["note"] = true;
+                this.Note = note;
+            }
+
             this.PlacedAt = placedAt;
             this.AcceptedAt = acceptedAt;
             this.RejectedAt = rejectedAt;
@@ -73,9 +116,59 @@ namespace Square.Models
             this.ExpiredAt = expiredAt;
             this.PickedUpAt = pickedUpAt;
             this.CanceledAt = canceledAt;
-            this.CancelReason = cancelReason;
-            this.IsCurbsidePickup = isCurbsidePickup;
+            if (cancelReason != null)
+            {
+                shouldSerialize["cancel_reason"] = true;
+                this.CancelReason = cancelReason;
+            }
+
+            if (isCurbsidePickup != null)
+            {
+                shouldSerialize["is_curbside_pickup"] = true;
+                this.IsCurbsidePickup = isCurbsidePickup;
+            }
+
             this.CurbsidePickupDetails = curbsidePickupDetails;
+        }
+        internal FulfillmentPickupDetails(Dictionary<string, bool> shouldSerialize,
+            Models.FulfillmentRecipient recipient = null,
+            string expiresAt = null,
+            string autoCompleteDuration = null,
+            string scheduleType = null,
+            string pickupAt = null,
+            string pickupWindowDuration = null,
+            string prepTimeDuration = null,
+            string note = null,
+            string placedAt = null,
+            string acceptedAt = null,
+            string rejectedAt = null,
+            string readyAt = null,
+            string expiredAt = null,
+            string pickedUpAt = null,
+            string canceledAt = null,
+            string cancelReason = null,
+            bool? isCurbsidePickup = null,
+            Models.FulfillmentPickupDetailsCurbsidePickupDetails curbsidePickupDetails = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Recipient = recipient;
+            ExpiresAt = expiresAt;
+            AutoCompleteDuration = autoCompleteDuration;
+            ScheduleType = scheduleType;
+            PickupAt = pickupAt;
+            PickupWindowDuration = pickupWindowDuration;
+            PrepTimeDuration = prepTimeDuration;
+            Note = note;
+            PlacedAt = placedAt;
+            AcceptedAt = acceptedAt;
+            RejectedAt = rejectedAt;
+            ReadyAt = readyAt;
+            ExpiredAt = expiredAt;
+            PickedUpAt = pickedUpAt;
+            CanceledAt = canceledAt;
+            CancelReason = cancelReason;
+            IsCurbsidePickup = isCurbsidePickup;
+            CurbsidePickupDetails = curbsidePickupDetails;
         }
 
         /// <summary>
@@ -91,7 +184,7 @@ namespace Square.Models
         /// If `expires_at` is not set, this pickup fulfillment is automatically accepted when
         /// placed.
         /// </summary>
-        [JsonProperty("expires_at", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("expires_at")]
         public string ExpiresAt { get; }
 
         /// <summary>
@@ -100,7 +193,7 @@ namespace Square.Models
         /// format (for example, "P1W3D").
         /// If not set, this pickup fulfillment remains accepted until it is canceled or completed.
         /// </summary>
-        [JsonProperty("auto_complete_duration", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("auto_complete_duration")]
         public string AutoCompleteDuration { get; }
 
         /// <summary>
@@ -116,7 +209,7 @@ namespace Square.Models
         /// For fulfillments with the schedule type `ASAP`, this is automatically set
         /// to the current time plus the expected duration to prepare the fulfillment.
         /// </summary>
-        [JsonProperty("pickup_at", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("pickup_at")]
         public string PickupAt { get; }
 
         /// <summary>
@@ -124,21 +217,21 @@ namespace Square.Models
         /// Must be in RFC 3339 duration format, e.g., "P1W3D". Can be used as an
         /// informational guideline for merchants.
         /// </summary>
-        [JsonProperty("pickup_window_duration", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("pickup_window_duration")]
         public string PickupWindowDuration { get; }
 
         /// <summary>
         /// The duration of time it takes to prepare this fulfillment.
         /// The duration must be in RFC 3339 format (for example, "P1W3D").
         /// </summary>
-        [JsonProperty("prep_time_duration", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("prep_time_duration")]
         public string PrepTimeDuration { get; }
 
         /// <summary>
         /// A note to provide additional instructions about the pickup
         /// fulfillment displayed in the Square Point of Sale application and set by the API.
         /// </summary>
-        [JsonProperty("note", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("note")]
         public string Note { get; }
 
         /// <summary>
@@ -200,13 +293,13 @@ namespace Square.Models
         /// <summary>
         /// A description of why the pickup was canceled. The maximum length: 100 characters.
         /// </summary>
-        [JsonProperty("cancel_reason", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("cancel_reason")]
         public string CancelReason { get; }
 
         /// <summary>
         /// If set to `true`, indicates that this pickup order is for curbside pickup, not in-store pickup.
         /// </summary>
-        [JsonProperty("is_curbside_pickup", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("is_curbside_pickup")]
         public bool? IsCurbsidePickup { get; }
 
         /// <summary>
@@ -223,6 +316,78 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"FulfillmentPickupDetails : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeExpiresAt()
+        {
+            return this.shouldSerialize["expires_at"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeAutoCompleteDuration()
+        {
+            return this.shouldSerialize["auto_complete_duration"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializePickupAt()
+        {
+            return this.shouldSerialize["pickup_at"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializePickupWindowDuration()
+        {
+            return this.shouldSerialize["pickup_window_duration"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializePrepTimeDuration()
+        {
+            return this.shouldSerialize["prep_time_duration"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeNote()
+        {
+            return this.shouldSerialize["note"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeCancelReason()
+        {
+            return this.shouldSerialize["cancel_reason"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeIsCurbsidePickup()
+        {
+            return this.shouldSerialize["is_curbside_pickup"];
         }
 
         /// <inheritdoc/>
@@ -331,6 +496,18 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "expires_at", false },
+                { "auto_complete_duration", false },
+                { "pickup_at", false },
+                { "pickup_window_duration", false },
+                { "prep_time_duration", false },
+                { "note", false },
+                { "cancel_reason", false },
+                { "is_curbside_pickup", false },
+            };
+
             private Models.FulfillmentRecipient recipient;
             private string expiresAt;
             private string autoCompleteDuration;
@@ -368,6 +545,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder ExpiresAt(string expiresAt)
             {
+                shouldSerialize["expires_at"] = true;
                 this.expiresAt = expiresAt;
                 return this;
             }
@@ -379,6 +557,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder AutoCompleteDuration(string autoCompleteDuration)
             {
+                shouldSerialize["auto_complete_duration"] = true;
                 this.autoCompleteDuration = autoCompleteDuration;
                 return this;
             }
@@ -401,6 +580,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder PickupAt(string pickupAt)
             {
+                shouldSerialize["pickup_at"] = true;
                 this.pickupAt = pickupAt;
                 return this;
             }
@@ -412,6 +592,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder PickupWindowDuration(string pickupWindowDuration)
             {
+                shouldSerialize["pickup_window_duration"] = true;
                 this.pickupWindowDuration = pickupWindowDuration;
                 return this;
             }
@@ -423,6 +604,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder PrepTimeDuration(string prepTimeDuration)
             {
+                shouldSerialize["prep_time_duration"] = true;
                 this.prepTimeDuration = prepTimeDuration;
                 return this;
             }
@@ -434,6 +616,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Note(string note)
             {
+                shouldSerialize["note"] = true;
                 this.note = note;
                 return this;
             }
@@ -522,6 +705,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder CancelReason(string cancelReason)
             {
+                shouldSerialize["cancel_reason"] = true;
                 this.cancelReason = cancelReason;
                 return this;
             }
@@ -533,6 +717,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder IsCurbsidePickup(bool? isCurbsidePickup)
             {
+                shouldSerialize["is_curbside_pickup"] = true;
                 this.isCurbsidePickup = isCurbsidePickup;
                 return this;
             }
@@ -549,12 +734,77 @@ namespace Square.Models
             }
 
             /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetExpiresAt()
+            {
+                this.shouldSerialize["expires_at"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetAutoCompleteDuration()
+            {
+                this.shouldSerialize["auto_complete_duration"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetPickupAt()
+            {
+                this.shouldSerialize["pickup_at"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetPickupWindowDuration()
+            {
+                this.shouldSerialize["pickup_window_duration"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetPrepTimeDuration()
+            {
+                this.shouldSerialize["prep_time_duration"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetNote()
+            {
+                this.shouldSerialize["note"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetCancelReason()
+            {
+                this.shouldSerialize["cancel_reason"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetIsCurbsidePickup()
+            {
+                this.shouldSerialize["is_curbside_pickup"] = false;
+            }
+
+
+            /// <summary>
             /// Builds class object.
             /// </summary>
             /// <returns> FulfillmentPickupDetails. </returns>
             public FulfillmentPickupDetails Build()
             {
-                return new FulfillmentPickupDetails(
+                return new FulfillmentPickupDetails(shouldSerialize,
                     this.recipient,
                     this.expiresAt,
                     this.autoCompleteDuration,

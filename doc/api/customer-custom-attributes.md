@@ -285,30 +285,6 @@ var bodyValues1 = new BulkUpsertCustomerCustomAttributesRequestCustomerCustomAtt
     .Build();
 bodyValues.Add("",bodyValues1);
 
-var bodyValues2CustomAttribute = new CustomAttribute.Builder()
-    .Build();
-var bodyValues2 = new BulkUpsertCustomerCustomAttributesRequestCustomerCustomAttributeUpsertRequest.Builder(
-        null,
-        bodyValues2CustomAttribute)
-    .Build();
-bodyValues.Add("",bodyValues2);
-
-var bodyValues3CustomAttribute = new CustomAttribute.Builder()
-    .Build();
-var bodyValues3 = new BulkUpsertCustomerCustomAttributesRequestCustomerCustomAttributeUpsertRequest.Builder(
-        null,
-        bodyValues3CustomAttribute)
-    .Build();
-bodyValues.Add("",bodyValues3);
-
-var bodyValues4CustomAttribute = new CustomAttribute.Builder()
-    .Build();
-var bodyValues4 = new BulkUpsertCustomerCustomAttributesRequestCustomerCustomAttributeUpsertRequest.Builder(
-        null,
-        bodyValues4CustomAttribute)
-    .Build();
-bodyValues.Add("",bodyValues4);
-
 var body = new BulkUpsertCustomerCustomAttributesRequest.Builder(
         bodyValues)
     .Build();
@@ -490,7 +466,6 @@ UpsertCustomerCustomAttributeAsync(
 string customerId = "customer_id8";
 string key = "key0";
 var bodyCustomAttribute = new CustomAttribute.Builder()
-    .MValue(JsonValue.FromObject("\"Dune\""))
     .Build();
 var body = new UpsertCustomerCustomAttributeRequest.Builder(
         bodyCustomAttribute)

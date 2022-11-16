@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class SubscriptionPhase
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="SubscriptionPhase"/> class.
         /// </summary>
@@ -32,17 +33,53 @@ namespace Square.Models
             Models.Money recurringPriceMoney = null,
             long? ordinal = null)
         {
-            this.Uid = uid;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "uid", false },
+                { "periods", false },
+                { "ordinal", false }
+            };
+
+            if (uid != null)
+            {
+                shouldSerialize["uid"] = true;
+                this.Uid = uid;
+            }
+
             this.Cadence = cadence;
-            this.Periods = periods;
+            if (periods != null)
+            {
+                shouldSerialize["periods"] = true;
+                this.Periods = periods;
+            }
+
             this.RecurringPriceMoney = recurringPriceMoney;
-            this.Ordinal = ordinal;
+            if (ordinal != null)
+            {
+                shouldSerialize["ordinal"] = true;
+                this.Ordinal = ordinal;
+            }
+
+        }
+        internal SubscriptionPhase(Dictionary<string, bool> shouldSerialize,
+            string cadence,
+            string uid = null,
+            int? periods = null,
+            Models.Money recurringPriceMoney = null,
+            long? ordinal = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Uid = uid;
+            Cadence = cadence;
+            Periods = periods;
+            RecurringPriceMoney = recurringPriceMoney;
+            Ordinal = ordinal;
         }
 
         /// <summary>
         /// The Square-assigned ID of the subscription phase. This field cannot be changed after a `SubscriptionPhase` is created.
         /// </summary>
-        [JsonProperty("uid", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("uid")]
         public string Uid { get; }
 
         /// <summary>
@@ -54,7 +91,7 @@ namespace Square.Models
         /// <summary>
         /// The number of `cadence`s the phase lasts. If not set, the phase never ends. Only the last phase can be indefinite. This field cannot be changed after a `SubscriptionPhase` is created.
         /// </summary>
-        [JsonProperty("periods", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("periods")]
         public int? Periods { get; }
 
         /// <summary>
@@ -71,7 +108,7 @@ namespace Square.Models
         /// <summary>
         /// The position this phase appears in the sequence of phases defined for the plan, indexed from 0. This field cannot be changed after a `SubscriptionPhase` is created.
         /// </summary>
-        [JsonProperty("ordinal", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("ordinal")]
         public long? Ordinal { get; }
 
         /// <inheritdoc/>
@@ -82,6 +119,33 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"SubscriptionPhase : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeUid()
+        {
+            return this.shouldSerialize["uid"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializePeriods()
+        {
+            return this.shouldSerialize["periods"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeOrdinal()
+        {
+            return this.shouldSerialize["ordinal"];
         }
 
         /// <inheritdoc/>
@@ -147,6 +211,13 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "uid", false },
+                { "periods", false },
+                { "ordinal", false },
+            };
+
             private string cadence;
             private string uid;
             private int? periods;
@@ -177,6 +248,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Uid(string uid)
             {
+                shouldSerialize["uid"] = true;
                 this.uid = uid;
                 return this;
             }
@@ -188,6 +260,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Periods(int? periods)
             {
+                shouldSerialize["periods"] = true;
                 this.periods = periods;
                 return this;
             }
@@ -210,9 +283,35 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Ordinal(long? ordinal)
             {
+                shouldSerialize["ordinal"] = true;
                 this.ordinal = ordinal;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetUid()
+            {
+                this.shouldSerialize["uid"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetPeriods()
+            {
+                this.shouldSerialize["periods"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetOrdinal()
+            {
+                this.shouldSerialize["ordinal"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -220,7 +319,7 @@ namespace Square.Models
             /// <returns> SubscriptionPhase. </returns>
             public SubscriptionPhase Build()
             {
-                return new SubscriptionPhase(
+                return new SubscriptionPhase(shouldSerialize,
                     this.cadence,
                     this.uid,
                     this.periods,

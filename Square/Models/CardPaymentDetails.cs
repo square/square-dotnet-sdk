@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class CardPaymentDetails
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="CardPaymentDetails"/> class.
         /// </summary>
@@ -54,29 +55,147 @@ namespace Square.Models
             bool? refundRequiresCardPresence = null,
             IList<Models.Error> errors = null)
         {
-            this.Status = status;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "status", false },
+                { "entry_method", false },
+                { "cvv_status", false },
+                { "avs_status", false },
+                { "auth_result_code", false },
+                { "application_identifier", false },
+                { "application_name", false },
+                { "application_cryptogram", false },
+                { "verification_method", false },
+                { "verification_results", false },
+                { "statement_description", false },
+                { "refund_requires_card_presence", false },
+                { "errors", false }
+            };
+
+            if (status != null)
+            {
+                shouldSerialize["status"] = true;
+                this.Status = status;
+            }
+
             this.Card = card;
-            this.EntryMethod = entryMethod;
-            this.CvvStatus = cvvStatus;
-            this.AvsStatus = avsStatus;
-            this.AuthResultCode = authResultCode;
-            this.ApplicationIdentifier = applicationIdentifier;
-            this.ApplicationName = applicationName;
-            this.ApplicationCryptogram = applicationCryptogram;
-            this.VerificationMethod = verificationMethod;
-            this.VerificationResults = verificationResults;
-            this.StatementDescription = statementDescription;
+            if (entryMethod != null)
+            {
+                shouldSerialize["entry_method"] = true;
+                this.EntryMethod = entryMethod;
+            }
+
+            if (cvvStatus != null)
+            {
+                shouldSerialize["cvv_status"] = true;
+                this.CvvStatus = cvvStatus;
+            }
+
+            if (avsStatus != null)
+            {
+                shouldSerialize["avs_status"] = true;
+                this.AvsStatus = avsStatus;
+            }
+
+            if (authResultCode != null)
+            {
+                shouldSerialize["auth_result_code"] = true;
+                this.AuthResultCode = authResultCode;
+            }
+
+            if (applicationIdentifier != null)
+            {
+                shouldSerialize["application_identifier"] = true;
+                this.ApplicationIdentifier = applicationIdentifier;
+            }
+
+            if (applicationName != null)
+            {
+                shouldSerialize["application_name"] = true;
+                this.ApplicationName = applicationName;
+            }
+
+            if (applicationCryptogram != null)
+            {
+                shouldSerialize["application_cryptogram"] = true;
+                this.ApplicationCryptogram = applicationCryptogram;
+            }
+
+            if (verificationMethod != null)
+            {
+                shouldSerialize["verification_method"] = true;
+                this.VerificationMethod = verificationMethod;
+            }
+
+            if (verificationResults != null)
+            {
+                shouldSerialize["verification_results"] = true;
+                this.VerificationResults = verificationResults;
+            }
+
+            if (statementDescription != null)
+            {
+                shouldSerialize["statement_description"] = true;
+                this.StatementDescription = statementDescription;
+            }
+
             this.DeviceDetails = deviceDetails;
             this.CardPaymentTimeline = cardPaymentTimeline;
-            this.RefundRequiresCardPresence = refundRequiresCardPresence;
-            this.Errors = errors;
+            if (refundRequiresCardPresence != null)
+            {
+                shouldSerialize["refund_requires_card_presence"] = true;
+                this.RefundRequiresCardPresence = refundRequiresCardPresence;
+            }
+
+            if (errors != null)
+            {
+                shouldSerialize["errors"] = true;
+                this.Errors = errors;
+            }
+
+        }
+        internal CardPaymentDetails(Dictionary<string, bool> shouldSerialize,
+            string status = null,
+            Models.Card card = null,
+            string entryMethod = null,
+            string cvvStatus = null,
+            string avsStatus = null,
+            string authResultCode = null,
+            string applicationIdentifier = null,
+            string applicationName = null,
+            string applicationCryptogram = null,
+            string verificationMethod = null,
+            string verificationResults = null,
+            string statementDescription = null,
+            Models.DeviceDetails deviceDetails = null,
+            Models.CardPaymentTimeline cardPaymentTimeline = null,
+            bool? refundRequiresCardPresence = null,
+            IList<Models.Error> errors = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Status = status;
+            Card = card;
+            EntryMethod = entryMethod;
+            CvvStatus = cvvStatus;
+            AvsStatus = avsStatus;
+            AuthResultCode = authResultCode;
+            ApplicationIdentifier = applicationIdentifier;
+            ApplicationName = applicationName;
+            ApplicationCryptogram = applicationCryptogram;
+            VerificationMethod = verificationMethod;
+            VerificationResults = verificationResults;
+            StatementDescription = statementDescription;
+            DeviceDetails = deviceDetails;
+            CardPaymentTimeline = cardPaymentTimeline;
+            RefundRequiresCardPresence = refundRequiresCardPresence;
+            Errors = errors;
         }
 
         /// <summary>
         /// The card payment's current state. The state can be AUTHORIZED, CAPTURED, VOIDED, or
         /// FAILED.
         /// </summary>
-        [JsonProperty("status", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("status")]
         public string Status { get; }
 
         /// <summary>
@@ -90,60 +209,60 @@ namespace Square.Models
         /// The method used to enter the card's details for the payment. The method can be
         /// `KEYED`, `SWIPED`, `EMV`, `ON_FILE`, or `CONTACTLESS`.
         /// </summary>
-        [JsonProperty("entry_method", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("entry_method")]
         public string EntryMethod { get; }
 
         /// <summary>
         /// The status code returned from the Card Verification Value (CVV) check. The code can be
         /// `CVV_ACCEPTED`, `CVV_REJECTED`, or `CVV_NOT_CHECKED`.
         /// </summary>
-        [JsonProperty("cvv_status", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("cvv_status")]
         public string CvvStatus { get; }
 
         /// <summary>
         /// The status code returned from the Address Verification System (AVS) check. The code can be
         /// `AVS_ACCEPTED`, `AVS_REJECTED`, or `AVS_NOT_CHECKED`.
         /// </summary>
-        [JsonProperty("avs_status", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("avs_status")]
         public string AvsStatus { get; }
 
         /// <summary>
         /// The status code returned by the card issuer that describes the payment's
         /// authorization status.
         /// </summary>
-        [JsonProperty("auth_result_code", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("auth_result_code")]
         public string AuthResultCode { get; }
 
         /// <summary>
         /// For EMV payments, the application ID identifies the EMV application used for the payment.
         /// </summary>
-        [JsonProperty("application_identifier", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("application_identifier")]
         public string ApplicationIdentifier { get; }
 
         /// <summary>
         /// For EMV payments, the human-readable name of the EMV application used for the payment.
         /// </summary>
-        [JsonProperty("application_name", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("application_name")]
         public string ApplicationName { get; }
 
         /// <summary>
         /// For EMV payments, the cryptogram generated for the payment.
         /// </summary>
-        [JsonProperty("application_cryptogram", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("application_cryptogram")]
         public string ApplicationCryptogram { get; }
 
         /// <summary>
         /// For EMV payments, the method used to verify the cardholder's identity. The method can be
         /// `PIN`, `SIGNATURE`, `PIN_AND_SIGNATURE`, `ON_DEVICE`, or `NONE`.
         /// </summary>
-        [JsonProperty("verification_method", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("verification_method")]
         public string VerificationMethod { get; }
 
         /// <summary>
         /// For EMV payments, the results of the cardholder verification. The result can be
         /// `SUCCESS`, `FAILURE`, or `UNKNOWN`.
         /// </summary>
-        [JsonProperty("verification_results", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("verification_results")]
         public string VerificationResults { get; }
 
         /// <summary>
@@ -151,7 +270,7 @@ namespace Square.Models
         /// Note: The actual statement description varies and is likely to be truncated and appended with
         /// additional information on a per issuer basis.
         /// </summary>
-        [JsonProperty("statement_description", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("statement_description")]
         public string StatementDescription { get; }
 
         /// <summary>
@@ -170,13 +289,13 @@ namespace Square.Models
         /// Whether the card must be physically present for the payment to
         /// be refunded.  If set to `true`, the card must be present.
         /// </summary>
-        [JsonProperty("refund_requires_card_presence", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("refund_requires_card_presence")]
         public bool? RefundRequiresCardPresence { get; }
 
         /// <summary>
         /// Information about errors encountered during the request.
         /// </summary>
-        [JsonProperty("errors", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("errors")]
         public IList<Models.Error> Errors { get; }
 
         /// <inheritdoc/>
@@ -187,6 +306,123 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"CardPaymentDetails : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeStatus()
+        {
+            return this.shouldSerialize["status"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeEntryMethod()
+        {
+            return this.shouldSerialize["entry_method"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeCvvStatus()
+        {
+            return this.shouldSerialize["cvv_status"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeAvsStatus()
+        {
+            return this.shouldSerialize["avs_status"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeAuthResultCode()
+        {
+            return this.shouldSerialize["auth_result_code"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeApplicationIdentifier()
+        {
+            return this.shouldSerialize["application_identifier"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeApplicationName()
+        {
+            return this.shouldSerialize["application_name"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeApplicationCryptogram()
+        {
+            return this.shouldSerialize["application_cryptogram"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeVerificationMethod()
+        {
+            return this.shouldSerialize["verification_method"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeVerificationResults()
+        {
+            return this.shouldSerialize["verification_results"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeStatementDescription()
+        {
+            return this.shouldSerialize["statement_description"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeRefundRequiresCardPresence()
+        {
+            return this.shouldSerialize["refund_requires_card_presence"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeErrors()
+        {
+            return this.shouldSerialize["errors"];
         }
 
         /// <inheritdoc/>
@@ -289,6 +525,23 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "status", false },
+                { "entry_method", false },
+                { "cvv_status", false },
+                { "avs_status", false },
+                { "auth_result_code", false },
+                { "application_identifier", false },
+                { "application_name", false },
+                { "application_cryptogram", false },
+                { "verification_method", false },
+                { "verification_results", false },
+                { "statement_description", false },
+                { "refund_requires_card_presence", false },
+                { "errors", false },
+            };
+
             private string status;
             private Models.Card card;
             private string entryMethod;
@@ -313,6 +566,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Status(string status)
             {
+                shouldSerialize["status"] = true;
                 this.status = status;
                 return this;
             }
@@ -335,6 +589,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder EntryMethod(string entryMethod)
             {
+                shouldSerialize["entry_method"] = true;
                 this.entryMethod = entryMethod;
                 return this;
             }
@@ -346,6 +601,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder CvvStatus(string cvvStatus)
             {
+                shouldSerialize["cvv_status"] = true;
                 this.cvvStatus = cvvStatus;
                 return this;
             }
@@ -357,6 +613,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder AvsStatus(string avsStatus)
             {
+                shouldSerialize["avs_status"] = true;
                 this.avsStatus = avsStatus;
                 return this;
             }
@@ -368,6 +625,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder AuthResultCode(string authResultCode)
             {
+                shouldSerialize["auth_result_code"] = true;
                 this.authResultCode = authResultCode;
                 return this;
             }
@@ -379,6 +637,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder ApplicationIdentifier(string applicationIdentifier)
             {
+                shouldSerialize["application_identifier"] = true;
                 this.applicationIdentifier = applicationIdentifier;
                 return this;
             }
@@ -390,6 +649,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder ApplicationName(string applicationName)
             {
+                shouldSerialize["application_name"] = true;
                 this.applicationName = applicationName;
                 return this;
             }
@@ -401,6 +661,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder ApplicationCryptogram(string applicationCryptogram)
             {
+                shouldSerialize["application_cryptogram"] = true;
                 this.applicationCryptogram = applicationCryptogram;
                 return this;
             }
@@ -412,6 +673,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder VerificationMethod(string verificationMethod)
             {
+                shouldSerialize["verification_method"] = true;
                 this.verificationMethod = verificationMethod;
                 return this;
             }
@@ -423,6 +685,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder VerificationResults(string verificationResults)
             {
+                shouldSerialize["verification_results"] = true;
                 this.verificationResults = verificationResults;
                 return this;
             }
@@ -434,6 +697,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder StatementDescription(string statementDescription)
             {
+                shouldSerialize["statement_description"] = true;
                 this.statementDescription = statementDescription;
                 return this;
             }
@@ -467,6 +731,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder RefundRequiresCardPresence(bool? refundRequiresCardPresence)
             {
+                shouldSerialize["refund_requires_card_presence"] = true;
                 this.refundRequiresCardPresence = refundRequiresCardPresence;
                 return this;
             }
@@ -478,9 +743,115 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Errors(IList<Models.Error> errors)
             {
+                shouldSerialize["errors"] = true;
                 this.errors = errors;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetStatus()
+            {
+                this.shouldSerialize["status"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetEntryMethod()
+            {
+                this.shouldSerialize["entry_method"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetCvvStatus()
+            {
+                this.shouldSerialize["cvv_status"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetAvsStatus()
+            {
+                this.shouldSerialize["avs_status"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetAuthResultCode()
+            {
+                this.shouldSerialize["auth_result_code"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetApplicationIdentifier()
+            {
+                this.shouldSerialize["application_identifier"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetApplicationName()
+            {
+                this.shouldSerialize["application_name"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetApplicationCryptogram()
+            {
+                this.shouldSerialize["application_cryptogram"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetVerificationMethod()
+            {
+                this.shouldSerialize["verification_method"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetVerificationResults()
+            {
+                this.shouldSerialize["verification_results"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetStatementDescription()
+            {
+                this.shouldSerialize["statement_description"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetRefundRequiresCardPresence()
+            {
+                this.shouldSerialize["refund_requires_card_presence"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetErrors()
+            {
+                this.shouldSerialize["errors"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -488,7 +859,7 @@ namespace Square.Models
             /// <returns> CardPaymentDetails. </returns>
             public CardPaymentDetails Build()
             {
-                return new CardPaymentDetails(
+                return new CardPaymentDetails(shouldSerialize,
                     this.status,
                     this.card,
                     this.entryMethod,

@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class OrderCreated
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="OrderCreated"/> class.
         /// </summary>
@@ -32,24 +33,54 @@ namespace Square.Models
             string state = null,
             string createdAt = null)
         {
-            this.OrderId = orderId;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "order_id", false },
+                { "location_id", false }
+            };
+
+            if (orderId != null)
+            {
+                shouldSerialize["order_id"] = true;
+                this.OrderId = orderId;
+            }
+
             this.Version = version;
-            this.LocationId = locationId;
+            if (locationId != null)
+            {
+                shouldSerialize["location_id"] = true;
+                this.LocationId = locationId;
+            }
+
             this.State = state;
             this.CreatedAt = createdAt;
+        }
+        internal OrderCreated(Dictionary<string, bool> shouldSerialize,
+            string orderId = null,
+            int? version = null,
+            string locationId = null,
+            string state = null,
+            string createdAt = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            OrderId = orderId;
+            Version = version;
+            LocationId = locationId;
+            State = state;
+            CreatedAt = createdAt;
         }
 
         /// <summary>
         /// The order's unique ID.
         /// </summary>
-        [JsonProperty("order_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("order_id")]
         public string OrderId { get; }
 
         /// <summary>
         /// The version number, which is incremented each time an update is committed to the order.
         /// Orders that were not created through the API do not include a version number and
         /// therefore cannot be updated.
-        /// [Read more about working with versions.](https://developer.squareup.com/docs/orders-api/manage-orders#update-orders)
+        /// [Read more about working with versions.](https://developer.squareup.com/docs/orders-api/manage-orders/update-orders)
         /// </summary>
         [JsonProperty("version", NullValueHandling = NullValueHandling.Ignore)]
         public int? Version { get; }
@@ -57,7 +88,7 @@ namespace Square.Models
         /// <summary>
         /// The ID of the seller location that this order is associated with.
         /// </summary>
-        [JsonProperty("location_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("location_id")]
         public string LocationId { get; }
 
         /// <summary>
@@ -80,6 +111,24 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"OrderCreated : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeOrderId()
+        {
+            return this.shouldSerialize["order_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeLocationId()
+        {
+            return this.shouldSerialize["location_id"];
         }
 
         /// <inheritdoc/>
@@ -145,6 +194,12 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "order_id", false },
+                { "location_id", false },
+            };
+
             private string orderId;
             private int? version;
             private string locationId;
@@ -158,6 +213,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder OrderId(string orderId)
             {
+                shouldSerialize["order_id"] = true;
                 this.orderId = orderId;
                 return this;
             }
@@ -180,6 +236,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder LocationId(string locationId)
             {
+                shouldSerialize["location_id"] = true;
                 this.locationId = locationId;
                 return this;
             }
@@ -207,12 +264,29 @@ namespace Square.Models
             }
 
             /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetOrderId()
+            {
+                this.shouldSerialize["order_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetLocationId()
+            {
+                this.shouldSerialize["location_id"] = false;
+            }
+
+
+            /// <summary>
             /// Builds class object.
             /// </summary>
             /// <returns> OrderCreated. </returns>
             public OrderCreated Build()
             {
-                return new OrderCreated(
+                return new OrderCreated(shouldSerialize,
                     this.orderId,
                     this.version,
                     this.locationId,

@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class ListDisputeEvidenceRequest
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="ListDisputeEvidenceRequest"/> class.
         /// </summary>
@@ -24,7 +25,23 @@ namespace Square.Models
         public ListDisputeEvidenceRequest(
             string cursor = null)
         {
-            this.Cursor = cursor;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "cursor", false }
+            };
+
+            if (cursor != null)
+            {
+                shouldSerialize["cursor"] = true;
+                this.Cursor = cursor;
+            }
+
+        }
+        internal ListDisputeEvidenceRequest(Dictionary<string, bool> shouldSerialize,
+            string cursor = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Cursor = cursor;
         }
 
         /// <summary>
@@ -32,7 +49,7 @@ namespace Square.Models
         /// Provide this cursor to retrieve the next set of results for the original query.
         /// For more information, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination).
         /// </summary>
-        [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("cursor")]
         public string Cursor { get; }
 
         /// <inheritdoc/>
@@ -43,6 +60,15 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"ListDisputeEvidenceRequest : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeCursor()
+        {
+            return this.shouldSerialize["cursor"];
         }
 
         /// <inheritdoc/>
@@ -96,6 +122,11 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "cursor", false },
+            };
+
             private string cursor;
 
              /// <summary>
@@ -105,9 +136,19 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Cursor(string cursor)
             {
+                shouldSerialize["cursor"] = true;
                 this.cursor = cursor;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetCursor()
+            {
+                this.shouldSerialize["cursor"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -115,7 +156,7 @@ namespace Square.Models
             /// <returns> ListDisputeEvidenceRequest. </returns>
             public ListDisputeEvidenceRequest Build()
             {
-                return new ListDisputeEvidenceRequest(
+                return new ListDisputeEvidenceRequest(shouldSerialize,
                     this.cursor);
             }
         }

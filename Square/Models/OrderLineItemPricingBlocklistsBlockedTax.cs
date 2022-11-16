@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class OrderLineItemPricingBlocklistsBlockedTax
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="OrderLineItemPricingBlocklistsBlockedTax"/> class.
         /// </summary>
@@ -28,22 +29,54 @@ namespace Square.Models
             string taxUid = null,
             string taxCatalogObjectId = null)
         {
-            this.Uid = uid;
-            this.TaxUid = taxUid;
-            this.TaxCatalogObjectId = taxCatalogObjectId;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "uid", false },
+                { "tax_uid", false },
+                { "tax_catalog_object_id", false }
+            };
+
+            if (uid != null)
+            {
+                shouldSerialize["uid"] = true;
+                this.Uid = uid;
+            }
+
+            if (taxUid != null)
+            {
+                shouldSerialize["tax_uid"] = true;
+                this.TaxUid = taxUid;
+            }
+
+            if (taxCatalogObjectId != null)
+            {
+                shouldSerialize["tax_catalog_object_id"] = true;
+                this.TaxCatalogObjectId = taxCatalogObjectId;
+            }
+
+        }
+        internal OrderLineItemPricingBlocklistsBlockedTax(Dictionary<string, bool> shouldSerialize,
+            string uid = null,
+            string taxUid = null,
+            string taxCatalogObjectId = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Uid = uid;
+            TaxUid = taxUid;
+            TaxCatalogObjectId = taxCatalogObjectId;
         }
 
         /// <summary>
         /// A unique ID of the `BlockedTax` within the order.
         /// </summary>
-        [JsonProperty("uid", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("uid")]
         public string Uid { get; }
 
         /// <summary>
         /// The `uid` of the tax that should be blocked. Use this field to block
         /// ad hoc taxes. For catalog, taxes use the `tax_catalog_object_id` field.
         /// </summary>
-        [JsonProperty("tax_uid", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("tax_uid")]
         public string TaxUid { get; }
 
         /// <summary>
@@ -51,7 +84,7 @@ namespace Square.Models
         /// Use this field to block catalog taxes. For ad hoc taxes, use the
         /// `tax_uid` field.
         /// </summary>
-        [JsonProperty("tax_catalog_object_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("tax_catalog_object_id")]
         public string TaxCatalogObjectId { get; }
 
         /// <inheritdoc/>
@@ -62,6 +95,33 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"OrderLineItemPricingBlocklistsBlockedTax : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeUid()
+        {
+            return this.shouldSerialize["uid"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeTaxUid()
+        {
+            return this.shouldSerialize["tax_uid"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeTaxCatalogObjectId()
+        {
+            return this.shouldSerialize["tax_catalog_object_id"];
         }
 
         /// <inheritdoc/>
@@ -121,6 +181,13 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "uid", false },
+                { "tax_uid", false },
+                { "tax_catalog_object_id", false },
+            };
+
             private string uid;
             private string taxUid;
             private string taxCatalogObjectId;
@@ -132,6 +199,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Uid(string uid)
             {
+                shouldSerialize["uid"] = true;
                 this.uid = uid;
                 return this;
             }
@@ -143,6 +211,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder TaxUid(string taxUid)
             {
+                shouldSerialize["tax_uid"] = true;
                 this.taxUid = taxUid;
                 return this;
             }
@@ -154,9 +223,35 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder TaxCatalogObjectId(string taxCatalogObjectId)
             {
+                shouldSerialize["tax_catalog_object_id"] = true;
                 this.taxCatalogObjectId = taxCatalogObjectId;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetUid()
+            {
+                this.shouldSerialize["uid"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetTaxUid()
+            {
+                this.shouldSerialize["tax_uid"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetTaxCatalogObjectId()
+            {
+                this.shouldSerialize["tax_catalog_object_id"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -164,7 +259,7 @@ namespace Square.Models
             /// <returns> OrderLineItemPricingBlocklistsBlockedTax. </returns>
             public OrderLineItemPricingBlocklistsBlockedTax Build()
             {
-                return new OrderLineItemPricingBlocklistsBlockedTax(
+                return new OrderLineItemPricingBlocklistsBlockedTax(shouldSerialize,
                     this.uid,
                     this.taxUid,
                     this.taxCatalogObjectId);

@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class V1PaymentItemDetail
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="V1PaymentItemDetail"/> class.
         /// </summary>
@@ -30,34 +31,74 @@ namespace Square.Models
             string itemId = null,
             string itemVariationId = null)
         {
-            this.CategoryName = categoryName;
-            this.Sku = sku;
-            this.ItemId = itemId;
-            this.ItemVariationId = itemVariationId;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "category_name", false },
+                { "sku", false },
+                { "item_id", false },
+                { "item_variation_id", false }
+            };
+
+            if (categoryName != null)
+            {
+                shouldSerialize["category_name"] = true;
+                this.CategoryName = categoryName;
+            }
+
+            if (sku != null)
+            {
+                shouldSerialize["sku"] = true;
+                this.Sku = sku;
+            }
+
+            if (itemId != null)
+            {
+                shouldSerialize["item_id"] = true;
+                this.ItemId = itemId;
+            }
+
+            if (itemVariationId != null)
+            {
+                shouldSerialize["item_variation_id"] = true;
+                this.ItemVariationId = itemVariationId;
+            }
+
+        }
+        internal V1PaymentItemDetail(Dictionary<string, bool> shouldSerialize,
+            string categoryName = null,
+            string sku = null,
+            string itemId = null,
+            string itemVariationId = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            CategoryName = categoryName;
+            Sku = sku;
+            ItemId = itemId;
+            ItemVariationId = itemVariationId;
         }
 
         /// <summary>
         /// The name of the item's merchant-defined category, if any.
         /// </summary>
-        [JsonProperty("category_name", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("category_name")]
         public string CategoryName { get; }
 
         /// <summary>
         /// The item's merchant-defined SKU, if any.
         /// </summary>
-        [JsonProperty("sku", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("sku")]
         public string Sku { get; }
 
         /// <summary>
         /// The unique ID of the item purchased, if any.
         /// </summary>
-        [JsonProperty("item_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("item_id")]
         public string ItemId { get; }
 
         /// <summary>
         /// The unique ID of the item variation purchased, if any.
         /// </summary>
-        [JsonProperty("item_variation_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("item_variation_id")]
         public string ItemVariationId { get; }
 
         /// <inheritdoc/>
@@ -68,6 +109,42 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"V1PaymentItemDetail : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeCategoryName()
+        {
+            return this.shouldSerialize["category_name"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeSku()
+        {
+            return this.shouldSerialize["sku"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeItemId()
+        {
+            return this.shouldSerialize["item_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeItemVariationId()
+        {
+            return this.shouldSerialize["item_variation_id"];
         }
 
         /// <inheritdoc/>
@@ -130,6 +207,14 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "category_name", false },
+                { "sku", false },
+                { "item_id", false },
+                { "item_variation_id", false },
+            };
+
             private string categoryName;
             private string sku;
             private string itemId;
@@ -142,6 +227,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder CategoryName(string categoryName)
             {
+                shouldSerialize["category_name"] = true;
                 this.categoryName = categoryName;
                 return this;
             }
@@ -153,6 +239,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Sku(string sku)
             {
+                shouldSerialize["sku"] = true;
                 this.sku = sku;
                 return this;
             }
@@ -164,6 +251,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder ItemId(string itemId)
             {
+                shouldSerialize["item_id"] = true;
                 this.itemId = itemId;
                 return this;
             }
@@ -175,9 +263,43 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder ItemVariationId(string itemVariationId)
             {
+                shouldSerialize["item_variation_id"] = true;
                 this.itemVariationId = itemVariationId;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetCategoryName()
+            {
+                this.shouldSerialize["category_name"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetSku()
+            {
+                this.shouldSerialize["sku"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetItemId()
+            {
+                this.shouldSerialize["item_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetItemVariationId()
+            {
+                this.shouldSerialize["item_variation_id"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -185,7 +307,7 @@ namespace Square.Models
             /// <returns> V1PaymentItemDetail. </returns>
             public V1PaymentItemDetail Build()
             {
-                return new V1PaymentItemDetail(
+                return new V1PaymentItemDetail(shouldSerialize,
                     this.categoryName,
                     this.sku,
                     this.itemId,

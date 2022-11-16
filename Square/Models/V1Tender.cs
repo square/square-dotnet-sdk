@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class V1Tender
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="V1Tender"/> class.
         /// </summary>
@@ -54,22 +55,110 @@ namespace Square.Models
             Models.V1Money refundedMoney = null,
             bool? isExchange = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "name", false },
+                { "employee_id", false },
+                { "receipt_url", false },
+                { "pan_suffix", false },
+                { "payment_note", false },
+                { "tendered_at", false },
+                { "settled_at", false },
+                { "is_exchange", false }
+            };
+
             this.Id = id;
             this.Type = type;
-            this.Name = name;
-            this.EmployeeId = employeeId;
-            this.ReceiptUrl = receiptUrl;
+            if (name != null)
+            {
+                shouldSerialize["name"] = true;
+                this.Name = name;
+            }
+
+            if (employeeId != null)
+            {
+                shouldSerialize["employee_id"] = true;
+                this.EmployeeId = employeeId;
+            }
+
+            if (receiptUrl != null)
+            {
+                shouldSerialize["receipt_url"] = true;
+                this.ReceiptUrl = receiptUrl;
+            }
+
             this.CardBrand = cardBrand;
-            this.PanSuffix = panSuffix;
+            if (panSuffix != null)
+            {
+                shouldSerialize["pan_suffix"] = true;
+                this.PanSuffix = panSuffix;
+            }
+
             this.EntryMethod = entryMethod;
-            this.PaymentNote = paymentNote;
+            if (paymentNote != null)
+            {
+                shouldSerialize["payment_note"] = true;
+                this.PaymentNote = paymentNote;
+            }
+
             this.TotalMoney = totalMoney;
             this.TenderedMoney = tenderedMoney;
-            this.TenderedAt = tenderedAt;
-            this.SettledAt = settledAt;
+            if (tenderedAt != null)
+            {
+                shouldSerialize["tendered_at"] = true;
+                this.TenderedAt = tenderedAt;
+            }
+
+            if (settledAt != null)
+            {
+                shouldSerialize["settled_at"] = true;
+                this.SettledAt = settledAt;
+            }
+
             this.ChangeBackMoney = changeBackMoney;
             this.RefundedMoney = refundedMoney;
-            this.IsExchange = isExchange;
+            if (isExchange != null)
+            {
+                shouldSerialize["is_exchange"] = true;
+                this.IsExchange = isExchange;
+            }
+
+        }
+        internal V1Tender(Dictionary<string, bool> shouldSerialize,
+            string id = null,
+            string type = null,
+            string name = null,
+            string employeeId = null,
+            string receiptUrl = null,
+            string cardBrand = null,
+            string panSuffix = null,
+            string entryMethod = null,
+            string paymentNote = null,
+            Models.V1Money totalMoney = null,
+            Models.V1Money tenderedMoney = null,
+            string tenderedAt = null,
+            string settledAt = null,
+            Models.V1Money changeBackMoney = null,
+            Models.V1Money refundedMoney = null,
+            bool? isExchange = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Id = id;
+            Type = type;
+            Name = name;
+            EmployeeId = employeeId;
+            ReceiptUrl = receiptUrl;
+            CardBrand = cardBrand;
+            PanSuffix = panSuffix;
+            EntryMethod = entryMethod;
+            PaymentNote = paymentNote;
+            TotalMoney = totalMoney;
+            TenderedMoney = tenderedMoney;
+            TenderedAt = tenderedAt;
+            SettledAt = settledAt;
+            ChangeBackMoney = changeBackMoney;
+            RefundedMoney = refundedMoney;
+            IsExchange = isExchange;
         }
 
         /// <summary>
@@ -87,19 +176,19 @@ namespace Square.Models
         /// <summary>
         /// A human-readable description of the tender.
         /// </summary>
-        [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("name")]
         public string Name { get; }
 
         /// <summary>
         /// The ID of the employee that processed the tender.
         /// </summary>
-        [JsonProperty("employee_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("employee_id")]
         public string EmployeeId { get; }
 
         /// <summary>
         /// The URL of the receipt for the tender.
         /// </summary>
-        [JsonProperty("receipt_url", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("receipt_url")]
         public string ReceiptUrl { get; }
 
         /// <summary>
@@ -111,7 +200,7 @@ namespace Square.Models
         /// <summary>
         /// The last four digits of the provided credit card's account number.
         /// </summary>
-        [JsonProperty("pan_suffix", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("pan_suffix")]
         public string PanSuffix { get; }
 
         /// <summary>
@@ -123,7 +212,7 @@ namespace Square.Models
         /// <summary>
         /// Notes entered by the merchant about the tender at the time of payment, if any. Typically only present for tender with the type: OTHER.
         /// </summary>
-        [JsonProperty("payment_note", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("payment_note")]
         public string PaymentNote { get; }
 
         /// <summary>
@@ -141,13 +230,13 @@ namespace Square.Models
         /// <summary>
         /// The time when the tender was created, in ISO 8601 format.
         /// </summary>
-        [JsonProperty("tendered_at", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("tendered_at")]
         public string TenderedAt { get; }
 
         /// <summary>
         /// The time when the tender was settled, in ISO 8601 format.
         /// </summary>
-        [JsonProperty("settled_at", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("settled_at")]
         public string SettledAt { get; }
 
         /// <summary>
@@ -165,7 +254,7 @@ namespace Square.Models
         /// <summary>
         /// Indicates whether or not the tender is associated with an exchange. If is_exchange is true, the tender represents the value of goods returned in an exchange not the actual money paid. The exchange value reduces the tender amounts needed to pay for items purchased in the exchange.
         /// </summary>
-        [JsonProperty("is_exchange", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("is_exchange")]
         public bool? IsExchange { get; }
 
         /// <inheritdoc/>
@@ -176,6 +265,78 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"V1Tender : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeName()
+        {
+            return this.shouldSerialize["name"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeEmployeeId()
+        {
+            return this.shouldSerialize["employee_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeReceiptUrl()
+        {
+            return this.shouldSerialize["receipt_url"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializePanSuffix()
+        {
+            return this.shouldSerialize["pan_suffix"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializePaymentNote()
+        {
+            return this.shouldSerialize["payment_note"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeTenderedAt()
+        {
+            return this.shouldSerialize["tendered_at"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeSettledAt()
+        {
+            return this.shouldSerialize["settled_at"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeIsExchange()
+        {
+            return this.shouldSerialize["is_exchange"];
         }
 
         /// <inheritdoc/>
@@ -278,6 +439,18 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "name", false },
+                { "employee_id", false },
+                { "receipt_url", false },
+                { "pan_suffix", false },
+                { "payment_note", false },
+                { "tendered_at", false },
+                { "settled_at", false },
+                { "is_exchange", false },
+            };
+
             private string id;
             private string type;
             private string name;
@@ -324,6 +497,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Name(string name)
             {
+                shouldSerialize["name"] = true;
                 this.name = name;
                 return this;
             }
@@ -335,6 +509,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder EmployeeId(string employeeId)
             {
+                shouldSerialize["employee_id"] = true;
                 this.employeeId = employeeId;
                 return this;
             }
@@ -346,6 +521,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder ReceiptUrl(string receiptUrl)
             {
+                shouldSerialize["receipt_url"] = true;
                 this.receiptUrl = receiptUrl;
                 return this;
             }
@@ -368,6 +544,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder PanSuffix(string panSuffix)
             {
+                shouldSerialize["pan_suffix"] = true;
                 this.panSuffix = panSuffix;
                 return this;
             }
@@ -390,6 +567,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder PaymentNote(string paymentNote)
             {
+                shouldSerialize["payment_note"] = true;
                 this.paymentNote = paymentNote;
                 return this;
             }
@@ -423,6 +601,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder TenderedAt(string tenderedAt)
             {
+                shouldSerialize["tendered_at"] = true;
                 this.tenderedAt = tenderedAt;
                 return this;
             }
@@ -434,6 +613,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder SettledAt(string settledAt)
             {
+                shouldSerialize["settled_at"] = true;
                 this.settledAt = settledAt;
                 return this;
             }
@@ -467,9 +647,75 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder IsExchange(bool? isExchange)
             {
+                shouldSerialize["is_exchange"] = true;
                 this.isExchange = isExchange;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetName()
+            {
+                this.shouldSerialize["name"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetEmployeeId()
+            {
+                this.shouldSerialize["employee_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetReceiptUrl()
+            {
+                this.shouldSerialize["receipt_url"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetPanSuffix()
+            {
+                this.shouldSerialize["pan_suffix"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetPaymentNote()
+            {
+                this.shouldSerialize["payment_note"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetTenderedAt()
+            {
+                this.shouldSerialize["tendered_at"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetSettledAt()
+            {
+                this.shouldSerialize["settled_at"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetIsExchange()
+            {
+                this.shouldSerialize["is_exchange"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -477,7 +723,7 @@ namespace Square.Models
             /// <returns> V1Tender. </returns>
             public V1Tender Build()
             {
-                return new V1Tender(
+                return new V1Tender(shouldSerialize,
                     this.id,
                     this.type,
                     this.name,

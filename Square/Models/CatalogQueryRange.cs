@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class CatalogQueryRange
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="CatalogQueryRange"/> class.
         /// </summary>
@@ -28,9 +29,35 @@ namespace Square.Models
             long? attributeMinValue = null,
             long? attributeMaxValue = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "attribute_min_value", false },
+                { "attribute_max_value", false }
+            };
+
             this.AttributeName = attributeName;
-            this.AttributeMinValue = attributeMinValue;
-            this.AttributeMaxValue = attributeMaxValue;
+            if (attributeMinValue != null)
+            {
+                shouldSerialize["attribute_min_value"] = true;
+                this.AttributeMinValue = attributeMinValue;
+            }
+
+            if (attributeMaxValue != null)
+            {
+                shouldSerialize["attribute_max_value"] = true;
+                this.AttributeMaxValue = attributeMaxValue;
+            }
+
+        }
+        internal CatalogQueryRange(Dictionary<string, bool> shouldSerialize,
+            string attributeName,
+            long? attributeMinValue = null,
+            long? attributeMaxValue = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            AttributeName = attributeName;
+            AttributeMinValue = attributeMinValue;
+            AttributeMaxValue = attributeMaxValue;
         }
 
         /// <summary>
@@ -42,13 +69,13 @@ namespace Square.Models
         /// <summary>
         /// The desired minimum value for the search attribute (inclusive).
         /// </summary>
-        [JsonProperty("attribute_min_value", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("attribute_min_value")]
         public long? AttributeMinValue { get; }
 
         /// <summary>
         /// The desired maximum value for the search attribute (inclusive).
         /// </summary>
-        [JsonProperty("attribute_max_value", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("attribute_max_value")]
         public long? AttributeMaxValue { get; }
 
         /// <inheritdoc/>
@@ -59,6 +86,24 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"CatalogQueryRange : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeAttributeMinValue()
+        {
+            return this.shouldSerialize["attribute_min_value"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeAttributeMaxValue()
+        {
+            return this.shouldSerialize["attribute_max_value"];
         }
 
         /// <inheritdoc/>
@@ -118,6 +163,12 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "attribute_min_value", false },
+                { "attribute_max_value", false },
+            };
+
             private string attributeName;
             private long? attributeMinValue;
             private long? attributeMaxValue;
@@ -146,6 +197,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder AttributeMinValue(long? attributeMinValue)
             {
+                shouldSerialize["attribute_min_value"] = true;
                 this.attributeMinValue = attributeMinValue;
                 return this;
             }
@@ -157,9 +209,27 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder AttributeMaxValue(long? attributeMaxValue)
             {
+                shouldSerialize["attribute_max_value"] = true;
                 this.attributeMaxValue = attributeMaxValue;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetAttributeMinValue()
+            {
+                this.shouldSerialize["attribute_min_value"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetAttributeMaxValue()
+            {
+                this.shouldSerialize["attribute_max_value"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -167,7 +237,7 @@ namespace Square.Models
             /// <returns> CatalogQueryRange. </returns>
             public CatalogQueryRange Build()
             {
-                return new CatalogQueryRange(
+                return new CatalogQueryRange(shouldSerialize,
                     this.attributeName,
                     this.attributeMinValue,
                     this.attributeMaxValue);

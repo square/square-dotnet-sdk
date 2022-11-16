@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class CustomerTextFilter
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="CustomerTextFilter"/> class.
         /// </summary>
@@ -26,14 +27,38 @@ namespace Square.Models
             string exact = null,
             string fuzzy = null)
         {
-            this.Exact = exact;
-            this.Fuzzy = fuzzy;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "exact", false },
+                { "fuzzy", false }
+            };
+
+            if (exact != null)
+            {
+                shouldSerialize["exact"] = true;
+                this.Exact = exact;
+            }
+
+            if (fuzzy != null)
+            {
+                shouldSerialize["fuzzy"] = true;
+                this.Fuzzy = fuzzy;
+            }
+
+        }
+        internal CustomerTextFilter(Dictionary<string, bool> shouldSerialize,
+            string exact = null,
+            string fuzzy = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Exact = exact;
+            Fuzzy = fuzzy;
         }
 
         /// <summary>
         /// Use the exact filter to select customers whose attributes match exactly the specified query.
         /// </summary>
-        [JsonProperty("exact", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("exact")]
         public string Exact { get; }
 
         /// <summary>
@@ -42,7 +67,7 @@ namespace Square.Models
         /// each query token must be matched somewhere in the searched attribute. For single token queries,
         /// this is effectively the same behavior as a partial match operation.
         /// </summary>
-        [JsonProperty("fuzzy", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("fuzzy")]
         public string Fuzzy { get; }
 
         /// <inheritdoc/>
@@ -53,6 +78,24 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"CustomerTextFilter : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeExact()
+        {
+            return this.shouldSerialize["exact"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeFuzzy()
+        {
+            return this.shouldSerialize["fuzzy"];
         }
 
         /// <inheritdoc/>
@@ -109,6 +152,12 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "exact", false },
+                { "fuzzy", false },
+            };
+
             private string exact;
             private string fuzzy;
 
@@ -119,6 +168,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Exact(string exact)
             {
+                shouldSerialize["exact"] = true;
                 this.exact = exact;
                 return this;
             }
@@ -130,9 +180,27 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Fuzzy(string fuzzy)
             {
+                shouldSerialize["fuzzy"] = true;
                 this.fuzzy = fuzzy;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetExact()
+            {
+                this.shouldSerialize["exact"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetFuzzy()
+            {
+                this.shouldSerialize["fuzzy"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -140,7 +208,7 @@ namespace Square.Models
             /// <returns> CustomerTextFilter. </returns>
             public CustomerTextFilter Build()
             {
-                return new CustomerTextFilter(
+                return new CustomerTextFilter(shouldSerialize,
                     this.exact,
                     this.fuzzy);
             }

@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class ChargeRequest
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="ChargeRequest"/> class.
         /// </summary>
@@ -50,20 +51,116 @@ namespace Square.Models
             IList<Models.ChargeRequestAdditionalRecipient> additionalRecipients = null,
             string verificationToken = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "card_nonce", false },
+                { "customer_card_id", false },
+                { "delay_capture", false },
+                { "reference_id", false },
+                { "note", false },
+                { "customer_id", false },
+                { "buyer_email_address", false },
+                { "order_id", false },
+                { "additional_recipients", false },
+                { "verification_token", false }
+            };
+
             this.IdempotencyKey = idempotencyKey;
             this.AmountMoney = amountMoney;
-            this.CardNonce = cardNonce;
-            this.CustomerCardId = customerCardId;
-            this.DelayCapture = delayCapture;
-            this.ReferenceId = referenceId;
-            this.Note = note;
-            this.CustomerId = customerId;
+            if (cardNonce != null)
+            {
+                shouldSerialize["card_nonce"] = true;
+                this.CardNonce = cardNonce;
+            }
+
+            if (customerCardId != null)
+            {
+                shouldSerialize["customer_card_id"] = true;
+                this.CustomerCardId = customerCardId;
+            }
+
+            if (delayCapture != null)
+            {
+                shouldSerialize["delay_capture"] = true;
+                this.DelayCapture = delayCapture;
+            }
+
+            if (referenceId != null)
+            {
+                shouldSerialize["reference_id"] = true;
+                this.ReferenceId = referenceId;
+            }
+
+            if (note != null)
+            {
+                shouldSerialize["note"] = true;
+                this.Note = note;
+            }
+
+            if (customerId != null)
+            {
+                shouldSerialize["customer_id"] = true;
+                this.CustomerId = customerId;
+            }
+
             this.BillingAddress = billingAddress;
             this.ShippingAddress = shippingAddress;
-            this.BuyerEmailAddress = buyerEmailAddress;
-            this.OrderId = orderId;
-            this.AdditionalRecipients = additionalRecipients;
-            this.VerificationToken = verificationToken;
+            if (buyerEmailAddress != null)
+            {
+                shouldSerialize["buyer_email_address"] = true;
+                this.BuyerEmailAddress = buyerEmailAddress;
+            }
+
+            if (orderId != null)
+            {
+                shouldSerialize["order_id"] = true;
+                this.OrderId = orderId;
+            }
+
+            if (additionalRecipients != null)
+            {
+                shouldSerialize["additional_recipients"] = true;
+                this.AdditionalRecipients = additionalRecipients;
+            }
+
+            if (verificationToken != null)
+            {
+                shouldSerialize["verification_token"] = true;
+                this.VerificationToken = verificationToken;
+            }
+
+        }
+        internal ChargeRequest(Dictionary<string, bool> shouldSerialize,
+            string idempotencyKey,
+            Models.Money amountMoney,
+            string cardNonce = null,
+            string customerCardId = null,
+            bool? delayCapture = null,
+            string referenceId = null,
+            string note = null,
+            string customerId = null,
+            Models.Address billingAddress = null,
+            Models.Address shippingAddress = null,
+            string buyerEmailAddress = null,
+            string orderId = null,
+            IList<Models.ChargeRequestAdditionalRecipient> additionalRecipients = null,
+            string verificationToken = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            IdempotencyKey = idempotencyKey;
+            AmountMoney = amountMoney;
+            CardNonce = cardNonce;
+            CustomerCardId = customerCardId;
+            DelayCapture = delayCapture;
+            ReferenceId = referenceId;
+            Note = note;
+            CustomerId = customerId;
+            BillingAddress = billingAddress;
+            ShippingAddress = shippingAddress;
+            BuyerEmailAddress = buyerEmailAddress;
+            OrderId = orderId;
+            AdditionalRecipients = additionalRecipients;
+            VerificationToken = verificationToken;
         }
 
         /// <summary>
@@ -97,7 +194,7 @@ namespace Square.Models
         /// Do not provide a value for this field if you provide a value for
         /// `customer_card_id`.
         /// </summary>
-        [JsonProperty("card_nonce", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("card_nonce")]
         public string CardNonce { get; }
 
         /// <summary>
@@ -106,7 +203,7 @@ namespace Square.Models
         /// If you provide this value, you _must_ also provide a value for
         /// `customer_id`.
         /// </summary>
-        [JsonProperty("customer_card_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("customer_card_id")]
         public string CustomerCardId { get; }
 
         /// <summary>
@@ -116,7 +213,7 @@ namespace Square.Models
         /// (with the [VoidTransaction]($e/Transactions/VoidTransaction) endpoint).
         /// Default value: `false`
         /// </summary>
-        [JsonProperty("delay_capture", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("delay_capture")]
         public bool? DelayCapture { get; }
 
         /// <summary>
@@ -125,14 +222,14 @@ namespace Square.Models
         /// own database).
         /// This value cannot exceed 40 characters.
         /// </summary>
-        [JsonProperty("reference_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("reference_id")]
         public string ReferenceId { get; }
 
         /// <summary>
         /// An optional note to associate with the transaction.
         /// This value cannot exceed 60 characters.
         /// </summary>
-        [JsonProperty("note", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("note")]
         public string Note { get; }
 
         /// <summary>
@@ -140,7 +237,7 @@ namespace Square.Models
         /// is required if you provide a value for `customer_card_id`, and optional
         /// otherwise.
         /// </summary>
-        [JsonProperty("customer_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("customer_id")]
         public string CustomerId { get; }
 
         /// <summary>
@@ -162,7 +259,7 @@ namespace Square.Models
         /// but this transaction is ineligible for chargeback protection if it is not
         /// provided.
         /// </summary>
-        [JsonProperty("buyer_email_address", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("buyer_email_address")]
         public string BuyerEmailAddress { get; }
 
         /// <summary>
@@ -170,7 +267,7 @@ namespace Square.Models
         /// If you provide this value, the `amount_money` value of your request must
         /// __exactly match__ the value of the order's `total_money` field.
         /// </summary>
-        [JsonProperty("order_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("order_id")]
         public string OrderId { get; }
 
         /// <summary>
@@ -182,14 +279,14 @@ namespace Square.Models
         /// This field requires the `PAYMENTS_WRITE_ADDITIONAL_RECIPIENTS` OAuth permission.
         /// This field is currently not supported in sandbox.
         /// </summary>
-        [JsonProperty("additional_recipients", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("additional_recipients")]
         public IList<Models.ChargeRequestAdditionalRecipient> AdditionalRecipients { get; }
 
         /// <summary>
         /// A token generated by SqPaymentForm's verifyBuyer() that represents
         /// customer's device info and 3ds challenge result.
         /// </summary>
-        [JsonProperty("verification_token", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("verification_token")]
         public string VerificationToken { get; }
 
         /// <inheritdoc/>
@@ -200,6 +297,96 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"ChargeRequest : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeCardNonce()
+        {
+            return this.shouldSerialize["card_nonce"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeCustomerCardId()
+        {
+            return this.shouldSerialize["customer_card_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeDelayCapture()
+        {
+            return this.shouldSerialize["delay_capture"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeReferenceId()
+        {
+            return this.shouldSerialize["reference_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeNote()
+        {
+            return this.shouldSerialize["note"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeCustomerId()
+        {
+            return this.shouldSerialize["customer_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeBuyerEmailAddress()
+        {
+            return this.shouldSerialize["buyer_email_address"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeOrderId()
+        {
+            return this.shouldSerialize["order_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeAdditionalRecipients()
+        {
+            return this.shouldSerialize["additional_recipients"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeVerificationToken()
+        {
+            return this.shouldSerialize["verification_token"];
         }
 
         /// <inheritdoc/>
@@ -294,6 +481,20 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "card_nonce", false },
+                { "customer_card_id", false },
+                { "delay_capture", false },
+                { "reference_id", false },
+                { "note", false },
+                { "customer_id", false },
+                { "buyer_email_address", false },
+                { "order_id", false },
+                { "additional_recipients", false },
+                { "verification_token", false },
+            };
+
             private string idempotencyKey;
             private Models.Money amountMoney;
             private string cardNonce;
@@ -346,6 +547,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder CardNonce(string cardNonce)
             {
+                shouldSerialize["card_nonce"] = true;
                 this.cardNonce = cardNonce;
                 return this;
             }
@@ -357,6 +559,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder CustomerCardId(string customerCardId)
             {
+                shouldSerialize["customer_card_id"] = true;
                 this.customerCardId = customerCardId;
                 return this;
             }
@@ -368,6 +571,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder DelayCapture(bool? delayCapture)
             {
+                shouldSerialize["delay_capture"] = true;
                 this.delayCapture = delayCapture;
                 return this;
             }
@@ -379,6 +583,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder ReferenceId(string referenceId)
             {
+                shouldSerialize["reference_id"] = true;
                 this.referenceId = referenceId;
                 return this;
             }
@@ -390,6 +595,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Note(string note)
             {
+                shouldSerialize["note"] = true;
                 this.note = note;
                 return this;
             }
@@ -401,6 +607,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder CustomerId(string customerId)
             {
+                shouldSerialize["customer_id"] = true;
                 this.customerId = customerId;
                 return this;
             }
@@ -434,6 +641,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder BuyerEmailAddress(string buyerEmailAddress)
             {
+                shouldSerialize["buyer_email_address"] = true;
                 this.buyerEmailAddress = buyerEmailAddress;
                 return this;
             }
@@ -445,6 +653,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder OrderId(string orderId)
             {
+                shouldSerialize["order_id"] = true;
                 this.orderId = orderId;
                 return this;
             }
@@ -456,6 +665,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder AdditionalRecipients(IList<Models.ChargeRequestAdditionalRecipient> additionalRecipients)
             {
+                shouldSerialize["additional_recipients"] = true;
                 this.additionalRecipients = additionalRecipients;
                 return this;
             }
@@ -467,9 +677,91 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder VerificationToken(string verificationToken)
             {
+                shouldSerialize["verification_token"] = true;
                 this.verificationToken = verificationToken;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetCardNonce()
+            {
+                this.shouldSerialize["card_nonce"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetCustomerCardId()
+            {
+                this.shouldSerialize["customer_card_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetDelayCapture()
+            {
+                this.shouldSerialize["delay_capture"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetReferenceId()
+            {
+                this.shouldSerialize["reference_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetNote()
+            {
+                this.shouldSerialize["note"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetCustomerId()
+            {
+                this.shouldSerialize["customer_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetBuyerEmailAddress()
+            {
+                this.shouldSerialize["buyer_email_address"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetOrderId()
+            {
+                this.shouldSerialize["order_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetAdditionalRecipients()
+            {
+                this.shouldSerialize["additional_recipients"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetVerificationToken()
+            {
+                this.shouldSerialize["verification_token"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -477,7 +769,7 @@ namespace Square.Models
             /// <returns> ChargeRequest. </returns>
             public ChargeRequest Build()
             {
-                return new ChargeRequest(
+                return new ChargeRequest(shouldSerialize,
                     this.idempotencyKey,
                     this.amountMoney,
                     this.cardNonce,

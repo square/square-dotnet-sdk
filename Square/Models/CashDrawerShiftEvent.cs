@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class CashDrawerShiftEvent
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="CashDrawerShiftEvent"/> class.
         /// </summary>
@@ -34,12 +35,44 @@ namespace Square.Models
             string createdAt = null,
             string description = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "employee_id", false },
+                { "description", false }
+            };
+
             this.Id = id;
-            this.EmployeeId = employeeId;
+            if (employeeId != null)
+            {
+                shouldSerialize["employee_id"] = true;
+                this.EmployeeId = employeeId;
+            }
+
             this.EventType = eventType;
             this.EventMoney = eventMoney;
             this.CreatedAt = createdAt;
-            this.Description = description;
+            if (description != null)
+            {
+                shouldSerialize["description"] = true;
+                this.Description = description;
+            }
+
+        }
+        internal CashDrawerShiftEvent(Dictionary<string, bool> shouldSerialize,
+            string id = null,
+            string employeeId = null,
+            string eventType = null,
+            Models.Money eventMoney = null,
+            string createdAt = null,
+            string description = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Id = id;
+            EmployeeId = employeeId;
+            EventType = eventType;
+            EventMoney = eventMoney;
+            CreatedAt = createdAt;
+            Description = description;
         }
 
         /// <summary>
@@ -51,7 +84,7 @@ namespace Square.Models
         /// <summary>
         /// The ID of the employee that created the event.
         /// </summary>
-        [JsonProperty("employee_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("employee_id")]
         public string EmployeeId { get; }
 
         /// <summary>
@@ -83,7 +116,7 @@ namespace Square.Models
         /// An optional description of the event, entered by the employee that
         /// created the event.
         /// </summary>
-        [JsonProperty("description", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("description")]
         public string Description { get; }
 
         /// <inheritdoc/>
@@ -94,6 +127,24 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"CashDrawerShiftEvent : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeEmployeeId()
+        {
+            return this.shouldSerialize["employee_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeDescription()
+        {
+            return this.shouldSerialize["description"];
         }
 
         /// <inheritdoc/>
@@ -162,6 +213,12 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "employee_id", false },
+                { "description", false },
+            };
+
             private string id;
             private string employeeId;
             private string eventType;
@@ -187,6 +244,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder EmployeeId(string employeeId)
             {
+                shouldSerialize["employee_id"] = true;
                 this.employeeId = employeeId;
                 return this;
             }
@@ -231,9 +289,27 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Description(string description)
             {
+                shouldSerialize["description"] = true;
                 this.description = description;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetEmployeeId()
+            {
+                this.shouldSerialize["employee_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetDescription()
+            {
+                this.shouldSerialize["description"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -241,7 +317,7 @@ namespace Square.Models
             /// <returns> CashDrawerShiftEvent. </returns>
             public CashDrawerShiftEvent Build()
             {
-                return new CashDrawerShiftEvent(
+                return new CashDrawerShiftEvent(shouldSerialize,
                     this.id,
                     this.employeeId,
                     this.eventType,

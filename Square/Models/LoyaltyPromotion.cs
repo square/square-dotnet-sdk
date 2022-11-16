@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class LoyaltyPromotion
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="LoyaltyPromotion"/> class.
         /// </summary>
@@ -31,6 +32,8 @@ namespace Square.Models
         /// <param name="updatedAt">updated_at.</param>
         /// <param name="loyaltyProgramId">loyalty_program_id.</param>
         /// <param name="minimumSpendAmountMoney">minimum_spend_amount_money.</param>
+        /// <param name="qualifyingItemVariationIds">qualifying_item_variation_ids.</param>
+        /// <param name="qualifyingCategoryIds">qualifying_category_ids.</param>
         public LoyaltyPromotion(
             string name,
             Models.LoyaltyPromotionIncentive incentive,
@@ -42,8 +45,16 @@ namespace Square.Models
             string canceledAt = null,
             string updatedAt = null,
             string loyaltyProgramId = null,
-            Models.Money minimumSpendAmountMoney = null)
+            Models.Money minimumSpendAmountMoney = null,
+            IList<string> qualifyingItemVariationIds = null,
+            IList<string> qualifyingCategoryIds = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "qualifying_item_variation_ids", false },
+                { "qualifying_category_ids", false }
+            };
+
             this.Id = id;
             this.Name = name;
             this.Incentive = incentive;
@@ -55,6 +66,48 @@ namespace Square.Models
             this.UpdatedAt = updatedAt;
             this.LoyaltyProgramId = loyaltyProgramId;
             this.MinimumSpendAmountMoney = minimumSpendAmountMoney;
+            if (qualifyingItemVariationIds != null)
+            {
+                shouldSerialize["qualifying_item_variation_ids"] = true;
+                this.QualifyingItemVariationIds = qualifyingItemVariationIds;
+            }
+
+            if (qualifyingCategoryIds != null)
+            {
+                shouldSerialize["qualifying_category_ids"] = true;
+                this.QualifyingCategoryIds = qualifyingCategoryIds;
+            }
+
+        }
+        internal LoyaltyPromotion(Dictionary<string, bool> shouldSerialize,
+            string name,
+            Models.LoyaltyPromotionIncentive incentive,
+            Models.LoyaltyPromotionAvailableTimeData availableTime,
+            string id = null,
+            Models.LoyaltyPromotionTriggerLimit triggerLimit = null,
+            string status = null,
+            string createdAt = null,
+            string canceledAt = null,
+            string updatedAt = null,
+            string loyaltyProgramId = null,
+            Models.Money minimumSpendAmountMoney = null,
+            IList<string> qualifyingItemVariationIds = null,
+            IList<string> qualifyingCategoryIds = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Id = id;
+            Name = name;
+            Incentive = incentive;
+            AvailableTime = availableTime;
+            TriggerLimit = triggerLimit;
+            Status = status;
+            CreatedAt = createdAt;
+            CanceledAt = canceledAt;
+            UpdatedAt = updatedAt;
+            LoyaltyProgramId = loyaltyProgramId;
+            MinimumSpendAmountMoney = minimumSpendAmountMoney;
+            QualifyingItemVariationIds = qualifyingItemVariationIds;
+            QualifyingCategoryIds = qualifyingCategoryIds;
         }
 
         /// <summary>
@@ -134,6 +187,26 @@ namespace Square.Models
         [JsonProperty("minimum_spend_amount_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Money MinimumSpendAmountMoney { get; }
 
+        /// <summary>
+        /// The IDs of any qualifying `ITEM_VARIATION` [catalog objects]($m/CatalogObject). If specified,
+        /// the purchase must include at least one of these items to qualify for the promotion.
+        /// This option is valid only if the base loyalty program uses a `VISIT` or `SPEND` accrual rule.
+        /// With `SPEND` accrual rules, make sure that qualifying promotional items are not excluded.
+        /// You can specify `qualifying_item_variation_ids` or `qualifying_category_ids` for a given promotion, but not both.
+        /// </summary>
+        [JsonProperty("qualifying_item_variation_ids")]
+        public IList<string> QualifyingItemVariationIds { get; }
+
+        /// <summary>
+        /// The IDs of any qualifying `CATEGORY` [catalog objects]($m/CatalogObject). If specified,
+        /// the purchase must include at least one item from one of these categories to qualify for the promotion.
+        /// This option is valid only if the base loyalty program uses a `VISIT` or `SPEND` accrual rule.
+        /// With `SPEND` accrual rules, make sure that qualifying promotional items are not excluded.
+        /// You can specify `qualifying_category_ids` or `qualifying_item_variation_ids` for a promotion, but not both.
+        /// </summary>
+        [JsonProperty("qualifying_category_ids")]
+        public IList<string> QualifyingCategoryIds { get; }
+
         /// <inheritdoc/>
         public override string ToString()
         {
@@ -142,6 +215,24 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"LoyaltyPromotion : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeQualifyingItemVariationIds()
+        {
+            return this.shouldSerialize["qualifying_item_variation_ids"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeQualifyingCategoryIds()
+        {
+            return this.shouldSerialize["qualifying_category_ids"];
         }
 
         /// <inheritdoc/>
@@ -168,16 +259,18 @@ namespace Square.Models
                 ((this.CanceledAt == null && other.CanceledAt == null) || (this.CanceledAt?.Equals(other.CanceledAt) == true)) &&
                 ((this.UpdatedAt == null && other.UpdatedAt == null) || (this.UpdatedAt?.Equals(other.UpdatedAt) == true)) &&
                 ((this.LoyaltyProgramId == null && other.LoyaltyProgramId == null) || (this.LoyaltyProgramId?.Equals(other.LoyaltyProgramId) == true)) &&
-                ((this.MinimumSpendAmountMoney == null && other.MinimumSpendAmountMoney == null) || (this.MinimumSpendAmountMoney?.Equals(other.MinimumSpendAmountMoney) == true));
+                ((this.MinimumSpendAmountMoney == null && other.MinimumSpendAmountMoney == null) || (this.MinimumSpendAmountMoney?.Equals(other.MinimumSpendAmountMoney) == true)) &&
+                ((this.QualifyingItemVariationIds == null && other.QualifyingItemVariationIds == null) || (this.QualifyingItemVariationIds?.Equals(other.QualifyingItemVariationIds) == true)) &&
+                ((this.QualifyingCategoryIds == null && other.QualifyingCategoryIds == null) || (this.QualifyingCategoryIds?.Equals(other.QualifyingCategoryIds) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -305125075;
+            int hashCode = -2086043308;
             hashCode = HashCode.Combine(this.Id, this.Name, this.Incentive, this.AvailableTime, this.TriggerLimit, this.Status, this.CreatedAt);
 
-            hashCode = HashCode.Combine(hashCode, this.CanceledAt, this.UpdatedAt, this.LoyaltyProgramId, this.MinimumSpendAmountMoney);
+            hashCode = HashCode.Combine(hashCode, this.CanceledAt, this.UpdatedAt, this.LoyaltyProgramId, this.MinimumSpendAmountMoney, this.QualifyingItemVariationIds, this.QualifyingCategoryIds);
 
             return hashCode;
         }
@@ -199,6 +292,8 @@ namespace Square.Models
             toStringOutput.Add($"this.UpdatedAt = {(this.UpdatedAt == null ? "null" : this.UpdatedAt == string.Empty ? "" : this.UpdatedAt)}");
             toStringOutput.Add($"this.LoyaltyProgramId = {(this.LoyaltyProgramId == null ? "null" : this.LoyaltyProgramId == string.Empty ? "" : this.LoyaltyProgramId)}");
             toStringOutput.Add($"this.MinimumSpendAmountMoney = {(this.MinimumSpendAmountMoney == null ? "null" : this.MinimumSpendAmountMoney.ToString())}");
+            toStringOutput.Add($"this.QualifyingItemVariationIds = {(this.QualifyingItemVariationIds == null ? "null" : $"[{string.Join(", ", this.QualifyingItemVariationIds)} ]")}");
+            toStringOutput.Add($"this.QualifyingCategoryIds = {(this.QualifyingCategoryIds == null ? "null" : $"[{string.Join(", ", this.QualifyingCategoryIds)} ]")}");
         }
 
         /// <summary>
@@ -218,7 +313,9 @@ namespace Square.Models
                 .CanceledAt(this.CanceledAt)
                 .UpdatedAt(this.UpdatedAt)
                 .LoyaltyProgramId(this.LoyaltyProgramId)
-                .MinimumSpendAmountMoney(this.MinimumSpendAmountMoney);
+                .MinimumSpendAmountMoney(this.MinimumSpendAmountMoney)
+                .QualifyingItemVariationIds(this.QualifyingItemVariationIds)
+                .QualifyingCategoryIds(this.QualifyingCategoryIds);
             return builder;
         }
 
@@ -227,6 +324,12 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "qualifying_item_variation_ids", false },
+                { "qualifying_category_ids", false },
+            };
+
             private string name;
             private Models.LoyaltyPromotionIncentive incentive;
             private Models.LoyaltyPromotionAvailableTimeData availableTime;
@@ -238,6 +341,8 @@ namespace Square.Models
             private string updatedAt;
             private string loyaltyProgramId;
             private Models.Money minimumSpendAmountMoney;
+            private IList<string> qualifyingItemVariationIds;
+            private IList<string> qualifyingCategoryIds;
 
             public Builder(
                 string name,
@@ -370,13 +475,54 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// QualifyingItemVariationIds.
+             /// </summary>
+             /// <param name="qualifyingItemVariationIds"> qualifyingItemVariationIds. </param>
+             /// <returns> Builder. </returns>
+            public Builder QualifyingItemVariationIds(IList<string> qualifyingItemVariationIds)
+            {
+                shouldSerialize["qualifying_item_variation_ids"] = true;
+                this.qualifyingItemVariationIds = qualifyingItemVariationIds;
+                return this;
+            }
+
+             /// <summary>
+             /// QualifyingCategoryIds.
+             /// </summary>
+             /// <param name="qualifyingCategoryIds"> qualifyingCategoryIds. </param>
+             /// <returns> Builder. </returns>
+            public Builder QualifyingCategoryIds(IList<string> qualifyingCategoryIds)
+            {
+                shouldSerialize["qualifying_category_ids"] = true;
+                this.qualifyingCategoryIds = qualifyingCategoryIds;
+                return this;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetQualifyingItemVariationIds()
+            {
+                this.shouldSerialize["qualifying_item_variation_ids"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetQualifyingCategoryIds()
+            {
+                this.shouldSerialize["qualifying_category_ids"] = false;
+            }
+
+
             /// <summary>
             /// Builds class object.
             /// </summary>
             /// <returns> LoyaltyPromotion. </returns>
             public LoyaltyPromotion Build()
             {
-                return new LoyaltyPromotion(
+                return new LoyaltyPromotion(shouldSerialize,
                     this.name,
                     this.incentive,
                     this.availableTime,
@@ -387,7 +533,9 @@ namespace Square.Models
                     this.canceledAt,
                     this.updatedAt,
                     this.loyaltyProgramId,
-                    this.minimumSpendAmountMoney);
+                    this.minimumSpendAmountMoney,
+                    this.qualifyingItemVariationIds,
+                    this.qualifyingCategoryIds);
             }
         }
     }

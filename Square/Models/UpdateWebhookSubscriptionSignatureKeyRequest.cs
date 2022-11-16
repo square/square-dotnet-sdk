@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class UpdateWebhookSubscriptionSignatureKeyRequest
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="UpdateWebhookSubscriptionSignatureKeyRequest"/> class.
         /// </summary>
@@ -24,13 +25,29 @@ namespace Square.Models
         public UpdateWebhookSubscriptionSignatureKeyRequest(
             string idempotencyKey = null)
         {
-            this.IdempotencyKey = idempotencyKey;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "idempotency_key", false }
+            };
+
+            if (idempotencyKey != null)
+            {
+                shouldSerialize["idempotency_key"] = true;
+                this.IdempotencyKey = idempotencyKey;
+            }
+
+        }
+        internal UpdateWebhookSubscriptionSignatureKeyRequest(Dictionary<string, bool> shouldSerialize,
+            string idempotencyKey = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            IdempotencyKey = idempotencyKey;
         }
 
         /// <summary>
         /// A unique string that identifies the [UpdateWebhookSubscriptionSignatureKey]($e/WebhookSubscriptions/UpdateWebhookSubscriptionSignatureKey) request.
         /// </summary>
-        [JsonProperty("idempotency_key", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("idempotency_key")]
         public string IdempotencyKey { get; }
 
         /// <inheritdoc/>
@@ -41,6 +58,15 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"UpdateWebhookSubscriptionSignatureKeyRequest : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeIdempotencyKey()
+        {
+            return this.shouldSerialize["idempotency_key"];
         }
 
         /// <inheritdoc/>
@@ -94,6 +120,11 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "idempotency_key", false },
+            };
+
             private string idempotencyKey;
 
              /// <summary>
@@ -103,9 +134,19 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder IdempotencyKey(string idempotencyKey)
             {
+                shouldSerialize["idempotency_key"] = true;
                 this.idempotencyKey = idempotencyKey;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetIdempotencyKey()
+            {
+                this.shouldSerialize["idempotency_key"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -113,7 +154,7 @@ namespace Square.Models
             /// <returns> UpdateWebhookSubscriptionSignatureKeyRequest. </returns>
             public UpdateWebhookSubscriptionSignatureKeyRequest Build()
             {
-                return new UpdateWebhookSubscriptionSignatureKeyRequest(
+                return new UpdateWebhookSubscriptionSignatureKeyRequest(shouldSerialize,
                     this.idempotencyKey);
             }
         }

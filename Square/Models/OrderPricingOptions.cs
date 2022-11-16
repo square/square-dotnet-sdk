@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class OrderPricingOptions
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="OrderPricingOptions"/> class.
         /// </summary>
@@ -26,22 +27,46 @@ namespace Square.Models
             bool? autoApplyDiscounts = null,
             bool? autoApplyTaxes = null)
         {
-            this.AutoApplyDiscounts = autoApplyDiscounts;
-            this.AutoApplyTaxes = autoApplyTaxes;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "auto_apply_discounts", false },
+                { "auto_apply_taxes", false }
+            };
+
+            if (autoApplyDiscounts != null)
+            {
+                shouldSerialize["auto_apply_discounts"] = true;
+                this.AutoApplyDiscounts = autoApplyDiscounts;
+            }
+
+            if (autoApplyTaxes != null)
+            {
+                shouldSerialize["auto_apply_taxes"] = true;
+                this.AutoApplyTaxes = autoApplyTaxes;
+            }
+
+        }
+        internal OrderPricingOptions(Dictionary<string, bool> shouldSerialize,
+            bool? autoApplyDiscounts = null,
+            bool? autoApplyTaxes = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            AutoApplyDiscounts = autoApplyDiscounts;
+            AutoApplyTaxes = autoApplyTaxes;
         }
 
         /// <summary>
         /// The option to determine whether pricing rule-based
         /// discounts are automatically applied to an order.
         /// </summary>
-        [JsonProperty("auto_apply_discounts", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("auto_apply_discounts")]
         public bool? AutoApplyDiscounts { get; }
 
         /// <summary>
         /// The option to determine whether rule-based taxes are automatically
         /// applied to an order when the criteria of the corresponding rules are met.
         /// </summary>
-        [JsonProperty("auto_apply_taxes", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("auto_apply_taxes")]
         public bool? AutoApplyTaxes { get; }
 
         /// <inheritdoc/>
@@ -52,6 +77,24 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"OrderPricingOptions : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeAutoApplyDiscounts()
+        {
+            return this.shouldSerialize["auto_apply_discounts"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeAutoApplyTaxes()
+        {
+            return this.shouldSerialize["auto_apply_taxes"];
         }
 
         /// <inheritdoc/>
@@ -108,6 +151,12 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "auto_apply_discounts", false },
+                { "auto_apply_taxes", false },
+            };
+
             private bool? autoApplyDiscounts;
             private bool? autoApplyTaxes;
 
@@ -118,6 +167,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder AutoApplyDiscounts(bool? autoApplyDiscounts)
             {
+                shouldSerialize["auto_apply_discounts"] = true;
                 this.autoApplyDiscounts = autoApplyDiscounts;
                 return this;
             }
@@ -129,9 +179,27 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder AutoApplyTaxes(bool? autoApplyTaxes)
             {
+                shouldSerialize["auto_apply_taxes"] = true;
                 this.autoApplyTaxes = autoApplyTaxes;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetAutoApplyDiscounts()
+            {
+                this.shouldSerialize["auto_apply_discounts"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetAutoApplyTaxes()
+            {
+                this.shouldSerialize["auto_apply_taxes"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -139,7 +207,7 @@ namespace Square.Models
             /// <returns> OrderPricingOptions. </returns>
             public OrderPricingOptions Build()
             {
-                return new OrderPricingOptions(
+                return new OrderPricingOptions(shouldSerialize,
                     this.autoApplyDiscounts,
                     this.autoApplyTaxes);
             }

@@ -18,6 +18,7 @@ namespace Square.Models
     /// </summary>
     public class V1Refund
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="V1Refund"/> class.
         /// </summary>
@@ -59,24 +60,116 @@ namespace Square.Models
             string merchantId = null,
             bool? isExchange = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "reason", false },
+                { "refunded_additive_tax", false },
+                { "refunded_inclusive_tax", false },
+                { "refunded_surcharges", false },
+                { "processed_at", false },
+                { "payment_id", false },
+                { "merchant_id", false },
+                { "is_exchange", false }
+            };
+
             this.Type = type;
-            this.Reason = reason;
+            if (reason != null)
+            {
+                shouldSerialize["reason"] = true;
+                this.Reason = reason;
+            }
+
             this.RefundedMoney = refundedMoney;
             this.RefundedProcessingFeeMoney = refundedProcessingFeeMoney;
             this.RefundedTaxMoney = refundedTaxMoney;
             this.RefundedAdditiveTaxMoney = refundedAdditiveTaxMoney;
-            this.RefundedAdditiveTax = refundedAdditiveTax;
+            if (refundedAdditiveTax != null)
+            {
+                shouldSerialize["refunded_additive_tax"] = true;
+                this.RefundedAdditiveTax = refundedAdditiveTax;
+            }
+
             this.RefundedInclusiveTaxMoney = refundedInclusiveTaxMoney;
-            this.RefundedInclusiveTax = refundedInclusiveTax;
+            if (refundedInclusiveTax != null)
+            {
+                shouldSerialize["refunded_inclusive_tax"] = true;
+                this.RefundedInclusiveTax = refundedInclusiveTax;
+            }
+
             this.RefundedTipMoney = refundedTipMoney;
             this.RefundedDiscountMoney = refundedDiscountMoney;
             this.RefundedSurchargeMoney = refundedSurchargeMoney;
-            this.RefundedSurcharges = refundedSurcharges;
+            if (refundedSurcharges != null)
+            {
+                shouldSerialize["refunded_surcharges"] = true;
+                this.RefundedSurcharges = refundedSurcharges;
+            }
+
             this.CreatedAt = createdAt;
-            this.ProcessedAt = processedAt;
-            this.PaymentId = paymentId;
-            this.MerchantId = merchantId;
-            this.IsExchange = isExchange;
+            if (processedAt != null)
+            {
+                shouldSerialize["processed_at"] = true;
+                this.ProcessedAt = processedAt;
+            }
+
+            if (paymentId != null)
+            {
+                shouldSerialize["payment_id"] = true;
+                this.PaymentId = paymentId;
+            }
+
+            if (merchantId != null)
+            {
+                shouldSerialize["merchant_id"] = true;
+                this.MerchantId = merchantId;
+            }
+
+            if (isExchange != null)
+            {
+                shouldSerialize["is_exchange"] = true;
+                this.IsExchange = isExchange;
+            }
+
+        }
+        internal V1Refund(Dictionary<string, bool> shouldSerialize,
+            string type = null,
+            string reason = null,
+            Models.V1Money refundedMoney = null,
+            Models.V1Money refundedProcessingFeeMoney = null,
+            Models.V1Money refundedTaxMoney = null,
+            Models.V1Money refundedAdditiveTaxMoney = null,
+            IList<Models.V1PaymentTax> refundedAdditiveTax = null,
+            Models.V1Money refundedInclusiveTaxMoney = null,
+            IList<Models.V1PaymentTax> refundedInclusiveTax = null,
+            Models.V1Money refundedTipMoney = null,
+            Models.V1Money refundedDiscountMoney = null,
+            Models.V1Money refundedSurchargeMoney = null,
+            IList<Models.V1PaymentSurcharge> refundedSurcharges = null,
+            string createdAt = null,
+            string processedAt = null,
+            string paymentId = null,
+            string merchantId = null,
+            bool? isExchange = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Type = type;
+            Reason = reason;
+            RefundedMoney = refundedMoney;
+            RefundedProcessingFeeMoney = refundedProcessingFeeMoney;
+            RefundedTaxMoney = refundedTaxMoney;
+            RefundedAdditiveTaxMoney = refundedAdditiveTaxMoney;
+            RefundedAdditiveTax = refundedAdditiveTax;
+            RefundedInclusiveTaxMoney = refundedInclusiveTaxMoney;
+            RefundedInclusiveTax = refundedInclusiveTax;
+            RefundedTipMoney = refundedTipMoney;
+            RefundedDiscountMoney = refundedDiscountMoney;
+            RefundedSurchargeMoney = refundedSurchargeMoney;
+            RefundedSurcharges = refundedSurcharges;
+            CreatedAt = createdAt;
+            ProcessedAt = processedAt;
+            PaymentId = paymentId;
+            MerchantId = merchantId;
+            IsExchange = isExchange;
         }
 
         /// <summary>
@@ -94,7 +187,7 @@ namespace Square.Models
         /// <summary>
         /// The merchant-specified reason for the refund.
         /// </summary>
-        [JsonProperty("reason", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("reason")]
         public string Reason { get; }
 
         /// <summary>
@@ -124,7 +217,7 @@ namespace Square.Models
         /// <summary>
         /// All of the additive taxes associated with the refund.
         /// </summary>
-        [JsonProperty("refunded_additive_tax", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("refunded_additive_tax")]
         public IList<Models.V1PaymentTax> RefundedAdditiveTax { get; }
 
         /// <summary>
@@ -136,7 +229,7 @@ namespace Square.Models
         /// <summary>
         /// All of the inclusive taxes associated with the refund.
         /// </summary>
-        [JsonProperty("refunded_inclusive_tax", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("refunded_inclusive_tax")]
         public IList<Models.V1PaymentTax> RefundedInclusiveTax { get; }
 
         /// <summary>
@@ -160,7 +253,7 @@ namespace Square.Models
         /// <summary>
         /// A list of all surcharges associated with the refund.
         /// </summary>
-        [JsonProperty("refunded_surcharges", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("refunded_surcharges")]
         public IList<Models.V1PaymentSurcharge> RefundedSurcharges { get; }
 
         /// <summary>
@@ -172,25 +265,25 @@ namespace Square.Models
         /// <summary>
         /// The time when Square processed the refund on behalf of the merchant, in ISO 8601 format.
         /// </summary>
-        [JsonProperty("processed_at", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("processed_at")]
         public string ProcessedAt { get; }
 
         /// <summary>
         /// A Square-issued ID associated with the refund. For single-tender refunds, payment_id is the ID of the original payment ID. For split-tender refunds, payment_id is the ID of the original tender. For exchange-based refunds (is_exchange == true), payment_id is the ID of the original payment ID even if the payment includes other tenders.
         /// </summary>
-        [JsonProperty("payment_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("payment_id")]
         public string PaymentId { get; }
 
         /// <summary>
         /// Gets or sets MerchantId.
         /// </summary>
-        [JsonProperty("merchant_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("merchant_id")]
         public string MerchantId { get; }
 
         /// <summary>
         /// Indicates whether or not the refund is associated with an exchange. If is_exchange is true, the refund reflects the value of goods returned in the exchange not the total money refunded.
         /// </summary>
-        [JsonProperty("is_exchange", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("is_exchange")]
         public bool? IsExchange { get; }
 
         /// <inheritdoc/>
@@ -201,6 +294,78 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"V1Refund : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeReason()
+        {
+            return this.shouldSerialize["reason"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeRefundedAdditiveTax()
+        {
+            return this.shouldSerialize["refunded_additive_tax"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeRefundedInclusiveTax()
+        {
+            return this.shouldSerialize["refunded_inclusive_tax"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeRefundedSurcharges()
+        {
+            return this.shouldSerialize["refunded_surcharges"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeProcessedAt()
+        {
+            return this.shouldSerialize["processed_at"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializePaymentId()
+        {
+            return this.shouldSerialize["payment_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeMerchantId()
+        {
+            return this.shouldSerialize["merchant_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeIsExchange()
+        {
+            return this.shouldSerialize["is_exchange"];
         }
 
         /// <inheritdoc/>
@@ -315,6 +480,18 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "reason", false },
+                { "refunded_additive_tax", false },
+                { "refunded_inclusive_tax", false },
+                { "refunded_surcharges", false },
+                { "processed_at", false },
+                { "payment_id", false },
+                { "merchant_id", false },
+                { "is_exchange", false },
+            };
+
             private string type;
             private string reason;
             private Models.V1Money refundedMoney;
@@ -352,6 +529,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Reason(string reason)
             {
+                shouldSerialize["reason"] = true;
                 this.reason = reason;
                 return this;
             }
@@ -407,6 +585,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder RefundedAdditiveTax(IList<Models.V1PaymentTax> refundedAdditiveTax)
             {
+                shouldSerialize["refunded_additive_tax"] = true;
                 this.refundedAdditiveTax = refundedAdditiveTax;
                 return this;
             }
@@ -429,6 +608,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder RefundedInclusiveTax(IList<Models.V1PaymentTax> refundedInclusiveTax)
             {
+                shouldSerialize["refunded_inclusive_tax"] = true;
                 this.refundedInclusiveTax = refundedInclusiveTax;
                 return this;
             }
@@ -473,6 +653,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder RefundedSurcharges(IList<Models.V1PaymentSurcharge> refundedSurcharges)
             {
+                shouldSerialize["refunded_surcharges"] = true;
                 this.refundedSurcharges = refundedSurcharges;
                 return this;
             }
@@ -495,6 +676,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder ProcessedAt(string processedAt)
             {
+                shouldSerialize["processed_at"] = true;
                 this.processedAt = processedAt;
                 return this;
             }
@@ -506,6 +688,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder PaymentId(string paymentId)
             {
+                shouldSerialize["payment_id"] = true;
                 this.paymentId = paymentId;
                 return this;
             }
@@ -517,6 +700,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder MerchantId(string merchantId)
             {
+                shouldSerialize["merchant_id"] = true;
                 this.merchantId = merchantId;
                 return this;
             }
@@ -528,9 +712,75 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder IsExchange(bool? isExchange)
             {
+                shouldSerialize["is_exchange"] = true;
                 this.isExchange = isExchange;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetReason()
+            {
+                this.shouldSerialize["reason"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetRefundedAdditiveTax()
+            {
+                this.shouldSerialize["refunded_additive_tax"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetRefundedInclusiveTax()
+            {
+                this.shouldSerialize["refunded_inclusive_tax"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetRefundedSurcharges()
+            {
+                this.shouldSerialize["refunded_surcharges"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetProcessedAt()
+            {
+                this.shouldSerialize["processed_at"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetPaymentId()
+            {
+                this.shouldSerialize["payment_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetMerchantId()
+            {
+                this.shouldSerialize["merchant_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetIsExchange()
+            {
+                this.shouldSerialize["is_exchange"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -538,7 +788,7 @@ namespace Square.Models
             /// <returns> V1Refund. </returns>
             public V1Refund Build()
             {
-                return new V1Refund(
+                return new V1Refund(shouldSerialize,
                     this.type,
                     this.reason,
                     this.refundedMoney,

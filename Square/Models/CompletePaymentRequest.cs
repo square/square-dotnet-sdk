@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class CompletePaymentRequest
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="CompletePaymentRequest"/> class.
         /// </summary>
@@ -24,7 +25,23 @@ namespace Square.Models
         public CompletePaymentRequest(
             string versionToken = null)
         {
-            this.VersionToken = versionToken;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "version_token", false }
+            };
+
+            if (versionToken != null)
+            {
+                shouldSerialize["version_token"] = true;
+                this.VersionToken = versionToken;
+            }
+
+        }
+        internal CompletePaymentRequest(Dictionary<string, bool> shouldSerialize,
+            string versionToken = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            VersionToken = versionToken;
         }
 
         /// <summary>
@@ -32,7 +49,7 @@ namespace Square.Models
         /// version that the caller expects. If the server has a different version of the Payment,
         /// the update fails and a response with a VERSION_MISMATCH error is returned.
         /// </summary>
-        [JsonProperty("version_token", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("version_token")]
         public string VersionToken { get; }
 
         /// <inheritdoc/>
@@ -43,6 +60,15 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"CompletePaymentRequest : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeVersionToken()
+        {
+            return this.shouldSerialize["version_token"];
         }
 
         /// <inheritdoc/>
@@ -96,6 +122,11 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "version_token", false },
+            };
+
             private string versionToken;
 
              /// <summary>
@@ -105,9 +136,19 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder VersionToken(string versionToken)
             {
+                shouldSerialize["version_token"] = true;
                 this.versionToken = versionToken;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetVersionToken()
+            {
+                this.shouldSerialize["version_token"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -115,7 +156,7 @@ namespace Square.Models
             /// <returns> CompletePaymentRequest. </returns>
             public CompletePaymentRequest Build()
             {
-                return new CompletePaymentRequest(
+                return new CompletePaymentRequest(shouldSerialize,
                     this.versionToken);
             }
         }

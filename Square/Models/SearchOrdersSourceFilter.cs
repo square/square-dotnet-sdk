@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class SearchOrdersSourceFilter
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="SearchOrdersSourceFilter"/> class.
         /// </summary>
@@ -24,7 +25,23 @@ namespace Square.Models
         public SearchOrdersSourceFilter(
             IList<string> sourceNames = null)
         {
-            this.SourceNames = sourceNames;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "source_names", false }
+            };
+
+            if (sourceNames != null)
+            {
+                shouldSerialize["source_names"] = true;
+                this.SourceNames = sourceNames;
+            }
+
+        }
+        internal SearchOrdersSourceFilter(Dictionary<string, bool> shouldSerialize,
+            IList<string> sourceNames = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            SourceNames = sourceNames;
         }
 
         /// <summary>
@@ -32,7 +49,7 @@ namespace Square.Models
         /// with a `source.name` that matches any of the listed source names.
         /// Max: 10 source names.
         /// </summary>
-        [JsonProperty("source_names", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("source_names")]
         public IList<string> SourceNames { get; }
 
         /// <inheritdoc/>
@@ -43,6 +60,15 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"SearchOrdersSourceFilter : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeSourceNames()
+        {
+            return this.shouldSerialize["source_names"];
         }
 
         /// <inheritdoc/>
@@ -96,6 +122,11 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "source_names", false },
+            };
+
             private IList<string> sourceNames;
 
              /// <summary>
@@ -105,9 +136,19 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder SourceNames(IList<string> sourceNames)
             {
+                shouldSerialize["source_names"] = true;
                 this.sourceNames = sourceNames;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetSourceNames()
+            {
+                this.shouldSerialize["source_names"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -115,7 +156,7 @@ namespace Square.Models
             /// <returns> SearchOrdersSourceFilter. </returns>
             public SearchOrdersSourceFilter Build()
             {
-                return new SearchOrdersSourceFilter(
+                return new SearchOrdersSourceFilter(shouldSerialize,
                     this.sourceNames);
             }
         }

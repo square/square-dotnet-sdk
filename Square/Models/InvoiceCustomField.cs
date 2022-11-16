@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class InvoiceCustomField
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="InvoiceCustomField"/> class.
         /// </summary>
@@ -28,21 +29,47 @@ namespace Square.Models
             string mValue = null,
             string placement = null)
         {
-            this.Label = label;
-            this.MValue = mValue;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "label", false },
+                { "value", false }
+            };
+
+            if (label != null)
+            {
+                shouldSerialize["label"] = true;
+                this.Label = label;
+            }
+
+            if (mValue != null)
+            {
+                shouldSerialize["value"] = true;
+                this.MValue = mValue;
+            }
+
             this.Placement = placement;
+        }
+        internal InvoiceCustomField(Dictionary<string, bool> shouldSerialize,
+            string label = null,
+            string mValue = null,
+            string placement = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Label = label;
+            MValue = mValue;
+            Placement = placement;
         }
 
         /// <summary>
         /// The label or title of the custom field. This field is required for a custom field.
         /// </summary>
-        [JsonProperty("label", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("label")]
         public string Label { get; }
 
         /// <summary>
         /// The text of the custom field. If omitted, only the label is rendered.
         /// </summary>
-        [JsonProperty("value", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("value")]
         public string MValue { get; }
 
         /// <summary>
@@ -60,6 +87,24 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"InvoiceCustomField : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeLabel()
+        {
+            return this.shouldSerialize["label"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeMValue()
+        {
+            return this.shouldSerialize["value"];
         }
 
         /// <inheritdoc/>
@@ -119,6 +164,12 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "label", false },
+                { "value", false },
+            };
+
             private string label;
             private string mValue;
             private string placement;
@@ -130,6 +181,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Label(string label)
             {
+                shouldSerialize["label"] = true;
                 this.label = label;
                 return this;
             }
@@ -141,6 +193,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder MValue(string mValue)
             {
+                shouldSerialize["value"] = true;
                 this.mValue = mValue;
                 return this;
             }
@@ -157,12 +210,29 @@ namespace Square.Models
             }
 
             /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetLabel()
+            {
+                this.shouldSerialize["label"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetMValue()
+            {
+                this.shouldSerialize["value"] = false;
+            }
+
+
+            /// <summary>
             /// Builds class object.
             /// </summary>
             /// <returns> InvoiceCustomField. </returns>
             public InvoiceCustomField Build()
             {
-                return new InvoiceCustomField(
+                return new InvoiceCustomField(shouldSerialize,
                     this.label,
                     this.mValue,
                     this.placement);

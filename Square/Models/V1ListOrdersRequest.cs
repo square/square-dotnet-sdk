@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class V1ListOrdersRequest
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="V1ListOrdersRequest"/> class.
         /// </summary>
@@ -28,9 +29,35 @@ namespace Square.Models
             int? limit = null,
             string batchToken = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "limit", false },
+                { "batch_token", false }
+            };
+
             this.Order = order;
-            this.Limit = limit;
-            this.BatchToken = batchToken;
+            if (limit != null)
+            {
+                shouldSerialize["limit"] = true;
+                this.Limit = limit;
+            }
+
+            if (batchToken != null)
+            {
+                shouldSerialize["batch_token"] = true;
+                this.BatchToken = batchToken;
+            }
+
+        }
+        internal V1ListOrdersRequest(Dictionary<string, bool> shouldSerialize,
+            string order = null,
+            int? limit = null,
+            string batchToken = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Order = order;
+            Limit = limit;
+            BatchToken = batchToken;
         }
 
         /// <summary>
@@ -42,14 +69,14 @@ namespace Square.Models
         /// <summary>
         /// The maximum number of payments to return in a single response. This value cannot exceed 200.
         /// </summary>
-        [JsonProperty("limit", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("limit")]
         public int? Limit { get; }
 
         /// <summary>
         /// A pagination cursor to retrieve the next set of results for your
         /// original query to the endpoint.
         /// </summary>
-        [JsonProperty("batch_token", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("batch_token")]
         public string BatchToken { get; }
 
         /// <inheritdoc/>
@@ -60,6 +87,24 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"V1ListOrdersRequest : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeLimit()
+        {
+            return this.shouldSerialize["limit"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeBatchToken()
+        {
+            return this.shouldSerialize["batch_token"];
         }
 
         /// <inheritdoc/>
@@ -119,6 +164,12 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "limit", false },
+                { "batch_token", false },
+            };
+
             private string order;
             private int? limit;
             private string batchToken;
@@ -141,6 +192,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Limit(int? limit)
             {
+                shouldSerialize["limit"] = true;
                 this.limit = limit;
                 return this;
             }
@@ -152,9 +204,27 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder BatchToken(string batchToken)
             {
+                shouldSerialize["batch_token"] = true;
                 this.batchToken = batchToken;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetLimit()
+            {
+                this.shouldSerialize["limit"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetBatchToken()
+            {
+                this.shouldSerialize["batch_token"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -162,7 +232,7 @@ namespace Square.Models
             /// <returns> V1ListOrdersRequest. </returns>
             public V1ListOrdersRequest Build()
             {
-                return new V1ListOrdersRequest(
+                return new V1ListOrdersRequest(shouldSerialize,
                     this.order,
                     this.limit,
                     this.batchToken);

@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class TeamMemberWage
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="TeamMemberWage"/> class.
         /// </summary>
@@ -30,10 +31,38 @@ namespace Square.Models
             string title = null,
             Models.Money hourlyRate = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "team_member_id", false },
+                { "title", false }
+            };
+
             this.Id = id;
-            this.TeamMemberId = teamMemberId;
-            this.Title = title;
+            if (teamMemberId != null)
+            {
+                shouldSerialize["team_member_id"] = true;
+                this.TeamMemberId = teamMemberId;
+            }
+
+            if (title != null)
+            {
+                shouldSerialize["title"] = true;
+                this.Title = title;
+            }
+
             this.HourlyRate = hourlyRate;
+        }
+        internal TeamMemberWage(Dictionary<string, bool> shouldSerialize,
+            string id = null,
+            string teamMemberId = null,
+            string title = null,
+            Models.Money hourlyRate = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Id = id;
+            TeamMemberId = teamMemberId;
+            Title = title;
+            HourlyRate = hourlyRate;
         }
 
         /// <summary>
@@ -45,13 +74,13 @@ namespace Square.Models
         /// <summary>
         /// The `TeamMember` that this wage is assigned to.
         /// </summary>
-        [JsonProperty("team_member_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("team_member_id")]
         public string TeamMemberId { get; }
 
         /// <summary>
         /// The job title that this wage relates to.
         /// </summary>
-        [JsonProperty("title", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("title")]
         public string Title { get; }
 
         /// <summary>
@@ -73,6 +102,24 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"TeamMemberWage : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeTeamMemberId()
+        {
+            return this.shouldSerialize["team_member_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeTitle()
+        {
+            return this.shouldSerialize["title"];
         }
 
         /// <inheritdoc/>
@@ -135,6 +182,12 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "team_member_id", false },
+                { "title", false },
+            };
+
             private string id;
             private string teamMemberId;
             private string title;
@@ -158,6 +211,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder TeamMemberId(string teamMemberId)
             {
+                shouldSerialize["team_member_id"] = true;
                 this.teamMemberId = teamMemberId;
                 return this;
             }
@@ -169,6 +223,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Title(string title)
             {
+                shouldSerialize["title"] = true;
                 this.title = title;
                 return this;
             }
@@ -185,12 +240,29 @@ namespace Square.Models
             }
 
             /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetTeamMemberId()
+            {
+                this.shouldSerialize["team_member_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetTitle()
+            {
+                this.shouldSerialize["title"] = false;
+            }
+
+
+            /// <summary>
             /// Builds class object.
             /// </summary>
             /// <returns> TeamMemberWage. </returns>
             public TeamMemberWage Build()
             {
-                return new TeamMemberWage(
+                return new TeamMemberWage(shouldSerialize,
                     this.id,
                     this.teamMemberId,
                     this.title,

@@ -504,11 +504,19 @@ var bodyLoyaltyPromotionTriggerLimit = new LoyaltyPromotionTriggerLimit.Builder(
         1)
     .Interval("DAY")
     .Build();
+var bodyLoyaltyPromotionMinimumSpendAmountMoney = new Money.Builder()
+    .Amount(2000L)
+    .Currency("USD")
+    .Build();
+var bodyLoyaltyPromotionQualifyingCategoryIds = new IList<string>();
+bodyLoyaltyPromotionQualifyingCategoryIds.Add("XTQPYLR3IIU9C44VRCB3XD12");
 var bodyLoyaltyPromotion = new LoyaltyPromotion.Builder(
         "Tuesday Happy Hour Promo",
         bodyLoyaltyPromotionIncentive,
         bodyLoyaltyPromotionAvailableTime)
     .TriggerLimit(bodyLoyaltyPromotionTriggerLimit)
+    .MinimumSpendAmountMoney(bodyLoyaltyPromotionMinimumSpendAmountMoney)
+    .QualifyingCategoryIds(bodyLoyaltyPromotionQualifyingCategoryIds)
     .Build();
 var body = new CreateLoyaltyPromotionRequest.Builder(
         bodyLoyaltyPromotion,

@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class Invoice
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="Invoice"/> class.
         /// </summary>
@@ -68,17 +69,67 @@ namespace Square.Models
             string paymentConditions = null,
             bool? storePaymentMethodEnabled = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "location_id", false },
+                { "order_id", false },
+                { "payment_requests", false },
+                { "invoice_number", false },
+                { "title", false },
+                { "description", false },
+                { "scheduled_at", false },
+                { "custom_fields", false },
+                { "sale_or_service_date", false },
+                { "payment_conditions", false },
+                { "store_payment_method_enabled", false }
+            };
+
             this.Id = id;
             this.Version = version;
-            this.LocationId = locationId;
-            this.OrderId = orderId;
+            if (locationId != null)
+            {
+                shouldSerialize["location_id"] = true;
+                this.LocationId = locationId;
+            }
+
+            if (orderId != null)
+            {
+                shouldSerialize["order_id"] = true;
+                this.OrderId = orderId;
+            }
+
             this.PrimaryRecipient = primaryRecipient;
-            this.PaymentRequests = paymentRequests;
+            if (paymentRequests != null)
+            {
+                shouldSerialize["payment_requests"] = true;
+                this.PaymentRequests = paymentRequests;
+            }
+
             this.DeliveryMethod = deliveryMethod;
-            this.InvoiceNumber = invoiceNumber;
-            this.Title = title;
-            this.Description = description;
-            this.ScheduledAt = scheduledAt;
+            if (invoiceNumber != null)
+            {
+                shouldSerialize["invoice_number"] = true;
+                this.InvoiceNumber = invoiceNumber;
+            }
+
+            if (title != null)
+            {
+                shouldSerialize["title"] = true;
+                this.Title = title;
+            }
+
+            if (description != null)
+            {
+                shouldSerialize["description"] = true;
+                this.Description = description;
+            }
+
+            if (scheduledAt != null)
+            {
+                shouldSerialize["scheduled_at"] = true;
+                this.ScheduledAt = scheduledAt;
+            }
+
             this.PublicUrl = publicUrl;
             this.NextPaymentAmountMoney = nextPaymentAmountMoney;
             this.Status = status;
@@ -86,11 +137,81 @@ namespace Square.Models
             this.CreatedAt = createdAt;
             this.UpdatedAt = updatedAt;
             this.AcceptedPaymentMethods = acceptedPaymentMethods;
-            this.CustomFields = customFields;
+            if (customFields != null)
+            {
+                shouldSerialize["custom_fields"] = true;
+                this.CustomFields = customFields;
+            }
+
             this.SubscriptionId = subscriptionId;
-            this.SaleOrServiceDate = saleOrServiceDate;
-            this.PaymentConditions = paymentConditions;
-            this.StorePaymentMethodEnabled = storePaymentMethodEnabled;
+            if (saleOrServiceDate != null)
+            {
+                shouldSerialize["sale_or_service_date"] = true;
+                this.SaleOrServiceDate = saleOrServiceDate;
+            }
+
+            if (paymentConditions != null)
+            {
+                shouldSerialize["payment_conditions"] = true;
+                this.PaymentConditions = paymentConditions;
+            }
+
+            if (storePaymentMethodEnabled != null)
+            {
+                shouldSerialize["store_payment_method_enabled"] = true;
+                this.StorePaymentMethodEnabled = storePaymentMethodEnabled;
+            }
+
+        }
+        internal Invoice(Dictionary<string, bool> shouldSerialize,
+            string id = null,
+            int? version = null,
+            string locationId = null,
+            string orderId = null,
+            Models.InvoiceRecipient primaryRecipient = null,
+            IList<Models.InvoicePaymentRequest> paymentRequests = null,
+            string deliveryMethod = null,
+            string invoiceNumber = null,
+            string title = null,
+            string description = null,
+            string scheduledAt = null,
+            string publicUrl = null,
+            Models.Money nextPaymentAmountMoney = null,
+            string status = null,
+            string timezone = null,
+            string createdAt = null,
+            string updatedAt = null,
+            Models.InvoiceAcceptedPaymentMethods acceptedPaymentMethods = null,
+            IList<Models.InvoiceCustomField> customFields = null,
+            string subscriptionId = null,
+            string saleOrServiceDate = null,
+            string paymentConditions = null,
+            bool? storePaymentMethodEnabled = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Id = id;
+            Version = version;
+            LocationId = locationId;
+            OrderId = orderId;
+            PrimaryRecipient = primaryRecipient;
+            PaymentRequests = paymentRequests;
+            DeliveryMethod = deliveryMethod;
+            InvoiceNumber = invoiceNumber;
+            Title = title;
+            Description = description;
+            ScheduledAt = scheduledAt;
+            PublicUrl = publicUrl;
+            NextPaymentAmountMoney = nextPaymentAmountMoney;
+            Status = status;
+            Timezone = timezone;
+            CreatedAt = createdAt;
+            UpdatedAt = updatedAt;
+            AcceptedPaymentMethods = acceptedPaymentMethods;
+            CustomFields = customFields;
+            SubscriptionId = subscriptionId;
+            SaleOrServiceDate = saleOrServiceDate;
+            PaymentConditions = paymentConditions;
+            StorePaymentMethodEnabled = storePaymentMethodEnabled;
         }
 
         /// <summary>
@@ -109,7 +230,7 @@ namespace Square.Models
         /// The ID of the location that this invoice is associated with.
         /// If specified in a `CreateInvoice` request, the value must match the `location_id` of the associated order.
         /// </summary>
-        [JsonProperty("location_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("location_id")]
         public string LocationId { get; }
 
         /// <summary>
@@ -118,7 +239,7 @@ namespace Square.Models
         /// To view the line items and other information for the associated order, call the
         /// [RetrieveOrder]($e/Orders/RetrieveOrder) endpoint using the order ID.
         /// </summary>
-        [JsonProperty("order_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("order_id")]
         public string OrderId { get; }
 
         /// <summary>
@@ -144,7 +265,7 @@ namespace Square.Models
         /// Adding `INSTALLMENT` payment requests to an invoice requires an
         /// [Invoices Plus subscription](https://developer.squareup.com/docs/invoices-api/overview#invoices-plus-subscription).
         /// </summary>
-        [JsonProperty("payment_requests", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("payment_requests")]
         public IList<Models.InvoicePaymentRequest> PaymentRequests { get; }
 
         /// <summary>
@@ -159,19 +280,19 @@ namespace Square.Models
         /// It increments from 1 and is padded with zeros making it 7 characters long
         /// (for example, 0000001 and 0000002).
         /// </summary>
-        [JsonProperty("invoice_number", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("invoice_number")]
         public string InvoiceNumber { get; }
 
         /// <summary>
         /// The title of the invoice, which is displayed on the invoice.
         /// </summary>
-        [JsonProperty("title", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("title")]
         public string Title { get; }
 
         /// <summary>
         /// The description of the invoice, which is displayed on the invoice.
         /// </summary>
-        [JsonProperty("description", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("description")]
         public string Description { get; }
 
         /// <summary>
@@ -180,7 +301,7 @@ namespace Square.Models
         /// according to the delivery method and payment request settings.
         /// If the field is not set, Square processes the invoice immediately after it is published.
         /// </summary>
-        [JsonProperty("scheduled_at", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("scheduled_at")]
         public string ScheduledAt { get; }
 
         /// <summary>
@@ -244,7 +365,7 @@ namespace Square.Models
         /// [Invoices Plus subscription](https://developer.squareup.com/docs/invoices-api/overview#invoices-plus-subscription).
         /// Max: 2 custom fields
         /// </summary>
-        [JsonProperty("custom_fields", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("custom_fields")]
         public IList<Models.InvoiceCustomField> CustomFields { get; }
 
         /// <summary>
@@ -258,7 +379,7 @@ namespace Square.Models
         /// The date of the sale or the date that the service is rendered, in `YYYY-MM-DD` format.
         /// This field can be used to specify a past or future date which is displayed on the invoice.
         /// </summary>
-        [JsonProperty("sale_or_service_date", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("sale_or_service_date")]
         public string SaleOrServiceDate { get; }
 
         /// <summary>
@@ -267,7 +388,7 @@ namespace Square.Models
         /// For countries other than France, Square returns an `INVALID_REQUEST_ERROR` with a `BAD_REQUEST` code and
         /// "Payment conditions are not supported for this location's country" detail if this field is included in `CreateInvoice` or `UpdateInvoice` requests.
         /// </summary>
-        [JsonProperty("payment_conditions", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("payment_conditions")]
         public string PaymentConditions { get; }
 
         /// <summary>
@@ -275,7 +396,7 @@ namespace Square.Models
         /// bank account on file. If `true`, Square displays a __Save my card on file__ or __Save my bank on file__ checkbox on the
         /// invoice payment page. Stored payment information can be used for future automatic payments. The default value is `false`.
         /// </summary>
-        [JsonProperty("store_payment_method_enabled", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("store_payment_method_enabled")]
         public bool? StorePaymentMethodEnabled { get; }
 
         /// <inheritdoc/>
@@ -286,6 +407,105 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"Invoice : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeLocationId()
+        {
+            return this.shouldSerialize["location_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeOrderId()
+        {
+            return this.shouldSerialize["order_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializePaymentRequests()
+        {
+            return this.shouldSerialize["payment_requests"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeInvoiceNumber()
+        {
+            return this.shouldSerialize["invoice_number"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeTitle()
+        {
+            return this.shouldSerialize["title"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeDescription()
+        {
+            return this.shouldSerialize["description"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeScheduledAt()
+        {
+            return this.shouldSerialize["scheduled_at"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeCustomFields()
+        {
+            return this.shouldSerialize["custom_fields"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeSaleOrServiceDate()
+        {
+            return this.shouldSerialize["sale_or_service_date"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializePaymentConditions()
+        {
+            return this.shouldSerialize["payment_conditions"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeStorePaymentMethodEnabled()
+        {
+            return this.shouldSerialize["store_payment_method_enabled"];
         }
 
         /// <inheritdoc/>
@@ -411,6 +631,21 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "location_id", false },
+                { "order_id", false },
+                { "payment_requests", false },
+                { "invoice_number", false },
+                { "title", false },
+                { "description", false },
+                { "scheduled_at", false },
+                { "custom_fields", false },
+                { "sale_or_service_date", false },
+                { "payment_conditions", false },
+                { "store_payment_method_enabled", false },
+            };
+
             private string id;
             private int? version;
             private string locationId;
@@ -464,6 +699,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder LocationId(string locationId)
             {
+                shouldSerialize["location_id"] = true;
                 this.locationId = locationId;
                 return this;
             }
@@ -475,6 +711,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder OrderId(string orderId)
             {
+                shouldSerialize["order_id"] = true;
                 this.orderId = orderId;
                 return this;
             }
@@ -497,6 +734,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder PaymentRequests(IList<Models.InvoicePaymentRequest> paymentRequests)
             {
+                shouldSerialize["payment_requests"] = true;
                 this.paymentRequests = paymentRequests;
                 return this;
             }
@@ -519,6 +757,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder InvoiceNumber(string invoiceNumber)
             {
+                shouldSerialize["invoice_number"] = true;
                 this.invoiceNumber = invoiceNumber;
                 return this;
             }
@@ -530,6 +769,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Title(string title)
             {
+                shouldSerialize["title"] = true;
                 this.title = title;
                 return this;
             }
@@ -541,6 +781,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Description(string description)
             {
+                shouldSerialize["description"] = true;
                 this.description = description;
                 return this;
             }
@@ -552,6 +793,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder ScheduledAt(string scheduledAt)
             {
+                shouldSerialize["scheduled_at"] = true;
                 this.scheduledAt = scheduledAt;
                 return this;
             }
@@ -640,6 +882,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder CustomFields(IList<Models.InvoiceCustomField> customFields)
             {
+                shouldSerialize["custom_fields"] = true;
                 this.customFields = customFields;
                 return this;
             }
@@ -662,6 +905,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder SaleOrServiceDate(string saleOrServiceDate)
             {
+                shouldSerialize["sale_or_service_date"] = true;
                 this.saleOrServiceDate = saleOrServiceDate;
                 return this;
             }
@@ -673,6 +917,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder PaymentConditions(string paymentConditions)
             {
+                shouldSerialize["payment_conditions"] = true;
                 this.paymentConditions = paymentConditions;
                 return this;
             }
@@ -684,9 +929,99 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder StorePaymentMethodEnabled(bool? storePaymentMethodEnabled)
             {
+                shouldSerialize["store_payment_method_enabled"] = true;
                 this.storePaymentMethodEnabled = storePaymentMethodEnabled;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetLocationId()
+            {
+                this.shouldSerialize["location_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetOrderId()
+            {
+                this.shouldSerialize["order_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetPaymentRequests()
+            {
+                this.shouldSerialize["payment_requests"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetInvoiceNumber()
+            {
+                this.shouldSerialize["invoice_number"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetTitle()
+            {
+                this.shouldSerialize["title"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetDescription()
+            {
+                this.shouldSerialize["description"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetScheduledAt()
+            {
+                this.shouldSerialize["scheduled_at"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetCustomFields()
+            {
+                this.shouldSerialize["custom_fields"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetSaleOrServiceDate()
+            {
+                this.shouldSerialize["sale_or_service_date"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetPaymentConditions()
+            {
+                this.shouldSerialize["payment_conditions"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetStorePaymentMethodEnabled()
+            {
+                this.shouldSerialize["store_payment_method_enabled"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -694,7 +1029,7 @@ namespace Square.Models
             /// <returns> Invoice. </returns>
             public Invoice Build()
             {
-                return new Invoice(
+                return new Invoice(shouldSerialize,
                     this.id,
                     this.version,
                     this.locationId,

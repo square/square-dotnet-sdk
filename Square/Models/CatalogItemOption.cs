@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class CatalogItemOption
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="CatalogItemOption"/> class.
         /// </summary>
@@ -32,24 +33,72 @@ namespace Square.Models
             bool? showColors = null,
             IList<Models.CatalogObject> values = null)
         {
-            this.Name = name;
-            this.DisplayName = displayName;
-            this.Description = description;
-            this.ShowColors = showColors;
-            this.Values = values;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "name", false },
+                { "display_name", false },
+                { "description", false },
+                { "show_colors", false },
+                { "values", false }
+            };
+
+            if (name != null)
+            {
+                shouldSerialize["name"] = true;
+                this.Name = name;
+            }
+
+            if (displayName != null)
+            {
+                shouldSerialize["display_name"] = true;
+                this.DisplayName = displayName;
+            }
+
+            if (description != null)
+            {
+                shouldSerialize["description"] = true;
+                this.Description = description;
+            }
+
+            if (showColors != null)
+            {
+                shouldSerialize["show_colors"] = true;
+                this.ShowColors = showColors;
+            }
+
+            if (values != null)
+            {
+                shouldSerialize["values"] = true;
+                this.Values = values;
+            }
+
+        }
+        internal CatalogItemOption(Dictionary<string, bool> shouldSerialize,
+            string name = null,
+            string displayName = null,
+            string description = null,
+            bool? showColors = null,
+            IList<Models.CatalogObject> values = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Name = name;
+            DisplayName = displayName;
+            Description = description;
+            ShowColors = showColors;
+            Values = values;
         }
 
         /// <summary>
         /// The item option's display name for the seller. Must be unique across
         /// all item options. This is a searchable attribute for use in applicable query filters.
         /// </summary>
-        [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("name")]
         public string Name { get; }
 
         /// <summary>
         /// The item option's display name for the customer. This is a searchable attribute for use in applicable query filters.
         /// </summary>
-        [JsonProperty("display_name", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("display_name")]
         public string DisplayName { get; }
 
         /// <summary>
@@ -57,20 +106,20 @@ namespace Square.Models
         /// Point of Sale app for the seller and in the Online Store or on receipts for
         /// the buyer. This is a searchable attribute for use in applicable query filters.
         /// </summary>
-        [JsonProperty("description", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("description")]
         public string Description { get; }
 
         /// <summary>
         /// If true, display colors for entries in `values` when present.
         /// </summary>
-        [JsonProperty("show_colors", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("show_colors")]
         public bool? ShowColors { get; }
 
         /// <summary>
         /// A list of CatalogObjects containing the
         /// `CatalogItemOptionValue`s for this item.
         /// </summary>
-        [JsonProperty("values", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("values")]
         public IList<Models.CatalogObject> Values { get; }
 
         /// <inheritdoc/>
@@ -81,6 +130,51 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"CatalogItemOption : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeName()
+        {
+            return this.shouldSerialize["name"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeDisplayName()
+        {
+            return this.shouldSerialize["display_name"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeDescription()
+        {
+            return this.shouldSerialize["description"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeShowColors()
+        {
+            return this.shouldSerialize["show_colors"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeValues()
+        {
+            return this.shouldSerialize["values"];
         }
 
         /// <inheritdoc/>
@@ -146,6 +240,15 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "name", false },
+                { "display_name", false },
+                { "description", false },
+                { "show_colors", false },
+                { "values", false },
+            };
+
             private string name;
             private string displayName;
             private string description;
@@ -159,6 +262,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Name(string name)
             {
+                shouldSerialize["name"] = true;
                 this.name = name;
                 return this;
             }
@@ -170,6 +274,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder DisplayName(string displayName)
             {
+                shouldSerialize["display_name"] = true;
                 this.displayName = displayName;
                 return this;
             }
@@ -181,6 +286,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Description(string description)
             {
+                shouldSerialize["description"] = true;
                 this.description = description;
                 return this;
             }
@@ -192,6 +298,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder ShowColors(bool? showColors)
             {
+                shouldSerialize["show_colors"] = true;
                 this.showColors = showColors;
                 return this;
             }
@@ -203,9 +310,51 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Values(IList<Models.CatalogObject> values)
             {
+                shouldSerialize["values"] = true;
                 this.values = values;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetName()
+            {
+                this.shouldSerialize["name"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetDisplayName()
+            {
+                this.shouldSerialize["display_name"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetDescription()
+            {
+                this.shouldSerialize["description"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetShowColors()
+            {
+                this.shouldSerialize["show_colors"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetValues()
+            {
+                this.shouldSerialize["values"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -213,7 +362,7 @@ namespace Square.Models
             /// <returns> CatalogItemOption. </returns>
             public CatalogItemOption Build()
             {
-                return new CatalogItemOption(
+                return new CatalogItemOption(shouldSerialize,
                     this.name,
                     this.displayName,
                     this.description,

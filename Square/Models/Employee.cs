@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class Employee
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="Employee"/> class.
         /// </summary>
@@ -42,16 +43,80 @@ namespace Square.Models
             string createdAt = null,
             string updatedAt = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "first_name", false },
+                { "last_name", false },
+                { "email", false },
+                { "phone_number", false },
+                { "location_ids", false },
+                { "is_owner", false }
+            };
+
             this.Id = id;
-            this.FirstName = firstName;
-            this.LastName = lastName;
-            this.Email = email;
-            this.PhoneNumber = phoneNumber;
-            this.LocationIds = locationIds;
+            if (firstName != null)
+            {
+                shouldSerialize["first_name"] = true;
+                this.FirstName = firstName;
+            }
+
+            if (lastName != null)
+            {
+                shouldSerialize["last_name"] = true;
+                this.LastName = lastName;
+            }
+
+            if (email != null)
+            {
+                shouldSerialize["email"] = true;
+                this.Email = email;
+            }
+
+            if (phoneNumber != null)
+            {
+                shouldSerialize["phone_number"] = true;
+                this.PhoneNumber = phoneNumber;
+            }
+
+            if (locationIds != null)
+            {
+                shouldSerialize["location_ids"] = true;
+                this.LocationIds = locationIds;
+            }
+
             this.Status = status;
-            this.IsOwner = isOwner;
+            if (isOwner != null)
+            {
+                shouldSerialize["is_owner"] = true;
+                this.IsOwner = isOwner;
+            }
+
             this.CreatedAt = createdAt;
             this.UpdatedAt = updatedAt;
+        }
+        internal Employee(Dictionary<string, bool> shouldSerialize,
+            string id = null,
+            string firstName = null,
+            string lastName = null,
+            string email = null,
+            string phoneNumber = null,
+            IList<string> locationIds = null,
+            string status = null,
+            bool? isOwner = null,
+            string createdAt = null,
+            string updatedAt = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Id = id;
+            FirstName = firstName;
+            LastName = lastName;
+            Email = email;
+            PhoneNumber = phoneNumber;
+            LocationIds = locationIds;
+            Status = status;
+            IsOwner = isOwner;
+            CreatedAt = createdAt;
+            UpdatedAt = updatedAt;
         }
 
         /// <summary>
@@ -63,31 +128,31 @@ namespace Square.Models
         /// <summary>
         /// The employee's first name.
         /// </summary>
-        [JsonProperty("first_name", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("first_name")]
         public string FirstName { get; }
 
         /// <summary>
         /// The employee's last name.
         /// </summary>
-        [JsonProperty("last_name", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("last_name")]
         public string LastName { get; }
 
         /// <summary>
         /// The employee's email address
         /// </summary>
-        [JsonProperty("email", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("email")]
         public string Email { get; }
 
         /// <summary>
         /// The employee's phone number in E.164 format, i.e. "+12125554250"
         /// </summary>
-        [JsonProperty("phone_number", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("phone_number")]
         public string PhoneNumber { get; }
 
         /// <summary>
         /// A list of location IDs where this employee has access to.
         /// </summary>
-        [JsonProperty("location_ids", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("location_ids")]
         public IList<string> LocationIds { get; }
 
         /// <summary>
@@ -101,7 +166,7 @@ namespace Square.Models
         /// has one owner employee, and that employee has full authority over
         /// the account.
         /// </summary>
-        [JsonProperty("is_owner", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("is_owner")]
         public bool? IsOwner { get; }
 
         /// <summary>
@@ -124,6 +189,60 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"Employee : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeFirstName()
+        {
+            return this.shouldSerialize["first_name"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeLastName()
+        {
+            return this.shouldSerialize["last_name"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeEmail()
+        {
+            return this.shouldSerialize["email"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializePhoneNumber()
+        {
+            return this.shouldSerialize["phone_number"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeLocationIds()
+        {
+            return this.shouldSerialize["location_ids"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeIsOwner()
+        {
+            return this.shouldSerialize["is_owner"];
         }
 
         /// <inheritdoc/>
@@ -206,6 +325,16 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "first_name", false },
+                { "last_name", false },
+                { "email", false },
+                { "phone_number", false },
+                { "location_ids", false },
+                { "is_owner", false },
+            };
+
             private string id;
             private string firstName;
             private string lastName;
@@ -235,6 +364,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder FirstName(string firstName)
             {
+                shouldSerialize["first_name"] = true;
                 this.firstName = firstName;
                 return this;
             }
@@ -246,6 +376,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder LastName(string lastName)
             {
+                shouldSerialize["last_name"] = true;
                 this.lastName = lastName;
                 return this;
             }
@@ -257,6 +388,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Email(string email)
             {
+                shouldSerialize["email"] = true;
                 this.email = email;
                 return this;
             }
@@ -268,6 +400,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder PhoneNumber(string phoneNumber)
             {
+                shouldSerialize["phone_number"] = true;
                 this.phoneNumber = phoneNumber;
                 return this;
             }
@@ -279,6 +412,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder LocationIds(IList<string> locationIds)
             {
+                shouldSerialize["location_ids"] = true;
                 this.locationIds = locationIds;
                 return this;
             }
@@ -301,6 +435,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder IsOwner(bool? isOwner)
             {
+                shouldSerialize["is_owner"] = true;
                 this.isOwner = isOwner;
                 return this;
             }
@@ -328,12 +463,61 @@ namespace Square.Models
             }
 
             /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetFirstName()
+            {
+                this.shouldSerialize["first_name"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetLastName()
+            {
+                this.shouldSerialize["last_name"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetEmail()
+            {
+                this.shouldSerialize["email"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetPhoneNumber()
+            {
+                this.shouldSerialize["phone_number"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetLocationIds()
+            {
+                this.shouldSerialize["location_ids"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetIsOwner()
+            {
+                this.shouldSerialize["is_owner"] = false;
+            }
+
+
+            /// <summary>
             /// Builds class object.
             /// </summary>
             /// <returns> Employee. </returns>
             public Employee Build()
             {
-                return new Employee(
+                return new Employee(shouldSerialize,
                     this.id,
                     this.firstName,
                     this.lastName,

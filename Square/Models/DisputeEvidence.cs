@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class DisputeEvidence
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="DisputeEvidence"/> class.
         /// </summary>
@@ -36,19 +37,65 @@ namespace Square.Models
             string uploadedAt = null,
             string evidenceType = null)
         {
-            this.EvidenceId = evidenceId;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "evidence_id", false },
+                { "dispute_id", false },
+                { "evidence_text", false },
+                { "uploaded_at", false }
+            };
+
+            if (evidenceId != null)
+            {
+                shouldSerialize["evidence_id"] = true;
+                this.EvidenceId = evidenceId;
+            }
+
             this.Id = id;
-            this.DisputeId = disputeId;
+            if (disputeId != null)
+            {
+                shouldSerialize["dispute_id"] = true;
+                this.DisputeId = disputeId;
+            }
+
             this.EvidenceFile = evidenceFile;
-            this.EvidenceText = evidenceText;
-            this.UploadedAt = uploadedAt;
+            if (evidenceText != null)
+            {
+                shouldSerialize["evidence_text"] = true;
+                this.EvidenceText = evidenceText;
+            }
+
+            if (uploadedAt != null)
+            {
+                shouldSerialize["uploaded_at"] = true;
+                this.UploadedAt = uploadedAt;
+            }
+
             this.EvidenceType = evidenceType;
+        }
+        internal DisputeEvidence(Dictionary<string, bool> shouldSerialize,
+            string evidenceId = null,
+            string id = null,
+            string disputeId = null,
+            Models.DisputeEvidenceFile evidenceFile = null,
+            string evidenceText = null,
+            string uploadedAt = null,
+            string evidenceType = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            EvidenceId = evidenceId;
+            Id = id;
+            DisputeId = disputeId;
+            EvidenceFile = evidenceFile;
+            EvidenceText = evidenceText;
+            UploadedAt = uploadedAt;
+            EvidenceType = evidenceType;
         }
 
         /// <summary>
         /// The Square-generated ID of the evidence.
         /// </summary>
-        [JsonProperty("evidence_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("evidence_id")]
         public string EvidenceId { get; }
 
         /// <summary>
@@ -60,7 +107,7 @@ namespace Square.Models
         /// <summary>
         /// The ID of the dispute the evidence is associated with.
         /// </summary>
-        [JsonProperty("dispute_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("dispute_id")]
         public string DisputeId { get; }
 
         /// <summary>
@@ -72,13 +119,13 @@ namespace Square.Models
         /// <summary>
         /// Raw text
         /// </summary>
-        [JsonProperty("evidence_text", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("evidence_text")]
         public string EvidenceText { get; }
 
         /// <summary>
         /// The time when the evidence was uploaded, in RFC 3339 format.
         /// </summary>
-        [JsonProperty("uploaded_at", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("uploaded_at")]
         public string UploadedAt { get; }
 
         /// <summary>
@@ -95,6 +142,42 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"DisputeEvidence : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeEvidenceId()
+        {
+            return this.shouldSerialize["evidence_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeDisputeId()
+        {
+            return this.shouldSerialize["dispute_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeEvidenceText()
+        {
+            return this.shouldSerialize["evidence_text"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeUploadedAt()
+        {
+            return this.shouldSerialize["uploaded_at"];
         }
 
         /// <inheritdoc/>
@@ -166,6 +249,14 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "evidence_id", false },
+                { "dispute_id", false },
+                { "evidence_text", false },
+                { "uploaded_at", false },
+            };
+
             private string evidenceId;
             private string id;
             private string disputeId;
@@ -181,6 +272,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder EvidenceId(string evidenceId)
             {
+                shouldSerialize["evidence_id"] = true;
                 this.evidenceId = evidenceId;
                 return this;
             }
@@ -203,6 +295,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder DisputeId(string disputeId)
             {
+                shouldSerialize["dispute_id"] = true;
                 this.disputeId = disputeId;
                 return this;
             }
@@ -225,6 +318,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder EvidenceText(string evidenceText)
             {
+                shouldSerialize["evidence_text"] = true;
                 this.evidenceText = evidenceText;
                 return this;
             }
@@ -236,6 +330,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder UploadedAt(string uploadedAt)
             {
+                shouldSerialize["uploaded_at"] = true;
                 this.uploadedAt = uploadedAt;
                 return this;
             }
@@ -252,12 +347,45 @@ namespace Square.Models
             }
 
             /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetEvidenceId()
+            {
+                this.shouldSerialize["evidence_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetDisputeId()
+            {
+                this.shouldSerialize["dispute_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetEvidenceText()
+            {
+                this.shouldSerialize["evidence_text"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetUploadedAt()
+            {
+                this.shouldSerialize["uploaded_at"] = false;
+            }
+
+
+            /// <summary>
             /// Builds class object.
             /// </summary>
             /// <returns> DisputeEvidence. </returns>
             public DisputeEvidence Build()
             {
-                return new DisputeEvidence(
+                return new DisputeEvidence(shouldSerialize,
                     this.evidenceId,
                     this.id,
                     this.disputeId,

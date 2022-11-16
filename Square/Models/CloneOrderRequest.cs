@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class CloneOrderRequest
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="CloneOrderRequest"/> class.
         /// </summary>
@@ -28,9 +29,29 @@ namespace Square.Models
             int? version = null,
             string idempotencyKey = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "idempotency_key", false }
+            };
+
             this.OrderId = orderId;
             this.Version = version;
-            this.IdempotencyKey = idempotencyKey;
+            if (idempotencyKey != null)
+            {
+                shouldSerialize["idempotency_key"] = true;
+                this.IdempotencyKey = idempotencyKey;
+            }
+
+        }
+        internal CloneOrderRequest(Dictionary<string, bool> shouldSerialize,
+            string orderId,
+            int? version = null,
+            string idempotencyKey = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            OrderId = orderId;
+            Version = version;
+            IdempotencyKey = idempotencyKey;
         }
 
         /// <summary>
@@ -55,7 +76,7 @@ namespace Square.Models
         /// The originally cloned order is returned.
         /// For more information, see [Idempotency](https://developer.squareup.com/docs/basics/api101/idempotency).
         /// </summary>
-        [JsonProperty("idempotency_key", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("idempotency_key")]
         public string IdempotencyKey { get; }
 
         /// <inheritdoc/>
@@ -66,6 +87,15 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"CloneOrderRequest : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeIdempotencyKey()
+        {
+            return this.shouldSerialize["idempotency_key"];
         }
 
         /// <inheritdoc/>
@@ -125,6 +155,11 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "idempotency_key", false },
+            };
+
             private string orderId;
             private int? version;
             private string idempotencyKey;
@@ -164,9 +199,19 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder IdempotencyKey(string idempotencyKey)
             {
+                shouldSerialize["idempotency_key"] = true;
                 this.idempotencyKey = idempotencyKey;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetIdempotencyKey()
+            {
+                this.shouldSerialize["idempotency_key"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -174,7 +219,7 @@ namespace Square.Models
             /// <returns> CloneOrderRequest. </returns>
             public CloneOrderRequest Build()
             {
-                return new CloneOrderRequest(
+                return new CloneOrderRequest(shouldSerialize,
                     this.orderId,
                     this.version,
                     this.idempotencyKey);

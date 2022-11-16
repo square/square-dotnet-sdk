@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class PaymentRefund
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="PaymentRefund"/> class.
         /// </summary>
@@ -52,21 +53,101 @@ namespace Square.Models
             string updatedAt = null,
             string teamMemberId = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "status", false },
+                { "location_id", false },
+                { "destination_type", false },
+                { "processing_fee", false },
+                { "payment_id", false },
+                { "order_id", false },
+                { "reason", false }
+            };
+
             this.Id = id;
-            this.Status = status;
-            this.LocationId = locationId;
+            if (status != null)
+            {
+                shouldSerialize["status"] = true;
+                this.Status = status;
+            }
+
+            if (locationId != null)
+            {
+                shouldSerialize["location_id"] = true;
+                this.LocationId = locationId;
+            }
+
             this.Unlinked = unlinked;
-            this.DestinationType = destinationType;
+            if (destinationType != null)
+            {
+                shouldSerialize["destination_type"] = true;
+                this.DestinationType = destinationType;
+            }
+
             this.DestinationDetails = destinationDetails;
             this.AmountMoney = amountMoney;
             this.AppFeeMoney = appFeeMoney;
-            this.ProcessingFee = processingFee;
-            this.PaymentId = paymentId;
-            this.OrderId = orderId;
-            this.Reason = reason;
+            if (processingFee != null)
+            {
+                shouldSerialize["processing_fee"] = true;
+                this.ProcessingFee = processingFee;
+            }
+
+            if (paymentId != null)
+            {
+                shouldSerialize["payment_id"] = true;
+                this.PaymentId = paymentId;
+            }
+
+            if (orderId != null)
+            {
+                shouldSerialize["order_id"] = true;
+                this.OrderId = orderId;
+            }
+
+            if (reason != null)
+            {
+                shouldSerialize["reason"] = true;
+                this.Reason = reason;
+            }
+
             this.CreatedAt = createdAt;
             this.UpdatedAt = updatedAt;
             this.TeamMemberId = teamMemberId;
+        }
+        internal PaymentRefund(Dictionary<string, bool> shouldSerialize,
+            string id,
+            Models.Money amountMoney,
+            string status = null,
+            string locationId = null,
+            bool? unlinked = null,
+            string destinationType = null,
+            Models.DestinationDetails destinationDetails = null,
+            Models.Money appFeeMoney = null,
+            IList<Models.ProcessingFee> processingFee = null,
+            string paymentId = null,
+            string orderId = null,
+            string reason = null,
+            string createdAt = null,
+            string updatedAt = null,
+            string teamMemberId = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Id = id;
+            Status = status;
+            LocationId = locationId;
+            Unlinked = unlinked;
+            DestinationType = destinationType;
+            DestinationDetails = destinationDetails;
+            AmountMoney = amountMoney;
+            AppFeeMoney = appFeeMoney;
+            ProcessingFee = processingFee;
+            PaymentId = paymentId;
+            OrderId = orderId;
+            Reason = reason;
+            CreatedAt = createdAt;
+            UpdatedAt = updatedAt;
+            TeamMemberId = teamMemberId;
         }
 
         /// <summary>
@@ -82,13 +163,13 @@ namespace Square.Models
         /// - `REJECTED` - The refund was rejected.
         /// - `FAILED` - An error occurred.
         /// </summary>
-        [JsonProperty("status", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("status")]
         public string Status { get; }
 
         /// <summary>
         /// The location ID associated with the payment this refund is attached to.
         /// </summary>
-        [JsonProperty("location_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("location_id")]
         public string LocationId { get; }
 
         /// <summary>
@@ -101,7 +182,7 @@ namespace Square.Models
         /// The destination type for this refund.
         /// Current values include `CARD`, `BANK_ACCOUNT`, `WALLET`, `CASH`, or `EXTERNAL`.
         /// </summary>
-        [JsonProperty("destination_type", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("destination_type")]
         public string DestinationType { get; }
 
         /// <summary>
@@ -135,25 +216,25 @@ namespace Square.Models
         /// <summary>
         /// Processing fees and fee adjustments assessed by Square for this refund.
         /// </summary>
-        [JsonProperty("processing_fee", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("processing_fee")]
         public IList<Models.ProcessingFee> ProcessingFee { get; }
 
         /// <summary>
         /// The ID of the payment associated with this refund.
         /// </summary>
-        [JsonProperty("payment_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("payment_id")]
         public string PaymentId { get; }
 
         /// <summary>
         /// The ID of the order associated with the refund.
         /// </summary>
-        [JsonProperty("order_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("order_id")]
         public string OrderId { get; }
 
         /// <summary>
         /// The reason for the refund.
         /// </summary>
-        [JsonProperty("reason", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("reason")]
         public string Reason { get; }
 
         /// <summary>
@@ -182,6 +263,69 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"PaymentRefund : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeStatus()
+        {
+            return this.shouldSerialize["status"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeLocationId()
+        {
+            return this.shouldSerialize["location_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeDestinationType()
+        {
+            return this.shouldSerialize["destination_type"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeProcessingFee()
+        {
+            return this.shouldSerialize["processing_fee"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializePaymentId()
+        {
+            return this.shouldSerialize["payment_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeOrderId()
+        {
+            return this.shouldSerialize["order_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeReason()
+        {
+            return this.shouldSerialize["reason"];
         }
 
         /// <inheritdoc/>
@@ -281,6 +425,17 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "status", false },
+                { "location_id", false },
+                { "destination_type", false },
+                { "processing_fee", false },
+                { "payment_id", false },
+                { "order_id", false },
+                { "reason", false },
+            };
+
             private string id;
             private Models.Money amountMoney;
             private string status;
@@ -334,6 +489,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Status(string status)
             {
+                shouldSerialize["status"] = true;
                 this.status = status;
                 return this;
             }
@@ -345,6 +501,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder LocationId(string locationId)
             {
+                shouldSerialize["location_id"] = true;
                 this.locationId = locationId;
                 return this;
             }
@@ -367,6 +524,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder DestinationType(string destinationType)
             {
+                shouldSerialize["destination_type"] = true;
                 this.destinationType = destinationType;
                 return this;
             }
@@ -400,6 +558,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder ProcessingFee(IList<Models.ProcessingFee> processingFee)
             {
+                shouldSerialize["processing_fee"] = true;
                 this.processingFee = processingFee;
                 return this;
             }
@@ -411,6 +570,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder PaymentId(string paymentId)
             {
+                shouldSerialize["payment_id"] = true;
                 this.paymentId = paymentId;
                 return this;
             }
@@ -422,6 +582,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder OrderId(string orderId)
             {
+                shouldSerialize["order_id"] = true;
                 this.orderId = orderId;
                 return this;
             }
@@ -433,6 +594,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Reason(string reason)
             {
+                shouldSerialize["reason"] = true;
                 this.reason = reason;
                 return this;
             }
@@ -471,12 +633,69 @@ namespace Square.Models
             }
 
             /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetStatus()
+            {
+                this.shouldSerialize["status"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetLocationId()
+            {
+                this.shouldSerialize["location_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetDestinationType()
+            {
+                this.shouldSerialize["destination_type"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetProcessingFee()
+            {
+                this.shouldSerialize["processing_fee"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetPaymentId()
+            {
+                this.shouldSerialize["payment_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetOrderId()
+            {
+                this.shouldSerialize["order_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetReason()
+            {
+                this.shouldSerialize["reason"] = false;
+            }
+
+
+            /// <summary>
             /// Builds class object.
             /// </summary>
             /// <returns> PaymentRefund. </returns>
             public PaymentRefund Build()
             {
-                return new PaymentRefund(
+                return new PaymentRefund(shouldSerialize,
                     this.id,
                     this.amountMoney,
                     this.status,

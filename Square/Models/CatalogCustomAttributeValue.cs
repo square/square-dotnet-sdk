@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class CatalogCustomAttributeValue
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="CatalogCustomAttributeValue"/> class.
         /// </summary>
@@ -38,26 +39,80 @@ namespace Square.Models
             IList<string> selectionUidValues = null,
             string key = null)
         {
-            this.Name = name;
-            this.StringValue = stringValue;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "name", false },
+                { "string_value", false },
+                { "number_value", false },
+                { "boolean_value", false },
+                { "selection_uid_values", false }
+            };
+
+            if (name != null)
+            {
+                shouldSerialize["name"] = true;
+                this.Name = name;
+            }
+
+            if (stringValue != null)
+            {
+                shouldSerialize["string_value"] = true;
+                this.StringValue = stringValue;
+            }
+
             this.CustomAttributeDefinitionId = customAttributeDefinitionId;
             this.Type = type;
-            this.NumberValue = numberValue;
-            this.BooleanValue = booleanValue;
-            this.SelectionUidValues = selectionUidValues;
+            if (numberValue != null)
+            {
+                shouldSerialize["number_value"] = true;
+                this.NumberValue = numberValue;
+            }
+
+            if (booleanValue != null)
+            {
+                shouldSerialize["boolean_value"] = true;
+                this.BooleanValue = booleanValue;
+            }
+
+            if (selectionUidValues != null)
+            {
+                shouldSerialize["selection_uid_values"] = true;
+                this.SelectionUidValues = selectionUidValues;
+            }
+
             this.Key = key;
+        }
+        internal CatalogCustomAttributeValue(Dictionary<string, bool> shouldSerialize,
+            string name = null,
+            string stringValue = null,
+            string customAttributeDefinitionId = null,
+            string type = null,
+            string numberValue = null,
+            bool? booleanValue = null,
+            IList<string> selectionUidValues = null,
+            string key = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Name = name;
+            StringValue = stringValue;
+            CustomAttributeDefinitionId = customAttributeDefinitionId;
+            Type = type;
+            NumberValue = numberValue;
+            BooleanValue = booleanValue;
+            SelectionUidValues = selectionUidValues;
+            Key = key;
         }
 
         /// <summary>
         /// The name of the custom attribute.
         /// </summary>
-        [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("name")]
         public string Name { get; }
 
         /// <summary>
         /// The string value of the custom attribute.  Populated if `type` = `STRING`.
         /// </summary>
-        [JsonProperty("string_value", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("string_value")]
         public string StringValue { get; }
 
         /// <summary>
@@ -76,19 +131,19 @@ namespace Square.Models
         /// Populated if `type` = `NUMBER`. Contains a string
         /// representation of a decimal number, using a `.` as the decimal separator.
         /// </summary>
-        [JsonProperty("number_value", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("number_value")]
         public string NumberValue { get; }
 
         /// <summary>
         /// A `true` or `false` value. Populated if `type` = `BOOLEAN`.
         /// </summary>
-        [JsonProperty("boolean_value", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("boolean_value")]
         public bool? BooleanValue { get; }
 
         /// <summary>
         /// One or more choices from `allowed_selections`. Populated if `type` = `SELECTION`.
         /// </summary>
-        [JsonProperty("selection_uid_values", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("selection_uid_values")]
         public IList<string> SelectionUidValues { get; }
 
         /// <summary>
@@ -105,6 +160,51 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"CatalogCustomAttributeValue : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeName()
+        {
+            return this.shouldSerialize["name"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeStringValue()
+        {
+            return this.shouldSerialize["string_value"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeNumberValue()
+        {
+            return this.shouldSerialize["number_value"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeBooleanValue()
+        {
+            return this.shouldSerialize["boolean_value"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeSelectionUidValues()
+        {
+            return this.shouldSerialize["selection_uid_values"];
         }
 
         /// <inheritdoc/>
@@ -181,6 +281,15 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "name", false },
+                { "string_value", false },
+                { "number_value", false },
+                { "boolean_value", false },
+                { "selection_uid_values", false },
+            };
+
             private string name;
             private string stringValue;
             private string customAttributeDefinitionId;
@@ -197,6 +306,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Name(string name)
             {
+                shouldSerialize["name"] = true;
                 this.name = name;
                 return this;
             }
@@ -208,6 +318,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder StringValue(string stringValue)
             {
+                shouldSerialize["string_value"] = true;
                 this.stringValue = stringValue;
                 return this;
             }
@@ -241,6 +352,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder NumberValue(string numberValue)
             {
+                shouldSerialize["number_value"] = true;
                 this.numberValue = numberValue;
                 return this;
             }
@@ -252,6 +364,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder BooleanValue(bool? booleanValue)
             {
+                shouldSerialize["boolean_value"] = true;
                 this.booleanValue = booleanValue;
                 return this;
             }
@@ -263,6 +376,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder SelectionUidValues(IList<string> selectionUidValues)
             {
+                shouldSerialize["selection_uid_values"] = true;
                 this.selectionUidValues = selectionUidValues;
                 return this;
             }
@@ -279,12 +393,53 @@ namespace Square.Models
             }
 
             /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetName()
+            {
+                this.shouldSerialize["name"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetStringValue()
+            {
+                this.shouldSerialize["string_value"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetNumberValue()
+            {
+                this.shouldSerialize["number_value"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetBooleanValue()
+            {
+                this.shouldSerialize["boolean_value"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetSelectionUidValues()
+            {
+                this.shouldSerialize["selection_uid_values"] = false;
+            }
+
+
+            /// <summary>
             /// Builds class object.
             /// </summary>
             /// <returns> CatalogCustomAttributeValue. </returns>
             public CatalogCustomAttributeValue Build()
             {
-                return new CatalogCustomAttributeValue(
+                return new CatalogCustomAttributeValue(shouldSerialize,
                     this.name,
                     this.stringValue,
                     this.customAttributeDefinitionId,

@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class GiftCard
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="GiftCard"/> class.
         /// </summary>
@@ -38,14 +39,44 @@ namespace Square.Models
             string createdAt = null,
             IList<string> customerIds = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "gan", false }
+            };
+
             this.Id = id;
             this.Type = type;
             this.GanSource = ganSource;
             this.State = state;
             this.BalanceMoney = balanceMoney;
-            this.Gan = gan;
+            if (gan != null)
+            {
+                shouldSerialize["gan"] = true;
+                this.Gan = gan;
+            }
+
             this.CreatedAt = createdAt;
             this.CustomerIds = customerIds;
+        }
+        internal GiftCard(Dictionary<string, bool> shouldSerialize,
+            string type,
+            string id = null,
+            string ganSource = null,
+            string state = null,
+            Models.Money balanceMoney = null,
+            string gan = null,
+            string createdAt = null,
+            IList<string> customerIds = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Id = id;
+            Type = type;
+            GanSource = ganSource;
+            State = state;
+            BalanceMoney = balanceMoney;
+            Gan = gan;
+            CreatedAt = createdAt;
+            CustomerIds = customerIds;
         }
 
         /// <summary>
@@ -88,7 +119,7 @@ namespace Square.Models
         /// The gift card account number (GAN). Buyers can use the GAN to make purchases or check
         /// the gift card balance.
         /// </summary>
-        [JsonProperty("gan", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("gan")]
         public string Gan { get; }
 
         /// <summary>
@@ -115,6 +146,15 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"GiftCard : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeGan()
+        {
+            return this.shouldSerialize["gan"];
         }
 
         /// <inheritdoc/>
@@ -191,6 +231,11 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "gan", false },
+            };
+
             private string type;
             private string id;
             private string ganSource;
@@ -268,6 +313,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Gan(string gan)
             {
+                shouldSerialize["gan"] = true;
                 this.gan = gan;
                 return this;
             }
@@ -295,12 +341,21 @@ namespace Square.Models
             }
 
             /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetGan()
+            {
+                this.shouldSerialize["gan"] = false;
+            }
+
+
+            /// <summary>
             /// Builds class object.
             /// </summary>
             /// <returns> GiftCard. </returns>
             public GiftCard Build()
             {
-                return new GiftCard(
+                return new GiftCard(shouldSerialize,
                     this.type,
                     this.id,
                     this.ganSource,

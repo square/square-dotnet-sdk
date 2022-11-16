@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class OrderReturnLineItem
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="OrderReturnLineItem"/> class.
         /// </summary>
@@ -60,19 +61,83 @@ namespace Square.Models
             Models.Money totalDiscountMoney = null,
             Models.Money totalMoney = null)
         {
-            this.Uid = uid;
-            this.SourceLineItemUid = sourceLineItemUid;
-            this.Name = name;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "uid", false },
+                { "source_line_item_uid", false },
+                { "name", false },
+                { "note", false },
+                { "catalog_object_id", false },
+                { "catalog_version", false },
+                { "variation_name", false },
+                { "return_modifiers", false },
+                { "applied_taxes", false },
+                { "applied_discounts", false }
+            };
+
+            if (uid != null)
+            {
+                shouldSerialize["uid"] = true;
+                this.Uid = uid;
+            }
+
+            if (sourceLineItemUid != null)
+            {
+                shouldSerialize["source_line_item_uid"] = true;
+                this.SourceLineItemUid = sourceLineItemUid;
+            }
+
+            if (name != null)
+            {
+                shouldSerialize["name"] = true;
+                this.Name = name;
+            }
+
             this.Quantity = quantity;
             this.QuantityUnit = quantityUnit;
-            this.Note = note;
-            this.CatalogObjectId = catalogObjectId;
-            this.CatalogVersion = catalogVersion;
-            this.VariationName = variationName;
+            if (note != null)
+            {
+                shouldSerialize["note"] = true;
+                this.Note = note;
+            }
+
+            if (catalogObjectId != null)
+            {
+                shouldSerialize["catalog_object_id"] = true;
+                this.CatalogObjectId = catalogObjectId;
+            }
+
+            if (catalogVersion != null)
+            {
+                shouldSerialize["catalog_version"] = true;
+                this.CatalogVersion = catalogVersion;
+            }
+
+            if (variationName != null)
+            {
+                shouldSerialize["variation_name"] = true;
+                this.VariationName = variationName;
+            }
+
             this.ItemType = itemType;
-            this.ReturnModifiers = returnModifiers;
-            this.AppliedTaxes = appliedTaxes;
-            this.AppliedDiscounts = appliedDiscounts;
+            if (returnModifiers != null)
+            {
+                shouldSerialize["return_modifiers"] = true;
+                this.ReturnModifiers = returnModifiers;
+            }
+
+            if (appliedTaxes != null)
+            {
+                shouldSerialize["applied_taxes"] = true;
+                this.AppliedTaxes = appliedTaxes;
+            }
+
+            if (appliedDiscounts != null)
+            {
+                shouldSerialize["applied_discounts"] = true;
+                this.AppliedDiscounts = appliedDiscounts;
+            }
+
             this.BasePriceMoney = basePriceMoney;
             this.VariationTotalPriceMoney = variationTotalPriceMoney;
             this.GrossReturnMoney = grossReturnMoney;
@@ -80,23 +145,65 @@ namespace Square.Models
             this.TotalDiscountMoney = totalDiscountMoney;
             this.TotalMoney = totalMoney;
         }
+        internal OrderReturnLineItem(Dictionary<string, bool> shouldSerialize,
+            string quantity,
+            string uid = null,
+            string sourceLineItemUid = null,
+            string name = null,
+            Models.OrderQuantityUnit quantityUnit = null,
+            string note = null,
+            string catalogObjectId = null,
+            long? catalogVersion = null,
+            string variationName = null,
+            string itemType = null,
+            IList<Models.OrderReturnLineItemModifier> returnModifiers = null,
+            IList<Models.OrderLineItemAppliedTax> appliedTaxes = null,
+            IList<Models.OrderLineItemAppliedDiscount> appliedDiscounts = null,
+            Models.Money basePriceMoney = null,
+            Models.Money variationTotalPriceMoney = null,
+            Models.Money grossReturnMoney = null,
+            Models.Money totalTaxMoney = null,
+            Models.Money totalDiscountMoney = null,
+            Models.Money totalMoney = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Uid = uid;
+            SourceLineItemUid = sourceLineItemUid;
+            Name = name;
+            Quantity = quantity;
+            QuantityUnit = quantityUnit;
+            Note = note;
+            CatalogObjectId = catalogObjectId;
+            CatalogVersion = catalogVersion;
+            VariationName = variationName;
+            ItemType = itemType;
+            ReturnModifiers = returnModifiers;
+            AppliedTaxes = appliedTaxes;
+            AppliedDiscounts = appliedDiscounts;
+            BasePriceMoney = basePriceMoney;
+            VariationTotalPriceMoney = variationTotalPriceMoney;
+            GrossReturnMoney = grossReturnMoney;
+            TotalTaxMoney = totalTaxMoney;
+            TotalDiscountMoney = totalDiscountMoney;
+            TotalMoney = totalMoney;
+        }
 
         /// <summary>
         /// A unique ID for this return line-item entry.
         /// </summary>
-        [JsonProperty("uid", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("uid")]
         public string Uid { get; }
 
         /// <summary>
         /// The `uid` of the line item in the original sale order.
         /// </summary>
-        [JsonProperty("source_line_item_uid", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("source_line_item_uid")]
         public string SourceLineItemUid { get; }
 
         /// <summary>
         /// The name of the line item.
         /// </summary>
-        [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("name")]
         public string Name { get; }
 
         /// <summary>
@@ -118,25 +225,25 @@ namespace Square.Models
         /// <summary>
         /// The note of the return line item.
         /// </summary>
-        [JsonProperty("note", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("note")]
         public string Note { get; }
 
         /// <summary>
         /// The [CatalogItemVariation]($m/CatalogItemVariation) ID applied to this return line item.
         /// </summary>
-        [JsonProperty("catalog_object_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("catalog_object_id")]
         public string CatalogObjectId { get; }
 
         /// <summary>
         /// The version of the catalog object that this line item references.
         /// </summary>
-        [JsonProperty("catalog_version", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("catalog_version")]
         public long? CatalogVersion { get; }
 
         /// <summary>
         /// The name of the variation applied to this return line item.
         /// </summary>
-        [JsonProperty("variation_name", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("variation_name")]
         public string VariationName { get; }
 
         /// <summary>
@@ -148,7 +255,7 @@ namespace Square.Models
         /// <summary>
         /// The [CatalogModifier]($m/CatalogModifier)s applied to this line item.
         /// </summary>
-        [JsonProperty("return_modifiers", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("return_modifiers")]
         public IList<Models.OrderReturnLineItemModifier> ReturnModifiers { get; }
 
         /// <summary>
@@ -157,7 +264,7 @@ namespace Square.Models
         /// `OrderReturnTax` applied to the return line item. On reads, the applied amount
         /// is populated.
         /// </summary>
-        [JsonProperty("applied_taxes", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("applied_taxes")]
         public IList<Models.OrderLineItemAppliedTax> AppliedTaxes { get; }
 
         /// <summary>
@@ -166,7 +273,7 @@ namespace Square.Models
         /// `OrderReturnDiscount` applied to the return line item. On reads, the applied amount
         /// is populated.
         /// </summary>
-        [JsonProperty("applied_discounts", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("applied_discounts")]
         public IList<Models.OrderLineItemAppliedDiscount> AppliedDiscounts { get; }
 
         /// <summary>
@@ -243,6 +350,96 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"OrderReturnLineItem : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeUid()
+        {
+            return this.shouldSerialize["uid"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeSourceLineItemUid()
+        {
+            return this.shouldSerialize["source_line_item_uid"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeName()
+        {
+            return this.shouldSerialize["name"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeNote()
+        {
+            return this.shouldSerialize["note"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeCatalogObjectId()
+        {
+            return this.shouldSerialize["catalog_object_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeCatalogVersion()
+        {
+            return this.shouldSerialize["catalog_version"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeVariationName()
+        {
+            return this.shouldSerialize["variation_name"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeReturnModifiers()
+        {
+            return this.shouldSerialize["return_modifiers"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeAppliedTaxes()
+        {
+            return this.shouldSerialize["applied_taxes"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeAppliedDiscounts()
+        {
+            return this.shouldSerialize["applied_discounts"];
         }
 
         /// <inheritdoc/>
@@ -354,6 +551,20 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "uid", false },
+                { "source_line_item_uid", false },
+                { "name", false },
+                { "note", false },
+                { "catalog_object_id", false },
+                { "catalog_version", false },
+                { "variation_name", false },
+                { "return_modifiers", false },
+                { "applied_taxes", false },
+                { "applied_discounts", false },
+            };
+
             private string quantity;
             private string uid;
             private string sourceLineItemUid;
@@ -398,6 +609,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Uid(string uid)
             {
+                shouldSerialize["uid"] = true;
                 this.uid = uid;
                 return this;
             }
@@ -409,6 +621,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder SourceLineItemUid(string sourceLineItemUid)
             {
+                shouldSerialize["source_line_item_uid"] = true;
                 this.sourceLineItemUid = sourceLineItemUid;
                 return this;
             }
@@ -420,6 +633,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Name(string name)
             {
+                shouldSerialize["name"] = true;
                 this.name = name;
                 return this;
             }
@@ -442,6 +656,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Note(string note)
             {
+                shouldSerialize["note"] = true;
                 this.note = note;
                 return this;
             }
@@ -453,6 +668,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder CatalogObjectId(string catalogObjectId)
             {
+                shouldSerialize["catalog_object_id"] = true;
                 this.catalogObjectId = catalogObjectId;
                 return this;
             }
@@ -464,6 +680,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder CatalogVersion(long? catalogVersion)
             {
+                shouldSerialize["catalog_version"] = true;
                 this.catalogVersion = catalogVersion;
                 return this;
             }
@@ -475,6 +692,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder VariationName(string variationName)
             {
+                shouldSerialize["variation_name"] = true;
                 this.variationName = variationName;
                 return this;
             }
@@ -497,6 +715,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder ReturnModifiers(IList<Models.OrderReturnLineItemModifier> returnModifiers)
             {
+                shouldSerialize["return_modifiers"] = true;
                 this.returnModifiers = returnModifiers;
                 return this;
             }
@@ -508,6 +727,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder AppliedTaxes(IList<Models.OrderLineItemAppliedTax> appliedTaxes)
             {
+                shouldSerialize["applied_taxes"] = true;
                 this.appliedTaxes = appliedTaxes;
                 return this;
             }
@@ -519,6 +739,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder AppliedDiscounts(IList<Models.OrderLineItemAppliedDiscount> appliedDiscounts)
             {
+                shouldSerialize["applied_discounts"] = true;
                 this.appliedDiscounts = appliedDiscounts;
                 return this;
             }
@@ -590,12 +811,93 @@ namespace Square.Models
             }
 
             /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetUid()
+            {
+                this.shouldSerialize["uid"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetSourceLineItemUid()
+            {
+                this.shouldSerialize["source_line_item_uid"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetName()
+            {
+                this.shouldSerialize["name"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetNote()
+            {
+                this.shouldSerialize["note"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetCatalogObjectId()
+            {
+                this.shouldSerialize["catalog_object_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetCatalogVersion()
+            {
+                this.shouldSerialize["catalog_version"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetVariationName()
+            {
+                this.shouldSerialize["variation_name"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetReturnModifiers()
+            {
+                this.shouldSerialize["return_modifiers"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetAppliedTaxes()
+            {
+                this.shouldSerialize["applied_taxes"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetAppliedDiscounts()
+            {
+                this.shouldSerialize["applied_discounts"] = false;
+            }
+
+
+            /// <summary>
             /// Builds class object.
             /// </summary>
             /// <returns> OrderReturnLineItem. </returns>
             public OrderReturnLineItem Build()
             {
-                return new OrderReturnLineItem(
+                return new OrderReturnLineItem(shouldSerialize,
                     this.quantity,
                     this.uid,
                     this.sourceLineItemUid,

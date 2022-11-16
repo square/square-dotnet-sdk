@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class CatalogModifierOverride
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="CatalogModifierOverride"/> class.
         /// </summary>
@@ -26,8 +27,26 @@ namespace Square.Models
             string modifierId,
             bool? onByDefault = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "on_by_default", false }
+            };
+
             this.ModifierId = modifierId;
-            this.OnByDefault = onByDefault;
+            if (onByDefault != null)
+            {
+                shouldSerialize["on_by_default"] = true;
+                this.OnByDefault = onByDefault;
+            }
+
+        }
+        internal CatalogModifierOverride(Dictionary<string, bool> shouldSerialize,
+            string modifierId,
+            bool? onByDefault = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            ModifierId = modifierId;
+            OnByDefault = onByDefault;
         }
 
         /// <summary>
@@ -39,7 +58,7 @@ namespace Square.Models
         /// <summary>
         /// If `true`, this `CatalogModifier` should be selected by default for this `CatalogItem`.
         /// </summary>
-        [JsonProperty("on_by_default", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("on_by_default")]
         public bool? OnByDefault { get; }
 
         /// <inheritdoc/>
@@ -50,6 +69,15 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"CatalogModifierOverride : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeOnByDefault()
+        {
+            return this.shouldSerialize["on_by_default"];
         }
 
         /// <inheritdoc/>
@@ -106,6 +134,11 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "on_by_default", false },
+            };
+
             private string modifierId;
             private bool? onByDefault;
 
@@ -133,9 +166,19 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder OnByDefault(bool? onByDefault)
             {
+                shouldSerialize["on_by_default"] = true;
                 this.onByDefault = onByDefault;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetOnByDefault()
+            {
+                this.shouldSerialize["on_by_default"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -143,7 +186,7 @@ namespace Square.Models
             /// <returns> CatalogModifierOverride. </returns>
             public CatalogModifierOverride Build()
             {
-                return new CatalogModifierOverride(
+                return new CatalogModifierOverride(shouldSerialize,
                     this.modifierId,
                     this.onByDefault);
             }

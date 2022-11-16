@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class ApplicationDetails
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="ApplicationDetails"/> class.
         /// </summary>
@@ -26,8 +27,26 @@ namespace Square.Models
             string squareProduct = null,
             string applicationId = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "application_id", false }
+            };
+
             this.SquareProduct = squareProduct;
-            this.ApplicationId = applicationId;
+            if (applicationId != null)
+            {
+                shouldSerialize["application_id"] = true;
+                this.ApplicationId = applicationId;
+            }
+
+        }
+        internal ApplicationDetails(Dictionary<string, bool> shouldSerialize,
+            string squareProduct = null,
+            string applicationId = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            SquareProduct = squareProduct;
+            ApplicationId = applicationId;
         }
 
         /// <summary>
@@ -45,7 +64,7 @@ namespace Square.Models
         /// If a seller uses a [Square App Marketplace](https://developer.squareup.com/docs/app-marketplace)
         /// application to process payments, the field contains the corresponding application ID.
         /// </summary>
-        [JsonProperty("application_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("application_id")]
         public string ApplicationId { get; }
 
         /// <inheritdoc/>
@@ -56,6 +75,15 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"ApplicationDetails : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeApplicationId()
+        {
+            return this.shouldSerialize["application_id"];
         }
 
         /// <inheritdoc/>
@@ -112,6 +140,11 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "application_id", false },
+            };
+
             private string squareProduct;
             private string applicationId;
 
@@ -133,9 +166,19 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder ApplicationId(string applicationId)
             {
+                shouldSerialize["application_id"] = true;
                 this.applicationId = applicationId;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetApplicationId()
+            {
+                this.shouldSerialize["application_id"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -143,7 +186,7 @@ namespace Square.Models
             /// <returns> ApplicationDetails. </returns>
             public ApplicationDetails Build()
             {
-                return new ApplicationDetails(
+                return new ApplicationDetails(shouldSerialize,
                     this.squareProduct,
                     this.applicationId);
             }

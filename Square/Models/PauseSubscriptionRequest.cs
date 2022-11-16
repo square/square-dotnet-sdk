@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class PauseSubscriptionRequest
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="PauseSubscriptionRequest"/> class.
         /// </summary>
@@ -32,11 +33,53 @@ namespace Square.Models
             string resumeChangeTiming = null,
             string pauseReason = null)
         {
-            this.PauseEffectiveDate = pauseEffectiveDate;
-            this.PauseCycleDuration = pauseCycleDuration;
-            this.ResumeEffectiveDate = resumeEffectiveDate;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "pause_effective_date", false },
+                { "pause_cycle_duration", false },
+                { "resume_effective_date", false },
+                { "pause_reason", false }
+            };
+
+            if (pauseEffectiveDate != null)
+            {
+                shouldSerialize["pause_effective_date"] = true;
+                this.PauseEffectiveDate = pauseEffectiveDate;
+            }
+
+            if (pauseCycleDuration != null)
+            {
+                shouldSerialize["pause_cycle_duration"] = true;
+                this.PauseCycleDuration = pauseCycleDuration;
+            }
+
+            if (resumeEffectiveDate != null)
+            {
+                shouldSerialize["resume_effective_date"] = true;
+                this.ResumeEffectiveDate = resumeEffectiveDate;
+            }
+
             this.ResumeChangeTiming = resumeChangeTiming;
-            this.PauseReason = pauseReason;
+            if (pauseReason != null)
+            {
+                shouldSerialize["pause_reason"] = true;
+                this.PauseReason = pauseReason;
+            }
+
+        }
+        internal PauseSubscriptionRequest(Dictionary<string, bool> shouldSerialize,
+            string pauseEffectiveDate = null,
+            long? pauseCycleDuration = null,
+            string resumeEffectiveDate = null,
+            string resumeChangeTiming = null,
+            string pauseReason = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            PauseEffectiveDate = pauseEffectiveDate;
+            PauseCycleDuration = pauseCycleDuration;
+            ResumeEffectiveDate = resumeEffectiveDate;
+            ResumeChangeTiming = resumeChangeTiming;
+            PauseReason = pauseReason;
         }
 
         /// <summary>
@@ -44,7 +87,7 @@ namespace Square.Models
         /// When this date is unspecified or falls within the current billing cycle, the subscription is paused
         /// on the starting date of the next billing cycle.
         /// </summary>
-        [JsonProperty("pause_effective_date", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("pause_effective_date")]
         public string PauseEffectiveDate { get; }
 
         /// <summary>
@@ -53,14 +96,14 @@ namespace Square.Models
         /// the end of the specified pause cycle duration. In this case, neither `resume_effective_date`
         /// nor `resume_change_timing` may be specified.
         /// </summary>
-        [JsonProperty("pause_cycle_duration", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("pause_cycle_duration")]
         public long? PauseCycleDuration { get; }
 
         /// <summary>
         /// The date when the subscription is reactivated by a scheduled `RESUME` action.
         /// This date must be at least one billing cycle ahead of `pause_effective_date`.
         /// </summary>
-        [JsonProperty("resume_effective_date", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("resume_effective_date")]
         public string ResumeEffectiveDate { get; }
 
         /// <summary>
@@ -72,7 +115,7 @@ namespace Square.Models
         /// <summary>
         /// The user-provided reason to pause the subscription.
         /// </summary>
-        [JsonProperty("pause_reason", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("pause_reason")]
         public string PauseReason { get; }
 
         /// <inheritdoc/>
@@ -83,6 +126,42 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"PauseSubscriptionRequest : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializePauseEffectiveDate()
+        {
+            return this.shouldSerialize["pause_effective_date"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializePauseCycleDuration()
+        {
+            return this.shouldSerialize["pause_cycle_duration"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeResumeEffectiveDate()
+        {
+            return this.shouldSerialize["resume_effective_date"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializePauseReason()
+        {
+            return this.shouldSerialize["pause_reason"];
         }
 
         /// <inheritdoc/>
@@ -148,6 +227,14 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "pause_effective_date", false },
+                { "pause_cycle_duration", false },
+                { "resume_effective_date", false },
+                { "pause_reason", false },
+            };
+
             private string pauseEffectiveDate;
             private long? pauseCycleDuration;
             private string resumeEffectiveDate;
@@ -161,6 +248,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder PauseEffectiveDate(string pauseEffectiveDate)
             {
+                shouldSerialize["pause_effective_date"] = true;
                 this.pauseEffectiveDate = pauseEffectiveDate;
                 return this;
             }
@@ -172,6 +260,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder PauseCycleDuration(long? pauseCycleDuration)
             {
+                shouldSerialize["pause_cycle_duration"] = true;
                 this.pauseCycleDuration = pauseCycleDuration;
                 return this;
             }
@@ -183,6 +272,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder ResumeEffectiveDate(string resumeEffectiveDate)
             {
+                shouldSerialize["resume_effective_date"] = true;
                 this.resumeEffectiveDate = resumeEffectiveDate;
                 return this;
             }
@@ -205,9 +295,43 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder PauseReason(string pauseReason)
             {
+                shouldSerialize["pause_reason"] = true;
                 this.pauseReason = pauseReason;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetPauseEffectiveDate()
+            {
+                this.shouldSerialize["pause_effective_date"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetPauseCycleDuration()
+            {
+                this.shouldSerialize["pause_cycle_duration"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetResumeEffectiveDate()
+            {
+                this.shouldSerialize["resume_effective_date"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetPauseReason()
+            {
+                this.shouldSerialize["pause_reason"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -215,7 +339,7 @@ namespace Square.Models
             /// <returns> PauseSubscriptionRequest. </returns>
             public PauseSubscriptionRequest Build()
             {
-                return new PauseSubscriptionRequest(
+                return new PauseSubscriptionRequest(shouldSerialize,
                     this.pauseEffectiveDate,
                     this.pauseCycleDuration,
                     this.resumeEffectiveDate,

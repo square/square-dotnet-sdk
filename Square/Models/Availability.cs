@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class Availability
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="Availability"/> class.
         /// </summary>
@@ -28,15 +29,41 @@ namespace Square.Models
             string locationId = null,
             IList<Models.AppointmentSegment> appointmentSegments = null)
         {
-            this.StartAt = startAt;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "start_at", false },
+                { "appointment_segments", false }
+            };
+
+            if (startAt != null)
+            {
+                shouldSerialize["start_at"] = true;
+                this.StartAt = startAt;
+            }
+
             this.LocationId = locationId;
-            this.AppointmentSegments = appointmentSegments;
+            if (appointmentSegments != null)
+            {
+                shouldSerialize["appointment_segments"] = true;
+                this.AppointmentSegments = appointmentSegments;
+            }
+
+        }
+        internal Availability(Dictionary<string, bool> shouldSerialize,
+            string startAt = null,
+            string locationId = null,
+            IList<Models.AppointmentSegment> appointmentSegments = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            StartAt = startAt;
+            LocationId = locationId;
+            AppointmentSegments = appointmentSegments;
         }
 
         /// <summary>
         /// The RFC 3339 timestamp specifying the beginning time of the slot available for booking.
         /// </summary>
-        [JsonProperty("start_at", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("start_at")]
         public string StartAt { get; }
 
         /// <summary>
@@ -48,7 +75,7 @@ namespace Square.Models
         /// <summary>
         /// The list of appointment segments available for booking
         /// </summary>
-        [JsonProperty("appointment_segments", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("appointment_segments")]
         public IList<Models.AppointmentSegment> AppointmentSegments { get; }
 
         /// <inheritdoc/>
@@ -59,6 +86,24 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"Availability : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeStartAt()
+        {
+            return this.shouldSerialize["start_at"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeAppointmentSegments()
+        {
+            return this.shouldSerialize["appointment_segments"];
         }
 
         /// <inheritdoc/>
@@ -118,6 +163,12 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "start_at", false },
+                { "appointment_segments", false },
+            };
+
             private string startAt;
             private string locationId;
             private IList<Models.AppointmentSegment> appointmentSegments;
@@ -129,6 +180,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder StartAt(string startAt)
             {
+                shouldSerialize["start_at"] = true;
                 this.startAt = startAt;
                 return this;
             }
@@ -151,9 +203,27 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder AppointmentSegments(IList<Models.AppointmentSegment> appointmentSegments)
             {
+                shouldSerialize["appointment_segments"] = true;
                 this.appointmentSegments = appointmentSegments;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetStartAt()
+            {
+                this.shouldSerialize["start_at"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetAppointmentSegments()
+            {
+                this.shouldSerialize["appointment_segments"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -161,7 +231,7 @@ namespace Square.Models
             /// <returns> Availability. </returns>
             public Availability Build()
             {
-                return new Availability(
+                return new Availability(shouldSerialize,
                     this.startAt,
                     this.locationId,
                     this.appointmentSegments);

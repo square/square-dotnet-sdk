@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class PaymentBalanceActivityDepositFeeDetail
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="PaymentBalanceActivityDepositFeeDetail"/> class.
         /// </summary>
@@ -24,13 +25,29 @@ namespace Square.Models
         public PaymentBalanceActivityDepositFeeDetail(
             string payoutId = null)
         {
-            this.PayoutId = payoutId;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "payout_id", false }
+            };
+
+            if (payoutId != null)
+            {
+                shouldSerialize["payout_id"] = true;
+                this.PayoutId = payoutId;
+            }
+
+        }
+        internal PaymentBalanceActivityDepositFeeDetail(Dictionary<string, bool> shouldSerialize,
+            string payoutId = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            PayoutId = payoutId;
         }
 
         /// <summary>
         /// The ID of the payout that triggered this deposit fee activity.
         /// </summary>
-        [JsonProperty("payout_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("payout_id")]
         public string PayoutId { get; }
 
         /// <inheritdoc/>
@@ -41,6 +58,15 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"PaymentBalanceActivityDepositFeeDetail : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializePayoutId()
+        {
+            return this.shouldSerialize["payout_id"];
         }
 
         /// <inheritdoc/>
@@ -94,6 +120,11 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "payout_id", false },
+            };
+
             private string payoutId;
 
              /// <summary>
@@ -103,9 +134,19 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder PayoutId(string payoutId)
             {
+                shouldSerialize["payout_id"] = true;
                 this.payoutId = payoutId;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetPayoutId()
+            {
+                this.shouldSerialize["payout_id"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -113,7 +154,7 @@ namespace Square.Models
             /// <returns> PaymentBalanceActivityDepositFeeDetail. </returns>
             public PaymentBalanceActivityDepositFeeDetail Build()
             {
-                return new PaymentBalanceActivityDepositFeeDetail(
+                return new PaymentBalanceActivityDepositFeeDetail(shouldSerialize,
                     this.payoutId);
             }
         }

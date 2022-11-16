@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class CatalogItemOptionValue
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="CatalogItemOptionValue"/> class.
         /// </summary>
@@ -32,29 +33,77 @@ namespace Square.Models
             string color = null,
             int? ordinal = null)
         {
-            this.ItemOptionId = itemOptionId;
-            this.Name = name;
-            this.Description = description;
-            this.Color = color;
-            this.Ordinal = ordinal;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "item_option_id", false },
+                { "name", false },
+                { "description", false },
+                { "color", false },
+                { "ordinal", false }
+            };
+
+            if (itemOptionId != null)
+            {
+                shouldSerialize["item_option_id"] = true;
+                this.ItemOptionId = itemOptionId;
+            }
+
+            if (name != null)
+            {
+                shouldSerialize["name"] = true;
+                this.Name = name;
+            }
+
+            if (description != null)
+            {
+                shouldSerialize["description"] = true;
+                this.Description = description;
+            }
+
+            if (color != null)
+            {
+                shouldSerialize["color"] = true;
+                this.Color = color;
+            }
+
+            if (ordinal != null)
+            {
+                shouldSerialize["ordinal"] = true;
+                this.Ordinal = ordinal;
+            }
+
+        }
+        internal CatalogItemOptionValue(Dictionary<string, bool> shouldSerialize,
+            string itemOptionId = null,
+            string name = null,
+            string description = null,
+            string color = null,
+            int? ordinal = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            ItemOptionId = itemOptionId;
+            Name = name;
+            Description = description;
+            Color = color;
+            Ordinal = ordinal;
         }
 
         /// <summary>
         /// Unique ID of the associated item option.
         /// </summary>
-        [JsonProperty("item_option_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("item_option_id")]
         public string ItemOptionId { get; }
 
         /// <summary>
         /// Name of this item option value. This is a searchable attribute for use in applicable query filters.
         /// </summary>
-        [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("name")]
         public string Name { get; }
 
         /// <summary>
         /// A human-readable description for the option value. This is a searchable attribute for use in applicable query filters.
         /// </summary>
-        [JsonProperty("description", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("description")]
         public string Description { get; }
 
         /// <summary>
@@ -63,13 +112,13 @@ namespace Square.Models
         /// left unset, `color` defaults to white ("#ffffff") when `show_colors` is
         /// enabled on the parent `ItemOption`.
         /// </summary>
-        [JsonProperty("color", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("color")]
         public string Color { get; }
 
         /// <summary>
         /// Determines where this option value appears in a list of option values.
         /// </summary>
-        [JsonProperty("ordinal", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("ordinal")]
         public int? Ordinal { get; }
 
         /// <inheritdoc/>
@@ -80,6 +129,51 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"CatalogItemOptionValue : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeItemOptionId()
+        {
+            return this.shouldSerialize["item_option_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeName()
+        {
+            return this.shouldSerialize["name"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeDescription()
+        {
+            return this.shouldSerialize["description"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeColor()
+        {
+            return this.shouldSerialize["color"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeOrdinal()
+        {
+            return this.shouldSerialize["ordinal"];
         }
 
         /// <inheritdoc/>
@@ -145,6 +239,15 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "item_option_id", false },
+                { "name", false },
+                { "description", false },
+                { "color", false },
+                { "ordinal", false },
+            };
+
             private string itemOptionId;
             private string name;
             private string description;
@@ -158,6 +261,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder ItemOptionId(string itemOptionId)
             {
+                shouldSerialize["item_option_id"] = true;
                 this.itemOptionId = itemOptionId;
                 return this;
             }
@@ -169,6 +273,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Name(string name)
             {
+                shouldSerialize["name"] = true;
                 this.name = name;
                 return this;
             }
@@ -180,6 +285,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Description(string description)
             {
+                shouldSerialize["description"] = true;
                 this.description = description;
                 return this;
             }
@@ -191,6 +297,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Color(string color)
             {
+                shouldSerialize["color"] = true;
                 this.color = color;
                 return this;
             }
@@ -202,9 +309,51 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Ordinal(int? ordinal)
             {
+                shouldSerialize["ordinal"] = true;
                 this.ordinal = ordinal;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetItemOptionId()
+            {
+                this.shouldSerialize["item_option_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetName()
+            {
+                this.shouldSerialize["name"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetDescription()
+            {
+                this.shouldSerialize["description"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetColor()
+            {
+                this.shouldSerialize["color"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetOrdinal()
+            {
+                this.shouldSerialize["ordinal"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -212,7 +361,7 @@ namespace Square.Models
             /// <returns> CatalogItemOptionValue. </returns>
             public CatalogItemOptionValue Build()
             {
-                return new CatalogItemOptionValue(
+                return new CatalogItemOptionValue(shouldSerialize,
                     this.itemOptionId,
                     this.name,
                     this.description,

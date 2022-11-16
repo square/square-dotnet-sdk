@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class DateRange
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="DateRange"/> class.
         /// </summary>
@@ -26,8 +27,32 @@ namespace Square.Models
             string startDate = null,
             string endDate = null)
         {
-            this.StartDate = startDate;
-            this.EndDate = endDate;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "start_date", false },
+                { "end_date", false }
+            };
+
+            if (startDate != null)
+            {
+                shouldSerialize["start_date"] = true;
+                this.StartDate = startDate;
+            }
+
+            if (endDate != null)
+            {
+                shouldSerialize["end_date"] = true;
+                this.EndDate = endDate;
+            }
+
+        }
+        internal DateRange(Dictionary<string, bool> shouldSerialize,
+            string startDate = null,
+            string endDate = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            StartDate = startDate;
+            EndDate = endDate;
         }
 
         /// <summary>
@@ -35,7 +60,7 @@ namespace Square.Models
         /// extended format for calendar dates.
         /// The beginning of a date range (inclusive).
         /// </summary>
-        [JsonProperty("start_date", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("start_date")]
         public string StartDate { get; }
 
         /// <summary>
@@ -43,7 +68,7 @@ namespace Square.Models
         /// extended format for calendar dates.
         /// The end of a date range (inclusive).
         /// </summary>
-        [JsonProperty("end_date", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("end_date")]
         public string EndDate { get; }
 
         /// <inheritdoc/>
@@ -54,6 +79,24 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"DateRange : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeStartDate()
+        {
+            return this.shouldSerialize["start_date"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeEndDate()
+        {
+            return this.shouldSerialize["end_date"];
         }
 
         /// <inheritdoc/>
@@ -110,6 +153,12 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "start_date", false },
+                { "end_date", false },
+            };
+
             private string startDate;
             private string endDate;
 
@@ -120,6 +169,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder StartDate(string startDate)
             {
+                shouldSerialize["start_date"] = true;
                 this.startDate = startDate;
                 return this;
             }
@@ -131,9 +181,27 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder EndDate(string endDate)
             {
+                shouldSerialize["end_date"] = true;
                 this.endDate = endDate;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetStartDate()
+            {
+                this.shouldSerialize["start_date"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetEndDate()
+            {
+                this.shouldSerialize["end_date"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -141,7 +209,7 @@ namespace Square.Models
             /// <returns> DateRange. </returns>
             public DateRange Build()
             {
-                return new DateRange(
+                return new DateRange(shouldSerialize,
                     this.startDate,
                     this.endDate);
             }

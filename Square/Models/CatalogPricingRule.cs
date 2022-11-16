@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class CatalogPricingRule
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="CatalogPricingRule"/> class.
         /// </summary>
@@ -48,26 +49,126 @@ namespace Square.Models
             Models.Money minimumOrderSubtotalMoney = null,
             IList<string> customerGroupIdsAny = null)
         {
-            this.Name = name;
-            this.TimePeriodIds = timePeriodIds;
-            this.DiscountId = discountId;
-            this.MatchProductsId = matchProductsId;
-            this.ApplyProductsId = applyProductsId;
-            this.ExcludeProductsId = excludeProductsId;
-            this.ValidFromDate = validFromDate;
-            this.ValidFromLocalTime = validFromLocalTime;
-            this.ValidUntilDate = validUntilDate;
-            this.ValidUntilLocalTime = validUntilLocalTime;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "name", false },
+                { "time_period_ids", false },
+                { "discount_id", false },
+                { "match_products_id", false },
+                { "apply_products_id", false },
+                { "exclude_products_id", false },
+                { "valid_from_date", false },
+                { "valid_from_local_time", false },
+                { "valid_until_date", false },
+                { "valid_until_local_time", false },
+                { "customer_group_ids_any", false }
+            };
+
+            if (name != null)
+            {
+                shouldSerialize["name"] = true;
+                this.Name = name;
+            }
+
+            if (timePeriodIds != null)
+            {
+                shouldSerialize["time_period_ids"] = true;
+                this.TimePeriodIds = timePeriodIds;
+            }
+
+            if (discountId != null)
+            {
+                shouldSerialize["discount_id"] = true;
+                this.DiscountId = discountId;
+            }
+
+            if (matchProductsId != null)
+            {
+                shouldSerialize["match_products_id"] = true;
+                this.MatchProductsId = matchProductsId;
+            }
+
+            if (applyProductsId != null)
+            {
+                shouldSerialize["apply_products_id"] = true;
+                this.ApplyProductsId = applyProductsId;
+            }
+
+            if (excludeProductsId != null)
+            {
+                shouldSerialize["exclude_products_id"] = true;
+                this.ExcludeProductsId = excludeProductsId;
+            }
+
+            if (validFromDate != null)
+            {
+                shouldSerialize["valid_from_date"] = true;
+                this.ValidFromDate = validFromDate;
+            }
+
+            if (validFromLocalTime != null)
+            {
+                shouldSerialize["valid_from_local_time"] = true;
+                this.ValidFromLocalTime = validFromLocalTime;
+            }
+
+            if (validUntilDate != null)
+            {
+                shouldSerialize["valid_until_date"] = true;
+                this.ValidUntilDate = validUntilDate;
+            }
+
+            if (validUntilLocalTime != null)
+            {
+                shouldSerialize["valid_until_local_time"] = true;
+                this.ValidUntilLocalTime = validUntilLocalTime;
+            }
+
             this.ExcludeStrategy = excludeStrategy;
             this.MinimumOrderSubtotalMoney = minimumOrderSubtotalMoney;
-            this.CustomerGroupIdsAny = customerGroupIdsAny;
+            if (customerGroupIdsAny != null)
+            {
+                shouldSerialize["customer_group_ids_any"] = true;
+                this.CustomerGroupIdsAny = customerGroupIdsAny;
+            }
+
+        }
+        internal CatalogPricingRule(Dictionary<string, bool> shouldSerialize,
+            string name = null,
+            IList<string> timePeriodIds = null,
+            string discountId = null,
+            string matchProductsId = null,
+            string applyProductsId = null,
+            string excludeProductsId = null,
+            string validFromDate = null,
+            string validFromLocalTime = null,
+            string validUntilDate = null,
+            string validUntilLocalTime = null,
+            string excludeStrategy = null,
+            Models.Money minimumOrderSubtotalMoney = null,
+            IList<string> customerGroupIdsAny = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Name = name;
+            TimePeriodIds = timePeriodIds;
+            DiscountId = discountId;
+            MatchProductsId = matchProductsId;
+            ApplyProductsId = applyProductsId;
+            ExcludeProductsId = excludeProductsId;
+            ValidFromDate = validFromDate;
+            ValidFromLocalTime = validFromLocalTime;
+            ValidUntilDate = validUntilDate;
+            ValidUntilLocalTime = validUntilLocalTime;
+            ExcludeStrategy = excludeStrategy;
+            MinimumOrderSubtotalMoney = minimumOrderSubtotalMoney;
+            CustomerGroupIdsAny = customerGroupIdsAny;
         }
 
         /// <summary>
         /// User-defined name for the pricing rule. For example, "Buy one get one
         /// free" or "10% off".
         /// </summary>
-        [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("name")]
         public string Name { get; }
 
         /// <summary>
@@ -75,21 +176,21 @@ namespace Square.Models
         /// this pricing rule is in effect. If left unset, the pricing rule is always
         /// in effect.
         /// </summary>
-        [JsonProperty("time_period_ids", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("time_period_ids")]
         public IList<string> TimePeriodIds { get; }
 
         /// <summary>
         /// Unique ID for the `CatalogDiscount` to take off
         /// the price of all matched items.
         /// </summary>
-        [JsonProperty("discount_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("discount_id")]
         public string DiscountId { get; }
 
         /// <summary>
         /// Unique ID for the `CatalogProductSet` that will be matched by this rule. A match rule
         /// matches within the entire cart, and can match multiple times. This field will always be set.
         /// </summary>
-        [JsonProperty("match_products_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("match_products_id")]
         public string MatchProductsId { get; }
 
         /// <summary>
@@ -102,7 +203,7 @@ namespace Square.Models
         /// If not supplied, the pricing will be applied to all products in the match set.
         /// Other products retain their base price, or a price generated by other rules.
         /// </summary>
-        [JsonProperty("apply_products_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("apply_products_id")]
         public string ApplyProductsId { get; }
 
         /// <summary>
@@ -112,33 +213,33 @@ namespace Square.Models
         /// If not supplied, the pricing will be applied to all products in the match set.
         /// Other products retain their base price, or a price generated by other rules.
         /// </summary>
-        [JsonProperty("exclude_products_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("exclude_products_id")]
         public string ExcludeProductsId { get; }
 
         /// <summary>
         /// Represents the date the Pricing Rule is valid from. Represented in RFC 3339 full-date format (YYYY-MM-DD).
         /// </summary>
-        [JsonProperty("valid_from_date", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("valid_from_date")]
         public string ValidFromDate { get; }
 
         /// <summary>
         /// Represents the local time the pricing rule should be valid from. Represented in RFC 3339 partial-time format
         /// (HH:MM:SS). Partial seconds will be truncated.
         /// </summary>
-        [JsonProperty("valid_from_local_time", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("valid_from_local_time")]
         public string ValidFromLocalTime { get; }
 
         /// <summary>
         /// Represents the date the Pricing Rule is valid until. Represented in RFC 3339 full-date format (YYYY-MM-DD).
         /// </summary>
-        [JsonProperty("valid_until_date", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("valid_until_date")]
         public string ValidUntilDate { get; }
 
         /// <summary>
         /// Represents the local time the pricing rule should be valid until. Represented in RFC 3339 partial-time format
         /// (HH:MM:SS). Partial seconds will be truncated.
         /// </summary>
-        [JsonProperty("valid_until_local_time", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("valid_until_local_time")]
         public string ValidUntilLocalTime { get; }
 
         /// <summary>
@@ -166,7 +267,7 @@ namespace Square.Models
         /// has a customer profile created or not. If this `customer_group_ids_any` field is set, the specified discount
         /// applies only to matched products sold to customers belonging to the specified customer groups.
         /// </summary>
-        [JsonProperty("customer_group_ids_any", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("customer_group_ids_any")]
         public IList<string> CustomerGroupIdsAny { get; }
 
         /// <inheritdoc/>
@@ -177,6 +278,105 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"CatalogPricingRule : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeName()
+        {
+            return this.shouldSerialize["name"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeTimePeriodIds()
+        {
+            return this.shouldSerialize["time_period_ids"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeDiscountId()
+        {
+            return this.shouldSerialize["discount_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeMatchProductsId()
+        {
+            return this.shouldSerialize["match_products_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeApplyProductsId()
+        {
+            return this.shouldSerialize["apply_products_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeExcludeProductsId()
+        {
+            return this.shouldSerialize["exclude_products_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeValidFromDate()
+        {
+            return this.shouldSerialize["valid_from_date"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeValidFromLocalTime()
+        {
+            return this.shouldSerialize["valid_from_local_time"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeValidUntilDate()
+        {
+            return this.shouldSerialize["valid_until_date"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeValidUntilLocalTime()
+        {
+            return this.shouldSerialize["valid_until_local_time"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeCustomerGroupIdsAny()
+        {
+            return this.shouldSerialize["customer_group_ids_any"];
         }
 
         /// <inheritdoc/>
@@ -268,6 +468,21 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "name", false },
+                { "time_period_ids", false },
+                { "discount_id", false },
+                { "match_products_id", false },
+                { "apply_products_id", false },
+                { "exclude_products_id", false },
+                { "valid_from_date", false },
+                { "valid_from_local_time", false },
+                { "valid_until_date", false },
+                { "valid_until_local_time", false },
+                { "customer_group_ids_any", false },
+            };
+
             private string name;
             private IList<string> timePeriodIds;
             private string discountId;
@@ -289,6 +504,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Name(string name)
             {
+                shouldSerialize["name"] = true;
                 this.name = name;
                 return this;
             }
@@ -300,6 +516,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder TimePeriodIds(IList<string> timePeriodIds)
             {
+                shouldSerialize["time_period_ids"] = true;
                 this.timePeriodIds = timePeriodIds;
                 return this;
             }
@@ -311,6 +528,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder DiscountId(string discountId)
             {
+                shouldSerialize["discount_id"] = true;
                 this.discountId = discountId;
                 return this;
             }
@@ -322,6 +540,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder MatchProductsId(string matchProductsId)
             {
+                shouldSerialize["match_products_id"] = true;
                 this.matchProductsId = matchProductsId;
                 return this;
             }
@@ -333,6 +552,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder ApplyProductsId(string applyProductsId)
             {
+                shouldSerialize["apply_products_id"] = true;
                 this.applyProductsId = applyProductsId;
                 return this;
             }
@@ -344,6 +564,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder ExcludeProductsId(string excludeProductsId)
             {
+                shouldSerialize["exclude_products_id"] = true;
                 this.excludeProductsId = excludeProductsId;
                 return this;
             }
@@ -355,6 +576,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder ValidFromDate(string validFromDate)
             {
+                shouldSerialize["valid_from_date"] = true;
                 this.validFromDate = validFromDate;
                 return this;
             }
@@ -366,6 +588,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder ValidFromLocalTime(string validFromLocalTime)
             {
+                shouldSerialize["valid_from_local_time"] = true;
                 this.validFromLocalTime = validFromLocalTime;
                 return this;
             }
@@ -377,6 +600,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder ValidUntilDate(string validUntilDate)
             {
+                shouldSerialize["valid_until_date"] = true;
                 this.validUntilDate = validUntilDate;
                 return this;
             }
@@ -388,6 +612,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder ValidUntilLocalTime(string validUntilLocalTime)
             {
+                shouldSerialize["valid_until_local_time"] = true;
                 this.validUntilLocalTime = validUntilLocalTime;
                 return this;
             }
@@ -421,9 +646,99 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder CustomerGroupIdsAny(IList<string> customerGroupIdsAny)
             {
+                shouldSerialize["customer_group_ids_any"] = true;
                 this.customerGroupIdsAny = customerGroupIdsAny;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetName()
+            {
+                this.shouldSerialize["name"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetTimePeriodIds()
+            {
+                this.shouldSerialize["time_period_ids"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetDiscountId()
+            {
+                this.shouldSerialize["discount_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetMatchProductsId()
+            {
+                this.shouldSerialize["match_products_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetApplyProductsId()
+            {
+                this.shouldSerialize["apply_products_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetExcludeProductsId()
+            {
+                this.shouldSerialize["exclude_products_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetValidFromDate()
+            {
+                this.shouldSerialize["valid_from_date"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetValidFromLocalTime()
+            {
+                this.shouldSerialize["valid_from_local_time"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetValidUntilDate()
+            {
+                this.shouldSerialize["valid_until_date"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetValidUntilLocalTime()
+            {
+                this.shouldSerialize["valid_until_local_time"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetCustomerGroupIdsAny()
+            {
+                this.shouldSerialize["customer_group_ids_any"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -431,7 +746,7 @@ namespace Square.Models
             /// <returns> CatalogPricingRule. </returns>
             public CatalogPricingRule Build()
             {
-                return new CatalogPricingRule(
+                return new CatalogPricingRule(shouldSerialize,
                     this.name,
                     this.timePeriodIds,
                     this.discountId,

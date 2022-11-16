@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class V1PaymentDiscount
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="V1PaymentDiscount"/> class.
         /// </summary>
@@ -28,15 +29,41 @@ namespace Square.Models
             Models.V1Money appliedMoney = null,
             string discountId = null)
         {
-            this.Name = name;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "name", false },
+                { "discount_id", false }
+            };
+
+            if (name != null)
+            {
+                shouldSerialize["name"] = true;
+                this.Name = name;
+            }
+
             this.AppliedMoney = appliedMoney;
-            this.DiscountId = discountId;
+            if (discountId != null)
+            {
+                shouldSerialize["discount_id"] = true;
+                this.DiscountId = discountId;
+            }
+
+        }
+        internal V1PaymentDiscount(Dictionary<string, bool> shouldSerialize,
+            string name = null,
+            Models.V1Money appliedMoney = null,
+            string discountId = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Name = name;
+            AppliedMoney = appliedMoney;
+            DiscountId = discountId;
         }
 
         /// <summary>
         /// The discount's name.
         /// </summary>
-        [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("name")]
         public string Name { get; }
 
         /// <summary>
@@ -48,7 +75,7 @@ namespace Square.Models
         /// <summary>
         /// The ID of the applied discount, if available. Discounts applied in older versions of Square Register might not have an ID.
         /// </summary>
-        [JsonProperty("discount_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("discount_id")]
         public string DiscountId { get; }
 
         /// <inheritdoc/>
@@ -59,6 +86,24 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"V1PaymentDiscount : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeName()
+        {
+            return this.shouldSerialize["name"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeDiscountId()
+        {
+            return this.shouldSerialize["discount_id"];
         }
 
         /// <inheritdoc/>
@@ -118,6 +163,12 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "name", false },
+                { "discount_id", false },
+            };
+
             private string name;
             private Models.V1Money appliedMoney;
             private string discountId;
@@ -129,6 +180,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Name(string name)
             {
+                shouldSerialize["name"] = true;
                 this.name = name;
                 return this;
             }
@@ -151,9 +203,27 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder DiscountId(string discountId)
             {
+                shouldSerialize["discount_id"] = true;
                 this.discountId = discountId;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetName()
+            {
+                this.shouldSerialize["name"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetDiscountId()
+            {
+                this.shouldSerialize["discount_id"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -161,7 +231,7 @@ namespace Square.Models
             /// <returns> V1PaymentDiscount. </returns>
             public V1PaymentDiscount Build()
             {
-                return new V1PaymentDiscount(
+                return new V1PaymentDiscount(shouldSerialize,
                     this.name,
                     this.appliedMoney,
                     this.discountId);

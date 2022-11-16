@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class PaymentBalanceActivityAppFeeRefundDetail
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="PaymentBalanceActivityAppFeeRefundDetail"/> class.
         /// </summary>
@@ -28,27 +29,59 @@ namespace Square.Models
             string refundId = null,
             string locationId = null)
         {
-            this.PaymentId = paymentId;
-            this.RefundId = refundId;
-            this.LocationId = locationId;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "payment_id", false },
+                { "refund_id", false },
+                { "location_id", false }
+            };
+
+            if (paymentId != null)
+            {
+                shouldSerialize["payment_id"] = true;
+                this.PaymentId = paymentId;
+            }
+
+            if (refundId != null)
+            {
+                shouldSerialize["refund_id"] = true;
+                this.RefundId = refundId;
+            }
+
+            if (locationId != null)
+            {
+                shouldSerialize["location_id"] = true;
+                this.LocationId = locationId;
+            }
+
+        }
+        internal PaymentBalanceActivityAppFeeRefundDetail(Dictionary<string, bool> shouldSerialize,
+            string paymentId = null,
+            string refundId = null,
+            string locationId = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            PaymentId = paymentId;
+            RefundId = refundId;
+            LocationId = locationId;
         }
 
         /// <summary>
         /// The ID of the payment associated with this activity.
         /// </summary>
-        [JsonProperty("payment_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("payment_id")]
         public string PaymentId { get; }
 
         /// <summary>
         /// The ID of the refund associated with this activity.
         /// </summary>
-        [JsonProperty("refund_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("refund_id")]
         public string RefundId { get; }
 
         /// <summary>
         /// The ID of the location of the merchant associated with the payment refund activity
         /// </summary>
-        [JsonProperty("location_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("location_id")]
         public string LocationId { get; }
 
         /// <inheritdoc/>
@@ -59,6 +92,33 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"PaymentBalanceActivityAppFeeRefundDetail : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializePaymentId()
+        {
+            return this.shouldSerialize["payment_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeRefundId()
+        {
+            return this.shouldSerialize["refund_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeLocationId()
+        {
+            return this.shouldSerialize["location_id"];
         }
 
         /// <inheritdoc/>
@@ -118,6 +178,13 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "payment_id", false },
+                { "refund_id", false },
+                { "location_id", false },
+            };
+
             private string paymentId;
             private string refundId;
             private string locationId;
@@ -129,6 +196,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder PaymentId(string paymentId)
             {
+                shouldSerialize["payment_id"] = true;
                 this.paymentId = paymentId;
                 return this;
             }
@@ -140,6 +208,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder RefundId(string refundId)
             {
+                shouldSerialize["refund_id"] = true;
                 this.refundId = refundId;
                 return this;
             }
@@ -151,9 +220,35 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder LocationId(string locationId)
             {
+                shouldSerialize["location_id"] = true;
                 this.locationId = locationId;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetPaymentId()
+            {
+                this.shouldSerialize["payment_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetRefundId()
+            {
+                this.shouldSerialize["refund_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetLocationId()
+            {
+                this.shouldSerialize["location_id"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -161,7 +256,7 @@ namespace Square.Models
             /// <returns> PaymentBalanceActivityAppFeeRefundDetail. </returns>
             public PaymentBalanceActivityAppFeeRefundDetail Build()
             {
-                return new PaymentBalanceActivityAppFeeRefundDetail(
+                return new PaymentBalanceActivityAppFeeRefundDetail(shouldSerialize,
                     this.paymentId,
                     this.refundId,
                     this.locationId);

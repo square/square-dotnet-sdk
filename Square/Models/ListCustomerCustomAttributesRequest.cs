@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class ListCustomerCustomAttributesRequest
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="ListCustomerCustomAttributesRequest"/> class.
         /// </summary>
@@ -28,9 +29,41 @@ namespace Square.Models
             string cursor = null,
             bool? withDefinitions = null)
         {
-            this.Limit = limit;
-            this.Cursor = cursor;
-            this.WithDefinitions = withDefinitions;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "limit", false },
+                { "cursor", false },
+                { "with_definitions", false }
+            };
+
+            if (limit != null)
+            {
+                shouldSerialize["limit"] = true;
+                this.Limit = limit;
+            }
+
+            if (cursor != null)
+            {
+                shouldSerialize["cursor"] = true;
+                this.Cursor = cursor;
+            }
+
+            if (withDefinitions != null)
+            {
+                shouldSerialize["with_definitions"] = true;
+                this.WithDefinitions = withDefinitions;
+            }
+
+        }
+        internal ListCustomerCustomAttributesRequest(Dictionary<string, bool> shouldSerialize,
+            int? limit = null,
+            string cursor = null,
+            bool? withDefinitions = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Limit = limit;
+            Cursor = cursor;
+            WithDefinitions = withDefinitions;
         }
 
         /// <summary>
@@ -38,7 +71,7 @@ namespace Square.Models
         /// The response might contain more or fewer results. The minimum value is 1 and the maximum value is 100.
         /// The default value is 20. For more information, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination).
         /// </summary>
-        [JsonProperty("limit", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("limit")]
         public int? Limit { get; }
 
         /// <summary>
@@ -46,7 +79,7 @@ namespace Square.Models
         /// Provide this cursor to retrieve the next page of results for your original request. For more
         /// information, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination).
         /// </summary>
-        [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("cursor")]
         public string Cursor { get; }
 
         /// <summary>
@@ -54,7 +87,7 @@ namespace Square.Models
         /// custom attribute. Set this parameter to `true` to get the name and description of each custom
         /// attribute, information about the data type, or other definition details. The default value is `false`.
         /// </summary>
-        [JsonProperty("with_definitions", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("with_definitions")]
         public bool? WithDefinitions { get; }
 
         /// <inheritdoc/>
@@ -65,6 +98,33 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"ListCustomerCustomAttributesRequest : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeLimit()
+        {
+            return this.shouldSerialize["limit"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeCursor()
+        {
+            return this.shouldSerialize["cursor"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeWithDefinitions()
+        {
+            return this.shouldSerialize["with_definitions"];
         }
 
         /// <inheritdoc/>
@@ -124,6 +184,13 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "limit", false },
+                { "cursor", false },
+                { "with_definitions", false },
+            };
+
             private int? limit;
             private string cursor;
             private bool? withDefinitions;
@@ -135,6 +202,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Limit(int? limit)
             {
+                shouldSerialize["limit"] = true;
                 this.limit = limit;
                 return this;
             }
@@ -146,6 +214,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Cursor(string cursor)
             {
+                shouldSerialize["cursor"] = true;
                 this.cursor = cursor;
                 return this;
             }
@@ -157,9 +226,35 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder WithDefinitions(bool? withDefinitions)
             {
+                shouldSerialize["with_definitions"] = true;
                 this.withDefinitions = withDefinitions;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetLimit()
+            {
+                this.shouldSerialize["limit"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetCursor()
+            {
+                this.shouldSerialize["cursor"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetWithDefinitions()
+            {
+                this.shouldSerialize["with_definitions"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -167,7 +262,7 @@ namespace Square.Models
             /// <returns> ListCustomerCustomAttributesRequest. </returns>
             public ListCustomerCustomAttributesRequest Build()
             {
-                return new ListCustomerCustomAttributesRequest(
+                return new ListCustomerCustomAttributesRequest(shouldSerialize,
                     this.limit,
                     this.cursor,
                     this.withDefinitions);

@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class AppointmentSegment
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="AppointmentSegment"/> class.
         /// </summary>
@@ -36,25 +37,65 @@ namespace Square.Models
             bool? anyTeamMember = null,
             IList<string> resourceIds = null)
         {
-            this.DurationMinutes = durationMinutes;
-            this.ServiceVariationId = serviceVariationId;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "duration_minutes", false },
+                { "service_variation_id", false },
+                { "service_variation_version", false }
+            };
+
+            if (durationMinutes != null)
+            {
+                shouldSerialize["duration_minutes"] = true;
+                this.DurationMinutes = durationMinutes;
+            }
+
+            if (serviceVariationId != null)
+            {
+                shouldSerialize["service_variation_id"] = true;
+                this.ServiceVariationId = serviceVariationId;
+            }
+
             this.TeamMemberId = teamMemberId;
-            this.ServiceVariationVersion = serviceVariationVersion;
+            if (serviceVariationVersion != null)
+            {
+                shouldSerialize["service_variation_version"] = true;
+                this.ServiceVariationVersion = serviceVariationVersion;
+            }
+
             this.IntermissionMinutes = intermissionMinutes;
             this.AnyTeamMember = anyTeamMember;
             this.ResourceIds = resourceIds;
+        }
+        internal AppointmentSegment(Dictionary<string, bool> shouldSerialize,
+            string teamMemberId,
+            int? durationMinutes = null,
+            string serviceVariationId = null,
+            long? serviceVariationVersion = null,
+            int? intermissionMinutes = null,
+            bool? anyTeamMember = null,
+            IList<string> resourceIds = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            DurationMinutes = durationMinutes;
+            ServiceVariationId = serviceVariationId;
+            TeamMemberId = teamMemberId;
+            ServiceVariationVersion = serviceVariationVersion;
+            IntermissionMinutes = intermissionMinutes;
+            AnyTeamMember = anyTeamMember;
+            ResourceIds = resourceIds;
         }
 
         /// <summary>
         /// The time span in minutes of an appointment segment.
         /// </summary>
-        [JsonProperty("duration_minutes", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("duration_minutes")]
         public int? DurationMinutes { get; }
 
         /// <summary>
         /// The ID of the [CatalogItemVariation]($m/CatalogItemVariation) object representing the service booked in this segment.
         /// </summary>
-        [JsonProperty("service_variation_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("service_variation_id")]
         public string ServiceVariationId { get; }
 
         /// <summary>
@@ -66,7 +107,7 @@ namespace Square.Models
         /// <summary>
         /// The current version of the item variation representing the service booked in this segment.
         /// </summary>
-        [JsonProperty("service_variation_version", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("service_variation_version")]
         public long? ServiceVariationVersion { get; }
 
         /// <summary>
@@ -95,6 +136,33 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"AppointmentSegment : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeDurationMinutes()
+        {
+            return this.shouldSerialize["duration_minutes"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeServiceVariationId()
+        {
+            return this.shouldSerialize["service_variation_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeServiceVariationVersion()
+        {
+            return this.shouldSerialize["service_variation_version"];
         }
 
         /// <inheritdoc/>
@@ -166,6 +234,13 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "duration_minutes", false },
+                { "service_variation_id", false },
+                { "service_variation_version", false },
+            };
+
             private string teamMemberId;
             private int? durationMinutes;
             private string serviceVariationId;
@@ -198,6 +273,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder DurationMinutes(int? durationMinutes)
             {
+                shouldSerialize["duration_minutes"] = true;
                 this.durationMinutes = durationMinutes;
                 return this;
             }
@@ -209,6 +285,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder ServiceVariationId(string serviceVariationId)
             {
+                shouldSerialize["service_variation_id"] = true;
                 this.serviceVariationId = serviceVariationId;
                 return this;
             }
@@ -220,6 +297,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder ServiceVariationVersion(long? serviceVariationVersion)
             {
+                shouldSerialize["service_variation_version"] = true;
                 this.serviceVariationVersion = serviceVariationVersion;
                 return this;
             }
@@ -258,12 +336,37 @@ namespace Square.Models
             }
 
             /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetDurationMinutes()
+            {
+                this.shouldSerialize["duration_minutes"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetServiceVariationId()
+            {
+                this.shouldSerialize["service_variation_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetServiceVariationVersion()
+            {
+                this.shouldSerialize["service_variation_version"] = false;
+            }
+
+
+            /// <summary>
             /// Builds class object.
             /// </summary>
             /// <returns> AppointmentSegment. </returns>
             public AppointmentSegment Build()
             {
-                return new AppointmentSegment(
+                return new AppointmentSegment(shouldSerialize,
                     this.teamMemberId,
                     this.durationMinutes,
                     this.serviceVariationId,

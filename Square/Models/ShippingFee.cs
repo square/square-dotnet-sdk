@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class ShippingFee
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="ShippingFee"/> class.
         /// </summary>
@@ -26,14 +27,32 @@ namespace Square.Models
             Models.Money charge,
             string name = null)
         {
-            this.Name = name;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "name", false }
+            };
+
+            if (name != null)
+            {
+                shouldSerialize["name"] = true;
+                this.Name = name;
+            }
+
             this.Charge = charge;
+        }
+        internal ShippingFee(Dictionary<string, bool> shouldSerialize,
+            Models.Money charge,
+            string name = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Name = name;
+            Charge = charge;
         }
 
         /// <summary>
         /// The name for the shipping fee.
         /// </summary>
-        [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("name")]
         public string Name { get; }
 
         /// <summary>
@@ -55,6 +74,15 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"ShippingFee : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeName()
+        {
+            return this.shouldSerialize["name"];
         }
 
         /// <inheritdoc/>
@@ -111,6 +139,11 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "name", false },
+            };
+
             private Models.Money charge;
             private string name;
 
@@ -138,9 +171,19 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Name(string name)
             {
+                shouldSerialize["name"] = true;
                 this.name = name;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetName()
+            {
+                this.shouldSerialize["name"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -148,7 +191,7 @@ namespace Square.Models
             /// <returns> ShippingFee. </returns>
             public ShippingFee Build()
             {
-                return new ShippingFee(
+                return new ShippingFee(shouldSerialize,
                     this.charge,
                     this.name);
             }

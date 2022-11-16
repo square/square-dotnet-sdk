@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class PaymentOptions
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="PaymentOptions"/> class.
         /// </summary>
@@ -28,16 +29,48 @@ namespace Square.Models
             string delayDuration = null,
             bool? acceptPartialAuthorization = null)
         {
-            this.Autocomplete = autocomplete;
-            this.DelayDuration = delayDuration;
-            this.AcceptPartialAuthorization = acceptPartialAuthorization;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "autocomplete", false },
+                { "delay_duration", false },
+                { "accept_partial_authorization", false }
+            };
+
+            if (autocomplete != null)
+            {
+                shouldSerialize["autocomplete"] = true;
+                this.Autocomplete = autocomplete;
+            }
+
+            if (delayDuration != null)
+            {
+                shouldSerialize["delay_duration"] = true;
+                this.DelayDuration = delayDuration;
+            }
+
+            if (acceptPartialAuthorization != null)
+            {
+                shouldSerialize["accept_partial_authorization"] = true;
+                this.AcceptPartialAuthorization = acceptPartialAuthorization;
+            }
+
+        }
+        internal PaymentOptions(Dictionary<string, bool> shouldSerialize,
+            bool? autocomplete = null,
+            string delayDuration = null,
+            bool? acceptPartialAuthorization = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Autocomplete = autocomplete;
+            DelayDuration = delayDuration;
+            AcceptPartialAuthorization = acceptPartialAuthorization;
         }
 
         /// <summary>
         /// Indicates whether the `Payment` objects created from this `TerminalCheckout` are automatically
         /// `COMPLETED` or left in an `APPROVED` state for later modification.
         /// </summary>
-        [JsonProperty("autocomplete", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("autocomplete")]
         public bool? Autocomplete { get; }
 
         /// <summary>
@@ -52,7 +85,7 @@ namespace Square.Models
         /// - Card-present payments: "PT36H" (36 hours) from the creation time.
         /// - Card-not-present payments: "P7D" (7 days) from the creation time.
         /// </summary>
-        [JsonProperty("delay_duration", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("delay_duration")]
         public string DelayDuration { get; }
 
         /// <summary>
@@ -67,7 +100,7 @@ namespace Square.Models
         /// [Take Partial Payments](https://developer.squareup.com/docs/payments-api/take-payments/card-payments/partial-payments-with-gift-cards).
         /// Default: false
         /// </summary>
-        [JsonProperty("accept_partial_authorization", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("accept_partial_authorization")]
         public bool? AcceptPartialAuthorization { get; }
 
         /// <inheritdoc/>
@@ -78,6 +111,33 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"PaymentOptions : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeAutocomplete()
+        {
+            return this.shouldSerialize["autocomplete"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeDelayDuration()
+        {
+            return this.shouldSerialize["delay_duration"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeAcceptPartialAuthorization()
+        {
+            return this.shouldSerialize["accept_partial_authorization"];
         }
 
         /// <inheritdoc/>
@@ -137,6 +197,13 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "autocomplete", false },
+                { "delay_duration", false },
+                { "accept_partial_authorization", false },
+            };
+
             private bool? autocomplete;
             private string delayDuration;
             private bool? acceptPartialAuthorization;
@@ -148,6 +215,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Autocomplete(bool? autocomplete)
             {
+                shouldSerialize["autocomplete"] = true;
                 this.autocomplete = autocomplete;
                 return this;
             }
@@ -159,6 +227,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder DelayDuration(string delayDuration)
             {
+                shouldSerialize["delay_duration"] = true;
                 this.delayDuration = delayDuration;
                 return this;
             }
@@ -170,9 +239,35 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder AcceptPartialAuthorization(bool? acceptPartialAuthorization)
             {
+                shouldSerialize["accept_partial_authorization"] = true;
                 this.acceptPartialAuthorization = acceptPartialAuthorization;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetAutocomplete()
+            {
+                this.shouldSerialize["autocomplete"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetDelayDuration()
+            {
+                this.shouldSerialize["delay_duration"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetAcceptPartialAuthorization()
+            {
+                this.shouldSerialize["accept_partial_authorization"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -180,7 +275,7 @@ namespace Square.Models
             /// <returns> PaymentOptions. </returns>
             public PaymentOptions Build()
             {
-                return new PaymentOptions(
+                return new PaymentOptions(shouldSerialize,
                     this.autocomplete,
                     this.delayDuration,
                     this.acceptPartialAuthorization);

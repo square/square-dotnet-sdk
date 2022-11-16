@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class PaymentLink
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="PaymentLink"/> class.
         /// </summary>
@@ -42,16 +43,56 @@ namespace Square.Models
             string updatedAt = null,
             string paymentNote = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "description", false },
+                { "payment_note", false }
+            };
+
             this.Id = id;
             this.Version = version;
-            this.Description = description;
+            if (description != null)
+            {
+                shouldSerialize["description"] = true;
+                this.Description = description;
+            }
+
             this.OrderId = orderId;
             this.CheckoutOptions = checkoutOptions;
             this.PrePopulatedData = prePopulatedData;
             this.Url = url;
             this.CreatedAt = createdAt;
             this.UpdatedAt = updatedAt;
-            this.PaymentNote = paymentNote;
+            if (paymentNote != null)
+            {
+                shouldSerialize["payment_note"] = true;
+                this.PaymentNote = paymentNote;
+            }
+
+        }
+        internal PaymentLink(Dictionary<string, bool> shouldSerialize,
+            int version,
+            string id = null,
+            string description = null,
+            string orderId = null,
+            Models.CheckoutOptions checkoutOptions = null,
+            Models.PrePopulatedData prePopulatedData = null,
+            string url = null,
+            string createdAt = null,
+            string updatedAt = null,
+            string paymentNote = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Id = id;
+            Version = version;
+            Description = description;
+            OrderId = orderId;
+            CheckoutOptions = checkoutOptions;
+            PrePopulatedData = prePopulatedData;
+            Url = url;
+            CreatedAt = createdAt;
+            UpdatedAt = updatedAt;
+            PaymentNote = paymentNote;
         }
 
         /// <summary>
@@ -70,7 +111,7 @@ namespace Square.Models
         /// The optional description of the `payment_link` object.
         /// It is primarily for use by your application and is not used anywhere.
         /// </summary>
-        [JsonProperty("description", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("description")]
         public string Description { get; }
 
         /// <summary>
@@ -115,7 +156,7 @@ namespace Square.Models
         /// An optional note. After Square processes the payment, this note is added to the
         /// resulting `Payment`.
         /// </summary>
-        [JsonProperty("payment_note", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("payment_note")]
         public string PaymentNote { get; }
 
         /// <inheritdoc/>
@@ -126,6 +167,24 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"PaymentLink : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeDescription()
+        {
+            return this.shouldSerialize["description"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializePaymentNote()
+        {
+            return this.shouldSerialize["payment_note"];
         }
 
         /// <inheritdoc/>
@@ -208,6 +267,12 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "description", false },
+                { "payment_note", false },
+            };
+
             private int version;
             private string id;
             private string description;
@@ -254,6 +319,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Description(string description)
             {
+                shouldSerialize["description"] = true;
                 this.description = description;
                 return this;
             }
@@ -331,9 +397,27 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder PaymentNote(string paymentNote)
             {
+                shouldSerialize["payment_note"] = true;
                 this.paymentNote = paymentNote;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetDescription()
+            {
+                this.shouldSerialize["description"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetPaymentNote()
+            {
+                this.shouldSerialize["payment_note"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -341,7 +425,7 @@ namespace Square.Models
             /// <returns> PaymentLink. </returns>
             public PaymentLink Build()
             {
-                return new PaymentLink(
+                return new PaymentLink(shouldSerialize,
                     this.version,
                     this.id,
                     this.description,

@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class SearchAvailabilityFilter
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="SearchAvailabilityFilter"/> class.
         /// </summary>
@@ -30,10 +31,44 @@ namespace Square.Models
             IList<Models.SegmentFilter> segmentFilters = null,
             string bookingId = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "location_id", false },
+                { "segment_filters", false },
+                { "booking_id", false }
+            };
+
             this.StartAtRange = startAtRange;
-            this.LocationId = locationId;
-            this.SegmentFilters = segmentFilters;
-            this.BookingId = bookingId;
+            if (locationId != null)
+            {
+                shouldSerialize["location_id"] = true;
+                this.LocationId = locationId;
+            }
+
+            if (segmentFilters != null)
+            {
+                shouldSerialize["segment_filters"] = true;
+                this.SegmentFilters = segmentFilters;
+            }
+
+            if (bookingId != null)
+            {
+                shouldSerialize["booking_id"] = true;
+                this.BookingId = bookingId;
+            }
+
+        }
+        internal SearchAvailabilityFilter(Dictionary<string, bool> shouldSerialize,
+            Models.TimeRange startAtRange,
+            string locationId = null,
+            IList<Models.SegmentFilter> segmentFilters = null,
+            string bookingId = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            StartAtRange = startAtRange;
+            LocationId = locationId;
+            SegmentFilters = segmentFilters;
+            BookingId = bookingId;
         }
 
         /// <summary>
@@ -50,7 +85,7 @@ namespace Square.Models
         /// The query expression to search for buyer-accessible availabilities with their location IDs matching the specified location ID.
         /// This query expression cannot be set if `booking_id` is set.
         /// </summary>
-        [JsonProperty("location_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("location_id")]
         public string LocationId { get; }
 
         /// <summary>
@@ -58,7 +93,7 @@ namespace Square.Models
         /// If the size of the `segment_filters` list is `n`, the search returns availabilities with `n` segments per availability.
         /// This query expression cannot be set if `booking_id` is set.
         /// </summary>
-        [JsonProperty("segment_filters", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("segment_filters")]
         public IList<Models.SegmentFilter> SegmentFilters { get; }
 
         /// <summary>
@@ -66,7 +101,7 @@ namespace Square.Models
         /// This is commonly used to reschedule an appointment.
         /// If this expression is set, the `location_id` and `segment_filters` expressions cannot be set.
         /// </summary>
-        [JsonProperty("booking_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("booking_id")]
         public string BookingId { get; }
 
         /// <inheritdoc/>
@@ -77,6 +112,33 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"SearchAvailabilityFilter : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeLocationId()
+        {
+            return this.shouldSerialize["location_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeSegmentFilters()
+        {
+            return this.shouldSerialize["segment_filters"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeBookingId()
+        {
+            return this.shouldSerialize["booking_id"];
         }
 
         /// <inheritdoc/>
@@ -139,6 +201,13 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "location_id", false },
+                { "segment_filters", false },
+                { "booking_id", false },
+            };
+
             private Models.TimeRange startAtRange;
             private string locationId;
             private IList<Models.SegmentFilter> segmentFilters;
@@ -168,6 +237,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder LocationId(string locationId)
             {
+                shouldSerialize["location_id"] = true;
                 this.locationId = locationId;
                 return this;
             }
@@ -179,6 +249,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder SegmentFilters(IList<Models.SegmentFilter> segmentFilters)
             {
+                shouldSerialize["segment_filters"] = true;
                 this.segmentFilters = segmentFilters;
                 return this;
             }
@@ -190,9 +261,35 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder BookingId(string bookingId)
             {
+                shouldSerialize["booking_id"] = true;
                 this.bookingId = bookingId;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetLocationId()
+            {
+                this.shouldSerialize["location_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetSegmentFilters()
+            {
+                this.shouldSerialize["segment_filters"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetBookingId()
+            {
+                this.shouldSerialize["booking_id"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -200,7 +297,7 @@ namespace Square.Models
             /// <returns> SearchAvailabilityFilter. </returns>
             public SearchAvailabilityFilter Build()
             {
-                return new SearchAvailabilityFilter(
+                return new SearchAvailabilityFilter(shouldSerialize,
                     this.startAtRange,
                     this.locationId,
                     this.segmentFilters,

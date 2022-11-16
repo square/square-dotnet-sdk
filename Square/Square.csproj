@@ -4,16 +4,19 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>Square</AssemblyName>
-    <Version>23.0.0.0</Version>
+    <Version>24.0.0.0</Version>
     <Authors>Square Developer Platform</Authors>
     <Owners>Square Developer Platform</Owners>
     <Product>Square</Product>
     <Copyright>Copyright ©  2019</Copyright>
-    <AssemblyVersion>23.0.0.0</AssemblyVersion>
-    <FileVersion>23.0.0.0</FileVersion>
+    <AssemblyVersion>24.0.0.0</AssemblyVersion>
+    <FileVersion>24.0.0.0</FileVersion>
     <Description>.NET client library for the Square API</Description>
     <LangVersion>7.3</LangVersion>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+    <PackageId>Square</PackageId>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -25,6 +28,8 @@
     <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
         <_Parameter1>Square.Tests</_Parameter1>
     </AssemblyAttribute>
+    <None Include="..\README.md" Pack="true" PackagePath="\"/>
+    <None Include="..\LICENSE" Pack="true" PackagePath="\"/>
   </ItemGroup>
 
 </Project>

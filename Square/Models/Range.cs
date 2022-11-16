@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class Range
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="Range"/> class.
         /// </summary>
@@ -26,22 +27,46 @@ namespace Square.Models
             string min = null,
             string max = null)
         {
-            this.Min = min;
-            this.Max = max;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "min", false },
+                { "max", false }
+            };
+
+            if (min != null)
+            {
+                shouldSerialize["min"] = true;
+                this.Min = min;
+            }
+
+            if (max != null)
+            {
+                shouldSerialize["max"] = true;
+                this.Max = max;
+            }
+
+        }
+        internal Range(Dictionary<string, bool> shouldSerialize,
+            string min = null,
+            string max = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Min = min;
+            Max = max;
         }
 
         /// <summary>
         /// The lower bound of the number range. At least one of `min` or `max` must be specified.
         /// If unspecified, the results will have no minimum value.
         /// </summary>
-        [JsonProperty("min", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("min")]
         public string Min { get; }
 
         /// <summary>
         /// The upper bound of the number range. At least one of `min` or `max` must be specified.
         /// If unspecified, the results will have no maximum value.
         /// </summary>
-        [JsonProperty("max", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("max")]
         public string Max { get; }
 
         /// <inheritdoc/>
@@ -52,6 +77,24 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"Range : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeMin()
+        {
+            return this.shouldSerialize["min"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeMax()
+        {
+            return this.shouldSerialize["max"];
         }
 
         /// <inheritdoc/>
@@ -108,6 +151,12 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "min", false },
+                { "max", false },
+            };
+
             private string min;
             private string max;
 
@@ -118,6 +167,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Min(string min)
             {
+                shouldSerialize["min"] = true;
                 this.min = min;
                 return this;
             }
@@ -129,9 +179,27 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Max(string max)
             {
+                shouldSerialize["max"] = true;
                 this.max = max;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetMin()
+            {
+                this.shouldSerialize["min"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetMax()
+            {
+                this.shouldSerialize["max"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -139,7 +207,7 @@ namespace Square.Models
             /// <returns> Range. </returns>
             public Range Build()
             {
-                return new Range(
+                return new Range(shouldSerialize,
                     this.min,
                     this.max);
             }

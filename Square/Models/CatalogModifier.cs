@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class CatalogModifier
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="CatalogModifier"/> class.
         /// </summary>
@@ -24,25 +25,67 @@ namespace Square.Models
         /// <param name="priceMoney">price_money.</param>
         /// <param name="ordinal">ordinal.</param>
         /// <param name="modifierListId">modifier_list_id.</param>
-        /// <param name="imageIds">image_ids.</param>
+        /// <param name="imageId">image_id.</param>
         public CatalogModifier(
             string name = null,
             Models.Money priceMoney = null,
             int? ordinal = null,
             string modifierListId = null,
-            IList<string> imageIds = null)
+            string imageId = null)
         {
-            this.Name = name;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "name", false },
+                { "ordinal", false },
+                { "modifier_list_id", false },
+                { "image_id", false }
+            };
+
+            if (name != null)
+            {
+                shouldSerialize["name"] = true;
+                this.Name = name;
+            }
+
             this.PriceMoney = priceMoney;
-            this.Ordinal = ordinal;
-            this.ModifierListId = modifierListId;
-            this.ImageIds = imageIds;
+            if (ordinal != null)
+            {
+                shouldSerialize["ordinal"] = true;
+                this.Ordinal = ordinal;
+            }
+
+            if (modifierListId != null)
+            {
+                shouldSerialize["modifier_list_id"] = true;
+                this.ModifierListId = modifierListId;
+            }
+
+            if (imageId != null)
+            {
+                shouldSerialize["image_id"] = true;
+                this.ImageId = imageId;
+            }
+
+        }
+        internal CatalogModifier(Dictionary<string, bool> shouldSerialize,
+            string name = null,
+            Models.Money priceMoney = null,
+            int? ordinal = null,
+            string modifierListId = null,
+            string imageId = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Name = name;
+            PriceMoney = priceMoney;
+            Ordinal = ordinal;
+            ModifierListId = modifierListId;
+            ImageId = imageId;
         }
 
         /// <summary>
         /// The modifier name.  This is a searchable attribute for use in applicable query filters, and its value length is of Unicode code points.
         /// </summary>
-        [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("name")]
         public string Name { get; }
 
         /// <summary>
@@ -59,21 +102,21 @@ namespace Square.Models
         /// <summary>
         /// Determines where this `CatalogModifier` appears in the `CatalogModifierList`.
         /// </summary>
-        [JsonProperty("ordinal", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("ordinal")]
         public int? Ordinal { get; }
 
         /// <summary>
         /// The ID of the `CatalogModifierList` associated with this modifier.
         /// </summary>
-        [JsonProperty("modifier_list_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("modifier_list_id")]
         public string ModifierListId { get; }
 
         /// <summary>
-        /// The IDs of images associated with this `CatalogModifier` instance.
-        /// Currently these images are not displayed by Square, but are free to be displayed in 3rd party applications.
+        /// The ID of the image associated with this `CatalogModifier` instance.
+        /// Currently this image is not displayed by Square, but is free to be displayed in 3rd party applications.
         /// </summary>
-        [JsonProperty("image_ids", NullValueHandling = NullValueHandling.Ignore)]
-        public IList<string> ImageIds { get; }
+        [JsonProperty("image_id")]
+        public string ImageId { get; }
 
         /// <inheritdoc/>
         public override string ToString()
@@ -83,6 +126,42 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"CatalogModifier : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeName()
+        {
+            return this.shouldSerialize["name"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeOrdinal()
+        {
+            return this.shouldSerialize["ordinal"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeModifierListId()
+        {
+            return this.shouldSerialize["modifier_list_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeImageId()
+        {
+            return this.shouldSerialize["image_id"];
         }
 
         /// <inheritdoc/>
@@ -103,14 +182,14 @@ namespace Square.Models
                 ((this.PriceMoney == null && other.PriceMoney == null) || (this.PriceMoney?.Equals(other.PriceMoney) == true)) &&
                 ((this.Ordinal == null && other.Ordinal == null) || (this.Ordinal?.Equals(other.Ordinal) == true)) &&
                 ((this.ModifierListId == null && other.ModifierListId == null) || (this.ModifierListId?.Equals(other.ModifierListId) == true)) &&
-                ((this.ImageIds == null && other.ImageIds == null) || (this.ImageIds?.Equals(other.ImageIds) == true));
+                ((this.ImageId == null && other.ImageId == null) || (this.ImageId?.Equals(other.ImageId) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -255597588;
-            hashCode = HashCode.Combine(this.Name, this.PriceMoney, this.Ordinal, this.ModifierListId, this.ImageIds);
+            int hashCode = 837348306;
+            hashCode = HashCode.Combine(this.Name, this.PriceMoney, this.Ordinal, this.ModifierListId, this.ImageId);
 
             return hashCode;
         }
@@ -125,7 +204,7 @@ namespace Square.Models
             toStringOutput.Add($"this.PriceMoney = {(this.PriceMoney == null ? "null" : this.PriceMoney.ToString())}");
             toStringOutput.Add($"this.Ordinal = {(this.Ordinal == null ? "null" : this.Ordinal.ToString())}");
             toStringOutput.Add($"this.ModifierListId = {(this.ModifierListId == null ? "null" : this.ModifierListId == string.Empty ? "" : this.ModifierListId)}");
-            toStringOutput.Add($"this.ImageIds = {(this.ImageIds == null ? "null" : $"[{string.Join(", ", this.ImageIds)} ]")}");
+            toStringOutput.Add($"this.ImageId = {(this.ImageId == null ? "null" : this.ImageId == string.Empty ? "" : this.ImageId)}");
         }
 
         /// <summary>
@@ -139,7 +218,7 @@ namespace Square.Models
                 .PriceMoney(this.PriceMoney)
                 .Ordinal(this.Ordinal)
                 .ModifierListId(this.ModifierListId)
-                .ImageIds(this.ImageIds);
+                .ImageId(this.ImageId);
             return builder;
         }
 
@@ -148,11 +227,19 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "name", false },
+                { "ordinal", false },
+                { "modifier_list_id", false },
+                { "image_id", false },
+            };
+
             private string name;
             private Models.Money priceMoney;
             private int? ordinal;
             private string modifierListId;
-            private IList<string> imageIds;
+            private string imageId;
 
              /// <summary>
              /// Name.
@@ -161,6 +248,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Name(string name)
             {
+                shouldSerialize["name"] = true;
                 this.name = name;
                 return this;
             }
@@ -183,6 +271,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Ordinal(int? ordinal)
             {
+                shouldSerialize["ordinal"] = true;
                 this.ordinal = ordinal;
                 return this;
             }
@@ -194,20 +283,55 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder ModifierListId(string modifierListId)
             {
+                shouldSerialize["modifier_list_id"] = true;
                 this.modifierListId = modifierListId;
                 return this;
             }
 
              /// <summary>
-             /// ImageIds.
+             /// ImageId.
              /// </summary>
-             /// <param name="imageIds"> imageIds. </param>
+             /// <param name="imageId"> imageId. </param>
              /// <returns> Builder. </returns>
-            public Builder ImageIds(IList<string> imageIds)
+            public Builder ImageId(string imageId)
             {
-                this.imageIds = imageIds;
+                shouldSerialize["image_id"] = true;
+                this.imageId = imageId;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetName()
+            {
+                this.shouldSerialize["name"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetOrdinal()
+            {
+                this.shouldSerialize["ordinal"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetModifierListId()
+            {
+                this.shouldSerialize["modifier_list_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetImageId()
+            {
+                this.shouldSerialize["image_id"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -215,12 +339,12 @@ namespace Square.Models
             /// <returns> CatalogModifier. </returns>
             public CatalogModifier Build()
             {
-                return new CatalogModifier(
+                return new CatalogModifier(shouldSerialize,
                     this.name,
                     this.priceMoney,
                     this.ordinal,
                     this.modifierListId,
-                    this.imageIds);
+                    this.imageId);
             }
         }
     }

@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class SourceApplication
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="SourceApplication"/> class.
         /// </summary>
@@ -28,9 +29,35 @@ namespace Square.Models
             string applicationId = null,
             string name = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "application_id", false },
+                { "name", false }
+            };
+
             this.Product = product;
-            this.ApplicationId = applicationId;
-            this.Name = name;
+            if (applicationId != null)
+            {
+                shouldSerialize["application_id"] = true;
+                this.ApplicationId = applicationId;
+            }
+
+            if (name != null)
+            {
+                shouldSerialize["name"] = true;
+                this.Name = name;
+            }
+
+        }
+        internal SourceApplication(Dictionary<string, bool> shouldSerialize,
+            string product = null,
+            string applicationId = null,
+            string name = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Product = product;
+            ApplicationId = applicationId;
+            Name = name;
         }
 
         /// <summary>
@@ -43,14 +70,14 @@ namespace Square.Models
         /// __Read only__ The Square-assigned ID of the application. This field is used only if the
         /// [product]($m/Product) type is `EXTERNAL_API`.
         /// </summary>
-        [JsonProperty("application_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("application_id")]
         public string ApplicationId { get; }
 
         /// <summary>
         /// __Read only__ The display name of the application
         /// (for example, `"Custom Application"` or `"Square POS 4.74 for Android"`).
         /// </summary>
-        [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("name")]
         public string Name { get; }
 
         /// <inheritdoc/>
@@ -61,6 +88,24 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"SourceApplication : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeApplicationId()
+        {
+            return this.shouldSerialize["application_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeName()
+        {
+            return this.shouldSerialize["name"];
         }
 
         /// <inheritdoc/>
@@ -120,6 +165,12 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "application_id", false },
+                { "name", false },
+            };
+
             private string product;
             private string applicationId;
             private string name;
@@ -142,6 +193,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder ApplicationId(string applicationId)
             {
+                shouldSerialize["application_id"] = true;
                 this.applicationId = applicationId;
                 return this;
             }
@@ -153,9 +205,27 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Name(string name)
             {
+                shouldSerialize["name"] = true;
                 this.name = name;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetApplicationId()
+            {
+                this.shouldSerialize["application_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetName()
+            {
+                this.shouldSerialize["name"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -163,7 +233,7 @@ namespace Square.Models
             /// <returns> SourceApplication. </returns>
             public SourceApplication Build()
             {
-                return new SourceApplication(
+                return new SourceApplication(shouldSerialize,
                     this.product,
                     this.applicationId,
                     this.name);

@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class CheckoutOptions
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="CheckoutOptions"/> class.
         /// </summary>
@@ -40,52 +41,114 @@ namespace Square.Models
             Models.Money appFeeMoney = null,
             Models.ShippingFee shippingFee = null)
         {
-            this.AllowTipping = allowTipping;
-            this.CustomFields = customFields;
-            this.SubscriptionPlanId = subscriptionPlanId;
-            this.RedirectUrl = redirectUrl;
-            this.MerchantSupportEmail = merchantSupportEmail;
-            this.AskForShippingAddress = askForShippingAddress;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "allow_tipping", false },
+                { "custom_fields", false },
+                { "subscription_plan_id", false },
+                { "redirect_url", false },
+                { "merchant_support_email", false },
+                { "ask_for_shipping_address", false }
+            };
+
+            if (allowTipping != null)
+            {
+                shouldSerialize["allow_tipping"] = true;
+                this.AllowTipping = allowTipping;
+            }
+
+            if (customFields != null)
+            {
+                shouldSerialize["custom_fields"] = true;
+                this.CustomFields = customFields;
+            }
+
+            if (subscriptionPlanId != null)
+            {
+                shouldSerialize["subscription_plan_id"] = true;
+                this.SubscriptionPlanId = subscriptionPlanId;
+            }
+
+            if (redirectUrl != null)
+            {
+                shouldSerialize["redirect_url"] = true;
+                this.RedirectUrl = redirectUrl;
+            }
+
+            if (merchantSupportEmail != null)
+            {
+                shouldSerialize["merchant_support_email"] = true;
+                this.MerchantSupportEmail = merchantSupportEmail;
+            }
+
+            if (askForShippingAddress != null)
+            {
+                shouldSerialize["ask_for_shipping_address"] = true;
+                this.AskForShippingAddress = askForShippingAddress;
+            }
+
             this.AcceptedPaymentMethods = acceptedPaymentMethods;
             this.AppFeeMoney = appFeeMoney;
             this.ShippingFee = shippingFee;
+        }
+        internal CheckoutOptions(Dictionary<string, bool> shouldSerialize,
+            bool? allowTipping = null,
+            IList<Models.CustomField> customFields = null,
+            string subscriptionPlanId = null,
+            string redirectUrl = null,
+            string merchantSupportEmail = null,
+            bool? askForShippingAddress = null,
+            Models.AcceptedPaymentMethods acceptedPaymentMethods = null,
+            Models.Money appFeeMoney = null,
+            Models.ShippingFee shippingFee = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            AllowTipping = allowTipping;
+            CustomFields = customFields;
+            SubscriptionPlanId = subscriptionPlanId;
+            RedirectUrl = redirectUrl;
+            MerchantSupportEmail = merchantSupportEmail;
+            AskForShippingAddress = askForShippingAddress;
+            AcceptedPaymentMethods = acceptedPaymentMethods;
+            AppFeeMoney = appFeeMoney;
+            ShippingFee = shippingFee;
         }
 
         /// <summary>
         /// Indicates whether the payment allows tipping.
         /// </summary>
-        [JsonProperty("allow_tipping", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("allow_tipping")]
         public bool? AllowTipping { get; }
 
         /// <summary>
         /// The custom fields requesting information from the buyer.
         /// </summary>
-        [JsonProperty("custom_fields", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("custom_fields")]
         public IList<Models.CustomField> CustomFields { get; }
 
         /// <summary>
         /// The ID of the subscription plan for the buyer to pay and subscribe.
         /// For more information, see [Subscription Plan Checkout](https://developer.squareup.com/docs/checkout-api/subscription-plan-checkout).
         /// </summary>
-        [JsonProperty("subscription_plan_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("subscription_plan_id")]
         public string SubscriptionPlanId { get; }
 
         /// <summary>
         /// The confirmation page URL to redirect the buyer to after Square processes the payment.
         /// </summary>
-        [JsonProperty("redirect_url", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("redirect_url")]
         public string RedirectUrl { get; }
 
         /// <summary>
         /// The email address that buyers can use to contact the seller.
         /// </summary>
-        [JsonProperty("merchant_support_email", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("merchant_support_email")]
         public string MerchantSupportEmail { get; }
 
         /// <summary>
         /// Indicates whether to include the address fields in the payment form.
         /// </summary>
-        [JsonProperty("ask_for_shipping_address", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("ask_for_shipping_address")]
         public bool? AskForShippingAddress { get; }
 
         /// <summary>
@@ -119,6 +182,60 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"CheckoutOptions : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeAllowTipping()
+        {
+            return this.shouldSerialize["allow_tipping"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeCustomFields()
+        {
+            return this.shouldSerialize["custom_fields"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeSubscriptionPlanId()
+        {
+            return this.shouldSerialize["subscription_plan_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeRedirectUrl()
+        {
+            return this.shouldSerialize["redirect_url"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeMerchantSupportEmail()
+        {
+            return this.shouldSerialize["merchant_support_email"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeAskForShippingAddress()
+        {
+            return this.shouldSerialize["ask_for_shipping_address"];
         }
 
         /// <inheritdoc/>
@@ -198,6 +315,16 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "allow_tipping", false },
+                { "custom_fields", false },
+                { "subscription_plan_id", false },
+                { "redirect_url", false },
+                { "merchant_support_email", false },
+                { "ask_for_shipping_address", false },
+            };
+
             private bool? allowTipping;
             private IList<Models.CustomField> customFields;
             private string subscriptionPlanId;
@@ -215,6 +342,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder AllowTipping(bool? allowTipping)
             {
+                shouldSerialize["allow_tipping"] = true;
                 this.allowTipping = allowTipping;
                 return this;
             }
@@ -226,6 +354,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder CustomFields(IList<Models.CustomField> customFields)
             {
+                shouldSerialize["custom_fields"] = true;
                 this.customFields = customFields;
                 return this;
             }
@@ -237,6 +366,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder SubscriptionPlanId(string subscriptionPlanId)
             {
+                shouldSerialize["subscription_plan_id"] = true;
                 this.subscriptionPlanId = subscriptionPlanId;
                 return this;
             }
@@ -248,6 +378,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder RedirectUrl(string redirectUrl)
             {
+                shouldSerialize["redirect_url"] = true;
                 this.redirectUrl = redirectUrl;
                 return this;
             }
@@ -259,6 +390,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder MerchantSupportEmail(string merchantSupportEmail)
             {
+                shouldSerialize["merchant_support_email"] = true;
                 this.merchantSupportEmail = merchantSupportEmail;
                 return this;
             }
@@ -270,6 +402,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder AskForShippingAddress(bool? askForShippingAddress)
             {
+                shouldSerialize["ask_for_shipping_address"] = true;
                 this.askForShippingAddress = askForShippingAddress;
                 return this;
             }
@@ -308,12 +441,61 @@ namespace Square.Models
             }
 
             /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetAllowTipping()
+            {
+                this.shouldSerialize["allow_tipping"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetCustomFields()
+            {
+                this.shouldSerialize["custom_fields"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetSubscriptionPlanId()
+            {
+                this.shouldSerialize["subscription_plan_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetRedirectUrl()
+            {
+                this.shouldSerialize["redirect_url"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetMerchantSupportEmail()
+            {
+                this.shouldSerialize["merchant_support_email"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetAskForShippingAddress()
+            {
+                this.shouldSerialize["ask_for_shipping_address"] = false;
+            }
+
+
+            /// <summary>
             /// Builds class object.
             /// </summary>
             /// <returns> CheckoutOptions. </returns>
             public CheckoutOptions Build()
             {
-                return new CheckoutOptions(
+                return new CheckoutOptions(shouldSerialize,
                     this.allowTipping,
                     this.customFields,
                     this.subscriptionPlanId,

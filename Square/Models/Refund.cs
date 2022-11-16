@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class Refund
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="Refund"/> class.
         /// </summary>
@@ -42,16 +43,56 @@ namespace Square.Models
             Models.Money processingFeeMoney = null,
             IList<Models.AdditionalRecipient> additionalRecipients = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "transaction_id", false },
+                { "additional_recipients", false }
+            };
+
             this.Id = id;
             this.LocationId = locationId;
-            this.TransactionId = transactionId;
+            if (transactionId != null)
+            {
+                shouldSerialize["transaction_id"] = true;
+                this.TransactionId = transactionId;
+            }
+
             this.TenderId = tenderId;
             this.CreatedAt = createdAt;
             this.Reason = reason;
             this.AmountMoney = amountMoney;
             this.Status = status;
             this.ProcessingFeeMoney = processingFeeMoney;
-            this.AdditionalRecipients = additionalRecipients;
+            if (additionalRecipients != null)
+            {
+                shouldSerialize["additional_recipients"] = true;
+                this.AdditionalRecipients = additionalRecipients;
+            }
+
+        }
+        internal Refund(Dictionary<string, bool> shouldSerialize,
+            string id,
+            string locationId,
+            string tenderId,
+            string reason,
+            Models.Money amountMoney,
+            string status,
+            string transactionId = null,
+            string createdAt = null,
+            Models.Money processingFeeMoney = null,
+            IList<Models.AdditionalRecipient> additionalRecipients = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Id = id;
+            LocationId = locationId;
+            TransactionId = transactionId;
+            TenderId = tenderId;
+            CreatedAt = createdAt;
+            Reason = reason;
+            AmountMoney = amountMoney;
+            Status = status;
+            ProcessingFeeMoney = processingFeeMoney;
+            AdditionalRecipients = additionalRecipients;
         }
 
         /// <summary>
@@ -69,7 +110,7 @@ namespace Square.Models
         /// <summary>
         /// The ID of the transaction that the refunded tender is part of.
         /// </summary>
-        [JsonProperty("transaction_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("transaction_id")]
         public string TransactionId { get; }
 
         /// <summary>
@@ -122,7 +163,7 @@ namespace Square.Models
         /// Additional recipients (other than the merchant) receiving a portion of this refund.
         /// For example, fees assessed on a refund of a purchase by a third party integration.
         /// </summary>
-        [JsonProperty("additional_recipients", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("additional_recipients")]
         public IList<Models.AdditionalRecipient> AdditionalRecipients { get; }
 
         /// <inheritdoc/>
@@ -133,6 +174,24 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"Refund : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeTransactionId()
+        {
+            return this.shouldSerialize["transaction_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeAdditionalRecipients()
+        {
+            return this.shouldSerialize["additional_recipients"];
         }
 
         /// <inheritdoc/>
@@ -215,6 +274,12 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "transaction_id", false },
+                { "additional_recipients", false },
+            };
+
             private string id;
             private string locationId;
             private string tenderId;
@@ -315,6 +380,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder TransactionId(string transactionId)
             {
+                shouldSerialize["transaction_id"] = true;
                 this.transactionId = transactionId;
                 return this;
             }
@@ -348,9 +414,27 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder AdditionalRecipients(IList<Models.AdditionalRecipient> additionalRecipients)
             {
+                shouldSerialize["additional_recipients"] = true;
                 this.additionalRecipients = additionalRecipients;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetTransactionId()
+            {
+                this.shouldSerialize["transaction_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetAdditionalRecipients()
+            {
+                this.shouldSerialize["additional_recipients"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -358,7 +442,7 @@ namespace Square.Models
             /// <returns> Refund. </returns>
             public Refund Build()
             {
-                return new Refund(
+                return new Refund(shouldSerialize,
                     this.id,
                     this.locationId,
                     this.tenderId,

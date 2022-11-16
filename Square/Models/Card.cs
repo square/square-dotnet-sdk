@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class Card
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="Card"/> class.
         /// </summary>
@@ -56,23 +57,95 @@ namespace Square.Models
             long? version = null,
             string cardCoBrand = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "exp_month", false },
+                { "exp_year", false },
+                { "cardholder_name", false },
+                { "customer_id", false },
+                { "reference_id", false }
+            };
+
             this.Id = id;
             this.CardBrand = cardBrand;
             this.Last4 = last4;
-            this.ExpMonth = expMonth;
-            this.ExpYear = expYear;
-            this.CardholderName = cardholderName;
+            if (expMonth != null)
+            {
+                shouldSerialize["exp_month"] = true;
+                this.ExpMonth = expMonth;
+            }
+
+            if (expYear != null)
+            {
+                shouldSerialize["exp_year"] = true;
+                this.ExpYear = expYear;
+            }
+
+            if (cardholderName != null)
+            {
+                shouldSerialize["cardholder_name"] = true;
+                this.CardholderName = cardholderName;
+            }
+
             this.BillingAddress = billingAddress;
             this.Fingerprint = fingerprint;
-            this.CustomerId = customerId;
+            if (customerId != null)
+            {
+                shouldSerialize["customer_id"] = true;
+                this.CustomerId = customerId;
+            }
+
             this.MerchantId = merchantId;
-            this.ReferenceId = referenceId;
+            if (referenceId != null)
+            {
+                shouldSerialize["reference_id"] = true;
+                this.ReferenceId = referenceId;
+            }
+
             this.Enabled = enabled;
             this.CardType = cardType;
             this.PrepaidType = prepaidType;
             this.Bin = bin;
             this.Version = version;
             this.CardCoBrand = cardCoBrand;
+        }
+        internal Card(Dictionary<string, bool> shouldSerialize,
+            string id = null,
+            string cardBrand = null,
+            string last4 = null,
+            long? expMonth = null,
+            long? expYear = null,
+            string cardholderName = null,
+            Models.Address billingAddress = null,
+            string fingerprint = null,
+            string customerId = null,
+            string merchantId = null,
+            string referenceId = null,
+            bool? enabled = null,
+            string cardType = null,
+            string prepaidType = null,
+            string bin = null,
+            long? version = null,
+            string cardCoBrand = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Id = id;
+            CardBrand = cardBrand;
+            Last4 = last4;
+            ExpMonth = expMonth;
+            ExpYear = expYear;
+            CardholderName = cardholderName;
+            BillingAddress = billingAddress;
+            Fingerprint = fingerprint;
+            CustomerId = customerId;
+            MerchantId = merchantId;
+            ReferenceId = referenceId;
+            Enabled = enabled;
+            CardType = cardType;
+            PrepaidType = prepaidType;
+            Bin = bin;
+            Version = version;
+            CardCoBrand = cardCoBrand;
         }
 
         /// <summary>
@@ -96,19 +169,19 @@ namespace Square.Models
         /// <summary>
         /// The expiration month of the associated card as an integer between 1 and 12.
         /// </summary>
-        [JsonProperty("exp_month", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("exp_month")]
         public long? ExpMonth { get; }
 
         /// <summary>
         /// The four-digit year of the card's expiration date.
         /// </summary>
-        [JsonProperty("exp_year", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("exp_year")]
         public long? ExpYear { get; }
 
         /// <summary>
         /// The name of the cardholder.
         /// </summary>
-        [JsonProperty("cardholder_name", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("cardholder_name")]
         public string CardholderName { get; }
 
         /// <summary>
@@ -129,7 +202,7 @@ namespace Square.Models
         /// <summary>
         /// **Required** The ID of a customer created using the Customers API to be associated with the card.
         /// </summary>
-        [JsonProperty("customer_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("customer_id")]
         public string CustomerId { get; }
 
         /// <summary>
@@ -143,7 +216,7 @@ namespace Square.Models
         /// another entity in an external system. For example, a customer ID from an
         /// external customer management system.
         /// </summary>
-        [JsonProperty("reference_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("reference_id")]
         public string ReferenceId { get; }
 
         /// <summary>
@@ -193,6 +266,51 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"Card : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeExpMonth()
+        {
+            return this.shouldSerialize["exp_month"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeExpYear()
+        {
+            return this.shouldSerialize["exp_year"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeCardholderName()
+        {
+            return this.shouldSerialize["cardholder_name"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeCustomerId()
+        {
+            return this.shouldSerialize["customer_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeReferenceId()
+        {
+            return this.shouldSerialize["reference_id"];
         }
 
         /// <inheritdoc/>
@@ -298,6 +416,15 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "exp_month", false },
+                { "exp_year", false },
+                { "cardholder_name", false },
+                { "customer_id", false },
+                { "reference_id", false },
+            };
+
             private string id;
             private string cardBrand;
             private string last4;
@@ -356,6 +483,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder ExpMonth(long? expMonth)
             {
+                shouldSerialize["exp_month"] = true;
                 this.expMonth = expMonth;
                 return this;
             }
@@ -367,6 +495,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder ExpYear(long? expYear)
             {
+                shouldSerialize["exp_year"] = true;
                 this.expYear = expYear;
                 return this;
             }
@@ -378,6 +507,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder CardholderName(string cardholderName)
             {
+                shouldSerialize["cardholder_name"] = true;
                 this.cardholderName = cardholderName;
                 return this;
             }
@@ -411,6 +541,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder CustomerId(string customerId)
             {
+                shouldSerialize["customer_id"] = true;
                 this.customerId = customerId;
                 return this;
             }
@@ -433,6 +564,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder ReferenceId(string referenceId)
             {
+                shouldSerialize["reference_id"] = true;
                 this.referenceId = referenceId;
                 return this;
             }
@@ -504,12 +636,53 @@ namespace Square.Models
             }
 
             /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetExpMonth()
+            {
+                this.shouldSerialize["exp_month"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetExpYear()
+            {
+                this.shouldSerialize["exp_year"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetCardholderName()
+            {
+                this.shouldSerialize["cardholder_name"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetCustomerId()
+            {
+                this.shouldSerialize["customer_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetReferenceId()
+            {
+                this.shouldSerialize["reference_id"] = false;
+            }
+
+
+            /// <summary>
             /// Builds class object.
             /// </summary>
             /// <returns> Card. </returns>
             public Card Build()
             {
-                return new Card(
+                return new Card(shouldSerialize,
                     this.id,
                     this.cardBrand,
                     this.last4,

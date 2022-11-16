@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class Payment
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="Payment"/> class.
         /// </summary>
@@ -102,6 +103,12 @@ namespace Square.Models
             Models.ApplicationDetails applicationDetails = null,
             string versionToken = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "delay_action", false },
+                { "version_token", false }
+            };
+
             this.Id = id;
             this.CreatedAt = createdAt;
             this.UpdatedAt = updatedAt;
@@ -114,7 +121,12 @@ namespace Square.Models
             this.RefundedMoney = refundedMoney;
             this.Status = status;
             this.DelayDuration = delayDuration;
-            this.DelayAction = delayAction;
+            if (delayAction != null)
+            {
+                shouldSerialize["delay_action"] = true;
+                this.DelayAction = delayAction;
+            }
+
             this.DelayedUntil = delayedUntil;
             this.SourceType = sourceType;
             this.CardDetails = cardDetails;
@@ -141,7 +153,96 @@ namespace Square.Models
             this.ReceiptUrl = receiptUrl;
             this.DeviceDetails = deviceDetails;
             this.ApplicationDetails = applicationDetails;
-            this.VersionToken = versionToken;
+            if (versionToken != null)
+            {
+                shouldSerialize["version_token"] = true;
+                this.VersionToken = versionToken;
+            }
+
+        }
+        internal Payment(Dictionary<string, bool> shouldSerialize,
+            string id = null,
+            string createdAt = null,
+            string updatedAt = null,
+            Models.Money amountMoney = null,
+            Models.Money tipMoney = null,
+            Models.Money totalMoney = null,
+            Models.Money appFeeMoney = null,
+            Models.Money approvedMoney = null,
+            IList<Models.ProcessingFee> processingFee = null,
+            Models.Money refundedMoney = null,
+            string status = null,
+            string delayDuration = null,
+            string delayAction = null,
+            string delayedUntil = null,
+            string sourceType = null,
+            Models.CardPaymentDetails cardDetails = null,
+            Models.CashPaymentDetails cashDetails = null,
+            Models.BankAccountPaymentDetails bankAccountDetails = null,
+            Models.ExternalPaymentDetails externalDetails = null,
+            Models.DigitalWalletDetails walletDetails = null,
+            Models.BuyNowPayLaterDetails buyNowPayLaterDetails = null,
+            string locationId = null,
+            string orderId = null,
+            string referenceId = null,
+            string customerId = null,
+            string employeeId = null,
+            string teamMemberId = null,
+            IList<string> refundIds = null,
+            Models.RiskEvaluation riskEvaluation = null,
+            string buyerEmailAddress = null,
+            Models.Address billingAddress = null,
+            Models.Address shippingAddress = null,
+            string note = null,
+            string statementDescriptionIdentifier = null,
+            IList<string> capabilities = null,
+            string receiptNumber = null,
+            string receiptUrl = null,
+            Models.DeviceDetails deviceDetails = null,
+            Models.ApplicationDetails applicationDetails = null,
+            string versionToken = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Id = id;
+            CreatedAt = createdAt;
+            UpdatedAt = updatedAt;
+            AmountMoney = amountMoney;
+            TipMoney = tipMoney;
+            TotalMoney = totalMoney;
+            AppFeeMoney = appFeeMoney;
+            ApprovedMoney = approvedMoney;
+            ProcessingFee = processingFee;
+            RefundedMoney = refundedMoney;
+            Status = status;
+            DelayDuration = delayDuration;
+            DelayAction = delayAction;
+            DelayedUntil = delayedUntil;
+            SourceType = sourceType;
+            CardDetails = cardDetails;
+            CashDetails = cashDetails;
+            BankAccountDetails = bankAccountDetails;
+            ExternalDetails = externalDetails;
+            WalletDetails = walletDetails;
+            BuyNowPayLaterDetails = buyNowPayLaterDetails;
+            LocationId = locationId;
+            OrderId = orderId;
+            ReferenceId = referenceId;
+            CustomerId = customerId;
+            EmployeeId = employeeId;
+            TeamMemberId = teamMemberId;
+            RefundIds = refundIds;
+            RiskEvaluation = riskEvaluation;
+            BuyerEmailAddress = buyerEmailAddress;
+            BillingAddress = billingAddress;
+            ShippingAddress = shippingAddress;
+            Note = note;
+            StatementDescriptionIdentifier = statementDescriptionIdentifier;
+            Capabilities = capabilities;
+            ReceiptNumber = receiptNumber;
+            ReceiptUrl = receiptUrl;
+            DeviceDetails = deviceDetails;
+            ApplicationDetails = applicationDetails;
+            VersionToken = versionToken;
         }
 
         /// <summary>
@@ -259,7 +360,7 @@ namespace Square.Models
         /// The action to be applied to the payment when the `delay_duration` has elapsed.
         /// Current values include `CANCEL` and `COMPLETE`.
         /// </summary>
-        [JsonProperty("delay_action", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("delay_action")]
         public string DelayAction { get; }
 
         /// <summary>
@@ -463,7 +564,7 @@ namespace Square.Models
         /// Used for optimistic concurrency. This opaque token identifies a specific version of the
         /// `Payment` object.
         /// </summary>
-        [JsonProperty("version_token", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("version_token")]
         public string VersionToken { get; }
 
         /// <inheritdoc/>
@@ -474,6 +575,24 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"Payment : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeDelayAction()
+        {
+            return this.shouldSerialize["delay_action"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeVersionToken()
+        {
+            return this.shouldSerialize["version_token"];
         }
 
         /// <inheritdoc/>
@@ -654,6 +773,12 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "delay_action", false },
+                { "version_token", false },
+            };
+
             private string id;
             private string createdAt;
             private string updatedAt;
@@ -834,6 +959,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder DelayAction(string delayAction)
             {
+                shouldSerialize["delay_action"] = true;
                 this.delayAction = delayAction;
                 return this;
             }
@@ -1131,9 +1257,27 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder VersionToken(string versionToken)
             {
+                shouldSerialize["version_token"] = true;
                 this.versionToken = versionToken;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetDelayAction()
+            {
+                this.shouldSerialize["delay_action"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetVersionToken()
+            {
+                this.shouldSerialize["version_token"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -1141,7 +1285,7 @@ namespace Square.Models
             /// <returns> Payment. </returns>
             public Payment Build()
             {
-                return new Payment(
+                return new Payment(shouldSerialize,
                     this.id,
                     this.createdAt,
                     this.updatedAt,

@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class BulkRetrieveVendorsRequest
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="BulkRetrieveVendorsRequest"/> class.
         /// </summary>
@@ -24,13 +25,29 @@ namespace Square.Models
         public BulkRetrieveVendorsRequest(
             IList<string> vendorIds = null)
         {
-            this.VendorIds = vendorIds;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "vendor_ids", false }
+            };
+
+            if (vendorIds != null)
+            {
+                shouldSerialize["vendor_ids"] = true;
+                this.VendorIds = vendorIds;
+            }
+
+        }
+        internal BulkRetrieveVendorsRequest(Dictionary<string, bool> shouldSerialize,
+            IList<string> vendorIds = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            VendorIds = vendorIds;
         }
 
         /// <summary>
         /// IDs of the [Vendor]($m/Vendor) objects to retrieve.
         /// </summary>
-        [JsonProperty("vendor_ids", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("vendor_ids")]
         public IList<string> VendorIds { get; }
 
         /// <inheritdoc/>
@@ -41,6 +58,15 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"BulkRetrieveVendorsRequest : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeVendorIds()
+        {
+            return this.shouldSerialize["vendor_ids"];
         }
 
         /// <inheritdoc/>
@@ -94,6 +120,11 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "vendor_ids", false },
+            };
+
             private IList<string> vendorIds;
 
              /// <summary>
@@ -103,9 +134,19 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder VendorIds(IList<string> vendorIds)
             {
+                shouldSerialize["vendor_ids"] = true;
                 this.vendorIds = vendorIds;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetVendorIds()
+            {
+                this.shouldSerialize["vendor_ids"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -113,7 +154,7 @@ namespace Square.Models
             /// <returns> BulkRetrieveVendorsRequest. </returns>
             public BulkRetrieveVendorsRequest Build()
             {
-                return new BulkRetrieveVendorsRequest(
+                return new BulkRetrieveVendorsRequest(shouldSerialize,
                     this.vendorIds);
             }
         }

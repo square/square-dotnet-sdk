@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class WageSetting
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="WageSetting"/> class.
         /// </summary>
@@ -34,18 +35,56 @@ namespace Square.Models
             string createdAt = null,
             string updatedAt = null)
         {
-            this.TeamMemberId = teamMemberId;
-            this.JobAssignments = jobAssignments;
-            this.IsOvertimeExempt = isOvertimeExempt;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "team_member_id", false },
+                { "job_assignments", false },
+                { "is_overtime_exempt", false }
+            };
+
+            if (teamMemberId != null)
+            {
+                shouldSerialize["team_member_id"] = true;
+                this.TeamMemberId = teamMemberId;
+            }
+
+            if (jobAssignments != null)
+            {
+                shouldSerialize["job_assignments"] = true;
+                this.JobAssignments = jobAssignments;
+            }
+
+            if (isOvertimeExempt != null)
+            {
+                shouldSerialize["is_overtime_exempt"] = true;
+                this.IsOvertimeExempt = isOvertimeExempt;
+            }
+
             this.Version = version;
             this.CreatedAt = createdAt;
             this.UpdatedAt = updatedAt;
+        }
+        internal WageSetting(Dictionary<string, bool> shouldSerialize,
+            string teamMemberId = null,
+            IList<Models.JobAssignment> jobAssignments = null,
+            bool? isOvertimeExempt = null,
+            int? version = null,
+            string createdAt = null,
+            string updatedAt = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            TeamMemberId = teamMemberId;
+            JobAssignments = jobAssignments;
+            IsOvertimeExempt = isOvertimeExempt;
+            Version = version;
+            CreatedAt = createdAt;
+            UpdatedAt = updatedAt;
         }
 
         /// <summary>
         /// The unique ID of the `TeamMember` whom this wage setting describes.
         /// </summary>
-        [JsonProperty("team_member_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("team_member_id")]
         public string TeamMemberId { get; }
 
         /// <summary>
@@ -53,13 +92,13 @@ namespace Square.Models
         /// The first job assignment is considered the team member's primary job.
         /// The minimum length is 1 and the maximum length is 12.
         /// </summary>
-        [JsonProperty("job_assignments", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("job_assignments")]
         public IList<Models.JobAssignment> JobAssignments { get; }
 
         /// <summary>
         /// Whether the team member is exempt from the overtime rules of the seller's country.
         /// </summary>
-        [JsonProperty("is_overtime_exempt", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("is_overtime_exempt")]
         public bool? IsOvertimeExempt { get; }
 
         /// <summary>
@@ -93,6 +132,33 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"WageSetting : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeTeamMemberId()
+        {
+            return this.shouldSerialize["team_member_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeJobAssignments()
+        {
+            return this.shouldSerialize["job_assignments"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeIsOvertimeExempt()
+        {
+            return this.shouldSerialize["is_overtime_exempt"];
         }
 
         /// <inheritdoc/>
@@ -161,6 +227,13 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "team_member_id", false },
+                { "job_assignments", false },
+                { "is_overtime_exempt", false },
+            };
+
             private string teamMemberId;
             private IList<Models.JobAssignment> jobAssignments;
             private bool? isOvertimeExempt;
@@ -175,6 +248,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder TeamMemberId(string teamMemberId)
             {
+                shouldSerialize["team_member_id"] = true;
                 this.teamMemberId = teamMemberId;
                 return this;
             }
@@ -186,6 +260,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder JobAssignments(IList<Models.JobAssignment> jobAssignments)
             {
+                shouldSerialize["job_assignments"] = true;
                 this.jobAssignments = jobAssignments;
                 return this;
             }
@@ -197,6 +272,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder IsOvertimeExempt(bool? isOvertimeExempt)
             {
+                shouldSerialize["is_overtime_exempt"] = true;
                 this.isOvertimeExempt = isOvertimeExempt;
                 return this;
             }
@@ -235,12 +311,37 @@ namespace Square.Models
             }
 
             /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetTeamMemberId()
+            {
+                this.shouldSerialize["team_member_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetJobAssignments()
+            {
+                this.shouldSerialize["job_assignments"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetIsOvertimeExempt()
+            {
+                this.shouldSerialize["is_overtime_exempt"] = false;
+            }
+
+
+            /// <summary>
             /// Builds class object.
             /// </summary>
             /// <returns> WageSetting. </returns>
             public WageSetting Build()
             {
-                return new WageSetting(
+                return new WageSetting(shouldSerialize,
                     this.teamMemberId,
                     this.jobAssignments,
                     this.isOvertimeExempt,

@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class PayoutEntry
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="PayoutEntry"/> class.
         /// </summary>
@@ -80,9 +81,19 @@ namespace Square.Models
             Models.PaymentBalanceActivityThirdPartyFeeDetail typeThirdPartyFeeDetails = null,
             Models.PaymentBalanceActivityThirdPartyFeeRefundDetail typeThirdPartyFeeRefundDetails = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "effective_at", false }
+            };
+
             this.Id = id;
             this.PayoutId = payoutId;
-            this.EffectiveAt = effectiveAt;
+            if (effectiveAt != null)
+            {
+                shouldSerialize["effective_at"] = true;
+                this.EffectiveAt = effectiveAt;
+            }
+
             this.Type = type;
             this.GrossAmountMoney = grossAmountMoney;
             this.FeeAmountMoney = feeAmountMoney;
@@ -110,6 +121,68 @@ namespace Square.Models
             this.TypeThirdPartyFeeDetails = typeThirdPartyFeeDetails;
             this.TypeThirdPartyFeeRefundDetails = typeThirdPartyFeeRefundDetails;
         }
+        internal PayoutEntry(Dictionary<string, bool> shouldSerialize,
+            string id,
+            string payoutId,
+            string effectiveAt = null,
+            string type = null,
+            Models.Money grossAmountMoney = null,
+            Models.Money feeAmountMoney = null,
+            Models.Money netAmountMoney = null,
+            Models.PaymentBalanceActivityAppFeeRevenueDetail typeAppFeeRevenueDetails = null,
+            Models.PaymentBalanceActivityAppFeeRefundDetail typeAppFeeRefundDetails = null,
+            Models.PaymentBalanceActivityAutomaticSavingsDetail typeAutomaticSavingsDetails = null,
+            Models.PaymentBalanceActivityAutomaticSavingsReversedDetail typeAutomaticSavingsReversedDetails = null,
+            Models.PaymentBalanceActivityChargeDetail typeChargeDetails = null,
+            Models.PaymentBalanceActivityDepositFeeDetail typeDepositFeeDetails = null,
+            Models.PaymentBalanceActivityDisputeDetail typeDisputeDetails = null,
+            Models.PaymentBalanceActivityFeeDetail typeFeeDetails = null,
+            Models.PaymentBalanceActivityFreeProcessingDetail typeFreeProcessingDetails = null,
+            Models.PaymentBalanceActivityHoldAdjustmentDetail typeHoldAdjustmentDetails = null,
+            Models.PaymentBalanceActivityOpenDisputeDetail typeOpenDisputeDetails = null,
+            Models.PaymentBalanceActivityOtherDetail typeOtherDetails = null,
+            Models.PaymentBalanceActivityOtherAdjustmentDetail typeOtherAdjustmentDetails = null,
+            Models.PaymentBalanceActivityRefundDetail typeRefundDetails = null,
+            Models.PaymentBalanceActivityReleaseAdjustmentDetail typeReleaseAdjustmentDetails = null,
+            Models.PaymentBalanceActivityReserveHoldDetail typeReserveHoldDetails = null,
+            Models.PaymentBalanceActivityReserveReleaseDetail typeReserveReleaseDetails = null,
+            Models.PaymentBalanceActivitySquareCapitalPaymentDetail typeSquareCapitalPaymentDetails = null,
+            Models.PaymentBalanceActivitySquareCapitalReversedPaymentDetail typeSquareCapitalReversedPaymentDetails = null,
+            Models.PaymentBalanceActivityTaxOnFeeDetail typeTaxOnFeeDetails = null,
+            Models.PaymentBalanceActivityThirdPartyFeeDetail typeThirdPartyFeeDetails = null,
+            Models.PaymentBalanceActivityThirdPartyFeeRefundDetail typeThirdPartyFeeRefundDetails = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Id = id;
+            PayoutId = payoutId;
+            EffectiveAt = effectiveAt;
+            Type = type;
+            GrossAmountMoney = grossAmountMoney;
+            FeeAmountMoney = feeAmountMoney;
+            NetAmountMoney = netAmountMoney;
+            TypeAppFeeRevenueDetails = typeAppFeeRevenueDetails;
+            TypeAppFeeRefundDetails = typeAppFeeRefundDetails;
+            TypeAutomaticSavingsDetails = typeAutomaticSavingsDetails;
+            TypeAutomaticSavingsReversedDetails = typeAutomaticSavingsReversedDetails;
+            TypeChargeDetails = typeChargeDetails;
+            TypeDepositFeeDetails = typeDepositFeeDetails;
+            TypeDisputeDetails = typeDisputeDetails;
+            TypeFeeDetails = typeFeeDetails;
+            TypeFreeProcessingDetails = typeFreeProcessingDetails;
+            TypeHoldAdjustmentDetails = typeHoldAdjustmentDetails;
+            TypeOpenDisputeDetails = typeOpenDisputeDetails;
+            TypeOtherDetails = typeOtherDetails;
+            TypeOtherAdjustmentDetails = typeOtherAdjustmentDetails;
+            TypeRefundDetails = typeRefundDetails;
+            TypeReleaseAdjustmentDetails = typeReleaseAdjustmentDetails;
+            TypeReserveHoldDetails = typeReserveHoldDetails;
+            TypeReserveReleaseDetails = typeReserveReleaseDetails;
+            TypeSquareCapitalPaymentDetails = typeSquareCapitalPaymentDetails;
+            TypeSquareCapitalReversedPaymentDetails = typeSquareCapitalReversedPaymentDetails;
+            TypeTaxOnFeeDetails = typeTaxOnFeeDetails;
+            TypeThirdPartyFeeDetails = typeThirdPartyFeeDetails;
+            TypeThirdPartyFeeRefundDetails = typeThirdPartyFeeRefundDetails;
+        }
 
         /// <summary>
         /// A unique ID for the payout entry.
@@ -126,7 +199,7 @@ namespace Square.Models
         /// <summary>
         /// The timestamp of when the payout entry affected the balance, in RFC 3339 format.
         /// </summary>
-        [JsonProperty("effective_at", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("effective_at")]
         public string EffectiveAt { get; }
 
         /// <summary>
@@ -193,7 +266,7 @@ namespace Square.Models
         public Models.PaymentBalanceActivityAutomaticSavingsReversedDetail TypeAutomaticSavingsReversedDetails { get; }
 
         /// <summary>
-        /// DESCRIPTION OF PaymentBalanceActivityChargeDetail
+        /// Gets or sets TypeChargeDetails.
         /// </summary>
         [JsonProperty("type_charge_details", NullValueHandling = NullValueHandling.Ignore)]
         public Models.PaymentBalanceActivityChargeDetail TypeChargeDetails { get; }
@@ -308,6 +381,15 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"PayoutEntry : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeEffectiveAt()
+        {
+            return this.shouldSerialize["effective_at"];
         }
 
         /// <inheritdoc/>
@@ -453,6 +535,11 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "effective_at", false },
+            };
+
             private string id;
             private string payoutId;
             private string effectiveAt;
@@ -520,6 +607,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder EffectiveAt(string effectiveAt)
             {
+                shouldSerialize["effective_at"] = true;
                 this.effectiveAt = effectiveAt;
                 return this;
             }
@@ -811,12 +899,21 @@ namespace Square.Models
             }
 
             /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetEffectiveAt()
+            {
+                this.shouldSerialize["effective_at"] = false;
+            }
+
+
+            /// <summary>
             /// Builds class object.
             /// </summary>
             /// <returns> PayoutEntry. </returns>
             public PayoutEntry Build()
             {
-                return new PayoutEntry(
+                return new PayoutEntry(shouldSerialize,
                     this.id,
                     this.payoutId,
                     this.effectiveAt,

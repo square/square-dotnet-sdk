@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class CatalogQueryItemVariationsForItemOptionValues
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="CatalogQueryItemVariationsForItemOptionValues"/> class.
         /// </summary>
@@ -24,7 +25,23 @@ namespace Square.Models
         public CatalogQueryItemVariationsForItemOptionValues(
             IList<string> itemOptionValueIds = null)
         {
-            this.ItemOptionValueIds = itemOptionValueIds;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "item_option_value_ids", false }
+            };
+
+            if (itemOptionValueIds != null)
+            {
+                shouldSerialize["item_option_value_ids"] = true;
+                this.ItemOptionValueIds = itemOptionValueIds;
+            }
+
+        }
+        internal CatalogQueryItemVariationsForItemOptionValues(Dictionary<string, bool> shouldSerialize,
+            IList<string> itemOptionValueIds = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            ItemOptionValueIds = itemOptionValueIds;
         }
 
         /// <summary>
@@ -32,7 +49,7 @@ namespace Square.Models
         /// `CatalogItemVariation`s. All ItemVariations that contain all of the given
         /// Item Option Values (in any order) will be returned.
         /// </summary>
-        [JsonProperty("item_option_value_ids", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("item_option_value_ids")]
         public IList<string> ItemOptionValueIds { get; }
 
         /// <inheritdoc/>
@@ -43,6 +60,15 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"CatalogQueryItemVariationsForItemOptionValues : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeItemOptionValueIds()
+        {
+            return this.shouldSerialize["item_option_value_ids"];
         }
 
         /// <inheritdoc/>
@@ -96,6 +122,11 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "item_option_value_ids", false },
+            };
+
             private IList<string> itemOptionValueIds;
 
              /// <summary>
@@ -105,9 +136,19 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder ItemOptionValueIds(IList<string> itemOptionValueIds)
             {
+                shouldSerialize["item_option_value_ids"] = true;
                 this.itemOptionValueIds = itemOptionValueIds;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetItemOptionValueIds()
+            {
+                this.shouldSerialize["item_option_value_ids"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -115,7 +156,7 @@ namespace Square.Models
             /// <returns> CatalogQueryItemVariationsForItemOptionValues. </returns>
             public CatalogQueryItemVariationsForItemOptionValues Build()
             {
-                return new CatalogQueryItemVariationsForItemOptionValues(
+                return new CatalogQueryItemVariationsForItemOptionValues(shouldSerialize,
                     this.itemOptionValueIds);
             }
         }

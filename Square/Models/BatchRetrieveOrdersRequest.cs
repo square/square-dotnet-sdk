@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class BatchRetrieveOrdersRequest
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="BatchRetrieveOrdersRequest"/> class.
         /// </summary>
@@ -26,15 +27,33 @@ namespace Square.Models
             IList<string> orderIds,
             string locationId = null)
         {
-            this.LocationId = locationId;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "location_id", false }
+            };
+
+            if (locationId != null)
+            {
+                shouldSerialize["location_id"] = true;
+                this.LocationId = locationId;
+            }
+
             this.OrderIds = orderIds;
+        }
+        internal BatchRetrieveOrdersRequest(Dictionary<string, bool> shouldSerialize,
+            IList<string> orderIds,
+            string locationId = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            LocationId = locationId;
+            OrderIds = orderIds;
         }
 
         /// <summary>
         /// The ID of the location for these orders. This field is optional: omit it to retrieve
         /// orders within the scope of the current authorization's merchant ID.
         /// </summary>
-        [JsonProperty("location_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("location_id")]
         public string LocationId { get; }
 
         /// <summary>
@@ -51,6 +70,15 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"BatchRetrieveOrdersRequest : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeLocationId()
+        {
+            return this.shouldSerialize["location_id"];
         }
 
         /// <inheritdoc/>
@@ -107,6 +135,11 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "location_id", false },
+            };
+
             private IList<string> orderIds;
             private string locationId;
 
@@ -134,9 +167,19 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder LocationId(string locationId)
             {
+                shouldSerialize["location_id"] = true;
                 this.locationId = locationId;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetLocationId()
+            {
+                this.shouldSerialize["location_id"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -144,7 +187,7 @@ namespace Square.Models
             /// <returns> BatchRetrieveOrdersRequest. </returns>
             public BatchRetrieveOrdersRequest Build()
             {
-                return new BatchRetrieveOrdersRequest(
+                return new BatchRetrieveOrdersRequest(shouldSerialize,
                     this.orderIds,
                     this.locationId);
             }

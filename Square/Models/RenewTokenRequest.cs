@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class RenewTokenRequest
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="RenewTokenRequest"/> class.
         /// </summary>
@@ -24,13 +25,29 @@ namespace Square.Models
         public RenewTokenRequest(
             string accessToken = null)
         {
-            this.AccessToken = accessToken;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "access_token", false }
+            };
+
+            if (accessToken != null)
+            {
+                shouldSerialize["access_token"] = true;
+                this.AccessToken = accessToken;
+            }
+
+        }
+        internal RenewTokenRequest(Dictionary<string, bool> shouldSerialize,
+            string accessToken = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            AccessToken = accessToken;
         }
 
         /// <summary>
         /// The token you want to renew.
         /// </summary>
-        [JsonProperty("access_token", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("access_token")]
         public string AccessToken { get; }
 
         /// <inheritdoc/>
@@ -41,6 +58,15 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"RenewTokenRequest : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeAccessToken()
+        {
+            return this.shouldSerialize["access_token"];
         }
 
         /// <inheritdoc/>
@@ -94,6 +120,11 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "access_token", false },
+            };
+
             private string accessToken;
 
              /// <summary>
@@ -103,9 +134,19 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder AccessToken(string accessToken)
             {
+                shouldSerialize["access_token"] = true;
                 this.accessToken = accessToken;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetAccessToken()
+            {
+                this.shouldSerialize["access_token"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -113,7 +154,7 @@ namespace Square.Models
             /// <returns> RenewTokenRequest. </returns>
             public RenewTokenRequest Build()
             {
-                return new RenewTokenRequest(
+                return new RenewTokenRequest(shouldSerialize,
                     this.accessToken);
             }
         }

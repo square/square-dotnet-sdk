@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class Break
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="Break"/> class.
         /// </summary>
@@ -36,13 +37,41 @@ namespace Square.Models
             string id = null,
             string endAt = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "end_at", false }
+            };
+
             this.Id = id;
             this.StartAt = startAt;
-            this.EndAt = endAt;
+            if (endAt != null)
+            {
+                shouldSerialize["end_at"] = true;
+                this.EndAt = endAt;
+            }
+
             this.BreakTypeId = breakTypeId;
             this.Name = name;
             this.ExpectedDuration = expectedDuration;
             this.IsPaid = isPaid;
+        }
+        internal Break(Dictionary<string, bool> shouldSerialize,
+            string startAt,
+            string breakTypeId,
+            string name,
+            string expectedDuration,
+            bool isPaid,
+            string id = null,
+            string endAt = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Id = id;
+            StartAt = startAt;
+            EndAt = endAt;
+            BreakTypeId = breakTypeId;
+            Name = name;
+            ExpectedDuration = expectedDuration;
+            IsPaid = isPaid;
         }
 
         /// <summary>
@@ -62,7 +91,7 @@ namespace Square.Models
         /// RFC 3339; follows the same timezone information as `Shift`. Precision up to
         /// the minute is respected; seconds are truncated.
         /// </summary>
-        [JsonProperty("end_at", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("end_at")]
         public string EndAt { get; }
 
         /// <summary>
@@ -99,6 +128,15 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"Break : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeEndAt()
+        {
+            return this.shouldSerialize["end_at"];
         }
 
         /// <inheritdoc/>
@@ -170,6 +208,11 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "end_at", false },
+            };
+
             private string startAt;
             private string breakTypeId;
             private string name;
@@ -265,9 +308,19 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder EndAt(string endAt)
             {
+                shouldSerialize["end_at"] = true;
                 this.endAt = endAt;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetEndAt()
+            {
+                this.shouldSerialize["end_at"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -275,7 +328,7 @@ namespace Square.Models
             /// <returns> Break. </returns>
             public Break Build()
             {
-                return new Break(
+                return new Break(shouldSerialize,
                     this.startAt,
                     this.breakTypeId,
                     this.name,

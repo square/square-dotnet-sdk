@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class BatchChangeInventoryRequest
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="BatchChangeInventoryRequest"/> class.
         /// </summary>
@@ -28,9 +29,35 @@ namespace Square.Models
             IList<Models.InventoryChange> changes = null,
             bool? ignoreUnchangedCounts = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "changes", false },
+                { "ignore_unchanged_counts", false }
+            };
+
             this.IdempotencyKey = idempotencyKey;
-            this.Changes = changes;
-            this.IgnoreUnchangedCounts = ignoreUnchangedCounts;
+            if (changes != null)
+            {
+                shouldSerialize["changes"] = true;
+                this.Changes = changes;
+            }
+
+            if (ignoreUnchangedCounts != null)
+            {
+                shouldSerialize["ignore_unchanged_counts"] = true;
+                this.IgnoreUnchangedCounts = ignoreUnchangedCounts;
+            }
+
+        }
+        internal BatchChangeInventoryRequest(Dictionary<string, bool> shouldSerialize,
+            string idempotencyKey,
+            IList<Models.InventoryChange> changes = null,
+            bool? ignoreUnchangedCounts = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            IdempotencyKey = idempotencyKey;
+            Changes = changes;
+            IgnoreUnchangedCounts = ignoreUnchangedCounts;
         }
 
         /// <summary>
@@ -48,14 +75,14 @@ namespace Square.Models
         /// Changes are applied based on the client-supplied timestamp and may be sent
         /// out of order.
         /// </summary>
-        [JsonProperty("changes", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("changes")]
         public IList<Models.InventoryChange> Changes { get; }
 
         /// <summary>
         /// Indicates whether the current physical count should be ignored if
         /// the quantity is unchanged since the last physical count. Default: `true`.
         /// </summary>
-        [JsonProperty("ignore_unchanged_counts", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("ignore_unchanged_counts")]
         public bool? IgnoreUnchangedCounts { get; }
 
         /// <inheritdoc/>
@@ -66,6 +93,24 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"BatchChangeInventoryRequest : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeChanges()
+        {
+            return this.shouldSerialize["changes"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeIgnoreUnchangedCounts()
+        {
+            return this.shouldSerialize["ignore_unchanged_counts"];
         }
 
         /// <inheritdoc/>
@@ -125,6 +170,12 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "changes", false },
+                { "ignore_unchanged_counts", false },
+            };
+
             private string idempotencyKey;
             private IList<Models.InventoryChange> changes;
             private bool? ignoreUnchangedCounts;
@@ -153,6 +204,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Changes(IList<Models.InventoryChange> changes)
             {
+                shouldSerialize["changes"] = true;
                 this.changes = changes;
                 return this;
             }
@@ -164,9 +216,27 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder IgnoreUnchangedCounts(bool? ignoreUnchangedCounts)
             {
+                shouldSerialize["ignore_unchanged_counts"] = true;
                 this.ignoreUnchangedCounts = ignoreUnchangedCounts;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetChanges()
+            {
+                this.shouldSerialize["changes"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetIgnoreUnchangedCounts()
+            {
+                this.shouldSerialize["ignore_unchanged_counts"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -174,7 +244,7 @@ namespace Square.Models
             /// <returns> BatchChangeInventoryRequest. </returns>
             public BatchChangeInventoryRequest Build()
             {
-                return new BatchChangeInventoryRequest(
+                return new BatchChangeInventoryRequest(shouldSerialize,
                     this.idempotencyKey,
                     this.changes,
                     this.ignoreUnchangedCounts);

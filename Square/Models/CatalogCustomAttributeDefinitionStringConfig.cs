@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class CatalogCustomAttributeDefinitionStringConfig
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="CatalogCustomAttributeDefinitionStringConfig"/> class.
         /// </summary>
@@ -24,7 +25,23 @@ namespace Square.Models
         public CatalogCustomAttributeDefinitionStringConfig(
             bool? enforceUniqueness = null)
         {
-            this.EnforceUniqueness = enforceUniqueness;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "enforce_uniqueness", false }
+            };
+
+            if (enforceUniqueness != null)
+            {
+                shouldSerialize["enforce_uniqueness"] = true;
+                this.EnforceUniqueness = enforceUniqueness;
+            }
+
+        }
+        internal CatalogCustomAttributeDefinitionStringConfig(Dictionary<string, bool> shouldSerialize,
+            bool? enforceUniqueness = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            EnforceUniqueness = enforceUniqueness;
         }
 
         /// <summary>
@@ -34,7 +51,7 @@ namespace Square.Models
         /// duplicated within a seller's catalog. May not be modified after the
         /// definition has been created.
         /// </summary>
-        [JsonProperty("enforce_uniqueness", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("enforce_uniqueness")]
         public bool? EnforceUniqueness { get; }
 
         /// <inheritdoc/>
@@ -45,6 +62,15 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"CatalogCustomAttributeDefinitionStringConfig : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeEnforceUniqueness()
+        {
+            return this.shouldSerialize["enforce_uniqueness"];
         }
 
         /// <inheritdoc/>
@@ -98,6 +124,11 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "enforce_uniqueness", false },
+            };
+
             private bool? enforceUniqueness;
 
              /// <summary>
@@ -107,9 +138,19 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder EnforceUniqueness(bool? enforceUniqueness)
             {
+                shouldSerialize["enforce_uniqueness"] = true;
                 this.enforceUniqueness = enforceUniqueness;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetEnforceUniqueness()
+            {
+                this.shouldSerialize["enforce_uniqueness"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -117,7 +158,7 @@ namespace Square.Models
             /// <returns> CatalogCustomAttributeDefinitionStringConfig. </returns>
             public CatalogCustomAttributeDefinitionStringConfig Build()
             {
-                return new CatalogCustomAttributeDefinitionStringConfig(
+                return new CatalogCustomAttributeDefinitionStringConfig(shouldSerialize,
                     this.enforceUniqueness);
             }
         }

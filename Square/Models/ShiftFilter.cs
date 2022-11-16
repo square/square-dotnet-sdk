@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class ShiftFilter
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="ShiftFilter"/> class.
         /// </summary>
@@ -36,25 +37,65 @@ namespace Square.Models
             Models.ShiftWorkday workday = null,
             IList<string> teamMemberIds = null)
         {
-            this.LocationIds = locationIds;
-            this.EmployeeIds = employeeIds;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "location_ids", false },
+                { "employee_ids", false },
+                { "team_member_ids", false }
+            };
+
+            if (locationIds != null)
+            {
+                shouldSerialize["location_ids"] = true;
+                this.LocationIds = locationIds;
+            }
+
+            if (employeeIds != null)
+            {
+                shouldSerialize["employee_ids"] = true;
+                this.EmployeeIds = employeeIds;
+            }
+
             this.Status = status;
             this.Start = start;
             this.End = end;
             this.Workday = workday;
-            this.TeamMemberIds = teamMemberIds;
+            if (teamMemberIds != null)
+            {
+                shouldSerialize["team_member_ids"] = true;
+                this.TeamMemberIds = teamMemberIds;
+            }
+
+        }
+        internal ShiftFilter(Dictionary<string, bool> shouldSerialize,
+            IList<string> locationIds = null,
+            IList<string> employeeIds = null,
+            string status = null,
+            Models.TimeRange start = null,
+            Models.TimeRange end = null,
+            Models.ShiftWorkday workday = null,
+            IList<string> teamMemberIds = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            LocationIds = locationIds;
+            EmployeeIds = employeeIds;
+            Status = status;
+            Start = start;
+            End = end;
+            Workday = workday;
+            TeamMemberIds = teamMemberIds;
         }
 
         /// <summary>
         /// Fetch shifts for the specified location.
         /// </summary>
-        [JsonProperty("location_ids", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("location_ids")]
         public IList<string> LocationIds { get; }
 
         /// <summary>
         /// Fetch shifts for the specified employees. DEPRECATED at version 2020-08-26. Use `team_member_ids` instead.
         /// </summary>
-        [JsonProperty("employee_ids", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("employee_ids")]
         public IList<string> EmployeeIds { get; }
 
         /// <summary>
@@ -93,7 +134,7 @@ namespace Square.Models
         /// <summary>
         /// Fetch shifts for the specified team members. Replaced `employee_ids` at version "2020-08-26".
         /// </summary>
-        [JsonProperty("team_member_ids", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("team_member_ids")]
         public IList<string> TeamMemberIds { get; }
 
         /// <inheritdoc/>
@@ -104,6 +145,33 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"ShiftFilter : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeLocationIds()
+        {
+            return this.shouldSerialize["location_ids"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeEmployeeIds()
+        {
+            return this.shouldSerialize["employee_ids"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeTeamMemberIds()
+        {
+            return this.shouldSerialize["team_member_ids"];
         }
 
         /// <inheritdoc/>
@@ -175,6 +243,13 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "location_ids", false },
+                { "employee_ids", false },
+                { "team_member_ids", false },
+            };
+
             private IList<string> locationIds;
             private IList<string> employeeIds;
             private string status;
@@ -190,6 +265,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder LocationIds(IList<string> locationIds)
             {
+                shouldSerialize["location_ids"] = true;
                 this.locationIds = locationIds;
                 return this;
             }
@@ -201,6 +277,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder EmployeeIds(IList<string> employeeIds)
             {
+                shouldSerialize["employee_ids"] = true;
                 this.employeeIds = employeeIds;
                 return this;
             }
@@ -256,9 +333,35 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder TeamMemberIds(IList<string> teamMemberIds)
             {
+                shouldSerialize["team_member_ids"] = true;
                 this.teamMemberIds = teamMemberIds;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetLocationIds()
+            {
+                this.shouldSerialize["location_ids"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetEmployeeIds()
+            {
+                this.shouldSerialize["employee_ids"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetTeamMemberIds()
+            {
+                this.shouldSerialize["team_member_ids"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -266,7 +369,7 @@ namespace Square.Models
             /// <returns> ShiftFilter. </returns>
             public ShiftFilter Build()
             {
-                return new ShiftFilter(
+                return new ShiftFilter(shouldSerialize,
                     this.locationIds,
                     this.employeeIds,
                     this.status,

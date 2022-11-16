@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class CashAppDetails
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="CashAppDetails"/> class.
         /// </summary>
@@ -28,22 +29,48 @@ namespace Square.Models
             string buyerCountryCode = null,
             string buyerCashtag = null)
         {
-            this.BuyerFullName = buyerFullName;
-            this.BuyerCountryCode = buyerCountryCode;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "buyer_full_name", false },
+                { "buyer_country_code", false }
+            };
+
+            if (buyerFullName != null)
+            {
+                shouldSerialize["buyer_full_name"] = true;
+                this.BuyerFullName = buyerFullName;
+            }
+
+            if (buyerCountryCode != null)
+            {
+                shouldSerialize["buyer_country_code"] = true;
+                this.BuyerCountryCode = buyerCountryCode;
+            }
+
             this.BuyerCashtag = buyerCashtag;
+        }
+        internal CashAppDetails(Dictionary<string, bool> shouldSerialize,
+            string buyerFullName = null,
+            string buyerCountryCode = null,
+            string buyerCashtag = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            BuyerFullName = buyerFullName;
+            BuyerCountryCode = buyerCountryCode;
+            BuyerCashtag = buyerCashtag;
         }
 
         /// <summary>
         /// The name of the Cash App account holder.
         /// </summary>
-        [JsonProperty("buyer_full_name", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("buyer_full_name")]
         public string BuyerFullName { get; }
 
         /// <summary>
         /// The country of the Cash App account holder, in ISO 3166-1-alpha-2 format.
         /// For possible values, see [Country]($m/Country).
         /// </summary>
-        [JsonProperty("buyer_country_code", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("buyer_country_code")]
         public string BuyerCountryCode { get; }
 
         /// <summary>
@@ -60,6 +87,24 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"CashAppDetails : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeBuyerFullName()
+        {
+            return this.shouldSerialize["buyer_full_name"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeBuyerCountryCode()
+        {
+            return this.shouldSerialize["buyer_country_code"];
         }
 
         /// <inheritdoc/>
@@ -119,6 +164,12 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "buyer_full_name", false },
+                { "buyer_country_code", false },
+            };
+
             private string buyerFullName;
             private string buyerCountryCode;
             private string buyerCashtag;
@@ -130,6 +181,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder BuyerFullName(string buyerFullName)
             {
+                shouldSerialize["buyer_full_name"] = true;
                 this.buyerFullName = buyerFullName;
                 return this;
             }
@@ -141,6 +193,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder BuyerCountryCode(string buyerCountryCode)
             {
+                shouldSerialize["buyer_country_code"] = true;
                 this.buyerCountryCode = buyerCountryCode;
                 return this;
             }
@@ -157,12 +210,29 @@ namespace Square.Models
             }
 
             /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetBuyerFullName()
+            {
+                this.shouldSerialize["buyer_full_name"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetBuyerCountryCode()
+            {
+                this.shouldSerialize["buyer_country_code"] = false;
+            }
+
+
+            /// <summary>
             /// Builds class object.
             /// </summary>
             /// <returns> CashAppDetails. </returns>
             public CashAppDetails Build()
             {
-                return new CashAppDetails(
+                return new CashAppDetails(shouldSerialize,
                     this.buyerFullName,
                     this.buyerCountryCode,
                     this.buyerCashtag);

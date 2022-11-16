@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class Subscription
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="Subscription"/> class.
         /// </summary>
@@ -56,23 +57,89 @@ namespace Square.Models
             Models.SubscriptionSource source = null,
             IList<Models.SubscriptionAction> actions = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "canceled_date", false },
+                { "tax_percentage", false },
+                { "card_id", false },
+                { "actions", false }
+            };
+
             this.Id = id;
             this.LocationId = locationId;
             this.PlanId = planId;
             this.CustomerId = customerId;
             this.StartDate = startDate;
-            this.CanceledDate = canceledDate;
+            if (canceledDate != null)
+            {
+                shouldSerialize["canceled_date"] = true;
+                this.CanceledDate = canceledDate;
+            }
+
             this.ChargedThroughDate = chargedThroughDate;
             this.Status = status;
-            this.TaxPercentage = taxPercentage;
+            if (taxPercentage != null)
+            {
+                shouldSerialize["tax_percentage"] = true;
+                this.TaxPercentage = taxPercentage;
+            }
+
             this.InvoiceIds = invoiceIds;
             this.PriceOverrideMoney = priceOverrideMoney;
             this.Version = version;
             this.CreatedAt = createdAt;
-            this.CardId = cardId;
+            if (cardId != null)
+            {
+                shouldSerialize["card_id"] = true;
+                this.CardId = cardId;
+            }
+
             this.Timezone = timezone;
             this.Source = source;
-            this.Actions = actions;
+            if (actions != null)
+            {
+                shouldSerialize["actions"] = true;
+                this.Actions = actions;
+            }
+
+        }
+        internal Subscription(Dictionary<string, bool> shouldSerialize,
+            string id = null,
+            string locationId = null,
+            string planId = null,
+            string customerId = null,
+            string startDate = null,
+            string canceledDate = null,
+            string chargedThroughDate = null,
+            string status = null,
+            string taxPercentage = null,
+            IList<string> invoiceIds = null,
+            Models.Money priceOverrideMoney = null,
+            long? version = null,
+            string createdAt = null,
+            string cardId = null,
+            string timezone = null,
+            Models.SubscriptionSource source = null,
+            IList<Models.SubscriptionAction> actions = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Id = id;
+            LocationId = locationId;
+            PlanId = planId;
+            CustomerId = customerId;
+            StartDate = startDate;
+            CanceledDate = canceledDate;
+            ChargedThroughDate = chargedThroughDate;
+            Status = status;
+            TaxPercentage = taxPercentage;
+            InvoiceIds = invoiceIds;
+            PriceOverrideMoney = priceOverrideMoney;
+            Version = version;
+            CreatedAt = createdAt;
+            CardId = cardId;
+            Timezone = timezone;
+            Source = source;
+            Actions = actions;
         }
 
         /// <summary>
@@ -111,7 +178,7 @@ namespace Square.Models
         /// If this field is not set, the subscription ends according its subscription plan.
         /// This field cannot be updated, other than being cleared.
         /// </summary>
-        [JsonProperty("canceled_date", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("canceled_date")]
         public string CanceledDate { get; }
 
         /// <summary>
@@ -139,7 +206,7 @@ namespace Square.Models
         /// separator and without a `'%'` sign. For example, a value of `7.5`
         /// corresponds to 7.5%.
         /// </summary>
-        [JsonProperty("tax_percentage", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("tax_percentage")]
         public string TaxPercentage { get; }
 
         /// <summary>
@@ -179,7 +246,7 @@ namespace Square.Models
         /// The ID of the [subscriber's]($m/Customer) [card]($m/Card)
         /// used to charge for the subscription.
         /// </summary>
-        [JsonProperty("card_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("card_id")]
         public string CardId { get; }
 
         /// <summary>
@@ -203,7 +270,7 @@ namespace Square.Models
         /// [SearchSubscriptions]($e/Subscriptions/SearchSubscriptions) with the input parameter
         /// of `include:["actions"]`.
         /// </summary>
-        [JsonProperty("actions", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("actions")]
         public IList<Models.SubscriptionAction> Actions { get; }
 
         /// <inheritdoc/>
@@ -214,6 +281,42 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"Subscription : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeCanceledDate()
+        {
+            return this.shouldSerialize["canceled_date"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeTaxPercentage()
+        {
+            return this.shouldSerialize["tax_percentage"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeCardId()
+        {
+            return this.shouldSerialize["card_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeActions()
+        {
+            return this.shouldSerialize["actions"];
         }
 
         /// <inheritdoc/>
@@ -319,6 +422,14 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "canceled_date", false },
+                { "tax_percentage", false },
+                { "card_id", false },
+                { "actions", false },
+            };
+
             private string id;
             private string locationId;
             private string planId;
@@ -399,6 +510,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder CanceledDate(string canceledDate)
             {
+                shouldSerialize["canceled_date"] = true;
                 this.canceledDate = canceledDate;
                 return this;
             }
@@ -432,6 +544,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder TaxPercentage(string taxPercentage)
             {
+                shouldSerialize["tax_percentage"] = true;
                 this.taxPercentage = taxPercentage;
                 return this;
             }
@@ -487,6 +600,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder CardId(string cardId)
             {
+                shouldSerialize["card_id"] = true;
                 this.cardId = cardId;
                 return this;
             }
@@ -520,9 +634,43 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Actions(IList<Models.SubscriptionAction> actions)
             {
+                shouldSerialize["actions"] = true;
                 this.actions = actions;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetCanceledDate()
+            {
+                this.shouldSerialize["canceled_date"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetTaxPercentage()
+            {
+                this.shouldSerialize["tax_percentage"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetCardId()
+            {
+                this.shouldSerialize["card_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetActions()
+            {
+                this.shouldSerialize["actions"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -530,7 +678,7 @@ namespace Square.Models
             /// <returns> Subscription. </returns>
             public Subscription Build()
             {
-                return new Subscription(
+                return new Subscription(shouldSerialize,
                     this.id,
                     this.locationId,
                     this.planId,

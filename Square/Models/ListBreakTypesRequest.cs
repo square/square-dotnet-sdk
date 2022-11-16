@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class ListBreakTypesRequest
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="ListBreakTypesRequest"/> class.
         /// </summary>
@@ -28,29 +29,61 @@ namespace Square.Models
             int? limit = null,
             string cursor = null)
         {
-            this.LocationId = locationId;
-            this.Limit = limit;
-            this.Cursor = cursor;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "location_id", false },
+                { "limit", false },
+                { "cursor", false }
+            };
+
+            if (locationId != null)
+            {
+                shouldSerialize["location_id"] = true;
+                this.LocationId = locationId;
+            }
+
+            if (limit != null)
+            {
+                shouldSerialize["limit"] = true;
+                this.Limit = limit;
+            }
+
+            if (cursor != null)
+            {
+                shouldSerialize["cursor"] = true;
+                this.Cursor = cursor;
+            }
+
+        }
+        internal ListBreakTypesRequest(Dictionary<string, bool> shouldSerialize,
+            string locationId = null,
+            int? limit = null,
+            string cursor = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            LocationId = locationId;
+            Limit = limit;
+            Cursor = cursor;
         }
 
         /// <summary>
         /// Filter the returned `BreakType` results to only those that are associated with the
         /// specified location.
         /// </summary>
-        [JsonProperty("location_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("location_id")]
         public string LocationId { get; }
 
         /// <summary>
         /// The maximum number of `BreakType` results to return per page. The number can range between 1
         /// and 200. The default is 200.
         /// </summary>
-        [JsonProperty("limit", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("limit")]
         public int? Limit { get; }
 
         /// <summary>
         /// A pointer to the next page of `BreakType` results to fetch.
         /// </summary>
-        [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("cursor")]
         public string Cursor { get; }
 
         /// <inheritdoc/>
@@ -61,6 +94,33 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"ListBreakTypesRequest : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeLocationId()
+        {
+            return this.shouldSerialize["location_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeLimit()
+        {
+            return this.shouldSerialize["limit"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeCursor()
+        {
+            return this.shouldSerialize["cursor"];
         }
 
         /// <inheritdoc/>
@@ -120,6 +180,13 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "location_id", false },
+                { "limit", false },
+                { "cursor", false },
+            };
+
             private string locationId;
             private int? limit;
             private string cursor;
@@ -131,6 +198,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder LocationId(string locationId)
             {
+                shouldSerialize["location_id"] = true;
                 this.locationId = locationId;
                 return this;
             }
@@ -142,6 +210,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Limit(int? limit)
             {
+                shouldSerialize["limit"] = true;
                 this.limit = limit;
                 return this;
             }
@@ -153,9 +222,35 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Cursor(string cursor)
             {
+                shouldSerialize["cursor"] = true;
                 this.cursor = cursor;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetLocationId()
+            {
+                this.shouldSerialize["location_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetLimit()
+            {
+                this.shouldSerialize["limit"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetCursor()
+            {
+                this.shouldSerialize["cursor"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -163,7 +258,7 @@ namespace Square.Models
             /// <returns> ListBreakTypesRequest. </returns>
             public ListBreakTypesRequest Build()
             {
-                return new ListBreakTypesRequest(
+                return new ListBreakTypesRequest(shouldSerialize,
                     this.locationId,
                     this.limit,
                     this.cursor);

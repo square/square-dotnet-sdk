@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class FulfillmentRecipient
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="FulfillmentRecipient"/> class.
         /// </summary>
@@ -32,11 +33,53 @@ namespace Square.Models
             string phoneNumber = null,
             Models.Address address = null)
         {
-            this.CustomerId = customerId;
-            this.DisplayName = displayName;
-            this.EmailAddress = emailAddress;
-            this.PhoneNumber = phoneNumber;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "customer_id", false },
+                { "display_name", false },
+                { "email_address", false },
+                { "phone_number", false }
+            };
+
+            if (customerId != null)
+            {
+                shouldSerialize["customer_id"] = true;
+                this.CustomerId = customerId;
+            }
+
+            if (displayName != null)
+            {
+                shouldSerialize["display_name"] = true;
+                this.DisplayName = displayName;
+            }
+
+            if (emailAddress != null)
+            {
+                shouldSerialize["email_address"] = true;
+                this.EmailAddress = emailAddress;
+            }
+
+            if (phoneNumber != null)
+            {
+                shouldSerialize["phone_number"] = true;
+                this.PhoneNumber = phoneNumber;
+            }
+
             this.Address = address;
+        }
+        internal FulfillmentRecipient(Dictionary<string, bool> shouldSerialize,
+            string customerId = null,
+            string displayName = null,
+            string emailAddress = null,
+            string phoneNumber = null,
+            Models.Address address = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            CustomerId = customerId;
+            DisplayName = displayName;
+            EmailAddress = emailAddress;
+            PhoneNumber = phoneNumber;
+            Address = address;
         }
 
         /// <summary>
@@ -48,7 +91,7 @@ namespace Square.Models
         /// targeted customer profile does not contain the necessary information and
         /// these fields are left unset, the request results in an error.
         /// </summary>
-        [JsonProperty("customer_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("customer_id")]
         public string CustomerId { get; }
 
         /// <summary>
@@ -56,7 +99,7 @@ namespace Square.Models
         /// If provided, the display name overrides the corresponding customer profile value
         /// indicated by `customer_id`.
         /// </summary>
-        [JsonProperty("display_name", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("display_name")]
         public string DisplayName { get; }
 
         /// <summary>
@@ -64,7 +107,7 @@ namespace Square.Models
         /// If provided, the email address overrides the corresponding customer profile value
         /// indicated by `customer_id`.
         /// </summary>
-        [JsonProperty("email_address", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("email_address")]
         public string EmailAddress { get; }
 
         /// <summary>
@@ -72,7 +115,7 @@ namespace Square.Models
         /// If provided, the phone number overrides the corresponding customer profile value
         /// indicated by `customer_id`.
         /// </summary>
-        [JsonProperty("phone_number", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("phone_number")]
         public string PhoneNumber { get; }
 
         /// <summary>
@@ -90,6 +133,42 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"FulfillmentRecipient : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeCustomerId()
+        {
+            return this.shouldSerialize["customer_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeDisplayName()
+        {
+            return this.shouldSerialize["display_name"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeEmailAddress()
+        {
+            return this.shouldSerialize["email_address"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializePhoneNumber()
+        {
+            return this.shouldSerialize["phone_number"];
         }
 
         /// <inheritdoc/>
@@ -155,6 +234,14 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "customer_id", false },
+                { "display_name", false },
+                { "email_address", false },
+                { "phone_number", false },
+            };
+
             private string customerId;
             private string displayName;
             private string emailAddress;
@@ -168,6 +255,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder CustomerId(string customerId)
             {
+                shouldSerialize["customer_id"] = true;
                 this.customerId = customerId;
                 return this;
             }
@@ -179,6 +267,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder DisplayName(string displayName)
             {
+                shouldSerialize["display_name"] = true;
                 this.displayName = displayName;
                 return this;
             }
@@ -190,6 +279,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder EmailAddress(string emailAddress)
             {
+                shouldSerialize["email_address"] = true;
                 this.emailAddress = emailAddress;
                 return this;
             }
@@ -201,6 +291,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder PhoneNumber(string phoneNumber)
             {
+                shouldSerialize["phone_number"] = true;
                 this.phoneNumber = phoneNumber;
                 return this;
             }
@@ -217,12 +308,45 @@ namespace Square.Models
             }
 
             /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetCustomerId()
+            {
+                this.shouldSerialize["customer_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetDisplayName()
+            {
+                this.shouldSerialize["display_name"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetEmailAddress()
+            {
+                this.shouldSerialize["email_address"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetPhoneNumber()
+            {
+                this.shouldSerialize["phone_number"] = false;
+            }
+
+
+            /// <summary>
             /// Builds class object.
             /// </summary>
             /// <returns> FulfillmentRecipient. </returns>
             public FulfillmentRecipient Build()
             {
-                return new FulfillmentRecipient(
+                return new FulfillmentRecipient(shouldSerialize,
                     this.customerId,
                     this.displayName,
                     this.emailAddress,

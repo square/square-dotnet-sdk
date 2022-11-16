@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class FulfillmentPickupDetailsCurbsidePickupDetails
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="FulfillmentPickupDetailsCurbsidePickupDetails"/> class.
         /// </summary>
@@ -26,14 +27,38 @@ namespace Square.Models
             string curbsideDetails = null,
             string buyerArrivedAt = null)
         {
-            this.CurbsideDetails = curbsideDetails;
-            this.BuyerArrivedAt = buyerArrivedAt;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "curbside_details", false },
+                { "buyer_arrived_at", false }
+            };
+
+            if (curbsideDetails != null)
+            {
+                shouldSerialize["curbside_details"] = true;
+                this.CurbsideDetails = curbsideDetails;
+            }
+
+            if (buyerArrivedAt != null)
+            {
+                shouldSerialize["buyer_arrived_at"] = true;
+                this.BuyerArrivedAt = buyerArrivedAt;
+            }
+
+        }
+        internal FulfillmentPickupDetailsCurbsidePickupDetails(Dictionary<string, bool> shouldSerialize,
+            string curbsideDetails = null,
+            string buyerArrivedAt = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            CurbsideDetails = curbsideDetails;
+            BuyerArrivedAt = buyerArrivedAt;
         }
 
         /// <summary>
         /// Specific details for curbside pickup, such as parking number and vehicle model.
         /// </summary>
-        [JsonProperty("curbside_details", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("curbside_details")]
         public string CurbsideDetails { get; }
 
         /// <summary>
@@ -41,7 +66,7 @@ namespace Square.Models
         /// indicating when the buyer arrived and is waiting for pickup. The timestamp must be in RFC 3339 format
         /// (for example, "2016-09-04T23:59:33.123Z").
         /// </summary>
-        [JsonProperty("buyer_arrived_at", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("buyer_arrived_at")]
         public string BuyerArrivedAt { get; }
 
         /// <inheritdoc/>
@@ -52,6 +77,24 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"FulfillmentPickupDetailsCurbsidePickupDetails : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeCurbsideDetails()
+        {
+            return this.shouldSerialize["curbside_details"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeBuyerArrivedAt()
+        {
+            return this.shouldSerialize["buyer_arrived_at"];
         }
 
         /// <inheritdoc/>
@@ -108,6 +151,12 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "curbside_details", false },
+                { "buyer_arrived_at", false },
+            };
+
             private string curbsideDetails;
             private string buyerArrivedAt;
 
@@ -118,6 +167,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder CurbsideDetails(string curbsideDetails)
             {
+                shouldSerialize["curbside_details"] = true;
                 this.curbsideDetails = curbsideDetails;
                 return this;
             }
@@ -129,9 +179,27 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder BuyerArrivedAt(string buyerArrivedAt)
             {
+                shouldSerialize["buyer_arrived_at"] = true;
                 this.buyerArrivedAt = buyerArrivedAt;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetCurbsideDetails()
+            {
+                this.shouldSerialize["curbside_details"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetBuyerArrivedAt()
+            {
+                this.shouldSerialize["buyer_arrived_at"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -139,7 +207,7 @@ namespace Square.Models
             /// <returns> FulfillmentPickupDetailsCurbsidePickupDetails. </returns>
             public FulfillmentPickupDetailsCurbsidePickupDetails Build()
             {
-                return new FulfillmentPickupDetailsCurbsidePickupDetails(
+                return new FulfillmentPickupDetailsCurbsidePickupDetails(shouldSerialize,
                     this.curbsideDetails,
                     this.buyerArrivedAt);
             }

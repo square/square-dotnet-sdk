@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class ShiftWorkday
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="ShiftWorkday"/> class.
         /// </summary>
@@ -28,9 +29,29 @@ namespace Square.Models
             string matchShiftsBy = null,
             string defaultTimezone = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "default_timezone", false }
+            };
+
             this.DateRange = dateRange;
             this.MatchShiftsBy = matchShiftsBy;
-            this.DefaultTimezone = defaultTimezone;
+            if (defaultTimezone != null)
+            {
+                shouldSerialize["default_timezone"] = true;
+                this.DefaultTimezone = defaultTimezone;
+            }
+
+        }
+        internal ShiftWorkday(Dictionary<string, bool> shouldSerialize,
+            Models.DateRange dateRange = null,
+            string matchShiftsBy = null,
+            string defaultTimezone = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            DateRange = dateRange;
+            MatchShiftsBy = matchShiftsBy;
+            DefaultTimezone = defaultTimezone;
         }
 
         /// <summary>
@@ -52,7 +73,7 @@ namespace Square.Models
         /// must be provided as a fallback. Format: the IANA timezone database
         /// identifier for the relevant timezone.
         /// </summary>
-        [JsonProperty("default_timezone", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("default_timezone")]
         public string DefaultTimezone { get; }
 
         /// <inheritdoc/>
@@ -63,6 +84,15 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"ShiftWorkday : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeDefaultTimezone()
+        {
+            return this.shouldSerialize["default_timezone"];
         }
 
         /// <inheritdoc/>
@@ -122,6 +152,11 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "default_timezone", false },
+            };
+
             private Models.DateRange dateRange;
             private string matchShiftsBy;
             private string defaultTimezone;
@@ -155,9 +190,19 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder DefaultTimezone(string defaultTimezone)
             {
+                shouldSerialize["default_timezone"] = true;
                 this.defaultTimezone = defaultTimezone;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetDefaultTimezone()
+            {
+                this.shouldSerialize["default_timezone"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -165,7 +210,7 @@ namespace Square.Models
             /// <returns> ShiftWorkday. </returns>
             public ShiftWorkday Build()
             {
-                return new ShiftWorkday(
+                return new ShiftWorkday(shouldSerialize,
                     this.dateRange,
                     this.matchShiftsBy,
                     this.defaultTimezone);

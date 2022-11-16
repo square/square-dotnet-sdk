@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class DigitalWalletDetails
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="DigitalWalletDetails"/> class.
         /// </summary>
@@ -28,22 +29,48 @@ namespace Square.Models
             string brand = null,
             Models.CashAppDetails cashAppDetails = null)
         {
-            this.Status = status;
-            this.Brand = brand;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "status", false },
+                { "brand", false }
+            };
+
+            if (status != null)
+            {
+                shouldSerialize["status"] = true;
+                this.Status = status;
+            }
+
+            if (brand != null)
+            {
+                shouldSerialize["brand"] = true;
+                this.Brand = brand;
+            }
+
             this.CashAppDetails = cashAppDetails;
+        }
+        internal DigitalWalletDetails(Dictionary<string, bool> shouldSerialize,
+            string status = null,
+            string brand = null,
+            Models.CashAppDetails cashAppDetails = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Status = status;
+            Brand = brand;
+            CashAppDetails = cashAppDetails;
         }
 
         /// <summary>
         /// The status of the `WALLET` payment. The status can be `AUTHORIZED`, `CAPTURED`, `VOIDED`, or
         /// `FAILED`.
         /// </summary>
-        [JsonProperty("status", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("status")]
         public string Status { get; }
 
         /// <summary>
         /// The brand used for the `WALLET` payment. The brand can be `CASH_APP`, `PAYPAY` or `UNKNOWN`.
         /// </summary>
-        [JsonProperty("brand", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("brand")]
         public string Brand { get; }
 
         /// <summary>
@@ -60,6 +87,24 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"DigitalWalletDetails : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeStatus()
+        {
+            return this.shouldSerialize["status"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeBrand()
+        {
+            return this.shouldSerialize["brand"];
         }
 
         /// <inheritdoc/>
@@ -119,6 +164,12 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "status", false },
+                { "brand", false },
+            };
+
             private string status;
             private string brand;
             private Models.CashAppDetails cashAppDetails;
@@ -130,6 +181,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Status(string status)
             {
+                shouldSerialize["status"] = true;
                 this.status = status;
                 return this;
             }
@@ -141,6 +193,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Brand(string brand)
             {
+                shouldSerialize["brand"] = true;
                 this.brand = brand;
                 return this;
             }
@@ -157,12 +210,29 @@ namespace Square.Models
             }
 
             /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetStatus()
+            {
+                this.shouldSerialize["status"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetBrand()
+            {
+                this.shouldSerialize["brand"] = false;
+            }
+
+
+            /// <summary>
             /// Builds class object.
             /// </summary>
             /// <returns> DigitalWalletDetails. </returns>
             public DigitalWalletDetails Build()
             {
-                return new DigitalWalletDetails(
+                return new DigitalWalletDetails(shouldSerialize,
                     this.status,
                     this.brand,
                     this.cashAppDetails);

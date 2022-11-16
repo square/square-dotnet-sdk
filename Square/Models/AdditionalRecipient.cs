@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class AdditionalRecipient
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="AdditionalRecipient"/> class.
         /// </summary>
@@ -30,10 +31,38 @@ namespace Square.Models
             string description = null,
             string receivableId = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "description", false },
+                { "receivable_id", false }
+            };
+
             this.LocationId = locationId;
-            this.Description = description;
+            if (description != null)
+            {
+                shouldSerialize["description"] = true;
+                this.Description = description;
+            }
+
             this.AmountMoney = amountMoney;
-            this.ReceivableId = receivableId;
+            if (receivableId != null)
+            {
+                shouldSerialize["receivable_id"] = true;
+                this.ReceivableId = receivableId;
+            }
+
+        }
+        internal AdditionalRecipient(Dictionary<string, bool> shouldSerialize,
+            string locationId,
+            Models.Money amountMoney,
+            string description = null,
+            string receivableId = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            LocationId = locationId;
+            Description = description;
+            AmountMoney = amountMoney;
+            ReceivableId = receivableId;
         }
 
         /// <summary>
@@ -45,7 +74,7 @@ namespace Square.Models
         /// <summary>
         /// The description of the additional recipient.
         /// </summary>
-        [JsonProperty("description", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("description")]
         public string Description { get; }
 
         /// <summary>
@@ -62,7 +91,7 @@ namespace Square.Models
         /// <summary>
         /// The unique ID for the RETIRED `AdditionalRecipientReceivable` object. This field should be empty for any `AdditionalRecipient` objects created after the retirement.
         /// </summary>
-        [JsonProperty("receivable_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("receivable_id")]
         public string ReceivableId { get; }
 
         /// <inheritdoc/>
@@ -73,6 +102,24 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"AdditionalRecipient : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeDescription()
+        {
+            return this.shouldSerialize["description"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeReceivableId()
+        {
+            return this.shouldSerialize["receivable_id"];
         }
 
         /// <inheritdoc/>
@@ -135,6 +182,12 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "description", false },
+                { "receivable_id", false },
+            };
+
             private string locationId;
             private Models.Money amountMoney;
             private string description;
@@ -177,6 +230,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Description(string description)
             {
+                shouldSerialize["description"] = true;
                 this.description = description;
                 return this;
             }
@@ -188,9 +242,27 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder ReceivableId(string receivableId)
             {
+                shouldSerialize["receivable_id"] = true;
                 this.receivableId = receivableId;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetDescription()
+            {
+                this.shouldSerialize["description"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetReceivableId()
+            {
+                this.shouldSerialize["receivable_id"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -198,7 +270,7 @@ namespace Square.Models
             /// <returns> AdditionalRecipient. </returns>
             public AdditionalRecipient Build()
             {
-                return new AdditionalRecipient(
+                return new AdditionalRecipient(shouldSerialize,
                     this.locationId,
                     this.amountMoney,
                     this.description,

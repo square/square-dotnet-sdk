@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class BuyNowPayLaterDetails
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="BuyNowPayLaterDetails"/> class.
         /// </summary>
@@ -28,16 +29,36 @@ namespace Square.Models
             Models.AfterpayDetails afterpayDetails = null,
             Models.ClearpayDetails clearpayDetails = null)
         {
-            this.Brand = brand;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "brand", false }
+            };
+
+            if (brand != null)
+            {
+                shouldSerialize["brand"] = true;
+                this.Brand = brand;
+            }
+
             this.AfterpayDetails = afterpayDetails;
             this.ClearpayDetails = clearpayDetails;
+        }
+        internal BuyNowPayLaterDetails(Dictionary<string, bool> shouldSerialize,
+            string brand = null,
+            Models.AfterpayDetails afterpayDetails = null,
+            Models.ClearpayDetails clearpayDetails = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Brand = brand;
+            AfterpayDetails = afterpayDetails;
+            ClearpayDetails = clearpayDetails;
         }
 
         /// <summary>
         /// The brand used for the Buy Now Pay Later payment.
         /// The brand can be `AFTERPAY`, `CLEARPAY` or `UNKNOWN`.
         /// </summary>
-        [JsonProperty("brand", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("brand")]
         public string Brand { get; }
 
         /// <summary>
@@ -60,6 +81,15 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"BuyNowPayLaterDetails : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeBrand()
+        {
+            return this.shouldSerialize["brand"];
         }
 
         /// <inheritdoc/>
@@ -119,6 +149,11 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "brand", false },
+            };
+
             private string brand;
             private Models.AfterpayDetails afterpayDetails;
             private Models.ClearpayDetails clearpayDetails;
@@ -130,6 +165,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Brand(string brand)
             {
+                shouldSerialize["brand"] = true;
                 this.brand = brand;
                 return this;
             }
@@ -157,12 +193,21 @@ namespace Square.Models
             }
 
             /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetBrand()
+            {
+                this.shouldSerialize["brand"] = false;
+            }
+
+
+            /// <summary>
             /// Builds class object.
             /// </summary>
             /// <returns> BuyNowPayLaterDetails. </returns>
             public BuyNowPayLaterDetails Build()
             {
-                return new BuyNowPayLaterDetails(
+                return new BuyNowPayLaterDetails(shouldSerialize,
                     this.brand,
                     this.afterpayDetails,
                     this.clearpayDetails);

@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class CatalogItemModifierListInfo
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="CatalogItemModifierListInfo"/> class.
         /// </summary>
@@ -32,11 +33,53 @@ namespace Square.Models
             int? maxSelectedModifiers = null,
             bool? enabled = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "modifier_overrides", false },
+                { "min_selected_modifiers", false },
+                { "max_selected_modifiers", false },
+                { "enabled", false }
+            };
+
             this.ModifierListId = modifierListId;
-            this.ModifierOverrides = modifierOverrides;
-            this.MinSelectedModifiers = minSelectedModifiers;
-            this.MaxSelectedModifiers = maxSelectedModifiers;
-            this.Enabled = enabled;
+            if (modifierOverrides != null)
+            {
+                shouldSerialize["modifier_overrides"] = true;
+                this.ModifierOverrides = modifierOverrides;
+            }
+
+            if (minSelectedModifiers != null)
+            {
+                shouldSerialize["min_selected_modifiers"] = true;
+                this.MinSelectedModifiers = minSelectedModifiers;
+            }
+
+            if (maxSelectedModifiers != null)
+            {
+                shouldSerialize["max_selected_modifiers"] = true;
+                this.MaxSelectedModifiers = maxSelectedModifiers;
+            }
+
+            if (enabled != null)
+            {
+                shouldSerialize["enabled"] = true;
+                this.Enabled = enabled;
+            }
+
+        }
+        internal CatalogItemModifierListInfo(Dictionary<string, bool> shouldSerialize,
+            string modifierListId,
+            IList<Models.CatalogModifierOverride> modifierOverrides = null,
+            int? minSelectedModifiers = null,
+            int? maxSelectedModifiers = null,
+            bool? enabled = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            ModifierListId = modifierListId;
+            ModifierOverrides = modifierOverrides;
+            MinSelectedModifiers = minSelectedModifiers;
+            MaxSelectedModifiers = maxSelectedModifiers;
+            Enabled = enabled;
         }
 
         /// <summary>
@@ -48,25 +91,25 @@ namespace Square.Models
         /// <summary>
         /// A set of `CatalogModifierOverride` objects that override whether a given `CatalogModifier` is enabled by default.
         /// </summary>
-        [JsonProperty("modifier_overrides", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("modifier_overrides")]
         public IList<Models.CatalogModifierOverride> ModifierOverrides { get; }
 
         /// <summary>
         /// If 0 or larger, the smallest number of `CatalogModifier`s that must be selected from this `CatalogModifierList`.
         /// </summary>
-        [JsonProperty("min_selected_modifiers", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("min_selected_modifiers")]
         public int? MinSelectedModifiers { get; }
 
         /// <summary>
         /// If 0 or larger, the largest number of `CatalogModifier`s that can be selected from this `CatalogModifierList`.
         /// </summary>
-        [JsonProperty("max_selected_modifiers", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("max_selected_modifiers")]
         public int? MaxSelectedModifiers { get; }
 
         /// <summary>
         /// If `true`, enable this `CatalogModifierList`. The default value is `true`.
         /// </summary>
-        [JsonProperty("enabled", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("enabled")]
         public bool? Enabled { get; }
 
         /// <inheritdoc/>
@@ -77,6 +120,42 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"CatalogItemModifierListInfo : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeModifierOverrides()
+        {
+            return this.shouldSerialize["modifier_overrides"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeMinSelectedModifiers()
+        {
+            return this.shouldSerialize["min_selected_modifiers"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeMaxSelectedModifiers()
+        {
+            return this.shouldSerialize["max_selected_modifiers"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeEnabled()
+        {
+            return this.shouldSerialize["enabled"];
         }
 
         /// <inheritdoc/>
@@ -142,6 +221,14 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "modifier_overrides", false },
+                { "min_selected_modifiers", false },
+                { "max_selected_modifiers", false },
+                { "enabled", false },
+            };
+
             private string modifierListId;
             private IList<Models.CatalogModifierOverride> modifierOverrides;
             private int? minSelectedModifiers;
@@ -172,6 +259,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder ModifierOverrides(IList<Models.CatalogModifierOverride> modifierOverrides)
             {
+                shouldSerialize["modifier_overrides"] = true;
                 this.modifierOverrides = modifierOverrides;
                 return this;
             }
@@ -183,6 +271,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder MinSelectedModifiers(int? minSelectedModifiers)
             {
+                shouldSerialize["min_selected_modifiers"] = true;
                 this.minSelectedModifiers = minSelectedModifiers;
                 return this;
             }
@@ -194,6 +283,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder MaxSelectedModifiers(int? maxSelectedModifiers)
             {
+                shouldSerialize["max_selected_modifiers"] = true;
                 this.maxSelectedModifiers = maxSelectedModifiers;
                 return this;
             }
@@ -205,9 +295,43 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Enabled(bool? enabled)
             {
+                shouldSerialize["enabled"] = true;
                 this.enabled = enabled;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetModifierOverrides()
+            {
+                this.shouldSerialize["modifier_overrides"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetMinSelectedModifiers()
+            {
+                this.shouldSerialize["min_selected_modifiers"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetMaxSelectedModifiers()
+            {
+                this.shouldSerialize["max_selected_modifiers"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetEnabled()
+            {
+                this.shouldSerialize["enabled"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -215,7 +339,7 @@ namespace Square.Models
             /// <returns> CatalogItemModifierListInfo. </returns>
             public CatalogItemModifierListInfo Build()
             {
-                return new CatalogItemModifierListInfo(
+                return new CatalogItemModifierListInfo(shouldSerialize,
                     this.modifierListId,
                     this.modifierOverrides,
                     this.minSelectedModifiers,

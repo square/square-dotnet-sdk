@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class UpdateOrderRequest
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="UpdateOrderRequest"/> class.
         /// </summary>
@@ -28,9 +29,35 @@ namespace Square.Models
             IList<string> fieldsToClear = null,
             string idempotencyKey = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "fields_to_clear", false },
+                { "idempotency_key", false }
+            };
+
             this.Order = order;
-            this.FieldsToClear = fieldsToClear;
-            this.IdempotencyKey = idempotencyKey;
+            if (fieldsToClear != null)
+            {
+                shouldSerialize["fields_to_clear"] = true;
+                this.FieldsToClear = fieldsToClear;
+            }
+
+            if (idempotencyKey != null)
+            {
+                shouldSerialize["idempotency_key"] = true;
+                this.IdempotencyKey = idempotencyKey;
+            }
+
+        }
+        internal UpdateOrderRequest(Dictionary<string, bool> shouldSerialize,
+            Models.Order order = null,
+            IList<string> fieldsToClear = null,
+            string idempotencyKey = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Order = order;
+            FieldsToClear = fieldsToClear;
+            IdempotencyKey = idempotencyKey;
         }
 
         /// <summary>
@@ -44,11 +71,11 @@ namespace Square.Models
         public Models.Order Order { get; }
 
         /// <summary>
-        /// The [dot notation paths](https://developer.squareup.com/docs/orders-api/manage-orders#on-dot-notation)
+        /// The [dot notation paths](https://developer.squareup.com/docs/orders-api/manage-orders/update-orders#identifying-fields-to-delete)
         /// fields to clear. For example, `line_items[uid].note`.
-        /// For more information, see [Deleting fields](https://developer.squareup.com/docs/orders-api/manage-orders#delete-fields).
+        /// For more information, see [Deleting fields](https://developer.squareup.com/docs/orders-api/manage-orders/update-orders#deleting-fields).
         /// </summary>
-        [JsonProperty("fields_to_clear", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("fields_to_clear")]
         public IList<string> FieldsToClear { get; }
 
         /// <summary>
@@ -59,7 +86,7 @@ namespace Square.Models
         /// The latest order version is returned.
         /// For more information, see [Idempotency](https://developer.squareup.com/docs/basics/api101/idempotency).
         /// </summary>
-        [JsonProperty("idempotency_key", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("idempotency_key")]
         public string IdempotencyKey { get; }
 
         /// <inheritdoc/>
@@ -70,6 +97,24 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"UpdateOrderRequest : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeFieldsToClear()
+        {
+            return this.shouldSerialize["fields_to_clear"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeIdempotencyKey()
+        {
+            return this.shouldSerialize["idempotency_key"];
         }
 
         /// <inheritdoc/>
@@ -129,6 +174,12 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "fields_to_clear", false },
+                { "idempotency_key", false },
+            };
+
             private Models.Order order;
             private IList<string> fieldsToClear;
             private string idempotencyKey;
@@ -151,6 +202,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder FieldsToClear(IList<string> fieldsToClear)
             {
+                shouldSerialize["fields_to_clear"] = true;
                 this.fieldsToClear = fieldsToClear;
                 return this;
             }
@@ -162,9 +214,27 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder IdempotencyKey(string idempotencyKey)
             {
+                shouldSerialize["idempotency_key"] = true;
                 this.idempotencyKey = idempotencyKey;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetFieldsToClear()
+            {
+                this.shouldSerialize["fields_to_clear"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetIdempotencyKey()
+            {
+                this.shouldSerialize["idempotency_key"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -172,7 +242,7 @@ namespace Square.Models
             /// <returns> UpdateOrderRequest. </returns>
             public UpdateOrderRequest Build()
             {
-                return new UpdateOrderRequest(
+                return new UpdateOrderRequest(shouldSerialize,
                     this.order,
                     this.fieldsToClear,
                     this.idempotencyKey);

@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class LoyaltyAccount
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="LoyaltyAccount"/> class.
         /// </summary>
@@ -42,16 +43,62 @@ namespace Square.Models
             Models.LoyaltyAccountMapping mapping = null,
             IList<Models.LoyaltyAccountExpiringPointDeadline> expiringPointDeadlines = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "customer_id", false },
+                { "enrolled_at", false },
+                { "expiring_point_deadlines", false }
+            };
+
             this.Id = id;
             this.ProgramId = programId;
             this.Balance = balance;
             this.LifetimePoints = lifetimePoints;
-            this.CustomerId = customerId;
-            this.EnrolledAt = enrolledAt;
+            if (customerId != null)
+            {
+                shouldSerialize["customer_id"] = true;
+                this.CustomerId = customerId;
+            }
+
+            if (enrolledAt != null)
+            {
+                shouldSerialize["enrolled_at"] = true;
+                this.EnrolledAt = enrolledAt;
+            }
+
             this.CreatedAt = createdAt;
             this.UpdatedAt = updatedAt;
             this.Mapping = mapping;
-            this.ExpiringPointDeadlines = expiringPointDeadlines;
+            if (expiringPointDeadlines != null)
+            {
+                shouldSerialize["expiring_point_deadlines"] = true;
+                this.ExpiringPointDeadlines = expiringPointDeadlines;
+            }
+
+        }
+        internal LoyaltyAccount(Dictionary<string, bool> shouldSerialize,
+            string programId,
+            string id = null,
+            int? balance = null,
+            int? lifetimePoints = null,
+            string customerId = null,
+            string enrolledAt = null,
+            string createdAt = null,
+            string updatedAt = null,
+            Models.LoyaltyAccountMapping mapping = null,
+            IList<Models.LoyaltyAccountExpiringPointDeadline> expiringPointDeadlines = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Id = id;
+            ProgramId = programId;
+            Balance = balance;
+            LifetimePoints = lifetimePoints;
+            CustomerId = customerId;
+            EnrolledAt = enrolledAt;
+            CreatedAt = createdAt;
+            UpdatedAt = updatedAt;
+            Mapping = mapping;
+            ExpiringPointDeadlines = expiringPointDeadlines;
         }
 
         /// <summary>
@@ -82,7 +129,7 @@ namespace Square.Models
         /// <summary>
         /// The Square-assigned ID of the [customer]($m/Customer) that is associated with the account.
         /// </summary>
-        [JsonProperty("customer_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("customer_id")]
         public string CustomerId { get; }
 
         /// <summary>
@@ -92,7 +139,7 @@ namespace Square.Models
         /// This field is typically specified in a `CreateLoyaltyAccount` request when creating a loyalty account for a buyer who already interacted with their account.
         /// For example, you would set this field when migrating accounts from an external system. The timestamp in the request can represent a current or previous date and time, but it cannot be set for the future.
         /// </summary>
-        [JsonProperty("enrolled_at", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("enrolled_at")]
         public string EnrolledAt { get; }
 
         /// <summary>
@@ -119,7 +166,7 @@ namespace Square.Models
         /// The schedule for when points expire in the loyalty account balance. This field is present only if the account has points that are scheduled to expire.
         /// The total number of points in this field equals the number of points in the `balance` field.
         /// </summary>
-        [JsonProperty("expiring_point_deadlines", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("expiring_point_deadlines")]
         public IList<Models.LoyaltyAccountExpiringPointDeadline> ExpiringPointDeadlines { get; }
 
         /// <inheritdoc/>
@@ -130,6 +177,33 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"LoyaltyAccount : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeCustomerId()
+        {
+            return this.shouldSerialize["customer_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeEnrolledAt()
+        {
+            return this.shouldSerialize["enrolled_at"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeExpiringPointDeadlines()
+        {
+            return this.shouldSerialize["expiring_point_deadlines"];
         }
 
         /// <inheritdoc/>
@@ -212,6 +286,13 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "customer_id", false },
+                { "enrolled_at", false },
+                { "expiring_point_deadlines", false },
+            };
+
             private string programId;
             private string id;
             private int? balance;
@@ -280,6 +361,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder CustomerId(string customerId)
             {
+                shouldSerialize["customer_id"] = true;
                 this.customerId = customerId;
                 return this;
             }
@@ -291,6 +373,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder EnrolledAt(string enrolledAt)
             {
+                shouldSerialize["enrolled_at"] = true;
                 this.enrolledAt = enrolledAt;
                 return this;
             }
@@ -335,9 +418,35 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder ExpiringPointDeadlines(IList<Models.LoyaltyAccountExpiringPointDeadline> expiringPointDeadlines)
             {
+                shouldSerialize["expiring_point_deadlines"] = true;
                 this.expiringPointDeadlines = expiringPointDeadlines;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetCustomerId()
+            {
+                this.shouldSerialize["customer_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetEnrolledAt()
+            {
+                this.shouldSerialize["enrolled_at"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetExpiringPointDeadlines()
+            {
+                this.shouldSerialize["expiring_point_deadlines"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -345,7 +454,7 @@ namespace Square.Models
             /// <returns> LoyaltyAccount. </returns>
             public LoyaltyAccount Build()
             {
-                return new LoyaltyAccount(
+                return new LoyaltyAccount(shouldSerialize,
                     this.programId,
                     this.id,
                     this.balance,

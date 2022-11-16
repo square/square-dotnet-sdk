@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class DeviceCode
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="DeviceCode"/> class.
         /// </summary>
@@ -44,17 +45,59 @@ namespace Square.Models
             string statusChangedAt = null,
             string pairedAt = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "name", false },
+                { "location_id", false }
+            };
+
             this.Id = id;
-            this.Name = name;
+            if (name != null)
+            {
+                shouldSerialize["name"] = true;
+                this.Name = name;
+            }
+
             this.Code = code;
             this.DeviceId = deviceId;
             this.ProductType = productType;
-            this.LocationId = locationId;
+            if (locationId != null)
+            {
+                shouldSerialize["location_id"] = true;
+                this.LocationId = locationId;
+            }
+
             this.Status = status;
             this.PairBy = pairBy;
             this.CreatedAt = createdAt;
             this.StatusChangedAt = statusChangedAt;
             this.PairedAt = pairedAt;
+        }
+        internal DeviceCode(Dictionary<string, bool> shouldSerialize,
+            string productType,
+            string id = null,
+            string name = null,
+            string code = null,
+            string deviceId = null,
+            string locationId = null,
+            string status = null,
+            string pairBy = null,
+            string createdAt = null,
+            string statusChangedAt = null,
+            string pairedAt = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Id = id;
+            Name = name;
+            Code = code;
+            DeviceId = deviceId;
+            ProductType = productType;
+            LocationId = locationId;
+            Status = status;
+            PairBy = pairBy;
+            CreatedAt = createdAt;
+            StatusChangedAt = statusChangedAt;
+            PairedAt = pairedAt;
         }
 
         /// <summary>
@@ -66,7 +109,7 @@ namespace Square.Models
         /// <summary>
         /// An optional user-defined name for the device code.
         /// </summary>
-        [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("name")]
         public string Name { get; }
 
         /// <summary>
@@ -90,7 +133,7 @@ namespace Square.Models
         /// <summary>
         /// The location assigned to this code.
         /// </summary>
-        [JsonProperty("location_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("location_id")]
         public string LocationId { get; }
 
         /// <summary>
@@ -131,6 +174,24 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"DeviceCode : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeName()
+        {
+            return this.shouldSerialize["name"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeLocationId()
+        {
+            return this.shouldSerialize["location_id"];
         }
 
         /// <inheritdoc/>
@@ -216,6 +277,12 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "name", false },
+                { "location_id", false },
+            };
+
             private string productType;
             private string id;
             private string name;
@@ -263,6 +330,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Name(string name)
             {
+                shouldSerialize["name"] = true;
                 this.name = name;
                 return this;
             }
@@ -296,6 +364,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder LocationId(string locationId)
             {
+                shouldSerialize["location_id"] = true;
                 this.locationId = locationId;
                 return this;
             }
@@ -356,12 +425,29 @@ namespace Square.Models
             }
 
             /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetName()
+            {
+                this.shouldSerialize["name"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetLocationId()
+            {
+                this.shouldSerialize["location_id"] = false;
+            }
+
+
+            /// <summary>
             /// Builds class object.
             /// </summary>
             /// <returns> DeviceCode. </returns>
             public DeviceCode Build()
             {
-                return new DeviceCode(
+                return new DeviceCode(shouldSerialize,
                     this.productType,
                     this.id,
                     this.name,

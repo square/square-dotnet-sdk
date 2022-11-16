@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class ListRefundsRequest
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="ListRefundsRequest"/> class.
         /// </summary>
@@ -30,10 +31,44 @@ namespace Square.Models
             string sortOrder = null,
             string cursor = null)
         {
-            this.BeginTime = beginTime;
-            this.EndTime = endTime;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "begin_time", false },
+                { "end_time", false },
+                { "cursor", false }
+            };
+
+            if (beginTime != null)
+            {
+                shouldSerialize["begin_time"] = true;
+                this.BeginTime = beginTime;
+            }
+
+            if (endTime != null)
+            {
+                shouldSerialize["end_time"] = true;
+                this.EndTime = endTime;
+            }
+
             this.SortOrder = sortOrder;
-            this.Cursor = cursor;
+            if (cursor != null)
+            {
+                shouldSerialize["cursor"] = true;
+                this.Cursor = cursor;
+            }
+
+        }
+        internal ListRefundsRequest(Dictionary<string, bool> shouldSerialize,
+            string beginTime = null,
+            string endTime = null,
+            string sortOrder = null,
+            string cursor = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            BeginTime = beginTime;
+            EndTime = endTime;
+            SortOrder = sortOrder;
+            Cursor = cursor;
         }
 
         /// <summary>
@@ -41,7 +76,7 @@ namespace Square.Models
         /// See [Date ranges](https://developer.squareup.com/docs/build-basics/working-with-dates) for details on date inclusivity/exclusivity.
         /// Default value: The current time minus one year.
         /// </summary>
-        [JsonProperty("begin_time", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("begin_time")]
         public string BeginTime { get; }
 
         /// <summary>
@@ -49,7 +84,7 @@ namespace Square.Models
         /// See [Date ranges](https://developer.squareup.com/docs/build-basics/working-with-dates) for details on date inclusivity/exclusivity.
         /// Default value: The current time.
         /// </summary>
-        [JsonProperty("end_time", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("end_time")]
         public string EndTime { get; }
 
         /// <summary>
@@ -63,7 +98,7 @@ namespace Square.Models
         /// Provide this to retrieve the next set of results for your original query.
         /// See [Paginating results](https://developer.squareup.com/docs/working-with-apis/pagination) for more information.
         /// </summary>
-        [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("cursor")]
         public string Cursor { get; }
 
         /// <inheritdoc/>
@@ -74,6 +109,33 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"ListRefundsRequest : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeBeginTime()
+        {
+            return this.shouldSerialize["begin_time"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeEndTime()
+        {
+            return this.shouldSerialize["end_time"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeCursor()
+        {
+            return this.shouldSerialize["cursor"];
         }
 
         /// <inheritdoc/>
@@ -136,6 +198,13 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "begin_time", false },
+                { "end_time", false },
+                { "cursor", false },
+            };
+
             private string beginTime;
             private string endTime;
             private string sortOrder;
@@ -148,6 +217,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder BeginTime(string beginTime)
             {
+                shouldSerialize["begin_time"] = true;
                 this.beginTime = beginTime;
                 return this;
             }
@@ -159,6 +229,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder EndTime(string endTime)
             {
+                shouldSerialize["end_time"] = true;
                 this.endTime = endTime;
                 return this;
             }
@@ -181,9 +252,35 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Cursor(string cursor)
             {
+                shouldSerialize["cursor"] = true;
                 this.cursor = cursor;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetBeginTime()
+            {
+                this.shouldSerialize["begin_time"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetEndTime()
+            {
+                this.shouldSerialize["end_time"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetCursor()
+            {
+                this.shouldSerialize["cursor"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -191,7 +288,7 @@ namespace Square.Models
             /// <returns> ListRefundsRequest. </returns>
             public ListRefundsRequest Build()
             {
-                return new ListRefundsRequest(
+                return new ListRefundsRequest(shouldSerialize,
                     this.beginTime,
                     this.endTime,
                     this.sortOrder,

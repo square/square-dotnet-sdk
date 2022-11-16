@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class CustomAttributeFilter
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="CustomAttributeFilter"/> class.
         /// </summary>
@@ -34,12 +35,62 @@ namespace Square.Models
             IList<string> selectionUidsFilter = null,
             bool? boolFilter = null)
         {
-            this.CustomAttributeDefinitionId = customAttributeDefinitionId;
-            this.Key = key;
-            this.StringFilter = stringFilter;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "custom_attribute_definition_id", false },
+                { "key", false },
+                { "string_filter", false },
+                { "selection_uids_filter", false },
+                { "bool_filter", false }
+            };
+
+            if (customAttributeDefinitionId != null)
+            {
+                shouldSerialize["custom_attribute_definition_id"] = true;
+                this.CustomAttributeDefinitionId = customAttributeDefinitionId;
+            }
+
+            if (key != null)
+            {
+                shouldSerialize["key"] = true;
+                this.Key = key;
+            }
+
+            if (stringFilter != null)
+            {
+                shouldSerialize["string_filter"] = true;
+                this.StringFilter = stringFilter;
+            }
+
             this.NumberFilter = numberFilter;
-            this.SelectionUidsFilter = selectionUidsFilter;
-            this.BoolFilter = boolFilter;
+            if (selectionUidsFilter != null)
+            {
+                shouldSerialize["selection_uids_filter"] = true;
+                this.SelectionUidsFilter = selectionUidsFilter;
+            }
+
+            if (boolFilter != null)
+            {
+                shouldSerialize["bool_filter"] = true;
+                this.BoolFilter = boolFilter;
+            }
+
+        }
+        internal CustomAttributeFilter(Dictionary<string, bool> shouldSerialize,
+            string customAttributeDefinitionId = null,
+            string key = null,
+            string stringFilter = null,
+            Models.Range numberFilter = null,
+            IList<string> selectionUidsFilter = null,
+            bool? boolFilter = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            CustomAttributeDefinitionId = customAttributeDefinitionId;
+            Key = key;
+            StringFilter = stringFilter;
+            NumberFilter = numberFilter;
+            SelectionUidsFilter = selectionUidsFilter;
+            BoolFilter = boolFilter;
         }
 
         /// <summary>
@@ -47,7 +98,7 @@ namespace Square.Models
         /// `custom_attribute_definition_id` property value against the the specified id.
         /// Exactly one of `custom_attribute_definition_id` or `key` must be specified.
         /// </summary>
-        [JsonProperty("custom_attribute_definition_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("custom_attribute_definition_id")]
         public string CustomAttributeDefinitionId { get; }
 
         /// <summary>
@@ -55,7 +106,7 @@ namespace Square.Models
         /// `key` property value against the specified key.
         /// Exactly one of `custom_attribute_definition_id` or `key` must be specified.
         /// </summary>
-        [JsonProperty("key", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("key")]
         public string Key { get; }
 
         /// <summary>
@@ -63,7 +114,7 @@ namespace Square.Models
         /// `string_value`  property value against the specified text.
         /// Exactly one of `string_filter`, `number_filter`, `selection_uids_filter`, or `bool_filter` must be specified.
         /// </summary>
-        [JsonProperty("string_filter", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("string_filter")]
         public string StringFilter { get; }
 
         /// <summary>
@@ -77,7 +128,7 @@ namespace Square.Models
         /// `selection_uid_values` values against the specified selection uids.
         /// Exactly one of `string_filter`, `number_filter`, `selection_uids_filter`, or `bool_filter` must be specified.
         /// </summary>
-        [JsonProperty("selection_uids_filter", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("selection_uids_filter")]
         public IList<string> SelectionUidsFilter { get; }
 
         /// <summary>
@@ -85,7 +136,7 @@ namespace Square.Models
         /// `boolean_value` property values against the specified Boolean expression.
         /// Exactly one of `string_filter`, `number_filter`, `selection_uids_filter`, or `bool_filter` must be specified.
         /// </summary>
-        [JsonProperty("bool_filter", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("bool_filter")]
         public bool? BoolFilter { get; }
 
         /// <inheritdoc/>
@@ -96,6 +147,51 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"CustomAttributeFilter : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeCustomAttributeDefinitionId()
+        {
+            return this.shouldSerialize["custom_attribute_definition_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeKey()
+        {
+            return this.shouldSerialize["key"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeStringFilter()
+        {
+            return this.shouldSerialize["string_filter"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeSelectionUidsFilter()
+        {
+            return this.shouldSerialize["selection_uids_filter"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeBoolFilter()
+        {
+            return this.shouldSerialize["bool_filter"];
         }
 
         /// <inheritdoc/>
@@ -164,6 +260,15 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "custom_attribute_definition_id", false },
+                { "key", false },
+                { "string_filter", false },
+                { "selection_uids_filter", false },
+                { "bool_filter", false },
+            };
+
             private string customAttributeDefinitionId;
             private string key;
             private string stringFilter;
@@ -178,6 +283,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder CustomAttributeDefinitionId(string customAttributeDefinitionId)
             {
+                shouldSerialize["custom_attribute_definition_id"] = true;
                 this.customAttributeDefinitionId = customAttributeDefinitionId;
                 return this;
             }
@@ -189,6 +295,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Key(string key)
             {
+                shouldSerialize["key"] = true;
                 this.key = key;
                 return this;
             }
@@ -200,6 +307,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder StringFilter(string stringFilter)
             {
+                shouldSerialize["string_filter"] = true;
                 this.stringFilter = stringFilter;
                 return this;
             }
@@ -222,6 +330,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder SelectionUidsFilter(IList<string> selectionUidsFilter)
             {
+                shouldSerialize["selection_uids_filter"] = true;
                 this.selectionUidsFilter = selectionUidsFilter;
                 return this;
             }
@@ -233,9 +342,51 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder BoolFilter(bool? boolFilter)
             {
+                shouldSerialize["bool_filter"] = true;
                 this.boolFilter = boolFilter;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetCustomAttributeDefinitionId()
+            {
+                this.shouldSerialize["custom_attribute_definition_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetKey()
+            {
+                this.shouldSerialize["key"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetStringFilter()
+            {
+                this.shouldSerialize["string_filter"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetSelectionUidsFilter()
+            {
+                this.shouldSerialize["selection_uids_filter"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetBoolFilter()
+            {
+                this.shouldSerialize["bool_filter"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -243,7 +394,7 @@ namespace Square.Models
             /// <returns> CustomAttributeFilter. </returns>
             public CustomAttributeFilter Build()
             {
-                return new CustomAttributeFilter(
+                return new CustomAttributeFilter(shouldSerialize,
                     this.customAttributeDefinitionId,
                     this.key,
                     this.stringFilter,

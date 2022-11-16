@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class OrderFulfillmentShipmentDetails
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="OrderFulfillmentShipmentDetails"/> class.
         /// </summary>
@@ -52,21 +53,113 @@ namespace Square.Models
             string failedAt = null,
             string failureReason = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "carrier", false },
+                { "shipping_note", false },
+                { "shipping_type", false },
+                { "tracking_number", false },
+                { "tracking_url", false },
+                { "expected_shipped_at", false },
+                { "canceled_at", false },
+                { "cancel_reason", false },
+                { "failure_reason", false }
+            };
+
             this.Recipient = recipient;
-            this.Carrier = carrier;
-            this.ShippingNote = shippingNote;
-            this.ShippingType = shippingType;
-            this.TrackingNumber = trackingNumber;
-            this.TrackingUrl = trackingUrl;
+            if (carrier != null)
+            {
+                shouldSerialize["carrier"] = true;
+                this.Carrier = carrier;
+            }
+
+            if (shippingNote != null)
+            {
+                shouldSerialize["shipping_note"] = true;
+                this.ShippingNote = shippingNote;
+            }
+
+            if (shippingType != null)
+            {
+                shouldSerialize["shipping_type"] = true;
+                this.ShippingType = shippingType;
+            }
+
+            if (trackingNumber != null)
+            {
+                shouldSerialize["tracking_number"] = true;
+                this.TrackingNumber = trackingNumber;
+            }
+
+            if (trackingUrl != null)
+            {
+                shouldSerialize["tracking_url"] = true;
+                this.TrackingUrl = trackingUrl;
+            }
+
             this.PlacedAt = placedAt;
             this.InProgressAt = inProgressAt;
             this.PackagedAt = packagedAt;
-            this.ExpectedShippedAt = expectedShippedAt;
+            if (expectedShippedAt != null)
+            {
+                shouldSerialize["expected_shipped_at"] = true;
+                this.ExpectedShippedAt = expectedShippedAt;
+            }
+
             this.ShippedAt = shippedAt;
-            this.CanceledAt = canceledAt;
-            this.CancelReason = cancelReason;
+            if (canceledAt != null)
+            {
+                shouldSerialize["canceled_at"] = true;
+                this.CanceledAt = canceledAt;
+            }
+
+            if (cancelReason != null)
+            {
+                shouldSerialize["cancel_reason"] = true;
+                this.CancelReason = cancelReason;
+            }
+
             this.FailedAt = failedAt;
-            this.FailureReason = failureReason;
+            if (failureReason != null)
+            {
+                shouldSerialize["failure_reason"] = true;
+                this.FailureReason = failureReason;
+            }
+
+        }
+        internal OrderFulfillmentShipmentDetails(Dictionary<string, bool> shouldSerialize,
+            Models.OrderFulfillmentRecipient recipient = null,
+            string carrier = null,
+            string shippingNote = null,
+            string shippingType = null,
+            string trackingNumber = null,
+            string trackingUrl = null,
+            string placedAt = null,
+            string inProgressAt = null,
+            string packagedAt = null,
+            string expectedShippedAt = null,
+            string shippedAt = null,
+            string canceledAt = null,
+            string cancelReason = null,
+            string failedAt = null,
+            string failureReason = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Recipient = recipient;
+            Carrier = carrier;
+            ShippingNote = shippingNote;
+            ShippingType = shippingType;
+            TrackingNumber = trackingNumber;
+            TrackingUrl = trackingUrl;
+            PlacedAt = placedAt;
+            InProgressAt = inProgressAt;
+            PackagedAt = packagedAt;
+            ExpectedShippedAt = expectedShippedAt;
+            ShippedAt = shippedAt;
+            CanceledAt = canceledAt;
+            CancelReason = cancelReason;
+            FailedAt = failedAt;
+            FailureReason = failureReason;
         }
 
         /// <summary>
@@ -78,32 +171,32 @@ namespace Square.Models
         /// <summary>
         /// The shipping carrier being used to ship this fulfillment (such as UPS, FedEx, or USPS).
         /// </summary>
-        [JsonProperty("carrier", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("carrier")]
         public string Carrier { get; }
 
         /// <summary>
         /// A note with additional information for the shipping carrier.
         /// </summary>
-        [JsonProperty("shipping_note", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("shipping_note")]
         public string ShippingNote { get; }
 
         /// <summary>
         /// A description of the type of shipping product purchased from the carrier
         /// (such as First Class, Priority, or Express).
         /// </summary>
-        [JsonProperty("shipping_type", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("shipping_type")]
         public string ShippingType { get; }
 
         /// <summary>
         /// The reference number provided by the carrier to track the shipment's progress.
         /// </summary>
-        [JsonProperty("tracking_number", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("tracking_number")]
         public string TrackingNumber { get; }
 
         /// <summary>
         /// A link to the tracking webpage on the carrier's website.
         /// </summary>
-        [JsonProperty("tracking_url", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("tracking_url")]
         public string TrackingUrl { get; }
 
         /// <summary>
@@ -135,7 +228,7 @@ namespace Square.Models
         /// indicating when the shipment is expected to be delivered to the shipping carrier.
         /// The timestamp must be in RFC 3339 format (for example, "2016-09-04T23:59:33.123Z").
         /// </summary>
-        [JsonProperty("expected_shipped_at", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("expected_shipped_at")]
         public string ExpectedShippedAt { get; }
 
         /// <summary>
@@ -152,13 +245,13 @@ namespace Square.Models
         /// indicating the shipment was canceled.
         /// The timestamp must be in RFC 3339 format (for example, "2016-09-04T23:59:33.123Z").
         /// </summary>
-        [JsonProperty("canceled_at", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("canceled_at")]
         public string CanceledAt { get; }
 
         /// <summary>
         /// A description of why the shipment was canceled.
         /// </summary>
-        [JsonProperty("cancel_reason", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("cancel_reason")]
         public string CancelReason { get; }
 
         /// <summary>
@@ -172,7 +265,7 @@ namespace Square.Models
         /// <summary>
         /// A description of why the shipment failed to be completed.
         /// </summary>
-        [JsonProperty("failure_reason", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("failure_reason")]
         public string FailureReason { get; }
 
         /// <inheritdoc/>
@@ -183,6 +276,87 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"OrderFulfillmentShipmentDetails : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeCarrier()
+        {
+            return this.shouldSerialize["carrier"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeShippingNote()
+        {
+            return this.shouldSerialize["shipping_note"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeShippingType()
+        {
+            return this.shouldSerialize["shipping_type"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeTrackingNumber()
+        {
+            return this.shouldSerialize["tracking_number"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeTrackingUrl()
+        {
+            return this.shouldSerialize["tracking_url"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeExpectedShippedAt()
+        {
+            return this.shouldSerialize["expected_shipped_at"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeCanceledAt()
+        {
+            return this.shouldSerialize["canceled_at"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeCancelReason()
+        {
+            return this.shouldSerialize["cancel_reason"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeFailureReason()
+        {
+            return this.shouldSerialize["failure_reason"];
         }
 
         /// <inheritdoc/>
@@ -282,6 +456,19 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "carrier", false },
+                { "shipping_note", false },
+                { "shipping_type", false },
+                { "tracking_number", false },
+                { "tracking_url", false },
+                { "expected_shipped_at", false },
+                { "canceled_at", false },
+                { "cancel_reason", false },
+                { "failure_reason", false },
+            };
+
             private Models.OrderFulfillmentRecipient recipient;
             private string carrier;
             private string shippingNote;
@@ -316,6 +503,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Carrier(string carrier)
             {
+                shouldSerialize["carrier"] = true;
                 this.carrier = carrier;
                 return this;
             }
@@ -327,6 +515,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder ShippingNote(string shippingNote)
             {
+                shouldSerialize["shipping_note"] = true;
                 this.shippingNote = shippingNote;
                 return this;
             }
@@ -338,6 +527,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder ShippingType(string shippingType)
             {
+                shouldSerialize["shipping_type"] = true;
                 this.shippingType = shippingType;
                 return this;
             }
@@ -349,6 +539,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder TrackingNumber(string trackingNumber)
             {
+                shouldSerialize["tracking_number"] = true;
                 this.trackingNumber = trackingNumber;
                 return this;
             }
@@ -360,6 +551,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder TrackingUrl(string trackingUrl)
             {
+                shouldSerialize["tracking_url"] = true;
                 this.trackingUrl = trackingUrl;
                 return this;
             }
@@ -404,6 +596,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder ExpectedShippedAt(string expectedShippedAt)
             {
+                shouldSerialize["expected_shipped_at"] = true;
                 this.expectedShippedAt = expectedShippedAt;
                 return this;
             }
@@ -426,6 +619,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder CanceledAt(string canceledAt)
             {
+                shouldSerialize["canceled_at"] = true;
                 this.canceledAt = canceledAt;
                 return this;
             }
@@ -437,6 +631,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder CancelReason(string cancelReason)
             {
+                shouldSerialize["cancel_reason"] = true;
                 this.cancelReason = cancelReason;
                 return this;
             }
@@ -459,9 +654,83 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder FailureReason(string failureReason)
             {
+                shouldSerialize["failure_reason"] = true;
                 this.failureReason = failureReason;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetCarrier()
+            {
+                this.shouldSerialize["carrier"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetShippingNote()
+            {
+                this.shouldSerialize["shipping_note"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetShippingType()
+            {
+                this.shouldSerialize["shipping_type"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetTrackingNumber()
+            {
+                this.shouldSerialize["tracking_number"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetTrackingUrl()
+            {
+                this.shouldSerialize["tracking_url"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetExpectedShippedAt()
+            {
+                this.shouldSerialize["expected_shipped_at"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetCanceledAt()
+            {
+                this.shouldSerialize["canceled_at"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetCancelReason()
+            {
+                this.shouldSerialize["cancel_reason"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetFailureReason()
+            {
+                this.shouldSerialize["failure_reason"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -469,7 +738,7 @@ namespace Square.Models
             /// <returns> OrderFulfillmentShipmentDetails. </returns>
             public OrderFulfillmentShipmentDetails Build()
             {
-                return new OrderFulfillmentShipmentDetails(
+                return new OrderFulfillmentShipmentDetails(shouldSerialize,
                     this.recipient,
                     this.carrier,
                     this.shippingNote,

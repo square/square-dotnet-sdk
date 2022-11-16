@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class TestWebhookSubscriptionRequest
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="TestWebhookSubscriptionRequest"/> class.
         /// </summary>
@@ -24,14 +25,30 @@ namespace Square.Models
         public TestWebhookSubscriptionRequest(
             string eventType = null)
         {
-            this.EventType = eventType;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "event_type", false }
+            };
+
+            if (eventType != null)
+            {
+                shouldSerialize["event_type"] = true;
+                this.EventType = eventType;
+            }
+
+        }
+        internal TestWebhookSubscriptionRequest(Dictionary<string, bool> shouldSerialize,
+            string eventType = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            EventType = eventType;
         }
 
         /// <summary>
         /// The event type that will be used to test the [Subscription]($m/WebhookSubscription). The event type must be
         /// contained in the list of event types in the [Subscription]($m/WebhookSubscription).
         /// </summary>
-        [JsonProperty("event_type", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("event_type")]
         public string EventType { get; }
 
         /// <inheritdoc/>
@@ -42,6 +59,15 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"TestWebhookSubscriptionRequest : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeEventType()
+        {
+            return this.shouldSerialize["event_type"];
         }
 
         /// <inheritdoc/>
@@ -95,6 +121,11 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "event_type", false },
+            };
+
             private string eventType;
 
              /// <summary>
@@ -104,9 +135,19 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder EventType(string eventType)
             {
+                shouldSerialize["event_type"] = true;
                 this.eventType = eventType;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetEventType()
+            {
+                this.shouldSerialize["event_type"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -114,7 +155,7 @@ namespace Square.Models
             /// <returns> TestWebhookSubscriptionRequest. </returns>
             public TestWebhookSubscriptionRequest Build()
             {
-                return new TestWebhookSubscriptionRequest(
+                return new TestWebhookSubscriptionRequest(shouldSerialize,
                     this.eventType);
             }
         }

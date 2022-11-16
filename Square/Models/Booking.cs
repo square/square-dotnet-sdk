@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class Booking
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="Booking"/> class.
         /// </summary>
@@ -54,22 +55,98 @@ namespace Square.Models
             Models.BookingCreatorDetails creatorDetails = null,
             string source = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "start_at", false },
+                { "location_id", false },
+                { "customer_id", false },
+                { "customer_note", false },
+                { "seller_note", false },
+                { "appointment_segments", false }
+            };
+
             this.Id = id;
             this.Version = version;
             this.Status = status;
             this.CreatedAt = createdAt;
             this.UpdatedAt = updatedAt;
-            this.StartAt = startAt;
-            this.LocationId = locationId;
-            this.CustomerId = customerId;
-            this.CustomerNote = customerNote;
-            this.SellerNote = sellerNote;
-            this.AppointmentSegments = appointmentSegments;
+            if (startAt != null)
+            {
+                shouldSerialize["start_at"] = true;
+                this.StartAt = startAt;
+            }
+
+            if (locationId != null)
+            {
+                shouldSerialize["location_id"] = true;
+                this.LocationId = locationId;
+            }
+
+            if (customerId != null)
+            {
+                shouldSerialize["customer_id"] = true;
+                this.CustomerId = customerId;
+            }
+
+            if (customerNote != null)
+            {
+                shouldSerialize["customer_note"] = true;
+                this.CustomerNote = customerNote;
+            }
+
+            if (sellerNote != null)
+            {
+                shouldSerialize["seller_note"] = true;
+                this.SellerNote = sellerNote;
+            }
+
+            if (appointmentSegments != null)
+            {
+                shouldSerialize["appointment_segments"] = true;
+                this.AppointmentSegments = appointmentSegments;
+            }
+
             this.TransitionTimeMinutes = transitionTimeMinutes;
             this.AllDay = allDay;
             this.LocationType = locationType;
             this.CreatorDetails = creatorDetails;
             this.Source = source;
+        }
+        internal Booking(Dictionary<string, bool> shouldSerialize,
+            string id = null,
+            int? version = null,
+            string status = null,
+            string createdAt = null,
+            string updatedAt = null,
+            string startAt = null,
+            string locationId = null,
+            string customerId = null,
+            string customerNote = null,
+            string sellerNote = null,
+            IList<Models.AppointmentSegment> appointmentSegments = null,
+            int? transitionTimeMinutes = null,
+            bool? allDay = null,
+            string locationType = null,
+            Models.BookingCreatorDetails creatorDetails = null,
+            string source = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Id = id;
+            Version = version;
+            Status = status;
+            CreatedAt = createdAt;
+            UpdatedAt = updatedAt;
+            StartAt = startAt;
+            LocationId = locationId;
+            CustomerId = customerId;
+            CustomerNote = customerNote;
+            SellerNote = sellerNote;
+            AppointmentSegments = appointmentSegments;
+            TransitionTimeMinutes = transitionTimeMinutes;
+            AllDay = allDay;
+            LocationType = locationType;
+            CreatorDetails = creatorDetails;
+            Source = source;
         }
 
         /// <summary>
@@ -105,38 +182,38 @@ namespace Square.Models
         /// <summary>
         /// The RFC 3339 timestamp specifying the starting time of this booking.
         /// </summary>
-        [JsonProperty("start_at", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("start_at")]
         public string StartAt { get; }
 
         /// <summary>
         /// The ID of the [Location]($m/Location) object representing the location where the booked service is provided. Once set when the booking is created, its value cannot be changed.
         /// </summary>
-        [JsonProperty("location_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("location_id")]
         public string LocationId { get; }
 
         /// <summary>
         /// The ID of the [Customer]($m/Customer) object representing the customer receiving the booked service.
         /// </summary>
-        [JsonProperty("customer_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("customer_id")]
         public string CustomerId { get; }
 
         /// <summary>
         /// The free-text field for the customer to supply notes about the booking. For example, the note can be preferences that cannot be expressed by supported attributes of a relevant [CatalogObject]($m/CatalogObject) instance.
         /// </summary>
-        [JsonProperty("customer_note", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("customer_note")]
         public string CustomerNote { get; }
 
         /// <summary>
         /// The free-text field for the seller to supply notes about the booking. For example, the note can be preferences that cannot be expressed by supported attributes of a specific [CatalogObject]($m/CatalogObject) instance.
         /// This field should not be visible to customers.
         /// </summary>
-        [JsonProperty("seller_note", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("seller_note")]
         public string SellerNote { get; }
 
         /// <summary>
         /// A list of appointment segments for this booking.
         /// </summary>
-        [JsonProperty("appointment_segments", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("appointment_segments")]
         public IList<Models.AppointmentSegment> AppointmentSegments { get; }
 
         /// <summary>
@@ -178,6 +255,60 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"Booking : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeStartAt()
+        {
+            return this.shouldSerialize["start_at"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeLocationId()
+        {
+            return this.shouldSerialize["location_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeCustomerId()
+        {
+            return this.shouldSerialize["customer_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeCustomerNote()
+        {
+            return this.shouldSerialize["customer_note"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeSellerNote()
+        {
+            return this.shouldSerialize["seller_note"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeAppointmentSegments()
+        {
+            return this.shouldSerialize["appointment_segments"];
         }
 
         /// <inheritdoc/>
@@ -280,6 +411,16 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "start_at", false },
+                { "location_id", false },
+                { "customer_id", false },
+                { "customer_note", false },
+                { "seller_note", false },
+                { "appointment_segments", false },
+            };
+
             private string id;
             private int? version;
             private string status;
@@ -359,6 +500,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder StartAt(string startAt)
             {
+                shouldSerialize["start_at"] = true;
                 this.startAt = startAt;
                 return this;
             }
@@ -370,6 +512,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder LocationId(string locationId)
             {
+                shouldSerialize["location_id"] = true;
                 this.locationId = locationId;
                 return this;
             }
@@ -381,6 +524,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder CustomerId(string customerId)
             {
+                shouldSerialize["customer_id"] = true;
                 this.customerId = customerId;
                 return this;
             }
@@ -392,6 +536,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder CustomerNote(string customerNote)
             {
+                shouldSerialize["customer_note"] = true;
                 this.customerNote = customerNote;
                 return this;
             }
@@ -403,6 +548,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder SellerNote(string sellerNote)
             {
+                shouldSerialize["seller_note"] = true;
                 this.sellerNote = sellerNote;
                 return this;
             }
@@ -414,6 +560,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder AppointmentSegments(IList<Models.AppointmentSegment> appointmentSegments)
             {
+                shouldSerialize["appointment_segments"] = true;
                 this.appointmentSegments = appointmentSegments;
                 return this;
             }
@@ -474,12 +621,61 @@ namespace Square.Models
             }
 
             /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetStartAt()
+            {
+                this.shouldSerialize["start_at"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetLocationId()
+            {
+                this.shouldSerialize["location_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetCustomerId()
+            {
+                this.shouldSerialize["customer_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetCustomerNote()
+            {
+                this.shouldSerialize["customer_note"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetSellerNote()
+            {
+                this.shouldSerialize["seller_note"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetAppointmentSegments()
+            {
+                this.shouldSerialize["appointment_segments"] = false;
+            }
+
+
+            /// <summary>
             /// Builds class object.
             /// </summary>
             /// <returns> Booking. </returns>
             public Booking Build()
             {
-                return new Booking(
+                return new Booking(shouldSerialize,
                     this.id,
                     this.version,
                     this.status,

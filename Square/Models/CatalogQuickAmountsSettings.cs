@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class CatalogQuickAmountsSettings
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="CatalogQuickAmountsSettings"/> class.
         /// </summary>
@@ -28,9 +29,35 @@ namespace Square.Models
             bool? eligibleForAutoAmounts = null,
             IList<Models.CatalogQuickAmount> amounts = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "eligible_for_auto_amounts", false },
+                { "amounts", false }
+            };
+
             this.Option = option;
-            this.EligibleForAutoAmounts = eligibleForAutoAmounts;
-            this.Amounts = amounts;
+            if (eligibleForAutoAmounts != null)
+            {
+                shouldSerialize["eligible_for_auto_amounts"] = true;
+                this.EligibleForAutoAmounts = eligibleForAutoAmounts;
+            }
+
+            if (amounts != null)
+            {
+                shouldSerialize["amounts"] = true;
+                this.Amounts = amounts;
+            }
+
+        }
+        internal CatalogQuickAmountsSettings(Dictionary<string, bool> shouldSerialize,
+            string option,
+            bool? eligibleForAutoAmounts = null,
+            IList<Models.CatalogQuickAmount> amounts = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Option = option;
+            EligibleForAutoAmounts = eligibleForAutoAmounts;
+            Amounts = amounts;
         }
 
         /// <summary>
@@ -43,13 +70,13 @@ namespace Square.Models
         /// Represents location's eligibility for auto amounts
         /// The boolean should be consistent with whether there are AUTO amounts in the `amounts`.
         /// </summary>
-        [JsonProperty("eligible_for_auto_amounts", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("eligible_for_auto_amounts")]
         public bool? EligibleForAutoAmounts { get; }
 
         /// <summary>
         /// Represents a set of Quick Amounts at this location.
         /// </summary>
-        [JsonProperty("amounts", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("amounts")]
         public IList<Models.CatalogQuickAmount> Amounts { get; }
 
         /// <inheritdoc/>
@@ -60,6 +87,24 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"CatalogQuickAmountsSettings : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeEligibleForAutoAmounts()
+        {
+            return this.shouldSerialize["eligible_for_auto_amounts"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeAmounts()
+        {
+            return this.shouldSerialize["amounts"];
         }
 
         /// <inheritdoc/>
@@ -119,6 +164,12 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "eligible_for_auto_amounts", false },
+                { "amounts", false },
+            };
+
             private string option;
             private bool? eligibleForAutoAmounts;
             private IList<Models.CatalogQuickAmount> amounts;
@@ -147,6 +198,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder EligibleForAutoAmounts(bool? eligibleForAutoAmounts)
             {
+                shouldSerialize["eligible_for_auto_amounts"] = true;
                 this.eligibleForAutoAmounts = eligibleForAutoAmounts;
                 return this;
             }
@@ -158,9 +210,27 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Amounts(IList<Models.CatalogQuickAmount> amounts)
             {
+                shouldSerialize["amounts"] = true;
                 this.amounts = amounts;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetEligibleForAutoAmounts()
+            {
+                this.shouldSerialize["eligible_for_auto_amounts"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetAmounts()
+            {
+                this.shouldSerialize["amounts"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -168,7 +238,7 @@ namespace Square.Models
             /// <returns> CatalogQuickAmountsSettings. </returns>
             public CatalogQuickAmountsSettings Build()
             {
-                return new CatalogQuickAmountsSettings(
+                return new CatalogQuickAmountsSettings(shouldSerialize,
                     this.option,
                     this.eligibleForAutoAmounts,
                     this.amounts);

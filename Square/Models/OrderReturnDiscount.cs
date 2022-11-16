@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class OrderReturnDiscount
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="OrderReturnDiscount"/> class.
         /// </summary>
@@ -42,46 +43,110 @@ namespace Square.Models
             Models.Money appliedMoney = null,
             string scope = null)
         {
-            this.Uid = uid;
-            this.SourceDiscountUid = sourceDiscountUid;
-            this.CatalogObjectId = catalogObjectId;
-            this.CatalogVersion = catalogVersion;
-            this.Name = name;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "uid", false },
+                { "source_discount_uid", false },
+                { "catalog_object_id", false },
+                { "catalog_version", false },
+                { "name", false },
+                { "percentage", false }
+            };
+
+            if (uid != null)
+            {
+                shouldSerialize["uid"] = true;
+                this.Uid = uid;
+            }
+
+            if (sourceDiscountUid != null)
+            {
+                shouldSerialize["source_discount_uid"] = true;
+                this.SourceDiscountUid = sourceDiscountUid;
+            }
+
+            if (catalogObjectId != null)
+            {
+                shouldSerialize["catalog_object_id"] = true;
+                this.CatalogObjectId = catalogObjectId;
+            }
+
+            if (catalogVersion != null)
+            {
+                shouldSerialize["catalog_version"] = true;
+                this.CatalogVersion = catalogVersion;
+            }
+
+            if (name != null)
+            {
+                shouldSerialize["name"] = true;
+                this.Name = name;
+            }
+
             this.Type = type;
-            this.Percentage = percentage;
+            if (percentage != null)
+            {
+                shouldSerialize["percentage"] = true;
+                this.Percentage = percentage;
+            }
+
             this.AmountMoney = amountMoney;
             this.AppliedMoney = appliedMoney;
             this.Scope = scope;
+        }
+        internal OrderReturnDiscount(Dictionary<string, bool> shouldSerialize,
+            string uid = null,
+            string sourceDiscountUid = null,
+            string catalogObjectId = null,
+            long? catalogVersion = null,
+            string name = null,
+            string type = null,
+            string percentage = null,
+            Models.Money amountMoney = null,
+            Models.Money appliedMoney = null,
+            string scope = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Uid = uid;
+            SourceDiscountUid = sourceDiscountUid;
+            CatalogObjectId = catalogObjectId;
+            CatalogVersion = catalogVersion;
+            Name = name;
+            Type = type;
+            Percentage = percentage;
+            AmountMoney = amountMoney;
+            AppliedMoney = appliedMoney;
+            Scope = scope;
         }
 
         /// <summary>
         /// A unique ID that identifies the returned discount only within this order.
         /// </summary>
-        [JsonProperty("uid", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("uid")]
         public string Uid { get; }
 
         /// <summary>
         /// The discount `uid` from the order that contains the original application of this discount.
         /// </summary>
-        [JsonProperty("source_discount_uid", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("source_discount_uid")]
         public string SourceDiscountUid { get; }
 
         /// <summary>
         /// The catalog object ID referencing [CatalogDiscount]($m/CatalogDiscount).
         /// </summary>
-        [JsonProperty("catalog_object_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("catalog_object_id")]
         public string CatalogObjectId { get; }
 
         /// <summary>
         /// The version of the catalog object that this discount references.
         /// </summary>
-        [JsonProperty("catalog_version", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("catalog_version")]
         public long? CatalogVersion { get; }
 
         /// <summary>
         /// The discount's name.
         /// </summary>
-        [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("name")]
         public string Name { get; }
 
         /// <summary>
@@ -95,7 +160,7 @@ namespace Square.Models
         /// A value of `"7.25"` corresponds to a percentage of 7.25%.
         /// `percentage` is not set for amount-based discounts.
         /// </summary>
-        [JsonProperty("percentage", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("percentage")]
         public string Percentage { get; }
 
         /// <summary>
@@ -134,6 +199,60 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"OrderReturnDiscount : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeUid()
+        {
+            return this.shouldSerialize["uid"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeSourceDiscountUid()
+        {
+            return this.shouldSerialize["source_discount_uid"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeCatalogObjectId()
+        {
+            return this.shouldSerialize["catalog_object_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeCatalogVersion()
+        {
+            return this.shouldSerialize["catalog_version"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeName()
+        {
+            return this.shouldSerialize["name"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializePercentage()
+        {
+            return this.shouldSerialize["percentage"];
         }
 
         /// <inheritdoc/>
@@ -216,6 +335,16 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "uid", false },
+                { "source_discount_uid", false },
+                { "catalog_object_id", false },
+                { "catalog_version", false },
+                { "name", false },
+                { "percentage", false },
+            };
+
             private string uid;
             private string sourceDiscountUid;
             private string catalogObjectId;
@@ -234,6 +363,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Uid(string uid)
             {
+                shouldSerialize["uid"] = true;
                 this.uid = uid;
                 return this;
             }
@@ -245,6 +375,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder SourceDiscountUid(string sourceDiscountUid)
             {
+                shouldSerialize["source_discount_uid"] = true;
                 this.sourceDiscountUid = sourceDiscountUid;
                 return this;
             }
@@ -256,6 +387,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder CatalogObjectId(string catalogObjectId)
             {
+                shouldSerialize["catalog_object_id"] = true;
                 this.catalogObjectId = catalogObjectId;
                 return this;
             }
@@ -267,6 +399,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder CatalogVersion(long? catalogVersion)
             {
+                shouldSerialize["catalog_version"] = true;
                 this.catalogVersion = catalogVersion;
                 return this;
             }
@@ -278,6 +411,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Name(string name)
             {
+                shouldSerialize["name"] = true;
                 this.name = name;
                 return this;
             }
@@ -300,6 +434,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Percentage(string percentage)
             {
+                shouldSerialize["percentage"] = true;
                 this.percentage = percentage;
                 return this;
             }
@@ -338,12 +473,61 @@ namespace Square.Models
             }
 
             /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetUid()
+            {
+                this.shouldSerialize["uid"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetSourceDiscountUid()
+            {
+                this.shouldSerialize["source_discount_uid"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetCatalogObjectId()
+            {
+                this.shouldSerialize["catalog_object_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetCatalogVersion()
+            {
+                this.shouldSerialize["catalog_version"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetName()
+            {
+                this.shouldSerialize["name"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetPercentage()
+            {
+                this.shouldSerialize["percentage"] = false;
+            }
+
+
+            /// <summary>
             /// Builds class object.
             /// </summary>
             /// <returns> OrderReturnDiscount. </returns>
             public OrderReturnDiscount Build()
             {
-                return new OrderReturnDiscount(
+                return new OrderReturnDiscount(shouldSerialize,
                     this.uid,
                     this.sourceDiscountUid,
                     this.catalogObjectId,

@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class DeviceMetadata
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="DeviceMetadata"/> class.
         /// </summary>
@@ -46,94 +47,198 @@ namespace Square.Models
             string wifiNetworkStrength = null,
             string ipAddress = null)
         {
-            this.BatteryPercentage = batteryPercentage;
-            this.ChargingState = chargingState;
-            this.LocationId = locationId;
-            this.MerchantId = merchantId;
-            this.NetworkConnectionType = networkConnectionType;
-            this.PaymentRegion = paymentRegion;
-            this.SerialNumber = serialNumber;
-            this.OsVersion = osVersion;
-            this.AppVersion = appVersion;
-            this.WifiNetworkName = wifiNetworkName;
-            this.WifiNetworkStrength = wifiNetworkStrength;
-            this.IpAddress = ipAddress;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "battery_percentage", false },
+                { "charging_state", false },
+                { "location_id", false },
+                { "merchant_id", false },
+                { "network_connection_type", false },
+                { "payment_region", false },
+                { "serial_number", false },
+                { "os_version", false },
+                { "app_version", false },
+                { "wifi_network_name", false },
+                { "wifi_network_strength", false },
+                { "ip_address", false }
+            };
+
+            if (batteryPercentage != null)
+            {
+                shouldSerialize["battery_percentage"] = true;
+                this.BatteryPercentage = batteryPercentage;
+            }
+
+            if (chargingState != null)
+            {
+                shouldSerialize["charging_state"] = true;
+                this.ChargingState = chargingState;
+            }
+
+            if (locationId != null)
+            {
+                shouldSerialize["location_id"] = true;
+                this.LocationId = locationId;
+            }
+
+            if (merchantId != null)
+            {
+                shouldSerialize["merchant_id"] = true;
+                this.MerchantId = merchantId;
+            }
+
+            if (networkConnectionType != null)
+            {
+                shouldSerialize["network_connection_type"] = true;
+                this.NetworkConnectionType = networkConnectionType;
+            }
+
+            if (paymentRegion != null)
+            {
+                shouldSerialize["payment_region"] = true;
+                this.PaymentRegion = paymentRegion;
+            }
+
+            if (serialNumber != null)
+            {
+                shouldSerialize["serial_number"] = true;
+                this.SerialNumber = serialNumber;
+            }
+
+            if (osVersion != null)
+            {
+                shouldSerialize["os_version"] = true;
+                this.OsVersion = osVersion;
+            }
+
+            if (appVersion != null)
+            {
+                shouldSerialize["app_version"] = true;
+                this.AppVersion = appVersion;
+            }
+
+            if (wifiNetworkName != null)
+            {
+                shouldSerialize["wifi_network_name"] = true;
+                this.WifiNetworkName = wifiNetworkName;
+            }
+
+            if (wifiNetworkStrength != null)
+            {
+                shouldSerialize["wifi_network_strength"] = true;
+                this.WifiNetworkStrength = wifiNetworkStrength;
+            }
+
+            if (ipAddress != null)
+            {
+                shouldSerialize["ip_address"] = true;
+                this.IpAddress = ipAddress;
+            }
+
+        }
+        internal DeviceMetadata(Dictionary<string, bool> shouldSerialize,
+            string batteryPercentage = null,
+            string chargingState = null,
+            string locationId = null,
+            string merchantId = null,
+            string networkConnectionType = null,
+            string paymentRegion = null,
+            string serialNumber = null,
+            string osVersion = null,
+            string appVersion = null,
+            string wifiNetworkName = null,
+            string wifiNetworkStrength = null,
+            string ipAddress = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            BatteryPercentage = batteryPercentage;
+            ChargingState = chargingState;
+            LocationId = locationId;
+            MerchantId = merchantId;
+            NetworkConnectionType = networkConnectionType;
+            PaymentRegion = paymentRegion;
+            SerialNumber = serialNumber;
+            OsVersion = osVersion;
+            AppVersion = appVersion;
+            WifiNetworkName = wifiNetworkName;
+            WifiNetworkStrength = wifiNetworkStrength;
+            IpAddress = ipAddress;
         }
 
         /// <summary>
         /// The Terminal’s remaining battery percentage, between 1-100.
         /// </summary>
-        [JsonProperty("battery_percentage", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("battery_percentage")]
         public string BatteryPercentage { get; }
 
         /// <summary>
         /// The current charging state of the Terminal.
         /// Options: `CHARGING`, `NOT_CHARGING`
         /// </summary>
-        [JsonProperty("charging_state", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("charging_state")]
         public string ChargingState { get; }
 
         /// <summary>
         /// The ID of the Square seller business location associated with the Terminal.
         /// </summary>
-        [JsonProperty("location_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("location_id")]
         public string LocationId { get; }
 
         /// <summary>
         /// The ID of the Square merchant account that is currently signed-in to the Terminal.
         /// </summary>
-        [JsonProperty("merchant_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("merchant_id")]
         public string MerchantId { get; }
 
         /// <summary>
         /// The Terminal’s current network connection type.
         /// Options: `WIFI`, `ETHERNET`
         /// </summary>
-        [JsonProperty("network_connection_type", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("network_connection_type")]
         public string NetworkConnectionType { get; }
 
         /// <summary>
         /// The country in which the Terminal is authorized to take payments.
         /// </summary>
-        [JsonProperty("payment_region", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("payment_region")]
         public string PaymentRegion { get; }
 
         /// <summary>
         /// The unique identifier assigned to the Terminal, which can be found on the lower back
         /// of the device.
         /// </summary>
-        [JsonProperty("serial_number", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("serial_number")]
         public string SerialNumber { get; }
 
         /// <summary>
         /// The current version of the Terminal’s operating system.
         /// </summary>
-        [JsonProperty("os_version", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("os_version")]
         public string OsVersion { get; }
 
         /// <summary>
         /// The current version of the application running on the Terminal.
         /// </summary>
-        [JsonProperty("app_version", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("app_version")]
         public string AppVersion { get; }
 
         /// <summary>
         /// The name of the Wi-Fi network to which the Terminal is connected.
         /// </summary>
-        [JsonProperty("wifi_network_name", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("wifi_network_name")]
         public string WifiNetworkName { get; }
 
         /// <summary>
         /// The signal strength of the Wi-FI network connection.
         /// Options: `POOR`, `FAIR`, `GOOD`, `EXCELLENT`
         /// </summary>
-        [JsonProperty("wifi_network_strength", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("wifi_network_strength")]
         public string WifiNetworkStrength { get; }
 
         /// <summary>
         /// The IP address of the Terminal.
         /// </summary>
-        [JsonProperty("ip_address", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("ip_address")]
         public string IpAddress { get; }
 
         /// <inheritdoc/>
@@ -144,6 +249,114 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"DeviceMetadata : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeBatteryPercentage()
+        {
+            return this.shouldSerialize["battery_percentage"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeChargingState()
+        {
+            return this.shouldSerialize["charging_state"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeLocationId()
+        {
+            return this.shouldSerialize["location_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeMerchantId()
+        {
+            return this.shouldSerialize["merchant_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeNetworkConnectionType()
+        {
+            return this.shouldSerialize["network_connection_type"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializePaymentRegion()
+        {
+            return this.shouldSerialize["payment_region"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeSerialNumber()
+        {
+            return this.shouldSerialize["serial_number"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeOsVersion()
+        {
+            return this.shouldSerialize["os_version"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeAppVersion()
+        {
+            return this.shouldSerialize["app_version"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeWifiNetworkName()
+        {
+            return this.shouldSerialize["wifi_network_name"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeWifiNetworkStrength()
+        {
+            return this.shouldSerialize["wifi_network_strength"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeIpAddress()
+        {
+            return this.shouldSerialize["ip_address"];
         }
 
         /// <inheritdoc/>
@@ -232,6 +445,22 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "battery_percentage", false },
+                { "charging_state", false },
+                { "location_id", false },
+                { "merchant_id", false },
+                { "network_connection_type", false },
+                { "payment_region", false },
+                { "serial_number", false },
+                { "os_version", false },
+                { "app_version", false },
+                { "wifi_network_name", false },
+                { "wifi_network_strength", false },
+                { "ip_address", false },
+            };
+
             private string batteryPercentage;
             private string chargingState;
             private string locationId;
@@ -252,6 +481,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder BatteryPercentage(string batteryPercentage)
             {
+                shouldSerialize["battery_percentage"] = true;
                 this.batteryPercentage = batteryPercentage;
                 return this;
             }
@@ -263,6 +493,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder ChargingState(string chargingState)
             {
+                shouldSerialize["charging_state"] = true;
                 this.chargingState = chargingState;
                 return this;
             }
@@ -274,6 +505,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder LocationId(string locationId)
             {
+                shouldSerialize["location_id"] = true;
                 this.locationId = locationId;
                 return this;
             }
@@ -285,6 +517,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder MerchantId(string merchantId)
             {
+                shouldSerialize["merchant_id"] = true;
                 this.merchantId = merchantId;
                 return this;
             }
@@ -296,6 +529,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder NetworkConnectionType(string networkConnectionType)
             {
+                shouldSerialize["network_connection_type"] = true;
                 this.networkConnectionType = networkConnectionType;
                 return this;
             }
@@ -307,6 +541,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder PaymentRegion(string paymentRegion)
             {
+                shouldSerialize["payment_region"] = true;
                 this.paymentRegion = paymentRegion;
                 return this;
             }
@@ -318,6 +553,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder SerialNumber(string serialNumber)
             {
+                shouldSerialize["serial_number"] = true;
                 this.serialNumber = serialNumber;
                 return this;
             }
@@ -329,6 +565,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder OsVersion(string osVersion)
             {
+                shouldSerialize["os_version"] = true;
                 this.osVersion = osVersion;
                 return this;
             }
@@ -340,6 +577,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder AppVersion(string appVersion)
             {
+                shouldSerialize["app_version"] = true;
                 this.appVersion = appVersion;
                 return this;
             }
@@ -351,6 +589,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder WifiNetworkName(string wifiNetworkName)
             {
+                shouldSerialize["wifi_network_name"] = true;
                 this.wifiNetworkName = wifiNetworkName;
                 return this;
             }
@@ -362,6 +601,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder WifiNetworkStrength(string wifiNetworkStrength)
             {
+                shouldSerialize["wifi_network_strength"] = true;
                 this.wifiNetworkStrength = wifiNetworkStrength;
                 return this;
             }
@@ -373,9 +613,107 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder IpAddress(string ipAddress)
             {
+                shouldSerialize["ip_address"] = true;
                 this.ipAddress = ipAddress;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetBatteryPercentage()
+            {
+                this.shouldSerialize["battery_percentage"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetChargingState()
+            {
+                this.shouldSerialize["charging_state"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetLocationId()
+            {
+                this.shouldSerialize["location_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetMerchantId()
+            {
+                this.shouldSerialize["merchant_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetNetworkConnectionType()
+            {
+                this.shouldSerialize["network_connection_type"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetPaymentRegion()
+            {
+                this.shouldSerialize["payment_region"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetSerialNumber()
+            {
+                this.shouldSerialize["serial_number"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetOsVersion()
+            {
+                this.shouldSerialize["os_version"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetAppVersion()
+            {
+                this.shouldSerialize["app_version"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetWifiNetworkName()
+            {
+                this.shouldSerialize["wifi_network_name"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetWifiNetworkStrength()
+            {
+                this.shouldSerialize["wifi_network_strength"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetIpAddress()
+            {
+                this.shouldSerialize["ip_address"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -383,7 +721,7 @@ namespace Square.Models
             /// <returns> DeviceMetadata. </returns>
             public DeviceMetadata Build()
             {
-                return new DeviceMetadata(
+                return new DeviceMetadata(shouldSerialize,
                     this.batteryPercentage,
                     this.chargingState,
                     this.locationId,

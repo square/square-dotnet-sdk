@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class CalculateLoyaltyPointsRequest
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="CalculateLoyaltyPointsRequest"/> class.
         /// </summary>
@@ -28,9 +29,35 @@ namespace Square.Models
             Models.Money transactionAmountMoney = null,
             string loyaltyAccountId = null)
         {
-            this.OrderId = orderId;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "order_id", false },
+                { "loyalty_account_id", false }
+            };
+
+            if (orderId != null)
+            {
+                shouldSerialize["order_id"] = true;
+                this.OrderId = orderId;
+            }
+
             this.TransactionAmountMoney = transactionAmountMoney;
-            this.LoyaltyAccountId = loyaltyAccountId;
+            if (loyaltyAccountId != null)
+            {
+                shouldSerialize["loyalty_account_id"] = true;
+                this.LoyaltyAccountId = loyaltyAccountId;
+            }
+
+        }
+        internal CalculateLoyaltyPointsRequest(Dictionary<string, bool> shouldSerialize,
+            string orderId = null,
+            Models.Money transactionAmountMoney = null,
+            string loyaltyAccountId = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            OrderId = orderId;
+            TransactionAmountMoney = transactionAmountMoney;
+            LoyaltyAccountId = loyaltyAccountId;
         }
 
         /// <summary>
@@ -38,7 +65,7 @@ namespace Square.Models
         /// Specify this field if your application uses the Orders API to process orders.
         /// Otherwise, specify the `transaction_amount_money`.
         /// </summary>
-        [JsonProperty("order_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("order_id")]
         public string OrderId { get; }
 
         /// <summary>
@@ -61,7 +88,7 @@ namespace Square.Models
         /// If not specified, the `promotion_points` field shows the number of points the purchase qualifies
         /// for regardless of the trigger limit.
         /// </summary>
-        [JsonProperty("loyalty_account_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("loyalty_account_id")]
         public string LoyaltyAccountId { get; }
 
         /// <inheritdoc/>
@@ -72,6 +99,24 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"CalculateLoyaltyPointsRequest : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeOrderId()
+        {
+            return this.shouldSerialize["order_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeLoyaltyAccountId()
+        {
+            return this.shouldSerialize["loyalty_account_id"];
         }
 
         /// <inheritdoc/>
@@ -131,6 +176,12 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "order_id", false },
+                { "loyalty_account_id", false },
+            };
+
             private string orderId;
             private Models.Money transactionAmountMoney;
             private string loyaltyAccountId;
@@ -142,6 +193,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder OrderId(string orderId)
             {
+                shouldSerialize["order_id"] = true;
                 this.orderId = orderId;
                 return this;
             }
@@ -164,9 +216,27 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder LoyaltyAccountId(string loyaltyAccountId)
             {
+                shouldSerialize["loyalty_account_id"] = true;
                 this.loyaltyAccountId = loyaltyAccountId;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetOrderId()
+            {
+                this.shouldSerialize["order_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetLoyaltyAccountId()
+            {
+                this.shouldSerialize["loyalty_account_id"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -174,7 +244,7 @@ namespace Square.Models
             /// <returns> CalculateLoyaltyPointsRequest. </returns>
             public CalculateLoyaltyPointsRequest Build()
             {
-                return new CalculateLoyaltyPointsRequest(
+                return new CalculateLoyaltyPointsRequest(shouldSerialize,
                     this.orderId,
                     this.transactionAmountMoney,
                     this.loyaltyAccountId);

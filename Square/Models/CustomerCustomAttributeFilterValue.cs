@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class CustomerCustomAttributeFilterValue
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="CustomerCustomAttributeFilterValue"/> class.
         /// </summary>
@@ -38,14 +39,44 @@ namespace Square.Models
             bool? boolean = null,
             Models.CustomerAddressFilter address = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "boolean", false }
+            };
+
             this.Email = email;
             this.Phone = phone;
             this.Text = text;
             this.Selection = selection;
             this.Date = date;
             this.Number = number;
-            this.Boolean = boolean;
+            if (boolean != null)
+            {
+                shouldSerialize["boolean"] = true;
+                this.Boolean = boolean;
+            }
+
             this.Address = address;
+        }
+        internal CustomerCustomAttributeFilterValue(Dictionary<string, bool> shouldSerialize,
+            Models.CustomerTextFilter email = null,
+            Models.CustomerTextFilter phone = null,
+            Models.CustomerTextFilter text = null,
+            Models.FilterValue selection = null,
+            Models.TimeRange date = null,
+            Models.FloatNumberRange number = null,
+            bool? boolean = null,
+            Models.CustomerAddressFilter address = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Email = email;
+            Phone = phone;
+            Text = text;
+            Selection = selection;
+            Date = date;
+            Number = number;
+            Boolean = boolean;
+            Address = address;
         }
 
         /// <summary>
@@ -100,7 +131,7 @@ namespace Square.Models
         /// <summary>
         /// A filter for a query based on the value of a `Boolean`-type custom attribute.
         /// </summary>
-        [JsonProperty("boolean", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("boolean")]
         public bool? Boolean { get; }
 
         /// <summary>
@@ -118,6 +149,15 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"CustomerCustomAttributeFilterValue : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeBoolean()
+        {
+            return this.shouldSerialize["boolean"];
         }
 
         /// <inheritdoc/>
@@ -194,6 +234,11 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "boolean", false },
+            };
+
             private Models.CustomerTextFilter email;
             private Models.CustomerTextFilter phone;
             private Models.CustomerTextFilter text;
@@ -276,6 +321,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Boolean(bool? boolean)
             {
+                shouldSerialize["boolean"] = true;
                 this.boolean = boolean;
                 return this;
             }
@@ -292,12 +338,21 @@ namespace Square.Models
             }
 
             /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetBoolean()
+            {
+                this.shouldSerialize["boolean"] = false;
+            }
+
+
+            /// <summary>
             /// Builds class object.
             /// </summary>
             /// <returns> CustomerCustomAttributeFilterValue. </returns>
             public CustomerCustomAttributeFilterValue Build()
             {
-                return new CustomerCustomAttributeFilterValue(
+                return new CustomerCustomAttributeFilterValue(shouldSerialize,
                     this.email,
                     this.phone,
                     this.text,

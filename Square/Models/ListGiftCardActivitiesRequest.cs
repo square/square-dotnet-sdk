@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class ListGiftCardActivitiesRequest
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="ListGiftCardActivitiesRequest"/> class.
         /// </summary>
@@ -38,14 +39,86 @@ namespace Square.Models
             string cursor = null,
             string sortOrder = null)
         {
-            this.GiftCardId = giftCardId;
-            this.Type = type;
-            this.LocationId = locationId;
-            this.BeginTime = beginTime;
-            this.EndTime = endTime;
-            this.Limit = limit;
-            this.Cursor = cursor;
-            this.SortOrder = sortOrder;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "gift_card_id", false },
+                { "type", false },
+                { "location_id", false },
+                { "begin_time", false },
+                { "end_time", false },
+                { "limit", false },
+                { "cursor", false },
+                { "sort_order", false }
+            };
+
+            if (giftCardId != null)
+            {
+                shouldSerialize["gift_card_id"] = true;
+                this.GiftCardId = giftCardId;
+            }
+
+            if (type != null)
+            {
+                shouldSerialize["type"] = true;
+                this.Type = type;
+            }
+
+            if (locationId != null)
+            {
+                shouldSerialize["location_id"] = true;
+                this.LocationId = locationId;
+            }
+
+            if (beginTime != null)
+            {
+                shouldSerialize["begin_time"] = true;
+                this.BeginTime = beginTime;
+            }
+
+            if (endTime != null)
+            {
+                shouldSerialize["end_time"] = true;
+                this.EndTime = endTime;
+            }
+
+            if (limit != null)
+            {
+                shouldSerialize["limit"] = true;
+                this.Limit = limit;
+            }
+
+            if (cursor != null)
+            {
+                shouldSerialize["cursor"] = true;
+                this.Cursor = cursor;
+            }
+
+            if (sortOrder != null)
+            {
+                shouldSerialize["sort_order"] = true;
+                this.SortOrder = sortOrder;
+            }
+
+        }
+        internal ListGiftCardActivitiesRequest(Dictionary<string, bool> shouldSerialize,
+            string giftCardId = null,
+            string type = null,
+            string locationId = null,
+            string beginTime = null,
+            string endTime = null,
+            int? limit = null,
+            string cursor = null,
+            string sortOrder = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            GiftCardId = giftCardId;
+            Type = type;
+            LocationId = locationId;
+            BeginTime = beginTime;
+            EndTime = endTime;
+            Limit = limit;
+            Cursor = cursor;
+            SortOrder = sortOrder;
         }
 
         /// <summary>
@@ -53,35 +126,35 @@ namespace Square.Models
         /// to the specified gift card. Otherwise, the endpoint returns all gift card activities for
         /// the seller.
         /// </summary>
-        [JsonProperty("gift_card_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("gift_card_id")]
         public string GiftCardId { get; }
 
         /// <summary>
         /// If a [type]($m/GiftCardActivityType) is provided, the endpoint returns gift card activities of the specified type.
         /// Otherwise, the endpoint returns all types of gift card activities.
         /// </summary>
-        [JsonProperty("type", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("type")]
         public string Type { get; }
 
         /// <summary>
         /// If a location ID is provided, the endpoint returns gift card activities for the specified location.
         /// Otherwise, the endpoint returns gift card activities for all locations.
         /// </summary>
-        [JsonProperty("location_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("location_id")]
         public string LocationId { get; }
 
         /// <summary>
         /// The timestamp for the beginning of the reporting period, in RFC 3339 format.
         /// This start time is inclusive. The default value is the current time minus one year.
         /// </summary>
-        [JsonProperty("begin_time", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("begin_time")]
         public string BeginTime { get; }
 
         /// <summary>
         /// The timestamp for the end of the reporting period, in RFC 3339 format.
         /// This end time is inclusive. The default value is the current time.
         /// </summary>
-        [JsonProperty("end_time", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("end_time")]
         public string EndTime { get; }
 
         /// <summary>
@@ -89,7 +162,7 @@ namespace Square.Models
         /// of results (or fewer) per page. The maximum value is 100. The default value is 50.
         /// For more information, see [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination).
         /// </summary>
-        [JsonProperty("limit", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("limit")]
         public int? Limit { get; }
 
         /// <summary>
@@ -98,7 +171,7 @@ namespace Square.Models
         /// If a cursor is not provided, the endpoint returns the first page of the results.
         /// For more information, see [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination).
         /// </summary>
-        [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("cursor")]
         public string Cursor { get; }
 
         /// <summary>
@@ -106,7 +179,7 @@ namespace Square.Models
         /// - `ASC` - Oldest to newest.
         /// - `DESC` - Newest to oldest (default).
         /// </summary>
-        [JsonProperty("sort_order", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("sort_order")]
         public string SortOrder { get; }
 
         /// <inheritdoc/>
@@ -117,6 +190,78 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"ListGiftCardActivitiesRequest : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeGiftCardId()
+        {
+            return this.shouldSerialize["gift_card_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeType()
+        {
+            return this.shouldSerialize["type"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeLocationId()
+        {
+            return this.shouldSerialize["location_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeBeginTime()
+        {
+            return this.shouldSerialize["begin_time"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeEndTime()
+        {
+            return this.shouldSerialize["end_time"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeLimit()
+        {
+            return this.shouldSerialize["limit"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeCursor()
+        {
+            return this.shouldSerialize["cursor"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeSortOrder()
+        {
+            return this.shouldSerialize["sort_order"];
         }
 
         /// <inheritdoc/>
@@ -193,6 +338,18 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "gift_card_id", false },
+                { "type", false },
+                { "location_id", false },
+                { "begin_time", false },
+                { "end_time", false },
+                { "limit", false },
+                { "cursor", false },
+                { "sort_order", false },
+            };
+
             private string giftCardId;
             private string type;
             private string locationId;
@@ -209,6 +366,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder GiftCardId(string giftCardId)
             {
+                shouldSerialize["gift_card_id"] = true;
                 this.giftCardId = giftCardId;
                 return this;
             }
@@ -220,6 +378,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Type(string type)
             {
+                shouldSerialize["type"] = true;
                 this.type = type;
                 return this;
             }
@@ -231,6 +390,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder LocationId(string locationId)
             {
+                shouldSerialize["location_id"] = true;
                 this.locationId = locationId;
                 return this;
             }
@@ -242,6 +402,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder BeginTime(string beginTime)
             {
+                shouldSerialize["begin_time"] = true;
                 this.beginTime = beginTime;
                 return this;
             }
@@ -253,6 +414,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder EndTime(string endTime)
             {
+                shouldSerialize["end_time"] = true;
                 this.endTime = endTime;
                 return this;
             }
@@ -264,6 +426,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Limit(int? limit)
             {
+                shouldSerialize["limit"] = true;
                 this.limit = limit;
                 return this;
             }
@@ -275,6 +438,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Cursor(string cursor)
             {
+                shouldSerialize["cursor"] = true;
                 this.cursor = cursor;
                 return this;
             }
@@ -286,9 +450,75 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder SortOrder(string sortOrder)
             {
+                shouldSerialize["sort_order"] = true;
                 this.sortOrder = sortOrder;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetGiftCardId()
+            {
+                this.shouldSerialize["gift_card_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetType()
+            {
+                this.shouldSerialize["type"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetLocationId()
+            {
+                this.shouldSerialize["location_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetBeginTime()
+            {
+                this.shouldSerialize["begin_time"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetEndTime()
+            {
+                this.shouldSerialize["end_time"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetLimit()
+            {
+                this.shouldSerialize["limit"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetCursor()
+            {
+                this.shouldSerialize["cursor"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetSortOrder()
+            {
+                this.shouldSerialize["sort_order"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -296,7 +526,7 @@ namespace Square.Models
             /// <returns> ListGiftCardActivitiesRequest. </returns>
             public ListGiftCardActivitiesRequest Build()
             {
-                return new ListGiftCardActivitiesRequest(
+                return new ListGiftCardActivitiesRequest(shouldSerialize,
                     this.giftCardId,
                     this.type,
                     this.locationId,

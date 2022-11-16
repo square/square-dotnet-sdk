@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class ListCustomerSegmentsRequest
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="ListCustomerSegmentsRequest"/> class.
         /// </summary>
@@ -26,8 +27,32 @@ namespace Square.Models
             string cursor = null,
             int? limit = null)
         {
-            this.Cursor = cursor;
-            this.Limit = limit;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "cursor", false },
+                { "limit", false }
+            };
+
+            if (cursor != null)
+            {
+                shouldSerialize["cursor"] = true;
+                this.Cursor = cursor;
+            }
+
+            if (limit != null)
+            {
+                shouldSerialize["limit"] = true;
+                this.Limit = limit;
+            }
+
+        }
+        internal ListCustomerSegmentsRequest(Dictionary<string, bool> shouldSerialize,
+            string cursor = null,
+            int? limit = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Cursor = cursor;
+            Limit = limit;
         }
 
         /// <summary>
@@ -35,7 +60,7 @@ namespace Square.Models
         /// This cursor is used to retrieve the next set of query results.
         /// For more information, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination).
         /// </summary>
-        [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("cursor")]
         public string Cursor { get; }
 
         /// <summary>
@@ -43,7 +68,7 @@ namespace Square.Models
         /// If the specified limit is less than 1 or greater than 50, Square returns a `400 VALUE_TOO_LOW` or `400 VALUE_TOO_HIGH` error. The default value is 50.
         /// For more information, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination).
         /// </summary>
-        [JsonProperty("limit", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("limit")]
         public int? Limit { get; }
 
         /// <inheritdoc/>
@@ -54,6 +79,24 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"ListCustomerSegmentsRequest : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeCursor()
+        {
+            return this.shouldSerialize["cursor"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeLimit()
+        {
+            return this.shouldSerialize["limit"];
         }
 
         /// <inheritdoc/>
@@ -110,6 +153,12 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "cursor", false },
+                { "limit", false },
+            };
+
             private string cursor;
             private int? limit;
 
@@ -120,6 +169,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Cursor(string cursor)
             {
+                shouldSerialize["cursor"] = true;
                 this.cursor = cursor;
                 return this;
             }
@@ -131,9 +181,27 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Limit(int? limit)
             {
+                shouldSerialize["limit"] = true;
                 this.limit = limit;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetCursor()
+            {
+                this.shouldSerialize["cursor"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetLimit()
+            {
+                this.shouldSerialize["limit"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -141,7 +209,7 @@ namespace Square.Models
             /// <returns> ListCustomerSegmentsRequest. </returns>
             public ListCustomerSegmentsRequest Build()
             {
-                return new ListCustomerSegmentsRequest(
+                return new ListCustomerSegmentsRequest(shouldSerialize,
                     this.cursor,
                     this.limit);
             }

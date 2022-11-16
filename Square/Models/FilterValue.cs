@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class FilterValue
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="FilterValue"/> class.
         /// </summary>
@@ -28,28 +29,60 @@ namespace Square.Models
             IList<string> any = null,
             IList<string> none = null)
         {
-            this.All = all;
-            this.Any = any;
-            this.None = none;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "all", false },
+                { "any", false },
+                { "none", false }
+            };
+
+            if (all != null)
+            {
+                shouldSerialize["all"] = true;
+                this.All = all;
+            }
+
+            if (any != null)
+            {
+                shouldSerialize["any"] = true;
+                this.Any = any;
+            }
+
+            if (none != null)
+            {
+                shouldSerialize["none"] = true;
+                this.None = none;
+            }
+
+        }
+        internal FilterValue(Dictionary<string, bool> shouldSerialize,
+            IList<string> all = null,
+            IList<string> any = null,
+            IList<string> none = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            All = all;
+            Any = any;
+            None = none;
         }
 
         /// <summary>
         /// A list of terms that must be present on the field of the resource.
         /// </summary>
-        [JsonProperty("all", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("all")]
         public IList<string> All { get; }
 
         /// <summary>
         /// A list of terms where at least one of them must be present on the
         /// field of the resource.
         /// </summary>
-        [JsonProperty("any", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("any")]
         public IList<string> Any { get; }
 
         /// <summary>
         /// A list of terms that must not be present on the field the resource
         /// </summary>
-        [JsonProperty("none", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("none")]
         public IList<string> None { get; }
 
         /// <inheritdoc/>
@@ -60,6 +93,33 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"FilterValue : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeAll()
+        {
+            return this.shouldSerialize["all"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeAny()
+        {
+            return this.shouldSerialize["any"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeNone()
+        {
+            return this.shouldSerialize["none"];
         }
 
         /// <inheritdoc/>
@@ -119,6 +179,13 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "all", false },
+                { "any", false },
+                { "none", false },
+            };
+
             private IList<string> all;
             private IList<string> any;
             private IList<string> none;
@@ -130,6 +197,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder All(IList<string> all)
             {
+                shouldSerialize["all"] = true;
                 this.all = all;
                 return this;
             }
@@ -141,6 +209,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Any(IList<string> any)
             {
+                shouldSerialize["any"] = true;
                 this.any = any;
                 return this;
             }
@@ -152,9 +221,35 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder None(IList<string> none)
             {
+                shouldSerialize["none"] = true;
                 this.none = none;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetAll()
+            {
+                this.shouldSerialize["all"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetAny()
+            {
+                this.shouldSerialize["any"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetNone()
+            {
+                this.shouldSerialize["none"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -162,7 +257,7 @@ namespace Square.Models
             /// <returns> FilterValue. </returns>
             public FilterValue Build()
             {
-                return new FilterValue(
+                return new FilterValue(shouldSerialize,
                     this.all,
                     this.any,
                     this.none);

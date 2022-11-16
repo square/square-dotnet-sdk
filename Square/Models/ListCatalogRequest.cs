@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class ListCatalogRequest
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="ListCatalogRequest"/> class.
         /// </summary>
@@ -28,9 +29,41 @@ namespace Square.Models
             string types = null,
             long? catalogVersion = null)
         {
-            this.Cursor = cursor;
-            this.Types = types;
-            this.CatalogVersion = catalogVersion;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "cursor", false },
+                { "types", false },
+                { "catalog_version", false }
+            };
+
+            if (cursor != null)
+            {
+                shouldSerialize["cursor"] = true;
+                this.Cursor = cursor;
+            }
+
+            if (types != null)
+            {
+                shouldSerialize["types"] = true;
+                this.Types = types;
+            }
+
+            if (catalogVersion != null)
+            {
+                shouldSerialize["catalog_version"] = true;
+                this.CatalogVersion = catalogVersion;
+            }
+
+        }
+        internal ListCatalogRequest(Dictionary<string, bool> shouldSerialize,
+            string cursor = null,
+            string types = null,
+            long? catalogVersion = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Cursor = cursor;
+            Types = types;
+            CatalogVersion = catalogVersion;
         }
 
         /// <summary>
@@ -38,7 +71,7 @@ namespace Square.Models
         /// The page size is currently set to be 100.
         /// See [Pagination](https://developer.squareup.com/docs/basics/api101/pagination) for more information.
         /// </summary>
-        [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("cursor")]
         public string Cursor { get; }
 
         /// <summary>
@@ -54,17 +87,16 @@ namespace Square.Models
         /// PRICING_RULE, PRODUCT_SET, TIME_PERIOD, MEASUREMENT_UNIT,
         /// SUBSCRIPTION_PLAN, ITEM_OPTION, CUSTOM_ATTRIBUTE_DEFINITION, QUICK_AMOUNT_SETTINGS.
         /// </summary>
-        [JsonProperty("types", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("types")]
         public string Types { get; }
 
         /// <summary>
         /// The specific version of the catalog objects to be included in the response.
-        /// This allows you to retrieve historical
-        /// versions of objects. The specified version value is matched against
-        /// the [CatalogObject]($m/CatalogObject)s' `version` attribute.  If not included, results will
-        /// be from the current version of the catalog.
+        /// This allows you to retrieve historical versions of objects. The specified version value is matched against
+        /// the [CatalogObject]($m/CatalogObject)s' `version` attribute.  If not included, results will be from the
+        /// current version of the catalog.
         /// </summary>
-        [JsonProperty("catalog_version", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("catalog_version")]
         public long? CatalogVersion { get; }
 
         /// <inheritdoc/>
@@ -75,6 +107,33 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"ListCatalogRequest : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeCursor()
+        {
+            return this.shouldSerialize["cursor"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeTypes()
+        {
+            return this.shouldSerialize["types"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeCatalogVersion()
+        {
+            return this.shouldSerialize["catalog_version"];
         }
 
         /// <inheritdoc/>
@@ -134,6 +193,13 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "cursor", false },
+                { "types", false },
+                { "catalog_version", false },
+            };
+
             private string cursor;
             private string types;
             private long? catalogVersion;
@@ -145,6 +211,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Cursor(string cursor)
             {
+                shouldSerialize["cursor"] = true;
                 this.cursor = cursor;
                 return this;
             }
@@ -156,6 +223,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Types(string types)
             {
+                shouldSerialize["types"] = true;
                 this.types = types;
                 return this;
             }
@@ -167,9 +235,35 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder CatalogVersion(long? catalogVersion)
             {
+                shouldSerialize["catalog_version"] = true;
                 this.catalogVersion = catalogVersion;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetCursor()
+            {
+                this.shouldSerialize["cursor"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetTypes()
+            {
+                this.shouldSerialize["types"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetCatalogVersion()
+            {
+                this.shouldSerialize["catalog_version"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -177,7 +271,7 @@ namespace Square.Models
             /// <returns> ListCatalogRequest. </returns>
             public ListCatalogRequest Build()
             {
-                return new ListCatalogRequest(
+                return new ListCatalogRequest(shouldSerialize,
                     this.cursor,
                     this.types,
                     this.catalogVersion);

@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class ClearpayDetails
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="ClearpayDetails"/> class.
         /// </summary>
@@ -24,13 +25,29 @@ namespace Square.Models
         public ClearpayDetails(
             string emailAddress = null)
         {
-            this.EmailAddress = emailAddress;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "email_address", false }
+            };
+
+            if (emailAddress != null)
+            {
+                shouldSerialize["email_address"] = true;
+                this.EmailAddress = emailAddress;
+            }
+
+        }
+        internal ClearpayDetails(Dictionary<string, bool> shouldSerialize,
+            string emailAddress = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            EmailAddress = emailAddress;
         }
 
         /// <summary>
         /// Email address on the buyer's Clearpay account.
         /// </summary>
-        [JsonProperty("email_address", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("email_address")]
         public string EmailAddress { get; }
 
         /// <inheritdoc/>
@@ -41,6 +58,15 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"ClearpayDetails : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeEmailAddress()
+        {
+            return this.shouldSerialize["email_address"];
         }
 
         /// <inheritdoc/>
@@ -94,6 +120,11 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "email_address", false },
+            };
+
             private string emailAddress;
 
              /// <summary>
@@ -103,9 +134,19 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder EmailAddress(string emailAddress)
             {
+                shouldSerialize["email_address"] = true;
                 this.emailAddress = emailAddress;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetEmailAddress()
+            {
+                this.shouldSerialize["email_address"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -113,7 +154,7 @@ namespace Square.Models
             /// <returns> ClearpayDetails. </returns>
             public ClearpayDetails Build()
             {
-                return new ClearpayDetails(
+                return new ClearpayDetails(shouldSerialize,
                     this.emailAddress);
             }
         }

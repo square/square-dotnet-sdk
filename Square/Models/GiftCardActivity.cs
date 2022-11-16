@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class GiftCardActivity
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="GiftCardActivity"/> class.
         /// </summary>
@@ -62,12 +63,28 @@ namespace Square.Models
             Models.GiftCardActivityUnblock unblockActivityDetails = null,
             Models.GiftCardActivityImportReversal importReversalActivityDetails = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "gift_card_id", false },
+                { "gift_card_gan", false }
+            };
+
             this.Id = id;
             this.Type = type;
             this.LocationId = locationId;
             this.CreatedAt = createdAt;
-            this.GiftCardId = giftCardId;
-            this.GiftCardGan = giftCardGan;
+            if (giftCardId != null)
+            {
+                shouldSerialize["gift_card_id"] = true;
+                this.GiftCardId = giftCardId;
+            }
+
+            if (giftCardGan != null)
+            {
+                shouldSerialize["gift_card_gan"] = true;
+                this.GiftCardGan = giftCardGan;
+            }
+
             this.GiftCardBalanceMoney = giftCardBalanceMoney;
             this.LoadActivityDetails = loadActivityDetails;
             this.ActivateActivityDetails = activateActivityDetails;
@@ -82,6 +99,50 @@ namespace Square.Models
             this.BlockActivityDetails = blockActivityDetails;
             this.UnblockActivityDetails = unblockActivityDetails;
             this.ImportReversalActivityDetails = importReversalActivityDetails;
+        }
+        internal GiftCardActivity(Dictionary<string, bool> shouldSerialize,
+            string type,
+            string locationId,
+            string id = null,
+            string createdAt = null,
+            string giftCardId = null,
+            string giftCardGan = null,
+            Models.Money giftCardBalanceMoney = null,
+            Models.GiftCardActivityLoad loadActivityDetails = null,
+            Models.GiftCardActivityActivate activateActivityDetails = null,
+            Models.GiftCardActivityRedeem redeemActivityDetails = null,
+            Models.GiftCardActivityClearBalance clearBalanceActivityDetails = null,
+            Models.GiftCardActivityDeactivate deactivateActivityDetails = null,
+            Models.GiftCardActivityAdjustIncrement adjustIncrementActivityDetails = null,
+            Models.GiftCardActivityAdjustDecrement adjustDecrementActivityDetails = null,
+            Models.GiftCardActivityRefund refundActivityDetails = null,
+            Models.GiftCardActivityUnlinkedActivityRefund unlinkedActivityRefundActivityDetails = null,
+            Models.GiftCardActivityImport importActivityDetails = null,
+            Models.GiftCardActivityBlock blockActivityDetails = null,
+            Models.GiftCardActivityUnblock unblockActivityDetails = null,
+            Models.GiftCardActivityImportReversal importReversalActivityDetails = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Id = id;
+            Type = type;
+            LocationId = locationId;
+            CreatedAt = createdAt;
+            GiftCardId = giftCardId;
+            GiftCardGan = giftCardGan;
+            GiftCardBalanceMoney = giftCardBalanceMoney;
+            LoadActivityDetails = loadActivityDetails;
+            ActivateActivityDetails = activateActivityDetails;
+            RedeemActivityDetails = redeemActivityDetails;
+            ClearBalanceActivityDetails = clearBalanceActivityDetails;
+            DeactivateActivityDetails = deactivateActivityDetails;
+            AdjustIncrementActivityDetails = adjustIncrementActivityDetails;
+            AdjustDecrementActivityDetails = adjustDecrementActivityDetails;
+            RefundActivityDetails = refundActivityDetails;
+            UnlinkedActivityRefundActivityDetails = unlinkedActivityRefundActivityDetails;
+            ImportActivityDetails = importActivityDetails;
+            BlockActivityDetails = blockActivityDetails;
+            UnblockActivityDetails = unblockActivityDetails;
+            ImportReversalActivityDetails = importReversalActivityDetails;
         }
 
         /// <summary>
@@ -112,14 +173,14 @@ namespace Square.Models
         /// The gift card ID. When creating a gift card activity, `gift_card_id` is not required if
         /// `gift_card_gan` is specified.
         /// </summary>
-        [JsonProperty("gift_card_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("gift_card_id")]
         public string GiftCardId { get; }
 
         /// <summary>
         /// The gift card account number (GAN). When creating a gift card activity, `gift_card_gan`
         /// is not required if `gift_card_id` is specified.
         /// </summary>
-        [JsonProperty("gift_card_gan", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("gift_card_gan")]
         public string GiftCardGan { get; }
 
         /// <summary>
@@ -221,6 +282,24 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"GiftCardActivity : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeGiftCardId()
+        {
+            return this.shouldSerialize["gift_card_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeGiftCardGan()
+        {
+            return this.shouldSerialize["gift_card_gan"];
         }
 
         /// <inheritdoc/>
@@ -335,6 +414,12 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "gift_card_id", false },
+                { "gift_card_gan", false },
+            };
+
             private string type;
             private string locationId;
             private string id;
@@ -415,6 +500,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder GiftCardId(string giftCardId)
             {
+                shouldSerialize["gift_card_id"] = true;
                 this.giftCardId = giftCardId;
                 return this;
             }
@@ -426,6 +512,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder GiftCardGan(string giftCardGan)
             {
+                shouldSerialize["gift_card_gan"] = true;
                 this.giftCardGan = giftCardGan;
                 return this;
             }
@@ -585,12 +672,29 @@ namespace Square.Models
             }
 
             /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetGiftCardId()
+            {
+                this.shouldSerialize["gift_card_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetGiftCardGan()
+            {
+                this.shouldSerialize["gift_card_gan"] = false;
+            }
+
+
+            /// <summary>
             /// Builds class object.
             /// </summary>
             /// <returns> GiftCardActivity. </returns>
             public GiftCardActivity Build()
             {
-                return new GiftCardActivity(
+                return new GiftCardActivity(shouldSerialize,
                     this.type,
                     this.locationId,
                     this.id,

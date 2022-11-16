@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class AcceptedPaymentMethods
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="AcceptedPaymentMethods"/> class.
         /// </summary>
@@ -30,34 +31,74 @@ namespace Square.Models
             bool? cashAppPay = null,
             bool? afterpayClearpay = null)
         {
-            this.ApplePay = applePay;
-            this.GooglePay = googlePay;
-            this.CashAppPay = cashAppPay;
-            this.AfterpayClearpay = afterpayClearpay;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "apple_pay", false },
+                { "google_pay", false },
+                { "cash_app_pay", false },
+                { "afterpay_clearpay", false }
+            };
+
+            if (applePay != null)
+            {
+                shouldSerialize["apple_pay"] = true;
+                this.ApplePay = applePay;
+            }
+
+            if (googlePay != null)
+            {
+                shouldSerialize["google_pay"] = true;
+                this.GooglePay = googlePay;
+            }
+
+            if (cashAppPay != null)
+            {
+                shouldSerialize["cash_app_pay"] = true;
+                this.CashAppPay = cashAppPay;
+            }
+
+            if (afterpayClearpay != null)
+            {
+                shouldSerialize["afterpay_clearpay"] = true;
+                this.AfterpayClearpay = afterpayClearpay;
+            }
+
+        }
+        internal AcceptedPaymentMethods(Dictionary<string, bool> shouldSerialize,
+            bool? applePay = null,
+            bool? googlePay = null,
+            bool? cashAppPay = null,
+            bool? afterpayClearpay = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            ApplePay = applePay;
+            GooglePay = googlePay;
+            CashAppPay = cashAppPay;
+            AfterpayClearpay = afterpayClearpay;
         }
 
         /// <summary>
         /// Whether Apple Pay is accepted at checkout.
         /// </summary>
-        [JsonProperty("apple_pay", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("apple_pay")]
         public bool? ApplePay { get; }
 
         /// <summary>
         /// Whether Google Pay is accepted at checkout.
         /// </summary>
-        [JsonProperty("google_pay", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("google_pay")]
         public bool? GooglePay { get; }
 
         /// <summary>
         /// Whether Cash App Pay is accepted at checkout.
         /// </summary>
-        [JsonProperty("cash_app_pay", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("cash_app_pay")]
         public bool? CashAppPay { get; }
 
         /// <summary>
         /// Whether Afterpay/Clearpay is accepted at checkout.
         /// </summary>
-        [JsonProperty("afterpay_clearpay", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("afterpay_clearpay")]
         public bool? AfterpayClearpay { get; }
 
         /// <inheritdoc/>
@@ -68,6 +109,42 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"AcceptedPaymentMethods : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeApplePay()
+        {
+            return this.shouldSerialize["apple_pay"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeGooglePay()
+        {
+            return this.shouldSerialize["google_pay"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeCashAppPay()
+        {
+            return this.shouldSerialize["cash_app_pay"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeAfterpayClearpay()
+        {
+            return this.shouldSerialize["afterpay_clearpay"];
         }
 
         /// <inheritdoc/>
@@ -130,6 +207,14 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "apple_pay", false },
+                { "google_pay", false },
+                { "cash_app_pay", false },
+                { "afterpay_clearpay", false },
+            };
+
             private bool? applePay;
             private bool? googlePay;
             private bool? cashAppPay;
@@ -142,6 +227,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder ApplePay(bool? applePay)
             {
+                shouldSerialize["apple_pay"] = true;
                 this.applePay = applePay;
                 return this;
             }
@@ -153,6 +239,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder GooglePay(bool? googlePay)
             {
+                shouldSerialize["google_pay"] = true;
                 this.googlePay = googlePay;
                 return this;
             }
@@ -164,6 +251,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder CashAppPay(bool? cashAppPay)
             {
+                shouldSerialize["cash_app_pay"] = true;
                 this.cashAppPay = cashAppPay;
                 return this;
             }
@@ -175,9 +263,43 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder AfterpayClearpay(bool? afterpayClearpay)
             {
+                shouldSerialize["afterpay_clearpay"] = true;
                 this.afterpayClearpay = afterpayClearpay;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetApplePay()
+            {
+                this.shouldSerialize["apple_pay"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetGooglePay()
+            {
+                this.shouldSerialize["google_pay"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetCashAppPay()
+            {
+                this.shouldSerialize["cash_app_pay"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetAfterpayClearpay()
+            {
+                this.shouldSerialize["afterpay_clearpay"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -185,7 +307,7 @@ namespace Square.Models
             /// <returns> AcceptedPaymentMethods. </returns>
             public AcceptedPaymentMethods Build()
             {
-                return new AcceptedPaymentMethods(
+                return new AcceptedPaymentMethods(shouldSerialize,
                     this.applePay,
                     this.googlePay,
                     this.cashAppPay,

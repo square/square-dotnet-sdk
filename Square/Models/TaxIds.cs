@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class TaxIds
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="TaxIds"/> class.
         /// </summary>
@@ -30,10 +31,50 @@ namespace Square.Models
             string frNaf = null,
             string esNif = null)
         {
-            this.EuVat = euVat;
-            this.FrSiret = frSiret;
-            this.FrNaf = frNaf;
-            this.EsNif = esNif;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "eu_vat", false },
+                { "fr_siret", false },
+                { "fr_naf", false },
+                { "es_nif", false }
+            };
+
+            if (euVat != null)
+            {
+                shouldSerialize["eu_vat"] = true;
+                this.EuVat = euVat;
+            }
+
+            if (frSiret != null)
+            {
+                shouldSerialize["fr_siret"] = true;
+                this.FrSiret = frSiret;
+            }
+
+            if (frNaf != null)
+            {
+                shouldSerialize["fr_naf"] = true;
+                this.FrNaf = frNaf;
+            }
+
+            if (esNif != null)
+            {
+                shouldSerialize["es_nif"] = true;
+                this.EsNif = esNif;
+            }
+
+        }
+        internal TaxIds(Dictionary<string, bool> shouldSerialize,
+            string euVat = null,
+            string frSiret = null,
+            string frNaf = null,
+            string esNif = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            EuVat = euVat;
+            FrSiret = frSiret;
+            FrNaf = frNaf;
+            EsNif = esNif;
         }
 
         /// <summary>
@@ -41,14 +82,14 @@ namespace Square.Models
         /// If the EU VAT number is present, it is well-formed and has been
         /// validated with VIES, the VAT Information Exchange System.
         /// </summary>
-        [JsonProperty("eu_vat", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("eu_vat")]
         public string EuVat { get; }
 
         /// <summary>
         /// The SIRET (Système d'Identification du Répertoire des Entreprises et de leurs Etablissements)
         /// number is a 14-digit code issued by the French INSEE. For example, `39922799000021`.
         /// </summary>
-        [JsonProperty("fr_siret", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("fr_siret")]
         public string FrSiret { get; }
 
         /// <summary>
@@ -56,14 +97,14 @@ namespace Square.Models
         /// track economic statistical data. This is also called the APE (Activite Principale de l’Entreprise) code.
         /// For example, `6910Z`.
         /// </summary>
-        [JsonProperty("fr_naf", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("fr_naf")]
         public string FrNaf { get; }
 
         /// <summary>
         /// The NIF (Numero de Identificacion Fiscal) number is a nine-character tax identifier used in Spain.
         /// If it is present, it has been validated. For example, `73628495A`.
         /// </summary>
-        [JsonProperty("es_nif", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("es_nif")]
         public string EsNif { get; }
 
         /// <inheritdoc/>
@@ -74,6 +115,42 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"TaxIds : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeEuVat()
+        {
+            return this.shouldSerialize["eu_vat"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeFrSiret()
+        {
+            return this.shouldSerialize["fr_siret"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeFrNaf()
+        {
+            return this.shouldSerialize["fr_naf"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeEsNif()
+        {
+            return this.shouldSerialize["es_nif"];
         }
 
         /// <inheritdoc/>
@@ -136,6 +213,14 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "eu_vat", false },
+                { "fr_siret", false },
+                { "fr_naf", false },
+                { "es_nif", false },
+            };
+
             private string euVat;
             private string frSiret;
             private string frNaf;
@@ -148,6 +233,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder EuVat(string euVat)
             {
+                shouldSerialize["eu_vat"] = true;
                 this.euVat = euVat;
                 return this;
             }
@@ -159,6 +245,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder FrSiret(string frSiret)
             {
+                shouldSerialize["fr_siret"] = true;
                 this.frSiret = frSiret;
                 return this;
             }
@@ -170,6 +257,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder FrNaf(string frNaf)
             {
+                shouldSerialize["fr_naf"] = true;
                 this.frNaf = frNaf;
                 return this;
             }
@@ -181,9 +269,43 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder EsNif(string esNif)
             {
+                shouldSerialize["es_nif"] = true;
                 this.esNif = esNif;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetEuVat()
+            {
+                this.shouldSerialize["eu_vat"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetFrSiret()
+            {
+                this.shouldSerialize["fr_siret"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetFrNaf()
+            {
+                this.shouldSerialize["fr_naf"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetEsNif()
+            {
+                this.shouldSerialize["es_nif"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -191,7 +313,7 @@ namespace Square.Models
             /// <returns> TaxIds. </returns>
             public TaxIds Build()
             {
-                return new TaxIds(
+                return new TaxIds(shouldSerialize,
                     this.euVat,
                     this.frSiret,
                     this.frNaf,

@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class UpdateInvoiceRequest
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="UpdateInvoiceRequest"/> class.
         /// </summary>
@@ -28,9 +29,35 @@ namespace Square.Models
             string idempotencyKey = null,
             IList<string> fieldsToClear = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "idempotency_key", false },
+                { "fields_to_clear", false }
+            };
+
             this.Invoice = invoice;
-            this.IdempotencyKey = idempotencyKey;
-            this.FieldsToClear = fieldsToClear;
+            if (idempotencyKey != null)
+            {
+                shouldSerialize["idempotency_key"] = true;
+                this.IdempotencyKey = idempotencyKey;
+            }
+
+            if (fieldsToClear != null)
+            {
+                shouldSerialize["fields_to_clear"] = true;
+                this.FieldsToClear = fieldsToClear;
+            }
+
+        }
+        internal UpdateInvoiceRequest(Dictionary<string, bool> shouldSerialize,
+            Models.Invoice invoice,
+            string idempotencyKey = null,
+            IList<string> fieldsToClear = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Invoice = invoice;
+            IdempotencyKey = idempotencyKey;
+            FieldsToClear = fieldsToClear;
         }
 
         /// <summary>
@@ -46,14 +73,14 @@ namespace Square.Models
         /// treats each request as independent.
         /// For more information, see [Idempotency](https://developer.squareup.com/docs/working-with-apis/idempotency).
         /// </summary>
-        [JsonProperty("idempotency_key", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("idempotency_key")]
         public string IdempotencyKey { get; }
 
         /// <summary>
         /// The list of fields to clear.
         /// For examples, see [Update an Invoice](https://developer.squareup.com/docs/invoices-api/update-invoices).
         /// </summary>
-        [JsonProperty("fields_to_clear", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("fields_to_clear")]
         public IList<string> FieldsToClear { get; }
 
         /// <inheritdoc/>
@@ -64,6 +91,24 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"UpdateInvoiceRequest : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeIdempotencyKey()
+        {
+            return this.shouldSerialize["idempotency_key"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeFieldsToClear()
+        {
+            return this.shouldSerialize["fields_to_clear"];
         }
 
         /// <inheritdoc/>
@@ -123,6 +168,12 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "idempotency_key", false },
+                { "fields_to_clear", false },
+            };
+
             private Models.Invoice invoice;
             private string idempotencyKey;
             private IList<string> fieldsToClear;
@@ -151,6 +202,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder IdempotencyKey(string idempotencyKey)
             {
+                shouldSerialize["idempotency_key"] = true;
                 this.idempotencyKey = idempotencyKey;
                 return this;
             }
@@ -162,9 +214,27 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder FieldsToClear(IList<string> fieldsToClear)
             {
+                shouldSerialize["fields_to_clear"] = true;
                 this.fieldsToClear = fieldsToClear;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetIdempotencyKey()
+            {
+                this.shouldSerialize["idempotency_key"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetFieldsToClear()
+            {
+                this.shouldSerialize["fields_to_clear"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -172,7 +242,7 @@ namespace Square.Models
             /// <returns> UpdateInvoiceRequest. </returns>
             public UpdateInvoiceRequest Build()
             {
-                return new UpdateInvoiceRequest(
+                return new UpdateInvoiceRequest(shouldSerialize,
                     this.invoice,
                     this.idempotencyKey,
                     this.fieldsToClear);

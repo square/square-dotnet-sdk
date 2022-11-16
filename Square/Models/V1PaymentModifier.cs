@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class V1PaymentModifier
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="V1PaymentModifier"/> class.
         /// </summary>
@@ -28,15 +29,41 @@ namespace Square.Models
             Models.V1Money appliedMoney = null,
             string modifierOptionId = null)
         {
-            this.Name = name;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "name", false },
+                { "modifier_option_id", false }
+            };
+
+            if (name != null)
+            {
+                shouldSerialize["name"] = true;
+                this.Name = name;
+            }
+
             this.AppliedMoney = appliedMoney;
-            this.ModifierOptionId = modifierOptionId;
+            if (modifierOptionId != null)
+            {
+                shouldSerialize["modifier_option_id"] = true;
+                this.ModifierOptionId = modifierOptionId;
+            }
+
+        }
+        internal V1PaymentModifier(Dictionary<string, bool> shouldSerialize,
+            string name = null,
+            Models.V1Money appliedMoney = null,
+            string modifierOptionId = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Name = name;
+            AppliedMoney = appliedMoney;
+            ModifierOptionId = modifierOptionId;
         }
 
         /// <summary>
         /// The modifier option's name.
         /// </summary>
-        [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("name")]
         public string Name { get; }
 
         /// <summary>
@@ -48,7 +75,7 @@ namespace Square.Models
         /// <summary>
         /// The ID of the applied modifier option, if available. Modifier options applied in older versions of Square Register might not have an ID.
         /// </summary>
-        [JsonProperty("modifier_option_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("modifier_option_id")]
         public string ModifierOptionId { get; }
 
         /// <inheritdoc/>
@@ -59,6 +86,24 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"V1PaymentModifier : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeName()
+        {
+            return this.shouldSerialize["name"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeModifierOptionId()
+        {
+            return this.shouldSerialize["modifier_option_id"];
         }
 
         /// <inheritdoc/>
@@ -118,6 +163,12 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "name", false },
+                { "modifier_option_id", false },
+            };
+
             private string name;
             private Models.V1Money appliedMoney;
             private string modifierOptionId;
@@ -129,6 +180,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Name(string name)
             {
+                shouldSerialize["name"] = true;
                 this.name = name;
                 return this;
             }
@@ -151,9 +203,27 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder ModifierOptionId(string modifierOptionId)
             {
+                shouldSerialize["modifier_option_id"] = true;
                 this.modifierOptionId = modifierOptionId;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetName()
+            {
+                this.shouldSerialize["name"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetModifierOptionId()
+            {
+                this.shouldSerialize["modifier_option_id"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -161,7 +231,7 @@ namespace Square.Models
             /// <returns> V1PaymentModifier. </returns>
             public V1PaymentModifier Build()
             {
-                return new V1PaymentModifier(
+                return new V1PaymentModifier(shouldSerialize,
                     this.name,
                     this.appliedMoney,
                     this.modifierOptionId);

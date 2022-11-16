@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class BatchDeleteCatalogObjectsRequest
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="BatchDeleteCatalogObjectsRequest"/> class.
         /// </summary>
@@ -24,7 +25,23 @@ namespace Square.Models
         public BatchDeleteCatalogObjectsRequest(
             IList<string> objectIds = null)
         {
-            this.ObjectIds = objectIds;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "object_ids", false }
+            };
+
+            if (objectIds != null)
+            {
+                shouldSerialize["object_ids"] = true;
+                this.ObjectIds = objectIds;
+            }
+
+        }
+        internal BatchDeleteCatalogObjectsRequest(Dictionary<string, bool> shouldSerialize,
+            IList<string> objectIds = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            ObjectIds = objectIds;
         }
 
         /// <summary>
@@ -32,7 +49,7 @@ namespace Square.Models
         /// in the graph that depend on that object will be deleted as well (for example, deleting a
         /// CatalogItem will delete its CatalogItemVariation.
         /// </summary>
-        [JsonProperty("object_ids", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("object_ids")]
         public IList<string> ObjectIds { get; }
 
         /// <inheritdoc/>
@@ -43,6 +60,15 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"BatchDeleteCatalogObjectsRequest : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeObjectIds()
+        {
+            return this.shouldSerialize["object_ids"];
         }
 
         /// <inheritdoc/>
@@ -96,6 +122,11 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "object_ids", false },
+            };
+
             private IList<string> objectIds;
 
              /// <summary>
@@ -105,9 +136,19 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder ObjectIds(IList<string> objectIds)
             {
+                shouldSerialize["object_ids"] = true;
                 this.objectIds = objectIds;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetObjectIds()
+            {
+                this.shouldSerialize["object_ids"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -115,7 +156,7 @@ namespace Square.Models
             /// <returns> BatchDeleteCatalogObjectsRequest. </returns>
             public BatchDeleteCatalogObjectsRequest Build()
             {
-                return new BatchDeleteCatalogObjectsRequest(
+                return new BatchDeleteCatalogObjectsRequest(shouldSerialize,
                     this.objectIds);
             }
         }

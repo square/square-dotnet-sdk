@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class CustomerCustomAttributeFilters
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="CustomerCustomAttributeFilters"/> class.
         /// </summary>
@@ -24,14 +25,30 @@ namespace Square.Models
         public CustomerCustomAttributeFilters(
             IList<Models.CustomerCustomAttributeFilter> filters = null)
         {
-            this.Filters = filters;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "filters", false }
+            };
+
+            if (filters != null)
+            {
+                shouldSerialize["filters"] = true;
+                this.Filters = filters;
+            }
+
+        }
+        internal CustomerCustomAttributeFilters(Dictionary<string, bool> shouldSerialize,
+            IList<Models.CustomerCustomAttributeFilter> filters = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Filters = filters;
         }
 
         /// <summary>
         /// The custom attribute filters. Each filter must specify `key` and include the `filter` field with a type-specific filter,
         /// the `updated_at` field, or both. The provided keys must be unique within the list of custom attribute filters.
         /// </summary>
-        [JsonProperty("filters", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("filters")]
         public IList<Models.CustomerCustomAttributeFilter> Filters { get; }
 
         /// <inheritdoc/>
@@ -42,6 +59,15 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"CustomerCustomAttributeFilters : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeFilters()
+        {
+            return this.shouldSerialize["filters"];
         }
 
         /// <inheritdoc/>
@@ -95,6 +121,11 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "filters", false },
+            };
+
             private IList<Models.CustomerCustomAttributeFilter> filters;
 
              /// <summary>
@@ -104,9 +135,19 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Filters(IList<Models.CustomerCustomAttributeFilter> filters)
             {
+                shouldSerialize["filters"] = true;
                 this.filters = filters;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetFilters()
+            {
+                this.shouldSerialize["filters"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -114,7 +155,7 @@ namespace Square.Models
             /// <returns> CustomerCustomAttributeFilters. </returns>
             public CustomerCustomAttributeFilters Build()
             {
-                return new CustomerCustomAttributeFilters(
+                return new CustomerCustomAttributeFilters(shouldSerialize,
                     this.filters);
             }
         }

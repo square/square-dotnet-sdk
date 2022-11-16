@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class Checkout
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="Checkout"/> class.
         /// </summary>
@@ -42,16 +43,80 @@ namespace Square.Models
             string createdAt = null,
             IList<Models.AdditionalRecipient> additionalRecipients = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "checkout_page_url", false },
+                { "ask_for_shipping_address", false },
+                { "merchant_support_email", false },
+                { "pre_populate_buyer_email", false },
+                { "redirect_url", false },
+                { "additional_recipients", false }
+            };
+
             this.Id = id;
-            this.CheckoutPageUrl = checkoutPageUrl;
-            this.AskForShippingAddress = askForShippingAddress;
-            this.MerchantSupportEmail = merchantSupportEmail;
-            this.PrePopulateBuyerEmail = prePopulateBuyerEmail;
+            if (checkoutPageUrl != null)
+            {
+                shouldSerialize["checkout_page_url"] = true;
+                this.CheckoutPageUrl = checkoutPageUrl;
+            }
+
+            if (askForShippingAddress != null)
+            {
+                shouldSerialize["ask_for_shipping_address"] = true;
+                this.AskForShippingAddress = askForShippingAddress;
+            }
+
+            if (merchantSupportEmail != null)
+            {
+                shouldSerialize["merchant_support_email"] = true;
+                this.MerchantSupportEmail = merchantSupportEmail;
+            }
+
+            if (prePopulateBuyerEmail != null)
+            {
+                shouldSerialize["pre_populate_buyer_email"] = true;
+                this.PrePopulateBuyerEmail = prePopulateBuyerEmail;
+            }
+
             this.PrePopulateShippingAddress = prePopulateShippingAddress;
-            this.RedirectUrl = redirectUrl;
+            if (redirectUrl != null)
+            {
+                shouldSerialize["redirect_url"] = true;
+                this.RedirectUrl = redirectUrl;
+            }
+
             this.Order = order;
             this.CreatedAt = createdAt;
-            this.AdditionalRecipients = additionalRecipients;
+            if (additionalRecipients != null)
+            {
+                shouldSerialize["additional_recipients"] = true;
+                this.AdditionalRecipients = additionalRecipients;
+            }
+
+        }
+        internal Checkout(Dictionary<string, bool> shouldSerialize,
+            string id = null,
+            string checkoutPageUrl = null,
+            bool? askForShippingAddress = null,
+            string merchantSupportEmail = null,
+            string prePopulateBuyerEmail = null,
+            Models.Address prePopulateShippingAddress = null,
+            string redirectUrl = null,
+            Models.Order order = null,
+            string createdAt = null,
+            IList<Models.AdditionalRecipient> additionalRecipients = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Id = id;
+            CheckoutPageUrl = checkoutPageUrl;
+            AskForShippingAddress = askForShippingAddress;
+            MerchantSupportEmail = merchantSupportEmail;
+            PrePopulateBuyerEmail = prePopulateBuyerEmail;
+            PrePopulateShippingAddress = prePopulateShippingAddress;
+            RedirectUrl = redirectUrl;
+            Order = order;
+            CreatedAt = createdAt;
+            AdditionalRecipients = additionalRecipients;
         }
 
         /// <summary>
@@ -64,7 +129,7 @@ namespace Square.Models
         /// The URL that the buyer's browser should be redirected to after the
         /// checkout is completed.
         /// </summary>
-        [JsonProperty("checkout_page_url", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("checkout_page_url")]
         public string CheckoutPageUrl { get; }
 
         /// <summary>
@@ -73,7 +138,7 @@ namespace Square.Models
         /// Square Dashboard.
         /// Default: `false`.
         /// </summary>
-        [JsonProperty("ask_for_shipping_address", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("ask_for_shipping_address")]
         public bool? AskForShippingAddress { get; }
 
         /// <summary>
@@ -83,7 +148,7 @@ namespace Square.Models
         /// primary email address associated with the merchant's Square account.
         /// Default: none; only exists if explicitly set.
         /// </summary>
-        [JsonProperty("merchant_support_email", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("merchant_support_email")]
         public string MerchantSupportEmail { get; }
 
         /// <summary>
@@ -91,7 +156,7 @@ namespace Square.Models
         /// as an editable text field.
         /// Default: none; only exists if explicitly set.
         /// </summary>
-        [JsonProperty("pre_populate_buyer_email", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("pre_populate_buyer_email")]
         public string PrePopulateBuyerEmail { get; }
 
         /// <summary>
@@ -113,7 +178,7 @@ namespace Square.Models
         /// you provide a redirect URL so you can verify the transaction results and
         /// finalize the order through your existing/normal confirmation workflow.
         /// </summary>
-        [JsonProperty("redirect_url", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("redirect_url")]
         public string RedirectUrl { get; }
 
         /// <summary>
@@ -136,7 +201,7 @@ namespace Square.Models
         /// Additional recipients (other than the merchant) receiving a portion of this checkout.
         /// For example, fees assessed on the purchase by a third party integration.
         /// </summary>
-        [JsonProperty("additional_recipients", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("additional_recipients")]
         public IList<Models.AdditionalRecipient> AdditionalRecipients { get; }
 
         /// <inheritdoc/>
@@ -147,6 +212,60 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"Checkout : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeCheckoutPageUrl()
+        {
+            return this.shouldSerialize["checkout_page_url"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeAskForShippingAddress()
+        {
+            return this.shouldSerialize["ask_for_shipping_address"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeMerchantSupportEmail()
+        {
+            return this.shouldSerialize["merchant_support_email"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializePrePopulateBuyerEmail()
+        {
+            return this.shouldSerialize["pre_populate_buyer_email"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeRedirectUrl()
+        {
+            return this.shouldSerialize["redirect_url"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeAdditionalRecipients()
+        {
+            return this.shouldSerialize["additional_recipients"];
         }
 
         /// <inheritdoc/>
@@ -229,6 +348,16 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "checkout_page_url", false },
+                { "ask_for_shipping_address", false },
+                { "merchant_support_email", false },
+                { "pre_populate_buyer_email", false },
+                { "redirect_url", false },
+                { "additional_recipients", false },
+            };
+
             private string id;
             private string checkoutPageUrl;
             private bool? askForShippingAddress;
@@ -258,6 +387,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder CheckoutPageUrl(string checkoutPageUrl)
             {
+                shouldSerialize["checkout_page_url"] = true;
                 this.checkoutPageUrl = checkoutPageUrl;
                 return this;
             }
@@ -269,6 +399,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder AskForShippingAddress(bool? askForShippingAddress)
             {
+                shouldSerialize["ask_for_shipping_address"] = true;
                 this.askForShippingAddress = askForShippingAddress;
                 return this;
             }
@@ -280,6 +411,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder MerchantSupportEmail(string merchantSupportEmail)
             {
+                shouldSerialize["merchant_support_email"] = true;
                 this.merchantSupportEmail = merchantSupportEmail;
                 return this;
             }
@@ -291,6 +423,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder PrePopulateBuyerEmail(string prePopulateBuyerEmail)
             {
+                shouldSerialize["pre_populate_buyer_email"] = true;
                 this.prePopulateBuyerEmail = prePopulateBuyerEmail;
                 return this;
             }
@@ -313,6 +446,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder RedirectUrl(string redirectUrl)
             {
+                shouldSerialize["redirect_url"] = true;
                 this.redirectUrl = redirectUrl;
                 return this;
             }
@@ -346,9 +480,59 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder AdditionalRecipients(IList<Models.AdditionalRecipient> additionalRecipients)
             {
+                shouldSerialize["additional_recipients"] = true;
                 this.additionalRecipients = additionalRecipients;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetCheckoutPageUrl()
+            {
+                this.shouldSerialize["checkout_page_url"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetAskForShippingAddress()
+            {
+                this.shouldSerialize["ask_for_shipping_address"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetMerchantSupportEmail()
+            {
+                this.shouldSerialize["merchant_support_email"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetPrePopulateBuyerEmail()
+            {
+                this.shouldSerialize["pre_populate_buyer_email"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetRedirectUrl()
+            {
+                this.shouldSerialize["redirect_url"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetAdditionalRecipients()
+            {
+                this.shouldSerialize["additional_recipients"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -356,7 +540,7 @@ namespace Square.Models
             /// <returns> Checkout. </returns>
             public Checkout Build()
             {
-                return new Checkout(
+                return new Checkout(shouldSerialize,
                     this.id,
                     this.checkoutPageUrl,
                     this.askForShippingAddress,

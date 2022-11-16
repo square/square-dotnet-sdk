@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class CustomerPreferences
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="CustomerPreferences"/> class.
         /// </summary>
@@ -24,13 +25,29 @@ namespace Square.Models
         public CustomerPreferences(
             bool? emailUnsubscribed = null)
         {
-            this.EmailUnsubscribed = emailUnsubscribed;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "email_unsubscribed", false }
+            };
+
+            if (emailUnsubscribed != null)
+            {
+                shouldSerialize["email_unsubscribed"] = true;
+                this.EmailUnsubscribed = emailUnsubscribed;
+            }
+
+        }
+        internal CustomerPreferences(Dictionary<string, bool> shouldSerialize,
+            bool? emailUnsubscribed = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            EmailUnsubscribed = emailUnsubscribed;
         }
 
         /// <summary>
         /// Indicates whether the customer has unsubscribed from marketing campaign emails. A value of `true` means that the customer chose to opt out of email marketing from the current Square seller or from all Square sellers. This value is read-only from the Customers API.
         /// </summary>
-        [JsonProperty("email_unsubscribed", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("email_unsubscribed")]
         public bool? EmailUnsubscribed { get; }
 
         /// <inheritdoc/>
@@ -41,6 +58,15 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"CustomerPreferences : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeEmailUnsubscribed()
+        {
+            return this.shouldSerialize["email_unsubscribed"];
         }
 
         /// <inheritdoc/>
@@ -94,6 +120,11 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "email_unsubscribed", false },
+            };
+
             private bool? emailUnsubscribed;
 
              /// <summary>
@@ -103,9 +134,19 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder EmailUnsubscribed(bool? emailUnsubscribed)
             {
+                shouldSerialize["email_unsubscribed"] = true;
                 this.emailUnsubscribed = emailUnsubscribed;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetEmailUnsubscribed()
+            {
+                this.shouldSerialize["email_unsubscribed"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -113,7 +154,7 @@ namespace Square.Models
             /// <returns> CustomerPreferences. </returns>
             public CustomerPreferences Build()
             {
-                return new CustomerPreferences(
+                return new CustomerPreferences(shouldSerialize,
                     this.emailUnsubscribed);
             }
         }

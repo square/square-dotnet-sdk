@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class LoyaltyProgramAccrualRuleSpendData
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="LoyaltyProgramAccrualRuleSpendData"/> class.
         /// </summary>
@@ -30,10 +31,38 @@ namespace Square.Models
             IList<string> excludedCategoryIds = null,
             IList<string> excludedItemVariationIds = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "excluded_category_ids", false },
+                { "excluded_item_variation_ids", false }
+            };
+
             this.AmountMoney = amountMoney;
-            this.ExcludedCategoryIds = excludedCategoryIds;
-            this.ExcludedItemVariationIds = excludedItemVariationIds;
+            if (excludedCategoryIds != null)
+            {
+                shouldSerialize["excluded_category_ids"] = true;
+                this.ExcludedCategoryIds = excludedCategoryIds;
+            }
+
+            if (excludedItemVariationIds != null)
+            {
+                shouldSerialize["excluded_item_variation_ids"] = true;
+                this.ExcludedItemVariationIds = excludedItemVariationIds;
+            }
+
             this.TaxMode = taxMode;
+        }
+        internal LoyaltyProgramAccrualRuleSpendData(Dictionary<string, bool> shouldSerialize,
+            Models.Money amountMoney,
+            string taxMode,
+            IList<string> excludedCategoryIds = null,
+            IList<string> excludedItemVariationIds = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            AmountMoney = amountMoney;
+            ExcludedCategoryIds = excludedCategoryIds;
+            ExcludedItemVariationIds = excludedItemVariationIds;
+            TaxMode = taxMode;
         }
 
         /// <summary>
@@ -52,7 +81,7 @@ namespace Square.Models
         /// You can use the [BatchRetrieveCatalogObjects]($e/Catalog/BatchRetrieveCatalogObjects)
         /// endpoint to retrieve information about the excluded categories.
         /// </summary>
-        [JsonProperty("excluded_category_ids", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("excluded_category_ids")]
         public IList<string> ExcludedCategoryIds { get; }
 
         /// <summary>
@@ -60,7 +89,7 @@ namespace Square.Models
         /// You can use the [BatchRetrieveCatalogObjects]($e/Catalog/BatchRetrieveCatalogObjects)
         /// endpoint to retrieve information about the excluded item variations.
         /// </summary>
-        [JsonProperty("excluded_item_variation_ids", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("excluded_item_variation_ids")]
         public IList<string> ExcludedItemVariationIds { get; }
 
         /// <summary>
@@ -78,6 +107,24 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"LoyaltyProgramAccrualRuleSpendData : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeExcludedCategoryIds()
+        {
+            return this.shouldSerialize["excluded_category_ids"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeExcludedItemVariationIds()
+        {
+            return this.shouldSerialize["excluded_item_variation_ids"];
         }
 
         /// <inheritdoc/>
@@ -140,6 +187,12 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "excluded_category_ids", false },
+                { "excluded_item_variation_ids", false },
+            };
+
             private Models.Money amountMoney;
             private string taxMode;
             private IList<string> excludedCategoryIds;
@@ -182,6 +235,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder ExcludedCategoryIds(IList<string> excludedCategoryIds)
             {
+                shouldSerialize["excluded_category_ids"] = true;
                 this.excludedCategoryIds = excludedCategoryIds;
                 return this;
             }
@@ -193,9 +247,27 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder ExcludedItemVariationIds(IList<string> excludedItemVariationIds)
             {
+                shouldSerialize["excluded_item_variation_ids"] = true;
                 this.excludedItemVariationIds = excludedItemVariationIds;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetExcludedCategoryIds()
+            {
+                this.shouldSerialize["excluded_category_ids"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetExcludedItemVariationIds()
+            {
+                this.shouldSerialize["excluded_item_variation_ids"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -203,7 +275,7 @@ namespace Square.Models
             /// <returns> LoyaltyProgramAccrualRuleSpendData. </returns>
             public LoyaltyProgramAccrualRuleSpendData Build()
             {
-                return new LoyaltyProgramAccrualRuleSpendData(
+                return new LoyaltyProgramAccrualRuleSpendData(shouldSerialize,
                     this.amountMoney,
                     this.taxMode,
                     this.excludedCategoryIds,

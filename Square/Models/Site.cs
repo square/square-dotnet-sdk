@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class Site
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="Site"/> class.
         /// </summary>
@@ -34,12 +35,50 @@ namespace Square.Models
             string createdAt = null,
             string updatedAt = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "site_title", false },
+                { "domain", false },
+                { "is_published", false }
+            };
+
             this.Id = id;
-            this.SiteTitle = siteTitle;
-            this.Domain = domain;
-            this.IsPublished = isPublished;
+            if (siteTitle != null)
+            {
+                shouldSerialize["site_title"] = true;
+                this.SiteTitle = siteTitle;
+            }
+
+            if (domain != null)
+            {
+                shouldSerialize["domain"] = true;
+                this.Domain = domain;
+            }
+
+            if (isPublished != null)
+            {
+                shouldSerialize["is_published"] = true;
+                this.IsPublished = isPublished;
+            }
+
             this.CreatedAt = createdAt;
             this.UpdatedAt = updatedAt;
+        }
+        internal Site(Dictionary<string, bool> shouldSerialize,
+            string id = null,
+            string siteTitle = null,
+            string domain = null,
+            bool? isPublished = null,
+            string createdAt = null,
+            string updatedAt = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Id = id;
+            SiteTitle = siteTitle;
+            Domain = domain;
+            IsPublished = isPublished;
+            CreatedAt = createdAt;
+            UpdatedAt = updatedAt;
         }
 
         /// <summary>
@@ -51,19 +90,19 @@ namespace Square.Models
         /// <summary>
         /// The title of the site.
         /// </summary>
-        [JsonProperty("site_title", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("site_title")]
         public string SiteTitle { get; }
 
         /// <summary>
         /// The domain of the site (without the protocol). For example, `mysite1.square.site`.
         /// </summary>
-        [JsonProperty("domain", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("domain")]
         public string Domain { get; }
 
         /// <summary>
         /// Indicates whether the site is published.
         /// </summary>
-        [JsonProperty("is_published", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("is_published")]
         public bool? IsPublished { get; }
 
         /// <summary>
@@ -86,6 +125,33 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"Site : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeSiteTitle()
+        {
+            return this.shouldSerialize["site_title"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeDomain()
+        {
+            return this.shouldSerialize["domain"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeIsPublished()
+        {
+            return this.shouldSerialize["is_published"];
         }
 
         /// <inheritdoc/>
@@ -154,6 +220,13 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "site_title", false },
+                { "domain", false },
+                { "is_published", false },
+            };
+
             private string id;
             private string siteTitle;
             private string domain;
@@ -179,6 +252,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder SiteTitle(string siteTitle)
             {
+                shouldSerialize["site_title"] = true;
                 this.siteTitle = siteTitle;
                 return this;
             }
@@ -190,6 +264,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Domain(string domain)
             {
+                shouldSerialize["domain"] = true;
                 this.domain = domain;
                 return this;
             }
@@ -201,6 +276,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder IsPublished(bool? isPublished)
             {
+                shouldSerialize["is_published"] = true;
                 this.isPublished = isPublished;
                 return this;
             }
@@ -228,12 +304,37 @@ namespace Square.Models
             }
 
             /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetSiteTitle()
+            {
+                this.shouldSerialize["site_title"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetDomain()
+            {
+                this.shouldSerialize["domain"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetIsPublished()
+            {
+                this.shouldSerialize["is_published"] = false;
+            }
+
+
+            /// <summary>
             /// Builds class object.
             /// </summary>
             /// <returns> Site. </returns>
             public Site Build()
             {
-                return new Site(
+                return new Site(shouldSerialize,
                     this.id,
                     this.siteTitle,
                     this.domain,

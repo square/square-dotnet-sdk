@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class CatalogSubscriptionPlan
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="CatalogSubscriptionPlan"/> class.
         /// </summary>
@@ -24,10 +25,28 @@ namespace Square.Models
         /// <param name="phases">phases.</param>
         public CatalogSubscriptionPlan(
             string name,
-            IList<Models.SubscriptionPhase> phases)
+            IList<Models.SubscriptionPhase> phases = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "phases", false }
+            };
+
             this.Name = name;
-            this.Phases = phases;
+            if (phases != null)
+            {
+                shouldSerialize["phases"] = true;
+                this.Phases = phases;
+            }
+
+        }
+        internal CatalogSubscriptionPlan(Dictionary<string, bool> shouldSerialize,
+            string name,
+            IList<Models.SubscriptionPhase> phases = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Name = name;
+            Phases = phases;
         }
 
         /// <summary>
@@ -38,6 +57,7 @@ namespace Square.Models
 
         /// <summary>
         /// A list of SubscriptionPhase containing the [SubscriptionPhase]($m/SubscriptionPhase) for this plan.
+        /// This field it required. Not including this field will throw a REQUIRED_FIELD_MISSING error
         /// </summary>
         [JsonProperty("phases")]
         public IList<Models.SubscriptionPhase> Phases { get; }
@@ -50,6 +70,15 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"CatalogSubscriptionPlan : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializePhases()
+        {
+            return this.shouldSerialize["phases"];
         }
 
         /// <inheritdoc/>
@@ -96,8 +125,8 @@ namespace Square.Models
         public Builder ToBuilder()
         {
             var builder = new Builder(
-                this.Name,
-                this.Phases);
+                this.Name)
+                .Phases(this.Phases);
             return builder;
         }
 
@@ -106,15 +135,18 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "phases", false },
+            };
+
             private string name;
             private IList<Models.SubscriptionPhase> phases;
 
             public Builder(
-                string name,
-                IList<Models.SubscriptionPhase> phases)
+                string name)
             {
                 this.name = name;
-                this.phases = phases;
             }
 
              /// <summary>
@@ -135,9 +167,19 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Phases(IList<Models.SubscriptionPhase> phases)
             {
+                shouldSerialize["phases"] = true;
                 this.phases = phases;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetPhases()
+            {
+                this.shouldSerialize["phases"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -145,7 +187,7 @@ namespace Square.Models
             /// <returns> CatalogSubscriptionPlan. </returns>
             public CatalogSubscriptionPlan Build()
             {
-                return new CatalogSubscriptionPlan(
+                return new CatalogSubscriptionPlan(shouldSerialize,
                     this.name,
                     this.phases);
             }

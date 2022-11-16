@@ -5,7 +5,7 @@ The following parameters are configurable for the API Client:
 
 | Parameter | Type | Description |
 |  --- | --- | --- |
-| `SquareVersion` | `string` | Square Connect API versions<br>*Default*: `"2022-10-19"` |
+| `SquareVersion` | `string` | Square Connect API versions<br>*Default*: `"2022-11-16"` |
 | `CustomUrl` | `string` | Sets the base URL requests are made to. Defaults to `https://connect.squareup.com`<br>*Default*: `"https://connect.squareup.com"` |
 | `Environment` | `string` | The API environment. <br> **Default: `production`** |
 | `Timeout` | `TimeSpan` | Http client timeout.<br>*Default*: `TimeSpan.FromSeconds(60)` |
@@ -17,7 +17,7 @@ The API client can be initialized as follows:
 ```csharp
 Square.SquareClient client = new Square.SquareClient.Builder()
     .AccessToken("AccessToken")
-    .SquareVersion("2022-10-19")
+    .SquareVersion("2022-11-16")
     .Environment(Square.Environment.Production)
     .CustomUrl("https://connect.squareup.com")
     .HttpClientConfig(config => config.NumberOfRetries(0))
@@ -47,7 +47,7 @@ namespace Testing
         {
             SquareClient client = new SquareClient.Builder()
                 .AccessToken("AccessToken")
-                .SquareVersion("2022-10-19")
+                .SquareVersion("2022-11-16")
                 .HttpClientConfig(config => config.NumberOfRetries(0))
                 .Build();
             ILocationsApi locationsApi = client.LocationsApi;
@@ -76,6 +76,7 @@ The gateway for the SDK. This class acts as a factory for the Apis and also hold
 | ApplePayApi | Gets ApplePayApi. |
 | BankAccountsApi | Gets BankAccountsApi. |
 | BookingsApi | Gets BookingsApi. |
+| BookingCustomAttributesApi | Gets BookingCustomAttributesApi. |
 | CardsApi | Gets CardsApi. |
 | CashDrawersApi | Gets CashDrawersApi. |
 | CatalogApi | Gets CatalogApi. |
@@ -97,6 +98,7 @@ The gateway for the SDK. This class acts as a factory for the Apis and also hold
 | LoyaltyApi | Gets LoyaltyApi. |
 | MerchantsApi | Gets MerchantsApi. |
 | OrdersApi | Gets OrdersApi. |
+| OrderCustomAttributesApi | Gets OrderCustomAttributesApi. |
 | PaymentsApi | Gets PaymentsApi. |
 | PayoutsApi | Gets PayoutsApi. |
 | RefundsApi | Gets RefundsApi. |
@@ -113,8 +115,8 @@ The gateway for the SDK. This class acts as a factory for the Apis and also hold
 | Name | Description | Type |
 |  --- | --- | --- |
 | AdditionalHeaders | Gets the additional headers. | `IDictionary<string, List<string>>` |
-| SdkVersion | Gets the additional headers. | `string` |
-| HttpClientConfiguration | Gets the configuration of the Http Client associated with this client. | `IHttpClientConfiguration` |
+| SdkVersion | Gets the current version of the SDK. | `string` |
+| HttpClientConfiguration | Gets the configuration of the Http Client associated with this client. | [`IHttpClientConfiguration`](http-client-configuration.md) |
 | Timeout | Http client timeout. | `TimeSpan` |
 | SquareVersion | Square Connect API versions | `string` |
 | UserAgentDetail | User-Agent detail. | `string` |
@@ -137,8 +139,8 @@ Class to build instances of SquareClient.
 | Name | Description | Return Type |
 |  --- | --- | --- |
 | `AdditionalHeaders(IDictionary<string, List<string>> additionalHeaders)` | Gets the additional headers. | `Builder` |
-| `SdkVersion(string sdkVersion)` | Gets the additional headers. | `Builder` |
-| `HttpClientConfiguration(Action<HttpClientConfiguration.Builder> action)` | Gets the configuration of the Http Client associated with this client. | `Builder` |
+| `SdkVersion(string sdkVersion)` | Gets the current version of the SDK. | `Builder` |
+| `HttpClientConfiguration(Action<`[`HttpClientConfiguration.Builder`](http-client-configuration-builder.md)`> action)` | Gets the configuration of the Http Client associated with this client. | `Builder` |
 | `Timeout(TimeSpan timeout)` | Http client timeout. | `Builder` |
 | `SquareVersion(string squareVersion)` | Square Connect API versions | `Builder` |
 | `UserAgentDetail(string userAgentDetail)` | User-Agent detail. | `Builder` |

@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class CatalogItemOptionValueForItemVariation
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="CatalogItemOptionValueForItemVariation"/> class.
         /// </summary>
@@ -26,20 +27,44 @@ namespace Square.Models
             string itemOptionId = null,
             string itemOptionValueId = null)
         {
-            this.ItemOptionId = itemOptionId;
-            this.ItemOptionValueId = itemOptionValueId;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "item_option_id", false },
+                { "item_option_value_id", false }
+            };
+
+            if (itemOptionId != null)
+            {
+                shouldSerialize["item_option_id"] = true;
+                this.ItemOptionId = itemOptionId;
+            }
+
+            if (itemOptionValueId != null)
+            {
+                shouldSerialize["item_option_value_id"] = true;
+                this.ItemOptionValueId = itemOptionValueId;
+            }
+
+        }
+        internal CatalogItemOptionValueForItemVariation(Dictionary<string, bool> shouldSerialize,
+            string itemOptionId = null,
+            string itemOptionValueId = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            ItemOptionId = itemOptionId;
+            ItemOptionValueId = itemOptionValueId;
         }
 
         /// <summary>
         /// The unique id of an item option.
         /// </summary>
-        [JsonProperty("item_option_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("item_option_id")]
         public string ItemOptionId { get; }
 
         /// <summary>
         /// The unique id of the selected value for the item option.
         /// </summary>
-        [JsonProperty("item_option_value_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("item_option_value_id")]
         public string ItemOptionValueId { get; }
 
         /// <inheritdoc/>
@@ -50,6 +75,24 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"CatalogItemOptionValueForItemVariation : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeItemOptionId()
+        {
+            return this.shouldSerialize["item_option_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeItemOptionValueId()
+        {
+            return this.shouldSerialize["item_option_value_id"];
         }
 
         /// <inheritdoc/>
@@ -106,6 +149,12 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "item_option_id", false },
+                { "item_option_value_id", false },
+            };
+
             private string itemOptionId;
             private string itemOptionValueId;
 
@@ -116,6 +165,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder ItemOptionId(string itemOptionId)
             {
+                shouldSerialize["item_option_id"] = true;
                 this.itemOptionId = itemOptionId;
                 return this;
             }
@@ -127,9 +177,27 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder ItemOptionValueId(string itemOptionValueId)
             {
+                shouldSerialize["item_option_value_id"] = true;
                 this.itemOptionValueId = itemOptionValueId;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetItemOptionId()
+            {
+                this.shouldSerialize["item_option_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetItemOptionValueId()
+            {
+                this.shouldSerialize["item_option_value_id"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -137,7 +205,7 @@ namespace Square.Models
             /// <returns> CatalogItemOptionValueForItemVariation. </returns>
             public CatalogItemOptionValueForItemVariation Build()
             {
-                return new CatalogItemOptionValueForItemVariation(
+                return new CatalogItemOptionValueForItemVariation(shouldSerialize,
                     this.itemOptionId,
                     this.itemOptionValueId);
             }

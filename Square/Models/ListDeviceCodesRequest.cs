@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class ListDeviceCodesRequest
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="ListDeviceCodesRequest"/> class.
         /// </summary>
@@ -30,10 +31,44 @@ namespace Square.Models
             string productType = null,
             IList<string> status = null)
         {
-            this.Cursor = cursor;
-            this.LocationId = locationId;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "cursor", false },
+                { "location_id", false },
+                { "status", false }
+            };
+
+            if (cursor != null)
+            {
+                shouldSerialize["cursor"] = true;
+                this.Cursor = cursor;
+            }
+
+            if (locationId != null)
+            {
+                shouldSerialize["location_id"] = true;
+                this.LocationId = locationId;
+            }
+
             this.ProductType = productType;
-            this.Status = status;
+            if (status != null)
+            {
+                shouldSerialize["status"] = true;
+                this.Status = status;
+            }
+
+        }
+        internal ListDeviceCodesRequest(Dictionary<string, bool> shouldSerialize,
+            string cursor = null,
+            string locationId = null,
+            string productType = null,
+            IList<string> status = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Cursor = cursor;
+            LocationId = locationId;
+            ProductType = productType;
+            Status = status;
         }
 
         /// <summary>
@@ -41,14 +76,14 @@ namespace Square.Models
         /// Provide this to retrieve the next set of results for your original query.
         /// See [Paginating results](https://developer.squareup.com/docs/working-with-apis/pagination) for more information.
         /// </summary>
-        [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("cursor")]
         public string Cursor { get; }
 
         /// <summary>
         /// If specified, only returns DeviceCodes of the specified location.
         /// Returns DeviceCodes of all locations if empty.
         /// </summary>
-        [JsonProperty("location_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("location_id")]
         public string LocationId { get; }
 
         /// <summary>
@@ -62,7 +97,7 @@ namespace Square.Models
         /// Returns DeviceCodes of status `PAIRED` and `UNPAIRED` if empty.
         /// See [DeviceCodeStatus](#type-devicecodestatus) for possible values
         /// </summary>
-        [JsonProperty("status", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("status")]
         public IList<string> Status { get; }
 
         /// <inheritdoc/>
@@ -73,6 +108,33 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"ListDeviceCodesRequest : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeCursor()
+        {
+            return this.shouldSerialize["cursor"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeLocationId()
+        {
+            return this.shouldSerialize["location_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeStatus()
+        {
+            return this.shouldSerialize["status"];
         }
 
         /// <inheritdoc/>
@@ -135,6 +197,13 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "cursor", false },
+                { "location_id", false },
+                { "status", false },
+            };
+
             private string cursor;
             private string locationId;
             private string productType;
@@ -147,6 +216,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Cursor(string cursor)
             {
+                shouldSerialize["cursor"] = true;
                 this.cursor = cursor;
                 return this;
             }
@@ -158,6 +228,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder LocationId(string locationId)
             {
+                shouldSerialize["location_id"] = true;
                 this.locationId = locationId;
                 return this;
             }
@@ -180,9 +251,35 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Status(IList<string> status)
             {
+                shouldSerialize["status"] = true;
                 this.status = status;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetCursor()
+            {
+                this.shouldSerialize["cursor"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetLocationId()
+            {
+                this.shouldSerialize["location_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetStatus()
+            {
+                this.shouldSerialize["status"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -190,7 +287,7 @@ namespace Square.Models
             /// <returns> ListDeviceCodesRequest. </returns>
             public ListDeviceCodesRequest Build()
             {
-                return new ListDeviceCodesRequest(
+                return new ListDeviceCodesRequest(shouldSerialize,
                     this.cursor,
                     this.locationId,
                     this.productType,

@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class V1PaymentItemization
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="V1PaymentItemization"/> class.
         /// </summary>
@@ -50,32 +51,110 @@ namespace Square.Models
             IList<Models.V1PaymentDiscount> discounts = null,
             IList<Models.V1PaymentModifier> modifiers = null)
         {
-            this.Name = name;
-            this.Quantity = quantity;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "name", false },
+                { "quantity", false },
+                { "notes", false },
+                { "item_variation_name", false },
+                { "taxes", false },
+                { "discounts", false },
+                { "modifiers", false }
+            };
+
+            if (name != null)
+            {
+                shouldSerialize["name"] = true;
+                this.Name = name;
+            }
+
+            if (quantity != null)
+            {
+                shouldSerialize["quantity"] = true;
+                this.Quantity = quantity;
+            }
+
             this.ItemizationType = itemizationType;
             this.ItemDetail = itemDetail;
-            this.Notes = notes;
-            this.ItemVariationName = itemVariationName;
+            if (notes != null)
+            {
+                shouldSerialize["notes"] = true;
+                this.Notes = notes;
+            }
+
+            if (itemVariationName != null)
+            {
+                shouldSerialize["item_variation_name"] = true;
+                this.ItemVariationName = itemVariationName;
+            }
+
             this.TotalMoney = totalMoney;
             this.SingleQuantityMoney = singleQuantityMoney;
             this.GrossSalesMoney = grossSalesMoney;
             this.DiscountMoney = discountMoney;
             this.NetSalesMoney = netSalesMoney;
-            this.Taxes = taxes;
-            this.Discounts = discounts;
-            this.Modifiers = modifiers;
+            if (taxes != null)
+            {
+                shouldSerialize["taxes"] = true;
+                this.Taxes = taxes;
+            }
+
+            if (discounts != null)
+            {
+                shouldSerialize["discounts"] = true;
+                this.Discounts = discounts;
+            }
+
+            if (modifiers != null)
+            {
+                shouldSerialize["modifiers"] = true;
+                this.Modifiers = modifiers;
+            }
+
+        }
+        internal V1PaymentItemization(Dictionary<string, bool> shouldSerialize,
+            string name = null,
+            double? quantity = null,
+            string itemizationType = null,
+            Models.V1PaymentItemDetail itemDetail = null,
+            string notes = null,
+            string itemVariationName = null,
+            Models.V1Money totalMoney = null,
+            Models.V1Money singleQuantityMoney = null,
+            Models.V1Money grossSalesMoney = null,
+            Models.V1Money discountMoney = null,
+            Models.V1Money netSalesMoney = null,
+            IList<Models.V1PaymentTax> taxes = null,
+            IList<Models.V1PaymentDiscount> discounts = null,
+            IList<Models.V1PaymentModifier> modifiers = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Name = name;
+            Quantity = quantity;
+            ItemizationType = itemizationType;
+            ItemDetail = itemDetail;
+            Notes = notes;
+            ItemVariationName = itemVariationName;
+            TotalMoney = totalMoney;
+            SingleQuantityMoney = singleQuantityMoney;
+            GrossSalesMoney = grossSalesMoney;
+            DiscountMoney = discountMoney;
+            NetSalesMoney = netSalesMoney;
+            Taxes = taxes;
+            Discounts = discounts;
+            Modifiers = modifiers;
         }
 
         /// <summary>
         /// The item's name.
         /// </summary>
-        [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("name")]
         public string Name { get; }
 
         /// <summary>
         /// The quantity of the item purchased. This can be a decimal value.
         /// </summary>
-        [JsonProperty("quantity", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("quantity")]
         public double? Quantity { get; }
 
         /// <summary>
@@ -93,13 +172,13 @@ namespace Square.Models
         /// <summary>
         /// Notes entered by the merchant about the item at the time of payment, if any.
         /// </summary>
-        [JsonProperty("notes", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("notes")]
         public string Notes { get; }
 
         /// <summary>
         /// The name of the item variation purchased, if any.
         /// </summary>
-        [JsonProperty("item_variation_name", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("item_variation_name")]
         public string ItemVariationName { get; }
 
         /// <summary>
@@ -135,19 +214,19 @@ namespace Square.Models
         /// <summary>
         /// All taxes applied to this itemization.
         /// </summary>
-        [JsonProperty("taxes", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("taxes")]
         public IList<Models.V1PaymentTax> Taxes { get; }
 
         /// <summary>
         /// All discounts applied to this itemization.
         /// </summary>
-        [JsonProperty("discounts", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("discounts")]
         public IList<Models.V1PaymentDiscount> Discounts { get; }
 
         /// <summary>
         /// All modifier options applied to this itemization.
         /// </summary>
-        [JsonProperty("modifiers", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("modifiers")]
         public IList<Models.V1PaymentModifier> Modifiers { get; }
 
         /// <inheritdoc/>
@@ -158,6 +237,69 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"V1PaymentItemization : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeName()
+        {
+            return this.shouldSerialize["name"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeQuantity()
+        {
+            return this.shouldSerialize["quantity"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeNotes()
+        {
+            return this.shouldSerialize["notes"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeItemVariationName()
+        {
+            return this.shouldSerialize["item_variation_name"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeTaxes()
+        {
+            return this.shouldSerialize["taxes"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeDiscounts()
+        {
+            return this.shouldSerialize["discounts"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeModifiers()
+        {
+            return this.shouldSerialize["modifiers"];
         }
 
         /// <inheritdoc/>
@@ -252,6 +394,17 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "name", false },
+                { "quantity", false },
+                { "notes", false },
+                { "item_variation_name", false },
+                { "taxes", false },
+                { "discounts", false },
+                { "modifiers", false },
+            };
+
             private string name;
             private double? quantity;
             private string itemizationType;
@@ -274,6 +427,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Name(string name)
             {
+                shouldSerialize["name"] = true;
                 this.name = name;
                 return this;
             }
@@ -285,6 +439,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Quantity(double? quantity)
             {
+                shouldSerialize["quantity"] = true;
                 this.quantity = quantity;
                 return this;
             }
@@ -318,6 +473,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Notes(string notes)
             {
+                shouldSerialize["notes"] = true;
                 this.notes = notes;
                 return this;
             }
@@ -329,6 +485,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder ItemVariationName(string itemVariationName)
             {
+                shouldSerialize["item_variation_name"] = true;
                 this.itemVariationName = itemVariationName;
                 return this;
             }
@@ -395,6 +552,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Taxes(IList<Models.V1PaymentTax> taxes)
             {
+                shouldSerialize["taxes"] = true;
                 this.taxes = taxes;
                 return this;
             }
@@ -406,6 +564,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Discounts(IList<Models.V1PaymentDiscount> discounts)
             {
+                shouldSerialize["discounts"] = true;
                 this.discounts = discounts;
                 return this;
             }
@@ -417,9 +576,67 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Modifiers(IList<Models.V1PaymentModifier> modifiers)
             {
+                shouldSerialize["modifiers"] = true;
                 this.modifiers = modifiers;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetName()
+            {
+                this.shouldSerialize["name"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetQuantity()
+            {
+                this.shouldSerialize["quantity"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetNotes()
+            {
+                this.shouldSerialize["notes"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetItemVariationName()
+            {
+                this.shouldSerialize["item_variation_name"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetTaxes()
+            {
+                this.shouldSerialize["taxes"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetDiscounts()
+            {
+                this.shouldSerialize["discounts"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetModifiers()
+            {
+                this.shouldSerialize["modifiers"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -427,7 +644,7 @@ namespace Square.Models
             /// <returns> V1PaymentItemization. </returns>
             public V1PaymentItemization Build()
             {
-                return new V1PaymentItemization(
+                return new V1PaymentItemization(shouldSerialize,
                     this.name,
                     this.quantity,
                     this.itemizationType,

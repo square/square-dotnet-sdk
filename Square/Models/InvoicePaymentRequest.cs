@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class InvoicePaymentRequest
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="InvoicePaymentRequest"/> class.
         /// </summary>
@@ -48,25 +49,95 @@ namespace Square.Models
             Models.Money totalCompletedAmountMoney = null,
             Models.Money roundingAdjustmentIncludedMoney = null)
         {
-            this.Uid = uid;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "uid", false },
+                { "due_date", false },
+                { "percentage_requested", false },
+                { "tipping_enabled", false },
+                { "card_id", false },
+                { "reminders", false }
+            };
+
+            if (uid != null)
+            {
+                shouldSerialize["uid"] = true;
+                this.Uid = uid;
+            }
+
             this.RequestMethod = requestMethod;
             this.RequestType = requestType;
-            this.DueDate = dueDate;
+            if (dueDate != null)
+            {
+                shouldSerialize["due_date"] = true;
+                this.DueDate = dueDate;
+            }
+
             this.FixedAmountRequestedMoney = fixedAmountRequestedMoney;
-            this.PercentageRequested = percentageRequested;
-            this.TippingEnabled = tippingEnabled;
+            if (percentageRequested != null)
+            {
+                shouldSerialize["percentage_requested"] = true;
+                this.PercentageRequested = percentageRequested;
+            }
+
+            if (tippingEnabled != null)
+            {
+                shouldSerialize["tipping_enabled"] = true;
+                this.TippingEnabled = tippingEnabled;
+            }
+
             this.AutomaticPaymentSource = automaticPaymentSource;
-            this.CardId = cardId;
-            this.Reminders = reminders;
+            if (cardId != null)
+            {
+                shouldSerialize["card_id"] = true;
+                this.CardId = cardId;
+            }
+
+            if (reminders != null)
+            {
+                shouldSerialize["reminders"] = true;
+                this.Reminders = reminders;
+            }
+
             this.ComputedAmountMoney = computedAmountMoney;
             this.TotalCompletedAmountMoney = totalCompletedAmountMoney;
             this.RoundingAdjustmentIncludedMoney = roundingAdjustmentIncludedMoney;
+        }
+        internal InvoicePaymentRequest(Dictionary<string, bool> shouldSerialize,
+            string uid = null,
+            string requestMethod = null,
+            string requestType = null,
+            string dueDate = null,
+            Models.Money fixedAmountRequestedMoney = null,
+            string percentageRequested = null,
+            bool? tippingEnabled = null,
+            string automaticPaymentSource = null,
+            string cardId = null,
+            IList<Models.InvoicePaymentReminder> reminders = null,
+            Models.Money computedAmountMoney = null,
+            Models.Money totalCompletedAmountMoney = null,
+            Models.Money roundingAdjustmentIncludedMoney = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Uid = uid;
+            RequestMethod = requestMethod;
+            RequestType = requestType;
+            DueDate = dueDate;
+            FixedAmountRequestedMoney = fixedAmountRequestedMoney;
+            PercentageRequested = percentageRequested;
+            TippingEnabled = tippingEnabled;
+            AutomaticPaymentSource = automaticPaymentSource;
+            CardId = cardId;
+            Reminders = reminders;
+            ComputedAmountMoney = computedAmountMoney;
+            TotalCompletedAmountMoney = totalCompletedAmountMoney;
+            RoundingAdjustmentIncludedMoney = roundingAdjustmentIncludedMoney;
         }
 
         /// <summary>
         /// The Square-generated ID of the payment request in an [invoice]($m/Invoice).
         /// </summary>
-        [JsonProperty("uid", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("uid")]
         public string Uid { get; }
 
         /// <summary>
@@ -93,7 +164,7 @@ namespace Square.Models
         /// of America/Los\_Angeles becomes overdue at midnight on March 9 in America/Los\_Angeles (which equals a UTC
         /// timestamp of 2021-03-10T08:00:00Z).
         /// </summary>
-        [JsonProperty("due_date", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("due_date")]
         public string DueDate { get; }
 
         /// <summary>
@@ -116,7 +187,7 @@ namespace Square.Models
         /// You cannot specify this when the payment `request_type` is `BALANCE` or when the
         /// payment request specifies the `fixed_amount_requested_money` field.
         /// </summary>
-        [JsonProperty("percentage_requested", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("percentage_requested")]
         public string PercentageRequested { get; }
 
         /// <summary>
@@ -125,7 +196,7 @@ namespace Square.Models
         /// This field is allowed only on the final payment request
         /// and the payment `request_type` must be `BALANCE` or `INSTALLMENT`.
         /// </summary>
-        [JsonProperty("tipping_enabled", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("tipping_enabled")]
         public bool? TippingEnabled { get; }
 
         /// <summary>
@@ -138,13 +209,13 @@ namespace Square.Models
         /// The ID of the credit or debit card on file to charge for the payment request. To get the cards on file for a customer,
         /// call [ListCards]($e/Cards/ListCards) and include the `customer_id` of the invoice recipient.
         /// </summary>
-        [JsonProperty("card_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("card_id")]
         public string CardId { get; }
 
         /// <summary>
         /// A list of one or more reminders to send for the payment request.
         /// </summary>
-        [JsonProperty("reminders", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("reminders")]
         public IList<Models.InvoicePaymentReminder> Reminders { get; }
 
         /// <summary>
@@ -188,6 +259,60 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"InvoicePaymentRequest : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeUid()
+        {
+            return this.shouldSerialize["uid"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeDueDate()
+        {
+            return this.shouldSerialize["due_date"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializePercentageRequested()
+        {
+            return this.shouldSerialize["percentage_requested"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeTippingEnabled()
+        {
+            return this.shouldSerialize["tipping_enabled"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeCardId()
+        {
+            return this.shouldSerialize["card_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeReminders()
+        {
+            return this.shouldSerialize["reminders"];
         }
 
         /// <inheritdoc/>
@@ -279,6 +404,16 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "uid", false },
+                { "due_date", false },
+                { "percentage_requested", false },
+                { "tipping_enabled", false },
+                { "card_id", false },
+                { "reminders", false },
+            };
+
             private string uid;
             private string requestMethod;
             private string requestType;
@@ -300,6 +435,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Uid(string uid)
             {
+                shouldSerialize["uid"] = true;
                 this.uid = uid;
                 return this;
             }
@@ -333,6 +469,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder DueDate(string dueDate)
             {
+                shouldSerialize["due_date"] = true;
                 this.dueDate = dueDate;
                 return this;
             }
@@ -355,6 +492,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder PercentageRequested(string percentageRequested)
             {
+                shouldSerialize["percentage_requested"] = true;
                 this.percentageRequested = percentageRequested;
                 return this;
             }
@@ -366,6 +504,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder TippingEnabled(bool? tippingEnabled)
             {
+                shouldSerialize["tipping_enabled"] = true;
                 this.tippingEnabled = tippingEnabled;
                 return this;
             }
@@ -388,6 +527,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder CardId(string cardId)
             {
+                shouldSerialize["card_id"] = true;
                 this.cardId = cardId;
                 return this;
             }
@@ -399,6 +539,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Reminders(IList<Models.InvoicePaymentReminder> reminders)
             {
+                shouldSerialize["reminders"] = true;
                 this.reminders = reminders;
                 return this;
             }
@@ -437,12 +578,61 @@ namespace Square.Models
             }
 
             /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetUid()
+            {
+                this.shouldSerialize["uid"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetDueDate()
+            {
+                this.shouldSerialize["due_date"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetPercentageRequested()
+            {
+                this.shouldSerialize["percentage_requested"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetTippingEnabled()
+            {
+                this.shouldSerialize["tipping_enabled"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetCardId()
+            {
+                this.shouldSerialize["card_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetReminders()
+            {
+                this.shouldSerialize["reminders"] = false;
+            }
+
+
+            /// <summary>
             /// Builds class object.
             /// </summary>
             /// <returns> InvoicePaymentRequest. </returns>
             public InvoicePaymentRequest Build()
             {
-                return new InvoicePaymentRequest(
+                return new InvoicePaymentRequest(shouldSerialize,
                     this.uid,
                     this.requestMethod,
                     this.requestType,

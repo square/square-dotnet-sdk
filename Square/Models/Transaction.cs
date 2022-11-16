@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class Transaction
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="Transaction"/> class.
         /// </summary>
@@ -42,16 +43,80 @@ namespace Square.Models
             Models.Address shippingAddress = null,
             string orderId = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "location_id", false },
+                { "tenders", false },
+                { "refunds", false },
+                { "reference_id", false },
+                { "client_id", false },
+                { "order_id", false }
+            };
+
             this.Id = id;
-            this.LocationId = locationId;
+            if (locationId != null)
+            {
+                shouldSerialize["location_id"] = true;
+                this.LocationId = locationId;
+            }
+
             this.CreatedAt = createdAt;
-            this.Tenders = tenders;
-            this.Refunds = refunds;
-            this.ReferenceId = referenceId;
+            if (tenders != null)
+            {
+                shouldSerialize["tenders"] = true;
+                this.Tenders = tenders;
+            }
+
+            if (refunds != null)
+            {
+                shouldSerialize["refunds"] = true;
+                this.Refunds = refunds;
+            }
+
+            if (referenceId != null)
+            {
+                shouldSerialize["reference_id"] = true;
+                this.ReferenceId = referenceId;
+            }
+
             this.Product = product;
-            this.ClientId = clientId;
+            if (clientId != null)
+            {
+                shouldSerialize["client_id"] = true;
+                this.ClientId = clientId;
+            }
+
             this.ShippingAddress = shippingAddress;
-            this.OrderId = orderId;
+            if (orderId != null)
+            {
+                shouldSerialize["order_id"] = true;
+                this.OrderId = orderId;
+            }
+
+        }
+        internal Transaction(Dictionary<string, bool> shouldSerialize,
+            string id = null,
+            string locationId = null,
+            string createdAt = null,
+            IList<Models.Tender> tenders = null,
+            IList<Models.Refund> refunds = null,
+            string referenceId = null,
+            string product = null,
+            string clientId = null,
+            Models.Address shippingAddress = null,
+            string orderId = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Id = id;
+            LocationId = locationId;
+            CreatedAt = createdAt;
+            Tenders = tenders;
+            Refunds = refunds;
+            ReferenceId = referenceId;
+            Product = product;
+            ClientId = clientId;
+            ShippingAddress = shippingAddress;
+            OrderId = orderId;
         }
 
         /// <summary>
@@ -63,7 +128,7 @@ namespace Square.Models
         /// <summary>
         /// The ID of the transaction's associated location.
         /// </summary>
-        [JsonProperty("location_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("location_id")]
         public string LocationId { get; }
 
         /// <summary>
@@ -75,13 +140,13 @@ namespace Square.Models
         /// <summary>
         /// The tenders used to pay in the transaction.
         /// </summary>
-        [JsonProperty("tenders", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("tenders")]
         public IList<Models.Tender> Tenders { get; }
 
         /// <summary>
         /// Refunds that have been applied to any tender in the transaction.
         /// </summary>
-        [JsonProperty("refunds", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("refunds")]
         public IList<Models.Refund> Refunds { get; }
 
         /// <summary>
@@ -89,7 +154,7 @@ namespace Square.Models
         /// endpoint, this value is the same as the value provided for the `reference_id`
         /// parameter in the request to that endpoint. Otherwise, it is not set.
         /// </summary>
-        [JsonProperty("reference_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("reference_id")]
         public string ReferenceId { get; }
 
         /// <summary>
@@ -108,7 +173,7 @@ namespace Square.Models
         /// It is not currently possible with the Connect API to perform a transaction
         /// lookup by this value.
         /// </summary>
-        [JsonProperty("client_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("client_id")]
         public string ClientId { get; }
 
         /// <summary>
@@ -121,7 +186,7 @@ namespace Square.Models
         /// <summary>
         /// The order_id is an identifier for the order associated with this transaction, if any.
         /// </summary>
-        [JsonProperty("order_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("order_id")]
         public string OrderId { get; }
 
         /// <inheritdoc/>
@@ -132,6 +197,60 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"Transaction : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeLocationId()
+        {
+            return this.shouldSerialize["location_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeTenders()
+        {
+            return this.shouldSerialize["tenders"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeRefunds()
+        {
+            return this.shouldSerialize["refunds"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeReferenceId()
+        {
+            return this.shouldSerialize["reference_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeClientId()
+        {
+            return this.shouldSerialize["client_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeOrderId()
+        {
+            return this.shouldSerialize["order_id"];
         }
 
         /// <inheritdoc/>
@@ -214,6 +333,16 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "location_id", false },
+                { "tenders", false },
+                { "refunds", false },
+                { "reference_id", false },
+                { "client_id", false },
+                { "order_id", false },
+            };
+
             private string id;
             private string locationId;
             private string createdAt;
@@ -243,6 +372,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder LocationId(string locationId)
             {
+                shouldSerialize["location_id"] = true;
                 this.locationId = locationId;
                 return this;
             }
@@ -265,6 +395,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Tenders(IList<Models.Tender> tenders)
             {
+                shouldSerialize["tenders"] = true;
                 this.tenders = tenders;
                 return this;
             }
@@ -276,6 +407,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Refunds(IList<Models.Refund> refunds)
             {
+                shouldSerialize["refunds"] = true;
                 this.refunds = refunds;
                 return this;
             }
@@ -287,6 +419,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder ReferenceId(string referenceId)
             {
+                shouldSerialize["reference_id"] = true;
                 this.referenceId = referenceId;
                 return this;
             }
@@ -309,6 +442,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder ClientId(string clientId)
             {
+                shouldSerialize["client_id"] = true;
                 this.clientId = clientId;
                 return this;
             }
@@ -331,9 +465,59 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder OrderId(string orderId)
             {
+                shouldSerialize["order_id"] = true;
                 this.orderId = orderId;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetLocationId()
+            {
+                this.shouldSerialize["location_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetTenders()
+            {
+                this.shouldSerialize["tenders"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetRefunds()
+            {
+                this.shouldSerialize["refunds"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetReferenceId()
+            {
+                this.shouldSerialize["reference_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetClientId()
+            {
+                this.shouldSerialize["client_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetOrderId()
+            {
+                this.shouldSerialize["order_id"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -341,7 +525,7 @@ namespace Square.Models
             /// <returns> Transaction. </returns>
             public Transaction Build()
             {
-                return new Transaction(
+                return new Transaction(shouldSerialize,
                     this.id,
                     this.locationId,
                     this.createdAt,

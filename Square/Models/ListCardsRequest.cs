@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class ListCardsRequest
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="ListCardsRequest"/> class.
         /// </summary>
@@ -32,11 +33,53 @@ namespace Square.Models
             string referenceId = null,
             string sortOrder = null)
         {
-            this.Cursor = cursor;
-            this.CustomerId = customerId;
-            this.IncludeDisabled = includeDisabled;
-            this.ReferenceId = referenceId;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "cursor", false },
+                { "customer_id", false },
+                { "include_disabled", false },
+                { "reference_id", false }
+            };
+
+            if (cursor != null)
+            {
+                shouldSerialize["cursor"] = true;
+                this.Cursor = cursor;
+            }
+
+            if (customerId != null)
+            {
+                shouldSerialize["customer_id"] = true;
+                this.CustomerId = customerId;
+            }
+
+            if (includeDisabled != null)
+            {
+                shouldSerialize["include_disabled"] = true;
+                this.IncludeDisabled = includeDisabled;
+            }
+
+            if (referenceId != null)
+            {
+                shouldSerialize["reference_id"] = true;
+                this.ReferenceId = referenceId;
+            }
+
             this.SortOrder = sortOrder;
+        }
+        internal ListCardsRequest(Dictionary<string, bool> shouldSerialize,
+            string cursor = null,
+            string customerId = null,
+            bool? includeDisabled = null,
+            string referenceId = null,
+            string sortOrder = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Cursor = cursor;
+            CustomerId = customerId;
+            IncludeDisabled = includeDisabled;
+            ReferenceId = referenceId;
+            SortOrder = sortOrder;
         }
 
         /// <summary>
@@ -44,27 +87,27 @@ namespace Square.Models
         /// Provide this to retrieve the next set of results for your original query.
         /// See [Pagination](https://developer.squareup.com/docs/basics/api101/pagination) for more information.
         /// </summary>
-        [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("cursor")]
         public string Cursor { get; }
 
         /// <summary>
         /// Limit results to cards associated with the customer supplied.
         /// By default, all cards owned by the merchant are returned.
         /// </summary>
-        [JsonProperty("customer_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("customer_id")]
         public string CustomerId { get; }
 
         /// <summary>
         /// Includes disabled cards.
         /// By default, all enabled cards owned by the merchant are returned.
         /// </summary>
-        [JsonProperty("include_disabled", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("include_disabled")]
         public bool? IncludeDisabled { get; }
 
         /// <summary>
         /// Limit results to cards associated with the reference_id supplied.
         /// </summary>
-        [JsonProperty("reference_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("reference_id")]
         public string ReferenceId { get; }
 
         /// <summary>
@@ -81,6 +124,42 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"ListCardsRequest : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeCursor()
+        {
+            return this.shouldSerialize["cursor"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeCustomerId()
+        {
+            return this.shouldSerialize["customer_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeIncludeDisabled()
+        {
+            return this.shouldSerialize["include_disabled"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeReferenceId()
+        {
+            return this.shouldSerialize["reference_id"];
         }
 
         /// <inheritdoc/>
@@ -146,6 +225,14 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "cursor", false },
+                { "customer_id", false },
+                { "include_disabled", false },
+                { "reference_id", false },
+            };
+
             private string cursor;
             private string customerId;
             private bool? includeDisabled;
@@ -159,6 +246,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Cursor(string cursor)
             {
+                shouldSerialize["cursor"] = true;
                 this.cursor = cursor;
                 return this;
             }
@@ -170,6 +258,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder CustomerId(string customerId)
             {
+                shouldSerialize["customer_id"] = true;
                 this.customerId = customerId;
                 return this;
             }
@@ -181,6 +270,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder IncludeDisabled(bool? includeDisabled)
             {
+                shouldSerialize["include_disabled"] = true;
                 this.includeDisabled = includeDisabled;
                 return this;
             }
@@ -192,6 +282,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder ReferenceId(string referenceId)
             {
+                shouldSerialize["reference_id"] = true;
                 this.referenceId = referenceId;
                 return this;
             }
@@ -208,12 +299,45 @@ namespace Square.Models
             }
 
             /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetCursor()
+            {
+                this.shouldSerialize["cursor"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetCustomerId()
+            {
+                this.shouldSerialize["customer_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetIncludeDisabled()
+            {
+                this.shouldSerialize["include_disabled"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetReferenceId()
+            {
+                this.shouldSerialize["reference_id"] = false;
+            }
+
+
+            /// <summary>
             /// Builds class object.
             /// </summary>
             /// <returns> ListCardsRequest. </returns>
             public ListCardsRequest Build()
             {
-                return new ListCardsRequest(
+                return new ListCardsRequest(shouldSerialize,
                     this.cursor,
                     this.customerId,
                     this.includeDisabled,

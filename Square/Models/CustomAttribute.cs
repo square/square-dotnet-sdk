@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class CustomAttribute
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="CustomAttribute"/> class.
         /// </summary>
@@ -36,13 +37,47 @@ namespace Square.Models
             string updatedAt = null,
             string createdAt = null)
         {
-            this.Key = key;
-            this.MValue = mValue;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "key", false },
+                { "value", false }
+            };
+
+            if (key != null)
+            {
+                shouldSerialize["key"] = true;
+                this.Key = key;
+            }
+
+            if (mValue != null)
+            {
+                shouldSerialize["value"] = true;
+                this.MValue = mValue;
+            }
+
             this.Version = version;
             this.Visibility = visibility;
             this.Definition = definition;
             this.UpdatedAt = updatedAt;
             this.CreatedAt = createdAt;
+        }
+        internal CustomAttribute(Dictionary<string, bool> shouldSerialize,
+            string key = null,
+            JsonValue mValue = null,
+            int? version = null,
+            string visibility = null,
+            Models.CustomAttributeDefinition definition = null,
+            string updatedAt = null,
+            string createdAt = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Key = key;
+            MValue = mValue;
+            Version = version;
+            Visibility = visibility;
+            Definition = definition;
+            UpdatedAt = updatedAt;
+            CreatedAt = createdAt;
         }
 
         /// <summary>
@@ -57,7 +92,7 @@ namespace Square.Models
         /// The value for a simple key can contain up to 60 alphanumeric characters, periods (.),
         /// underscores (_), and hyphens (-).
         /// </summary>
-        [JsonProperty("key", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("key")]
         public string Key { get; }
 
         /// <summary>
@@ -66,7 +101,7 @@ namespace Square.Models
         /// attribute values,
         /// see [Custom Attributes Overview](https://developer.squareup.com/docs/devtools/customattributes/overview).
         /// </summary>
-        [JsonProperty("value", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("value")]
         public JsonValue MValue { get; }
 
         /// <summary>
@@ -117,6 +152,24 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"CustomAttribute : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeKey()
+        {
+            return this.shouldSerialize["key"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeMValue()
+        {
+            return this.shouldSerialize["value"];
         }
 
         /// <inheritdoc/>
@@ -188,6 +241,12 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "key", false },
+                { "value", false },
+            };
+
             private string key;
             private JsonValue mValue;
             private int? version;
@@ -203,6 +262,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Key(string key)
             {
+                shouldSerialize["key"] = true;
                 this.key = key;
                 return this;
             }
@@ -214,6 +274,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder MValue(JsonValue mValue)
             {
+                shouldSerialize["value"] = true;
                 this.mValue = mValue;
                 return this;
             }
@@ -274,12 +335,29 @@ namespace Square.Models
             }
 
             /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetKey()
+            {
+                this.shouldSerialize["key"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetMValue()
+            {
+                this.shouldSerialize["value"] = false;
+            }
+
+
+            /// <summary>
             /// Builds class object.
             /// </summary>
             /// <returns> CustomAttribute. </returns>
             public CustomAttribute Build()
             {
-                return new CustomAttribute(
+                return new CustomAttribute(shouldSerialize,
                     this.key,
                     this.mValue,
                     this.version,

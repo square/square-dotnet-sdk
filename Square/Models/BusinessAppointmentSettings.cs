@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class BusinessAppointmentSettings
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="BusinessAppointmentSettings"/> class.
         /// </summary>
@@ -48,26 +49,114 @@ namespace Square.Models
             string cancellationPolicyText = null,
             bool? skipBookingFlowStaffSelection = null)
         {
-            this.LocationTypes = locationTypes;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "location_types", false },
+                { "min_booking_lead_time_seconds", false },
+                { "max_booking_lead_time_seconds", false },
+                { "any_team_member_booking_enabled", false },
+                { "multiple_service_booking_enabled", false },
+                { "max_appointments_per_day_limit", false },
+                { "cancellation_window_seconds", false },
+                { "cancellation_policy_text", false },
+                { "skip_booking_flow_staff_selection", false }
+            };
+
+            if (locationTypes != null)
+            {
+                shouldSerialize["location_types"] = true;
+                this.LocationTypes = locationTypes;
+            }
+
             this.AlignmentTime = alignmentTime;
-            this.MinBookingLeadTimeSeconds = minBookingLeadTimeSeconds;
-            this.MaxBookingLeadTimeSeconds = maxBookingLeadTimeSeconds;
-            this.AnyTeamMemberBookingEnabled = anyTeamMemberBookingEnabled;
-            this.MultipleServiceBookingEnabled = multipleServiceBookingEnabled;
+            if (minBookingLeadTimeSeconds != null)
+            {
+                shouldSerialize["min_booking_lead_time_seconds"] = true;
+                this.MinBookingLeadTimeSeconds = minBookingLeadTimeSeconds;
+            }
+
+            if (maxBookingLeadTimeSeconds != null)
+            {
+                shouldSerialize["max_booking_lead_time_seconds"] = true;
+                this.MaxBookingLeadTimeSeconds = maxBookingLeadTimeSeconds;
+            }
+
+            if (anyTeamMemberBookingEnabled != null)
+            {
+                shouldSerialize["any_team_member_booking_enabled"] = true;
+                this.AnyTeamMemberBookingEnabled = anyTeamMemberBookingEnabled;
+            }
+
+            if (multipleServiceBookingEnabled != null)
+            {
+                shouldSerialize["multiple_service_booking_enabled"] = true;
+                this.MultipleServiceBookingEnabled = multipleServiceBookingEnabled;
+            }
+
             this.MaxAppointmentsPerDayLimitType = maxAppointmentsPerDayLimitType;
-            this.MaxAppointmentsPerDayLimit = maxAppointmentsPerDayLimit;
-            this.CancellationWindowSeconds = cancellationWindowSeconds;
+            if (maxAppointmentsPerDayLimit != null)
+            {
+                shouldSerialize["max_appointments_per_day_limit"] = true;
+                this.MaxAppointmentsPerDayLimit = maxAppointmentsPerDayLimit;
+            }
+
+            if (cancellationWindowSeconds != null)
+            {
+                shouldSerialize["cancellation_window_seconds"] = true;
+                this.CancellationWindowSeconds = cancellationWindowSeconds;
+            }
+
             this.CancellationFeeMoney = cancellationFeeMoney;
             this.CancellationPolicy = cancellationPolicy;
-            this.CancellationPolicyText = cancellationPolicyText;
-            this.SkipBookingFlowStaffSelection = skipBookingFlowStaffSelection;
+            if (cancellationPolicyText != null)
+            {
+                shouldSerialize["cancellation_policy_text"] = true;
+                this.CancellationPolicyText = cancellationPolicyText;
+            }
+
+            if (skipBookingFlowStaffSelection != null)
+            {
+                shouldSerialize["skip_booking_flow_staff_selection"] = true;
+                this.SkipBookingFlowStaffSelection = skipBookingFlowStaffSelection;
+            }
+
+        }
+        internal BusinessAppointmentSettings(Dictionary<string, bool> shouldSerialize,
+            IList<string> locationTypes = null,
+            string alignmentTime = null,
+            int? minBookingLeadTimeSeconds = null,
+            int? maxBookingLeadTimeSeconds = null,
+            bool? anyTeamMemberBookingEnabled = null,
+            bool? multipleServiceBookingEnabled = null,
+            string maxAppointmentsPerDayLimitType = null,
+            int? maxAppointmentsPerDayLimit = null,
+            int? cancellationWindowSeconds = null,
+            Models.Money cancellationFeeMoney = null,
+            string cancellationPolicy = null,
+            string cancellationPolicyText = null,
+            bool? skipBookingFlowStaffSelection = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            LocationTypes = locationTypes;
+            AlignmentTime = alignmentTime;
+            MinBookingLeadTimeSeconds = minBookingLeadTimeSeconds;
+            MaxBookingLeadTimeSeconds = maxBookingLeadTimeSeconds;
+            AnyTeamMemberBookingEnabled = anyTeamMemberBookingEnabled;
+            MultipleServiceBookingEnabled = multipleServiceBookingEnabled;
+            MaxAppointmentsPerDayLimitType = maxAppointmentsPerDayLimitType;
+            MaxAppointmentsPerDayLimit = maxAppointmentsPerDayLimit;
+            CancellationWindowSeconds = cancellationWindowSeconds;
+            CancellationFeeMoney = cancellationFeeMoney;
+            CancellationPolicy = cancellationPolicy;
+            CancellationPolicyText = cancellationPolicyText;
+            SkipBookingFlowStaffSelection = skipBookingFlowStaffSelection;
         }
 
         /// <summary>
         /// Types of the location allowed for bookings.
         /// See [BusinessAppointmentSettingsBookingLocationType](#type-businessappointmentsettingsbookinglocationtype) for possible values
         /// </summary>
-        [JsonProperty("location_types", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("location_types")]
         public IList<string> LocationTypes { get; }
 
         /// <summary>
@@ -79,26 +168,26 @@ namespace Square.Models
         /// <summary>
         /// The minimum lead time in seconds before a service can be booked. Bookings must be created at least this far ahead of the booking's starting time.
         /// </summary>
-        [JsonProperty("min_booking_lead_time_seconds", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("min_booking_lead_time_seconds")]
         public int? MinBookingLeadTimeSeconds { get; }
 
         /// <summary>
         /// The maximum lead time in seconds before a service can be booked. Bookings must be created at most this far ahead of the booking's starting time.
         /// </summary>
-        [JsonProperty("max_booking_lead_time_seconds", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("max_booking_lead_time_seconds")]
         public int? MaxBookingLeadTimeSeconds { get; }
 
         /// <summary>
         /// Indicates whether a customer can choose from all available time slots and have a staff member assigned
         /// automatically (`true`) or not (`false`).
         /// </summary>
-        [JsonProperty("any_team_member_booking_enabled", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("any_team_member_booking_enabled")]
         public bool? AnyTeamMemberBookingEnabled { get; }
 
         /// <summary>
         /// Indicates whether a customer can book multiple services in a single online booking.
         /// </summary>
-        [JsonProperty("multiple_service_booking_enabled", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("multiple_service_booking_enabled")]
         public bool? MultipleServiceBookingEnabled { get; }
 
         /// <summary>
@@ -110,13 +199,13 @@ namespace Square.Models
         /// <summary>
         /// The maximum number of daily appointments per team member or per location.
         /// </summary>
-        [JsonProperty("max_appointments_per_day_limit", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("max_appointments_per_day_limit")]
         public int? MaxAppointmentsPerDayLimit { get; }
 
         /// <summary>
         /// The cut-off time in seconds for allowing clients to cancel or reschedule an appointment.
         /// </summary>
-        [JsonProperty("cancellation_window_seconds", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("cancellation_window_seconds")]
         public int? CancellationWindowSeconds { get; }
 
         /// <summary>
@@ -139,13 +228,13 @@ namespace Square.Models
         /// <summary>
         /// The free-form text of the seller's cancellation policy.
         /// </summary>
-        [JsonProperty("cancellation_policy_text", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("cancellation_policy_text")]
         public string CancellationPolicyText { get; }
 
         /// <summary>
         /// Indicates whether customers has an assigned staff member (`true`) or can select s staff member of their choice (`false`).
         /// </summary>
-        [JsonProperty("skip_booking_flow_staff_selection", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("skip_booking_flow_staff_selection")]
         public bool? SkipBookingFlowStaffSelection { get; }
 
         /// <inheritdoc/>
@@ -156,6 +245,87 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"BusinessAppointmentSettings : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeLocationTypes()
+        {
+            return this.shouldSerialize["location_types"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeMinBookingLeadTimeSeconds()
+        {
+            return this.shouldSerialize["min_booking_lead_time_seconds"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeMaxBookingLeadTimeSeconds()
+        {
+            return this.shouldSerialize["max_booking_lead_time_seconds"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeAnyTeamMemberBookingEnabled()
+        {
+            return this.shouldSerialize["any_team_member_booking_enabled"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeMultipleServiceBookingEnabled()
+        {
+            return this.shouldSerialize["multiple_service_booking_enabled"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeMaxAppointmentsPerDayLimit()
+        {
+            return this.shouldSerialize["max_appointments_per_day_limit"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeCancellationWindowSeconds()
+        {
+            return this.shouldSerialize["cancellation_window_seconds"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeCancellationPolicyText()
+        {
+            return this.shouldSerialize["cancellation_policy_text"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeSkipBookingFlowStaffSelection()
+        {
+            return this.shouldSerialize["skip_booking_flow_staff_selection"];
         }
 
         /// <inheritdoc/>
@@ -247,6 +417,19 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "location_types", false },
+                { "min_booking_lead_time_seconds", false },
+                { "max_booking_lead_time_seconds", false },
+                { "any_team_member_booking_enabled", false },
+                { "multiple_service_booking_enabled", false },
+                { "max_appointments_per_day_limit", false },
+                { "cancellation_window_seconds", false },
+                { "cancellation_policy_text", false },
+                { "skip_booking_flow_staff_selection", false },
+            };
+
             private IList<string> locationTypes;
             private string alignmentTime;
             private int? minBookingLeadTimeSeconds;
@@ -268,6 +451,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder LocationTypes(IList<string> locationTypes)
             {
+                shouldSerialize["location_types"] = true;
                 this.locationTypes = locationTypes;
                 return this;
             }
@@ -290,6 +474,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder MinBookingLeadTimeSeconds(int? minBookingLeadTimeSeconds)
             {
+                shouldSerialize["min_booking_lead_time_seconds"] = true;
                 this.minBookingLeadTimeSeconds = minBookingLeadTimeSeconds;
                 return this;
             }
@@ -301,6 +486,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder MaxBookingLeadTimeSeconds(int? maxBookingLeadTimeSeconds)
             {
+                shouldSerialize["max_booking_lead_time_seconds"] = true;
                 this.maxBookingLeadTimeSeconds = maxBookingLeadTimeSeconds;
                 return this;
             }
@@ -312,6 +498,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder AnyTeamMemberBookingEnabled(bool? anyTeamMemberBookingEnabled)
             {
+                shouldSerialize["any_team_member_booking_enabled"] = true;
                 this.anyTeamMemberBookingEnabled = anyTeamMemberBookingEnabled;
                 return this;
             }
@@ -323,6 +510,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder MultipleServiceBookingEnabled(bool? multipleServiceBookingEnabled)
             {
+                shouldSerialize["multiple_service_booking_enabled"] = true;
                 this.multipleServiceBookingEnabled = multipleServiceBookingEnabled;
                 return this;
             }
@@ -345,6 +533,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder MaxAppointmentsPerDayLimit(int? maxAppointmentsPerDayLimit)
             {
+                shouldSerialize["max_appointments_per_day_limit"] = true;
                 this.maxAppointmentsPerDayLimit = maxAppointmentsPerDayLimit;
                 return this;
             }
@@ -356,6 +545,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder CancellationWindowSeconds(int? cancellationWindowSeconds)
             {
+                shouldSerialize["cancellation_window_seconds"] = true;
                 this.cancellationWindowSeconds = cancellationWindowSeconds;
                 return this;
             }
@@ -389,6 +579,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder CancellationPolicyText(string cancellationPolicyText)
             {
+                shouldSerialize["cancellation_policy_text"] = true;
                 this.cancellationPolicyText = cancellationPolicyText;
                 return this;
             }
@@ -400,9 +591,83 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder SkipBookingFlowStaffSelection(bool? skipBookingFlowStaffSelection)
             {
+                shouldSerialize["skip_booking_flow_staff_selection"] = true;
                 this.skipBookingFlowStaffSelection = skipBookingFlowStaffSelection;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetLocationTypes()
+            {
+                this.shouldSerialize["location_types"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetMinBookingLeadTimeSeconds()
+            {
+                this.shouldSerialize["min_booking_lead_time_seconds"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetMaxBookingLeadTimeSeconds()
+            {
+                this.shouldSerialize["max_booking_lead_time_seconds"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetAnyTeamMemberBookingEnabled()
+            {
+                this.shouldSerialize["any_team_member_booking_enabled"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetMultipleServiceBookingEnabled()
+            {
+                this.shouldSerialize["multiple_service_booking_enabled"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetMaxAppointmentsPerDayLimit()
+            {
+                this.shouldSerialize["max_appointments_per_day_limit"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetCancellationWindowSeconds()
+            {
+                this.shouldSerialize["cancellation_window_seconds"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetCancellationPolicyText()
+            {
+                this.shouldSerialize["cancellation_policy_text"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetSkipBookingFlowStaffSelection()
+            {
+                this.shouldSerialize["skip_booking_flow_staff_selection"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -410,7 +675,7 @@ namespace Square.Models
             /// <returns> BusinessAppointmentSettings. </returns>
             public BusinessAppointmentSettings Build()
             {
-                return new BusinessAppointmentSettings(
+                return new BusinessAppointmentSettings(shouldSerialize,
                     this.locationTypes,
                     this.alignmentTime,
                     this.minBookingLeadTimeSeconds,

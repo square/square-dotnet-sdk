@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class CatalogModifierList
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="CatalogModifierList"/> class.
         /// </summary>
@@ -32,23 +33,65 @@ namespace Square.Models
             IList<Models.CatalogObject> modifiers = null,
             IList<string> imageIds = null)
         {
-            this.Name = name;
-            this.Ordinal = ordinal;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "name", false },
+                { "ordinal", false },
+                { "modifiers", false },
+                { "image_ids", false }
+            };
+
+            if (name != null)
+            {
+                shouldSerialize["name"] = true;
+                this.Name = name;
+            }
+
+            if (ordinal != null)
+            {
+                shouldSerialize["ordinal"] = true;
+                this.Ordinal = ordinal;
+            }
+
             this.SelectionType = selectionType;
-            this.Modifiers = modifiers;
-            this.ImageIds = imageIds;
+            if (modifiers != null)
+            {
+                shouldSerialize["modifiers"] = true;
+                this.Modifiers = modifiers;
+            }
+
+            if (imageIds != null)
+            {
+                shouldSerialize["image_ids"] = true;
+                this.ImageIds = imageIds;
+            }
+
+        }
+        internal CatalogModifierList(Dictionary<string, bool> shouldSerialize,
+            string name = null,
+            int? ordinal = null,
+            string selectionType = null,
+            IList<Models.CatalogObject> modifiers = null,
+            IList<string> imageIds = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Name = name;
+            Ordinal = ordinal;
+            SelectionType = selectionType;
+            Modifiers = modifiers;
+            ImageIds = imageIds;
         }
 
         /// <summary>
         /// The name for the `CatalogModifierList` instance. This is a searchable attribute for use in applicable query filters, and its value length is of Unicode code points.
         /// </summary>
-        [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("name")]
         public string Name { get; }
 
         /// <summary>
         /// Determines where this modifier list appears in a list of `CatalogModifierList` values.
         /// </summary>
-        [JsonProperty("ordinal", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("ordinal")]
         public int? Ordinal { get; }
 
         /// <summary>
@@ -63,14 +106,14 @@ namespace Square.Models
         /// Each CatalogObject must have type `MODIFIER` and contain
         /// `CatalogModifier` data.
         /// </summary>
-        [JsonProperty("modifiers", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("modifiers")]
         public IList<Models.CatalogObject> Modifiers { get; }
 
         /// <summary>
         /// The IDs of images associated with this `CatalogModifierList` instance.
         /// Currently these images are not displayed by Square, but are free to be displayed in 3rd party applications.
         /// </summary>
-        [JsonProperty("image_ids", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("image_ids")]
         public IList<string> ImageIds { get; }
 
         /// <inheritdoc/>
@@ -81,6 +124,42 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"CatalogModifierList : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeName()
+        {
+            return this.shouldSerialize["name"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeOrdinal()
+        {
+            return this.shouldSerialize["ordinal"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeModifiers()
+        {
+            return this.shouldSerialize["modifiers"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeImageIds()
+        {
+            return this.shouldSerialize["image_ids"];
         }
 
         /// <inheritdoc/>
@@ -146,6 +225,14 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "name", false },
+                { "ordinal", false },
+                { "modifiers", false },
+                { "image_ids", false },
+            };
+
             private string name;
             private int? ordinal;
             private string selectionType;
@@ -159,6 +246,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Name(string name)
             {
+                shouldSerialize["name"] = true;
                 this.name = name;
                 return this;
             }
@@ -170,6 +258,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Ordinal(int? ordinal)
             {
+                shouldSerialize["ordinal"] = true;
                 this.ordinal = ordinal;
                 return this;
             }
@@ -192,6 +281,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Modifiers(IList<Models.CatalogObject> modifiers)
             {
+                shouldSerialize["modifiers"] = true;
                 this.modifiers = modifiers;
                 return this;
             }
@@ -203,9 +293,43 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder ImageIds(IList<string> imageIds)
             {
+                shouldSerialize["image_ids"] = true;
                 this.imageIds = imageIds;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetName()
+            {
+                this.shouldSerialize["name"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetOrdinal()
+            {
+                this.shouldSerialize["ordinal"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetModifiers()
+            {
+                this.shouldSerialize["modifiers"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetImageIds()
+            {
+                this.shouldSerialize["image_ids"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -213,7 +337,7 @@ namespace Square.Models
             /// <returns> CatalogModifierList. </returns>
             public CatalogModifierList Build()
             {
-                return new CatalogModifierList(
+                return new CatalogModifierList(shouldSerialize,
                     this.name,
                     this.ordinal,
                     this.selectionType,

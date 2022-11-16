@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class TerminalAction
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="TerminalAction"/> class.
         /// </summary>
@@ -30,6 +31,7 @@ namespace Square.Models
         /// <param name="appId">app_id.</param>
         /// <param name="type">type.</param>
         /// <param name="saveCardOptions">save_card_options.</param>
+        /// <param name="receiptOptions">receipt_options.</param>
         /// <param name="deviceMetadata">device_metadata.</param>
         public TerminalAction(
             string id = null,
@@ -42,11 +44,28 @@ namespace Square.Models
             string appId = null,
             string type = null,
             Models.SaveCardOptions saveCardOptions = null,
+            Models.ReceiptOptions receiptOptions = null,
             Models.DeviceMetadata deviceMetadata = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "device_id", false },
+                { "deadline_duration", false }
+            };
+
             this.Id = id;
-            this.DeviceId = deviceId;
-            this.DeadlineDuration = deadlineDuration;
+            if (deviceId != null)
+            {
+                shouldSerialize["device_id"] = true;
+                this.DeviceId = deviceId;
+            }
+
+            if (deadlineDuration != null)
+            {
+                shouldSerialize["deadline_duration"] = true;
+                this.DeadlineDuration = deadlineDuration;
+            }
+
             this.Status = status;
             this.CancelReason = cancelReason;
             this.CreatedAt = createdAt;
@@ -54,7 +73,36 @@ namespace Square.Models
             this.AppId = appId;
             this.Type = type;
             this.SaveCardOptions = saveCardOptions;
+            this.ReceiptOptions = receiptOptions;
             this.DeviceMetadata = deviceMetadata;
+        }
+        internal TerminalAction(Dictionary<string, bool> shouldSerialize,
+            string id = null,
+            string deviceId = null,
+            string deadlineDuration = null,
+            string status = null,
+            string cancelReason = null,
+            string createdAt = null,
+            string updatedAt = null,
+            string appId = null,
+            string type = null,
+            Models.SaveCardOptions saveCardOptions = null,
+            Models.ReceiptOptions receiptOptions = null,
+            Models.DeviceMetadata deviceMetadata = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Id = id;
+            DeviceId = deviceId;
+            DeadlineDuration = deadlineDuration;
+            Status = status;
+            CancelReason = cancelReason;
+            CreatedAt = createdAt;
+            UpdatedAt = updatedAt;
+            AppId = appId;
+            Type = type;
+            SaveCardOptions = saveCardOptions;
+            ReceiptOptions = receiptOptions;
+            DeviceMetadata = deviceMetadata;
         }
 
         /// <summary>
@@ -67,7 +115,7 @@ namespace Square.Models
         /// The unique Id of the device intended for this `TerminalAction`.
         /// The Id can be retrieved from /v2/devices api.
         /// </summary>
-        [JsonProperty("device_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("device_id")]
         public string DeviceId { get; }
 
         /// <summary>
@@ -77,7 +125,7 @@ namespace Square.Models
         /// Default: 5 minutes from creation
         /// Maximum: 5 minutes
         /// </summary>
-        [JsonProperty("deadline_duration", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("deadline_duration")]
         public string DeadlineDuration { get; }
 
         /// <summary>
@@ -124,6 +172,12 @@ namespace Square.Models
         public Models.SaveCardOptions SaveCardOptions { get; }
 
         /// <summary>
+        /// Describes receipt action fields.
+        /// </summary>
+        [JsonProperty("receipt_options", NullValueHandling = NullValueHandling.Ignore)]
+        public Models.ReceiptOptions ReceiptOptions { get; }
+
+        /// <summary>
         /// Gets or sets DeviceMetadata.
         /// </summary>
         [JsonProperty("device_metadata", NullValueHandling = NullValueHandling.Ignore)]
@@ -137,6 +191,24 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"TerminalAction : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeDeviceId()
+        {
+            return this.shouldSerialize["device_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeDeadlineDuration()
+        {
+            return this.shouldSerialize["deadline_duration"];
         }
 
         /// <inheritdoc/>
@@ -163,16 +235,17 @@ namespace Square.Models
                 ((this.AppId == null && other.AppId == null) || (this.AppId?.Equals(other.AppId) == true)) &&
                 ((this.Type == null && other.Type == null) || (this.Type?.Equals(other.Type) == true)) &&
                 ((this.SaveCardOptions == null && other.SaveCardOptions == null) || (this.SaveCardOptions?.Equals(other.SaveCardOptions) == true)) &&
+                ((this.ReceiptOptions == null && other.ReceiptOptions == null) || (this.ReceiptOptions?.Equals(other.ReceiptOptions) == true)) &&
                 ((this.DeviceMetadata == null && other.DeviceMetadata == null) || (this.DeviceMetadata?.Equals(other.DeviceMetadata) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1559694977;
+            int hashCode = 195206616;
             hashCode = HashCode.Combine(this.Id, this.DeviceId, this.DeadlineDuration, this.Status, this.CancelReason, this.CreatedAt, this.UpdatedAt);
 
-            hashCode = HashCode.Combine(hashCode, this.AppId, this.Type, this.SaveCardOptions, this.DeviceMetadata);
+            hashCode = HashCode.Combine(hashCode, this.AppId, this.Type, this.SaveCardOptions, this.ReceiptOptions, this.DeviceMetadata);
 
             return hashCode;
         }
@@ -193,6 +266,7 @@ namespace Square.Models
             toStringOutput.Add($"this.AppId = {(this.AppId == null ? "null" : this.AppId == string.Empty ? "" : this.AppId)}");
             toStringOutput.Add($"this.Type = {(this.Type == null ? "null" : this.Type.ToString())}");
             toStringOutput.Add($"this.SaveCardOptions = {(this.SaveCardOptions == null ? "null" : this.SaveCardOptions.ToString())}");
+            toStringOutput.Add($"this.ReceiptOptions = {(this.ReceiptOptions == null ? "null" : this.ReceiptOptions.ToString())}");
             toStringOutput.Add($"this.DeviceMetadata = {(this.DeviceMetadata == null ? "null" : this.DeviceMetadata.ToString())}");
         }
 
@@ -213,6 +287,7 @@ namespace Square.Models
                 .AppId(this.AppId)
                 .Type(this.Type)
                 .SaveCardOptions(this.SaveCardOptions)
+                .ReceiptOptions(this.ReceiptOptions)
                 .DeviceMetadata(this.DeviceMetadata);
             return builder;
         }
@@ -222,6 +297,12 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "device_id", false },
+                { "deadline_duration", false },
+            };
+
             private string id;
             private string deviceId;
             private string deadlineDuration;
@@ -232,6 +313,7 @@ namespace Square.Models
             private string appId;
             private string type;
             private Models.SaveCardOptions saveCardOptions;
+            private Models.ReceiptOptions receiptOptions;
             private Models.DeviceMetadata deviceMetadata;
 
              /// <summary>
@@ -252,6 +334,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder DeviceId(string deviceId)
             {
+                shouldSerialize["device_id"] = true;
                 this.deviceId = deviceId;
                 return this;
             }
@@ -263,6 +346,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder DeadlineDuration(string deadlineDuration)
             {
+                shouldSerialize["deadline_duration"] = true;
                 this.deadlineDuration = deadlineDuration;
                 return this;
             }
@@ -345,6 +429,17 @@ namespace Square.Models
             }
 
              /// <summary>
+             /// ReceiptOptions.
+             /// </summary>
+             /// <param name="receiptOptions"> receiptOptions. </param>
+             /// <returns> Builder. </returns>
+            public Builder ReceiptOptions(Models.ReceiptOptions receiptOptions)
+            {
+                this.receiptOptions = receiptOptions;
+                return this;
+            }
+
+             /// <summary>
              /// DeviceMetadata.
              /// </summary>
              /// <param name="deviceMetadata"> deviceMetadata. </param>
@@ -356,12 +451,29 @@ namespace Square.Models
             }
 
             /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetDeviceId()
+            {
+                this.shouldSerialize["device_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetDeadlineDuration()
+            {
+                this.shouldSerialize["deadline_duration"] = false;
+            }
+
+
+            /// <summary>
             /// Builds class object.
             /// </summary>
             /// <returns> TerminalAction. </returns>
             public TerminalAction Build()
             {
-                return new TerminalAction(
+                return new TerminalAction(shouldSerialize,
                     this.id,
                     this.deviceId,
                     this.deadlineDuration,
@@ -372,6 +484,7 @@ namespace Square.Models
                     this.appId,
                     this.type,
                     this.saveCardOptions,
+                    this.receiptOptions,
                     this.deviceMetadata);
             }
         }

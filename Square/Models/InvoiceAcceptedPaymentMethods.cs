@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class InvoiceAcceptedPaymentMethods
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="InvoiceAcceptedPaymentMethods"/> class.
         /// </summary>
@@ -30,29 +31,69 @@ namespace Square.Models
             bool? bankAccount = null,
             bool? buyNowPayLater = null)
         {
-            this.Card = card;
-            this.SquareGiftCard = squareGiftCard;
-            this.BankAccount = bankAccount;
-            this.BuyNowPayLater = buyNowPayLater;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "card", false },
+                { "square_gift_card", false },
+                { "bank_account", false },
+                { "buy_now_pay_later", false }
+            };
+
+            if (card != null)
+            {
+                shouldSerialize["card"] = true;
+                this.Card = card;
+            }
+
+            if (squareGiftCard != null)
+            {
+                shouldSerialize["square_gift_card"] = true;
+                this.SquareGiftCard = squareGiftCard;
+            }
+
+            if (bankAccount != null)
+            {
+                shouldSerialize["bank_account"] = true;
+                this.BankAccount = bankAccount;
+            }
+
+            if (buyNowPayLater != null)
+            {
+                shouldSerialize["buy_now_pay_later"] = true;
+                this.BuyNowPayLater = buyNowPayLater;
+            }
+
+        }
+        internal InvoiceAcceptedPaymentMethods(Dictionary<string, bool> shouldSerialize,
+            bool? card = null,
+            bool? squareGiftCard = null,
+            bool? bankAccount = null,
+            bool? buyNowPayLater = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Card = card;
+            SquareGiftCard = squareGiftCard;
+            BankAccount = bankAccount;
+            BuyNowPayLater = buyNowPayLater;
         }
 
         /// <summary>
         /// Indicates whether credit card or debit card payments are accepted. The default value is `false`.
         /// </summary>
-        [JsonProperty("card", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("card")]
         public bool? Card { get; }
 
         /// <summary>
         /// Indicates whether Square gift card payments are accepted. The default value is `false`.
         /// </summary>
-        [JsonProperty("square_gift_card", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("square_gift_card")]
         public bool? SquareGiftCard { get; }
 
         /// <summary>
         /// Indicates whether bank transfer payments are accepted. The default value is `false`.
         /// This option is allowed only for invoices that have a single payment request of the `BALANCE` type.
         /// </summary>
-        [JsonProperty("bank_account", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("bank_account")]
         public bool? BankAccount { get; }
 
         /// <summary>
@@ -63,7 +104,7 @@ namespace Square.Models
         /// `buy_now_pay_later` payments. For more information, including detailed requirements and processing limits, see
         /// [Buy Now Pay Later payments with Afterpay](https://developer.squareup.com/docs/invoices-api/overview#buy-now-pay-later).
         /// </summary>
-        [JsonProperty("buy_now_pay_later", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("buy_now_pay_later")]
         public bool? BuyNowPayLater { get; }
 
         /// <inheritdoc/>
@@ -74,6 +115,42 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"InvoiceAcceptedPaymentMethods : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeCard()
+        {
+            return this.shouldSerialize["card"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeSquareGiftCard()
+        {
+            return this.shouldSerialize["square_gift_card"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeBankAccount()
+        {
+            return this.shouldSerialize["bank_account"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeBuyNowPayLater()
+        {
+            return this.shouldSerialize["buy_now_pay_later"];
         }
 
         /// <inheritdoc/>
@@ -136,6 +213,14 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "card", false },
+                { "square_gift_card", false },
+                { "bank_account", false },
+                { "buy_now_pay_later", false },
+            };
+
             private bool? card;
             private bool? squareGiftCard;
             private bool? bankAccount;
@@ -148,6 +233,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Card(bool? card)
             {
+                shouldSerialize["card"] = true;
                 this.card = card;
                 return this;
             }
@@ -159,6 +245,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder SquareGiftCard(bool? squareGiftCard)
             {
+                shouldSerialize["square_gift_card"] = true;
                 this.squareGiftCard = squareGiftCard;
                 return this;
             }
@@ -170,6 +257,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder BankAccount(bool? bankAccount)
             {
+                shouldSerialize["bank_account"] = true;
                 this.bankAccount = bankAccount;
                 return this;
             }
@@ -181,9 +269,43 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder BuyNowPayLater(bool? buyNowPayLater)
             {
+                shouldSerialize["buy_now_pay_later"] = true;
                 this.buyNowPayLater = buyNowPayLater;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetCard()
+            {
+                this.shouldSerialize["card"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetSquareGiftCard()
+            {
+                this.shouldSerialize["square_gift_card"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetBankAccount()
+            {
+                this.shouldSerialize["bank_account"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetBuyNowPayLater()
+            {
+                this.shouldSerialize["buy_now_pay_later"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -191,7 +313,7 @@ namespace Square.Models
             /// <returns> InvoiceAcceptedPaymentMethods. </returns>
             public InvoiceAcceptedPaymentMethods Build()
             {
-                return new InvoiceAcceptedPaymentMethods(
+                return new InvoiceAcceptedPaymentMethods(shouldSerialize,
                     this.card,
                     this.squareGiftCard,
                     this.bankAccount,

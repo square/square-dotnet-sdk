@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class UpdateItemTaxesRequest
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="UpdateItemTaxesRequest"/> class.
         /// </summary>
@@ -28,9 +29,35 @@ namespace Square.Models
             IList<string> taxesToEnable = null,
             IList<string> taxesToDisable = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "taxes_to_enable", false },
+                { "taxes_to_disable", false }
+            };
+
             this.ItemIds = itemIds;
-            this.TaxesToEnable = taxesToEnable;
-            this.TaxesToDisable = taxesToDisable;
+            if (taxesToEnable != null)
+            {
+                shouldSerialize["taxes_to_enable"] = true;
+                this.TaxesToEnable = taxesToEnable;
+            }
+
+            if (taxesToDisable != null)
+            {
+                shouldSerialize["taxes_to_disable"] = true;
+                this.TaxesToDisable = taxesToDisable;
+            }
+
+        }
+        internal UpdateItemTaxesRequest(Dictionary<string, bool> shouldSerialize,
+            IList<string> itemIds,
+            IList<string> taxesToEnable = null,
+            IList<string> taxesToDisable = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            ItemIds = itemIds;
+            TaxesToEnable = taxesToEnable;
+            TaxesToDisable = taxesToDisable;
         }
 
         /// <summary>
@@ -44,14 +71,14 @@ namespace Square.Models
         /// IDs of the CatalogTax objects to enable.
         /// At least one of `taxes_to_enable` or `taxes_to_disable` must be specified.
         /// </summary>
-        [JsonProperty("taxes_to_enable", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("taxes_to_enable")]
         public IList<string> TaxesToEnable { get; }
 
         /// <summary>
         /// IDs of the CatalogTax objects to disable.
         /// At least one of `taxes_to_enable` or `taxes_to_disable` must be specified.
         /// </summary>
-        [JsonProperty("taxes_to_disable", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("taxes_to_disable")]
         public IList<string> TaxesToDisable { get; }
 
         /// <inheritdoc/>
@@ -62,6 +89,24 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"UpdateItemTaxesRequest : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeTaxesToEnable()
+        {
+            return this.shouldSerialize["taxes_to_enable"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeTaxesToDisable()
+        {
+            return this.shouldSerialize["taxes_to_disable"];
         }
 
         /// <inheritdoc/>
@@ -121,6 +166,12 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "taxes_to_enable", false },
+                { "taxes_to_disable", false },
+            };
+
             private IList<string> itemIds;
             private IList<string> taxesToEnable;
             private IList<string> taxesToDisable;
@@ -149,6 +200,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder TaxesToEnable(IList<string> taxesToEnable)
             {
+                shouldSerialize["taxes_to_enable"] = true;
                 this.taxesToEnable = taxesToEnable;
                 return this;
             }
@@ -160,9 +212,27 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder TaxesToDisable(IList<string> taxesToDisable)
             {
+                shouldSerialize["taxes_to_disable"] = true;
                 this.taxesToDisable = taxesToDisable;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetTaxesToEnable()
+            {
+                this.shouldSerialize["taxes_to_enable"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetTaxesToDisable()
+            {
+                this.shouldSerialize["taxes_to_disable"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -170,7 +240,7 @@ namespace Square.Models
             /// <returns> UpdateItemTaxesRequest. </returns>
             public UpdateItemTaxesRequest Build()
             {
-                return new UpdateItemTaxesRequest(
+                return new UpdateItemTaxesRequest(shouldSerialize,
                     this.itemIds,
                     this.taxesToEnable,
                     this.taxesToDisable);

@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class CalculateOrderRequest
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="CalculateOrderRequest"/> class.
         /// </summary>
@@ -26,8 +27,26 @@ namespace Square.Models
             Models.Order order,
             IList<Models.OrderReward> proposedRewards = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "proposed_rewards", false }
+            };
+
             this.Order = order;
-            this.ProposedRewards = proposedRewards;
+            if (proposedRewards != null)
+            {
+                shouldSerialize["proposed_rewards"] = true;
+                this.ProposedRewards = proposedRewards;
+            }
+
+        }
+        internal CalculateOrderRequest(Dictionary<string, bool> shouldSerialize,
+            Models.Order order,
+            IList<Models.OrderReward> proposedRewards = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Order = order;
+            ProposedRewards = proposedRewards;
         }
 
         /// <summary>
@@ -47,7 +66,7 @@ namespace Square.Models
         /// redemptions; that is, no `reward`s are created. Therefore, the reward `id`s are
         /// random strings used only to reference the reward tier.
         /// </summary>
-        [JsonProperty("proposed_rewards", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("proposed_rewards")]
         public IList<Models.OrderReward> ProposedRewards { get; }
 
         /// <inheritdoc/>
@@ -58,6 +77,15 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"CalculateOrderRequest : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeProposedRewards()
+        {
+            return this.shouldSerialize["proposed_rewards"];
         }
 
         /// <inheritdoc/>
@@ -114,6 +142,11 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "proposed_rewards", false },
+            };
+
             private Models.Order order;
             private IList<Models.OrderReward> proposedRewards;
 
@@ -141,9 +174,19 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder ProposedRewards(IList<Models.OrderReward> proposedRewards)
             {
+                shouldSerialize["proposed_rewards"] = true;
                 this.proposedRewards = proposedRewards;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetProposedRewards()
+            {
+                this.shouldSerialize["proposed_rewards"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -151,7 +194,7 @@ namespace Square.Models
             /// <returns> CalculateOrderRequest. </returns>
             public CalculateOrderRequest Build()
             {
-                return new CalculateOrderRequest(
+                return new CalculateOrderRequest(shouldSerialize,
                     this.order,
                     this.proposedRewards);
             }

@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class TeamMemberAssignedLocations
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="TeamMemberAssignedLocations"/> class.
         /// </summary>
@@ -26,8 +27,26 @@ namespace Square.Models
             string assignmentType = null,
             IList<string> locationIds = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "location_ids", false }
+            };
+
             this.AssignmentType = assignmentType;
-            this.LocationIds = locationIds;
+            if (locationIds != null)
+            {
+                shouldSerialize["location_ids"] = true;
+                this.LocationIds = locationIds;
+            }
+
+        }
+        internal TeamMemberAssignedLocations(Dictionary<string, bool> shouldSerialize,
+            string assignmentType = null,
+            IList<string> locationIds = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            AssignmentType = assignmentType;
+            LocationIds = locationIds;
         }
 
         /// <summary>
@@ -39,7 +58,7 @@ namespace Square.Models
         /// <summary>
         /// The locations that the team member is assigned to.
         /// </summary>
-        [JsonProperty("location_ids", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("location_ids")]
         public IList<string> LocationIds { get; }
 
         /// <inheritdoc/>
@@ -50,6 +69,15 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"TeamMemberAssignedLocations : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeLocationIds()
+        {
+            return this.shouldSerialize["location_ids"];
         }
 
         /// <inheritdoc/>
@@ -106,6 +134,11 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "location_ids", false },
+            };
+
             private string assignmentType;
             private IList<string> locationIds;
 
@@ -127,9 +160,19 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder LocationIds(IList<string> locationIds)
             {
+                shouldSerialize["location_ids"] = true;
                 this.locationIds = locationIds;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetLocationIds()
+            {
+                this.shouldSerialize["location_ids"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -137,7 +180,7 @@ namespace Square.Models
             /// <returns> TeamMemberAssignedLocations. </returns>
             public TeamMemberAssignedLocations Build()
             {
-                return new TeamMemberAssignedLocations(
+                return new TeamMemberAssignedLocations(shouldSerialize,
                     this.assignmentType,
                     this.locationIds);
             }

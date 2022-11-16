@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class CatalogObject
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="CatalogObject"/> class.
         /// </summary>
@@ -76,16 +77,56 @@ namespace Square.Models
             Models.CatalogCustomAttributeDefinition customAttributeDefinitionData = null,
             Models.CatalogQuickAmountsSettings quickAmountsSettingsData = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "is_deleted", false },
+                { "custom_attribute_values", false },
+                { "catalog_v1_ids", false },
+                { "present_at_all_locations", false },
+                { "present_at_location_ids", false },
+                { "absent_at_location_ids", false }
+            };
+
             this.Type = type;
             this.Id = id;
             this.UpdatedAt = updatedAt;
             this.Version = version;
-            this.IsDeleted = isDeleted;
-            this.CustomAttributeValues = customAttributeValues;
-            this.CatalogV1Ids = catalogV1Ids;
-            this.PresentAtAllLocations = presentAtAllLocations;
-            this.PresentAtLocationIds = presentAtLocationIds;
-            this.AbsentAtLocationIds = absentAtLocationIds;
+            if (isDeleted != null)
+            {
+                shouldSerialize["is_deleted"] = true;
+                this.IsDeleted = isDeleted;
+            }
+
+            if (customAttributeValues != null)
+            {
+                shouldSerialize["custom_attribute_values"] = true;
+                this.CustomAttributeValues = customAttributeValues;
+            }
+
+            if (catalogV1Ids != null)
+            {
+                shouldSerialize["catalog_v1_ids"] = true;
+                this.CatalogV1Ids = catalogV1Ids;
+            }
+
+            if (presentAtAllLocations != null)
+            {
+                shouldSerialize["present_at_all_locations"] = true;
+                this.PresentAtAllLocations = presentAtAllLocations;
+            }
+
+            if (presentAtLocationIds != null)
+            {
+                shouldSerialize["present_at_location_ids"] = true;
+                this.PresentAtLocationIds = presentAtLocationIds;
+            }
+
+            if (absentAtLocationIds != null)
+            {
+                shouldSerialize["absent_at_location_ids"] = true;
+                this.AbsentAtLocationIds = absentAtLocationIds;
+            }
+
             this.ItemData = itemData;
             this.CategoryData = categoryData;
             this.ItemVariationData = itemVariationData;
@@ -103,6 +144,64 @@ namespace Square.Models
             this.ItemOptionValueData = itemOptionValueData;
             this.CustomAttributeDefinitionData = customAttributeDefinitionData;
             this.QuickAmountsSettingsData = quickAmountsSettingsData;
+        }
+        internal CatalogObject(Dictionary<string, bool> shouldSerialize,
+            string type,
+            string id,
+            string updatedAt = null,
+            long? version = null,
+            bool? isDeleted = null,
+            IDictionary<string, Models.CatalogCustomAttributeValue> customAttributeValues = null,
+            IList<Models.CatalogV1Id> catalogV1Ids = null,
+            bool? presentAtAllLocations = null,
+            IList<string> presentAtLocationIds = null,
+            IList<string> absentAtLocationIds = null,
+            Models.CatalogItem itemData = null,
+            Models.CatalogCategory categoryData = null,
+            Models.CatalogItemVariation itemVariationData = null,
+            Models.CatalogTax taxData = null,
+            Models.CatalogDiscount discountData = null,
+            Models.CatalogModifierList modifierListData = null,
+            Models.CatalogModifier modifierData = null,
+            Models.CatalogTimePeriod timePeriodData = null,
+            Models.CatalogProductSet productSetData = null,
+            Models.CatalogPricingRule pricingRuleData = null,
+            Models.CatalogImage imageData = null,
+            Models.CatalogMeasurementUnit measurementUnitData = null,
+            Models.CatalogSubscriptionPlan subscriptionPlanData = null,
+            Models.CatalogItemOption itemOptionData = null,
+            Models.CatalogItemOptionValue itemOptionValueData = null,
+            Models.CatalogCustomAttributeDefinition customAttributeDefinitionData = null,
+            Models.CatalogQuickAmountsSettings quickAmountsSettingsData = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Type = type;
+            Id = id;
+            UpdatedAt = updatedAt;
+            Version = version;
+            IsDeleted = isDeleted;
+            CustomAttributeValues = customAttributeValues;
+            CatalogV1Ids = catalogV1Ids;
+            PresentAtAllLocations = presentAtAllLocations;
+            PresentAtLocationIds = presentAtLocationIds;
+            AbsentAtLocationIds = absentAtLocationIds;
+            ItemData = itemData;
+            CategoryData = categoryData;
+            ItemVariationData = itemVariationData;
+            TaxData = taxData;
+            DiscountData = discountData;
+            ModifierListData = modifierListData;
+            ModifierData = modifierData;
+            TimePeriodData = timePeriodData;
+            ProductSetData = productSetData;
+            PricingRuleData = pricingRuleData;
+            ImageData = imageData;
+            MeasurementUnitData = measurementUnitData;
+            SubscriptionPlanData = subscriptionPlanData;
+            ItemOptionData = itemOptionData;
+            ItemOptionValueData = itemOptionValueData;
+            CustomAttributeDefinitionData = customAttributeDefinitionData;
+            QuickAmountsSettingsData = quickAmountsSettingsData;
         }
 
         /// <summary>
@@ -141,7 +240,7 @@ namespace Square.Models
         /// If `true`, the object has been deleted from the database. Must be `false` for new objects
         /// being inserted. When deleted, the `updated_at` field will equal the deletion time.
         /// </summary>
-        [JsonProperty("is_deleted", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("is_deleted")]
         public bool? IsDeleted { get; }
 
         /// <summary>
@@ -160,7 +259,7 @@ namespace Square.Models
         /// or associations with an entity in another system. Do not use custom attributes
         /// to store any sensitive information (personally identifiable information, card details, etc.).
         /// </summary>
-        [JsonProperty("custom_attribute_values", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("custom_attribute_values")]
         public IDictionary<string, Models.CatalogCustomAttributeValue> CustomAttributeValues { get; }
 
         /// <summary>
@@ -168,7 +267,7 @@ namespace Square.Models
         /// differ from the object's Connect V2 ID. The field will only be present for objects that
         /// have been created or modified by legacy APIs.
         /// </summary>
-        [JsonProperty("catalog_v1_ids", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("catalog_v1_ids")]
         public IList<Models.CatalogV1Id> CatalogV1Ids { get; }
 
         /// <summary>
@@ -176,21 +275,21 @@ namespace Square.Models
         /// the `absent_at_location_ids` field. If `false`, this object is not present at any locations (including future locations),
         /// except where specified in the `present_at_location_ids` field. If not specified, defaults to `true`.
         /// </summary>
-        [JsonProperty("present_at_all_locations", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("present_at_all_locations")]
         public bool? PresentAtAllLocations { get; }
 
         /// <summary>
         /// A list of locations where the object is present, even if `present_at_all_locations` is `false`.
         /// This can include locations that are deactivated.
         /// </summary>
-        [JsonProperty("present_at_location_ids", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("present_at_location_ids")]
         public IList<string> PresentAtLocationIds { get; }
 
         /// <summary>
         /// A list of locations where the object is not present, even if `present_at_all_locations` is `true`.
         /// This can include locations that are deactivated.
         /// </summary>
-        [JsonProperty("absent_at_location_ids", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("absent_at_location_ids")]
         public IList<string> AbsentAtLocationIds { get; }
 
         /// <summary>
@@ -335,6 +434,60 @@ namespace Square.Models
             return $"CatalogObject : ({string.Join(", ", toStringOutput)})";
         }
 
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeIsDeleted()
+        {
+            return this.shouldSerialize["is_deleted"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeCustomAttributeValues()
+        {
+            return this.shouldSerialize["custom_attribute_values"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeCatalogV1Ids()
+        {
+            return this.shouldSerialize["catalog_v1_ids"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializePresentAtAllLocations()
+        {
+            return this.shouldSerialize["present_at_all_locations"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializePresentAtLocationIds()
+        {
+            return this.shouldSerialize["present_at_location_ids"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeAbsentAtLocationIds()
+        {
+            return this.shouldSerialize["absent_at_location_ids"];
+        }
+
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
@@ -470,6 +623,16 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "is_deleted", false },
+                { "custom_attribute_values", false },
+                { "catalog_v1_ids", false },
+                { "present_at_all_locations", false },
+                { "present_at_location_ids", false },
+                { "absent_at_location_ids", false },
+            };
+
             private string type;
             private string id;
             private string updatedAt;
@@ -557,6 +720,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder IsDeleted(bool? isDeleted)
             {
+                shouldSerialize["is_deleted"] = true;
                 this.isDeleted = isDeleted;
                 return this;
             }
@@ -568,6 +732,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder CustomAttributeValues(IDictionary<string, Models.CatalogCustomAttributeValue> customAttributeValues)
             {
+                shouldSerialize["custom_attribute_values"] = true;
                 this.customAttributeValues = customAttributeValues;
                 return this;
             }
@@ -579,6 +744,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder CatalogV1Ids(IList<Models.CatalogV1Id> catalogV1Ids)
             {
+                shouldSerialize["catalog_v1_ids"] = true;
                 this.catalogV1Ids = catalogV1Ids;
                 return this;
             }
@@ -590,6 +756,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder PresentAtAllLocations(bool? presentAtAllLocations)
             {
+                shouldSerialize["present_at_all_locations"] = true;
                 this.presentAtAllLocations = presentAtAllLocations;
                 return this;
             }
@@ -601,6 +768,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder PresentAtLocationIds(IList<string> presentAtLocationIds)
             {
+                shouldSerialize["present_at_location_ids"] = true;
                 this.presentAtLocationIds = presentAtLocationIds;
                 return this;
             }
@@ -612,6 +780,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder AbsentAtLocationIds(IList<string> absentAtLocationIds)
             {
+                shouldSerialize["absent_at_location_ids"] = true;
                 this.absentAtLocationIds = absentAtLocationIds;
                 return this;
             }
@@ -804,12 +973,61 @@ namespace Square.Models
             }
 
             /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetIsDeleted()
+            {
+                this.shouldSerialize["is_deleted"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetCustomAttributeValues()
+            {
+                this.shouldSerialize["custom_attribute_values"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetCatalogV1Ids()
+            {
+                this.shouldSerialize["catalog_v1_ids"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetPresentAtAllLocations()
+            {
+                this.shouldSerialize["present_at_all_locations"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetPresentAtLocationIds()
+            {
+                this.shouldSerialize["present_at_location_ids"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetAbsentAtLocationIds()
+            {
+                this.shouldSerialize["absent_at_location_ids"] = false;
+            }
+
+
+            /// <summary>
             /// Builds class object.
             /// </summary>
             /// <returns> CatalogObject. </returns>
             public CatalogObject Build()
             {
-                return new CatalogObject(
+                return new CatalogObject(shouldSerialize,
                     this.type,
                     this.id,
                     this.updatedAt,

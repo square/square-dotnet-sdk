@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class FulfillmentFulfillmentEntry
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="FulfillmentFulfillmentEntry"/> class.
         /// </summary>
@@ -30,16 +31,44 @@ namespace Square.Models
             string uid = null,
             IDictionary<string, string> metadata = null)
         {
-            this.Uid = uid;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "uid", false },
+                { "metadata", false }
+            };
+
+            if (uid != null)
+            {
+                shouldSerialize["uid"] = true;
+                this.Uid = uid;
+            }
+
             this.LineItemUid = lineItemUid;
             this.Quantity = quantity;
-            this.Metadata = metadata;
+            if (metadata != null)
+            {
+                shouldSerialize["metadata"] = true;
+                this.Metadata = metadata;
+            }
+
+        }
+        internal FulfillmentFulfillmentEntry(Dictionary<string, bool> shouldSerialize,
+            string lineItemUid,
+            string quantity,
+            string uid = null,
+            IDictionary<string, string> metadata = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Uid = uid;
+            LineItemUid = lineItemUid;
+            Quantity = quantity;
+            Metadata = metadata;
         }
 
         /// <summary>
         /// A unique ID that identifies the fulfillment entry only within this order.
         /// </summary>
-        [JsonProperty("uid", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("uid")]
         public string Uid { get; }
 
         /// <summary>
@@ -72,7 +101,7 @@ namespace Square.Models
         /// application.
         /// For more information, see [Metadata](https://developer.squareup.com/docs/build-basics/metadata).
         /// </summary>
-        [JsonProperty("metadata", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("metadata")]
         public IDictionary<string, string> Metadata { get; }
 
         /// <inheritdoc/>
@@ -83,6 +112,24 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"FulfillmentFulfillmentEntry : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeUid()
+        {
+            return this.shouldSerialize["uid"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeMetadata()
+        {
+            return this.shouldSerialize["metadata"];
         }
 
         /// <inheritdoc/>
@@ -145,6 +192,12 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "uid", false },
+                { "metadata", false },
+            };
+
             private string lineItemUid;
             private string quantity;
             private string uid;
@@ -187,6 +240,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Uid(string uid)
             {
+                shouldSerialize["uid"] = true;
                 this.uid = uid;
                 return this;
             }
@@ -198,9 +252,27 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Metadata(IDictionary<string, string> metadata)
             {
+                shouldSerialize["metadata"] = true;
                 this.metadata = metadata;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetUid()
+            {
+                this.shouldSerialize["uid"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetMetadata()
+            {
+                this.shouldSerialize["metadata"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -208,7 +280,7 @@ namespace Square.Models
             /// <returns> FulfillmentFulfillmentEntry. </returns>
             public FulfillmentFulfillmentEntry Build()
             {
-                return new FulfillmentFulfillmentEntry(
+                return new FulfillmentFulfillmentEntry(shouldSerialize,
                     this.lineItemUid,
                     this.quantity,
                     this.uid,

@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class TerminalRefund
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="TerminalRefund"/> class.
         /// </summary>
@@ -50,6 +51,11 @@ namespace Square.Models
             string appId = null,
             string locationId = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "deadline_duration", false }
+            };
+
             this.Id = id;
             this.RefundId = refundId;
             this.PaymentId = paymentId;
@@ -57,13 +63,50 @@ namespace Square.Models
             this.AmountMoney = amountMoney;
             this.Reason = reason;
             this.DeviceId = deviceId;
-            this.DeadlineDuration = deadlineDuration;
+            if (deadlineDuration != null)
+            {
+                shouldSerialize["deadline_duration"] = true;
+                this.DeadlineDuration = deadlineDuration;
+            }
+
             this.Status = status;
             this.CancelReason = cancelReason;
             this.CreatedAt = createdAt;
             this.UpdatedAt = updatedAt;
             this.AppId = appId;
             this.LocationId = locationId;
+        }
+        internal TerminalRefund(Dictionary<string, bool> shouldSerialize,
+            string paymentId,
+            Models.Money amountMoney,
+            string reason,
+            string deviceId,
+            string id = null,
+            string refundId = null,
+            string orderId = null,
+            string deadlineDuration = null,
+            string status = null,
+            string cancelReason = null,
+            string createdAt = null,
+            string updatedAt = null,
+            string appId = null,
+            string locationId = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Id = id;
+            RefundId = refundId;
+            PaymentId = paymentId;
+            OrderId = orderId;
+            AmountMoney = amountMoney;
+            Reason = reason;
+            DeviceId = deviceId;
+            DeadlineDuration = deadlineDuration;
+            Status = status;
+            CancelReason = cancelReason;
+            CreatedAt = createdAt;
+            UpdatedAt = updatedAt;
+            AppId = appId;
+            LocationId = locationId;
         }
 
         /// <summary>
@@ -121,7 +164,7 @@ namespace Square.Models
         /// Default: 5 minutes from creation.
         /// Maximum: 5 minutes
         /// </summary>
-        [JsonProperty("deadline_duration", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("deadline_duration")]
         public string DeadlineDuration { get; }
 
         /// <summary>
@@ -169,6 +212,15 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"TerminalRefund : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeDeadlineDuration()
+        {
+            return this.shouldSerialize["deadline_duration"];
         }
 
         /// <inheritdoc/>
@@ -263,6 +315,11 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "deadline_duration", false },
+            };
+
             private string paymentId;
             private Models.Money amountMoney;
             private string reason;
@@ -374,6 +431,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder DeadlineDuration(string deadlineDuration)
             {
+                shouldSerialize["deadline_duration"] = true;
                 this.deadlineDuration = deadlineDuration;
                 return this;
             }
@@ -445,12 +503,21 @@ namespace Square.Models
             }
 
             /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetDeadlineDuration()
+            {
+                this.shouldSerialize["deadline_duration"] = false;
+            }
+
+
+            /// <summary>
             /// Builds class object.
             /// </summary>
             /// <returns> TerminalRefund. </returns>
             public TerminalRefund Build()
             {
-                return new TerminalRefund(
+                return new TerminalRefund(shouldSerialize,
                     this.paymentId,
                     this.amountMoney,
                     this.reason,

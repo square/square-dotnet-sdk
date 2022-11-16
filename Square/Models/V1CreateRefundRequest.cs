@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class V1CreateRefundRequest
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="V1CreateRefundRequest"/> class.
         /// </summary>
@@ -32,11 +33,35 @@ namespace Square.Models
             Models.V1Money refundedMoney = null,
             string requestIdempotenceKey = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "request_idempotence_key", false }
+            };
+
             this.PaymentId = paymentId;
             this.Type = type;
             this.Reason = reason;
             this.RefundedMoney = refundedMoney;
-            this.RequestIdempotenceKey = requestIdempotenceKey;
+            if (requestIdempotenceKey != null)
+            {
+                shouldSerialize["request_idempotence_key"] = true;
+                this.RequestIdempotenceKey = requestIdempotenceKey;
+            }
+
+        }
+        internal V1CreateRefundRequest(Dictionary<string, bool> shouldSerialize,
+            string paymentId,
+            string type,
+            string reason,
+            Models.V1Money refundedMoney = null,
+            string requestIdempotenceKey = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            PaymentId = paymentId;
+            Type = type;
+            Reason = reason;
+            RefundedMoney = refundedMoney;
+            RequestIdempotenceKey = requestIdempotenceKey;
         }
 
         /// <summary>
@@ -68,7 +93,7 @@ namespace Square.Models
         /// <summary>
         /// An optional key to ensure idempotence if you issue the same PARTIAL refund request more than once.
         /// </summary>
-        [JsonProperty("request_idempotence_key", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("request_idempotence_key")]
         public string RequestIdempotenceKey { get; }
 
         /// <inheritdoc/>
@@ -79,6 +104,15 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"V1CreateRefundRequest : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeRequestIdempotenceKey()
+        {
+            return this.shouldSerialize["request_idempotence_key"];
         }
 
         /// <inheritdoc/>
@@ -144,6 +178,11 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "request_idempotence_key", false },
+            };
+
             private string paymentId;
             private string type;
             private string reason;
@@ -211,9 +250,19 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder RequestIdempotenceKey(string requestIdempotenceKey)
             {
+                shouldSerialize["request_idempotence_key"] = true;
                 this.requestIdempotenceKey = requestIdempotenceKey;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetRequestIdempotenceKey()
+            {
+                this.shouldSerialize["request_idempotence_key"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -221,7 +270,7 @@ namespace Square.Models
             /// <returns> V1CreateRefundRequest. </returns>
             public V1CreateRefundRequest Build()
             {
-                return new V1CreateRefundRequest(
+                return new V1CreateRefundRequest(shouldSerialize,
                     this.paymentId,
                     this.type,
                     this.reason,
